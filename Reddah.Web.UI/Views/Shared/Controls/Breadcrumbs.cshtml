@@ -1,0 +1,17 @@
+﻿@using System.Globalization
+@using Reddah.Web.UI.Resources
+<div id="ShellBreadcrumbs">
+    @*<a href="/@CultureInfo.CurrentUICulture.Name/">@Resources.Navi_Home</a><span> &gt; </span><span>Support</span>*@
+    <span> &nbsp; </span>
+    <a href="/@CultureInfo.CurrentUICulture.Name/">ALL</a><span> - </span>
+    <a href="/@CultureInfo.CurrentUICulture.Name/">RANDOM</a><span> &nbsp;|&nbsp; </span>
+    @{
+        string[] categories = { "GADGETS", "SPORTS", "GAMING", "PICS", "WORLDNEWS", "VIDEOS", "ASKREDDAH", "MUSIC",
+                                "FUNNY", "NEWS", "MOVIES", "BLOG", "BOOKS", "HISTORY", "FOOD", "PHILOSOPHY", "TELEVISION", "JOKES",
+                                "ART", "DIY", "SPACE", "DOCUMENTARIES" };
+    }
+    @foreach (var category in categories)
+    {
+        <a href="/@CultureInfo.CurrentUICulture.Name/">@category</a><span> - </span>
+    }
+</div>

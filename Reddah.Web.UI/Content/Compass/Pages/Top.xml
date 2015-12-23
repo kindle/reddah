@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="TopList">
+  <Title>Top List</Title>
+  <!--<Articles>
+    <Title>Product</Title>
+    <Article>
+      <Title>Apps</Title>
+      <Description>
+        You can easily find a test that offers the right mix of filter conditions
+        for your test pass.
+      </Description>
+      <ImageUrl>/content/images/contactsupport/Apps.png</ImageUrl>
+      <ArticleUrl>compass/pages/apps/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Tools</Title>
+      <Description>
+      </Description>
+      <ImageUrl>/content/images/contactsupport/tools.png</ImageUrl>
+      <ArticleUrl>compass/pages/tools/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Games</Title>
+      <Description>
+      </Description>
+      <ImageUrl>/content/images/contactsupport/games.png</ImageUrl>
+      <ArticleUrl>compass/pages/games/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Video</Title>
+      <Description>
+      </Description>
+      <ImageUrl>/content/images/contactsupport/videos.png</ImageUrl>
+      <ArticleUrl>compass/pages/video/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Photos</Title>
+      <Description>
+      </Description>
+      <ImageUrl>/content/images/contactsupport/photos.png</ImageUrl>
+      <ArticleUrl>compass/pages/photos/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Download</Title>
+      <Description>
+      </Description>
+      <ImageUrl>/content/images/contactsupport/downloads.png</ImageUrl>
+      <ArticleUrl>compass/pages/download/navigationlist</ArticleUrl>
+    </Article>
+  </Articles>-->
+  <Articles>
+    <Title>Product</Title>
+    <Article>
+      <Title>Apps</Title>
+      <Description>
+        You can easily find a test that offers the right mix of filter conditions
+        for your test pass.
+      </Description>
+      <ImageUrl>/content/images/contactsupport/ContactSupportAppsIcon.png</ImageUrl>
+      <ArticleUrl>compass/pages/apps/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Tools</Title>
+      <Description>
+        You can easily find a test that offers the right mix of filter conditions
+        for your test pass.
+      </Description>
+      <ImageUrl>/content/images/contactsupport/ContactSupportReddahKinectIcon.png</ImageUrl>
+      <ArticleUrl>compass/pages/tools/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Games</Title>
+      <Description>
+        You can easily find a test that offers the right mix of filter conditions
+        for your test pass.
+      </Description>
+      <ImageUrl>/content/images/contactsupport/ContactSupportGamesIcon.png</ImageUrl>
+      <ArticleUrl>compass/pages/games/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Video</Title>
+      <Description>
+        You can easily find a test that offers the right mix of filter conditions
+        for your test pass.
+      </Description>
+      <ImageUrl>/content/images/contactsupport/ContactSupportMusicVideoIcon.png</ImageUrl>
+      <ArticleUrl>compass/pages/video/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Photos</Title>
+      <Description>
+        You can easily find a test that offers the right mix of filter conditions
+        for your test pass.
+      </Description>
+      <ImageUrl>/content/images/contactsupport/ContactSupportLiveIcon.png</ImageUrl>
+      <ArticleUrl>compass/pages/photos/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Download</Title>
+      <Description>
+        You can easily find a test that offers the right mix of filter conditions
+        for your test pass.
+      </Description>
+      <ImageUrl>/content/images/contactsupport/ContactSupportBillingIcon.png</ImageUrl>
+      <ArticleUrl>compass/pages/download/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Video:Getting Started with Reddah>3's A=℃∆∃ néad 대한</Title>
+      <Description>
+        Reddah gives you a powerful way to manage your test cases that
+        enables a clean separation of concerns and that gives you full control over your test bits
+        for enjoyable, agile test experience. Reddah includes many features that enable
+        fast, agile testing for scheduling test pass that use the most agile way.>3's A=℃∆∃ néad 대한
+      </Description>
+      <!--<ImageUrl>http://nxeassets.reddah.com/shaxam/0201/64/52/64523801-df09-40cf-aceb-154d6e62b6fe.PNG?v=1#gow3-s-m.PNG</ImageUrl>-->
+      <ImageUrl>/Content/compass/Images/contact_us.png</ImageUrl>
+      <ArticleUrl>video/reddaharch2</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>PPT:Add new test pass and jump-start your testing>3's A=℃∆∃ néad 대한</Title>
+      <Description>
+        PPT:Reddah makes it easy to install and update free libraries and tools.>3's A=℃∆∃ néad 대한
+      </Description>
+      <ImageUrl>/Content/compass/Images/twitter.png</ImageUrl>
+      <ArticleUrl>test/pptsap</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Wizard steps: Find your test cases>3's A=℃∆∃ néad 대한</Title>
+      <Description>
+        Wizard steps: You can easily find a test that offers the right mix of filter conditions
+        for your test pass.>3's A=℃∆∃ néad 대한
+      </Description>
+      <ImageUrl>/Content/compass/Images/forum.png</ImageUrl>
+      <ArticleUrl>test/wizard/wizardsteps</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>No photo: Find your test cases</Title>
+      <Description>
+        You can easily find a test that offers the right mix of filter conditions
+        for your test pass.
+      </Description>
+      <ImageUrl></ImageUrl>
+      <ArticleUrl>#</ArticleUrl>
+    </Article>
+  </Articles>
+  <DeflectionModule>
+    <Visible>False</Visible>
+    <Id>Articles</Id>
+    <Title>These articles may help resolve your issue</Title>
+    <Type>SoftDeflection</Type>
+    <ButtonText></ButtonText>
+    <ButtonLink></ButtonLink>
+    <Descriptions></Descriptions>
+    <Articles>
+      <Article>
+        <Title>
+          <![CDATA[
+          Verify these chars could display on page correctly: ' : () //&lt;SCRIPT>alert('：%2F%2Fテスト©，說明®、کی وضاحت™&#—-%？①iii㈣<5')&lt;/script&gt;
+          ]]>
+        </Title>
+        <Link>http://www.bing.com</Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 002
+        </Title>
+        <Link></Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 003
+        </Title>
+        <Link></Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 004
+        </Title>
+        <Link></Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 005
+        </Title>
+        <Link></Link>
+      </Article>
+    </Articles>
+  </DeflectionModule>
+</ContentType>

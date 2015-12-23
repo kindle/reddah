@@ -1,0 +1,77 @@
+﻿@using System.Globalization
+@using Reddah.Web.UI.Models
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
+    DeflectionModule dm = this.Model;
+
+    /*soft dm.Id=Articles*/
+    if (dm.Id == null)
+    {
+        var id = Guid.NewGuid().ToString();
+        id = id.Replace("-", "");
+        dm.Id = "HardDeflection_" + id;
+    }
+}
+
+<div id="@dm.Id" class="DeflectionModuleContainer">
+    <div>
+        <span class="GradientTopLeft"></span>
+        <span class="GradientTopMiddle"></span>
+        <span class="GradientTopRight"></span>
+    </div>
+    <div>
+        <span class="GradientLeftMiddle"></span>
+        <span class="DeflectionModuleContent" id="Deflection">
+            <span class="DeflectionModuleButton">
+                <span class="DeflectionModuleAlertButton"></span>
+                <span class="WarningTitle DeflectionTitle">@dm.Title</span>
+            </span>
+            <span class="DeflectionModuleFullText">
+                @if (dm.Type == "SoftDeflection")
+                {
+                    <ul class="ContactUsArticlesContent" id="ArticlesList">
+                        @foreach (var article in dm.Articles)
+                        {
+                            <li>
+                                <a href="/@locale/@article.Value">@article.Key</a>
+                            </li>        
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <a class="ms-rteStyle-button-green DeflectionButtonLink" href="http://bing.com">Button Text</a>
+                    <span class="DeflectionText">Hard Deflection Text....</span>
+                }
+            </span>
+        </span>
+        <span class="GradientRightMiddle"></span>
+    </div>
+    <div style="float: left;">
+        <span class="GradientBottomLeft"></span>
+        <span class="GradientBottomMiddle"></span>
+        <span class="GradientBottomRight"></span>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var mywidth = $("#@dm.Id ").width() - $("#@dm.Id .GradientTopLeft").width() * 2;
+            $("#@dm.Id .DeflectionModuleContent").css("width", mywidth);
+            $("#@dm.Id .GradientTopMiddle").css("width", mywidth);
+            $("#@dm.Id .GradientBottomMiddle").css("width", mywidth);
+
+            //set the width of deflection text
+            $("#@dm.Id .DeflectionText").width($("#@dm.Id .DeflectionModuleContent").width() - ($("#@dm.Id .DeflectionModuleAlertButton").outerWidth(true) + 10) - ($("#@dm.Id .DeflectionButtonLink").outerWidth(true) + 10));
+
+            var contentHeight = $("#@dm.Id .DeflectionModuleContent").height();
+            $("#@dm.Id .GradientLeftMiddle").height(contentHeight);
+            $("#@dm.Id .GradientRightMiddle").height(contentHeight);
+            $("#@dm.Id").height(contentHeight + $("#@dm.Id .GradientTopLeft").height() + $("#@dm.Id .GradientBottomLeft").height());
+
+            if("@dm.Visible" == "True") 
+            {
+                $("#@dm.Id ").css("visibility", "visible");
+            } 
+
+        });
+    </script>
+</div>

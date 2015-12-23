@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageDetails>
+    <Title>Welcome to reddah.com</Title>
+  </PageDetails>
+  <Announcements>
+    <Title>Announcements</Title>
+    <AnnouncementsLinkList>
+      <AnnouncementsLink>
+        <Title>Getting started with Reddah</Title>
+        <ArticleUrl>r/Compass/Pages/SolutionArticlePage</ArticleUrl>
+        <Description></Description>
+        <ImageUrl></ImageUrl>
+      </AnnouncementsLink>
+      <AnnouncementsLink>
+        <Title>What's new?</Title>
+        <ArticleUrl>r/Compass/Pages/ReddahDemo_LocalMachine</ArticleUrl>
+        <Description></Description>
+        <ImageUrl></ImageUrl>
+    </AnnouncementsLink>
+      <AnnouncementsLink>
+        <Title>Latest news about Reddah</Title>
+        <ArticleUrl>r/Compass/Pages/ReddahDemo_Distributed</ArticleUrl>
+        <Description></Description>
+        <ImageUrl></ImageUrl>
+    </AnnouncementsLink>
+      <AnnouncementsLink>
+        <Title>Issues with Datel controllers after system update</Title>
+        <ArticleUrl>r/Compass/Pages/Navigationlist</ArticleUrl>
+        <Description></Description>
+        <ImageUrl></ImageUrl>
+      </AnnouncementsLink>
+      <AnnouncementsLink>
+        <Title>Update your Reddah 360 console software</Title>
+        <ArticleUrl>r/Compass/Pages/top</ArticleUrl>
+        <Description></Description>
+        <ImageUrl></ImageUrl>
+      </AnnouncementsLink>
+    </AnnouncementsLinkList>
+  </Announcements>
+  <HomePageModularLeftContent>
+    <HomePageContent>
+      <Title>Dev ramp up</Title>
+      <HomePageContentLinkList>
+        <HomePageContentLink>
+          <Title>Support.reddah.com ppt</Title>
+          <ArticleUrl>r/compass/pages/test/pptsap</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Reddah Arch part 2 - Shaken</Title>
+          <ArticleUrl>r/compass/pages/video/reddaharch2</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Wizard Steps Page Test</Title>
+          <ArticleUrl>r/compass/pages/test/wizard/wizardsteps</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+      </HomePageContentLinkList>
+    </HomePageContent>
+    <HomePageContent>
+      <Title>Applications and Tools</Title>
+      <HomePageContentLinkList>
+        <HomePageContentLink>
+          <Title>Family Page without deflection</Title>
+          <ArticleUrl>r/Compass/Pages/FamilyPage</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Family Page with Hard Deflection </Title>
+          <ArticleUrl>r/Compass/Pages/FamilyPageHardDeflection</ArticleUrl>
+          <Description>test description</Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Family Page with Soft Deflection</Title>
+          <ArticleUrl>r/Compass/Pages/FamilyPageSoftDeflection</ArticleUrl>
+          <Description>testtest</Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Solution article page with hard deflection module</Title>
+          <ArticleUrl>r/Compass/Pages/SolutionArticlePageShortHD</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Solution article page with soft deflection module</Title>
+          <ArticleUrl>r/Compass/Pages/SolutionArticlePageShortSD</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+      </HomePageContentLinkList>
+    </HomePageContent>
+    <HomePageContent>
+      <Title>Games</Title>
+      <HomePageContentLinkList>
+        <HomePageContentLink>
+          <Title>Multi-Videos for SAP</Title>
+          <ArticleUrl>r/Compass/Pages/SolutionArticlePageShort</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Set up Windows Media Center on Reddah 360 </Title>
+          <ArticleUrl>#</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Update your Reddah 360 console software </Title>
+          <ArticleUrl>#</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Disc Drive Solution </Title>
+          <ArticleUrl>#</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Download, move, or delete your Reddah LIVE profile</Title>
+          <ArticleUrl>#</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+      </HomePageContentLinkList>
+    </HomePageContent>
+    <HomePageContent>
+      <Title>Download</Title>
+      <HomePageContentLinkList>
+        <HomePageContentLink>
+          <Title>Test decoding issue: Family Page</Title>
+          <ArticleUrl>r/Compass/Pages/Test/FamilyPageSoftDeflectionDecodingTest</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Test decoding issue: Solution Article Page</Title>
+          <ArticleUrl>r/Compass/Pages/Test/SolutionArticlePageDecodingTest</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Test decoding issue: Navigation List Page</Title>
+          <ArticleUrl>r/Compass/Pages/Test/NavigationListDecodingTest</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Reddah LIVE wireless connection</Title>
+          <ArticleUrl>#</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+        <HomePageContentLink>
+          <Title>Service status</Title>
+          <ArticleUrl>#</ArticleUrl>
+          <Description></Description>
+          <ImageUrl></ImageUrl>
+        </HomePageContentLink>
+      </HomePageContentLinkList>
+    </HomePageContent>
+  </HomePageModularLeftContent>
+  <HomePageModularRightContent>
+    <HomePageRightBoxModule>
+      <Title>Feedbacks</Title>
+      <ArticleUrl>#</ArticleUrl>
+      <Description>Get help from the knowledgeable Reddah Community and official Reddah Support!</Description>
+      <ImageUrl>/content/Compass/Images/forum.png</ImageUrl>
+    </HomePageRightBoxModule>
+    <HomePageRightBoxModule>
+      <Title>Twitter</Title>
+      <ArticleUrl>#</ArticleUrl>
+      <Description>Chat with an Reddah Community Ambassador now?</Description>
+      <ImageUrl>/content/Compass/Images/ambassador.png</ImageUrl>
+    </HomePageRightBoxModule>
+    <HomePageRightBoxModule>
+      <Title>Contact Us</Title>
+      <ArticleUrl>Contact-us</ArticleUrl>
+      <Description>Get in touch with an Reddah Support technician. We are ready and willing to help you!</Description>
+      <ImageUrl>/content/Compass/Images/contact_us.png</ImageUrl>
+    </HomePageRightBoxModule>
+  </HomePageModularRightContent>
+</Root>

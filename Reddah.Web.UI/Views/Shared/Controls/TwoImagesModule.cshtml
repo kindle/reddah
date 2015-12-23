@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "TwoImagesModule";
+}
+
+<div class="TwoIMagesModule">
+    <table class="TwoImageModule">
+        <tbody>
+            <tr>
+                <td class="ImageModuleBlank"></td>
+                <td class="ImageModuleText">
+                    @Html.Raw(Model.Caption1)
+                </td>
+                <td class="TwoImagesModuleBetweenContent"></td>
+                <td class="ImageModuleText">
+                    @Html.Raw(Model.Caption2)
+                </td>
+            </tr>
+            <tr>
+                <td class="ImageModuleBlank"></td>
+                <td class="TwoImagesModuleImageContent">
+                    @if (!String.IsNullOrEmpty(Model.ImageLink1))
+                    {
+                    <a href="@Model.ImageLink1">
+                        <img class="TwoImagesModuleImageContent" alt="picture" src="@Model.ImageUrl1"/>
+                    </a>                    
+                    }
+                    else
+                    {
+                        <img class="TwoImagesModuleImageContent" alt="picture" src="@Model.ImageUrl1"/>
+                    }
+                </td>
+                <td class="TwoImagesModuleBetweenContent"></td>
+                <td class="TwoImagesModuleImageContent">
+                    @if (!String.IsNullOrEmpty(Model.ImageLink2))
+                    {
+                    <a href="@Model.ImageLink2">
+                        <img class="TwoImagesModuleImageContent" alt="picture" src="@Model.ImageUrl2"/>
+                    </a>                    
+                    }
+                    else
+                    {
+                        <img class="TwoImagesModuleImageContent" alt="picture" src="@Model.ImageUrl2"/>
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

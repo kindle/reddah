@@ -1,0 +1,62 @@
+﻿@using System.Globalization
+@using Reddah.Web.UI.Resources
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
+}
+<div>
+    <div class="SearchArea">
+        <input id="SearchTextBox" type="text" name="q" class="TextBox" value="" url="" maxlength="200" autocomplete="off" />
+        <input id="SearchButton" type="button" class="SubmitButton" value="" title="Search" />
+    </div>
+            
+    <ul class="NavigationElements">
+        @*<li>
+            <a href="/@locale/">@Resources.Navi_Home</a>
+        </li>*@
+        <li>
+            <a href="/@locale/r/hot">Hot</a>
+        </li>
+        <li>
+            <a href="/@locale/r/new">New</a>
+        </li>
+        <li>
+            <a href="/@locale/r/Rising">Rising</a>
+        </li>
+        <li>
+            <a href="/@locale/r/Controversial">Controversial</a>
+        </li>
+        <li>
+            <a href="/@locale/r/top">Top</a>
+        </li>
+        <li>
+            <a href="/@locale/r/Gilded">Gilded</a>
+        </li>
+        <li>
+            <a href="/@locale/r/Wiki">Wiki</a>
+        </li>
+        <li>
+            <a href="/@locale/r/Compass/Pages/Promoted">Promoted</a>
+        </li>
+        @*<li>
+            <a href="/@locale/Articles/Compass/Pages/Download">Tools</a>
+        </li>
+        <li>
+            <a href="#">Games</a>
+            <ul>
+                <li>
+                    <a href="/@locale/Articles/Compass/Pages/Games/BailinBlocks-WindowsPhone" name="en_US_2_0" >Windows Phone</a>
+                </li>
+                <li>
+                    <a href="/@locale/Articles/Compass/Pages/Games/BailinBlocks-Kinect" name="en_US_2_1" >Kinect Game</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="/@locale/Articles/Compass/Pages/Download">Download</a>
+        </li>
+        <li>
+            <a href="/@locale/Articles/Compass/Pages/Navigationlist">Support</a>
+        </li>*@
+    </ul>
+</div>
+ 

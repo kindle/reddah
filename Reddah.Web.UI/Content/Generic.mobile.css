@@ -1,0 +1,743 @@
+﻿/**
+Style use in all support mobile pages
+**/
+
+/***********************
+HACK TO HIDE HEADER/FOOTER
+NEED TO INVESTIGATE A BETTER WAY
+************************/
+header,
+footer
+{
+    display: none;
+}
+ 
+/***********************
+        GENERAL
+************************/
+ 
+body 
+{
+    background: #ffffff;
+}
+
+section.body
+{
+    padding: 0;
+    margin: 0 12px;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+td {    
+    border-color: #636468 ;
+    border-style: solid; 
+    border-width: 2px;
+    padding: 5px;
+} 
+ 
+h1 
+{
+    color: #231f20;
+    font-family: 'Segoe UI Light', Arial, Sans-Serif; 
+    font-size: 30px;
+    line-height: 32px;
+    margin: 25px 0 28px 0;     
+}
+ 
+h2 
+{
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 25px;     
+}
+ 
+h3
+{
+    background: #bdbec1;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 22px;
+    height: 22px;
+    text-indent: 12px;  
+    margin-top: 25px;   
+}
+ 
+a, 
+a:visited
+{
+    color: #107C10;
+    text-decoration: underline;
+    font-weight: normal;
+}
+
+a:hover, 
+a:active
+{
+    color: #2ca243;
+}
+ 
+b
+{
+    font-weight: bold;
+}
+ 
+ol, 
+ul 
+{
+    list-style-type: disc;
+}
+
+ol
+{
+    list-style-type: decimal;    
+}
+
+p
+{
+    margin: 25px 0;    
+}
+
+strong
+{
+    font-weight: bold; 
+}
+
+/***********************
+        HEADER
+************************/
+#headerBar
+{
+    position: static;    
+}
+
+#CompanionHeader
+{
+    display: block;
+    margin: 0 -12px;
+}
+
+#CompanionContent
+{
+    padding-top: 0;
+}
+
+nav
+{
+    position: relative;
+    overflow: hidden;
+    height: 48px;    
+}
+
+.CompanionHeaderButton
+{
+    width: 48px;
+    height: 48px;
+    background-image: url("../Content/Images/header_sprite_companion.png");
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    padding:0;
+    margin: 0;
+    background-repeat: no-repeat;
+    display: inline-block;    
+}
+
+.CompanionHeaderBackButton
+{
+    background-position: 0 0;      
+}
+
+.CompanionHeaderBackButton:hover,
+.CompanionHeaderBackButtonDisabled
+{
+    background-position: -49px 0;      
+}
+
+.CompanionHeaderBackButton:active
+{
+    background-position: -98px 0;      
+}
+
+.CompanionHeaderNextButton
+{
+    background-position: 0 -49px;
+    margin-left: -4px;      
+}
+
+.CompanionHeaderNextButton:hover,
+.CompanionHeaderNextButtonDisabled
+{
+    background-position: -49px -49px; 
+    margin-left: -4px;        
+}
+
+.CompanionHeaderNextButton:active
+{
+    background-position: -98px -49px;      
+}
+
+#CompanionHeaderTitleEndGradient
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-position: 0 -98px;   
+}
+
+#CompanionHeaderTitle
+{
+    font-size: 18px;
+    line-height: 48px;
+    vertical-align: top;
+    margin: 0 58px 0 6px;
+}
+
+/***********************
+     MODULE CLASSES
+************************/
+
+.StartModule 
+{
+}
+ 
+.TextModule 
+{
+    margin-top: 25px;
+    font-size: 14px;
+    line-height: 18px; 
+}
+
+.TextModule ol, 
+.TextModule ul 
+{
+    padding-left: 19px;
+    margin-top: 25px;
+    list-style-position: outside;
+    padding-left: 28px;
+}
+
+.OneImageModule,
+.TwoIMagesModule
+{
+    padding: 0 12px;     
+}
+ 
+img.ImageModule,
+img.TwoImagesModuleImage
+{
+    width: 100%;
+    margin-top: 20px;   
+}
+ 
+.ImageModuleText,
+.ImageModuleTextContent
+{
+    margin: 20px 0 0 0;
+}
+ 
+.FamilySubGroupContentLink
+{   
+    background: #f8f8f8;
+    background: -moz-linear-gradient(top,  #f8f8f8 0%, #e0e0e0 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#e0e0e0));
+    background: -webkit-linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    background: -o-linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    background: -ms-linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    background: linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#e0e0e0',GradientType=0 );
+    color: #107C10;
+    font-size: 14px;
+    padding: 30px 20px;
+    margin: 0 -12px;
+    border-bottom: 1px solid #bdbec1;
+}
+
+.FamilySubGroupContent a, 
+.FamilySubGroupContent a:hover
+{
+    text-decoration: none;
+}   
+
+.FamilyPageContent h2
+{
+    background: #e7f2de;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 22px;
+    height: 22px;
+    padding: 0 20px;
+    margin: 0 -12px;
+    overflow: hidden;
+    position:relative;
+}
+ 
+.FamilyPageContent h3
+{ 
+    margin: 0 -12px;
+    padding: 0 8px;
+    overflow: hidden;
+    position:relative;   
+}
+
+.TitleGradient {
+    position:absolute;
+    display: block;
+    top:0;
+    right:0;
+    width: 30%;
+    height:30px;
+}
+
+.FamilyPageContent h2 .TitleGradient
+{
+    background: -moz-linear-gradient(left,  rgba(231,242,222,0) 0%, rgba(231,242,222,1) 25%, rgba(231,242,222,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(231,242,222,0)), color-stop(25%,rgba(231,242,222,1)), color-stop(100%,rgba(231,242,222,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  rgba(231,242,222,0) 0%,rgba(231,242,222,1) 25%,rgba(231,242,222,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  rgba(231,242,222,0) 0%,rgba(231,242,222,1) 25%,rgba(231,242,222,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  rgba(231,242,222,0) 0%,rgba(231,242,222,1) 25%,rgba(231,242,222,1) 100%); /* IE10+ */
+    background: linear-gradient(to right,  rgba(231,242,222,0) 0%,rgba(231,242,222,1) 25%,rgba(231,242,222,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00e7f2de', endColorstr='#e7f2de',GradientType=1 ); /* IE6-9 */
+}
+
+.FamilyPageContent h3 .TitleGradient
+{
+    background: -moz-linear-gradient(left,  rgba(189,190,193,0) 0%, rgba(189,190,193,1) 25%, rgba(189,190,193,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(189,190,193,0)), color-stop(25%,rgba(189,190,193,1)), color-stop(100%,rgba(189,190,193,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  rgba(189,190,193,0) 0%,rgba(189,190,193,1) 25%,rgba(189,190,193,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  rgba(189,190,193,0) 0%,rgba(189,190,193,1) 25%,rgba(189,190,193,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  rgba(189,190,193,0) 0%,rgba(189,190,193,1) 25%,rgba(189,190,193,1) 100%); /* IE10+ */
+    background: linear-gradient(to right,  rgba(189,190,193,0) 0%,rgba(189,190,193,1) 25%,rgba(189,190,193,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00bdbec1', endColorstr='#bdbec1',GradientType=1 ); /* IE6-9 */  
+}
+ 
+
+/***********************
+ REUSABLE UI COMPONENTS
+************************/
+ 
+ /*Accordion with title, collapsed and expanded state*/
+
+ol.MobileAccordionList, ul.MobileAccordionList 
+{
+    list-style-position:inherit;
+    list-style-type:none;
+} 
+
+.MobileAccordionListElement,
+.MobileAccordion
+{ 
+    background: #f8f8f8;
+    background: -moz-linear-gradient(top,  #f8f8f8 0%, #e0e0e0 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#e0e0e0));
+    background: -webkit-linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    background: -o-linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    background: -ms-linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    background: linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#e0e0e0',GradientType=0 );
+    border-bottom: 1px solid #bdbec1;
+    position: relative;
+}
+
+.MobileAccordion {
+    margin: 0 -12px;
+}
+
+.MobileAccordionCollapsed,
+.MobileAccordionExpanded
+{   
+    color: #107C10;
+    padding: 0 20px;
+    font-size: 14px;
+    display: block;
+    height: 72px;    
+}
+
+.MobileAccordionCollapsed>:first-child
+{
+    height: 35px;
+    margin-right: 34px;
+    overflow: hidden;
+    display: block;
+    position: absolute;
+    top: 26px;
+}
+
+.MobileAccordionExpandedContent,
+.MobileAccordionExpandedContent>:first-child
+{
+    padding-top: 0;
+}
+
+.MobileAccordionExpandedContent div 
+{
+    padding: 0 12px;    
+}
+
+@media only screen 
+and (max-width : 420px) 
+{   
+    .MobileAccordionCollapsed>:first-child
+    {
+        top:17px;
+    }
+}
+
+.MobileAccordionExpandedContent 
+{
+    display: none;
+    padding: 0 12px 30px 12px;      
+}
+
+.MobileAccordionIcon
+{
+    background-image: url(Images/arrows_companion12x12.png);
+    background-repeat: no-repeat;
+    display: block;
+    width: 12px;
+    height: 12px;
+    top: 29px;
+    right: 8px;
+    position: absolute;    
+}
+
+.MobileAccordionCollapsedIcon
+{
+    background-position: 50% 0;      
+}
+.MobileAccordionExpandedIcon 
+{
+    background-position: 50% -12px;      
+}
+
+/***********************
+      COMPANION
+************************/
+div.AppStatusModule {
+    background: #f8f8f8;
+    background: -moz-linear-gradient(top,  #f8f8f8 0%, #e0e0e0 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#e0e0e0));
+    background: -webkit-linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    background: -o-linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    background: -ms-linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    background: linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#e0e0e0',GradientType=0 );
+    border: none;
+    border-width: 0px;
+    border-style: none;
+    border-spacing: 0px;
+    position: relative;
+    margin: 0 -12px;
+}
+
+.AppStatusModuleTop 
+{
+    height: 52px;    
+}
+
+.AppStatusContent 
+{
+    display: block;
+    font-family: "Segoe UI", Arial, Sans-Serif;
+    font-size: 12px;
+    color: #848589;
+    padding-left: 12px;
+}
+
+.AppStatusContentText {
+    padding-bottom: 20px;
+}
+    
+div.StatusModuleOKTitle {
+    padding: 19px 20px 0 20px;
+    height:52px;
+    color: #107C10;
+    font-family: "Segoe UI", Arial, Sans-Serif;
+    font-size: 18px;
+}
+
+div.StatusModuleOKIcon, 
+div.StatusModuleUnknowIcon {
+    position: absolute;
+    top: 14px;
+    right: 20px;    
+}
+
+div.StatusModuleKOTitle {
+    padding: 20px 10px 0 20px;
+    height:52px;
+    color: #f17a22;
+    font-family: "Segoe UI", Arial, Sans-Serif;
+    font-size: 18px;
+}
+
+div.StatusModuleKOIcon {
+    position: absolute;
+    top: 15px;
+    right: 30px;    
+}
+
+
+div.StatusAccordionIcon {
+    position: absolute;
+    background-image: url(Images/arrows_companion12x12.png);
+    display: block;
+    width: 12px;
+    height: 12px;
+    top: 20px;
+    right: 10px;    
+}
+
+div.StatusModuleText
+{
+    margin-left: 54px;
+    margin-top: -5px;
+    padding-bottom: 10px;
+}
+
+div.StatusModuleUnknowTitle
+{
+    padding: 19px 20px 0 20px;
+    height:52px;
+    color: #231F20;
+    font-family: "Segoe UI", Arial, Sans-Serif;
+    font-size: 18px;
+}
+/** loading animation **/
+.LoadingAnimation50
+{
+    background: #FFF url(/Content/images/loading_50x50.gif) no-repeat center center;
+    height: 50px;
+    width: 50px;
+}
+
+.banner {
+    font-size: 0px;
+}
+
+.gradient { 
+    background: #F8F8F8; /* for non-css3 browsers */
+    
+    background: -moz-linear-gradient(center top, #F8F8F8 0%, #E0E0E0 100%); /* FF3.6+ */ 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F8F8F8), color-stop(100%,#E0E0E0)); /* Chrome,Safari4+ */ 
+    background: -webkit-linear-gradient(center top, #F8F8F8 0%,#E0E0E0 100%); /* Chrome10+,Safari5.1+ */ 
+    background: -o-linear-gradient(center top, #F8F8F8 0%,#E0E0E0 100%); /* Opera 11.10+ */ 
+    background: -ms-linear-gradient(center top, #F8F8F8 0%,#E0E0E0 100%); /* IE10+ */ 
+    background: linear-gradient(top, #F8F8F8 0%,#E0E0E0 100%); /* W3C */ 
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F8F8F8', endColorstr='#E0E0E0',GradientType=0 ); /* IE6-9 */
+}
+
+.wideButton {
+    cursor: pointer;
+    overflow: hidden;
+    padding: 22px 20px 20px 20px;
+    margin: 0 -12px;
+    position: relative;
+    border-bottom: 1px solid #bdbec1;
+}
+
+.wideButton a 
+{
+    font-family: "Segoe UI", Arial, Sans-serif;
+    font-size: 17px;
+    font-weight: normal;
+    color: #107C10;
+    text-decoration: none; 
+}
+
+.FloatLeft
+{
+    float: left;
+}
+
+.ClearBoth
+{
+    clear: both;
+}
+
+#BannerTitle
+{   
+    background: #252424; /* Old browsers */ 
+    background: -moz-linear-gradient(top, #252424 0%, #302e2f 14%, #383637 33%, #393738 100%); /* FF3.6+ */ 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#252424), color-stop(14%,#302e2f), color-stop(33%,#383637), color-stop(100%,#393738)); /* Chrome,Safari4+ */ 
+    background: -webkit-linear-gradient(top, #252424 0%,#302e2f 14%,#383637 33%,#393738 100%); /* Chrome10+,Safari5.1+ */ 
+    background: -o-linear-gradient(top, #252424 0%,#302e2f 14%,#383637 33%,#393738 100%); /* Opera 11.10+ */ 
+    background: -ms-linear-gradient(top, #252424 0%,#302e2f 14%,#383637 33%,#393738 100%); /* IE10+ */ 
+    background: linear-gradient(top, #252424 0%,#302e2f 14%,#383637 33%,#393738 100%); /* W3C */ 
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#252424', endColorstr='#393738',GradientType=0 ); /* IE6-9 */
+    box-shadow:0px 3px 5px 0px rgba(0, 0, 0, 0.2);
+    color: #636468;
+    font-size: 10px;
+    font-weight: bold;
+    height: 22px;
+    letter-spacing: 1px;
+    line-height: 21px;
+    overflow: hidden;
+    padding: 0 12px;
+    position: relative;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.resultsHeading {
+    cursor: pointer;
+    height: 27px;
+    overflow: hidden;
+    padding: 9px 10px 14px;
+    position: relative;
+}
+
+div.Liner
+{
+    border-color: #D1D1D1 ;
+    border-right: 0 none;
+    border-style: solid none none; 
+    border-width: 1px 0 0;
+}
+
+iframe {
+    border: 0;
+    position: fixed;
+    top: 55px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+div.stepLabel {
+    margin-top: 30px;
+    font-family: "Segoe UI", Arial;
+    font-size: 18px;
+    color: #393738;
+}
+
+div.stepTitle {
+    font-family: "Segoe UI", Arial;
+    font-family: "Segoe UI", Arial;
+    font-size: 18px;
+    color: #231f20;
+}
+
+div.tileList {
+    display: inline-block;
+    margin-top: 8px;
+}
+
+div.wizardTile {
+    margin-top: 10px;
+    width: 295px;
+    height: 103px;
+    border-color: #E2E2E2;
+    border-style: solid;
+    border-width: 1px; 
+    background: -webkit-gradient(linear, left top, left bottom, from(#E2E2E2), to(#ffffff));
+    background: -moz-linear-gradient(top,  #E2E2E2,  #ffffff);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E2E2E2', endColorstr='#ffffff');  
+    position: relative;
+    padding-top: 11px;
+}
+
+div.wizardTile a {
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    text-decoration:none;
+    z-index:10;
+    background-color:white;
+    opacity: 0;
+    filter: alpha(opacity=1);
+}
+
+div.wizardTileText 
+{
+    width: 132px;
+    height: 89px;
+    text-align: left;
+    color: #107C10;
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 43px;
+    overflow: hidden;
+}
+
+div.fullWizardTileText {
+    height: 89px;
+    text-align: left;
+    color: #107C10;
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 43px;
+    overflow: hidden;
+}
+
+div.wizardTileImage {
+    float: right;
+    margin-right: 11px;
+}
+
+img.wizardTileImage {
+    width: 132px;
+    height: 89px;
+}
+
+.hiddenComponent{
+	visibility: hidden;
+	display: none;
+}
+
+.wizardSolveIssueQuestion {
+    font-family: "Segoe UI", Arial;
+    font-size: 18px;
+    color: #393738;
+}
+
+.wizardSolveIssueQuestion {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.wizardSolveIssueButton {
+    margin-top: 20px;
+}
+
+.wizardSolveIssueButton div{
+    float: left;
+    width: 136px;
+    height: 50px;
+    background-color: #107C10;
+    color: #ffffff;
+    margin-right: 4px;
+    position: relative;
+    padding-left: 12px;
+    font-family: "Segoe UI", Arial;
+    font-size: 14px;
+    line-height: 48px;   
+}
+
+.wizardSolveIssueButton div a {
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    text-decoration:none;
+    z-index:10;
+    background-color:white;
+    opacity: 0;
+    filter: alpha(opacity=1);
+}
+
+div.greyButton {
+    background-color: #636468;
+}
+
+/***********************
+      END COMPANION
+************************/

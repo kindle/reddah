@@ -1,0 +1,20 @@
+﻿1.Browse page title style padding-bottom too big
+2.add old browse page with dropdowns
+3.add AB testing for old browse page for different locales
+*4.add new contact us page
+5.add old contact us page
+6.add a wizard page
+7.add omniture if it's free
+8.browse page manage back
+9.investigate hbi/mbi sign in
+10.error handling: not found/server error
+11.remove knockout
+12.menubar to new fashon
+13.support signin/register
+14.support database
+15.support share in facebook
+16.about page
+17.add change password
+OK18.solve /r/top issue 2015/12/23
+19.use ninjia ioc framework kernal to replace current ioc framework
+20.

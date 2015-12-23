@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="FamilyArticle">
+  <Title>Manage your Reddah LIVE account>3's A=℃∆∃ néad 대한</Title>
+  <FamilyGroupContainer>
+    <FamilyGroupContent>
+      <Title>What membership activity do you need to complete?>3's A=℃∆∃ néad 대한</Title>
+      <FamilySubGroupContent>
+        <Title>Renew or cancel your membership>3's A=℃∆∃ néad 대한</Title>
+        <FamilySubGroupContentLink>
+          <Title>Renew your Reddah LIVE Gold Membership>3's A=℃∆∃ néad 대한</Title>
+          <ImageUrl>/content/Compass/Images/pdf_icon25x25.png</ImageUrl>
+          <ArticleUrl></ArticleUrl>
+          <Description>Learn how to renew your Reddah LIVE membership either from your computer or on your console. >3's A=℃∆∃ néad 대한</Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Cancel Your Reddah LIVE Gold Membership>3's A=℃∆∃ néad 대한</Title>
+          <ImageUrl>/content/Compass/Images/pdf_icon25x25.png</ImageUrl>
+          <ArticleUrl></ArticleUrl>
+          <Description>Find out how to cancel your membership or turn off auto-renewal.>3's A=℃∆∃ néad 대한</Description>
+        </FamilySubGroupContentLink>
+      </FamilySubGroupContent>
+      <FamilySubGroupContent>
+        <Title>Update your payment options>3's A=℃∆∃ néad 대한</Title>
+        <FamilySubGroupContentLink>
+          <Title>Add or Edit an Reddah LIVE Payment Option</Title>
+          <ImageUrl>/content/Compass/Images/pdf_icon25x25.png</ImageUrl>
+          <ArticleUrl></ArticleUrl>
+          <Description>Learn how to add or change a payment option (such as a credit card) associated with your Reddah LIVE account.</Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Change Payment for an Reddah LIVE Membership</Title>
+          <ImageUrl></ImageUrl>
+          <ArticleUrl></ArticleUrl>
+          <Description>Learn how to change the payment option associated with your paid Reddah LIVE membership. This procedure can help you reinstate a suspended account.</Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Remove an Reddah LIVE Payment Option </Title>
+          <ImageUrl></ImageUrl>
+          <ArticleUrl></ArticleUrl>
+          <Description>Learn how to remove a payment option (such as a credit card) from your Reddah LIVE account.</Description>
+        </FamilySubGroupContentLink>
+      </FamilySubGroupContent>
+    </FamilyGroupContent>
+    <FamilyGroupContent>
+      <Title>Group 2</Title>
+      <FamilySubGroupContent>
+        <Title>Manage your Microsoft account</Title>
+        <FamilySubGroupContentLink>
+          <Title>Manage Your Microsoft account</Title>
+          <ImageUrl></ImageUrl>
+          <ArticleUrl></ArticleUrl>
+          <Description>Learn how to view, change, and manage password options for your Microsoft account and Reddah LIVE membership.</Description>
+        </FamilySubGroupContentLink>
+      </FamilySubGroupContent>
+    </FamilyGroupContent>
+   </FamilyGroupContainer>
+  <DeflectionModule>
+    <Visible>True</Visible>
+    <Id>Articles</Id>
+    <Title>These articles may help resolve your issue</Title>
+    <Type>SoftDeflection</Type>
+    <ButtonText></ButtonText>
+    <ButtonLink></ButtonLink>
+    <Descriptions></Descriptions>
+    <Articles>
+      <Article>
+        <Title>
+          <![CDATA[
+          Verify these chars could display on page correctly: ' : () //&lt;SCRIPT>alert('：%2F%2Fテスト©，說明®、کی وضاحت™&#—-%？①iii㈣<5')&lt;/script&gt;
+          ]]>
+        </Title>
+        <Link>http://www.bing.com</Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 002
+        </Title>
+        <Link></Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 003
+        </Title>
+        <Link></Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 004
+        </Title>
+        <Link></Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 005
+        </Title>
+        <Link></Link>
+      </Article>
+    </Articles>
+  </DeflectionModule>
+</ContentType>

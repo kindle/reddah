@@ -1,0 +1,6 @@
+﻿1.Bug Report
+2.what can Bailin Studio Do
+3.Add videos
+4.Add other project: Bailin Tetris(windows phone), Chinese chess(Surface) ()(Windows 8)
+5.add web service
+6.

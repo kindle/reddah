@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="BrowseNavigate">
+  <CategoryLimit>4</CategoryLimit>
+  <ShowMoreText>Show More</ShowMoreText>
+  <ShowLessText>Show Less</ShowLessText>
+</ContentType>

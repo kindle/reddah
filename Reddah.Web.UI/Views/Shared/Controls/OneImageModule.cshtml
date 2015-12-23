@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "OneImageModule";
+}
+<div class="OneImageModule">
+    <table class="OneImageModule">
+        <tbody>
+            @if (!string.IsNullOrEmpty(Model.Caption))
+            {
+            <tr>
+                <td class="ImageModuleBlank"></td>
+                <td class="ImageModuleText">@Html.Raw(Model.Caption)</td>
+            </tr>
+            }
+            <tr>
+                <td class="ImageModuleBlank"></td>
+                <td class="ImageModuleContent">
+                    <div class="ImageModuleImageContent">  
+                    @if (!String.IsNullOrEmpty(Model.ImageLink))
+                    {
+                        <a href="@Model.ImageLink">
+                            <img class="ImageModule @Model.Style" alt="picture" src="@Model.ImageUrl"/>
+                        </a>
+                    }
+                    else
+                    {
+                        <img class="ImageModule @Model.Style" alt="picture" src="@Model.ImageUrl"/>
+                    }
+                    </div>
+                    @if (@Model.Style != "Large") 
+                    {
+                        if (@Model.Style == "Small")
+                        {
+                            <div class="ImageModuleTextContent SmallImageModuleTextContent">@Html.Raw(Model.Text)</div>
+                        }
+                        else
+                        {
+                            <div class="ImageModuleTextContent MediumImageModuleTextContent">@Html.Raw(Model.Text)</div>
+                        }
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

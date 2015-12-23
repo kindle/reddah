@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "TextModule";
+}
+
+<div class="OneVideoModule">
+    <table class="OneVideoModule">
+        <tbody>
+            <tr>
+                <td class="ImageModuleBlank"></td>
+                <td class="ImageModuleText">@Model.VideoTitle</td>
+            </tr>
+            <tr>
+                <td class="VideoModuleBlank"></td>
+                <td class="VideoModuleContent">
+                    
+                        @if (@Model.Style == "Medium")
+                        {
+                            <div class="VideoModuleMediumImage">
+                                <div class="supportVideo" height="205" width="364" videourl="@Model.VideoUrl" previewimageurl="@Model.BackgroundImageUrl" rating="" locale="" overflow="false"></div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="VideoModuleLargeImage">
+                                <div class="supportVideo" height="425" width="754" videourl="@Model.VideoUrl" previewimageurl="@Model.BackgroundImageUrl" rating="" locale="en-US" overflow="false"></div>
+                            </div>
+                        }
+                        
+                                
+                    @if (@Model.Style != "Large") 
+                    {
+                    <div class="VideoModuleTextContent">@Model.Text</div>
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+</div>

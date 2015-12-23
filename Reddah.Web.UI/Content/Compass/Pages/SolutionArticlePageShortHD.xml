@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="SolutionArticle">
+  <Title>H1 Title</Title>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Every Reddah LIVE account has a Windows Live ID</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      When you signed up for Reddah LIVE, you associated your Reddah LIVE account with a Windows Live ID (an email address and password used to sign in to various Microsoft services). You use this Windows Live ID and password to manage your account and download your profile.
+ 
+If you are a parent, you also connected a Windows Live ID to your child’s account in addition to the Windows Live ID they use to sign on with. Your Windows Live ID is used to control their Reddah LIVE services, agree to the Reddah LIVE Terms of Use, and perform other functions. For more information on Reddah LIVE online safety, see <a href=#>Reddah LIVE online safety and privacy</a>
+ 
+      ]]>
+    </Text>
+  </Module>
+  <DeflectionModule>
+    <Visible>True</Visible>
+    <Id>HardDeflection</Id>
+    <Title>HardDeflection Title</Title>
+    <Type>HardDeflection</Type>
+    <ButtonText>ButtonText</ButtonText>
+    <ButtonLink>http://www.google.com</ButtonLink>
+    <Description>This is a hard deflection module demo</Description>
+    <Articles>
+      <Article>
+        <Title></Title>
+        <Link></Link>
+      </Article>
+    </Articles>
+  </DeflectionModule>
+</ContentType>

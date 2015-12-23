@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="WizardStepEnd">
+  <Title>Success!</Title>
+  <LegendTitle>Success LegendTitle</LegendTitle>
+  <Description>Success Description</Description>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Getting Started with Reddah</Text>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Medium</Style>
+    <Caption>Congratulations!</Caption>
+    <ImageUrl>/content/Compass/Images/ambassador.png</ImageUrl>
+    <Text>
+      Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.
+    </Text>
+    <ImageLink></ImageLink>
+  </Module>
+</ContentType>

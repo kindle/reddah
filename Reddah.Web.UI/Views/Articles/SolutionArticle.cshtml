@@ -1,0 +1,42 @@
+﻿@using Reddah.Web.UI.Models
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    var moduleList = new Dictionary<string, string>
+                             {
+                                 {"StartSectionModule", "~/views/Shared/Controls/StartSectionModule.cshtml"},
+                                 {"TextModule", "~/views/Shared/Controls/TextModule.cshtml"},
+                                 {"OneImageModule", "~/views/Shared/Controls/OneImageModule.cshtml"},
+                                 {"TwoImagesModule", "~/views/Shared/Controls/TwoImagesModule.cshtml"},
+                                 {"OneVideoModule", "~/views/Shared/Controls/OneVideoModule.cshtml"}
+                                 //{"LongArticleModule", "~/views/Shared/Controls/LongArticleModule-Companion.cshtml"}
+                             };
+}
+
+<div id="Solution-Article-Title">
+    <h1>@Model.ArticleTitle</h1>
+</div>
+
+@foreach (SolutionModule solutionModule in Model.SolutionModuleList)
+{
+    string path;
+    if (moduleList.TryGetValue(solutionModule.ModuleType, out path))
+    {
+        @Html.Partial(path, solutionModule)
+    }
+}
+
+<br/>
+@{
+        DeflectionModule dm = Model.Deflection;
+
+        if (dm.Visible)
+        {
+            Html.RenderPartial("~/views/Shared/Controls/DeflectionModule.cshtml", dm);
+        }
+}
+
+@{
+        Html.RenderPartial("~/views/Shared/Controls/AssistanceModule.cshtml", 1);
+}

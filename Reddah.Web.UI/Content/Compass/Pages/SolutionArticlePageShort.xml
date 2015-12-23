@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="SolutionArticle">
+  <Title>H1 Title</Title>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Every Reddah LIVE account has a Windows Live ID</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      When you signed up for Reddah LIVE, you associated your Reddah LIVE account with a Windows Live ID (an email address and password used to sign in to various Microsoft services). You use this Windows Live ID and password to manage your account and download your profile.
+ 
+If you are a parent, you also connected a Windows Live ID to your child’s account in addition to the Windows Live ID they use to sign on with. Your Windows Live ID is used to control their Reddah LIVE services, agree to the Reddah LIVE Terms of Use, and perform other functions. For more information on Reddah LIVE online safety, see <a href=#>Reddah LIVE online safety and privacy</a>
+ 
+      ]]>
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Medium</Style>
+    <BackgroundImageUrl>/content/Compass/Images/ReddahDemo.png</BackgroundImageUrl>
+    <Text>
+      <![CDATA[
+      When you signed up for Reddah LIVE, you associated your Reddah LIVE account with a Windows Live ID (an email address and password used to sign in to various Microsoft services). You use this Windows Live ID and password to manage your account and download your profile.
+ 
+If you are a parent, you also connected a Windows Live ID to your child’s account in addition to the Windows Live ID they use to sign on with. Your Windows Live ID is used to control their Reddah LIVE services, agree to the Reddah LIVE Terms of Use, and perform other functions. For more information on Reddah LIVE online safety, see <a href=#>Reddah LIVE online safety and privacy</a>
+ 
+      ]]>
+    </Text>
+    <VideoUrl>http://bailin/content/Compass/Videos/ReddahDemo_DistributedMachines.wmv</VideoUrl>
+    <VideoTitle>Position Kinect</VideoTitle>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Medium</Style>
+    <BackgroundImageUrl>/content/Compass/Images/ReddahDemo.png</BackgroundImageUrl>
+    <Text>
+      <![CDATA[
+      When you signed up for Reddah LIVE, you associated your Reddah LIVE account with a Windows Live ID (an email address and password used to sign in to various Microsoft services). You use this Windows Live ID and password to manage your account and download your profile.
+ 
+If you are a parent, you also connected a Windows Live ID to your child’s account in addition to the Windows Live ID they use to sign on with. Your Windows Live ID is used to control their Reddah LIVE services, agree to the Reddah LIVE Terms of Use, and perform other functions. For more information on Reddah LIVE online safety, see <a href=#>Reddah LIVE online safety and privacy</a>
+ 
+      ]]>
+    </Text>
+    <VideoUrl>http://bailin/content/Compass/Videos/ReddahDemo_LocalMachine.wmv</VideoUrl>
+    <VideoTitle>Position Kinect</VideoTitle>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Large</Style>
+    <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
+    <Text>One Video Image</Text>
+    <VideoUrl>http://bailin/content/Compass/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
+    <VideoTitle>Position Kinect</VideoTitle>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Large</Style>
+    <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
+    <Text>One Video Image</Text>
+    <VideoUrl>http://bailin/content/Compass/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
+    <VideoTitle>Position Kinect</VideoTitle>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Large</Style>
+    <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
+    <Text>One Video Image</Text>
+    <VideoUrl>http://bailin/content/Compass/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
+    <VideoTitle>Position Kinect</VideoTitle>
+  </Module>
+</ContentType>
