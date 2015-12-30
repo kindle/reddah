@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="362e9d61464a44e7b1c22513a90a3d37" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="reddahModel.Article" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reddahModel.Comment" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reddahModel.Label" Width="1.5" PointX="2.75" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

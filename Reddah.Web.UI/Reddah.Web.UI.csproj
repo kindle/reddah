@@ -43,11 +43,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -164,16 +165,26 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Article.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Comment.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\BrowseNavigateController.cs" />
     <Compile Include="Controllers\ContactSupportController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\SubmitController.cs" />
     <Compile Include="Controllers\WizardStepController.cs" />
     <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Label.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ArticleModel.cs" />
@@ -193,6 +204,21 @@
     <Compile Include="Models\SolutionModel.cs" />
     <Compile Include="Models\SectionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReddahModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReddahModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReddahModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReddahModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReddahModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Resources.Designer.cs" />
     <Compile Include="Routing\AcceptedLocaleConstraint.cs" />
     <Compile Include="Routing\LocalizedRoute.cs" />
@@ -545,6 +571,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\playSmall.png" />
     <Content Include="Issues.txt" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -716,6 +743,27 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Reddah.com.pubxml" />
     <Content Include="Views\Articles\TopList.cshtml" />
+    <EntityDeploy Include="ReddahModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ReddahModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ReddahModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ReddahModel.edmx</DependentUpon>
+      <LastGenOutput>ReddahModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ReddahModel.edmx.diagram">
+      <DependentUpon>ReddahModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="ReddahModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ReddahModel.edmx</DependentUpon>
+      <LastGenOutput>ReddahModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Submit\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -735,7 +783,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63819</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost</IISUrl>
+          <IISUrl>http://localhost:60000</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://support.dev.bailinstudio.com</CustomServerUrl>

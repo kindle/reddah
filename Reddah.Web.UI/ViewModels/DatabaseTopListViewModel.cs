@@ -26,7 +26,7 @@
 
             ArticleTitle = Doc.SelectSingleNode("ContentType/Title").InnerText;
 
-            using (var db = new UsersContext())
+            using (var db = new reddahEntities1())
             {
                 //var blog = new Labels { Name = "game" };
                 //db.Labels.Add(blog);
@@ -34,7 +34,7 @@
 
                 // Display all Blogs from the database 
                 var query = from b in db.Labels
-                            orderby b.Name
+                            orderby b.Id
                             select b;
 
                 foreach (var item in query)

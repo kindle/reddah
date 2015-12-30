@@ -17,8 +17,6 @@ namespace Reddah.Web.UI.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
-        public DbSet<Label> Labels { get; set; }
-        public DbSet<Post> Posts { get; set; }
     }
 
     [Table("UserProfile")]

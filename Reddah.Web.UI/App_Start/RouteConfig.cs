@@ -24,6 +24,12 @@
                 new { controller = "Hot", action = "Index" }
             );
 
+            routes.MapLocalizedRoute(
+                "Submit",
+                "{locale}/submit",
+                new { controller = "Submit", action = "Index" }
+            );
+
             //each has a route: hot/top/new/controversial/promoted
 
             routes.MapLocalizedRoute(
