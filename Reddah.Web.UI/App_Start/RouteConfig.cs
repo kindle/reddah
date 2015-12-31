@@ -27,8 +27,14 @@
             routes.MapLocalizedRoute(
                 "Submit",
                 "{locale}/submit",
-                new { controller = "Submit", action = "Index" }
+                new { controller = "submit", action = "index" }
             );
+
+            //routes.MapLocalizedRoute(
+            //    "SubmitSubmit",
+            //    "{locale}/submit/submit",
+            //    new { controller = "submit", action = "submit" }
+            //);
 
             //each has a route: hot/top/new/controversial/promoted
 

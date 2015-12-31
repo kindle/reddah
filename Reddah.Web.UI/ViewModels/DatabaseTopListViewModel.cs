@@ -33,17 +33,17 @@
                 //db.SaveChanges();
 
                 // Display all Blogs from the database 
-                var query = from b in db.Labels
-                            orderby b.Id
+                var query = from b in db.Articles
+                            orderby b.Id descending
                             select b;
 
                 foreach (var item in query)
                 {
                     var ap = new ArticlePreview();
-                    ap.Title = item.Name;
-                    ap.Description = item.Name;
-                    ap.ImageUrl = item.Name;
-                    ap.ArticleUrl = item.Name;
+                    ap.Title = item.Title;
+                    ap.Description = item.Content;
+                    ap.ImageUrl = item.Title;
+                    ap.ArticleUrl = item.Title;
 
                     apList.Add(ap);
                 }
