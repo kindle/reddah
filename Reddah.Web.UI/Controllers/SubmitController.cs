@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CaptchaMvc.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,21 +14,29 @@ namespace Reddah.Web.UI.Controllers
             return View("~/Views/Submit/Index.cshtml");
         }
 
-        [HttpPost]
+        [HttpPost, CaptchaVerify("Captcha is not valid")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Index(Article article)
         {
-            using (var context = new reddahEntities1())
+            if (ModelState.IsValid)
             {
-                context.Articles.Add(new Article
+                TempData["Message"] = "Message: captcha is valid.";
+                using (var context = new reddahEntities1())
                 {
-                    Title = article.Title,
-                    Content = article.Content
-                });
-                context.SaveChanges();
+                    context.Articles.Add(new Article
+                    {
+                        Title = article.Title,
+                        Content = article.Content
+                    });
+                    context.SaveChanges();
+                }
+
+                //return View("~/Views/Home/HomePageV1.cshtml");
+                return RedirectToRoute("Support");
             }
 
+            TempData["ErrorMessage"] = "Error: captcha is not valid.";
             return View();
         }
         

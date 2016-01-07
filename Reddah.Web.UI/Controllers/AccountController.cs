@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using Reddah.Web.UI.Filters;
 using Reddah.Web.UI.Models;
+using CaptchaMvc.Attributes;
 
 namespace Reddah.Web.UI.Controllers
 {
@@ -68,7 +69,7 @@ namespace Reddah.Web.UI.Controllers
         //
         // POST: /Account/Register
 
-        [HttpPost]
+        [HttpPost, CaptchaVerify("Captcha is not valid")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)

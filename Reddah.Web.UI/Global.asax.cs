@@ -9,6 +9,7 @@
     using Reddah.Web.Core;
     using Reddah.Web.Core.ABTesting;
     using Reddah.Web.Live.ABTesting;
+    using CaptchaMvc.Infrastructure;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -17,6 +18,7 @@
     {
         protected void Application_Start()
         {
+            CaptchaUtils.CaptchaManager.StorageProvider = new CookieStorageProvider();
             //RegisterComponents();
             AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);

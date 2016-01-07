@@ -17,7 +17,19 @@
                 new { },
                 new string[] { },
                 u => new Route("", new RedirectToLocalizedHandler()));
+            
+            routes.MapRoute(
+                "DefaultCaptchaRoute", 
+                "{locale}/DefaultCaptcha/Generate",
+                new { controller = "DefaultCaptcha", action = "Generate" }
+            );
 
+            routes.MapRoute(
+                "RefreshCaptchaRoute",
+                "{locale}/DefaultCaptcha/Refresh",
+                new { controller = "DefaultCaptcha", action = "Refresh" }
+            );
+            
             routes.MapLocalizedRoute(
                 "Hot",
                 "{locale}",
@@ -29,12 +41,6 @@
                 "{locale}/submit",
                 new { controller = "submit", action = "index" }
             );
-
-            //routes.MapLocalizedRoute(
-            //    "SubmitSubmit",
-            //    "{locale}/submit/submit",
-            //    new { controller = "submit", action = "submit" }
-            //);
 
             //each has a route: hot/top/new/controversial/promoted
 

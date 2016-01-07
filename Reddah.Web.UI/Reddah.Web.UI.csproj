@@ -684,6 +684,10 @@
       <Project>{3096955e-31f3-4721-aa86-76461d3276a2}</Project>
       <Name>Reddah.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Reddah.Web.Captcha\Reddah.Web.Captcha.csproj">
+      <Project>{e78e7563-07c5-494d-bc1f-b00542a059dc}</Project>
+      <Name>Reddah.Web.Captcha</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Reddah.Web.Core\Reddah.Web.Core.csproj">
       <Project>{4df85914-0d37-4f16-beaa-74f8bc4ecc01}</Project>
       <Name>Reddah.Web.Core</Name>

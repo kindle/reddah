@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reddah.Web.Live", "Reddah.W
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Reddah.Data", "Reddah.Data\Reddah.Data.sqlproj", "{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reddah.Web.Captcha", "Reddah.Web.Captcha\Reddah.Web.Captcha.csproj", "{E78E7563-07C5-494D-BC1F-B00542A059DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,14 @@ Global
 		{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}.Release|x64.ActiveCfg = Release|Any CPU
 		{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}.Release|x86.ActiveCfg = Release|Any CPU
+		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Release|x64.ActiveCfg = Release|Any CPU
+		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
