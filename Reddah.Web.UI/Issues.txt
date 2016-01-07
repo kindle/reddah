@@ -17,4 +17,5 @@
 17.add change password
 OK18.solve /r/top issue 2015/12/23
 19.use ninjia ioc framework kernal to replace current ioc framework
-20.
+OK20.solve captcha are you a robot issue 2016/01/07
+21.

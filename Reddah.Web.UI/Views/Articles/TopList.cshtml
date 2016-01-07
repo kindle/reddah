@@ -3,6 +3,7 @@
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
 }
+<link href="/Content/Post.css" rel="stylesheet" />
 <h1>@Model.ArticleTitle</h1>
 <div class="BrowsePreviewsContent">
     @{
@@ -12,6 +13,8 @@
         {
             Html.RenderPartial("~/views/Shared/Controls/DeflectionModule.cshtml", dm);
         }
+
+        int index = 1;
     }
 
     @foreach (var article in Model.Articles)
@@ -19,22 +22,40 @@
         if (!String.IsNullOrEmpty(article.Title) && !String.IsNullOrEmpty(article.Description) && !String.IsNullOrEmpty(article.ArticleUrl))
         {
             <div class="BrowsePreview">
-                <div class="BrowsePreviewTitle">
-                    <a href="@article.ArticleUrl">@Html.Raw(article.Title)</a>
-                </div>
-                @if (!String.IsNullOrEmpty(article.ImageUrl))
-                {
-                    <div style="float: left;">
-                        <a href="/@locale/@article.ArticleUrl"><img class="BrowsePreviewImage" src="@article.ImageUrl" alt="picture"></a>
-                    </div>
-                }
-                    <div>
-                        @Html.Raw(article.Description)
-                    </div>
-
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="votecell">
+                                <div class="vote">
+                                    <input type="hidden" name="_id_" value="14276817">
+                                    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+                                    <span itemprop="upvoteCount" class="vote-count-post ">34319</span>
+                                    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+                                    @*<a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>*@
+                                    <div class="favoritecount"><b>@index</b></div>
+                                </div>
+                            </td>
+                            <td class="postcell">
+                                <div class="BrowsePreviewTitle">
+                                    <a href="@article.ArticleUrl">@Html.Raw(article.Title)</a>
+                                </div>
+                                @if (!String.IsNullOrEmpty(article.ImageUrl))
+                                {
+                                    <div style="float: left;">
+                                        <a href="/@locale/@article.ArticleUrl"><img class="BrowsePreviewImage" src="@article.ImageUrl" alt="picture"></a>
+                                    </div>
+                                }
+                                <div>
+                                    @Html.Raw(article.Description)
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
                 <div class="StartModuleLiner" style="width: 100%;"></div>
             </div>
         }
+        index++;
     }
     
     @{

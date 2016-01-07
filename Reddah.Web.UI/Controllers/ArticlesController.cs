@@ -19,9 +19,9 @@
         {
             if (!System.IO.File.Exists(HttpContext.Server.MapPath("~/Content/" + path + ".xml")))
             {
-                //return new HttpNotFoundResult();
+                return new HttpNotFoundResult();
                 // ooopos page
-                throw new Exception();//yellow page in dev machine
+                //*****////////throw new Exception();//yellow page in dev machine
                 //throw new HttpException(404, "Application not found");//white page
                 //return new HttpNotFoundResult();// transparent page
                 //log

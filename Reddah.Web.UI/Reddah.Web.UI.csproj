@@ -398,7 +398,9 @@
     <Content Include="Content\Compass\Pages\Video\reddahArch2.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\Post.css" />
     <Content Include="Content\ContactSupport.css" />
+    <Content Include="Content\Images\sprites.png" />
     <Content Include="Content\最新.xml">
       <SubType>Designer</SubType>
     </Content>
