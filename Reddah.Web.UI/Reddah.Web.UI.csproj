@@ -574,7 +574,7 @@
     <Content Include="Images\playSmall.png" />
     <Content Include="security.txt" />
     <Content Include="Issues.txt" />
-    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\angular-1.2.16.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />

@@ -58,7 +58,7 @@
             bundles.Add(new ScriptBundle("~/bundles/min").Include(
                         "~/Scripts/jquery-{version}.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
-                        "~/Scripts/angular.min.js"));
+                        "~/Scripts/angular-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/silverlight").Include(
                         "~/Content/js/Silverlight.js"));
             bundles.Add(new ScriptBundle("~/bundles/videoplayer").Include(
