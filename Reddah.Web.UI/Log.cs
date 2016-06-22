@@ -12,16 +12,14 @@ namespace Reddah.Web.UI
     using System;
     using System.Collections.Generic;
     
-    public partial class Article
+    public partial class Log
     {
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string Content { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public int Up { get; set; }
-        public int Down { get; set; }
-        public int Count { get; set; }
-        public int Type { get; set; }
+        public System.DateTime Date { get; set; }
+        public string Thread { get; set; }
+        public string Level { get; set; }
+        public string Logger { get; set; }
+        public string Message { get; set; }
+        public string Exception { get; set; }
     }
 }

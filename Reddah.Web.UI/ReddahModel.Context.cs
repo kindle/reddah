@@ -28,5 +28,7 @@ namespace Reddah.Web.UI
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Label> Labels { get; set; }
+        public DbSet<Log> Logs { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
     }
 }

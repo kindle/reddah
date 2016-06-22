@@ -10,6 +10,8 @@
     using Reddah.Web.Core.ABTesting;
     using Reddah.Web.Live.ABTesting;
     using CaptchaMvc.Infrastructure;
+    using log4net;
+    using System.IO;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801

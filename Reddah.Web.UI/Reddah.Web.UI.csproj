@@ -42,6 +42,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -176,6 +180,8 @@
     <Compile Include="Controllers\BrowseNavigateController.cs" />
     <Compile Include="Controllers\ContactSupportController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\QQController.cs" />
+    <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\SubmitController.cs" />
     <Compile Include="Controllers\WizardStepController.cs" />
     <Compile Include="Controllers\SupportController.cs" />
@@ -184,6 +190,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Label.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log.cs">
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
@@ -224,12 +233,16 @@
     <Compile Include="Routing\LocalizedRoute.cs" />
     <Compile Include="Routing\RedirectToLocalizedRoute.cs" />
     <Compile Include="Routing\RoutingExtensions.cs" />
+    <Compile Include="UserProfile.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utility\Helpers.cs" />
     <Compile Include="ViewModels\ArticleViewModelBase.cs" />
     <Compile Include="ViewModels\BrowseNavigateViewModel.cs" />
     <Compile Include="ViewModels\BrowseProductViewModel.cs" />
     <Compile Include="ViewModels\ContactSupport\CategoriesViewModel.cs" />
     <Compile Include="ViewModels\ContactSupport\ProductsViewModel.cs" />
+    <Compile Include="ViewModels\DatabaseLogViewModel.cs" />
     <Compile Include="ViewModels\DatabaseTopListViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WizardStepSolutionListViewModel.cs" />
@@ -396,6 +409,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Compass\Pages\Video\reddahArch2.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Log.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Post.css" />
@@ -769,6 +785,7 @@
     </Content>
     <Content Include="Views\Submit\Index.cshtml" />
     <Content Include="Web.sitemap" />
+    <Content Include="Views\Articles\Log.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

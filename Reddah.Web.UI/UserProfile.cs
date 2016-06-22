@@ -12,16 +12,10 @@ namespace Reddah.Web.UI
     using System;
     using System.Collections.Generic;
     
-    public partial class Article
+    public partial class UserProfile
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Content { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public int Up { get; set; }
-        public int Down { get; set; }
-        public int Count { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
         public int Type { get; set; }
     }
 }

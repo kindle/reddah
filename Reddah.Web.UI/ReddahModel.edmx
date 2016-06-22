@@ -4,24 +4,43 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="reddahModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="reddahModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="reddahModelStoreContainer">
+          <EntitySet Name="Article" EntityType="reddahModel.Store.Article" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Comment" EntityType="reddahModel.Store.Comment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Label" EntityType="reddahModel.Store.Label" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Log" EntityType="reddahModel.Store.Log" store:Type="Tables" store:Schema="dbo" store:Name="Log">
+            <DefiningQuery>SELECT 
+      [Log].[Id] AS [Id], 
+      [Log].[Date] AS [Date], 
+      [Log].[Thread] AS [Thread], 
+      [Log].[Level] AS [Level], 
+      [Log].[Logger] AS [Logger], 
+      [Log].[Message] AS [Message], 
+      [Log].[Exception] AS [Exception]
+      FROM [dbo].[Log] AS [Log]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserProfile" EntityType="reddahModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
         <EntityType Name="Article">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="Content" Type="ntext" />
-          <Property Name="CreatedOn" Type="datetime" />
-          <Property Name="Up" Type="int" />
-          <Property Name="Down" Type="int" />
-          <Property Name="Count" Type="int" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Content" Type="ntext" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Up" Type="int" Nullable="false" />
+          <Property Name="Down" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ParentId" Type="int" />
           <Property Name="ParentType" Type="char" MaxLength="10" />
           <Property Name="Content" Type="nchar" MaxLength="10" />
@@ -32,14 +51,37 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <EntityContainer Name="reddahModelStoreContainer">
-          <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Label" EntityType="Self.Label" Schema="dbo" store:Type="Tables" />
-        </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'reddah.dbo.Log' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Logger" />
+            <PropertyRef Name="Message" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Thread" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Level" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Logger" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Message" Type="varchar" Nullable="false" MaxLength="4000" />
+          <Property Name="Exception" Type="varchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -48,36 +90,65 @@
           <EntitySet Name="Articles" EntityType="reddahModel.Article" />
           <EntitySet Name="Comments" EntityType="reddahModel.Comment" />
           <EntitySet Name="Labels" EntityType="reddahModel.Label" />
+          <EntitySet Name="Logs" EntityType="reddahModel.Log" />
+          <EntitySet Name="UserProfiles" EntityType="reddahModel.UserProfile" />
         </EntityContainer>
         <EntityType Name="Article">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="Up" Type="Int32" />
-          <Property Name="Down" Type="Int32" />
-          <Property Name="Count" Type="Int32" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Content" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="Int32" Name="Up" Nullable="false" />
+          <Property Type="Int32" Name="Down" Nullable="false" />
+          <Property Type="Int32" Name="Count" Nullable="false" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ParentId" Type="Int32" />
-          <Property Name="ParentType" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Content" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Up" Type="Int32" />
-          <Property Name="Down" Type="Int32" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ParentId" />
+          <Property Type="String" Name="ParentType" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Content" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="Up" />
+          <Property Type="Int32" Name="Down" />
         </EntityType>
         <EntityType Name="Label">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Logger" />
+            <PropertyRef Name="Message" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Thread" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Level" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Logger" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Message" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Exception" MaxLength="2000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -88,9 +159,11 @@
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="reddahModel.Article">
               <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Down" ColumnName="Down" />
                 <ScalarProperty Name="Up" ColumnName="Up" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -115,6 +188,28 @@
               <MappingFragment StoreEntitySet="Label">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="reddahModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Logger" ColumnName="Logger" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="reddahModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

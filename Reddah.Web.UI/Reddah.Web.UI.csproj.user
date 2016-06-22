@@ -28,18 +28,17 @@
           </StartCmdLineArguments>
           <StartWorkingDirectory>
           </StartWorkingDirectory>
-          <EnableENC>True</EnableENC>
+          <EnableENC>False</EnableENC>
           <AlwaysStartWebServerOnDebug>True</AlwaysStartWebServerOnDebug>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>63819</DevelopmentServerPort>
+          <DevelopmentServerPort>8647</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>http://support.dev.bailinstudio.com</CustomServerUrl>
+          <CustomServerUrl>
+          </CustomServerUrl>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

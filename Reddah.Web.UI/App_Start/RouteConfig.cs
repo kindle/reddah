@@ -29,11 +29,11 @@
                 "{locale}/DefaultCaptcha/Refresh",
                 new { controller = "DefaultCaptcha", action = "Refresh" }
             );
-            
+
             routes.MapLocalizedRoute(
-                "Hot",
+                "Home",
                 "{locale}",
-                new { controller = "Hot", action = "Index" }
+                new { controller = "Support", action = "Index" }
             );
 
             routes.MapLocalizedRoute(
@@ -132,6 +132,24 @@
                 "Error",
                 "{locale}/Error",
                 new { controller = "Home", action = "Error" }
+            );
+
+            routes.MapLocalizedRoute(
+                "Token",
+                "{locale}/token",
+                new { controller = "token", action = "index" }
+            );
+
+            routes.MapLocalizedRoute(
+                "Log",
+                "{locale}/log",
+                new { controller = "log", action = "index" }
+            );
+
+            routes.MapLocalizedRoute(
+                "QQ",
+                "qq",
+                new { controller = "QQ", action = "index" }
             );
         }
     }

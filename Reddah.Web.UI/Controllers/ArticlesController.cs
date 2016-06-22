@@ -48,6 +48,10 @@
                 {
                     return View(presentationView, new DatabaseTopListViewModel(path));
                 }
+                else if (PresentationTemplate == "Log")
+                {
+                    return View(presentationView, new DatabaseLogViewModel(path));
+                }
 
                 // SolutionArticle
                 return View(presentationView, new SolutionArticleViewModel(path));

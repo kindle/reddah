@@ -5,10 +5,10 @@
     using System.Linq;
 
     using Reddah.Web.UI.Models;
-    
-    public class DatabaseTopListViewModel : ArticleViewModelBase
+
+    public class DatabaseLogViewModel : ArticleViewModelBase
     {
-        public DatabaseTopListViewModel(string path)
+        public DatabaseLogViewModel(string path)
             : base(path)
         {
             Articles = GetArticlePreviews(path);
@@ -28,43 +28,23 @@
 
             using (var db = new reddahEntities1())
             {
-                //var blog = new Labels { Name = "game" };
-                //db.Labels.Add(blog);
-                //db.SaveChanges();
-
-                // Display all Blogs from the database 
-                var query = from b in db.Articles
+                var query = from b in db.Logs
                             orderby b.Id descending
                             select b;
 
                 foreach (var item in query)
                 {
                     var ap = new ArticlePreview();
-                    ap.Title = item.Title;
-                    ap.Description = item.Content;
-                    ap.ImageUrl = item.Title;
-                    ap.ArticleUrl = item.Title;
-                    //ap.Count = item.Count ?? 0;
-                    //ap.Up = item.Up ?? 0;
-                    //ap.Down = item.Down ?? 0;
+                    ap.Title = item.Level;
+                    ap.Description = item.Id +" " + item.Date + " " +item.Message;
+                    ap.ImageUrl = item.Thread;
+                    ap.ArticleUrl = item.Logger;
 
                     apList.Add(ap);
                 }
 
             } 
 
-
-            //foreach (XmlNode node in Doc.SelectNodes("ContentType/Articles/Article"))
-            //{
-            //    var ap = new ArticlePreview();
-            //    ap.Title = node.SelectSingleNode("Title").InnerText;
-            //    ap.Description = node.SelectSingleNode("Description").InnerText;
-            //    ap.ImageUrl = node.SelectSingleNode("ImageUrl").InnerText;
-            //    ap.ArticleUrl = node.SelectSingleNode("ArticleUrl").InnerText;
-
-            //    apList.Add(ap);
-            //}
-            //get top 25 dah from db
 
             return apList;
         }

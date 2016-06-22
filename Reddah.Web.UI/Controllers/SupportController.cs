@@ -75,6 +75,7 @@ namespace Reddah.Web.UI.Controllers
             return View();
         }
 
+        
         [HttpGet]
         public ActionResult ChangeLocale(string targetLocale, string returnUrl)
         {
