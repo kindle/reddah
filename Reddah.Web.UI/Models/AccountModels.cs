@@ -12,20 +12,11 @@ namespace Reddah.Web.UI.Models
     public class UsersContext : DbContext
     {
         public UsersContext()
-            : base("DefaultConnection")
+            : base("reddahEntities1")
         {
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
-    }
-
-    [Table("UserProfile")]
-    public class UserProfile
-    {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int UserId { get; set; }
-        public string UserName { get; set; }
     }
 
     public class RegisterExternalLoginModel
@@ -87,6 +78,10 @@ namespace Reddah.Web.UI.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
     }
 
     public class ExternalLogin

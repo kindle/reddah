@@ -1,9 +1,0 @@
-D:\BailinStudio\Reddah\Reddah.Data\bin\Debug\Reddah.Data.dacpac
-D:\BailinStudio\Reddah\Reddah.Data\bin\Debug\Reddah.Data.dll
-D:\BailinStudio\Reddah\Reddah.Data\bin\Debug\Reddah.Data.pdb
-D:\BailinStudio\Reddah\Reddah.Data\obj\Debug\Model.xml
-D:\BailinStudio\Reddah\Reddah.Data\obj\Debug\refactor.xml
-D:\BailinStudio\Reddah\Reddah.Data\obj\Debug\postdeploy.sql
-D:\BailinStudio\Reddah\Reddah.Data\obj\Debug\predeploy.sql
-D:\BailinStudio\Reddah\Reddah.Data\obj\Debug\Reddah.Data.dll
-D:\BailinStudio\Reddah\Reddah.Data\obj\Debug\Reddah.Data.pdb

@@ -1,4 +1,0 @@
-D:\BailinStudio\Reddah\Reddah.Core\bin\Debug\Reddah.Core.dll
-D:\BailinStudio\Reddah\Reddah.Core\bin\Debug\Reddah.Core.pdb
-D:\BailinStudio\Reddah\Reddah.Core\obj\Debug\Reddah.Core.dll
-D:\BailinStudio\Reddah\Reddah.Core\obj\Debug\Reddah.Core.pdb

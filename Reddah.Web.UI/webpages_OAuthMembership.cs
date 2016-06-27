@@ -15,22 +15,14 @@ namespace Reddah.Web.UI
 using System;
     using System.Collections.Generic;
     
-public partial class Article
+public partial class webpages_OAuthMembership
 {
 
-    public int Id { get; set; }
+    public string Provider { get; set; }
 
-    public string Title { get; set; }
+    public string ProviderUserId { get; set; }
 
-    public string Content { get; set; }
-
-    public Nullable<System.DateTime> CreatedOn { get; set; }
-
-    public Nullable<int> Up { get; set; }
-
-    public Nullable<int> Down { get; set; }
-
-    public Nullable<int> Count { get; set; }
+    public int UserId { get; set; }
 
 }
 

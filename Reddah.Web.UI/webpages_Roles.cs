@@ -15,22 +15,24 @@ namespace Reddah.Web.UI
 using System;
     using System.Collections.Generic;
     
-public partial class Article
+public partial class webpages_Roles
 {
 
-    public int Id { get; set; }
+    public webpages_Roles()
+    {
 
-    public string Title { get; set; }
+        this.UserProfiles = new HashSet<UserProfile>();
 
-    public string Content { get; set; }
+    }
 
-    public Nullable<System.DateTime> CreatedOn { get; set; }
 
-    public Nullable<int> Up { get; set; }
+    public int RoleId { get; set; }
 
-    public Nullable<int> Down { get; set; }
+    public string RoleName { get; set; }
 
-    public Nullable<int> Count { get; set; }
+
+
+    public virtual ICollection<UserProfile> UserProfiles { get; set; }
 
 }
 

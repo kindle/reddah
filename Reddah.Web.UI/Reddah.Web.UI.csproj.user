@@ -34,11 +34,10 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>8647</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost</IISUrl>
+          <IISUrl>http://localhost:2345</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://www.dev.reddah.com</CustomServerUrl>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

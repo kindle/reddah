@@ -11,6 +11,10 @@ using WebMatrix.WebData;
 using Reddah.Web.UI.Filters;
 using Reddah.Web.UI.Models;
 using CaptchaMvc.Attributes;
+using System.Net.Mail;
+using System.Text;
+using System.Net;
+using System.Web.Helpers;
 
 namespace Reddah.Web.UI.Controllers
 {
@@ -18,6 +22,8 @@ namespace Reddah.Web.UI.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private readonly log4net.ILog log = log4net.LogManager.GetLogger("AccountController");
+
         //
         // GET: /Account/Login
 
@@ -69,7 +75,8 @@ namespace Reddah.Web.UI.Controllers
         //
         // POST: /Account/Register
 
-        [HttpPost, CaptchaVerify("Captcha is not valid")]
+        //[HttpPost, CaptchaVerify("Captcha is not valid")]
+        [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
@@ -79,7 +86,13 @@ namespace Reddah.Web.UI.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    var verifyToken = WebSecurity.CreateUserAndAccount(
+                        model.UserName, 
+                        model.Password, 
+                        new { Email=model.Email }, 
+                        false);
+                    //log.Info("verify token:" + verifyToken);
+
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("HomePage", "Home");
                 }
@@ -92,7 +105,17 @@ namespace Reddah.Web.UI.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
+        public struct MailInfo
+        {
+            public string MailFrom;
+            public string MailTo;
+            public string MailCC;
+            public string MailContent;
+            public string AttachPath;
+            public string Subject;
+            public bool IsBodyHtml;
+            public MailPriority mailPriority;
+        };
         //
         // POST: /Account/Disassociate
 
@@ -270,7 +293,7 @@ namespace Reddah.Web.UI.Controllers
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        db.UserProfiles.Add(new Models.UserProfile { UserName = model.UserName });
+                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);

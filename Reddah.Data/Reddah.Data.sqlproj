@@ -59,17 +59,7 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Article.sql" />
-    <Build Include="Comment.sql" />
-    <Build Include="Label.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="Reddah.Data.refactorlog" />
-  </ItemGroup>
-  <ItemGroup>
-    <PostDeploy Include="Update.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Reddah.Data.publish.xml" />
+    <Build Include="Setup.sql" />
+    <Build Include="DropAll.sql" />
   </ItemGroup>
 </Project>

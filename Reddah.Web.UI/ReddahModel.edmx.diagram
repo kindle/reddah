@@ -5,11 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="362e9d61464a44e7b1c22513a90a3d37" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="reddahModel.Article" Width="1.5" PointX="8.44604862315862" PointY="15.921413637661102" />
-        <EntityTypeShape EntityType="reddahModel.Comment" Width="1.5" PointX="5.5338072709430977" PointY="9.2422366334322081" />
-        <EntityTypeShape EntityType="reddahModel.Label" Width="1.5" PointX="11.113010929484391" PointY="13.405543214364696" />
-        <EntityTypeShape EntityType="reddahModel.Log" Width="1.5" PointX="7.5428322607385141" PointY="23.003974433524522" />
-        <EntityTypeShape EntityType="reddahModel.UserProfile" Width="1.5" PointX="1.4763783893903617" PointY="26.625736010552259" />
+        <EntityTypeShape EntityType="reddahModel.Article" Width="1.5" PointX="7.1815576828930325" PointY="25.265394699417705" />
+        <EntityTypeShape EntityType="reddahModel.Comment" Width="1.5" PointX="7.7415600939381672" PointY="1.0223058913938263" />
+        <EntityTypeShape EntityType="reddahModel.Label" Width="1.5" PointX="11.25215269031569" PointY="25.022692751615629" />
+        <EntityTypeShape EntityType="reddahModel.Log" Width="1.5" PointX="2.9048857572045579" PointY="7.1461340073245267" />
+        <EntityTypeShape EntityType="reddahModel.Post" Width="1.5" PointX="6.4058735083815979" PointY="10.740952839488607" />
+        <EntityTypeShape EntityType="reddahModel.UserProfile" Width="1.5" PointX="3.1687346301827275" PointY="20.992636079430877" />
+        <EntityTypeShape EntityType="reddahModel.webpages_Membership" Width="1.5" PointX="1.5116664979195531" PointY="26.83926066515933" />
+        <EntityTypeShape EntityType="reddahModel.webpages_OAuthMembership" Width="1.5" PointX="3.3934996944821902" PointY="18.276945122646609" />
+        <EntityTypeShape EntityType="reddahModel.webpages_Roles" Width="1.5" PointX="6.1056783507138856" PointY="7.6362275665794623" />
+        <AssociationConnector Association="reddahModel.webpages_UsersInRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
