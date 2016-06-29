@@ -19,4 +19,10 @@ OK18.solve /r/top issue 2015/12/23
 19.use ninjia ioc framework kernal to replace current ioc framework
 OK20.solve captcha are you a robot issue 2016/01/07
 ok21.2016-06-21 add wechat response text message handler and subscribe event handler
-22.
+22.refactor email module
+23.update verify email ui
+24.deal with proxy that not able to send mail with smtp.reddah.com 25
+25.add captcha for register
+26.update css for mobile view
+27.login then verify email or verify email then log in?
+28.reddah.com add feature toolbox, delete after read.

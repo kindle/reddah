@@ -180,6 +180,7 @@
     <Compile Include="Controllers\BrowseNavigateController.cs" />
     <Compile Include="Controllers\ContactSupportController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\VerifyEmailController.cs" />
     <Compile Include="Controllers\QQController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\SubmitController.cs" />
@@ -797,6 +798,7 @@
     <Content Include="Views\Submit\Index.cshtml" />
     <Content Include="Web.sitemap" />
     <Content Include="Views\Articles\Log.cshtml" />
+    <Content Include="Views\Account\VerifyEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

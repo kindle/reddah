@@ -141,6 +141,12 @@
             );
 
             routes.MapLocalizedRoute(
+                "VerifyEmail",
+                "{locale}/VerifyEmail",
+                new { controller = "VerifyEmail", action = "index"}
+            );
+
+            routes.MapLocalizedRoute(
                 "Log",
                 "{locale}/log",
                 new { controller = "log", action = "index" }
