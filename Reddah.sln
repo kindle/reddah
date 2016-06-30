@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reddah.Web.UI", "Reddah.Web.UI\Reddah.Web.UI.csproj", "{472CC0FC-D495-4E7A-BB29-C7E43AE745BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reddah.Web.Core", "Reddah.Web.Core\Reddah.Web.Core.csproj", "{4DF85914-0D37-4F16-BEAA-74F8BC4ECC01}"
@@ -10,8 +8,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reddah.Core", "Reddah.Core\Reddah.Core.csproj", "{3096955E-31F3-4721-AA86-76461D3276A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reddah.Web.Live", "Reddah.Web.Live\Reddah.Web.Live.csproj", "{A4A7EB56-B49E-4C1B-86B0-187D1BF70BA9}"
-EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Reddah.Data", "Reddah.Data\Reddah.Data.sqlproj", "{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reddah.Web.Captcha", "Reddah.Web.Captcha\Reddah.Web.Captcha.csproj", "{E78E7563-07C5-494D-BC1F-B00542A059DC}"
 EndProject
@@ -57,16 +53,6 @@ Global
 		{A4A7EB56-B49E-4C1B-86B0-187D1BF70BA9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A4A7EB56-B49E-4C1B-86B0-187D1BF70BA9}.Release|x64.ActiveCfg = Release|Any CPU
 		{A4A7EB56-B49E-4C1B-86B0-187D1BF70BA9}.Release|x86.ActiveCfg = Release|Any CPU
-		{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}.Release|x64.ActiveCfg = Release|Any CPU
-		{BA0C6B48-E828-4CBA-A4BB-50A2BBEC1794}.Release|x86.ActiveCfg = Release|Any CPU
 		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Debug|x64.ActiveCfg = Debug|Any CPU

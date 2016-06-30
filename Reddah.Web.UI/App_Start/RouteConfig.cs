@@ -157,6 +157,12 @@
                 "qq",
                 new { controller = "QQ", action = "index" }
             );
+
+            routes.MapLocalizedRoute(
+                "UserCount",
+                "{locale}/Users",
+                new { controller = "UserCount", action = "index" }
+            );
         }
     }
 }

@@ -180,6 +180,7 @@
     <Compile Include="Controllers\BrowseNavigateController.cs" />
     <Compile Include="Controllers\ContactSupportController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\UserCountController.cs" />
     <Compile Include="Controllers\VerifyEmailController.cs" />
     <Compile Include="Controllers\QQController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
@@ -597,11 +598,12 @@
     <Content Include="Content\Compass\Pages\NavigationList.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Database\DropAll.sql" />
+    <Content Include="Database\Setup.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\playSmall.png" />
     <Content Include="security.txt" />
-    <Content Include="Issues.txt" />
     <Content Include="Scripts\angular-1.2.16.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
@@ -799,6 +801,7 @@
     <Content Include="Web.sitemap" />
     <Content Include="Views\Articles\Log.cshtml" />
     <Content Include="Views\Account\VerifyEmail.cshtml" />
+    <Content Include="Views\Account\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
