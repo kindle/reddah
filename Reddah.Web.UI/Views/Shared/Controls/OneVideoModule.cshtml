@@ -15,12 +15,14 @@
                     
                         @if (@Model.Style == "Medium")
                         {
+                            @Model.VideoUrl
                             <div class="VideoModuleMediumImage">
                                 <div class="supportVideo" height="205" width="364" videourl="@Model.VideoUrl" previewimageurl="@Model.BackgroundImageUrl" rating="" locale="" overflow="false"></div>
                             </div>
                         }
                         else
                         {
+                            @Model.VideoUrl
                             <div class="VideoModuleLargeImage">
                                 <div class="supportVideo" height="425" width="754" videourl="@Model.VideoUrl" previewimageurl="@Model.BackgroundImageUrl" rating="" locale="en-US" overflow="false"></div>
                             </div>

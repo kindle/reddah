@@ -28,7 +28,7 @@ If you are a parent, you also connected a Windows Live ID to your child’s acco
  
       ]]>
     </Text>
-    <VideoUrl>http://bailin/content/Compass/Videos/ReddahDemo_DistributedMachines.wmv</VideoUrl>
+    <VideoUrl>http://www.reddah.com/content/Compass/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
     <VideoTitle>Position Kinect</VideoTitle>
   </Module>
   <Module>
@@ -43,7 +43,7 @@ If you are a parent, you also connected a Windows Live ID to your child’s acco
  
       ]]>
     </Text>
-    <VideoUrl>http://bailin/content/Compass/Videos/ReddahDemo_LocalMachine.wmv</VideoUrl>
+    <VideoUrl>/content/Compass/Videos/ReddahDemo_LocalMachine.wmv</VideoUrl>
     <VideoTitle>Position Kinect</VideoTitle>
   </Module>
   <Module>
@@ -51,7 +51,7 @@ If you are a parent, you also connected a Windows Live ID to your child’s acco
     <Style>Large</Style>
     <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
     <Text>One Video Image</Text>
-    <VideoUrl>http://bailin/content/Compass/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
+    <VideoUrl>http://localhost/content/Compass/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
     <VideoTitle>Position Kinect</VideoTitle>
   </Module>
   <Module>
@@ -59,7 +59,7 @@ If you are a parent, you also connected a Windows Live ID to your child’s acco
     <Style>Large</Style>
     <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
     <Text>One Video Image</Text>
-    <VideoUrl>http://bailin/content/Compass/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
+    <VideoUrl>http://localhost/content/Compass/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
     <VideoTitle>Position Kinect</VideoTitle>
   </Module>
   <Module>
@@ -67,7 +67,7 @@ If you are a parent, you also connected a Windows Live ID to your child’s acco
     <Style>Large</Style>
     <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
     <Text>One Video Image</Text>
-    <VideoUrl>http://bailin/content/Compass/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
+    <VideoUrl>http://localhost/content/Compass/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
     <VideoTitle>Position Kinect</VideoTitle>
   </Module>
 </ContentType>

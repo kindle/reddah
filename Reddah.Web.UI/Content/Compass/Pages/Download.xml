@@ -56,7 +56,7 @@
     <Style>Large</Style>
     <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
     <Text>One Video Image</Text>
-    <VideoUrl>http://bailin/content/Compass/Videos/ReddahDemo_LocalMachine.wmv</VideoUrl>
+    <VideoUrl>http://localhost/content/Compass/Videos/ReddahDemo_LocalMachine.wmv</VideoUrl>
     <VideoTitle>Position Kinect</VideoTitle>
   </Module>
   <Module>
@@ -68,7 +68,7 @@
     <Style>Large</Style>
     <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
     <Text>One Video Image</Text>
-    <VideoUrl>http://bailin/content/Compass/Videos/ReddahDemo_DistributedMachines.wmv</VideoUrl>
+    <VideoUrl>http://localhost/content/Compass/Videos/ReddahDemo_DistributedMachines.wmv</VideoUrl>
     <VideoTitle>Position Kinect</VideoTitle>
   </Module>
   <Module>

@@ -97,7 +97,7 @@
     <Style>Large</Style>
     <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
     <Text>One Video Image</Text>
-    <VideoUrl>http://bailin/content/Compass/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
+    <VideoUrl>http://localhost/content/Compass/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
     <VideoTitle>Position Kinect</VideoTitle>
   </Module>
   <Module>

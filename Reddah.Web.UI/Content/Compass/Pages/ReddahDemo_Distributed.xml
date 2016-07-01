@@ -51,7 +51,7 @@
     <Style>Large</Style>
     <BackgroundImageUrl>/content/Compass/Images/ReddahDemo.png</BackgroundImageUrl>
     <Text>One Video Image</Text>
-    <VideoUrl>http://bailin/content/Compass/Videos/ReddahDemo_DistributedMachines.wmv</VideoUrl>
+    <VideoUrl>http://localhost/content/Compass/Videos/ReddahDemo_DistributedMachines.wmv</VideoUrl>
     <VideoTitle>Position Kinect</VideoTitle>
   </Module>
   <Module>

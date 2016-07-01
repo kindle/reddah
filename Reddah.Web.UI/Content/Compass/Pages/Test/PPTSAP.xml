@@ -9,9 +9,9 @@
     <ModuleType>TextModule</ModuleType>
     <Text>
       <![CDATA[
-        <a href="http://bailin/content/Compass/ppt/supportreddahcom.pps">supportreddah.com.ppts link</a>
+        <a href="http://localhost/content/Compass/ppt/supportreddahcom.pps">supportreddah.com.ppts link</a>
         <br>
-        <a href="http://bailin/content/Compass/ppt/support.pptx">support.pptx link</a>
+        <a href="http://localhost/content/Compass/ppt/support.pptx">support.pptx link</a>
         <br>
         <br>        
       ]]>
@@ -20,9 +20,9 @@
   <Module>
     <ModuleType>OneVideoModule</ModuleType>
     <Style>Large</Style>
-    <BackgroundImageUrl>http://bailin/content/images/reddahppt.jpg</BackgroundImageUrl>
+    <BackgroundImageUrl>http://localhost/content/images/reddahppt.jpg</BackgroundImageUrl>
     <Text>One Video Image</Text>
-    <VideoUrl>http://bailin/content/Compass/Videos/support.mp4</VideoUrl>
+    <VideoUrl>http://localhost/content/Compass/Videos/support.mp4</VideoUrl>
     <VideoTitle>support.reddah.com ppt video in case Office is not installed</VideoTitle>
   </Module>
 </ContentType>

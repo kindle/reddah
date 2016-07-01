@@ -163,6 +163,12 @@
                 "{locale}/Users",
                 new { controller = "UserCount", action = "index" }
             );
+
+            routes.MapLocalizedRoute(
+                "About",
+                "{locale}/About",
+                new { controller = "Support", action = "About" }
+            );
         }
     }
 }
