@@ -180,6 +180,9 @@
     <Compile Include="Controllers\BrowseNavigateController.cs" />
     <Compile Include="Controllers\ContactSupportController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\QuoteController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\UserCountController.cs" />
     <Compile Include="Controllers\VerifyEmailController.cs" />
     <Compile Include="Controllers\QQController.cs" />
@@ -622,6 +625,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Views\Finance\Quote.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Views\Shared\Controls\ArticlesPreviewsModule.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

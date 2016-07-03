@@ -169,6 +169,12 @@
                 "{locale}/About",
                 new { controller = "Support", action = "About" }
             );
+
+            routes.MapLocalizedRoute(
+                "Quote",
+                "{locale}/Quote",
+                new { controller = "Quote", action = "Index" }
+            );
         }
     }
 }
