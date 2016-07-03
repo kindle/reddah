@@ -5,15 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="362e9d61464a44e7b1c22513a90a3d37" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="reddahModel.Article" Width="1.5" PointX="7.1815576828930325" PointY="25.265394699417705" />
-        <EntityTypeShape EntityType="reddahModel.Comment" Width="1.5" PointX="7.7415600939381672" PointY="1.0223058913938263" />
-        <EntityTypeShape EntityType="reddahModel.Label" Width="1.5" PointX="11.25215269031569" PointY="25.022692751615629" />
-        <EntityTypeShape EntityType="reddahModel.Log" Width="1.5" PointX="2.9048857572045579" PointY="7.1461340073245267" />
-        <EntityTypeShape EntityType="reddahModel.Post" Width="1.5" PointX="6.4058735083815979" PointY="10.740952839488607" />
-        <EntityTypeShape EntityType="reddahModel.UserProfile" Width="1.5" PointX="3.1687346301827275" PointY="20.992636079430877" />
-        <EntityTypeShape EntityType="reddahModel.webpages_Membership" Width="1.5" PointX="1.5116664979195531" PointY="26.83926066515933" />
-        <EntityTypeShape EntityType="reddahModel.webpages_OAuthMembership" Width="1.5" PointX="3.3934996944821902" PointY="18.276945122646609" />
-        <EntityTypeShape EntityType="reddahModel.webpages_Roles" Width="1.5" PointX="6.1056783507138856" PointY="7.6362275665794623" />
+        <EntityTypeShape EntityType="reddahModel.Article" Width="1.5" PointX="4.3747760506229358" PointY="9.5389583006216956" />
+        <EntityTypeShape EntityType="reddahModel.Comment" Width="1.5" PointX="10.468396379830502" PointY="19.917465979194951" />
+        <EntityTypeShape EntityType="reddahModel.Label" Width="1.5" PointX="6.2879717193022238" PointY="1.7264202692203319" />
+        <EntityTypeShape EntityType="reddahModel.Log" Width="1.5" PointX="5.2203034950514811" PointY="24.371803935790343" />
+        <EntityTypeShape EntityType="reddahModel.Post" Width="1.5" PointX="3.0112897041306317" PointY="2.5906504255675946" />
+        <EntityTypeShape EntityType="reddahModel.Setting" Width="1.5" PointX="0.58802667846345658" PointY="15.31482208488268" />
+        <EntityTypeShape EntityType="reddahModel.UserProfile" Width="1.5" PointX="0.89797783498558115" PointY="3.9716208148615531" />
+        <EntityTypeShape EntityType="reddahModel.webpages_Membership" Width="1.5" PointX="11.003238809762168" PointY="23.399275969434193" />
+        <EntityTypeShape EntityType="reddahModel.webpages_OAuthMembership" Width="1.5" PointX="9.21884656195475" PointY="5.5909025993155792" />
+        <EntityTypeShape EntityType="reddahModel.webpages_Roles" Width="1.5" PointX="6.5524243575299268" PointY="22.169967482876949" />
         <AssociationConnector Association="reddahModel.webpages_UsersInRoles" />
       </Diagram>
     </edmx:Diagrams>

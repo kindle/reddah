@@ -8,3 +8,4 @@ drop table [dbo].[webpages_Membership];
 drop table [dbo].[webpages_OAuthMembership];
 drop table [dbo].[webpages_Roles];
 drop table [dbo].[webpages_UsersInRoles];
+drop table [dbo].[Setting];

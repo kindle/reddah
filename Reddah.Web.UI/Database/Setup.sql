@@ -87,3 +87,10 @@ CREATE TABLE [dbo].[Posts] (
     [LabelId] INT            NOT NULL,
     CONSTRAINT [PK_dbo.Posts] PRIMARY KEY CLUSTERED ([PostId] ASC)
 );
+
+CREATE TABLE [dbo].[Setting] (
+    [Id]  INT            IDENTITY (1, 1) NOT NULL,
+    [Key]   NVARCHAR (MAX) NULL,
+    [Value] NVARCHAR (MAX) NULL,
+    CONSTRAINT [PK_dbo.Setting] PRIMARY KEY CLUSTERED ([Id] ASC)
+);

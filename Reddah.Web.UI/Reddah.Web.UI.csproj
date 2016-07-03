@@ -237,9 +237,13 @@
     <Compile Include="Routing\LocalizedRoute.cs" />
     <Compile Include="Routing\RedirectToLocalizedRoute.cs" />
     <Compile Include="Routing\RoutingExtensions.cs" />
+    <Compile Include="Setting.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserProfile.cs">
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utility\EmailHelper.cs" />
     <Compile Include="Utility\Helpers.cs" />
     <Compile Include="ViewModels\ArticleViewModelBase.cs" />
     <Compile Include="ViewModels\BrowseNavigateViewModel.cs" />

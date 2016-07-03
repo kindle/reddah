@@ -21,6 +21,7 @@
       FROM [dbo].[Log] AS [Log]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Posts" EntityType="reddahModel.Store.Posts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Setting" EntityType="reddahModel.Store.Setting" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserProfile" EntityType="reddahModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="webpages_Membership" EntityType="reddahModel.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="reddahModel.Store.webpages_OAuthMembership" store:Type="Tables" Schema="dbo" />
@@ -93,6 +94,14 @@
           <Property Name="Title" Type="nvarchar(max)" />
           <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="LabelId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="nvarchar(max)" />
+          <Property Name="Value" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -176,6 +185,7 @@
           <EntitySet Name="Labels" EntityType="reddahModel.Label" />
           <EntitySet Name="Logs" EntityType="reddahModel.Log" />
           <EntitySet Name="Posts" EntityType="reddahModel.Post" />
+          <EntitySet Name="Settings" EntityType="reddahModel.Setting" />
           <EntitySet Name="UserProfiles" EntityType="reddahModel.UserProfile" />
           <EntitySet Name="webpages_Membership" EntityType="reddahModel.webpages_Membership" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="reddahModel.webpages_OAuthMembership" />
@@ -240,6 +250,14 @@
           <Property Type="String" Name="Title" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Content" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="LabelId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Key" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Value" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -346,6 +364,15 @@
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="PostId" ColumnName="PostId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="reddahModel.Setting">
+              <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

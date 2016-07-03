@@ -15,6 +15,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Net;
 using System.Web.Helpers;
+using Reddah.Web.UI.Utility;
 
 namespace Reddah.Web.UI.Controllers
 {
@@ -96,35 +97,17 @@ namespace Reddah.Web.UI.Controllers
                     using (var context = new reddahEntities1())
                     {
                         var user = context.UserProfiles.FirstOrDefault(u => u.UserName == model.UserName);
-                        try
-                        {
-                            SmtpClient client = new SmtpClient();
-                            client.Host = "smtp.reddah.com";
-                            client.Credentials = new System.Net.NetworkCredential("mp@reddah.com", "");
-                            client.EnableSsl = false;
-                            MailAddress from = new MailAddress("mp@reddah.com", "mp@reddah.com");
-                            MailAddress to = new MailAddress(model.Email, "Bailin");
-                            MailMessage message = new MailMessage(from, to);
-                            message.Subject = "[reddah] Verify your email address‏";
-                            message.Body = string.Format(@"
-your username is:
-
-{0}
-
-visit this link to verify your email address:
-
-http://www.reddah.com/en-US/VerifyEmail?Userid={1}&EmailToken={2}
-
-thanks for using the site!", 
-                           model.UserName, user.UserId, verifyToken);
-                            client.Send(message);
-                        }
-                        catch (Exception e)
-                        {
-                            log.Error(e.Message);
-                        }
+                        EmailHelper.Send(
+                                new MailAddress("donotreply@reddah.com", "donotreply@reddah.com"),
+                                new MailAddress(model.Email, model.UserName),
+                                "[reddah] Verify your email address‏",
+                                string.Format("Dear {0}:\r\n" +
+                                "visit this link to verify your email address:\r\n" +
+                                "http://www.reddah.com/en-US/VerifyEmail?Userid={1}&EmailToken={2}" +
+                                "\r\nthanks for using the site!", 
+                                model.UserName, user.UserId, verifyToken)
+                        );
                     }
-
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("HomePage", "Home");
                 }
