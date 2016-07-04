@@ -9,36 +9,43 @@
             <hgroup class="title">
                 <h1>@ViewBag.Title</h1>
             </hgroup>
-            <section id="submitForm">
-                <h2>You are submitting a link. The key to a successful submission is interesting content and a descriptive title.</h2>
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)
+            @if (Request.IsAuthenticated)
+            {
+                <section id="submitForm">
+                    <h2>You are submitting a link. The key to a successful submission is interesting content and a descriptive title.</h2>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
 
-                    <fieldset>
-                        <legend>Log in Form</legend>
-                        <ol>
-                            <li>
-                                @Html.LabelFor(m => m.Title)
-                                @Html.TextAreaFor(m => m.Title, new { @required = "required", @maxlength="20" })
-                                <br />
-                                @Html.ValidationMessageFor(m => m.Title)
-                            </li>
-                            <li>
-                                @Html.LabelFor(m => m.Content)
-                                @Html.TextAreaFor(m => m.Content, new { @required = "required", @maxlength = "50" })
-                                <br />
-                                @Html.ValidationMessageFor(m => m.Content)
-                            </li>
-                        </ol>
-                        @*@Html.Captcha("Click to get a new one", "", 5, "are you a robot?", true)*@
-                        @Html.MathCaptcha("Click to get a new one", "", "are you a robot?", true)
-                        <br/>
-                        <input type="submit" value="submit" />
-                    </fieldset>
-                }
-            </section>
+                        <fieldset>
+                            <legend>Log in Form</legend>
+                            <ol>
+                                <li>
+                                    @Html.LabelFor(m => m.Title)
+                                    @Html.TextAreaFor(m => m.Title, new { @required = "required", @maxlength="20" })
+                                    <br />
+                                    @Html.ValidationMessageFor(m => m.Title)
+                                </li>
+                                <li>
+                                    @Html.LabelFor(m => m.Content)
+                                    @Html.TextAreaFor(m => m.Content, new { @required = "required", @maxlength = "50" })
+                                    <br />
+                                    @Html.ValidationMessageFor(m => m.Content)
+                                </li>
+                            </ol>
+                            @*@Html.Captcha("Click to get a new one", "", 5, "are you a robot?", true)*@
+                            @Html.MathCaptcha("Click to get a new one", "", "are you a robot?", true)
+                            <br/>
+                            <input type="submit" value="submit" />
+                        </fieldset>
+                    }
+                </section>
+            }
+            else
+            {
+                <h2>Please Login to Submit</h2>
+            }
         </td>
         <td class="HomePageModularRightContent">
             <h3>Discuss this AD on reddah: </h3>

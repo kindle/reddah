@@ -435,6 +435,10 @@
     <Content Include="Content\Compass\Pages\Video\reddahArch2.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\Images\exlogin\facebook.png" />
+    <Content Include="Content\Images\exlogin\google.png" />
+    <Content Include="Content\Images\exlogin\microsoft.jpg" />
+    <Content Include="Content\Images\exlogin\twitter.jpg" />
     <Content Include="Content\Log.xml">
       <SubType>Designer</SubType>
     </Content>

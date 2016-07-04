@@ -15,7 +15,7 @@ namespace Reddah.Web.UI.Controllers
         }
 
         [HttpPost, CaptchaVerify("Captcha is not valid")]
-        [AllowAnonymous]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Index(Article article)
         {

@@ -1560,3 +1560,27 @@ div.AssistancePopupHeader
     display: none;
     visibility: hidden;
 }
+
+.exlogin_microsoft {
+    background: url(/Content/images/exlogin/microsoft.jpg) no-repeat center center;
+    width: 100px;
+    height: 100px;
+}
+
+.exlogin_twitter {
+    background: url(/Content/images/exlogin/twitter.jpg) no-repeat center center;
+    width: 100px;
+    height: 100px;
+}
+
+.exlogin_facebook {
+    background: url(/Content/images/exlogin/facebook.png) no-repeat center center;
+    width: 100px;
+    height: 100px;
+}
+
+.exlogin_google {
+    background: url(/Content/images/exlogin/google.png) no-repeat center center;
+    width: 100px;
+    height: 100px;
+}
