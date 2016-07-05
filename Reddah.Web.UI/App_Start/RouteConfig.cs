@@ -117,6 +117,31 @@
             );
 
             routes.MapLocalizedRoute(
+                "ExternalLogin",
+                "{locale}/Account/ExternalLogin",
+                new { controller = "account", action = "ExternalLogin" }
+            );
+
+            routes.MapLocalizedRoute(
+                "ExternalLoginFallback",
+                "{locale}/Account/ExternalLoginCallback",
+                new { controller = "account", action = "ExternalLoginCallback" }
+            );
+
+            routes.MapLocalizedRoute(
+                "ExternalLoginFailure",
+                "{locale}/Account/ExternalLoginFailure",
+                new { controller = "account", action = "ExternalLoginFailure" }
+            );
+
+            routes.MapLocalizedRoute(
+                "ExternalLoginConfirmation",
+                "{locale}/Account/ExternalLoginConfirmation",
+                new { controller = "account", action = "ExternalLoginConfirmation" }
+            );
+
+
+            routes.MapLocalizedRoute(
                 "LogOff",
                 "{locale}/account/logoff",
                 new { controller = "account", action = "logoff" }
