@@ -236,7 +236,8 @@ namespace Reddah.Web.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-            return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            //return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            return new ExternalLoginResult(provider, "/en-us/account/ExternalLoginCallback");
         }
 
         //
@@ -245,32 +246,42 @@ namespace Reddah.Web.UI.Controllers
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
-            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            log.Info("1");
+            //AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication("/en-us/account/ExternalLoginCallback");
+            log.Info("2");
             if (!result.IsSuccessful)
             {
-                return RedirectToAction("ExternalLoginFailure");
+                log.Info("3");
+                //return RedirectToAction("ExternalLoginFailure");
+                return Redirect("/en-us/account/ExternalLoginFailure");
             }
-
+            log.Info("4");
             if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
             {
+                log.Info("5");
                 return RedirectToLocal(returnUrl);
             }
-
+            log.Info("6");
             if (User.Identity.IsAuthenticated)
             {
+                log.Info("7");
                 // If the current user is logged in add the new account
                 OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
                 return RedirectToLocal(returnUrl);
             }
             else
             {
+                log.Info("8");
                 // User is new, ask for their desired membership name
                 string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
                 ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                 ViewBag.ReturnUrl = returnUrl;
                 return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
             }
+            log.Info("9");
         }
+
 
         //
         // POST: /Account/ExternalLoginConfirmation

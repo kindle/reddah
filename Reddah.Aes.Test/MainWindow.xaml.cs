@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reddah.Encryption;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Reddah.AesTool
+namespace Reddah.Aes.Test
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

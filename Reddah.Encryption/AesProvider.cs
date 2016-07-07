@@ -1,17 +1,25 @@
-﻿namespace Reddah.Web.UI.Utility
-{
-    using System;
-    using System.IO;
-    using System.Security.Cryptography;
+﻿using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
+namespace Reddah.Encryption
+{
     public class AesProvider
     {
+        /// <summary>
+        /// Encrypts the specified text info.
+        /// </summary>
+        /// <param name="text">The plain text.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="iv">The iv.</param>
+        /// <returns></returns>
         public static string Encrypt(string text, byte[] key, byte[] iv)
         {
             if (String.IsNullOrEmpty(text))
                 return String.Empty;
 
-            byte[] encryptedUserInfo;
+            byte[] encryptedText;
 
             try
             {
@@ -34,7 +42,7 @@
                                 //Write all data to the stream.
                                 swEncrypt.Write(text);
                             }
-                            encryptedUserInfo = msEncrypt.ToArray();
+                            encryptedText = msEncrypt.ToArray();
                         }
                     }
                 }
@@ -45,16 +53,23 @@
             }
 
             // Return the encrypted bytes from the memory stream.
-            return Convert.ToBase64String(encryptedUserInfo);
+            return Convert.ToBase64String(encryptedText);
         }
 
+        /// <summary>
+        /// Decrypts the specified text cipher.
+        /// </summary>
+        /// <param name="textCipher">The text cipher.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="iv">The iv.</param>
+        /// <returns></returns>
         public static string Decrypt(string textCipher, byte[] key, byte[] iv)
         {
             // Declare the string used to hold the decrypted text.
-            string userInfoString = String.Empty;
+            string textString = String.Empty;
 
             if (String.IsNullOrEmpty(textCipher))
-                return userInfoString;
+                return textString;
 
             // Create an AesCryptoServiceProvider object with the specified key and IV.
             using (var aesAlg = new AesCryptoServiceProvider())
@@ -73,12 +88,12 @@
                         using (var srDecrypt = new StreamReader(csDecrypt))
                         {
                             // Read the decrypted bytes from the decrypting stream and place them in a string.
-                            userInfoString = srDecrypt.ReadToEnd();
+                            textString = srDecrypt.ReadToEnd();
                         }
                     }
                 }
             }
-            return userInfoString;
+            return textString;
         }
     }
 }

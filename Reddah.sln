@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reddah.Web.Live", "Reddah.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reddah.Web.Captcha", "Reddah.Web.Captcha\Reddah.Web.Captcha.csproj", "{E78E7563-07C5-494D-BC1F-B00542A059DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reddah.AesTool", "Reddah.AesTool\Reddah.AesTool.csproj", "{CBCAB917-82D4-4B17-BB39-CAB7C0103272}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reddah.Encryption", "Reddah.Encryption\Reddah.Encryption.csproj", "{F0B8F889-03C8-4ABB-9CB7-580B2D1C8E32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reddah.Aes.Test", "Reddah.Aes.Test\Reddah.Aes.Test.csproj", "{CBCAB917-82D4-4B17-BB39-CAB7C0103272}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,14 @@ Global
 		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Release|x64.ActiveCfg = Release|Any CPU
 		{E78E7563-07C5-494D-BC1F-B00542A059DC}.Release|x86.ActiveCfg = Release|Any CPU
+		{F0B8F889-03C8-4ABB-9CB7-580B2D1C8E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0B8F889-03C8-4ABB-9CB7-580B2D1C8E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0B8F889-03C8-4ABB-9CB7-580B2D1C8E32}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F0B8F889-03C8-4ABB-9CB7-580B2D1C8E32}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F0B8F889-03C8-4ABB-9CB7-580B2D1C8E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0B8F889-03C8-4ABB-9CB7-580B2D1C8E32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0B8F889-03C8-4ABB-9CB7-580B2D1C8E32}.Release|x64.ActiveCfg = Release|Any CPU
+		{F0B8F889-03C8-4ABB-9CB7-580B2D1C8E32}.Release|x86.ActiveCfg = Release|Any CPU
 		{CBCAB917-82D4-4B17-BB39-CAB7C0103272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CBCAB917-82D4-4B17-BB39-CAB7C0103272}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBCAB917-82D4-4B17-BB39-CAB7C0103272}.Debug|x64.ActiveCfg = Debug|Any CPU

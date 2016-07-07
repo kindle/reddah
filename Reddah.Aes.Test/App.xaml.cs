@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
-namespace Reddah.AesTool
+namespace Reddah.Aes.Test
 {
     /// <summary>
     /// Interaction logic for App.xaml

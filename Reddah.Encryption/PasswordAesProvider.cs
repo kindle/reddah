@@ -1,9 +1,9 @@
-﻿namespace Reddah.Web.UI.Utility
-{
-    using System;
-    using System.Text;
+﻿using System;
+using System.Text;
 
-    public static class AesHelper
+namespace Reddah.Encryption
+{
+    public static class PasswordAesProvider
     {
         public static string Encrypt(string text, string aesKey, string aesIV)
         {
