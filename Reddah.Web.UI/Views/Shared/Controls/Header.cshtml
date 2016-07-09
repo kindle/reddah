@@ -4,11 +4,19 @@
     var locale = CultureInfo.CurrentUICulture.Name;
     var avatar = string.Format("https://microsoft-my.sharepoint.com/User%20Photos/Profile%20Pictures/{0}_microsoft_com_LThumb.jpg", "v-bawei");
 }
+@functions{
+    public string GetAntiForgeryToken()
+    {
+        string cookieToken, formToken;
+        AntiForgery.GetTokens(null, out cookieToken, out formToken);
+        return cookieToken + ":" + formToken;                
+    }
+}
 <div id="ShellHeaderContent">
     <div id="ShellMeBarArea">
         <a href="/">
             <div id="ShellLogo"></div>
-        </a>
+        </a>        
         @if (Request.IsAuthenticated)
         {
             <div id="SignedInExperience">
@@ -46,10 +54,15 @@
                         <div class="WelcomeText"><font color="#107c10" size="2">True or False</font> - <font color="Orange">Right or Wrong</font></div>
                     </div>
                     <div class="LinkArea">
-                        <a href="/@locale/account/register/#">@Resources.Header_JoinNow</a>
+                        <div id="BroswerOpacify" ng-click="hidePanel();"></div>
+                        <a href="#" ng-click="showPanel()">@Resources.Header_JoinNow</a>
+                        <span class="spread" ng-click="showPanel()">
+                            <a name="RpsSignInLink" href="#">@Resources.Header_SignIn</a>
+                        </span>
+                        @*<a href="/@locale/account/register/#">@Resources.Header_JoinNow</a>
                         <span class="spread">
                             <a name="RpsSignInLink" href="/@locale/account/login#">@Resources.Header_SignIn</a>
-                        </span>
+                        </span>*@
                     </div>
                 </div>
             </div>

@@ -65,7 +65,7 @@
             routes.MapLocalizedRoute(
                 "ChangeLocale",
                 "{locale}/ChangeLocale/{*path}",
-                new { controller = "Home", action = "ChangeLocale" }
+                new { controller = "Support", action = "ChangeLocale" }
             );
 
             routes.MapLocalizedRoute(

@@ -1,6 +1,6 @@
 ﻿@using System.Globalization    
 <!DOCTYPE html>
-<html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
+<html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName" ng-app="reddahApp">
     <head>
         <meta charset="utf-8" />
         <title>Reddah</title>
@@ -23,7 +23,7 @@
         @Scripts.Render("~/bundles/common")
         @RenderSection("scripts", required: false)        
     </head>
-    <body>
+    <body ng-controller="appCtrl">
         <div id="BodyHeader" class="container">
             @Html.Partial("~/Views/Shared/Controls/Header.cshtml")
         </div>
