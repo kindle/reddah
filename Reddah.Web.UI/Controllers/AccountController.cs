@@ -38,7 +38,27 @@ namespace Reddah.Web.UI.Controllers
         //
         // POST: /Account/Login
 
+        [AllowAnonymous]
         [HttpPost]
+        [AjaxValidateAntiForgeryToken]
+        public JsonResult JsonLogin(LoginModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+                {
+                    return Json(new { success = true, redirect = returnUrl });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                }
+            }
+            
+            return Json(new { errors = GetErrorsFromModelState() });
+        }
+
+        [HttpPost, CaptchaVerify("Captcha is not valid")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
@@ -76,9 +96,7 @@ namespace Reddah.Web.UI.Controllers
         //
         // POST: /Account/Register
 
-        //[HttpPost, CaptchaVerify("Captcha is not valid")]
         [HttpPost, CaptchaVerify("Captcha is not valid")]
-        //[HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
@@ -402,6 +420,11 @@ namespace Reddah.Web.UI.Controllers
             {
                 OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
             }
+        }
+
+        private IEnumerable<string> GetErrorsFromModelState()
+        {
+            return ModelState.SelectMany(x => x.Value.Errors.Select(error => error.ErrorMessage));
         }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)

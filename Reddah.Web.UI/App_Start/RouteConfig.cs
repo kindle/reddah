@@ -105,6 +105,12 @@
             );
 
             routes.MapLocalizedRoute(
+                "JsonLogin",
+                "{locale}/Account/JsonLogin",
+                new { controller = "Account", action = "JsonLogin" }
+            );
+
+            routes.MapLocalizedRoute(
                 "Register",
                 "{locale}/account/register",
                 new { controller = "account", action = "register" }

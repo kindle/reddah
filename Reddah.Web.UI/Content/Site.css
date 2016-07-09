@@ -627,6 +627,12 @@ td.HomePageModularRightContent
     vertical-align: top;
 }
 
+td.HomePageModularCenterContent
+{
+    width: 240px;
+    vertical-align: top;
+}
+
 div.AnnouncementsModuleLiner
 {
     border-color: #BDBEC1 ;
@@ -1583,4 +1589,35 @@ div.AssistancePopupHeader
     background: url(/Content/images/exlogin/google.png) no-repeat center center;
     width: 100px;
     height: 100px;
+}
+
+.loginUserName, .loginPassword {
+    width: 180px;
+}
+
+.loginTable {
+    border: 1px solid #BDBEC1;
+    margin: 0 5px;
+    padding: 10px;
+}
+
+.loginLoading {
+    vertical-align:middle;
+    width: 40px;
+    height: 40px;
+}
+
+.loginReset {
+    float:left;
+    margin: 5px;
+}
+.loginButton {
+    float: right;
+    margin: 5px;
+}
+
+.loginError {
+    color:red;
+    font-weight:bold;
+    height:50px;
 }

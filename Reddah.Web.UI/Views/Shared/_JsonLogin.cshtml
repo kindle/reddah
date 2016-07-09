@@ -1,0 +1,94 @@
+﻿@model Reddah.Web.UI.Models.LoginModel
+@using System.Globalization
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
+}
+<script>
+    angular.module("loginApp", [])
+    .controller("appCtrl", ['$scope', 'loginSvc', function ($scope, loginSvc) {
+        $scope.loading = false;
+        $scope.loginModel = { UserName: "", Password: "", RememberMe: false, ReturnUrl: window.location.href, Error: "", Token: "" };
+        $scope.loginAction = function () {
+            $scope.loading = true;
+            $scope.loginModel.Token = $scope.antiForgeryToken;
+            loginSvc.login($scope.loginModel).then(function (data) {
+                if (data.success == true) {
+                    window.location.href = data.redirect;
+                }
+                else
+                {
+                    $scope.loading = false;
+                    var str = '';
+                    for (var error in data.errors) {
+                        str += data.errors[error] + '\n';
+                    }
+                    $scope.loginModel.Error = str;
+                }
+            })
+        };
+    }])
+    //.controller("loginCtrl", ['$scope', 'loginSvc', function ($scope, loginSvc) {
+    //    alert('loginCtrl');
+    //    $scope.login = { name: "logineee", password: "", remember: false };
+    //    loginSvc.login().then(function (data) {
+    //        alert(data);
+    //    });
+    //}])
+    .factory("loginSvc", ['$http', '$q', function ($http, $q) {
+        return {
+            login: function (data) {
+                var defer = $q.defer();
+                $http({
+                    method: 'post',
+                    url: '/en-us/account/jsonlogin',
+                    data: data,
+                    headers: { 'RequestVerificationToken': data.Token }
+                }).success(function (data, status, headers, config) {
+                    defer.resolve(data);
+                }).error(function (data, status, headers, config) {
+                    defer.reject(data)
+                });
+                return defer.promise;
+            }
+        }
+    }]);
+</script>
+@functions{
+    public string GetAntiForgeryToken()
+    {
+        string cookieToken, formToken;
+        AntiForgery.GetTokens(null, out cookieToken, out formToken);
+        return cookieToken + ":" + formToken;                
+    }
+}
+@if (Request.IsAuthenticated)
+{
+    <div class="loginTable">Already Login</div>
+}
+else {
+<div ng-app="loginApp" class="loginTable">
+    <table ng-controller="appCtrl">
+        <tr>
+            <td>@Html.TextBoxFor(m => m.UserName, new { @class="loginUserName", data_ng_model = "loginModel.UserName"})</td>
+            <td>@Html.PasswordFor(m => m.Password, new { @class="loginPassword", data_ng_model = "loginModel.Password"})</td>
+        </tr>
+        <tr>
+            <td>
+                @Html.CheckBoxFor(m => m.RememberMe, new { data_ng_model = "loginModel.RememberMe" })
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+            </td>
+            <td>
+                <label class="loginReset">Reset</label>
+                <input class="loginButton" type="button" value="Log in" ng-click="loginAction()"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <img class="loginLoading" src="/content/images/loading_50x50.gif" ng-show="loading"/>
+                <div class="loginError" ng-show="loginModel.Error!='' &&!loading">{{loginModel.Error}}</div>
+            </td>
+        </tr>
+    </table>
+    <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@GetAntiForgeryToken()'"  />
+</div>
+}
