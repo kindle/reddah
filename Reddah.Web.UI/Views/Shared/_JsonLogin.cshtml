@@ -31,9 +31,14 @@
         $scope.loginModel = { UserName: "", Password: "", RememberMe: false, ReturnUrl: window.location.href, Error: "", Token: "" };
         $scope.showPanel = function () {
             $('div#BroswerOpacify').show();
+            $('div#LoginPanel').show();
+            var toAlign = $('div#LoginPanel');
+            toAlign.css('top', (($(window).height() - toAlign.outerHeight()) / 2) + $(window).scrollTop() + 'px');
+            toAlign.css('left', (($(window).width() - toAlign.outerWidth()) / 2) + $(window).scrollLeft() + 'px');
         };
         $scope.hidePanel = function () {
             $('div#BroswerOpacify').hide();
+            $('div#LoginPanel').hide();
         }
     }])
     //.controller("loginCtrl", ['$scope', 'loginSvc', function ($scope, loginSvc) {

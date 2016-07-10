@@ -51,7 +51,7 @@ body div#BodyHeader div#ShellLinkArea div.Links span#MobileVersionLinkArea
 div#ShellHeaderContent div#ShellMeBarArea
 {
     position: relative;
-    height: 85px;
+    height: 25px;
     margin-top: 6px;
     margin-bottom: 6px;
 }
@@ -122,8 +122,8 @@ div#ShellHeaderContent div#ShellMeBarArea div.GamerStatArea
 
 div#ShellHeaderContent div#ShellMeBarArea div.LinkArea
 {
+    margin-right:10px;
     position: absolute;
-    top: 44px;
     text-align: right;
     right: 0px;
     font-size: 12px;
@@ -147,7 +147,7 @@ div#ShellHeaderContent div#ShellMeBarArea div#ShellMeBar.SignedOut div.LinkArea 
     font-size: 12px;
 }
 
-div#ShellHeaderContent div#ShellMeBarArea div#ShellMeBar.SignedOut div.GamerStatArea div.WelcomeText
+div#ShellHeaderContent div#ShellMeBarArea div.GamerStatArea div.WelcomeText
 {
     float: right;
     /*padding-right: 104px;*/
@@ -272,8 +272,7 @@ div#ShellHeaderContent div#ShellMeBarArea div#ShellMeBar.SignedIn div.LinkArea s
     height: 12px;
 }
 
-div#ShellHeaderContent div#ShellMeBarArea div#ShellMeBar.SignedOut div.LinkArea span.spread,
-div#ShellHeaderContent div#ShellMeBarArea div#ShellMeBar.SignedIn div.LinkArea span.spread
+div#ShellHeaderContent div.LinkArea span.spread
 {
     background-image: url(/content/images/glyph-pipe.png);
     background-position: 7px center;

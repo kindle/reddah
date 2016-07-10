@@ -1,0 +1,62 @@
+﻿@using Reddah.Web.UI.Resources
+@using System.Globalization
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
+    var avatar = string.Format("https://microsoft-my.sharepoint.com/User%20Photos/Profile%20Pictures/{0}_microsoft_com_LThumb.jpg", "v-bawei");
+}
+<div id="ShellHeaderContent">
+    <div id="ShellMeBarArea">
+        <a href="/">
+            <div id="ShellLogo"></div>
+        </a>
+        @if (Request.IsAuthenticated)
+        {
+            <div id="SignedInExperience">
+                <div title="username" class="SignedIn" id="HeadShotBox">
+                    <a href="account/manage">
+                        <div class="avatarheadshot" style="background-image: url('/content/images/anonymous.png');" name="MeBarAvatar"></div>
+                        @*<div class="avatarheadshot" name="MeBarAvatar">
+                            <image src="@avatar" style="width:70px; height:80px;"></image>
+                        </div>*@
+                    </a>
+                </div>
+                <div id="ShellMeBar" class="SignedIn">
+                    <div class="GamerStatArea" id="GamerStatArea">
+                        <h1 class="gamertag" id="gamertag" name="MeBarGamerTag">
+                            <a href="#profile">
+                                @User.Identity.Name
+                            </a>
+                        </h1>
+                    </div>
+                    <div class="LinkArea">
+                        <a href="/@locale/account/manage">@Resources.Header_MyAccount</a>
+                        <span class="spread">
+                            <a name="RpsSignInLink" href="/@locale/account/logoff">Log Off</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div id="SignedOutExperience">
+                <div id="HeadShotBox" class="SignedOut"></div>
+                <div id="ShellMeBar" class="SignedOut">
+                    <div class="GamerStatArea">
+                        <div class="WelcomeText"><font color="#107c10" size="2">True or False</font> - <font color="Orange">Right or Wrong</font></div>
+                    </div>
+                    <div class="LinkArea">
+                        <a href="/@locale/account/register/#">@Resources.Header_JoinNow</a>
+                        <span class="spread">
+                            <a name="RpsSignInLink" href="/@locale/account/login#">@Resources.Header_SignIn</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div id="ShellNavigationBar">
+        @Html.Partial("~/Views/Shared/Controls/NavigationBar.cshtml")
+    </div>
+    @Html.Partial("~/Views/Shared/Controls/Breadcrumbs.cshtml")
+</div>

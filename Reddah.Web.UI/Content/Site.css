@@ -1591,6 +1591,7 @@ div.AssistancePopupHeader
     height: 100px;
 }
 
+/*right login start*/
 ::-webkit-input-placeholder { color:#BDBEC1; }
 input:-moz-placeholder { color:#BDBEC1; }
 
@@ -1634,6 +1635,7 @@ input:-moz-placeholder { color:#BDBEC1; }
     font-weight: bold;
     height: 50px;
 }
+/*right login end*/
 
 .shell-icon-globe {
     font-family: "Segoe UI","wf_segoe-ui_normal","Arial",sans-serif;
@@ -1643,6 +1645,8 @@ input:-moz-placeholder { color:#BDBEC1; }
     font-weight:normal;line-height:1.5;font-family:"Segoe UI","wf_segoe-ui_normal","Arial",sans-serif;font-size:inherit;font-size:100%;border:0;text-rendering:auto;
 }
 
+
+/*float login start*/
 .headerLoginButton {
     float: left;
     margin: 10px;
@@ -1660,3 +1664,61 @@ div#BroswerOpacify {
     width: 100%;
     height: 100%;
 }
+
+div#LoginPanel {
+    display: none;
+    z-index: 1001;
+    position: absolute;
+    width: 745px;
+    height: auto;
+    background-color: #ffffff;
+}
+
+div.loginPanelHide {
+    float: right;
+    cursor: pointer;
+    margin-right: 18px;
+    margin-top: 18px;
+    height: 24px;
+    width: 24px;
+    background-image: url("/Content/Images/close_icon.png");
+}
+
+div#ShellHeaderContent div#ShellMeBarArea a.GamerTagArea {
+    color: #e98;
+    font-size: 13px;
+}
+
+
+.floatPanelModular
+{
+    border-collapse: collapse;
+    padding: 10px;
+    margin: 20px;
+}
+
+td.floatPanelModularLeftContent, td.floatPanelModularRightContent
+{
+    width: 400px;
+    vertical-align: top;
+}
+
+td.spread {
+    background-image: url(/content/images/glyph-pipe.png);
+    background-position: 7px center;
+    padding-left: 30px;
+    background-repeat:repeat-y;
+}
+
+.floatPanelModular .loginText {
+    margin-right: 30px;
+}
+
+.floatPanelModular .loginButton {
+    margin-right: 30px;
+}
+
+.floatPanelModular h2 {
+    margin-bottom:10px;
+}
+/*float login end*/
