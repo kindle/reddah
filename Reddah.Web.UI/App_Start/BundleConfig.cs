@@ -71,6 +71,9 @@
                         "~/Content/js/ContactUs.DisplayModule.js"));
             bundles.Add(new ScriptBundle("~/bundles/wizard").Include(
                         "~/Content/js/wizard.js"));
+            // angular
+            bundles.Add(new ScriptBundle("~/bundles/login").Include(
+                        "~/Content/app/login.js"));
             
         }
     }

@@ -1,0 +1,21 @@
+﻿@model Reddah.Web.UI.Models.RegisterModel
+<h2>CREATE A NEW ACCOUNT</h2>
+<div>@Html.TextBoxFor(m => m.UserName, new { @class="loginText", @placeholder="choose a username", data_ng_model = "registerModel.UserName"})</div>
+<div>@Html.PasswordFor(m => m.Password, new { @class="loginText", @placeholder="password", data_ng_model = "registerModel.Password"})</div>
+<div>@Html.PasswordFor(m => m.ConfirmPassword, new { @class="loginText", @placeholder="verify password", data_ng_model = "registerModel.ConfirmPassword"})</div>
+<div>@Html.TextBoxFor(m => m.Email, new { @class="loginText", @placeholder="email", data_ng_model = "registerModel.Email"})</div>
+<div class="loginRememberMe">
+    @Html.CheckBoxFor(m => m.RememberMe, new { data_ng_model = "registerModel.RememberMe" })
+    @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+</div>
+<table style="width:100%">
+    <tr>
+        <td>
+            <img class="loginLoading" src="/content/images/loading_50x50.gif" ng-show="loadingRegister"/>
+            <div class="loginError" ng-show="registerModel.Error!='' &&!loadingRegister">{{registerModel.Error}}</div>
+        </td>
+    </tr>
+    <tr>
+        <td><input class="loginButton" type="button" value="SIGN UP" ng-click="register()"/></td>
+    </tr>
+</table>

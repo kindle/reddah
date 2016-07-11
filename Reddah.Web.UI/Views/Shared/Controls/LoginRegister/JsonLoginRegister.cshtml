@@ -1,0 +1,37 @@
+﻿@using Reddah.Web.UI.Models
+@using System.Globalization
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
+}
+@functions{
+    public string GetAntiForgeryToken()
+    {
+        string cookieToken, formToken;
+        AntiForgery.GetTokens(null, out cookieToken, out formToken);
+        return cookieToken + ":" + formToken;                
+    }
+}
+@if (!Request.IsAuthenticated)
+{
+    <div id="LoginRegisterPanel">
+        <h1><div class="loginRegisterPanelHide" ng-click="hidePanel();"></div></h1>
+        <div class="floatPanelModular">
+            <table ng-controller="loginCtrl">
+                <tr>
+                    <td class="floatPanelModularLeftContent">
+                        @Html.Partial("~/Views/Shared/Controls/LoginRegister/PartialRegister.cshtml", new RegisterModel())
+                    </td>
+                    <td class="floatPanelModularRightContent spread">
+                        @Html.Partial("~/Views/Shared/Controls/LoginRegister/PartialLogin.cshtml", new LoginModel())
+                    </td>
+                </tr>
+            </table>
+            <p class="login-disclaimer">
+                By signing up, you agree to our <a href="https://www.reddah.com/help/useragreement/">Terms</a> 
+                and that you have read our <a href="https://www.reddah.com/help/privacypolicy/">Privacy Policy</a>
+                    and <a href="https://www.reddah.com/help/contentpolicy/">Content Policy</a>.
+            </p>
+        </div>
+        <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@GetAntiForgeryToken()'"  />
+    </div>
+}    

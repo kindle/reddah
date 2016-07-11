@@ -615,9 +615,9 @@ table.HomePageModular
 
 td.HomePageModularLeftContent
 {
-    width: 715px;
-    min-width: 715px;
-    max-width: 715px;
+    width: 100%;
+    /*min-width: 715px;
+    max-width: 715px;*/
     vertical-align: top;
 }
 
@@ -652,13 +652,15 @@ div.AnnouncementsLinkList
     margin-left: 200px;
     margin-bottom: 1px;
     padding-right: 10px;
-    width:505px
+    /*width:505px*/
+    width: 100%;
 }
 
 div.AnnouncementsLink
 {
     margin: 0px;
-    width: 505px;
+    /*width: 505px;*/
+    width:100%;
     height: 20px;
     white-space: nowrap;
     word-wrap: normal;
@@ -692,14 +694,16 @@ div.HomePageContentLinkList
 {
     margin-top: 20px;
     margin-left: 200px;   
-    width: 505px;
+    /*width: 505px;*/
+    width: 100%;
     padding-right: 10px;
 }
 
 div.HomePageContentLink
 {
     margin: 0px;
-    width: 505px;
+    /*width: 505px;*/
+    width: 100%;
     height: 20px;
     white-space: nowrap;
     overflow: hidden;
@@ -1603,6 +1607,8 @@ input:-moz-placeholder { color:#BDBEC1; }
 .loginTable {
     border: 1px solid #BDBEC1;
     margin: 0 5px;
+    margin-left:43px;
+    margin-bottom:20px;
     padding: 10px;
 }
 
@@ -1665,16 +1671,16 @@ div#BroswerOpacify {
     height: 100%;
 }
 
-div#LoginPanel {
+div#LoginRegisterPanel {
     display: none;
     z-index: 1001;
     position: absolute;
-    width: 745px;
+    width: 800px;
     height: auto;
     background-color: #ffffff;
 }
 
-div.loginPanelHide {
+div.loginRegisterPanelHide {
     float: right;
     cursor: pointer;
     margin-right: 18px;
@@ -1694,7 +1700,7 @@ div#ShellHeaderContent div#ShellMeBarArea a.GamerTagArea {
 {
     border-collapse: collapse;
     padding: 10px;
-    margin: 20px;
+    margin: 20px;    
 }
 
 td.floatPanelModularLeftContent, td.floatPanelModularRightContent
@@ -1722,3 +1728,7 @@ td.spread {
     margin-bottom:10px;
 }
 /*float login end*/
+
+.rightBoxModule {
+    padding-left: 10px;
+}

@@ -1,28 +1,64 @@
-﻿@model MvcApplication2.Models.RegisterModel
-
-@using (Html.BeginForm("JsonRegister", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { Id = "registerForm" }))
-{
-    @Html.AntiForgeryToken()
-
-    <fieldset>
-        <legend>Registration Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName, new { id = "registerName" })
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.PasswordFor(m => m.ConfirmPassword)
-            </li>
-            <li>
-                <input type="submit" value="Sign up" />
-            </li>
-        </ol>
-        @Html.ValidationSummary()
-    </fieldset>
+﻿@model Reddah.Web.UI.Models.LoginModel
+@using System.Globalization
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
 }
+@functions{
+    public string GetAntiForgeryToken()
+    {
+        string cookieToken, formToken;
+        AntiForgery.GetTokens(null, out cookieToken, out formToken);
+        return cookieToken + ":" + formToken;                
+    }
+}
+@if (Request.IsAuthenticated)
+{
+    <div class="loginTable">Already Login</div>
+}
+else 
+{
+    <h1><div class="loginPanelHide" ng-click="hidePanel();"></div></h1>
+    <div class="floatPanelModular">
+        <table ng-controller="loginCtrl">
+            <tr>
+                <td class="floatPanelModularLeftContent">
+                    <h2>CREATE A NEW ACCOUNT</h2>
+                    <div>@Html.TextBoxFor(m => m.UserName, new { @class="loginText", @placeholder="choose a username", data_ng_model = "loginModel.UserName"})</div>
+                    <div>@Html.PasswordFor(m => m.Password, new { @class="loginText", @placeholder="password", data_ng_model = "loginModel.Password"})</div>
+                    <div>@Html.TextBoxFor(m => m.UserName, new { @class="loginText", @placeholder="verify password", data_ng_model = "loginModel.UserName"})</div>
+                    <div>@Html.TextBoxFor(m => m.UserName, new { @class="loginText", @placeholder="email", data_ng_model = "loginModel.UserName"})</div>
+                    <div class="loginRememberMe">
+                        @Html.CheckBoxFor(m => m.RememberMe, new { data_ng_model = "loginModel.RememberMe" })
+                        @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                    </div>
+                    <input class="loginButton" type="button" value="SIGN UP" ng-click="loginAction()"/>
+                    <div>
+                        <img class="loginLoading" src="/content/images/loading_50x50.gif" ng-show="loading"/>
+                        <div class="loginError" ng-show="loginModel.Error!='' &&!loading">{{loginModel.Error}}</div>
+                    </div>
+                </td>
+                <td class="floatPanelModularRightContent spread">
+                    <h2>LOG IN</h2>
+                    <div>@Html.TextBoxFor(m => m.UserName, new { @class="loginText", @placeholder="username", data_ng_model = "loginModel.UserName"})</div>
+                    <div>@Html.PasswordFor(m => m.Password, new { @class="loginText", @placeholder="password", data_ng_model = "loginModel.Password"})</div>
+                    <div class="loginRememberMe">
+                            @Html.CheckBoxFor(m => m.RememberMe, new { data_ng_model = "loginModel.RememberMe" })
+                            @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                    </div>
+                    <div class="loginReset"><label>Reset Password</label></div>
+                    <input class="loginButton" type="button" value="LOG IN" ng-click="loginAction()"/>
+                    <div>
+                        <img class="loginLoading" src="/content/images/loading_50x50.gif" ng-show="loading"/>
+                        <div class="loginError" ng-show="loginModel.Error!='' &&!loading">{{loginModel.Error}}</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <p class="login-disclaimer">
+            By signing up, you agree to our <a href="https://www.reddah.com/help/useragreement/">Terms</a> 
+            and that you have read our <a href="https://www.reddah.com/help/privacypolicy/">Privacy Policy</a>
+                and <a href="https://www.reddah.com/help/contentpolicy/">Content Policy</a>.
+        </p>
+    </div>
+    <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@GetAntiForgeryToken()'"  />
+}    

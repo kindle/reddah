@@ -138,6 +138,53 @@ namespace Reddah.Web.UI.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [AjaxValidateAntiForgeryToken]
+        public JsonResult JsonRegister(RegisterModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var verifyToken = WebSecurity.CreateUserAndAccount(
+                        model.UserName,
+                        model.Password,
+                        new { Email = model.Email },
+                        false);
+
+                    using (var context = new reddahEntities1())
+                    {
+                        var user = context.UserProfiles.FirstOrDefault(u => u.UserName == model.UserName);
+                        EmailHelper.Send(
+                                new MailAddress("donotreply@reddah.com", "donotreply@reddah.com"),
+                                new MailAddress(model.Email, model.UserName),
+                                "[reddah] Verify your email address‏",
+                                string.Format("Dear {0}:\r\n" +
+                                "visit this link to verify your email address:\r\n" +
+                                "http://www.reddah.com/en-US/VerifyEmail?Userid={1}&EmailToken={2}" +
+                                "\r\nthanks for using the site!",
+                                model.UserName, user.UserId, verifyToken)
+                        );
+                    }
+                    if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+                    {
+                        return Json(new { success = true, redirect = returnUrl });
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    }
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+            }
+
+            return Json(new { errors = GetErrorsFromModelState() });
+        }
         
         //
         // POST: /Account/Disassociate

@@ -82,6 +82,9 @@ namespace Reddah.Web.UI.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Display(Name = "Remember me?")]
+        public bool RememberMe { get; set; }
     }
 
     public class ExternalLogin

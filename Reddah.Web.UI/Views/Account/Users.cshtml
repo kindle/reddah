@@ -3,3 +3,7 @@
 }
 
 <h1>Total Users: @ViewBag.UserCount</h1>
+@foreach (Reddah.Web.UI.UserProfile item in ViewBag.Top)
+{
+    <div>@item.UserId @item.UserName</div>
+}

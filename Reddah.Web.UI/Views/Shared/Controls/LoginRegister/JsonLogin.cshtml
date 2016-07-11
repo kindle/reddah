@@ -1,0 +1,41 @@
+﻿@model Reddah.Web.UI.Models.LoginModel
+@using System.Globalization
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
+}
+@functions{
+    public string GetAntiForgeryToken()
+    {
+        string cookieToken, formToken;
+        AntiForgery.GetTokens(null, out cookieToken, out formToken);
+        return cookieToken + ":" + formToken;                
+    }
+}
+@if (!Request.IsAuthenticated)
+{
+<div class="loginTable">
+    <table ng-controller="loginCtrl">
+        <tr>
+            <td>@Html.TextBoxFor(m => m.UserName, new { @class="loginUserName", @placeholder="username", data_ng_model = "loginModel.UserName"})</td>
+            <td>@Html.PasswordFor(m => m.Password, new { @class="loginPassword", @placeholder="password", data_ng_model = "loginModel.Password"})</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="loginRememberMe">
+                @Html.CheckBoxFor(m => m.RememberMe, new { data_ng_model = "loginModel.RememberMe" })
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                </div>
+                <div class="loginReset"><label>Reset Password</label></div>
+                <input class="loginButton" type="button" value="Log in" ng-click="login()"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <img class="loginLoading" src="/content/images/loading_50x50.gif" ng-show="loadingLogin"/>
+                <div class="loginError" ng-show="loginModel.Error!='' &&!loadingLogin">{{loginModel.Error}}</div>
+            </td>
+        </tr>
+    </table>
+    <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@GetAntiForgeryToken()'"  />
+</div>
+}

@@ -70,6 +70,7 @@
             }
         </td>
         <td class="HomePageModularCenterContent">
+            @Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())
             @{
                 int j = 0;
                 foreach (var rightBoxModule in Model.RightBoxModules)
@@ -81,17 +82,22 @@
                             break;
                         }
                         <div class="HomePageRightBoxModule">
-                            <a href="/@locale/@rightBoxModule.ArticleUrl"><img alt="@rightBoxModule.ImageUrl" src="@rightBoxModule.ImageUrl"/></a>
-                            <h2><a href="/@locale/@rightBoxModule.ArticleUrl">@rightBoxModule.Title</a></h2>
-                            <div>@rightBoxModule.Description</div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <a href="/@locale/@rightBoxModule.ArticleUrl"><img alt="@rightBoxModule.ImageUrl" src="@rightBoxModule.ImageUrl"/></a>
+                                    </td>
+                                    <td class="rightBoxModule">
+                                        <h2><a href="/@locale/@rightBoxModule.ArticleUrl">@rightBoxModule.Title</a></h2>
+                                        <div>@rightBoxModule.Description</div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                         j++;
                     }
                 }
             }
-        </td>
-        <td class="HomePageModularRightContent">
-            @Html.Partial("_JsonLogin", new Reddah.Web.UI.Models.LoginModel())
         </td>
     </tr>
 </table>

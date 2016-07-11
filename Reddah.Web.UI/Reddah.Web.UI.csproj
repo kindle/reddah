@@ -275,6 +275,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\app\login.js" />
     <Content Include="Content\Compass\Images\StartMenu.png" />
     <Content Include="Content\Compass\Pages\Apps\Reddah\FamilyPage.xml">
       <SubType>Designer</SubType>
@@ -633,13 +634,16 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Shared\_JsonRegister.cshtml">
+    <Content Include="Views\Shared\Controls\LoginRegister\JsonLoginRegister.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Finance\Quote.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Shared\Controls\ArticlesPreviewsModule.ascx" />
+    <Content Include="Views\Shared\Controls\LoginRegister\PartialRegister.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -826,7 +830,8 @@
     <Content Include="Views\Articles\Log.cshtml" />
     <Content Include="Views\Account\VerifyEmail.cshtml" />
     <Content Include="Views\Account\Users.cshtml" />
-    <Content Include="Views\Shared\_JsonLogin.cshtml" />
+    <Content Include="Views\Shared\Controls\LoginRegister\JsonLogin.cshtml" />
+    <Content Include="Views\Shared\Controls\LoginRegister\PartialLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
