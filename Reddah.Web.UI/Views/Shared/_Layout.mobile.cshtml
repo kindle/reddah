@@ -1,0 +1,43 @@
+﻿@using System.Globalization    
+<!DOCTYPE html>
+<html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName" ng-app="reddahApp">
+    <head>
+        <meta charset="utf-8" />
+        <title>Reddah</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        <script type="text/javascript">
+            (function (window) {
+                var reddah = window.reddah = window.reddah || {};
+                reddah.videoPlayer = reddah.videoPlayer || {};
+                reddah.videoPlayer.VideoPlayerUrl = "/Content/Silverlight/VideoPlayer.xap";
+            })(window);
+        </script>
+        @Styles.Render("~/Content/GridLayout")
+        @Styles.Render("~/Content/Shell")
+        @Styles.Render("~/Content/MobileCss")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/angularjs")
+        @Scripts.Render("~/bundles/min")
+        @Scripts.Render("~/bundles/common")
+        @Scripts.Render("~/bundles/login")
+        @RenderSection("scripts", required: false)        
+    </head>
+    <body ng-controller="appCtrl">
+        <div id="BodyHeader" class="container">
+            @Html.Partial("~/Views/Shared/Controls/Header.mobile.cshtml")
+        </div>
+        <div id="BodyContent" class="container">
+            <div class="bodyContainer">
+            @RenderSection("featured", required: false)
+            @RenderBody()
+            </div>
+        </div>
+        <div id="BodyFooter" class="container">
+            @Html.Partial("~/Views/Shared/Controls/Footer.cshtml")
+            @Scripts.Render("~/bundles/videoplayer")
+            @Scripts.Render("~/bundles/silverlight")
+        </div>
+    </body>
+</html>

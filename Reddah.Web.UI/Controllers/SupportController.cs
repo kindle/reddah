@@ -27,7 +27,8 @@ namespace Reddah.Web.UI.Controllers
 
             //var PresentationTemplate = GetContentType(path);
 
-            var presentationView = "~/Views/Home/HomePageV1.cshtml";
+            var presentationView = Request.Browser.IsMobileDevice ?
+                "~/Views/Home/HomePageV1.mobile.cshtml" : "~/Views/Home/HomePageV1.cshtml";
             
 
             return View(presentationView, new HomePageViewModel(path));

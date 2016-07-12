@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Footer_ChangeLocale" xml:space="preserve">
-    <value>United States</value>
+    <value>English Country</value>
   </data>
   <data name="Header_MyAccount" xml:space="preserve">
     <value>My Account</value>

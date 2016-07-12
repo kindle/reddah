@@ -34,6 +34,7 @@
             bundles.Add(new StyleBundle("~/Content/GridLayout").Include("~/Content/GridLayout.css"));
             bundles.Add(new StyleBundle("~/Content/Shell").Include("~/Content/ShellStyle.css"));
             bundles.Add(new StyleBundle("~/Content/Css").Include("~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/MobileCss").Include("~/Content/site.mobile.css"));
             bundles.Add(new StyleBundle("~/Content/ContactSupport").Include("~/Content/ContactSupport.css"));
             bundles.Add(new StyleBundle("~/Content/Wizard").Include("~/Content/Wizard.css"));
 

@@ -433,6 +433,7 @@
     <Content Include="Content\Compass\Pages\Video\reddahArch2.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\Site.mobile.css" />
     <Content Include="Content\Images\close_icon.png" />
     <Content Include="Content\Images\exlogin\facebook.png" />
     <Content Include="Content\Images\exlogin\google.png" />
@@ -634,6 +635,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Home\HomePageV1.mobile.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Views\Shared\Controls\LoginRegister\JsonLoginRegister.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -642,6 +646,9 @@
     </Content>
     <Content Include="Views\Shared\Controls\ArticlesPreviewsModule.ascx" />
     <Content Include="Views\Shared\Controls\LoginRegister\PartialRegister.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\Controls\NavigationBar.mobile.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Web.config">
@@ -832,6 +839,10 @@
     <Content Include="Views\Account\Users.cshtml" />
     <Content Include="Views\Shared\Controls\LoginRegister\JsonLogin.cshtml" />
     <Content Include="Views\Shared\Controls\LoginRegister\PartialLogin.cshtml" />
+    <Content Include="Views\Shared\_Layout.mobile.cshtml" />
+    <Content Include="Views\Shared\Controls\Header.mobile.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
