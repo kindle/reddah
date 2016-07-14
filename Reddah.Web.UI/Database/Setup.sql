@@ -64,7 +64,7 @@ CREATE TABLE [dbo].[Group]
 CREATE TABLE [dbo].[Article]
 (
 	[Id] INT IDENTITY(1,1) NOT NULL, 
-    [Title] NVARCHAR(50) NOT NULL, 
+    [Title] NVARCHAR(MAX) NOT NULL, 
     [Content] NVARCHAR(MAX) NOT NULL, 
 	[Abstract] NVARCHAR(200) NOT NULL, 
     [CreatedOn] DATETIME NOT NULL , 

@@ -30,7 +30,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Abstract" Type="nvarchar" Nullable="false" MaxLength="200" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
@@ -175,7 +175,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Content" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Abstract" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />

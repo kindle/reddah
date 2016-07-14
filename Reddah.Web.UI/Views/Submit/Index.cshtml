@@ -25,14 +25,14 @@
                             <legend>Log in Form</legend>
                             <ol>
                                 <li>
-                                    @Html.TextAreaFor(m => m.Title, new { @required = "required", @maxlength="200", @placeholder="title" })
+                                    @Html.TextAreaFor(m => m.Title, new { @required = "required", @maxlength="500", @placeholder="title" })
                                     <br />
                                     @Html.ValidationMessageFor(m => m.Title)
                                 </li>
                                 <li>
                                     @Html.TextAreaFor(m => m.GroupName, new { @required = "required", @maxlength = "200", @placeholder="group" })
                                     <br />
-                                    @Html.ValidationMessageFor(m => m.Content)
+                                    @Html.ValidationMessageFor(m => m.GroupName)
                                 </li>
                                 <li>
                                     @Html.TextAreaFor(m => m.Content, new { @required = "required", @placeholder="content" })

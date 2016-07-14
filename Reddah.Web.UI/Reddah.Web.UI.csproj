@@ -821,6 +821,7 @@
     <Content Include="Content\Compass\Pages\Video\reddahArch2.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\Images\noimage.jpg" />
     <Content Include="Content\Site.mobile.css" />
     <Content Include="Content\Images\close_icon.png" />
     <Content Include="Content\Images\exlogin\facebook.png" />

@@ -32,26 +32,29 @@
                                         <td class="votecell">
                                             <div class="vote">
                                                 <input type="hidden" name="_id_" value="14276817">
-                                                <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+                                                <a class="vote-up-off" title="This question shows research effort; it is useful and clear" ng-click="showPanel()">up vote</a>
                                                 <span itemprop="upvoteCount" class="vote-count-post ">@article.Count</span>
-                                                <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+                                                <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful" ng-click="showPanel()">down vote</a>
                                                 @*<a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>*@
                                                 <div class="favoritecount"><b>@index</b></div>
                                             </div>
                                         </td>
                                         <td class="postcell">
-                                            <div class="BrowsePreviewTitle">
-                                                <a href="@article.ArticleUrl">@Html.Raw(article.Title)</a>
-                                            </div>
-                                            @if (!String.IsNullOrEmpty(article.ImageUrl))
-                                            {
-                                                <div style="float: left;">
-                                                    <a href="/@locale/@article.ArticleUrl"><img class="BrowsePreviewImage" src="@article.ImageUrl" alt="picture"></a>
-                                                </div>
-                                            }
-                                            <div>
-                                                @Html.Raw(article.Abstract)
-                                            </div>
+                                            <table>
+                                                <tr>
+                                                    <td class="listImage">
+                                                        <div class="listImageWrapper">
+                                                            <a href="/@locale/@article.ArticleUrl"><img class="BrowsePreviewImage" width="193" src="@article.ImageUrl" alt="picture"></a>
+                                                        </div>
+                                                    </td>
+                                                    <td class="rightBoxModule listRight">
+                                                        <h2><a href="@article.ArticleUrl">@Html.Raw(article.Title)</a> <span class="listInfo">(source)</span></h2>
+                                                        <div>@Html.Raw(article.Abstract)</div>
+                                                        <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@article.GroupName">/r/@article.GroupName</a></div>
+                                                        <div class="listInfo">2839 comments share save hide report</div>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
                                     </tr>
                                 </tbody>

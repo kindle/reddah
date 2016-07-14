@@ -1729,6 +1729,25 @@ td.spread {
 }
 /*float login end*/
 
-.rightBoxModule {
-    padding-left: 10px;
+.listRight {
+    vertical-align: top;
+    padding-left:0;
+}
+
+.listImage {
+    vertical-align: top;
+}
+
+.listImageWrapper {
+    float: left; 
+    height: 120px; 
+    overflow: hidden;
+}
+
+.listRight .listInfo {
+    color: #BDBEC1;
+}
+
+.listRight a {
+    color: #107C10;
 }

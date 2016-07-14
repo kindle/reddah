@@ -5,6 +5,7 @@
     using System.Linq;
 
     using Reddah.Web.UI.Models;
+    using Reddah.Web.UI.Utility;
     
     public class DatabaseTopListViewModel : ArticleViewModelBase
     {
@@ -39,11 +40,15 @@
                     ap.Title = item.Title;
                     ap.Abstract = item.Abstract;
                     ap.Description = item.Content;
-                    ap.ImageUrl = item.Title;
+                    ap.ImageUrl = Helpers.GetFirstImageSrc(item.Content);
                     ap.ArticleUrl = item.Title;
-                    ap.Count = item.Count ?? 0;
+                    ap.Comments = item.Count ?? 0;
                     ap.Up = item.Up ?? 0;
                     ap.Down = item.Down ?? 0;
+                    ap.Count = ap.Up - ap.Down;
+                    ap.CreatedOn = Helpers.TimeAgo(item.CreatedOn);
+                    ap.UserName = item.UserName;
+                    ap.GroupName = item.GroupName;
 
                     apList.Add(ap);
                 }
