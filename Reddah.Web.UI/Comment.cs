@@ -20,7 +20,7 @@ public partial class Comment
 
     public int Id { get; set; }
 
-    public Nullable<int> ParentId { get; set; }
+    public int ParentId { get; set; }
 
     public string ParentType { get; set; }
 
@@ -29,6 +29,8 @@ public partial class Comment
     public Nullable<int> Up { get; set; }
 
     public Nullable<int> Down { get; set; }
+
+    public int UserId { get; set; }
 
 }
 

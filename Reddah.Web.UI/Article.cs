@@ -24,13 +24,19 @@ public partial class Article
 
     public string Content { get; set; }
 
-    public Nullable<System.DateTime> CreatedOn { get; set; }
+    public string Abstract { get; set; }
+
+    public System.DateTime CreatedOn { get; set; }
 
     public Nullable<int> Up { get; set; }
 
     public Nullable<int> Down { get; set; }
 
     public Nullable<int> Count { get; set; }
+
+    public string UserName { get; set; }
+
+    public string GroupName { get; set; }
 
 }
 

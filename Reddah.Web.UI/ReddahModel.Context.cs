@@ -36,11 +36,9 @@ public partial class reddahEntities1 : DbContext
 
     public DbSet<Comment> Comments { get; set; }
 
-    public DbSet<Label> Labels { get; set; }
+    public DbSet<Group> Groups { get; set; }
 
     public DbSet<Log> Logs { get; set; }
-
-    public DbSet<Post> Posts { get; set; }
 
     public DbSet<Setting> Settings { get; set; }
 

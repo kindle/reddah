@@ -1,8 +1,11 @@
-﻿@using CaptchaMvc.HtmlHelpers
+﻿@using System.Globalization
+@using CaptchaMvc.HtmlHelpers
 @model Reddah.Web.UI.Article
 @{
     ViewBag.Title = "submit to reddah";
+    var locale = CultureInfo.CurrentUICulture.Name;
 }
+<script src="~/Content/app/ckeditor/ckeditor.js"></script>
 <table class="HomePageModular">
     <tr>
         <td class="HomePageModularLeftContent">
@@ -22,14 +25,28 @@
                             <legend>Log in Form</legend>
                             <ol>
                                 <li>
-                                    @Html.LabelFor(m => m.Title)
-                                    @Html.TextAreaFor(m => m.Title, new { @required = "required", @maxlength="20" })
+                                    @Html.TextAreaFor(m => m.Title, new { @required = "required", @maxlength="200", @placeholder="title" })
                                     <br />
                                     @Html.ValidationMessageFor(m => m.Title)
                                 </li>
                                 <li>
-                                    @Html.LabelFor(m => m.Content)
-                                    @Html.TextAreaFor(m => m.Content, new { @required = "required", @maxlength = "50" })
+                                    @Html.TextAreaFor(m => m.GroupName, new { @required = "required", @maxlength = "200", @placeholder="group" })
+                                    <br />
+                                    @Html.ValidationMessageFor(m => m.Content)
+                                </li>
+                                <li>
+                                    @Html.TextAreaFor(m => m.Content, new { @required = "required", @placeholder="content" })
+                                    <br />
+                                    @Html.ValidationMessageFor(m => m.Content)
+                                    <script>
+                                        CKEDITOR.replace('Content', {
+                                            language: '@locale',
+                                            uiColor: '#ffffff'
+                                    });
+                                    </script>
+                                </li>
+                                <li>
+                                    @Html.TextAreaFor(m => m.Abstract, new { @required = "required", @maxlength = "200", @placeholder="abstract" })
                                     <br />
                                     @Html.ValidationMessageFor(m => m.Content)
                                 </li>

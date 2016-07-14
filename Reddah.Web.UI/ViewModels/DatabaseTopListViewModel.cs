@@ -28,10 +28,6 @@
 
             using (var db = new reddahEntities1())
             {
-                //var blog = new Labels { Name = "game" };
-                //db.Labels.Add(blog);
-                //db.SaveChanges();
-
                 // Display all Blogs from the database 
                 var query = from b in db.Articles
                             orderby b.Id descending
@@ -41,12 +37,13 @@
                 {
                     var ap = new ArticlePreview();
                     ap.Title = item.Title;
+                    ap.Abstract = item.Abstract;
                     ap.Description = item.Content;
                     ap.ImageUrl = item.Title;
                     ap.ArticleUrl = item.Title;
-                    //ap.Count = item.Count ?? 0;
-                    //ap.Up = item.Up ?? 0;
-                    //ap.Down = item.Down ?? 0;
+                    ap.Count = item.Count ?? 0;
+                    ap.Up = item.Up ?? 0;
+                    ap.Down = item.Down ?? 0;
 
                     apList.Add(ap);
                 }

@@ -47,13 +47,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/en-US/Reddah.Web.UI.resources.dll">
-      <publishTime>07/12/2016 07:26:04</publishTime>
+      <publishTime>07/13/2016 06:35:48</publishTime>
     </File>
     <File Include="bin/en/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/en/Reddah.Web.UI.resources.dll">
-      <publishTime>07/12/2016 07:26:04</publishTime>
+      <publishTime>07/13/2016 06:35:48</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -62,19 +62,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/fr-FR/Reddah.Web.UI.resources.dll">
-      <publishTime>07/12/2016 07:26:04</publishTime>
+      <publishTime>07/13/2016 06:35:47</publishTime>
     </File>
     <File Include="bin/ja-JP/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/ja-JP/Reddah.Web.UI.resources.dll">
-      <publishTime>07/12/2016 07:26:04</publishTime>
+      <publishTime>07/13/2016 06:35:48</publishTime>
     </File>
     <File Include="bin/ko-KR/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/ko-KR/Reddah.Web.UI.resources.dll">
-      <publishTime>07/12/2016 07:26:04</publishTime>
+      <publishTime>07/13/2016 06:35:47</publishTime>
     </File>
     <File Include="bin/log4net.dll">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -107,7 +107,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/03/2016 10:54:06</publishTime>
     </File>
     <File Include="bin/Reddah.Web.UI.dll">
-      <publishTime>07/12/2016 07:26:04</publishTime>
+      <publishTime>07/13/2016 06:35:47</publishTime>
     </File>
     <File Include="bin/System.Net.Http.dll">
       <publishTime>07/10/2012 12:07:38</publishTime>
@@ -158,7 +158,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/zh-CN/Reddah.Web.UI.resources.dll">
-      <publishTime>07/12/2016 07:26:04</publishTime>
+      <publishTime>07/13/2016 06:35:48</publishTime>
     </File>
     <File Include="Content/app/login.js">
       <publishTime>07/12/2016 07:06:29</publishTime>
@@ -464,7 +464,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/23/2016 06:47:53</publishTime>
     </File>
     <File Include="Content/GridLayout.css">
-      <publishTime>06/23/2016 06:48:38</publishTime>
+      <publishTime>07/13/2016 06:13:41</publishTime>
     </File>
     <File Include="Content/Hot.xml">
       <publishTime>06/23/2016 06:48:38</publishTime>
@@ -692,13 +692,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/23/2016 06:48:38</publishTime>
     </File>
     <File Include="Content/ShellStyle.css">
-      <publishTime>07/11/2016 05:26:31</publishTime>
+      <publishTime>07/13/2016 06:08:23</publishTime>
     </File>
     <File Include="Content/Silverlight/VideoPlayer.xap">
       <publishTime>06/23/2016 06:47:53</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>07/12/2016 06:33:04</publishTime>
+      <publishTime>07/13/2016 06:32:56</publishTime>
+    </File>
+    <File Include="Content/Site.mobile.css">
+      <publishTime>07/13/2016 06:15:21</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -1060,6 +1063,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Home/HomePageV1.cshtml">
       <publishTime>07/12/2016 06:04:36</publishTime>
     </File>
+    <File Include="Views/Home/HomePageV1.mobile.cshtml">
+      <publishTime>07/13/2016 06:19:33</publishTime>
+    </File>
     <File Include="Views/Home/HomePageV2.cshtml">
       <publishTime>06/23/2016 06:48:38</publishTime>
     </File>
@@ -1091,7 +1097,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/11/2016 06:54:48</publishTime>
     </File>
     <File Include="Views/Shared/Controls/Header.cshtml">
-      <publishTime>07/12/2016 06:20:52</publishTime>
+      <publishTime>07/13/2016 05:38:55</publishTime>
+    </File>
+    <File Include="Views/Shared/Controls/Header.mobile.cshtml">
+      <publishTime>07/13/2016 06:22:36</publishTime>
     </File>
     <File Include="Views/Shared/Controls/LoginRegister/JsonLogin.cshtml">
       <publishTime>07/12/2016 07:21:33</publishTime>
@@ -1107,6 +1116,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Shared/Controls/NavigationBar.cshtml">
       <publishTime>07/11/2016 05:37:56</publishTime>
+    </File>
+    <File Include="Views/Shared/Controls/NavigationBar.mobile.cshtml">
+      <publishTime>07/13/2016 05:40:58</publishTime>
     </File>
     <File Include="Views/Shared/Controls/OneImageModule.cshtml">
       <publishTime>06/23/2016 06:48:38</publishTime>
@@ -1143,6 +1155,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>07/12/2016 05:49:28</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.mobile.cshtml">
+      <publishTime>07/13/2016 05:37:16</publishTime>
     </File>
     <File Include="Views/Submit/Index.cshtml">
       <publishTime>07/09/2016 07:00:15</publishTime>

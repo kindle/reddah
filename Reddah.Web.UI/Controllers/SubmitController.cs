@@ -17,6 +17,7 @@ namespace Reddah.Web.UI.Controllers
         [HttpPost, CaptchaVerify("Captcha is not valid")]
         [Authorize]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Index(Article article)
         {
             if (ModelState.IsValid)
@@ -24,10 +25,18 @@ namespace Reddah.Web.UI.Controllers
                 TempData["Message"] = "Message: captcha is valid.";
                 using (var context = new reddahEntities1())
                 {
+                    if (context.Groups.FirstOrDefault(g => g.Name == article.GroupName) == null)
+                    {
+                        context.Groups.Add(new Group { Name = article.GroupName });
+                    }
                     context.Articles.Add(new Article
                     {
                         Title = article.Title,
-                        Content = article.Content
+                        GroupName = article.GroupName,
+                        Content = article.Content,
+                        Abstract = article.Abstract,
+                        UserName = User.Identity.Name,
+                        CreatedOn = DateTime.Now
                     });
                     context.SaveChanges();
                 }

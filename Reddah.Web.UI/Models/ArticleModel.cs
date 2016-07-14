@@ -15,5 +15,7 @@
         public int Up { get; set; }
 
         public int Down { get; set; }
+
+        public string Abstract { get; set; }
     }
 }

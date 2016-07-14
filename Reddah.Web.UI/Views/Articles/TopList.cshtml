@@ -22,7 +22,7 @@
 
                 @foreach (var article in Model.Articles)
                 {
-                    if (!String.IsNullOrEmpty(article.Title) && !String.IsNullOrEmpty(article.Description) && !String.IsNullOrEmpty(article.ArticleUrl))
+                    if (!String.IsNullOrEmpty(article.Title) && !String.IsNullOrEmpty(article.Abstract) && !String.IsNullOrEmpty(article.ArticleUrl))
                     {
                         <div class="BrowsePreview">
                             <div class="StartModuleLiner" style="width: 100%;"></div>
@@ -50,7 +50,7 @@
                                                 </div>
                                             }
                                             <div>
-                                                @Html.Raw(article.Description)
+                                                @Html.Raw(article.Abstract)
                                             </div>
                                         </td>
                                     </tr>

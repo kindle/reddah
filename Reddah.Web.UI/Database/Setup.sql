@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[UserProfile] (
-    [UserId]   INT            IDENTITY (1, 1) NOT NULL,
+    [UserId] INT IDENTITY (1, 1) NOT NULL,
     [UserName] NVARCHAR (MAX) NULL,
 	[Email] NVARCHAR (MAX) NULL,
     PRIMARY KEY CLUSTERED ([UserId] ASC)
@@ -50,42 +50,42 @@ CREATE TABLE [dbo].[Log]
     [Level] [varchar] (50) NOT NULL, 
     [Logger] [varchar] (255) NOT NULL, 
     [Message] [varchar] (4000) NOT NULL, 
-    [Exception] [varchar] (2000) NULL 
+    [Exception] [varchar] (2000) NULL,
+	CONSTRAINT [PK_dbo.Log] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[Group]
+(
+	[Id] INT IDENTITY (1, 1) NOT NULL, 
+    [Name] NVARCHAR(MAX) NOT NULL,
+	CONSTRAINT [PK_dbo.Group] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
 CREATE TABLE [dbo].[Article]
 (
-	[Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY, 
-    [Title] NVARCHAR(50) NULL, 
-    [Content] NTEXT NULL, 
-    [CreatedOn] DATETIME NULL , 
+	[Id] INT IDENTITY(1,1) NOT NULL, 
+    [Title] NVARCHAR(50) NOT NULL, 
+    [Content] NVARCHAR(MAX) NOT NULL, 
+	[Abstract] NVARCHAR(200) NOT NULL, 
+    [CreatedOn] DATETIME NOT NULL , 
     [Up] INT NULL DEFAULT 0, 
     [Down] INT NULL DEFAULT 0, 
-    [Count] INT NULL DEFAULT 0
+    [Count] INT NULL DEFAULT 0,
+	[UserName] NVARCHAR(MAX) NOT NULL,
+	[GroupName] NVARCHAR(MAX) NOT NULL,
+	CONSTRAINT [PK_dbo.Article] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
 CREATE TABLE [dbo].[Comment]
 (
-	[Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY, 
-    [ParentId] INT NULL, 
+	[Id] INT IDENTITY(1,1) NOT NULL, 
+    [ParentId] INT NOT NULL, 
     [ParentType] CHAR(10) NULL, 
-    [Content] NCHAR(10) NULL, 
+    [Content] NVARCHAR (MAX) NOT NULL, 
     [Up] INT NULL DEFAULT 0, 
-    [Down] INT NULL DEFAULT 0
-);
-
-CREATE TABLE [dbo].[Label]
-(
-	[Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY, 
-    [Name] NVARCHAR(100) NULL 
-);
-
-CREATE TABLE [dbo].[Posts] (
-    [PostId]  INT            IDENTITY (1, 1) NOT NULL,
-    [Title]   NVARCHAR (MAX) NULL,
-    [Content] NVARCHAR (MAX) NULL,
-    [LabelId] INT            NOT NULL,
-    CONSTRAINT [PK_dbo.Posts] PRIMARY KEY CLUSTERED ([PostId] ASC)
+    [Down] INT NULL DEFAULT 0,
+	[UserId] INT NOT NULL,
+	CONSTRAINT [PK_dbo.Comment] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
 CREATE TABLE [dbo].[Setting] (
