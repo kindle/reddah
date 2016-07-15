@@ -6,15 +6,19 @@
 
     using Reddah.Web.UI.Models;
     using Reddah.Web.UI.Utility;
+    using System.Web;
     
     public class DatabaseTopListViewModel : ArticleViewModelBase
     {
+        public List<ArticlePreview> RightBoxModules { get; set; }
+
         public DatabaseTopListViewModel(string path)
             : base(path)
         {
             Articles = GetArticlePreviews(path);
             Folders = GetFolderPreviews(path);
             Items = GetItemPreviews(path);
+            RightBoxModules = GetArticlePreviews1("/Root/HomePageModularRightContent/HomePageRightBoxModule");
         }
 
         public List<ArticlePreview> Articles { get; set; }
@@ -79,6 +83,28 @@
         private List<ArticlePreview> GetArticlePreviews(string path)
         {
             return GetItemPreviews(path).FindAll(url => !url.ArticleUrl.ToLower().Contains("navigationlist"));
+        }
+
+        private const string HomePageXmlPath = "~/Content/Compass/Pages/HomePage.xml";
+
+        private List<ArticlePreview> GetArticlePreviews1(string path)
+        {
+            var doc = new XmlDocument();
+            doc.Load(HttpContext.Current.Server.MapPath(HomePageXmlPath));
+
+            var apList = new List<ArticlePreview>();
+            foreach (XmlNode node in doc.SelectNodes(path))
+            {
+                var ap = new ArticlePreview();
+                ap.Title = node.SelectSingleNode("Title").InnerText;
+                ap.Description = node.SelectSingleNode("Description").InnerText;
+                ap.ImageUrl = node.SelectSingleNode("ImageUrl").InnerText;
+                ap.ArticleUrl = node.SelectSingleNode("ArticleUrl").InnerText;
+
+                apList.Add(ap);
+            }
+
+            return apList;
         }
     }
 }
