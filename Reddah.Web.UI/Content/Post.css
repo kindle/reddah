@@ -1,78 +1,136 @@
-﻿.votecell{
-        vertical-align: top;
-        padding-right: 15px;
-    }
-    .vote{
-        min-width: 46px;
-        text-align: center;
-        vertical-align: top;
-    }
-    .vote span{
-        display: block;
-        color: #777;
-    }
-    .vote-count-post{
-        padding:0;
-        border:0;
-        text-align: center;
-        margin: 8px 0;
-        font-size: 20px;
-    }
-    .vote-up-off{
-        background-position: 0 -170px;
+﻿.votecell {
+    vertical-align: top;
+    padding-right: 15px;
+    float: left;
+    display: inline;
+}
+.voterank {
+    text-align: center;
+    vertical-align: top;
+    padding-top: 42px;
+    padding-left: 5px;
+    float: left;
+    overflow: hidden;
+    width: 10px;
+}
+.vote{
+    min-width: 80px;
+    text-align: center;
+    vertical-align: top;
+}
+.vote span{
+    display: block;
+    color: #777;
+}
+.vote-count-post{
+    padding:0;
+    border:0;
+    text-align: center;
+    margin: 8px 0;
+    font-size: 20px;
+}
+.vote-up-off{
+    background-position: 0 -170px;
 
-        height: 30px;
-        text-decoration: none;
-        background-image: url("/Content/Images/sprites.png"), none;
-        background-size: initial;
-        text-indent: -9999em;
-        font-size:1px;
-        cursor: pointer;
-        display: block;
-        margin:0 auto;
-        width:40px;
-        background-repeat:no-repeat;
-        overflow: hidden;
-    }
-    .vote-down-off{
-        background-position: 0 -220px;
+    height: 30px;
+    text-decoration: none;
+    background-image: url("/Content/Images/sprites.png"), none;
+    background-size: initial;
+    text-indent: -9999em;
+    font-size:1px;
+    cursor: pointer;
+    display: block;
+    margin:0 auto;
+    width:40px;
+    background-repeat:no-repeat;
+    overflow: hidden;
+}
+.vote-down-off{
+    background-position: 0 -220px;
 
-        margin-bottom:10px;
-        height:30px;
-        text-decoration: none;
-        background-image: url("/Content/Images/sprites.png"), none;
-        background-size: initial;
-        text-indent: -9999em;
-        font-size:1px;
-        cursor: pointer;
-        display: block;
-        margin:0 auto;
-        width:40px;
-        background-repeat:no-repeat;
-        overflow: hidden;
-    }
-    .star-off{
-        display: none;
-        background-position: 0 -120px;
+    margin-bottom:10px;
+    height:30px;
+    text-decoration: none;
+    background-image: url("/Content/Images/sprites.png"), none;
+    background-size: initial;
+    text-indent: -9999em;
+    font-size:1px;
+    cursor: pointer;
+    display: block;
+    margin:0 auto;
+    width:40px;
+    background-repeat:no-repeat;
+    overflow: hidden;
+}
+.star-off{
+    display: none;
+    background-position: 0 -120px;
 
-        height:30px;
-        text-decoration: none;
-        background-image: url("/Content/Images/sprites.png"), none;
-        background-size: initial;
-        text-indent: -9999em;
-        font-size:1px;
-        cursor: pointer;
-        display: block;
-        margin:0 auto;
-        width:40px;
-        margin-bottom:2px;
-        background-repeat:no-repeat;
-        overflow: hidden;
-    }
-    .favoritecount{
-        text-align: center;
-        margin:0;
-        margin-top: 10px;
-        padding:0;
-        font-size: 20px;
-    }
+    height:30px;
+    text-decoration: none;
+    background-image: url("/Content/Images/sprites.png"), none;
+    background-size: initial;
+    text-indent: -9999em;
+    font-size:1px;
+    cursor: pointer;
+    display: block;
+    margin:0 auto;
+    width:40px;
+    margin-bottom:2px;
+    background-repeat:no-repeat;
+    overflow: hidden;
+}
+.favoritecount{
+    text-align: center;
+    margin:0;
+    margin-top: 30px;
+    padding:0;
+    font-size: 20px;        
+}
+
+div.postModuleLiner
+{
+    border-color: #BDBEC1 ;
+    border-right: 0 none;
+    border-style: none none solid; 
+    border-width: 0 0 1px;
+    padding-bottom: 20px;
+    overflow: hidden;
+}
+
+div.rightBox {
+    float: right;
+    width: 480px;
+}
+
+div.postClear {
+    clear: left;
+    height: 10px;
+}
+
+.rightBoxModule {
+    padding-left: 10px;
+}
+
+.listRight {
+    vertical-align: top;
+    padding-left:0;
+}
+
+.listImage {
+    vertical-align: top;
+}
+
+.listImageWrapper {
+    float: left; 
+    height: 120px; 
+    overflow: hidden;
+}
+
+.listRight .listInfo {
+    color: #BDBEC1;
+}
+
+.listRight a {
+    color: #107C10;
+}

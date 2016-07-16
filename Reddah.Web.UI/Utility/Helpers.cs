@@ -41,7 +41,7 @@
         {
             var matches = Regex.Match(content, "<img.+?src=[\"'](.+?)[\"'].*?>", RegexOptions.IgnoreCase);
             string matchString = string.IsNullOrWhiteSpace(matches.Groups[1].Value) ? 
-                "/content/images/noimage.jpg" : matches.Groups[1].Value;
+                "" : matches.Groups[1].Value;
 
             return matchString;
         }

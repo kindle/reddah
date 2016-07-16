@@ -33,7 +33,8 @@
             routes.MapLocalizedRoute(
                 "Home",
                 "{locale}",
-                new { controller = "Support", action = "Index" }
+                //new { controller = "Support", action = "Index" }
+                new { controller = "Articles", action = "ClassicArticle", path="hot" }
             );
 
             routes.MapLocalizedRoute(

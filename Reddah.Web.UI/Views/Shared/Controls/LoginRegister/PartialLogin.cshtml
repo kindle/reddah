@@ -10,8 +10,8 @@
 <table style="width:100%">
     <tr>
         <td>
-            <img class="loginLoading" src="/content/images/loading_50x50.gif" ng-show="loadingLogin"/>
-            <div class="loginError" ng-show="loginModel.Error!='' &&!loadingLogin">{{loginModel.Error}}</div>
+            <img class="loginLoading" src="/content/images/loading_50x50.gif" ng-show="loadingLogin==true"/>
+            <div class="loginError" ng-show="loginModel.Error!='' &&!loadingLogin" ng-bind="loginModel.Error"></div>
         </td>
     </tr>
     <tr>
