@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="WizardStepSolution">
+  <Title>Solution3</Title>
+  <LegendTitle>Sln 4</LegendTitle>
+  <Description>whoknows</Description>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Getting Started with Reddah</Text>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Small</Style>
+    <Caption>Image caption small</Caption>
+    <ImageUrl>/Content/Images/ambassador.png</ImageUrl>
+    <Text>
+      Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.
+    </Text>
+    <ImageLink>http://www.google.com</ImageLink>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Medium</Style>
+    <Caption>Image caption medium</Caption>
+    <ImageUrl>/Content/Images/ambassador.png</ImageUrl>
+    <Text>Add new test pass and jump-start your testing</Text>
+    <ImageLink></ImageLink>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Large</Style>
+    <Caption>Image caption large</Caption>
+    <ImageUrl>/Content/Images/ambassador.png</ImageUrl>
+    <Text>Add new test pass and jump-start your testing</Text>
+    <ImageLink>http://www.google.com</ImageLink>
+  </Module>
+  <Module>
+    <ModuleType>TwoImagesModule</ModuleType>
+    <ImageUrl1>/Content/Images/ambassador.png</ImageUrl1>
+    <ImageUrl2>/Content/Images/ambassador.png</ImageUrl2>
+    <Caption1>Image caption1</Caption1>
+    <Caption2>Image caption2</Caption2>
+    <ImageLink1>http://www.google.com</ImageLink1>
+    <ImageLink2>http://www.google.com</ImageLink2>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Large</Style>
+    <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
+    <Text>One Video Image</Text>
+    <VideoUrl>http://localhost/App_Data/wiki/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
+    <VideoTitle>Position Kinect</VideoTitle>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Medium</Style>
+    <BackgroundImageUrl>http://epix.reddah.com/shaXam/0201/22/ba/22ba9343-808b-4de3-b3e8-fb3f1783c241.PNG?v=1#renewgold-vm-m.PNG</BackgroundImageUrl>
+    <Text>Watch the following video to quickly see your options for renewing your Reddah LIVE Gold Membership.</Text>
+    <VideoUrl>http://nxeassets.reddah.com/shaxam/0201/6e/e8/6ee8941c-9e63-44de-bbe4-fa72773813d5.WMV?v=1#Reddah101_HowTo_RenewGold_Support.WMV</VideoUrl>
+    <VideoTitle>Position Kinect</VideoTitle>
+  </Module>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Find your test cases</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>Find your test cases</Text>
+  </Module>
+</ContentType>

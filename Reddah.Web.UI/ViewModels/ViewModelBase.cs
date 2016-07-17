@@ -15,7 +15,7 @@
         protected void Init(string path)
         {
             Doc = new XmlDocument();
-            Doc.Load(HttpContext.Current.Server.MapPath("~/Content/" + path + ".xml"));
+            Doc.Load(HttpContext.Current.Server.MapPath("~/App_Data/" + path + ".xml"));
         }
 
         //move to a common method later

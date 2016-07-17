@@ -17,7 +17,39 @@
                 new { },
                 new string[] { },
                 u => new Route("", new RedirectToLocalizedHandler()));
-            
+
+            //menu
+            routes.MapLocalizedRoute("Home", "{locale}",
+                new { controller = "Articles", action = "Menu", path = "hot" }
+            );
+
+            routes.MapLocalizedRoute("Hot", "{locale}/hot",
+                new { controller = "Articles", action = "Menu", path = "hot" }
+            );
+
+            routes.MapLocalizedRoute("New", "{locale}/new",
+                new { controller = "Articles", action = "Menu", path = "new" }
+            );
+
+            routes.MapLocalizedRoute("Rising", "{locale}/rising",
+                new { controller = "Articles", action = "Menu", path = "rising" }
+            );
+
+            //subreddah
+            routes.MapLocalizedRoute("SubReddah", "{locale}/r/{sub}",
+                new { controller = "Articles", action = "SubReddah" }
+            );
+
+            //static article
+            routes.MapLocalizedRoute(
+                "StaticArticle",
+                "{locale}/r/{*path}",
+                new { controller = "Articles", action = "ClassicArticle" }
+            );
+
+
+
+            //tools
             routes.MapRoute(
                 "DefaultCaptchaRoute", 
                 "{locale}/DefaultCaptcha/Generate",
@@ -30,12 +62,7 @@
                 new { controller = "DefaultCaptcha", action = "Refresh" }
             );
 
-            routes.MapLocalizedRoute(
-                "Home",
-                "{locale}",
-                //new { controller = "Support", action = "Index" }
-                new { controller = "Articles", action = "ClassicArticle", path="hot" }
-            );
+            
 
             routes.MapLocalizedRoute(
                 "Submit",
@@ -57,11 +84,7 @@
             //    new { controller = "Articles", action = "ClassicArticle" }
             //);
 
-            routes.MapLocalizedRoute(
-                "ArticleWithLocales",
-                "{locale}/r/{*path}",
-                new { controller = "Articles", action = "ClassicArticle" }
-            );
+            
 
             routes.MapLocalizedRoute(
                 "ChangeLocale",

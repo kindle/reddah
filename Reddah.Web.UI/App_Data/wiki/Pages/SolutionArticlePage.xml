@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="SolutionArticle">
+  <Title>Error 80070428 when you install the fall 2012 Reddah 360 update</Title>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Getting Started with Reddah</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      Text Module
+      <br/>
+      Some Kinect games can take photos and videos of you and your friends while you’re playing a game. You can then upload these photos and videos to websites and services such as KinectShare.com. Photos and videos uploaded to KinectShare.com can be downloaded, printed, and shared with your friends and family on social networking sites like Facebook.
+      <ol>
+        <li>Plug one end of a network cable into a port on your router or gateway. You might need a long network cable, depending upon on the location of your router or modem. </li>
+        <li>Plug the other end of the network cable into the back of your console.</li>
+      </ol>
+      <ul>
+        <li>Place the sensor near the edge on a flat, stable surface.</li>
+        <li>Position the sensor between 2 feet (0.6m) and 6 feet (1.8m) from the floor. Ideally, the sensor should be within 6 inches (15 cm) above or below your TV.</li>
+        <li>Avoid positioning the sensor in direct sunlight or within 1 foot (.3m) of audio speakers.</li>
+      </ul>
+
+      <TABLE>
+        <TBODY>
+          <TR>
+            <TD style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 3px; BACKGROUND-COLOR: lightgray; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 3px" align="middle">
+              <STRONG>Locale</STRONG>
+            </TD>
+            <TH style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 3px; BACKGROUND-COLOR: lightgray; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 3px" align="middle">
+              <STRONG>Language</STRONG>
+            </TH>
+          </TR>
+          <TR>
+            <TD style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 3px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 3px" align="middle">United States</TD>
+            <TD style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 3px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 3px" align="middle">English</TD>
+          </TR>
+          <TR>
+            <TD style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 3px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 3px" align="middle">Canada</TD>
+            <TD style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 3px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 3px" align="middle">English</TD>
+          </TR>
+          <TR>
+            <TD style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 3px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 3px" align="middle">United Kingdom</TD>
+            <TD style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 3px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 3px" align="middle">English</TD>
+          </TR>
+          <TR>
+            <TD style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 3px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 3px" align="middle">Japan</TD>
+            <TD style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 3px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 3px" align="middle">Japanese</TD>
+          </TR>
+          <TR>
+            <TD style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 3px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 3px" align="middle">Mexico</TD>
+            <TD style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 3px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 3px" align="middle">Spanish</TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      ]]>
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Small</Style>
+    <Caption>Image caption small</Caption>
+    <ImageUrl>/Content/Images/ambassador.png</ImageUrl>
+    <Text>
+      Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.
+    </Text>
+    <ImageLink>http://www.google.com</ImageLink>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Medium</Style>
+    <Caption>Image caption medium</Caption>
+    <ImageUrl>/Content/Images/ambassador.png</ImageUrl>
+    <Text>Add new test pass and jump-start your testing</Text>
+    <ImageLink></ImageLink>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Large</Style>
+    <Caption>Image caption large</Caption>
+    <ImageUrl>/Content/Images/ambassador.png</ImageUrl>
+    <Text>Add new test pass and jump-start your testing</Text>
+    <ImageLink>http://www.google.com</ImageLink>
+  </Module>
+  <Module>
+    <ModuleType>TwoImagesModule</ModuleType>
+    <ImageUrl1>/Content/Images/ambassador.png</ImageUrl1>
+    <ImageUrl2>/Content/Images/ambassador.png</ImageUrl2>
+    <Caption1>Image caption1</Caption1>
+    <Caption2>Image caption2</Caption2>
+    <ImageLink1>http://www.google.com</ImageLink1>
+    <ImageLink2>http://www.google.com</ImageLink2>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Large</Style>
+    <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
+    <Text>One Video Image</Text>
+    <VideoUrl>http://localhost/App_Data/wiki/Videos/be74f4d9-ad34-45e5-89ed-7934d5c10b7a.WMV</VideoUrl>
+    <VideoTitle>Position Kinect</VideoTitle>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Medium</Style>
+    <BackgroundImageUrl>http://epix.reddah.com/shaXam/0201/22/ba/22ba9343-808b-4de3-b3e8-fb3f1783c241.PNG?v=1#renewgold-vm-m.PNG</BackgroundImageUrl>
+    <Text>Watch the following video to quickly see your options for renewing your Reddah LIVE Gold Membership.</Text>
+    <VideoUrl>http://nxeassets.reddah.com/shaxam/0201/6e/e8/6ee8941c-9e63-44de-bbe4-fa72773813d5.WMV?v=1#Reddah101_HowTo_RenewGold_Support.WMV</VideoUrl>
+    <VideoTitle>Position Kinect</VideoTitle>
+  </Module>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Find your test cases</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>Find your test cases</Text>
+  </Module>
+</ContentType>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="SolutionArticle">
+  <Title>Download Reddah</Title>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Getting Started with Reddah</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      Install online: <a href="/TestViewer/Reddah.application">Click here to install Reddah</a>
+      <br/>
+      
+      ]]>
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Large</Style>
+    <Caption>After install Reddah online, you can find it in start menu.</Caption>
+    <ImageUrl>/App_Data/wiki/Images/StartMenu.png</ImageUrl>
+    <Text></Text>
+    <ImageLink></ImageLink>
+  </Module>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Download from a share folder</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      Download from here: <a href="\\lynxbj02\KFW\temp\v-bawei\Reddah\Debug2013.03.08.1">Reddah Beta 2013.03.08.1</a>
+      
+      <br/>
+      ]]>
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Small</Style>
+    <Caption>Are you the first one to use Reddah?</Caption>
+    <ImageUrl>/Content/Images/ambassador.png</ImageUrl>
+    <Text>
+      Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.
+    </Text>
+    <ImageLink>http://www.google.com</ImageLink>
+  </Module>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Watch demo video for local test</Text>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Large</Style>
+    <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
+    <Text>One Video Image</Text>
+    <VideoUrl>http://localhost/App_Data/wiki/Videos/ReddahDemo_LocalMachine.wmv</VideoUrl>
+    <VideoTitle>Position Kinect</VideoTitle>
+  </Module>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Watch demo video with client machines test</Text>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Large</Style>
+    <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
+    <Text>One Video Image</Text>
+    <VideoUrl>http://localhost/App_Data/wiki/Videos/ReddahDemo_DistributedMachines.wmv</VideoUrl>
+    <VideoTitle>Position Kinect</VideoTitle>
+  </Module>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Find your test cases</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>Find your test cases - Text Module</Text>
+  </Module>
+</ContentType>

@@ -16,7 +16,7 @@
         public List<ArticlePreview> RightBoxModules { get; set; }
         public List<SectionPreview> HomePageContents { get; set; }
 
-        private const string HomePageXmlPath = "~/Content/Compass/Pages/HomePage.xml";
+        private const string HomePageXmlPath = "~/App_Data/wiki/Pages/HomePage.xml";
 
         public HomePageViewModel(string path="")
         {

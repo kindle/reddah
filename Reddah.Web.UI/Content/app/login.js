@@ -54,7 +54,7 @@
                 $scope.registerModel.Error = str;
             }
         })
-    }
+    };
 }])
 .controller("appCtrl", ['$scope', 'loginSvc', function ($scope, loginSvc) {
     $scope.loginModel = { UserName: "", Password: "", RememberMe: false, ReturnUrl: window.location.href, Error: "", Token: "" };
@@ -68,6 +68,14 @@
     $scope.hidePanel = function () {
         $('div#BroswerOpacify').hide();
         $('div#LoginRegisterPanel').hide();
+    }
+    $scope.showImage = function (index) {
+        if ($('img#org_image_' + index).attr("src") === "/content/images/noimage.jpg")
+            return;
+        $('img#org_image_'+index).toggle();
+    }
+    $scope.toggleArticle = function (index) {
+        $('div#org_article_' + index).toggle();
     }
 }])
 .factory("loginSvc", ['$http', '$q', function ($http, $q) {
@@ -101,4 +109,14 @@
             return defer.promise;
         }
     }
-}]);
+}])
+.directive('collapser', function () {
+    return {
+        restrict: 'EAC',
+        templateUrl: '/content/app/collapser.html',
+        scope: {
+            caption: '@'
+        },
+        transclude: true
+    };
+})

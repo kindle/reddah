@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="WizardStepSolutionList">
+  <Solutions>
+    <Solution>wiki/Pages/test/wizard/WizardStepSolution_1</Solution>
+    <Solution>wiki/Pages/test/wizard/WizardStepSolution_2</Solution>
+    <Solution>wiki/Pages/test/wizard/WizardStepSolution_3</Solution>
+    <Solution>wiki/Pages/test/wizard/WizardStepSolution_4</Solution>
+  </Solutions>
+  <SolveIssue>
+    <YesText>Yes</YesText>
+    <YesUrl>wiki/Pages/test/wizard/WizardStepEnd_Success</YesUrl>
+    <NoText>No</NoText>
+    <NoUrl>wiki/Pages/test/wizard/WizardStepEnd_Failed</NoUrl>
+  </SolveIssue>
+</ContentType>

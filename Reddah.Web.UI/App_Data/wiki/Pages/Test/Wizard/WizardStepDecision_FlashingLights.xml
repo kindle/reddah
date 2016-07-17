@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="WizardStepDecision">
+  <Title>How many lights flash red on your console?</Title>
+  <LegendTitle>LegendTitle</LegendTitle>
+  <Description>Description</Description>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Getting Started with Reddah</Text>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Small</Style>
+    <Caption>Image caption small</Caption>
+    <ImageUrl>/Content/Images/ambassador.png</ImageUrl>
+    <Text>
+      Do not manually tilt the sensor, it adjusts automatically.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.
+    </Text>
+    <ImageLink>http://www.google.com</ImageLink>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Medium</Style>
+    <BackgroundImageUrl>http://epix.reddah.com/shaXam/0201/22/ba/22ba9343-808b-4de3-b3e8-fb3f1783c241.PNG?v=1#renewgold-vm-m.PNG</BackgroundImageUrl>
+    <Text>Watch the following video to quickly see your options for renewing your Reddah LIVE Gold Membership.</Text>
+    <VideoUrl>http://nxeassets.reddah.com/shaxam/0201/6e/e8/6ee8941c-9e63-44de-bbe4-fa72773813d5.WMV?v=1#Reddah101_HowTo_RenewGold_Support.WMV</VideoUrl>
+    <VideoTitle>Position Kinect</VideoTitle>
+  </Module>
+  <Answers>
+    <Title>Choose an option</Title>
+    <Proposals>
+      <Proposal>
+        <Text>One light</Text>
+        <ImageUrl>http://solutions.reddah.com/en-US/PublishingImages/oneredlight.png</ImageUrl>
+        <StepUrl>wiki/Pages/test/wizard/WizardStepSolutionList_FlashingLights</StepUrl>
+      </Proposal>
+      <Proposal>
+        <Text>Two lights</Text>
+        <ImageUrl>http://solutions.reddah.com/en-US/PublishingImages/tworedlight.png</ImageUrl>
+        <StepUrl>wiki/Pages/test/wizard/WizardStepSolutionList_FlashingLights</StepUrl>
+      </Proposal>
+      <Proposal>
+        <Text>3 lights</Text>
+        <ImageUrl>http://solutions.reddah.com/en-US/PublishingImages/threeredlight.png</ImageUrl>
+        <StepUrl>wiki/Pages/test/wizard/WizardStepSolutionList_FlashingLights</StepUrl>
+      </Proposal>
+      <Proposal>
+        <Text>4 flashing lights</Text>
+        <ImageUrl>http://solutions.reddah.com/en-US/PublishingImages/fourredlight.png</ImageUrl>
+        <StepUrl>wiki/Pages/test/wizard/WizardStepSolutionList_FlashingLights</StepUrl>
+      </Proposal>
+    </Proposals>
+    <ImageType>medium</ImageType>
+    <!--<ImageType>large</ImageType>-->
+    <ImageForcedHeight>true</ImageForcedHeight>
+  </Answers>
+</ContentType>

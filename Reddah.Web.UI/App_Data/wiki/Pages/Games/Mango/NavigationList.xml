@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="NavigationList">
+  <Title>Apps Navigation list</Title>
+  <Articles>
+    <Title>Navigation list title >3's A=℃∆∃ néad 대한</Title>
+    <Article>
+      <Title>Reddah article 1</Title>
+      <Description></Description>
+      <ImageUrl></ImageUrl>
+      <ArticleUrl>apps/Reddah/familypage</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Reddah article 2</Title>
+      <Description></Description>
+      <ImageUrl></ImageUrl>
+      <ArticleUrl>apps/Reddah/familypagenotexist</ArticleUrl>
+    </Article>
+  </Articles>
+  <DeflectionModule>
+    <Visible>True</Visible>
+    <Id>Articles</Id>
+    <Title>These articles may help resolve your issue</Title>
+    <Type>SoftDeflection</Type>
+    <ButtonText></ButtonText>
+    <ButtonLink></ButtonLink>
+    <Descriptions></Descriptions>
+    <Articles>
+      <Article>
+        <Title>
+          <![CDATA[
+          Verify these chars could display on page correctly: ' : () //&lt;SCRIPT>alert('：%2F%2Fテスト©，說明®、کی وضاحت™&#—-%？①iii㈣<5')&lt;/script&gt;
+          ]]>
+        </Title>
+        <Link>http://www.bing.com</Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 002
+        </Title>
+        <Link></Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 003
+        </Title>
+        <Link></Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 004
+        </Title>
+        <Link></Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 005
+        </Title>
+        <Link></Link>
+      </Article>
+    </Articles>
+  </DeflectionModule>
+</ContentType>

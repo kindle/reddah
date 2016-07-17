@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="SolutionArticle">
+  <Title>Bailin Blocks For Windows Phone</Title>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Getting Started with Bailin Blocks</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      Well here is a new Tetris game for Windows Phone. We did see some of the early Tetris inspired games were forced to be taken down, but there seems to be quite a few of them floating around on the Marketplace
+      <br/>
+      &nbsp;
+      <br>
+      <iframe width="420" height="315" src="http://www.youtube.com/embed/ErJE-HGLRTk" frameborder="0" allowfullscreen></iframe>
+      <br>
+      &nbsp;
+      <br>
+      BailinTetris is a Tetris game that supports both Classic Mode and Adventure Mode. In Classic Mode, try to get a score as high as possible; in Adventure Mode, try to remove the squares to be under the colorful line. It also integrates OpenXLive services and you can share with your friends your high scores and achievements. This is so much more fun than just any Tetris game! 
+      <br/>
+      ]]>
+    </Text>
+  </Module>
+</ContentType>

@@ -62,18 +62,15 @@
                     {
                     <div class="listImage">
                         <div class="listImageWrapper">
-                            <a href="/@locale/@article.ArticleUrl">
-                                <img class="BrowsePreviewImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="193" src="@article.ImageUrl" alt="picture">
-                            </a>
+                            <img ng-click="showImage(@index)" class="BrowsePreviewImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="193" src="@article.ImageUrl" alt="picture">
                         </div>
                     </div>
                     }
-                    <div class="rightBoxModule listRight" colspan="@GetColspan(article.ImageUrl)">
-                        <h2><a href="@article.ArticleUrl">@Html.Raw(article.Title)</a> <span class="listInfo">(source)</span></h2>
-                        <div>@Html.Raw(article.Abstract)</div>
-                        <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@article.GroupName">/r/@article.GroupName</a></div>
-                        <div class="listInfo">2839 comments share save hide report</div>
-                    </div>
+                    <h2><a href="@article.ArticleUrl">@Html.Raw(article.Title)</a> <span class="listInfo">(source)</span></h2>
+                    <div>@Html.Raw(article.Abstract)</div>
+                    <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@article.GroupName">/r/@article.GroupName</a></div>
+                    <div class="listInfo">2839 comments share save hide report</div>
+                    <img id="org_image_@index" class="orgImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="100%" src="@article.ImageUrl" alt="picture">
                 </div>
             </div>
             <div class="postClear"></div>

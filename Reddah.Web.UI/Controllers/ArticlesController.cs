@@ -7,17 +7,30 @@
 
     public class ArticlesController : BaseController
     {
-        //
-        // GET: /Articles/
+        public ActionResult Menu(string path, string count)
+        {
+            if (!System.IO.File.Exists(HttpContext.Server.MapPath("~/App_Data/" + path + ".xml")))
+            {
+                return new HttpNotFoundResult();
+            }
+            else
+            {
+                var PresentationTemplate = GetContentType(path);
 
-        //public ActionResult ClassicArticle(string locale, string path)
-        //{
-        //    return ClassicArticle(path);
-        //}
+                var presentationView = string.Format("~/Views/Articles/articleList.cshtml", PresentationTemplate);
+                
+                return View(presentationView, new MenuArticleViewModel(path, PresentationTemplate));
+            }
+        }
+
+        public ActionResult SubReddah(string sub, int count = 25)
+        {
+            return View("~/Views/Articles/articleList.cshtml", new SubArticleViewModel(sub, count));
+        }
 
         public ActionResult ClassicArticle(string path, string category, string count)
         {
-            if (!System.IO.File.Exists(HttpContext.Server.MapPath("~/Content/" + path + ".xml")))
+            if (!System.IO.File.Exists(HttpContext.Server.MapPath("~/App_Data/" + path + ".xml")))
             {
                 return new HttpNotFoundResult();
                 // ooopos page
@@ -43,10 +56,6 @@
                 else if (PresentationTemplate == "WizardSteps")
                 {
                     return View(presentationView, new WizardStepsViewModel(path));
-                }
-                else if (PresentationTemplate == "TopList")
-                {
-                    return View(presentationView, new DatabaseTopListViewModel(path));
                 }
                 else if (PresentationTemplate == "Log")
                 {

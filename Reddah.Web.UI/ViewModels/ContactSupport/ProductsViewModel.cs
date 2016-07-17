@@ -14,7 +14,7 @@ namespace Reddah.Web.UI.ViewModels.ContactSupport
 
         public ProductsViewModel()
         {
-            this.navigationListPath = "Compass/Pages/NavigationList";
+            this.navigationListPath = "wiki/Pages/NavigationList";
             this.rootNavigationList = new NavigationListViewModel(navigationListPath);
             this.RootProducts = GetRootProducts();
         }

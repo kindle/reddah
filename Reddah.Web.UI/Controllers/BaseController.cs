@@ -9,7 +9,7 @@ namespace Reddah.Web.UI.Controllers
         {
             var doc = new XmlDocument();
 
-            doc.Load(HttpContext.Server.MapPath("~/Content/" + path + ".xml"));
+            doc.Load(HttpContext.Server.MapPath("~/App_Data/" + path + ".xml"));
 
             return doc.SelectSingleNode("ContentType/@Name").Value;
         }

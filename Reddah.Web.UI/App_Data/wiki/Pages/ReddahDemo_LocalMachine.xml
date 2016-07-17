@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="SolutionArticle">
+  <Title>Error 80070428 when you install the fall 2012 Reddah 360 update</Title>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Getting Started with Reddah</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      This introduction shows how Reddah works
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Small</Style>
+    <Caption>Image caption small</Caption>
+    <ImageUrl>/App_Data/wiki/Images/twitter.png</ImageUrl>
+    <Text>
+      Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.Do not manually tilt the sensor, it adjusts automatically.Be careful not to drop the sensor.
+    </Text>
+    <ImageLink>http://www.google.com</ImageLink>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Medium</Style>
+    <Caption>Image caption medium</Caption>
+    <ImageUrl>/App_Data/wiki/Images/twitter.png</ImageUrl>
+    <Text>Add new test pass and jump-start your testing</Text>
+    <ImageLink></ImageLink>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Large</Style>
+    <Caption>Image caption large</Caption>
+    <ImageUrl>/App_Data/wiki/Images/twitter.png</ImageUrl>
+    <Text>Add new test pass and jump-start your testing</Text>
+    <ImageLink>http://www.google.com</ImageLink>
+  </Module>
+  <Module>
+    <ModuleType>TwoImagesModule</ModuleType>
+    <ImageUrl1>/App_Data/wiki/Images/twitter.png</ImageUrl1>
+    <ImageUrl2>/App_Data/wiki/Images/twitter.png</ImageUrl2>
+    <Caption1>Image caption1</Caption1>
+    <Caption2>Image caption2</Caption2>
+    <ImageLink1>http://www.google.com</ImageLink1>
+    <ImageLink2>http://www.google.com</ImageLink2>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Large</Style>
+    <BackgroundImageUrl>/App_Data/wiki/Images/ReddahDemo.png</BackgroundImageUrl>
+    <Text>One Video Image</Text>
+    <VideoUrl>http://localhost/App_Data/wiki/Videos/ReddahDemo_LocalMachine.wmv</VideoUrl>
+    <VideoTitle>Position Kinect</VideoTitle>
+  </Module>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Find your test cases</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>Find your test cases</Text>
+  </Module>
+</ContentType>

@@ -20,7 +20,7 @@ namespace Reddah.Web.UI.ViewModels
             this.currentProductName = product;
             this.currentCategoryName = category;
 
-            this.rootNavigationList = new NavigationListViewModel("Compass/Pages/NavigationList");
+            this.rootNavigationList = new NavigationListViewModel("wiki/Pages/NavigationList");
         }
 
         public List<BrowseProductViewModel> Products 
@@ -28,7 +28,7 @@ namespace Reddah.Web.UI.ViewModels
             get 
             { 
                 var products = new List<BrowseProductViewModel>();
-                BrowseProductViewModel.GetProductSettings("Compass/Pages/BrowseNavigate");
+                BrowseProductViewModel.GetProductSettings("wiki/Pages/BrowseNavigate");
 
                 if(this.rootNavigationList != null)
                 {
@@ -62,7 +62,7 @@ namespace Reddah.Web.UI.ViewModels
 
                 if(product.NavigationListUrl.Split('/').Length > 0)
                 {
-                    product.CompassIdentifier = product.NavigationListUrl.Replace("compass/pages/", "").Split('/')[0];
+                    product.CompassIdentifier = product.NavigationListUrl.Replace("wiki/pages/", "").Split('/')[0];
                 }
 
                 product.GetCategories(product.NavigationListUrl, currentProduct, currentCategory);

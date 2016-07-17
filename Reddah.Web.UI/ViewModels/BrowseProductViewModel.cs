@@ -26,7 +26,7 @@ namespace Reddah.Web.UI.ViewModels
         public static void GetProductSettings(string path)
         {
             var doc = new XmlDocument();
-            doc.Load(HttpContext.Current.Server.MapPath("~/Content/" + path + ".xml"));
+            doc.Load(HttpContext.Current.Server.MapPath("~/App_Data/" + path + ".xml"));
 
             // load limit
             int productCategoryLimit;
@@ -81,7 +81,7 @@ namespace Reddah.Web.UI.ViewModels
                                    ArticleUrl = field.ArticleUrl.ToLower()
                                };
 
-                var compassIdentifier = category.ArticleUrl.Replace("compass/pages/", "");
+                var compassIdentifier = category.ArticleUrl.Replace("wiki/pages/", "");
                 category.CompassIdentifier = (compassIdentifier.Split('/').Length > 2)
                                         ? compassIdentifier.Split('/')[1]
                                         : compassIdentifier.Split('/')[0];

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="SolutionArticle">
+  <Title>PPT</Title>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>support.reddah.com</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+        <a href="http://localhost/App_Data/wiki/ppt/supportreddahcom.pps">supportreddah.com.ppts link</a>
+        <br>
+        <a href="http://localhost/App_Data/wiki/ppt/support.pptx">support.pptx link</a>
+        <br>
+        <br>        
+      ]]>
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Large</Style>
+    <BackgroundImageUrl>http://localhost/content/images/reddahppt.jpg</BackgroundImageUrl>
+    <Text>One Video Image</Text>
+    <VideoUrl>http://localhost/App_Data/wiki/Videos/support.mp4</VideoUrl>
+    <VideoTitle>support.reddah.com ppt video in case Office is not installed</VideoTitle>
+  </Module>
+</ContentType>

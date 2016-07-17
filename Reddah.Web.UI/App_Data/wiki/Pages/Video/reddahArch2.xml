@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="SolutionArticle">
+  <Title>Reddah Arch part2 Shaken</Title>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Reddah Arch Video part2</Text>
+  </Module>
+  <Module>
+    <ModuleType>OneVideoModule</ModuleType>
+    <Style>Large</Style>
+    <BackgroundImageUrl>http://nxeassets.reddah.com/shaxam/0201/88/19/881979ef-2154-4c7b-adef-690b2ea82cbc.JPG?v=2#positionsensorvid-vm-m.JPG</BackgroundImageUrl>
+    <Text>One Video Image</Text>
+    <VideoUrl>http://localhost/App_Data/wiki/Videos/ReddahArchpart2Shaken.mp4</VideoUrl>
+    <VideoTitle>Live Video taken in Redmond</VideoTitle>
+  </Module>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>My Comments</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      It mainly talked about the arch of reddah.com from test view, the following are just my notes:
+      <ol>
+        <li>We have 5 test environments: dev, main, rtm, dnet, qfe</li>
+        <li>There's no AP dev environment currently</li>
+        <li>Create a user in main, and you can use it in all other test environments</li>
+        <li>dev to main everyday</li>
+        <li>main to rtm every 2 weeks</li>
+        <li>rtm to prod every month</li>
+        <li>support PM is David Ciuba, seems he took the video</li>
+        <li>There are still some conceptions not clear</li>
+      </ol>
+      <ul>
+        <li>What is <b>Shadown Prod</b></li>
+        <li><b>cnet</b>, what for, when available?</li>
+        <li><b>xblob</b>, npdb where is it?</li>
+        <li><b>live cache</b> strategy</li>
+      </ul>
+      ]]>
+    </Text>
+  </Module>
+</ContentType>

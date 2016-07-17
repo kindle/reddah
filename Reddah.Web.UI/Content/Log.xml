@@ -53,7 +53,7 @@
         for your test pass.
       </Description>
       <ImageUrl>/content/images/contactsupport/ContactSupportAppsIcon.png</ImageUrl>
-      <ArticleUrl>compass/pages/apps/navigationlist</ArticleUrl>
+      <ArticleUrl>wiki/pages/apps/navigationlist</ArticleUrl>
     </Article>
     <Article>
       <Title>Tools</Title>
@@ -62,7 +62,7 @@
         for your test pass.
       </Description>
       <ImageUrl>/content/images/contactsupport/ContactSupportReddahKinectIcon.png</ImageUrl>
-      <ArticleUrl>compass/pages/tools/navigationlist</ArticleUrl>
+      <ArticleUrl>wiki/pages/tools/navigationlist</ArticleUrl>
     </Article>
     <Article>
       <Title>Games</Title>
@@ -71,7 +71,7 @@
         for your test pass.
       </Description>
       <ImageUrl>/content/images/contactsupport/ContactSupportGamesIcon.png</ImageUrl>
-      <ArticleUrl>compass/pages/games/navigationlist</ArticleUrl>
+      <ArticleUrl>wiki/pages/games/navigationlist</ArticleUrl>
     </Article>
     <Article>
       <Title>Video</Title>
@@ -80,7 +80,7 @@
         for your test pass.
       </Description>
       <ImageUrl>/content/images/contactsupport/ContactSupportMusicVideoIcon.png</ImageUrl>
-      <ArticleUrl>compass/pages/video/navigationlist</ArticleUrl>
+      <ArticleUrl>wiki/pages/video/navigationlist</ArticleUrl>
     </Article>
     <Article>
       <Title>Photos</Title>
@@ -89,7 +89,7 @@
         for your test pass.
       </Description>
       <ImageUrl>/content/images/contactsupport/ContactSupportLiveIcon.png</ImageUrl>
-      <ArticleUrl>compass/pages/photos/navigationlist</ArticleUrl>
+      <ArticleUrl>wiki/pages/photos/navigationlist</ArticleUrl>
     </Article>
     <Article>
       <Title>Download</Title>
@@ -98,7 +98,7 @@
         for your test pass.
       </Description>
       <ImageUrl>/content/images/contactsupport/ContactSupportBillingIcon.png</ImageUrl>
-      <ArticleUrl>compass/pages/download/navigationlist</ArticleUrl>
+      <ArticleUrl>wiki/pages/download/navigationlist</ArticleUrl>
     </Article>
     <Article>
       <Title>Video:Getting Started with Reddah>3's A=℃∆∃ néad 대한</Title>
@@ -108,7 +108,7 @@
         for enjoyable, agile test experience. Reddah includes many features that enable
         fast, agile testing for scheduling test pass that use the most agile way.>3's A=℃∆∃ néad 대한
       </Description>
-      <ImageUrl>/Content/compass/Images/contact_us.png</ImageUrl>
+      <ImageUrl>/Content/Images/contact_us.png</ImageUrl>
       <ArticleUrl>video/reddaharch2</ArticleUrl>
     </Article>
     <Article>
@@ -116,7 +116,7 @@
       <Description>
         PPT:Reddah makes it easy to install and update free libraries and tools.>3's A=℃∆∃ néad 대한
       </Description>
-      <ImageUrl>/Content/compass/Images/twitter.png</ImageUrl>
+      <ImageUrl>/App_Data/wiki/Images/twitter.png</ImageUrl>
       <ArticleUrl>test/pptsap</ArticleUrl>
     </Article>
     <Article>
@@ -125,7 +125,7 @@
         Wizard steps: You can easily find a test that offers the right mix of filter conditions
         for your test pass.>3's A=℃∆∃ néad 대한
       </Description>
-      <ImageUrl>/Content/compass/Images/forum.png</ImageUrl>
+      <ImageUrl>/Content/Images/forum.png</ImageUrl>
       <ArticleUrl>test/wizard/wizardsteps</ArticleUrl>
     </Article>
     <Article>

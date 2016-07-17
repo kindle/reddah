@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="NavigationList">
+  <Title>Games Navigation list</Title>
+  <Articles>
+    <Title>Navigation list title >3's A=℃∆∃ néad 대한</Title>
+    <Article>
+      <Title>games article</Title>
+      <Description>
+        You can easily find a test that offers the right mix of filter conditions
+        for your test pass.
+      </Description>
+      <ImageUrl>/Content/Images/forum.png</ImageUrl>
+      <ArticleUrl>testurl</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Getting Started with Reddah</Title>
+      <Description>
+        Reddah gives you a powerful way to manage your test cases that
+        enables a clean separation of concerns and that gives you full control over your test bits
+        for enjoyable, agile test experience. Reddah includes many features that enable
+        fast, agile testing for scheduling test pass that use the most agile way.
+      </Description>
+      <!--<ImageUrl>http://nxeassets.reddah.com/shaxam/0201/64/52/64523801-df09-40cf-aceb-154d6e62b6fe.PNG?v=1#gow3-s-m.PNG</ImageUrl>-->
+      <ImageUrl>/Content/Images/contact_us.png</ImageUrl>
+      <ArticleUrl>testurl</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Add new test pass and jump-start your testing</Title>
+      <Description>
+        Reddah makes it easy to install and update free libraries and tools.
+      </Description>
+      <ImageUrl>/App_Data/wiki/Images/twitter.png</ImageUrl>
+      <ArticleUrl>testurl</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Find your test cases</Title>
+      <Description>
+        You can easily find a test that offers the right mix of filter conditions
+        for your test pass.
+      </Description>
+      <ImageUrl></ImageUrl>
+      <ArticleUrl>testurl</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>BailinBlocks</Title>
+      <Description>
+      </Description>
+      <ImageUrl></ImageUrl>
+      <ArticleUrl>wiki/pages/games/bailinblocks/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Kinect</Title>
+      <Description>
+      </Description>
+      <ImageUrl></ImageUrl>
+      <ArticleUrl>wiki/pages/games/kinect/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>Mango Games</Title>
+      <Description>
+      </Description>
+      <ImageUrl></ImageUrl>
+      <ArticleUrl>wiki/pages/games/mango/navigationlist</ArticleUrl>
+    </Article>
+    <Article>
+      <Title>WP 8</Title>
+      <Description>
+      </Description>
+      <ImageUrl></ImageUrl>
+      <ArticleUrl>wiki/pages/games/Windowsphone8/navigationlist</ArticleUrl>
+    </Article>
+  </Articles>
+  <DeflectionModule>
+    <Visible>True</Visible>
+    <Id>Articles</Id>
+    <Title>These articles may help resolve your issue</Title>
+    <Type>SoftDeflection</Type>
+    <ButtonText></ButtonText>
+    <ButtonLink></ButtonLink>
+    <Descriptions></Descriptions>
+    <Articles>
+      <Article>
+        <Title>
+          <![CDATA[
+          Verify these chars could display on page correctly: ' : () //&lt;SCRIPT>alert('：%2F%2Fテスト©，說明®、کی وضاحت™&#—-%？①iii㈣<5')&lt;/script&gt;
+          ]]>
+        </Title>
+        <Link>http://www.bing.com</Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 002
+        </Title>
+        <Link></Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 003
+        </Title>
+        <Link></Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 004
+        </Title>
+        <Link></Link>
+      </Article>
+      <Article>
+        <Title>
+          Title: Solution Article 005
+        </Title>
+        <Link></Link>
+      </Article>
+    </Articles>
+  </DeflectionModule>
+</ContentType>
