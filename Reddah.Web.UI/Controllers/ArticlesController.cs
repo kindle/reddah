@@ -1,9 +1,12 @@
 ﻿namespace Reddah.Web.UI.Controllers
 {
     using System;
+    using System.Linq;
     using System.Web.Mvc;
 
     using Reddah.Web.UI.ViewModels;
+    using Reddah.Web.UI.Filters;
+    using Reddah.Web.UI.Models;
 
     public class ArticlesController : BaseController
     {
@@ -115,6 +118,57 @@
             var presentationView = string.Format("~/Views/Error.cshtml");
 
             return View(presentationView);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public JsonResult JsonVote(VoteModel model)
+        {
+            var errors = string.Empty;
+            if (model.ArticleId < 0)
+            {
+                errors = "Article does not exist";
+            }
+
+            if (string.IsNullOrEmpty(errors))
+            {
+                try
+                {
+                    //also update user info
+                    using (var db = new reddahEntities1())
+                    {
+                        var article = db.Articles.FirstOrDefault(a => a.Id == model.ArticleId);
+                        if (model.Value.ToLowerInvariant() == "up")
+                        {
+                            if(article.Up == null)
+                            {
+                                article.Up = 0;
+                            }
+                            article.Up += 1;
+                        }
+                        else 
+                        {
+                            if (article.Down == null)
+                            {
+                                article.Down = 0;
+                            }
+                            article.Down += 1;
+                        }
+                        db.SaveChanges();
+                    }
+                }
+                catch(Exception e)
+                {
+                    errors = e.Message;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(errors))
+            {
+                return Json(new { errors = errors }); 
+            }
+            
+            return Json(new { success = true });
         }
     }
 }

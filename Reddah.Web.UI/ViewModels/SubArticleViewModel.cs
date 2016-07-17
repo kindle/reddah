@@ -39,6 +39,7 @@
                 foreach (var item in query)
                 {
                     var ap = new ArticlePreview();
+                    ap.Id = item.Id;
                     ap.Title = item.Title;
                     ap.Abstract = item.Abstract;
                     ap.Description = item.Content;
@@ -51,6 +52,7 @@
                     ap.CreatedOn = Helpers.TimeAgo(item.CreatedOn);
                     ap.UserName = item.UserName;
                     ap.GroupName = item.GroupName;
+                    ap.Content = item.Content;
 
                     apList.Add(ap);
                 }

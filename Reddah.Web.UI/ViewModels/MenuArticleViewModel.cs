@@ -26,6 +26,7 @@
                     foreach (var item in query)
                     {
                         var ap = new ArticlePreview();
+                        ap.Id = item.Id;
                         ap.Title = item.Title;
                         ap.Abstract = item.Abstract;
                         ap.Description = item.Content;
@@ -52,6 +53,7 @@
                     foreach (var item in query)
                     {
                         var ap = new ArticlePreview();
+                        ap.Id = item.Id;
                         ap.Title = item.Title;
                         ap.Abstract = item.Abstract;
                         ap.Description = item.Content;
@@ -78,6 +80,7 @@
                     foreach (var item in query)
                     {
                         var ap = new ArticlePreview();
+                        ap.Id = item.Id;
                         ap.Title = item.Title;
                         ap.Abstract = item.Abstract;
                         ap.Description = item.Content;
@@ -104,6 +107,7 @@
                     foreach (var item in query)
                     {
                         var ap = new ArticlePreview();
+                        ap.Id = item.Id;
                         ap.Title = item.Title;
                         ap.Abstract = item.Abstract;
                         ap.Description = item.Content;

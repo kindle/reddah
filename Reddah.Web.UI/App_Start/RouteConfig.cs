@@ -141,6 +141,12 @@
             );
 
             routes.MapLocalizedRoute(
+                "JsonVote",
+                "{locale}/Articles/JsonVote",
+                new { controller = "Articles", action = "JsonVote" }
+            );
+
+            routes.MapLocalizedRoute(
                 "Register",
                 "{locale}/account/register",
                 new { controller = "account", action = "register" }

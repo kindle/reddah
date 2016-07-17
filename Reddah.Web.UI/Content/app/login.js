@@ -55,6 +55,7 @@
             }
         })
     };
+    
 }])
 .controller("appCtrl", ['$scope', 'loginSvc', function ($scope, loginSvc) {
     $scope.loginModel = { UserName: "", Password: "", RememberMe: false, ReturnUrl: window.location.href, Error: "", Token: "" };
@@ -76,6 +77,25 @@
     }
     $scope.toggleArticle = function (index) {
         $('div#org_article_' + index).toggle();
+    }
+    $scope.vote = function (articleId, value, orgCount) {
+        $scope.voteModel = {
+            ArticleId: articleId,
+            Value: value
+        };
+        loginSvc.vote($scope.voteModel).then(function (data) {
+            if (data.success == true) {
+                var newCount = value == "up" ? orgCount + 1 : orgCount - 1;
+                $('span#vote-count-post-' + articleId).text(newCount);
+            }
+            else {
+                var str = '';
+                for (var error in data.errors) {
+                    str += data.errors[error] + '\n';
+                }
+                alert(str);
+            }
+        })
     }
 }])
 .factory("loginSvc", ['$http', '$q', function ($http, $q) {
@@ -101,6 +121,19 @@
                 url: '/en-us/Account/JsonRegister',
                 data: data,
                 headers: { 'RequestVerificationToken': data.Token }
+            }).success(function (data, status, headers, config) {
+                defer.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defer.reject(data)
+            });
+            return defer.promise;
+        },
+        vote: function (data) {
+            var defer = $q.defer();
+            $http({
+                method: 'post',
+                url: '/en-us/Articles/JsonVote',
+                data: data
             }).success(function (data, status, headers, config) {
                 defer.resolve(data);
             }).error(function (data, status, headers, config) {

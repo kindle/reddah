@@ -88,6 +88,7 @@
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
       <Private>True</Private>
@@ -99,9 +100,11 @@
     </Reference>
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
@@ -251,8 +254,11 @@
     <Compile Include="ViewModels\BrowseProductViewModel.cs" />
     <Compile Include="ViewModels\ContactSupport\CategoriesViewModel.cs" />
     <Compile Include="ViewModels\ContactSupport\ProductsViewModel.cs" />
+    <Compile Include="ViewModels\MenuArticleViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\SubArticleViewModel.cs" />
     <Compile Include="ViewModels\DatabaseLogViewModel.cs" />
-    <Compile Include="ViewModels\DatabaseTopListViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WizardStepSolutionListViewModel.cs" />
     <Compile Include="ViewModels\WizardStepDataViewModel.cs" />
@@ -272,6 +278,87 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\top.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\new.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\rising.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\wiki\Images\ambassador.png" />
+    <Content Include="App_Data\wiki\Images\contact_us.png" />
+    <Content Include="App_Data\wiki\Images\forum.png" />
+    <Content Include="App_Data\wiki\Images\pdf_icon25x25.png" />
+    <Content Include="App_Data\wiki\Images\Reddah1.png" />
+    <Content Include="App_Data\wiki\Images\Reddah2.png" />
+    <Content Include="App_Data\wiki\Images\Reddah3.png" />
+    <Content Include="App_Data\wiki\Images\Reddah4.png" />
+    <Content Include="App_Data\wiki\Images\ReddahDemo.png" />
+    <Content Include="App_Data\wiki\Images\StartMenu.png" />
+    <Content Include="App_Data\wiki\Images\twitter.png" />
+    <Content Include="App_Data\wiki\Pages\Apps\Demo\BailinBlocks\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\Demo\ChineseCheckers\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\Demo\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\Demo\Reddah\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\DistributedTest\FilterTestCases\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\DistributedTest\LoadTestBits\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\DistributedTest\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\Local Test\Filtertestcases\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\Local Test\LoadTestBits\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\Local Test\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\Reddah\FamilyPage.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\Reddah\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\Reddah\Setup\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\Reddah\Tips\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Apps\Reddah\Tutorial\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\BrowseNavigate.xml" />
+    <Content Include="App_Data\wiki\Pages\Download.xml" />
+    <Content Include="App_Data\wiki\Pages\Download\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\FamilyPage.xml" />
+    <Content Include="App_Data\wiki\Pages\FamilyPageHardDeflection.xml" />
+    <Content Include="App_Data\wiki\Pages\FamilyPageShort.xml" />
+    <Content Include="App_Data\wiki\Pages\FamilyPageSoftDeflection.xml" />
+    <Content Include="App_Data\wiki\Pages\Games\BailinBlocks-Kinect.xml" />
+    <Content Include="App_Data\wiki\Pages\Games\BailinBlocks-WindowsPhone.xml" />
+    <Content Include="App_Data\wiki\Pages\Games\BailinBlocks\Free\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Games\BailinBlocks\Full\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Games\BailinBlocks\Lover\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Games\BailinBlocks\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Games\BailinBlocks\Summer\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Games\Kinect\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Games\Mango\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Games\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Games\WindowsPhone8\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\HomePage.xml" />
+    <Content Include="App_Data\wiki\Pages\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Photos\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\ReddahDemo_Distributed.xml" />
+    <Content Include="App_Data\wiki\Pages\ReddahDemo_LocalMachine.xml" />
+    <Content Include="App_Data\wiki\Pages\SolutionArticlePage.xml" />
+    <Content Include="App_Data\wiki\Pages\SolutionArticlePageShort.xml" />
+    <Content Include="App_Data\wiki\Pages\SolutionArticlePageShortHD.xml" />
+    <Content Include="App_Data\wiki\Pages\SolutionArticlePageShortSD.xml" />
+    <Content Include="App_Data\wiki\Pages\Test\FamilyPageSoftDeflectionDecodingTest.xml" />
+    <Content Include="App_Data\wiki\Pages\Test\NavigationListDecodingTest.xml" />
+    <Content Include="App_Data\wiki\Pages\Test\PPTSAP.xml" />
+    <Content Include="App_Data\wiki\Pages\Test\SolutionArticlePageDecodingTest.xml" />
+    <Content Include="App_Data\wiki\Pages\Test\Wizard\WizardStepDecision_FlashingLights.xml" />
+    <Content Include="App_Data\wiki\Pages\Test\Wizard\WizardStepEnd_Failed.xml" />
+    <Content Include="App_Data\wiki\Pages\Test\Wizard\WizardStepEnd_Success.xml" />
+    <Content Include="App_Data\wiki\Pages\Test\Wizard\WizardSteps.xml" />
+    <Content Include="App_Data\wiki\Pages\Test\Wizard\WizardStepSolutionList_FlashingLights.xml" />
+    <Content Include="App_Data\wiki\Pages\Test\Wizard\WizardStepSolution_1.xml" />
+    <Content Include="App_Data\wiki\Pages\Test\Wizard\WizardStepSolution_2.xml" />
+    <Content Include="App_Data\wiki\Pages\Test\Wizard\WizardStepSolution_3.xml" />
+    <Content Include="App_Data\wiki\Pages\Test\Wizard\WizardStepSolution_4.xml" />
+    <Content Include="App_Data\wiki\Pages\Tools\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Video\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Video\reddahArch2.xml" />
+    <Content Include="App_Data\wiki\ppt\Support.pptx" />
+    <Content Include="App_Data\wiki\ppt\supportreddahcom.pps" />
     <Content Include="Content\app\ckeditor\adapters\jquery.js" />
     <Content Include="Content\app\ckeditor\build-config.js" />
     <Content Include="Content\app\ckeditor\ckeditor.js" />
@@ -444,11 +531,8 @@
     <Content Include="Content\app\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
     <Content Include="Content\app\ckeditor\plugins\pastefromword\filter\default.js" />
     <Content Include="Content\app\ckeditor\plugins\preview\preview.html" />
-    <Content Include="Content\app\ckeditor\plugins\scayt\CHANGELOG.md" />
     <Content Include="Content\app\ckeditor\plugins\scayt\dialogs\options.js" />
     <Content Include="Content\app\ckeditor\plugins\scayt\dialogs\toolbar.css" />
-    <Content Include="Content\app\ckeditor\plugins\scayt\LICENSE.md" />
-    <Content Include="Content\app\ckeditor\plugins\scayt\README.md" />
     <Content Include="Content\app\ckeditor\plugins\showblocks\images\block_address.png" />
     <Content Include="Content\app\ckeditor\plugins\showblocks\images\block_blockquote.png" />
     <Content Include="Content\app\ckeditor\plugins\showblocks\images\block_div.png" />
@@ -572,8 +656,6 @@
     <Content Include="Content\app\ckeditor\plugins\wsc\dialogs\wsc.css" />
     <Content Include="Content\app\ckeditor\plugins\wsc\dialogs\wsc.js" />
     <Content Include="Content\app\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
-    <Content Include="Content\app\ckeditor\plugins\wsc\LICENSE.md" />
-    <Content Include="Content\app\ckeditor\plugins\wsc\README.md" />
     <Content Include="Content\app\ckeditor\samples\css\samples.css" />
     <Content Include="Content\app\ckeditor\samples\img\github-top.png" />
     <Content Include="Content\app\ckeditor\samples\img\header-bg.png" />
@@ -588,7 +670,6 @@
     <Content Include="Content\app\ckeditor\samples\old\appendto.html" />
     <Content Include="Content\app\ckeditor\samples\old\assets\inlineall\logo.png" />
     <Content Include="Content\app\ckeditor\samples\old\assets\outputxhtml\outputxhtml.css" />
-    <Content Include="Content\app\ckeditor\samples\old\assets\posteddata.php" />
     <Content Include="Content\app\ckeditor\samples\old\assets\sample.jpg" />
     <Content Include="Content\app\ckeditor\samples\old\assets\uilanguages\languages.js" />
     <Content Include="Content\app\ckeditor\samples\old\datafiltering.html" />
@@ -596,7 +677,6 @@
     <Content Include="Content\app\ckeditor\samples\old\dialog\dialog.html" />
     <Content Include="Content\app\ckeditor\samples\old\divreplace.html" />
     <Content Include="Content\app\ckeditor\samples\old\enterkey\enterkey.html" />
-    <Content Include="Content\app\ckeditor\samples\old\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="Content\app\ckeditor\samples\old\htmlwriter\assets\outputforflash\outputforflash.swf" />
     <Content Include="Content\app\ckeditor\samples\old\htmlwriter\assets\outputforflash\swfobject.js" />
     <Content Include="Content\app\ckeditor\samples\old\htmlwriter\outputforflash.html" />
@@ -612,7 +692,6 @@
     <Content Include="Content\app\ckeditor\samples\old\replacebycode.html" />
     <Content Include="Content\app\ckeditor\samples\old\sample.css" />
     <Content Include="Content\app\ckeditor\samples\old\sample.js" />
-    <Content Include="Content\app\ckeditor\samples\old\sample_posteddata.php" />
     <Content Include="Content\app\ckeditor\samples\old\tabindex.html" />
     <Content Include="Content\app\ckeditor\samples\old\toolbar\toolbar.html" />
     <Content Include="Content\app\ckeditor\samples\old\uicolor.html" />
@@ -620,11 +699,7 @@
     <Content Include="Content\app\ckeditor\samples\old\wysiwygarea\fullpage.html" />
     <Content Include="Content\app\ckeditor\samples\old\xhtmlstyle.html" />
     <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\css\fontello.css" />
-    <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\font\config.json" />
-    <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\font\fontello.eot" />
     <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\font\fontello.svg" />
-    <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\font\fontello.ttf" />
-    <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\font\LICENSE.txt" />
     <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\index.html" />
     <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\js\abstracttoolbarmodifier.js" />
@@ -634,7 +709,6 @@
     <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\lib\codemirror\codemirror.css" />
     <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\lib\codemirror\codemirror.js" />
     <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\lib\codemirror\javascript.js" />
-    <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\lib\codemirror\neo.css" />
     <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\lib\codemirror\show-hint.css" />
     <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\lib\codemirror\show-hint.js" />
@@ -661,167 +735,15 @@
     <Content Include="Content\app\ckeditor\skins\moono\images\lock.png" />
     <Content Include="Content\app\ckeditor\skins\moono\images\refresh.png" />
     <Content Include="Content\app\ckeditor\skins\moono\images\spinner.gif" />
-    <Content Include="Content\app\ckeditor\skins\moono\readme.md" />
     <Content Include="Content\app\ckeditor\styles.js" />
+    <Content Include="Content\app\collapser.html" />
     <Content Include="Content\app\login.js" />
-    <Content Include="Content\Compass\Images\StartMenu.png" />
-    <Content Include="Content\Compass\Pages\Apps\Reddah\FamilyPage.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\Reddah\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\Reddah\Setup\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\Reddah\Tips\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\Reddah\Tutorial\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\Demo\BailinBlocks\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\Demo\Reddah\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\Demo\ChineseCheckers\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\Demo\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\DistributedTest\FilterTestCases\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\DistributedTest\LoadTestBits\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\DistributedTest\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\Local Test\Filtertestcases\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\Local Test\LoadTestBits\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\Local Test\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Apps\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\BrowseNavigate.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Top.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Test\PPTSAP.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Test\Wizard\WizardStepSolution_4.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Test\Wizard\WizardStepSolution_3.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Test\Wizard\WizardStepEnd_Failed.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Test\Wizard\WizardStepEnd_Success.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Test\Wizard\WizardStepSolution_2.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Test\Wizard\WizardStepSolution_1.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Test\Wizard\WizardStepSolutionList_FlashingLights.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Test\Wizard\WizardStepDecision_FlashingLights.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Test\Wizard\WizardSteps.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Download.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Download\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Games\BailinBlocks-Kinect.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Games\BailinBlocks-WindowsPhone.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Games\BailinBlocks\Free\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Games\BailinBlocks\Full\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Games\BailinBlocks\Lover\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Games\BailinBlocks\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Games\BailinBlocks\Summer\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Games\Kinect\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Games\Mango\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Games\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Games\WindowsPhone8\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Photos\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Test\FamilyPageSoftDeflectionDecodingTest.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Test\NavigationListDecodingTest.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Test\SolutionArticlePageDecodingTest.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\SolutionArticlePageShortSD.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\SolutionArticlePageShortHD.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\FamilyPageSoftDeflection.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\FamilyPageHardDeflection.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Tools\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Video\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\Video\reddahArch2.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Content\Images\ambassador.png" />
+    <Content Include="Content\Images\contact_us.png" />
+    <Content Include="Content\Images\forum.png" />
+    <Content Include="Content\Images\like-dislike.png" />
     <Content Include="Content\Images\noimage.jpg" />
+    <Content Include="Content\Images\wiki\pdf_icon25x25.png" />
     <Content Include="Content\Site.mobile.css" />
     <Content Include="Content\Images\close_icon.png" />
     <Content Include="Content\Images\exlogin\facebook.png" />
@@ -838,15 +760,12 @@
     <Content Include="Content\最新.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Content\New.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\Images\menu_shadow.png" />
     <Content Include="Content\Images\running_static25x25.png" />
     <Content Include="Content\Images\step_number_border_25x25.png" />
     <Content Include="Content\Images\reddahppt.jpg" />
     <Content Include="Content\js\Wizard.js" />
-    <Content Include="Content\Hot.xml">
+    <Content Include="App_Data\hot.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Wizard.css" />
@@ -887,20 +806,6 @@
     <Content Include="Content\Images\ContactSupport\Videos.png" />
     <Content Include="Content\Images\glyph-pipe.png" />
     <Content Include="Content\Images\ErrorAvatar.png" />
-    <Content Include="Content\Compass\Images\ambassador.png" />
-    <Content Include="Content\Compass\Images\Reddah1.png" />
-    <Content Include="Content\Compass\Images\Reddah2.png" />
-    <Content Include="Content\Compass\Images\Reddah3.png" />
-    <Content Include="Content\Compass\Images\Reddah4.png" />
-    <Content Include="Content\Compass\Images\ReddahDemo.png" />
-    <Content Include="Content\Compass\Images\contact_us.png" />
-    <Content Include="Content\Compass\Images\twitter.png" />
-    <Content Include="Content\Compass\Pages\SolutionArticlePageShort.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\FamilyPageShort.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\Images\anonymous1.png" />
     <Content Include="Content\Images\Deflection\bottom_border.png" />
     <Content Include="Content\Images\Deflection\bottom_left_corner.png" />
@@ -910,17 +815,6 @@
     <Content Include="Content\Images\Deflection\top_border.png" />
     <Content Include="Content\Images\Deflection\top_left_corner.png" />
     <Content Include="Content\Images\Deflection\top_right_corner.png" />
-    <Content Include="Content\Compass\Images\forum.png" />
-    <Content Include="Content\Compass\Images\pdf_icon25x25.png" />
-    <Content Include="Content\Compass\Pages\ReddahDemo_LocalMachine.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\ReddahDemo_Distributed.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\FamilyPage.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\Generic.css" />
     <Content Include="Content\Generic.mobile.css" />
     <Content Include="Content\Generic.tablet.css" />
@@ -994,15 +888,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="Content\Compass\Pages\SolutionArticlePage.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\HomePage.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\Compass\Pages\NavigationList.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Database\DropAll.sql" />
     <Content Include="Database\Setup.sql" />
     <Content Include="favicon.ico" />
@@ -1024,6 +909,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Articles\ArticleList.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Views\Home\HomePageV1.mobile.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -1082,9 +970,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Content\Compass\Templates\" />
-    <Folder Include="Content\Compass\Videos\" />
+    <Folder Include="App_Data\wiki\Templates\" />
+    <Folder Include="App_Data\wiki\Videos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1193,17 +1080,24 @@
     <Content Include="Views\Shared\Controls\WizardStep.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Compass\ppt\Support.pptx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\Compass\ppt\supportreddahcom.pps" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\Controls\Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\app\ckeditor\plugins\scayt\CHANGELOG.md" />
+    <Content Include="Content\app\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="Content\app\ckeditor\plugins\scayt\README.md" />
+    <Content Include="Content\app\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="Content\app\ckeditor\plugins\wsc\README.md" />
+    <Content Include="Content\app\ckeditor\samples\old\assets\posteddata.php" />
+    <Content Include="Content\app\ckeditor\samples\old\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="Content\app\ckeditor\samples\old\sample_posteddata.php" />
+    <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\font\config.json" />
+    <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\font\fontello.eot" />
+    <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\font\fontello.ttf" />
+    <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
+    <Content Include="Content\app\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
+    <Content Include="Content\app\ckeditor\skins\moono\readme.md" />
     <None Include="Properties\PublishProfiles\Reddah.com.pubxml" />
-    <Content Include="Views\Articles\TopList.cshtml" />
     <EntityDeploy Include="ReddahModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ReddahModel.Designer.cs</LastGenOutput>
