@@ -101,7 +101,7 @@ div.postModuleLiner
 
 div.rightBox {
     float: right;
-    width: 480px;
+    width: 360px;
 }
 
 div.postClear {
@@ -135,4 +135,46 @@ div.postClear {
 .orgArticle img {
     max-width: 100%;
     height: auto !important;
+}
+
+/*upcoming link box*/
+.upcomingLinks {
+    border: 1px solid #BDBEC1;
+    position:relative;
+    overflow:hidden;
+    padding: 10px 0;
+}
+
+.upcomingPost {
+    overflow:hidden;
+}
+
+.nextprev {
+    margin:10px 10px 10px 0;
+    right:0;
+    top:0;
+    position: absolute;
+    vertical-align: top;
+}
+
+.nextprevHelp {
+    color: #429658;
+    margin: 0px 10px 5px 0;
+    position: absolute;
+    right: -1px;
+    bottom: 0px;
+    z-index: 1;
+    cursor:help;
+}
+
+.buttonPrevNext {
+   width: 25px;
+   height: 25px;
+   border: 1px solid #BDBEC1;
+   cursor:pointer;
+}
+
+/*treding subreddahs*/
+.trendingSubs {
+    margin: 5px 0;
 }

@@ -757,7 +757,7 @@ div.ContactUsModule h2
 
 div.HomePageRightBoxModule
 {
-    margin-left: 42px;
+    margin-left: 10px;
 }
 
 div.HomePageRightBoxModule img
@@ -1600,16 +1600,20 @@ div.AssistancePopupHeader
 input:-moz-placeholder { color:#BDBEC1; }
 
 .loginUserName, .loginPassword {
-    width: 180px;
+    width: 120px;
     border: 1px solid #BDBEC1;
 }
 
 .loginTable {
     border: 1px solid #BDBEC1;
     margin: 0 5px;
-    margin-left:43px;
+    margin-left: 11px;
     margin-bottom:20px;
     padding: 10px;
+}
+
+.loginTable td {
+    padding-right:10px;
 }
 
 .loginLoading {
@@ -1623,6 +1627,12 @@ input:-moz-placeholder { color:#BDBEC1; }
     margin: 5px;
     vertical-align: middle;
     text-align: center;
+}
+
+.loginRememberMe, .loginReset label {
+    font-size: 12px;
+    vertical-align:middle;
+    display: inline-block;
 }
 
 .loginReset {

@@ -739,6 +739,8 @@
     <Content Include="Content\app\collapser.html" />
     <Content Include="Content\app\login.js" />
     <Content Include="Content\Images\ambassador.png" />
+    <Content Include="Content\Images\arrow-left.png" />
+    <Content Include="Content\Images\arrow-right.png" />
     <Content Include="Content\Images\contact_us.png" />
     <Content Include="Content\Images\forum.png" />
     <Content Include="Content\Images\like-dislike.png" />

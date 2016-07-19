@@ -4,12 +4,6 @@
     var locale = CultureInfo.CurrentUICulture.Name;
     int index = 1;
 }
-@functions{
-    public string GetColspan(string imageUrl)
-    {
-        return String.IsNullOrEmpty(imageUrl) ? "2" : "1";
-    }
-}
 <link href="/Content/Post.css" rel="stylesheet" />
 @*<h1 class="HomePageModular">@Model.ArticleTitle</h1>*@
 <div class="rightBox">
@@ -30,6 +24,8 @@
                             <td>
                                 <a href="/@locale/@rightBoxModule.ArticleUrl"><img alt="@rightBoxModule.ImageUrl" src="@rightBoxModule.ImageUrl"/></a>
                             </td>
+                        </tr>
+                        <tr>
                             <td class="rightBoxModule">
                                 <h2><a href="/@locale/@rightBoxModule.ArticleUrl">@rightBoxModule.Title</a></h2>
                                 <div>@rightBoxModule.Description</div>
@@ -43,6 +39,55 @@
     }
 </div>
 <div>
+    <div class="upcomingLinks">
+        @foreach (var article in Model.Articles)
+        {
+            if (!String.IsNullOrEmpty(article.Title) && !String.IsNullOrEmpty(article.Abstract) && !String.IsNullOrEmpty(article.ArticleUrl))
+            {
+                <div class="upcomingPost">
+                    <span class="voterank"></span>
+                    <div class="votecell">
+                        <div class="vote">
+                            @if (Request.IsAuthenticated){
+                            <a class="vote-up-off" ng-click="vote(@article.Id, 'up', @article.Count)">up vote</a>
+                            <span itemprop="upvoteCount" class="vote-count-post" id="vote-count-post-@article.Id">@article.Count</span>
+                            <a class="vote-down-off" ng-click="vote(@article.Id, 'down', @article.Count)">down vote</a>}
+                            else{
+                            <a class="vote-up-off" ng-click="showPanel()">up vote</a>
+                            <span itemprop="upvoteCount" class="vote-count-post">@article.Count</span>
+                            <a class="vote-down-off" ng-click="showPanel()">down vote</a>
+                            }
+                        </div>
+                    </div>
+                    <div>
+                        @if (!String.IsNullOrEmpty(article.ImageUrl)) 
+                        {
+                        <div class="listImage">
+                            <div class="listImageWrapper">
+                                <img ng-click="showImage(@index)" class="BrowsePreviewImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="193" src="@article.ImageUrl" alt="picture">
+                            </div>
+                        </div>
+                        }
+                        
+                        <h2><a ng-click="toggleArticle(@index)">@Html.Raw(article.Title)</a> <span class="listInfo">(source)</span></h2>
+                        <div>@Html.Raw(article.Abstract)</div>
+                        <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@article.GroupName">/r/@article.GroupName</a></div>
+                        <div class="listInfo">@article.Comments comments share save hide report</div>
+                        <div class="postClear"></div>
+                        <img id="org_image_@index" class="orgImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="100%" src="@article.ImageUrl" alt="picture">
+                        <div id="org_article_@index" class="orgArticle">@Html.Raw(article.Content)</div>
+                    </div>
+                </div>
+            }
+            break;
+        }
+        <div class="nextprev">
+            <img class="buttonPrevNext" src="/content/images/arrow-left.png" />
+            <img class="buttonPrevNext" src="/content/images/arrow-right.png" />
+        </div>
+        <div class="nextprevHelp">what's this?</div>    
+    </div>
+    <div class="trendingSubs">trending subreddahs <a>/r/CrazyIdeas /r/StrangerThings /r/BetterEveryLoop /r/MonsterHunter /r/buildapc 44 comments</a></div>
     @foreach (var article in Model.Articles)
     {
         if (!String.IsNullOrEmpty(article.Title) && !String.IsNullOrEmpty(article.Abstract) && !String.IsNullOrEmpty(article.ArticleUrl))
