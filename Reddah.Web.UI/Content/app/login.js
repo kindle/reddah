@@ -86,7 +86,7 @@
         loginSvc.vote($scope.voteModel).then(function (data) {
             if (data.success == true) {
                 var newCount = value == "up" ? orgCount + 1 : orgCount - 1;
-                $('span#vote-count-post-' + articleId).text(newCount);
+                $('.post span#vote-count-post-' + articleId).text(newCount);
             }
             else {
                 var str = '';

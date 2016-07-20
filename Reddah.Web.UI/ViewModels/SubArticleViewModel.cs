@@ -18,8 +18,9 @@
             //Folders = GetFolderPreviews(path);
             Items = GetItemPreviews(sub);
             Articles = GetArticlePreviews();
-            NextPrevBox = MenuFactory.GetItemPreviews("nextprevbox");
+            NextPrevBox = MenuFactory.GetItemPreviews("nextprevbox", 10);
             RightBoxModules = GetArticlePreviews1("/Root/HomePageModularRightContent/HomePageRightBoxModule");
+            TrendingSubs = new SubArticleViewModel().GetTrendingSubs();
         }
 
         //for random sub
@@ -31,6 +32,7 @@
         public List<ArticlePreview> NextPrevBox { get; set; }
         public List<ArticlePreview> Folders { get; set; }
         public List<ArticlePreview> Items { get; set; }
+        public List<string> TrendingSubs { get; set; }
 
         public string GetRandomSub() 
         {
@@ -46,6 +48,28 @@
 
             return subName;
         }
+
+        public List<string> GetTrendingSubs()
+        {
+            TrendingSubs = new List<string>();
+
+            using (var db = new reddahEntities1())
+            {
+                var q = db.Articles
+                   .GroupBy(x => x.GroupName)
+                   .Select(g => new { GroupName = g.Key, Count = g.Count() })
+                   .OrderByDescending(i => i.Count)
+                   .Take(5);
+
+                foreach (var item in q)
+                {
+                    TrendingSubs.Add(item.GroupName);
+                }
+            }
+
+            return TrendingSubs;
+        }
+
         private List<ArticlePreview> GetItemPreviews(string sub)
         {
             var apList = new List<ArticlePreview>();

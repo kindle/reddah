@@ -43,7 +43,7 @@
     {
         if (!String.IsNullOrEmpty(article.Title) && !String.IsNullOrEmpty(article.Abstract) && !String.IsNullOrEmpty(article.ArticleUrl))
         {
-            <div>
+            <div class="post">
                 <span class="voterank">@index</span>
                 <div class="votecell">
                     <div class="vote">
@@ -63,11 +63,11 @@
                     {
                     <div class="listImage">
                         <div class="listImageWrapper">
-                            <img ng-click="showImage(@index)" class="BrowsePreviewImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="193" src="@article.ImageUrl" alt="picture">
+                            <img ng-click="showImage('post', @index)" class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="@article.ImageUrl" alt="picture">
                         </div>
                     </div>
                     }
-                    <h2><a ng-click="toggleArticle(@index)">@Html.Raw(article.Title)</a> <span class="listInfo">(source)</span></h2>
+                    <h2><a ng-click="toggleArticle('post', @index)">@Html.Raw(article.Title)</a> <span class="listInfo">(source)</span></h2>
                     <div>@Html.Raw(article.Abstract)</div>
                     <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@article.GroupName">/r/@article.GroupName</a></div>
                     <div class="listInfo">@article.Comments comments share save hide report</div>

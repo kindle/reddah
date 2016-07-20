@@ -5,6 +5,26 @@
     int index = 1;
     int nextPrevIndex = 1;
 }
+@functions{
+    public string GetNextPageNo()
+    {
+        var pageNo = Request.Params["page"];
+        int newPageNo = 1;
+        if (string.IsNullOrWhiteSpace(pageNo))
+        {
+            newPageNo = 2;
+        }
+        else
+        {
+            if(int.TryParse(pageNo, out newPageNo))
+            {
+                newPageNo += 1;
+            }
+        }
+
+        return newPageNo.ToString();
+    }
+}
 <link href="/Content/Post.css" rel="stylesheet" />
 @*<h1 class="HomePageModular">@Model.ArticleTitle</h1>*@
 <div class="rightBox">
@@ -39,7 +59,7 @@
         }
     }
 </div>
-<div>
+<div class="postBlock">
     <div class="upcomingLinks" ng-controller="nextprevbox">
         @foreach (var article in Model.NextPrevBox)
         {
@@ -65,7 +85,7 @@
                         {
                         <div class="listImage">
                             <div class="listImageWrapper">
-                                <img ng-click="showImage('upcomingLinks', @nextPrevIndex)" class="BrowsePreviewImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="193" src="@article.ImageUrl" alt="picture">
+                                <img ng-click="showImage('upcomingLinks', @nextPrevIndex)" class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="@article.ImageUrl" alt="picture">
                             </div>
                         </div>
                         }
@@ -88,7 +108,11 @@
         </div>
         <div class="nextprevHelp" title="This area shows new and upcoming links. Vote on links here to help them become popular, and click the forwards and backwards buttons to view more.">what's this?</div>    
     </div>
-    <div class="trendingSubs">trending subreddahs <a>/r/CrazyIdeas /r/StrangerThings /r/BetterEveryLoop /r/MonsterHunter /r/buildapc 44 comments</a></div>
+    <div class="trendingSubs">trending subreddahs 
+        @foreach(var trendingSub in Model.TrendingSubs) {
+            <a href="@locale/r/@trendingSub">/r/@trendingSub</a>
+        }
+    </div>
     <div class="postClear"></div>
     @foreach (var article in Model.Articles)
     {
@@ -114,7 +138,7 @@
                     {
                     <div class="listImage">
                         <div class="listImageWrapper">
-                            <img ng-click="showImage('post', @index)" class="BrowsePreviewImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="193" src="@article.ImageUrl" alt="picture">
+                            <img ng-click="showImage('post', @index)" class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="@article.ImageUrl" alt="picture">
                         </div>
                     </div>
                     }
@@ -135,4 +159,5 @@
     @*@{
         Html.RenderPartial("~/views/Shared/Controls/AssistanceModule.cshtml", 1);
     }*@
+    View more: <a href="?page=@GetNextPageNo()">Next</a> or try a <a href="/@CultureInfo.CurrentUICulture.Name/random">Random Subreddah</a>
 </div> 

@@ -102,7 +102,7 @@ div.postModuleLiner
 
 div.rightBox {
     float: right;
-    width: 360px;
+    width: 210px;
 }
 
 div.postClear {
@@ -184,4 +184,9 @@ div.postClear {
 /*treding subreddahs*/
 .trendingSubs {
     margin: 5px 0;
+}
+
+.postBlock a {
+    color: #107C10;
+    cursor:pointer;
 }

@@ -1600,7 +1600,7 @@ div.AssistancePopupHeader
 input:-moz-placeholder { color:#BDBEC1; }
 
 .loginUserName, .loginPassword {
-    width: 120px;
+    width: 100%;
     border: 1px solid #BDBEC1;
 }
 
@@ -1609,11 +1609,16 @@ input:-moz-placeholder { color:#BDBEC1; }
     margin: 0 5px;
     margin-left: 11px;
     margin-bottom:20px;
-    padding: 10px;
+    padding: 5px;
 }
 
 .loginTable td {
     padding-right:10px;
+}
+
+.loginTable input {
+    margin: 0;
+    padding: 2px;
 }
 
 .loginLoading {
@@ -1624,15 +1629,16 @@ input:-moz-placeholder { color:#BDBEC1; }
 
 .loginRememberMe {
     float: left;
-    margin: 5px;
+    margin: 10px 0;
     vertical-align: middle;
     text-align: center;
 }
 
-.loginRememberMe, .loginReset label {
+.loginRememberMe label, .loginReset label {
     font-size: 12px;
-    vertical-align:middle;
+    vertical-align: middle;
     display: inline-block;
+    margin-top:-7px;
 }
 
 .loginReset {
@@ -1643,7 +1649,8 @@ input:-moz-placeholder { color:#BDBEC1; }
 
 .loginButton {
     float: right;
-    margin: 5px;
+    margin-right: -5px !important;
+    margin-top: 5px !important;
 }
 
 .loginError {

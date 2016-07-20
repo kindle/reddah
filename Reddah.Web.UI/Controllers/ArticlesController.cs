@@ -11,7 +11,7 @@
 
     public class ArticlesController : BaseController
     {
-        public ActionResult Menu(string path, string count)
+        public ActionResult Menu(string path, string page)
         {
             if (!System.IO.File.Exists(HttpContext.Server.MapPath("~/App_Data/" + path + ".xml")))
             {
@@ -22,8 +22,11 @@
                 var PresentationTemplate = GetContentType(path);
 
                 var presentationView = "~/Views/Articles/ArticleList.cshtml";
+
+                int pageNo = 0;
+                int.TryParse(page, out pageNo);
                 
-                return View(presentationView, new MenuArticleViewModel(path, PresentationTemplate));
+                return View(presentationView, new MenuArticleViewModel(path, PresentationTemplate, pageNo));
             }
         }
 
