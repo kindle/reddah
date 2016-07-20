@@ -1600,7 +1600,7 @@ div.AssistancePopupHeader
 input:-moz-placeholder { color:#BDBEC1; }
 
 .loginUserName, .loginPassword {
-    width: 100%;
+    width: 98%;
     border: 1px solid #BDBEC1;
 }
 

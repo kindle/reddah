@@ -7,6 +7,7 @@
     using Reddah.Web.UI.Models;
     using Reddah.Web.UI.Utility;
     using System.Web;
+    using System;
 
     public class SubArticleViewModel
     {
@@ -14,17 +15,37 @@
 
         public SubArticleViewModel(string sub, int count)
         {
-            
             //Folders = GetFolderPreviews(path);
             Items = GetItemPreviews(sub);
             Articles = GetArticlePreviews();
+            NextPrevBox = MenuFactory.GetItemPreviews("nextprevbox");
             RightBoxModules = GetArticlePreviews1("/Root/HomePageModularRightContent/HomePageRightBoxModule");
         }
 
+        //for random sub
+        public SubArticleViewModel()
+        {
+        }
+
         public List<ArticlePreview> Articles { get; set; }
+        public List<ArticlePreview> NextPrevBox { get; set; }
         public List<ArticlePreview> Folders { get; set; }
         public List<ArticlePreview> Items { get; set; }
 
+        public string GetRandomSub() 
+        {
+            string subName = string.Empty;
+
+            using (var db = new reddahEntities1())
+            {
+                var allSubs = db.Groups.AsEnumerable();
+                              
+                var randomGroup = allSubs.ElementAtOrDefault(new Random().Next() % allSubs.Count());
+                subName = randomGroup.Name;
+            }
+
+            return subName;
+        }
         private List<ArticlePreview> GetItemPreviews(string sub)
         {
             var apList = new List<ArticlePreview>();

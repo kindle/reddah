@@ -70,13 +70,13 @@
         $('div#BroswerOpacify').hide();
         $('div#LoginRegisterPanel').hide();
     }
-    $scope.showImage = function (index) {
-        if ($('img#org_image_' + index).attr("src") === "/content/images/noimage.jpg")
+    $scope.showImage = function (box, index) {
+        if ($('.' + box +' img#org_image_' + index).attr("src") === "/content/images/noimage.jpg")
             return;
-        $('img#org_image_'+index).toggle();
+        $('.' + box +' img#org_image_'+index).toggle();
     }
-    $scope.toggleArticle = function (index) {
-        $('div#org_article_' + index).toggle();
+    $scope.toggleArticle = function (box, index) {
+        $('.' + box + ' div#org_article_' + index).toggle();
     }
     $scope.vote = function (articleId, value, orgCount) {
         $scope.voteModel = {
@@ -97,6 +97,32 @@
             }
         })
     }
+}])
+.controller("nextprevbox", ['$scope', function ($scope) {
+    $scope.currentIndex = 1;
+    $scope.next = function (total) {
+        if ($scope.currentIndex < total) {
+            $scope.currentIndex++;
+        }
+        else {
+            $scope.currentIndex = 1;
+        }
+        $scope.showPost();
+    }
+    $scope.prev = function (total) {
+        if ($scope.currentIndex > 1) {
+            $scope.currentIndex--;
+        }
+        else
+        {
+            $scope.currentIndex = total;
+        }
+        $scope.showPost();
+    }
+    $scope.showPost = function () {
+        $('div.upcomingPost').hide();
+        $('div#upcomingPost-' + $scope.currentIndex).show();
+    };
 }])
 .factory("loginSvc", ['$http', '$q', function ($http, $q) {
     return {

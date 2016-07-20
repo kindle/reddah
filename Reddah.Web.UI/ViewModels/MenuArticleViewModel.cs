@@ -14,7 +14,6 @@
         { 
             var apList = new List<ArticlePreview>();
 
-            //if hot
             using (var db = new reddahEntities1())
             {
                 if (type == "hot")
@@ -74,7 +73,34 @@
                 else if (type == "rising")
                 {
                     var query = from b in db.Articles
-                                orderby (b.Up-b.Down) descending
+                                orderby (b.Up-b.Down) descending, b.Count descending
+                                select b;
+
+                    foreach (var item in query)
+                    {
+                        var ap = new ArticlePreview();
+                        ap.Id = item.Id;
+                        ap.Title = item.Title;
+                        ap.Abstract = item.Abstract;
+                        ap.Description = item.Content;
+                        ap.ImageUrl = Helpers.GetFirstImageSrc(item.Content);
+                        ap.ArticleUrl = item.Title;
+                        ap.Comments = item.Count ?? 0;
+                        ap.Up = item.Up ?? 0;
+                        ap.Down = item.Down ?? 0;
+                        ap.Count = ap.Up - ap.Down;
+                        ap.CreatedOn = Helpers.TimeAgo(item.CreatedOn);
+                        ap.UserName = item.UserName;
+                        ap.GroupName = item.GroupName;
+                        ap.Content = item.Content;
+
+                        apList.Add(ap);
+                    }
+                }
+                else if (type == "controversial")
+                {
+                    var query = from b in db.Articles
+                                orderby (b.Up - b.Down) ascending, (b.Up + b.Down) descending
                                 select b;
 
                     foreach (var item in query)
@@ -101,7 +127,91 @@
                 else if (type == "top")
                 {
                     var query = from b in db.Articles
-                                orderby (b.Up - b.Down) descending
+                                orderby (b.Up + b.Down) descending
+                                select b;
+
+                    foreach (var item in query)
+                    {
+                        var ap = new ArticlePreview();
+                        ap.Id = item.Id;
+                        ap.Title = item.Title;
+                        ap.Abstract = item.Abstract;
+                        ap.Description = item.Content;
+                        ap.ImageUrl = Helpers.GetFirstImageSrc(item.Content);
+                        ap.ArticleUrl = item.Title;
+                        ap.Comments = item.Count ?? 0;
+                        ap.Up = item.Up ?? 0;
+                        ap.Down = item.Down ?? 0;
+                        ap.Count = ap.Up - ap.Down;
+                        ap.CreatedOn = Helpers.TimeAgo(item.CreatedOn);
+                        ap.UserName = item.UserName;
+                        ap.GroupName = item.GroupName;
+                        ap.Content = item.Content;
+
+                        apList.Add(ap);
+                    }
+                }
+                else if (type == "gilded")
+                {
+                    var query = from b in db.Articles
+                                orderby b.Up descending
+                                select b;
+
+                    foreach (var item in query)
+                    {
+                        var ap = new ArticlePreview();
+                        ap.Id = item.Id;
+                        ap.Title = item.Title;
+                        ap.Abstract = item.Abstract;
+                        ap.Description = item.Content;
+                        ap.ImageUrl = Helpers.GetFirstImageSrc(item.Content);
+                        ap.ArticleUrl = item.Title;
+                        ap.Comments = item.Count ?? 0;
+                        ap.Up = item.Up ?? 0;
+                        ap.Down = item.Down ?? 0;
+                        ap.Count = ap.Up - ap.Down;
+                        ap.CreatedOn = Helpers.TimeAgo(item.CreatedOn);
+                        ap.UserName = item.UserName;
+                        ap.GroupName = item.GroupName;
+                        ap.Content = item.Content;
+
+                        apList.Add(ap);
+                    }
+                }
+                //todo
+                else if (type == "promoted")
+                {
+                    var query = from b in db.Articles
+                                //where is promoted.
+                                orderby b.Id descending
+                                select b;
+
+                    foreach (var item in query)
+                    {
+                        var ap = new ArticlePreview();
+                        ap.Id = item.Id;
+                        ap.Title = item.Title;
+                        ap.Abstract = item.Abstract;
+                        ap.Description = item.Content;
+                        ap.ImageUrl = Helpers.GetFirstImageSrc(item.Content);
+                        ap.ArticleUrl = item.Title;
+                        ap.Comments = item.Count ?? 0;
+                        ap.Up = item.Up ?? 0;
+                        ap.Down = item.Down ?? 0;
+                        ap.Count = ap.Up - ap.Down;
+                        ap.CreatedOn = Helpers.TimeAgo(item.CreatedOn);
+                        ap.UserName = item.UserName;
+                        ap.GroupName = item.GroupName;
+                        ap.Content = item.Content;
+
+                        apList.Add(ap);
+                    }
+                }
+                else if (type == "nextprevbox")
+                {
+                    var query = from b in db.Articles
+                                where b.Up == null && b.Down == null
+                                orderby b.CreatedOn 
                                 select b;
 
                     foreach (var item in query)
@@ -142,10 +252,13 @@
             //Folders = GetFolderPreviews(path);
             Items = MenuFactory.GetItemPreviews(type);
             Articles = GetArticlePreviews(path);
+            NextPrevBox = MenuFactory.GetItemPreviews("nextprevbox");
             RightBoxModules = GetArticlePreviews1("/Root/HomePageModularRightContent/HomePageRightBoxModule");
         }
 
         public List<ArticlePreview> Articles { get; set; }
+        public List<ArticlePreview> NextPrevBox { get; set; }
+
         public List<ArticlePreview> Folders { get; set; }
         public List<ArticlePreview> Items { get; set; }
 

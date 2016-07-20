@@ -35,9 +35,33 @@
                 new { controller = "Articles", action = "Menu", path = "rising" }
             );
 
+            routes.MapLocalizedRoute("Controversial", "{locale}/controversial",
+                new { controller = "Articles", action = "Menu", path = "controversial" }
+            );
+
+            routes.MapLocalizedRoute("Top", "{locale}/top",
+                new { controller = "Articles", action = "Menu", path = "top" }
+            );
+
+            routes.MapLocalizedRoute("Gilded", "{locale}/gilded",
+                new { controller = "Articles", action = "Menu", path = "gilded" }
+            );
+
+            routes.MapLocalizedRoute("Support", "{locale}/support",
+                new { controller = "Support", action = "Index" }
+            );
+
+            routes.MapLocalizedRoute("Promoted", "{locale}/promoted",
+                new { controller = "Articles", action = "Menu", path = "promoted" }
+            );
+
             //subreddah
             routes.MapLocalizedRoute("SubReddah", "{locale}/r/{sub}",
                 new { controller = "Articles", action = "SubReddah" }
+            );
+
+            routes.MapLocalizedRoute("SubRandom", "{locale}/random",
+                new { controller = "Articles", action = "RandomSubReddah" }
             );
 
             //static article
@@ -47,7 +71,10 @@
                 new { controller = "Articles", action = "ClassicArticle" }
             );
 
-
+            //user article
+            routes.MapLocalizedRoute("UserArticles", "{locale}/user/{username}",
+                new { controller = "Articles", action = "User" }
+            );
 
             //tools
             routes.MapRoute(
@@ -70,14 +97,7 @@
                 new { controller = "submit", action = "index" }
             );
 
-            //each has a route: hot/top/new/controversial/promoted
-
-            routes.MapLocalizedRoute(
-                "Support",
-                "{locale}/support",
-                new { controller = "Support", action = "Index" }
-            );
-
+            
             //routes.MapLocalizedRoute(
             //    "ArticleWithLocales",
             //    "{locale}/Articles/{*path}",

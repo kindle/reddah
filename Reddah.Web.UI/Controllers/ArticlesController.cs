@@ -7,6 +7,7 @@
     using Reddah.Web.UI.ViewModels;
     using Reddah.Web.UI.Filters;
     using Reddah.Web.UI.Models;
+    using System.Threading;
 
     public class ArticlesController : BaseController
     {
@@ -20,15 +21,10 @@
             {
                 var PresentationTemplate = GetContentType(path);
 
-                var presentationView = string.Format("~/Views/Articles/articleList.cshtml", PresentationTemplate);
+                var presentationView = "~/Views/Articles/ArticleList.cshtml";
                 
                 return View(presentationView, new MenuArticleViewModel(path, PresentationTemplate));
             }
-        }
-
-        public ActionResult SubReddah(string sub, int count = 25)
-        {
-            return View("~/Views/Articles/articleList.cshtml", new SubArticleViewModel(sub, count));
         }
 
         public ActionResult ClassicArticle(string path, string category, string count)
@@ -113,6 +109,24 @@
             //}
         }
 
+        public ActionResult SubReddah(string sub, int count = 25)
+        {
+            return View("~/Views/Articles/ArticleList.cshtml", new SubArticleViewModel(sub, count));
+        }
+
+        public ActionResult RandomSubReddah()
+        {
+            var subName = new SubArticleViewModel().GetRandomSub();
+            return Redirect(string.Format("/{0}/r/{1}", Thread.CurrentThread.CurrentCulture, subName));
+        }
+
+        public ActionResult User(string userName, string count)
+        {
+            var presentationView = "~/Views/Articles/UserArticleList.cshtml";
+
+            return View(presentationView, new UserArticleViewModel(userName, count));
+        }
+
         public ActionResult Error(string path)
         {
             var presentationView = string.Format("~/Views/Error.cshtml");
@@ -134,7 +148,7 @@
             {
                 try
                 {
-                    //also update user info
+                    //todo: also update user info
                     using (var db = new reddahEntities1())
                     {
                         var article = db.Articles.FirstOrDefault(a => a.Id == model.ArticleId);

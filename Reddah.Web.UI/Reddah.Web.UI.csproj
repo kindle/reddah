@@ -259,6 +259,9 @@
     </Compile>
     <Compile Include="ViewModels\SubArticleViewModel.cs" />
     <Compile Include="ViewModels\DatabaseLogViewModel.cs" />
+    <Compile Include="ViewModels\UserArticleViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WizardStepSolutionListViewModel.cs" />
     <Compile Include="ViewModels\WizardStepDataViewModel.cs" />
@@ -278,6 +281,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\controversial.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\gilded.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\promoted.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\top.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -911,7 +923,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Users.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Views\Articles\ArticleList.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Articles\UserArticleList.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Home\HomePageV1.mobile.cshtml">
@@ -1121,7 +1139,6 @@
     <Content Include="Web.sitemap" />
     <Content Include="Views\Articles\Log.cshtml" />
     <Content Include="Views\Account\VerifyEmail.cshtml" />
-    <Content Include="Views\Account\Users.cshtml" />
     <Content Include="Views\Shared\Controls\LoginRegister\JsonLogin.cshtml" />
     <Content Include="Views\Shared\Controls\LoginRegister\PartialLogin.cshtml" />
     <Content Include="Views\Shared\_Layout.mobile.cshtml" />

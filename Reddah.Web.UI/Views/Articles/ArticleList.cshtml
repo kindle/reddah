@@ -3,6 +3,7 @@
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
     int index = 1;
+    int nextPrevIndex = 1;
 }
 <link href="/Content/Post.css" rel="stylesheet" />
 @*<h1 class="HomePageModular">@Model.ArticleTitle</h1>*@
@@ -39,60 +40,61 @@
     }
 </div>
 <div>
-    <div class="upcomingLinks">
-        @foreach (var article in Model.Articles)
+    <div class="upcomingLinks" ng-controller="nextprevbox">
+        @foreach (var article in Model.NextPrevBox)
         {
             if (!String.IsNullOrEmpty(article.Title) && !String.IsNullOrEmpty(article.Abstract) && !String.IsNullOrEmpty(article.ArticleUrl))
             {
-                <div class="upcomingPost">
+                <div class="upcomingPost" id="upcomingPost-@nextPrevIndex" ng-init="showPost()">
                     <span class="voterank"></span>
                     <div class="votecell">
                         <div class="vote">
                             @if (Request.IsAuthenticated){
                             <a class="vote-up-off" ng-click="vote(@article.Id, 'up', @article.Count)">up vote</a>
-                            <span itemprop="upvoteCount" class="vote-count-post" id="vote-count-post-@article.Id">@article.Count</span>
+                            <span itemprop="upvoteCount" class="vote-count-post" id="vote-count-post-@article.Id">-</span>
                             <a class="vote-down-off" ng-click="vote(@article.Id, 'down', @article.Count)">down vote</a>}
                             else{
                             <a class="vote-up-off" ng-click="showPanel()">up vote</a>
-                            <span itemprop="upvoteCount" class="vote-count-post">@article.Count</span>
+                            <span itemprop="upvoteCount" class="vote-count-post">-</span>
                             <a class="vote-down-off" ng-click="showPanel()">down vote</a>
                             }
                         </div>
                     </div>
-                    <div>
+                    <div class="listInfoBlock">
                         @if (!String.IsNullOrEmpty(article.ImageUrl)) 
                         {
                         <div class="listImage">
                             <div class="listImageWrapper">
-                                <img ng-click="showImage(@index)" class="BrowsePreviewImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="193" src="@article.ImageUrl" alt="picture">
+                                <img ng-click="showImage('upcomingLinks', @nextPrevIndex)" class="BrowsePreviewImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="193" src="@article.ImageUrl" alt="picture">
                             </div>
                         </div>
                         }
                         
-                        <h2><a ng-click="toggleArticle(@index)">@Html.Raw(article.Title)</a> <span class="listInfo">(source)</span></h2>
+                        <h2><a ng-click="toggleArticle('upcomingLinks', @nextPrevIndex)">@Html.Raw(article.Title)</a> <span class="listInfo">(source)</span></h2>
                         <div>@Html.Raw(article.Abstract)</div>
                         <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@article.GroupName">/r/@article.GroupName</a></div>
                         <div class="listInfo">@article.Comments comments share save hide report</div>
                         <div class="postClear"></div>
-                        <img id="org_image_@index" class="orgImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="100%" src="@article.ImageUrl" alt="picture">
-                        <div id="org_article_@index" class="orgArticle">@Html.Raw(article.Content)</div>
+                        <img id="org_image_@nextPrevIndex" class="orgImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="100%" src="@article.ImageUrl" alt="picture">
+                        <div id="org_article_@nextPrevIndex" class="orgArticle">@Html.Raw(article.Content)</div>
                     </div>
                 </div>
             }
-            break;
+            nextPrevIndex++;
         }
         <div class="nextprev">
-            <img class="buttonPrevNext" src="/content/images/arrow-left.png" />
-            <img class="buttonPrevNext" src="/content/images/arrow-right.png" />
+            <img class="buttonPrevNext" src="/content/images/arrow-left.png" ng-click="prev(@Model.NextPrevBox.Count)"/>
+            <img class="buttonPrevNext" src="/content/images/arrow-right.png" ng-click="next(@Model.NextPrevBox.Count)"/>
         </div>
-        <div class="nextprevHelp">what's this?</div>    
+        <div class="nextprevHelp" title="This area shows new and upcoming links. Vote on links here to help them become popular, and click the forwards and backwards buttons to view more.">what's this?</div>    
     </div>
     <div class="trendingSubs">trending subreddahs <a>/r/CrazyIdeas /r/StrangerThings /r/BetterEveryLoop /r/MonsterHunter /r/buildapc 44 comments</a></div>
+    <div class="postClear"></div>
     @foreach (var article in Model.Articles)
     {
         if (!String.IsNullOrEmpty(article.Title) && !String.IsNullOrEmpty(article.Abstract) && !String.IsNullOrEmpty(article.ArticleUrl))
         {
-            <div>
+            <div class="post">
                 <span class="voterank">@index</span>
                 <div class="votecell">
                     <div class="vote">
@@ -112,11 +114,11 @@
                     {
                     <div class="listImage">
                         <div class="listImageWrapper">
-                            <img ng-click="showImage(@index)" class="BrowsePreviewImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="193" src="@article.ImageUrl" alt="picture">
+                            <img ng-click="showImage('post', @index)" class="BrowsePreviewImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="193" src="@article.ImageUrl" alt="picture">
                         </div>
                     </div>
                     }
-                    <h2><a ng-click="toggleArticle(@index)">@Html.Raw(article.Title)</a> <span class="listInfo">(source)</span></h2>
+                    <h2><a ng-click="toggleArticle('post', @index)">@Html.Raw(article.Title)</a> <span class="listInfo">(source)</span></h2>
                     <div>@Html.Raw(article.Abstract)</div>
                     <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@article.GroupName">/r/@article.GroupName</a></div>
                     <div class="listInfo">@article.Comments comments share save hide report</div>
