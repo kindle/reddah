@@ -254,6 +254,7 @@
     <Compile Include="ViewModels\BrowseProductViewModel.cs" />
     <Compile Include="ViewModels\ContactSupport\CategoriesViewModel.cs" />
     <Compile Include="ViewModels\ContactSupport\ProductsViewModel.cs" />
+    <Compile Include="ViewModels\ArticleCommentViewModel.cs" />
     <Compile Include="ViewModels\MenuArticleViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -750,6 +751,7 @@
     <Content Include="Content\app\ckeditor\styles.js" />
     <Content Include="Content\app\collapser.html" />
     <Content Include="Content\app\login.js" />
+    <Content Include="Content\Comment.css" />
     <Content Include="Content\Images\ambassador.png" />
     <Content Include="Content\Images\arrow-left.png" />
     <Content Include="Content\Images\arrow-right.png" />
@@ -924,6 +926,9 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Users.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Articles\ArticleComment.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Articles\ArticleList.cshtml">

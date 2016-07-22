@@ -29,4 +29,15 @@ namespace Reddah.Web.UI.Models
         [Display(Name = "Vote Value")]
         public string Value { get; set; }
     }
+
+    public class ArticleComment 
+    { 
+        public int Id { get; set; }
+        public int ParentId { get; set; }
+        public string Content{get;set;}
+        public string UserName {get;set;}
+        public int Count { get; set; }
+        public int Up { get; set; }
+        public int Down { get; set; }
+    }
 }

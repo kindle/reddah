@@ -50,7 +50,7 @@
           <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Up" Type="int" />
           <Property Name="Down" Type="int" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -195,7 +195,7 @@
           <Property Type="String" Name="Content" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="Up" />
           <Property Type="Int32" Name="Down" />
-          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -295,7 +295,7 @@
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="reddahModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Down" ColumnName="Down" />
                 <ScalarProperty Name="Up" ColumnName="Up" />
                 <ScalarProperty Name="Content" ColumnName="Content" />

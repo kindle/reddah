@@ -1,0 +1,13 @@
+﻿div.articleContent {
+    padding-right: 7em;
+}
+
+div.articleContent img {
+    max-width: 100%;
+    height: auto !important;
+}
+
+div.rightBox {
+    float: right;
+    width: 210px;
+}

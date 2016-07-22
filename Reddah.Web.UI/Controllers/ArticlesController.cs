@@ -8,6 +8,7 @@
     using Reddah.Web.UI.Filters;
     using Reddah.Web.UI.Models;
     using System.Threading;
+    using System.Web;
 
     public class ArticlesController : BaseController
     {
@@ -123,11 +124,26 @@
             return Redirect(string.Format("/{0}/r/{1}", Thread.CurrentThread.CurrentCulture, subName));
         }
 
-        public ActionResult User(string userName, string count)
+        public ActionResult UserArticles(string userName, string count)
         {
             var presentationView = "~/Views/Articles/UserArticleList.cshtml";
 
             return View(presentationView, new UserArticleViewModel(userName, count));
+        }
+
+        public ActionResult Comments(string id, string count)
+        {
+            int articleId = -1;
+            if (int.TryParse(id, out articleId))
+            {
+                var presentationView = "~/Views/Articles/ArticleComment.cshtml";
+
+                return View(presentationView, new ArticleCommentViewModel(articleId, count));
+            }
+            else 
+            {
+                throw new HttpException(404, "Reddah : Article not found");
+            }
         }
 
         public ActionResult Error(string path)

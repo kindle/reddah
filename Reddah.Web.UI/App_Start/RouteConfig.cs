@@ -65,20 +65,23 @@
             );
 
             //static article
-            routes.MapLocalizedRoute(
-                "StaticArticle",
-                "{locale}/r/{*path}",
+            routes.MapLocalizedRoute("StaticArticle", "{locale}/r/{*path}",
                 new { controller = "Articles", action = "ClassicArticle" }
             );
 
             //user article
             routes.MapLocalizedRoute("UserArticles", "{locale}/user/{username}",
-                new { controller = "Articles", action = "User" }
+                new { controller = "Articles", action = "UserArticles" }
+            );
+
+            //comment
+            routes.MapLocalizedRoute("ArticleComment", "{locale}/comments/{id}/{short}",
+                new { controller = "Articles", action = "comments" }
             );
 
             //tools
             routes.MapRoute(
-                "DefaultCaptchaRoute", 
+                "DefaultCaptchaRoute",
                 "{locale}/DefaultCaptcha/Generate",
                 new { controller = "DefaultCaptcha", action = "Generate" }
             );
@@ -89,7 +92,7 @@
                 new { controller = "DefaultCaptcha", action = "Refresh" }
             );
 
-            
+
 
             routes.MapLocalizedRoute(
                 "Submit",
@@ -97,14 +100,14 @@
                 new { controller = "submit", action = "index" }
             );
 
-            
+
             //routes.MapLocalizedRoute(
             //    "ArticleWithLocales",
             //    "{locale}/Articles/{*path}",
             //    new { controller = "Articles", action = "ClassicArticle" }
             //);
 
-            
+
 
             routes.MapLocalizedRoute(
                 "ChangeLocale",
@@ -230,7 +233,7 @@
             routes.MapLocalizedRoute(
                 "VerifyEmail",
                 "{locale}/VerifyEmail",
-                new { controller = "VerifyEmail", action = "index"}
+                new { controller = "VerifyEmail", action = "index" }
             );
 
             routes.MapLocalizedRoute(

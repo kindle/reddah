@@ -84,7 +84,7 @@ CREATE TABLE [dbo].[Comment]
     [Content] NVARCHAR (MAX) NOT NULL, 
     [Up] INT NULL DEFAULT 0, 
     [Down] INT NULL DEFAULT 0,
-	[UserId] INT NOT NULL,
+	[UserName] NVARCHAR(MAX) NOT NULL,
 	CONSTRAINT [PK_dbo.Comment] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

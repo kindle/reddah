@@ -67,7 +67,7 @@
                 {
                     query = (from b in db.Articles
                                 where b.Up == null || b.Down == null
-                                orderby b.CreatedOn 
+                                orderby b.CreatedOn descending
                                 select b).Take(10);
                 }
 

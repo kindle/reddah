@@ -1,0 +1,68 @@
+﻿@using Reddah.Web.UI.Models
+@using System.Globalization   
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
+}
+<link href="/Content/Comment.css" rel="stylesheet" />
+<link href="/Content/Post.css" rel="stylesheet" />
+<div class="rightBox">
+    @Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())
+    @{
+        int j = 0;
+        foreach (var rightBoxModule in Model.RightBoxModules)
+        {
+            if (!String.IsNullOrEmpty(rightBoxModule.Title) && !String.IsNullOrEmpty(rightBoxModule.ArticleUrl))
+            {
+                if (j == 3)
+                {
+                    break;
+                }
+                <div class="HomePageRightBoxModule">
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="/@locale/@rightBoxModule.ArticleUrl"><img alt="@rightBoxModule.ImageUrl" src="@rightBoxModule.ImageUrl"/></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="rightBoxModule">
+                                <h2><a href="/@locale/@rightBoxModule.ArticleUrl">@rightBoxModule.Title</a></h2>
+                                <div>@rightBoxModule.Description</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                j++;
+            }
+        }
+    }
+</div>
+<div class="articleContent">
+    <span class="voterank"></span>
+    <div class="votecell">
+        <div class="vote">
+            @if (Request.IsAuthenticated){
+            <a class="vote-up-off" ng-click="vote(@Model.Article.Id, 'up', @Model.Article.Count)">up vote</a>
+            <span itemprop="upvoteCount" class="vote-count-post" id="vote-count-post-@Model.Article.Id">@Model.Article.Count</span>
+            <a class="vote-down-off" ng-click="vote(@Model.Article.Id, 'down', @Model.Article.Count)">down vote</a>}
+            else{
+            <a class="vote-up-off" ng-click="showPanel()">up vote</a>
+            <span itemprop="upvoteCount" class="vote-count-post">@Model.Article.Count</span>
+            <a class="vote-down-off" ng-click="showPanel()">down vote</a>
+            }
+        </div>
+    </div>
+    <div class="listInfoBlock">
+        <h1>@Html.Raw(Model.Article.Title)</h1>
+        <div class="listInfo">submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Model.Article.GroupName">/r/@Model.Article.GroupName</a></div>
+        <div class="listInfo">share save hide report</div>
+        <div class="postClear"></div>
+        <div>@Html.Raw(Model.Article.Content)</div>
+    </div>
+</div>
+<div class="postModuleLiner"></div>
+<h2>Comments</h2>
+@foreach (var comment in Model.Comments)
+{ 
+    <div>@comment.Content</div>
+}

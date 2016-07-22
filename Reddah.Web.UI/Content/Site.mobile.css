@@ -1737,8 +1737,9 @@ td.spread {
     margin-right: 30px;
 }
 
-.floatPanelModular .loginButton {
+.floatPanelModular .floatLoginButton {
     margin-right: 30px;
+    float:right;
 }
 
 .floatPanelModular h2 {
