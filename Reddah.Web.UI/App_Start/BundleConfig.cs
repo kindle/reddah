@@ -75,6 +75,8 @@
             // angular
             bundles.Add(new ScriptBundle("~/bundles/login").Include(
                         "~/Content/app/login.js"));
+            bundles.Add(new ScriptBundle("~/bundles/comment").Include(
+                        "~/Content/app/comment.js"));
             
         }
     }

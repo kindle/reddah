@@ -203,5 +203,46 @@
             
             return Json(new { success = true });
         }
+
+        [Authorize]
+        [HttpPost]
+        public JsonResult JsonAddComment(CommentModel model)
+        {
+            var errors = string.Empty;
+            if (model.ArticleId < 0)
+            {
+                errors = "Article does not exist";
+            }
+
+            if (string.IsNullOrEmpty(errors))
+            {
+                try
+                {
+                    using (var db = new reddahEntities1())
+                    {
+                        db.Comments.Add(new Comment()
+                        {
+                            ArticleId = model.ArticleId,
+                            ParentId = model.ParentId,
+                            Content = model.Content,
+                            CreatedOn = DateTime.Now,
+                            UserName = User.Identity.Name
+                        });
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    errors = e.Message;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(errors))
+            {
+                return Json(new { errors = errors });
+            }
+
+            return Json(new { success = true });
+        }
     }
 }

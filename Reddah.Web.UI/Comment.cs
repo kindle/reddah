@@ -20,17 +20,21 @@ public partial class Comment
 
     public int Id { get; set; }
 
+    public int ArticleId { get; set; }
+
     public int ParentId { get; set; }
 
-    public string ParentType { get; set; }
-
     public string Content { get; set; }
+
+    public System.DateTime CreatedOn { get; set; }
 
     public Nullable<int> Up { get; set; }
 
     public Nullable<int> Down { get; set; }
 
     public string UserName { get; set; }
+
+    public int Status { get; set; }
 
 }
 

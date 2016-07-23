@@ -249,12 +249,14 @@
     </Compile>
     <Compile Include="Utility\EmailHelper.cs" />
     <Compile Include="Utility\Helpers.cs" />
+    <Compile Include="ViewModels\ArticleCommentViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ViewModels\ArticleViewModelBase.cs" />
     <Compile Include="ViewModels\BrowseNavigateViewModel.cs" />
     <Compile Include="ViewModels\BrowseProductViewModel.cs" />
     <Compile Include="ViewModels\ContactSupport\CategoriesViewModel.cs" />
     <Compile Include="ViewModels\ContactSupport\ProductsViewModel.cs" />
-    <Compile Include="ViewModels\ArticleCommentViewModel.cs" />
     <Compile Include="ViewModels\MenuArticleViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -750,6 +752,7 @@
     <Content Include="Content\app\ckeditor\skins\moono\images\spinner.gif" />
     <Content Include="Content\app\ckeditor\styles.js" />
     <Content Include="Content\app\collapser.html" />
+    <Content Include="Content\app\comment.js" />
     <Content Include="Content\app\login.js" />
     <Content Include="Content\Comment.css" />
     <Content Include="Content\Images\ambassador.png" />
@@ -932,6 +935,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Articles\ArticleList.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Articles\Comment.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Articles\UserArticleList.cshtml">
@@ -1150,6 +1156,7 @@
     <Content Include="Views\Shared\Controls\Header.mobile.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Shared\Controls\NewComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -61,8 +61,8 @@
     </div>
 </div>
 <div class="postModuleLiner"></div>
-<h2>Comments</h2>
-@foreach (var comment in Model.Comments)
-{ 
-    <div>@comment.Content</div>
-}
+<div ng-controller="commentCtrl">
+    <input data-ng-model="articleId" type="hidden" data-ng-init="articleId='@Model.Article.Id'"  />
+    @Html.Partial("~/Views/Shared/Controls/NewComment.cshtml", new CommentModel() { ParentId = -1 })
+    @Html.Partial("Comment", Model.Comments as SeededComments)
+</div>

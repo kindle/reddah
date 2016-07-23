@@ -79,6 +79,10 @@
                 new { controller = "Articles", action = "comments" }
             );
 
+            routes.MapLocalizedRoute("AddComment", "{locale}/Article/JsonAddComment",
+                 new { controller = "Articles", action = "JsonAddComment" }
+             );
+
             //tools
             routes.MapRoute(
                 "DefaultCaptchaRoute",

@@ -78,14 +78,16 @@ CREATE TABLE [dbo].[Article]
 
 CREATE TABLE [dbo].[Comment]
 (
-	[Id] INT IDENTITY(1,1) NOT NULL, 
-    [ParentId] INT NOT NULL, 
-    [ParentType] CHAR(10) NULL, 
-    [Content] NVARCHAR (MAX) NOT NULL, 
-    [Up] INT NULL DEFAULT 0, 
+    [Id] INT IDENTITY(1,1) NOT NULL,
+    [ArticleId] INT NOT NULL,
+    [ParentId] INT NOT NULL,
+    [Content] NVARCHAR (MAX) NOT NULL,
+    [CreatedOn] DATETIME NOT NULL ,
+    [Up] INT NULL DEFAULT 0,
     [Down] INT NULL DEFAULT 0,
-	[UserName] NVARCHAR(MAX) NOT NULL,
-	CONSTRAINT [PK_dbo.Comment] PRIMARY KEY CLUSTERED ([Id] ASC)
+    [UserName] NVARCHAR(MAX) NOT NULL,
+	[Status] INT NOT NULL DEFAULT 0,
+    CONSTRAINT [PK_dbo.Comment] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
 CREATE TABLE [dbo].[Setting] (

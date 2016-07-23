@@ -45,12 +45,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ArticleId" Type="int" Nullable="false" />
           <Property Name="ParentId" Type="int" Nullable="false" />
-          <Property Name="ParentType" Type="char" MaxLength="10" />
           <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="Up" Type="int" />
           <Property Name="Down" Type="int" />
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -190,12 +192,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ArticleId" Nullable="false" />
           <Property Type="Int32" Name="ParentId" Nullable="false" />
-          <Property Type="String" Name="ParentType" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="Content" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />
           <Property Type="Int32" Name="Up" />
           <Property Type="Int32" Name="Down" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -295,12 +299,14 @@
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="reddahModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Down" ColumnName="Down" />
                 <ScalarProperty Name="Up" ColumnName="Up" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="ParentType" ColumnName="ParentType" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

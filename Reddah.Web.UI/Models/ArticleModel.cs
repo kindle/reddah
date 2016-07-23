@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 namespace Reddah.Web.UI.Models
 {
     public class ArticlePreview
@@ -39,5 +40,25 @@ namespace Reddah.Web.UI.Models
         public int Count { get; set; }
         public int Up { get; set; }
         public int Down { get; set; }
+    }
+
+    public class SeededComments
+    {
+        public int Seed { get; set; }
+        public IList<Comment> Comments { get; set; }
+    }
+
+    public class CommentModel
+    {
+        [Required]
+        [Display(Name = "Article ID")]
+        public int ArticleId { get; set; }
+
+        [Required]
+        [Display(Name = "Parent Id")]
+        public int ParentId { get; set; }
+        [Required]
+        [Display(Name = "Comment Content")]
+        public string Content { get; set; }
     }
 }

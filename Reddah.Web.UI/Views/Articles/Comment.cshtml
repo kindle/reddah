@@ -1,0 +1,24 @@
+﻿@using Reddah.Web.UI.Models
+@model SeededComments
+
+@if (Model.Comments.Where(s => s.ParentId == Model.Seed).Any())
+{
+    <ul>
+        @foreach (var node in Model.Comments)
+        {
+            if (node.ParentId == Model.Seed)
+            {
+                var inner = new SeededComments { Seed = node.Id, Comments = Model.Comments };
+                <li>
+                    <collapser caption="@node.Content">
+                        <collapser caption="reply">
+                            @Html.Partial("~/Views/Shared/Controls/NewComment.cshtml", new CommentModel() { ParentId = node.Id })
+                        </collapser>
+                        @Html.Partial("Comment", inner)
+                    </collapser>
+                </li>
+            }
+        }
+    </ul>
+}
+
