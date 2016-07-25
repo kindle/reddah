@@ -228,6 +228,11 @@
                             CreatedOn = DateTime.Now,
                             UserName = User.Identity.Name
                         });
+                        var article = db.Articles.FirstOrDefault(a => a.Id == model.ArticleId);
+                        if (article != null)
+                        {
+                            article.Count = (article.Count == null) ? 1 : article.Count + 1;
+                        }
                         db.SaveChanges();
                     }
                 }

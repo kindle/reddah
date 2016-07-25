@@ -753,6 +753,7 @@
     <Content Include="Content\app\ckeditor\styles.js" />
     <Content Include="Content\app\collapser.html" />
     <Content Include="Content\app\comment.js" />
+    <Content Include="Content\app\collapser-comment.html" />
     <Content Include="Content\app\login.js" />
     <Content Include="Content\Comment.css" />
     <Content Include="Content\Images\ambassador.png" />

@@ -1,4 +1,5 @@
 ﻿@using Reddah.Web.UI.Models
+@using Reddah.Web.UI.Utility
 @using System.Globalization   
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
@@ -23,12 +24,6 @@
         }
 
         return newPageNo.ToString();
-    }
-    
-    public string GetShortTitle(string title)
-    {
-        title = (title == null) ? "" : title.Trim().Replace(" ", "_");
-        return title.Substring(0, Math.Min(50, title.Length - 1));
     }
 }
 <link href="/Content/Post.css" rel="stylesheet" />
@@ -99,7 +94,7 @@
                         <h2><a ng-click="toggleArticle('upcomingLinks', @nextPrevIndex)">@Html.Raw(article.Title)</a> <span class="listInfo">(source)</span></h2>
                         <div>@Html.Raw(article.Abstract)</div>
                         <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@article.GroupName">/r/@article.GroupName</a></div>
-                        <div class="listInfo"><a href="/@locale/comments/@article.Id/@GetShortTitle(article.Abstract)/" target="_blank">@article.Comments comments</a> share save hide report</div>
+                        <div class="listInfo"><a href="/@locale/comments/@article.Id/@Helpers.GetShortTitle(article.Abstract)/" target="_blank">@article.Comments comments</a> share save hide report</div>
                         <div class="postClear"></div>
                         <img id="org_image_@nextPrevIndex" class="orgImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="100%" src="@article.ImageUrl" alt="picture">
                         <div id="org_article_@nextPrevIndex" class="orgArticle">@Html.Raw(article.Content)</div>
@@ -151,7 +146,7 @@
                     <h2><a ng-click="toggleArticle('post', @index)">@Html.Raw(article.Title)</a> <span class="listInfo">(source)</span></h2>
                     <div>@Html.Raw(article.Abstract)</div>
                     <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@article.GroupName">/r/@article.GroupName</a></div>
-                    <div class="listInfo">@article.Comments comments share save hide report</div>
+                    <div class="listInfo"><a href="/@locale/comments/@article.Id/@Helpers.GetShortTitle(article.Abstract)/" target="_blank">@article.Comments comments</a> share save hide report</div>
                     <div class="postClear"></div>
                     <img id="org_image_@index" class="orgImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="100%" src="@article.ImageUrl" alt="picture">
                     <div id="org_article_@index" class="orgArticle">@Html.Raw(article.Content)</div>

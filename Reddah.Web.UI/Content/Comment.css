@@ -1,4 +1,21 @@
-﻿div.articleContent {
+﻿div.commentclear {
+    clear:left;
+    height: 0;
+}
+
+div.clearline {
+    clear:left;
+    height: 0;
+    border-color: #BDBEC1 ;
+    border-right: 0 none;
+    border-style: none none solid; 
+    border-width: 0 0 1px;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+div.articleContent {
     padding-right: 7em;
 }
 
@@ -11,3 +28,29 @@ div.rightBox {
     float: right;
     width: 210px;
 }
+
+div.votecell {
+    float:left;
+    overflow: hidden;
+}
+
+div.entry {
+    vertical-align:top;
+    float:left;
+    overflow: hidden;
+}
+
+div.entry a {
+    float: left;
+    margin-right: 10px;
+}
+
+div.author {
+    float:left;
+    overflow: hidden;
+}
+
+ul, li {
+    list-style: none;
+}
+

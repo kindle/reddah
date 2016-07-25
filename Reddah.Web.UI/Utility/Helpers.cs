@@ -81,6 +81,11 @@
             return string.Empty;
         }
 
+        public static string GetShortTitle(string title)
+        {
+            title = (title == null) ? "" : title.Trim().Replace(" ", "_");
+            return title.Substring(0, Math.Min(50, title.Length - 1));
+        }
 
         //public static string GetLocalizedPath(string originalPath)
         //{

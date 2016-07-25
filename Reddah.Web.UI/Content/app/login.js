@@ -179,3 +179,19 @@
         transclude: true
     };
 })
+.directive('collapserComment', function () {
+    return {
+        restrict: 'EAC',
+        templateUrl: '/content/app/collapser-comment.html',
+        scope: {
+            toggle1: '@',
+            toggle2: '@',
+            locale: '@',
+            username: '@',
+            createdon: '@',
+            content: '@',
+            parentid: '@'
+        },
+        transclude: true
+    };
+})
