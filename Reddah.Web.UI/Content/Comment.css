@@ -48,6 +48,7 @@ div.entry a {
 div.author {
     float:left;
     overflow: hidden;
+    color: #BDBEC1;
 }
 
 ul, li {

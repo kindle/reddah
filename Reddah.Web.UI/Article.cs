@@ -32,7 +32,7 @@ public partial class Article
 
     public Nullable<int> Down { get; set; }
 
-    public Nullable<int> Count { get; set; }
+    public int Count { get; set; }
 
     public string UserName { get; set; }
 

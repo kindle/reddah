@@ -32,6 +32,8 @@ public partial class Comment
 
     public Nullable<int> Down { get; set; }
 
+    public int Count { get; set; }
+
     public string UserName { get; set; }
 
     public int Status { get; set; }

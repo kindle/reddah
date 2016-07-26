@@ -70,7 +70,7 @@ CREATE TABLE [dbo].[Article]
     [CreatedOn] DATETIME NOT NULL , 
     [Up] INT NULL DEFAULT 0, 
     [Down] INT NULL DEFAULT 0, 
-    [Count] INT NULL DEFAULT 0,
+    [Count] INT NOT NULL DEFAULT 0,
 	[UserName] NVARCHAR(MAX) NOT NULL,
 	[GroupName] NVARCHAR(MAX) NOT NULL,
 	CONSTRAINT [PK_dbo.Article] PRIMARY KEY CLUSTERED ([Id] ASC)
@@ -85,6 +85,7 @@ CREATE TABLE [dbo].[Comment]
     [CreatedOn] DATETIME NOT NULL ,
     [Up] INT NULL DEFAULT 0,
     [Down] INT NULL DEFAULT 0,
+	[Count] INT NOT NULL DEFAULT 0,
     [UserName] NVARCHAR(MAX) NOT NULL,
 	[Status] INT NOT NULL DEFAULT 0,
     CONSTRAINT [PK_dbo.Comment] PRIMARY KEY CLUSTERED ([Id] ASC)

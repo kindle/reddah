@@ -36,7 +36,7 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="Up" Type="int" />
           <Property Name="Down" Type="int" />
-          <Property Name="Count" Type="int" />
+          <Property Name="Count" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="GroupName" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -51,6 +51,7 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="Up" Type="int" />
           <Property Name="Down" Type="int" />
+          <Property Name="Count" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -183,7 +184,7 @@
           <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />
           <Property Type="Int32" Name="Up" />
           <Property Type="Int32" Name="Down" />
-          <Property Type="Int32" Name="Count" />
+          <Property Type="Int32" Name="Count" Nullable="false" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="GroupName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -198,6 +199,7 @@
           <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />
           <Property Type="Int32" Name="Up" />
           <Property Type="Int32" Name="Down" />
+          <Property Type="Int32" Name="Count" Nullable="false" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="Status" Nullable="false" />
         </EntityType>
@@ -301,6 +303,7 @@
               <MappingFragment StoreEntitySet="Comment">
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Down" ColumnName="Down" />
                 <ScalarProperty Name="Up" ColumnName="Up" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />

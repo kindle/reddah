@@ -15,7 +15,8 @@
         $scope.model.ParentId = parentId;
         commentSvc.add($scope.model).then(function (data) {
             if (data.success == true) {
-                
+                $scope.model.Content = "";
+                //todo:insert html via js on top
             }
             else {
                 var str = '';
@@ -47,3 +48,20 @@
         }
     }
 }])
+.directive('collapserComment', function () {
+    return {
+        restrict: 'EAC',
+        templateUrl: '/content/app/collapser-comment.html',
+        scope: {
+            toggle1: '@',
+            toggle2: '@',
+            locale: '@',
+            username: '@',
+            createdon: '@',
+            content: '@',
+            count:'@',
+            parentid: '@'
+        },
+        transclude: true
+    };
+})

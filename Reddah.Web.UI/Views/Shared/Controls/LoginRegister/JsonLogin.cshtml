@@ -1,15 +1,8 @@
 ﻿@model Reddah.Web.UI.Models.LoginModel
+@using Reddah.Web.UI.Utility
 @using System.Globalization
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
-}
-@functions{
-    public string GetAntiForgeryToken()
-    {
-        string cookieToken, formToken;
-        AntiForgery.GetTokens(null, out cookieToken, out formToken);
-        return cookieToken + ":" + formToken;                
-    }
 }
 @if (!Request.IsAuthenticated)
 {
@@ -38,6 +31,6 @@
             </td>
         </tr>
     </table>
-    <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@GetAntiForgeryToken()'"  />
+    <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@Helpers.GetAntiForgeryToken()'"  />
 </div>
 }

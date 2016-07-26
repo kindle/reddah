@@ -30,7 +30,7 @@
                     ap.Description = item.Content;
                     ap.ImageUrl = Helpers.GetFirstImageSrc(item.Content);
                     ap.ArticleUrl = item.Title;
-                    ap.Comments = item.Count ?? 0;
+                    ap.Comments = item.Count;
                     ap.Up = item.Up ?? 0;
                     ap.Down = item.Down ?? 0;
                     ap.Count = ap.Up - ap.Down;

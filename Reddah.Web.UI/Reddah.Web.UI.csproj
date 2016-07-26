@@ -290,6 +290,7 @@
     <Content Include="App_Data\gilded.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\help\contentpolicy.zh-cn.xml" />
     <Content Include="App_Data\promoted.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -302,6 +303,7 @@
     <Content Include="App_Data\rising.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\help\contentpolicy.xml" />
     <Content Include="App_Data\wiki\Images\ambassador.png" />
     <Content Include="App_Data\wiki\Images\contact_us.png" />
     <Content Include="App_Data\wiki\Images\forum.png" />

@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="entry">
-                    <collapser-comment toggle1="[+]" toggle2="[-]" locale="@locale" username="@node.UserName" createdon="@Helpers.TimeAgo(node.CreatedOn)" content="@node.Content" parentid="@Model.Seed">
+                    <collapser-comment toggle1="[+]" toggle2="[-]" locale="@locale" username="@node.UserName" createdon="@Helpers.TimeAgo(node.CreatedOn)" content="@node.Content" count="@node.Count" parentid="@Model.Seed">
                         <div class="buttons">
                             <collapser caption="reply">
                                 @Html.Partial("~/Views/Shared/Controls/NewComment.cshtml", new CommentModel() { ParentId = node.Id })

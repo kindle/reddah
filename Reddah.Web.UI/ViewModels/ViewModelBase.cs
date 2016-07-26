@@ -1,5 +1,6 @@
 ﻿namespace Reddah.Web.UI.ViewModels
 {
+    using System.Globalization;
     using System.Web;
     using System.Xml;
 
@@ -15,7 +16,17 @@
         protected void Init(string path)
         {
             Doc = new XmlDocument();
-            Doc.Load(HttpContext.Current.Server.MapPath("~/App_Data/" + path + ".xml"));
+
+            var locale = CultureInfo.CurrentUICulture.Name;
+            if (!System.IO.File.Exists(HttpContext.Current.Server.MapPath("~/App_Data/" + path + "." + locale + ".xml")))
+            {
+                Doc.Load(HttpContext.Current.Server.MapPath("~/App_Data/" + path + ".xml"));
+            }
+            else
+            {
+                Doc.Load(HttpContext.Current.Server.MapPath("~/App_Data/" + path + "." + locale + ".xml"));
+            }
+            
         }
 
         //move to a common method later

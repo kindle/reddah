@@ -228,11 +228,24 @@
                             CreatedOn = DateTime.Now,
                             UserName = User.Identity.Name
                         });
-                        var article = db.Articles.FirstOrDefault(a => a.Id == model.ArticleId);
-                        if (article != null)
+
+                        if (model.ParentId == -1)
                         {
-                            article.Count = (article.Count == null) ? 1 : article.Count + 1;
+                            var article = db.Articles.FirstOrDefault(a => a.Id == model.ArticleId);
+                            if (article != null)
+                            {
+                                article.Count ++;
+                            }
                         }
+                        else 
+                        {
+                            var parentComment = db.Comments.FirstOrDefault(c => c.Id == model.ParentId);
+                            if (parentComment != null)
+                            {
+                                parentComment.Count ++;
+                            }
+                        }
+                        
                         db.SaveChanges();
                     }
                 }
