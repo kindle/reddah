@@ -71,9 +71,9 @@
                     <div class="votecell">
                         <div class="vote">
                             @if (Request.IsAuthenticated){
-                            <a class="vote-up-off" ng-click="vote(@article.Id, 'up', @article.Count)">up vote</a>
+                            <a class="vote-up-off" ng-click="vote(@article.Id, 'up', @(article.Up-article.Down))">up vote</a>
                             <span itemprop="upvoteCount" class="vote-count-post" id="vote-count-post-@article.Id">-</span>
-                            <a class="vote-down-off" ng-click="vote(@article.Id, 'down', @article.Count)">down vote</a>}
+                            <a class="vote-down-off" ng-click="vote(@article.Id, 'down', @(article.Up-article.Down))">down vote</a>}
                             else{
                             <a class="vote-up-off" ng-click="showPanel()">up vote</a>
                             <span itemprop="upvoteCount" class="vote-count-post">-</span>
@@ -124,12 +124,12 @@
                 <div class="votecell">
                     <div class="vote">
                         @if (Request.IsAuthenticated){
-                        <a class="vote-up-off" ng-click="vote(@article.Id, 'up', @article.Count)">up vote</a>
-                        <span itemprop="upvoteCount" class="vote-count-post" id="vote-count-post-@article.Id">@article.Count</span>
-                        <a class="vote-down-off" ng-click="vote(@article.Id, 'down', @article.Count)">down vote</a>}
+                        <a class="vote-up-off" ng-click="vote(@article.Id, 'up', @(article.Up-article.Down))">up vote</a>
+                        <span itemprop="upvoteCount" class="vote-count-post" id="vote-count-post-@article.Id">@(article.Up-article.Down)</span>
+                        <a class="vote-down-off" ng-click="vote(@article.Id, 'down', @(article.Up-article.Down))">down vote</a>}
                         else{
                         <a class="vote-up-off" ng-click="showPanel()">up vote</a>
-                        <span itemprop="upvoteCount" class="vote-count-post">@article.Count</span>
+                        <span itemprop="upvoteCount" class="vote-count-post">@(article.Up-article.Down)</span>
                         <a class="vote-down-off" ng-click="showPanel()">down vote</a>
                         }
                     </div>

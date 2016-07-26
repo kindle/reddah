@@ -229,15 +229,14 @@
                             UserName = User.Identity.Name
                         });
 
-                        if (model.ParentId == -1)
+                        
+                        var article = db.Articles.FirstOrDefault(a => a.Id == model.ArticleId);
+                        if (article != null)
                         {
-                            var article = db.Articles.FirstOrDefault(a => a.Id == model.ArticleId);
-                            if (article != null)
-                            {
-                                article.Count ++;
-                            }
+                            article.Count ++;
                         }
-                        else 
+
+                        if (model.ParentId != -1)
                         {
                             var parentComment = db.Comments.FirstOrDefault(c => c.Id == model.ParentId);
                             if (parentComment != null)

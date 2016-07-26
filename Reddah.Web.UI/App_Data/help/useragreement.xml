@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="SolutionArticle">
+  <Title>Reddah User Agreement</Title>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>
+      Reddah will power thousands of distinct online communities.
+      these terms and your conduct make that possible.
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      <h3>Hello reddahers and people of the Internet! We want you to know your rights and our rights and so we have prepared this agreement ("user agreement" or "agreement") between reddah ("we", "our," "us") and you. This agreement sets the terms of your use of the reddah website and services ("reddah") that include subreddahs, messaging, and reddah mobile. This agreement is meant to encourage a fair and tolerant place for ideas, people, links, and discussion.</h2>
+      <br/>
+      
+      <h2><b>legal stuff</b></h2>
+      <br/>
+      <h3>This agreement is a legal contract between you and us. You acknowledge that you have read, understood, and agree to be bound by the terms of this agreement. If you do not agree to this agreement, you should not use reddah. Please take a look at reddah’s privacy policy too. It explains how we collect and use your information.</h3>
+      <br/>
+      
+      <h3><b>your access to reddah</b></h3>
+      <br/>
+      <h3>Without advance notice and at any time, we may, for violations of this agreement or for any other reason we choose: (1) suspend your access to reddah, (2) suspend or terminate Your Account, and/or (3) remove any of your User Content from reddah.</h3>
+      <br/>
+      <h3>We reserve the right to monitor reddah, and your use of the Service means you agree to such monitoring. At the same time, we do not guarantee we will monitor at all.</h3>
+      <br/>
+      
+      <h2><b>reddah is for your personal, lawful use</b></h2>
+      <br/>
+      <h3>reddah is designed and supported for personal use only. You may not use reddah to break the law, violate an individual's privacy, or infringe any person or entity’s intellectual property or any other proprietary rights.</h3>
+      <br/>
+      
+      <h2><b>reddah is for fun<b></h2>
+      <br/>
+      <h3>reddah is intended to be a place for your entertainment. We are not responsible for any decisions you make based on something you read on reddah.</h3>
+      <br/>
+      
+      <h2><b>reddah isn’t intended as a marketplace</b></h2>
+      <br/>
+      <h3>reddah is not intended to be a marketplace for any goods or services. However, you may find commercial links, coupons, deals, advertisements and other third-party offers on reddah. In addition, reddah may have affiliate relationships with certain of these third parties and may receive compensation for any purchase made from them. reddah is not a party to, nor in any way responsible for, any transactions you have with these third parties, even if reddah has an affiliate relationship with such parties. For this reason, any transactions you undertake are your responsibility alone, so be careful.</h3>
+      <br/>
+      <h3>You may not use reddah to conduct transactions for any illegal goods or services.</h3>
+      <br/>
+      
+      <h2><b>your reddah account</b></h2>
+      <br/>
+      <h3>To participate on reddah, you must create an account that includes a username and password ("Your Account") and, if you want to be able to reset your password or have us contact you, an email address as well. Of course, you can also browse reddah without logging in.</h3>
+      <br/>
+      <h3>You are solely responsible for the information associated with Your Account and anything that happens related to Your Account.</h3>
+      <br/>
+      <h3>You may not license, transfer, sell, or assign Your Account without our written approval.</h3>
+      <br/>
+      
+      <h2><b>reddah content</b></h2>
+      <br/>
+      <h3>reddah contains graphics, text, photographs, images, video, audio, software, code, website compilation, website "look and feel," and advertisements supplied by us or our licensors, which we call "reddah content." reddah content is protected by intellectual property laws including copyright and other proprietary rights of the United States and foreign countries.</h3>
+      <br/>
+      <h3>We grant you the right to access the reddah content in the manner described in this agreement. You may not otherwise make unauthorized commercial use of, reproduce, prepare derivative works, distribute copies, perform, or publicly display reddah content, except as permitted by the doctrine of fair use or as authorized in writing by us.</h3>
+      <br/>
+      
+      <h2><b>your content</b></h2>
+      <br/>
+      <h3>You retain the rights to your copyrighted content or information that you submit to reddah ("user content") except as described below.</h3>
+      <br/>
+      <h3>By submitting user content to reddah, you grant us a royalty-free, perpetual, irrevocable, non-exclusive, unrestricted, worldwide license to reproduce, prepare derivative works, distribute copies, perform, or publicly display your user content in any medium and for any purpose, including commercial purposes, and to authorize others to do so.</h3>
+      <br/>
+      <h3>You agree that you have the right to submit anything you post, and that your user content does not violate the copyright, trademark, trade secret or any other personal or proprietary right of any other party.</h3>
+      <br/>
+      <h3>Please take a look at reddah’s privacy policy for an explanation of how we may use or share information submitted by you or collected from you.</h3>
+      <br/>
+      
+      <h2><b>we don’t endorse user content</b></h2>
+      <br/>
+      <h3>We take no responsibility for, we do not expressly or implicitly endorse, and we do not assume any liability for any user content submitted by you to reddah.</h3>
+      <br/>
+      
+      <h2><b>links and reddah</b></h2>
+      <br/>
+      <h3>reddah is a place with many third-party hyperlinks posted by users like you. We are not responsible for the content or actions of any third party websites or services associated with posted links. You agree to take sole legal responsibility for any links you post, and neither this agreement nor our privacy policy applies to any content on other websites related to those links. You should consult the terms and privacy policies of those other websites to understand your rights.</h3>
+      <br/>
+      ]]>
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>
+      Reddah rules
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      <h2><b>your participation on reddah</b></h2>
+      <br/>
+      <h3>You also agree to follow the Reddah Content Policy. These guidelines are intended to keep people safe, protect kids, keep reddah running, and to encourage personal responsibility for what you do on reddah.</h3>
+      <br/>
+      
+      <h2><b>subreddah rules</b></h2>
+      <br/>
+      <h3>Subreddahs may create their own rules and enforce them as they see fit, providing they do not violate the terms of this agreement.</h3>
+      <br/>
+      <h3>You agree that reddah is not responsible for the actions taken or not taken by moderators.</h3>
+      <br/>
+      
+      <h2><b>moderators</b></h2>
+      <br/>
+      <h3>Moderating a subreddah is an unofficial, voluntary position. We reserve the right to revoke that position for any user at any time. If you choose to moderate a subreddah, you agree to the following:</h3>
+      <br/>
+      <h3>
+        <ul>
+          <li>You may not enter into any form of agreement on behalf of reddah, or the subreddah which you moderate, without our written approval.</li>
+          <li>You may not perform moderation actions in return for any form of compensation or favor from third-parties.</li>
+          <li>When you receive notice that there is content that violates this user agreement on subreddahs you moderate, you agree to remove it.</li>
+        </ul>
+      </h3>
+      <br/>
+      
+      <h2><b>don’t spam the reddah community</b></h2>
+      <br/>
+      <h3>You may not post any graphics, text, photographs, images, video, audio or other material that we deem to be junk or spam. Cluttering reddah with this sort of content reduces the quality of the reddah experience for others. </h3>
+      <br/>
+      
+      <h2><b>respect users that edit their content</b></h2>
+      <br/>
+      <h3>You may not purposefully negate any user's actions to delete or edit their content on reddah. This is intended to respect the privacy of reddah users who delete or edit their content, and is not intended to abridge the fair use or the expressive rights shared by us all.</h3>
+      <br/>
+      
+      <h2><b>don’t mess with reddah</b></h2>
+      <br/>
+      <h3>You agree not to interrupt the serving of reddah, introduce malicious code onto reddah, make it difficult for anyone else to use reddah due to your actions, attempt to manipulate votes or reddah’s systems, or assist anyone in misusing reddah in any way. It takes a lot of work to maintain reddah. Be cool.</h3>
+      <br/>
+      <h3>We support the responsible reporting of security vulnerabilities. To report a reddah security issue, please send an email to security@reddah.com</h3>
+      <br/>
+      ]]>
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>
+      A few more legalities
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      <h2><b>Please read the following very carefully. Each of the following sections applies to the maximum extent permitted by law. Where jurisdictions do not allow disclaimers of implied warranties or the limitation of liability in contracts, the contents of this section may not apply.</b></h2>
+      <br/>
+      
+      <h2><b>indemnity</b></h2>
+      <br/>
+      <h3>All the things you do and all the information you submit or post to reddah remain your responsibility. Indemnity is basically a way of saying that you will not hold us legally liable for any of your user content or actions that infringe the law or the rights of a third party or person in any way.</h3>
+      <br/>
+      <h3 class="em">Specifically, you agree to hold reddah, its affiliates, officers, directors, employees, agents, and third party service providers harmless from and defend them against any claims, costs, damages, losses, expenses, and any other liabilities, including attorneys’ fees and costs, arising out of or related to your access to or use of reddah, your violation of this user agreement, and/or your violation of the rights of any third party or person.</h3>
+      <br/>
+      
+      <h2><b>disclaimer of warranties</b></h2>
+      <br/>
+      <h3 class="em">reddah is provided "as is" and without warranty of any kind. To the maximum extent permitted by law, we and our affiliates and third party service providers disclaim any and all warranties, express or implied, including (but not limited to) implied warranties of merchantability, fitness for a particular purpose, and non-infringement of proprietary rights, or any other warranty, condition, guarantee or representation, whether oral or electronic. You are solely responsible for any damage to your computer or mobile device, loss of use, or loss of your user content. We do not guarantee that reddah will always work properly.</h3>
+      <br/>
+      <h3></h3>
+      <br/>
+      
+      <h2><b>limitation of liability</b></h2>
+      <br/>
+      <h3 class="em">We will not be liable for any special, consequential, indirect, incidental, punitive, reliance, or exemplary damages, whether in tort, contract, or any other legal theory, arising out of or in any way connected with this agreement or your use of or attempt to use reddah, including (but not limited to) damages for loss of profits, goodwill, use, or data. This limitation on liability shall not be affected even if we have been advised of the possibility of such damages. Some states do not allow for the exclusion of implied warranties or the limitation or exclusion of liability for incidental or consequential damages, so the above exclusions may not apply to you. You may have other rights that vary from state to state.</h3>
+      <br/>
+      <h3 class="em">You agree to release us, our affiliates, and third-party service providers, and each associated director, employee, agents, and officers, from claims, demands and damages (actual and consequential), of every kind and nature, known and unknown, disclosed or undisclosed, arising out of or in any way connected to your use of reddah.</h3>
+      <br/>
+      
+      <h2><b>governing law</b></h2>
+      <br/>
+      <h3>We want you to enjoy reddah, so if you have an issue or dispute, you agree to raise it and try to resolve it with us informally. You can contact us with feedback and concerns here or by emailing us at contact@reddah.com.</h3>
+      <br/>
+      <h3>The headings in this agreement are for convenience and do not control any of its provisions.</h3>
+      <br/>
+      
+      
+      <h2><b>severability and enforcement</b></h2>
+      <br/>
+      <h3 class="em">If any provision of this user agreement is held invalid or unenforceable, that provision will be modified to the extent necessary to render it enforceable without losing its intent. If no such modification is possible, that provision will be severed from the rest of this agreement.</h3>
+      <br/>
+      <h3>If we do not enforce any right or provision in this user agreement, that is not to be deemed a waiver of our right to do so in the future.</h3>
+      <br/>
+      
+      ]]>
+    </Text>
+  </Module>
+</ContentType>

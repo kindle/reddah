@@ -34,7 +34,7 @@
                     Article.Comments = item.Count;
                     Article.Up = item.Up ?? 0;
                     Article.Down = item.Down ?? 0;
-                    Article.Count = Article.Up - Article.Down;
+                    Article.Count = item.Count;
                     Article.CreatedOn = Helpers.TimeAgo(item.CreatedOn);
                     Article.UserName = item.UserName;
                     Article.GroupName = item.GroupName;

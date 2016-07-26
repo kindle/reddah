@@ -93,7 +93,7 @@
                     ap.Comments = item.Count;
                     ap.Up = item.Up ?? 0;
                     ap.Down = item.Down ?? 0;
-                    ap.Count = ap.Up - ap.Down;
+                    ap.Count = item.Count;
                     ap.CreatedOn = Helpers.TimeAgo(item.CreatedOn);
                     ap.UserName = item.UserName;
                     ap.GroupName = item.GroupName;
