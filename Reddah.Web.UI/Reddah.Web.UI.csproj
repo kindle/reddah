@@ -291,6 +291,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\help\contentpolicy.zh-cn.xml" />
+    <Content Include="App_Data\help\privacypolicy.xml" />
     <Content Include="App_Data\help\useragreement.xml" />
     <Content Include="App_Data\promoted.xml">
       <SubType>Designer</SubType>
@@ -350,7 +351,9 @@
     <Content Include="App_Data\wiki\Pages\Games\Mango\NavigationList.xml" />
     <Content Include="App_Data\wiki\Pages\Games\NavigationList.xml" />
     <Content Include="App_Data\wiki\Pages\Games\WindowsPhone8\NavigationList.xml" />
-    <Content Include="App_Data\wiki\Pages\HomePage.xml" />
+    <Content Include="App_Data\wiki\Pages\HomePage.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\wiki\Pages\NavigationList.xml" />
     <Content Include="App_Data\wiki\Pages\Photos\NavigationList.xml" />
     <Content Include="App_Data\wiki\Pages\ReddahDemo_Distributed.xml" />

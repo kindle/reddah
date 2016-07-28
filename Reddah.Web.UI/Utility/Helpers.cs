@@ -5,6 +5,7 @@
     using System.Globalization;
     using System.Text.RegularExpressions;
     using System.Web.Helpers;
+    using System.Collections.Generic;
 
     public static class Helpers
     {
@@ -93,6 +94,19 @@
             string cookieToken, formToken;
             AntiForgery.GetTokens(null, out cookieToken, out formToken);
             return cookieToken + ":" + formToken;
+        }
+
+        public static string HideSensitiveWords(string text)
+        {
+            var re = new Regex(@"\b(\w+)\b", RegexOptions.Compiled);
+            var replacements = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                {"fuck", "****"},
+                {"bitch", "*****"},
+                {"asshole", "*******"}
+            };
+            return re.Replace(text, match => replacements.ContainsKey(match.Groups[1].Value) ? 
+                replacements[match.Groups[1].Value] : match.Groups[1].Value);
         }
 
         //public static string GetLocalizedPath(string originalPath)

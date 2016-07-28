@@ -9,6 +9,7 @@
     using Reddah.Web.UI.Models;
     using System.Threading;
     using System.Web;
+    using Reddah.Web.UI.Utility;
 
     public class ArticlesController : BaseController
     {
@@ -224,7 +225,7 @@
                         {
                             ArticleId = model.ArticleId,
                             ParentId = model.ParentId,
-                            Content = model.Content,
+                            Content = Helpers.HideSensitiveWords(model.Content),
                             CreatedOn = DateTime.Now,
                             UserName = User.Identity.Name
                         });

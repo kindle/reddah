@@ -1,4 +1,5 @@
 ﻿using CaptchaMvc.Attributes;
+using Reddah.Web.UI.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace Reddah.Web.UI.Controllers
                     {
                         Title = article.Title,
                         GroupName = article.GroupName,
-                        Content = article.Content,
+                        Content = Helpers.HideSensitiveWords(article.Content),
                         Abstract = article.Abstract,
                         UserName = User.Identity.Name,
                         CreatedOn = DateTime.Now

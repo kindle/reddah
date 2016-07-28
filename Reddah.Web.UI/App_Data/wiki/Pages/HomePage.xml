@@ -7,20 +7,20 @@
     <Title>Announcements</Title>
     <AnnouncementsLinkList>
       <AnnouncementsLink>
-        <Title>Getting started with Reddah</Title>
-        <ArticleUrl>r/wiki/Pages/SolutionArticlePage</ArticleUrl>
+        <Title>Reddah Content Policy</Title>
+        <ArticleUrl>r/help/contentpolicy</ArticleUrl>
         <Description></Description>
         <ImageUrl></ImageUrl>
       </AnnouncementsLink>
       <AnnouncementsLink>
-        <Title>What's new?</Title>
-        <ArticleUrl>r/wiki/Pages/ReddahDemo_LocalMachine</ArticleUrl>
+        <Title>Reddah User Agreement</Title>
+        <ArticleUrl>r/help/useragreement</ArticleUrl>
         <Description></Description>
         <ImageUrl></ImageUrl>
     </AnnouncementsLink>
       <AnnouncementsLink>
-        <Title>Latest news about Reddah</Title>
-        <ArticleUrl>r/wiki/Pages/ReddahDemo_Distributed</ArticleUrl>
+        <Title>Reddah Privacy Policy</Title>
+        <ArticleUrl>r/help/privacypolicy</ArticleUrl>
         <Description></Description>
         <ImageUrl></ImageUrl>
     </AnnouncementsLink>
