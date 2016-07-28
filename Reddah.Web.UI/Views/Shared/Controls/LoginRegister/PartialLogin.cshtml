@@ -3,8 +3,8 @@
 <div>@Html.TextBoxFor(m => m.UserName, new { @class="loginText", @placeholder="username", data_ng_model = "loginModel.UserName"})</div>
 <div>@Html.PasswordFor(m => m.Password, new { @class="loginText", @placeholder="password", data_ng_model = "loginModel.Password"})</div>
 <div class="loginRememberMe">
-        @Html.CheckBoxFor(m => m.RememberMe, new { data_ng_model = "loginModel.RememberMe" })
-        @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+        @Html.CheckBoxFor(m => m.RememberMe, new { @id="login_rem", data_ng_model = "loginModel.RememberMe" })
+        <label class="checkbox" for="login_rem">Remember me?</label>
 </div>
 <div class="loginReset" style="display:none;"><label>Reset Password</label></div>
 <table style="width:100%">

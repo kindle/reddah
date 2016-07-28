@@ -5,8 +5,8 @@
 <div>@Html.PasswordFor(m => m.ConfirmPassword, new { @class="loginText", @placeholder="verify password", data_ng_model = "registerModel.ConfirmPassword"})</div>
 <div>@Html.TextBoxFor(m => m.Email, new { @class="loginText", @placeholder="email", data_ng_model = "registerModel.Email"})</div>
 <div class="loginRememberMe">
-    @Html.CheckBoxFor(m => m.RememberMe, new { data_ng_model = "registerModel.RememberMe" })
-    @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+    @Html.CheckBoxFor(m => m.RememberMe, new { @id="reg_rem", data_ng_model = "registerModel.RememberMe" })
+    <label class="checkbox" for="reg_rem">Remember me?</label>
 </div>
 <table style="width:100%">
     <tr>

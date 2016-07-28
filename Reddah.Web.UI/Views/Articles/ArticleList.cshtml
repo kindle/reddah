@@ -3,11 +3,33 @@
 @using System.Globalization   
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
-    int index = 1;
+    int index = (GetNextPageNo()-1)*25 + 1;
     int nextPrevIndex = 1;
 }
 @functions{
-    public string GetNextPageNo()
+    public bool ShowPrev()
+    {
+        return GetNextPageNo() > 1;
+    }
+    public int GetPrevPageNo()
+    {
+        var pageNo = Request.Params["page"];
+        int newPageNo = 0;
+        if (string.IsNullOrWhiteSpace(pageNo))
+        {
+            newPageNo = 0;
+        }
+        else
+        {
+            if (int.TryParse(pageNo, out newPageNo))
+            {
+                newPageNo -= 1;
+            }
+        }
+
+        return newPageNo;
+    }
+    public int GetNextPageNo()
     {
         var pageNo = Request.Params["page"];
         int newPageNo = 1;
@@ -23,7 +45,7 @@
             }
         }
 
-        return newPageNo.ToString();
+        return newPageNo;
     }
 }
 <link href="/Content/Post.css" rel="stylesheet" />
@@ -160,5 +182,11 @@
     @*@{
         Html.RenderPartial("~/views/Shared/Controls/AssistanceModule.cshtml", 1);
     }*@
-    View more: <a href="?page=@GetNextPageNo()">Next</a> or try a <a href="/@CultureInfo.CurrentUICulture.Name/random">Random Subreddah</a>
+    <span class="footermenu">
+        View more:
+        @if(ShowPrev()) {
+        <a class="nextbutton" href ="?page=@GetPrevPageNo()">< Prev </a><span class="separator"></span> }
+        <a class="nextbutton" href ="?page=@GetNextPageNo()">Next > </a>
+        or try a <a class="nextbutton" href="/@CultureInfo.CurrentUICulture.Name/random"> Random Subreddah</a>
+    </span>
 </div> 

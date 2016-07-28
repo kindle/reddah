@@ -22,6 +22,8 @@ public partial class Group
 
     public string Name { get; set; }
 
+    public System.DateTime CreatedOn { get; set; }
+
 }
 
 }

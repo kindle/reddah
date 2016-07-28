@@ -54,11 +54,11 @@ CREATE TABLE [dbo].[Log]
 	CONSTRAINT [PK_dbo.Log] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
-CREATE TABLE [dbo].[Group]
-(
-	[Id] INT IDENTITY (1, 1) NOT NULL, 
-    [Name] NVARCHAR(MAX) NOT NULL,
-	CONSTRAINT [PK_dbo.Group] PRIMARY KEY CLUSTERED ([Id] ASC)
+CREATE TABLE [dbo].[Group] (
+    [Id] INT IDENTITY (1, 1) NOT NULL,
+    [Name] NVARCHAR (MAX) NOT NULL,
+	[CreatedOn] DATETIME NOT NULL DEFAULT (getdate()),
+    CONSTRAINT [PK_dbo.Group] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
 CREATE TABLE [dbo].[Article]
