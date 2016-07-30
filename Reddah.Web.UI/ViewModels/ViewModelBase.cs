@@ -8,6 +8,8 @@
     {
         protected XmlDocument Doc { get; set; }
 
+        public ViewModelBase() { }
+
         public ViewModelBase(string path)
         {
             Init(path);

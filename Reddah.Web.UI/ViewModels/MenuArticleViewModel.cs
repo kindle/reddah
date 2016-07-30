@@ -99,8 +99,6 @@
 
     public class MenuArticleViewModel : ArticleViewModelBase
     {
-        public List<ArticlePreview> RightBoxModules { get; set; }
-
         public MenuArticleViewModel(string path, string type, int pageNo)
             : base(path)
         {
@@ -113,8 +111,8 @@
         }
 
         public List<ArticlePreview> Articles { get; set; }
-        public List<ArticlePreview> NextPrevBox { get; set; }
-        public List<string> TrendingSubs { get;set; }
+        
+        
 
         public List<ArticlePreview> Folders { get; set; }
         public List<ArticlePreview> Items { get; set; }

@@ -1,0 +1,15 @@
+﻿@model Reddah.Web.UI.Models.CommentModel
+@if (Request.IsAuthenticated){
+    <h2>New Comment</h2>
+    <div>@Html.TextAreaFor(m => m.Content, new { @class="commentText", @placeholder="comment", data_ng_model = "model.Content"})</div>
+    <div>
+        @if (Request.IsAuthenticated){
+        <input class="floatLoginButton" type="button" value="Comment" ng-click="add(@Model.ParentId)"/>
+        }
+        else{
+        <input class="floatLoginButton" type="button" value="Comment" ng-click="showPanel()"/>
+        }
+        <img class="loginLoading" src="/content/images/loading_50x50.gif" ng-show="loading==true"/>
+        <div class="loginError" ng-show="model.Error!='' &&!loading" ng-bind="model.Error"></div>
+    </div>
+}

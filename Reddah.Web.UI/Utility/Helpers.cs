@@ -85,8 +85,19 @@
 
         public static string GetShortTitle(string title)
         {
-            title = (title == null) ? "" : title.Trim().Replace(" ", "_");
-            return title.Substring(0, Math.Min(50, title.Length - 1));
+            var urlTitle = string.Empty;
+            if (!String.IsNullOrWhiteSpace(title))
+            {
+                urlTitle = title;
+            }
+            else 
+            {
+                return "article";
+            }
+
+            urlTitle = Regex.Replace(urlTitle, @"[^A-Za-z0-9 ]+", "");
+            urlTitle = urlTitle.Trim().Replace(" ", "-");
+            return urlTitle.Substring(0, Math.Min(50, urlTitle.Length - 1));
         }
 
         public static string GetAntiForgeryToken()

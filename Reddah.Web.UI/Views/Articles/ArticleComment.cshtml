@@ -64,6 +64,6 @@
 <div ng-controller="commentCtrl">
     <input data-ng-model="articleId" type="hidden" data-ng-init="articleId='@Model.Article.Id'"  />
     All @Model.Article.Count Comments
-    @Html.Partial("~/Views/Shared/Controls/NewComment.cshtml", new CommentModel() { ParentId = -1 })
+    @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = -1 })
     @Html.Partial("Comment", Model.Comments as SeededComments)
 </div>

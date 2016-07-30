@@ -3,9 +3,18 @@
     using System.Xml;
 
     using Reddah.Web.UI.Models;
+    using System.Collections.Generic;
 
     public class ArticleViewModelBase : ViewModelBase
     {
+        public List<ArticlePreview> RightBoxModules { get; set; }
+        public List<ArticlePreview> NextPrevBox { get; set; }
+        public List<string> TrendingSubs { get; set; }
+
+        public ArticleViewModelBase()
+        {
+        }
+
         public ArticleViewModelBase(string path) : base(path)
         {
             Deflection = GetDeflectionModule();

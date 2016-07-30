@@ -125,11 +125,14 @@
             return Redirect(string.Format("/{0}/r/{1}", Thread.CurrentThread.CurrentCulture, subName));
         }
 
-        public ActionResult UserArticles(string userName, string count)
+        public ActionResult UserArticles(string userName, string page)
         {
-            var presentationView = "~/Views/Articles/UserArticleList.cshtml";
+            var presentationView = "~/Views/Articles/ArticleList.cshtml";
 
-            return View(presentationView, new UserArticleViewModel(userName, count));
+            int pageNo = 0;
+            int.TryParse(page, out pageNo);
+
+            return View(presentationView, new UserArticleViewModel(userName, pageNo));
         }
 
         public ActionResult Comments(string id, string count)

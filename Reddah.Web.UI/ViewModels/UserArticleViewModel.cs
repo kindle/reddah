@@ -6,20 +6,21 @@
     using Reddah.Web.UI.Models;
     using Reddah.Web.UI.Utility;
 
-    public class UserArticleViewModel
+    public class UserArticleViewModel : ArticleViewModelBase
     {
         public List<ArticlePreview> Articles { get; set; }
 
-        public UserArticleViewModel(string userName, string count)
+        public UserArticleViewModel(string userName, int pageNo)
         {
+            const int pageCount = 25;
             Articles = new List<ArticlePreview>();
 
             using (var db = new reddahEntities1())
             {
-                var query = from b in db.Articles 
+                var query = (from b in db.Articles 
                             where b.UserName == userName
                             orderby b.Count descending
-                            select b;
+                            select b).Skip(pageCount * pageNo).Take(pageCount); ;
 
                 foreach (var item in query)
                 {
