@@ -7,6 +7,18 @@
     <Title>Announcements</Title>
     <AnnouncementsLinkList>
       <AnnouncementsLink>
+        <Title>Getting Started with Reddah</Title>
+        <ArticleUrl>r/help/gettingstarted</ArticleUrl>
+        <Description></Description>
+        <ImageUrl></ImageUrl>
+      </AnnouncementsLink>
+      <AnnouncementsLink>
+        <Title>Core values that guide us when making decisions</Title>
+        <ArticleUrl>r/help/corevalues</ArticleUrl>
+        <Description></Description>
+        <ImageUrl></ImageUrl>
+      </AnnouncementsLink>
+      <AnnouncementsLink>
         <Title>Reddah Content Policy</Title>
         <ArticleUrl>r/help/contentpolicy</ArticleUrl>
         <Description></Description>
@@ -17,22 +29,10 @@
         <ArticleUrl>r/help/useragreement</ArticleUrl>
         <Description></Description>
         <ImageUrl></ImageUrl>
-    </AnnouncementsLink>
+      </AnnouncementsLink>
       <AnnouncementsLink>
         <Title>Reddah Privacy Policy</Title>
         <ArticleUrl>r/help/privacypolicy</ArticleUrl>
-        <Description></Description>
-        <ImageUrl></ImageUrl>
-    </AnnouncementsLink>
-      <AnnouncementsLink>
-        <Title>Issues with Datel controllers after system update</Title>
-        <ArticleUrl>r/wiki/Pages/Navigationlist</ArticleUrl>
-        <Description></Description>
-        <ImageUrl></ImageUrl>
-      </AnnouncementsLink>
-      <AnnouncementsLink>
-        <Title>Update your Reddah 360 console software</Title>
-        <ArticleUrl>hot</ArticleUrl>
         <Description></Description>
         <ImageUrl></ImageUrl>
       </AnnouncementsLink>

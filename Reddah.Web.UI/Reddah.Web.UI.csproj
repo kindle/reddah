@@ -291,6 +291,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\help\contentpolicy.zh-cn.xml" />
+    <Content Include="App_Data\help\corevalues.xml" />
+    <Content Include="App_Data\help\gettingstarted.xml" />
     <Content Include="App_Data\help\privacypolicy.xml" />
     <Content Include="App_Data\help\useragreement.xml" />
     <Content Include="App_Data\promoted.xml">
@@ -757,9 +759,9 @@
     <Content Include="Content\app\ckeditor\skins\moono\images\refresh.png" />
     <Content Include="Content\app\ckeditor\skins\moono\images\spinner.gif" />
     <Content Include="Content\app\ckeditor\styles.js" />
+    <Content Include="Content\app\collapser-comment.html" />
     <Content Include="Content\app\collapser.html" />
     <Content Include="Content\app\comment.js" />
-    <Content Include="Content\app\collapser-comment.html" />
     <Content Include="Content\app\login.js" />
     <Content Include="Content\Comment.css" />
     <Content Include="Content\Images\ambassador.png" />

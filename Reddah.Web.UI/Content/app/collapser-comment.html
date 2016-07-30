@@ -1,0 +1,8 @@
+﻿<div ng-init="show=true" class="tagline">
+    <a ng-click="show=!show">{{show? toggle1: toggle2}}</a>
+    <div class="author"><a href="/{{locale}}/user/{{username}}">{{username}}</a> submitted {{createdon}} <span ng-show="show&&count>0">({{count}} {{count==1?'child':'children' }})</span></div>
+    <div class="commentclear"></div>
+    <div class="text">{{content}}</div>
+    <div>reply share report</div>
+</div>
+<div ng-show="!show" ng-transclude></div>

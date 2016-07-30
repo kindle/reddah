@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="SolutionArticle">
+  <Title>Getting Started with Reddah</Title>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>How Reddah Works?</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      <h2><b>Vote</b></h2>
+      <h3><font color="red"><b>reddahers vote</b></font> on which stories and discussions are important. the hottest stories rise to the top, while cooler stories sink.</h3>
+      <br/>
+      <h2><b>Comments</b></h2>
+      <h3><font color="red"><b>comments can be posted on every story</b></font> on reddah. comments add information, context, and humor.</h3>
+      <br/>
+      <h2><b>Open Source</b></h2>
+      <h3><font color="red"><b>reddah is open source.</b></font> community members are constantly tinkering and contributing features, bug fixes, and translations back to the site.</h3>
+      <br/>
+      <h2><b>Community</b></h2>
+      <h3><font color="red"><b>anyone can create a community (called "subreddahs").</b></font> each subreddah is independent and moderated by a team of volunteers.</h3>
+      <br/>
+      ]]>
+    </Text>
+  </Module>
+  <DeflectionModule>
+    <Visible>True</Visible>
+    <Id>Articles</Id>
+    <Title>These articles may help answer your questions</Title>
+    <Type>SoftDeflection</Type>
+    <ButtonText></ButtonText>
+    <ButtonLink></ButtonLink>
+    <Descriptions></Descriptions>
+    <Articles>
+      <Article>
+        <Title>
+          <![CDATA[
+          User Agreement also called Terms of Use
+          ]]>
+        </Title>
+        <Link>r/help/useragreement</Link>
+      </Article>
+      <Article>
+        <Title>
+          <![CDATA[
+          Privacy Policy also called Privacy Statement
+          ]]>
+        </Title>
+        <Link>r/help/privacypolicy</Link>
+      </Article>
+      <Article>
+        <Title>
+          <![CDATA[
+          Content Policy also called Code of Conduct
+          ]]>
+        </Title>
+        <Link>r/help/contentpolicy</Link>
+      </Article>
+      <Article>
+        <Title>
+          <![CDATA[
+          Core values that guide us when making decisions
+          ]]>
+        </Title>
+        <Link>r/help/corevalues</Link>
+      </Article>
+    </Articles>
+  </DeflectionModule>
+</ContentType>
