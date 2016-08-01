@@ -287,6 +287,8 @@
     <Content Include="App_Data\controversial.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\dev\routing.xml" />
+    <Content Include="App_Data\dev\ranking.xml" />
     <Content Include="App_Data\gilded.xml">
       <SubType>Designer</SubType>
     </Content>
