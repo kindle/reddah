@@ -781,15 +781,12 @@
     <Content Include="Content\Images\exlogin\microsoft.jpg" />
     <Content Include="Content\Images\exlogin\twitter.jpg" />
     <Content Include="Content\Images\pixOpacity.png" />
-    <Content Include="Content\Log.xml">
+    <Content Include="App_Data\log.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Post.css" />
     <Content Include="Content\ContactSupport.css" />
     <Content Include="Content\Images\sprites.png" />
-    <Content Include="Content\最新.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\Images\menu_shadow.png" />
     <Content Include="Content\Images\running_static25x25.png" />
     <Content Include="Content\Images\step_number_border_25x25.png" />

@@ -135,7 +135,7 @@
             return View(presentationView, new UserArticleViewModel(userName, pageNo));
         }
 
-        public ActionResult Comments(string id, string count)
+        public ActionResult Comments(string groupName, string id, string count)
         {
             int articleId = -1;
             if (int.TryParse(id, out articleId))

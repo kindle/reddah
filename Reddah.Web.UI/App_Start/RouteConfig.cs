@@ -65,7 +65,7 @@
             );
 
             //static article
-            routes.MapLocalizedRoute("StaticArticle", "{locale}/r/{*path}",
+            routes.MapLocalizedRoute("StaticArticle", "{locale}/t/{*path}",
                 new { controller = "Articles", action = "ClassicArticle" }
             );
 
@@ -75,7 +75,7 @@
             );
 
             //comment
-            routes.MapLocalizedRoute("ArticleComment", "{locale}/comments/{id}/{short}",
+            routes.MapLocalizedRoute("ArticleComment", "{locale}/r/{group}/comments/{id}/{short}",
                 new { controller = "Articles", action = "comments" }
             );
 

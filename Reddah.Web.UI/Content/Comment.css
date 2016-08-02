@@ -6,10 +6,10 @@
 div.clearline {
     clear:left;
     height: 0;
-    border-color: #BDBEC1 ;
+    /*border-color: #BDBEC1;
     border-right: 0 none;
     border-style: none none solid; 
-    border-width: 0 0 1px;
+    border-width: 0 0 1px;*/
     padding-bottom: 20px;
     margin-bottom: 10px;
     overflow: hidden;
@@ -38,6 +38,13 @@ div.entry {
     vertical-align:top;
     float:left;
     overflow: hidden;
+}
+
+div.child {
+    border-color: #BDBEC1;
+    border-style: none none none solid;
+    border-width: 0 0 0 1px;
+    margin-left: 10px;
 }
 
 div.entry a {
