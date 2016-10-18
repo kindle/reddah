@@ -13,9 +13,11 @@
         public ArticlePreview Article { get; set; }
         public List<ArticlePreview> RightBoxModules { get; set; }
         public SeededComments Comments { get; set; }
+        public string GroupName { get; set; }
 
-        public ArticleCommentViewModel(int id, string count)
+        public ArticleCommentViewModel(string groupName, int id, string count)
         {
+            GroupName = groupName.ToLowerInvariant();
             RightBoxModules = GetArticlePreviews("/Root/HomePageModularRightContent/HomePageRightBoxModule");
 
             Article = new ArticlePreview();

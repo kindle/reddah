@@ -135,14 +135,14 @@
             return View(presentationView, new UserArticleViewModel(userName, pageNo));
         }
 
-        public ActionResult Comments(string id, string count)
+        public ActionResult Comments(string group, string id, string count)
         {
             int articleId = -1;
             if (int.TryParse(id, out articleId))
             {
                 var presentationView = "~/Views/Articles/ArticleComment.cshtml";
 
-                return View(presentationView, new ArticleCommentViewModel(articleId, count));
+                return View(presentationView, new ArticleCommentViewModel(group, articleId, count));
             }
             else 
             {

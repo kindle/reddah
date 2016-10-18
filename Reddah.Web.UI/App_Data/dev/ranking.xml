@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="SolutionArticle">
+  <Title>How Reddah posts get ranked?</Title>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Ranking Algorithm</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      <h2><b>Hot</b></h2>
+      <br/>
+      <h3>orderby p.Count descending, the post with the most comments goes first.</h3>
+      <br/>
+      
+      <h2><b>New</b></h2>
+      <br/>
+      <h3>orderby p.Id descending, the lastest post goes first.</h3>
+      <br/>
+      
+      <h2><b>Rising</b></h2>
+      <br/>
+      <h3>orderby (p.Up-p.Down) descending , p.Count descending</h3>
+      <br/>
+      
+      <h2><b>Controversial</b></h2>
+      <br/>
+      <h3>orderby (p.Up - p.Down) ascending , (p.Up + p.Down) descending</h3>
+      <br/>
+      
+      <h2><b>Top</b></h2>
+      <br/>
+      <h3>orderby (p.Up + p.Down) descending</h3>
+      <br/>
+      
+      <h2><b>Gilded</b></h2>
+      <br/>
+      <h3>orderby (p.Up - p.Down) descending</h3>
+      <br/>
+      
+      <h2><b>Promoted</b></h2>
+      <br/>
+      <h3>to do</h3>
+      <br/>
+      
+      <h2><b>Next/prev box</b></h2>
+      <br/>
+      <h3>p.Up == null || p.Down == null</h3>
+      <br/>
+      
+      <h2><b>Trending subreddahs</b></h2>
+      <br/>
+      <h3>order by article.groupname OrderByDescending</h3>
+      <br/>
+      ]]>
+    </Text>
+  </Module>
+</ContentType>

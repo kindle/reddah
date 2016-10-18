@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="SolutionArticle">
+  <Title>How Reddah route works?</Title>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Routing</Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      <h2><b>1.template article - compass article, xml template format on server</b></h2>
+      <br/>
+      <h3>
+      {locale}/r/{*path}  
+      content/help/contentpolicy.xml
+      content/help/contentpolicy.zh-cn.xml
+      </h3>
+      <br/>
+      
+      <h2><b>2.dynamic article - article that stored in database</b></h2>
+      <br/>
+      <h3>
+      {locale}/r/{groupname}/comments/id
+      show article content
+      </h3>
+      <br/>
+      
+      <h2><b>3.{locale}/hot</b></h2>
+      <br/>
+      <h3>get hot article list for all groups</h3>
+      <br/>
+      
+      <h2><b>4.{locale}/r/{groupname}</b></h2>
+      <br/>
+      <h3>
+      e.g. /en-us/r/game
+      get article list under group name equals game
+      </h3>
+      <br/>
+      
+      <h2><b>5.{locale}/r/{groupname}/hot</b></h2>
+      <br/>
+      <h3>get hot article list for a specific group</h3>
+      <br/>
+      
+      <h2><b>6.{locale}/{user}</b></h2>
+      <br/>
+      <h3>get article list for specific user</h3>
+      <br/>
+      ]]>
+    </Text>
+  </Module>
+</ContentType>

@@ -8,31 +8,31 @@
     <AnnouncementsLinkList>
       <AnnouncementsLink>
         <Title>Getting Started with Reddah</Title>
-        <ArticleUrl>r/help/gettingstarted</ArticleUrl>
+        <ArticleUrl>t/help/gettingstarted</ArticleUrl>
         <Description></Description>
         <ImageUrl></ImageUrl>
       </AnnouncementsLink>
       <AnnouncementsLink>
         <Title>Core values that guide us when making decisions</Title>
-        <ArticleUrl>r/help/corevalues</ArticleUrl>
+        <ArticleUrl>t/help/corevalues</ArticleUrl>
         <Description></Description>
         <ImageUrl></ImageUrl>
       </AnnouncementsLink>
       <AnnouncementsLink>
         <Title>Reddah Content Policy</Title>
-        <ArticleUrl>r/help/contentpolicy</ArticleUrl>
+        <ArticleUrl>t/help/contentpolicy</ArticleUrl>
         <Description></Description>
         <ImageUrl></ImageUrl>
       </AnnouncementsLink>
       <AnnouncementsLink>
         <Title>Reddah User Agreement</Title>
-        <ArticleUrl>r/help/useragreement</ArticleUrl>
+        <ArticleUrl>t/help/useragreement</ArticleUrl>
         <Description></Description>
         <ImageUrl></ImageUrl>
       </AnnouncementsLink>
       <AnnouncementsLink>
         <Title>Reddah Privacy Policy</Title>
-        <ArticleUrl>r/help/privacypolicy</ArticleUrl>
+        <ArticleUrl>t/help/privacypolicy</ArticleUrl>
         <Description></Description>
         <ImageUrl></ImageUrl>
       </AnnouncementsLink>

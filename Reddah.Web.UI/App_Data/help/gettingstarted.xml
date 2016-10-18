@@ -39,7 +39,7 @@
           User Agreement also called Terms of Use
           ]]>
         </Title>
-        <Link>r/help/useragreement</Link>
+        <Link>t/help/useragreement</Link>
       </Article>
       <Article>
         <Title>
@@ -47,7 +47,7 @@
           Privacy Policy also called Privacy Statement
           ]]>
         </Title>
-        <Link>r/help/privacypolicy</Link>
+        <Link>t/help/privacypolicy</Link>
       </Article>
       <Article>
         <Title>
@@ -55,7 +55,7 @@
           Content Policy also called Code of Conduct
           ]]>
         </Title>
-        <Link>r/help/contentpolicy</Link>
+        <Link>t/help/contentpolicy</Link>
       </Article>
       <Article>
         <Title>
@@ -63,7 +63,7 @@
           Core values that guide us when making decisions
           ]]>
         </Title>
-        <Link>r/help/corevalues</Link>
+        <Link>t/help/corevalues</Link>
       </Article>
     </Articles>
   </DeflectionModule>
