@@ -103,6 +103,8 @@ div.postModuleLiner
 div.rightBox {
     float: right;
     width: 210px;
+    margin-left: 30px;
+    margin-right: 10px;
 }
 
 div.postClear {

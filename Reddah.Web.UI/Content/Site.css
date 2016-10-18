@@ -630,7 +630,12 @@ td.HomePageModularRightContent
 td.HomePageModularCenterContent
 {
     width: 240px;
-    vertical-align: top;
+    vertical-align: top;    
+}
+
+.wide td.HomePageModularCenterContent {
+    margin-left: 30px;
+    margin-right: 10px;
 }
 
 div.AnnouncementsModuleLiner
@@ -770,6 +775,11 @@ div.HomePageRightBoxModule img
     border-color: #BDBEC1;
 }
 
+.wide div.HomePageRightBoxModule img
+{
+    margin-left:30px;
+}
+
 div.HomePageRightBoxModule div
 {
     margin-bottom: 31px;
@@ -785,6 +795,11 @@ div.HomePageRightBoxModule h2, div.HomePageRightBoxModule h2
     word-wrap: normal;
     word-break: normal;
     text-overflow: ellipsis;
+}
+
+.wide div.HomePageRightBoxModule td.rightBoxModule 
+{
+    padding-left:10px;
 }
 /**
 Solution Article Page
@@ -1610,6 +1625,14 @@ input:-moz-placeholder { color:#BDBEC1; }
     margin-left: 11px;
     margin-bottom:20px;
     padding: 5px;
+}
+
+.wide .loginTable {
+    margin-left: 40px;
+}
+
+div.loginTable table {
+    width:100%;
 }
 
 .loginTable td {
