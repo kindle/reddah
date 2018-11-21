@@ -1,0 +1,115 @@
+﻿
+/***********************
+     TABLET HEADER
+************************/
+
+#headerBar
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    background: #f8f8f8;
+    background: -moz-linear-gradient(top,  #f8f8f8 0%, #e0e0e0 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#e0e0e0));
+    background: -webkit-linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    background: -o-linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    background: -ms-linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    background: linear-gradient(top,  #f8f8f8 0%,#e0e0e0 100%);
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#e0e0e0',GradientType=0 );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#e0e0e0',GradientType=0 );
+    box-shadow:0px 3px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+#CompanionHeader
+{
+    display: block;
+}
+
+#CompanionContent
+{
+    padding-top: 78px;
+}
+
+nav
+{
+    position: relative;
+    overflow: hidden;
+    height: 48px;    
+}
+
+.CompanionHeaderButton
+{
+    width: 48px;
+    height: 48px;
+    background-image: url("../Content/Images/header_sprite_companion.png");
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    padding:0;
+    margin: 0;
+    background-repeat: no-repeat;
+    display: inline-block;    
+}
+
+.CompanionHeaderBackButton
+{
+    background-position: 0 0;      
+}
+
+.CompanionHeaderBackButton:hover,
+.CompanionHeaderBackButtonDisabled
+{
+    background-position: -49px 0;      
+}
+
+.CompanionHeaderBackButton:active
+{
+    background-position: -98px 0;      
+}
+
+.CompanionHeaderNextButton
+{
+    background-position: 0 -49px;
+    margin-left: -4px;      
+}
+
+.CompanionHeaderNextButton:hover,
+.CompanionHeaderNextButtonDisabled
+{
+    background-position: -49px -49px; 
+    margin-left: -4px;        
+}
+
+.CompanionHeaderNextButton:active
+{
+    background-position: -98px -49px;      
+}
+
+#CompanionHeaderTitleEndGradient
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-position: 0 -98px;   
+}
+
+#CompanionHeaderTitle
+{
+    font-size: 18px;
+    line-height: 48px;
+    vertical-align: top;
+    margin: 0 58px 0 6px;
+}
+
+
+/***********************
+ TABLET SPECIFIC RULES
+************************/
+
+.BrowsePreviewsContent
+{
+    width:100%;
+    margin: 0 0 0 0;
+}

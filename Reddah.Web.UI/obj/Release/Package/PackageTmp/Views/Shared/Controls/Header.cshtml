@@ -10,6 +10,12 @@
             <div class="LinkArea">
                 <a class="GamerTagArea" href="/@locale/account/manage">@User.Identity.Name</a>
                 <span class="spread">
+                    <a href="/@locale/submit">@Resources.Header_Create</a>
+                </span>
+                <span class="spread">
+                    <a href="/@locale/ChangeLocale" id="ChangeCultureLink" name="ChangeCultureLink">@Resources.Footer_ChangeLocale</a>
+                </span>
+                <span class="spread">
                     <a name="RpsSignInLink" href="/@locale/account/logoff">Log Off</a>
                 </span>
             </div>
@@ -25,9 +31,9 @@
         }
     </div>
     <div id="ShellNavigationBar">
-        @Html.Partial("~/Views/Shared/Controls/NavigationBar.cshtml")
+        @Html.Partial("~/Views/Shared/Controls/NavigationBar.mobile.cshtml")
     </div>
     @Html.Partial("~/Views/Shared/Controls/Breadcrumbs.cshtml")
 </div>
 <div id="BroswerOpacify" ng-click="hidePanel();"></div>
-<div id="LoginPanel">@Html.Partial("_JsonRegister", new Reddah.Web.UI.Models.LoginModel())</div>
+@Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLoginRegister.cshtml")

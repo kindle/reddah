@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "Quote";
+}
+<table>
+@foreach (var fx in ViewBag.CR as List<Reddah.Web.UI.Controllers.FXModel>)
+{
+    <tr><td>@fx.FromCurrency/@fx.ToCurrency</td><td>@fx.Rate</td><td>@fx.Date @fx.Time</td></tr>   
+    @*<div><span style="min-width:200px;background-color:red;">@fx.FromCurrency/@fx.ToCurrency</span> @fx.Rate [@fx.Date @fx.Time]</div>*@
+}
+</table>

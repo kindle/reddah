@@ -1,5 +1,5 @@
 ﻿angular.module("reddahApp")
-.controller("commentCtrl", ['$scope', 'commentSvc', function ($scope, commentSvc) {
+.controller("commentCtrl", ['$scope', 'commentSvc','$window', function ($scope, commentSvc, $window) {
     $scope.loading = false;
     $scope.model = {
         Content: "",
@@ -17,6 +17,8 @@
             if (data.success == true) {
                 $scope.model.Content = "";
                 //todo:insert html via js on top
+                ///$route.reload();
+                $window.location.reload();
             }
             else {
                 var str = '';

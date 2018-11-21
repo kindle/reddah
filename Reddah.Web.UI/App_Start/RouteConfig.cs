@@ -269,6 +269,12 @@
                 "{locale}/Quote",
                 new { controller = "Quote", action = "Index" }
             );
+
+            routes.MapLocalizedRoute(
+                "webapi",
+                "{locale}/api",
+                new { controller = "Articles", action = "GetSub" }
+            );
         }
     }
 }

@@ -106,6 +106,50 @@ div.rightBox {
     margin-left: 30px;
     margin-right: 10px;
 }
+@media screen and (max-width: 900px) {
+    div.rightBox {
+        display: none;
+    }
+
+    .upcomingLinks {
+        display: none;
+    }
+
+    .trendingSubs {
+        display: none;
+    }
+
+    .voterank {
+        display: none;
+    }
+
+    .votecell {
+        display: none;
+    }
+    /*header*/
+    #BodyHeader a {
+        font-size: 20px;
+    }
+
+    #BodyHeader LinkArea {
+        font-size: 20px;
+    }
+
+    div#ShellHeaderContent div#ShellMeBarArea div.LinkArea {
+        font-size: 20px;
+    }
+    /*list*/
+    .bodyContainer { 
+        font-size: 34px; 
+    }
+    .bodyContainer a {
+        font-size: 34px;
+    }
+    /*footer*/
+    #ShellFooterContent a {
+        font-size: 20px; 
+    }
+}
 
 div.postClear {
     clear: left;

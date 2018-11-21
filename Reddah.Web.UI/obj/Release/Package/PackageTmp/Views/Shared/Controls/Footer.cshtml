@@ -1,0 +1,52 @@
+﻿@using System.Globalization
+@using Reddah.Web.UI.Resources
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
+}
+<div id="ShellFooterContent">
+    <div class="PrimaryContent">
+        <div id="ShellRightContentArea">
+        </div>
+
+        <div id="ShellFooterNavigation">
+            <a href="/@locale/Contact-us">Contact Us</a>
+            <a href="#" class="spread">Press</a>
+            <a href="#" class="spread">For Developers</a>
+            <a href="#" class="spread">Jobs</a>
+            <a href="#" class="spread">Feedback</a>
+            <a href="#" class="spread">Photosensitive Seizure Warning</a>
+        </div>
+
+        <div id="ShellFooterSocial" class="ShellFooterSocial">
+            <!--
+            <iframe src="&#47;&#47;www.facebook.com&#47;plugins&#47;like.php&#63;locale&#61;en_US&#38;href&#61;http&#37;3a&#37;2f&#37;2fwww.facebook.com&#37;2freddah&#38;send&#61;false&#38;layout&#61;button_count&#38;show_faces&#61;false&#38;action&#61;like&#38;colorscheme&#61;light&#38;font&#38;height&#61;21" class="socialPluginFramefacebook spread" style="border: none; overflow: hidden; height: 21px;" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
+            -->
+        </div>
+        <div id="ShellLeftContentArea">
+        </div>
+    </div>
+
+    <div class="SecondaryContent">
+        <div id="LogoAndCopyright">
+            <div id="CopyrightLogo1">
+                <font size="4"><b>REDDAH.COM</b></font>
+            </div>
+            <div id="CopyrightText">
+                &#169; 2016 REDDAH.COM
+            </div>
+        </div>
+        <div id="ShellFooterSecondaryNavigation">
+            <div class="FuncLinkArea">
+                <a href="/@locale/ChangeLocale" id="ChangeCultureLink" name="ChangeCultureLink">@Resources.Footer_ChangeLocale</a>
+                <span id="MobileVersionLinkArea">
+                    <a class="changeMobileVersion" href="#" data-type="mobile" id="MobileVersionLink">Mobile version</a>
+                </span>
+            </div>
+            <a href="/@locale/t/help/privacypolicy">Privacy Statement</a>
+            <a href="/@locale/t/help/useragreement" class="spread">Terms of Use</a>
+            <a href="/@locale/t/help/contentpolicy" class="spread">Code of Conduct</a>
+            <a href="#" class="spread">About Our Ads</a>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,9 @@
+D:\BailinStudio\Reddah\Reddah.Web.Core\bin\Debug\Reddah.Web.Core.dll
+D:\BailinStudio\Reddah\Reddah.Web.Core\bin\Debug\Reddah.Web.Core.pdb
+D:\BailinStudio\Reddah\Reddah.Web.Core\bin\Debug\Reddah.Core.dll
+D:\BailinStudio\Reddah\Reddah.Web.Core\bin\Debug\System.Web.Mvc.dll
+D:\BailinStudio\Reddah\Reddah.Web.Core\bin\Debug\Reddah.Core.pdb
+D:\BailinStudio\Reddah\Reddah.Web.Core\bin\Debug\System.Web.Mvc.xml
+D:\BailinStudio\Reddah\Reddah.Web.Core\obj\Debug\Reddah.Web.Core.csprojResolveAssemblyReference.cache
+D:\BailinStudio\Reddah\Reddah.Web.Core\obj\Debug\Reddah.Web.Core.dll
+D:\BailinStudio\Reddah\Reddah.Web.Core\obj\Debug\Reddah.Web.Core.pdb

@@ -167,5 +167,13 @@ namespace Reddah.Web.UI.Resources
                 return ResourceManager.GetString("Footer_ChangeLocale", resourceCulture);
             }
         }
+
+        public static string Header_Create
+        {
+            get
+            {
+                return ResourceManager.GetString("Header_Create", resourceCulture);
+            }
+        }
     }
 }

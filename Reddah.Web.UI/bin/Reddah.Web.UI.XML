@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Reddah.Web.UI</name>
+    </assembly>
+    <members>
+        <member name="T:Reddah.Web.UI.Models.Category">
+            <summary>
+            Object representing a category.
+            </summary>
+        </member>
+        <member name="T:Reddah.Web.UI.Models.Product">
+            <summary>
+            Object representing a product.
+            </summary>
+        </member>
+        <member name="T:Reddah.Web.UI.Models.SectionPreview">
+            <summary>
+            Object representing an section preview.
+            It contains a title and list of articles
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Models.SectionPreview.Title">
+            <summary>
+            Gets or sets the Title of the section.
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Models.SectionPreview.Items">
+            <summary>
+            Gets or sets the article list.
+            </summary>
+        </member>
+        <member name="T:Reddah.Web.UI.Resources.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.Header_MyAccount">
+            <summary>
+              Looks up a localized string similar to My Account
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.Header_JoinNow">
+            <summary>
+              Looks up a localized string similar to Join Now
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.Header_SignIn">
+            <summary>
+              Looks up a localized string similar to Sign In
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.Navi_Home">
+            <summary>
+              Looks up a localized string similar to Home
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.Assistance_Title">
+            <summary>
+              Looks up a localized string similar to Assistance
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.Browse_TopIssues">
+            <summary>
+              Looks up a localized string similar to Top Issues in Browse page
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.Browse_ShowMoreText">
+            <summary>
+              Looks up a localized string similar to Show More in Browse page
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.Browse_ShowLessText">
+            <summary>
+              Looks up a localized string similar to Show Less in Browse page
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.Footer_ChangeLocale">
+            <summary>
+              Looks up a localized string similar to United States for change locale in the footer
+            </summary>
+        </member>
+        <member name="T:Reddah.Web.UI.Routing.RoutingExtensions">
+            <summary>
+            Contents are copied from the framework's RouteCollectionExtensions class and modified
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.ViewModels.HomePageViewModel.Articles">
+            <summary>
+            List of articles
+            </summary>
+        </member>
+    </members>
+</doc>

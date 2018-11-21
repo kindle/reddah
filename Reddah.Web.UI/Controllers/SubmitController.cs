@@ -28,7 +28,10 @@ namespace Reddah.Web.UI.Controllers
                 {
                     if (context.Groups.FirstOrDefault(g => g.Name == article.GroupName) == null)
                     {
-                        context.Groups.Add(new Group { Name = article.GroupName });
+                        context.Groups.Add(new Group { 
+                            Name = article.GroupName,
+                            CreatedOn = DateTime.Now
+                        });
                     }
                     context.Articles.Add(new Article
                     {

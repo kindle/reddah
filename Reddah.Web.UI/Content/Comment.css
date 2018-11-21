@@ -26,7 +26,12 @@ div.articleContent img {
 
 div.rightBox {
     float: right;
-    width: 210px;
+    width: 420px !important;
+}
+@media screen and (max-width: 900px) {
+    div.rightBox {
+        display:none;
+    }
 }
 
 div.votecell {
@@ -113,10 +118,6 @@ div.subreddahbox li:before {
     font-weight: bold;
     border-radius: 2em;
     transition: all .1s ease;
-}
-
-div.rightBox {
-    width: 420px !important;
 }
 
 div.loginTable table{

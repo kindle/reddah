@@ -1,0 +1,51 @@
+﻿@using Reddah.Web.UI.Resources
+@using Reddah.Web.UI.ViewModels
+@model BrowseProductViewModel
+<div class="ProductCategories">@Model.Title</div>
+<ul>
+    @{
+        var i = 1;
+        var productId = "id" + Model.Title.GetHashCode().ToString();
+    }
+    @foreach (var cat in Model.Categories)
+    {
+        var browseTitle = Model.Title + " : " + cat.Title;
+        
+        var dataOmniture = browseTitle.Replace(" : ", ":");
+        dataOmniture = dataOmniture.Replace(Resources.Browse_TopIssues, "all");
+        
+        if (i <= BrowseProductViewModel.CategoryLimit)
+        {
+            if (cat.IsCurrent)
+            {
+                <li class="CategoryArticles Selected" title="@browseTitle" link="@cat.ArticleUrl" data-omniture="@dataOmniture"><a onclick="return false;" href="@cat.Link">@cat.Title</a></li>              
+            }
+            else
+            {
+                <li class="CategoryArticles" title="@browseTitle" link="@cat.ArticleUrl"><a  onclick="return false;" href="@cat.Link">@cat.Title</a></li>
+            }
+        }
+        else if (Model.CurrentCategoryIndex > BrowseProductViewModel.CategoryLimit)
+        {
+            if (cat.IsCurrent)
+            {
+                <li  class="CategoryArticles Selected @productId" title="@browseTitle" link="@cat.ArticleUrl" data-omniture="@dataOmniture"><a onclick="return false;" href="@cat.Link">@cat.Title</a></li>
+            }
+            else
+            {
+                <li class="CategoryArticles @productId"  title="@browseTitle" link="@cat.ArticleUrl"><a onclick="return false;" href="@cat.Link">@cat.Title</a></li>
+            }
+        }
+        else
+        {          
+            <li class="CategoryArticles hideComponent @productId" title="@browseTitle" link="@cat.ArticleUrl"><a onclick="return false;" href="@cat.Link">@cat.Title</a></li>           
+        }
+
+        i++;
+    }
+    @if (Model.Categories.Count > BrowseProductViewModel.CategoryLimit)
+    {
+        var lessOrMoreItems = Model.CurrentCategoryIndex > BrowseProductViewModel.CategoryLimit ? BrowseProductViewModel.ShowLessText : BrowseProductViewModel.ShowMoreText;      
+        <li title="@lessOrMoreItems" class="DisplayLessOrMoreItems" id="@productId">@lessOrMoreItems</li>
+    }
+</ul>

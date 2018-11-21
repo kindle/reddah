@@ -1,0 +1,127 @@
+﻿@using System.Globalization
+@using Reddah.Web.UI.Models
+@model Reddah.Web.UI.ViewModels.WizardStepDataViewModel
+@{
+    var moduleList = new Dictionary<string, string>
+                             {
+                                 {"StartSectionModule", "~/views/Shared/Controls/StartSectionModule.cshtml"},
+                                 {"TextModule", "~/views/Shared/Controls/TextModule.cshtml"},
+                                 {"OneImageModule", "~/views/Shared/Controls/OneImageModule.cshtml"},
+                                 {"TwoImagesModule", "~/views/Shared/Controls/TwoImagesModule.cshtml"},
+                                 {"OneVideoModule", "~/views/Shared/Controls/OneVideoModule.cshtml"}
+                                 //{"LongArticleModule", "~/views/Shared/Controls/LongArticleModule-Companion.cshtml"}
+                             };
+    var index = Model.StepIndex;
+    var solutionIndex = Model.SolutionIndex;
+}
+<h2 class="StepNumber">@string.Format("Step {0}: ", @Model.StepIndex + 1)<span id="StepTitle">@Model.ArticleTitle</span></h2>
+<div id="GhostLegendTitle">
+@if (!string.IsNullOrEmpty(Model.LegendTitle))
+{
+    @Model.LegendTitle
+}
+else
+{
+    @Model.ArticleTitle
+}
+</div>
+@foreach (SolutionModule solutionModule in Model.SolutionModuleList)
+{
+    string path;
+    if (moduleList.TryGetValue(solutionModule.ModuleType, out path))
+    {
+        @Html.Partial(path, solutionModule)
+    }
+}
+<div class="ProposalList">
+    @if(!string.IsNullOrEmpty(Model.AnswersTitle))
+    {
+        <div class="ProposalListTitle">@Model.AnswersTitle</div>
+    }
+
+    @if(@Model.AnswersImageType == "medium" || @Model.AnswersImageType == "")
+    {
+        <table class="ProposalList">
+            <tbody>
+                <tr>
+                    @{
+                        var cnt = 0;
+                        var n = 0;
+                    }
+                    @foreach (ProposalModel proposal in @Model.AnswerList)
+                    {
+                        <td class="ProposalList">
+                            <div class="Proposal">
+                                @if(!String.IsNullOrEmpty(proposal.ImageUrl))
+                                {
+                                    <a href="javascript:selectAnAnswer('/@CultureInfo.CurrentUICulture.Name/WizardStep/GetWizardStep', '@proposal.StepUrl', '@string.Format(proposal.Text + "{0}", n)', @index + 1);"><img src="@proposal.ImageUrl" class="Proposal"/></a>
+                                }
+                                else
+                                {
+                                    <div onclick="javascript:selectAnAnswer('/@CultureInfo.CurrentUICulture.Name/WizardStep/GetWizardStep', '@proposal.StepUrl', '@string.Format(proposal.Text + "{0}", n)', @index + 1);" class="EmptyProposalImage"></div>
+                                }
+                                <div onclick="javascript:selectAnAnswer('/@CultureInfo.CurrentUICulture.Name/WizardStep/GetWizardStep', '@proposal.StepUrl', '@string.Format(proposal.Text + "{0}", n)', '');" class="ProposalBottom">
+                                    <span>@proposal.Text</span>
+                                </div>
+                            </div>
+                        </td>
+                    
+                        if(cnt == 1)
+                        {
+                            cnt = 0;
+                            @:</tr>
+                            @:<tr>
+                        }
+                        else
+                        {
+                            cnt++;
+                        }
+                        n++;
+                    
+                    }
+                </tr>
+            </tbody>
+        </table>
+    }
+    else if (@Model.AnswersImageType == "large")
+    {
+    
+        var n = 0;
+        var imageStyle = string.Empty;
+        if (@Model.AnswersImageForcedHeight)
+        {
+            imageStyle = " ForcedHeight";
+        }
+    
+        foreach (ProposalModel proposal in @Model.AnswerList)
+        {
+            <div>
+                @if(!String.IsNullOrEmpty(proposal.ImageUrl))
+                {
+                    <a href="javascript:selectAnAnswer('/@CultureInfo.CurrentUICulture.Name/WizardStep/GetWizardStep', '@proposal.StepUrl', '@string.Format(proposal.Text + "{0}", n)', @index + 1);"><img src="@proposal.ImageUrl" class="Proposal @imageStyle"/></a>
+                }
+                else
+                {
+                    <div onclick="javascript:selectAnAnswer('/@CultureInfo.CurrentUICulture.Name/WizardStep/GetWizardStep', '@proposal.StepUrl', '@string.Format(proposal.Text + "{0}", n)', @index + 1);" class="EmptyProposalImage"></div>
+                }
+                <div onclick="javascript:selectAnAnswer('/@CultureInfo.CurrentUICulture.Name/WizardStep/GetWizardStep', '@proposal.StepUrl', '@string.Format(proposal.Text + "{0}", n)', '');" class="ProposalBottom">
+                    <span>@proposal.Text</span>
+                </div>
+            </div>
+            n++;
+        }
+    }
+</div>
+@if(@Model.SolveIssue != null)
+{
+    <script type="text/javascript">
+        var noLabel = "@Model.SolveIssue.NoText";
+        var yesLabel = "@Model.SolveIssue.YesText";
+    </script>
+    <div class="SolveIssueQuestion">
+        <div class="WizardLiner"></div>
+        <div class="SolveIssueButton" onclick="javascript:selectAnAnswer('/@CultureInfo.CurrentUICulture.Name/WizardStep/GetWizardStep', '@Model.SolveIssue.NoUrl', noLabel, @index + 1, @solutionIndex + 1);"><span>@Model.SolveIssue.NoText</span></div>
+        <div class="SolveIssueButton SolveIssueYesButton" onclick="javascript:selectAnAnswer('/@CultureInfo.CurrentUICulture.Name/WizardStep/GetWizardStep', '@Model.SolveIssue.YesUrl', yesLabel, @index + 1, @solutionIndex + 1);"><span>@Model.SolveIssue.YesText</span></div>
+        <h3>Did this solve your issue?</h3>
+    </div>
+}

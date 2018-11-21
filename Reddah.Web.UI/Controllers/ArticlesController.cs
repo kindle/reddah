@@ -10,6 +10,9 @@
     using System.Threading;
     using System.Web;
     using Reddah.Web.UI.Utility;
+    //using System.Net.Http;
+    //using System.Web.Http;
+    //using System.Web.Http.Cors;
 
     public class ArticlesController : BaseController
     {
@@ -31,6 +34,34 @@
                 return View(presentationView, new MenuArticleViewModel(path, PresentationTemplate, pageNo));
             }
         }
+
+        //ionic api
+        [HttpGet]
+        [AllowCors("*","*")]
+        public JsonResult GetSub(string sub, int count = 25)
+        {
+            //string sub = "PICS";
+            //int count = 25;
+            if(String.IsNullOrEmpty(sub))
+                sub = new SubArticleViewModel().GetRandomSub();
+
+            return Json(new SubArticleViewModel(sub, count).Articles, JsonRequestBehavior.AllowGet);
+        }
+
+
+        /*public System.Net.Http.HttpResponseMessage GetSub(string sub, int count = 25)
+        {
+            //string sub = "PICS";
+            //int count = 25;
+            if (String.IsNullOrEmpty(sub))
+                sub = new SubArticleViewModel().GetRandomSub();
+
+            ///return Json(new SubArticleViewModel(sub, count).Articles, JsonRequestBehavior.AllowGet);
+            return new System.Net.Http.HttpResponseMessage()
+            {
+                Content = new System.Net.Http.StringContent(Json(new SubArticleViewModel(sub, count).Articles, JsonRequestBehavior.AllowGet).ToString())
+            };
+        }*/
 
         public ActionResult ClassicArticle(string path, string category, string count)
         {

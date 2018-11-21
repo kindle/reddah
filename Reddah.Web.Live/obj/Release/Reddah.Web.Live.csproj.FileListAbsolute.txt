@@ -1,0 +1,9 @@
+D:\BailinStudio\Reddah\Reddah.Web.Live\bin\Release\Reddah.Web.Live.dll
+D:\BailinStudio\Reddah\Reddah.Web.Live\bin\Release\Reddah.Web.Live.pdb
+D:\BailinStudio\Reddah\Reddah.Web.Live\bin\Release\Reddah.Web.Core.dll
+D:\BailinStudio\Reddah\Reddah.Web.Live\bin\Release\Reddah.Core.dll
+D:\BailinStudio\Reddah\Reddah.Web.Live\bin\Release\Reddah.Web.Core.pdb
+D:\BailinStudio\Reddah\Reddah.Web.Live\bin\Release\Reddah.Core.pdb
+D:\BailinStudio\Reddah\Reddah.Web.Live\obj\Release\Reddah.Web.Live.csprojResolveAssemblyReference.cache
+D:\BailinStudio\Reddah\Reddah.Web.Live\obj\Release\Reddah.Web.Live.dll
+D:\BailinStudio\Reddah\Reddah.Web.Live\obj\Release\Reddah.Web.Live.pdb

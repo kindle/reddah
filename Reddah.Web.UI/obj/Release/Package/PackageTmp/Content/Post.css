@@ -1,0 +1,268 @@
+﻿.votecell {
+    vertical-align: top;
+    padding-right: 15px;
+    float: left;
+    display: inline;
+    overflow: hidden;
+}
+.voterank {
+    text-align: right;
+    vertical-align: top;
+    padding-top: 53px;
+    padding-left: 5px;
+    float: left;
+    overflow: hidden;
+    width: 2.2ex;
+}
+.vote{
+    min-width: 80px;
+    text-align: center;
+    vertical-align: top;
+}
+.vote span{
+    display: block;
+    color: #777;
+}
+.vote-count-post{
+    padding:0;
+    border:0;
+    text-align: center;
+    margin: 8px 0;
+    font-size: 20px;
+}
+.vote-up-off{
+    background-position: 0 0;
+
+    height: 40px;
+    text-decoration: none;
+    /*background-image: url("/Content/Images/sprites.png"), none;*/
+    background-image: url("/Content/Images/like-dislike.png"), none;
+    background-size: initial;
+    text-indent: -9999em;
+    font-size:1px;
+    cursor: pointer;
+    display: block;
+    margin:0 auto;
+    width:40px;
+    background-repeat:no-repeat;
+    overflow: hidden;
+}
+.vote-down-off{
+    background-position: -40px 0;
+
+    margin-bottom:10px;
+    height:40px;
+    text-decoration: none;
+    background-image: url("/Content/Images/like-dislike.png"), none;
+    background-size: initial;
+    text-indent: -9999em;
+    font-size:1px;
+    cursor: pointer;
+    display: block;
+    margin:0 auto;
+    width:40px;
+    background-repeat:no-repeat;
+    overflow: hidden;
+}
+.star-off{
+    display: none;
+    background-position: 0 -120px;
+
+    height:30px;
+    text-decoration: none;
+    background-image: url("/Content/Images/sprites.png"), none;
+    background-size: initial;
+    text-indent: -9999em;
+    font-size:1px;
+    cursor: pointer;
+    display: block;
+    margin:0 auto;
+    width:40px;
+    margin-bottom:2px;
+    background-repeat:no-repeat;
+    overflow: hidden;
+}
+.favoritecount{
+    text-align: center;
+    margin:0;
+    margin-top: 30px;
+    padding:0;
+    font-size: 20px;        
+}
+
+div.postModuleLiner
+{
+    border-color: #BDBEC1 ;
+    border-right: 0 none;
+    border-style: none none solid; 
+    border-width: 0 0 1px;
+    padding-bottom: 20px;
+    overflow: hidden;
+}
+
+div.rightBox {
+    float: right;
+    width: 210px;
+    margin-left: 30px;
+    margin-right: 10px;
+}
+@media screen and (max-width: 900px) {
+    div.rightBox {
+        display: none;
+    }
+
+    .upcomingLinks {
+        display: none;
+    }
+
+    .trendingSubs {
+        display: none;
+    }
+
+    .voterank {
+        display: none;
+    }
+
+    .votecell {
+        display: none;
+    }
+    /*header*/
+    #BodyHeader a {
+        font-size: 20px;
+    }
+
+    #BodyHeader LinkArea {
+        font-size: 20px;
+    }
+
+    div#ShellHeaderContent div#ShellMeBarArea div.LinkArea {
+        font-size: 20px;
+    }
+    /*list*/
+    .bodyContainer { 
+        font-size: 34px; 
+    }
+    .bodyContainer a {
+        font-size: 34px;
+    }
+    /*footer*/
+    #ShellFooterContent a {
+        font-size: 20px; 
+    }
+}
+
+div.postClear {
+    clear: left;
+    height: 10px;
+}
+
+.listImage {
+    vertical-align: top;
+}
+
+.listImageWrapper {
+    float: left; 
+    height: 120px; 
+    overflow: hidden;
+    cursor: pointer; 
+}
+
+.listRight .listInfo {
+    color: #BDBEC1;
+}
+
+.listRight a {
+    color: #107C10;
+}
+
+.orgImage, .orgArticle {
+    display: none;
+}
+
+.orgArticle img {
+    max-width: 100%;
+    height: auto !important;
+}
+
+/*upcoming link box*/
+.upcomingLinks {
+    border: 1px solid #BDBEC1;
+    position:relative;
+    overflow:hidden;
+    padding: 10px 0;
+    min-height: 72px;
+}
+
+.upcomingPost {
+    padding-right: 7em;
+    display: none;
+}
+
+.listInfoBlock {
+    overflow:hidden;
+}
+
+.nextprev {
+    margin:10px 10px 10px 0;
+    right:0;
+    top:0;
+    position: absolute;
+    vertical-align: top;
+}
+
+.nextprevHelp {
+    color: #429658;
+    margin: 0px 10px 5px 0;
+    position: absolute;
+    right: -1px;
+    bottom: 0px;
+    z-index: 1;
+    cursor:help;
+}
+
+.buttonPrevNext {
+   width: 25px;
+   height: 25px;
+   border: 1px solid #BDBEC1;
+   cursor:pointer;
+}
+
+/*treding subreddahs*/
+.trendingSubs {
+    margin: 5px 0;
+}
+
+.postBlock a {
+    color: #107C10;
+    cursor:pointer;
+}
+
+span.footermenu .nextbutton
+{
+    border-radius: 3px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1px 4px;
+    font-size: larger;
+}
+
+span.footermenu a:hover
+{
+    background-color: #f0f0f0;
+    border: 1px solid #76bb44;
+}
+
+span.footermenu span.separator
+{
+    margin:0;
+    margin-top: 8px;
+    margin-left: .5em;
+    padding-left: .5em;
+    border-left: 1px solid #ccc;
+    color: gray;
+    font-size: larger;
+}

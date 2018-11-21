@@ -1,9 +1,11 @@
-﻿@{
+﻿@using System.Globalization   
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
     ViewBag.Title = "How Many Users";
 }
 
 <h1>Total Users: @ViewBag.UserCount</h1>
 @foreach (Reddah.Web.UI.UserProfile item in ViewBag.Top)
 {
-    <div>@item.UserId @item.UserName</div>
+    <div>@item.UserId @item.UserName <a href="/@locale/user/@item.UserName">/user/@item.UserName</a></div>
 }

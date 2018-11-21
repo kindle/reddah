@@ -171,19 +171,19 @@
   <HomePageModularRightContent>
     <HomePageRightBoxModule>
       <Title>Feedbacks</Title>
-      <ArticleUrl>#</ArticleUrl>
+      <ArticleUrl>r/feedbacks</ArticleUrl>
       <Description>Get help from the knowledgeable Reddah Community and official Reddah Support!</Description>
       <ImageUrl>/content/images/forum.png</ImageUrl>
     </HomePageRightBoxModule>
     <HomePageRightBoxModule>
       <Title>Discuss on AD</Title>
-      <ArticleUrl>#</ArticleUrl>
+      <ArticleUrl>r/discuss-on-AD</ArticleUrl>
       <Description>A place for discussing the ads that reddah is currently running.</Description>
       <ImageUrl>/content/images/ambassador.png</ImageUrl>
     </HomePageRightBoxModule>
     <HomePageRightBoxModule>
       <Title>Contact Us</Title>
-      <ArticleUrl>Contact-us</ArticleUrl>
+      <ArticleUrl>r/contact-us</ArticleUrl>
       <Description>Get in touch with an Reddah Support technician. We are ready and willing to help you!</Description>
       <ImageUrl>/content/images/contact_us.png</ImageUrl>
     </HomePageRightBoxModule>

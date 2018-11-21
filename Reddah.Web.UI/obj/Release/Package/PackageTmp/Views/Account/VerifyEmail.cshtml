@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Verify your email";
+}
+
+<h1 style="display:none;">@ViewBag.UserId</h1>
+<h2>@ViewBag.EmailToken</h2>
+<h3>@ViewBag.VerifySuccessState</h3>
+@if (ViewBag.VerifySuccessState.ToString() == "AlreadyVerified")
+{
+    <h1>Your email has already been verified.</h1>
+}
+else if (ViewBag.VerifySuccessState.ToString() == "WrongToken")
+{ 
+    <h1>The token is wrong, please try again.</h1>
+}
+else if (ViewBag.VerifySuccessState.ToString() == "UserNotExist")
+{ 
+    <h1>The user does not exist.</h1>
+}
+else if (ViewBag.VerifySuccessState.ToString() == "Success")
+{ 
+    <h1>You have successfully verified your email. </h1>
+}
+else if (ViewBag.VerifySuccessState.ToString() == "NotVerified")
+{ 
+    <h1>The email is not verified.</h1>
+}
+else{
+    <h1>Unknown Error, please try again later.</h1>
+}

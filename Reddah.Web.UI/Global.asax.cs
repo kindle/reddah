@@ -12,6 +12,7 @@
     using CaptchaMvc.Infrastructure;
     using log4net;
     using System.IO;
+    using Reddah.Web.UI.Filters;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -23,11 +24,12 @@
             CaptchaUtils.CaptchaManager.StorageProvider = new CookieStorageProvider();
             //RegisterComponents();
             AreaRegistration.RegisterAllAreas();
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            //SwaggerConfig.Register();
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new CrosHandler());
         }
 
         private static void RegisterComponents()

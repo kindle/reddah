@@ -2,7 +2,7 @@
     ViewBag.Title = "Verify your email";
 }
 
-<h1>@ViewBag.UserId</h1>
+<h1 style="display:none;">@ViewBag.UserId</h1>
 <h2>@ViewBag.EmailToken</h2>
 <h3>@ViewBag.VerifySuccessState</h3>
 @if (ViewBag.VerifySuccessState.ToString() == "AlreadyVerified")
