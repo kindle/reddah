@@ -11,6 +11,7 @@ namespace Reddah.Web.UI.Controllers
         public ActionResult Index() 
         {
             var topList = new List<UserProfile>();
+            var subReddahs = new List<Group>();
             using (var context = new reddahEntities1())
             {
                 ViewBag.UserCount = context.UserProfiles.Count();
@@ -22,9 +23,20 @@ namespace Reddah.Web.UI.Controllers
                     topList.Add(item);
                 }
                 ViewBag.Top = topList;
+
+                ViewBag.SubReddahsCount = context.Groups.Count();
+                var groups = (from g in context.Groups
+                              orderby g.Id descending
+                              select g);
+                foreach (var item in groups)
+                {
+                    subReddahs.Add(item);
+                }
+                ViewBag.SubReddahs = subReddahs;
+
             }
 
             return View("~/Views/Account/Users.cshtml");
-        }        
-    }
+        }
+     }
 }

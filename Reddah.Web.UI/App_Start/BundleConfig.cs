@@ -66,6 +66,8 @@
                         "~/Content/js/Videoplayer.js"));
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
                         "~/Content/js/Common.js"));
+            bundles.Add(new ScriptBundle("~/bundles/common").Include(
+                        "~/Content/js/jquery.okayNav.js"));
             bundles.Add(new ScriptBundle("~/bundles/contactus").Include(
                         "~/Content/js/ContactUs.js"));
             bundles.Add(new ScriptBundle("~/bundles/contactus.displaymodule").Include(

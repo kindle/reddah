@@ -253,8 +253,8 @@
             );
 
             routes.MapLocalizedRoute(
-                "UserCount",
-                "{locale}/Users",
+                "SiteMap",
+                "sitemap",
                 new { controller = "UserCount", action = "index" }
             );
 

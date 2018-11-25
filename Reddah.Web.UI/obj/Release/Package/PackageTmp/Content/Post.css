@@ -127,8 +127,11 @@ div.rightBox {
         display: none;
     }
     /*header*/
+    div#ShellMeBarArea a.GamerTagArea {
+        font-size: 20px !important;
+    }
     #BodyHeader a {
-        font-size: 20px;
+        font-size: 20px;   
     }
 
     #BodyHeader LinkArea {
@@ -140,14 +143,29 @@ div.rightBox {
     }
     /*list*/
     .bodyContainer { 
-        font-size: 34px; 
+        font-size: 45px; 
     }
     .bodyContainer a {
-        font-size: 34px;
+        font-size: 45px;
     }
     /*footer*/
     #ShellFooterContent a {
         font-size: 20px; 
+    }
+
+    .listImageWrapper {
+        height: 190px !important;
+    }
+
+    .listImageWrapper img {
+        width: 293px;
+    }
+
+    div.postModuleLiner {
+        padding:20px !important;
+    }
+    div.rightBox {
+        display:none;
     }
 }
 

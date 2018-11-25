@@ -41,7 +41,7 @@
 
         public static string GetFirstImageSrc(string content)
         {
-            var matches = Regex.Match(content, "<img.+?src=[\"'](.+?)[\"'].*?>", RegexOptions.IgnoreCase);
+            var matches = Regex.Match(System.Web.HttpUtility.HtmlDecode(content), "<img.+?src=[\"'](.+?)[\"'].*?>", RegexOptions.IgnoreCase);
             string matchString = string.IsNullOrWhiteSpace(matches.Groups[1].Value) ? 
                 "" : matches.Groups[1].Value;
 
@@ -95,8 +95,8 @@
                 return "article";
             }
 
-            urlTitle = Regex.Replace(urlTitle, @"[^A-Za-z0-9 ]+", "");
-            urlTitle = urlTitle.Trim().Replace(" ", "-");
+            //urlTitle = Regex.Replace(urlTitle, @"[^A-Za-z0-9 ]+", "");
+            //urlTitle = urlTitle.Trim().Replace(" ", "-");
             return urlTitle.Substring(0, Math.Min(50, urlTitle.Length - 1));
         }
 
@@ -112,12 +112,48 @@
             var re = new Regex(@"\b(\w+)\b", RegexOptions.Compiled);
             var replacements = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
-                {"fuck", "****"},
-                {"bitch", "*****"},
-                {"asshole", "*******"}
+                {"fuck", "duck"},
+                {"bitch", "beach"},
+                {"asshole", "niceweather"}
             };
             return re.Replace(text, match => replacements.ContainsKey(match.Groups[1].Value) ? 
                 replacements[match.Groups[1].Value] : match.Groups[1].Value);
+        }
+
+        public static string HideXss(string text)
+        {
+            var re = new Regex(@"\b(\w+)\b", RegexOptions.Compiled);
+            var replacements = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                {"<applet>", "(applet)"},
+                {"<body>", "(body)"},
+                {"<embed>", "(embed)"},
+                {"<frame>", "(frame)"},
+                {"<script>", "(script)"},
+                {"<frameset>", "(frameset)"},
+                {"<html>", "(html)"},
+                {"<iframe>", "(iframe)"},
+                {"<img>", "(img)"},
+                {"<style>", "(style)"},
+                {"<layer>", "(layer)"},
+                {"<link>", "(link)"},
+                {"<ilayer>", "(ilayer)"},
+                {"<meta>", "(meta)"},
+                {"<object>", "(object)"},
+                {"&lt;script&gt;", "(script)"},
+            };
+            return re.Replace(text, match => replacements.ContainsKey(match.Groups[1].Value) ?
+                replacements[match.Groups[1].Value] : match.Groups[1].Value);
+        }
+
+        public static string HtmlEncode(string text)
+        {
+            return System.Web.HttpUtility.HtmlEncode(Helpers.HideXss(Helpers.HideSensitiveWords(text)));
+        }
+
+        public static string HtmlDecode(string text)
+        {
+            return System.Web.HttpUtility.HtmlDecode(Helpers.HideXss(text));
         }
 
         //public static string GetLocalizedPath(string originalPath)

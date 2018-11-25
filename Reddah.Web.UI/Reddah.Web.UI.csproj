@@ -409,6 +409,7 @@
     <Content Include="Content\Images\like-dislike.png" />
     <Content Include="Content\Images\noimage.jpg" />
     <Content Include="Content\Images\wiki\pdf_icon25x25.png" />
+    <Content Include="Content\js\jquery.okayNav.js" />
     <Content Include="Content\Site.mobile.css" />
     <Content Include="Content\Images\close_icon.png" />
     <Content Include="Content\Images\exlogin\facebook.png" />
@@ -550,6 +551,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Database\Update.sql" />
     <Content Include="Database\DropAll.sql" />
     <Content Include="Database\Setup.sql" />
     <Content Include="favicon.ico" />

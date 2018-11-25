@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Articles">
       <EntityTypeMapping TypeName="reddahModel.Article">
         <MappingFragment StoreEntitySet="Article">
+          <ScalarProperty Name="Locale" ColumnName="Locale" />
           <ScalarProperty Name="GroupName" ColumnName="GroupName" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Count" ColumnName="Count" />

@@ -7,6 +7,7 @@
     using Reddah.Web.UI.Models;
     using Reddah.Web.UI.Utility;
     using System.Web;
+    using System.Globalization;
 
     public static class MenuFactory 
     {
@@ -15,6 +16,8 @@
             const int pageCount = 25;
             var apList = new List<ArticlePreview>();
 
+            string locale = CultureInfo.CurrentUICulture.Name.ToLowerInvariant().Split('-')[0];
+
             using (var db = new reddahEntities1())
             {
                 IEnumerable<Article> query = null;
@@ -22,36 +25,42 @@
                 if (type == "hot")
                 {
                     query = (from b in db.Articles
-                                orderby b.Count descending
+                             where b.Locale.StartsWith(locale)
+                             orderby b.Count descending
                              select b).Skip(pageCount * pageNo).Take(pageCount);
                 }
                 else if (type == "new")
                 {
                     query = (from b in db.Articles
+                             where b.Locale.StartsWith(locale)
                                 orderby b.Id descending
                              select b).Skip(pageCount * pageNo).Take(pageCount);
                 }
                 else if (type == "rising")
                 {
                     query = (from b in db.Articles
+                             where b.Locale.StartsWith(locale)
                                 orderby (b.Up-b.Down) descending, b.Count descending
                              select b).Skip(pageCount * pageNo).Take(pageCount);
                 }
                 else if (type == "controversial")
                 {
                     query = (from b in db.Articles
+                             where b.Locale.StartsWith(locale)
                                 orderby (b.Up - b.Down) ascending, (b.Up + b.Down) descending
                              select b).Skip(pageCount * pageNo).Take(pageCount);
                 }
                 else if (type == "top")
                 {
                     query = (from b in db.Articles
+                             where b.Locale.StartsWith(locale)
                                 orderby (b.Up + b.Down) descending
                              select b).Skip(pageCount * pageNo).Take(pageCount);
                 }
                 else if (type == "gilded")
                 {
                     query = (from b in db.Articles
+                             where b.Locale.StartsWith(locale)
                                 orderby b.Up descending
                              select b).Skip(pageCount * pageNo).Take(pageCount);
                 }
@@ -59,6 +68,7 @@
                 else if (type == "promoted")
                 {
                     query = (from b in db.Articles
+                             where b.Locale.StartsWith(locale)
                                 //where is promoted.
                                 orderby b.Id descending
                              select b).Skip(pageCount * pageNo).Take(pageCount);
@@ -66,6 +76,7 @@
                 else if (type == "nextprevbox")
                 {
                     query = (from b in db.Articles
+                             where b.Locale.StartsWith(locale)
                                 where b.Up == null || b.Down == null
                                 orderby b.CreatedOn descending
                                 select b).Take(10);
@@ -88,6 +99,7 @@
                     ap.UserName = item.UserName;
                     ap.GroupName = item.GroupName;
                     ap.Content = item.Content;
+                    
 
                     apList.Add(ap);
                 }

@@ -1,5 +1,6 @@
 ﻿@using Reddah.Web.UI.Models
 @using System.Globalization   
+@using Reddah.Web.UI.Utility
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
 }
@@ -7,6 +8,16 @@
 <link href="/Content/Post.css" rel="stylesheet" />
 <div class="rightBox">
     @Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())
+    <div class="subreddahbox">
+        <h5>Welcome to <a href="/@locale/r/@Model.GroupName">/r/@Model.GroupName</a></h5>
+        <h3>Rules</h3>
+        <ol>
+            <li>You also agree to follow the Reddah Content Policy. These guidelines are intended to keep people safe, protect kids, keep reddah running, and to encourage personal responsibility for what you do on reddah.</li>
+            <li>You may not post any graphics, text, photographs, images, video, audio or other material that we deem to be junk or spam. Cluttering reddah with this sort of content reduces the quality of the reddah experience for others.</li>
+            <li>You agree not to interrupt the serving of reddah, introduce malicious code onto reddah, make it difficult for anyone else to use reddah due to your actions, attempt to manipulate votes or reddah’s systems, or assist anyone in misusing reddah in any way. It takes a lot of work to maintain reddah. Be cool.</li>
+        </ol>
+        <br/>
+    </div>
     @{
         int j = 0;
         foreach (var rightBoxModule in Model.RightBoxModules)
@@ -34,16 +45,6 @@
             }
         }
     }
-    <div class="subreddahbox">
-        <h5>Welcome to <a href="/@locale/r/@Model.GroupName">/r/@Model.GroupName</a></h5>
-        <h3>Rules</h3>
-        <ol>
-            <li>You also agree to follow the Reddah Content Policy. These guidelines are intended to keep people safe, protect kids, keep reddah running, and to encourage personal responsibility for what you do on reddah.</li>
-            <li>You may not post any graphics, text, photographs, images, video, audio or other material that we deem to be junk or spam. Cluttering reddah with this sort of content reduces the quality of the reddah experience for others.</li>
-            <li>You agree not to interrupt the serving of reddah, introduce malicious code onto reddah, make it difficult for anyone else to use reddah due to your actions, attempt to manipulate votes or reddah’s systems, or assist anyone in misusing reddah in any way. It takes a lot of work to maintain reddah. Be cool.</li>
-        </ol>
-        <br/>
-    </div>
 </div>
 <div class="articleContent">
     <span class="voterank"></span>
@@ -61,11 +62,11 @@
         </div>
     </div>
     <div class="listInfoBlock">
-        <h1>@Html.Raw(Model.Article.Title)</h1>
-        <div class="listInfo">submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Model.Article.GroupName">/r/@Model.Article.GroupName</a></div>
+        <h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1>
+        <div class="listInfo">submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)">/r/@Helpers.HtmlDecode(Model.Article.GroupName)</a></div>
         <div class="listInfo">share save hide report</div>
         <div class="postClear"></div>
-        <div>@Html.Raw(Model.Article.Content)</div>
+        <div>@Html.Raw(Helpers.HtmlDecode(Model.Article.Content))</div>
     </div>
 </div>
 <div class="postModuleLiner"></div>
@@ -75,4 +76,7 @@
     @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = -1 })
     @Html.Partial("Comment", Model.Comments as SeededComments)
 </div>
+@if (Model.Comments.Comments.Count < 5)
+{
 <div id="box" style="height:100vh;"></div>
+}

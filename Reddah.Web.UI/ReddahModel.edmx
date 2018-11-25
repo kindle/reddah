@@ -39,6 +39,7 @@
           <Property Name="Count" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="GroupName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Locale" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -188,6 +189,7 @@
           <Property Type="Int32" Name="Count" Nullable="false" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="GroupName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Locale" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -287,6 +289,7 @@
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="reddahModel.Article">
               <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="Locale" ColumnName="Locale" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Count" ColumnName="Count" />

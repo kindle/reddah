@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Reddah.Web.UI.Utility;
+using System.Globalization;
 
 namespace Reddah.Web.UI.Controllers
 {
@@ -26,27 +28,29 @@ namespace Reddah.Web.UI.Controllers
                 TempData["Message"] = "Message: captcha is valid.";
                 using (var context = new reddahEntities1())
                 {
-                    if (context.Groups.FirstOrDefault(g => g.Name == article.GroupName) == null)
+                    String articleGroupName = Helpers.HtmlEncode(article.GroupName);
+                    if (context.Groups.FirstOrDefault(g => g.Name == articleGroupName) == null)
                     {
-                        context.Groups.Add(new Group { 
-                            Name = article.GroupName,
+                        context.Groups.Add(new Group {
+                            Name = articleGroupName,
                             CreatedOn = DateTime.Now
                         });
                     }
                     context.Articles.Add(new Article
                     {
-                        Title = article.Title,
-                        GroupName = article.GroupName,
-                        Content = Helpers.HideSensitiveWords(article.Content),
-                        Abstract = article.Abstract,
+                        Title = Helpers.HtmlEncode(article.Title),
+                        GroupName = articleGroupName,
+                        Content = Helpers.HtmlEncode(article.Content),
+                        Abstract = Helpers.HtmlEncode(article.Abstract),
                         UserName = User.Identity.Name,
-                        CreatedOn = DateTime.Now
+                        CreatedOn = DateTime.Now,
+                        Locale = CultureInfo.CurrentUICulture.Name.ToLowerInvariant()
                     });
                     context.SaveChanges();
                 }
 
                 //return View("~/Views/Home/HomePageV1.cshtml");
-                return RedirectToRoute("Support");
+                return RedirectToRoute("New");
             }
 
             TempData["ErrorMessage"] = "Error: captcha is not valid.";

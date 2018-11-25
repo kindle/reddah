@@ -637,6 +637,8 @@ body div#BodyFooter div#ShellFooterContent
     background-color:#333333;
     background-image: url(/content/images/Footer-gradient.jpg);
     background-repeat:  repeat-x;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .ja-JP div#BodyFooter div#ShellFooterContent
@@ -1277,4 +1279,30 @@ div#videoPlayerErrorScreen
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
     z-index: 100;
+}
+
+.rd_logo a {
+    background-image: url(/content/images/logo.png);
+    background-position:0,0;
+    background-repeat:no-repeat;
+    background-size: 45px !important;
+    height:45px !important;
+    position: relative;
+    width: 45px !important;
+}
+
+.logo_container {
+    position:absolute;
+    margin-top: -13px;
+    margin-left: -10px;
+    float:left;
+}
+
+@media screen and (max-width: 900px) {
+    .whenmobile {
+        display: none;
+    }
+    .logo_container {
+        margin-left: 0;
+    }
 }

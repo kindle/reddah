@@ -1,4 +1,5 @@
-﻿@model Reddah.Web.UI.Models.CommentModel
+﻿@using Reddah.Web.UI.Utility
+@model Reddah.Web.UI.Models.CommentModel
 @if (Request.IsAuthenticated){
     <h2>New Comment</h2>
     <div>@Html.TextAreaFor(m => m.Content, new { @class="commentText", 

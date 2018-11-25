@@ -29,6 +29,7 @@
     <Property Type="Int32" Name="Count" Nullable="false" />
     <Property Type="String" Name="UserName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="GroupName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Locale" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>

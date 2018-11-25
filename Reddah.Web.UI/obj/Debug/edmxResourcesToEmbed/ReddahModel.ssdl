@@ -34,6 +34,7 @@
     <Property Name="Count" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="GroupName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Locale" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>

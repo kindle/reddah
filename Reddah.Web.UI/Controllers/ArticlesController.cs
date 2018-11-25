@@ -259,7 +259,7 @@
                         {
                             ArticleId = model.ArticleId,
                             ParentId = model.ParentId,
-                            Content = Helpers.HideSensitiveWords(model.Content),
+                            Content = System.Web.HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(model.Content))),
                             CreatedOn = DateTime.Now,
                             UserName = User.Identity.Name
                         });

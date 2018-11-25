@@ -2,4 +2,3 @@ D:\BailinStudio\reddah\Reddah.Encryption\bin\Debug\Reddah.Encryption.dll
 D:\BailinStudio\reddah\Reddah.Encryption\bin\Debug\Reddah.Encryption.pdb
 D:\BailinStudio\reddah\Reddah.Encryption\obj\Debug\Reddah.Encryption.dll
 D:\BailinStudio\reddah\Reddah.Encryption\obj\Debug\Reddah.Encryption.pdb
-D:\BailinStudio\Reddah\Reddah.Encryption\obj\Debug\Reddah.Encryption.csprojResolveAssemblyReference.cache

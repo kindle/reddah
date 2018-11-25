@@ -38,6 +38,8 @@ public partial class Article
 
     public string GroupName { get; set; }
 
+    public string Locale { get; set; }
+
 }
 
 }

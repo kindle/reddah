@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="362e9d61464a44e7b1c22513a90a3d37" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="reddahModel.Article" Width="1.5" PointX="10.605738886914093" PointY="8.441680375692286" />
+        <EntityTypeShape EntityType="reddahModel.Article" Width="1.5" PointX="12.25" PointY="7.875" />
         <EntityTypeShape EntityType="reddahModel.Comment" Width="1.5" PointX="4.5198284892923333" PointY="3.7035436945518216" />
         <EntityTypeShape EntityType="reddahModel.Group" Width="1.5" PointX="11.609334809523698" PointY="17.553179674573791" />
         <EntityTypeShape EntityType="reddahModel.Log" Width="1.5" PointX="6.6841294312310087" PointY="26.701665145671772" />

@@ -32,6 +32,9 @@ div.rightBox {
     div.rightBox {
         display:none;
     }
+    div.articleContent {
+        padding-right: 0em;
+    }
 }
 
 div.votecell {

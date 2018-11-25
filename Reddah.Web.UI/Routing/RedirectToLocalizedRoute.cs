@@ -31,6 +31,7 @@ namespace Reddah.Web.UI.Routing
             httpContext.Response.StatusCode = 302;
             httpContext.Response.AppendHeader("Location", newUri.ToString());
             httpContext.Response.AppendHeader("Access-Control-Allow-Origin", "*");
+            httpContext.Response.AppendHeader("Access-Control-Allow-Credentials", "true");
             httpContext.Response.AppendHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS, POST, PUT");
             httpContext.Response.AppendHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
         }
