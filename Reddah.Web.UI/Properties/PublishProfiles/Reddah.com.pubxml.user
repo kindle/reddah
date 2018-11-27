@@ -2516,7 +2516,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/25/2018 18:50:11</publishTime>
     </File>
     <File Include="Views/Articles/ArticleList.mobile.cshtml">
-      <publishTime>11/27/2018 08:02:02</publishTime>
+      <publishTime>11/27/2018 08:21:43</publishTime>
     </File>
     <File Include="Views/Articles/Comment.cshtml">
       <publishTime>11/27/2018 05:54:14</publishTime>

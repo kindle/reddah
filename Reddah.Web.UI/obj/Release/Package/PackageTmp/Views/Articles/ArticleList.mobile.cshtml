@@ -99,23 +99,21 @@
         {
             <div class="post">
                 <div class="postModuleLiner">
-                    <a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetShortTitle(Helpers.HtmlDecode(article.Title))/" target="_blank">
-                        @if (!String.IsNullOrEmpty(article.ImageUrl)) 
-                        {
-                        <div class="listImage">
-                            <div class="listImageWrapper">
-                                <img ng-click="showImage('post', @index)" class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="@article.ImageUrl" alt="picture">
-                            </div>
+                    @if (!String.IsNullOrEmpty(article.ImageUrl)) 
+                    {
+                    <div class="listImage">
+                        <div class="listImageWrapper">
+                            <img ng-click="showImage('post', @index)" class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="@article.ImageUrl" alt="picture">
                         </div>
-                        }
-                        <h2><a>@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
-                        <div>@Helpers.HtmlDecode(article.Abstract)</div>
-                        <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(article.GroupName)">/r/@Helpers.HtmlDecode(article.GroupName)</a></div>
-                        <div class="listInfo">@article.Comments comments<i class="commenting-o"></i> <!--share save hide report--></div>
-                        <div class="postClear"></div>
-                        <img id="org_image_@index" class="orgImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="100%" src="@article.ImageUrl" alt="picture">
-                        <div id="org_article_@index" class="orgArticle">@Html.Raw(Helpers.HtmlDecode(article.Content))</div>
-                    </a>
+                    </div>
+                    }
+                    <h2><a>@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                    <div>@Helpers.HtmlDecode(article.Abstract)</div>
+                    <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(article.GroupName)">/r/@Helpers.HtmlDecode(article.GroupName)</a></div>
+                    <div class="listInfo"><a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetShortTitle(Helpers.HtmlDecode(article.Title))/" target="_blank">@article.Comments comments</a><i class="commenting-o"></i> <!--share save hide report--></div>
+                    <div class="postClear"></div>
+                    <img id="org_image_@index" class="orgImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="100%" src="@article.ImageUrl" alt="picture">
+                    <div id="org_article_@index" class="orgArticle">@Html.Raw(Helpers.HtmlDecode(article.Content))</div>
                 </div>
             </div>
             <div class="postClear"></div>
