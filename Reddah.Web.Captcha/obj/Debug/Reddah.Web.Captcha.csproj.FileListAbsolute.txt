@@ -6,3 +6,4 @@ D:\BailinStudio\Reddah\Reddah.Web.Captcha\bin\Debug\System.Web.Mvc.xml
 D:\BailinStudio\Reddah\Reddah.Web.Captcha\bin\Debug\System.Web.WebPages.xml
 D:\BailinStudio\Reddah\Reddah.Web.Captcha\obj\Debug\Reddah.Web.Captcha.dll
 D:\BailinStudio\Reddah\Reddah.Web.Captcha\obj\Debug\Reddah.Web.Captcha.pdb
+D:\BailinStudio\Reddah\Reddah.Web.Captcha\obj\Debug\Reddah.Web.Captcha.csprojResolveAssemblyReference.cache

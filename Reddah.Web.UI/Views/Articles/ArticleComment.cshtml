@@ -76,7 +76,7 @@
     @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = -1 })
     @Html.Partial("Comment", Model.Comments as SeededComments)
 </div>
-@if (Model.Comments.Comments.Count < 5)
+@if (!Request.IsAuthenticated && Model.Comments.Comments.Count < 5)
 {
 <div id="box" style="height:100vh;"></div>
 }

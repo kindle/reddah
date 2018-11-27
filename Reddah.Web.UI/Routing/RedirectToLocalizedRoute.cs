@@ -27,8 +27,8 @@ namespace Reddah.Web.UI.Routing
 
             var newUri = ConstructRedirectUrl(httpRequest, culture);
 
-            httpContext.Response.Status = "302 Found";
-            httpContext.Response.StatusCode = 302;
+            httpContext.Response.Status = "301 Found";
+            httpContext.Response.StatusCode = 301;
             httpContext.Response.AppendHeader("Location", newUri.ToString());
             httpContext.Response.AppendHeader("Access-Control-Allow-Origin", "*");
             httpContext.Response.AppendHeader("Access-Control-Allow-Credentials", "true");

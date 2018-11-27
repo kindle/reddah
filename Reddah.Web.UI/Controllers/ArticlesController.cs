@@ -16,6 +16,11 @@
 
     public class ArticlesController : BaseController
     {
+        private string getViewByDevice(){
+            return Request.Browser.IsMobileDevice ?
+                    "~/Views/Articles/ArticleList.mobile.cshtml" : "~/Views/Articles/ArticleList.cshtml";
+        }
+
         public ActionResult Menu(string path, string page)
         {
             if (!System.IO.File.Exists(HttpContext.Server.MapPath("~/App_Data/" + path + ".xml")))
@@ -26,7 +31,7 @@
             {
                 var PresentationTemplate = GetContentType(path);
 
-                var presentationView = "~/Views/Articles/ArticleList.cshtml";
+                var presentationView = getViewByDevice();
 
                 int pageNo = 0;
                 int.TryParse(page, out pageNo);
@@ -147,7 +152,7 @@
 
         public ActionResult SubReddah(string sub, int count = 25)
         {
-            return View("~/Views/Articles/ArticleList.cshtml", new SubArticleViewModel(sub, count));
+            return View(getViewByDevice(), new SubArticleViewModel(sub, count));
         }
 
         public ActionResult RandomSubReddah()
@@ -158,7 +163,7 @@
 
         public ActionResult UserArticles(string userName, string page)
         {
-            var presentationView = "~/Views/Articles/ArticleList.cshtml";
+            var presentationView = getViewByDevice();
 
             int pageNo = 0;
             int.TryParse(page, out pageNo);

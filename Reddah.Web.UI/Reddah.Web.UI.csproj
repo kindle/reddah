@@ -401,6 +401,7 @@
     <Content Include="Content\app\comment.js" />
     <Content Include="Content\app\login.js" />
     <Content Include="Content\Comment.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\ambassador.png" />
     <Content Include="Content\Images\arrow-left.png" />
     <Content Include="Content\Images\arrow-right.png" />
@@ -787,6 +788,7 @@
     <Content Include="Views\Shared\Controls\Header.mobile.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Articles\ArticleList.mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
