@@ -49,7 +49,7 @@
     }
 }
 <link href="/Content/Post.css" rel="stylesheet" />
-<link href="/Content/font-awesome.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 @*<h1 class="HomePageModular">@Model.ArticleTitle</h1>*@
 <div class="rightBox">
     @Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())
@@ -84,6 +84,7 @@
         }
     }
 </div>
+@*<a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetShortTitle(Helpers.HtmlDecode(article.Title))/" target="_blank">*@
 <div class="postBlock">
     @if(Model.TrendingSubs!=null){
     <div class="trendingSubs">trending subreddahs 
@@ -109,11 +110,17 @@
                     }
                     <h2><a>@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
                     <div>@Helpers.HtmlDecode(article.Abstract)</div>
-                    <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(article.GroupName)">/r/@Helpers.HtmlDecode(article.GroupName)</a></div>
-                    <div class="listInfo"><a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetShortTitle(Helpers.HtmlDecode(article.Title))/" target="_blank">@article.Comments comments</a><i class="commenting-o"></i> <!--share save hide report--></div>
+                    
+                    
                     <div class="postClear"></div>
                     <img id="org_image_@index" class="orgImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="100%" src="@article.ImageUrl" alt="picture">
                     <div id="org_article_@index" class="orgArticle">@Html.Raw(Helpers.HtmlDecode(article.Content))</div>
+                    <div class="listInfo">
+                        <a href="/@locale/r/@Helpers.HtmlDecode(article.GroupName)">@Helpers.HtmlDecode(article.GroupName)   </a>
+                        <i class="fa fa-clock-o"> @article.CreatedOn </i> 
+                        <i class="fa fa-commenting-o"> <a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetShortTitle(Helpers.HtmlDecode(article.Title))/" target="_blank">@article.Comments</a> </i> 
+                        <i class="fa fa-user-o" style="float:right;"> <a href="/@locale/user/@article.UserName">@article.UserName</a></i> 
+                    </div>
                 </div>
             </div>
             <div class="postClear"></div>

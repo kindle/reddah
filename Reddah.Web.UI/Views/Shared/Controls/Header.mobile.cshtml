@@ -3,37 +3,126 @@
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
 }
-<div id="ShellHeaderContent">
-    <div id="ShellMeBarArea">
-        @if (Request.IsAuthenticated)
-        {
-            <div class="LinkArea">
-                <a class="GamerTagArea" href="/@locale/account/manage">@User.Identity.Name</a>
-                <span class="spread">
-                    <a href="/@locale/submit">@Resources.Header_Create</a>
-                </span>
-                <span class="spread">
-                    <a href="/@locale/ChangeLocale" id="ChangeCultureLink" name="ChangeCultureLink">@Resources.Footer_ChangeLocale</a>
-                </span>
-                <span class="spread">
-                    <a name="RpsSignInLink" href="/@locale/account/logoff">Log Off</a>
-                </span>
-            </div>
-        }
-        else
-        {
-            <div class="LinkArea">
-                Want to join? <a name="RpsSignInLink" href="/@locale/account/login#">@Resources.Header_SignIn</a> or <a href="/@locale/account/register/#">@Resources.Header_JoinNow</a> in seconds.
-                <span class="spread">
-                    <a href="/@locale/ChangeLocale" id="ChangeCultureLink" name="ChangeCultureLink">@Resources.Footer_ChangeLocale</a>
-                </span>
-            </div>
-        }
-    </div>
-    <div id="ShellNavigationBar">
-        @Html.Partial("~/Views/Shared/Controls/NavigationBar.mobile.cshtml")
-    </div>
-    @Html.Partial("~/Views/Shared/Controls/Breadcrumbs.cshtml")
-</div>
 <div id="BroswerOpacify" ng-click="hidePanel();"></div>
 @Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLoginRegister.cshtml")
+<!--new Header-->
+<script src="https://assets.xbox.com/xbcservicewebsupport-1811-19131-0-0-main-rolling/shell/js/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" href="https://statics-uhf-eus.akamaized.net/west-european/shell/_scrf/css/themes=default.device=uplevel_web_pc/95-bebd50/fa-931df9/52-018a9f/1c-69bb10/e5-670c61/ce-1c4cee/34-6b9bf8/a6-1fffa6?ver=2.0" type="text/css" media="all" />
+<link rel='stylesheet' href='https://statics-uhf-eus.akamaized.net/statics/override.css?c=5' type='text/css' />
+<script src="https://statics-uhf-eus.akamaized.net/shell/_scrf/js/themes=default/54-af9f9f/c0-247156/de-099401/e1-a50eee/e7-954872/d8-97d509/f0-251fe2/46-be1318/77-04a268/7f-652c90/63-077520/a4-34de62/75-71ddfc/db-bc0148/1e-346557/78-4c7d22/df-e4d70f/e4-8302f6/cd-23d3b0/6d-1e7ed0/b7-cadaa7/ca-40b7b0/c3-6454d7/f9-7592d3/10-0288cd/79-499886/7e-cda2d3/32-6dafa3/93-283c2d/e0-3c9860/91-97a04f/1f-100dea/33-abe4df/bf-d3d307?ver=2.0&iife=1"></script>
+
+<header role="banner" class="c-uhfh context-uhf no-js c-sgl-stck c-category-header " itemscope="itemscope" itemtype="http://schema.org/Organization">
+    <div class="theme-light js-global-head f-closed  global-head-cont">
+        <div class="c-uhfh-gcontainer-st">
+            <button type="button" class="c-action-trigger c-glyph glyph-global-nav-button" aria-label="Header navigation menu" aria-expanded="false"></button>
+            <button type="button" class="c-action-trigger c-glyph glyph-arrow-htmllegacy" aria-label="Close search" aria-expanded="false"></button>
+            <a id="uhfLogo" class="c-logo c-sgl-stk-uhfLogo" itemprop="url" href="/" aria-label="Reddah" style="width:100px;">
+                <span role="presentation" aria-hidden="true" style="margin-top:5px!important;">Reddah</span>
+            </a>
+            <nav id="uhf-g-nav" aria-label="Contextual menu" class="c-uhfh-gnav">
+                <ul class="js-paddle-items">
+                  <li class="single-link js-nav-menu">
+                    <a id="c-shellmenu_84" class="c-uhf-nav-link" href="/@locale/hot">Hot</a>
+                  </li>
+                  <li class="single-link js-nav-menu">
+                    <a id="c-shellmenu_84" class="c-uhf-nav-link" href="/@locale/new">New</a>
+                  </li>
+                  <li class="single-link js-nav-menu">
+                    <a id="c-shellmenu_84" class="c-uhf-nav-link" href="/@locale/rising">Rising</a>
+                  </li>
+                  <li class="single-link js-nav-menu">
+                    <a id="c-shellmenu_84" class="c-uhf-nav-link" href="/@locale/controversial">Controversial</a>
+                  </li>
+                  <li class="single-link js-nav-menu">
+                    <a id="c-shellmenu_84" class="c-uhf-nav-link" href="/@locale/top">Top</a>
+                  </li>
+                  <li class="single-link js-nav-menu">
+                    <a id="c-shellmenu_84" class="c-uhf-nav-link" href="/@locale/glided">Gilded</a>
+                  </li>
+                  <li class="single-link js-nav-menu">
+                    <a id="c-shellmenu_84" class="c-uhf-nav-link" href="/@locale/promoted">Promoted</a>
+                  </li>                     
+                  <li class="single-link js-nav-menu">
+                    <a id="c-shellmenu_84" class="c-uhf-nav-link" href="/@locale/support">Support</a>
+                  </li>
+                </ul>
+            </nav>
+
+
+            <div class="c-uhfh-actions">
+                <div class="wf-menu">
+                </div>
+                <form class="c-search" autocomplete="off" id="searchForm" name="searchForm" role="search" action="https://www.xbox.com/en-us/Search" method="GET" title="" aria-expanded="false">
+                  <input id="cli_shellHeaderSearchInput" aria-label="Search" aria-autocomplete="list" aria-controls="universal-header-search-auto-suggest-transparent" aria-owns="universal-header-search-auto-suggest-ul" type="search" name="q" placeholder=""  />
+                  <button id="search" aria-label="Search" class="c-glyph" data-bi-dnt="true" data-bi-mto="true" aria-expanded="false">
+                    <span role="presentation">Search</span>
+                  </button>
+                  <div class="m-auto-suggest" id="universal-header-search-auto-suggest-transparent" role="group">
+                <ul class="c-menu" id="universal-header-search-auto-suggest-ul" aria-hidden="true" data-bi-dnt="true" data-bi-mto="true" data-js-auto-suggest-position="default" role="listbox" data-tel="jsll"></ul>
+            </div>
+            
+        </form>
+        <button id="cancel-search" class="cancel-search" aria-label="Cancel Search">
+            <span>Cancel</span>
+        </button>
+        
+        <a id="uhf-shopping-cart" aria-label="change locale" title=""
+           class="c-action-trigger c-glyph c-uhf-nav-link" href="/@locale/ChangeLocale">
+            <span class="shopping-cart-amount x-hidden" aria-hidden="true">0</span>
+            <span class="c-cart-lbl c-st-lbl">@Resources.Footer_ChangeLocale</span>
+        </a>
+            
+        <div id="meControl" class="c-me">
+            <div class="msame_Header">
+                <div class="msame_Header_name st_msame_placeholder">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div class="LinkArea">
+                            <a class="GamerTagArea" href="/@locale/account/manage">@User.Identity.Name</a>
+                            <span class="spread">
+                                <a href="/@locale/submit">@Resources.Header_Create</a>
+                            </span>
+                            <span class="spread">
+                                <a href="/@locale/ChangeLocale" id="ChangeCultureLink" name="ChangeCultureLink">@Resources.Footer_ChangeLocale</a>
+                            </span>
+                            <span class="spread">
+                                <a name="RpsSignInLink" href="/@locale/account/logoff">Log Off</a>
+                            </span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="LinkArea">
+                            <a name="RpsSignInLink" href="/@locale/account/login#">@Resources.Header_SignIn</a>
+                        </div>
+                    }
+                </div>
+            </div>
+            
+        </div>
+                
+            </div>
+        </div>
+        
+        
+    </div>
+    
+</header>
+
+
+
+
+<script>
+    (function () {
+        var checkSearchSubmit = function (e) {
+            if (searchInputValue.value.trim() === "") {
+                e.preventDefault();
+                return;
+            }
+        };
+        var searchInputValue = document.getElementById('cli_shellHeaderSearchInput');
+        if (searchInputValue && searchInputValue.form.id === "searchForm") {
+            document.getElementById("searchForm").addEventListener("submit", checkSearchSubmit, false);
+        }
+    })();
+</script>

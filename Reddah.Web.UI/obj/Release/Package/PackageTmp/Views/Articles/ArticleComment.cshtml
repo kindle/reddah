@@ -61,10 +61,10 @@
             }
         </div>
     </div>
-    <div class="listInfoBlock">
+    <h1 class="listInfoBlock">
         <h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1>
         <div class="listInfo">submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)">/r/@Helpers.HtmlDecode(Model.Article.GroupName)</a></div>
-        <div class="listInfo">share save hide report</div>
+        <div class="listInfo" style="display:none;">share save hide report</div>
         <div class="postClear"></div>
         <div>@Html.Raw(Helpers.HtmlDecode(Model.Article.Content))</div>
     </div>

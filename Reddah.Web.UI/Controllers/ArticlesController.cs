@@ -176,7 +176,8 @@
             int articleId = -1;
             if (int.TryParse(id, out articleId))
             {
-                var presentationView = "~/Views/Articles/ArticleComment.cshtml";
+                var presentationView = Request.Browser.IsMobileDevice ?
+                    "~/Views/Articles/ArticleComment.mobile.cshtml" : "~/Views/Articles/ArticleComment.cshtml"; 
 
                 return View(presentationView, new ArticleCommentViewModel(group, articleId, count));
             }
