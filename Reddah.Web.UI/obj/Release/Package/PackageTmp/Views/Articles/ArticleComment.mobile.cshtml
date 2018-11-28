@@ -1,0 +1,82 @@
+﻿@using Reddah.Web.UI.Models
+@using System.Globalization   
+@using Reddah.Web.UI.Utility
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
+}
+<link href="/Content/Comment.css" rel="stylesheet" />
+<link href="/Content/Post.css" rel="stylesheet" />
+<div class="rightBox">
+    @Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())
+    <div class="subreddahbox">
+        <h5>Welcome to <a href="/@locale/r/@Model.GroupName">/r/@Model.GroupName</a></h5>
+        <h3>Rules</h3>
+        <ol>
+            <li>You also agree to follow the Reddah Content Policy. These guidelines are intended to keep people safe, protect kids, keep reddah running, and to encourage personal responsibility for what you do on reddah.</li>
+            <li>You may not post any graphics, text, photographs, images, video, audio or other material that we deem to be junk or spam. Cluttering reddah with this sort of content reduces the quality of the reddah experience for others.</li>
+            <li>You agree not to interrupt the serving of reddah, introduce malicious code onto reddah, make it difficult for anyone else to use reddah due to your actions, attempt to manipulate votes or reddah’s systems, or assist anyone in misusing reddah in any way. It takes a lot of work to maintain reddah. Be cool.</li>
+        </ol>
+        <br/>
+    </div>
+    @{
+        int j = 0;
+        foreach (var rightBoxModule in Model.RightBoxModules)
+        {
+            if (!String.IsNullOrEmpty(rightBoxModule.Title) && !String.IsNullOrEmpty(rightBoxModule.ArticleUrl))
+            {
+                if (j == 3)
+                {
+                    break;
+                }
+                <div class="HomePageRightBoxModule">
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="/@locale/@rightBoxModule.ArticleUrl"><img alt="@rightBoxModule.ImageUrl" src="@rightBoxModule.ImageUrl" /></a>
+                            </td>
+                            <td class="rightBoxModule">
+                                <h2><a href="/@locale/@rightBoxModule.ArticleUrl">@rightBoxModule.Title</a></h2>
+                                <div>@rightBoxModule.Description</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                j++;
+            }
+        }
+    }
+</div>
+<div class="articleContent">
+    <span class="voterank"></span>
+    <div class="votecell">
+        <div class="vote">
+            @if (Request.IsAuthenticated){
+            <a class="vote-up-off" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down))">up vote</a>
+            <span itemprop="upvoteCount" class="vote-count-post" id="vote-count-post-@Model.Article.Id">@(Model.Article.Up-Model.Article.Down)</span>
+            <a class="vote-down-off" ng-click="vote(@Model.Article.Id, 'down', @(Model.Article.Up-Model.Article.Down))">down vote</a>}
+            else{
+            <a class="vote-up-off" ng-click="showPanel()">up vote</a>
+            <span itemprop="upvoteCount" class="vote-count-post">@(Model.Article.Up-Model.Article.Down)</span>
+            <a class="vote-down-off" ng-click="showPanel()">down vote</a>
+            }
+        </div>
+    </div>
+    <div class="listInfoBlock">
+        <div class="listInfo"><b>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</b></div>
+        <div class="listInfo">submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)">/r/@Helpers.HtmlDecode(Model.Article.GroupName)</a></div>
+        <div class="listInfo" style="display:none;">share save hide report</div>
+        <div class="postClear"></div>
+        <div>@Html.Raw(Helpers.HtmlDecode(Model.Article.Content))</div>
+    </div>
+</div>
+<div class="postModuleLiner"></div>
+<div ng-controller="commentCtrl">
+    <input data-ng-model="articleId" type="hidden" data-ng-init="articleId='@Model.Article.Id'"  />
+    All @Model.Article.Count Comments
+    @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = -1 })
+    @Html.Partial("Comment", Model.Comments as SeededComments)
+</div>
+@if (!Request.IsAuthenticated && Model.Comments.Comments.Count < 5)
+{
+<div id="box" style="height:100vh;"></div>
+}
