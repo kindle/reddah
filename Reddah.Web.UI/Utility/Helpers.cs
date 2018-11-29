@@ -112,9 +112,14 @@
                 return "reddah_article";
             }
 
-            urlTitle = Regex.Replace(urlTitle, @"[^A-Za-z0-9 ]+", "");
             urlTitle = urlTitle.Trim().Replace(" ", "-");
-            return urlTitle.Substring(0, Math.Min(50, urlTitle.Length - 1));
+
+            string[] invalid = { "<", ">", "*", "%", "&", ":", "/" };
+            foreach (string item in invalid) {
+                urlTitle = urlTitle.Replace(item, "-");
+            }
+            
+            return urlTitle;
         }
 
         public static string GetAntiForgeryToken()

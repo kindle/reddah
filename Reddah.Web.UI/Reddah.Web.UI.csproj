@@ -551,6 +551,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <None Include="vs.gitignore" />
     <Content Include="Database\Update.sql" />
     <Content Include="Database\DropAll.sql" />
     <Content Include="Database\Setup.sql" />
@@ -688,8 +689,12 @@
     <EmbeddedResource Include="Resources\Resources.ja-JP.resx" />
     <EmbeddedResource Include="Resources\Resources.resx" />
     <EmbeddedResource Include="Resources\Resources.en-US.resx" />
-    <EmbeddedResource Include="Resources\Resources.en.resx" />
-    <EmbeddedResource Include="Resources\Resources.zh-CN.resx" />
+    <EmbeddedResource Include="Resources\Resources.en.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resources.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\HomePageV1.cshtml" />

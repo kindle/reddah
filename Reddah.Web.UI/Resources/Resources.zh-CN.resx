@@ -138,4 +138,28 @@
   <data name="Navi_Home" xml:space="preserve">
     <value>主页</value>
   </data>
+  <data name="Menu_Controversial" xml:space="preserve">
+    <value>有争议的</value>
+  </data>
+  <data name="Menu_Gilded" xml:space="preserve">
+    <value>好评如潮</value>
+  </data>
+  <data name="Menu_Hot" xml:space="preserve">
+    <value>点击最多</value>
+  </data>
+  <data name="Menu_New" xml:space="preserve">
+    <value>新帖子</value>
+  </data>
+  <data name="Menu_Promoted" xml:space="preserve">
+    <value>置顶</value>
+  </data>
+  <data name="Menu_Rising" xml:space="preserve">
+    <value>上升</value>
+  </data>
+  <data name="Menu_Support" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="Menu_Top" xml:space="preserve">
+    <value>热评榜</value>
+  </data>
 </root>

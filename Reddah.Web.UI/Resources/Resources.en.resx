@@ -141,6 +141,30 @@
   <data name="Header_SignIn" xml:space="preserve">
     <value>Log In</value>
   </data>
+  <data name="Menu_Controversial" xml:space="preserve">
+    <value>Controversial</value>
+  </data>
+  <data name="Menu_Gilded" xml:space="preserve">
+    <value>Gilded</value>
+  </data>
+  <data name="Menu_Hot" xml:space="preserve">
+    <value>Hot</value>
+  </data>
+  <data name="Menu_New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Menu_Promoted" xml:space="preserve">
+    <value>Promoted</value>
+  </data>
+  <data name="Menu_Rising" xml:space="preserve">
+    <value>Rising</value>
+  </data>
+  <data name="Menu_Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="Menu_Top" xml:space="preserve">
+    <value>Top</value>
+  </data>
   <data name="Navi_Home" xml:space="preserve">
     <value>Home</value>
   </data>

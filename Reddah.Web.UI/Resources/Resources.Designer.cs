@@ -175,5 +175,69 @@ namespace Reddah.Web.UI.Resources
                 return ResourceManager.GetString("Header_Create", resourceCulture);
             }
         }
+
+        public static string Menu_Controversial
+        {
+            get
+            {
+                return ResourceManager.GetString("Menu_Controversial", resourceCulture);
+            }
+        }
+
+        public static string Menu_Gilded
+        {
+            get
+            {
+                return ResourceManager.GetString("Menu_Gilded", resourceCulture);
+            }
+        }
+
+        public static string Menu_Hot
+        {
+            get
+            {
+                return ResourceManager.GetString("Menu_Hot", resourceCulture);
+            }
+        }
+
+        public static string Menu_New
+        {
+            get
+            {
+                return ResourceManager.GetString("Menu_New", resourceCulture);
+            }
+        }
+
+        public static string Menu_Promoted
+        {
+            get
+            {
+                return ResourceManager.GetString("Menu_Promoted", resourceCulture);
+            }
+        }
+
+        public static string Menu_Rising
+        {
+            get
+            {
+                return ResourceManager.GetString("Menu_Rising", resourceCulture);
+            }
+        }
+
+        public static string Menu_Support
+        {
+            get
+            {
+                return ResourceManager.GetString("Menu_Support", resourceCulture);
+            }
+        }
+
+        public static string Menu_Top
+        {
+            get
+            {
+                return ResourceManager.GetString("Menu_Top", resourceCulture);
+            }
+        }
     }
 }
