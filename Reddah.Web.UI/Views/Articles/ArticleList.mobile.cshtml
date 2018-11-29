@@ -108,7 +108,7 @@
                         </div>
                     </div>
                     }
-                    <h2><a>@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                    <h2><a ng-click="toggleArticle('post', @index)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
                     <div>@Helpers.HtmlDecode(article.Abstract)</div>
                     
                     
@@ -118,7 +118,7 @@
                     <div class="listInfo">
                         <a href="/@locale/r/@Helpers.HtmlDecode(article.GroupName)">@Helpers.HtmlDecode(article.GroupName)   </a>
                         <i class="fa fa-clock-o"> @article.CreatedOn </i> 
-                        <i class="fa fa-commenting-o"> <a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetShortTitle(Helpers.HtmlDecode(article.Title))/" target="_blank">@article.Comments</a> </i> 
+                        <i class="fa fa-commenting-o"> <a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetUrlTitle(Helpers.HtmlDecode(article.Title))/" target="_blank">@article.Comments</a> </i> 
                         <i class="fa fa-user-o" style="float:right;"> <a href="/@locale/user/@article.UserName">@article.UserName</a></i> 
                     </div>
                 </div>

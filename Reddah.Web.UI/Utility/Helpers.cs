@@ -100,6 +100,23 @@
             return urlTitle.Substring(0, Math.Min(50, urlTitle.Length - 1));
         }
 
+        public static string GetUrlTitle(string title)
+        {
+            var urlTitle = string.Empty;
+            if (!String.IsNullOrWhiteSpace(title))
+            {
+                urlTitle = title;
+            }
+            else
+            {
+                return "reddah_article";
+            }
+
+            urlTitle = Regex.Replace(urlTitle, @"[^A-Za-z0-9 ]+", "");
+            urlTitle = urlTitle.Trim().Replace(" ", "-");
+            return urlTitle.Substring(0, Math.Min(50, urlTitle.Length - 1));
+        }
+
         public static string GetAntiForgeryToken()
         {
             string cookieToken, formToken;
