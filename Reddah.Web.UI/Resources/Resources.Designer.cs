@@ -91,9 +91,6 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to Sign In
-        /// </summary>
         public static string Header_SignIn
         {
             get
@@ -102,9 +99,14 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to Home
-        /// </summary>
+        public static string Header_SignOut
+        {
+            get
+            {
+                return ResourceManager.GetString("Header_SignOut", resourceCulture);
+            }
+        }
+
         public static string Navi_Home
         {
             get
@@ -113,9 +115,6 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to Assistance
-        /// </summary>
         public static string Assistance_Title
         {
             get
@@ -124,9 +123,6 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to Top Issues in Browse page
-        /// </summary>
         public static string Browse_TopIssues
         {
             get
@@ -135,9 +131,6 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to Show More in Browse page
-        /// </summary>
         public static string Browse_ShowMoreText
         {
             get
@@ -146,9 +139,6 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to Show Less in Browse page
-        /// </summary>
         public static string Browse_ShowLessText
         {
             get
@@ -157,9 +147,6 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to United States for change locale in the footer
-        /// </summary>
         public static string Footer_ChangeLocale
         {
             get
@@ -237,6 +224,30 @@ namespace Reddah.Web.UI.Resources
             get
             {
                 return ResourceManager.GetString("Menu_Top", resourceCulture);
+            }
+        }
+
+        public static string Right_Feedbacks
+        {
+            get
+            {
+                return ResourceManager.GetString("Right_Feedbacks", resourceCulture);
+            }
+        }
+
+        public static string Right_DiscussAd
+        {
+            get
+            {
+                return ResourceManager.GetString("Right_DiscussAd", resourceCulture);
+            }
+        }
+
+        public static string Right_ContactUs
+        {
+            get
+            {
+                return ResourceManager.GetString("Right_ContactUs", resourceCulture);
             }
         }
     }

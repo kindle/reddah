@@ -141,6 +141,9 @@
   <data name="Header_SignIn" xml:space="preserve">
     <value>Log In</value>
   </data>
+  <data name="Header_SignOut" xml:space="preserve">
+    <value>Log Off</value>
+  </data>
   <data name="Menu_Controversial" xml:space="preserve">
     <value>Controversial</value>
   </data>
@@ -167,5 +170,14 @@
   </data>
   <data name="Navi_Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="Right_Feedbacks" xml:space="preserve">
+    <value>Feedbacks</value>
+  </data>
+  <data name="Right_DiscussAd" xml:space="preserve">
+    <value>Discuss on AD</value>
+  </data>
+  <data name="Right_ContactUs" xml:space="preserve">
+    <value>Contact Us</value>
   </data>
 </root>

@@ -1,9 +1,0 @@
-D:\BailinStudio\Reddah\Reddah.Web.Live\bin\Debug\Reddah.Web.Live.dll
-D:\BailinStudio\Reddah\Reddah.Web.Live\bin\Debug\Reddah.Web.Live.pdb
-D:\BailinStudio\Reddah\Reddah.Web.Live\bin\Debug\Reddah.Web.Core.dll
-D:\BailinStudio\Reddah\Reddah.Web.Live\bin\Debug\Reddah.Core.dll
-D:\BailinStudio\Reddah\Reddah.Web.Live\bin\Debug\Reddah.Web.Core.pdb
-D:\BailinStudio\Reddah\Reddah.Web.Live\bin\Debug\Reddah.Core.pdb
-D:\BailinStudio\Reddah\Reddah.Web.Live\obj\Debug\Reddah.Web.Live.csprojResolveAssemblyReference.cache
-D:\BailinStudio\Reddah\Reddah.Web.Live\obj\Debug\Reddah.Web.Live.dll
-D:\BailinStudio\Reddah\Reddah.Web.Live\obj\Debug\Reddah.Web.Live.pdb

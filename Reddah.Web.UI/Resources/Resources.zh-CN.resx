@@ -124,7 +124,7 @@
     <value>中文(中华人民共和国)‎</value>
   </data>
   <data name="Header_Create" xml:space="preserve">
-    <value> 新建</value>
+    <value>发新贴子</value>
   </data>
   <data name="Header_JoinNow" xml:space="preserve">
     <value>立即加入</value>
@@ -134,6 +134,9 @@
   </data>
   <data name="Header_SignIn" xml:space="preserve">
     <value>登录</value>
+  </data>
+  <data name="Header_Signout" xml:space="preserve">
+    <value>退出登录</value>
   </data>
   <data name="Navi_Home" xml:space="preserve">
     <value>主页</value>
@@ -161,5 +164,14 @@
   </data>
   <data name="Menu_Top" xml:space="preserve">
     <value>热评榜</value>
+  </data>
+  <data name="Right_Feedbacks" xml:space="preserve">
+    <value>问题反馈</value>
+  </data>
+  <data name="Right_DiscussAd" xml:space="preserve">
+    <value>广告招商</value>
+  </data>
+  <data name="Right_ContactUs" xml:space="preserve">
+    <value>联系我们</value> 
   </data>
 </root>
