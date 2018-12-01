@@ -144,6 +144,15 @@
   <data name="Header_SignOut" xml:space="preserve">
     <value>Log Off</value>
   </data>
+  <data name="Header_Want" xml:space="preserve">
+    <value>Want to join?</value>
+  </data>
+  <data name="Header_Or" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="Header_InSeconds" xml:space="preserve">
+    <value>in seconds.</value>
+  </data>
   <data name="Menu_Controversial" xml:space="preserve">
     <value>Controversial</value>
   </data>

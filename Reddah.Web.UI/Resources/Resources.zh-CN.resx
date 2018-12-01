@@ -138,6 +138,15 @@
   <data name="Header_Signout" xml:space="preserve">
     <value>退出登录</value>
   </data>
+  <data name="Header_Want" xml:space="preserve">
+    <value>想加入吗?</value>
+  </data>
+  <data name="Header_Or" xml:space="preserve">
+    <value>或</value>
+  </data>
+  <data name="Header_InSeconds" xml:space="preserve">
+    <value>即刻出发</value>
+  </data>
   <data name="Navi_Home" xml:space="preserve">
     <value>主页</value>
   </data>

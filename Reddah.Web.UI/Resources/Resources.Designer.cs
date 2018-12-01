@@ -107,6 +107,29 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
+        public static string Header_Want
+        {
+            get
+            {
+                return ResourceManager.GetString("Header_Want", resourceCulture);
+            }
+        }
+
+        public static string Header_Or
+        {
+            get
+            {
+                return ResourceManager.GetString("Header_Or", resourceCulture);
+            }
+        }
+        public static string Header_InSeconds
+        {
+            get
+            {
+                return ResourceManager.GetString("Header_InSeconds", resourceCulture);
+            }
+        }
+
         public static string Navi_Home
         {
             get
