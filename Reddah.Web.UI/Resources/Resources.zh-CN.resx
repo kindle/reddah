@@ -183,4 +183,52 @@
   <data name="Right_ContactUs" xml:space="preserve">
     <value>联系我们</value> 
   </data>
+  <data name="Article_TrendingSubReddah" xml:space="preserve">
+    <value>热门主题</value>
+  </data>
+  <data name="Article_Comments" xml:space="preserve">
+    <value>评论</value>
+  </data>
+  <data name="Article_WhatThis" xml:space="preserve">
+    <value>这是什么？</value>
+  </data>
+  <data name="Article_WhatThisTip" xml:space="preserve">
+    <value>这个区域显示最新的帖子，为喜欢的帖子点赞吧！</value>
+  </data>
+  <data name="Article_More" xml:space="preserve">
+    <value>查看更多：</value>
+  </data>
+  <data name="Article_Prev" xml:space="preserve">
+    <value>前一页</value>
+  </data>
+  <data name="Article_Next" xml:space="preserve">
+    <value>下一页</value>
+  </data>
+  <data name="Article_OrTry" xml:space="preserve">
+    <value>或者试试</value>
+  </data>
+  <data name="Article_RandomSubReddah" xml:space="preserve">
+    <value>查看随机主题</value>
+  </data>
+  <data name="Login_UserName" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="Login_Password" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="Login_ConfirmPassword" xml:space="preserve">
+    <value>确认密码</value>
+  </data>
+  <data name="Login_Email" xml:space="preserve">
+    <value>电子邮件</value>
+  </data>
+  <data name="Login_RememberMe" xml:space="preserve">
+    <value>记住我？</value>
+  </data>
+  <data name="Login_Signup" xml:space="preserve">
+    <value>注册</value>
+  </data>
+  <data name="Login_CreateNewAccount" xml:space="preserve">
+    <value>创建一个新账户</value>
+  </data>
 </root>

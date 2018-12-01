@@ -189,4 +189,52 @@
   <data name="Right_ContactUs" xml:space="preserve">
     <value>Contact Us</value>
   </data>
+  <data name="Article_TrendingSubReddah" xml:space="preserve">
+    <value>Trending Subreddahs</value>
+  </data>
+  <data name="Article_Comments" xml:space="preserve">
+    <value>comments</value>
+  </data>
+  <data name="Article_WhatThis" xml:space="preserve">
+    <value>what's this?</value>
+  </data>
+  <data name="Article_WhatThisTip" xml:space="preserve">
+    <value>This area shows new and upcoming links. Vote on links here to help them become popular, and click the forwards and backwards buttons to view more.</value>
+  </data>
+  <data name="Article_More" xml:space="preserve">
+    <value>View more:</value>
+  </data>
+  <data name="Article_Prev" xml:space="preserve">
+    <value>Prev</value>
+  </data>
+  <data name="Article_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Article_OrTry" xml:space="preserve">
+    <value>or try a</value>
+  </data>
+  <data name="Article_RandomSubReddah" xml:space="preserve">
+    <value>Random SubReddah</value>
+  </data>
+  <data name="Login_UserName" xml:space="preserve">
+    <value>username</value>
+  </data>
+  <data name="Login_Password" xml:space="preserve">
+    <value>password</value>
+  </data>
+  <data name="Login_ConfirmPassword" xml:space="preserve">
+    <value>confirm password</value>
+  </data>
+  <data name="Login_Email" xml:space="preserve">
+    <value>email</value>
+  </data>
+  <data name="Login_RememberMe" xml:space="preserve">
+    <value>Remember me?</value>
+  </data>
+  <data name="Login_Signup" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="Login_CreateNewAccount" xml:space="preserve">
+    <value>CREATE A NEW ACCOUNT</value>
+  </data>
 </root>

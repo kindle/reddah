@@ -273,5 +273,133 @@ namespace Reddah.Web.UI.Resources
                 return ResourceManager.GetString("Right_ContactUs", resourceCulture);
             }
         }
+
+        public static string Article_TrendingSubReddah
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_TrendingSubReddah", resourceCulture);
+            }
+        }
+
+        public static string Article_Comments
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_Comments", resourceCulture);
+            }
+        }
+
+        public static string Article_WhatThis
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_WhatThis", resourceCulture);
+            }
+        }
+
+        public static string Article_WhatThisTip
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_WhatThisTip", resourceCulture);
+            }
+        }
+
+        public static string Article_More
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_More", resourceCulture);
+            }
+        }
+
+        public static string Article_Prev
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_Prev", resourceCulture);
+            }
+        }
+
+        public static string Article_Next
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_Next", resourceCulture);
+            }
+        }
+
+        public static string Article_OrTry
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_OrTry", resourceCulture);
+            }
+        }
+
+        public static string Article_RandomSubReddah
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_RandomSubReddah", resourceCulture);
+            }
+        }
+
+        public static string Login_UserName
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_UserName", resourceCulture);
+            }
+        }
+
+        public static string Login_Password
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_Password", resourceCulture);
+            }
+        }
+
+        public static string Login_ConfirmPassword
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_ConfirmPassword", resourceCulture);
+            }
+        }
+
+        public static string Login_Email
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_Email", resourceCulture);
+            }
+        }
+
+        public static string Login_RememberMe
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_RememberMe", resourceCulture);
+            }
+        }
+
+        public static string Login_Signup
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_Signup", resourceCulture);
+            }
+        }
+
+        public static string Login_CreateNewAccount
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_CreateNewAccount", resourceCulture);
+            }
+        }
     }
 }
