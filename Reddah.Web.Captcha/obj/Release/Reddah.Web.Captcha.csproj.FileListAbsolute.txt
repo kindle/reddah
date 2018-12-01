@@ -1,9 +1,0 @@
-D:\BailinStudio\Reddah\Reddah.Web.Captcha\bin\Release\Reddah.Web.Captcha.dll
-D:\BailinStudio\Reddah\Reddah.Web.Captcha\bin\Release\Reddah.Web.Captcha.pdb
-D:\BailinStudio\Reddah\Reddah.Web.Captcha\bin\Release\System.Web.Mvc.dll
-D:\BailinStudio\Reddah\Reddah.Web.Captcha\bin\Release\System.Web.WebPages.dll
-D:\BailinStudio\Reddah\Reddah.Web.Captcha\bin\Release\System.Web.Mvc.xml
-D:\BailinStudio\Reddah\Reddah.Web.Captcha\bin\Release\System.Web.WebPages.xml
-D:\BailinStudio\Reddah\Reddah.Web.Captcha\obj\Release\Reddah.Web.Captcha.dll
-D:\BailinStudio\Reddah\Reddah.Web.Captcha\obj\Release\Reddah.Web.Captcha.pdb
-D:\BailinStudio\Reddah\Reddah.Web.Captcha\obj\Release\Reddah.Web.Captcha.csprojResolveAssemblyReference.cache

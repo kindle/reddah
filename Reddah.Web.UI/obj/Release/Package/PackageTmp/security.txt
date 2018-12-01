@@ -1,6 +1,0 @@
-﻿1.CSRF(Cross Site Request Forgery)
-What is the AntiForgeryToken and why do I need it? - ASP.NET MVC 101 series
-http://www.devcurry.com/2013/01/what-is-antiforgerytoken-and-why-do-i.html
-2.XSS
-
-2.SQL injection

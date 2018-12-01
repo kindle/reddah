@@ -1,5 +1,0 @@
-D:\BailinStudio\Reddah\Reddah.Core\bin\Release\Reddah.Core.dll
-D:\BailinStudio\Reddah\Reddah.Core\bin\Release\Reddah.Core.pdb
-D:\BailinStudio\Reddah\Reddah.Core\obj\Release\Reddah.Core.dll
-D:\BailinStudio\Reddah\Reddah.Core\obj\Release\Reddah.Core.pdb
-D:\BailinStudio\Reddah\Reddah.Core\obj\Release\Reddah.Core.csprojResolveAssemblyReference.cache
