@@ -104,6 +104,18 @@
                 new { controller = "submit", action = "index" }
             );
 
+            routes.MapLocalizedRoute(
+                "Edit",
+                "{locale}/edit/{id}",
+                new { controller = "submit", action = "edit"}
+            );
+
+            routes.MapLocalizedRoute(
+               "Delete",
+               "{locale}/delete/{id}",
+               new { controller = "submit", action = "delete" }
+           );
+
 
             //routes.MapLocalizedRoute(
             //    "ArticleWithLocales",

@@ -763,6 +763,7 @@
     <Content Include="Views\Shared\Controls\Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\reddah.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Reddah.com.pubxml" />
     <EntityDeploy Include="ReddahModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -794,6 +795,7 @@
     <Content Include="Views\Articles\ArticleList.mobile.cshtml" />
     <Content Include="Views\Articles\ArticleComment.mobile.cshtml" />
     <Content Include="Views\Shared\Controls\Header.mobile.menu.cshtml" />
+    <Content Include="Views\Submit\edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -19,10 +19,10 @@ div.articleContent {
     padding-right: 7em;
 }
 
-div.articleContent img {
-    max-width: 100%;
-    height: auto !important;
-}
+    div.articleContent img {
+        max-width: 900px !important;
+        height: auto !important;
+    }
 
 div.rightBox {
     float: right;
@@ -125,4 +125,8 @@ div.subreddahbox li:before {
 
 div.loginTable table{
     width: 100%;
+}
+
+div.articleContent img {
+    max-width: 900px !important;
 }

@@ -114,12 +114,12 @@
 
             urlTitle = urlTitle.Trim().Replace(" ", "-");
 
-            string[] invalid = { "<", ">", "*", "%", "&", ":", "/" };
+            string[] invalid = { "<", ">", "*", "%", "&", ":", "/", "." };
             foreach (string item in invalid) {
                 urlTitle = urlTitle.Replace(item, "-");
             }
             
-            return urlTitle;
+            return urlTitle.Substring(0, Math.Min(30, urlTitle.Length));
         }
 
         public static string GetAntiForgeryToken()
