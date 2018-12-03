@@ -1512,6 +1512,11 @@ div.AssistancePopupHeader
  /*contact us end*/
 
  /* Change locale shared page*/
+@media screen and (max-width: 900px) {
+    .changeLocaleBlock {
+        width: 80% !important;
+    }
+}
  .changeLocaleBlock 
 {
     margin: 28px 0px 0px 0px;

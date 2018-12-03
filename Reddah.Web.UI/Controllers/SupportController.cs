@@ -83,7 +83,8 @@ namespace Reddah.Web.UI.Controllers
         {
             if (string.IsNullOrEmpty(targetLocale))
             {
-                var presentationView = "~/Views/Shared/ChangeLocale.cshtml";
+                var presentationView = Request.Browser.IsMobileDevice ? 
+                    "~/Views/Shared/ChangeLocale.mobile.cshtml" : "~/Views/Shared/ChangeLocale.cshtml";
 
                 var allWebCultures = GetCultures();
                 var cultures = new List<CultureViewModel>();
