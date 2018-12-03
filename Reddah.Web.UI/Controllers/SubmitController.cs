@@ -113,6 +113,7 @@ namespace Reddah.Web.UI.Controllers
                     existingArticle.GroupName = article.GroupName;
                     existingArticle.Content = Helpers.HtmlEncode(article.Content);
                     existingArticle.Abstract = Helpers.HtmlEncode(article.Abstract);
+                    existingArticle.LastUpdateOn = DateTime.Now;
 
                     context.SaveChanges();
                 }

@@ -41,6 +41,7 @@
                     Article.UserName = item.UserName;
                     Article.GroupName = item.GroupName;
                     Article.Content = item.Content;
+                    Article.LastUpdateOn = Helpers.TimeAgoNullable(item.LastUpdateOn);
                 }
 
                 var comments = (from c in db.Comments

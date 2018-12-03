@@ -50,6 +50,8 @@ public partial class reddahEntities1 : DbContext
 
     public DbSet<webpages_Roles> webpages_Roles { get; set; }
 
+    public DbSet<C__RefactorLog> C__RefactorLog { get; set; }
+
 }
 
 }

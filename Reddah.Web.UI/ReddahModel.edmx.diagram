@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="362e9d61464a44e7b1c22513a90a3d37" Name="Diagram1" ZoomLevel="97">
+      <Diagram DiagramId="362e9d61464a44e7b1c22513a90a3d37" Name="Diagram1" ZoomLevel="73">
         <EntityTypeShape EntityType="reddahModel.Article" Width="1.5" PointX="12.25" PointY="7.875" />
         <EntityTypeShape EntityType="reddahModel.Comment" Width="1.5" PointX="4.5198284892923333" PointY="3.7035436945518216" />
         <EntityTypeShape EntityType="reddahModel.Group" Width="1.5" PointX="11.609334809523698" PointY="17.553179674573791" />
@@ -15,6 +15,7 @@
         <EntityTypeShape EntityType="reddahModel.webpages_OAuthMembership" Width="1.5" PointX="4.213035706529876" PointY="30.59272283250127" />
         <EntityTypeShape EntityType="reddahModel.webpages_Roles" Width="1.5" PointX="11.771909275917295" PointY="14.554766438228436" />
         <AssociationConnector Association="reddahModel.webpages_UsersInRoles" />
+        <EntityTypeShape EntityType="reddahModel.C__RefactorLog" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

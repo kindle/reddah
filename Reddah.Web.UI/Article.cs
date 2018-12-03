@@ -40,6 +40,8 @@ public partial class Article
 
     public string Locale { get; set; }
 
+    public Nullable<System.DateTime> LastUpdateOn { get; set; }
+
 }
 
 }

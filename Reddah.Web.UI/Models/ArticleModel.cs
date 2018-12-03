@@ -19,6 +19,7 @@ namespace Reddah.Web.UI.Models
         public string GroupName { get; set; }
         public string Content { get; set; }
         public string Locale { get; set; }
+        public string LastUpdateOn { get; set; }
     }
 
     public class VoteModel {

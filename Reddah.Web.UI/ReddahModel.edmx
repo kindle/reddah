@@ -4,35 +4,21 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="reddahModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="reddahModelStoreContainer">
-          <EntitySet Name="Article" EntityType="reddahModel.Store.Article" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Comment" EntityType="reddahModel.Store.Comment" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Group" EntityType="reddahModel.Store.Group" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Log" EntityType="reddahModel.Store.Log" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Setting" EntityType="reddahModel.Store.Setting" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserProfile" EntityType="reddahModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="webpages_Membership" EntityType="reddahModel.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="webpages_OAuthMembership" EntityType="reddahModel.Store.webpages_OAuthMembership" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="webpages_Roles" EntityType="reddahModel.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="webpages_UsersInRoles" EntityType="reddahModel.Store.webpages_UsersInRoles" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="fk_RoleId" Association="reddahModel.Store.fk_RoleId">
-            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
-            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
-          </AssociationSet>
-          <AssociationSet Name="fk_UserId" Association="reddahModel.Store.fk_UserId">
-            <End Role="UserProfile" EntitySet="UserProfile" />
-            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
-          </AssociationSet>
-        </EntityContainer>
+    <Schema Namespace="reddahModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="Article">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Abstract" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Abstract" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="Up" Type="int" />
           <Property Name="Down" Type="int" />
@@ -40,12 +26,13 @@
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="GroupName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Locale" Type="varchar" MaxLength="10" />
+          <Property Name="LastUpdateOn" Type="datetime" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ArticleId" Type="int" Nullable="false" />
           <Property Name="ParentId" Type="int" Nullable="false" />
           <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
@@ -60,7 +47,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
         </EntityType>
@@ -68,19 +55,19 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="Thread" Type="varchar" Nullable="false" MaxLength="255" />
-          <Property Name="Level" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="Logger" Type="varchar" Nullable="false" MaxLength="255" />
-          <Property Name="Message" Type="varchar" Nullable="false" MaxLength="4000" />
+          <Property Name="Thread" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Level" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Logger" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="4000" Nullable="false" />
           <Property Name="Exception" Type="varchar" MaxLength="2000" />
         </EntityType>
         <EntityType Name="Setting">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Key" Type="nvarchar(max)" />
           <Property Name="Value" Type="nvarchar(max)" />
         </EntityType>
@@ -88,7 +75,7 @@
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar(max)" />
           <Property Name="Email" Type="nvarchar(max)" />
         </EntityType>
@@ -102,9 +89,9 @@
           <Property Name="IsConfirmed" Type="bit" />
           <Property Name="LastPasswordFailureDate" Type="datetime" />
           <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="PasswordChangedDate" Type="datetime" />
-          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
           <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
         </EntityType>
@@ -113,16 +100,16 @@
             <PropertyRef Name="Provider" />
             <PropertyRef Name="ProviderUserId" />
           </Key>
-          <Property Name="Provider" Type="nvarchar" Nullable="false" MaxLength="30" />
-          <Property Name="ProviderUserId" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Roles">
           <Key>
             <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_UsersInRoles">
           <Key>
@@ -133,8 +120,8 @@
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="fk_RoleId">
-          <End Role="webpages_Roles" Type="reddahModel.Store.webpages_Roles" Multiplicity="1" />
-          <End Role="webpages_UsersInRoles" Type="reddahModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="webpages_Roles">
               <PropertyRef Name="RoleId" />
@@ -145,8 +132,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_UserId">
-          <End Role="UserProfile" Type="reddahModel.Store.UserProfile" Multiplicity="1" />
-          <End Role="webpages_UsersInRoles" Type="reddahModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserProfile">
               <PropertyRef Name="UserId" />
@@ -156,6 +143,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="reddahModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -174,6 +182,7 @@
             <End Role="webpages_Roles" EntitySet="webpages_Roles" />
             <End Role="UserProfile" EntitySet="UserProfiles" />
           </AssociationSet>
+          <EntitySet Name="C__RefactorLog" EntityType="reddahModel.C__RefactorLog" />
         </EntityContainer>
         <EntityType Name="Article">
           <Key>
@@ -190,6 +199,7 @@
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="GroupName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Locale" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdateOn" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -280,6 +290,12 @@
           <End Type="reddahModel.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
           <End Type="reddahModel.UserProfile" Role="UserProfile" Multiplicity="*" />
         </Association>
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -289,6 +305,7 @@
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="reddahModel.Article">
               <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="LastUpdateOn" ColumnName="LastUpdateOn" />
                 <ScalarProperty Name="Locale" ColumnName="Locale" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -401,6 +418,13 @@
               <ScalarProperty Name="RoleId" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="reddahModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

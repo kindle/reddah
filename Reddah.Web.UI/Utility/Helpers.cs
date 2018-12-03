@@ -48,9 +48,23 @@
             return matchString;
         }
 
+
+        public static string TimeAgoNullable(Nullable<System.DateTime> dt)
+        {
+            if (dt == null)
+                return null;
+            else
+                return dt.Value.ToShortDateString() + " " + dt.Value.ToShortTimeString();
+        }
+
         public static string TimeAgo(DateTime dt)
         {
             TimeSpan span = DateTime.Now - dt;
+            return TimeAgo(span);
+        }
+
+        private static string TimeAgo(TimeSpan span)
+        {
             if (span.Days > 365)
             {
                 int years = (span.Days / 365);
