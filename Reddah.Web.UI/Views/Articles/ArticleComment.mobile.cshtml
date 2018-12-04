@@ -61,7 +61,6 @@
             }
         </div>
     </div>
-    <div class="listInfoBlock">
         <div class="listInfo"><b>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</b></div>
         <div class="postClear"></div>
         <div class="listInfo">submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)">/r/@Helpers.HtmlDecode(Model.Article.GroupName)</a></div>

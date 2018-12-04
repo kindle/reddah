@@ -14,22 +14,8 @@
         {
             var seededComments = new SeededComments { Seed = node.Id, Comments = Model.Comments };
             <li class="comment">
-                <div class="votecell">
-                    <div class="vote">
-                        vote
-                        @*@if (Request.IsAuthenticated){
-                        <a class="vote-up-off" ng-click="vote(@node.Id, 'up', @node.Up)">up vote</a>
-                        <span itemprop="upvoteCount" class="vote-count-post" id="vote-count-post-@node.Id">-</span>
-                        <a class="vote-down-off" ng-click="vote(@node.Id, 'down', @node.Down)">down vote</a>}
-                        else{
-                        <a class="vote-up-off" ng-click="showPanel()">up vote</a>
-                        <span itemprop="upvoteCount" class="vote-count-post">-</span>
-                        <a class="vote-down-off" ng-click="showPanel()">down vote</a>
-                        }*@
-                    </div>
-                </div>
                 <div class="entry">
-                    <collapser-comment toggle1="[-]" toggle2="[+]" locale="@locale" username="@node.UserName" createdon="@Helpers.TimeAgo(node.CreatedOn)" content="@node.Content" count="@node.Count" parentid="@Model.Seed">
+                    <collapser-comment toggle1="[-]" toggle2="[+]" locale="@locale" username="@node.UserName" createdon="@Helpers.TimeAgo(node.CreatedOn)" content="@Html.Raw(Helpers.HtmlDecode(node.Content))" count="@node.Count" parentid="@Model.Seed">
                         @if (Request.IsAuthenticated){
                         <div class="buttons">
                             <collapser caption="reply">

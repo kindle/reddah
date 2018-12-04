@@ -61,8 +61,7 @@
             }
         </div>
     </div>
-    <h1 class="listInfoBlock">
-        <h1 style="margin-top:-15px;">@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1>
+        <h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1>
         <div class="listInfo">Submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)">/r/@Helpers.HtmlDecode(Model.Article.GroupName)</a></div>
         @if (Model.Article.LastUpdateOn != null)
         {<div class="listInfo">Last updated on @Model.Article.LastUpdateOn</div>}

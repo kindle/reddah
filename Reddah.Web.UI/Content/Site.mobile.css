@@ -1516,6 +1516,10 @@ div.AssistancePopupHeader
     .changeLocaleBlock {
         width: 80% !important;
     }
+
+    .changeLocaleBlock li {
+        margin-bottom: 68px;
+    }
 }
  .changeLocaleBlock 
 {
