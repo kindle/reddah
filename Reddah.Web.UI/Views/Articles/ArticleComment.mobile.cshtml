@@ -80,7 +80,7 @@
     }
 </div>
 <div class="postModuleLiner"></div>
-<div ng-controller="commentCtrl">
+<div ng-controller="commentCtrl" id="mobileComments">
     <input data-ng-model="articleId" type="hidden" data-ng-init="articleId='@Model.Article.Id'"  />
     All @Model.Article.Count Comments
     @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = -1 })

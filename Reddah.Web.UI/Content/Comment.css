@@ -35,6 +35,9 @@ div.rightBox {
     div.articleContent {
         padding-right: 0em;
     }
+    #mobileComments {
+        font-size: 30px !important;
+    }
 }
 
 div.votecell {
