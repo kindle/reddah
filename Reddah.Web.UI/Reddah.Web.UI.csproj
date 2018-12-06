@@ -800,6 +800,9 @@
     <Content Include="Views\Shared\Controls\Header.mobile.menu.cshtml" />
     <Content Include="Views\Submit\edit.cshtml" />
     <Content Include="Views\Shared\ChangeLocale.mobile.cshtml" />
+    <Content Include="Views\Account\Login.mobile.cshtml" />
+    <Content Include="Views\Account\Manage.mobile.cshtml" />
+    <Content Include="Views\Account\Register.mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

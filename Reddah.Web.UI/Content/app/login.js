@@ -78,7 +78,7 @@
     $scope.toggleArticle = function (box, index) {
         $('.' + box + ' div#org_article_' + index).toggle();
     }
-    $scope.vote = function (articleId, value, orgCount) {
+    $scope.vote = function (articleId, value, orgCount, page) {
         $scope.voteModel = {
             ArticleId: articleId,
             Value: value
@@ -86,7 +86,7 @@
         loginSvc.vote($scope.voteModel).then(function (data) {
             if (data.success == true) {
                 var newCount = value == "up" ? orgCount + 1 : orgCount - 1;
-                $('.post span#vote-count-post-' + articleId).text(newCount);
+                $('.'+page+' span#vote-count-post-' + articleId).text(newCount);
             }
             else {
                 var str = '';

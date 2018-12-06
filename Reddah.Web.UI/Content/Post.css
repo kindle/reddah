@@ -128,6 +128,18 @@ div.rightBox {
     }
     /*comment*/
 
+    div#articleContentMobile h1 {
+        font-size: 50px;
+        font-weight:bold;
+    }
+    div#articleContentMobile h2 {
+        font-size: 45px;
+        font-weight:bold;
+    }
+    div#articleContentMobile h3 {
+        font-size: 40px;
+        font-weight: bold;
+    }
     /*header*/
     div#ShellMeBarArea a.GamerTagArea {
         font-size: 30px !important;
@@ -146,6 +158,9 @@ div.rightBox {
     /*list*/
     .bodyContainer { 
         font-size: 45px; 
+    }
+    .bodyContainer h1 {
+        font-size: 55px;
     }
     .bodyContainer a {
         font-size: 45px;

@@ -46,14 +46,14 @@
         }
     }
 </div>
-<div class="articleContent">
+<div class="articleContent" id="articleContentMobile">
     <span class="voterank"></span>
     <div class="votecell">
         <div class="vote">
             @if (Request.IsAuthenticated){
-            <a class="vote-up-off" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down))">up vote</a>
+            <a class="vote-up-off" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContent')">up vote</a>
             <span itemprop="upvoteCount" class="vote-count-post" id="vote-count-post-@Model.Article.Id">@(Model.Article.Up-Model.Article.Down)</span>
-            <a class="vote-down-off" ng-click="vote(@Model.Article.Id, 'down', @(Model.Article.Up-Model.Article.Down))">down vote</a>}
+            <a class="vote-down-off" ng-click="vote(@Model.Article.Id, 'down', @(Model.Article.Up-Model.Article.Down),'articleContent')">down vote</a>}
             else{
             <a class="vote-up-off" ng-click="showPanel()">up vote</a>
             <span itemprop="upvoteCount" class="vote-count-post">@(Model.Article.Up-Model.Article.Down)</span>
@@ -61,7 +61,7 @@
             }
         </div>
     </div>
-        <div class="listInfo"><b>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</b></div>
+        <div class="listInfo"><h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1></div>
         <div class="postClear"></div>
         <div class="listInfo">submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)">/r/@Helpers.HtmlDecode(Model.Article.GroupName)</a></div>
         @if (Model.Article.LastUpdateOn != null)
@@ -73,10 +73,10 @@
         <div>@Html.Raw(Helpers.HtmlDecode(Model.Article.Content))</div>
     </div>
 </div>
-<div class="vote">
+<div class="vote articleContentMobile">
     @if (Request.IsAuthenticated)
     {
-        <a class="vote-up-off" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down))">up vote</a>
+        <a class="vote-up-off" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContentMobile')">up vote</a>
     }
 </div>
 <div class="postModuleLiner"></div>

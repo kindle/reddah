@@ -51,9 +51,9 @@
     <div class="votecell">
         <div class="vote">
             @if (Request.IsAuthenticated){
-            <a class="vote-up-off" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down))">up vote</a>
+            <a class="vote-up-off" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContent')">up vote</a>
             <span itemprop="upvoteCount" class="vote-count-post" id="vote-count-post-@Model.Article.Id">@(Model.Article.Up-Model.Article.Down)</span>
-            <a class="vote-down-off" ng-click="vote(@Model.Article.Id, 'down', @(Model.Article.Up-Model.Article.Down))">down vote</a>}
+            <a class="vote-down-off" ng-click="vote(@Model.Article.Id, 'down', @(Model.Article.Up-Model.Article.Down),'articleContent')">down vote</a>}
             else{
             <a class="vote-up-off" ng-click="showPanel()">up vote</a>
             <span itemprop="upvoteCount" class="vote-count-post">@(Model.Article.Up-Model.Article.Down)</span>
