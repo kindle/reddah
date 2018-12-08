@@ -132,8 +132,17 @@
             foreach (string item in invalid) {
                 urlTitle = urlTitle.Replace(item, "-");
             }
-            
-            return urlTitle.Substring(0, Math.Min(30, urlTitle.Length));
+
+            urlTitle = urlTitle.Replace("--", "-");
+            if (urlTitle.IndexOf('-') == 0 && urlTitle.Length>1)
+                urlTitle.Remove(1);
+
+            urlTitle = urlTitle.Substring(0, Math.Min(50, urlTitle.Length));
+
+            if (urlTitle.LastIndexOf('-') == urlTitle.Length - 1)
+                urlTitle = urlTitle.Substring(0, urlTitle.Length - 1);
+
+            return urlTitle;
         }
 
         public static string GetAntiForgeryToken()

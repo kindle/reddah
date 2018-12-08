@@ -58,6 +58,7 @@
     
 }])
 .controller("appCtrl", ['$scope', 'loginSvc', function ($scope, loginSvc) {
+    $scope.verify = null;
     $scope.loginModel = { UserName: "", Password: "", RememberMe: false, ReturnUrl: window.location.href, Error: "", Token: "" };
     $scope.showPanel = function () {
         $('div#BroswerOpacify').show();
@@ -78,15 +79,30 @@
     $scope.toggleArticle = function (box, index) {
         $('.' + box + ' div#org_article_' + index).toggle();
     }
-    $scope.vote = function (articleId, value, orgCount, page) {
+    $scope.vote = function (articleId, value, orgCount, page, tick) {
         $scope.voteModel = {
             ArticleId: articleId,
             Value: value
         };
+
+        if ($scope.verify == null)
+            $scope.verify = articleId + tick;
+        else {
+            if ($scope.verify == articleId + tick) {
+                return;
+            }
+            $scope.verify = articleId + tick;
+        }
+        
         loginSvc.vote($scope.voteModel).then(function (data) {
             if (data.success == true) {
                 var newCount = value == "up" ? orgCount + 1 : orgCount - 1;
-                $('.'+page+' span#vote-count-post-' + articleId).text(newCount);
+                $('.' + page + ' span#vote-count-post-' + articleId).text(newCount);
+                if (page == "articleContent") {
+                    $('#voteButton').hide();
+                    $('#voteInfo').hide();
+                    $('#voteThanks').show();
+                }
             }
             else {
                 var str = '';

@@ -305,13 +305,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/en-US/Reddah.Web.UI.resources.dll">
-      <publishTime>12/06/2018 08:04:51</publishTime>
+      <publishTime>12/08/2018 09:18:29</publishTime>
     </File>
     <File Include="bin/en/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/en/Reddah.Web.UI.resources.dll">
-      <publishTime>12/06/2018 08:04:52</publishTime>
+      <publishTime>12/08/2018 09:18:29</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -320,19 +320,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/fr-FR/Reddah.Web.UI.resources.dll">
-      <publishTime>12/06/2018 08:04:51</publishTime>
+      <publishTime>12/08/2018 09:18:29</publishTime>
     </File>
     <File Include="bin/ja-JP/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/ja-JP/Reddah.Web.UI.resources.dll">
-      <publishTime>12/06/2018 08:04:51</publishTime>
+      <publishTime>12/08/2018 09:18:29</publishTime>
     </File>
     <File Include="bin/ko-KR/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/ko-KR/Reddah.Web.UI.resources.dll">
-      <publishTime>12/06/2018 08:04:51</publishTime>
+      <publishTime>12/08/2018 09:18:29</publishTime>
     </File>
     <File Include="bin/log4net.dll">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -350,40 +350,40 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/16/2018 11:29:30</publishTime>
     </File>
     <File Include="bin/Reddah.Core.dll">
-      <publishTime>12/06/2018 08:04:48</publishTime>
+      <publishTime>12/08/2018 08:51:36</publishTime>
     </File>
     <File Include="bin/Reddah.Core.pdb">
-      <publishTime>12/06/2018 08:04:48</publishTime>
+      <publishTime>12/08/2018 08:51:36</publishTime>
     </File>
     <File Include="bin/Reddah.Encryption.dll">
-      <publishTime>12/05/2018 07:13:17</publishTime>
+      <publishTime>12/08/2018 08:51:36</publishTime>
     </File>
     <File Include="bin/Reddah.Encryption.pdb">
-      <publishTime>12/06/2018 08:04:48</publishTime>
+      <publishTime>12/08/2018 08:51:36</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Captcha.dll">
-      <publishTime>12/06/2018 08:04:48</publishTime>
+      <publishTime>12/08/2018 08:51:36</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Captcha.pdb">
-      <publishTime>12/06/2018 08:04:48</publishTime>
+      <publishTime>12/08/2018 08:51:36</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Core.dll">
-      <publishTime>12/06/2018 08:04:49</publishTime>
+      <publishTime>12/08/2018 08:51:37</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Core.pdb">
-      <publishTime>12/06/2018 08:04:49</publishTime>
+      <publishTime>12/08/2018 08:51:37</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Live.dll">
-      <publishTime>12/06/2018 08:04:49</publishTime>
+      <publishTime>12/08/2018 08:51:37</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Live.pdb">
-      <publishTime>12/05/2018 07:13:17</publishTime>
+      <publishTime>12/08/2018 08:51:37</publishTime>
     </File>
     <File Include="bin/Reddah.Web.UI.dll">
-      <publishTime>12/06/2018 08:04:51</publishTime>
+      <publishTime>12/08/2018 09:18:28</publishTime>
     </File>
     <File Include="bin/Reddah.Web.UI.pdb">
-      <publishTime>12/06/2018 08:04:51</publishTime>
+      <publishTime>12/08/2018 09:18:28</publishTime>
     </File>
     <File Include="bin/Swashbuckle.Core.dll">
       <publishTime>11/16/2018 11:29:30</publishTime>
@@ -440,7 +440,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/zh-CN/Reddah.Web.UI.resources.dll">
-      <publishTime>12/06/2018 08:04:52</publishTime>
+      <publishTime>12/08/2018 09:18:30</publishTime>
     </File>
     <File Include="Content/app/ckeditor/adapters/jquery.js">
       <publishTime>07/14/2016 06:07:09</publishTime>
@@ -1625,7 +1625,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/17/2018 18:31:06</publishTime>
     </File>
     <File Include="Content/app/login.js">
-      <publishTime>12/06/2018 07:04:39</publishTime>
+      <publishTime>12/08/2018 08:48:45</publishTime>
     </File>
     <File Include="Content/Comment.css">
       <publishTime>12/06/2018 06:35:40</publishTime>
@@ -2195,10 +2195,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/23/2016 06:47:53</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>11/24/2018 09:31:53</publishTime>
+      <publishTime>12/08/2018 07:39:33</publishTime>
     </File>
     <File Include="Content/Site.mobile.css">
-      <publishTime>12/04/2018 19:59:31</publishTime>
+      <publishTime>12/07/2018 21:17:29</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -2501,7 +2501,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/23/2016 06:48:38</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>07/09/2016 04:59:02</publishTime>
+      <publishTime>12/06/2018 08:03:38</publishTime>
     </File>
     <File Include="Views/Account/Login.mobile.cshtml">
       <publishTime>12/06/2018 08:02:56</publishTime>
@@ -2514,6 +2514,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Account/Register.cshtml">
       <publishTime>12/06/2018 08:03:50</publishTime>
+    </File>
+    <File Include="Views/Account/Register.mobile.cshtml">
+      <publishTime>12/06/2018 08:03:21</publishTime>
     </File>
     <File Include="Views/Account/Users.cshtml">
       <publishTime>11/26/2018 06:56:51</publishTime>
@@ -2533,14 +2536,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Account/_SetPasswordPartial.cshtml">
       <publishTime>06/23/2016 06:48:38</publishTime>
     </File>
+    <File Include="Views/Articles/ArticleComment-bak.cshtml">
+      <publishTime>12/08/2018 06:20:04</publishTime>
+    </File>
     <File Include="Views/Articles/ArticleComment.cshtml">
-      <publishTime>12/04/2018 20:53:53</publishTime>
+      <publishTime>12/08/2018 08:18:42</publishTime>
     </File>
     <File Include="Views/Articles/ArticleComment.mobile.cshtml">
-      <publishTime>12/04/2018 20:47:54</publishTime>
+      <publishTime>12/08/2018 06:20:20</publishTime>
     </File>
     <File Include="Views/Articles/ArticleList.cshtml">
-      <publishTime>12/01/2018 14:21:31</publishTime>
+      <publishTime>12/08/2018 08:42:30</publishTime>
     </File>
     <File Include="Views/Articles/ArticleList.mobile.cshtml">
       <publishTime>12/01/2018 14:21:19</publishTime>
@@ -2699,10 +2705,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/29/2018 06:38:11</publishTime>
     </File>
     <File Include="Views/Submit/edit.cshtml">
-      <publishTime>12/02/2018 10:37:59</publishTime>
+      <publishTime>12/06/2018 06:55:15</publishTime>
     </File>
     <File Include="Views/Submit/Index.cshtml">
-      <publishTime>11/25/2018 20:20:39</publishTime>
+      <publishTime>12/06/2018 06:55:22</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>06/23/2016 06:48:38</publishTime>

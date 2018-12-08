@@ -1,5 +1,6 @@
-﻿.reddah {
-    box-shadow: inset 0 -1px 0 red, inset 0 -1px 0 darkred !important;
+﻿#articleContentMobile u {
+    border-bottom: 1px solid #ff3030 !important;
+    text-decoration: none !important;
 }
 .container {
     min-width:995px;   
