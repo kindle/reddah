@@ -7,28 +7,40 @@
 <link href="/Content/Comment.css" rel="stylesheet" />
 <link href="/Content/Post.css" rel="stylesheet" />
 <style>
-    .flex-article{
-        display:flex;
+    .flex-article {
+        display: -webkit-flex;
+        -webkit-justify-content: space-between;
+
+        display: flex;
         justify-content: space-between;
     }
     .flex-article-left {
+        display: -webkit-flex;
+        -webkit-flex-direction: column;
+        -webkit-flex: 0 1 auto;
         display: flex;
         flex-direction: column;
-        margin:0 20px 0 0;
+        margin: 0 20px 0 0;
     }
     .flex-article-left img {
         max-width:100%;
         height:auto !important;
     }
     .flex-article-right {
+        display: -webkit-flex;
+        -webkit-flex-direction: column;
+        -webkit-flex: 0 1 300px;
         display: flex;
         flex-direction: column;
-        flex:300px;
+        flex: 300px;
     }
     .flex-vote {
+        display: -webkit-flex;
+        -webkit-justify-content: center;
+        -webkit-align-items: center;
         display: flex;
         justify-content: center;
-        align-items:center;
+        align-items: center;
         margin: 30px;
     }
         .flex-vote > u {
@@ -79,7 +91,7 @@
             }
             else
             {
-                <u ng-click="showPanel()" id="votelogo">I like the post!</u>
+                <u ng-click="showPanel()" id="votelogo"></u>
                 <i>I like the post!</i>
                 <!--<a ng-click="showPanel()">I don't like the post!</a>-->
             }

@@ -129,8 +129,15 @@
             urlTitle = urlTitle.Trim().Replace(" ", "-");
 
             string[] invalid = { "<", ">", "*", "%", "&", ":", "/", "." };
+                                
             foreach (string item in invalid) {
                 urlTitle = urlTitle.Replace(item, "-");
+            }
+
+            string[] opts = { ",", ";", "'"};
+            foreach (string item in opts)
+            {
+                urlTitle = urlTitle.Replace(item, "");
             }
 
             urlTitle = urlTitle.Replace("--", "-");
