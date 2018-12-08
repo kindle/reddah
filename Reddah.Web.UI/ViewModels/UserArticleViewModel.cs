@@ -30,6 +30,7 @@
                     ap.Abstract = item.Abstract;
                     ap.Description = item.Content;
                     ap.ImageUrl = Helpers.GetFirstImageSrc(item.Content);
+                    ap.ImageUrls = Helpers.GetFirstImageSrc(item.Content, 3);
                     ap.ArticleUrl = item.Title;
                     ap.Comments = item.Count;
                     ap.Up = item.Up ?? 0;

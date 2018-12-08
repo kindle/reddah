@@ -171,15 +171,26 @@
                     </div>
                 </div>
                 <div class="postModuleLiner">
-                    @if (!String.IsNullOrEmpty(article.ImageUrl))
+                    @if (article.ImageUrls != null)
                     {
-                        <div class="listImage">
-                            <div class="listImageWrapper">
-                                <img ng-click="showImage('post', @index)" class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="@article.ImageUrl" alt="picture">
+                        if (article.ImageUrls.Length > 1)
+                        {
+                            <h2><a ng-click="toggleArticle('post', @index)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                            <div class="postClear"></div>
+                        }
+                        for (int i = 0; i < article.ImageUrls.Length; i++)
+                        {
+                            <div class="listImage">
+                                <div class="listImageWrapper">
+                                    <img ng-click="showImage('post', @index)" class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="@article.ImageUrls[i]" alt="picture">
+                                </div>
                             </div>
-                        </div>
+                        }
                     }
-                    <h2><a ng-click="toggleArticle('post', @index)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                    @if (article.ImageUrls != null && article.ImageUrls.Length < 2)
+                    {
+                        <h2><a ng-click="toggleArticle('post', @index)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                    }
                     <div>@Helpers.HtmlDecode(article.Abstract)</div>
                     <div class="listInfo">
                         <a href="/@locale/r/@Helpers.HtmlDecode(article.GroupName)">/r/@Helpers.HtmlDecode(article.GroupName)</a>
@@ -195,19 +206,15 @@
         }
         index++;
     }
-
-    @*@{
-            Html.RenderPartial("~/views/Shared/Controls/AssistanceModule.cshtml", 1);
-        }*@
-            <span class="footermenu">
-                @Resources.Article_More
-                @if (ShowPrev())
-                {
-                    <a class="nextbutton" href="?page=@GetPrevPageNo()">< @Resources.Article_Prev </a><span class="separator"></span>
-                }
-                <a class="nextbutton" href="?page=@GetNextPageNo()">@Resources.Article_Next > </a>
-                @Resources.Article_OrTry <a class="nextbutton" href="/@locale/random"> @Resources.Article_RandomSubReddah</a>
-            </span>
+    <span class="footermenu">
+        @Resources.Article_More
+        @if (ShowPrev())
+        {
+            <a class="nextbutton" href="?page=@GetPrevPageNo()">< @Resources.Article_Prev </a><span class="separator"></span>
+        }
+        <a class="nextbutton" href="?page=@GetNextPageNo()">@Resources.Article_Next > </a>
+        @Resources.Article_OrTry <a class="nextbutton" href="/@locale/random"> @Resources.Article_RandomSubReddah</a>
+    </span>
 </div>
 @if (Model.Articles.Count < 5)
 {
