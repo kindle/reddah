@@ -98,7 +98,7 @@
             if (data.success == true) {
                 var newCount = value == "up" ? orgCount + 1 : orgCount - 1;
                 $('.' + page + ' span#vote-count-post-' + articleId).text(newCount);
-                if (page == "articleContent") {
+                if (page == "articleContent" || page == "articleContentMobile") {
                     $('#voteButton').hide();
                     $('#voteInfo').hide();
                     $('#voteThanks').show();

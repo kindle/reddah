@@ -1,11 +1,42 @@
 ﻿@using Reddah.Web.UI.Models
-@using System.Globalization   
+@using System.Globalization
 @using Reddah.Web.UI.Utility
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
 }
 <link href="/Content/Comment.css" rel="stylesheet" />
 <link href="/Content/Post.css" rel="stylesheet" />
+<style>
+.flex-vote {
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        margin: 30px;
+    }
+        .flex-vote > u {
+            background-image: url("/Content/Images/like-dislike.png"), none;
+            background-position: 0 0;
+            background-repeat: no-repeat;
+            background-size: initial;
+            cursor: pointer;
+            height: 40px;
+            width: 40px;
+            text-decoration: none;
+        }
+        .flex-vote > a {
+            background-image: url("/Content/Images/like-dislike.png"), none;
+            background-position: -40px 0;
+            background-repeat: no-repeat;
+            background-size: initial;
+            cursor: pointer;
+            height: 40px;
+            width: 40px;
+        }
+        .flex-vote > i{
+            margin: 0 15px 0 5px;
+        }
+
+</style>
 <div class="rightBox">
     @Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())
     <div class="subreddahbox">
@@ -16,7 +47,7 @@
             <li>You may not post any graphics, text, photographs, images, video, audio or other material that we deem to be junk or spam. Cluttering reddah with this sort of content reduces the quality of the reddah experience for others.</li>
             <li>You agree not to interrupt the serving of reddah, introduce malicious code onto reddah, make it difficult for anyone else to use reddah due to your actions, attempt to manipulate votes or reddah’s systems, or assist anyone in misusing reddah in any way. It takes a lot of work to maintain reddah. Be cool.</li>
         </ol>
-        <br/>
+        <br />
     </div>
     @{
         int j = 0;
@@ -50,43 +81,48 @@
     <span class="voterank"></span>
     <div class="votecell">
         <div class="vote">
-            @if (Request.IsAuthenticated){
-            <a class="vote-up-off" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContent')">up vote</a>
-            <span itemprop="upvoteCount" class="vote-count-post" id="vote-count-post-@Model.Article.Id">@(Model.Article.Up-Model.Article.Down)</span>
-            <a class="vote-down-off" ng-click="vote(@Model.Article.Id, 'down', @(Model.Article.Up-Model.Article.Down),'articleContent')">down vote</a>}
-            else{
-            <a class="vote-up-off" ng-click="showPanel()">up vote</a>
-            <span itemprop="upvoteCount" class="vote-count-post">@(Model.Article.Up-Model.Article.Down)</span>
-            <a class="vote-down-off" ng-click="showPanel()">down vote</a>
+            @if (Request.IsAuthenticated)
+            {
+                <a class="vote-up-off" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContent')">up vote</a>
+                <span itemprop="upvoteCount" class="vote-count-post" id="vote-count-post-@Model.Article.Id">@(Model.Article.Up - Model.Article.Down)</span>
+                <a class="vote-down-off" ng-click="vote(@Model.Article.Id, 'down', @(Model.Article.Up-Model.Article.Down),'articleContent')">down vote</a>}
+            else
+            {
+                <a class="vote-up-off" ng-click="showPanel()">up vote</a>
+                <span itemprop="upvoteCount" class="vote-count-post">@(Model.Article.Up - Model.Article.Down)</span>
+                <a class="vote-down-off" ng-click="showPanel()">down vote</a>
             }
         </div>
     </div>
-        <div class="listInfo"><h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1></div>
-        <div class="postClear"></div>
-        <div class="listInfo">submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)">/r/@Helpers.HtmlDecode(Model.Article.GroupName)</a></div>
-        @if (Model.Article.LastUpdateOn != null)
-        {<div class="listInfo">Last updated on @Model.Article.LastUpdateOn</div>}
-        @if (User.Identity.Name.Equals(Model.Article.UserName))
-        {<div class="listInfo">[<a href="/@locale/edit/@Model.Article.Id">Edit</a>] [<a href="/@locale/delete/@Model.Article.Id">Delete</a>]</div>}
-        <div class="listInfo" style="display:none;">share save hide report</div>
-        <div class="postClear"></div>
-        <div>@Html.Raw(Helpers.HtmlDecode(Model.Article.Content))</div>
-    </div>
-
-<div class="vote articleContentMobile">
+    <div class="listInfo"><h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1></div>
+    <div class="postClear"></div>
+    <div class="listInfo">submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)">/r/@Helpers.HtmlDecode(Model.Article.GroupName)</a></div>
+    @if (Model.Article.LastUpdateOn != null)
+    {<div class="listInfo">Last updated on @Model.Article.LastUpdateOn</div>}
+    @if (User.Identity.Name.Equals(Model.Article.UserName))
+    {<div class="listInfo">[<a href="/@locale/edit/@Model.Article.Id">Edit</a>] [<a href="/@locale/delete/@Model.Article.Id">Delete</a>]</div>}
+    <div class="listInfo" style="display:none;">share save hide report</div>
+    <div class="postClear"></div>
+    <div>@Html.Raw(Helpers.HtmlDecode(Model.Article.Content))</div>
+</div>
+<section class="flex-vote">
     @if (Request.IsAuthenticated)
     {
-        <a class="vote-up-off" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContentMobile')">up vote</a>
+        <u id="voteButton" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContentMobile')"></u>
+        <i id="voteInfo" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContentMobile')">I like the post!</i>
+        <i id="voteThanks" style="display:none;">Thank you for the feedback! Your vote here will to help them become popular.</i>
+        <span style="display:none;" itemprop="upvoteCount" id="vote-count-post-@Model.Article.Id">@(Model.Article.Up - Model.Article.Down)</span>
     }
-</div>
+    else
+    {
+        <u></u>
+        <i><a href="/@locale/account/login">I like the post!</a></i>
+    }
+</section>
 <div class="postModuleLiner"></div>
 <div ng-controller="commentCtrl" id="mobileComments">
-    <input data-ng-model="articleId" type="hidden" data-ng-init="articleId='@Model.Article.Id'"  />
+    <input data-ng-model="articleId" type="hidden" data-ng-init="articleId='@Model.Article.Id'" />
     All @Model.Article.Count Comments
     @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = -1 })
     @Html.Partial("Comment", Model.Comments as SeededComments)
 </div>
-@if (!Request.IsAuthenticated && Model.Comments.Comments.Count < 5)
-{
-<div id="box" style="height:100vh;"></div>
-}
