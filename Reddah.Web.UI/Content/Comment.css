@@ -36,8 +36,11 @@ div.rightBox {
         padding-right: 0em;
     }
     #mobileComments {
-        font-size: 25px !important;
-        width: 850px !important;
+        font-size: 45px !important;
+    }
+    #newcomment textarea {
+        font-size: 35px !important;
+        width: 700px;
     }
 }
 

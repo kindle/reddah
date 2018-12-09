@@ -96,7 +96,7 @@
     </div>
     <div class="listInfo"><h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1></div>
     <div class="postClear"></div>
-    <div class="listInfo">submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)">/r/@Helpers.HtmlDecode(Model.Article.GroupName)</a></div>
+    <div class="listInfo">submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)"><u>@Helpers.HtmlDecode(Model.Article.GroupName)</u></a></div>
     @if (Model.Article.LastUpdateOn != null)
     {<div class="listInfo">Last updated on @Model.Article.LastUpdateOn</div>}
     @if (User.Identity.Name.Equals(Model.Article.UserName))

@@ -1,10 +1,13 @@
 ﻿#articleContent u {
     border-bottom: 1px solid #ff3030 !important;
-    text-decoration:none !important;
+    text-decoration: none !important;
 }
-#postBlock, #upcomingLinks u {
+#postBlock u, #upcomingLinks u {
     border-bottom: 1px solid #ff3030 !important;
     text-decoration: none !important;
+}
+video {
+    width: 100%;
 }
 .container {
     width: 100%;
