@@ -1,8 +1,6 @@
-﻿@using Reddah.Web.UI.Utility
-@model Reddah.Web.UI.Models.CommentModel
+﻿@model Reddah.Web.UI.Models.CommentModel
 @if (Request.IsAuthenticated){
-    <h2>New Comment</h2>
-    <div>@Html.TextAreaFor(m => m.Content, new { @class="commentText", 
+    <div id="newcomment">@Html.TextAreaFor(m => m.Content, new { @class="commentText", 
         @placeholder="do not post personal information, phone numbers, email addresses, names, etc, real or fake, or you will be banned without warning.", 
         data_ng_model = "model.Content"})
     </div>

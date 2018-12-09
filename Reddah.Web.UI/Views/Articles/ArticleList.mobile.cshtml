@@ -86,7 +86,7 @@
     }
 </div>
 @*<a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetShortTitle(Helpers.HtmlDecode(article.Title))/" target="_blank">*@
-<div class="postBlock">
+<div class="postBlock" id="postBlock">
     @if (Model.TrendingSubs != null)
     {
         <div class="trendingSubs">
@@ -104,26 +104,50 @@
         {
             <div class="post">
                 <div class="postModuleLiner">
-                    @if (!String.IsNullOrEmpty(article.ImageUrl))
+                    @*if (!String.IsNullOrEmpty(article.ImageUrl))
+        {
+            <div class="listImage">
+                <div class="listImageWrapper">
+                    <img ng-click="showImage('post', @index)" class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="@article.ImageUrl" alt="picture">
+                </div>
+            </div>
+        }*@
+                    @if (article.ImageUrls != null)
                     {
-                        <div class="listImage">
-                            <div class="listImageWrapper">
-                                <img ng-click="showImage('post', @index)" class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="@article.ImageUrl" alt="picture">
-                            </div>
+                        if (article.ImageUrls.Length > 1)
+                        {
+                            <h2><a ng-click="toggleArticle('post', @index)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                            <div class="postClear"></div>
+                        }
+                        <div class="listImage" style="display:@Helpers.Display(article.ImageUrls.Length>1);">
+                            @for (int i = 0; i < article.ImageUrls.Length; i++)
+                            {
+                                <div class="listImageWrapper">
+                                    <img ng-click="showImage('post', @index)" class="BrowsePreviewImage" onerror="this.style.display='none'" src="@article.ImageUrls[i]" alt="picture">
+                                </div>
+                            }
                         </div>
+                        if (article.ImageUrls.Length > 1)
+                        {
+                            <div class="postClear"></div>
+                        }
                     }
-                    <h2><a ng-click="toggleArticle('post', @index)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                    @if (article.ImageUrls != null && article.ImageUrls.Length < 2)
+                    {
+                        <h2><a ng-click="toggleArticle('post', @index)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                    }
+
+
+                    @*<h2><a ng-click="toggleArticle('post', @index)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>*@
                     <div>@Helpers.HtmlDecode(article.Abstract)</div>
-
-
                     <div class="postClear"></div>
                     <img id="org_image_@index" class="orgImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="100%" src="@article.ImageUrl" alt="picture">
                     <div id="org_article_@index" class="orgArticle">@Html.Raw(Helpers.HtmlDecode(article.Content))</div>
                     <div class="listInfo">
-                        <a href="/@locale/r/@Helpers.HtmlDecode(article.GroupName)">@Helpers.HtmlDecode(article.GroupName)   </a>
                         <i class="fa fa-clock-o"> @article.CreatedOn </i>
                         <i class="fa fa-commenting-o"> <a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetUrlTitle(Helpers.HtmlDecode(article.Title))/" target="_blank">@article.Comments</a> </i>
-                        <i class="fa fa-user-o" style="float:right;"> <a href="/@locale/user/@article.UserName">@article.UserName</a></i>
+                        <!--<i class="fa fa-user-o" style="float:right;"> <a href="/@locale/user/@article.UserName">@article.UserName</a></i>-->
+                        <a style="float:right" href="/@locale/r/@Helpers.HtmlDecode(article.GroupName)"><u>@Helpers.HtmlDecode(article.GroupName)</u></a>
                     </div>
                 </div>
             </div>

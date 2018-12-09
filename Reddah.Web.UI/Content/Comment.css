@@ -28,7 +28,7 @@ div.rightBox {
     float: right;
     width: 420px !important;
 }
-@media screen and (max-width: 900px) {
+@media only screen and (max-width: 900px) {
     div.rightBox {
         display:none;
     }
@@ -36,7 +36,8 @@ div.rightBox {
         padding-right: 0em;
     }
     #mobileComments {
-        font-size: 45px !important;
+        font-size: 25px !important;
+        width: 850px !important;
     }
 }
 

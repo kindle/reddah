@@ -84,10 +84,10 @@
         }
     }
 </div>
-<div class="postBlock">
+<div class="postBlock" id="postBlock">
     @if (Model.NextPrevBox != null)
     {
-        <div class="upcomingLinks" ng-controller="nextprevbox">
+        <div class="upcomingLinks" ng-controller="nextprevbox" id="upcomingLinks">
             @foreach (var article in Model.NextPrevBox)
             {
                 if (!String.IsNullOrEmpty(article.Title) && !String.IsNullOrEmpty(article.Abstract) && !String.IsNullOrEmpty(article.ArticleUrl))
@@ -121,7 +121,7 @@
 
                             <h2><a ng-click="toggleArticle('upcomingLinks', @nextPrevIndex)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
                             <div>@Helpers.HtmlDecode(article.Abstract)</div>
-                            <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(article.GroupName)">/r/@Helpers.HtmlDecode(article.GroupName)</a></div>
+                            <div class="listInfo">submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(article.GroupName)"><u>@Helpers.HtmlDecode(article.GroupName)</u></a></div>
                             <div class="listInfo"><a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetUrlTitle(Helpers.HtmlDecode(article.Title))/" target="_blank">@article.Comments @Resources.Article_Comments</a> <!--share save hide report--></div>
                             <div class="postClear"></div>
                             <img id="org_image_@nextPrevIndex" class="orgImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="100%" src="@article.ImageUrl" alt="picture">
@@ -193,7 +193,7 @@
                     }
                     <div>@Helpers.HtmlDecode(article.Abstract)</div>
                     <div class="listInfo">
-                        <a href="/@locale/r/@Helpers.HtmlDecode(article.GroupName)">/r/@Helpers.HtmlDecode(article.GroupName)</a>
+                        <a href="/@locale/r/@Helpers.HtmlDecode(article.GroupName)"><u>@Helpers.HtmlDecode(article.GroupName)</u></a>
                         submitted @article.CreatedOn ago by <a href="/@locale/user/@article.UserName">@article.UserName</a>
                     </div>
                     <div class="listInfo"><a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetUrlTitle(Helpers.HtmlDecode(article.Title))/" target="_blank">@article.Comments @Resources.Article_Comments</a> <!--share save hide report--></div>

@@ -9,6 +9,11 @@
 
     public static class Helpers
     {
+        public static string Display(bool flag)
+        {
+            return flag ? "flex" : "";
+        }
+
         public static string RemoveLocaleFromPath(string originalPath)
         {
             String path = String.Empty;
