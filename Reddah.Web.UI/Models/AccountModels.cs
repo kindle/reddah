@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
-using System.Globalization;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace Reddah.Web.UI.Models
 {
@@ -58,7 +53,8 @@ namespace Reddah.Web.UI.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        //[LocalizedDisplayName("Login_RememberMe")]
+        [Display(Name = "Login_RememberMe", ResourceType = typeof(Resources.Resources))]
         public bool RememberMe { get; set; }
     }
 
@@ -83,7 +79,8 @@ namespace Reddah.Web.UI.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Display(Name = "Remember me?")]
+        //[Display(Name = "Remember me?")]
+        [Display(Name = "Login_RememberMe", ResourceType = typeof(Resources.Resources))]
         public bool RememberMe { get; set; }
     }
 

@@ -401,5 +401,53 @@ namespace Reddah.Web.UI.Resources
                 return ResourceManager.GetString("Login_CreateNewAccount", resourceCulture);
             }
         }
+
+        public static string Footer_TermsOfUse
+        {
+            get
+            {
+                return ResourceManager.GetString("Footer_TermsOfUse", resourceCulture);
+            }
+        }
+
+        public static string Footer_PrivacyStatement
+        {
+            get
+            {
+                return ResourceManager.GetString("Footer_PrivacyStatement", resourceCulture);
+            }
+        }
+
+        public static string Footer_ContentPolicy
+        {
+            get
+            {
+                return ResourceManager.GetString("Footer_ContentPolicy", resourceCulture);
+            }
+        }
+
+        public static string Login_AgreeWord
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_AgreeWord", resourceCulture);
+            }
+        }
+
+        public static string Login_ReadWord
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_ReadWord", resourceCulture);
+            }
+        }
+
+        public static string Login_And
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_And", resourceCulture);
+            }
+        }
     }
 }

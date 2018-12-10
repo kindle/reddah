@@ -231,4 +231,22 @@
   <data name="Login_CreateNewAccount" xml:space="preserve">
     <value>创建一个新账户</value>
   </data>
+  <data name="Login_AgreeWord" xml:space="preserve">
+    <value>注册前，请同意我们的</value>
+  </data>
+  <data name="Login_ReadWord" xml:space="preserve">
+    <value>并请阅读我们的</value>
+  </data>
+  <data name="Login_And" xml:space="preserve">
+    <value>和</value>
+  </data>
+  <data name="Footer_TermsOfUse" xml:space="preserve">
+    <value>使用条款</value>
+  </data>
+  <data name="Footer_PrivacyStatement" xml:space="preserve">
+    <value>隐私声明</value>
+  </data>
+  <data name="Footer_ContentPolicy" xml:space="preserve">
+    <value>内容政策</value>
+  </data>
 </root>
