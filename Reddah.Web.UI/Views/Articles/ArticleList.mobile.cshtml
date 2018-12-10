@@ -104,14 +104,13 @@
         {
             <div class="post">
                 <div class="postModuleLiner">
-                    @*if (!String.IsNullOrEmpty(article.ImageUrl))
-        {
-            <div class="listImage">
-                <div class="listImageWrapper">
-                    <img ng-click="showImage('post', @index)" class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="@article.ImageUrl" alt="picture">
-                </div>
-            </div>
-        }*@
+                    @if (!String.IsNullOrEmpty(article.VideoUrl))
+                    {
+                        <h2><a>@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                        <div class="postClear"></div>
+                        <div>@Html.Raw(Helpers.HtmlDecode(article.Content))</div>
+                    }
+
                     @if (article.ImageUrls != null)
                     {
                         if (article.ImageUrls.Length > 1)
@@ -132,11 +131,10 @@
                             <div class="postClear"></div>
                         }
                     }
-                    @if (article.ImageUrls != null && article.ImageUrls.Length < 2)
+                    @if (article.ImageUrls != null && article.ImageUrls.Length < 2 && String.IsNullOrEmpty(article.VideoUrl))
                     {
                         <h2><a ng-click="toggleArticle('post', @index)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
                     }
-
 
                     @*<h2><a ng-click="toggleArticle('post', @index)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>*@
                     <div>@Helpers.HtmlDecode(article.Abstract)</div>

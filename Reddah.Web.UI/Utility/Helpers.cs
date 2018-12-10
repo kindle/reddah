@@ -44,6 +44,24 @@
             return false;
         }
 
+        public static string GetVideoSrc(string content)
+        {
+            var matches = Regex.Match(System.Web.HttpUtility.HtmlDecode(content), "<video.+?src=[\"'](.+?)[\"'].*?>", RegexOptions.IgnoreCase);
+            string matchString = string.IsNullOrWhiteSpace(matches.Groups[1].Value) ?
+                "" : matches.Groups[1].Value;
+
+            return matchString;
+        }
+
+        public static string GetVideoPoster(string content)
+        {
+            var matches = Regex.Match(System.Web.HttpUtility.HtmlDecode(content), "<video.+?poster=[\"'](.+?)[\"'].*?>", RegexOptions.IgnoreCase);
+            string matchString = string.IsNullOrWhiteSpace(matches.Groups[1].Value) ?
+                "" : matches.Groups[1].Value;
+
+            return matchString;
+        }
+
         public static string GetFirstImageSrc(string content)
         {
             var matches = Regex.Match(System.Web.HttpUtility.HtmlDecode(content), "<img.+?src=[\"'](.+?)[\"'].*?>", RegexOptions.IgnoreCase);

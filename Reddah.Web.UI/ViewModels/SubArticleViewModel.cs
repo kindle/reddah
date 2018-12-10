@@ -90,6 +90,8 @@
                     ap.Description = item.Content;
                     ap.ImageUrl = Helpers.GetFirstImageSrc(item.Content);
                     ap.ImageUrls = Helpers.GetFirstImageSrc(item.Content, 3);
+                    ap.VideoUrl = Helpers.GetVideoSrc(item.Content);
+                    ap.VideoPoster = Helpers.GetVideoPoster(item.Content);
                     ap.ArticleUrl = item.Title;
                     ap.Comments = item.Count;
                     ap.Up = item.Up ?? 0;
