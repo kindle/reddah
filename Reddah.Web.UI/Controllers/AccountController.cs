@@ -16,6 +16,7 @@ using System.Text;
 using System.Net;
 using System.Web.Helpers;
 using Reddah.Web.UI.Utility;
+using System.Globalization;
 
 namespace Reddah.Web.UI.Controllers
 {
@@ -217,7 +218,7 @@ namespace Reddah.Web.UI.Controllers
 
         //
         // GET: /Account/Manage
-
+        [HttpGet]
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -232,9 +233,10 @@ namespace Reddah.Web.UI.Controllers
 
         //
         // POST: /Account/Manage
-
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Manage(LocalPasswordModel model)
         {
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
@@ -257,7 +259,11 @@ namespace Reddah.Web.UI.Controllers
 
                     if (changePasswordSucceeded)
                     {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        //return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        //Redirect(CultureInfo.CurrentUICulture.Name + "/account/manage?Message="+ ManageMessageId.ChangePasswordSuccess);
+                        //Redirect(CultureInfo.CurrentUICulture.Name + "/account/manage?Message=" + ManageMessageId.ChangePasswordSuccess);
+                        //
+                        ViewBag.Message = ManageMessageId.ChangePasswordSuccess;
                     }
                     else
                     {
@@ -280,7 +286,8 @@ namespace Reddah.Web.UI.Controllers
                     try
                     {
                         WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+                        //return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+                        Redirect(CultureInfo.CurrentUICulture.Name + "/account/manage?Message=" + ManageMessageId.SetPasswordSuccess);
                     }
                     catch (Exception e)
                     {

@@ -192,10 +192,22 @@
             );
 
             routes.MapLocalizedRoute(
-                "Manager",
+                "Manage",
                 "{locale}/account/manage",
                 new { controller = "account", action = "manage" }
             );
+
+            routes.MapLocalizedRoute(
+                "ChangePassword",
+                "{locale}/account/manage",
+                new { controller = "account", action = "manage" }
+            );
+
+            /*routes.MapLocalizedRoute(
+                "Submit",
+                "{locale}/submit",
+                new { controller = "submit", action = "index" }
+            );*/
 
             routes.MapLocalizedRoute(
                 "ExternalLogin",
