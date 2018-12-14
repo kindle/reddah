@@ -246,6 +246,18 @@
   <data name="Login_And" xml:space="preserve">
     <value>and</value>
   </data>
+  <data name="Login_Msg_WrongPW" xml:space="preserve">
+    <value>The user name or password provided is incorrect.</value>
+  </data>
+  <data name="Login_Msg_UserNameRequire" xml:space="preserve">
+    <value>The User Name field is required.</value>
+  </data>
+  <data name="Login_Msg_PasswordRequire" xml:space="preserve">
+    <value>The Password field is required.</value>
+  </data>
+  <data name="Login_Msg_EmailRequire" xml:space="preserve">
+    <value>The Email field is required.</value>
+  </data>
   <data name="Footer_TermsOfUse" xml:space="preserve">
     <value>Terms of Use</value>
   </data>

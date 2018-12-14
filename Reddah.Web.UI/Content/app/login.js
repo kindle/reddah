@@ -7,11 +7,13 @@
         RememberMe: false,
         ReturnUrl: window.location.href,
         Error: "",
-        Token: ""
+        Token: "",
+        Locale: "en-us"
     };
     $scope.login = function () {
         $scope.loadingLogin = true;
         $scope.loginModel.Token = $scope.antiForgeryToken;
+        $scope.loginModel.Locale = $scope.locale; 
         loginSvc.login($scope.loginModel).then(function (data) {
             if (data.success == true) {
                 window.location.replace(data.redirect);
@@ -36,11 +38,13 @@
         RememberMe: false,
         ReturnUrl: window.location.href,
         Error: "",
-        Token: ""
+        Token: "",
+        Locale: "en-us"
     };
     $scope.register = function () {
         $scope.loadingRegister = true;
         $scope.registerModel.Token = $scope.antiForgeryToken;
+        $scope.registerModel.Locale = $scope.locale; 
         loginSvc.register($scope.registerModel).then(function (data) {
             if (data.success == true) {
                 window.location.replace(data.redirect);
@@ -59,7 +63,7 @@
 }])
 .controller("appCtrl", ['$scope', 'loginSvc', function ($scope, loginSvc) {
     $scope.verify = null;
-    $scope.loginModel = { UserName: "", Password: "", RememberMe: false, ReturnUrl: window.location.href, Error: "", Token: "" };
+    $scope.loginModel = { UserName: "", Password: "", RememberMe: false, ReturnUrl: window.location.href, Error: "", Token: "", Locale: "en-us" };
     $scope.showPanel = function () {
         $('div#BroswerOpacify').show();
         $('div#LoginRegisterPanel').show();
@@ -82,7 +86,8 @@
     $scope.vote = function (articleId, value, orgCount, page, tick) {
         $scope.voteModel = {
             ArticleId: articleId,
-            Value: value
+            Value: value,
+            Locale: 'en-us'
         };
 
         if ($scope.verify == null)
@@ -146,7 +151,7 @@
             var defer = $q.defer();
             $http({
                 method: 'post',
-                url: '/en-us/Account/JsonLogin',
+                url: '/' + data.Locale + '/Account/JsonLogin',
                 data: data,
                 headers: { 'RequestVerificationToken': data.Token }
             }).success(function (data, status, headers, config) {
@@ -160,7 +165,7 @@
             var defer = $q.defer();
             $http({
                 method: 'post',
-                url: '/en-us/Account/JsonRegister',
+                url: '/' + data.Locale + '/Account/JsonRegister',
                 data: data,
                 headers: { 'RequestVerificationToken': data.Token }
             }).success(function (data, status, headers, config) {
@@ -174,7 +179,7 @@
             var defer = $q.defer();
             $http({
                 method: 'post',
-                url: '/en-us/Articles/JsonVote',
+                url: '/' + data.Locale + '/Articles/JsonVote',
                 data: data
             }).success(function (data, status, headers, config) {
                 defer.resolve(data);

@@ -52,7 +52,7 @@ namespace Reddah.Web.UI.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    ModelState.AddModelError("", Resources.Resources.Login_Msg_WrongPW);
                 }
             }
             
@@ -70,7 +70,7 @@ namespace Reddah.Web.UI.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            ModelState.AddModelError("", Resources.Resources.Login_Msg_WrongPW);
             return View(model);
         }
 
@@ -175,7 +175,7 @@ namespace Reddah.Web.UI.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                        ModelState.AddModelError("", Resources.Resources.Login_Msg_WrongPW);
                     }
                 }
                 catch (MembershipCreateUserException e)
@@ -221,14 +221,19 @@ namespace Reddah.Web.UI.Controllers
         [HttpGet]
         public ActionResult Manage(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
+            ViewBag.StatusMessage = StatusMessage(message);
+            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            ViewBag.ReturnUrl = Url.Action("Manage");
+            return View();
+        }
+
+        private string StatusMessage(ManageMessageId? message)
+        {
+            return 
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : "";
-            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            ViewBag.ReturnUrl = Url.Action("Manage");
-            return View();
         }
 
         //
@@ -260,10 +265,7 @@ namespace Reddah.Web.UI.Controllers
                     if (changePasswordSucceeded)
                     {
                         //return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
-                        //Redirect(CultureInfo.CurrentUICulture.Name + "/account/manage?Message="+ ManageMessageId.ChangePasswordSuccess);
-                        //Redirect(CultureInfo.CurrentUICulture.Name + "/account/manage?Message=" + ManageMessageId.ChangePasswordSuccess);
-                        //
-                        ViewBag.Message = ManageMessageId.ChangePasswordSuccess;
+                        ViewBag.StatusMessage = StatusMessage(ManageMessageId.ChangePasswordSuccess);
                     }
                     else
                     {
@@ -287,7 +289,7 @@ namespace Reddah.Web.UI.Controllers
                     {
                         WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
                         //return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
-                        Redirect(CultureInfo.CurrentUICulture.Name + "/account/manage?Message=" + ManageMessageId.SetPasswordSuccess);
+                        ViewBag.StatusMessage = StatusMessage(ManageMessageId.SetPasswordSuccess);
                     }
                     catch (Exception e)
                     {
@@ -351,7 +353,6 @@ namespace Reddah.Web.UI.Controllers
                 ViewBag.ReturnUrl = returnUrl;
                 return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
             }
-            log.Info("9");
         }
 
 

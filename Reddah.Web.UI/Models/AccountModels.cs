@@ -44,27 +44,26 @@ namespace Reddah.Web.UI.Models
 
     public class LoginModel
     {
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "Login_Msg_UserNameRequire")]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "Login_Msg_PasswordRequire")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        //[LocalizedDisplayName("Login_RememberMe")]
         [Display(Name = "Login_RememberMe", ResourceType = typeof(Resources.Resources))]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterModel
     {
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "Login_Msg_UserNameRequire")]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "Login_Msg_PasswordRequire")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -75,7 +74,7 @@ namespace Reddah.Web.UI.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "Login_Msg_EmailRequire")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 

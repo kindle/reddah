@@ -449,5 +449,38 @@ namespace Reddah.Web.UI.Resources
                 return ResourceManager.GetString("Login_And", resourceCulture);
             }
         }
+
+        public static string Login_Msg_WrongPW
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_Msg_WrongPW", resourceCulture);
+            }
+        }
+
+        public static string Login_Msg_UserNameRequire
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_Msg_UserNameRequire", resourceCulture);
+            }
+        }
+
+        public static string Login_Msg_PasswordRequire
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_Msg_PasswordRequire", resourceCulture);
+            }
+        }
+
+        public static string Login_Msg_EmailRequire
+        {
+            get
+            {
+                return ResourceManager.GetString("Login_Msg_EmailRequire", resourceCulture);
+            }
+        }
+
     }
 }
