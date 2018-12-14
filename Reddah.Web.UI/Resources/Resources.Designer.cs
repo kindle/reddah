@@ -274,6 +274,30 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
+        public static string Right_Feedbacks_Desc
+        {
+            get
+            {
+                return ResourceManager.GetString("Right_Feedbacks_Desc", resourceCulture);
+            }
+        }
+
+        public static string Right_DiscussAd_Desc
+        {
+            get
+            {
+                return ResourceManager.GetString("Right_DiscussAd_Desc", resourceCulture);
+            }
+        }
+
+        public static string Right_ContactUs_Desc
+        {
+            get
+            {
+                return ResourceManager.GetString("Right_ContactUs_Desc", resourceCulture);
+            }
+        }
+
         public static string Article_TrendingSubReddah
         {
             get

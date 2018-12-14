@@ -121,7 +121,7 @@
             Items = MenuFactory.GetItemPreviews(type, pageNo);
             Articles = GetArticlePreviews(path);
             NextPrevBox = MenuFactory.GetItemPreviews("nextprevbox", 10);
-            RightBoxModules = GetArticlePreviews1("/Root/HomePageModularRightContent/HomePageRightBoxModule");
+            RightBoxModules = GetArticlePreviews();
             TrendingSubs = new SubArticleViewModel().GetTrendingSubs();
         }
 
@@ -184,6 +184,34 @@
             }
 
             return apList;
+        }
+
+        private List<ArticlePreview> GetArticlePreviews()
+        {
+            var rbList = new List<ArticlePreview>();
+            
+            var rb = new ArticlePreview();
+            rb.Title = Resources.Resources.Right_Feedbacks;
+            rb.Description = Resources.Resources.Right_Feedbacks_Desc;
+            rb.ImageUrl = "/content/images/forum.png";
+            rb.ArticleUrl = "r/feedbacks";
+            rbList.Add(rb);
+
+            rb = new ArticlePreview();
+            rb.Title = Resources.Resources.Right_DiscussAd;
+            rb.Description = Resources.Resources.Right_DiscussAd_Desc;
+            rb.ImageUrl = "/content/images/ambassador.png";
+            rb.ArticleUrl = "r/discuss-on-AD";
+            rbList.Add(rb);
+
+            rb = new ArticlePreview();
+            rb.Title = Resources.Resources.Right_ContactUs;
+            rb.Description = Resources.Resources.Right_ContactUs_Desc;
+            rb.ImageUrl = "/content/images/contact_us.png";
+            rb.ArticleUrl = "r/contact-us";
+            rbList.Add(rb);
+
+            return rbList;
         }
     }
 }

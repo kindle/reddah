@@ -189,6 +189,15 @@
   <data name="Right_ContactUs" xml:space="preserve">
     <value>Contact Us</value>
   </data>
+  <data name="Right_Feedbacks_Desc" xml:space="preserve">
+    <value>Get help from the knowledgeable Reddah Community and official Reddah Support!</value>
+  </data>
+  <data name="Right_DiscussAd_Desc" xml:space="preserve">
+    <value>A place for discussing the ads that reddah is currently running.</value>
+  </data>
+  <data name="Right_ContactUs_Desc" xml:space="preserve">
+    <value>Get in touch with an Reddah Support technician. We are ready and willing to help you!</value>
+  </data>
   <data name="Article_TrendingSubReddah" xml:space="preserve">
     <value>Trending Subreddahs</value>
   </data>

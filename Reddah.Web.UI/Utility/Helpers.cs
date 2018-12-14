@@ -179,7 +179,7 @@
                 urlTitle = urlTitle.Replace(item, "-");
             }
 
-            string[] opts = { ",", ";", "'"};
+            string[] opts = { ",", ";", "'", "(", ")"};
             foreach (string item in opts)
             {
                 urlTitle = urlTitle.Replace(item, "");

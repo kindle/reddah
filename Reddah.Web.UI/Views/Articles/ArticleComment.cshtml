@@ -87,8 +87,8 @@
             @if (Request.IsAuthenticated)
             {
                 <u id="voteButton" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContent')"></u>
-                <i id="voteInfo">I like the post!</i>
-                <i id="voteThanks" style="display:none;">Thank you for the feedback! Your vote here will to help them become popular.</i>
+                <i id="voteInfo"><u style="cursor: pointer;">I like the post!</u></i>
+                <i id="voteThanks" style="display:none;"><u>Thank you for the feedback! Your vote here will to help them become popular.</u></i>
                 <span style="display:none;" itemprop="upvoteCount" id="vote-count-post-@Model.Article.Id">@(Model.Article.Up - Model.Article.Down)</span>
                 <!--<a ng-click="vote(@Model.Article.Id, 'down', @(Model.Article.Up-Model.Article.Down),'articleContent')"></a>
         <i>I don't like it!</i>-->
@@ -96,7 +96,7 @@
             else
             {
                 <u ng-click="showPanel()" id="votelogo"></u>
-                <i>I like the post!</i>
+                <i ng-click="showPanel()"><u style="cursor: pointer;">I like the post!</u></i>
                 <!--<a ng-click="showPanel()">I don't like the post!</a>-->
             }
         </section>
@@ -109,7 +109,7 @@
         </div>
     </div>
     <aside class="flex-article-right">
-        @Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())
+        @*Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())*@
         <div class="subreddahbox">
             <h5>Welcome to <a href="/@locale/r/@Model.GroupName">/r/@Model.GroupName</a></h5>
             <h3>Rules</h3>

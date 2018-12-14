@@ -109,14 +109,14 @@
     @if (Request.IsAuthenticated)
     {
         <u id="voteButton" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContentMobile')"></u>
-        <i id="voteInfo" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContentMobile')">I like the post!</i>
-        <i id="voteThanks" style="display:none;">Thank you for the feedback! Your vote here will to help them become popular.</i>
+        <i id="voteInfo" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContentMobile')"><u>I like the post!</u></i>
+        <i id="voteThanks" style="display:none;"><u>Thank you for the feedback! Your vote here will to help them become popular.</u></i>
         <span style="display:none;" itemprop="upvoteCount" id="vote-count-post-@Model.Article.Id">@(Model.Article.Up - Model.Article.Down)</span>
     }
     else
     {
         <u></u>
-        <i><a href="/@locale/account/login">I like the post!</a></i>
+        <i><a href="/@locale/account/login"><u>I like the post!</u></a></i>
     }
 </section>
 <div class="postModuleLiner"></div>

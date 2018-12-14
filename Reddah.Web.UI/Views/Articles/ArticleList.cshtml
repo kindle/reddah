@@ -52,7 +52,7 @@
 <link href="/Content/Post.css" rel="stylesheet" />
 @*<h1 class="HomePageModular">@Model.ArticleTitle</h1>*@
 <div class="rightBox">
-    @Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())
+    @*Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())*@
     @if (Model.RightBoxModules != null)
     {
         int j = 0;
@@ -144,7 +144,7 @@
             @Resources.Article_TrendingSubReddah
             @foreach (var trendingSub in Model.TrendingSubs)
             {
-                <a href="/@locale/r/@trendingSub">r/@trendingSub</a>
+                <a href="/@locale/r/@trendingSub"><u>@trendingSub</u></a>
             }
         </div>
     }

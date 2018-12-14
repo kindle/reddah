@@ -59,7 +59,7 @@
                    .GroupBy(x => x.GroupName)
                    .Select(g => new { GroupName = g.Key, Count = g.Count() })
                    .OrderByDescending(i => i.Count)
-                   .Take(5);
+                   .Take(10);
 
                 foreach (var item in q)
                 {

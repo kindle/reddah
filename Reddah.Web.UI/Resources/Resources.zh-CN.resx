@@ -183,6 +183,15 @@
   <data name="Right_ContactUs" xml:space="preserve">
     <value>联系我们</value> 
   </data>
+  <data name="Right_Feedbacks_Desc" xml:space="preserve">
+    <value>留言来获得网站官方的协助！</value>
+  </data>
+  <data name="Right_DiscussAd_Desc" xml:space="preserve">
+    <value>这是一个讨论广告合作的版块。</value>
+  </data>
+  <data name="Right_ContactUs_Desc" xml:space="preserve">
+    <value>留言与技术人员联系，我们已准备好帮助您！</value>
+  </data>
   <data name="Article_TrendingSubReddah" xml:space="preserve">
     <value>热门主题</value>
   </data>
