@@ -506,5 +506,13 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
+        public static string Msg_Deleted
+        {
+            get
+            {
+                return ResourceManager.GetString("Msg_Deleted", resourceCulture);
+            }
+        }
+
     }
 }

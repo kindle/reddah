@@ -94,28 +94,30 @@ namespace Reddah.Web.UI.Controllers
                 {
                     var existingArticle = context.Articles.FirstOrDefault(x => x.Id == article.Id);
 
-                    if(!User.Identity.Name.Equals(existingArticle.UserName))
+                    if (User.Identity.Name.Equals(existingArticle.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.EditPost))
                     {
-                        throw new Exception("you can't edit other people's post!");
-                    }
-
-                    String articleGroupName = Helpers.HtmlEncode(article.GroupName);
-                    if (context.Groups.FirstOrDefault(g => g.Name == articleGroupName) == null)
-                    {
-                        context.Groups.Add(new Group
+                        String articleGroupName = Helpers.HtmlEncode(article.GroupName);
+                        if (context.Groups.FirstOrDefault(g => g.Name == articleGroupName) == null)
                         {
-                            Name = articleGroupName,
-                            CreatedOn = DateTime.Now
-                        });
+                            context.Groups.Add(new Group
+                            {
+                                Name = articleGroupName,
+                                CreatedOn = DateTime.Now
+                            });
+                        }
+
+                        existingArticle.Title = Helpers.HtmlEncode(article.Title);
+                        existingArticle.GroupName = article.GroupName;
+                        existingArticle.Content = Helpers.HtmlEncode(article.Content);
+                        existingArticle.Abstract = Helpers.HtmlEncode(article.Abstract);
+                        existingArticle.LastUpdateOn = DateTime.Now;
+
+                        context.SaveChanges();
                     }
-
-                    existingArticle.Title = Helpers.HtmlEncode(article.Title);
-                    existingArticle.GroupName = article.GroupName;
-                    existingArticle.Content = Helpers.HtmlEncode(article.Content);
-                    existingArticle.Abstract = Helpers.HtmlEncode(article.Abstract);
-                    existingArticle.LastUpdateOn = DateTime.Now;
-
-                    context.SaveChanges();
+                    else
+                    {
+                        throw new Exception("you do not have permission to edit the post!");
+                    }
                 }
 
                 return RedirectToRoute(new { controller = "ArticleComment", action = "comments", id = article.Id });

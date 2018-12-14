@@ -203,9 +203,6 @@
     <Compile Include="Controllers\SubmitController.cs" />
     <Compile Include="Controllers\WizardStepController.cs" />
     <Compile Include="Controllers\SupportController.cs" />
-    <Compile Include="C__RefactorLog.cs">
-      <DependentUpon>ReddahModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Filters\AllowCorsAttribute.cs" />
     <Compile Include="Filters\CrosHandler .cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -294,7 +291,16 @@
     <Compile Include="webpages_OAuthMembership.cs">
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="webpages_Privileges.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="webpages_PrivilegesInRoles.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="webpages_Roles.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="webpages_UsersInRoles.cs">
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

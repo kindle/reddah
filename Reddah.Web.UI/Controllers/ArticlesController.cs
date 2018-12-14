@@ -302,5 +302,32 @@
 
             return Json(new { success = true });
         }
+
+        [Authorize]
+        [HttpPost]
+        public JsonResult JsonDeleteComment(CommentModel model)
+        {
+            var errors = string.Empty;
+            
+            try
+            {
+                using (var db = new reddahEntities1())
+                {
+                    db.Comments.FirstOrDefault(x => x.Id == model.ArticleId).Status = -1;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                errors = e.Message;
+            }
+        
+            if (!string.IsNullOrEmpty(errors))
+            {
+                return Json(new { errors = errors });
+            }
+
+            return Json(new { success = true });
+        }
     }
 }

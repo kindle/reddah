@@ -7,8 +7,39 @@
     using System.Web.Helpers;
     using System.Collections.Generic;
 
+    public enum PrivilegeList
+    {
+        EditPost=1,
+        DeletePost=2,
+        DeleteComment=3
+    }
+
     public static class Helpers
     {
+        public static bool Acl(string userName, PrivilegeList privilegeList)
+        {
+            using (var db = new reddahEntities1())
+            {
+                var query = (from user in db.Set<UserProfile>()
+                             join userInRole in db.Set<webpages_UsersInRoles>() on user.UserId equals userInRole.UserId
+                             join privilegeInRole in db.Set<webpages_PrivilegesInRoles>() on userInRole.RoleId equals privilegeInRole.RoleId
+                             join priviege in db.Set<webpages_Privileges>() on privilegeInRole.PrivilegeId equals priviege.PrivilegeId
+                             join role in db.Set<webpages_Roles>() on userInRole.RoleId equals role.RoleId
+                             where user.UserName == userName && priviege.PrivilegeId == (int)privilegeList
+                             select new
+                             {
+                                 user.UserId,
+                                 PrivilegeName = priviege.PrivilegeId
+                             }).Take(1);
+
+                if (query.Count() > 0)
+                    return true;
+
+
+            }
+
+            return false;
+        }
         public static string Display(bool flag)
         {
             return flag ? "flex" : "";

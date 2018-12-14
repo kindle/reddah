@@ -83,6 +83,10 @@
                  new { controller = "Articles", action = "JsonAddComment" }
              );
 
+            routes.MapLocalizedRoute("DeleteComment", "{locale}/Article/JsonDeleteComment",
+                 new { controller = "Articles", action = "JsonDeleteComment" }
+             );
+
             //tools
             routes.MapRoute(
                 "DefaultCaptchaRoute",

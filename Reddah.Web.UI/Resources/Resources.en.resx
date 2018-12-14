@@ -276,4 +276,7 @@
   <data name="Footer_ContentPolicy" xml:space="preserve">
     <value>Content Policy</value>
   </data>
+  <data name="Msg_Deleted" xml:space="preserve">
+    <value>The content was deleted</value>
+  </data>
 </root>

@@ -3,6 +3,7 @@
     <span ng-show="show&&count>0"> ({{count}} {{count==1?'comment':'comments' }})</span>
     <div class="author"><a href="/{{locale}}/user/{{username}}">{{username}}</a> {{createdon}} </div>
     <div class="commentclear"></div>
-    <div class="text">{{content}}</div>
+    <div ng-if="status==0" class="text">{{content}}</div>
+    <div ng-if="status==-1" class="text">{{msg}}</div>
 </div>
 <div ng-show="show" ng-transclude></div>

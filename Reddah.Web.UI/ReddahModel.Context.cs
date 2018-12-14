@@ -48,9 +48,13 @@ public partial class reddahEntities1 : DbContext
 
     public DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
 
+    public DbSet<webpages_Privileges> webpages_Privileges { get; set; }
+
+    public DbSet<webpages_PrivilegesInRoles> webpages_PrivilegesInRoles { get; set; }
+
     public DbSet<webpages_Roles> webpages_Roles { get; set; }
 
-    public DbSet<C__RefactorLog> C__RefactorLog { get; set; }
+    public DbSet<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
 
 }
 

@@ -1,4 +1,8 @@
 ﻿@model Reddah.Web.UI.Models.CommentModel
+@using System.Globalization
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
+}
 @if (Request.IsAuthenticated){
     <div id="newcomment">@Html.TextAreaFor(m => m.Content, new { @class="commentText", 
         @placeholder="do not post personal information, phone numbers, email addresses, names, etc, real or fake, or you will be banned without warning.", 
@@ -7,7 +11,7 @@
     <div class="clearline"></div>
     <div>
         @if (Request.IsAuthenticated){
-        <input class="floatLoginButton" type="button" value="Comment" ng-click="add(@Model.ParentId)"/>
+        <input class="floatLoginButton" type="button" value="Comment" ng-click="add('@locale', @Model.ParentId)"/>
         }
         else{
         <input class="floatLoginButton" type="button" value="Comment" ng-click="showPanel()"/>

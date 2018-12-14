@@ -15,10 +15,12 @@ namespace Reddah.Web.UI
 using System;
     using System.Collections.Generic;
     
-public partial class C__RefactorLog
+public partial class webpages_UsersInRoles
 {
 
-    public System.Guid OperationKey { get; set; }
+    public int UserId { get; set; }
+
+    public int RoleId { get; set; }
 
 }
 

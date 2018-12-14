@@ -1,36 +1,40 @@
 ﻿@model SeededComments
 @using Reddah.Web.UI.Models
 @using Reddah.Web.UI.Utility
-@using System.Globalization   
+@using Reddah.Web.UI.Resources
+@using System.Globalization
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
 }
 @if (Model.Comments.Where(s => s.ParentId == Model.Seed).Any())
 {
     <ul class="nestedlist">
-    @foreach (var node in Model.Comments)
-    {
-        if (node.ParentId == Model.Seed)
+        @foreach (var node in Model.Comments)
         {
-            var seededComments = new SeededComments { Seed = node.Id, Comments = Model.Comments };
-            <li class="comment">
-                <div class="entry">
-                    <collapser-comment toggle1="[-]" toggle2="[+]" locale="@locale" username="@node.UserName" createdon="@Helpers.TimeAgo(node.CreatedOn)" content="@Html.Raw(Helpers.HtmlDecode(node.Content))" count="@node.Count" parentid="@Model.Seed">
-                        @if (Request.IsAuthenticated){
-                        <div class="buttons">
-                            <collapser caption="reply">
-                                @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = node.Id })
-                            </collapser>
-                        </div>}
-                        <div class="child">
-                            @Html.Partial("Comment", seededComments)
-                        </div>
-                    </collapser-comment>
-                </div>
-                <div class="clearline"></div>
-            </li>
+            if (node.ParentId == Model.Seed)
+            {
+                var seededComments = new SeededComments { Seed = node.Id, Comments = Model.Comments };
+                <li class="comment">
+                    <div class="entry">
+                        <collapser-comment toggle1="[-]" toggle2="[+]" locale="@locale" username="@node.UserName" createdon="@Helpers.TimeAgo(node.CreatedOn)" content="@Html.Raw(Helpers.HtmlDecode(node.Content))" count="@node.Count" parentid="@Model.Seed" status="@node.Status" msg="@Resources.Msg_Deleted">
+                            @if (Request.IsAuthenticated)
+                            {
+                                <div class="buttons">
+                                    <collapser caption="Reply">
+                                        @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = node.Id })
+                                    </collapser>
+                                    @if (User.Identity.Name.Equals(node.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.DeleteComment))
+                                    {<u ng-click="delete('@locale', @node.Id)">[Delete]</u>}
+                                </div>}
+                            <div class="child">
+                                @Html.Partial("Comment", seededComments)
+                            </div>
+                        </collapser-comment>
+                    </div>
+                    <div class="clearline"></div>
+                </li>
+            }
         }
-    }
     </ul>
 }
 

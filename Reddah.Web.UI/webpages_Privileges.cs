@@ -15,12 +15,12 @@ namespace Reddah.Web.UI
 using System;
     using System.Collections.Generic;
     
-public partial class webpages_Roles
+public partial class webpages_Privileges
 {
 
-    public int RoleId { get; set; }
+    public int PrivilegeId { get; set; }
 
-    public string RoleName { get; set; }
+    public string PrivilegeName { get; set; }
 
 }
 

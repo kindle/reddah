@@ -6,11 +6,13 @@
         ArticleId: -1,
         ParentId: -1,
         Error: "",
-        Token: ""
+        Token: "",
+        Locale: "en-us"
     };
-    $scope.add = function (parentId) {
+    $scope.add = function (locale, parentId) {
         $scope.loading = true;
         $scope.model.Token = $scope.antiForgeryToken;
+        $scope.model.Locale = locale;
         $scope.model.ArticleId = $scope.articleId;
         $scope.model.ParentId = parentId;
         commentSvc.add($scope.model).then(function (data) {
@@ -31,6 +33,32 @@
             $scope.loading = false;
         })
     };
+    $scope.delete = function (locale, commentId) {
+        $scope.loading = true;
+        $scope.model.Token = $scope.antiForgeryToken;
+        $scope.model.Locale = locale;
+        $scope.model.ArticleId = commentId;
+        var r = confirm("Are you sure to delete the comment?");
+        if (r) {
+            commentSvc.delete($scope.model).then(function (data) {
+                if (data.success == true) {
+                    $scope.model.Content = "";
+                    //todo:insert html via js on top
+                    ///$route.reload();
+                    $window.location.reload();
+                }
+                else {
+                    var str = '';
+                    for (var error in data.errors) {
+                        str += data.errors[error] + '\n';
+                    }
+                    $scope.model.Error = str;
+                }
+
+                $scope.loading = false;
+            })
+        }
+    }
 }])
 .factory("commentSvc", ['$http', '$q', function ($http, $q) {
     return {
@@ -38,7 +66,21 @@
             var defer = $q.defer();
             $http({
                 method: 'post',
-                url: '/en-us/Article/JsonAddComment',
+                url: '/' + data.Locale + '/Article/JsonAddComment',
+                data: data,
+                headers: { 'RequestVerificationToken': data.Token }
+            }).success(function (data, status, headers, config) {
+                defer.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defer.reject(data)
+            });
+            return defer.promise;
+        },
+        delete: function (data) {
+            var defer = $q.defer();
+            $http({
+                method: 'post',
+                url: '/'+data.Locale+'/Article/JsonDeleteComment',
                 data: data,
                 headers: { 'RequestVerificationToken': data.Token }
             }).success(function (data, status, headers, config) {
@@ -62,7 +104,9 @@
             createdon: '@',
             content: '@',
             count:'@',
-            parentid: '@'
+            parentid: '@',
+            status: '@',
+            msg:'@'
         },
         transclude: true
     };

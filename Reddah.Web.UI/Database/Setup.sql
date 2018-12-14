@@ -37,9 +37,20 @@ CREATE TABLE [dbo].[webpages_Roles] (
 CREATE TABLE [dbo].[webpages_UsersInRoles] (
     [UserId] INT NOT NULL,
     [RoleId] INT NOT NULL,
-    PRIMARY KEY CLUSTERED ([UserId] ASC, [RoleId] ASC),
-    CONSTRAINT [fk_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[UserProfile] ([UserId]),
-    CONSTRAINT [fk_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[webpages_Roles] ([RoleId])
+    PRIMARY KEY CLUSTERED ([UserId] ASC, [RoleId] ASC)
+);
+
+CREATE TABLE [dbo].[webpages_Privileges] (
+    [PrivilegeId]   INT       IDENTITY (1, 1) NOT NULL,
+    [PrivilegeName] NVARCHAR (256) NOT NULL,
+    PRIMARY KEY CLUSTERED ([PrivilegeId] ASC),
+    UNIQUE NONCLUSTERED ([PrivilegeName] ASC)
+);
+
+CREATE TABLE [dbo].[webpages_PrivilegesInRoles] (
+    [PrivilegeId] INT NOT NULL,
+    [RoleId] INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([PrivilegeId] ASC, [RoleId] ASC)
 );
 
 CREATE TABLE [dbo].[Log] 
