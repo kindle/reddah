@@ -51,8 +51,11 @@
                 new { controller = "Support", action = "Index" }
             );
 
-            routes.MapLocalizedRoute("Promoted", "{locale}/promoted",
-                new { controller = "Articles", action = "Menu", path = "promoted" }
+            /*routes.MapLocalizedRoute("Promoted", "{locale}/promoted",
+                new { controller = "AI", action = "UserProfile", path = "promoted" }
+            );*/
+            routes.MapLocalizedRoute("AI", "{locale}/promoted",
+                new { controller = "AI", action = "UserProfile" }
             );
 
             //subreddah
@@ -72,6 +75,13 @@
             //user article
             routes.MapLocalizedRoute("UserArticles", "{locale}/user/{username}",
                 new { controller = "Articles", action = "UserArticles" }
+            );
+
+            //articles JSON
+            routes.MapLocalizedRoute(
+                "JsonUserProfileArticles",
+                "{locale}/AI/JsonUserProfileArticles",
+                new { controller = "AI", action = "JsonUserProfileArticles" }
             );
 
             //comment

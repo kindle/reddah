@@ -8,18 +8,22 @@
     using System.Xml;
     using System.Web;
 
-    public class ArticleCommentViewModel
+    public class ArticleCommentViewModel : ArticleViewModelBase
     {
         public ArticlePreview Article { get; set; }
-        public List<ArticlePreview> RightBoxModules { get; set; }
+        //public List<ArticlePreview> RightBoxModules { get; set; }
         public SeededComments Comments { get; set; }
         public string GroupName { get; set; }
+
+        public ArticleCommentViewModel() : base()
+        {
+            
+        }
 
         public ArticleCommentViewModel(string groupName, int id, string count)
         {
             GroupName = groupName.ToLowerInvariant();
-            RightBoxModules = GetArticlePreviews("/Root/HomePageModularRightContent/HomePageRightBoxModule");
-
+            
             Article = new ArticlePreview();
             //Comments = new List<ArticleComment>();
             using (var db = new reddahEntities1())
@@ -52,7 +56,7 @@
                 Comments = new SeededComments { Seed = -1, Comments = comments.ToList() };
             }
         }
-
+        /*
         private const string HomePageXmlPath = "~/App_Data/wiki/Pages/HomePage.xml";
 
         private List<ArticlePreview> GetArticlePreviews(string path)
@@ -73,6 +77,6 @@
             }
 
             return apList;
-        }
+        }*/
     }
 }

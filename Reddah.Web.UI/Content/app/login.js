@@ -1,4 +1,4 @@
-﻿angular.module("reddahApp", [])
+﻿angular.module("reddahApp")
 .controller("loginCtrl", ['$scope', 'loginSvc', function ($scope, loginSvc) {
     $scope.loadingLogin = false;
     $scope.loginModel = {
@@ -187,7 +187,7 @@
                 defer.reject(data)
             });
             return defer.promise;
-        }
+        },
     }
 }])
 .directive('collapser', function () {

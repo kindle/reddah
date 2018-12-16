@@ -1,31 +1,33 @@
 ﻿@using System.Globalization    
 <!DOCTYPE html>
 <html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName" ng-app="reddahApp">
-    <head>
-        <meta charset="utf-8" />
-        <title>reddah.com</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        <script type="text/javascript">
-            (function (window) {
-                var reddah = window.reddah = window.reddah || {};
-                reddah.videoPlayer = reddah.videoPlayer || {};
-                reddah.videoPlayer.VideoPlayerUrl = "/Content/Silverlight/VideoPlayer.xap";
-            })(window);
-        </script>
-        @Styles.Render("~/Content/GridLayout")
-        @Styles.Render("~/Content/Shell")
-        @Styles.Render("~/Content/Css")
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/angularjs")
-        @Scripts.Render("~/bundles/min")
-        @Scripts.Render("~/bundles/common")
-        @Scripts.Render("~/bundles/login")
-        @Scripts.Render("~/bundles/comment")
-        @RenderSection("scripts", required: false)        
-    </head>
-    <body ng-controller="appCtrl">
+<head>
+    <meta charset="utf-8" />
+    <title>reddah.com</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <script type="text/javascript">
+        (function (window) {
+            var reddah = window.reddah = window.reddah || {};
+            reddah.videoPlayer = reddah.videoPlayer || {};
+            reddah.videoPlayer.VideoPlayerUrl = "/Content/Silverlight/VideoPlayer.xap";
+        })(window);
+    </script>
+    @Styles.Render("~/Content/GridLayout")
+    @Styles.Render("~/Content/Shell")
+    @Styles.Render("~/Content/Css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/angularjs")
+    @Scripts.Render("~/bundles/min")
+    @Scripts.Render("~/bundles/common")
+    @Scripts.Render("~/bundles/app")
+    @Scripts.Render("~/bundles/login")
+    @Scripts.Render("~/bundles/comment")
+    @Scripts.Render("~/bundles/article")
+    @RenderSection("scripts", required: false)
+</head>
+    <body ng-controller="appCtrl" ng-cloak>
         <div id="BodyHeader" class="container">
             @Html.Partial("~/Views/Shared/Controls/Header.cshtml")
         </div>

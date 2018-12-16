@@ -66,4 +66,11 @@ namespace Reddah.Web.UI.Models
         [Display(Name = "Comment Content")]
         public string Content { get; set; }
     }
+
+    public class UserProfileModel
+    {
+        public string Token;
+        public string Locale;
+        //public Dictionary<string, int> habits;
+    }
 }

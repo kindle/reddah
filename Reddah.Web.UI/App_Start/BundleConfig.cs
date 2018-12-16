@@ -75,11 +75,15 @@
             bundles.Add(new ScriptBundle("~/bundles/wizard").Include(
                         "~/Content/js/wizard.js"));
             // angular
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                        "~/Content/app/app.js"));
             bundles.Add(new ScriptBundle("~/bundles/login").Include(
                         "~/Content/app/login.js"));
             bundles.Add(new ScriptBundle("~/bundles/comment").Include(
                         "~/Content/app/comment.js"));
-            
+            bundles.Add(new ScriptBundle("~/bundles/article").Include(
+                        "~/Content/app/article.js"));
+
         }
     }
 }

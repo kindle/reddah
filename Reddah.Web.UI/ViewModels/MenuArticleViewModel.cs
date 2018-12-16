@@ -64,7 +64,7 @@
                                 orderby b.Up descending
                              select b).Skip(pageCount * pageNo).Take(pageCount);
                 }
-                //todo
+                //AI recommeded by engine accoring to user profile
                 else if (type == "promoted")
                 {
                     query = (from b in db.Articles
@@ -115,26 +115,23 @@
     public class MenuArticleViewModel : ArticleViewModelBase
     {
         public MenuArticleViewModel(string path, string type, int pageNo)
-            : base(path)
+            : base()
         {
             //Folders = GetFolderPreviews(path);
             Items = MenuFactory.GetItemPreviews(type, pageNo);
             Articles = GetArticlePreviews(path);
             NextPrevBox = MenuFactory.GetItemPreviews("nextprevbox", 10);
-            RightBoxModules = GetArticlePreviews();
             TrendingSubs = new SubArticleViewModel().GetTrendingSubs();
         }
 
         public List<ArticlePreview> Articles { get; set; }
         
-        
-
         public List<ArticlePreview> Folders { get; set; }
         public List<ArticlePreview> Items { get; set; }
 
         //private List<ArticlePreview> GetItemPreviews(string path, string menu)
         //{
-            
+
 
         //    } 
 
@@ -151,19 +148,19 @@
         //    //}
         //    //get top 25 dah from db
 
-            
+
         //}
 
         //private List<ArticlePreview> GetFolderPreviews(string path)
         //{
         //    return GetItemPreviews(path).FindAll(url => url.ArticleUrl.ToLower().Contains("navigationlist"));
         //}
-
+        
         private List<ArticlePreview> GetArticlePreviews(string path)
         {
             return Items.FindAll(url => !url.ArticleUrl.ToLower().Contains("navigationlist"));
         }
-
+        /*
         private const string HomePageXmlPath = "~/App_Data/wiki/Pages/HomePage.xml";
 
         private List<ArticlePreview> GetArticlePreviews1(string path)
@@ -184,34 +181,8 @@
             }
 
             return apList;
-        }
+        }*/
 
-        private List<ArticlePreview> GetArticlePreviews()
-        {
-            var rbList = new List<ArticlePreview>();
-            
-            var rb = new ArticlePreview();
-            rb.Title = Resources.Resources.Right_Feedbacks;
-            rb.Description = Resources.Resources.Right_Feedbacks_Desc;
-            rb.ImageUrl = "/content/images/forum.png";
-            rb.ArticleUrl = "r/feedbacks";
-            rbList.Add(rb);
 
-            rb = new ArticlePreview();
-            rb.Title = Resources.Resources.Right_DiscussAd;
-            rb.Description = Resources.Resources.Right_DiscussAd_Desc;
-            rb.ImageUrl = "/content/images/ambassador.png";
-            rb.ArticleUrl = "r/discuss-on-AD";
-            rbList.Add(rb);
-
-            rb = new ArticlePreview();
-            rb.Title = Resources.Resources.Right_ContactUs;
-            rb.Description = Resources.Resources.Right_ContactUs_Desc;
-            rb.ImageUrl = "/content/images/contact_us.png";
-            rb.ArticleUrl = "r/contact-us";
-            rbList.Add(rb);
-
-            return rbList;
-        }
     }
 }

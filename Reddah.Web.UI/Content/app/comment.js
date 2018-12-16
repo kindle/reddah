@@ -34,12 +34,14 @@
         })
     };
     $scope.delete = function (locale, commentId) {
-        $scope.loading = true;
-        $scope.model.Token = $scope.antiForgeryToken;
-        $scope.model.Locale = locale;
-        $scope.model.ArticleId = commentId;
         var r = confirm("Are you sure to delete the comment?");
         if (r) {
+
+            $scope.loading = true;
+            $scope.model.Token = $scope.antiForgeryToken;
+            $scope.model.Locale = locale;
+            $scope.model.ArticleId = commentId;
+
             commentSvc.delete($scope.model).then(function (data) {
                 if (data.success == true) {
                     $scope.model.Content = "";

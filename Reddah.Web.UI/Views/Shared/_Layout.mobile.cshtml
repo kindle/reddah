@@ -25,7 +25,7 @@
         @Scripts.Render("~/bundles/comment")
         @RenderSection("scripts", required: false)        
     </head>
-    <body ng-controller="appCtrl">
+    <body ng-controller="appCtrl" ng-cloak>
         <div id="BodyHeader" class="container">
             @Html.Partial("~/Views/Shared/Controls/Header.mobile.cshtml")
         </div>

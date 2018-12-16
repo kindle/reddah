@@ -188,6 +188,7 @@
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AIController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\BrowseNavigateController.cs" />
     <Compile Include="Controllers\ContactSupportController.cs" />
@@ -269,6 +270,7 @@
     <Compile Include="ViewModels\BrowseProductViewModel.cs" />
     <Compile Include="ViewModels\ContactSupport\CategoriesViewModel.cs" />
     <Compile Include="ViewModels\ContactSupport\ProductsViewModel.cs" />
+    <Compile Include="ViewModels\UserProfileArticleViewModel.cs" />
     <Compile Include="ViewModels\MenuArticleViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -405,9 +407,11 @@
     <Content Include="App_Data\wiki\Pages\Video\reddahArch2.xml" />
     <Content Include="App_Data\wiki\ppt\Support.pptx" />
     <Content Include="App_Data\wiki\ppt\supportreddahcom.pps" />
+    <Content Include="Content\app\app.js" />
     <Content Include="Content\app\collapser-comment.html" />
     <Content Include="Content\app\collapser.html" />
     <Content Include="Content\app\comment.js" />
+    <Content Include="Content\app\article.js" />
     <Content Include="Content\app\login.js" />
     <Content Include="Content\Comment.css" />
     <Content Include="Content\Images\ambassador.png" />
@@ -810,6 +814,8 @@
     <Content Include="Views\Account\Manage.mobile.cshtml" />
     <Content Include="Views\Account\Register.mobile.cshtml" />
     <Content Include="Views\Articles\ArticleComment-bak.cshtml" />
+    <Content Include="Views\Articles\UserProfileArticleList.cshtml" />
+    <Content Include="Views\Articles\UserProfileArticleList.mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
