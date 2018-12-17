@@ -33,8 +33,8 @@
             $scope.loading = false;
         })
     };
-    $scope.delete = function (locale, commentId) {
-        var r = confirm("Are you sure to delete the comment?");
+    $scope.delComment = function (locale, commentId) {
+        var r = confirm("Are you sure to remove the comment?");
         if (r) {
 
             $scope.loading = true;
@@ -42,7 +42,7 @@
             $scope.model.Locale = locale;
             $scope.model.ArticleId = commentId;
 
-            commentSvc.delete($scope.model).then(function (data) {
+            commentSvc.delComment($scope.model).then(function (data) {
                 if (data.success == true) {
                     $scope.model.Content = "";
                     //todo:insert html via js on top
@@ -78,11 +78,11 @@
             });
             return defer.promise;
         },
-        delete: function (data) {
+        delComment: function (data) {
             var defer = $q.defer();
             $http({
                 method: 'post',
-                url: '/'+data.Locale+'/Article/JsonDeleteComment',
+                url: '/'+data.Locale+'/Article/JsonDelComment',
                 data: data,
                 headers: { 'RequestVerificationToken': data.Token }
             }).success(function (data, status, headers, config) {

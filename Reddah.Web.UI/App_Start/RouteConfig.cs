@@ -93,8 +93,8 @@
                  new { controller = "Articles", action = "JsonAddComment" }
              );
 
-            routes.MapLocalizedRoute("DeleteComment", "{locale}/Article/JsonDeleteComment",
-                 new { controller = "Articles", action = "JsonDeleteComment" }
+            routes.MapLocalizedRoute("DeleteComment", "{locale}/Article/JsonDelComment",
+                 new { controller = "Articles", action = "JsonDelComment" }
              );
 
             //tools

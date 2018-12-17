@@ -19,12 +19,13 @@
 
             $scope.loading = false;
             $scope.isLoadingMore = false;
-        })
+        });
     };
     $scope.isLoadingMore = false;
     $scope.loadMore = function (locale) {
-        if($scope.isLoadingMore == false)
+        if ($scope.isLoadingMore == false) {
             $scope.getUserProfileArticles(locale);
+        }
     };
     $scope.htmlDecode = function (str) {
         var s = "";
@@ -35,8 +36,9 @@
         s = s.replace(/&nbsp;/g, " ");
         s = s.replace(/&#39;/g, "\'");
         s = s.replace(/&quot;/g, "\"");
+
         return s;
-    }
+    };
 }])
 .factory("articleSvc", ['$http', '$q', function ($http, $q) {
     return {

@@ -305,7 +305,7 @@
 
         [Authorize]
         [HttpPost]
-        public JsonResult JsonDeleteComment(CommentModel model)
+        public JsonResult JsonDelComment(CommentModel model)
         {
             var errors = string.Empty;
             

@@ -252,7 +252,7 @@
             <div class="postClear" ng-if="article.ImageUrls.length>1"></div>
             <div class="listImage" ng-repeat="articleUrl in article.ImageUrls">
                 <div class="listImageWrapper">
-                    <img class="BrowsePreviewImage" width="193" src="{{articleUrl}}" alt="picture">
+                    <img class="BrowsePreviewImage" width="193" src="{{articleUrl}}" alt="picture not found">
                 </div>
             </div>
             <h2 ng-if="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
