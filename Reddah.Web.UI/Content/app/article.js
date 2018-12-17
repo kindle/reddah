@@ -54,7 +54,7 @@
             });
             return defer.promise;
         },
-    }
+    };
 }])
 .directive('whenScrolled', function () {
     return function (scope, elm, attr) {

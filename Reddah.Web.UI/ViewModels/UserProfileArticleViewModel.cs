@@ -26,7 +26,7 @@
 
             string locale = CultureInfo.CurrentUICulture.Name.ToLowerInvariant().Split('-')[0];
 
-            /*using (var db = new reddahEntities1())
+            using (var db = new reddahEntities1())
             {
                 IEnumerable<Article> query = null;
 
@@ -59,7 +59,7 @@
 
                     apList.Add(ap);
                 }
-            }*/
+            }
 
             return apList;
         }
