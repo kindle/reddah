@@ -291,6 +291,12 @@
             );
 
             routes.MapLocalizedRoute(
+                "Upload",
+                "upload",
+                new { controller = "Articles", action = "Upload" }
+            );
+
+            routes.MapLocalizedRoute(
                 "About",
                 "{locale}/About",
                 new { controller = "Support", action = "About" }

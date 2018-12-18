@@ -10,6 +10,8 @@
     using System.Threading;
     using System.Web;
     using Reddah.Web.UI.Utility;
+    using System.IO;
+
     //using System.Net.Http;
     //using System.Web.Http;
     //using System.Web.Http.Cors;
@@ -328,6 +330,31 @@
             }
 
             return Json(new { success = true });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase upload)
+        {
+            var CKEditorFuncNum = System.Web.HttpContext.Current.Request["CKEditorFuncNum"];
+            if (!upload.ContentType.Contains("image"))
+            {
+                return Content("<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum
+                + ",''," + "'File format Error: (must be .jpg/.gif/.bmp/.png)');</script>");
+            }
+            else
+            {
+                var fileName = Path.GetFileName(upload.FileName);
+                var filePhysicalPath = Server.MapPath("~/upload/" + fileName);
+                if (!Directory.Exists(Server.MapPath("~/upload")))
+                {
+                    Directory.CreateDirectory(Server.MapPath("~/upload"));
+                }
+                upload.SaveAs(filePhysicalPath);
+                var url = "/upload/" + fileName;
+                
+                return Content("<script>window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ", \"" + url + "\");</script>");
+            }
         }
     }
 }
