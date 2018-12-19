@@ -257,6 +257,9 @@
     <Compile Include="Setting.cs">
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UploadFile.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserProfile.cs">
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>

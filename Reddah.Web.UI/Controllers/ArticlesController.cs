@@ -349,8 +349,8 @@
             }
             else
             {
-                
-                var fileName = Path.GetFileName(guid + "." +upload.FileName.Split('.')[1]);
+                var fileFormat = upload.FileName.Split('.')[1];
+                var fileName = Path.GetFileName(guid + "." + fileFormat);
                 var filePhysicalPath = Server.MapPath(uploadImageServerPath + "/"  + fileName);
                 if (!Directory.Exists(Server.MapPath(uploadImageServerPath)))
                 {
@@ -358,6 +358,19 @@
                 }
                 upload.SaveAs(filePhysicalPath);
                 var url = uploadedImagePath + fileName;
+
+                using (var db = new reddahEntities1())
+                {
+                    UploadFile file = new UploadFile();
+                    file.Guid = guid;
+                    file.Format = fileFormat;
+                    file.UserName = User.Identity.Name;
+                    file.CreatedOn = DateTime.Now;
+                    file.GroupName = "";
+                    file.Tag = "";
+                    db.UploadFiles.Add(file);
+                    db.SaveChanges();
+                }
 
                 return Content("<script>window.parent.CKEDITOR.tools.callFunction(window.parent.CKEDITOR.instances.Content._.filebrowserFn, \"" + url + "\");</script>");
             }

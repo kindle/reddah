@@ -108,3 +108,15 @@ CREATE TABLE [dbo].[Setting] (
     [Value] NVARCHAR (MAX) NULL,
     CONSTRAINT [PK_dbo.Setting] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
+CREATE TABLE [dbo].[UploadFile] 
+( 
+    [Id] [int] IDENTITY (1, 1) NOT NULL, 
+    [Guid] [varchar] (255) NOT NULL, 
+	[Format] [varchar] (10) NOT NULL, 
+    [UserName] NVARCHAR (MAX) NOT NULL,
+    [CreatedOn] DATETIME NOT NULL,
+	[GroupName] NVARCHAR(MAX) NOT NULL,
+	[Tag] NVARCHAR(MAX) NOT NULL,
+	CONSTRAINT [PK_dbo.UploadFile] PRIMARY KEY CLUSTERED ([Id] ASC)
+);

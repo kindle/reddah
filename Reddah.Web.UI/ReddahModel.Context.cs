@@ -42,6 +42,8 @@ public partial class reddahEntities1 : DbContext
 
     public DbSet<Setting> Settings { get; set; }
 
+    public DbSet<UploadFile> UploadFiles { get; set; }
+
     public DbSet<UserProfile> UserProfiles { get; set; }
 
     public DbSet<webpages_Membership> webpages_Membership { get; set; }
