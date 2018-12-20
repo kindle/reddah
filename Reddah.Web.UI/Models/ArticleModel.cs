@@ -69,8 +69,10 @@ namespace Reddah.Web.UI.Models
 
     public class UserProfileModel
     {
-        public string Token;
+        public int[] LoadedIds;
         public string Locale;
+        public string Token;
+        
         //public Dictionary<string, int> habits;
     }
 }

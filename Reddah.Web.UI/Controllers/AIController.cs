@@ -1,17 +1,15 @@
 ﻿namespace Reddah.Web.UI.Controllers
 {
-    using System;
     using System.Linq;
     using System.Web.Mvc;
 
     using Reddah.Web.UI.ViewModels;
     using Reddah.Web.UI.Filters;
     using Reddah.Web.UI.Models;
-    using System.Threading;
-    using System.Web;
-    using Reddah.Web.UI.Utility;
     using System.Collections.Generic;
     using System.Web.Security;
+    using System.Web.Script.Serialization;
+    using System.IO;
 
     public class AIController : BaseController
     {
@@ -26,12 +24,17 @@
         [AllowAnonymous]
         [HttpPost]
         [AjaxValidateAntiForgeryToken]
-        public JsonResult JsonUserProfileArticles(UserProfileModel userProfileModel)
+        public JsonResult JsonUserProfileArticles()
         {
             if (ModelState.IsValid)
             {
                 try
-                {
+                { 
+                    var sr = new StreamReader(Request.InputStream);
+                    var stream = sr.ReadToEnd();
+                    JavaScriptSerializer js = new JavaScriptSerializer();
+                    UserProfileModel userProfileModel = js.Deserialize<UserProfileModel>(stream);
+
                     return Json(new {
                         success = true,
                         result = new UserProfileArticleViewModel(userProfileModel)
@@ -49,6 +52,30 @@
         private IEnumerable<string> GetErrorsFromModelState()
         {
             return ModelState.SelectMany(x => x.Value.Errors.Select(error => error.ErrorMessage));
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [AjaxValidateAntiForgeryToken]
+        public JsonResult JsonRightBoxItems(UserProfileModel userProfileModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    return Json(new
+                    {
+                        success = true,
+                        result = new ArticleViewModelBase()
+                    });
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+            }
+
+            return Json(new { errors = GetErrorsFromModelState() });
         }
 
     }

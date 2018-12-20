@@ -72,11 +72,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removePlugins = 'image';
 	config.extraPlugins = 'html5video';
 	config.extraPlugins = 'image2';
-	//config.extraPlugins = 'filebrowser';
 	config.filebrowserImageUploadUrl = "/upload";
-	//config.filebrowserBrowseUrl = "";
-	//config.filebrowserUploadUrl = "";
-	//config.filebrowserImageUploadMethod = "form";
 };
 
 // %LEAVE_UNMINIFIED% %REMOVE_LINE%

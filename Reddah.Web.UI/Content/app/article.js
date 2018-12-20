@@ -1,19 +1,23 @@
 ﻿angular.module("reddahApp")
 .controller("articleCtrl", ['$scope', 'articleSvc', function ($scope, articleSvc) {
     $scope.aiArticles = [];
+    $scope.loadedArticleIds = [0];
     $scope.loading = false;
     $scope.getUserProfileArticles = function (locale) {
-        $scope.userProfileModel = {
-            Token: $scope.antiForgeryToken,
-            Locale: locale
+        $scope.UserProfileModel = {
+            LoadedIds: $scope.loadedArticleIds,
+            Locale: locale,
+            Token: $scope.antiForgeryToken
         };
         $scope.loading = true;
         $scope.isLoadingMore = true;
 
-        articleSvc.getArticles($scope.userProfileModel).then(function (data) {
+        articleSvc.getArticles($scope.UserProfileModel).then(function (data) {
             if (data.success == true) {
                 data.result.Articles.forEach(function (article) {
                     $scope.aiArticles.push(article);
+                    if ($scope.loadedArticleIds.indexOf(article.Id)==-1)
+                        $scope.loadedArticleIds.push(article.Id);
                 });
             }
 
@@ -39,6 +43,24 @@
 
         return s;
     };
+
+    $scope.aiRightBoxItems = [];
+    $scope.getRightBox = function (locale) {
+        $scope.rightBoxModel = {
+            Token: $scope.antiForgeryToken,
+            Locale: locale
+        };
+        $scope.rightBoxLoading = true;
+        articleSvc.getRightBox($scope.rightBoxModel).then(function (data) {
+            if (data.success == true) {
+                data.result.RightBoxModules.forEach(function (item) {
+                    $scope.aiRightBoxItems.push(item);
+                });
+            }
+
+            $scope.rightBoxLoading = false;
+        });
+    };
 }])
 .factory("articleSvc", ['$http', '$q', function ($http, $q) {
     return {
@@ -47,6 +69,21 @@
             $http({
                 method: 'post',
                 url: '/' + data.Locale + '/AI/JsonUserProfileArticles',
+                data: JSON.stringify(data),
+                dataType: "json",
+                headers: {'RequestVerificationToken': data.Token}
+            }).success(function (data, status, headers, config) {
+                defer.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defer.reject(data)
+            });
+            return defer.promise;
+        },
+        getRightBox: function (data) {
+            var defer = $q.defer();
+            $http({
+                method: 'post',
+                url: '/' + data.Locale + '/AI/JsonRightBoxItems',
                 data: data,
                 headers: { 'RequestVerificationToken': data.Token }
             }).success(function (data, status, headers, config) {

@@ -54,10 +54,7 @@
             /*routes.MapLocalizedRoute("Promoted", "{locale}/promoted",
                 new { controller = "AI", action = "UserProfile", path = "promoted" }
             );*/
-            routes.MapLocalizedRoute("AI", "{locale}/promoted",
-                new { controller = "AI", action = "UserProfile" }
-            );
-
+            
             //subreddah
             routes.MapLocalizedRoute("SubReddah", "{locale}/r/{sub}",
                 new { controller = "Articles", action = "SubReddah" }
@@ -79,9 +76,19 @@
 
             //articles JSON
             routes.MapLocalizedRoute(
-                "JsonUserProfileArticles",
-                "{locale}/AI/JsonUserProfileArticles",
+                "AI", "{locale}/promoted",
+                new { controller = "AI", action = "UserProfile" }
+            );
+
+            routes.MapLocalizedRoute(
+                "JsonUserProfileArticles", "{locale}/AI/JsonUserProfileArticles",
                 new { controller = "AI", action = "JsonUserProfileArticles" }
+            );
+
+            routes.MapLocalizedRoute(
+                "JsonRightBoxItems",
+                "{locale}/AI/JsonRightBoxItems",
+                new { controller = "AI", action = "JsonRightBoxItems"}
             );
 
             //comment

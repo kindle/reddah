@@ -9,11 +9,11 @@
     using System.Web;
     using System.Globalization;
 
-    public class UserProfileArticleViewModel : ArticleViewModelBase
+    public class UserProfileArticleViewModel
     {
         public List<ArticlePreview> Articles { get; set; }
 
-        public UserProfileArticleViewModel(UserProfileModel userProfileModel) : base()
+        public UserProfileArticleViewModel(UserProfileModel userProfileModel)
         {
             Articles = GetUserProfileArticles(userProfileModel);
         }
@@ -21,7 +21,7 @@
         private List<ArticlePreview> GetUserProfileArticles(UserProfileModel userProfileModel)
         {
             const int pageNo = 0; // put in userProfile send article list
-            const int pageCount = 25;
+            const int pageCount = 10;
             var apList = new List<ArticlePreview>();
 
             string locale = CultureInfo.CurrentUICulture.Name.ToLowerInvariant().Split('-')[0];
@@ -29,11 +29,13 @@
             using (var db = new reddahEntities1())
             {
                 IEnumerable<Article> query = null;
-
+                int[] loaded = userProfileModel.LoadedIds == null ? new int[] { } : userProfileModel.LoadedIds;
                 query = (from b in db.Articles
-                            where b.Locale.StartsWith(locale)
+                            where b.Locale.StartsWith(locale) &&
+                             !(loaded).Contains(b.Id)
                             orderby b.Count descending
-                            select b).Skip(pageCount * pageNo).Take(pageCount);
+                            select b)//.Skip(pageCount * pageNo)
+                            .Take(pageCount);
                 
                 foreach (var item in query)
                 {
