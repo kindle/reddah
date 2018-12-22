@@ -338,7 +338,7 @@
         public ContentResult Upload(HttpPostedFileBase upload)
         {
             string guid = Guid.NewGuid().ToString().Replace("-","");
-            string uploadedImagePath = "/uploadPhoto/";// + guid + "/";
+            string uploadedImagePath = "/uploadPhoto/";
             string uploadImageServerPath = "~" + uploadedImagePath;
 
 
@@ -349,7 +349,7 @@
             }
             else
             {
-                var fileFormat = upload.FileName.Split('.')[1];
+                var fileFormat = upload.FileName.Substring(upload.FileName.LastIndexOf('.')).Replace(".","");
                 var fileName = Path.GetFileName(guid + "." + fileFormat);
                 var filePhysicalPath = Server.MapPath(uploadImageServerPath + "/"  + fileName);
                 if (!Directory.Exists(Server.MapPath(uploadImageServerPath)))

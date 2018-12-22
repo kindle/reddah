@@ -4,169 +4,53 @@
 @using System.Globalization
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
-    int index = (GetNextPageNo() - 1) * 25 + 1;
-    int nextPrevIndex = 1;
 }
-@functions{
-    public bool ShowPrev()
-    {
-        return GetNextPageNo() > 1;
-    }
-    public int GetPrevPageNo()
-    {
-        var pageNo = Request.Params["page"];
-        int newPageNo = 0;
-        if (string.IsNullOrWhiteSpace(pageNo))
-        {
-            newPageNo = 0;
-        }
-        else
-        {
-            if (int.TryParse(pageNo, out newPageNo))
-            {
-                newPageNo -= 1;
-            }
-        }
 
-        return newPageNo;
-    }
-    public int GetNextPageNo()
-    {
-        var pageNo = Request.Params["page"];
-        int newPageNo = 1;
-        if (string.IsNullOrWhiteSpace(pageNo))
-        {
-            newPageNo = 1;
-        }
-        else
-        {
-            if (int.TryParse(pageNo, out newPageNo))
-            {
-                newPageNo += 1;
-            }
-        }
-
-        return newPageNo;
-    }
-}
 <link href="/Content/Post.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-@*<h1 class="HomePageModular">@Model.ArticleTitle</h1>*@
-<div class="rightBox">
-    @Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())
-    @if (Model.RightBoxModules != null)
-    {
-        int j = 0;
-        foreach (var rightBoxModule in Model.RightBoxModules)
-        {
-            if (!String.IsNullOrEmpty(rightBoxModule.Title) && !String.IsNullOrEmpty(rightBoxModule.ArticleUrl))
-            {
-                if (j == 3)
-                {
-                    break;
-                }
-                <div class="HomePageRightBoxModule">
-                    <table>
-                        <tr>
-                            <td>
-                                <a href="/@locale/@rightBoxModule.ArticleUrl"><img alt="@rightBoxModule.ImageUrl" src="@rightBoxModule.ImageUrl" /></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="rightBoxModule">
-                                <h2><a href="/@locale/@rightBoxModule.ArticleUrl">@rightBoxModule.Title</a></h2>
-                                <div>@rightBoxModule.Description</div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                j++;
-            }
-        }
-    }
-</div>
-@*<a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetShortTitle(Helpers.HtmlDecode(article.Title))/" target="_blank">*@
-<div class="postBlock" id="postBlock">
-    @if (Model.TrendingSubs != null)
-    {
-        <div class="trendingSubs">
-            Resources.Article_TrendingSubReddah
-            @foreach (var trendingSub in Model.TrendingSubs)
-            {
-                <a href="/@locale/r/@trendingSub">r/@trendingSub</a>
-            }
-        </div>
-    }
-    <div class="postClear"></div>
-    @foreach (var article in Model.Articles)
-    {
-        if (!String.IsNullOrEmpty(article.Title) && !String.IsNullOrEmpty(article.Abstract) && !String.IsNullOrEmpty(article.ArticleUrl))
-        {
-            <div class="post">
-                <div class="postModuleLiner">
-                    @if (!String.IsNullOrEmpty(article.VideoUrl))
-                    {
-                        <h2><a>@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
-                        <div class="postClear"></div>
-                        <div>@Html.Raw(Helpers.HtmlDecode(article.Content))</div>
-                    }
 
-                    @if (article.ImageUrls != null)
-                    {
-                        if (article.ImageUrls.Length > 1)
-                        {
-                            <h2><a ng-click="toggleArticle('post', @index)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
-                            <div class="postClear"></div>
-                        }
-                        <div class="listImage" style="display:@Helpers.Display(article.ImageUrls.Length>1);">
-                            @for (int i = 0; i < article.ImageUrls.Length; i++)
-                            {
-                                <div class="listImageWrapper">
-                                    <img ng-click="showImage('post', @index)" class="BrowsePreviewImage" onerror="this.style.display='none'" src="@article.ImageUrls[i]" alt="picture">
-                                </div>
-                            }
-                        </div>
-                        if (article.ImageUrls.Length > 1)
-                        {
-                            <div class="postClear"></div>
-                        }
-                    }
-                    @if (article.ImageUrls != null && article.ImageUrls.Length < 2 && String.IsNullOrEmpty(article.VideoUrl))
-                    {
-                        <h2><a ng-click="toggleArticle('post', @index)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>
-                    }
+<style>
+    .articleLoading {
+        padding: 30px;
+        text-align: center;
+    }
+</style>
 
-                    @*<h2><a ng-click="toggleArticle('post', @index)">@Helpers.HtmlDecode(article.Title)</a> <span class="listInfo" style="display:none;">(source)</span></h2>*@
-                    <div>@Helpers.HtmlDecode(article.Abstract)</div>
+<input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@Helpers.GetAntiForgeryToken()'" />
+<div class="postBlock" id="postBlock" ng-controller="articleCtrl">
+    <div class="ai-list" ng-init="getUserProfileArticles('@locale')" when-scrolled="loadMore('@locale')">
+        <div class="post" ng-repeat="article in aiArticles">
+            <div class="postModuleLiner">
+                <div ng-if="article.VideoUrl.length>0">
+                    <h2><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
                     <div class="postClear"></div>
-                    <img id="org_image_@index" class="orgImage" onerror="if (this.src != '/content/images/noimage.jpg') this.src = '/content/images/noimage.jpg';" width="100%" src="@article.ImageUrl" alt="picture">
-                    <div id="org_article_@index" class="orgArticle">@Html.Raw(Helpers.HtmlDecode(article.Content))</div>
-                    <div class="listInfo">
-                        <i class="fa fa-clock-o"> @article.CreatedOn </i>
-                        <i class="fa fa-commenting-o"> <a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetUrlTitle(Helpers.HtmlDecode(article.Title))/" target="_blank">@article.Comments</a> </i>
-                        <!--<i class="fa fa-user-o" style="float:right;"> <a href="/@locale/user/@article.UserName">@article.UserName</a></i>-->
-                        <a style="float:right" href="/@locale/r/@Helpers.HtmlDecode(article.GroupName)"><u>@Helpers.HtmlDecode(article.GroupName)</u></a>
+                    <video id="video_{{article.Id}}" webkit-playsinline ng-click="playVideo(article.Id)" src="{{trustAsResourceUrl(article.VideoUrl)}}" 
+                           poster="https://compass-ssl.xbox.com/assets/0a/92/0a9223d2-0de5-47d4-9f5b-23b0bd26bb56.jpg?n=GoW4-MWF_Content-Placement-0_Launch-trailer_740x417.jpg"
+                           controls="controls" loop="true">
+                        your browser does not support the video tag
+                    </video>
+                    <div class="postClear"></div>
+                </div>
+                <div ng-if="article.VideoUrl.length==0" ng-click="viewArticle('@locale', article.GroupName, article.Id, urlDecode(article.Title))">
+                    <h2 ng-if="article.ImageUrls.length>1"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                    <div class="postClear" ng-if="article.ImageUrls.length>1"></div>
+                    <div class="listImage" ng-style="{display:article.ImageUrls.length>1?'flex':''}">
+                        <div class="listImageWrapper" ng-repeat="articleUrl in article.ImageUrls">
+                            <img class="BrowsePreviewImage" src="{{articleUrl}}" alt="picture not found">
+                        </div>
                     </div>
+                    <h2 ng-if="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                    <div>{{htmlDecode(article.Abstract)}}</div>
+                </div>
+                <div class="postClear"></div>
+                <div class="listInfo">
+                    <i class="fa fa-clock-o"> {{article.CreatedOn}} </i>
+                    <i class="fa fa-commenting-o"> <a href="/@locale/r/{{article.GroupName}}/comments/{{article.Id}}/{{urlDecode(article.Title)}}/" target="_blank">{{article.Comments}}</a> </i>
+                    <a style="float:right" href="/@locale/r/{{article.GroupName}}"><u>{{article.GroupName}}</u></a>
                 </div>
             </div>
-            <div class="postClear"></div>
-        }
-        index++;
-    }
-
-    @*@{
-            Html.RenderPartial("~/views/Shared/Controls/AssistanceModule.cshtml", 1);
-        }*@
-            <span class="footermenu">
-                @Resources.Article_More
-                @if (ShowPrev())
-                {
-                    <a class="nextbutton" href="?page=@GetPrevPageNo()">< @Resources.Article_Prev </a><span class="separator"></span>}
-                <a class="nextbutton" href="?page=@GetNextPageNo()">@Resources.Article_Next > </a>
-                @Resources.Article_OrTry <a class="nextbutton" href="/@locale/random"> @Resources.Article_RandomSubReddah</a>
-            </span>
+        </div>
+        <div class="postClear"></div>
+        <div class="articleLoading"><img src="/content/images/loading_50x50.gif" width="100" height="100" ng-show="loading==true" /></div>
+    </div>
 </div>
-@if (Model.Articles.Count < 5)
-{
-    <div id="box" style="height:100vh;"></div>
-}

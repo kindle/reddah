@@ -1,5 +1,16 @@
 ﻿angular.module("reddahApp")
-.controller("articleCtrl", ['$scope', 'articleSvc', function ($scope, articleSvc) {
+.controller("articleCtrl", ['$scope', '$sce', 'articleSvc', function ($scope, $sce, articleSvc) {
+    $scope.trustAsResourceUrl = function (url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+    $scope.playVideo = function (id) {
+        let v = $('#video_' + id);
+        if (v.paused) {
+            v.play();
+        } else {
+            v.pause();
+        }
+    };
     $scope.aiArticles = [];
     $scope.loadedArticleIds = [0];
     $scope.loading = false;
@@ -43,6 +54,16 @@
 
         return s;
     };
+    $scope.urlDecode = function (str) {
+        var s = "";
+        if (str.length == 0) return "";
+
+        s = $scope.htmlDecode(str).replace(/ /g, "-");
+        s = s.replace(/--/g, "-");
+        s = s.replace(/[^a-zA-Z0-9\-]/g, "");
+
+        return s;
+    }
 
     $scope.aiRightBoxItems = [];
     $scope.getRightBox = function (locale) {
@@ -60,6 +81,11 @@
 
             $scope.rightBoxLoading = false;
         });
+    };
+    $scope.viewArticle = function (locale, group, id, title) {
+        let url = `/${locale}/r/${group}/comments/${id}/${title}/`;
+        
+        window.open(url, '_blank');
     };
 }])
 .factory("articleSvc", ['$http', '$q', function ($http, $q) {
@@ -98,9 +124,9 @@
 .directive('whenScrolled', function () {
     return function (scope, elm, attr) {
         angular.element(window).bind('scroll', function () {
-            let sm = $(this).scrollTop() + $(window).height();
+            let sm = $(this).scrollTop() + window.innerHeight;
             let dsm = $(document).height();
-            if (sm == dsm) {
+            if (sm === dsm) {
                 scope.$apply(attr.whenScrolled);
             }
         });
