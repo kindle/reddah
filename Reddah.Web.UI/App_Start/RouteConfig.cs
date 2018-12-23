@@ -18,17 +18,27 @@
                 new string[] { },
                 u => new Route("", new RedirectToLocalizedHandler()));
 
-            //menu
-            routes.MapLocalizedRoute("Home", "{locale}",
+            //menu default
+            /*routes.MapLocalizedRoute("Home", "{locale}",
                 new { controller = "Articles", action = "Menu", path = "hot" }
+            );*/
+            routes.MapLocalizedRoute(
+               "Home", "{locale}",
+               new { controller = "AI", action = "UserProfile" }
             );
+
+            routes.MapLocalizedRoute("New", "{locale}/new",
+                new { controller = "Articles", action = "Menu", path = "new" }
+            );
+
+            //promoted
 
             routes.MapLocalizedRoute("Hot", "{locale}/hot",
                 new { controller = "Articles", action = "Menu", path = "hot" }
             );
 
-            routes.MapLocalizedRoute("New", "{locale}/new",
-                new { controller = "Articles", action = "Menu", path = "new" }
+            routes.MapLocalizedRoute("Gilded", "{locale}/gilded",
+                new { controller = "Articles", action = "Menu", path = "gilded" }
             );
 
             routes.MapLocalizedRoute("Rising", "{locale}/rising",
@@ -43,17 +53,12 @@
                 new { controller = "Articles", action = "Menu", path = "top" }
             );
 
-            routes.MapLocalizedRoute("Gilded", "{locale}/gilded",
-                new { controller = "Articles", action = "Menu", path = "gilded" }
-            );
-
             routes.MapLocalizedRoute("Support", "{locale}/support",
                 new { controller = "Support", action = "Index" }
             );
 
-            /*routes.MapLocalizedRoute("Promoted", "{locale}/promoted",
-                new { controller = "AI", action = "UserProfile", path = "promoted" }
-            );*/
+
+
             
             //subreddah
             routes.MapLocalizedRoute("SubReddah", "{locale}/r/{sub}",

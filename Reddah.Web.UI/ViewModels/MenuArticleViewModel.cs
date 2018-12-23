@@ -22,18 +22,33 @@
             {
                 IEnumerable<Article> query = null;
 
-                if (type == "hot")
+                if (type == "new")
+                {
+                    query = (from b in db.Articles
+                             where b.Locale.StartsWith(locale)
+                             orderby b.Id descending
+                             select b).Skip(pageCount * pageNo).Take(pageCount);
+                }
+                //AI recommeded by engine accoring to user profile
+                else if (type == "promoted")
+                {
+                    query = (from b in db.Articles
+                             where b.Locale.StartsWith(locale)
+                             orderby b.Id descending
+                             select b).Skip(pageCount * pageNo).Take(pageCount);
+                }
+                else if (type == "hot")
                 {
                     query = (from b in db.Articles
                              where b.Locale.StartsWith(locale)
                              orderby b.Count descending
                              select b).Skip(pageCount * pageNo).Take(pageCount);
                 }
-                else if (type == "new")
+                else if (type == "gilded")
                 {
                     query = (from b in db.Articles
                              where b.Locale.StartsWith(locale)
-                                orderby b.Id descending
+                             orderby b.Up descending
                              select b).Skip(pageCount * pageNo).Take(pageCount);
                 }
                 else if (type == "rising")
@@ -57,22 +72,8 @@
                                 orderby (b.Up + b.Down) descending
                              select b).Skip(pageCount * pageNo).Take(pageCount);
                 }
-                else if (type == "gilded")
-                {
-                    query = (from b in db.Articles
-                             where b.Locale.StartsWith(locale)
-                                orderby b.Up descending
-                             select b).Skip(pageCount * pageNo).Take(pageCount);
-                }
-                //AI recommeded by engine accoring to user profile
-                else if (type == "promoted")
-                {
-                    query = (from b in db.Articles
-                             where b.Locale.StartsWith(locale)
-                                //where is promoted.
-                                orderby b.Id descending
-                             select b).Skip(pageCount * pageNo).Take(pageCount);
-                }
+                
+                
                 else if (type == "nextprevbox")
                 {
                     query = (from b in db.Articles

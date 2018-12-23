@@ -157,13 +157,13 @@
     <value>好评如潮</value>
   </data>
   <data name="Menu_Hot" xml:space="preserve">
-    <value>点击最多</value>
+    <value>评论最多</value>
   </data>
   <data name="Menu_New" xml:space="preserve">
-    <value>新帖子</value>
+    <value>最新</value>
   </data>
   <data name="Menu_Promoted" xml:space="preserve">
-    <value>置顶</value>
+    <value>推荐</value>
   </data>
   <data name="Menu_Rising" xml:space="preserve">
     <value>上升</value>
