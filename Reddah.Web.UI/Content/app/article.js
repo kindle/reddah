@@ -3,6 +3,7 @@
     $scope.trustAsResourceUrl = function (url) {
         return $sce.trustAsResourceUrl(url);
     };
+    
     $scope.playVideo = function (id) {
         let v = $('#video_' + id);
         if (v.paused) {

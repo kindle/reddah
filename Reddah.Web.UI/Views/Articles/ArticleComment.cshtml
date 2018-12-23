@@ -71,6 +71,8 @@
         }
         
 </style>
+
+
 <div class="flex-article">
     <div class="flex-article-left" id="articleContent">
         <div>
@@ -153,3 +155,36 @@
         }
     </aside>
 </div>
+<div id="done" style="display:none;"></div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let vs = Array.from($("video"));
+        
+        vs.forEach((v) => {
+
+            v.onclick = function () {
+                if (v.paused) {
+                    v.play();
+                } else {
+                    v.pause();
+                }
+            };
+
+            
+            v.onloadeddata = function () {
+                var canvas = document.createElement("canvas");
+                canvas.width = v.videoWidth;
+                canvas.height = v.videoHeight;
+                document.getElementById("done").innerHTML = "";
+                document.getElementById("done").appendChild(canvas);
+                
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(v, 0, 0);
+                
+            };
+            
+        });
+
+    });
+    
+</script>
