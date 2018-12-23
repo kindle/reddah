@@ -35,13 +35,13 @@
 
 <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@Helpers.GetAntiForgeryToken()'" />
 <div class="ai-container" ng-controller="articleCtrl">
-    <div class="ai-list" ng-init="getUserProfileArticles('@locale')" when-scrolled="loadMore('@locale')">
-        <div class="post" ng-repeat="article in aiArticles">
+    <div class="ai-list" id="ai-list" ng-init="getUserProfileArticles('@locale')" when-scrolled="loadMore('@locale')">
+        <div class="post" ng-repeat="article in aiArticles" on-finish-render-posts>
             <h2 ng-if="article.ImageUrls.length>1"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
             <div class="postClear" ng-if="article.ImageUrls.length>1"></div>
             <div class="listImage" ng-repeat="articleUrl in article.ImageUrls">
                 <div class="listImageWrapper">
-                    <img class="BrowsePreviewImage" width="193" src="{{articleUrl}}" alt="picture not found">
+                    <img class="lazy BrowsePreviewImage" onerror="this.style.display='none'" src="" data-original="{{articleUrl}}" alt="picture not found">
                 </div>
             </div>
             <h2 ng-if="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>

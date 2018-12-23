@@ -415,6 +415,7 @@
     <Content Include="Content\app\collapser.html" />
     <Content Include="Content\app\comment.js" />
     <Content Include="Content\app\article.js" />
+    <Content Include="Content\app\jquery.lazyload.js" />
     <Content Include="Content\app\login.js" />
     <Content Include="Content\Comment.css" />
     <Content Include="Content\Images\ambassador.png" />
@@ -425,7 +426,6 @@
     <Content Include="Content\Images\like-dislike.png" />
     <Content Include="Content\Images\noimage.jpg" />
     <Content Include="Content\Images\wiki\pdf_icon25x25.png" />
-    <Content Include="Content\js\jquery.okayNav.js" />
     <Content Include="Content\Site.mobile.css" />
     <Content Include="Content\Images\close_icon.png" />
     <Content Include="Content\Images\exlogin\facebook.png" />

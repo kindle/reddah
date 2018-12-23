@@ -66,8 +66,6 @@
                         "~/Content/js/Videoplayer.js"));
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
                         "~/Content/js/Common.js"));
-            bundles.Add(new ScriptBundle("~/bundles/common").Include(
-                        "~/Content/js/jquery.okayNav.js"));
             bundles.Add(new ScriptBundle("~/bundles/contactus").Include(
                         "~/Content/js/ContactUs.js"));
             bundles.Add(new ScriptBundle("~/bundles/contactus.displaymodule").Include(
@@ -83,6 +81,8 @@
                         "~/Content/app/comment.js"));
             bundles.Add(new ScriptBundle("~/bundles/article").Include(
                         "~/Content/app/article.js"));
+            bundles.Add(new ScriptBundle("~/bundles/lazy").Include(
+                        "~/Content/app/jquery.lazyload.js"));
 
         }
     }

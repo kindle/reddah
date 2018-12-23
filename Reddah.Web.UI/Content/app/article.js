@@ -30,11 +30,12 @@
                     $scope.aiArticles.push(article);
                     if ($scope.loadedArticleIds.indexOf(article.Id)==-1)
                         $scope.loadedArticleIds.push(article.Id);
-                });
+                });   
             }
 
             $scope.loading = false;
             $scope.isLoadingMore = false;
+            
         });
     };
     $scope.isLoadingMore = false;
@@ -132,4 +133,23 @@
             }
         });
     };
-});
+})
+.directive('onFinishRenderPosts', ['$timeout', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    $("img.lazy").lazyload({
+                        container: $("#ai-list"),
+                        placeholder: "/content/Images/noimage.jpg",
+                        effect: "fadeIn",
+                        threshold: 200,
+                        failure_limit: 20,
+                        skip_invisible: false
+                    });
+                });
+            }
+        }
+    }
+}]);
