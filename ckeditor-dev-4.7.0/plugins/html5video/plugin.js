@@ -1,6 +1,6 @@
 CKEDITOR.plugins.add( 'html5video', {
     requires: 'widget',
-    lang: 'de,en,eu,es,ru,uk,fr',
+    lang: 'de,en,eu,es,ru,uk,fr,zh',
     icons: 'html5video',
     init: function( editor ) {
         editor.widgets.add( 'html5video', {
@@ -11,7 +11,7 @@ CKEDITOR.plugins.add( 'html5video', {
              *  - div-s with text-align,float,margin-left,margin-right inline style rules and required ckeditor-html5-video class.
              *  - video tags with src, controls, width and height attributes.
              */
-            allowedContent: 'div[data-responsive](!ckeditor-html5-video){text-align,float,margin-left,margin-right}; video[src,controls,autoplay,width, height]{max-width,height};',
+            allowedContent: 'div[data-responsive](!ckeditor-html5-video){text-align,float,margin-left,margin-right}; video[src,poster,controls,autoplay,width, height]{max-width,height};',
             requiredContent: 'div(ckeditor-html5-video); video[src,controls];',
             upcast: function( element ) {
                 return element.name === 'div' && element.hasClass( 'ckeditor-html5-video' );
@@ -19,6 +19,7 @@ CKEDITOR.plugins.add( 'html5video', {
             dialog: 'html5video',
             init: function() {
                 var src = '';
+				var poster = '';
                 var autoplay = '';
                 var align = this.element.getStyle( 'text-align' );
 
@@ -29,6 +30,7 @@ CKEDITOR.plugins.add( 'html5video', {
                 if ( this.element.getChild( 0 ) ) {
                     // get it's attributes.
                     src = this.element.getChild( 0 ).getAttribute( 'src' );
+					poster = this.element.getChild( 0 ).getAttribute( 'poster' );
                     width = this.element.getChild( 0 ).getAttribute( 'width' );
                     height = this.element.getChild( 0 ).getAttribute( 'height' );
                     autoplay = this.element.getChild( 0 ).getAttribute( 'autoplay' );
@@ -38,7 +40,7 @@ CKEDITOR.plugins.add( 'html5video', {
                 if ( src ) {
                     this.setData( 'src', src );
 
-                    if ( align ) {
+					if ( align ) {
                         this.setData( 'align', align );
                     } else {
                         this.setData( 'align', 'none' );
@@ -60,6 +62,15 @@ CKEDITOR.plugins.add( 'html5video', {
                         this.setData( 'responsive', responsive );	
                     }
                 }
+				
+				if ( poster ) {
+					if ( poster ) {
+                        this.setData( 'poster', poster );
+                    } else {
+                        this.setData( 'poster', '' );
+                    }
+					
+				}
             },
             data: function() {
                 // If there is an video source
@@ -74,6 +85,7 @@ CKEDITOR.plugins.add( 'html5video', {
                         this.element.append( videoElement );
                     }
                     this.element.getChild( 0 ).setAttribute( 'src', this.data.src );
+					
                     if (this.data.width) this.element.getChild( 0 ).setAttribute( 'width', this.data.width );
                     if (this.data.height) this.element.getChild( 0 ).setAttribute( 'height', this.data.height );
 
@@ -86,6 +98,10 @@ CKEDITOR.plugins.add( 'html5video', {
                             this.element.getChild( 0 ).removeStyle( 'height' );
                     }								
                 }
+				
+				if ( this.data.poster ) {
+					this.element.getChild( 0 ).setAttribute( 'poster', this.data.poster );
+				}
 
                 this.element.removeStyle( 'float' );
                 this.element.removeStyle( 'margin-left' );

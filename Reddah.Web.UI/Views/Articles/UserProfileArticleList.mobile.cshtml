@@ -28,8 +28,8 @@
                 <div ng-if="article.VideoUrl.length>0">
                     <h2><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
                     <div class="postClear"></div>
-                    <video id="video_{{article.Id}}" webkit-playsinline ng-click="playVideo(article.Id)" src="{{trustAsResourceUrl(article.VideoUrl)}}" 
-                           poster="https://compass-ssl.xbox.com/assets/0a/92/0a9223d2-0de5-47d4-9f5b-23b0bd26bb56.jpg?n=GoW4-MWF_Content-Placement-0_Launch-trailer_740x417.jpg"
+                    <video id="video_{{article.Id}}" ng-click="playVideo(article.Id)" src="{{trustAsResourceUrl(article.VideoUrl)}}" 
+                           poster="{{article.VideoPoster}}"
                            controls="controls" loop="true">
                         your browser does not support the video tag
                     </video>

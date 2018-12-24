@@ -37,21 +37,33 @@
 <div class="ai-container" ng-controller="articleCtrl">
     <div class="ai-list" id="ai-list" ng-init="getUserProfileArticles('@locale')" when-scrolled="loadMore('@locale')">
         <div class="post" ng-repeat="article in aiArticles" on-finish-render-posts>
-            <h2 ng-if="article.ImageUrls.length>1"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
-            <div class="postClear" ng-if="article.ImageUrls.length>1"></div>
-            <div class="listImage" ng-repeat="articleUrl in article.ImageUrls">
-                <div class="listImageWrapper">
-                    <img class="lazy BrowsePreviewImage" onerror="this.style.display='none'" src="" data-original="{{articleUrl}}" alt="picture not found">
+            <div ng-if="article.VideoUrl.length>0">
+                <h2><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                <div class="postClear"></div>
+                <video id="video_{{article.Id}}" ng-click="playVideo(article.Id)" src="{{trustAsResourceUrl(article.VideoUrl)}}"
+                       poster="{{article.VideoPoster}}"
+                       controls="controls" loop="true">
+                    your browser does not support the video tag
+                </video>
+                <div class="postClear"></div>
+            </div>
+            <div ng-if="article.VideoUrl.length==0">
+                <h2 ng-if="article.ImageUrls.length>1"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                <div class="postClear" ng-if="article.ImageUrls.length>1"></div>
+                <div class="listImage" ng-repeat="articleUrl in article.ImageUrls">
+                    <div class="listImageWrapper">
+                        <img class="lazy BrowsePreviewImage" onerror="this.style.display='none'" src="" data-original="{{articleUrl}}" alt="picture not found">
+                    </div>
                 </div>
+                <h2 ng-if="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                <div>{{htmlDecode(article.Abstract)}}</div>
+                <div class="listInfo">
+                    <a href="/@locale/r/{{article.GroupName}}"><u>{{article.GroupName}}</u></a>
+                    submitted {{article.CreatedOn}} ago by <a href="/@locale/user/{{article.UserName}}">{{article.UserName}}</a>
+                </div>
+                <div class="listInfo"><a href="/@locale/r/{{article.GroupName}}/comments/{{article.Id}}/{{htmlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments</a> <!--share save hide report--></div>
+                <div class="postClear"></div>
             </div>
-            <h2 ng-if="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
-            <div>{{htmlDecode(article.Abstract)}}</div>
-            <div class="listInfo">
-                <a href="/@locale/r/{{article.GroupName}}"><u>{{article.GroupName}}</u></a>
-                submitted {{article.CreatedOn}} ago by <a href="/@locale/user/{{article.UserName}}">{{article.UserName}}</a>
-            </div>
-            <div class="listInfo"><a href="/@locale/r/{{article.GroupName}}/comments/{{article.Id}}/{{htmlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments</a> <!--share save hide report--></div>
-            <div class="postClear"></div>
         </div>
         <div class="postClear"></div>
         <div class="articleLoading"><img src="/content/images/loading_50x50.gif" ng-show="loading==true" /></div>

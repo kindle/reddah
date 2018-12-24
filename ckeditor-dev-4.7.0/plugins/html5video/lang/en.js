@@ -4,6 +4,7 @@ CKEDITOR.plugins.setLang( 'html5video', 'en', {
     infoLabel: 'Video info',
     allowed: 'Allowed file extensions: MP4, WebM, Ogv',
     urlMissing: 'Video source URL is missing.',
+    poster: 'Poster',    posterMissing: 'Video poster URL is missing.',
     videoProperties: 'Video properties',
     upload: 'Upload',
     btnUpload: 'Send it to the server',

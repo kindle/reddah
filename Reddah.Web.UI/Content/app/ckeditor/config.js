@@ -8,12 +8,8 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 	config.removePlugins = 'image';
-	config.extraPlugins = 'html5video';
 	config.extraPlugins = 'image2';
-	//config.extraPlugins = 'filebrowser';
+	config.extraPlugins = 'html5video';
 	config.filebrowserImageUploadUrl = "/upload";
-	//config.filebrowserBrowseUrl = "";
-	//config.filebrowserUploadUrl = "";
-	//config.filebrowserImageUploadMethod = "form";
 };
 

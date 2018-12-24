@@ -70,8 +70,8 @@ CKEDITOR.editorConfig = function( config ) {
 		'wysiwygarea';
 	// %REMOVE_END%
 	config.removePlugins = 'image';
-	config.extraPlugins = 'html5video';
 	config.extraPlugins = 'image2';
+	config.extraPlugins = 'html5video';
 	config.filebrowserImageUploadUrl = "/upload";
 };
 

@@ -5,7 +5,7 @@
     };
     
     $scope.playVideo = function (id) {
-        let v = $('#video_' + id);
+        let v = $('#video_' + id).get(0);
         if (v.paused) {
             v.play();
         } else {

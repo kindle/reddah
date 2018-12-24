@@ -27,7 +27,7 @@ CKEDITOR.dialog.add( 'html5video', function( editor ) {
                             widget.setData( 'src', this.getValue() );
                         }
                     },
-                    {
+					{
                         type: 'button',
                         id: 'browse',
                         // v-align with the 'txtUrl' field.
@@ -40,6 +40,20 @@ CKEDITOR.dialog.add( 'html5video', function( editor ) {
                     } ]
                 } ]
             },
+			{
+				type: 'text',
+				widths: [ '365px', '110px' ],			
+				id: 'poster',
+				label: editor.lang.html5video.poster,
+				required: false,
+				validate: CKEDITOR.dialog.validate.notEmpty( editor.lang.html5video.posterMissing ),
+				setup: function( widget ) {
+					this.setValue( widget.data.poster );
+				},
+				commit: function( widget ) {
+					widget.setData( 'poster', this.getValue() );
+				}
+			},
             {
                 type: 'checkbox',
                 id: 'responsive',
@@ -110,7 +124,7 @@ CKEDITOR.dialog.add( 'html5video', function( editor ) {
         },
         {
             id: 'Upload',
-            hidden: true,
+            hidden: false,
             filebrowser: 'uploadButton',
             label: editor.lang.html5video.upload,
             elements: [ {
