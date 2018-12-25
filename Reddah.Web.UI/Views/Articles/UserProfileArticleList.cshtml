@@ -43,8 +43,8 @@
             <div ng-if="article.VideoUrl.length>0">
                 <h2><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
                 <div class="postClear"></div>
-                <video id="video_{{article.Id}}" ng-click="playVideo(article.Id)" src="{{trustAsResourceUrl(article.VideoUrl)}}"
-                       poster="{{article.VideoPoster}}"
+                <video id="video_{{article.Id}}" ng-click="playVideo(article.Id)" ng-attr-src="{{trustAsResourceUrl(article.VideoUrl)}}"
+                       ng-attr-poster="{{article.VideoPoster}}"
                        controls="controls" loop="true">
                     your browser does not support the video tag
                 </video>
@@ -65,7 +65,7 @@
                 <a href="/@locale/r/{{article.GroupName}}"><u>{{article.GroupName}}</u></a>
                 submitted {{article.CreatedOn}} ago by <a href="/@locale/user/{{article.UserName}}">{{article.UserName}}</a>
             </div>
-            <div class="listInfo"><a href="/@locale/r/{{article.GroupName}}/comments/{{article.Id}}/{{htmlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments</a> <!--share save hide report--></div>
+            <div class="listInfo"><a href="/@locale/r/{{article.GroupName}}/comments/{{article.Id}}/{{urlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments</a> <!--share save hide report--></div>
         </div>
         <div class="postClear"></div>
         <div class="articleLoading"><img src="/content/images/loading_50x50.gif" ng-show="loading==true" /></div>
@@ -74,11 +74,11 @@
         <div class="post" ng-repeat="item in aiRightBoxItems">
             <div class="listImage">
                 <div class="listImageWrapper">
-                    <img class="BrowsePreviewImage" width="193" src="{{item.ImageUrl}}" alt="picture not found">
+                    <img class="BrowsePreviewImage" width="193" ng-attr-src="{{item.ImageUrl}}" alt="picture not found">
                 </div>
             </div>
             <div class="listInfo">
-                <h2><a href="/@locale/{{item.ArticleUrl}}">{{htmlDecode(item.Title)}}</a></h2>
+                <h2><a href="/@locale/{{item.ArticleUrl}}">{{urlDecode(item.Title)}}</a></h2>
                 <div>{{htmlDecode(item.Description)}}</div>
             </div>
             <div class="postClear"></div>
