@@ -3,6 +3,9 @@
 @using System.Globalization
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
+    var menu = Request.RequestContext.RouteData.Values["menu"];
+    var sub = Request.RequestContext.RouteData.Values["sub"];
+    var user = Request.RequestContext.RouteData.Values["user"];
 }
 
 <style>
@@ -32,11 +35,11 @@
     }
 </style>
 <link href="/Content/Post.css" rel="stylesheet" />
-
 <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@Helpers.GetAntiForgeryToken()'" />
-<div class="ai-container" ng-controller="articleCtrl">
-    <div class="ai-list" id="ai-list" ng-init="getUserProfileArticles('@locale')" when-scrolled="loadMore('@locale')">
-        <div class="post" ng-repeat="article in aiArticles" on-finish-render-posts>
+<div class="ai-container" id="postBlock" ng-controller="articleCtrl">
+    <div class="ai-list" id="ai-list" ng-init="getUserProfileArticles('@locale','@menu','@sub','@user')" when-scrolled="loadMore('@locale','@menu','@sub','@user')">
+        <div class="post postModuleLiner" ng-repeat="article in aiArticles" on-finish-render-posts>
+            <div class="postClear"></div>
             <div ng-if="article.VideoUrl.length>0">
                 <h2><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
                 <div class="postClear"></div>
@@ -56,14 +59,13 @@
                     </div>
                 </div>
                 <h2 ng-if="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
-                <div>{{htmlDecode(article.Abstract)}}</div>
-                <div class="listInfo">
-                    <a href="/@locale/r/{{article.GroupName}}"><u>{{article.GroupName}}</u></a>
-                    submitted {{article.CreatedOn}} ago by <a href="/@locale/user/{{article.UserName}}">{{article.UserName}}</a>
-                </div>
-                <div class="listInfo"><a href="/@locale/r/{{article.GroupName}}/comments/{{article.Id}}/{{htmlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments</a> <!--share save hide report--></div>
-                <div class="postClear"></div>
             </div>
+            <div>{{htmlDecode(article.Abstract)}}</div>
+            <div class="listInfo">
+                <a href="/@locale/r/{{article.GroupName}}"><u>{{article.GroupName}}</u></a>
+                submitted {{article.CreatedOn}} ago by <a href="/@locale/user/{{article.UserName}}">{{article.UserName}}</a>
+            </div>
+            <div class="listInfo"><a href="/@locale/r/{{article.GroupName}}/comments/{{article.Id}}/{{htmlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments</a> <!--share save hide report--></div>
         </div>
         <div class="postClear"></div>
         <div class="articleLoading"><img src="/content/images/loading_50x50.gif" ng-show="loading==true" /></div>

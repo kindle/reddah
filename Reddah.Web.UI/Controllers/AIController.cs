@@ -18,7 +18,7 @@
             var presentationView = Request.Browser.IsMobileDevice ?
                     "~/Views/Articles/UserProfileArticleList.mobile.cshtml" : "~/Views/Articles/UserProfileArticleList.cshtml";
 
-            return View(presentationView, new UserProfileArticleViewModel(userProfileModel));
+            return View(presentationView, null);//new UserProfileArticleViewModel(userProfileModel));
         }
 
         [AllowAnonymous]

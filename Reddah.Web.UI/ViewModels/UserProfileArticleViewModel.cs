@@ -1,18 +1,16 @@
 ﻿namespace Reddah.Web.UI.ViewModels
 {
     using System.Collections.Generic;
-    using System.Xml;
     using System.Linq;
 
     using Reddah.Web.UI.Models;
     using Reddah.Web.UI.Utility;
-    using System.Web;
     using System.Globalization;
 
     public class UserProfileArticleViewModel
     {
         public List<ArticlePreview> Articles { get; set; }
-
+        
         public UserProfileArticleViewModel(UserProfileModel userProfileModel)
         {
             Articles = GetUserProfileArticles(userProfileModel);
@@ -20,7 +18,6 @@
 
         private List<ArticlePreview> GetUserProfileArticles(UserProfileModel userProfileModel)
         {
-            const int pageNo = 0; // put in userProfile send article list
             const int pageCount = 10;
             var apList = new List<ArticlePreview>();
 
@@ -30,13 +27,58 @@
             {
                 IEnumerable<Article> query = null;
                 int[] loaded = userProfileModel.LoadedIds == null ? new int[] { } : userProfileModel.LoadedIds;
-                query = (from b in db.Articles
-                            where b.Locale.StartsWith(locale) &&
-                             !(loaded).Contains(b.Id)
-                            orderby b.Count descending
-                            select b)//.Skip(pageCount * pageNo)
+
+                if (userProfileModel.Menu.Equals("new", System.StringComparison.InvariantCultureIgnoreCase))
+                {
+                    query = (from b in db.Articles
+                             where b.Locale.StartsWith(locale) &&
+                              !(loaded).Contains(b.Id)
+                             orderby b.Id descending
+                             select b)
                             .Take(pageCount);
-                
+                }
+                else if (userProfileModel.Menu.Equals("promoted", System.StringComparison.InvariantCultureIgnoreCase))
+                {
+                    //query according to user habits
+                    query = (from b in db.Articles
+                             where b.Locale.StartsWith(locale) &&
+                              !(loaded).Contains(b.Id)
+                             orderby b.Count descending
+                             select b)
+                            .Take(pageCount);
+                }
+                else if (userProfileModel.Menu.Equals("hot", System.StringComparison.InvariantCultureIgnoreCase))
+                {
+                    query = (from b in db.Articles
+                             where b.Locale.StartsWith(locale) &&
+                              !(loaded).Contains(b.Id)
+                             orderby b.Count descending
+                             select b)
+                            .Take(pageCount);
+                }
+                else if (userProfileModel.Menu.Equals("bysub", System.StringComparison.InvariantCultureIgnoreCase))
+                {
+                    query = (from b in db.Articles
+                             where
+                                b.GroupName == userProfileModel.Sub &&
+                                b.Locale.StartsWith(locale) &&
+                                !(loaded).Contains(b.Id)
+                             orderby b.Id descending
+                             select b)
+                            .Take(pageCount);
+                }
+                else if (userProfileModel.Menu.Equals("byuser", System.StringComparison.InvariantCultureIgnoreCase))
+                {
+                    query = (from b in db.Articles
+                             where
+                                b.UserName == userProfileModel.User &&
+                                b.Locale.StartsWith(locale) &&
+                                !(loaded).Contains(b.Id)
+                             orderby b.Id descending
+                             select b)
+                            .Take(pageCount);
+                }
+
                 foreach (var item in query)
                 {
                     var ap = new ArticlePreview();
@@ -57,8 +99,7 @@
                     ap.UserName = item.UserName;
                     ap.GroupName = item.GroupName;
                     ap.Content = item.Content;
-
-
+                    
                     apList.Add(ap);
                 }
             }

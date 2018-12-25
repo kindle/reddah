@@ -72,6 +72,9 @@ namespace Reddah.Web.UI.Models
         public int[] LoadedIds;
         public string Locale;
         public string Token;
+        public string Menu;
+        public string Sub;
+        public string User;
         
         //public Dictionary<string, int> habits;
     }

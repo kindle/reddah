@@ -4,6 +4,7 @@
 @using System.Globalization
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
+    var menu = Request.RequestContext.RouteData.Values["menu"];
 }
 
 <link href="/Content/Post.css" rel="stylesheet" />
@@ -19,10 +20,10 @@
         text-align: center;
     }
 </style>
-
+<input id="menu" data-ng-model="menu" type="hidden" data-ng-init="menu='@Model.Menu'" />
 <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@Helpers.GetAntiForgeryToken()'" />
 <div class="postBlock" id="postBlock" ng-controller="articleCtrl">
-    <div class="ai-list" id="ai-list" ng-init="getUserProfileArticles('@locale')" when-scrolled="loadMore('@locale')">
+    <div class="ai-list" id="ai-list" ng-init="getUserProfileArticles('@locale','@menu')" when-scrolled="loadMore('@locale','@menu')">
         <div class="post" ng-repeat="article in aiArticles" on-finish-render-posts>
             <div class="postModuleLiner">
                 <div ng-if="article.VideoUrl.length>0">

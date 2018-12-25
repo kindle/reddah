@@ -19,51 +19,68 @@
                 u => new Route("", new RedirectToLocalizedHandler()));
 
             //menu default
-            /*routes.MapLocalizedRoute("Home", "{locale}",
-                new { controller = "Articles", action = "Menu", path = "hot" }
-            );*/
             routes.MapLocalizedRoute(
                "Home", "{locale}",
-               new { controller = "AI", action = "UserProfile" }
+               new { controller = "AI", action = "UserProfile", menu = "promoted" }
             );
-
             routes.MapLocalizedRoute("New", "{locale}/new",
-                new { controller = "Articles", action = "Menu", path = "new" }
+                new { controller = "AI", action = "UserProfile", menu = "new" }
             );
-
-            //promoted
-
+            routes.MapLocalizedRoute("Promoted", "{locale}/promoted",
+                new { controller = "AI", action = "UserProfile", menu = "promoted" }
+            );
             routes.MapLocalizedRoute("Hot", "{locale}/hot",
-                new { controller = "Articles", action = "Menu", path = "hot" }
+                new { controller = "AI", action = "UserProfile", path = "hot" }
             );
+
 
             routes.MapLocalizedRoute("Gilded", "{locale}/gilded",
                 new { controller = "Articles", action = "Menu", path = "gilded" }
             );
-
             routes.MapLocalizedRoute("Rising", "{locale}/rising",
                 new { controller = "Articles", action = "Menu", path = "rising" }
             );
-
             routes.MapLocalizedRoute("Controversial", "{locale}/controversial",
                 new { controller = "Articles", action = "Menu", path = "controversial" }
             );
-
             routes.MapLocalizedRoute("Top", "{locale}/top",
                 new { controller = "Articles", action = "Menu", path = "top" }
             );
-
             routes.MapLocalizedRoute("Support", "{locale}/support",
                 new { controller = "Support", action = "Index" }
             );
 
 
+            //articles JSON
+            routes.MapLocalizedRoute(
+                "JsonUserProfileArticles", "{locale}/AI/JsonUserProfileArticles",
+                new { controller = "AI", action = "JsonUserProfileArticles" }
+            );
+            routes.MapLocalizedRoute(
+                "JsonRightBoxItems",
+                "{locale}/AI/JsonRightBoxItems",
+                new { controller = "AI", action = "JsonRightBoxItems" }
+            );
 
-            
-            //subreddah
-            routes.MapLocalizedRoute("SubReddah", "{locale}/r/{sub}",
+
+            /*routes.MapLocalizedRoute("SubReddah", "{locale}/r/{sub}",
                 new { controller = "Articles", action = "SubReddah" }
             );
+            routes.MapLocalizedRoute("UserArticles", "{locale}/user/{username}",
+                new { controller = "Articles", action = "UserArticles" }
+            );*/
+            //articles by subreddah
+            routes.MapLocalizedRoute("SubReddah", "{locale}/r/{sub}",
+                new { controller = "AI", action = "UserProfile", menu = "bysub" }
+            );
+            //articles by user
+            routes.MapLocalizedRoute("UserArticles", "{locale}/user/{user}",
+                new { controller = "AI", action = "UserProfile", menu = "byuser" }
+            );
+
+
+
+
 
             routes.MapLocalizedRoute("SubRandom", "{locale}/random",
                 new { controller = "Articles", action = "RandomSubReddah" }
@@ -74,28 +91,9 @@
                 new { controller = "Articles", action = "ClassicArticle" }
             );
 
-            //user article
-            routes.MapLocalizedRoute("UserArticles", "{locale}/user/{username}",
-                new { controller = "Articles", action = "UserArticles" }
-            );
+            
 
-            //articles JSON
-            routes.MapLocalizedRoute(
-                "AI", "{locale}/promoted",
-                new { controller = "AI", action = "UserProfile" }
-            );
-
-            routes.MapLocalizedRoute(
-                "JsonUserProfileArticles", "{locale}/AI/JsonUserProfileArticles",
-                new { controller = "AI", action = "JsonUserProfileArticles" }
-            );
-
-            routes.MapLocalizedRoute(
-                "JsonRightBoxItems",
-                "{locale}/AI/JsonRightBoxItems",
-                new { controller = "AI", action = "JsonRightBoxItems"}
-            );
-
+            
             //comment
             routes.MapLocalizedRoute("ArticleComment", "{locale}/r/{group}/comments/{id}/{short}",
                 new { controller = "Articles", action = "comments" }
@@ -328,3 +326,4 @@
         }
     }
 }
+ 

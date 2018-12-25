@@ -8,6 +8,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 	config.removePlugins = 'image';
+	config.removePlugins = 'flash';
 	config.extraPlugins = 'image2';
 	config.extraPlugins = 'html5video';
 	config.filebrowserImageUploadUrl = "/upload";

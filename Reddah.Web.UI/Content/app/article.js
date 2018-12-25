@@ -15,11 +15,14 @@
     $scope.aiArticles = [];
     $scope.loadedArticleIds = [0];
     $scope.loading = false;
-    $scope.getUserProfileArticles = function (locale) {
+    $scope.getUserProfileArticles = function (locale, menu, sub, user) {
         $scope.UserProfileModel = {
             LoadedIds: $scope.loadedArticleIds,
             Locale: locale,
-            Token: $scope.antiForgeryToken
+            Token: $scope.antiForgeryToken,
+            Menu: menu,
+            Sub: sub,
+            User: user
         };
         $scope.loading = true;
         $scope.isLoadingMore = true;
@@ -39,9 +42,9 @@
         });
     };
     $scope.isLoadingMore = false;
-    $scope.loadMore = function (locale) {
+    $scope.loadMore = function (locale, menu, sub, user) {
         if ($scope.isLoadingMore == false) {
-            $scope.getUserProfileArticles(locale);
+            $scope.getUserProfileArticles(locale, menu, sub, user);
         }
     };
     $scope.htmlDecode = function (str) {
