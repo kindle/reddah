@@ -10,6 +10,10 @@
     $scope.trustAsResourceUrl = function (url) {
         return $sce.trustAsResourceUrl(url);
     };
+
+    $scope.toTop = function () {
+        $("html,body").animate({ scrollTop: 0 }, 500);
+    }
     
     $scope.playVideo = function (id) {
         let v = $('#video_' + id).get(0);

@@ -39,8 +39,26 @@
         background-color: #FFFF88;
     }
 
+    .totop {
+        position: fixed;
+        right: 30px;
+        bottom: 50px;
+        padding: 10px;
+        z-index: 10000;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        background-color: #333333;
+        line-height: 25px;
+        opacity: 0.5;
+        transition: 0.2s;
+        border-radius: 2px;
+        cursor:pointer;
+    }
+
 </style>
 <link href="/Content/Post.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@Helpers.GetAntiForgeryToken()'" />
 <div class="ai-container" id="postBlock" ng-controller="articleCtrl">
     <div class="ai-list" id="ai-list" ng-init="getUserProfileArticles('@locale','@menu','@sub','@user','@keyword')" when-scrolled="loadMore('@locale','@menu','@sub','@user','@keyword')">
@@ -50,8 +68,8 @@
                 <h2><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
                 <div class="postClear"></div>
                 <video id="video_{{article.Id}}" ng-click="playVideo(article.Id)" ng-attr-src="{{trustAsResourceUrl(article.VideoUrl)}}"
-                        ng-attr-poster="{{article.VideoPoster}}"
-                        controls="controls" loop="true">
+                       ng-attr-poster="{{article.VideoPoster}}"
+                       controls="controls" loop="true">
                     your browser does not support the video tag
                 </video>
                 <div class="postClear"></div>
@@ -90,6 +108,7 @@
             <div class="postClear"></div>
         </div>
         <div class="postClear"></div>
-        <div class="articleLoading"><img src="/content/images/loading_50x50.gif" ng-show="rightBoxLoading==true"/></div>
+        <div class="articleLoading"><img src="/content/images/loading_50x50.gif" ng-show="rightBoxLoading==true" /></div>
     </div>
+    <a ng-click="toTop()" id="totop"><div class="totop"><i class="fa fa-chevron-up"></i></div></a>
 </div>
