@@ -32,7 +32,7 @@
             routes.MapLocalizedRoute("Hot", "{locale}/hot",
                 new { controller = "AI", action = "UserProfile", path = "hot" }
             );
-
+            
 
             routes.MapLocalizedRoute("Gilded", "{locale}/gilded",
                 new { controller = "Articles", action = "Menu", path = "gilded" }
@@ -49,6 +49,9 @@
             routes.MapLocalizedRoute("Support", "{locale}/support",
                 new { controller = "Support", action = "Index" }
             );
+
+
+            
 
 
             //articles JSON
@@ -70,12 +73,15 @@
                 new { controller = "Articles", action = "UserArticles" }
             );*/
             //articles by subreddah
-            routes.MapLocalizedRoute("SubReddah", "{locale}/r/{sub}",
+            routes.MapLocalizedRoute("BySubReddah", "{locale}/r/{sub}",
                 new { controller = "AI", action = "UserProfile", menu = "bysub" }
             );
             //articles by user
-            routes.MapLocalizedRoute("UserArticles", "{locale}/user/{user}",
+            routes.MapLocalizedRoute("ByUser", "{locale}/user/{user}",
                 new { controller = "AI", action = "UserProfile", menu = "byuser" }
+            );
+            routes.MapLocalizedRoute("Search", "{locale}/search/{keyword}",
+                new { controller = "AI", action = "UserProfile", menu = "search" }
             );
 
 

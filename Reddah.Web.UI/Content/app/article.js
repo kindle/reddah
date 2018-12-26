@@ -1,4 +1,11 @@
 ﻿angular.module("reddahApp")
+.controller("searchCtrl", ['$scope', function ($scope) {
+    $scope.keyword = "";
+    $scope.search = function (locale) {
+        let url = `/${locale}/search/${$scope.keyword}/`;
+        window.open(url, '_self');
+    };
+}])
 .controller("articleCtrl", ['$scope', '$sce', 'articleSvc', function ($scope, $sce, articleSvc) {
     $scope.trustAsResourceUrl = function (url) {
         return $sce.trustAsResourceUrl(url);
@@ -15,14 +22,15 @@
     $scope.aiArticles = [];
     $scope.loadedArticleIds = [0];
     $scope.loading = false;
-    $scope.getUserProfileArticles = function (locale, menu, sub, user) {
+    $scope.getUserProfileArticles = function (locale, menu, sub, user, keyword) {
         $scope.UserProfileModel = {
             LoadedIds: $scope.loadedArticleIds,
             Locale: locale,
             Token: $scope.antiForgeryToken,
             Menu: menu,
             Sub: sub,
-            User: user
+            User: user,
+            Keyword: keyword
         };
         $scope.loading = true;
         $scope.isLoadingMore = true;
@@ -42,9 +50,9 @@
         });
     };
     $scope.isLoadingMore = false;
-    $scope.loadMore = function (locale, menu, sub, user) {
+    $scope.loadMore = function (locale, menu, sub, user, keyword) {
         if ($scope.isLoadingMore == false) {
-            $scope.getUserProfileArticles(locale, menu, sub, user);
+            $scope.getUserProfileArticles(locale, menu, sub, user, keyword);
         }
     };
     $scope.htmlDecode = function (str) {

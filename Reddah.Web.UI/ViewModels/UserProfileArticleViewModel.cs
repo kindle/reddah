@@ -78,6 +78,21 @@
                              select b)
                             .Take(pageCount);
                 }
+                else if (userProfileModel.Menu.Equals("search", System.StringComparison.InvariantCultureIgnoreCase))
+                {
+                    query = (from b in db.Articles
+                             where
+                                (b.Title.Contains(userProfileModel.Keyword) ||
+                                b.Content.Contains(userProfileModel.Keyword) ||
+                                b.UserName.Contains(userProfileModel.Keyword) ||
+                                b.Abstract.Contains(userProfileModel.Keyword) ||
+                                b.GroupName.Contains(userProfileModel.Keyword))  &&
+                                b.Locale.StartsWith(locale) &&
+                                !(loaded).Contains(b.Id)
+                             orderby b.Id descending
+                             select b)
+                            .Take(pageCount);
+                }
 
                 foreach (var item in query)
                 {

@@ -75,6 +75,7 @@ namespace Reddah.Web.UI.Models
         public string Menu;
         public string Sub;
         public string User;
+        public string Keyword;
         
         //public Dictionary<string, int> habits;
     }

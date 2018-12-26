@@ -6,6 +6,7 @@
     var menu = Request.RequestContext.RouteData.Values["menu"];
     var sub = Request.RequestContext.RouteData.Values["sub"];
     var user = Request.RequestContext.RouteData.Values["user"];
+    var keyword = Request.RequestContext.RouteData.Values["keyword"];
 }
 
 <style>
@@ -33,19 +34,24 @@
         padding: 30px;
         text-align: center;
     }
+
+    .highlight {
+        background-color: #FFFF88;
+    }
+
 </style>
 <link href="/Content/Post.css" rel="stylesheet" />
 <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@Helpers.GetAntiForgeryToken()'" />
 <div class="ai-container" id="postBlock" ng-controller="articleCtrl">
-    <div class="ai-list" id="ai-list" ng-init="getUserProfileArticles('@locale','@menu','@sub','@user')" when-scrolled="loadMore('@locale','@menu','@sub','@user')">
+    <div class="ai-list" id="ai-list" ng-init="getUserProfileArticles('@locale','@menu','@sub','@user','@keyword')" when-scrolled="loadMore('@locale','@menu','@sub','@user','@keyword')">
         <div class="post postModuleLiner" ng-repeat="article in aiArticles" on-finish-render-posts>
             <div class="postClear"></div>
             <div ng-if="article.VideoUrl.length>0">
                 <h2><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
                 <div class="postClear"></div>
                 <video id="video_{{article.Id}}" ng-click="playVideo(article.Id)" ng-attr-src="{{trustAsResourceUrl(article.VideoUrl)}}"
-                       ng-attr-poster="{{article.VideoPoster}}"
-                       controls="controls" loop="true">
+                        ng-attr-poster="{{article.VideoPoster}}"
+                        controls="controls" loop="true">
                     your browser does not support the video tag
                 </video>
                 <div class="postClear"></div>

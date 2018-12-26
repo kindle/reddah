@@ -4,9 +4,9 @@
     var locale = CultureInfo.CurrentUICulture.Name;
 }
 <div>
-    <div class="SearchArea">
-        <input id="SearchTextBox" type="text" name="q" class="TextBox" value="" url="" maxlength="200" autocomplete="off" />
-        <input id="SearchButton" type="button" class="SubmitButton" value="" title="Search" />
+    <div class="SearchArea" ng-controller="searchCtrl">
+        <input id="SearchTextBox" type="text" name="q" class="TextBox" data-ng-model="keyword" url="" maxlength="200" autocomplete="off" />
+        <input id="SearchButton" type="button" class="SubmitButton" value="" title="Search" ng-click="search('@locale', keyword)"/>
     </div>
     <ul class="NavigationElements">
         <!--<li>
