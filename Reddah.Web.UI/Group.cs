@@ -24,6 +24,14 @@ public partial class Group
 
     public System.DateTime CreatedOn { get; set; }
 
+    public string Desc { get; set; }
+
+    public string Path { get; set; }
+
+    public Nullable<int> ParentId { get; set; }
+
+    public string Relation { get; set; }
+
 }
 
 }

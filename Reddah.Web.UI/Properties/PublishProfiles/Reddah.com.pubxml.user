@@ -305,13 +305,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/en-US/Reddah.Web.UI.resources.dll">
-      <publishTime>12/26/2018 10:19:56</publishTime>
+      <publishTime>12/28/2018 07:06:10</publishTime>
     </File>
     <File Include="bin/en/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/en/Reddah.Web.UI.resources.dll">
-      <publishTime>12/26/2018 10:19:56</publishTime>
+      <publishTime>12/28/2018 07:06:10</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -320,19 +320,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/fr-FR/Reddah.Web.UI.resources.dll">
-      <publishTime>12/26/2018 10:19:56</publishTime>
+      <publishTime>12/28/2018 07:06:10</publishTime>
     </File>
     <File Include="bin/ja-JP/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/ja-JP/Reddah.Web.UI.resources.dll">
-      <publishTime>12/26/2018 10:19:56</publishTime>
+      <publishTime>12/28/2018 07:06:10</publishTime>
     </File>
     <File Include="bin/ko-KR/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/ko-KR/Reddah.Web.UI.resources.dll">
-      <publishTime>12/26/2018 10:19:56</publishTime>
+      <publishTime>12/28/2018 07:06:10</publishTime>
     </File>
     <File Include="bin/log4net.dll">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -350,40 +350,40 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/16/2018 11:29:30</publishTime>
     </File>
     <File Include="bin/Reddah.Core.dll">
-      <publishTime>12/26/2018 10:19:53</publishTime>
+      <publishTime>12/28/2018 07:03:28</publishTime>
     </File>
     <File Include="bin/Reddah.Core.pdb">
-      <publishTime>12/26/2018 10:19:53</publishTime>
+      <publishTime>12/28/2018 07:03:28</publishTime>
     </File>
     <File Include="bin/Reddah.Encryption.dll">
-      <publishTime>12/26/2018 10:19:53</publishTime>
+      <publishTime>12/28/2018 07:03:29</publishTime>
     </File>
     <File Include="bin/Reddah.Encryption.pdb">
-      <publishTime>12/26/2018 10:19:53</publishTime>
+      <publishTime>12/28/2018 07:03:29</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Captcha.dll">
-      <publishTime>12/26/2018 10:19:53</publishTime>
+      <publishTime>12/28/2018 07:03:29</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Captcha.pdb">
-      <publishTime>12/26/2018 10:19:53</publishTime>
+      <publishTime>12/28/2018 07:03:29</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Core.dll">
-      <publishTime>12/26/2018 10:19:54</publishTime>
+      <publishTime>12/28/2018 07:03:29</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Core.pdb">
-      <publishTime>12/26/2018 10:19:54</publishTime>
+      <publishTime>12/28/2018 07:03:29</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Live.dll">
-      <publishTime>12/26/2018 10:19:54</publishTime>
+      <publishTime>12/28/2018 07:03:29</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Live.pdb">
-      <publishTime>12/26/2018 10:19:54</publishTime>
+      <publishTime>12/28/2018 07:03:29</publishTime>
     </File>
     <File Include="bin/Reddah.Web.UI.dll">
-      <publishTime>12/26/2018 10:19:55</publishTime>
+      <publishTime>12/28/2018 07:06:09</publishTime>
     </File>
     <File Include="bin/Reddah.Web.UI.pdb">
-      <publishTime>12/26/2018 10:19:55</publishTime>
+      <publishTime>12/28/2018 07:06:09</publishTime>
     </File>
     <File Include="bin/Swashbuckle.Core.dll">
       <publishTime>11/16/2018 11:29:30</publishTime>
@@ -440,13 +440,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/zh-CN/Reddah.Web.UI.resources.dll">
-      <publishTime>12/26/2018 10:19:57</publishTime>
+      <publishTime>12/28/2018 07:06:11</publishTime>
     </File>
     <File Include="Content/app/app.js">
       <publishTime>12/22/2018 10:26:30</publishTime>
     </File>
     <File Include="Content/app/article.js">
-      <publishTime>12/26/2018 10:18:23</publishTime>
+      <publishTime>12/27/2018 19:25:51</publishTime>
     </File>
     <File Include="Content/app/ckeditor/adapters/jquery.js">
       <publishTime>07/14/2016 06:07:09</publishTime>
@@ -1636,6 +1636,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/app/login.js">
       <publishTime>12/26/2018 10:10:20</publishTime>
     </File>
+    <File Include="Content/app/ng-tags-input.js">
+      <publishTime>12/26/2018 15:00:19</publishTime>
+    </File>
     <File Include="Content/Comment.css">
       <publishTime>12/09/2018 11:27:47</publishTime>
     </File>
@@ -2194,6 +2197,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/New.xml">
       <publishTime>06/23/2016 06:48:38</publishTime>
     </File>
+    <File Include="Content/ng-tags-input.css">
+      <publishTime>12/26/2018 15:00:35</publishTime>
+    </File>
     <File Include="Content/Post.css">
       <publishTime>12/09/2018 08:06:55</publishTime>
     </File>
@@ -2381,10 +2387,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/14/2016 06:26:54</publishTime>
     </File>
     <File Include="Database/Setup.sql">
-      <publishTime>12/20/2018 06:32:54</publishTime>
+      <publishTime>12/26/2018 19:17:42</publishTime>
     </File>
     <File Include="Database/Update.sql">
-      <publishTime>12/14/2018 15:17:10</publishTime>
+      <publishTime>12/28/2018 05:50:46</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>11/24/2018 19:29:53</publishTime>
@@ -2441,7 +2447,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2018 15:06:19</publishTime>
     </File>
     <File Include="ReddahModel.edmx.diagram">
-      <publishTime>12/20/2018 06:33:54</publishTime>
+      <publishTime>12/28/2018 05:56:24</publishTime>
     </File>
     <File Include="Scripts/angular-1.2.16.js">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -2549,7 +2555,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/08/2018 06:20:04</publishTime>
     </File>
     <File Include="Views/Articles/ArticleComment.cshtml">
-      <publishTime>12/23/2018 07:57:35</publishTime>
+      <publishTime>12/27/2018 19:26:58</publishTime>
     </File>
     <File Include="Views/Articles/ArticleComment.mobile.cshtml">
       <publishTime>12/23/2018 07:58:04</publishTime>
@@ -2588,10 +2594,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/27/2016 07:38:56</publishTime>
     </File>
     <File Include="Views/Articles/UserProfileArticleList.cshtml">
-      <publishTime>12/26/2018 08:17:58</publishTime>
+      <publishTime>12/27/2018 19:10:33</publishTime>
     </File>
     <File Include="Views/Articles/UserProfileArticleList.mobile.cshtml">
-      <publishTime>12/26/2018 10:07:17</publishTime>
+      <publishTime>12/27/2018 19:08:31</publishTime>
     </File>
     <File Include="Views/Articles/WizardSteps.cshtml">
       <publishTime>06/23/2016 06:48:38</publishTime>
@@ -2732,7 +2738,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/23/2016 06:48:38</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/05/2018 07:14:15</publishTime>
+      <publishTime>12/28/2018 07:03:47</publishTime>
     </File>
     <File Include="Web.sitemap">
       <publishTime>11/26/2018 06:57:59</publishTime>

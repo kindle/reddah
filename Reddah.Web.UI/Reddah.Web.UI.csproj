@@ -48,6 +48,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -188,6 +189,7 @@
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\AIController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\BrowseNavigateController.cs" />
@@ -205,6 +207,7 @@
     <Compile Include="Controllers\WizardStepController.cs" />
     <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="Filters\AllowCorsAttribute.cs" />
+    <Compile Include="Filters\LocalAttribute.cs" />
     <Compile Include="Filters\CrosHandler .cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Filters\AjaxValidateAntiForgeryTokenAttribute.cs" />
@@ -417,6 +420,7 @@
     <Content Include="Content\app\article.js" />
     <Content Include="Content\app\jquery.lazyload.js" />
     <Content Include="Content\app\login.js" />
+    <Content Include="Content\app\ng-tags-input.js" />
     <Content Include="Content\Comment.css" />
     <Content Include="Content\Images\ambassador.png" />
     <Content Include="Content\Images\arrow-left.png" />
@@ -426,6 +430,7 @@
     <Content Include="Content\Images\like-dislike.png" />
     <Content Include="Content\Images\noimage.jpg" />
     <Content Include="Content\Images\wiki\pdf_icon25x25.png" />
+    <Content Include="Content\ng-tags-input.css" />
     <Content Include="Content\Site.mobile.css" />
     <Content Include="Content\Images\close_icon.png" />
     <Content Include="Content\Images\exlogin\facebook.png" />
@@ -819,6 +824,15 @@
     <Content Include="Views\Articles\ArticleComment-bak.cshtml" />
     <Content Include="Views\Articles\UserProfileArticleList.cshtml" />
     <Content Include="Views\Articles\UserProfileArticleList.mobile.cshtml" />
+    <None Include="Web.config.sit">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.config.Debug.sit">
+      <DependentUpon>Web.config.sit</DependentUpon>
+    </None>
+    <None Include="Web.config.Release.sit">
+      <DependentUpon>Web.config.sit</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

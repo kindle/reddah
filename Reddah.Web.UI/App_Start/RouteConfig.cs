@@ -51,7 +51,11 @@
             );
 
 
-            
+            //localonly usage: localhost:2345/import
+            routes.MapLocalizedRoute("Helper", "import",
+                new { controller = "Import", action = "index" }
+            );
+
 
 
             //articles JSON

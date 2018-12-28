@@ -7,6 +7,9 @@
 <link href="/Content/Comment.css" rel="stylesheet" />
 <link href="/Content/Post.css" rel="stylesheet" />
 <style>
+    .poetry {
+        font-size: x-large;
+    }
     .flex-article {
         display: -webkit-flex;
         -webkit-justify-content: space-between;
@@ -21,6 +24,7 @@
         display: flex;
         flex-direction: column;
         margin: 0 20px 0 0;
+        min-width: 900px;
     }
     .flex-article-left img {
         max-width:100%;
@@ -77,7 +81,12 @@
     <div class="flex-article-left" id="articleContent">
         <div>
             <h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1>
-            <div class="listInfo">Submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)"><u>@Helpers.HtmlDecode(Model.Article.GroupName)</u></a></div>
+            <div class="listInfo">Submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to 
+            @foreach(string g in Model.Article.GroupName.Trim().Split(','))
+            {
+                <a href="/@locale/r/@Helpers.HtmlDecode(g)"><u>@Helpers.HtmlDecode(g)</u> </a>
+            }
+            </div>
             @if (Model.Article.LastUpdateOn != null)
             {<div class="listInfo">Last updated on @Model.Article.LastUpdateOn</div>}
             <div class="listInfo">
@@ -117,14 +126,18 @@
     <aside class="flex-article-right">
         @*Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())*@
         <div class="subreddahbox">
-            <h5>Welcome to <a href="/@locale/r/@Model.GroupName">/r/@Model.GroupName</a></h5>
-            <h3>Rules</h3>
-            <ol>
-                <li>You also agree to follow the Reddah Content Policy. These guidelines are intended to keep people safe, protect kids, keep reddah running, and to encourage personal responsibility for what you do on reddah.</li>
-                <li>You may not post any graphics, text, photographs, images, video, audio or other material that we deem to be junk or spam. Cluttering reddah with this sort of content reduces the quality of the reddah experience for others.</li>
-                <li>You agree not to interrupt the serving of reddah, introduce malicious code onto reddah, make it difficult for anyone else to use reddah due to your actions, attempt to manipulate votes or reddah’s systems, or assist anyone in misusing reddah in any way. It takes a lot of work to maintain reddah. Be cool.</li>
-            </ol>
-            <br />
+            @foreach(string g in Model.GroupName.Trim().Split(','))
+            {
+                <h5>Welcome to <a href="/@locale/r/@g">/r/@g</a></h5>
+                <h3>Rules</h3>
+                <ol>
+                    <li>You also agree to follow the Reddah Content Policy. These guidelines are intended to keep people safe, protect kids, keep reddah running, and to encourage personal responsibility for what you do on reddah.</li>
+                    <li>You may not post any graphics, text, photographs, images, video, audio or other material that we deem to be junk or spam. Cluttering reddah with this sort of content reduces the quality of the reddah experience for others.</li>
+                    <li>You agree not to interrupt the serving of reddah, introduce malicious code onto reddah, make it difficult for anyone else to use reddah due to your actions, attempt to manipulate votes or reddah’s systems, or assist anyone in misusing reddah in any way. It takes a lot of work to maintain reddah. Be cool.</li>
+                </ol>
+                <br />
+            }
+            
         </div>
         @{
             int j = 0;

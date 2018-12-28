@@ -10,9 +10,11 @@
     using System.Web.Security;
     using System.Web.Script.Serialization;
     using System.IO;
+    using System.Web.UI;
 
     public class AIController : BaseController
     {
+        [OutputCache(Duration = 30, VaryByParam = "*", Location = OutputCacheLocation.Server)]
         public ActionResult UserProfile(UserProfileModel userProfileModel)
         {
             var presentationView = Request.Browser.IsMobileDevice ?
@@ -24,18 +26,20 @@
         [AllowAnonymous]
         [HttpPost]
         [AjaxValidateAntiForgeryToken]
+        [OutputCache(Duration = 30, VaryByParam = "*", Location = OutputCacheLocation.Server)]
         public JsonResult JsonUserProfileArticles()
         {
             if (ModelState.IsValid)
             {
                 try
-                { 
+                {
                     var sr = new StreamReader(Request.InputStream);
                     var stream = sr.ReadToEnd();
                     JavaScriptSerializer js = new JavaScriptSerializer();
                     UserProfileModel userProfileModel = js.Deserialize<UserProfileModel>(stream);
 
-                    return Json(new {
+                    return Json(new
+                    {
                         success = true,
                         result = new UserProfileArticleViewModel(userProfileModel)
                     });
@@ -57,6 +61,7 @@
         [AllowAnonymous]
         [HttpPost]
         [AjaxValidateAntiForgeryToken]
+        [OutputCache(Duration = 600, VaryByParam = "none", Location = OutputCacheLocation.Server)]
         public JsonResult JsonRightBoxItems(UserProfileModel userProfileModel)
         {
             if (ModelState.IsValid)
@@ -77,6 +82,7 @@
 
             return Json(new { errors = GetErrorsFromModelState() });
         }
-
     }
+
+    
 }

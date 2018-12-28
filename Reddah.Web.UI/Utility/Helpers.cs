@@ -6,6 +6,7 @@
     using System.Text.RegularExpressions;
     using System.Web.Helpers;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
 
     public enum PrivilegeList
     {
@@ -292,6 +293,17 @@
 
         //    return string.Join("/", culture.Name, path);
         //}
+
+
+        public static string ToSimplified(string source)
+        {
+            return Microsoft.VisualBasic.Strings.StrConv(source, Microsoft.VisualBasic.VbStrConv.SimplifiedChinese, 0);
+        }
+
+        public static string ToTraditional(string source)
+        {
+            return Microsoft.VisualBasic.Strings.StrConv(source, Microsoft.VisualBasic.VbStrConv.TraditionalChinese, 0); 
+        }
 
     }
 }

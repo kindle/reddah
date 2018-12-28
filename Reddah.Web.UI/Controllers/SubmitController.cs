@@ -25,18 +25,24 @@ namespace Reddah.Web.UI.Controllers
                 TempData["Message"] = "Message: captcha is valid.";
                 using (var context = new reddahEntities1())
                 {
-                    String articleGroupName = Helpers.HtmlEncode(article.GroupName);
-                    if (context.Groups.FirstOrDefault(g => g.Name == articleGroupName) == null)
+                    string longArticleGroupNames = Helpers.HtmlEncode(article.GroupName.Trim());
+                    String[] articleGroupNames = longArticleGroupNames.Split(',');
+                    foreach(string articleGroupName in articleGroupNames)
                     {
-                        context.Groups.Add(new Group {
-                            Name = articleGroupName,
-                            CreatedOn = DateTime.Now
-                        });
+                        if (context.Groups.FirstOrDefault(g => g.Name == articleGroupName.Trim()) == null)
+                        {
+                            context.Groups.Add(new Group
+                            {
+                                Name = articleGroupName.Trim(),
+                                CreatedOn = DateTime.Now
+                            });
+                        }
                     }
+                    
                     context.Articles.Add(new Article
                     {
                         Title = Helpers.HtmlEncode(article.Title),
-                        GroupName = articleGroupName,
+                        GroupName = longArticleGroupNames,
                         Content = Helpers.HtmlEncode(article.Content),
                         Abstract = Helpers.HtmlEncode(article.Abstract),
                         UserName = User.Identity.Name,
@@ -45,8 +51,7 @@ namespace Reddah.Web.UI.Controllers
                     });
                     context.SaveChanges();
                 }
-
-                //return View("~/Views/Home/HomePageV1.cshtml");
+                
                 return RedirectToRoute("New");
             }
 
@@ -96,18 +101,22 @@ namespace Reddah.Web.UI.Controllers
 
                     if (User.Identity.Name.Equals(existingArticle.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.EditPost))
                     {
-                        String articleGroupName = Helpers.HtmlEncode(article.GroupName);
-                        if (context.Groups.FirstOrDefault(g => g.Name == articleGroupName) == null)
+                        string longArticleGroupNames = Helpers.HtmlEncode(article.GroupName.Trim());
+                        String[] articleGroupNames = longArticleGroupNames.Split(',');
+                        foreach (string articleGroupName in articleGroupNames)
                         {
-                            context.Groups.Add(new Group
+                            if (context.Groups.FirstOrDefault(g => g.Name == articleGroupName.Trim()) == null)
                             {
-                                Name = articleGroupName,
-                                CreatedOn = DateTime.Now
-                            });
+                                context.Groups.Add(new Group
+                                {
+                                    Name = articleGroupName.Trim(),
+                                    CreatedOn = DateTime.Now
+                                });
+                            }
                         }
 
                         existingArticle.Title = Helpers.HtmlEncode(article.Title);
-                        existingArticle.GroupName = article.GroupName;
+                        existingArticle.GroupName = longArticleGroupNames;
                         existingArticle.Content = Helpers.HtmlEncode(article.Content);
                         existingArticle.Abstract = Helpers.HtmlEncode(article.Abstract);
                         existingArticle.LastUpdateOn = DateTime.Now;

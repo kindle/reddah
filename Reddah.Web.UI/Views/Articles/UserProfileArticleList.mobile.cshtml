@@ -29,7 +29,7 @@
                 <div ng-if="article.VideoUrl.length>0">
                     <h2><a ng-click="viewArticle('@locale', article.GroupName, article.Id, urlDecode(article.Title))">{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
                     <div class="postClear"></div>
-                    <video id="video_{{article.Id}}" ng-click="playVideo(article.Id)" ng-attr-src="{{trustAsResourceUrl(article.VideoUrl)}}" 
+                    <video id="video_{{article.Id}}" ng-click="playVideo(article.Id)" ng-attr-src="{{trustAsResourceUrl(article.VideoUrl)}}"
                            ng-attr-poster="{{article.VideoPoster}}"
                            controls="controls" loop="true">
                         your browser does not support the video tag
@@ -45,13 +45,18 @@
                         </div>
                     </div>
                     <h2 ng-if="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
-                    <div>{{htmlDecode(article.Abstract)}}</div>
+                    <div>{{summary(article.Content, 60)}}</div>
+                </div>
+                <div class="postClear"></div>
+                <div class="listInfo">
+                    <span ng-repeat="group in article.GroupName.split(',')" style="padding:0 5px;">
+                        <a href="/@locale/r/{{group}}"><u>{{group}}</u></a>
+                    </span>
                 </div>
                 <div class="postClear"></div>
                 <div class="listInfo">
                     <i class="fa fa-clock-o"> {{article.CreatedOn}} </i>
-                    <i class="fa fa-commenting-o"> <a ng-click="viewArticle('@locale', article.GroupName, article.Id, urlDecode(article.Title))">{{article.Comments}}</a> </i>
-                    <a style="float:right" href="/@locale/r/{{article.GroupName}}"><u>{{article.GroupName}}</u></a>
+                    <i class="fa fa-commenting-o" style="float:right;"> <a ng-click="viewArticle('@locale', article.GroupName, article.Id, urlDecode(article.Title))">{{article.Comments}}</a> </i>
                 </div>
             </div>
         </div>

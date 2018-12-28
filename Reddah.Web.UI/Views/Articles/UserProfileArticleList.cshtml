@@ -84,9 +84,11 @@
                 </div>
                 <h2 ng-if="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
             </div>
-            <div>{{htmlDecode(article.Abstract)}}</div>
+            <div>{{summary(article.Content,120)}}</div>
             <div class="listInfo">
-                <a href="/@locale/r/{{article.GroupName}}"><u>{{article.GroupName}}</u></a>
+                <span ng-repeat="group in article.GroupName.split(',')">
+                    <a href="/@locale/r/{{group}}"><u>{{group}}</u></a> 
+                </span>
                 submitted {{article.CreatedOn}} ago by <a href="/@locale/user/{{article.UserName}}">{{article.UserName}}</a>
             </div>
             <div class="listInfo"><a href="/@locale/r/{{article.GroupName}}/comments/{{article.Id}}/{{urlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments</a> <!--share save hide report--></div>

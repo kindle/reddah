@@ -1,8 +1,19 @@
 ﻿alter table article add 
-  "Locale" VARCHAR(10) default 'en-us'
+  [Locale] VARCHAR(10) default 'en-us'
 
 alter table article add 
-  "LastUpdateOn" DATETIME NULL 
+  [LastUpdateOn] DATETIME NULL 
+
+alter table [dbo].[Group] add
+  [Desc] NVARCHAR (MAX) NULL, 
+  [ParentId] INT default -1,
+  [Relation] NVARCHAR (MAX) default 'isa',
+  [Path] NVARCHAR (MAX) NULL
+
+alter table article alter column
+  [Abstract] NVARCHAR(MAX) 
+
+
 
 insert into webpages_privileges (PrivilegeName)values('edit post')
 insert into webpages_privileges (PrivilegeName)values('delete post')

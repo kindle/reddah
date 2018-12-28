@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="reddahModel.Comment" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="reddahModel.Group" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="reddahModel.Log" Width="1.5" PointX="2.75" PointY="4.75" />
-        <EntityTypeShape EntityType="reddahModel.Setting" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="reddahModel.Setting" Width="1.5" PointX="4.75" PointY="4.75" />
         <EntityTypeShape EntityType="reddahModel.UploadFile" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="reddahModel.UserProfile" Width="1.5" PointX="6.75" PointY="4.75" />
         <EntityTypeShape EntityType="reddahModel.webpages_Membership" Width="1.5" PointX="4.75" PointY="7.75" />

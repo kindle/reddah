@@ -10,7 +10,17 @@
     $scope.trustAsResourceUrl = function (url) {
         return $sce.trustAsResourceUrl(url);
     };
-
+    $scope.subpost = function (str, n) {
+        var r = /[^\u4e00-\u9fa5]/g;
+        if (str.replace(r, "mm").length <= n) { return str; }
+        var m = Math.floor(n / 2);
+        for (var i = m; i < str.length; i++) {
+            if (str.substr(0, i).replace(r, "mm").length >= n) {
+                return str.substr(0, i) + "...";
+            }
+        }
+        return str;
+    };
     $scope.toTop = function () {
         $("html,body").animate({ scrollTop: 0 }, 500);
     }
@@ -78,11 +88,14 @@
 
         s = $scope.htmlDecode(str).replace(/ /g, "-");
         s = s.replace(/--/g, "-");
-        s = s.replace(/[^a-zA-Z0-9\-]/g, "");
+        s = s.replace(/[^a-zA-Z0-9\-\u4e00-\u9fa5]/g, "");
 
         return s;
-    }
-
+    };
+    $scope.summary = function (str, n) {
+        str = $scope.htmlDecode(str).replace(/<[^>]+>/g, "");
+        return $scope.subpost(str, n);
+    };
     $scope.aiRightBoxItems = [];
     $scope.getRightBox = function (locale) {
         $scope.rightBoxModel = {

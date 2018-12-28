@@ -60,7 +60,7 @@
                 {
                     query = (from b in db.Articles
                              where
-                                b.GroupName == userProfileModel.Sub &&
+                                b.GroupName.Contains(userProfileModel.Sub) &&
                                 b.Locale.StartsWith(locale) &&
                                 !(loaded).Contains(b.Id)
                              orderby b.Id descending
