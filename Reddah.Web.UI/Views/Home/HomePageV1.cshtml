@@ -3,101 +3,165 @@
     ViewBag.Title = "Home Page v1";
     var locale = CultureInfo.CurrentUICulture.Name;
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-        </div>
-    </section>
-}
-<h1 class="HomePageModular">@Model.PageTitle v1</h1>
-<table class="HomePageModular">
-    <tr>
-        <td class="HomePageModularLeftContent">
-            <div class="Announcements">
-                <div class="AnnouncementsModuleLiner"></div>
-                <h2 class="Announcements">@Model.AnnouncementsTitle</h2>
-                <div class="AnnouncementsLinkList">
-                    @{
-                        int n = 0;
-                        foreach (var announcement in Model.Announcements)
-                        {
-                            if (!String.IsNullOrEmpty(announcement.Title) && !String.IsNullOrEmpty(announcement.ArticleUrl))
-                            {
-                                if (n == 5)
-                                {
-                                    break;
-                                }
-                                <div class="AnnouncementsLink">
-                                    <a href="/@locale/@announcement.ArticleUrl" data-link-position="Announcements">@Html.Raw(announcement.Title)</a>
-                                </div>
-                                n++;
-                            }
-                        }
-                    }
-                </div>
-            </div>
-            @foreach (var section in Model.HomePageContents)
-            {
-                var k = 0;
-                <div class="HomePageContent">
-                    <div class="HomePageContentModuleLiner"></div>
-                    <h2 class="HomePageContent">@Html.Raw(section.Title)</h2>
-                    <div class="HomePageContentLinkList">
-                            @foreach (var item in section.Items)
-                            {
-                                if (!string.IsNullOrEmpty(item.ArticleUrl) && !string.IsNullOrEmpty(item.Title))
-                                {
-                                    if (k == 5)
-                                    {
-                                        break;
-                                    }
-                                    <div class="HomePageContentLink">
-                                        <a href="/@locale/@item.ArticleUrl">@Html.Raw(item.Title)</a>
-                                    </div>
+<style>
+    .ai-container {
+        width: 1170px;
+        margin: 0 auto;
+        margin-top: 0;
+        min-height: 500px;
+        display: flex;
+        justify-content: flex-start;
+    }
 
-                                    k++;
-                                }
-                            }
-       
-                            <div class="HomePageContentLink">
-                                <a href="/@locale/Browse" title="View all @Html.Raw(section.Title) articles">View All</a>
-                            </div>
-                    </div>
-                </div>
+    .ai-list {
+        min-width: 900px;
+        min-height: 300px;
+    }
+
+    .ai-right {
+        margin-top: 65px;
+        margin-left: 30px;
+        width: 200px;
+        min-height: 600px;
+    }
+
+    .articleLoading {
+        padding: 30px;
+        text-align: center;
+    }
+
+    .highlight {
+        background-color: #FFFF88;
+    }
+
+    .totop {
+        position: fixed;
+        right: 30px;
+        bottom: 50px;
+        padding: 10px;
+        z-index: 10000;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        background-color: #333333;
+        line-height: 25px;
+        opacity: 0.5;
+        transition: 0.2s;
+        border-radius: 2px;
+        cursor: pointer;
+    }
+    #GroupList{
+        display: flex;
+        margin: 30px;
+        flex-wrap:wrap;
+    }
+    #GroupList > div{
+        width: 150px;
+        height: 40px;
+    }
+</style>
+
+<link href="/Content/Post.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="ai-container">
+    <div class="ai-list" id="ai-list">
+        <h1 class="HomePageModular">@Model.PageTitle</h1>
+        <div class="Announcements">
+            @if (!string.IsNullOrWhiteSpace(Model.AnnouncementsTitle))
+            {
+                <div class="AnnouncementsModuleLiner"></div>
             }
-        </td>
-        <td class="HomePageModularCenterContent">
-            @Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())
-            @{
-                int j = 0;
-                foreach (var rightBoxModule in Model.RightBoxModules)
-                {
-                    if (!String.IsNullOrEmpty(rightBoxModule.Title) && !String.IsNullOrEmpty(rightBoxModule.ArticleUrl))
+            <h2 class="Announcements">@Model.AnnouncementsTitle</h2>
+            <div class="AnnouncementsLinkList">
+                @{
+                    int n = 0;
+                    foreach (var announcement in Model.Announcements)
                     {
-                        if (j == 3)
+                        if (!String.IsNullOrEmpty(announcement.Title) && !String.IsNullOrEmpty(announcement.ArticleUrl))
                         {
-                            break;
+                            if (n == 5)
+                            {
+                                break;
+                            }
+                            <div class="AnnouncementsLink">
+                                <a href="/@locale/@announcement.ArticleUrl" data-link-position="Announcements">@Html.Raw(announcement.Title)</a>
+                            </div>
+                            n++;
                         }
-                        <div class="HomePageRightBoxModule">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <a href="/@locale/@rightBoxModule.ArticleUrl"><img alt="@rightBoxModule.ImageUrl" src="@rightBoxModule.ImageUrl"/></a>
-                                    </td>
-                                    <td class="rightBoxModule">
-                                        <h2><a href="/@locale/@rightBoxModule.ArticleUrl">@rightBoxModule.Title</a></h2>
-                                        <div>@rightBoxModule.Description</div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        j++;
                     }
                 }
-            }
-        </td>
-    </tr>
-</table>
+            </div>
+        </div>
+        @foreach (var section in Model.HomePageContents)
+        {
+            var k = 0;
+            <div class="HomePageContent">
+                <div class="HomePageContentModuleLiner"></div>
+                <h2 class="HomePageContent">@Html.Raw(section.Title)</h2>
+                <div class="HomePageContentLinkList">
+                    @foreach (var item in section.Items)
+                    {
+                        if (!string.IsNullOrEmpty(item.ArticleUrl) && !string.IsNullOrEmpty(item.Title))
+                        {
+                            if (k == 5)
+                            {
+                                break;
+                            }
+                            <div class="HomePageContentLink">
+                                <a href="/@locale/@item.ArticleUrl">@Html.Raw(item.Title)</a>
+                            </div>
+
+                            k++;
+                        }
+                    }
+
+                    <div class="HomePageContentLink">
+                        <a href="/@locale/Browse" title="View all @Html.Raw(section.Title) articles">View All</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!--group contents-->
+        @foreach (var group in Model.GroupContents)
+        {
+            <div class="HomePageContent">
+                <div class="HomePageContentModuleLiner"></div>
+                <h2 class="HomePageContent">@Html.Raw(group.Title)</h2>
+                <div class="HomePageContentLinkList">
+                    <div id="GroupList">
+                        @foreach (var item in group.Description.Split(','))
+                        {
+                            if (!string.IsNullOrEmpty(item))
+                            {
+                                <div>
+                                    <a href="/@locale/@group.ArticleUrl/@item">@Html.Raw(item)</a>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="ai-right" ng-controller="rightBoxCtrl" ng-init="getRightBox('@locale')">
+        <div class="post" ng-repeat="item in aiRightBoxItems">
+            <div class="listImage">
+                <div class="listImageWrapper">
+                    <img class="BrowsePreviewImage" width="193" ng-attr-src="{{item.ImageUrl}}" alt="picture not found">
+                </div>
+            </div>
+            <div class="listInfo">
+                <h2><a href="/@locale/{{item.ArticleUrl}}">{{urlDecode(item.Title)}}</a></h2>
+                <div>{{htmlDecode(item.Description)}}</div>
+            </div>
+            <div class="postClear"></div>
+        </div>
+        <div class="postClear"></div>
+        <div class="articleLoading"><img src="/content/images/loading_50x50.gif" ng-show="rightBoxLoading==true" /></div>
+    </div>
+    <a ng-click="toTop()" id="totop"><div class="totop"><i class="fa fa-chevron-up"></i></div></a>
+</div>
+
+

@@ -25,6 +25,7 @@
         flex-direction: column;
         margin: 0 20px 0 0;
         min-width: 900px;
+        max-width: 900px;
     }
     .flex-article-left img {
         max-width:100%;
@@ -73,6 +74,11 @@
         .flex-vote > i{
             margin: 0 15px 0 5px;
         }
+
+    .groupLoading {
+        padding: 30px;
+        text-align: center;
+    }
         
 </style>
 
@@ -81,23 +87,35 @@
     <div class="flex-article-left" id="articleContent">
         <div>
             <h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1>
-            <div class="listInfo">Submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to 
-            @foreach(string g in Model.Article.GroupName.Trim().Split(','))
-            {
-                <a href="/@locale/r/@Helpers.HtmlDecode(g)"><u>@Helpers.HtmlDecode(g)</u> </a>
-            }
+            <div class="listInfo">
+                Submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to
+                @foreach (string g in Model.Article.GroupName.Trim().Split(','))
+                {
+                    <a href="/@locale/r/@Helpers.HtmlDecode(g)"><u>@Helpers.HtmlDecode(g)</u> </a>
+                }
             </div>
             @if (Model.Article.LastUpdateOn != null)
             {<div class="listInfo">Last updated on @Model.Article.LastUpdateOn</div>}
             <div class="listInfo">
                 @if (User.Identity.Name.Equals(Model.Article.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.EditPost))
-                {<u><a href="/@locale/edit/@Model.Article.Id">[Edit]</a></u> }
+                {<u><a href="/@locale/edit/@Model.Article.Id">[Edit]</a></u>}
                 @if (User.Identity.Name.Equals(Model.Article.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.DeletePost))
                 {<u><a href="/@locale/delete/@Model.Article.Id">[Delete]</a></u>}
             </div>
             <div class="listInfo" style="display:none;">share save hide report</div>
         </div>
         <div>@Html.Raw(Helpers.HtmlDecode(Model.Article.Content))</div>
+
+        <div class="postModuleLiner"></div>
+        <section class="group">
+            @foreach (string g in Model.GroupName.Trim().Split(','))
+            {
+                <div ng-controller="groupCtrl" data-ng-init="getGroup('@g','@locale')">
+                    <p>{{group.Desc}}</p>
+                </div>
+            }
+        </section>
+
         <section class="flex-vote">
             @if (Request.IsAuthenticated)
             {
@@ -105,8 +123,9 @@
                 <i id="voteInfo"><u style="cursor: pointer;">I like the post!</u></i>
                 <i id="voteThanks" style="display:none;"><u>Thank you for the feedback! Your vote here will to help them become popular.</u></i>
                 <span style="display:none;" itemprop="upvoteCount" id="vote-count-post-@Model.Article.Id">@(Model.Article.Up - Model.Article.Down)</span>
+
                 <!--<a ng-click="vote(@Model.Article.Id, 'down', @(Model.Article.Up-Model.Article.Down),'articleContent')"></a>
-        <i>I don't like it!</i>-->
+            <i>I don't like it!</i>-->
             }
             else
             {
@@ -122,24 +141,24 @@
             @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = -1 })
             @Html.Partial("Comment", Model.Comments as SeededComments)
         </div>
+
+
     </div>
-    <aside class="flex-article-right">
+    <aside class="flex-article-right" id="articleAside">
         @*Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())*@
         <div class="subreddahbox">
-            @foreach(string g in Model.GroupName.Trim().Split(','))
-            {
-                <h5>Welcome to <a href="/@locale/r/@g">/r/@g</a></h5>
-                <h3>Rules</h3>
-                <ol>
-                    <li>You also agree to follow the Reddah Content Policy. These guidelines are intended to keep people safe, protect kids, keep reddah running, and to encourage personal responsibility for what you do on reddah.</li>
-                    <li>You may not post any graphics, text, photographs, images, video, audio or other material that we deem to be junk or spam. Cluttering reddah with this sort of content reduces the quality of the reddah experience for others.</li>
-                    <li>You agree not to interrupt the serving of reddah, introduce malicious code onto reddah, make it difficult for anyone else to use reddah due to your actions, attempt to manipulate votes or reddah’s systems, or assist anyone in misusing reddah in any way. It takes a lot of work to maintain reddah. Be cool.</li>
-                </ol>
-                <br />
-            }
-            
+            <h5>知识图谱</h5>
+            <ol>
+                @foreach (string g in Model.GroupName.Trim().Split(','))
+                {
+                <li ng-controller="groupCtrl" data-ng-init="getGroup('@g','@locale')">
+                    <a href="/@locale/r/@g"><u>@g</u></a>
+                </li>
+                }
+            </ol>
+            <br />     
         </div>
-        @{
+        @*{
             int j = 0;
             foreach (var rightBoxModule in Model.RightBoxModules)
             {
@@ -165,7 +184,7 @@
                     j++;
                 }
             }
-        }
+        }*@
     </aside>
 </div>
 <div id="done" style="display:none;"></div>

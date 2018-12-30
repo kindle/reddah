@@ -82,6 +82,32 @@
 
             return Json(new { errors = GetErrorsFromModelState() });
         }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [OutputCache(Duration = 600, VaryByParam = "*", Location = OutputCacheLocation.Server)]
+        public JsonResult JsonGetGroup()
+        {
+            try
+            {
+                var sr = new StreamReader(Request.InputStream);
+                var stream = sr.ReadToEnd();
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                JsonGroup group = js.Deserialize<JsonGroup>(stream);
+
+                return Json(new
+                {
+                    success = true,
+                    result = new GroupViewModel(group.Name)
+                });
+            }
+            catch (MembershipCreateUserException e)
+            {
+                ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+            }
+
+            return Json(new { errors = GetErrorsFromModelState() });
+        }
     }
 
     

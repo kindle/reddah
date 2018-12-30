@@ -20,8 +20,8 @@
         {
             if (pw != 37)
                 return;
-            
-            tang_author();
+
+            //tang_author();
             //song_author(1);
             //song_author(2);
             /*for(int i=start+1000;i<=57000;i+=1000)
@@ -35,6 +35,96 @@
 
             //tang_data(15000);
             //fix3();
+
+            /*for (int i = 2000; i <= 254000; i += 1000)
+            {
+                song_data(i);
+            }*/
+
+
+            /*for (int i = 126000; i <= 254000; i += 1000)
+            {
+                song_data(i);
+            }*/
+
+            //shijing_data();
+            //lunyu_data();
+
+
+            //song_data(126000);
+            //song_data(127000);
+            /*for (int i = 0; i <= 21000; i += 1000)
+            {
+                ci_data(i);
+            }*/
+
+            /*for (int i = 135000; i <= 254000; i += 1000)
+            {
+                song_data(i);
+            }*/
+
+            song_data(140000);
+            song_data(141000);
+            song_data(142000);
+        }
+
+
+
+        //5mins for 1k peoms
+        public void song_data(int n)
+        {
+            string jsonfile = HttpContext.Server.MapPath("~/Content/poem/poet.song." + n.ToString() + ".json");
+
+            FileStream fs = new FileStream(jsonfile, FileMode.Open, FileAccess.Read);
+
+            using (StreamReader file = new StreamReader(fs, Encoding.UTF8))
+            {
+                using (JsonTextReader reader = new JsonTextReader(file))
+                {
+                    JArray ja = (JArray)JToken.ReadFrom(reader);
+                    int i = 0;
+                    using (var db = new reddahEntities1())
+                    {
+                        try
+                        {
+                            foreach (JObject e in ja)
+                            {
+                                i++;
+                                
+                                var p = new Article();
+                                p.Title = Helpers.ToSimplified(e["title"].ToString());
+                                p.GroupName = Helpers.ToSimplified("诗词,宋," + e["author"].ToString());
+                                JArray njap = (JArray)e["paragraphs"];
+                                var njapt = njap.ToString().Replace("[", "").Replace("]", "").Replace("\",", "").Replace("\"", "").Replace("\r\n", "<br>");
+                                p.Content = Helpers.ToSimplified(Helpers.HtmlEncode("<div class=\"poetry\">" + njapt + "</div>"));
+                                JArray njas = (JArray)e["strains"];
+                                var njast = njas.ToString().Replace("[", "").Replace("]", "").Replace("\",", "").Replace("\"", "").Replace("\r\n", "<br>");
+                                p.Abstract = Helpers.ToSimplified(Helpers.HtmlEncode(njast));
+                                p.Locale = "zh-cn";
+                                p.CreatedOn = System.DateTime.Now;
+                                p.UserName = "wind";
+
+                                if (e["tags"] != null)
+                                    p.GroupName += Helpers.ToSimplified("," + e["tags"].ToString().Replace("[", "").Replace("]", "").Replace("\"", "").Replace(" ", "").Replace("\r\n", ""));
+
+                                db.Articles.Add(p);
+                                
+
+                            }
+
+                            System.Diagnostics.Debug.WriteLine("start: " + n.ToString() + " " + System.DateTime.Now.ToString("F") + "...");
+                            db.SaveChanges();
+                            System.Diagnostics.Debug.WriteLine("completed: " + n.ToString() + " " + System.DateTime.Now.ToString("F") + "...");
+                        }
+                        catch (DbEntityValidationException ex)
+                        {
+                            System.Console.WriteLine(ex.Message + i + n);
+                        }
+                    }
+
+
+                }
+            }
         }
 
         //5mins for 1k peoms
@@ -259,7 +349,175 @@
             }
         }
 
-        
+        public void shijing_data()
+        {
+            string jsonfile = HttpContext.Server.MapPath("~/Content/poem/shijing.json");
+
+            FileStream fs = new FileStream(jsonfile, FileMode.Open, FileAccess.Read);
+
+            using (StreamReader file = new StreamReader(fs, Encoding.UTF8))
+            {
+                using (JsonTextReader reader = new JsonTextReader(file))
+                {
+                    JArray ja = (JArray)JToken.ReadFrom(reader);
+                    int i = 0;
+                    using (var db = new reddahEntities1())
+                    {
+                        try
+                        {
+                            foreach (JObject e in ja)
+                            {
+                                i++;
+
+                                var p = new Article();
+                                p.Title = Helpers.ToSimplified(e["chapter"].ToString() + "·" + e["section"].ToString() + "·" + e["title"].ToString());
+                                p.GroupName = Helpers.ToSimplified("诗词,先秦,诗经");
+                                p.GroupName += Helpers.ToSimplified(
+                                    "," + e["chapter"].ToString() + "," + e["section"].ToString()
+                                    );
+                                JArray njap = (JArray)e["content"];
+                                var njapt = njap.ToString().Replace("[", "").Replace("]", "").Replace("\",", "").Replace("\"", "").Replace("\r\n", "<br>");
+                                p.Content = Helpers.ToSimplified(Helpers.HtmlEncode("<div class=\"poetry\">" + njapt + "</div>"));
+                                p.Abstract = "";
+                                p.Locale = "zh-cn";
+                                p.CreatedOn = System.DateTime.Now;
+                                p.UserName = "wind";
+
+
+
+
+                                db.Articles.Add(p);
+
+
+                            }
+
+                            System.Diagnostics.Debug.WriteLine("start: " + System.DateTime.Now.ToString("F") + "...");
+                            db.SaveChanges();
+                            System.Diagnostics.Debug.WriteLine("completed: " + System.DateTime.Now.ToString("F") + "...");
+                        }
+                        catch (DbEntityValidationException ex)
+                        {
+                            System.Console.WriteLine(ex.Message + i);
+                        }
+                    }
+
+
+                }
+            }
+        }
+
+        public void lunyu_data()
+        {
+            string jsonfile = HttpContext.Server.MapPath("~/Content/poem/lunyu.json");
+
+            FileStream fs = new FileStream(jsonfile, FileMode.Open, FileAccess.Read);
+
+            using (StreamReader file = new StreamReader(fs, Encoding.UTF8))
+            {
+                using (JsonTextReader reader = new JsonTextReader(file))
+                {
+                    JArray ja = (JArray)JToken.ReadFrom(reader);
+                    int i = 0;
+                    using (var db = new reddahEntities1())
+                    {
+                        try
+                        {
+                            foreach (JObject e in ja)
+                            {
+                                i++;
+
+                                var p = new Article();
+                                p.Title = Helpers.ToSimplified("论语·"+e["chapter"].ToString());
+                                p.GroupName = Helpers.ToSimplified("诗词,战国,孔子,论语");
+                                JArray njap = (JArray)e["paragraphs"];
+                                var njapt = njap.ToString().Replace("[", "").Replace("]", "").Replace("\",", "").Replace("\"", "").Replace("\r\n", "<br>");
+                                p.Content = Helpers.ToSimplified(Helpers.HtmlEncode("<div class=\"poetry\">" + njapt + "</div>"));
+                                p.Abstract = "";
+                                p.Locale = "zh-cn";
+                                p.CreatedOn = System.DateTime.Now;
+                                p.UserName = "wind";
+
+
+
+
+                                db.Articles.Add(p);
+
+
+                            }
+
+                            System.Diagnostics.Debug.WriteLine("start: " + System.DateTime.Now.ToString("F") + "...");
+                            db.SaveChanges();
+                            System.Diagnostics.Debug.WriteLine("completed: " + System.DateTime.Now.ToString("F") + "...");
+                        }
+                        catch (DbEntityValidationException ex)
+                        {
+                            System.Console.WriteLine(ex.Message + i);
+                        }
+                    }
+
+
+                }
+            }
+        }
+
+        //5mins for 1k peoms
+        public void ci_data(int n)
+        {
+            string jsonfile = HttpContext.Server.MapPath("~/Content/poem/ci.song." + n.ToString() + ".json");
+
+            FileStream fs = new FileStream(jsonfile, FileMode.Open, FileAccess.Read);
+
+            using (StreamReader file = new StreamReader(fs, Encoding.UTF8))
+            {
+                using (JsonTextReader reader = new JsonTextReader(file))
+                {
+                    JArray ja = (JArray)JToken.ReadFrom(reader);
+                    int i = 0;
+                    using (var db = new reddahEntities1())
+                    {
+                        try
+                        {
+                            foreach (JObject e in ja)
+                            {
+                                i++;
+
+                                var p = new Article();
+                                
+                                p.GroupName = Helpers.ToSimplified("诗词,宋," + e["author"].ToString()+",宋词," + e["rhythmic"].ToString());
+                                if (e["tags"] != null)
+                                    p.GroupName += Helpers.ToSimplified("," + e["tags"].ToString().Replace("[", "").Replace("]", "").Replace("\"", "").Replace(" ", "").Replace("\r\n", ""));
+
+                                JArray njap = (JArray)e["paragraphs"];
+                                var njapt = njap.ToString().Replace("[", "").Replace("]", "").Replace("\",", "").Replace("\"", "").Replace("\r\n", "<br>");
+                                p.Content = Helpers.ToSimplified(Helpers.HtmlEncode("<div class=\"poetry\">" + njapt + "</div>"));
+
+
+                                p.Title = Helpers.ToSimplified(e["rhythmic"].ToString() + "·" + njapt.Split('，', '。')[0].Replace("<br>","").Trim());
+                                p.Abstract = "";
+                                p.Locale = "zh-cn";
+                                p.CreatedOn = System.DateTime.Now;
+                                p.UserName = "wind";
+
+                                
+                                db.Articles.Add(p);
+
+
+                            }
+
+                            System.Diagnostics.Debug.WriteLine("start: " + n.ToString() + " " + System.DateTime.Now.ToString("F") + "...");
+                            db.SaveChanges();
+                            System.Diagnostics.Debug.WriteLine("completed: " + n.ToString() + " " + System.DateTime.Now.ToString("F") + "...");
+                        }
+                        catch (DbEntityValidationException ex)
+                        {
+                            System.Console.WriteLine(ex.Message + i + n);
+                        }
+                    }
+
+
+                }
+            }
+        }
 
     }
 

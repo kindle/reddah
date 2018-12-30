@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="SolutionArticle">
+  <Title>诗词名句</Title>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>
+      推荐作者
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+		<ol class="changeLocaleBlock" style="width:16%;">
+		    <li>
+				<span></span>
+				<ol>
+					<li><a href="../r/李白">李白</a></li>
+					<li><a href="../r/贺知章">贺知章</a></li>
+					<li><a href="../r/李清照">李清照</a></li>
+					<li><a href="../r/文天祥">文天祥</a></li>
+				</ol>
+			</li>
+		</ol>
+		<ol class="changeLocaleBlock" style="width:16%;">
+		    <li>
+				<span></span>
+				<ol>
+					<li><a href="../r/杜甫">杜甫</a></li>
+					<li><a href="../r/王勃">王勃</a></li>
+					<li><a href="../r/黄庭坚">黄庭坚</a></li>
+					<li><a href="../r/杨万里">杨万里</a></li>
+				</ol>
+			</li>
+		</ol>
+		<ol class="changeLocaleBlock" style="width:16%;">
+		    <li>
+				<span></span>
+				<ol>
+					<li><a href="../r/白居易">白居易</a></li>
+					<li><a href="../r/李商隐">李商隐</a></li>
+					<li><a href="../r/苏轼">苏轼</a></li>
+					<li><a href="../r/范成大">范成大</a></li>
+				</ol>
+			</li>
+		</ol>
+		<ol class="changeLocaleBlock" style="width:16%;">
+		    <li>
+				<span></span>
+				<ol>
+					<li><a href="../r/岑参">岑参</a></li>
+					<li><a href="../r/杜牧">杜牧</a></li>
+					<li><a href="../r/王安石">王安石</a></li>
+					<li><a href="../r/陆游">陆游</a></li>
+				</ol>
+			</li>
+		</ol>
+		<ol class="changeLocaleBlock" style="width:16%;">
+		    <li>
+				<span></span>
+				<ol>
+					<li><a href="../r/王维">王维</a></li>
+					<li><a href="../r/李贺">李贺</a></li>
+					<li><a href="../r/欧阳修">欧阳修</a></li>
+					<li><a href="../r/范仲淹">范仲淹</a></li>
+				</ol>
+			</li>
+		</ol>
+		<ol class="changeLocaleBlock" style="width:20%;">
+		    <li>
+				<span></span>
+				<ol>
+					<li><a href="../r/孟浩然">孟浩然</a></li>
+					<li><a href="../r/柳宗元">柳宗元</a></li>
+					<li><a href="../r/梅尧臣">梅尧臣</a></li>
+					<li><a href="../r/辛弃疾">辛弃疾</a></li>
+				</ol>
+			</li>
+		</ol>
+      ]]>
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>
+      作者合称
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+	  <ol class="changeLocaleBlock" style="width:25%;">
+		    <li>
+				<span></span>
+				<ol>
+					<li><a href="../r/唐宋八大家">唐宋八大家</a></li>
+					<li><a href="../r/大李杜">大李杜</a></li>
+					<li><a href="../r/竹林七贤">竹林七贤</a></li>
+					<li><a href="../r/大历十才子">大历十才子</a></li>
+					<li><a href="../r/前七子">前七子</a></li>
+					<li><a href="../r/文章四友">文章四友</a></li>
+					<li><a href="../r/江右三大家">江右三大家</a></li>
+					<li><a href="../r/皮陆">皮陆</a></li>
+					<li><a href="../r/二程">二程</a></li>
+					<li><a href="../r/元白">元白</a></li>
+					<li><a href="../r/温韦">温韦</a></li>
+					<li><a href="../r/济南二安">济南二安</a></li>
+				</ol>
+			</li>
+		</ol>
+		<ol class="changeLocaleBlock" style="width:25%;">
+		    <li>
+				<span></span>
+				<ol>
+					<li><a href="../r/初唐四杰">初唐四杰</a></li>
+					<li><a href="../r/小李杜">小李杜</a></li>
+					<li><a href="../r/酒中八仙">酒中八仙</a></li>
+					<li><a href="../r/汉赋四大家">汉赋四大家</a></li>
+					<li><a href="../r/后七子">后七子</a></li>
+					<li><a href="../r/三曹">三曹</a></li>
+					<li><a href="../r/江左三大家">江左三大家</a></li>
+					<li><a href="../r/三苏">三苏</a></li>
+					<li><a href="../r/苏黄">苏黄</a></li>
+					<li><a href="../r/刘白">刘白</a></li>
+					<li><a href="../r/沈宋">沈宋</a></li>
+					<li><a href="../r/">&nbsp;</a></li>
+				</ol>
+			</li>
+		</ol>
+		<ol class="changeLocaleBlock" style="width:25%;">
+		    <li>
+				<span></span>
+				<ol>
+					<li><a href="../r/南宋四大家">南宋四大家</a></li>
+					<li><a href="../r/元曲四大家">元曲四大家</a></li>
+					<li><a href="../r/苏门四学士">苏门四学士</a></li>
+					<li><a href="../r/宋四家">宋四家</a></li>
+					<li><a href="../r/公安三袁">公安三袁</a></li>
+					<li><a href="../r/永嘉四灵">永嘉四灵</a></li>
+					<li><a href="../r/晚清诗界革命二巨子">晚清诗界革命二巨子</a></li>
+					<li><a href="../r/南施北宋">南施北宋</a></li>
+					<li><a href="../r/苏辛">苏辛</a></li>
+					<li><a href="../r/高岑">高岑</a></li>
+					<li><a href="../r/苏梅">苏梅</a></li>
+					<li><a href="../r/">&nbsp;</a></li>
+				</ol>
+			</li>
+		</ol>
+		<ol class="changeLocaleBlock" style="width:25%;">
+		    <li>
+				<span></span>
+				<ol>
+					<li><a href="../r/建安七子">建安七子</a></li>
+					<li><a href="../r/中国古代四大才女">中国古代四大才女</a></li>
+					<li><a href="../r/吴中四士">吴中四士</a></li>
+					<li><a href="../r/元嘉三大家">元嘉三大家</a></li>
+					<li><a href="../r/南朝三谢">南朝三谢</a></li>
+					<li><a href="../r/岭南三家">岭南三家</a></li>
+					<li><a href="../r/南袁北纪">南袁北纪</a></li>
+					<li><a href="../r/南朱北王">南朱北王</a></li>
+					<li><a href="../r/苏李">苏李</a></li>
+					<li><a href="../r/王孟">王孟</a></li>
+					<li><a href="../r/四大边塞诗人">四大边塞诗人</a></li>
+					<li><a href="../r/">&nbsp;</a></li>
+				</ol>
+			</li>
+		</ol>
+      ]]>
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>
+      作者称号
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      <h2><b>Please read the following very carefully. Each of the following sections applies to the maximum extent permitted by law. Where jurisdictions do not allow disclaimers of implied warranties or the limitation of liability in contracts, the contents of this section may not apply.</b></h2>
+      <br/>
+      
+      <h2><b>indemnity</b></h2>
+      <br/>
+      <h3>All the things you do and all the information you submit or post to reddah remain your responsibility. Indemnity is basically a way of saying that you will not hold us legally liable for any of your user content or actions that infringe the law or the rights of a third party or person in any way.</h3>
+      <br/>
+      <h3 class="em">Specifically, you agree to hold reddah, its affiliates, officers, directors, employees, agents, and third party service providers harmless from and defend them against any claims, costs, damages, losses, expenses, and any other liabilities, including attorneys’ fees and costs, arising out of or related to your access to or use of reddah, your violation of this user agreement, and/or your violation of the rights of any third party or person.</h3>
+      <br/>
+      
+      <h2><b>disclaimer of warranties</b></h2>
+      <br/>
+      <h3 class="em">reddah is provided "as is" and without warranty of any kind. To the maximum extent permitted by law, we and our affiliates and third party service providers disclaim any and all warranties, express or implied, including (but not limited to) implied warranties of merchantability, fitness for a particular purpose, and non-infringement of proprietary rights, or any other warranty, condition, guarantee or representation, whether oral or electronic. You are solely responsible for any damage to your computer or mobile device, loss of use, or loss of your user content. We do not guarantee that reddah will always work properly.</h3>
+      <br/>
+      <h3></h3>
+      <br/>
+      
+      <h2><b>limitation of liability</b></h2>
+      <br/>
+      <h3 class="em">We will not be liable for any special, consequential, indirect, incidental, punitive, reliance, or exemplary damages, whether in tort, contract, or any other legal theory, arising out of or in any way connected with this agreement or your use of or attempt to use reddah, including (but not limited to) damages for loss of profits, goodwill, use, or data. This limitation on liability shall not be affected even if we have been advised of the possibility of such damages. Some states do not allow for the exclusion of implied warranties or the limitation or exclusion of liability for incidental or consequential damages, so the above exclusions may not apply to you. You may have other rights that vary from state to state.</h3>
+      <br/>
+      <h3 class="em">You agree to release us, our affiliates, and third-party service providers, and each associated director, employee, agents, and officers, from claims, demands and damages (actual and consequential), of every kind and nature, known and unknown, disclosed or undisclosed, arising out of or in any way connected to your use of reddah.</h3>
+      <br/>
+      
+      <h2><b>governing law</b></h2>
+      <br/>
+      <h3>We want you to enjoy reddah, so if you have an issue or dispute, you agree to raise it and try to resolve it with us informally. You can contact us with feedback and concerns here or by emailing us at contact@reddah.com.</h3>
+      <br/>
+      <h3>The headings in this agreement are for convenience and do not control any of its provisions.</h3>
+      <br/>
+      
+      
+      <h2><b>severability and enforcement</b></h2>
+      <br/>
+      <h3 class="em">If any provision of this user agreement is held invalid or unenforceable, that provision will be modified to the extent necessary to render it enforceable without losing its intent. If no such modification is possible, that provision will be severed from the rest of this agreement.</h3>
+      <br/>
+      <h3>If we do not enforce any right or provision in this user agreement, that is not to be deemed a waiver of our right to do so in the future.</h3>
+      <br/>
+      
+      ]]>
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>
+      分类
+    </Text>
+  </Module>
+  <Module>
+    <ModuleType>TextModule</ModuleType>
+    <Text>
+      <![CDATA[
+      <h2><b>Please read the following very carefully. Each of the following sections applies to the maximum extent permitted by law. Where jurisdictions do not allow disclaimers of implied warranties or the limitation of liability in contracts, the contents of this section may not apply.</b></h2>
+      <br/>
+      
+      <h2><b>indemnity</b></h2>
+      <br/>
+      <h3>All the things you do and all the information you submit or post to reddah remain your responsibility. Indemnity is basically a way of saying that you will not hold us legally liable for any of your user content or actions that infringe the law or the rights of a third party or person in any way.</h3>
+      <br/>
+      <h3 class="em">Specifically, you agree to hold reddah, its affiliates, officers, directors, employees, agents, and third party service providers harmless from and defend them against any claims, costs, damages, losses, expenses, and any other liabilities, including attorneys’ fees and costs, arising out of or related to your access to or use of reddah, your violation of this user agreement, and/or your violation of the rights of any third party or person.</h3>
+      <br/>
+      
+      <h2><b>disclaimer of warranties</b></h2>
+      <br/>
+      <h3 class="em">reddah is provided "as is" and without warranty of any kind. To the maximum extent permitted by law, we and our affiliates and third party service providers disclaim any and all warranties, express or implied, including (but not limited to) implied warranties of merchantability, fitness for a particular purpose, and non-infringement of proprietary rights, or any other warranty, condition, guarantee or representation, whether oral or electronic. You are solely responsible for any damage to your computer or mobile device, loss of use, or loss of your user content. We do not guarantee that reddah will always work properly.</h3>
+      <br/>
+      <h3></h3>
+      <br/>
+      
+      <h2><b>limitation of liability</b></h2>
+      <br/>
+      <h3 class="em">We will not be liable for any special, consequential, indirect, incidental, punitive, reliance, or exemplary damages, whether in tort, contract, or any other legal theory, arising out of or in any way connected with this agreement or your use of or attempt to use reddah, including (but not limited to) damages for loss of profits, goodwill, use, or data. This limitation on liability shall not be affected even if we have been advised of the possibility of such damages. Some states do not allow for the exclusion of implied warranties or the limitation or exclusion of liability for incidental or consequential damages, so the above exclusions may not apply to you. You may have other rights that vary from state to state.</h3>
+      <br/>
+      <h3 class="em">You agree to release us, our affiliates, and third-party service providers, and each associated director, employee, agents, and officers, from claims, demands and damages (actual and consequential), of every kind and nature, known and unknown, disclosed or undisclosed, arising out of or in any way connected to your use of reddah.</h3>
+      <br/>
+      
+      <h2><b>governing law</b></h2>
+      <br/>
+      <h3>We want you to enjoy reddah, so if you have an issue or dispute, you agree to raise it and try to resolve it with us informally. You can contact us with feedback and concerns here or by emailing us at contact@reddah.com.</h3>
+      <br/>
+      <h3>The headings in this agreement are for convenience and do not control any of its provisions.</h3>
+      <br/>
+      
+      
+      <h2><b>severability and enforcement</b></h2>
+      <br/>
+      <h3 class="em">If any provision of this user agreement is held invalid or unenforceable, that provision will be modified to the extent necessary to render it enforceable without losing its intent. If no such modification is possible, that provision will be severed from the rest of this agreement.</h3>
+      <br/>
+      <h3>If we do not enforce any right or provision in this user agreement, that is not to be deemed a waiver of our right to do so in the future.</h3>
+      <br/>
+      
+      ]]>
+    </Text>
+  </Module>
+</ContentType>

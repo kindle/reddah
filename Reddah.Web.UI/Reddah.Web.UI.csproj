@@ -276,6 +276,7 @@
     <Compile Include="ViewModels\BrowseProductViewModel.cs" />
     <Compile Include="ViewModels\ContactSupport\CategoriesViewModel.cs" />
     <Compile Include="ViewModels\ContactSupport\ProductsViewModel.cs" />
+    <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\UserProfileArticleViewModel.cs" />
     <Compile Include="ViewModels\MenuArticleViewModel.cs">
       <SubType>Code</SubType>
@@ -384,6 +385,9 @@
     <Content Include="App_Data\wiki\Pages\Games\Mango\NavigationList.xml" />
     <Content Include="App_Data\wiki\Pages\Games\NavigationList.xml" />
     <Content Include="App_Data\wiki\Pages\Games\WindowsPhone8\NavigationList.xml" />
+    <Content Include="App_Data\wiki\Pages\Shici.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\wiki\Pages\HomePage.xml">
       <SubType>Designer</SubType>
     </Content>

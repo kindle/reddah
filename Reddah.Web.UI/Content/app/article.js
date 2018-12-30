@@ -6,25 +6,35 @@
         window.open(url, '_self');
     };
 }])
+.controller("groupCtrl", ['$scope', 'groupSvc', function ($scope, groupSvc) {
+    $scope.group = {
+        Locale: "",
+        Name: "",
+        Desc: ""
+    }
+    $scope.groupLoading = false;
+    $scope.getGroup = function (name, locale) {
+        $scope.group = {
+            Locale: locale,
+            Name: name,
+            Desc: ""
+        }
+        $scope.loading = true;
+        groupSvc.getGroup($scope.group).then(function (data) {
+            if (data.success == true) {
+                $scope.group = data.result.Group;
+            }
+            $scope.groupLoading = false;
+        },
+        function (data) {
+            $scope.groupLoading = false;
+        });
+    };
+}])
 .controller("articleCtrl", ['$scope', '$sce', 'articleSvc', function ($scope, $sce, articleSvc) {
     $scope.trustAsResourceUrl = function (url) {
         return $sce.trustAsResourceUrl(url);
     };
-    $scope.subpost = function (str, n) {
-        var r = /[^\u4e00-\u9fa5]/g;
-        if (str.replace(r, "mm").length <= n) { return str; }
-        var m = Math.floor(n / 2);
-        for (var i = m; i < str.length; i++) {
-            if (str.substr(0, i).replace(r, "mm").length >= n) {
-                return str.substr(0, i) + "...";
-            }
-        }
-        return str;
-    };
-    $scope.toTop = function () {
-        $("html,body").animate({ scrollTop: 0 }, 500);
-    }
-    
     $scope.playVideo = function (id) {
         let v = $('#video_' + id).get(0);
         if (v.paused) {
@@ -53,14 +63,18 @@
             if (data.success == true) {
                 data.result.Articles.forEach(function (article) {
                     $scope.aiArticles.push(article);
-                    if ($scope.loadedArticleIds.indexOf(article.Id)==-1)
+                    if ($scope.loadedArticleIds.indexOf(article.Id) == -1)
                         $scope.loadedArticleIds.push(article.Id);
-                });   
+                });
             }
 
             $scope.loading = false;
             $scope.isLoadingMore = false;
-            
+
+        },
+        function (data) {
+            $scope.loading = false;
+            $scope.isLoadingMore = false;
         });
     };
     $scope.isLoadingMore = false;
@@ -69,33 +83,13 @@
             $scope.getUserProfileArticles(locale, menu, sub, user, keyword);
         }
     };
-    $scope.htmlDecode = function (str) {
-        var s = "";
-        if (str.length == 0) return "";
-        s = str.replace(/&amp;/g, "&");
-        s = s.replace(/&lt;/g, "<");
-        s = s.replace(/&gt;/g, ">");
-        s = s.replace(/&nbsp;/g, " ");
-        s = s.replace(/&#39;/g, "\'");
-        s = s.replace(/&quot;/g, "\"");
-        s = s.replace(/&#183;/g, "\·");
-
-        return s;
+    $scope.viewArticle = function (locale, group, id, title) {
+        let url = `/${locale}/r/${group}/comments/${id}/${title}/`;
+        
+        window.open(url, '_blank');
     };
-    $scope.urlDecode = function (str) {
-        var s = "";
-        if (str.length == 0) return "";
-
-        s = $scope.htmlDecode(str).replace(/ /g, "-");
-        s = s.replace(/--/g, "-");
-        s = s.replace(/[^a-zA-Z0-9\-\u4e00-\u9fa5]/g, "");
-
-        return s;
-    };
-    $scope.summary = function (str, n) {
-        str = $scope.htmlDecode(str).replace(/<[^>]+>/g, "");
-        return $scope.subpost(str, n);
-    };
+}])
+.controller("rightBoxCtrl", ['$scope', 'articleSvc', function ($scope, articleSvc) {
     $scope.aiRightBoxItems = [];
     $scope.getRightBox = function (locale) {
         $scope.rightBoxModel = {
@@ -111,12 +105,9 @@
             }
 
             $scope.rightBoxLoading = false;
+        }, function (data) {
+            $scope.rightBoxLoading = false;
         });
-    };
-    $scope.viewArticle = function (locale, group, id, title) {
-        let url = `/${locale}/r/${group}/comments/${id}/${title}/`;
-        
-        window.open(url, '_blank');
     };
 }])
 .factory("articleSvc", ['$http', '$q', function ($http, $q) {
@@ -150,6 +141,24 @@
             });
             return defer.promise;
         },
+    };
+}])
+.factory("groupSvc", ['$http', '$q', function ($http, $q) {
+    return {
+        getGroup: function (data) {
+            var defer = $q.defer();
+            $http({
+                method: 'post',
+                url: '/' + data.Locale + '/AI/JsonGetGroup',
+                data: JSON.stringify(data),
+                dataType: "json"
+            }).success(function (data, status, headers, config) {
+                defer.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defer.reject(data)
+            });
+            return defer.promise;
+        }
     };
 }])
 .directive('whenScrolled', function () {

@@ -19,36 +19,14 @@ namespace Reddah.Web.UI.Controllers
         //[ABTesting(Feature.HomePageV2, "HomePageV2")]
         public ActionResult Index(string path="")
         {
-            //if (!System.IO.File.Exists(HttpContext.Server.MapPath("~/Content/" + path + ".xml")))
-            //{
-            //    return new HttpNotFoundResult();
-            //    // ooopos page
-            //}
-
-            //var PresentationTemplate = GetContentType(path);
-
             var presentationView = Request.Browser.IsMobileDevice ?
                 "~/Views/Home/HomePageV1.mobile.cshtml" : "~/Views/Home/HomePageV1.cshtml";
             
-
             return View(presentationView, new HomePageViewModel(path));
         }
 
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-
         public ActionResult HomePageV2(string path = "")
         {
-            //if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
-            //{
-            //    return RedirectToLocal(returnUrl);
-            //}
-
-            //// If we got this far, something failed, redisplay form
-            //ModelState.AddModelError("", "The user name or password provided is incorrect.");
-            //return View(model);
-
             ViewBag.Message = "Agile and optimize your test experience of CodedUI projects.";
 
             var presentationView = "~/Views/Home/HomePageV2.cshtml";

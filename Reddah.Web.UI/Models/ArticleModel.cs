@@ -79,4 +79,11 @@ namespace Reddah.Web.UI.Models
         
         //public Dictionary<string, int> habits;
     }
+
+    public class JsonGroup
+    {
+        public string Name;
+        public string Locale;
+        public string Desc;
+    }
 }

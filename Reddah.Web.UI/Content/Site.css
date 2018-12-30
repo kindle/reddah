@@ -1,4 +1,4 @@
-﻿#articleContent u {
+﻿#articleContent u, #articleAside u {
     border-bottom: 1px solid #ff3030 !important;
     text-decoration: none !important;
 }
@@ -1538,7 +1538,7 @@ div.AssistancePopupHeader
  /*contact us end*/
 
  /* Change locale shared page*/
- .changeLocaleBlock 
+.changeLocaleBlock 
 {
     margin: 28px 0px 0px 0px;
     padding: 0px;

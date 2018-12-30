@@ -30,7 +30,7 @@
                 new { controller = "AI", action = "UserProfile", menu = "promoted" }
             );
             routes.MapLocalizedRoute("Hot", "{locale}/hot",
-                new { controller = "AI", action = "UserProfile", path = "hot" }
+                new { controller = "AI", action = "UserProfile", menu = "hot" }
             );
             
 
@@ -48,6 +48,10 @@
             );
             routes.MapLocalizedRoute("Support", "{locale}/support",
                 new { controller = "Support", action = "Index" }
+            );
+            //zh-cn
+            routes.MapLocalizedRoute("Shici", "{locale}/shici",
+                new { controller = "Support", action = "Index", path="shici" }
             );
 
 
@@ -68,7 +72,10 @@
                 "{locale}/AI/JsonRightBoxItems",
                 new { controller = "AI", action = "JsonRightBoxItems" }
             );
-
+            routes.MapLocalizedRoute(
+                "JsonGroup", "{locale}/AI/JsonGetGroup",
+                new { controller = "AI", action = "JsonGetGroup" }
+            );
 
             /*routes.MapLocalizedRoute("SubReddah", "{locale}/r/{sub}",
                 new { controller = "Articles", action = "SubReddah" }

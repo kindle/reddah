@@ -87,7 +87,7 @@
             <div>{{summary(article.Content,120)}}</div>
             <div class="listInfo">
                 <span ng-repeat="group in article.GroupName.split(',')">
-                    <a href="/@locale/r/{{group}}"><u>{{group}}</u></a> 
+                    <a href="/@locale/r/{{group}}"><u>{{group}}</u></a>
                 </span>
                 submitted {{article.CreatedOn}} ago by <a href="/@locale/user/{{article.UserName}}">{{article.UserName}}</a>
             </div>
@@ -96,7 +96,15 @@
         <div class="postClear"></div>
         <div class="articleLoading"><img src="/content/images/loading_50x50.gif" ng-show="loading==true" /></div>
     </div>
-    <div class="ai-right" ng-init="getRightBox('@locale')">
+    
+    @*foreach (string g in sub.ToString().Trim().Split(','))
+    {
+        <div ng-controller="groupCtrl" data-ng-init="getGroup('@g','@locale')">
+            <p>{{group.Desc}}</p>
+        </div>
+    }*@
+    
+    <div class="ai-right" ng-controller="rightBoxCtrl" ng-init="getRightBox('@locale')">
         <div class="post" ng-repeat="item in aiRightBoxItems">
             <div class="listImage">
                 <div class="listImageWrapper">

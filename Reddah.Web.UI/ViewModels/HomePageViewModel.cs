@@ -15,16 +15,22 @@
         public List<ArticlePreview> Announcements { get; set; }
         public List<ArticlePreview> RightBoxModules { get; set; }
         public List<SectionPreview> HomePageContents { get; set; }
+        public List<ArticlePreview> GroupContents { get; set; }
 
-        private const string HomePageXmlPath = "~/App_Data/wiki/Pages/HomePage.xml";
+        private string HomePageXmlPath = "~/App_Data/wiki/Pages/HomePage.xml";
 
         public HomePageViewModel(string path="")
         {
+            if(!string.IsNullOrWhiteSpace(path))
+                HomePageXmlPath = "~/App_Data/wiki/Pages/Shici.xml";
+
             PageTitle = GetContentItems("/Root/PageDetails/Title");
             AnnouncementsTitle = GetContentItems("/Root/Announcements/Title");
             Announcements = GetArticlePreviews("/Root/Announcements/AnnouncementsLinkList/AnnouncementsLink");
             HomePageContents = GetSectionPreviews("/Root/HomePageModularLeftContent/HomePageContent");
             RightBoxModules = GetArticlePreviews("/Root/HomePageModularRightContent/HomePageRightBoxModule");
+
+            GroupContents = GetGroupArticlePreviews("/Root/GroupContents/GroupContent");
         }
 
         /// <summary>
@@ -36,7 +42,7 @@
         {
             var doc = XDocument.Load(HttpContext.Current.Server.MapPath(HomePageXmlPath));
             XElement node = doc.Descendants().FirstOrDefault(e => e.Path() == path);
-            return node.Value;
+            return node==null ? "" : node.Value;
         }
 
         private List<ArticlePreview> GetArticlePreviews(string path)
@@ -52,6 +58,25 @@
                 ap.Description = node.SelectSingleNode("Description").InnerText;
                 ap.ImageUrl = node.SelectSingleNode("ImageUrl").InnerText;
                 ap.ArticleUrl = node.SelectSingleNode("ArticleUrl").InnerText;
+
+                apList.Add(ap);
+            }
+
+            return apList;
+        }
+
+        private List<ArticlePreview> GetGroupArticlePreviews(string path)
+        {
+            var doc = new XmlDocument();
+            doc.Load(HttpContext.Current.Server.MapPath(HomePageXmlPath));
+
+            var apList = new List<ArticlePreview>();
+            foreach (XmlNode node in doc.SelectNodes(path))
+            {
+                var ap = new ArticlePreview();
+                ap.Title = node.SelectSingleNode("Title").InnerText;
+                ap.Description = node.SelectSingleNode("Description").InnerText;
+                ap.ArticleUrl = node.SelectSingleNode("Url").InnerText;
 
                 apList.Add(ap);
             }

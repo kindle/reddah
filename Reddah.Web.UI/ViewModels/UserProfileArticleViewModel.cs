@@ -58,9 +58,20 @@
                 }
                 else if (userProfileModel.Menu.Equals("bysub", System.StringComparison.InvariantCultureIgnoreCase))
                 {
+                    //max support 5
+                    var ga = userProfileModel.Sub.Split(',');
+                    var g1 = ga.Length > 0 ? ga[0] : "";
+                    var g2 = ga.Length > 1 ? ga[1] : "";
+                    var g3 = ga.Length > 2 ? ga[2] : "";
+                    var g4 = ga.Length > 3 ? ga[3] : "";
+                    var g5 = ga.Length > 4 ? ga[4] : "";
                     query = (from b in db.Articles
                              where
-                                b.GroupName.Contains(userProfileModel.Sub) &&
+                                b.GroupName.Contains(g1) &&
+                                b.GroupName.Contains(g2) &&
+                                b.GroupName.Contains(g3) &&
+                                b.GroupName.Contains(g4) &&
+                                b.GroupName.Contains(g5) &&
                                 b.Locale.StartsWith(locale) &&
                                 !(loaded).Contains(b.Id)
                              orderby b.Id descending
