@@ -22,7 +22,7 @@
         protected void Application_Start()
         {
             CaptchaUtils.CaptchaManager.StorageProvider = new CookieStorageProvider();
-            RegisterComponents();
+            //RegisterComponents();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

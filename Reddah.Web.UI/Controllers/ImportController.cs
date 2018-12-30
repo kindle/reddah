@@ -57,15 +57,12 @@
             {
                 ci_data(i);
             }*/
-
-            /*for (int i = 135000; i <= 254000; i += 1000)
+            //254000
+            for (int i = 210000; i <= 254000; i += 1000)
             {
                 song_data(i);
-            }*/
+            }
 
-            song_data(140000);
-            song_data(141000);
-            song_data(142000);
         }
 
 
