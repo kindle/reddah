@@ -3,6 +3,7 @@
 @using Reddah.Web.UI.Utility
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
+    ViewBag.ReddahPageTitle = Helpers.HtmlDecode(Model.Article.Title);
 }
 <link href="/Content/Comment.css" rel="stylesheet" />
 <link href="/Content/Post.css" rel="stylesheet" />
