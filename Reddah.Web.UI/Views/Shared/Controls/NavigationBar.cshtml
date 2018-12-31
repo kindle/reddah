@@ -3,17 +3,12 @@
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
 }
-<div>
+<div style="width: 1170px; margin:0 auto;">
     <div class="SearchArea" ng-controller="searchCtrl">
-        <input id="SearchTextBox" type="text" name="q" class="TextBox" data-ng-model="keyword" url="" maxlength="200" autocomplete="off" />
-        <input id="SearchButton" type="button" class="SubmitButton" value="" title="Search" ng-click="search('@locale', keyword)"/>
+        <input id="SearchTextBox" type="text" name="q" class="TextBox" data-ng-model="keyword" url="" ng-keyup="searchOnEnter($event,'@locale')" maxlength="200" autocomplete="off" />
+        <input id="SearchButton" type="button" class="SubmitButton" value="" title="Search" ng-click="search('@locale')"/>
     </div>
     <ul class="NavigationElements">
-        <!--<li>
-        <a href="/" class="logo_container">
-            <img alt="reddah.com" width="65" height="65" src="/content/images/logo.png" class="rd_logo">
-        </a>
-    </li>-->
         <li>
             <a href="/@locale/new">@Resources.Menu_New</a>
         </li>

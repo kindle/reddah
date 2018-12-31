@@ -16,6 +16,9 @@
             <td>@Html.PasswordFor(m => m.Password, new { @class = "loginPassword", @placeholder = @Resources.Login_Password, data_ng_model = "loginModel.Password" })</td>
         </tr>
         <tr>
+            <td></td>
+        </tr>
+        <tr>
             <td colspan="2">
                 <div class="loginRememberMe">
                     @Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkbox", data_ng_model = "loginModel.RememberMe" })

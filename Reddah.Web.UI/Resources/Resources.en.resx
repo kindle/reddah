@@ -279,4 +279,46 @@
   <data name="Msg_Deleted" xml:space="preserve">
     <value>The content was deleted</value>
   </data>
+  <data name="Submit_PageTitle_New" xml:space="preserve">
+    <value>Submit to Reddah</value>
+  </data>
+  <data name="Submit_PageTitle_Edit" xml:space="preserve">
+    <value>Edit on Reddah</value>
+  </data>
+  <data name="Submit_PageDesc" xml:space="preserve">
+    <value>You are submitting a link. The key to a successful submission is interesting content and a descriptive title.</value>
+  </data>
+  <data name="Submit_Title" xml:space="preserve">
+    <value>Input the title</value>
+  </data>
+  <data name="Submit_Group" xml:space="preserve">
+    <value>Input the group, split by ,</value>
+  </data>
+  <data name="Submit_Abstract" xml:space="preserve">
+    <value>Input the abstract</value>
+  </data>
+  <data name="Submit_Captura_New" xml:space="preserve">
+    <value>Click to get a new one</value>
+  </data>
+  <data name="Submit_Captura_Robot" xml:space="preserve">
+    <value>Are you a robot?</value>
+  </data>
+  <data name="Submit_Button_Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Submit_Button_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Submit_Button_Login_New" xml:space="preserve">
+    <value>Please Login to Submit</value>
+  </data>
+  <data name="Submit_Button_Login_Edit" xml:space="preserve">
+    <value>Please Login to Edit</value>
+  </data>
+  <data name="Error_No_More_Result" xml:space="preserve">
+    <value>No more search result!</value>
+  </data>
+  <data name="Error_Server_Error" xml:space="preserve">
+    <value>Server error, please click here to refresh the page</value>
+  </data>
 </root>

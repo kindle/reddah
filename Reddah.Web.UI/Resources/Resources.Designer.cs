@@ -514,5 +514,116 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
+        public static string Submit_PageTitle_New
+        {
+            get
+            {
+                return ResourceManager.GetString("Submit_PageTitle_New", resourceCulture);
+            }
+        }
+
+        public static string Submit_PageTitle_Edit
+        {
+            get
+            {
+                return ResourceManager.GetString("Submit_PageTitle_Edit", resourceCulture);
+            }
+        }
+
+        public static string Submit_PageDesc
+        {
+            get
+            {
+                return ResourceManager.GetString("Submit_PageDesc", resourceCulture);
+            }
+        }
+
+        public static string Submit_Title
+        {
+            get
+            {
+                return ResourceManager.GetString("Submit_Title", resourceCulture);
+            }
+        }
+
+        public static string Submit_Group
+        {
+            get
+            {
+                return ResourceManager.GetString("Submit_Group", resourceCulture);
+            }
+        }
+
+        public static string Submit_Abstract
+        {
+            get
+            {
+                return ResourceManager.GetString("Submit_Abstract", resourceCulture);
+            }
+        }
+
+        public static string Submit_Captura_New
+        {
+            get
+            {
+                return ResourceManager.GetString("Submit_Captura_New", resourceCulture);
+            }
+        }
+
+        public static string Submit_Captura_Robot
+        {
+            get
+            {
+                return ResourceManager.GetString("Submit_Captura_Robot", resourceCulture);
+            }
+        }
+
+        public static string Submit_Button_Submit
+        {
+            get
+            {
+                return ResourceManager.GetString("Submit_Button_Submit", resourceCulture);
+            }
+        }
+
+        public static string Submit_Button_Cancel
+        {
+            get
+            {
+                return ResourceManager.GetString("Submit_Button_Cancel", resourceCulture);
+            }
+        }
+
+        public static string Submit_Button_Login_New
+        {
+            get
+            {
+                return ResourceManager.GetString("Submit_Button_Login_New", resourceCulture);
+            }
+        }
+
+        public static string Submit_Button_Login_Edit
+        {
+            get
+            {
+                return ResourceManager.GetString("Submit_Button_Login_Edit", resourceCulture);
+            }
+        }
+
+        public static string Error_No_More_Result
+        {
+            get
+            {
+                return ResourceManager.GetString("Error_No_More_Result", resourceCulture);
+            }
+        }
+
+        public static string Error_Server_Error
+        {
+            get
+            {
+                return ResourceManager.GetString("Error_Server_Error", resourceCulture);
+            }
+        }
     }
 }

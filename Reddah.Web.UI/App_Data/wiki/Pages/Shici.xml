@@ -9,7 +9,7 @@
       <Description>
         诗经,李白,杜甫,白居易,岑参,王维,孟浩然,贺知章,王勃,李商隐,杜牧,李贺,柳宗元,
         李清照,黄庭坚,苏轼,王安石,欧阳修,梅尧臣,文天祥,杨万里,范成大,陆游,范仲淹,辛弃疾</Description>
-      <Url>/r</Url>
+      <Url>r</Url>
     </GroupContent>
     <GroupContent>
       <Title>诗词分类</Title>
@@ -19,7 +19,7 @@
       月亮,马,思乡,思念,哲理,唐诗三百首,怀古,古诗十九首,羁旅,宋词三百首,
       小学,初中,高中,婉约,豪放,老师,母亲,惜时,读书,咏史诗,怀才不遇,寓理,忧国忧民,人生,
       悲愤,孤独,讽刺,赞美,劳动,壮志难酬</Description>
-      <Url>/r</Url>
+      <Url>r</Url>
     </GroupContent>
   </GroupContents>
 </Root>

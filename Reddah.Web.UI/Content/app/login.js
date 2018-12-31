@@ -1,5 +1,11 @@
 ﻿angular.module("reddahApp")
 .controller("loginCtrl", ['$scope', 'loginSvc', function ($scope, loginSvc) {
+    $scope.loginOnEnter = function (e) {
+        var keycode = window.event ? e.keyCode : e.which;
+        if (keycode == 13) {
+            $scope.login();
+        }
+    };
     $scope.loadingLogin = false;
     $scope.loginModel = {
         UserName: "",

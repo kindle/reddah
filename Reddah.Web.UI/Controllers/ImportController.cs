@@ -50,15 +50,12 @@
             //shijing_data();
             //lunyu_data();
 
-
-            //song_data(126000);
-            //song_data(127000);
             /*for (int i = 0; i <= 21000; i += 1000)
             {
                 ci_data(i);
             }*/
             //254000
-            for (int i = 210000; i <= 254000; i += 1000)
+            for (int i = 217000; i <= 254000; i += 1000)
             {
                 song_data(i);
             }

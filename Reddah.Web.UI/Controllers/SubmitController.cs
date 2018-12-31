@@ -25,7 +25,7 @@ namespace Reddah.Web.UI.Controllers
                 TempData["Message"] = "Message: captcha is valid.";
                 using (var context = new reddahEntities1())
                 {
-                    string longArticleGroupNames = Helpers.HtmlEncode(article.GroupName.Trim());
+                    string longArticleGroupNames = Helpers.HtmlEncode(article.GroupName.Replace(" ", "").Replace("，",","));
                     String[] articleGroupNames = longArticleGroupNames.Split(',');
                     foreach(string articleGroupName in articleGroupNames)
                     {
@@ -101,7 +101,7 @@ namespace Reddah.Web.UI.Controllers
 
                     if (User.Identity.Name.Equals(existingArticle.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.EditPost))
                     {
-                        string longArticleGroupNames = Helpers.HtmlEncode(article.GroupName.Trim());
+                        string longArticleGroupNames = Helpers.HtmlEncode(article.GroupName.Replace(" ", "").Replace("，", ","));
                         String[] articleGroupNames = longArticleGroupNames.Split(',');
                         foreach (string articleGroupName in articleGroupNames)
                         {

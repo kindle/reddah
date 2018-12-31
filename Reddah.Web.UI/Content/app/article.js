@@ -5,6 +5,12 @@
         let url = `/${locale}/search/${$scope.keyword}/`;
         window.open(url, '_self');
     };
+    $scope.searchOnEnter = function (e, locale) {
+        var keycode = window.event ? e.keyCode : e.which;
+        if (keycode == 13) {
+            $scope.search(locale);
+        }
+    };
 }])
 .controller("groupCtrl", ['$scope', 'groupSvc', function ($scope, groupSvc) {
     $scope.group = {
@@ -61,6 +67,8 @@
 
         articleSvc.getArticles($scope.UserProfileModel).then(function (data) {
             if (data.success == true) {
+                if (data.result.Articles.length==0)
+                    $scope.noMoreResult = true;
                 data.result.Articles.forEach(function (article) {
                     $scope.aiArticles.push(article);
                     if ($scope.loadedArticleIds.indexOf(article.Id) == -1)
@@ -75,6 +83,7 @@
         function (data) {
             $scope.loading = false;
             $scope.isLoadingMore = false;
+            $scope.serverError = true;
         });
     };
     $scope.isLoadingMore = false;

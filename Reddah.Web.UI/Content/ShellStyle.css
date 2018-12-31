@@ -472,7 +472,7 @@ body div#BodyHeader div#ShellNavigationBar div.SearchArea input[type=button]
 body div#BodyHeader div#ShellNavigationBar div.SearchArea input.TextBox
 {
     margin: 0px;
-    width: 160px;
+    width: 170px;
     float: left;
     color: #333132; /* Slate gray */
     font-size: 12px;

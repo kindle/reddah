@@ -140,7 +140,7 @@
                             if (!string.IsNullOrEmpty(item))
                             {
                                 <div>
-                                    <a href="/@locale/@group.ArticleUrl/@item">@Html.Raw(item)</a>
+                                    <a href="/@locale/@group.ArticleUrl/@item.Trim()">@Html.Raw(item)</a>
                                 </div>
                             }
                         }

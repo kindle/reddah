@@ -1,9 +1,8 @@
 ﻿@using System.Globalization
+@using Reddah.Web.UI.Resources
 @using CaptchaMvc.HtmlHelpers
-@using Reddah.Web.UI.Utility
 @model Reddah.Web.UI.Article
 @{
-    ViewBag.Title = "Submit to Reddah";
     var locale = CultureInfo.CurrentUICulture.Name;
 }
 <link href="/Content/Comment.css" rel="stylesheet" />
@@ -11,14 +10,14 @@
 <script src="~/Content/app/ckeditor/ckeditor.js"></script>
 <div class="rightBox">
     <div class="subreddahbox">
-        <h5>Submit to Reddah</h5>
+        <h5>@Resources.Submit_PageTitle_New</h5>
         <h3>Rules</h3>
         <ol>
             <li>You also agree to follow the Reddah Content Policy. These guidelines are intended to keep people safe, protect kids, keep reddah running, and to encourage personal responsibility for what you do on reddah.</li>
             <li>You may not post any graphics, text, photographs, images, video, audio or other material that we deem to be junk or spam. Cluttering reddah with this sort of content reduces the quality of the reddah experience for others.</li>
             <li>You agree not to interrupt the serving of reddah, introduce malicious code onto reddah, make it difficult for anyone else to use reddah due to your actions, attempt to manipulate votes or reddah’s systems, or assist anyone in misusing reddah in any way. It takes a lot of work to maintain reddah. Be cool.</li>
         </ol>
-        <br/>
+        <br />
     </div>
 </div>
 <div class="articleContent">
@@ -26,32 +25,31 @@
         <tr>
             <td class="HomePageModularLeftContent">
                 <hgroup class="title">
-                    <h1>@ViewBag.Title</h1>
+                    <h1>@Resources.Submit_PageTitle_New</h1>
                 </hgroup>
                 @if (Request.IsAuthenticated)
                 {
                     <section id="submitForm">
-                        <h2>You are submitting a link. The key to a successful submission is interesting content and a descriptive title.</h2>
+                        <h2>@Resources.Submit_PageDesc</h2>
                         @using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true)
 
                             <fieldset>
-                                <legend>Log in Form</legend>
                                 <ol>
                                     <li>
-                                        @Html.TextAreaFor(m => m.Title, new { @required = "required", @maxlength="500", @placeholder="title" })
+                                        @Html.TextAreaFor(m => m.Title, new { @required = "required", @maxlength = "500", @placeholder = @Resources.Submit_Title })
                                         <br />
                                         @Html.ValidationMessageFor(m => m.Title)
                                     </li>
                                     <li>
-                                        @Html.TextAreaFor(m => m.GroupName, new { @required = "required", @maxlength = "200", @placeholder="group" })
+                                        @Html.TextAreaFor(m => m.GroupName, new { @required = "required", @maxlength = "200", @placeholder = @Resources.Submit_Group })
                                         <br />
                                         @Html.ValidationMessageFor(m => m.GroupName)
                                     </li>
                                     <li>
-                                        @Html.TextAreaFor(m => m.Content, new { @required = "required", @placeholder="content" })
+                                        @Html.TextAreaFor(m => m.Content, new { @required = "required", @placeholder = "content" })
                                         <br />
                                         @Html.ValidationMessageFor(m => m.Content)
                                         <script>
@@ -62,28 +60,25 @@
                                         </script>
                                     </li>
                                     <li>
-                                        @Html.TextAreaFor(m => m.Abstract, new { @required = "required", @maxlength = "200", @placeholder="abstract" })
+                                        @Html.TextAreaFor(m => m.Abstract, new { @required = "required", @maxlength = "200", @placeholder = @Resources.Submit_Abstract })
                                         <br />
                                         @Html.ValidationMessageFor(m => m.Content)
                                     </li>
                                 </ol>
-                                @*@Html.Captcha("Click to get a new one", "", 5, "are you a robot?", true)*@
-                                @Html.MathCaptcha("Click to get a new one", "", "are you a robot?", true)
-                                <br/>
-                                <input type="submit" value="Submit" />
-                                <button onclick="javascript:history.back(-1);">Cancel</button>
+                                @Html.MathCaptcha(@Resources.Submit_Captura_New, "", @Resources.Submit_Captura_Robot, true)
+                                <br />
+                                <input type="submit" value="@Resources.Submit_Button_Submit" />
+                                <button onclick="javascript:history.back(-1);">@Resources.Submit_Button_Cancel</button>
                             </fieldset>
                         }
                     </section>
                 }
                 else
                 {
-                    <h2>Please Login to Submit</h2>
+                    <h2>@Resources.Submit_Button_Login_New</h2>
                 }
             </td>
-            <td class="HomePageModularRightContent">
-            
-            </td>
+            <td class="HomePageModularRightContent"></td>
         </tr>
     </table>
 </div>
