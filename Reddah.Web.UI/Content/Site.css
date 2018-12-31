@@ -6,15 +6,17 @@
     border-bottom: 1px solid #ff3030 !important;
     text-decoration: none !important;
 }
+
 video {
     width: 100%;
 }
 .container {
     width: 100%;
-    margin-top: 0px;
+    margin-top: 0px;   
 }
 .bodyContainer {
-    padding:20px;
+    padding: 0px;
+    /*padding: 65px;*/
 }
 
 html {
@@ -24,6 +26,11 @@ html {
 }
 
 body {
+    /*background-color: #f4ede3;*/
+    /*background-image: url('/content/images/skin/MountainInkTopShortGrad.jpg');
+    background-position: top center;
+    background-repeat: no-repeat;*/
+
     border-top: solid 0px #000;
     color: #636468;
     font-size: 14px;

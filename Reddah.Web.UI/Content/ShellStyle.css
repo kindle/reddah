@@ -624,7 +624,7 @@ div#BodyContent
 body div#BodyFooter
 {
     clear: both;
-    margin-top: 40px;
+    margin-top: 0;
     width:100%;
 }
 

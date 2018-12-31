@@ -1,9 +1,25 @@
 ﻿@using System.Globalization
+@using Reddah.Web.UI.Utility
 @{
-    ViewBag.Title = "Home Page v1";
     var locale = CultureInfo.CurrentUICulture.Name;
 }
 <style>
+
+    body {
+        /*background-color: #f4ede3;*/
+        background-image: url('/content/images/skin/MountainInkTopShortGrad.jpg');
+        background-position: top center;
+        background-repeat: no-repeat;
+        border-top: solid 0px #000;
+        color: #636468;
+        font-size: 14px;
+        font-family: "Segoe UI", Arial, Sans-Serif;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        word-wrap: break-word;
+    }
+
     .ai-container {
         width: 1170px;
         margin: 0 auto;
@@ -50,19 +66,31 @@
         border-radius: 2px;
         cursor: pointer;
     }
-    #GroupList{
+
+    #GroupList {
         display: flex;
         margin: 30px;
-        flex-wrap:wrap;
+        flex-wrap: wrap;
     }
-    #GroupList > div{
+
+    #GroupList > div {
         width: 150px;
         height: 40px;
     }
-    #GroupList > div >a  {
+
+    #GroupList > div > a {
         font-size: larger;
-        /**font-family:**/
+        color: black;
     }
+
+    #ai-right .listInfo a {
+        color: darkgreen;
+    }
+
+    #ai-right .post {
+        margin-bottom: 20px;
+    }
+
 </style>
 
 <link href="/Content/Post.css" rel="stylesheet" />
@@ -128,11 +156,12 @@
         }
 
         <!--group contents-->
+        @{ var h = 0; }
         @foreach (var group in Model.GroupContents)
         {
             <div class="HomePageContent">
                 <div class="HomePageContentModuleLiner"></div>
-                <h2 class="HomePageContent">@Html.Raw(group.Title)</h2>
+                <h2 class="HomePageContent" style="color:@Helpers.GetColor(@h);">@Html.Raw(group.Title)</h2>
                 <div class="HomePageContentLinkList">
                     <div id="GroupList">
                         @foreach (var item in group.Description.Split(','))
@@ -140,22 +169,24 @@
                             if (!string.IsNullOrEmpty(item))
                             {
                                 <div>
-                                    <a href="/@locale/@group.ArticleUrl/@item.Trim()">@Html.Raw(item)</a>
+                                    <a style="color:@Helpers.GetColor(@h);" href="/@locale/@group.ArticleUrl/@item.Trim()">@Html.Raw(item)</a>
                                 </div>
                             }
                         }
                     </div>
                 </div>
             </div>
+            h++;
         }
     </div>
-    <div class="ai-right" ng-controller="rightBoxCtrl" ng-init="getRightBox('@locale')">
+    <div class="ai-right" id="ai-right" ng-controller="rightBoxCtrl" ng-init="getRightBox('@locale')">
         <div class="post" ng-repeat="item in aiRightBoxItems">
             <div class="listImage">
                 <div class="listImageWrapper">
                     <img class="BrowsePreviewImage" width="193" ng-attr-src="{{item.ImageUrl}}" alt="picture not found">
                 </div>
             </div>
+            <div class="postClear"></div>
             <div class="listInfo">
                 <h2><a href="/@locale/{{item.ArticleUrl}}">{{urlDecode(item.Title)}}</a></h2>
                 <div>{{htmlDecode(item.Description)}}</div>

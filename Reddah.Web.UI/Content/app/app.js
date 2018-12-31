@@ -24,7 +24,8 @@
         s = s.replace(/&#39;/g, "\'");
         s = s.replace(/&quot;/g, "\"");
         s = s.replace(/&#183;/g, "\·");
-
+        s = s.replace(/&middot;/g, "\·");
+        
         return s;
     };
     $scope.urlDecode = function (str) {

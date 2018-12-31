@@ -45,6 +45,10 @@
         {
             return flag ? "flex" : "";
         }
+        public static string GetColor(int n)
+        {
+            return n == 0 ? "black" : "darkgreen";
+        }
 
         public static string RemoveLocaleFromPath(string originalPath)
         {

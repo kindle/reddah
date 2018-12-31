@@ -432,7 +432,10 @@
     <Content Include="Content\Images\contact_us.png" />
     <Content Include="Content\Images\forum.png" />
     <Content Include="Content\Images\like-dislike.png" />
+    <Content Include="Content\Images\skin\MountainInkTopShortPink.jpg" />
+    <Content Include="Content\Images\skin\MountainInkTopShortGrad.jpg" />
     <Content Include="Content\Images\noimage.jpg" />
+    <Content Include="Content\Images\skin\MountainInkTop.jpg" />
     <Content Include="Content\Images\wiki\pdf_icon25x25.png" />
     <Content Include="Content\ng-tags-input.css" />
     <Content Include="Content\Site.mobile.css" />
