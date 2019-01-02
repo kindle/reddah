@@ -11,9 +11,16 @@
     using System.Web.Security;
     using System.Web.UI;
 
+    /// <summary>
+    /// Web Api controller
+    /// </summary>
     public class WebApiController : ApiController
     {
         
+        /// <summary>
+        /// Get Articles
+        /// </summary>
+        /// <returns>list of posts</returns>
         [HttpGet]
         public IEnumerable<ArticlePreview> GetArticles()
         {

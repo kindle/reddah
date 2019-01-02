@@ -20,7 +20,7 @@ namespace Reddah.Web.Core
 
         public void Init(HttpApplication context)
         {
-            context.PreSendRequestContent += ModifyHeaders;
+            //context.PreSendRequestContent += ModifyHeaders;
         }
 
         private void ModifyHeaders(object sender, EventArgs e)

@@ -342,14 +342,5 @@
                 new { controller = "Articles", action = "GetSub" }
             );
         }
-
-        public static void RegisterWebApiRoutes(HttpConfiguration config)
-        {
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "{locale}/api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-        }
     }
 } 
