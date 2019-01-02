@@ -21,7 +21,8 @@
             const int pageCount = 10;
             var apList = new List<ArticlePreview>();
 
-            string locale = CultureInfo.CurrentUICulture.Name.ToLowerInvariant().Split('-')[0];
+            //string locale = CultureInfo.CurrentUICulture.Name.ToLowerInvariant().Split('-')[0];
+            string locale = userProfileModel.Locale.ToLowerInvariant().Split('-')[0];
 
             using (var db = new reddahEntities1())
             {

@@ -1,29 +1,33 @@
 ﻿namespace Reddah.Web.UI.Controllers
 {
-    using System;
-    using System.Linq;
-    using System.Web.Mvc;
-
-    using Reddah.Web.UI.ViewModels;
     using Reddah.Web.UI.Filters;
     using Reddah.Web.UI.Models;
-    using System.Threading;
-    using System.Web;
-    using Reddah.Web.UI.Utility;
+    using Reddah.Web.UI.ViewModels;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Web.Http;
+    using System.Web.Script.Serialization;
+    using System.Web.Security;
+    using System.Web.UI;
 
-    public class WebApiController : Controller
+    public class WebApiController : ApiController
     {
-        //[Authorize]
+        
         [HttpGet]
-        public String test()
+        public IEnumerable<ArticlePreview> GetArticles()
         {
-            return "hello";
-        }
+            IEnumerable<ArticlePreview> result = null;
 
-        [HttpGet]
-        public String article()
-        {
-            return "articles";
+            UserProfileModel userProfileModel = new UserProfileModel();
+            userProfileModel.LoadedIds = new int[] { };
+            userProfileModel.Locale = "zh-cn";
+            userProfileModel.Menu = "new";
+
+            result = new UserProfileArticleViewModel(userProfileModel).Articles;
+            
+            return result;
+            
         }
     }
 }

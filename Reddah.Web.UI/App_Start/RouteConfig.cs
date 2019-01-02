@@ -1,5 +1,6 @@
 ﻿namespace Reddah.Web.UI
 {
+    using System.Web.Http;
     using System.Web.Mvc;
     using System.Web.Routing;
     using Reddah.Web.UI.Routing;
@@ -336,11 +337,19 @@
             );
 
             routes.MapLocalizedRoute(
-                "webapi",
+                "GetRandomSub",
                 "{locale}/api",
                 new { controller = "Articles", action = "GetSub" }
             );
         }
+
+        public static void RegisterWebApiRoutes(HttpConfiguration config)
+        {
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "{locale}/api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+        }
     }
-}
- 
+} 
