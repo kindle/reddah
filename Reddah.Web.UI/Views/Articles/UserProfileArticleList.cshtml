@@ -102,9 +102,9 @@
             <div class="listInfo"><a href="/@locale/r/{{article.GroupName}}/comments/{{article.Id}}/{{urlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments</a> <!--share save hide report--></div>
         </div>
         <div class="postClear"></div>
+        <div ng-init="noMoreResult=false" ng-show="noMoreResult"><h3 class="em_error">@Resources.Error_No_More_Result</h3></div>
+        <div ng-init="serverError=false" ng-show="serverError"><h3 class="em_error"><span onclick="javascript: location.reload();">@Resources.Error_Server_Error</span></h3></div>
         <div class="articleLoading"><img src="/content/images/loading_50x50.gif" ng-show="loading==true" /></div>
-        <div ng-init="noMoreResult=false" ng-show="noMoreResult"><h3 class="em">@Resources.Error_No_More_Result</h3></div>
-        <div ng-init="serverError=false" ng-show="serverError"><h3 class="em"><span onclick="javascript: location.reload();">@Resources.Error_Server_Error</span></h3></div>
     </div>
     
     @*foreach (string g in sub.ToString().Trim().Split(','))
