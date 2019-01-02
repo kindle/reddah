@@ -75,7 +75,7 @@ namespace Reddah.Web.UI.Controllers
                 article.Content = Helpers.HtmlDecode(article.Content);
             }
 
-            if (!User.Identity.Name.Equals(article.UserName))
+            if (!(User.Identity.Name.Equals(article.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.EditPost)))
             {
                 ViewBag.Error = "you can't edit other people's post!";
             }

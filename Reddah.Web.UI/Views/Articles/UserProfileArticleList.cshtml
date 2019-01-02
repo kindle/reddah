@@ -92,14 +92,15 @@
                 </div>
                 <h2 ng-if="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
             </div>
-            <div>{{summary(article.Content,120)}}</div>
-            <div class="listInfo">
+            <div style="margin-top: 5px;">{{summary(article.Content,120)}}</div>
+            <div class="postClear" ng-if="article.ImageUrls.length==3"></div>
+            <div class="listInfo" style="margin-top: 5px;">
+                <a href="/@locale/r/{{article.GroupName}}/comments/{{article.Id}}/{{urlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments </a> <!--share save hide report-->
                 <span ng-repeat="group in article.GroupName.split(',')">
                     <a href="/@locale/r/{{group}}"><u>{{group}}</u></a>
                 </span>
-                submitted {{article.CreatedOn}} ago by <a href="/@locale/user/{{article.UserName}}">{{article.UserName}}</a>
+                submitted {{article.CreatedOn}} by <a href="/@locale/user/{{article.UserName}}">{{article.UserName}}</a>
             </div>
-            <div class="listInfo"><a href="/@locale/r/{{article.GroupName}}/comments/{{article.Id}}/{{urlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments</a> <!--share save hide report--></div>
         </div>
         <div class="postClear"></div>
         <div ng-init="noMoreResult=false" ng-show="noMoreResult"><h3 class="em_error">@Resources.Error_No_More_Result</h3></div>
