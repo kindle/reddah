@@ -151,30 +151,30 @@
                 int years = (span.Days / 365);
                 if (span.Days % 365 != 0)
                     years += 1;
-                return String.Format("{0} {1} ago",
-                years, years == 1 ? "year" : "years");
+                return String.Format(Resources.Resources.List_Time_Format,
+                years, years == 1 ? Resources.Resources.List_Time_Year : Resources.Resources.List_Time_Years);
             }
             if (span.Days > 30)
             {
                 int months = (span.Days / 30);
                 if (span.Days % 31 != 0)
                     months += 1;
-                return String.Format("{0} {1} ago",
-                months, months == 1 ? "month" : "months");
+                return String.Format(Resources.Resources.List_Time_Format,
+                months, months == 1 ? Resources.Resources.List_Time_Month : Resources.Resources.List_Time_Months);
             }
             if (span.Days > 0)
-                return String.Format("{0} {1} ago",
-                span.Days, span.Days == 1 ? "day" : "days");
+                return String.Format(Resources.Resources.List_Time_Format,
+                span.Days, span.Days == 1 ? Resources.Resources.List_Time_Day : Resources.Resources.List_Time_Days);
             if (span.Hours > 0)
-                return String.Format("{0} {1} ago",
-                span.Hours, span.Hours == 1 ? "hour" : "hours");
+                return String.Format(Resources.Resources.List_Time_Format,
+                span.Hours, span.Hours == 1 ? Resources.Resources.List_Time_Hour : Resources.Resources.List_Time_Hours);
             if (span.Minutes > 0)
-                return String.Format("{0} {1} ago",
-                span.Minutes, span.Minutes == 1 ? "minute" : "minutes");
+                return String.Format(Resources.Resources.List_Time_Format,
+                span.Minutes, span.Minutes == 1 ? Resources.Resources.List_Time_Minute : Resources.Resources.List_Time_Minutes);
             if (span.Seconds > 5)
-                return String.Format("{0} seconds ago", span.Seconds);
+                return String.Format(Resources.Resources.List_Time_Format, span.Seconds, Resources.Resources.List_Time_Seconds);
             if (span.Seconds <= 5)
-                return "just now";
+                return Resources.Resources.List_Time_Just;
             return string.Empty;
         }
 

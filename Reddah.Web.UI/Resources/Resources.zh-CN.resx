@@ -315,4 +315,52 @@
   <data name="Error_Server_Error" xml:space="preserve">
     <value>服务器错误，请点击刷新页面</value>
   </data>
+  <data name="List_Submit" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="List_By" xml:space="preserve">
+    <value>发布者</value>
+  </data>
+  <data name="List_Time_Format" xml:space="preserve">
+    <value>{0}{1}前</value>
+  </data>
+  <data name="List_Time_Just" xml:space="preserve">
+    <value>刚刚</value>
+  </data>
+  <data name="List_Time_Year" xml:space="preserve">
+    <value>年</value>
+  </data>
+  <data name="List_Time_Month" xml:space="preserve">
+    <value>个月</value>
+  </data>
+  <data name="List_Time_Day" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="List_Time_Hour" xml:space="preserve">
+    <value>小时</value>
+  </data>
+  <data name="List_Time_Minute" xml:space="preserve">
+    <value>分钟</value>
+  </data>
+  <data name="List_Time_Second" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="List_Time_Years" xml:space="preserve">
+    <value>年</value>
+  </data>
+  <data name="List_Time_Months" xml:space="preserve">
+    <value>个月</value>
+  </data>
+  <data name="List_Time_Days" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="List_Time_Hours" xml:space="preserve">
+    <value>小时</value>
+  </data>
+  <data name="List_Time_Minutes" xml:space="preserve">
+    <value>分钟</value>
+  </data>
+  <data name="List_Time_Seconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
 </root>

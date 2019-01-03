@@ -17,12 +17,13 @@ div.clearline {
 
 div.articleContent {
     padding-right: 7em;
+    padding-bottom: 30px;
 }
 
-    div.articleContent img {
-        max-width: 900px !important;
-        height: auto !important;
-    }
+div.articleContent img {
+    max-width: 900px !important;
+    height: auto !important;
+}
 
 div.rightBox {
     float: right;

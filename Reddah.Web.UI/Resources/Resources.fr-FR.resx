@@ -321,4 +321,52 @@
   <data name="Error_Server_Error" xml:space="preserve">
     <value>Server error, please click here to refresh the page</value>
   </data>
+  <data name="List_Submit" xml:space="preserve">
+    <value>submitted</value>
+  </data>
+  <data name="List_By" xml:space="preserve">
+    <value>by</value>
+  </data>
+  <data name="List_Time_Format" xml:space="preserve">
+    <value>{0} {1} ago</value>
+  </data>
+  <data name="List_Time_Just" xml:space="preserve">
+    <value>just now</value>
+  </data>
+  <data name="List_Time_Year" xml:space="preserve">
+    <value>year</value>
+  </data>
+  <data name="List_Time_Month" xml:space="preserve">
+    <value>month</value>
+  </data>
+  <data name="List_Time_Day" xml:space="preserve">
+    <value>day</value>
+  </data>
+  <data name="List_Time_Hour" xml:space="preserve">
+    <value>hour</value>
+  </data>
+  <data name="List_Time_Minute" xml:space="preserve">
+    <value>minute</value>
+  </data>
+  <data name="List_Time_Second" xml:space="preserve">
+    <value>second</value>
+  </data>
+  <data name="List_Time_Years" xml:space="preserve">
+    <value>years</value>
+  </data>
+  <data name="List_Time_Months" xml:space="preserve">
+    <value>months</value>
+  </data>
+  <data name="List_Time_Days" xml:space="preserve">
+    <value>days</value>
+  </data>
+  <data name="List_Time_Hours" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="List_Time_Minutes" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="List_Time_Seconds" xml:space="preserve">
+    <value>seconds</value>
+  </data>
 </root>

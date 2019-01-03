@@ -36,40 +36,40 @@
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true)
 
-                            <fieldset>
-                                <ol>
-                                    <li>
-                                        @Html.TextAreaFor(m => m.Title, new { @required = "required", @maxlength = "500", @placeholder = @Resources.Submit_Title })
-                                        <br />
-                                        @Html.ValidationMessageFor(m => m.Title)
-                                    </li>
-                                    <li>
-                                        @Html.TextAreaFor(m => m.GroupName, new { @required = "required", @maxlength = "200", @placeholder = @Resources.Submit_Group })
-                                        <br />
-                                        @Html.ValidationMessageFor(m => m.GroupName)
-                                    </li>
-                                    <li>
-                                        @Html.TextAreaFor(m => m.Content, new { @required = "required", @placeholder = "content" })
-                                        <br />
-                                        @Html.ValidationMessageFor(m => m.Content)
-                                        <script>
+                        <fieldset>
+                            <ol>
+                                <li>
+                                    @Html.TextAreaFor(m => m.Title, new { @required = "required", @maxlength = "500", @placeholder = @Resources.Submit_Title })
+                                    <br />
+                                    @Html.ValidationMessageFor(m => m.Title)
+                                </li>
+                                <li>
+                                    @Html.TextAreaFor(m => m.GroupName, new { @required = "required", @maxlength = "200", @placeholder = @Resources.Submit_Group })
+                                    <br />
+                                    @Html.ValidationMessageFor(m => m.GroupName)
+                                </li>
+                                <li>
+                                    @Html.TextAreaFor(m => m.Content, new { @required = "required", @placeholder = "content" })
+                                    <br />
+                                    @Html.ValidationMessageFor(m => m.Content)
+                                    <script>
                                             CKEDITOR.replace('Content', {
                                                 language: '@locale',
                                                 uiColor: '#ffffff',
                                         });
-                                        </script>
-                                    </li>
-                                    <li>
-                                        @Html.TextAreaFor(m => m.Abstract, new { @required = "required", @maxlength = "200", @placeholder = @Resources.Submit_Abstract })
-                                        <br />
-                                        @Html.ValidationMessageFor(m => m.Content)
-                                    </li>
-                                </ol>
-                                @Html.MathCaptcha(@Resources.Submit_Captura_New, "", @Resources.Submit_Captura_Robot, true)
-                                <br />
-                                <input type="submit" value="@Resources.Submit_Button_Submit" />
-                                <button onclick="javascript:history.back(-1);">@Resources.Submit_Button_Cancel</button>
-                            </fieldset>
+                                    </script>
+                                </li>
+                                <li>
+                                    @Html.TextAreaFor(m => m.Abstract, new { @required = "required", @maxlength = "200", @placeholder = @Resources.Submit_Abstract })
+                                    <br />
+                                    @Html.ValidationMessageFor(m => m.Content)
+                                </li>
+                            </ol>
+                            @Html.MathCaptcha(@Resources.Submit_Captura_New, "", @Resources.Submit_Captura_Robot, true)
+                            <br />
+                            <input type="submit" value="@Resources.Submit_Button_Submit" />
+                            <button onclick="javascript:history.back(-1);">@Resources.Submit_Button_Cancel</button>
+                        </fieldset>
                         }
                     </section>
                 }

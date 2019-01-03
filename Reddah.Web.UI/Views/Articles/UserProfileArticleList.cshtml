@@ -101,7 +101,7 @@
                 <span ng-repeat="group in article.GroupName.split(',')">
                     <a href="/@locale/r/{{group}}"><u>{{group}}</u></a>
                 </span>
-                submitted {{article.CreatedOn}} by <a href="/@locale/user/{{article.UserName}}">{{article.UserName}}</a>
+                @Resources.List_Submit {{article.CreatedOn}} @Resources.List_By <a href="/@locale/user/{{article.UserName}}">{{article.UserName}}</a>
             </div>
         </div>
         <div class="postClear"></div>

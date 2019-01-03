@@ -625,5 +625,133 @@ namespace Reddah.Web.UI.Resources
                 return ResourceManager.GetString("Error_Server_Error", resourceCulture);
             }
         }
+
+        public static string List_Submit
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Submit", resourceCulture);
+            }
+        }
+
+        public static string List_By
+        {
+            get
+            {
+                return ResourceManager.GetString("List_By", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Format
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Format", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Just
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Just", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Year
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Year", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Month
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Month", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Day
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Day", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Hour
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Hour", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Minute
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Minute", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Second
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Second", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Years
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Years", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Months
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Months", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Days
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Days", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Hours
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Hours", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Minutes
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Minutes", resourceCulture);
+            }
+        }
+
+        public static string List_Time_Seconds
+        {
+            get
+            {
+                return ResourceManager.GetString("List_Time_Seconds", resourceCulture);
+            }
+        }
     }
 }

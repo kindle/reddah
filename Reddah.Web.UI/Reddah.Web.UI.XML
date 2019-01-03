@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Reddah.Web.UI</name>
+    </assembly>
+    <members>
+        <member name="T:Reddah.Web.UI.SwaggerConfig">
+            <summary>
+            http://localhost/swagger/docs/v1
+            http://localhost/swagger/ui/index
+            </summary>
+        </member>
+        <member name="T:Reddah.Web.UI.Controllers.ImportController">
+            <summary>
+            localonly usage: localhost:2345/import
+            </summary>
+        </member>
+        <member name="T:Reddah.Web.UI.Controllers.WebApiController">
+            <summary>
+            Web Api controller
+            </summary>
+        </member>
+        <member name="M:Reddah.Web.UI.Controllers.WebApiController.GetArticles">
+            <summary>
+            Get Articles
+            </summary>
+            <returns>list of posts</returns>
+        </member>
+        <member name="T:Reddah.Web.UI.Models.Category">
+            <summary>
+            Object representing a category.
+            </summary>
+        </member>
+        <member name="T:Reddah.Web.UI.Models.Product">
+            <summary>
+            Object representing a product.
+            </summary>
+        </member>
+        <member name="T:Reddah.Web.UI.Models.SectionPreview">
+            <summary>
+            Object representing an section preview.
+            It contains a title and list of articles
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Models.SectionPreview.Title">
+            <summary>
+            Gets or sets the Title of the section.
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Models.SectionPreview.Items">
+            <summary>
+            Gets or sets the article list.
+            </summary>
+        </member>
+        <member name="T:Reddah.Web.UI.Resources.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.Header_MyAccount">
+            <summary>
+              Looks up a localized string similar to My Account
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.Resources.Resources.Header_JoinNow">
+            <summary>
+              Looks up a localized string similar to Join Now
+            </summary>
+        </member>
+        <member name="T:Reddah.Web.UI.Routing.RoutingExtensions">
+            <summary>
+            Contents are copied from the framework's RouteCollectionExtensions class and modified
+            </summary>
+        </member>
+        <member name="P:Reddah.Web.UI.ViewModels.HomePageViewModel.Articles">
+            <summary>
+            List of articles
+            </summary>
+        </member>
+    </members>
+</doc>
