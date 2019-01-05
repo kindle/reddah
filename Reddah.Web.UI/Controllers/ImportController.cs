@@ -11,7 +11,7 @@
     using Reddah.Web.UI.Filters;
 
     /// <summary>
-    /// localonly usage: localhost:2345/import
+    /// localonly usage: localhost:2345/import?pw=37
     /// </summary>
     public class ImportController : Controller
     {
@@ -22,6 +22,7 @@
                 return;
 
             //tang_author();
+            //songci_author();
             //song_author(1);
             //song_author(2);
             /*for(int i=start+1000;i<=57000;i+=1000)
@@ -60,6 +61,55 @@
                 song_data(i);
             }*/
 
+
+
+        }
+
+        //30ms*2
+        public void songci_author()
+        {
+            string jsonfile = HttpContext.Server.MapPath("~/Content/poem/author.songci.json");
+
+            FileStream fs = new FileStream(jsonfile, FileMode.Open, FileAccess.Read);
+
+            using (StreamReader file = new StreamReader(fs, Encoding.UTF8))
+            {
+                using (JsonTextReader reader = new JsonTextReader(file))
+                {
+                    JArray ja = (JArray)JToken.ReadFrom(reader);
+                    int i = 0;
+                    using (var db = new reddahEntities1())
+                    {
+                        try
+                        {
+                            foreach (JObject e in ja)
+                            {
+                                var name = Helpers.ToSimplified(e["name"].ToString().Replace(" ","").Replace("--",""));
+                                var desc = Helpers.ToSimplified(e["description"].ToString().Replace(" ","").Replace("--",""));
+
+                                if (!string.IsNullOrWhiteSpace(desc) && db.Groups.FirstOrDefault(g => g.Name == name.Trim()) == null)
+                                {
+                                    i++;
+                                    var g = new Group();
+                                    g.Name = name;
+                                    g.ParentId = 5;
+                                    g.Relation = "作者";
+                                    g.CreatedOn = System.DateTime.Now;
+                                    if (!string.IsNullOrWhiteSpace(desc))
+                                        g.Desc = desc;
+                                    db.Groups.Add(g);
+                                }
+                            }
+                            db.SaveChanges();
+                        }
+                        catch (DbEntityValidationException ex)
+                        {
+                            System.Console.WriteLine(ex.Message);
+                        }
+                    }
+
+                }
+            }
         }
 
 
@@ -317,13 +367,15 @@
                         {
                             foreach (JObject e in ja)
                             {
-                                var name = Helpers.ToSimplified(e["name"].ToString());
-                                var desc = Helpers.ToSimplified(e["desc"].ToString());
+                                var name = Helpers.ToSimplified(e["name"].ToString().Replace(" ",""));
+                                var desc = Helpers.ToSimplified(e["desc"].ToString().Replace(" ",""));
 
                                 if (!string.IsNullOrWhiteSpace(desc) && db.Groups.FirstOrDefault(g => g.Name == name.Trim()) == null)
                                 {
                                     i++;
                                     var g = new Group();
+                                    g.ParentId = 5;
+                                    g.Relation = "作者";
                                     g.Name = name;
                                     g.CreatedOn = System.DateTime.Now;
                                     if (!string.IsNullOrWhiteSpace(desc))

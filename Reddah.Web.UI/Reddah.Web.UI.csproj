@@ -681,6 +681,7 @@
   <ItemGroup>
     <Folder Include="App_Data\wiki\Templates\" />
     <Folder Include="App_Data\wiki\Videos\" />
+    <Folder Include="Content\poem\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
