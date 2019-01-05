@@ -753,5 +753,13 @@ namespace Reddah.Web.UI.Resources
                 return ResourceManager.GetString("List_Time_Seconds", resourceCulture);
             }
         }
+
+        public static string List_LastUpdateOn
+        {
+            get
+            {
+                return ResourceManager.GetString("List_LastUpdateOn", resourceCulture);
+            }
+        }
     }
 }

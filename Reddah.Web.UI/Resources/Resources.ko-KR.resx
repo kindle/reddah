@@ -369,4 +369,7 @@
   <data name="List_Time_Seconds" xml:space="preserve">
     <value>seconds</value>
   </data>
+  <data name="List_LastUpdateOn" xml:space="preserve">
+    <value>Last updated on</value>
+  </data>
 </root>

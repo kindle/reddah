@@ -1,5 +1,6 @@
 ﻿@using Reddah.Web.UI.Models
-@using System.Globalization   
+@using System.Globalization
+@using Reddah.Web.UI.Resources
 @using Reddah.Web.UI.Utility
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
@@ -11,6 +12,7 @@
     .poetry {
         font-size: x-large;
     }
+
     .flex-article {
         width: 1170px;
         margin: 0 auto;
@@ -19,6 +21,7 @@
         display: flex;
         justify-content: space-between;
     }
+
     .flex-article-left {
         display: -webkit-flex;
         -webkit-flex-direction: column;
@@ -29,14 +32,17 @@
         min-width: 900px;
         max-width: 900px;
     }
-    .flex-article-left img {
-        max-width:100%;
-        height:auto !important;
-    }
-    .flex-article-left video {
-        max-width: 100%;
-        height: auto !important;
-    }
+
+        .flex-article-left img {
+            max-width: 100%;
+            height: auto !important;
+        }
+
+        .flex-article-left video {
+            max-width: 100%;
+            height: auto !important;
+        }
+
     .flex-article-right {
         margin-top: 20px;
         display: -webkit-flex;
@@ -46,6 +52,7 @@
         flex-direction: column;
         flex: 300px;
     }
+
     .flex-vote {
         display: -webkit-flex;
         -webkit-justify-content: center;
@@ -55,6 +62,7 @@
         align-items: center;
         margin: 30px;
     }
+
         .flex-vote > u {
             background-image: url("/Content/Images/like-dislike.png"), none;
             background-position: 0 0;
@@ -65,6 +73,7 @@
             width: 40px;
             text-decoration: none;
         }
+
         .flex-vote > a {
             background-image: url("/Content/Images/like-dislike.png"), none;
             background-position: -40px 0;
@@ -74,7 +83,8 @@
             height: 40px;
             width: 40px;
         }
-        .flex-vote > i{
+
+        .flex-vote > i {
             margin: 0 15px 0 5px;
         }
 
@@ -82,7 +92,6 @@
         padding: 30px;
         text-align: center;
     }
-        
 </style>
 
 
@@ -91,14 +100,14 @@
         <div>
             <h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1>
             <div class="listInfo">
-                Submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to
+                @Resources.List_Submit @Model.Article.CreatedOn @Resources.List_By <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> 
                 @foreach (string g in Model.Article.GroupName.Trim().Split(','))
                 {
                     <a href="/@locale/r/@Helpers.HtmlDecode(g)"><u>@Helpers.HtmlDecode(g)</u> </a>
                 }
             </div>
             @if (Model.Article.LastUpdateOn != null)
-            {<div class="listInfo">Last updated on @Model.Article.LastUpdateOn</div>}
+            {<div class="listInfo">@Resources.List_LastUpdateOn @Model.Article.LastUpdateOn</div>}
             <div class="listInfo">
                 @if (User.Identity.Name.Equals(Model.Article.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.EditPost))
                 {<u><a href="/@locale/edit/@Model.Article.Id">[Edit]</a></u>}
@@ -128,7 +137,7 @@
                 <span style="display:none;" itemprop="upvoteCount" id="vote-count-post-@Model.Article.Id">@(Model.Article.Up - Model.Article.Down)</span>
 
                 <!--<a ng-click="vote(@Model.Article.Id, 'down', @(Model.Article.Up-Model.Article.Down),'articleContent')"></a>
-            <i>I don't like it!</i>-->
+                <i>I don't like it!</i>-->
             }
             else
             {
@@ -154,47 +163,47 @@
             <ol>
                 @foreach (string g in Model.GroupName.Trim().Split(','))
                 {
-                <li ng-controller="groupCtrl" data-ng-init="getGroup('@g','@locale')">
-                    <a href="/@locale/r/@g"><u>@g</u></a>
-                </li>
+                    <li ng-controller="groupCtrl" data-ng-init="getGroup('@g','@locale')">
+                        <a href="/@locale/r/@g"><u>@g</u></a>
+                    </li>
                 }
             </ol>
-            <br />     
+            <br />
         </div>
         @*{
-            int j = 0;
-            foreach (var rightBoxModule in Model.RightBoxModules)
-            {
-                if (!String.IsNullOrEmpty(rightBoxModule.Title) && !String.IsNullOrEmpty(rightBoxModule.ArticleUrl))
+                int j = 0;
+                foreach (var rightBoxModule in Model.RightBoxModules)
                 {
-                    if (j == 3)
+                    if (!String.IsNullOrEmpty(rightBoxModule.Title) && !String.IsNullOrEmpty(rightBoxModule.ArticleUrl))
                     {
-                        break;
+                        if (j == 3)
+                        {
+                            break;
+                        }
+                        <div class="HomePageRightBoxModule">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <a href="/@locale/@rightBoxModule.ArticleUrl"><img alt="@rightBoxModule.ImageUrl" src="@rightBoxModule.ImageUrl" /></a>
+                                    </td>
+                                    <td class="rightBoxModule">
+                                        <h2><a href="/@locale/@rightBoxModule.ArticleUrl">@rightBoxModule.Title</a></h2>
+                                        <div>@rightBoxModule.Description</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        j++;
                     }
-                    <div class="HomePageRightBoxModule">
-                        <table>
-                            <tr>
-                                <td>
-                                    <a href="/@locale/@rightBoxModule.ArticleUrl"><img alt="@rightBoxModule.ImageUrl" src="@rightBoxModule.ImageUrl" /></a>
-                                </td>
-                                <td class="rightBoxModule">
-                                    <h2><a href="/@locale/@rightBoxModule.ArticleUrl">@rightBoxModule.Title</a></h2>
-                                    <div>@rightBoxModule.Description</div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    j++;
                 }
-            }
-        }*@
+            }*@
     </aside>
 </div>
 <div id="done" style="display:none;"></div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         let vs = Array.from($("video"));
-        
+
         vs.forEach((v) => {
 
             v.onclick = function () {
@@ -205,21 +214,21 @@
                 }
             };
 
-            
+
             v.onloadeddata = function () {
                 var canvas = document.createElement("canvas");
                 canvas.width = v.videoWidth;
                 canvas.height = v.videoHeight;
                 document.getElementById("done").innerHTML = "";
                 document.getElementById("done").appendChild(canvas);
-                
+
                 var ctx = canvas.getContext("2d");
                 ctx.drawImage(v, 0, 0);
-                
+
             };
-            
+
         });
 
     });
-    
+
 </script>

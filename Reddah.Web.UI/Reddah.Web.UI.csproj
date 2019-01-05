@@ -32,7 +32,7 @@
     <DeployEncryptKey>reddah</DeployEncryptKey>
     <IncludeIisSettings>false</IncludeIisSettings>
     <IncludeAppPool>false</IncludeAppPool>
-    <DocumentationFile>bin\Reddah.Web.UI.XML</DocumentationFile>
+    <DocumentationFile>Reddah.Web.UI.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -587,6 +587,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\playSmall.png" />
+    <Content Include="Reddah.Web.UI.XML">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="security.txt" />
     <Content Include="Scripts\angular-1.2.16.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />

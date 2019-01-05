@@ -224,7 +224,7 @@ namespace Reddah.Web.UI
 
         private static string GetXmlCommentsPath()
         {
-            return String.Format(@"{0}\bin\Reddah.Web.UI.XML", System.AppDomain.CurrentDomain.BaseDirectory);
+            return String.Format(@"{0}\Reddah.Web.UI.XML", System.AppDomain.CurrentDomain.BaseDirectory);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿@using Reddah.Web.UI.Models
 @using System.Globalization
+@using Reddah.Web.UI.Resources
 @using Reddah.Web.UI.Utility
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
@@ -7,12 +8,13 @@
 <link href="/Content/Comment.css" rel="stylesheet" />
 <link href="/Content/Post.css" rel="stylesheet" />
 <style>
-.flex-vote {
+    .flex-vote {
         display: flex;
         justify-content: center;
-        align-items:center;
+        align-items: center;
         margin: 30px;
     }
+
         .flex-vote > u {
             background-image: url("/Content/Images/like-dislike.png"), none;
             background-position: 0 0;
@@ -23,6 +25,7 @@
             width: 40px;
             text-decoration: none;
         }
+
         .flex-vote > a {
             background-image: url("/Content/Images/like-dislike.png"), none;
             background-position: -40px 0;
@@ -32,22 +35,22 @@
             height: 40px;
             width: 40px;
         }
-        .flex-vote > i{
+
+        .flex-vote > i {
             margin: 0 15px 0 5px;
         }
-
 </style>
 <div class="articleContent" id="articleContentMobile">
     <div class="listInfo"><h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1></div>
     <div class="postClear"></div>
-    <div class="listInfo">submitted @Model.Article.CreatedOn ago by <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> to <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)"><u>@Helpers.HtmlDecode(Model.Article.GroupName)</u></a></div>
+    <div class="listInfo">@Resources.List_Submit @Model.Article.CreatedOn @Resources.List_By <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a>  <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)"><u>@Helpers.HtmlDecode(Model.Article.GroupName)</u></a></div>
     @if (Model.Article.LastUpdateOn != null)
-    {<div class="listInfo">Last updated on @Model.Article.LastUpdateOn</div>}
+    {<div class="listInfo">@Resources.List_LastUpdateOn @Model.Article.LastUpdateOn</div>}
     <div class="listInfo">
-    @if (User.Identity.Name.Equals(Model.Article.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.EditPost))
-    {<u><a href="/@locale/edit/@Model.Article.Id">[Edit]</a></u> }
-    @if (User.Identity.Name.Equals(Model.Article.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.DeletePost))
-    {<u><a href="/@locale/delete/@Model.Article.Id">[Delete]</a></u>}
+        @if (User.Identity.Name.Equals(Model.Article.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.EditPost))
+        {<u><a href="/@locale/edit/@Model.Article.Id">[Edit]</a></u>}
+        @if (User.Identity.Name.Equals(Model.Article.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.DeletePost))
+        {<u><a href="/@locale/delete/@Model.Article.Id">[Delete]</a></u>}
     </div>
     <div class="listInfo" style="display:none;">share save hide report</div>
     <div class="postClear"></div>

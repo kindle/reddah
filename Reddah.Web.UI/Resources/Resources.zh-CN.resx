@@ -363,4 +363,7 @@
   <data name="List_Time_Seconds" xml:space="preserve">
     <value>秒</value>
   </data>
+  <data name="List_LastUpdateOn" xml:space="preserve">
+    <value>最后更新</value>
+  </data>
 </root>
