@@ -8,7 +8,7 @@
         @if (Request.IsAuthenticated)
         {
             <div class="LinkArea">
-                <a class="GamerTagArea" href="/@locale/account/manage">@User.Identity.Name</a>
+                <a class="GamerTagArea" href="/@locale/account/manage">@Resources.Header_MyAccount [@User.Identity.Name]</a>
                 <span class="spread">
                     <a href="/@locale/submit">@Resources.Header_Create</a>
                 </span>

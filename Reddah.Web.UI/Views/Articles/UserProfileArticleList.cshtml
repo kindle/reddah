@@ -97,7 +97,7 @@
             <div style="margin-top: 5px;">{{summary(article.Content,120)}}</div>
             <div class="postClear" ng-if="article.ImageUrls.length==3"></div>
             <div class="listInfo" style="margin-top: 5px;">
-                <a href="/@locale/r/{{article.GroupName}}/comments/{{article.Id}}/{{urlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments </a> <!--share save hide report-->
+                <a href="/@locale/r/{{urlDecode(article.GroupName)}}/comments/{{article.Id}}/{{urlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments </a> <!--share save hide report-->
                 <span ng-repeat="group in article.GroupName.split(',')">
                     <a href="/@locale/r/{{group}}"><u>{{group}}</u></a>
                 </span>
