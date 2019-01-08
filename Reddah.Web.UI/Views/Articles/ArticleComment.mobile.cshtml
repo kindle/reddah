@@ -55,6 +55,15 @@
     <div class="listInfo" style="display:none;">share save hide report</div>
     <div class="postClear"></div>
     <div>@Html.Raw(Helpers.HtmlDecode(Model.Article.Content))</div>
+    <div class="postModuleLiner"></div>
+    <section class="group">
+        @foreach (string g in Model.GroupName.Trim().Split(','))
+        {
+            <div ng-controller="groupCtrl" data-ng-init="getGroup('@g','@locale')">
+                <p>{{group.Desc}}</p>
+            </div>
+        }
+    </section>
 </div>
 <section class="flex-vote">
     @if (Request.IsAuthenticated)

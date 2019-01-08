@@ -12,7 +12,7 @@
         </member>
         <member name="T:Reddah.Web.UI.Controllers.ImportController">
             <summary>
-            localonly usage: localhost:2345/import
+            localonly usage: localhost:2345/import?pw=37
             </summary>
         </member>
         <member name="T:Reddah.Web.UI.Controllers.WebApiController">
