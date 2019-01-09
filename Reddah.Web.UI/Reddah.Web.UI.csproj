@@ -587,6 +587,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\playSmall.png" />
+    <Content Include="Images\reddah-release-0.0.1-apk.png" />
     <Content Include="Reddah.Web.UI.XML">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
