@@ -341,6 +341,15 @@
                 "{locale}/api",
                 new { controller = "Articles", action = "GetSub" }
             );
+
+
+
+
+            routes.MapLocalizedRoute(
+                "authRedirect",
+                "authRedirect",
+                new { controller = "UserCount", action = "index" }
+            );
         }
     }
 } 
