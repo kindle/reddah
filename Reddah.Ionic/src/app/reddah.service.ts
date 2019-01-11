@@ -28,7 +28,7 @@ export class ReddahService {
       
     };
 
-    return this.http.get<Article[]>(this.heroesUrl)
+    return this.http.get<Article[]>(this.heroesUrl, httpOptions)
       .pipe(
         tap(heroes => this.log('fetched subs')),
         catchError(this.handleError('getReddahSubs', []))

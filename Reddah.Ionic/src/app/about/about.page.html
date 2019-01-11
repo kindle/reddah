@@ -1,19 +1,36 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>About</ion-title>
+    <ion-title>关于Reddah</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+    <ion-card>
+      <ion-card-header>
+        当前版本
+      </ion-card-header>
+      <ion-card-content>
+        {{version}}
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-content>
+          <ion-button (click)="upgrade()">检查更新</ion-button>
+        </ion-card-content>
+      </ion-card>
+    <div class="row text-center" flex="box:mean">
+        <!--<div class="share-option" (click)="shareFriend()">
+          <p>微信好友</p>
+        </div>
+        <div class="share-option" (click)="shareTimeline()">
+          <p>微信朋友圈</p>
+        </div>
+        <div class="share-option" (click)="appversion()">
+          <p>Show Current Version</p>
+        </div>
+        -->
+    </div>
+
+</ion-content>
 
 
-<div class="row text-center" flex="box:mean">
-  <div class="share-option" (click)="shareFriend()">
-    <img src="main/assets/images/account/invite/share-friends.png" alt="" class="icon-share">
-    <p>微信好友</p>
-  </div>
-  <div class="share-option" (click)="shareTimeline()">
-    <img src="main/assets/images/account/invite/share-timeline.png" alt="" class="icon-share">
-    <p>微信朋友圈</p>
-  </div>
- </div>
