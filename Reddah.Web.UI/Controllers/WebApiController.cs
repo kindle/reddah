@@ -22,12 +22,12 @@
         /// </summary>
         /// <returns>list of posts</returns>
         [HttpGet]
-        public IEnumerable<ArticlePreview> GetArticles()
+        public IEnumerable<ArticlePreview> GetArticles(int[] loadedIds)
         {
             IEnumerable<ArticlePreview> result = null;
 
             UserProfileModel userProfileModel = new UserProfileModel();
-            userProfileModel.LoadedIds = new int[] { };
+            userProfileModel.LoadedIds = loadedIds;
             userProfileModel.Locale = "zh-cn";
             userProfileModel.Menu = "new";
 
