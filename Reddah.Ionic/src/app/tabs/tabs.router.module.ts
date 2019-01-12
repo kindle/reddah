@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 import { HomePage } from '../home/home.page';
 import { AboutPage } from '../about/about.page';
+import { FindPage } from '../find/find.page';
 import { ContactPage } from '../contact/contact.page';
 
 const routes: Routes = [
@@ -25,6 +26,11 @@ const routes: Routes = [
         path: 'about',
         outlet: 'about',
         component: AboutPage
+      },
+      {
+        path: 'find',
+        outlet: 'find',
+        component: FindPage
       },
       {
         path: 'contact',

@@ -1,23 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Reddah.com</ion-title>
+    <ion-title>Reddah</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <div class="listInfoBlock" *ngFor="let article of articles" (click)="view()">
-      <div class="listImage" *ngIf="article.ImageUrl">
-          <div class="listImageWrapper">
-              <img class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="{{article.ImageUrl}}" alt="picture">
-          </div>
-      </div>
-      <h2><a>{{article.Title}}</a></h2>
-      <div>{{article.Content}}</div>
-      <div class="listInfo">submitted {{article.CreatedOn}} ago by <a href="{{article.UserName}}">{{article.UserName}}</a> to <a href="/@locale/r/@article.GroupName">/r/{{article.GroupName}}</a></div>
-      <div class="listInfo"><a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetShortTitle(article.Title)/" target="_blank">{{article.Comments}} comments</a></div>
-      <div class="postClear"></div>
-  </div>
+  <ion-list>
+    <div class="listInfoBlock" *ngFor="let article of articles" (click)="view()">
+        <div class="listImage" *ngIf="article.ImageUrl">
+            <div class="listImageWrapper">
+                <img class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="{{article.ImageUrl}}" alt="picture">
+            </div>
+        </div>
+        <h2><a>{{article.Title}}</a></h2>
+        <div>{{article.Content}}</div>
+        <div class="listInfo">submitted {{article.CreatedOn}} ago by <a href="{{article.UserName}}">{{article.UserName}}</a> to <a href="/@locale/r/@article.GroupName">/r/{{article.GroupName}}</a></div>
+        <div class="listInfo"><a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetShortTitle(article.Title)/" target="_blank">{{article.Comments}} comments</a></div>
+        <div class="postClear"></div>
+    </div>
+  </ion-list>
 
-  The world is your oyster1.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+  
+
 </ion-content>
