@@ -12,8 +12,8 @@
                 <img class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="{{article.ImageUrl}}" alt="picture">
             </div>
         </div>
-        <h2><a>{{article.Title}}</a></h2>
-        <div>{{article.Content}}</div>
+        <h2><a>{{htmlDecode(article.Title)}}</a></h2>
+        <div>{{htmlDecode(article.Content)}}</div>
         <div class="listInfo">submitted {{article.CreatedOn}} ago by <a href="{{article.UserName}}">{{article.UserName}}</a> to <a href="/@locale/r/@article.GroupName">/r/{{article.GroupName}}</a></div>
         <div class="listInfo"><a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetShortTitle(article.Title)/" target="_blank">{{article.Comments}} comments</a></div>
         <div class="postClear"></div>

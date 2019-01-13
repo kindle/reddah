@@ -16,19 +16,21 @@ export class ReddahService {
     console.log(message);
   }
  
-  private heroesUrl = 'https://reddah.com/api/webapi/getarticles';  
+  private heroesUrl = 'https://reddah.com/api/webapi/getarticles'; 
 
-  getHeroes(): Observable<Article[]> {
+  getHeroes(loadedIds: Number[]): Observable<Article[]> {
     const httpOptions = {
       headers: new HttpHeaders({ 
+        'Content-Type':'application/json',
         'Access-Control-Allow-Origin*':'*',
         'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
         'Access-Control-Allow-Headers':'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-      })
+      }),
+      body: loadedIds
       
     };
 
-    return this.http.get<Article[]>(this.heroesUrl, httpOptions)
+    return this.http.post<Article[]>(this.heroesUrl, loadedIds)//httpOptions)
       .pipe(
         tap(heroes => this.log('fetched subs')),
         catchError(this.handleError('getReddahSubs', []))
