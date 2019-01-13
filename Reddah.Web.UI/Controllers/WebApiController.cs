@@ -21,14 +21,14 @@
         /// Get Articles
         /// </summary>
         /// <returns>list of posts</returns>
-        [HttpGet]
-        public IEnumerable<ArticlePreview> GetArticles(int[] loadedIds)
+        [HttpPost]
+        public IEnumerable<ArticlePreview> GetArticles([FromBody] int[] loadedIds)
         {
             IEnumerable<ArticlePreview> result = null;
 
             UserProfileModel userProfileModel = new UserProfileModel();
             userProfileModel.LoadedIds = loadedIds;
-            userProfileModel.Locale = "zh-cn";
+            userProfileModel.Locale = "en-us";
             userProfileModel.Menu = "new";
 
             result = new UserProfileArticleViewModel(userProfileModel).Articles;
