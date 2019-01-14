@@ -80,13 +80,19 @@
             return false;
         }
 
+        public static string GetRelativeUrl(string url)
+        {
+            return url.StartsWith("/uploadPhoto", StringComparison.InvariantCultureIgnoreCase)?url.Replace("/uploadPhoto", 
+                "///reddah.com/uploadPhoto") : url;
+        }
+
         public static string GetVideoSrc(string content)
         {
             var matches = Regex.Match(System.Web.HttpUtility.HtmlDecode(content), "<video.+?src=[\"'](.+?)[\"'].*?>", RegexOptions.IgnoreCase);
             string matchString = string.IsNullOrWhiteSpace(matches.Groups[1].Value) ?
                 "" : matches.Groups[1].Value;
 
-            return matchString;
+            return GetRelativeUrl(matchString);
         }
 
         public static string GetVideoPoster(string content)
@@ -95,7 +101,7 @@
             string matchString = string.IsNullOrWhiteSpace(matches.Groups[1].Value) ?
                 "" : matches.Groups[1].Value;
 
-            return matchString;
+            return GetRelativeUrl(matchString);
         }
 
         public static string GetFirstImageSrc(string content)
@@ -104,7 +110,7 @@
             string matchString = string.IsNullOrWhiteSpace(matches.Groups[1].Value) ? 
                 "" : matches.Groups[1].Value;
 
-            return matchString;
+            return GetRelativeUrl(matchString);
         }
 
         public static string[] GetFirstImageSrc(string content, int n)
@@ -118,7 +124,7 @@
                 {
                     if(!string.IsNullOrWhiteSpace(m.Groups[1].Value))
                     {
-                        list.Add(m.Groups[1].Value);
+                        list.Add(GetRelativeUrl(m.Groups[1].Value));
                         count++;
                     }
                 }
