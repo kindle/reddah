@@ -34,7 +34,7 @@
 
         s = $scope.htmlDecode(str).replace(/ /g, "-");
         s = s.replace(/--/g, "-");
-        s = s.replace(/[^a-zA-Z0-9\-\u4e00-\u9fa5]/g, "");
+        s = s.replace(/[^a-zA-Z0-9,\-\u4e00-\u9fa5]/g, "");
 
         return s;
     };
