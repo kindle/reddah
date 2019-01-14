@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+//import { StorageServiceModule } from 'angular-webstorage-service';
 
 import { IonicModule, IonicRouteStrategy, Platform, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -25,7 +26,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     IonicModule.forRoot(), 
     AppRoutingModule,
     HttpClientModule,
-    
+    //StorageServiceModule,
     
   ],
   exports:[
