@@ -29,6 +29,7 @@
     "@ionic-native/wechat": "^4.17.0",
     "@ionic/angular": "4.0.0-beta.15",
     "@ionic/pro": "2.0.3",
+    "angular-web-storage": "^4.1.0",
     "cordova-android": "^7.1.2",
     "cordova-browser": "5.0.4",
     "cordova-plugin-app-update": "2.0.2",

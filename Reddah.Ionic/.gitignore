@@ -23,7 +23,6 @@ www/
 node_modules/
 tmp/
 temp/
-package-lock.json
 platforms/android/.gradle/
 platforms/android/app/build/
 platforms/android/app/src/

@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Article } from "./article";
+import { UserProfileModel } from './UserProfileModel';
 
 
 @Injectable({
@@ -18,19 +19,30 @@ export class ReddahService {
  
   private heroesUrl = 'https://reddah.com/api/webapi/getarticles'; 
 
-  getHeroes(loadedIds: Number[]): Observable<Article[]> {
-    const httpOptions = {
+  private userProfileModel: UserProfileModel;
+
+  getHeroes(loadedIds: Number[], locale: String, menu: String): Observable<Article[]> {
+    this.userProfileModel = new UserProfileModel();
+    this.userProfileModel.LoadedIds = loadedIds;
+    this.userProfileModel.Locale = locale;
+    this.userProfileModel.Menu = menu;
+    this.userProfileModel.Token = "";
+    this.userProfileModel.Sub = "";
+    this.userProfileModel.User = "";
+    this.userProfileModel.Keyword = "";
+
+    /*const httpOptions = {
       headers: new HttpHeaders({ 
         'Content-Type':'application/json',
         'Access-Control-Allow-Origin*':'*',
         'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
         'Access-Control-Allow-Headers':'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
       }),
-      body: loadedIds
+      body: this.userProfileModel
       
-    };
+    };*/
 
-    return this.http.post<Article[]>(this.heroesUrl, loadedIds)//httpOptions)
+    return this.http.post<Article[]>(this.heroesUrl, this.userProfileModel)//httpOptions)
       .pipe(
         tap(heroes => this.log('fetched subs')),
         catchError(this.handleError('getReddahSubs', []))

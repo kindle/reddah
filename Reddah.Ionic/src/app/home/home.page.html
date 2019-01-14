@@ -3,20 +3,45 @@
     <ion-title>Reddah</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <ion-content padding>
   <ion-list>
     <div class="listInfoBlock" *ngFor="let article of articles" (click)="view()">
-        <div class="listImage" *ngIf="article.ImageUrl">
-            <div class="listImageWrapper">
-                <img class="BrowsePreviewImage" onerror="this.style.display='none'" width="193" src="{{article.ImageUrl}}" alt="picture">
+        <div class="postModuleLiner">
+            <div *ngIf="article.VideoUrl.length>0">
+                <h2><a (click)="view()">{{htmlDecode(article.Title)}}</a></h2>
+                <div class="postClear"></div>
+                <video id="video_{{article.Id}}" (click)="playVideo(article.Id)" src="{{article.VideoUrl}}"
+                       poster="{{article.VideoPoster}}"
+                       controls="controls" loop="true">
+                    your browser does not support the video tag
+                </video>
+                <div class="postClear"></div>
+            </div>
+            <div *ngIf="article.VideoUrl.length==0" (click)="view()">
+                <h2 *ngIf="article.ImageUrls.length>1"><a>{{htmlDecode(article.Title)}}</a></h2>
+                <div class="postClear" *ngIf="article.ImageUrls.length>1"></div>
+                <div class="listImage" [ngStyle]="{'display':article.ImageUrls.length>1?'flex':''}">
+                    <div class="listImageWrapper" *ngFor="let articleUrl of article.ImageUrls">
+                        <img class="lazy BrowsePreviewImage" onerror="this.style.display='none'" src="{{articleUrl}}">
+                    </div>
+                </div>
+                <h2 *ngIf="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a></h2>
+                <div class="postClear" *ngIf="article.ImageUrls.length==3"></div>
+                <div>{{summary(article.Content, 60)}}</div>
+            </div>
+            <div class="postClear"></div>
+            <div class="listInfo">
+                <span *ngFor="let group of article.GroupName.split(',')" style="padding:0 5px;">
+                    <a href="/@locale/r/{{group}}"><u>{{group}}</u></a>
+                </span>
+            </div>
+            <div class="postClear"></div>
+            <div class="listInfo">
+                <i class="fa fa-clock-o"> {{article.CreatedOn}} </i>
+                <i class="fa fa-commenting-o" style="float:right;"> <a (click)="view()"> {{article.Comments}}</a> </i>
             </div>
         </div>
-        <h2><a>{{htmlDecode(article.Title)}}</a></h2>
-        <div>{{htmlDecode(article.Content)}}</div>
-        <div class="listInfo">submitted {{article.CreatedOn}} ago by <a href="{{article.UserName}}">{{article.UserName}}</a> to <a href="/@locale/r/@article.GroupName">/r/{{article.GroupName}}</a></div>
-        <div class="listInfo"><a href="/@locale/r/@article.GroupName/comments/@article.Id/@Helpers.GetShortTitle(article.Title)/" target="_blank">{{article.Comments}} comments</a></div>
-        <div class="postClear"></div>
     </div>
   </ion-list>
 
@@ -26,8 +51,5 @@
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-
-
-  
 
 </ion-content>
