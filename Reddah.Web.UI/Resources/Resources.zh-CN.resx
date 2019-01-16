@@ -270,6 +270,12 @@
   <data name="Footer_ContentPolicy" xml:space="preserve">
     <value>内容政策</value>
   </data>
+  <data name="Footer_Press" xml:space="preserve">
+    <value>版权申诉</value>
+  </data>
+  <data name="Footer_Jobs" xml:space="preserve">
+    <value>工作机会</value>
+  </data>
   <data name="Msg_Deleted" xml:space="preserve">
     <value>此内容已经被删除</value>
   </data>

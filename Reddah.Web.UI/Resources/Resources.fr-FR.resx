@@ -276,6 +276,12 @@
   <data name="Footer_ContentPolicy" xml:space="preserve">
     <value>Content Policy</value>
   </data>
+  <data name="Footer_Press" xml:space="preserve">
+    <value>Press</value>
+  </data>
+  <data name="Footer_Jobs" xml:space="preserve">
+    <value>Jobs</value>
+  </data>
   <data name="Msg_Deleted" xml:space="preserve">
     <value>The content was deleted</value>
   </data>
