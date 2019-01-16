@@ -25,6 +25,8 @@
         s = s.replace(/&quot;/g, "\"");
         s = s.replace(/&#183;/g, "\·");
         s = s.replace(/&middot;/g, "\·");
+        s = s.replace(/&ldquo;/g, "\"");
+        s = s.replace(/\r\n/g, "")
         
         return s;
     };
