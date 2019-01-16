@@ -20,7 +20,7 @@
             Web Api controller
             </summary>
         </member>
-        <member name="M:Reddah.Web.UI.Controllers.WebApiController.GetArticles(System.Int32[])">
+        <member name="M:Reddah.Web.UI.Controllers.WebApiController.GetArticles(Reddah.Web.UI.Models.UserProfileModel)">
             <summary>
             Get Articles
             </summary>

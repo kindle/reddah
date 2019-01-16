@@ -450,6 +450,22 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
+        public static string Footer_Press
+        {
+            get
+            {
+                return ResourceManager.GetString("Footer_Press", resourceCulture);
+            }
+        }
+
+        public static string Footer_Jobs
+        {
+            get
+            {
+                return ResourceManager.GetString("Footer_Jobs", resourceCulture);
+            }
+        }
+
         public static string Login_AgreeWord
         {
             get
