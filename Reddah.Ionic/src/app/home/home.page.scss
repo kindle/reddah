@@ -1,3 +1,6 @@
+video{
+    width: 100%;
+}
 .listInfoBlock {
     overflow:hidden;
 }
@@ -9,6 +12,7 @@
     height: 120px;
     overflow: hidden;
     cursor: pointer;
+    margin: 2px;
 }
 .BrowsePreviewImage
 {

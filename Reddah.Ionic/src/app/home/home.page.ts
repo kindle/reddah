@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { InfiniteScroll } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../article';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-home',
@@ -72,7 +73,8 @@ export class HomePage implements OnInit {
       //}, 500);
     }
 
-    constructor(private reddah : ReddahService){}
+    constructor(private reddah : ReddahService, 
+      private localStorageService: LocalStorageService){}
 
     ngOnInit(){
       this.articles = [];
@@ -83,7 +85,10 @@ export class HomePage implements OnInit {
     
 
     getHeroes(): void {
-      this.reddah.getHeroes(this.loadedIds, "en-us", "new")
+      let locale = this.localStorageService.retrieve("Reddah_Locale");
+      if(locale==null)
+        locale = "en-us"
+      this.reddah.getHeroes(this.loadedIds, locale, "new")
         .subscribe(heroes => 
           {
             for(let article of heroes){
