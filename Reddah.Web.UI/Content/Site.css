@@ -1815,6 +1815,18 @@ td.spread {
 }
 
 
+.em_hint {
+    line-height: 1.5em;
+    font-style: normal;
+    background: #fcfbd7;
+    padding: .5em .75em;
+    margin: 0 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px #d1d0bb;
+    color: #222;
+}
+
+
 /*ok menu css start*/
 /*
  * We are hiding the invisible nav outside the screen

@@ -168,8 +168,17 @@
   <data name="Menu_Rising" xml:space="preserve">
     <value>上升</value>
   </data>
+  <data name="Menu_Games" xml:space="preserve">
+    <value>游戏</value>
+  </data>
+  <data name="Menu_Download" xml:space="preserve">
+    <value>下载</value>
+  </data>
   <data name="Menu_Support" xml:space="preserve">
     <value>帮助</value>
+  </data>
+  <data name="Menu_Search" xml:space="preserve">
+    <value>搜索</value>
   </data>
   <data name="Menu_Top" xml:space="preserve">
     <value>热评榜</value>
@@ -191,6 +200,9 @@
   </data>
   <data name="Right_ContactUs_Desc" xml:space="preserve">
     <value>留言与技术人员联系，我们已准备好帮助您！</value>
+  </data>
+  <data name="Right_Tags" xml:space="preserve">
+    <value>扫码安装手机APP</value>
   </data>
   <data name="Article_TrendingSubReddah" xml:space="preserve">
     <value>热门主题</value>
@@ -218,6 +230,12 @@
   </data>
   <data name="Article_RandomSubReddah" xml:space="preserve">
     <value>查看随机主题</value>
+  </data>
+  <data name="Article_Likeit" xml:space="preserve">
+    <value>我喜欢！</value>
+  </data>
+  <data name="Article_Share" xml:space="preserve">
+    <value>分享</value>
   </data>
   <data name="Login_UserName" xml:space="preserve">
     <value>用户名</value>
@@ -275,6 +293,9 @@
   </data>
   <data name="Footer_Jobs" xml:space="preserve">
     <value>工作机会</value>
+  </data>
+  <data name="Footer_ForDevelopers" xml:space="preserve">
+    <value>面向开发者</value>
   </data>
   <data name="Msg_Deleted" xml:space="preserve">
     <value>此内容已经被删除</value>

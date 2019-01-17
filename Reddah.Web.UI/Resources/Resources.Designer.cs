@@ -234,11 +234,35 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
+        public static string Menu_Games
+        {
+            get
+            {
+                return ResourceManager.GetString("Menu_Games", resourceCulture);
+            }
+        }
+
+        public static string Menu_Download
+        {
+            get
+            {
+                return ResourceManager.GetString("Menu_Download", resourceCulture);
+            }
+        }
+
         public static string Menu_Support
         {
             get
             {
                 return ResourceManager.GetString("Menu_Support", resourceCulture);
+            }
+        }
+
+        public static string Menu_Search
+        {
+            get
+            {
+                return ResourceManager.GetString("Menu_Search", resourceCulture);
             }
         }
 
@@ -295,6 +319,14 @@ namespace Reddah.Web.UI.Resources
             get
             {
                 return ResourceManager.GetString("Right_ContactUs_Desc", resourceCulture);
+            }
+        }
+
+        public static string Right_Tags
+        {
+            get
+            {
+                return ResourceManager.GetString("Right_Tags", resourceCulture);
             }
         }
 
@@ -367,6 +399,22 @@ namespace Reddah.Web.UI.Resources
             get
             {
                 return ResourceManager.GetString("Article_RandomSubReddah", resourceCulture);
+            }
+        }
+
+        public static string Article_Likeit
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_Likeit", resourceCulture);
+            }
+        }
+
+        public static string Article_Share
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_Share", resourceCulture);
             }
         }
 
@@ -463,6 +511,14 @@ namespace Reddah.Web.UI.Resources
             get
             {
                 return ResourceManager.GetString("Footer_Jobs", resourceCulture);
+            }
+        }
+
+        public static string Footer_ForDevelopers
+        {
+            get
+            {
+                return ResourceManager.GetString("Footer_ForDevelopers", resourceCulture);
             }
         }
 

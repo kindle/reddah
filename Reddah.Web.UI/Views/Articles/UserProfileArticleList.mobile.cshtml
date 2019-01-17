@@ -1,4 +1,5 @@
 ﻿@using Reddah.Web.UI.Utility
+@using Reddah.Web.UI.Resources
 @using System.Globalization
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
@@ -20,47 +21,91 @@
         padding: 30px;
         text-align: center;
     }
+
+    .em_hint {
+        line-height: 1.5em;
+        font-style: normal;
+        background: #fcfbd7;
+        padding: .5em .75em;
+        margin: 5px 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px #d1d0bb;
+        color: #222;
+    }
 </style>
-<input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@Helpers.GetAntiForgeryToken()'" />
-<div class="postBlock" id="postBlock" ng-controller="articleCtrl">
-    <div class="ai-list" id="ai-list" ng-init="getUserProfileArticles('@locale','@menu','@sub','@user','@keyword')" when-scrolled="loadMore('@locale','@menu','@sub','@user','@keyword')">
-        <div class="post" ng-repeat="article in aiArticles" on-finish-render-posts>
-            <div class="postModuleLiner">
-                <div ng-if="article.VideoUrl.length>0">
-                    <h2><a ng-click="viewArticle('@locale', article.GroupName, article.Id, urlDecode(article.Title))">{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
-                    <div class="postClear"></div>
-                    <video id="video_{{article.Id}}" ng-click="playVideo(article.Id)" ng-attr-src="{{trustAsResourceUrl(article.VideoUrl)}}"
-                           ng-attr-poster="{{article.VideoPoster}}"
-                           controls="controls" loop="true">
-                        your browser does not support the video tag
-                    </video>
-                    <div class="postClear"></div>
-                </div>
-                <div ng-if="article.VideoUrl.length==0" ng-click="viewArticle('@locale', article.GroupName, article.Id, urlDecode(article.Title))">
-                    <h2 ng-if="article.ImageUrls.length>1"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
-                    <div class="postClear" ng-if="article.ImageUrls.length>1"></div>
-                    <div class="listImage" ng-style="{display:article.ImageUrls.length>1?'flex':''}">
-                        <div class="listImageWrapper" ng-repeat="articleUrl in article.ImageUrls">
-                            <img class="lazy BrowsePreviewImage" onerror="this.style.display='none'" src="" data-original="{{articleUrl}}">
-                        </div>
+@if (menu != null && keyword != null && menu.Equals("search") && keyword.Equals("default"))
+{
+    <div class="SearchArea" ng-controller="searchCtrl">
+        <input id="SearchTextBox" type="text" name="q" class="TextBox" style="width:100%;" data-ng-model="keyword" url="" ng-keyup="searchOnEnter($event,'@locale')" maxlength="200" autocomplete="off" />
+        <input id="SearchButton" type="button" class="SubmitButton" value="@Resources.Menu_Search" title="Search" ng-click="search('@locale')" />
+    </div>
+    <div>
+        <span>推荐搜索</span>
+    </div>
+    <div class="postClear"></div>
+    <ol>
+        <li>
+            <span class="em_hint"><a href="/@locale/search/春节">春节</a></span>
+            <span class="em_hint"><a href="/@locale/search/祝福">祝福</a></span>
+            <span class="em_hint"><a href="/@locale/search/励志">励志</a></span>
+            <span class="em_hint"><a href="/@locale/search/友情">友情</a></span>
+        </li>
+        <li>
+            <span class="em_hint"><a href="/@locale/search/爱国">爱国</a></span>
+            <span class="em_hint"><a href="/@locale/search/怀古">怀古</a></span>
+            <span class="em_hint"><a href="/@locale/search/思乡">思乡</a></span>
+            <span class="em_hint"><a href="/@locale/search/惜时">惜时</a></span>
+        </li>
+        <li>
+            <span class="em_hint"><a href="/@locale/search/思念">思念</a></span>
+        </li>
+    </ol>
+    <div class="postClear"></div>
+}
+else
+{
+    <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@Helpers.GetAntiForgeryToken()'" />
+    <div class="postBlock" id="postBlock" ng-controller="articleCtrl">
+        <div class="ai-list" id="ai-list" ng-init="getUserProfileArticles('@locale','@menu','@sub','@user','@keyword')" when-scrolled="loadMore('@locale','@menu','@sub','@user','@keyword')">
+            <div class="post" ng-repeat="article in aiArticles" on-finish-render-posts>
+                <div class="postModuleLiner">
+                    <div ng-if="article.VideoUrl.length>0">
+                        <h2><a ng-click="viewArticle('@locale', article.GroupName, article.Id, urlDecode(article.Title))">{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                        <div class="postClear"></div>
+                        <video id="video_{{article.Id}}" ng-click="playVideo(article.Id)" ng-attr-src="{{trustAsResourceUrl(article.VideoUrl)}}"
+                               ng-attr-poster="{{article.VideoPoster}}"
+                               controls="controls" loop="true">
+                            your browser does not support the video tag
+                        </video>
+                        <div class="postClear"></div>
                     </div>
-                    <h2 ng-if="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
-                    <div>{{summary(article.Content, 120)}}</div>
-                </div>
-                <div class="postClear"></div>
-                <div class="listInfo">
-                    <span ng-repeat="group in article.GroupName.split(',')" style="padding:0 5px;">
-                        <a href="/@locale/r/{{group}}"><u>{{group}}</u></a>
-                    </span>
-                </div>
-                <div class="postClear"></div>
-                <div class="listInfo">
-                    <i class="fa fa-clock-o"> {{article.CreatedOn}} </i>
-                    <i class="fa fa-commenting-o" style="float:right;"> <a ng-click="viewArticle('@locale', article.GroupName, article.Id, urlDecode(article.Title))">{{article.Comments}}</a> </i>
+                    <div ng-if="article.VideoUrl.length==0" ng-click="viewArticle('@locale', article.GroupName, article.Id, urlDecode(article.Title))">
+                        <h2 ng-if="article.ImageUrls.length>1"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                        <div class="postClear" ng-if="article.ImageUrls.length>1"></div>
+                        <div class="listImage" ng-style="{display:article.ImageUrls.length>1?'flex':''}">
+                            <div class="listImageWrapper" ng-repeat="articleUrl in article.ImageUrls">
+                                <img class="lazy BrowsePreviewImage" onerror="this.style.display='none'" src="" data-original="{{articleUrl}}">
+                            </div>
+                        </div>
+                        <h2 ng-if="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                        <div>{{summary(article.Content, 120)}}</div>
+                    </div>
+                    <div class="postClear"></div>
+                    <div class="listInfo">
+                        <span ng-repeat="group in article.GroupName.split(',')" style="padding:0 5px;">
+                            <a href="/@locale/r/{{group}}"><u>{{group}}</u></a>
+                        </span>
+                    </div>
+                    <div class="postClear"></div>
+                    <div class="listInfo">
+                        <i class="fa fa-clock-o"> {{article.CreatedOn}} </i>
+                        <i class="fa fa-commenting-o" style="float:right;"> <a ng-click="viewArticle('@locale', article.GroupName, article.Id, urlDecode(article.Title))">{{article.Comments}}</a> </i>
+                    </div>
                 </div>
             </div>
+            <div class="postClear"></div>
+            <div class="articleLoading"><img src="/content/images/loading_50x50.gif" width="100" height="100" ng-show="loading==true" /></div>
         </div>
-        <div class="postClear"></div>
-        <div class="articleLoading"><img src="/content/images/loading_50x50.gif" width="100" height="100" ng-show="loading==true" /></div>
     </div>
-</div>
+}
+

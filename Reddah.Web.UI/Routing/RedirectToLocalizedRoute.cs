@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Threading;
 using System.Web;
 using System.Web.Routing;
 
@@ -23,7 +24,9 @@ namespace Reddah.Web.UI.Routing
         {
             var httpRequest = new HttpRequestWrapper(httpContext.Request);
             //var culture = IoC.Get<IReddahCultureProvider>().GetCurrentCultureInfo();
-            var culture = new CultureInfo("en-US");
+            //var culture = new CultureInfo("en-US");
+            //var culture = Thread.CurrentThread.CurrentCulture;
+            var culture = new CultureInfo(httpContext.Request.UserLanguages[0]);
 
             var newUri = ConstructRedirectUrl(httpRequest, culture);
 

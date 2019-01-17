@@ -171,10 +171,19 @@
     <data name="Menu_Rising" xml:space="preserve">
     <value>Rising</value>
   </data>
-    <data name="Menu_Support" xml:space="preserve">
+  <data name="Menu_Games" xml:space="preserve">
+    <value>Games</value>
+  </data>
+  <data name="Menu_Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Menu_Support" xml:space="preserve">
     <value>Support</value>
   </data>
-    <data name="Menu_Top" xml:space="preserve">
+  <data name="Menu_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Menu_Top" xml:space="preserve">
     <value>Top</value>
   </data>
     <data name="Navi_Home" xml:space="preserve">
@@ -198,7 +207,10 @@
     <data name="Right_ContactUs_Desc" xml:space="preserve">
     <value>Get in touch with an Reddah Support technician. We are ready and willing to help you!</value>
   </data>
-    <data name="Article_TrendingSubReddah" xml:space="preserve">
+  <data name="Right_Tags" xml:space="preserve">
+    <value>Scan QR Codes to download mobile App</value>
+  </data>
+  <data name="Article_TrendingSubReddah" xml:space="preserve">
     <value>Trending Subreddahs</value>
   </data>
     <data name="Article_Comments" xml:space="preserve">
@@ -225,7 +237,13 @@
     <data name="Article_RandomSubReddah" xml:space="preserve">
     <value>Random SubReddah</value>
   </data>
-    <data name="Login_UserName" xml:space="preserve">
+  <data name="Article_Likeit" xml:space="preserve">
+    <value>I like it!</value>
+  </data>
+  <data name="Article_Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="Login_UserName" xml:space="preserve">
     <value>username</value>
   </data>
     <data name="Login_Password" xml:space="preserve">
@@ -281,6 +299,9 @@
   </data>
   <data name="Footer_Jobs" xml:space="preserve">
     <value>Jobs</value>
+  </data>
+  <data name="Footer_ForDevelopers" xml:space="preserve">
+    <value>For Developers</value>
   </data>
   <data name="Msg_Deleted" xml:space="preserve">
     <value>The content was deleted</value>

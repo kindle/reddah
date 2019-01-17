@@ -2,6 +2,8 @@
 .controller("searchCtrl", ['$scope', function ($scope) {
     $scope.keyword = "";
     $scope.search = function (locale) {
+        if ($scope.keyword == "")
+            $scope.keyword = "default"
         let url = `/${locale}/search/${$scope.keyword}/`;
         window.open(url, '_self');
     };

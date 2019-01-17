@@ -14,7 +14,7 @@
         width: 1170px;
         margin: 0 auto;
         margin-top: 0;
-        min-height: 500px; 
+        min-height: 500px;
         display: flex;
         justify-content: flex-start;
     }
@@ -53,8 +53,8 @@
         opacity: 0.5;
         transition: 0.2s;
         border-radius: 2px;
-        cursor:pointer;
-        border-color:white;
+        cursor: pointer;
+        border-color: white;
         border-style: solid;
     }
 
@@ -65,10 +65,28 @@
     #ai-right .post {
         margin-bottom: 20px;
     }
-
 </style>
 <link href="/Content/Post.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+@if (menu != null && keyword != null && menu.Equals("search") && keyword.Equals("default"))
+{
+    <div>
+        <span>推荐搜索</span>
+    </div>
+    <div class="postClear"></div>
+    <div>
+        <span class="em_hint"><a href="/@locale/search/春节">春节</a></span>
+        <span class="em_hint"><a href="/@locale/search/祝福">祝福</a></span>
+        <span class="em_hint"><a href="/@locale/search/励志">励志</a></span>
+        <span class="em_hint"><a href="/@locale/search/友情">友情</a></span>
+        <span class="em_hint"><a href="/@locale/search/思念">思念</a></span>
+        <span class="em_hint"><a href="/@locale/search/爱国">爱国</a></span>
+        <span class="em_hint"><a href="/@locale/search/怀古">怀古</a></span>
+        <span class="em_hint"><a href="/@locale/search/思乡">思乡</a></span>
+        <span class="em_hint"><a href="/@locale/search/惜时">惜时</a></span>
+    </div>
+    <div class="postClear"></div>
+}
 <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@Helpers.GetAntiForgeryToken()'" />
 <div class="ai-container" id="postBlock" ng-controller="articleCtrl">
     <div class="ai-list" id="ai-list" ng-init="getUserProfileArticles('@locale','@menu','@sub','@user','@keyword')" when-scrolled="loadMore('@locale','@menu','@sub','@user','@keyword')">
@@ -109,14 +127,14 @@
         <div ng-init="serverError=false" ng-show="serverError"><h3 class="em_error"><span onclick="javascript: location.reload();">@Resources.Error_Server_Error</span></h3></div>
         <div class="articleLoading"><img src="/content/images/loading_50x50.gif" ng-show="loading==true" /></div>
     </div>
-    
+
     @*foreach (string g in sub.ToString().Trim().Split(','))
-    {
-        <div ng-controller="groupCtrl" data-ng-init="getGroup('@g','@locale')">
-            <p>{{group.Desc}}</p>
-        </div>
-    }*@
-    
+        {
+            <div ng-controller="groupCtrl" data-ng-init="getGroup('@g','@locale')">
+                <p>{{group.Desc}}</p>
+            </div>
+        }*@
+
     <div class="ai-right" ng-controller="rightBoxCtrl" ng-init="getRightBox('@locale')">
         <div class="post" ng-repeat="item in aiRightBoxItems">
             <div class="listImage">
@@ -133,7 +151,7 @@
         <div class="postClear"></div>
         <div class="post">
             <div class="listInfo">
-                <h2><a href="#">扫码安装手机APP</a></h2>
+                <h2><a href="#">@Resources.Right_Tags</a></h2>
             </div>
             <div class="listImage">
                 <div>
