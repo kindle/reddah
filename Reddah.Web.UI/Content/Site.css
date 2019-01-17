@@ -1816,6 +1816,7 @@ td.spread {
 
 
 .em_hint {
+    display: inline-block;
     line-height: 1.5em;
     font-style: normal;
     background: #fcfbd7;

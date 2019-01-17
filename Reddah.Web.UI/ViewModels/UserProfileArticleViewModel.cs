@@ -44,7 +44,7 @@
                     query = (from b in db.Articles
                              where b.Locale.StartsWith(locale) &&
                               !(loaded).Contains(b.Id)
-                             orderby b.Count descending
+                             orderby b.Count descending, b.LastUpdateOn descending
                              select b)
                             .Take(pageCount);
                 }
@@ -53,7 +53,7 @@
                     query = (from b in db.Articles
                              where b.Locale.StartsWith(locale) &&
                               !(loaded).Contains(b.Id)
-                             orderby b.Count descending
+                             orderby b.Count descending, b.LastUpdateOn descending
                              select b)
                             .Take(pageCount);
                 }
@@ -75,7 +75,7 @@
                                 b.GroupName.Contains(g5) &&
                                 b.Locale.StartsWith(locale) &&
                                 !(loaded).Contains(b.Id)
-                             orderby b.Id descending
+                             orderby b.Count descending, b.LastUpdateOn descending
                              select b)
                             .Take(pageCount);
                 }
@@ -101,7 +101,7 @@
                                 b.GroupName.Contains(userProfileModel.Keyword))  &&
                                 b.Locale.StartsWith(locale) &&
                                 !(loaded).Contains(b.Id)
-                             orderby b.Id descending
+                             orderby b.Count descending, b.LastUpdateOn descending
                              select b)
                             .Take(pageCount);
                 }

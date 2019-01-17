@@ -23,43 +23,55 @@
     }
 
     .em_hint {
+        display: inline-block;
         line-height: 1.5em;
         font-style: normal;
         background: #fcfbd7;
         padding: .5em .75em;
-        margin: 5px 20px;
+        margin: 5px 10px;
         border-radius: 5px;
         box-shadow: 0 2px 5px #d1d0bb;
         color: #222;
     }
+    .reclist{
+        padding: 5px;
+    }
 </style>
 @if (menu != null && keyword != null && menu.Equals("search") && keyword.Equals("default"))
 {
+    string[] topics = { "春节", "祝福", "励志", "友情", "爱国", "怀古", "思乡", "惜时", "思念" ,
+      "田园","送别","山水","爱情","边塞","悼亡","战争",
+      "闺怨","清明","端午","中秋","七夕","重阳","寒食","元宵","春天","夏天",
+      "秋天","冬天","雨","雪","风","花","梅花","荷花","菊花","柳",
+      "月亮","马","哲理","唐诗三百首","怀古","古诗十九首","羁旅","宋词三百首",
+      "小学","初中","高中","婉约","豪放","老师","母亲","读书","咏史诗","怀才不遇","寓理","忧国忧民","人生",
+      "悲愤","孤独","讽刺","赞美","劳动","壮志难酬"
+      };
+
+    string[] authors = {
+      "诗经","李白","杜甫","白居易","岑参","王维","孟浩然","贺知章","王勃","李商隐","杜牧","李贺","柳宗元",
+        "李清照","黄庭坚","苏轼","王安石","欧阳修","梅尧臣","文天祥","杨万里","范成大","陆游","范仲淹","辛弃疾"
+        };
     <div class="SearchArea" ng-controller="searchCtrl">
-        <input id="SearchTextBox" type="text" name="q" class="TextBox" style="width:100%;" data-ng-model="keyword" url="" ng-keyup="searchOnEnter($event,'@locale')" maxlength="200" autocomplete="off" />
+        <input id="SearchTextBox" type="text" name="q" class="TextBox" style="margin-right:10px;width:auto;" data-ng-model="keyword" url="" ng-keyup="searchOnEnter($event,'@locale')" maxlength="200" autocomplete="off" />
         <input id="SearchButton" type="button" class="SubmitButton" value="@Resources.Menu_Search" title="Search" ng-click="search('@locale')" />
     </div>
-    <div>
-        <span>推荐搜索</span>
-    </div>
     <div class="postClear"></div>
-    <ol>
-        <li>
-            <span class="em_hint"><a href="/@locale/search/春节">春节</a></span>
-            <span class="em_hint"><a href="/@locale/search/祝福">祝福</a></span>
-            <span class="em_hint"><a href="/@locale/search/励志">励志</a></span>
-            <span class="em_hint"><a href="/@locale/search/友情">友情</a></span>
-        </li>
-        <li>
-            <span class="em_hint"><a href="/@locale/search/爱国">爱国</a></span>
-            <span class="em_hint"><a href="/@locale/search/怀古">怀古</a></span>
-            <span class="em_hint"><a href="/@locale/search/思乡">思乡</a></span>
-            <span class="em_hint"><a href="/@locale/search/惜时">惜时</a></span>
-        </li>
-        <li>
-            <span class="em_hint"><a href="/@locale/search/思念">思念</a></span>
-        </li>
-    </ol>
+    <hr />
+    <div class="reclist">
+        <span>推荐搜索</span>
+        <div class="postClear"></div>
+        @foreach (string topic in topics)
+        {
+            <span class="em_hint"><a href="/@locale/search/@topic">@topic</a></span>
+        }
+        <hr />
+        @foreach (string author in authors)
+        {
+            <span class="em_hint"><a href="/@locale/search/@author">@author</a></span>
+        }
+    </div>
+
     <div class="postClear"></div>
 }
 else

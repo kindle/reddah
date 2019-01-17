@@ -14,12 +14,26 @@
             <ol>
                 @foreach (var culture in group)
                 {
-                    <li><a href="@culture.Link">@culture.DisplayName</a></li>
+                    <li><span class="em_hint"><a href="@culture.Link">@culture.DisplayName</a></span> </li>
                 }
             </ol>
+            <div class="postClear"></div>
         </li>
     }
 }
+<style>
+    .em_hint {
+        display: inline-block;
+        line-height: 1.5em;
+        font-style: normal;
+        background: #fcfbd7;
+        padding: .5em .75em;
+        margin: 0 0;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px #d1d0bb;
+        color: #222;
+    }
+</style>
 <link href="/Content/Comment.css" rel="stylesheet" />
 <link href="/Content/Post.css" rel="stylesheet" />
 <h1>Set Your Default Country or Region</h1>

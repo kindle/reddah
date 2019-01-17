@@ -4,6 +4,8 @@
 @using Reddah.Web.UI.Utility
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
+    ViewBag.ReddahPageTitle = Helpers.HtmlDecode(Model.Article.Title);
+    Layout = "~/Views/Shared/Layouts/_ArticleLayout.mobile.cshtml";
 }
 <link href="/Content/Comment.css" rel="stylesheet" />
 <link href="/Content/Post.css" rel="stylesheet" />
@@ -43,7 +45,13 @@
 <div class="articleContent" id="articleContentMobile">
     <div class="listInfo"><h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1></div>
     <div class="postClear"></div>
-    <div class="listInfo">@Resources.List_Submit @Model.Article.CreatedOn @Resources.List_By <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a>  <a href="/@locale/r/@Helpers.HtmlDecode(Model.Article.GroupName)"><u>@Helpers.HtmlDecode(Model.Article.GroupName)</u></a></div>
+    <div class="listInfo">
+        @Resources.List_Submit @Model.Article.CreatedOn @Resources.List_By <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a>
+        @foreach (string g in Model.Article.GroupName.Trim().Split(','))
+        {
+            <a href="/@locale/r/@Helpers.HtmlDecode(g)"><u>@Helpers.HtmlDecode(g)</u> </a>
+        }
+    </div>
     @if (Model.Article.LastUpdateOn != null)
     {<div class="listInfo">@Resources.List_LastUpdateOn @Model.Article.LastUpdateOn</div>}
     <div class="listInfo">
