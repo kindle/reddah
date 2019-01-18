@@ -132,6 +132,12 @@
   <data name="Footer_ChangeLocale" xml:space="preserve">
     <value>English Country</value>
   </data>
+  <data name="ChangeLocale_Title" xml:space="preserve">
+    <value>Set Your Default Country or Region</value>
+  </data>
+  <data name="ChangeLocale_Desc" xml:space="preserve">
+    <value>Select the default country or region you would like to see each time you visit Reddah.com.</value>
+  </data>
   <data name="Header_JoinNow" xml:space="preserve">
     <value>Join Now</value>
   </data>

@@ -132,7 +132,13 @@
     <data name="Footer_ChangeLocale" xml:space="preserve">
         <value>한국어(대한민국)</value>
   </data>
-    <data name="Header_JoinNow" xml:space="preserve">
+  <data name="ChangeLocale_Title" xml:space="preserve">
+    <value>Set Your Default Country or Region</value>
+  </data>
+  <data name="ChangeLocale_Desc" xml:space="preserve">
+    <value>Select the default country or region you would like to see each time you visit Reddah.com.</value>
+  </data>
+  <data name="Header_JoinNow" xml:space="preserve">
         <value>지금 가입</value>
   </data>
     <data name="Header_MyAccount" xml:space="preserve">

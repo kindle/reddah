@@ -371,6 +371,8 @@
     <Content Include="App_Data\wiki\Pages\Apps\Reddah\Tutorial\NavigationList.xml" />
     <Content Include="App_Data\wiki\Pages\BrowseNavigate.xml" />
     <Content Include="App_Data\wiki\Pages\Download.xml" />
+    <Content Include="App_Data\wiki\Pages\Download.zh-cn.xml" />
+    <Content Include="App_Data\wiki\Pages\Download.bak.xml" />
     <Content Include="App_Data\wiki\Pages\Download\NavigationList.xml" />
     <Content Include="App_Data\wiki\Pages\FamilyPage.xml" />
     <Content Include="App_Data\wiki\Pages\FamilyPageHardDeflection.xml" />
@@ -587,7 +589,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\playSmall.png" />
-    <Content Include="Images\reddah-release-0.0.1-apk.png" />
+    <Content Include="Images\reddah.apk.png" />
     <Content Include="Reddah.Web.UI.XML">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -839,6 +841,7 @@
     <Content Include="Views\Articles\UserProfileArticleList.cshtml" />
     <Content Include="Views\Articles\UserProfileArticleList.mobile.cshtml" />
     <Content Include="Views\Shared\Layouts\_ArticleLayout.mobile.cshtml" />
+    <Content Include="Views\Articles\SolutionArticle.mobile.cshtml" />
     <None Include="Web.config.sit">
       <SubType>Designer</SubType>
     </None>

@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentType Name="SolutionArticle">
-  <Title>Download Reddah Mobile App</Title>
+  <Title>下载手机App</Title>
   <Module>
     <ModuleType>StartSectionModule</ModuleType>
-    <Text>Scan QR Codes</Text>
+    <Text>扫描二维码</Text>
   </Module>
   <Module>
     <ModuleType>OneImageModule</ModuleType>
     <Style>Medium</Style>
-    <Caption>Scan QR Codes to download Android mobile App</Caption>
+    <Caption>扫描二维码下载安卓手机App</Caption>
     <ImageUrl>/Images/reddah.apk.png</ImageUrl>
     <Text></Text>
     <ImageLink></ImageLink>
   </Module>
   <Module>
     <ModuleType>StartSectionModule</ModuleType>
-    <Text>Download from a link</Text>
+    <Text>点击链接下载</Text>
   </Module>
   <Module>
     <ModuleType>TextModule</ModuleType>
@@ -39,11 +39,10 @@
           font-size: 1rem;
       }
       </style>
-      Click here to download: 
       <br/>
-      <a href="///reddah.com/apk/Reddah.apk" class="home-downloadbutton" title="Download reddah.com android apk">
-        Reddah.apk
-        <small>Latest Features</small>
+      <a href="///reddah.com/apk/Reddah.apk" class="home-downloadbutton" title="下载安卓Apk">
+        点击下载 Reddah.apk
+        <small>最新版本</small>
       </a>
       <br/>
       ]]>

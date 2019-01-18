@@ -178,6 +178,22 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
+        public static string ChangeLocale_Title
+        {
+            get
+            {
+                return ResourceManager.GetString("ChangeLocale_Title", resourceCulture);
+            }
+        }
+
+        public static string ChangeLocale_Desc
+        {
+            get
+            {
+                return ResourceManager.GetString("ChangeLocale_Desc", resourceCulture);
+            }
+        }
+
         public static string Header_Create
         {
             get

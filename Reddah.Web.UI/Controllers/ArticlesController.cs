@@ -106,6 +106,10 @@
                 }
 
                 // SolutionArticle
+
+                presentationView = Request.Browser.IsMobileDevice ?
+                    "~/Views/Articles/SolutionArticle.mobile.cshtml" : "~/Views/Articles/SolutionArticle.cshtml";
+
                 return View(presentationView, new SolutionArticleViewModel(path));
             }
             //    // Hide the header and footer
