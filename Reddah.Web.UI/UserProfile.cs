@@ -24,6 +24,12 @@ public partial class UserProfile
 
     public string Email { get; set; }
 
+    public Nullable<int> Sex { get; set; }
+
+    public string Signature { get; set; }
+
+    public string Photo { get; set; }
+
 }
 
 }

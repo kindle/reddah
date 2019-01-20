@@ -434,6 +434,22 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
+        public static string Article_CommentTitle
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_CommentTitle", resourceCulture);
+            }
+        }
+
+        public static string Article_CommentCount
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_CommentCount", resourceCulture);
+            }
+        }
+
         public static string Login_UserName
         {
             get

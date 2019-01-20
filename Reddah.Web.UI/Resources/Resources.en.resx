@@ -249,6 +249,12 @@
   <data name="Article_Share" xml:space="preserve">
     <value>Share</value>
   </data>
+  <data name="Article_CommentTitle" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Article_CommentCount" xml:space="preserve">
+    <value>comment(s)</value>
+  </data>
   <data name="Login_UserName" xml:space="preserve">
     <value>username</value>
   </data>

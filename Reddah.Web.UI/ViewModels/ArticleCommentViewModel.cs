@@ -50,7 +50,7 @@
 
                 var comments = (from c in db.Comments
                                 where c.ArticleId == id
-                                orderby c.CreatedOn descending
+                                orderby c.CreatedOn ascending
                              select c);//.Skip(pageCount * pageNo).Take(pageCount);
 
                 Comments = new SeededComments { Seed = -1, Comments = comments.ToList() };

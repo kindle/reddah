@@ -253,7 +253,10 @@
             {
                 {"fuck", "duck"},
                 {"bitch", "beach"},
-                {"asshole", "niceweather"}
+                {"asshole", "niceweather"},
+                {"操他妈","#$@" },
+                {"操你妈","#*@" },
+                {"你妈逼","*@O" },
             };
             return re.Replace(text, match => replacements.ContainsKey(match.Groups[1].Value) ? 
                 replacements[match.Groups[1].Value] : match.Groups[1].Value);

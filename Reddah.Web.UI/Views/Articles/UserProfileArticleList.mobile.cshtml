@@ -82,7 +82,7 @@ else
             <div class="post" ng-repeat="article in aiArticles" on-finish-render-posts>
                 <div class="postModuleLiner">
                     <div ng-if="article.VideoUrl.length>0">
-                        <h2><a ng-click="viewArticle('@locale', article.GroupName, article.Id, urlDecode(article.Title))">{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                        <h2><a ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))">{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
                         <div class="postClear"></div>
                         <video id="video_{{article.Id}}" ng-click="playVideo(article.Id)" ng-attr-src="{{trustAsResourceUrl(article.VideoUrl)}}"
                                ng-attr-poster="{{article.VideoPoster}}"
@@ -91,7 +91,7 @@ else
                         </video>
                         <div class="postClear"></div>
                     </div>
-                    <div ng-if="article.VideoUrl.length==0" ng-click="viewArticle('@locale', article.GroupName, article.Id, urlDecode(article.Title))">
+                    <div ng-if="article.VideoUrl.length==0" ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))">
                         <h2 ng-if="article.ImageUrls.length>1"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
                         <div class="postClear" ng-if="article.ImageUrls.length>1"></div>
                         <div class="listImage" ng-style="{display:article.ImageUrls.length>1?'flex':''}">
@@ -111,7 +111,7 @@ else
                     <div class="postClear"></div>
                     <div class="listInfo">
                         <i class="fa fa-clock-o"> {{article.CreatedOn}} </i>
-                        <i class="fa fa-commenting-o" style="float:right;"> <a ng-click="viewArticle('@locale', article.GroupName, article.Id, urlDecode(article.Title))">{{article.Comments}}</a> </i>
+                        <i class="fa fa-commenting-o" style="float:right;"> <a ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))">{{article.Comments}}</a> </i>
                     </div>
                 </div>
             </div>

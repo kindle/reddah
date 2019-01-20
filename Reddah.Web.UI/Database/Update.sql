@@ -13,8 +13,6 @@ alter table [dbo].[Group] add
 alter table article alter column
   [Abstract] NVARCHAR(MAX) 
 
-
-
 insert into webpages_privileges (PrivilegeName)values('edit post')
 insert into webpages_privileges (PrivilegeName)values('delete post')
 insert into webpages_privileges (PrivilegeName)values('delete comment')
@@ -36,10 +34,17 @@ update userprofile set username=N'妙吉祥' where userid=7
 update userprofile set username=N'虚空' where userid=8
 update userprofile set username=N'广目' where userid=9
 update userprofile set username=N'多闻' where userid=10
-
 update userprofile set username=N'匿名用户' where userid=2
 
-select * from userprofile
+alter table [dbo].[UserProfile] add
+  [Sex] INT default 0, 
+  [Signature] NVARCHAR (MAX) NULL,
+  [Photo] VARCHAR (MAX) NULL
+
+update userprofile set sex=1 where userid in(3,4,6,8,9,10)
+update userprofile set sex=0 where userid in(5,7)
+update userprofile set signature=N'悲莫悲生离别，乐莫乐新相识' where userid=3
+
 
 
 
