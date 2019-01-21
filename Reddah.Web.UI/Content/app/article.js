@@ -18,25 +18,31 @@
     $scope.group = {
         Locale: "",
         Name: "",
-        Desc: ""
+        Desc: "",
+        Limit: 150
     }
     $scope.groupLoading = false;
     $scope.getGroup = function (name, locale) {
-        $scope.group = {
-            Locale: locale,
-            Name: name,
-            Desc: ""
-        }
+        $scope.group.Locale = locale;
+        $scope.group.Name = name;
+        
         $scope.loading = true;
         groupSvc.getGroup($scope.group).then(function (data) {
             if (data.success == true) {
-                $scope.group = data.result.Group;
+                if (data.result.Group!=null)
+                    $scope.group.Desc = data.result.Group.Desc;
             }
             $scope.groupLoading = false;
         },
         function (data) {
             $scope.groupLoading = false;
         });
+        $scope.showMore = function () {
+            $scope.group.Limit = $scope.group.Desc.length;
+        };
+        $scope.showLess = function () {
+            $scope.group.Limit = 150;
+        };
     };
 }])
 .controller("articleCtrl", ['$scope', '$sce', 'articleSvc', function ($scope, $sce, articleSvc) {

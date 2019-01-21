@@ -10,7 +10,7 @@
     various data types are done through the TypeConverter classes 
     associated with the data types.
     
-    Example:
+    Example:D:\BailinStudio\reddah\Reddah.Web.UI\Resources\Resources.zh-CN.resx
     
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
@@ -119,6 +119,15 @@
   </resheader>
   <data name="Assistance_Title" xml:space="preserve">
     <value>帮助</value>
+  </data>
+  <data name="Browse_ShowLessText" xml:space="preserve">
+    <value>折叠全部</value>
+  </data>
+  <data name="Browse_ShowMoreText" xml:space="preserve">
+    <value>展开全部</value>
+  </data>
+  <data name="Browse_TopIssues" xml:space="preserve">
+    <value>Top Issues</value>
   </data>
   <data name="Footer_ChangeLocale" xml:space="preserve">
     <value>中文(中华人民共和国)‎</value>

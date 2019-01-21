@@ -67,9 +67,15 @@
     <section class="group">
         @foreach (string g in Model.GroupName.Trim().Split(','))
         {
-            <div ng-controller="groupCtrl" data-ng-init="getGroup('@g','@locale')">
-                <p>{{group.Desc}}</p>
-            </div>
+        <div ng-controller="groupCtrl" data-ng-init="getGroup('@g','@locale')">
+            {{ group.Desc | limitTo:group.Limit }}
+            <span ng-if="group.Desc.length > 50 && group.Desc.length != group.Limit">
+                <a ng-click="showMore()">...@Resources.Browse_ShowMoreText<i class="fa fa-chevron-down"></i></a>
+            </span>
+            <span ng-if="group.Desc.length == group.Limit">
+                <a ng-click="showLess()">@Resources.Browse_ShowLessText<i class="fa fa-chevron-up"></i></a>
+            </span>
+        </div>
         }
     </section>
 </div>
