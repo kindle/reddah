@@ -82,7 +82,7 @@ namespace Reddah.Web.UI.Controllers
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("HomePage", "Home");
+            return Redirect("/"+ CultureInfo.CurrentUICulture.Name+"?logout=true");
         }
 
         //

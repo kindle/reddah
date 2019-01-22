@@ -18,8 +18,8 @@
     @Scripts.Render("~/bundles/comment")
     @Scripts.Render("~/bundles/article")
     @Scripts.Render("~/bundles/lazy")
+    <link rel="stylesheet" href="~/Content/font-awesome-4.7.0/css/font-awesome.min.css" />
     @RenderSection("scripts", required: false)
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
     <body ng-controller="appCtrl" ng-cloak>
         <div id="BodyContent" class="container">
@@ -28,12 +28,5 @@
             @RenderBody()
             </div>
         </div>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({
-                google_ad_client: "ca-pub-5866711901672761",
-                enable_page_level_ads: true
-            });
-        </script>
     </body>
 </html>

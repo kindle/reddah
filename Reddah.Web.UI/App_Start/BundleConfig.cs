@@ -60,10 +60,6 @@
                         "~/Scripts/jquery-{version}.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
                         "~/Scripts/angular-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/silverlight").Include(
-                        "~/Content/js/Silverlight.js"));
-            bundles.Add(new ScriptBundle("~/bundles/videoplayer").Include(
-                        "~/Content/js/Videoplayer.js"));
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
                         "~/Content/js/Common.js"));
             bundles.Add(new ScriptBundle("~/bundles/contactus").Include(

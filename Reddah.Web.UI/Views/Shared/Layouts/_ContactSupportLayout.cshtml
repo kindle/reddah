@@ -1,24 +1,25 @@
 ﻿@using System.Globalization    
 <!DOCTYPE html>
 <html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
-    <head>
-        <meta charset="utf-8" />
-        <title>Reddah</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/GridLayout")
-        @Styles.Render("~/Content/Shell")
-        @Styles.Render("~/Content/Css")
-        @Styles.Render("~/Content/ContactSupport")
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/angularjs")
-        @Scripts.Render("~/bundles/min")
-        @Scripts.Render("~/bundles/common")
-        @Scripts.Render("~/bundles/contactus")
-        @Scripts.Render("~/bundles/contactus.displaymodule")
-        @RenderSection("scripts", required: false)
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <title>Reddah</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/GridLayout")
+    @Styles.Render("~/Content/Shell")
+    @Styles.Render("~/Content/Css")
+    @Styles.Render("~/Content/ContactSupport")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/angularjs")
+    @Scripts.Render("~/bundles/min")
+    @Scripts.Render("~/bundles/common")
+    @Scripts.Render("~/bundles/contactus")
+    @Scripts.Render("~/bundles/contactus.displaymodule")
+    <link rel="stylesheet" href="~/Content/font-awesome-4.7.0/css/font-awesome.min.css" />
+    @RenderSection("scripts", required: false)
+</head>
     <body>
         <div id="BodyHeader" class="container">
             @Html.Partial("~/Views/Shared/Controls/Header.cshtml")

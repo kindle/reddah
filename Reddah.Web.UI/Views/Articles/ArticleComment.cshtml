@@ -92,15 +92,17 @@
         padding: 30px;
         text-align: center;
     }
+
+    .commentBox {
+        padding-top: 20px;
+    }
 </style>
-
-
 <div class="flex-article">
     <div class="flex-article-left" id="articleContent">
         <div>
             <h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1>
             <div class="listInfo">
-                @Resources.List_Submit @Model.Article.CreatedOn @Resources.List_By <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a> 
+                @Resources.List_Submit @Model.Article.CreatedOn @Resources.List_By <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a>
                 @foreach (string g in Model.Article.GroupName.Trim().Split(','))
                 {
                     <a href="/@locale/r/@Helpers.HtmlDecode(g)"><u>@Helpers.HtmlDecode(g)</u> </a>
@@ -119,20 +121,20 @@
         <div>@Html.Raw(Helpers.HtmlDecode(Model.Article.Content))</div>
 
         <div class="postModuleLiner"></div>
-        <section class="group">
-            @foreach (string g in Model.GroupName.Trim().Split(','))
-            {
+        <div class="commentBox">
+        @foreach (string g in Model.GroupName.Trim().Split(','))
+        {
             <div ng-controller="groupCtrl" data-ng-init="getGroup('@g','@locale')">
                 {{ group.Desc | limitTo : group.Limit }}
-                <span ng-if="group.Desc.length > 50 && group.Desc.length != group.Limit">
-                    <a ng-click="showMore()">...@Resources.Browse_ShowMoreText<i class="fa fa-chevron-down"></i></a>
+                <span ng-if="group.Desc.length > 150 && group.Desc.length != group.Limit">
+                    <a ng-click="showMore()">... @Resources.Browse_ShowMoreText{{(group.Desc.length-150)/group.Desc.length*100 | number:0}}%<i class="fa fa-chevron-down"></i></a>
                 </span>
                 <span ng-if="group.Desc.length == group.Limit">
                     <a ng-click="showLess()">@Resources.Browse_ShowLessText<i class="fa fa-chevron-up"></i></a>
                 </span>
             </div>
-            }
-        </section>
+        }
+        </div>
 
         <section class="flex-vote">
             @if (Request.IsAuthenticated)
@@ -141,6 +143,8 @@
                 <i id="voteInfo"><u style="cursor: pointer;">@Resources.Article_Likeit</u></i>
                 <i id="voteThanks" style="display:none;"><u>Thank you for the feedback! Your vote here will to help them become popular.</u></i>
                 <span style="display:none;" itemprop="upvoteCount" id="vote-count-post-@Model.Article.Id">@(Model.Article.Up - Model.Article.Down)</span>
+
+
 
                 <!--<a ng-click="vote(@Model.Article.Id, 'down', @(Model.Article.Up-Model.Article.Down),'articleContent')"></a>
                 <i>I don't like it!</i>-->
@@ -153,7 +157,7 @@
             }
         </section>
         <div class="postModuleLiner"></div>
-        <div style="margin:20px;" ng-controller="commentCtrl">
+        <div ng-controller="commentCtrl" class="commentBox">
             <input data-ng-model="articleId" type="hidden" data-ng-init="articleId='@Model.Article.Id'" />
             @Resources.Article_CommentTitle @Model.Article.Count @Resources.Article_CommentCount
             @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = -1 })

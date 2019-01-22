@@ -305,13 +305,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/en-US/Reddah.Web.UI.resources.dll">
-      <publishTime>01/21/2019 13:49:46</publishTime>
+      <publishTime>01/22/2019 15:35:03</publishTime>
     </File>
     <File Include="bin/en/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/en/Reddah.Web.UI.resources.dll">
-      <publishTime>01/21/2019 13:49:46</publishTime>
+      <publishTime>01/22/2019 15:35:03</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -320,19 +320,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/fr-FR/Reddah.Web.UI.resources.dll">
-      <publishTime>01/21/2019 13:49:45</publishTime>
+      <publishTime>01/22/2019 15:35:03</publishTime>
     </File>
     <File Include="bin/ja-JP/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/ja-JP/Reddah.Web.UI.resources.dll">
-      <publishTime>01/21/2019 13:49:46</publishTime>
+      <publishTime>01/22/2019 15:35:03</publishTime>
     </File>
     <File Include="bin/ko-KR/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/ko-KR/Reddah.Web.UI.resources.dll">
-      <publishTime>01/21/2019 13:49:45</publishTime>
+      <publishTime>01/22/2019 15:35:03</publishTime>
     </File>
     <File Include="bin/log4net.dll">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -350,40 +350,40 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/16/2018 11:29:30</publishTime>
     </File>
     <File Include="bin/Reddah.Core.dll">
-      <publishTime>01/21/2019 13:49:41</publishTime>
+      <publishTime>01/22/2019 07:17:13</publishTime>
     </File>
     <File Include="bin/Reddah.Core.pdb">
-      <publishTime>01/21/2019 13:49:41</publishTime>
+      <publishTime>01/22/2019 07:17:13</publishTime>
     </File>
     <File Include="bin/Reddah.Encryption.dll">
-      <publishTime>01/21/2019 13:49:41</publishTime>
+      <publishTime>01/22/2019 07:17:13</publishTime>
     </File>
     <File Include="bin/Reddah.Encryption.pdb">
-      <publishTime>01/21/2019 13:49:41</publishTime>
+      <publishTime>01/22/2019 07:17:13</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Captcha.dll">
-      <publishTime>01/21/2019 13:49:41</publishTime>
+      <publishTime>01/22/2019 07:17:13</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Captcha.pdb">
-      <publishTime>01/21/2019 13:49:41</publishTime>
+      <publishTime>01/22/2019 07:17:13</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Core.dll">
-      <publishTime>01/21/2019 13:49:42</publishTime>
+      <publishTime>01/22/2019 07:17:14</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Core.pdb">
-      <publishTime>01/21/2019 13:49:42</publishTime>
+      <publishTime>01/22/2019 07:17:14</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Live.dll">
-      <publishTime>01/21/2019 13:49:42</publishTime>
+      <publishTime>01/22/2019 07:17:14</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Live.pdb">
-      <publishTime>01/21/2019 13:49:42</publishTime>
+      <publishTime>01/22/2019 07:17:14</publishTime>
     </File>
     <File Include="bin/Reddah.Web.UI.dll">
-      <publishTime>01/21/2019 13:49:45</publishTime>
+      <publishTime>01/22/2019 15:35:02</publishTime>
     </File>
     <File Include="bin/Reddah.Web.UI.pdb">
-      <publishTime>01/21/2019 13:49:45</publishTime>
+      <publishTime>01/22/2019 15:35:02</publishTime>
     </File>
     <File Include="bin/Reddah.Web.UI.XML">
       <publishTime>01/19/2019 10:24:03</publishTime>
@@ -443,7 +443,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/zh-CN/Reddah.Web.UI.resources.dll">
-      <publishTime>01/21/2019 15:52:21</publishTime>
+      <publishTime>01/22/2019 15:35:04</publishTime>
     </File>
     <File Include="Content/app/app.js">
       <publishTime>01/16/2019 20:57:38</publishTime>
@@ -1637,7 +1637,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/24/2018 06:14:32</publishTime>
     </File>
     <File Include="Content/app/login.js">
-      <publishTime>12/30/2018 07:39:13</publishTime>
+      <publishTime>01/22/2019 15:34:44</publishTime>
     </File>
     <File Include="Content/app/ng-tags-input.js">
       <publishTime>12/26/2018 15:00:19</publishTime>
@@ -1935,6 +1935,114 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/ContactSupport.css">
       <publishTime>07/05/2016 06:41:36</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/css/font-awesome.css">
+      <publishTime>01/22/2019 07:15:16</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/css/font-awesome.min.css">
+      <publishTime>01/22/2019 07:15:16</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/fonts/fontawesome-webfont.eot">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/fonts/fontawesome-webfont.svg">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/fonts/fontawesome-webfont.woff">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/fonts/FontAwesome.otf">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/animated.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/bordered-pulled.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/core.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/fixed-width.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/font-awesome.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/icons.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/larger.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/list.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/mixins.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/path.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/rotated-flipped.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/screen-reader.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/stacked.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/less/variables.less">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/font-awesome.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/_animated.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/_bordered-pulled.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/_core.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/_fixed-width.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/_icons.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/_larger.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/_list.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/_mixins.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/_path.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/_rotated-flipped.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/_screen-reader.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/_stacked.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.7.0/scss/_variables.scss">
+      <publishTime>01/22/2019 07:15:17</publishTime>
     </File>
     <File Include="Content/font-awesome.min.css">
       <publishTime>11/27/2018 06:46:53</publishTime>
@@ -2576,16 +2684,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/08/2018 06:20:04</publishTime>
     </File>
     <File Include="Views/Articles/ArticleComment.cshtml">
-      <publishTime>01/21/2019 15:35:11</publishTime>
+      <publishTime>01/22/2019 12:21:42</publishTime>
     </File>
     <File Include="Views/Articles/ArticleComment.mobile.cshtml">
-      <publishTime>01/21/2019 15:35:31</publishTime>
+      <publishTime>01/22/2019 12:21:46</publishTime>
     </File>
     <File Include="Views/Articles/ArticleList.cshtml">
       <publishTime>12/23/2018 16:12:09</publishTime>
     </File>
     <File Include="Views/Articles/ArticleList.mobile.cshtml">
-      <publishTime>12/10/2018 19:56:01</publishTime>
+      <publishTime>01/22/2019 12:21:52</publishTime>
     </File>
     <File Include="Views/Articles/Comment.cshtml">
       <publishTime>12/18/2018 06:32:54</publishTime>
@@ -2618,10 +2726,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/27/2016 07:38:56</publishTime>
     </File>
     <File Include="Views/Articles/UserProfileArticleList.cshtml">
-      <publishTime>01/18/2019 06:52:07</publishTime>
+      <publishTime>01/22/2019 12:21:56</publishTime>
     </File>
     <File Include="Views/Articles/UserProfileArticleList.mobile.cshtml">
-      <publishTime>01/21/2019 15:23:11</publishTime>
+      <publishTime>01/22/2019 12:22:01</publishTime>
     </File>
     <File Include="Views/Articles/WizardSteps.cshtml">
       <publishTime>06/23/2016 06:48:38</publishTime>
@@ -2642,7 +2750,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/02/2016 06:50:35</publishTime>
     </File>
     <File Include="Views/Home/HomePageV1.cshtml">
-      <publishTime>01/07/2019 21:22:34</publishTime>
+      <publishTime>01/22/2019 12:22:06</publishTime>
     </File>
     <File Include="Views/Home/HomePageV1.mobile.cshtml">
       <publishTime>11/21/2018 06:52:19</publishTime>
@@ -2696,7 +2804,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/14/2018 08:09:04</publishTime>
     </File>
     <File Include="Views/Shared/Controls/LoginRegister/PartialLogin.cshtml">
-      <publishTime>12/01/2018 10:52:16</publishTime>
+      <publishTime>01/22/2019 14:56:32</publishTime>
     </File>
     <File Include="Views/Shared/Controls/LoginRegister/PartialRegister.cshtml">
       <publishTime>12/01/2018 13:26:08</publishTime>
@@ -2732,13 +2840,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/23/2016 06:48:38</publishTime>
     </File>
     <File Include="Views/Shared/Layouts/_ArticleLayout.mobile.cshtml">
-      <publishTime>01/21/2019 15:23:33</publishTime>
+      <publishTime>01/22/2019 14:09:05</publishTime>
     </File>
     <File Include="Views/Shared/Layouts/_ContactSupportLayout.cshtml">
-      <publishTime>06/23/2016 06:47:53</publishTime>
+      <publishTime>01/22/2019 14:08:45</publishTime>
     </File>
     <File Include="Views/Shared/Layouts/_WizardLayout.cshtml">
-      <publishTime>06/23/2016 06:47:53</publishTime>
+      <publishTime>01/22/2019 14:08:53</publishTime>
     </File>
     <File Include="Views/Shared/_JsonLogin.cshtml">
       <publishTime>07/11/2016 05:55:53</publishTime>
@@ -2747,10 +2855,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/11/2016 06:52:32</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/21/2019 15:23:58</publishTime>
+      <publishTime>01/22/2019 14:09:02</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.mobile.cshtml">
-      <publishTime>01/21/2019 15:24:12</publishTime>
+      <publishTime>01/22/2019 14:08:57</publishTime>
     </File>
     <File Include="Views/Submit/edit.cshtml">
       <publishTime>01/04/2019 06:53:45</publishTime>
