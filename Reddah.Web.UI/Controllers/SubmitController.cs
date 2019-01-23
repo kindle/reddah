@@ -129,8 +129,9 @@ namespace Reddah.Web.UI.Controllers
                     }
                 }
 
-                return RedirectToRoute(new { controller = "ArticleComment", action = "comments", id = article.Id });
+                //return RedirectToRoute(new { controller = "ArticleComment", action = "comments", id = article.Id });
                 //http://localhost/en-US/r/world/comments/130/test2ddd/
+                return Redirect(string.Format("/{0}/r/{1}/comments/{2}/{3}", CultureInfo.CurrentUICulture.Name, Helpers.GetUrlTitle(article.GroupName), article.Id, Helpers.GetUrlTitle(article.Title)));
             }
 
             TempData["ErrorMessage"] = "Error: captcha is not valid.";

@@ -76,32 +76,33 @@
                 <span ng-if="group.Desc.length > 150 && group.Desc.length != group.Limit">
                     <a ng-click="showMore()">... @Resources.Browse_ShowMoreText{{(group.Desc.length-150)/group.Desc.length*100 | number:0}}%<i class="fa fa-chevron-down"></i></a>
                 </span>
-                <span ng-if="group.Desc.length == group.Limit">
+                @*<span ng-if="group.Desc.length == group.Limit">
                     <a ng-click="showLess()">@Resources.Browse_ShowLessText<i class="fa fa-chevron-up"></i></a>
-                </span>
+                </span>*@
             </div>
         }
     </div>
-<section class="flex-vote">
-    @if (Request.IsAuthenticated)
-    {
-        <u id="voteButton" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContentMobile')"></u>
-        <i id="voteInfo" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContentMobile')"><u>@Resources.Article_Likeit</u></i>
-        <i id="voteThanks" style="display:none;"><u>Thank you for the feedback! Your vote here will to help them become popular.</u></i>
-        <span style="display:none;" itemprop="upvoteCount" id="vote-count-post-@Model.Article.Id">@(Model.Article.Up - Model.Article.Down)</span>
-    }
-    else
-    {
-        <u></u>
-        <i><a href="/@locale/account/login"><u>@Resources.Article_Likeit</u></a></i>
-    }
-</section>
-<div class="postModuleLiner"></div>
-<div ng-controller="commentCtrl" id="mobileComments" class="commentBox">
-    <input data-ng-model="articleId" type="hidden" data-ng-init="articleId='@Model.Article.Id'" />
-    @Resources.Article_CommentTitle @Model.Article.Count @Resources.Article_CommentCount
-    @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = -1 })
-    @Html.Partial("Comment", Model.Comments as SeededComments)
+    <section class="flex-vote">
+        @if (Request.IsAuthenticated)
+        {
+            <u id="voteButton" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContentMobile')"></u>
+            <i id="voteInfo" ng-click="vote(@Model.Article.Id, 'up', @(Model.Article.Up-Model.Article.Down),'articleContentMobile')"><u>@Resources.Article_Likeit</u></i>
+            <i id="voteThanks" style="display:none;"><u>Thank you for the feedback! Your vote here will to help them become popular.</u></i>
+            <span style="display:none;" itemprop="upvoteCount" id="vote-count-post-@Model.Article.Id">@(Model.Article.Up - Model.Article.Down)</span>
+        }
+        else
+        {
+            <u></u>
+            <i><a href="/@locale/account/login"><u>@Resources.Article_Likeit</u></a></i>
+        }
+    </section>
+    <div class="postModuleLiner"></div>
+    <div ng-controller="commentCtrl" id="mobileComments" class="commentBox">
+        <input data-ng-model="articleId" type="hidden" data-ng-init="articleId='@Model.Article.Id'" />
+        @Resources.Article_CommentTitle @Model.Article.Count @Resources.Article_CommentCount
+        @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = -1 })
+        @Html.Partial("Comment", Model.Comments as SeededComments)
+    </div>
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
