@@ -9,9 +9,11 @@ namespace Reddah.Web.UI.Controllers
 {
     public class SubmitController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string group)
         {
-            return View("~/Views/Submit/Index.cshtml");
+            Article article = new Article();
+            article.GroupName = Helpers.HtmlEncode(group.Replace(" ", "").Replace("，", ",")); 
+            return View("~/Views/Submit/Index.cshtml", article);
         }
 
         [HttpPost, CaptchaVerify("Captcha is not valid")]

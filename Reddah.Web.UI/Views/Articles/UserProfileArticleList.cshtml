@@ -65,6 +65,23 @@
     #ai-right .post {
         margin-bottom: 20px;
     }
+    .hand{
+        cursor: pointer;
+    }
+
+    .alert-success {
+        display: inline-block;
+        background-color: #dff0d8;
+        border-color: #d0e9c6;
+        color: #3c763d;
+        padding: .8em .8em;
+        margin: 0 0;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px #d1d0bb;
+        line-height: 1.5em;
+        font-style: normal;
+    }
+
 </style>
 <link href="/Content/Post.css" rel="stylesheet" />
 @if (menu != null && keyword != null && menu.Equals("search") && keyword.Equals("default"))
@@ -92,24 +109,23 @@
         <div class="post postModuleLiner" ng-repeat="article in aiArticles" on-finish-render-posts>
             <div class="postClear"></div>
             <div ng-if="article.VideoUrl.length>0">
-                <h2><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                <h2><a class="hand" ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))">{{htmlDecode(article.Title)}}</a> <i class="fa fa-window-maximize hand" ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))"></i></h2>
                 <div class="postClear"></div>
                 <video id="video_{{article.Id}}" ng-click="playVideo(article.Id)" ng-attr-src="{{trustAsResourceUrl(article.VideoUrl)}}"
                        ng-attr-poster="{{article.VideoPoster}}"
                        controls="controls" loop="true">
-                    your browser does not support the video tag
                 </video>
                 <div class="postClear"></div>
             </div>
             <div ng-if="article.VideoUrl.length==0">
-                <h2 ng-if="article.ImageUrls.length>1"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                <h2 ng-if="article.ImageUrls.length>1"><a class="hand" ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))">{{htmlDecode(article.Title)}}</a> <i class="fa fa-window-maximize hand" ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))"></i></h2>
                 <div class="postClear" ng-if="article.ImageUrls.length>1"></div>
                 <div class="listImage" ng-repeat="articleUrl in article.ImageUrls">
                     <div class="listImageWrapper">
                         <img class="lazy BrowsePreviewImage" onerror="this.style.display='none'" src="" data-original="{{articleUrl}}" alt="picture not found">
                     </div>
                 </div>
-                <h2 ng-if="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a> <span class="listInfo" style="display:none;">(source)</span></h2>
+                <h2 ng-if="article.ImageUrls.length<2"><a class="hand" ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))">{{htmlDecode(article.Title)}}</a> <i class="fa fa-window-maximize hand" ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))"></i></h2>
             </div>
             <div style="margin-top: 5px;">{{summary(article.Content,120)}}</div>
             <div class="postClear" ng-if="article.ImageUrls.length==3"></div>
@@ -122,7 +138,14 @@
             </div>
         </div>
         <div class="postClear"></div>
-        <div ng-init="noMoreResult=false" ng-show="noMoreResult"><h3 class="em_error">@Resources.Error_No_More_Result</h3></div>
+        <div ng-init="noMoreResult=false" ng-show="noMoreResult">
+            <h3 class="em_error">@Resources.Error_No_More_Result</h3>
+            @if (sub != null)
+            {
+                <div class="postClear"></div>
+                <a class="alert-success" href="/@locale/submit?group=@sub" target="_blank" style="color: #3c763d;">@Resources.Header_Create</a>
+            }
+        </div>
         <div ng-init="serverError=false" ng-show="serverError"><h3 class="em_error"><span onclick="javascript: location.reload();">@Resources.Error_Server_Error</span></h3></div>
         <div class="articleLoading"><img src="/content/images/loading_50x50.gif" ng-show="loading==true" /></div>
     </div>

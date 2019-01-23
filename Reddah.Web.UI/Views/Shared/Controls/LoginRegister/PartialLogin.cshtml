@@ -2,7 +2,7 @@
 @using Reddah.Web.UI.Resources
 <h2>@Resources.Header_SignIn</h2>
 <div>@Html.TextBoxFor(m => m.UserName, new { @id="login_username", @class = "loginText", @placeholder = @Resources.Login_UserName, data_ng_model = "loginModel.UserName" })</div>
-<div>@Html.PasswordFor(m => m.Password, new { @id="login_password", @class = "loginText", @placeholder = @Resources.Login_Password, data_ng_model = "loginModel.Password" })</div>
+<div>@Html.PasswordFor(m => m.Password, new { @id="login_password", ng_keyup = "loginOnEnter($event)", @class = "loginText", @placeholder = @Resources.Login_Password, data_ng_model = "loginModel.Password" })</div>
 <div class="loginRememberMe">
     @Html.CheckBoxFor(m => m.RememberMe, new { @id = "login_rem", data_ng_model = "loginModel.RememberMe" })
     <label class="checkbox" for="login_rem">@Resources.Login_RememberMe</label>

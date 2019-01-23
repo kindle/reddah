@@ -46,6 +46,7 @@
                                 <li>
                                     @Html.TextAreaFor(m => m.GroupName, new { @required = "required", @maxlength = "200", @placeholder = @Resources.Submit_Group })
                                     <br />
+
                                     @Html.ValidationMessageFor(m => m.GroupName)
                                 </li>
                                 <li>

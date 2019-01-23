@@ -298,6 +298,15 @@
             return System.Web.HttpUtility.HtmlDecode(Helpers.HideXss(text));
         }
 
+        public static string ReplaceHtmlTag(string html)
+        {
+            string stroutput = html;
+            Regex regex = new Regex(@"<[^>]+>|</[^>]+>");
+
+            stroutput = regex.Replace(stroutput, "");
+            return stroutput;
+        }
+
         //public static string GetLocalizedPath(string originalPath)
         //{
         //    String path = RemoveLocaleFromPath(originalPath);

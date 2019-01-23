@@ -22,7 +22,11 @@
         $scope.loginModel.Locale = $scope.locale; 
         loginSvc.login($scope.loginModel).then(function (data) {
             if (data.success == true) {
-                window.location.replace(data.redirect+"?login=true");
+                if (data.redirect.indexOf("?")!=-1)
+                    data.redirect += "&login=true";
+                else 
+                    data.redirect += "?login=true";
+                window.location.replace(data.redirect);
             }
             else {
                 $scope.loadingLogin = false;

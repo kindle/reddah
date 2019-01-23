@@ -4,6 +4,7 @@
 @using Reddah.Web.UI.Utility
 @{
     var locale = CultureInfo.CurrentUICulture.Name;
+    var language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
     ViewBag.ReddahPageTitle = Helpers.HtmlDecode(Model.Article.Title);
     Layout = "~/Views/Shared/Layouts/_ArticleLayout.mobile.cshtml";
 }
@@ -47,7 +48,36 @@
     }
 </style>
 <div class="articleContent" id="articleContentMobile">
-    <div class="listInfo"><h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))</h1></div>
+    <div class="listInfo">
+        <h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))
+        <div class="fa fa-volume-up" id="readpbtn">
+            <audio id="readp" src="http://tts.baidu.com/text2audio?lan=@language&ie=UTF-8&text='@Helpers.ReplaceHtmlTag(Helpers.HtmlDecode(Model.Article.Content))'&spd=3"></audio>
+            <script type="text/javascript">
+                $(function () {
+                    $('#readp').on('ended', function () {
+                        $('#readpbtn').css("fa fa-volume-up");
+                    })
+                        
+                    var audio = document.getElementById('readp');
+                    audio.volume = .3;
+                    $('#readpbtn').click(function () {
+                        event.stopPropagation();
+                        if (audio.paused) { 
+                            $('#readpbtn').toggleClass("fa-volume-up", false);
+                            $('#readpbtn').toggleClass("fa-pause", true);
+                            audio.play(); 
+                            return;
+                        } else {
+                            $('#readpbtn').toggleClass("fa-pause", false);
+                            $('#readpbtn').toggleClass("fa-volume-up", true);
+                            audio.pause();
+                        }
+                    });
+                })
+            </script>
+        </div>
+        </h1>
+    </div>
     <div class="postClear"></div>
     <div class="listInfo">
         @Resources.List_Submit @Model.Article.CreatedOn @Resources.List_By <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a>
@@ -77,8 +107,8 @@
                     <a ng-click="showMore()">... @Resources.Browse_ShowMoreText{{(group.Desc.length-150)/group.Desc.length*100 | number:0}}%<i class="fa fa-chevron-down"></i></a>
                 </span>
                 @*<span ng-if="group.Desc.length == group.Limit">
-                    <a ng-click="showLess()">@Resources.Browse_ShowLessText<i class="fa fa-chevron-up"></i></a>
-                </span>*@
+                        <a ng-click="showLess()">@Resources.Browse_ShowLessText<i class="fa fa-chevron-up"></i></a>
+                    </span>*@
             </div>
         }
     </div>
