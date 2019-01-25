@@ -103,25 +103,27 @@
         <div>
             <h1>@Html.Raw(Helpers.HtmlDecode(Model.Article.Title))
             <div class="fa fa-volume-up" id="readpbtn">
-                <audio id="readp" src="http://tts.baidu.com/text2audio?lan=@language&ie=UTF-8&text='@Helpers.ReplaceHtmlTag(Helpers.HtmlDecode(Model.Article.Content))'&spd=3"></audio>
+                <audio id="readp" src="///tts.baidu.com/text2audio?lan=@language&ie=UTF-8&text=@Helpers.ToAudioString(Model.Article.Content)&spd=3"></audio>
                 <script type="text/javascript">
                     $(function () {
+                        let audiobtn = $('#readpbtn');
                         $('#readp').on('ended', function () {
-                            $('#readpbtn').css("fa fa-volume-up");
+                            audiobtn.toggleClass("fa fa-volume-up", true);
+                            audiobtn.toggleClass("fa-pause", false);
                         })
                         
                         var audio = document.getElementById('readp');
                         audio.volume = .3;
-                        $('#readpbtn').click(function () {
+                        audiobtn.click(function () {
                             event.stopPropagation();
                             if (audio.paused) { 
-                                $('#readpbtn').toggleClass("fa-volume-up", false);
-                                $('#readpbtn').toggleClass("fa-pause", true);
+                                audiobtn.toggleClass("fa-volume-up", false);
+                                audiobtn.toggleClass("fa-pause", true);
                                 audio.play(); 
                                 return;
                             } else {
-                                $('#readpbtn').toggleClass("fa-pause", false);
-                                $('#readpbtn').toggleClass("fa-volume-up", true);
+                                audiobtn.toggleClass("fa-pause", false);
+                                audiobtn.toggleClass("fa-volume-up", true);
                                 audio.pause();
                             }
                         });

@@ -307,6 +307,14 @@
             return stroutput;
         }
 
+        public static string ToAudioString(string html)
+        {
+            html = HtmlDecode(html);
+            html = HtmlDecode(html);
+
+            return ReplaceHtmlTag(html);
+        }
+
         //public static string GetLocalizedPath(string originalPath)
         //{
         //    String path = RemoveLocaleFromPath(originalPath);
