@@ -12,7 +12,8 @@ namespace Reddah.Web.UI.Controllers
         public ActionResult Index(string group)
         {
             Article article = new Article();
-            article.GroupName = Helpers.HtmlEncode(group.Replace(" ", "").Replace("，", ",")); 
+            if(!String.IsNullOrEmpty(group))
+                article.GroupName = Helpers.HtmlEncode(group.Replace(" ", "").Replace("，", ",")); 
             return View("~/Views/Submit/Index.cshtml", article);
         }
 

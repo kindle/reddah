@@ -198,7 +198,7 @@
 
             //urlTitle = Regex.Replace(urlTitle, @"[^A-Za-z0-9 ]+", "");
             //urlTitle = urlTitle.Trim().Replace(" ", "-");
-            return urlTitle.Substring(0, Math.Min(50, urlTitle.Length - 1));
+            return SubString(urlTitle, 0, Math.Min(50, urlTitle.Length - 1));
         }
 
         public static string GetUrlTitle(string title)
@@ -231,10 +231,10 @@
             if (urlTitle.IndexOf('-') == 0 && urlTitle.Length>1)
                 urlTitle.Remove(1);
 
-            urlTitle = urlTitle.Substring(0, Math.Min(50, urlTitle.Length));
+            urlTitle = SubString(urlTitle, 0, Math.Min(50, urlTitle.Length));
 
             if (urlTitle.LastIndexOf('-') == urlTitle.Length - 1)
-                urlTitle = urlTitle.Substring(0, urlTitle.Length - 1);
+                urlTitle = SubString(urlTitle, 0, urlTitle.Length - 1);
 
             return urlTitle;
         }
@@ -312,7 +312,17 @@
             html = HtmlDecode(html);
             html = HtmlDecode(html);
 
-            return ReplaceHtmlTag(html);
+            return SubString(ReplaceHtmlTag(html), 0, Math.Min(500, html.Length - 1));
+        }
+
+        public static string SubString(string toSub, int startIndex, int length)
+        {
+
+            byte[] subbyte = System.Text.Encoding.Default.GetBytes(toSub);
+            string Sub = System.Text.Encoding.Default.GetString(subbyte, startIndex, length);
+
+            return Sub;
+
         }
 
         //public static string GetLocalizedPath(string originalPath)
