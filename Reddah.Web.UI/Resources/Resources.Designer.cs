@@ -865,5 +865,21 @@ namespace Reddah.Web.UI.Resources
                 return ResourceManager.GetString("List_LastUpdateOn", resourceCulture);
             }
         }
+
+        public static string Comment_Reply
+        {
+            get
+            {
+                return ResourceManager.GetString("Comment_Reply", resourceCulture);
+            }
+        }
+
+        public static string Comment_Delete
+        {
+            get
+            {
+                return ResourceManager.GetString("Comment_Delete", resourceCulture);
+            }
+        }
     }
 }

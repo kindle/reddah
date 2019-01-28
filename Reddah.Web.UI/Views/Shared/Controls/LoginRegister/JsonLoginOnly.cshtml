@@ -1,0 +1,29 @@
+﻿@using Reddah.Web.UI.Models
+@using Reddah.Web.UI.Utility
+@using Reddah.Web.UI.Resources
+@using System.Globalization
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
+}
+@if (!Request.IsAuthenticated)
+{
+<div id="LoginRegisterPanel">
+    <h1><div class="loginRegisterPanelHide" ng-click="hidePanel();"></div></h1>
+    <div class="floatPanelModular">
+        <table ng-controller="loginCtrl">
+            <tr>
+                <td class="floatPanelModularRightContent spread">
+                    @Html.Partial("~/Views/Shared/Controls/LoginRegister/PartialLogin.cshtml", new LoginModel())
+                </td>
+            </tr>
+        </table>
+        <p class="login-disclaimer">
+            @Resources.Login_AgreeWord <a target="_blank" href="/@locale/t/help/useragreement">@Resources.Footer_TermsOfUse</a>
+            @Resources.Login_ReadWord <a target="_blank" href="/@locale/t/help/privacypolicy">@Resources.Footer_PrivacyStatement</a>
+            @Resources.Login_And <a target="_blank" href="/@locale/t/help/contentpolicy">@Resources.Footer_ContentPolicy</a>.
+        </p>
+    </div>
+    <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@Helpers.GetAntiForgeryToken()'" />
+    <input id="locale" data-ng-model="locale" type="hidden" data-ng-init="locale='@locale'" />
+</div>
+}    

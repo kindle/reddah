@@ -414,4 +414,10 @@
   <data name="List_LastUpdateOn" xml:space="preserve">
     <value>Last updated on</value>
   </data>
+  <data name="Comment_Reply" xml:space="preserve">
+    <value>대답</value>
+  </data>
+  <data name="Comment_Delete" xml:space="preserve">
+    <value>삭제</value>
+  </data>
 </root>

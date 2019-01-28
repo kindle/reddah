@@ -20,11 +20,11 @@
                             @if (Request.IsAuthenticated)
                             {
                                 <div class="buttons">
-                                    <collapser caption="Reply">
+                                    <collapser caption="@Resources.Comment_Reply">
                                         @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = node.Id })
                                     </collapser>
                                     @if (User.Identity.Name.Equals(node.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.DeleteComment))
-                                    {<u ng-click="delComment('@locale', @node.Id)">[Delete]</u>}
+                                    {<u ng-click="delComment('@locale', @node.Id)">[@Resources.Comment_Delete]</u>}
                                 </div>}
                             <div class="child">
                                 @Html.Partial("Comment", seededComments)

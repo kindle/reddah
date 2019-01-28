@@ -875,6 +875,7 @@
     <Content Include="Views\Articles\UserProfileArticleList.mobile.cshtml" />
     <Content Include="Views\Shared\Layouts\_ArticleLayout.mobile.cshtml" />
     <Content Include="Views\Articles\SolutionArticle.mobile.cshtml" />
+    <Content Include="Views\Shared\Controls\LoginRegister\JsonLoginOnly.cshtml" />
     <None Include="Web.config.sit">
       <SubType>Designer</SubType>
     </None>

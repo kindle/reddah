@@ -198,7 +198,7 @@
 
             //urlTitle = Regex.Replace(urlTitle, @"[^A-Za-z0-9 ]+", "");
             //urlTitle = urlTitle.Trim().Replace(" ", "-");
-            return SubString(urlTitle, 0, Math.Min(50, urlTitle.Length - 1));
+            return SubString(urlTitle, Math.Min(50, urlTitle.Length - 1));
         }
 
         public static string GetUrlTitle(string title)
@@ -231,10 +231,10 @@
             if (urlTitle.IndexOf('-') == 0 && urlTitle.Length>1)
                 urlTitle.Remove(1);
 
-            urlTitle = SubString(urlTitle, 0, Math.Min(50, urlTitle.Length));
+            urlTitle = SubString(urlTitle, Math.Min(50, urlTitle.Length));
 
             if (urlTitle.LastIndexOf('-') == urlTitle.Length - 1)
-                urlTitle = SubString(urlTitle, 0, urlTitle.Length - 1);
+                urlTitle = SubString(urlTitle, urlTitle.Length - 1);
 
             return urlTitle;
         }
@@ -290,12 +290,12 @@
 
         public static string HtmlEncode(string text)
         {
-            return System.Web.HttpUtility.HtmlEncode(Helpers.HideXss(Helpers.HideSensitiveWords(text)));
+            return System.Web.HttpUtility.HtmlEncode(HideXss(HideSensitiveWords(text)));
         }
 
         public static string HtmlDecode(string text)
         {
-            return System.Web.HttpUtility.HtmlDecode(Helpers.HideXss(text));
+            return System.Web.HttpUtility.HtmlDecode(HideXss(text));
         }
 
         public static string ReplaceHtmlTag(string html)
@@ -310,18 +310,51 @@
         public static string ToAudioString(string html)
         {
             html = HtmlDecode(html);
-            html = HtmlDecode(html);
+            html = System.Web.HttpUtility.HtmlDecode(html);
 
-            return SubString(ReplaceHtmlTag(html), 0, Math.Min(500, html.Length - 1));
+            return SubString(ReplaceHtmlTag(html), Math.Min(500, html.Length - 1));
         }
 
-        public static string SubString(string toSub, int startIndex, int length)
+        public static string SubString(string str, int len)
         {
-
-            byte[] subbyte = System.Text.Encoding.Default.GetBytes(toSub);
-            string Sub = System.Text.Encoding.Default.GetString(subbyte, startIndex, length);
-
-            return Sub;
+            string result = string.Empty;
+            if (string.IsNullOrEmpty(str))
+            {
+                return result;
+            }
+            int byteLen = System.Text.Encoding.Default.GetByteCount(str);
+            int charLen = str.Length;
+            int byteCount = 0;
+            int pos = 0;
+            if (byteLen > len)
+            {
+                for (int i = 0; i < charLen; i++)
+                {
+                    if (Convert.ToInt32(str.ToCharArray()[i]) > 255)
+                    {
+                        byteCount += 2;
+                    }
+                    else
+                    {
+                        byteCount += 1;
+                    }
+                    if (byteCount > len)
+                    {
+                        pos = i;
+                        break;
+                    }
+                    else if (byteCount == len)
+                    {
+                        pos = i + 1; break;
+                    }
+                }
+                if (pos >= 0)
+                {
+                    result = str.Substring(0, pos);
+                }
+            }
+            else { result = str; }
+            return result;
 
         }
 
