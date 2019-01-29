@@ -1,6 +1,5 @@
 ﻿@model Reddah.Web.UI.Models.RegisterModel
 @using Reddah.Web.UI.Resources
-<h2>@Resources.Login_CreateNewAccount</h2>
 <div>@Html.TextBoxFor(m => m.UserName, new { @class = "loginText", @placeholder = @Resources.Login_UserName, data_ng_model = "registerModel.UserName" })</div>
 <div>@Html.PasswordFor(m => m.Password, new { @class = "loginText", @placeholder = @Resources.Login_Password, data_ng_model = "registerModel.Password" })</div>
 <div>@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "loginText", @placeholder = @Resources.Login_ConfirmPassword, data_ng_model = "registerModel.ConfirmPassword" })</div>

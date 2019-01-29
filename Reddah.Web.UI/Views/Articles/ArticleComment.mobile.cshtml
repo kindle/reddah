@@ -98,9 +98,9 @@
     {<div class="listInfo">@Resources.List_LastUpdateOn @Model.Article.LastUpdateOn</div>}
     <div class="listInfo">
         @if (User.Identity.Name.Equals(Model.Article.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.EditPost))
-        {<u><a href="/@locale/edit/@Model.Article.Id">[Edit]</a></u>}
+        {<u><a href="/@locale/edit/@Model.Article.Id">[@Resources.Comment_Edit]</a></u>}
         @if (User.Identity.Name.Equals(Model.Article.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.DeletePost))
-        {<u><a href="/@locale/delete/@Model.Article.Id">[Delete]</a></u>}
+        {<u><a href="/@locale/delete/@Model.Article.Id">[@Resources.Comment_Delete]</a></u>}
     </div>
     <div class="listInfo" style="display:none;">share save hide report</div>
     <div class="postClear"></div>
@@ -170,13 +170,13 @@
         @Resources.Article_CommentTitle @Model.Article.Count @Resources.Article_CommentCount
         @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = -1 })
         @Html.Partial("Comment", Model.Comments as SeededComments)
-        @if (!Request.IsAuthenticated)
-        {
-            <div id="addComment" class="baseCommentBox hideCommentBox">
-                <div class="leftcomment"><span class="fa fa-pencil-square-o writecomment" ng-click="showPanel()"> 写评论</span></div>
-                <div class="rightcomment"><span class="fa fa-bookmark-o"></span><span class="fa fa-share-alt"></span></div>
-            </div>
-        }
+        <div id="addComment" class="baseCommentBox hideCommentBox">
+            @if (!Request.IsAuthenticated)
+            {
+                <div class="leftcomment"><span class="fa fa-pencil-square-o writecomment" ng-click="showPanelLoginOnly()"> @Resources.Comment_Write</span></div>
+            }
+            <div class="rightcomment"><span class="fa fa-bookmark-o"></span><span class="fa fa-share-alt"></span></div>
+        </div>
     </div>
 </div>
 <script>
@@ -215,4 +215,4 @@
 
 </script>
 <div id="BroswerOpacify" ng-click="hidePanel();"></div>
-@Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLoginOnly.cshtml")
+@Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLoginRegister.mobile.cshtml")

@@ -420,4 +420,16 @@
   <data name="Comment_Delete" xml:space="preserve">
     <value>삭제</value>
   </data>
+  <data name="Comment_Edit" xml:space="preserve">
+    <value>편집</value>
+  </data>
+  <data name="Comment_Hint" xml:space="preserve">
+    <value>do not post personal information, phone numbers, email addresses, names, etc, real or fake, or you will be banned without warning.</value>
+  </data>
+  <data name="Comment_Write" xml:space="preserve">
+    <value>Add Comment</value>
+  </data>
+  <data name="Comment_Good" xml:space="preserve">
+    <value>Good</value>
+  </data>
 </root>

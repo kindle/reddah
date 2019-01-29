@@ -143,9 +143,9 @@
             {<div class="listInfo">@Resources.List_LastUpdateOn @Model.Article.LastUpdateOn</div>}
             <div class="listInfo">
                 @if (User.Identity.Name.Equals(Model.Article.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.EditPost))
-                {<u><a href="/@locale/edit/@Model.Article.Id">[Edit]</a></u>}
+                {<u><a href="/@locale/edit/@Model.Article.Id">[@Resources.Comment_Edit]</a></u>}
                 @if (User.Identity.Name.Equals(Model.Article.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.DeletePost))
-                {<u><a href="/@locale/delete/@Model.Article.Id">[Delete]</a></u>}
+                {<u><a href="/@locale/delete/@Model.Article.Id">[@Resources.Comment_Delete]</a></u>}
             </div>
             <div class="listInfo" style="display:none;">share save hide report</div>
         </div>

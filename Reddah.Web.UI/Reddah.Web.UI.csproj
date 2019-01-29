@@ -724,7 +724,6 @@
     <EmbeddedResource Include="Resources\Resources.ko-KR.resx" />
     <EmbeddedResource Include="Resources\Resources.ja-JP.resx" />
     <EmbeddedResource Include="Resources\Resources.resx" />
-    <EmbeddedResource Include="Resources\Resources.en-US.resx" />
     <EmbeddedResource Include="Resources\Resources.en.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -875,7 +874,7 @@
     <Content Include="Views\Articles\UserProfileArticleList.mobile.cshtml" />
     <Content Include="Views\Shared\Layouts\_ArticleLayout.mobile.cshtml" />
     <Content Include="Views\Articles\SolutionArticle.mobile.cshtml" />
-    <Content Include="Views\Shared\Controls\LoginRegister\JsonLoginOnly.cshtml" />
+    <Content Include="Views\Shared\Controls\LoginRegister\JsonLoginRegister.mobile.cshtml" />
     <None Include="Web.config.sit">
       <SubType>Designer</SubType>
     </None>

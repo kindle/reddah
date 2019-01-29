@@ -1,0 +1,36 @@
+﻿@using Reddah.Web.UI.Models
+@using Reddah.Web.UI.Utility
+@using Reddah.Web.UI.Resources
+@using System.Globalization
+@{
+    var locale = CultureInfo.CurrentUICulture.Name;
+}
+@if (!Request.IsAuthenticated)
+{
+<div id="LoginRegisterPanel">
+    <h1><div class="loginRegisterPanelHide" ng-click="hidePanel();"></div></h1>
+    <div ng-controller="loginCtrl">
+        <div>
+            <h2>
+                <span ng-class="{ 'active' : data.current == 1 }" ng-click="actions.setCurrent(1)">@Resources.Header_SignIn</span>
+                <span ng-class="{ 'active' : data.current == 2 }" ng-click="actions.setCurrent(2)">@Resources.Login_CreateNewAccount</span>
+            </h2>
+        </div>
+        <div>
+            <div ng-if="data.current == 1">
+                @Html.Partial("~/Views/Shared/Controls/LoginRegister/PartialLogin.cshtml", new LoginModel())
+            </div>
+            <div ng-if="data.current == 2">
+                @Html.Partial("~/Views/Shared/Controls/LoginRegister/PartialRegister.cshtml", new RegisterModel())
+            </div ng-if="data.current>
+            <div>
+                @Resources.Login_AgreeWord <a target="_blank" href="/@locale/t/help/useragreement">@Resources.Footer_TermsOfUse</a>
+                @Resources.Login_ReadWord <a target="_blank" href="/@locale/t/help/privacypolicy">@Resources.Footer_PrivacyStatement</a>
+                @Resources.Login_And <a target="_blank" href="/@locale/t/help/contentpolicy">@Resources.Footer_ContentPolicy</a>.
+            </div>
+        </div>
+        <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@Helpers.GetAntiForgeryToken()'" />
+        <input id="locale" data-ng-model="locale" type="hidden" data-ng-init="locale='@locale'" />
+    </div>
+</div>
+}    

@@ -13,9 +13,11 @@
         <table ng-controller="loginCtrl">
             <tr>
                 <td class="floatPanelModularLeftContent">
+                    <h2>@Resources.Header_SignIn</h2>
                     @Html.Partial("~/Views/Shared/Controls/LoginRegister/PartialRegister.cshtml", new RegisterModel())
                 </td>
                 <td class="floatPanelModularRightContent spread">
+                    <h2>@Resources.Login_CreateNewAccount</h2>
                     @Html.Partial("~/Views/Shared/Controls/LoginRegister/PartialLogin.cshtml", new LoginModel())
                 </td>
             </tr>

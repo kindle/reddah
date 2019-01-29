@@ -277,7 +277,7 @@
     <value>注册</value>
   </data>
   <data name="Login_CreateNewAccount" xml:space="preserve">
-    <value>创建一个新账户</value>
+    <value>创建新账户</value>
   </data>
   <data name="Login_AgreeWord" xml:space="preserve">
     <value>注册前，请同意我们的</value>
@@ -419,5 +419,17 @@
   </data>
   <data name="Comment_Delete" xml:space="preserve">
     <value>删除</value>
+  </data>
+  <data name="Comment_Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Comment_Hint" xml:space="preserve">
+    <value>请不要输入个人信息，电话号码，电子邮件，真实姓名以及其他敏感信息，否则您的账户可能在没有警告的情况下被Reddah禁用。</value>
+  </data>
+  <data name="Comment_Write" xml:space="preserve">
+    <value>写评论</value>
+  </data>
+  <data name="Comment_Good" xml:space="preserve">
+    <value>点赞</value>
   </data>
 </root>

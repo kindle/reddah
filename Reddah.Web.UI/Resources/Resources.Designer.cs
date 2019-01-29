@@ -881,5 +881,37 @@ namespace Reddah.Web.UI.Resources
                 return ResourceManager.GetString("Comment_Delete", resourceCulture);
             }
         }
+
+        public static string Comment_Edit
+        {
+            get
+            {
+                return ResourceManager.GetString("Comment_Edit", resourceCulture);
+            }
+        }
+
+        public static string Comment_Hint
+        {
+            get
+            {
+                return ResourceManager.GetString("Comment_Hint", resourceCulture);
+            }
+        }
+
+        public static string Comment_Write
+        {
+            get
+            {
+                return ResourceManager.GetString("Comment_Write", resourceCulture);
+            }
+        }
+
+        public static string Comment_Good
+        {
+            get
+            {
+                return ResourceManager.GetString("Comment_Good", resourceCulture);
+            }
+        }
     }
 }

@@ -1712,9 +1712,39 @@ div#LoginRegisterPanel {
     display: none;
     z-index: 1001;
     position: absolute;
-    width: 800px;
+    min-width: 800px;
+    left: 50px;
     height: auto;
     background-color: #ffffff;
+    padding: 50px;
+}
+
+div#LoginRegisterPanel input {
+    width: 100%;
+}
+
+div#LoginRegisterPanel h2 {
+    font-size: 55px;
+    margin-bottom: 50px;
+}
+
+div#LoginRegisterPanel label {
+    font-size: 45px;
+}
+
+div#LoginRegisterPanel input[type="checkbox"] {
+    width:40px;
+    height:40px;
+    vertical-align:middle;
+}
+
+div#LoginRegisterPanel input[type="button"] {
+    margin-bottom: 100px;
+}
+
+div#LoginRegisterPanel img {
+    width: 200px;
+    height: 200px;
 }
 
 div.loginRegisterPanelHide {
@@ -1722,9 +1752,11 @@ div.loginRegisterPanelHide {
     cursor: pointer;
     margin-right: 18px;
     margin-top: 18px;
-    height: 24px;
-    width: 24px;
+    height: 50px;
+    width: 50px;
     background-image: url("/Content/Images/close_icon.png");
+    background-repeat: no-repeat;
+    background-size:100%;
 }
 
 div#ShellHeaderContent div#ShellMeBarArea a.GamerTagArea {
@@ -1743,6 +1775,11 @@ div#ShellHeaderContent div#ShellMeBarArea a.GamerTagArea {
 td.floatPanelModularLeftContent, td.floatPanelModularRightContent
 {
     width: 400px;
+    vertical-align: top;
+}
+
+td.floatPanelModularContent {
+    width: 600px;
     vertical-align: top;
 }
 

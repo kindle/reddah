@@ -113,3 +113,15 @@
         transclude: true
     };
 })
+.directive('collapser', function () {
+    return {
+        restrict: 'EAC',
+        templateUrl: '/content/app/collapser.html',
+        scope: {
+            caption: '@',
+            del: '@',
+            delfun:'&'
+        },
+        transclude: true
+    };
+})

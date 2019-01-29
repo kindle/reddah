@@ -1,5 +1,15 @@
 ﻿angular.module("reddahApp")
 .controller("loginCtrl", ['$scope', 'loginSvc', function ($scope, loginSvc) {
+    $scope.data = {
+        current: "1" // 1代表Login，2代表Register
+    };
+    $scope.actions =
+    {
+        setCurrent: function (param) {
+            $scope.data.current = param;
+        }
+    }
+
     $scope.loginOnEnter = function (e) {
         var keycode = window.event ? e.keyCode : e.which;
         if (keycode == 13) {
@@ -141,13 +151,3 @@
         },
     }
 }])
-.directive('collapser', function () {
-    return {
-        restrict: 'EAC',
-        templateUrl: '/content/app/collapser.html',
-        scope: {
-            caption: '@'
-        },
-        transclude: true
-    };
-})

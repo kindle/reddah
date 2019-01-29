@@ -19,13 +19,20 @@
                         <collapser-comment toggle1="[-]" toggle2="[+]" locale="@locale" username="@node.UserName" createdon="@Helpers.TimeAgo(node.CreatedOn)" content="@Html.Raw(Helpers.HtmlDecode(node.Content))" count="@node.Count" parentid="@Model.Seed" status="@node.Status" msg="@Resources.Msg_Deleted">
                             @if (Request.IsAuthenticated)
                             {
-                                <div class="buttons">
-                                    <collapser caption="@Resources.Comment_Reply">
+                            <div class="buttons">
+                                @if (User.Identity.Name.Equals(node.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.DeleteComment))
+                                {
+                                    <collapser caption="@Resources.Comment_Reply" del="@Resources.Comment_Delete" delfun="delComment('@locale',@node.Id)" good="@Resources.Comment_Good">
                                         @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = node.Id })
                                     </collapser>
-                                    @if (User.Identity.Name.Equals(node.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.DeleteComment))
-                                    {<u ng-click="delComment('@locale', @node.Id)">[@Resources.Comment_Delete]</u>}
-                                </div>}
+                                }
+                                else
+                                {
+                                    <collapser caption="@Resources.Comment_Reply" good="@Resources.Comment_Good">
+                                        @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = node.Id })
+                                    </collapser>
+                                }
+                            </div>}
                             <div class="child">
                                 @Html.Partial("Comment", seededComments)
                             </div>
