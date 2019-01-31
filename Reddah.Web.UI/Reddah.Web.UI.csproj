@@ -222,6 +222,9 @@
     <Compile Include="Log.cs">
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Message.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ArticleModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
@@ -263,6 +266,12 @@
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UploadFile.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserArticle.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserFriend.cs">
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserProfile.cs">

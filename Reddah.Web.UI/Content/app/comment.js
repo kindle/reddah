@@ -119,8 +119,9 @@
         templateUrl: '/content/app/collapser.html',
         scope: {
             caption: '@',
+            zan: '@',
             del: '@',
-            delfun:'&'
+            delfun: '&'            
         },
         transclude: true
     };

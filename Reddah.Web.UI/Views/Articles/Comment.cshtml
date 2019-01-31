@@ -22,13 +22,13 @@
                             <div class="buttons">
                                 @if (User.Identity.Name.Equals(node.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.DeleteComment))
                                 {
-                                    <collapser caption="@Resources.Comment_Reply" del="@Resources.Comment_Delete" delfun="delComment('@locale',@node.Id)" good="@Resources.Comment_Good">
+                                    <collapser caption="@Resources.Comment_Reply" del="@Resources.Comment_Delete" delfun="delComment('@locale',@node.Id)" zan="@Resources.Comment_Good">
                                         @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = node.Id })
                                     </collapser>
                                 }
                                 else
                                 {
-                                    <collapser caption="@Resources.Comment_Reply" good="@Resources.Comment_Good">
+                                    <collapser caption="@Resources.Comment_Reply" zan="@Resources.Comment_Good">
                                         @Html.Partial("~/Views/Articles/NewComment.cshtml", new CommentModel() { ParentId = node.Id })
                                     </collapser>
                                 }

@@ -58,6 +58,12 @@ public partial class reddahEntities1 : DbContext
 
     public DbSet<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
 
+    public DbSet<Message> Messages { get; set; }
+
+    public DbSet<UserArticle> UserArticles { get; set; }
+
+    public DbSet<UserFriend> UserFriends { get; set; }
+
 }
 
 }

@@ -120,3 +120,23 @@ CREATE TABLE [dbo].[UploadFile]
 	[Tag] NVARCHAR(MAX) NOT NULL,
 	CONSTRAINT [PK_dbo.UploadFile] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
+CREATE TABLE [dbo].[UserArticle]
+(
+	[UserName] NVARCHAR(MAX) NOT NULL,
+	[ArticleId] INT NOT NULL 
+);
+
+CREATE TABLE [dbo].[UserFriend]
+(
+	[UserName] NVARCHAR(MAX) NOT NULL,
+	[Watch] NVARCHAR(MAX) NOT NULL
+);
+
+CREATE TABLE [dbo].[Message]
+(
+	[From] NVARCHAR(MAX) NOT NULL,
+	[To] NVARCHAR(MAX) NOT NULL,
+	[Msg] NVARCHAR(MAX) NOT NULL,
+	[Status] INT NOT NULL DEFAULT 0
+);

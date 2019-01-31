@@ -7,6 +7,10 @@
     text-decoration: none !important;
 }
 
+.hand{
+    cursor:pointer;
+}
+
 video {
     width: 100%;
 }
