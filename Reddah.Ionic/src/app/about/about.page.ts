@@ -4,8 +4,10 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+//import { AlipayShare } from 'cordova-plugin-kindle-alipay-share'
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+declare let cordova: any;
 @Component({
   selector: 'app-about',
   templateUrl: 'about.page.html',
@@ -23,10 +25,18 @@ export class AboutPage {
     private platform: Platform,
     //private alertCtrl: AlertController,
     private http: HttpClient,
+    //private alipayShare: AlipayShare,
+    
   ) {
     this.getVersionNumber().then(version => {
       this.version = version;
     });
+    /*cordova.plugins.helloplugin.coolMethod("Hello World", res => {
+        console.log(res); //返回结果
+    },err => {
+        console.log(err); //返回错误
+    });*/
+    //helloplugin.coolMethod("插件测试！",result=>alert(result),error=>alert(error));
   }
 
   shareFriend(){
@@ -34,7 +44,7 @@ export class AboutPage {
         alert('friend');
     //else
     //    alert('wechat not installed')
-
+    //this.alipayShare.timeline("a");
   }
 
   shareTimeline(){

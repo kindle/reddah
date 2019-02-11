@@ -16,6 +16,8 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
+//import { AlipayShare } from 'cordova-plugin-kindle-alipay-share'
+
 @NgModule({
   declarations: [
     AppComponent
@@ -27,7 +29,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     AppRoutingModule,
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
-    
+    //AlipayShare,
   ],
   exports:[
     
