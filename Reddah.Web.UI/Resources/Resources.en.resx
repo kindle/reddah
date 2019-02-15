@@ -258,6 +258,9 @@
   <data name="Article_CommentCount" xml:space="preserve">
     <value>comment(s)</value>
   </data>
+  <data name="Article_Mapping" xml:space="preserve">
+    <value>Knowledge Mapping</value>
+  </data>
   <data name="Login_UserName" xml:space="preserve">
     <value>username</value>
   </data>
@@ -307,7 +310,7 @@
     <value>Privacy Statement</value>
   </data>
   <data name="Footer_ContentPolicy" xml:space="preserve">
-    <value>Content Policy</value>
+    <value>Code of Conduct</value>
   </data>
   <data name="Footer_Press" xml:space="preserve">
     <value>Press</value>

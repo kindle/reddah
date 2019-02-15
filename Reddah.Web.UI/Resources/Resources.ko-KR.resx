@@ -169,13 +169,13 @@
     <value>Gilded</value>
   </data>
     <data name="Menu_Hot" xml:space="preserve">
-    <value>Hot</value>
+    <value>인기 있다</value>
   </data>
     <data name="Menu_New" xml:space="preserve">
-    <value>New</value>
+    <value>최신</value>
   </data>
     <data name="Menu_Promoted" xml:space="preserve">
-    <value>Promoted</value>
+    <value>추천하다</value>
   </data>
     <data name="Menu_Rising" xml:space="preserve">
     <value>Rising</value>
@@ -184,28 +184,28 @@
     <value>Games</value>
   </data>
   <data name="Menu_Download" xml:space="preserve">
-    <value>Download</value>
+    <value>다운로드</value>
   </data>
   <data name="Menu_Support" xml:space="preserve">
     <value>Support</value>
   </data>
   <data name="Menu_Search" xml:space="preserve">
-    <value>Search</value>
+    <value>검색</value>
   </data>
   <data name="Menu_Top" xml:space="preserve">
     <value>Top</value>
   </data>
-    <data name="Navi_Home" xml:space="preserve">
-        <value>홈</value>
+  <data name="Navi_Home" xml:space="preserve">
+    <value>홈</value>
   </data>
     <data name="Right_Feedbacks" xml:space="preserve">
-    <value>Feedbacks</value>
+    <value>피드백</value>
   </data>
     <data name="Right_DiscussAd" xml:space="preserve">
-    <value>Discuss on AD</value>
+    <value>광고 정보</value>
   </data>
     <data name="Right_ContactUs" xml:space="preserve">
-    <value>Contact Us</value>
+    <value>문의처</value>
   </data>
     <data name="Right_Feedbacks_Desc" xml:space="preserve">
     <value>Get help from the knowledgeable Reddah Community and official Reddah Support!</value>
@@ -258,6 +258,9 @@
   <data name="Article_CommentCount" xml:space="preserve">
     <value>comment(s)</value>
   </data>
+  <data name="Article_Mapping" xml:space="preserve">
+    <value>Knowledge Mapping</value>
+  </data>
   <data name="Login_UserName" xml:space="preserve">
     <value>username</value>
   </data>
@@ -300,23 +303,23 @@
     <data name="Login_Msg_EmailRequire" xml:space="preserve">
     <value>The Email field is required.</value>
   </data>
-    <data name="Footer_TermsOfUse" xml:space="preserve">
-    <value>Terms of Use</value>
+  <data name="Footer_TermsOfUse" xml:space="preserve">
+    <value>사용약관</value>
   </data>
-    <data name="Footer_PrivacyStatement" xml:space="preserve">
-    <value>Privacy Statement</value>
+  <data name="Footer_PrivacyStatement" xml:space="preserve">
+    <value>개인정보처리방침</value>
   </data>
-    <data name="Footer_ContentPolicy" xml:space="preserve">
-    <value>Content Policy</value>
+  <data name="Footer_ContentPolicy" xml:space="preserve">
+    <value>사용 규정</value>
   </data>
   <data name="Footer_Press" xml:space="preserve">
-    <value>Press</value>
+    <value>프레스</value>
   </data>
   <data name="Footer_Jobs" xml:space="preserve">
-    <value>Jobs</value>
+    <value>합격 정보</value>
   </data>
   <data name="Footer_ForDevelopers" xml:space="preserve">
-    <value>For Developers</value>
+    <value>개발자 향상</value>
   </data>
   <data name="Msg_Deleted" xml:space="preserve">
     <value>The content was deleted</value>

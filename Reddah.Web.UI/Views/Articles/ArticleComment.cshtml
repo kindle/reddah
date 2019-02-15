@@ -196,7 +196,7 @@
     <aside class="flex-article-right" id="articleAside">
         @*Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLogin.cshtml", new Reddah.Web.UI.Models.LoginModel())*@
         <div class="subreddahbox">
-            <h5>知识图谱</h5>
+            <h5>@Resources.Article_Mapping</h5>
             <ol>
                 @foreach (string g in Model.GroupName.Trim().Split(','))
                 {

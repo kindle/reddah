@@ -169,13 +169,13 @@
     <value>Gilded</value>
   </data>
   <data name="Menu_Hot" xml:space="preserve">
-    <value>Hot</value>
+    <value>人気</value>
   </data>
   <data name="Menu_New" xml:space="preserve">
-    <value>New</value>
+    <value>最新</value>
   </data>
   <data name="Menu_Promoted" xml:space="preserve">
-    <value>Promoted</value>
+    <value>お勧め</value>
   </data>
   <data name="Menu_Rising" xml:space="preserve">
     <value>Rising</value>
@@ -184,13 +184,13 @@
     <value>Games</value>
   </data>
   <data name="Menu_Download" xml:space="preserve">
-    <value>Download</value>
+    <value>ダウンロード</value>
   </data>
   <data name="Menu_Support" xml:space="preserve">
     <value>Support</value>
   </data>
   <data name="Menu_Search" xml:space="preserve">
-    <value>Search</value>
+    <value>サーチ</value>
   </data>
   <data name="Menu_Top" xml:space="preserve">
     <value>Top</value>
@@ -199,13 +199,13 @@
     <value>ホーム</value>
   </data>
   <data name="Right_Feedbacks" xml:space="preserve">
-    <value>Feedbacks</value>
+    <value>フィードバック</value>
   </data>
   <data name="Right_DiscussAd" xml:space="preserve">
-    <value>Discuss on AD</value>
+    <value>広告について</value>
   </data>
   <data name="Right_ContactUs" xml:space="preserve">
-    <value>Contact Us</value>
+    <value>お問い合わせ</value>
   </data>
   <data name="Right_Feedbacks_Desc" xml:space="preserve">
     <value>Get help from the knowledgeable Reddah Community and official Reddah Support!</value>
@@ -258,6 +258,9 @@
   <data name="Article_CommentCount" xml:space="preserve">
     <value>comment(s)</value>
   </data>
+  <data name="Article_Mapping" xml:space="preserve">
+    <value>Knowledge Mapping</value>
+  </data>
   <data name="Login_UserName" xml:space="preserve">
     <value>username</value>
   </data>
@@ -301,22 +304,22 @@
     <value>The Email field is required.</value>
   </data>
   <data name="Footer_TermsOfUse" xml:space="preserve">
-    <value>Terms of Use</value>
+    <value>使用条件</value>
   </data>
   <data name="Footer_PrivacyStatement" xml:space="preserve">
-    <value>Privacy Statement</value>
+    <value>プライバシー</value>
   </data>
   <data name="Footer_ContentPolicy" xml:space="preserve">
-    <value>Content Policy</value>
+    <value>マナーについて</value>
   </data>
   <data name="Footer_Press" xml:space="preserve">
-    <value>Press</value>
+    <value>プレス</value>
   </data>
   <data name="Footer_Jobs" xml:space="preserve">
-    <value>Jobs</value>
+    <value>採用情報</value>
   </data>
   <data name="Footer_ForDevelopers" xml:space="preserve">
-    <value>For Developers</value>
+    <value>開発者向け</value>
   </data>
   <data name="Msg_Deleted" xml:space="preserve">
     <value>The content was deleted</value>

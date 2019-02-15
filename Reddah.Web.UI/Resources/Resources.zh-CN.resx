@@ -258,6 +258,9 @@
   <data name="Article_CommentCount" xml:space="preserve">
     <value>条</value>
   </data>
+  <data name="Article_Mapping" xml:space="preserve">
+    <value>知识图谱</value>
+  </data>
   <data name="Login_UserName" xml:space="preserve">
     <value>用户名</value>
   </data>

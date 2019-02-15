@@ -290,23 +290,25 @@ div#ShellHeaderContent div#ShellMeBarArea div#ShellMeBar.SignedIn div.LinkArea s
     Navigation Bar
 ************************************************/
 
-div#ShellHeaderContent div#ShellNavigationBar
-{
+div#ShellHeaderContent div#ShellNavigationBar {
     font-size: 13px;
-    font-family: 'Segoe UI' , Arial, Sans-Serif;
-    background-color: #107C10; /*Primary Green*/
+    font-family: 'Segoe UI', Arial, Sans-Serif;
+    /*background-color: #107C10; Primary Green*/
+    background-color: #cb0000; /*Primary Red*/
     overflow: auto;
     zoom: 1; /* IE6 */
     z-index: 30;
     text-align: left;
-    background: -webkit-gradient(linear, left top, left bottom, from(#107C10), to(#107C10)); /* Safari 4+, Chrome */
-    background: -webkit-linear-gradient(top, #107C10, #107C10); /* Chrome 10+, Safari 5.1+ */
+    /*background: -webkit-gradient(linear, left top, left bottom, from(#cb0000), to(#cb0000)); /* Safari 4+, Chrome */
+    background: -webkit-gradient(linear, left top, left bottom, from(#107C10), to(#107C10));  /* Safari 4+, Chrome */
+    /*background: -webkit-linear-gradient(top, #cb0000, #cb0000); /* Chrome 10+, Safari 5.1+ */
+    background: -webkit-linear-gradient(top, #107C10, #107C10); /*Chrome 10+, Safari 5.1+ */
     background: -moz-linear-gradient(top, #107C10, #107C10); /* FF3.6+ */
     background: -ms-linear-gradient(top, #107C10, #107C10); /* IE10 */
     background: -o-linear-gradient(top, #107C10, #107C10); /* Opera */
-    background: linear-gradient(top, #107C10, #107C10); /* W3C */ 
+    background: linear-gradient(top, #107C10, #107C10); /* W3C */
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#107C10, endColorstr=#107C10)"; /*IE8-9*/
-    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr="#107C10", endColorstr="#107C10", GradientType=0); /* IE6-7 */ 
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr="#107C10", endColorstr="#107C10", GradientType=0); /* IE6-7 */
     overflow: auto; /* Give "layout" for IE6-7 filters to work */
 }
 

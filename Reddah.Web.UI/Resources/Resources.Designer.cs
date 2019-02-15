@@ -450,6 +450,14 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
+        public static string Article_Mapping
+        {
+            get
+            {
+                return ResourceManager.GetString("Article_Mapping", resourceCulture);
+            }
+        }
+
         public static string Login_UserName
         {
             get
