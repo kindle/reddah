@@ -23,7 +23,7 @@
         else
         {
             <div class="LinkArea">
-                @Resources.Header_Want <a name="RpsSignInLink" href="/@locale/account/login">@Resources.Header_SignIn</a> @Resources.Header_Or <a name="RpsSignInLink" href="/@locale/account/register">@Resources.Header_JoinNow</a> @Resources.Header_InSeconds
+                @Resources.Header_Want <a name="RpsSignInLink" ng-click="showPanelLoginOnly('1')">@Resources.Header_SignIn</a> @Resources.Header_Or <a name="RpsSignInLink" ng-click="showPanelLoginOnly('2')">@Resources.Header_JoinNow</a> @Resources.Header_InSeconds
                 <span class="spread">
                     <a href="/@locale/ChangeLocale" id="ChangeCultureLink" name="ChangeCultureLink">@Resources.Footer_ChangeLocale</a>
                 </span>
@@ -35,4 +35,4 @@
     </div>
 </div>
 <div id="BroswerOpacify" ng-click="hidePanel();"></div>
-@Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLoginRegister.cshtml")
+@Html.Partial("~/Views/Shared/Controls/LoginRegister/JsonLoginRegister.mobile.cshtml")

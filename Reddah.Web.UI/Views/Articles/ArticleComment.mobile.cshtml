@@ -173,7 +173,7 @@
         <div id="addComment" class="baseCommentBox hideCommentBox">
             @if (!Request.IsAuthenticated)
             {
-                <div class="leftcomment"><span class="fa fa-pencil-square-o writecomment" ng-click="showPanelLoginOnly()"> @Resources.Comment_Write</span></div>
+                <div class="leftcomment"><span class="fa fa-pencil-square-o writecomment" ng-click="showPanelLoginOnly('1')"> @Resources.Comment_Write</span></div>
             }
             <div class="rightcomment"><span class="fa fa-bookmark-o"></span><span class="fa fa-share-alt"></span></div>
         </div>

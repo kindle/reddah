@@ -55,7 +55,11 @@
         toAlign.css('top', (($(window).height() - toAlign.outerHeight()) / 2) + $(window).scrollTop() + 'px');
         toAlign.css('left', (($(window).width() - toAlign.outerWidth()) / 2) + $(window).scrollLeft() + 'px');
     };
-    $scope.showPanelLoginOnly = function () {
+    $scope.data = {
+        current: "1" // 1代表Login，2代表Register
+    };
+    $scope.showPanelLoginOnly = function (n='1') {
+        $scope.data.current = n;
         $('div#BroswerOpacify').show();
         $('div#LoginRegisterPanel').show();
         var toAlign = $('div#LoginRegisterPanel');

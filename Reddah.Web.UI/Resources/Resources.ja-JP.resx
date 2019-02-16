@@ -280,7 +280,7 @@
     <value>Sign Up</value>
   </data>
   <data name="Login_CreateNewAccount" xml:space="preserve">
-    <value>CREATE A NEW ACCOUNT</value>
+    <value>アカウントの作成</value>
   </data>
   <data name="Login_AgreeWord" xml:space="preserve">
     <value>By signing up, you agree to our</value>
@@ -361,7 +361,7 @@
     <value>Please Login to Edit</value>
   </data>
   <data name="Error_No_More_Result" xml:space="preserve">
-    <value>No more search result!</value>
+    <value>これ以上の検索結果！</value>
   </data>
   <data name="Error_Server_Error" xml:space="preserve">
     <value>Server error, please click here to refresh the page</value>

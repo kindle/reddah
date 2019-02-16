@@ -1,8 +1,6 @@
 ﻿angular.module("reddahApp")
 .controller("loginCtrl", ['$scope', 'loginSvc', function ($scope, loginSvc) {
-    $scope.data = {
-        current: "1" // 1代表Login，2代表Register
-    };
+    
     $scope.actions =
     {
         setCurrent: function (param) {

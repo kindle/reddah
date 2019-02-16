@@ -142,42 +142,42 @@
     <value>새 글 을 발포 하다</value>
   </data>
   <data name="Header_JoinNow" xml:space="preserve">
-        <value>지금 가입</value>
+    <value>지금 가입</value>
   </data>
-    <data name="Header_MyAccount" xml:space="preserve">
-        <value>내 계정</value>
+  <data name="Header_MyAccount" xml:space="preserve">
+    <value>내 계정</value>
   </data>
-    <data name="Header_SignIn" xml:space="preserve">
-        <value>로그인</value>
+  <data name="Header_SignIn" xml:space="preserve">
+    <value>로그인</value>
   </data>
-    <data name="Header_SignOut" xml:space="preserve">
+  <data name="Header_SignOut" xml:space="preserve">
     <value>Log Off</value>
   </data>
-    <data name="Header_Want" xml:space="preserve">
+  <data name="Header_Want" xml:space="preserve">
     <value>Want to join?</value>
   </data>
-    <data name="Header_Or" xml:space="preserve">
+  <data name="Header_Or" xml:space="preserve">
     <value>or</value>
   </data>
-    <data name="Header_InSeconds" xml:space="preserve">
+  <data name="Header_InSeconds" xml:space="preserve">
     <value>in seconds.</value>
   </data>
-    <data name="Menu_Controversial" xml:space="preserve">
+  <data name="Menu_Controversial" xml:space="preserve">
     <value>Controversial</value>
   </data>
-    <data name="Menu_Gilded" xml:space="preserve">
+  <data name="Menu_Gilded" xml:space="preserve">
     <value>Gilded</value>
   </data>
-    <data name="Menu_Hot" xml:space="preserve">
+  <data name="Menu_Hot" xml:space="preserve">
     <value>인기 있다</value>
   </data>
-    <data name="Menu_New" xml:space="preserve">
+  <data name="Menu_New" xml:space="preserve">
     <value>최신</value>
   </data>
-    <data name="Menu_Promoted" xml:space="preserve">
+  <data name="Menu_Promoted" xml:space="preserve">
     <value>추천하다</value>
   </data>
-    <data name="Menu_Rising" xml:space="preserve">
+  <data name="Menu_Rising" xml:space="preserve">
     <value>Rising</value>
   </data>
   <data name="Menu_Games" xml:space="preserve">
@@ -198,22 +198,22 @@
   <data name="Navi_Home" xml:space="preserve">
     <value>홈</value>
   </data>
-    <data name="Right_Feedbacks" xml:space="preserve">
+  <data name="Right_Feedbacks" xml:space="preserve">
     <value>피드백</value>
   </data>
-    <data name="Right_DiscussAd" xml:space="preserve">
+  <data name="Right_DiscussAd" xml:space="preserve">
     <value>광고 정보</value>
   </data>
-    <data name="Right_ContactUs" xml:space="preserve">
+  <data name="Right_ContactUs" xml:space="preserve">
     <value>문의처</value>
   </data>
-    <data name="Right_Feedbacks_Desc" xml:space="preserve">
+  <data name="Right_Feedbacks_Desc" xml:space="preserve">
     <value>Get help from the knowledgeable Reddah Community and official Reddah Support!</value>
   </data>
-    <data name="Right_DiscussAd_Desc" xml:space="preserve">
+  <data name="Right_DiscussAd_Desc" xml:space="preserve">
     <value>A place for discussing the ads that reddah is currently running.</value>
   </data>
-    <data name="Right_ContactUs_Desc" xml:space="preserve">
+  <data name="Right_ContactUs_Desc" xml:space="preserve">
     <value>Get in touch with an Reddah Support technician. We are ready and willing to help you!</value>
   </data>
   <data name="Right_Tags" xml:space="preserve">
@@ -280,7 +280,7 @@
     <value>Sign Up</value>
   </data>
     <data name="Login_CreateNewAccount" xml:space="preserve">
-    <value>CREATE A NEW ACCOUNT</value>
+    <value>계정 만들기</value>
   </data>
     <data name="Login_AgreeWord" xml:space="preserve">
     <value>By signing up, you agree to our</value>
@@ -360,8 +360,8 @@
     <data name="Submit_Button_Login_Edit" xml:space="preserve">
     <value>Please Login to Edit</value>
   </data>
-    <data name="Error_No_More_Result" xml:space="preserve">
-    <value>No more search result!</value>
+  <data name="Error_No_More_Result" xml:space="preserve">
+    <value>더 이상 검색 결과!</value>
   </data>
     <data name="Error_Server_Error" xml:space="preserve">
     <value>Server error, please click here to refresh the page</value>
