@@ -14,21 +14,12 @@
     $scope.toTop = function () {
         $("html,body").animate({ scrollTop: 0 }, 500);
     };
-    $scope.htmlDecode = function (str) {
-        var s = "";
-        if (str.length == 0) return "";
-        s = str.replace(/&amp;/g, "&");
-        s = s.replace(/&lt;/g, "<");
-        s = s.replace(/&gt;/g, ">");
-        s = s.replace(/&nbsp;/g, " ");
-        s = s.replace(/&#39;/g, "\'");
-        s = s.replace(/&quot;/g, "\"");
-        s = s.replace(/&#183;/g, "\·");
-        s = s.replace(/&middot;/g, "\·");
-        s = s.replace(/&ldquo;/g, "\"");
-        s = s.replace(/\r\n/g, "")
-        
-        return s;
+    $scope.htmlDecode = function (text) {
+        var temp = document.createElement("div");
+        temp.innerHTML = text;
+        var output = temp.innerText || temp.textContent;
+        temp = null;
+        return output;
     };
     $scope.urlDecode = function (str) {
         var s = "";
@@ -41,8 +32,8 @@
         return s;
     };
     $scope.summary = function (str, n) {
-        str = $scope.htmlDecode(str).replace(/<[^>]+>/g, "");
-        return $scope.subpost(str, n);
+        text = $scope.htmlDecode(str).replace(/<[^>]+>/g, "");
+        return $scope.htmlDecode($scope.subpost(text, n));
     };
 
 

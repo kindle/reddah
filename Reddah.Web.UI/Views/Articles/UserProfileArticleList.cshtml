@@ -127,7 +127,7 @@
                 </div>
                 <h2 ng-if="article.ImageUrls.length<2"><a class="hand" ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))">{{htmlDecode(article.Title)}}</a> <i class="fa fa-window-maximize hand" ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))"></i></h2>
             </div>
-            <div style="margin-top: 5px;">{{summary(article.Content,120)}}</div>
+            <div style="margin-top: 5px;">{{summary(article.Content, 150)}}</div>
             <div class="postClear" ng-if="article.ImageUrls.length==3"></div>
             <div class="listInfo" style="margin-top: 5px;">
                 <a href="/@locale/r/{{urlDecode(article.GroupName)}}/comments/{{article.Id}}/{{urlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments </a> <!--share save hide report-->
