@@ -7,7 +7,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 //import { AlipayShare } from 'cordova-plugin-kindle-alipay-share'
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-declare let cordova: any;
+//declare let cordova: any;
 @Component({
   selector: 'app-about',
   templateUrl: 'about.page.html',

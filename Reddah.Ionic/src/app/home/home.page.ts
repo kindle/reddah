@@ -84,8 +84,6 @@ export class HomePage implements OnInit {
       this.getHeroes();
     }
   
-    
-
     getHeroes(): void {
       let locale = this.localStorageService.retrieve("Reddah_Locale");
       if(locale==null)
@@ -98,7 +96,6 @@ export class HomePage implements OnInit {
               this.loadedIds.push(article.Id);  
             }
           }
-          
         );
     
     }
