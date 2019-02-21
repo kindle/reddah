@@ -1,55 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Reddah</ion-title>
+    <ion-title>Reddah.com</ion-title>
   </ion-toolbar>
 </ion-header>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <ion-content padding>
-  <ion-list>
-    <div class="listInfoBlock" *ngFor="let article of articles" (click)="view()">
-        <div class="postModuleLiner">
-            <div *ngIf="article.VideoUrl.length>0">
-                <h2><a (click)="view()">{{htmlDecode(article.Title)}}</a></h2>
-                <div class="postClear"></div>
-                <video id="video_{{article.Id}}" (click)="playVideo(article.Id)" src="{{article.VideoUrl}}"
-                       poster="{{article.VideoPoster}}"
-                       controls="controls" loop="true">
-                    your browser does not support the video tag
-                </video>
-                <div class="postClear"></div>
-            </div>
-            <div *ngIf="article.VideoUrl.length==0" (click)="view()">
-                <h2 *ngIf="article.ImageUrls.length>1"><a>{{htmlDecode(article.Title)}}</a></h2>
-                <div class="postClear" *ngIf="article.ImageUrls.length>1"></div>
-                <div class="listImage" [ngStyle]="{'display':article.ImageUrls.length>1?'flex':''}">
-                    <div class="listImageWrapper" *ngFor="let articleUrl of article.ImageUrls">
-                        <img class="lazy BrowsePreviewImage" onerror="this.style.display='none'" src="{{articleUrl}}">
-                    </div>
-                </div>
-                <h2 *ngIf="article.ImageUrls.length<2"><a>{{htmlDecode(article.Title)}}</a></h2>
-                <div class="postClear" *ngIf="article.ImageUrls.length==3"></div>
-                <div>{{summary(article.Content, 60)}}</div>
-            </div>
-            <div class="postClear"></div>
-            <div class="listInfo">
-                <span *ngFor="let group of article.GroupName.split(',')" style="padding:0 5px;">
-                    <a href="/@locale/r/{{group}}"><u>{{group}}</u></a>
-                </span>
-            </div>
-            <div class="postClear"></div>
-            <div class="listInfo">
-                <i class="fa fa-clock-o"> {{article.CreatedOn}} </i>
-                <i class="fa fa-commenting-o" style="float:right;"> <a (click)="view()"> {{article.Comments}}</a> </i>
-            </div>
-        </div>
-    </div>
-  </ion-list>
-
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+    <ng-template ngFor let-article [ngForOf]="articles">
+        <ion-card class="welcome-card">
+            <video id="video_{{article.Id}}" (click)="playVideo(article.Id)" src="{{article.VideoUrl}}"
+                    poster="{{article.VideoPoster}}"
+                    *ngIf="article.VideoUrl.length>0"
+                    controls="controls" loop="true">
+            </video>
+            <ion-img src="{{article.ImageUrls[0]}}" *ngIf="article.VideoUrl.length==0&&article.ImageUrls.length>0"></ion-img>
+            <ion-card-header>
+                <ion-card-subtitle>
+                    <ng-template ngFor let-group [ngForOf]="article.GroupName.split(',')">
+                        <ion-label>{{group}} </ion-label>
+                    </ng-template>
+                </ion-card-subtitle>
+                <ion-card-title>{{htmlDecode(article.Title)}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <p>{{summary(article.Content, 500)}}</p>
+            </ion-card-content>
+            <ion-item>
+                <ion-note color="dark">{{article.CreatedOn}}</ion-note>
+                <ion-note color="dark" slot="end">{{article.Comments}} comment(s)</ion-note>
+            </ion-item>
+        </ion-card>
+    </ng-template>
+    
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
 </ion-content>

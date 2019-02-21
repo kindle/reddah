@@ -3,6 +3,7 @@ import { InfiniteScroll } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../article';
 import { LocalStorageService } from 'ngx-webstorage';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -75,31 +76,50 @@ export class HomePage implements OnInit {
       //}, 500);
     }
 
-    constructor(private reddah : ReddahService, 
+    constructor(private reddah : ReddahService,
+      public loadingController: LoadingController,
       private localStorageService: LocalStorageService){}
 
-    ngOnInit(){
+
+    async ngOnInit(){
       this.articles = [];
       this.loadedIds = [];
-      this.getHeroes();
-    }
-  
-    getHeroes(): void {
+      const loading = await this.loadingController.create({
+        message: 'Please wait...',
+        spinner: 'circles',
+      });
+      await loading.present();
+
       let locale = this.localStorageService.retrieve("Reddah_Locale");
       if(locale==null)
         locale = "en-us"
       this.reddah.getHeroes(this.loadedIds, locale, "new")
         .subscribe(heroes => 
-          {
-            for(let article of heroes){
-              this.articles.push(article);
-              this.loadedIds.push(article.Id);  
+            {
+                for(let article of heroes){
+                  this.articles.push(article);
+                  this.loadedIds.push(article.Id);  
+                }
+                loading.dismiss();
             }
-          }
         );
-    
     }
-
+  
+    getHeroes():void {
+      let locale = this.localStorageService.retrieve("Reddah_Locale");
+      if(locale==null)
+        locale = "en-us"
+      this.reddah.getHeroes(this.loadedIds, locale, "new")
+        .subscribe(heroes => 
+            {
+                for(let article of heroes){
+                  this.articles.push(article);
+                  this.loadedIds.push(article.Id);  
+                }
+            }
+        );
+    }
+    
     view(){
       alert('view article content');
     }
