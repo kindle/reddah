@@ -223,7 +223,7 @@
     <value>Trending Subreddahs</value>
   </data>
   <data name="Article_Comments" xml:space="preserve">
-    <value>comments</value>
+    <value>commentaires</value>
   </data>
   <data name="Article_WhatThis" xml:space="preserve">
     <value>what's this?</value>
@@ -256,28 +256,28 @@
     <value>All</value>
   </data>
   <data name="Article_CommentCount" xml:space="preserve">
-    <value>comment(s)</value>
+    <value>commentaire(s)</value>
   </data>
   <data name="Article_Mapping" xml:space="preserve">
-    <value>Knowledge Mapping</value>
+    <value>Cartographie des Connaissances</value>
   </data>
   <data name="Login_UserName" xml:space="preserve">
-    <value>username</value>
+    <value>nom d'utilisateur</value>
   </data>
   <data name="Login_Password" xml:space="preserve">
-    <value>password</value>
+    <value>mot de passe</value>
   </data>
   <data name="Login_ConfirmPassword" xml:space="preserve">
-    <value>confirm password</value>
+    <value>confirmer mot de passe</value>
   </data>
   <data name="Login_Email" xml:space="preserve">
-    <value>email</value>
+    <value>courriel</value>
   </data>
   <data name="Login_RememberMe" xml:space="preserve">
-    <value>Remember me?</value>
+    <value>Maintenir la connexion</value>
   </data>
   <data name="Login_Signup" xml:space="preserve">
-    <value>Sign Up</value>
+    <value>Connexion</value>
   </data>
   <data name="Login_CreateNewAccount" xml:space="preserve">
     <value>Créer un compte</value>
@@ -370,49 +370,49 @@
     <value>submitted</value>
   </data>
   <data name="List_By" xml:space="preserve">
-    <value>by</value>
+    <value>par</value>
   </data>
   <data name="List_Time_Format" xml:space="preserve">
     <value>{0} {1} ago</value>
   </data>
   <data name="List_Time_Just" xml:space="preserve">
-    <value>just now</value>
+    <value>juste maintenant</value>
   </data>
   <data name="List_Time_Year" xml:space="preserve">
-    <value>year</value>
+    <value>année</value>
   </data>
   <data name="List_Time_Month" xml:space="preserve">
-    <value>month</value>
+    <value>mois</value>
   </data>
   <data name="List_Time_Day" xml:space="preserve">
-    <value>day</value>
+    <value>jour</value>
   </data>
   <data name="List_Time_Hour" xml:space="preserve">
-    <value>hour</value>
+    <value>heure</value>
   </data>
   <data name="List_Time_Minute" xml:space="preserve">
     <value>minute</value>
   </data>
   <data name="List_Time_Second" xml:space="preserve">
-    <value>second</value>
+    <value>deuxième</value>
   </data>
   <data name="List_Time_Years" xml:space="preserve">
-    <value>years</value>
+    <value>ans</value>
   </data>
   <data name="List_Time_Months" xml:space="preserve">
-    <value>months</value>
+    <value>mois</value>
   </data>
   <data name="List_Time_Days" xml:space="preserve">
-    <value>days</value>
+    <value>jours</value>
   </data>
   <data name="List_Time_Hours" xml:space="preserve">
-    <value>hours</value>
+    <value>heures</value>
   </data>
   <data name="List_Time_Minutes" xml:space="preserve">
     <value>minutes</value>
   </data>
   <data name="List_Time_Seconds" xml:space="preserve">
-    <value>seconds</value>
+    <value>secondes</value>
   </data>
   <data name="List_LastUpdateOn" xml:space="preserve">
     <value>Last updated on</value>

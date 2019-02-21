@@ -223,7 +223,7 @@
     <value>Trending Subreddahs</value>
   </data>
   <data name="Article_Comments" xml:space="preserve">
-    <value>comments</value>
+    <value>コメント</value>
   </data>
   <data name="Article_WhatThis" xml:space="preserve">
     <value>what's this?</value>
@@ -256,28 +256,28 @@
     <value>All</value>
   </data>
   <data name="Article_CommentCount" xml:space="preserve">
-    <value>comment(s)</value>
+    <value>コメント</value>
   </data>
   <data name="Article_Mapping" xml:space="preserve">
-    <value>Knowledge Mapping</value>
+    <value>知識マッピング</value>
   </data>
   <data name="Login_UserName" xml:space="preserve">
-    <value>username</value>
+    <value>ユーザー名</value>
   </data>
   <data name="Login_Password" xml:space="preserve">
-    <value>password</value>
+    <value>パスワード</value>
   </data>
   <data name="Login_ConfirmPassword" xml:space="preserve">
-    <value>confirm password</value>
+    <value>パスワード確認</value>
   </data>
   <data name="Login_Email" xml:space="preserve">
-    <value>email</value>
+    <value>電子メール</value>
   </data>
   <data name="Login_RememberMe" xml:space="preserve">
-    <value>Remember me?</value>
+    <value>サインインしたままにする</value>
   </data>
   <data name="Login_Signup" xml:space="preserve">
-    <value>Sign Up</value>
+    <value>サインイン</value>
   </data>
   <data name="Login_CreateNewAccount" xml:space="preserve">
     <value>アカウントの作成</value>
@@ -376,10 +376,10 @@
     <value>{0} {1} ago</value>
   </data>
   <data name="List_Time_Just" xml:space="preserve">
-    <value>just now</value>
+    <value>ジャストナウ</value>
   </data>
   <data name="List_Time_Year" xml:space="preserve">
-    <value>year</value>
+    <value>年</value>
   </data>
   <data name="List_Time_Month" xml:space="preserve">
     <value>month</value>

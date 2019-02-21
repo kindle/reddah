@@ -274,7 +274,7 @@
     <value>电子邮件</value>
   </data>
   <data name="Login_RememberMe" xml:space="preserve">
-    <value>记住我？</value>
+    <value>保持登录状态</value>
   </data>
   <data name="Login_Signup" xml:space="preserve">
     <value>注册</value>
