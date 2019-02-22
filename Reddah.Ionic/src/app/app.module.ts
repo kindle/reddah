@@ -11,25 +11,36 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ReddahService } from './reddah.service';
-import { HttpClientModule } from '@angular/common/http';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { LocalePage } from './locale/locale.page';
 
-//import { AlipayShare } from 'cordova-plugin-kindle-alipay-share'
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LocalePage
   ],
-  entryComponents: [],
+  entryComponents: [
+    LocalePage
+  ],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
-    //AlipayShare,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  })
   ],
   exports:[
     
@@ -48,3 +59,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

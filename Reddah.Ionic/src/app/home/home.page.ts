@@ -3,7 +3,8 @@ import { InfiniteScroll } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../article';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -17,21 +18,12 @@ export class HomePage implements OnInit {
 
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
     
-    htmlDecode(str: string) {
-      var s = "";
-      if (str.length == 0) return "";
-      s = str.replace(/&amp;/g, "&");
-      s = s.replace(/&lt;/g, "<");
-      s = s.replace(/&gt;/g, ">");
-      s = s.replace(/&nbsp;/g, " ");
-      s = s.replace(/&#39;/g, "\'");
-      s = s.replace(/&quot;/g, "\"");
-      s = s.replace(/&#183;/g, "\·");
-      s = s.replace(/&middot;/g, "\·");      
-      s = s.replace(/&ldquo;/g, "\"");
-      s = s.replace(/\r\n/g, "")
-      
-      return s;
+    htmlDecode(text: string) {
+      var temp = document.createElement("div");
+        temp.innerHTML = text;
+        var output = temp.innerText || temp.textContent;
+        temp = null;
+        return output;
     }
     subpost(str: string, n: number) {
       var r = /[^\u4e00-\u9fa5]/g;
@@ -62,38 +54,34 @@ export class HomePage implements OnInit {
     }
     
     loadData(event) {
-      //setTimeout(() => {
         this.getHeroes();
 
         console.log('Done');
         event.target.complete();
-  
-        // App logic to determine if all data is loaded
-        // and disable the infinite scroll
-        //if (data.length == 1000) {
-        //  event.target.disabled = true;
-        //}
-      //}, 500);
     }
 
     constructor(private reddah : ReddahService,
       public loadingController: LoadingController,
-      private localStorageService: LocalStorageService){}
-
+      public translateService: TranslateService,
+      public navController: NavController,
+      private localStorageService: LocalStorageService){
+        let locale = this.localStorageService.retrieve("Reddah_Locale");
+      console.log(locale);
+    }
 
     async ngOnInit(){
       this.articles = [];
       this.loadedIds = [];
       const loading = await this.loadingController.create({
-        message: 'Please wait...',
+        message: this.translateService.instant("Article.Loading"),
         spinner: 'circles',
       });
       await loading.present();
 
       let locale = this.localStorageService.retrieve("Reddah_Locale");
       if(locale==null)
-        locale = "en-us"
-      this.reddah.getHeroes(this.loadedIds, locale, "new")
+        locale = "en-US"
+      this.reddah.getHeroes(this.loadedIds, locale, "promoted")
         .subscribe(heroes => 
             {
                 for(let article of heroes){
@@ -108,8 +96,8 @@ export class HomePage implements OnInit {
     getHeroes():void {
       let locale = this.localStorageService.retrieve("Reddah_Locale");
       if(locale==null)
-        locale = "en-us"
-      this.reddah.getHeroes(this.loadedIds, locale, "new")
+        locale = "en-US"
+      this.reddah.getHeroes(this.loadedIds, locale, "promoted")
         .subscribe(heroes => 
             {
                 for(let article of heroes){
@@ -118,6 +106,11 @@ export class HomePage implements OnInit {
                 }
             }
         );
+    }
+
+    ionViewDidLoad() {
+      let locale = this.localStorageService.retrieve("Reddah_Locale");
+      console.log(locale);
     }
     
     view(){

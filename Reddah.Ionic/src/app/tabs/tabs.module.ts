@@ -12,6 +12,8 @@ import { AboutPageModule } from '../about/about.module';
 import { FindPageModule } from '../find/find.module';
 import { HomePageModule } from '../home/home.module';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
@@ -22,7 +24,8 @@ import { HomePageModule } from '../home/home.module';
     HomePageModule,
     AboutPageModule,
     FindPageModule,
-    ContactPageModule
+    ContactPageModule,
+    TranslateModule.forChild(),
   ],
   declarations: [TabsPage]
 })

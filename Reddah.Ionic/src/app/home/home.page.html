@@ -1,10 +1,4 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Reddah.com</ion-title>
-  </ion-toolbar>
-</ion-header>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<ion-content padding>
+<ion-content>
     <ng-template ngFor let-article [ngForOf]="articles">
         <ion-card class="welcome-card">
             <video id="video_{{article.Id}}" (click)="playVideo(article.Id)" src="{{article.VideoUrl}}"
@@ -26,7 +20,7 @@
             </ion-card-content>
             <ion-item>
                 <ion-note color="dark">{{article.CreatedOn}}</ion-note>
-                <ion-note color="dark" slot="end">{{article.Comments}} comment(s)</ion-note>
+                <ion-note color="dark" slot="end">{{article.Comments}} {{ 'Article.Comments' | translate }}</ion-note>
             </ion-item>
         </ion-card>
     </ng-template>

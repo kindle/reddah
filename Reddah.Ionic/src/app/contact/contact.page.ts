@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-contact',
@@ -8,16 +11,12 @@ import { LocalStorageService } from 'ngx-webstorage';
 })
 export class ContactPage {
 
-  constructor(private localStorageService: LocalStorageService){
-
+  constructor(
+    public localStorageService: LocalStorageService,
+    public modalController: ModalController,
+    public navController: NavController,
+    public router: Router)
+  {
   }
 
-  changeLocale(){
-    let locale = this.localStorageService.retrieve("Reddah_Locale");
-    if(locale==null)
-      locale = "en-us";
-    locale = locale == "en-us" ? "zh-cn" : "en-us"
-
-    this.localStorageService.store("Reddah_Locale", locale);
-  }
 }

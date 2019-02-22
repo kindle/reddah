@@ -3,11 +3,13 @@ import { Platform } from '@ionic/angular';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-
-//import { AlipayShare } from 'cordova-plugin-kindle-alipay-share'
-
+import { ModalController } from '@ionic/angular';
+import { LocalStorageService } from 'ngx-webstorage';
+import { LocalePage } from '../locale/locale.page';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-//declare let cordova: any;
+
 @Component({
   selector: 'app-about',
   templateUrl: 'about.page.html',
@@ -15,93 +17,50 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AboutPage {
 
-  version: String;
+    version: String;
 
-  //constructor(private wechat: Wechat) { }
-  constructor(
-    private appVersion: AppVersion,
-    private appUpdate: AppUpdate,
-    private iab: InAppBrowser,
-    private platform: Platform,
-    //private alertCtrl: AlertController,
-    private http: HttpClient,
-    //private alipayShare: AlipayShare,
-    
-  ) {
-    this.getVersionNumber().then(version => {
-      this.version = version;
-    });
-    /*cordova.plugins.helloplugin.coolMethod("Hello World", res => {
-        console.log(res); //返回结果
-    },err => {
-        console.log(err); //返回错误
-    });*/
-    //helloplugin.coolMethod("插件测试！",result=>alert(result),error=>alert(error));
-  }
+    constructor(
+        private appVersion: AppVersion,
+        private appUpdate: AppUpdate,
+        private iab: InAppBrowser,
+        private platform: Platform,
+        private http: HttpClient,
+        private localStorageService: LocalStorageService,
+        public modalController: ModalController,
+        public navController: NavController,
+        private router: Router
+    ) {
+        this.getVersionNumber().then(version => {
+            this.version = version;
+        });
+    }
 
-  shareFriend(){
-    //if(this.wechat.isInstalled())
-        alert('friend');
-    //else
-    //    alert('wechat not installed')
-    //this.alipayShare.timeline("a");
-  }
+    getVersionNumber(): Promise<string> {
+        return new Promise((resolve) => {
+            this.appVersion.getVersionNumber().then((value: string) => {
+                resolve(value);
+            }).catch(err => {
+                console.log('getVersionNumber:' + err);
+            });
+        });
+    }
 
-  shareTimeline(){
-    alert('detectionUpgrade');
-    
-  }
-
-
-  appversion(){
-      
-      /*this.appVersion.getAppName().then(function(data){
-        alert(JSON.stringify(data));
-        this.info += JSON.stringify(data);
-      });
-      this.appVersion.getPackageName().then(function(data){
-        alert(JSON.stringify(data));
-        this.info += JSON.stringify(data);
-      });
-      this.appVersion.getVersionCode().then(function(data){
-        alert(JSON.stringify(data));
-        this.info += JSON.stringify(data);
-      });
-      this.appVersion.getVersionNumber().then(function(data){
-        alert(data);
-        this.info += data;
-      });*/
-      
+    upgrade() {
+        const updateUrl = 'https://reddah.com/apk/update.xml';
+        if (this.isMobile()) {
+            this.getVersionNumber().then(version => {
+                if (this.isAndroid()) {
+                    this.appUpdate.checkAppUpdate(updateUrl).then(data => {});
+                } else {
+                    this.appUpgrade();
+                }
+            });
+                
+        }
+    }
 
 
-  }
-
-  /**
-      * 检查app是否需要升级
-      */
-     upgrade() {
-
-      const updateUrl = 'https://reddah.com/apk/update.xml';
-      //这里连接后台获取app最新版本号,然后与当前app版本号对比
-      //版本号不一样就需要提示更新
-      if (this.isMobile()) {
-          this.getVersionNumber().then(version => {
-              if (this.isAndroid()) {
-                  this.appUpdate.checkAppUpdate(updateUrl).then(data => {});
-              } else {
-                  this.appUpgrade();
-              }
-                  
-          });
-              
-      }
-  }
-
-
- /**
-   * 提示是否需要下载最新版本
-   */
-  appUpgrade() {
+    appUpgrade() {
       alert('appupgrade');
       /*this.alertCtrl.create({
           title: '发现新版本',
@@ -116,45 +75,36 @@ export class AboutPage {
           }
           ]
       }).present();*/
-  }
+    }
 
-/**
- * 获得app版本号,如0.01
- * @description  对应/config.xml中version的值
- * @returns {Promise<string>}
- */
-  getVersionNumber(): Promise<string> {
-      return new Promise((resolve) => {
-          this.appVersion.getVersionNumber().then((value: string) => {
-              resolve(value);
-          }).catch(err => {
-              console.log('getVersionNumber:' + err);
-          });
-      });
-  }
+    isMobile(): boolean {
+        return this.platform.is('mobile');
+    }
 
- /**
-   * 是否真机环境
-   * @return {boolean}
-   */
-  isMobile(): boolean {
-      return this.platform.is('mobile');
-  }
+    isAndroid(): boolean {
+        return this.isMobile() && this.platform.is('android');
+    }
 
- /**
-   * 是否android真机环境
-   * @return {boolean}
-   */
-  isAndroid(): boolean {
-      return this.isMobile() && this.platform.is('android');
-  }
+    isIos(): boolean {
+        return this.isMobile() && (this.platform.is('ios') || this.platform.is('ipad') || this.platform.is('iphone'));
+    }
 
- /**
-   * 是否ios真机环境
-   * @return {boolean}
-   */
-  isIos(): boolean {
-      return this.isMobile() && (this.platform.is('ios') || this.platform.is('ipad') || this.platform.is('iphone'));
-  }
+
+    async changeLocale(){
+        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+        const changeLocaleModal = await this.modalController.create({
+        component: LocalePage,
+        componentProps: { orgLocale: currentLocale }
+        });
+        
+        await changeLocaleModal.present();
+        const { data } = await changeLocaleModal.onDidDismiss();
+        if(data){
+            console.log(data)
+            //this.router.navigateByUrl('/tabs/(home:home)');
+            window.location.reload();
+        }
+
+    }
 
 }
