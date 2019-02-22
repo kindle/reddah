@@ -274,7 +274,7 @@
     <value>email</value>
   </data>
   <data name="Login_RememberMe" xml:space="preserve">
-    <value>Remember me?</value>
+    <value>Keep me signed in</value>
   </data>
   <data name="Login_Signup" xml:space="preserve">
     <value>Sign Up</value>

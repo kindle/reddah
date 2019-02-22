@@ -118,19 +118,19 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
   <data name="Assistance_Title" xml:space="preserve">
-        <value>지원</value>
+    <value>지원</value>
   </data>
-    <data name="Browse_ShowLessText" xml:space="preserve">
-        <value>덜 보기</value>
+  <data name="Browse_ShowLessText" xml:space="preserve">
+    <value>덜 보기</value>
   </data>
-    <data name="Browse_ShowMoreText" xml:space="preserve">
-        <value>더 보기</value>
+  <data name="Browse_ShowMoreText" xml:space="preserve">
+    <value>더 보기</value>
   </data>
-    <data name="Browse_TopIssues" xml:space="preserve">
-        <value>자주 발생하는 문제</value>
+  <data name="Browse_TopIssues" xml:space="preserve">
+    <value>자주 발생하는 문제</value>
   </data>
-    <data name="Footer_ChangeLocale" xml:space="preserve">
-        <value>한국어(대한민국)</value>
+  <data name="Footer_ChangeLocale" xml:space="preserve">
+    <value>한국어(대한민국)</value>
   </data>
   <data name="ChangeLocale_Title" xml:space="preserve">
     <value>Set Your Default Country or Region</value>
@@ -223,7 +223,7 @@
     <value>Trending Subreddahs</value>
   </data>
     <data name="Article_Comments" xml:space="preserve">
-    <value>comments</value>
+    <value>의견</value>
   </data>
     <data name="Article_WhatThis" xml:space="preserve">
     <value>what's this?</value>
@@ -256,51 +256,51 @@
     <value>All</value>
   </data>
   <data name="Article_CommentCount" xml:space="preserve">
-    <value>comment(s)</value>
+    <value>의견</value>
   </data>
   <data name="Article_Mapping" xml:space="preserve">
-    <value>Knowledge Mapping</value>
+    <value>지식 맵</value>
   </data>
   <data name="Login_UserName" xml:space="preserve">
-    <value>username</value>
+    <value>사용자 이름</value>
   </data>
-    <data name="Login_Password" xml:space="preserve">
-    <value>password</value>
+  <data name="Login_Password" xml:space="preserve">
+    <value>비밀번호</value>
   </data>
-    <data name="Login_ConfirmPassword" xml:space="preserve">
-    <value>confirm password</value>
+  <data name="Login_ConfirmPassword" xml:space="preserve">
+    <value>비밀번호 확인</value>
   </data>
-    <data name="Login_Email" xml:space="preserve">
-    <value>email</value>
+  <data name="Login_Email" xml:space="preserve">
+    <value>전자 우편</value>
   </data>
-    <data name="Login_RememberMe" xml:space="preserve">
-    <value>Remember me?</value>
+  <data name="Login_RememberMe" xml:space="preserve">
+    <value>로그인 유지</value>
   </data>
-    <data name="Login_Signup" xml:space="preserve">
-    <value>Sign Up</value>
+  <data name="Login_Signup" xml:space="preserve">
+    <value>로그인</value>
   </data>
-    <data name="Login_CreateNewAccount" xml:space="preserve">
+  <data name="Login_CreateNewAccount" xml:space="preserve">
     <value>계정 만들기</value>
   </data>
-    <data name="Login_AgreeWord" xml:space="preserve">
+  <data name="Login_AgreeWord" xml:space="preserve">
     <value>By signing up, you agree to our</value>
   </data>
-    <data name="Login_ReadWord" xml:space="preserve">
+  <data name="Login_ReadWord" xml:space="preserve">
     <value>and that you have read our</value>
   </data>
-    <data name="Login_And" xml:space="preserve">
+  <data name="Login_And" xml:space="preserve">
     <value>and</value>
   </data>
-    <data name="Login_Msg_WrongPW" xml:space="preserve">
+  <data name="Login_Msg_WrongPW" xml:space="preserve">
     <value>The user name or password provided is incorrect.</value>
   </data>
-    <data name="Login_Msg_UserNameRequire" xml:space="preserve">
+  <data name="Login_Msg_UserNameRequire" xml:space="preserve">
     <value>The User Name field is required.</value>
   </data>
-    <data name="Login_Msg_PasswordRequire" xml:space="preserve">
+  <data name="Login_Msg_PasswordRequire" xml:space="preserve">
     <value>The Password field is required.</value>
   </data>
-    <data name="Login_Msg_EmailRequire" xml:space="preserve">
+  <data name="Login_Msg_EmailRequire" xml:space="preserve">
     <value>The Email field is required.</value>
   </data>
   <data name="Footer_TermsOfUse" xml:space="preserve">
