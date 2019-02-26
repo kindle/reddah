@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Locale } from '../locale';
-
+import { ReddahService } from '../reddah.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -12,22 +12,16 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LocalePage implements OnInit {
   @Input() orgLocale: string;
-  locales: Locale[];
 
   constructor(
       private localStorageService: LocalStorageService,
       private modalController: ModalController,
-      private translate: TranslateService) {
+      private translate: TranslateService,
+      public service: ReddahService) {
   }
 
   ngOnInit() {
-      this.locales = [
-          new Locale("zh-CN", "中华人民共和国 (China)"),
-          new Locale("fr-FR", "France"),
-          new Locale("ja-JP", "日本 (Japan)"),
-          new Locale("ko-KR", "대한민국 (Korea)"),
-          new Locale("en-US", "United States"),
-      ];
+      
   }
   
   async changeLocale(selector: string) {

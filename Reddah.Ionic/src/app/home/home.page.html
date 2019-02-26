@@ -1,6 +1,6 @@
 <ion-content>
     <ng-template ngFor let-article [ngForOf]="articles">
-        <ion-card class="welcome-card">
+        <ion-card class="welcome-card" (click)="view(article)">
             <video id="video_{{article.Id}}" (click)="playVideo(article.Id)" src="{{article.VideoUrl}}"
                     poster="{{article.VideoPoster}}"
                     *ngIf="article.VideoUrl.length>0"
@@ -10,14 +10,12 @@
             <ion-card-header>
                 <ion-card-subtitle>
                     <ng-template ngFor let-group [ngForOf]="article.GroupName.split(',')">
-                        <ion-label>{{group}} </ion-label>
+                        <ion-label><span [innerHTML]="htmlDecode(group)"></span> </ion-label>
                     </ng-template>
                 </ion-card-subtitle>
-                <ion-card-title>{{htmlDecode(article.Title)}}</ion-card-title>
+                <ion-card-title><div [innerHTML]="htmlDecode(article.Title)"></div></ion-card-title>
             </ion-card-header>
-            <ion-card-content>
-                <p>{{summary(article.Content, 500)}}</p>
-            </ion-card-content>
+            <ion-card-content><div [innerHTML]="summary(article.Title)"></div></ion-card-content>
             <ion-item>
                 <ion-note color="dark">{{article.CreatedOn}}</ion-note>
                 <ion-note color="dark" slot="end">{{article.Comments}} {{ 'Article.Comments' | translate }}</ion-note>

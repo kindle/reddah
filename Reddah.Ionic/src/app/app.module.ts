@@ -15,18 +15,25 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { LocalePage } from './locale/locale.page';
+import { SafePipe } from './safe.pipe';
 
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { Camera } from '@ionic-native/Camera/ngx'
+import { PhotoViewer } from '@ionic-native/photo-viewer/ngx'
+import { PostviewerPage } from './postviewer/postviewer.page';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LocalePage
+    LocalePage,
+    PostviewerPage,
+    SafePipe,
   ],
   entryComponents: [
-    LocalePage
+    LocalePage,
+    PostviewerPage,
   ],
   imports: [
     BrowserModule, 
@@ -51,10 +58,12 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     InAppBrowser,
     StatusBar,
     SplashScreen,
+    PhotoViewer,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     ReddahService,
     Platform,
-    AlertController
+    AlertController,
   ],
   bootstrap: [AppComponent]
 })

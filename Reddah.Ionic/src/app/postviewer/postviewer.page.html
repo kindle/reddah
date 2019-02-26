@@ -1,0 +1,6 @@
+<ion-content padding>
+    <H1 [innerHTML]="htmlDecode(article.Title) | safe: 'html'"></H1>
+    <ion-text color="dark">
+        <div id="articleContent" (click)="viewer($event)" [innerHTML]="htmlDecode(article.Content) | safe: 'html'"></div>
+    </ion-text>
+</ion-content>

@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
-  { path: 'locale', loadChildren: './locale/locale.module#LocalePageModule' }
+  { path: 'locale', loadChildren: './locale/locale.module#LocalePageModule' },
+  { path: 'postviewer', loadChildren: './postviewer/postviewer.module#PostviewerPageModule' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

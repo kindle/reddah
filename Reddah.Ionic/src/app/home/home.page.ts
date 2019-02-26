@@ -4,6 +4,9 @@ import { ReddahService } from '../reddah.service';
 import { Article } from '../article';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController } from '@ionic/angular';
+import { LocalePage } from '../locale/locale.page';
+import { PostviewerPage } from '../postviewer/postviewer.page';
+import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -64,12 +67,31 @@ export class HomePage implements OnInit {
       public loadingController: LoadingController,
       public translateService: TranslateService,
       public navController: NavController,
+
+      public modalController: ModalController,
       private localStorageService: LocalStorageService){
         let locale = this.localStorageService.retrieve("Reddah_Locale");
-      console.log(locale);
+        console.log(locale);
     }
 
     async ngOnInit(){
+      let locale = this.localStorageService.retrieve("Reddah_Locale");
+      if(locale==null){
+        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+        const changeLocaleModal = await this.modalController.create({
+        component: LocalePage,
+        componentProps: { orgLocale: currentLocale }
+        });
+        
+        await changeLocaleModal.present();
+        const { data } = await changeLocaleModal.onDidDismiss();
+        if(data){
+            console.log(data)
+            //this.router.navigateByUrl('/tabs/(home:home)');
+            window.location.reload();
+        }
+      }
+
       this.articles = [];
       this.loadedIds = [];
       const loading = await this.loadingController.create({
@@ -78,9 +100,7 @@ export class HomePage implements OnInit {
       });
       await loading.present();
 
-      let locale = this.localStorageService.retrieve("Reddah_Locale");
-      if(locale==null)
-        locale = "en-US"
+      
       this.reddah.getHeroes(this.loadedIds, locale, "promoted")
         .subscribe(heroes => 
             {
@@ -113,8 +133,19 @@ export class HomePage implements OnInit {
       console.log(locale);
     }
     
-    view(){
-      alert('view article content');
-    }
+    
+    async view(article: Article){
+      const viewerModal = await this.modalController.create({
+        component: PostviewerPage,
+        componentProps: { article: article }
+      });
+      
+      await viewerModal.present();
+      const { data } = await viewerModal.onDidDismiss();
+      if(data){
+          console.log(data)
+      }
+
+  }
 
 }

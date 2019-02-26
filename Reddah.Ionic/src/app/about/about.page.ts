@@ -9,6 +9,8 @@ import { LocalePage } from '../locale/locale.page';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ReddahService } from '../reddah.service';
 
 @Component({
   selector: 'app-about',
@@ -16,7 +18,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['about.page.scss']
 })
 export class AboutPage {
-
+    currentLocaleInfo : String;
     version: String;
 
     constructor(
@@ -28,12 +30,47 @@ export class AboutPage {
         private localStorageService: LocalStorageService,
         public modalController: ModalController,
         public navController: NavController,
-        private router: Router
+        private router: Router,
+        private service: ReddahService
     ) {
         this.getVersionNumber().then(version => {
             this.version = version;
         });
+
+        this.currentLocaleInfo = "Not Set";
+        const locale = this.localStorageService.retrieve("Reddah_Locale");
+        this.service.Locales.forEach((value, index, arr)=>{
+            if(locale===value.Name)
+                this.currentLocaleInfo = value.Description;
+        });
+        
+
     }
+    
+    image:any=''
+    
+
+    async takePhoto(){
+        const options: CameraOptions = {
+            quality: 100,
+            destinationType: Camera.DestinationType.FILE_URI,
+            encodingType: Camera.EncodingType.JPEG,
+            mediaType: Camera.MediaType.PICTURE
+          }
+          
+          Camera.getPicture(options).then((imageData) => {
+           // imageData is either a base64 encoded string or a file URI
+           // If it's base64 (DATA_URL):
+           //alert(imageData)
+           this.image=(<any>window).Ionic.WebView.convertFileSrc(imageData);
+          }, (err) => {
+           // Handle error
+           alert("error "+JSON.stringify(err))
+          });
+        
+    }
+
+    
 
     getVersionNumber(): Promise<string> {
         return new Promise((resolve) => {

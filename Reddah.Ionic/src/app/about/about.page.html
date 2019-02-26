@@ -1,10 +1,7 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>关注</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+    <ion-item>
+      <ion-icon slot="end" name="camera" (click)="takePhoto()"></ion-icon>
+    </ion-item>
     <ion-card>
       <ion-card-header>
         当前版本
@@ -19,24 +16,15 @@
       </ion-card-content>
     </ion-card>
     <ion-card>
+      <ion-card-header>
+          <ion-label>Current Locale: {{currentLocaleInfo}}</ion-label>
+      </ion-card-header>
       <ion-card-content>
         <ion-button (click)="changeLocale()">Change Locale</ion-button>
       </ion-card-content>
     </ion-card>
-      
-    <div class="row text-center" flex="box:mean">
-        <!--<div class="share-option" (click)="shareFriend()">
-          <p>微信好友</p>
-        </div>
-        <div class="share-option" (click)="shareTimeline()">
-          <p>微信朋友圈</p>
-        </div>
-        <div class="share-option" (click)="appversion()">
-          <p>Show Current Version</p>
-        </div>
-        -->
-    </div>
-
+    
+    <img [src]="image" *ngIf="image" />
 </ion-content>
 
 

@@ -4,6 +4,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-contact',
   templateUrl: 'contact.page.html',
@@ -17,6 +18,8 @@ export class ContactPage {
     public navController: NavController,
     public router: Router)
   {
+
   }
+  
 
 }

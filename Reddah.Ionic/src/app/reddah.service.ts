@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Article } from "./article";
 import { UserProfileModel } from './UserProfileModel';
-
+import { Locale } from './locale';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,14 @@ export class ReddahService {
   private log(message: string) {
     console.log(message);
   }
+
+  public Locales = [
+      new Locale("zh-CN", "中华人民共和国 (China)"),
+      new Locale("fr-FR", "France"),
+      new Locale("ja-JP", "日本 (Japan)"),
+      new Locale("ko-KR", "대한민국 (Korea)"),
+      new Locale("en-US", "United States"),
+  ];
  
   private heroesUrl = 'https://reddah.com/api/webapi/getarticles'; 
 
@@ -111,17 +119,17 @@ export class ReddahService {
  * @param operation - name of the operation that failed
  * @param result - optional value to return as the observable result
  */
-private handleError<T> (operation = 'operation', result?: T) {
-  return (error: any): Observable<T> => {
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
 
-    // TODO: send the error to remote logging infrastructure
-    console.error(error); // log to console instead
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
 
-    // TODO: better job of transforming error for user consumption
-    this.log(`${operation} failed: ${error.message}`);
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
 
-    // Let the app keep running by returning an empty result.
-    return of(result as T);
-  };
-}
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
 }
