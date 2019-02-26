@@ -48,7 +48,6 @@
 		4E9A59D4F05E493682130171 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C03520B3D934E22AAF02C14 /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C6A6D5B96F244D90A2B63977 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DFA06C045164A90BFB1D5C6 /* CoreLocation.framework */; };
 		AC63EAA4FB2D4E0C96142870 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69E0C40193341C582C1CC06 /* AVFoundation.framework */; };
-		3BB894F3AB2240708F016D7E /* PhotoViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF0CD256AB6473C9935BBFE /* PhotoViewer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,7 +150,6 @@
 		1C03520B3D934E22AAF02C14 /* ImageIO.framework */ = {isa = PBXFileReference; name = "ImageIO.framework"; path = "System/Library/Frameworks/ImageIO.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		8DFA06C045164A90BFB1D5C6 /* CoreLocation.framework */ = {isa = PBXFileReference; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		B69E0C40193341C582C1CC06 /* AVFoundation.framework */ = {isa = PBXFileReference; name = "AVFoundation.framework"; path = "System/Library/Frameworks/AVFoundation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		EEF0CD256AB6473C9935BBFE /* PhotoViewer.m */ = {isa = PBXFileReference; name = "PhotoViewer.m"; path = "com-sarriaroman-photoviewer/PhotoViewer.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,7 +320,6 @@
 				06E2DD96EDEB4A6A965E3329 /* CDVCamera.h */,
 				7BEAEAE64BB242A9BD0A5203 /* CDVJpegHeaderWriter.h */,
 				D236017F5397452B83FD5F97 /* CDVExif.h */,
-				EEF0CD256AB6473C9935BBFE /* PhotoViewer.m */,
 			);
 			name = Plugins;
 			path = "Reddah/Plugins";
@@ -462,7 +459,6 @@
 				D27B9623ACB64D1398AEDB40 /* UIImage+CropScaleOrientation.m in Sources */,
 				8511AD7BC1B94FA48D1449C9 /* CDVCamera.m in Sources */,
 				8A4E7B376AB64F56980A7F78 /* CDVJpegHeaderWriter.m in Sources */,
-				3BB894F3AB2240708F016D7E /* PhotoViewer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

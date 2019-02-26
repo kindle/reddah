@@ -25,7 +25,6 @@
     "@ionic-native/camera": "^5.0.0",
     "@ionic-native/core": "5.0.0-beta.21",
     "@ionic-native/in-app-browser": "^5.0.0-beta.23",
-    "@ionic-native/photo-viewer": "^5.2.0",
     "@ionic-native/splash-screen": "5.0.0-beta.21",
     "@ionic-native/status-bar": "5.0.0-beta.21",
     "@ionic/angular": "4.0.0-beta.15",
@@ -33,9 +32,9 @@
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "angular-web-storage": "^4.1.0",
-    "com-sarriaroman-photoviewer": "1.2.0",
     "cordova-android": "^7.1.2",
     "cordova-browser": "5.0.4",
+    "cordova-common": "^3.1.0",
     "cordova-ios": "4.5.5",
     "cordova-plugin-app-update": "2.0.2",
     "cordova-plugin-app-version": "0.1.9",
@@ -53,6 +52,10 @@
     "ngx-webstorage": "^3.0.0-beta.14",
     "ngx-webstorage-service": "^3.1.3",
     "rxjs": "^6.2.2",
+    "shelljs": "^0.8.3",
+    "underscore": "^1.9.1",
+    "unorm": "^1.5.0",
+    "xcode": "^2.0.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -95,8 +98,7 @@
       "cordova-plugin-app-update": {},
       "cordova-plugin-app-version": {},
       "cordova-plugin-inappbrowser": {},
-      "cordova-plugin-camera": {},
-      "com-sarriaroman-photoviewer": {}
+      "cordova-plugin-camera": {}
     },
     "platforms": [
       "android",

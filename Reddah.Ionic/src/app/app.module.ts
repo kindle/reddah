@@ -21,8 +21,8 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { Camera } from '@ionic-native/Camera/ngx'
-import { PhotoViewer } from '@ionic-native/photo-viewer/ngx'
 import { PostviewerPage } from './postviewer/postviewer.page';
+import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 
 @NgModule({
   declarations: [
@@ -30,10 +30,12 @@ import { PostviewerPage } from './postviewer/postviewer.page';
     LocalePage,
     PostviewerPage,
     SafePipe,
+    ImageViewerComponent,
   ],
   entryComponents: [
     LocalePage,
     PostviewerPage,
+    ImageViewerComponent,
   ],
   imports: [
     BrowserModule, 
@@ -58,7 +60,6 @@ import { PostviewerPage } from './postviewer/postviewer.page';
     InAppBrowser,
     StatusBar,
     SplashScreen,
-    PhotoViewer,
     Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     ReddahService,
