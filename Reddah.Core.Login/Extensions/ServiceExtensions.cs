@@ -11,6 +11,7 @@ namespace Reddah.Core.Login.Extensions
     public static class ServiceExtensions
     {
         public static string JwtSecurityKey;
+        public const string ApiUrl = "https://login.reddah.com";
 
         public static void ConfigureCors(this IServiceCollection services)
         {
@@ -44,8 +45,8 @@ namespace Reddah.Core.Login.Extensions
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
 
-                    ValidIssuer = "http://localhost:5051",
-                    ValidAudience = "http://localhost:5051",
+                    ValidIssuer = ApiUrl,
+                    ValidAudience = ApiUrl,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSecurityKey))
                 };
             });
