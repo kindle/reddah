@@ -156,6 +156,12 @@
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
     <Compile Include="InitializeSimpleMembershipAttribute.cs" />
+    <Compile Include="jwt\ClaimTypeMapping.cs" />
+    <Compile Include="jwt\CustomJwtSecurityTokenHandler.cs" />
+    <Compile Include="jwt\CustomJwtSecurityToken.cs" />
+    <Compile Include="jwt\JwtConstants.cs" />
+    <Compile Include="jwt\LogMessages.cs" />
+    <Compile Include="jwt\TokenLogMessages.cs" />
     <Compile Include="Log.cs">
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
