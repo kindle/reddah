@@ -6,6 +6,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Web.Http;
+using System.Linq;
+using System.Web.Helpers;
+using System.Security.Cryptography;
+using System.Web.ApplicationServices;
+using WebMatrix.WebData;
+using Org.BouncyCastle.Crypto;
+using System.Web.Security;
+using System.Data.Entity;
 
 namespace Reddah.Web.Login.Controllers
 {
@@ -22,31 +30,43 @@ namespace Reddah.Web.Login.Controllers
                 return BadRequest("Invalid client request");
             }
 
-            if (user.UserName == "johndoe" && user.Password == "def@123")
+            try
             {
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
-                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                if (!WebSecurity.Initialized)
+                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", false);
 
-                var claims = new List<Claim>();
-                claims.Add(new Claim("100","view"));
-                claims.Add(new Claim("101", "post"));
+                if (Membership.ValidateUser(user.UserName, user.Password))
+                {
+                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
+                    var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
-                var tokeOptions = new JwtSecurityToken(
-                    issuer: "https://login.reddah.com",
-                    audience: user.UserName,
-                    claims: claims,
-                    expires: DateTime.Now.AddMinutes(1),
-                    signingCredentials: signinCredentials
-                );
+                    var claims = new List<Claim>();
+                    claims.Add(new Claim("100", "view"));
+                    claims.Add(new Claim("101", "post"));
 
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-                return Ok(new { Token = tokenString });
+                    var tokeOptions = new JwtSecurityToken(
+                        issuer: "https://login.reddah.com",
+                        audience: user.UserName,
+                        claims: claims,
+                        expires: DateTime.Now.AddMinutes(20),
+                        signingCredentials: signinCredentials
+                    );
+
+                    var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+                    return Ok(new { Token = tokenString });
+                }
+                else
+                {
+                    return Unauthorized();
+                }
             }
-            else
+            catch (Exception e)
             {
-                return Unauthorized();
+                return Ok(new { Token = e.Message.ToString() });
             }
         }
+       
+
         [Route("verify")]
         [HttpPost]
         public IHttpActionResult Verify([FromBody]Product product)
