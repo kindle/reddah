@@ -6,6 +6,7 @@ import { HomePage } from '../home/home.page';
 import { AboutPage } from '../about/about.page';
 import { FindPage } from '../find/find.page';
 import { ContactPage } from '../contact/contact.page';
+import { AuthGuard } from '../AuthGuard.service';
 
 const routes: Routes = [
   {
@@ -23,20 +24,23 @@ const routes: Routes = [
         component: HomePage
       },
       {
-        path: 'about',
-        outlet: 'about',
-        component: AboutPage
+        path: 'contact',
+        outlet: 'contact',
+        component: ContactPage,
+        canActivate: [AuthGuard],
       },
       {
         path: 'find',
         outlet: 'find',
-        component: FindPage
+        component: FindPage,
+        canActivate: [AuthGuard],
       },
       {
-        path: 'contact',
-        outlet: 'contact',
-        component: ContactPage
-      }
+        path: 'about',
+        outlet: 'about',
+        component: AboutPage,
+        canActivate: [AuthGuard],
+      },
     ]
   },
   {

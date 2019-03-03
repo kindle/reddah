@@ -11,6 +11,7 @@ import { NavController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../reddah.service';
+import { AuthService }      from '../auth.service';
 
 @Component({
   selector: 'app-about',
@@ -18,6 +19,8 @@ import { ReddahService } from '../reddah.service';
   styleUrls: ['about.page.scss']
 })
 export class AboutPage {
+    
+    currentUser: String;
     currentLocaleInfo : String;
     version: String;
 
@@ -31,7 +34,8 @@ export class AboutPage {
         public modalController: ModalController,
         public navController: NavController,
         private router: Router,
-        private service: ReddahService
+        private service: ReddahService,
+        private authService: AuthService,
     ) {
         this.getVersionNumber().then(version => {
             this.version = version;
@@ -44,7 +48,8 @@ export class AboutPage {
                 this.currentLocaleInfo = value.Description;
         });
         
-
+        this.currentUser = "Not Set";
+        this.currentUser = this.localStorageService.retrieve("Reddah_CurrentUser");
     }
     
     image:any=''
@@ -142,6 +147,10 @@ export class AboutPage {
             window.location.reload();
         }
 
+    }
+
+    logout() {
+        this.authService.logout();
     }
 
 }

@@ -23,6 +23,9 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { Camera } from '@ionic-native/Camera/ngx'
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
+import { LoginPage } from './login/login.page';
+import { AuthService } from './auth.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,14 +34,17 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
     PostviewerPage,
     SafePipe,
     ImageViewerComponent,
+    LoginPage,
   ],
   entryComponents: [
     LocalePage,
     PostviewerPage,
     ImageViewerComponent,
+    LoginPage,
   ],
   imports: [
     BrowserModule, 
+    FormsModule,
     IonicModule.forRoot(), 
     AppRoutingModule,
     HttpClientModule,
@@ -60,11 +66,13 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
     InAppBrowser,
     StatusBar,
     SplashScreen,
+    AuthService,
     Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     ReddahService,
     Platform,
     AlertController,
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })
