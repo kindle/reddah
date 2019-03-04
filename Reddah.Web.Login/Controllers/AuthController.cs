@@ -14,10 +14,12 @@ using WebMatrix.WebData;
 using Org.BouncyCastle.Crypto;
 using System.Web.Security;
 using System.Data.Entity;
+using System.Web.Http.Cors;
 
 namespace Reddah.Web.Login.Controllers
 {
     [RoutePrefix("api/auth")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AuthController : ApiController
     {
         public const string SecretKey = "abc1234567@reddahcom";
