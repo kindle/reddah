@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from 'ngx-webstorage';
-import { Observable } from 'rxjs';
-
+import { ReddahService } from './reddah.service';
 import { LoginPage } from './login/login.page';
 import { ModalController } from '@ionic/angular';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private localStorageService: LocalStorageService,
-    private modalController: ModalController){}
+  constructor(
+    private modalController: ModalController,
+    private reddahService: ReddahService){}
 
   authenticated(): boolean {
-    let currentUser = this.localStorageService.retrieve("Reddah_CurrentUser");
+    let currentUser = this.reddahService.getCurrentUser();
     return currentUser!=null;
   } ;  
 
@@ -28,17 +27,53 @@ export class AuthService {
     await loginModal.present();
     const { data } = await loginModal.onDidDismiss();
     if(data){
-        this.localStorageService.store("Reddah_CurrentUser","wind");
         //this.router.navigateByUrl('/tabs/(home:home)');
         //window.location.reload();
+        this.exactToken(data);
     }
-    return await data;
-
+    return false;
   }
 
 
   logout(): void {
-    this.localStorageService.clear("Reddah_CurrentUser");
+    this.reddahService.clearCurrentUser();
     window.location.reload();
+  }
+
+
+  exactToken(jwt: string){
+    let parts = jwt.split('.');
+    let bodyEnc = parts[1];
+    if(!bodyEnc){
+        return false;
+    }
+    let bodyStr = atob(bodyEnc)
+        , body;
+
+    try{
+        body = JSON.parse(bodyStr);
+    }
+    catch(e){
+        body = {};
+    }
+
+    let exp = body.exp
+        , user= body.aud
+    ;
+
+    if(!this.isExpired(exp)){
+        this.reddahService.setCurrentUser(user);
+        return true;
+    }
+    else{
+      this.reddahService.clearCurrentUser();
+      return false;
+    }
+  }
+
+  isExpired(exp:number): boolean {
+      if(!exp) return true;
+      let now = Date.now();
+      return now >= exp*1000;
   }
 }

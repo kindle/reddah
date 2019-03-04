@@ -7,33 +7,21 @@ import { UserProfileModel } from './UserProfileModel';
 import { UserModel } from './UserModel';
 import { Locale } from './locale';
 
+import { LocalStorageService } from 'ngx-webstorage';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ReddahService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private localStorageService: LocalStorageService) { }
 
   private loginUrl = 'https://login.reddah.com/api/auth/sign'; 
-  private userModel: UserModel;
+
   login(userName: string, password: string): Observable<any> {
-    this.userModel = new UserModel();
-    this.userModel.UserName = userName;
-    this.userModel.Password = password;
 
-    let httpOptions = {
-      headers: new HttpHeaders({ 
-        'Content-Type':'application/json',
-        //'Access-Control-Allow-Origin*':'*',
-        //'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
-        //'Access-Control-Allow-Headers':'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-      }),
-      body: this.userModel,
-      
-    };
-    alert(JSON.stringify(this.userModel));
-
-    return this.http.post<any>(this.loginUrl, httpOptions)
+    return this.http.post<any>(this.loginUrl, new UserModel(userName, password))
       .pipe(
         tap(heroes => this.log('fetched subs')),
         catchError(this.handleError('login', []))
@@ -82,6 +70,23 @@ export class ReddahService {
         tap(heroes => this.log('fetched subs')),
         catchError(this.handleError('getReddahSubs', []))
       );
+  }
+
+
+  setCurrentUser(userName: string){
+    this.localStorageService.store("Reddah_CurrentUser",userName);
+  }
+
+  getCurrentUser(){
+    return this.localStorageService.retrieve("Reddah_CurrentUser");
+  }
+
+  clearCurrentUser(){
+    this.localStorageService.clear("Reddah_CurrentUser");
+  }
+
+  setCurrentJwt(jwt: string){
+    this.localStorageService.store("Reddah_CurrentJwt",jwt);
   }
 
 /*

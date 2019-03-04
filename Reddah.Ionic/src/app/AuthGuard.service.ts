@@ -16,24 +16,24 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(private authService: AuthService, 
     private router: Router) {}
 
-  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     let url: string = state.url;
-    return await this.checkLogin(url);
+    return this.checkLogin(url);
   }
 
-  async canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     let url: string = state.url;
-    return await this.checkLogin(url);
+    return this.checkLogin(url);
     //return this.canActivate(route, state);
   }
 
-  async canLoad(route: Route) {
+  canLoad(route: Route) {
     let url = `/${route.path}`;
 
-    return await this.checkLogin(url);
+    return this.checkLogin(url);
   }
 
-  async checkLogin(url: string) {
+  checkLogin(url: string) {
     if (this.authService.authenticated()) { return true; }
     // Store the attempted URL for redirecting
     this.authService.redirectUrl = url;
@@ -50,7 +50,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
     // Navigate to the login page with extras
     //this.router.navigate(['login'], navigationExtras);
-    return await this.authService.login();
+    return this.authService.login();
     
     //return false;
   }
