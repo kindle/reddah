@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Article } from "./article";
 import { UserProfileModel } from './UserProfileModel';
+import { UserModel } from './UserModel';
 import { Locale } from './locale';
 
 @Injectable({
@@ -12,6 +13,32 @@ import { Locale } from './locale';
 export class ReddahService {
 
   constructor(private http: HttpClient) { }
+
+  private loginUrl = 'https://login.reddah.com/api/auth/sign'; 
+  private userModel: UserModel;
+  login(userName: string, password: string): Observable<any> {
+    this.userModel = new UserModel();
+    this.userModel.UserName = userName;
+    this.userModel.Password = password;
+
+    let httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type':'application/json',
+        //'Access-Control-Allow-Origin*':'*',
+        //'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
+        //'Access-Control-Allow-Headers':'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+      }),
+      body: this.userModel,
+      
+    };
+    alert(JSON.stringify(this.userModel));
+
+    return this.http.post<any>(this.loginUrl, httpOptions)
+      .pipe(
+        tap(heroes => this.log('fetched subs')),
+        catchError(this.handleError('login', []))
+      );
+  }
 
   private log(message: string) {
     console.log(message);

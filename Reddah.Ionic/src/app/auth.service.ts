@@ -28,17 +28,17 @@ export class AuthService {
     await loginModal.present();
     const { data } = await loginModal.onDidDismiss();
     if(data){
-        alert(data);
         this.localStorageService.store("Reddah_CurrentUser","wind");
         //this.router.navigateByUrl('/tabs/(home:home)');
         //window.location.reload();
     }
-    return true;
+    return await data;
 
   }
 
 
   logout(): void {
     this.localStorageService.clear("Reddah_CurrentUser");
+    window.location.reload();
   }
 }
