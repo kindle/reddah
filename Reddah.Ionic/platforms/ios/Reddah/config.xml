@@ -50,9 +50,6 @@
     <feature name="Camera">
         <param name="ios-package" value="CDVCamera" />
     </feature>
-    <feature name="PhotoViewer">
-        <param name="ios-package" value="PhotoViewer" />
-    </feature>
     <name>Reddah</name>
     <description>Reddah.com An awesome hybird app.</description>
     <author email="weibailin@hotmail.com" href="http://reddah.com/">Reddah.com Team</author>

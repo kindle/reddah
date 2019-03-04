@@ -67,10 +67,6 @@
             {
               "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
               "count": 1
-            },
-            {
-              "xml": "<feature name=\"PhotoViewer\"><param name=\"ios-package\" value=\"PhotoViewer\" /></feature>",
-              "count": 1
             }
           ]
         }

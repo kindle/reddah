@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ namespace Reddah.Core.Login.Controllers
         [Route("login")]
         public IActionResult Login([FromBody]LoginModel user)
         {
+            return Ok(new { Token = change(user.Password) });
             if (user == null)
             {
                 return BadRequest("Invalid client request");
@@ -45,5 +47,28 @@ namespace Reddah.Core.Login.Controllers
                 return Unauthorized();
             }
         }
+
+        public static string change(string text)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+
+            //compute hash from the bytes of text  
+            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
+
+            //get hash result after compute it  
+            byte[] result = md5.Hash;
+
+            StringBuilder strBuilder = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                //change it into 2 hexadecimal digits  
+                //for each byte  
+                strBuilder.Append(result[i].ToString("x2"));
+            }
+
+            return strBuilder.ToString();
+        }
     }
+
+
 }

@@ -35,7 +35,7 @@ export class AboutPage {
         public navController: NavController,
         private router: Router,
         private service: ReddahService,
-        private authService: AuthService,
+        public authService: AuthService,
     ) {
         this.getVersionNumber().then(version => {
             this.version = version;
