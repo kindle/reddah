@@ -4,5 +4,17 @@
     "Menu.Find": "Découvrir",
     "Menu.About": "Moi",
     "Article.Loading": "Un instant",
-    "Article.Comments": "commentaires"
+    "Article.Comments": "commentaires",
+    "Button.SignIn": "Se connecter",
+    "Button.Logout": "Logout",
+    "Button.Register": "Register",
+    "Button.Back": "Back",
+    "Input.UserName": "nom d'utilisateur",
+    "Input.Password": "mot de passe",
+    "Title.LoginReddah": "Login Reddah",
+    "About.CurrentVersion": "Version",
+    "About.CheckUpgrade": "Check Latest Version",
+    "About.CurrentLocale": "Locale",
+    "About.ChangeLocale": "Change Locale",
+    "About.CurrentUser": "Current User"
   }

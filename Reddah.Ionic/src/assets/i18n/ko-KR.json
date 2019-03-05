@@ -4,5 +4,17 @@
     "Menu.Find": "발견하다",
     "Menu.About": "나",
     "Article.Loading": "잠깐만 기다리세요",
-    "Article.Comments": "의견"
+    "Article.Comments": "의견",
+    "Button.SignIn": "로그인",
+    "Button.Logout": "Logout",
+    "Button.Register": "Register",
+    "Button.Back": "Back",
+    "Input.UserName": "사용자 이름",
+    "Input.Password": "비밀번호",
+    "Title.LoginReddah": "Login Reddah",
+    "About.CurrentVersion": "Version",
+    "About.CheckUpgrade": "Check Latest Version",
+    "About.CurrentLocale": "Locale",
+    "About.ChangeLocale": "Change Locale",
+    "About.CurrentUser": "Current User"
   }

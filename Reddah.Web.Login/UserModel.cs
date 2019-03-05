@@ -17,4 +17,16 @@ namespace Reddah.Web.Login
         public string UserName { get; set; }
         public string Password { get; set; }
     }
+
+    public class ApiResult
+    {
+        public int Success { get; set; }
+        public string Message { get; set; }
+
+        public ApiResult(int success, string message)
+        {
+            this.Success = success;
+            this.Message = message;
+        }
+    }
 }

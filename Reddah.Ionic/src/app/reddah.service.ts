@@ -89,6 +89,13 @@ export class ReddahService {
     this.localStorageService.store("Reddah_CurrentJwt",jwt);
   }
 
+  getCurrentLocale(){
+    let locale = this.localStorageService.retrieve("Reddah_Locale");
+    if(locale==undefined||locale==null)
+      locale = "en-US";
+    return locale;
+  }
+
 /*
   getHero(id: number): Observable<Hero> {
     const url = `${this.heroesUrl}/${id}`;

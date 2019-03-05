@@ -12,6 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../reddah.service';
 import { AuthService }      from '../auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-about',
@@ -36,6 +37,7 @@ export class AboutPage {
         private router: Router,
         private service: ReddahService,
         public authService: AuthService,
+        public translateService: TranslateService,
     ) {
         this.getVersionNumber().then(version => {
             this.version = version;

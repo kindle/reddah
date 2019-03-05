@@ -9,13 +9,17 @@
             <ion-img src="{{article.ImageUrls[0]}}" *ngIf="article.VideoUrl.length==0&&article.ImageUrls.length>0"></ion-img>
             <ion-card-header>
                 <ion-card-subtitle>
-                    <ng-template ngFor let-group [ngForOf]="article.GroupName.split(',')">
-                        <ion-label><span [innerHTML]="htmlDecode(group)"></span> </ion-label>
-                    </ng-template>
+                    <div [innerHTML]="summary(article.Title)"></div>
                 </ion-card-subtitle>
-                <ion-card-title><div [innerHTML]="htmlDecode(article.Title)"></div></ion-card-title>
+                <ion-card-title>
+                    <div [innerHTML]="htmlDecode(article.Title)"></div>
+                </ion-card-title>
             </ion-card-header>
-            <ion-card-content><div [innerHTML]="summary(article.Title)"></div></ion-card-content>
+            <ion-card-content>
+                <ng-template ngFor let-group [ngForOf]="article.GroupName.split(',')">
+                    <ion-label><span [innerHTML]="htmlDecode(group)"></span>&nbsp;</ion-label>
+                </ng-template>
+            </ion-card-content>
             <ion-item>
                 <ion-note color="dark">{{article.CreatedOn}}</ion-note>
                 <ion-note color="dark" slot="end">{{article.Comments}} {{ 'Article.Comments' | translate }}</ion-note>

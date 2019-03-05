@@ -1,27 +1,30 @@
 <ion-header>
   <ion-item>
     <ion-icon name="arrow-round-back" (click)="goback()"></ion-icon>
-    <ion-title>back</ion-title>
+    <ion-title>{{ 'Button.Back' | translate }}</ion-title>
   </ion-item>
 </ion-header>
 <ion-grid>
   <ion-row justify-content-center>
     <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
       <div text-center>
-        <h2>Login Reddah</h2>
+        <h2>{{ 'Title.LoginReddah' | translate }}</h2>
         <br>
       </div>
       <div padding>
         <ion-item>
-            <ion-input type="text" placeholder="input user name" [(ngModel)]="username"></ion-input>
+            <ion-input type="text" placeholder="{{ 'Input.UserName' | translate }}" [(ngModel)]="username"></ion-input>
         </ion-item>
         <br>
         <ion-item>
-            <ion-input type="password" placeholder="input password" [(ngModel)]="password"></ion-input>
+            <ion-input type="password" placeholder="{{ 'Input.Password' | translate }}" [(ngModel)]="password"></ion-input>
         </ion-item>
       </div>
       <div padding>
-        <ion-button size="large" (click)="logIn()" expand="block">Login</ion-button>
+        <ion-button size="large" (click)="logIn()" expand="block">{{ 'Button.SignIn' | translate }}</ion-button>
+      </div>
+      <div padding>
+        <ion-button size="large" href="https://reddah.com/{{getLocale()}}/account/register" expand="block">{{ 'Button.Register' | translate }}</ion-button>
       </div>
     </ion-col>
   </ion-row>

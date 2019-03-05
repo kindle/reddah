@@ -4,5 +4,17 @@
     "Menu.Find": "発見する",
     "Menu.About": "私",
     "Article.Loading": "少々お待ちください",
-    "Article.Comments": "コメント"
+    "Article.Comments": "コメント",
+    "Button.SignIn": "サインイン",
+    "Button.Logout": "Logout",
+    "Button.Register": "Register",
+    "Button.Back": "Back",
+    "Input.UserName": "ユーザー名",
+    "Input.Password": "パスワード",
+    "Title.LoginReddah": "Login Reddah",
+    "About.CurrentVersion": "Version",
+    "About.CheckUpgrade": "Check Latest Version",
+    "About.CurrentLocale": "Locale",
+    "About.ChangeLocale": "Change Locale",
+    "About.CurrentUser": "Current User"
   }

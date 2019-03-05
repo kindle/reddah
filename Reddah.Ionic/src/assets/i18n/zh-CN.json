@@ -4,5 +4,17 @@
     "Menu.Find": "发现",
     "Menu.About": "我",
     "Article.Loading": "请稍等...",
-    "Article.Comments": "评论"
+    "Article.Comments": "评论",
+    "Button.SignIn": "登录",
+    "Button.Logout": "退出登录",
+    "Button.Register": "注册",
+    "Button.Back": "返回",
+    "Input.UserName": "用户名",
+    "Input.Password": "密码",
+    "Title.LoginReddah": "登录 Reddah",
+    "About.CurrentVersion": "当前版本",
+    "About.CheckUpgrade": "检查更新",
+    "About.CurrentLocale": "语言",
+    "About.ChangeLocale": "更换语言",
+    "About.CurrentUser": "当前用户"
 }

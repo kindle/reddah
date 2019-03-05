@@ -29,7 +29,7 @@ namespace Reddah.Web.Login.Controllers
         {
             if (user == null)
             {
-                return BadRequest("Invalid client request");
+                return Ok(new ApiResult(1, "Input user name or password is empty"));
             }
 
             try
@@ -55,16 +55,16 @@ namespace Reddah.Web.Login.Controllers
                     );
 
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-                    return Ok(new { Token = tokenString });
+                    return Ok(new ApiResult(0, tokenString));
                 }
                 else
                 {
-                    return Unauthorized();
+                    return Ok(new ApiResult(2, "Username or Password is wrong"));
                 }
             }
             catch (Exception e)
             {
-                return Ok(new { Token = e.Message.ToString() });
+                return Ok(new ApiResult(3, e.Message.ToString()));
             }
         }
        

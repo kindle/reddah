@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Article } from '../article';
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-postviewer',
@@ -10,7 +11,8 @@ import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 })
 export class PostviewerPage implements OnInit {
   @Input() article: Article;
-  constructor(public modalController: ModalController) { }
+  constructor(public modalController: ModalController,
+    private location: Location) { }
 
   ngOnInit() {
   }
@@ -46,5 +48,7 @@ export class PostviewerPage implements OnInit {
     }
   }
 
-
+  goback(){
+      this.location.back();
+  }
 }

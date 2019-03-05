@@ -77,4 +77,8 @@ export class LoginPage implements OnInit {
       await this.modalController.dismiss(null);
   }
 
+  getLocale(){
+      return this.reddah.getCurrentLocale();
+  }
+
 }

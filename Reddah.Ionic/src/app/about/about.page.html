@@ -8,32 +8,28 @@
       </ion-thumbnail>
     </ion-item>
     <ion-card>
-      <ion-card-header>
-        当前版本
-      </ion-card-header>
-      <ion-card-content>
-        {{version}}
-      </ion-card-content>
+      <ion-card-header>{{ 'About.CurrentVersion' | translate }}</ion-card-header>
+      <ion-card-content>{{version}}</ion-card-content>
     </ion-card>
     <ion-card>
       <ion-card-content>
-        <ion-button (click)="upgrade()">检查更新</ion-button>
+        <ion-button (click)="upgrade()">{{ 'About.CheckUpgrade' | translate }}</ion-button>
       </ion-card-content>
     </ion-card>
     <ion-card>
       <ion-card-header>
-          <ion-label>Current Locale: {{currentLocaleInfo}}</ion-label>
+          <ion-label>{{ 'About.CurrentLocale' | translate }}: {{currentLocaleInfo}}</ion-label>
       </ion-card-header>
       <ion-card-content>
-        <ion-button (click)="changeLocale()">Change Locale</ion-button>
+        <ion-button (click)="changeLocale()">{{ 'About.ChangeLocale' | translate }}</ion-button>
       </ion-card-content>
     </ion-card>
     <ion-card *ngIf="this.authService.authenticated()">
       <ion-card-content>
-        <ion-button (click)="logout()">Logout</ion-button>
+        <ion-button (click)="logout()">{{ 'Button.Logout' | translate }}</ion-button>
       </ion-card-content>
       <ion-card-header>
-        <ion-label>Current User: {{currentUser}}</ion-label>
+        <ion-label>{{ 'About.CurrentUser' | translate }}: {{currentUser}}</ion-label>
     </ion-card-header>
     </ion-card>
     <img [src]="image" *ngIf="image" />
