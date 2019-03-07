@@ -14,7 +14,6 @@ import { HomePageModule } from '../home/home.module';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-
 @NgModule({
   imports: [
     IonicModule,

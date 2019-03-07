@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SelectiveStrategyService } from './selective-strategy.service';
-import { AuthGuard } from './AuthGuard.service';
 import { LoginPage } from './login/login.page';
 
 const routes: Routes = [

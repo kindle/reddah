@@ -2,7 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Article } from '../article';
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
+
+import { ReddahService } from '../reddah.service';
 
 @Component({
   selector: 'app-postviewer',
@@ -12,9 +14,19 @@ import {Location} from '@angular/common';
 export class PostviewerPage implements OnInit {
   @Input() article: Article;
   constructor(public modalController: ModalController,
-    private location: Location) { }
+    private location: Location,
+    private reddah : ReddahService,
+    ) { }
+
+  commentsData: any;
 
   ngOnInit() {
+    this.reddah.getComments(this.article.Id)
+      .subscribe(data => 
+        {
+            this.commentsData = data;
+        }
+    );
   }
 
   htmlDecode(text: string) {

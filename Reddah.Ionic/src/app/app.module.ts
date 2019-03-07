@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 
-import { IonicModule, IonicRouteStrategy, Platform, AlertController } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, Platform, AlertController, IonRouterOutlet } from '@ionic/angular';
+import { ModalController, ActionSheetController, PopoverController, MenuController } from '@ionic/angular';
+
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -27,6 +29,9 @@ import { LoginPage } from './login/login.page';
 import { AuthService } from './auth.service';
 import { FormsModule } from '@angular/forms';
 
+import { Toast } from '@ionic-native/toast/ngx';
+import { CommentComponent } from './comment/comment.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +40,7 @@ import { FormsModule } from '@angular/forms';
     SafePipe,
     ImageViewerComponent,
     LoginPage,
+    CommentComponent,
   ],
   entryComponents: [
     LocalePage,
@@ -68,11 +74,17 @@ import { FormsModule } from '@angular/forms';
     SplashScreen,
     AuthService,
     Camera,
+    Toast,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     ReddahService,
     Platform,
+    IonRouterOutlet,
     AlertController,
     AuthService,
+    ModalController,
+    ActionSheetController,
+    PopoverController,
+    MenuController,
   ],
   bootstrap: [AppComponent]
 })

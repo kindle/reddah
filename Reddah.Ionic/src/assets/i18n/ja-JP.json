@@ -16,5 +16,14 @@
     "About.CheckUpgrade": "Check Latest Version",
     "About.CurrentLocale": "Locale",
     "About.ChangeLocale": "Change Locale",
-    "About.CurrentUser": "Current User"
+    "About.CurrentUser": "Current User",
+    "Comment.Comment": "comment",
+    "Comment.Like": "Like",
+    "Comment.Delete": "Delete",
+    "Article.Bookmark": "Bookmark",
+    "Article.Share": "Share",
+    "Confirm.Title": "Confirm",
+    "Confirm.Message": "Do you want to exit Reddah?",
+    "Confirm.Yes": "Yes",
+    "Confirm.Cancel": "Cancel"
   }

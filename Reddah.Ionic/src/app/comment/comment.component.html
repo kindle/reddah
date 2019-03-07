@@ -1,0 +1,32 @@
+<ion-card *ngIf="!data" no-padding>
+    <ion-card-content>
+        <ion-spinner name="dots"></ion-spinner>
+    </ion-card-content>
+</ion-card>
+<div *ngIf="data">
+  <div *ngFor="let comment of data.Comments">
+      <li *ngIf="data.Seed===comment.ParentId">
+          <ion-card no-padding>
+              <ion-card-header>
+                  <ion-card-subtitle>
+                      <ion-text color="dark">
+                          {{comment.UserName}} {{comment.CreatedOn | date:'yyyy-MM-dd HH:mm:ss'}} [{{ 'Comment.Delete' | translate }}]
+                      </ion-text>
+                  </ion-card-subtitle>
+                  <ion-card-subtitle>
+                      <ion-text color="dark">
+                          <div [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></div>
+                      </ion-text>
+                  </ion-card-subtitle>
+              </ion-card-header>
+              <ion-item>
+                  <ion-icon name="create" size="medium"></ion-icon>{{ 'Comment.Comment' | translate }}
+                  <ion-icon name="heart-empty" size="medium"></ion-icon>{{ 'Comment.Like' | translate }}
+              </ion-item>
+              <ion-card-content>
+                  <app-comment [data]="{'Seed':comment.Id, 'Comments': data.Comments}"></app-comment>
+              </ion-card-content>
+          </ion-card>
+      </li>
+    </div>
+</div>

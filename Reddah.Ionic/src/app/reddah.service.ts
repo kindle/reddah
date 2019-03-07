@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Article } from "./article";
 import { UserProfileModel } from './UserProfileModel';
-import { UserModel } from './UserModel';
+import { UserModel, QueryCommentModel } from './UserModel';
 import { Locale } from './locale';
 
 import { LocalStorageService } from 'ngx-webstorage';
@@ -27,7 +27,18 @@ export class ReddahService {
         catchError(this.handleError('login', []))
       );
   }
+  //******************************** */
+  private getCommentsUrl = 'https://login.reddah.com/api/article/getcomments'; 
 
+  getComments(articleId: number): Observable<any> {
+
+    return this.http.post<any>(this.getCommentsUrl, new QueryCommentModel("", articleId))
+      .pipe(
+        tap(heroes => this.log('fetched subs')),
+        catchError(this.handleError('login', []))
+      );
+  }
+  //******************************** */
   private log(message: string) {
     console.log(message);
   }
@@ -41,7 +52,6 @@ export class ReddahService {
   ];
  
   private heroesUrl = 'https://reddah.com/api/webapi/getarticles'; 
-
   private userProfileModel: UserProfileModel;
 
   getHeroes(loadedIds: Number[], locale: String, menu: String): Observable<Article[]> {

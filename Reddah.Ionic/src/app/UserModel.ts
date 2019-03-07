@@ -6,3 +6,13 @@ export class UserModel {
     public UserName: string;
     public Password: string;
 }
+
+export class QueryCommentModel {
+    constructor(jwt: string, articleId: number){
+        this.Jwt = jwt;
+        this.ArticleId = articleId;
+    }
+    public Jwt: string;
+    public ArticleId: number;
+}
+

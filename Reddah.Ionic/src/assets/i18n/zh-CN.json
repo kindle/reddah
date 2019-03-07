@@ -16,5 +16,14 @@
     "About.CheckUpgrade": "检查更新",
     "About.CurrentLocale": "语言",
     "About.ChangeLocale": "更换语言",
-    "About.CurrentUser": "当前用户"
+    "About.CurrentUser": "当前用户",
+    "Comment.Comment": "写评论",
+    "Comment.Like": "点赞",
+    "Comment.Delete": "删除",
+    "Article.Bookmark": "收藏",
+    "Article.Share": "分享",
+    "Confirm.Title": "确认",
+    "Confirm.Message": "确定要离开Reddah？",
+    "Confirm.Yes": "确定",
+    "Confirm.Cancel": "取消"
 }
