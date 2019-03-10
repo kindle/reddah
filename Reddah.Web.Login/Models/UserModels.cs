@@ -18,15 +18,9 @@ namespace Reddah.Web.Login
         public string Password { get; set; }
     }
 
-    public class ApiResult
+    public class JwtUser
     {
-        public int Success { get; set; }
-        public string Message { get; set; }
-
-        public ApiResult(int success, string message)
-        {
-            this.Success = success;
-            this.Message = message;
-        }
+        public string User { get; set; }
+        public string Allow { get; set; }
     }
 }

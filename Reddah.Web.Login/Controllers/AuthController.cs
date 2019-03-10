@@ -71,7 +71,7 @@ namespace Reddah.Web.Login.Controllers
 
         [Route("verify")]
         [HttpPost]
-        public IHttpActionResult Verify([FromBody]Product product)
+        public IHttpActionResult Verify([FromBody]CommentQuery product)
         {
             //string signedAndEncodedToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIxMDAiOiJ2aWV3IiwiMTAxIjoicG9zdCIsImV4cCI6MTU1MTM5NjE5MiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5yZWRkYWguY29tIiwiYXVkIjoid2luZCJ9.bqVbbDRbw1o_bS0AZiU5hdb4EcBREoqzw1o-8zd3TrE";
 
@@ -81,7 +81,7 @@ namespace Reddah.Web.Login.Controllers
             SecurityToken validatedToken;
             //CustomJwtSecurityToken output;
 
-            string signedAndEncodedToken = product.Name;
+            string signedAndEncodedToken = product.Jwt;
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
             try
             {

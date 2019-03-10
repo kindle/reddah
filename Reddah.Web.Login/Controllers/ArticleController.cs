@@ -15,6 +15,7 @@ using Org.BouncyCastle.Crypto;
 using System.Web.Security;
 using System.Data.Entity;
 using System.Web.Http.Cors;
+using Reddah.Web.Login.Utilities;
 
 namespace Reddah.Web.Login.Controllers
 {
@@ -47,7 +48,66 @@ namespace Reddah.Web.Login.Controllers
 
         }
 
-        public static JwtUser ValidJwt(string jwt)
+        [Route("addcomments")]
+        [HttpPost]
+        public IHttpActionResult AddComments([FromBody]NewComment data)
+        {
+            //string signedAndEncodedToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIxMDAiOiJ2aWV3IiwiMTAxIjoicG9zdCIsImV4cCI6MTU1MTM5NjE5MiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5yZWRkYWguY29tIiwiYXVkIjoid2luZCJ9.bqVbbDRbw1o_bS0AZiU5hdb4EcBREoqzw1o-8zd3TrE";
+
+            //expired:
+            //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIxMDAiOiJ2aWV3IiwiMTAxIjoicG9zdCIsImV4cCI6MTU1MTM5NTExMywiaXNzIjoiaHR0cHM6Ly9sb2dpbi5yZWRkYWguY29tIiwiYXVkIjoiam9obmRvZSJ9.SXayamY0LV_tptXLnW7Onjd5hSrvoRQM2JAPlIGrHBc
+
+            if (data.ArticleId < 0)
+                return Ok(new ApiResult(1, "Invalid Article Id"));
+
+            JwtResult jwtResult = ValidJwt(data.Jwt);
+
+            if(jwtResult.Success!=0)
+                return Ok(new ApiResult(2, "Jwt invalid"+jwtResult.Message));
+
+            try
+            {
+                using (var db = new reddahEntities())
+                {
+                    db.Comment.Add(new Comment()
+                    {
+                        ArticleId = data.ArticleId,
+                        ParentId = data.ParentId,
+                        Content = System.Web.HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(data.Content))),
+                        CreatedOn = DateTime.Now,
+                        UserName = jwtResult.JwtUser.User
+                    });
+
+
+                    var article = db.Article.FirstOrDefault(a => a.Id == data.ArticleId);
+                    if (article != null)
+                    {
+                        article.Count++;
+                    }
+
+                    if (data.ParentId != -1)
+                    {
+                        var parentComment = db.Comment.FirstOrDefault(c => c.Id == data.ParentId);
+                        if (parentComment != null)
+                        {
+                            parentComment.Count++;
+                        }
+                    }
+
+                    db.SaveChanges();
+
+                }
+            }
+            catch(Exception ex)
+            {
+                Ok(new ApiResult(3, "Excepion:"+ex.Message.ToString()));
+            }
+
+            return Ok(new ApiResult(0, "New Comment Added"));
+
+        }
+
+        public static JwtResult ValidJwt(string jwt)
         {
             var jwtUser = new JwtUser();
 
@@ -79,18 +139,18 @@ namespace Reddah.Web.Login.Controllers
                 tokenHandler.ValidateToken(signedAndEncodedToken, tokenValidationParameters, out validatedToken);
 
                 var payload = (validatedToken as CustomJwtSecurityToken).Payload;
-                jwtUser.User = payload.Aud.ToString();
+                jwtUser.User = payload.Aud.First().ToString();
                 jwtUser.Allow = "not set";
 
             }
             catch (Exception ex)
             {
-                
+                new JwtResult(1, ex.Message.ToString(), null);
             }
 
-            
 
-            return jwtUser;
+
+            return new JwtResult(0, "Success", jwtUser);
         }
     }
 }
