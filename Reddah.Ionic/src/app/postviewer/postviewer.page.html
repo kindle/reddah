@@ -1,8 +1,17 @@
-<ion-content padding>
+<ion-content padding [scrollEvents]="true" (ionScroll)="onScroll($event)">
     <H1 [innerHTML]="htmlDecode(article.Title) | safe: 'html'"></H1>
-    <ion-item no-padding>
-        <ion-icon name="bookmark" size="medium"></ion-icon>{{ 'Article.Bookmark' | translate }}
-        <ion-icon name="share" size="medium"></ion-icon>{{ 'Article.Share' | translate }}
+    <ion-item no-padding padding-bottom>
+        <ion-text color="primary" margin-end>
+            <span [innerHTML]="article.UserName | safe: 'html'"></span>
+        </ion-text>
+        <ion-text color="dark" margin-end>
+            {{article.CreatedOn}} 
+        </ion-text>
+        <ion-buttons slot="end">
+            <ion-button (click)="presentPopover($event)">
+                <ion-icon slot="icon-only" name="more"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-item>
     <ion-text color="dark">
         <div id="articleContent" (click)="viewer($event)" [innerHTML]="htmlDecode(article.Content) | safe: 'html'"></div>
@@ -10,14 +19,25 @@
     <ion-item no-padding padding-bottom>
     </ion-item>
     <ng-template ngFor let-group [ngForOf]="article.GroupName.split(',')">
-        <ion-chip outline>
+        <ion-chip outline margin-bottom>
             <ion-label [innerHTML]="htmlDecode(group)"></ion-label>
         </ion-chip>&nbsp;
     </ng-template>
-    <ion-item no-padding padding-bottom>
-        </ion-item>
-    <ion-item no-padding>
-        <ion-icon name="create" size="medium"></ion-icon>{{ 'Comment.Comment' | translate }}
-    </ion-item>
-    <app-comment [data]="commentsData"></app-comment>
+    <app-comment no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" 
+    [articleauthor]="article.UserName"></app-comment>
 </ion-content>
+<ion-footer *ngIf="direction=='up'">
+    <ion-item margin-end>
+        <ion-icon name="create" size="medium" (click)="newComment(article.Id, -1)"></ion-icon>
+        <ion-input id="newComment" (click)="newComment(article.Id, -1)" 
+        readonly padding-start placeholder="{{ 'Comment.Tip' | translate }}"></ion-input>
+        
+        <ion-icon color="danger" name="bookmark" size="medium"></ion-icon>
+        <ion-text (click)="bookmark()" margin-end>{{ 'Article.Bookmark' | translate }}</ion-text>
+        
+        <ion-icon color="primary" name="share" size="medium"></ion-icon>
+        <ion-text (click)="share()">{{ 'Article.Share' | translate }}</ion-text>
+    </ion-item>
+</ion-footer>
+
+

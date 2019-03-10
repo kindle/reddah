@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular'; 
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
@@ -19,7 +19,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: 'about.page.html',
   styleUrls: ['about.page.scss']
 })
-export class AboutPage {
+export class AboutPage implements OnInit {
     
     currentUser: String;
     currentLocaleInfo : String;
@@ -38,7 +38,9 @@ export class AboutPage {
         private service: ReddahService,
         public authService: AuthService,
         public translateService: TranslateService,
-    ) {
+    ) {}
+
+    ngOnInit() {
         this.getVersionNumber().then(version => {
             this.version = version;
         });
@@ -53,6 +55,7 @@ export class AboutPage {
         this.currentUser = "Not Set";
         this.currentUser = this.localStorageService.retrieve("Reddah_CurrentUser");
     }
+
     
     image:any=''
     

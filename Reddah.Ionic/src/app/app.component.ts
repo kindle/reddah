@@ -1,4 +1,4 @@
-import { Component, ViewChildren, ViewChild, QueryList } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform, ModalController, AlertController, ActionSheetController, PopoverController, IonRouterOutlet, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -47,7 +47,6 @@ export class AppComponent {
   lastTimeBackPress = 0;
   timePeriodToExit = 2000;
 
-  @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
 
   
@@ -55,7 +54,7 @@ export class AppComponent {
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      //header: this.translate.instant("Confirm.Title"),
+      header: this.translate.instant("Confirm.Title"),
       message: this.translate.instant("Confirm.Message"),
       buttons: [
         {
@@ -79,8 +78,6 @@ export class AppComponent {
     });;
   }
 
-
-
   // active hardware back button
   backButtonEvent() {
       this.platform.backButton.subscribe(async () => {
@@ -102,7 +99,7 @@ export class AppComponent {
             }
         } catch (error) {
         }
-
+*/
         // close modal
         try {
             const element = await this.modalCtrl.getTop();
@@ -113,7 +110,7 @@ export class AppComponent {
         } catch (error) {
             console.log(error);
 
-        }
+        }/*
 
         // close side menua
         try {

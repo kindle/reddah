@@ -20,10 +20,12 @@
     "Comment.Comment": "comment",
     "Comment.Like": "Like",
     "Comment.Delete": "Delete",
+    "Comment.Tip": "Enter some comment here...",
     "Article.Bookmark": "Bookmark",
     "Article.Share": "Share",
     "Confirm.Title": "Confirm",
     "Confirm.Message": "Do you want to exit Reddah?",
     "Confirm.Yes": "Yes",
-    "Confirm.Cancel": "Cancel"
+    "Confirm.Cancel": "Cancel",
+    "Confirm.Submit": "Submit"
   }

@@ -29,24 +29,34 @@ import { LoginPage } from './login/login.page';
 import { AuthService } from './auth.service';
 import { FormsModule } from '@angular/forms';
 
+import { AddCommentPage } from './add-comment/add-comment.page';
 import { Toast } from '@ionic-native/toast/ngx';
 import { CommentComponent } from './comment/comment.component';
+import { ArticlePopPage } from './article-pop/article-pop.page'
+import { CommentPopPage } from './article-pop/comment-pop.page'
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LocalePage,
+    AddCommentPage,
     PostviewerPage,
     SafePipe,
     ImageViewerComponent,
     LoginPage,
     CommentComponent,
+    ArticlePopPage,
+    CommentPopPage,
   ],
   entryComponents: [
     LocalePage,
     PostviewerPage,
     ImageViewerComponent,
     LoginPage,
+    AddCommentPage,
+    ArticlePopPage,
+    CommentPopPage,
   ],
   imports: [
     BrowserModule, 

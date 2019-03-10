@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Article } from "./article";
 import { UserProfileModel } from './UserProfileModel';
-import { UserModel, QueryCommentModel } from './UserModel';
+import { UserModel, QueryCommentModel, NewCommentModel } from './UserModel';
 import { Locale } from './locale';
 
 import { LocalStorageService } from 'ngx-webstorage';
@@ -17,13 +17,14 @@ export class ReddahService {
   constructor(private http: HttpClient,
     private localStorageService: LocalStorageService) { }
 
+//******************************** */
   private loginUrl = 'https://login.reddah.com/api/auth/sign'; 
 
   login(userName: string, password: string): Observable<any> {
 
     return this.http.post<any>(this.loginUrl, new UserModel(userName, password))
       .pipe(
-        tap(heroes => this.log('fetched subs')),
+        tap(heroes => this.log('login')),
         catchError(this.handleError('login', []))
       );
   }
@@ -34,11 +35,28 @@ export class ReddahService {
 
     return this.http.post<any>(this.getCommentsUrl, new QueryCommentModel("", articleId))
       .pipe(
-        tap(heroes => this.log('fetched subs')),
-        catchError(this.handleError('login', []))
+        tap(heroes => this.log('get comments')),
+        catchError(this.handleError('get comments', []))
       );
   }
   //******************************** */
+  private addCommentsUrl = 'https://login.reddah.com/api/article/addcomments'; 
+
+  addComments(jwt: string, articleId: number, parentId: number, content: string): Observable<any> {
+
+    return this.http.post<any>(this.addCommentsUrl, new NewCommentModel(jwt, articleId, parentId, content))
+      .pipe(
+        tap(heroes => this.log('add comment')),
+        catchError(this.handleError('add comment', []))
+      );
+  }
+  //******************************** */
+
+
+
+
+
+
   private log(message: string) {
     console.log(message);
   }
@@ -97,6 +115,14 @@ export class ReddahService {
 
   setCurrentJwt(jwt: string){
     this.localStorageService.store("Reddah_CurrentJwt",jwt);
+  }
+
+  getCurrentJwt(){
+    return this.localStorageService.retrieve("Reddah_CurrentJwt");
+  }
+
+  clearCurrentJwt(){
+    this.localStorageService.clear("Reddah_CurrentJwt");
   }
 
   getCurrentLocale(){

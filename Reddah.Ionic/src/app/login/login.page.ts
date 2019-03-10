@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
     private reddah: ReddahService,
     private loadingController: LoadingController,
     private translateService: TranslateService,
-    private toastController: ToastController) { }
+    private toastController: ToastController,) { }
 
   ngOnInit() {
   }
@@ -53,6 +53,7 @@ export class LoginPage implements OnInit {
           {
               loading.dismiss();
               if(result.Success==0){
+                  this.reddah.setCurrentJwt(result.Message);
                   // return token successfully
                   this.modalController.dismiss(result.Message);
               }

@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { Article } from '../article';
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { Location } from '@angular/common';
-
+import { AddCommentPage } from '../add-comment/add-comment.page';
 import { ReddahService } from '../reddah.service';
+
+import { ArticlePopPage } from '../article-pop/article-pop.page';
 
 @Component({
   selector: 'app-postviewer',
@@ -13,14 +15,29 @@ import { ReddahService } from '../reddah.service';
 })
 export class PostviewerPage implements OnInit {
   @Input() article: Article;
+  authoronly=true;
   constructor(public modalController: ModalController,
     private location: Location,
     private reddah : ReddahService,
+    private popoverController: PopoverController
     ) { }
 
   commentsData: any;
 
   ngOnInit() {
+    this.loadComments();
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: ArticlePopPage,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
+  }
+
+  loadComments(){
     this.reddah.getComments(this.article.Id)
       .subscribe(data => 
         {
@@ -62,5 +79,53 @@ export class PostviewerPage implements OnInit {
 
   goback(){
       this.location.back();
+  }
+
+
+  private lastScrollTop: number = 0;
+  direction: string = "up";
+
+  onScroll($event){
+    let currentScrollTop = $event.detail.scrollTop;
+
+    if(currentScrollTop > this.lastScrollTop)
+    {
+        this.direction = 'down';
+    }
+    else if(currentScrollTop < this.lastScrollTop)
+    {
+        this.direction = 'up';
+    }
+    
+    this.lastScrollTop = currentScrollTop;
+  }
+
+  async newComment(articleId: number, commentId: number){
+    const addCommentModal = await this.modalController.create({
+    component: AddCommentPage,
+    componentProps: { 
+        articleId: articleId,
+        commentId: commentId
+      }
+    });
+    
+    await addCommentModal.present();
+    const { data } = await addCommentModal.onDidDismiss();
+    if(data){
+      this.loadComments();
+    }
+
+  }
+
+  bookmark(){
+    alert('bookmark');
+  }
+
+  share(){
+    alert('share');
+  }
+
+  popover(){
+    alert('show menu to report, delete.');
   }
 }

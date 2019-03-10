@@ -4,29 +4,72 @@
     </ion-card-content>
 </ion-card>
 <div *ngIf="data">
-  <div *ngFor="let comment of data.Comments">
-      <li *ngIf="data.Seed===comment.ParentId">
-          <ion-card no-padding>
-              <ion-card-header>
-                  <ion-card-subtitle>
-                      <ion-text color="dark">
-                          {{comment.UserName}} {{comment.CreatedOn | date:'yyyy-MM-dd HH:mm:ss'}} [{{ 'Comment.Delete' | translate }}]
-                      </ion-text>
-                  </ion-card-subtitle>
-                  <ion-card-subtitle>
-                      <ion-text color="dark">
-                          <div [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></div>
-                      </ion-text>
-                  </ion-card-subtitle>
-              </ion-card-header>
-              <ion-item>
-                  <ion-icon name="create" size="medium"></ion-icon>{{ 'Comment.Comment' | translate }}
-                  <ion-icon name="heart-empty" size="medium"></ion-icon>{{ 'Comment.Like' | translate }}
-              </ion-item>
-              <ion-card-content>
-                  <app-comment [data]="{'Seed':comment.Id, 'Comments': data.Comments}"></app-comment>
-              </ion-card-content>
-          </ion-card>
-      </li>
+    <div *ngFor="let comment of data.Comments">
+        <li *ngIf="data.Seed===comment.ParentId&&depth <= 1">
+            <ion-card>
+                <ion-card-header>
+                    <ion-item no-padding>
+                        <ion-text color="dark">
+                            {{comment.UserName}} {{comment.CreatedOn | date:'yyyy-MM-dd HH:mm:ss'}} 
+                        </ion-text>
+                        <ion-buttons slot="end">
+                            <ion-button (click)="presentPopover($event)">
+                                <ion-icon slot="icon-only" name="menu"></ion-icon>
+                            </ion-button>
+                        </ion-buttons>
+                    </ion-item>
+                    
+                    <ion-card-subtitle>
+                        <ion-text color="dark">
+                            <div [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></div>
+                        </ion-text>
+                    </ion-card-subtitle>
+                </ion-card-header>
+                <ion-item>
+                    <ion-icon name="create" size="medium" (click)="newComment(comment.ArticleId, comment.Id)"></ion-icon>
+                    <ion-text (click)="newComment(comment.ArticleId, comment.Id)" margin-end>{{ 'Comment.Comment' | translate }}</ion-text>
+                  
+                    <ion-icon name="heart-empty" size="medium" (click)="likeComment(comment.Id)"></ion-icon>
+                    <ion-text (click)="likeComment(comment.Id)">{{ 'Comment.Like' | translate }}</ion-text>
+                </ion-item>
+                <ion-card-content>
+                    <app-comment [data]="{'Seed':comment.Id, 'Comments': data.Comments}" [depth]="depth+1" [ptext]="comment.Content"
+                     [pauthor]="comment.UserName" [authoronly]="authoronly" [articleauthor]="articleauthor"></app-comment>
+                </ion-card-content>
+            </ion-card>
+        </li>
+        <div *ngIf="data.Seed===comment.ParentId&&depth > 1">
+            <ion-card no-padding>
+                <ion-card-header>
+                    <ion-item no-padding>
+                        <ion-text color="dark">
+                            {{comment.UserName}} {{comment.CreatedOn | date:'yyyy-MM-dd HH:mm:ss'}} 
+                        </ion-text>
+                        <ion-buttons slot="end">
+                            <ion-button (click)="presentPopover($event)">
+                                <ion-icon slot="icon-only" name="menu"></ion-icon>
+                            </ion-button>
+                        </ion-buttons>
+                    </ion-item>
+                    <ion-card-subtitle>
+                        <ion-text color="dark">
+                            <div [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></div>
+                        </ion-text>
+                        <hr/>
+                        <ion-text color="primary">回复:<span [innerHTML]="pauthor | safe: 'html'"></span></ion-text>
+                        <ion-text color="medium"><div [innerHTML]="summary(ptext, 20) | safe: 'html'"></div></ion-text>
+                    </ion-card-subtitle>
+                </ion-card-header>
+                <ion-item>
+                    <ion-icon name="create" size="medium" (click)="newComment(comment.ArticleId, comment.Id)"></ion-icon>
+                    <ion-text (click)="newComment(comment.ArticleId, comment.Id)" margin-end>{{ 'Comment.Comment' | translate }}</ion-text>
+                    
+                    <ion-icon name="heart-empty" size="medium" (click)="likeComment(comment.Id)"></ion-icon>
+                    <ion-text (click)="likeComment(comment.Id)">{{ 'Comment.Like' | translate }}</ion-text>
+                </ion-item>
+            </ion-card>
+            <app-comment [data]="{'Seed':comment.Id, 'Comments': data.Comments}" [depth]="depth+1" 
+            [ptext]="comment.Content" [pauthor]="comment.UserName" [authoronly]="authoronly" [articleauthor]="articleauthor"></app-comment>
+        </div>
     </div>
 </div>

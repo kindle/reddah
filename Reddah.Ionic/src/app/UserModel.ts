@@ -16,3 +16,16 @@ export class QueryCommentModel {
     public ArticleId: number;
 }
 
+export class NewCommentModel {
+    constructor(jwt: string, articleId: number, parentId: number, content: string){
+        this.Jwt = jwt;
+        this.ArticleId = articleId;
+        this.ParentId = parentId;
+        this.Content = content;
+    }
+    public Jwt: string;
+    public ArticleId: number;
+    public ParentId: number;
+    public Content: string;
+}
+

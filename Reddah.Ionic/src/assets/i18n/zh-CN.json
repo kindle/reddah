@@ -20,10 +20,12 @@
     "Comment.Comment": "写评论",
     "Comment.Like": "点赞",
     "Comment.Delete": "删除",
+    "Comment.Tip": "写点什么...",
     "Article.Bookmark": "收藏",
     "Article.Share": "分享",
     "Confirm.Title": "确认",
     "Confirm.Message": "确定要离开Reddah？",
     "Confirm.Yes": "确定",
-    "Confirm.Cancel": "取消"
+    "Confirm.Cancel": "取消",
+    "Confirm.Submit": "提交"
 }

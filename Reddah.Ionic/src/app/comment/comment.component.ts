@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { PopoverController } from '@ionic/angular'
+import { CommentPopPage } from '../article-pop/comment-pop.page'
 
 @Component({
   selector: 'app-comment',
@@ -8,10 +10,26 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CommentComponent implements OnInit {
 
   @Input() data;
-  
-  constructor() { }
+  @Input() depth: number;
+  @Input() ptext;
+  @Input() pauthor;
+  @Input() authoronly: boolean;
+  @Input() articleauthor;
+
+  constructor(
+    private popoverController: PopoverController
+  ) { }
 
   ngOnInit() {
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: CommentPopPage,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   foo(){
@@ -28,4 +46,33 @@ export class CommentComponent implements OnInit {
       return output;
   }
 
+  subpost(str: string, n: number) {
+    var r = /[^\u4e00-\u9fa5]/g;
+    if (str.replace(r, "mm").length <= n) { return str; }
+    var m = Math.floor(n/2);
+    for (var i = m; i < str.length; i++) {
+        if (str.substr(0, i).replace(r, "mm").length >= n) {
+            return str.substr(0, i) + "...";
+        }
+    }
+    return str;
+  }
+  summary(str: string, n: number) {
+    str = this.htmlDecode(str).replace(/<[^>]+>/g, "");
+    return this.subpost(str, n);
+  }
+
+  newComment(articleId: number, commentId: number){
+    alert(`write some...aid:${articleId},cid:${commentId}`);
+  }
+
+  likeComment(commentId: number){
+    alert(`like...cid:${commentId}`);
+  }
+
+
+  popover(){
+    alert('show menu to report, delete.');
+  }
+  
 }
