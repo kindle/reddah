@@ -11,10 +11,12 @@ namespace Reddah.Web.Login
         public int ArticleId { get; set; }
     }
 
-    public class JwtUser
+    public class NewComment
     {
-        public string User { get; set; }
-        public string Allow { get; set; }
+        public string Jwt { get; set; }
+        public int ArticleId { get; set; }
+        public int ParentId { get; set; }
+        public string Content { get; set; }
     }
 
     public class SeededComments
