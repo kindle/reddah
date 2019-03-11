@@ -48,7 +48,14 @@
 		4E9A59D4F05E493682130171 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C03520B3D934E22AAF02C14 /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C6A6D5B96F244D90A2B63977 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DFA06C045164A90BFB1D5C6 /* CoreLocation.framework */; };
 		AC63EAA4FB2D4E0C96142870 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B69E0C40193341C582C1CC06 /* AVFoundation.framework */; };
-		4A9D8A73F3FD44BC86BC65B4 /* QRScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628A932E4C644174A49B9322 /* QRScanner.swift */; };
+		E3A42640DB88433EB94713DB /* CDVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 41638F1EF3164B0F82C3FD2D /* CDVFile.m */; };
+		869693D9B6DD454E8CA4058D /* CDVLocalFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4319CF457D0A4F68BB132919 /* CDVLocalFilesystem.m */; };
+		8D3B268BD9604B6C902AF7B4 /* CDVAssetLibraryFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = FFED18A224044553B03B0391 /* CDVAssetLibraryFilesystem.m */; };
+		434E087D68F246148B9FDB02 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6073A35A613A48D89DF15A10 /* PhotoLibrary.swift */; };
+		34A0192E7FC14E119D51F99F /* PhotoLibraryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71274425EF3A4F84959AAF64 /* PhotoLibraryProtocol.swift */; };
+		46BAA3FDC1D94F6AA7B76707 /* PhotoLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345930E53D0A4F628FA98700 /* PhotoLibraryService.swift */; };
+		600608CD40634E83A3904A51 /* PhotoLibraryGetLibraryOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD022D583DA4E71A52C07E5 /* PhotoLibraryGetLibraryOptions.swift */; };
+		97A69BB0A2DC41D29B52C3B5 /* QRScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708C26B5B2142FDAB507D8E /* QRScanner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,7 +158,17 @@
 		1C03520B3D934E22AAF02C14 /* ImageIO.framework */ = {isa = PBXFileReference; name = "ImageIO.framework"; path = "System/Library/Frameworks/ImageIO.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		8DFA06C045164A90BFB1D5C6 /* CoreLocation.framework */ = {isa = PBXFileReference; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		B69E0C40193341C582C1CC06 /* AVFoundation.framework */ = {isa = PBXFileReference; name = "AVFoundation.framework"; path = "System/Library/Frameworks/AVFoundation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		628A932E4C644174A49B9322 /* QRScanner.swift */ = {isa = PBXFileReference; name = "QRScanner.swift"; path = "cordova-plugin-qrscanner/QRScanner.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		41638F1EF3164B0F82C3FD2D /* CDVFile.m */ = {isa = PBXFileReference; name = "CDVFile.m"; path = "cordova-plugin-file/CDVFile.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		4319CF457D0A4F68BB132919 /* CDVLocalFilesystem.m */ = {isa = PBXFileReference; name = "CDVLocalFilesystem.m"; path = "cordova-plugin-file/CDVLocalFilesystem.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		FFED18A224044553B03B0391 /* CDVAssetLibraryFilesystem.m */ = {isa = PBXFileReference; name = "CDVAssetLibraryFilesystem.m"; path = "cordova-plugin-file/CDVAssetLibraryFilesystem.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		440FE3C8448B40E4A6C4B039 /* CDVFile.h */ = {isa = PBXFileReference; name = "CDVFile.h"; path = "cordova-plugin-file/CDVFile.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		8E0C3D3286E24F0490DF9F97 /* CDVLocalFilesystem.h */ = {isa = PBXFileReference; name = "CDVLocalFilesystem.h"; path = "cordova-plugin-file/CDVLocalFilesystem.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		277D00A5A9034909ADBCE73A /* CDVAssetLibraryFilesystem.h */ = {isa = PBXFileReference; name = "CDVAssetLibraryFilesystem.h"; path = "cordova-plugin-file/CDVAssetLibraryFilesystem.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		6073A35A613A48D89DF15A10 /* PhotoLibrary.swift */ = {isa = PBXFileReference; name = "PhotoLibrary.swift"; path = "cordova-plugin-photo-library/PhotoLibrary.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		71274425EF3A4F84959AAF64 /* PhotoLibraryProtocol.swift */ = {isa = PBXFileReference; name = "PhotoLibraryProtocol.swift"; path = "cordova-plugin-photo-library/PhotoLibraryProtocol.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		345930E53D0A4F628FA98700 /* PhotoLibraryService.swift */ = {isa = PBXFileReference; name = "PhotoLibraryService.swift"; path = "cordova-plugin-photo-library/PhotoLibraryService.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		BCD022D583DA4E71A52C07E5 /* PhotoLibraryGetLibraryOptions.swift */ = {isa = PBXFileReference; name = "PhotoLibraryGetLibraryOptions.swift"; path = "cordova-plugin-photo-library/PhotoLibraryGetLibraryOptions.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		4708C26B5B2142FDAB507D8E /* QRScanner.swift */ = {isa = PBXFileReference; name = "QRScanner.swift"; path = "cordova-plugin-qrscanner/QRScanner.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,7 +339,17 @@
 				06E2DD96EDEB4A6A965E3329 /* CDVCamera.h */,
 				7BEAEAE64BB242A9BD0A5203 /* CDVJpegHeaderWriter.h */,
 				D236017F5397452B83FD5F97 /* CDVExif.h */,
-				628A932E4C644174A49B9322 /* QRScanner.swift */,
+				41638F1EF3164B0F82C3FD2D /* CDVFile.m */,
+				4319CF457D0A4F68BB132919 /* CDVLocalFilesystem.m */,
+				FFED18A224044553B03B0391 /* CDVAssetLibraryFilesystem.m */,
+				440FE3C8448B40E4A6C4B039 /* CDVFile.h */,
+				8E0C3D3286E24F0490DF9F97 /* CDVLocalFilesystem.h */,
+				277D00A5A9034909ADBCE73A /* CDVAssetLibraryFilesystem.h */,
+				6073A35A613A48D89DF15A10 /* PhotoLibrary.swift */,
+				71274425EF3A4F84959AAF64 /* PhotoLibraryProtocol.swift */,
+				345930E53D0A4F628FA98700 /* PhotoLibraryService.swift */,
+				BCD022D583DA4E71A52C07E5 /* PhotoLibraryGetLibraryOptions.swift */,
+				4708C26B5B2142FDAB507D8E /* QRScanner.swift */,
 			);
 			name = Plugins;
 			path = "Reddah/Plugins";
@@ -462,7 +489,14 @@
 				D27B9623ACB64D1398AEDB40 /* UIImage+CropScaleOrientation.m in Sources */,
 				8511AD7BC1B94FA48D1449C9 /* CDVCamera.m in Sources */,
 				8A4E7B376AB64F56980A7F78 /* CDVJpegHeaderWriter.m in Sources */,
-				4A9D8A73F3FD44BC86BC65B4 /* QRScanner.swift in Sources */,
+				E3A42640DB88433EB94713DB /* CDVFile.m in Sources */,
+				869693D9B6DD454E8CA4058D /* CDVLocalFilesystem.m in Sources */,
+				8D3B268BD9604B6C902AF7B4 /* CDVAssetLibraryFilesystem.m in Sources */,
+				434E087D68F246148B9FDB02 /* PhotoLibrary.swift in Sources */,
+				34A0192E7FC14E119D51F99F /* PhotoLibraryProtocol.swift in Sources */,
+				46BAA3FDC1D94F6AA7B76707 /* PhotoLibraryService.swift in Sources */,
+				600608CD40634E83A3904A51 /* PhotoLibraryGetLibraryOptions.swift in Sources */,
+				97A69BB0A2DC41D29B52C3B5 /* QRScanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

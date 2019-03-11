@@ -3,11 +3,12 @@ import { InfiniteScroll } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../article';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, PopoverController } from '@ionic/angular';
 import { LocalePage } from '../locale/locale.page';
 import { PostviewerPage } from '../postviewer/postviewer.page';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { TimelinePopPage } from '../article-pop/timeline-pop.page';
 
 @Component({
   selector: 'app-timeline',
@@ -69,7 +70,9 @@ export class TimeLinePage implements OnInit {
       public navController: NavController,
       private renderer: Renderer,
       public modalController: ModalController,
-      private localStorageService: LocalStorageService){
+      private localStorageService: LocalStorageService,
+      private popoverController: PopoverController,
+      ){
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         console.log(locale);
     }
@@ -185,6 +188,15 @@ export class TimeLinePage implements OnInit {
           this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
           this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
       }
+  }
+
+  async post(ev: any) {
+    const popover = await this.popoverController.create({
+      component: TimelinePopPage,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
 

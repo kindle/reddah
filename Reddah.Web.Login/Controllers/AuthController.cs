@@ -114,5 +114,51 @@ namespace Reddah.Web.Login.Controllers
             }
 
         }
+
+        public static JwtResult ValidJwt(string jwt)
+        {
+            var jwtUser = new JwtUser();
+
+            SecurityToken validatedToken;
+            string signedAndEncodedToken = jwt;
+
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
+            try
+            {
+                var tokenValidationParameters = new TokenValidationParameters
+                {
+                    RequireExpirationTime = true,
+                    RequireSignedTokens = true,
+                    ValidateAudience = false,
+                    ValidateIssuer = true,
+                    ValidIssuers = new string[]
+                    {
+                        "https://login.reddah.com",
+                        "http://my.othertokenissuer.com"
+                    },
+                    ValidateLifetime = true,
+
+                    IssuerSigningKey = signingKey
+                };
+
+
+                var tokenHandler = new CustomJwtSecurityTokenHandler();
+
+                tokenHandler.ValidateToken(signedAndEncodedToken, tokenValidationParameters, out validatedToken);
+
+                var payload = (validatedToken as CustomJwtSecurityToken).Payload;
+                jwtUser.User = payload.Aud.First().ToString();
+                jwtUser.Allow = "not set";
+
+            }
+            catch (Exception ex)
+            {
+                new JwtResult(1, ex.Message.ToString(), null);
+            }
+
+
+
+            return new JwtResult(0, "Success", jwtUser);
+        }
     }
 }

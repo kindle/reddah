@@ -29,10 +29,6 @@ namespace Reddah.Web.Login.Controllers
         [HttpPost]
         public IHttpActionResult GetComments([FromBody]CommentQuery query)
         {
-            //string signedAndEncodedToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIxMDAiOiJ2aWV3IiwiMTAxIjoicG9zdCIsImV4cCI6MTU1MTM5NjE5MiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5yZWRkYWguY29tIiwiYXVkIjoid2luZCJ9.bqVbbDRbw1o_bS0AZiU5hdb4EcBREoqzw1o-8zd3TrE";
-
-            //expired:
-            //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIxMDAiOiJ2aWV3IiwiMTAxIjoicG9zdCIsImV4cCI6MTU1MTM5NTExMywiaXNzIjoiaHR0cHM6Ly9sb2dpbi5yZWRkYWguY29tIiwiYXVkIjoiam9obmRvZSJ9.SXayamY0LV_tptXLnW7Onjd5hSrvoRQM2JAPlIGrHBc
             SeededComments seededComments;
             using (var db = new reddahEntities())
             {
@@ -52,15 +48,10 @@ namespace Reddah.Web.Login.Controllers
         [HttpPost]
         public IHttpActionResult AddComments([FromBody]NewComment data)
         {
-            //string signedAndEncodedToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIxMDAiOiJ2aWV3IiwiMTAxIjoicG9zdCIsImV4cCI6MTU1MTM5NjE5MiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5yZWRkYWguY29tIiwiYXVkIjoid2luZCJ9.bqVbbDRbw1o_bS0AZiU5hdb4EcBREoqzw1o-8zd3TrE";
-
-            //expired:
-            //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIxMDAiOiJ2aWV3IiwiMTAxIjoicG9zdCIsImV4cCI6MTU1MTM5NTExMywiaXNzIjoiaHR0cHM6Ly9sb2dpbi5yZWRkYWguY29tIiwiYXVkIjoiam9obmRvZSJ9.SXayamY0LV_tptXLnW7Onjd5hSrvoRQM2JAPlIGrHBc
-
             if (data.ArticleId < 0)
                 return Ok(new ApiResult(1, "Invalid Article Id"));
 
-            JwtResult jwtResult = ValidJwt(data.Jwt);
+            JwtResult jwtResult = AuthController.ValidJwt(data.Jwt);
 
             if(jwtResult.Success!=0)
                 return Ok(new ApiResult(2, "Jwt invalid"+jwtResult.Message));
@@ -107,50 +98,6 @@ namespace Reddah.Web.Login.Controllers
 
         }
 
-        public static JwtResult ValidJwt(string jwt)
-        {
-            var jwtUser = new JwtUser();
-
-            SecurityToken validatedToken;
-            string signedAndEncodedToken = jwt;
-
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
-            try
-            {
-                var tokenValidationParameters = new TokenValidationParameters
-                {
-                    RequireExpirationTime = true,
-                    RequireSignedTokens = true,
-                    ValidateAudience = false,
-                    ValidateIssuer = true,
-                    ValidIssuers = new string[]
-                    {
-                        "https://login.reddah.com",
-                        "http://my.othertokenissuer.com"
-                    },
-                    ValidateLifetime = true,
-
-                    IssuerSigningKey = signingKey
-                };
-
-
-                var tokenHandler = new CustomJwtSecurityTokenHandler();
-
-                tokenHandler.ValidateToken(signedAndEncodedToken, tokenValidationParameters, out validatedToken);
-
-                var payload = (validatedToken as CustomJwtSecurityToken).Payload;
-                jwtUser.User = payload.Aud.First().ToString();
-                jwtUser.Allow = "not set";
-
-            }
-            catch (Exception ex)
-            {
-                new JwtResult(1, ex.Message.ToString(), null);
-            }
-
-
-
-            return new JwtResult(0, "Success", jwtUser);
-        }
+        
     }
 }

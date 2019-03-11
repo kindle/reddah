@@ -35,7 +35,9 @@ import { CommentComponent } from './comment/comment.component';
 import { TimeLinePage } from './timeline/timeline.page';
 import { ArticlePopPage } from './article-pop/article-pop.page'
 import { CommentPopPage } from './article-pop/comment-pop.page'
+import { TimelinePopPage } from './article-pop/timeline-pop.page'
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
+import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 
 
 @NgModule({
@@ -51,6 +53,7 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
     TimeLinePage,
     ArticlePopPage,
     CommentPopPage,
+    TimelinePopPage,
   ],
   entryComponents: [
     LocalePage,
@@ -60,6 +63,7 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
     AddCommentPage,
     ArticlePopPage,
     CommentPopPage,
+    TimelinePopPage,
   ],
   imports: [
     BrowserModule, 
@@ -88,6 +92,7 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
     AuthService,
     Camera,
     QRScanner,
+    PhotoLibrary,
     Toast,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     ReddahService,
