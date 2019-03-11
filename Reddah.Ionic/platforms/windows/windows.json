@@ -10,7 +10,7 @@
           "/Package/Capabilities": [
             {
               "xml": "<DeviceCapability Name=\"webcam\" />",
-              "count": 1
+              "count": 2
             }
           ]
         }
@@ -20,7 +20,7 @@
           "/Package/Capabilities": [
             {
               "xml": "<DeviceCapability Name=\"webcam\" />",
-              "count": 1
+              "count": 2
             }
           ]
         }
@@ -30,6 +30,16 @@
           "/Package/Capabilities": [
             {
               "xml": "<DeviceCapability Name=\"webcam\" />",
+              "count": 2
+            }
+          ]
+        }
+      },
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"QRScanner\"><param name=\"windows-package\" value=\"QRScanner\" /></feature>",
               "count": 1
             }
           ]
@@ -69,6 +79,9 @@
       "PACKAGE_NAME": "Reddah"
     },
     "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "Reddah"
+    },
+    "cordova-plugin-qrscanner": {
       "PACKAGE_NAME": "Reddah"
     }
   },
@@ -208,6 +221,26 @@
       "file": "plugins/cordova-plugin-statusbar/src/windows/StatusBarProxy.js",
       "pluginId": "cordova-plugin-statusbar",
       "runs": true
+    },
+    {
+      "id": "cordova-plugin-qrscanner.QRScanner",
+      "file": "plugins/cordova-plugin-qrscanner/www/www.min.js",
+      "pluginId": "cordova-plugin-qrscanner",
+      "clobbers": [
+        "QRScanner"
+      ]
+    },
+    {
+      "id": "cordova-plugin-qrscanner.qrScanner",
+      "file": "plugins/cordova-plugin-qrscanner/src/windows/lib/qrScanner.js",
+      "pluginId": "cordova-plugin-qrscanner",
+      "runs": true
+    },
+    {
+      "id": "cordova-plugin-qrscanner.preview",
+      "file": "plugins/cordova-plugin-qrscanner/src/windows/lib/preview.js",
+      "pluginId": "cordova-plugin-qrscanner",
+      "runs": true
     }
   ],
   "plugin_metadata": {
@@ -221,6 +254,7 @@
     "cordova-plugin-ionic-webview": "2.3.1",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-whitelist": "1.3.3"
+    "cordova-plugin-whitelist": "1.3.3",
+    "cordova-plugin-qrscanner": "2.6.0"
   }
 }

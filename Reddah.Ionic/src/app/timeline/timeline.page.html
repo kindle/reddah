@@ -1,0 +1,64 @@
+
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
+    <div class="headerStart" #headerStart>
+        <ion-item color="transparent" lines="none">
+            <ion-icon name="arrow-round-back" slot="start"></ion-icon>
+            <ion-label></ion-label>
+            <ion-icon name="camera" slot="end"></ion-icon>
+        </ion-item>
+    </div>
+    <div class="headerOnScroll" #headerOnScroll>
+        <ion-item color="primary">
+            <ion-icon name="arrow-round-back" slot="start"></ion-icon>
+            <ion-label>关注</ion-label>
+            <ion-icon name="camera" slot="end"></ion-icon>
+        </ion-item>
+    </div>
+    <div>   
+        <div class="timelineCover" #timelineCover>
+            <img src="assets/icon/timg.jpg">
+        </div>
+        <div class="timelineAvatar">
+            <ion-label>User Name</ion-label>
+            <img src="assets/icon/anonymous.png">
+        </div>
+        
+        
+        <ng-template ngFor let-article [ngForOf]="articles">
+            <ion-card class="welcome-card" (click)="view(article)">
+                <video id="video_{{article.Id}}" (click)="playVideo(article.Id)" src="{{article.VideoUrl}}"
+                        poster="{{article.VideoPoster}}"
+                        *ngIf="article.VideoUrl.length>0"
+                        controls="controls" loop="true">
+                </video>
+                <ion-img src="{{article.ImageUrls[0]}}" *ngIf="article.VideoUrl.length==0&&article.ImageUrls.length>0"></ion-img>
+                <ion-card-header>
+                    <ion-card-subtitle>
+                        <div [innerHTML]="summary(article.Title)"></div>
+                    </ion-card-subtitle>
+                    <ion-card-title>
+                        <div [innerHTML]="htmlDecode(article.Title)"></div>
+                    </ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                    <ng-template ngFor let-group [ngForOf]="article.GroupName.split(',')">
+                        <ion-chip outline margin-bottom>
+                            <ion-label [innerHTML]="htmlDecode(group)"></ion-label>
+                        </ion-chip>&nbsp;
+                    </ng-template>
+                </ion-card-content>
+                <ion-item>
+                    <ion-note color="dark">{{article.CreatedOn}}</ion-note>
+                    <ion-note color="dark" slot="end">{{article.Comments}} {{ 'Article.Comments' | translate }}</ion-note>
+                </ion-item>
+            </ion-card>
+        </ng-template>
+        
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </div>
+</ion-content>

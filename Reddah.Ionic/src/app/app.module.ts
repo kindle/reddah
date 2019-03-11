@@ -19,9 +19,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { LocalePage } from './locale/locale.page';
 import { SafePipe } from './safe.pipe';
 
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Camera } from '@ionic-native/Camera/ngx'
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
@@ -32,8 +32,10 @@ import { FormsModule } from '@angular/forms';
 import { AddCommentPage } from './add-comment/add-comment.page';
 import { Toast } from '@ionic-native/toast/ngx';
 import { CommentComponent } from './comment/comment.component';
+import { TimeLinePage } from './timeline/timeline.page';
 import { ArticlePopPage } from './article-pop/article-pop.page'
 import { CommentPopPage } from './article-pop/comment-pop.page'
+import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 
 
 @NgModule({
@@ -46,6 +48,7 @@ import { CommentPopPage } from './article-pop/comment-pop.page'
     ImageViewerComponent,
     LoginPage,
     CommentComponent,
+    TimeLinePage,
     ArticlePopPage,
     CommentPopPage,
   ],
@@ -84,6 +87,7 @@ import { CommentPopPage } from './article-pop/comment-pop.page'
     SplashScreen,
     AuthService,
     Camera,
+    QRScanner,
     Toast,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     ReddahService,

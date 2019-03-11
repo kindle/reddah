@@ -1,8 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.reddah.app.andriod" version="1.0.50" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.reddah.app.andriod" version="1.0.82" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
+    <feature name="QRScanner">
+        <param name="windows-package" value="QRScanner" />
+    </feature>
     <name>Reddah</name>
     <description>Reddah.com An awesome hybird app.</description>
     <author email="weibailin@hotmail.com" href="http://reddah.com/">Reddah.com Team</author>

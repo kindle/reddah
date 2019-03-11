@@ -1,0 +1,87 @@
+video {
+    width: 100%;
+}
+.listInfoBlock {
+    overflow:hidden;
+}
+.listImage {
+    vertical-align: top;
+}
+.listImageWrapper {
+    float: left;
+    height: 120px;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 2px;
+}
+.BrowsePreviewImage
+{
+    width: 193px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    border: 1px solid #BDBEC1;
+    margin-top: 5px;
+}
+.listRight .listInfo {
+    color: #BDBEC1;
+}
+div.postClear {
+    clear: left;
+    height: 10px;
+}
+orgImage, .orgArticle {
+    display: none;
+}
+
+
+
+
+
+
+.headerStart {
+    background-color:transparent;
+    position: fixed;
+    visibility:visible;
+    width: 100%;
+    height: 40px;
+    z-index: 999;
+    font-size:1.5rem;
+}
+
+.headerOnScroll{
+    position: fixed;
+    visibility: hidden;
+    width: 100%;
+    height: 40px;
+    z-index: 999;
+    font-size:1.5rem;
+}
+
+.timelineCover {
+    height: 300px;
+    overflow: hidden;
+}
+
+.timelineAvatar {
+    display: flex; 
+    justify-content: flex-end;
+}
+
+.timelineAvatar img {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    top: -50px;
+    margin-right: 15px;
+    border-radius: 7%;
+    border: 1px solid gray;
+}
+
+.timelineAvatar ion-label {
+    position: relative;
+    top: -40px;
+    height: 30px;
+    margin-right: 20px;
+    color: white;
+}
+

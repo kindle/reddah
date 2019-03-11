@@ -2,15 +2,24 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SelectiveStrategyService } from './selective-strategy.service';
 import { LoginPage } from './login/login.page';
+import { TimeLinePage } from './timeline/timeline.page';
+import { AuthGuard } from './AuthGuard.service';
 
 const routes: Routes = [
   { 
-    path: '', 
-    loadChildren: './tabs/tabs.module#TabsPageModule',
-    //canActivateChild: [AuthGuard]
-    //canActivate: [AuthGuard],
+      path: '', 
+      loadChildren: './tabs/tabs.module#TabsPageModule',
+      //canActivateChild: [AuthGuard]
+      //canActivate: [AuthGuard],
   },
-  { path: 'login', component: LoginPage },
+  { 
+      path: 'login', 
+      component: LoginPage },
+  { 
+      path: 'timeline', 
+      component: TimeLinePage,
+      canActivate: [AuthGuard],
+  },
   
 ];
 @NgModule({

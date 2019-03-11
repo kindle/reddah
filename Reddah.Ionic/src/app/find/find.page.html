@@ -4,17 +4,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content style="background: transparent !important;">
     <ion-card>
-        <ion-item href="#">
+        <ion-item href="/timeline">
           <ion-icon name="aperture" slot="start"></ion-icon>
           <ion-label>Reddah</ion-label>
+          <ion-icon name="arrow-forward" slot="end"></ion-icon>
         </ion-item>
     </ion-card>
     <ion-card>
-        <ion-item href="#">
+        <ion-item (click)="qrScan()">
           <ion-icon name="qr-scanner" slot="start"></ion-icon>
           <ion-label>扫一扫</ion-label>
+          <ion-icon name="arrow-forward" slot="end"></ion-icon>
         </ion-item>
         <ion-item href="#">
           <ion-icon name="pulse" slot="start"></ion-icon>
@@ -23,9 +25,10 @@
     </ion-card>
 
     <ion-card>
-        <ion-item href="#">
+        <ion-item href="/tabs/(home:home)">
           <ion-icon name="eye" slot="start"></ion-icon>
           <ion-label>看一看</ion-label>
+          <ion-icon name="arrow-forward" slot="end"></ion-icon>
         </ion-item>
         <ion-item href="#">
           <ion-icon name="search" slot="start"></ion-icon>
@@ -43,6 +46,7 @@
           <ion-label>小游戏</ion-label>
         </ion-item>
     </ion-card>
+    {{debug}}
 </ion-content>
 
 
