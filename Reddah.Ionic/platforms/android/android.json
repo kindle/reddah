@@ -42,19 +42,19 @@
             },
             {
               "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<allow-navigation href=\"cdvfile:*\" />",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<feature name=\"PhotoLibrary\"><param name=\"android-package\" value=\"com.terikon.cordova.photolibrary.PhotoLibrary\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<allow-navigation href=\"cdvphotolibrary:*\" />",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<feature name=\"QRScanner\"><param name=\"android-package\" value=\"com.bitpay.cordova.qrscanner.QRScanner\" /></feature>",
@@ -98,11 +98,11 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-              "count": 4
+              "count": 5
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
-              "count": 2
+              "count": 3
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.REQUEST_INSTALL_PACKAGES\" />",
@@ -114,7 +114,7 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.MANAGE_DOCUMENTS\" />",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.CAMERA\" android:required=\"false\" />",

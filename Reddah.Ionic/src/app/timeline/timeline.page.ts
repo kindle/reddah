@@ -9,6 +9,7 @@ import { PostviewerPage } from '../postviewer/postviewer.page';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { TimelinePopPage } from '../article-pop/timeline-pop.page';
+import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 
 @Component({
   selector: 'app-timeline',
@@ -72,6 +73,7 @@ export class TimeLinePage implements OnInit {
       public modalController: ModalController,
       private localStorageService: LocalStorageService,
       private popoverController: PopoverController,
+      private photoLibrary: PhotoLibrary,
       ){
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         console.log(locale);
@@ -190,15 +192,48 @@ export class TimeLinePage implements OnInit {
       }
   }
 
-  async post(ev: any) {
-    const popover = await this.popoverController.create({
-      component: TimelinePopPage,
-      event: ev,
-      translucent: true
-    });
-    return await popover.present();
-  }
 
+
+  debug="";
+
+  async post(ev: any) {
+      const popover = await this.popoverController.create({
+          component: TimelinePopPage,
+          event: ev,
+          translucent: true
+      });
+      await popover.present();
+      const { data } = await popover.onDidDismiss();
+      if(data==1)//photo
+      {
+          alert('take a photo');
+      }
+      else//from library
+      {
+          this.photoLibrary.requestAuthorization().then(() => {
+            this.photoLibrary.getLibrary().subscribe({
+              next: library => {
+                library.forEach(function(libraryItem) {
+                  this.debug += libraryItem.photoURL;
+                  console.log(libraryItem.id);          // ID of the photo
+                  console.log(libraryItem.photoURL);    // Cross-platform access to photo
+                  console.log(libraryItem.thumbnailURL);// Cross-platform access to thumbnail
+                  console.log(libraryItem.fileName);
+                  console.log(libraryItem.width);
+                  console.log(libraryItem.height);
+                  console.log(libraryItem.creationDate);
+                  console.log(libraryItem.latitude);
+                  console.log(libraryItem.longitude);
+                  console.log(libraryItem.albumIds);    // array of ids of appropriate AlbumItem, only of includeAlbumsData was used
+                });
+              },
+              error: err => { this.debug += err; console.log('could not get photos'); },
+              complete: () => { this.debug += "done"; console.log('done getting photos'); }
+            });
+          })
+          .catch(err => {this.debug += err; console.log('permissions weren\'t granted')});
+      }
+  }
 
 
 }

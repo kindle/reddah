@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="background: transparent !important;">
+<ion-content>
     <ion-card>
         <ion-item href="/timeline">
           <ion-icon name="aperture" slot="start"></ion-icon>
@@ -13,7 +13,7 @@
         </ion-item>
     </ion-card>
     <ion-card>
-        <ion-item (click)="qrScan()">
+        <ion-item href="/scan">
           <ion-icon name="qr-scanner" slot="start"></ion-icon>
           <ion-label>扫一扫</ion-label>
           <ion-icon name="arrow-forward" slot="end"></ion-icon>
@@ -46,7 +46,6 @@
           <ion-label>小游戏</ion-label>
         </ion-item>
     </ion-card>
-    {{debug}}
 </ion-content>
 
 

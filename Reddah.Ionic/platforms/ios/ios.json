@@ -70,11 +70,11 @@
             },
             {
               "xml": "<feature name=\"File\"><param name=\"ios-package\" value=\"CDVFile\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<feature name=\"PhotoLibrary\"><param name=\"ios-package\" value=\"PhotoLibrary\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<feature name=\"QRScanner\"><param name=\"ios-package\" value=\"QRScanner\" /></feature>",
@@ -94,7 +94,7 @@
           "NSPhotoLibraryUsageDescription": [
             {
               "xml": "<string> </string>",
-              "count": 1
+              "count": 2
             }
           ]
         }
