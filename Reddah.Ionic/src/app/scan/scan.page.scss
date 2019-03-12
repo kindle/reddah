@@ -1,12 +1,30 @@
-#close-scanner-button {
-    display: none;
+
+.button-bottom {
+    width:100%;
+    display:flex;
+    justify-content: center; 
+    margin-bottom: 200px;
+}
+
+.scanSqure {
+    background: transparent none !important;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.scanSqure img{
+    width: 400px;
+    height: 400px;
+    background: transparent none !important;
 }
 
 html.cameraView {
 
     background: transparent none !important;
 
-    body, ion-app, .modal-wrapper, .ion-page{
+    body, ion-app, ion-tabs, .modal-wrapper, .ion-page{
         background: transparent none !important;
     }
     
@@ -27,7 +45,4 @@ html.cameraView {
     }
 }
 
-ion-content {
-    --background: none transparent;
-  }
   

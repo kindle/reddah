@@ -1,19 +1,18 @@
 
-<ion-content style="background-color:transparent !important;">
-    <div id="close-scanner-button" text-center>
-        <ion-button (click)="closeScanner()" color="warning">
-            Close Scanner
-        </ion-button>
-        {{debug}}
-    </div>
+<ion-content>
     
-    <div class="button-bottom">
-        <button (click)="toggleLight()" ion-fab class="icon-camera" margin-right>
-            <ion-icon name="flash"></ion-icon>                  
-        </button>
-        <button (click)="toggleCamera()" ion-fab class="icon-camera">
-            <ion-icon name="reverse-camera"></ion-icon>                  
-        </button>
-    </div>    
     
 </ion-content>
+
+<div class="scanSqure">
+    <img src="assets/icon/scanner.svg">
+</div>       
+<div class="button-bottom">
+        <ion-button (click)="toggleLight()" ion-fab class="icon-camera" margin-end>
+                <ion-icon name="flash"></ion-icon>                  
+            </ion-button>
+            <ion-button (click)="toggleCamera()" ion-fab class="icon-camera">
+                <ion-icon name="reverse-camera"></ion-icon>                  
+            </ion-button>
+</div>
+

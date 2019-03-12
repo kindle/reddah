@@ -70,7 +70,7 @@
                                                      name:UIApplicationDidBecomeActiveNotification object:nil];
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAppWillEnterForeground:)
-                                                     name:UIApplicationWillEnterForegroundNotification object:nil];
+                                                     name:UIApplicationForegroundNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAppDidEnterBackground:)
                                                      name:UIApplicationDidEnterBackgroundNotification object:nil];
 

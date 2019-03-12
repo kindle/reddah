@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   { 
       path: 'scan', 
-      component: ScanPage
+      component: ScanPage,
   },
   
 ];

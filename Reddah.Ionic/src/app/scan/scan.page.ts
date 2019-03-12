@@ -60,7 +60,9 @@ export class ScanPage implements OnInit {
         (window.document.querySelector('html') as HTMLElement).classList.add('cameraView');
     }
 
-    closeScanner() {
+    
+
+    ionViewWillLeave() {
       (window.document.querySelector('html') as HTMLElement).classList.remove('cameraView');
     }
 
