@@ -207,6 +207,7 @@ export class TimeLinePage implements OnInit {
       if(data==1)//photo
       {
           alert('take a photo');
+          
       }
       else//from library
       {

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-icon name="arrow-back" slot="start"></ion-icon>
+      <ion-button color="success" slot="end" (click)="submit()">发表</ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-item>
+      <ion-textarea [(ngModel)]="commentContent" rows="6" cols="20" placeholder="这一刻的想法..."></ion-textarea>
+    </ion-item>
+    <div class="imgSqure" *ngFor="let photo of photos">
+        <ion-avatar slot="start">
+          <img src="photo.base64">
+        </ion-avatar>
+        
+    </div>
+    <div class="imgSqure">
+      <ion-icon name="add" (click)="addNewPhoto()" size="large"></ion-icon>
+  </div>
+    <ion-item>
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>所在位置</ion-label>
+      <ion-icon name="arrow-forward" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="person" slot="start"></ion-icon>
+      <ion-label>谁可以看</ion-label>
+      <ion-icon name="arrow-forward" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="at" slot="start"></ion-icon>
+      <ion-label>提醒谁看</ion-label>
+      <ion-icon name="arrow-forward" slot="end"></ion-icon>
+    </ion-item>
+</ion-content>

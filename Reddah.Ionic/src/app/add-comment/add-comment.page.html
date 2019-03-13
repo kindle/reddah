@@ -1,15 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{ 'Comment.Comment' | translate }}</ion-title>
+    <ion-button color="success" slot="end" (click)="submit()">{{ 'Confirm.Submit' | translate }}</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
     <ion-item>
       <ion-textarea [(ngModel)]="commentContent" rows="6" cols="20" placeholder="{{ 'Comment.Tip' | translate }}"></ion-textarea>
-    </ion-item>
-    <ion-item>
-      <ion-button color="medium" slot="end" (click)="cancel()">{{ 'Confirm.Cancel' | translate }}</ion-button>
-      <ion-button color="success" slot="end" (click)="submit()">{{ 'Confirm.Submit' | translate }}</ion-button>
     </ion-item>
 </ion-content>

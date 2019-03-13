@@ -26,6 +26,11 @@ const routes: Routes = [
       path: 'scan', 
       component: ScanPage,
   },
+  { 
+      path: 'post', 
+      loadChildren: './add-timeline/add-timeline.module#AddTimelinePageModule',
+      canActivate: [AuthGuard],
+  },
   
 ];
 @NgModule({
