@@ -207,6 +207,7 @@ export class TimeLinePage implements OnInit {
       if(data==1)//photo
       {
           alert('take a photo');
+          this.navController.navigateRoot('/post');
           
       }
       else//from library

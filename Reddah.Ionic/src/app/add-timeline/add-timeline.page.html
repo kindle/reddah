@@ -13,13 +13,12 @@
     </ion-item>
     <div class="imgSqure" *ngFor="let photo of photos">
         <ion-avatar slot="start">
-          <img src="photo.base64">
+          <img src="photo">
         </ion-avatar>
-        
     </div>
     <div class="imgSqure">
-      <ion-icon name="add" (click)="addNewPhoto()" size="large"></ion-icon>
-  </div>
+      <ion-icon name="add" (click)="addNewPhoto($event)" size="large"></ion-icon>
+    </div>
     <ion-item>
       <ion-icon name="pin" slot="start"></ion-icon>
       <ion-label>所在位置</ion-label>
