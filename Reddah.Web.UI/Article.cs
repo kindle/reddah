@@ -42,6 +42,8 @@ public partial class Article
 
     public Nullable<System.DateTime> LastUpdateOn { get; set; }
 
+    public Nullable<int> Type { get; set; }
+
 }
 
 }

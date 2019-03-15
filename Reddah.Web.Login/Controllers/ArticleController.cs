@@ -98,6 +98,46 @@ namespace Reddah.Web.Login.Controllers
 
         }
 
-        
+        [Route("addtimeline")]
+        [HttpPost]
+        public IHttpActionResult AddTimeline([FromBody]NewTimeline data)
+        {
+            if (String.IsNullOrWhiteSpace(data.Thoughts)&& String.IsNullOrWhiteSpace(data.Content))
+                return Ok(new ApiResult(1, "No thoughts and photos"));
+
+            JwtResult jwtResult = AuthController.ValidJwt(data.Jwt);
+
+            if (jwtResult.Success != 0)
+                return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+            try
+            {
+                using (var db = new reddahEntities())
+                {
+                    db.Article.Add(new Article()
+                    {
+                        Title = data.Thoughts,
+                        Content = data.Content,
+                        CreatedOn = DateTime.Now,
+                        Count=0,
+                        GroupName = data.Location,
+                        UserName = jwtResult.JwtUser.User,
+                        Type = 1,
+                    });
+
+                    db.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Ok(new ApiResult(3, "Excepion:" + ex.Message.ToString()));
+            }
+
+            return Ok(new ApiResult(0, "New Timeline Added"));
+
+        }
+
+
     }
 }
