@@ -37,9 +37,11 @@ import { TimeLinePage } from './timeline/timeline.page';
 import { ArticlePopPage } from './article-pop/article-pop.page'
 import { CommentPopPage } from './article-pop/comment-pop.page'
 import { TimelinePopPage } from './article-pop/timeline-pop.page'
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
+import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
-
+import { File } from '@ionic-native/file/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { Crop } from '@ionic-native/crop/ngx';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,9 @@ import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
     SplashScreen,
     AuthService,
     Camera,
+    File,
+    FileTransfer,
+    Crop,
     QRScanner,
     PhotoLibrary,
     Toast,

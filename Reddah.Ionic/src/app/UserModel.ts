@@ -29,3 +29,16 @@ export class NewCommentModel {
     public Content: string;
 }
 
+export class NewTimelineModel {
+    constructor(jwt: string, thoughts: string, content: string, location: string){
+        this.Jwt = jwt;
+        this.Thoughts = thoughts;
+        this.Content = content;
+        this.Location = location;
+    }
+    public Jwt: string;
+    public Thoughts: string;
+    public Content: string;
+    public Location: string;
+}
+

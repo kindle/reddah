@@ -23,7 +23,6 @@
             <img src="assets/icon/anonymous.png">
         </div>
         {{debug}}
-        
         <ng-template ngFor let-article [ngForOf]="articles">
             <ion-card class="welcome-card" (click)="view(article)">
                 <video id="video_{{article.Id}}" (click)="playVideo(article.Id)" src="{{article.VideoUrl}}"

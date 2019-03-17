@@ -7,18 +7,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-    <ion-item>
-      <ion-textarea [(ngModel)]="commentContent" rows="6" cols="20" placeholder="这一刻的想法..."></ion-textarea>
+<ion-content>
+    <ion-item lines="none">
+      <ion-textarea [(ngModel)]="yourThoughts" rows="6" cols="20" placeholder="这一刻的想法..."></ion-textarea>
     </ion-item>
-    <div class="imgSqure" *ngFor="let photo of photos">
-        <ion-avatar slot="start">
-          <img src="photo">
-        </ion-avatar>
+    <div class="imgContainer">
+      <div class="imgSqure" *ngFor="let image of photos">
+          <img [src]="image">
+      </div>
+      <div class="imgSqure addImg" (click)="addNewPhoto($event)">
+        <ion-icon name="add" size="large" color="medium"></ion-icon>
+      </div>
     </div>
-    <div class="imgSqure">
-      <ion-icon name="add" (click)="addNewPhoto($event)" size="large"></ion-icon>
+    <div *ngFor="let text of texts">
+        {{text}}<br/>
     </div>
+    <ion-item lines="none">
+      <ion-label></ion-label>
+    </ion-item>
     <ion-item>
       <ion-icon name="pin" slot="start"></ion-icon>
       <ion-label>所在位置</ion-label>

@@ -27,9 +27,7 @@ export class AddCommentPage implements OnInit {
 
   async submit() {
       //alert(`write some...aid:${this.articleId},cid:${this.commentId},content:${this.commentContent}`);
-      let jwt = this.reddahService.getCurrentJwt();
-    
-      this.reddahService.addComments(jwt, this.articleId, this.commentId, this.commentContent)
+      this.reddahService.addComments(this.articleId, this.commentId, this.commentContent)
       .subscribe(result => 
           {
               if(result.Success==0)

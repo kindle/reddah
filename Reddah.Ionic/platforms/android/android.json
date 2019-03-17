@@ -59,6 +59,14 @@
             {
               "xml": "<feature name=\"QRScanner\"><param name=\"android-package\" value=\"com.bitpay.cordova.qrscanner.QRScanner\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"CropPlugin\"><param name=\"android-package\" value=\"com.jeduan.crop.CropPlugin\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"FileTransfer\"><param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -98,7 +106,7 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-              "count": 5
+              "count": 6
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
@@ -133,9 +141,18 @@
             {
               "xml": "<provider android:authorities=\"${applicationId}.appupdate.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"com.vaenow.appupdate.android.GenericFileProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/appupdate_paths\" /></provider>",
               "count": 1
+            },
+            {
+              "xml": "<activity android:name=\"com.soundcloud.android.crop.CropImageActivity\" />",
+              "count": 1
             }
           ],
-          "/manifest": [],
+          "/manifest": [
+            {
+              "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+              "count": 1
+            }
+          ],
           "application": [
             {
               "xml": "<provider android:authorities=\"${applicationId}.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"org.apache.cordova.camera.FileProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/camera_provider_paths\" /></provider>",
@@ -191,6 +208,12 @@
       "PACKAGE_NAME": "com.reddah.app.andriod"
     },
     "cordova-plugin-add-swift-support": {
+      "PACKAGE_NAME": "com.reddah.app.andriod"
+    },
+    "cordova-plugin-crop": {
+      "PACKAGE_NAME": "com.reddah.app.andriod"
+    },
+    "cordova-plugin-file-transfer": {
       "PACKAGE_NAME": "com.reddah.app.andriod"
     }
   },
@@ -499,6 +522,30 @@
       "clobbers": [
         "QRScanner"
       ]
+    },
+    {
+      "id": "cordova-plugin-crop.CropPlugin",
+      "file": "plugins/cordova-plugin-crop/www/crop.js",
+      "pluginId": "cordova-plugin-crop",
+      "clobbers": [
+        "plugins.crop"
+      ]
+    },
+    {
+      "id": "cordova-plugin-file-transfer.FileTransferError",
+      "file": "plugins/cordova-plugin-file-transfer/www/FileTransferError.js",
+      "pluginId": "cordova-plugin-file-transfer",
+      "clobbers": [
+        "window.FileTransferError"
+      ]
+    },
+    {
+      "id": "cordova-plugin-file-transfer.FileTransfer",
+      "file": "plugins/cordova-plugin-file-transfer/www/FileTransfer.js",
+      "pluginId": "cordova-plugin-file-transfer",
+      "clobbers": [
+        "window.FileTransfer"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -516,6 +563,8 @@
     "cordova-plugin-file": "6.0.1",
     "cordova-plugin-photo-library": "2.2.1",
     "cordova-plugin-qrscanner": "2.6.0",
-    "cordova-plugin-add-swift-support": "1.7.2"
+    "cordova-plugin-add-swift-support": "1.7.2",
+    "cordova-plugin-crop": "0.3.1",
+    "cordova-plugin-file-transfer": "1.7.1"
   }
 }

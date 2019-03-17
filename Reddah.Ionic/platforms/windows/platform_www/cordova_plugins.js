@@ -337,6 +337,36 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "file": "plugins/cordova-plugin-qrscanner/src/windows/lib/preview.js",
       "pluginId": "cordova-plugin-qrscanner",
       "runs": true
+    },
+    {
+      "id": "cordova-plugin-crop.CropPlugin",
+      "file": "plugins/cordova-plugin-crop/www/crop.js",
+      "pluginId": "cordova-plugin-crop",
+      "clobbers": [
+        "plugins.crop"
+      ]
+    },
+    {
+      "id": "cordova-plugin-file-transfer.FileTransferError",
+      "file": "plugins/cordova-plugin-file-transfer/www/FileTransferError.js",
+      "pluginId": "cordova-plugin-file-transfer",
+      "clobbers": [
+        "window.FileTransferError"
+      ]
+    },
+    {
+      "id": "cordova-plugin-file-transfer.FileTransfer",
+      "file": "plugins/cordova-plugin-file-transfer/www/FileTransfer.js",
+      "pluginId": "cordova-plugin-file-transfer",
+      "clobbers": [
+        "window.FileTransfer"
+      ]
+    },
+    {
+      "id": "cordova-plugin-file-transfer.FileTransferProxy",
+      "file": "plugins/cordova-plugin-file-transfer/src/windows/FileTransferProxy.js",
+      "pluginId": "cordova-plugin-file-transfer",
+      "runs": true
     }
   ];
   module.exports.metadata = {
@@ -354,6 +384,8 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-file": "6.0.1",
     "cordova-plugin-photo-library": "2.2.1",
     "cordova-plugin-qrscanner": "2.6.0",
-    "cordova-plugin-add-swift-support": "1.7.2"
+    "cordova-plugin-add-swift-support": "1.7.2",
+    "cordova-plugin-crop": "0.3.1",
+    "cordova-plugin-file-transfer": "1.7.1"
   };
 });

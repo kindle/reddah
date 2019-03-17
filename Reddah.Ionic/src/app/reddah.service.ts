@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Article } from "./article";
 import { UserProfileModel } from './UserProfileModel';
-import { UserModel, QueryCommentModel, NewCommentModel } from './UserModel';
+import { UserModel, QueryCommentModel, NewCommentModel, NewTimelineModel } from './UserModel';
 import { Locale } from './locale';
 
 import { LocalStorageService } from 'ngx-webstorage';
@@ -42,12 +42,24 @@ export class ReddahService {
   //******************************** */
   private addCommentsUrl = 'https://login.reddah.com/api/article/addcomments'; 
 
-  addComments(jwt: string, articleId: number, parentId: number, content: string): Observable<any> {
+  addComments(articleId: number, parentId: number, content: string): Observable<any> {
 
-    return this.http.post<any>(this.addCommentsUrl, new NewCommentModel(jwt, articleId, parentId, content))
+    return this.http.post<any>(this.addCommentsUrl, new NewCommentModel(this.getCurrentJwt(), articleId, parentId, content))
       .pipe(
         tap(heroes => this.log('add comment')),
         catchError(this.handleError('add comment', []))
+      );
+  }
+  //******************************** */
+  private addTimelineUrl = 'https://login.reddah.com/api/article/addtimeline'; 
+
+  addTimeline(formData: FormData): Observable<any> {
+
+    formData.append('jwt', this.getCurrentJwt());
+    return this.http.post<any>(this.addTimelineUrl, formData)
+      .pipe(
+        tap(heroes => this.log('add timeline')),
+        catchError(this.handleError('add timeline', []))
       );
   }
   //******************************** */

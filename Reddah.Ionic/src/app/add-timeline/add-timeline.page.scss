@@ -1,13 +1,31 @@
+.imgContainer {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
 .imgSqure {
-    width : 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     border: 1px solid gray;
     text-align: center;
     vertical-align:middle;
+    margin: 2px;
+
+    overflow: hidden;
 }
 
 .imgSqure img {
-    position: absolute;
+    width: 100%;
+}
+
+.imgSqure ion-icon {
+    display: inline;
     top: 50%;
     vertical-align: middle;
+}
+
+.addImg {
+    background: rgb(243, 242, 242);
 }
