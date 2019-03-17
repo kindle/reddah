@@ -5,22 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="242f51e12e0842efb1ecf8d416efba0e" Name="Diagram1">
-        <EntityTypeShape EntityType="reddahModel.Article" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.Comment" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.Group" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.Log" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.Setting" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.UploadFile" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.UserProfile" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.webpages_Membership" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.webpages_OAuthMembership" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.webpages_Privileges" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.webpages_PrivilegesInRoles" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.webpages_Roles" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.webpages_UsersInRoles" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.Message" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.UserArticle" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="reddahModel.UserFriend" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="reddahModel.Article" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reddahModel.Comment" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reddahModel.Group" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reddahModel.Log" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="reddahModel.Setting" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="reddahModel.UploadFile" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reddahModel.UserProfile" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="reddahModel.webpages_Membership" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="reddahModel.webpages_OAuthMembership" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="reddahModel.webpages_Privileges" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reddahModel.webpages_PrivilegesInRoles" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="reddahModel.webpages_Roles" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="reddahModel.webpages_UsersInRoles" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="reddahModel.Message" Width="1.5" PointX="8.75" PointY="9.75" />
+        <EntityTypeShape EntityType="reddahModel.UserArticle" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reddahModel.UserFriend" Width="1.5" PointX="10.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

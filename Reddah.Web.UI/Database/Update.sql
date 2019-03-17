@@ -1,6 +1,10 @@
 ﻿alter table article add 
   [Locale] VARCHAR(10) default 'en-us'
 
+-- normal post from website: 0, friends see only:1.
+alter table article add 
+  [Type] int default 0
+
 alter table article add 
   [LastUpdateOn] DATETIME NULL 
 

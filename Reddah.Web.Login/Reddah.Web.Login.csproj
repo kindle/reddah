@@ -153,6 +153,9 @@
     <Compile Include="Comment.cs">
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ComplexType1.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

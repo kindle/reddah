@@ -21,6 +21,7 @@
           <Property Name="GroupName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Locale" Type="varchar" MaxLength="10" />
           <Property Name="LastUpdateOn" Type="datetime" />
+          <Property Name="Type" Type="int" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -254,6 +255,7 @@ FROM [dbo].[UserFriend] AS [UserFriend]</DefiningQuery>
           <Property Name="GroupName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Locale" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="LastUpdateOn" Type="DateTime" Precision="3" />
+          <Property Name="Type" Type="Int32" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -417,6 +419,7 @@ FROM [dbo].[UserFriend] AS [UserFriend]</DefiningQuery>
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="reddahModel.Article">
               <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="LastUpdateOn" ColumnName="LastUpdateOn" />
                 <ScalarProperty Name="Locale" ColumnName="Locale" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="reddahModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="reddahModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Article">
           <Key>
             <PropertyRef Name="Id" />
@@ -21,6 +21,7 @@
           <Property Name="GroupName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Locale" Type="varchar" MaxLength="10" />
           <Property Name="LastUpdateOn" Type="datetime" />
+          <Property Name="Type" Type="int" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -216,27 +217,48 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
     FROM [dbo].[UserFriend] AS [UserFriend]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="reddahModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="reddahEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Article" EntityType="reddahModel.Article" />
+          <EntitySet Name="Comment" EntityType="reddahModel.Comment" />
+          <EntitySet Name="Group" EntityType="reddahModel.Group" />
+          <EntitySet Name="Log" EntityType="reddahModel.Log" />
+          <EntitySet Name="Setting" EntityType="reddahModel.Setting" />
+          <EntitySet Name="UploadFile" EntityType="reddahModel.UploadFile" />
+          <EntitySet Name="UserProfile" EntityType="reddahModel.UserProfile" />
+          <EntitySet Name="webpages_Membership" EntityType="reddahModel.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="reddahModel.webpages_OAuthMembership" />
+          <EntitySet Name="webpages_Privileges" EntityType="reddahModel.webpages_Privileges" />
+          <EntitySet Name="webpages_PrivilegesInRoles" EntityType="reddahModel.webpages_PrivilegesInRoles" />
+          <EntitySet Name="webpages_Roles" EntityType="reddahModel.webpages_Roles" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="reddahModel.webpages_UsersInRoles" />
+          <EntitySet Name="Message" EntityType="reddahModel.Message" />
+          <EntitySet Name="UserArticle" EntityType="reddahModel.UserArticle" />
+          <EntitySet Name="UserFriend" EntityType="reddahModel.UserFriend" />
+        </EntityContainer>
+        <ComplexType Name="ComplexType1">
+          <Property Type="Int32" Name="Count" Nullable="false" />
+        </ComplexType>
         <EntityType Name="Article">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Abstract" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Up" Type="Int32" />
           <Property Name="Down" Type="Int32" />
           <Property Name="Count" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="GroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Locale" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="LastUpdateOn" Type="DateTime" Precision="3" />
+          <Property Name="Type" Type="Int32" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -245,12 +267,12 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ArticleId" Type="Int32" Nullable="false" />
           <Property Name="ParentId" Type="Int32" Nullable="false" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Up" Type="Int32" />
           <Property Name="Down" Type="Int32" />
           <Property Name="Count" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Group">
@@ -258,7 +280,7 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -271,10 +293,10 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Thread" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Logger" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Message" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Thread" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Level" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Logger" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="Exception" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Setting">
@@ -290,12 +312,12 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Guid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Format" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Guid" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Format" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="GroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Tag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tag" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -318,9 +340,9 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
           <Property Name="IsConfirmed" Type="Boolean" />
           <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
           <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
-          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
         </EntityType>
@@ -329,8 +351,8 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
             <PropertyRef Name="Provider" />
             <PropertyRef Name="ProviderUserId" />
           </Key>
-          <Property Name="Provider" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderUserId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Privileges">
@@ -338,7 +360,7 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
             <PropertyRef Name="PrivilegeId" />
           </Key>
           <Property Name="PrivilegeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PrivilegeName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PrivilegeName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="webpages_PrivilegesInRoles">
           <Key>
@@ -353,7 +375,7 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
             <PropertyRef Name="RoleId" />
           </Key>
           <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="webpages_UsersInRoles">
           <Key>
@@ -370,9 +392,9 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
             <PropertyRef Name="Msg" />
             <PropertyRef Name="Status" />
           </Key>
-          <Property Name="From" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="To" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Msg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="From" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="To" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Msg" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="UserArticle">
@@ -380,7 +402,7 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
             <PropertyRef Name="UserName" />
             <PropertyRef Name="ArticleId" />
           </Key>
-          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ArticleId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="UserFriend">
@@ -388,27 +410,9 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
             <PropertyRef Name="UserName" />
             <PropertyRef Name="Watch" />
           </Key>
-          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Watch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Watch" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="reddahEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Article" EntityType="Self.Article" />
-          <EntitySet Name="Comment" EntityType="Self.Comment" />
-          <EntitySet Name="Group" EntityType="Self.Group" />
-          <EntitySet Name="Log" EntityType="Self.Log" />
-          <EntitySet Name="Setting" EntityType="Self.Setting" />
-          <EntitySet Name="UploadFile" EntityType="Self.UploadFile" />
-          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" />
-          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" />
-          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" />
-          <EntitySet Name="webpages_Privileges" EntityType="Self.webpages_Privileges" />
-          <EntitySet Name="webpages_PrivilegesInRoles" EntityType="Self.webpages_PrivilegesInRoles" />
-          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" />
-          <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" />
-          <EntitySet Name="Message" EntityType="Self.Message" />
-          <EntitySet Name="UserArticle" EntityType="Self.UserArticle" />
-          <EntitySet Name="UserFriend" EntityType="Self.UserFriend" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -418,178 +422,179 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
           <EntitySetMapping Name="Article">
             <EntityTypeMapping TypeName="reddahModel.Article">
               <MappingFragment StoreEntitySet="Article">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Abstract" ColumnName="Abstract" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Up" ColumnName="Up" />
-                <ScalarProperty Name="Down" ColumnName="Down" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="Locale" ColumnName="Locale" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="LastUpdateOn" ColumnName="LastUpdateOn" />
+                <ScalarProperty Name="Locale" ColumnName="Locale" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Down" ColumnName="Down" />
+                <ScalarProperty Name="Up" ColumnName="Up" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Abstract" ColumnName="Abstract" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Comment">
             <EntityTypeMapping TypeName="reddahModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Up" ColumnName="Up" />
-                <ScalarProperty Name="Down" ColumnName="Down" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Down" ColumnName="Down" />
+                <ScalarProperty Name="Up" ColumnName="Up" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Group">
             <EntityTypeMapping TypeName="reddahModel.Group">
               <MappingFragment StoreEntitySet="Group">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Desc" ColumnName="Desc" />
-                <ScalarProperty Name="Path" ColumnName="Path" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="Relation" ColumnName="Relation" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Log">
             <EntityTypeMapping TypeName="reddahModel.Log">
               <MappingFragment StoreEntitySet="Log">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Thread" ColumnName="Thread" />
-                <ScalarProperty Name="Level" ColumnName="Level" />
-                <ScalarProperty Name="Logger" ColumnName="Logger" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="Exception" ColumnName="Exception" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Logger" ColumnName="Logger" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Setting">
             <EntityTypeMapping TypeName="reddahModel.Setting">
               <MappingFragment StoreEntitySet="Setting">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Key" ColumnName="Key" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UploadFile">
             <EntityTypeMapping TypeName="reddahModel.UploadFile">
               <MappingFragment StoreEntitySet="UploadFile">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Guid" ColumnName="Guid" />
-                <ScalarProperty Name="Format" ColumnName="Format" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserProfile">
             <EntityTypeMapping TypeName="reddahModel.UserProfile">
               <MappingFragment StoreEntitySet="UserProfile">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="Signature" ColumnName="Signature" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Signature" ColumnName="Signature" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_Membership">
             <EntityTypeMapping TypeName="reddahModel.webpages_Membership">
               <MappingFragment StoreEntitySet="webpages_Membership">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
-                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
-                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
-                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
-                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
-                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
                 <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_OAuthMembership">
             <EntityTypeMapping TypeName="reddahModel.webpages_OAuthMembership">
               <MappingFragment StoreEntitySet="webpages_OAuthMembership">
-                <ScalarProperty Name="Provider" ColumnName="Provider" />
-                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_Privileges">
             <EntityTypeMapping TypeName="reddahModel.webpages_Privileges">
               <MappingFragment StoreEntitySet="webpages_Privileges">
-                <ScalarProperty Name="PrivilegeId" ColumnName="PrivilegeId" />
                 <ScalarProperty Name="PrivilegeName" ColumnName="PrivilegeName" />
+                <ScalarProperty Name="PrivilegeId" ColumnName="PrivilegeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_PrivilegesInRoles">
             <EntityTypeMapping TypeName="reddahModel.webpages_PrivilegesInRoles">
               <MappingFragment StoreEntitySet="webpages_PrivilegesInRoles">
-                <ScalarProperty Name="PrivilegeId" ColumnName="PrivilegeId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="PrivilegeId" ColumnName="PrivilegeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_Roles">
             <EntityTypeMapping TypeName="reddahModel.webpages_Roles">
               <MappingFragment StoreEntitySet="webpages_Roles">
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_UsersInRoles">
             <EntityTypeMapping TypeName="reddahModel.webpages_UsersInRoles">
               <MappingFragment StoreEntitySet="webpages_UsersInRoles">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Message">
             <EntityTypeMapping TypeName="reddahModel.Message">
               <MappingFragment StoreEntitySet="Message">
-                <ScalarProperty Name="From" ColumnName="From" />
-                <ScalarProperty Name="To" ColumnName="To" />
-                <ScalarProperty Name="Msg" ColumnName="Msg" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="From" ColumnName="From" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserArticle">
             <EntityTypeMapping TypeName="reddahModel.UserArticle">
               <MappingFragment StoreEntitySet="UserArticle">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserFriend">
             <EntityTypeMapping TypeName="reddahModel.UserFriend">
               <MappingFragment StoreEntitySet="UserFriend">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Watch" ColumnName="Watch" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
