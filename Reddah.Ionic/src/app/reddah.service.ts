@@ -56,6 +56,13 @@ export class ReddahService {
   addTimeline(formData: FormData): Observable<any> {
 
     formData.append('jwt', this.getCurrentJwt());
+    const httpOptions = {
+        headers: new HttpHeaders({
+          //'enctype': 'multipart/form-data; boundary=----WebKitFormBoundaryuL67FWkv1CA',
+          'Content-Type': 'multipart/form-data', 
+          'Accept': 'application/json',
+        })
+    };
     return this.http.post<any>(this.addTimelineUrl, formData)
       .pipe(
         tap(heroes => this.log('add timeline')),
@@ -208,7 +215,6 @@ export class ReddahService {
  */
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 

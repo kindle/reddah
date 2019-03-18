@@ -24,14 +24,13 @@ export class AddTimelinePage implements OnInit {
     ) { }
 
     ngOnInit() {
-      //this.photos = [1,2,3,4,5,6,7,8,9]
     }
     
     texts = [];
     photos = [];
     yourThoughts: string;
     location = "";
-
+    debug = "";
     formData = new FormData();
 
     async submit(){
@@ -41,22 +40,32 @@ export class AddTimelinePage implements OnInit {
         });
         await loading.present();
 
-        //this.yourThoughts, this.photos.join('$$$'), this.location
         this.formData.append('thoughts', this.yourThoughts);
         this.formData.append('location', this.location);
+
+        //test
+        //this.formData.append('f1', '', 'file1');
+        //this.formData.append('f2', '', 'file2');
+        
+        //this.debug+=JSON.stringify(json);
         this.reddahService.addTimeline(this.formData)
         .subscribe(result => 
-        {
-            loading.dismiss();
-            if(result.Success==0)
-            { 
-                this.navController.navigateRoot('/timeline');
+            {
+                loading.dismiss();
+                this.debug+= JSON.stringify(result);
+                if(result.Success==0)
+                { 
+                    this.navController.navigateRoot('/timeline');
+                }
+                else{
+                  alert(result.Message);
+                }
+                
+            },
+            error=>{
+              this.debug+=JSON.stringify(error);
             }
-            else{
-              alert(result.Message);
-            }
-            
-        });
+        );
     }
 
     async addNewPhoto(ev: any) {
@@ -93,9 +102,11 @@ export class AddTimelinePage implements OnInit {
             this.texts.push(imageData);
             this.photos.push((<any>window).Ionic.WebView.convertFileSrc(imageData));
             this.prepareData(imageData);
+            //this.prepareData((<any>window).Ionic.WebView.convertFileSrc(imageData));
             //this.photos.push('data:image/jpeg;base64,' + imageData);
         }, (err) => {
             // Handle error
+            this.debug+="takeaphoto:"+JSON.stringify(err);
         });
         
     }
@@ -118,30 +129,32 @@ export class AddTimelinePage implements OnInit {
             this.texts.push(imageData);
             this.photos.push((<any>window).Ionic.WebView.convertFileSrc(imageData));
             this.prepareData(imageData);
+            //this.prepareData((<any>window).Ionic.WebView.convertFileSrc(imageData));
         }, (err) => {
-            // Handle error
+            this.debug+="fromlib:"+JSON.stringify(err);
         });
         
     }
 
-    prepareData(filePath) {
+    async prepareData(filePath) {
       this.file.resolveLocalFilesystemUrl(filePath)
           .then(entry => {
               ( <FileEntry> entry).file(file => this.readFile(file))
           })
           .catch(err => {
-              
+              this.debug+="prepare:"+JSON.stringify(err);
           });
     }
     
-    readFile(file: any) {
+    async readFile(file: any) {
         const reader = new FileReader();
         reader.onloadend = () => {
-            
+            this.debug+="readfile_start"+file.name;
             const imgBlob = new Blob([reader.result], {
                 type: file.type
             });
-            this.formData.append('file', imgBlob, file.name);
+            this.formData.append('file'+file.name, imgBlob, file.name);
+            this.debug+="readfile_complete"+file.name;
         };
         reader.readAsArrayBuffer(file);
     }
