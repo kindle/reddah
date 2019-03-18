@@ -50,7 +50,8 @@ namespace Reddah.Web.Login.Controllers
                         issuer: "https://login.reddah.com",
                         audience: user.UserName,
                         claims: claims,
-                        expires: DateTime.Now.AddMinutes(20),
+                        //expires: DateTime.Now.AddMinutes(20),
+                        expires: DateTime.Now.AddMonths(1),
                         signingCredentials: signinCredentials
                     );
 

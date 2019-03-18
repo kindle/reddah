@@ -16,6 +16,12 @@ using System.Web.Security;
 using System.Data.Entity;
 using System.Web.Http.Cors;
 using Reddah.Web.Login.Utilities;
+using System.Web;
+using System.Web.Hosting;
+using System.IO;
+using System.Net.Http;
+using System.Collections.Specialized;
+using System.Threading.Tasks;
 
 namespace Reddah.Web.Login.Controllers
 {
@@ -100,43 +106,102 @@ namespace Reddah.Web.Login.Controllers
 
         [Route("addtimeline")]
         [HttpPost]
-        public IHttpActionResult AddTimeline([FromBody]NewTimeline data)
+        public IHttpActionResult AddTimeline()
         {
-            if (String.IsNullOrWhiteSpace(data.Thoughts)&& String.IsNullOrWhiteSpace(data.Content))
-                return Ok(new ApiResult(1, "No thoughts and photos"));
-
-            JwtResult jwtResult = AuthController.ValidJwt(data.Jwt);
-
-            if (jwtResult.Success != 0)
-                return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
-
             try
             {
-                using (var db = new reddahEntities())
+                string jwt = HttpContext.Current.Request["jwt"];
+                string thoughts = HttpContext.Current.Request["thoughts"];
+                string location = HttpContext.Current.Request["location"];
+                List<string> imageUrls = new List<string>();
+
+                HttpFileCollection hfc = HttpContext.Current.Request.Files;
+
+                if (String.IsNullOrWhiteSpace(thoughts) && hfc.Count == 0)
+                    return Ok(new ApiResult(1, "No thoughts and photos"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                try
                 {
-                    db.Article.Add(new Article()
+                    using (var db = new reddahEntities())
                     {
-                        Title = data.Thoughts,
-                        Content = data.Content,
-                        CreatedOn = DateTime.Now,
-                        Count=0,
-                        GroupName = data.Location,
-                        UserName = jwtResult.JwtUser.User,
-                        Type = 1,
-                    });
+                        foreach (string rfilename in HttpContext.Current.Request.Files)
+                        {
+                            //upload image first
+                            string guid = Guid.NewGuid().ToString().Replace("-", "");
+                            string uploadedImagePath = "/uploadPhoto/";
+                            string uploadImageServerPath = "~" + uploadedImagePath;
 
-                    db.SaveChanges();
+                            HttpPostedFile upload = HttpContext.Current.Request.Files[rfilename];
 
+                            try
+                            {
+                                var fileFormat = upload.FileName.Substring(upload.FileName.LastIndexOf('.')).Replace(".", "");
+                                var fileName = Path.GetFileName(guid + "." + fileFormat);
+                                var filePhysicalPath = HostingEnvironment.MapPath(uploadImageServerPath + "/" + fileName);
+                                if (!Directory.Exists(HostingEnvironment.MapPath(uploadImageServerPath)))
+                                {
+                                    Directory.CreateDirectory(HostingEnvironment.MapPath(uploadImageServerPath));
+                                }
+                                upload.SaveAs(filePhysicalPath);
+                                var url = uploadedImagePath + fileName;
+
+
+                                UploadFile file = new UploadFile();
+                                file.Guid = guid;
+                                file.Format = fileFormat;
+                                file.UserName = jwtResult.JwtUser.User;
+                                file.CreatedOn = DateTime.Now;
+                                file.GroupName = "";
+                                file.Tag = "";
+                                db.UploadFile.Add(file);
+                                imageUrls.Add("https://login.reddah.com" + url);
+                            }
+                            catch (Exception ex)
+                            {
+                                
+                            }
+                        }
+
+
+                        //add timeline article
+                        db.Article.Add(new Article()
+                        {
+                            Title = thoughts,
+                            Content = string.Join("$$$", imageUrls),
+                            CreatedOn = DateTime.Now,
+                            Count = 0,
+                            GroupName = location,
+                            UserName = jwtResult.JwtUser.User,
+                            Type = 1,
+                        });
+
+                        db.SaveChanges();
+
+                    }
                 }
+                catch (Exception ex)
+                {
+                    Ok(new ApiResult(3, "Excepion:" + ex.Message.ToString()));
+                }
+                
+
+                return Ok(new ApiResult(0, "New Timeline Added"));
+
             }
-            catch (Exception ex)
+            catch(Exception ex1)
             {
-                Ok(new ApiResult(3, "Excepion:" + ex.Message.ToString()));
+                return Ok(new ApiResult(4, ex1.Message));
             }
 
-            return Ok(new ApiResult(0, "New Timeline Added"));
+            
 
         }
+        
 
 
     }
