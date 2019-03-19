@@ -18,8 +18,9 @@ import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 })
 export class TimeLinePage implements OnInit {
 
-    articles: Article[];
-    loadedIds: Number[];
+    articles = [];
+    loadedIds = [];
+    formData = new FormData();
 
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
     
@@ -59,9 +60,7 @@ export class TimeLinePage implements OnInit {
     }
     
     loadData(event) {
-        this.getHeroes();
-
-        console.log('Done');
+        this.getTimeline();
         event.target.complete();
     }
 
@@ -80,36 +79,17 @@ export class TimeLinePage implements OnInit {
     }
 
     async ngOnInit(){
-      let locale = this.localStorageService.retrieve("Reddah_Locale");
-      if(locale==null){
-        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-        const changeLocaleModal = await this.modalController.create({
-        component: LocalePage,
-        componentProps: { orgLocale: currentLocale }
-        });
-        
-        await changeLocaleModal.present();
-        const { data } = await changeLocaleModal.onDidDismiss();
-        if(data){
-            console.log(data)
-            //this.router.navigateByUrl('/tabs/(home:home)');
-            window.location.reload();
-        }
-      }
-
-      this.articles = [];
-      this.loadedIds = [];
       const loading = await this.loadingController.create({
         message: this.translateService.instant("Article.Loading"),
         spinner: 'circles',
       });
       await loading.present();
 
-      
-      this.reddah.getHeroes(this.loadedIds, locale, "promoted")
-        .subscribe(heroes => 
+      this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
+      this.reddah.getTimeline(this.formData)
+        .subscribe(timeline => 
             {
-                for(let article of heroes){
+                for(let article of timeline){
                   this.articles.push(article);
                   this.loadedIds.push(article.Id);  
                 }
@@ -118,14 +98,13 @@ export class TimeLinePage implements OnInit {
         );
     }
   
-    getHeroes():void {
-      let locale = this.localStorageService.retrieve("Reddah_Locale");
-      if(locale==null)
-        locale = "en-US"
-      this.reddah.getHeroes(this.loadedIds, locale, "promoted")
-        .subscribe(heroes => 
+    getTimeline():void {
+      this.formData.append("loadedIds", this.loadedIds.join(','));
+      this.reddah.getTimeline(this.formData)
+        .subscribe(timeline => 
             {
-                for(let article of heroes){
+                this.debug += JSON.stringify(timeline);
+                for(let article of timeline){
                   this.articles.push(article);
                   this.loadedIds.push(article.Id);  
                 }

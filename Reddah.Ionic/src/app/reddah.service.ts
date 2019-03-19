@@ -70,6 +70,18 @@ export class ReddahService {
       );
   }
   //******************************** */
+  private getTimelineUrl = 'https://login.reddah.com/api/article/gettimeline'; 
+
+  getTimeline(formData: FormData): Observable<any> {
+
+    formData.append('jwt', this.getCurrentJwt());
+    return this.http.post<any>(this.getTimelineUrl, formData)
+      .pipe(
+        tap(data => this.log('get timeline')),
+        catchError(this.handleError('get timeline', []))
+      );
+  }
+  //******************************** */
 
 
 

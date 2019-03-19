@@ -22,6 +22,7 @@ using System.IO;
 using System.Net.Http;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace Reddah.Web.Login.Controllers
 {
@@ -201,7 +202,53 @@ namespace Reddah.Web.Login.Controllers
             
 
         }
-        
+
+        [Route("gettimeline")]
+        [HttpPost]
+        public IHttpActionResult GetTimeline()
+        {
+            IEnumerable<Article> query = null;
+            
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int[] loadedIds = js.Deserialize<int[]>(HttpContext.Current.Request["loadedIds"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var pageCount = 10;
+                    
+                    int[] loaded = loadedIds == null ? new int[] { } : loadedIds;
+                    
+                    query = (from b in db.Article
+                                where b.Type==1 && b.UserName==jwtResult.JwtUser.User &&
+                                !(loaded).Contains(b.Id)
+                                orderby b.Id descending
+                                select b)
+                            .Take(pageCount);
+
+                    return Ok(query.ToList());
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
 
 
     }

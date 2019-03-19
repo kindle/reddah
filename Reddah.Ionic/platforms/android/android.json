@@ -62,11 +62,11 @@
             },
             {
               "xml": "<feature name=\"CropPlugin\"><param name=\"android-package\" value=\"com.jeduan.crop.CropPlugin\" /></feature>",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<feature name=\"FileTransfer\"><param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" /></feature>",
-              "count": 1
+              "count": 2
             }
           ]
         }
@@ -106,7 +106,7 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-              "count": 6
+              "count": 7
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
@@ -144,13 +144,13 @@
             },
             {
               "xml": "<activity android:name=\"com.soundcloud.android.crop.CropImageActivity\" />",
-              "count": 1
+              "count": 2
             }
           ],
           "/manifest": [
             {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-              "count": 1
+              "count": 2
             }
           ],
           "application": [

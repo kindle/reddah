@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-    <Identity Name="com.reddah.app.andriod" Publisher="CN=$username$" Version="1.1.31.0" />
+    <Identity Name="com.reddah.app.andriod" Publisher="CN=$username$" Version="1.1.54.0" />
     <mp:PhoneIdentity PhoneProductId="0e418eb0-3c6d-11e9-b9f3-cd9198eafe4e" PhonePublisherId="db093ed5-53b1-45f7-af72-751e8f36ab80" />
     <Properties>
         <DisplayName>Reddah</DisplayName>
