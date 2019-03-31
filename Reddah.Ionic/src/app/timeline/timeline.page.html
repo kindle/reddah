@@ -22,30 +22,42 @@
             <ion-label>User Name</ion-label>
             <img src="assets/icon/anonymous.png">
         </div>
-        {{debug}}
-        <ng-template ngFor let-article [ngForOf]="articles">
-            <ion-card class="welcome-card" (click)="view(article)">
+        <div *ngFor="let article of articles" style="display: flex;">
+            <div style="width:75px; padding: 0 10px; padding-top: 16px;">
+                <img src="assets/icon/anonymous.png" class="border: 1px solid gray;">
+            </div>
+            <div style="width:100%;padding: 5px;">
                 <ion-card-header>
-                    <ion-card-subtitle>
-                        <div [innerHTML]="summary(article.Title)"></div>
-                    </ion-card-subtitle>
+                    <ion-card-title>
+                        <div [innerHTML]="htmlDecode(article.UserName)"></div>
+                    </ion-card-title>
                     <ion-card-title>
                         <div [innerHTML]="htmlDecode(article.Title)"></div>
                     </ion-card-title>
                 </ion-card-header>
-                <ion-card-content>
-                    <ng-template ngFor let-image [ngForOf]="article.Content.split('$$$')">
-                        <ion-chip outline margin-bottom>
-                            <img src="{{image}}">
-                        </ion-chip>&nbsp;
-                    </ng-template>
+                <ion-card-content *ngIf="article.Content.split('$$$').length>0">
+                    <div style="display: grid;grid-template-columns: 120px 120px 120px;grid-template-rows: 120px 120px 120px;" *ngIf="article.Content.split('$$$').length>6">
+                        <div style="overflow: hidden;width:120px; height: 120px;" *ngFor="let image of article.Content.split('$$$')">
+                            <img src="{{image}}" style="margin:5px;">
+                        </div>
+                    </div>
+                    <div style="display: grid;grid-template-columns: 120px 120px 120px;grid-template-rows: 120px;" *ngIf="article.Content.split('$$$').length>=3&&article.Content.split('$$$').length<=6">
+                        <div style="overflow: hidden;width:120px; height: 120px;" *ngFor="let image of article.Content.split('$$$')">
+                            <img src="{{image}}" style="margin:5px;">
+                        </div>
+                    </div>
+                    
+                    <div *ngIf="article.Content.split('$$$').length<3">
+                        <img src="{{article.Content.split('$$$')[0]}}" style="width: 200px;">
+                    </div>
+                    
                 </ion-card-content>
                 <ion-item>
-                    <ion-note color="dark">{{article.CreatedOn}}</ion-note>
+                    <ion-note color="dark">{{article.CreatedOn | date: 'yyyy-MM-dd hh:mm:ss'}}</ion-note>
                     <ion-note color="dark" slot="end">{{article.Comments}} {{ 'Article.Comments' | translate }}</ion-note>
                 </ion-item>
-            </ion-card>
-        </ng-template>
+            </div>
+        </div>
         
         <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
             <ion-infinite-scroll-content
