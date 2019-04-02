@@ -116,21 +116,6 @@ export class TimeLinePage implements OnInit {
       let locale = this.localStorageService.retrieve("Reddah_Locale");
       console.log(locale);
     }
-    
-    
-    async view(article: Article){
-      const viewerModal = await this.modalController.create({
-        component: PostviewerPage,
-        componentProps: { article: article }
-      });
-      
-      await viewerModal.present();
-      const { data } = await viewerModal.onDidDismiss();
-      if(data){
-          console.log(data)
-      }
-
-  }
 
 
   @ViewChild('headerStart')
