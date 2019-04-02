@@ -37,6 +37,7 @@ import { TimeLinePage } from './timeline/timeline.page';
 import { ArticlePopPage } from './article-pop/article-pop.page'
 import { CommentPopPage } from './article-pop/comment-pop.page'
 import { TimelinePopPage } from './article-pop/timeline-pop.page'
+import { TimelineCommentPopPage } from './article-pop/timeline-comment-pop.page'
 import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -57,6 +58,7 @@ import { Crop } from '@ionic-native/crop/ngx';
     ArticlePopPage,
     CommentPopPage,
     TimelinePopPage,
+    TimelineCommentPopPage,
     ScanPage,
   ],
   entryComponents: [
@@ -68,6 +70,7 @@ import { Crop } from '@ionic-native/crop/ngx';
     ArticlePopPage,
     CommentPopPage,
     TimelinePopPage,
+    TimelineCommentPopPage,
     ScanPage,
   ],
   imports: [

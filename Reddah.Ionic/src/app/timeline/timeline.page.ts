@@ -10,6 +10,7 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { TimelinePopPage } from '../article-pop/timeline-pop.page';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
+import { TimelineCommentPopPage } from '../article-pop/timeline-comment-pop.page'
 
 @Component({
   selector: 'app-timeline',
@@ -201,5 +202,14 @@ export class TimeLinePage implements OnInit {
       }
   }
 
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: TimelineCommentPopPage,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
+  }
+  
 
 }
