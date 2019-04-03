@@ -67,3 +67,10 @@
         </ion-infinite-scroll>
     </div>
 </ion-content>
+<ion-footer *ngIf="showAddComment">
+    <ion-item margin-end>
+        <ion-input #newComment id="newComment" (click)="newComment(article.Id, -1)" placeholder="评论"></ion-input>
+        <ion-icon name="happy" size="medium" margin-end></ion-icon>
+        <ion-button (click)="send()" color="light">发送</ion-button>
+    </ion-item>
+</ion-footer>

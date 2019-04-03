@@ -22,8 +22,10 @@ export class TimeLinePage implements OnInit {
     articles = [];
     loadedIds = [];
     formData = new FormData();
+    showAddComment = false;
 
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
+    @ViewChild('newComment') newComment;
     
     htmlDecode(text: string) {
       var temp = document.createElement("div");
@@ -129,6 +131,7 @@ export class TimeLinePage implements OnInit {
 
   onScroll($event) {
 
+      this.showAddComment = false;
       //console.log($event.detail.scrollTop+" "+this.timelineCover.nativeElement.scrollHeight)
       let offset = this.timelineCover.nativeElement.scrollHeight - $event.detail.scrollTop;
       if(offset>=250)
@@ -208,7 +211,18 @@ export class TimeLinePage implements OnInit {
       event: ev,
       translucent: true
     });
-    return await popover.present();
+    await popover.present();
+    const { data } = await popover.onDidDismiss();
+    if(data){
+        if(data==1)
+          alert('like');
+        
+        if(data==2)
+          this.showAddComment = true;
+          setTimeout(() => {
+            this.newComment.setFocus();
+          },150);
+    }
   }
   
 
