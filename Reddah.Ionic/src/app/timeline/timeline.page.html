@@ -38,16 +38,16 @@
                 <ion-card-content *ngIf="article.Content.split('$$$').length>0" no-padding>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>6">
                         <div class="container" *ngFor="let image of article.Content.split('$$$')">
-                            <img src="{{image}}" class="picture">
+                            <img src="{{image}}" class="picture" (click)="viewer(image)">
                         </div>
                     </div>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>=3&&article.Content.split('$$$').length<=6">
                         <div class="container" *ngFor="let image of article.Content.split('$$$')">
-                            <img src="{{image}}" class="picture">
+                            <img src="{{image}}" class="picture" (click)="viewer(image)">
                         </div>
                     </div>
                     <div *ngIf="article.Content.split('$$$').length<3">
-                        <img src="{{article.Content.split('$$$')[0]}}" style="width: 200px;">
+                        <img src="{{article.Content.split('$$$')[0]}}" style="width: 200px;" (click)="viewer(article.Content.split('$$$')[0])">
                     </div>
                 </ion-card-content>
                 

@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { TimelinePopPage } from '../article-pop/timeline-pop.page';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { TimelineCommentPopPage } from '../article-pop/timeline-comment-pop.page'
+import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 
 @Component({
   selector: 'app-timeline',
@@ -223,6 +224,24 @@ export class TimeLinePage implements OnInit {
             this.newComment.setFocus();
           },150);
     }
+  }
+
+  async viewer(imageSrc){
+      //PhotoViewer.show(target.src, 'view photo', options);
+      //PhotoViewer.show(target.src);
+      const modal = await this.modalController.create({
+        component: ImageViewerComponent,
+        componentProps: {
+          imgSource: imageSrc,
+          imgTitle: "",
+          imgDescription: ""
+        },
+        cssClass: 'modal-fullscreen',
+        keyboardClose: true,
+        showBackdrop: true
+      });
+  
+      return await modal.present();
   }
   
 
