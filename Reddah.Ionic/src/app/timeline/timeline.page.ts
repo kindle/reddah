@@ -187,7 +187,6 @@ export class TimeLinePage implements OnInit {
       const { data } = await popover.onDidDismiss();
       if(data==1)//photo
       {
-          alert('take a photo');
           this.navController.navigateRoot('/post');
           
       }

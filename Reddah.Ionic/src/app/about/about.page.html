@@ -33,6 +33,14 @@
     </ion-card-header>
     </ion-card>
     <img [src]="image" *ngIf="image" />
+    <ion-card>
+      <ion-card-header>
+          <ion-label>Clear Cache</ion-label>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button (click)="clearCache()">Clear</ion-button>
+      </ion-card-content>
+    </ion-card>
 </ion-content>
 
 

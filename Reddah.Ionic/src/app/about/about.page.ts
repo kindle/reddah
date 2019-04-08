@@ -13,6 +13,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../reddah.service';
 import { AuthService }      from '../auth.service';
 import { TranslateService } from '@ngx-translate/core';
+import { CacheService } from "ionic-cache";
 
 @Component({
   selector: 'app-about',
@@ -38,6 +39,7 @@ export class AboutPage implements OnInit {
         private service: ReddahService,
         public authService: AuthService,
         public translateService: TranslateService,
+        private cacheService: CacheService,
     ) {}
 
     ngOnInit() {
@@ -78,6 +80,10 @@ export class AboutPage implements OnInit {
            alert("error "+JSON.stringify(err))
           });
         
+    }
+
+    async clearCache(){
+        this.cacheService.clearAll();
     }
 
     
