@@ -8,6 +8,7 @@ import { LocalePage } from '../locale/locale.page';
 import { PostviewerPage } from '../postviewer/postviewer.page';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { CacheService } from "ionic-cache";
 
 @Component({
   selector: 'app-home',
@@ -69,7 +70,9 @@ export class HomePage implements OnInit {
       public navController: NavController,
 
       public modalController: ModalController,
-      private localStorageService: LocalStorageService){
+      private localStorageService: LocalStorageService,
+      private cacheService: CacheService,
+      ){
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         console.log(locale);
     }
@@ -100,8 +103,10 @@ export class HomePage implements OnInit {
       });
       await loading.present();
 
-      
-      this.reddah.getHeroes(this.loadedIds, locale, "promoted")
+      let cacheKey = "this.reddah.getHeroes" + JSON.stringify(this.loadedIds) + locale;
+      let request = this.reddah.getHeroes(this.loadedIds, locale, "promoted");
+
+      this.cacheService.loadFromObservable(cacheKey, request)
         .subscribe(heroes => 
             {
                 for(let article of heroes){
@@ -117,7 +122,11 @@ export class HomePage implements OnInit {
       let locale = this.localStorageService.retrieve("Reddah_Locale");
       if(locale==null)
         locale = "en-US"
-      this.reddah.getHeroes(this.loadedIds, locale, "promoted")
+
+      let cacheKey = "this.reddah.getHeroes" + JSON.stringify(this.loadedIds) + locale;
+      let request = this.reddah.getHeroes(this.loadedIds, locale, "promoted");
+
+      this.cacheService.loadFromObservable(cacheKey, request)
         .subscribe(heroes => 
             {
                 for(let article of heroes){

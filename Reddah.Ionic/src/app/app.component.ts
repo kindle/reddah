@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Toast } from '@ionic-native/toast/ngx';
+import { ImageLoaderConfigService } from 'ionic-image-loader';
+import { CacheService } from "ionic-cache";
 
 @Component({
   selector: 'app-root',
@@ -25,9 +27,25 @@ export class AppComponent {
     private popoverCtrl: PopoverController,
     private toast: Toast,
     private router: Router,
+    private imageLoaderConfigService: ImageLoaderConfigService,
+    private cacheService: CacheService,
   ) {
     this.initializeApp();
-    
+
+    this.imageLoaderConfigService.useImageTag(true);
+    this.imageLoaderConfigService.enableSpinner(false);
+    this.imageLoaderConfigService.setConcurrency(10);
+    //this.imageLoaderConfigService.setCacheDirectoryName('redda.com.cache');
+    this.imageLoaderConfigService.setMaximumCacheSize(20 * 1024 * 1024 * 1024); // set max size to 20GB
+    this.imageLoaderConfigService.setMaximumCacheAge(365 * 24 * 60 * 60 * 1000); // 365 days
+    //this.imageLoaderConfigService.enableFallbackAsPlaceholder(true);
+    //this.imageLoaderConfigService.setFallbackUrl('assets/fallback.png');
+    //const headers = new HttpHeaders()
+    //              .set("Authorization", "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA==");
+    //this.imageLoaderConfig.setHttpHeaders(headers);
+    this.cacheService.enableCache(true);
+    this.cacheService.setDefaultTTL(60 * 60); //set default cache TTL for 1 hour
+
     let locale = this.localStorageService.retrieve("Reddah_Locale");
     this.translate.setDefaultLang(locale);
 

@@ -5,8 +5,8 @@ import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { Location } from '@angular/common';
 import { AddCommentPage } from '../add-comment/add-comment.page';
 import { ReddahService } from '../reddah.service';
-
 import { ArticlePopPage } from '../article-pop/article-pop.page';
+import { CacheService } from "ionic-cache";
 
 @Component({
   selector: 'app-postviewer',
@@ -19,7 +19,8 @@ export class PostviewerPage implements OnInit {
   constructor(public modalController: ModalController,
     private location: Location,
     private reddah : ReddahService,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private cacheService: CacheService,
     ) { }
 
   commentsData: any;
@@ -38,7 +39,11 @@ export class PostviewerPage implements OnInit {
   }
 
   loadComments(){
-    this.reddah.getComments(this.article.Id)
+    let cacheKey = "this.reddah.getComments" + this.article.Id;
+    let request = this.reddah.getComments(this.article.Id)
+
+    this.cacheService.loadFromObservable(cacheKey, request)
+    
       .subscribe(data => 
         {
             this.commentsData = data;

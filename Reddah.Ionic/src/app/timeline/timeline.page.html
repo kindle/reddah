@@ -16,15 +16,15 @@
     </div>
     <div>   
         <div class="timelineCover" #timelineCover>
-            <img src="assets/icon/timg.jpg">
+            <img-loader src="assets/icon/timg.jpg"></img-loader>
         </div>
         <div class="timelineAvatar">
             <ion-label>User Name</ion-label>
-            <img src="assets/icon/anonymous.png">
+            <img-loader src="assets/icon/anonymous.png"></img-loader>
         </div>
         <div *ngFor="let article of articles" style="display: flex; border-bottom: 1px solid lightgrey; margin-bottom: 15px;padding-bottom: 10px;">
             <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
-                <img src="assets/icon/anonymous.png" class="border: 1px solid gray;">
+                <img-loader src="assets/icon/anonymous.png" class="border: 1px solid gray;"></img-loader>
             </div>
             <div style="width:100%;border: 0px solid red;">
                 <ion-card-header no-padding>
@@ -38,16 +38,16 @@
                 <ion-card-content *ngIf="article.Content.split('$$$').length>0" no-padding>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>6">
                         <div class="container" *ngFor="let image of article.Content.split('$$$')">
-                            <img src="{{image}}" class="picture" (click)="viewer(image)">
+                            <img-loader src="{{image}}" class="picture" (click)="viewer(image)"></img-loader>
                         </div>
                     </div>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>=3&&article.Content.split('$$$').length<=6">
                         <div class="container" *ngFor="let image of article.Content.split('$$$')">
-                            <img src="{{image}}" class="picture" (click)="viewer(image)">
+                            <img-loader src="{{image}}" class="picture" (click)="viewer(image)"></img-loader>
                         </div>
                     </div>
                     <div *ngIf="article.Content.split('$$$').length<3">
-                        <img src="{{article.Content.split('$$$')[0]}}" style="width: 200px;" (click)="viewer(article.Content.split('$$$')[0])">
+                        <img-loader src="{{article.Content.split('$$$')[0]}}" class="singlePicture" (click)="viewer(article.Content.split('$$$')[0])"></img-loader>
                     </div>
                 </ion-card-content>
                 

@@ -43,6 +43,9 @@ import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { Crop } from '@ionic-native/crop/ngx';
+import { IonicImageLoader } from 'ionic-image-loader';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { CacheModule } from "ionic-cache";
 
 @NgModule({
   declarations: [
@@ -79,6 +82,8 @@ import { Crop } from '@ionic-native/crop/ngx';
     IonicModule.forRoot(), 
     AppRoutingModule,
     HttpClientModule,
+    IonicImageLoader.forRoot(),
+    CacheModule.forRoot(),
     NgxWebstorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -89,7 +94,6 @@ import { Crop } from '@ionic-native/crop/ngx';
   })
   ],
   exports:[
-    
   ],
   providers: [
     AppVersion,
@@ -100,6 +104,7 @@ import { Crop } from '@ionic-native/crop/ngx';
     AuthService,
     Camera,
     File,
+    WebView,
     FileTransfer,
     Crop,
     QRScanner,
@@ -115,6 +120,7 @@ import { Crop } from '@ionic-native/crop/ngx';
     ActionSheetController,
     PopoverController,
     MenuController,
+    IonicImageLoader,
   ],
   bootstrap: [AppComponent]
 })

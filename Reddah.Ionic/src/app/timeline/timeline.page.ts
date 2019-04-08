@@ -12,6 +12,8 @@ import { TimelinePopPage } from '../article-pop/timeline-pop.page';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { TimelineCommentPopPage } from '../article-pop/timeline-comment-pop.page'
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
+import { IonicImageLoader } from 'ionic-image-loader';
+import { CacheService } from "ionic-cache";
 
 @Component({
   selector: 'app-timeline',
@@ -77,6 +79,7 @@ export class TimeLinePage implements OnInit {
       private localStorageService: LocalStorageService,
       private popoverController: PopoverController,
       private photoLibrary: PhotoLibrary,
+      private cacheService: CacheService,
       ){
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         console.log(locale);
@@ -90,30 +93,39 @@ export class TimeLinePage implements OnInit {
       await loading.present();
 
       this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
-      this.reddah.getTimeline(this.formData)
+
+      let cacheKey = "this.reddah.getTimeline" + JSON.stringify(this.formData);
+      let request = this.reddah.getTimeline(this.formData);
+
+      this.cacheService.loadFromObservable(cacheKey, request)
         .subscribe(timeline => 
-            {
-                for(let article of timeline){
-                  this.articles.push(article);
-                  this.loadedIds.push(article.Id);  
-                }
-                loading.dismiss();
-            }
-        );
+          {
+              for(let article of timeline){
+                this.articles.push(article);
+                this.loadedIds.push(article.Id);
+              }
+              loading.dismiss();
+          }
+      );
     }
   
     getTimeline():void {
       this.formData.append("loadedIds", this.loadedIds.join(','));
-      this.reddah.getTimeline(this.formData)
+      
+      let cacheKey = "this.reddah.getTimeline" + JSON.stringify(this.formData);
+      let request = this.reddah.getTimeline(this.formData);
+      
+      this.cacheService.loadFromObservable(cacheKey, request)
         .subscribe(timeline => 
-            {
-                this.debug += JSON.stringify(timeline);
-                for(let article of timeline){
-                  this.articles.push(article);
-                  this.loadedIds.push(article.Id);  
-                }
-            }
-        );
+          {
+              this.debug += JSON.stringify(timeline);
+              for(let article of timeline){
+                this.articles.push(article);
+                this.loadedIds.push(article.Id);
+              }
+          }
+      );
+
     }
 
     ionViewDidLoad() {
