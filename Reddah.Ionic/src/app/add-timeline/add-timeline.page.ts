@@ -5,6 +5,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../reddah.service';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File, FileEntry } from '@ionic-native/file/ngx';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-add-timeline',
@@ -20,11 +21,22 @@ export class AddTimelinePage implements OnInit {
       private fileTransfer: FileTransfer,
       private file: File,
       private loadingController: LoadingController,
-
-    ) { }
-
-    ngOnInit() {
+      private activatedRoute: ActivatedRoute
+    ) { 
+        this.activatedRoute.queryParams.subscribe((params: Params) => {
+            let data = params['data'];
+            if(data==1)//photo
+            {
+                this.takePhoto();
+            }
+            else//from library
+            {
+                this.fromLib();
+            }
+       });
     }
+
+    ngOnInit() {}
     
     texts = [];
     photos = [];

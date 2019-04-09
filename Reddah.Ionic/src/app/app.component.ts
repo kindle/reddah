@@ -44,7 +44,7 @@ export class AppComponent {
     //              .set("Authorization", "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA==");
     //this.imageLoaderConfig.setHttpHeaders(headers);
     this.cacheService.enableCache(true);
-    this.cacheService.setDefaultTTL(60 * 60); //set default cache TTL for 1 hour
+    this.cacheService.setDefaultTTL(365 * 24 * 60 * 60); //set default cache TTL for 365 days
 
     let locale = this.localStorageService.retrieve("Reddah_Locale");
     this.translate.setDefaultLang(locale);

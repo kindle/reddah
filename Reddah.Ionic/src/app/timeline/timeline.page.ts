@@ -14,6 +14,7 @@ import { TimelineCommentPopPage } from '../article-pop/timeline-comment-pop.page
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { CacheService } from "ionic-cache";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-timeline',
@@ -80,6 +81,7 @@ export class TimeLinePage implements OnInit {
       private popoverController: PopoverController,
       private photoLibrary: PhotoLibrary,
       private cacheService: CacheService,
+      private router: Router,
       ){
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         console.log(locale);
@@ -185,36 +187,11 @@ export class TimeLinePage implements OnInit {
       });
       await popover.present();
       const { data } = await popover.onDidDismiss();
-      if(data==1)//photo
-      {
-          this.navController.navigateRoot('/post');
-          
-      }
-      else//from library
-      {
-          this.photoLibrary.requestAuthorization().then(() => {
-            this.photoLibrary.getLibrary().subscribe({
-              next: library => {
-                library.forEach(function(libraryItem) {
-                  this.debug += libraryItem.photoURL;
-                  console.log(libraryItem.id);          // ID of the photo
-                  console.log(libraryItem.photoURL);    // Cross-platform access to photo
-                  console.log(libraryItem.thumbnailURL);// Cross-platform access to thumbnail
-                  console.log(libraryItem.fileName);
-                  console.log(libraryItem.width);
-                  console.log(libraryItem.height);
-                  console.log(libraryItem.creationDate);
-                  console.log(libraryItem.latitude);
-                  console.log(libraryItem.longitude);
-                  console.log(libraryItem.albumIds);    // array of ids of appropriate AlbumItem, only of includeAlbumsData was used
-                });
-              },
-              error: err => { this.debug += err; console.log('could not get photos'); },
-              complete: () => { this.debug += "done"; console.log('done getting photos'); }
-            });
-          })
-          .catch(err => {this.debug += err; console.log('permissions weren\'t granted')});
-      }
+      this.router.navigate(['/post'], {
+        queryParams: {
+          data: data
+        }
+      });
   }
 
   async presentPopover(ev: any) {
