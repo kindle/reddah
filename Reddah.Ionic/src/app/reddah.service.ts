@@ -82,7 +82,18 @@ export class ReddahService {
       );
   }
   //******************************** */
+  private timelineLikeUrl = 'https://login.reddah.com/api/article/like'; 
 
+  like(formData: FormData): Observable<any> {
+
+    formData.append('jwt', this.getCurrentJwt());
+    return this.http.post<any>(this.timelineLikeUrl, formData)
+      .pipe(
+        tap(data => this.log('set like')),
+        catchError(this.handleError('set like', []))
+      );
+  }
+  //******************************** */
 
 
 

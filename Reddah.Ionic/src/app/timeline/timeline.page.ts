@@ -194,7 +194,7 @@ export class TimeLinePage implements OnInit {
       });
   }
 
-  async presentPopover(ev: any) {
+  async presentPopover(ev: any, id: any) {
     const popover = await this.popoverController.create({
       component: TimelineCommentPopPage,
       event: ev,
@@ -204,13 +204,30 @@ export class TimeLinePage implements OnInit {
     const { data } = await popover.onDidDismiss();
     if(data){
         if(data==1)
-          alert('like');
-        
+        {
+            this.formData.append("action", "add");
+            this.formData.append("id", id+"");
+            this.reddah.like(this.formData)
+              .subscribe(data => 
+                {
+                    alert(JSON.stringify(data));
+                }
+            );
+        }
+
         if(data==2)
+        {
+            this.formData.append("action", 'remove');
+            this.formData.append("id", id+"");
+            this.reddah.like(this.formData);
+        }
+        
+        if(data==3){
           this.showAddComment = true;
           setTimeout(() => {
             this.newComment.setFocus();
           },150);
+        }
     }
   }
 

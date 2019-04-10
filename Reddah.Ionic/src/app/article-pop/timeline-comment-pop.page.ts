@@ -7,8 +7,10 @@ import { PopoverController } from '@ionic/angular';
         <ion-item>
           <ion-icon (click)="close(1)" color="danger" name="heart-empty" size="medium"></ion-icon>
           <ion-text (click)="close(1)" margin-end>赞</ion-text>
-          <ion-icon (click)="close(2)" color="primary" name="chatboxes" size="medium"></ion-icon>
-          <ion-text (click)="close(2)" margin-end>评论</ion-text>
+          <ion-icon (click)="close(2)" color="danger" name="heart-empty" size="medium"></ion-icon>
+          <ion-text (click)="close(2)" margin-end>取消</ion-text>
+          <ion-icon (click)="close(3)" color="primary" name="chatboxes" size="medium"></ion-icon>
+          <ion-text (click)="close(3)" margin-end>评论</ion-text>
         </ion-item>     
   `
 })
