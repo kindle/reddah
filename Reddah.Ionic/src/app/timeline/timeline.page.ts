@@ -25,7 +25,7 @@ export class TimeLinePage implements OnInit {
 
     articles = [];
     loadedIds = [];
-    formData = new FormData();
+    formData: FormData;
     showAddComment = false;
 
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
@@ -71,6 +71,10 @@ export class TimeLinePage implements OnInit {
         event.target.complete();
     }
 
+    goback(){
+        this.navController.goBack(true);
+    }
+
     constructor(private reddah : ReddahService,
       public loadingController: LoadingController,
       public translateService: TranslateService,
@@ -93,7 +97,7 @@ export class TimeLinePage implements OnInit {
         spinner: 'circles',
       });
       await loading.present();
-
+      this.formData = new FormData();
       this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
 
       let cacheKey = "this.reddah.getTimeline" + JSON.stringify(this.formData);
@@ -112,6 +116,7 @@ export class TimeLinePage implements OnInit {
     }
   
     getTimeline():void {
+      this.formData = new FormData();
       this.formData.append("loadedIds", this.loadedIds.join(','));
       
       let cacheKey = "this.reddah.getTimeline" + JSON.stringify(this.formData);
@@ -194,9 +199,11 @@ export class TimeLinePage implements OnInit {
       });
   }
 
-  async presentPopover(ev: any, id: any) {
+  async presentPopover(ev: any, id: any, groupNames: string) {
+    let liked = groupNames.split(',').includes(this.reddah.getCurrentUser());
     const popover = await this.popoverController.create({
       component: TimelineCommentPopPage,
+      componentProps: { liked: liked },
       event: ev,
       translucent: true
     });
@@ -205,30 +212,76 @@ export class TimeLinePage implements OnInit {
     if(data){
         if(data==1)
         {
-            this.formData.append("action", "add");
-            this.formData.append("id", id+"");
-            this.reddah.like(this.formData)
+            let likeAddFormData = new FormData();
+            likeAddFormData.append("action", "add");
+            likeAddFormData.append("id", id+"");
+            this.reddah.like(likeAddFormData)
               .subscribe(data => 
                 {
-                    alert(JSON.stringify(data));
+                    console.log(JSON.stringify(data));
+                    let cacheKey = "this.reddah.getTimeline" + JSON.stringify(this.formData);
+                    this.cacheService.removeItem(cacheKey);
                 }
             );
+            
+            this.renderUiLike(id, "add");
+           
         }
 
         if(data==2)
         {
-            this.formData.append("action", 'remove');
-            this.formData.append("id", id+"");
-            this.reddah.like(this.formData);
+            let likeRemoveFormData = new FormData();
+            likeRemoveFormData.append("action", "remove");
+            likeRemoveFormData.append("id", id+"");
+            this.reddah.like(likeRemoveFormData)  
+              .subscribe(data => 
+                {
+                    console.log(JSON.stringify(data));
+                    let cacheKey = "this.reddah.getTimeline" + JSON.stringify(this.formData);
+                    this.cacheService.removeItem(cacheKey);
+                }
+            );
+            this.renderUiLike(id, "remove");
         }
         
         if(data==3){
-          this.showAddComment = true;
-          setTimeout(() => {
-            this.newComment.setFocus();
-          },150);
+            this.showAddComment = true;
+            setTimeout(() => {
+              this.newComment.setFocus();
+            },150);
         }
     }
+  }
+
+  renderUiLike(id: number, action: string){
+      this.articles.forEach((item, index, alias)=> {
+          if(item.Id==id){
+              let currentUser = this.reddah.getCurrentUser();
+              if(action=="add"){
+                  if(item.GroupName.length==0){
+                      item.GroupName = currentUser;
+                  }
+                  else{
+                      item.GroupName += "," + currentUser;
+                  }
+              }
+
+              if(action=="remove"){
+                  if(item.GroupName==currentUser)
+                      item.GroupName="";
+                  else {
+                      let groupNames = item.GroupName.split(',');
+                      groupNames.forEach((gitem, gindex, galias)=>{
+                          if(gitem==currentUser){
+                              groupNames.splice(0, gindex);
+                          }
+                      });
+                  }
+              }
+              
+              return false;
+          }
+      });
   }
 
   async viewer(imageSrc){

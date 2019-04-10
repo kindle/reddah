@@ -2,14 +2,14 @@
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
     <div class="headerStart" #headerStart>
         <ion-item color="transparent" lines="none">
-            <ion-icon name="arrow-round-back" slot="start"></ion-icon>
+            <ion-icon name="arrow-round-back" slot="start" (click)="goback()"></ion-icon>
             <ion-label></ion-label>
             <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll>
         <ion-item color="primary">
-            <ion-icon name="arrow-round-back" slot="start"></ion-icon>
+            <ion-icon name="arrow-round-back" slot="start" (click)="goback()"></ion-icon>
             <ion-label>关注</ion-label>
             <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
@@ -35,7 +35,7 @@
                 <ion-item no-padding lines="none">
                     <div [innerHTML]="htmlDecode(article.Title)"></div>
                 </ion-item>
-                <ion-card-content *ngIf="article.Content.split('$$$').length>0" no-padding>
+                <ion-card-content style="display:'';" *ngIf="article.Content.split('$$$').length>0" no-padding>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>6">
                         <div class="container" *ngFor="let image of article.Content.split('$$$')">
                             <img-loader src="{{image}}" class="picture" (click)="viewer(image)"></img-loader>
@@ -54,9 +54,10 @@
 
                 <ion-item no-padding lines="none">
                     <ion-note color="dark">{{article.CreatedOn | date: 'yyyy-MM-dd hh:mm:ss'}}</ion-note>
-                    <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id)"></ion-icon>
+                    <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
                 </ion-item>
                 <ion-item no-padding lines="none">
+                    <ion-icon name="heart-empty" size="small" *ngIf="article.GroupName"></ion-icon>
                     {{article.GroupName}}
                 </ion-item>
             </div>
