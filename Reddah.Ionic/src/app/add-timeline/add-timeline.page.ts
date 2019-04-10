@@ -75,8 +75,7 @@ export class AddTimelinePage implements OnInit {
                 this.debug+= JSON.stringify(result);
                 if(result.Success==0)
                 { 
-                    let cacheKey = "this.reddah.getTimeline";
-                    this.cacheService.removeItem(cacheKey);
+                    this.cacheService.clearGroup("TimeLinePage");
                     this.router.navigate(['/timeline'], {
                         queryParams: {
                             refresh: true//no use but you can sent the parameter

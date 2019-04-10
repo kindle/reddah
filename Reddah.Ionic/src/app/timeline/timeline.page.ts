@@ -100,11 +100,6 @@ export class TimeLinePage implements OnInit {
       });
     }
 
-    clearCache(cacheKey: string){
-        console.log(`removed cache key:{0}`, cacheKey);
-        this.cacheService.removeItem(cacheKey);
-    }
-
     async ngOnInit(){
       const loading = await this.loadingController.create({
         message: this.translateService.instant("Article.Loading"),
@@ -114,11 +109,11 @@ export class TimeLinePage implements OnInit {
       this.formData = new FormData();
       this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
 
-      let cacheKey = "this.reddah.getTimeline" + this.loadedIds.join(',');
+      let cacheKey = "this.reddah.getTimeline";
       console.log(`cacheKey:{0}`,cacheKey);
       let request = this.reddah.getTimeline(this.formData);
 
-      this.cacheService.loadFromObservable(cacheKey, request)
+      this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage")
         .subscribe(timeline => 
           {
               for(let article of timeline){
@@ -138,7 +133,7 @@ export class TimeLinePage implements OnInit {
       console.log(`loadmore_cacheKey:{0}`, cacheKey);
       let request = this.reddah.getTimeline(this.formData);
       
-      this.cacheService.loadFromObservable(cacheKey, request)
+      this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage")
         .subscribe(timeline => 
           {
               //console.log(JSON.stringify(timeline));
@@ -233,8 +228,7 @@ export class TimeLinePage implements OnInit {
               .subscribe(data => 
                 {
                     console.log(JSON.stringify(data));
-                    let cacheKey = "this.reddah.getTimeline" + JSON.stringify(this.formData);
-                    this.clearCache(cacheKey);
+                    this.cacheService.clearGroup("TimeLinePage");
                 }
             );
             
@@ -251,8 +245,7 @@ export class TimeLinePage implements OnInit {
               .subscribe(data => 
                 {
                     console.log(JSON.stringify(data));
-                    let cacheKey = "this.reddah.getTimeline" + JSON.stringify(this.formData);
-                    this.clearCache(cacheKey);
+                    this.cacheService.clearGroup("TimeLinePage");
                 }
             );
             this.renderUiLike(id, "remove");
@@ -275,21 +268,23 @@ export class TimeLinePage implements OnInit {
                   if(item.GroupName.length==0){
                       item.GroupName = currentUser;
                   }
-                  else{
+                  else {
                       item.GroupName += "," + currentUser;
                   }
               }
 
               if(action=="remove"){
-                  if(item.GroupName==currentUser)
+                  if(item.GroupName==currentUser){
                       item.GroupName="";
+                  }
                   else {
                       let groupNames = item.GroupName.split(',');
                       groupNames.forEach((gitem, gindex, galias)=>{
                           if(gitem==currentUser){
-                              groupNames.splice(0, gindex);
+                              groupNames.splice(gindex, 1);
                           }
                       });
+                      item.GroupName = groupNames.join(',');
                   }
               }
               
