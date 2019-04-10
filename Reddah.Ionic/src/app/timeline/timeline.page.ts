@@ -14,7 +14,7 @@ import { TimelineCommentPopPage } from '../article-pop/timeline-comment-pop.page
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { CacheService } from "ionic-cache";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-timeline',
@@ -86,9 +86,23 @@ export class TimeLinePage implements OnInit {
       private photoLibrary: PhotoLibrary,
       private cacheService: CacheService,
       private router: Router,
+      private activatedRoute: ActivatedRoute,
       ){
-        let locale = this.localStorageService.retrieve("Reddah_Locale");
-        console.log(locale);
+        //let locale = this.localStorageService.retrieve("Reddah_Locale");
+        
+        this.activatedRoute.queryParams.subscribe((params: Params) => {
+            let refresh = params['refresh'];
+            
+            if(refresh)//refresh after add timeline
+            {
+                
+            }
+      });
+    }
+
+    clearCache(cacheKey: string){
+        console.log(`removed cache key:{0}`, cacheKey);
+        this.cacheService.removeItem(cacheKey);
     }
 
     async ngOnInit(){
@@ -100,7 +114,8 @@ export class TimeLinePage implements OnInit {
       this.formData = new FormData();
       this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
 
-      let cacheKey = "this.reddah.getTimeline" + JSON.stringify(this.formData);
+      let cacheKey = "this.reddah.getTimeline" + this.loadedIds.join(',');
+      console.log(`cacheKey:{0}`,cacheKey);
       let request = this.reddah.getTimeline(this.formData);
 
       this.cacheService.loadFromObservable(cacheKey, request)
@@ -117,15 +132,16 @@ export class TimeLinePage implements OnInit {
   
     getTimeline():void {
       this.formData = new FormData();
-      this.formData.append("loadedIds", this.loadedIds.join(','));
+      this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
       
-      let cacheKey = "this.reddah.getTimeline" + JSON.stringify(this.formData);
+      let cacheKey = "this.reddah.getTimeline" + this.loadedIds.join(',');
+      console.log(`loadmore_cacheKey:{0}`, cacheKey);
       let request = this.reddah.getTimeline(this.formData);
       
       this.cacheService.loadFromObservable(cacheKey, request)
         .subscribe(timeline => 
           {
-              this.debug += JSON.stringify(timeline);
+              //console.log(JSON.stringify(timeline));
               for(let article of timeline){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
@@ -180,8 +196,6 @@ export class TimeLinePage implements OnInit {
       }
   }
 
-
-
   debug="";
 
   async post(ev: any) {
@@ -220,7 +234,7 @@ export class TimeLinePage implements OnInit {
                 {
                     console.log(JSON.stringify(data));
                     let cacheKey = "this.reddah.getTimeline" + JSON.stringify(this.formData);
-                    this.cacheService.removeItem(cacheKey);
+                    this.clearCache(cacheKey);
                 }
             );
             
@@ -238,7 +252,7 @@ export class TimeLinePage implements OnInit {
                 {
                     console.log(JSON.stringify(data));
                     let cacheKey = "this.reddah.getTimeline" + JSON.stringify(this.formData);
-                    this.cacheService.removeItem(cacheKey);
+                    this.clearCache(cacheKey);
                 }
             );
             this.renderUiLike(id, "remove");
@@ -284,9 +298,7 @@ export class TimeLinePage implements OnInit {
       });
   }
 
-  async viewer(imageSrc){
-      //PhotoViewer.show(target.src, 'view photo', options);
-      //PhotoViewer.show(target.src);
+  async viewer(imageSrc) {
       const modal = await this.modalController.create({
         component: ImageViewerComponent,
         componentProps: {
@@ -301,6 +313,4 @@ export class TimeLinePage implements OnInit {
   
       return await modal.present();
   }
-  
-
 }

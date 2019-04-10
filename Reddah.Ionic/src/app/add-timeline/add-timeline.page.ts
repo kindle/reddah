@@ -6,6 +6,8 @@ import { ReddahService } from '../reddah.service';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
+import { CacheService } from "ionic-cache";
 
 @Component({
   selector: 'app-add-timeline',
@@ -21,7 +23,9 @@ export class AddTimelinePage implements OnInit {
       private fileTransfer: FileTransfer,
       private file: File,
       private loadingController: LoadingController,
-      private activatedRoute: ActivatedRoute
+      private activatedRoute: ActivatedRoute,
+      private router: Router,
+      private cacheService: CacheService,
     ) { 
         this.activatedRoute.queryParams.subscribe((params: Params) => {
             let data = params['data'];
@@ -33,7 +37,11 @@ export class AddTimelinePage implements OnInit {
             {
                 this.fromLib();
             }
-       });
+        });
+    }
+
+    goback(){
+        this.navController.goBack();
     }
 
     ngOnInit() {}
@@ -67,10 +75,17 @@ export class AddTimelinePage implements OnInit {
                 this.debug+= JSON.stringify(result);
                 if(result.Success==0)
                 { 
-                    this.navController.navigateRoot('/timeline');
+                    let cacheKey = "this.reddah.getTimeline";
+                    this.cacheService.removeItem(cacheKey);
+                    this.router.navigate(['/timeline'], {
+                        queryParams: {
+                            refresh: true//no use but you can sent the parameter
+                        }
+                    });
                 }
-                else{
-                  alert(result.Message);
+                else
+                {
+                    alert(result.Message);
                 }
                 
             },
