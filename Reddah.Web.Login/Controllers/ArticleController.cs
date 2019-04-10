@@ -215,6 +215,7 @@ namespace Reddah.Web.Login.Controllers
 
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 int[] loadedIds = js.Deserialize<int[]>(HttpContext.Current.Request["loadedIds"]);
+                //string thoughts = HttpContext.Current.Request["thoughts"];
 
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
@@ -231,8 +232,10 @@ namespace Reddah.Web.Login.Controllers
                     int[] loaded = loadedIds == null ? new int[] { } : loadedIds;
                     
                     query = (from b in db.Article
-                                where b.Type==1 && b.UserName==jwtResult.JwtUser.User &&
-                                !(loaded).Contains(b.Id)
+                             where b.Type == 1 && (b.UserName == jwtResult.JwtUser.User || 
+                             (from f in db.UserFriend where f.UserName == jwtResult.JwtUser.User select f.Watch).ToList().Contains(b.UserName)
+                             ) &&
+                                     !(loaded).Contains(b.Id)
                                 orderby b.Id descending
                                 select b)
                             .Take(pageCount);
@@ -249,7 +252,73 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("like")]
+        [HttpPost]
+        public IHttpActionResult Like()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
 
+                
+                string action = HttpContext.Current.Request["action"];
+                int id = int.Parse(HttpContext.Current.Request["id"]);
+                
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+                
+                using (var db = new reddahEntities())
+                {
+
+                    var article = db.Article.FirstOrDefault(a => a.Id == id);
+                    if(article != null)
+                    {
+                        if (action.Equals("add"))
+                        {
+                            if (!article.GroupName.Split(',').ToList().Contains(jwtResult.JwtUser.User))
+                            {
+                                if(string.IsNullOrWhiteSpace(article.GroupName))
+                                    article.GroupName += jwtResult.JwtUser.User;
+                                else 
+                                    article.GroupName += "," + jwtResult.JwtUser.User;
+                            }
+                            else
+                                return Ok(new ApiResult(1, "already add like"));
+                        }
+
+                        if (action.Equals("remove"))
+                        {
+                            if (article.GroupName.Split(',').ToList().Contains(jwtResult.JwtUser.User))
+                            {
+                                var list = article.GroupName.Split(',').ToList();
+                                list.Remove(jwtResult.JwtUser.User);
+                                article.GroupName = string.Join(",", list);
+                            }
+                            else
+                                return Ok(new ApiResult(2, "already remove like"));
+                        }
+
+                        db.SaveChanges();
+                    }
+                    else
+                        return Ok(new ApiResult(3, "Article not found"));
+
+                    return Ok(new ApiResult(0, "success"+ jwtResult.JwtUser.User));
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
 
     }
 }
