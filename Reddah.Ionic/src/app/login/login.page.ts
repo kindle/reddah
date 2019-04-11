@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,9 @@ export class LoginPage implements OnInit {
     private reddah: ReddahService,
     private loadingController: LoadingController,
     private translateService: TranslateService,
-    private toastController: ToastController,) { }
+    private toastController: ToastController,
+    private router: Router,
+    ) { }
 
   ngOnInit() {
   }
@@ -56,6 +59,10 @@ export class LoginPage implements OnInit {
                   this.reddah.setCurrentJwt(result.Message);
                   // return token successfully
                   this.modalController.dismiss(result.Message);
+                  this.router.navigate(['/'], {
+                    queryParams: {
+                    }
+                  });
               }
               else if(result.Success==1){
                   //Input user name or password is empty
