@@ -308,4 +308,9 @@ export class TimeLinePage implements OnInit {
   
       return await modal.present();
   }
+ 
+  showFacePanel = false;
+  toggleFacePanel(){
+    this.showFacePanel= !this.showFacePanel;
+  }
 }
