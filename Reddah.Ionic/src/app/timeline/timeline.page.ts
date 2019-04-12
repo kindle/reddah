@@ -119,6 +119,7 @@ export class TimeLinePage implements OnInit {
               for(let article of timeline){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
+                this.GetCommentsData(article.Id);
               }
               loading.dismiss();
           }
@@ -253,12 +254,18 @@ export class TimeLinePage implements OnInit {
         
         if(data==3){
             this.showAddComment = true;
+            this.selectedArticleId = id;
+            this.selectedCommentId = -1;
+            this.selectedReplyPlaceholder = "评论";
             setTimeout(() => {
               this.newComment.setFocus();
             },150);
         }
     }
   }
+
+  selectedArticleId: number;
+  selectedCommentId: number;
 
   renderUiLike(id: number, action: string){
       this.articles.forEach((item, index, alias)=> {
@@ -312,5 +319,49 @@ export class TimeLinePage implements OnInit {
   showFacePanel = false;
   toggleFacePanel(){
     this.showFacePanel= !this.showFacePanel;
+  }
+
+  commentData = new Map();
+  authoronly = false;
+  async GetCommentsData(articleId: number){
+      console.log(`get ts comments:{0}`, articleId);
+      let cacheKey = "this.reddah.getTimelineComments" + articleId;
+      let request = this.reddah.getComments(articleId)
+
+      this.cacheService.loadFromObservable(cacheKey, request)
+          .subscribe(data => 
+          {
+              console.log('load comments:'+articleId+JSON.stringify(data));
+              this.commentData.set(articleId, data);
+          }
+      );
+  }
+
+  SendComment(){
+      this.showAddComment = false;
+      //console.log("leave:"+this.newComment.value);
+      this.reddah.addComments(this.selectedArticleId, this.selectedCommentId, this.newComment.value)
+      .subscribe(data=>{
+          //console.log(JSON.stringify(data))
+          let cacheKey = "this.reddah.getTimelineComments" + this.selectedArticleId;
+          this.cacheService.removeItem(cacheKey);
+          this.GetCommentsData(this.selectedArticleId);
+      });
+  }
+
+  selectedReplyPlaceholder: string;
+  showAddCommentFromChildren(event){
+      this.selectedArticleId = event.articleId;
+      this.selectedCommentId = event.commentId;
+      this.showAddComment = true;
+      this.selectedReplyPlaceholder = "回复" + event.userName + ":";
+
+      if(this.selectedArticleId!=event.articleId||this.selectedCommentId!=event.commentId)
+      {
+          this.newComment = "";
+      }
+      setTimeout(() => {
+        this.newComment.setFocus();
+      },150);
   }
 }

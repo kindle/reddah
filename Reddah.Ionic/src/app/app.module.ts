@@ -33,6 +33,7 @@ import { FormsModule } from '@angular/forms';
 import { AddCommentPage } from './add-comment/add-comment.page';
 import { Toast } from '@ionic-native/toast/ngx';
 import { CommentComponent } from './comment/comment.component';
+import { CommentTimelineComponent } from './commentts/comment.component';
 import { TimeLinePage } from './timeline/timeline.page';
 import { ArticlePopPage } from './article-pop/article-pop.page'
 import { CommentPopPage } from './article-pop/comment-pop.page'
@@ -57,6 +58,7 @@ import { CacheModule } from "ionic-cache";
     ImageViewerComponent,
     LoginPage,
     CommentComponent,
+    CommentTimelineComponent,
     TimeLinePage,
     ArticlePopPage,
     CommentPopPage,
