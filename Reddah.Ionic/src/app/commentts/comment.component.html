@@ -3,7 +3,8 @@
         <ion-spinner name="dots"></ion-spinner>
     </ion-card-content>
 </ion-card>
-<div *ngIf="data">
+<div *ngIf="data&&data.Comments">
+    
     <div *ngFor="let comment of data.Comments">
         <div *ngIf="data.Seed===comment.ParentId&&depth<=1">
             <div (click)="showAddComment(comment)" style="padding: 3px;">{{comment.UserName}}: <span [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></span></div>
@@ -16,4 +17,9 @@
                 [ptext]="comment.Content" [pauthor]="comment.UserName" [authoronly]="authoronly" [articleauthor]="articleauthor"></ts-comment>
         </div>
     </div>
+    
+    <!--<div *ngFor="let comment of data.Comments">
+        <div (click)="showAddComment(comment)" style="padding: 3px;">{{comment.CreatedOn}} {{comment.UserName}}: <span [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></span></div>
+        
+    </div>-->
 </div>

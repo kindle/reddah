@@ -339,7 +339,11 @@ export class TimeLinePage implements OnInit {
 
   SendComment(){
       this.showAddComment = false;
-      //console.log("leave:"+this.newComment.value);
+      
+      let temp = this.commentData.get(this.selectedArticleId);
+      temp.Comments.push({'Id': 0, 'ArticleId': this.selectedArticleId, 'ParentId': this.selectedCommentId, 
+          'Content': this.newComment.value, 'UserName': this.reddah.getCurrentUser()});
+      
       this.reddah.addComments(this.selectedArticleId, this.selectedCommentId, this.newComment.value)
       .subscribe(data=>{
           //console.log(JSON.stringify(data))
