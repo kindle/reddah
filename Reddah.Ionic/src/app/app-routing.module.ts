@@ -5,6 +5,7 @@ import { LoginPage } from './login/login.page';
 import { ScanPage } from './scan/scan.page';
 import { TimeLinePage } from './timeline/timeline.page';
 import { AuthGuard } from './AuthGuard.service';
+import { UserPage } from './user/user.page';
 
 const routes: Routes = [
   { 
@@ -25,6 +26,10 @@ const routes: Routes = [
   { 
       path: 'scan', 
       component: ScanPage,
+  },
+  { 
+      path: 'user', 
+      component: UserPage,
   },
   { 
       path: 'post', 

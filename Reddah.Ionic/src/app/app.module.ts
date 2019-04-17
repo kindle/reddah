@@ -35,6 +35,7 @@ import { Toast } from '@ionic-native/toast/ngx';
 import { CommentComponent } from './comment/comment.component';
 import { CommentTimelineComponent } from './commentts/comment.component';
 import { TimeLinePage } from './timeline/timeline.page';
+import { UserPage } from './user/user.page';
 import { ArticlePopPage } from './article-pop/article-pop.page'
 import { CommentPopPage } from './article-pop/comment-pop.page'
 import { TimelinePopPage } from './article-pop/timeline-pop.page'
@@ -60,6 +61,7 @@ import { CacheModule } from "ionic-cache";
     CommentComponent,
     CommentTimelineComponent,
     TimeLinePage,
+    UserPage,
     ArticlePopPage,
     CommentPopPage,
     TimelinePopPage,

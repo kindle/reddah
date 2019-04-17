@@ -24,7 +24,7 @@
         </div>
         <div *ngFor="let article of articles" style="display: flex; border-bottom: 1px solid lightgrey; margin-bottom: 15px;padding-bottom: 10px;">
             <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
-                <img-loader src="assets/icon/anonymous.png" class="border: 1px solid gray;"></img-loader>
+                <img-loader src="assets/icon/anonymous.png" class="border: 1px solid gray;" (click)="goUser(article.UserName)"></img-loader>
             </div>
             <div style="width:100%;border: 0px solid red;">
                 <ion-card-header no-padding>
@@ -85,46 +85,12 @@
         <ion-icon name="happy" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>
         <ion-button (click)="SendComment(-1)" color="primary">发送</ion-button>
     </ion-item>
+    
     <ion-grid *ngIf="showFacePanel">
-        <ion-row>
-            <ion-col>😀</ion-col>
-            <ion-col>😃</ion-col>
-            <ion-col>😄</ion-col>
-            <ion-col>😁</ion-col>
-            <ion-col>😆</ion-col>
-            <ion-col>😅</ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>❤️</ion-col>
-            <ion-col>⚽️</ion-col>
-            <ion-col>🏀</ion-col>
-            <ion-col>🍎</ion-col>
-            <ion-col>🍉</ion-col>
-            <ion-col>☕️</ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>🌈</ion-col>
-            <ion-col>☀️</ion-col>
-            <ion-col>🌧</ion-col>
-            <ion-col>🐶</ion-col>
-            <ion-col>🐱</ion-col>
-            <ion-col>🐷</ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>😎</ion-col>
-            <ion-col>😱</ion-col>
-            <ion-col>😴</ion-col>
-            <ion-col>👍</ion-col>
-            <ion-col>👎</ion-col>
-            <ion-col>💪</ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>🙏</ion-col>
-            <ion-col>😜</ion-col>
-            <ion-col>😡</ion-col>
-            <ion-col>😍</ion-col>
-            <ion-col>👻</ion-col>
-            <ion-col>💩</ion-col>
-        </ion-row>
+        <ion-row *ngFor="let row of emojis">
+            <ion-col *ngFor="let col of row" text-center>
+                <span (click)="handleSelection(col)" style="width: 80px;height: 80px;">{{col}}</span>
+            </ion-col>
+        </ion-row> 
     </ion-grid>
 </ion-footer>

@@ -23,6 +23,14 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class TimeLinePage implements OnInit {
 
+    emojis = [
+        ['😀','😃','😄','😁','😆','😅'],
+        ['❤️','⚽️','🏀','🍎','🍉','☕️'],
+        ['🌈','☀️','🌧','🐶','🐱','🐷'],
+        ['😎','😱','😴','👍','👎','💪'],
+        ['🙏','😜','😡','😍','👻','💩']
+    ];
+
     articles = [];
     loadedIds = [];
     formData: FormData;
@@ -368,4 +376,20 @@ export class TimeLinePage implements OnInit {
         this.newComment.setFocus();
       },150);
   }
+
+  
+  handleSelection(face) {
+      this.newComment.value += face;
+  }
+
+  goUser(userName){
+      this.router.navigate(['/user'], {
+        queryParams: {
+          data: userName
+        }
+      });
+  }
+
+  
+        
 }
