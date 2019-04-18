@@ -40,9 +40,7 @@ export class AboutPage implements OnInit {
         public authService: AuthService,
         public translateService: TranslateService,
         private cacheService: CacheService,
-    ) {}
-
-    ngOnInit() {
+    ) {
         this.getVersionNumber().then(version => {
             this.version = version;
         });
@@ -56,6 +54,10 @@ export class AboutPage implements OnInit {
         
         this.currentUser = "Not Set";
         this.currentUser = this.localStorageService.retrieve("Reddah_CurrentUser");
+    }
+
+    ngOnInit() {
+        
     }
 
     

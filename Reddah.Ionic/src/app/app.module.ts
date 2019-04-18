@@ -48,6 +48,7 @@ import { Crop } from '@ionic-native/crop/ngx';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { CacheModule } from "ionic-cache";
+import { AboutPage } from './about/about.page';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,8 @@ import { CacheModule } from "ionic-cache";
     CommentPopPage,
     TimelinePopPage,
     TimelineCommentPopPage,
+    UserPage,
+    AboutPage,
     ScanPage,
   ],
   imports: [

@@ -21,7 +21,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   templateUrl: 'user.page.html',
   styleUrls: ['user.page.scss']
 })
-export class UserPage implements OnInit {
+export class UserPage {
     goback(){
         this.navController.goBack(true);
     }
@@ -46,9 +46,6 @@ export class UserPage implements OnInit {
       });
     }
 
-    async ngOnInit(){
-      
-    }
   
   
         
