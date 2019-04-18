@@ -79,8 +79,6 @@ import { AboutPage } from './about/about.page';
     CommentPopPage,
     TimelinePopPage,
     TimelineCommentPopPage,
-    UserPage,
-    AboutPage,
     ScanPage,
   ],
   imports: [
