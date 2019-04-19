@@ -19,7 +19,7 @@
             <img-loader src="assets/icon/timg.jpg"></img-loader>
         </div>
         <div class="timelineAvatar">
-            <ion-label>User Name</ion-label>
+            <ion-label>{{userName}}</ion-label>
             <img-loader src="assets/icon/anonymous.png"></img-loader>
         </div>
         <div *ngFor="let article of articles" style="display: flex; border-bottom: 1px solid lightgrey; margin-bottom: 15px;padding-bottom: 10px;">
@@ -57,12 +57,12 @@
                     <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
                 </ion-item>
                 
-                <div style="background-color: silver; width: 100%; padding: 10px 5px; margin-right: 15px;" *ngIf="article.GroupName">
+                <div style="background-color: #eeeeee; width: 100%; padding: 10px 5px; margin-right: 15px;" *ngIf="article.GroupName">
                     <ion-icon name="heart-empty" style="display: inline-block;vertical-align: middle;"></ion-icon>
                     {{article.GroupName}}
                 </div>
                 <div *ngIf="article.GroupName&&commentData.get(article.Id)" style="border-bottom: 1px solid darkgray; width: 100%;margin-right: 15px;"></div>
-                <div style="background-color: silver; width: 100%;margin-right: 15px;" *ngIf="commentData.get(article.Id)">
+                <div style="background-color: #eeeeee; width: 100%;margin-right: 15px;" *ngIf="commentData.get(article.Id)">
                     <div style="padding: 5px;" *ngIf="commentData.get(article.Id).Comments.length>0">
                         <ts-comment (reply)="showAddCommentFromChildren($event)" no-padding [data]="commentData.get(article.Id)" [depth]="1" [authoronly]="authoronly" 
                         [articleauthor]="article.UserName"></ts-comment>

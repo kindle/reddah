@@ -32,6 +32,7 @@ export class MyTimeLinePage implements OnInit {
         ['🙏','😜','😡','😍','👻','💩']
     ];
 
+    userName: string;
     articles = [];
     loadedIds = [];
     formData: FormData;
@@ -97,16 +98,7 @@ export class MyTimeLinePage implements OnInit {
       private router: Router,
       private activatedRoute: ActivatedRoute,
       ){
-        //let locale = this.localStorageService.retrieve("Reddah_Locale");
-        
-        this.activatedRoute.queryParams.subscribe((params: Params) => {
-            let refresh = params['refresh'];
-            
-            if(refresh)//refresh after add timeline
-            {
-                
-            }
-      });
+        this.userName = this.reddah.getCurrentUser();
     }
 
     async ngOnInit(){
@@ -120,7 +112,7 @@ export class MyTimeLinePage implements OnInit {
 
       let cacheKey = "this.reddah.getTimeline";
       console.log(`cacheKey:{0}`,cacheKey);
-      let request = this.reddah.getTimeline(this.formData);
+      let request = this.reddah.getMyTimeline(this.formData);
 
       this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage")
         .subscribe(timeline => 
