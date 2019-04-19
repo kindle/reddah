@@ -4,12 +4,14 @@
         <ion-item color="transparent" lines="none">
             <ion-icon name="arrow-round-back" slot="start" (click)="goback()"></ion-icon>
             <ion-label></ion-label>
+            <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll>
         <ion-item color="primary">
             <ion-icon name="arrow-round-back" slot="start" (click)="goback()"></ion-icon>
             <ion-label>关注</ion-label>
+            <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
     <div>   

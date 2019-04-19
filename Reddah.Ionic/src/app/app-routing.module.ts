@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SelectiveStrategyService } from './selective-strategy.service';
 import { LoginPage } from './login/login.page';
 import { ScanPage } from './scan/scan.page';
-import { TimeLinePage } from './timeline/timeline.page';
+import { MyTimeLinePage } from './mytimeline/mytimeline.page';
 import { AuthGuard } from './AuthGuard.service';
 import { UserPage } from './user/user.page';
 
@@ -19,17 +19,13 @@ const routes: Routes = [
       component: LoginPage 
   },
   { 
-      path: 'timeline', 
-      component: TimeLinePage,
+      path: 'mytimeline', 
+      component: MyTimeLinePage,
       canActivate: [AuthGuard],
   },
   { 
-      path: 'scan', 
+      path: 'scan',
       component: ScanPage,
-  },
-  { 
-      path: 'user', 
-      component: UserPage,
   },
   { 
       path: 'post', 

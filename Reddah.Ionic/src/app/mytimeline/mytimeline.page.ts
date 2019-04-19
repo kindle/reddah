@@ -18,11 +18,11 @@ import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
-  selector: 'app-timeline',
-  templateUrl: 'timeline.page.html',
-  styleUrls: ['timeline.page.scss']
+  selector: 'app-mytimeline',
+  templateUrl: 'mytimeline.page.html',
+  styleUrls: ['mytimeline.page.scss']
 })
-export class TimeLinePage implements OnInit {
+export class MyTimeLinePage implements OnInit {
 
     emojis = [
         ['😀','😃','😄','😁','😆','😅'],
@@ -80,8 +80,8 @@ export class TimeLinePage implements OnInit {
         event.target.complete();
     }
 
-    async goback(){
-        await this.modalController.dismiss();
+    goback(){
+        this.navController.goBack(true);
     }
 
     constructor(private reddah : ReddahService,
