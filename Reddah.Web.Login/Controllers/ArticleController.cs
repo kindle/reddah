@@ -203,9 +203,9 @@ namespace Reddah.Web.Login.Controllers
 
         }
 
-        [Route("gettimeline")]
+        [Route("getmytimeline")]
         [HttpPost]
-        public IHttpActionResult GetTimeline()
+        public IHttpActionResult GetMyTimeline()
         {
             IEnumerable<Article> query = null;
             
@@ -238,6 +238,54 @@ namespace Reddah.Web.Login.Controllers
                                      !(loaded).Contains(b.Id)
                                 orderby b.Id descending
                                 select b)
+                            .Take(pageCount);
+
+                    return Ok(query.ToList());
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("gettimeline")]
+        [HttpPost]
+        public IHttpActionResult GetTimeline()
+        {
+            IEnumerable<Article> query = null;
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string targetUser = HttpContext.Current.Request["targetUser"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int[] loadedIds = js.Deserialize<int[]>(HttpContext.Current.Request["loadedIds"]);
+                //string thoughts = HttpContext.Current.Request["thoughts"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var pageCount = 10;
+
+                    int[] loaded = loadedIds == null ? new int[] { } : loadedIds;
+
+                    query = (from b in db.Article
+                             where b.Type == 1 && b.UserName == targetUser &&
+                                     !(loaded).Contains(b.Id)
+                             orderby b.Id descending
+                             select b)
                             .Take(pageCount);
 
                     return Ok(query.ToList());
