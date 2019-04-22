@@ -76,7 +76,7 @@ export class AddTimelinePage implements OnInit {
                 if(result.Success==0)
                 { 
                     this.cacheService.clearGroup("TimeLinePage");
-                    this.router.navigate(['/timeline'], {
+                    this.router.navigate(['/mytimeline'], {
                         queryParams: {
                             refresh: true//no use but you can sent the parameter
                         }

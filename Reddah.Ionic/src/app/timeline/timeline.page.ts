@@ -32,26 +32,26 @@ export class TimeLinePage implements OnInit {
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
     
     htmlDecode(text: string) {
-      var temp = document.createElement("div");
+        var temp = document.createElement("div");
         temp.innerHTML = text;
         var output = temp.innerText || temp.textContent;
         temp = null;
         return output;
     }
     subpost(str: string, n: number) {
-      var r = /[^\u4e00-\u9fa5]/g;
-      if (str.replace(r, "mm").length <= n) { return str; }
-      var m = Math.floor(n/2);
-      for (var i = m; i < str.length; i++) {
-          if (str.substr(0, i).replace(r, "mm").length >= n) {
-              return str.substr(0, i) + "...";
-          }
-      }
-      return str;
+        var r = /[^\u4e00-\u9fa5]/g;
+        if (str.replace(r, "mm").length <= n) { return str; }
+        var m = Math.floor(n/2);
+        for (var i = m; i < str.length; i++) {
+            if (str.substr(0, i).replace(r, "mm").length >= n) {
+                return str.substr(0, i) + "...";
+            }
+        }
+        return str;
     }
     summary(str: string, n: number) {
-      str = this.htmlDecode(str).replace(/<[^>]+>/g, "");
-      return this.subpost(str, n);
+        str = this.htmlDecode(str).replace(/<[^>]+>/g, "");
+        return this.subpost(str, n);
     }
     /*trustAsResourceUrl = function (url) {
       return $sce.trustAsResourceUrl(url);
@@ -75,70 +75,72 @@ export class TimeLinePage implements OnInit {
         await this.modalController.dismiss();
     }
 
-    constructor(private reddah : ReddahService,
-      public loadingController: LoadingController,
-      public translateService: TranslateService,
-      public navController: NavController,
-      private renderer: Renderer,
-      public modalController: ModalController,
-      private localStorageService: LocalStorageService,
-      private popoverController: PopoverController,
-      private photoLibrary: PhotoLibrary,
-      private cacheService: CacheService,
-      private router: Router,
-      private activatedRoute: ActivatedRoute,
-      ){
+    constructor(
+        private reddah : ReddahService,
+        public loadingController: LoadingController,
+        public translateService: TranslateService,
+        public navController: NavController,
+        private renderer: Renderer,
+        public modalController: ModalController,
+        private localStorageService: LocalStorageService,
+        private popoverController: PopoverController,
+        private photoLibrary: PhotoLibrary,
+        private cacheService: CacheService,
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        ){
     }
 
     async ngOnInit(){
-      const loading = await this.loadingController.create({
-        message: this.translateService.instant("Article.Loading"),
-        spinner: 'circles',
-      });
-      await loading.present();
-      this.formData = new FormData();
-      this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
-      this.formData.append("targetUser", this.userName);
+        const loading = await this.loadingController.create({
+            message: this.translateService.instant("Article.Loading"),
+            spinner: 'circles',
+        });
+        await loading.present();
+        this.formData = new FormData();
+        this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
+        this.formData.append("targetUser", this.userName);
 
-      let cacheKey = "this.reddah.getTimeline"+this.userName;
-      console.log(`cacheKey:{0}`,cacheKey);
-      let request = this.reddah.getTimeline(this.formData);
+        let cacheKey = "this.reddah.getTimeline"+this.userName;
+        console.log(`cacheKey:${cacheKey}`);
+        let request = this.reddah.getTimeline(this.formData);
 
-      this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage")
-        .subscribe(timeline => 
-          {
-              for(let article of timeline){
-                this.articles.push(article);
-                this.loadedIds.push(article.Id);
-              }
-              loading.dismiss();
-          }
-      );
+        this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
+            .subscribe(timeline => 
+            {
+                for(let article of timeline){
+                    this.articles.push(article);
+                    this.loadedIds.push(article.Id);
+                }
+                loading.dismiss();
+            }
+        );
     }
   
     getTimeline():void {
-      this.formData = new FormData();
-      this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
-      
-      let cacheKey = "this.reddah.getTimeline" + this.userName + this.loadedIds.join(',');
-      console.log(`loadmore_cacheKey:{0}`, cacheKey);
-      let request = this.reddah.getTimeline(this.formData);
-      
-      this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage")
-        .subscribe(timeline => 
-          {
-              for(let article of timeline){
-                this.articles.push(article);
-                this.loadedIds.push(article.Id);
-              }
-          }
-      );
+        this.formData = new FormData();
+        this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
+        this.formData.append("targetUser", this.userName);
+
+        let cacheKey = "this.reddah.getTimeline" + this.userName + this.loadedIds.join(',');
+        console.log(`loadmore_cacheKey:${cacheKey}`);
+        let request = this.reddah.getTimeline(this.formData);
+        
+        this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
+          .subscribe(timeline => 
+            {
+                for(let article of timeline){
+                    this.articles.push(article);
+                    this.loadedIds.push(article.Id);
+                }
+            }
+        );
 
     }
 
     ionViewDidLoad() {
-      let locale = this.localStorageService.retrieve("Reddah_Locale");
-      console.log(locale);
+        let locale = this.localStorageService.retrieve("Reddah_Locale");
+        console.log(locale);
     }
 
 

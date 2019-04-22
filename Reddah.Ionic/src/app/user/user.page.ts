@@ -22,7 +22,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   templateUrl: 'user.page.html',
   styleUrls: ['user.page.scss']
 })
-export class UserPage {
+export class UserPage implements OnInit {
     async close(){
         await this.modalController.dismiss();
     }
@@ -44,6 +44,40 @@ export class UserPage {
       public actionSheetController: ActionSheetController,
       ){
         
+    }
+
+    ngOnInit(){
+      this.getTimeline();
+    }
+
+    imageList = [];
+    loadedIds = [];
+    formData: FormData;
+
+    getTimeline(){
+        this.formData = new FormData();
+        this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
+        this.formData.append("targetUser", this.userName);
+
+        let cacheKey = "this.reddah.getTimeline"+this.userName;
+        console.log(`cacheKey:${cacheKey}`);
+        let request = this.reddah.getTimeline(this.formData);
+
+        this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
+            .subscribe(timeline => 
+            {
+                for(let article of timeline){
+                    console.log(article);
+                    article.Content.split('$$$').forEach((item)=>{
+                        this.imageList.push(item);
+                    }
+                    );
+                    
+                    if(this.imageList.length>=2)
+                        break;
+                }
+            }
+        );
     }
 
     async viewTimeline(){

@@ -1,14 +1,14 @@
 
-<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop>
     <div class="headerStart" #headerStart>
-        <ion-item color="transparent" lines="none">
+        <ion-item color="transparent" lines="none" (dblclick)="clearCacheAndReload()">
             <ion-icon name="arrow-round-back" slot="start" (click)="goback()"></ion-icon>
             <ion-label></ion-label>
             <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll>
-        <ion-item color="light" lines="none">
+        <ion-item color="light" lines="none" (dblclick)="clearCacheAndReload()">
             <ion-icon name="arrow-round-back" slot="start" (click)="goback()"></ion-icon>
             <ion-label>好友圈</ion-label>
             <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
@@ -27,7 +27,7 @@
                 <img-loader src="assets/icon/anonymous.png" class="border: 1px solid gray;" (click)="goUser(article.UserName)"></img-loader>
             </div>
             <div style="width:100%;border: 0px solid red;">
-                <ion-card-header no-padding>
+                <ion-card-header no-padding  class="articleUserName">
                     <ion-card-title>
                         <div [innerHTML]="htmlDecode(article.UserName)"></div>
                     </ion-card-title>
@@ -36,9 +36,9 @@
                     <div [innerHTML]="htmlDecode(article.Title)"></div>
                 </ion-item>
                 <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
-                    <div style="background-color: #eeeeee;padding: 5px;" [innerHTML]="summary(article.Title,50)"></div>
+                    <div style="background-color: #eeeeee; padding: 5px;" [innerHTML]="summary(article.Title,50)"></div>
                 </ion-item>
-                <ion-card-content style="display:'none';" *ngIf="article.Content.split('$$$').length>0" no-padding>
+                <ion-card-content style="display:none;" *ngIf="article.Content.split('$$$').length>0" no-padding>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>6">
                         <div class="container" *ngFor="let image of article.Content.split('$$$')">
                             <img-loader src="{{image}}" class="picture" (click)="viewer(image)"></img-loader>
@@ -54,23 +54,32 @@
                     </div>
                 </ion-card-content>
                 
-
                 <ion-item no-padding lines="none">
                     <ion-note color="dark">{{article.CreatedOn | date: 'yyyy-MM-dd hh:mm:ss'}}</ion-note>
                     <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
                 </ion-item>
                 
-                <div style="background-color: #eeeeee; width: 100%; padding: 10px 5px; margin-right: 15px;" *ngIf="article.GroupName">
-                    <ion-icon name="heart-empty" style="display: inline-block;vertical-align: middle;"></ion-icon>
-                    {{article.GroupName}}
-                </div>
-                <div *ngIf="article.GroupName&&commentData.get(article.Id)" style="border-bottom: 1px solid darkgray; width: 100%;margin-right: 15px;"></div>
-                <div style="background-color: #eeeeee; width: 100%;margin-right: 15px;" *ngIf="commentData.get(article.Id)">
-                    <div style="padding: 5px;" *ngIf="commentData.get(article.Id).Comments.length>0">
-                        <ts-comment (reply)="showAddCommentFromChildren($event)" no-padding [data]="commentData.get(article.Id)" [depth]="1" [authoronly]="authoronly" 
-                        [articleauthor]="article.UserName"></ts-comment>
+                <ion-item no-padding lines="none" *ngIf="article.GroupName">
+                    <div style="width: 100%;">
+                        <div class="like-arrow-up"></div>
+                        <div class="likeSection">
+                            <ion-icon name="heart-empty" class="likeIcon"></ion-icon>
+                            <span class="likeUserName">{{article.GroupName}}</span>
+                        </div>
                     </div>
-                </div>
+                </ion-item>
+                <ion-item no-padding lines="none" *ngIf="commentData.get(article.Id)&&commentData.get(article.Id).Comments.length>0">
+                    <div style="width: 100%;">
+                        <div class="like-arrow-up" *ngIf="!article.GroupName"></div>
+                        <div class="like-spliter" *ngIf="article.GroupName"></div>
+                        <div class="commentSection">
+                            <div style="padding: 10px;">
+                                <ts-comment (reply)="showAddCommentFromChildren($event)" no-padding [data]="commentData.get(article.Id)" [depth]="1" [authoronly]="authoronly" 
+                                [articleauthor]="article.UserName"></ts-comment>
+                            </div>
+                        </div>
+                    </div>
+                </ion-item>
             </div>
         </div>
         

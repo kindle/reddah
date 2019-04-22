@@ -75,3 +75,46 @@
     display: block;
     width: 200px !important;
  }
+
+ .likeSection{
+    background-color: #eeeeee; 
+    width: 100%; 
+    padding: 10px 5px; 
+ }
+
+ .commentSection{
+    background-color: #eeeeee; 
+    width: 100%;
+ }
+
+ .likeIcon{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+ }
+
+ .likeUserName{
+    font-size: 18px;
+    vertical-align: middle;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0;
+    padding-bottom: 5px;
+ }
+
+ .like-arrow-up {
+    margin-left: 10px;
+    width: 0; 
+    height: 0; 
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #eeeeee;
+  }
+
+  .articleUserName{
+      margin-bottom: 10px;
+  }
+
+  .like-spliter{
+      border-bottom: 1px solid lightgray;
+  }

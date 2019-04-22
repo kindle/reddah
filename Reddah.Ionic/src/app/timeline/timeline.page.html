@@ -38,7 +38,7 @@
                         <ion-thumbnail slot="start">
                             <img src="{{article.Content.split('$$$')[0]}}">
                         </ion-thumbnail>
-                        <ion-label class="articleContentText">
+                        <ion-label class="articleContentText" text-wrap>
                             <div [innerHTML]="summary(article.Title,20)" class="articleContentTextSummary"></div>
                             <div class="articleContentTextCount" *ngIf="article.Content.split('$$$').length>0">共{{article.Content.split('$$$').length}}张</div>
                         </ion-label>

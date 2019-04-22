@@ -26,7 +26,10 @@
             <ion-label>个性签名</ion-label>
         </ion-item>
         <ion-item (click)="viewTimeline()">
-            <ion-label>朋友圈</ion-label>
+            <ion-label slot="start">朋友圈</ion-label>
+            <ion-thumbnail slot="start" *ngFor="let image of imageList" style="padding: 10px;">
+                <img src="{{image}}">
+            </ion-thumbnail>
             <ion-icon name="arrow-forward" slot="end"></ion-icon>
         </ion-item>
     </ion-card>
