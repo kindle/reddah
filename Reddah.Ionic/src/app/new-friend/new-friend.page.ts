@@ -46,6 +46,10 @@ export class NewFriendPage implements OnInit {
 
   }
 
+  async search(){
+      
+  }
+
   async accept(requestUserName){
       this.formData = new FormData();
       this.formData.append("requestUserName", requestUserName);

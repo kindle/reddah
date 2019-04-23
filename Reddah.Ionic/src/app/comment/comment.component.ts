@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PopoverController } from '@ionic/angular'
+import { PopoverController, ModalController } from '@ionic/angular'
 import { CommentPopPage } from '../article-pop/comment-pop.page'
+import { UserPage } from '../user/user.page';
 
 @Component({
   selector: 'app-comment',
@@ -17,7 +18,8 @@ export class CommentComponent implements OnInit {
   @Input() articleauthor;
 
   constructor(
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private modalController: ModalController,
   ) { }
 
   ngOnInit() {
@@ -73,6 +75,15 @@ export class CommentComponent implements OnInit {
 
   popover(){
     alert('show menu to report, delete.');
+  }
+
+  async goUser(userName){
+    const userModal = await this.modalController.create({
+      component: UserPage,
+      componentProps: { userName: userName }
+    });
+      
+    await userModal.present();
   }
   
 }

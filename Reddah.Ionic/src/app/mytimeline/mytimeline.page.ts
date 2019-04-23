@@ -108,6 +108,8 @@ export class MyTimeLinePage implements OnInit {
         spinner: 'circles',
       });
       await loading.present();
+
+      this.loadedIds = [];
       this.formData = new FormData();
       this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
 
@@ -119,7 +121,6 @@ export class MyTimeLinePage implements OnInit {
         .subscribe(timeline => 
           {
               this.articles = [];
-              this.loadedIds = [];
               this.commentData = new Map();
 
               for(let article of timeline){
@@ -156,6 +157,15 @@ export class MyTimeLinePage implements OnInit {
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("MyTimeLinePage");
         this.ngOnInit();
+    }
+
+    doRefresh(event) {
+      console.log('Begin async operation');
+  
+      setTimeout(() => {
+        this.clearCacheAndReload();
+        event.target.complete();
+      }, 2000);
     }
 
     ionViewDidLoad() {

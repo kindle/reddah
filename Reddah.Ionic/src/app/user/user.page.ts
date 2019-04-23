@@ -64,7 +64,7 @@ export class UserPage implements OnInit {
     signature: string;
 
     noteName: string;
-    isFriend: false;
+    isFriend = -1;
 
     getUserInfo(){
         this.formData = new FormData();
@@ -85,7 +85,7 @@ export class UserPage implements OnInit {
                 this.signature = userInfo.Signature;
 
                 this.noteName = userInfo.NoteName;
-                this.isFriend = userInfo.IsFriend;
+                this.isFriend = userInfo.IsFriend?1:0;
             }
         );
     }
@@ -105,9 +105,9 @@ export class UserPage implements OnInit {
                 for(let article of timeline){
                     console.log(article);
                     article.Content.split('$$$').forEach((item)=>{
-                        this.imageList.push(item);
-                    }
-                    );
+                        if(this.imageList.length<2)  
+                            this.imageList.push(item);
+                    });
                     
                     if(this.imageList.length>=2)
                         break;
@@ -125,15 +125,29 @@ export class UserPage implements OnInit {
       await timelineModal.present();
     }
 
+    clearCacheAndReload(){
+        this.cacheService.clearGroup("TimeLinePage"+this.userName);
+        this.ngOnInit();
+    }
+
+    doRefresh(event) {
+      console.log('Begin async operation');
+  
+      setTimeout(() => {
+        this.clearCacheAndReload();
+        event.target.complete();
+      }, 2000);
+    }
+
     async presentActionSheet() {
       const actionSheet = await this.actionSheetController.create({
         header: 'Albums',
         buttons: [{
-          text: 'Delete',
+          text: '刷新',
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            console.log('Delete clicked');
+              this.clearCacheAndReload();
           }
         }, {
           text: 'Share',

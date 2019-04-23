@@ -1,7 +1,7 @@
 <ion-content padding [scrollEvents]="true" (ionScroll)="onScroll($event)">
     <H1 [innerHTML]="htmlDecode(article.Title) | safe: 'html'"></H1>
     <ion-item no-padding padding-bottom>
-        <ion-text color="primary" margin-end>
+        <ion-text color="primary" margin-end (click)="goUser(article.UserName)">
             <span [innerHTML]="article.UserName | safe: 'html'"></span>
         </ion-text>
         <ion-text color="dark" margin-end>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PopoverController } from '@ionic/angular'
+import { PopoverController, ModalController } from '@ionic/angular'
 import { CommentPopPage } from '../article-pop/comment-pop.page'
+import { UserPage } from '../user/user.page';
 
 @Component({
   selector: 'ts-comment',
@@ -17,7 +18,8 @@ export class CommentTimelineComponent implements OnInit {
   @Input() articleauthor;
 
   constructor(
-      private popoverController: PopoverController
+      private popoverController: PopoverController,
+      private modalController: ModalController,
   ) { }
 
   ngOnInit() {
@@ -90,6 +92,13 @@ export class CommentTimelineComponent implements OnInit {
     this.reply.emit(event);
   }
 
-  
+  async goUser(userName){
+    const userModal = await this.modalController.create({
+      component: UserPage,
+      componentProps: { userName: userName }
+    });
+      
+    await userModal.present();
+  }
   
 }

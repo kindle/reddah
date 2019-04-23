@@ -7,6 +7,7 @@ import { AddCommentPage } from '../add-comment/add-comment.page';
 import { ReddahService } from '../reddah.service';
 import { ArticlePopPage } from '../article-pop/article-pop.page';
 import { CacheService } from "ionic-cache";
+import { UserPage } from '../user/user.page';
 
 @Component({
   selector: 'app-postviewer',
@@ -132,5 +133,14 @@ export class PostviewerPage implements OnInit {
 
   popover(){
     alert('show menu to report, delete.');
+  }
+
+  async goUser(userName){
+    const userModal = await this.modalController.create({
+      component: UserPage,
+      componentProps: { userName: userName }
+    });
+      
+    await userModal.present();
   }
 }

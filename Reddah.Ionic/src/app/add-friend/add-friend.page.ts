@@ -33,7 +33,9 @@ export class AddFriendPage implements OnInit {
       },150);
   }
 
+  submitClicked=false;
   async submit() {
+      this.submitClicked = true;
       this.formData = new FormData();
       this.formData.append("targetUser", this.targetUserName);
       this.formData.append("targetNoteName", this.targetNoteName);

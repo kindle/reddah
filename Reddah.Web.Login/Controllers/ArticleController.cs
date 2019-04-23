@@ -398,7 +398,16 @@ namespace Reddah.Web.Login.Controllers
                     userInfo.Location = user.Location??"未知";
                     userInfo.Signature = user.Signature;
 
-                    var findFriends = db.UserFriend.FirstOrDefault(f => (f.UserName == jwtResult.JwtUser.User && f.Watch == targetUser && f.Approve == 1) &&
+                    var log = new Log();
+                    log.Date = DateTime.Now;
+                    log.Level = "1";
+                    log.Thread = "1";
+                    log.Logger = "sys";
+                    log.Message = jwtResult.JwtUser.User + targetUser;
+
+                    db.Log.Add(log);
+                    
+                    var findFriends = db.UserFriend.FirstOrDefault(f => (f.UserName == jwtResult.JwtUser.User && f.Watch == targetUser && f.Approve == 1) ||
                     (f.UserName == targetUser && f.Watch == jwtResult.JwtUser.User && f.Approve == 1));
                     userInfo.IsFriend = findFriends != null;
                     if(userInfo.IsFriend)
