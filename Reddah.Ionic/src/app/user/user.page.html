@@ -52,7 +52,7 @@
         </ion-item>
     </ion-card>
     <ion-card *ngIf="!isFriend">
-        <ion-item href="/#">
+        <ion-item (click)="addFriend()">
             <ion-label>添加到通讯录</ion-label>
         </ion-item>
     </ion-card>

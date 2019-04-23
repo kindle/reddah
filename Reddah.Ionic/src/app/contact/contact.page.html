@@ -5,6 +5,12 @@
 </ion-header>
 
 <ion-content>
+    <ion-item (click)="viewNewFriends()">
+        <ion-icon name="ios-person-add" slot="start" color="tertiary" style="background-color: gold;border-radius: 3px;"></ion-icon>
+        <ion-label>新的朋友</ion-label>
+        <ion-badge slot="end" color="danger" *ngIf="requestCount>0">{{requestCount}}</ion-badge>
+    </ion-item>
+
     <ion-item>
       <ion-label>My Message</ion-label>
       <ion-badge slot="end" color="dark">0</ion-badge>

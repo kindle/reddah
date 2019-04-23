@@ -31,6 +31,8 @@ import { AuthService } from './auth.service';
 import { FormsModule } from '@angular/forms';
 
 import { AddCommentPage } from './add-comment/add-comment.page';
+import { AddFriendPage } from './add-friend/add-friend.page';
+import { NewFriendPage } from './new-friend/new-friend.page';
 import { Toast } from '@ionic-native/toast/ngx';
 import { CommentComponent } from './comment/comment.component';
 import { CommentTimelineComponent } from './commentts/comment.component';
@@ -56,6 +58,8 @@ import { AboutPage } from './about/about.page';
     AppComponent,
     LocalePage,
     AddCommentPage,
+    AddFriendPage,
+    NewFriendPage,
     PostviewerPage,
     SafePipe,
     ImageViewerComponent,
@@ -77,6 +81,8 @@ import { AboutPage } from './about/about.page';
     ImageViewerComponent,
     LoginPage,
     AddCommentPage,
+    AddFriendPage,
+    NewFriendPage,
     ArticlePopPage,
     CommentPopPage,
     TimelinePopPage,
