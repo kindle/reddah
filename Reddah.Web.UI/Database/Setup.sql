@@ -129,8 +129,14 @@ CREATE TABLE [dbo].[UserArticle]
 
 CREATE TABLE [dbo].[UserFriend]
 (
-	[UserName] NVARCHAR(MAX) NOT NULL,
-	[Watch] NVARCHAR(MAX) NOT NULL
+    [Id] INT IDENTITY(1,1) NOT NULL,
+    [UserName] NVARCHAR(MAX) NOT NULL,
+	[Watch] NVARCHAR(MAX) NOT NULL,
+	[Just] NVARCHAR (MAX) NULL,
+	[RequestOn] DATETIME NULL,
+	[Approve] INT default -1,
+	[NoteName] NVARCHAR (MAX) NULL,	
+    CONSTRAINT [PK_dbo.UserFriend] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
 CREATE TABLE [dbo].[Message]

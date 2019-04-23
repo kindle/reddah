@@ -54,11 +54,6 @@ alter table [dbo].[UserProfile] add
   [NickName] NVARCHAR (MAX) NULL,
   [Location] VARCHAR (MAX) NULL
 
-alter table [dbo].[UserFriend] add
-[Just] NVARCHAR (MAX) NULL,
-[RequestOn] DATETIME NULL,
-[Approve] INT default -1,
-[NoteName] NVARCHAR (MAX) NULL
 
 
 

@@ -106,13 +106,11 @@ warning 6002: The table/view 'reddah.dbo.UserArticle' does not have a primary ke
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ArticleId" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserFriend">
           <Key>
-            <PropertyRef Name="UserName" />
-            <PropertyRef Name="Watch" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Watch" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Just" Type="nvarchar(max)" />
@@ -195,6 +193,7 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UploadFile" EntityType="Self.UploadFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserFriend" EntityType="Self.UserFriend" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
@@ -216,16 +215,6 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
     [UserArticle].[ArticleId] AS [ArticleId]
     FROM [dbo].[UserArticle] AS [UserArticle]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="UserFriend" EntityType="Self.UserFriend" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserFriend].[UserName] AS [UserName], 
-    [UserFriend].[Watch] AS [Watch], 
-    [UserFriend].[Just] AS [Just], 
-    [UserFriend].[RequestOn] AS [RequestOn], 
-    [UserFriend].[Approve] AS [Approve], 
-    [UserFriend].[NoteName] AS [NoteName]
-    FROM [dbo].[UserFriend] AS [UserFriend]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -238,6 +227,7 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
           <EntitySet Name="Log" EntityType="reddahModel.Log" />
           <EntitySet Name="Setting" EntityType="reddahModel.Setting" />
           <EntitySet Name="UploadFile" EntityType="reddahModel.UploadFile" />
+          <EntitySet Name="UserFriend" EntityType="reddahModel.UserFriend" />
           <EntitySet Name="UserProfile" EntityType="reddahModel.UserProfile" />
           <EntitySet Name="webpages_Membership" EntityType="reddahModel.webpages_Membership" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="reddahModel.webpages_OAuthMembership" />
@@ -247,7 +237,6 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
           <EntitySet Name="webpages_UsersInRoles" EntityType="reddahModel.webpages_UsersInRoles" />
           <EntitySet Name="Message" EntityType="reddahModel.Message" />
           <EntitySet Name="UserArticle" EntityType="reddahModel.UserArticle" />
-          <EntitySet Name="UserFriend" EntityType="reddahModel.UserFriend" />
         </EntityContainer>
         <ComplexType Name="ComplexType1">
           <Property Type="Int32" Name="Count" Nullable="false" />
@@ -328,6 +317,18 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="GroupName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Tag" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserFriend">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Watch" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Just" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RequestOn" Type="DateTime" Precision="3" />
+          <Property Name="Approve" Type="Int32" />
+          <Property Name="NoteName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -416,18 +417,6 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
           </Key>
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ArticleId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserFriend">
-          <Key>
-            <PropertyRef Name="UserName" />
-            <PropertyRef Name="Watch" />
-          </Key>
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Watch" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Just" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="RequestOn" Type="DateTime" Precision="3" />
-          <Property Name="Approve" Type="Int32" />
-          <Property Name="NoteName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -518,6 +507,19 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserFriend">
+            <EntityTypeMapping TypeName="reddahModel.UserFriend">
+              <MappingFragment StoreEntitySet="UserFriend">
+                <ScalarProperty Name="NoteName" ColumnName="NoteName" />
+                <ScalarProperty Name="Approve" ColumnName="Approve" />
+                <ScalarProperty Name="RequestOn" ColumnName="RequestOn" />
+                <ScalarProperty Name="Just" ColumnName="Just" />
+                <ScalarProperty Name="Watch" ColumnName="Watch" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UserProfile">
             <EntityTypeMapping TypeName="reddahModel.UserProfile">
               <MappingFragment StoreEntitySet="UserProfile">
@@ -604,18 +606,6 @@ warning 6002: The table/view 'reddah.dbo.UserFriend' does not have a primary key
             <EntityTypeMapping TypeName="reddahModel.UserArticle">
               <MappingFragment StoreEntitySet="UserArticle">
                 <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserFriend">
-            <EntityTypeMapping TypeName="reddahModel.UserFriend">
-              <MappingFragment StoreEntitySet="UserFriend">
-                <ScalarProperty Name="NoteName" ColumnName="NoteName" />
-                <ScalarProperty Name="Approve" ColumnName="Approve" />
-                <ScalarProperty Name="RequestOn" ColumnName="RequestOn" />
-                <ScalarProperty Name="Just" ColumnName="Just" />
-                <ScalarProperty Name="Watch" ColumnName="Watch" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>

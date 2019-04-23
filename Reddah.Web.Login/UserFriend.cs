@@ -14,6 +14,7 @@ namespace Reddah.Web.Login
     
     public partial class UserFriend
     {
+        public int Id { get; set; }
         public string UserName { get; set; }
         public string Watch { get; set; }
         public string Just { get; set; }

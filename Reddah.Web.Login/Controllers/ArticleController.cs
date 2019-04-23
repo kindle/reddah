@@ -31,6 +31,7 @@ namespace Reddah.Web.Login.Controllers
     public class ArticleController : ApiController
     {
         public const string SecretKey = "abc1234567@reddahcom";
+        private string message;
 
         [Route("getcomments")]
         [HttpPost]
@@ -404,6 +405,165 @@ namespace Reddah.Web.Login.Controllers
                         userInfo.NoteName = db.UserFriend.FirstOrDefault(f=>f.UserName == jwtResult.JwtUser.User && f.Approve == 1).NoteName;
                     
                     return Ok(userInfo);
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("addfriend")]
+        [HttpPost]
+        public IHttpActionResult AddFriend()
+        {
+            UserInfo userInfo = new UserInfo();
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string targetUser = HttpContext.Current.Request["targetUser"];
+                string targetNoteName = HttpContext.Current.Request["targetNoteName"];
+                string message = HttpContext.Current.Request["message"];
+                bool hasPermisson = HttpContext.Current.Request["permission"].Equals("Allow", StringComparison.OrdinalIgnoreCase);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var item = db.UserFriend.FirstOrDefault(f => f.UserName == jwtResult.JwtUser.User && f.Watch == targetUser);
+                    if (item == null)
+                    {
+                        var uf = new UserFriend();
+                        uf.UserName = jwtResult.JwtUser.User;
+                        uf.Watch = targetUser;
+                        uf.Just = message;
+                        uf.RequestOn = DateTime.Now;
+                        uf.NoteName = targetNoteName;
+                        db.UserFriend.Add(uf);
+                    }
+                    else
+                    {
+                        item.Just = item.Just==null?message:item.Just+"\r\n"+message;
+                        item.RequestOn = DateTime.Now;
+                        item.NoteName = targetNoteName;
+                    }
+
+                    db.SaveChanges();
+
+                    return Ok(new ApiResult(0, "success"));
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("friendrequests")]
+        [HttpPost]
+        public IHttpActionResult GetFriendRequests()
+        {
+            IEnumerable<UserFriend> query = null;
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var pageCount = 100;
+
+                    query = (from f in db.UserFriend
+                             where f.Watch == jwtResult.JwtUser.User
+                             orderby f.RequestOn descending
+                             select f)
+                            .Take(pageCount);
+
+                    return Ok(query.ToList());
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("approvefriend")]
+        [HttpPost]
+        public IHttpActionResult ApproveFriend()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string requestUserName = HttpContext.Current.Request["requestUserName"];
+                
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var item = db.UserFriend.FirstOrDefault(f => f.UserName == requestUserName && f.Watch == jwtResult.JwtUser.User);
+                    if (item == null)
+                    {
+                        return Ok(new ApiResult(3, "Request not found"));
+                    }
+                    else
+                    {
+                        item.Approve = 1;
+                        
+                        var verse = db.UserFriend.FirstOrDefault(f => f.UserName == jwtResult.JwtUser.User && f.Watch == requestUserName);
+                        if (verse == null)
+                        {
+                            var uf = new UserFriend();
+                            uf.UserName = jwtResult.JwtUser.User;
+                            uf.Watch = requestUserName;
+                            uf.Just = "confirmed";
+                            uf.RequestOn = DateTime.Now;
+                            uf.NoteName = requestUserName;
+                            uf.Approve = 1;
+                            db.UserFriend.Add(uf);
+                        }
+                        else
+                        {
+                            verse.Just = "confirmed";
+                            verse.RequestOn = DateTime.Now;
+                            verse.NoteName = requestUserName;
+                            verse.Approve = 1;
+                        }
+                    }
+
+                    db.SaveChanges();
+
+                    return Ok(new ApiResult(0, "success"));
 
                 }
 
