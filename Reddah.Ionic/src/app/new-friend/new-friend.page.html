@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-item>
+      <ion-icon slot="start" name="arrow-round-back" (click)="close()"></ion-icon>
+      <ion-label slot="start">新的朋友</ion-label>
+      <ion-label color="success" slot="end" (click)="add()">添加朋友</ion-label>
+  </ion-item>
+</ion-header>
+
+<ion-content padding>
+    <ion-item *ngFor="let request of friendRequestList" lines="none">
+        <ion-thumbnail slot="start">
+            <img src="/assets/icon/anonymous.png">
+        </ion-thumbnail>
+        <ion-label slot="start">
+            <h1>
+                {{request.UserName}}
+                <ion-icon name="ios-person" *ngIf="sex==1"></ion-icon>
+                <ion-icon name="ios-person" *ngIf="sex==0" color="danger"></ion-icon>
+            </h1>
+            <p>{{request.Just}}</p>
+        </ion-label>
+        <ion-button color="success" slot="end" (click)="accept(request.UserName)" *ngIf="!request.Approve">接受</ion-button>
+        <ion-label slot="end" *ngIf="request.Approve">已添加</ion-label>
+    </ion-item>
+</ion-content>

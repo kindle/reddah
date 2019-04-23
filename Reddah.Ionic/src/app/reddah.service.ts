@@ -117,7 +117,42 @@ export class ReddahService {
       );
   }
   //******************************** */
+  private addFriendUrl = 'https://login.reddah.com/api/article/addfriend'; 
 
+  addFriend(formData: FormData): Observable<any> {
+
+    formData.append('jwt', this.getCurrentJwt());
+    return this.http.post<any>(this.addFriendUrl, formData)
+      .pipe(
+        tap(data => this.log('add friend')),
+        catchError(this.handleError('add friend', []))
+      );
+  }
+  //******************************** */
+  private approveFriendUrl = 'https://login.reddah.com/api/article/approvefriend'; 
+
+  approveFriend(formData: FormData): Observable<any> {
+
+    formData.append('jwt', this.getCurrentJwt());
+    return this.http.post<any>(this.approveFriendUrl, formData)
+      .pipe(
+        tap(data => this.log('approve friend')),
+        catchError(this.handleError('approve friend', []))
+      );
+  }
+  //******************************** */
+  private friendRequestsUrl = 'https://login.reddah.com/api/article/friendrequests'; 
+
+  friendRequests(formData: FormData): Observable<any> {
+
+    formData.append('jwt', this.getCurrentJwt());
+    return this.http.post<any>(this.friendRequestsUrl, formData)
+      .pipe(
+        tap(data => this.log('get friend requests')),
+        catchError(this.handleError('get friend requests', []))
+      );
+  }
+  //******************************** */
 
 
 

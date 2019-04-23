@@ -38,7 +38,7 @@
                 <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
                     <div style="background-color: #eeeeee; padding: 5px;" [innerHTML]="summary(article.Title,50)"></div>
                 </ion-item>
-                <ion-card-content style="display:block;" *ngIf="article.Content.split('$$$').length>0" no-padding>
+                <ion-card-content style="display:none;" *ngIf="article.Content.split('$$$').length>0" no-padding>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>6">
                         <div class="container" *ngFor="let image of article.Content.split('$$$')">
                             <img-loader src="{{image}}" class="picture" (click)="viewer(image)"></img-loader>
