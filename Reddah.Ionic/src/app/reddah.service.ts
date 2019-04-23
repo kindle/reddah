@@ -94,6 +94,18 @@ export class ReddahService {
       );
   }
   //******************************** */
+  private getUserInfoUrl = 'https://login.reddah.com/api/article/getuser'; 
+
+  getUserInfo(formData: FormData): Observable<any> {
+
+    formData.append('jwt', this.getCurrentJwt());
+    return this.http.post<any>(this.getUserInfoUrl, formData)
+      .pipe(
+        tap(data => this.log('get user info')),
+        catchError(this.handleError('get user info', []))
+      );
+  }
+  //******************************** */
   private timelineLikeUrl = 'https://login.reddah.com/api/article/like'; 
 
   like(formData: FormData): Observable<any> {

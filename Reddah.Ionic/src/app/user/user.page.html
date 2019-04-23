@@ -10,9 +10,13 @@
             <img src="/assets/icon/anonymous.png">
         </ion-thumbnail>
         <ion-label>
-            <h1>{{userName}}</h1>
-            <p>昵称：Lorem ipsum</p>
-            <p>地区：直布罗陀</p>
+            <h1>
+                {{userName}}
+                <ion-icon name="ios-person" *ngIf="sex==1"></ion-icon>
+                <ion-icon name="ios-person" *ngIf="sex==0" color="danger"></ion-icon>
+            </h1>
+            <p>昵称：{{nickName}}</p>
+            <p>地区：{{location}}</p>
         </ion-label>
     </ion-item>
     <ion-card>
@@ -22,31 +26,32 @@
         </ion-item>
     </ion-card>
     <ion-card>
-        <ion-item href="#">
-            <ion-label>个性签名</ion-label>
+        <ion-item>
+            <ion-label slot="start">个性签名</ion-label>
+            <ion-label text-wrap slot="start">{{signature}}</ion-label>
         </ion-item>
-        <ion-item (click)="viewTimeline()">
+        <ion-item (click)="viewTimeline()" style="margin: 8px 0;" lines="none">
             <ion-label slot="start">朋友圈</ion-label>
-            <ion-thumbnail slot="start" *ngFor="let image of imageList" style="padding: 10px;">
+            <ion-thumbnail slot="start" *ngFor="let image of imageList" style="padding: 1px;">
                 <img src="{{image}}">
             </ion-thumbnail>
+        
             <ion-icon name="arrow-forward" slot="end"></ion-icon>
         </ion-item>
     </ion-card>
-    
-    <ion-card>
+    <ion-card *ngIf="isFriend">
         <ion-item href="/#">
             <ion-icon name="chatboxes" slot="start"></ion-icon>
             <ion-label>发消息</ion-label>
         </ion-item>
     </ion-card>
-    <ion-card>
-        <ion-item href="#">
+    <ion-card *ngIf="isFriend">
+        <ion-item href="/#">
             <ion-icon name="videocam" slot="start"></ion-icon>
             <ion-label>音视频通话</ion-label>
         </ion-item>
     </ion-card>
-    <ion-card>
+    <ion-card *ngIf="!isFriend">
         <ion-item href="/#">
             <ion-label>添加到通讯录</ion-label>
         </ion-item>

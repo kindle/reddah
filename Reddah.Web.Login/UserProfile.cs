@@ -20,5 +20,7 @@ namespace Reddah.Web.Login
         public Nullable<int> Sex { get; set; }
         public string Signature { get; set; }
         public string Photo { get; set; }
+        public string NickName { get; set; }
+        public string Location { get; set; }
     }
 }

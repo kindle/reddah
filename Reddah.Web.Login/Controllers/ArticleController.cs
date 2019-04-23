@@ -368,5 +368,52 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("getuser")]
+        [HttpPost]
+        public IHttpActionResult GetUser()
+        {
+            UserInfo userInfo = new UserInfo();
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string targetUser = HttpContext.Current.Request["targetUser"];
+                
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var user = db.UserProfile.FirstOrDefault(u => u.UserName == targetUser);
+                    userInfo.UserName = user.UserName;
+                    userInfo.NickName = user.NickName??user.UserName;
+                    userInfo.Sex = user.Sex??0;
+                    userInfo.Photo = user.Photo;
+                    userInfo.Location = user.Location??"未知";
+                    userInfo.Signature = user.Signature;
+
+                    var findFriends = db.UserFriend.FirstOrDefault(f => (f.UserName == jwtResult.JwtUser.User && f.Watch == targetUser && f.Approve == 1) &&
+                    (f.UserName == targetUser && f.Watch == jwtResult.JwtUser.User && f.Approve == 1));
+                    userInfo.IsFriend = findFriends != null;
+                    if(userInfo.IsFriend)
+                        userInfo.NoteName = db.UserFriend.FirstOrDefault(f=>f.UserName == jwtResult.JwtUser.User && f.Approve == 1).NoteName;
+                    
+                    return Ok(userInfo);
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
     }
 }

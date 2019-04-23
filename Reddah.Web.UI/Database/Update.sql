@@ -49,6 +49,16 @@ update userprofile set sex=1 where userid in(3,4,6,8,9,10)
 update userprofile set sex=0 where userid in(5,7)
 update userprofile set signature=N'悲莫悲生离别，乐莫乐新相识' where userid=3
 
+--20190423
+alter table [dbo].[UserProfile] add
+  [NickName] NVARCHAR (MAX) NULL,
+  [Location] VARCHAR (MAX) NULL
+
+alter table [dbo].[UserFriend] add
+[Just] NVARCHAR (MAX) NULL,
+[RequestOn] DATETIME NULL,
+[Approve] INT default -1,
+[NoteName] NVARCHAR (MAX) NULL
 
 
 

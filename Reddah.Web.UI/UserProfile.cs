@@ -30,6 +30,10 @@ public partial class UserProfile
 
     public string Photo { get; set; }
 
+    public string NickName { get; set; }
+
+    public string Location { get; set; }
+
 }
 
 }

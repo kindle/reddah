@@ -16,5 +16,9 @@ namespace Reddah.Web.Login
     {
         public string UserName { get; set; }
         public string Watch { get; set; }
+        public string Just { get; set; }
+        public Nullable<System.DateTime> RequestOn { get; set; }
+        public Nullable<int> Approve { get; set; }
+        public string NoteName { get; set; }
     }
 }

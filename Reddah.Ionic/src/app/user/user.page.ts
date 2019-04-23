@@ -47,12 +47,47 @@ export class UserPage implements OnInit {
     }
 
     ngOnInit(){
+      this.getUserInfo();
       this.getTimeline();
     }
 
     imageList = [];
     loadedIds = [];
     formData: FormData;
+
+
+    nickName: string;
+    sex=-1;
+    photo: string;
+    location: string;
+    signature: string;
+
+    noteName: string;
+    isFriend: false;
+
+    getUserInfo(){
+        this.formData = new FormData();
+        this.formData.append("targetUser", this.userName);
+
+        let cacheKey = "this.reddah.getUserInfo"+this.userName;
+        console.log(`cacheKey:${cacheKey}`);
+        let request = this.reddah.getUserInfo(this.formData);
+
+        this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
+            .subscribe(userInfo => 
+            {
+                console.log(JSON.stringify(userInfo));
+                this.nickName = userInfo.NickName
+                this.sex = userInfo.Sex;
+                this.photo = userInfo.Photo;
+                this.location = userInfo.Location;
+                this.signature = userInfo.Signature;
+
+                this.noteName = userInfo.NoteName;
+                this.isFriend = userInfo.IsFriend;
+            }
+        );
+    }
 
     getTimeline(){
         this.formData = new FormData();
