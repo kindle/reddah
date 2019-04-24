@@ -16,6 +16,7 @@ import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ArticleTextPopPage } from '../article-pop/article-text-pop.page'
 
 @Component({
   selector: 'app-mytimeline',
@@ -102,13 +103,36 @@ export class MyTimeLinePage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
     }
 
+
+    drawBackground(){
+        var p = document.getElementById("mycontent");
+        
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext("2d");
+        var img = new Image();
+        img.src = "assets/icon/timg.jpg";
+        context.drawImage(img, 0, 0);
+        var imgData = context.getImageData(0, 0, img.width, 3);
+        
+        var canvas1 = document.createElement('canvas');
+        canvas1.style.position = "absolute";
+        canvas1.style.width = "100%";
+        canvas1.style.zIndex = "-100";
+        p.parentElement.appendChild(canvas1);
+        var ctx = canvas1.getContext("2d");
+        for(let i=0;i<90;i++){
+            ctx.putImageData(imgData, 0, 3*i);
+        }
+        
+    }
+    
     async ngOnInit(){
       const loading = await this.loadingController.create({
         message: this.translateService.instant("Article.Loading"),
         spinner: 'circles',
       });
       await loading.present();
-
+      this.drawBackground();
       this.loadedIds = [];
       this.formData = new FormData();
       this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
@@ -403,6 +427,13 @@ export class MyTimeLinePage implements OnInit {
       await userModal.present();
     }
 
-  
+    async fullText(text){
+      const textModal = await this.modalController.create({
+        component: ArticleTextPopPage,
+        componentProps: { text: text }
+      });
+        
+      await textModal.present();
+    }
         
 }

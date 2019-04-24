@@ -85,7 +85,8 @@ export class UserPage implements OnInit {
                 this.signature = userInfo.Signature;
 
                 this.noteName = userInfo.NoteName;
-                this.isFriend = userInfo.IsFriend?1:0;
+                if(this.userName!=this.reddah.getCurrentUser())
+                    this.isFriend = userInfo.IsFriend?1:0;
             }
         );
     }
@@ -141,11 +142,11 @@ export class UserPage implements OnInit {
 
     async presentActionSheet() {
       const actionSheet = await this.actionSheetController.create({
-        header: 'Albums',
+        //header: '',
         buttons: [{
           text: '刷新',
           role: 'destructive',
-          icon: 'trash',
+          icon: 'refresh',
           handler: () => {
               this.clearCacheAndReload();
           }
@@ -156,8 +157,8 @@ export class UserPage implements OnInit {
             console.log('Share clicked');
           }
         }, {
-          text: 'Play (open modal)',
-          icon: 'arrow-dropright-circle',
+          text: '加入黑名单',
+          icon: 'remove-circle-outline',
           handler: () => {
             console.log('Play clicked');
           }
@@ -168,8 +169,8 @@ export class UserPage implements OnInit {
             console.log('Favorite clicked');
           }
         }, {
-          text: 'Cancel',
-          icon: 'close',
+          text: '删除',
+          icon: 'ios-trash',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');

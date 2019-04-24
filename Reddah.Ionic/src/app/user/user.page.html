@@ -4,9 +4,9 @@
         <ion-icon name="ios-more" slot="end" (click)="presentActionSheet()"></ion-icon>
     </ion-item>
 </ion-header>
-<ion-content style="align-items: center;">
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
+<ion-content style="align-items: center; background-color:white;">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" spinner="none">
+        <ion-refresher-content ></ion-refresher-content>
     </ion-refresher>
     <ion-item>
         <ion-thumbnail slot="start">
@@ -30,15 +30,14 @@
     </ion-card>
     <ion-card>
         <ion-item>
-            <ion-label slot="start">个性签名</ion-label>
-            <ion-label text-wrap slot="start">{{signature}}</ion-label>
+            <span class="itemTitle">个性签名</span>
+            <ion-label text-wrap>{{signature}}</ion-label>
         </ion-item>
         <ion-item (click)="viewTimeline()" style="margin: 8px 0;" lines="none">
-            <ion-label slot="start">朋友圈</ion-label>
-            <ion-thumbnail slot="start" *ngFor="let image of imageList" style="padding: 1px;">
+            <span class="itemTitle">朋友圈</span>
+            <ion-thumbnail *ngFor="let image of imageList" style="padding: 1px;">
                 <img src="{{image}}">
             </ion-thumbnail>
-        
             <ion-icon name="arrow-forward" slot="end"></ion-icon>
         </ion-item>
     </ion-card>
