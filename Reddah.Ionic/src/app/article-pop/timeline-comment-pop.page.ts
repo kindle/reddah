@@ -11,7 +11,7 @@ import { PopoverController } from '@ionic/angular';
           <ion-text (click)="close(2)" margin-end *ngIf="liked">取消</ion-text>
           <ion-icon (click)="close(3)" color="primary" name="chatboxes" size="medium"></ion-icon>
           <ion-text (click)="close(3)" margin-end>评论</ion-text>
-        </ion-item>     
+        </ion-item>
   `
 })
 export class TimelineCommentPopPage {

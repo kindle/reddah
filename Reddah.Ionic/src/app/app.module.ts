@@ -40,6 +40,7 @@ import { TimeLinePage } from './timeline/timeline.page';
 import { MyTimeLinePage } from './mytimeline/mytimeline.page';
 import { UserPage } from './user/user.page';
 import { ArticlePopPage } from './article-pop/article-pop.page'
+import { ChangeCoverPopPage } from './article-pop/change-cover-pop.page'
 import { ArticleTextPopPage } from './article-pop/article-text-pop.page'
 import { CommentPopPage } from './article-pop/comment-pop.page'
 import { TimelinePopPage } from './article-pop/timeline-pop.page'
@@ -71,6 +72,7 @@ import { AboutPage } from './about/about.page';
     MyTimeLinePage,
     UserPage,
     ArticlePopPage,
+    ChangeCoverPopPage,
     ArticleTextPopPage,
     CommentPopPage,
     TimelinePopPage,
@@ -86,6 +88,7 @@ import { AboutPage } from './about/about.page';
     AddFriendPage,
     NewFriendPage,
     ArticlePopPage,
+    ChangeCoverPopPage,
     ArticleTextPopPage,
     CommentPopPage,
     TimelinePopPage,

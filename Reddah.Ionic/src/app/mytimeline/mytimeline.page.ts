@@ -3,7 +3,7 @@ import { InfiniteScroll, Content } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../article';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController } from '@ionic/angular';
+import { LoadingController, NavController, PopoverController, AlertController } from '@ionic/angular';
 import { LocalePage } from '../locale/locale.page';
 import { PostviewerPage } from '../postviewer/postviewer.page';
 import { ModalController } from '@ionic/angular';
@@ -17,6 +17,7 @@ import { IonicImageLoader } from 'ionic-image-loader';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleTextPopPage } from '../article-pop/article-text-pop.page'
+import { ChangeCoverPopPage } from '../article-pop/change-cover-pop.page'
 
 @Component({
   selector: 'app-mytimeline',
@@ -99,6 +100,7 @@ export class MyTimeLinePage implements OnInit {
       private cacheService: CacheService,
       private router: Router,
       private activatedRoute: ActivatedRoute,
+      private alertController: AlertController,
       ){
         this.userName = this.reddah.getCurrentUser();
     }
@@ -254,13 +256,14 @@ export class MyTimeLinePage implements OnInit {
         });
     }
 
-    async presentPopover(ev: any, id: any, groupNames: string) {
+    async presentPopover(event: Event, id: any, groupNames: string) {
       let liked = groupNames.split(',').includes(this.reddah.getCurrentUser());
       const popover = await this.popoverController.create({
         component: TimelineCommentPopPage,
         componentProps: { liked: liked },
-        event: ev,
-        translucent: true
+        event: event,
+        translucent: true,
+        cssClass: 'like-comment-popover'
       });
       await popover.present();
       const { data } = await popover.onDidDismiss();
@@ -435,5 +438,16 @@ export class MyTimeLinePage implements OnInit {
         
       await textModal.present();
     }
+
+    async changeCover(){
+      const popover = await this.popoverController.create({
+          component: ChangeCoverPopPage,
+          translucent: true,
+          animated: false
+      });
+      await popover.present();
+      const { data } = await popover.onDidDismiss();
+    }
+
         
 }
