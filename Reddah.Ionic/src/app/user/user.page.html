@@ -1,6 +1,6 @@
 <ion-header>
     <ion-item>
-        <ion-icon name="arrow-round-back" slot="start" (click)="close()"></ion-icon>
+        <ion-icon name="ios-arrow-back" slot="start" (click)="close()"></ion-icon>
         <ion-icon name="ios-more" slot="end" (click)="presentActionSheet()"></ion-icon>
     </ion-item>
 </ion-header>
@@ -25,7 +25,7 @@
     <ion-card>
         <ion-item href="/#">
             <ion-label>设置备注和标签</ion-label>
-            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
         </ion-item>
     </ion-card>
     <ion-card>
@@ -38,7 +38,7 @@
             <ion-thumbnail *ngFor="let image of imageList" style="padding: 1px;">
                 <img src="{{image}}">
             </ion-thumbnail>
-            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
         </ion-item>
     </ion-card>
     <ion-card *ngIf="isFriend==1">

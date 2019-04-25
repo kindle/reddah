@@ -244,16 +244,20 @@ export class MyTimeLinePage implements OnInit {
     async post(ev: any) {
         const popover = await this.popoverController.create({
             component: TimelinePopPage,
-            event: ev,
-            translucent: true
+            animated: false,
+            translucent: true,
+            cssClass: 'post-option-popover'
         });
         await popover.present();
         const { data } = await popover.onDidDismiss();
-        this.router.navigate(['/post'], {
-          queryParams: {
-            data: data
-          }
-        });
+        //data=1: take a photo, data=2: lib
+        if(data!=null){
+            this.router.navigate(['/post'], {
+              queryParams: {
+                data: data
+              }
+            });
+        }
     }
 
     async presentPopover(event: Event, id: any, groupNames: string) {
@@ -422,32 +426,32 @@ export class MyTimeLinePage implements OnInit {
     }
 
     async goUser(userName){
-      const userModal = await this.modalController.create({
-        component: UserPage,
-        componentProps: { userName: userName }
-      });
-        
-      await userModal.present();
+        const userModal = await this.modalController.create({
+          component: UserPage,
+          componentProps: { userName: userName }
+        });
+          
+        await userModal.present();
     }
 
     async fullText(text){
-      const textModal = await this.modalController.create({
-        component: ArticleTextPopPage,
-        componentProps: { text: text }
-      });
-        
-      await textModal.present();
+        const textModal = await this.modalController.create({
+          component: ArticleTextPopPage,
+          componentProps: { text: text }
+        });
+          
+        await textModal.present();
     }
 
     async changeCover(){
-      const popover = await this.popoverController.create({
-          component: ChangeCoverPopPage,
-          translucent: true,
-          animated: false
-      });
-      await popover.present();
-      const { data } = await popover.onDidDismiss();
+        const popover = await this.popoverController.create({
+            component: ChangeCoverPopPage,
+            translucent: true,
+            animated: false,
+            cssClass: 'change-cover-popover',
+        });
+        await popover.present();
+        const { data } = await popover.onDidDismiss();
     }
 
-        
 }

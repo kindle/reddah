@@ -14,6 +14,7 @@ import { ReddahService } from '../reddah.service';
 import { AuthService }      from '../auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
+import { MyInfoPage } from '../my-info/my-info.page';
 
 @Component({
   selector: 'app-about',
@@ -164,6 +165,17 @@ export class AboutPage implements OnInit {
 
     logout() {
         this.authService.logout();
+    }
+
+    async myInfo() {
+        const addFriendModal = await this.modalController.create({
+            component: MyInfoPage,
+            componentProps: {  }
+        });
+        
+        await addFriendModal.present();
+        const { data } = await addFriendModal.onDidDismiss();
+        //check if change
     }
 
 }

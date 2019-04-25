@@ -5,7 +5,7 @@ import { ModalController } from '@ionic/angular';
   template: `
   <ion-header>
     <ion-item>
-        <ion-icon slot="start" name="arrow-round-back" (click)="close()"></ion-icon>
+        <ion-icon slot="start" name="ios-arrow-back" (click)="close()"></ion-icon>
     </ion-item>
   </ion-header>
   <ion-content padding>

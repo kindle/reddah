@@ -1,4 +1,4 @@
-<ion-tabs>
+<ion-tabs *ngIf="isLocaleSet()">
 
   <ion-tab tab="home">
       <ion-router-outlet name="home"></ion-router-outlet>

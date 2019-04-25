@@ -2,13 +2,13 @@
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" style="background-color:white;">
     <div class="headerStart" #headerStart>
         <ion-item color="transparent" lines="none">
-            <ion-icon name="arrow-round-back" slot="start" (click)="goback()"></ion-icon>
+            <ion-icon name="ios-arrow-back" slot="start" (click)="goback()"></ion-icon>
             <ion-label></ion-label>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll>
         <ion-item color="light">
-            <ion-icon name="arrow-round-back" slot="start" (click)="goback()"></ion-icon>
+            <ion-icon name="ios-arrow-back" slot="start" (click)="goback()"></ion-icon>
             <ion-label>{{userName}}</ion-label>
         </ion-item>
     </div>

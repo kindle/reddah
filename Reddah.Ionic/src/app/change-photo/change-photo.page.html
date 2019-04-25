@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-item>
+      <ion-icon slot="start" name="ios-arrow-back" (click)="close()"></ion-icon>
+      <ion-label slot="start">{{title}}</ion-label>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-item (click)="select(2)">
+          <ion-label>从手机相册选择</ion-label>
+          <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item (click)="select(1)">
+          <ion-label>拍一张</ion-label>
+          <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+    </ion-card>
+    <ion-card style="display: none;">
+        <ion-item>
+          <ion-label>摄影师作品</ion-label>
+          <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+    </ion-card>
+</ion-content>

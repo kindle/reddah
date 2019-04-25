@@ -32,6 +32,9 @@ import { FormsModule } from '@angular/forms';
 
 import { AddCommentPage } from './add-comment/add-comment.page';
 import { AddFriendPage } from './add-friend/add-friend.page';
+import { ChangePhotoPage } from './change-photo/change-photo.page';
+import { CropPhotoPage } from './crop-photo/crop-photo.page';
+import { MyInfoPage } from './my-info/my-info.page';
 import { NewFriendPage } from './new-friend/new-friend.page';
 import { Toast } from '@ionic-native/toast/ngx';
 import { CommentComponent } from './comment/comment.component';
@@ -61,6 +64,9 @@ import { AboutPage } from './about/about.page';
     LocalePage,
     AddCommentPage,
     AddFriendPage,
+    ChangePhotoPage,
+    CropPhotoPage,
+    MyInfoPage,
     NewFriendPage,
     PostviewerPage,
     SafePipe,
@@ -86,6 +92,9 @@ import { AboutPage } from './about/about.page';
     LoginPage,
     AddCommentPage,
     AddFriendPage,
+    ChangePhotoPage,
+    CropPhotoPage,
+    MyInfoPage,
     NewFriendPage,
     ArticlePopPage,
     ChangeCoverPopPage,
