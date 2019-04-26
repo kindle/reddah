@@ -22,5 +22,6 @@ namespace Reddah.Web.Login
         public string Photo { get; set; }
         public string NickName { get; set; }
         public string Location { get; set; }
+        public string Cover { get; set; }
     }
 }

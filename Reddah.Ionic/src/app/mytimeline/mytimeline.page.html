@@ -19,7 +19,7 @@
             <ion-refresher-content></ion-refresher-content>
         </ion-refresher>  
         <div class="timelineCover" #timelineCover>
-            <img-loader src="assets/icon/timg.jpg" (click)="changeCover()"></img-loader>
+            <img-loader src="{{cover}}" (click)="changeCover()"></img-loader>
         </div>
         <div class="timelineAvatar">
             <ion-label class="userNameTitle">{{userName}}</ion-label>

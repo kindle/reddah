@@ -62,6 +62,7 @@ export class UserPage implements OnInit {
     photo: string;
     location: string;
     signature: string;
+    cover: string;
 
     noteName: string;
     isFriend = -1;
@@ -83,6 +84,7 @@ export class UserPage implements OnInit {
                 this.photo = userInfo.Photo;
                 this.location = userInfo.Location;
                 this.signature = userInfo.Signature;
+                this.cover = userInfo.Cover;
 
                 this.noteName = userInfo.NoteName;
                 if(this.userName!=this.reddah.getCurrentUser())

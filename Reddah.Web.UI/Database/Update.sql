@@ -54,6 +54,10 @@ alter table [dbo].[UserProfile] add
   [NickName] NVARCHAR (MAX) NULL,
   [Location] VARCHAR (MAX) NULL
 
+--20190426
+alter table [dbo].[UserProfile] add
+  [Cover] VARCHAR (MAX) NULL
+
 
 
 

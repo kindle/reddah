@@ -397,16 +397,8 @@ namespace Reddah.Web.Login.Controllers
                     userInfo.Photo = user.Photo;
                     userInfo.Location = user.Location??"未知";
                     userInfo.Signature = user.Signature;
+                    userInfo.Cover = user.Cover;
 
-                    var log = new Log();
-                    log.Date = DateTime.Now;
-                    log.Level = "1";
-                    log.Thread = "1";
-                    log.Logger = "sys";
-                    log.Message = jwtResult.JwtUser.User + targetUser;
-
-                    db.Log.Add(log);
-                    
                     var findFriends = db.UserFriend.FirstOrDefault(f => (f.UserName == jwtResult.JwtUser.User && f.Watch == targetUser && f.Approve == 1) ||
                     (f.UserName == targetUser && f.Watch == jwtResult.JwtUser.User && f.Approve == 1));
                     userInfo.IsFriend = findFriends != null;
@@ -583,6 +575,109 @@ namespace Reddah.Web.Login.Controllers
                 return Ok(new ApiResult(4, ex.Message));
             }
         }
+
+        [Route("updateuserphoto")]
+        [HttpPost]
+        public IHttpActionResult UpdateUserPhoto()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string tag = HttpContext.Current.Request["tag"];//cover|portrait
+                List<string> imageUrls = new List<string>();
+
+                HttpFileCollection hfc = HttpContext.Current.Request.Files;
+
+                if (String.IsNullOrWhiteSpace(tag))
+                    return Ok(new ApiResult(1, "No tag"));
+
+                if (hfc.Count == 0)
+                    return Ok(new ApiResult(1, "No photo"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                try
+                {
+                    using (var db = new reddahEntities())
+                    {
+                        var fileName = "";
+
+                        foreach (string rfilename in HttpContext.Current.Request.Files)
+                        {
+                            //upload image first
+                            string guid = Guid.NewGuid().ToString().Replace("-", "");
+                            string uploadedImagePath = "/uploadPhoto/";
+                            string uploadImageServerPath = "~" + uploadedImagePath;
+
+                            HttpPostedFile upload = HttpContext.Current.Request.Files[rfilename];
+
+                            try
+                            {
+                                var fileFormat = upload.FileName.Substring(upload.FileName.LastIndexOf('.')).Replace(".", "");
+                                fileName = Path.GetFileName(guid + "." + fileFormat);
+                                var filePhysicalPath = HostingEnvironment.MapPath(uploadImageServerPath + "/" + fileName);
+                                if (!Directory.Exists(HostingEnvironment.MapPath(uploadImageServerPath)))
+                                {
+                                    Directory.CreateDirectory(HostingEnvironment.MapPath(uploadImageServerPath));
+                                }
+                                upload.SaveAs(filePhysicalPath);
+                                var url = uploadedImagePath + fileName;
+
+
+                                UploadFile file = new UploadFile();
+                                file.Guid = guid;
+                                file.Format = fileFormat;
+                                file.UserName = jwtResult.JwtUser.User;
+                                file.CreatedOn = DateTime.Now;
+                                file.GroupName = "";
+                                file.Tag = tag;
+                                db.UploadFile.Add(file);
+                                imageUrls.Add("https://login.reddah.com" + url);
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+                        }
+
+
+                        //update user info
+                        UserProfile user = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+                        if (tag.Equals("cover", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            user.Photo = string.Format("///login.reddah.com/uploadPhoto/{0}", fileName);
+                        }
+                        else
+                        {
+                            //portrait
+                            user.Cover = string.Format("///login.reddah.com/uploadPhoto/{0}", fileName);
+                        }
+
+                        db.SaveChanges();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Ok(new ApiResult(3, "Excepion:" + ex.Message.ToString()));
+                }
+
+
+                return Ok(new ApiResult(0, "User "+tag+" photo updated"));
+
+            }
+            catch (Exception ex1)
+            {
+                return Ok(new ApiResult(4, ex1.Message));
+            }
+
+
+
+        }
+
 
     }
 }

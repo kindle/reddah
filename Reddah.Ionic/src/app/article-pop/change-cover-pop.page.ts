@@ -21,7 +21,10 @@ export class ChangeCoverPopPage {
 
     const userModal = await this.modalController.create({
       component: ChangePhotoPage,
-      componentProps: { title : "更换相册封面" }
+      componentProps: { 
+        title : "更换相册封面",
+        tag : "cover"
+      }
     });
       
     await userModal.present();

@@ -32,8 +32,41 @@ export class CropPhotoPage implements OnInit {
       await this.modalController.dismiss(false);
   }
 
+  fileUrl: any = null;
+  respData: any;
 
+  cropUpload(){
+    const options: CameraOptions = {
+        quality: 100,
+        destinationType: Camera.DestinationType.FILE_URI,
+        encodingType: Camera.EncodingType.JPEG,
+        mediaType: Camera.MediaType.PICTURE,
+        correctOrientation: true
+    }
+      
+    Camera.getPicture(options).then((imageData) => {
+        //this.texts.push(imageData);
+        //this.photos.push((<any>window).Ionic.WebView.convertFileSrc(imageData));
+        //this.prepareData(imageData);
+        //this.prepareData((<any>window).Ionic.WebView.convertFileSrc(imageData));
+        //this.photos.push('data:image/jpeg;base64,' + imageData);
+        this.crop.crop(imageData, { quality: 100, targetWidth: -1, targetHeight: -1 })
+            .then(
+              newImage => {
+                console.log('new image path is: ' + newImage);
+                this.fileUrl = newImage;
+                
+              },
+              error => console.error('Error cropping image', error)
+            );
+    }, (err) => {
+        console.log(JSON.stringify(err));
+    });
+    
+    
+  }
 
+/*
   async prepareData(filePath) {
     this.file.resolveLocalFilesystemUrl(filePath)
         .then(entry => {
@@ -54,5 +87,5 @@ export class CropPhotoPage implements OnInit {
       };
       reader.readAsArrayBuffer(file);
   }
-
+*/
 }

@@ -30,7 +30,10 @@ export class MyInfoPage implements OnInit {
   async changePhoto(){
       const userModal = await this.modalController.create({
         component: ChangePhotoPage,
-        componentProps: { title: "更换头像" }
+        componentProps: { 
+            title: "更换头像",
+            tag : "portrait"
+        }
       });
         
       await userModal.present();

@@ -127,14 +127,31 @@ export class MyTimeLinePage implements OnInit {
         }
         
     }
+
+    cover: string;
+    getUserInfo(){
+        this.formData = new FormData();
+        this.formData.append("targetUser", this.userName);
+
+        this.reddah.getUserInfo(this.formData)
+            .subscribe(userInfo => 
+            {
+                console.log(JSON.stringify(userInfo));
+                this.cover = userInfo.Cover!=null?userInfo.Cover:"assets/icon/timg.jpg";
+                this.drawBackground();
+            }
+        );
+    }
     
     async ngOnInit(){
+      this.getUserInfo();
+
       const loading = await this.loadingController.create({
         message: this.translateService.instant("Article.Loading"),
         spinner: 'circles',
       });
       await loading.present();
-      this.drawBackground();
+      
       this.loadedIds = [];
       this.formData = new FormData();
       this.formData.append("loadedIds", JSON.stringify(this.loadedIds));

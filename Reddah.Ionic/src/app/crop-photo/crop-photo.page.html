@@ -5,5 +5,11 @@
 </ion-header>
 
 <ion-content>
-    
+    <img *ngIf="!fileUrl" src="assets/icon/noimage.jpg"/>
+    <img *ngIf="fileUrl" src="{{fileUrl}}"/>
+    <ion-card-content>
+      <ion-button color="medium" size="large" (click)="cropUpload()">
+        <ion-icon slot="icon-only" name="camera"></ion-icon>
+      </ion-button>
+    </ion-card-content>
 </ion-content>

@@ -34,6 +34,8 @@ public partial class UserProfile
 
     public string Location { get; set; }
 
+    public string Cover { get; set; }
+
 }
 
 }

@@ -153,7 +153,24 @@ export class ReddahService {
       );
   }
   //******************************** */
+  private updateUserPhotoUrl = 'https://login.reddah.com/api/article/updateuserphoto'; 
 
+  updateUserPhoto(formData: FormData): Observable<any> {
+
+    formData.append('jwt', this.getCurrentJwt());
+    const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'multipart/form-data', 
+          'Accept': 'application/json',
+        })
+    };
+    return this.http.post<any>(this.updateUserPhotoUrl, formData)
+      .pipe(
+        tap(heroes => this.log('update user photo')),
+        catchError(this.handleError('update user photo', []))
+      );
+  }
+  //******************************** */
 
 
 
