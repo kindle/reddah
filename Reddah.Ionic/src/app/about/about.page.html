@@ -1,12 +1,19 @@
-<ion-content>
-    <ion-item>
+<ion-content class="aboutContent">
+    <ion-item lines="none" style="margin-bottom: 10px;">
       <ion-icon slot="end" name="camera" (click)="takePhoto()"></ion-icon>
     </ion-item>
-    <ion-item (click)="myInfo()">
-      <ion-thumbnail item-left>
-        <img src="/assets/icon/anonymous.png">
-      </ion-thumbnail>
+    <ion-item (click)="myInfo()" lines="none">
+        <ion-thumbnail slot="start" style="padding: 5px;">
+          <img src="{{photo}}" class="portrait">
+        </ion-thumbnail>
+        <ion-label slot="start">
+            <h1>{{nickName}}</h1>
+            <p>Reddah ID: {{userName}}</p>
+        </ion-label>
+        <ion-icon name="ios-qr-scanner" slot="end"></ion-icon>
+        <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
     </ion-item>
+
     <ion-card>
       <ion-card-header>{{ 'About.CurrentVersion' | translate }}</ion-card-header>
       <ion-card-content>{{version}}</ion-card-content>

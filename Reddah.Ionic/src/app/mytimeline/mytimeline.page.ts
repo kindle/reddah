@@ -89,30 +89,30 @@ export class MyTimeLinePage implements OnInit {
     }
 
     constructor(private reddah : ReddahService,
-      public loadingController: LoadingController,
-      public translateService: TranslateService,
-      public navController: NavController,
-      private renderer: Renderer,
-      public modalController: ModalController,
-      private localStorageService: LocalStorageService,
-      private popoverController: PopoverController,
-      private photoLibrary: PhotoLibrary,
-      private cacheService: CacheService,
-      private router: Router,
-      private activatedRoute: ActivatedRoute,
-      private alertController: AlertController,
-      ){
-        this.userName = this.reddah.getCurrentUser();
+        public loadingController: LoadingController,
+        public translateService: TranslateService,
+        public navController: NavController,
+        private renderer: Renderer,
+        public modalController: ModalController,
+        private localStorageService: LocalStorageService,
+        private popoverController: PopoverController,
+        private photoLibrary: PhotoLibrary,
+        private cacheService: CacheService,
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        private alertController: AlertController,
+        ){
+            this.userName = this.reddah.getCurrentUser();
     }
 
 
-    drawBackground(){
+    drawBackground(src){
         var p = document.getElementById("mycontent");
         
         var canvas = document.createElement('canvas');
         var context = canvas.getContext("2d");
         var img = new Image();
-        img.src = "assets/icon/timg.jpg";
+        img.src = src;
         context.drawImage(img, 0, 0);
         var imgData = context.getImageData(0, 0, img.width, 3);
         
@@ -128,7 +128,8 @@ export class MyTimeLinePage implements OnInit {
         
     }
 
-    cover: string;
+    cover: string = "assets/icon/timg.jpg";
+    userPhoto: string = "assets/icon/anonymous.png";
     getUserInfo(){
         this.formData = new FormData();
         this.formData.append("targetUser", this.userName);
@@ -137,43 +138,47 @@ export class MyTimeLinePage implements OnInit {
             .subscribe(userInfo => 
             {
                 console.log(JSON.stringify(userInfo));
-                this.cover = userInfo.Cover!=null?userInfo.Cover:"assets/icon/timg.jpg";
-                this.drawBackground();
+                if(userInfo.Cover!=null)
+                    this.cover = userInfo.Cover;
+                if(userInfo.Photo!=null)
+                    this.userPhoto = userInfo.Photo;
+                //bug when image not loaded, src width =0
+                this.drawBackground(this.cover);
             }
         );
     }
     
     async ngOnInit(){
-      this.getUserInfo();
+        this.getUserInfo();
 
-      const loading = await this.loadingController.create({
-        message: this.translateService.instant("Article.Loading"),
-        spinner: 'circles',
-      });
-      await loading.present();
-      
-      this.loadedIds = [];
-      this.formData = new FormData();
-      this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
+        const loading = await this.loadingController.create({
+            message: this.translateService.instant("Article.Loading"),
+            spinner: 'circles',
+        });
+        await loading.present();
+        
+        this.loadedIds = [];
+        this.formData = new FormData();
+        this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
 
-      let cacheKey = "this.reddah.getMyTimeline";
-      console.log(`cacheKey:${cacheKey}`);
-      let request = this.reddah.getMyTimeline(this.formData);
+        let cacheKey = "this.reddah.getMyTimeline";
+        console.log(`cacheKey:${cacheKey}`);
+        let request = this.reddah.getMyTimeline(this.formData);
 
-      this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
-        .subscribe(timeline => 
-          {
-              this.articles = [];
-              this.commentData = new Map();
+        this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
+            .subscribe(timeline => 
+            {
+                this.articles = [];
+                this.commentData = new Map();
 
-              for(let article of timeline){
-                this.articles.push(article);
-                this.loadedIds.push(article.Id);
-                this.GetCommentsData(article.Id);
-              }
-              loading.dismiss();
-          }
-      );
+                for(let article of timeline){
+                    this.articles.push(article);
+                    this.loadedIds.push(article.Id);
+                    this.GetCommentsData(article.Id);
+                }
+                loading.dismiss();
+            }
+        );
     }
   
     getMyTimeline():void {
@@ -186,12 +191,12 @@ export class MyTimeLinePage implements OnInit {
       
       this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
         .subscribe(timeline => 
-          {
-              for(let article of timeline){
+        {
+            for(let article of timeline){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
-              }
-          }
+            }
+        }
       );
 
     }
@@ -203,17 +208,17 @@ export class MyTimeLinePage implements OnInit {
     }
 
     doRefresh(event) {
-      console.log('Begin async operation');
-  
-      setTimeout(() => {
-        this.clearCacheAndReload();
-        event.target.complete();
-      }, 2000);
+        console.log('Begin async operation');
+    
+        setTimeout(() => {
+            this.clearCacheAndReload();
+            event.target.complete();
+        }, 2000);
     }
 
     ionViewDidLoad() {
-      let locale = this.localStorageService.retrieve("Reddah_Locale");
-      console.log(locale);
+        let locale = this.localStorageService.retrieve("Reddah_Locale");
+        console.log(locale);
     }
 
 
@@ -436,7 +441,6 @@ export class MyTimeLinePage implements OnInit {
           this.newComment.setFocus();
         },150);
     }
-
     
     handleSelection(face) {
         this.newComment.value += face;
@@ -469,6 +473,8 @@ export class MyTimeLinePage implements OnInit {
         });
         await popover.present();
         const { data } = await popover.onDidDismiss();
+        if(data)
+            this.getUserInfo();
     }
 
 }

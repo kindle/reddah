@@ -26,16 +26,16 @@
 .timelineAvatar {
     display: flex; 
     justify-content: flex-end;
+    margin-bottom: -40px;
 }
 
 .timelineAvatar img {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     top: -50px;
     margin-right: 15px;
     border-radius: 7%;
-    border: 1px solid gray;
 }
 
 .timelineAvatar ion-label {

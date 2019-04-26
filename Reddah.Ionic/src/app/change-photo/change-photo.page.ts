@@ -144,11 +144,12 @@ export class ChangePhotoPage implements OnInit {
                 
                 if(result.Success==0)
                 { 
-                    //go back and refresh photo
+                    this.modalController.dismiss(true);
                 }
                 else
                 {
                     alert(result.Message);
+                    this.modalController.dismiss(false);
                 }
                 
             },

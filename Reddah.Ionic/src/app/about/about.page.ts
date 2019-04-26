@@ -23,9 +23,10 @@ import { MyInfoPage } from '../my-info/my-info.page';
 })
 export class AboutPage implements OnInit {
     
-    currentUser: String;
-    currentLocaleInfo : String;
-    version: String;
+    userName: string;
+    nickName: string;
+    currentLocaleInfo : string;
+    version: string;
 
     constructor(
         private appVersion: AppVersion,
@@ -37,28 +38,52 @@ export class AboutPage implements OnInit {
         public modalController: ModalController,
         public navController: NavController,
         private router: Router,
-        private service: ReddahService,
+        private reddahService: ReddahService,
         public authService: AuthService,
         public translateService: TranslateService,
         private cacheService: CacheService,
     ) {
+        
+    }
+
+    ngOnInit() {
         this.getVersionNumber().then(version => {
             this.version = version;
         });
 
         this.currentLocaleInfo = "Not Set";
         const locale = this.localStorageService.retrieve("Reddah_Locale");
-        this.service.Locales.forEach((value, index, arr)=>{
+        this.reddahService.Locales.forEach((value, index, arr)=>{
             if(locale===value.Name)
                 this.currentLocaleInfo = value.Description;
         });
         
-        this.currentUser = "Not Set";
-        this.currentUser = this.localStorageService.retrieve("Reddah_CurrentUser");
+        this.userName = "Not Set";
+        this.userName = this.localStorageService.retrieve("Reddah_CurrentUser");
+
+        this.getUserInfo();
     }
 
-    ngOnInit() {
-        
+    formData: FormData;
+    photo: string = "assets/icon/anonymous.png";
+    getUserInfo(){
+        this.formData = new FormData();
+        this.formData.append("targetUser", this.userName);
+
+        let cacheKey = "this.reddah.getUserInfo"+this.userName;
+        console.log(`cacheKey:${cacheKey}`);
+        let request = this.reddahService.getUserInfo(this.formData);
+
+        this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
+            .subscribe(userInfo => 
+            {
+                console.log(JSON.stringify(userInfo));
+                if(userInfo.Photo!=null)
+                    this.photo = userInfo.Photo;
+                if(userInfo.NickName!=null)
+                    this.nickName = userInfo.NickName;
+            }
+        );
     }
 
     
@@ -71,17 +96,17 @@ export class AboutPage implements OnInit {
             destinationType: Camera.DestinationType.FILE_URI,
             encodingType: Camera.EncodingType.JPEG,
             mediaType: Camera.MediaType.PICTURE
-          }
+        }
           
-          Camera.getPicture(options).then((imageData) => {
-           // imageData is either a base64 encoded string or a file URI
-           // If it's base64 (DATA_URL):
-           //alert(imageData)
-           this.image=(<any>window).Ionic.WebView.convertFileSrc(imageData);
-          }, (err) => {
-           // Handle error
-           alert("error "+JSON.stringify(err))
-          });
+        Camera.getPicture(options).then((imageData) => {
+            // imageData is either a base64 encoded string or a file URI
+            // If it's base64 (DATA_URL):
+            //alert(imageData)
+            this.image=(<any>window).Ionic.WebView.convertFileSrc(imageData);
+        }, (err) => {
+            // Handle error
+            alert("error "+JSON.stringify(err))
+        });
         
     }
 
@@ -117,20 +142,20 @@ export class AboutPage implements OnInit {
 
 
     appUpgrade() {
-      alert('appupgrade');
-      /*this.alertCtrl.create({
-          title: '发现新版本',
-          subTitle: '检查到新版本，是否立即下载？',
-          buttons: [{ text:'取消' },
-          {
-              text: '下载'
-              handler: () => {
-                      //跳转ios 版本下载地址
-                      this.iab.create(url, '_system');
-              }
-          }
-          ]
-      }).present();*/
+        alert('appupgrade');
+        /*this.alertCtrl.create({
+            title: '发现新版本',
+            subTitle: '检查到新版本，是否立即下载？',
+            buttons: [{ text:'取消' },
+            {
+                text: '下载'
+                handler: () => {
+                        //跳转ios 版本下载地址
+                        this.iab.create(url, '_system');
+                }
+            }
+            ]
+        }).present();*/
     }
 
     isMobile(): boolean {
@@ -168,14 +193,16 @@ export class AboutPage implements OnInit {
     }
 
     async myInfo() {
-        const addFriendModal = await this.modalController.create({
+        const myInfoModal = await this.modalController.create({
             component: MyInfoPage,
             componentProps: {  }
         });
         
-        await addFriendModal.present();
-        const { data } = await addFriendModal.onDidDismiss();
+        await myInfoModal.present();
+        const { data } = await myInfoModal.onDidDismiss();
         //check if change
+        if(data)
+            this.getUserInfo();
     }
 
 }

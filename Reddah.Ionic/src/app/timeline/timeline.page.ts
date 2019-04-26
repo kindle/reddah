@@ -90,8 +90,26 @@ export class TimeLinePage implements OnInit {
         private activatedRoute: ActivatedRoute,
         ){
     }
+    cover: string = "assets/icon/timg.jpg";
+    userPhoto: string = "assets/icon/anonymous.png";
+    getUserInfo(){
+        this.formData = new FormData();
+        this.formData.append("targetUser", this.userName);
 
+        this.reddah.getUserInfo(this.formData)
+            .subscribe(userInfo => 
+            {
+                console.log(JSON.stringify(userInfo));
+                if(userInfo.Cover!=null)
+                    this.cover = userInfo.Cover;
+                if(userInfo.Photo!=null)
+                    this.userPhoto = userInfo.Photo;
+            }
+        );
+    }
+    
     async ngOnInit(){
+        this.getUserInfo();
         const loading = await this.loadingController.create({
             message: this.translateService.instant("Article.Loading"),
             spinner: 'circles',

@@ -14,11 +14,11 @@
     </div>
     <div>   
         <div class="timelineCover" #timelineCover>
-            <img-loader src="assets/icon/timg.jpg"></img-loader>
+            <img-loader src="{{cover}}"></img-loader>
         </div>
         <div class="timelineAvatar">
             <ion-label class="userNameTitle">{{userName}}</ion-label>
-            <img-loader src="assets/icon/anonymous.png"></img-loader>
+            <img-loader src="{{userPhoto}}"></img-loader>
         </div>
         <div *ngFor="let article of articles;index as i">
             <p *ngIf="i==0||(i>0&&articles[i-1].CreatedOn.substring(0,4)!=article.CreatedOn.substring(0,4))" class="yearTitle">

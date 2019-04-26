@@ -59,7 +59,7 @@ export class UserPage implements OnInit {
 
     nickName: string;
     sex=-1;
-    photo: string;
+    photo: string = "assets/icon/anonymous.png";
     location: string;
     signature: string;
     cover: string;
@@ -81,7 +81,8 @@ export class UserPage implements OnInit {
                 console.log(JSON.stringify(userInfo));
                 this.nickName = userInfo.NickName
                 this.sex = userInfo.Sex;
-                this.photo = userInfo.Photo;
+                if(userInfo.Photo!=null)
+                    this.photo = userInfo.Photo;
                 this.location = userInfo.Location;
                 this.signature = userInfo.Signature;
                 this.cover = userInfo.Cover;
@@ -191,5 +192,20 @@ export class UserPage implements OnInit {
         await addFriendModal.present();
     }
   
+    async viewer(imageSrc) {
+      const modal = await this.modalController.create({
+        component: ImageViewerComponent,
+        componentProps: {
+          imgSource: imageSrc,
+          imgTitle: "",
+          imgDescription: ""
+        },
+        cssClass: 'modal-fullscreen',
+        keyboardClose: true,
+        showBackdrop: true
+      });
+  
+      return await modal.present();
+  }
 
 }

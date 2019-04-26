@@ -23,9 +23,9 @@
         </div>
         <div class="timelineAvatar">
             <ion-label class="userNameTitle">{{userName}}</ion-label>
-            <img-loader src="assets/icon/anonymous.png" (click)="goUser(userName)"></img-loader>
+            <img-loader src="{{userPhoto}}" (click)="goUser(userName)"></img-loader>
         </div>
-        <div *ngFor="let article of articles" style="display: flex; border-bottom: 1px solid lightgrey; margin-bottom: 15px;padding-bottom: 10px;">
+        <div *ngFor="let article of articles" style="display: flex; border-bottom: 1px solid lightgrey; margin-bottom: 15px; margin-top: -40px; padding-bottom: 10px;">
             <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
                 <img-loader src="assets/icon/anonymous.png" class="border: 1px solid gray;" (click)="goUser(article.UserName)"></img-loader>
             </div>

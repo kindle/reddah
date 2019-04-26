@@ -19,7 +19,7 @@ export class ChangeCoverPopPage {
     //close popover menu
     this.popoverController.dismiss();
 
-    const userModal = await this.modalController.create({
+    const changePhotoModal = await this.modalController.create({
       component: ChangePhotoPage,
       componentProps: { 
         title : "更换相册封面",
@@ -27,11 +27,10 @@ export class ChangeCoverPopPage {
       }
     });
       
-    await userModal.present();
-    const { data } = await userModal.onDidDismiss();
+    await changePhotoModal.present();
+    const { data } = await changePhotoModal.onDidDismiss();
     
-    if(data==true)
-        alert('refresh cover')
+    this.modalController.dismiss(data);
         
     
   }

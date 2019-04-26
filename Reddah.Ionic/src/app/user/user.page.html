@@ -10,8 +10,7 @@
     </ion-refresher>
     <ion-item>
         <ion-thumbnail slot="start">
-            <img src="assets/icon/anonymous.png" *ngIf="!photo">
-            <img src="{{photo}}" *ngIf="photo">
+            <img src="{{photo}}" (click)="viewer(photo)" class="portrait">
         </ion-thumbnail>
         <ion-label>
             <h1>
