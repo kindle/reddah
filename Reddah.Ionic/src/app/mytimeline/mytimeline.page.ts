@@ -107,11 +107,13 @@ export class MyTimeLinePage implements OnInit {
 
 
     drawBackground(src){
+        console.log(src);
+        src = src.replace("///","https://");
         var p = document.getElementById("mycontent");
         
         var canvas = document.createElement('canvas');
         var context = canvas.getContext("2d");
-        var img = new Image();
+        var img = new Image(200,3);
         img.src = src;
         context.drawImage(img, 0, 0);
         var imgData = context.getImageData(0, 0, img.width, 3);

@@ -648,12 +648,12 @@ namespace Reddah.Web.Login.Controllers
                         UserProfile user = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
                         if (tag.Equals("cover", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            user.Photo = string.Format("///login.reddah.com/uploadPhoto/{0}", fileName);
+                            user.Cover = string.Format("///login.reddah.com/uploadPhoto/{0}", fileName);
                         }
                         else
                         {
                             //portrait
-                            user.Cover = string.Format("///login.reddah.com/uploadPhoto/{0}", fileName);
+                            user.Photo = string.Format("///login.reddah.com/uploadPhoto/{0}", fileName);
                         }
 
                         db.SaveChanges();
