@@ -3,10 +3,9 @@ import { InfiniteScroll } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../article';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, ModalController } from '@ionic/angular';
 import { LocalePage } from '../locale/locale.page';
 import { PostviewerPage } from '../postviewer/postviewer.page';
-import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 

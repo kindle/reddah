@@ -9,6 +9,8 @@ import { Toast } from '@ionic-native/toast/ngx';
 import { ImageLoaderConfigService } from 'ionic-image-loader';
 import { CacheService } from "ionic-cache";
 
+import { File } from '@ionic-native/file/ngx';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -29,18 +31,21 @@ export class AppComponent {
     private router: Router,
     private imageLoaderConfigService: ImageLoaderConfigService,
     private cacheService: CacheService,
+    private file: File,
   ) {
         this.initializeApp();
 
         this.imageLoaderConfigService.useImageTag(true);
         this.imageLoaderConfigService.enableSpinner(false);
         this.imageLoaderConfigService.setConcurrency(10);
-        this.imageLoaderConfigService.setCacheDirectoryName('reddah_cache_image');
+        //this.imageLoaderConfigService.setCacheDirectoryName('reddah');
         this.imageLoaderConfigService.setMaximumCacheSize(20 * 1024 * 1024 * 1024); // set max size to 20GB
         this.imageLoaderConfigService.setMaximumCacheAge(365 * 24 * 60 * 60 * 1000); // 365 days
-        this.imageLoaderConfigService.cacheDirectoryType = 'cache';
+        this.imageLoaderConfigService.cacheDirectoryType = "cache";
         this.imageLoaderConfigService.enableFallbackAsPlaceholder(true);
         this.imageLoaderConfigService.setFallbackUrl('assets/icon/noimage.jpg');
+
+        //File.createDir("/","reddah", true);
         
         //const headers = new HttpHeaders()
         //              .set("Authorization", "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA==");

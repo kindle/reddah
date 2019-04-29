@@ -18,6 +18,7 @@ import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleTextPopPage } from '../article-pop/article-text-pop.page'
 import { ChangeCoverPopPage } from '../article-pop/change-cover-pop.page'
+import { IonicImageLoaderComponent } from 'ionic-image-loader';
 
 @Component({
   selector: 'app-mytimeline',
@@ -104,7 +105,6 @@ export class MyTimeLinePage implements OnInit {
         ){
             this.userName = this.reddah.getCurrentUser();
     }
-
 
     drawBackground(src){
         console.log(src);

@@ -1,22 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Platform } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
+import { ModalController } from '@ionic/angular';
+import { LocalePage } from '../locale/locale.page';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss']
 })
-export class TabsPage {
+export class TabsPage implements OnInit {
 
   constructor(private authService: AuthService,
     private platform: Platform,
     private localStorageService: LocalStorageService,
+    private modalController: ModalController,
     ) {}
 
+  async ngOnInit(){
+      let locale = this.localStorageService.retrieve("Reddah_Locale");
+      if(locale==null){
+          let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+          const changeLocaleModal = await this.modalController.create({
+              component: LocalePage,
+              componentProps: { orgLocale: currentLocale }
+          });
+          
+          await changeLocaleModal.present();
+          const { data } = await changeLocaleModal.onDidDismiss();
+          if(data){
+              console.log(data)
+              //this.router.navigateByUrl('/tabs/(home:home)');
+              window.location.reload();
+          }
+      }
+
+  }
+  
   login() {
-    this.authService.login();
+      this.authService.login();
   }
  
   logout() {
@@ -28,9 +51,9 @@ export class TabsPage {
   }
 
   ionViewDidEnter(){
-    //this.subscription = this.platform.backButton.subscribe(()=>{
-    //    navigator['app'].exitApp();
-    //});
+      //this.subscription = this.platform.backButton.subscribe(()=>{
+      //    navigator['app'].exitApp();
+      //});
   }
 
   ionViewWillLeave(){
