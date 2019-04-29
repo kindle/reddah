@@ -38,8 +38,10 @@ export class AppComponent {
         this.imageLoaderConfigService.setCacheDirectoryName('reddah_cache_image');
         this.imageLoaderConfigService.setMaximumCacheSize(20 * 1024 * 1024 * 1024); // set max size to 20GB
         this.imageLoaderConfigService.setMaximumCacheAge(365 * 24 * 60 * 60 * 1000); // 365 days
-        //this.imageLoaderConfigService.enableFallbackAsPlaceholder(true);
-        //this.imageLoaderConfigService.setFallbackUrl('assets/fallback.png');
+        this.imageLoaderConfigService.cacheDirectoryType = 'cache';
+        this.imageLoaderConfigService.enableFallbackAsPlaceholder(true);
+        this.imageLoaderConfigService.setFallbackUrl('assets/icon/noimage.jpg');
+        
         //const headers = new HttpHeaders()
         //              .set("Authorization", "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA==");
         //this.imageLoaderConfig.setHttpHeaders(headers);

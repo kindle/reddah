@@ -15,6 +15,7 @@ import { AuthService }      from '../auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { MyInfoPage } from '../my-info/my-info.page';
+import { ImageLoaderService } from 'ionic-image-loader';
 
 @Component({
   selector: 'app-about',
@@ -42,6 +43,7 @@ export class AboutPage implements OnInit {
         public authService: AuthService,
         public translateService: TranslateService,
         private cacheService: CacheService,
+        private imageLoaderService: ImageLoaderService
     ) {
         
     }
@@ -114,6 +116,9 @@ export class AboutPage implements OnInit {
         this.cacheService.clearAll();
     }
 
+    async clearImageCache(){
+        this.imageLoaderService.clearCache();
+    }
     
 
     getVersionNumber(): Promise<string> {

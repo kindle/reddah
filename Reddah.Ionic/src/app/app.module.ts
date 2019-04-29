@@ -150,7 +150,6 @@ import { AboutPage } from './about/about.page';
       ActionSheetController,
       PopoverController,
       MenuController,
-      IonicImageLoader,
   ],
   bootstrap: [AppComponent]
 })
