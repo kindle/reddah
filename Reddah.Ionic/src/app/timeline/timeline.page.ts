@@ -16,6 +16,7 @@ import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { TsViewerPage } from '../tsviewer/tsviewer.page'
 
 @Component({
   selector: 'app-timeline',
@@ -202,13 +203,14 @@ export class TimeLinePage implements OnInit {
   selectedArticleId: number;
   selectedCommentId: number;
 
-  async viewer(imageSrc) {
+  async viewer(index, imageSrcArray) {
       const modal = await this.modalController.create({
         component: ImageViewerComponent,
         componentProps: {
-          imgSource: imageSrc,
-          imgTitle: "",
-          imgDescription: ""
+            index: index,
+            imgSourceArray: imageSrcArray,
+            imgTitle: "",
+            imgDescription: ""
         },
         cssClass: 'modal-fullscreen',
         keyboardClose: true,
@@ -216,6 +218,15 @@ export class TimeLinePage implements OnInit {
       });
   
       return await modal.present();
+  }
+
+  async goTsViewer(article){
+        const userModal = await this.modalController.create({
+            component: TsViewerPage,
+            componentProps: { article: article }
+        });
+        
+        await userModal.present();
   }
         
 }

@@ -192,11 +192,11 @@ export class UserPage implements OnInit {
         await addFriendModal.present();
     }
   
-    async viewer(imageSrc) {
+    async viewer(photo) {
       const modal = await this.modalController.create({
         component: ImageViewerComponent,
         componentProps: {
-          imgSource: imageSrc,
+          imgSource: [photo],
           imgTitle: "",
           imgDescription: ""
         },

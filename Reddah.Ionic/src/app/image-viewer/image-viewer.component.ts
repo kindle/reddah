@@ -7,17 +7,25 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./image-viewer.component.scss']
 })
 export class ImageViewerComponent implements OnInit {
-  @Input() imgSource = '';
+  @Input() index = 0;
+  @Input() imgSourceArray: any = [];
   @Input() imgTitle = '';
   @Input() imgDescription = '';
 
-  slideOpts = {
-    centeredSlides: 'true'
-  };
+  slideOpts = {};
 
   constructor(private modalController: ModalController) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+      this.slideOpts = {
+          centeredSlides: 'true',
+          initialSlide: this.index,
+      };
+  }
+
+  org(src){
+    return src.replace("_reddah_preview","")
+  }
 
   closeModal() {
     this.modalController.dismiss();

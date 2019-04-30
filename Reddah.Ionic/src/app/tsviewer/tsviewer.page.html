@@ -1,0 +1,78 @@
+<ion-item no-padding>
+    <ion-icon name="ios-arrow-back" (click)="close()"></ion-icon>
+    <ion-title>详情</ion-title>
+</ion-item>
+<ion-content>
+    <div style="display: flex; border-bottom: 1px solid lightgrey; margin: 15px 5px; padding-bottom: 10px;">
+        <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
+            <img-loader src="assets/icon/anonymous.png" class="border: 1px solid gray;" (click)="goUser(article.UserName)"></img-loader>
+        </div>
+        <div style="width:100%;border: 0px solid red;">
+            <ion-card-header no-padding  class="articleUserName">
+                <ion-card-title>
+                    <div [innerHTML]="htmlDecode(article.UserName)" (click)="goUser(article.UserName)"></div>
+                </ion-card-title>
+            </ion-card-header>
+            <ion-item no-padding style="padding: 5px 0;" lines="none">
+                <div [innerHTML]="htmlDecode(article.Title)"></div>
+            </ion-item>
+            <ion-card-content style="display:block;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
+                <div class="parent" *ngIf="article.Content.split('$$$').length>6">
+                    <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
+                        <img-loader src="{{image}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))"></img-loader>
+                    </div>
+                </div>
+                <div class="parent" *ngIf="article.Content.split('$$$').length>=3&&article.Content.split('$$$').length<=6">
+                    <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
+                        <img-loader src="{{image}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))"></img-loader>
+                    </div>
+                </div>
+                <div *ngIf="article.Content.split('$$$').length<3">
+                    <img-loader src="{{article.Content.split('$$$')[0]}}" class="singlePicture" (click)="viewer(0, article.Content.split('$$$'))"></img-loader>
+                </div>
+            </ion-card-content>
+            
+            <ion-item no-padding lines="none">
+                <ion-note color="dark">{{article.CreatedOn | date: 'yyyy-MM-dd hh:mm:ss'}}</ion-note>
+                <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
+            </ion-item>
+            
+            <ion-item no-padding lines="none" *ngIf="article.GroupName">
+                <div style="width: 100%;">
+                    <div class="like-arrow-up"></div>
+                    <div class="likeSection">
+                        <ion-icon name="heart-empty" class="likeIcon"></ion-icon>
+                        <span class="likeUserName" (click)="goUser(article.GroupName)">{{article.GroupName}}</span>
+                    </div>
+                </div>
+            </ion-item>
+            <ion-item no-padding lines="none" *ngIf="commentData.get(article.Id)&&commentData.get(article.Id).Comments.length>0">
+                <div style="width: 100%;">
+                    <div class="like-arrow-up" *ngIf="!article.GroupName"></div>
+                    <div class="like-spliter" *ngIf="article.GroupName"></div>
+                    <div class="commentSection">
+                        <div style="padding: 10px;">
+                            <ts-comment (reply)="showAddCommentFromChildren($event)" no-padding [data]="commentData.get(article.Id)" [depth]="1" [authoronly]="authoronly" 
+                            [articleauthor]="article.UserName"></ts-comment>
+                        </div>
+                    </div>
+                </div>
+            </ion-item>
+        </div>
+    </div>
+</ion-content>
+<ion-footer style="background-color: white;">
+    <ion-item margin-end>
+        <ion-input #newComment id="newComment" placeholder="{{selectedReplyPlaceholder}}" padding-start></ion-input>
+        <ion-icon name="happy" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>
+        <ion-button (click)="SendComment(-1)" color="primary">发送</ion-button>
+    </ion-item>
+    
+    <ion-grid *ngIf="showFacePanel">
+        <ion-row *ngFor="let row of emojis">
+            <ion-col *ngFor="let col of row" text-center>
+                <span (click)="handleSelection(col)" style="width: 80px;height: 80px;">{{col}}</span>
+            </ion-col>
+        </ion-row> 
+    </ion-grid>
+</ion-footer>

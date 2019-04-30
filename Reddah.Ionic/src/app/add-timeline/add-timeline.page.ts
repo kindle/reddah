@@ -3,13 +3,11 @@ import { PopoverController, NavController, LoadingController } from '@ionic/angu
 import { TimelinePopPage } from '../article-pop/timeline-pop.page';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../reddah.service';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 import { CacheService } from "ionic-cache";
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
-import { Crop } from '@ionic-native/crop/ngx';
 
 @Component({
   selector: 'app-add-timeline',
@@ -22,13 +20,11 @@ export class AddTimelinePage implements OnInit {
       private popoverController: PopoverController,
       private reddahService: ReddahService,
       private navController: NavController,
-      private fileTransfer: FileTransfer,
       private file: File,
       private loadingController: LoadingController,
       private activatedRoute: ActivatedRoute,
       private router: Router,
       private cacheService: CacheService,
-      private crop: Crop,
     ) { 
         this.activatedRoute.queryParams.subscribe((params: Params) => {
             let data = params['data'];
@@ -50,7 +46,7 @@ export class AddTimelinePage implements OnInit {
     ngOnInit() {}
     
     photos = [];
-    yourThoughts: string;
+    yourThoughts: string = "";
     location = "";
     debug = "";
     formData = new FormData();
@@ -70,13 +66,12 @@ export class AddTimelinePage implements OnInit {
         .subscribe(result => 
             {
                 loading.dismiss();
-                this.debug+= JSON.stringify(result);
                 if(result.Success==0)
                 { 
                     this.cacheService.clearGroup("TimeLinePage");
                     this.router.navigate(['/mytimeline'], {
                         queryParams: {
-                            refresh: true//no use but you can sent the parameter
+                            refresh: true
                         }
                     });
                 }
@@ -160,12 +155,11 @@ export class AddTimelinePage implements OnInit {
     }
 
     async resize(uri, fileName){
-        alert(fileName);
         let options = {
             uri: uri,
             folderName: 'reddah',
             fileName: fileName, 
-            quality: 30,
+            quality: 50,
             width: 200,
             height: 200
            } as ImageResizerOptions;
@@ -179,12 +173,12 @@ export class AddTimelinePage implements OnInit {
 
     async prepareData(filePath) {
       this.file.resolveLocalFilesystemUrl(filePath)
-          .then(entry => {
-              ( <FileEntry> entry).file(file => this.readFile(file))
-          })
-          .catch(err => {
-              this.debug+="prepare:"+JSON.stringify(err);
-          });
+            .then(entry => {
+                ( <FileEntry> entry).file(file => this.readFile(file))
+            })
+            .catch(err => {
+                this.debug+="prepare:"+JSON.stringify(err);
+            });
     }
     
     async readFile(file: any) {

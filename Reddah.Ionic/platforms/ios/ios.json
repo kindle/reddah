@@ -90,7 +90,7 @@
             },
             {
               "xml": "<feature name=\"ImageResizer\"><param name=\"ios-package\" value=\"ImageResizer\" /></feature>",
-              "count": 1
+              "count": 2
             }
           ]
         }
@@ -167,7 +167,7 @@
       "PACKAGE_NAME": "com.reddah.app.andriod"
     },
     "info.protonet.imageresizer": {
-      "PACKAGE_NAME": "com.reddah.app.andriod"
+      "PACKAGE_NAME": "com.reddah"
     }
   },
   "dependent_plugins": {},

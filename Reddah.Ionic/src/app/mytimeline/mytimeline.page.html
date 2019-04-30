@@ -43,17 +43,17 @@
                 </ion-item>
                 <ion-card-content style="display:block;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>6">
-                        <div class="container" *ngFor="let image of article.Content.split('$$$')">
-                            <img-loader src="{{image}}" class="picture" (click)="viewer(image)"></img-loader>
+                        <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
+                            <img-loader src="{{image}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))"></img-loader>
                         </div>
                     </div>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>=3&&article.Content.split('$$$').length<=6">
-                        <div class="container" *ngFor="let image of article.Content.split('$$$')">
-                            <img-loader src="{{image}}" class="picture" (click)="viewer(image)"></img-loader>
+                        <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
+                            <img-loader src="{{image}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))"></img-loader>
                         </div>
                     </div>
                     <div *ngIf="article.Content.split('$$$').length<3">
-                        <img-loader src="{{article.Content.split('$$$')[0]}}" class="singlePicture" (click)="viewer(article.Content.split('$$$')[0])"></img-loader>
+                        <img-loader src="{{article.Content.split('$$$')[0]}}" class="singlePicture" (click)="viewer(0, article.Content.split('$$$'))"></img-loader>
                     </div>
                 </ion-card-content>
                 

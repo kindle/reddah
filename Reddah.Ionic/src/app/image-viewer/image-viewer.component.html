@@ -9,8 +9,8 @@
 
 <ion-content [forceOverscroll]="false" color="dark" fullscreen="true">
   <ion-slides [options]="slideOpts">
-    <ion-slide>
-      <div class="swiper-zoom-container"><img src="{{imgSource}}" height="100vh"></div>
+    <ion-slide *ngFor="let img of imgSourceArray">
+      <div class="swiper-zoom-container"><img src="{{org(img)}}" height="100vh"></div>
     </ion-slide>
   </ion-slides>
 </ion-content>

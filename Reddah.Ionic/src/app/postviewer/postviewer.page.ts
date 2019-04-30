@@ -65,21 +65,19 @@ export class PostviewerPage implements OnInit {
   async viewer(event){
     var target = event.target || event.srcElement || event.currentTarget;
     if(target.tagName.toUpperCase()==="IMG"){
-      //PhotoViewer.show(target.src, 'view photo', options);
-      //PhotoViewer.show(target.src);
-      const modal = await this.modalController.create({
-        component: ImageViewerComponent,
-        componentProps: {
-          imgSource: target.src,
-          imgTitle: "",
-          imgDescription: ""
-        },
-        cssClass: 'modal-fullscreen',
-        keyboardClose: true,
-        showBackdrop: true
-      });
+        const modal = await this.modalController.create({
+            component: ImageViewerComponent,
+            componentProps: {
+                imgSourceArray: [target.src],
+                imgTitle: "",
+                imgDescription: ""
+            },
+            cssClass: 'modal-fullscreen',
+            keyboardClose: true,
+            showBackdrop: true
+        });
   
-      return await modal.present();
+        return await modal.present(); 
     }
   }
 
@@ -107,40 +105,40 @@ export class PostviewerPage implements OnInit {
   }
 
   async newComment(articleId: number, commentId: number){
-    const addCommentModal = await this.modalController.create({
-    component: AddCommentPage,
-    componentProps: { 
-        articleId: articleId,
-        commentId: commentId
+      const addCommentModal = await this.modalController.create({
+      component: AddCommentPage,
+      componentProps: { 
+          articleId: articleId,
+          commentId: commentId
+        }
+      });
+      
+      await addCommentModal.present();
+      const { data } = await addCommentModal.onDidDismiss();
+      if(data){
+        this.loadComments();
       }
-    });
-    
-    await addCommentModal.present();
-    const { data } = await addCommentModal.onDidDismiss();
-    if(data){
-      this.loadComments();
-    }
 
   }
 
   bookmark(){
-    alert('bookmark');
+      alert('bookmark');
   }
 
   share(){
-    alert('share');
+      alert('share');
   }
 
   popover(){
-    alert('show menu to report, delete.');
+      alert('show menu to report, delete.');
   }
 
   async goUser(userName){
-    const userModal = await this.modalController.create({
-      component: UserPage,
-      componentProps: { userName: userName }
-    });
-      
-    await userModal.present();
+      const userModal = await this.modalController.create({
+          component: UserPage,
+          componentProps: { userName: userName }
+      });
+        
+      await userModal.present();
   }
 }

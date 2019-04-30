@@ -1,22 +1,21 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CropPhotoPage } from './crop-photo.page';
+import { TsViewerPage } from './tsviewer.page';
 
-describe('CropPhotoPage', () => {
-  let component: CropPhotoPage;
-  let fixture: ComponentFixture<CropPhotoPage>;
+describe('TsViewerPage', () => {
+  let component: TsViewerPage;
+  let fixture: ComponentFixture<TsViewerPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CropPhotoPage ],
+      declarations: [TsViewerPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CropPhotoPage);
+    fixture = TestBed.createComponent(TsViewerPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

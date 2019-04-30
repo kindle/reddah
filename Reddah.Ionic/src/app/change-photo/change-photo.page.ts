@@ -1,11 +1,9 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../reddah.service';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
-import { CropPhotoPage } from '../crop-photo/crop-photo.page';
 import { Crop } from '@ionic-native/crop/ngx';
 
 @Component({

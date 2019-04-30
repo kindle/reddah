@@ -33,7 +33,6 @@ import { FormsModule } from '@angular/forms';
 import { AddCommentPage } from './add-comment/add-comment.page';
 import { AddFriendPage } from './add-friend/add-friend.page';
 import { ChangePhotoPage } from './change-photo/change-photo.page';
-import { CropPhotoPage } from './crop-photo/crop-photo.page';
 import { MyInfoPage } from './my-info/my-info.page';
 import { NewFriendPage } from './new-friend/new-friend.page';
 import { Toast } from '@ionic-native/toast/ngx';
@@ -56,6 +55,7 @@ import { Crop } from '@ionic-native/crop/ngx';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { CacheModule } from "ionic-cache";
+import { TsViewerPage } from './tsviewer/tsviewer.page'
 
 @NgModule({
   declarations: [
@@ -64,7 +64,6 @@ import { CacheModule } from "ionic-cache";
       AddCommentPage,
       AddFriendPage,
       ChangePhotoPage,
-      CropPhotoPage,
       MyInfoPage,
       NewFriendPage,
       PostviewerPage,
@@ -83,6 +82,7 @@ import { CacheModule } from "ionic-cache";
       TimelinePopPage,
       TimelineCommentPopPage,
       ScanPage,
+      TsViewerPage,
   ],
   entryComponents: [
       LocalePage,
@@ -92,7 +92,6 @@ import { CacheModule } from "ionic-cache";
       AddCommentPage,
       AddFriendPage,
       ChangePhotoPage,
-      CropPhotoPage,
       MyInfoPage,
       NewFriendPage,
       ArticlePopPage,
@@ -104,6 +103,7 @@ import { CacheModule } from "ionic-cache";
       ScanPage,
       UserPage,
       TimeLinePage,
+      TsViewerPage,
   ],
   imports: [
       BrowserModule, 
@@ -132,6 +132,7 @@ import { CacheModule } from "ionic-cache";
       SplashScreen,
       AuthService,
       Camera,
+      IonicImageLoader,
       File,
       WebView,
       FileTransfer,
