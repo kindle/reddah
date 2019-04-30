@@ -161,7 +161,8 @@ namespace Reddah.Web.Login.Controllers
                                 file.GroupName = "";
                                 file.Tag = "";
                                 db.UploadFile.Add(file);
-                                imageUrls.Add("https://login.reddah.com" + url);
+                                if(upload.FileName.Contains("_reddah_preview."))
+                                    imageUrls.Add("///login.reddah.com" + url);
                             }
                             catch (Exception ex)
                             {

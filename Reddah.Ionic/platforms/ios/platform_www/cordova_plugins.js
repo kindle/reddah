@@ -335,6 +335,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "window.FileTransfer"
       ]
+    },
+    {
+      "id": "info.protonet.imageresizer.ImageResizer",
+      "file": "plugins/info.protonet.imageresizer/www/image_resizer.js",
+      "pluginId": "info.protonet.imageresizer",
+      "clobbers": [
+        "ImageResizer"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -354,6 +362,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-qrscanner": "2.6.0",
     "cordova-plugin-add-swift-support": "1.7.2",
     "cordova-plugin-crop": "0.3.1",
-    "cordova-plugin-file-transfer": "1.7.1"
+    "cordova-plugin-file-transfer": "1.7.1",
+    "info.protonet.imageresizer": "0.1.1"
   };
 });

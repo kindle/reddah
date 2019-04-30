@@ -27,6 +27,7 @@
     "@ionic-native/crop": "^5.2.0",
     "@ionic-native/file": "^5.5.0",
     "@ionic-native/file-transfer": "^5.2.0",
+    "@ionic-native/image-resizer": "^5.0.0",
     "@ionic-native/in-app-browser": "^5.0.0-beta.23",
     "@ionic-native/ionic-webview": "^5.5.0",
     "@ionic-native/photo-library": "^5.2.0",
@@ -65,6 +66,7 @@
     "cordova-windows": "6.0.1",
     "core-js": "^2.5.3",
     "helloplugin": "file:../../helloPlugin",
+    "info.protonet.imageresizer": "0.1.1",
     "ionic-cache": "^4.0.1",
     "ionic-image-loader": "^7.0.0-beta.2",
     "ngx-webstorage": "^3.0.0-beta.14",
@@ -125,7 +127,8 @@
       "cordova-plugin-add-swift-support": {},
       "cordova-plugin-crop": {},
       "cordova-plugin-file": {},
-      "cordova-plugin-file-transfer": {}
+      "cordova-plugin-file-transfer": {},
+      "info.protonet.imageresizer": {}
     },
     "platforms": [
       "android",

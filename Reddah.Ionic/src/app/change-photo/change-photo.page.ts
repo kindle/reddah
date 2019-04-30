@@ -59,9 +59,6 @@ export class ChangePhotoPage implements OnInit {
         }
             
         Camera.getPicture(options).then((imageData) => {
-            //this.photos.push((<any>window).Ionic.WebView.convertFileSrc(imageData));
-            //this.prepareData(imageData);
-            //this.prepareData((<any>window).Ionic.WebView.convertFileSrc(imageData));
             this.crop.crop(imageData, { quality: 100, targetWidth: -1, targetHeight: -1 })
             .then(
                     newCropImageData => {

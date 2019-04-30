@@ -65,6 +65,7 @@
 		85E45319FD31450D9D0FACAB /* PEPhotoCropEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 91C97057ADA043ABA93A85E9 /* PEPhotoCropEditor.bundle */; };
 		4460877846D84C638926B7D0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECBC197A940140CE97A31A72 /* QuartzCore.framework */; };
 		EC9CA9B8738B47639EE5C89D /* CDVFileTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E9545E2AAC492FAE500A93 /* CDVFileTransfer.m */; };
+		5392897D769D4E2489B5437F /* ImageResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2CA24C7454F9E91811C20 /* ImageResizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,6 +195,8 @@
 		ECBC197A940140CE97A31A72 /* QuartzCore.framework */ = {isa = PBXFileReference; name = "QuartzCore.framework"; path = "System/Library/Frameworks/QuartzCore.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		84E9545E2AAC492FAE500A93 /* CDVFileTransfer.m */ = {isa = PBXFileReference; name = "CDVFileTransfer.m"; path = "cordova-plugin-file-transfer/CDVFileTransfer.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		66EE8A52070C436CAA6D8DA4 /* CDVFileTransfer.h */ = {isa = PBXFileReference; name = "CDVFileTransfer.h"; path = "cordova-plugin-file-transfer/CDVFileTransfer.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		2FA2CA24C7454F9E91811C20 /* ImageResizer.m */ = {isa = PBXFileReference; name = "ImageResizer.m"; path = "info.protonet.imageresizer/ImageResizer.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		21EA76D6B1B247759C0BB4FC /* ImageResizer.h */ = {isa = PBXFileReference; name = "ImageResizer.h"; path = "info.protonet.imageresizer/ImageResizer.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,6 +395,8 @@
 				137200F2773D4FB2A7C9D479 /* UIImage+PECrop.h */,
 				84E9545E2AAC492FAE500A93 /* CDVFileTransfer.m */,
 				66EE8A52070C436CAA6D8DA4 /* CDVFileTransfer.h */,
+				2FA2CA24C7454F9E91811C20 /* ImageResizer.m */,
+				21EA76D6B1B247759C0BB4FC /* ImageResizer.h */,
 			);
 			name = Plugins;
 			path = "Reddah/Plugins";
@@ -547,6 +552,7 @@
 				483615885E7D487B8E59E8C8 /* PEResizeControl.m in Sources */,
 				C05E07D892E7460993C67516 /* UIImage+PECrop.m in Sources */,
 				EC9CA9B8738B47639EE5C89D /* CDVFileTransfer.m in Sources */,
+				5392897D769D4E2489B5437F /* ImageResizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

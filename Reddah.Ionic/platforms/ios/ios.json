@@ -87,6 +87,10 @@
             {
               "xml": "<feature name=\"FileTransfer\"><param name=\"ios-package\" value=\"CDVFileTransfer\" /></feature>",
               "count": 2
+            },
+            {
+              "xml": "<feature name=\"ImageResizer\"><param name=\"ios-package\" value=\"ImageResizer\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -160,6 +164,9 @@
       "PACKAGE_NAME": "com.reddah.app.andriod"
     },
     "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.reddah.app.andriod"
+    },
+    "info.protonet.imageresizer": {
       "PACKAGE_NAME": "com.reddah.app.andriod"
     }
   },
@@ -500,6 +507,14 @@
       "clobbers": [
         "window.FileTransfer"
       ]
+    },
+    {
+      "id": "info.protonet.imageresizer.ImageResizer",
+      "file": "plugins/info.protonet.imageresizer/www/image_resizer.js",
+      "pluginId": "info.protonet.imageresizer",
+      "clobbers": [
+        "ImageResizer"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -519,6 +534,7 @@
     "cordova-plugin-qrscanner": "2.6.0",
     "cordova-plugin-add-swift-support": "1.7.2",
     "cordova-plugin-crop": "0.3.1",
-    "cordova-plugin-file-transfer": "1.7.1"
+    "cordova-plugin-file-transfer": "1.7.1",
+    "info.protonet.imageresizer": "0.1.1"
   }
 }

@@ -8,6 +8,8 @@ import { File, FileEntry } from '@ionic-native/file/ngx';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 import { CacheService } from "ionic-cache";
+import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
+import { Crop } from '@ionic-native/crop/ngx';
 
 @Component({
   selector: 'app-add-timeline',
@@ -26,6 +28,7 @@ export class AddTimelinePage implements OnInit {
       private activatedRoute: ActivatedRoute,
       private router: Router,
       private cacheService: CacheService,
+      private crop: Crop,
     ) { 
         this.activatedRoute.queryParams.subscribe((params: Params) => {
             let data = params['data'];
@@ -46,7 +49,6 @@ export class AddTimelinePage implements OnInit {
 
     ngOnInit() {}
     
-    texts = [];
     photos = [];
     yourThoughts: string;
     location = "";
@@ -63,11 +65,7 @@ export class AddTimelinePage implements OnInit {
         this.formData.append('thoughts', this.yourThoughts);
         this.formData.append('location', this.location);
 
-        //test
-        //this.formData.append('f1', '', 'file1');
-        //this.formData.append('f2', '', 'file2');
         
-        //this.debug+=JSON.stringify(json);
         this.reddahService.addTimeline(this.formData)
         .subscribe(result => 
             {
@@ -122,14 +120,9 @@ export class AddTimelinePage implements OnInit {
         }
           
         Camera.getPicture(options).then((imageData) => {
-            this.texts.push(imageData);
-            this.photos.push((<any>window).Ionic.WebView.convertFileSrc(imageData));
-            this.prepareData(imageData);
-            //this.prepareData((<any>window).Ionic.WebView.convertFileSrc(imageData));
-            //this.photos.push('data:image/jpeg;base64,' + imageData);
+            this.inQueue(imageData);
         }, (err) => {
-            // Handle error
-            this.debug+="takeaphoto:"+JSON.stringify(err);
+            console.log(JSON.stringify(err));
         });
         
     }
@@ -146,14 +139,42 @@ export class AddTimelinePage implements OnInit {
         }
           
         Camera.getPicture(options).then((imageData) => {
-            this.texts.push(imageData);
-            this.photos.push((<any>window).Ionic.WebView.convertFileSrc(imageData));
-            this.prepareData(imageData);
-            //this.prepareData((<any>window).Ionic.WebView.convertFileSrc(imageData));
+            this.inQueue(imageData);
         }, (err) => {
-            this.debug+="fromlib:"+JSON.stringify(err);
+            console.log(JSON.stringify(err));
         });
         
+    }
+
+    async inQueue(imageData){
+        this.photos.push((<any>window).Ionic.WebView.convertFileSrc(imageData));
+        this.prepareData(imageData);
+        this.resize(imageData, this.getFileName(imageData));
+
+    }
+
+    getFileName(text){
+        let name = text.substring(text.lastIndexOf('/')+1);
+        let parts = name.split('.');
+        return parts[0] + "_reddah_preview." + parts[1].split('?')[0];
+    }
+
+    async resize(uri, fileName){
+        alert(fileName);
+        let options = {
+            uri: uri,
+            folderName: 'reddah',
+            fileName: fileName, 
+            quality: 30,
+            width: 200,
+            height: 200
+           } as ImageResizerOptions;
+           
+        
+        ImageResizer
+            .resize(options)
+            .then((filePath: string) => this.prepareData(filePath))
+            .catch(e => alert(e));
     }
 
     async prepareData(filePath) {

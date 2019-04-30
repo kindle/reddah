@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Package IgnorableNamespaces="uap mp" xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10">
-    <Identity Name="com.reddah.app.andriod" Publisher="CN=$username$" Version="1.1.54.0" />
+    <Identity Name="com.reddah" Publisher="CN=$username$" Version="1.2.31.0" />
     <mp:PhoneIdentity PhoneProductId="0e418eb0-3c6d-11e9-b9f3-cd9198eafe4e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
     <Properties>
         <DisplayName>Reddah</DisplayName>
@@ -15,7 +15,7 @@
         <Resource Language="x-generate" />
     </Resources>
     <Applications>
-        <Application Id="com.reddah.app.andriod" StartPage="ms-appx-web://com.reddah.app.andriod/www/index.html">
+        <Application Id="com.reddah" StartPage="ms-appx-web://com.reddah/www/index.html">
             <uap:VisualElements BackgroundColor="#464646" Description="A sample Apache Cordova application that responds to the deviceready event." DisplayName="Reddah" Square150x150Logo="images\Square150x150Logo.png" Square44x44Logo="images\Square44x44Logo.png">
                 <uap:SplashScreen Image="images\splashscreen.png" />
                 <uap:DefaultTile ShortName="Reddah" Square310x310Logo="images\Square310x310Logo.png" Square71x71Logo="images\Square71x71Logo.png" Wide310x150Logo="images\Wide310x150Logo.png" />

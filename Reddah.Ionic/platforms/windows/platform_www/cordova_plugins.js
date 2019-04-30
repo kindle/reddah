@@ -367,6 +367,22 @@ module.exports = [
     "file": "plugins/cordova-plugin-file-transfer/src/windows/FileTransferProxy.js",
     "pluginId": "cordova-plugin-file-transfer",
     "runs": true
+  },
+  {
+    "id": "info.protonet.imageresizer.ImageResizer",
+    "file": "plugins/info.protonet.imageresizer/www/image_resizer.js",
+    "pluginId": "info.protonet.imageresizer",
+    "clobbers": [
+      "ImageResizer"
+    ]
+  },
+  {
+    "id": "info.protonet.imageresizer.ImageResizerProxy",
+    "file": "plugins/info.protonet.imageresizer/src/windows/ImageResizerProxy.js",
+    "pluginId": "info.protonet.imageresizer",
+    "merges": [
+      ""
+    ]
   }
 ];
 module.exports.metadata = 
@@ -388,7 +404,8 @@ module.exports.metadata =
   "cordova-plugin-qrscanner": "2.6.0",
   "cordova-plugin-add-swift-support": "1.7.2",
   "cordova-plugin-crop": "0.3.1",
-  "cordova-plugin-file-transfer": "1.7.1"
+  "cordova-plugin-file-transfer": "1.7.1",
+  "info.protonet.imageresizer": "0.1.1"
 };
 // BOTTOM OF METADATA
 });
