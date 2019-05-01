@@ -5,7 +5,6 @@ import { LoginPage } from './login/login.page';
 import { ScanPage } from './scan/scan.page';
 import { MyTimeLinePage } from './mytimeline/mytimeline.page';
 import { AuthGuard } from './AuthGuard.service';
-import { UserPage } from './user/user.page';
 
 const routes: Routes = [
   { 
@@ -27,15 +26,12 @@ const routes: Routes = [
       path: 'scan',
       component: ScanPage,
   },
-  { 
-      path: 'post', 
-      loadChildren: './add-timeline/add-timeline.module#AddTimelinePageModule',
-      canActivate: [AuthGuard],
-  },
   
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: SelectiveStrategyService })],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes, { 
+        preloadingStrategy: SelectiveStrategyService,
+    })],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {}

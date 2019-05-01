@@ -56,6 +56,7 @@ import { IonicImageLoader } from 'ionic-image-loader';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { CacheModule } from "ionic-cache";
 import { TsViewerPage } from './tsviewer/tsviewer.page'
+import { AddTimelinePage } from './add-timeline/add-timeline.page';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { TsViewerPage } from './tsviewer/tsviewer.page'
       TimelineCommentPopPage,
       ScanPage,
       TsViewerPage,
+      AddTimelinePage,
   ],
   entryComponents: [
       LocalePage,
@@ -104,6 +106,7 @@ import { TsViewerPage } from './tsviewer/tsviewer.page'
       UserPage,
       TimeLinePage,
       TsViewerPage,
+      AddTimelinePage,
   ],
   imports: [
       BrowserModule, 

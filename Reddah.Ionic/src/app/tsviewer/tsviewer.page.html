@@ -65,7 +65,7 @@
     <ion-item margin-end>
         <ion-input #newComment id="newComment" placeholder="{{selectedReplyPlaceholder}}" padding-start></ion-input>
         <ion-icon name="happy" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>
-        <ion-button (click)="SendComment(-1)" color="primary">发送</ion-button>
+        <ion-button (click)="SendComment()" color="primary">发送</ion-button>
     </ion-item>
     
     <ion-grid *ngIf="showFacePanel">

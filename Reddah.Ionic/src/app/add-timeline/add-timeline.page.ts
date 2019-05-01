@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController, NavController, LoadingController } from '@ionic/angular'
+import { PopoverController, NavController, LoadingController, ModalController } from '@ionic/angular'
 import { TimelinePopPage } from '../article-pop/timeline-pop.page';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../reddah.service';
@@ -8,6 +8,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 import { CacheService } from "ionic-cache";
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-add-timeline',
@@ -25,6 +26,8 @@ export class AddTimelinePage implements OnInit {
       private activatedRoute: ActivatedRoute,
       private router: Router,
       private cacheService: CacheService,
+      private localStorageService: LocalStorageService,
+      private modalController: ModalController,
     ) { 
         this.activatedRoute.queryParams.subscribe((params: Params) => {
             let data = params['data'];
@@ -68,12 +71,7 @@ export class AddTimelinePage implements OnInit {
                 loading.dismiss();
                 if(result.Success==0)
                 { 
-                    this.cacheService.clearGroup("TimeLinePage");
-                    this.router.navigate(['/mytimeline'], {
-                        queryParams: {
-                            refresh: true
-                        }
-                    });
+                    this.modalController.dismiss(true);
                 }
                 else
                 {
@@ -159,9 +157,9 @@ export class AddTimelinePage implements OnInit {
             uri: uri,
             folderName: 'reddah',
             fileName: fileName, 
-            quality: 50,
-            width: 200,
-            height: 200
+            quality: 30,
+            width: 800,
+            height: 800
            } as ImageResizerOptions;
            
         

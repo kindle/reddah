@@ -35,7 +35,7 @@
                         <div [innerHTML]="htmlDecode(article.UserName)" (click)="goUser(article.UserName)"></div>
                     </ion-card-title>
                 </ion-card-header>
-                <ion-item no-padding style="padding: 5px 0;" lines="none" *ngIf="article.Title.length<100">
+                <ion-item no-padding style="padding: 0;" lines="none" *ngIf="article.Title.length>0&&article.Title.length<100">
                     <div [innerHTML]="htmlDecode(article.Title)"></div>
                 </ion-item>
                 <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
@@ -57,7 +57,7 @@
                     </div>
                 </ion-card-content>
                 
-                <ion-item no-padding lines="none">
+                <ion-item no-padding lines="none" style="margin-top:5px;">
                     <ion-note color="dark">{{article.CreatedOn | date: 'yyyy-MM-dd hh:mm:ss'}}</ion-note>
                     <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
                 </ion-item>

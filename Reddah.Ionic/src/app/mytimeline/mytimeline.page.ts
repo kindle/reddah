@@ -14,6 +14,7 @@ import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleTextPopPage } from '../article-pop/article-text-pop.page'
 import { ChangeCoverPopPage } from '../article-pop/change-cover-pop.page'
+import { AddTimelinePage } from '../add-timeline/add-timeline.page'
 
 @Component({
   selector: 'app-mytimeline',
@@ -101,7 +102,10 @@ export class MyTimeLinePage implements OnInit {
 
     drawBackground(src){
         console.log(src);
-        src = src.replace("///","https://");
+        //find the src in local cache folder
+        //if find it, run the following code
+        return;
+        ///src = src.replace("///","https://");
         var p = document.getElementById("mycontent");
         
         var canvas = document.createElement('canvas');
@@ -144,15 +148,6 @@ export class MyTimeLinePage implements OnInit {
     }
     
     async ngOnInit(){
-        this.activatedRoute.queryParams.subscribe((params: Params) => {
-            let data = params['refresh'];
-            alert(data)
-            if(data)
-            {
-                this.clearCacheAndReload();
-            }
-        });
-
         this.getUserInfo();
 
         const loading = await this.loadingController.create({
@@ -273,15 +268,20 @@ export class MyTimeLinePage implements OnInit {
             cssClass: 'post-option-popover'
         });
         await popover.present();
-        const { data } = await popover.onDidDismiss();
-        //data=1: take a photo, data=2: lib
-        if(data!=null){
-            this.router.navigate(['/post'], {
-                queryParams: {
-                    data: data
-                }
-            });
+        const postType = await popover.onDidDismiss();
+        
+        const postModal = await this.modalController.create({
+            component: AddTimelinePage,
+            componentProps: { postType: postType }
+        });
+          
+        await postModal.present();
+        const { data } = await postModal.onDidDismiss();
+        if(data){
+            this.cacheService.clearGroup("MyTimeLinePage");
+            this.ngOnInit();
         }
+
     }
 
     async presentPopover(event: Event, id: any, groupNames: string) {
