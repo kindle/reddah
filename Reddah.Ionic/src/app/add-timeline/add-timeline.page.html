@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-item lines="none">
-      <ion-icon name="ios-arrow-back" slot="start" (click)="goback()"></ion-icon>
+      <ion-icon name="ios-arrow-back" slot="start" (click)="close()"></ion-icon>
       <ion-button color="success" slot="end" (click)="submit()">发表</ion-button>
     </ion-item>
   </ion-toolbar>
@@ -13,7 +13,7 @@
     </ion-item>
     <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos">
       <div class="imgSqure" *ngFor="let image of photos;index as i">
-          <img [src]="image" (click)="viewer(i, photos)">
+          <img [src]="image.webUrl" (click)="viewer(i, photos)">
       </div>
       <div class="imgSqure addImg" (click)="addNewPhoto($event)" *ngIf="photos.length<9">
         <ion-icon name="add" size="large" color="medium"></ion-icon>

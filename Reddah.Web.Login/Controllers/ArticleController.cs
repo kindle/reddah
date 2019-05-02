@@ -3,25 +3,15 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+
 using System.Web.Http;
 using System.Linq;
-using System.Web.Helpers;
-using System.Security.Cryptography;
-using System.Web.ApplicationServices;
-using WebMatrix.WebData;
-using Org.BouncyCastle.Crypto;
-using System.Web.Security;
 using System.Data.Entity;
 using System.Web.Http.Cors;
 using Reddah.Web.Login.Utilities;
 using System.Web;
 using System.Web.Hosting;
 using System.IO;
-using System.Net.Http;
-using System.Collections.Specialized;
-using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
 namespace Reddah.Web.Login.Controllers
@@ -131,6 +121,7 @@ namespace Reddah.Web.Login.Controllers
                 {
                     using (var db = new reddahEntities())
                     {
+                        Dictionary<string, string> dict = new Dictionary<string, string>();
                         foreach (string rfilename in HttpContext.Current.Request.Files)
                         {
                             //upload image first
@@ -139,6 +130,19 @@ namespace Reddah.Web.Login.Controllers
                             string uploadImageServerPath = "~" + uploadedImagePath;
 
                             HttpPostedFile upload = HttpContext.Current.Request.Files[rfilename];
+                            var fileNameKey = upload.FileName.Replace("_reddah_preview", "");
+                            if (!dict.Keys.Contains(fileNameKey))
+                            {
+                                dict.Add(fileNameKey, guid);
+                            }
+                            else
+                            {
+                                guid = dict[fileNameKey];
+                            }
+                            if (upload.FileName.Contains("_reddah_preview"))
+                            {
+                                guid += "_reddah_preview";
+                            }
 
                             try
                             {
@@ -161,8 +165,13 @@ namespace Reddah.Web.Login.Controllers
                                 file.GroupName = "";
                                 file.Tag = "";
                                 db.UploadFile.Add(file);
-                                if(upload.FileName.Contains("_reddah_preview."))
-                                    imageUrls.Add("///login.reddah.com" + url);
+                                if (upload.FileName.Contains("_reddah_preview."))
+                                {
+                                    if(!imageUrls.Contains("///login.reddah.com" + url))
+                                    {
+                                        imageUrls.Add("///login.reddah.com" + url);
+                                    }
+                                }
                             }
                             catch (Exception ex)
                             {

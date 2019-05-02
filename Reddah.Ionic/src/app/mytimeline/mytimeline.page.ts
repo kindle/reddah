@@ -267,20 +267,26 @@ export class MyTimeLinePage implements OnInit {
             cssClass: 'post-option-popover'
         });
         await popover.present();
-        const postType = await popover.onDidDismiss();
-        
+        const { data } = await popover.onDidDismiss();
+
+        //data=1: take a photo, data=2: lib
+        this.goPost(data);
+        /*if(data!=null){
+            this.router.navigate(['/post'], {
+              queryParams: {
+                postType: data
+              }
+            });
+        }*/
+    }
+
+    async goPost(data){
         const postModal = await this.modalController.create({
             component: AddTimelinePage,
-            componentProps: { postType: postType }
+            componentProps: { postType: data }
         });
           
         await postModal.present();
-        const { data } = await postModal.onDidDismiss();
-        if(data){
-            this.cacheService.clearGroup("MyTimeLinePage");
-            this.ngOnInit();
-        }
-
     }
 
     async presentPopover(event: Event, id: any, groupNames: string) {
