@@ -1,16 +1,10 @@
-<ion-header>
-  <ion-toolbar color="dark">
-    <ion-buttons slot="start">
-      <ion-button (click)="closeModal()"> <ion-icon slot="icon-only" name="close"></ion-icon> </ion-button>
-    </ion-buttons>
+<ion-item no-padding>
     <ion-title>{{ imgTitle }}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [forceOverscroll]="false" color="dark" fullscreen="true">
+</ion-item>
+<ion-content [forceOverscroll]="false" color="dark" fullscreen="true" (click)="closeModal()" >
   <ion-slides [options]="slideOpts">
     <ion-slide *ngFor="let img of imgSourceArray">
-      <div class="swiper-zoom-container"><img src="{{org(img)}}" height="100vh"></div>
+      <div class="swiper-zoom-container"><img src="{{img}}" height="100vh"></div>
     </ion-slide>
   </ion-slides>
 </ion-content>

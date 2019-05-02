@@ -2,12 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/cor
 import { InfiniteScroll, Content } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController, AlertController } from '@ionic/angular';
+import { LoadingController, NavController, PopoverController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { TimelinePopPage } from '../article-pop/timeline-pop.page';
 import { UserPage } from '../user/user.page';
-import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { TimelineCommentPopPage } from '../article-pop/timeline-comment-pop.page'
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";

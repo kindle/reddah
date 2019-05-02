@@ -11,18 +11,14 @@
     <ion-item lines="none">
       <ion-textarea [(ngModel)]="yourThoughts" rows="6" cols="20" placeholder="这一刻的想法..."></ion-textarea>
     </ion-item>
-    <div class="imgContainer">
-      <div class="imgSqure" *ngFor="let image of photos">
-          <img [src]="image">
+    <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos">
+      <div class="imgSqure" *ngFor="let image of photos;index as i">
+          <img [src]="image" (click)="viewer(i, photos)">
       </div>
-      <div class="imgSqure addImg" (click)="addNewPhoto($event)">
+      <div class="imgSqure addImg" (click)="addNewPhoto($event)" *ngIf="photos.length<9">
         <ion-icon name="add" size="large" color="medium"></ion-icon>
       </div>
     </div>
-    <!--<div *ngFor="let text of texts">
-        {{text}}<br/>
-    </div>
-    {{debug}}-->
     <ion-item lines="none">
       <ion-label></ion-label>
     </ion-item>
@@ -42,3 +38,10 @@
       <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
     </ion-item>
 </ion-content>
+<ion-footer *ngIf="dragging" style="background-color: red;color: white;">
+    <ion-row id="delete-photo" class="delete-area" align-items-center justify-content-center dragula="bag" [(dragulaModel)]="photos_trash">
+        <ion-icon name="ios-trash" color="tertiary" size="medium"></ion-icon>
+        <ion-text *ngIf="dragToDel" color="white">松手即可删除</ion-text>
+        <ion-text *ngIf="!dragToDel">拖动到此处删除</ion-text>
+    </ion-row>
+</ion-footer>

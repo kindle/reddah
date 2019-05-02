@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { CacheService } from "ionic-cache";
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { LocalStorageService } from 'ngx-webstorage';
+import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
+import { DragulaService } from 'ng2-dragula';
 
 @Component({
   selector: 'app-add-timeline',
@@ -28,6 +30,7 @@ export class AddTimelinePage implements OnInit {
       private cacheService: CacheService,
       private localStorageService: LocalStorageService,
       private modalController: ModalController,
+      private dragulaService: DragulaService,
     ) { 
         this.activatedRoute.queryParams.subscribe((params: Params) => {
             let data = params['data'];
@@ -40,6 +43,62 @@ export class AddTimelinePage implements OnInit {
                 this.fromLib();
             }
         });
+
+        this.dragulaService.dragend('bag')
+        .subscribe(({ name, el }) => {
+            this.removeClass(el, "ex-over");
+            this.dragToDel = false;
+        });
+    
+        this.dragulaService.createGroup('bag', {
+            removeOnSpill: false,
+            revertOnSpill: true,
+            moves: (el, container, handle) => {
+                // you can't move plus button
+                return handle.tagName !== "ION-ICON";
+            },
+            accepts: (el, target, source, sibling) => {
+                if (sibling === null) {
+                  return false;
+                }
+                return true;
+            },
+        });
+
+        this.dragulaService.over('bag')
+        .subscribe(({ el, container }) => {
+            if(container.id=="delete-photo"){
+                this.dragToDel = true;
+                this.addClass(el, "ex-over");
+            }
+            else{
+                this.dragToDel = false;
+                this.removeClass(el, "ex-over");
+            }
+        });
+
+        this.dragulaService.out('bag')
+        .subscribe(({ el, container }) => {
+            this.dragToDel = false;
+            this.removeClass(el, "ex-over");
+        });
+    }
+
+    private hasClass(el: Element, name: string): any {
+        return new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)").test(el.className);
+    }
+    private addClass(el: Element, name: string): void {
+        if (!this.hasClass(el, name)) {
+            el.className = el.className ? [el.className, name].join(" ") : name;
+        }
+    }
+    private removeClass(el: Element, name: string): void {
+        if (this.hasClass(el, name)) {
+            el.className = el.className.replace(
+            new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)", "g"),
+            ""
+            );
+        }
     }
 
     goback(){
@@ -49,6 +108,9 @@ export class AddTimelinePage implements OnInit {
     ngOnInit() {}
     
     photos = [];
+    photos_trash = [];
+    dragging = false;
+    dragToDel = false;
     yourThoughts: string = "";
     location = "";
     debug = "";
@@ -192,7 +254,32 @@ export class AddTimelinePage implements OnInit {
         reader.readAsArrayBuffer(file);
     }
 
+    async viewer(index, imageSrcArray) {
+        const modal = await this.modalController.create({
+            component: ImageViewerComponent,
+            componentProps: {
+                index: index,
+                imgSourceArray: imageSrcArray,
+                imgTitle: "",
+                imgDescription: ""
+            },
+            cssClass: 'modal-fullscreen',
+            keyboardClose: true,
+            showBackdrop: true
+        });
+    
+        return await modal.present();
+    }
 
+    pressed(){
+        this.dragging = true;
+    }
+
+    active(){}
+
+    released(){
+        this.dragging = false;
+    }
 
 
 }

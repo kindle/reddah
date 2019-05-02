@@ -57,6 +57,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { CacheModule } from "ionic-cache";
 import { TsViewerPage } from './tsviewer/tsviewer.page'
 import { AddTimelinePage } from './add-timeline/add-timeline.page';
+import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { AddTimelinePage } from './add-timeline/add-timeline.page';
       IonicImageLoader.forRoot(),
       CacheModule.forRoot(),
       NgxWebstorageModule.forRoot(),
+      DragulaModule.forRoot(),
       TranslateModule.forRoot({
         loader: {
             provide: TranslateLoader,
