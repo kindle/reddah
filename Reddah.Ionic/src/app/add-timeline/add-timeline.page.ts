@@ -13,9 +13,9 @@ import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { DragulaService } from 'ng2-dragula';
 
 @Component({
-  selector: 'app-add-timeline',
-  templateUrl: './add-timeline.page.html',
-  styleUrls: ['./add-timeline.page.scss'],
+    selector: 'app-add-timeline',
+    templateUrl: './add-timeline.page.html',
+    styleUrls: ['./add-timeline.page.scss'],
 })
 export class AddTimelinePage implements OnInit {
 
@@ -34,21 +34,6 @@ export class AddTimelinePage implements OnInit {
       private modalController: ModalController,
       private dragulaService: DragulaService,
     ) { 
-        /*this.activatedRoute.queryParams.subscribe((params: Params) => {
-            let postType = params['postType'];
-            alert(this.postType)
-            if(postType==1)//photo
-            {
-                this.takePhoto();
-            }
-            else//from library
-            {
-                this.fromLib();
-            }
-        });
-        */
-        
-
         this.dragulaService.drag('bag')
         .subscribe(({ name, el }) => {
             this.dragging = true;
@@ -60,10 +45,14 @@ export class AddTimelinePage implements OnInit {
             this.dragToDel = false;
             this.dragging = false;
         });
-
-        this.dragulaService.dropModel('bag').subscribe((value) => {
-            console.log(value);
-            this.formData.delete("key");
+        this.dragulaService.dropModel('bag')
+            .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
+                if(target.id=="delete-photo"){
+                    //delete org photo form data
+                    this.formData.delete(item["fileUrl"]);
+                    //delete resize photo form data
+                    this.formData.delete(item["fileUrl"]+"_reddah_preview");
+                }
         });
         
         if(!this.dragulaService.find('bag')){
@@ -76,7 +65,7 @@ export class AddTimelinePage implements OnInit {
                 },
                 accepts: (el, target, source, sibling) => {
                     if (sibling === null) {
-                    return false;
+                        return false;
                     }
                     return true;
                 },
@@ -134,13 +123,13 @@ export class AddTimelinePage implements OnInit {
         }
     }
     
+    //photos = [{fileUrl: '1', webUrl:'web1'},{fileUrl: '2', webUrl:'web2'},{fileUrl: '3', webUrl:'web3'}];
     photos = [];
     photos_trash = [];
     dragging = false;
     dragToDel = false;
     yourThoughts: string = "";
     location = "";
-    debug = "";
     formData = new FormData();
 
     async submit(){
@@ -149,25 +138,13 @@ export class AddTimelinePage implements OnInit {
             spinner: 'circles',
         });
         await loading.present();
-
-        /*
-        this.photos.forEach((photo)=>{
-            //append org photo form data
-            this.prepareData(photo.fileUrl);
-
-            //append preview photo form data
-            let orgFileUrl = photo.fileUrl;
-            orgFileUrl = orgFileUrl.substring(orgFileUrl.lastIndexOf('/')+1);
-            let parts = orgFileUrl.split('.');
-            let previewFileName = parts[0] + "_reddah_preview." + parts[1].split('?')[0];
-            this.resize(photo.fileUrl, previewFileName);
-        })
-        */
         
         this.formData.append('thoughts', this.yourThoughts);
         this.formData.append('location', this.location);
+        //send the key in UI display order
+        this.formData.append('order', this.photos.map(e=>e.fileUrl).join(","));
+        //alert(this.photos.map(e=>e.fileUrl).join(","));
 
-        
         this.reddahService.addTimeline(this.formData)
         .subscribe(result => 
             {
@@ -183,27 +160,29 @@ export class AddTimelinePage implements OnInit {
                 
             },
             error=>{
-              this.debug+=JSON.stringify(error);
+                //console.error(JSON.stringify(error));
+                alert(JSON.stringify(error));
             }
         );
     }
 
     async addNewPhoto(ev: any) {
-      const popover = await this.popoverController.create({
-          component: TimelinePopPage,
-          event: ev,
-          translucent: true
-      });
-      await popover.present();
-      const { data } = await popover.onDidDismiss();
-      if(data==1)//photo
-      {
-          await this.takePhoto();
-      }
-      else//from library
-      {
-          await this.fromLib();
-      }
+        const popover = await this.popoverController.create({
+            component: TimelinePopPage,
+            event: ev,
+            translucent: true,
+        });
+
+        await popover.present();
+        const { data } = await popover.onDidDismiss();
+        if(data==1)//photo
+        {
+            await this.takePhoto();
+        }
+        else//from library
+        {
+            await this.fromLib();
+        }
     }
 
     async takePhoto(){
@@ -246,54 +225,46 @@ export class AddTimelinePage implements OnInit {
         
     }
 
-    async addPhotoToFormData(photo){
+    addPhotoToFormData(photo){
         //append org photo form data
-        this.prepareData(photo.fileUrl);
+        this.prepareData(photo.fileUrl, photo.fileUrl);
 
         //append preview photo form data
         let orgFileUrl = photo.fileUrl;
         orgFileUrl = orgFileUrl.substring(orgFileUrl.lastIndexOf('/')+1);
         let parts = orgFileUrl.split('.');
         let previewFileName = parts[0] + "_reddah_preview." + parts[1].split('?')[0];
-        this.resize(photo.fileUrl, previewFileName);
-    }
-
-    async resize(uri, fileName){
         let options = {
-            uri: uri,
+            uri: photo.fileUrl,
             folderName: 'reddah_resize',
-            fileName: fileName, 
+            fileName: previewFileName,
             quality: 30,
             width: 800,
             height: 800
-           } as ImageResizerOptions;
-           
-        
+        } as ImageResizerOptions;
         ImageResizer
             .resize(options)
-            .then((filePath: string) => this.prepareData(filePath))
+            .then((filePath: string) => this.prepareData(filePath, photo.fileUrl+"_reddah_preview"))
             .catch(e => alert(e));
     }
 
-    async prepareData(filePath) {
+    prepareData(filePath, formKey) {
         this.file.resolveLocalFilesystemUrl(filePath)
-            .then(entry => {
-                ( <FileEntry> entry).file(file => this.readFile(file))
+        .then(entry => {
+            ( <FileEntry> entry).file(file => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const imgBlob = new Blob([reader.result], {
+                        type: file.type
+                    });
+                    this.formData.append(formKey, imgBlob, file.name);
+                };
+                reader.readAsArrayBuffer(file);
             })
-            .catch(err => {
-                console.error(JSON.stringify(err));
-            });
-    }
-    
-    async readFile(file: any) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            const imgBlob = new Blob([reader.result], {
-                type: file.type
-            });
-            this.formData.append('file'+file.name, imgBlob, file.name);
-        };
-        reader.readAsArrayBuffer(file);
+        })
+        .catch(err => {
+            console.error(JSON.stringify(err));
+        });
     }
 
     async viewer(index, imageSrcArray) {
@@ -316,6 +287,4 @@ export class AddTimelinePage implements OnInit {
     
         return await modal.present();
     }
-
-
 }

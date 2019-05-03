@@ -280,13 +280,17 @@ export class MyTimeLinePage implements OnInit {
         }*/
     }
 
-    async goPost(data){
+    async goPost(postType){
         const postModal = await this.modalController.create({
             component: AddTimelinePage,
-            componentProps: { postType: data }
+            componentProps: { postType: postType }
         });
           
         await postModal.present();
+        const { data } = await postModal.onDidDismiss();
+        if(data){
+            this.clearCacheAndReload();
+        }
     }
 
     async presentPopover(event: Event, id: any, groupNames: string) {
