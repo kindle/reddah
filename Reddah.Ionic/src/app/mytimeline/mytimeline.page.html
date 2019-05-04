@@ -47,12 +47,12 @@
                             <img-loader src="{{image}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))"></img-loader>
                         </div>
                     </div>
-                    <div class="parent" *ngIf="article.Content.split('$$$').length>=3&&article.Content.split('$$$').length<=6">
+                    <div class="parent" *ngIf="article.Content.split('$$$').length>=2&&article.Content.split('$$$').length<=6">
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img-loader src="{{image}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))"></img-loader>
                         </div>
                     </div>
-                    <div *ngIf="article.Content.split('$$$').length<3">
+                    <div *ngIf="article.Content.split('$$$').length<2">
                         <img-loader src="{{article.Content.split('$$$')[0]}}" class="singlePicture" (click)="viewer(0, article.Content.split('$$$'))"></img-loader>
                     </div>
                 </ion-card-content>

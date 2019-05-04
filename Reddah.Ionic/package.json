@@ -66,6 +66,7 @@
     "cordova-windows": "6.0.1",
     "core-js": "^2.5.3",
     "helloplugin": "file:../../helloPlugin",
+    "highcharts": "^7.1.1",
     "info.protonet.imageresizer": "0.1.1",
     "ionic-cache": "^4.0.1",
     "ionic-image-loader": "^7.0.0-beta.2",

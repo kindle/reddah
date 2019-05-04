@@ -323,4 +323,40 @@ export class ReddahService {
       return of(result as T);
     };
   }
+
+
+    private sohuStockApi = "https://q.stock.sohu.com/hisHq?code=cn_600009&start=19900716&end=20200720&stat=1&order=D&period=d&callback=historySearchHandler&rt=jsonp"; 
+
+    getStock(id: string): Observable<any> {
+
+      return this.http.get(this.sohuStockApi)
+        .pipe(
+          tap(data => this.log('get stock')),
+          catchError(this.handleError('get stock', []))
+        );
+    }
+    //******************************** */
+
+
+    foo(): Observable<any> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+        })
+      };
+
+
+      this.http.get(this.sohuStockApi)
+      .subscribe((res:Response)=>{
+        console.log(res)
+      },err=>{
+        console.dir(err)
+    });
+      return this.http.get<any>(this.sohuStockApi, httpOptions)
+      .pipe(
+        catchError(this.handleError('addHero', []))
+      );
+   
+    
+    }
 }

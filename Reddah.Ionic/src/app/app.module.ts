@@ -58,6 +58,7 @@ import { CacheModule } from "ionic-cache";
 import { TsViewerPage } from './tsviewer/tsviewer.page'
 import { AddTimelinePage } from './add-timeline/add-timeline.page';
 import { DragulaModule } from 'ng2-dragula';
+import { StockPage } from './stock/stock.page';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { DragulaModule } from 'ng2-dragula';
       ScanPage,
       TsViewerPage,
       AddTimelinePage,
+      StockPage,
   ],
   entryComponents: [
       LocalePage,
@@ -108,6 +110,7 @@ import { DragulaModule } from 'ng2-dragula';
       TimeLinePage,
       TsViewerPage,
       AddTimelinePage,
+      StockPage,
   ],
   imports: [
       BrowserModule, 

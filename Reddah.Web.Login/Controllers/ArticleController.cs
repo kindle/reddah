@@ -105,7 +105,10 @@ namespace Reddah.Web.Login.Controllers
                 string jwt = HttpContext.Current.Request["jwt"];
                 string thoughts = HttpContext.Current.Request["thoughts"];
                 string location = HttpContext.Current.Request["location"];
-                List<string> imageUrls = new List<string>();
+                //this is actually fileurl array
+                string rorder = HttpContext.Current.Request["order"];
+                
+                Dictionary<string, string> imageUrls = new Dictionary<string, string>();
 
                 HttpFileCollection hfc = HttpContext.Current.Request.Files;
 
@@ -119,6 +122,8 @@ namespace Reddah.Web.Login.Controllers
 
                 try
                 {
+                    string[] order = rorder.Split(',');
+                    
                     using (var db = new reddahEntities())
                     {
                         Dictionary<string, string> dict = new Dictionary<string, string>();
@@ -130,7 +135,7 @@ namespace Reddah.Web.Login.Controllers
                             string uploadImageServerPath = "~" + uploadedImagePath;
 
                             HttpPostedFile upload = HttpContext.Current.Request.Files[rfilename];
-                            var fileNameKey = upload.FileName.Replace("_reddah_preview", "");
+                            var fileNameKey = rfilename.Replace("_reddah_preview", "");
                             if (!dict.Keys.Contains(fileNameKey))
                             {
                                 dict.Add(fileNameKey, guid);
@@ -167,24 +172,35 @@ namespace Reddah.Web.Login.Controllers
                                 db.UploadFile.Add(file);
                                 if (upload.FileName.Contains("_reddah_preview."))
                                 {
-                                    if(!imageUrls.Contains("///login.reddah.com" + url))
+                                    if (!imageUrls.Values.Contains("///login.reddah.com" + url))
                                     {
-                                        imageUrls.Add("///login.reddah.com" + url);
+                                        imageUrls.Add(guid.Replace("_reddah_preview", ""), "///login.reddah.com" + url);
                                     }
                                 }
                             }
                             catch (Exception ex)
                             {
-                                
+                                return Ok(new ApiResult(1, ex.Message));
                             }
                         }
-
+                        
+                        //deal with photo order
+                        List<string> articleContentList = new List<string>();
+                        foreach(string key in order)
+                        {
+                            if (dict.ContainsKey(key))
+                            {
+                                string targetGuid = dict[key];
+                                if(imageUrls.ContainsKey(targetGuid))
+                                    articleContentList.Add(imageUrls[targetGuid]);
+                            }
+                        }
 
                         //add timeline article
                         db.Article.Add(new Article()
                         {
                             Title = thoughts,
-                            Content = string.Join("$$$", imageUrls),
+                            Content = string.Join("$$$", articleContentList),
                             CreatedOn = DateTime.Now,
                             Count = 0,
                             GroupName = location,

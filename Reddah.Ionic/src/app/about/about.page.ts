@@ -15,6 +15,7 @@ import { AuthService }      from '../auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { MyInfoPage } from '../my-info/my-info.page';
+import { StockPage } from '../stock/stock.page';
 import { ImageLoaderService } from 'ionic-image-loader';
 
 @Component({
@@ -208,6 +209,15 @@ export class AboutPage implements OnInit {
         //check if change
         if(data)
             this.getUserInfo();
+    }
+
+    async foo(){
+        const stockModal = await this.modalController.create({
+            component: StockPage,
+            componentProps: {  }
+        });
+        
+        await stockModal.present();
     }
 
 }
