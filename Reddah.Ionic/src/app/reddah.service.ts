@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
+import {
+  Headers, Http, JsonpModule, XHRBackend, RequestOptions, RequestOptionsArgs, Jsonp,
+  JSONPBackend, URLSearchParams, QueryEncoder, ResponseContentType
+} from '@angular/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Article } from "./article";
 import { UserProfileModel } from './UserProfileModel';
@@ -14,8 +18,11 @@ import { LocalStorageService } from 'ngx-webstorage';
 })
 export class ReddahService {
 
-  constructor(private http: HttpClient,
-    private localStorageService: LocalStorageService) { }
+  constructor(
+      private http: HttpClient,
+      private localStorageService: LocalStorageService,
+      private jsonp: Jsonp
+  ) { }
 
 //******************************** */
   private loginUrl = 'https://login.reddah.com/api/auth/sign'; 
@@ -325,38 +332,28 @@ export class ReddahService {
   }
 
 
-    private sohuStockApi = "https://q.stock.sohu.com/hisHq?code=cn_600009&start=19900716&end=20200720&stat=1&order=D&period=d&callback=historySearchHandler&rt=jsonp"; 
+    
+    //******************************** */
+    
+    options: any;
+    //d表示日线，m表示月线，w表示周线
+    getStock(stock:string, period='d'): Observable<any> {
+      let sohuStockApi = `https://q.stock.sohu.com/hisHq?code=cn_${stock}&start=19900716&end=20200720&stat=1&order=A&period=${period}&rt=jsonp`; 
+        console.log(sohuStockApi);
 
-    getStock(id: string): Observable<any> {
+      const searchParams = new URLSearchParams();
+      searchParams.append('callback', 'JSONP_CALLBACK');
+      if (!this.options) {
+        this.options = {headers: new Headers()};
+      }
+      this.options.headers.set('Content-Type', 'application/json:charset=UTF-8');
+      this.options.params = searchParams;
 
-      return this.http.get(this.sohuStockApi)
-        .pipe(
+      return this.jsonp.get(sohuStockApi, this.options).pipe(
           tap(data => this.log('get stock')),
           catchError(this.handleError('get stock', []))
-        );
-    }
-    //******************************** */
-
-
-    foo(): Observable<any> {
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-        })
-      };
-
-
-      this.http.get(this.sohuStockApi)
-      .subscribe((res:Response)=>{
-        console.log(res)
-      },err=>{
-        console.dir(err)
-    });
-      return this.http.get<any>(this.sohuStockApi, httpOptions)
-      .pipe(
-        catchError(this.handleError('addHero', []))
       );
-   
+    } 
     
-    }
+    //******************************** */
 }

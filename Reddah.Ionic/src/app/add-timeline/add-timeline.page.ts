@@ -238,7 +238,7 @@ export class AddTimelinePage implements OnInit {
             uri: photo.fileUrl,
             folderName: 'reddah_resize',
             fileName: previewFileName,
-            quality: 30,
+            quality: 20,
             width: 800,
             height: 800
         } as ImageResizerOptions;

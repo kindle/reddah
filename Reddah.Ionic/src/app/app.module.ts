@@ -21,7 +21,8 @@ import { SafePipe } from './safe.pipe';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { HttpModule,JsonpModule } from '@angular/http';
 import { Camera } from '@ionic-native/Camera/ngx'
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
@@ -118,6 +119,8 @@ import { StockPage } from './stock/stock.page';
       IonicModule.forRoot(), 
       AppRoutingModule,
       HttpClientModule,
+      JsonpModule,
+      HttpClientJsonpModule,
       IonicImageLoader.forRoot(),
       CacheModule.forRoot(),
       NgxWebstorageModule.forRoot(),
