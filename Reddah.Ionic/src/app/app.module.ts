@@ -51,7 +51,7 @@ import { TimelineCommentPopPage } from './article-pop/timeline-comment-pop.page'
 import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { Crop } from '@ionic-native/crop/ngx';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
@@ -145,8 +145,9 @@ import { StockPage } from './stock/stock.page';
       Camera,
       IonicImageLoader,
       File,
-      WebView,
       FileTransfer,
+      FileTransferObject,
+      WebView,
       Crop,
       QRScanner,
       PhotoLibrary,

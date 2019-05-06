@@ -38,13 +38,13 @@ export class AppComponent {
         this.imageLoaderConfigService.useImageTag(true);
         this.imageLoaderConfigService.enableSpinner(false);
         this.imageLoaderConfigService.setConcurrency(10);
-        //this.imageLoaderConfigService.setCacheDirectoryName('reddah');
+        this.imageLoaderConfigService.setCacheDirectoryName('reddah');
         this.imageLoaderConfigService.setMaximumCacheSize(20 * 1024 * 1024 * 1024); // set max size to 20GB
         this.imageLoaderConfigService.setMaximumCacheAge(365 * 24 * 60 * 60 * 1000); // 365 days
         this.imageLoaderConfigService.cacheDirectoryType = "cache";
         this.imageLoaderConfigService.enableFallbackAsPlaceholder(true);
         this.imageLoaderConfigService.setFallbackUrl('assets/icon/noimage.jpg');
-
+        //this.file.dataDirectory = "/reddah";
         //File.createDir("/","reddah", true);
         
         //const headers = new HttpHeaders()

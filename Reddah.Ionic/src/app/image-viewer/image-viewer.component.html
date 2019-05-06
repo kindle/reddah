@@ -1,16 +1,23 @@
 <ion-item no-padding>
     <ion-title>{{ imgTitle }}</ion-title>
 </ion-item>
-<ion-content [forceOverscroll]="false" color="dark" fullscreen="true" (click)="closeModal()" >
-  <ion-slides [options]="slideOpts">
-    <ion-slide *ngFor="let img of imgSourceArray">
-      <div class="swiper-zoom-container"><img src="{{img}}" height="100vh"></div>
-    </ion-slide>
-  </ion-slides>
+<ion-content [forceOverscroll]="false" color="dark" fullscreen="true" (click)="closeModal($event)" >
+    <ion-slides [options]="slideOpts">
+        <ion-slide *ngFor="let img of imgSourceArray">
+            <div class="swiper-zoom-container">
+                <img src="{{img}}" height="100vh">
+            </div>
+            <ion-item no-padding style="position: absolute;bottom: 80px;" color="dark">
+                <ion-title id="showOrgImage" (click)="showOrgImage(img)">查看原图{{progress}}</ion-title>
+            </ion-item>
+            <ion-item no-padding style="position: absolute;bottom:80px;right:0px;" color="dark">
+                <ion-icon name="download"></ion-icon>
+            </ion-item>
+        </ion-slide>
+    </ion-slides>
 </ion-content>
-
 <ion-footer *ngIf="imgDescription.length">
-  <ion-toolbar color="dark" text-center>
-    <ion-text>{{ imgDescription }}</ion-text>
-  </ion-toolbar>
+    <ion-toolbar color="dark" text-center>
+        <ion-text>{{ imgDescription }}</ion-text>
+    </ion-toolbar>
 </ion-footer>
