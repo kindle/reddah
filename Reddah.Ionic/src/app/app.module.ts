@@ -60,6 +60,7 @@ import { TsViewerPage } from './tsviewer/tsviewer.page'
 import { AddTimelinePage } from './add-timeline/add-timeline.page';
 import { DragulaModule } from 'ng2-dragula';
 import { StockPage } from './stock/stock.page';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { StockPage } from './stock/stock.page';
       TsViewerPage,
       AddTimelinePage,
       StockPage,
+      ProgressBarComponent,
   ],
   entryComponents: [
       LocalePage,

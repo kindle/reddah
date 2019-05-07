@@ -5,16 +5,14 @@
     <ion-slides [options]="slideOpts">
         <ion-slide *ngFor="let item of enhanceImgSourceArray">
             <div class="swiper-zoom-container">
-                <img [src]="item.webUrl" height="100vh">
+                <img [src]="item.webPreviewUrl" height="100vh" *ngIf="!item.isOrgViewed">
+                <img [src]="item.localhostOrgImageUrl" height="100vh" *ngIf="item.isOrgViewed">
             </div>
             <ion-item no-padding style="position: absolute;bottom: 80px;" color="dark">
-                <ion-title id="showOrgImage" (click)="showOrgImage(item.webUrl)" *ngIf="!item.isOrgViewed">查看原图</ion-title>
-                <div class="progress-inner" [style.width]="progress + '%'">
-                    {{progress}}%
-                </div>
+                <ion-title id="downloadOrgImage" (click)="downloadOrgImage(item)" *ngIf="!item.isOrgViewed">查看原图</ion-title>
             </ion-item>
-            <ion-item no-padding style="position: absolute;bottom:80px;right:0px;" color="dark">
-                <ion-icon id="downloadOrgImage" name="download" (click)="download(item)"></ion-icon>
+            <ion-item style="position: absolute;bottom: 80px;right: 10px;" color="dark">
+                <ion-icon id="downloadImage" name="download" (click)="downloadImage(item)" slot="end"></ion-icon>
             </ion-item>
         </ion-slide>
     </ion-slides>
