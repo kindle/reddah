@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -12,6 +12,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 export class ImageViewerComponent implements OnInit {
     @Input() index = 0;
     @Input() imgSourceArray: any = [];
+    enhanceImgSourceArray: any = [];
     @Input() imgTitle = '';
     @Input() imgDescription = '';
 
@@ -23,6 +24,7 @@ export class ImageViewerComponent implements OnInit {
         private transfer: FileTransfer, 
         private file: File,
         private localStorageService: LocalStorageService,
+        private toastController: ToastController,
     ) {
     }
 
@@ -35,7 +37,20 @@ export class ImageViewerComponent implements OnInit {
             let org = this.localStorageService.retrieve(this.imgSourceArray[i]);
             if(org!=null){
                 let webUrl = (<any>window).Ionic.WebView.convertFileSrc(org);
-                this.imgSourceArray[i] = webUrl;
+                this.enhanceImgSourceArray[i] = { 
+                    webUrl: webUrl, 
+                    downloadUrl: org,
+                    fileName: org.replace("file:///storage/emulated/0/DCIM/Reddah/",""),
+                    isOrgViewed: true, 
+                }
+            }
+            else{
+                this.enhanceImgSourceArray[i] = { 
+                    webUrl: this.imgSourceArray[i], 
+                    downloadUrl: this.imgSourceArray[i],
+                    fileName: '',
+                    isOrgViewed: false,
+                }
             }
         }
     }
@@ -57,6 +72,8 @@ export class ImageViewerComponent implements OnInit {
     showOrgImage(preview_url) {
         let orgUrl = preview_url.replace("_reddah_preview","")
         let fileName = orgUrl.replace("///login.reddah.com/uploadPhoto/","");
+
+            //fileName = fileName.replace("http://localhost:8080/_file_/data/user/0/com.reddah/","");
         let pUrl = orgUrl.replace("///","https://");
         
         this.fileTransfer = this.transfer.create();  
@@ -76,7 +93,12 @@ export class ImageViewerComponent implements OnInit {
             for(let i=0;i<this.imgSourceArray.length;i++){
                 if(this.imgSourceArray[i]===preview_url){
                     let newWebUrl = (<any>window).Ionic.WebView.convertFileSrc(webUrl);
-                    this.imgSourceArray[i] = newWebUrl;
+                    this.enhanceImgSourceArray[i] = { 
+                        webUrl: newWebUrl, 
+                        downloadUrl: webUrl,
+                        fileName: fileName,
+                        isOrgViewed: true, 
+                  }
                     break;
                 }
             }
@@ -85,21 +107,48 @@ export class ImageViewerComponent implements OnInit {
         });
     }
 
-    download(url){
-        let pUrl = url.replace("///","https://");
-        alert("download:"+pUrl)
-        let fileName = url.replace("///login.reddah.com/uploadPhoto/","");
-        let downloadDir = "/reddah/download";
-        /*this.file.checkDir(this.file.externalRootDirectory, "reddah").then(data=>{
+    async download(item){
+        if(!item.isOrgViewed)
+        {
+            let url = item.downloadUrl;
+            let pUrl = url.replace("///","https://");
+            let fileName = url.replace("///login.reddah.com/uploadPhoto/","");
+            let target = this.file.externalRootDirectory+"DCIM/Reddah/" + fileName;
+            this.fileTransfer = this.transfer.create(); 
+            const toast = await this.toastController.create({
+                message: `图片已保存至${target}`,
+                showCloseButton: false,
+                position: 'bottom',
+                duration: 2500
+            });
+            alert(pUrl+"_"+target)
+            this.fileTransfer.download(pUrl, target, true).then((entry) => {
+                toast.present();
+            }, (error) => {
+                alert(JSON.stringify(error));
+            });
+        }
+        else
+        {
+            let path = item.downloadUrl.replace(item.fileName, "");
+            let fileName = item.fileName;
+            let newPath = this.file.externalRootDirectory+"DCIM/Reddah/";
+            let newFileName = item.fileName;
+
+            let target = newPath + newFileName;
+            alert(target)
+            const toast = await this.toastController.create({
+                message: `图片已保存至${target}`,
+                showCloseButton: false,
+                position: 'bottom',
+                duration: 2500
+            });
             
-            
-        })*/
-        this.fileTransfer.download(pUrl, this.file.externalRootDirectory + fileName).then((entry) => {
-            alert('downloadto:'+this.file.externalRootDirectory + fileName);
-            console.log("download success");
-        }, (error) => {
-            
-            alert(JSON.stringify(error));
-        });
+            this.file.copyFile(path, fileName, newPath, newFileName).then((data)=>{
+                toast.present();
+            });
+        }
+      
     }
+  
 }
