@@ -236,7 +236,7 @@ export class AddTimelinePage implements OnInit {
         let previewFileName = parts[0] + "_reddah_preview." + parts[1].split('?')[0];
         let options = {
             uri: photo.fileUrl,
-            folderName: 'reddah_resize',
+            folderName: 'reddah',
             fileName: previewFileName,
             quality: 20,
             width: 800,

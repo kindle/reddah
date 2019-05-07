@@ -23,20 +23,21 @@ export class ImageViewerComponent implements OnInit {
         private transfer: FileTransfer, 
         private file: File,
         private localStorageService: LocalStorageService,
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.slideOpts = {
             centeredSlides: 'true',
             initialSlide: this.index,
         };
-        this.imgSourceArray.forEach((preview)=>{
-            let org = this.localStorageService.retrieve(preview);
-            alert(org);
+        for(let i=0;i<this.imgSourceArray.length;i++){
+            let org = this.localStorageService.retrieve(this.imgSourceArray[i]);
             if(org!=null){
-                preview = org;
+                let webUrl = (<any>window).Ionic.WebView.convertFileSrc(org);
+                this.imgSourceArray[i] = webUrl;
             }
-        })
+        }
     }
 
     org(src){
@@ -45,7 +46,7 @@ export class ImageViewerComponent implements OnInit {
 
     closeModal(event) {
         var target = event.target || event.srcElement || event.currentTarget;
-        if(target.id==="showOrgImage"){}
+        if(target.id==="showOrgImage"||target.id==="downloadOrgImage"){}
         else{
             this.modalController.dismiss();
         }
@@ -53,28 +54,51 @@ export class ImageViewerComponent implements OnInit {
 
     progress : any;
 
-    showOrgImage(preview_url){
-      alert(preview_url);
+    showOrgImage(preview_url) {
         let orgUrl = preview_url.replace("_reddah_preview","")
         let fileName = orgUrl.replace("///login.reddah.com/uploadPhoto/","");
         let pUrl = orgUrl.replace("///","https://");
         
         this.fileTransfer = this.transfer.create();  
         this.fileTransfer.onProgress((data)=>{
-            //this.progress = JSON.stringify(data);
-            alert(JSON.stringify(data));
+            let percentage = data.loaded/data.total*100;
+            let timer = setInterval(() => {
+                this.progress = (percentage).toFixed(0);
+                if (percentage >= 99) {
+                    clearInterval(timer);
+                }
+            }, 300);
         });
-        alert('downloadto:'+this.file.applicationStorageDirectory + fileName)
+        
         this.fileTransfer.download(pUrl, this.file.applicationStorageDirectory + fileName).then((entry) => {
-            let webUrl = (<any>window).Ionic.WebView.convertFileSrc(entry.toURL());
+            let webUrl = this.file.applicationStorageDirectory + fileName;
             this.localStorageService.store(preview_url, webUrl);
-            this.imgSourceArray.forEach((preview)=>{
-              if(preview==preview_url){
-                  preview = webUrl;
-                  alert('change to:'+webUrl);
-              }
-          })
+            for(let i=0;i<this.imgSourceArray.length;i++){
+                if(this.imgSourceArray[i]===preview_url){
+                    let newWebUrl = (<any>window).Ionic.WebView.convertFileSrc(webUrl);
+                    this.imgSourceArray[i] = newWebUrl;
+                    break;
+                }
+            }
         }, (error) => {
+            console.log(JSON.stringify(error));
+        });
+    }
+
+    download(url){
+        let pUrl = url.replace("///","https://");
+        alert("download:"+pUrl)
+        let fileName = url.replace("///login.reddah.com/uploadPhoto/","");
+        let downloadDir = "/reddah/download";
+        /*this.file.checkDir(this.file.externalRootDirectory, "reddah").then(data=>{
+            
+            
+        })*/
+        this.fileTransfer.download(pUrl, this.file.externalRootDirectory + fileName).then((entry) => {
+            alert('downloadto:'+this.file.externalRootDirectory + fileName);
+            console.log("download success");
+        }, (error) => {
+            
             alert(JSON.stringify(error));
         });
     }
