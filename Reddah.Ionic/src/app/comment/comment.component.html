@@ -6,70 +6,27 @@
 <div *ngIf="data">
     <div *ngFor="let comment of data.Comments">
         <li *ngIf="data.Seed===comment.ParentId&&depth <= 1">
-            <ion-card>
-                <ion-card-header>
-                    <ion-item no-padding>
-                        <ion-text color="dark">
-                            <span (click)="goUser(comment.UserName)">{{comment.UserName}}</span> {{comment.CreatedOn | date:'yyyy-MM-dd HH:mm:ss'}} 
-                        </ion-text>
-                        <ion-buttons slot="end">
-                            <ion-button (click)="presentPopover($event)">
-                                <ion-icon slot="icon-only" name="menu"></ion-icon>
-                            </ion-button>
-                        </ion-buttons>
-                    </ion-item>
+            <ion-item lines="none" no-padding>
+                <ion-avatar slot="start" class="avatar-top">
+                    <img src="{{comment.UserPhoto}}" class="portrait" *ngIf="comment.UserPhoto">
+                    <img src="assets/icon/anonymous0.png" class="portrait" *ngIf="!comment.UserPhoto&&comment.UserSex==0">
+                    <img src="assets/icon/anonymous1.png" class="portrait" *ngIf="!comment.UserPhoto&&comment.UserSex==1">
+                    <img src="assets/icon/anonymous.png" class="portrait" *ngIf="!comment.UserPhoto&&comment.UserSex!=1&&comment.UserSex!=0">
+                </ion-avatar>
+                <ion-label text-wrap>
+                    <div>
+                        {{comment.UserNickName?comment.UserNickName:comment.UserName}}
+                        <ion-icon name="ios-more" style="float:right;"></ion-icon>
+                        <ion-icon name="ios-thumbs-up" color="medium" style="float:right;margin-right:5px;"></ion-icon>
+                        <span style="float: right;color: gray;margin-right:2px;margin-top:0;font-size: 12px;vertical-align: top;">0</span>
+                    </div>
                     
-                    <ion-card-subtitle>
-                        <ion-text color="dark">
-                            <div [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></div>
-                        </ion-text>
-                    </ion-card-subtitle>
-                </ion-card-header>
-                <ion-item>
-                    <ion-icon name="create" size="medium" (click)="newComment(comment.ArticleId, comment.Id)"></ion-icon>
-                    <ion-text (click)="newComment(comment.ArticleId, comment.Id)" margin-end>{{ 'Comment.Comment' | translate }}</ion-text>
-                  
-                    <ion-icon name="heart-empty" size="medium" (click)="likeComment(comment.Id)"></ion-icon>
-                    <ion-text (click)="likeComment(comment.Id)">{{ 'Comment.Like' | translate }}</ion-text>
-                </ion-item>
-                <ion-card-content>
-                    <app-comment [data]="{'Seed':comment.Id, 'Comments': data.Comments}" [depth]="depth+1" [ptext]="comment.Content"
-                     [pauthor]="comment.UserName" [authoronly]="authoronly" [articleauthor]="articleauthor"></app-comment>
-                </ion-card-content>
-            </ion-card>
+                    <p>{{comment.CreatedOn | date:'MM-dd HH:mm'}}</p>
+                    <div [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></div>
+                    <p>查看{{0}}条回复</p>
+                </ion-label>
+                
+            </ion-item>
         </li>
-        <div *ngIf="data.Seed===comment.ParentId&&depth > 1">
-            <ion-card no-padding>
-                <ion-card-header>
-                    <ion-item no-padding>
-                        <ion-text color="dark">
-                            <span (click)="goUser(comment.UserName)">{{comment.UserName}}</span> {{comment.CreatedOn | date:'yyyy-MM-dd HH:mm:ss'}} 
-                        </ion-text>
-                        <ion-buttons slot="end">
-                            <ion-button (click)="presentPopover($event)">
-                                <ion-icon slot="icon-only" name="menu"></ion-icon>
-                            </ion-button>
-                        </ion-buttons>
-                    </ion-item>
-                    <ion-card-subtitle>
-                        <ion-text color="dark">
-                            <div [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></div>
-                        </ion-text>
-                        <hr/>
-                        <ion-text color="primary">回复:<span [innerHTML]="pauthor | safe: 'html'" (click)="goUser(pauthor)"></span></ion-text>
-                        <ion-text color="medium"><div [innerHTML]="summary(ptext, 20) | safe: 'html'"></div></ion-text>
-                    </ion-card-subtitle>
-                </ion-card-header>
-                <ion-item>
-                    <ion-icon name="create" size="medium" (click)="newComment(comment.ArticleId, comment.Id)"></ion-icon>
-                    <ion-text (click)="newComment(comment.ArticleId, comment.Id)" margin-end>{{ 'Comment.Comment' | translate }}</ion-text>
-                    
-                    <ion-icon name="heart-empty" size="medium" (click)="likeComment(comment.Id)"></ion-icon>
-                    <ion-text (click)="likeComment(comment.Id)">{{ 'Comment.Like' | translate }}</ion-text>
-                </ion-item>
-            </ion-card>
-            <app-comment [data]="{'Seed':comment.Id, 'Comments': data.Comments}" [depth]="depth+1" 
-            [ptext]="comment.Content" [pauthor]="comment.UserName" [authoronly]="authoronly" [articleauthor]="articleauthor"></app-comment>
-        </div>
     </div>
 </div>

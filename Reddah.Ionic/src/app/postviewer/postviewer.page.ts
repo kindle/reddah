@@ -31,25 +31,25 @@ export class PostviewerPage implements OnInit {
   }
 
   async presentPopover(ev: any) {
-    const popover = await this.popoverController.create({
-      component: ArticlePopPage,
-      event: ev,
-      translucent: true
-    });
-    return await popover.present();
+      const popover = await this.popoverController.create({
+        component: ArticlePopPage,
+        event: ev,
+        translucent: true
+      });
+      return await popover.present();
   }
 
   loadComments(){
-    let cacheKey = "this.reddah.getComments" + this.article.Id;
-    let request = this.reddah.getComments(this.article.Id)
+      let cacheKey = "this.reddah.getComments" + this.article.Id;
+      let request = this.reddah.getComments(this.article.Id)
 
-    this.cacheService.loadFromObservable(cacheKey, request)
-    
-      .subscribe(data => 
-        {
-            this.commentsData = data;
-        }
-    );
+      this.cacheService.loadFromObservable(cacheKey, request)
+      
+        .subscribe(data => 
+          {
+              this.commentsData = data;
+          }
+      );
   }
 
   htmlDecode(text: string) {
@@ -90,33 +90,35 @@ export class PostviewerPage implements OnInit {
   direction: string = "up";
 
   onScroll($event){
-    let currentScrollTop = $event.detail.scrollTop;
+      let currentScrollTop = $event.detail.scrollTop;
 
-    if(currentScrollTop > this.lastScrollTop)
-    {
-        this.direction = 'down';
-    }
-    else if(currentScrollTop < this.lastScrollTop)
-    {
-        this.direction = 'up';
-    }
-    
-    this.lastScrollTop = currentScrollTop;
+      if(currentScrollTop > this.lastScrollTop)
+      {
+          this.direction = 'down';
+      }
+      else if(currentScrollTop < this.lastScrollTop)
+      {
+          this.direction = 'up';
+      }
+      
+      this.lastScrollTop = currentScrollTop;
   }
 
   async newComment(articleId: number, commentId: number){
       const addCommentModal = await this.modalController.create({
-      component: AddCommentPage,
-      componentProps: { 
-          articleId: articleId,
-          commentId: commentId
-        }
+          component: AddCommentPage,
+          componentProps: { 
+              articleId: articleId,
+              commentId: commentId
+          }
       });
       
       await addCommentModal.present();
       const { data } = await addCommentModal.onDidDismiss();
       if(data){
-        this.loadComments();
+          let cacheKey = "this.reddah.getComments" + this.article.Id;
+          this.cacheService.removeItem(cacheKey);
+          this.loadComments();
       }
 
   }

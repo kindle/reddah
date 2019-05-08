@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { LocalStorageService } from 'ngx-webstorage';
@@ -15,6 +15,7 @@ export class AddCommentPage implements OnInit {
   @Input() commentId: number
 
   commentContent: string;
+  submitClicked=false;
 
   constructor(
     private modalController: ModalController,
@@ -25,7 +26,27 @@ export class AddCommentPage implements OnInit {
     
   }
 
+  emojis = [
+      ['😀','😃','😄','😁','😆','😅'],
+      ['❤️','⚽️','🏀','🍎','🍉','☕️'],
+      ['🌈','☀️','🌧','🐶','🐱','🐷'],
+      ['😎','😱','😴','👍','👎','💪'],
+      ['🙏','😜','😡','😍','👻','💩']
+  ];
+
+  @ViewChild('newComment') newComment;
+
+  showFacePanel = false;
+  toggleFacePanel(){
+      this.showFacePanel= !this.showFacePanel;
+  }
+
+  handleSelection(face) {
+      this.newComment.value += face;
+  }
+
   async submit() {
+      this.submitClicked = true;
       //alert(`write some...aid:${this.articleId},cid:${this.commentId},content:${this.commentContent}`);
       this.reddahService.addComments(this.articleId, this.commentId, this.commentContent)
       .subscribe(result => 

@@ -28,6 +28,7 @@ export class ImageViewerComponent implements OnInit {
     ) {
     }
 
+    //isOrgViewed 0 No, 1 Yes, 2 on-going.
     ngOnInit() {
         this.slideOpts = {
             centeredSlides: 'true',
@@ -44,7 +45,7 @@ export class ImageViewerComponent implements OnInit {
                     localhostOrgImageUrl: '',
                     localFileOrgImageUrl: '',
                     previewImageFileName: fileName,
-                    isOrgViewed: false,
+                    isOrgViewed: 0,
                 }
             }
             else{
@@ -55,7 +56,7 @@ export class ImageViewerComponent implements OnInit {
                     localhostOrgImageUrl: webUrl,
                     localFileOrgImageUrl: org,
                     previewImageFileName: fileName,
-                    isOrgViewed: true, 
+                    isOrgViewed: 1, 
                 }
             }
         }
@@ -76,6 +77,8 @@ export class ImageViewerComponent implements OnInit {
     //loadProgress : any;
 
     async downloadOrgImage(item) {
+        //set status as loading
+        item.isOrgViewed = 2;
         // only against preview image
         this.fileTransfer = this.transfer.create();  
         //this.fileTransfer.onProgress((data)=>{
@@ -91,7 +94,7 @@ export class ImageViewerComponent implements OnInit {
                     let localhostOrgImageUrl = (<any>window).Ionic.WebView.convertFileSrc(localFileOrgImageUrl);
                     this.enhanceImgSourceArray[i].localhostOrgImageUrl = localhostOrgImageUrl;
                     this.enhanceImgSourceArray[i].localFileOrgImageUrl = localFileOrgImageUrl;
-                    this.enhanceImgSourceArray[i].isOrgViewed = true;
+                    this.enhanceImgSourceArray[i].isOrgViewed = 1;
 
                     break;
                 }
@@ -102,7 +105,7 @@ export class ImageViewerComponent implements OnInit {
     }
 
     async downloadImage(item){
-        if(!item.isOrgViewed)
+        if(item.isOrgViewed!=1)
         {
             //download preview image
             let source = item.webPreviewUrl.replace("///","https://");
@@ -129,7 +132,6 @@ export class ImageViewerComponent implements OnInit {
             let newFileName = fileName;
             let newPath = this.file.externalRootDirectory + "DCIM/Reddah/";
             
-            let target = newPath + newFileName;
             let briefTarget = "DCIM/Reddah/" + newFileName;
             
             const toast = await this.toastController.create({

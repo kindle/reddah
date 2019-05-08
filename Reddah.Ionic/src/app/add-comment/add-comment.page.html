@@ -1,12 +1,22 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{ 'Comment.Comment' | translate }}</ion-title>
-    <ion-button color="success" slot="end" (click)="submit()">{{ 'Confirm.Submit' | translate }}</ion-button>
+    <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ 'Confirm.Submit' | translate }}</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
     <ion-item>
-      <ion-textarea [(ngModel)]="commentContent" rows="6" cols="20" placeholder="{{ 'Comment.Tip' | translate }}"></ion-textarea>
+        <ion-textarea #newComment id="newComment" [(ngModel)]="commentContent" rows="6" cols="20" placeholder="{{ 'Comment.Tip' | translate }}"></ion-textarea>
     </ion-item>
+    <ion-item lines="none">
+        <ion-icon name="happy" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>
+    </ion-item>
+    <ion-grid *ngIf="showFacePanel">
+        <ion-row *ngFor="let row of emojis">
+            <ion-col *ngFor="let col of row" text-center>
+                <span (click)="handleSelection(col)" style="width: 80px;height: 80px;">{{col}}</span>
+            </ion-col>
+        </ion-row> 
+    </ion-grid>
 </ion-content>
