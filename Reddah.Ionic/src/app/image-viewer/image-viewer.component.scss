@@ -10,3 +10,8 @@ ion-slides {
     border-radius: 20px;
     background-color: gray;
 }
+
+.swiper-slide {
+    overflow-y: scroll;
+    display: block;
+}
