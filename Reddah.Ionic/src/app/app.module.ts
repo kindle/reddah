@@ -60,6 +60,7 @@ import { TsViewerPage } from './tsviewer/tsviewer.page'
 import { AddTimelinePage } from './add-timeline/add-timeline.page';
 import { DragulaModule } from 'ng2-dragula';
 import { StockPage } from './stock/stock.page';
+import { CommentReplyPage } from './comment-reply/comment-reply.page';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 @NgModule({
@@ -91,6 +92,7 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
       AddTimelinePage,
       StockPage,
       ProgressBarComponent,
+      CommentReplyPage,
   ],
   entryComponents: [
       LocalePage,
@@ -114,6 +116,7 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
       TsViewerPage,
       AddTimelinePage,
       StockPage,
+      CommentReplyPage,
   ],
   imports: [
       BrowserModule, 

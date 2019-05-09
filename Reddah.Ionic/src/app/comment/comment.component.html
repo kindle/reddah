@@ -9,9 +9,7 @@
             <ion-item lines="none" no-padding>
                 <ion-avatar slot="start" class="avatar-top">
                     <img src="{{comment.UserPhoto}}" class="portrait" *ngIf="comment.UserPhoto">
-                    <img src="assets/icon/anonymous0.png" class="portrait" *ngIf="!comment.UserPhoto&&comment.UserSex==0">
-                    <img src="assets/icon/anonymous1.png" class="portrait" *ngIf="!comment.UserPhoto&&comment.UserSex==1">
-                    <img src="assets/icon/anonymous.png" class="portrait" *ngIf="!comment.UserPhoto&&comment.UserSex!=1&&comment.UserSex!=0">
+                    <img src="assets/icon/anonymous.png" class="portrait" *ngIf="!comment.UserPhoto">
                 </ion-avatar>
                 <ion-label text-wrap>
                     <div>
@@ -23,7 +21,7 @@
                     
                     <p>{{comment.CreatedOn | date:'MM-dd HH:mm'}}</p>
                     <div [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></div>
-                    <p>查看{{GetCommentCount(data.Comments, comment.Id)}}条回复</p>
+                    <p (click)="viewReply(data.Comments, comment)">查看{{GetCommentCount(data.Comments, comment.Id)}}条回复</p>
                 </ion-label>
                 
             </ion-item>

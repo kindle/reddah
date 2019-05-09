@@ -392,7 +392,8 @@ export class MyTimeLinePage implements OnInit {
                 index: index,
                 imgSourceArray: imageSrcArray,
                 imgTitle: "",
-                imgDescription: ""
+                imgDescription: "",
+                showDownload: true,
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
@@ -487,6 +488,14 @@ export class MyTimeLinePage implements OnInit {
         const { data } = await popover.onDidDismiss();
         if(data)
             this.getUserInfo();
+    }
+
+    GetCache(url){
+        let org = this.localStorageService.retrieve(url);
+        if(org){
+            return (<any>window).Ionic.WebView.convertFileSrc(org);
+        }
+        return url;
     }
 
 }

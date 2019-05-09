@@ -15,6 +15,7 @@ export class ImageViewerComponent implements OnInit {
     enhanceImgSourceArray: any = [];
     @Input() imgTitle = '';
     @Input() imgDescription = '';
+    @Input() showDownload = false;
 
     slideOpts = {};
     private fileTransfer: FileTransferObject; 
