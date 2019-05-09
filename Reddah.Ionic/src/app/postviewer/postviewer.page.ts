@@ -47,6 +47,7 @@ export class PostviewerPage implements OnInit {
       
         .subscribe(data => 
           {
+              console.log(data);
               this.commentsData = data;
           }
       );

@@ -32,6 +32,23 @@ namespace Reddah.Web.Login
     public class SeededComments
     {
         public int Seed { get; set; }
-        public IList<Comment> Comments { get; set; }
+        public IList<AdvancedComment> Comments { get; set; }
+    }
+
+    public partial class AdvancedComment
+    {
+        public int Id { get; set; }
+        public int ArticleId { get; set; }
+        public int ParentId { get; set; }
+        public string Content { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public Nullable<int> Up { get; set; }
+        public Nullable<int> Down { get; set; }
+        public int Count { get; set; }
+        public string UserName { get; set; }
+        public int Status { get; set; }
+        public string UserNickName { get; set; }
+        public string UserPhoto { get; set; }
+        public Nullable<int> UserSex { get; set; }
     }
 }

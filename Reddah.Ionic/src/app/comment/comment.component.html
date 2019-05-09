@@ -23,7 +23,7 @@
                     
                     <p>{{comment.CreatedOn | date:'MM-dd HH:mm'}}</p>
                     <div [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></div>
-                    <p>查看{{0}}条回复</p>
+                    <p>查看{{GetCommentCount(data.Comments, comment.Id)}}条回复</p>
                 </ion-label>
                 
             </ion-item>

@@ -18,20 +18,24 @@ export class CommentComponent implements OnInit {
   @Input() articleauthor;
 
   constructor(
-    private popoverController: PopoverController,
-    private modalController: ModalController,
+      private popoverController: PopoverController,
+      private modalController: ModalController,
   ) { }
 
   ngOnInit() {
   }
 
   async presentPopover(ev: any) {
-    const popover = await this.popoverController.create({
-      component: CommentPopPage,
-      event: ev,
-      translucent: true
-    });
-    return await popover.present();
+      const popover = await this.popoverController.create({
+        component: CommentPopPage,
+        event: ev,
+        translucent: true
+      });
+      return await popover.present();
+  }
+
+  GetCommentCount(comments, id){
+    return comments.filter(c=>c.ParentId==id).reduce((sum,c)=>{return sum+1},0);
   }
 
   foo(){

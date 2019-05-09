@@ -31,9 +31,25 @@ namespace Reddah.Web.Login.Controllers
             using (var db = new reddahEntities())
             {
                 var comments = (from c in db.Comment
+                                join u in db.UserProfile on c.UserName equals u.UserName
                                 where c.ArticleId == query.ArticleId
                                 orderby c.CreatedOn ascending
-                                select c);
+                                select new AdvancedComment
+                                {
+                                    Id = c.Id,
+                                    ArticleId = c.ArticleId,
+                                    ParentId = c.ParentId,
+                                    Content = c.Content,
+                                    CreatedOn = c.CreatedOn,
+                                    Up = c.Up,
+                                    Down = c.Down,
+                                    Count = c.Count,
+                                    UserName = c.UserName,
+                                    Status = c.Status,
+                                    UserNickName = u.NickName,
+                                    UserPhoto = u.Photo,
+                                    UserSex = u.Sex
+                                });
 
                 seededComments = new SeededComments { Seed = -1, Comments = comments.ToList() };
                 
