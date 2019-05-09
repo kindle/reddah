@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, ActionSheetController } from '@ionic/angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
+import 'hammerjs';
 
 @Component({
     selector: 'app-image-viewer',
@@ -26,6 +27,7 @@ export class ImageViewerComponent implements OnInit {
         private file: File,
         private localStorageService: LocalStorageService,
         private toastController: ToastController,
+        private actionSheetController: ActionSheetController,
     ) {
     }
 
@@ -73,6 +75,35 @@ export class ImageViewerComponent implements OnInit {
         else{
             this.modalController.dismiss();
         }
+    }
+
+    async showMenu(item){
+        const actionSheet = await this.actionSheetController.create({
+            buttons: [
+            {
+              text: '发送给朋友',
+              icon: 'share',
+              handler: () => {
+                  
+              }
+            }, 
+            {
+              text: '收藏',
+              icon: 'bookmark',
+              handler: () => {
+                
+              }
+            }, 
+            {
+              text: '保存图片',
+              icon: 'ios-save',
+              handler: () => {
+                  this.downloadImage(item);
+              }
+            }, 
+            ]
+          });
+          await actionSheet.present();
     }
 
     //loadProgress : any;

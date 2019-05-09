@@ -65,6 +65,7 @@
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-windows": "6.0.1",
     "core-js": "^2.5.3",
+    "hammerjs": "^2.0.8",
     "helloplugin": "file:../../helloPlugin",
     "highcharts": "^7.1.1",
     "info.protonet.imageresizer": "0.1.1",

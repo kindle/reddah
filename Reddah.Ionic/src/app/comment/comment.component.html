@@ -21,7 +21,7 @@
                     
                     <p>{{comment.CreatedOn | date:'MM-dd HH:mm'}}</p>
                     <div [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></div>
-                    <p (click)="viewReply(data.Comments, comment)">查看{{GetCommentCount(data.Comments, comment.Id)}}条回复</p>
+                    <p (click)="viewReply(data.Comments, comment)" *ngIf="GetCommentCount(data.Comments, comment.Id)>0">查看{{GetCommentCount(data.Comments, comment.Id)}}条回复>></p>
                 </ion-label>
                 
             </ion-item>
