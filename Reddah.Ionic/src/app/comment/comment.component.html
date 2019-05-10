@@ -4,19 +4,29 @@
     </ion-card-content>
 </ion-card>
 <div *ngIf="data">
+    <ion-item lines="none" no-padding>
+        <ion-label text-wrap>
+            全部回复 {{GetCommentCount(data.Comments, -1)}}
+        </ion-label>
+        <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" cancel-text="取消" ok-text="确定" #commentSortType>
+            <ion-select-option value="latest">按最新</ion-select-option>
+            <ion-select-option value="oldest">按最早</ion-select-option>
+            <ion-select-option value="mostlike">按赞</ion-select-option>
+        </ion-select>
+    </ion-item>
     <div *ngFor="let comment of data.Comments">
         <li *ngIf="data.Seed===comment.ParentId&&depth <= 1">
             <ion-item lines="none" no-padding>
-                <ion-avatar slot="start" class="avatar-top">
+                <ion-avatar slot="start" class="avatar-top" (click)="goUser(comment.UserName)">
                     <img src="{{comment.UserPhoto}}" class="portrait" *ngIf="comment.UserPhoto">
                     <img src="assets/icon/anonymous.png" class="portrait" *ngIf="!comment.UserPhoto">
                 </ion-avatar>
                 <ion-label text-wrap>
                     <div>
-                        {{comment.UserNickName?comment.UserNickName:comment.UserName}}
+                        <span (click)="goUser(comment.UserName)">{{comment.UserNickName?comment.UserNickName:comment.UserName}}</span>
                         <ion-icon name="ios-more" style="float:right;"></ion-icon>
                         <ion-icon name="ios-thumbs-up" color="medium" style="float:right;margin-right:5px;"></ion-icon>
-                        <span style="float: right;color: gray;margin-right:2px;margin-top:0;font-size: 12px;vertical-align: top;">0</span>
+                        <span style="float: right;color: gray;margin-right:2px;margin-top:0;font-size: 12px;vertical-align: top;">{{comment.Count}}</span>
                     </div>
                     
                     <p>{{comment.CreatedOn | date:'MM-dd HH:mm'}}</p>

@@ -11,106 +11,129 @@ import { CommentReplyPage } from '../comment-reply/comment-reply.page';
 })
 export class CommentComponent implements OnInit {
 
-  @Input() data;
-  @Input() depth: number;
-  @Input() ptext;
-  @Input() pauthor;
-  @Input() authoronly: boolean;
-  @Input() articleauthor;
+    @Input() data;
+    @Input() depth: number;
+    @Input() ptext;
+    @Input() pauthor;
+    @Input() authoronly: boolean;
+    @Input() articleauthor;
 
-  constructor(
-      private popoverController: PopoverController,
-      private modalController: ModalController,
-  ) { }
+    constructor(
+        private popoverController: PopoverController,
+        private modalController: ModalController,
+    ) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        if(this.data)
+            this.data.Comments.sort((a,b)=> b.Id-a.Id);
+    }
 
-  async presentPopover(ev: any) {
-      const popover = await this.popoverController.create({
-          component: CommentPopPage,
-          event: ev,
-          translucent: true
-      });
-      return await popover.present();
-  }
+    customPopoverOptions: any = {
+        //header: 'Hair Color',
+        //subHeader: 'Select your hair color',
+        //message: 'Only select your dominant hair color'
+    };
 
-  GetCommentCount(comments, id){
-      //replies for current comment
-      let count = comments.filter(c=>c.ParentId==id).reduce((sum,c)=>{return sum+1},0);
-      if(count>0)
-      {
-          let subTotal = 0;
-          comments.forEach((element) => {
-              if(element.ParentId==id){
-                  subTotal += this.GetCommentCount(comments, element.Id);
-              }
-          });
-          return count + subTotal;
-      }
-      else{
-          return 0;
-      }
-  }
-
-  async viewReply(comments, comment){
-        const replayModal = await this.modalController.create({
-            component: CommentReplyPage,
-            componentProps: { 
-                comments: comments,
-                comment: comment,
-            }
+    async presentPopover(ev: any) {
+        const popover = await this.popoverController.create({
+            component: CommentPopPage,
+            event: ev,
+            translucent: true
         });
-        
-        await replayModal.present();
-  }
+        return await popover.present();
+    }
 
-  htmlDecode(text: string) {
-    var temp = document.createElement("div");
-      temp.innerHTML = text;
-      var output = temp.innerText || temp.textContent;
-      temp = null;
-      //output = output.replace(/src=\"\/uploadPhoto/g, "imageViewer src=\"\/\/\/reddah.com\/uploadPhoto");
-      output = output.replace(/\"\/uploadPhoto/g, "\"\/\/\/reddah.com\/uploadPhoto");
-      return output;
-  }
+    sortComment(value){
+        switch(value){
+            case "oldest":
+                this.data.Comments.sort((a,b)=> a.Id-b.Id);
+                break;
+            case "mostlike":
+                this.data.Comments.sort((a,b)=> b.Count-a.Count);
+                break;
+            case "latest":
+            default:
+                this.data.Comments.sort((a,b)=> b.Id-a.Id);
+                break;
+        }
+    }
 
-  subpost(str: string, n: number) {
-      var r = /[^\u4e00-\u9fa5]/g;
-      if (str.replace(r, "mm").length <= n) { return str; }
-      var m = Math.floor(n/2);
-      for (var i = m; i < str.length; i++) {
-          if (str.substr(0, i).replace(r, "mm").length >= n) {
-              return str.substr(0, i) + "...";
-          }
-      }
-      return str;
-  }
-  summary(str: string, n: number) {
-      str = this.htmlDecode(str).replace(/<[^>]+>/g, "");
-      return this.subpost(str, n);
-  }
+    GetCommentCount(comments, id){
+        //replies for current comment
+        let count = comments.filter(c=>c.ParentId==id).reduce((sum,c)=>{return sum+1},0);
+        if(count>0)
+        {
+            let subTotal = 0;
+            comments.forEach((element) => {
+                if(element.ParentId==id){
+                    subTotal += this.GetCommentCount(comments, element.Id);
+                }
+            });
+            return count + subTotal;
+        }
+        else{
+            return 0;
+        }
+    }
 
-  newComment(articleId: number, commentId: number){
-      alert(`write some...aid:${articleId},cid:${commentId}`);
-  }
+    async viewReply(comments, comment){
+            const replayModal = await this.modalController.create({
+                component: CommentReplyPage,
+                componentProps: { 
+                    comments: comments,
+                    comment: comment,
+                }
+            });
+            
+            await replayModal.present();
+    }
 
-  likeComment(commentId: number){
-      alert(`like...cid:${commentId}`);
-  }
+    htmlDecode(text: string) {
+        var temp = document.createElement("div");
+        temp.innerHTML = text;
+        var output = temp.innerText || temp.textContent;
+        temp = null;
+        //output = output.replace(/src=\"\/uploadPhoto/g, "imageViewer src=\"\/\/\/reddah.com\/uploadPhoto");
+        output = output.replace(/\"\/uploadPhoto/g, "\"\/\/\/reddah.com\/uploadPhoto");
+        return output;
+    }
+
+    subpost(str: string, n: number) {
+        var r = /[^\u4e00-\u9fa5]/g;
+        if (str.replace(r, "mm").length <= n) { return str; }
+        var m = Math.floor(n/2);
+        for (var i = m; i < str.length; i++) {
+            if (str.substr(0, i).replace(r, "mm").length >= n) {
+                return str.substr(0, i) + "...";
+            }
+        }
+        return str;
+    }
+    summary(str: string, n: number) {
+        str = this.htmlDecode(str).replace(/<[^>]+>/g, "");
+        return this.subpost(str, n);
+    }
+
+    newComment(articleId: number, commentId: number){
+        alert(`write some...aid:${articleId},cid:${commentId}`);
+    }
+
+    likeComment(commentId: number){
+        alert(`like...cid:${commentId}`);
+    }
 
 
-  popover(){
-      alert('show menu to report, delete.');
-  }
+    popover(){
+        alert('show menu to report, delete.');
+    }
 
-  async goUser(userName){
-      const userModal = await this.modalController.create({
-          component: UserPage,
-          componentProps: { userName: userName }
-      });
-        
-      await userModal.present();
-  }
+    async goUser(userName){
+        const userModal = await this.modalController.create({
+            component: UserPage,
+            componentProps: { userName: userName }
+        });
+            
+        await userModal.present();
+    }
   
 }

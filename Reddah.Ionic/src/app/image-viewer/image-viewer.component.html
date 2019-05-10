@@ -1,7 +1,7 @@
 <ion-item no-padding  (click)="closeModal($event)">
     <ion-title>{{ imgTitle }}</ion-title>
 </ion-item>
-<ion-content [forceOverscroll]="false" color="dark" fullscreen="true">
+<ion-content [forceOverscroll]="false" color="dark" fullscreen="true" (click)="closeModal($event)">
     <ion-slides [options]="slideOpts" pager="true">
         <ion-slide *ngFor="let item of enhanceImgSourceArray" (press)="showMenu(item)">
             <div class="swiper-zoom-container">
@@ -18,6 +18,5 @@
 <ion-footer (click)="closeModal($event)">
     <ion-toolbar color="dark" text-center>
         <ion-text>{{ imgDescription }}</ion-text>
-        
     </ion-toolbar>
 </ion-footer>

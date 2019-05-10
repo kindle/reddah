@@ -17,6 +17,7 @@ import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { UserPage } from '../user/user.page';
 import * as HighCharts from 'highcharts';
 var Highcharts = require('highcharts/highstock');
 
@@ -51,7 +52,30 @@ export class CommentReplyPage implements OnInit {
         
     }
     
+    customPopoverOptions: any = {
+        //header: 'Hair Color',
+        //subHeader: 'Select your hair color',
+        //message: 'Only select your dominant hair color'
+    };
+
+    sortComment(value){
+        switch(value){
+            case "oldest":
+                this.comments.sort((a,b)=> a.Id-b.Id);
+                break;
+            case "mostlike":
+                this.comments.sort((a,b)=> b.Count-a.Count);
+                break;
+            case "latest":
+            default:
+                this.comments.sort((a,b)=> b.Id-a.Id);
+                break;
+        }
+    }
+
     ngOnInit(){
+        this.comments.sort((a,b)=> b.Id-a.Id);
+        
         this.allRepliesCount = this.GetCommentCount(this.comments, this.comment.Id);
     }
 
@@ -101,6 +125,15 @@ export class CommentReplyPage implements OnInit {
             return fc[0].Content;
         }
         return "";
+    }
+
+    async goUser(userName){
+        const userModal = await this.modalController.create({
+            component: UserPage,
+            componentProps: { userName: userName }
+        });
+            
+        await userModal.present();
     }
 
 }

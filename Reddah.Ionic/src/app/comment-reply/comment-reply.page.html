@@ -21,20 +21,26 @@
         <ion-label text-wrap>
             全部回复 {{allRepliesCount}}
         </ion-label>
+        <!-- [interfaceOptions]="customPopoverOptions" interface="popover" -->
+        <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" cancel-text="取消" ok-text="确定" #commentSortType>
+            <ion-select-option value="latest">按最新</ion-select-option>
+            <ion-select-option value="oldest">按最早</ion-select-option>
+            <ion-select-option value="mostlike">按赞</ion-select-option>
+        </ion-select>
     </ion-item>
     <div *ngFor="let reply of comments">
         <li *ngIf="childrenIds.includes(reply.Id)">
             <ion-item lines="none" no-padding>
-                <ion-avatar slot="start" class="avatar-top">
+                <ion-avatar slot="start" class="avatar-top" (click)="goUser(reply.UserName)">
                     <img src="{{reply.UserPhoto}}" class="portrait" *ngIf="reply.UserPhoto">
                     <img src="assets/icon/anonymous.png" class="portrait" *ngIf="!reply.UserPhoto">
                 </ion-avatar>
                 <ion-label text-wrap>
                     <div>
-                        {{reply.UserNickName?reply.UserNickName:reply.UserName}}
+                        <span (click)="goUser(reply.UserName)">{{reply.UserNickName?reply.UserNickName:reply.UserName}}</span>
                         <ion-icon name="ios-more" style="float:right;"></ion-icon>
                         <ion-icon name="ios-thumbs-up" color="medium" style="float:right;margin-right:5px;"></ion-icon>
-                        <span style="float: right;color: gray;margin-right:2px;margin-top:0;font-size: 12px;vertical-align: top;">0</span>
+                        <span style="float: right;color: gray;margin-right:2px;margin-top:0;font-size: 12px;vertical-align: top;">{{reply.Count}}</span>
                     </div>
                     <p>{{reply.CreatedOn | date:'MM-dd HH:mm'}}</p>
                     <div *ngIf="reply.ParentId!=comment.Id" style="background-color:#eeeeee;padding:5px;">
