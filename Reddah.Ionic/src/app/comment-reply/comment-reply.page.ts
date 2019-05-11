@@ -35,7 +35,7 @@ export class CommentReplyPage implements OnInit {
     @Input() comment: any;
 
 
-    constructor(private reddah : ReddahService,
+    constructor(public reddah : ReddahService,
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,
@@ -99,16 +99,6 @@ export class CommentReplyPage implements OnInit {
         else{
             return 0;
         }
-    }
-
-    htmlDecode(text: string) {
-        var temp = document.createElement("div");
-        temp.innerHTML = text;
-        var output = temp.innerText || temp.textContent;
-        temp = null;
-        //output = output.replace(/src=\"\/uploadPhoto/g, "imageViewer src=\"\/\/\/reddah.com\/uploadPhoto");
-        output = output.replace(/\"\/uploadPhoto/g, "\"\/\/\/reddah.com\/uploadPhoto");
-        return output;
     }
 
     GetUserNameByCommentId(comments, id){

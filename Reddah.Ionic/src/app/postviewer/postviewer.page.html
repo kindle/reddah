@@ -1,5 +1,5 @@
 <ion-content padding [scrollEvents]="true" (ionScroll)="onScroll($event)">
-    <H1 [innerHTML]="htmlDecode(article.Title) | safe: 'html'"></H1>
+    <H1 [innerHTML]="reddah.htmlDecode(article.Title) | safe: 'html'"></H1>
     <ion-item no-padding padding-bottom>
         <ion-text color="primary" margin-end (click)="goUser(article.UserName)">
             <span [innerHTML]="article.UserName | safe: 'html'"></span>
@@ -14,13 +14,13 @@
         </ion-buttons>
     </ion-item>
     <ion-text color="dark">
-        <div id="articleContent" (click)="viewer($event)" [innerHTML]="htmlDecode(article.Content) | safe: 'html'"></div>
+        <div id="articleContent" (click)="viewer($event)" [innerHTML]="reddah.htmlDecode(article.Content) | safe: 'html'"></div>
     </ion-text>
     <ion-item no-padding padding-bottom>
     </ion-item>
     <ng-template ngFor let-group [ngForOf]="article.GroupName.split(',')">
         <ion-chip outline margin-bottom>
-            <ion-label [innerHTML]="htmlDecode(group)"></ion-label>
+            <ion-label [innerHTML]="reddah.htmlDecode(group)"></ion-label>
         </ion-chip>&nbsp;
     </ng-template>
     <app-comment no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" 

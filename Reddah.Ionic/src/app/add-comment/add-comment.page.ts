@@ -19,20 +19,12 @@ export class AddCommentPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private reddahService: ReddahService,
+    public reddahService: ReddahService,
     private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
     
   }
-
-  emojis = [
-      ['😀','😃','😄','😁','😆','😅'],
-      ['❤️','⚽️','🏀','🍎','🍉','☕️'],
-      ['🌈','☀️','🌧','🐶','🐱','🐷'],
-      ['😎','😱','😴','👍','👎','💪'],
-      ['🙏','😜','😡','😍','👻','💩']
-  ];
 
   @ViewChild('newComment') newComment;
 

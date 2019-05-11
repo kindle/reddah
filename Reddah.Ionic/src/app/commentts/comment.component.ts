@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PopoverController, ModalController } from '@ionic/angular'
 import { CommentPopPage } from '../article-pop/comment-pop.page'
 import { UserPage } from '../user/user.page';
+import { ReddahService } from '../reddah.service';
 
 @Component({
   selector: 'ts-comment',
@@ -18,8 +19,10 @@ export class CommentTimelineComponent implements OnInit {
   @Input() articleauthor;
 
   constructor(
+      public reddah: ReddahService,
       private popoverController: PopoverController,
       private modalController: ModalController,
+
   ) { }
 
   ngOnInit() {
@@ -37,32 +40,6 @@ export class CommentTimelineComponent implements OnInit {
 
   foo(){
     
-  }
-
-  htmlDecode(text: string) {
-      var temp = document.createElement("div");
-      temp.innerHTML = text;
-      var output = temp.innerText || temp.textContent;
-      temp = null;
-      //output = output.replace(/src=\"\/uploadPhoto/g, "imageViewer src=\"\/\/\/reddah.com\/uploadPhoto");
-      output = output.replace(/\"\/uploadPhoto/g, "\"\/\/\/reddah.com\/uploadPhoto");
-      return output;
-  }
-
-  subpost(str: string, n: number) {
-      var r = /[^\u4e00-\u9fa5]/g;
-      if (str.replace(r, "mm").length <= n) { return str; }
-      var m = Math.floor(n/2);
-      for (var i = m; i < str.length; i++) {
-          if (str.substr(0, i).replace(r, "mm").length >= n) {
-              return str.substr(0, i) + "...";
-          }
-      }
-      return str;
-  }
-  summary(str: string, n: number) {
-      str = this.htmlDecode(str).replace(/<[^>]+>/g, "");
-      return this.subpost(str, n);
   }
 
   newComment(articleId: number, commentId: number){

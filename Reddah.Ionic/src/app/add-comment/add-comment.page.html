@@ -13,7 +13,7 @@
         <ion-icon name="happy" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>
     </ion-item>
     <ion-grid *ngIf="showFacePanel">
-        <ion-row *ngFor="let row of emojis">
+        <ion-row *ngFor="let row of reddahService.emojis">
             <ion-col *ngFor="let col of row" text-center>
                 <span (click)="handleSelection(col)" style="width: 80px;height: 80px;">{{col}}</span>
             </ion-col>

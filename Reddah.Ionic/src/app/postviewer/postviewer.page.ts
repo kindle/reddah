@@ -19,7 +19,7 @@ export class PostviewerPage implements OnInit {
   authoronly=true;
   constructor(public modalController: ModalController,
     private location: Location,
-    private reddah : ReddahService,
+    public reddah : ReddahService,
     private popoverController: PopoverController,
     private cacheService: CacheService,
     ) { }
@@ -51,16 +51,6 @@ export class PostviewerPage implements OnInit {
               this.commentsData = data;
           }
       );
-  }
-
-  htmlDecode(text: string) {
-    var temp = document.createElement("div");
-      temp.innerHTML = text;
-      var output = temp.innerText || temp.textContent;
-      temp = null;
-      //output = output.replace(/src=\"\/uploadPhoto/g, "imageViewer src=\"\/\/\/reddah.com\/uploadPhoto");
-      output = output.replace(/\"\/uploadPhoto/g, "\"\/\/\/reddah.com\/uploadPhoto");
-      return output;
   }
 
   async viewer(event){

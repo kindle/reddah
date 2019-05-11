@@ -25,14 +25,6 @@ import { File } from '@ionic-native/file/ngx';
 })
 export class MyTimeLinePage implements OnInit {
 
-    emojis = [
-        ['😀','😃','😄','😁','😆','😅'],
-        ['❤️','⚽️','🏀','🍎','🍉','☕️'],
-        ['🌈','☀️','🌧','🐶','🐱','🐷'],
-        ['😎','😱','😴','👍','👎','💪'],
-        ['🙏','😜','😡','😍','👻','💩']
-    ];
-
     userName: string;
     articles = [];
     loadedIds = [];
@@ -42,42 +34,7 @@ export class MyTimeLinePage implements OnInit {
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
     @ViewChild('newComment') newComment;
     @ViewChild('pageTop') pageTop: Content;
-    
-    htmlDecode(text: string) {
-      var temp = document.createElement("div");
-        temp.innerHTML = text;
-        var output = temp.innerText || temp.textContent;
-        temp = null;
-        return output;
-    }
-    subpost(str: string, n: number) {
-      var r = /[^\u4e00-\u9fa5]/g;
-      if (str.replace(r, "mm").length <= n) { return str; }
-      var m = Math.floor(n/2);
-      for (var i = m; i < str.length; i++) {
-          if (str.substr(0, i).replace(r, "mm").length >= n) {
-              return str.substr(0, i) + "...";
-          }
-      }
-      return str;
-    }
-    summary(str: string, n: number) {
-      str = this.htmlDecode(str).replace(/<[^>]+>/g, "");
-      return this.subpost(str, n);
-    }
-    /*trustAsResourceUrl = function (url) {
-      return $sce.trustAsResourceUrl(url);
-    }*/
-    playVideo(id: string) {
-        /*let v = $('#video_' + id).get(0);
-        if (v.paused) {
-            v.play();
-        } else {
-            v.pause();
-        }*/
-        alert('play'+id);
-    }
-    
+        
     loadData(event) {
         this.getMyTimeline();
         event.target.complete();
@@ -89,7 +46,7 @@ export class MyTimeLinePage implements OnInit {
 
     private fileTransfer: FileTransferObject; 
 
-    constructor(private reddah : ReddahService,
+    constructor(public reddah : ReddahService,
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,

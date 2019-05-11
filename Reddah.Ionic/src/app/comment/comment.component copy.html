@@ -21,7 +21,7 @@
                     
                     <ion-card-subtitle>
                         <ion-text color="dark">
-                            <div [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></div>
+                            <div [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
                         </ion-text>
                     </ion-card-subtitle>
                 </ion-card-header>
@@ -53,11 +53,11 @@
                     </ion-item>
                     <ion-card-subtitle>
                         <ion-text color="dark">
-                            <div [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></div>
+                            <div [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
                         </ion-text>
                         <hr/>
                         <ion-text color="primary">回复:<span [innerHTML]="pauthor | safe: 'html'" (click)="goUser(pauthor)"></span></ion-text>
-                        <ion-text color="medium"><div [innerHTML]="summary(ptext, 20) | safe: 'html'"></div></ion-text>
+                        <ion-text color="medium"><div [innerHTML]="reddah.summary(ptext, 20) | safe: 'html'"></div></ion-text>
                     </ion-card-subtitle>
                 </ion-card-header>
                 <ion-item>

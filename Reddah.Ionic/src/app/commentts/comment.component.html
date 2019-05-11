@@ -7,7 +7,7 @@
     
     <div *ngFor="let comment of data.Comments">
         <div *ngIf="data.Seed===comment.ParentId&&depth<=1">
-            <div (click)="showAddComment(comment)" style="padding: 3px;"><span (click)="goUser(comment.UserName)">{{comment.UserName}}</span>: <span [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></span></div>
+            <div (click)="showAddComment(comment)" style="padding: 3px;"><span (click)="goUser(comment.UserName)">{{comment.UserName}}</span>: <span [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></span></div>
             <ts-comment (reply)=pop($event) [data]="{'Seed':comment.Id, 'Comments': data.Comments}" [depth]="depth+1" [ptext]="comment.Content"
                      [pauthor]="comment.UserName" [authoronly]="authoronly" [articleauthor]="articleauthor"></ts-comment>
         </div>
@@ -19,7 +19,7 @@
     </div>
     
     <!--<div *ngFor="let comment of data.Comments">
-        <div (click)="showAddComment(comment)" style="padding: 3px;">{{comment.CreatedOn}} {{comment.UserName}}: <span [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></span></div>
+        <div (click)="showAddComment(comment)" style="padding: 3px;">{{comment.CreatedOn}} {{comment.UserName}}: <span [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></span></div>
         
     </div>-->
 </div>

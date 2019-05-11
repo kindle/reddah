@@ -10,11 +10,11 @@
         <div style="width:100%;border: 0px solid red;">
             <ion-card-header no-padding  class="articleUserName">
                 <ion-card-title>
-                    <div [innerHTML]="htmlDecode(article.UserName)" (click)="goUser(article.UserName)"></div>
+                    <div [innerHTML]="reddah.htmlDecode(article.UserName)" (click)="goUser(article.UserName)"></div>
                 </ion-card-title>
             </ion-card-header>
             <ion-item no-padding style="padding: 5px 0;" lines="none">
-                <div [innerHTML]="htmlDecode(article.Title)"></div>
+                <div [innerHTML]="reddah.htmlDecode(article.Title)"></div>
             </ion-item>
             <ion-card-content style="display:block;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                 <div class="parent" *ngIf="article.Content.split('$$$').length>6">
@@ -69,7 +69,7 @@
     </ion-item>
     
     <ion-grid *ngIf="showFacePanel">
-        <ion-row *ngFor="let row of emojis">
+        <ion-row *ngFor="let row of reddah.emojis">
             <ion-col *ngFor="let col of row" text-center>
                 <span (click)="handleSelection(col)" style="width: 80px;height: 80px;">{{col}}</span>
             </ion-col>

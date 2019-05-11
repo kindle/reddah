@@ -13,7 +13,7 @@
                 {{comment.UserNickName?comment.UserNickName:comment.UserName}}
             </div>
             <p>{{comment.CreatedOn | date:'MM-dd HH:mm'}}</p>
-            <div [innerHTML]="htmlDecode(comment.Content) | safe: 'html'"></div>
+            <div [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
         </ion-label>
     </ion-item>
 
@@ -44,9 +44,9 @@
                     </div>
                     <p>{{reply.CreatedOn | date:'MM-dd HH:mm'}}</p>
                     <div *ngIf="reply.ParentId!=comment.Id" style="background-color:#eeeeee;padding:5px;">
-                        {{GetUserNameByCommentId(comments,reply.ParentId)}} : <span [innerHTML]="htmlDecode(GetContentByCommentId(comments,reply.ParentId)) | safe: 'html'"></span>
+                        {{GetUserNameByCommentId(comments,reply.ParentId)}} : <span [innerHTML]="reddah.htmlDecode(GetContentByCommentId(comments,reply.ParentId)) | safe: 'html'"></span>
                     </div>
-                    <div [innerHTML]="htmlDecode(reply.Content) | safe: 'html'"></div>
+                    <div [innerHTML]="reddah.htmlDecode(reply.Content) | safe: 'html'"></div>
                 </ion-label>
             </ion-item>
         </li>
