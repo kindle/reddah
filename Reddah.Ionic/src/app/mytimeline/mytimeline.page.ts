@@ -14,6 +14,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleTextPopPage } from '../article-pop/article-text-pop.page'
 import { ChangeCoverPopPage } from '../article-pop/change-cover-pop.page'
 import { AddTimelinePage } from '../add-timeline/add-timeline.page'
+import { CacheResult } from '../UserModel'
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-mytimeline',
@@ -84,6 +87,8 @@ export class MyTimeLinePage implements OnInit {
         this.navController.goBack(true);
     }
 
+    private fileTransfer: FileTransferObject; 
+
     constructor(private reddah : ReddahService,
         public loadingController: LoadingController,
         public translateService: TranslateService,
@@ -95,55 +100,70 @@ export class MyTimeLinePage implements OnInit {
         private cacheService: CacheService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
+        private transfer: FileTransfer, 
+        private file: File,
         ){
             this.userName = this.reddah.getCurrentUser();
     }
 
-    drawBackground(src){
-        console.log(src);
-        //find the src in local cache folder
-        //if find it, run the following code
-        return;
-        ///src = src.replace("///","https://");
-        var p = document.getElementById("mycontent");
-        
-        var canvas = document.createElement('canvas');
-        var context = canvas.getContext("2d");
-        var img = new Image(200,3);
-        img.src = src;
-        context.drawImage(img, 0, 0);
-        var imgData = context.getImageData(0, 0, img.width, 3);
-        
-        var canvas1 = document.createElement('canvas');
-        canvas1.style.position = "absolute";
-        canvas1.style.width = "100%";
-        canvas1.style.zIndex = "-100";
-        p.parentElement.appendChild(canvas1);
-        var ctx = canvas1.getContext("2d");
-        for(let i=0;i<90;i++){
-            ctx.putImageData(imgData, 0, 3*i);
-        }
-        
-    }
-
-    cover: string = "assets/icon/timg.jpg";
-    userPhoto: string = "assets/icon/anonymous.png";
+    appPhoto = { 
+        cover: "assets/icon/timg.jpg", 
+        userPhoto: "assets/icon/anonymous.png"
+    };
+    
     getUserInfo(){
+        //check cache first
+        let cachedCoverPath = this.localStorageService.retrieve(`${this.userName}_timeline_imageurl_cover`);
+        if(cachedCoverPath!=null){
+            this.appPhoto["cover"] = (<any>window).Ionic.WebView.convertFileSrc(cachedCoverPath);
+            //bug when image not loaded, src width =0
+            this.reddah.drawCanvasBackground(cachedCoverPath);
+        }
+        let cachedUserPhotoPath = this.localStorageService.retrieve(`${this.userName}_timeline_imageurl_userphoto`);
+        if(cachedCoverPath!=null){
+            this.appPhoto["userPhoto"] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
+        }
+
+        //check from web
         this.formData = new FormData();
         this.formData.append("targetUser", this.userName);
 
         this.reddah.getUserInfo(this.formData)
             .subscribe(userInfo => 
             {
-                console.log(JSON.stringify(userInfo));
-                if(userInfo.Cover!=null)
-                    this.cover = userInfo.Cover;
-                if(userInfo.Photo!=null)
-                    this.userPhoto = userInfo.Photo;
-                //bug when image not loaded, src width =0
-                this.drawBackground(this.cover);
+                if(userInfo.Cover!=null){
+                    this.toCache(userInfo.Cover, `${this.userName}_timeline_imageurl_cover`, "cover");
+                }
+                if(userInfo.Photo!=null){
+                    this.toCache(userInfo.Photo, `${this.userName}_timeline_imageurl_userphoto`,"userPhoto");
+                }
             }
         );
+    }
+
+    toCache(webUrl, cacheKey, functionKey){
+        webUrl = webUrl.replace("///","https://");
+        let result = new CacheResult(false, '');
+        let cachedImagePath = this.localStorageService.retrieve(cacheKey);
+        //check if changed or not downloaded, go to download it
+        let webImageName = webUrl.replace("https://login.reddah.com/uploadPhoto/","");
+        let cacheImageName = "";
+        if(cachedImagePath!=null){
+            cacheImageName = cachedImagePath.replace(this.file.applicationStorageDirectory,"");
+        }
+        if(cachedImagePath==null||cacheImageName!=webImageName){
+            this.fileTransfer = this.transfer.create();  
+            let target = this.file.applicationStorageDirectory + webImageName;
+            this.fileTransfer.download(webUrl, target).then((entry) => {
+                this.localStorageService.store(cacheKey, target);
+                this.appPhoto[functionKey] = (<any>window).Ionic.WebView.convertFileSrc(target);
+            }, (error) => {
+                console.log(JSON.stringify(error));
+            });     
+
+        }
+
+        return result;
     }
     
     async ngOnInit(){

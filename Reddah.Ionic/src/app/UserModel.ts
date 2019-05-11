@@ -42,3 +42,12 @@ export class NewTimelineModel {
     public Location: string;
 }
 
+export class CacheResult {
+    constructor(update: boolean, path: string){
+        this.Update = update;
+        this.Path = path;
+    }
+    public Update: boolean;
+    public Path: string;
+}
+
