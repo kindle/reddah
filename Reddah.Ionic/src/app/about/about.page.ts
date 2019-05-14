@@ -19,9 +19,9 @@ import { StockPage } from '../stock/stock.page';
 import { ImageLoaderService } from 'ionic-image-loader';
 
 @Component({
-  selector: 'app-about',
-  templateUrl: 'about.page.html',
-  styleUrls: ['about.page.scss']
+    selector: 'app-about',
+    templateUrl: 'about.page.html',
+    styleUrls: ['about.page.scss']
 })
 export class AboutPage implements OnInit {
     

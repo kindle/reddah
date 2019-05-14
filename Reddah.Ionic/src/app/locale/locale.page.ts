@@ -5,9 +5,9 @@ import { ReddahService } from '../reddah.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-locale',
-  templateUrl: './locale.page.html',
-  styleUrls: ['./locale.page.scss'],
+    selector: 'app-locale',
+    templateUrl: './locale.page.html',
+    styleUrls: ['./locale.page.scss'],
 })
 export class LocalePage implements OnInit {
   @Input() orgLocale: string;
@@ -22,7 +22,7 @@ export class LocalePage implements OnInit {
   }
 
   ngOnInit() {
-    this.selectedLocale = this.orgLocale;
+      this.selectedLocale = this.orgLocale;
   }
   
   async changeLocale(selector: string) {

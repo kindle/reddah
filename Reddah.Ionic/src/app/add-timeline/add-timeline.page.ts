@@ -22,17 +22,17 @@ export class AddTimelinePage implements OnInit {
     @Input() postType: number;
 
     constructor(
-      private popoverController: PopoverController,
-      private reddahService: ReddahService,
-      private navController: NavController,
-      private file: File,
-      private loadingController: LoadingController,
-      private activatedRoute: ActivatedRoute,
-      private router: Router,
-      private cacheService: CacheService,
-      private localStorageService: LocalStorageService,
-      private modalController: ModalController,
-      private dragulaService: DragulaService,
+        private popoverController: PopoverController,
+        private reddahService: ReddahService,
+        private navController: NavController,
+        private file: File,
+        private loadingController: LoadingController,
+        private activatedRoute: ActivatedRoute,
+        private router: Router,
+        private cacheService: CacheService,
+        private localStorageService: LocalStorageService,
+        private modalController: ModalController,
+        private dragulaService: DragulaService,
     ) { 
         this.dragulaService.drag('bag')
         .subscribe(({ name, el }) => {

@@ -6,19 +6,19 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+    selector: 'app-login',
+    templateUrl: './login.page.html',
+    styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
 
   constructor(private modalController: ModalController,
-    private reddah: ReddahService,
-    private loadingController: LoadingController,
-    private translateService: TranslateService,
-    private toastController: ToastController,
-    private router: Router,
-    ) { }
+      private reddah: ReddahService,
+      private loadingController: LoadingController,
+      private translateService: TranslateService,
+      private toastController: ToastController,
+      private router: Router,
+  ) { }
 
   ngOnInit() {
   }
@@ -29,14 +29,14 @@ export class LoginPage implements OnInit {
   
   
   async presentToastWithOptions(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      showCloseButton: true,
-      position: 'top',
-      closeButtonText: 'Close',
-      duration: 3000
-    });
-    toast.present();
+      const toast = await this.toastController.create({
+          message: message,
+          showCloseButton: true,
+          position: 'top',
+          closeButtonText: 'Close',
+          duration: 3000
+      });
+      toast.present();
   }
 
   async logIn() {

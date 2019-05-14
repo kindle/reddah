@@ -12,27 +12,27 @@ import { CacheService } from "ionic-cache";
 import { File } from '@ionic-native/file/ngx';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html'
+    selector: 'app-root',
+    templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private translate: TranslateService,
-    private localStorageService: LocalStorageService,
-    public modalCtrl: ModalController,
-    private menu: MenuController,
-    private actionSheetCtrl: ActionSheetController,
-    private alertController: AlertController,
-    private popoverCtrl: PopoverController,
-    private toast: Toast,
-    private router: Router,
-    private imageLoaderConfigService: ImageLoaderConfigService,
-    private cacheService: CacheService,
-    private file: File,
-  ) {
+    constructor(
+        private platform: Platform,
+        private splashScreen: SplashScreen,
+        private statusBar: StatusBar,
+        private translate: TranslateService,
+        private localStorageService: LocalStorageService,
+        public modalCtrl: ModalController,
+        private menu: MenuController,
+        private actionSheetCtrl: ActionSheetController,
+        private alertController: AlertController,
+        private popoverCtrl: PopoverController,
+        private toast: Toast,
+        private router: Router,
+        private imageLoaderConfigService: ImageLoaderConfigService,
+        private cacheService: CacheService,
+        private file: File,
+    ) {
         this.initializeApp();
 
         this.imageLoaderConfigService.useImageTag(true);
@@ -56,111 +56,111 @@ export class AppComponent {
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         this.translate.setDefaultLang(locale);
 
-  }
+    }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+    initializeApp() {
+        this.platform.ready().then(() => {
+          this.statusBar.styleDefault();
+          this.splashScreen.hide();
+        });
+        
+        // Initialize BackButton Eevent.
+        this.backButtonEvent();
+    }
+
+    // set up hardware back button event.
+    lastTimeBackPress = 0;
+    timePeriodToExit = 2000;
+
+    @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
+
     
-    // Initialize BackButton Eevent.
-    this.backButtonEvent();
-  }
+    public alertShown:boolean = false;
 
-  // set up hardware back button event.
-  lastTimeBackPress = 0;
-  timePeriodToExit = 2000;
+    async presentAlertConfirm() {
+        const alert = await this.alertController.create({
+            header: this.translate.instant("Confirm.Title"),
+            message: this.translate.instant("Confirm.Message"),
+            buttons: [
+              {
+                text: this.translate.instant("Confirm.Cancel"),
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: (blah) => {
+                  this.alertShown=false;
+                }
+              }, {
+                text: this.translate.instant("Confirm.Yes"),
+                handler: () => {
+                  navigator['app'].exitApp();
+                }
+              }
+            ]
+        });
 
-  @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
+        await alert.present().then(()=>{
+            this.alertShown=true;
+        });;
+    }
 
-  
-  public alertShown:boolean = false;
-
-  async presentAlertConfirm() {
-    const alert = await this.alertController.create({
-      header: this.translate.instant("Confirm.Title"),
-      message: this.translate.instant("Confirm.Message"),
-      buttons: [
-        {
-          text: this.translate.instant("Confirm.Cancel"),
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            this.alertShown=false;
+    // active hardware back button
+    backButtonEvent() {
+        this.platform.backButton.subscribe(async () => {
+          /*try {
+              const element = await this.actionSheetCtrl.getTop();
+              if (element) {
+                  element.dismiss();
+                  return;
+              }
+          } catch (error) {
           }
-        }, {
-          text: this.translate.instant("Confirm.Yes"),
-          handler: () => {
-            navigator['app'].exitApp();
+
+          // close popover
+          try {
+              const element = await this.popoverCtrl.getTop();
+              if (element) {
+                  element.dismiss();
+                  return;
+              }
+          } catch (error) {
           }
-        }
-      ]
-    });
+  */
+          // close modal
+          try {
+              const element = await this.modalCtrl.getTop();
+              if (element) {
+                  element.dismiss();
+                  return;
+              }
+          } catch (error) {
+              console.log(error);
 
-    await alert.present().then(()=>{
-        this.alertShown=true;
-    });;
-  }
+          }/*
 
-  // active hardware back button
-  backButtonEvent() {
-      this.platform.backButton.subscribe(async () => {
-        /*try {
-            const element = await this.actionSheetCtrl.getTop();
-            if (element) {
-                element.dismiss();
-                return;
-            }
-        } catch (error) {
-        }
+          // close side menua
+          try {
+              const element = await this.menu.getOpen();
+              if (element !== null) {
+                  this.menu.close();
+                  return;
 
-        // close popover
-        try {
-            const element = await this.popoverCtrl.getTop();
-            if (element) {
-                element.dismiss();
-                return;
-            }
-        } catch (error) {
-        }
-*/
-        // close modal
-        try {
-            const element = await this.modalCtrl.getTop();
-            if (element) {
-                element.dismiss();
-                return;
-            }
-        } catch (error) {
-            console.log(error);
+              }
 
-        }/*
+          } catch (error) {
 
-        // close side menua
-        try {
-            const element = await this.menu.getOpen();
-            if (element !== null) {
-                this.menu.close();
-                return;
+          }*/
 
-            }
-
-        } catch (error) {
-
-        }*/
-
-        if( this.router.url.startsWith('/tabs/(home:home)')) 
-        {
-            if(this.alertShown==false){
-                this.presentAlertConfirm();  
-            }
-        }
-        else if(this.routerOutlet && this.routerOutlet.canGoBack())
-        {
-            this.routerOutlet.pop();
-        }  
-      });
-  }
+          if( this.router.url.startsWith('/tabs/(home:home)')) 
+          {
+              if(this.alertShown==false){
+                  this.presentAlertConfirm();  
+              }
+          }
+          else if(this.routerOutlet && this.routerOutlet.canGoBack())
+          {
+              this.routerOutlet.pop();
+          }  
+        });
+    }
 
 }

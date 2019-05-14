@@ -19,9 +19,9 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file/ngx';
 
 @Component({
-  selector: 'app-mytimeline',
-  templateUrl: 'mytimeline.page.html',
-  styleUrls: ['mytimeline.page.scss']
+    selector: 'app-mytimeline',
+    templateUrl: 'mytimeline.page.html',
+    styleUrls: ['mytimeline.page.scss']
 })
 export class MyTimeLinePage implements OnInit {
 
@@ -46,7 +46,8 @@ export class MyTimeLinePage implements OnInit {
 
     private fileTransfer: FileTransferObject; 
 
-    constructor(public reddah : ReddahService,
+    constructor(
+        public reddah : ReddahService,
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,

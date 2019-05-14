@@ -13,9 +13,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleTextPopPage } from '../article-pop/article-text-pop.page'
 
 @Component({
-  selector: 'app-tsviewer',
-  templateUrl: 'tsviewer.page.html',
-  styleUrls: ['tsviewer.page.scss']
+    selector: 'app-tsviewer',
+    templateUrl: 'tsviewer.page.html',
+    styleUrls: ['tsviewer.page.scss']
 })
 export class TsViewerPage implements OnInit {
 

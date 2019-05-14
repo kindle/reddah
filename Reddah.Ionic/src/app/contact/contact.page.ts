@@ -7,27 +7,27 @@ import { NewFriendPage } from '../new-friend/new-friend.page';
 
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: 'contact.page.html',
-  styleUrls: ['contact.page.scss']
+    selector: 'app-contact',
+    templateUrl: 'contact.page.html',
+    styleUrls: ['contact.page.scss']
 })
 export class ContactPage {
 
   requestCount: number;
 
   constructor(
-    public localStorageService: LocalStorageService,
-    public modalController: ModalController,
-    public navController: NavController,
-    public router: Router)
+      public localStorageService: LocalStorageService,
+      public modalController: ModalController,
+      public navController: NavController,
+      public router: Router)
   {
       this.requestCount=2;
   }
   
   async viewNewFriends(){
       const newFriendModal = await this.modalController.create({
-        component: NewFriendPage,
-        componentProps: {  }
+          component: NewFriendPage,
+          componentProps: {  }
       });
         
       await newFriendModal.present();

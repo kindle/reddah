@@ -8,9 +8,9 @@ import { ReddahService } from '../reddah.service';
 
 
 @Component({
-  selector: 'app-my-info',
-  templateUrl: './my-info.page.html',
-  styleUrls: ['./my-info.page.scss'],
+    selector: 'app-my-info',
+    templateUrl: './my-info.page.html',
+    styleUrls: ['./my-info.page.scss'],
 })
 export class MyInfoPage implements OnInit {
 

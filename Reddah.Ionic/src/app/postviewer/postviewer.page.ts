@@ -10,128 +10,128 @@ import { CacheService } from "ionic-cache";
 import { UserPage } from '../user/user.page';
 
 @Component({
-  selector: 'app-postviewer',
-  templateUrl: './postviewer.page.html',
-  styleUrls: ['./postviewer.page.scss'],
+    selector: 'app-postviewer',
+    templateUrl: './postviewer.page.html',
+    styleUrls: ['./postviewer.page.scss'],
 })
 export class PostviewerPage implements OnInit {
-  @Input() article: Article;
-  authoronly=true;
-  constructor(public modalController: ModalController,
-    private location: Location,
-    public reddah : ReddahService,
-    private popoverController: PopoverController,
-    private cacheService: CacheService,
+    @Input() article: Article;
+    authoronly=true;
+    constructor(public modalController: ModalController,
+        private location: Location,
+        public reddah : ReddahService,
+        private popoverController: PopoverController,
+        private cacheService: CacheService,
     ) { }
 
-  commentsData: any;
+    commentsData: any;
 
-  ngOnInit() {
-    this.loadComments();
-  }
-
-  async presentPopover(ev: any) {
-      const popover = await this.popoverController.create({
-        component: ArticlePopPage,
-        event: ev,
-        translucent: true
-      });
-      return await popover.present();
-  }
-
-  loadComments(){
-      let cacheKey = "this.reddah.getComments" + this.article.Id;
-      let request = this.reddah.getComments(this.article.Id)
-
-      this.cacheService.loadFromObservable(cacheKey, request)
-      
-        .subscribe(data => 
-          {
-              console.log(data);
-              this.commentsData = data;
-          }
-      );
-  }
-
-  async viewer(event){
-    var target = event.target || event.srcElement || event.currentTarget;
-    if(target.tagName.toUpperCase()==="IMG"){
-        const modal = await this.modalController.create({
-            component: ImageViewerComponent,
-            componentProps: {
-                imgSourceArray: [target.src],
-                imgTitle: "",
-                imgDescription: ""
-            },
-            cssClass: 'modal-fullscreen',
-            keyboardClose: true,
-            showBackdrop: true
-        });
-  
-        return await modal.present(); 
+    ngOnInit() {
+        this.loadComments();
     }
-  }
 
-  goback(){
-      this.location.back();
-  }
+    async presentPopover(ev: any) {
+        const popover = await this.popoverController.create({
+            component: ArticlePopPage,
+            event: ev,
+            translucent: true
+        });
+        return await popover.present();
+    }
 
+    loadComments(){
+        let cacheKey = "this.reddah.getComments" + this.article.Id;
+        let request = this.reddah.getComments(this.article.Id)
 
-  private lastScrollTop: number = 0;
-  direction: string = "up";
-
-  onScroll($event){
-      let currentScrollTop = $event.detail.scrollTop;
-
-      if(currentScrollTop > this.lastScrollTop)
-      {
-          this.direction = 'down';
-      }
-      else if(currentScrollTop < this.lastScrollTop)
-      {
-          this.direction = 'up';
-      }
-      
-      this.lastScrollTop = currentScrollTop;
-  }
-
-  async newComment(articleId: number, commentId: number){
-      const addCommentModal = await this.modalController.create({
-          component: AddCommentPage,
-          componentProps: { 
-              articleId: articleId,
-              commentId: commentId
-          }
-      });
-      
-      await addCommentModal.present();
-      const { data } = await addCommentModal.onDidDismiss();
-      if(data){
-          let cacheKey = "this.reddah.getComments" + this.article.Id;
-          this.cacheService.removeItem(cacheKey);
-          this.loadComments();
-      }
-
-  }
-
-  bookmark(){
-      alert('bookmark');
-  }
-
-  share(){
-      alert('share');
-  }
-
-  popover(){
-      alert('show menu to report, delete.');
-  }
-
-  async goUser(userName){
-      const userModal = await this.modalController.create({
-          component: UserPage,
-          componentProps: { userName: userName }
-      });
+        this.cacheService.loadFromObservable(cacheKey, request)
         
-      await userModal.present();
-  }
+            .subscribe(data => 
+            {
+                console.log(data);
+                this.commentsData = data;
+            }
+        );
+    }
+
+    async viewer(event){
+        var target = event.target || event.srcElement || event.currentTarget;
+        if(target.tagName.toUpperCase()==="IMG"){
+            const modal = await this.modalController.create({
+                component: ImageViewerComponent,
+                componentProps: {
+                    imgSourceArray: [target.src],
+                    imgTitle: "",
+                    imgDescription: ""
+                },
+                cssClass: 'modal-fullscreen',
+                keyboardClose: true,
+                showBackdrop: true
+            });
+    
+            return await modal.present(); 
+        }
+    }
+
+    goback(){
+        this.location.back();
+    }
+
+
+    private lastScrollTop: number = 0;
+    direction: string = "up";
+
+    onScroll($event){
+        let currentScrollTop = $event.detail.scrollTop;
+
+        if(currentScrollTop > this.lastScrollTop)
+        {
+            this.direction = 'down';
+        }
+        else if(currentScrollTop < this.lastScrollTop)
+        {
+            this.direction = 'up';
+        }
+        
+        this.lastScrollTop = currentScrollTop;
+    }
+
+    async newComment(articleId: number, commentId: number){
+        const addCommentModal = await this.modalController.create({
+            component: AddCommentPage,
+            componentProps: { 
+                articleId: articleId,
+                commentId: commentId
+            }
+        });
+        
+        await addCommentModal.present();
+        const { data } = await addCommentModal.onDidDismiss();
+        if(data){
+            let cacheKey = "this.reddah.getComments" + this.article.Id;
+            this.cacheService.removeItem(cacheKey);
+            this.loadComments();
+        }
+
+    }
+
+    bookmark(){
+        alert('bookmark');
+    }
+
+    share(){
+        alert('share');
+    }
+
+    popover(){
+        alert('show menu to report, delete.');
+    }
+
+    async goUser(userName){
+        const userModal = await this.modalController.create({
+            component: UserPage,
+            componentProps: { userName: userName }
+        });
+            
+        await userModal.present();
+    }
 }

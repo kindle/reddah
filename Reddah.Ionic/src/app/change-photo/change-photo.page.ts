@@ -7,9 +7,9 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { Crop } from '@ionic-native/crop/ngx';
 
 @Component({
-  selector: 'app-change-photo',
-  templateUrl: './change-photo.page.html',
-  styleUrls: ['./change-photo.page.scss'],
+    selector: 'app-change-photo',
+    templateUrl: './change-photo.page.html',
+    styleUrls: ['./change-photo.page.scss'],
 })
 export class ChangePhotoPage implements OnInit {
 

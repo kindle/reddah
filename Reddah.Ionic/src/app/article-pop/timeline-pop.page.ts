@@ -14,8 +14,8 @@ import { PopoverController } from '@ionic/angular';
 })
 export class TimelinePopPage {
     constructor(
-      public popoverCtrl: PopoverController,
-      ) {}
+        public popoverCtrl: PopoverController,
+    ) {}
 
     select(type: number){
         this.popoverCtrl.dismiss(type);

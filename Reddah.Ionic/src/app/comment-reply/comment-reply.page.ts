@@ -22,9 +22,9 @@ import * as HighCharts from 'highcharts';
 var Highcharts = require('highcharts/highstock');
 
 @Component({
-  selector: 'app-comment-reply',
-  templateUrl: 'comment-reply.page.html',
-  styleUrls: ['comment-reply.page.scss']
+    selector: 'app-comment-reply',
+    templateUrl: 'comment-reply.page.html',
+    styleUrls: ['comment-reply.page.scss']
 })
 export class CommentReplyPage implements OnInit {
     async close(){

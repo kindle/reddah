@@ -11,27 +11,25 @@ import { PopoverController, ModalController } from '@ionic/angular';
 })
 export class ChangeCoverPopPage {
   constructor(
-    public popoverController: PopoverController,
-    public modalController: ModalController,
-    ) {}
+      public popoverController: PopoverController,
+      public modalController: ModalController,
+  ) {}
 
   async change(){
-    //close popover menu
-    this.popoverController.dismiss();
+      //close popover menu
+      this.popoverController.dismiss();
 
-    const changePhotoModal = await this.modalController.create({
-      component: ChangePhotoPage,
-      componentProps: { 
-        title : "更换相册封面",
-        tag : "cover"
-      }
-    });
-      
-    await changePhotoModal.present();
-    const { data } = await changePhotoModal.onDidDismiss();
-    
-    this.modalController.dismiss(data);
+      const changePhotoModal = await this.modalController.create({
+          component: ChangePhotoPage,
+          componentProps: { 
+            title : "更换相册封面",
+            tag : "cover"
+          }
+      });
         
-    
+      await changePhotoModal.present();
+      const { data } = await changePhotoModal.onDidDismiss();
+      
+      this.modalController.dismiss(data);
   }
 }

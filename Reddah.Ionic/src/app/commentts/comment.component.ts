@@ -26,14 +26,14 @@ export class CommentTimelineComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(JSON.stringify(this.data));
+      console.log(JSON.stringify(this.data));
   }
 
   async presentPopover(ev: any) {
       const popover = await this.popoverController.create({
-        component: CommentPopPage,
-        event: ev,
-        translucent: true
+          component: CommentPopPage,
+          event: ev,
+          translucent: true
       });
       return await popover.present();
   }

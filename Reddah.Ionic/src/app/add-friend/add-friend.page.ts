@@ -5,9 +5,9 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
 
 @Component({
-  selector: 'app-add-friend',
-  templateUrl: './add-friend.page.html',
-  styleUrls: ['./add-friend.page.scss'],
+    selector: 'app-add-friend',
+    templateUrl: './add-friend.page.html',
+    styleUrls: ['./add-friend.page.scss'],
 })
 export class AddFriendPage implements OnInit {
 
@@ -21,9 +21,10 @@ export class AddFriendPage implements OnInit {
 
 
   constructor(
-    private modalController: ModalController,
-    private reddahService: ReddahService,
-    private localStorageService: LocalStorageService) { }
+      private modalController: ModalController,
+      private reddahService: ReddahService,
+      private localStorageService: LocalStorageService
+  ) { }
 
   async ngOnInit() {
       this.message = `我是${this.reddahService.getCurrentUser()}`; 

@@ -9,20 +9,19 @@ import { ScanPage } from '../scan/scan.page';
 })
 export class FindPage {
     constructor(
-      private modalController: ModalController,
+        private modalController: ModalController,
     ){}
 
     async startScanner(){
-      const scanModal = await this.modalController.create({
-        component: ScanPage,
-        componentProps: { }
+        const scanModal = await this.modalController.create({
+            component: ScanPage,
+            componentProps: { }
         });
         
         await scanModal.present();
         const { data } = await scanModal.onDidDismiss();
         if(data){
             console.log(data)
-            
         }
 
     };

@@ -5,9 +5,9 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
 
 @Component({
-  selector: 'app-add-comment',
-  templateUrl: './add-comment.page.html',
-  styleUrls: ['./add-comment.page.scss'],
+    selector: 'app-add-comment',
+    templateUrl: './add-comment.page.html',
+    styleUrls: ['./add-comment.page.scss'],
 })
 export class AddCommentPage implements OnInit {
 
@@ -18,9 +18,10 @@ export class AddCommentPage implements OnInit {
   submitClicked=false;
 
   constructor(
-    private modalController: ModalController,
-    public reddahService: ReddahService,
-    private localStorageService: LocalStorageService) { }
+      private modalController: ModalController,
+      public reddahService: ReddahService,
+      private localStorageService: LocalStorageService,
+  ) { }
 
   ngOnInit() {
     

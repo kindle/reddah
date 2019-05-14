@@ -19,9 +19,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TsViewerPage } from '../tsviewer/tsviewer.page'
 
 @Component({
-  selector: 'app-timeline',
-  templateUrl: 'timeline.page.html',
-  styleUrls: ['timeline.page.scss']
+    selector: 'app-timeline',
+    templateUrl: 'timeline.page.html',
+    styleUrls: ['timeline.page.scss']
 })
 export class TimeLinePage implements OnInit {
     @Input() userName: string;

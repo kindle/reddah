@@ -28,12 +28,12 @@ export class ArticlePopPage {
   constructor(public popoverCtrl: PopoverController) {}
 
   support() {
-    // this.app.getRootNavs()[0].push('/support');
-    this.popoverCtrl.dismiss();
+      // this.app.getRootNavs()[0].push('/support');
+      this.popoverCtrl.dismiss();
   }
 
   close() {
-    this.popoverCtrl.dismiss();
+      this.popoverCtrl.dismiss();
   }
 
   foo(){
