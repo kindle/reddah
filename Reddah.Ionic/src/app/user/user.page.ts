@@ -3,7 +3,7 @@ import { InfiniteScroll } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../article';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController, ActionSheetController  } from '@ionic/angular';
+import { LoadingController, NavController, PopoverController, ActionSheetController,NavParams } from '@ionic/angular';
 import { LocalePage } from '../locale/locale.page';
 import { PostviewerPage } from '../postviewer/postviewer.page';
 import { ModalController } from '@ionic/angular';
@@ -19,37 +19,33 @@ import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: 'user.page.html',
-  styleUrls: ['user.page.scss']
+    selector: 'app-user',
+    templateUrl: 'user.page.html',
+    styleUrls: ['user.page.scss']
 })
 export class UserPage implements OnInit {
-    async close(){
-        await this.modalController.dismiss();
-    }
-
     @Input() userName: string;
 
-    constructor(private reddah : ReddahService,
-      public loadingController: LoadingController,
-      public translateService: TranslateService,
-      public navController: NavController,
-      private renderer: Renderer,
-      public modalController: ModalController,
-      private localStorageService: LocalStorageService,
-      private popoverController: PopoverController,
-      private photoLibrary: PhotoLibrary,
-      private cacheService: CacheService,
-      private router: Router,
-      private activatedRoute: ActivatedRoute,
-      public actionSheetController: ActionSheetController,
-      ){
-        
-    }
+    constructor(
+        public reddah : ReddahService,
+        public loadingController: LoadingController,
+        public translateService: TranslateService,
+        public navController: NavController,
+        private renderer: Renderer,
+        public modalController: ModalController,
+        private localStorageService: LocalStorageService,
+        private popoverController: PopoverController,
+        private photoLibrary: PhotoLibrary,
+        private cacheService: CacheService,
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        public actionSheetController: ActionSheetController,
+        private navParams: NavParams,
+    ){}
 
     ngOnInit(){
-      this.getUserInfo();
-      this.getTimeline();
+        this.getUserInfo();
+        this.getTimeline();
     }
 
     imageList = [];
@@ -121,12 +117,16 @@ export class UserPage implements OnInit {
     }
 
     async viewTimeline(){
-      const timelineModal = await this.modalController.create({
-        component: TimeLinePage,
-        componentProps: { userName: this.userName }
-      });
-        
-      await timelineModal.present();
+        const timelineModal = await this.modalController.create({
+          component: TimeLinePage,
+          componentProps: { userName: this.userName }
+        });
+          
+        await timelineModal.present();
+    }
+
+    async close(isCloseParent){
+        await this.modalController.dismiss(isCloseParent);
     }
 
     clearCacheAndReload(){
@@ -135,52 +135,52 @@ export class UserPage implements OnInit {
     }
 
     doRefresh(event) {
-      console.log('Begin async operation');
-  
-      setTimeout(() => {
-        this.clearCacheAndReload();
-        event.target.complete();
-      }, 2000);
+        console.log('Begin async operation');
+    
+        setTimeout(() => {
+          this.clearCacheAndReload();
+          event.target.complete();
+        }, 2000);
     }
 
     async presentActionSheet() {
-      const actionSheet = await this.actionSheetController.create({
-        //header: '',
-        buttons: [{
-          text: '刷新',
-          role: 'destructive',
-          icon: 'refresh',
-          handler: () => {
-              this.clearCacheAndReload();
-          }
-        }, {
-          text: 'Share',
-          icon: 'share',
-          handler: () => {
-            console.log('Share clicked');
-          }
-        }, {
-          text: '加入黑名单',
-          icon: 'remove-circle-outline',
-          handler: () => {
-            console.log('Play clicked');
-          }
-        }, {
-          text: 'Favorite',
-          icon: 'heart',
-          handler: () => {
-            console.log('Favorite clicked');
-          }
-        }, {
-          text: '删除',
-          icon: 'ios-trash',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }]
-      });
-      await actionSheet.present();
+        const actionSheet = await this.actionSheetController.create({
+          //header: '',
+          buttons: [{
+            text: '刷新',
+            role: 'destructive',
+            icon: 'refresh',
+            handler: () => {
+                this.clearCacheAndReload();
+            }
+          }, {
+            text: 'Share',
+            icon: 'share',
+            handler: () => {
+              console.log('Share clicked');
+            }
+          }, {
+            text: '加入黑名单',
+            icon: 'remove-circle-outline',
+            handler: () => {
+              console.log('Play clicked');
+            }
+          }, {
+            text: 'Favorite',
+            icon: 'heart',
+            handler: () => {
+              console.log('Favorite clicked');
+            }
+          }, {
+            text: '删除',
+            icon: 'ios-trash',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }]
+        });
+        await actionSheet.present();
     }
 
     async addFriend(){
@@ -193,19 +193,19 @@ export class UserPage implements OnInit {
     }
   
     async viewer(photo) {
-      const modal = await this.modalController.create({
-        component: ImageViewerComponent,
-        componentProps: {
-          imgSource: [photo],
-          imgTitle: "",
-          imgDescription: ""
-        },
-        cssClass: 'modal-fullscreen',
-        keyboardClose: true,
-        showBackdrop: true
-      });
-  
-      return await modal.present();
+        const modal = await this.modalController.create({
+          component: ImageViewerComponent,
+          componentProps: {
+            imgSource: [photo],
+            imgTitle: "",
+            imgDescription: ""
+          },
+          cssClass: 'modal-fullscreen',
+          keyboardClose: true,
+          showBackdrop: true
+        });
+    
+        return await modal.present();
   }
 
 }

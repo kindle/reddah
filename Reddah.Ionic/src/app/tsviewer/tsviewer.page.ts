@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input, Renderer } from '@angular/core';
 import { InfiniteScroll, Content } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController, AlertController } from '@ionic/angular';
+import { LoadingController, NavController, PopoverController, AlertController, NavParams } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { UserPage } from '../user/user.page';
@@ -29,7 +29,8 @@ export class TsViewerPage implements OnInit {
         this.navController.goBack(true);
     }
 
-    constructor(public reddah : ReddahService,
+    constructor(
+        public reddah : ReddahService,
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,
@@ -40,6 +41,7 @@ export class TsViewerPage implements OnInit {
         private cacheService: CacheService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
+        private navParams: NavParams,
         ){
             //this.userName = this.reddah.getCurrentUser();
     }
@@ -235,10 +237,16 @@ export class TsViewerPage implements OnInit {
     async goUser(userName){
         const userModal = await this.modalController.create({
             component: UserPage,
-            componentProps: { userName: userName }
+            componentProps: { 
+                userName: userName,
+            },
         });
-          
+        
         await userModal.present();
+        const { data } = await userModal.onDidDismiss();
+        if(data){
+            this.close();
+        }
     }
 
     async fullText(text){

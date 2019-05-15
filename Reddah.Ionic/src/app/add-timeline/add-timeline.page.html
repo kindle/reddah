@@ -1,12 +1,7 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-item lines="none">
-      <ion-icon name="ios-arrow-back" slot="start" (click)="close()"></ion-icon>
-      <ion-button color="success" slot="end" (click)="submit()">发表</ion-button>
-    </ion-item>
-  </ion-toolbar>
-</ion-header>
-
+<ion-item color="light" lines="none">
+    <ion-icon name="ios-arrow-back" slot="start" (click)="close()"></ion-icon>
+    <ion-button color="success" slot="end" (click)="submit()">发表</ion-button>
+</ion-item>
 <ion-content>
     <ion-item lines="none">
       <ion-textarea [(ngModel)]="yourThoughts" rows="6" cols="20" placeholder="这一刻的想法..."></ion-textarea>

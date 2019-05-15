@@ -60,7 +60,7 @@ export class AddCommentPage implements OnInit {
     
   }
 
-  async cancel() {
+  async close() {
       await this.modalController.dismiss(false);
   }
 

@@ -9,7 +9,6 @@ import { PostviewerPage } from '../postviewer/postviewer.page';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { TimelinePopPage } from '../article-pop/timeline-pop.page';
-import { UserPage } from '../user/user.page';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { TimelineCommentPopPage } from '../article-pop/timeline-comment-pop.page'
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
@@ -128,70 +127,84 @@ export class TimeLinePage implements OnInit {
     }
 
 
-  @ViewChild('headerStart')
-  headerStart:ElementRef;
-  @ViewChild('headerOnScroll')
-  headerOnScroll:ElementRef;
-  @ViewChild('timelineCover')
-  timelineCover:ElementRef;
-  
+    @ViewChild('headerStart')
+    headerStart:ElementRef;
+    @ViewChild('headerOnScroll')
+    headerOnScroll:ElementRef;
+    @ViewChild('timelineCover')
+    timelineCover:ElementRef;
+    
 
-  onScroll($event) {
-      //console.log($event.detail.scrollTop+" "+this.timelineCover.nativeElement.scrollHeight)
-      let offset = this.timelineCover.nativeElement.scrollHeight - $event.detail.scrollTop;
-      if(offset>=250)
-      {
-          this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'visible');
-          this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
-          this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', '8');
-      }
-      else if(offset<250 && offset>=150)
-      {
-          console.log('start change'+offset)
-          let opacity = (offset-150)/100;
-          if(opacity<0) opacity=0;
-          this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', opacity+'');
-          this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
-      }
-      else if(offset<150 && offset>=0){
-          let opacity = (1-(offset-150)/100);
-          if(opacity>1) opacity=1;
-          this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'opacity', opacity+'');
-      }
-      else
-      {
-          this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
-          this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
-      }
-  }
+    onScroll($event) {
+        //console.log($event.detail.scrollTop+" "+this.timelineCover.nativeElement.scrollHeight)
+        let offset = this.timelineCover.nativeElement.scrollHeight - $event.detail.scrollTop;
+        if(offset>=250)
+        {
+            this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'visible');
+            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
+            this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', '8');
+        }
+        else if(offset<250 && offset>=150)
+        {
+            console.log('start change'+offset)
+            let opacity = (offset-150)/100;
+            if(opacity<0) opacity=0;
+            this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', opacity+'');
+            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
+        }
+        else if(offset<150 && offset>=0){
+            let opacity = (1-(offset-150)/100);
+            if(opacity>1) opacity=1;
+            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'opacity', opacity+'');
+        }
+        else
+        {
+            this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
+            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
+        }
+    }
 
-  selectedArticleId: number;
-  selectedCommentId: number;
+    selectedArticleId: number;
+    selectedCommentId: number;
 
-  async viewer(index, imageSrcArray) {
-      const modal = await this.modalController.create({
-        component: ImageViewerComponent,
-        componentProps: {
-            index: index,
-            imgSourceArray: imageSrcArray,
-            imgTitle: "",
-            imgDescription: ""
-        },
-        cssClass: 'modal-fullscreen',
-        keyboardClose: true,
-        showBackdrop: true
-      });
-  
-      return await modal.present();
-  }
+    async viewer(index, imageSrcArray) {
+        const modal = await this.modalController.create({
+            component: ImageViewerComponent,
+            componentProps: {
+                index: index,
+                imgSourceArray: imageSrcArray,
+                imgTitle: "",
+                imgDescription: ""
+            },
+            cssClass: 'modal-fullscreen',
+            keyboardClose: true,
+            showBackdrop: true
+        });
+    
+        return await modal.present();
+    }
 
-  async goTsViewer(article){
+    async goTsViewer(article){
         const userModal = await this.modalController.create({
             component: TsViewerPage,
-            componentProps: { article: article }
+            componentProps: { 
+                article: article,
+                //sameLevelGoUser: (userName, isGoBack)=>this.goUser(userName, isGoBack),
+            }
         });
         
         await userModal.present();
-  }
+    }
+/*
+    async goUser(userName){
+        const userModal = await this.modalController.create({
+            component: UserPage,
+            componentProps: { 
+                userName: userName,
+            },
+        });
         
+        await userModal.present();
+    }
+*/      
 }

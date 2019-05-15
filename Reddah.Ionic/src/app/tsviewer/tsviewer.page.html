@@ -1,16 +1,16 @@
-<ion-item no-padding>
+<ion-item color="light" lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()"></ion-icon>
     <ion-title>详情</ion-title>
 </ion-item>
 <ion-content>
     <div style="display: flex; border-bottom: 1px solid lightgrey; margin: 15px 5px; padding-bottom: 10px;">
         <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
-            <img-loader src="assets/icon/anonymous.png" class="border: 1px solid gray;" (click)="goUser(article.UserName)"></img-loader>
+            <img-loader src="assets/icon/anonymous.png" class="border: 1px solid gray;" (click)="goUser(article.UserName,true)"></img-loader>
         </div>
         <div style="width:100%;border: 0px solid red;">
             <ion-card-header no-padding  class="articleUserName">
                 <ion-card-title>
-                    <div [innerHTML]="reddah.htmlDecode(article.UserName)" (click)="goUser(article.UserName)"></div>
+                    <div [innerHTML]="reddah.htmlDecode(article.UserName)" (click)="goUser(article.UserName,true)"></div>
                 </ion-card-title>
             </ion-card-header>
             <ion-item no-padding style="padding: 5px 0;" lines="none">
@@ -42,7 +42,7 @@
                     <div class="like-arrow-up"></div>
                     <div class="likeSection">
                         <ion-icon name="heart-empty" class="likeIcon"></ion-icon>
-                        <span class="likeUserName" (click)="goUser(article.GroupName)">{{article.GroupName}}</span>
+                        <span class="likeUserName" (click)="goUser(article.GroupName,true)">{{article.GroupName}}</span>
                     </div>
                 </div>
             </ion-item>

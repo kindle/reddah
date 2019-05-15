@@ -3,11 +3,9 @@ import { ModalController } from '@ionic/angular';
 
 @Component({
     template: `
-    <ion-header>
-      <ion-item>
-          <ion-icon slot="start" name="ios-arrow-back" (click)="close()"></ion-icon>
-      </ion-item>
-    </ion-header>
+    <ion-item color="light" lines="none">
+        <ion-icon slot="start" name="ios-arrow-back" (click)="close()"></ion-icon>
+    </ion-item>
     <ion-content padding>
       <ion-label>
         {{text}}

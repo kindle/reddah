@@ -440,7 +440,9 @@ export class MyTimeLinePage implements OnInit {
     async goUser(userName){
         const userModal = await this.modalController.create({
             component: UserPage,
-            componentProps: { userName: userName }
+            componentProps: { 
+                userName: userName
+            }
         });
           
         await userModal.present();

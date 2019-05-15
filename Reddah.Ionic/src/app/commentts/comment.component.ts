@@ -71,11 +71,13 @@ export class CommentTimelineComponent implements OnInit {
 
   async goUser(userName){
     const userModal = await this.modalController.create({
-      component: UserPage,
-      componentProps: { userName: userName }
+        component: UserPage,
+        componentProps: { 
+            userName: userName,
+        }
     });
       
     await userModal.present();
-  }
+}
   
 }

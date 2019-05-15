@@ -1,10 +1,7 @@
-<ion-header>
-  <ion-item>
-      <ion-icon slot="start" name="ios-arrow-back" (click)="close()"></ion-icon>
-      <ion-label slot="start">{{title}}</ion-label>
-  </ion-item>
-</ion-header>
-
+<ion-item color="light" lines="none">
+    <ion-icon slot="start" name="ios-arrow-back" (click)="close()"></ion-icon>
+    <ion-label slot="start">{{title}}</ion-label>
+</ion-item>
 <ion-content>
     <ion-card>
         <ion-item (click)="select(2)">
