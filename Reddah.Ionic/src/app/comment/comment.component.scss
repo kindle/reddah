@@ -12,3 +12,12 @@ ul, li {
     margin: 11px 10px 0 0;
     margin-bottom: auto;
 }
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: #eeeeee;
+    left: 0;
+}

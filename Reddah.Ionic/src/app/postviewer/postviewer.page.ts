@@ -17,7 +17,7 @@ import { UserPage } from '../user/user.page';
 export class PostviewerPage implements OnInit {
     @Input() article: Article;
     authoronly=true;
-    
+
     constructor(
         public modalController: ModalController,
         private location: Location,
@@ -46,13 +46,11 @@ export class PostviewerPage implements OnInit {
         let request = this.reddah.getComments(this.article.Id)
 
         this.cacheService.loadFromObservable(cacheKey, request)
-        
-            .subscribe(data => 
-            {
-                console.log(data);
-                this.commentsData = data;
-            }
-        );
+        .subscribe(data => 
+        {
+            console.log(data);
+            this.commentsData = data;
+        });
     }
 
     async viewer(event){
@@ -82,6 +80,11 @@ export class PostviewerPage implements OnInit {
     private lastScrollTop: number = 0;
     direction: string = "up";
 
+    
+    header: any;
+    sticky: number;
+    
+
     onScroll($event){
         let currentScrollTop = $event.detail.scrollTop;
 
@@ -97,6 +100,19 @@ export class PostviewerPage implements OnInit {
         }
         
         this.lastScrollTop = currentScrollTop;
+        //total count as fixed header
+        let header = document.getElementById("TotalComments");
+        if(this.sticky==null)
+            this.sticky = header.offsetTop;
+
+        console.log(this.sticky+"_"+$event.detail.scrollTop);
+        if ($event.detail.scrollTop > this.sticky) {
+            header.classList.add("sticky");
+            console.log('add class')
+        } else {
+            header.classList.remove("sticky");
+            console.log('remove class')
+        }
     }
 
     showEditBox=false;
@@ -132,6 +148,7 @@ export class PostviewerPage implements OnInit {
         await addCommentModal.present();
         const { data } = await addCommentModal.onDidDismiss();
         if(data.action=='submit'){
+            this.newComment.value = "";
             let cacheKey = "this.reddah.getComments" + this.article.Id;
             this.cacheService.removeItem(cacheKey);
             this.loadComments();
@@ -188,7 +205,6 @@ export class PostviewerPage implements OnInit {
                     this.cacheService.removeItem(cacheKey);
                     this.loadComments();
                     this.showEditBox = false;
-
                 }
                 else{
                     alert(result.Message);

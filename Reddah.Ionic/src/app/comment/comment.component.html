@@ -4,11 +4,12 @@
     </ion-card-content>
 </ion-card>
 <div *ngIf="data">
-    <ion-item lines="none" no-padding>
+    <ion-item lines="none" color="light" id="TotalComments">
         <ion-label text-wrap>
             全部回复 {{GetCommentCount(data.Comments, -1)}}
         </ion-label>
-        <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" cancel-text="取消" ok-text="确定" #commentSortType>
+        <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" 
+        cancel-text="取消" ok-text="确定" #commentSortType>
             <ion-select-option value="latest">按最新</ion-select-option>
             <ion-select-option value="oldest">按最早</ion-select-option>
             <ion-select-option value="mostlike">按赞</ion-select-option>
