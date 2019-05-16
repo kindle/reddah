@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PopoverController, ModalController } from '@ionic/angular'
 import { CommentPopPage } from '../article-pop/comment-pop.page'
 import { UserPage } from '../user/user.page';
@@ -18,6 +18,8 @@ export class CommentComponent implements OnInit {
     @Input() pauthor;
     @Input() authoronly: boolean;
     @Input() articleauthor;
+
+    @Output() commentClick = new EventEmitter();
 
     constructor(
         public reddah: ReddahService,
@@ -79,15 +81,15 @@ export class CommentComponent implements OnInit {
     }
 
     async viewReply(comments, comment){
-            const replayModal = await this.modalController.create({
-                component: CommentReplyPage,
-                componentProps: { 
-                    comments: comments,
-                    comment: comment,
-                }
-            });
-            
-            await replayModal.present();
+        const replayModal = await this.modalController.create({
+            component: CommentReplyPage,
+            componentProps: { 
+                comments: comments,
+                comment: comment,
+            }
+        });
+        
+        await replayModal.present();
     }
 
     newComment(articleId: number, commentId: number){
@@ -114,4 +116,8 @@ export class CommentComponent implements OnInit {
         await userModal.present();
     }
   
+    async addNewComment(articleId, commentId){
+        //show parent(postviewer.page) show comment box
+        this.commentClick.emit({articleId: articleId, commentId: commentId});
+    }
 }

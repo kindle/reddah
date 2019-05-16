@@ -17,7 +17,9 @@ import { UserPage } from '../user/user.page';
 export class PostviewerPage implements OnInit {
     @Input() article: Article;
     authoronly=true;
-    constructor(public modalController: ModalController,
+    
+    constructor(
+        public modalController: ModalController,
         private location: Location,
         public reddah : ReddahService,
         private popoverController: PopoverController,
@@ -91,6 +93,7 @@ export class PostviewerPage implements OnInit {
         {
             this.direction = 'up';
             this.showEditBox = false;
+            this.selectedCommentId = -1
         }
         
         this.lastScrollTop = currentScrollTop;
@@ -98,11 +101,22 @@ export class PostviewerPage implements OnInit {
 
     showEditBox=false;
 
-    async newComment(articleId: number, commentId: number){
+    async addNewComment(){
+        //show the whole write comment box
+        this.direction = 'up';
+        //show text area, hide input single line
         this.showEditBox = true;
+        //change submit button state to disabled
+        this.submitClicked = false;
+        console.log(this.selectedCommentId);
     }
 
-    @ViewChild('newComment') newCommentElement;
+    childCommentClick($event){
+        this.selectedCommentId = $event.commentId;
+        this.addNewComment();
+    }
+
+    @ViewChild('newComment') newComment;
 
     async newPopComment(articleId: number, commentId: number){
         
@@ -111,16 +125,19 @@ export class PostviewerPage implements OnInit {
             componentProps: { 
                 articleId: articleId,
                 commentId: commentId,
-                text: this.newCommentElement.value,
+                text: this.newComment.value,
             }
         });
         
         await addCommentModal.present();
         const { data } = await addCommentModal.onDidDismiss();
-        if(data){
+        if(data.action=='submit'){
             let cacheKey = "this.reddah.getComments" + this.article.Id;
             this.cacheService.removeItem(cacheKey);
             this.loadComments();
+        }
+        else if(data.action=='cancel'){
+            this.newComment.value = data.text;
         }
 
     }
@@ -146,5 +163,38 @@ export class PostviewerPage implements OnInit {
         });
           
         await userModal.present();
+    }
+
+    showFacePanel = false;
+    toggleFacePanel(){
+        this.showFacePanel= !this.showFacePanel;
+    }
+
+    handleSelection(face) {
+        this.newComment.value += face;
+    }
+
+    selectedCommentId = -1;
+    submitClicked = false;
+    async submit() {
+        this.submitClicked = true;
+        
+        this.reddah.addComments(this.article.Id, this.selectedCommentId, this.newComment.value)
+        .subscribe(result => 
+            {
+                if(result.Success==0)
+                { 
+                    let cacheKey = "this.reddah.getComments" + this.article.Id;
+                    this.cacheService.removeItem(cacheKey);
+                    this.loadComments();
+                    this.showEditBox = false;
+
+                }
+                else{
+                    alert(result.Message);
+                }
+            }
+        );
+        
     }
 }

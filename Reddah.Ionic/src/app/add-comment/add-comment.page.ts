@@ -11,58 +11,58 @@ import { ReddahService } from '../reddah.service';
 })
 export class AddCommentPage implements OnInit {
 
-  @Input() articleId: number
-  @Input() commentId: number
-  @Input() text: string;
+    @Input() articleId: number
+    @Input() commentId: number
+    @Input() text: string;
 
-  commentContent: string;
-  submitClicked=false;
+    commentContent: string;
+    submitClicked=false;
 
-  constructor(
-      private modalController: ModalController,
-      public reddahService: ReddahService,
-      private localStorageService: LocalStorageService,
-  ) { }
+    constructor(
+        private modalController: ModalController,
+        public reddahService: ReddahService,
+        private localStorageService: LocalStorageService,
+    ) { }
 
-  ngOnInit() {
+    ngOnInit() {
         this.commentContent = this.text;
-  }
+    }
 
-  @ViewChild('newComment') newComment;
+    @ViewChild('newComment') newComment;
 
-  showFacePanel = false;
-  toggleFacePanel(){
-      this.showFacePanel= !this.showFacePanel;
-  }
+    showFacePanel = false;
+    toggleFacePanel(){
+        this.showFacePanel= !this.showFacePanel;
+    }
 
-  handleSelection(face) {
-      this.newComment.value += face;
-  }
+    handleSelection(face) {
+        this.newComment.value += face;
+    }
 
-  async submit() {
-      this.submitClicked = true;
-      //alert(`write some...aid:${this.articleId},cid:${this.commentId},content:${this.commentContent}`);
-      this.reddahService.addComments(this.articleId, this.commentId, this.commentContent)
-      .subscribe(result => 
-          {
-              if(result.Success==0)
-              { 
-                this.modalController.dismiss(true); 
-              }
-              else{
-                alert(result.Message);
-              }
-          }
-      );
-      
-  }
+    async submit() {
+        this.submitClicked = true;
+        //alert(`write some...aid:${this.articleId},cid:${this.commentId},content:${this.commentContent}`);
+        this.reddahService.addComments(this.articleId, this.commentId, this.commentContent)
+        .subscribe(result => 
+            {
+                if(result.Success==0)
+                { 
+                    this.modalController.dismiss({ action: 'submit', text: ''}); 
+                }
+                else{
+                    alert(result.Message);
+                }
+            }
+        );
+        
+    }
 
-  AddComment():void {
-    
-  }
+    AddComment():void {
+        
+    }
 
-  async close() {
-      await this.modalController.dismiss(false);
-  }
+    async close() {
+        await this.modalController.dismiss({ action: 'cancel', text: this.commentContent});
+    }
 
 }

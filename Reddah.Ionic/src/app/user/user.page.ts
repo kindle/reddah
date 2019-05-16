@@ -125,7 +125,7 @@ export class UserPage implements OnInit {
         await timelineModal.present();
     }
 
-    async close(isCloseParent){
+    async close(isCloseParent=false){
         await this.modalController.dismiss(isCloseParent);
     }
 

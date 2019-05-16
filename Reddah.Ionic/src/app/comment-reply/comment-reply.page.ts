@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
 import { InfiniteScroll } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../article';
@@ -34,6 +34,7 @@ export class CommentReplyPage implements OnInit {
     @Input() comments: any;
     @Input() comment: any;
 
+    @Output() commentClick = new EventEmitter();
 
     constructor(public reddah : ReddahService,
         public loadingController: LoadingController,
@@ -126,6 +127,11 @@ export class CommentReplyPage implements OnInit {
         });
           
         await userModal.present();
+    }
+
+    async addNewComment(articleId, commentId){
+        //show parent(postviewer.page) show comment box
+        this.commentClick.emit({articleId: articleId, commentId: commentId});
     }
 
 }

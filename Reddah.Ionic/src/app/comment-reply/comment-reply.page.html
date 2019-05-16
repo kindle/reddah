@@ -30,7 +30,7 @@
     </ion-item>
     <div *ngFor="let reply of comments">
         <li *ngIf="childrenIds.includes(reply.Id)">
-            <ion-item lines="none" no-padding>
+            <ion-item lines="none" no-padding (click)="addNewComment(reply.ArticleId, reply.Id)">
                 <ion-avatar slot="start" class="avatar-top" (click)="goUser(reply.UserName)">
                     <img src="{{reply.UserPhoto}}" class="portrait" *ngIf="reply.UserPhoto">
                     <img src="assets/icon/anonymous.png" class="portrait" *ngIf="!reply.UserPhoto">

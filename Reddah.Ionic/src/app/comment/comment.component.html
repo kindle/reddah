@@ -16,7 +16,7 @@
     </ion-item>
     <div *ngFor="let comment of data.Comments">
         <li *ngIf="data.Seed===comment.ParentId&&depth <= 1">
-            <ion-item lines="none" no-padding>
+            <ion-item lines="none" no-padding (click)="addNewComment(comment.ArticleId, comment.Id)">
                 <ion-avatar slot="start" class="avatar-top" (click)="goUser(comment.UserName)">
                     <img src="{{comment.UserPhoto}}" class="portrait" *ngIf="comment.UserPhoto">
                     <img src="assets/icon/anonymous.png" class="portrait" *ngIf="!comment.UserPhoto">
