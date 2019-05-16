@@ -10,6 +10,7 @@ import { CacheService } from "ionic-cache";
 export class CommentBoxComponent implements OnInit {
 
     @ViewChild('newComment') newComment;
+    @Input() selectedArticleId: number;
 
     constructor(
         public reddah : ReddahService,
@@ -35,7 +36,7 @@ export class CommentBoxComponent implements OnInit {
         {
             this.direction = 'down';
         }
-        else if(currentScrollTop < this.lastScrollTop)
+        else
         {
             this.direction = 'up';
             this.showEditBox = false;
@@ -58,7 +59,6 @@ export class CommentBoxComponent implements OnInit {
 
     showEditBox=false;
 
-    selectedArticleId = -1;
     selectedCommentId = -1;
     async addNewComment(articleId, commmentId){
         //show the whole write comment box
