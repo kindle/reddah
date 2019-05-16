@@ -198,19 +198,19 @@ export class PostviewerPage implements OnInit {
         
         this.reddah.addComments(this.article.Id, this.selectedCommentId, this.newComment.value)
         .subscribe(result => 
-            {
-                if(result.Success==0)
-                { 
-                    let cacheKey = "this.reddah.getComments" + this.article.Id;
-                    this.cacheService.removeItem(cacheKey);
-                    this.loadComments();
-                    this.showEditBox = false;
-                }
-                else{
-                    alert(result.Message);
-                }
+        {
+            if(result.Success==0)
+            { 
+                let cacheKey = "this.reddah.getComments" + this.article.Id;
+                this.cacheService.removeItem(cacheKey);
+                this.loadComments();
+                this.showEditBox = false;
             }
-        );
+            else
+            {
+                alert(result.Message);
+            }
+        });
         
     }
 }

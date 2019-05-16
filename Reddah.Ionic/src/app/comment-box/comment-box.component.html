@@ -1,0 +1,45 @@
+<ion-footer *ngIf="direction=='up'" class="content">
+    <ion-item *ngIf="!showEditBox">
+        <ion-icon name="create" size="medium" (click)="addNewComment()"></ion-icon>
+        <ion-input id="newComment" (click)="addNewComment()" 
+            readonly padding-start placeholder="写评论..."></ion-input>
+        
+        <ion-icon color="danger" name="bookmark" size="medium"></ion-icon>
+        <ion-text (click)="bookmark()" margin-end>{{ 'Article.Bookmark' | translate }}</ion-text>
+        
+        <ion-icon color="primary" name="share" size="medium"></ion-icon>
+        <ion-text (click)="share()">{{ 'Article.Share' | translate }}</ion-text>
+    </ion-item>
+    <ion-item *ngIf="showEditBox">
+        <ion-textarea autoresize padding #newComment id="newComment" [(ngModel)]="commentContent" rows="3" cols="21" 
+        placeholder="说说你的看法..." [disabled]="submitClicked"></ion-textarea>    
+        <ion-buttons>
+            <ion-grid>
+                <ion-row>
+                    <ion-col text-center>
+                        <ion-icon name="resize" size="medium" (click)="newPopComment(article.Id, -1)"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                        <ion-col>
+                        </ion-col>
+                    </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-button (click)="submit()" position="stack" color="primary" [disabled]="submitClicked||commentContent==null||commentContent==''">发送</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-buttons>
+    </ion-item>
+    <ion-item *ngIf="showEditBox">
+        <ion-icon slot="end" name="happy" size="medium" (click)="toggleFacePanel()" margin-end></ion-icon>
+    </ion-item>
+    <ion-grid *ngIf="showEditBox&&showFacePanel">
+        <ion-row *ngFor="let row of reddah.emojis">
+            <ion-col *ngFor="let col of row" text-center>
+                <span (click)="handleSelection(col)" style="width: 80px;height: 80px;">{{col}}</span>
+            </ion-col>
+        </ion-row> 
+    </ion-grid>
+</ion-footer>

@@ -63,6 +63,7 @@ import { StockPage } from './stock/stock.page';
 import { CommentReplyPage } from './comment-reply/comment-reply.page';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { AutoresizeDirective } from './autoresize-textarea.directive';
+import { CommentBoxComponent } from './comment-box/comment-box.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { AutoresizeDirective } from './autoresize-textarea.directive';
       ProgressBarComponent,
       CommentReplyPage,
       AutoresizeDirective,
+      CommentBoxComponent,
   ],
   entryComponents: [
       LocalePage,

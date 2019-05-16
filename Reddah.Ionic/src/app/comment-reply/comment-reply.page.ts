@@ -129,9 +129,16 @@ export class CommentReplyPage implements OnInit {
         await userModal.present();
     }
 
+    @ViewChild('commentbox') commentbox;
     async addNewComment(articleId, commentId){
         //show parent(postviewer.page) show comment box
-        this.commentClick.emit({articleId: articleId, commentId: commentId});
+        //this.commentClick.emit({articleId: articleId, commentId: commentId});
+        this.commentbox.addNewComment(articleId, commentId);
     }
 
+    selectedCommentId = -1;
+    childCommentClick($event){
+        this.selectedCommentId = $event.commentId;
+        this.addNewComment(1, this.selectedCommentId);
+    }
 }

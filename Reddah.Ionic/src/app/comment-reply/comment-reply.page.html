@@ -2,7 +2,7 @@
     <ion-icon name="ios-arrow-back" (click)="close()"></ion-icon>
     <ion-text>评论详情</ion-text>
 </ion-item>
-<ion-content padding>
+<ion-content padding [scrollEvents]="true" (ionScroll)="commentbox.onScroll($event)">
     <ion-item lines="none" no-padding>
         <ion-avatar slot="start" class="avatar-top">
             <img src="{{comment.UserPhoto}}" class="portrait" *ngIf="comment.UserPhoto">
@@ -52,3 +52,4 @@
         </li>
     </div>
 </ion-content>
+<app-comment-box #commentbox (commentClick)="childCommentClick($event)"></app-comment-box>
