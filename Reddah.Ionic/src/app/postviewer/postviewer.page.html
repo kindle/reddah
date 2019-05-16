@@ -27,7 +27,7 @@
         [articleauthor]="article.UserName"></app-comment>
 </ion-content>
 <ion-footer *ngIf="direction=='up'">
-    <ion-item>
+    <ion-item *ngIf="!showEditBox">
         <ion-icon name="create" size="medium" (click)="newComment(article.Id, -1)"></ion-icon>
         <ion-input id="newComment" (click)="newComment(article.Id, -1)" 
             readonly padding-start placeholder="{{ 'Comment.Tip' | translate }}"></ion-input>
@@ -38,21 +38,20 @@
         <ion-icon color="primary" name="share" size="medium"></ion-icon>
         <ion-text (click)="share()">{{ 'Article.Share' | translate }}</ion-text>
     </ion-item>
-</ion-footer>
-<!--<ion-footer *ngIf="showAddComment">
-    <ion-item margin-end>
-        <ion-input #newComment id="newComment" placeholder="{{selectedReplyPlaceholder}}" padding-start></ion-input>
-        <ion-icon name="happy" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>
-        <ion-button (click)="SendComment(-1)" color="primary">发送</ion-button>
+    <ion-item margin-end *ngIf="showEditBox">
+        <ion-textarea autoresize padding #newComment id="newComment" [(ngModel)]="commentContent" rows="6" cols="20" placeholder="{{ 'Comment.Tip' | translate }}"></ion-textarea>    
+        <ion-icon name="resize" size="medium" margin-end (click)="newPopComment(article.Id, -1)"></ion-icon>
     </ion-item>
-    
-    <ion-grid *ngIf="showFacePanel">
+    <ion-item margin-end *ngIf="showEditBox">
+        <ion-icon name="happy" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>
+        <ion-button (click)="SendComment(-1)" slot="end" color="primary" [disabled]="commentContent==null||commentContent==''">发送</ion-button>
+    </ion-item>
+    <ion-grid *ngIf="showEditBox&&showFacePanel">
         <ion-row *ngFor="let row of emojis">
             <ion-col *ngFor="let col of row" text-center>
                 <span (click)="handleSelection(col)" style="width: 80px;height: 80px;">{{col}}</span>
             </ion-col>
         </ion-row> 
     </ion-grid>
-</ion-footer>-->
-
+</ion-footer>
 

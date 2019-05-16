@@ -62,6 +62,7 @@ import { DragulaModule } from 'ng2-dragula';
 import { StockPage } from './stock/stock.page';
 import { CommentReplyPage } from './comment-reply/comment-reply.page';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
+import { AutoresizeDirective } from './autoresize-textarea.directive';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
       StockPage,
       ProgressBarComponent,
       CommentReplyPage,
+      AutoresizeDirective,
   ],
   entryComponents: [
       LocalePage,

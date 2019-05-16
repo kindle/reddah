@@ -5,7 +5,7 @@
 </ion-item>
 <ion-content padding>
     <ion-item>
-        <ion-textarea padding #newComment id="newComment" [(ngModel)]="commentContent" rows="6" cols="20" placeholder="{{ 'Comment.Tip' | translate }}"></ion-textarea>
+        <ion-textarea autoresize padding #newComment id="newComment" [(ngModel)]="commentContent" rows="6" cols="20" placeholder="{{ 'Comment.Tip' | translate }}"></ion-textarea>
     </ion-item>
     <ion-item lines="none">
         <ion-icon name="happy" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>

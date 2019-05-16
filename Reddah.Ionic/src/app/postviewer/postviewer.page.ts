@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { Article } from '../article';
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
@@ -90,17 +90,28 @@ export class PostviewerPage implements OnInit {
         else if(currentScrollTop < this.lastScrollTop)
         {
             this.direction = 'up';
+            this.showEditBox = false;
         }
         
         this.lastScrollTop = currentScrollTop;
     }
 
+    showEditBox=false;
+
     async newComment(articleId: number, commentId: number){
+        this.showEditBox = true;
+    }
+
+    @ViewChild('newComment') newCommentElement;
+
+    async newPopComment(articleId: number, commentId: number){
+        
         const addCommentModal = await this.modalController.create({
             component: AddCommentPage,
             componentProps: { 
                 articleId: articleId,
-                commentId: commentId
+                commentId: commentId,
+                text: this.newCommentElement.value,
             }
         });
         

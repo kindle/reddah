@@ -13,6 +13,7 @@ export class AddCommentPage implements OnInit {
 
   @Input() articleId: number
   @Input() commentId: number
+  @Input() text: string;
 
   commentContent: string;
   submitClicked=false;
@@ -24,7 +25,7 @@ export class AddCommentPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+        this.commentContent = this.text;
   }
 
   @ViewChild('newComment') newComment;
