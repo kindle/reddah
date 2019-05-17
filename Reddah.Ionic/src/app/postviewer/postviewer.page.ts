@@ -29,7 +29,6 @@ export class PostviewerPage implements OnInit {
 
     ngOnInit() {
         this.loadComments();
-        console.log(this.article)
     }
 
     async presentPopover(ev: any) {
@@ -79,6 +78,10 @@ export class PostviewerPage implements OnInit {
     @ViewChild('commentbox') commentbox;
     childCommentClick($event){
         this.commentbox.addNewComment(this.article.Id, $event.commentId);
+    }
+
+    childReloadComments($event){
+        this.loadComments();
     }
 
     bookmark(){

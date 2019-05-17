@@ -1,8 +1,8 @@
 <!--{{selectedArticleId}} {{selectedCommentId}}-->
 <ion-footer *ngIf="direction=='up'" class="content">
     <ion-item *ngIf="!showEditBox">
-        <ion-icon name="create" size="medium" (click)="addNewComment()"></ion-icon>
-        <ion-input id="newComment" (click)="addNewComment()" 
+        <ion-icon name="create" size="medium" (click)="addNewComment(selectedArticleId, selectedCommentId)"></ion-icon>
+        <ion-input id="newComment" (click)="addNewComment(selectedArticleId, selectedCommentId)" 
             readonly padding-start placeholder="写评论..."></ion-input>
         
         <ion-icon color="danger" name="bookmark" size="medium"></ion-icon>
@@ -18,7 +18,8 @@
             <ion-grid>
                 <ion-row>
                     <ion-col text-center>
-                        <ion-icon name="resize" size="medium" (click)="newPopComment(article.Id, -1)"></ion-icon>
+                        <ion-icon name="resize" size="medium" (click)="newPopComment(selectedArticleId, selectedCommentId)"
+                        *ngIf="!submitClicked"></ion-icon>
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -27,7 +28,8 @@
                     </ion-row>
                 <ion-row>
                     <ion-col>
-                        <ion-button (click)="submit()" position="stack" color="primary" [disabled]="submitClicked||commentContent==null||commentContent==''">发送</ion-button>
+                        <ion-button (click)="submit()" position="stack" color="primary" 
+                        [disabled]="submitClicked||commentContent==null||commentContent==''">发送</ion-button>
                     </ion-col>
                 </ion-row>
             </ion-grid>

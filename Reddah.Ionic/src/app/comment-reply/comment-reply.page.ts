@@ -76,7 +76,6 @@ export class CommentReplyPage implements OnInit {
 
     ngOnInit(){
         this.comments.sort((a,b)=> b.Id-a.Id);
-        
         this.allRepliesCount = this.GetCommentCount(this.comments, this.comment.Id);
     }
 
@@ -127,5 +126,22 @@ export class CommentReplyPage implements OnInit {
         });
           
         await userModal.present();
+    }
+
+    childReloadComments($event){
+        this.loadComments();
+    }
+
+    loadComments(){
+        let cacheKey = "this.reddah.getComments" + this.comment.ArticleId;
+        let request = this.reddah.getComments(this.comment.ArticleId)
+
+        this.cacheService.loadFromObservable(cacheKey, request)
+        .subscribe(data => 
+        {
+            this.comments = data.Comments;
+            this.comments.sort((a,b)=> b.Id-a.Id);
+            this.allRepliesCount = this.GetCommentCount(this.comments, this.comment.Id);
+        });
     }
 }

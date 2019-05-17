@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild, Input, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { CacheService } from "ionic-cache";
+import { AddCommentPage } from '../add-comment/add-comment.page';
 
 @Component({
     selector: 'app-comment-box',
@@ -11,10 +13,14 @@ export class CommentBoxComponent implements OnInit {
 
     @ViewChild('newComment') newComment;
     @Input() selectedArticleId: number;
+    @Input() selectedCommentId: number;
+    @Output() reloadComments = new EventEmitter();
+    commentContent: string;
 
     constructor(
         public reddah : ReddahService,
         private cacheService: CacheService,
+        private modalController: ModalController,
     ) { }
 
     ngOnInit() {
@@ -22,11 +28,9 @@ export class CommentBoxComponent implements OnInit {
 
     private lastScrollTop: number = 0;
     direction: string = "up";
-
     
     header: any;
     sticky: number;
-    
 
     onScroll($event)
     {
@@ -59,7 +63,6 @@ export class CommentBoxComponent implements OnInit {
 
     showEditBox=false;
 
-    selectedCommentId = -1;
     async addNewComment(articleId, commmentId){
         //show the whole write comment box
         this.direction = 'up';
@@ -72,6 +75,10 @@ export class CommentBoxComponent implements OnInit {
         this.selectedCommentId = commmentId;
         console.log("selectedArticleId:"+this.selectedArticleId);
         console.log("selectedCommentId:"+this.selectedCommentId);
+
+        setTimeout(() => {
+            this.newComment.setFocus();
+        },150);
     }
 
     showFacePanel = false;
@@ -89,20 +96,42 @@ export class CommentBoxComponent implements OnInit {
         
         this.reddah.addComments(this.selectedArticleId, this.selectedCommentId, this.newComment.value)
         .subscribe(result => 
-            {
-                if(result.Success==0)
-                { 
-                    let cacheKey = "this.reddah.getComments" + this.selectedArticleId;
-                    this.cacheService.removeItem(cacheKey);
-                    //this.loadComments();
-                    this.showEditBox = false;
-                }
-                else{
-                    alert(result.Message);
-                }
+        {
+            if(result.Success==0)
+            { 
+                this.commentContent = "";
+                let cacheKey = "this.reddah.getComments" + this.selectedArticleId;
+                this.cacheService.removeItem(cacheKey);
+                this.reloadComments.emit();
+                this.showEditBox = false;
             }
-        );
+            else{
+                alert(result.Message);
+            }
+        });
         
+    }
+
+    async newPopComment(articleId: number, commentId: number){
+        
+        const addCommentModal = await this.modalController.create({
+            component: AddCommentPage,
+            componentProps: { 
+                articleId: articleId,
+                commentId: commentId,
+                text: this.commentContent,
+            }
+        });
+        
+        await addCommentModal.present();
+        const { data } = await addCommentModal.onDidDismiss();
+        if(data){
+            this.commentContent = "";
+            let cacheKey = "this.reddah.getComments" + this.selectedArticleId;
+            this.cacheService.removeItem(cacheKey);
+            this.reloadComments.emit();
+        }
+
     }
 
 }

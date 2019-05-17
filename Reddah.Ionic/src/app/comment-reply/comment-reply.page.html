@@ -52,4 +52,5 @@
         </li>
     </div>
 </ion-content>
-<app-comment-box #commentbox selectedArticleId="{{comment.ArticleId}}"></app-comment-box>
+<app-comment-box #commentbox selectedArticleId="{{comment.ArticleId}}" selectedCommentId="{{comment.Id}}"
+    (reloadComments)="childReloadComments($event)"></app-comment-box>

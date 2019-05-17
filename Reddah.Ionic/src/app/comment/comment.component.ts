@@ -13,6 +13,7 @@ import { ReddahService } from '../reddah.service';
 export class CommentComponent implements OnInit {
 
     @Input() data;
+    localComments: any;
     @Input() depth: number;
     @Input() ptext;
     @Input() pauthor;
@@ -20,6 +21,8 @@ export class CommentComponent implements OnInit {
     @Input() articleauthor;
 
     @Output() commentClick = new EventEmitter();
+
+    totalCommentCount: number;
 
     constructor(
         public reddah: ReddahService,
@@ -29,7 +32,32 @@ export class CommentComponent implements OnInit {
 
     ngOnInit() {
         if(this.data)
-            this.data.Comments.sort((a,b)=> b.Id-a.Id);
+        {
+            this.localComments = this.data.Comments.concat();
+            this.totalCommentCount = this.GetCommentCount(this.localComments, -1);
+            this.localComments.forEach(comment=>{
+                comment.CommentCount = this.GetCommentCount(this.localComments, comment.Id);
+            });
+            this.localComments.sort((a,b)=> b.Id-a.Id); 
+        }
+    }
+
+    GetCommentCount(comments, id){
+        //replies for current comment
+        let count = comments.filter(c=>c.ParentId==id).reduce((sum,c)=>{return sum+1},0);
+        if(count>0)
+        {
+            let subTotal = 0;
+            comments.forEach((element) => {
+                if(element.ParentId==id){
+                    subTotal += this.GetCommentCount(comments, element.Id);
+                }
+            });
+            return count + subTotal;
+        }
+        else{
+            return 0;
+        }
     }
 
     customPopoverOptions: any = {
@@ -50,33 +78,15 @@ export class CommentComponent implements OnInit {
     sortComment(value){
         switch(value){
             case "oldest":
-                this.data.Comments.sort((a,b)=> a.Id-b.Id);
+                this.localComments.sort((a,b)=> a.Id-b.Id);
                 break;
             case "mostlike":
-                this.data.Comments.sort((a,b)=> b.Count-a.Count);
+                this.localComments.sort((a,b)=> b.Count-a.Count);
                 break;
             case "latest":
             default:
-                this.data.Comments.sort((a,b)=> b.Id-a.Id);
+                this.localComments.sort((a,b)=> b.Id-a.Id);
                 break;
-        }
-    }
-
-    GetCommentCount(comments, id){
-        //replies for current comment
-        let count = comments.filter(c=>c.ParentId==id).reduce((sum,c)=>{return sum+1},0);
-        if(count>0)
-        {
-            let subTotal = 0;
-            comments.forEach((element) => {
-                if(element.ParentId==id){
-                    subTotal += this.GetCommentCount(comments, element.Id);
-                }
-            });
-            return count + subTotal;
-        }
-        else{
-            return 0;
         }
     }
 

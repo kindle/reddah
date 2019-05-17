@@ -6,7 +6,7 @@
 <div *ngIf="data">
     <ion-item lines="none" color="light" id="TotalComments">
         <ion-label text-wrap>
-            全部回复 {{GetCommentCount(data.Comments, -1)}}
+            全部回复 {{totalCommentCount}}
         </ion-label>
         <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" 
         cancel-text="取消" ok-text="确定" #commentSortType>
@@ -15,7 +15,7 @@
             <ion-select-option value="mostlike">按赞</ion-select-option>
         </ion-select>
     </ion-item>
-    <div *ngFor="let comment of data.Comments">
+    <div *ngFor="let comment of localComments">
         <li *ngIf="data.Seed===comment.ParentId&&depth <= 1">
             <ion-item lines="none" no-padding (click)="addNewComment(comment.ArticleId, comment.Id)" style="padding-left:10px;">
                 <ion-avatar slot="start" class="avatar-top" (click)="goUser(comment.UserName)">
@@ -32,9 +32,8 @@
                     
                     <p>{{comment.CreatedOn | date:'MM-dd HH:mm'}}</p>
                     <div [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
-                    <p (click)="viewReply(data.Comments, comment)" *ngIf="GetCommentCount(data.Comments, comment.Id)>0">查看{{GetCommentCount(data.Comments, comment.Id)}}条回复>></p>
+                    <p (click)="viewReply(localComments, comment)" *ngIf="comment.CommentCount&&comment.CommentCount>0">查看{{comment.CommentCount}}条回复>></p>
                 </ion-label>
-                
             </ion-item>
         </li>
     </div>
