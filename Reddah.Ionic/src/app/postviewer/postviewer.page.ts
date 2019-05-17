@@ -40,6 +40,8 @@ export class PostviewerPage implements OnInit {
         return await popover.present();
     }
 
+    @ViewChild('commentlist') commentlist;
+
     loadComments(){
         let cacheKey = "this.reddah.getComments" + this.article.Id;
         let request = this.reddah.getComments(this.article.Id)
@@ -49,6 +51,7 @@ export class PostviewerPage implements OnInit {
         {
             console.log(data);
             this.commentsData = data;
+            this.commentlist.init(data.Comments);
         });
     }
 

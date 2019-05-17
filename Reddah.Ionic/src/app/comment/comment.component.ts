@@ -33,14 +33,19 @@ export class CommentComponent implements OnInit {
     ngOnInit() {
         if(this.data)
         {
-            this.localComments = this.data.Comments.concat();
-            this.totalCommentCount = this.GetCommentCount(this.localComments, -1);
-            this.localComments.forEach(comment=>{
-                comment.CommentCount = this.GetCommentCount(this.localComments, comment.Id);
-            });
-            this.localComments.sort((a,b)=> b.Id-a.Id); 
+            this.init(this.data.Comments); 
         }
     }
+
+    init(comments) {
+        this.localComments = comments.concat();
+        this.totalCommentCount = this.GetCommentCount(this.localComments, -1);
+        this.localComments.forEach(comment=>{
+            comment.CommentCount = this.GetCommentCount(this.localComments, comment.Id);
+        });
+        this.localComments.sort((a,b)=> b.Id-a.Id); 
+    }
+
 
     GetCommentCount(comments, id){
         //replies for current comment
@@ -100,6 +105,10 @@ export class CommentComponent implements OnInit {
         });
         
         await replayModal.present();
+        const { data } = await replayModal.onDidDismiss();
+        if(data){
+            //reload comments
+        }
     }
 
     newComment(articleId: number, commentId: number){

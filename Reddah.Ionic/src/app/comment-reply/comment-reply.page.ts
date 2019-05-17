@@ -27,8 +27,10 @@ var Highcharts = require('highcharts/highstock');
     styleUrls: ['comment-reply.page.scss']
 })
 export class CommentReplyPage implements OnInit {
+    flagAddComment=false;
+
     async close(){
-        await this.modalController.dismiss();
+        await this.modalController.dismiss(this.flagAddComment);
     }
 
     @Input() comments: any;
@@ -139,6 +141,7 @@ export class CommentReplyPage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request)
         .subscribe(data => 
         {
+            this.flagAddComment = true;
             this.comments = data.Comments;
             this.comments.sort((a,b)=> b.Id-a.Id);
             this.allRepliesCount = this.GetCommentCount(this.comments, this.comment.Id);

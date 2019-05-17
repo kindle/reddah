@@ -25,7 +25,7 @@
             </ion-chip>&nbsp;
         </ng-template>
     </div>
-    <app-comment no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" (commentClick)="childCommentClick($event)" 
+    <app-comment #commentlist no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" (commentClick)="childCommentClick($event)" 
         [articleauthor]="article.UserName"></app-comment>
 </ion-content>
 <app-comment-box #commentbox selectedArticleId="{{article.Id}}" selectedCommentId="-1"
