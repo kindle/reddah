@@ -44,8 +44,6 @@ export class MyTimeLinePage implements OnInit {
         this.navController.goBack(true);
     }
 
-    private fileTransfer: FileTransferObject; 
-
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
@@ -60,72 +58,12 @@ export class MyTimeLinePage implements OnInit {
         private activatedRoute: ActivatedRoute,
         private transfer: FileTransfer, 
         private file: File,
-        ){
-            this.userName = this.reddah.getCurrentUser();
-    }
-
-    appPhoto = { 
-        cover: "assets/icon/timg.jpg", 
-        userPhoto: "assets/icon/anonymous.png"
-    };
-    
-    getUserInfo(){
-        //check cache first
-        let cachedCoverPath = this.localStorageService.retrieve(`${this.userName}_timeline_imageurl_cover`);
-        if(cachedCoverPath!=null){
-            this.appPhoto["cover"] = (<any>window).Ionic.WebView.convertFileSrc(cachedCoverPath);
-            //bug when image not loaded, src width =0
-            this.reddah.drawCanvasBackground(cachedCoverPath);
-        }
-        let cachedUserPhotoPath = this.localStorageService.retrieve(`${this.userName}_timeline_imageurl_userphoto`);
-        if(cachedCoverPath!=null){
-            this.appPhoto["userPhoto"] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
-        }
-
-        //check from web
-        this.formData = new FormData();
-        this.formData.append("targetUser", this.userName);
-
-        this.reddah.getUserInfo(this.formData)
-            .subscribe(userInfo => 
-            {
-                if(userInfo.Cover!=null){
-                    this.toCache(userInfo.Cover, `${this.userName}_timeline_imageurl_cover`, "cover");
-                }
-                if(userInfo.Photo!=null){
-                    this.toCache(userInfo.Photo, `${this.userName}_timeline_imageurl_userphoto`,"userPhoto");
-                }
-            }
-        );
-    }
-
-    toCache(webUrl, cacheKey, functionKey){
-        webUrl = webUrl.replace("///","https://");
-        let result = new CacheResult(false, '');
-        let cachedImagePath = this.localStorageService.retrieve(cacheKey);
-        //check if changed or not downloaded, go to download it
-        let webImageName = webUrl.replace("https://login.reddah.com/uploadPhoto/","");
-        let cacheImageName = "";
-        if(cachedImagePath!=null){
-            cacheImageName = cachedImagePath.replace(this.file.applicationStorageDirectory,"");
-        }
-        if(cachedImagePath==null||cacheImageName!=webImageName){
-            this.fileTransfer = this.transfer.create();  
-            let target = this.file.applicationStorageDirectory + webImageName;
-            this.fileTransfer.download(webUrl, target).then((entry) => {
-                this.localStorageService.store(cacheKey, target);
-                this.appPhoto[functionKey] = (<any>window).Ionic.WebView.convertFileSrc(target);
-            }, (error) => {
-                console.log(JSON.stringify(error));
-            });     
-
-        }
-
-        return result;
+    ){
+        this.userName = this.reddah.getCurrentUser();
     }
     
     async ngOnInit(){
-        this.getUserInfo();
+        this.reddah.getUserPhotos(this.userName);
 
         const loading = await this.loadingController.create({
             message: this.translateService.instant("Article.Loading"),
@@ -142,19 +80,29 @@ export class MyTimeLinePage implements OnInit {
         let request = this.reddah.getMyTimeline(this.formData);
 
         this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
-            .subscribe(timeline => 
-            {
-                this.articles = [];
-                this.commentData = new Map();
+        .subscribe(timeline => 
+        {
+            this.articles = [];
+            this.commentData = new Map();
 
-                for(let article of timeline){
-                    this.articles.push(article);
-                    this.loadedIds.push(article.Id);
-                    this.GetCommentsData(article.Id);
+            for(let article of timeline){
+                //check cache first
+                let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${article.UserName}`);
+                if(cachedUserPhotoPath!=null){
+                    this.reddah.appPhoto["userphoto_"+article.UserName] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
                 }
-                loading.dismiss();
+                else{
+                    this.reddah.appPhoto["userphoto_"+article.UserName] = "assets/icon/anonymous.png";
+                }
+                if(article.UserPhoto!=null){
+                    this.reddah.toCache(article.UserPhoto, `userphoto_${article.UserName}`);
+                }
+                this.articles.push(article);
+                this.loadedIds.push(article.Id);
+                this.GetCommentsData(article.Id);
             }
-        );
+            loading.dismiss();
+        });
     }
   
     getMyTimeline():void {
@@ -467,7 +415,7 @@ export class MyTimeLinePage implements OnInit {
         await popover.present();
         const { data } = await popover.onDidDismiss();
         if(data)
-            this.getUserInfo();
+            this.reddah.getUserPhotos(this.userName);
     }
 
     GetCache(url){

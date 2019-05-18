@@ -1,14 +1,14 @@
 <ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop>
     <div class="headerStart" #headerStart>
-        <ion-item color="transparent" lines="none" (dblclick)="clearCacheAndReload()">
-            <ion-icon name="ios-arrow-back" slot="start" (click)="goback()"></ion-icon>
+        <ion-item color="transparent" no-padding lines="none" (dblclick)="clearCacheAndReload()">
+            <ion-icon name="ios-arrow-back" slot="start" (click)="goback()" class="backbutton"></ion-icon>
             <ion-label></ion-label>
             <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll>
-        <ion-item color="light" lines="none" (dblclick)="clearCacheAndReload()">
-            <ion-icon name="ios-arrow-back" slot="start" (click)="goback()"></ion-icon>
+        <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload()">
+            <ion-icon name="ios-arrow-back" slot="start" (click)="goback()" class="backbutton"></ion-icon>
             <ion-label>好友圈</ion-label>
             <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
@@ -18,15 +18,15 @@
             <ion-refresher-content></ion-refresher-content>
         </ion-refresher>  
         <div class="timelineCover" #timelineCover>
-            <img-loader src="{{this.appPhoto['cover']}}" (click)="changeCover()"></img-loader>
+            <img src="{{reddah.appPhoto['cover_'+userName]}}" (click)="changeCover()">
         </div>
         <div class="timelineAvatar">
             <ion-label class="userNameTitle">{{userName}}</ion-label>
-            <img-loader src="{{this.appPhoto['userPhoto']}}" (click)="goUser(userName)"></img-loader>
+            <img src="{{reddah.appPhoto['userphoto_'+userName]}}" (click)="goUser(userName)">
         </div>
         <div *ngFor="let article of articles" style="display: flex; border-bottom: 1px solid lightgrey; margin-bottom: 15px; padding-bottom: 10px;">
             <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
-                <img-loader src="assets/icon/anonymous.png" class="border: 1px solid gray;" (click)="goUser(article.UserName)"></img-loader>
+                <img src="{{reddah.appPhoto['userphoto_'+article.UserName]}}" class="portrait" (click)="goUser(article.UserName)">
             </div>
             <div style="width:100%;border: 0px solid red;">
                 <ion-card-header no-padding  class="articleUserName">

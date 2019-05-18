@@ -40,7 +40,7 @@ export class AboutPage implements OnInit {
         public modalController: ModalController,
         public navController: NavController,
         private router: Router,
-        private reddahService: ReddahService,
+        public reddah: ReddahService,
         public authService: AuthService,
         public translateService: TranslateService,
         private cacheService: CacheService,
@@ -56,7 +56,7 @@ export class AboutPage implements OnInit {
 
         this.currentLocaleInfo = "Not Set";
         const locale = this.localStorageService.retrieve("Reddah_Locale");
-        this.reddahService.Locales.forEach((value, index, arr)=>{
+        this.reddah.Locales.forEach((value, index, arr)=>{
             if(locale===value.Name)
                 this.currentLocaleInfo = value.Description;
         });
@@ -64,11 +64,11 @@ export class AboutPage implements OnInit {
         this.userName = "Not Set";
         this.userName = this.localStorageService.retrieve("Reddah_CurrentUser");
 
-        this.getUserInfo();
+        this.reddah.getUserPhotos(this.userName);
     }
 
     formData: FormData;
-    photo: string = "assets/icon/anonymous.png";
+    /*photo: string = "assets/icon/anonymous.png";
     getUserInfo(){
         this.formData = new FormData();
         this.formData.append("targetUser", this.userName);
@@ -87,7 +87,7 @@ export class AboutPage implements OnInit {
                     this.nickName = userInfo.NickName;
             }
         );
-    }
+    }*/
 
     
     image:any=''
@@ -208,7 +208,7 @@ export class AboutPage implements OnInit {
         const { data } = await myInfoModal.onDidDismiss();
         //check if change
         if(data)
-            this.getUserInfo();
+            this.reddah.getUserPhotos(this.userName);
     }
 
     async foo(){

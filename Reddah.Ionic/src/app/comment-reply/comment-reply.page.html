@@ -1,5 +1,5 @@
-<ion-item color="light" lines="none">
-    <ion-icon name="ios-arrow-back" (click)="close()"></ion-icon>
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-text>评论详情</ion-text>
 </ion-item>
 <ion-content padding [scrollEvents]="true" (ionScroll)="commentbox.onScroll($event)">
@@ -22,7 +22,8 @@
             全部回复 {{allRepliesCount}}
         </ion-label>
         <!-- [interfaceOptions]="customPopoverOptions" interface="popover" -->
-        <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" cancel-text="取消" ok-text="确定" #commentSortType>
+        <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" 
+        cancel-text="取消" ok-text="确定" #commentSortType>
             <ion-select-option value="latest">按最新</ion-select-option>
             <ion-select-option value="oldest">按最早</ion-select-option>
             <ion-select-option value="mostlike">按赞</ion-select-option>

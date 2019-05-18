@@ -1,5 +1,5 @@
-<ion-item color="light" lines="none">
-    <ion-icon name="ios-arrow-back" (click)="close()"></ion-icon>
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-title>{{ 'Comment.Comment' | translate }}</ion-title>
     <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked||commentContent==null||commentContent==''">{{ 'Confirm.Submit' | translate }}</ion-button>
 </ion-item>
@@ -8,7 +8,7 @@
         <ion-textarea autoresize padding #newComment id="newComment" [(ngModel)]="commentContent" rows="6" cols="20" placeholder="{{ 'Comment.Tip' | translate }}"></ion-textarea>
     </ion-item>
     <ion-item lines="none">
-        <ion-icon name="happy" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>
+        <ion-icon name="happy" slot="end" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>
     </ion-item>
     <ion-grid *ngIf="showFacePanel">
         <ion-row *ngFor="let row of reddahService.emojis">

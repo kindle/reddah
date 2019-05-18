@@ -1,24 +1,24 @@
 
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" style="background-color:white;">
     <div class="headerStart" #headerStart>
-        <ion-item color="transparent" lines="none">
-            <ion-icon name="ios-arrow-back" slot="start" (click)="goback()"></ion-icon>
+        <ion-item color="transparent" no-padding lines="none">
+            <ion-icon name="ios-arrow-back" slot="start" (click)="goback()" class="backbutton"></ion-icon>
             <ion-label></ion-label>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll>
-        <ion-item color="light">
-            <ion-icon name="ios-arrow-back" slot="start" (click)="goback()"></ion-icon>
+        <ion-item color="light" no-padding lines="none">
+            <ion-icon name="ios-arrow-back" slot="start" (click)="goback()" class="backbutton"></ion-icon>
             <ion-label>{{userName}}</ion-label>
         </ion-item>
     </div>
     <div>   
         <div class="timelineCover" #timelineCover>
-            <img-loader src="{{cover}}"></img-loader>
+            <img-loader src="{{reddah.appPhoto['cover_'+userName]}}"></img-loader>
         </div>
         <div class="timelineAvatar">
             <ion-label class="userNameTitle">{{userName}}</ion-label>
-            <img-loader src="{{userPhoto}}"></img-loader>
+            <img-loader src="{{reddah.appPhoto['userphoto_'+userName]}}"></img-loader>
         </div>
         <div *ngFor="let article of articles;index as i">
             <p *ngIf="i==0||(i>0&&articles[i-1].CreatedOn.substring(0,4)!=article.CreatedOn.substring(0,4))" class="yearTitle">

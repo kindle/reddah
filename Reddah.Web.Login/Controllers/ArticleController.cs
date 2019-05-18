@@ -275,12 +275,30 @@ namespace Reddah.Web.Login.Controllers
                     int[] loaded = loadedIds == null ? new int[] { } : loadedIds;
                     
                     query = (from b in db.Article
+                             join u in db.UserProfile on b.UserName equals u.UserName
                              where b.Type == 1 && (b.UserName == jwtResult.JwtUser.User || 
-                             (from f in db.UserFriend where f.UserName == jwtResult.JwtUser.User select f.Watch).ToList().Contains(b.UserName)
-                             ) &&
-                                     !(loaded).Contains(b.Id)
-                                orderby b.Id descending
-                                select b)
+                             (from f in db.UserFriend where f.UserName == jwtResult.JwtUser.User select f.Watch).ToList().Contains(b.UserName)) 
+                             && !(loaded).Contains(b.Id)
+                             orderby b.Id descending
+                             select new AdvancedTimeline
+                             {
+                                 Id = b.Id,
+                                 Title = b.Title,
+                                 Content = b.Content,
+                                 Abstract = b.Abstract,
+                                 CreatedOn = b.CreatedOn,
+                                 Up = b.Up,
+                                 Down = b.Down,
+                                 Count = b.Count,
+                                 UserName = b.UserName,
+                                 GroupName = b.GroupName,
+                                 Locale = b.Locale,
+                                 LastUpdateOn = b.LastUpdateOn,
+                                 Type = b.Type,
+                                 UserNickName = u.NickName,
+                                 UserPhoto = u.Photo,
+                                 UserSex = u.Sex
+                             })
                             .Take(pageCount);
 
                     return Ok(query.ToList());

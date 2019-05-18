@@ -55,26 +55,9 @@ export class TimeLinePage implements OnInit {
         private activatedRoute: ActivatedRoute,
         ){
     }
-    cover: string = "assets/icon/timg.jpg";
-    userPhoto: string = "assets/icon/anonymous.png";
-    getUserInfo(){
-        this.formData = new FormData();
-        this.formData.append("targetUser", this.userName);
-
-        this.reddah.getUserInfo(this.formData)
-            .subscribe(userInfo => 
-            {
-                console.log(JSON.stringify(userInfo));
-                if(userInfo.Cover!=null)
-                    this.cover = userInfo.Cover;
-                if(userInfo.Photo!=null)
-                    this.userPhoto = userInfo.Photo;
-            }
-        );
-    }
     
     async ngOnInit(){
-        this.getUserInfo();
+        this.reddah.getUserPhotos(this.userName);
         const loading = await this.loadingController.create({
             message: this.translateService.instant("Article.Loading"),
             spinner: 'circles',
@@ -89,15 +72,14 @@ export class TimeLinePage implements OnInit {
         let request = this.reddah.getTimeline(this.formData);
 
         this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
-            .subscribe(timeline => 
-            {
-                for(let article of timeline){
-                    this.articles.push(article);
-                    this.loadedIds.push(article.Id);
-                }
-                loading.dismiss();
+        .subscribe(timeline => 
+        {
+            for(let article of timeline){
+                this.articles.push(article);
+                this.loadedIds.push(article.Id);
             }
-        );
+            loading.dismiss();
+        });
     }
   
     getTimeline():void {
@@ -110,14 +92,13 @@ export class TimeLinePage implements OnInit {
         let request = this.reddah.getTimeline(this.formData);
         
         this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
-          .subscribe(timeline => 
-            {
-                for(let article of timeline){
-                    this.articles.push(article);
-                    this.loadedIds.push(article.Id);
-                }
+        .subscribe(timeline => 
+        {
+            for(let article of timeline){
+                this.articles.push(article);
+                this.loadedIds.push(article.Id);
             }
-        );
+        });
 
     }
 

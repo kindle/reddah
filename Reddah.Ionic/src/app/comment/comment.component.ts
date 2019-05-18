@@ -4,6 +4,7 @@ import { CommentPopPage } from '../article-pop/comment-pop.page'
 import { UserPage } from '../user/user.page';
 import { CommentReplyPage } from '../comment-reply/comment-reply.page';
 import { ReddahService } from '../reddah.service';
+import { CacheService } from "ionic-cache";
 
 @Component({
     selector: 'app-comment',
@@ -28,6 +29,7 @@ export class CommentComponent implements OnInit {
         public reddah: ReddahService,
         private popoverController: PopoverController,
         private modalController: ModalController,
+        private cacheService: CacheService,
     ) { }
 
     ngOnInit() {
@@ -40,9 +42,9 @@ export class CommentComponent implements OnInit {
     init(comments) {
         this.localComments = comments.concat();
         this.totalCommentCount = this.GetCommentCount(this.localComments, -1);
-        this.localComments.forEach(comment=>{
-            comment.CommentCount = this.GetCommentCount(this.localComments, comment.Id);
-        });
+        //this.localComments.forEach(comment=>{
+        //    comment.CommentCount = this.GetCommentCount(this.localComments, comment.Id);
+        //});
         this.localComments.sort((a,b)=> b.Id-a.Id); 
     }
 
@@ -108,7 +110,19 @@ export class CommentComponent implements OnInit {
         const { data } = await replayModal.onDidDismiss();
         if(data){
             //reload comments
+            this.loadComments(comment.ArticleId)
         }
+    }
+
+    loadComments(articleId){
+        let cacheKey = "this.reddah.getComments" + articleId;
+        let request = this.reddah.getComments(articleId)
+
+        this.cacheService.loadFromObservable(cacheKey, request)
+        .subscribe(data => 
+        {
+            this.init(data.Comments);
+        });
     }
 
     newComment(articleId: number, commentId: number){

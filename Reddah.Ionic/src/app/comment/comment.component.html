@@ -32,7 +32,7 @@
                     
                     <p>{{comment.CreatedOn | date:'MM-dd HH:mm'}}</p>
                     <div [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
-                    <p (click)="viewReply(localComments, comment)" *ngIf="comment.CommentCount&&comment.CommentCount>0">查看{{comment.CommentCount}}条回复>></p>
+                    <p (click)="viewReply(localComments, comment)" *ngIf="comment.Count&&comment.Count>0">查看{{comment.Count}}条回复>></p>
                 </ion-label>
             </ion-item>
         </li>

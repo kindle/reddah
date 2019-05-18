@@ -44,7 +44,7 @@ export class UserPage implements OnInit {
     ){}
 
     ngOnInit(){
-        this.getUserInfo();
+        this.reddah.getUserPhotos(this.userName);
         this.getTimeline();
     }
 
@@ -52,18 +52,7 @@ export class UserPage implements OnInit {
     loadedIds = [];
     formData: FormData;
 
-
-    nickName: string;
-    sex=-1;
-    photo: string = "assets/icon/anonymous.png";
-    location: string;
-    signature: string;
-    cover: string;
-
-    noteName: string;
-    isFriend = -1;
-
-    getUserInfo(){
+    /*getUserInfo(){
         this.formData = new FormData();
         this.formData.append("targetUser", this.userName);
 
@@ -72,23 +61,22 @@ export class UserPage implements OnInit {
         let request = this.reddah.getUserInfo(this.formData);
 
         this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
-            .subscribe(userInfo => 
-            {
-                console.log(JSON.stringify(userInfo));
-                this.nickName = userInfo.NickName
-                this.sex = userInfo.Sex;
-                if(userInfo.Photo!=null)
-                    this.photo = userInfo.Photo;
-                this.location = userInfo.Location;
-                this.signature = userInfo.Signature;
-                this.cover = userInfo.Cover;
+        .subscribe(userInfo => 
+        {
+            console.log(JSON.stringify(userInfo));
+            this.nickName = userInfo.NickName
+            this.sex = userInfo.Sex;
+            if(userInfo.Photo!=null)
+                this.photo = userInfo.Photo;
+            this.location = userInfo.Location;
+            this.signature = userInfo.Signature;
+            this.cover = userInfo.Cover;
 
-                this.noteName = userInfo.NoteName;
-                if(this.userName!=this.reddah.getCurrentUser())
-                    this.isFriend = userInfo.IsFriend?1:0;
-            }
-        );
-    }
+            this.noteName = userInfo.NoteName;
+            if(this.userName!=this.reddah.getCurrentUser())
+                this.isFriend = userInfo.IsFriend?1:0;
+        });
+    }*/
 
     getTimeline(){
         this.formData = new FormData();

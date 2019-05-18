@@ -10,251 +10,254 @@ import { Article } from "./article";
 import { UserProfileModel } from './UserProfileModel';
 import { UserModel, QueryCommentModel, NewCommentModel, NewTimelineModel } from './UserModel';
 import { Locale } from './locale';
-
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ReddahService {
 
-  constructor(
-      private http: HttpClient,
-      private localStorageService: LocalStorageService,
-      private jsonp: Jsonp
-  ) { }
+    constructor(
+        private http: HttpClient,
+        private localStorageService: LocalStorageService,
+        private jsonp: Jsonp,
+        private transfer: FileTransfer, 
+        private file: File,
+    ) { }
 
-//******************************** */
-  private loginUrl = 'https://login.reddah.com/api/auth/sign'; 
+    //******************************** */
+    private loginUrl = 'https://login.reddah.com/api/auth/sign'; 
 
-  login(userName: string, password: string): Observable<any> {
+    login(userName: string, password: string): Observable<any> {
 
-    return this.http.post<any>(this.loginUrl, new UserModel(userName, password))
-      .pipe(
-        tap(heroes => this.log('login')),
-        catchError(this.handleError('login', []))
-      );
-  }
-  //******************************** */
-  private getCommentsUrl = 'https://login.reddah.com/api/article/getcomments'; 
+      return this.http.post<any>(this.loginUrl, new UserModel(userName, password))
+        .pipe(
+          tap(heroes => this.log('login')),
+          catchError(this.handleError('login', []))
+        );
+    }
+    //******************************** */
+    private getCommentsUrl = 'https://login.reddah.com/api/article/getcomments'; 
 
-  getComments(articleId: number): Observable<any> {
+    getComments(articleId: number): Observable<any> {
 
-    return this.http.post<any>(this.getCommentsUrl, new QueryCommentModel("", articleId))
-      .pipe(
-        tap(heroes => this.log('get comments')),
-        catchError(this.handleError('get comments', []))
-      );
-  }
-  //******************************** */
-  private addCommentsUrl = 'https://login.reddah.com/api/article/addcomments'; 
+      return this.http.post<any>(this.getCommentsUrl, new QueryCommentModel("", articleId))
+        .pipe(
+          tap(heroes => this.log('get comments')),
+          catchError(this.handleError('get comments', []))
+        );
+    }
+    //******************************** */
+    private addCommentsUrl = 'https://login.reddah.com/api/article/addcomments'; 
 
-  addComments(articleId: number, parentId: number, content: string): Observable<any> {
+    addComments(articleId: number, parentId: number, content: string): Observable<any> {
 
-    return this.http.post<any>(this.addCommentsUrl, new NewCommentModel(this.getCurrentJwt(), articleId, parentId, content))
-      .pipe(
-        tap(heroes => this.log('add comment')),
-        catchError(this.handleError('add comment', []))
-      );
-  }
-  //******************************** */
-  private addTimelineUrl = 'https://login.reddah.com/api/article/addtimeline'; 
+      return this.http.post<any>(this.addCommentsUrl, new NewCommentModel(this.getCurrentJwt(), articleId, parentId, content))
+        .pipe(
+          tap(heroes => this.log('add comment')),
+          catchError(this.handleError('add comment', []))
+        );
+    }
+    //******************************** */
+    private addTimelineUrl = 'https://login.reddah.com/api/article/addtimeline'; 
 
-  addTimeline(formData: FormData): Observable<any> {
+    addTimeline(formData: FormData): Observable<any> {
 
-    formData.append('jwt', this.getCurrentJwt());
-    const httpOptions = {
-        headers: new HttpHeaders({
-          //'enctype': 'multipart/form-data; boundary=----WebKitFormBoundaryuL67FWkv1CA',
-          'Content-Type': 'multipart/form-data', 
-          'Accept': 'application/json',
-        })
-    };
-    return this.http.post<any>(this.addTimelineUrl, formData)
-      .pipe(
-        tap(heroes => this.log('add timeline')),
-        catchError(this.handleError('add timeline', []))
-      );
-  }
-  //******************************** */
-  private getMyTimelineUrl = 'https://login.reddah.com/api/article/getmytimeline'; 
+      formData.append('jwt', this.getCurrentJwt());
+      const httpOptions = {
+          headers: new HttpHeaders({
+            //'enctype': 'multipart/form-data; boundary=----WebKitFormBoundaryuL67FWkv1CA',
+            'Content-Type': 'multipart/form-data', 
+            'Accept': 'application/json',
+          })
+      };
+      return this.http.post<any>(this.addTimelineUrl, formData)
+        .pipe(
+          tap(heroes => this.log('add timeline')),
+          catchError(this.handleError('add timeline', []))
+        );
+    }
+    //******************************** */
+    private getMyTimelineUrl = 'https://login.reddah.com/api/article/getmytimeline'; 
 
-  getMyTimeline(formData: FormData): Observable<any> {
+    getMyTimeline(formData: FormData): Observable<any> {
 
-    formData.append('jwt', this.getCurrentJwt());
-    return this.http.post<any>(this.getMyTimelineUrl, formData)
-      .pipe(
-        tap(data => this.log('get my timeline')),
-        catchError(this.handleError('get my timeline', []))
-      );
-  }
-  //******************************** */
-  private getTimelineUrl = 'https://login.reddah.com/api/article/gettimeline'; 
+      formData.append('jwt', this.getCurrentJwt());
+      return this.http.post<any>(this.getMyTimelineUrl, formData)
+        .pipe(
+          tap(data => this.log('get my timeline')),
+          catchError(this.handleError('get my timeline', []))
+        );
+    }
+    //******************************** */
+    private getTimelineUrl = 'https://login.reddah.com/api/article/gettimeline'; 
 
-  getTimeline(formData: FormData): Observable<any> {
+    getTimeline(formData: FormData): Observable<any> {
 
-    formData.append('jwt', this.getCurrentJwt());
-    return this.http.post<any>(this.getTimelineUrl, formData)
-      .pipe(
-        tap(data => this.log('get timeline')),
-        catchError(this.handleError('get timeline', []))
-      );
-  }
-  //******************************** */
-  private getUserInfoUrl = 'https://login.reddah.com/api/article/getuser'; 
+      formData.append('jwt', this.getCurrentJwt());
+      return this.http.post<any>(this.getTimelineUrl, formData)
+        .pipe(
+          tap(data => this.log('get timeline')),
+          catchError(this.handleError('get timeline', []))
+        );
+    }
+    //******************************** */
+    private getUserInfoUrl = 'https://login.reddah.com/api/article/getuser'; 
 
-  getUserInfo(formData: FormData): Observable<any> {
+    getUserInfo(formData: FormData): Observable<any> {
 
-    formData.append('jwt', this.getCurrentJwt());
-    return this.http.post<any>(this.getUserInfoUrl, formData)
-      .pipe(
-        tap(data => this.log('get user info')),
-        catchError(this.handleError('get user info', []))
-      );
-  }
-  //******************************** */
-  private timelineLikeUrl = 'https://login.reddah.com/api/article/like'; 
+      formData.append('jwt', this.getCurrentJwt());
+      return this.http.post<any>(this.getUserInfoUrl, formData)
+        .pipe(
+          tap(data => this.log('get user info')),
+          catchError(this.handleError('get user info', []))
+        );
+    }
+    //******************************** */
+    private timelineLikeUrl = 'https://login.reddah.com/api/article/like'; 
 
-  like(formData: FormData): Observable<any> {
-    formData.append('jwt', this.getCurrentJwt());
-    return this.http.post<any>(this.timelineLikeUrl, formData)
-      .pipe(
-        tap(data => this.log('set like')),
-        catchError(this.handleError('set like', []))
-      );
-  }
-  //******************************** */
-  private addFriendUrl = 'https://login.reddah.com/api/article/addfriend'; 
+    like(formData: FormData): Observable<any> {
+      formData.append('jwt', this.getCurrentJwt());
+      return this.http.post<any>(this.timelineLikeUrl, formData)
+        .pipe(
+          tap(data => this.log('set like')),
+          catchError(this.handleError('set like', []))
+        );
+    }
+    //******************************** */
+    private addFriendUrl = 'https://login.reddah.com/api/article/addfriend'; 
 
-  addFriend(formData: FormData): Observable<any> {
+    addFriend(formData: FormData): Observable<any> {
 
-    formData.append('jwt', this.getCurrentJwt());
-    return this.http.post<any>(this.addFriendUrl, formData)
-      .pipe(
-        tap(data => this.log('add friend')),
-        catchError(this.handleError('add friend', []))
-      );
-  }
-  //******************************** */
-  private approveFriendUrl = 'https://login.reddah.com/api/article/approvefriend'; 
+      formData.append('jwt', this.getCurrentJwt());
+      return this.http.post<any>(this.addFriendUrl, formData)
+        .pipe(
+          tap(data => this.log('add friend')),
+          catchError(this.handleError('add friend', []))
+        );
+    }
+    //******************************** */
+    private approveFriendUrl = 'https://login.reddah.com/api/article/approvefriend'; 
 
-  approveFriend(formData: FormData): Observable<any> {
+    approveFriend(formData: FormData): Observable<any> {
 
-    formData.append('jwt', this.getCurrentJwt());
-    return this.http.post<any>(this.approveFriendUrl, formData)
-      .pipe(
-        tap(data => this.log('approve friend')),
-        catchError(this.handleError('approve friend', []))
-      );
-  }
-  //******************************** */
-  private friendRequestsUrl = 'https://login.reddah.com/api/article/friendrequests'; 
+      formData.append('jwt', this.getCurrentJwt());
+      return this.http.post<any>(this.approveFriendUrl, formData)
+        .pipe(
+          tap(data => this.log('approve friend')),
+          catchError(this.handleError('approve friend', []))
+        );
+    }
+    //******************************** */
+    private friendRequestsUrl = 'https://login.reddah.com/api/article/friendrequests'; 
 
-  friendRequests(formData: FormData): Observable<any> {
+    friendRequests(formData: FormData): Observable<any> {
 
-    formData.append('jwt', this.getCurrentJwt());
-    return this.http.post<any>(this.friendRequestsUrl, formData)
-      .pipe(
-        tap(data => this.log('get friend requests')),
-        catchError(this.handleError('get friend requests', []))
-      );
-  }
-  //******************************** */
-  private updateUserPhotoUrl = 'https://login.reddah.com/api/article/updateuserphoto'; 
+      formData.append('jwt', this.getCurrentJwt());
+      return this.http.post<any>(this.friendRequestsUrl, formData)
+        .pipe(
+          tap(data => this.log('get friend requests')),
+          catchError(this.handleError('get friend requests', []))
+        );
+    }
+    //******************************** */
+    private updateUserPhotoUrl = 'https://login.reddah.com/api/article/updateuserphoto'; 
 
-  updateUserPhoto(formData: FormData): Observable<any> {
+    updateUserPhoto(formData: FormData): Observable<any> {
 
-    formData.append('jwt', this.getCurrentJwt());
-    const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'multipart/form-data', 
-          'Accept': 'application/json',
-        })
-    };
-    return this.http.post<any>(this.updateUserPhotoUrl, formData)
-      .pipe(
-        tap(heroes => this.log('update user photo')),
-        catchError(this.handleError('update user photo', []))
-      );
-  }
-  //******************************** */
-
-
-
-  private log(message: string) {
-    console.log(message);
-  }
-
-  public Locales = [
-      new Locale("zh-CN", "中华人民共和国 (China)"),
-      new Locale("fr-FR", "France"),
-      new Locale("ja-JP", "日本 (Japan)"),
-      new Locale("ko-KR", "대한민국 (Korea)"),
-      new Locale("en-US", "United States"),
-  ];
- 
-  private heroesUrl = 'https://reddah.com/api/webapi/getarticles'; 
-  private userProfileModel: UserProfileModel;
-
-  getHeroes(loadedIds: Number[], locale: String, menu: String): Observable<Article[]> {
-    this.userProfileModel = new UserProfileModel();
-    this.userProfileModel.LoadedIds = loadedIds;
-    this.userProfileModel.Locale = locale;
-    this.userProfileModel.Menu = menu;
-    this.userProfileModel.Token = "";
-    this.userProfileModel.Sub = "";
-    this.userProfileModel.User = "";
-    this.userProfileModel.Keyword = "";
-
-    /*const httpOptions = {
-      headers: new HttpHeaders({ 
-        'Content-Type':'application/json',
-        'Access-Control-Allow-Origin*':'*',
-        'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
-        'Access-Control-Allow-Headers':'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-      }),
-      body: this.userProfileModel
-      
-    };*/
-
-    return this.http.post<Article[]>(this.heroesUrl, this.userProfileModel)//httpOptions)
-      .pipe(
-        tap(heroes => this.log('fetched subs')),
-        catchError(this.handleError('getReddahSubs', []))
-      );
-  }
+      formData.append('jwt', this.getCurrentJwt());
+      const httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type': 'multipart/form-data', 
+            'Accept': 'application/json',
+          })
+      };
+      return this.http.post<any>(this.updateUserPhotoUrl, formData)
+        .pipe(
+          tap(heroes => this.log('update user photo')),
+          catchError(this.handleError('update user photo', []))
+        );
+    }
+    //******************************** */
 
 
-  setCurrentUser(userName: string){
-    this.localStorageService.store("Reddah_CurrentUser",userName);
-  }
 
-  getCurrentUser(){
-    return this.localStorageService.retrieve("Reddah_CurrentUser");
-  }
+    private log(message: string) {
+      console.log(message);
+    }
 
-  clearCurrentUser(){
-    this.localStorageService.clear("Reddah_CurrentUser");
-  }
+    public Locales = [
+        new Locale("zh-CN", "中华人民共和国 (China)"),
+        new Locale("fr-FR", "France"),
+        new Locale("ja-JP", "日本 (Japan)"),
+        new Locale("ko-KR", "대한민국 (Korea)"),
+        new Locale("en-US", "United States"),
+    ];
+  
+    private heroesUrl = 'https://reddah.com/api/webapi/getarticles'; 
+    private userProfileModel: UserProfileModel;
 
-  setCurrentJwt(jwt: string){
-    this.localStorageService.store("Reddah_CurrentJwt",jwt);
-  }
+    getHeroes(loadedIds: Number[], locale: String, menu: String): Observable<Article[]> {
+        this.userProfileModel = new UserProfileModel();
+        this.userProfileModel.LoadedIds = loadedIds;
+        this.userProfileModel.Locale = locale;
+        this.userProfileModel.Menu = menu;
+        this.userProfileModel.Token = "";
+        this.userProfileModel.Sub = "";
+        this.userProfileModel.User = "";
+        this.userProfileModel.Keyword = "";
 
-  getCurrentJwt(){
-    return this.localStorageService.retrieve("Reddah_CurrentJwt");
-  }
+        /*const httpOptions = {
+          headers: new HttpHeaders({ 
+            'Content-Type':'application/json',
+            'Access-Control-Allow-Origin*':'*',
+            'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
+            'Access-Control-Allow-Headers':'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+          }),
+          body: this.userProfileModel
+          
+        };*/
 
-  clearCurrentJwt(){
-    this.localStorageService.clear("Reddah_CurrentJwt");
-  }
+        return this.http.post<Article[]>(this.heroesUrl, this.userProfileModel)//httpOptions)
+          .pipe(
+            tap(heroes => this.log('fetched subs')),
+            catchError(this.handleError('getReddahSubs', []))
+          );
+    }
 
-  getCurrentLocale(){
-    let locale = this.localStorageService.retrieve("Reddah_Locale");
-    if(locale==undefined||locale==null)
-      locale = "en-US";
-    return locale;
-  }
+
+    setCurrentUser(userName: string){
+        this.localStorageService.store("Reddah_CurrentUser",userName);
+    }
+
+    getCurrentUser(){
+        return this.localStorageService.retrieve("Reddah_CurrentUser");
+    }
+
+    clearCurrentUser(){
+        this.localStorageService.clear("Reddah_CurrentUser");
+    }
+
+    setCurrentJwt(jwt: string){
+        this.localStorageService.store("Reddah_CurrentJwt",jwt);
+    }
+
+    getCurrentJwt(){
+        return this.localStorageService.retrieve("Reddah_CurrentJwt");
+    }
+
+    clearCurrentJwt(){
+        this.localStorageService.clear("Reddah_CurrentJwt");
+    }
+
+    getCurrentLocale(){
+        let locale = this.localStorageService.retrieve("Reddah_Locale");
+        if(locale==undefined||locale==null)
+          locale = "en-US";
+        return locale;
+    }
 
 /*
   getHero(id: number): Observable<Hero> {
@@ -433,4 +436,76 @@ export class ReddahService {
         ['😎','😱','😴','👍','👎','💪'],
         ['🙏','😜','😡','😍','👻','💩']
     ];
+
+    appPhoto = {};
+
+    private fileTransfer: FileTransferObject; 
+    toCache(webUrl, cacheKey){
+        webUrl = webUrl.replace("///","https://");
+        let cachedImagePath = this.localStorageService.retrieve(cacheKey);
+        //check if changed or not downloaded, go to download it
+        let webImageName = webUrl.replace("https://login.reddah.com/uploadPhoto/","");
+        let cacheImageName = "";
+        if(cachedImagePath!=null){
+            cacheImageName = cachedImagePath.replace(this.file.applicationStorageDirectory,"");
+        }
+        if(cachedImagePath==null||cacheImageName!=webImageName){
+            this.fileTransfer = this.transfer.create();  
+            let target = this.file.applicationStorageDirectory + webImageName;
+            this.fileTransfer.download(webUrl, target).then((entry) => {
+                this.localStorageService.store(cacheKey, target);
+                this.appPhoto[cacheKey] = (<any>window).Ionic.WebView.convertFileSrc(target);
+            }, (error) => {
+                console.log(JSON.stringify(error));
+            });
+        }
+    } 
+
+    getUserPhotos(userName, opt=null){
+      //check cache first
+      let cachedCoverPath = this.localStorageService.retrieve(`cover_${userName}`);
+      if(cachedCoverPath!=null){
+          this.appPhoto["cover_"+userName] = (<any>window).Ionic.WebView.convertFileSrc(cachedCoverPath);
+          //bug when image not loaded, src width =0
+          this.drawCanvasBackground(cachedCoverPath);
+      }
+      else{
+          this.appPhoto["cover_"+userName] = "assets/icon/timg.jpg";
+      }
+      let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${userName}`);
+      if(cachedCoverPath!=null){
+          this.appPhoto["userphoto_"+userName] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
+      }
+      else{
+          this.appPhoto["userphoto_"+userName] = "assets/icon/anonymous.png";
+      }
+
+      //check from web
+      let formData = new FormData();
+      formData.append("targetUser", userName);
+
+      this.getUserInfo(formData)
+      .subscribe(userInfo => 
+      {
+          if(userInfo.Cover!=null)
+              this.toCache(userInfo.Cover, `cover_${userName}`);
+          
+          if(userInfo.Photo!=null)
+              this.toCache(userInfo.Photo, `userphoto_${userName}`);
+                    
+          if(userInfo.NickName!=null)
+              this.appPhoto["usernickname_"+userName] = userInfo.NickName;
+          if(userInfo.Sex!=null)
+              this.appPhoto["usersex_"+userName] = userInfo.Sex;
+          if(userInfo.Location!=null)
+              this.appPhoto["userlocation_"+userName] = userInfo.Location;
+          if(userInfo.Signature!=null)
+              this.appPhoto["usersignature_"+userName] = userInfo.Signature;
+          if(userInfo.NoteName!=null)
+              this.appPhoto["usernotename_"+userName] = userInfo.NoteName;
+          if(userInfo.UserName!=this.getCurrentUser())
+              this.appPhoto["userisfriend_"+userName] = userInfo.IsFriend?1:0;
+      
+      });
+  }
 }
