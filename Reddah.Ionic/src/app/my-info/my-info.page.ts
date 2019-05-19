@@ -16,14 +16,17 @@ export class MyInfoPage implements OnInit {
 
     constructor(
         private modalController: ModalController,
-        private reddahService: ReddahService,
+        public reddah: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
-    ) { }
+    ) { 
+        this.userName = this.reddah.getCurrentUser();
+    }
 
-    photo: string = "assets/icon/anonymous.png";
-    formData: FormData;
     userName: string;
+    /*photo: string = "assets/icon/anonymous.png";
+    formData: FormData;
+    
     nickName: string;
     sex: number;
     location: string;
@@ -31,20 +34,19 @@ export class MyInfoPage implements OnInit {
     cover: string;
 
     noteName: string;
-    isFriend = -1;
+    isFriend = -1;*/
 
     async ngOnInit() {
-        this.userName = this.reddahService.getCurrentUser();
-        this.getUserInfo();
+        this.reddah.getUserPhotos(this.userName);
     }
 
-    getUserInfo(){
+    /*getUserInfo(){
         this.formData = new FormData();
         this.formData.append("targetUser", this.userName);
 
         let cacheKey = "this.reddah.getUserInfo"+this.userName;
         console.log(`cacheKey:${cacheKey}`);
-        let request = this.reddahService.getUserInfo(this.formData);
+        let request = this.reddah.getUserInfo(this.formData);
 
         this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
             .subscribe(userInfo => 
@@ -61,7 +63,7 @@ export class MyInfoPage implements OnInit {
                 this.noteName = userInfo.NoteName;
             }
         );
-    }
+    }*/
 
 
     async close() {
@@ -82,7 +84,7 @@ export class MyInfoPage implements OnInit {
         const { data } = await userModal.onDidDismiss();
         if(data)
         {
-            this.getUserInfo();
+            this.reddah.getUserPhotos(this.userName);
         }
         this.changed = data;
     }

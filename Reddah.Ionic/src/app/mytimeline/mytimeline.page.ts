@@ -95,7 +95,7 @@ export class MyTimeLinePage implements OnInit {
                     this.reddah.appPhoto["userphoto_"+article.UserName] = "assets/icon/anonymous.png";
                 }
                 if(article.UserPhoto!=null){
-                    this.reddah.toCache(article.UserPhoto, `userphoto_${article.UserName}`);
+                    this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
                 }
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);

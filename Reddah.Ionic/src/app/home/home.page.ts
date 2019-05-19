@@ -8,6 +8,7 @@ import { LocalePage } from '../locale/locale.page';
 import { PostviewerPage } from '../postviewer/postviewer.page';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
+import { MyInfoPage } from '../my-info/my-info.page';
 
 @Component({
     selector: 'app-home',
@@ -22,12 +23,11 @@ export class HomePage implements OnInit {
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
     
     loadData(event) {
-        this.getHeroes();
-
-        console.log('Done');
+        this.getArticles();
         event.target.complete();
     }
 
+    userName: any;
     constructor(public reddah : ReddahService,
         public loadingController: LoadingController,
         public translateService: TranslateService,
@@ -37,24 +37,21 @@ export class HomePage implements OnInit {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
     ){
-        let locale = this.localStorageService.retrieve("Reddah_Locale");
-        console.log(locale);
+        this.userName = this.reddah.getCurrentUser();
     }
 
     async ngOnInit(){
-        let locale = this.localStorageService.retrieve("Reddah_Locale");
+        let locale = this.reddah.getCurrentLocale();
+        this.reddah.getUserPhotos(this.userName);
         if(locale==null){
-            let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
             const changeLocaleModal = await this.modalController.create({
                 component: LocalePage,
-                componentProps: { orgLocale: currentLocale }
+                componentProps: { orgLocale: locale }
             });
             
             await changeLocaleModal.present();
             const { data } = await changeLocaleModal.onDidDismiss();
             if(data){
-                console.log(data)
-                //this.router.navigateByUrl('/tabs/(home:home)');
                 window.location.reload();
             }
         }
@@ -67,38 +64,36 @@ export class HomePage implements OnInit {
         });
         await loading.present();
 
-        let cacheKey = "this.reddah.getHeroes" + JSON.stringify(this.loadedIds) + locale;
-        let request = this.reddah.getHeroes(this.loadedIds, locale, "promoted");
+        let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale;
+        let request = this.reddah.getArticles(this.loadedIds, locale, "promoted");
 
         this.cacheService.loadFromObservable(cacheKey, request)
-        .subscribe(heroes => 
-            {
-                for(let article of heroes){
-                  this.articles.push(article);
-                  this.loadedIds.push(article.Id);  
-                }
-                loading.dismiss();
-            }
-        );
-    }
-  
-    getHeroes():void {
-      let locale = this.localStorageService.retrieve("Reddah_Locale");
-      if(locale==null)
-          locale = "en-US"
-
-      let cacheKey = "this.reddah.getHeroes" + JSON.stringify(this.loadedIds) + locale;
-      let request = this.reddah.getHeroes(this.loadedIds, locale, "promoted");
-
-      this.cacheService.loadFromObservable(cacheKey, request)
-      .subscribe(heroes => 
-          {
-              for(let article of heroes){
+        .subscribe(articles => 
+        {
+            for(let article of articles){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);  
-              }
-          }
-      );
+            }
+            loading.dismiss();
+        });
+    }
+  
+    getArticles():void {
+        let locale = this.localStorageService.retrieve("Reddah_Locale");
+        if(locale==null)
+            locale = "en-US"
+
+        let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale;
+        let request = this.reddah.getArticles(this.loadedIds, locale, "promoted");
+
+        this.cacheService.loadFromObservable(cacheKey, request)
+        .subscribe(articles => 
+        {
+            for(let article of articles){
+            this.articles.push(article);
+            this.loadedIds.push(article.Id);  
+            }
+        });
     }
 
     ionViewDidLoad() {
@@ -119,6 +114,30 @@ export class HomePage implements OnInit {
             console.log(data)
         }
 
+    }
+
+    async myInfo() {
+        const myInfoModal = await this.modalController.create({
+            component: MyInfoPage,
+            componentProps: {  }
+        });
+        
+        await myInfoModal.present();
+        const { data } = await myInfoModal.onDidDismiss();
+        //check if change
+        if(data)
+            this.reddah.getUserPhotos(this.userName);
+    }
+
+    async goSearch(){
+        const userModal = await this.modalController.create({
+            component: MyInfoPage,
+            componentProps: { 
+                userName: ''
+            }
+        });
+          
+        await userModal.present();
     }
 
 }

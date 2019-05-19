@@ -42,10 +42,12 @@ export class CommentComponent implements OnInit {
     init(comments) {
         this.localComments = comments.concat();
         this.totalCommentCount = this.GetCommentCount(this.localComments, -1);
-        //this.localComments.forEach(comment=>{
-        //    comment.CommentCount = this.GetCommentCount(this.localComments, comment.Id);
-        //});
+        this.localComments.forEach(comment=>{
+        //  comment.CommentCount = this.GetCommentCount(this.localComments, comment.Id);
+            this.reddah.getUserPhotos(comment.UserName);
+        });
         this.localComments.sort((a,b)=> b.Id-a.Id); 
+        
     }
 
 

@@ -127,7 +127,7 @@ export class TimeLinePage implements OnInit {
         }
         else if(offset<250 && offset>=150)
         {
-            console.log('start change'+offset)
+            //console.log('start change'+offset)
             let opacity = (offset-150)/100;
             if(opacity<0) opacity=0;
             this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', opacity+'');
@@ -144,9 +144,6 @@ export class TimeLinePage implements OnInit {
             this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
         }
     }
-
-    selectedArticleId: number;
-    selectedCommentId: number;
 
     async viewer(index, imageSrcArray) {
         const modal = await this.modalController.create({

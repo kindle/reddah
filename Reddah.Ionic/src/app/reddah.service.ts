@@ -34,7 +34,7 @@ export class ReddahService {
 
       return this.http.post<any>(this.loginUrl, new UserModel(userName, password))
         .pipe(
-          tap(heroes => this.log('login')),
+          tap(data => this.log('login')),
           catchError(this.handleError('login', []))
         );
     }
@@ -45,7 +45,7 @@ export class ReddahService {
 
       return this.http.post<any>(this.getCommentsUrl, new QueryCommentModel("", articleId))
         .pipe(
-          tap(heroes => this.log('get comments')),
+          tap(data => this.log('get comments')),
           catchError(this.handleError('get comments', []))
         );
     }
@@ -56,7 +56,7 @@ export class ReddahService {
 
       return this.http.post<any>(this.addCommentsUrl, new NewCommentModel(this.getCurrentJwt(), articleId, parentId, content))
         .pipe(
-          tap(heroes => this.log('add comment')),
+          tap(data => this.log('add comment')),
           catchError(this.handleError('add comment', []))
         );
     }
@@ -75,7 +75,7 @@ export class ReddahService {
       };
       return this.http.post<any>(this.addTimelineUrl, formData)
         .pipe(
-          tap(heroes => this.log('add timeline')),
+          tap(data => this.log('add timeline')),
           catchError(this.handleError('add timeline', []))
         );
     }
@@ -176,7 +176,7 @@ export class ReddahService {
       };
       return this.http.post<any>(this.updateUserPhotoUrl, formData)
         .pipe(
-          tap(heroes => this.log('update user photo')),
+          tap(data => this.log('update user photo')),
           catchError(this.handleError('update user photo', []))
         );
     }
@@ -196,10 +196,10 @@ export class ReddahService {
         new Locale("en-US", "United States"),
     ];
   
-    private heroesUrl = 'https://reddah.com/api/webapi/getarticles'; 
+    private articlesUrl = 'https://reddah.com/api/webapi/getarticles'; 
     private userProfileModel: UserProfileModel;
 
-    getHeroes(loadedIds: Number[], locale: String, menu: String): Observable<Article[]> {
+    getArticles(loadedIds: Number[], locale: String, menu: String): Observable<Article[]> {
         this.userProfileModel = new UserProfileModel();
         this.userProfileModel.LoadedIds = loadedIds;
         this.userProfileModel.Locale = locale;
@@ -220,7 +220,7 @@ export class ReddahService {
           
         };*/
 
-        return this.http.post<Article[]>(this.heroesUrl, this.userProfileModel)//httpOptions)
+        return this.http.post<Article[]>(this.articlesUrl, this.userProfileModel)//httpOptions)
           .pipe(
             tap(heroes => this.log('fetched subs')),
             catchError(this.handleError('getReddahSubs', []))
@@ -439,8 +439,13 @@ export class ReddahService {
 
     appPhoto = {};
 
+    appData(cacheKey){
+        let result = this.localStorageService.retrieve(cacheKey);
+        return result==null ? "": result;
+    }
+
     private fileTransfer: FileTransferObject; 
-    toCache(webUrl, cacheKey){
+    toImageCache(webUrl, cacheKey){
         webUrl = webUrl.replace("///","https://");
         let cachedImagePath = this.localStorageService.retrieve(cacheKey);
         //check if changed or not downloaded, go to download it
@@ -461,7 +466,17 @@ export class ReddahService {
         }
     } 
 
-    getUserPhotos(userName, opt=null){
+    toTextCache(text, cacheKey){
+        if(text){
+            let cachedText = this.localStorageService.retrieve(cacheKey);
+            
+            if(cachedText!=text){
+                this.localStorageService.store(cacheKey, text);
+            }
+        }
+    } 
+
+    getUserPhotos(userName){
       //check cache first
       let cachedCoverPath = this.localStorageService.retrieve(`cover_${userName}`);
       if(cachedCoverPath!=null){
@@ -488,23 +503,28 @@ export class ReddahService {
       .subscribe(userInfo => 
       {
           if(userInfo.Cover!=null)
-              this.toCache(userInfo.Cover, `cover_${userName}`);
-          
+              this.toImageCache(userInfo.Cover, `cover_${userName}`);
           if(userInfo.Photo!=null)
-              this.toCache(userInfo.Photo, `userphoto_${userName}`);
+              this.toImageCache(userInfo.Photo, `userphoto_${userName}`);
                     
           if(userInfo.NickName!=null)
-              this.appPhoto["usernickname_"+userName] = userInfo.NickName;
+              this.toTextCache(userInfo.NickName, `usernickname_${userName}`);
+              //this.appPhoto["usernickname_"+userName] = userInfo.NickName;
           if(userInfo.Sex!=null)
-              this.appPhoto["usersex_"+userName] = userInfo.Sex;
+              this.toTextCache(userInfo.Sex, `usersex_${userName}`);
+              //this.appPhoto["usersex_"+userName] = userInfo.Sex;
           if(userInfo.Location!=null)
-              this.appPhoto["userlocation_"+userName] = userInfo.Location;
+              this.toTextCache(userInfo.Location, `userlocation_${userName}`);
+              //this.appPhoto["userlocation_"+userName] = userInfo.Location;
           if(userInfo.Signature!=null)
-              this.appPhoto["usersignature_"+userName] = userInfo.Signature;
+              this.toTextCache(userInfo.Signature, `usersignature_${userName}`);
+              //this.appPhoto["usersignature_"+userName] = userInfo.Signature;
           if(userInfo.NoteName!=null)
-              this.appPhoto["usernotename_"+userName] = userInfo.NoteName;
+              this.toTextCache(userInfo.NoteName, `usernotename_${userName}`);
+              //this.appPhoto["usernotename_"+userName] = userInfo.NoteName;
           if(userInfo.UserName!=this.getCurrentUser())
-              this.appPhoto["userisfriend_"+userName] = userInfo.IsFriend?1:0;
+              this.toTextCache(userInfo.IsFriend?1:0, `userisfriend_${userName}`);
+              //this.appPhoto["userisfriend_"+userName] = userInfo.IsFriend?1:0;
       
       });
   }

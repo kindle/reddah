@@ -230,10 +230,10 @@ export class AddTimelinePage implements OnInit {
         this.prepareData(photo.fileUrl, photo.fileUrl);
 
         //append preview photo form data
-        let orgFileUrl = photo.fileUrl;
-        orgFileUrl = orgFileUrl.substring(orgFileUrl.lastIndexOf('/')+1);
-        let parts = orgFileUrl.split('.');
-        let previewFileName = parts[0] + "_reddah_preview." + parts[1].split('?')[0];
+        let orgFileName = photo.fileUrl.substring(photo.fileUrl.lastIndexOf('/')+1);
+        let fileExtention = orgFileName.substring(orgFileName.lastIndexOf('.'));
+        
+        let previewFileName = orgFileName.replace(fileExtention,"") + "_reddah_preview" + fileExtention;
         let options = {
             uri: photo.fileUrl,
             folderName: 'reddah',
@@ -254,6 +254,7 @@ export class AddTimelinePage implements OnInit {
             ( <FileEntry> entry).file(file => {
                 const reader = new FileReader();
                 reader.onloadend = () => {
+                    //org image data
                     const imgBlob = new Blob([reader.result], {
                         type: file.type
                     });

@@ -13,11 +13,11 @@
         <ion-label>
             <h1>
                 {{userName}}
-                <ion-icon name="ios-person" *ngIf="reddah.appPhoto['usersex_'+userName]==1"></ion-icon>
-                <ion-icon name="ios-person" *ngIf="reddah.appPhoto['usersex_'+userName]==0" color="danger"></ion-icon>
+                <ion-icon name="ios-person" *ngIf="reddah.appData('usersex_'+userName)==1"></ion-icon>
+                <ion-icon name="ios-person" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
             </h1>
-            <p>昵称：{{reddah.appPhoto['usernickname_'+userName]}}</p>
-            <p>地区：{{reddah.appPhoto['userlocation_'+userName]}}</p>
+            <p>昵称：{{reddah.appData('usernickname_'+userName)}}</p>
+            <p>地区：{{reddah.appData('userlocation_'+userName)}}</p>
         </ion-label>
     </ion-item>
     <ion-card>
@@ -29,7 +29,7 @@
     <ion-card>
         <ion-item>
             <span class="itemTitle">个性签名</span>
-            <ion-label text-wrap>{{reddah.appPhoto['usersignature_'+userName]}}</ion-label>
+            <ion-label text-wrap>{{reddah.appData('usersignature_'+userName)}}</ion-label>
         </ion-item>
         <ion-item (click)="viewTimeline()" style="margin: 8px 0;" lines="none">
             <span class="itemTitle">朋友圈</span>
@@ -39,19 +39,19 @@
             <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
         </ion-item>
     </ion-card>
-    <ion-card *ngIf="reddah.appPhoto['userisfriend_'+userName]==1">
+    <ion-card *ngIf="reddah.appData('userisfriend_'+userName)==1">
         <ion-item href="/#">
             <ion-icon name="chatboxes" slot="start"></ion-icon>
             <ion-label>发消息</ion-label>
         </ion-item>
     </ion-card>
-    <ion-card *ngIf="reddah.appPhoto['userisfriend_'+userName]==1">
+    <ion-card *ngIf="reddah.appData('userisfriend_'+userName)==1">
         <ion-item href="/#">
             <ion-icon name="videocam" slot="start"></ion-icon>
             <ion-label>音视频通话</ion-label>
         </ion-item>
     </ion-card>
-    <ion-card *ngIf="reddah.appPhoto['userisfriend_'+userName]==0">
+    <ion-card *ngIf="reddah.appData('userisfriend_'+userName)==0">
         <ion-item (click)="addFriend()">
             <ion-label>添加到通讯录</ion-label>
         </ion-item>
