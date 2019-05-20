@@ -30,11 +30,6 @@ export class TimeLinePage implements OnInit {
     formData: FormData;
 
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
-    
-    loadData(event) {
-        this.getTimeline();
-        event.target.complete();
-    }
 
     async goback(){
         await this.modalController.dismiss();
@@ -57,7 +52,7 @@ export class TimeLinePage implements OnInit {
     }
     
     async ngOnInit(){
-        this.reddah.getUserPhotos(this.userName);
+        this.reddah.getUserPhotos(this.userName, true);
         const loading = await this.loadingController.create({
             message: this.translateService.instant("Article.Loading"),
             spinner: 'circles',
@@ -82,7 +77,7 @@ export class TimeLinePage implements OnInit {
         });
     }
   
-    getTimeline():void {
+    getTimeline(event):void {
         this.formData = new FormData();
         this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
         this.formData.append("targetUser", this.userName);
@@ -98,15 +93,15 @@ export class TimeLinePage implements OnInit {
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
             }
+            if(event)
+                event.target.complete();
         });
 
     }
 
-    ionViewDidLoad() {
-        let locale = this.localStorageService.retrieve("Reddah_Locale");
-        console.log(locale);
+    loadData(event) {
+        this.getTimeline(event);
     }
-
 
     @ViewChild('headerStart')
     headerStart:ElementRef;
@@ -172,17 +167,5 @@ export class TimeLinePage implements OnInit {
         });
         
         await userModal.present();
-    }
-/*
-    async goUser(userName){
-        const userModal = await this.modalController.create({
-            component: UserPage,
-            componentProps: { 
-                userName: userName,
-            },
-        });
-        
-        await userModal.present();
-    }
-*/      
+    }  
 }

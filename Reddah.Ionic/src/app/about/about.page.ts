@@ -17,6 +17,7 @@ import { CacheService } from "ionic-cache";
 import { MyInfoPage } from '../my-info/my-info.page';
 import { StockPage } from '../stock/stock.page';
 import { ImageLoaderService } from 'ionic-image-loader';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
     selector: 'app-about',
@@ -46,7 +47,12 @@ export class AboutPage implements OnInit {
         private cacheService: CacheService,
         private imageLoaderService: ImageLoaderService
     ) {
-        
+    }
+
+    ionViewWillEnter(){
+        if (cordova.platformId == 'android') {
+            StatusBar.backgroundColorByHexString("#ffffff");
+        }
     }
 
     ngOnInit() {

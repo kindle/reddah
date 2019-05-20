@@ -9,6 +9,7 @@ import { PostviewerPage } from '../postviewer/postviewer.page';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { MyInfoPage } from '../my-info/my-info.page';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
     selector: 'app-home',
@@ -36,9 +37,14 @@ export class HomePage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
     }
 
-    async ngOnInit(){
-        this.reddah.getUserPhotos(this.userName);
+    ionViewWillEnter(){
+        if (cordova.platformId == 'android') {
+            StatusBar.backgroundColorByHexString("#eeeeee");
+        }
+    }
 
+    async ngOnInit(){
+        //this.reddah.getUserPhotos(this.userName);
         let locale = this.reddah.getCurrentLocale();
         
         if(locale==null){
@@ -74,45 +80,42 @@ export class HomePage implements OnInit {
         });
     }
   
-    getArticles():void {
+    getArticles(event):void {
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         if(locale==null)
             locale = "en-US"
 
         let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale;
         let request = this.reddah.getArticles(this.loadedIds, locale, "promoted");
-alert(cacheKey);
+
         this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
         .subscribe(articles => 
         {
-            alert(JSON.stringify(articles));
             for(let article of articles){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);  
             }
+            if(event)
+                event.target.complete();
         });
     }    
 
-    clearCacheAndReload(){
+    clearCacheAndReload(event){
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("HomePage");
-        this.getArticles();
+        this.getArticles(event);
     }
 
     //drag down
     doRefresh(event) {
-        console.log('Begin async operation');
-    
         setTimeout(() => {
-            this.clearCacheAndReload();
-            event.target.complete();
+            this.clearCacheAndReload(event);
         }, 2000);
     }
 
     //drag up
     loadData(event) {
-        this.getArticles();
-        event.target.complete();
+        this.getArticles(event);
     }
     
     async view(article: Article){
@@ -142,15 +145,5 @@ alert(cacheKey);
             this.reddah.getUserPhotos(this.userName);
     }
 
-    async goSearch(){
-        const userModal = await this.modalController.create({
-            component: MyInfoPage,
-            componentProps: { 
-                userName: ''
-            }
-        });
-          
-        await userModal.present();
-    }
 
 }

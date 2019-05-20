@@ -14,9 +14,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleTextPopPage } from '../article-pop/article-text-pop.page'
 import { ChangeCoverPopPage } from '../article-pop/change-cover-pop.page'
 import { AddTimelinePage } from '../add-timeline/add-timeline.page'
-import { CacheResult } from '../UserModel'
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
     selector: 'app-mytimeline',
@@ -36,8 +36,7 @@ export class MyTimeLinePage implements OnInit {
     @ViewChild('pageTop') pageTop: Content;
         
     loadData(event) {
-        this.getMyTimeline();
-        event.target.complete();
+        this.getMyTimeline(event);
     }
 
     goback(){
@@ -63,7 +62,7 @@ export class MyTimeLinePage implements OnInit {
     }
     
     async ngOnInit(){
-        this.reddah.getUserPhotos(this.userName);
+        this.reddah.getUserPhotos(this.userName, true);
 
         const loading = await this.loadingController.create({
             message: this.translateService.instant("Article.Loading"),
@@ -105,7 +104,7 @@ export class MyTimeLinePage implements OnInit {
         });
     }
   
-    getMyTimeline():void {
+    getMyTimeline(event):void {
         this.formData = new FormData();
         this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
         
@@ -120,23 +119,24 @@ export class MyTimeLinePage implements OnInit {
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
             }
+            if(event)
+                event.target.complete();
         });
 
     }
 
-    clearCacheAndReload(){
+    clearCacheAndReload(event){
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("MyTimeLinePage");
-        this.ngOnInit();
+        this.getMyTimeline(event);
     }
 
     doRefresh(event) {
-        console.log('Begin async operation');
-    
         setTimeout(() => {
-            this.clearCacheAndReload();
-            event.target.complete();
+            this.clearCacheAndReload(event);
         }, 2000);
+        //debug 
+        //this.reddah.drawCanvasBackground("");
     }
 
     @ViewChild('headerStart')
@@ -208,7 +208,7 @@ export class MyTimeLinePage implements OnInit {
         await postModal.present();
         const { data } = await postModal.onDidDismiss();
         if(data){
-            this.clearCacheAndReload();
+            this.clearCacheAndReload(null);
         }
     }
 
@@ -408,7 +408,7 @@ export class MyTimeLinePage implements OnInit {
         await popover.present();
         const { data } = await popover.onDidDismiss();
         if(data)
-            this.reddah.getUserPhotos(this.userName);
+            this.reddah.getUserPhotos(this.userName, true);
     }
 
     GetCache(url){

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular'
 import { ScanPage } from '../scan/scan.page';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
   selector: 'app-find',
@@ -12,6 +13,12 @@ export class FindPage {
         private modalController: ModalController,
     ){}
 
+    ionViewWillEnter(){
+        if (cordova.platformId == 'android') {
+            StatusBar.backgroundColorByHexString("#eeeeee");
+        }
+    }
+    
     async startScanner(){
         const scanModal = await this.modalController.create({
             component: ScanPage,

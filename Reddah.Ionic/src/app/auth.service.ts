@@ -11,27 +11,27 @@ export class AuthService {
     private reddahService: ReddahService){}
 
   authenticated(): boolean {
-    let currentUser = this.reddahService.getCurrentUser();
-    return currentUser!=null;
+      let currentUser = this.reddahService.getCurrentUser();
+      return currentUser!=null;
   } ;  
 
   // store the URL so we can redirect after logging in
   redirectUrl: string;
 
   async login() {
-    const loginModal = await this.modalController.create({
-      component: LoginPage,
-      componentProps: { url: '' }
-    });
-    
-    await loginModal.present();
-    const { data } = await loginModal.onDidDismiss();
-    if(data){
-        //this.router.navigateByUrl('/tabs/(home:home)');
-        //window.location.reload();
-        this.exactToken(data);
-    }
-    return false;
+      const loginModal = await this.modalController.create({
+        component: LoginPage,
+        componentProps: { url: '' }
+      });
+      
+      await loginModal.present();
+      const { data } = await loginModal.onDidDismiss();
+      if(data){
+          //this.router.navigateByUrl('/tabs/(home:home)');
+          //window.location.reload();
+          this.exactToken(data);
+      }
+      return false;
   }
 
 

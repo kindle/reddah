@@ -14,18 +14,23 @@ import { HomePageModule } from '../home/home.module';
 
 import { TranslateModule } from '@ngx-translate/core';
 
+
 @NgModule({
   imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    TabsPageRoutingModule,
-    HomePageModule,
-    AboutPageModule,
-    FindPageModule,
-    ContactPageModule,
-    TranslateModule.forChild(),
+      IonicModule,
+      CommonModule,
+      FormsModule,
+      TabsPageRoutingModule,
+      HomePageModule,
+      AboutPageModule,
+      FindPageModule,
+      ContactPageModule,
+      TranslateModule.forChild(),
   ],
-  declarations: [TabsPage]
+  declarations: [
+      TabsPage,
+  ],
+  exports:[
+  ]
 })
 export class TabsPageModule {}

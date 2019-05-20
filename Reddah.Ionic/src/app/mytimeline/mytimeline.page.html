@@ -1,13 +1,13 @@
 <ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop>
     <div class="headerStart" #headerStart>
-        <ion-item color="transparent" no-padding lines="none" (dblclick)="clearCacheAndReload()">
+        <ion-item color="transparent" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
             <ion-icon name="ios-arrow-back" slot="start" (click)="goback()" class="backbutton"></ion-icon>
             <ion-label></ion-label>
             <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll>
-        <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload()">
+        <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload($event)">
             <ion-icon name="ios-arrow-back" slot="start" (click)="goback()" class="backbutton"></ion-icon>
             <ion-label>好友圈</ion-label>
             <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
@@ -15,7 +15,7 @@
     </div>
     <div> 
         <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-            <ion-refresher-content></ion-refresher-content>
+            <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>
         </ion-refresher>  
         <div class="timelineCover" #timelineCover>
             <img src="{{reddah.appPhoto['cover_'+userName]}}" (click)="changeCover()">

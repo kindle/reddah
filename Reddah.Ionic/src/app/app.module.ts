@@ -64,6 +64,7 @@ import { CommentReplyPage } from './comment-reply/comment-reply.page';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { AutoresizeDirective } from './autoresize-textarea.directive';
 import { CommentBoxComponent } from './comment-box/comment-box.component';
+import { SearchPage } from './search/search.page';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { CommentBoxComponent } from './comment-box/comment-box.component';
       CommentReplyPage,
       AutoresizeDirective,
       CommentBoxComponent,
+      SearchPage,
   ],
   entryComponents: [
       LocalePage,
@@ -121,6 +123,7 @@ import { CommentBoxComponent } from './comment-box/comment-box.component';
       AddTimelinePage,
       StockPage,
       CommentReplyPage,
+      SearchPage,
   ],
   imports: [
       BrowserModule, 
@@ -135,11 +138,11 @@ import { CommentBoxComponent } from './comment-box/comment-box.component';
       NgxWebstorageModule.forRoot(),
       DragulaModule.forRoot(),
       TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient]
-        }
+          loader: {
+              provide: TranslateLoader,
+              useFactory: HttpLoaderFactory,
+              deps: [HttpClient]
+          }
   })
   ],
   exports:[

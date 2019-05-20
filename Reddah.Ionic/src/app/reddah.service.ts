@@ -32,10 +32,10 @@ export class ReddahService {
 
     login(userName: string, password: string): Observable<any> {
 
-      return this.http.post<any>(this.loginUrl, new UserModel(userName, password))
+        return this.http.post<any>(this.loginUrl, new UserModel(userName, password))
         .pipe(
-          tap(data => this.log('login')),
-          catchError(this.handleError('login', []))
+            tap(data => this.log('login')),
+            catchError(this.handleError('login', []))
         );
     }
     //******************************** */
@@ -43,10 +43,10 @@ export class ReddahService {
 
     getComments(articleId: number): Observable<any> {
 
-      return this.http.post<any>(this.getCommentsUrl, new QueryCommentModel("", articleId))
+        return this.http.post<any>(this.getCommentsUrl, new QueryCommentModel("", articleId))
         .pipe(
-          tap(data => this.log('get comments')),
-          catchError(this.handleError('get comments', []))
+            tap(data => this.log('get comments')),
+            catchError(this.handleError('get comments', []))
         );
     }
     //******************************** */
@@ -54,10 +54,10 @@ export class ReddahService {
 
     addComments(articleId: number, parentId: number, content: string): Observable<any> {
 
-      return this.http.post<any>(this.addCommentsUrl, new NewCommentModel(this.getCurrentJwt(), articleId, parentId, content))
+        return this.http.post<any>(this.addCommentsUrl, new NewCommentModel(this.getCurrentJwt(), articleId, parentId, content))
         .pipe(
-          tap(data => this.log('add comment')),
-          catchError(this.handleError('add comment', []))
+            tap(data => this.log('add comment')),
+            catchError(this.handleError('add comment', []))
         );
     }
     //******************************** */
@@ -68,27 +68,27 @@ export class ReddahService {
       formData.append('jwt', this.getCurrentJwt());
       const httpOptions = {
           headers: new HttpHeaders({
-            //'enctype': 'multipart/form-data; boundary=----WebKitFormBoundaryuL67FWkv1CA',
-            'Content-Type': 'multipart/form-data', 
-            'Accept': 'application/json',
+              //'enctype': 'multipart/form-data; boundary=----WebKitFormBoundaryuL67FWkv1CA',
+              'Content-Type': 'multipart/form-data', 
+              'Accept': 'application/json',
           })
       };
       return this.http.post<any>(this.addTimelineUrl, formData)
-        .pipe(
+      .pipe(
           tap(data => this.log('add timeline')),
           catchError(this.handleError('add timeline', []))
-        );
+      );
     }
     //******************************** */
     private getMyTimelineUrl = 'https://login.reddah.com/api/article/getmytimeline'; 
 
     getMyTimeline(formData: FormData): Observable<any> {
 
-      formData.append('jwt', this.getCurrentJwt());
-      return this.http.post<any>(this.getMyTimelineUrl, formData)
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getMyTimelineUrl, formData)
         .pipe(
-          tap(data => this.log('get my timeline')),
-          catchError(this.handleError('get my timeline', []))
+            tap(data => this.log('get my timeline')),
+            catchError(this.handleError('get my timeline', []))
         );
     }
     //******************************** */
@@ -96,11 +96,11 @@ export class ReddahService {
 
     getTimeline(formData: FormData): Observable<any> {
 
-      formData.append('jwt', this.getCurrentJwt());
-      return this.http.post<any>(this.getTimelineUrl, formData)
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getTimelineUrl, formData)
         .pipe(
-          tap(data => this.log('get timeline')),
-          catchError(this.handleError('get timeline', []))
+            tap(data => this.log('get timeline')),
+            catchError(this.handleError('get timeline', []))
         );
     }
     //******************************** */
@@ -108,22 +108,22 @@ export class ReddahService {
 
     getUserInfo(formData: FormData): Observable<any> {
 
-      formData.append('jwt', this.getCurrentJwt());
-      return this.http.post<any>(this.getUserInfoUrl, formData)
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getUserInfoUrl, formData)
         .pipe(
-          tap(data => this.log('get user info')),
-          catchError(this.handleError('get user info', []))
+            tap(data => this.log('get user info')),
+            catchError(this.handleError('get user info', []))
         );
     }
     //******************************** */
     private timelineLikeUrl = 'https://login.reddah.com/api/article/like'; 
 
     like(formData: FormData): Observable<any> {
-      formData.append('jwt', this.getCurrentJwt());
-      return this.http.post<any>(this.timelineLikeUrl, formData)
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.timelineLikeUrl, formData)
         .pipe(
-          tap(data => this.log('set like')),
-          catchError(this.handleError('set like', []))
+            tap(data => this.log('set like')),
+            catchError(this.handleError('set like', []))
         );
     }
     //******************************** */
@@ -131,11 +131,11 @@ export class ReddahService {
 
     addFriend(formData: FormData): Observable<any> {
 
-      formData.append('jwt', this.getCurrentJwt());
-      return this.http.post<any>(this.addFriendUrl, formData)
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.addFriendUrl, formData)
         .pipe(
-          tap(data => this.log('add friend')),
-          catchError(this.handleError('add friend', []))
+            tap(data => this.log('add friend')),
+            catchError(this.handleError('add friend', []))
         );
     }
     //******************************** */
@@ -143,11 +143,11 @@ export class ReddahService {
 
     approveFriend(formData: FormData): Observable<any> {
 
-      formData.append('jwt', this.getCurrentJwt());
-      return this.http.post<any>(this.approveFriendUrl, formData)
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.approveFriendUrl, formData)
         .pipe(
-          tap(data => this.log('approve friend')),
-          catchError(this.handleError('approve friend', []))
+            tap(data => this.log('approve friend')),
+            catchError(this.handleError('approve friend', []))
         );
     }
     //******************************** */
@@ -155,11 +155,11 @@ export class ReddahService {
 
     friendRequests(formData: FormData): Observable<any> {
 
-      formData.append('jwt', this.getCurrentJwt());
-      return this.http.post<any>(this.friendRequestsUrl, formData)
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.friendRequestsUrl, formData)
         .pipe(
-          tap(data => this.log('get friend requests')),
-          catchError(this.handleError('get friend requests', []))
+            tap(data => this.log('get friend requests')),
+            catchError(this.handleError('get friend requests', []))
         );
     }
     //******************************** */
@@ -167,17 +167,17 @@ export class ReddahService {
 
     updateUserPhoto(formData: FormData): Observable<any> {
 
-      formData.append('jwt', this.getCurrentJwt());
-      const httpOptions = {
-          headers: new HttpHeaders({
-            'Content-Type': 'multipart/form-data', 
-            'Accept': 'application/json',
-          })
-      };
-      return this.http.post<any>(this.updateUserPhotoUrl, formData)
+        formData.append('jwt', this.getCurrentJwt());
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'multipart/form-data', 
+                'Accept': 'application/json',
+            })
+        };
+        return this.http.post<any>(this.updateUserPhotoUrl, formData)
         .pipe(
-          tap(data => this.log('update user photo')),
-          catchError(this.handleError('update user photo', []))
+            tap(data => this.log('update user photo')),
+            catchError(this.handleError('update user photo', []))
         );
     }
     //******************************** */
@@ -221,10 +221,10 @@ export class ReddahService {
         };*/
 
         return this.http.post<Article[]>(this.articlesUrl, this.userProfileModel)//httpOptions)
-          .pipe(
-              tap(data => this.log('fetched subs')),
-              catchError(this.handleError('getReddahSubs', []))
-          );
+        .pipe(
+            tap(data => this.log('fetched subs')),
+            catchError(this.handleError('getReddahSubs', []))
+        );
     }
 
 
@@ -255,7 +255,7 @@ export class ReddahService {
     getCurrentLocale(){
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         if(locale==undefined||locale==null)
-          locale = "en-US";
+            locale = "en-US";
         return locale;
     }
 
@@ -267,16 +267,16 @@ export class ReddahService {
      * @param result - optional value to return as the observable result
    */
     private handleError<T> (operation = 'operation', result?: T) {
-      return (error: any): Observable<T> => {
-        // TODO: send the error to remote logging infrastructure
-        console.error(error); // log to console instead
+        return (error: any): Observable<T> => {
+            // TODO: send the error to remote logging infrastructure
+            console.error(error); // log to console instead
 
-        // TODO: better job of transforming error for user consumption
-        this.log(`${operation} failed: ${error.message}`);
+            // TODO: better job of transforming error for user consumption
+            this.log(`${operation} failed: ${error.message}`);
 
-        // Let the app keep running by returning an empty result.
-        return of(result as T);
-      };
+            // Let the app keep running by returning an empty result.
+            return of(result as T);
+        };
     }
 
 
@@ -286,21 +286,21 @@ export class ReddahService {
     options: any;
     //d表示日线，m表示月线，w表示周线
     getStock(stock:string, period='d'): Observable<any> {
-      let sohuStockApi = `https://q.stock.sohu.com/hisHq?code=cn_${stock}&start=19900716&end=20200720&stat=1&order=A&period=${period}&rt=jsonp`; 
-        console.log(sohuStockApi);
+        let sohuStockApi = `https://q.stock.sohu.com/hisHq?code=cn_${stock}&start=19900716&end=20200720&stat=1&order=A&period=${period}&rt=jsonp`; 
+          console.log(sohuStockApi);
 
-      const searchParams = new URLSearchParams();
-      searchParams.append('callback', 'JSONP_CALLBACK');
-      if (!this.options) {
-        this.options = {headers: new Headers()};
-      }
-      this.options.headers.set('Content-Type', 'application/json:charset=UTF-8');
-      this.options.params = searchParams;
+        const searchParams = new URLSearchParams();
+        searchParams.append('callback', 'JSONP_CALLBACK');
+        if (!this.options) {
+          this.options = {headers: new Headers()};
+        }
+        this.options.headers.set('Content-Type', 'application/json:charset=UTF-8');
+        this.options.params = searchParams;
 
-      return this.jsonp.get(sohuStockApi, this.options).pipe(
-          tap(data => this.log('get stock')),
-          catchError(this.handleError('get stock', []))
-      );
+        return this.jsonp.get(sohuStockApi, this.options).pipe(
+            tap(data => this.log('get stock')),
+            catchError(this.handleError('get stock', []))
+        );
     } 
     
     //******************************** */
@@ -311,15 +311,21 @@ export class ReddahService {
     //util functions
     //share with my timeline & user timeline
     drawCanvasBackground(src){
+
+        //src="assets/icon/timg.jpg";
+        //src= (<any>window).Ionic.WebView.convertFileSrc(src);
+
         //cavas use local path, web url has cors issue.
         var p = document.getElementById("mycontent");
         
         var canvas = document.createElement('canvas');
         var context = canvas.getContext("2d");
-        var img = new Image(200,3);
+        var img = new Image(3000,3);
         img.src = src;
         context.drawImage(img, 0, 0);
-        var imgData = context.getImageData(0, 0, img.width, 3);
+        var imgData = context.getImageData(1, 1, img.width, 3);
+        console.log(imgData.data)
+console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         
         var canvas1 = document.createElement('canvas');
         canvas1.style.position = "absolute";
@@ -344,20 +350,20 @@ export class ReddahService {
     }
 
     subpost(str: string, n: number) {
-      var r = /[^\u4e00-\u9fa5]/g;
-      if (str.replace(r, "mm").length <= n) { return str; }
-      var m = Math.floor(n/2);
-      for (var i = m; i < str.length; i++) {
-          if (str.substr(0, i).replace(r, "mm").length >= n) {
-              return str.substr(0, i) + "...";
-          }
-      }
-      return str;
+        var r = /[^\u4e00-\u9fa5]/g;
+        if (str.replace(r, "mm").length <= n) { return str; }
+        var m = Math.floor(n/2);
+        for (var i = m; i < str.length; i++) {
+            if (str.substr(0, i).replace(r, "mm").length >= n) {
+                return str.substr(0, i) + "...";
+            }
+        }
+        return str;
     }
 
     summary(str: string, n: number) {
-      str = this.htmlDecode(str).replace(/<[^>]+>/g, "");
-      return this.subpost(str, n);
+        str = this.htmlDecode(str).replace(/<[^>]+>/g, "");
+        return this.subpost(str, n);
     }
 
     playVideo(id: string) {
@@ -386,7 +392,26 @@ export class ReddahService {
 
     appData(cacheKey){
         let result = this.localStorageService.retrieve(cacheKey);
-        return result==null ? "": result;
+        
+        if(cacheKey.indexOf('userphoto_')>-1){
+            if(result){
+                return (<any>window).Ionic.WebView.convertFileSrc(result);
+            }
+            else{
+                return "assets/icon/anonymous.png";
+            }
+        }
+        else if(cacheKey.indexOf('usercover_')>-1){
+            if(result){
+                return (<any>window).Ionic.WebView.convertFileSrc(result);
+            }
+            else{
+                return "assets/icon/timg.jpg";
+            }
+        }
+        else{//pure text
+            return result==null ? "": result;
+        }
     }
 
     private fileTransfer: FileTransferObject; 
@@ -407,7 +432,6 @@ export class ReddahService {
                 this.appPhoto[cacheKey] = (<any>window).Ionic.WebView.convertFileSrc(target);
             }, (error) => {
                 console.log(JSON.stringify(error));
-                alert(JSON.stringify(error));
             });
         }
     } 
@@ -422,58 +446,58 @@ export class ReddahService {
         }
     } 
 
-    getUserPhotos(userName){
+    getUserPhotos(userName, isTimeline=false){
         if(userName==null)
             return;
-        //check cache first
-        let cachedCoverPath = this.localStorageService.retrieve(`cover_${userName}`);
-        if(cachedCoverPath!=null){
-            this.appPhoto["cover_"+userName] = (<any>window).Ionic.WebView.convertFileSrc(cachedCoverPath);
-            //bug when image not loaded, src width =0
-            this.drawCanvasBackground(cachedCoverPath);
-        }
-        else{
-            this.appPhoto["cover_"+userName] = "assets/icon/timg.jpg";
-        }
-        let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${userName}`);
-        if(cachedCoverPath!=null){
-            this.appPhoto["userphoto_"+userName] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
-        }
-        else{
-            this.appPhoto["userphoto_"+userName] = "assets/icon/anonymous.png";
-        }
+        try{
+            //check cache first
+            let cachedCoverPath = this.localStorageService.retrieve(`cover_${userName}`);
+            if(cachedCoverPath!=null){
+                this.appPhoto["cover_"+userName] = (<any>window).Ionic.WebView.convertFileSrc(cachedCoverPath);
+                //bug when image not loaded, src width =0
+                if(isTimeline)
+                    this.drawCanvasBackground(cachedCoverPath);
+            }
+            else{
+                this.appPhoto["cover_"+userName] = "assets/icon/timg.jpg";
+            }
+            let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${userName}`);
+            if(cachedCoverPath!=null){
+                this.appPhoto["userphoto_"+userName] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
+            }
+            else{
+                this.appPhoto["userphoto_"+userName] = "assets/icon/anonymous.png";
+            }
 
-        //check from web
-        let formData = new FormData();
-        formData.append("targetUser", userName);
+            //check from web
+            let formData = new FormData();
+            formData.append("targetUser", userName);
 
-        this.getUserInfo(formData)
-        .subscribe(userInfo => 
-        {
-            if(userInfo.Cover!=null)
-                this.toImageCache(userInfo.Cover, `cover_${userName}`);
-            if(userInfo.Photo!=null)
-                this.toImageCache(userInfo.Photo, `userphoto_${userName}`);
-                      
-            if(userInfo.NickName!=null)
-                this.toTextCache(userInfo.NickName, `usernickname_${userName}`);
-                //this.appPhoto["usernickname_"+userName] = userInfo.NickName;
-            if(userInfo.Sex!=null)
-                this.toTextCache(userInfo.Sex, `usersex_${userName}`);
-                //this.appPhoto["usersex_"+userName] = userInfo.Sex;
-            if(userInfo.Location!=null)
-                this.toTextCache(userInfo.Location, `userlocation_${userName}`);
-                //this.appPhoto["userlocation_"+userName] = userInfo.Location;
-            if(userInfo.Signature!=null)
-                this.toTextCache(userInfo.Signature, `usersignature_${userName}`);
-                //this.appPhoto["usersignature_"+userName] = userInfo.Signature;
-            if(userInfo.NoteName!=null)
-                this.toTextCache(userInfo.NoteName, `usernotename_${userName}`);
-                //this.appPhoto["usernotename_"+userName] = userInfo.NoteName;
-            if(userInfo.UserName!=this.getCurrentUser())
-                this.toTextCache(userInfo.IsFriend?1:0, `userisfriend_${userName}`);
-                //this.appPhoto["userisfriend_"+userName] = userInfo.IsFriend?1:0;
-        
-        });
+            this.getUserInfo(formData)
+            .subscribe(userInfo => 
+            {
+                if(userInfo.Cover!=null)
+                    this.toImageCache(userInfo.Cover, `cover_${userName}`);
+                if(userInfo.Photo!=null)
+                    this.toImageCache(userInfo.Photo, `userphoto_${userName}`);
+                          
+                if(userInfo.NickName!=null)
+                    this.toTextCache(userInfo.NickName, `usernickname_${userName}`);
+                if(userInfo.Sex!=null)
+                    this.toTextCache(userInfo.Sex, `usersex_${userName}`);
+                if(userInfo.Location!=null)
+                    this.toTextCache(userInfo.Location, `userlocation_${userName}`);
+                if(userInfo.Signature!=null)
+                    this.toTextCache(userInfo.Signature, `usersignature_${userName}`);
+                if(userInfo.NoteName!=null)
+                    this.toTextCache(userInfo.NoteName, `usernotename_${userName}`);
+                if(userInfo.UserName!=this.getCurrentUser())
+                    this.toTextCache(userInfo.IsFriend?1:0, `userisfriend_${userName}`);
+            
+            });
+        }
+        catch(error){
+            alert(error)
+        }
   }
 }

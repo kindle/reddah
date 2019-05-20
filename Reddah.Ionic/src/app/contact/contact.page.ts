@@ -4,7 +4,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { NewFriendPage } from '../new-friend/new-friend.page';
-
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
     selector: 'app-contact',
@@ -13,24 +13,30 @@ import { NewFriendPage } from '../new-friend/new-friend.page';
 })
 export class ContactPage {
 
-  requestCount: number;
+    requestCount: number;
 
-  constructor(
-      public localStorageService: LocalStorageService,
-      public modalController: ModalController,
-      public navController: NavController,
-      public router: Router)
-  {
-      this.requestCount=2;
-  }
+    constructor(
+        public localStorageService: LocalStorageService,
+        public modalController: ModalController,
+        public navController: NavController,
+        public router: Router)
+    {
+        this.requestCount=2;
+    }
   
-  async viewNewFriends(){
-      const newFriendModal = await this.modalController.create({
-          component: NewFriendPage,
-          componentProps: {  }
-      });
-        
-      await newFriendModal.present();
-  }
+    ionViewWillEnter(){
+        if (cordova.platformId == 'android') {
+            StatusBar.backgroundColorByHexString("#eeeeee");
+        }
+    }
+
+    async viewNewFriends(){
+        const newFriendModal = await this.modalController.create({
+            component: NewFriendPage,
+            componentProps: {  }
+        });
+            
+        await newFriendModal.present();
+    }
 
 }
