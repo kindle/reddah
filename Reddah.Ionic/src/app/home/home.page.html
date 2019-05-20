@@ -1,10 +1,13 @@
 <ion-item color="transparent" no-padding lines="none">
-    <ion-avatar class="backbutton" (click)="myInfo()">
+    <ion-avatar class="header" (click)="myInfo()">
         <img src="{{reddah.appPhoto['userphoto_'+userName]}}">
     </ion-avatar>
     <ion-searchbar no-border placeholder="查点什么..." (click)="goSearch()"></ion-searchbar>
 </ion-item>
-<ion-content>
+<ion-content #pageTop>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>  
     <ng-template ngFor let-article [ngForOf]="articles">
         <ion-card class="welcome-card" (click)="view(article)">
             <video id="video_{{article.Id}}" (click)="reddah.playVideo(article.Id)" src="{{article.VideoUrl}}"

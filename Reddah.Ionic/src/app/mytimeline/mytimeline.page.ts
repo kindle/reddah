@@ -114,14 +114,13 @@ export class MyTimeLinePage implements OnInit {
         let request = this.reddah.getMyTimeline(this.formData);
         
         this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
-            .subscribe(timeline => 
-            {
-                for(let article of timeline){
-                    this.articles.push(article);
-                    this.loadedIds.push(article.Id);
-                }
+        .subscribe(timeline => 
+        {
+            for(let article of timeline){
+                this.articles.push(article);
+                this.loadedIds.push(article.Id);
             }
-        );
+        });
 
     }
 
@@ -139,12 +138,6 @@ export class MyTimeLinePage implements OnInit {
             event.target.complete();
         }, 2000);
     }
-
-    ionViewDidLoad() {
-        let locale = this.localStorageService.retrieve("Reddah_Locale");
-        console.log(locale);
-    }
-
 
     @ViewChild('headerStart')
     headerStart:ElementRef;

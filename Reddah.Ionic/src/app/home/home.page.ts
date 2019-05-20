@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { InfiniteScroll } from '@ionic/angular';
+import { InfiniteScroll, Content } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../article';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -17,16 +17,12 @@ import { MyInfoPage } from '../my-info/my-info.page';
 })
 export class HomePage implements OnInit {
 
-    articles: Article[];
-    loadedIds: Number[];
+    articles = [];
+    loadedIds = [];
 
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
+    @ViewChild('pageTop') pageTop: Content;
     
-    loadData(event) {
-        this.getArticles();
-        event.target.complete();
-    }
-
     userName: any;
     constructor(public reddah : ReddahService,
         public loadingController: LoadingController,
@@ -41,8 +37,10 @@ export class HomePage implements OnInit {
     }
 
     async ngOnInit(){
-        let locale = this.reddah.getCurrentLocale();
         this.reddah.getUserPhotos(this.userName);
+
+        let locale = this.reddah.getCurrentLocale();
+        
         if(locale==null){
             const changeLocaleModal = await this.modalController.create({
                 component: LocalePage,
@@ -55,9 +53,7 @@ export class HomePage implements OnInit {
                 window.location.reload();
             }
         }
-
-        this.articles = [];
-        this.loadedIds = [];
+        
         const loading = await this.loadingController.create({
             message: this.translateService.instant("Article.Loading"),
             spinner: 'circles',
@@ -67,7 +63,7 @@ export class HomePage implements OnInit {
         let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale;
         let request = this.reddah.getArticles(this.loadedIds, locale, "promoted");
 
-        this.cacheService.loadFromObservable(cacheKey, request)
+        this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
         .subscribe(articles => 
         {
             for(let article of articles){
@@ -85,22 +81,39 @@ export class HomePage implements OnInit {
 
         let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale;
         let request = this.reddah.getArticles(this.loadedIds, locale, "promoted");
-
-        this.cacheService.loadFromObservable(cacheKey, request)
+alert(cacheKey);
+        this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
         .subscribe(articles => 
         {
+            alert(JSON.stringify(articles));
             for(let article of articles){
-            this.articles.push(article);
-            this.loadedIds.push(article.Id);  
+                this.articles.push(article);
+                this.loadedIds.push(article.Id);  
             }
         });
+    }    
+
+    clearCacheAndReload(){
+        this.pageTop.scrollToTop();
+        this.cacheService.clearGroup("HomePage");
+        this.getArticles();
     }
 
-    ionViewDidLoad() {
-        let locale = this.localStorageService.retrieve("Reddah_Locale");
-        console.log(locale);
-    }
+    //drag down
+    doRefresh(event) {
+        console.log('Begin async operation');
     
+        setTimeout(() => {
+            this.clearCacheAndReload();
+            event.target.complete();
+        }, 2000);
+    }
+
+    //drag up
+    loadData(event) {
+        this.getArticles();
+        event.target.complete();
+    }
     
     async view(article: Article){
         const viewerModal = await this.modalController.create({

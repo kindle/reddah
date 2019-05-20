@@ -221,6 +221,7 @@ export class AddTimelinePage implements OnInit {
             this.addPhotoToFormData(data);
         }, (err) => {
             console.log(JSON.stringify(err));
+            alert(JSON.stringify(err));
         });
         
     }
@@ -232,8 +233,10 @@ export class AddTimelinePage implements OnInit {
         //append preview photo form data
         let orgFileName = photo.fileUrl.substring(photo.fileUrl.lastIndexOf('/')+1);
         let fileExtention = orgFileName.substring(orgFileName.lastIndexOf('.'));
-        
-        let previewFileName = orgFileName.replace(fileExtention,"") + "_reddah_preview" + fileExtention;
+        //remove ?****
+        let removdQFileExtention = fileExtention.replace(fileExtention.substring(fileExtention.lastIndexOf('?')),"");
+        let previewFileName = orgFileName.replace(fileExtention,"") + "_reddah_preview" + removdQFileExtention;
+        //alert(photo.fileUrl+"_"+previewFileName);
         let options = {
             uri: photo.fileUrl,
             folderName: 'reddah',
