@@ -37,12 +37,6 @@ export class HomePage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
     }
 
-    ionViewWillEnter(){
-        if (cordova.platformId == 'android') {
-            StatusBar.backgroundColorByHexString("#eeeeee");
-        }
-    }
-
     async ngOnInit(){
         //this.reddah.getUserPhotos(this.userName);
         let locale = this.reddah.getCurrentLocale();

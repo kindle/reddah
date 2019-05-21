@@ -11,14 +11,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 export class FindPage {
     constructor(
         private modalController: ModalController,
-    ){}
-
-    ionViewWillEnter(){
-        if (cordova.platformId == 'android') {
-            StatusBar.backgroundColorByHexString("#eeeeee");
-        }
+    ){
     }
-    
+
     async startScanner(){
         const scanModal = await this.modalController.create({
             component: ScanPage,

@@ -23,12 +23,6 @@ export class ContactPage {
     {
         this.requestCount=2;
     }
-  
-    ionViewWillEnter(){
-        if (cordova.platformId == 'android') {
-            StatusBar.backgroundColorByHexString("#eeeeee");
-        }
-    }
 
     async viewNewFriends(){
         const newFriendModal = await this.modalController.create({

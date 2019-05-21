@@ -49,12 +49,6 @@ export class AboutPage implements OnInit {
     ) {
     }
 
-    ionViewWillEnter(){
-        if (cordova.platformId == 'android') {
-            StatusBar.backgroundColorByHexString("#ffffff");
-        }
-    }
-
     ngOnInit() {
         this.getVersionNumber().then(version => {
             this.version = version;

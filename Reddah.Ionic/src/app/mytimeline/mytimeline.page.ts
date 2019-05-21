@@ -152,21 +152,22 @@ export class MyTimeLinePage implements OnInit {
         this.showAddComment = false;
         
         let offset = this.timelineCover.nativeElement.scrollHeight - $event.detail.scrollTop;
+        
         if(offset>=250)
         {
             this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'visible');
-            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
             this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', '8');
+            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
+            
         }
         else if(offset<250 && offset>=150)
         {
-            console.log('start change'+offset)
             let opacity = (offset-150)/100;
             if(opacity<0) opacity=0;
             this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', opacity+'');
             this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
         }
-        else if(offset<150 && offset>=0){
+        else if(offset<150 && offset>=-150){
             let opacity = (1-(offset-150)/100);
             if(opacity>1) opacity=1;
             this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'opacity', opacity+'');
@@ -175,6 +176,7 @@ export class MyTimeLinePage implements OnInit {
         {
             this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
             this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
+            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'opacity', '8');
         }
     }
 

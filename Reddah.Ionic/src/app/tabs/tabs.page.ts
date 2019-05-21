@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ModalController } from '@ionic/angular';
 import { LocalePage } from '../locale/locale.page';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
   selector: 'app-tabs',
@@ -36,6 +37,17 @@ export class TabsPage implements OnInit {
           }
       }
 
+  }
+
+  change(page=null){
+      StatusBar.overlaysWebView(true);
+      StatusBar.styleDefault();
+      if(page=="about"){
+          StatusBar.backgroundColorByHexString("#ffffff");
+      }
+      else{
+          StatusBar.backgroundColorByHexString("#eeeeee");
+      }
   }
   
   login() {

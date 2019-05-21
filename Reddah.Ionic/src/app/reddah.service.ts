@@ -312,7 +312,7 @@ export class ReddahService {
     //share with my timeline & user timeline
     drawCanvasBackground(src){
 
-        //src="assets/icon/timg.jpg";
+        src="assets/icon/timg.jpg";
         //src= (<any>window).Ionic.WebView.convertFileSrc(src);
 
         //cavas use local path, web url has cors issue.

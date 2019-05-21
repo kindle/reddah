@@ -15,19 +15,19 @@
 
   <ion-tab-bar slot="bottom">
 
-    <ion-tab-button tab="home" href="/tabs/(home:home)">
+    <ion-tab-button tab="home" href="/tabs/(home:home)" (click)="change()">
       <ion-icon name="book"></ion-icon>
       <ion-label>{{ 'Menu.Recommend' | translate }}</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="contact" href="/tabs/(contact:contact)">
+    <ion-tab-button tab="contact" href="/tabs/(contact:contact)" (click)="change()">
       <ion-icon name="chatboxes"></ion-icon>
       <ion-label>{{ 'Menu.Contact' | translate }}</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="find" href="/tabs/(find:find)">
+    <ion-tab-button tab="find" href="/tabs/(find:find)" (click)="change()">
       <ion-icon name="compass"></ion-icon>
       <ion-label>{{ 'Menu.Find' | translate }}</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="about" href="/tabs/(about:about)">
+    <ion-tab-button tab="about" href="/tabs/(about:about)" (click)="change('about')">
       <ion-icon name="person"></ion-icon>
       <ion-label>{{ 'Menu.About' | translate }}</ion-label>
     </ion-tab-button>
