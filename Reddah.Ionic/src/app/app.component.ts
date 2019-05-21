@@ -8,7 +8,6 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { Toast } from '@ionic-native/toast/ngx';
 import { ImageLoaderConfigService } from 'ionic-image-loader';
 import { CacheService } from "ionic-cache";
-
 import { File } from '@ionic-native/file/ngx';
 
 @Component({
@@ -22,7 +21,7 @@ export class AppComponent {
         private statusBar: StatusBar,
         private translate: TranslateService,
         private localStorageService: LocalStorageService,
-        public modalCtrl: ModalController,
+        public modalController: ModalController,
         private menu: MenuController,
         private actionSheetCtrl: ActionSheetController,
         private alertController: AlertController,
@@ -55,13 +54,13 @@ export class AppComponent {
 
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         this.translate.setDefaultLang(locale);
-
     }
 
     initializeApp() {
         this.platform.ready().then(() => {
-          this.statusBar.styleDefault();
-          this.splashScreen.hide();
+            //this.statusBar.overlaysWebView(true);
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
         });
         
         // Initialize BackButton Eevent.
@@ -127,7 +126,7 @@ export class AppComponent {
   */
           // close modal
           try {
-              const element = await this.modalCtrl.getTop();
+              const element = await this.modalController.getTop();
               if (element) {
                   element.dismiss();
                   return;

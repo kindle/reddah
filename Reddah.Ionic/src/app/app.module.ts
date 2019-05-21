@@ -65,6 +65,8 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { AutoresizeDirective } from './autoresize-textarea.directive';
 import { CommentBoxComponent } from './comment-box/comment-box.component';
 import { SearchPage } from './search/search.page';
+import { QrcardPage } from './qrcard/qrcard.page';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 @NgModule({
   declarations: [
@@ -99,6 +101,7 @@ import { SearchPage } from './search/search.page';
       AutoresizeDirective,
       CommentBoxComponent,
       SearchPage,
+      QrcardPage,
   ],
   entryComponents: [
       LocalePage,
@@ -124,6 +127,7 @@ import { SearchPage } from './search/search.page';
       StockPage,
       CommentReplyPage,
       SearchPage,
+      QrcardPage,
   ],
   imports: [
       BrowserModule, 
@@ -143,7 +147,8 @@ import { SearchPage } from './search/search.page';
               useFactory: HttpLoaderFactory,
               deps: [HttpClient]
           }
-  })
+      }),
+      NgxQRCodeModule,
   ],
   exports:[
   ],

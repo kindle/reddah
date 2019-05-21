@@ -17,7 +17,7 @@ import { CacheService } from "ionic-cache";
 import { MyInfoPage } from '../my-info/my-info.page';
 import { StockPage } from '../stock/stock.page';
 import { ImageLoaderService } from 'ionic-image-loader';
-import { StatusBar } from '@ionic-native/status-bar';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
     selector: 'app-about',
@@ -45,10 +45,13 @@ export class AboutPage implements OnInit {
         public authService: AuthService,
         public translateService: TranslateService,
         private cacheService: CacheService,
-        private imageLoaderService: ImageLoaderService
+        private imageLoaderService: ImageLoaderService,
+        private statusBar: StatusBar,
     ) {
+        this.checked = false;
     }
 
+    checked = false;
     ngOnInit() {
         this.getVersionNumber().then(version => {
             this.version = version;
@@ -133,6 +136,7 @@ export class AboutPage implements OnInit {
     }
 
     upgrade() {
+        this.checked = true;
         const updateUrl = 'https://reddah.com/apk/update.xml';
         if (this.isMobile()) {
             this.getVersionNumber().then(version => {

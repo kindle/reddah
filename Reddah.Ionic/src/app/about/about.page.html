@@ -20,7 +20,7 @@
     </ion-card>
     <ion-card>
       <ion-card-content>
-        <ion-button (click)="upgrade()">{{ 'About.CheckUpgrade' | translate }}</ion-button>
+        <ion-button (click)="upgrade()" [disabled]="checked">{{ 'About.CheckUpgrade' | translate }}</ion-button>
       </ion-card-content>
     </ion-card>
     <ion-card>

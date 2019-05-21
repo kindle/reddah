@@ -16,7 +16,7 @@ import { ChangeCoverPopPage } from '../article-pop/change-cover-pop.page'
 import { AddTimelinePage } from '../add-timeline/add-timeline.page'
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { StatusBar } from '@ionic-native/status-bar';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
     selector: 'app-mytimeline',
@@ -57,6 +57,7 @@ export class MyTimeLinePage implements OnInit {
         private activatedRoute: ActivatedRoute,
         private transfer: FileTransfer, 
         private file: File,
+        private statusBar: StatusBar,
     ){
         this.userName = this.reddah.getCurrentUser();
     }

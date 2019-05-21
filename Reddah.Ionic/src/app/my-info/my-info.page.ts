@@ -5,7 +5,7 @@ import { CacheService } from "ionic-cache";
 import { ChangePhotoPage } from '../change-photo/change-photo.page';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
-
+import { QrcardPage } from '../qrcard/qrcard.page';
 
 @Component({
     selector: 'app-my-info',
@@ -87,6 +87,14 @@ export class MyInfoPage implements OnInit {
             this.reddah.getUserPhotos(this.userName);
         }
         this.changed = data;
+    }
+
+    async qrCard(){
+        const qrModal = await this.modalController.create({
+            component: QrcardPage
+          });
+            
+          await qrModal.present();
     }
 
 }

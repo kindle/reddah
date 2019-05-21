@@ -21,7 +21,7 @@
         <ion-text slot="end">{{userName}}</ion-text>
         <ion-icon name="ios-arrow-forward" slot="end" style="display:hidden;"></ion-icon>
     </ion-item>
-    <ion-item no-padding>
+    <ion-item no-padding (click)="qrCard()">
         <ion-label class="title">二维码名片</ion-label>
         <ion-icon name="ios-qr-scanner" slot="end"></ion-icon>
         <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
