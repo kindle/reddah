@@ -4,7 +4,12 @@
 </ion-item>
 <ion-content style="align-items: center; background-color:white;">
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" spinner="none">
-        <ion-refresher-content ></ion-refresher-content>
+            <ion-refresher-content 
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="bubbles"
+                refreshingText="Refreshing...">
+            </ion-refresher-content>
     </ion-refresher>
     <ion-item no-padding>
         <ion-thumbnail style="padding:10px;">
@@ -13,8 +18,8 @@
         <ion-label>
             <h1>
                 {{userName}}
-                <ion-icon name="ios-person" *ngIf="reddah.appData('usersex_'+userName)==1"></ion-icon>
-                <ion-icon name="ios-person" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
+                <ion-icon name="ios-male" *ngIf="reddah.appData('usersex_'+userName)==1"></ion-icon>
+                <ion-icon name="ios-female" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
             </h1>
             <p>昵称：{{reddah.appData('usernickname_'+userName)}}</p>
             <p>地区：{{reddah.appData('userlocation_'+userName)}}</p>
@@ -51,9 +56,9 @@
             <ion-label>音视频通话</ion-label>
         </ion-item>
     </ion-card>
-    <ion-card *ngIf="reddah.appData('userisfriend_'+userName)==0">
+    <ion-card *ngIf="reddah.appData('userisfriend_'+userName)==0&&userName!=reddah.getCurrentUser()">
         <ion-item (click)="addFriend()">
-            <ion-label>添加到通讯录</ion-label>
+            <ion-label>添加为好友</ion-label>
         </ion-item>
     </ion-card>
 </ion-content>

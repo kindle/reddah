@@ -16,7 +16,7 @@ export class NewFriendPage implements OnInit {
 
     constructor(
             private modalController: ModalController,
-            private reddahService: ReddahService,
+            public reddah: ReddahService,
             private localStorageService: LocalStorageService) { }
 
     async ngOnInit() {
@@ -26,20 +26,30 @@ export class NewFriendPage implements OnInit {
     async loadRequests(){
         this.formData = new FormData();
 
-        this.reddahService.friendRequests(this.formData)
-            .subscribe(friendRequests => 
-            {
-                console.log(JSON.stringify(friendRequests))
-                for(let friendRequest of friendRequests){
-                    this.friendRequestList.push(friendRequest);
+        this.reddah.friendRequests(this.formData)
+        .subscribe(friendRequests => 
+        {
+            for(let request of friendRequests){
+                //check cache first
+                //can abstract to fun(photourl, username){}
+                let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${request.UserName}`);
+                if(cachedUserPhotoPath!=null){
+                    this.reddah.appPhoto["userphoto_"+request.UserName] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
                 }
+                else{
+                    this.reddah.appPhoto["userphoto_"+request.UserName] = "assets/icon/anonymous.png";
+                }
+                if(request.UserPhoto!=null){
+                    this.reddah.toImageCache(request.UserPhoto, `userphoto_${request.UserName}`);
+                }
+                this.friendRequestList.push(request);
             }
-        );
+        });
     }
 
 
     async close() {
-        await this.modalController.dismiss(false);
+        await this.modalController.dismiss(this.hasAccepted);
     }
 
     async add(){
@@ -47,9 +57,10 @@ export class NewFriendPage implements OnInit {
     }
 
     async search(){
-        
+        //popup search page
     }
 
+    hasAccepted = false;
     async accept(requestUserName){
         this.formData = new FormData();
         this.formData.append("requestUserName", requestUserName);
@@ -60,19 +71,20 @@ export class NewFriendPage implements OnInit {
             }
         });
 
-        this.reddahService.approveFriend(this.formData)
-            .subscribe(result => 
-            {
-                if(result.Success!=0){
-                    this.friendRequestList.forEach((item, index, alias)=> {
-                        if(item.UserName==requestUserName){
-                            item.Approve = false;
-                        }
-                    });
-                    alert(result.Message);
-                }
+        this.reddah.approveFriend(this.formData)
+        .subscribe(result => 
+        {
+            if(result.Success!=0){
+                this.friendRequestList.forEach((item, index, alias)=> {
+                    if(item.UserName==requestUserName){
+                        item.Approve = false;
+                    }
+                });
+                alert(result.Message);
+            }else{
+                this.hasAccepted = true;
             }
-        );
+        });
     }
 
 }

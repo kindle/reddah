@@ -52,32 +52,6 @@ export class UserPage implements OnInit {
     loadedIds = [];
     formData: FormData;
 
-    /*getUserInfo(){
-        this.formData = new FormData();
-        this.formData.append("targetUser", this.userName);
-
-        let cacheKey = "this.reddah.getUserInfo"+this.userName;
-        console.log(`cacheKey:${cacheKey}`);
-        let request = this.reddah.getUserInfo(this.formData);
-
-        this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
-        .subscribe(userInfo => 
-        {
-            console.log(JSON.stringify(userInfo));
-            this.nickName = userInfo.NickName
-            this.sex = userInfo.Sex;
-            if(userInfo.Photo!=null)
-                this.photo = userInfo.Photo;
-            this.location = userInfo.Location;
-            this.signature = userInfo.Signature;
-            this.cover = userInfo.Cover;
-
-            this.noteName = userInfo.NoteName;
-            if(this.userName!=this.reddah.getCurrentUser())
-                this.isFriend = userInfo.IsFriend?1:0;
-        });
-    }*/
-
     getTimeline(){
         this.formData = new FormData();
         this.formData.append("loadedIds", JSON.stringify(this.loadedIds));

@@ -393,6 +393,8 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
       return $sce.trustAsResourceUrl(url);
     }*/
 
+    QrUserKey = 'https://reddah.com/apk/reddah.apk?username=';
+    
     emojis = [
         ['😀','😃','😄','😁','😆','😅'],
         ['❤️','⚽️','🏀','🍎','🍉','☕️'],

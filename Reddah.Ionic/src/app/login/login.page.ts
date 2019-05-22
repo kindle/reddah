@@ -4,6 +4,7 @@ import { ReddahService } from '../reddah.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { CacheService } from "ionic-cache";
 
 @Component({
     selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginPage implements OnInit {
       private translateService: TranslateService,
       private toastController: ToastController,
       private router: Router,
+      private cacheService: CacheService,
   ) { }
 
   ngOnInit() {
@@ -63,6 +65,7 @@ export class LoginPage implements OnInit {
                     queryParams: {
                     }
                   });
+                  this.cacheService.clearAll();
               }
               else if(result.Success==1){
                   //Input user name or password is empty

@@ -4,22 +4,22 @@
     <ion-label slot="end" (click)="add()">添加好友</ion-label>
 </ion-item>
 <ion-content>
-    <ion-item>
-        <ion-icon name="search" slot="start"></ion-icon>
-        <ion-input type="text" placeholder="Reddah ID/User Name" (click)="search()"></ion-input>
-    </ion-item>
+    <ion-list>
+        <ion-item>
+            <ion-icon name="ios-search" slot="start"></ion-icon>
+            <ion-note (click)="search()">Reddah ID/User Name</ion-note>
+        </ion-item>
+    </ion-list>
     <ion-list>
         <ion-item *ngFor="let request of friendRequestList">
             <ion-avatar slot="start" style="margin:5px;">
-            <!--<img src="{{reddah.appPhoto['userphoto_'+userName]}}" class="portrait">
-                <img [src]="contact.UserPhoto" class="portrait">-->
-                <img src="/assets/icon/anonymous.png" class="portrait">
+                <img src="{{reddah.appPhoto['userphoto_'+request.UserName]}}" class="portrait">
             </ion-avatar>
             <ion-label style="margin-left:10px;">
                 <h2>
                     {{request.UserName}}
-                    <ion-icon name="ios-person" *ngIf="sex==1"></ion-icon>
-                    <ion-icon name="ios-person" *ngIf="sex==0" color="danger"></ion-icon>
+                    <ion-icon name="ios-male" *ngIf="sex==1"></ion-icon>
+                    <ion-icon name="ios-female" *ngIf="sex==0" color="danger"></ion-icon>
                 </h2>
                 <ion-note>{{request.Just=="confirmed"?"对方已同意":request.Just}}</ion-note>
             </ion-label>

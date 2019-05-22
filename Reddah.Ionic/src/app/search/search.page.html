@@ -3,6 +3,17 @@
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-input placeholder="搜索" #searchKeyword></ion-input>
 </ion-item>
-<ion-content no-padding>
-    
+<ion-content no-padding style="background-color: white;">
+    <ion-grid *ngIf="showTopic">
+        <ion-row style="padding:10px;">
+            <ion-col text-center>
+                <ion-note>搜索指定内容</ion-note>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let row of topics" style="padding:10px;">
+            <ion-col *ngFor="let col of row" text-center>
+                <ion-text (click)="chooseTopic(col)">{{col}}</ion-text>
+            </ion-col>
+        </ion-row> 
+    </ion-grid>
 </ion-content>

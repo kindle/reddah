@@ -1,17 +1,20 @@
 <app-header title="Menu.Contact"></app-header>
 <ion-content>
     <ion-item (click)="viewNewFriends()">
-        <ion-icon name="ios-person-add" slot="start" color="tertiary" style="background-color: gold;border-radius: 3px;"></ion-icon>
-        <ion-label>新的朋友</ion-label>
+        <ion-icon name="ios-person-add" slot="start" color="tertiary" class="portrait" style="width: 40px; height: 40px; margin: 5px; background-color: #f99d3a;border-radius: 3px;"></ion-icon>
+        <ion-label style="margin-left:10px;">新的朋友</ion-label>
         <ion-badge slot="end" color="danger" *ngIf="requestCount>0">{{requestCount}}</ion-badge>
+    </ion-item>
+    <ion-item (click)="foo()">
+        <ion-icon name="ios-person" slot="start" color="tertiary" class="portrait" style="width: 40px; height: 40px; margin: 5px; background-color: #2781d7;border-radius: 3px;"></ion-icon>
+        <ion-label style="margin-left:10px;">公众号</ion-label>
     </ion-item>
     <ion-list>
         <ion-item-group *ngFor="let group of groupedContacts" lines="none">
             <ion-item-divider color="light" lines="none">{{group.letter.toUpperCase()}}</ion-item-divider>
             <ion-item *ngFor="let contact of group.contacts">
-                <ion-avatar slot="start" style="margin:5px;">
-                    <!--<img src="{{reddah.appPhoto['userphoto_'+userName]}}" class="portrait">-->
-                    <img [src]="contact.UserPhoto" class="portrait">
+                <ion-avatar slot="start" style="margin:5px;" (click)="goUser(contact.Watch)">
+                    <img src="{{reddah.appPhoto['userphoto_'+contact.Watch]}}" class="portrait">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
                     <h3>{{contact.NoteName?contact.NoteName:contact.Watch}}</h3>
