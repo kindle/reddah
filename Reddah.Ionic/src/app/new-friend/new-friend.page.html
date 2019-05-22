@@ -1,28 +1,32 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon slot="start" name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-label slot="start">新的朋友</ion-label>
-    <ion-label color="success" slot="end" (click)="add()">添加朋友</ion-label>
+    <ion-label slot="end" (click)="add()">添加好友</ion-label>
 </ion-item>
-<ion-content padding>
+<ion-content>
     <ion-item>
         <ion-icon name="search" slot="start"></ion-icon>
         <ion-input type="text" placeholder="Reddah ID/User Name" (click)="search()"></ion-input>
     </ion-item>
-    <ion-item *ngFor="let request of friendRequestList" lines="none">
-        <ion-thumbnail slot="start">
-            <img src="/assets/icon/anonymous.png" style="width: 50px;height:50px;margin:10px;">
-        </ion-thumbnail>
-        <ion-label slot="start">
-            <h1>
-                {{request.UserName}}
-                <ion-icon name="ios-person" *ngIf="sex==1"></ion-icon>
-                <ion-icon name="ios-person" *ngIf="sex==0" color="danger"></ion-icon>
-            </h1>
-            <p>{{request.Just=="confirmed"?"对方已同意":request.Just}}</p>
-        </ion-label>
-        <div slot="end">
-            <ion-button color="success" (click)="accept(request.UserName)" *ngIf="!request.Approve">接受</ion-button>
-            <ion-label *ngIf="request.Approve">已添加</ion-label>
-        </div>
-    </ion-item>
+    <ion-list>
+        <ion-item *ngFor="let request of friendRequestList">
+            <ion-avatar slot="start" style="margin:5px;">
+            <!--<img src="{{reddah.appPhoto['userphoto_'+userName]}}" class="portrait">
+                <img [src]="contact.UserPhoto" class="portrait">-->
+                <img src="/assets/icon/anonymous.png" class="portrait">
+            </ion-avatar>
+            <ion-label style="margin-left:10px;">
+                <h2>
+                    {{request.UserName}}
+                    <ion-icon name="ios-person" *ngIf="sex==1"></ion-icon>
+                    <ion-icon name="ios-person" *ngIf="sex==0" color="danger"></ion-icon>
+                </h2>
+                <ion-note>{{request.Just=="confirmed"?"对方已同意":request.Just}}</ion-note>
+            </ion-label>
+            <div slot="end">
+                <ion-button color="success" (click)="accept(request.UserName)" *ngIf="!request.Approve">接受</ion-button>
+                <ion-note *ngIf="request.Approve">已添加</ion-note>
+            </div>
+        </ion-item>
+    </ion-list>
 </ion-content>

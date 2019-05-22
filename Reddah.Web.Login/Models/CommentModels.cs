@@ -48,4 +48,13 @@ namespace Reddah.Web.Login
         public string UserPhoto { get; set; }
         public Nullable<int> UserSex { get; set; }
     }
+
+    public class AdvancedUserFriend : UserFriend
+    {
+        public string UserNickName { get; set; }
+        public string UserPhoto { get; set; }
+        public Nullable<int> UserSex { get; set; }
+        public string Signature { get; set; }
+    }
+
 }

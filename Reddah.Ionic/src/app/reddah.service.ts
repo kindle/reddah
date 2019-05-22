@@ -163,6 +163,19 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private friendsUrl = 'https://login.reddah.com/api/article/friends'; 
+
+    getFriends(): Observable<any> {
+
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.friendsUrl, formData)
+        .pipe(
+            tap(data => this.log('get friends')),
+            catchError(this.handleError('get friends', []))
+        );
+    }
+    //******************************** */
     private updateUserPhotoUrl = 'https://login.reddah.com/api/article/updateuserphoto'; 
 
     updateUserPhoto(formData: FormData): Observable<any> {

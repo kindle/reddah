@@ -533,6 +533,55 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("friends")]
+        [HttpPost]
+        public IHttpActionResult GetFriends()
+        {
+            IEnumerable<UserFriend> query = null;
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    query =  from f in db.UserFriend
+                             join u in db.UserProfile on f.Watch equals u.UserName
+                             where f.UserName == jwtResult.JwtUser.User && f.Approve==1
+                             orderby f.RequestOn descending
+                             select new AdvancedUserFriend
+                             {
+                                 Id = f.Id,
+                                 UserName = f.UserName,
+                                 Watch = f.Watch,
+                                 Just = f.Just,
+                                 RequestOn = f.RequestOn,
+                                 Approve = f.Approve,
+                                 NoteName = f.NoteName,
+                                 UserNickName = u.NickName,
+                                 UserPhoto = u.Photo,
+                                 UserSex = u.Sex,
+                                 Signature = u.Signature,
+                             };
+
+                    return Ok(query.ToList());   
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
         [Route("friendrequests")]
         [HttpPost]
         public IHttpActionResult GetFriendRequests()
