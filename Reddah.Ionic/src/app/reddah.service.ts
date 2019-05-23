@@ -14,6 +14,9 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
 
+import { PostviewerPage } from './postviewer/postviewer.page';
+import { LoadingController, NavController, ModalController } from '@ionic/angular';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -25,6 +28,7 @@ export class ReddahService {
         private jsonp: Jsonp,
         private transfer: FileTransfer, 
         private file: File,
+        private modalController: ModalController,
     ) { }
 
     //******************************** */
@@ -212,7 +216,7 @@ export class ReddahService {
     private articlesUrl = 'https://reddah.com/api/webapi/getarticles'; 
     private userProfileModel: UserProfileModel;
 
-    getArticles(loadedIds: Number[], locale: String, menu: String): Observable<Article[]> {
+    getArticles(loadedIds: Number[], locale: String, menu: String, keyword=""): Observable<Article[]> {
         this.userProfileModel = new UserProfileModel();
         this.userProfileModel.LoadedIds = loadedIds;
         this.userProfileModel.Locale = locale;
@@ -220,7 +224,7 @@ export class ReddahService {
         this.userProfileModel.Token = "";
         this.userProfileModel.Sub = "";
         this.userProfileModel.User = "";
-        this.userProfileModel.Keyword = "";
+        this.userProfileModel.Keyword = keyword;
 
         /*const httpOptions = {
           headers: new HttpHeaders({ 
@@ -374,8 +378,11 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         return str;
     }
 
-    summary(str: string, n: number) {
-        str = this.htmlDecode(str).replace(/<[^>]+>/g, "");
+    summary(str: string, n: number, locale='en-US') {
+        locale = locale.toLowerCase();
+        if(locale=='en-us'||locale=='fr-fr')
+            n = 2*n;
+        str = this.htmlDecode(this.htmlDecode(str)).replace(/<[^>]+>/g, "");
         return this.subpost(str, n);
     }
 
@@ -514,5 +521,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         catch(error){
             alert(error)
         }
-  }
+    }
+
+    
 }

@@ -25,7 +25,8 @@ export class HomePage implements OnInit {
     @ViewChild('pageTop') pageTop: Content;
     
     userName: any;
-    constructor(public reddah : ReddahService,
+    constructor(
+        public reddah : ReddahService,
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,
@@ -111,6 +112,19 @@ export class HomePage implements OnInit {
     loadData(event) {
         this.getArticles(event);
     }
+
+    async myInfo() {
+        const myInfoModal = await this.modalController.create({
+            component: MyInfoPage,
+            componentProps: {  }
+        });
+        
+        await myInfoModal.present();
+        const { data } = await myInfoModal.onDidDismiss();
+        //check if change
+        if(data)
+            this.reddah.getUserPhotos(this.userName);
+    }
     
     async view(article: Article){
         const viewerModal = await this.modalController.create({
@@ -125,19 +139,5 @@ export class HomePage implements OnInit {
         }
 
     }
-
-    async myInfo() {
-        const myInfoModal = await this.modalController.create({
-            component: MyInfoPage,
-            componentProps: {  }
-        });
-        
-        await myInfoModal.present();
-        const { data } = await myInfoModal.onDidDismiss();
-        //check if change
-        if(data)
-            this.reddah.getUserPhotos(this.userName);
-    }
-
 
 }

@@ -1,7 +1,36 @@
-.portrait{
-    border-radius: 8px;  
+.avatar-top {
+    margin: 14px 10px 0 0;
+    margin-bottom: auto;
 }
 
-.title{
-    margin-left:10px;
+ion-avatar,
+ion-avatar > img{
+    border-radius:0;
+    height:90px;
+    width:90px;
+}
+
+.articleTab {
+    padding: 12px;
+}
+
+.articleTitle{
+    font-size: 19px;
+    padding: 0px 15px;
+    margin-top: 15px;
+}
+
+.articleContent{
+    font-size: 18px;
+    color:grey;
+    margin-bottom: 20px;
+}
+
+.articleFooter{
+    font-size: 18px;
+}
+
+.articleFooterTime{
+    font-size: 18px;
+    margin-left: 10px;
 }

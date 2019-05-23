@@ -13,4 +13,5 @@ export class Article {
     UserName : string;
     GroupName : string;
     Content : string;
+    Type : number;
 }
