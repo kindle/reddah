@@ -43,6 +43,9 @@ export class SearchPage implements OnInit {
     }
 
     @ViewChild('searchKeyword') searchKeyword;
+    @ViewChild('searchResult') searchResult;
+
+    firstLoading = false;
 
     async ngOnInit() {
         setTimeout(() => {
@@ -55,38 +58,73 @@ export class SearchPage implements OnInit {
     }
 
     async search(){
+        this.firstLoading = true;
         this.showTopic = false;
         this.loadedIds=[];
         this.articles=[];
         if(this.selectedTopicId==1)//article
         {
-            this.getArticles(null);
+            this.searchArticles(null);
+        }
+        else if(this.selectedTopicId==2)//timeline
+        {
+            this.searchTimelines(null);
+        }
+        else
+        {
+                
         }
     }
 
     locale;
     loadedIds=[];
     articles=[];
-    async getArticles(event){
+    
+    async searchArticles(event){
         
-        let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + this.locale + "search"+this.searchKeyword.value;
-        let request = this.reddah.getArticles(this.loadedIds, this.locale, "search", this.searchKeyword.value);
+        let cacheKey = "this.reddah.searchArticles" + JSON.stringify(this.loadedIds) + this.locale + "search"+this.searchKeyword.value;
+        let request = this.reddah.getArticles(this.loadedIds, this.locale, "search", this.searchKeyword.value, 0);
         console.log(cacheKey);
         this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
         .subscribe(articles => 
         {
-            console.log(articles);
             for(let article of articles){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);  
             }
             if(event)
                 event.target.complete();
+            this.firstLoading = false;
+        });
+    }
+
+    async searchTimelines(event){
+        
+        let cacheKey = "this.reddah.searchTimelines" + JSON.stringify(this.loadedIds) + this.locale + "search"+this.searchKeyword.value;
+        let request = this.reddah.getArticles(this.loadedIds, this.locale, "search", this.searchKeyword.value, 1);
+        console.log(cacheKey);
+        this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
+        .subscribe(articles => 
+        {
+            for(let article of articles){
+                this.articles.push(article);
+                this.loadedIds.push(article.Id);  
+            }
+            if(event)
+                event.target.complete();
+            this.firstLoading = false;
         });
     }
 
     loadData(event) {
-        this.getArticles(event);
+        if(this.selectedTopicId==1)//article
+        {
+            this.searchArticles(event);
+        }
+        else if(this.selectedTopicId==2)//timeline
+        {
+            this.searchTimelines(event);
+        }
     }
 
     async view(article: Article){
@@ -100,6 +138,10 @@ export class SearchPage implements OnInit {
         if(data){
             console.log(data)
         }
+
+    }
+
+    async viewTs(article){
 
     }
 

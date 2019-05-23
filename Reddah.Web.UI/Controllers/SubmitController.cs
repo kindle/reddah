@@ -50,7 +50,8 @@ namespace Reddah.Web.UI.Controllers
                         Abstract = Helpers.HtmlEncode(article.Abstract),
                         UserName = User.Identity.Name,
                         CreatedOn = DateTime.Now,
-                        Locale = CultureInfo.CurrentUICulture.Name.ToLowerInvariant()
+                        Locale = CultureInfo.CurrentUICulture.Name.ToLowerInvariant(),
+                        Type = 0 //0 article, 1 timeline
                     });
                     context.SaveChanges();
                 }

@@ -277,7 +277,7 @@ namespace Reddah.Web.Login.Controllers
                     query = (from b in db.Article
                              join u in db.UserProfile on b.UserName equals u.UserName
                              where b.Type == 1 && (b.UserName == jwtResult.JwtUser.User || 
-                             (from f in db.UserFriend where f.UserName == jwtResult.JwtUser.User select f.Watch).ToList().Contains(b.UserName)) 
+                             (from f in db.UserFriend where f.UserName == jwtResult.JwtUser.User && f.Approve==1 select f.Watch).ToList().Contains(b.UserName)) 
                              && !(loaded).Contains(b.Id)
                              orderby b.Id descending
                              select new AdvancedTimeline
@@ -605,11 +605,25 @@ namespace Reddah.Web.Login.Controllers
                     var pageCount = 100;
 
                     query = (from f in db.UserFriend
+                             join u in db.UserProfile on f.UserName equals u.UserName
                              where f.Watch == jwtResult.JwtUser.User
                              orderby f.RequestOn descending
-                             select f)
+                             select new AdvancedUserFriend
+                             {
+                                 Id = f.Id,
+                                 UserName = f.UserName,
+                                 Watch = f.Watch,
+                                 Just = f.Just,
+                                 RequestOn = f.RequestOn,
+                                 Approve = f.Approve,
+                                 NoteName = f.NoteName,
+                                 UserNickName = u.NickName,
+                                 UserPhoto = u.Photo,
+                                 UserSex = u.Sex,
+                                 Signature = u.Signature,
+                             })
                             .Take(pageCount);
-
+                             
                     return Ok(query.ToList());
 
                 }

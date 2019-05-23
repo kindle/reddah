@@ -216,7 +216,7 @@ export class ReddahService {
     private articlesUrl = 'https://reddah.com/api/webapi/getarticles'; 
     private userProfileModel: UserProfileModel;
 
-    getArticles(loadedIds: Number[], locale: String, menu: String, keyword=""): Observable<Article[]> {
+    getArticles(loadedIds: Number[], locale: String, menu: String, keyword="", type=0): Observable<Article[]> {
         this.userProfileModel = new UserProfileModel();
         this.userProfileModel.LoadedIds = loadedIds;
         this.userProfileModel.Locale = locale;
@@ -225,6 +225,7 @@ export class ReddahService {
         this.userProfileModel.Sub = "";
         this.userProfileModel.User = "";
         this.userProfileModel.Keyword = keyword;
+        this.userProfileModel.Type = type;
 
         /*const httpOptions = {
           headers: new HttpHeaders({ 
@@ -357,7 +358,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     } 
 
     htmlDecode(text: string) {
-      var temp = document.createElement("div");
+        var temp = document.createElement("div");
         temp.innerHTML = text;
         var output = temp.innerText || temp.textContent;
         temp = null;
@@ -379,6 +380,8 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     }
 
     summary(str: string, n: number, locale='en-US') {
+        if(locale==null)
+            locale='zh-cn';
         locale = locale.toLowerCase();
         if(locale=='en-us'||locale=='fr-fr')
             n = 2*n;

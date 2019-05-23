@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 namespace Reddah.Web.UI.Models
 {
@@ -23,6 +24,7 @@ namespace Reddah.Web.UI.Models
         public string Content { get; set; }
         public string Locale { get; set; }
         public string LastUpdateOn { get; set; }
+        public Nullable<int> Type { get; set; }
     }
 
     public class VoteModel {
@@ -76,6 +78,7 @@ namespace Reddah.Web.UI.Models
         public string Sub;
         public string User;
         public string Keyword;
+        public int Type;//1 timeline, others: article
         
         //public Dictionary<string, int> habits;
     }

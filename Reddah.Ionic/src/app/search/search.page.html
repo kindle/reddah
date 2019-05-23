@@ -3,7 +3,7 @@
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-input placeholder="搜索" #searchKeyword clearInput (keyup.enter)="search()"></ion-input>
 </ion-item>
-<ion-content no-padding style="background-color: white;">
+<ion-content no-padding style="background-color: white;" #searchResult>
     <ion-grid *ngIf="showTopic">
         <ion-row style="padding:10px;">
             <ion-col text-center>
@@ -18,6 +18,8 @@
     </ion-grid>
     <ion-grid *ngIf="selectedTopicId==1">
         <ion-row>
+            <ion-spinner name="bubbles" *ngIf="firstLoading"></ion-spinner>
+            <ion-text *ngIf="firstLoading" class="loadingText">正在加载...</ion-text>
             <span class="articleTab" *ngIf="articles.length>0">相关文章</span>
         </ion-row>
         <ion-row *ngFor="let article of articles" (click)="view(article)">
@@ -26,12 +28,33 @@
                 <ion-avatar class="avatar-top" *ngIf="article.ImageUrls.length>0">
                     <img src="{{article.ImageUrls[0]}}">
                 </ion-avatar>
-                <ion-label style="margin-left:10px;">
+                <ion-label>
                     <p class="articleContent" text-wrap>{{reddah.summary(article.Content, 100, article.Locale)}}</p>
-                    <ion-note class="articleFooter">{{article.UserName}}</ion-note>
+                    <ion-note class="articleFooter">{{reddah.htmlDecode(article.UserName)}}</ion-note>
                     <ion-note class="articleFooterTime">{{article.CreatedOn}}</ion-note>
                 </ion-label>
             </ion-item>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="selectedTopicId==2">
+        <ion-row>
+            <ion-spinner name="bubbles" *ngIf="firstLoading"></ion-spinner>
+            <ion-text *ngIf="firstLoading" class="loadingText">正在加载...</ion-text>
+            <span class="articleTab" *ngIf="articles.length>0">相关朋友圈</span>
+        </ion-row>
+        <ion-row *ngFor="let article of articles" (click)="viewTs(article)">
+            <div style="width:100%;border-bottom: 1px solid #eeeeee;padding: 10px 0;">
+                <span class="articleTitle">{{reddah.summary(article.Title, 100, article.Locale)}}</span>
+                <ion-item style="margin: 8px 0;" lines="none" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0">
+                    <ion-thumbnail *ngFor="let image of article.Content.split('$$$').splice(0,3);index as i" style="padding: 1px;">
+                        <img src="{{image}}">
+                    </ion-thumbnail>
+                </ion-item>
+                <ion-label class="articleTitle">
+                    <ion-note class="articleFooter">{{reddah.htmlDecode(article.UserName)}}</ion-note>
+                    <ion-note class="articleFooterTime">{{article.CreatedOn}}</ion-note>
+                </ion-label>
+            </div>
         </ion-row>
     </ion-grid>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">

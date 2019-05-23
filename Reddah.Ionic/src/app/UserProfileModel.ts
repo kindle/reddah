@@ -6,4 +6,5 @@ export class UserProfileModel {
     public Sub: String;
     public User: String;
     public Keyword: String;
+    public Type: Number;
 }

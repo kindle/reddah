@@ -99,8 +99,9 @@
                                 b.UserName.Contains(userProfileModel.Keyword) ||
                                 b.Abstract.Contains(userProfileModel.Keyword) ||
                                 b.GroupName.Contains(userProfileModel.Keyword))  &&
-                                b.Locale.StartsWith(locale) &&
-                                !(loaded).Contains(b.Id)
+                                //b.Locale.StartsWith(locale) &&
+                                !(loaded).Contains(b.Id)&&
+                                b.Type == userProfileModel.Type
                              orderby b.Count descending, b.LastUpdateOn descending
                              select b)
                             .Take(pageCount);
@@ -126,6 +127,8 @@
                     ap.UserName = item.UserName;
                     ap.GroupName = item.GroupName;
                     ap.Content = item.Content;
+                    ap.Type = item.Type;
+                    ap.Locale = item.Locale;
                     
                     apList.Add(ap);
                 }

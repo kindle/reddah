@@ -11,10 +11,11 @@ ion-avatar > img{
 }
 
 .articleTab {
-    padding: 12px;
+    padding: 15px;
 }
 
 .articleTitle{
+    display: block;
     font-size: 19px;
     padding: 0px 15px;
     margin-top: 15px;
@@ -23,7 +24,7 @@ ion-avatar > img{
 .articleContent{
     font-size: 18px;
     color:grey;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .articleFooter{
@@ -33,4 +34,8 @@ ion-avatar > img{
 .articleFooterTime{
     font-size: 18px;
     margin-left: 10px;
+}
+
+.loadingText{
+    padding:5px;
 }
