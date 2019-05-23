@@ -23,8 +23,8 @@
         <ion-row *ngFor="let article of articles" (click)="view(article)">
             <span class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span>
             <ion-item>
-                <ion-avatar class="avatar-top">
-                    <img src="{{article.ImageUrls[0]}}" *ngIf="article.ImageUrls.length>0">
+                <ion-avatar class="avatar-top" *ngIf="article.ImageUrls.length>0">
+                    <img src="{{article.ImageUrls[0]}}">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
                     <p class="articleContent" text-wrap>{{reddah.summary(article.Content, 100, article.Locale)}}</p>
