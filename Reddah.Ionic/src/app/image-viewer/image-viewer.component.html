@@ -2,7 +2,7 @@
     <ion-title>{{ imgTitle }}</ion-title>
 </ion-item>
 <ion-content [forceOverscroll]="false" color="dark" fullscreen="true" (click)="closeModal($event)">
-    <ion-slides [options]="slideOpts" pager="true">
+    <ion-slides [options]="slideOpts" [pager]="imgSourceArray.length>1">
         <ion-slide *ngFor="let item of enhanceImgSourceArray" (press)="showMenu(item)">
             <div class="swiper-zoom-container">
                 <img [src]="item.webPreviewUrl" height="100vh" *ngIf="item.isOrgViewed!=1">

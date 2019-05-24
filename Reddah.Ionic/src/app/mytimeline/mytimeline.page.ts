@@ -414,12 +414,4 @@ export class MyTimeLinePage implements OnInit {
             this.reddah.getUserPhotos(this.userName, true);
     }
 
-    GetCache(url){
-        let org = this.localStorageService.retrieve(url);
-        if(org){
-            return (<any>window).Ionic.WebView.convertFileSrc(org);
-        }
-        return url;
-    }
-
 }

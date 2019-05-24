@@ -3,7 +3,7 @@ import { InfiniteScroll } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../article';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController, ActionSheetController,NavParams } from '@ionic/angular';
+import { LoadingController, NavController, PopoverController, ActionSheetController, NavParams, AlertController } from '@ionic/angular';
 import { LocalePage } from '../locale/locale.page';
 import { PostviewerPage } from '../postviewer/postviewer.page';
 import { ModalController } from '@ionic/angular';
@@ -41,6 +41,7 @@ export class UserPage implements OnInit {
         private activatedRoute: ActivatedRoute,
         public actionSheetController: ActionSheetController,
         private navParams: NavParams,
+        private alertController: AlertController,
     ){}
 
     ngOnInit(){
@@ -110,39 +111,50 @@ export class UserPage implements OnInit {
             //header: '',
             buttons: [{
               text: '刷新',
-              role: 'destructive',
               icon: 'refresh',
               handler: () => {
                   this.clearCacheAndReload();
               }
-            }, {
+            }, 
+            {
               text: 'Share',
               icon: 'share',
               handler: () => {
-                console.log('Share clicked');
+                  console.log('Share clicked');
               }
-            }, {
-              text: '加入黑名单',
-              icon: 'remove-circle-outline',
-              handler: () => {
-                console.log('Play clicked');
-              }
-            }, {
-              text: 'Favorite',
-              icon: 'heart',
-              handler: () => {
-                console.log('Favorite clicked');
-              }
-            }, {
-              text: '删除',
+            },
+            {
+              text: '删除好友',
               icon: 'ios-trash',
-              role: 'cancel',
               handler: () => {
-                console.log('Cancel clicked');
+                  this.delCinfirm();                  
               }
             }]
         });
         await actionSheet.present();
+    }
+
+    async delCinfirm(){
+        const alert = await this.alertController.create({
+          header: '删除确认',
+          message: '确定要删除好友吗？',
+          buttons: [
+            {
+              text: '取消',
+              cssClass: 'secondary',
+              handler: (blah) => {
+                console.log('Confirm Cancel: blah');
+              }
+            }, {
+              text: '删除',
+              handler: () => {
+                console.log('Confirm Okay');
+              }
+            }
+          ]
+        });
+    
+        await alert.present();
     }
 
     async addFriend(){

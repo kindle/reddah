@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular'
 import { ScanPage } from '../scan/scan.page';
 import { StatusBar } from '@ionic-native/status-bar';
+import { SearchPage } from '../search/search.page';
 
 @Component({
   selector: 'app-find',
@@ -27,5 +28,13 @@ export class FindPage {
         }
 
     };
+
+    async goSearch(){
+        const userModal = await this.modalController.create({
+            component: SearchPage
+        });
+          
+        await userModal.present();
+    }
 
 }

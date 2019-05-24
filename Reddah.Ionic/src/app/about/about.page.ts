@@ -15,7 +15,7 @@ import { AuthService }      from '../auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { MyInfoPage } from '../my-info/my-info.page';
-import { StockPage } from '../stock/stock.page';
+
 import { ImageLoaderService } from 'ionic-image-loader';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -194,15 +194,6 @@ export class AboutPage implements OnInit {
         //check if change
         if(data)
             this.reddah.getUserPhotos(this.userName);
-    }
-
-    async foo(){
-        const stockModal = await this.modalController.create({
-            component: StockPage,
-            componentProps: { s: this.debugInput.value }
-        });
-        
-        await stockModal.present();
     }
 
     @ViewChild('debugInput') debugInput;

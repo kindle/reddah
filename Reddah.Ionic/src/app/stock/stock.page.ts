@@ -78,9 +78,9 @@ export class StockPage implements OnInit {
                     ohlc.push([
                         new Date(data[i][0]).valueOf(), // the date
                         parseFloat(data[i][1]), // open
-                        parseFloat(data[i][2]), // close
+                        parseFloat(data[i][6]), // close
                         parseFloat(data[i][5]), // low
-                        parseFloat(data[i][6]), // high                
+                        parseFloat(data[i][2]), // high        
                     ]);
 
                     volume.push([

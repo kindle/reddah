@@ -59,22 +59,47 @@
     grid-gap: 3px;
  }
 
- .container {
-    position: relative;
-    padding-top: 100%; 
-    overflow: hidden;
- }
- 
- .picture {
-    position:  absolute;
-    top: 0;
-    left: 0;
+ .parent2 {
+    display: grid;
+    grid-template-columns: 46% 46%;
+    grid-gap: 3px;
  }
 
- .singlePicture {
-    display: block;
-    width: 200px !important;
+ .parent3 {
+    display: grid;
+    grid-template-columns: 92%;
+    grid-gap: 3px;
  }
+
+.container {
+   position: relative;
+   padding-top: 100%;
+   overflow: hidden;
+}
+
+.picture {
+   position: absolute;
+   top:50%;
+   transform: translateY(-50%);
+}
+
+.container3 {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: relative;
+   padding-top: 100%;
+   overflow: hidden;
+   margin-top: 10px;
+}
+
+.picture3 {
+   position: absolute;
+   flex-shrink: 0;
+   min-width: 100%;
+   top:0;
+   left:0;
+}
 
  .likeSection{
     background-color: #eeeeee; 

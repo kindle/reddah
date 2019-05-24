@@ -5,6 +5,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
 import { Article } from "../article";
 import { PostviewerPage } from '../postviewer/postviewer.page';
+import { StockPage } from '../stock/stock.page';
 
 @Component({
     selector: 'app-search',
@@ -20,7 +21,7 @@ export class SearchPage implements OnInit {
 
     topics = [
         [{id:1,name:'文章'},{id:2,name:'朋友圈'},{id:3,name:'好友'}],
-        [{id:4,name:'公众号'},{id:5,name:'小程序'},{id:6,name:'表情'}],
+        [{id:4,name:'公众号'},{id:5,name:'小程序'},{id:6,name:'股票'}],
     ];
 
     chooseTopic(col){
@@ -69,6 +70,10 @@ export class SearchPage implements OnInit {
         else if(this.selectedTopicId==2)//timeline
         {
             this.searchTimelines(null);
+        }
+        else if(this.selectedTopicId==6)//stock chart
+        {
+            this.viewStock();
         }
         else
         {
@@ -143,6 +148,15 @@ export class SearchPage implements OnInit {
 
     async viewTs(article){
 
+    }
+
+    async viewStock(){
+        const stockModal = await this.modalController.create({
+            component: StockPage,
+            componentProps: { s: this.searchKeyword.value }
+        });
+        
+        await stockModal.present();
     }
 
 }
