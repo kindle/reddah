@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Platform } from '@ionic/angular'; 
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
@@ -71,26 +71,7 @@ export class AboutPage implements OnInit {
     }
 
     formData: FormData;
-    /*photo: string = "assets/icon/anonymous.png";
-    getUserInfo(){
-        this.formData = new FormData();
-        this.formData.append("targetUser", this.userName);
-
-        let cacheKey = "this.reddah.getUserInfo"+this.userName;
-        console.log(`cacheKey:${cacheKey}`);
-        let request = this.reddahService.getUserInfo(this.formData);
-
-        this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
-            .subscribe(userInfo => 
-            {
-                console.log(JSON.stringify(userInfo));
-                if(userInfo.Photo!=null)
-                    this.photo = userInfo.Photo;
-                if(userInfo.NickName!=null)
-                    this.nickName = userInfo.NickName;
-            }
-        );
-    }*/
+    
 
     
     image:any=''
@@ -218,10 +199,17 @@ export class AboutPage implements OnInit {
     async foo(){
         const stockModal = await this.modalController.create({
             component: StockPage,
-            componentProps: {  }
+            componentProps: { s: this.debugInput.value }
         });
         
         await stockModal.present();
+    }
+
+    @ViewChild('debugInput') debugInput;
+    async debug(){
+        let key = this.debugInput.value;
+        alert(this.localStorageService.retrieve(key));
+        alert(this.reddah.appPhoto[key]);
     }
 
 }

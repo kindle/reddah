@@ -50,7 +50,8 @@ export class StockPage implements OnInit {
     }
     
     ngOnInit(){
-        this.s = "000563";
+        if(this.s==null)
+            this.s = "000563";
         this.reddah.getStock(this.s).subscribe(result=>{
             console.log(result);
             let data = result.json()[0].hq;

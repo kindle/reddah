@@ -1,11 +1,7 @@
 <app-header title="Menu.Recommend"></app-header>
 <ion-content #pageTop>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content 
-            pullingIcon="arrow-dropdown"
-            pullingText="Pull to refresh"
-            refreshingSpinner="bubbles"
-            refreshingText="Refreshing...">
+        <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
     </ion-refresher>  
     <ng-template ngFor let-article [ngForOf]="articles">

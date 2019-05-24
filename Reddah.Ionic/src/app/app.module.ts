@@ -43,6 +43,7 @@ import { TimeLinePage } from './timeline/timeline.page';
 import { MyTimeLinePage } from './mytimeline/mytimeline.page';
 import { UserPage } from './user/user.page';
 import { ArticlePopPage } from './article-pop/article-pop.page'
+import { HeaderAddPage } from './article-pop/header-add-pop.page'
 import { ChangeCoverPopPage } from './article-pop/change-cover-pop.page'
 import { ArticleTextPopPage } from './article-pop/article-text-pop.page'
 import { CommentPopPage } from './article-pop/comment-pop.page'
@@ -87,6 +88,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
       MyTimeLinePage,
       UserPage,
       ArticlePopPage,
+      HeaderAddPage,
       ChangeCoverPopPage,
       ArticleTextPopPage,
       CommentPopPage,
@@ -114,6 +116,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
       MyInfoPage,
       NewFriendPage,
       ArticlePopPage,
+      HeaderAddPage,
       ChangeCoverPopPage,
       ArticleTextPopPage,
       CommentPopPage,
@@ -184,5 +187,5 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 })
 export class AppModule {}
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+    return new TranslateHttpLoader(http);
 }

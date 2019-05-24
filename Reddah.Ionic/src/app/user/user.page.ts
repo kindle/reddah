@@ -80,8 +80,8 @@ export class UserPage implements OnInit {
 
     async viewTimeline(){
         const timelineModal = await this.modalController.create({
-          component: TimeLinePage,
-          componentProps: { userName: this.userName }
+            component: TimeLinePage,
+            componentProps: { userName: this.userName }
         });
           
         await timelineModal.present();
@@ -100,55 +100,55 @@ export class UserPage implements OnInit {
         console.log('Begin async operation');
     
         setTimeout(() => {
-          this.clearCacheAndReload();
-          event.target.complete();
+            this.clearCacheAndReload();
+            event.target.complete();
         }, 2000);
     }
 
     async presentActionSheet() {
         const actionSheet = await this.actionSheetController.create({
-          //header: '',
-          buttons: [{
-            text: '刷新',
-            role: 'destructive',
-            icon: 'refresh',
-            handler: () => {
-                this.clearCacheAndReload();
-            }
-          }, {
-            text: 'Share',
-            icon: 'share',
-            handler: () => {
-              console.log('Share clicked');
-            }
-          }, {
-            text: '加入黑名单',
-            icon: 'remove-circle-outline',
-            handler: () => {
-              console.log('Play clicked');
-            }
-          }, {
-            text: 'Favorite',
-            icon: 'heart',
-            handler: () => {
-              console.log('Favorite clicked');
-            }
-          }, {
-            text: '删除',
-            icon: 'ios-trash',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
-          }]
+            //header: '',
+            buttons: [{
+              text: '刷新',
+              role: 'destructive',
+              icon: 'refresh',
+              handler: () => {
+                  this.clearCacheAndReload();
+              }
+            }, {
+              text: 'Share',
+              icon: 'share',
+              handler: () => {
+                console.log('Share clicked');
+              }
+            }, {
+              text: '加入黑名单',
+              icon: 'remove-circle-outline',
+              handler: () => {
+                console.log('Play clicked');
+              }
+            }, {
+              text: 'Favorite',
+              icon: 'heart',
+              handler: () => {
+                console.log('Favorite clicked');
+              }
+            }, {
+              text: '删除',
+              icon: 'ios-trash',
+              role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+              }
+            }]
         });
         await actionSheet.present();
     }
 
     async addFriend(){
         const addFriendModal = await this.modalController.create({
-          component: AddFriendPage,
-          componentProps: { targetUserName: this.userName }
+            component: AddFriendPage,
+            componentProps: { targetUserName: this.userName }
         });
           
         await addFriendModal.present();
@@ -156,15 +156,15 @@ export class UserPage implements OnInit {
   
     async viewer(photo) {
         const modal = await this.modalController.create({
-          component: ImageViewerComponent,
-          componentProps: {
-            imgSource: [photo],
-            imgTitle: "",
-            imgDescription: ""
-          },
-          cssClass: 'modal-fullscreen',
-          keyboardClose: true,
-          showBackdrop: true
+            component: ImageViewerComponent,
+            componentProps: {
+              imgSourceArray: [photo],
+              imgTitle: "",
+              imgDescription: ""
+            },
+            cssClass: 'modal-fullscreen',
+            keyboardClose: true,
+            showBackdrop: true
         });
     
         return await modal.present();

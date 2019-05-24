@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LoadingController, NavController, ModalController } from '@ionic/angular';
+import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
 import { SearchPage } from '../search/search.page';
-
+import { HeaderAddPage } from '../article-pop/header-add-pop.page';
 
 @Component({
     selector: 'app-header',
@@ -12,7 +12,10 @@ export class HeaderComponent implements OnInit {
 
     @Input() title: string;
 
-    constructor(private modalController: ModalController) { }
+    constructor(
+        private modalController: ModalController,
+        private popoverController: PopoverController,
+    ) { }
 
     ngOnInit() {
         
@@ -24,6 +27,16 @@ export class HeaderComponent implements OnInit {
         });
           
         await userModal.present();
+    }
+
+    async add(ev: any) {
+        const popover = await this.popoverController.create({
+            component: HeaderAddPage,
+            event: ev,
+            translucent: true,
+            cssClass: 'header-add-popover'
+        });
+        return await popover.present();
     }
 
 }
