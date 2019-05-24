@@ -4,12 +4,8 @@
 </ion-item>
 <ion-content style="align-items: center; background-color:white;">
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" spinner="none">
-            <ion-refresher-content 
-                pullingIcon="arrow-dropdown"
-                pullingText="Pull to refresh"
-                refreshingSpinner="bubbles"
-                refreshingText="Refreshing...">
-            </ion-refresher-content>
+        <ion-refresher-content refreshingSpinner="bubbles">
+        </ion-refresher-content>
     </ion-refresher>
     <ion-item no-padding>
         <ion-thumbnail style="padding:10px;">

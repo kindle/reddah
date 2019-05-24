@@ -17,9 +17,13 @@ export class ScanPage implements OnInit {
     ) { }
 
     debug = "";
-    ngOnInit() {
-    // Show scanner 
+    ngOnInit(){
+        this.scanner();
+    }
 
+    // Show scanner 
+    scanner() {
+        (window.document.querySelector('html') as HTMLElement).classList.add('cameraView');
         // Optionally request the permission early
         QRScanner.prepare()
         .then((status: QRScannerStatus) => {
@@ -44,9 +48,9 @@ export class ScanPage implements OnInit {
                     scanSub.unsubscribe(); // stop scanning
                     //this.modalController.dismiss();
                 });
-/*
+
                 QRScanner.resumePreview();
-                
+               
                 // show camera preview
                 QRScanner.show()
                     .then((data: QRScannerStatus) => {
@@ -56,7 +60,7 @@ export class ScanPage implements OnInit {
                         console.log('show error', err);
                         this.debug+= err;
                     });
-*/
+
 
             } else if (status.denied) {
                 // camera permission was permanently denied
@@ -70,7 +74,7 @@ export class ScanPage implements OnInit {
         })
         .catch((e: any) => {console.log('Error is', e);this.debug+= e});
 
-        (window.document.querySelector('html') as HTMLElement).classList.add('cameraView');
+        
     }
 
     ionViewWillLeave() {
@@ -107,6 +111,13 @@ export class ScanPage implements OnInit {
         });
           
         await userModal.present();
+        const { data } = await userModal.onDidDismiss();
+        if(data){
+            this.scanner();
+        }
+        else{
+            this.scanner();
+        }
     }
 
 }

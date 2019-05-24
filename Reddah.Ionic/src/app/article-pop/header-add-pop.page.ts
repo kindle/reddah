@@ -3,7 +3,7 @@ import { PopoverController } from '@ionic/angular';
 
 @Component({
     template: `
-        <div>
+        <div (click)="close()">
             <ion-item button (click)="foo()">
                 <ion-icon slot="start" color="tertiary" name="ios-person-add"></ion-icon>  
                 <ion-label>添加朋友</ion-label>
