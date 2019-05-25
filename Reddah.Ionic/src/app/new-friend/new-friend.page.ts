@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-
+import { UserPage } from '../user/user.page';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
+import { AddFriendPage } from '../add-friend/add-friend.page'
+import { SearchUserPage } from '../search-user/search-user.page'
 
 @Component({
     selector: 'app-new-friend',
@@ -56,8 +58,20 @@ export class NewFriendPage implements OnInit {
 
     }
 
-    async search(){
-        //popup search page
+    async addFriend(){
+        const modal = await this.modalController.create({
+            component: AddFriendPage
+        });
+          
+        await modal.present();
+    }
+
+    async searchUser(){
+        const modal = await this.modalController.create({
+            component: SearchUserPage
+        });
+          
+        await modal.present();
     }
 
     hasAccepted = false;
@@ -86,5 +100,17 @@ export class NewFriendPage implements OnInit {
             }
         });
     }
+
+    async goUser(userName){
+        const userModal = await this.modalController.create({
+            component: UserPage,
+            componentProps: { 
+                userName: userName
+            }
+        });
+          
+        await userModal.present();
+    }
+
 
 }

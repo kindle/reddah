@@ -7,6 +7,7 @@ import { ReddahService } from '../reddah.service';
 import { ArticlePopPage } from '../article-pop/article-pop.page';
 import { CacheService } from "ionic-cache";
 import { UserPage } from '../user/user.page';
+import { SearchPage } from '../search/search.page';
 
 @Component({
     selector: 'app-postviewer',
@@ -104,6 +105,18 @@ export class PostviewerPage implements OnInit {
             component: UserPage,
             componentProps: { 
                 userName: userName
+            }
+        });
+          
+        await userModal.present();
+    }
+
+    async goSearch(key){
+        const userModal = await this.modalController.create({
+            component: SearchPage,
+            componentProps: { 
+                key: key,
+                type: 0,//article only
             }
         });
           

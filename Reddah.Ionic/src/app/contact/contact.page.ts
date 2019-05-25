@@ -113,9 +113,10 @@ export class ContactPage {
             
         await newFriendModal.present();
         const { data } = await newFriendModal.onDidDismiss();
-        if(data)
+        if(data||!data)
         {
             this.cacheService.clearGroup("ContactPage");
+            this.loadRequests();
             this.loadData();
         }
     }
@@ -129,6 +130,13 @@ export class ContactPage {
         });
           
         await userModal.present();
+        const { data } = await userModal.onDidDismiss();
+        if(data||!data)
+        {
+            this.cacheService.clearGroup("ContactPage");
+            this.loadRequests();
+            this.loadData();
+        }
     }
 
     foo(){}

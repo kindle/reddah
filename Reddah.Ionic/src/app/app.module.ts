@@ -33,6 +33,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AddCommentPage } from './add-comment/add-comment.page';
 import { AddFriendPage } from './add-friend/add-friend.page';
+import { ApplyFriendPage } from './apply-friend/apply-friend.page';
 import { ChangePhotoPage } from './change-photo/change-photo.page';
 import { MyInfoPage } from './my-info/my-info.page';
 import { NewFriendPage } from './new-friend/new-friend.page';
@@ -66,6 +67,7 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { AutoresizeDirective } from './autoresize-textarea.directive';
 import { CommentBoxComponent } from './comment-box/comment-box.component';
 import { SearchPage } from './search/search.page';
+import { SearchUserPage } from './search-user/search-user.page';
 import { QrcardPage } from './qrcard/qrcard.page';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 
@@ -75,6 +77,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
       LocalePage,
       AddCommentPage,
       AddFriendPage,
+      ApplyFriendPage,
       ChangePhotoPage,
       MyInfoPage,
       NewFriendPage,
@@ -103,6 +106,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
       AutoresizeDirective,
       CommentBoxComponent,
       SearchPage,
+      SearchUserPage,
       QrcardPage,
   ],
   entryComponents: [
@@ -112,6 +116,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
       LoginPage,
       AddCommentPage,
       AddFriendPage,
+      ApplyFriendPage,
       ChangePhotoPage,
       MyInfoPage,
       NewFriendPage,
@@ -130,6 +135,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
       StockPage,
       CommentReplyPage,
       SearchPage,
+      SearchUserPage,
       QrcardPage,
   ],
   imports: [

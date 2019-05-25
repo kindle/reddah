@@ -14,6 +14,9 @@ import { StockPage } from '../stock/stock.page';
 })
 export class SearchPage implements OnInit {
 
+    @Input() key: string;
+    @Input() type: number;
+
     userName: string;
 
     showTopic=true;
@@ -49,9 +52,16 @@ export class SearchPage implements OnInit {
     firstLoading = false;
 
     async ngOnInit() {
-        setTimeout(() => {
-            this.searchKeyword.setFocus();
-        },150);
+        if(this.key){
+            this.chooseTopic([].concat.apply([],this.topics)[this.type]);
+            this.searchKeyword.value = this.key;
+            this.search();
+        }
+        else{
+            setTimeout(() => {
+                this.searchKeyword.setFocus();
+            },150);
+        }
     }
 
     async close() {

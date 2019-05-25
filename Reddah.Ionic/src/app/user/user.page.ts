@@ -9,7 +9,7 @@ import { PostviewerPage } from '../postviewer/postviewer.page';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { TimelinePopPage } from '../article-pop/timeline-pop.page';
-import { AddFriendPage } from '../add-friend/add-friend.page';
+import { ApplyFriendPage } from '../apply-friend/apply-friend.page';
 import { TimeLinePage } from '../timeline/timeline.page';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { TimelineCommentPopPage } from '../article-pop/timeline-comment-pop.page'
@@ -98,8 +98,6 @@ export class UserPage implements OnInit {
     }
 
     doRefresh(event) {
-        console.log('Begin async operation');
-    
         setTimeout(() => {
             this.clearCacheAndReload();
             event.target.complete();
@@ -122,14 +120,16 @@ export class UserPage implements OnInit {
               handler: () => {
                   console.log('Share clicked');
               }
-            },
-            {
-              text: '删除好友',
-              icon: 'ios-trash',
-              handler: () => {
-                  this.delCinfirm();                  
-              }
-            }]
+            }
+            ].concat(this.reddah.appData('userisfriend_'+this.userName)==1?
+                [{
+                    text: '删除好友',
+                    icon: 'ios-trash',
+                    handler: () => {
+                        this.delCinfirm();                  
+                    }
+                }]:[]
+            )
         });
         await actionSheet.present();
     }
@@ -140,16 +140,27 @@ export class UserPage implements OnInit {
           message: '确定要删除好友吗？',
           buttons: [
             {
-              text: '取消',
-              cssClass: 'secondary',
-              handler: (blah) => {
-                console.log('Confirm Cancel: blah');
-              }
-            }, {
-              text: '删除',
-              handler: () => {
-                console.log('Confirm Okay');
-              }
+                text: '取消',
+                cssClass: 'secondary',
+                handler: (blah) => {
+                    
+                }
+            }, 
+            {
+                text: '删除',
+                handler: () => {
+                    console.log('start del fr')
+                    let formData = new FormData();
+                    formData.append("targetUser", this.userName);
+                    this.reddah.removeFriend(formData).subscribe(data=>{
+                        if(data.Success==0)
+                            this.localStorageService.store(`userisfriend_${this.userName}`, 0);
+                            this.reddah.appPhoto[`userisfriend_${this.userName}`] = 0;
+                            this.cacheService.clearGroup("ContactPage");
+                            this.cacheService.clearGroup("TimeLinePage"+this.userName);
+                            this.modalController.dismiss();
+                    });
+                }
             }
           ]
         });
@@ -158,12 +169,12 @@ export class UserPage implements OnInit {
     }
 
     async addFriend(){
-        const addFriendModal = await this.modalController.create({
-            component: AddFriendPage,
+        const applyFriendModal = await this.modalController.create({
+            component: ApplyFriendPage,
             componentProps: { targetUserName: this.userName }
         });
           
-        await addFriendModal.present();
+        await applyFriendModal.present();
     }
   
     async viewer(photo) {

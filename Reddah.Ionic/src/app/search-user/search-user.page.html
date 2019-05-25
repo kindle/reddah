@@ -1,0 +1,11 @@
+
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-input placeholder="UserName" #searchKeyword clearInput (keyup.enter)="search()"></ion-input>
+</ion-item>
+<ion-content no-padding style="background-color: white;">
+    <ion-item>
+        <ion-icon name="ios-person-add" slot="start" color="tertiary" class="portrait"></ion-icon>
+        <ion-label style="margin-left:10px;">搜索:{{searchKeyword.value}}</ion-label>
+    </ion-item>
+</ion-content>

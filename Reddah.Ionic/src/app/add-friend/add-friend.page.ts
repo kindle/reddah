@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-
+import { QrcardPage } from '../qrcard/qrcard.page';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
+import { SearchUserPage } from '../search-user/search-user.page'
 
 @Component({
     selector: 'app-add-friend',
@@ -11,50 +12,38 @@ import { ReddahService } from '../reddah.service';
 })
 export class AddFriendPage implements OnInit {
 
-  @ViewChild('newRequest') newRequest;
-  @Input() targetUserName: string;
-  targetNoteName: string;
-  
-  formData: FormData;
-  message: string;
-  permission: false;
+    userName;
 
+    constructor(
+        private modalController: ModalController,
+        public reddah: ReddahService,
+        private localStorageService: LocalStorageService
+    ) { 
+        this.userName = this.reddah.getCurrentUser();
+    }
 
-  constructor(
-      private modalController: ModalController,
-      private reddahService: ReddahService,
-      private localStorageService: LocalStorageService
-  ) { }
+    async ngOnInit() {
+        
+    }
 
-  async ngOnInit() {
-      this.message = `我是${this.reddahService.getCurrentUser()}`; 
-      this.targetNoteName = this.targetUserName;
-      setTimeout(() => {
-        this.newRequest.setFocus();
-      },150);
-  }
+    async close() {
+        await this.modalController.dismiss(false);
+    }
 
-  submitClicked=false;
-  async submit() {
-      this.submitClicked = true;
-      this.formData = new FormData();
-      this.formData.append("targetUser", this.targetUserName);
-      this.formData.append("targetNoteName", this.targetNoteName);
-      this.formData.append("permission", this.permission?"Allow":"NotAllow");
-      this.formData.append("message", this.message);
+    async searchUser(){
+        const modal = await this.modalController.create({
+            component: SearchUserPage
+        });
+          
+        await modal.present();
+    }
 
-      this.reddahService.addFriend(this.formData)
-          .subscribe(result => 
-          {
-              console.log(result);
-              this.modalController.dismiss(false);
-          }
-      );
-      
-  }
-
-  async close() {
-      await this.modalController.dismiss(false);
-  }
+    async myQrCard(){
+        const modal = await this.modalController.create({
+            component: QrcardPage
+        });
+        
+        await modal.present();
+    }
 
 }

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, ModalController } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
+import { AddFriendPage } from '../add-friend/add-friend.page';
 
 @Component({
     template: `
         <div (click)="close()">
-            <ion-item button (click)="foo()">
+            <ion-item button (click)="addFriend()">
                 <ion-icon slot="start" color="tertiary" name="ios-person-add"></ion-icon>  
                 <ion-label>添加朋友</ion-label>
             </ion-item>
@@ -25,6 +26,7 @@ export class HeaderAddPage {
     constructor(
         public popoverCtrl: PopoverController,
         public reddah: ReddahService,
+        private modalController: ModalController,
         ) {
         this.locale = this.reddah.getCurrentLocale();
     }
@@ -38,7 +40,11 @@ export class HeaderAddPage {
         this.popoverCtrl.dismiss();
     }
 
-    foo(){
-      
+    async addFriend(){
+        const addFriendModal = await this.modalController.create({
+            component: AddFriendPage,
+        });
+          
+        await addFriendModal.present();
     }
 }

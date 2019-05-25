@@ -143,6 +143,18 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private removeFriendUrl = 'https://login.reddah.com/api/article/removefriend'; 
+
+    removeFriend(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.removeFriendUrl, formData)
+        .pipe(
+            tap(data => this.log('remove friend')),
+            catchError(this.handleError('remove friend', []))
+        );
+    }
+    //******************************** */
     private approveFriendUrl = 'https://login.reddah.com/api/article/approvefriend'; 
 
     approveFriend(formData: FormData): Observable<any> {
@@ -516,8 +528,9 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
                     this.toTextCache(userInfo.Signature, `usersignature_${userName}`);
                 if(userInfo.NoteName!=null)
                     this.toTextCache(userInfo.NoteName, `usernotename_${userName}`);
-                if(userInfo.UserName!=this.getCurrentUser())
+                if(userInfo.UserName!=this.getCurrentUser()){
                     this.toTextCache(userInfo.IsFriend?1:0, `userisfriend_${userName}`);
+                }
             
             });
         }

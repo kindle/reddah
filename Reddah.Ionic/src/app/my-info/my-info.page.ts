@@ -89,12 +89,12 @@ export class MyInfoPage implements OnInit {
         this.changed = data;
     }
 
-    async qrCard(){
+    async myQrCard(){
         const qrModal = await this.modalController.create({
             component: QrcardPage
-          });
-            
-          await qrModal.present();
+        });
+        
+        await qrModal.present();
     }
 
 }

@@ -533,6 +533,49 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("removefriend")]
+        [HttpPost]
+        public IHttpActionResult RemoveFriend()
+        {
+            UserInfo userInfo = new UserInfo();
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string targetUser = HttpContext.Current.Request["targetUser"];
+                
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var itemMe = db.UserFriend.FirstOrDefault(f => f.UserName == jwtResult.JwtUser.User && f.Watch == targetUser && f.Approve==1);
+                    if(itemMe!=null)
+                        db.UserFriend.Remove(itemMe);
+                    var itemIt = db.UserFriend.FirstOrDefault(f => f.Watch == jwtResult.JwtUser.User && f.UserName == targetUser && f.Approve == 1);
+                    if (itemIt != null)
+                        db.UserFriend.Remove(itemIt);
+
+                    if(itemMe!=null&&itemIt!=null)
+                        db.SaveChanges();
+
+                    return Ok(new ApiResult(0, "success"));
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
         [Route("friends")]
         [HttpPost]
         public IHttpActionResult GetFriends()
