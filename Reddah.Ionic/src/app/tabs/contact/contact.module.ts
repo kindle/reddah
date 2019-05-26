@@ -3,10 +3,10 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FindPage } from './find.page';
+import { ContactPage } from './contact.page';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { HeaderModule } from '../header/header.module';
+import { HeaderModule } from '../../header/header.module';
 
 @NgModule({
   imports: [
@@ -14,11 +14,9 @@ import { HeaderModule } from '../header/header.module';
     CommonModule,
     FormsModule,
     HeaderModule,
-    RouterModule.forChild([{ path: '', component: FindPage }]),
+    RouterModule.forChild([{ path: '', component: ContactPage }]),
     TranslateModule.forChild()
   ],
-  declarations: [FindPage]
+  declarations: [ContactPage]
 })
-export class FindPageModule {
-  
-}
+export class ContactPageModule {}

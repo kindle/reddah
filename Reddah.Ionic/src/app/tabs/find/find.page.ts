@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular'
-import { ScanPage } from '../scan/scan.page';
+import { ScanPage } from '../../scan/scan.page';
 import { StatusBar } from '@ionic-native/status-bar';
-import { SearchPage } from '../search/search.page';
+import { SearchPage } from '../../search/search.page';
 
 @Component({
   selector: 'app-find',

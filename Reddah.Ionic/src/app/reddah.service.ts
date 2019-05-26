@@ -131,6 +131,18 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private searchUserUrl = 'https://login.reddah.com/api/article/searchuser'; 
+
+    searchUser(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.searchUserUrl, formData)
+        .pipe(
+            tap(data => this.log('search user')),
+            catchError(this.handleError('search user', []))
+        );
+    }
+    //******************************** */
     private addFriendUrl = 'https://login.reddah.com/api/article/addfriend'; 
 
     addFriend(formData: FormData): Observable<any> {

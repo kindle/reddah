@@ -32,11 +32,11 @@ import { AuthService } from './auth.service';
 import { FormsModule } from '@angular/forms';
 
 import { AddCommentPage } from './add-comment/add-comment.page';
-import { AddFriendPage } from './add-friend/add-friend.page';
-import { ApplyFriendPage } from './apply-friend/apply-friend.page';
+import { AddFriendPage } from './friend/add-friend/add-friend.page';
+import { ApplyFriendPage } from './friend/apply-friend/apply-friend.page';
 import { ChangePhotoPage } from './change-photo/change-photo.page';
 import { MyInfoPage } from './my-info/my-info.page';
-import { NewFriendPage } from './new-friend/new-friend.page';
+import { NewFriendPage } from './friend/new-friend/new-friend.page';
 import { Toast } from '@ionic-native/toast/ngx';
 import { CommentComponent } from './comment/comment.component';
 import { CommentTimelineComponent } from './commentts/comment.component';
@@ -67,7 +67,7 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { AutoresizeDirective } from './autoresize-textarea.directive';
 import { CommentBoxComponent } from './comment-box/comment-box.component';
 import { SearchPage } from './search/search.page';
-import { SearchUserPage } from './search-user/search-user.page';
+import { SearchUserPage } from './friend/search-user/search-user.page';
 import { QrcardPage } from './qrcard/qrcard.page';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { LocalStorageService } from 'ngx-webstorage';
-import { ReddahService } from '../reddah.service';
+import { ReddahService } from '../../reddah.service';
 
 @Component({
     selector: 'app-apply-friend',

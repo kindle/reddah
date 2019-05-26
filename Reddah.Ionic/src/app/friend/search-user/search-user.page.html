@@ -1,0 +1,23 @@
+
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-input placeholder="UserName" #searchKeyword clearInput (keyup.enter)="search()" (ionChange)="onchange()"></ion-input>
+</ion-item>
+<ion-content no-padding style="background-color: white;">
+    <ion-item *ngIf="!user404">
+        <ion-icon name="ios-person-add" slot="start" color="tertiary" class="portrait"></ion-icon>
+        <ion-label style="margin-left:10px;">搜索:<font color="#107c10">{{searchKeyword.value}}</font></ion-label>
+    </ion-item>
+
+    <div text-center *ngIf="user404" class="user404">
+            该用户不存在
+    </div>
+
+    <ion-item *ngIf="user404">
+        <ion-icon name="ios-search" slot="start" color="tertiary" class="portrait"></ion-icon>
+        <ion-label style="margin-left:10px;">
+            搜一搜 <font color="#107c10">{{searchKeyword.value}}</font>
+            <p class="desc">小程序、公众号、文章、朋友圈和表情等</p>
+        </ion-label>
+    </ion-item>
+</ion-content>

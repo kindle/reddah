@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PopoverController, ModalController } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
-import { AddFriendPage } from '../add-friend/add-friend.page';
+import { AddFriendPage } from '../friend/add-friend/add-friend.page';
 
 @Component({
     template: `

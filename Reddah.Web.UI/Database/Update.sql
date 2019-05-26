@@ -58,6 +58,11 @@ alter table [dbo].[UserProfile] add
 alter table [dbo].[UserProfile] add
   [Cover] VARCHAR (MAX) NULL
 
+--20190526
+alter table [dbo].[UserProfile] add
+  [SysStatus] INT default 0 NOT NULL,  --limit or disable this user 
+  [UserStatus] INT default 0 NOT NULL  --do not want to be searched by username, cell number
+  
 
 
 

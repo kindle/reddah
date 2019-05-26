@@ -3,11 +3,11 @@ import { ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { NewFriendPage } from '../new-friend/new-friend.page';
+import { NewFriendPage } from '../../friend/new-friend/new-friend.page';
 import { StatusBar } from '@ionic-native/status-bar';
-import { ReddahService } from '../reddah.service';
+import { ReddahService } from '../../reddah.service';
 import { CacheService } from 'ionic-cache';
-import { UserPage } from '../user/user.page';
+import { UserPage } from '../../user/user.page';
 
 @Component({
     selector: 'app-contact',

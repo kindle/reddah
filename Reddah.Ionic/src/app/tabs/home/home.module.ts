@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { TranslateModule } from '@ngx-translate/core';
-import { HeaderModule } from '../header/header.module';
+import { HeaderModule } from '../../header/header.module';
 
 @NgModule({
   imports: [

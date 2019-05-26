@@ -477,6 +477,46 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("searchuser")]
+        [HttpPost]
+        public IHttpActionResult SearchUser()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string targetUser = HttpContext.Current.Request["targetUser"];
+                
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    //userset status 0: can be searched by username
+                    //sys status 0: normal user, others: forbidden user
+                    var user = db.UserProfile.FirstOrDefault(u=>u.UserName == targetUser && u.SystemStatus==0 && u.UserSetStatus==0);
+                    if (user != null)
+                    {
+                        return Ok(new ApiResult(0, "success"));
+                    }
+                    else
+                    {
+                        return Ok(new ApiResult(404, "user not found"));
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
         [Route("addfriend")]
         [HttpPost]
         public IHttpActionResult AddFriend()

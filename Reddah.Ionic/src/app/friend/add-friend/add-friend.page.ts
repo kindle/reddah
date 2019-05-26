@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { QrcardPage } from '../qrcard/qrcard.page';
+import { QrcardPage } from '../../qrcard/qrcard.page';
 import { LocalStorageService } from 'ngx-webstorage';
-import { ReddahService } from '../reddah.service';
+import { ReddahService } from '../../reddah.service';
 import { SearchUserPage } from '../search-user/search-user.page'
 
 @Component({

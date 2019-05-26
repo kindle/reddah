@@ -9,7 +9,7 @@ import { PostviewerPage } from '../postviewer/postviewer.page';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { TimelinePopPage } from '../article-pop/timeline-pop.page';
-import { ApplyFriendPage } from '../apply-friend/apply-friend.page';
+import { ApplyFriendPage } from '../friend/apply-friend/apply-friend.page';
 import { TimeLinePage } from '../timeline/timeline.page';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { TimelineCommentPopPage } from '../article-pop/timeline-comment-pop.page'

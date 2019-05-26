@@ -23,5 +23,7 @@ namespace Reddah.Web.Login
         public string NickName { get; set; }
         public string Location { get; set; }
         public string Cover { get; set; }
+        public int SystemStatus { get; set; }
+        public int UserSetStatus { get; set; }
     }
 }

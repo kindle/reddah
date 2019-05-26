@@ -36,6 +36,10 @@ public partial class UserProfile
 
     public string Cover { get; set; }
 
+    public int SystemStatus { get; set; }
+
+    public int UserSetStatus { get; set; }
+
 }
 
 }

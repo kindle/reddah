@@ -7,10 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
-import { ContactPageModule } from '../contact/contact.module';
-import { AboutPageModule } from '../about/about.module';
-import { FindPageModule } from '../find/find.module';
-import { HomePageModule } from '../home/home.module';
+import { ContactPageModule } from './contact/contact.module';
+import { AboutPageModule } from './about/about.module';
+import { FindPageModule } from './find/find.module';
+import { HomePageModule } from './home/home.module';
 
 import { TranslateModule } from '@ngx-translate/core';
 
