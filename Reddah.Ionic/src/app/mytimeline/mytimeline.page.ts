@@ -5,15 +5,15 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, PopoverController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { TimelinePopPage } from '../article-pop/timeline-pop.page';
-import { UserPage } from '../user/user.page';
-import { TimelineCommentPopPage } from '../article-pop/timeline-comment-pop.page'
-import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
+import { TimelinePopPage } from '../common/timeline-pop.page';
+import { UserPage } from '../common/user/user.page';
+import { TimelineCommentPopPage } from '../common/timeline-comment-pop.page'
+import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ArticleTextPopPage } from '../article-pop/article-text-pop.page'
-import { ChangeCoverPopPage } from '../article-pop/change-cover-pop.page'
-import { AddTimelinePage } from '../add-timeline/add-timeline.page'
+import { ArticleTextPopPage } from '../common/article-text-pop.page'
+import { ChangeCoverPopPage } from '../common/change-cover-pop.page'
+import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page'
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';

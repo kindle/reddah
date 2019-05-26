@@ -1,75 +1,77 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { NgxWebstorageModule } from 'ngx-webstorage';
+import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { JsonpModule } from '@angular/http';
+import { AlertController, ActionSheetController, 
+         IonicModule, IonicRouteStrategy, IonRouterOutlet,
+         Platform, PopoverController,
+         ModalController, MenuController } from '@ionic/angular';
 
-import { IonicModule, IonicRouteStrategy, Platform, AlertController, IonRouterOutlet } from '@ionic/angular';
-import { ModalController, ActionSheetController, PopoverController, MenuController } from '@ionic/angular';
 
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-import { ReddahService } from './reddah.service';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
+import { Crop } from '@ionic-native/crop/ngx';
+import { Camera } from '@ionic-native/Camera/ngx'
+import { File } from '@ionic-native/file/ngx';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { LocalePage } from './locale/locale.page';
-import { SafePipe } from './safe.pipe';
+import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
+import { QRScanner } from '@ionic-native/qr-scanner/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Toast } from '@ionic-native/toast/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
-import { HttpModule,JsonpModule } from '@angular/http';
-import { Camera } from '@ionic-native/Camera/ngx'
-import { PostviewerPage } from './postviewer/postviewer.page';
-import { ImageViewerComponent } from './image-viewer/image-viewer.component';
-import { LoginPage } from './login/login.page';
-import { ScanPage } from './scan/scan.page';
-import { AuthService } from './auth.service';
-import { FormsModule } from '@angular/forms';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import { IonicImageLoader } from 'ionic-image-loader';
+import { CacheModule } from "ionic-cache";
+import { DragulaModule } from 'ng2-dragula';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 
-import { AddCommentPage } from './add-comment/add-comment.page';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { ReddahService } from './reddah.service';
+import { LocalePage } from './common/locale/locale.page';
+import { SafePipe } from './safe.pipe';
+import { PostviewerPage } from './postviewer/postviewer.page';
+import { ImageViewerComponent } from './common/image-viewer/image-viewer.component';
+import { LoginPage } from './login/login.page';
+import { ScanPage } from './common/scan/scan.page';
+import { AuthService } from './auth.service';
+import { AddCommentPage } from './postviewer/add-comment/add-comment.page';
 import { AddFriendPage } from './friend/add-friend/add-friend.page';
 import { ApplyFriendPage } from './friend/apply-friend/apply-friend.page';
-import { ChangePhotoPage } from './change-photo/change-photo.page';
-import { MyInfoPage } from './my-info/my-info.page';
+import { ChangePhotoPage } from './common/change-photo/change-photo.page';
+import { MyInfoPage } from './common/my-info/my-info.page';
 import { NewFriendPage } from './friend/new-friend/new-friend.page';
-import { Toast } from '@ionic-native/toast/ngx';
-import { CommentComponent } from './comment/comment.component';
-import { CommentTimelineComponent } from './commentts/comment.component';
-import { TimeLinePage } from './timeline/timeline.page';
+import { CommentComponent } from './postviewer/comment/comment.component';
+import { CommentTimelineComponent } from './mytimeline/commentts/comment.component';
+import { TimeLinePage } from './mytimeline/timeline/timeline.page';
 import { MyTimeLinePage } from './mytimeline/mytimeline.page';
-import { UserPage } from './user/user.page';
-import { ArticlePopPage } from './article-pop/article-pop.page'
-import { HeaderAddPage } from './article-pop/header-add-pop.page'
-import { ChangeCoverPopPage } from './article-pop/change-cover-pop.page'
-import { ArticleTextPopPage } from './article-pop/article-text-pop.page'
-import { CommentPopPage } from './article-pop/comment-pop.page'
-import { TimelinePopPage } from './article-pop/timeline-pop.page'
-import { TimelineCommentPopPage } from './article-pop/timeline-comment-pop.page'
-import { QRScanner } from '@ionic-native/qr-scanner/ngx';
-import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { Crop } from '@ionic-native/crop/ngx';
-import { IonicImageLoader } from 'ionic-image-loader';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { CacheModule } from "ionic-cache";
-import { TsViewerPage } from './tsviewer/tsviewer.page'
-import { AddTimelinePage } from './add-timeline/add-timeline.page';
-import { DragulaModule } from 'ng2-dragula';
-import { StockPage } from './stock/stock.page';
-import { CommentReplyPage } from './comment-reply/comment-reply.page';
-import { ProgressBarComponent } from './progress-bar/progress-bar.component';
+import { UserPage } from './common/user/user.page';
+import { ArticlePopPage } from './common/article-pop.page'
+import { HeaderAddPage } from './common/header-add-pop.page'
+import { ChangeCoverPopPage } from './common/change-cover-pop.page'
+import { ArticleTextPopPage } from './common/article-text-pop.page'
+import { CommentPopPage } from './common/comment-pop.page'
+import { TimelinePopPage } from './common/timeline-pop.page'
+import { TimelineCommentPopPage } from './common/timeline-comment-pop.page'
+import { TsViewerPage } from './mytimeline/tsviewer/tsviewer.page'
+import { AddTimelinePage } from './mytimeline/add-timeline/add-timeline.page';
+import { StockPage } from './common/stock/stock.page';
+import { CommentReplyPage } from './postviewer/comment-reply/comment-reply.page';
 import { AutoresizeDirective } from './autoresize-textarea.directive';
-import { CommentBoxComponent } from './comment-box/comment-box.component';
-import { SearchPage } from './search/search.page';
+import { CommentBoxComponent } from './postviewer/comment-box/comment-box.component';
+import { SearchPage } from './common/search/search.page';
 import { SearchUserPage } from './friend/search-user/search-user.page';
-import { QrcardPage } from './qrcard/qrcard.page';
-import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { QrcardPage } from './common/qrcard/qrcard.page';
+
 
 @NgModule({
   declarations: [
@@ -101,7 +103,6 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
       TsViewerPage,
       AddTimelinePage,
       StockPage,
-      ProgressBarComponent,
       CommentReplyPage,
       AutoresizeDirective,
       CommentBoxComponent,
@@ -162,32 +163,31 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
   exports:[
   ],
   providers: [
+      ActionSheetController,
       AppVersion,
       AppUpdate,
-      InAppBrowser,
-      StatusBar,
-      SplashScreen,
+      AlertController,
       AuthService,
       Camera,
+      Crop,
+      InAppBrowser,
       IonicImageLoader,
+      IonRouterOutlet,
       File,
       FileTransfer,
       FileTransferObject,
-      WebView,
-      Crop,
-      QRScanner,
-      PhotoLibrary,
-      Toast,
-      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
-      ReddahService,
-      Platform,
-      IonRouterOutlet,
-      AlertController,
-      AuthService,
-      ModalController,
-      ActionSheetController,
-      PopoverController,
       MenuController,
+      ModalController,
+      PhotoLibrary,
+      Platform,
+      PopoverController,
+      QRScanner,
+      ReddahService,
+      StatusBar,
+      SplashScreen,
+      Toast,
+      WebView,
+      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
   ],
   bootstrap: [AppComponent]
 })

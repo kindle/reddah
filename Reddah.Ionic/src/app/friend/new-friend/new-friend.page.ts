@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { UserPage } from '../../user/user.page';
+import { UserPage } from '../../common/user/user.page';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../../reddah.service';
 import { AddFriendPage } from '../add-friend/add-friend.page'

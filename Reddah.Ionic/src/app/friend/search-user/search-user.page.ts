@@ -3,7 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../../reddah.service';
-import { UserPage } from '../../user/user.page'
+import { UserPage } from '../../common/user/user.page'
+import { SearchPage } from '../../common/search/search.page'
 
 @Component({
     selector: 'app-search-user',
@@ -60,6 +61,18 @@ export class SearchUserPage implements OnInit {
                 alert(result.Message);
             }
         });
+    }
+
+    async searchMore(){
+        const userModal = await this.modalController.create({
+            component: SearchPage,
+            componentProps: { 
+                key: this.searchKeyword.value,
+                type: -1
+            }
+        });
+          
+        await userModal.present();
     }
 
     async goUser(userName){

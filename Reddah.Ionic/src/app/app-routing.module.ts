@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SelectiveStrategyService } from './selective-strategy.service';
 import { LoginPage } from './login/login.page';
-import { ScanPage } from './scan/scan.page';
+import { ScanPage } from './common/scan/scan.page';
 import { MyTimeLinePage } from './mytimeline/mytimeline.page';
-import { AddTimelinePage } from './add-timeline/add-timeline.page';
+import { AddTimelinePage } from './mytimeline/add-timeline/add-timeline.page';
 import { AuthGuard } from './AuthGuard.service';
 
 const routes: Routes = [

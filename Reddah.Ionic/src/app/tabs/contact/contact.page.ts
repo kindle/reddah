@@ -7,7 +7,7 @@ import { NewFriendPage } from '../../friend/new-friend/new-friend.page';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from 'ionic-cache';
-import { UserPage } from '../../user/user.page';
+import { UserPage } from '../../common/user/user.page';
 
 @Component({
     selector: 'app-contact',

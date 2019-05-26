@@ -3,7 +3,7 @@ import { AuthService } from '../auth.service';
 import { Platform } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ModalController } from '@ionic/angular';
-import { LocalePage } from '../locale/locale.page';
+import { LocalePage } from '../common/locale/locale.page';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({

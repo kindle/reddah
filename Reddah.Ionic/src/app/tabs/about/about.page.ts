@@ -5,7 +5,7 @@ import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LocalePage } from '../../locale/locale.page';
+import { LocalePage } from '../../common/locale/locale.page';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -14,7 +14,7 @@ import { ReddahService } from '../../reddah.service';
 import { AuthService }      from '../../auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
-import { MyInfoPage } from '../../my-info/my-info.page';
+import { MyInfoPage } from '../../common/my-info/my-info.page';
 
 import { ImageLoaderService } from 'ionic-image-loader';
 import { StatusBar } from '@ionic-native/status-bar/ngx';

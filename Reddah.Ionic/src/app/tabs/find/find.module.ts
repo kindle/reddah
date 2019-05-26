@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { FindPage } from './find.page';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { HeaderModule } from '../../header/header.module';
+import { HeaderModule } from '../../common/header/header.module';
 
 @NgModule({
   imports: [

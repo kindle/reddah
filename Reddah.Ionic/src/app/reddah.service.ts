@@ -6,10 +6,10 @@ import {
   JSONPBackend, URLSearchParams, QueryEncoder, ResponseContentType
 } from '@angular/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Article } from "./article";
-import { UserProfileModel } from './UserProfileModel';
-import { UserModel, QueryCommentModel, NewCommentModel, NewTimelineModel } from './UserModel';
-import { Locale } from './locale';
+import { Article } from "./model/article";
+import { UserProfileModel } from './model/UserProfileModel';
+import { UserModel, QueryCommentModel, NewCommentModel, NewTimelineModel } from './model/UserModel';
+import { Locale } from './model/locale';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';

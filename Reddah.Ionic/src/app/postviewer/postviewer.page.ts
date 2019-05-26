@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
-import { Article } from '../article';
-import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
+import { Article } from '../model/article';
+import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 import { Location } from '@angular/common';
 import { ReddahService } from '../reddah.service';
-import { ArticlePopPage } from '../article-pop/article-pop.page';
+import { ArticlePopPage } from '../common/article-pop.page';
 import { CacheService } from "ionic-cache";
-import { UserPage } from '../user/user.page';
-import { SearchPage } from '../search/search.page';
+import { UserPage } from '../common/user/user.page';
+import { SearchPage } from '../common/search/search.page';
 
 @Component({
     selector: 'app-postviewer',

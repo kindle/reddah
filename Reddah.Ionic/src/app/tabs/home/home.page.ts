@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { InfiniteScroll, Content } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
-import { Article } from '../../article';
+import { Article } from '../../model/article';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
-import { LocalePage } from '../../locale/locale.page';
+import { LocalePage } from '../../common/locale/locale.page';
 import { PostviewerPage } from '../../postviewer/postviewer.page';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
-import { MyInfoPage } from '../../my-info/my-info.page';
+import { MyInfoPage } from '../../common/my-info/my-info.page';
 import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({

@@ -1,0 +1,109 @@
+
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-input placeholder="搜索" #searchKeyword clearInput (keyup.enter)="search()"></ion-input>
+</ion-item>
+<ion-content no-padding style="background-color: white;" #searchResult>
+    <ion-grid *ngIf="showTopic">
+        <ion-row style="padding:10px;">
+            <ion-col text-center>
+                <ion-note>搜索指定内容</ion-note>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let row of topics" style="padding:10px;">
+            <ion-col *ngFor="let col of row" text-center>
+                <ion-text (click)="chooseTopic(col)">{{col.name}}</ion-text>
+            </ion-col>
+        </ion-row> 
+    </ion-grid>
+    <ion-grid *ngIf="selectedTopicId==1">
+        <ion-row>
+            <ion-spinner name="bubbles" *ngIf="firstLoading_a"></ion-spinner>
+            <ion-text *ngIf="firstLoading_t" class="loadingText">正在加载...</ion-text>
+            <span class="articleTab" *ngIf="articles_a.length>0">相关文章</span>
+        </ion-row>
+        <ion-row *ngFor="let article of articles_a" (click)="view(article)">
+            <span class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span>
+            <ion-item>
+                <ion-avatar class="avatar-top" *ngIf="article.ImageUrls.length>0">
+                    <img src="{{article.ImageUrls[0]}}">
+                </ion-avatar>
+                <ion-label>
+                    <p class="articleContent" text-wrap>{{reddah.summary(article.Content, 100, article.Locale)}}</p>
+                    <ion-note class="articleFooter">{{reddah.htmlDecode(article.UserName)}}</ion-note>
+                    <ion-note class="articleFooterTime">{{article.CreatedOn}}</ion-note>
+                </ion-label>
+            </ion-item>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="selectedTopicId==2">
+        <ion-row>
+            <ion-spinner name="bubbles" *ngIf="firstLoading_t"></ion-spinner>
+            <ion-text *ngIf="firstLoading_t" class="loadingText">正在加载...</ion-text>
+            <span class="articleTab" *ngIf="articles_t.length>0">相关朋友圈</span>
+        </ion-row>
+        <ion-row *ngFor="let article of articles_t" (click)="viewTs(article)">
+            <div style="width:100%;border-bottom: 1px solid #eeeeee;padding: 10px 0;">
+                <span class="articleTitle">{{reddah.summary(article.Title, 100, article.Locale)}}</span>
+                <ion-item style="margin: 8px 0;" lines="none" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0">
+                    <ion-thumbnail *ngFor="let image of article.Content.split('$$$').splice(0,3);index as i" style="padding: 1px;">
+                        <img src="{{image}}">
+                    </ion-thumbnail>
+                </ion-item>
+                <ion-label class="articleTitle">
+                    <ion-note class="articleFooter">{{reddah.htmlDecode(article.UserName)}}</ion-note>
+                    <ion-note class="articleFooterTime">{{article.CreatedOn}}</ion-note>
+                </ion-label>
+            </div>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="selectedTopicId==0">
+        <ion-row>
+            <ion-spinner name="bubbles" *ngIf="firstLoading_a"></ion-spinner>
+            <ion-text *ngIf="firstLoading_a" class="loadingText">正在加载...</ion-text>
+            <span class="articleTab" *ngIf="articles_a.length>0">相关文章</span>
+        </ion-row>
+        <ion-row *ngFor="let article_a of articles_a" (click)="view(article_a)">
+            <span class="articleTitle">{{reddah.htmlDecode(article_a.Title)}}</span>
+            <ion-item>
+                <ion-avatar class="avatar-top" *ngIf="article_a.ImageUrls.length>0">
+                    <img src="{{article_a.ImageUrls[0]}}">
+                </ion-avatar>
+                <ion-label>
+                    <p class="articleContent" text-wrap>{{reddah.summary(article_a.Content, 100, article_a.Locale)}}</p>
+                    <ion-note class="articleFooter">{{reddah.htmlDecode(article_a.UserName)}}</ion-note>
+                    <ion-note class="articleFooterTime">{{article_a.CreatedOn}}</ion-note>
+                </ion-label>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <span class="articleTab" *ngIf="articles_a.length>0" (click)="more(0)">更多文章>></span>
+        </ion-row>
+        <ion-row>
+            <ion-spinner name="bubbles" *ngIf="firstLoading_t"></ion-spinner>
+            <ion-text *ngIf="firstLoading_t" class="loadingText">正在加载...</ion-text>
+            <span class="articleTab" *ngIf="articles_t.length>0">相关朋友圈</span>
+        </ion-row>
+        <ion-row *ngFor="let article_t of articles_t" (click)="viewTs(article_t)">
+            <div style="width:100%;border-bottom: 1px solid #eeeeee;padding: 10px 0;">
+                <span class="articleTitle">{{reddah.summary(article_t.Title, 100, article_t.Locale)}}</span>
+                <ion-item style="margin: 8px 0;" lines="none" *ngIf="article_t.Content.split('$$$').length>0&&article_t.Content.split('$$$')[0].length>0">
+                    <ion-thumbnail *ngFor="let image of article_t.Content.split('$$$').splice(0,3);index as i" style="padding: 1px;">
+                        <img src="{{image}}">
+                    </ion-thumbnail>
+                </ion-item>
+                <ion-label class="articleTitle">
+                    <ion-note class="articleFooter">{{reddah.htmlDecode(article_t.UserName)}}</ion-note>
+                    <ion-note class="articleFooterTime">{{article_t.CreatedOn}}</ion-note>
+                </ion-label>
+            </div>
+        </ion-row>
+        <ion-row>
+            <span class="articleTab" *ngIf="articles_t.length>0" (click)="more(1)">更多朋友圈>></span>
+        </ion-row>
+    </ion-grid>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" *ngIf="selectedTopicId!=0">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
