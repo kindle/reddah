@@ -88,6 +88,10 @@ export class StockPage implements OnInit {
                     title: {
                         text: this.s + ' Historical'
                     },
+                    //colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce',
+                    //        '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
+                    //colors: ['red', '#0d233a', '#8bbc21', '#910000', '#1aadce',
+                    //        '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
                     yAxis: [
                         {
                             labels: {
@@ -132,6 +136,10 @@ export class StockPage implements OnInit {
                     {
                         name: this.s,
                         type: 'candlestick',
+                        color: 'green',
+                        lineColor: 'green',
+                        upColor: 'red',
+                        upLineColor: 'red',
                         data: ohlc,
                         //showInNavigator: false,
                         //dataGrouping: {
@@ -141,6 +149,10 @@ export class StockPage implements OnInit {
                     {
                         type: 'column',
                         name: 'Volume',
+                        //color: 'green',
+                        //lineColor: 'green',
+                        //upColor: 'red',
+                        //upLineColor: 'red',
                         data: volume,
                         yAxis: 1,
                         //dataGrouping: {

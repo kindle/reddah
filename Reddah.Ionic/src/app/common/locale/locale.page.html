@@ -1,10 +1,8 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Change Locale</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
+<ion-item color="light" no-padding lines="none">
+  <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+  <ion-label>Change Locale</ion-label>
+</ion-item>
+<ion-content no-padding>
   <ng-template ngFor let-locale [ngForOf]="service.Locales">
       <ion-item (click)="changeLocale(locale.Name)" *ngIf="locale.Name!=selectedLocale">
           <ion-icon slot="start" name="radio-button-off"></ion-icon>

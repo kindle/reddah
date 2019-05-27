@@ -10,26 +10,30 @@ import { TranslateService } from '@ngx-translate/core';
     styleUrls: ['./locale.page.scss'],
 })
 export class LocalePage implements OnInit {
-  @Input() orgLocale: string;
+    @Input() orgLocale: string;
 
-  selectedLocale: string;
+    selectedLocale: string;
 
-  constructor(
-      private localStorageService: LocalStorageService,
-      private modalController: ModalController,
-      private translate: TranslateService,
-      public service: ReddahService) {
-  }
+    constructor(
+        private localStorageService: LocalStorageService,
+        private modalController: ModalController,
+        private translate: TranslateService,
+        public service: ReddahService) {
+    }
 
-  ngOnInit() {
-      this.selectedLocale = this.orgLocale;
-  }
-  
-  async changeLocale(selector: string) {
-      this.localStorageService.store("Reddah_Locale", selector);
-      this.selectedLocale = selector;
-      this.translate.use(selector);
-      await this.modalController.dismiss(selector!==this.orgLocale);
-  }
+    ngOnInit() {
+        this.selectedLocale = this.orgLocale;
+    }
+    
+    async changeLocale(selector: string) {
+        this.localStorageService.store("Reddah_Locale", selector);
+        this.selectedLocale = selector;
+        this.translate.use(selector);
+        await this.modalController.dismiss(selector!==this.orgLocale);
+    }
+
+    async close() {
+        await this.modalController.dismiss();
+    }
 
 }

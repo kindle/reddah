@@ -1,54 +1,59 @@
 <app-header title="Menu.Find"></app-header>
 <ion-content style="background-color: #eeeeee;">
-    <ion-card>
-        <ion-item href="/mytimeline">
+  <div class="gap">
+      <ion-item lines="none" class="borderTop borderItem borderBottom" href="/mytimeline">
           <ion-icon name="aperture" slot="start"></ion-icon>
           <ion-label>Reddah</ion-label>
-          <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
-        </ion-item>
-    </ion-card>
-    <ion-card>
-        <ion-item href="/scan">
+          <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+      </ion-item>
+  </div>
+
+  <div class="gap">
+      <ion-item class="borderTop borderItem" href="/scan">
           <ion-icon name="qr-scanner" slot="start"></ion-icon>
           <ion-label>扫一扫</ion-label>
-          <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item href="#">
-          <ion-icon name="pulse" slot="start"></ion-icon>
-          <ion-label>摇一摇</ion-label>
-        </ion-item>
-    </ion-card>
+          <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+      </ion-item>
+      <ion-item lines="none" class="borderItem borderBottom" href="#">
+        <ion-icon name="pulse" slot="start"></ion-icon>
+        <ion-label>摇一摇</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+      </ion-item>
+  </div>
 
-    <ion-card>
-        <ion-item href="/tabs/(home:home)">
+  <div class="gap">
+      <ion-item class="borderTop borderItem" href="/tabs/(home:home)">
           <ion-icon name="eye" slot="start"></ion-icon>
           <ion-label>看一看</ion-label>
-          <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item (click)="goSearch()">
-          <ion-icon name="search" slot="start"></ion-icon>
-          <ion-label>搜一搜</ion-label>
-          <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
-        </ion-item>
-    </ion-card>
+          <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+      </ion-item>
+      <ion-item lines="none" class="borderItem borderBottom" (click)="goSearch()">
+        <ion-icon name="search" slot="start"></ion-icon>
+        <ion-label>搜一搜</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+      </ion-item>
+  </div>
 
-    <ion-card>
-        <ion-item href="#">
+  <div class="gap">
+      <ion-item class="borderTop borderItem" href="#">
           <ion-icon name="cart" slot="start"></ion-icon>
           <ion-label>买买买</ion-label>
-        </ion-item>
-        <ion-item href="#">
+          <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+      </ion-item>
+      <ion-item lines="none" class="borderItem borderBottom" href="#">
           <ion-icon name="logo-game-controller-b" slot="start"></ion-icon>
           <ion-label>小游戏</ion-label>
-        </ion-item>
-    </ion-card>
+          <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+      </ion-item>
+  </div>
 
-    <ion-card>
-        <ion-item href="#">
+  <div class="gap lastGap">
+      <ion-item lines="none" class="borderTop borderItem borderBottom" href="#">
           <ion-icon name="infinite" slot="start"></ion-icon>
           <ion-label>小程序</ion-label>
-        </ion-item>
-    </ion-card>
+          <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+      </ion-item>
+  </div>
 </ion-content>
 
 

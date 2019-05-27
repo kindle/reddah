@@ -72,6 +72,8 @@ import { SearchPage } from './common/search/search.page';
 import { SearchUserPage } from './friend/search-user/search-user.page';
 import { QrcardPage } from './common/qrcard/qrcard.page';
 import { SettingListPage } from './settings/setting-list/setting-list.page';
+import { SettingGePage } from './settings/setting-ge/setting-ge.page';
+import { SettingAboutPage } from './settings/setting-about/setting-about.page';
 
 
 @NgModule({
@@ -109,6 +111,8 @@ import { SettingListPage } from './settings/setting-list/setting-list.page';
       CommentBoxComponent,
       SearchPage,
       SearchUserPage,
+      SettingAboutPage,
+      SettingGePage,
       SettingListPage,
       QrcardPage,
   ],
@@ -139,6 +143,8 @@ import { SettingListPage } from './settings/setting-list/setting-list.page';
       CommentReplyPage,
       SearchPage,
       SearchUserPage,
+      SettingAboutPage,
+      SettingGePage,
       SettingListPage,
       QrcardPage,
   ],

@@ -71,6 +71,7 @@ export class ContactPage {
             }
 
             this.groupContacts(contacts);
+            //this.groupContacts_Zh(contacts, null);
         });  
     }
 
@@ -83,9 +84,9 @@ export class ContactPage {
         let currentLetter = false;
         let currentContacts = [];
 
-        sortedContacts.forEach((value, index) => {
+        sortedContacts.forEach((value, index, alias) => {
 
-            let name = value.NoteName ? value.NoteName : value.UserName;
+            let name = value.NoteName ? value.NoteName : value.Watch;
             if(name.charAt(0) != currentLetter){
 
                 currentLetter = name.charAt(0);
@@ -104,6 +105,39 @@ export class ContactPage {
 
         });
 
+    }
+
+
+    groupContacts_Zh(contacts, empty){
+
+        //this.contacts = [];
+
+        if(!String.prototype.localeCompare){
+            return;
+        }
+        
+        var letters = "*abcdefghjklmnopqrstwxyz".split('');
+        var zh = "阿八嚓哒妸发旮哈讥咔垃痳拏噢妑七呥扨它穵夕丫帀".split('');
+          
+        this.groupedContacts = [];
+        var curr;
+
+        letters.forEach((ch, index, array)=>{
+            curr = { letter: ch, contacts:[] };
+            contacts.forEach((contact, j, alias)=>{
+                let name = contact.NoteName ? contact.NoteName : contact.Watch;
+                if((!zh[index-1] || zh[index-1].localeCompare(name, "zh") <= 0) && name.localeCompare(zh[index], "zh") == -1) {
+                    curr.contacts.push(contact);
+                }
+            });
+            
+            if(empty || curr.contacts.length) {
+                this.groupedContacts.push(curr);
+                curr.contacts.sort(function(a, b){
+                   return a.Watch.localeCompare(b.Watch, "zh");
+               });
+            }
+        });
     }
 
     async viewNewFriends(){

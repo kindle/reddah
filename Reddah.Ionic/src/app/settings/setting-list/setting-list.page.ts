@@ -4,6 +4,8 @@ import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
+import { SettingAboutPage } from '../setting-about/setting-about.page';
+import { SettingGePage } from '../setting-ge/setting-ge.page';
 
 @Component({
     selector: 'app-setting-list',
@@ -20,7 +22,7 @@ export class SettingListPage implements OnInit {
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
-        private authService: AuthService,
+        public authService: AuthService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
@@ -37,6 +39,22 @@ export class SettingListPage implements OnInit {
 
     logout() {
         this.authService.logout();
+    }
+
+    async goAbout(){
+        const modal = await this.modalController.create({
+            component: SettingAboutPage,
+        });
+        
+        await modal.present();
+    }
+
+    async goGeneral(){
+        const modal = await this.modalController.create({
+            component: SettingGePage,
+        });
+        
+        await modal.present();
     }
 
 }
