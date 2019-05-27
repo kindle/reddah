@@ -1,8 +1,8 @@
-<ion-content class="aboutContent">
+<ion-content no-padding class="aboutContent">
     <ion-item lines="none" style="margin-bottom: 10px;">
       <ion-icon slot="end" name="camera" (click)="takePhoto()"></ion-icon>
     </ion-item>
-    <ion-item (click)="myInfo()" lines="none">
+    <ion-item (click)="myInfo()" lines="none" class="borderBottom">
         <ion-thumbnail slot="start" style="padding: 5px;">
           <img src="{{reddah.appPhoto['userphoto_'+userName]}}" class="portrait">
         </ion-thumbnail>
@@ -13,6 +13,47 @@
         <ion-icon name="ios-qr-scanner" slot="end"></ion-icon>
         <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
     </ion-item>
+
+    <div class="gap">
+        <ion-item lines="none" class="borderTop borderBottom">
+            <ion-icon slot="start" name="checkmark-circle" color="primary"></ion-icon>
+            <ion-label>支付</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+    </div>
+
+    <div class="gap">
+        <ion-item class="borderTop">
+            <ion-icon slot="start" name="bookmark"></ion-icon>
+            <ion-label>收藏</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item>
+            <ion-icon slot="start" name="images"></ion-icon>
+            <ion-label>相册</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item>
+            <ion-icon slot="start" name="card"></ion-icon>
+            <ion-label>卡包</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item lines="none" class="borderBottom">
+            <ion-icon slot="start" name="happy"></ion-icon>
+            <ion-label>表情</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+      </ion-item>
+    </div>
+
+    <div class="gap lastGap">
+        <ion-item lines="none" (click)="goSettings()" class="borderTop borderBottom">
+            <ion-icon slot="start" name="settings"></ion-icon>
+            <ion-label>设置</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+    </div>
+
+
 
     <ion-card>
       <ion-card-header>{{ 'About.CurrentVersion' | translate }}</ion-card-header>
@@ -31,14 +72,7 @@
         <ion-button (click)="changeLocale()">{{ 'About.ChangeLocale' | translate }}</ion-button>
       </ion-card-content>
     </ion-card>
-    <ion-card *ngIf="this.authService.authenticated()">
-      <ion-card-content>
-        <ion-button (click)="logout()">{{ 'Button.Logout' | translate }}</ion-button>
-      </ion-card-content>
-      <ion-card-header>
-        <ion-label>{{ 'About.CurrentUser' | translate }}: {{currentUser}}</ion-label>
-    </ion-card-header>
-    </ion-card>
+    
     <img [src]="image" *ngIf="image" />
     <ion-card>
       <ion-card-header>

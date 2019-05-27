@@ -1,0 +1,54 @@
+
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-label>设置</ion-label>
+</ion-item>
+<ion-content no-padding style="background-color: white;" #searchResult>
+    <div>
+        <ion-item lines="none" class="borderTop borderBottom">
+            <ion-label>账号与安全</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+    </div>
+
+    <div class="gap">
+        <ion-item class="borderTop">
+            <ion-label>新消息提醒</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item>
+            <ion-label>勿扰模式</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item>
+            <ion-label>聊天</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item>
+            <ion-label>隐私</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item lines="none" class="borderBottom">
+            <ion-label>通用</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+      </ion-item>
+    </div>
+
+    <div class="gap">
+        <ion-item class="borderTop">
+            <ion-label>关于Reddah</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item lines="none" class="borderBottom" href="https://reddah.com/{{locale}}/r/feedbacks">
+            <ion-label>帮助与反馈</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+      </ion-item>
+    </div>
+
+    <div class="gap lastGap" *ngIf="this.authService.authenticated()">
+        <ion-item lines="none" class="borderTop borderBottom" (click)="logout()">
+            <ion-label>{{ 'Button.Logout' | translate }}</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+    </div>
+</ion-content>

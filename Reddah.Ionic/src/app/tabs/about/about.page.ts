@@ -11,11 +11,11 @@ import { NavController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../../reddah.service';
-import { AuthService }      from '../../auth.service';
+import { AuthService } from '../../auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { MyInfoPage } from '../../common/my-info/my-info.page';
-
+import { SettingListPage } from '../../settings/setting-list/setting-list.page';
 import { ImageLoaderService } from 'ionic-image-loader';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -68,6 +68,14 @@ export class AboutPage implements OnInit {
         this.userName = this.localStorageService.retrieve("Reddah_CurrentUser");
 
         this.reddah.getUserPhotos(this.userName);
+    }
+
+    async goSettings(){
+        const modal = await this.modalController.create({
+            component: SettingListPage,
+        });
+        
+        await modal.present();
     }
 
     formData: FormData;
@@ -179,9 +187,7 @@ export class AboutPage implements OnInit {
 
     }
 
-    logout() {
-        this.authService.logout();
-    }
+    
 
     async myInfo() {
         const myInfoModal = await this.modalController.create({

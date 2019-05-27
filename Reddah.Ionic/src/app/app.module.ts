@@ -71,6 +71,7 @@ import { CommentBoxComponent } from './postviewer/comment-box/comment-box.compon
 import { SearchPage } from './common/search/search.page';
 import { SearchUserPage } from './friend/search-user/search-user.page';
 import { QrcardPage } from './common/qrcard/qrcard.page';
+import { SettingListPage } from './settings/setting-list/setting-list.page';
 
 
 @NgModule({
@@ -108,6 +109,7 @@ import { QrcardPage } from './common/qrcard/qrcard.page';
       CommentBoxComponent,
       SearchPage,
       SearchUserPage,
+      SettingListPage,
       QrcardPage,
   ],
   entryComponents: [
@@ -137,6 +139,7 @@ import { QrcardPage } from './common/qrcard/qrcard.page';
       CommentReplyPage,
       SearchPage,
       SearchUserPage,
+      SettingListPage,
       QrcardPage,
   ],
   imports: [
