@@ -5,11 +5,12 @@
 <ion-content no-padding style="background-color: #eeeeee;">
     <div class="lastGap">
         <ion-item class="borderTop borderItem" (click)="changeLocale()">
+            <ion-icon slot="start" name="globe" color="primary" size="medium"></ion-icon>
             <ion-label>{{ 'About.ChangeLocale' | translate }}</ion-label>
             <ion-text slot="end">{{currentLocaleInfo}}</ion-text>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
-        <ion-item lines="none" class="borderItem" (click)="goAbout()">
+        <ion-item class="borderItem" (click)="goAbout()">
             <ion-label>字体大小</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>

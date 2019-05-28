@@ -1,1 +1,19 @@
+.newFriend {
+    width: 40px; 
+    height: 40px; 
+    margin: 5px; 
+    background-color: #f99d3a;
+    border-radius: 3px;
+}
 
+.publicPoster {
+    width: 40px; 
+    height: 40px; 
+    margin: 5px; 
+    background-color: #2781d7;
+    border-radius: 3px;
+}
+
+.userPhoto #shadow-root img {
+    border-radius: 3px;
+}

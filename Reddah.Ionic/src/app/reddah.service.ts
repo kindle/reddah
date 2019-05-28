@@ -155,6 +155,18 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private changeNoteNameUrl = 'https://login.reddah.com/api/article/changenotename'; 
+
+    changeNoteName(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.changeNoteNameUrl, formData)
+        .pipe(
+            tap(data => this.log('change note name')),
+            catchError(this.handleError('change note name', []))
+        );
+    }
+    //******************************** */
     private removeFriendUrl = 'https://login.reddah.com/api/article/removefriend'; 
 
     removeFriend(formData: FormData): Observable<any> {
@@ -525,6 +537,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             this.getUserInfo(formData)
             .subscribe(userInfo => 
             {
+                console.log(userInfo);
                 if(userInfo.Cover!=null)
                     this.toImageCache(userInfo.Cover, `cover_${userName}`);
                 if(userInfo.Photo!=null)
@@ -557,6 +570,23 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             return (<any>window).Ionic.WebView.convertFileSrc(org);
         }
         return url;
+    }
+
+    getSortLetter(text, locale){
+        if(!String.prototype.localeCompare)
+            return null;
+    
+        let letters = "*abcdefghjklmnopqrstwxyz".split('');
+        let zh = "阿八嚓哒妸发旮哈讥咔垃痳拏噢妑七呥扨它穵夕丫帀".split('');
+    
+        let result = '#';
+        letters.forEach((letter, i) => {
+            if((!zh[i-1] || zh[i-1].localeCompare(text, locale) <= 0) && text.localeCompare(zh[i], locale) == -1) {
+                result = letter;
+            }
+        });
+
+        return result;
     }
     
 }

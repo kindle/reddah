@@ -11,6 +11,7 @@ import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { SettingNoteLabelPage } from '../../settings/setting-note-label/setting-note-label.page';
 
 @Component({
     selector: 'app-user',
@@ -60,13 +61,13 @@ export class UserPage implements OnInit {
             .subscribe(timeline => 
             {
                 for(let article of timeline){
-                    console.log(article);
+                    
                     article.Content.split('$$$').forEach((item)=>{
-                        if(this.imageList.length<2)  
+                        if(this.imageList.length<3)  
                             this.imageList.push(item);
                     });
                     
-                    if(this.imageList.length>=2)
+                    if(this.imageList.length>=3)
                         break;
                 }
             }
@@ -143,7 +144,6 @@ export class UserPage implements OnInit {
             {
                 text: '删除',
                 handler: () => {
-                    console.log('start del fr')
                     let formData = new FormData();
                     formData.append("targetUser", this.userName);
                     this.reddah.removeFriend(formData).subscribe(data=>{
@@ -185,6 +185,20 @@ export class UserPage implements OnInit {
         });
     
         return await modal.present();
-  }
+    }
+
+    async changeNoteName(){
+        const modal = await this.modalController.create({
+            component: SettingNoteLabelPage,
+            componentProps: { 
+                targetUserName: this.userName,
+                currentNoteName: this.reddah.appData('usernotename_'+this.userName)
+            }
+        });
+        await modal.present();
+        const {data} = await modal.onDidDismiss();
+        if(data||!data)
+            this.reddah.getUserPhotos(this.userName);
+    }
 
 }

@@ -74,7 +74,8 @@ import { QrcardPage } from './common/qrcard/qrcard.page';
 import { SettingListPage } from './settings/setting-list/setting-list.page';
 import { SettingGePage } from './settings/setting-ge/setting-ge.page';
 import { SettingAboutPage } from './settings/setting-about/setting-about.page';
-
+import { SettingNoteLabelPage } from './settings/setting-note-label/setting-note-label.page';
+import { ChangeNoteNamePopPage } from './common/change-notename-pop.page';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { SettingAboutPage } from './settings/setting-about/setting-about.page';
       AddFriendPage,
       ApplyFriendPage,
       ChangePhotoPage,
+      ChangeNoteNamePopPage,
       MyInfoPage,
       NewFriendPage,
       PostviewerPage,
@@ -114,6 +116,7 @@ import { SettingAboutPage } from './settings/setting-about/setting-about.page';
       SettingAboutPage,
       SettingGePage,
       SettingListPage,
+      SettingNoteLabelPage,
       QrcardPage,
   ],
   entryComponents: [
@@ -125,6 +128,7 @@ import { SettingAboutPage } from './settings/setting-about/setting-about.page';
       AddFriendPage,
       ApplyFriendPage,
       ChangePhotoPage,
+      ChangeNoteNamePopPage,
       MyInfoPage,
       NewFriendPage,
       ArticlePopPage,
@@ -146,6 +150,7 @@ import { SettingAboutPage } from './settings/setting-about/setting-about.page';
       SettingAboutPage,
       SettingGePage,
       SettingListPage,
+      SettingNoteLabelPage,
       QrcardPage,
   ],
   imports: [

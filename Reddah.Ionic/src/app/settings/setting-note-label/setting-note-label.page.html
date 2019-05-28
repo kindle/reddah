@@ -1,0 +1,11 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-label>设置备注和标签</ion-label>
+    <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">完成</ion-button>
+</ion-item>
+<ion-content no-padding style="background-color: #eeeeee;">
+    <ion-item no-padding margin>
+        <ion-label position="stacked">为朋友设置备注</ion-label>
+        <ion-input margin-top type="text" [(ngModel)]="currentNoteName" clearInput [disabled]="submitClicked"></ion-input>
+    </ion-item>
+</ion-content>

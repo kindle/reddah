@@ -463,7 +463,7 @@ namespace Reddah.Web.Login.Controllers
                     (f.UserName == targetUser && f.Watch == jwtResult.JwtUser.User && f.Approve == 1));
                     userInfo.IsFriend = findFriends != null;
                     if(userInfo.IsFriend)
-                        userInfo.NoteName = db.UserFriend.FirstOrDefault(f=>f.UserName == jwtResult.JwtUser.User && f.Approve == 1).NoteName;
+                        userInfo.NoteName = db.UserFriend.FirstOrDefault(f=>f.UserName == jwtResult.JwtUser.User && f.Watch==targetUser && f.Approve == 1).NoteName;
                     
                     return Ok(userInfo);
 
@@ -510,6 +510,41 @@ namespace Reddah.Web.Login.Controllers
                 }
 
 
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("changenotename")]
+        [HttpPost]
+        public IHttpActionResult ChangeNoteName()
+        {
+            UserInfo userInfo = new UserInfo();
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string targetUser = HttpContext.Current.Request["targetUser"];
+                string targetNoteName = HttpContext.Current.Request["targetNoteName"];
+                
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var target = db.UserFriend.FirstOrDefault(uf => uf.UserName == jwtResult.JwtUser.User && uf.Watch == targetUser&& uf.Approve==1);
+                    target.NoteName = targetNoteName;
+                    db.SaveChanges();
+
+                    return Ok(new ApiResult(0, "success"));
+                }
             }
             catch (Exception ex)
             {

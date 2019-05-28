@@ -83,6 +83,7 @@ export class MyTimeLinePage implements OnInit {
         .subscribe(timeline => 
         {
             this.articles = [];
+            this.loadedIds = [];
             this.commentData = new Map();
 
             for(let article of timeline){
@@ -116,6 +117,8 @@ export class MyTimeLinePage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
         .subscribe(timeline => 
         {
+            this.loadedIds = [];
+            this.articles = [];
             for(let article of timeline){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
@@ -190,16 +193,17 @@ export class MyTimeLinePage implements OnInit {
         });
         await popover.present();
         const { data } = await popover.onDidDismiss();
-
-        //data=1: take a photo, data=2: lib
-        this.goPost(data);
-        /*if(data!=null){
-            this.router.navigate(['/post'], {
-              queryParams: {
-                postType: data
-              }
-            });
-        }*/
+        if(data==1||data==2){
+            //data=1: take a photo, data=2: lib
+            this.goPost(data);
+            /*if(data!=null){
+                this.router.navigate(['/post'], {
+                queryParams: {
+                    postType: data
+                }
+                });
+            }*/
+        }
     }
 
     async goPost(postType){
@@ -210,7 +214,7 @@ export class MyTimeLinePage implements OnInit {
           
         await postModal.present();
         const { data } = await postModal.onDidDismiss();
-        if(data){
+        if(data||!data){
             this.clearCacheAndReload(null);
         }
     }

@@ -5,3 +5,41 @@
 .portrait{
     border-radius: 8px;
 }
+
+.gap{
+    padding-top: 10px;
+    background-color: #eeeeee;
+}
+
+.lastGap{
+    padding-bottom: 100%;
+}
+
+.borderTop {
+    border-top: 1px solid #dedede;
+}
+
+.borderBottom {
+    border-bottom: 1px solid #dedede;
+}
+
+.borderItem {
+}
+
+.userInfo p { 
+    padding: 2px;
+    margin-left: 10px;
+}
+
+.userInfo h1 { 
+    padding: 2px;
+    padding-top: 15px;
+    margin-left: 10px;
+}
+
+.userPhoto{
+    padding-top: 0px;
+    padding-bottom:10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
