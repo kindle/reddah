@@ -10,10 +10,10 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-//@import "./app/postviewer/postviewer.page.scss";
-//@import "./app/common/scan/scan.page.scss";
-//@import "./app/mytimeline/timeline/timeline.page.scss";
-//@import "./app/common/user/user.page.scss";
+@import "./app/common/scan/scan.page.scss";
+@import "./app/postviewer/postviewer.page.scss";
+@import "./app/mytimeline/timeline/timeline.page.scss";
+@import "./app/common/user/user.page.scss";
 
 /* in-flight clone */
 .gu-mirror {

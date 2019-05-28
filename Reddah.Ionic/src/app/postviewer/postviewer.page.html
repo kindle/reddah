@@ -1,18 +1,14 @@
 <ion-content [scrollEvents]="true" (ionScroll)="commentbox.onScroll($event)">
-    <div style="padding: 10px;">
+    <div style="padding-left: 10px;padding-top: 10px;padding-bottom: 10px;">
         <H1 [innerHTML]="reddah.htmlDecode(article.Title) | safe: 'html'"></H1>
-        <ion-item no-padding padding-bottom>
+        <ion-item no-padding>
             <ion-text color="primary" margin-end (click)="goUser(article.UserName)">
                 <span [innerHTML]="article.UserName | safe: 'html'"></span>
             </ion-text>
             <ion-text color="dark" margin-end>
                 {{article.CreatedOn}} 
             </ion-text>
-            <ion-buttons slot="end">
-                <ion-button (click)="presentPopover($event)">
-                    <ion-icon slot="icon-only" name="ios-more"></ion-icon>
-                </ion-button>
-            </ion-buttons>
+            <ion-icon slot="icon-only" slot="end" name="ios-more" (click)="presentPopover($event)"></ion-icon>
         </ion-item>
         <ion-text color="dark">
             <div id="articleContent" (click)="viewer($event)" [innerHTML]="reddah.htmlDecode(article.Content) | safe: 'html'"></div>
