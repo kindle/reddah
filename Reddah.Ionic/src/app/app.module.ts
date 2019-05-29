@@ -76,6 +76,8 @@ import { SettingGePage } from './settings/setting-ge/setting-ge.page';
 import { SettingAboutPage } from './settings/setting-about/setting-about.page';
 import { SettingNoteLabelPage } from './settings/setting-note-label/setting-note-label.page';
 import { ChangeNoteNamePopPage } from './common/change-notename-pop.page';
+import { SettingAccountPage } from './settings/setting-account/setting-account.page';
+import { SettingPrivacyPage } from './settings/setting-privacy/setting-privacy.page';
 
 @NgModule({
   declarations: [
@@ -118,6 +120,8 @@ import { ChangeNoteNamePopPage } from './common/change-notename-pop.page';
       SettingListPage,
       SettingNoteLabelPage,
       QrcardPage,
+      SettingAccountPage,
+      SettingPrivacyPage,
   ],
   entryComponents: [
       LocalePage,
@@ -152,6 +156,8 @@ import { ChangeNoteNamePopPage } from './common/change-notename-pop.page';
       SettingListPage,
       SettingNoteLabelPage,
       QrcardPage,
+      SettingAccountPage,
+      SettingPrivacyPage,
   ],
   imports: [
       BrowserModule, 

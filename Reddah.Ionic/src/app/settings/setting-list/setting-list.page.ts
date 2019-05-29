@@ -5,7 +5,9 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
 import { SettingAboutPage } from '../setting-about/setting-about.page';
+import { SettingAccountPage } from '../setting-account/setting-account.page';
 import { SettingGePage } from '../setting-ge/setting-ge.page';
+import { SettingPrivacyPage } from '../setting-privacy/setting-privacy.page';
 
 @Component({
     selector: 'app-setting-list',
@@ -44,6 +46,22 @@ export class SettingListPage implements OnInit {
     async goAbout(){
         const modal = await this.modalController.create({
             component: SettingAboutPage,
+        });
+        
+        await modal.present();
+    }
+
+    async goAccount(){
+        const modal = await this.modalController.create({
+            component: SettingAccountPage,
+        });
+        
+        await modal.present();
+    }
+
+    async goPrivacy(){
+        const modal = await this.modalController.create({
+            component: SettingPrivacyPage,
         });
         
         await modal.present();

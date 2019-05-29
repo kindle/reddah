@@ -1,0 +1,36 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-label>帐号与安全</ion-label>
+</ion-item>
+<ion-content no-padding style="background-color: #eeeeee;">
+    <div>
+        <ion-item class="borderTop borderItem">
+            <ion-label>帐号</ion-label>
+            <ion-note slot="end">{{userName}}</ion-note>
+        </ion-item>
+        <ion-item lines="none" class="borderBottom borderItem" (click)="goEmail()">
+            <ion-label>电子邮件</ion-label>
+            <ion-text slot="end"></ion-text>
+            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
+    </div>
+
+    <div class="gap">
+        <ion-item class="borderTop borderItem borderBottom" (click)="goPassword()" lines="none">
+            <ion-label>密码</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
+    </div>
+
+    <div class="gap lastGap">
+        <ion-item lines="none" class="borderTop borderItem" (click)="goSafeCenter()">
+            <ion-label slot="start">Reddah安全中心</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
+        <ion-item lines="none" class="borderItem borderBottom">
+            <ion-note slot="start" text-wrap>
+                如果你遇到帐号被盗，无法登陆等问题，可以前往安全中心
+            </ion-note>
+        </ion-item>
+    </div>
+</ion-content>
