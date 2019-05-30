@@ -23,7 +23,10 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-
+//import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+//import { Firebase } from '@ionic-native/firebase/ngx';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -79,6 +82,16 @@ import { ChangeNoteNamePopPage } from './common/change-notename-pop.page';
 import { SettingAccountPage } from './settings/setting-account/setting-account.page';
 import { SettingPrivacyPage } from './settings/setting-privacy/setting-privacy.page';
 import { ChatPage } from './chat/chat.page';
+
+var firebaseConfig = {
+    apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
+    authDomain: "reddah-com.firebaseapp.com",
+    databaseURL: "https://reddah-com.firebaseio.com",
+    projectId: "reddah-com",
+    storageBucket: "reddah-com.appspot.com",
+    messagingSenderId: "64237460591",
+    appId: "1:64237460591:web:4f2a4411eca1162f"
+  };
 
 @NgModule({
   declarations: [
@@ -182,6 +195,8 @@ import { ChatPage } from './chat/chat.page';
           }
       }),
       NgxQRCodeModule,
+      AngularFireModule.initializeApp(firebaseConfig),
+      AngularFireDatabaseModule,
   ],
   exports:[
   ],
@@ -210,6 +225,7 @@ import { ChatPage } from './chat/chat.page';
       SplashScreen,
       Toast,
       WebView,
+      //Firebase,
       { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
   ],
   bootstrap: [AppComponent]

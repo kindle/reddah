@@ -30,6 +30,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
+        //implementation 'com.google.firebase:firebase-core:16.0.9'
     }
 }
 
@@ -339,3 +340,4 @@ for (def func : cdvPluginPostBuildExtras) {
 if (hasProperty('postBuildExtras')) {
     postBuildExtras()
 }
+//apply plugin: 'com.google.gms.google-services'

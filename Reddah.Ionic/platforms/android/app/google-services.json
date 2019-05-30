@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "64237460591",
+    "firebase_url": "https://reddah-com.firebaseio.com",
+    "project_id": "reddah-com",
+    "storage_bucket": "reddah-com.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64237460591:android:3b9d063b559b0220",
+        "android_client_info": {
+          "package_name": "com.reddah.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64237460591-8d04h9mvquhhj1ubpf3esrn1h8tgolop.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDX4cCUHsw46YEFIGkIEGJpGXgHRJDo60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "64237460591-8d04h9mvquhhj1ubpf3esrn1h8tgolop.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
