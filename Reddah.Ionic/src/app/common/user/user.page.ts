@@ -12,6 +12,7 @@ import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SettingNoteLabelPage } from '../../settings/setting-note-label/setting-note-label.page';
+import { ChatPage } from '../../chat/chat.page';
 
 @Component({
     selector: 'app-user',
@@ -199,6 +200,19 @@ export class UserPage implements OnInit {
         const {data} = await modal.onDidDismiss();
         if(data||!data)
             this.reddah.getUserPhotos(this.userName);
+    }
+
+    async chat(){
+        const modal = await this.modalController.create({
+            component: ChatPage,
+            componentProps: { 
+                title: this.reddah.appData('usernotename_'+this.userName),
+                target: this.userName,
+                
+            }
+        });
+        await modal.present();
+        const {data} = await modal.onDidDismiss();
     }
 
 }

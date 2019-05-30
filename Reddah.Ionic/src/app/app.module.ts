@@ -78,6 +78,7 @@ import { SettingNoteLabelPage } from './settings/setting-note-label/setting-note
 import { ChangeNoteNamePopPage } from './common/change-notename-pop.page';
 import { SettingAccountPage } from './settings/setting-account/setting-account.page';
 import { SettingPrivacyPage } from './settings/setting-privacy/setting-privacy.page';
+import { ChatPage } from './chat/chat.page';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { SettingPrivacyPage } from './settings/setting-privacy/setting-privacy.p
       ApplyFriendPage,
       ChangePhotoPage,
       ChangeNoteNamePopPage,
+      ChatPage,
       MyInfoPage,
       NewFriendPage,
       PostviewerPage,
@@ -133,6 +135,7 @@ import { SettingPrivacyPage } from './settings/setting-privacy/setting-privacy.p
       ApplyFriendPage,
       ChangePhotoPage,
       ChangeNoteNamePopPage,
+      ChatPage,
       MyInfoPage,
       NewFriendPage,
       ArticlePopPage,

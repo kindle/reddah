@@ -47,7 +47,7 @@
         </ion-item>
     </div>
     <div class="gap lastGap">
-        <ion-item class="borderTop" href="/#" *ngIf="reddah.appData('userisfriend_'+this.userName)==1">
+        <ion-item class="borderTop" *ngIf="reddah.appData('userisfriend_'+this.userName)==1" (click)="chat()">
             <ion-icon name="chatboxes" slot="start"></ion-icon>
             <ion-label>发消息</ion-label>
         </ion-item>
