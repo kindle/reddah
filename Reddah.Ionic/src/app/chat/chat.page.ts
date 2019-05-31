@@ -5,6 +5,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
+import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 
 @Component({
     selector: 'app-chat',
@@ -33,7 +34,7 @@ export class ChatPage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }
-
+    hubConnection;
     async ngOnInit() {
         this.db.list('/chat').valueChanges().subscribe(data => {
             console.log(data)
@@ -49,6 +50,29 @@ export class ChatPage implements OnInit {
 
             this.firebase.onTokenRefresh()
             .subscribe((token: string) => console.log(`Got a new token ${token}`));*/
+/*
+            this.hubConnection = new HubConnection('https://chat.reddah.com/chat');
+
+            this.hubConnection
+            .start()
+            .then(() => console.log('Connection started!'))
+            .catch(err => console.log('Error while establishing connection :('));
+
+            }*/
+
+
+
+
+            let connection = new HubConnectionBuilder()
+                .withUrl("http://chat.reddah.com")
+                .build();
+            
+            connection.on("send", data => {
+                console.log(data);
+            });
+            
+            connection.start()
+                .then(() => connection.invoke("send", "Hello"));
     }
 
     async close() {
