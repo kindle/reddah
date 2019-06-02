@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { InfiniteScroll, Content } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
 import { createChangeDetectorRef } from '@angular/core/src/view/refs';
+import { getOrCreateChangeDetectorRef } from '@angular/core/src/render3/di';
 //import { AngularFireDatabase } from 'angularfire2/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 
@@ -44,6 +46,12 @@ export class ChatPage implements OnInit {
         //    this.messages = data
         //});
 
+        this.getChat();
+        
+    }
+
+    @ViewChild('pageTop') pageTop: Content;
+    async getChat(){
         let formData = new FormData();
         formData.append("targetUser", this.target);
         this.reddah.getChat(formData).subscribe(data=>{
@@ -53,6 +61,11 @@ export class ChatPage implements OnInit {
                 console.log(data);
                 this.messages =  data.Message.Comments;
                 this.chatId = data.Message.Seed;
+                setTimeout(() => {
+                    if(this.pageTop.scrollToBottom){
+                        this.pageTop.scrollToBottom(0);
+                    }
+                },200)
             }
             else{
                 alert(data);
@@ -76,9 +89,8 @@ export class ChatPage implements OnInit {
     }
 
     sendMessage(){
-        alert(this.chatId)
         this.reddah.addComments(this.chatId, -1, this.message).subscribe(data=>{
-            console.log(data)
+            this.getChat();
         });
         this.message = "";
     }

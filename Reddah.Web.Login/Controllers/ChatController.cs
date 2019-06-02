@@ -71,7 +71,7 @@ namespace Reddah.Web.Login.Controllers
                     var comments = (from c in db.Comment
                                     join u in db.UserProfile on c.UserName equals u.UserName
                                     where c.ArticleId == existingChat.Id
-                                    orderby c.Id ascending
+                                    orderby c.Id descending
                                     select new AdvancedComment
                                     {
                                         Id = c.Id,
@@ -87,7 +87,7 @@ namespace Reddah.Web.Login.Controllers
                                         UserNickName = u.NickName,
                                         UserPhoto = u.Photo,
                                         UserSex = u.Sex
-                                    }).Take(pageCount);
+                                    }).Take(pageCount).OrderBy(n=>n.Id);
 
                     return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
 

@@ -4,7 +4,7 @@
     <ion-label>{{title}}</ion-label>
     <ion-icon slot="icon-only" slot="end" name="ios-more" (click)="option()"></ion-icon>
 </ion-item>
-<ion-content no-padding style="--background: #eeeeee;"> 
+<ion-content no-padding style="--background: #eeeeee;" #pageTop> 
     <ion-grid *ngFor="let comment of messages">
         <ion-row>
             <div text-center class="chatTime" *ngIf="checkIsToday(comment.CreatedOn)">{{comment.CreatedOn | date:'HH:mm'}}</div>
@@ -12,21 +12,21 @@
         </ion-row>
         <ion-row>
             <ion-col no-padding>
-                <ion-item lines="none" color="transparent" no-padding>
-                    <div slot="end" *ngIf="userName==comment.UserName" style="width: auto; display: flex; justify-content: flex-end;">
-                        <div style="min-height:40px; flex:1; background-color: #95ec69; vertical-align: middle;padding:10px;border-radius: 5px;" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                <ion-item lines="none" color="transparent" no-padding no-padding-end>
+                    <div slot="end" *ngIf="userName==comment.UserName" class="chat-container-me">
+                        <div class="chat-box-me" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
                         <div class="chat-arrow-right" style="flex:auto 0;"></div>
                     </div>
-                    <ion-avatar slot="end" style="min-width:40px;" (click)="goUser(comment.UserName)" *ngIf="userName==comment.UserName">
+                    <ion-avatar class="chat-avatar-top" slot="end" style="min-width:40px;" (click)="goUser(comment.UserName)" *ngIf="userName==comment.UserName">
                         <img src="{{reddah.appPhoto['userphoto_'+comment.UserName]}}" class="portrait">
                     </ion-avatar>
         
-                    <ion-avatar slot="start" (click)="goUser(comment.UserName)" *ngIf="userName!=comment.UserName">
+                    <ion-avatar class="chat-avatar-top" slot="start" (click)="goUser(comment.UserName)" *ngIf="userName!=comment.UserName">
                         <img src="{{reddah.appPhoto['userphoto_'+comment.UserName]}}" class="portrait">
                     </ion-avatar>
                     <div *ngIf="userName!=comment.UserName" style="display: flex;">
                         <div class="chat-arrow-left" style="flex:0 auto;"></div>
-                        <div style="min-height:40px; flex:1; background-color: white; vertical-align: middle;padding:10px;border-radius: 5px;" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                        <div class="chat-box-others" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
                     </div>
                 </ion-item>
             </ion-col>
