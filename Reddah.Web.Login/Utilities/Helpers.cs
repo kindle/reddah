@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -48,6 +50,35 @@ namespace Reddah.Web.Login.Utilities
             };
             return re.Replace(text, match => replacements.ContainsKey(match.Groups[1].Value) ?
                 replacements[match.Groups[1].Value] : match.Groups[1].Value);
+        }
+
+        public static string Sha1(this string str)
+        {
+            var buffer = Encoding.UTF8.GetBytes(str);
+            var data = SHA1.Create().ComputeHash(buffer);
+
+            var sb = new StringBuilder();
+            foreach (var t in data)
+            {
+                sb.Append(t.ToString("X2"));
+            }
+
+            return sb.ToString();
+        }
+
+        public static string EncodeBase64(string code_type, string code)
+        {
+            string encode = "";
+            byte[] bytes = Encoding.GetEncoding(code_type).GetBytes(code);
+            try
+            {
+                encode = Convert.ToBase64String(bytes);
+            }
+            catch
+            {
+                encode = code;
+            }
+            return encode;
         }
     }
 }

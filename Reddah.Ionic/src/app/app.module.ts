@@ -36,10 +36,10 @@ import { CacheModule } from "ionic-cache";
 import { DragulaModule } from 'ng2-dragula';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 
+import { ReddahService } from './reddah.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReddahService } from './reddah.service';
 import { LocalePage } from './common/locale/locale.page';
 import { SafePipe } from './safe.pipe';
 import { PostviewerPage } from './postviewer/postviewer.page';
@@ -195,8 +195,8 @@ var firebaseConfig = {
           }
       }),
       NgxQRCodeModule,
-      AngularFireModule.initializeApp(firebaseConfig),
-      AngularFireDatabaseModule,
+      //AngularFireModule.initializeApp(firebaseConfig),
+      //AngularFireDatabaseModule,
   ],
   exports:[
   ],

@@ -159,6 +159,8 @@
     <Compile Include="ComplexType1.cs">
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ApiBaseController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

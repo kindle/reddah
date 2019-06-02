@@ -58,14 +58,7 @@ export class AppComponent {
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         this.translate.setDefaultLang(locale);
 
-        /*let config = {
-            apiKey: 'AIzaSyBDX4cCUHsw46YEFIGkIEGJpGXgHRJDo60',
-            authDomain: 'YOUR_AUTH_DOMAIN',
-            databaseURL: 'https://reddah-com.firebaseio.com',
-            projectId: 'reddah-com',
-            storageBucket: 'reddah-com.appspot.com',
-        };
-        */
+        
 
         var firebaseConfig = {
             apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -76,7 +69,7 @@ export class AppComponent {
             messagingSenderId: "64237460591",
             appId: "1:64237460591:web:4f2a4411eca1162f"
           };
-        firebase.initializeApp(firebaseConfig);
+        //firebase.initializeApp(firebaseConfig);
     }
 
     initializeApp() {

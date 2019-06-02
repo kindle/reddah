@@ -17,12 +17,8 @@ using System.Web.Script.Serialization;
 namespace Reddah.Web.Login.Controllers
 {
     [RoutePrefix("api/article")]
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class ArticleController : ApiController
+    public class ArticleController : ApiBaseController
     {
-        public const string SecretKey = "abc1234567@reddahcom";
-        private string message;
-
         [Route("getcomments")]
         [HttpPost]
         public IHttpActionResult GetComments([FromBody]CommentQuery query)

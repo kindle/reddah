@@ -19,11 +19,8 @@ using System.Web.Http.Cors;
 namespace Reddah.Web.Login.Controllers
 {
     [RoutePrefix("api/auth")]
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class AuthController : ApiController
+    public class AuthController : ApiBaseController
     {
-        public const string SecretKey = "abc1234567@reddahcom";
-
         [Route("sign")]
         public IHttpActionResult Sign([FromBody]UserModel user)
         {

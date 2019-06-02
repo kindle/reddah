@@ -5,11 +5,11 @@ namespace Reddah.Web.Login
     public class ApiResult
     {
         public int Success { get; set; }
-        public string Message { get; set; }
+        public object Message { get; set; }
 
         public ApiResult() {}
 
-        public ApiResult(int success, string message)
+        public ApiResult(int success, object message)
         {
             this.Success = success;
             this.Message = message;

@@ -237,6 +237,23 @@ export class ReddahService {
 
 
 
+
+
+
+    //******************************** */
+    private getChatUrl = 'https://login.reddah.com/api/chat/getchat'; 
+
+    getChat(formData: FormData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getChatUrl, formData)
+        .pipe(
+            tap(data => this.log('create chat')),
+            catchError(this.handleError('create chat', []))
+        );
+    }
+    //******************************** */
+
+
     private log(message: string) {
       console.log(message);
     }
