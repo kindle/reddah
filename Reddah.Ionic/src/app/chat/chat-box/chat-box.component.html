@@ -22,15 +22,15 @@
     <ion-slides [options]="slideOpts" [pager]="true" *ngIf="showFunctionPanel" class="optionPanel">
         <ion-slide *ngFor="let chatFunctions of chatFunctionGroups">
             <ion-grid>
-                <ion-row *ngFor="let row of chatFunctions">
-                    <ion-col *ngFor="let col of row" style="display: flex;flex-direction: column;">
+                <ion-row *ngFor="let row of chatFunctions" style="display: flex;justify-content: space-between;">
+                    <div *ngFor="let col of row" style="display: flex;flex-direction: column;">
                         <div class="emptyFunCard" *ngIf="!col.icon">
                         </div>
                         <div class="funCard" *ngIf="col.icon">
                             <ion-icon name="{{col.icon}}" (click)="funSelection(col.id)" size="large"></ion-icon>
                         </div>
                         <ion-text class="funName" *ngIf="col.name">{{col.name}}</ion-text>
-                    </ion-col>
+                    </div>
                 </ion-row> 
             </ion-grid>
         </ion-slide>

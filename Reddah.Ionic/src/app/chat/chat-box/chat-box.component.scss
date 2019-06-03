@@ -14,8 +14,8 @@
 .funCard {
     width: 50px;
     height: 50px;
-    margin: 10px 20px;
-    padding: 10px;
+    margin: 10px 10px;
+    padding: 5px;
     border-radius: 5px;
     background-color: white;
 }
@@ -23,10 +23,10 @@
 .emptyFunCard {
     width: 50px;
     height: 50px;
-    margin: 10px 20px;
+    //margin: 10px 20px;
     padding: 10px;
     border-radius: 5px;
-    background-color: transparent;
+    background-color: #eeeeee;
 }
 
 .funName{
@@ -36,5 +36,5 @@
 
 .optionPanel{
     min-height: 300px;
-    background-color: transparent;
+    background-color: #eeeeee;
 }
