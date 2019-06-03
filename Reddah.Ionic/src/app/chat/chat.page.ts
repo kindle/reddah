@@ -4,8 +4,8 @@ import { ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
-import { createChangeDetectorRef } from '@angular/core/src/view/refs';
-import { getOrCreateChangeDetectorRef } from '@angular/core/src/render3/di';
+import { ChatOptPage } from '../chat/chat-opt/chat-opt.page';
+import { UserPage } from '../common/user/user.page';
 //import { AngularFireDatabase } from 'angularfire2/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 
@@ -50,6 +50,10 @@ export class ChatPage implements OnInit {
         
     }
 
+    async childReloadComments(event){
+        this.getChat();
+    }
+
     @ViewChild('pageTop') pageTop: Content;
     async getChat(){
         let formData = new FormData();
@@ -80,7 +84,12 @@ export class ChatPage implements OnInit {
     }
 
     async option(){
+        const modal = await this.modalController.create({
+            component: ChatOptPage,
+            componentProps: { targetUser: this.target }
+        });
         
+        await modal.present();
     }
 
     async checkIsToday(date){
@@ -88,12 +97,12 @@ export class ChatPage implements OnInit {
         return cur.getDate()==new Date().getDate();
     }
 
-    sendMessage(){
+    /*sendMessage(){
         this.reddah.addComments(this.chatId, -1, this.message).subscribe(data=>{
             this.getChat();
         });
         this.message = "";
-    }
+    }*/
 
     /*sendMessage(){
         console.log('send msg')
@@ -105,4 +114,15 @@ export class ChatPage implements OnInit {
         })
       }
       */
+
+    async goUser(userName){
+        const userModal = await this.modalController.create({
+            component: UserPage,
+            componentProps: { 
+                userName: userName
+            }
+        });
+            
+        await userModal.present();
+    }
 }

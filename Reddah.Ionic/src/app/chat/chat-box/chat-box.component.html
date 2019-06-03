@@ -1,0 +1,38 @@
+<ion-footer class="chat-footer">
+    <ion-item lines="none" color="light">
+        <ion-icon name="mic" size="medium" (click)="switchSpeak()" *ngIf="!showSpeakBox"></ion-icon>
+        <ion-textarea class="newChatComment" autoresize rows="1" cols="21"
+        #newChatComment id="newChatComment" [(ngModel)]="commentContent" *ngIf="!showSpeakBox"></ion-textarea>
+        <ion-icon name="ios-keypad" size="medium" (click)="switchSpeak()" *ngIf="showSpeakBox"></ion-icon>
+        <ion-textarea class="newChatComment" autoresize readonly rows="1" cols="21" text-center
+        placeholder="按住 说话" *ngIf="showSpeakBox"></ion-textarea>
+        
+        <ion-icon slot="end" name="happy" size="medium" (click)="toggleFacePanel()" margin-end *ngIf="!showFacePanel"></ion-icon>
+        <ion-icon slot="end" name="ios-keypad" size="medium" (click)="toggleFacePanel()" margin-end *ngIf="showFacePanel"></ion-icon>
+        <ion-icon slot="end" name="add-circle-outline" size="medium" (click)="toggleFunctionPanel()" margin-end *ngIf="!commentContent"></ion-icon>
+        <ion-button slot="end" (click)="submit()" color="primary" *ngIf="commentContent">发送</ion-button>
+    </ion-item>
+    <ion-grid *ngIf="showFacePanel" class="optionPanel">
+        <ion-row *ngFor="let row of reddah.emojis">
+            <ion-col *ngFor="let col of row" text-center>
+                <span (click)="faceSelection(col)" style="width: 80px;height: 80px;">{{col}}</span>
+            </ion-col>
+        </ion-row> 
+    </ion-grid>
+    <ion-slides [options]="slideOpts" [pager]="true" *ngIf="showFunctionPanel" class="optionPanel">
+        <ion-slide *ngFor="let chatFunctions of chatFunctionGroups">
+            <ion-grid>
+                <ion-row *ngFor="let row of chatFunctions">
+                    <ion-col *ngFor="let col of row" style="display: flex;flex-direction: column;">
+                        <div class="emptyFunCard" *ngIf="!col.icon">
+                        </div>
+                        <div class="funCard" *ngIf="col.icon">
+                            <ion-icon name="{{col.icon}}" (click)="funSelection(col.id)" size="large"></ion-icon>
+                        </div>
+                        <ion-text class="funName" *ngIf="col.name">{{col.name}}</ion-text>
+                    </ion-col>
+                </ion-row> 
+            </ion-grid>
+        </ion-slide>
+    </ion-slides>
+</ion-footer>

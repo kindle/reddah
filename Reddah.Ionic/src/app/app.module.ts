@@ -71,6 +71,7 @@ import { StockPage } from './common/stock/stock.page';
 import { CommentReplyPage } from './postviewer/comment-reply/comment-reply.page';
 import { AutoresizeDirective } from './autoresize-textarea.directive';
 import { CommentBoxComponent } from './postviewer/comment-box/comment-box.component';
+import { ChatBoxComponent } from './chat/chat-box/chat-box.component';
 import { SearchPage } from './common/search/search.page';
 import { SearchUserPage } from './friend/search-user/search-user.page';
 import { QrcardPage } from './common/qrcard/qrcard.page';
@@ -82,6 +83,7 @@ import { ChangeNoteNamePopPage } from './common/change-notename-pop.page';
 import { SettingAccountPage } from './settings/setting-account/setting-account.page';
 import { SettingPrivacyPage } from './settings/setting-privacy/setting-privacy.page';
 import { ChatPage } from './chat/chat.page';
+import { ChatOptPage } from './chat/chat-opt/chat-opt.page';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -103,6 +105,7 @@ var firebaseConfig = {
       ChangePhotoPage,
       ChangeNoteNamePopPage,
       ChatPage,
+      ChatOptPage,
       MyInfoPage,
       NewFriendPage,
       PostviewerPage,
@@ -128,6 +131,7 @@ var firebaseConfig = {
       CommentReplyPage,
       AutoresizeDirective,
       CommentBoxComponent,
+      ChatBoxComponent,
       SearchPage,
       SearchUserPage,
       SettingAboutPage,
@@ -149,6 +153,7 @@ var firebaseConfig = {
       ChangePhotoPage,
       ChangeNoteNamePopPage,
       ChatPage,
+      ChatOptPage,
       MyInfoPage,
       NewFriendPage,
       ArticlePopPage,

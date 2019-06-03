@@ -33,9 +33,6 @@
         </ion-row>
     </ion-grid>
 </ion-content>
-<ion-footer>
-    <ion-toolbar>
-        <ion-input slot="start" type="text" name="message" placeholder="Message" [(ngModel)]="message"></ion-input>
-        <ion-button slot="end" (click)="sendMessage()" color="primary" [disabled]="sendChatButtonDisabled">发送</ion-button>
-    </ion-toolbar>
-</ion-footer>
+<app-chat-box #commentbox selectedArticleId="{{chatId}}" selectedCommentId="-1"
+    (reloadComments)="childReloadComments($event)"></app-chat-box>
+
