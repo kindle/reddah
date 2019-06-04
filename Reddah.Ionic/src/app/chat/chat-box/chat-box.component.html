@@ -1,15 +1,15 @@
 <ion-footer class="chat-footer">
     <ion-item lines="none" color="light">
         <ion-icon name="mic" size="medium" (click)="switchSpeak()" *ngIf="!showSpeakBox"></ion-icon>
-        <ion-textarea class="newChatComment" autoresize rows="1" cols="21"
+        <ion-textarea class="newChatComment" autoresize rows="1" cols="21" (click)="hide()"
         #newChatComment id="newChatComment" [(ngModel)]="commentContent" *ngIf="!showSpeakBox"></ion-textarea>
         <ion-icon name="apps" size="medium" (click)="switchSpeak()" *ngIf="showSpeakBox"></ion-icon>
         <ion-textarea class="newChatComment" autoresize readonly rows="1" cols="21" text-center
         placeholder="按住 说话" *ngIf="showSpeakBox"></ion-textarea>
         
-        <ion-icon slot="end" name="happy" size="medium" (click)="toggleFacePanel()" margin-end *ngIf="!showFacePanel"></ion-icon>
-        <ion-icon slot="end" name="apps" size="medium" (click)="toggleFacePanel()" margin-end *ngIf="showFacePanel"></ion-icon>
-        <ion-icon slot="end" name="add-circle-outline" size="medium" (click)="toggleFunctionPanel()" margin-end *ngIf="!commentContent"></ion-icon>
+        <ion-icon slot="end" name="happy" size="medium" (click)="toggleFacePanel()" *ngIf="!showFacePanel"></ion-icon>
+        <ion-icon slot="end" name="apps" size="medium" (click)="toggleFacePanel()" *ngIf="showFacePanel"></ion-icon>
+        <ion-icon slot="end" name="add-circle-outline" size="medium" (click)="toggleFunctionPanel()" *ngIf="!commentContent"></ion-icon>
         <ion-button slot="end" (click)="submit()" color="primary" *ngIf="commentContent">发送</ion-button>
     </ion-item>
     <ion-grid *ngIf="showFacePanel" class="optionPanel">

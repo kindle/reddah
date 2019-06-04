@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
-import { ChatOptPage } from '../chat/chat-opt/chat-opt.page';
+import { GroupChatOptPage } from '../chat/group-chat-opt/group-chat-opt.page';
 import { UserPage } from '../common/user/user.page';
 //import { AngularFireDatabase } from 'angularfire2/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
@@ -17,8 +17,7 @@ import { UserPage } from '../common/user/user.page';
 })
 export class GroupChatPage implements OnInit {
 
-    @Input() title: any;
-    @Input() target: any;
+    @Input() targetUsers: any;
 
     userName: string;
     locale: string;
@@ -86,8 +85,8 @@ export class GroupChatPage implements OnInit {
 
     async option(){
         const modal = await this.modalController.create({
-            component: ChatOptPage,
-            componentProps: { targetUser: this.target }
+            component: GroupChatOptPage,
+            componentProps: { targetUsers: this.targetUsers }
         });
         
         await modal.present();

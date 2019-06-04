@@ -6,6 +6,7 @@ import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
 import { LocalePage } from '../../common/locale/locale.page';
 import { UserPage } from '../../common/user/user.page';
+import { ChatPage } from '../chat.page';
 import { GroupChatPage } from '../group-chat.page';
 
 @Component({
@@ -48,17 +49,40 @@ export class ChatChooseUserPage implements OnInit {
         this.submitClicked= true;
         console.log(this.groupedContacts)
 
-        const modal = await this.modalController.create({
-            component: GroupChatPage,
-            componentProps: { 
-                title: this.reddah.appData('usernotename_'+this.userName),//todo
-                target: this.userName,///todo
-                
-            }
+        let targetUsers = [];
+        this.groupedContacts.forEach((item)=>{
+            item.contacts.forEach((contact)=>{
+                if(contact.isChecked==true)
+                {
+                    targetUsers.push(contact);
+                }
+            });
         });
-        await modal.present();
-        const {data} = await modal.onDidDismiss();
 
+        console.log(targetUsers)
+
+        if(targetUsers.length==1){//2 people chat
+            const modal = await this.modalController.create({
+                component: ChatPage,
+                componentProps: { 
+                    title: this.reddah.appData('usernotename_'+targetUsers[0].Watch),
+                    target: targetUsers[0].Watch,
+                }
+            });
+            await modal.present();
+            const {data} = await modal.onDidDismiss();
+        }
+        else//real group chat
+        {
+            const modal = await this.modalController.create({
+                component: GroupChatPage,
+                componentProps: {
+                    targetUsers: targetUsers,
+                }
+            });
+            await modal.present();
+            const {data} = await modal.onDidDismiss();
+        }
     }
 
     contacts=[];

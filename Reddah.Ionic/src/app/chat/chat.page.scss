@@ -1,7 +1,7 @@
 .chatTime {
     font-size: 12px;
     width: 100%;
-    color: #dedede;
+    color: #878787;
     padding: 10px 0;
 }
 
@@ -21,6 +21,7 @@
 
 .arrow-box-right {
     display: flex; margin-right: 5px;
+    margin-bottom: 10px;
 }
 
 .chat-box-me {
@@ -45,6 +46,7 @@
 /**align left**/
 .container-left{
     display: flex; word-break: break-word;
+    margin-bottom: 10px;
 }
 
 .arrow-box-left {

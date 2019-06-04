@@ -85,6 +85,7 @@ import { SettingPrivacyPage } from './settings/setting-privacy/setting-privacy.p
 import { ChatPage } from './chat/chat.page';
 import { GroupChatPage } from './chat/group-chat.page';
 import { ChatOptPage } from './chat/chat-opt/chat-opt.page';
+import { GroupChatOptPage } from './chat/group-chat-opt/group-chat-opt.page';
 import { ChatChooseUserPage } from './chat/chat-choose-user/chat-choose-user.page';
 
 var firebaseConfig = {
@@ -109,6 +110,7 @@ var firebaseConfig = {
       ChatPage,
       GroupChatPage,
       ChatOptPage,
+      GroupChatOptPage,
       ChatChooseUserPage,
       MyInfoPage,
       NewFriendPage,
@@ -159,6 +161,7 @@ var firebaseConfig = {
       ChatPage,
       GroupChatPage,
       ChatOptPage,
+      GroupChatOptPage,
       ChatChooseUserPage,
       MyInfoPage,
       NewFriendPage,
