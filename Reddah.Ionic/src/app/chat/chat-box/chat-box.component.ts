@@ -52,6 +52,12 @@ export class ChatBoxComponent implements OnInit {
     toggleFacePanel(){
         this.showFunctionPanel = false;
         this.showFacePanel= !this.showFacePanel;
+        if(this.showFacePanel){
+            this.showSpeakBox = false;
+            setTimeout(() => {
+                this.newChatComment.setFocus();
+            },150); 
+        }
     }
 
     faceSelection(face) {
@@ -62,6 +68,12 @@ export class ChatBoxComponent implements OnInit {
     toggleFunctionPanel(){
         this.showFacePanel = false;
         this.showFunctionPanel= !this.showFunctionPanel;
+        if(this.showFacePanel){
+            this.showSpeakBox = false;
+            setTimeout(() => {
+                this.newChatComment.setFocus();
+            },150); 
+        }
     }
     funSelection(face) {
         this.newChatComment.value += face;
@@ -69,26 +81,21 @@ export class ChatBoxComponent implements OnInit {
 
     chatFunctionGroups = [
         [
-            [
-                {id:1, icon:'images',name:'相册'},
-                {id:2, icon:'camera',name:'拍摄'},
-                {id:3, icon:'videocam',name:'视频通话'},
-                {id:4, icon:'pin',name:'位置'}
-            ],
-            [
-                {id:5, icon:'gift',name:'红包'},
-                {id:6, icon:'repeat',name:'转账'},
-                {id:7, icon:'mic',name:'语音输入'},
-                {id:8, icon:'bookmark',name:'我的收藏'}
-            ]
+            {id:1, icon:'images',name:'相册'},
+            {id:2, icon:'camera',name:'拍摄'},
+            {id:3, icon:'videocam',name:'视频通话'},
+            {id:4, icon:'pin',name:'位置'},
+            {id:5, icon:'gift',name:'红包'},
+            {id:6, icon:'repeat',name:'转账'},
+            {id:7, icon:'mic',name:'语音输入'},
+            {id:8, icon:'cube',name:'我的收藏'}
+        
         ],
         [
-            [
-                {id:9, icon:'ios-person',name:'名片'},
-                {id:10, icon:'folder',name:'文件'},
-                {id:11, icon:'ios-wallet',name:'卡券'},
-                {}
-            ]
+            {id:9, icon:'ios-person',name:'名片'},
+            {id:10, icon:'folder',name:'文件'},
+            {id:11, icon:'ios-wallet',name:'卡券'}           
+            
         ]
     ];
 
@@ -106,7 +113,10 @@ export class ChatBoxComponent implements OnInit {
         initialSlide: 0,
     };
     
-    
+    async hide(){
+        this.showFunctionPanel = false;
+        this.showFacePanel = false;
+    }
 
     
 

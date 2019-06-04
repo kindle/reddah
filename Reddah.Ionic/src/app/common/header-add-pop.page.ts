@@ -2,10 +2,15 @@ import { Component } from '@angular/core';
 import { PopoverController, ModalController } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { AddFriendPage } from '../friend/add-friend/add-friend.page';
+import { ChatChooseUserPage } from '../chat/chat-choose-user/chat-choose-user.page';
 
 @Component({
     template: `
         <div (click)="close()">
+            <ion-item button (click)="createGroupChat()">
+                <ion-icon slot="start" color="tertiary" name="ios-chatbubbles"></ion-icon>  
+                <ion-label>发起群聊</ion-label>
+            </ion-item>
             <ion-item button (click)="addFriend()">
                 <ion-icon slot="start" color="tertiary" name="ios-person-add"></ion-icon>  
                 <ion-label>添加朋友</ion-label>
@@ -46,5 +51,13 @@ export class HeaderAddPage {
         });
           
         await addFriendModal.present();
+    }
+
+    async createGroupChat(){
+        const modal = await this.modalController.create({
+            component: ChatChooseUserPage,
+        });
+          
+        await modal.present();
     }
 }

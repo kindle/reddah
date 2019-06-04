@@ -83,7 +83,9 @@ import { ChangeNoteNamePopPage } from './common/change-notename-pop.page';
 import { SettingAccountPage } from './settings/setting-account/setting-account.page';
 import { SettingPrivacyPage } from './settings/setting-privacy/setting-privacy.page';
 import { ChatPage } from './chat/chat.page';
+import { GroupChatPage } from './chat/group-chat.page';
 import { ChatOptPage } from './chat/chat-opt/chat-opt.page';
+import { ChatChooseUserPage } from './chat/chat-choose-user/chat-choose-user.page';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -105,7 +107,9 @@ var firebaseConfig = {
       ChangePhotoPage,
       ChangeNoteNamePopPage,
       ChatPage,
+      GroupChatPage,
       ChatOptPage,
+      ChatChooseUserPage,
       MyInfoPage,
       NewFriendPage,
       PostviewerPage,
@@ -153,7 +157,9 @@ var firebaseConfig = {
       ChangePhotoPage,
       ChangeNoteNamePopPage,
       ChatPage,
+      GroupChatPage,
       ChatOptPage,
+      ChatChooseUserPage,
       MyInfoPage,
       NewFriendPage,
       ArticlePopPage,
