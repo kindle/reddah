@@ -54,9 +54,6 @@ export class ChatBoxComponent implements OnInit {
         this.showFacePanel= !this.showFacePanel;
         if(this.showFacePanel){
             this.showSpeakBox = false;
-            setTimeout(() => {
-                this.newChatComment.setFocus();
-            },150); 
         }
     }
 
@@ -70,13 +67,10 @@ export class ChatBoxComponent implements OnInit {
         this.showFunctionPanel= !this.showFunctionPanel;
         if(this.showFacePanel){
             this.showSpeakBox = false;
-            setTimeout(() => {
-                this.newChatComment.setFocus();
-            },150); 
         }
     }
-    funSelection(face) {
-        this.newChatComment.value += face;
+    funSelection(fun) {
+        //this.newChatComment.value += fun;
     }
 
     chatFunctionGroups = [

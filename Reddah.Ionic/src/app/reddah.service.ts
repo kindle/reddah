@@ -252,6 +252,28 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private createGroupChatUrl = 'https://login.reddah.com/api/chat/creategroupchat'; 
+
+    createGroupChat(formData: FormData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.createGroupChatUrl, formData)
+        .pipe(
+            tap(data => this.log('create group chat')),
+            catchError(this.handleError('create group chat', []))
+        );
+    }
+    //******************************** */
+    private getGroupChatUrl = 'https://login.reddah.com/api/chat/getgroupchat'; 
+
+    getGroupChat(formData: FormData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getGroupChatUrl, formData)
+        .pipe(
+            tap(data => this.log('get group chat')),
+            catchError(this.handleError('get group chat', []))
+        );
+    }
+    //******************************** */
 
 
     private log(message: string) {

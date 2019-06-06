@@ -35,6 +35,12 @@ namespace Reddah.Web.Login
         public IList<AdvancedComment> Comments { get; set; }
     }
 
+    public class GroupChatSeededComments
+    {
+        public Article Group { get; set; }
+        public IList<AdvancedComment> Comments { get; set; }
+    }
+
     public class AdvancedComment : Comment
     {
         public string UserNickName { get; set; }

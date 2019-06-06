@@ -23,8 +23,6 @@ namespace Reddah.Web.Login.Controllers
         [HttpPost]
         public IHttpActionResult GetChat()
         {
-            IEnumerable<Comment> query = null;
-
             try
             {
                 string jwt = HttpContext.Current.Request["jwt"];
@@ -90,6 +88,79 @@ namespace Reddah.Web.Login.Controllers
                                     }).Take(pageCount).OrderBy(n=>n.Id);
 
                     return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+
+        }
+
+        [Route("getgroupchat")]
+        [HttpPost]
+        public IHttpActionResult GetGroupChat()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                string[] targetUsers = js.Deserialize<string[]>(HttpContext.Current.Request["targetUsers"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    //if chat not exist, create one
+
+                    
+                    var newGroupChat = new Article();
+                    newGroupChat.Type = 3;  //2 two persons' chat, 3 group chat >2 persons
+
+                    //group members
+                    newGroupChat.GroupName = jwtResult.JwtUser.User + "," + string.Join(",", targetUsers);
+                    
+                    newGroupChat.CreatedOn = DateTime.Now;
+                    newGroupChat.UserName = jwtResult.JwtUser.User; //group creator
+                    newGroupChat.Title = "群聊"; //group title
+                    newGroupChat.Content = "群公告"; //group anouncement
+                    newGroupChat.Abstract = jwtResult.JwtUser.User; //group owners, default only 1 - the creator
+                    db.Article.Add(newGroupChat);
+                    db.SaveChanges();
+
+                    //start loading unread chat messages
+                    int pageCount = 10;
+                    var comments = (from c in db.Comment
+                                    join u in db.UserProfile on c.UserName equals u.UserName
+                                    where c.ArticleId == newGroupChat.Id
+                                    orderby c.Id descending
+                                    select new AdvancedComment
+                                    {
+                                        Id = c.Id,
+                                        ArticleId = c.ArticleId,
+                                        ParentId = c.ParentId,
+                                        Content = c.Content,
+                                        CreatedOn = c.CreatedOn,
+                                        Up = c.Up,
+                                        Down = c.Down,
+                                        Count = c.Count,
+                                        UserName = c.UserName,
+                                        Status = c.Status,
+                                        UserNickName = u.NickName,
+                                        UserPhoto = u.Photo,
+                                        UserSex = u.Sex
+                                    }).Take(pageCount).OrderBy(n => n.Id);
+
+                    return Ok(new ApiResult(0, new GroupChatSeededComments { Group = newGroupChat, Comments = comments.ToList() }));
 
                 }
 

@@ -18,6 +18,7 @@ import { UserPage } from '../common/user/user.page';
 export class GroupChatPage implements OnInit {
 
     @Input() targetUsers: any;
+    groupChatId = -1;
 
     userName: string;
     locale: string;
@@ -38,7 +39,8 @@ export class GroupChatPage implements OnInit {
     }
     
     sendChatButtonDisabled = true;
-    chatId = -1;
+    
+    groupInfo;
     ngOnInit() {
         //this.db.list('/chat').valueChanges().subscribe(data => {
         //    console.log(data)
@@ -55,16 +57,17 @@ export class GroupChatPage implements OnInit {
 
     @ViewChild('pageTop') pageTop: Content;
     async getGroupChat(){
-        /*
+        return;
         let formData = new FormData();
-        formData.append("targetUser", this.target);
-        this.reddah.getChat(formData).subscribe(data=>{
+        formData.append("targetUsers", this.targetUsers.map(t=>t.Watch));
+        this.reddah.getGroupChat(formData).subscribe(data=>{
             if(data.Success==0)
             {
                 this.sendChatButtonDisabled = false;
                 console.log(data);
                 this.messages =  data.Message.Comments;
-                this.chatId = data.Message.Seed;
+                this.chatId = data.Message.Group.Id;
+                this.groupInfo = data.Message.Group;
                 setTimeout(() => {
                     if(this.pageTop.scrollToBottom){
                         this.pageTop.scrollToBottom(0);
@@ -74,7 +77,7 @@ export class GroupChatPage implements OnInit {
             else{
                 alert(data);
             }
-        });*/
+        });
     }
 
     
