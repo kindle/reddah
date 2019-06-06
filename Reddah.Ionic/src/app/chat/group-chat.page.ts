@@ -18,7 +18,7 @@ import { UserPage } from '../common/user/user.page';
 export class GroupChatPage implements OnInit {
 
     @Input() targetUsers: any;
-    groupChatId = -1;
+    chatId = -1;
 
     userName: string;
     locale: string;
@@ -47,6 +47,8 @@ export class GroupChatPage implements OnInit {
         //    this.messages = data
         //});
 
+        ///if(false)
+            //creategroupchat;
         this.getGroupChat();
         
     }
@@ -57,7 +59,7 @@ export class GroupChatPage implements OnInit {
 
     @ViewChild('pageTop') pageTop: Content;
     async getGroupChat(){
-        return;
+        
         let formData = new FormData();
         formData.append("targetUsers", this.targetUsers.map(t=>t.Watch));
         this.reddah.getGroupChat(formData).subscribe(data=>{
@@ -66,7 +68,7 @@ export class GroupChatPage implements OnInit {
                 this.sendChatButtonDisabled = false;
                 console.log(data);
                 this.messages =  data.Message.Comments;
-                this.chatId = data.Message.Group.Id;
+                this.chatId = data.Message.Seed;
                 this.groupInfo = data.Message.Group;
                 setTimeout(() => {
                     if(this.pageTop.scrollToBottom){

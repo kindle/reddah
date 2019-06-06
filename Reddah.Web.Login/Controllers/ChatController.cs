@@ -100,9 +100,9 @@ namespace Reddah.Web.Login.Controllers
 
         }
 
-        [Route("getgroupchat")]
+        [Route("creategroupchat")]
         [HttpPost]
-        public IHttpActionResult GetGroupChat()
+        public IHttpActionResult CreateGroupChat()
         {
             try
             {
@@ -120,9 +120,6 @@ namespace Reddah.Web.Login.Controllers
 
                 using (var db = new reddahEntities())
                 {
-                    //if chat not exist, create one
-
-                    
                     var newGroupChat = new Article();
                     newGroupChat.Type = 3;  //2 two persons' chat, 3 group chat >2 persons
 
@@ -137,11 +134,51 @@ namespace Reddah.Web.Login.Controllers
                     db.Article.Add(newGroupChat);
                     db.SaveChanges();
 
+                    return Ok(new ApiResult(0, newGroupChat));
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+
+        }
+
+        [Route("getgroupchat")]
+        [HttpPost]
+        public IHttpActionResult GetGroupChat()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int groupChatId = js.Deserialize<int>(HttpContext.Current.Request["groupChatId"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    //if chat not exist, create one
+                    var existingGroupChat = db.Article.FirstOrDefault(a=>a.Id==groupChatId);
+
+                    if(existingGroupChat==null)
+                        return Ok(new ApiResult(3, "group chat not exist"));
+
                     //start loading unread chat messages
-                    int pageCount = 10;
+                    int pageCount = 20;
                     var comments = (from c in db.Comment
                                     join u in db.UserProfile on c.UserName equals u.UserName
-                                    where c.ArticleId == newGroupChat.Id
+                                    where c.ArticleId == groupChatId
                                     orderby c.Id descending
                                     select new AdvancedComment
                                     {
@@ -160,7 +197,7 @@ namespace Reddah.Web.Login.Controllers
                                         UserSex = u.Sex
                                     }).Take(pageCount).OrderBy(n => n.Id);
 
-                    return Ok(new ApiResult(0, new GroupChatSeededComments { Group = newGroupChat, Comments = comments.ToList() }));
+                    return Ok(new ApiResult(0, new SeededComments { Seed = groupChatId, Comments = comments.ToList() }));
 
                 }
 
