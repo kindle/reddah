@@ -274,7 +274,17 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private getGroupListUrl = 'https://login.reddah.com/api/chat/getgrouplist'; 
 
+    getGroupList(formData: FormData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getGroupListUrl, formData)
+        .pipe(
+            tap(data => this.log('get group chat list')),
+            catchError(this.handleError('get group chat list', []))
+        );
+    }
+    //******************************** */
 
     private log(message: string) {
       console.log(message);

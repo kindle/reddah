@@ -87,6 +87,7 @@ import { GroupChatPage } from './chat/group-chat.page';
 import { ChatOptPage } from './chat/chat-opt/chat-opt.page';
 import { GroupChatOptPage } from './chat/group-chat-opt/group-chat-opt.page';
 import { ChatChooseUserPage } from './chat/chat-choose-user/chat-choose-user.page';
+import { ChatChooseGroupPage } from './chat/chat-choose-group/chat-choose-group.page';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -112,6 +113,7 @@ var firebaseConfig = {
       ChatOptPage,
       GroupChatOptPage,
       ChatChooseUserPage,
+      ChatChooseGroupPage,
       MyInfoPage,
       NewFriendPage,
       PostviewerPage,
@@ -163,6 +165,7 @@ var firebaseConfig = {
       ChatOptPage,
       GroupChatOptPage,
       ChatChooseUserPage,
+      ChatChooseGroupPage,
       MyInfoPage,
       NewFriendPage,
       ArticlePopPage,

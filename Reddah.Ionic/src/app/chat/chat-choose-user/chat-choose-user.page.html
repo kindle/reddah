@@ -4,7 +4,7 @@
     <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ 'Confirm.Submit' | translate }}</ion-button>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;">
-    <ion-item lines="none" class="borderTop borderItem borderBottom">
+    <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="goChooseGroupChat()">
         <ion-label>选择一个群</ion-label>
     </ion-item>
     <ion-list>

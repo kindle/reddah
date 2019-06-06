@@ -8,6 +8,7 @@ import { LocalePage } from '../../common/locale/locale.page';
 import { UserPage } from '../../common/user/user.page';
 import { ChatPage } from '../chat.page';
 import { GroupChatPage } from '../group-chat.page';
+import { ChatChooseGroupPage } from '../chat-choose-group/chat-choose-group.page';
 
 @Component({
     selector: 'app-chat-choose-user',
@@ -147,5 +148,12 @@ export class ChatChooseUserPage implements OnInit {
             } 
             currentContacts.push(value);
         });
+    }
+
+    async goChooseGroupChat(){
+        const modal = await this.modalController.create({
+            component: ChatChooseGroupPage
+        });
+        await modal.present();
     }
 }

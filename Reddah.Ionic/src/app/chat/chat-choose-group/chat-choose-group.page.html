@@ -1,0 +1,16 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-label>选择群聊</ion-label>
+</ion-item>
+<ion-content no-padding style="background-color: #eeeeee;">
+    <ion-list>
+        <ion-item *ngFor="let groupChat of groupList" (click)="goGroupChat(groupChat)">
+            <div class="groupImages">
+                <div *ngFor="let user of groupChat.GroupName.split(',')">
+                    <img src="{{reddah.appPhoto['userphoto_'+user]}}">
+                </div>
+            </div>
+            <ion-label style="margin-left:10px;">{{groupChat.Title}}({{groupChat.GroupName.split(',').length}})</ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

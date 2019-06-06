@@ -1,7 +1,7 @@
 
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-label>title...</ion-label>
+    <ion-label>{{groupChat==null?"":groupChat.Title}}</ion-label>
     <ion-icon slot="icon-only" slot="end" name="ios-more" (click)="option()"></ion-icon>
 </ion-item>
 <ion-content no-padding style="--background: #eeeeee;" #pageTop (click)="chatbox.hide()"> 
@@ -32,6 +32,6 @@
         </ion-row>
     </ion-grid>
 </ion-content>
-<app-chat-box #chatbox selectedArticleId="{{chatId}}" selectedCommentId="-1"
-    (reloadComments)="childReloadComments($event)"></app-chat-box>
+<app-chat-box #chatbox selectedArticleId="{{groupChat.Id}}" selectedCommentId="-1"
+    (reloadComments)="childReloadComments($event)" *ngIf="groupChat&&groupChat.Id>0"></app-chat-box>
 

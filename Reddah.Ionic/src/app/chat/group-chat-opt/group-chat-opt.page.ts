@@ -15,6 +15,8 @@ import { UserPage } from '../../common/user/user.page';
 export class GroupChatOptPage implements OnInit {
 
     @Input() targetUsers;
+    @Input() groupInfo;
+
     userName;
     locale;
 

@@ -38,7 +38,6 @@ export class ChatPage implements OnInit {
         this.locale = this.reddah.getCurrentLocale();
     }
     
-    sendChatButtonDisabled = true;
     chatId = -1;
     ngOnInit() {
         //this.db.list('/chat').valueChanges().subscribe(data => {
@@ -61,7 +60,6 @@ export class ChatPage implements OnInit {
         this.reddah.getChat(formData).subscribe(data=>{
             if(data.Success==0)
             {
-                this.sendChatButtonDisabled = false;
                 console.log(data);
                 this.messages =  data.Message.Comments;
                 this.chatId = data.Message.Seed;

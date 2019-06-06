@@ -18,7 +18,9 @@ import { UserPage } from '../common/user/user.page';
 export class GroupChatPage implements OnInit {
 
     @Input() targetUsers: any;
-    chatId = -1;
+    @Input() groupChat;
+    @ViewChild('chatbox') chatbox;
+    
 
     userName: string;
     locale: string;
@@ -38,9 +40,7 @@ export class GroupChatPage implements OnInit {
         this.locale = this.reddah.getCurrentLocale();
     }
     
-    sendChatButtonDisabled = true;
     
-    groupInfo;
     ngOnInit() {
         //this.db.list('/chat').valueChanges().subscribe(data => {
         //    console.log(data)
@@ -49,7 +49,13 @@ export class GroupChatPage implements OnInit {
 
         ///if(false)
             //creategroupchat;
-        this.getGroupChat();
+        //this.getGroupChat();
+        if(this.targetUsers!=null&&this.groupChat==null){
+            this.createGroupChat();
+        }
+        else{
+            this.getGroupChat();
+        }
         
     }
 
@@ -58,18 +64,41 @@ export class GroupChatPage implements OnInit {
     }
 
     @ViewChild('pageTop') pageTop: Content;
-    async getGroupChat(){
-        
+
+    async createGroupChat(){
         let formData = new FormData();
-        formData.append("targetUsers", this.targetUsers.map(t=>t.Watch));
+        formData.append("targetUsers", JSON.stringify(this.targetUsers.map(t=>t.Watch)));
+        this.reddah.createGroupChat(formData).subscribe(data=>{
+            if(data.Success==0)
+            {
+                console.log(data);
+                //this.messages =  data.Message.Comments;
+                //this.groupChat.Id = data.Message.Id;
+                this.groupChat = data.Message;
+                console.log(this.groupChat);
+
+                setTimeout(() => {
+                    if(this.pageTop.scrollToBottom){
+                        this.pageTop.scrollToBottom(0);
+                    }
+                },200)
+
+                this.cacheService.clearGroup("ChatChooseGroupPage");
+            }
+            else{
+                alert(JSON.stringify(data));
+            }
+        });
+    }
+    
+    async getGroupChat(){
+        let formData = new FormData();
+        formData.append("groupChatId", JSON.stringify(this.groupChat.Id));
         this.reddah.getGroupChat(formData).subscribe(data=>{
             if(data.Success==0)
             {
-                this.sendChatButtonDisabled = false;
                 console.log(data);
                 this.messages =  data.Message.Comments;
-                this.chatId = data.Message.Seed;
-                this.groupInfo = data.Message.Group;
                 setTimeout(() => {
                     if(this.pageTop.scrollToBottom){
                         this.pageTop.scrollToBottom(0);
@@ -91,7 +120,10 @@ export class GroupChatPage implements OnInit {
     async option(){
         const modal = await this.modalController.create({
             component: GroupChatOptPage,
-            componentProps: { targetUsers: this.targetUsers }
+            componentProps: { 
+                targetUsers: this.targetUsers,
+                groupInfo: this.groupChat
+            }
         });
         
         await modal.present();
