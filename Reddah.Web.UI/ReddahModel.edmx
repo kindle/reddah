@@ -96,15 +96,16 @@ warning 6002: The table/view 'reddah.dbo.Message' does not have a primary key de
           <Property Name="GroupName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Tag" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'reddah.dbo.UserArticle' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserArticle">
           <Key>
-            <PropertyRef Name="UserName" />
-            <PropertyRef Name="ArticleId" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ArticleId" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="UserFriend">
           <Key>
@@ -196,6 +197,7 @@ warning 6002: The table/view 'reddah.dbo.UserArticle' does not have a primary ke
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UploadFile" EntityType="Self.UploadFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserArticle" EntityType="Self.UserArticle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserFriend" EntityType="Self.UserFriend" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
@@ -212,12 +214,6 @@ warning 6002: The table/view 'reddah.dbo.UserArticle' does not have a primary ke
 [Message].[Status] AS [Status]
 FROM [dbo].[Message] AS [Message]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="UserArticle" EntityType="Self.UserArticle" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[UserArticle].[UserName] AS [UserName], 
-[UserArticle].[ArticleId] AS [ArticleId]
-FROM [dbo].[UserArticle] AS [UserArticle]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -230,6 +226,7 @@ FROM [dbo].[UserArticle] AS [UserArticle]</DefiningQuery>
           <EntitySet Name="Logs" EntityType="reddahModel.Log" />
           <EntitySet Name="Settings" EntityType="reddahModel.Setting" />
           <EntitySet Name="UploadFiles" EntityType="reddahModel.UploadFile" />
+          <EntitySet Name="UserArticles" EntityType="reddahModel.UserArticle" />
           <EntitySet Name="UserFriends" EntityType="reddahModel.UserFriend" />
           <EntitySet Name="UserProfiles" EntityType="reddahModel.UserProfile" />
           <EntitySet Name="webpages_Membership" EntityType="reddahModel.webpages_Membership" />
@@ -239,7 +236,6 @@ FROM [dbo].[UserArticle] AS [UserArticle]</DefiningQuery>
           <EntitySet Name="webpages_Roles" EntityType="reddahModel.webpages_Roles" />
           <EntitySet Name="webpages_UsersInRoles" EntityType="reddahModel.webpages_UsersInRoles" />
           <EntitySet Name="Messages" EntityType="reddahModel.Message" />
-          <EntitySet Name="UserArticles" EntityType="reddahModel.UserArticle" />
         </EntityContainer>
         <EntityType Name="Article">
           <Key>
@@ -317,6 +313,17 @@ FROM [dbo].[UserArticle] AS [UserArticle]</DefiningQuery>
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="GroupName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Tag" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserArticle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ArticleId" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="UserFriend">
           <Key>
@@ -413,14 +420,6 @@ FROM [dbo].[UserArticle] AS [UserArticle]</DefiningQuery>
           <Property Name="Msg" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="UserArticle">
-          <Key>
-            <PropertyRef Name="UserName" />
-            <PropertyRef Name="ArticleId" />
-          </Key>
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ArticleId" Type="Int32" Nullable="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -506,6 +505,18 @@ FROM [dbo].[UserArticle] AS [UserArticle]</DefiningQuery>
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Format" ColumnName="Format" />
                 <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserArticles">
+            <EntityTypeMapping TypeName="reddahModel.UserArticle">
+              <MappingFragment StoreEntitySet="UserArticle">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -605,14 +616,6 @@ FROM [dbo].[UserArticle] AS [UserArticle]</DefiningQuery>
                 <ScalarProperty Name="Msg" ColumnName="Msg" />
                 <ScalarProperty Name="To" ColumnName="To" />
                 <ScalarProperty Name="From" ColumnName="From" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserArticles">
-            <EntityTypeMapping TypeName="reddahModel.UserArticle">
-              <MappingFragment StoreEntitySet="UserArticle">
-                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

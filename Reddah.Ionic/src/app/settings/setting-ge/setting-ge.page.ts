@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
@@ -23,7 +23,6 @@ export class SettingGePage implements OnInit {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         public authService: AuthService,
-        private toastController: ToastController,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
@@ -73,18 +72,7 @@ export class SettingGePage implements OnInit {
 
     async clearCache(){
         this.cacheService.clearAll();
-        this.presentToastWithOptions("已清除缓存");
-    }
-
-    async presentToastWithOptions(message: string) {
-        const toast = await this.toastController.create({
-            message: message,
-            showCloseButton: true,
-            position: 'top',
-            closeButtonText: 'Close',
-            duration: 3000
-        });
-        toast.present();
+        this.reddah.presentToastWithOptions("已清除缓存");
     }
 
 }

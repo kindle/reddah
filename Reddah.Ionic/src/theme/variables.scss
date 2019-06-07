@@ -84,11 +84,7 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
-.like-comment-popover .popover-content {
-    width: auto;
-}
-
-.postviewer-popover  .popover-content {
+.common-comment-popover .popover-content {
     width: auto;
 }
 
@@ -113,6 +109,11 @@
     width: 150px;
     --ion-background-color: #222428;
     --ion-text-color: white;
+}  
+
+.article-pop-popover .popover-content {
+    width: auto;
+    
 }  
 
 .backbutton{

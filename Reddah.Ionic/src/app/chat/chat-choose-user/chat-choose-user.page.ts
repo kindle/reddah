@@ -60,8 +60,6 @@ export class ChatChooseUserPage implements OnInit {
             });
         });
 
-        console.log(targetUsers)
-
         if(targetUsers.length==1){//2 people chat
             const modal = await this.modalController.create({
                 component: ChatPage,
@@ -82,7 +80,7 @@ export class ChatChooseUserPage implements OnInit {
                 }
             });
             await modal.present();
-            const {data} = await modal.onDidDismiss();
+            //const {data} = await modal.onDidDismiss();
         }
     }
 

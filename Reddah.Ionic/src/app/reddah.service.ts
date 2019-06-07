@@ -15,7 +15,7 @@ import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
 
 import { PostviewerPage } from './postviewer/postviewer.page';
-import { LoadingController, NavController, ModalController } from '@ionic/angular';
+import { LoadingController, NavController, ModalController, ToastController } from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -29,6 +29,7 @@ export class ReddahService {
         private transfer: FileTransfer, 
         private file: File,
         private modalController: ModalController,
+        private toastController: ToastController,
     ) { }
 
     //******************************** */
@@ -167,6 +168,18 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private changeGroupChatTitleUrl = 'https://login.reddah.com/api/chat/changegroupchattitle'; 
+
+    changeGroupChatTitle(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.changeGroupChatTitleUrl, formData)
+        .pipe(
+            tap(data => this.log('change group chat title')),
+            catchError(this.handleError('change group chat title', []))
+        );
+    }
+    //******************************** */
     private removeFriendUrl = 'https://login.reddah.com/api/article/removefriend'; 
 
     removeFriend(formData: FormData): Observable<any> {
@@ -231,6 +244,18 @@ export class ReddahService {
         .pipe(
             tap(data => this.log('update user photo')),
             catchError(this.handleError('update user photo', []))
+        );
+    }
+    //******************************** */
+    private bookmarkUrl = 'https://login.reddah.com/api/article/bookmark'; 
+
+    bookmark(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.bookmarkUrl, formData)
+        .pipe(
+            tap(data => this.log('set bookmark'+JSON.stringify(formData))),
+            catchError(this.handleError('set bookmark', []))
         );
     }
     //******************************** */
@@ -329,7 +354,18 @@ export class ReddahService {
             catchError(this.handleError('getReddahSubs', []))
         );
     }
-
+    //******************************** */
+    private bookmarksUrl = 'https://login.reddah.com/api/article/getbookmarks'; 
+    
+    getBookmarks(formData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.bookmarksUrl, formData)
+        .pipe(
+            tap(data => this.log('fetched bookmarks')),
+            catchError(this.handleError('getReddahBookmarks', []))
+        );
+    }
+    //******************************** */
 
     setCurrentUser(userName: string){
         this.localStorageService.store("Reddah_CurrentUser",userName);
@@ -636,6 +672,19 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         });
 
         return result;
+    }
+
+
+
+    async presentToastWithOptions(message: string) {
+        const toast = await this.toastController.create({
+            message: message,
+            showCloseButton: true,
+            position: 'top',
+            closeButtonText: 'Close',
+            duration: 3000
+        });
+        toast.present();
     }
     
 }

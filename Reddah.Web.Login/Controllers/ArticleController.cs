@@ -13,6 +13,7 @@ using System.Web;
 using System.Web.Hosting;
 using System.IO;
 using System.Web.Script.Serialization;
+using System.Data.Entity.Validation;
 
 namespace Reddah.Web.Login.Controllers
 {
@@ -915,6 +916,95 @@ namespace Reddah.Web.Login.Controllers
 
         }
 
+        /// <summary>
+        /// --default 0 as article, 1 as an image link, 2 as an video
+        /// --bookmark an image link in content
+        /// </summary>
+        /// <returns></returns>
+        [Route("bookmark")]
+        [HttpPost]
+        public IHttpActionResult Bookmark()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int articleId = js.Deserialize<int>(HttpContext.Current.Request["ArticleId"]);
+
+                string content = HttpContext.Current.Request["Content"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var target = articleId>0? db.UserArticle.FirstOrDefault(ua => ua.ArticleId==articleId && ua.Type==0)
+                        : db.UserArticle.FirstOrDefault(ua => ua.Content==content && ua.Type==1);
+                    if(target==null)
+                    {
+                        db.UserArticle.Add(new UserArticle { UserName = jwtResult.JwtUser.User, ArticleId = articleId, Content=content==null?string.Empty:content, Type = articleId>0?0:1, CreatedOn=DateTime.UtcNow });
+                        db.SaveChanges();
+                    }
+
+                    return Ok(new ApiResult(0, "success"));
+                }
+            }
+            catch(DbEntityValidationException ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("getbookmarks")]
+        [HttpPost]
+        public IHttpActionResult GetBookmarks()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int[] loadedIds = js.Deserialize<int[]>(HttpContext.Current.Request["loadedIds"]);
+
+                string content = HttpContext.Current.Request["Content"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    IEnumerable<UserArticle> query = null;
+                    int pageCount = 10;
+                    query = (from b in db.UserArticle
+                             where 
+                              !(loadedIds).Contains(b.Id)
+                             orderby b.Id descending
+                             select b)
+                            .Take(pageCount);
+
+                    return Ok(new ApiResult(0, query.ToList()));
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
 
     }
 }

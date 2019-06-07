@@ -31,6 +31,7 @@ namespace Reddah.Web.Login
         public virtual DbSet<Log> Log { get; set; }
         public virtual DbSet<Setting> Setting { get; set; }
         public virtual DbSet<UploadFile> UploadFile { get; set; }
+        public virtual DbSet<UserArticle> UserArticle { get; set; }
         public virtual DbSet<UserFriend> UserFriend { get; set; }
         public virtual DbSet<UserProfile> UserProfile { get; set; }
         public virtual DbSet<webpages_Membership> webpages_Membership { get; set; }
@@ -40,6 +41,5 @@ namespace Reddah.Web.Login
         public virtual DbSet<webpages_Roles> webpages_Roles { get; set; }
         public virtual DbSet<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
         public virtual DbSet<Message> Message { get; set; }
-        public virtual DbSet<UserArticle> UserArticle { get; set; }
     }
 }

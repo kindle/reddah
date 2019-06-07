@@ -9,6 +9,7 @@ import { ReddahService } from '../../reddah.service';
 import { CacheService } from 'ionic-cache';
 import { UserPage } from '../../common/user/user.page';
 import { ChangeNoteNamePopPage } from '../../common/change-notename-pop.page';
+import { ChatChooseGroupPage } from '../../chat/chat-choose-group/chat-choose-group.page';
 
 @Component({
     selector: 'app-contact',
@@ -126,6 +127,13 @@ export class ContactPage {
             this.loadRequests();
             this.loadData();
         }
+    }
+
+    async goChooseGroupChat(){
+        const modal = await this.modalController.create({
+            component: ChatChooseGroupPage
+        });
+        await modal.present();
     }
 
     async goUser(userName){

@@ -85,7 +85,7 @@ export class TsViewerPage implements OnInit {
             componentProps: { liked: liked },
             event: event,
             translucent: true,
-            cssClass: 'like-comment-popover'
+            cssClass: 'common-comment-popover'
         });
         await popover.present();
         const { data } = await popover.onDidDismiss();

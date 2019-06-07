@@ -15,9 +15,9 @@
         </ion-item>
     </div>
     <div class="gap">
-        <ion-item class="borderTop borderItem" lines="none">
-            <ion-note>{{groupInfo.Title}}</ion-note>
+        <ion-item class="borderTop borderItem" lines="none" (click)="changeTitle()">
             <ion-text slot="start">群聊名称</ion-text>
+            <ion-label slot="end">{{groupInfo.Title}}</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
         <ion-item class="borderItem" lines="none">

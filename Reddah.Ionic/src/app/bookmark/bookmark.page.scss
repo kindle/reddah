@@ -1,0 +1,35 @@
+video{
+    width: 100%;
+}
+.listInfoBlock {
+    overflow:hidden;
+}
+.listImage {
+    vertical-align: top;
+}
+.listImageWrapper {
+    float: left;
+    height: 120px;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 2px;
+}
+.BrowsePreviewImage
+{
+    width: 193px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    border: 1px solid #BDBEC1;
+    margin-top: 5px;
+}
+.listRight .listInfo {
+    color: #BDBEC1;
+}
+div.postClear {
+    clear: left;
+    height: 10px;
+}
+orgImage, .orgArticle {
+    display: none;
+}
+

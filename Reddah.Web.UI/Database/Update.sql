@@ -64,6 +64,9 @@ alter table [dbo].[UserProfile] add
   [UserStatus] INT default 0 NOT NULL  --do not want to be searched by username, cell number
   
 
+--20190607
+--re-create userarticle
+
 
 
         

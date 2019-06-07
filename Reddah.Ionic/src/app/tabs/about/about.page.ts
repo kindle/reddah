@@ -7,6 +7,7 @@ import { AuthService } from '../../auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MyInfoPage } from '../../common/my-info/my-info.page';
 import { SettingListPage } from '../../settings/setting-list/setting-list.page';
+import { BookmarkPage } from '../../bookmark/bookmark.page';
 
 @Component({
     selector: 'app-about',
@@ -58,6 +59,15 @@ export class AboutPage implements OnInit {
         //check if change
         if(data)
             this.reddah.getUserPhotos(this.userName);
+    }
+
+    async goBookmark(){
+        const modal = await this.modalController.create({
+            component: BookmarkPage,
+            componentProps: {  }
+        });
+        
+        await modal.present();
     }
 
 }

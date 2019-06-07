@@ -16,6 +16,13 @@ using System.Web.Script.Serialization;
 
 namespace Reddah.Web.Login.Controllers
 {
+    /// <summary>
+    /// 0 normal
+    /// 1 timeline
+    /// 2 two chat
+    /// 3 group chat 
+    /// 4 feedback
+    /// </summary>
     [RoutePrefix("api/chat")]
     public class ChatController : ApiBaseController
     {
@@ -208,6 +215,81 @@ namespace Reddah.Web.Login.Controllers
                 return Ok(new ApiResult(4, ex.Message));
             }
 
+        }
+
+        [Route("getgrouplist")]
+        [HttpPost]
+        public IHttpActionResult GetGroupList()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+
+                    var groupChats = (from a in db.Article
+                                      where a.Type == 3 && (a.GroupName.StartsWith(jwtResult.JwtUser.User + ",") ||
+                                        a.GroupName.Contains("," + jwtResult.JwtUser.User + ",") ||
+                                        a.GroupName.EndsWith("," + jwtResult.JwtUser.User))
+                                    orderby a.Id descending
+                                    select a);
+
+                    return Ok(new ApiResult(0, groupChats.ToList()));
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+
+        }
+
+        [Route("changegroupchattitle")]
+        [HttpPost]
+        public IHttpActionResult ChangeGroupChatTitle()
+        {
+            UserInfo userInfo = new UserInfo();
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string targetTitle = HttpContext.Current.Request["targetTitle"];
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int targetGroupChatId = js.Deserialize<int>(HttpContext.Current.Request["targetGroupChatId"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var target = db.Article.FirstOrDefault(a => a.Id==targetGroupChatId && a.Type==3);
+                    target.Title = targetTitle;
+                    db.SaveChanges();
+
+                    return Ok(new ApiResult(0, "success"));
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
         }
     }
 }

@@ -1,0 +1,43 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-label>我的收藏</ion-label>
+    <ion-icon name="ios-add" (click)="createNote()" slot="end"></ion-icon>
+</ion-item>
+<ion-content #pageTop style="background-color: white;">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content refreshingSpinner="bubbles">
+        </ion-refresher-content>
+    </ion-refresher>  
+    <ng-template ngFor let-bookmark [ngForOf]="bookmarks">
+        <ion-card class="welcome-card" (click)="view(article)">
+        <!--<video id="video_{{article.Id}}" (click)="reddah.playVideo(article.Id)" src="{{article.VideoUrl}}"
+                    poster="{{article.VideoPoster}}"
+                    *ngIf="article.VideoUrl.length>0"
+                    controls="controls" loop="true">
+            </video>
+            <ion-img src="{{article.ImageUrls[0]}}" *ngIf="article.VideoUrl.length==0&&article.ImageUrls.length>0"></ion-img>
+            <ion-card-header>
+                <ion-card-subtitle>
+                    <div [innerHTML]="reddah.summary(article.Title)"></div>
+                </ion-card-subtitle>
+                <ion-card-title>
+                    <div [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <ng-template ngFor let-group [ngForOf]="article.GroupName.split(',')">
+                    <ion-chip outline margin-bottom>
+                        <ion-label [innerHTML]="reddah.htmlDecode(group)"></ion-label>
+                    </ion-chip>&nbsp;
+                </ng-template>
+            </ion-card-content>-->
+            <ion-item>
+                <ion-note color="dark">{{bookmark.Id}} {{bookmark.ArticleId}} {{bookmark.CreatedOn}}</ion-note>
+            </ion-item>
+        </ion-card>
+    </ng-template>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

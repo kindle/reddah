@@ -4,6 +4,7 @@ import { CacheService } from "ionic-cache";
 import { GroupChatPage } from '../group-chat.page';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
+import { ChatChooseUserPage } from '../../chat/chat-choose-user/chat-choose-user.page';
 
 @Component({
     selector: 'app-chat-choose-group',
@@ -57,5 +58,13 @@ export class ChatChooseGroupPage implements OnInit {
         });
         await modal.present();
     }
+
+    async createGroupChat(){
+        const modal = await this.modalController.create({
+            component: ChatChooseUserPage,
+        });
+          
+        await modal.present();
+    } 
 
 }

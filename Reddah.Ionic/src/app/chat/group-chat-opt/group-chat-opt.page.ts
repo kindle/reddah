@@ -6,6 +6,7 @@ import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
 import { LocalePage } from '../../common/locale/locale.page';
 import { UserPage } from '../../common/user/user.page';
+import { SettingGroupChatTitlePage } from '../../settings/setting-group-chat-title/setting-group-chat-title.page';
 
 @Component({
     selector: 'app-group-chat-opt',
@@ -16,9 +17,6 @@ export class GroupChatOptPage implements OnInit {
 
     @Input() targetUsers;
     @Input() groupInfo;
-
-    userName;
-    locale;
 
     noDisturb=false;
     stickTop=false;
@@ -34,18 +32,26 @@ export class GroupChatOptPage implements OnInit {
         public authService: AuthService,
         private toastController: ToastController,
     ) { 
-        this.userName = this.reddah.getCurrentUser();
-        this.locale = this.reddah.getCurrentLocale();
     }
 
-
     ngOnInit() {
-        this.currentLocaleInfo = "Not Set";
-        const locale = this.localStorageService.retrieve("Reddah_Locale");
-        this.reddah.Locales.forEach((value, index, arr)=>{
-            if(locale===value.Name)
-                this.currentLocaleInfo = value.Description;
+    }
+
+    async changeTitle(){
+        const modal = await this.modalController.create({
+            component: SettingGroupChatTitlePage,
+            componentProps: { 
+                targetGroupChatId: this.groupInfo.Id,
+                currentTitle: this.groupInfo.Title
+            }
         });
+        await modal.present();
+        const {data} = await modal.onDidDismiss();
+        if(data)
+        {
+            this.groupInfo.Title = data.newTitle;
+            this.cacheService.clearGroup("ChatChooseGroupPage");
+        }
     }
 
     async setBackground(){
@@ -62,42 +68,6 @@ export class GroupChatOptPage implements OnInit {
     
     async close() {
         await this.modalController.dismiss();
-    }
-
-    logout() {
-        this.authService.logout();
-    }
-
-    currentLocaleInfo;
-    async changeLocale(){
-        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-        const changeLocaleModal = await this.modalController.create({
-            component: LocalePage,
-            componentProps: { orgLocale: currentLocale }
-        });
-        
-        await changeLocaleModal.present();
-        const { data } = await changeLocaleModal.onDidDismiss();
-        if(data){
-            window.location.reload();
-        }
-
-    }
-
-    async clearCache(){
-        this.cacheService.clearAll();
-        this.presentToastWithOptions("已清除缓存");
-    }
-
-    async presentToastWithOptions(message: string) {
-        const toast = await this.toastController.create({
-            message: message,
-            showCloseButton: true,
-            position: 'top',
-            closeButtonText: 'Close',
-            duration: 3000
-        });
-        toast.present();
     }
 
     async goUser(userName){

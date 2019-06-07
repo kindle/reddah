@@ -35,9 +35,10 @@ export class PostviewerPage implements OnInit {
     async presentPopover(ev: any) {
         const popover = await this.popoverController.create({
             component: ArticlePopPage,
+            componentProps: { ArticleId: this.article.Id },
             event: ev,
             translucent: true,
-            cssClass: 'postviewer-popover'
+            cssClass: 'article-pop-popover'
         });
         return await popover.present();
     }

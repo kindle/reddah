@@ -123,8 +123,13 @@ CREATE TABLE [dbo].[UploadFile]
 
 CREATE TABLE [dbo].[UserArticle]
 (
+	[Id] INT IDENTITY(1,1) NOT NULL,
 	[UserName] NVARCHAR(MAX) NOT NULL,
-	[ArticleId] INT NOT NULL 
+	[ArticleId] INT NOT NULL,
+	[Content] NVARCHAR(MAX) NOT NULL,   --bookmark an image link
+	[Type] INT default 0 NOT NULL,       --default 0 as article, 1 as an image link, 2 as an video
+	[CreatedOn] DATETIME NOT NULL,
+	PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
 CREATE TABLE [dbo].[UserFriend]
