@@ -31,7 +31,7 @@
                     </ion-chip>&nbsp;
                 </ng-template>
             </ion-card-content>-->
-            <ion-item>
+            <ion-item (press)="showChangeMenu($event, bookmark)">
                 <ion-note color="dark">{{bookmark.Id}} {{bookmark.ArticleId}} {{bookmark.CreatedOn}}</ion-note>
             </ion-item>
         </ion-card>

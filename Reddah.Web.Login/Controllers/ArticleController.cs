@@ -965,6 +965,48 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("deletebookmark")]
+        [HttpPost]
+        public IHttpActionResult DeleteBookmark()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int id = js.Deserialize<int>(HttpContext.Current.Request["Id"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var target = db.UserArticle.FirstOrDefault(ua => ua.Id == id);
+                        
+                    if (target != null)
+                    {
+                        db.UserArticle.Remove(target);
+                        db.SaveChanges();
+                    }
+
+                    return Ok(new ApiResult(0, "success"));
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
         [Route("getbookmarks")]
         [HttpPost]
         public IHttpActionResult GetBookmarks()

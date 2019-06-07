@@ -254,8 +254,19 @@ export class ReddahService {
         formData.append('jwt', this.getCurrentJwt());
         return this.http.post<any>(this.bookmarkUrl, formData)
         .pipe(
-            tap(data => this.log('set bookmark'+JSON.stringify(formData))),
+            tap(data => this.log('set bookmark')),
             catchError(this.handleError('set bookmark', []))
+        );
+    }
+    //******************************** */
+    private deleteBookmarkUrl = 'https://login.reddah.com/api/article/deletebookmark'; 
+
+    deleteBookmark(formData: FormData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.deleteBookmarkUrl, formData)
+        .pipe(
+            tap(data => this.log('delete bookmark')),
+            catchError(this.handleError('delete bookmark', []))
         );
     }
     //******************************** */

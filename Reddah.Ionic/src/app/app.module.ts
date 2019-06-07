@@ -90,6 +90,7 @@ import { GroupChatOptPage } from './chat/group-chat-opt/group-chat-opt.page';
 import { ChatChooseUserPage } from './chat/chat-choose-user/chat-choose-user.page';
 import { ChatChooseGroupPage } from './chat/chat-choose-group/chat-choose-group.page';
 import { BookmarkPage } from './bookmark/bookmark.page';
+import { BookmarkPopPage } from './common/bookmark-pop.page';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -105,6 +106,7 @@ var firebaseConfig = {
     declarations: [
         AppComponent,
         BookmarkPage,
+        BookmarkPopPage,
         LocalePage,
         AddCommentPage,
         AddFriendPage,
@@ -156,6 +158,7 @@ var firebaseConfig = {
     ],
     entryComponents: [
         BookmarkPage,
+        BookmarkPopPage,
         LocalePage,
         PostviewerPage,
         ImageViewerComponent,
