@@ -88,6 +88,7 @@ import { GroupChatPage } from './chat/group-chat.page';
 import { ChatOptPage } from './chat/chat-opt/chat-opt.page';
 import { GroupChatOptPage } from './chat/group-chat-opt/group-chat-opt.page';
 import { ChatChooseUserPage } from './chat/chat-choose-user/chat-choose-user.page';
+import { ChooseUserPage } from './common/choose-user/choose-user.page';
 import { ChatChooseGroupPage } from './chat/chat-choose-group/chat-choose-group.page';
 import { BookmarkPage } from './bookmark/bookmark.page';
 import { BookmarkPopPage } from './common/bookmark-pop.page';
@@ -108,6 +109,7 @@ var firebaseConfig = {
         BookmarkPage,
         BookmarkPopPage,
         LocalePage,
+        ChooseUserPage,
         AddCommentPage,
         AddFriendPage,
         ApplyFriendPage,
@@ -160,6 +162,7 @@ var firebaseConfig = {
         BookmarkPage,
         BookmarkPopPage,
         LocalePage,
+        ChooseUserPage,
         PostviewerPage,
         ImageViewerComponent,
         LoginPage,

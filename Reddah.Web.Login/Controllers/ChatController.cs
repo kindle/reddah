@@ -13,6 +13,7 @@ using System.Web;
 using System.Web.Hosting;
 using System.IO;
 using System.Web.Script.Serialization;
+using System.Data.Entity.Validation;
 
 namespace Reddah.Web.Login.Controllers
 {
@@ -244,6 +245,93 @@ namespace Reddah.Web.Login.Controllers
                                     select a);
 
                     return Ok(new ApiResult(0, groupChats.ToList()));
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+
+        }
+
+        [Route("deletegroupchat")]
+        [HttpPost]
+        public IHttpActionResult DeleteGroupChat()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int id = js.Deserialize<int>(HttpContext.Current.Request["Id"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var target = db.Article.FirstOrDefault(a=>a.Id==id && a.Type==3);
+                    if (target != null)
+                    {
+                        var me = jwtResult.JwtUser.User;
+                        var userList = target.GroupName.Split(',').ToList();
+                        if (userList.Contains(me))
+                            userList.Remove(me);
+                        target.GroupName = string.Join(",", userList);
+
+                        db.SaveChanges();
+                    }
+
+                    return Ok(new ApiResult(0, "success"));
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("addtogroupchat")]
+        [HttpPost]
+        public IHttpActionResult AddToGroupChat()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int id = js.Deserialize<int>(HttpContext.Current.Request["Id"]);
+                string[] userNames = js.Deserialize<string[]>(HttpContext.Current.Request["UserNames"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var target = db.Article.FirstOrDefault(a => a.Type == 3 && a.Id == id);
+                    if (target != null)
+                    {
+                        target.GroupName += "," + string.Join(",", userNames);
+                        db.SaveChanges();
+                    }
+                    
+                    return Ok(new ApiResult(0, "Success"));
 
                 }
 

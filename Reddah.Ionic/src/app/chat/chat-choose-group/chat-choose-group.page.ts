@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, Content } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { GroupChatPage } from '../group-chat.page';
 import { AuthService } from '../../auth.service';
@@ -13,6 +13,8 @@ import { ChatChooseUserPage } from '../../chat/chat-choose-user/chat-choose-user
 })
 export class ChatChooseGroupPage implements OnInit {
 
+    @ViewChild('pageTop') pageTop: Content;
+    
     async close() {
         await this.modalController.dismiss();
     }
@@ -28,9 +30,23 @@ export class ChatChooseGroupPage implements OnInit {
         this.getGroupList();
     }
 
+    //drag down
+    doRefresh(event) {
+        setTimeout(() => {
+            this.clearCacheAndReload(event);
+        }, 2000);
+    }
+
+    clearCacheAndReload(event){
+        this.pageTop.scrollToTop();
+        this.cacheService.clearGroup("ChatChooseGroupPage");
+        this.groupList = [];
+        this.getGroupList(event);
+    }
+
     groupList = [];
 
-    getGroupList(){
+    getGroupList(event=null){
         let cacheKey = "this.reddah.getGroupList";
         let formData = new FormData();
         let request = this.reddah.getGroupList(formData);
@@ -46,6 +62,8 @@ export class ChatChooseGroupPage implements OnInit {
                     });
                 });
             }
+            if(event)
+                event.target.complete();
         });  
     }
 
@@ -57,6 +75,10 @@ export class ChatChooseGroupPage implements OnInit {
             }
         });
         await modal.present();
+        const {data} = await modal.onDidDismiss();
+        if(data=='delete'){
+            this.clearCacheAndReload(null);
+        }
     }
 
     async createGroupChat(){

@@ -26,6 +26,8 @@
     "Article.Share": "Share",
     "Confirm.Title": "Confirm",
     "Confirm.Message": "Do you want to exit Reddah?",
+    "Confirm.LogoutMessage":"Do you want to logout?",
+    "Confirm.LeaveGroupChatMessage":"Do you want to quit and delete?",
     "Confirm.Yes": "Yes",
     "Confirm.Cancel": "Cancel",
     "Confirm.Submit": "Submit"

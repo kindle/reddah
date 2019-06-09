@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
@@ -8,6 +8,7 @@ import { SettingAboutPage } from '../setting-about/setting-about.page';
 import { SettingAccountPage } from '../setting-account/setting-account.page';
 import { SettingGePage } from '../setting-ge/setting-ge.page';
 import { SettingPrivacyPage } from '../setting-privacy/setting-privacy.page';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-setting-list',
@@ -25,6 +26,8 @@ export class SettingListPage implements OnInit {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         public authService: AuthService,
+        private alertController: AlertController,
+        private translate: TranslateService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
@@ -39,8 +42,26 @@ export class SettingListPage implements OnInit {
         await this.modalController.dismiss();
     }
 
-    logout() {
-        this.authService.logout();
+    async logout() {
+        const alert = await this.alertController.create({
+            header: this.translate.instant("Confirm.Title"),
+            message: this.translate.instant("Confirm.LogoutMessage"),
+            buttons: [
+            {
+                text: this.translate.instant("Confirm.Cancel"),
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {}
+            }, 
+            {
+                text: this.translate.instant("Confirm.Yes"),
+                handler: () => {
+                    this.authService.logout();
+                }
+            }]
+        });
+
+        await alert.present().then(()=>{});
     }
 
     async goAbout(){

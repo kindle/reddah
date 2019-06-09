@@ -127,6 +127,10 @@ export class GroupChatPage implements OnInit {
         });
         
         await modal.present();
+        const {data} = await modal.onDidDismiss();
+        if(data=='delete'){
+            await this.modalController.dismiss('delete');
+        }
     }
 
     async checkIsToday(date){

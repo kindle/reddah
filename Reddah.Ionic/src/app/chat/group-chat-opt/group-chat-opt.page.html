@@ -12,6 +12,12 @@
                 </ion-avatar>
                 <ion-label style="margin-top:0;width:65px;color:gray;" text-center>{{reddah.appData('usernotename_'+uname)}}</ion-label>
             </div>
+            <div style="display: flex;flex-direction: column;">
+                <div>
+                    <ion-icon name="add" size="large" color="medium" class="addToGroupChat" (click)="addToGroupChat()"></ion-icon>
+                </div>
+                <ion-label style="margin-top:0;width:65px;color:gray;" text-center>&nbsp;</ion-label>
+            </div>
         </ion-item>
     </div>
     <div class="gap">
@@ -83,10 +89,16 @@
         </ion-item>
     </div>
 
-    <div class="gap lastGap">
+    <div class="gap">
         <ion-item class="borderTop borderItem borderBottom" (click)="report()" lines="none">
             <ion-label>投诉</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
+    </div>
+    
+    <div class="gap lastGap">
+        <ion-item class="borderTop borderItem borderBottom" (click)="leaveGroupChatConfirm()" lines="none" text-center>
+            <ion-label color="danger">删除并退出</ion-label>
         </ion-item>
     </div>
 </ion-content>

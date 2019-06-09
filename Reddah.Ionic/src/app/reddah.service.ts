@@ -321,6 +321,28 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private deleteGroupChatUrl = 'https://login.reddah.com/api/chat/deletegroupchat'; 
+
+    deleteGroupChat(formData: FormData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.deleteGroupChatUrl, formData)
+        .pipe(
+            tap(data => this.log('delete group chat')),
+            catchError(this.handleError('delete group chat', []))
+        );
+    }
+    //******************************** */
+    private addToGroupChatUrl = 'https://login.reddah.com/api/chat/addtogroupchat'; 
+
+    addToGroupChat(formData: FormData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.addToGroupChatUrl, formData)
+        .pipe(
+            tap(data => this.log('add to group chat')),
+            catchError(this.handleError('add to group chat', []))
+        );
+    }
+    //******************************** */
 
     private log(message: string) {
       console.log(message);
