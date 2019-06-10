@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angu
 import { ModalController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from "ionic-cache";
+import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions } from '@ionic-native/media-capture';
+import { File, FileEntry } from '@ionic-native/file/ngx';
+import { Media, MediaObject } from '@ionic-native/media'; 
 
 @Component({
     selector: 'app-chat-box',
@@ -97,6 +100,7 @@ export class ChatBoxComponent implements OnInit {
         public reddah : ReddahService,
         private cacheService: CacheService,
         private modalController: ModalController,
+        private file: File,
     ) { }
 
     ngOnInit() {
@@ -112,6 +116,122 @@ export class ChatBoxComponent implements OnInit {
         this.showFacePanel = false;
     }
 
-    
+    mediaObj;               
+
+    async startSpeak(){
+        
+        let fullPath = this.file.applicationStorageDirectory + "file.wav";
+        this.mediaObj = Media.create(fullPath);               
+        this.mediaObj.startRecord();                 
+        this.mediaObj.onSuccess.subscribe(() => {
+            alert('Record success!')
+            this.uploadAudio(fullPath);
+        }); 
+        this.mediaObj.onError.subscribe(err => {
+            alert('Record fail! Error: ' + err)
+        });               
+    }
+
+
+    async stopSpeak(){
+        this.mediaObj.stopRecord();
+    }
+
+
+    async uploadAudio(fullPath){
+        let formData = new FormData();
+        formData.append("ArticleId", JSON.stringify(this.selectedArticleId));
+        formData.append("ParentCommentId", JSON.stringify(this.selectedCommentId));
+
+        this.file.resolveLocalFilesystemUrl(fullPath)
+        .then(entry => {
+            ( <FileEntry> entry).file(file => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const imgBlob = new Blob([reader.result], {
+                        type: file.type
+                    });
+                    formData.append(file.name, imgBlob, file.name);
+                    this.reddah.addAudioChat(formData).subscribe(result => 
+                    {
+                        if(result.Success==0)
+                        { 
+                            //this.modalController.dismiss(true);
+                            this.reloadComments.emit();
+                        }
+                        else
+                        {
+                            alert(result.Message);
+                        }
+                        
+                    },
+                    error=>{
+                        //console.error(JSON.stringify(error));
+                        alert(JSON.stringify(error));
+                    });
+                };
+                reader.readAsArrayBuffer(file);
+            })
+        })
+        .catch(err => {
+            console.error(JSON.stringify(err));
+        });
+    }
+
+
+
+    //not best plugin
+    async startSpeak_B(){
+        //limit audio 1 file, 60*5 seconds=5 minutes
+        let options: CaptureAudioOptions = { limit: 1, duration: 60*5 };									
+        MediaCapture.captureAudio(options).then(									
+            (mediaFiles: MediaFile[]) => {
+                this.uploadAudio_B(mediaFiles[0]);
+            },									
+            (err: CaptureError) => { 
+                console.log('error:'+JSON.stringify(err))
+                alert(JSON.stringify(err));
+            }									
+        );	
+    }
+
+    async uploadAudio_B(mediaFile){
+        let formData = new FormData();
+        formData.append("ArticleId", JSON.stringify(this.selectedArticleId));
+        formData.append("ParentCommentId", JSON.stringify(this.selectedCommentId));
+
+        this.file.resolveLocalFilesystemUrl(mediaFile.fullPath)
+        .then(entry => {
+            ( <FileEntry> entry).file(file => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const imgBlob = new Blob([reader.result], {
+                        type: file.type
+                    });
+                    formData.append(mediaFile.name, imgBlob, file.name);
+                    this.reddah.addAudioChat(formData).subscribe(result => 
+                    {
+                        if(result.Success==0)
+                        { 
+                            this.modalController.dismiss(true);
+                        }
+                        else
+                        {
+                            alert(result.Message);
+                        }
+                        
+                    },
+                    error=>{
+                        //console.error(JSON.stringify(error));
+                        alert(JSON.stringify(error));
+                    });
+                };
+                reader.readAsArrayBuffer(file);
+            })
+        })
+        .catch(err => {
+            console.error(JSON.stringify(err));
+        });
+    }
 
 }

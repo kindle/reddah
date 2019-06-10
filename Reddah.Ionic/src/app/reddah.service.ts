@@ -344,6 +344,23 @@ export class ReddahService {
     }
     //******************************** */
 
+    private addAudioChatUrl = 'https://login.reddah.com/api/chat/addaudiochat'; 
+
+    addAudioChat(formData: FormData): Observable<any> {
+
+      formData.append('jwt', this.getCurrentJwt());
+      
+      return this.http.post<any>(this.addAudioChatUrl, formData)
+      .pipe(
+          tap(data => this.log('add audio chat')),
+          catchError(this.handleError('add audio chat', []))
+      );
+    }
+    //******************************** */
+
+
+
+
     private log(message: string) {
       console.log(message);
     }
@@ -568,6 +585,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     ];
 
     appPhoto = {};
+    appCacheToOrg = {};
 
     appData(cacheKey){
         let result = this.localStorageService.retrieve(cacheKey);
@@ -607,8 +625,9 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             this.fileTransfer = this.transfer.create();  
             let target = this.file.applicationStorageDirectory + webImageName;
             this.fileTransfer.download(webUrl, target).then((entry) => {
-                this.localStorageService.store(cacheKey, target);
+                this.localStorageService.store(cacheKey, target);                
                 this.appPhoto[cacheKey] = (<any>window).Ionic.WebView.convertFileSrc(target);
+                this.appCacheToOrg[(<any>window).Ionic.WebView.convertFileSrc(target)] = webUrl;
             }, (error) => {
                 console.log(JSON.stringify(error));
             });

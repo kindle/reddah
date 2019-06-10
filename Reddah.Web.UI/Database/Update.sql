@@ -67,6 +67,11 @@ alter table [dbo].[UserProfile] add
 --20190607
 --re-create userarticle
 
+--20190609
+--default 0:text, 1:audio 2:video
+alter table [dbo].[Comment] add
+  [Type] INT NOT NULL DEFAULT 0
+
 
 
         

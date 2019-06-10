@@ -6,17 +6,19 @@
 <ion-content no-padding style="background-color: #eeeeee;">
     <div class="gap">
         <ion-item lines="none" class="borderTop borderItem borderBottom">
-            <div style="display: flex;flex-direction: column;" *ngFor="let uname of groupInfo.GroupName.split(',')">
-                <ion-avatar class="userPhoto" (click)="goUser(uname)">
-                    <img src="{{reddah.appPhoto['userphoto_'+uname]}}" class="portrait">
-                </ion-avatar>
-                <ion-label style="margin-top:0;width:65px;color:gray;" text-center>{{reddah.appData('usernotename_'+uname)}}</ion-label>
-            </div>
-            <div style="display: flex;flex-direction: column;">
-                <div>
-                    <ion-icon name="add" size="large" color="medium" class="addToGroupChat" (click)="addToGroupChat()"></ion-icon>
+            <div style="display: flex;flex-wrap: wrap;">
+                <div style="display: flex;flex-direction: column;" *ngFor="let uname of groupInfo.GroupName.split(',')">
+                    <ion-avatar class="userPhoto" (click)="goUser(uname)">
+                        <img src="{{reddah.appPhoto['userphoto_'+uname]}}" class="portrait">
+                    </ion-avatar>
+                    <ion-label style="margin-top:0;width:65px;color:gray;" text-center>{{reddah.appData('usernotename_'+uname)}}</ion-label>
                 </div>
-                <ion-label style="margin-top:0;width:65px;color:gray;" text-center>&nbsp;</ion-label>
+                <div style="display: flex;flex-direction: column;">
+                    <div>
+                        <ion-icon name="add" size="large" color="medium" class="addToGroupChat" (click)="addToGroupChat()"></ion-icon>
+                    </div>
+                    <ion-label style="margin-top:0;width:65px;color:gray;" text-center>&nbsp;</ion-label>
+                </div>
             </div>
         </ion-item>
     </div>

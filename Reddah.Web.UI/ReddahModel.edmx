@@ -37,6 +37,7 @@
           <Property Name="Count" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -269,6 +270,7 @@ FROM [dbo].[Message] AS [Message]</DefiningQuery>
           <Property Name="Count" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -448,6 +450,7 @@ FROM [dbo].[Message] AS [Message]</DefiningQuery>
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="reddahModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Count" ColumnName="Count" />

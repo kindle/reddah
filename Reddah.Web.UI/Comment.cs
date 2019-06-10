@@ -38,6 +38,8 @@ public partial class Comment
 
     public int Status { get; set; }
 
+    public int Type { get; set; }
+
 }
 
 }

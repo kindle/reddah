@@ -8,6 +8,7 @@ import { PostviewerPage } from '../postviewer/postviewer.page';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { BookmarkPopPage } from '../common/bookmark-pop.page';
+import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 
 @Component({
     selector: 'app-bookmark',
@@ -60,6 +61,7 @@ export class BookmarkPage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "BookmarkPage")
         .subscribe(result => 
         {
+            console.log(result.Message)
             if(result.Success==0){
                 console.log(this.bookmarks);
                 for(let bookmark of result.Message){
@@ -84,6 +86,7 @@ export class BookmarkPage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "BookmarkPage")
         .subscribe(result => 
         {
+            console.log(result)
             if(result.Success==0){
                 for(let bookmark of result.Message){
                     this.bookmarks.push(bookmark);
@@ -99,7 +102,7 @@ export class BookmarkPage implements OnInit {
     clearCacheAndReload(event){
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("BookmarkPage");
-        this.ngOnInit();
+        this.getBookmarks(event);
     }
 
     //drag down
@@ -126,6 +129,22 @@ export class BookmarkPage implements OnInit {
             console.log(data)
         }
 
+    }
+
+    async viewer(photo) {
+        const modal = await this.modalController.create({
+            component: ImageViewerComponent,
+            componentProps: {
+              imgSourceArray: [photo],
+              imgTitle: "",
+              imgDescription: ""
+            },
+            cssClass: 'modal-fullscreen',
+            keyboardClose: true,
+            showBackdrop: true
+        });
+    
+        return await modal.present();
     }
 
     async createNote(){}

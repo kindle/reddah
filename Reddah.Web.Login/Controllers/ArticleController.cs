@@ -1030,16 +1030,37 @@ namespace Reddah.Web.Login.Controllers
 
                 using (var db = new reddahEntities())
                 {
-                    IEnumerable<UserArticle> query = null;
+                    //type:0 article, 1: image, 2: video
+                    IEnumerable<AdvancedUserArticle> query = null;
                     int pageCount = 10;
                     query = (from b in db.UserArticle
-                             where 
+                             join a in db.Article on b.ArticleId equals a.Id into temp
+                             from tt in temp.DefaultIfEmpty()
+                             where
                               !(loadedIds).Contains(b.Id)
                              orderby b.Id descending
-                             select b)
+                             select new AdvancedUserArticle
+                             {
+                                 Id = b.Id,
+                                 UserName = b.UserName,
+                                 ArticleId = b.ArticleId,
+                                 Title = (b.Type == 0 ? tt.Title : ""),
+                                 OrgUserName = (b.Type == 0 ? tt.UserName : ""),
+                                 PreviewPhoto = (b.Type == 0 ? tt.Content : b.Content),
+                                 article = (b.Type == 0 ? tt : null),
+                                 Content= (b.Type==0 ? "" : b.Content),
+                                 Type = b.Type,
+                                 CreatedOn = b.CreatedOn
+                             })
                             .Take(pageCount);
+                    
+                    var list = query.ToList();
+                    foreach(var item in list)
+                    {
+                        item.PreviewPhoto = Helpers.GetFirstImageSrc(item.PreviewPhoto);
+                    }
 
-                    return Ok(new ApiResult(0, query.ToList()));
+                    return Ok(new ApiResult(0, list));
                 }
             }
             catch (Exception ex)

@@ -27,6 +27,8 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
+import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions } from '@ionic-native/media-capture/ngx';
+import { Media, MediaObject } from '@ionic-native/media/ngx'; 
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -254,6 +256,8 @@ var firebaseConfig = {
         SplashScreen,
         Toast,
         WebView,
+        MediaCapture,
+        Media,
         //Firebase,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     ],

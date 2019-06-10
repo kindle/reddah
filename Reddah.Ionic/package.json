@@ -32,6 +32,8 @@
     "@ionic-native/image-resizer": "^5.0.0",
     "@ionic-native/in-app-browser": "^5.0.0-beta.23",
     "@ionic-native/ionic-webview": "^5.5.0",
+    "@ionic-native/media": "^5.7.0",
+    "@ionic-native/media-capture": "^5.7.0",
     "@ionic-native/photo-library": "^5.2.0",
     "@ionic-native/qr-scanner": "^5.2.0",
     "@ionic-native/splash-screen": "5.0.0-beta.21",
@@ -60,6 +62,8 @@
     "cordova-plugin-inappbrowser": "3.0.0",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^2.2.1",
+    "cordova-plugin-media": "5.0.2",
+    "cordova-plugin-media-capture": "3.0.2",
     "cordova-plugin-photo-library": "2.2.1",
     "cordova-plugin-qrscanner": "^2.6.0",
     "cordova-plugin-splashscreen": "^5.0.2",
@@ -138,7 +142,11 @@
       "cordova-plugin-crop": {},
       "cordova-plugin-file": {},
       "cordova-plugin-file-transfer": {},
-      "info.protonet.imageresizer": {}
+      "info.protonet.imageresizer": {},
+      "cordova-plugin-media-capture": {},
+      "cordova-plugin-media": {
+        "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
+      }
     },
     "platforms": [
       "android",

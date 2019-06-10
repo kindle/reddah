@@ -4,6 +4,8 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
 import 'hammerjs';
+import { ReddahService } from '../../reddah.service';
+import { CacheService } from 'ionic-cache';
 
 @Component({
     selector: 'app-image-viewer',
@@ -28,6 +30,8 @@ export class ImageViewerComponent implements OnInit {
         private localStorageService: LocalStorageService,
         private toastController: ToastController,
         private actionSheetController: ActionSheetController,
+        public reddah: ReddahService,
+        private cacheService: CacheService,
     ) {
     }
 
@@ -81,25 +85,39 @@ export class ImageViewerComponent implements OnInit {
         const actionSheet = await this.actionSheetController.create({
             buttons: [
             {
-              text: '发送给朋友',
-              icon: 'share',
-              handler: () => {
-                  
-              }
+                text: '发送给朋友',
+                icon: 'share',
+                handler: () => {
+                    
+                }
             }, 
             {
-              text: '收藏',
-              icon: 'bookmark',
-              handler: () => {
-                
-              }
+                text: '收藏',
+                icon: 'bookmark',
+                handler: () => {
+                    let formData = new FormData();
+                    formData.append("ArticleId", JSON.stringify(-1));
+                    let orgurl = this.reddah.appCacheToOrg[item.webPreviewUrl];
+                    formData.append("Content", orgurl==null?item.webPreviewUrl:orgurl);
+                    
+                    this.reddah.bookmark(formData).subscribe(result=>{
+                        if(result.Success==0)
+                        {
+                            this.reddah.presentToastWithOptions(`已收藏，请到到"我/收藏"查看`);
+                            this.cacheService.clearGroup("BookmarkPage");
+                        }
+                        else{
+                            alert(JSON.stringify(result.Message));
+                        }
+                    });
+                }
             }, 
             {
-              text: '保存图片',
-              icon: 'ios-save',
-              handler: () => {
-                  this.downloadImage(item);
-              }
+                text: '保存图片',
+                icon: 'ios-save',
+                handler: () => {
+                    this.downloadImage(item);
+                }
             }, 
             ]
           });

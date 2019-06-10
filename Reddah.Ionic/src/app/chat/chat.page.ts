@@ -10,6 +10,7 @@ import { UserPage } from '../common/user/user.page';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 
 
+
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.page.html',

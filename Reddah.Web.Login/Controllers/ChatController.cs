@@ -379,5 +379,116 @@ namespace Reddah.Web.Login.Controllers
                 return Ok(new ApiResult(4, ex.Message));
             }
         }
+
+
+        [Route("addaudiochat")]
+        [HttpPost]
+        public IHttpActionResult AddAudioChat()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int articleId = js.Deserialize<int>(HttpContext.Current.Request["ArticleId"]);
+                int parentCommentId = js.Deserialize<int>(HttpContext.Current.Request["ParentCommentId"]);
+
+                HttpFileCollection hfc = HttpContext.Current.Request.Files;
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                try
+                {
+                    using (var db = new reddahEntities())
+                    {
+                        string fileName = string.Empty;
+                        foreach (string rfilename in HttpContext.Current.Request.Files)
+                        {
+                            //upload image first
+                            string guid = Guid.NewGuid().ToString().Replace("-", "");
+                            string uploadedImagePath = "/uploadPhoto/";
+                            string uploadImageServerPath = "~" + uploadedImagePath;
+
+                            HttpPostedFile upload = HttpContext.Current.Request.Files[rfilename];
+                            
+                            try
+                            {
+                                var fileFormat = upload.FileName.Substring(upload.FileName.LastIndexOf('.')).Replace(".", "");
+                                //var fileName = Path.GetFileName(guid + "." + fileFormat);
+                                fileName = Path.GetFileName(guid + "." + fileFormat);
+                                var filePhysicalPath = HostingEnvironment.MapPath(uploadImageServerPath + "/" + fileName);
+                                if (!Directory.Exists(HostingEnvironment.MapPath(uploadImageServerPath)))
+                                {
+                                    Directory.CreateDirectory(HostingEnvironment.MapPath(uploadImageServerPath));
+                                }
+                                upload.SaveAs(filePhysicalPath);
+                                var url = uploadedImagePath + fileName;
+
+                                UploadFile file = new UploadFile();
+                                file.Guid = guid;
+                                file.Format = fileFormat;
+                                file.UserName = jwtResult.JwtUser.User;
+                                file.CreatedOn = DateTime.Now;
+                                file.GroupName = "";
+                                file.Tag = "";
+                                db.UploadFile.Add(file);
+                            }
+                            catch (Exception ex)
+                            {
+                                return Ok(new ApiResult(1, ex.Message));
+                            }
+                        }
+
+
+                        db.Comment.Add(new Comment()
+                        {
+                            ArticleId = articleId,
+                            ParentId = parentCommentId,
+                            Content = fileName,
+                            CreatedOn = DateTime.Now,
+                            UserName = jwtResult.JwtUser.User,
+                            Type=1
+                        });
+
+
+                        var article = db.Article.FirstOrDefault(a => a.Id == articleId);
+                        if (article != null)
+                        {
+                            article.Count++;
+                        }
+
+                        if (parentCommentId != -1)
+                        {
+                            var parentComment = db.Comment.FirstOrDefault(c => c.Id == parentCommentId);
+                            if (parentComment != null)
+                            {
+                                parentComment.Count++;
+                            }
+                        }
+
+                        db.SaveChanges();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Ok(new ApiResult(3, "Excepion:" + ex.Message.ToString()));
+                }
+
+
+                return Ok(new ApiResult(0, "New Timeline Added"));
+
+            }
+            catch (Exception ex1)
+            {
+                return Ok(new ApiResult(4, ex1.Message));
+            }
+
+
+
+        }
     }
 }
