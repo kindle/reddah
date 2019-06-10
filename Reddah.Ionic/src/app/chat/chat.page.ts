@@ -9,6 +9,7 @@ import { UserPage } from '../common/user/user.page';
 //import { AngularFireDatabase } from 'angularfire2/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 
+import { Media, MediaObject } from '@ionic-native/media/ngx';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class ChatPage implements OnInit {
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
+        private media: Media,
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
@@ -76,7 +78,23 @@ export class ChatPage implements OnInit {
         });
     }
 
-    
+    async play(audioFileName){
+        let src = "https://login.reddah.com/uploadphoto/"+audioFileName;
+        //let media = new Media(src, null, null);
+
+        //let media = this.media.create(src);
+        const file: MediaObject = this.media.create(src);
+        
+        
+        //media.getCurrentPosition(data=>{
+        //    alert(data);
+        //})
+        file.play();
+        file.stop();
+        alert(src+file.getDuration())
+        file.play();
+        
+    }
 
     async close() {
         await this.modalController.dismiss();

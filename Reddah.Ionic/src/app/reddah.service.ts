@@ -738,5 +738,12 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         });
         toast.present();
     }
+
+    complement(n) { return n < 10 ? '0' + n : n }
+
+    generateFileName() {
+        var date = new Date();
+        return date.getFullYear().toString() + this.complement(date.getMonth() + 1) + this.complement(date.getDate()) + this.complement(date.getHours()) + this.complement(date.getMinutes()) + this.complement(date.getSeconds());
+    }
     
 }

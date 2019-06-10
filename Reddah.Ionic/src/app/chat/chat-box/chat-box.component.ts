@@ -4,7 +4,7 @@ import { ReddahService } from '../../reddah.service';
 import { CacheService } from "ionic-cache";
 import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions } from '@ionic-native/media-capture';
 import { File, FileEntry } from '@ionic-native/file/ngx';
-import { Media, MediaObject } from '@ionic-native/media'; 
+import { Media, MediaObject } from '@ionic-native/media/ngx'; 
 
 @Component({
     selector: 'app-chat-box',
@@ -101,6 +101,7 @@ export class ChatBoxComponent implements OnInit {
         private cacheService: CacheService,
         private modalController: ModalController,
         private file: File,
+        private media: Media,
     ) { }
 
     ngOnInit() {
@@ -119,44 +120,53 @@ export class ChatBoxComponent implements OnInit {
     mediaObj;               
 
     async startSpeak(){
-        
-        let fullPath = this.file.applicationStorageDirectory + "file.wav";
-        this.mediaObj = Media.create(fullPath);               
+        let fileName = this.reddah.generateFileName()+".wav";
+        let filePath = this.file.externalRootDirectory.replace(/^file:\/\//, '') + "/reddah/" + fileName;
+        this.mediaObj = this.media.create(filePath);               
         this.mediaObj.startRecord();                 
         this.mediaObj.onSuccess.subscribe(() => {
-            alert('Record success!')
-            this.uploadAudio(fullPath);
+            this.uploadAudio(fileName);
+            alert(this.mediaObj.getDuration()+"eee1");
         }); 
         this.mediaObj.onError.subscribe(err => {
             alert('Record fail! Error: ' + err)
-        });               
+        });        
     }
 
 
     async stopSpeak(){
         this.mediaObj.stopRecord();
+        
     }
 
-
-    async uploadAudio(fullPath){
+    uploadAudio(fileName){
         let formData = new FormData();
         formData.append("ArticleId", JSON.stringify(this.selectedArticleId));
         formData.append("ParentCommentId", JSON.stringify(this.selectedCommentId));
+        let fullPath = this.file.externalRootDirectory +"/reddah/"+ fileName;
+        
+        //let temp = this.media.create(fullPath);
+        //temp.play();
+        //temp.stop();
+        //alert(temp.getDuration());
+        //temp.release();
+        //let test = Media
 
         this.file.resolveLocalFilesystemUrl(fullPath)
         .then(entry => {
-            ( <FileEntry> entry).file(file => {
+            (<FileEntry> entry).file(file => {
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     const imgBlob = new Blob([reader.result], {
                         type: file.type
                     });
                     formData.append(file.name, imgBlob, file.name);
+                    
                     this.reddah.addAudioChat(formData).subscribe(result => 
                     {
                         if(result.Success==0)
                         { 
-                            //this.modalController.dismiss(true);
+                            alert('uploaded...');
                             this.reloadComments.emit();
                         }
                         else
@@ -175,6 +185,7 @@ export class ChatBoxComponent implements OnInit {
         })
         .catch(err => {
             console.error(JSON.stringify(err));
+            alert(JSON.stringify(err));
         });
     }
 
@@ -211,6 +222,7 @@ export class ChatBoxComponent implements OnInit {
                     formData.append(mediaFile.name, imgBlob, file.name);
                     this.reddah.addAudioChat(formData).subscribe(result => 
                     {
+                        
                         if(result.Success==0)
                         { 
                             this.modalController.dismiss(true);

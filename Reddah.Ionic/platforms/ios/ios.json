@@ -94,15 +94,15 @@
             },
             {
               "xml": "<feature name=\"Capture\"><param name=\"ios-package\" value=\"CDVCapture\" /></feature>",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<feature name=\"Media\"><param name=\"ios-package\" value=\"CDVSound\" /></feature>",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<preference name=\"KeepAVAudioSessionAlwaysActive\" value=\"NO\" />",
-              "count": 1
+              "count": 2
             }
           ]
         }
@@ -182,7 +182,7 @@
       "PACKAGE_NAME": "com.reddah"
     },
     "cordova-plugin-media-capture": {
-      "PACKAGE_NAME": "com.reddah"
+      "PACKAGE_NAME": "com.reddah.app"
     },
     "cordova-plugin-media": {
       "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO",

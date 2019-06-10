@@ -17,15 +17,21 @@
                 <div class="container-right" *ngIf="userName==comment.UserName">
                     <img src="{{reddah.appPhoto['userphoto_'+comment.UserName]}}" class="portrait" (click)="goUser(comment.UserName)">
                     <div class="arrow-box-right">
-                        <div class="chat-box-me" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                        <div class="chat-box-me" *ngIf="comment.Type==0" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                        <div class="chat-box-me" *ngIf="comment.Type==1" (click)="play(comment.Content)">
+                            play
+                        </div>
                         <div class="chat-arrow-right" style="flex:auto 0;"></div>
                     </div>
                 </div>
                 <div class="container-left" *ngIf="userName!=comment.UserName">
                     <img src="{{reddah.appPhoto['userphoto_'+comment.UserName]}}" class="portrait" (click)="goUser(comment.UserName)">
-                    <div style="display: flex;margin-left:5px;">
+                    <div style="display: flex;margin-left:5px;">{{comment.Type}}
                         <div class="chat-arrow-left" style="flex:0 auto;"></div>
-                        <div class="chat-box-others" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                        <div class="chat-box-others" *ngIf="comment.Type==0" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                        <div class="chat-box-others" *ngIf="comment.Type==1" (click)="play(comment.Content)">
+                            play
+                        </div>
                     </div>
                 </div>
             </ion-col>

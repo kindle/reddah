@@ -47,7 +47,7 @@ export class AppComponent {
         this.imageLoaderConfigService.enableFallbackAsPlaceholder(true);
         this.imageLoaderConfigService.setFallbackUrl('assets/icon/noimage.jpg');
         //this.file.dataDirectory = "/reddah";
-        //File.createDir("/","reddah", true);
+        //this.file.createDir("/","reddah", false);
         
         //const headers = new HttpHeaders()
         //              .set("Authorization", "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA==");

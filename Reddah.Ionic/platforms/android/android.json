@@ -74,11 +74,11 @@
             },
             {
               "xml": "<feature name=\"Capture\"><param name=\"android-package\" value=\"org.apache.cordova.mediacapture.Capture\" /></feature>",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<feature name=\"Media\"><param name=\"android-package\" value=\"org.apache.cordova.media.AudioHandler\" /></feature>",
-              "count": 1
+              "count": 2
             }
           ]
         }
@@ -118,11 +118,11 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-              "count": 11
+              "count": 13
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
-              "count": 4
+              "count": 5
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.REQUEST_INSTALL_PACKAGES\" />",
@@ -150,19 +150,19 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
-              "count": 2
+              "count": 4
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.RECORD_VIDEO\" />",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\" />",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
-              "count": 1
+              "count": 2
             }
           ],
           "/manifest/application": [

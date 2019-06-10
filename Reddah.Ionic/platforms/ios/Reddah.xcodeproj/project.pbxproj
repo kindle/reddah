@@ -69,6 +69,7 @@
 		CB7346BE5E58492CB625BBA4 /* CDVCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1166B4B7A447769B65C5F8 /* CDVCapture.m */; };
 		E069AD075993446F8CA53D58 /* CDVCapture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97FE1AEF8597472CB01D1F14 /* CDVCapture.bundle */; };
 		3EB4F9FB7B7A4041855C35A8 /* CDVSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F34CAC812C44A5EB0C2753B /* CDVSound.m */; };
+		E8D772AA12AC490595A93295 /* CDVCapture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C568833354A946B8BD49E7E2 /* CDVCapture.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +206,7 @@
 		97FE1AEF8597472CB01D1F14 /* CDVCapture.bundle */ = {isa = PBXFileReference; name = "CDVCapture.bundle"; path = "CDVCapture.bundle"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.plug-in; explicitFileType = undefined; includeInIndex = 0; };
 		9F34CAC812C44A5EB0C2753B /* CDVSound.m */ = {isa = PBXFileReference; name = "CDVSound.m"; path = "cordova-plugin-media/CDVSound.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		D1F64493B29E4B2B98C0C332 /* CDVSound.h */ = {isa = PBXFileReference; name = "CDVSound.h"; path = "cordova-plugin-media/CDVSound.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		C568833354A946B8BD49E7E2 /* CDVCapture.bundle */ = {isa = PBXFileReference; name = "CDVCapture.bundle"; path = "CDVCapture.bundle"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.plug-in; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +285,7 @@
 				6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */,
 				91C97057ADA043ABA93A85E9 /* PEPhotoCropEditor.bundle */,
 				97FE1AEF8597472CB01D1F14 /* CDVCapture.bundle */,
+				C568833354A946B8BD49E7E2 /* CDVCapture.bundle */,
 			);
 			name = Resources;
 			path = "Reddah/Resources";
@@ -493,6 +496,7 @@
 				6AFF5BF91D6E424B00AB3073 /* CDVLaunchScreen.storyboard in Resources */,
 				85E45319FD31450D9D0FACAB /* PEPhotoCropEditor.bundle in Resources */,
 				E069AD075993446F8CA53D58 /* CDVCapture.bundle in Resources */,
+				E8D772AA12AC490595A93295 /* CDVCapture.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
