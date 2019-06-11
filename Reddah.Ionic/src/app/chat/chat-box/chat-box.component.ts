@@ -128,7 +128,6 @@ export class ChatBoxComponent implements OnInit {
         this.mediaObj.startRecord();                 
         this.mediaObj.onSuccess.subscribe(() => {
             this.uploadAudio(fileName);
-            alert(this.mediaObj.getDuration()+"eee1");
         }); 
         this.mediaObj.onError.subscribe(err => {
             alert('Record fail! Error: ' + err)
@@ -145,52 +144,52 @@ export class ChatBoxComponent implements OnInit {
         let formData = new FormData();
         formData.append("ArticleId", JSON.stringify(this.selectedArticleId));
         formData.append("ParentCommentId", JSON.stringify(this.selectedCommentId));
-        formData.append("Duration", JSON.stringify(-1));
+        
         let fullPath = this.file.externalRootDirectory +"/reddah/"+ fileName;
         
-        //let temp = this.media.create(fullPath);
-        //temp.play();
-        //temp.stop();
-        //alert(temp.getDuration());
-        //temp.release();
-        //let test = Media
-
-        this.file.resolveLocalFilesystemUrl(fullPath)
-        .then(entry => {
-            (<FileEntry> entry).file(file => {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    const imgBlob = new Blob([reader.result], {
-                        type: file.type
-                    });
-                    formData.append(file.name, imgBlob, file.name);
-                    
-                    this.reddah.addAudioChat(formData).subscribe(result => 
-                    {
-                        if(result.Success==0)
-                        { 
-                            setTimeout(() => {
-                                this.reloadComments.emit();
-                            }, 200)
-                        }
-                        else
-                        {
-                            alert(result.Message);
-                        }
+        let temp = this.media.create(fullPath);
+        temp.play();
+        temp.pause();
+        setTimeout(() => {
+            formData.append("Duration", JSON.stringify(parseInt(temp.getDuration().toString())));
+            this.file.resolveLocalFilesystemUrl(fullPath)
+            .then(entry => {
+                (<FileEntry> entry).file(file => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        const imgBlob = new Blob([reader.result], {
+                            type: file.type
+                        });
+                        formData.append(file.name, imgBlob, file.name);
                         
-                    },
-                    error=>{
-                        //console.error(JSON.stringify(error));
-                        alert(JSON.stringify(error));
-                    });
-                };
-                reader.readAsArrayBuffer(file);
+                        this.reddah.addAudioChat(formData).subscribe(result => 
+                        {
+                            if(result.Success==0)
+                            { 
+                                setTimeout(() => {
+                                    this.reloadComments.emit();
+                                }, 200)
+                            }
+                            else
+                            {
+                                alert(result.Message);
+                            }
+                            
+                        },
+                        error=>{
+                            //console.error(JSON.stringify(error));
+                            alert(JSON.stringify(error));
+                        });
+                    };
+                    reader.readAsArrayBuffer(file);
+                })
             })
-        })
-        .catch(err => {
-            console.error(JSON.stringify(err));
-            alert(JSON.stringify(err));
-        });
+            .catch(err => {
+                console.error(JSON.stringify(err));
+                alert(JSON.stringify(err));
+            });
+        }, 1000)
+        temp.release();
     }
 
 

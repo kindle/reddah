@@ -9,6 +9,7 @@ import { SettingAccountPage } from '../setting-account/setting-account.page';
 import { SettingGePage } from '../setting-ge/setting-ge.page';
 import { SettingPrivacyPage } from '../setting-privacy/setting-privacy.page';
 import { TranslateService } from '@ngx-translate/core';
+import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
 
 @Component({
     selector: 'app-setting-list',
@@ -93,6 +94,14 @@ export class SettingListPage implements OnInit {
             component: SettingGePage,
         });
         
+        await modal.present();
+    }
+
+    async feedback() {
+        const modal = await this.modalController.create({
+            component: AddFeedbackPage,
+        });
+          
         await modal.present();
     }
 
