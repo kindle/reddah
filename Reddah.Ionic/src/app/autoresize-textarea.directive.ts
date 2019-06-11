@@ -25,9 +25,7 @@ export class AutoresizeDirective {
                 ta.style.overflow = "hidden";
                 ta.style.height = "auto";
                 if (this.maxHeight) {
-                    console.log('this.maxHeight',this.maxHeight)
                     newHeight = Math.min(ta.scrollHeight, this.maxHeight);
-                    console.log('newHeight',newHeight)
                 } 
                 else 
                 {

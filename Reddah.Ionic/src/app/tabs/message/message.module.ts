@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
+import { MessagePage } from './message.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderModule } from '../../common/header/header.module';
 
@@ -13,11 +13,11 @@ import { HeaderModule } from '../../common/header/header.module';
       CommonModule,
       HeaderModule,
       FormsModule,
-      RouterModule.forChild([{ path: 'home', component: HomePage }]),
+      RouterModule.forChild([{ path: '', component: MessagePage }]),
       TranslateModule.forChild(),
   ],
   declarations: [
-      HomePage,
+      MessagePage,
   ]
 })
-export class HomePageModule {}
+export class MessagePageModule {}

@@ -12,8 +12,8 @@
         <ion-label>功能介绍</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
-    <ion-item class="borderItem">
-        <ion-label>投诉</ion-label>
+    <ion-item class="borderItem" (click)="feedback()">
+        <ion-label>建议反馈</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item lines="none" class="borderBottom borderItem" (click)="upgrade()">
@@ -22,7 +22,7 @@
     </ion-item>
     <div class="conductArea" text-center>
         <p class="copyright">
-            CopyRight © 2011-2019 Reddah.<br>
+            CopyRight © 2015-2019 Reddah.<br>
             All Rights Reserved.
         </p>
     </div>

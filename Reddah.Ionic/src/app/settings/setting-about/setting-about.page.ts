@@ -7,6 +7,7 @@ import { ReddahService } from '../../reddah.service';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { Platform } from '@ionic/angular'; 
+import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
 
 @Component({
     selector: 'app-setting-about',
@@ -102,6 +103,14 @@ export class SettingAboutPage implements OnInit {
 
     logout() {
         this.authService.logout();
+    }
+
+    async feedback() {
+        const modal = await this.modalController.create({
+            component: AddFeedbackPage,
+        });
+          
+        await modal.present();
     }
 
 }

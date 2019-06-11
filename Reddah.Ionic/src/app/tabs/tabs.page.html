@@ -1,10 +1,13 @@
 <ion-tabs *ngIf="isLocaleSet()">
 
-  <ion-tab tab="home">
-      <ion-router-outlet name="home"></ion-router-outlet>
+  <ion-tab tab="message">
+      <ion-router-outlet name="message"></ion-router-outlet>
   </ion-tab>
   <ion-tab tab="contact">
       <ion-router-outlet name="contact"></ion-router-outlet>
+  </ion-tab>
+  <ion-tab tab="home">
+    <ion-router-outlet name="home"></ion-router-outlet>
   </ion-tab>
   <ion-tab tab="find">
       <ion-router-outlet name="find"></ion-router-outlet>
@@ -15,13 +18,17 @@
 
   <ion-tab-bar slot="bottom">
 
+    <ion-tab-button tab="message" href="/tabs/(message:message)" (click)="change()">
+      <ion-icon name="ios-chatbubbles"></ion-icon>
+      <ion-label>{{ 'Menu.Message' | translate }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="contact" href="/tabs/(contact:contact)" (click)="change()">
+      <ion-icon name="ios-people"></ion-icon>
+      <ion-label>{{ 'Menu.Contact' | translate }}</ion-label>
+    </ion-tab-button>
     <ion-tab-button tab="home" href="/tabs/(home:home)" (click)="change()">
       <ion-icon name="book"></ion-icon>
       <ion-label>{{ 'Menu.Recommend' | translate }}</ion-label>
-    </ion-tab-button>
-    <ion-tab-button tab="contact" href="/tabs/(contact:contact)" (click)="change()">
-      <ion-icon name="chatboxes"></ion-icon>
-      <ion-label>{{ 'Menu.Contact' | translate }}</ion-label>
     </ion-tab-button>
     <ion-tab-button tab="find" href="/tabs/(find:find)" (click)="change()">
       <ion-icon name="compass"></ion-icon>

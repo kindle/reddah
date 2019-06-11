@@ -13,11 +13,11 @@ import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.com
 import { DragulaService } from 'ng2-dragula';
 
 @Component({
-    selector: 'app-add-timeline',
-    templateUrl: './add-timeline.page.html',
-    styleUrls: ['./add-timeline.page.scss'],
+    selector: 'app-add-feedback',
+    templateUrl: './add-feedback.page.html',
+    styleUrls: ['./add-feedback.page.scss'],
 })
-export class AddTimelinePage implements OnInit {
+export class AddFeedbackPage implements OnInit {
 
     @Input() postType: number;
 
@@ -112,18 +112,21 @@ export class AddTimelinePage implements OnInit {
         this.modalController.dismiss();
     }
 
-    ngOnInit() {
-        if(this.postType==1)//photo
-        {
-            this.takePhoto();
-        }
-        else//from library
-        {
-            this.fromLib();
-        }
+    feedbackTypes =[
+        { value:1, checked: true, text:'咨询建议' },
+        { value:2, checked: false, text:'信息出错' },
+        { value:3, checked: false, text:'程序出错' },
+        { value:4, checked: false, text:'其它' },
+    ]
+    feedbackType = 1;
+    changeFeedbackType(item) {
+        this.feedbackType = item.value;
     }
     
-    //photos = [{fileUrl: '1', webUrl:'web1'},{fileUrl: '2', webUrl:'web2'},{fileUrl: '3', webUrl:'web3'}];
+    ngOnInit() {
+        
+    }
+    
     photos = [];
     photos_trash = [];
     dragging = false;
@@ -141,10 +144,10 @@ export class AddTimelinePage implements OnInit {
         
         this.formData.append('thoughts', this.yourThoughts);
         this.formData.append('location', this.location);
+        this.formData.append('feedbackType', JSON.stringify(this.feedbackType));
+        this.formData.append('type', JSON.stringify(9));//feedback:9, normal:0, timeline:1
         //send the key in UI display order
-        this.formData.append('order', this.photos.map(e=>e.fileUrl).join(","));
-        this.formData.append('type', JSON.stringify(1));//feedback:9, normal:0, timeline:1
-        //alert(this.photos.map(e=>e.fileUrl).join(","));
+        this.formData.append('order', this.photos.map(e=>e.fileUrl).join(","));        
 
         this.reddahService.addTimeline(this.formData)
         .subscribe(result => 

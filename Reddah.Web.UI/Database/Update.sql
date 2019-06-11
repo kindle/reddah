@@ -70,7 +70,8 @@ alter table [dbo].[UserProfile] add
 --20190609
 --default 0:text, 1:audio 2:video
 alter table [dbo].[Comment] add
-  [Type] INT NOT NULL DEFAULT 0
+  [Type] INT NOT NULL DEFAULT 0,
+  [Duration]  INT NOT NULL DEFAULT -1
 
 
 

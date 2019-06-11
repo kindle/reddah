@@ -6,6 +6,7 @@ import { HomePage } from './home/home.page';
 import { AboutPage } from './about/about.page';
 import { FindPage } from './find/find.page';
 import { ContactPage } from './contact/contact.page';
+import { MessagePage } from './message/message.page';
 import { AuthGuard } from '../AuthGuard.service';
 
 const routes: Routes = [
@@ -15,8 +16,13 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/tabs/(home:home)',
+        redirectTo: '/tabs/(message:message)',
         pathMatch: 'full',
+      },
+      {
+        path: 'message',
+        outlet: 'message',
+        component: MessagePage
       },
       {
         path: 'home',
@@ -45,7 +51,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/(home:home)',
+    redirectTo: '/tabs/(message:message)',
     pathMatch: 'full'
   }
 ];

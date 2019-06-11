@@ -92,7 +92,8 @@ namespace Reddah.Web.Login.Controllers
                                         Status = c.Status,
                                         UserNickName = u.NickName,
                                         UserPhoto = u.Photo,
-                                        UserSex = u.Sex
+                                        UserSex = u.Sex,
+                                        Type=c.Type
                                     }).Take(pageCount).OrderBy(n=>n.Id);
 
                     return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
@@ -392,6 +393,7 @@ namespace Reddah.Web.Login.Controllers
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 int articleId = js.Deserialize<int>(HttpContext.Current.Request["ArticleId"]);
                 int parentCommentId = js.Deserialize<int>(HttpContext.Current.Request["ParentCommentId"]);
+                int duration = js.Deserialize<int>(HttpContext.Current.Request["Duration"]);
 
                 HttpFileCollection hfc = HttpContext.Current.Request.Files;
 
@@ -450,7 +452,8 @@ namespace Reddah.Web.Login.Controllers
                             Content = fileName,
                             CreatedOn = DateTime.Now,
                             UserName = jwtResult.JwtUser.User,
-                            Type=1
+                            Type=1,
+                            Duration=duration
                         });
 
 
@@ -479,7 +482,7 @@ namespace Reddah.Web.Login.Controllers
                 }
 
 
-                return Ok(new ApiResult(0, "New Timeline Added"));
+                return Ok(new ApiResult(0, "New audio chat Added"));
 
             }
             catch (Exception ex1)

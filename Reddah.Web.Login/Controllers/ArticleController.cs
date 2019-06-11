@@ -45,7 +45,9 @@ namespace Reddah.Web.Login.Controllers
                                     Status = c.Status,
                                     UserNickName = u.NickName,
                                     UserPhoto = u.Photo,
-                                    UserSex = u.Sex
+                                    UserSex = u.Sex,
+                                    Type=c.Type,
+                                    Duration=c.Duration
                                 });
 
                 seededComments = new SeededComments { Seed = -1, Comments = comments.ToList() };
@@ -120,7 +122,11 @@ namespace Reddah.Web.Login.Controllers
                 string location = HttpContext.Current.Request["location"];
                 //this is actually fileurl array
                 string rorder = HttpContext.Current.Request["order"];
-                
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int feedbackType = js.Deserialize<int>(HttpContext.Current.Request["feedbackType"]);
+                int type = js.Deserialize<int>(HttpContext.Current.Request["type"]);
+
+
                 Dictionary<string, string> imageUrls = new Dictionary<string, string>();
 
                 HttpFileCollection hfc = HttpContext.Current.Request.Files;
@@ -218,7 +224,8 @@ namespace Reddah.Web.Login.Controllers
                             Count = 0,
                             GroupName = location,
                             UserName = jwtResult.JwtUser.User,
-                            Type = 1,
+                            Type = type,
+                            Abstract = feedbackType.ToString()
                         });
 
                         db.SaveChanges();

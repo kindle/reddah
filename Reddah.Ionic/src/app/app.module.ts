@@ -69,6 +69,7 @@ import { TimelinePopPage } from './common/timeline-pop.page'
 import { TimelineCommentPopPage } from './common/timeline-comment-pop.page'
 import { TsViewerPage } from './mytimeline/tsviewer/tsviewer.page'
 import { AddTimelinePage } from './mytimeline/add-timeline/add-timeline.page';
+import { AddFeedbackPage } from './mytimeline/add-feedback/add-feedback.page';
 import { StockPage } from './common/stock/stock.page';
 import { CommentReplyPage } from './postviewer/comment-reply/comment-reply.page';
 import { AutoresizeDirective } from './autoresize-textarea.directive';
@@ -144,6 +145,7 @@ var firebaseConfig = {
         ScanPage,
         TsViewerPage,
         AddTimelinePage,
+        AddFeedbackPage,
         StockPage,
         CommentReplyPage,
         AutoresizeDirective,
@@ -193,6 +195,7 @@ var firebaseConfig = {
         TimeLinePage,
         TsViewerPage,
         AddTimelinePage,
+        AddFeedbackPage,
         StockPage,
         CommentReplyPage,
         SearchPage,

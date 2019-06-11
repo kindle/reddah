@@ -25,5 +25,6 @@ namespace Reddah.Web.Login
         public string UserName { get; set; }
         public int Status { get; set; }
         public int Type { get; set; }
+        public int Duration { get; set; }
     }
 }

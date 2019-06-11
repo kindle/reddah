@@ -1,0 +1,39 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" slot="start" (click)="close()" class="backbutton"></ion-icon>
+    <ion-label>建议反馈</ion-label>
+    <ion-button color="success" slot="end" (click)="submit()">提交</ion-button>
+</ion-item>
+<ion-content>
+    <ion-item lines="none">
+        <ion-textarea autoresize [(ngModel)]="yourThoughts" rows="6" cols="20" placeholder="写下您遇到的问题或者建议，我们将不断改进。"></ion-textarea>
+    </ion-item>
+    <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos">
+        <div class="imgSqure" *ngFor="let image of photos;index as i">
+            <img [src]="image.webUrl" (click)="viewer(i, photos)">
+        </div>
+        <div class="imgSqure addImg" (click)="addNewPhoto($event)" *ngIf="photos.length<9">
+          <ion-icon name="add" size="large" color="medium"></ion-icon>
+        </div>
+    </div>
+    <ion-item lines="none">
+        <ion-label></ion-label>
+    </ion-item>
+    
+    <ion-list>
+        <ion-radio-group>
+            <ion-item *ngFor="let item of feedbackTypes" (click)="changeFeedbackType(item)">
+                <ion-radio value="{{item.value}}" checked="{{item.checked}}"></ion-radio>
+                <ion-label>{{item.text}}</ion-label>
+            </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+    
+</ion-content>
+<ion-footer *ngIf="dragging" style="background-color: red;color: white;">
+    <ion-row id="delete-photo" class="delete-area" align-items-center justify-content-center dragula="bag" [(dragulaModel)]="photos_trash">
+        <ion-icon name="ios-trash" color="tertiary" size="medium"></ion-icon>
+        <ion-text *ngIf="dragToDel" color="white">松手即可删除</ion-text>
+        <ion-text *ngIf="!dragToDel">拖动到此处删除</ion-text>
+    </ion-row>
+</ion-footer>

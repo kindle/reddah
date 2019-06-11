@@ -40,6 +40,8 @@ public partial class Comment
 
     public int Type { get; set; }
 
+    public int Duration { get; set; }
+
 }
 
 }

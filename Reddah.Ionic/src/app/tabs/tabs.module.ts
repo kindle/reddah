@@ -11,7 +11,7 @@ import { ContactPageModule } from './contact/contact.module';
 import { AboutPageModule } from './about/about.module';
 import { FindPageModule } from './find/find.module';
 import { HomePageModule } from './home/home.module';
-
+import { MessagePageModule } from './message/message.module';
 import { TranslateModule } from '@ngx-translate/core';
 
 
@@ -22,6 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
       FormsModule,
       TabsPageRoutingModule,
       HomePageModule,
+      MessagePageModule,
       AboutPageModule,
       FindPageModule,
       ContactPageModule,

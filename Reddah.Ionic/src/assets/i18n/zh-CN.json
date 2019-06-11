@@ -1,8 +1,10 @@
 {
+    "Menu.Message": "消息",
     "Menu.Recommend": "推荐",
     "Menu.Contact": "好友",
     "Menu.Find": "发现",
     "Menu.About": "我",
+
     "Article.Loading": "请稍等...",
     "Article.Comments": "评论",
     "Button.SignIn": "登录",

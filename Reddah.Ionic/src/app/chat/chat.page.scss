@@ -74,5 +74,20 @@
 /**end align right**/
 
 
+.chat-box-me-1 {
+    min-height:40px; 
+    background-color: #95ec69; 
+    vertical-align: top;
+    padding:3px;
+    border-radius: 5px;
+}
 
-
+.chat-box-others-1 {
+    min-height:40px; 
+    flex:1; 
+    background-color: white; 
+    vertical-align: top;
+    padding:3px;
+    border-radius: 5px;
+    overflow-wrap: break-word;
+}

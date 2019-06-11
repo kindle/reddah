@@ -43,6 +43,8 @@ export class ChatBoxComponent implements OnInit {
             if(result.Success==0)
             { 
                 this.reloadComments.emit();
+                this.showFacePanel = false;
+                this.showFunctionPanel = false;
             }
             else{
                 alert(result.Message);
@@ -143,6 +145,7 @@ export class ChatBoxComponent implements OnInit {
         let formData = new FormData();
         formData.append("ArticleId", JSON.stringify(this.selectedArticleId));
         formData.append("ParentCommentId", JSON.stringify(this.selectedCommentId));
+        formData.append("Duration", JSON.stringify(-1));
         let fullPath = this.file.externalRootDirectory +"/reddah/"+ fileName;
         
         //let temp = this.media.create(fullPath);
@@ -166,8 +169,9 @@ export class ChatBoxComponent implements OnInit {
                     {
                         if(result.Success==0)
                         { 
-                            alert('uploaded...');
-                            this.reloadComments.emit();
+                            setTimeout(() => {
+                                this.reloadComments.emit();
+                            }, 200)
                         }
                         else
                         {
