@@ -1043,8 +1043,8 @@ namespace Reddah.Web.Login.Controllers
                     query = (from b in db.UserArticle
                              join a in db.Article on b.ArticleId equals a.Id into temp
                              from tt in temp.DefaultIfEmpty()
-                             where
-                              !(loadedIds).Contains(b.Id)
+                             where b.UserName==jwtResult.JwtUser.User &&
+                                !(loadedIds).Contains(b.Id)
                              orderby b.Id descending
                              select new AdvancedUserArticle
                              {

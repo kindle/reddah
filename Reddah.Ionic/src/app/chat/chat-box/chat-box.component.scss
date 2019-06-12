@@ -7,11 +7,19 @@
     overflow: hidden;
 }
 
+.newChatCommentPress {
+    border: solid grey 0px;
+    border-radius: 5px;
+    margin: 10px 10px;
+    padding: 0px 5px;
+    --background: primary;
+    overflow: hidden;
+    color: black;
+}
+
 .chat-footer{
     background-color: #eeeeee;
 }
-
-
 
 .optionPanel {
     min-height: 300px;

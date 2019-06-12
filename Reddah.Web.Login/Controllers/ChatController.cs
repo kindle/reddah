@@ -93,7 +93,8 @@ namespace Reddah.Web.Login.Controllers
                                         UserNickName = u.NickName,
                                         UserPhoto = u.Photo,
                                         UserSex = u.Sex,
-                                        Type=c.Type
+                                        Type=c.Type,
+                                        Duration=c.Duration
                                     }).Take(pageCount).OrderBy(n=>n.Id);
 
                     return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));

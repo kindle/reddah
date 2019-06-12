@@ -145,7 +145,7 @@ export class AddFeedbackPage implements OnInit {
         this.formData.append('thoughts', this.yourThoughts);
         this.formData.append('location', this.location);
         this.formData.append('feedbackType', JSON.stringify(this.feedbackType));
-        this.formData.append('type', JSON.stringify(9));//feedback:9, normal:0, timeline:1
+        this.formData.append('type', JSON.stringify(4));//feedback:4, normal:0, timeline:1, chat:2,groupchat:3,
         //send the key in UI display order
         this.formData.append('order', this.photos.map(e=>e.fileUrl).join(","));        
 

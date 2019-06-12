@@ -56,6 +56,10 @@ export class ChatPage implements OnInit {
         this.getChat();
     }
 
+    getArray(n){
+        return new Array(n);
+    }
+
     @ViewChild('pageTop') pageTop: Content;
     async getChat(){
         let formData = new FormData();

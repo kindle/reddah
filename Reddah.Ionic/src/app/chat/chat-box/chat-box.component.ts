@@ -17,9 +17,21 @@ export class ChatBoxComponent implements OnInit {
     @Input() selectedCommentId: number;
     @Output() reloadComments = new EventEmitter();
     @ViewChild('newChatComment') newChatComment;
+    
     speakDesc="按住 说话";
     commentContent: string;
 
+    constructor(
+        public reddah : ReddahService,
+        private cacheService: CacheService,
+        private modalController: ModalController,
+        private file: File,
+        private media: Media,
+    ) { }
+
+    ngOnInit() {
+    }
+    
     showSpeakBox=false;
     switchSpeak(){
         this.showSpeakBox=!this.showSpeakBox;
@@ -98,17 +110,6 @@ export class ChatBoxComponent implements OnInit {
         ]
     ];
 
-    constructor(
-        public reddah : ReddahService,
-        private cacheService: CacheService,
-        private modalController: ModalController,
-        private file: File,
-        private media: Media,
-    ) { }
-
-    ngOnInit() {
-    }
-
     slideOpts = {
         centeredSlides: 'true',
         initialSlide: 0,
@@ -119,25 +120,42 @@ export class ChatBoxComponent implements OnInit {
         this.showFacePanel = false;
     }
 
-    mediaObj;               
+    audioMediaObj;
 
     async startSpeak(){
-        let fileName = this.reddah.generateFileName()+".wav";
+        this.speakDesc = "松开 发送";
+
+/*
+        let fileName = this.reddah.generateFileName()+".m4a";
+        this.file.createFile(this.file.tempDirectory, fileName, true).then(() => {
+            this.audioMediaObj = this.media.create(this.file.tempDirectory.replace(/^file:\/\//, '') + fileName);
+            this.audioMediaObj.startRecord();
+            this.audioMediaObj.onSuccess.subscribe(() => {
+                this.uploadAudio(fileName);
+            });
+            this.audioMediaObj.onError.subscribe(err => {
+                alert('Record fail! Error: ' + err)
+            });
+        });
+
+*/
+        //let fileName = this.reddah.generateFileName()+".wav";
+        let fileName = this.reddah.generateFileName()+".m4a";
         let filePath = this.file.externalRootDirectory.replace(/^file:\/\//, '') + "/reddah/" + fileName;
-        this.mediaObj = this.media.create(filePath);               
-        this.mediaObj.startRecord();                 
-        this.mediaObj.onSuccess.subscribe(() => {
+        this.audioMediaObj = this.media.create(filePath);
+        this.audioMediaObj.startRecord();
+        this.audioMediaObj.onSuccess.subscribe(() => {
             this.uploadAudio(fileName);
         }); 
-        this.mediaObj.onError.subscribe(err => {
+        this.audioMediaObj.onError.subscribe(err => {
             alert('Record fail! Error: ' + err)
-        });        
+        });
     }
 
 
     async stopSpeak(){
-        this.mediaObj.stopRecord();
-        
+        this.speakDesc = "按住 说话";
+        this.audioMediaObj.stopRecord();
     }
 
     uploadAudio(fileName){
@@ -166,9 +184,8 @@ export class ChatBoxComponent implements OnInit {
                         {
                             if(result.Success==0)
                             { 
-                                setTimeout(() => {
-                                    this.reloadComments.emit();
-                                }, 200)
+                                //todo not work
+                                this.reloadComments.emit();
                             }
                             else
                             {
