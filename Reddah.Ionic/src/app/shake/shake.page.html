@@ -1,0 +1,20 @@
+<ion-item no-padding lines="none" color="dark">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-label>摇一摇</ion-label>
+</ion-item>
+<ion-content #pageTop style="background-color: white;">
+    <div class="shakebg" *ngIf="showShakebg">
+        <img src="assets/shake/shakeIcon.png"/>
+    </div>
+    <div class="animetebg" *ngIf="showAnimetebg">
+        <img class="flower" src="assets/shake/flower.png" />
+        <div class="topShakeBox">
+            <img class="topShake" src="assets/shake/topShake.png" />
+            <div class="topBar"></div>
+        </div>
+        <div class="bottomShakeBox">
+            <div class="bottomBar"></div>
+            <img class="bottomShake" src="assets/shake/bottomShake.png" />
+        </div>
+    </div>
+</ion-content>

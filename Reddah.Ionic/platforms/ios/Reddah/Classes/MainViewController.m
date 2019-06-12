@@ -29,6 +29,13 @@
 
 @implementation MainViewController
 
+// added by cordova-plugin-shake
+- (void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent*)event {
+	if (event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"CDVShakeDeviceShaken" object:self];
+	}
+}
+
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

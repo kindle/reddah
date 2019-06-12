@@ -481,6 +481,36 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "file": "plugins/cordova-plugin-media/src/windows/MediaProxy.js",
       "pluginId": "cordova-plugin-media",
       "runs": true
+    },
+    {
+      "id": "cordova-plugin-device-motion.Acceleration",
+      "file": "plugins/cordova-plugin-device-motion/www/Acceleration.js",
+      "pluginId": "cordova-plugin-device-motion",
+      "clobbers": [
+        "Acceleration"
+      ]
+    },
+    {
+      "id": "cordova-plugin-device-motion.accelerometer",
+      "file": "plugins/cordova-plugin-device-motion/www/accelerometer.js",
+      "pluginId": "cordova-plugin-device-motion",
+      "clobbers": [
+        "navigator.accelerometer"
+      ]
+    },
+    {
+      "id": "cordova-plugin-device-motion.AccelerometerProxy",
+      "file": "plugins/cordova-plugin-device-motion/src/windows/AccelerometerProxy.js",
+      "pluginId": "cordova-plugin-device-motion",
+      "runs": true
+    },
+    {
+      "id": "cordova-plugin-shake.Shake",
+      "file": "plugins/cordova-plugin-shake/www/shake.js",
+      "pluginId": "cordova-plugin-shake",
+      "clobbers": [
+        "shake"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -503,6 +533,9 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-file-transfer": "1.7.1",
     "info.protonet.imageresizer": "0.1.1",
     "cordova-plugin-media-capture": "3.0.2",
-    "cordova-plugin-media": "5.0.2"
+    "cordova-plugin-media": "5.0.2",
+    "cordova-plugin-device-motion": "2.0.1",
+    "cordova-plugin-shake": "0.6.0",
+    "cordova-plugin-nativeaudio": "3.0.9"
   };
 });

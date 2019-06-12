@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from "ionic-cache";
 import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions } from '@ionic-native/media-capture';
@@ -27,6 +27,7 @@ export class ChatBoxComponent implements OnInit {
         private modalController: ModalController,
         private file: File,
         private media: Media,
+        private platform: Platform,
     ) { }
 
     ngOnInit() {
@@ -123,33 +124,36 @@ export class ChatBoxComponent implements OnInit {
     audioMediaObj;
 
     async startSpeak(){
+        if (this.platform.is('cordova')) {
+
         this.speakDesc = "松开 发送";
 
-/*
-        let fileName = this.reddah.generateFileName()+".m4a";
-        this.file.createFile(this.file.tempDirectory, fileName, true).then(() => {
-            this.audioMediaObj = this.media.create(this.file.tempDirectory.replace(/^file:\/\//, '') + fileName);
+    /*
+            let fileName = this.reddah.generateFileName()+".m4a";
+            this.file.createFile(this.file.tempDirectory, fileName, true).then(() => {
+                this.audioMediaObj = this.media.create(this.file.tempDirectory.replace(/^file:\/\//, '') + fileName);
+                this.audioMediaObj.startRecord();
+                this.audioMediaObj.onSuccess.subscribe(() => {
+                    this.uploadAudio(fileName);
+                });
+                this.audioMediaObj.onError.subscribe(err => {
+                    alert('Record fail! Error: ' + err)
+                });
+            });
+
+    */
+            //let fileName = this.reddah.generateFileName()+".wav";
+            let fileName = this.reddah.generateFileName()+".m4a";
+            let filePath = this.file.externalRootDirectory.replace(/^file:\/\//, '') + "/reddah/" + fileName;
+            this.audioMediaObj = this.media.create(filePath);
             this.audioMediaObj.startRecord();
             this.audioMediaObj.onSuccess.subscribe(() => {
                 this.uploadAudio(fileName);
-            });
+            }); 
             this.audioMediaObj.onError.subscribe(err => {
                 alert('Record fail! Error: ' + err)
             });
-        });
-
-*/
-        //let fileName = this.reddah.generateFileName()+".wav";
-        let fileName = this.reddah.generateFileName()+".m4a";
-        let filePath = this.file.externalRootDirectory.replace(/^file:\/\//, '') + "/reddah/" + fileName;
-        this.audioMediaObj = this.media.create(filePath);
-        this.audioMediaObj.startRecord();
-        this.audioMediaObj.onSuccess.subscribe(() => {
-            this.uploadAudio(fileName);
-        }); 
-        this.audioMediaObj.onError.subscribe(err => {
-            alert('Record fail! Error: ' + err)
-        });
+        }
     }
 
 
@@ -210,7 +214,7 @@ export class ChatBoxComponent implements OnInit {
     }
 
 
-
+/*
     //not best plugin
     async startSpeak_B(){
         //limit audio 1 file, 60*5 seconds=5 minutes
@@ -265,5 +269,5 @@ export class ChatBoxComponent implements OnInit {
             console.error(JSON.stringify(err));
         });
     }
-
+*/
 }

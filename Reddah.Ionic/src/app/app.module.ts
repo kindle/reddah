@@ -29,6 +29,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions } from '@ionic-native/media-capture/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx'; 
+import { Shake } from '@ionic-native/shake/ngx';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -86,6 +88,7 @@ import { SettingGroupChatTitlePage } from './settings/setting-group-chat-title/s
 import { ChangeNoteNamePopPage } from './common/change-notename-pop.page';
 import { SettingAccountPage } from './settings/setting-account/setting-account.page';
 import { SettingPrivacyPage } from './settings/setting-privacy/setting-privacy.page';
+import { ShakePage } from './shake/shake.page';
 import { ChatPage } from './chat/chat.page';
 import { GroupChatPage } from './chat/group-chat.page';
 import { ChatOptPage } from './chat/chat-opt/chat-opt.page';
@@ -152,6 +155,7 @@ var firebaseConfig = {
         CommentBoxComponent,
         ChatBoxComponent,
         SearchPage,
+        ShakePage,
         SearchUserPage,
         SettingAboutPage,
         SettingGePage,
@@ -199,6 +203,7 @@ var firebaseConfig = {
         StockPage,
         CommentReplyPage,
         SearchPage,
+        ShakePage,
         SearchUserPage,
         SettingAboutPage,
         SettingGePage,
@@ -241,6 +246,7 @@ var firebaseConfig = {
         AlertController,
         AuthService,
         Camera,
+        Shake,
         Crop,
         InAppBrowser,
         IonicImageLoader,
@@ -261,6 +267,7 @@ var firebaseConfig = {
         WebView,
         MediaCapture,
         Media,
+        NativeAudio,
         //Firebase,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     ],

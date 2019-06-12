@@ -10,7 +10,7 @@ import { UserPage } from '../common/user/user.page';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 
 import { Media, MediaObject } from '@ionic-native/media/ngx';
-
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 @Component({
     selector: 'app-chat',
@@ -34,6 +34,7 @@ export class ChatPage implements OnInit {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         private media: Media,
+        private nativeAudio: NativeAudio,
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
@@ -75,6 +76,9 @@ export class ChatPage implements OnInit {
                         this.pageTop.scrollToBottom(0);
                     }
                 },200)
+                this.messages.forEach((comment)=>{
+                    this.nativeAudio.preloadSimple(comment["Content"], "https://login.reddah.com/uploadphoto/"+comment["Content"]);
+                })
             }
             else{
                 alert(data);
@@ -83,9 +87,11 @@ export class ChatPage implements OnInit {
     }
 
     async play(audioFileName){
-        let src = "https://login.reddah.com/uploadphoto/"+audioFileName;
-        const file: MediaObject = this.media.create(src);
-        file.play();
+        //let src = "https://login.reddah.com/uploadphoto/"+audioFileName;
+        //const file: MediaObject = this.media.create(src);
+        //file.play();
+
+        this.nativeAudio.play(audioFileName);
     }
 
     async close() {

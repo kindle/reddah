@@ -79,6 +79,14 @@
             {
               "xml": "<feature name=\"Media\"><param name=\"android-package\" value=\"org.apache.cordova.media.AudioHandler\" /></feature>",
               "count": 2
+            },
+            {
+              "xml": "<feature name=\"Accelerometer\"><param name=\"android-package\" value=\"org.apache.cordova.devicemotion.AccelListener\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"NativeAudio\"><param name=\"android-package\" value=\"com.rjfun.cordova.plugin.nativeaudio.NativeAudio\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -118,7 +126,7 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-              "count": 13
+              "count": 14
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
@@ -158,11 +166,11 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\" />",
-              "count": 2
+              "count": 3
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
-              "count": 2
+              "count": 3
             }
           ],
           "/manifest/application": [
@@ -251,6 +259,15 @@
       "PACKAGE_NAME": "com.reddah.app"
     },
     "cordova-plugin-media": {
+      "PACKAGE_NAME": "com.reddah.app"
+    },
+    "cordova-plugin-device-motion": {
+      "PACKAGE_NAME": "com.reddah.app"
+    },
+    "cordova-plugin-shake": {
+      "PACKAGE_NAME": "com.reddah.app"
+    },
+    "cordova-plugin-nativeaudio": {
       "PACKAGE_NAME": "com.reddah.app"
     }
   },
@@ -675,6 +692,38 @@
       "clobbers": [
         "window.Media"
       ]
+    },
+    {
+      "id": "cordova-plugin-device-motion.Acceleration",
+      "file": "plugins/cordova-plugin-device-motion/www/Acceleration.js",
+      "pluginId": "cordova-plugin-device-motion",
+      "clobbers": [
+        "Acceleration"
+      ]
+    },
+    {
+      "id": "cordova-plugin-device-motion.accelerometer",
+      "file": "plugins/cordova-plugin-device-motion/www/accelerometer.js",
+      "pluginId": "cordova-plugin-device-motion",
+      "clobbers": [
+        "navigator.accelerometer"
+      ]
+    },
+    {
+      "id": "cordova-plugin-shake.Shake",
+      "file": "plugins/cordova-plugin-shake/www/shake.js",
+      "pluginId": "cordova-plugin-shake",
+      "clobbers": [
+        "shake"
+      ]
+    },
+    {
+      "id": "cordova-plugin-nativeaudio.nativeaudio",
+      "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
+      "pluginId": "cordova-plugin-nativeaudio",
+      "clobbers": [
+        "window.plugins.NativeAudio"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -697,6 +746,9 @@
     "cordova-plugin-file-transfer": "1.7.1",
     "info.protonet.imageresizer": "0.1.1",
     "cordova-plugin-media-capture": "3.0.2",
-    "cordova-plugin-media": "5.0.2"
+    "cordova-plugin-media": "5.0.2",
+    "cordova-plugin-device-motion": "2.0.1",
+    "cordova-plugin-shake": "0.6.0",
+    "cordova-plugin-nativeaudio": "3.0.9"
   }
 }

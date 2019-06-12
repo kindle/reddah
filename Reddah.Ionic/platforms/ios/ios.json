@@ -103,6 +103,14 @@
             {
               "xml": "<preference name=\"KeepAVAudioSessionAlwaysActive\" value=\"NO\" />",
               "count": 2
+            },
+            {
+              "xml": "<feature name=\"CDVShake\"><param name=\"ios-package\" value=\"CDVShake\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"NativeAudio\"><param name=\"ios-package\" value=\"NativeAudio\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -186,6 +194,12 @@
     },
     "cordova-plugin-media": {
       "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO",
+      "PACKAGE_NAME": "com.reddah.app"
+    },
+    "cordova-plugin-shake": {
+      "PACKAGE_NAME": "com.reddah.app"
+    },
+    "cordova-plugin-nativeaudio": {
       "PACKAGE_NAME": "com.reddah.app"
     }
   },
@@ -612,6 +626,22 @@
       "clobbers": [
         "window.Media"
       ]
+    },
+    {
+      "id": "cordova-plugin-shake.Shake",
+      "file": "plugins/cordova-plugin-shake/www/shakeNative.js",
+      "pluginId": "cordova-plugin-shake",
+      "clobbers": [
+        "shake"
+      ]
+    },
+    {
+      "id": "cordova-plugin-nativeaudio.nativeaudio",
+      "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
+      "pluginId": "cordova-plugin-nativeaudio",
+      "clobbers": [
+        "window.plugins.NativeAudio"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -634,6 +664,8 @@
     "cordova-plugin-file-transfer": "1.7.1",
     "info.protonet.imageresizer": "0.1.1",
     "cordova-plugin-media-capture": "3.0.2",
-    "cordova-plugin-media": "5.0.2"
+    "cordova-plugin-media": "5.0.2",
+    "cordova-plugin-shake": "0.6.0",
+    "cordova-plugin-nativeaudio": "3.0.9"
   }
 }

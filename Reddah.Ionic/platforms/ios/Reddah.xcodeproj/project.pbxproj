@@ -70,6 +70,11 @@
 		E069AD075993446F8CA53D58 /* CDVCapture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97FE1AEF8597472CB01D1F14 /* CDVCapture.bundle */; };
 		3EB4F9FB7B7A4041855C35A8 /* CDVSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F34CAC812C44A5EB0C2753B /* CDVSound.m */; };
 		E8D772AA12AC490595A93295 /* CDVCapture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C568833354A946B8BD49E7E2 /* CDVCapture.bundle */; };
+		CD052C65C0A347F1ABED0758 /* CDVShake.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC392F28223492984B524AB /* CDVShake.m */; };
+		2245B77A69CE498D81823F04 /* NativeAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3DFDFCB9CD472E8915D7D9 /* NativeAudio.m */; };
+		4FB842C097484F29906B0302 /* NativeAudioAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E6DF60F3DA4E809004FAED /* NativeAudioAsset.m */; };
+		DB16B1011AC84AA5A0DDC3F3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59DFCDCBD5E6424A90B98856 /* Foundation.framework */; };
+		0A711693CD2C4D34B0F406B0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87511F118B3541D3AD4CA006 /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +212,14 @@
 		9F34CAC812C44A5EB0C2753B /* CDVSound.m */ = {isa = PBXFileReference; name = "CDVSound.m"; path = "cordova-plugin-media/CDVSound.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		D1F64493B29E4B2B98C0C332 /* CDVSound.h */ = {isa = PBXFileReference; name = "CDVSound.h"; path = "cordova-plugin-media/CDVSound.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		C568833354A946B8BD49E7E2 /* CDVCapture.bundle */ = {isa = PBXFileReference; name = "CDVCapture.bundle"; path = "CDVCapture.bundle"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.plug-in; explicitFileType = undefined; includeInIndex = 0; };
+		3BC392F28223492984B524AB /* CDVShake.m */ = {isa = PBXFileReference; name = "CDVShake.m"; path = "cordova-plugin-shake/CDVShake.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		10F1061EAC404584AA3F74BE /* CDVShake.h */ = {isa = PBXFileReference; name = "CDVShake.h"; path = "cordova-plugin-shake/CDVShake.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		DD3DFDFCB9CD472E8915D7D9 /* NativeAudio.m */ = {isa = PBXFileReference; name = "NativeAudio.m"; path = "cordova-plugin-nativeaudio/NativeAudio.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		40E6DF60F3DA4E809004FAED /* NativeAudioAsset.m */ = {isa = PBXFileReference; name = "NativeAudioAsset.m"; path = "cordova-plugin-nativeaudio/NativeAudioAsset.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		9BD96D7EFEFC4D779A56F868 /* NativeAudio.h */ = {isa = PBXFileReference; name = "NativeAudio.h"; path = "cordova-plugin-nativeaudio/NativeAudio.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		FF864896BEFA4AADACF4F9FB /* NativeAudioAsset.h */ = {isa = PBXFileReference; name = "NativeAudioAsset.h"; path = "cordova-plugin-nativeaudio/NativeAudioAsset.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		59DFCDCBD5E6424A90B98856 /* Foundation.framework */ = {isa = PBXFileReference; name = "Foundation.framework"; path = "System/Library/Frameworks/Foundation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		87511F118B3541D3AD4CA006 /* AudioToolbox.framework */ = {isa = PBXFileReference; name = "AudioToolbox.framework"; path = "System/Library/Frameworks/AudioToolbox.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +234,8 @@
 				C6A6D5B96F244D90A2B63977 /* CoreLocation.framework in Frameworks */,
 				AC63EAA4FB2D4E0C96142870 /* AVFoundation.framework in Frameworks */,
 				4460877846D84C638926B7D0 /* QuartzCore.framework in Frameworks */,
+				DB16B1011AC84AA5A0DDC3F3 /* Foundation.framework in Frameworks */,
+				0A711693CD2C4D34B0F406B0 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +315,8 @@
 				8DFA06C045164A90BFB1D5C6 /* CoreLocation.framework */,
 				B69E0C40193341C582C1CC06 /* AVFoundation.framework */,
 				ECBC197A940140CE97A31A72 /* QuartzCore.framework */,
+				59DFCDCBD5E6424A90B98856 /* Foundation.framework */,
+				87511F118B3541D3AD4CA006 /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -413,6 +430,12 @@
 				4FA4FFCFB706412FADF93F42 /* CDVCapture.h */,
 				9F34CAC812C44A5EB0C2753B /* CDVSound.m */,
 				D1F64493B29E4B2B98C0C332 /* CDVSound.h */,
+				3BC392F28223492984B524AB /* CDVShake.m */,
+				10F1061EAC404584AA3F74BE /* CDVShake.h */,
+				DD3DFDFCB9CD472E8915D7D9 /* NativeAudio.m */,
+				40E6DF60F3DA4E809004FAED /* NativeAudioAsset.m */,
+				9BD96D7EFEFC4D779A56F868 /* NativeAudio.h */,
+				FF864896BEFA4AADACF4F9FB /* NativeAudioAsset.h */,
 			);
 			name = Plugins;
 			path = "Reddah/Plugins";
@@ -573,6 +596,9 @@
 				5392897D769D4E2489B5437F /* ImageResizer.m in Sources */,
 				CB7346BE5E58492CB625BBA4 /* CDVCapture.m in Sources */,
 				3EB4F9FB7B7A4041855C35A8 /* CDVSound.m in Sources */,
+				CD052C65C0A347F1ABED0758 /* CDVShake.m in Sources */,
+				2245B77A69CE498D81823F04 /* NativeAudio.m in Sources */,
+				4FB842C097484F29906B0302 /* NativeAudioAsset.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

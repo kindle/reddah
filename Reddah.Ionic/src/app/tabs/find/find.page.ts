@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular'
 import { ScanPage } from '../../common/scan/scan.page';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SearchPage } from '../../common/search/search.page';
+import { ShakePage } from '../../shake/shake.page';
 
 @Component({
   selector: 'app-find',
@@ -35,6 +36,14 @@ export class FindPage {
         });
           
         await userModal.present();
+    }
+
+    async shake(){
+        const modal = await this.modalController.create({
+            component: ShakePage
+        });
+          
+        await modal.present();
     }
 
 }

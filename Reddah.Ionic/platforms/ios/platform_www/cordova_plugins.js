@@ -421,6 +421,22 @@ module.exports = [
     "clobbers": [
       "window.Media"
     ]
+  },
+  {
+    "id": "cordova-plugin-shake.Shake",
+    "file": "plugins/cordova-plugin-shake/www/shakeNative.js",
+    "pluginId": "cordova-plugin-shake",
+    "clobbers": [
+      "shake"
+    ]
+  },
+  {
+    "id": "cordova-plugin-nativeaudio.nativeaudio",
+    "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
+    "pluginId": "cordova-plugin-nativeaudio",
+    "clobbers": [
+      "window.plugins.NativeAudio"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -445,7 +461,9 @@ module.exports.metadata =
   "cordova-plugin-file-transfer": "1.7.1",
   "info.protonet.imageresizer": "0.1.1",
   "cordova-plugin-media-capture": "3.0.2",
-  "cordova-plugin-media": "5.0.2"
+  "cordova-plugin-media": "5.0.2",
+  "cordova-plugin-shake": "0.6.0",
+  "cordova-plugin-nativeaudio": "3.0.9"
 };
 // BOTTOM OF METADATA
 });
