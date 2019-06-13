@@ -49,7 +49,6 @@
     "angular-web-storage": "^4.1.0",
     "angularfire2": "^5.1.3",
     "cordova-android": "^7.1.2",
-    "cordova-browser": "5.0.4",
     "cordova-common": "^3.1.0",
     "cordova-ios": "4.5.5",
     "cordova-plugin-add-swift-support": "^1.7.2",
@@ -75,7 +74,7 @@
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-telerik-imagepicker": "2.2.4",
     "cordova-plugin-whitelist": "^1.3.3",
-    "cordova-windows": "6.0.1",
+    "cordova-windows": "^6.0.1",
     "core-js": "^2.5.3",
     "firebase": "^6.1.0",
     "hammerjs": "^2.0.8",
@@ -157,7 +156,6 @@
     },
     "platforms": [
       "android",
-      "browser",
       "ios",
       "windows"
     ]

@@ -10,11 +10,11 @@
           "/Package/Capabilities": [
             {
               "xml": "<DeviceCapability Name=\"webcam\" />",
-              "count": 4
+              "count": 3
             },
             {
               "xml": "<DeviceCapability Name=\"microphone\" />",
-              "count": 4
+              "count": 2
             }
           ]
         }
@@ -24,11 +24,11 @@
           "/Package/Capabilities": [
             {
               "xml": "<DeviceCapability Name=\"webcam\" />",
-              "count": 4
+              "count": 3
             },
             {
               "xml": "<DeviceCapability Name=\"microphone\" />",
-              "count": 4
+              "count": 2
             }
           ]
         }
@@ -38,11 +38,11 @@
           "/Package/Capabilities": [
             {
               "xml": "<DeviceCapability Name=\"webcam\" />",
-              "count": 4
+              "count": 3
             },
             {
               "xml": "<DeviceCapability Name=\"microphone\" />",
-              "count": 4
+              "count": 2
             }
           ]
         }
@@ -60,6 +60,9 @@
     }
   },
   "installed_plugins": {
+    "cordova-plugin-add-swift-support": {
+      "PACKAGE_NAME": "Reddah"
+    },
     "cordova-plugin-appversion": {
       "PACKAGE_NAME": "Reddah"
     },
@@ -72,7 +75,19 @@
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "Reddah"
     },
+    "cordova-plugin-crop": {
+      "PACKAGE_NAME": "Reddah"
+    },
     "cordova-plugin-device": {
+      "PACKAGE_NAME": "Reddah"
+    },
+    "cordova-plugin-device-motion": {
+      "PACKAGE_NAME": "Reddah"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "Reddah"
+    },
+    "cordova-plugin-file-transfer": {
       "PACKAGE_NAME": "Reddah"
     },
     "cordova-plugin-inappbrowser": {
@@ -84,6 +99,24 @@
     "cordova-plugin-ionic-webview": {
       "PACKAGE_NAME": "Reddah"
     },
+    "cordova-plugin-media": {
+      "PACKAGE_NAME": "Reddah"
+    },
+    "cordova-plugin-media-capture": {
+      "PACKAGE_NAME": "Reddah"
+    },
+    "cordova-plugin-nativeaudio": {
+      "PACKAGE_NAME": "Reddah"
+    },
+    "cordova-plugin-photo-library": {
+      "PACKAGE_NAME": "Reddah"
+    },
+    "cordova-plugin-qrscanner": {
+      "PACKAGE_NAME": "Reddah"
+    },
+    "cordova-plugin-shake": {
+      "PACKAGE_NAME": "Reddah"
+    },
     "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "Reddah"
     },
@@ -93,40 +126,7 @@
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "Reddah"
     },
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "Reddah"
-    },
-    "cordova-plugin-photo-library": {
-      "PACKAGE_NAME": "Reddah"
-    },
-    "cordova-plugin-qrscanner": {
-      "PACKAGE_NAME": "Reddah"
-    },
-    "cordova-plugin-add-swift-support": {
-      "PACKAGE_NAME": "Reddah"
-    },
-    "cordova-plugin-crop": {
-      "PACKAGE_NAME": "Reddah"
-    },
-    "cordova-plugin-file-transfer": {
-      "PACKAGE_NAME": "Reddah"
-    },
     "info.protonet.imageresizer": {
-      "PACKAGE_NAME": "Reddah"
-    },
-    "cordova-plugin-media-capture": {
-      "PACKAGE_NAME": "Reddah"
-    },
-    "cordova-plugin-media": {
-      "PACKAGE_NAME": "Reddah"
-    },
-    "cordova-plugin-device-motion": {
-      "PACKAGE_NAME": "Reddah"
-    },
-    "cordova-plugin-shake": {
-      "PACKAGE_NAME": "Reddah"
-    },
-    "cordova-plugin-nativeaudio": {
       "PACKAGE_NAME": "Reddah"
     }
   },
@@ -203,6 +203,14 @@
       "runs": true
     },
     {
+      "id": "cordova-plugin-crop.CropPlugin",
+      "file": "plugins/cordova-plugin-crop/www/crop.js",
+      "pluginId": "cordova-plugin-crop",
+      "clobbers": [
+        "plugins.crop"
+      ]
+    },
+    {
       "id": "cordova-plugin-device.device",
       "file": "plugins/cordova-plugin-device/www/device.js",
       "pluginId": "cordova-plugin-device",
@@ -217,54 +225,25 @@
       "runs": true
     },
     {
-      "id": "cordova-plugin-inappbrowser.inappbrowser",
-      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-      "pluginId": "cordova-plugin-inappbrowser",
+      "id": "cordova-plugin-device-motion.Acceleration",
+      "file": "plugins/cordova-plugin-device-motion/www/Acceleration.js",
+      "pluginId": "cordova-plugin-device-motion",
       "clobbers": [
-        "cordova.InAppBrowser.open",
-        "window.open"
+        "Acceleration"
       ]
     },
     {
-      "id": "cordova-plugin-inappbrowser.InAppBrowserProxy",
-      "file": "plugins/cordova-plugin-inappbrowser/src/windows/InAppBrowserProxy.js",
-      "pluginId": "cordova-plugin-inappbrowser",
-      "runs": true
-    },
-    {
-      "id": "cordova-plugin-ionic-webview.IonicWebView",
-      "file": "plugins/cordova-plugin-ionic-webview/src/www/util.js",
-      "pluginId": "cordova-plugin-ionic-webview",
+      "id": "cordova-plugin-device-motion.accelerometer",
+      "file": "plugins/cordova-plugin-device-motion/www/accelerometer.js",
+      "pluginId": "cordova-plugin-device-motion",
       "clobbers": [
-        "Ionic.WebView"
+        "navigator.accelerometer"
       ]
     },
     {
-      "id": "cordova-plugin-splashscreen.SplashScreen",
-      "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-      "pluginId": "cordova-plugin-splashscreen",
-      "clobbers": [
-        "navigator.splashscreen"
-      ]
-    },
-    {
-      "id": "cordova-plugin-splashscreen.SplashScreenProxy",
-      "file": "plugins/cordova-plugin-splashscreen/www/windows/SplashScreenProxy.js",
-      "pluginId": "cordova-plugin-splashscreen",
-      "runs": true
-    },
-    {
-      "id": "cordova-plugin-statusbar.statusbar",
-      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-      "pluginId": "cordova-plugin-statusbar",
-      "clobbers": [
-        "window.StatusBar"
-      ]
-    },
-    {
-      "id": "cordova-plugin-statusbar.StatusBarProxy",
-      "file": "plugins/cordova-plugin-statusbar/src/windows/StatusBarProxy.js",
-      "pluginId": "cordova-plugin-statusbar",
+      "id": "cordova-plugin-device-motion.AccelerometerProxy",
+      "file": "plugins/cordova-plugin-device-motion/src/windows/AccelerometerProxy.js",
+      "pluginId": "cordova-plugin-device-motion",
       "runs": true
     },
     {
@@ -433,52 +412,6 @@
       "runs": true
     },
     {
-      "id": "cordova-plugin-photo-library.PhotoLibrary",
-      "file": "plugins/cordova-plugin-photo-library/www/PhotoLibrary.js",
-      "pluginId": "cordova-plugin-photo-library",
-      "clobbers": [
-        "cordova.plugins.photoLibrary"
-      ]
-    },
-    {
-      "id": "cordova-plugin-photo-library.async",
-      "file": "plugins/cordova-plugin-photo-library/www/async/dist/async.min.js",
-      "pluginId": "cordova-plugin-photo-library"
-    },
-    {
-      "id": "cordova-plugin-photo-library.async_map",
-      "file": "plugins/cordova-plugin-photo-library/www/async/dist/async.min.map",
-      "pluginId": "cordova-plugin-photo-library"
-    },
-    {
-      "id": "cordova-plugin-qrscanner.QRScanner",
-      "file": "plugins/cordova-plugin-qrscanner/www/www.min.js",
-      "pluginId": "cordova-plugin-qrscanner",
-      "clobbers": [
-        "QRScanner"
-      ]
-    },
-    {
-      "id": "cordova-plugin-qrscanner.qrScanner",
-      "file": "plugins/cordova-plugin-qrscanner/src/windows/lib/qrScanner.js",
-      "pluginId": "cordova-plugin-qrscanner",
-      "runs": true
-    },
-    {
-      "id": "cordova-plugin-qrscanner.preview",
-      "file": "plugins/cordova-plugin-qrscanner/src/windows/lib/preview.js",
-      "pluginId": "cordova-plugin-qrscanner",
-      "runs": true
-    },
-    {
-      "id": "cordova-plugin-crop.CropPlugin",
-      "file": "plugins/cordova-plugin-crop/www/crop.js",
-      "pluginId": "cordova-plugin-crop",
-      "clobbers": [
-        "plugins.crop"
-      ]
-    },
-    {
       "id": "cordova-plugin-file-transfer.FileTransferError",
       "file": "plugins/cordova-plugin-file-transfer/www/FileTransferError.js",
       "pluginId": "cordova-plugin-file-transfer",
@@ -501,20 +434,49 @@
       "runs": true
     },
     {
-      "id": "info.protonet.imageresizer.ImageResizer",
-      "file": "plugins/info.protonet.imageresizer/www/image_resizer.js",
-      "pluginId": "info.protonet.imageresizer",
+      "id": "cordova-plugin-inappbrowser.inappbrowser",
+      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+      "pluginId": "cordova-plugin-inappbrowser",
       "clobbers": [
-        "ImageResizer"
+        "cordova.InAppBrowser.open",
+        "window.open"
       ]
     },
     {
-      "id": "info.protonet.imageresizer.ImageResizerProxy",
-      "file": "plugins/info.protonet.imageresizer/src/windows/ImageResizerProxy.js",
-      "pluginId": "info.protonet.imageresizer",
-      "merges": [
-        ""
+      "id": "cordova-plugin-inappbrowser.InAppBrowserProxy",
+      "file": "plugins/cordova-plugin-inappbrowser/src/windows/InAppBrowserProxy.js",
+      "pluginId": "cordova-plugin-inappbrowser",
+      "runs": true
+    },
+    {
+      "id": "cordova-plugin-ionic-webview.IonicWebView",
+      "file": "plugins/cordova-plugin-ionic-webview/src/www/util.js",
+      "pluginId": "cordova-plugin-ionic-webview",
+      "clobbers": [
+        "Ionic.WebView"
       ]
+    },
+    {
+      "id": "cordova-plugin-media.MediaError",
+      "file": "plugins/cordova-plugin-media/www/MediaError.js",
+      "pluginId": "cordova-plugin-media",
+      "clobbers": [
+        "window.MediaError"
+      ]
+    },
+    {
+      "id": "cordova-plugin-media.Media",
+      "file": "plugins/cordova-plugin-media/www/Media.js",
+      "pluginId": "cordova-plugin-media",
+      "clobbers": [
+        "window.Media"
+      ]
+    },
+    {
+      "id": "cordova-plugin-media.MediaProxy",
+      "file": "plugins/cordova-plugin-media/src/windows/MediaProxy.js",
+      "pluginId": "cordova-plugin-media",
+      "runs": true
     },
     {
       "id": "cordova-plugin-media-capture.CaptureAudioOptions",
@@ -593,47 +555,41 @@
       "runs": true
     },
     {
-      "id": "cordova-plugin-media.MediaError",
-      "file": "plugins/cordova-plugin-media/www/MediaError.js",
-      "pluginId": "cordova-plugin-media",
+      "id": "cordova-plugin-photo-library.PhotoLibrary",
+      "file": "plugins/cordova-plugin-photo-library/www/PhotoLibrary.js",
+      "pluginId": "cordova-plugin-photo-library",
       "clobbers": [
-        "window.MediaError"
+        "cordova.plugins.photoLibrary"
       ]
     },
     {
-      "id": "cordova-plugin-media.Media",
-      "file": "plugins/cordova-plugin-media/www/Media.js",
-      "pluginId": "cordova-plugin-media",
+      "id": "cordova-plugin-photo-library.async",
+      "file": "plugins/cordova-plugin-photo-library/www/async/dist/async.min.js",
+      "pluginId": "cordova-plugin-photo-library"
+    },
+    {
+      "id": "cordova-plugin-photo-library.async_map",
+      "file": "plugins/cordova-plugin-photo-library/www/async/dist/async.min.map",
+      "pluginId": "cordova-plugin-photo-library"
+    },
+    {
+      "id": "cordova-plugin-qrscanner.QRScanner",
+      "file": "plugins/cordova-plugin-qrscanner/www/www.min.js",
+      "pluginId": "cordova-plugin-qrscanner",
       "clobbers": [
-        "window.Media"
+        "QRScanner"
       ]
     },
     {
-      "id": "cordova-plugin-media.MediaProxy",
-      "file": "plugins/cordova-plugin-media/src/windows/MediaProxy.js",
-      "pluginId": "cordova-plugin-media",
+      "id": "cordova-plugin-qrscanner.qrScanner",
+      "file": "plugins/cordova-plugin-qrscanner/src/windows/lib/qrScanner.js",
+      "pluginId": "cordova-plugin-qrscanner",
       "runs": true
     },
     {
-      "id": "cordova-plugin-device-motion.Acceleration",
-      "file": "plugins/cordova-plugin-device-motion/www/Acceleration.js",
-      "pluginId": "cordova-plugin-device-motion",
-      "clobbers": [
-        "Acceleration"
-      ]
-    },
-    {
-      "id": "cordova-plugin-device-motion.accelerometer",
-      "file": "plugins/cordova-plugin-device-motion/www/accelerometer.js",
-      "pluginId": "cordova-plugin-device-motion",
-      "clobbers": [
-        "navigator.accelerometer"
-      ]
-    },
-    {
-      "id": "cordova-plugin-device-motion.AccelerometerProxy",
-      "file": "plugins/cordova-plugin-device-motion/src/windows/AccelerometerProxy.js",
-      "pluginId": "cordova-plugin-device-motion",
+      "id": "cordova-plugin-qrscanner.preview",
+      "file": "plugins/cordova-plugin-qrscanner/src/windows/lib/preview.js",
+      "pluginId": "cordova-plugin-qrscanner",
       "runs": true
     },
     {
@@ -643,31 +599,75 @@
       "clobbers": [
         "shake"
       ]
+    },
+    {
+      "id": "cordova-plugin-splashscreen.SplashScreen",
+      "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+      "pluginId": "cordova-plugin-splashscreen",
+      "clobbers": [
+        "navigator.splashscreen"
+      ]
+    },
+    {
+      "id": "cordova-plugin-splashscreen.SplashScreenProxy",
+      "file": "plugins/cordova-plugin-splashscreen/www/windows/SplashScreenProxy.js",
+      "pluginId": "cordova-plugin-splashscreen",
+      "runs": true
+    },
+    {
+      "id": "cordova-plugin-statusbar.statusbar",
+      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+      "pluginId": "cordova-plugin-statusbar",
+      "clobbers": [
+        "window.StatusBar"
+      ]
+    },
+    {
+      "id": "cordova-plugin-statusbar.StatusBarProxy",
+      "file": "plugins/cordova-plugin-statusbar/src/windows/StatusBarProxy.js",
+      "pluginId": "cordova-plugin-statusbar",
+      "runs": true
+    },
+    {
+      "id": "info.protonet.imageresizer.ImageResizer",
+      "file": "plugins/info.protonet.imageresizer/www/image_resizer.js",
+      "pluginId": "info.protonet.imageresizer",
+      "clobbers": [
+        "ImageResizer"
+      ]
+    },
+    {
+      "id": "info.protonet.imageresizer.ImageResizerProxy",
+      "file": "plugins/info.protonet.imageresizer/src/windows/ImageResizerProxy.js",
+      "pluginId": "info.protonet.imageresizer",
+      "merges": [
+        ""
+      ]
     }
   ],
   "plugin_metadata": {
+    "cordova-plugin-add-swift-support": "1.7.2",
     "cordova-plugin-appversion": "1.0.0",
     "cordova-plugin-app-update": "2.0.2",
     "cordova-plugin-app-version": "0.1.9",
     "cordova-plugin-camera": "4.0.3",
+    "cordova-plugin-crop": "0.3.1",
     "cordova-plugin-device": "2.0.2",
+    "cordova-plugin-device-motion": "2.0.1",
+    "cordova-plugin-file": "6.0.1",
+    "cordova-plugin-file-transfer": "1.7.1",
     "cordova-plugin-inappbrowser": "3.0.0",
     "cordova-plugin-ionic-keyboard": "2.1.3",
     "cordova-plugin-ionic-webview": "2.3.1",
+    "cordova-plugin-media": "5.0.2",
+    "cordova-plugin-media-capture": "3.0.2",
+    "cordova-plugin-nativeaudio": "3.0.9",
+    "cordova-plugin-photo-library": "2.2.1",
+    "cordova-plugin-qrscanner": "2.6.0",
+    "cordova-plugin-shake": "0.6.0",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
     "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-file": "6.0.1",
-    "cordova-plugin-photo-library": "2.2.1",
-    "cordova-plugin-qrscanner": "2.6.0",
-    "cordova-plugin-add-swift-support": "1.7.2",
-    "cordova-plugin-crop": "0.3.1",
-    "cordova-plugin-file-transfer": "1.7.1",
-    "info.protonet.imageresizer": "0.1.1",
-    "cordova-plugin-media-capture": "3.0.2",
-    "cordova-plugin-media": "5.0.2",
-    "cordova-plugin-device-motion": "2.0.1",
-    "cordova-plugin-shake": "0.6.0",
-    "cordova-plugin-nativeaudio": "3.0.9"
+    "info.protonet.imageresizer": "0.1.1"
   }
 }

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Package IgnorableNamespaces="uap mp" xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10">
-    <Identity Name="com.reddah.app" Publisher="CN=$username$" Version="1.4.93.0" />
-    <mp:PhoneIdentity PhoneProductId="0e418eb0-3c6d-11e9-b9f3-cd9198eafe4e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+    <Identity Name="com.reddah.app" Publisher="CN=$username$" Version="1.4.95.0" />
+    <mp:PhoneIdentity PhoneProductId="120c4550-8d8d-11e9-8749-e1318ac1fc1c" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
     <Properties>
         <DisplayName>Reddah</DisplayName>
         <PublisherDisplayName>Reddah.com Team</PublisherDisplayName>
@@ -32,7 +32,7 @@
     </Applications>
     <Capabilities>
         <Capability Name="internetClient" />
-        <DeviceCapability Name="webcam" />
         <DeviceCapability Name="microphone" />
+        <DeviceCapability Name="webcam" />
     </Capabilities>
 </Package>

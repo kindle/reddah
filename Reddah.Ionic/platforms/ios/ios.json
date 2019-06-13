@@ -106,11 +106,11 @@
             },
             {
               "xml": "<feature name=\"CDVShake\"><param name=\"ios-package\" value=\"CDVShake\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<feature name=\"NativeAudio\"><param name=\"ios-package\" value=\"NativeAudio\" /></feature>",
-              "count": 1
+              "count": 2
             }
           ]
         }
