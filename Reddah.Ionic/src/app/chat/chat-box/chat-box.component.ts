@@ -154,6 +154,7 @@ export class ChatBoxComponent implements OnInit {
             });
 
     */
+            //let fileName = this.reddah.generateFileName()+".mp3";
             //let fileName = this.reddah.generateFileName()+".wav";
             let fileName = this.reddah.generateFileName()+".m4a";
             let filePath = this.file.externalRootDirectory.replace(/^file:\/\//, '') + "/reddah/" + fileName;
@@ -179,7 +180,7 @@ export class ChatBoxComponent implements OnInit {
         formData.append("ArticleId", JSON.stringify(this.selectedArticleId));
         formData.append("ParentCommentId", JSON.stringify(this.selectedCommentId));
         
-        let fullPath = this.file.externalRootDirectory +"/reddah/"+ fileName;
+        let fullPath = this.file.externalRootDirectory +"reddah/"+ fileName;
         
         let temp = this.media.create(fullPath);
         temp.play();
@@ -324,17 +325,20 @@ export class ChatBoxComponent implements OnInit {
     }
 
     addPhotoToFormData(photo){
+//alert(JSON.stringify(photo));
         this.formData = new FormData();
         //append org photo form data
-        this.prepareData(photo.fileUrl, photo.fileUr,1);
+        this.prepareData(photo.fileUrl, photo.fileUrl, 1);
 
         //append preview photo form data
         let orgFileName = photo.fileUrl.substring(photo.fileUrl.lastIndexOf('/')+1);
         let fileExtention = orgFileName.substring(orgFileName.lastIndexOf('.'));
+//alert(orgFileName+"--"+fileExtention);
         //remove ?****
-        let removdQFileExtention = fileExtention.replace(fileExtention.substring(fileExtention.lastIndexOf('?')),"");
+        let removdQFileExtention = fileExtention.lastIndexOf('?')==-1 ? 
+            fileExtention : fileExtention.replace(fileExtention.substring(fileExtention.lastIndexOf('?')),"");
         let previewFileName = orgFileName.replace(fileExtention,"") + "_reddah_preview" + removdQFileExtention;
-        //alert(photo.fileUrl+"_"+previewFileName);
+//alert(photo.fileUrl+"_"+previewFileName+"_**_"+removdQFileExtention);
         let options = {
             uri: photo.fileUrl,
             folderName: 'reddah',
@@ -351,6 +355,7 @@ export class ChatBoxComponent implements OnInit {
     }
 
     prepareData(filePath, formKey, step) {
+//alert(filePath+"@@"+formKey);
         this.file.resolveLocalFilesystemUrl(filePath)
         .then(entry => {
             ( <FileEntry> entry).file(file => {
@@ -361,14 +366,19 @@ export class ChatBoxComponent implements OnInit {
                         type: file.type
                     });
                     this.formData.append(formKey, imgBlob, file.name);
-                    if(step==2)
-                        this.submit_photo_comment();
+            //alert(formKey+"_"+file.name);
+                    if(step==2){
+                        setTimeout(() => {
+                            this.submit_photo_comment();
+                        },1000)
+                    }
+                        
                 };
                 reader.readAsArrayBuffer(file);
             })
         })
         .catch(err => {
-            console.error(JSON.stringify(err));
+            console.error("prepareData:"+JSON.stringify(err));
         });
     }
 

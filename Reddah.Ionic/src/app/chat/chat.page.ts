@@ -12,6 +12,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 
 @Component({
     selector: 'app-chat',
@@ -79,8 +80,9 @@ export class ChatPage implements OnInit {
                         this.pageTop.scrollToBottom(0);
                     }
                 },200)
-                this.messages.forEach((comment)=>{
-                    this.preload(comment["Content"]);
+                this.messages.forEach((comment:any)=>{
+                    if(comment.Type==1)//audio only
+                        this.preload(comment["Content"]);
                 })
             }
             else{
@@ -93,25 +95,46 @@ export class ChatPage implements OnInit {
     async preload(guidName){
         let path = this.localStorageService.retrieve(guidName);
 
-        if(path){
-            this.nativeAudio.preloadSimple(guidName, path);
-        }
-        else{
+        if(path==null){
             this.fileTransfer = this.transfer.create();  
-            let target = this.file.applicationStorageDirectory + guidName;
-            this.fileTransfer.download("https://login.reddah.com/uploadphoto/"+guidName, target).then((entry) => {
+            let target = this.file.externalRootDirectory +"reddah/"+ guidName;
+            this.file.checkFile(this.file.externalRootDirectory +"reddah/", guidName)
+            .then(_ =>{
                 this.localStorageService.store(guidName, target);
-                this.nativeAudio.preloadSimple(guidName, target);
-            }, (error) => {
-                console.log(JSON.stringify(error));
+            })
+            .catch(err =>{
+                this.fileTransfer.download("https://login.reddah.com/uploadPhoto/"+guidName, target, true).then((entry) => {
+                    this.localStorageService.store(guidName, target);
+                }, (error) => {
+                    console.log(JSON.stringify(error));
+                    alert(JSON.stringify(error));
+                });
             });
-            
         }
         
     }
 
     async play(audioFileName){
-        this.nativeAudio.play(audioFileName);
+        let target = this.file.externalRootDirectory +"reddah/";
+
+        //error handling, check again
+        this.file.checkFile(target, audioFileName)
+        .then(_ =>{
+            this.localStorageService.store(audioFileName, target);
+            let player = this.media.create(target.replace(/^file:\/\//, '') + audioFileName);
+            player.play();
+        })
+        .catch(err =>{
+            this.fileTransfer.download("https://login.reddah.com/uploadPhoto/"+audioFileName, target+ audioFileName, true).then((entry) => {
+                this.localStorageService.store(audioFileName, target);
+                let player = this.media.create(target.replace(/^file:\/\//, '') + audioFileName);
+                player.play();
+            }, (error) => {
+                console.log(JSON.stringify(error));
+                alert(JSON.stringify(error));
+            });
+        });
+        
     }
 
     async close() {
@@ -159,5 +182,23 @@ export class ChatPage implements OnInit {
         });
             
         await userModal.present();
+    }
+
+    async viewer(index, imageSrcArray) {
+        const modal = await this.modalController.create({
+            component: ImageViewerComponent,
+            componentProps: {
+                index: index,
+                imgSourceArray: imageSrcArray,
+                imgTitle: "",
+                imgDescription: "",
+                showDownload: true,
+            },
+            cssClass: 'modal-fullscreen',
+            keyboardClose: true,
+            showBackdrop: true
+        });
+    
+        return await modal.present();
     }
 }

@@ -144,6 +144,7 @@ export class AddTimelinePage implements OnInit {
         //send the key in UI display order
         this.formData.append('order', this.photos.map(e=>e.fileUrl).join(","));
         this.formData.append('type', JSON.stringify(1));//feedback:9, normal:0, timeline:1
+        this.formData.append('feedbackType', JSON.stringify(-1));
         //alert(this.photos.map(e=>e.fileUrl).join(","));
 
         this.reddahService.addTimeline(this.formData)
@@ -235,7 +236,9 @@ export class AddTimelinePage implements OnInit {
         let orgFileName = photo.fileUrl.substring(photo.fileUrl.lastIndexOf('/')+1);
         let fileExtention = orgFileName.substring(orgFileName.lastIndexOf('.'));
         //remove ?****
-        let removdQFileExtention = fileExtention.replace(fileExtention.substring(fileExtention.lastIndexOf('?')),"");
+        let removdQFileExtention = fileExtention.lastIndexOf('?')==-1 ? 
+            fileExtention : fileExtention.replace(fileExtention.substring(fileExtention.lastIndexOf('?')),"");
+        
         let previewFileName = orgFileName.replace(fileExtention,"") + "_reddah_preview" + removdQFileExtention;
         //alert(photo.fileUrl+"_"+previewFileName);
         let options = {

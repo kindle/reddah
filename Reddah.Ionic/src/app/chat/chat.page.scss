@@ -24,6 +24,12 @@
     margin-bottom: 10px;
 }
 
+.arrow-box-right-photo {
+    display: flex; margin-right: 5px;
+    margin-bottom: 10px;
+    flex-direction: row-reverse;
+}
+
 .chat-box-me {
     min-height:40px; 
     background-color: #95ec69; 
@@ -93,4 +99,18 @@
     border-radius: 5px;
     overflow-wrap: break-word;
     display: flex;
+}
+
+
+.parent3 {
+    width:50%;
+}
+
+.parent3-me {
+    width:50%;
+    right:0;
+}
+ 
+.picture3 {
+    min-width: 100%;
 }

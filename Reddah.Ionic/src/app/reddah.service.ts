@@ -71,8 +71,8 @@ export class ReddahService {
         formData.append('jwt', this.getCurrentJwt());
         return this.http.post<any>(this.addPhotoCommentsUrl, formData)
         .pipe(
-            tap(data => this.log('add comment')),
-            catchError(this.handleError('add comment', []))
+            tap(data => this.log('add photo comment')),
+            catchError(this.handleError('add photo comment', []))
         );
     }
     //******************************** */

@@ -49,6 +49,9 @@ export class SettingAboutPage implements OnInit {
         this.getVersionNumber().then(version => {
             this.version = version;
         });
+
+        //upgrade auto when come in
+        this.upgrade();
     }
 
     upgradeChecked = false;

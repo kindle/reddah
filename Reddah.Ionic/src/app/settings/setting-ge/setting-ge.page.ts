@@ -72,6 +72,7 @@ export class SettingGePage implements OnInit {
 
     async clearCache(){
         this.cacheService.clearAll();
+        //this.localStorageService.clear(); //this will force logout
         this.reddah.presentToastWithOptions("已清除缓存");
     }
 

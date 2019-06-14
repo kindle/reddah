@@ -16,7 +16,7 @@
             <ion-col no-padding>
                 <div class="container-right" *ngIf="userName==comment.UserName">
                     <img src="{{reddah.appPhoto['userphoto_'+comment.UserName]}}" class="portrait" (click)="goUser(comment.UserName)">
-                    <div class="arrow-box-right">
+                    <div class="arrow-box-right" *ngIf="comment.Type<2">
                         <div class="chat-box-me" *ngIf="comment.Type==0" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
                         <div class="chat-box-me-1" *ngIf="comment.Type==1" (click)="play(comment.Content)">
                             <ion-icon slot="start" name="ios-wifi" size="large" style="width:20px;height:18px;transform: rotate(-90deg);margin:auto;"></ion-icon>
@@ -25,9 +25,11 @@
                                 <div>{{comment.Duration}}''</div>
                             </div>
                         </div>
-                        <div class="chat-arrow-right" style="flex:auto 0;" *ngIf="comment.Type<2"></div>
-                        <div *ngIf="comment.Type==2">
-                            <img [src]="comment.Content">
+                        <div class="chat-arrow-right" style="flex:auto 0;"></div>
+                    </div>
+                    <div class="arrow-box-right-photo" *ngIf="comment.Type==2">
+                        <div class="parent3-me">
+                            <img [src]="comment.Content" class="picture3" (click)="viewer(0, [comment.Content])">
                         </div>
                     </div>
                 </div>
@@ -43,8 +45,8 @@
                                 <div style="width:5px;" *ngFor="let i of getArray(comment.Duration)">&nbsp;</div>
                             </div>
                         </div>
-                        <div *ngIf="comment.Type==2">
-                            <img [src]="comment.Content">
+                        <div class="parent3" *ngIf="comment.Type==2">
+                            <img [src]="comment.Content" class="picture3" (click)="viewer(0, [comment.Content])">
                         </div>
                     </div>
                 </div>
