@@ -80,6 +80,8 @@
     vertical-align: top;
     padding:3px;
     border-radius: 5px;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 .chat-box-others-1 {
@@ -90,4 +92,5 @@
     padding:3px;
     border-radius: 5px;
     overflow-wrap: break-word;
+    display: flex;
 }

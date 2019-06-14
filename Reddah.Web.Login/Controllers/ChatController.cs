@@ -494,5 +494,135 @@ namespace Reddah.Web.Login.Controllers
 
 
         }
+
+        //support only 1 image currently
+        [Route("addphotocomments")]
+        [HttpPost]
+        public IHttpActionResult AddPhotoComments()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int articleId = js.Deserialize<int>(HttpContext.Current.Request["ArticleId"]);
+                int parentCommentId = js.Deserialize<int>(HttpContext.Current.Request["CommentId"]);
+
+                Dictionary<string, string> imageUrls = new Dictionary<string, string>();
+                HttpFileCollection hfc = HttpContext.Current.Request.Files;
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                try
+                {
+                    using (var db = new reddahEntities())
+                    {
+                        string previewFileName = string.Empty;
+                        Dictionary<string, string> dict = new Dictionary<string, string>();
+                        foreach (string rfilename in HttpContext.Current.Request.Files)
+                        {
+                            //upload image first
+                            string guid = Guid.NewGuid().ToString().Replace("-", "");
+                            string uploadedImagePath = "/uploadPhoto/";
+                            string uploadImageServerPath = "~" + uploadedImagePath;
+
+                            HttpPostedFile upload = HttpContext.Current.Request.Files[rfilename];
+                            var fileNameKey = rfilename.Replace("_reddah_preview", "");
+                            if (!dict.Keys.Contains(fileNameKey))
+                            {
+                                dict.Add(fileNameKey, guid);
+                            }
+                            else
+                            {
+                                guid = dict[fileNameKey];
+                            }
+                            if (upload.FileName.Contains("_reddah_preview"))
+                            {
+                                guid += "_reddah_preview";
+                            }
+
+                            try
+                            {
+                                var fileFormat = upload.FileName.Substring(upload.FileName.LastIndexOf('.')).Replace(".", "");
+                                var fileName = Path.GetFileName(guid + "." + fileFormat);
+                                var filePhysicalPath = HostingEnvironment.MapPath(uploadImageServerPath + "/" + fileName);
+                                if (!Directory.Exists(HostingEnvironment.MapPath(uploadImageServerPath)))
+                                {
+                                    Directory.CreateDirectory(HostingEnvironment.MapPath(uploadImageServerPath));
+                                }
+                                upload.SaveAs(filePhysicalPath);
+                                var url = uploadedImagePath + fileName;
+
+
+                                UploadFile file = new UploadFile();
+                                file.Guid = guid;
+                                file.Format = fileFormat;
+                                file.UserName = jwtResult.JwtUser.User;
+                                file.CreatedOn = DateTime.Now;
+                                file.GroupName = "";
+                                file.Tag = "";
+                                db.UploadFile.Add(file);
+                                if (upload.FileName.Contains("_reddah_preview."))
+                                {
+                                    previewFileName = "///login.reddah.com" + url;
+                                    if (!imageUrls.Values.Contains("///login.reddah.com" + url))
+                                    {
+                                        imageUrls.Add(guid.Replace("_reddah_preview", ""), "///login.reddah.com" + url);
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                return Ok(new ApiResult(1, ex.Message));
+                            }
+                        }
+
+                        db.Comment.Add(new Comment()
+                        {
+                            ArticleId = articleId,
+                            ParentId = parentCommentId,
+                            Content = previewFileName,
+                            CreatedOn = DateTime.Now,
+                            UserName = jwtResult.JwtUser.User,
+                            Type = 2,
+                        });
+
+
+                        var article = db.Article.FirstOrDefault(a => a.Id == articleId);
+                        if (article != null)
+                        {
+                            article.Count++;
+                        }
+
+                        if (parentCommentId != -1)
+                        {
+                            var parentComment = db.Comment.FirstOrDefault(c => c.Id == parentCommentId);
+                            if (parentComment != null)
+                            {
+                                parentComment.Count++;
+                            }
+                        }
+
+                        db.SaveChanges();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Ok(new ApiResult(3, "Excepion:" + ex.Message.ToString()));
+                }
+
+
+                return Ok(new ApiResult(0, "New audio chat Added"));
+
+            }
+            catch (Exception ex1)
+            {
+                return Ok(new ApiResult(4, ex1.Message));
+            }
+        }
     }
 }

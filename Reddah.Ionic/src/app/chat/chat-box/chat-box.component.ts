@@ -5,6 +5,8 @@ import { CacheService } from "ionic-cache";
 import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions } from '@ionic-native/media-capture';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx'; 
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 
 @Component({
     selector: 'app-chat-box',
@@ -87,8 +89,18 @@ export class ChatBoxComponent implements OnInit {
             this.showSpeakBox = false;
         }
     }
-    funSelection(fun) {
-        //this.newChatComment.value += fun;
+    async funSelection(fun) {
+        switch(fun){
+            case 1: 
+                await this.fromLib();
+                break;
+            case 2: 
+                await this.takePhoto();
+                break;
+            case 3: 
+            default: 
+                break;
+        }
     }
 
     chatFunctionGroups = [
@@ -270,4 +282,114 @@ export class ChatBoxComponent implements OnInit {
         });
     }
 */
+
+    formData;
+    async takePhoto(){
+        const options: CameraOptions = {
+            quality: 100,
+            destinationType: Camera.DestinationType.FILE_URI,
+            encodingType: Camera.EncodingType.JPEG,
+            mediaType: Camera.MediaType.PICTURE,
+            correctOrientation: true
+        }
+        
+        Camera.getPicture(options).then((imageData) => {
+            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
+            this.addPhotoToFormData(data);
+        }, (err) => {
+            console.log(JSON.stringify(err));
+        });
+        
+    }
+
+    async fromLib()
+    {
+        const options: CameraOptions = {
+            quality: 100,
+            destinationType: Camera.DestinationType.FILE_URI,
+            encodingType: Camera.EncodingType.JPEG,
+            mediaType: Camera.MediaType.PICTURE,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            correctOrientation: true
+        }
+        
+        Camera.getPicture(options).then((imageData) => {
+            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
+            this.addPhotoToFormData(data);
+        }, (err) => {
+            console.log(JSON.stringify(err));
+            alert(JSON.stringify(err));
+        });
+        
+    }
+
+    addPhotoToFormData(photo){
+        this.formData = new FormData();
+        //append org photo form data
+        this.prepareData(photo.fileUrl, photo.fileUr,1);
+
+        //append preview photo form data
+        let orgFileName = photo.fileUrl.substring(photo.fileUrl.lastIndexOf('/')+1);
+        let fileExtention = orgFileName.substring(orgFileName.lastIndexOf('.'));
+        //remove ?****
+        let removdQFileExtention = fileExtention.replace(fileExtention.substring(fileExtention.lastIndexOf('?')),"");
+        let previewFileName = orgFileName.replace(fileExtention,"") + "_reddah_preview" + removdQFileExtention;
+        //alert(photo.fileUrl+"_"+previewFileName);
+        let options = {
+            uri: photo.fileUrl,
+            folderName: 'reddah',
+            fileName: previewFileName,
+            quality: 20,
+            width: 800,
+            height: 800
+        } as ImageResizerOptions;
+        ImageResizer
+            .resize(options)
+            .then((filePath: string) => this.prepareData(filePath, photo.fileUrl+"_reddah_preview",2))
+            .catch(e => alert(e));
+
+    }
+
+    prepareData(filePath, formKey, step) {
+        this.file.resolveLocalFilesystemUrl(filePath)
+        .then(entry => {
+            ( <FileEntry> entry).file(file => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    //org image data
+                    const imgBlob = new Blob([reader.result], {
+                        type: file.type
+                    });
+                    this.formData.append(formKey, imgBlob, file.name);
+                    if(step==2)
+                        this.submit_photo_comment();
+                };
+                reader.readAsArrayBuffer(file);
+            })
+        })
+        .catch(err => {
+            console.error(JSON.stringify(err));
+        });
+    }
+
+    async submit_photo_comment() {
+        this.formData.append("ArticleId", JSON.stringify(this.selectedArticleId));
+        this.formData.append("CommentId", JSON.stringify(this.selectedCommentId));
+        this.reddah.addPhotoComments(this.formData)
+        .subscribe(result => 
+        {
+            if(result.Success==0)
+            { 
+                this.reloadComments.emit();
+                this.showFacePanel = false;
+                this.showFunctionPanel = false;
+            }
+            else{
+                alert(result.Message);
+            }
+        });
+        
+    }
+
+
 }

@@ -66,6 +66,16 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private addPhotoCommentsUrl = 'https://login.reddah.com/api/chat/addphotocomments'; 
+    addPhotoComments(formData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.addPhotoCommentsUrl, formData)
+        .pipe(
+            tap(data => this.log('add comment')),
+            catchError(this.handleError('add comment', []))
+        );
+    }
+    //******************************** */
     private addTimelineUrl = 'https://login.reddah.com/api/article/addtimeline'; 
 
     addTimeline(formData: FormData): Observable<any> {

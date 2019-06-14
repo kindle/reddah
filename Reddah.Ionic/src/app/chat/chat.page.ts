@@ -8,7 +8,8 @@ import { ChatOptPage } from '../chat/chat-opt/chat-opt.page';
 import { UserPage } from '../common/user/user.page';
 //import { AngularFireDatabase } from 'angularfire2/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
-
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
@@ -35,6 +36,8 @@ export class ChatPage implements OnInit {
         private cacheService: CacheService,
         private media: Media,
         private nativeAudio: NativeAudio,
+        private transfer: FileTransfer, 
+        private file: File,
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
@@ -77,7 +80,7 @@ export class ChatPage implements OnInit {
                     }
                 },200)
                 this.messages.forEach((comment)=>{
-                    this.nativeAudio.preloadSimple(comment["Content"], "https://login.reddah.com/uploadphoto/"+comment["Content"]);
+                    this.preload(comment["Content"]);
                 })
             }
             else{
@@ -86,11 +89,28 @@ export class ChatPage implements OnInit {
         });
     }
 
-    async play(audioFileName){
-        //let src = "https://login.reddah.com/uploadphoto/"+audioFileName;
-        //const file: MediaObject = this.media.create(src);
-        //file.play();
+    private fileTransfer: FileTransferObject; 
+    async preload(guidName){
+        let path = this.localStorageService.retrieve(guidName);
 
+        if(path){
+            this.nativeAudio.preloadSimple(guidName, path);
+        }
+        else{
+            this.fileTransfer = this.transfer.create();  
+            let target = this.file.applicationStorageDirectory + guidName;
+            this.fileTransfer.download("https://login.reddah.com/uploadphoto/"+guidName, target).then((entry) => {
+                this.localStorageService.store(guidName, target);
+                this.nativeAudio.preloadSimple(guidName, target);
+            }, (error) => {
+                console.log(JSON.stringify(error));
+            });
+            
+        }
+        
+    }
+
+    async play(audioFileName){
         this.nativeAudio.play(audioFileName);
     }
 
