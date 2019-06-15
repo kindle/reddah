@@ -102,6 +102,10 @@ export class PostviewerPage implements OnInit {
         alert('show menu to report, delete.');
     }
 
+    async close() {
+        await this.modalController.dismiss();
+    }
+
     async goUser(userName){
         const userModal = await this.modalController.create({
             component: UserPage,

@@ -17,6 +17,7 @@ export class SettingNoteLabelPage implements OnInit {
 
     submitClicked = false;
         
+    userName;
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
@@ -24,7 +25,9 @@ export class SettingNoteLabelPage implements OnInit {
         private cacheService: CacheService,
         public authService: AuthService,
         private toastController: ToastController,
-    ) {}
+    ) {
+        this.userName = this.reddah.getCurrentUser();
+    }
 
     ngOnInit() {}
     
@@ -43,8 +46,8 @@ export class SettingNoteLabelPage implements OnInit {
         .subscribe(result => 
         {
             if(result.Success==0){
-                this.reddah.appPhoto['usernotename_'+this.targetUserName] = this.currentNoteName;
-                this.localStorageService.store('usernotename_'+this.targetUserName, this.currentNoteName);
+                this.reddah.appPhoto['usernotename_'+this.targetUserName+'_'+this.userName] = this.currentNoteName;
+                this.localStorageService.store('usernotename_'+this.targetUserName+'_'+this.userName, this.currentNoteName);
                 this.modalController.dismiss(true);
             }
             else

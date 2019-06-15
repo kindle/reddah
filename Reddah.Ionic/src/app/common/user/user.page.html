@@ -13,7 +13,7 @@
         </ion-thumbnail>
         <ion-label class="userInfo">
             <h1>
-                {{reddah.appData('usernotename_'+userName)}}
+                {{reddah.appData('usernotename_'+userName+'_'+this.currentUserName)}}
                 <ion-icon name="ios-male" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
                 <ion-icon name="ios-female" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
             </h1>
@@ -24,7 +24,7 @@
     </ion-item>
 
     <div>
-        <ion-item class="borderTop" (click)="changeNoteName()" *ngIf="reddah.appData('userisfriend_'+this.userName)==1">
+        <ion-item class="borderTop" (click)="changeNoteName()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
             <ion-label>设置备注和标签</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
@@ -47,15 +47,15 @@
         </ion-item>
     </div>
     <div class="gap lastGap">
-        <ion-item class="borderTop" *ngIf="reddah.appData('userisfriend_'+this.userName)==1" (click)="chat()">
+        <ion-item class="borderTop" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1" (click)="chat()">
             <ion-icon name="chatboxes" slot="start"></ion-icon>
             <ion-label>发消息</ion-label>
         </ion-item>
-        <ion-item class="borderBottom" lines="none" href="/#" *ngIf="reddah.appData('userisfriend_'+this.userName)==1">
+        <ion-item class="borderBottom" lines="none" href="/#" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
             <ion-icon name="videocam" slot="start"></ion-icon>
             <ion-label>音视频通话</ion-label>
         </ion-item>
-        <ion-item  class="borderTop borderBottom" (click)="addFriend()" *ngIf="reddah.appData('userisfriend_'+this.userName)==0&&userName!=reddah.getCurrentUser()">
+        <ion-item  class="borderTop borderBottom" (click)="addFriend()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0&&userName!=reddah.getCurrentUser()">
             <ion-label>添加为好友</ion-label>
         </ion-item>
     </div>

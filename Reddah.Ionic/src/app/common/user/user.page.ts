@@ -22,6 +22,7 @@ import { ChatPage } from '../../chat/chat.page';
 export class UserPage implements OnInit {
     @Input() userName: string;
 
+    currentUserName;
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
@@ -41,6 +42,7 @@ export class UserPage implements OnInit {
     ){}
 
     ngOnInit(){
+        this.currentUserName = this.reddah.getCurrentUser();
         this.reddah.getUserPhotos(this.userName);
         this.getTimeline();
     }
@@ -117,7 +119,7 @@ export class UserPage implements OnInit {
                   console.log('Share clicked');
               }
             }
-            ].concat(this.reddah.appData('userisfriend_'+this.userName)==1?
+            ].concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?
                 [{
                     text: '删除好友',
                     icon: 'ios-trash',
@@ -149,8 +151,8 @@ export class UserPage implements OnInit {
                     formData.append("targetUser", this.userName);
                     this.reddah.removeFriend(formData).subscribe(data=>{
                         if(data.Success==0)
-                            this.localStorageService.store(`userisfriend_${this.userName}`, 0);
-                            this.reddah.appPhoto[`userisfriend_${this.userName}`] = 0;
+                            this.localStorageService.store(`userisfriend_${this.userName}_${this.currentUserName}`, 0);
+                            this.reddah.appPhoto[`userisfriend_${this.userName}_${this.currentUserName}`] = 0;
                             this.cacheService.clearGroup("ContactPage");
                             this.cacheService.clearGroup("TimeLinePage"+this.userName);
                             this.modalController.dismiss();
@@ -193,7 +195,7 @@ export class UserPage implements OnInit {
             component: SettingNoteLabelPage,
             componentProps: { 
                 targetUserName: this.userName,
-                currentNoteName: this.reddah.appData('usernotename_'+this.userName)
+                currentNoteName: this.reddah.appData('usernotename_'+this.userName+'_'+this.currentUserName)
             }
         });
         await modal.present();
@@ -206,7 +208,7 @@ export class UserPage implements OnInit {
         const modal = await this.modalController.create({
             component: ChatPage,
             componentProps: { 
-                title: this.reddah.appData('usernotename_'+this.userName),
+                title: this.reddah.appData('usernotename_'+this.userName+'_'+this.currentUserName),
                 target: this.userName,
                 
             }

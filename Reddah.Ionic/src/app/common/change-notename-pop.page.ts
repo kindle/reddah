@@ -34,6 +34,6 @@ export class ChangeNoteNamePopPage {
         await modal.present();
         const { data } = await modal.onDidDismiss();
         
-        this.modalController.dismiss(data);
+        //this.modalController.dismiss(data);
     }
 }

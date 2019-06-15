@@ -22,7 +22,7 @@
                 <ion-item lines="none">
                     <ion-label slot="start" class="articleFooter" style="min-width: 300px;">
                         {{bookmark.CreatedOn|date:'yyyy-MM-dd'}} 
-                        {{reddah.appData('usernotename_'+bookmark.OrgUserName)}}
+                        {{reddah.appData('usernotename_'+bookmark.OrgUserName+'_'+this.userName)}}
                     </ion-label>
                 </ion-item> 
             </ion-row>

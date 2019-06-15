@@ -699,9 +699,9 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
                 if(userInfo.Signature!=null)
                     this.toTextCache(userInfo.Signature, `usersignature_${userName}`);
                 if(userInfo.NoteName!=null)
-                    this.toTextCache(userInfo.NoteName, `usernotename_${userName}`);
+                    this.toTextCache(userInfo.NoteName, `usernotename_${userName}_${this.getCurrentUser()}`);
                 if(userInfo.UserName!=this.getCurrentUser()){
-                    this.toTextCache(userInfo.IsFriend?1:0, `userisfriend_${userName}`);
+                    this.toTextCache(userInfo.IsFriend?1:0, `userisfriend_${userName}_${this.getCurrentUser()}`);
                 }
             
             });

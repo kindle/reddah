@@ -72,9 +72,9 @@ export class ContactPage {
                     this.reddah.toImageCache(contact.UserPhoto, `userphoto_${contact.Watch}`);
                 }
 
-                let cname = contact.NoteName ? contact.NoteName : contact.Watch;
+                let cname = contact.NoteName ? contact.NoteName : (contact.UserNickName?contact.UserNickName:contact.Watch);
                 let ch = cname.charAt(0);
-                console.log(ch)
+                //console.log(ch)
                 if(/^[A-Za-z]/.test(ch))//English
                 {
                     contact.s = ch.toLowerCase();
@@ -95,7 +95,7 @@ export class ContactPage {
         this.contacts = [];
         this.groupedContacts = [];
 
-        let sortedContacts = contacts.sort((a,b)=> a.s-b.s);
+        let sortedContacts = contacts.sort((a,b)=> a.s.localeCompare(b.s));
         let currentLetter = false;
         let currentContacts = [];
 
@@ -108,9 +108,11 @@ export class ContactPage {
                 };
                 currentContacts = newGroup.contacts;
                 this.groupedContacts.push(newGroup);
+                
             } 
             currentContacts.push(value);
         });
+
     }
 
     async viewNewFriends(){

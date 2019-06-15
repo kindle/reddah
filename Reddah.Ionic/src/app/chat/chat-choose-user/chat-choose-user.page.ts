@@ -64,7 +64,7 @@ export class ChatChooseUserPage implements OnInit {
             const modal = await this.modalController.create({
                 component: ChatPage,
                 componentProps: { 
-                    title: this.reddah.appData('usernotename_'+targetUsers[0].Watch),
+                    title: this.reddah.appData('usernotename_'+targetUsers[0].Watch+'_'+this.userName),
                     target: targetUsers[0].Watch,
                 }
             });

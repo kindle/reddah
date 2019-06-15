@@ -24,7 +24,7 @@ export class GroupChatOptPage implements OnInit {
     strongReminder=false;
 
     showGroupNickName=true;
-    
+    userName;
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
@@ -35,6 +35,7 @@ export class GroupChatOptPage implements OnInit {
         private alertController: AlertController,
         private translate: TranslateService,
     ) { 
+        this.userName = this.reddah.getCurrentUser();
     }
 
     ngOnInit() {
