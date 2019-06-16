@@ -87,6 +87,10 @@
             {
               "xml": "<feature name=\"NativeAudio\"><param name=\"android-package\" value=\"com.rjfun.cordova.plugin.nativeaudio.NativeAudio\" /></feature>",
               "count": 2
+            },
+            {
+              "xml": "<feature name=\"Permissions\"><param name=\"android-package\" value=\"com.android.plugins.Permissions\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -268,6 +272,9 @@
       "PACKAGE_NAME": "com.reddah.app"
     },
     "cordova-plugin-nativeaudio": {
+      "PACKAGE_NAME": "com.reddah.app"
+    },
+    "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "com.reddah.app"
     }
   },
@@ -724,6 +731,14 @@
       "clobbers": [
         "window.plugins.NativeAudio"
       ]
+    },
+    {
+      "id": "cordova-plugin-android-permissions.Permissions",
+      "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+      "pluginId": "cordova-plugin-android-permissions",
+      "clobbers": [
+        "cordova.plugins.permissions"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -749,6 +764,7 @@
     "cordova-plugin-media": "5.0.2",
     "cordova-plugin-device-motion": "2.0.1",
     "cordova-plugin-shake": "0.6.0",
-    "cordova-plugin-nativeaudio": "3.0.9"
+    "cordova-plugin-nativeaudio": "3.0.9",
+    "cordova-plugin-android-permissions": "1.0.0"
   }
 }

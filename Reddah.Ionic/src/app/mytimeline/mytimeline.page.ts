@@ -100,6 +100,10 @@ export class MyTimeLinePage implements OnInit {
                 }
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
+                //cache preview images
+                article.Content.split('$$$').forEach((previewImageUrl)=>{
+                    this.reddah.toImageCache(previewImageUrl, previewImageUrl)
+                });
                 this.GetCommentsData(article.Id);
             }
             loading.dismiss();
@@ -117,11 +121,13 @@ export class MyTimeLinePage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
         .subscribe(timeline => 
         {
-            this.loadedIds = [];
-            this.articles = [];
             for(let article of timeline){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
+                //cache preview images
+                article.Content.split('$$$').forEach((previewImageUrl)=>{
+                    this.reddah.toImageCache(previewImageUrl, previewImageUrl)
+                });
             }
             if(event)
                 event.target.complete();
@@ -133,6 +139,7 @@ export class MyTimeLinePage implements OnInit {
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("MyTimeLinePage");
         this.loadedIds = [];
+        this.articles = [];
         this.getMyTimeline(event);
     }
 
@@ -140,8 +147,6 @@ export class MyTimeLinePage implements OnInit {
         setTimeout(() => {
             this.clearCacheAndReload(event);
         }, 2000);
-        //debug 
-        //this.reddah.drawCanvasBackground("");
     }
 
     @ViewChild('headerStart')
@@ -195,15 +200,9 @@ export class MyTimeLinePage implements OnInit {
         await popover.present();
         const { data } = await popover.onDidDismiss();
         if(data==1||data==2){
+            alert(data)
             //data=1: take a photo, data=2: lib
             this.goPost(data);
-            /*if(data!=null){
-                this.router.navigate(['/post'], {
-                queryParams: {
-                    postType: data
-                }
-                });
-            }*/
         }
     }
 
@@ -216,7 +215,9 @@ export class MyTimeLinePage implements OnInit {
         await postModal.present();
         const { data } = await postModal.onDidDismiss();
         if(data||!data){
-            this.clearCacheAndReload(null);
+            alert(data)
+            //this.clearCacheAndReload(null);
+            this.doRefresh(null);
         }
     }
 

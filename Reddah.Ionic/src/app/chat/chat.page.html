@@ -21,8 +21,8 @@
                         <div class="chat-box-me-1" *ngIf="comment.Type==1" (click)="play(comment.Content)">
                             <ion-icon slot="start" name="ios-wifi" size="large" style="width:20px;height:18px;transform: rotate(-90deg);margin:auto;"></ion-icon>
                             <div style="display: flex; line-height:38px;">
-                                <div style="width:5px;" *ngFor="let i of getArray(comment.Duration)">&nbsp;</div>
-                                <div>{{comment.Duration}}''</div>
+                                <div style="width:5px;" *ngFor="let i of reddah.getArray(comment.Duration)">&nbsp;</div>
+                                <div>{{comment.Duration<0?0:comment.Duration}}''</div>
                             </div>
                         </div>
                         <div class="chat-arrow-right" style="flex:auto 0;"></div>
@@ -41,8 +41,8 @@
                         <div class="chat-box-others-1" *ngIf="comment.Type==1" (click)="play(comment.Content)">
                             <ion-icon name="ios-wifi" size="large" style="width:20px;height:18px;transform: rotate(90deg);margin:auto;"></ion-icon>
                             <div style="display: flex; line-height:38px;">
-                                <div>{{comment.Duration}}''</div>
-                                <div style="width:5px;" *ngFor="let i of getArray(comment.Duration)">&nbsp;</div>
+                                <div>{{comment.Duration}}<0?0:comment.Duration''</div>
+                                <div style="width:5px;" *ngFor="let i of reddah.getArray(comment.Duration)">&nbsp;</div>
                             </div>
                         </div>
                         <div class="parent3" *ngIf="comment.Type==2">
@@ -55,5 +55,5 @@
     </ion-grid>
 </ion-content>
 <app-chat-box #chatbox selectedArticleId="{{chatId}}" selectedCommentId="-1"
-    (reloadComments)="childReloadComments($event)"></app-chat-box>
+    (reloadComments)="childReloadComments($event)" *ngIf="chatId>0||(groupChat&&groupChat.Id>0)"></app-chat-box>
 

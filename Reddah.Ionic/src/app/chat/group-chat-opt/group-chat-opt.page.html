@@ -11,7 +11,7 @@
                     <ion-avatar class="userPhoto" (click)="goUser(uname)">
                         <img src="{{reddah.appPhoto['userphoto_'+uname]}}" class="portrait">
                     </ion-avatar>
-                    <ion-label style="margin-top:0;width:65px;color:gray;" text-center>{{reddah.appData('usernotename_'+uname+'_'+this.userName)}}</ion-label>
+                    <ion-label style="margin-top:0;width:65px;color:gray;" text-center>{{reddah.getDisplayName(uname)}}</ion-label>
                 </div>
                 <div style="display: flex;flex-direction: column;">
                     <div>

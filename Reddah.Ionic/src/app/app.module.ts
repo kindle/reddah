@@ -12,6 +12,7 @@ import { AlertController, ActionSheetController,
 
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Crop } from '@ionic-native/crop/ngx';
 import { Camera } from '@ionic-native/Camera/ngx'
 import { File } from '@ionic-native/file/ngx';
@@ -245,6 +246,7 @@ var firebaseConfig = {
         AppUpdate,
         AlertController,
         AuthService,
+        AndroidPermissions,
         Camera,
         Shake,
         Crop,

@@ -15,7 +15,7 @@ import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
 
 import { PostviewerPage } from './postviewer/postviewer.page';
-import { LoadingController, NavController, ModalController, ToastController } from '@ionic/angular';
+import { LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -30,6 +30,7 @@ export class ReddahService {
         private file: File,
         private modalController: ModalController,
         private toastController: ToastController,
+        private platform: Platform,
     ) { }
 
     //******************************** */
@@ -630,10 +631,12 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         let cacheImageName = "";
         if(cachedImagePath!=null){
             cacheImageName = cachedImagePath.replace(this.file.applicationStorageDirectory,"");
+            //cacheImageName = cachedImagePath.replace(this.file.externalRootDirectory+"reddah/","");
         }
         if(cachedImagePath==null||cacheImageName!=webImageName){
             this.fileTransfer = this.transfer.create();  
             let target = this.file.applicationStorageDirectory + webImageName;
+            //let target = this.file.externalRootDirectory+"reddah/" + webImageName;
             this.fileTransfer.download(webUrl, target).then((entry) => {
                 this.localStorageService.store(cacheKey, target);                
                 this.appPhoto[cacheKey] = (<any>window).Ionic.WebView.convertFileSrc(target);
@@ -690,8 +693,8 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
                 if(userInfo.Photo!=null)
                     this.toImageCache(userInfo.Photo, `userphoto_${userName}`);
                           
-                if(userInfo.NickName!=null)
-                    this.toTextCache(userInfo.NickName, `usernickname_${userName}`);
+                if(userInfo.UserNickName!=null)
+                    this.toTextCache(userInfo.UserNickName, `usernickname_${userName}`);
                 if(userInfo.Sex!=null)
                     this.toTextCache(userInfo.Sex, `usersex_${userName}`);
                 if(userInfo.Location!=null)
@@ -711,12 +714,18 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         }
     }
     
+
     GetCache(url){
-        let org = this.localStorageService.retrieve(url);
-        if(org){
-            return (<any>window).Ionic.WebView.convertFileSrc(org);
+        if(this.platform.is('cordova')){
+            let org = this.localStorageService.retrieve(url);
+            if(org){
+                return (<any>window).Ionic.WebView.convertFileSrc(org);
+            }
         }
-        return url;
+        else
+        {
+            return url;
+        }
     }
 
     getSortLetter(text, locale){
@@ -755,5 +764,16 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         var date = new Date();
         return date.getFullYear().toString() + this.complement(date.getMonth() + 1) + this.complement(date.getDate()) + this.complement(date.getHours()) + this.complement(date.getMinutes()) + this.complement(date.getSeconds());
     }
+
+    getDisplayName(userName){
+        let currentUserName = this.getCurrentUser();
+        return this.appData('usernotename_'+userName+"_"+currentUserName) ? this.appData('usernotename_'+userName+"_"+currentUserName) :
+            (this.appData('usernickname_'+userName) ? this.appData('usernickname_'+userName) : userName);
+    }
     
+    getArray(n){
+        if(n==null||n<0)
+            n=0;
+        return new Array(n);
+    }
 }

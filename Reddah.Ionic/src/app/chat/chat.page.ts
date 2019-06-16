@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { InfiniteScroll, Content } from '@ionic/angular';
+import { InfiniteScroll, Content, Platform } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
@@ -23,12 +23,17 @@ export class ChatPage implements OnInit {
 
     @Input() title: any;
     @Input() target: any;
+    
+    @ViewChild('chatbox') chatbox;
 
     userName: string;
     locale: string;
 
     message:string = ''
     messages: object[];
+
+    //placeholder
+    groupChat;
 
     constructor(
         private modalController: ModalController,
@@ -39,6 +44,7 @@ export class ChatPage implements OnInit {
         private nativeAudio: NativeAudio,
         private transfer: FileTransfer, 
         private file: File,
+        private platform: Platform,
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
@@ -61,10 +67,6 @@ export class ChatPage implements OnInit {
         this.getChat();
     }
 
-    getArray(n){
-        return new Array(n);
-    }
-
     @ViewChild('pageTop') pageTop: Content;
     async getChat(){
         let formData = new FormData();
@@ -80,10 +82,15 @@ export class ChatPage implements OnInit {
                         this.pageTop.scrollToBottom(0);
                     }
                 },200)
-                this.messages.forEach((comment:any)=>{
-                    if(comment.Type==1)//audio only
-                        this.preload(comment["Content"]);
-                })
+                if(this.platform.is('cordova'))
+                {
+                    this.messages.forEach((comment:any)=>{
+                        if(comment.Type==1&&comment.Duration>=0)//audio only
+                        {
+                            this.preload(comment["Content"]);   
+                        }
+                    })
+                }
             }
             else{
                 alert(data);
@@ -99,6 +106,8 @@ export class ChatPage implements OnInit {
             this.fileTransfer = this.transfer.create();  
             let target = this.file.externalRootDirectory +"reddah/"+ guidName;
             this.file.checkFile(this.file.externalRootDirectory +"reddah/", guidName)
+            //let target = this.file.applicationStorageDirectory + guidName;
+            //this.file.checkFile(this.file.applicationStorageDirectory, guidName)
             .then(_ =>{
                 this.localStorageService.store(guidName, target);
             })
@@ -116,6 +125,7 @@ export class ChatPage implements OnInit {
 
     async play(audioFileName){
         let target = this.file.externalRootDirectory +"reddah/";
+        //let target = this.file.applicationStorageDirectory;
 
         //error handling, check again
         this.file.checkFile(target, audioFileName)

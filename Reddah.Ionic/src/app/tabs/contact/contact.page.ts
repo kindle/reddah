@@ -62,17 +62,15 @@ export class ContactPage {
             for(let contact of contacts){
                 //check cache first
                 let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${contact.Watch}`);
-                if(cachedUserPhotoPath!=null){
-                    this.reddah.appPhoto["userphoto_"+contact.Watch] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
-                }
-                else{
+                if(cachedUserPhotoPath==null){
                     this.reddah.appPhoto["userphoto_"+contact.Watch] = "assets/icon/anonymous.png";
                 }
                 if(contact.UserPhoto!=null){
                     this.reddah.toImageCache(contact.UserPhoto, `userphoto_${contact.Watch}`);
                 }
 
-                let cname = contact.NoteName ? contact.NoteName : (contact.UserNickName?contact.UserNickName:contact.Watch);
+                let cname = contact.NoteName ? contact.NoteName : 
+                    (contact.UserNickName ? contact.UserNickName : contact.Watch);
                 let ch = cname.charAt(0);
                 //console.log(ch)
                 if(/^[A-Za-z]/.test(ch))//English

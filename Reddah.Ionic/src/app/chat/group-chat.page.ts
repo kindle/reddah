@@ -1,19 +1,22 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { InfiniteScroll, Content } from '@ionic/angular';
+import { InfiniteScroll, Content, Platform } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
 import { GroupChatOptPage } from '../chat/group-chat-opt/group-chat-opt.page';
 import { UserPage } from '../common/user/user.page';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { Media, MediaObject } from '@ionic-native/media/ngx';
 //import { AngularFireDatabase } from 'angularfire2/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 
 
 @Component({
     selector: 'app-group-chat',
-    templateUrl: './group-chat.page.html',
-    styleUrls: ['./group-chat.page.scss'],
+    templateUrl: './chat.page.html',
+    styleUrls: ['./chat.page.scss'],
 })
 export class GroupChatPage implements OnInit {
 
@@ -33,6 +36,10 @@ export class GroupChatPage implements OnInit {
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
+        private transfer: FileTransfer, 
+        private file: File,
+        private media: Media,
+        private platform: Platform,
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
@@ -40,7 +47,8 @@ export class GroupChatPage implements OnInit {
         this.locale = this.reddah.getCurrentLocale();
     }
     
-    
+    chatId = -1;
+    title;
     ngOnInit() {
         //this.db.list('/chat').valueChanges().subscribe(data => {
         //    console.log(data)
@@ -75,6 +83,8 @@ export class GroupChatPage implements OnInit {
                 //this.messages =  data.Message.Comments;
                 //this.groupChat.Id = data.Message.Id;
                 this.groupChat = data.Message;
+                this.title = this.groupChat.Title;
+                this.chatbox.setArticleId(this.groupChat.Id);
                 console.log(this.groupChat);
 
                 setTimeout(() => {
@@ -82,13 +92,62 @@ export class GroupChatPage implements OnInit {
                         this.pageTop.scrollToBottom(0);
                     }
                 },200)
-
+                
                 this.cacheService.clearGroup("ChatChooseGroupPage");
             }
             else{
                 alert(JSON.stringify(data));
             }
         });
+    }
+
+    private fileTransfer: FileTransferObject; 
+    async preload(guidName){
+        let path = this.localStorageService.retrieve(guidName);
+
+        if(path==null){
+            this.fileTransfer = this.transfer.create();  
+            let target = this.file.externalRootDirectory +"reddah/"+ guidName;
+            this.file.checkFile(this.file.externalRootDirectory +"reddah/", guidName)
+            //let target = this.file.applicationStorageDirectory + guidName;
+            //this.file.checkFile(this.file.applicationStorageDirectory, guidName)
+            .then(_ =>{
+                this.localStorageService.store(guidName, target);
+            })
+            .catch(err =>{
+                this.fileTransfer.download("https://login.reddah.com/uploadPhoto/"+guidName, target, true).then((entry) => {
+                    this.localStorageService.store(guidName, target);
+                }, (error) => {
+                    console.log(JSON.stringify(error));
+                    alert(JSON.stringify(error));
+                });
+            });
+        }
+        
+    }
+
+    async play(audioFileName){
+        let target = this.file.externalRootDirectory +"reddah/";
+        //let target = this.file.applicationStorageDirectory;
+
+        //error handling, check again
+        this.file.checkFile(target, audioFileName)
+        .then(_ =>{
+            this.localStorageService.store(audioFileName, target);
+            let player = this.media.create(target.replace(/^file:\/\//, '') + audioFileName);
+            player.play();
+        })
+        .catch(err =>{
+            this.fileTransfer.download("https://login.reddah.com/uploadPhoto/"+audioFileName, target+ audioFileName, true).then((entry) => {
+                this.localStorageService.store(audioFileName, target);
+                let player = this.media.create(target.replace(/^file:\/\//, '') + audioFileName);
+                player.play();
+            }, (error) => {
+                console.log(JSON.stringify(error));
+                alert(JSON.stringify(error));
+            });
+        });
+        
     }
     
     async getGroupChat(){
@@ -104,6 +163,15 @@ export class GroupChatPage implements OnInit {
                         this.pageTop.scrollToBottom(0);
                     }
                 },200)
+                if(this.platform.is('cordova'))
+                {
+                    this.messages.forEach((comment:any)=>{
+                        if(comment.Type==1&&comment.Duration>=0)//audio only
+                        {
+                            this.preload(comment["Content"]);   
+                        }
+                    })
+                }
             }
             else{
                 alert(data);

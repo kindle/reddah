@@ -20,6 +20,10 @@ export class ChatBoxComponent implements OnInit {
     @Output() reloadComments = new EventEmitter();
     @ViewChild('newChatComment') newChatComment;
     
+    setArticleId(id){
+        alert(id);
+        this.selectedArticleId = id;
+    }
     speakDesc="按住 说话";
     commentContent: string;
 
@@ -52,6 +56,7 @@ export class ChatBoxComponent implements OnInit {
 
     async submit() {
         this.commentContent = "";
+        alert(this.selectedArticleId);
         this.reddah.addComments(this.selectedArticleId, this.selectedCommentId, this.newChatComment.value)
         .subscribe(result => 
         {
@@ -158,6 +163,7 @@ export class ChatBoxComponent implements OnInit {
             //let fileName = this.reddah.generateFileName()+".wav";
             let fileName = this.reddah.generateFileName()+".m4a";
             let filePath = this.file.externalRootDirectory.replace(/^file:\/\//, '') + "/reddah/" + fileName;
+            //let filePath = this.file.applicationStorageDirectory.replace(/^file:\/\//, '') + fileName;
             this.audioMediaObj = this.media.create(filePath);
             this.audioMediaObj.startRecord();
             this.audioMediaObj.onSuccess.subscribe(() => {
@@ -181,6 +187,7 @@ export class ChatBoxComponent implements OnInit {
         formData.append("ParentCommentId", JSON.stringify(this.selectedCommentId));
         
         let fullPath = this.file.externalRootDirectory +"reddah/"+ fileName;
+        //let fullPath = this.file.applicationStorageDirectory + fileName;
         
         let temp = this.media.create(fullPath);
         temp.play();

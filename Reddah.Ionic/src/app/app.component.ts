@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Platform, ModalController, AlertController, ActionSheetController, PopoverController, IonRouterOutlet, MenuController } from '@ionic/angular';
+import { Platform, ModalController, AlertController, ActionSheetController, PopoverController, IonRouterOutlet, MenuController, LoadingController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,6 +11,7 @@ import { CacheService } from "ionic-cache";
 import { File } from '@ionic-native/file/ngx';
 import * as firebase from 'firebase';
 //import { Firebase } from '@ionic-native/firebase/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 @Component({
     selector: 'app-root',
@@ -28,14 +29,35 @@ export class AppComponent {
         private actionSheetCtrl: ActionSheetController,
         private alertController: AlertController,
         private popoverCtrl: PopoverController,
+        private loadingController: LoadingController,
         private toast: Toast,
         private router: Router,
         private imageLoaderConfigService: ImageLoaderConfigService,
         private cacheService: CacheService,
         private file: File,
+        private androidPermissions: AndroidPermissions,
         //private firebase: Firebase,
     ) {
         this.initializeApp();
+
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+            result => console.log('Has permission?',result.hasPermission),
+            err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
+        );
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE).then(
+            result => console.log('Has permission?',result.hasPermission),
+            err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
+        );
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO).then(
+            result => console.log('Has permission?',result.hasPermission),
+            err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO)
+        );
+        
+        this.androidPermissions.requestPermissions([
+            this.androidPermissions.PERMISSION.CAMERA, 
+            this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
+            this.androidPermissions.PERMISSION.RECORD_AUDIO,
+        ]);
 
         this.imageLoaderConfigService.useImageTag(true);
         this.imageLoaderConfigService.enableSpinner(false);
@@ -121,60 +143,67 @@ export class AppComponent {
     // active hardware back button
     backButtonEvent() {
         this.platform.backButton.subscribe(async () => {
-          /*try {
-              const element = await this.actionSheetCtrl.getTop();
-              if (element) {
-                  element.dismiss();
-                  return;
-              }
-          } catch (error) {
-          }
+            let popFlag = true;
+            try {
+                const element = await this.actionSheetCtrl.getTop();
+                if (element) {
+                    element.dismiss();
+                    popFlag = false;
+                }
+            } catch (error) {}
 
-          // close popover
-          try {
-              const element = await this.popoverCtrl.getTop();
-              if (element) {
-                  element.dismiss();
-                  return;
-              }
-          } catch (error) {
-          }
-  */
-          // close modal
-          try {
-              const element = await this.modalController.getTop();
-              if (element) {
-                  element.dismiss();
-                  return;
-              }
-          } catch (error) {
-              console.log(error);
+            // close popover
+            try {
+                const element = await this.popoverCtrl.getTop();
+                if (element) {
+                    element.dismiss();
+                    popFlag = false;
+                }
+            } catch (error) {}
 
-          }/*
+            // loading control
+            try {
+                const element = await this.loadingController.getTop();
+                if (element) {
+                    element.dismiss();
+                    popFlag = false;
+                }
+            } catch (error) {}
+            
+            // close modal
+            try {
+                const element = await this.modalController.getTop();
+                if (element) {
+                    element.dismiss();
+                    popFlag = false;
+                }
+            } catch (error) {}
 
-          // close side menua
-          try {
-              const element = await this.menu.getOpen();
-              if (element !== null) {
-                  this.menu.close();
-                  return;
+            //close side menua
+            try {
+                const element = await this.menu.getOpen();
+                if (element !== null) {
+                    this.menu.close();
+                    popFlag = false;
 
-              }
+                }
 
-          } catch (error) {
+            } catch (error) {}
 
-          }*/
-
-          if( this.router.url.startsWith('/tabs/(home:home)')) 
-          {
-              if(this.alertShown==false){
-                  this.presentAlertConfirm();  
-              }
-          }
-          else if(this.routerOutlet && this.routerOutlet.canGoBack())
-          {
-              this.routerOutlet.pop();
-          }  
+            alert(popFlag)
+            if(popFlag)
+            {
+                if( this.router.url.startsWith('/tabs/(home:home)')) 
+                {
+                    if(this.alertShown==false){
+                        this.presentAlertConfirm();  
+                    }
+                }
+                else if(this.routerOutlet && this.routerOutlet.canGoBack())
+                {
+                    this.routerOutlet.pop();
+                }  
+            }
         });
     }
 

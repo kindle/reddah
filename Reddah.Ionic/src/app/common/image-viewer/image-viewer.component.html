@@ -2,13 +2,13 @@
     <ion-title>{{ imgTitle }}</ion-title>
 </ion-item>
 <ion-content [forceOverscroll]="false" color="dark" fullscreen="true" (click)="closeModal($event)">
-    <ion-slides [options]="slideOpts" [pager]="imgSourceArray.length>1">
+    <ion-slides [options]="slideOpts" [pager]="imgSourceArray.length>1" (ionSlideDidChange)="ionSlideWillChange()">
         <ion-slide *ngFor="let item of enhanceImgSourceArray" (press)="showMenu(item)">
             <div class="swiper-zoom-container">
                 <img [src]="item.webPreviewUrl" height="100vh" *ngIf="item.isOrgViewed!=1">
                 <img [src]="item.localhostOrgImageUrl" height="100vh" *ngIf="item.isOrgViewed==1">
             </div>
-            <ion-item no-padding style="position: absolute; bottom: 40px;" color="dark" *ngIf="item.isOrgViewed!=1&&showDownload">
+            <ion-item no-padding style="position: absolute; bottom: 40px;display:none;" color="dark" *ngIf="item.isOrgViewed!=1&&showDownload">
                 <ion-title id="downloadOrgImage" (click)="downloadOrgImage(item)" *ngIf="item.isOrgViewed==0">查看原图</ion-title>
                 <ion-title id="downloadOrgImage" (dblclick)="downloadOrgImage(item)" *ngIf="item.isOrgViewed==2">正在下载···</ion-title>
             </ion-item>

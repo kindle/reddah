@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, ToastController, ActionSheetController } from '@ionic/angular';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { ModalController, ToastController, ActionSheetController, Slides } from '@ionic/angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -67,6 +67,10 @@ export class ImageViewerComponent implements OnInit {
                 }
             }
         }
+
+        if(this.index>=0&&this.index<this.enhanceImgSourceArray.length){
+            this.downloadOrgImage(this.enhanceImgSourceArray[this.index]);
+        }
     }
 
     org(src){
@@ -124,6 +128,19 @@ export class ImageViewerComponent implements OnInit {
           await actionSheet.present();
     }
 
+    @ViewChild(Slides) slides: Slides;
+
+    ionSlideWillChange(){
+        this.slides.getActiveIndex().then(index=>
+        {
+            if(index>=0&&index<this.enhanceImgSourceArray.length){
+                let item = this.enhanceImgSourceArray[index];
+                if(item.isOrgViewed==0)
+                    this.downloadOrgImage(item);
+            }
+        });
+        
+    }
     //loadProgress : any;
 
     async downloadOrgImage(item) {
@@ -137,8 +154,11 @@ export class ImageViewerComponent implements OnInit {
         let orgImageUrl = item.webPreviewUrl.replace("///","https://").replace("_reddah_preview","");
         let orgImageFileName = item.previewImageFileName.replace("_reddah_preview","");
         this.fileTransfer.download(orgImageUrl, this.file.applicationStorageDirectory + orgImageFileName).then((entry) => {
+        //this.fileTransfer.download(orgImageUrl, this.file.externalRootDirectory+"reddah/" + orgImageFileName).then((entry) => {
             let localFileOrgImageUrl = this.file.applicationStorageDirectory + orgImageFileName;
+            //let localFileOrgImageUrl = this.file.externalRootDirectory+"reddah/" + orgImageFileName;
             this.localStorageService.store(item.webPreviewUrl, localFileOrgImageUrl);
+            this.reddah.appPhoto[item.webPreviewUrl] = (<any>window).Ionic.WebView.convertFileSrc(localFileOrgImageUrl);
             for(let i=0;i<this.imgSourceArray.length;i++){
                 if(this.imgSourceArray[i]===item.webPreviewUrl){
                     let localhostOrgImageUrl = (<any>window).Ionic.WebView.convertFileSrc(localFileOrgImageUrl);
