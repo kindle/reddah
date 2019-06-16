@@ -40,24 +40,27 @@ export class AppComponent {
     ) {
         this.initializeApp();
 
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
-            result => console.log('Has permission?',result.hasPermission),
-            err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
-        );
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE).then(
-            result => console.log('Has permission?',result.hasPermission),
-            err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
-        );
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO).then(
-            result => console.log('Has permission?',result.hasPermission),
-            err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO)
-        );
-        
-        this.androidPermissions.requestPermissions([
-            this.androidPermissions.PERMISSION.CAMERA, 
-            this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
-            this.androidPermissions.PERMISSION.RECORD_AUDIO,
-        ]);
+        if(this.platform.is('cordova'))
+        {
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+                result => console.log('Has permission?',result.hasPermission),
+                err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
+            );
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE).then(
+                result => console.log('Has permission?',result.hasPermission),
+                err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
+            );
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO).then(
+                result => console.log('Has permission?',result.hasPermission),
+                err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO)
+            );
+            
+            this.androidPermissions.requestPermissions([
+                this.androidPermissions.PERMISSION.CAMERA, 
+                this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
+                this.androidPermissions.PERMISSION.RECORD_AUDIO,
+            ]);
+        }
 
         this.imageLoaderConfigService.useImageTag(true);
         this.imageLoaderConfigService.enableSpinner(false);
@@ -190,7 +193,7 @@ export class AppComponent {
 
             } catch (error) {}
 
-            alert(popFlag)
+            //alert(popFlag)
             if(popFlag)
             {
                 if( this.router.url.startsWith('/tabs/(home:home)')) 

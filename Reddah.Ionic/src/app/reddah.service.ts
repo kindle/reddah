@@ -630,13 +630,13 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         let webImageName = webUrl.replace("https://login.reddah.com/uploadPhoto/","");
         let cacheImageName = "";
         if(cachedImagePath!=null){
-            cacheImageName = cachedImagePath.replace(this.file.applicationStorageDirectory,"");
-            //cacheImageName = cachedImagePath.replace(this.file.externalRootDirectory+"reddah/","");
+            //cacheImageName = cachedImagePath.replace(this.file.applicationStorageDirectory,"");
+            cacheImageName = cachedImagePath.replace(this.file.externalRootDirectory+"reddah/","");
         }
         if(cachedImagePath==null||cacheImageName!=webImageName){
             this.fileTransfer = this.transfer.create();  
-            let target = this.file.applicationStorageDirectory + webImageName;
-            //let target = this.file.externalRootDirectory+"reddah/" + webImageName;
+            //let target = this.file.applicationStorageDirectory + webImageName;
+            let target = this.file.externalRootDirectory+"reddah/" + webImageName;
             this.fileTransfer.download(webUrl, target).then((entry) => {
                 this.localStorageService.store(cacheKey, target);                
                 this.appPhoto[cacheKey] = (<any>window).Ionic.WebView.convertFileSrc(target);
@@ -775,5 +775,19 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         if(n==null||n<0)
             n=0;
         return new Array(n);
+    }
+
+    async CommonCache(url, key, fallbackImage){
+        //check user photo cache
+        let cachedUserPhotoPath = this.localStorageService.retrieve(key);
+        if(cachedUserPhotoPath!=null){
+            this.appPhoto[key] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
+        }
+        else{
+            this.appPhoto[key] = fallbackImage;
+        }
+        if(url!=null){
+            this.toImageCache(url, key);
+        }
     }
 }

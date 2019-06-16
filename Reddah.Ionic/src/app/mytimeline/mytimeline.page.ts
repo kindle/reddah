@@ -87,22 +87,14 @@ export class MyTimeLinePage implements OnInit {
             this.commentData = new Map();
 
             for(let article of timeline){
-                //check cache first
-                let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${article.UserName}`);
-                if(cachedUserPhotoPath!=null){
-                    this.reddah.appPhoto["userphoto_"+article.UserName] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
-                }
-                else{
-                    this.reddah.appPhoto["userphoto_"+article.UserName] = "assets/icon/anonymous.png";
-                }
-                if(article.UserPhoto!=null){
-                    this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
-                }
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
-                //cache preview images
+                
+                //cache user image
+                this.reddah.CommonCache(article.UserPhoto, `userphoto_${article.UserName}`,"assets/icon/anonymous.png");
+                //cache preview image
                 article.Content.split('$$$').forEach((previewImageUrl)=>{
-                    this.reddah.toImageCache(previewImageUrl, previewImageUrl)
+                    this.reddah.CommonCache(previewImageUrl, previewImageUrl,"assets/icon/noimage.jpg");
                 });
                 this.GetCommentsData(article.Id);
             }
@@ -124,9 +116,12 @@ export class MyTimeLinePage implements OnInit {
             for(let article of timeline){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
-                //cache preview images
+                
+                //cache user image
+                this.reddah.CommonCache(article.UserPhoto, `userphoto_${article.UserName}`,"assets/icon/anonymous.png");
+                //cache preview image
                 article.Content.split('$$$').forEach((previewImageUrl)=>{
-                    this.reddah.toImageCache(previewImageUrl, previewImageUrl)
+                    this.reddah.CommonCache(previewImageUrl, previewImageUrl,"assets/icon/noimage.jpg");
                 });
             }
             if(event)
