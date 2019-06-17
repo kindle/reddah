@@ -11,14 +11,14 @@ import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
 //import { AngularFireDatabase } from 'angularfire2/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
-
+import { ChatBase } from './chat.page';
 
 @Component({
     selector: 'app-group-chat',
     templateUrl: './chat.page.html',
     styleUrls: ['./chat.page.scss'],
 })
-export class GroupChatPage implements OnInit {
+export class GroupChatPage extends ChatBase implements OnInit {
 
     @Input() targetUsers: any;
     @Input() groupChat;
@@ -43,6 +43,7 @@ export class GroupChatPage implements OnInit {
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
+        super();
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }
@@ -62,7 +63,10 @@ export class GroupChatPage implements OnInit {
             this.createGroupChat();
         }
         else{
+            console.log(this.groupChat)
             this.getGroupChat();
+            this.title = this.groupChat.Title;
+            this.chatId = this.groupChat.Id;
         }
         
     }
@@ -79,13 +83,12 @@ export class GroupChatPage implements OnInit {
         this.reddah.createGroupChat(formData).subscribe(data=>{
             if(data.Success==0)
             {
-                console.log(data);
+                console.log("asdf"+data);
                 //this.messages =  data.Message.Comments;
                 //this.groupChat.Id = data.Message.Id;
                 this.groupChat = data.Message;
                 this.title = this.groupChat.Title;
-                this.chatbox.setArticleId(this.groupChat.Id);
-                console.log(this.groupChat);
+                this.chatId = this.groupChat.Id;
 
                 setTimeout(() => {
                     if(this.pageTop.scrollToBottom){

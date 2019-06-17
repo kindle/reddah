@@ -32,6 +32,7 @@ import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions } from '@ion
 import { Media, MediaObject } from '@ionic-native/media/ngx'; 
 import { Shake } from '@ionic-native/shake/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import { VideoPlayer } from '@ionic-native/video-player/ngx';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -270,6 +271,7 @@ var firebaseConfig = {
         MediaCapture,
         Media,
         NativeAudio,
+        VideoPlayer,
         //Firebase,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     ],

@@ -1,15 +1,15 @@
 <ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop style="background-color:white;">
     <div class="headerStart" #headerStart slot="fixed">
         <ion-item color="transparent" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
-            <ion-icon name="ios-arrow-back" slot="start" (click)="goback()" class="backbutton"></ion-icon>
+            <ion-icon name="ios-arrow-back" color="tertiary" slot="start" (click)="goback()" class="backbutton"></ion-icon>
             <ion-label></ion-label>
-            <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
+            <ion-icon name="camera" color="tertiary" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll slot="fixed">
         <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload($event)">
             <ion-icon name="ios-arrow-back" slot="start" (click)="goback()" class="backbutton"></ion-icon>
-            <ion-label text-center>朋友圈</ion-label>
+            <ion-label>朋友圈</ion-label>
             <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
@@ -35,10 +35,10 @@
                     </ion-card-title>
                 </ion-card-header>
                 <ion-item no-padding style="padding: 0;" lines="none" *ngIf="article.Title.length>0&&article.Title.length<100">
-                    <div style="background-color: white; padding: 5px 0;margin-bottom:5px;width:93%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                    <div style="background-color: white; padding: 5px 0;margin-bottom:5px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
                 </ion-item>
                 <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
-                    <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 5px;margin-bottom:5px;width:93%;" [innerHTML]="reddah.summary(article.Title,50)"></div>
+                    <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 5px;margin-bottom:5px;width:96%;" [innerHTML]="reddah.summary(article.Title,50)"></div>
                 </ion-item>
                 <ion-card-content style="display:block;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>6">
@@ -64,7 +64,7 @@
                 </ion-card-content>
                 
                 <ion-item no-padding lines="none" style="margin-top:5px;">
-                    <ion-note color="dark">{{article.CreatedOn | date: 'yyyy-MM-dd hh:mm:ss'}}</ion-note>
+                    <ion-note color="dark">{{reddah.getSendTime(article.CreatedOn| date: 'yyyy-MM-dd hh:mm:ss')}}</ion-note>
                     <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
                 </ion-item>
                 

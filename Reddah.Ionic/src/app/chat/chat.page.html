@@ -32,6 +32,11 @@
                             <img [src]="comment.Content" class="picture3" (click)="viewer(0, [comment.Content])">
                         </div>
                     </div>
+                    <div class="arrow-box-right-photo" *ngIf="comment.Type==3">
+                        <div class="parent3-me">
+                            <video id="video_{{comment.Id}}" (click)="playVideo(comment.Content)" [src]="comment.Content" class="picture3"></video>
+                        </div>
+                    </div>
                 </div>
                 <div class="container-left" *ngIf="userName!=comment.UserName">
                     <img src="{{reddah.appPhoto['userphoto_'+comment.UserName]}}" class="portrait" (click)="goUser(comment.UserName)">
@@ -48,12 +53,15 @@
                         <div class="parent3" *ngIf="comment.Type==2">
                             <img [src]="comment.Content" class="picture3" (click)="viewer(0, [comment.Content])">
                         </div>
+                        <div class="parent3" *ngIf="comment.Type==3">
+                            <video id="video_{{comment.Id}}" (click)="reddah.playVideo(comment.Id)" [src]="comment.Content" class="picture3"></video>
+                        </div>
                     </div>
                 </div>
             </ion-col>
         </ion-row>
     </ion-grid>
 </ion-content>
-<app-chat-box #chatbox selectedArticleId="{{chatId}}" selectedCommentId="-1"
+<app-chat-box #chatbox [(selectedArticleId)]="chatId" selectedCommentId="-1"
     (reloadComments)="childReloadComments($event)" *ngIf="chatId>0||(groupChat&&groupChat.Id>0)"></app-chat-box>
 

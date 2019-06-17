@@ -13,13 +13,33 @@ import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
+import { setupProvideEvents } from '@ionic/angular/dist/providers/events';
+import { baseDirectiveCreate } from '@angular/core/src/render3/instructions';
+import { VideoPlayer } from '@ionic-native/video-player';
+
+export class ChatBase{
+    constructor(
+        
+    ){
+
+    }
+
+    async playVideo(src){
+        alert(src);
+        VideoPlayer.play(src).then(() => {
+            alert('video completed');
+        }).catch(err => {
+            alert(err);
+        });
+    }
+}
 
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.page.html',
     styleUrls: ['./chat.page.scss'],
 })
-export class ChatPage implements OnInit {
+export class ChatPage extends ChatBase implements OnInit  {
 
     @Input() title: any;
     @Input() target: any;
@@ -48,6 +68,7 @@ export class ChatPage implements OnInit {
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
+        super();
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }
@@ -211,4 +232,7 @@ export class ChatPage implements OnInit {
     
         return await modal.present();
     }
+
+    
 }
+

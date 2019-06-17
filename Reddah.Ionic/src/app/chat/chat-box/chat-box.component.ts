@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angu
 import { ModalController, Platform } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from "ionic-cache";
-import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions } from '@ionic-native/media-capture';
+import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions,CaptureVideoOptions } from '@ionic-native/media-capture';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx'; 
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -20,10 +20,6 @@ export class ChatBoxComponent implements OnInit {
     @Output() reloadComments = new EventEmitter();
     @ViewChild('newChatComment') newChatComment;
     
-    setArticleId(id){
-        alert(id);
-        this.selectedArticleId = id;
-    }
     speakDesc="按住 说话";
     commentContent: string;
 
@@ -56,7 +52,6 @@ export class ChatBoxComponent implements OnInit {
 
     async submit() {
         this.commentContent = "";
-        alert(this.selectedArticleId);
         this.reddah.addComments(this.selectedArticleId, this.selectedCommentId, this.newChatComment.value)
         .subscribe(result => 
         {
@@ -103,6 +98,11 @@ export class ChatBoxComponent implements OnInit {
                 await this.takePhoto();
                 break;
             case 3: 
+                await this.fromVideoLib();
+                break;
+            case 4: 
+                await this.takeVideo();
+                break;
             default: 
                 break;
         }
@@ -111,10 +111,10 @@ export class ChatBoxComponent implements OnInit {
     chatFunctionGroups = [
         [
             {id:1, icon:'images',name:'相册'},
-            {id:2, icon:'camera',name:'拍摄'},
-            {id:3, icon:'videocam',name:'视频通话'},
-            {id:4, icon:'pin',name:'位置'},
-            {id:5, icon:'gift',name:'红包'},
+            {id:2, icon:'camera',name:'拍照片'},
+            {id:3, icon:'play-circle',name:'视频库'},
+            {id:4, icon:'videocam',name:'拍视频'},
+            {id:5, icon:'pin',name:'位置'},
             {id:6, icon:'repeat',name:'转账'},
             {id:7, icon:'mic',name:'语音输入'},
             {id:8, icon:'cube',name:'我的收藏'}
@@ -292,23 +292,6 @@ export class ChatBoxComponent implements OnInit {
 */
 
     formData;
-    async takePhoto(){
-        const options: CameraOptions = {
-            quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
-            encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE,
-            correctOrientation: true
-        }
-        
-        Camera.getPicture(options).then((imageData) => {
-            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
-            this.addPhotoToFormData(data);
-        }, (err) => {
-            console.log(JSON.stringify(err));
-        });
-        
-    }
 
     async fromLib()
     {
@@ -326,16 +309,71 @@ export class ChatBoxComponent implements OnInit {
             this.addPhotoToFormData(data);
         }, (err) => {
             console.log(JSON.stringify(err));
-            alert(JSON.stringify(err));
+            //alert(JSON.stringify(err));
         });
         
     }
 
-    addPhotoToFormData(photo){
+    async takePhoto(){
+        const options: CameraOptions = {
+            quality: 100,
+            destinationType: Camera.DestinationType.FILE_URI,
+            encodingType: Camera.EncodingType.JPEG,
+            mediaType: Camera.MediaType.PICTURE,
+            correctOrientation: true
+        }
+        
+        Camera.getPicture(options).then((imageData) => {
+            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
+            this.addPhotoToFormData(data);
+        }, (err) => {
+            console.log(JSON.stringify(err));
+        });
+
+    }
+
+    async fromVideoLib()
+    {
+        const options: CameraOptions = {
+            quality: 100,
+            destinationType: Camera.DestinationType.FILE_URI,
+            mediaType: Camera.MediaType.VIDEO,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            correctOrientation: true
+        }
+        
+        Camera.getPicture(options).then((imageData) => {
+            let data = {fileUrl: "file://"+imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
+            alert(JSON.stringify(data));
+            this.addVideoToFormData(data);
+        }, (err) => {
+            console.log(JSON.stringify(err));
+            //alert(JSON.stringify(err));
+        });
+    }
+
+    async takeVideo(){
+        let options: CaptureVideoOptions = { limit: 1, duration: 60, quality: 100 };									
+        MediaCapture.captureVideo(options).then(									
+            (mediaFiles: MediaFile[]) => {
+                //alert(JSON.stringify(mediaFiles));
+                let data = {fileUrl: mediaFiles[0].fullPath, webUrl: (<any>window).Ionic.WebView.convertFileSrc(mediaFiles[0].fullPath)};
+                alert(mediaFiles[0].fullPath);
+                this.addVideoToFormData(data);
+            },									
+            (err: CaptureError) => { 
+                console.log('error:'+JSON.stringify(err))
+                alert(JSON.stringify(err));
+            }
+        );
+    }
+
+    addPhotoToFormData(photo)
+    {
 //alert(JSON.stringify(photo));
         this.formData = new FormData();
         //append org photo form data
-        this.prepareData(photo.fileUrl, photo.fileUrl, 1);
+        this.prepareData(photo.fileUrl, photo.fileUrl, 1, 2);
 
         //append preview photo form data
         let orgFileName = photo.fileUrl.substring(photo.fileUrl.lastIndexOf('/')+1);
@@ -356,12 +394,18 @@ export class ChatBoxComponent implements OnInit {
         } as ImageResizerOptions;
         ImageResizer
             .resize(options)
-            .then((filePath: string) => this.prepareData(filePath, photo.fileUrl+"_reddah_preview",2))
+            .then((filePath: string) => this.prepareData(filePath, photo.fileUrl+"_reddah_preview", 2, 2))
             .catch(e => alert(e));
-
     }
 
-    prepareData(filePath, formKey, step) {
+    addVideoToFormData(data)
+    {
+        this.formData = new FormData();
+        this.prepareData(data.fileUrl, data.fileUrl, 2, 3);
+    }
+
+    // type: 0:text, 1:audio, 2:image, 3:video
+    prepareData(filePath, formKey, step, type) {
 //alert(filePath+"@@"+formKey);
         this.file.resolveLocalFilesystemUrl(filePath)
         .then(entry => {
@@ -376,7 +420,7 @@ export class ChatBoxComponent implements OnInit {
             //alert(formKey+"_"+file.name);
                     if(step==2){
                         setTimeout(() => {
-                            this.submit_photo_comment();
+                            this.submit_comment(type);
                         },1000)
                     }
                         
@@ -389,9 +433,11 @@ export class ChatBoxComponent implements OnInit {
         });
     }
 
-    async submit_photo_comment() {
+    // type: 0:text, 1:audio, 2:image, 3:video
+    async submit_comment(type) {
         this.formData.append("ArticleId", JSON.stringify(this.selectedArticleId));
         this.formData.append("CommentId", JSON.stringify(this.selectedCommentId));
+        this.formData.append("FileType", JSON.stringify(type));
         this.reddah.addPhotoComments(this.formData)
         .subscribe(result => 
         {

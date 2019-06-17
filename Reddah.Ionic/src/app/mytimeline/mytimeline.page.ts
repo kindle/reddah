@@ -195,7 +195,6 @@ export class MyTimeLinePage implements OnInit {
         await popover.present();
         const { data } = await popover.onDidDismiss();
         if(data==1||data==2){
-            alert(data)
             //data=1: take a photo, data=2: lib
             this.goPost(data);
         }
@@ -210,7 +209,6 @@ export class MyTimeLinePage implements OnInit {
         await postModal.present();
         const { data } = await postModal.onDidDismiss();
         if(data||!data){
-            alert(data)
             //this.clearCacheAndReload(null);
             this.doRefresh(null);
         }
