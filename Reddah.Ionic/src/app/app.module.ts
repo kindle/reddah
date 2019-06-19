@@ -32,7 +32,6 @@ import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions } from '@ion
 import { Media, MediaObject } from '@ionic-native/media/ngx'; 
 import { Shake } from '@ionic-native/shake/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
-import { VideoPlayer } from '@ionic-native/video-player/ngx';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -50,7 +49,9 @@ import { LocalePage } from './common/locale/locale.page';
 import { SafePipe } from './safe.pipe';
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { ImageViewerComponent } from './common/image-viewer/image-viewer.component';
+import { VideoViewerComponent } from './common/video-viewer/video-viewer.component';
 import { LoginPage } from './login/login.page';
+import { RegisterPage } from './register/register.page';
 import { ScanPage } from './common/scan/scan.page';
 import { AuthService } from './auth.service';
 import { AddCommentPage } from './postviewer/add-comment/add-comment.page';
@@ -133,7 +134,7 @@ var firebaseConfig = {
         NewFriendPage,
         PostviewerPage,
         SafePipe,
-        ImageViewerComponent,
+        ImageViewerComponent,VideoViewerComponent,
         LoginPage,
         CommentComponent,
         CommentTimelineComponent,
@@ -167,6 +168,7 @@ var firebaseConfig = {
         QrcardPage,
         SettingAccountPage,
         SettingPrivacyPage,
+        RegisterPage,
     ],
     entryComponents: [
         BookmarkPage,
@@ -174,7 +176,7 @@ var firebaseConfig = {
         LocalePage,
         ChooseUserPage,
         PostviewerPage,
-        ImageViewerComponent,
+        ImageViewerComponent,VideoViewerComponent,
         LoginPage,
         AddCommentPage,
         AddFriendPage,
@@ -215,6 +217,7 @@ var firebaseConfig = {
         QrcardPage,
         SettingAccountPage,
         SettingPrivacyPage,
+        RegisterPage,
     ],
     imports: [
         BrowserModule, 
@@ -271,7 +274,6 @@ var firebaseConfig = {
         MediaCapture,
         Media,
         NativeAudio,
-        VideoPlayer,
         //Firebase,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     ],

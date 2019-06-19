@@ -509,6 +509,7 @@ namespace Reddah.Web.Login.Controllers
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 int articleId = js.Deserialize<int>(HttpContext.Current.Request["ArticleId"]);
                 int parentCommentId = js.Deserialize<int>(HttpContext.Current.Request["CommentId"]);
+                int fileType = js.Deserialize<int>(HttpContext.Current.Request["FileType"]);//2:image,3videos
 
                 Dictionary<string, string> imageUrls = new Dictionary<string, string>();
                 HttpFileCollection hfc = HttpContext.Current.Request.Files;
@@ -575,6 +576,8 @@ namespace Reddah.Web.Login.Controllers
                                         imageUrls.Add(guid.Replace("_reddah_preview", ""), "///login.reddah.com" + url);
                                     }
                                 }
+                                if (fileType == 3)
+                                    previewFileName = "https://login.reddah.com" + url; ;
                             }
                             catch (Exception ex)
                             {
@@ -589,7 +592,7 @@ namespace Reddah.Web.Login.Controllers
                             Content = previewFileName,
                             CreatedOn = DateTime.Now,
                             UserName = jwtResult.JwtUser.User,
-                            Type = 2,
+                            Type = fileType,
                         });
 
 

@@ -91,6 +91,10 @@
             {
               "xml": "<feature name=\"Permissions\"><param name=\"android-package\" value=\"com.android.plugins.Permissions\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"StreamingMedia\"><param name=\"android-package\" value=\"com.hutchind.cordova.plugins.streamingmedia.StreamingMedia\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -185,12 +189,24 @@
             {
               "xml": "<activity android:name=\"com.soundcloud.android.crop.CropImageActivity\" />",
               "count": 2
+            },
+            {
+              "xml": "<activity android:configChanges=\"orientation|screenSize\" android:label=\"Simple Audio Stream\" android:name=\"com.hutchind.cordova.plugins.streamingmedia.SimpleAudioStream\" />",
+              "count": 1
+            },
+            {
+              "xml": "<activity android:configChanges=\"orientation|screenSize\" android:label=\"Simple Video Stream\" android:name=\"com.hutchind.cordova.plugins.streamingmedia.SimpleVideoStream\" />",
+              "count": 1
             }
           ],
           "/manifest": [
             {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
               "count": 2
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+              "count": 1
             }
           ],
           "application": [
@@ -275,6 +291,9 @@
       "PACKAGE_NAME": "com.reddah.app"
     },
     "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.reddah.app"
+    },
+    "cordova-plugin-streaming-media": {
       "PACKAGE_NAME": "com.reddah.app"
     }
   },
@@ -739,6 +758,14 @@
       "clobbers": [
         "cordova.plugins.permissions"
       ]
+    },
+    {
+      "id": "cordova-plugin-streaming-media.StreamingMedia",
+      "file": "plugins/cordova-plugin-streaming-media/www/StreamingMedia.js",
+      "pluginId": "cordova-plugin-streaming-media",
+      "clobbers": [
+        "streamingMedia"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -765,6 +792,7 @@
     "cordova-plugin-device-motion": "2.0.1",
     "cordova-plugin-shake": "0.6.0",
     "cordova-plugin-nativeaudio": "3.0.9",
-    "cordova-plugin-android-permissions": "1.0.0"
+    "cordova-plugin-android-permissions": "1.0.0",
+    "cordova-plugin-streaming-media": "2.2.0"
   }
 }

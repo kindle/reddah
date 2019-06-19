@@ -109,8 +109,21 @@
 .parent3-me {
     width:61.8%;
     right:0;
+    overflow: hidden;
+    max-height: 230px;
 }
  
 .picture3 {
     min-width: 100%;
+}
+
+.parent3-video-me {
+    width:61.8%;
+    right:0;
+    overflow: hidden;
+    max-height: 230px;
+}
+
+.video3 {
+    width: 100%;
 }

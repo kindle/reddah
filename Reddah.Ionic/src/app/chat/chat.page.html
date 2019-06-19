@@ -33,8 +33,9 @@
                         </div>
                     </div>
                     <div class="arrow-box-right-photo" *ngIf="comment.Type==3">
-                        <div class="parent3-me">
-                            <video id="video_{{comment.Id}}" (click)="playVideo(comment.Content)" [src]="comment.Content" class="picture3"></video>
+                        <div class="parent3-video-me">
+                            <video (click)="playVideo(comment)" [src]="comment.Content" class="video3"></video>
+                            <img src="assets/icon/playbutton.png" style="width:80px;position:absolute;left:50%;top:75px;">
                         </div>
                     </div>
                 </div>
@@ -54,7 +55,7 @@
                             <img [src]="comment.Content" class="picture3" (click)="viewer(0, [comment.Content])">
                         </div>
                         <div class="parent3" *ngIf="comment.Type==3">
-                            <video id="video_{{comment.Id}}" (click)="reddah.playVideo(comment.Id)" [src]="comment.Content" class="picture3"></video>
+                            <video (click)="playVideo(comment)" [src]="comment.Content" class="video3"></video>
                         </div>
                     </div>
                 </div>

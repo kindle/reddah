@@ -13,24 +13,29 @@ import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
-import { setupProvideEvents } from '@ionic/angular/dist/providers/events';
-import { baseDirectiveCreate } from '@angular/core/src/render3/instructions';
-import { VideoPlayer } from '@ionic-native/video-player';
+import { VideoViewerComponent } from '../common/video-viewer/video-viewer.component';
 
 export class ChatBase{
+    
     constructor(
+        protected modalController: ModalController,
+    ){}
+
+    async playVideo(comment){
         
-    ){
-
-    }
-
-    async playVideo(src){
-        alert(src);
-        VideoPlayer.play(src).then(() => {
-            alert('video completed');
-        }).catch(err => {
-            alert(err);
+        const modal = await this.modalController.create({
+            component: VideoViewerComponent,
+            componentProps: {
+                id: comment.Id,
+                src: comment.Content,
+            },
+            cssClass: 'modal-fullscreen',
+            keyboardClose: true,
+            showBackdrop: true
         });
+    
+        await modal.present();
+
     }
 }
 
@@ -56,7 +61,7 @@ export class ChatPage extends ChatBase implements OnInit  {
     groupChat;
 
     constructor(
-        private modalController: ModalController,
+        public modalController: ModalController,
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
@@ -68,7 +73,7 @@ export class ChatPage extends ChatBase implements OnInit  {
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
-        super();
+        super(modalController);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }

@@ -32,7 +32,7 @@ export class GroupChatPage extends ChatBase implements OnInit {
     messages: object[];
 
     constructor(
-        private modalController: ModalController,
+        public modalController: ModalController,
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
@@ -43,7 +43,7 @@ export class GroupChatPage extends ChatBase implements OnInit {
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
-        super();
+        super(modalController);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }
