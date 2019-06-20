@@ -50,7 +50,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
     // Navigate to the login page with extras
     //this.router.navigate(['login'], navigationExtras);
-    return this.authService.login();
+    return this.authService.surface();
     
     //return false;
   }

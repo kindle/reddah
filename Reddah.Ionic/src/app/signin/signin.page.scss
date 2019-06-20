@@ -1,0 +1,90 @@
+
+$white-color: #fff;
+$height100: 100%;
+
+ion-content {
+    height: $height100;
+    background-color: $white-color;
+}
+
+ion-grid {
+    width:100%;
+    height: 100%;
+    background: #dfdfdf;
+}
+
+ion-row {
+    height: 100%;
+}
+
+ion-col {
+    border: 1px solid #488aff;
+    background: $white-color;
+}
+
+ion-button, ion-item {
+    font-weight: 300;
+}
+
+@media (min-width: 240px) and (max-width: 768px) {
+    ion-grid {
+        background: $white-color;
+    }
+    ion-col {
+        border: none;
+    }
+}
+
+.footer {
+    position: relative;
+    width: 500px;
+    height: 100px;
+    background: linear-gradient(to bottom, #fff, #fff 50%, #DDD);
+    border-radius: 0px;
+    margin: 0 auto;
+    box-shadow: 0 11px 8px -10px rgba(51, 51, 51, .5);
+    overflow: hidden;
+}
+.waveBox {
+    width: 800px;
+    height: 900px;
+    border-radius: 50%;
+    position: absolute;
+    animation: waver 5s .5s infinite linear;
+    background-color: #D9EBF0;
+    opacity: .8;
+    left: -150px;
+    top: 50px;
+    transform-origin: center, center;
+}
+
+@keyframes waver {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+#waveTwo {
+    background-color: #4A8FE3;
+    opacity: .8;
+    left: -450px;
+    animation: waver 5s infinite linear;
+}
+#waveThree {
+    background-color: #107c10;
+    opacity: .5;
+    left: 150px;
+    animation: waver 5s 1.5s infinite linear;
+}
+.text {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 36px;
+    line-height: 58px;
+    float: left;
+    position: relative;
+    margin-left: 115px;
+}

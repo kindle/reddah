@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ReddahService } from './reddah.service';
-import { LoginPage } from './login/login.page';
+import { SigninPage } from './signin/signin.page';
+import { RegisterPage } from './register/register.page';
+import { SurfacePage } from './surface/surface.page';
 import { ModalController } from '@ionic/angular';
 
 @Injectable()
@@ -18,14 +20,46 @@ export class AuthService {
   // store the URL so we can redirect after logging in
   redirectUrl: string;
 
-  async login() {
-      const loginModal = await this.modalController.create({
-        component: LoginPage,
+  async register() {
+    const modal = await this.modalController.create({
+      component: RegisterPage,
+      componentProps: { url: '' }
+    });
+    
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+    if(data){
+        //this.router.navigateByUrl('/tabs/(home:home)');
+        //window.location.reload();
+        this.exactToken(data);
+    }
+    return false;
+}
+
+  async signin() {
+      const modal = await this.modalController.create({
+        component: SigninPage,
         componentProps: { url: '' }
       });
       
-      await loginModal.present();
-      const { data } = await loginModal.onDidDismiss();
+      await modal.present();
+      const { data } = await modal.onDidDismiss();
+      if(data){
+          //this.router.navigateByUrl('/tabs/(home:home)');
+          //window.location.reload();
+          this.exactToken(data);
+      }
+      return false;
+  }
+
+  async surface() {
+      const modal = await this.modalController.create({
+        component: SurfacePage,
+        componentProps: { url: '' }
+      });
+      
+      await modal.present();
+      const { data } = await modal.onDidDismiss();
       if(data){
           //this.router.navigateByUrl('/tabs/(home:home)');
           //window.location.reload();

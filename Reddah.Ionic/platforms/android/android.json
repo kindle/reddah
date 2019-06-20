@@ -95,6 +95,14 @@
             {
               "xml": "<feature name=\"StreamingMedia\"><param name=\"android-package\" value=\"com.hutchind.cordova.plugins.streamingmedia.StreamingMedia\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"VideoPlayer\"><param name=\"android-package\" value=\"com.moust.cordova.videoplayer.VideoPlayer\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Globalization\"><param name=\"android-package\" value=\"org.apache.cordova.globalization.Globalization\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -294,6 +302,12 @@
       "PACKAGE_NAME": "com.reddah.app"
     },
     "cordova-plugin-streaming-media": {
+      "PACKAGE_NAME": "com.reddah.app"
+    },
+    "com.moust.cordova.videoplayer": {
+      "PACKAGE_NAME": "com.reddah.app"
+    },
+    "cordova-plugin-globalization": {
       "PACKAGE_NAME": "com.reddah.app"
     }
   },
@@ -766,6 +780,30 @@
       "clobbers": [
         "streamingMedia"
       ]
+    },
+    {
+      "id": "com.moust.cordova.videoplayer.VideoPlayer",
+      "file": "plugins/com.moust.cordova.videoplayer/www/videoplayer.js",
+      "pluginId": "com.moust.cordova.videoplayer",
+      "clobbers": [
+        "VideoPlayer"
+      ]
+    },
+    {
+      "id": "cordova-plugin-globalization.GlobalizationError",
+      "file": "plugins/cordova-plugin-globalization/www/GlobalizationError.js",
+      "pluginId": "cordova-plugin-globalization",
+      "clobbers": [
+        "window.GlobalizationError"
+      ]
+    },
+    {
+      "id": "cordova-plugin-globalization.globalization",
+      "file": "plugins/cordova-plugin-globalization/www/globalization.js",
+      "pluginId": "cordova-plugin-globalization",
+      "clobbers": [
+        "navigator.globalization"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -793,6 +831,8 @@
     "cordova-plugin-shake": "0.6.0",
     "cordova-plugin-nativeaudio": "3.0.9",
     "cordova-plugin-android-permissions": "1.0.0",
-    "cordova-plugin-streaming-media": "2.2.0"
+    "cordova-plugin-streaming-media": "2.2.0",
+    "com.moust.cordova.videoplayer": "1.0.1",
+    "cordova-plugin-globalization": "1.11.0"
   }
 }

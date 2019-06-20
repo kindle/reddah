@@ -1,10 +1,15 @@
 {
-    "WebKit.framework": 1,
-    "libz.tbd": 1,
     "ImageIO.framework": 1,
     "CoreLocation.framework": 1,
-    "AVFoundation.framework": 4,
-    "QuartzCore.framework": 1,
-    "Foundation.framework": 2,
-    "AudioToolbox.framework": 2
+    "AVFoundation.framework": 3,
+    "QuartzCore.framework": 2,
+    "CoreMotion.framework": 1,
+    "WebKit.framework": 1,
+    "libz.tbd": 1,
+    "Foundation.framework": 1,
+    "AudioToolbox.framework": 1,
+    "Accelerate.framework": 1,
+    "Security.framework": 1,
+    "Photos.framework": 1,
+    "SystemConfiguration.framework": 1
 }

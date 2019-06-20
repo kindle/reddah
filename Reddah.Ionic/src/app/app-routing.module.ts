@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SelectiveStrategyService } from './selective-strategy.service';
-import { LoginPage } from './login/login.page';
+import { SurfacePage } from './surface/surface.page';
 import { ScanPage } from './common/scan/scan.page';
 import { MyTimeLinePage } from './mytimeline/mytimeline.page';
 import { AddTimelinePage } from './mytimeline/add-timeline/add-timeline.page';
@@ -16,7 +16,7 @@ const routes: Routes = [
     },
     { 
         path: 'login', 
-        component: LoginPage 
+        component: SurfacePage 
     },
     { 
         path: 'mytimeline', 

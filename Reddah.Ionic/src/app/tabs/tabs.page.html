@@ -1,59 +1,40 @@
-
-    <div class="world">
-      <div class="world-bg"></div>
-      <div class="world-globe">
-          <div class="world-globe-pole"></div>
-          <div class="world-globe-doms-container"></div>
-          <div class="world-globe-halo"></div>
-      </div>
-    </div>
-    <ion-text color="light" (click)="locale()" style="position:absolute;right:15px;top:15px;font-size:12px;">语言</ion-text>     
-    <ion-button color="primary" (click)="login()" style="position:absolute;left:15px;bottom:15px;">登录</ion-button>
-    <ion-button color="light" (click)="register()" style="position:absolute;right:15px;bottom:15px;">注册</ion-button>
-
-<!--
 <ion-tabs *ngIf="isAuthenticated()">
+    <ion-tab tab="message">
+        <ion-router-outlet name="message"></ion-router-outlet>
+    </ion-tab>
+    <ion-tab tab="contact">
+        <ion-router-outlet name="contact"></ion-router-outlet>
+    </ion-tab>
+    <ion-tab tab="home">
+      <ion-router-outlet name="home"></ion-router-outlet>
+    </ion-tab>
+    <ion-tab tab="find">
+        <ion-router-outlet name="find"></ion-router-outlet>
+    </ion-tab>
+    <ion-tab tab="about">
+        <ion-router-outlet #about name="about"></ion-router-outlet>
+    </ion-tab>
 
-  <ion-tab tab="message">
-      <ion-router-outlet name="message"></ion-router-outlet>
-  </ion-tab>
-  <ion-tab tab="contact">
-      <ion-router-outlet name="contact"></ion-router-outlet>
-  </ion-tab>
-  <ion-tab tab="home">
-    <ion-router-outlet name="home"></ion-router-outlet>
-  </ion-tab>
-  <ion-tab tab="find">
-      <ion-router-outlet name="find"></ion-router-outlet>
-  </ion-tab>
-  <ion-tab tab="about">
-      <ion-router-outlet #about name="about"></ion-router-outlet>
-  </ion-tab>
-
-  <ion-tab-bar slot="bottom">
-
-    <ion-tab-button tab="message" href="/tabs/(message:message)" (click)="change()">
-      <ion-icon name="ios-chatbubbles"></ion-icon>
-      <ion-label>{{ 'Menu.Message' | translate }}</ion-label>
-    </ion-tab-button>
-    <ion-tab-button tab="contact" href="/tabs/(contact:contact)" (click)="change()">
-      <ion-icon name="ios-people"></ion-icon>
-      <ion-label>{{ 'Menu.Contact' | translate }}</ion-label>
-    </ion-tab-button>
-    <ion-tab-button tab="home" href="/tabs/(home:home)" (click)="change()">
-      <ion-icon name="book"></ion-icon>
-      <ion-label>{{ 'Menu.Recommend' | translate }}</ion-label>
-    </ion-tab-button>
-    <ion-tab-button tab="find" href="/tabs/(find:find)" (click)="change()">
-      <ion-icon name="compass"></ion-icon>
-      <ion-label>{{ 'Menu.Find' | translate }}</ion-label>
-    </ion-tab-button>
-    <ion-tab-button tab="about" href="/tabs/(about:about)" (click)="change('about')">
-      <ion-icon name="person"></ion-icon>
-      <ion-label>{{ 'Menu.About' | translate }}</ion-label>
-    </ion-tab-button>
-
-  </ion-tab-bar>
-
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="message" href="/tabs/(message:message)" (click)="change()">
+        <ion-icon name="ios-chatbubbles"></ion-icon>
+        <ion-label>{{ 'Menu.Message' | translate }}</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="contact" href="/tabs/(contact:contact)" (click)="change()">
+        <ion-icon name="ios-people"></ion-icon>
+        <ion-label>{{ 'Menu.Contact' | translate }}</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="home" href="/tabs/(home:home)" (click)="change()">
+        <ion-icon name="book"></ion-icon>
+        <ion-label>{{ 'Menu.Recommend' | translate }}</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="find" href="/tabs/(find:find)" (click)="change()">
+        <ion-icon name="compass"></ion-icon>
+        <ion-label>{{ 'Menu.Find' | translate }}</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="about" href="/tabs/(about:about)" (click)="change('about')">
+        <ion-icon name="person"></ion-icon>
+        <ion-label>{{ 'Menu.About' | translate }}</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
 </ion-tabs>
--->

@@ -105,6 +105,6 @@
     <plugin name="cordova-plugin-shake" spec="0.6.0" />
     <plugin name="cordova-plugin-nativeaudio" spec="3.0.9" />
     <engine name="android" spec="^7.1.2" />
-    <engine name="ios" spec="4.5.5" />
     <engine name="windows" spec="^6.0.1" />
+    <engine name="ios" spec="^4.5.5" />
 </widget>

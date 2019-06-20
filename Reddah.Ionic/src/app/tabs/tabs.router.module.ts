@@ -22,12 +22,14 @@ const routes: Routes = [
       {
         path: 'message',
         outlet: 'message',
-        component: MessagePage
+        component: MessagePage,
+        canActivate: [AuthGuard],
       },
       {
         path: 'home',
         outlet: 'home',
-        component: HomePage
+        component: HomePage,
+        canActivate: [AuthGuard],
       },
       {
         path: 'contact',

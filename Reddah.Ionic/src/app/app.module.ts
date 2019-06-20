@@ -40,6 +40,7 @@ import { IonicImageLoader } from 'ionic-image-loader';
 import { CacheModule } from "ionic-cache";
 import { DragulaModule } from 'ng2-dragula';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
+//import { Globalization } from '@ionic-native/globalization/ngx';
 
 import { ReddahService } from './reddah.service';
 
@@ -50,7 +51,7 @@ import { SafePipe } from './safe.pipe';
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { ImageViewerComponent } from './common/image-viewer/image-viewer.component';
 import { VideoViewerComponent } from './common/video-viewer/video-viewer.component';
-import { LoginPage } from './login/login.page';
+import { SurfacePage } from './surface/surface.page';
 import { RegisterPage } from './register/register.page';
 import { ScanPage } from './common/scan/scan.page';
 import { AuthService } from './auth.service';
@@ -101,6 +102,7 @@ import { ChooseUserPage } from './common/choose-user/choose-user.page';
 import { ChatChooseGroupPage } from './chat/chat-choose-group/chat-choose-group.page';
 import { BookmarkPage } from './bookmark/bookmark.page';
 import { BookmarkPopPage } from './common/bookmark-pop.page';
+import { SigninPage } from './signin/signin.page';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -135,7 +137,7 @@ var firebaseConfig = {
         PostviewerPage,
         SafePipe,
         ImageViewerComponent,VideoViewerComponent,
-        LoginPage,
+        SurfacePage,
         CommentComponent,
         CommentTimelineComponent,
         TimeLinePage,
@@ -149,6 +151,7 @@ var firebaseConfig = {
         TimelinePopPage,
         TimelineCommentPopPage,
         ScanPage,
+        SigninPage,
         TsViewerPage,
         AddTimelinePage,
         AddFeedbackPage,
@@ -177,7 +180,7 @@ var firebaseConfig = {
         ChooseUserPage,
         PostviewerPage,
         ImageViewerComponent,VideoViewerComponent,
-        LoginPage,
+        SurfacePage,
         AddCommentPage,
         AddFriendPage,
         ApplyFriendPage,
@@ -199,6 +202,7 @@ var firebaseConfig = {
         TimelinePopPage,
         TimelineCommentPopPage,
         ScanPage,
+        SigninPage,
         UserPage,
         TimeLinePage,
         TsViewerPage,
@@ -260,6 +264,7 @@ var firebaseConfig = {
         File,
         FileTransfer,
         FileTransferObject,
+        //Globalization,
         MenuController,
         ModalController,
         PhotoLibrary,

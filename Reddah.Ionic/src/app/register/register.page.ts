@@ -84,7 +84,7 @@ export class RegisterPage implements OnInit {
       }
   }
 
-  async goback(){
+  async close(){
       await this.modalController.dismiss(null);
   }
 
