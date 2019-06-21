@@ -44,19 +44,8 @@ export class SurfacePage implements OnInit {
             
     }
 
-    showSurface = true;
-
     ngOnInit() {
-        
-        this.showSurface = !(this.reddah.getCurrentUser()!=null);
-        if(this.showSurface){
-            this.toggleRotate = true;
-            this.init(null);
-        }
-        else{
-            document.querySelector('.surface-container').innerHTML = "";;
-            this.toggleRotate = false;
-        }
+        this.init(null);
     }
 
     toggleRotate = true;
@@ -80,7 +69,7 @@ export class SurfacePage implements OnInit {
         if(data){
             let result = this.authService.exactToken(data);
             if(result)
-                window.location.reload();
+                this.router.navigate(['']);
         }
     }
 
@@ -94,7 +83,7 @@ export class SurfacePage implements OnInit {
         await changeLocaleModal.present();
         const { data } = await changeLocaleModal.onDidDismiss();
         if(data){
-            console.log(data)
+            //console.log(data)
             //this.router.navigateByUrl('/tabs/(home:home)');
             window.location.reload();
         }
@@ -186,14 +175,15 @@ export class SurfacePage implements OnInit {
 
         this.regenerateGlobe();
 
-        //var gui = new dat.GUI();
-        //gui.add(this.config, 'lat', -90, 90).listen();
-        //gui.add(this.config, 'lng', -180, 180).listen();
-        //gui.add(this.config, 'isHaloVisible');
-        //gui.add(this.config, 'isPoleVisible');
-        //gui.add(this.config, 'autoSpin');
-        //gui.add(this.config, 'goToBristol');
-        //gui.add(this.config, 'zoom', 0, 1).listen();
+        /*var gui = new dat.GUI();
+        gui.add(this.config, 'lat', -90, 90).listen();
+        gui.add(this.config, 'lng', -180, 180).listen();
+        gui.add(this.config, 'isHaloVisible');
+        gui.add(this.config, 'isPoleVisible');
+        gui.add(this.config, 'autoSpin');
+        gui.add(this.config, 'goToBristol');
+        gui.add(this.config, 'zoom', 0, 1).listen();
+        */
 
         //this.stats = new Stats();
         //this.stats.domElement.style.position = 'absolute';
@@ -345,11 +335,11 @@ export class SurfacePage implements OnInit {
         this.globePole.style.display = this.config.isPoleVisible ? 'block' : 'none';
         this.globeHalo.style.display = this.config.isHaloVisible ? 'block' : 'none';
 
-        var ratio = Math.pow(this.config.zoom, 1.5);
+        var ratio = Math.pow(this.config.zoom, 1);
         this.pixelExpandOffset = 1.5 + (ratio) * -1.25;
         ratio = 1 + ratio * 3;
         this.globe.style[this.transformStyleName] = 'scale3d(' + ratio + ',' + ratio + ',1)';
-        ratio = 1 + Math.pow(this.config.zoom, 3) * 0.3;
+        ratio = 1 + Math.pow(this.config.zoom, 2) * 0.3;
         this.worldBg.style[this.transformStyleName] = 'scale3d(' + ratio + ',' + ratio + ',1)';
 
         this.transformGlobe();

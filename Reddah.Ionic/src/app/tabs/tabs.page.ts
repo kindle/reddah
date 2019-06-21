@@ -4,7 +4,7 @@ import { Platform } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ModalController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
     selector: 'app-tabs',
@@ -20,6 +20,7 @@ export class TabsPage implements OnInit {
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
         private statusBar: StatusBar,
+        private router: Router,
         ) {}
 
     
@@ -28,7 +29,7 @@ export class TabsPage implements OnInit {
         if(locale==null){
             
         }
-
+        
         
     }
 

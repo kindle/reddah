@@ -40,7 +40,7 @@ import { IonicImageLoader } from 'ionic-image-loader';
 import { CacheModule } from "ionic-cache";
 import { DragulaModule } from 'ng2-dragula';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
-//import { Globalization } from '@ionic-native/globalization/ngx';
+import { Globalization } from '@ionic-native/globalization/ngx';
 
 import { ReddahService } from './reddah.service';
 
@@ -264,7 +264,7 @@ var firebaseConfig = {
         File,
         FileTransfer,
         FileTransferObject,
-        //Globalization,
+        Globalization,
         MenuController,
         ModalController,
         PhotoLibrary,
