@@ -103,6 +103,10 @@
             {
               "xml": "<feature name=\"Globalization\"><param name=\"android-package\" value=\"org.apache.cordova.globalization.Globalization\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"ImagePicker\"><param name=\"android-package\" value=\"com.synconset.ImagePicker\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -204,6 +208,10 @@
             },
             {
               "xml": "<activity android:configChanges=\"orientation|screenSize\" android:label=\"Simple Video Stream\" android:name=\"com.hutchind.cordova.plugins.streamingmedia.SimpleVideoStream\" />",
+              "count": 1
+            },
+            {
+              "xml": "<activity android:label=\"@string/multi_app_name\" android:name=\"com.synconset.MultiImageChooserActivity\" android:theme=\"@style/Theme.AppCompat.Light\"></activity>",
               "count": 1
             }
           ],
@@ -308,6 +316,9 @@
       "PACKAGE_NAME": "com.reddah.app"
     },
     "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "com.reddah.app"
+    },
+    "cordova-plugin-telerik-imagepicker": {
       "PACKAGE_NAME": "com.reddah.app"
     }
   },
@@ -804,6 +815,14 @@
       "clobbers": [
         "navigator.globalization"
       ]
+    },
+    {
+      "id": "cordova-plugin-telerik-imagepicker.ImagePicker",
+      "file": "plugins/cordova-plugin-telerik-imagepicker/www/imagepicker.js",
+      "pluginId": "cordova-plugin-telerik-imagepicker",
+      "clobbers": [
+        "plugins.imagePicker"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -833,6 +852,7 @@
     "cordova-plugin-android-permissions": "1.0.0",
     "cordova-plugin-streaming-media": "2.2.0",
     "com.moust.cordova.videoplayer": "1.0.1",
-    "cordova-plugin-globalization": "1.11.0"
+    "cordova-plugin-globalization": "1.11.0",
+    "cordova-plugin-telerik-imagepicker": "2.2.4"
   }
 }

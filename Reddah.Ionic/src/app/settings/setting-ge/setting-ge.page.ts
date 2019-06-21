@@ -6,6 +6,7 @@ import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
 import { SettingAboutPage } from '../setting-about/setting-about.page';
 import { LocalePage } from '../../common/locale/locale.page';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-setting-ge',
@@ -23,6 +24,7 @@ export class SettingGePage implements OnInit {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         public authService: AuthService,
+        private translate: TranslateService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
@@ -65,6 +67,8 @@ export class SettingGePage implements OnInit {
         await changeLocaleModal.present();
         const { data } = await changeLocaleModal.onDidDismiss();
         if(data){
+            //let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+            //this.translate.setDefaultLang(currentLocale);
             window.location.reload();
         }
 

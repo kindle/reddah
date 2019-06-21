@@ -12,6 +12,7 @@ import { File } from '@ionic-native/file/ngx';
 import * as firebase from 'firebase';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { Globalization } from '@ionic-native/globalization';
 
 @Component({
     selector: 'app-root',
@@ -80,8 +81,20 @@ export class AppComponent {
         this.cacheService.enableCache(true);
         this.cacheService.setDefaultTTL(365 * 24 * 60 * 60); //set default cache TTL for 365 days
 
-        let locale = this.localStorageService.retrieve("Reddah_Locale");
-        this.translate.setDefaultLang(locale);
+        
+        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+        if(currentLocale==null){
+            Globalization.getPreferredLanguage()
+            .then(res => {
+                this.localStorageService.store("Reddah_Locale", res.value);
+                this.translate.setDefaultLang(res.value);
+            })
+            .catch(e => alert(JSON.stringify(e)));
+
+        }
+        else{
+            this.translate.setDefaultLang(currentLocale);
+        }
 
         
 

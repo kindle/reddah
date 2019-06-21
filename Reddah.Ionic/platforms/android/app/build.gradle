@@ -93,6 +93,8 @@ ext {
 
 // PLUGIN GRADLE EXTENSIONS START
 apply from: "../cordova-plugin-qrscanner/andriod-qrscanner.gradle"
+apply from: "../cordova-plugin-telerik-imagepicker/app-ignorelinterrors.gradle"
+apply from: "../cordova-plugin-telerik-imagepicker/app-androidtarget.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()
@@ -278,6 +280,7 @@ dependencies {
     compile "com.android.support:support-annotations:27.+"
     compile "com.android.support:support-v4:24.1.1+"
     compile "com.soundcloud.android:android-crop:1.0.0@aar"
+    compile "com.android.support:appcompat-v7:23+"
     // SUB-PROJECT DEPENDENCIES END
 }
 

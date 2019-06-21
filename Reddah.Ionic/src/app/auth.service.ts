@@ -21,19 +21,19 @@ export class AuthService {
   redirectUrl: string;
 
   async register() {
-    const modal = await this.modalController.create({
-      component: RegisterPage,
-      componentProps: { url: '' }
-    });
-    
-    await modal.present();
-    const { data } = await modal.onDidDismiss();
-    if(data){
-        //this.router.navigateByUrl('/tabs/(home:home)');
-        //window.location.reload();
-        this.exactToken(data);
-    }
-    return false;
+      const modal = await this.modalController.create({
+        component: RegisterPage,
+        componentProps: { url: '' }
+      });
+      
+      await modal.present();
+      const { data } = await modal.onDidDismiss();
+      if(data){
+          //this.router.navigateByUrl('/tabs/(home:home)');
+          //window.location.reload();
+          this.exactToken(data);
+      }
+      return false;
 }
 
   async signin() {

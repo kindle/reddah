@@ -1,4 +1,8 @@
 {
+    "Surface.Language": "LANGUAGE",
+    "Surface.Signin": "サインイン",
+    "Surface.NewAccount": "アカウントの作成",
+
     "Menu.Message": "Message",
     "Menu.Recommend": "お勧め",
     "Menu.Contact": "チャット",

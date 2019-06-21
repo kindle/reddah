@@ -14,7 +14,7 @@ import { SigninPage } from '../signin/signin.page';
 import PerspectiveTransform from '../../assets/js/css_globe_PerspectiveTransform.js'
 import TweenMax from '../../assets/js/TweenMax.min.js'
 import { AuthService } from '../auth.service';
-//import { Globalization } from '@ionic-native/globalization';
+import { RegisterPage } from '../register/register.page'
 
 @Component({
     selector: 'app-surface',
@@ -32,15 +32,9 @@ export class SurfacePage implements OnInit {
         private cacheService: CacheService,
         private authService: AuthService,
         private localStorageService: LocalStorageService,
+        private translate: TranslateService,
     ) { 
-        /*let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-        if(currentLocale==null){
-            Globalization.getPreferredLanguage()
-                .then(res => alert("glo:"+res))
-                .catch(e => alert(e));
-
-            this.localStorageService.store("Reddah_Locale", "");
-        }*/
+        
             
     }
 
@@ -48,16 +42,28 @@ export class SurfacePage implements OnInit {
         this.init(null);
     }
 
-    toggleRotate = true;
     async register(){
-        this.toggleRotate = false;
-        this.loop();
-        this.authService.register();
+        this.config.isWorldVisible = false;
+
+        const modal = await this.modalController.create({
+            component: RegisterPage,
+            componentProps: { url: '' }
+        });
+          
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            //this.router.navigateByUrl('/tabs/(home:home)');
+            //window.location.reload();
+            //this.exactToken(data);
+        }
+        else{
+            this.config.isWorldVisible = true;
+        }
     }
 
     async signin(){
-        this.toggleRotate = false;
-        this.loop();
+        this.config.isWorldVisible = false;
         
         const modal = await this.modalController.create({
             component: SigninPage,
@@ -71,9 +77,14 @@ export class SurfacePage implements OnInit {
             if(result)
                 this.router.navigate(['']);
         }
+        else{
+            this.config.isWorldVisible = true;
+        }
     }
 
     async locale(){
+        this.config.isWorldVisible = false;
+
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
         const changeLocaleModal = await this.modalController.create({
             component: LocalePage,
@@ -83,23 +94,16 @@ export class SurfacePage implements OnInit {
         await changeLocaleModal.present();
         const { data } = await changeLocaleModal.onDidDismiss();
         if(data){
-            //console.log(data)
-            //this.router.navigateByUrl('/tabs/(home:home)');
-            window.location.reload();
+            let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+            this.translate.setDefaultLang(currentLocale);
         }
+        this.config.isWorldVisible = true;
+        
     }
 
     tap(){
-        this.toggleRotate = !this.toggleRotate;
-        this.loop();
+        this.config.autoSpin = !this.config.autoSpin;
     }
-    /*
-    isAuthenticated() {
-        let result = this.authService.authenticated();
-        if(result)
-            this.toggleRotate = false;
-        return result;
-    }*/
 
 
     config = {
@@ -108,6 +112,7 @@ export class SurfacePage implements OnInit {
         lng: 0,
         segX: 14,
         segY: 12,
+        isWorldVisible: true,
         isHaloVisible: true,
         isPoleVisible: true,
         autoSpin: true,
@@ -195,17 +200,15 @@ export class SurfacePage implements OnInit {
         this.world.ondragstart = function() {
             return false;
         };
-        this.world.addEventListener('mousedown', ()=>this.onMouseDown);
+        /*this.world.addEventListener('mousedown', ()=>this.onMouseDown);
         this.world.addEventListener('mousemove', ()=>this.onMouseMove);
         this.world.addEventListener('mouseup', ()=>this.onMouseUp);
         this.world.addEventListener('touchstart', this.touchPass(()=>this.onMouseDown));
         this.world.addEventListener('touchmove', this.touchPass(()=>this.onMouseMove));
         this.world.addEventListener('touchend', this.touchPass(()=>this.onMouseUp));
-
+*/
         this.loop();
     }
-
-
 
     touchPass(func) {
         return function(evt) {
@@ -223,9 +226,6 @@ export class SurfacePage implements OnInit {
         this.dragY = evt.pageY;
         this.dragLat = this.config.lat;
         this.dragLng = this.config.lng;
-
-        this.toggleRotate = !this.toggleRotate;
-        this.loop();
     }
 
     onMouseMove(evt) {
@@ -313,10 +313,7 @@ export class SurfacePage implements OnInit {
 
     }
 
-    loop() {
-        
-        if(!this.toggleRotate)
-            return;
+    loop(){
         requestAnimationFrame(()=>{this.loop()});
         //this.stats.begin();
         this.render();
@@ -332,6 +329,7 @@ export class SurfacePage implements OnInit {
         this.rX = this.config.lat / 180 * Math.PI;
         this.rY = (this.clampLng(this.config.lng) - 270) / 180 * Math.PI;
 
+        this.world.style.display = this.config.isWorldVisible ? 'block' : 'none';
         this.globePole.style.display = this.config.isPoleVisible ? 'block' : 'none';
         this.globeHalo.style.display = this.config.isHaloVisible ? 'block' : 'none';
 

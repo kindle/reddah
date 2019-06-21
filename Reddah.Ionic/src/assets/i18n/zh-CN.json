@@ -1,4 +1,9 @@
 {
+    "Surface.Language": "语言",
+    "Surface.Signin": "登录",
+    "Surface.NewAccount": "创建新账户",
+
+
     "Menu.Message": "消息",
     "Menu.Recommend": "推荐",
     "Menu.Contact": "好友",

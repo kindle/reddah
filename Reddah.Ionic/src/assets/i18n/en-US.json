@@ -1,4 +1,8 @@
 {
+    "Surface.Language": "LANGUAGE",
+    "Surface.Signin": "Log In",
+    "Surface.NewAccount": "CREATE ACCOUNT",
+
     "Menu.Message": "Message",
     "Menu.Recommend": "Promoted",
     "Menu.Contact": "Friends",
