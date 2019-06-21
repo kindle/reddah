@@ -68,9 +68,9 @@ export class ImageViewerComponent implements OnInit {
             }
         }
 
-        if(this.index>=0&&this.index<this.enhanceImgSourceArray.length){
-            this.downloadOrgImage(this.enhanceImgSourceArray[this.index]);
-        }
+        //if(this.index>=0&&this.index<this.enhanceImgSourceArray.length){
+        //    this.downloadOrgImage(this.enhanceImgSourceArray[this.index]);
+        //}
     }
 
     org(src){
@@ -133,11 +133,11 @@ export class ImageViewerComponent implements OnInit {
     ionSlideWillChange(){
         this.slides.getActiveIndex().then(index=>
         {
-            if(index>=0&&index<this.enhanceImgSourceArray.length){
-                let item = this.enhanceImgSourceArray[index];
-                if(item.isOrgViewed==0)
-                    this.downloadOrgImage(item);
-            }
+            //if(index>=0&&index<this.enhanceImgSourceArray.length){
+            //    let item = this.enhanceImgSourceArray[index];
+            //    if(item.isOrgViewed==0)
+            //        this.downloadOrgImage(item);
+            //}
         });
         
     }

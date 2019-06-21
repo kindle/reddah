@@ -14,7 +14,7 @@
             <ion-item-divider color="light" lines="none">{{group.letter.toUpperCase()}}</ion-item-divider>
             <ion-item *ngFor="let contact of group.contacts" (click)="goUser(contact.Watch)">
                 <ion-avatar slot="start" class="contactUserPhoto">
-                    <img src="{{reddah.appPhoto['userphoto_'+contact.Watch]}}" class="contactPortrait">
+                    <img src="{{reddah.appData('userphoto_'+contact.Watch)}}" class="contactPortrait">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
                     <h3 (press)="showChangeMenu($event, contact)">{{reddah.getDisplayName(contact.Watch)}}</h3>
