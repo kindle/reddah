@@ -621,6 +621,18 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         }
     }
 
+    cache(cacheKey){
+        let preview = this.localStorageService.retrieve(cacheKey);
+        let org = this.localStorageService.retrieve(cacheKey.replace("_reddah_preview",""))
+        
+        if(org)
+            return (<any>window).Ionic.WebView.convertFileSrc(org);
+        else if(preview)
+            return (<any>window).Ionic.WebView.convertFileSrc(preview);
+        else
+            return cacheKey;
+    }
+
     private fileTransfer: FileTransferObject; 
     toImageCache(webUrl, cacheKey){
         webUrl = webUrl.replace("///","https://");

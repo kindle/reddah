@@ -35,7 +35,7 @@ export class ImageViewerComponent implements OnInit {
     ) {
     }
 
-    //isOrgViewed 0 No, 1 Yes, 2 on-going.
+    //0: web preview url, 1:local preview, 2: on-going, 3: local org, 
     ngOnInit() {
         this.slideOpts = {
             centeredSlides: 'true',
@@ -43,29 +43,39 @@ export class ImageViewerComponent implements OnInit {
         };
 
         for(let i=0;i<this.imgSourceArray.length;i++){
-            let org = this.localStorageService.retrieve(this.imgSourceArray[i]);
+            let preview = this.localStorageService.retrieve(this.imgSourceArray[i]);
+            let org = this.localStorageService.retrieve(this.imgSourceArray[i].replace("_reddah_preview",""));
             let fileName = this.imgSourceArray[i].replace("///login.reddah.com/uploadPhoto/","");
-            if(org==null){
-                //preview image url
+
+            if(org){
+                let localUrl = (<any>window).Ionic.WebView.convertFileSrc(org);
+                this.enhanceImgSourceArray[i] = { 
+                    webPreviewUrl: this.imgSourceArray[i],
+                    localhostImageUrl: localUrl,
+                    localFileImageUrl: org,
+                    previewImageFileName: fileName,
+                    isOrgViewed: 3, 
+                }
+            }
+            else if(preview){
+                let localUrl = (<any>window).Ionic.WebView.convertFileSrc(org);
                 this.enhanceImgSourceArray[i] = { 
                     webPreviewUrl: this.imgSourceArray[i], 
-                    localhostOrgImageUrl: '',
-                    localFileOrgImageUrl: '',
+                    localhostImageUrl: localUrl,
+                    localFileImageUrl: preview,
+                    previewImageFileName: fileName,
+                    isOrgViewed: 1,
+                }
+            }else{
+                this.enhanceImgSourceArray[i] = { 
+                    webPreviewUrl: this.imgSourceArray[i], 
+                    localhostImageUrl: '',
+                    localFileImageUrl: '',
                     previewImageFileName: fileName,
                     isOrgViewed: 0,
                 }
             }
-            else{
-                //cached local image file 
-                let webUrl = (<any>window).Ionic.WebView.convertFileSrc(org);
-                this.enhanceImgSourceArray[i] = { 
-                    webPreviewUrl: this.imgSourceArray[i],
-                    localhostOrgImageUrl: webUrl,
-                    localFileOrgImageUrl: org,
-                    previewImageFileName: fileName,
-                    isOrgViewed: 1, 
-                }
-            }
+
         }
 
         //if(this.index>=0&&this.index<this.enhanceImgSourceArray.length){
@@ -155,16 +165,16 @@ export class ImageViewerComponent implements OnInit {
         let orgImageFileName = item.previewImageFileName.replace("_reddah_preview","");
         //this.fileTransfer.download(orgImageUrl, this.file.applicationStorageDirectory + orgImageFileName).then((entry) => {
         this.fileTransfer.download(orgImageUrl, this.file.externalRootDirectory+"reddah/" + orgImageFileName).then((entry) => {
-            //let localFileOrgImageUrl = this.file.applicationStorageDirectory + orgImageFileName;
-            let localFileOrgImageUrl = this.file.externalRootDirectory+"reddah/" + orgImageFileName;
-            this.localStorageService.store(item.webPreviewUrl, localFileOrgImageUrl);
-            this.reddah.appPhoto[item.webPreviewUrl] = (<any>window).Ionic.WebView.convertFileSrc(localFileOrgImageUrl);
+            //let localFileImageUrl = this.file.applicationStorageDirectory + orgImageFileName;
+            let localFileImageUrl = this.file.externalRootDirectory + "reddah/" + orgImageFileName;
+            this.localStorageService.store(item.webPreviewUrl.replace("_reddah_preview",""), localFileImageUrl);
+            //this.reddah.appPhoto[item.webPreviewUrl] = (<any>window).Ionic.WebView.convertFileSrc(localFileImageUrl);
             for(let i=0;i<this.imgSourceArray.length;i++){
                 if(this.imgSourceArray[i]===item.webPreviewUrl){
-                    let localhostOrgImageUrl = (<any>window).Ionic.WebView.convertFileSrc(localFileOrgImageUrl);
-                    this.enhanceImgSourceArray[i].localhostOrgImageUrl = localhostOrgImageUrl;
-                    this.enhanceImgSourceArray[i].localFileOrgImageUrl = localFileOrgImageUrl;
-                    this.enhanceImgSourceArray[i].isOrgViewed = 1;
+                    let localhostImageUrl = (<any>window).Ionic.WebView.convertFileSrc(localFileImageUrl);
+                    this.enhanceImgSourceArray[i].localhostImageUrl = localhostImageUrl;
+                    this.enhanceImgSourceArray[i].localFileImageUrl = localFileImageUrl;
+                    this.enhanceImgSourceArray[i].isOrgViewed = 3;
 
                     break;
                 }
@@ -198,7 +208,7 @@ export class ImageViewerComponent implements OnInit {
         {
             //copy from local directory
             let fileName = item.previewImageFileName.replace("_reddah_preview","");
-            let path = item.localFileOrgImageUrl.replace(fileName, "");
+            let path = item.localFileImageUrl.replace(fileName, "");
             let newFileName = fileName;
             let newPath = this.file.externalRootDirectory + "DCIM/Reddah/";
             
