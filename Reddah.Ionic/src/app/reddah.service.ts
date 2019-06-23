@@ -810,9 +810,13 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         let day = hour * 24;
         let halfamonth = day * 15;
         let month = day * 30;
-        let now = new Date().getTime();
+        let localnow = new Date().getTime();
+        //to utc now
+        let offset = new Date().getTimezoneOffset()*60*1000;
+        let now = new Date(localnow+offset).getTime(); 
+        
         let diffValue = now - dateTimeStamp;
-        if(diffValue < 0){return;}
+        if(diffValue < 0){return dateStr;}
         let monthC =diffValue/month;
         let weekC =diffValue/(7*day);
         let dayC =diffValue/day;

@@ -1,4 +1,4 @@
-<ion-item no-padding  (click)="closeModal($event)">
+<ion-item no-padding  (click)="closeModal($event)" *ngIf="imgTitle">
     <ion-title>{{ imgTitle }}</ion-title>
 </ion-item>
 <ion-content [forceOverscroll]="false" color="dark" fullscreen="true" (click)="closeModal($event)">
@@ -7,14 +7,14 @@
             <div class="swiper-zoom-container">
                 <img [src]="reddah.cache(item.webPreviewUrl)" height="100vh">
             </div>
-            <ion-item text-center no-padding style="position: absolute; bottom: 40px;" color="dark" *ngIf="item.isOrgViewed!=3&&showDownload">
+            <ion-item no-padding color="dark" style="position: absolute; bottom: 40px;margin:0 50%;transform: translateX(-50%);" *ngIf="item.isOrgViewed!=3&&showDownload">
                 <ion-title id="downloadOrgImage" (click)="downloadOrgImage(item)" *ngIf="item.isOrgViewed==0||item.isOrgViewed==1">查看原图</ion-title>
                 <ion-title id="downloadOrgImage" (dblclick)="downloadOrgImage(item)" *ngIf="item.isOrgViewed==2">正在下载···</ion-title>
             </ion-item>
         </ion-slide>
     </ion-slides>
 </ion-content>
-<ion-footer (click)="closeModal($event)">
+<ion-footer (click)="closeModal($event)" *ngIf="imgDescription">
     <ion-toolbar color="dark" text-center>
         <ion-text>{{ imgDescription }}</ion-text>
     </ion-toolbar>

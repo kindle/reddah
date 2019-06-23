@@ -220,7 +220,7 @@ namespace Reddah.Web.Login.Controllers
                         {
                             Title = thoughts,
                             Content = string.Join("$$$", articleContentList),
-                            CreatedOn = DateTime.Now,
+                            CreatedOn = DateTime.UtcNow,
                             Count = 0,
                             GroupName = location,
                             UserName = jwtResult.JwtUser.User,
