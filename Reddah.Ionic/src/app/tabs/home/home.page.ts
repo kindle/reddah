@@ -40,39 +40,35 @@ export class HomePage implements OnInit {
 
     async ngOnInit(){
         //this.reddah.getUserPhotos(this.userName);
-        let locale = this.reddah.getCurrentLocale();
-        
-        if(locale==null){
-            const changeLocaleModal = await this.modalController.create({
-                component: LocalePage,
-                componentProps: { orgLocale: locale }
-            });
-            
-            await changeLocaleModal.present();
-            const { data } = await changeLocaleModal.onDidDismiss();
-            if(data){
-                window.location.reload();
-            }
+        let cacheArticles = this.localStorageService.retrieve("reddah_articles");
+        let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids");
+        if(cacheArticles){
+            this.articles = JSON.parse(cacheArticles);
+            this.loadedIds = JSON.parse(cacheArticleIds);
         }
-        
-        const loading = await this.loadingController.create({
-            message: this.translateService.instant("Article.Loading"),
-            spinner: 'circles',
-        });
-        await loading.present();
-
-        let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale;
-        let request = this.reddah.getArticles(this.loadedIds, locale, "promoted");
-
-        this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
-        .subscribe(articles => 
+        else
         {
-            for(let article of articles){
-                this.articles.push(article);
-                this.loadedIds.push(article.Id);  
-            }
-            loading.dismiss();
-        });
+            const loading = await this.loadingController.create({
+                message: this.translateService.instant("Article.Loading"),
+                spinner: 'circles',
+            });
+            await loading.present();
+            let locale = this.reddah.getCurrentLocale();
+            let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale;
+            let request = this.reddah.getArticles(this.loadedIds, locale, "promoted");
+
+            this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
+            .subscribe(articles => 
+            {
+                for(let article of articles){
+                    this.articles.push(article);
+                    this.loadedIds.push(article.Id);
+                }
+                this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
+                this.localStorageService.store("reddah_article_ids", JSON.stringify(this.loadedIds));
+                loading.dismiss();
+            });
+        }
     }
   
     getArticles(event):void {
@@ -90,6 +86,8 @@ export class HomePage implements OnInit {
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);  
             }
+            this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
+            this.localStorageService.store("reddah_article_ids", JSON.stringify(this.loadedIds));
             if(event)
                 event.target.complete();
         });
@@ -98,6 +96,8 @@ export class HomePage implements OnInit {
     clearCacheAndReload(event){
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("HomePage");
+        this.localStorageService.clear("reddah_articles");
+        this.localStorageService.clear("reddah_article_ids");
         this.getArticles(event);
     }
 

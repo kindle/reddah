@@ -9,6 +9,7 @@ import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import leaflet from 'leaflet';
+import L from 'leaflet-search';
 
 @Component({
   selector: 'app-location',
@@ -51,6 +52,7 @@ export class LocationPage implements OnInit {
     
     loadmap() {
         this.map = leaflet.map("map").fitWorld();
+        
         leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attributions: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
             maxZoom: 18
@@ -66,11 +68,26 @@ export class LocationPage implements OnInit {
             })
 
             markerGroup.addLayer(marker);
-
             this.map.addLayer(markerGroup);
+
+            //add search
+            var controlSearch = new L.Control.Search({
+                position:'topright',		
+                layer: marker,
+                initial: false,
+                zoom: 12,
+                marker: false
+            });
+            this.map.addControl( controlSearch );
+
         }).on('locationerror', (err) => {
             alert(err.message);
         })
+
+        var searchLayer = L.layerGroup().addTo(this.map);
+        //... adding data in searchLayer ...
+        this.map.addControl( new L.Control.Search({layer: searchLayer}) );
+        
     }
 
 }

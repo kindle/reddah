@@ -92,6 +92,7 @@
     "ionic-cache": "^4.0.1",
     "ionic-image-loader": "^7.0.0-beta.2",
     "leaflet": "^1.5.1",
+    "leaflet-search": "^2.9.8",
     "ng2-dragula": "^2.1.1",
     "ngx-qrcode2": "0.0.9",
     "ngx-webstorage": "^3.0.2",
