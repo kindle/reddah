@@ -46,7 +46,7 @@ export class SettingNoteLabelPage implements OnInit {
         .subscribe(result => 
         {
             if(result.Success==0){
-                this.reddah.appPhoto['usernotename_'+this.targetUserName+'_'+this.userName] = this.currentNoteName;
+                //this.reddah.appPhoto['usernotename_'+this.targetUserName+'_'+this.userName] = this.currentNoteName;
                 this.localStorageService.store('usernotename_'+this.targetUserName+'_'+this.userName, this.currentNoteName);
                 this.modalController.dismiss(true);
             }

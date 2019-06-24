@@ -56,8 +56,9 @@ export class VideoViewerComponent implements OnInit {
         this.fileTransfer.download(orgImageUrl, this.file.externalRootDirectory+"reddah/" + orgImageFileName).then((entry) => {
             //let localFileOrgImageUrl = this.file.applicationStorageDirectory + orgImageFileName;
             let localFileOrgImageUrl = this.file.externalRootDirectory+"reddah/" + orgImageFileName;
-            this.localStorageService.store(item.webPreviewUrl, localFileOrgImageUrl);
-            this.reddah.appPhoto[item.webPreviewUrl] = (<any>window).Ionic.WebView.convertFileSrc(localFileOrgImageUrl);
+            //this.localStorageService.store(item.webPreviewUrl, localFileOrgImageUrl);
+            this.localStorageService.store(item.webPreviewUrl, 
+                (<any>window).Ionic.WebView.convertFileSrc(localFileOrgImageUrl));
             
         }, (error) => {
             console.log(JSON.stringify(error));

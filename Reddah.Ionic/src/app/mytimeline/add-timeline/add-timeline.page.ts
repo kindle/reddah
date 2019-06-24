@@ -11,6 +11,7 @@ import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { DragulaService } from 'ng2-dragula';
+import { LocationPage } from '../../common/location/location.page';
 
 @Component({
     selector: 'app-add-timeline',
@@ -294,5 +295,13 @@ export class AddTimelinePage implements OnInit {
         });
     
         return await modal.present();
+    }
+
+    async getLocation(){
+        const modal = await this.modalController.create({
+            component: LocationPage
+        });
+    
+        await modal.present();
     }
 }

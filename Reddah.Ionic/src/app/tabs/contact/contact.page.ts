@@ -96,7 +96,6 @@ export class ContactPage {
                 this.localStorageService.store("Reddah_GroupedContacts", JSON.stringify(this.groupedContacts));
             }
             
-            
         });  
     }
 

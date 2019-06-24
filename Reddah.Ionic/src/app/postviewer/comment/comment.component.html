@@ -19,7 +19,7 @@
         <li *ngIf="data.Seed===comment.ParentId&&depth <= 1">
             <ion-item lines="none" no-padding (click)="addNewComment(comment.ArticleId, comment.Id)" style="padding-left:10px;">
                 <ion-avatar slot="start" class="avatar-top" (click)="goUser(comment.UserName)">
-                    <img src="{{reddah.appPhoto['userphoto_'+comment.UserName]}}" class="portrait">
+                    <img src="{{reddah.appData('userphoto_'+comment.UserName)}}" class="portrait">
                 </ion-avatar>
                 <ion-label text-wrap>
                     <div>

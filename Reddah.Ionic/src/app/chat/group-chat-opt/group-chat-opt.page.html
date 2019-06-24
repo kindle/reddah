@@ -9,7 +9,7 @@
             <div style="display: flex;flex-wrap: wrap;">
                 <div style="display: flex;flex-direction: column;" *ngFor="let uname of groupInfo.GroupName.split(',')">
                     <ion-avatar class="userPhoto" (click)="goUser(uname)">
-                        <img src="{{reddah.appPhoto['userphoto_'+uname]}}" class="portrait">
+                        <img src="{{reddah.appData('userphoto_'+uname)}}" class="portrait">
                     </ion-avatar>
                     <ion-label style="margin-top:0;width:65px;color:gray;" text-center>{{reddah.getDisplayName(uname)}}</ion-label>
                 </div>

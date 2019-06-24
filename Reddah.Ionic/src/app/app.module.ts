@@ -41,12 +41,13 @@ import { CacheModule } from "ionic-cache";
 import { DragulaModule } from 'ng2-dragula';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { Globalization } from '@ionic-native/globalization/ngx';
-
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ReddahService } from './reddah.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LocalePage } from './common/locale/locale.page';
+import { LocationPage } from './common/location/location.page'
 import { SafePipe } from './safe.pipe';
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { ImageViewerComponent } from './common/image-viewer/image-viewer.component';
@@ -121,7 +122,7 @@ var firebaseConfig = {
         AppComponent,
         BookmarkPage,
         BookmarkPopPage,
-        LocalePage,
+        LocalePage,LocationPage,
         ChooseUserPage,
         AddCommentPage,
         AddFriendPage,
@@ -179,7 +180,7 @@ var firebaseConfig = {
     entryComponents: [
         BookmarkPage,
         BookmarkPopPage,
-        LocalePage,
+        LocalePage,LocationPage,
         ChooseUserPage,
         PostviewerPage,
         ImageViewerComponent,VideoViewerComponent,
@@ -269,6 +270,7 @@ var firebaseConfig = {
         FileTransfer,
         FileTransferObject,
         Globalization,
+        Geolocation,
         MenuController,
         ModalController,
         PhotoLibrary,

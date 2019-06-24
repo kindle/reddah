@@ -43,8 +43,6 @@
                 <ion-note color="dark">{{article.CreatedOn | date: 'yyyy-MM-dd hh:mm:ss'}}</ion-note>
                 <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
             </ion-item>
-            
-            
         </div>
     </div>
     <div style="margin:0 10px;">
@@ -55,7 +53,7 @@
                     <ion-icon name="heart-empty" class="likeIcon"></ion-icon>
                     <span class="likeUserName">
                         <img [src]="reddah.appData('userphoto_'+user)" *ngFor="let user of article.GroupName.split(',')" (click)="goUser(article.GroupName,true)"
-                        style="margin:0 3px;width:25px;height:25px;">
+                        style="margin:0 3px;width:35px;height:35px;">
                     </span>
                 </div>
             </div>

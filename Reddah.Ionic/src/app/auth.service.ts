@@ -4,110 +4,115 @@ import { SigninPage } from './signin/signin.page';
 import { RegisterPage } from './register/register.page';
 import { SurfacePage } from './surface/surface.page';
 import { ModalController } from '@ionic/angular';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Injectable()
 export class AuthService {
 
-  constructor(
-    private modalController: ModalController,
-    private reddahService: ReddahService){}
+    constructor(
+        private modalController: ModalController,
+        private reddahService: ReddahService,
+        private localStorageService: LocalStorageService,
+    ){}
 
-  authenticated(): boolean {
-      let currentUser = this.reddahService.getCurrentUser();
-      return currentUser!=null;
-  } ;  
+    authenticated(): boolean {
+        let currentUser = this.reddahService.getCurrentUser();
+        return currentUser!=null;
+    } ;  
 
-  // store the URL so we can redirect after logging in
-  redirectUrl: string;
+    // store the URL so we can redirect after logging in
+    redirectUrl: string;
 
-  async register() {
-      const modal = await this.modalController.create({
-        component: RegisterPage,
-        componentProps: { url: '' }
-      });
-      
-      await modal.present();
-      const { data } = await modal.onDidDismiss();
-      if(data){
-          //this.router.navigateByUrl('/tabs/(home:home)');
-          //window.location.reload();
-          this.exactToken(data);
-      }
-      return false;
-}
-
-  async signin() {
-      const modal = await this.modalController.create({
-        component: SigninPage,
-        componentProps: { url: '' }
-      });
-      
-      await modal.present();
-      const { data } = await modal.onDidDismiss();
-      if(data){
-          //this.router.navigateByUrl('/tabs/(home:home)');
-          //window.location.reload();
-          this.exactToken(data);
-      }
-      return false;
-  }
-
-  async surface() {
-      const modal = await this.modalController.create({
-        component: SurfacePage,
-        componentProps: { url: '' }
-      });
-      
-      await modal.present();
-      const { data } = await modal.onDidDismiss();
-      if(data){
-          //this.router.navigateByUrl('/tabs/(home:home)');
-          //window.location.reload();
-          this.exactToken(data);
-      }
-      return false;
-  }
-
-
-  logout(): void {
-    this.reddahService.logoutClear();
-    window.location.reload();
-  }
-
-
-  exactToken(jwt: string){
-    let parts = jwt.split('.');
-    let bodyEnc = parts[1];
-    if(!bodyEnc){
+    async register() {
+        const modal = await this.modalController.create({
+            component: RegisterPage,
+            componentProps: { url: '' }
+        });
+        
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            //this.router.navigateByUrl('/tabs/(home:home)');
+            //window.location.reload();
+            this.exactToken(data);
+        }
         return false;
     }
-    let bodyStr = atob(bodyEnc)
-        , body;
 
-    try{
-        body = JSON.parse(bodyStr);
-    }
-    catch(e){
-        body = {};
+    async signin() {
+        const modal = await this.modalController.create({
+            component: SigninPage,
+            componentProps: { url: '' }
+        });
+        
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            //this.router.navigateByUrl('/tabs/(home:home)');
+            //window.location.reload();
+            this.exactToken(data);
+        }
+        return false;
     }
 
-    let exp = body.exp
-        , user= body.aud
-    ;
-
-    if(!this.isExpired(exp)){
-        this.reddahService.setCurrentUser(user);
-        return true;
+    async surface() {
+        const modal = await this.modalController.create({
+            component: SurfacePage,
+            componentProps: { url: '' }
+        });
+        
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            //this.router.navigateByUrl('/tabs/(home:home)');
+            //window.location.reload();
+            this.exactToken(data);
+        }
+        return false;
     }
-    else{
-      this.reddahService.clearCurrentUser();
-      return false;
-    }
-  }
 
-  isExpired(exp:number): boolean {
-      if(!exp) return true;
-      let now = Date.now();
-      return now >= exp*1000;
-  }
+
+    logout(): void {
+        this.reddahService.logoutClear();
+        this.localStorageService.clear("Reddah_GroupedContacts");
+        this.localStorageService.clear("Reddah_Contacts");
+        window.location.reload();
+    }
+
+
+    exactToken(jwt: string){
+        let parts = jwt.split('.');
+        let bodyEnc = parts[1];
+        if(!bodyEnc){
+            return false;
+        }
+        let bodyStr = atob(bodyEnc)
+            , body;
+
+        try{
+            body = JSON.parse(bodyStr);
+        }
+        catch(e){
+            body = {};
+        }
+
+        let exp = body.exp
+            , user= body.aud
+        ;
+
+        if(!this.isExpired(exp)){
+            this.reddahService.setCurrentUser(user);
+            return true;
+        }
+        else{
+          this.reddahService.clearCurrentUser();
+          return false;
+        }
+    }
+
+    isExpired(exp:number): boolean {
+        if(!exp) return true;
+        let now = Date.now();
+        return now >= exp*1000;
+    }
 }

@@ -14,11 +14,11 @@
     </div>
     <div>   
         <div class="timelineCover" #timelineCover>
-            <img-loader src="{{reddah.appPhoto['cover_'+userName]}}"></img-loader>
+            <img src="{{reddah.appData('cover_'+userName)}}">
         </div>
         <div class="timelineAvatar">
             <ion-label class="userNameTitle">{{userName}}</ion-label>
-            <img-loader src="{{reddah.appPhoto['userphoto_'+userName]}}"></img-loader>
+            <img src="{{reddah.appData('userphoto_'+userName)}}">
         </div>
         <div *ngFor="let article of articles;index as i">
             <p *ngIf="i==0||(i>0&&articles[i-1].CreatedOn.substring(0,4)!=article.CreatedOn.substring(0,4))" class="yearTitle">

@@ -154,7 +154,7 @@ export class UserPage implements OnInit {
                     this.reddah.removeFriend(formData).subscribe(data=>{
                         if(data.Success==0)
                             this.localStorageService.store(`userisfriend_${this.userName}_${this.currentUserName}`, 0);
-                            this.reddah.appPhoto[`userisfriend_${this.userName}_${this.currentUserName}`] = 0;
+                            //this.reddah.appPhoto[`userisfriend_${this.userName}_${this.currentUserName}`] = 0;
                             this.cacheService.clearGroup("ContactPage");
                             this.cacheService.clearGroup("TimeLinePage"+this.userName);
                             this.modalController.dismiss();

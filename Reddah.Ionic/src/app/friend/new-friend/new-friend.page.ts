@@ -36,10 +36,12 @@ export class NewFriendPage implements OnInit {
                 //can abstract to fun(photourl, username){}
                 let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${request.UserName}`);
                 if(cachedUserPhotoPath!=null){
-                    this.reddah.appPhoto["userphoto_"+request.UserName] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
+                    this.localStorageService.store("userphoto_"+request.UserName, 
+                    (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
                 }
                 else{
-                    this.reddah.appPhoto["userphoto_"+request.UserName] = "assets/icon/anonymous.png";
+                    this.localStorageService.store("userphoto_"+request.UserName,
+                        "assets/icon/anonymous.png");
                 }
                 if(request.UserPhoto!=null){
                     this.reddah.toImageCache(request.UserPhoto, `userphoto_${request.UserName}`);

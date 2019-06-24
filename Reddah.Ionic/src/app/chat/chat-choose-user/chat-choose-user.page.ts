@@ -98,10 +98,10 @@ export class ChatChooseUserPage implements OnInit {
                 //check cache first
                 let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${contact.Watch}`);
                 if(cachedUserPhotoPath!=null){
-                    this.reddah.appPhoto["userphoto_"+contact.Watch] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
+                    this.localStorageService.store("userphoto_"+contact.Watch, (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
                 }
                 else{
-                    this.reddah.appPhoto["userphoto_"+contact.Watch] = "assets/icon/anonymous.png";
+                    this.localStorageService.store("userphoto_"+contact.Watch, "assets/icon/anonymous.png");
                 }
                 if(contact.UserPhoto!=null){
                     this.reddah.toImageCache(contact.UserPhoto, `userphoto_${contact.Watch}`);

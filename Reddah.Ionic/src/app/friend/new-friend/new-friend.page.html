@@ -13,7 +13,7 @@
     <ion-list>
         <ion-item *ngFor="let request of friendRequestList">
             <ion-avatar slot="start" style="margin:5px;" (click)="goUser(request.UserName)">
-                <img src="{{reddah.appPhoto['userphoto_'+request.UserName]}}" class="portrait">
+                <img src="{{reddah.appData('userphoto_'+request.UserName)}}" class="portrait">
             </ion-avatar>
             <ion-label style="margin-left:10px;">
                 <h2>

@@ -625,7 +625,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         ['🙏','😜','😡','😍','👻','💩']
     ];
 
-    appPhoto = {};
+    //appPhoto = {};
     appCacheToOrg = {};
 
     appData(cacheKey){
@@ -680,8 +680,9 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             //let target = this.file.applicationStorageDirectory + webImageName;
             let target = this.file.externalRootDirectory+"reddah/" + webImageName;
             this.fileTransfer.download(webUrl, target).then((entry) => {
-                this.localStorageService.store(cacheKey, target);                
-                this.appPhoto[cacheKey] = (<any>window).Ionic.WebView.convertFileSrc(target);
+                //this.localStorageService.store(cacheKey, target);                
+                this.localStorageService.store(cacheKey, 
+                    (<any>window).Ionic.WebView.convertFileSrc(target));
                 this.appCacheToOrg[(<any>window).Ionic.WebView.convertFileSrc(target)] = webUrl;
             }, (error) => {
                 console.log(JSON.stringify(error));
@@ -706,20 +707,22 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             //check cache first
             let cachedCoverPath = this.localStorageService.retrieve(`cover_${userName}`);
             if(cachedCoverPath!=null){
-                this.appPhoto["cover_"+userName] = (<any>window).Ionic.WebView.convertFileSrc(cachedCoverPath);
+                this.localStorageService.store("cover_"+userName, 
+                    (<any>window).Ionic.WebView.convertFileSrc(cachedCoverPath));
                 //bug when image not loaded, src width =0
                 if(isTimeline)
                     this.drawCanvasBackground(cachedCoverPath);
             }
             else{
-                this.appPhoto["cover_"+userName] = "assets/icon/timg.jpg";
+                this.localStorageService.store("cover_"+userName, "assets/icon/timg.jpg");
             }
             let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${userName}`);
             if(cachedCoverPath!=null){
-                this.appPhoto["userphoto_"+userName] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
+                this.localStorageService.store("userphoto_"+userName,
+                    (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
             }
             else{
-                this.appPhoto["userphoto_"+userName] = "assets/icon/anonymous.png";
+                this.localStorageService.store("userphoto_"+userName, "assets/icon/anonymous.png");
             }
 
             //check from web
@@ -735,8 +738,8 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
                 if(userInfo.Photo!=null)
                     this.toImageCache(userInfo.Photo, `userphoto_${userName}`);
                           
-                if(userInfo.UserNickName!=null)
-                    this.toTextCache(userInfo.UserNickName, `usernickname_${userName}`);
+                if(userInfo.NickName!=null)
+                    this.toTextCache(userInfo.NickName, `usernickname_${userName}`);
                 if(userInfo.Sex!=null)
                     this.toTextCache(userInfo.Sex, `usersex_${userName}`);
                 if(userInfo.Location!=null)
@@ -823,10 +826,11 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         //check user photo cache
         let cachedUserPhotoPath = this.localStorageService.retrieve(key);
         if(cachedUserPhotoPath!=null){
-            this.appPhoto[key] = (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath);
+            this.localStorageService.store(key, 
+                (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
         }
         else{
-            this.appPhoto[key] = fallbackImage;
+            this.localStorageService.store(key, fallbackImage);
         }
         if(url!=null){
             this.toImageCache(url, key);
