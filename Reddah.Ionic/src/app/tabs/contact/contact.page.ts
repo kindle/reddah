@@ -35,8 +35,15 @@ export class ContactPage {
         )
     {
         this.userName = this.reddah.getCurrentUser();
+        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
+        if(cachedGroupContact){
+            console.log('use cache grouped contact')
+            this.groupedContacts = JSON.parse(cachedGroupContact);
+        }
+        
         this.loadData();
         this.loadRequests();
+
     }
 
     async loadRequests(){
@@ -59,25 +66,36 @@ export class ContactPage {
         this.cacheService.loadFromObservable(cacheKey, request, "ContactPage")
         .subscribe(contacts => 
         {
-            for(let contact of contacts){
-                //cache user image
-                this.reddah.CommonCache(contact.UserPhoto, `userphoto_${contact.Watch}`,"assets/icon/anonymous.png");
-                
-                let cname = contact.NoteName ? contact.NoteName : 
-                    (contact.UserNickName ? contact.UserNickName : contact.Watch);
-                let ch = cname.charAt(0);
-                
-                if(/^[A-Za-z]/.test(ch))//English
-                {
-                    contact.s = ch.toLowerCase();
-                }
-                else
-                {
-                    contact.s = this.reddah.getSortLetter(ch,'zh');
-                }
+            let cachedContact = this.localStorageService.retrieve("Reddah_Contacts");
+
+            if(cachedContact==JSON.stringify(contacts)){
+                //
             }
-                        
-            this.groupContacts(contacts);
+            else{
+                this.localStorageService.store("Reddah_Contacts", JSON.stringify(contacts));
+
+                for(let contact of contacts){
+                    //cache user image
+                    this.reddah.CommonCache(contact.UserPhoto, `userphoto_${contact.Watch}`,"assets/icon/anonymous.png");
+                    
+                    let cname = contact.NoteName ? contact.NoteName : 
+                        (contact.UserNickName ? contact.UserNickName : contact.Watch);
+                    let ch = cname.charAt(0);
+                    
+                    if(/^[A-Za-z]/.test(ch))//English
+                    {
+                        contact.s = ch.toLowerCase();
+                    }
+                    else
+                    {
+                        contact.s = this.reddah.getSortLetter(ch,'zh');
+                    }
+                }
+                            
+                this.groupContacts(contacts);
+                this.localStorageService.store("Reddah_GroupedContacts", JSON.stringify(this.groupedContacts));
+            }
+            
             
         });  
     }
@@ -104,7 +122,6 @@ export class ContactPage {
             } 
             currentContacts.push(value);
         });
-
     }
 
     async viewNewFriends(){

@@ -13,13 +13,13 @@
         </ion-thumbnail>
         <ion-label class="userInfo">
             <h1>
-                {{reddah.appData('usernotename_'+userName+'_'+this.currentUserName)}}
+                {{reddah.getDisplayName(userName)}}
                 <ion-icon name="ios-male" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
                 <ion-icon name="ios-female" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
             </h1>
-            <p>昵称：{{reddah.appData('usernickname_'+userName)}}</p>
+            <p *ngIf="reddah.appData('usernickname_'+userName)">昵称：{{reddah.appData('usernickname_'+userName)}}</p>
             <p>Reddah ID：{{userName}}</p>
-            <p>地区：{{reddah.appData('userlocation_'+userName)}}</p>
+            <p *ngIf="reddah.appData('userlocation_'+userName)">地区：{{reddah.appData('userlocation_'+userName)}}</p>
         </ion-label>
     </ion-item>
 

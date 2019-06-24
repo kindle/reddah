@@ -21,7 +21,7 @@
             <ion-row>
                 <ion-item lines="none">
                     <ion-label slot="start" class="articleFooter" style="min-width: 300px;">
-                        {{bookmark.CreatedOn|date:'yyyy-MM-dd'}} 
+                        {{reddah.getSendTime(bookmark.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}} 
                         {{reddah.appData('usernotename_'+bookmark.OrgUserName+'_'+this.userName)}}
                     </ion-label>
                 </ion-item> 
@@ -31,13 +31,13 @@
             <ion-row>
                 <ion-item lines="none" (click)="viewer(bookmark.Content)" (press)="showChangeMenu($event, bookmark)">
                     <ion-avatar slot="start" class="avatar-top" *ngIf="bookmark.Content.length>0">
-                        <img [src]="bookmark.Content">
+                        <img [src]="reddah.cache(bookmark.Content)">
                     </ion-avatar>
                 </ion-item>
             </ion-row>
             <ion-row>
                 <ion-item lines="none">
-                    <ion-note slot="end" class="articleFooterTime">{{bookmark.CreatedOn|date:'yyyy-MM-dd'}} </ion-note>
+                    <ion-note slot="end" class="articleFooterTime">{{reddah.getSendTime(bookmark.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}} </ion-note>
                 </ion-item> 
             </ion-row>
         </ion-grid>

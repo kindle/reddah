@@ -92,6 +92,8 @@ export class UserPage implements OnInit {
 
     clearCacheAndReload(){
         this.cacheService.clearGroup("TimeLinePage"+this.userName);
+        this.imageList = [];
+        this.loadedIds = [];
         this.ngOnInit();
     }
 

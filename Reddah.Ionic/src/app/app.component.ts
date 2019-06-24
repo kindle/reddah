@@ -206,10 +206,10 @@ export class AppComponent {
 
             } catch (error) {}
 
-            //alert(popFlag)
             if(popFlag)
             {
-                if( this.router.url.startsWith('/tabs/(home:home)')) 
+                if(this.router.url.startsWith('/tabs/(home:home)')||
+                this.router.url==('/')) 
                 {
                     if(this.alertShown==false){
                         this.presentAlertConfirm();  

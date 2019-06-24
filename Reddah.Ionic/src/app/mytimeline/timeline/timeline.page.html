@@ -1,7 +1,7 @@
 
 <ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" style="background-color:white;">
     <div class="headerStart" #headerStart>
-        <ion-item color="transparent" no-padding lines="none">
+        <ion-item color="transparent" no-padding lines="none"  (dblclick)="clearCacheAndReload()">
             <ion-icon name="ios-arrow-back" slot="start" (click)="goback()" class="backbutton"></ion-icon>
             <ion-label></ion-label>
         </ion-item>
@@ -34,7 +34,7 @@
                 <div class="articleContent">
                     <ion-item no-padding lines="none" *ngIf="article.Content.length>0" (click)="goTsViewer(article)">
                         <ion-thumbnail slot="start">
-                            <img src="{{article.Content.split('$$$')[0]}}">
+                            <img src="{{reddah.cache(article.Content.split('$$$')[0])}}">
                         </ion-thumbnail>
                         <ion-label class="articleContentText" text-wrap>
                             <div [innerHTML]="reddah.summary(article.Title,20)" class="articleContentTextSummary"></div>

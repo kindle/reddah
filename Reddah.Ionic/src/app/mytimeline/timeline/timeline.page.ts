@@ -70,6 +70,13 @@ export class TimeLinePage implements OnInit {
             loading.dismiss();
         });
     }
+
+    async clearCacheAndReload(){
+        this.cacheService.clearGroup("TimeLinePage"+this.userName);
+        this.articles = [];
+        this.loadedIds = [];
+        this.ngOnInit();
+    }
   
     getTimeline(event):void {
         this.formData = new FormData();

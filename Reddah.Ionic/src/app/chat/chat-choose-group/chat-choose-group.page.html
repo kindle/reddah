@@ -12,7 +12,7 @@
         <ion-item *ngFor="let groupChat of groupList" (click)="goGroupChat(groupChat)">
             <div class="groupImages">
                 <div *ngFor="let user of groupChat.GroupName.split(',')">
-                    <img src="{{reddah.appPhoto['userphoto_'+user]}}">
+                    <img src="{{reddah.appData('userphoto_'+user)}}">
                 </div>
             </div>
             <ion-label style="margin-left:10px;">{{groupChat.Title}}({{groupChat.GroupName.split(',').length}})</ion-label>

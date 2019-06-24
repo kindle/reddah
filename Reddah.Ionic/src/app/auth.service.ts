@@ -70,7 +70,7 @@ export class AuthService {
 
 
   logout(): void {
-    this.reddahService.clearCurrentUser();
+    this.reddahService.logoutClear();
     window.location.reload();
   }
 

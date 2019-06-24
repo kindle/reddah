@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-
+import { SettingSignaturePage } from '../../settings/setting-signature/setting-signature.page'
 import { CacheService } from "ionic-cache";
 import { ChangePhotoPage } from '../change-photo/change-photo.page';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../../reddah.service';
 import { QrcardPage } from '../qrcard/qrcard.page';
+import { SettingNickNamePage } from '../../settings/setting-nickname/setting-nickname.page'
 
 @Component({
     selector: 'app-my-info',
@@ -95,6 +96,32 @@ export class MyInfoPage implements OnInit {
         });
         
         await qrModal.present();
+    }
+
+    async changeNickName(){
+        const modal = await this.modalController.create({
+            component: SettingNickNamePage,
+            componentProps: { 
+                currentNickName: this.reddah.appData('usernickname_'+this.userName)
+            }
+        });
+        await modal.present();
+        const {data} = await modal.onDidDismiss();
+        if(data||!data)
+            this.reddah.getUserPhotos(this.userName);
+    }
+
+    async changeSignature(){
+        const modal = await this.modalController.create({
+            component: SettingSignaturePage,
+            componentProps: { 
+                currentSignature: this.reddah.appData('usersignature_'+this.userName)
+            }
+        });
+        await modal.present();
+        const {data} = await modal.onDidDismiss();
+        if(data||!data)
+            this.reddah.getUserPhotos(this.userName);
     }
 
 }

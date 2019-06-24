@@ -3,9 +3,9 @@
     <ion-title>详情</ion-title>
 </ion-item>
 <ion-content>
-    <div style="display: flex; border-bottom: 1px solid lightgrey; margin: 15px 5px; padding-bottom: 10px;">
+    <div style="display: flex; border-bottom: 0px solid lightgrey; margin: 15px 5px; padding-bottom: 0px;">
         <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
-            <img-loader src="assets/icon/anonymous.png" class="border: 1px solid gray;" (click)="goUser(article.UserName)"></img-loader>
+            <img [src]="reddah.appData('userphoto_'+article.UserName)" class="border: 1px solid gray;" (click)="goUser(article.UserName)">
         </div>
         <div style="width:100%;border: 0px solid red;">
             <ion-card-header no-padding  class="articleUserName">
@@ -19,22 +19,22 @@
             <ion-card-content style="display:block;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                 <div class="parent" *ngIf="article.Content.split('$$$').length>6">
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                        <img src="{{reddah.GetCache(image)}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))">
+                        <img src="{{reddah.cache(image)}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
                 <div class="parent" *ngIf="article.Content.split('$$$').length==3||article.Content.split('$$$').length==5||article.Content.split('$$$').length==6">
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                        <img src="{{reddah.GetCache(image)}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))">
+                        <img src="{{reddah.cache(image)}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
                 <div class="parent2" *ngIf="article.Content.split('$$$').length==2||article.Content.split('$$$').length==4">
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                        <img src="{{reddah.GetCache(image)}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))">
+                        <img src="{{reddah.cache(image)}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
                 <div class="parent3" *ngIf="article.Content.split('$$$').length==1">
                     <div class="container3">
-                        <img src="{{reddah.GetCache(article.Content.split('$$$')[0])}}" class="picture3" (click)="viewer(0, article.Content.split('$$$'))">
+                        <img src="{{reddah.cache(article.Content.split('$$$')[0])}}" class="picture3" (click)="viewer(0, article.Content.split('$$$'))">
                     </div>
                 </div>
             </ion-card-content>
@@ -44,28 +44,34 @@
                 <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
             </ion-item>
             
-            <ion-item no-padding lines="none" *ngIf="article.GroupName">
-                <div style="width: 100%;">
-                    <div class="like-arrow-up"></div>
-                    <div class="likeSection">
-                        <ion-icon name="heart-empty" class="likeIcon"></ion-icon>
-                        <span class="likeUserName" (click)="goUser(article.GroupName,true)">{{article.GroupName}}</span>
-                    </div>
-                </div>
-            </ion-item>
-            <ion-item no-padding lines="none" *ngIf="commentData.get(article.Id)&&commentData.get(article.Id).Comments.length>0">
-                <div style="width: 100%;">
-                    <div class="like-arrow-up" *ngIf="!article.GroupName"></div>
-                    <div class="like-spliter" *ngIf="article.GroupName"></div>
-                    <div class="commentSection">
-                        <div style="padding: 10px;">
-                            <ts-comment (reply)="showAddCommentFromChildren($event)" no-padding [data]="commentData.get(article.Id)" [depth]="1" [authoronly]="authoronly" 
-                            [articleauthor]="article.UserName"></ts-comment>
-                        </div>
-                    </div>
-                </div>
-            </ion-item>
+            
         </div>
+    </div>
+    <div style="margin:0 10px;">
+        <ion-item no-padding lines="none" *ngIf="article.GroupName">
+            <div style="width: 100%;">
+                <div class="like-arrow-up"></div>
+                <div class="likeSection">
+                    <ion-icon name="heart-empty" class="likeIcon"></ion-icon>
+                    <span class="likeUserName">
+                        <img [src]="reddah.appData('userphoto_'+user)" *ngFor="let user of article.GroupName.split(',')" (click)="goUser(article.GroupName,true)"
+                        style="margin:0 3px;width:25px;height:25px;">
+                    </span>
+                </div>
+            </div>
+        </ion-item>
+        <ion-item no-padding lines="none" *ngIf="commentData.get(article.Id)&&commentData.get(article.Id).Comments.length>0">
+            <div style="width: 100%;">
+                <div class="like-arrow-up" *ngIf="!article.GroupName"></div>
+                <div class="like-spliter" *ngIf="article.GroupName"></div>
+                <div class="commentSection">
+                    <div style="padding: 10px;">
+                        <ts-comment (reply)="showAddCommentFromChildren($event)" no-padding [data]="commentData.get(article.Id)" [depth]="1" [authoronly]="authoronly" 
+                        [articleauthor]="article.UserName"></ts-comment>
+                    </div>
+                </div>
+            </div>
+        </ion-item>
     </div>
 </ion-content>
 <ion-footer style="background-color: white;">

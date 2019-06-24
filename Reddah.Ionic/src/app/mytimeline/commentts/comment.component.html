@@ -7,12 +7,12 @@
     
     <div *ngFor="let comment of data.Comments">
         <div *ngIf="data.Seed===comment.ParentId&&depth<=1">
-            <div (click)="showAddComment(comment)" style="padding: 3px;"><span (click)="goUser(comment.UserName)">{{comment.UserName}}</span>: <span [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></span></div>
+            <div (click)="showAddComment(comment)" style="padding: 3px;"><span (click)="goUser(comment.UserName)">{{reddah.getDisplayName(comment.UserName)}}</span>: <span [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></span></div>
             <ts-comment (reply)=pop($event) [data]="{'Seed':comment.Id, 'Comments': data.Comments}" [depth]="depth+1" [ptext]="comment.Content"
                      [pauthor]="comment.UserName" [authoronly]="authoronly" [articleauthor]="articleauthor"></ts-comment>
         </div>
         <div *ngIf="data.Seed===comment.ParentId&&depth>1">
-            <div (click)="showAddComment(comment)" style="padding: 3px;"><span (click)="goUser(comment.UserName)">{{comment.UserName}}</span>回复<span [innerHTML]="pauthor | safe: 'html'" (click)="goUser(pauthor)"></span>:<span [innerHTML]="comment.Content | safe: 'html'"></span></div>
+            <div (click)="showAddComment(comment)" style="padding: 3px;"><span (click)="goUser(comment.UserName)">{{reddah.getDisplayName(comment.UserName)}}</span>回复<span [innerHTML]="reddah.getDisplayName(pauthor) | safe: 'html'" (click)="goUser(pauthor)"></span>:<span [innerHTML]="comment.Content | safe: 'html'"></span></div>
             <ts-comment (reply)=pop($event) [data]="{'Seed':comment.Id, 'Comments': data.Comments}" [depth]="depth+1" 
                 [ptext]="comment.Content" [pauthor]="comment.UserName" [authoronly]="authoronly" [articleauthor]="articleauthor"></ts-comment>
         </div>

@@ -103,6 +103,8 @@ import { ChatChooseGroupPage } from './chat/chat-choose-group/chat-choose-group.
 import { BookmarkPage } from './bookmark/bookmark.page';
 import { BookmarkPopPage } from './common/bookmark-pop.page';
 import { SigninPage } from './signin/signin.page';
+import { SettingNickNamePage } from './settings/setting-nickname/setting-nickname.page'
+import { SettingSignaturePage } from './settings/setting-signature/setting-signature.page'
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -172,6 +174,7 @@ var firebaseConfig = {
         SettingAccountPage,
         SettingPrivacyPage,
         RegisterPage,
+        SettingNickNamePage,SettingSignaturePage,
     ],
     entryComponents: [
         BookmarkPage,
@@ -222,6 +225,7 @@ var firebaseConfig = {
         SettingAccountPage,
         SettingPrivacyPage,
         RegisterPage,
+        SettingNickNamePage,SettingSignaturePage,
     ],
     imports: [
         BrowserModule, 

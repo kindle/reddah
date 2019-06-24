@@ -7,7 +7,7 @@
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll slot="fixed">
-        <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload($event)">
+        <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
             <ion-icon name="ios-arrow-back" slot="start" (click)="goback()" class="backbutton"></ion-icon>
             <ion-label>朋友圈</ion-label>
             <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
@@ -73,7 +73,9 @@
                         <div class="like-arrow-up"></div>
                         <div class="likeSection">
                             <ion-icon name="heart-empty" class="likeIcon"></ion-icon>
-                            <span class="likeUserName" (click)="goUser(article.GroupName)">{{article.GroupName}}</span>
+                            <span class="likeUserName">
+                                <i (click)="goUser(user.userName)" *ngFor="let user of getDisplayNames(article.GroupName);last as isLast;">{{user.displayName}}{{isLast?"":", "}}</i>
+                            </span>
                         </div>
                     </div>
                 </ion-item>

@@ -215,7 +215,8 @@ export class MyTimeLinePage implements OnInit {
     }
 
     async presentPopover(event: Event, id: any, groupNames: string) {
-        let liked = groupNames.split(',').includes(this.reddah.getCurrentUser());
+        let liked = this.getDisplayNames(groupNames).map(x=>x.displayName).includes(this.reddah.getDisplayName(this.reddah.getCurrentUser()));
+        //let liked = groupNames.split(',').includes(this.reddah.getDisplayName(this.reddah.getCurrentUser()));
         const popover = await this.popoverController.create({
             component: TimelineCommentPopPage,
             componentProps: { liked: liked },
@@ -279,21 +280,21 @@ export class MyTimeLinePage implements OnInit {
                 let currentUser = this.reddah.getCurrentUser();
                 if(action=="add"){
                     if(item.GroupName.length==0){
-                        item.GroupName = currentUser;
+                        item.GroupName = this.reddah.getDisplayName(currentUser);
                     }
                     else {
-                        item.GroupName += "," + currentUser;
+                        item.GroupName += "," + this.reddah.getDisplayName(currentUser);
                     }
                 }
 
                 if(action=="remove"){
-                    if(item.GroupName==currentUser){
+                    if(item.GroupName==this.reddah.getDisplayName(currentUser)){
                         item.GroupName="";
                     }
                     else {
                         let groupNames = item.GroupName.split(',');
                         groupNames.forEach((gitem, gindex, galias)=>{
-                            if(gitem==currentUser){
+                            if(gitem==this.reddah.getDisplayName(currentUser)){
                                 groupNames.splice(gindex, 1);
                             }
                         });
@@ -413,4 +414,13 @@ export class MyTimeLinePage implements OnInit {
             this.reddah.getUserPhotos(this.userName, true);
     }
 
+    getDisplayNames(groupName){
+        let result = [];
+        let groupNames = groupName.split(',')
+        groupNames.forEach((name)=>{
+            result.push({userName: name, displayName: this.reddah.getDisplayName(name)});
+        });
+
+        return result;
+    }
 }

@@ -16,6 +16,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
+import { CacheService } from 'ionic-cache';
 
 @Injectable({
     providedIn: 'root'
@@ -31,6 +32,7 @@ export class ReddahService {
         private modalController: ModalController,
         private toastController: ToastController,
         private platform: Platform,
+        private cacheService: CacheService,
     ) { }
 
     //******************************** */
@@ -176,6 +178,30 @@ export class ReddahService {
         .pipe(
             tap(data => this.log('change note name')),
             catchError(this.handleError('change note name', []))
+        );
+    }
+    //******************************** */
+    private changeSignatureUrl = 'https://login.reddah.com/api/article/changesignature'; 
+
+    changeSignature(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.changeSignatureUrl, formData)
+        .pipe(
+            tap(data => this.log('change signature')),
+            catchError(this.handleError('change signature', []))
+        );
+    }
+    //******************************** */
+    private changeNickNameUrl = 'https://login.reddah.com/api/article/changenickname'; 
+
+    changeNickName(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.changeNickNameUrl, formData)
+        .pipe(
+            tap(data => this.log('change nick name')),
+            catchError(this.handleError('change nick name', []))
         );
     }
     //******************************** */
@@ -438,6 +464,11 @@ export class ReddahService {
 
     clearCurrentUser(){
         this.localStorageService.clear("Reddah_CurrentUser");
+    }
+
+    logoutClear(){
+        this.clearCurrentUser();
+        this.cacheService.clearAll();
     }
 
     setCurrentJwt(jwt: string){
