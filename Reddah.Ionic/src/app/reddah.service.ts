@@ -721,9 +721,6 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
                 this.localStorageService.store("userphoto_"+userName,
                     (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
             }
-            else{
-                this.localStorageService.store("userphoto_"+userName, "assets/icon/anonymous.png");
-            }
 
             //check from web
             let formData = new FormData();
@@ -822,7 +819,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         return new Array(n);
     }
 
-    async CommonCache(url, key, fallbackImage){
+    /*async CommonCache(url, key, fallbackImage){
         //check user photo cache
         let cachedUserPhotoPath = this.localStorageService.retrieve(key);
         if(cachedUserPhotoPath!=null){
@@ -834,6 +831,15 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         }
         if(url!=null){
             this.toImageCache(url, key);
+        }
+    }*/
+
+    async CachePhoto(url, key){
+        if(url){
+            let exist = this.localStorageService.retrieve(key);
+            if(!exist){
+                this.toImageCache(url, key);
+            }
         }
     }
 

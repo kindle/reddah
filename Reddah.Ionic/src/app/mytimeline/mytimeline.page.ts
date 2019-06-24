@@ -91,10 +91,12 @@ export class MyTimeLinePage implements OnInit {
                 this.loadedIds.push(article.Id);
                 
                 //cache user image
-                this.reddah.CommonCache(article.UserPhoto, `userphoto_${article.UserName}`,"assets/icon/anonymous.png");
+                //this.reddah.CommonCache(article.UserPhoto, `userphoto_${article.UserName}`,"assets/icon/anonymous.png");
+                this.reddah.CachePhoto(article.UserPhoto, `userphoto_${article.UserName}`);
                 //cache preview image
                 article.Content.split('$$$').forEach((previewImageUrl)=>{
-                    this.reddah.CommonCache(previewImageUrl, previewImageUrl,"assets/icon/noimage.jpg");
+                    //this.reddah.CommonCache(previewImageUrl, previewImageUrl,"assets/icon/noimage.jpg");
+                    this.reddah.CachePhoto(previewImageUrl, previewImageUrl);
                 });
                 this.GetCommentsData(article.Id);
             }
@@ -118,10 +120,12 @@ export class MyTimeLinePage implements OnInit {
                 this.loadedIds.push(article.Id);
                 
                 //cache user image
-                this.reddah.CommonCache(article.UserPhoto, `userphoto_${article.UserName}`,"assets/icon/anonymous.png");
+                //this.reddah.CommonCache(article.UserPhoto, `userphoto_${article.UserName}`, "assets/icon/anonymous.png");
+                this.reddah.CachePhoto(article.UserPhoto, `userphoto_${article.UserName}`);
                 //cache preview image
                 article.Content.split('$$$').forEach((previewImageUrl)=>{
-                    this.reddah.CommonCache(previewImageUrl, previewImageUrl,"assets/icon/noimage.jpg");
+                    //this.reddah.CommonCache(previewImageUrl, previewImageUrl,"assets/icon/noimage.jpg");
+                    this.reddah.CachePhoto(previewImageUrl, previewImageUrl);
                 });
             }
             if(event)

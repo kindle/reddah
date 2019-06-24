@@ -39,10 +39,7 @@ export class NewFriendPage implements OnInit {
                     this.localStorageService.store("userphoto_"+request.UserName, 
                     (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
                 }
-                else{
-                    this.localStorageService.store("userphoto_"+request.UserName,
-                        "assets/icon/anonymous.png");
-                }
+                
                 if(request.UserPhoto!=null){
                     this.reddah.toImageCache(request.UserPhoto, `userphoto_${request.UserName}`);
                 }

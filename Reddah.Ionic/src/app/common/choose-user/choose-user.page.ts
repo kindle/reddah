@@ -74,10 +74,7 @@ export class ChooseUserPage implements OnInit {
                     this.localStorageService.store("userphoto_"+contact.Watch, 
                         (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
                 }
-                else{
-                    this.localStorageService.store("userphoto_"+contact.Watch, 
-                        "assets/icon/anonymous.png");
-                }
+                
                 if(contact.UserPhoto!=null){
                     this.reddah.toImageCache(contact.UserPhoto, `userphoto_${contact.Watch}`);
                 }

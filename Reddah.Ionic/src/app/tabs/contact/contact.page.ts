@@ -76,7 +76,8 @@ export class ContactPage {
 
                 for(let contact of contacts){
                     //cache user image
-                    this.reddah.CommonCache(contact.UserPhoto, `userphoto_${contact.Watch}`,"assets/icon/anonymous.png");
+                    //this.reddah.CommonCache(contact.UserPhoto, `userphoto_${contact.Watch}`,"assets/icon/anonymous.png");
+                    this.reddah.CachePhoto(contact.UserPhoto, `userphoto_${contact.UserName}`);
                     
                     let cname = contact.NoteName ? contact.NoteName : 
                         (contact.UserNickName ? contact.UserNickName : contact.Watch);
