@@ -85,10 +85,19 @@ export class LocationPage implements OnInit {
             alert(err.message);
         })
 
-        var searchLayer = L.layerGroup().addTo(this.map);
+        //var searchLayer = L.layerGroup().addTo(this.map);
         //... adding data in searchLayer ...
-        this.map.addControl( new L.Control.Search({layer: searchLayer}) );
-        
+        //this.map.addControl( new L.Control.Search({layer: searchLayer}) );
+        this.search("方舟大厦")
+    }
+
+    async search(text){
+        // setup
+        const provider = new OpenStreetMapProvider();
+
+        // search
+        const results = await provider.search({ query: text });
+        console.log(results);
     }
 
 }
