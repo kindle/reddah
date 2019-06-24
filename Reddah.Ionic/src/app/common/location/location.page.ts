@@ -10,6 +10,7 @@ import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import leaflet from 'leaflet';
 import L from 'leaflet-search';
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
 @Component({
   selector: 'app-location',

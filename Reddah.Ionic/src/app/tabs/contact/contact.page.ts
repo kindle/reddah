@@ -68,16 +68,13 @@ export class ContactPage {
         {
             let cachedContact = this.localStorageService.retrieve("Reddah_Contacts");
 
-            if(cachedContact==JSON.stringify(contacts)){
-                //
-            }
-            else{
+            if(cachedContact!=JSON.stringify(contacts)){
                 this.localStorageService.store("Reddah_Contacts", JSON.stringify(contacts));
 
                 for(let contact of contacts){
                     //cache user image
                     //this.reddah.CommonCache(contact.UserPhoto, `userphoto_${contact.Watch}`,"assets/icon/anonymous.png");
-                    this.reddah.CachePhoto(contact.UserPhoto, `userphoto_${contact.UserName}`);
+                    this.reddah.CachePhoto(contact.UserPhoto, `userphoto_${contact.Watch}`);
                     
                     let cname = contact.NoteName ? contact.NoteName : 
                         (contact.UserNickName ? contact.UserNickName : contact.Watch);
