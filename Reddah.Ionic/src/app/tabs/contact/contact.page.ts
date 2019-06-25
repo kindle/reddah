@@ -4,7 +4,6 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { NewFriendPage } from '../../friend/new-friend/new-friend.page';
-import { StatusBar } from '@ionic-native/status-bar';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from 'ionic-cache';
 import { UserPage } from '../../common/user/user.page';
@@ -74,8 +73,8 @@ export class ContactPage {
                 for(let contact of contacts){
                     //cache user image
                     //this.reddah.CommonCache(contact.UserPhoto, `userphoto_${contact.Watch}`,"assets/icon/anonymous.png");
-                    this.reddah.CachePhoto(contact.UserPhoto, `userphoto_${contact.Watch}`);
-                    
+                    //this.reddah.CachePhoto(contact.UserPhoto, `userphoto_${contact.Watch}`);
+                    this.reddah.getUserPhotos(contact.Watch);
                     let cname = contact.NoteName ? contact.NoteName : 
                         (contact.UserNickName ? contact.UserNickName : contact.Watch);
                     let ch = cname.charAt(0);

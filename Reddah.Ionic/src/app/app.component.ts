@@ -13,6 +13,7 @@ import * as firebase from 'firebase';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Globalization } from '@ionic-native/globalization';
+import { ReddahService } from './reddah.service';
 
 @Component({
     selector: 'app-root',
@@ -37,6 +38,7 @@ export class AppComponent {
         private cacheService: CacheService,
         private file: File,
         private androidPermissions: AndroidPermissions,
+        private reddah: ReddahService,
         //private firebase: Firebase,
     ) {
         this.initializeApp();
@@ -96,6 +98,8 @@ export class AppComponent {
             this.translate.setDefaultLang(currentLocale);
         }
 
+        //load friends to cache for permission check
+        this.reddah.loadFriends();
         
 
         var firebaseConfig = {

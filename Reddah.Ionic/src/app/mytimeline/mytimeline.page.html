@@ -67,22 +67,21 @@
                     <ion-note color="dark">{{reddah.getSendTime(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
                     <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
                 </ion-item>
-                
-                <ion-item no-padding lines="none" *ngIf="article.GroupName">
+                <ion-item no-padding lines="none" *ngIf="reddah.getAllowedNames(article.GroupName).length>0">
                     <div style="width: 100%;">
                         <div class="like-arrow-up"></div>
                         <div class="likeSection">
                             <ion-icon name="heart-empty" class="likeIcon"></ion-icon>
                             <span class="likeUserName">
-                                <i (click)="goUser(user.userName)" *ngFor="let user of getDisplayNames(article.GroupName);last as isLast;">{{user.displayName}}{{isLast?"":", "}}</i>
+                                <i (click)="goUser(user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName);last as isLast;">{{user.displayName}}{{isLast?"":", "}}</i>
                             </span>
                         </div>
                     </div>
                 </ion-item>
-                <ion-item no-padding lines="none" *ngIf="commentData.get(article.Id)&&commentData.get(article.Id).Comments.length>0">
+                <ion-item no-padding lines="none" *ngIf="commentData.get(article.Id)&&reddah.getAllowedComments(commentData.get(article.Id)).length>0">
                     <div style="width: 100%;">
-                        <div class="like-arrow-up" *ngIf="!article.GroupName"></div>
-                        <div class="like-spliter" *ngIf="article.GroupName"></div>
+                        <div class="like-arrow-up" *ngIf="reddah.getAllowedNames(article.GroupName).length==0"></div>
+                        <div class="like-spliter" *ngIf="reddah.getAllowedNames(article.GroupName).length>0"></div>
                         <div class="commentSection">
                             <div style="padding: 10px;">
                                 <ts-comment (reply)="showAddCommentFromChildren($event)" no-padding [data]="commentData.get(article.Id)" [depth]="1" [authoronly]="authoronly" 

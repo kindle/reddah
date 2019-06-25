@@ -3,6 +3,7 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { ModalController } from '@ionic/angular';
 import { UserPage } from '../user/user.page';
 import { ReddahService } from '../../reddah.service';
+import { QrcardPage } from '../qrcard/qrcard.page';
 
 @Component({
     selector: 'app-scan',
@@ -79,6 +80,8 @@ export class ScanPage implements OnInit {
 
     ionViewWillLeave() {
         (window.document.querySelector('html') as HTMLElement).classList.remove('cameraView');
+        QRScanner.hide();
+        QRScanner.destroy();
     }
 
     light=false;

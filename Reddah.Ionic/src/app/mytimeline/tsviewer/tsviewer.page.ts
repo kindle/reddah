@@ -219,7 +219,7 @@ export class TsViewerPage implements OnInit {
     showAddCommentFromChildren(event){
         this.selectedArticleId = event.articleId;
         this.selectedCommentId = event.commentId;
-        this.selectedReplyPlaceholder = "回复" + event.userName + ":";
+        this.selectedReplyPlaceholder = "回复" + this.reddah.getDisplayName(event.userName) + ":";
 
         if(this.selectedArticleId!=event.articleId||this.selectedCommentId!=event.commentId)
         {
