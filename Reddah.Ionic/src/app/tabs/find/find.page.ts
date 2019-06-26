@@ -4,6 +4,7 @@ import { ScanPage } from '../../common/scan/scan.page';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SearchPage } from '../../common/search/search.page';
 import { ShakePage } from '../../shake/shake.page';
+import { ReddahService } from '../../reddah.service';
 
 @Component({
   selector: 'app-find',
@@ -13,6 +14,7 @@ import { ShakePage } from '../../shake/shake.page';
 export class FindPage {
     constructor(
         private modalController: ModalController,
+        public reddah: ReddahService,
     ){
     }
 

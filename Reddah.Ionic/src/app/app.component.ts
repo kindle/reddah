@@ -100,8 +100,13 @@ export class AppComponent {
 
         //load friends to cache for permission check
         this.reddah.loadFriends();
+        this.reddah.getMessageUnread().subscribe(data=>{
+            if(data.Success==0){
+                this.reddah.unReadMessage = data.Message;
+            }
+        });
         
-
+/*
         var firebaseConfig = {
             apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
             authDomain: "reddah-com.firebaseapp.com",
@@ -111,6 +116,7 @@ export class AppComponent {
             messagingSenderId: "64237460591",
             appId: "1:64237460591:web:4f2a4411eca1162f"
           };
+          */
         //firebase.initializeApp(firebaseConfig);
     }
 

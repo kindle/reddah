@@ -5,6 +5,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ModalController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ReddahService } from '../reddah.service';
 
 @Component({
     selector: 'app-tabs',
@@ -15,12 +16,14 @@ export class TabsPage implements OnInit {
 
     @ViewChild('about') about;
 
-    constructor(private authService: AuthService,
+    constructor(
+        private authService: AuthService,
         private platform: Platform,
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
         private statusBar: StatusBar,
         private router: Router,
+        public reddah: ReddahService,
         ) {}
 
     
@@ -56,6 +59,11 @@ export class TabsPage implements OnInit {
                 this.statusBar.styleDefault();
             }
         }*/
+        this.reddah.getMessageUnread().subscribe(data=>{
+            if(data.Success==0){
+                this.reddah.unReadMessage = data.Message;
+            }
+        });
     }
 
     

@@ -17,6 +17,7 @@ import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page'
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { MessagePage } from '../mytimeline/message/message.page'
 
 @Component({
     selector: 'app-mytimeline',
@@ -61,46 +62,65 @@ export class MyTimeLinePage implements OnInit {
     ){
         this.userName = this.reddah.getCurrentUser();
     }
+
+    messages=[1];
+    async goMessage(){
+        const modal = await this.modalController.create({
+            component: MessagePage,
+        });
+          
+        await modal.present();
+    }
     
     async ngOnInit(){
         this.reddah.getUserPhotos(this.userName, true);
 
-        const loading = await this.loadingController.create({
+        /*const loading = await this.loadingController.create({
             message: this.translateService.instant("Article.Loading"),
             spinner: 'circles',
         });
-        await loading.present();
+        await loading.present();*/
+
+        let cachedArticles = this.localStorageService.retrieve("Reddah_mytimeline");
+        let cachedIds = this.localStorageService.retrieve("Reddah_mytimeline_ids");
+        if(cachedArticles){
+            this.articles = JSON.parse(cachedArticles);
+            this.loadedIds = JSON.parse(cachedIds);
+        }
         
-        this.loadedIds = [];
+
         this.formData = new FormData();
-        this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
+        this.formData.append("loadedIds", JSON.stringify([]));
 
         let cacheKey = "this.reddah.getMyTimeline";
-        console.log(`cacheKey:${cacheKey}`);
         let request = this.reddah.getMyTimeline(this.formData);
 
         this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
         .subscribe(timeline => 
         {
-            this.articles = [];
-            this.loadedIds = [];
-            this.commentData = new Map();
+            if(cachedArticles!=JSON.stringify(timeline))
+            {
+                this.articles = [];
+                this.loadedIds = [];
+                this.commentData = new Map();
 
-            for(let article of timeline){
-                this.articles.push(article);
-                this.loadedIds.push(article.Id);
-                
-                //cache user image
-                //this.reddah.CommonCache(article.UserPhoto, `userphoto_${article.UserName}`,"assets/icon/anonymous.png");
-                this.reddah.CachePhoto(article.UserPhoto, `userphoto_${article.UserName}`);
-                //cache preview image
-                article.Content.split('$$$').forEach((previewImageUrl)=>{
-                    //this.reddah.CommonCache(previewImageUrl, previewImageUrl,"assets/icon/noimage.jpg");
-                    this.reddah.CachePhoto(previewImageUrl, previewImageUrl);
-                });
-                this.GetCommentsData(article.Id);
+                for(let article of timeline){
+                    this.articles.push(article);
+                    this.loadedIds.push(article.Id);
+                    
+                    //cache user image
+                    this.reddah.CachePhoto(article.UserPhoto, `userphoto_${article.UserName}`);
+                    //cache preview image
+                    article.Content.split('$$$').forEach((previewImageUrl)=>{
+                        this.reddah.CachePhoto(previewImageUrl, previewImageUrl);
+                    });
+                    this.GetCommentsData(article.Id);
+                }
+
+                this.localStorageService.store("Reddah_mytimeline",JSON.stringify(timeline));
+                this.localStorageService.store("Reddah_mytimeline_ids",JSON.stringify(this.loadedIds));
+
             }
-            loading.dismiss();
         });
     }
   
@@ -109,7 +129,6 @@ export class MyTimeLinePage implements OnInit {
         this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
         
         let cacheKey = "this.reddah.getMyTimeline" + this.loadedIds.join(',');
-        console.log(`loadmore_cacheKey:${cacheKey}`);
         let request = this.reddah.getMyTimeline(this.formData);
         
         this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
@@ -120,14 +139,16 @@ export class MyTimeLinePage implements OnInit {
                 this.loadedIds.push(article.Id);
                 
                 //cache user image
-                //this.reddah.CommonCache(article.UserPhoto, `userphoto_${article.UserName}`, "assets/icon/anonymous.png");
                 this.reddah.CachePhoto(article.UserPhoto, `userphoto_${article.UserName}`);
                 //cache preview image
                 article.Content.split('$$$').forEach((previewImageUrl)=>{
-                    //this.reddah.CommonCache(previewImageUrl, previewImageUrl,"assets/icon/noimage.jpg");
                     this.reddah.CachePhoto(previewImageUrl, previewImageUrl);
                 });
             }
+
+            this.localStorageService.store("Reddah_mytimeline",JSON.stringify(timeline));
+            this.localStorageService.store("Reddah_mytimeline_ids",JSON.stringify(this.loadedIds));
+
             if(event)
                 event.target.complete();
         });
@@ -139,6 +160,8 @@ export class MyTimeLinePage implements OnInit {
         this.cacheService.clearGroup("MyTimeLinePage");
         this.loadedIds = [];
         this.articles = [];
+        this.localStorageService.clear("Reddah_mytimeline");
+        this.localStorageService.clear("Reddah_mytimeline_ids");
         this.getMyTimeline(event);
     }
 
@@ -238,12 +261,11 @@ export class MyTimeLinePage implements OnInit {
                 likeAddFormData.append("action", "add");
                 likeAddFormData.append("id", id+"");
                 this.reddah.like(likeAddFormData)
-                    .subscribe(data => 
-                    {
-                        console.log(JSON.stringify(data));
-                        this.cacheService.clearGroup("MyTimeLinePage");
-                    }
-                );
+                .subscribe(data => 
+                {
+                    console.log(JSON.stringify(data));
+                    this.cacheService.clearGroup("MyTimeLinePage");
+                });
                 
                 this.renderUiLike(id, "add");
                 
@@ -255,12 +277,11 @@ export class MyTimeLinePage implements OnInit {
                 likeRemoveFormData.append("action", "remove");
                 likeRemoveFormData.append("id", id+"");
                 this.reddah.like(likeRemoveFormData)  
-                    .subscribe(data => 
-                    {
-                        console.log(JSON.stringify(data));
-                        this.cacheService.clearGroup("MyTimeLinePage");
-                    }
-                );
+                .subscribe(data => 
+                {
+                    console.log(JSON.stringify(data));
+                    this.cacheService.clearGroup("MyTimeLinePage");
+                });
                 this.renderUiLike(id, "remove");
             }
             

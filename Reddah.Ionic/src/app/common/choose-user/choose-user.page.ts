@@ -13,6 +13,8 @@ import { ReddahService } from '../../reddah.service';
 export class ChooseUserPage implements OnInit {
 
     @Input() targetUser;
+    @Input() addedUsers;
+
     userName;
     locale;
     
@@ -32,8 +34,6 @@ export class ChooseUserPage implements OnInit {
     ngOnInit() {
         this.loadData();
     }
-
-    
     
     async close() {
         await this.modalController.dismiss();
@@ -47,7 +47,7 @@ export class ChooseUserPage implements OnInit {
         let targetUsers = [];
         this.groupedContacts.forEach((item)=>{
             item.contacts.forEach((contact)=>{
-                if(contact.isChecked==true)
+                if(contact.isChecked==true&&!this.addedUsers.split(',').includes(contact.Watch))
                 {
                     targetUsers.push(contact);
                 }
@@ -61,62 +61,18 @@ export class ChooseUserPage implements OnInit {
     groupedContacts = [];
 
     loadData(){
-        let cacheKey = "this.reddah.getFriends";
-        let request = this.reddah.getFriends();
-
-        this.cacheService.loadFromObservable(cacheKey, request, "ContactPage")
-        .subscribe(contacts => 
-        {
-            for(let contact of contacts){
-                //check cache first
-                let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${contact.Watch}`);
-                if(cachedUserPhotoPath!=null){
-                    this.localStorageService.store("userphoto_"+contact.Watch, 
-                        (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
-                }
-                
-                if(contact.UserPhoto!=null){
-                    this.reddah.toImageCache(contact.UserPhoto, `userphoto_${contact.Watch}`);
-                }
-
-                let cname = contact.NoteName ? contact.NoteName : contact.Watch;
-                let ch = cname.charAt(0);
-                console.log(ch)
-                if(/^[A-Za-z]/.test(ch))//English
-                {
-                    contact.s = ch.toLowerCase();
-                }
-                else
-                {
-                    contact.s = this.reddah.getSortLetter(ch,'zh');
-                }
-            }
-                        
-            this.groupContacts(contacts);
-            
-        });  
+        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
+        if(cachedGroupContact){
+            this.groupedContacts = JSON.parse(cachedGroupContact);
+            this.groupedContacts.forEach((item)=>{
+                item.contacts.forEach((contact)=>{
+                    if(this.addedUsers.split(',').includes(contact.Watch))
+                    {
+                        contact.isChecked=true;
+                    }
+                });
+            });
+        } 
     }
 
-    groupContacts(contacts){
-
-        this.contacts = [];
-        this.groupedContacts = [];
-
-        let sortedContacts = contacts.sort((a,b)=> a.s-b.s);
-        let currentLetter = false;
-        let currentContacts = [];
-
-        sortedContacts.forEach((value, index, alias) => {
-            if(value.s.charAt(0) != currentLetter){
-                currentLetter = value.s.charAt(0);
-                let newGroup = {
-                    letter: currentLetter,
-                    contacts: []
-                };
-                currentContacts = newGroup.contacts;
-                this.groupedContacts.push(newGroup);
-            } 
-            currentContacts.push(value);
-        });
-    }
 }

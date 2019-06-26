@@ -146,8 +146,14 @@ CREATE TABLE [dbo].[UserFriend]
 
 CREATE TABLE [dbo].[Message]
 (
+	[Id] INT IDENTITY(1,1) NOT NULL,
 	[From] NVARCHAR(MAX) NOT NULL,
 	[To] NVARCHAR(MAX) NOT NULL,
-	[Msg] NVARCHAR(MAX) NOT NULL,
-	[Status] INT NOT NULL DEFAULT 0
+	[Msg] NVARCHAR(MAX) NOT NULL, 
+	[ArticleId] INT NOT NULL DEFAULT 0,
+	[AritclePhoto] NVARCHAR(MAX) NULL,
+	[Status] INT NOT NULL DEFAULT 0, --0:unread, 1:read
+	[Type] INT NOT NULL DEFAULT 0, --0:like, 1:comment
+	[CreatedOn] DATETIME NOT NULL,
+	PRIMARY KEY CLUSTERED ([Id] ASC)
 );

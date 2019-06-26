@@ -1,0 +1,62 @@
+import { Component, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
+import { InfiniteScroll } from '@ionic/angular';
+import { ReddahService } from '../../reddah.service';
+import { LocalStorageService } from 'ngx-webstorage';
+import { LoadingController, NavController, PopoverController, ActionSheetController  } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
+import { CacheService } from "ionic-cache";
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
+@Component({
+  selector: 'app-message',
+  templateUrl: 'message.page.html',
+  styleUrls: ['message.page.scss']
+})
+export class MessagePage implements OnInit {
+    
+    async close(){
+        await this.modalController.dismiss();
+    }
+
+    messages;
+
+    constructor(private reddah : ReddahService,
+        public loadingController: LoadingController,
+        public translateService: TranslateService,
+        public navController: NavController,
+        private renderer: Renderer,
+        public modalController: ModalController,
+        private localStorageService: LocalStorageService,
+        private popoverController: PopoverController,
+        private photoLibrary: PhotoLibrary,
+        private cacheService: CacheService,
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        public actionSheetController: ActionSheetController,
+        ){
+        
+    }
+        
+    ngOnInit(){
+        this.messages = this.reddah.unReadMessage;
+        
+        this.reddah.setMessageRead().subscribe(data=>{
+            if(data.Success==0){
+                this.reddah.unReadMessage = [];
+            }
+        })
+    }
+
+    async viewTimeline(message){
+
+    }
+
+    showAll = false;
+    showAllMessage(){
+        this.showAll = true;
+        this.messages = this.reddah.getAllMessage();
+    }
+
+}

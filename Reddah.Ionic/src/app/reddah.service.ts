@@ -394,6 +394,30 @@ export class ReddahService {
       );
     }
     //******************************** */
+    private messageunreadUrl = 'https://login.reddah.com/api/article/messageunread'; 
+
+    getMessageUnread(): Observable<any> {
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.messageunreadUrl, formData)
+        .pipe(
+            tap(data => this.log('get msg unread')),
+            catchError(this.handleError('get msg unread', []))
+        );
+    }
+    //******************************** */
+    private messagesetreadUrl = 'https://login.reddah.com/api/article/messagesetread'; 
+
+    setMessageRead(): Observable<any> {
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.messagesetreadUrl, formData)
+        .pipe(
+            tap(data => this.log('set msg as read')),
+            catchError(this.handleError('set msg as read', []))
+        );
+    }
+    //******************************** */
 
 
 
@@ -722,7 +746,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         try{
             //check cache first
             let cachedCoverPath = this.localStorageService.retrieve(`cover_${userName}`);
-            if(cachedCoverPath!=null){
+            if(cachedCoverPath!=null&&this.platform.is('cordova')){
                 this.localStorageService.store("cover_"+userName, 
                     (<any>window).Ionic.WebView.convertFileSrc(cachedCoverPath));
                 //bug when image not loaded, src width =0
@@ -733,7 +757,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
                 this.localStorageService.store("cover_"+userName, "assets/icon/timg.jpg");
             }
             let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${userName}`);
-            if(cachedCoverPath!=null){
+            if(cachedCoverPath!=null&&this.platform.is('cordova')){
                 this.localStorageService.store("userphoto_"+userName,
                     (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
             }
@@ -934,5 +958,19 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             return data.Comments.filter(c=>(friends.includes(c.UserName)||c.UserName==this.getCurrentUser())&&data.Seed==c.ParentId);
         }
         return [];
+    }
+
+
+    unReadMessage = [];
+    //unReadMessage(){
+    //    return [{userName:'wind', type:0},{userName:'duck6686', type:0}];
+    //}
+
+    getAllMessage(){
+        return [
+            {userName:'wind', type:0},{userName:'duck6686', type:0},
+            {userName:'wind', type:0},{userName:'duck6686', type:0},
+            {userName:'wind', type:0},{userName:'duck6686', type:0}
+        ];
     }
 }

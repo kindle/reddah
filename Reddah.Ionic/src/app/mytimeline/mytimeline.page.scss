@@ -137,7 +137,7 @@
 }
 
 .articleUserName{
-   margin-bottom: 10px;
+   margin-bottom: 2px;
 }
 
 .like-spliter{
@@ -146,4 +146,28 @@
 
 .portrait{
    border-radius: 6px;  
+}
+
+.friendName{
+   color: #566890;
+   font-weight: bold;
+}
+
+.messageBox{
+   background-color: #585858;
+   border-radius: 4px;
+   padding:3px;
+   color:white;
+   margin:10px 50%;
+   transform: translateX(-50%);
+   min-width:150px;
+   vertical-align: middle;
+   display: flex;
+}
+
+.messagePhoto{
+   border-radius:3px; 
+   margin:3px;
+   width:30px;
+   height:30px;
 }

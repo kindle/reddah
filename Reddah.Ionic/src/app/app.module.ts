@@ -83,6 +83,7 @@ import { AutoresizeDirective } from './autoresize-textarea.directive';
 import { CommentBoxComponent } from './postviewer/comment-box/comment-box.component';
 import { ChatBoxComponent } from './chat/chat-box/chat-box.component';
 import { SearchPage } from './common/search/search.page';
+import { MessagePage } from './mytimeline/message/message.page'
 import { SearchUserPage } from './friend/search-user/search-user.page';
 import { QrcardPage } from './common/qrcard/qrcard.page';
 import { SettingListPage } from './settings/setting-list/setting-list.page';
@@ -135,7 +136,7 @@ var firebaseConfig = {
         GroupChatOptPage,
         ChatChooseUserPage,
         ChatChooseGroupPage,
-        MyInfoPage,
+        MyInfoPage,MessagePage,
         NewFriendPage,
         PostviewerPage,
         SafePipe,
@@ -196,7 +197,7 @@ var firebaseConfig = {
         GroupChatOptPage,
         ChatChooseUserPage,
         ChatChooseGroupPage,
-        MyInfoPage,
+        MyInfoPage,MessagePage,
         NewFriendPage,
         ArticlePopPage,
         HeaderAddPage,

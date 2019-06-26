@@ -22,7 +22,9 @@ export class ShakePage implements OnInit {
     userName: any;
 
     async close(){
-        this.watch.unsubscribe();
+        if(this.platform.is('cordova')){
+            this.watch.unsubscribe();
+        }
         this.modalController.dismiss();
     }
 

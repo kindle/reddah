@@ -125,7 +125,8 @@ export class GroupChatOptPage implements OnInit {
 
     async addToGroupChat(){
         const modal = await this.modalController.create({
-            component: ChooseUserPage
+            component: ChooseUserPage,
+            componentProps: { "addedUsers" : this.groupInfo.GroupName} 
         });
             
         await modal.present();

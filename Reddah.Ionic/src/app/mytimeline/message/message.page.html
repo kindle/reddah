@@ -1,0 +1,22 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-text>消息</ion-text>
+    <ion-text slot="end">清空</ion-text>
+</ion-item>
+<ion-content no-padding>
+    <ion-item *ngFor="let message of messages" (click)="viewTimeline(message)">
+        <ion-avatar slot="start" class="messageUserPhoto">
+            <img src="{{reddah.appData('userphoto_'+message.From)}}" class="messagePortrait">
+        </ion-avatar>
+        <ion-label style="margin-left:10px;">
+            <h3 class="friendName">{{reddah.getDisplayName(message.From)}}</h3>
+            <ion-icon name="heart-empty" class="likeIcon" *ngIf="message.Type==0"></ion-icon>
+            <ion-note *ngIf="message.Type==1">#@$#!</ion-note>
+            <h4>{{message.CreatedOn | date: 'HH:mm'}}</h4>
+        </ion-label>
+        <img slot="end" src="{{reddah.cache(message.AritclePhoto)}}" class="messageContentPortrait">
+    </ion-item>
+    <ion-item lines="none" (click)="showAllMessage()" *ngIf="!showAll">
+        <ion-label text-center>查看更早的消息...</ion-label>
+    </ion-item>    
+</ion-content>

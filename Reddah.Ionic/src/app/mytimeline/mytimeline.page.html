@@ -24,21 +24,25 @@
             <ion-label class="userNameTitle">{{reddah.getDisplayName(userName)}}</ion-label>
             <img src="{{reddah.appData('userphoto_'+userName)}}" (click)="goUser(userName)">
         </div>
+        <div (click)="goMessage()" *ngIf="reddah.unReadMessage.length>0" class="messageBox">
+            <img [src]="reddah.appData('userphoto_'+reddah.unReadMessage.slice(-1)[0].From)" class="messagePhoto">
+            <span style="color:white;line-height:35px;margin:0 15px;">{{reddah.unReadMessage.length}}条新消息</span>
+        </div>
         <div *ngFor="let article of articles" style="display: flex; border-bottom: 1px solid lightgrey; margin-bottom: 15px; padding-bottom: 10px;">
             <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
                 <img src="{{reddah.appData('userphoto_'+article.UserName)}}" class="portrait" (click)="goUser(article.UserName)">
             </div>
             <div style="width:100%;border: 0px solid red;">
-                <ion-card-header no-padding  class="articleUserName">
+                <ion-card-header no-padding class="articleUserName">
                     <ion-card-title>
-                        <div (click)="goUser(article.UserName)">{{reddah.getDisplayName(article.UserName)}}</div>
+                        <div (click)="goUser(article.UserName)" class="friendName">{{reddah.getDisplayName(article.UserName)}}</div>
                     </ion-card-title>
                 </ion-card-header>
                 <ion-item no-padding style="padding: 0;" lines="none" *ngIf="article.Title.length>0&&article.Title.length<100">
-                    <div style="background-color: white; padding: 5px 0;margin-bottom:5px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                    <div style="background-color: white; padding: 2px 0;margin-bottom:5px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
                 </ion-item>
                 <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
-                    <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 5px;margin-bottom:5px;width:96%;" [innerHTML]="reddah.summary(article.Title,50)"></div>
+                    <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 2px;margin-bottom:5px;width:96%;" [innerHTML]="reddah.summary(article.Title,50)"></div>
                 </ion-item>
                 <ion-card-content style="display:block;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>6">
@@ -73,7 +77,7 @@
                         <div class="likeSection">
                             <ion-icon name="heart-empty" class="likeIcon"></ion-icon>
                             <span class="likeUserName">
-                                <i (click)="goUser(user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName);last as isLast;">{{user.displayName}}{{isLast?"":", "}}</i>
+                                <span class="friendName" (click)="goUser(user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName);last as isLast;">{{user.displayName}}{{isLast?"":", "}}</span>
                             </span>
                         </div>
                     </div>

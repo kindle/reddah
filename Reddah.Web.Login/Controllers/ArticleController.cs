@@ -399,6 +399,19 @@ namespace Reddah.Web.Login.Controllers
                                     article.GroupName += jwtResult.JwtUser.User;
                                 else 
                                     article.GroupName += "," + jwtResult.JwtUser.User;
+
+                                var msg = new Message()
+                                {
+                                    From = jwtResult.JwtUser.User,
+                                    To = article.UserName,
+                                    Msg = "like",
+                                    ArticleId = article.Id,
+                                    AritclePhoto = article.Content.Length>0?article.Content.Split(new[] { "$$$" }, StringSplitOptions.None)[0]:null,
+                                    Type = 0,
+                                    CreatedOn = DateTime.UtcNow,
+                                    Status = 0
+                                };
+                                db.Message.Add(msg);
                             }
                             else
                                 return Ok(new ApiResult(1, "already add like"));
@@ -1136,6 +1149,70 @@ namespace Reddah.Web.Login.Controllers
                     }
 
                     return Ok(new ApiResult(0, list));
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("messageunread")]
+        [HttpPost]
+        public IHttpActionResult MessageUnread()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    return Ok(new ApiResult(0, db.Message.Where(x => x.Status == 0 && x.To == jwtResult.JwtUser.User 
+                        && x.From!=jwtResult.JwtUser.User//self like/comment not notify self
+                    ).ToList()));
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("messagesetread")]
+        [HttpPost]
+        public IHttpActionResult MessageSetRead()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var messages = db.Message.Where(x => x.To == jwtResult.JwtUser.User&&x.Status==0);
+                    foreach(var msg in messages)
+                    {
+                        msg.Status = 1;
+                    }
+                    db.SaveChanges();
+
+                    return Ok(new ApiResult(0, "Success"));
                 }
             }
             catch (Exception ex)
