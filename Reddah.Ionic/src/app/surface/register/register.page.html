@@ -1,0 +1,49 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon slot="end" name="close" (click)="close()" class="backbutton"></ion-icon>
+</ion-item>
+<ion-content style="background-color: white;">
+    <ion-item lines="none" class="sectionGapTop inputItem gapBottom" no-padding>
+        <h2 class="title">{{ 'Button.Register' | translate }}</h2>
+    </ion-item>
+
+    <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
+        <ion-input type="text" placeholder="{{ 'Input.UserName' | translate }}" [(ngModel)]="username" clearInput></ion-input>
+    </ion-item>
+
+    <ion-item class="gapBottom inputItem" no-padding>
+        <ion-input type="password" placeholder="{{ 'Input.Password' | translate }}" [(ngModel)]="password" clearInput></ion-input>
+    </ion-item>
+
+    <ion-item class="gapBottom inputItem" no-padding>
+        <ion-input type="password" placeholder="{{ 'Input.ConfirmPassword' | translate }}" [(ngModel)]="confirmpassword" clearInput></ion-input>
+    </ion-item>
+
+    <ion-item class="gapBottom inputItem" no-padding>
+        <ion-input type="text" placeholder="{{ 'Input.Email' | translate }}" [(ngModel)]="email" clearInput></ion-input>
+    </ion-item>
+    
+    <ion-item lines="none" class="gapBottom inputItem" no-padding>
+        <ion-checkbox></ion-checkbox>您已阅读并同意我们的
+    </ion-item>
+    <div class="inputItem">
+        <ion-note text-wrap color="dark">
+            <span class="policy" (click)="browse('useragreement')">使用条款</span>、
+            <span class="policy" (click)="browse('privacypolicy')">隐私声明</span>和
+            <span class="policy" (click)="browse('contentpolicy')">内容政策</span>。
+        </ion-note>
+    </div> 
+
+    <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="logIn()" expand="block">{{ 'Button.Register' | translate }}</ion-button>
+    
+</ion-content>
+<div class="footer">
+    <div id="waveThree" class="waveBox"></div>
+    <div id="waveTwo" class="waveBox"></div>
+    <div id="waveOne" class="waveBox"></div>
+    <div class="conductArea" text-center>
+        <p class="copyright">
+            CopyRight © 2015-2019 Reddah.com<br>
+            All Rights Reserved.
+        </p>
+    </div>
+</div>

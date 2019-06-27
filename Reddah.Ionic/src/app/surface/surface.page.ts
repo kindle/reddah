@@ -7,14 +7,14 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LocalePage } from '../common/locale/locale.page';
 import { CacheService } from "ionic-cache";
-import { SigninPage } from '../signin/signin.page';
+import { SigninPage } from './signin/signin.page';
 //import dat from 'dat.gui'
 //import Stats from 'stats-js';
 //import TweenMax from "gsap";
 import PerspectiveTransform from '../../assets/js/css_globe_PerspectiveTransform.js'
 import TweenMax from '../../assets/js/TweenMax.min.js'
 import { AuthService } from '../auth.service';
-import { RegisterPage } from '../register/register.page'
+import { RegisterPage } from './register/register.page'
 
 @Component({
     selector: 'app-surface',
@@ -356,7 +356,7 @@ export class SurfacePage implements OnInit {
         var dom, perspectiveTransform;
         var x, y, v1, v2, v3, v4, vertex, verticesRow, i, len;
         if (this.tick ^= 1) {
-            console.log(this.rY);
+            //console.log(this.rY);
             this.sinRY = Math.sin(this.rY);
             this.sinRX = Math.sin(-this.rX);
             this.sinRZ = Math.sin(this.rZ);

@@ -1,35 +1,4 @@
 
-$white-color: #fff;
-$height100: 100%;
-
-ion-grid {
-    width:100%;
-    height: $height100;
-    background: #dfdfdf;
-}
-
-ion-row {
-    height: $height100;
-}
-
-ion-col {
-    border: 1px solid #488aff;
-    background: $white-color;
-}
-
-ion-button, ion-item {
-    font-weight: 300;
-}
-
-@media (min-width: 240px) and (max-width: 768px) {
-    ion-grid {
-        background: $white-color;
-    }
-    ion-col {
-        border: none;
-    }
-}
-
 .footer {
     position: relative;
     width: 500px;
@@ -40,6 +9,7 @@ ion-button, ion-item {
     box-shadow: 0 11px 8px -10px rgba(51, 51, 51, .5);
     overflow: hidden;
 }
+
 .waveBox {
     width: 800px;
     height: 900px;
@@ -52,6 +22,7 @@ ion-button, ion-item {
     top: 50px;
     transform-origin: center, center;
 }
+
 @keyframes waver {
     0% {
         transform: rotate(0deg);
@@ -60,18 +31,21 @@ ion-button, ion-item {
         transform: rotate(360deg);
     }
 }
+
 #waveTwo {
     background-color: #4A8FE3;
     opacity: .8;
     left: -450px;
     animation: waver 5s infinite linear;
 }
+
 #waveThree {
     background-color: #107c10;
     opacity: .5;
     left: 150px;
     animation: waver 5s 1.5s infinite linear;
 }
+
 .text {
     font-family: Helvetica, Arial, sans-serif;
     font-weight: 300;
@@ -81,4 +55,51 @@ ion-button, ion-item {
     float: left;
     position: relative;
     margin-left: 115px;
+}
+
+
+
+.title {
+    font-weight: bold;
+}
+
+.gapTop {
+    margin-top: 20px;
+}
+
+.gapBottom {
+    margin-bottom: 10px;
+}
+
+.inputItem {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.sectionGapTop {
+    margin-top: 30px;
+}
+
+.buttonGapTop{
+    margin-top: 50px;
+}
+
+.conductArea {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+}
+
+.copyright{
+    font-size: 14px;
+    color: #dedede;
+}
+
+.forget{
+    margin-top: 20px;
+    color: #dedede;
+}
+
+.policy{
+    color: #107c10;
 }

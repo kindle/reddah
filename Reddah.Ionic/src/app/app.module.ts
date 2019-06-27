@@ -53,7 +53,7 @@ import { PostviewerPage } from './postviewer/postviewer.page';
 import { ImageViewerComponent } from './common/image-viewer/image-viewer.component';
 import { VideoViewerComponent } from './common/video-viewer/video-viewer.component';
 import { SurfacePage } from './surface/surface.page';
-import { RegisterPage } from './register/register.page';
+import { RegisterPage } from './surface/register/register.page';
 import { ScanPage } from './common/scan/scan.page';
 import { AuthService } from './auth.service';
 import { AddCommentPage } from './postviewer/add-comment/add-comment.page';
@@ -104,7 +104,7 @@ import { ChooseUserPage } from './common/choose-user/choose-user.page';
 import { ChatChooseGroupPage } from './chat/chat-choose-group/chat-choose-group.page';
 import { BookmarkPage } from './bookmark/bookmark.page';
 import { BookmarkPopPage } from './common/bookmark-pop.page';
-import { SigninPage } from './signin/signin.page';
+import { SigninPage } from './surface/signin/signin.page';
 import { SettingNickNamePage } from './settings/setting-nickname/setting-nickname.page'
 import { SettingSignaturePage } from './settings/setting-signature/setting-signature.page'
 

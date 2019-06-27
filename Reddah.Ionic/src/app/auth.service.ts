@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ReddahService } from './reddah.service';
-import { SigninPage } from './signin/signin.page';
-import { RegisterPage } from './register/register.page';
+import { SigninPage } from './surface/signin/signin.page';
+import { RegisterPage } from './surface/register/register.page';
 import { SurfacePage } from './surface/surface.page';
 import { ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';

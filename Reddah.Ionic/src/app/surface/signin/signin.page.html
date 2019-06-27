@@ -1,0 +1,33 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon slot="end" name="close" (click)="close()" class="backbutton"></ion-icon>
+</ion-item>
+<ion-content style="background-color: white;">
+    <ion-item lines="none" class="sectionGapTop inputItem" no-padding>
+        <h2 class="title">{{ 'Title.LoginReddah' | translate }}</h2>
+    </ion-item>
+    <ion-item lines="none" class="gapBottom inputItem" position="stack" no-padding>
+        <ion-note slot="start" text-wrap color="dark">
+            还没有帐号，<span style="color: #107c10;" (click)="goRegister()">立即注册</span>
+        </ion-note>
+    </ion-item>
+
+    <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
+        <ion-input type="text" placeholder="{{ 'Input.UserName' | translate }}" [(ngModel)]="username" clearInput></ion-input>
+    </ion-item>
+
+    <ion-item class="gapBottom inputItem" no-padding>
+        <ion-input type="password" placeholder="{{ 'Input.Password' | translate }}" [(ngModel)]="password" clearInput></ion-input>
+    </ion-item>
+    
+    <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="logIn()" expand="block">{{ 'Button.SignIn' | translate }}</ion-button>
+    
+    
+    <div text-center class="forget">忘记密码</div>    
+
+    <div class="conductArea" text-center>
+        <p class="copyright">
+            CopyRight © 2015-2019 Reddah.com<br>
+            All Rights Reserved.
+        </p>
+    </div>
+</ion-content>
