@@ -3,8 +3,7 @@
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
-    </ion-refresher>  
-    <ion-spinner name="bubbles" *ngIf="showLoading"></ion-spinner>
+    </ion-refresher>
     <ng-template ngFor let-article [ngForOf]="articles">
         <ion-card class="welcome-card" (click)="view(article)">
             <video id="video_{{article.Id}}" (click)="reddah.playVideo(article.Id)" src="{{article.VideoUrl}}"
@@ -38,5 +37,4 @@
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
-
 </ion-content>

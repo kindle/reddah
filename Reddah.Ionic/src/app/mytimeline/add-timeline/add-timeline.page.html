@@ -6,13 +6,16 @@
     <ion-item lines="none">
       <ion-textarea [(ngModel)]="yourThoughts" rows="6" cols="20" placeholder="这一刻的想法..."></ion-textarea>
     </ion-item>
-    <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos">
-      <div class="imgSqure" *ngFor="let image of photos;index as i">
-          <img [src]="image.webUrl" (click)="viewer(i, photos)">
-      </div>
-      <div class="imgSqure addImg" (click)="addNewPhoto($event)" *ngIf="photos.length<9">
-        <ion-icon name="add" size="large" color="medium"></ion-icon>
-      </div>
+    <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="postType!=3">
+        <div class="imgSqure" *ngFor="let image of photos;index as i">
+            <img [src]="image.webUrl" (click)="viewer(i, photos)">
+        </div>
+        <div class="imgSqure addImg" (click)="addNewPhoto($event)" *ngIf="photos.length<9">
+          <ion-icon name="add" size="large" color="medium"></ion-icon>
+        </div>
+    </div>
+    <div *ngIf="postType==3">
+      video
     </div>
     <ion-item lines="none">
       <ion-label></ion-label>

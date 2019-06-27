@@ -12,6 +12,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { DragulaService } from 'ng2-dragula';
 import { LocationPage } from '../../common/location/location.page';
+import { VideoEditor } from '@ionic-native/video-editor/ngx';
 
 @Component({
     selector: 'app-add-timeline',
@@ -34,6 +35,7 @@ export class AddTimelinePage implements OnInit {
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
         private dragulaService: DragulaService,
+        private videoEditor: VideoEditor,
     ) { 
         this.dragulaService.drag('bag')
         .subscribe(({ name, el }) => {
@@ -47,13 +49,13 @@ export class AddTimelinePage implements OnInit {
             this.dragging = false;
         });
         this.dragulaService.dropModel('bag')
-            .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-                if(target.id=="delete-photo"){
-                    //delete org photo form data
-                    this.formData.delete(item["fileUrl"]);
-                    //delete resize photo form data
-                    this.formData.delete(item["fileUrl"]+"_reddah_preview");
-                }
+        .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
+            if(target.id=="delete-photo"){
+                //delete org photo form data
+                this.formData.delete(item["fileUrl"]);
+                //delete resize photo form data
+                this.formData.delete(item["fileUrl"]+"_reddah_preview");
+            }
         });
         
         if(!this.dragulaService.find('bag')){
@@ -118,9 +120,12 @@ export class AddTimelinePage implements OnInit {
         {
             this.takePhoto();
         }
-        else//from library
+        else if(this.postType==2)//photo//from lib
         {
-            this.fromLib();
+            this.fromLibPhoto();
+        }
+        else{//video from lib
+            this.fromLibVideo();
         }
     }
     
@@ -149,24 +154,20 @@ export class AddTimelinePage implements OnInit {
         //alert(this.photos.map(e=>e.fileUrl).join(","));
 
         this.reddahService.addTimeline(this.formData)
-        .subscribe(result => 
-            {
-                loading.dismiss();
-                if(result.Success==0)
-                { 
-                    this.modalController.dismiss(true);
-                }
-                else
-                {
-                    alert(result.Message);
-                }
-                
-            },
-            error=>{
-                //console.error(JSON.stringify(error));
-                alert(JSON.stringify(error));
+        .subscribe(result => {
+            loading.dismiss();
+            if(result.Success==0)
+            { 
+                this.modalController.dismiss(true);
             }
-        );
+            else
+            {
+                alert(result.Message);
+            }
+        },
+        error=>{
+            alert(JSON.stringify(error));
+        });
     }
 
     async addNewPhoto(ev: any) {
@@ -184,7 +185,7 @@ export class AddTimelinePage implements OnInit {
         }
         else//from library
         {
-            await this.fromLib();
+            await this.fromLibPhoto();
         }
     }
 
@@ -202,12 +203,64 @@ export class AddTimelinePage implements OnInit {
             this.photos.push(data);
             this.addPhotoToFormData(data);
         }, (err) => {
-            console.log(JSON.stringify(err));
+            alert(JSON.stringify(err));
         });
         
     }
 
-    async fromLib()
+    async fromLibVideo()
+    {
+        const options: CameraOptions = {
+            quality: 100,
+            destinationType: Camera.DestinationType.FILE_URI,
+            mediaType: Camera.MediaType.VIDEO,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            correctOrientation: true
+        }
+          
+        Camera.getPicture(options).then((imageData) => {
+            let fileUrl = "file://"+imageData;
+            alert(fileUrl);
+
+            //good
+            this.videoEditor.getVideoInfo({
+                fileUri: fileUrl
+            })
+            .then((info)=>{alert(JSON.stringify(info))})
+            .catch((err)=>{alert(JSON.stringify(err))});
+
+            this.videoEditor.trim({
+                fileUri: fileUrl, // path to input video
+                trimStart: 5, // time to start trimming in seconds
+                trimEnd: 15, // time to end trimming in seconds
+                outputFileName: 'output-name', // output file name
+                progress: function(info) {} // optional, see docs on progress
+            }).then((value)=>{alert(JSON.stringify(value))})
+            .catch((err)=>{alert(JSON.stringify(err))});
+
+            //good
+            this.videoEditor.createThumbnail({
+                fileUri: fileUrl,
+                outputFileName: "cover",
+                atTime: 2,
+                quality: 50
+            }).then((value)=>{alert(JSON.stringify(value))})
+            .catch((err)=>{alert(JSON.stringify(err))})
+
+            /*this.videoEditor.transcodeVideo({
+                fileUri: "file://"+imageData,
+                outputFileName: 'output.mp4',
+                outputFileType: this.videoEditor.OutputFileType.MPEG4
+            })
+            .then((fileUri: string) => alert('video transcode success'+fileUri))
+            .catch((error: any) => alert('video transcode error'+JSON.stringify(error)));*/
+        }, (err) => {
+            alert(JSON.stringify(err));
+        });
+        
+    }
+
+    async fromLibPhoto()
     {
         const options: CameraOptions = {
             quality: 100,
@@ -223,7 +276,6 @@ export class AddTimelinePage implements OnInit {
             this.photos.push(data);
             this.addPhotoToFormData(data);
         }, (err) => {
-            console.log(JSON.stringify(err));
             alert(JSON.stringify(err));
         });
         

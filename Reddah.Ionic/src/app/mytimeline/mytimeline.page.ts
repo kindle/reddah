@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
-import { InfiniteScroll, Content } from '@ionic/angular';
+import { InfiniteScroll, Content, LoadingController, NavController, PopoverController, ModalController, } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { TimelinePopPage } from '../common/timeline-pop.page';
 import { UserPage } from '../common/user/user.page';
@@ -75,19 +73,12 @@ export class MyTimeLinePage implements OnInit {
     async ngOnInit(){
         this.reddah.getUserPhotos(this.userName, true);
 
-        /*const loading = await this.loadingController.create({
-            message: this.translateService.instant("Article.Loading"),
-            spinner: 'circles',
-        });
-        await loading.present();*/
-
         let cachedArticles = this.localStorageService.retrieve("Reddah_mytimeline");
         let cachedIds = this.localStorageService.retrieve("Reddah_mytimeline_ids");
         if(cachedArticles){
             this.articles = JSON.parse(cachedArticles);
             this.loadedIds = JSON.parse(cachedIds);
         }
-        
 
         this.formData = new FormData();
         this.formData.append("loadedIds", JSON.stringify([]));
@@ -124,14 +115,7 @@ export class MyTimeLinePage implements OnInit {
         });
     }
 
-    showLoading = false;
     getMyTimeline(event):void {
-        let cachedGroupContact = this.localStorageService.retrieve("Reddah_mytimeline");
-        if(!cachedGroupContact)
-        {
-            this.showLoading = true;
-        }
-
         this.formData = new FormData();
         this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
         
@@ -158,7 +142,6 @@ export class MyTimeLinePage implements OnInit {
 
             if(event){
                 event.target.complete();
-                this.showLoading = false;
             }
         });
 
@@ -230,8 +213,8 @@ export class MyTimeLinePage implements OnInit {
         });
         await popover.present();
         const { data } = await popover.onDidDismiss();
-        if(data==1||data==2){
-            //data=1: take a photo, data=2: lib
+        if(data==1||data==2||data==3){
+            //data=1: take a photo, data=2: lib photo, data=3: lib video
             this.goPost(data);
         }
     }

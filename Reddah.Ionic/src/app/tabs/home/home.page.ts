@@ -4,12 +4,10 @@ import { ReddahService } from '../../reddah.service';
 import { Article } from '../../model/article';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
-import { LocalePage } from '../../common/locale/locale.page';
 import { PostviewerPage } from '../../postviewer/postviewer.page';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { MyInfoPage } from '../../common/my-info/my-info.page';
-import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
     selector: 'app-home',
@@ -39,7 +37,6 @@ export class HomePage implements OnInit {
     }
 
     async ngOnInit(){
-        //this.reddah.getUserPhotos(this.userName);
         let cacheArticles = this.localStorageService.retrieve("reddah_articles");
         let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids");
         if(cacheArticles){
@@ -48,11 +45,6 @@ export class HomePage implements OnInit {
         }
         else
         {
-            const loading = await this.loadingController.create({
-                message: this.translateService.instant("Article.Loading"),
-                spinner: 'circles',
-            });
-            await loading.present();
             let locale = this.reddah.getCurrentLocale();
             let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale;
             let request = this.reddah.getArticles(this.loadedIds, locale, "promoted");
@@ -66,22 +58,14 @@ export class HomePage implements OnInit {
                 }
                 this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
                 this.localStorageService.store("reddah_article_ids", JSON.stringify(this.loadedIds));
-                loading.dismiss();
             });
         }
     }
   
-    showLoading = false;
     getArticles(event):void {
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         if(locale==null)
             locale = "en-US"
-
-        let cachedGroupContact = this.localStorageService.retrieve("reddah_articles");
-        if(!cachedGroupContact)
-        {
-            this.showLoading = true;
-        }
 
         let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale;
         let request = this.reddah.getArticles(this.loadedIds, locale, "promoted");
@@ -97,7 +81,6 @@ export class HomePage implements OnInit {
             this.localStorageService.store("reddah_article_ids", JSON.stringify(this.loadedIds));
             if(event){
                 event.target.complete();
-                this.showLoading = false;
             }
         });
     }    
