@@ -36,7 +36,6 @@ export class ContactPage {
         this.userName = this.reddah.getCurrentUser();
         let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
         if(cachedGroupContact){
-            console.log('use cache grouped contact')
             this.groupedContacts = JSON.parse(cachedGroupContact);
         }
         
@@ -58,7 +57,14 @@ export class ContactPage {
         });
     }
 
+    showLoading = false;
     loadData(){
+        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
+        if(!cachedGroupContact)
+        {
+            this.showLoading = true;
+        }
+
         let cacheKey = "this.reddah.getFriends";
         let request = this.reddah.getFriends();
 
@@ -88,7 +94,8 @@ export class ContactPage {
                         contact.s = this.reddah.getSortLetter(ch,'zh');
                     }
                 }
-                            
+                      
+                this.showLoading = false;
                 this.groupContacts(contacts);
                 this.localStorageService.store("Reddah_GroupedContacts", JSON.stringify(this.groupedContacts));
             }

@@ -74,8 +74,13 @@ export class AuthService {
 
     logout(): void {
         this.reddahService.logoutClear();
+
         this.localStorageService.clear("Reddah_GroupedContacts");
         this.localStorageService.clear("Reddah_Contacts");
+
+        this.localStorageService.clear("Reddah_mytimeline");
+        this.localStorageService.clear("Reddah_mytimeline_ids");
+        
         window.location.reload();
     }
 

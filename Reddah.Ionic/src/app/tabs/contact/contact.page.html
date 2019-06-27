@@ -9,6 +9,7 @@
         <ion-icon name="ios-chatbubbles" slot="start" color="tertiary" class="portrait groupChat"></ion-icon>
         <ion-label style="margin-left:10px;">群聊</ion-label>
     </ion-item>
+    <ion-spinner name="bubbles" *ngIf="showLoading"></ion-spinner>
     <ion-list>
         <ion-item-group *ngFor="let group of groupedContacts" lines="none">
             <ion-item-divider color="light" lines="none">{{group.letter.toUpperCase()}}</ion-item-divider>

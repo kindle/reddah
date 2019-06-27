@@ -71,10 +71,17 @@ export class HomePage implements OnInit {
         }
     }
   
+    showLoading = false;
     getArticles(event):void {
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         if(locale==null)
             locale = "en-US"
+
+        let cachedGroupContact = this.localStorageService.retrieve("reddah_articles");
+        if(!cachedGroupContact)
+        {
+            this.showLoading = true;
+        }
 
         let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale;
         let request = this.reddah.getArticles(this.loadedIds, locale, "promoted");
@@ -88,8 +95,10 @@ export class HomePage implements OnInit {
             }
             this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
             this.localStorageService.store("reddah_article_ids", JSON.stringify(this.loadedIds));
-            if(event)
+            if(event){
                 event.target.complete();
+                this.showLoading = false;
+            }
         });
     }    
 

@@ -123,8 +123,15 @@ export class MyTimeLinePage implements OnInit {
             }
         });
     }
-  
+
+    showLoading = false;
     getMyTimeline(event):void {
+        let cachedGroupContact = this.localStorageService.retrieve("Reddah_mytimeline");
+        if(!cachedGroupContact)
+        {
+            this.showLoading = true;
+        }
+
         this.formData = new FormData();
         this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
         
@@ -146,11 +153,13 @@ export class MyTimeLinePage implements OnInit {
                 });
             }
 
-            this.localStorageService.store("Reddah_mytimeline",JSON.stringify(timeline));
-            this.localStorageService.store("Reddah_mytimeline_ids",JSON.stringify(this.loadedIds));
+            this.localStorageService.store("Reddah_mytimeline", JSON.stringify(timeline));
+            this.localStorageService.store("Reddah_mytimeline_ids", JSON.stringify(this.loadedIds));
 
-            if(event)
+            if(event){
                 event.target.complete();
+                this.showLoading = false;
+            }
         });
 
     }
@@ -158,7 +167,7 @@ export class MyTimeLinePage implements OnInit {
     clearCacheAndReload(event){
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("MyTimeLinePage");
-        this.loadedIds = [];
+        this.loadedIds = [-1];
         this.articles = [];
         this.localStorageService.clear("Reddah_mytimeline");
         this.localStorageService.clear("Reddah_mytimeline_ids");

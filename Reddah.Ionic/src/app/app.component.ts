@@ -14,6 +14,7 @@ import * as firebase from 'firebase';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Globalization } from '@ionic-native/globalization';
 import { ReddahService } from './reddah.service';
+import { AuthService } from './auth.service';
 
 @Component({
     selector: 'app-root',
@@ -39,6 +40,7 @@ export class AppComponent {
         private file: File,
         private androidPermissions: AndroidPermissions,
         private reddah: ReddahService,
+        private authService: AuthService,
         //private firebase: Firebase,
     ) {
         this.initializeApp();
@@ -99,12 +101,15 @@ export class AppComponent {
         }
 
         //load friends to cache for permission check
-        this.reddah.loadFriends();
-        this.reddah.getMessageUnread().subscribe(data=>{
-            if(data.Success==0){
-                this.reddah.unReadMessage = data.Message;
-            }
-        });
+        if(this.authService.authenticated())
+        {
+            this.reddah.loadFriends();
+            this.reddah.getMessageUnread().subscribe(data=>{
+                if(data.Success==0){
+                    this.reddah.unReadMessage = data.Message;
+                }
+            });
+        }
         
 /*
         var firebaseConfig = {
