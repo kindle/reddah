@@ -4,9 +4,9 @@ import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
-import { SettingAboutPage } from '../setting-about/setting-about.page';
 import { LocalePage } from '../../common/locale/locale.page';
 import { TranslateService } from '@ngx-translate/core';
+import { SettingFontPage } from '../setting-font/setting-font.page';
 
 @Component({
     selector: 'app-setting-ge',
@@ -48,9 +48,9 @@ export class SettingGePage implements OnInit {
         this.authService.logout();
     }
 
-    async goAbout(){
+    async goFontSize(){
         const modal = await this.modalController.create({
-            component: SettingAboutPage,
+            component: SettingFontPage,
         });
         
         await modal.present();

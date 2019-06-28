@@ -4,39 +4,10 @@
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
     </ion-refresher>
-    <!--<ng-template ngFor let-article [ngForOf]="articles">
-        <ion-card class="welcome-card" (click)="view(article)">
-            <video id="video_{{article.Id}}" (click)="reddah.playVideo(article.Id)" src="{{article.VideoUrl}}"
-                    poster="{{article.VideoPoster}}"
-                    *ngIf="article.VideoUrl.length>0"
-                    controls="controls" loop="true">
-            </video>
-            <ion-img src="{{article.ImageUrls[0]}}" *ngIf="article.VideoUrl.length==0&&article.ImageUrls.length>0"></ion-img>
-            <ion-card-header>
-                <ion-card-subtitle>
-                    <div [innerHTML]="reddah.summary(article.Title)"></div>
-                </ion-card-subtitle>
-                <ion-card-title>
-                    <div [innerHTML]="reddah.htmlDecode(article.Title)"></div>
-                </ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-                <ng-template ngFor let-group [ngForOf]="article.GroupName.split(',')">
-                    <ion-chip outline margin-bottom>
-                        <ion-label [innerHTML]="reddah.htmlDecode(group)"></ion-label>
-                    </ion-chip>&nbsp;
-                </ng-template>
-            </ion-card-content>
-            <ion-item>
-                <ion-note color="dark">{{article.CreatedOn}}</ion-note>
-                <ion-note color="dark" slot="end">{{article.Comments}} {{ 'Article.Comments' | translate }}</ion-note>
-            </ion-item>
-        </ion-card>
-    </ng-template>-->
     <ng-template ngFor let-article [ngForOf]="articles" id="homepage" style="color: #636468;font-family: 'Segoe UI', Arial, sans-serif;">
         <div class="postModuleLiner">
             <div *ngIf="article.VideoUrl.length>0">
-                <h2 (click)="view(article)">{{reddah.htmlDecode(article.Title)}}</h2>
+                <h2 style="font-size: 20px;" (click)="view(article)">{{reddah.htmlDecode(article.Title)}}</h2>
                 <div class="postClear"></div>
                 <video id="video_{{article.Id}}" (click)="playVideo(article.Id)"
                         controls="controls" loop="true">
@@ -45,7 +16,7 @@
                 <div class="postClear"></div>
             </div>
             <div *ngIf="article.VideoUrl.length==0" (click)="view(article)">
-                <h2 *ngIf="article.ImageUrls.length>1"><a>{{reddah.htmlDecode(article.Title)}}</a></h2>
+                <h2 style="font-size: 20px;" *ngIf="article.ImageUrls.length>1"><a>{{reddah.htmlDecode(article.Title)}}</a></h2>
                 <div class="postClear" *ngIf="article.ImageUrls.length>1"></div>
                 <div class="listImage" ng-style="{display:article.ImageUrls.length>1?'flex':''}">
                     <div class="listImageWrapper" *ngFor="let articleUrl of article.ImageUrls">
@@ -53,19 +24,24 @@
                         <img class="BrowsePreviewImage" onerror="this.style.display='none'" src="" src="{{articleUrl}}">
                     </div>
                 </div>
-                <h2 *ngIf="article.ImageUrls.length<2"><a>{{reddah.htmlDecode(article.Title)}}</a></h2>
-                <div>{{reddah.summary(article.Content, 120)}}</div>
+                <h2 style="font-size: 20px;" *ngIf="article.ImageUrls.length<2"><a>{{reddah.htmlDecode(article.Title)}}</a></h2>
+                <div style="color: #636468;font-size: 20px;">{{reddah.summary(article.Content, 120)}}</div>
             </div>
             <div class="postClear"></div>
             <div class="listInfo">
-                <span *ngFor="let group of article.GroupName.split(',')" style="padding-right:5px;">
-                    <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;">{{group}}</u>
+                <span *ngFor="let group of article.GroupName.split(',')" (click)="goSearch(group)" style="padding-right:5px;">
+                    <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;font-size: 20px;margin-bottom:2px;">{{group}}</u>
                 </span>
             </div>
             <div class="postClear"></div>
-            <div class="listInfo">
-                <ion-icon name="time"></ion-icon>{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}
-                <i class="fa fa-commenting-o" style="float:right;"> <ion-icon name="chatbubbles"></ion-icon><a (click)="view(article)">{{article.Comments}}</a> </i>
+            <div class="listInfo" style="font-size: 20px;color:#636468;display:flex;justify-content: space-between;" (click)="view(article)">
+                <div style="display: flex;">
+                    <ion-icon name="time" style="width:25px;height:25px;"></ion-icon>
+                    <span style="padding-left:3px;margin-top:0px;">{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</span>
+                </div>
+                <div style="display: flex;">
+                    <ion-icon name="text" style="width:25px;height:25px;"></ion-icon><span style="padding-left:3px;margin-top:-2px;">{{article.Comments}}</span>
+                </div>
             </div>
         </div>
     </ng-template>

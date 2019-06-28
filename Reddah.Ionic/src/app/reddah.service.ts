@@ -903,6 +903,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         let day = hour * 24;
         let halfamonth = day * 15;
         let month = day * 30;
+        let year = day *365;
         let localnow = new Date().getTime();
         //to utc now
         let offset = new Date().getTimezoneOffset()*60*1000;
@@ -910,13 +911,17 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         
         let diffValue = now - dateTimeStamp;
         if(diffValue < 0){return dateStr;}
+        let yearC =diffValue/year;
         let monthC =diffValue/month;
         let weekC =diffValue/(7*day);
         let dayC =diffValue/day;
         let hourC =diffValue/hour;
         let minC =diffValue/minute;
-        if(monthC>=1){
-            result="" + parseInt(monthC+"") + "月前";
+        if(yearC>=1){
+            result="" + parseInt(yearC+"") + "年前";
+        }
+        else if(monthC>=1){
+            result="" + parseInt(monthC+"") + "个月前";
         }
         else if(weekC>=1){
             result="" + parseInt(weekC+"") + "周前";
@@ -929,8 +934,10 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         }
         else if(minC>=1){
             result=""+ parseInt(minC+"") +"分钟前";
-        }else
-        result="刚刚";
+        }
+        else{
+            result="刚刚";
+        }
         return result;
     }
 
@@ -985,4 +992,14 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             {userName:'wind', type:0},{userName:'duck6686', type:0}
         ];
     }
+
+    fontSizeMap = new Map()
+    .set(1,'12px')
+    .set(2,'16px')
+    .set(3,'20px')
+    .set(4,'24px')
+    .set(5,'28px')
+    .set(6,'32px')
+    .set(7,'36px')
+    .set(8,'40px');
 }

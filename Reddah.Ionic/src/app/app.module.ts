@@ -108,6 +108,7 @@ import { BookmarkPopPage } from './common/bookmark-pop.page';
 import { SigninPage } from './surface/signin/signin.page';
 import { SettingNickNamePage } from './settings/setting-nickname/setting-nickname.page'
 import { SettingSignaturePage } from './settings/setting-signature/setting-signature.page'
+import { SettingFontPage } from './settings/setting-font/setting-font.page';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -172,7 +173,7 @@ var firebaseConfig = {
         SettingGePage,
         SettingListPage,
         SettingNoteLabelPage,
-        SettingGroupChatTitlePage,
+        SettingGroupChatTitlePage,SettingFontPage,
         QrcardPage,
         SettingAccountPage,
         SettingPrivacyPage,
@@ -223,7 +224,7 @@ var firebaseConfig = {
         SettingGePage,
         SettingListPage,
         SettingNoteLabelPage,
-        SettingGroupChatTitlePage,
+        SettingGroupChatTitlePage,SettingFontPage,
         QrcardPage,
         SettingAccountPage,
         SettingPrivacyPage,

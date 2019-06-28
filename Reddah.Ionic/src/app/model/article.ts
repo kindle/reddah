@@ -10,6 +10,7 @@ export class Article {
     Comments : number;
     Abstract : string;
     CreatedOn : string;
+    CreatedOnOrg : string;
     UserName : string;
     GroupName : string;
     Content : string;

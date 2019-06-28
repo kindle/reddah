@@ -8,6 +8,7 @@ import { PostviewerPage } from '../../postviewer/postviewer.page';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { MyInfoPage } from '../../common/my-info/my-info.page';
+import { SearchPage } from '../../common/search/search.page';
 
 @Component({
     selector: 'app-home',
@@ -136,4 +137,16 @@ export class HomePage implements OnInit {
 
     }
 
+    async goSearch(key){
+        const userModal = await this.modalController.create({
+            component: SearchPage,
+            componentProps: { 
+                key: key,
+                type: 0,//article only
+            }
+        });
+          
+        await userModal.present();
+    }
+    
 }

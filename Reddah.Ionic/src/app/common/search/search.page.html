@@ -30,8 +30,8 @@
                 </ion-avatar>
                 <ion-label>
                     <p class="articleContent" text-wrap>{{reddah.summary(article.Content, 100, article.Locale)}}</p>
-                    <ion-note class="articleFooter">{{reddah.htmlDecode(article.UserName)}}</ion-note>
-                    <ion-note class="articleFooterTime">{{article.CreatedOn}}</ion-note>
+                    <ion-note class="articleFooter">{{reddah.getDisplayName(article.UserName)}}</ion-note>
+                    <ion-note class="articleFooterTime">{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
                 </ion-label>
             </ion-item>
         </ion-row>
