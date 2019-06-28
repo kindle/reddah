@@ -124,6 +124,7 @@
                     ap.Down = item.Down ?? 0;
                     ap.Count = item.Count;
                     ap.CreatedOn = Helpers.TimeAgo(item.CreatedOn);
+                    ap.CreatedOnOrg = item.CreatedOn;
                     ap.UserName = item.UserName;
                     ap.GroupName = item.GroupName;
                     ap.Content = item.Content;

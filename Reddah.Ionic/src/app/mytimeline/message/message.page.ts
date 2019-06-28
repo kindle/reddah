@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { TsViewerPage } from '../tsviewer/tsviewer.page';
 
 @Component({
   selector: 'app-message',
@@ -49,9 +50,27 @@ export class MessagePage implements OnInit {
         })
     }
 
-    async viewTimeline(message){
+    async viewTimeline(articleId){
+        let formData = new FormData();
+        formData.append("ArticleId", JSON.stringify(articleId));
 
-    }
+        this.reddah.getArticleById(formData).subscribe(data=>{
+            if(data.Success==0){
+                this.goTsViewer(data.Message);
+            }
+        });
+    } 
+
+    async goTsViewer(article){
+        const userModal = await this.modalController.create({
+            component: TsViewerPage,
+            componentProps: { 
+                article: article
+            }
+        });
+        
+        await userModal.present();
+    } 
 
     showAll = false;
     showAllMessage(){

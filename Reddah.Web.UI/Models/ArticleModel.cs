@@ -19,6 +19,7 @@ namespace Reddah.Web.UI.Models
         public int Comments { get; set; }
         public string Abstract { get; set; }
         public string CreatedOn { get; set; }
+        public DateTime CreatedOnOrg { get; set; }
         public string UserName { get; set; }
         public string GroupName { get; set; }
         public string Content { get; set; }

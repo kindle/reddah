@@ -446,6 +446,47 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("getarticlebyid")]
+        [HttpPost]
+        public IHttpActionResult GetArticleById()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                int articleId = int.Parse(HttpContext.Current.Request["ArticleId"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+
+                    var article = db.Article.FirstOrDefault(a => a.Id == articleId);
+                    if (article != null)
+                    {
+                        return Ok(new ApiResult(0, article));
+                    }
+                    else
+                    {
+                        return Ok(new ApiResult(3, "Article not found"));
+                    }
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
         [Route("getuser")]
         [HttpPost]
         public IHttpActionResult GetUser()
@@ -1176,7 +1217,7 @@ namespace Reddah.Web.Login.Controllers
                 using (var db = new reddahEntities())
                 {
                     return Ok(new ApiResult(0, db.Message.Where(x => x.Status == 0 && x.To == jwtResult.JwtUser.User 
-                        && x.From!=jwtResult.JwtUser.User//self like/comment not notify self
+                        //&& x.From!=jwtResult.JwtUser.User//self like/comment not notify self
                     ).ToList()));
 
                 }

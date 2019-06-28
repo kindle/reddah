@@ -4,7 +4,7 @@
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
     </ion-refresher>
-    <ng-template ngFor let-article [ngForOf]="articles">
+    <!--<ng-template ngFor let-article [ngForOf]="articles">
         <ion-card class="welcome-card" (click)="view(article)">
             <video id="video_{{article.Id}}" (click)="reddah.playVideo(article.Id)" src="{{article.VideoUrl}}"
                     poster="{{article.VideoPoster}}"
@@ -32,6 +32,42 @@
                 <ion-note color="dark" slot="end">{{article.Comments}} {{ 'Article.Comments' | translate }}</ion-note>
             </ion-item>
         </ion-card>
+    </ng-template>-->
+    <ng-template ngFor let-article [ngForOf]="articles" id="homepage" style="color: #636468;font-family: 'Segoe UI', Arial, sans-serif;">
+        <div class="postModuleLiner">
+            <div *ngIf="article.VideoUrl.length>0">
+                <h2 (click)="view(article)">{{reddah.htmlDecode(article.Title)}}</h2>
+                <div class="postClear"></div>
+                <video id="video_{{article.Id}}" (click)="playVideo(article.Id)"
+                        controls="controls" loop="true">
+                    your browser does not support the video tag
+                </video>
+                <div class="postClear"></div>
+            </div>
+            <div *ngIf="article.VideoUrl.length==0" (click)="view(article)">
+                <h2 *ngIf="article.ImageUrls.length>1"><a>{{reddah.htmlDecode(article.Title)}}</a></h2>
+                <div class="postClear" *ngIf="article.ImageUrls.length>1"></div>
+                <div class="listImage" ng-style="{display:article.ImageUrls.length>1?'flex':''}">
+                    <div class="listImageWrapper" *ngFor="let articleUrl of article.ImageUrls">
+                        <!--<img class="lazy BrowsePreviewImage" onerror="this.style.display='none'" src="" data-original="{{articleUrl}}">-->
+                        <img class="BrowsePreviewImage" onerror="this.style.display='none'" src="" src="{{articleUrl}}">
+                    </div>
+                </div>
+                <h2 *ngIf="article.ImageUrls.length<2"><a>{{reddah.htmlDecode(article.Title)}}</a></h2>
+                <div>{{reddah.summary(article.Content, 120)}}</div>
+            </div>
+            <div class="postClear"></div>
+            <div class="listInfo">
+                <span *ngFor="let group of article.GroupName.split(',')" style="padding-right:5px;">
+                    <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;">{{group}}</u>
+                </span>
+            </div>
+            <div class="postClear"></div>
+            <div class="listInfo">
+                <ion-icon name="time"></ion-icon>{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}
+                <i class="fa fa-commenting-o" style="float:right;"> <ion-icon name="chatbubbles"></ion-icon><a (click)="view(article)">{{article.Comments}}</a> </i>
+            </div>
+        </div>
     </ng-template>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">

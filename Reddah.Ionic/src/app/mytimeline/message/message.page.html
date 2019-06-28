@@ -4,7 +4,7 @@
     <ion-text slot="end">清空</ion-text>
 </ion-item>
 <ion-content no-padding>
-    <ion-item *ngFor="let message of messages" (click)="viewTimeline(message)">
+    <ion-item *ngFor="let message of messages" (click)="viewTimeline(message.ArticleId)">
         <ion-avatar slot="start" class="messageUserPhoto">
             <img src="{{reddah.appData('userphoto_'+message.From)}}" class="messagePortrait">
         </ion-avatar>

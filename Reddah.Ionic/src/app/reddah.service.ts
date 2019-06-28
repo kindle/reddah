@@ -418,7 +418,17 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private getarticlebyidUrl = 'https://login.reddah.com/api/article/getarticlebyid'; 
 
+    getArticleById(formData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getarticlebyidUrl, formData)
+        .pipe(
+            tap(data => this.log('get article by id')),
+            catchError(this.handleError('get article by id', []))
+        );
+    }
+    //******************************** */
 
 
 
@@ -884,6 +894,8 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     }
 
     getSendTime(dateStr){
+        if(!dateStr)
+            return "";
         let dateTimeStamp = Date.parse(dateStr.replace(/-/gi,"/"));
         let result = "";
         let minute = 1000 * 60;

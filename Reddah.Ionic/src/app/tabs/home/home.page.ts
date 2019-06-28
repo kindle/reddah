@@ -52,6 +52,7 @@ export class HomePage implements OnInit {
             this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
             .subscribe(articles => 
             {
+                console.log(articles);
                 for(let article of articles){
                     this.articles.push(article);
                     this.loadedIds.push(article.Id);
@@ -73,6 +74,7 @@ export class HomePage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
         .subscribe(articles => 
         {
+            console.log(articles);
             for(let article of articles){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);  
@@ -90,6 +92,8 @@ export class HomePage implements OnInit {
         this.cacheService.clearGroup("HomePage");
         this.localStorageService.clear("reddah_articles");
         this.localStorageService.clear("reddah_article_ids");
+        this.articles = [];
+        this.loadedIds = [];
         this.getArticles(event);
     }
 
