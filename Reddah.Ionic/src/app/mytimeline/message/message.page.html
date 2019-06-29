@@ -9,7 +9,7 @@
             <img src="{{reddah.appData('userphoto_'+message.From)}}" class="messagePortrait">
         </ion-avatar>
         <ion-label style="margin-left:10px;">
-            <h3 class="friendName">{{reddah.getDisplayName(message.From)}}</h3>
+            <h3 class="user-name">{{reddah.getDisplayName(message.From)}}</h3>
             <ion-icon name="heart-empty" class="likeIcon" *ngIf="message.Type==0"></ion-icon>
             <ion-note *ngIf="message.Type==1">#@$#!</ion-note>
             <h4>{{message.CreatedOn | date: 'HH:mm'}}</h4>

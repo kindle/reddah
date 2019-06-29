@@ -8,9 +8,7 @@
             <img src="{{reddah.appData('userphoto_'+comment.UserName)}}" class="portrait">
         </ion-avatar>
         <ion-label text-wrap style="font-size: 20px;">
-            <div style="font-size: 20px;color:#566890;">
-                {{reddah.getDisplayName(comment.UserName)}}
-            </div>
+            <div class="user-name">{{reddah.getDisplayName(comment.UserName)}}</div>
             <p style="font-size: 20px;">{{comment.CreatedOn | date:'MM-dd HH:mm'}}</p>
             <div [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
         </ion-label>
@@ -36,7 +34,7 @@
                 </ion-avatar>
                 <ion-label text-wrap>
                     <div style="display: flex;justify-content:space-between">
-                        <span style="font-size: 20px;color:#566890;" (click)="goUser(reply.UserName)">{{reddah.getDisplayName(reply.UserName)}}</span>
+                        <span class="user-name" (click)="goUser(reply.UserName)">{{reddah.getDisplayName(reply.UserName)}}</span>
                         <div>
                             <span style="color: gray;margin-right:2px;margin-top:0;font-size: 20px;vertical-align: top;">{{reply.Count}}</span>
                             <ion-icon name="ios-thumbs-up" color="medium" style="margin-right:5px;width:25px;height:25px;"></ion-icon>
@@ -45,7 +43,7 @@
                     </div>
                     <p style="font-size: 20px;">{{reply.CreatedOn | date:'MM-dd HH:mm'}}</p>
                     <div *ngIf="reply.ParentId!=comment.Id" style="background-color:#eeeeee;padding:5px;font-size: 20px;">
-                        <span style="font-size:20px;color:#566890;" (click)="goUser(GetUserNameByCommentId(comments,reply.ParentId))">{{reddah.getDisplayName(GetUserNameByCommentId(comments,reply.ParentId))}}</span> : <span style="font-size: 20px;" [innerHTML]="reddah.htmlDecode(GetContentByCommentId(comments,reply.ParentId)) | safe: 'html'"></span>
+                        <span class="user-name" (click)="goUser(GetUserNameByCommentId(comments,reply.ParentId))">{{reddah.getDisplayName(GetUserNameByCommentId(comments,reply.ParentId))}}</span> : <span style="font-size: 20px;" [innerHTML]="reddah.htmlDecode(GetContentByCommentId(comments,reply.ParentId)) | safe: 'html'"></span>
                     </div>
                     <div style="font-size: 20px;" [innerHTML]="reddah.htmlDecode(reply.Content) | safe: 'html'"></div>
                 </ion-label>

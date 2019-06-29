@@ -437,11 +437,11 @@ export class ReddahService {
     }
 
     public Locales = [
-        new Locale("zh-CN", "中华人民共和国 (China)"),
+        new Locale("zh-CN", "简体中文(China)"),
         new Locale("fr-FR", "France"),
-        new Locale("ja-JP", "日本 (Japan)"),
-        new Locale("ko-KR", "대한민국 (Korea)"),
-        new Locale("en-US", "United States"),
+        new Locale("ja-JP", "日本(Japan)"),
+        new Locale("ko-KR", "대한민국(Korea)"),
+        new Locale("en-US", "English(US)"),
     ];
   
     private articlesUrl = 'https://reddah.com/api/webapi/getarticles'; 

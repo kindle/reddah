@@ -85,3 +85,36 @@
 .borderItem{
 
 }
+
+h1,h2,h3,h4,h5,h6{
+  color: #107c10;
+}
+
+.tab {
+  font-size:12px;
+}
+
+[text-wrap]{
+  font-size: var(--ion-font-size);
+}
+
+.user-name {
+  color: #566890;
+  font-weight: bold;
+}
+
+.article-title {
+  color: #107c10;
+  font-weight: bold;
+}
+
+u {
+  border-bottom: 1px solid #ff3030;
+  text-decoration: none;
+  font-weight: bold;
+  color: #107c10;
+}
+
+ion-icon{
+  font-size:1.6em;
+}

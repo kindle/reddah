@@ -14,7 +14,7 @@
         <div *ngIf="data.Seed===comment.ParentId&&depth>1">
             <div style="padding: 3px;">
                 <span (click)="goUser(comment.UserName)" class="friendName">
-                    {{reddah.getDisplayName(comment.UserName)}}</span>回复<span class="friendName" [innerHTML]="reddah.getDisplayName(pauthor) | safe: 'html'" (click)="goUser(pauthor)"></span>:<span (click)="showAddComment(comment)" [innerHTML]="comment.Content | safe: 'html'"></span></div>
+                    {{reddah.getDisplayName(comment.UserName)}}</span>回复<span class="user-name" [innerHTML]="reddah.getDisplayName(pauthor) | safe: 'html'" (click)="goUser(pauthor)"></span>:<span (click)="showAddComment(comment)" [innerHTML]="comment.Content | safe: 'html'"></span></div>
             <ts-comment (reply)=pop($event) [data]="{'Seed':comment.Id, 'Comments': data.Comments}" [depth]="depth+1" 
                 [ptext]="comment.Content" [pauthor]="comment.UserName" [authoronly]="authoronly" [articleauthor]="articleauthor"></ts-comment>
         </div>

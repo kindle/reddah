@@ -35,7 +35,7 @@
             <div style="width:100%;border: 0px solid red;">
                 <ion-card-header no-padding class="articleUserName">
                     <ion-card-title>
-                        <div (click)="goUser(article.UserName)" class="friendName">{{reddah.getDisplayName(article.UserName)}}</div>
+                        <div (click)="goUser(article.UserName)" class="user-name">{{reddah.getDisplayName(article.UserName)}}</div>
                     </ion-card-title>
                 </ion-card-header>
                 <ion-item no-padding style="padding: 0;" lines="none" *ngIf="article.Title.length>0&&article.Title.length<100">

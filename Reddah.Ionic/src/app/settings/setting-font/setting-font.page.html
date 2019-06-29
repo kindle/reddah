@@ -24,11 +24,11 @@
         </ion-row>
     </ion-grid>
     
-    <ion-item>
+    <ion-item style="bottom:0;">
         <ion-range min="1" max="8" step="1" [(ngModel)]="fontSize" snaps="true" tick="true"
         color="primary" (ionChange)="changeFontSize()">
-            <ion-text slot="start" style="font-size:15px;">A</ion-text>
-            <ion-text slot="end" style="font-size:40px;">A</ion-text>
+            <ion-text slot="start" style="font-size:12px;" margin-end>A</ion-text>
+            <ion-text slot="end" style="font-size:40px;" margin-start>A</ion-text>
         </ion-range>
     </ion-item>
 </ion-content>

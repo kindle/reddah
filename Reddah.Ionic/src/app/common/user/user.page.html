@@ -12,14 +12,13 @@
             <img src="{{reddah.appData('userphoto_'+userName)}}" (click)="viewer(reddah.appData('userphoto_'+userName))" class="portrait">
         </ion-thumbnail>
         <ion-label class="userInfo">
-            <h1>
-                {{reddah.getDisplayName(userName)}}
-                <ion-icon name="ios-male" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
-                <ion-icon name="ios-female" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
-            </h1>
-            <p *ngIf="reddah.appData('usernickname_'+userName)">昵称：{{reddah.appData('usernickname_'+userName)}}</p>
-            <p>Reddah ID：{{userName}}</p>
-            <p *ngIf="reddah.appData('userlocation_'+userName)">地区：{{reddah.appData('userlocation_'+userName)}}</p>
+            <span class="user-name">{{reddah.getDisplayName(userName)}}</span>
+            <ion-icon name="ios-male" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
+            <ion-icon name="ios-female" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
+            <br>
+            <span *ngIf="reddah.appData('usernickname_'+userName)">昵称：{{reddah.appData('usernickname_'+userName)}}</span><br>
+            <span>Reddah ID：{{userName}}</span><br>
+            <span *ngIf="reddah.appData('userlocation_'+userName)">地区：{{reddah.appData('userlocation_'+userName)}}</span>
         </ion-label>
     </ion-item>
 
@@ -48,11 +47,11 @@
     </div>
     <div class="gap lastGap">
         <ion-item class="borderTop" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1" (click)="chat()">
-            <ion-icon name="chatboxes" slot="start"></ion-icon>
+            <ion-icon name="chatboxes"></ion-icon>
             <ion-label>发消息</ion-label>
         </ion-item>
         <ion-item class="borderBottom" lines="none" href="/#" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
-            <ion-icon name="videocam" slot="start"></ion-icon>
+            <ion-icon name="videocam"></ion-icon>
             <ion-label>音视频通话</ion-label>
         </ion-item>
         <ion-item  class="borderTop borderBottom" (click)="addFriend()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0&&userName!=reddah.getCurrentUser()">
