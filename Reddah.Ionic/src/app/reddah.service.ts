@@ -890,21 +890,6 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         return new Array(n);
     }
 
-    /*async CommonCache(url, key, fallbackImage){
-        //check user photo cache
-        let cachedUserPhotoPath = this.localStorageService.retrieve(key);
-        if(cachedUserPhotoPath!=null){
-            this.localStorageService.store(key, 
-                (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
-        }
-        else{
-            this.localStorageService.store(key, fallbackImage);
-        }
-        if(url!=null){
-            this.toImageCache(url, key);
-        }
-    }*/
-
     async CachePhoto(url, key){
         if(url){
             let exist = this.localStorageService.retrieve(key);
@@ -919,6 +904,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             return "";
         let dateTimeStamp = Date.parse(dateStr.replace(/-/gi,"/"));
         let result = "";
+        let second = 1000;
         let minute = 1000 * 60;
         let hour = minute * 60;
         let day = hour * 24;
@@ -938,6 +924,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         let dayC =diffValue/day;
         let hourC =diffValue/hour;
         let minC =diffValue/minute;
+        let secC =diffValue/second;
         if(yearC>=1){
             result="" + parseInt(yearC+"") + "年前";
         }
@@ -956,9 +943,10 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         else if(minC>=1){
             result=""+ parseInt(minC+"") +"分钟前";
         }
-        else{
+        else if(secC>=1){
             result="刚刚";
         }
+        
         return result;
     }
 

@@ -36,15 +36,16 @@ export class RegisterPage implements OnInit {
     password = "";
     confirmpassword = "";
     email = "";
+    agreed = false;
     
-    
-    async presentToastWithOptions(message: string) {
+    async presentToastWithOptions(message: string, color="dark") {
         const toast = await this.toastController.create({
             message: message,
             showCloseButton: true,
             position: 'top',
             closeButtonText: 'Close',
-            duration: 3000
+            duration: 3000,
+            color: color
         });
         toast.present();
     }
@@ -59,6 +60,9 @@ export class RegisterPage implements OnInit {
         }
         else if (this.password!=this.confirmpassword) {
             this.presentToastWithOptions("Password and confirm password are different");
+        }
+        else if (!this.agreed) {
+            this.presentToastWithOptions("Please agree with user agreement");
         }
         else {
             const loading = await this.loadingController.create({
@@ -80,7 +84,7 @@ export class RegisterPage implements OnInit {
                     window.location.reload();
                 }
                 else{
-                    this.presentToastWithOptions(result.Message);
+                    this.presentToastWithOptions(result.Message, "danger");
                 }
                 
             });

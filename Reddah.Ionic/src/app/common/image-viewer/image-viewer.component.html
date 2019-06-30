@@ -1,7 +1,7 @@
 <ion-item no-padding *ngIf="imgTitle">
     <ion-title>{{ imgTitle }}</ion-title>
 </ion-item>
-<ion-content [forceOverscroll]="false" color="dark" fullscreen="true" (click)="single_click($event)" (dbclick)="double_click()">
+<ion-content [forceOverscroll]="false" color="dark" fullscreen="true" (click)="single_click($event)" (dblclick)="double_click()">
     <ion-slides [options]="slideOpts" [pager]="imgSourceArray.length>1" (ionSlideDidChange)="ionSlideWillChange()">
         <ion-slide *ngFor="let item of enhanceImgSourceArray" (press)="showMenu(item)">
             <div class="swiper-zoom-container">

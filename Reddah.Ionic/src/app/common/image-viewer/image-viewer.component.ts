@@ -87,23 +87,14 @@ export class ImageViewerComponent implements OnInit {
         return src.replace("_reddah_preview","")
     }
 
-    dbltimer = null;
-    isdblclick = false;
+    singleClickTimer = null;
     async single_click(event){
-        
-        window.clearTimeout(this.dbltimer)
-
-        this.dbltimer =setTimeout(function() {
-            if(!this.isdblclick){
-                this.closeModal(event);
-            }
-        },300);
+        window.clearTimeout(this.singleClickTimer)
+        this.singleClickTimer =setTimeout(()=> { this.closeModal(event); },300);
     }
 
     async double_click(){
-        window.clearTimeout(this.dbltimer); 
-        this.isdblclick = true;
-        this.dbltimer = window.setTimeout(()=>{this.isdblclick = false;},2000);
+        window.clearTimeout(this.singleClickTimer);
     }
 
     async closeModal(event) {
