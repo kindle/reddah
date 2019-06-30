@@ -1,7 +1,7 @@
 .itemTitle {
     margin-right: 10px;
     line-height: 1.5;
-    min-width: 100px;
+    min-width: 5em;
 }
 
 .portrait{
@@ -33,6 +33,10 @@
     margin-left: 10px;
 }
 
+.cmd-title {
+    margin-left: 0.25em;
+}
+
 .userInfo h1 { 
     padding: 2px;
     padding-top: 15px;
@@ -44,6 +48,7 @@
     padding-bottom:10px;
     padding-left: 5px;
     padding-right: 5px;
+    width: 5em;
 }
 
 [text-wrap]{

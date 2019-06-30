@@ -113,7 +113,7 @@ export class AppComponent {
         
         let currentFontSize = this.localStorageService.retrieve("Reddah_fontsize");
         if(!currentFontSize)
-            currentFontSize = 2;
+            currentFontSize = 1;
         document.documentElement.style.setProperty(`--ion-font-size`, this.reddah.fontSizeMap.get(currentFontSize));
 
 /*

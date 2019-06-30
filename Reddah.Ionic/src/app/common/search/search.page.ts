@@ -29,13 +29,15 @@ export class SearchPage implements OnInit {
         [{id:4,name:'公众号'},{id:5,name:'小程序'},{id:6,name:'股票'}],
     ];
 
-    chooseTopic(col){
+    chooseTopic(col, isSetFocus=false){
         this.showTopic = false;
         this.searchKeyword.placeholder += col.name;
         this.selectedTopicId = col.id;
-        setTimeout(() => {
-            this.searchKeyword.setFocus();
-        },150);
+        if(isSetFocus){
+            setTimeout(() => {
+                this.searchKeyword.setFocus();
+            },150);
+        }
     }
 
     constructor(
@@ -56,7 +58,7 @@ export class SearchPage implements OnInit {
 
     async ngOnInit() {
         if(this.key&&this.type!=-1){//come from clicking article label
-            this.chooseTopic([].concat.apply([],this.topics)[this.type]);
+            this.chooseTopic([].concat.apply([],this.topics)[this.type], false);
             this.searchKeyword.value = this.key;
             this.search();
         }

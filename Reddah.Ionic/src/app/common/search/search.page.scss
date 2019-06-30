@@ -16,27 +16,25 @@ ion-avatar > img{
 
 .articleTitle{
     display: block;
-    font-size: 19px;
     padding: 0px 15px;
     margin-top: 15px;
     color: #107c10;
 }
 
 .articleContent{
-    font-size: 18px;
-    color:grey;
+    color: #636468;
     margin-bottom: 10px;
 }
 
-.articleFooter{
-    font-size: 18px;
-}
-
 .articleFooterTime{
-    font-size: 18px;
+    color: #636468;
     margin-left: 10px;
 }
 
 .loadingText{
     padding:5px;
+}
+
+[text-wrap]{
+    font-size: var(--ion-font-size);
 }

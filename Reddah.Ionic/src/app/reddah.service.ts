@@ -35,6 +35,18 @@ export class ReddahService {
         private cacheService: CacheService,
     ) { }
 
+    
+    //******************************** */
+    private registerUrl = 'https://login.reddah.com/api/auth/register'; 
+    
+    register(formData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.registerUrl, formData)
+        .pipe(
+            tap(data => this.log('register')),
+            catchError(this.handleError('register', []))
+        );
+    }
     //******************************** */
     private loginUrl = 'https://login.reddah.com/api/auth/sign'; 
 
@@ -524,6 +536,15 @@ export class ReddahService {
         return locale;
     }
 
+    setLoginUserName(userName){
+        this.localStorageService.store("Reddah_lastlogin_username", userName);
+    }
+    
+    getLoginUserName(){
+        return this.localStorageService.retrieve("Reddah_lastlogin_username");
+    }
+
+
 
     /**
      * Handle Http operation that failed.
@@ -994,12 +1015,15 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     }
 
     fontSizeMap = new Map()
-    .set(1,'12px')
-    .set(2,'16px')
+    .set(1,'16px')
+    .set(2,'18px')
     .set(3,'20px')
-    .set(4,'24px')
-    .set(5,'28px')
-    .set(6,'32px')
-    .set(7,'36px')
-    .set(8,'40px');
+    .set(4,'22px')
+    .set(5,'24px')
+    .set(6,'26px')
+    .set(7,'28px')
+    .set(8,'30px')
+    .set(9,'32px')
+    .set(10,'34px');
+
 }

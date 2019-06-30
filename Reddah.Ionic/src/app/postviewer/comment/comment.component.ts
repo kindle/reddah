@@ -114,6 +114,7 @@ export class CommentComponent implements OnInit {
             //reload comments
             this.loadComments(comment.ArticleId)
         }
+
     }
 
     loadComments(articleId){

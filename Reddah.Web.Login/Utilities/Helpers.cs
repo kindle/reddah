@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -112,6 +113,36 @@ namespace Reddah.Web.Login.Utilities
                 "" : matches.Groups[1].Value;
 
             return GetRelativeUrl(matchString);
+        }
+
+        public static void Email(
+            MailAddress from,
+            MailAddress to,
+            string subject,
+            string body
+            )
+        {
+
+            try
+            {
+                var verifyEmailPassword = string.Empty;
+                using (var db = new reddahEntities())
+                {
+                    verifyEmailPassword = db.Setting.FirstOrDefault(s => s.Key == "VerifyEmailPassword").Value;
+                }
+                SmtpClient client = new SmtpClient();
+                client.Host = "smtp.reddah.com";
+                client.Credentials = new System.Net.NetworkCredential(from.Address, verifyEmailPassword);
+                client.EnableSsl = false;
+                MailMessage message = new MailMessage(from, to);
+                message.Subject = subject;
+                message.Body = body;
+                client.Send(message);
+            }
+            catch (Exception e)
+            {
+
+            }
         }
     }
 }

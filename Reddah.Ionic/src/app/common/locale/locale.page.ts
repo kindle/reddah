@@ -18,7 +18,8 @@ export class LocalePage implements OnInit {
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
         private translate: TranslateService,
-        public service: ReddahService) {
+        public reddah: ReddahService,
+        ) {
     }
 
     ngOnInit() {

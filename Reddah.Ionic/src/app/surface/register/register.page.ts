@@ -49,43 +49,38 @@ export class RegisterPage implements OnInit {
         toast.present();
     }
 
-    async logIn() {
+    async register() {
         if (this.username.length == 0) {
-            alert("请输入账号");
-        } else if (this.password.length == 0) {
-            alert("请输入密码");
-        } else {
+            this.presentToastWithOptions("Please input your user name");
+        }else if (this.password.length == 0) {
+            this.presentToastWithOptions("Please input your password");
+        }else if (this.email.length == 0) {
+            this.presentToastWithOptions("Please input your email");
+        }
+        else if (this.password!=this.confirmpassword) {
+            this.presentToastWithOptions("Password and confirm password are different");
+        }
+        else {
             const loading = await this.loadingController.create({
                 message: this.translateService.instant("Article.Loading"),
                 spinner: 'circles',
             });
             await loading.present();
             
-            this.reddah.login(this.username, this.password)
+            let formData = new FormData();
+            formData.append("UserName", this.username);
+            formData.append("Password", this.password);
+            formData.append("Email", this.email);
+            this.reddah.register(formData)
             .subscribe(result => 
             {
                 loading.dismiss();
                 if(result.Success==0){
                     this.reddah.setCurrentJwt(result.Message);
-                    // return token successfully
-                    this.modalController.dismiss(result.Message);
-                    this.router.navigate(['/'], {
-                        queryParams: {
-                        }
-                    });
-                    this.cacheService.clearAll();
+                    window.location.reload();
                 }
-                else if(result.Success==1){
-                    //Input user name or password is empty
-                    alert(result.Message);
-                }
-                else if(result.Success==2){
-                    //"Username or Password is wrong"
+                else{
                     this.presentToastWithOptions(result.Message);
-                }
-                else if(result.Success==3){
-                    //other errors
-                    alert(result.Message);
                 }
                 
             });

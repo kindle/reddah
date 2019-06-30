@@ -15,12 +15,90 @@ using Org.BouncyCastle.Crypto;
 using System.Web.Security;
 using System.Data.Entity;
 using System.Web.Http.Cors;
+using System.Web;
+using Reddah.Web.Login.Utilities;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace Reddah.Web.Login.Controllers
 {
     [RoutePrefix("api/auth")]
     public class AuthController : ApiBaseController
     {
+        [Route("register")]
+        public IHttpActionResult Register()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string userName = HttpContext.Current.Request["UserName"];
+                string password = HttpContext.Current.Request["Password"];
+                string email = HttpContext.Current.Request["Email"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                if (String.IsNullOrWhiteSpace(userName))
+                    return Ok(new ApiResult(1, "No user name"));
+
+                if (String.IsNullOrWhiteSpace(password))
+                    return Ok(new ApiResult(1, "No password"));
+
+                if (String.IsNullOrWhiteSpace(email))
+                    return Ok(new ApiResult(1, "No email"));
+
+                //Regex reg = new Regex(@"^\w+$");//字母、数字和下划线
+                Regex reg = new Regex("^[a-zA-Z]\\w{5,17}$");//字母开头，字母、数字和下划线
+                if (!reg.IsMatch(userName))
+                    return Ok(new ApiResult(2, "user name invalid"));
+
+                reg = new Regex("^\\s*([A-Za-z0-9_-]+(\\.\\w+)*@(\\w+\\.)+\\w{2,5})\\s*$");//valid email
+                if (!reg.IsMatch(email))
+                    return Ok(new ApiResult(2, "Email invalid"));
+
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var userExist = db.UserProfile.FirstOrDefault(u => u.UserName == userName||u.UserName.Contains(userName));
+                    if(userExist != null)
+                        return Ok(new ApiResult(3, "User exist"));
+                    //var emailExist = db.UserProfile.FirstOrDefault(u => u.Email == email);
+                    //if (emailExist != null)
+                    //    return Ok(new ApiResult(3, "Email exist"));
+
+                    var verifyToken = WebSecurity.CreateUserAndAccount(
+                        userName,
+                        password,
+                        new { Email = email },
+                        false);
+
+                    var userJustCreated = db.UserProfile.FirstOrDefault(u => u.UserName == userName);
+                    Helpers.Email(
+                            new MailAddress("donotreply@reddah.com", "donotreply@reddah.com"),
+                            new MailAddress(email, userName),
+                            "[Reddah] Verify your email address‏",
+                            string.Format("Dear {0}:\r\n" +
+                            "visit this link to verify your email address:\r\n" +
+                            "http://www.reddah.com/en-US/VerifyEmail?Userid={1}&EmailToken={2}" +
+                            "\r\nthanks for using the site!",
+                            userName, userJustCreated.UserId, verifyToken)
+                    );
+                }
+
+                return Ok(new ApiResult(0, ""));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+
         [Route("sign")]
         public IHttpActionResult Sign([FromBody]UserModel user)
         {

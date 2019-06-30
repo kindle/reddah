@@ -6,10 +6,10 @@
             readonly padding-start placeholder="写评论..."></ion-input>
         
         <ion-icon color="danger" name="bookmark" size="medium"></ion-icon>
-        <ion-text (click)="bookmark()" margin-end>{{ 'Article.Bookmark' | translate }}</ion-text>
+        <!--<ion-text (click)="bookmark()" margin-end>{{ 'Article.Bookmark' | translate }}</ion-text>-->
         
         <ion-icon color="primary" name="share" size="medium"></ion-icon>
-        <ion-text (click)="share()">{{ 'Article.Share' | translate }}</ion-text>
+        <!--<ion-text (click)="share()">{{ 'Article.Share' | translate }}</ion-text>-->
     </ion-item>
     <ion-item *ngIf="showEditBox">
         <ion-textarea autoresize padding #newComment id="newComment" [(ngModel)]="commentContent" rows="3" cols="21" 

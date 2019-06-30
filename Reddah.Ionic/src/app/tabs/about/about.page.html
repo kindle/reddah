@@ -7,8 +7,8 @@
           <img src="{{reddah.appData('userphoto_'+userName)}}" class="portrait">
         </ion-thumbnail>
         <ion-label slot="start">
-            <h1>{{reddah.getDisplayName(userName)}}</h1>
-            <p>Reddah ID: {{userName}}</p>
+            <span>{{reddah.getDisplayName(userName)}}</span><br>
+            <span>{{userName}}</span>
         </ion-label>
         <ion-icon name="ios-qr-scanner" slot="end"></ion-icon>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>

@@ -4,20 +4,20 @@
 </ion-item>
 <ion-content [scrollEvents]="true" (ionScroll)="commentbox.onScroll($event)">
     <div style="padding-left: 10px;padding-top: 10px;padding-bottom: 10px;">
-        <H1 [innerHTML]="reddah.htmlDecode(article.Title) | safe: 'html'"></H1>
+        <span class="article-title" [innerHTML]="reddah.htmlDecode(article.Title) | safe: 'html'"></span>
         <ion-item no-padding>
             <ion-text color="primary" (click)="goUser(article.UserName)">
-                <span style="font-size:20px;color:#556890;" [innerHTML]="reddah.getDisplayName(article.UserName) | safe: 'html'"></span>
+                <span class="user-name" [innerHTML]="reddah.getDisplayName(article.UserName) | safe: 'html'"></span>
             </ion-text>
-            <ion-text style="margin-left:5px;font-size:20px;" color="dark" margin-end>{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-text>     
+            <ion-text style="margin-left:5px;" color="dark" margin-end>{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-text>     
         </ion-item>
-        <ion-item no-padding lines="none">
+        <div class="listInfo">
             <span *ngFor="let group of article.GroupName.split(',')" (click)="goSearch(group)" style="padding-right:5px;">
-                <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;font-size: 20px;margin-bottom:3px;">{{group}}</u>
+                <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;margin-bottom:2px;">{{group}}</u>
             </span>
-        </ion-item>
+        </div>
         <ion-text color="dark">
-            <div style="font-size: 20px;" id="articleContent" (click)="viewer($event)" [innerHTML]="reddah.htmlDecode(article.Content) | safe: 'html'"></div>
+            <div id="articleContent" (click)="viewer($event)" [innerHTML]="reddah.htmlDecode(article.Content) | safe: 'html'"></div>
         </ion-text>
     </div>
     <app-comment #commentlist no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" (commentClick)="childCommentClick($event)" 

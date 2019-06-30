@@ -24,6 +24,9 @@ export class SigninPage implements OnInit {
     ) { }
 
     ngOnInit() {
+        let lastLoginUserName = this.reddah.getLoginUserName();
+        if(lastLoginUserName)
+            this.username = lastLoginUserName;
     }
 
     
@@ -44,9 +47,9 @@ export class SigninPage implements OnInit {
 
     async logIn() {
         if (this.username.length == 0) {
-            alert("请输入账号");
+            this.presentToastWithOptions("Please input your user name");
         } else if (this.password.length == 0) {
-            alert("请输入密码");
+            this.presentToastWithOptions("Please input your password");
         } else {
             const loading = await this.loadingController.create({
                 message: this.translateService.instant("Article.Loading"),
@@ -59,6 +62,7 @@ export class SigninPage implements OnInit {
             {
                 loading.dismiss();
                 if(result.Success==0){
+                    this.reddah.setLoginUserName(this.username);
                     this.reddah.setCurrentJwt(result.Message);
                     // return token successfully
                     this.modalController.dismiss(result.Message);
