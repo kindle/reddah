@@ -40,7 +40,7 @@ export class ReddahService {
     private registerUrl = 'https://login.reddah.com/api/auth/register'; 
     
     register(formData): Observable<any> {
-        formData.append('jwt', this.getCurrentJwt());
+        //formData.append('jwt', this.getCurrentJwt());
         return this.http.post<any>(this.registerUrl, formData)
         .pipe(
             tap(data => this.log('register')),
@@ -510,6 +510,7 @@ export class ReddahService {
 
     clearCurrentUser(){
         this.localStorageService.clear("Reddah_CurrentUser");
+        this.localStorageService.clear("Reddah_CurrentJwt");
     }
 
     logoutClear(){

@@ -75,13 +75,15 @@ export class RegisterPage implements OnInit {
             formData.append("UserName", this.username);
             formData.append("Password", this.password);
             formData.append("Email", this.email);
+            formData.append("Locale", this.reddah.getCurrentLocale());
             this.reddah.register(formData)
             .subscribe(result => 
             {
                 loading.dismiss();
                 if(result.Success==0){
-                    this.reddah.setCurrentJwt(result.Message);
-                    window.location.reload();
+                    this.reddah.setLoginUserName(this.username);
+                    this.presentToastWithOptions("注册成功，请验证邮箱后登录...", "primary");
+                    this.modalController.dismiss(true);
                 }
                 else{
                     this.presentToastWithOptions(result.Message, "danger");

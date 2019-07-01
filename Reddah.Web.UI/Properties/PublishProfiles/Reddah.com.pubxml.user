@@ -2666,7 +2666,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/26/2018 06:56:51</publishTime>
     </File>
     <File Include="Views/Account/VerifyEmail.cshtml">
-      <publishTime>11/16/2018 08:35:46</publishTime>
+      <publishTime>07/01/2019 08:22:14</publishTime>
     </File>
     <File Include="Views/Account/_ChangePasswordPartial.cshtml">
       <publishTime>12/14/2018 06:37:56</publishTime>

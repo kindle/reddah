@@ -30,13 +30,10 @@ namespace Reddah.Web.Login.Controllers
         {
             try
             {
-                string jwt = HttpContext.Current.Request["jwt"];
                 string userName = HttpContext.Current.Request["UserName"];
                 string password = HttpContext.Current.Request["Password"];
                 string email = HttpContext.Current.Request["Email"];
-
-                if (String.IsNullOrWhiteSpace(jwt))
-                    return Ok(new ApiResult(1, "No Jwt string"));
+                string locale = HttpContext.Current.Request["Locale"];
 
                 if (String.IsNullOrWhiteSpace(userName))
                     return Ok(new ApiResult(1, "No user name"));
@@ -56,12 +53,6 @@ namespace Reddah.Web.Login.Controllers
                 if (!reg.IsMatch(email))
                     return Ok(new ApiResult(2, "Email invalid"));
 
-
-                JwtResult jwtResult = AuthController.ValidJwt(jwt);
-
-                if (jwtResult.Success != 0)
-                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
-
                 using (var db = new reddahEntities())
                 {
                     var userExist = db.UserProfile.FirstOrDefault(u => u.UserName == userName||u.UserName.Contains(userName));
@@ -71,11 +62,17 @@ namespace Reddah.Web.Login.Controllers
                     //if (emailExist != null)
                     //    return Ok(new ApiResult(3, "Email exist"));
 
+                    if (!WebSecurity.Initialized && WebApiConfig.IsWebSecurityNotCalled)
+                    {
+                        WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", false);
+                        WebApiConfig.IsWebSecurityNotCalled = false;
+                    }
+
                     var verifyToken = WebSecurity.CreateUserAndAccount(
                         userName,
                         password,
                         new { Email = email },
-                        false);
+                        true);
 
                     var userJustCreated = db.UserProfile.FirstOrDefault(u => u.UserName == userName);
                     Helpers.Email(
@@ -83,10 +80,10 @@ namespace Reddah.Web.Login.Controllers
                             new MailAddress(email, userName),
                             "[Reddah] Verify your email address‏",
                             string.Format("Dear {0}:\r\n" +
-                            "visit this link to verify your email address:\r\n" +
-                            "http://www.reddah.com/en-US/VerifyEmail?Userid={1}&EmailToken={2}" +
-                            "\r\nthanks for using the site!",
-                            userName, userJustCreated.UserId, verifyToken)
+                            "Please visit this link to verify your email address:\r\n" +
+                            "http://www.reddah.com/{1}/VerifyEmail?Userid={2}&EmailToken={3}" +
+                            "\r\nAfter that, you can login. Thanks for using Reddah!",
+                            userName, locale, userJustCreated.UserId, verifyToken)
                     );
                 }
 
@@ -109,8 +106,11 @@ namespace Reddah.Web.Login.Controllers
 
             try
             {
-                if (!WebSecurity.Initialized)
+                if (!WebSecurity.Initialized && WebApiConfig.IsWebSecurityNotCalled)
+                {
                     WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", false);
+                    WebApiConfig.IsWebSecurityNotCalled = false;
+                }
 
                 if (Membership.ValidateUser(user.UserName, user.Password))
                 {
@@ -135,6 +135,22 @@ namespace Reddah.Web.Login.Controllers
                 }
                 else
                 {
+                    using (var db = new reddahEntities())
+                    {
+                        var userExist = db.UserProfile.FirstOrDefault(u => u.UserName == user.UserName);
+                        if (userExist != null)
+                        {
+                            var mem = db.webpages_Membership.FirstOrDefault(m => m.UserId == userExist.UserId);
+                            if (mem != null)
+                            {
+                                if (mem.IsConfirmed!=true)
+                                {
+                                    return Ok(new ApiResult(3, "email not verified"));
+                                }
+                            }
+                        }
+                    }
+
                     return Ok(new ApiResult(2, "Username or Password is wrong"));
                 }
             }

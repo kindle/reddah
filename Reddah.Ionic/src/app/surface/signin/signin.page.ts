@@ -34,13 +34,14 @@ export class SigninPage implements OnInit {
     password = "";
     
     
-    async presentToastWithOptions(message: string) {
+    async presentToastWithOptions(message: string, color="dark") {
         const toast = await this.toastController.create({
             message: message,
             showCloseButton: true,
             position: 'top',
             closeButtonText: 'Close',
-            duration: 3000
+            duration: 3000,
+            color: color
         });
         toast.present();
     }
@@ -72,17 +73,8 @@ export class SigninPage implements OnInit {
                     });
                     this.cacheService.clearAll();
                 }
-                else if(result.Success==1){
-                    //Input user name or password is empty
-                    alert(result.Message);
-                }
-                else if(result.Success==2){
-                    //"Username or Password is wrong"
-                    this.presentToastWithOptions(result.Message);
-                }
-                else if(result.Success==3){
-                    //other errors
-                    alert(result.Message);
+                else {
+                    this.presentToastWithOptions(result.Message, "danger");
                 }
                 
             });

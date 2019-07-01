@@ -56,6 +56,7 @@ export class SurfacePage implements OnInit {
             //this.router.navigateByUrl('/tabs/(home:home)');
             //window.location.reload();
             //this.exactToken(data);
+            this.signin();
         }
         else{
             this.config.isWorldVisible = true;

@@ -3,11 +3,11 @@
 }
 
 <h1 style="display:none;">@ViewBag.UserId</h1>
-<h2>@ViewBag.EmailToken</h2>
+<h2 style="display:none;">@ViewBag.EmailToken</h2>
 <h3>@ViewBag.VerifySuccessState</h3>
 @if (ViewBag.VerifySuccessState.ToString() == "AlreadyVerified")
 {
-    <h1>Your email has already been verified.</h1>
+    <h1>Your Email is verified.</h1>
 }
 else if (ViewBag.VerifySuccessState.ToString() == "WrongToken")
 { 
@@ -19,7 +19,7 @@ else if (ViewBag.VerifySuccessState.ToString() == "UserNotExist")
 }
 else if (ViewBag.VerifySuccessState.ToString() == "Success")
 { 
-    <h1>You have successfully verified your email. </h1>
+    <h1>Congrats! You have successfully verified your email. </h1>
 }
 else if (ViewBag.VerifySuccessState.ToString() == "NotVerified")
 { 

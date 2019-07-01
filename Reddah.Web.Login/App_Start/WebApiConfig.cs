@@ -21,5 +21,7 @@ namespace Reddah.Web.Login
             );
             
         }
+
+        public static bool IsWebSecurityNotCalled = true;
     }
 }
