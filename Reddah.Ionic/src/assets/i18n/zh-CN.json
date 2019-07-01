@@ -1,26 +1,91 @@
 {
-    "Surface.Language": "语言",
-    "Surface.Signin": "登录",
-    "Surface.NewAccount": "创建新账户",
+    "Surface":{
+        "Language": "语言",
+        "Login": "登录",
+        "Register": "创建新账户"
+    },
+
+    "Login":{
+        "Title":"登录",
+        "NoAccount":"还没有帐号？",
+        "RegisterNow":"立即注册",
+        "ForgetPassword":"忘记密码",
+        "Loading":"正在登录..."
+    },
+
+    "Register":{
+        "Title":"注册",
+        "ReadAgree":"您已阅读并同意：",
+        "UserAgreement":"用户协议、",
+        "Privacy":"隐私声明",
+        "And":"和",
+        "Content":"内容政策",
+        "Loading":"正在注册...",
+        "Register.Success":"注册成功，请验证邮箱后登录..."
+    },
+
+    "Input":{
+        "UserName": "用户名",
+        "Password": "密码",
+        "ConfirmPassword": "确认密码",
+        "Email": "电子邮件",
+        "Error":{
+            "UserNameEmpty":"请输入用户名",
+            "PasswordEmpty":"请输入密码",
+            "PasswordDifferent":"密码不一致",
+            "EmailEmpty":"请输入电子邮件",
+            "Agree":"请同意用户协议"
+        }
+    },
+
+    "Button":{
+        "Login": "登录",
+        "Register": "注册",
+        "Logout": "退出",
+        "Back": "返回",
+        "Close": "关闭"
+    },
+
+    "Menu":{
+        "Message": "消息",
+        "Recommend": "推荐",
+        "Contact": "好友",
+        "Find": "发现",
+        "About": "我",
+        "Header":{
+            "GroupChat":"发起群聊",
+            "AddFriend":"添加朋友",
+            "Scan":"扫一扫",
+            "Feedback":"帮助与反馈"
+        },
+        "FindSub":{
+            "Timeline":"朋友圈",
+            "Scan":"扫一扫",
+            "Shake":"摇一摇",
+            "Look":"看一看",
+            "Search":"搜一搜",
+            "Buy":"买买买",
+            "Play":"小游戏",
+            "Program":"小程序"
+        }
+    },
+
+    "Time.YearsAgo": "年前",
+    "Time.MonthsAgo": "个月前",
+    "Time.WeeksAgo": "周前",
+    "Time.Yesterday": "昨天",
+    "Time.DaysAgo": "天前",
+    "Time.HoursAgo": "小时前",
+    "Time.MinutesAgo": "分钟前",
+    "Time.JustNow": "刚刚",
 
 
-    "Menu.Message": "消息",
-    "Menu.Recommend": "推荐",
-    "Menu.Contact": "好友",
-    "Menu.Find": "发现",
-    "Menu.About": "我",
+    
 
     "Article.Loading": "请稍等...",
     "Article.Comments": "评论",
-    "Button.SignIn": "登录",
-    "Button.Logout": "退出",
-    "Button.Register": "注册",
-    "Button.Back": "返回",
-    "Input.Email": "电子邮件",
-    "Input.UserName": "用户名",
-    "Input.Password": "密码",
-    "Input.ConfirmPassword": "确认密码",
-    "Title.LoginReddah": "登录",
+    
+    
     "About.CurrentVersion": "当前版本",
     "About.CheckUpgrade": "检查新版本",
     "About.CurrentLocale": "语言",

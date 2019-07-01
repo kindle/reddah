@@ -1,24 +1,94 @@
 {
-    "Surface.Language": "언어",
-    "Surface.Signin": "로그인",
-    "Surface.NewAccount": "계정 만들기",
+    "Surface":{
+      "Language": "언어",
+      "Login": "로그인",
+      "Register": "레지스터"
+    },
 
-    "Menu.Message": "Message",
-    "Menu.Recommend": "추천하다",
-    "Menu.Contact": "대화",
-    "Menu.Find": "발견하다",
-    "Menu.About": "나",
+    "Login":{
+      "Title":"로그인",
+      "NoAccount":"하찮은?",
+      "RegisterNow":"지금 등록",
+      "ForgetPassword":"잊고 비밀번호",
+      "Loading":"로그인..."
+    },
+
+    "Register":{
+      "Title":"레지스터",
+      "ReadAgree":"너 읽는 것에:",
+      "UserAgreement":"사용자 협의,",
+      "Privacy":"보안 정책",
+      "And":"&",
+      "Content":"내용 정책",
+      "Loading":"레지스터...",
+      "Register.Success":"등록이 성공했으니, 메일박스를 검증한 후 로그인..."
+    },
+
+    "Input":{
+      "UserName": "사용자 이름",
+      "Password": "비밀번호",
+      "ConfirmPassword": "비밀번호 확인",
+      "Email": "전자 우편",
+      "Error":{
+        "UserNameEmpty":"사용자 이름을 입력하십시오",
+        "PasswordEmpty":"암호를 입력하십시오",
+        "PasswordDifferent":"암호가 일치하지 않다",
+        "EmailEmpty":"입력하십시오. 전자 우편",
+        "Agree":"사용자 협의 좀 동의한다"
+      }
+    },
+
+    "Button":{
+      "Login": "로그인",
+      "Register": "레지스터",
+      "Logout": "로그아웃",
+      "Back": "가",
+      "Close": "가깝다"
+    },
+
+    "Menu":{
+      "Message": "메시지",
+      "Recommend": "추천",
+      "Contact": "친구",
+      "Find": "찾을 수 있다",
+      "About": "나",
+      "Header":{
+        "GroupChat":"군담",
+        "AddFriend":"친구 추가",
+        "Scan":"스캔",
+        "Feedback":"피드백"
+      },
+      "FindSub":{
+          "Timeline":"친구권",
+          "Scan":"스캔",
+          "Shake":"흔들다",
+          "Look":"좋은 이야기",
+          "Search":"검색",
+          "Buy":"산",
+          "Play":"게임",
+          "Program":"작은 프로그램"
+      }
+    },
+
+
+    "Time.YearsAgo": "year(s) ago",
+    "Time.MonthsAgo": "month(s) ago",
+    "Time.WeeksAgo": "week(s) ago",
+    "Time.Yesterday": "yesterday",
+    "Time.DaysAgo": "day(s) ago",
+    "Time.HoursAgo": "hour(s) ago",
+    "Time.MinutesAgo": "minute(s) ago",
+    "Time.JustNow": "just now",
+    
+    
+    
     "Article.Loading": "잠깐만 기다리세요",
     "Article.Comments": "의견",
     "Button.SignIn": "로그인",
     "Button.Logout": "Logout",
     "Button.Register": "Register",
     "Button.Back": "Back",
-    "Input.Email": "Email",
-    "Input.UserName": "사용자 이름",
-    "Input.Password": "비밀번호",
-    "Input.ConfirmPassword": "Confirm Password",
-    "Title.LoginReddah": "Login",
+    
     "About.CurrentVersion": "Version",
     "About.CheckUpgrade": "Check Latest Version",
     "About.CurrentLocale": "Locale",

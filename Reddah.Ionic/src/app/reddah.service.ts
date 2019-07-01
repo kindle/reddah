@@ -17,6 +17,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
     providedIn: 'root'
@@ -33,6 +34,7 @@ export class ReddahService {
         private toastController: ToastController,
         private platform: Platform,
         private cacheService: CacheService,
+        private translate: TranslateService,
     ) { }
 
     
@@ -918,7 +920,12 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         let now = new Date(localnow+offset).getTime(); 
         
         let diffValue = now - dateTimeStamp;
-        if(diffValue < 0){return dateStr;}
+        if(diffValue < 0){
+            if(diffValue>-1000*60)
+                return this.translate.instant("Time.JustNow");
+            else 
+                return result;
+        }
         let yearC =diffValue/year;
         let monthC =diffValue/month;
         let weekC =diffValue/(7*day);
@@ -927,25 +934,25 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         let minC =diffValue/minute;
         let secC =diffValue/second;
         if(yearC>=1){
-            result="" + parseInt(yearC+"") + "年前";
+            result=parseInt(yearC+"") + " " +this.translate.instant("Time.YearsAgo");
         }
         else if(monthC>=1){
-            result="" + parseInt(monthC+"") + "个月前";
+            result=parseInt(monthC+"") + " " + this.translate.instant("Time.MonthsAgo");
         }
         else if(weekC>=1){
-            result="" + parseInt(weekC+"") + "周前";
+            result=parseInt(weekC+"") + " " + this.translate.instant("Time.WeeksAgo");
         }
         else if(dayC>=1){
-            result=""+ (parseInt(dayC+"")==1?"昨天":parseInt(dayC+"") +"天前");
+            result=(parseInt(dayC+"")==1?this.translate.instant("Time.Yesterday"):parseInt(dayC+"") + " " +this.translate.instant("Time.DaysAgo"));
         }
         else if(hourC>=1){
-            result=""+ parseInt(hourC+"") +"小时前";
+            result=parseInt(hourC+"") + " " +this.translate.instant("Time.HoursAgo");
         }
         else if(minC>=1){
-            result=""+ parseInt(minC+"") +"分钟前";
+            result=parseInt(minC+"") + " " +this.translate.instant("Time.MinutesAgo");
         }
         else if(secC>=1){
-            result="刚刚";
+            result=this.translate.instant("Time.JustNow");
         }
         
         return result;

@@ -33,10 +33,7 @@ export class SurfacePage implements OnInit {
         private authService: AuthService,
         private localStorageService: LocalStorageService,
         private translate: TranslateService,
-    ) { 
-        
-            
-    }
+    ) {}
 
     ngOnInit() {
         this.init(null);
@@ -46,16 +43,12 @@ export class SurfacePage implements OnInit {
         this.config.isWorldVisible = false;
 
         const modal = await this.modalController.create({
-            component: RegisterPage,
-            componentProps: { url: '' }
+            component: RegisterPage
         });
           
         await modal.present();
         const { data } = await modal.onDidDismiss();
         if(data){
-            //this.router.navigateByUrl('/tabs/(home:home)');
-            //window.location.reload();
-            //this.exactToken(data);
             this.signin();
         }
         else{
@@ -67,8 +60,7 @@ export class SurfacePage implements OnInit {
         this.config.isWorldVisible = false;
         
         const modal = await this.modalController.create({
-            component: SigninPage,
-            componentProps: { url: '' }
+            component: SigninPage
         });
         
         await modal.present();

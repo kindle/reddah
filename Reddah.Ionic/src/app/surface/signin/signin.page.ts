@@ -17,7 +17,7 @@ export class SigninPage implements OnInit {
     constructor(private modalController: ModalController,
         private reddah: ReddahService,
         private loadingController: LoadingController,
-        private translateService: TranslateService,
+        private translate: TranslateService,
         private toastController: ToastController,
         private router: Router,
         private cacheService: CacheService,
@@ -39,7 +39,7 @@ export class SigninPage implements OnInit {
             message: message,
             showCloseButton: true,
             position: 'top',
-            closeButtonText: 'Close',
+            closeButtonText: this.translate.instant("Button.Close"),
             duration: 3000,
             color: color
         });
@@ -48,12 +48,12 @@ export class SigninPage implements OnInit {
 
     async logIn() {
         if (this.username.length == 0) {
-            this.presentToastWithOptions("Please input your user name");
+            this.presentToastWithOptions(this.translate.instant("Input.Error.UserNameEmpty"));
         } else if (this.password.length == 0) {
-            this.presentToastWithOptions("Please input your password");
+            this.presentToastWithOptions(this.translate.instant("Input.Error.PasswordEmpty"));
         } else {
             const loading = await this.loadingController.create({
-                message: this.translateService.instant("Article.Loading"),
+                message: this.translate.instant("Login.Loading"),
                 spinner: 'circles',
             });
             await loading.present();

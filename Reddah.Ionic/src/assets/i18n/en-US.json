@@ -1,24 +1,87 @@
 {
-    "Surface.Language": "Language",
-    "Surface.Signin": "Log In",
-    "Surface.NewAccount": "CREATE ACCOUNT",
+    "Surface":{
+        "Language": "Language",
+        "Login": "Login",
+        "Register": "Register"
+    },
 
-    "Menu.Message": "Message",
-    "Menu.Recommend": "Promoted",
-    "Menu.Contact": "Friends",
-    "Menu.Find": "Discover",
-    "Menu.About": "Me",
+    "Login":{
+        "Title":"Login",
+        "NoAccount":"No Account?",
+        "RegisterNow":"Register Now",
+        "ForgetPassword":"Forget Password",
+        "Loading":"Login..."
+    },
+
+    "Register":{
+        "Title":"Register",
+        "ReadAgree":"You have read and agreed:",
+        "UserAgreement":"User Agreement,",
+        "Privacy":"Privacy Policy",
+        "And":"and",
+        "Content":"Content Policy",
+        "Loading":"Register...",
+        "Register.Success":"Registration is successful. Please verify your email and login..."
+    },
+
+    "Input":{
+        "UserName": "User Name",
+        "Password": "Password",
+        "ConfirmPassword": "Confirm Password",
+        "Email": "Email",
+        "Error":{
+            "UserNameEmpty":"Please input user name",
+            "PasswordEmpty":"Please input password",
+            "PasswordDifferent":"Password & confirm password are different",
+            "EmailEmpty":"Please input email",
+            "Agree":"Please agree with user agreement"
+        }
+    },
+
+    "Button":{
+        "Login": "Login",
+        "Register": "Register",
+        "Logout": "Logout",
+        "Back": "Back",
+        "Close": "Close"
+    },
+
+    "Menu":{
+        "Message": "Message",
+        "Recommend": "Recommend",
+        "Contact": "Friend",
+        "Find": "Discover",
+        "About": "Me",
+        "Header":{
+            "GroupChat":"New Chat",
+            "AddFriend":"Add Friend",
+            "Scan":"Scan",
+            "Feedback":"Feedback"
+        },
+        "FindSub":{
+            "Timeline":"Moments",
+            "Scan":"Scan",
+            "Shake":"Shake",
+            "Look":"Top Stories",
+            "Search":"Search",
+            "Buy":"Buy",
+            "Play":"Game",
+            "Program":"Mini Program"
+        }
+    },
+
+    "Time.YearsAgo": "year(s) ago",
+    "Time.MonthsAgo": "month(s) ago",
+    "Time.WeeksAgo": "week(s) ago",
+    "Time.Yesterday": "yesterday",
+    "Time.DaysAgo": "day(s) ago",
+    "Time.HoursAgo": "hour(s) ago",
+    "Time.MinutesAgo": "minute(s) ago",
+    "Time.JustNow": "just now",
+
     "Article.Loading": "Please wait",
     "Article.Comments": "comments",
-    "Button.SignIn": "Sign in",
-    "Button.Logout": "Logout",
-    "Button.Register": "Register",
-    "Button.Back": "Back",
-    "Input.Email": "Email",
-    "Input.UserName": "User Name",
-    "Input.Password": "Password",
-    "Input.ConfirmPassword": "Confirm Password",
-    "Title.LoginReddah": "Login",
+    
     "About.CurrentVersion": "Version",
     "About.CheckUpgrade": "Check Latest Version",
     "About.CurrentLocale": "Locale",

@@ -1,25 +1,89 @@
 {
-    "Surface.Language": "Langue",
-    "Surface.Signin": "Se connecter",
-    "Surface.NewAccount": "Créer un compte",
+    "Surface":{
+      "Language": "Langue",
+      "Login": "Connexion",
+      "Register": "Registre"
+    },
 
-    "Menu.Message": "Message",
-    "Menu.Recommend": "Recommander",
-    "Menu.Contact": "Message",
-    "Menu.Find": "Découvrir",
-    "Menu.About": "Moi",
+    "Login":{
+      "Title":"Connexion",
+      "NoAccount":"No de compte?",
+      "RegisterNow":"Inscrivez - vous maintenant",
+      "ForgetPassword":"Oubliez le mot de passe",
+      "Loading":"Connexion..."
+    },
+
+    "Register":{
+      "Title":"Registre",
+      "ReadAgree":"Vous avez lu et approuvé:",
+      "UserAgreement":"Entente d'utilisation,",
+      "Privacy":"Politique sur la protection des renseignements personnels",
+      "And":"&",
+      "Content":"En matière de contenu",
+      "Loading":"Registre...",
+      "Register.Success":"S'il vous plaît vérifier l'enregistrement..."
+    },
+
+    "Input":{
+      "UserName": "nom d'utilisateur",
+      "Password": "mot de passe",
+      "ConfirmPassword": "Confirmer mot de passe",
+      "Email": "Courriel",
+      "Error":{
+        "UserNameEmpty":"Veuillez entrer le nom d'utilisateur",
+        "PasswordEmpty":"Veuillez entrer votre mot de passe",
+        "PasswordDifferent":"Incohérence du mot de passe",
+        "EmailEmpty":"Veuillez entrer courriel",
+        "Agree":"Veuillez accepter avec accord de l'utilisateur"
+      }
+    },
+
+    "Button":{
+      "Login": "Connexion",
+      "Register": "Registre",
+      "Logout": "Sortie",
+      "Back": "Retournez",
+      "Close": "Proche"
+    },
+
+    "Menu":{
+      "Message": "Message",
+      "Recommend": "Recommander",
+      "Contact": "Ami",
+      "Find": "Trouver",
+      "About": "Moi",
+      "Header":{
+        "GroupChat":"Bavarder",
+        "AddFriend":"Ajouter un ami",
+        "Scan":"Scan",
+        "Feedback":"Commentaires"
+      },
+      "FindSub":{
+          "Timeline":"Moments",
+          "Scan":"Scan",
+          "Shake":"Agiter",
+          "Look":"News",
+          "Search":"Recherche",
+          "Buy":"Acheter",
+          "Play":"Les jeux",
+          "Program":"Mini programme"
+      }
+    },
+
+    "Time.YearsAgo": "year(s) ago",
+    "Time.MonthsAgo": "month(s) ago",
+    "Time.WeeksAgo": "week(s) ago",
+    "Time.Yesterday": "yesterday",
+    "Time.DaysAgo": "day(s) ago",
+    "Time.HoursAgo": "hour(s) ago",
+    "Time.MinutesAgo": "minute(s) ago",
+    "Time.JustNow": "just now",
+    
+    
     "Article.Loading": "Un instant",
     "Article.Comments": "commentaires",
     "Article.Like": "like",
-    "Button.SignIn": "Se connecter",
-    "Button.Logout": "Logout",
-    "Button.Register": "Register",
-    "Button.Back": "Back",
-    "Input.Email": "Email",
-    "Input.UserName": "nom d'utilisateur",
-    "Input.Password": "mot de passe",
-    "Input.ConfirmPassword": "Confirm Password",
-    "Title.LoginReddah": "Login",
+    
     "About.CurrentVersion": "Version",
     "About.CheckUpgrade": "Check Latest Version",
     "About.CurrentLocale": "Locale",

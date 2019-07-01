@@ -1,24 +1,88 @@
 {
-    "Surface.Language": "言語",
-    "Surface.Signin": "サインイン",
-    "Surface.NewAccount": "アカウントの作成",
+    "Surface":{
+      "Language": "言語",
+      "Login": "ログイン",
+      "Register": "レジスタ"
+    },
 
-    "Menu.Message": "Message",
-    "Menu.Recommend": "お勧め",
-    "Menu.Contact": "チャット",
-    "Menu.Find": "発見する",
-    "Menu.About": "私",
+    "Login":{
+      "Title":"ログイン",
+      "NoAccount":"いいえアカウント？",
+      "RegisterNow":"今すぐ登録",
+      "ForgetPassword":"パスワードを忘れる",
+      "Loading":"ログイン..."
+    },
+
+    "Register":{
+      "Title":"レジスタ",
+      "ReadAgree":"読んで同意しました:",
+      "UserAgreement":"利用規約,",
+      "Privacy":"プライバシーポリシー",
+      "And":"&",
+      "Content":"コンテンツポリシー",
+      "Loading":"レジスタ...",
+      "Register.Success":"登録が成功しました。メールを確認して登録してください..."
+    },
+
+    "Input":{
+      "UserName": "ユーザー名",
+      "Password": "パスワード",
+      "ConfirmPassword": "パスワード確認",
+      "Email": "電子メール",
+      "Error":{
+        "UserNameEmpty":"ユーザー名入力",
+        "PasswordEmpty":"パスワード入力",
+        "PasswordDifferent":"パスワードが一致しません",
+        "EmailEmpty":"入力メール",
+        "Agree":"ユーザー同意に同意してください"
+      }
+    },
+
+    "Button":{
+      "Login": "ログイン",
+      "Register": "レジスタ",
+      "Logout": "ログアウト",
+      "Back": "戻る",
+      "Close": "クローズ"
+    },
+
+    "Menu":{
+      "Message": "メッセージ",
+      "Recommend": "推薦",
+      "Contact": "友達",
+      "Find": "見つける",
+      "About": "私",
+      "Header":{
+        "GroupChat":"雑談を始める",
+        "AddFriend":"友達を追加",
+        "Scan":"スキャン",
+        "Feedback":"フィードバック"
+      },
+      "FindSub":{
+          "Timeline":"友達の輪",
+          "Scan":"スキャン",
+          "Shake":"振る",
+          "Look":"トップストーリー",
+          "Search":"サーチ",
+          "Buy":"買い",
+          "Play":"ゲーム",
+          "Program":"ミニプログラム"
+      }
+    },
+
+    "Time.YearsAgo": "year(s) ago",
+    "Time.MonthsAgo": "month(s) ago",
+    "Time.WeeksAgo": "week(s) ago",
+    "Time.Yesterday": "yesterday",
+    "Time.DaysAgo": "day(s) ago",
+    "Time.HoursAgo": "hour(s) ago",
+    "Time.MinutesAgo": "minute(s) ago",
+    "Time.JustNow": "just now",
+    
+    
     "Article.Loading": "少々お待ちください",
     "Article.Comments": "コメント",
-    "Button.SignIn": "サインイン",
-    "Button.Logout": "Logout",
-    "Button.Register": "Register",
-    "Button.Back": "Back",
-    "Input.Email": "Email",
-    "Input.UserName": "ユーザー名",
-    "Input.Password": "パスワード",
-    "Input.ConfirmPassword": "Confirm Password",
-    "Title.LoginReddah": "Login",
+    
     "About.CurrentVersion": "Version",
     "About.CheckUpgrade": "Check Latest Version",
     "About.CurrentLocale": "Locale",
