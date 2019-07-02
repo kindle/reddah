@@ -156,17 +156,16 @@ export class TimeLinePage implements OnInit {
         });
     
         return await modal.present();
-    }
+    } 
 
     async goTsViewer(article){
         const userModal = await this.modalController.create({
             component: TsViewerPage,
             componentProps: { 
-                article: article,
-                //sameLevelGoUser: (userName, isGoBack)=>this.goUser(userName, isGoBack),
+                article: article
             }
         });
         
         await userModal.present();
-    }  
+    }
 }

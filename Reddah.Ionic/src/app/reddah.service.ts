@@ -18,6 +18,7 @@ import { PostviewerPage } from './postviewer/postviewer.page';
 import { LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
 import { TranslateService } from '@ngx-translate/core';
+import { TsViewerPage } from './mytimeline/tsviewer/tsviewer.page';
 
 @Injectable({
     providedIn: 'root'
@@ -861,19 +862,6 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         return result;
     }
 
-
-
-    async presentToastWithOptions(message: string) {
-        const toast = await this.toastController.create({
-            message: message,
-            showCloseButton: true,
-            position: 'top',
-            closeButtonText: 'Close',
-            duration: 3000
-        });
-        toast.present();
-    }
-
     complement(n) { return n < 10 ? '0' + n : n }
 
     generateFileName() {
@@ -1021,5 +1009,38 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     .set(8,'30px')
     .set(9,'32px')
     .set(10,'34px');
+
+    async toast(message: string, color="dark") {
+        const toast = await this.toastController.create({
+            message: message,
+            showCloseButton: true,
+            position: 'top',
+            closeButtonText: this.translate.instant("Button.Close"),
+            duration: 3000,
+            color: color
+        });
+        toast.present();
+    }
+
+    async addBookmark(articleId){
+        let formData = new FormData();
+        formData.append("ArticleId", JSON.stringify(articleId));
+        
+        this.addBookmarkFormData(formData);
+    }
+
+    async addBookmarkFormData(formData){
+        this.bookmark(formData).subscribe(result=>{
+            if(result.Success==0)
+            {
+                this.toast(`已收藏，请到到"我/收藏"查看`, "primary");
+                this.cacheService.clearGroup("BookmarkPage");
+            }
+            else{
+                alert(JSON.stringify(result.Message));
+            }
+        })
+        
+    }
 
 }

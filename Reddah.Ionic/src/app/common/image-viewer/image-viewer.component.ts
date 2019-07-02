@@ -124,16 +124,7 @@ export class ImageViewerComponent implements OnInit {
                     let orgurl = this.reddah.appCacheToOrg[item.webPreviewUrl];
                     formData.append("Content", orgurl==null?item.webPreviewUrl:orgurl);
                     
-                    this.reddah.bookmark(formData).subscribe(result=>{
-                        if(result.Success==0)
-                        {
-                            this.reddah.presentToastWithOptions(`已收藏，请到到"我/收藏"查看`);
-                            this.cacheService.clearGroup("BookmarkPage");
-                        }
-                        else{
-                            alert(JSON.stringify(result.Message));
-                        }
-                    });
+                    this.reddah.addBookmarkFormData(formData);
                 }
             }, 
             {

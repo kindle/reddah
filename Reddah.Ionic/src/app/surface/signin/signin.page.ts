@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CacheService } from "ionic-cache";
@@ -18,7 +18,6 @@ export class SigninPage implements OnInit {
         private reddah: ReddahService,
         private loadingController: LoadingController,
         private translate: TranslateService,
-        private toastController: ToastController,
         private router: Router,
         private cacheService: CacheService,
     ) { }
@@ -33,24 +32,11 @@ export class SigninPage implements OnInit {
     username = "";
     password = "";
     
-    
-    async presentToastWithOptions(message: string, color="dark") {
-        const toast = await this.toastController.create({
-            message: message,
-            showCloseButton: true,
-            position: 'top',
-            closeButtonText: this.translate.instant("Button.Close"),
-            duration: 3000,
-            color: color
-        });
-        toast.present();
-    }
-
     async logIn() {
         if (this.username.length == 0) {
-            this.presentToastWithOptions(this.translate.instant("Input.Error.UserNameEmpty"));
+            this.reddah.toast(this.translate.instant("Input.Error.UserNameEmpty"));
         } else if (this.password.length == 0) {
-            this.presentToastWithOptions(this.translate.instant("Input.Error.PasswordEmpty"));
+            this.reddah.toast(this.translate.instant("Input.Error.PasswordEmpty"));
         } else {
             const loading = await this.loadingController.create({
                 message: this.translate.instant("Login.Loading"),
@@ -74,7 +60,7 @@ export class SigninPage implements OnInit {
                     this.cacheService.clearAll();
                 }
                 else {
-                    this.presentToastWithOptions(result.Message, "danger");
+                    this.reddah.toast(result.Message, "danger");
                 }
                 
             });

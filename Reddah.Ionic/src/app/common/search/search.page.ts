@@ -8,6 +8,7 @@ import { Article } from "../../model/article";
 import { PostviewerPage } from '../../postviewer/postviewer.page';
 import { StockPage } from '../stock/stock.page';
 import { NgOnChangesFeature } from '@angular/core/src/render3';
+import { TsViewerPage } from '../../mytimeline/tsviewer/tsviewer.page';
 
 @Component({
     selector: 'app-search',
@@ -29,7 +30,7 @@ export class SearchPage implements OnInit {
         [{id:4,name:'公众号'},{id:5,name:'小程序'},{id:6,name:'股票'}],
     ];
 
-    chooseTopic(col, isSetFocus=false){
+    chooseTopic(col, isSetFocus=true){
         this.showTopic = false;
         this.searchKeyword.placeholder += col.name;
         this.selectedTopicId = col.id;
@@ -156,7 +157,7 @@ export class SearchPage implements OnInit {
         
         let cacheKey = "this.reddah.searchTimelines" + JSON.stringify(this.loadedIds_t) + this.locale + "search_timeline"+this.searchKeyword.value;
         let request = this.reddah.getArticles(this.loadedIds_t, this.locale, "search", this.searchKeyword.value, 1);
-        console.log(cacheKey);
+        
         this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
         .subscribe(articles => 
         {
@@ -206,10 +207,6 @@ export class SearchPage implements OnInit {
 
     }
 
-    async viewTs(article){
-
-    }
-
     async viewStock(){
         const stockModal = await this.modalController.create({
             component: StockPage,
@@ -217,6 +214,17 @@ export class SearchPage implements OnInit {
         });
         
         await stockModal.present();
+    }
+
+    async goTsViewer(article){
+        const userModal = await this.modalController.create({
+            component: TsViewerPage,
+            componentProps: { 
+                article: article
+            }
+        });
+        
+        await userModal.present();
     }
 
 }

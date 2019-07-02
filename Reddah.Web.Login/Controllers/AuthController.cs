@@ -76,12 +76,12 @@ namespace Reddah.Web.Login.Controllers
 
                     var userJustCreated = db.UserProfile.FirstOrDefault(u => u.UserName == userName);
                     Helpers.Email(
-                            new MailAddress("donotreply@reddah.com", "donotreply@reddah.com"),
+                            new MailAddress("donotreply@reddah.com", "Reddah Account"),
                             new MailAddress(email, userName),
-                            "[Reddah] Verify your email address‏",
+                            "Verify your email address‏",
                             string.Format("Dear {0}:\r\n" +
                             "Please visit this link to verify your email address:\r\n" +
-                            "http://www.reddah.com/{1}/VerifyEmail?Userid={2}&EmailToken={3}" +
+                            "https://reddah.com/{1}/VerifyEmail?Userid={2}&EmailToken={3}" +
                             "\r\nAfter that, you can login. Thanks for using Reddah!",
                             userName, locale, userJustCreated.UserId, verifyToken)
                     );

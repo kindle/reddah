@@ -102,7 +102,7 @@
                                 //b.Locale.StartsWith(locale) &&
                                 !(loaded).Contains(b.Id)&&
                                 b.Type == userProfileModel.Type
-                             orderby b.Count descending, b.LastUpdateOn descending
+                             orderby b.Id descending
                              select b)
                             .Take(pageCount);
                 }

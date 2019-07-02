@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
@@ -16,7 +16,6 @@ export class RegisterPage implements OnInit {
         private reddah: ReddahService,
         private loadingController: LoadingController,
         private translate: TranslateService,
-        private toastController: ToastController,
         private iab: InAppBrowser,
     ) { }
 
@@ -25,38 +24,25 @@ export class RegisterPage implements OnInit {
             this.locale = this.reddah.getCurrentLocale();
     }
 
-    
     username = "";
     password = "";
     confirmpassword = "";
     email = "";
     agreed = false;
-    
-    async presentToastWithOptions(message: string, color="dark") {
-        const toast = await this.toastController.create({
-            message: message,
-            showCloseButton: true,
-            position: 'top',
-            closeButtonText: this.translate.instant("Button.Close"),
-            duration: 3000,
-            color: color
-        });
-        toast.present();
-    }
 
     async register() {
         if (this.username.length == 0) {
-            this.presentToastWithOptions(this.translate.instant("Input.Error.UserNameEmpty"));
+            this.reddah.toast(this.translate.instant("Input.Error.UserNameEmpty"));
         }else if (this.password.length == 0) {
-            this.presentToastWithOptions(this.translate.instant("Input.Error.PasswordEmpty"));
+            this.reddah.toast(this.translate.instant("Input.Error.PasswordEmpty"));
         }else if (this.email.length == 0) {
-            this.presentToastWithOptions(this.translate.instant("Input.Error.EmailEmpty"));
+            this.reddah.toast(this.translate.instant("Input.Error.EmailEmpty"));
         }
         else if (this.password!=this.confirmpassword) {
-            this.presentToastWithOptions(this.translate.instant("Input.Error.PasswordDifferent"));
+            this.reddah.toast(this.translate.instant("Input.Error.PasswordDifferent"));
         }
         else if (!this.agreed) {
-            this.presentToastWithOptions(this.translate.instant("Input.Error.Agree"));
+            this.reddah.toast(this.translate.instant("Input.Error.Agree"));
         }
         else {
             const loading = await this.loadingController.create({
@@ -76,11 +62,11 @@ export class RegisterPage implements OnInit {
                 loading.dismiss();
                 if(result.Success==0){
                     this.reddah.setLoginUserName(this.username);
-                    this.presentToastWithOptions(this.translate.instant("Register.Success"), "primary");
+                    this.reddah.toast(this.translate.instant("Register.Success"), "primary");
                     this.modalController.dismiss(true);
                 }
                 else{
-                    this.presentToastWithOptions(result.Message, "danger");
+                    this.reddah.toast(result.Message, "danger");
                 }
                 
             });

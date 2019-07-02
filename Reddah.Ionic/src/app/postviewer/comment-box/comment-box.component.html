@@ -5,7 +5,7 @@
         <ion-input id="newComment" (click)="addNewComment(selectedArticleId, selectedCommentId)" 
             readonly padding-start placeholder="写评论..."></ion-input>
         
-        <ion-icon color="danger" name="bookmark" size="medium"></ion-icon>
+        <ion-icon color="danger" name="bookmark" (click)="reddah.addBookmark(selectedArticleId)" size="medium"></ion-icon>
         <!--<ion-text (click)="bookmark()" margin-end>{{ 'Article.Bookmark' | translate }}</ion-text>-->
         
         <ion-icon color="primary" name="share" size="medium"></ion-icon>

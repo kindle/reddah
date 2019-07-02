@@ -23,7 +23,8 @@ export class MessagePage implements OnInit {
 
     messages;
 
-    constructor(private reddah : ReddahService,
+    constructor(
+        public reddah : ReddahService,
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,
@@ -50,6 +51,13 @@ export class MessagePage implements OnInit {
         })
     }
 
+    showAll = false;
+    showAllMessage(){
+        this.showAll = true;
+        this.messages = this.reddah.getAllMessage();
+    }
+
+    
     async viewTimeline(articleId){
         let formData = new FormData();
         formData.append("ArticleId", JSON.stringify(articleId));
@@ -70,12 +78,6 @@ export class MessagePage implements OnInit {
         });
         
         await userModal.present();
-    } 
-
-    showAll = false;
-    showAllMessage(){
-        this.showAll = true;
-        this.messages = this.reddah.getAllMessage();
     }
 
 }

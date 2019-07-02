@@ -6,7 +6,7 @@ import { CacheService } from 'ionic-cache';
 @Component({
     template: `
         <div (click)="close()">
-            <ion-item button (click)="bookmark()" margin-end>
+            <ion-item button (click)="reddah.addBookmark(ArticleId)" margin-end>
                 <ion-icon slot="start" color="danger" name="bookmark"></ion-icon>  
                 <ion-label>收藏</ion-label>
             </ion-item>    
@@ -36,23 +36,6 @@ export class ArticlePopPage {
 
     close() {
         this.popoverCtrl.dismiss();
-    }
-
-    async bookmark(){
-        let formData = new FormData();
-        formData.append("ArticleId", JSON.stringify(this.ArticleId));
-        
-        this.reddah.bookmark(formData).subscribe(result=>{
-            if(result.Success==0)
-            {
-                this.reddah.presentToastWithOptions(`已收藏，请到到"我/收藏"查看`);
-                this.cacheService.clearGroup("BookmarkPage");
-            }
-            else{
-                alert(JSON.stringify(result.Message));
-            }
-        })
-        
     }
 
     foo(){

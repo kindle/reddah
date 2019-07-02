@@ -133,20 +133,4 @@ export class CommentBoxComponent implements OnInit {
         }
 
     }
-
-    async bookmark(){
-        let formData = new FormData();
-        formData.append("ArticleId", JSON.stringify(this.selectedArticleId));
-        this.reddah.bookmark(formData).subscribe(result=>{
-            if(result.Success==0)
-            {
-                this.reddah.presentToastWithOptions(`已收藏，请到到"我/收藏"查看`);
-                this.cacheService.clearGroup("BookmarkPage");
-            }
-            else{
-                alert(JSON.stringify(result.Message));
-            }
-        })
-    }
-
 }
