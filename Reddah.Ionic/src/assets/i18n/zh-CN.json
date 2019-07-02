@@ -43,12 +43,13 @@
         "Register": "注册",
         "Logout": "退出",
         "Back": "返回",
-        "Close": "关闭"
+        "Close": "关闭",
+        "Loading":"加载中..."
     },
 
     "Menu":{
         "Message": "消息",
-        "Recommend": "推荐",
+        "Recommend": "开卷有益",
         "Contact": "好友",
         "Find": "发现",
         "About": "我",
@@ -73,6 +74,7 @@
     "Time.YearsAgo": "年前",
     "Time.MonthsAgo": "个月前",
     "Time.WeeksAgo": "周前",
+    "Time.Today": "今天",
     "Time.Yesterday": "昨天",
     "Time.DaysAgo": "天前",
     "Time.HoursAgo": "小时前",

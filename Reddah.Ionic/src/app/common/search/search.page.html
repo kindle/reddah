@@ -19,7 +19,7 @@
     <ion-grid *ngIf="selectedTopicId==1">
         <ion-row>
             <ion-spinner name="bubbles" *ngIf="firstLoading_a"></ion-spinner>
-            <ion-text *ngIf="firstLoading_t" class="loadingText">正在加载...</ion-text>
+            <ion-text *ngIf="firstLoading_t" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
             <span class="articleTab" *ngIf="articles_a.length>0">相关文章</span>
         </ion-row>
         <ion-row *ngFor="let article of articles_a" (click)="view(article)">
@@ -39,7 +39,7 @@
     <ion-grid *ngIf="selectedTopicId==2">
         <ion-row>
             <ion-spinner name="bubbles" *ngIf="firstLoading_t"></ion-spinner>
-            <ion-text *ngIf="firstLoading_t" class="loadingText">正在加载...</ion-text>
+            <ion-text *ngIf="firstLoading_t" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
             <span class="articleTab" *ngIf="articles_t.length>0">相关朋友圈</span>
         </ion-row>
         <ion-row *ngFor="let article of articles_t" (click)="goTsViewer(article)">
@@ -60,7 +60,7 @@
     <ion-grid *ngIf="selectedTopicId==0">
         <ion-row>
             <ion-spinner name="bubbles" *ngIf="firstLoading_a"></ion-spinner>
-            <ion-text *ngIf="firstLoading_a" class="loadingText">正在加载...</ion-text>
+            <ion-text *ngIf="firstLoading_a" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
             <span class="articleTab" *ngIf="articles_a.length>0">相关文章</span>
         </ion-row>
         <ion-row *ngFor="let article_a of articles_a" (click)="view(article_a)">
@@ -81,12 +81,12 @@
         </ion-row>
         <ion-row>
             <ion-spinner name="bubbles" *ngIf="firstLoading_t"></ion-spinner>
-            <ion-text *ngIf="firstLoading_t" class="loadingText">正在加载...</ion-text>
+            <ion-text *ngIf="firstLoading_t" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
             <span class="articleTab" *ngIf="articles_t.length>0">相关朋友圈</span>
         </ion-row>
         <ion-row *ngFor="let article_t of articles_t" (click)="goTsViewer(article_t)">
             <div style="width:100%;border-bottom: 1px solid #eeeeee;padding: 10px 0;">
-                <span class="article-title articleTitle">{{reddah.summary(article_t.Title, 100, article_t.Locale)}}</span>
+                <span class="ts-article-title">{{reddah.summary(article_t.Title, 100, article_t.Locale)}}</span>
                 <ion-item style="margin: 8px 0;" lines="none" *ngIf="article_t.Content.split('$$$').length>0&&article_t.Content.split('$$$')[0].length>0">
                     <ion-thumbnail *ngFor="let image of article_t.Content.split('$$$').splice(0,3);index as i" style="padding: 1px;">
                         <img src="{{image}}">
@@ -103,7 +103,7 @@
         </ion-row>
     </ion-grid>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" *ngIf="selectedTopicId!=0">
-        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'Button.Loading' | translate }}">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

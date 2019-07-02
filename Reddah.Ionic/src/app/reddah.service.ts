@@ -871,8 +871,9 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
 
     getDisplayName(userName){
         let currentUserName = this.getCurrentUser();
-        return this.appData('usernotename_'+userName+"_"+currentUserName) ? this.appData('usernotename_'+userName+"_"+currentUserName) :
+        let name = this.appData('usernotename_'+userName+"_"+currentUserName) ? this.appData('usernotename_'+userName+"_"+currentUserName) :
             (this.appData('usernickname_'+userName) ? this.appData('usernickname_'+userName) : userName);
+        return this.summary(name, 15, this.getCurrentLocale());    
     }
     
     getArray(n){
@@ -944,6 +945,62 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         }
         
         return result;
+    }
+
+    getSendTimeShort(dateStr){
+        if(!dateStr)
+            return "";
+        let dateTimeStamp = Date.parse(dateStr.replace(/-/gi,"/"));
+        let result = "";
+        let second = 1000;
+        let minute = 1000 * 60;
+        let hour = minute * 60;
+        let day = hour * 24;
+        let halfamonth = day * 15;
+        let month = day * 30;
+        let year = day *365;
+        let localnow = new Date().getTime();
+        //to utc now
+        let offset = new Date().getTimezoneOffset()*60*1000;
+        let now = new Date(localnow+offset).getTime(); 
+        
+        let diffValue = now - dateTimeStamp;
+        if(diffValue < 0){
+            if(diffValue>-1000*60)
+                return this.translate.instant("Time.Today");
+            else 
+                return dateStr;
+        }
+        let yearC =diffValue/year;
+        let monthC =diffValue/month;
+        let weekC =diffValue/(7*day);
+        let dayC =diffValue/day;
+        let hourC =diffValue/hour;
+        let minC =diffValue/minute;
+        let secC =diffValue/second;
+        if(yearC>=1){
+            return dateStr;
+        }
+        else if(monthC>=1){
+            return dateStr;
+        }
+        else if(weekC>=1){
+            return dateStr;
+        }
+        else if(dayC>=1){
+            result=(parseInt(dayC+"")==1?this.translate.instant("Time.Yesterday"):dateStr);
+        }
+        else if(hourC>=1){
+            return this.translate.instant("Time.Today");
+        }
+        else if(minC>=1){
+            return this.translate.instant("Time.Today");
+        }
+        else if(secC>=1){
+            return this.translate.instant("Time.Today");
+        }
+        
+        return dateStr;
     }
 
     async loadFriends(){

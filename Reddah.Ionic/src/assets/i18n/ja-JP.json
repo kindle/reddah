@@ -43,7 +43,8 @@
       "Register": "レジスタ",
       "Logout": "ログアウト",
       "Back": "戻る",
-      "Close": "クローズ"
+      "Close": "クローズ",
+      "Loading":"読み込み..."
     },
 
     "Menu":{
@@ -73,7 +74,8 @@
     "Time.YearsAgo": "year(s) ago",
     "Time.MonthsAgo": "month(s) ago",
     "Time.WeeksAgo": "week(s) ago",
-    "Time.Yesterday": "yesterday",
+    "Time.Today": "今日",
+    "Time.Yesterday": "昨日",
     "Time.DaysAgo": "day(s) ago",
     "Time.HoursAgo": "hour(s) ago",
     "Time.MinutesAgo": "minute(s) ago",

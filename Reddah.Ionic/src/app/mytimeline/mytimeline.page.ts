@@ -112,6 +112,11 @@ export class MyTimeLinePage implements OnInit {
                 this.localStorageService.store("Reddah_mytimeline_ids",JSON.stringify(this.loadedIds));
 
             }
+            else{
+                for(let article of timeline){
+                    this.GetCommentsData(article.Id);
+                }
+            }
         });
     }
 
@@ -135,6 +140,7 @@ export class MyTimeLinePage implements OnInit {
                 article.Content.split('$$$').forEach((previewImageUrl)=>{
                     this.reddah.CachePhoto(previewImageUrl, previewImageUrl);
                 });
+                this.GetCommentsData(article.Id);
             }
 
             this.localStorageService.store("Reddah_mytimeline", JSON.stringify(timeline));
@@ -356,12 +362,11 @@ export class MyTimeLinePage implements OnInit {
         let request = this.reddah.getComments(articleId)
 
         this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
-            .subscribe(data => 
-            {
-                console.log('load comments:'+articleId+JSON.stringify(data));
-                this.commentData.set(articleId, data);
-            }
-        );
+        .subscribe(data => 
+        {
+            console.log('load comments:'+articleId+JSON.stringify(data));
+            this.commentData.set(articleId, data);
+        });
     }
 
     SendComment(){

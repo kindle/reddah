@@ -43,7 +43,8 @@
       "Register": "레지스터",
       "Logout": "로그아웃",
       "Back": "가",
-      "Close": "가깝다"
+      "Close": "가깝다",
+      "Loading":"로드..."
     },
 
     "Menu":{
@@ -74,7 +75,8 @@
     "Time.YearsAgo": "year(s) ago",
     "Time.MonthsAgo": "month(s) ago",
     "Time.WeeksAgo": "week(s) ago",
-    "Time.Yesterday": "yesterday",
+    "Time.Today": "오늘",
+    "Time.Yesterday": "어제",
     "Time.DaysAgo": "day(s) ago",
     "Time.HoursAgo": "hour(s) ago",
     "Time.MinutesAgo": "minute(s) ago",

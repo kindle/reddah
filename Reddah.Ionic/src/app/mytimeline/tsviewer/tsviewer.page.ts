@@ -209,8 +209,12 @@ export class TsViewerPage implements OnInit {
         
         this.reddah.addComments(this.selectedArticleId, this.selectedCommentId, this.newComment.value)
         .subscribe(data=>{
-            let cacheKey = "this.reddah.getTimelineComments" + this.selectedArticleId;
-            this.cacheService.removeItem(cacheKey);
+            this.newComment.value = "";
+            let cacheKey1 = "this.reddah.getTimelineComments" + this.selectedArticleId;
+            this.cacheService.removeItem(cacheKey1);
+            let cacheKey2 = "this.reddah.getComments" + this.selectedArticleId;
+            this.cacheService.removeItem(cacheKey2);
+            this.cacheService.clearGroup("MyTimeLinePage");
             this.GetCommentsData(this.selectedArticleId);
         });
     }

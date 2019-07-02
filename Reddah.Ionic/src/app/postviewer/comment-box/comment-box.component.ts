@@ -100,8 +100,10 @@ export class CommentBoxComponent implements OnInit {
             if(result.Success==0)
             { 
                 this.commentContent = "";
-                let cacheKey = "this.reddah.getComments" + this.selectedArticleId;
-                this.cacheService.removeItem(cacheKey);
+                let cacheKey1 = "this.reddah.getComments" + this.selectedArticleId;
+                this.cacheService.removeItem(cacheKey1);
+                let cacheKey2 = "this.reddah.getTimelineComments" + this.selectedArticleId;
+                this.cacheService.removeItem(cacheKey2);
                 this.reloadComments.emit();
                 this.showEditBox = false;
             }

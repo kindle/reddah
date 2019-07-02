@@ -43,7 +43,8 @@
         "Register": "Register",
         "Logout": "Logout",
         "Back": "Back",
-        "Close": "Close"
+        "Close": "Close",
+        "Loading":"loading..."
     },
 
     "Menu":{
@@ -73,11 +74,12 @@
     "Time.YearsAgo": "year(s) ago",
     "Time.MonthsAgo": "month(s) ago",
     "Time.WeeksAgo": "week(s) ago",
-    "Time.Yesterday": "yesterday",
-    "Time.DaysAgo": "day(s) ago",
+    "Time.Today": "Today",
+    "Time.Yesterday": "Yesterday",
+    "Time.DaysAgo": "days ago",
     "Time.HoursAgo": "hour(s) ago",
-    "Time.MinutesAgo": "minute(s) ago",
-    "Time.JustNow": "just now",
+    "Time.MinutesAgo": "mins ago",
+    "Time.JustNow": "Just now",
 
     "Article.Loading": "Please wait",
     "Article.Comments": "comments",

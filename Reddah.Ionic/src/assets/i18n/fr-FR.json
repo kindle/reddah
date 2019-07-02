@@ -43,7 +43,8 @@
       "Register": "Registre",
       "Logout": "Sortie",
       "Back": "Retournez",
-      "Close": "Proche"
+      "Close": "Proche",
+      "Loading":"le chargement..."
     },
 
     "Menu":{
@@ -73,7 +74,8 @@
     "Time.YearsAgo": "year(s) ago",
     "Time.MonthsAgo": "month(s) ago",
     "Time.WeeksAgo": "week(s) ago",
-    "Time.Yesterday": "yesterday",
+    "Time.Today": "Aujourd 'hui",
+    "Time.Yesterday": "Hier",
     "Time.DaysAgo": "day(s) ago",
     "Time.HoursAgo": "hour(s) ago",
     "Time.MinutesAgo": "minute(s) ago",

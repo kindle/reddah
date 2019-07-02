@@ -16,7 +16,7 @@
                 <div class="postClear"></div>
             </div>
             <div *ngIf="article.VideoUrl.length==0" (click)="view(article)">
-                <span class="article-title" *ngIf="article.ImageUrls.length>1">{{reddah.htmlDecode(article.Title)}}</span>
+                <span class="article-title articleTitle" *ngIf="article.ImageUrls.length>1">{{reddah.htmlDecode(article.Title)}}</span>
                 <div class="postClear" *ngIf="article.ImageUrls.length>1"></div>
                 <div class="listImage" ng-style="{display:article.ImageUrls.length>1?'flex':''}">
                     <div class="listImageWrapper" *ngFor="let articleUrl of article.ImageUrls">
@@ -24,7 +24,7 @@
                         <img class="BrowsePreviewImage" onerror="this.style.display='none'" src="" src="{{articleUrl}}">
                     </div>
                 </div>
-                <span class="article-title" *ngIf="article.ImageUrls.length<2">{{reddah.htmlDecode(article.Title)}}</span><br>
+                <span class="article-title articleTitle" *ngIf="article.ImageUrls.length<2">{{reddah.htmlDecode(article.Title)}}</span><br>
                 <div style="color: #636468;">{{reddah.summary(article.Content, 100)}}</div>
             </div>
             <div class="postClear"></div>
@@ -36,17 +36,16 @@
             <div class="postClear"></div>
             <div class="listInfo" style="color:#636468;display:flex;justify-content: space-between;" (click)="view(article)">
                 <div style="display: flex;">
-                    <ion-icon name="time"></ion-icon>
-                    <span style="padding-left:3px;margin-top:0.125em;">{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</span>
+                    <span class="user-name" style="display: inline-block;vertical-align: middle;line-height: 1.5em;">{{reddah.getDisplayName(article.UserName)}}</span>
                 </div>
                 <div style="display: flex;">
-                    <ion-icon name="text"></ion-icon><span style="padding-left:3px;">{{article.Comments}}</span>
+                    <ion-icon name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
                 </div>
             </div>
         </div>
     </ng-template>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'Button.Loading' | translate }}">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>
