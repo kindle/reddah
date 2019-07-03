@@ -60,7 +60,8 @@ export class ContactPage {
     showLoading = false;
     loadData(){
         let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
-        if(!cachedGroupContact)
+        let cachedContact = this.localStorageService.retrieve("Reddah_Contacts");
+        if(!cachedGroupContact||!cachedContact)
         {
             this.showLoading = true;
         }
@@ -71,34 +72,30 @@ export class ContactPage {
         this.cacheService.loadFromObservable(cacheKey, request, "ContactPage")
         .subscribe(contacts => 
         {
+            let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
             let cachedContact = this.localStorageService.retrieve("Reddah_Contacts");
 
-            if(cachedContact!=JSON.stringify(contacts)){
+            if(cachedContact!=JSON.stringify(contacts)||!cachedGroupContact){
                 this.localStorageService.store("Reddah_Contacts", JSON.stringify(contacts));
 
                 for(let contact of contacts){
                     //cache user image
-                    //this.reddah.CommonCache(contact.UserPhoto, `userphoto_${contact.Watch}`,"assets/icon/anonymous.png");
-                    //this.reddah.CachePhoto(contact.UserPhoto, `userphoto_${contact.Watch}`);
                     this.reddah.getUserPhotos(contact.Watch);
-                    let cname = contact.NoteName ? contact.NoteName : 
-                        (contact.UserNickName ? contact.UserNickName : contact.Watch);
+                    let cname = this.reddah.getDisplayName(contact.Watch);
                     let ch = cname.charAt(0);
                     
                     if(/^[A-Za-z]/.test(ch))//English
-                    {
                         contact.s = ch.toLowerCase();
-                    }
                     else
-                    {
                         contact.s = this.reddah.getSortLetter(ch,'zh');
-                    }
                 }
-                      
-                this.showLoading = false;
+                
                 this.groupContacts(contacts);
                 this.localStorageService.store("Reddah_GroupedContacts", JSON.stringify(this.groupedContacts));
+                this.localStorageService.store("Reddah_Contacts", JSON.stringify(contacts));
             }
+            
+            this.showLoading = false;
             
         });  
     }

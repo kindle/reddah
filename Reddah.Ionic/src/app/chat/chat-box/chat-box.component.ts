@@ -7,6 +7,7 @@ import { File, FileEntry } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx'; 
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
+import { VideoEditor } from '@ionic-native/video-editor/ngx'
 
 @Component({
     selector: 'app-chat-box',
@@ -30,6 +31,7 @@ export class ChatBoxComponent implements OnInit {
         private file: File,
         private media: Media,
         private platform: Platform,
+        private videoEditor: VideoEditor,
     ) { }
 
     ngOnInit() {
@@ -344,11 +346,11 @@ export class ChatBoxComponent implements OnInit {
         
         Camera.getPicture(options).then((imageData) => {
             let data = {fileUrl: "file://"+imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
-            alert(JSON.stringify(data));
+            //alert(JSON.stringify(data));
             this.addVideoToFormData(data);
         }, (err) => {
             console.log(JSON.stringify(err));
-            //alert(JSON.stringify(err));
+            alert(JSON.stringify(err));
         });
     }
 
@@ -358,7 +360,7 @@ export class ChatBoxComponent implements OnInit {
             (mediaFiles: MediaFile[]) => {
                 //alert(JSON.stringify(mediaFiles));
                 let data = {fileUrl: mediaFiles[0].fullPath, webUrl: (<any>window).Ionic.WebView.convertFileSrc(mediaFiles[0].fullPath)};
-                alert(mediaFiles[0].fullPath);
+                //alert(mediaFiles[0].fullPath);
                 this.addVideoToFormData(data);
             },									
             (err: CaptureError) => { 
@@ -401,12 +403,27 @@ export class ChatBoxComponent implements OnInit {
     addVideoToFormData(data)
     {
         this.formData = new FormData();
-        this.prepareData(data.fileUrl, data.fileUrl, 2, 3);
+        this.prepareData(data.fileUrl, data.fileUrl, 1, 3);
+        //create thumbnail image
+        let posterName = "reddah_video_poster";
+        let option = {
+            fileUri: data.fileUrl,
+            outputFileName: posterName,
+            atTime: 1,
+            quality: 30
+        }
+        this.videoEditor.createThumbnail(option)
+        .then(videoInfo=>{
+            alert(JSON.stringify(videoInfo))
+            let posterFileUrl = this.file.dataDirectory + "videos/" + posterName + ".jpg";
+            this.prepareData(posterFileUrl, posterFileUrl, 2, 3);
+        })
+        .catch(error=>{alert(JSON.stringify(error))})
     }
 
     // type: 0:text, 1:audio, 2:image, 3:video
     prepareData(filePath, formKey, step, type) {
-//alert(filePath+"@@"+formKey);
+alert(filePath+"@@"+formKey);
         this.file.resolveLocalFilesystemUrl(filePath)
         .then(entry => {
             ( <FileEntry> entry).file(file => {
@@ -417,7 +434,7 @@ export class ChatBoxComponent implements OnInit {
                         type: file.type
                     });
                     this.formData.append(formKey, imgBlob, file.name);
-            //alert(formKey+"_"+file.name);
+            alert(formKey+"_"+file.name);
                     if(step==2){
                         setTimeout(() => {
                             this.submit_comment(type);
@@ -429,7 +446,8 @@ export class ChatBoxComponent implements OnInit {
             })
         })
         .catch(err => {
-            console.error("prepareData:"+JSON.stringify(err));
+            //console.error
+            alert("prepareData:"+JSON.stringify(err));
         });
     }
 
