@@ -21,6 +21,7 @@ export class ChatBase{
     constructor(
         protected modalController: ModalController,
         protected reddah: ReddahService,
+        protected streamingMedia: StreamingMedia,
     ){}
 /*
 ///pop up new window
@@ -46,6 +47,15 @@ export class ChatBase{
         let isLocal = this.reddah.isLocal(key);
         if(isLocal){//play
             alert(this.reddah.appData(isLocal));
+            let options: StreamingVideoOptions = {
+                successCallback: () => { console.log('Video played') },
+                errorCallback: (e) => { console.log('Error streaming') },
+                orientation: 'landscape',
+                shouldAutoClose: true,
+                controls: false
+            };
+            
+            this.streamingMedia.playVideo(this.reddah.appData(isLocal), options);
         }
         else{//download
             this.reddah.toImageCache(key, key);
@@ -85,10 +95,11 @@ export class ChatPage extends ChatBase implements OnInit  {
         private transfer: FileTransfer, 
         private file: File,
         private platform: Platform,
+        public streamingMedia: StreamingMedia,
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
-        super(modalController, reddah);
+        super(modalController, reddah, streamingMedia);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }

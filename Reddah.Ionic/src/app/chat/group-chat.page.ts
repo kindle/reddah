@@ -9,6 +9,7 @@ import { UserPage } from '../common/user/user.page';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 //import { AngularFireDatabase } from 'angularfire2/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 import { ChatBase } from './chat.page';
@@ -40,10 +41,11 @@ export class GroupChatPage extends ChatBase implements OnInit {
         private file: File,
         private media: Media,
         private platform: Platform,
+        public streamingMedia: StreamingMedia,
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
-        super(modalController, reddah);
+        super(modalController, reddah, streamingMedia);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }
