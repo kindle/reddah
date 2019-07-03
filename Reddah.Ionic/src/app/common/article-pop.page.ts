@@ -10,9 +10,13 @@ import { CacheService } from 'ionic-cache';
                 <ion-icon slot="start" color="danger" name="bookmark"></ion-icon>  
                 <ion-label>收藏</ion-label>
             </ion-item>    
-            <ion-item button (click)="foo()">
-                <ion-icon slot="start" color="primary" name="share"></ion-icon>  
-                <ion-label>分享</ion-label>
+            <ion-item button (click)="share(1)">
+                <ion-icon slot="start" color="primary" name="share-alt"></ion-icon>  
+                <ion-label>发给好友</ion-label>
+            </ion-item>
+            <ion-item button (click)="share(2)">
+                <ion-icon slot="start" color="primary" name="aperture"></ion-icon>  
+                <ion-label>朋友圈分享</ion-label>
             </ion-item>
             <ion-item button (click)="foo()">
                 <ion-icon slot="start" color="warning" name="alert"></ion-icon>  
@@ -40,5 +44,9 @@ export class ArticlePopPage {
 
     foo(){
       
+    }
+
+    share(type:number){
+        this.popoverCtrl.dismiss(type);
     }
 }

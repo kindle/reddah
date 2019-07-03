@@ -6,7 +6,7 @@
     <ion-item lines="none">
       <ion-textarea [(ngModel)]="yourThoughts" rows="6" cols="20" placeholder="这一刻的想法..."></ion-textarea>
     </ion-item>
-    <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="postType!=3">
+    <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="postType<3">
         <div class="imgSqure" *ngFor="let image of photos;index as i">
             <img [src]="image.webUrl" (click)="viewer(i, photos)">
         </div>
@@ -16,6 +16,17 @@
     </div>
     <div *ngIf="postType==3">
       video
+    </div>
+    <div *ngIf="postType==4" style="margin:0 15px;">
+        <ion-item lines="none" color="light">
+          <ion-avatar slot="start" class="sharePhoto" *ngIf="article.ImageUrl">
+              <img [src]="article.ImageUrl" class="sharePortrait">
+          </ion-avatar>
+          <ion-label style="margin-left:10px;">
+              <span>{{article.Title}}</span><br>
+              <ion-note color="dark"></ion-note>
+          </ion-label>
+        </ion-item>
     </div>
     <ion-item lines="none">
       <ion-label></ion-label>

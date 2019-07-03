@@ -740,11 +740,11 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     }
 
     private fileTransfer: FileTransferObject; 
-    toImageCache(webUrl, cacheKey){
+    toImageCache(webUrl, cacheKey, storePath='default'){
         webUrl = webUrl.replace("///","https://");
         let cachedImagePath = this.localStorageService.retrieve(cacheKey);
         //check if changed or not downloaded, go to download it
-        let webImageName = webUrl.replace("https://login.reddah.com/uploadPhoto/","");
+        let webImageName = webUrl.toLowerCase().replace("https://login.reddah.com/uploadphoto/","");
         let cacheImageName = "";
         if(cachedImagePath!=null){
             //cacheImageName = cachedImagePath.replace(this.file.applicationStorageDirectory,"");
@@ -756,8 +756,9 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             let target = this.file.externalRootDirectory+"reddah/" + webImageName;
             this.fileTransfer.download(webUrl, target).then((entry) => {
                 //this.localStorageService.store(cacheKey, target);                
+
                 this.localStorageService.store(cacheKey, 
-                    (<any>window).Ionic.WebView.convertFileSrc(target));
+                    storePath=='default'?(<any>window).Ionic.WebView.convertFileSrc(target):target);
                 this.appCacheToOrg[(<any>window).Ionic.WebView.convertFileSrc(target)] = webUrl;
             }, (error) => {
                 console.log(JSON.stringify(error));
@@ -1100,10 +1101,15 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         
     }
 
-    async isLocal(videoUrl){
-        let key = videoUrl.toLowerCase();
+    isLocal(videoUrl){
+        let key = videoUrl.toString().toLowerCase();
         let localPath = this.localStorageService.retrieve(key);
         return localPath!=null;
+    }
+
+    clearLocaleCache(){
+        this.localStorageService.clear("reddah_articles");
+        this.localStorageService.clear("reddah_article_ids");
     }
 
 

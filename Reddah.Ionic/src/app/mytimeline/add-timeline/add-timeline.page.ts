@@ -22,6 +22,7 @@ import { VideoEditor } from '@ionic-native/video-editor/ngx';
 export class AddTimelinePage implements OnInit {
 
     @Input() postType: number;
+    @Input() article: any;
 
     constructor(
         private popoverController: PopoverController,
@@ -124,8 +125,14 @@ export class AddTimelinePage implements OnInit {
         {
             this.fromLibPhoto();
         }
-        else{//video from lib
+        else if(this.postType==3){//video from lib
             this.fromLibVideo();
+        }
+        else if(this.postType==4){//share from article
+            //
+        }
+        else if(this.postType==5){//placeholder
+            //
         }
     }
     

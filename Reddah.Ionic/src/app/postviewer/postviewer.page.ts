@@ -8,6 +8,7 @@ import { ArticlePopPage } from '../common/article-pop.page';
 import { CacheService } from "ionic-cache";
 import { UserPage } from '../common/user/user.page';
 import { SearchPage } from '../common/search/search.page';
+import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page';
 
 @Component({
     selector: 'app-postviewer',
@@ -40,7 +41,33 @@ export class PostviewerPage implements OnInit {
             translucent: true,
             cssClass: 'article-pop-popover'
         });
-        return await popover.present();
+        
+        await popover.present();
+        const { data } = await popover.onDidDismiss();
+        if(data==1)//share to friend
+        {
+            //await this.takePhoto();
+        }
+        else//share to timeline
+        {
+            this.goPost(4);
+        }
+    }
+
+    async goPost(postType){
+        const postModal = await this.modalController.create({
+            component: AddTimelinePage,
+            componentProps: { 
+                postType: postType,
+                article: this.article
+            }
+        });
+          
+        await postModal.present();
+        const { data } = await postModal.onDidDismiss();
+        if(data||!data){
+            
+        }
     }
 
     @ViewChild('commentlist') commentlist;

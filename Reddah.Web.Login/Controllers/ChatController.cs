@@ -534,6 +534,8 @@ namespace Reddah.Web.Login.Controllers
 
                             HttpPostedFile upload = HttpContext.Current.Request.Files[rfilename];
                             var fileNameKey = rfilename.Replace("_reddah_preview", "");
+                            if (fileType == 3)
+                                fileNameKey = "videokey";
                             if (!dict.Keys.Contains(fileNameKey))
                             {
                                 dict.Add(fileNameKey, guid);
@@ -577,7 +579,7 @@ namespace Reddah.Web.Login.Controllers
                                     }
                                 }
                                 if (fileType == 3)
-                                    previewFileName = "https://login.reddah.com" + url; ;
+                                    previewFileName = "https://login.reddah.com" + url.ToLower().Replace(".jpg",".mp4") ;
                             }
                             catch (Exception ex)
                             {

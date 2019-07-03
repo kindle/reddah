@@ -15,6 +15,7 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 import { VideoViewerComponent } from '../common/video-viewer/video-viewer.component';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
+import { VideoEditor } from '@ionic-native/video-editor/ngx'
 
 export class ChatBase{
     
@@ -22,6 +23,7 @@ export class ChatBase{
         protected modalController: ModalController,
         protected reddah: ReddahService,
         protected streamingMedia: StreamingMedia,
+        protected videoEditor: VideoEditor,
     ){}
 /*
 ///pop up new window
@@ -43,22 +45,29 @@ export class ChatBase{
     }
 */
     async playVideo(comment){
-        let key = comment.Content.toLowerCase();
+        let key = comment.Content.toString().toLowerCase();
         let isLocal = this.reddah.isLocal(key);
         if(isLocal){//play
-            alert(this.reddah.appData(isLocal));
-            let options: StreamingVideoOptions = {
-                successCallback: () => { console.log('Video played') },
-                errorCallback: (e) => { console.log('Error streaming') },
-                orientation: 'landscape',
-                shouldAutoClose: true,
-                controls: false
-            };
+            let localPath = this.reddah.appData(key);
             
-            this.streamingMedia.playVideo(this.reddah.appData(isLocal), options);
+            this.videoEditor.getVideoInfo({fileUri: localPath})
+            .then(info=>{
+                let options: StreamingVideoOptions = {
+                    successCallback: () => { console.log('Video played') },
+                    errorCallback: (e) => { console.log('Error streaming') },
+                    orientation: info.orientation,
+                    shouldAutoClose: true,
+                    controls: true
+                };
+                
+                this.streamingMedia.playVideo(localPath, options);
+            })
+            .catch(err=>{alert(JSON.stringify(err))})
+
+            
         }
         else{//download
-            this.reddah.toImageCache(key, key);
+            this.reddah.toImageCache(key, key, 'org');
         }
     }
 
@@ -96,10 +105,11 @@ export class ChatPage extends ChatBase implements OnInit  {
         private file: File,
         private platform: Platform,
         public streamingMedia: StreamingMedia,
+        public videoEditor: VideoEditor,
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
-        super(modalController, reddah, streamingMedia);
+        super(modalController, reddah, streamingMedia, videoEditor);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }

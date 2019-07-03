@@ -30,6 +30,7 @@ export class LocalePage implements OnInit {
         this.localStorageService.store("Reddah_Locale", selector);
         this.selectedLocale = selector;
         this.translate.use(selector);
+        this.reddah.clearLocaleCache();
         await this.modalController.dismiss(selector!==this.orgLocale);
     }
 
