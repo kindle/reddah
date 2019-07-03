@@ -127,3 +127,8 @@
 .video3 {
     width: 100%;
 }
+
+.notdownload{
+    -webkit-filter: grayscale(100%); 
+    filter: grayscale(100%);
+}

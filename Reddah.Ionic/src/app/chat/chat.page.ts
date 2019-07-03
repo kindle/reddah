@@ -14,13 +14,16 @@ import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 import { VideoViewerComponent } from '../common/video-viewer/video-viewer.component';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 
 export class ChatBase{
     
     constructor(
         protected modalController: ModalController,
+        protected reddah: ReddahService,
     ){}
-
+/*
+///pop up new window
     async playVideo(comment){
         
         const modal = await this.modalController.create({
@@ -37,6 +40,18 @@ export class ChatBase{
         await modal.present();
 
     }
+*/
+    async playVideo(comment){
+        let key = comment.Content.toLowerCase();
+        let isLocal = this.reddah.isLocal(key);
+        if(isLocal){//play
+            alert(this.reddah.appData(isLocal));
+        }
+        else{//download
+            this.reddah.toImageCache(key, key);
+        }
+    }
+
 }
 
 @Component({
@@ -73,7 +88,7 @@ export class ChatPage extends ChatBase implements OnInit  {
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
-        super(modalController);
+        super(modalController, reddah);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }

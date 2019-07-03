@@ -404,18 +404,21 @@ export class ChatBoxComponent implements OnInit {
     {
         this.formData = new FormData();
         this.prepareData(data.fileUrl, data.fileUrl, 1, 3);
+    }
+
+    prepareVideoThumbnail(fileUrl, fileName){
         //create thumbnail image
-        let posterName = "reddah_video_poster";
+        let posterName = fileName.toLowerCase().replace(".mp4", "");
+        //alert(posterName);
         let option = {
-            fileUri: data.fileUrl,
+            fileUri: fileUrl,
             outputFileName: posterName,
             atTime: 1,
             quality: 30
         }
         this.videoEditor.createThumbnail(option)
         .then(videoInfo=>{
-            alert(JSON.stringify(videoInfo))
-            let posterFileUrl = this.file.dataDirectory + "videos/" + posterName + ".jpg";
+            let posterFileUrl = "file://" + videoInfo;
             this.prepareData(posterFileUrl, posterFileUrl, 2, 3);
         })
         .catch(error=>{alert(JSON.stringify(error))})
@@ -423,7 +426,7 @@ export class ChatBoxComponent implements OnInit {
 
     // type: 0:text, 1:audio, 2:image, 3:video
     prepareData(filePath, formKey, step, type) {
-alert(filePath+"@@"+formKey);
+//alert(filePath+"@@"+formKey);
         this.file.resolveLocalFilesystemUrl(filePath)
         .then(entry => {
             ( <FileEntry> entry).file(file => {
@@ -434,7 +437,11 @@ alert(filePath+"@@"+formKey);
                         type: file.type
                     });
                     this.formData.append(formKey, imgBlob, file.name);
-            alert(formKey+"_"+file.name);
+            //alert(formKey+"_"+file.name);
+
+                    if(type==3&&step==1){
+                        this.prepareVideoThumbnail(filePath, file.name);
+                    }
                     if(step==2){
                         setTimeout(() => {
                             this.submit_comment(type);

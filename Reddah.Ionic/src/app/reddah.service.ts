@@ -1100,4 +1100,11 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         
     }
 
+    async isLocal(videoUrl){
+        let key = videoUrl.toLowerCase();
+        let localPath = this.localStorageService.retrieve(key);
+        return localPath!=null;
+    }
+
+
 }
