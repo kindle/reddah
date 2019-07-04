@@ -739,6 +739,22 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             return cacheKey;
     }
 
+    chatImageCache(cacheKey){
+        let preview = this.localStorageService.retrieve(cacheKey);
+        let org = this.localStorageService.retrieve(cacheKey.replace("_reddah_preview",""))
+        
+        if(org)
+            return (<any>window).Ionic.WebView.convertFileSrc(org);
+        else if(preview)
+            return (<any>window).Ionic.WebView.convertFileSrc(preview);
+        else
+        {
+            if(this.platform.is('cordova'))
+                this.toImageCache(cacheKey, cacheKey);
+            return cacheKey;
+        }
+    }
+
     private fileTransfer: FileTransferObject; 
     toImageCache(webUrl, cacheKey, storePath='default'){
         webUrl = webUrl.replace("///","https://");

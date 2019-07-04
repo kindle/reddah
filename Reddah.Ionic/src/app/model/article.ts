@@ -15,4 +15,5 @@ export class Article {
     GroupName : string;
     Content : string;
     Type : number;
+    Ref: number;
 }

@@ -16,6 +16,8 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { MessagePage } from '../mytimeline/message/message.page'
+import { Article } from '../model/article';
+import { PostviewerPage } from '../postviewer/postviewer.page';
 
 @Component({
     selector: 'app-mytimeline',
@@ -435,5 +437,30 @@ export class MyTimeLinePage implements OnInit {
         const { data } = await popover.onDidDismiss();
         if(data)
             this.reddah.getUserPhotos(this.userName, true);
+    }
+
+    async viewArticle(articleId){
+        let formData = new FormData();
+        formData.append("ArticleId", JSON.stringify(articleId));
+
+        this.reddah.getArticleById(formData).subscribe(data=>{
+            if(data.Success==0){
+                this.goArticleViewer(data.Message);
+            }
+        });
+    } 
+
+    async goArticleViewer(article: Article){
+        const viewerModal = await this.modalController.create({
+            component: PostviewerPage,
+            componentProps: { article: article }
+        });
+        
+        await viewerModal.present();
+        const { data } = await viewerModal.onDidDismiss();
+        if(data){
+            console.log(data)
+        }
+
     }
 }

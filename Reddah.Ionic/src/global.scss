@@ -123,3 +123,26 @@ ion-icon{
   color: #BDBEC1;
   margin-top:0.33em;
 }
+
+.sharePhoto{
+  margin: 0 10px 10px 0;
+  border-radius: 0px;
+}
+
+.sharePhotoNone{
+  margin: 0 10px 10px 0;
+  background-color: #dedede;
+  border-radius: 0px;
+}
+
+.sharePortrait{
+  border-radius: 0px;
+  width: 40px;
+  height: 40px;
+}
+
+.sharePortraitNone{
+  border-radius: 0px;
+  width: 30px;
+  height: 30px;
+}

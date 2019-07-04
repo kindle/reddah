@@ -158,6 +158,15 @@ export class AddTimelinePage implements OnInit {
         this.formData.append('order', this.photos.map(e=>e.fileUrl).join(","));
         this.formData.append('type', JSON.stringify(1));//feedback:9, normal:0, timeline:1
         this.formData.append('feedbackType', JSON.stringify(-1));
+        if(this.postType==4)//share
+        {
+            this.formData.append("abstract", this.reddahService.htmlDecode(this.article.Title));
+            this.formData.append("content", this.article.ImageUrl);
+            this.formData.append("ref", JSON.stringify(this.article.Id));
+        }
+        else{
+            this.formData.append("ref", JSON.stringify(0));
+        }
         //alert(this.photos.map(e=>e.fileUrl).join(","));
 
         this.reddahService.addTimeline(this.formData)
@@ -165,6 +174,9 @@ export class AddTimelinePage implements OnInit {
             loading.dismiss();
             if(result.Success==0)
             { 
+                this.cacheService.clearGroup("MyTimeLinePage");
+                this.localStorageService.clear("Reddah_mytimeline");
+                this.localStorageService.clear("Reddah_mytimeline_ids");
                 this.modalController.dismiss(true);
             }
             else
