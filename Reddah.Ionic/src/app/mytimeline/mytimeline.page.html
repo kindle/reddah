@@ -38,19 +38,19 @@
                         <div (click)="goUser(article.UserName)" class="user-name">{{reddah.getDisplayName(article.UserName)}}</div>
                     </ion-card-title>
                 </ion-card-header>
-                <ion-item no-padding style="padding: 0;" lines="none" *ngIf="article.Title.length>0&&article.Title.length<100">
-                    <div style="background-color: white; padding: 2px 0;margin-bottom:5px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
-                </ion-item>
+                <div *ngIf="article.Title.length>0&&article.Title.length<100">
+                    <div style="background-color: white; padding: 2px 0;margin-bottom:0px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                </div>
                 <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
                     <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 2px;margin-bottom:5px;width:96%;" [innerHTML]="reddah.summary(article.Title,50)"></div>
                 </ion-item>
-                <div *ngIf="article.Abstract&&article.Abstract.length>2" style="background-color:#eeeeee;margin: 5px 5px 0px 0;padding:0 5px 5px 5px;">
-                    <ion-item lines="none" color="light" (click)="viewArticle(article.Ref)" no-padding>
+                <div *ngIf="article.Abstract&&article.Abstract.length>2" (click)="viewArticle(article.Ref)" style="background-color:#eeeeee;margin: 5px 5px 0px 0;padding:0 5px 5px 5px;">
+                    <ion-item lines="none" color="light" no-padding>
                         <ion-avatar class="avatar-top sharePhoto" *ngIf="article.Content">
                             <img [src]="article.Content" class="sharePortrait">
                         </ion-avatar>
                         <ion-avatar class="avatar-top sharePhotoNone" *ngIf="!article.Content">
-                            <ion-icon name="ios-link" color="medium" class="sharePortraitNone"></ion-icon>
+                            <ion-icon name="ios-link" color="dark" class="sharePortraitNone"></ion-icon>
                         </ion-avatar>
                         <ion-label class="marginleft" text-wrap style="margin-top:5px;margin-bottom:0;">
                             <span>{{reddah.htmlDecode(article.Abstract)}}</span><br>
@@ -89,7 +89,7 @@
                     <div style="width: 100%;">
                         <div class="like-arrow-up"></div>
                         <div class="likeSection">
-                            <ion-icon name="heart-empty" class="likeIcon"></ion-icon>
+                            <ion-icon name="heart-empty" class="likeIcon" style="font-size:15px;"></ion-icon>
                             <span class="likeUserName">
                                 <span class="friendName" (click)="goUser(user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName);last as isLast;">{{user.displayName}}{{isLast?"":", "}}</span>
                             </span>

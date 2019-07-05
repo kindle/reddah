@@ -707,15 +707,15 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         let result = this.localStorageService.retrieve(cacheKey);
         
         if(cacheKey.indexOf('userphoto_')>-1){
-            if(result){
+            if(result&&this.platform.is('cordova')){
                 return (<any>window).Ionic.WebView.convertFileSrc(result);
             }
             else{
                 return "assets/icon/anonymous.png";
             }
         }
-        else if(cacheKey.indexOf('usercover_')>-1){
-            if(result){
+        else if(cacheKey.indexOf('cover_')>-1){
+            if(result&&this.platform.is('cordova')){
                 return (<any>window).Ionic.WebView.convertFileSrc(result);
             }
             else{
@@ -784,7 +784,6 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
 
         let cacheImageName = "";
         if(cachedImagePath!=null){
-            //cacheImageName = cachedImagePath.replace(this.file.applicationStorageDirectory,"");
             cacheImageName = cachedImagePath.replace(this.file.externalRootDirectory+"reddah/","");
         }
 
@@ -818,7 +817,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             return;
         try{
             //check cache first
-            let cachedCoverPath = this.localStorageService.retrieve(`cover_${userName}`);
+            /*let cachedCoverPath = this.localStorageService.retrieve(`cover_${userName}`);
             if(cachedCoverPath!=null&&this.platform.is('cordova')){
                 this.localStorageService.store("cover_"+userName, 
                     (<any>window).Ionic.WebView.convertFileSrc(cachedCoverPath));
@@ -833,7 +832,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             if(cachedCoverPath!=null&&this.platform.is('cordova')){
                 this.localStorageService.store("userphoto_"+userName,
                     (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
-            }
+            }*/
 
             //check from web
             let formData = new FormData();

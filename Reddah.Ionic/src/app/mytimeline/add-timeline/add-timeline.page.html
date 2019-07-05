@@ -23,7 +23,7 @@
                 <img [src]="article.ImageUrl" class="sharePortrait">
             </ion-avatar>
             <ion-avatar class="avatar-top sharePhotoNone" *ngIf="!article.ImageUrl">
-                <ion-icon name="ios-link" color="medium" class="sharePortraitNone"></ion-icon>
+                <ion-icon name="ios-link" color="dark" class="sharePortraitNone"></ion-icon>
             </ion-avatar>
             <ion-label class="marginleft" text-wrap style="margin-top:5px;margin-bottom:0;">
                 <span>{{reddahService.htmlDecode(article.Title)}}</span><br>
