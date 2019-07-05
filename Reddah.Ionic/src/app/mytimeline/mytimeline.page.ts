@@ -102,10 +102,10 @@ export class MyTimeLinePage implements OnInit {
                     this.loadedIds.push(article.Id);
                     
                     //cache user image
-                    this.reddah.CachePhoto(article.UserPhoto, `userphoto_${article.UserName}`);
+                    this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
                     //cache preview image
                     article.Content.split('$$$').forEach((previewImageUrl)=>{
-                        this.reddah.CachePhoto(previewImageUrl, previewImageUrl);
+                        this.reddah.toFileCache(previewImageUrl);
                     });
                     this.GetCommentsData(article.Id);
                 }
@@ -137,10 +137,10 @@ export class MyTimeLinePage implements OnInit {
                 this.loadedIds.push(article.Id);
                 
                 //cache user image
-                this.reddah.CachePhoto(article.UserPhoto, `userphoto_${article.UserName}`);
+                this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
                 //cache preview image
                 article.Content.split('$$$').forEach((previewImageUrl)=>{
-                    this.reddah.CachePhoto(previewImageUrl, previewImageUrl);
+                    this.reddah.toFileCache(previewImageUrl);
                 });
                 this.GetCommentsData(article.Id);
             }

@@ -22,6 +22,7 @@
           <Property Name="Locale" Type="varchar" MaxLength="10" />
           <Property Name="LastUpdateOn" Type="datetime" />
           <Property Name="Type" Type="int" />
+          <Property Name="Ref" Type="int" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -64,19 +65,19 @@
           <Property Name="Message" Type="varchar" MaxLength="4000" Nullable="false" />
           <Property Name="Exception" Type="varchar" MaxLength="2000" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'reddah.dbo.Message' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Message">
           <Key>
-            <PropertyRef Name="From" />
-            <PropertyRef Name="To" />
-            <PropertyRef Name="Msg" />
-            <PropertyRef Name="Status" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="From" Type="nvarchar(max)" Nullable="false" />
           <Property Name="To" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Msg" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ArticleId" Type="int" Nullable="false" />
+          <Property Name="AritclePhoto" Type="nvarchar(max)" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Setting">
           <Key>
@@ -197,6 +198,7 @@ warning 6002: The table/view 'reddah.dbo.Message' does not have a primary key de
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UploadFile" EntityType="Self.UploadFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserArticle" EntityType="Self.UserArticle" Schema="dbo" store:Type="Tables" />
@@ -208,14 +210,6 @@ warning 6002: The table/view 'reddah.dbo.Message' does not have a primary key de
           <EntitySet Name="webpages_PrivilegesInRoles" EntityType="Self.webpages_PrivilegesInRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Message" EntityType="Self.Message" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[Message].[From] AS [From], 
-[Message].[To] AS [To], 
-[Message].[Msg] AS [Msg], 
-[Message].[Status] AS [Status]
-FROM [dbo].[Message] AS [Message]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -226,6 +220,7 @@ FROM [dbo].[Message] AS [Message]</DefiningQuery>
           <EntitySet Name="Comments" EntityType="reddahModel.Comment" />
           <EntitySet Name="Groups" EntityType="reddahModel.Group" />
           <EntitySet Name="Logs" EntityType="reddahModel.Log" />
+          <EntitySet Name="Messages" EntityType="reddahModel.Message" />
           <EntitySet Name="Settings" EntityType="reddahModel.Setting" />
           <EntitySet Name="UploadFiles" EntityType="reddahModel.UploadFile" />
           <EntitySet Name="UserArticles" EntityType="reddahModel.UserArticle" />
@@ -237,7 +232,6 @@ FROM [dbo].[Message] AS [Message]</DefiningQuery>
           <EntitySet Name="webpages_PrivilegesInRoles" EntityType="reddahModel.webpages_PrivilegesInRoles" />
           <EntitySet Name="webpages_Roles" EntityType="reddahModel.webpages_Roles" />
           <EntitySet Name="webpages_UsersInRoles" EntityType="reddahModel.webpages_UsersInRoles" />
-          <EntitySet Name="Messages" EntityType="reddahModel.Message" />
         </EntityContainer>
         <EntityType Name="Article">
           <Key>
@@ -256,6 +250,7 @@ FROM [dbo].[Message] AS [Message]</DefiningQuery>
           <Property Name="Locale" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="LastUpdateOn" Type="DateTime" Precision="3" />
           <Property Name="Type" Type="Int32" />
+          <Property Name="Ref" Type="Int32" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -297,6 +292,20 @@ FROM [dbo].[Message] AS [Message]</DefiningQuery>
           <Property Name="Logger" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Message" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="Exception" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="From" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="To" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Msg" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ArticleId" Type="Int32" Nullable="false" />
+          <Property Name="AritclePhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Setting">
           <Key>
@@ -412,18 +421,6 @@ FROM [dbo].[Message] AS [Message]</DefiningQuery>
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Message">
-          <Key>
-            <PropertyRef Name="From" />
-            <PropertyRef Name="To" />
-            <PropertyRef Name="Msg" />
-            <PropertyRef Name="Status" />
-          </Key>
-          <Property Name="From" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="To" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Msg" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -433,6 +430,7 @@ FROM [dbo].[Message] AS [Message]</DefiningQuery>
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="reddahModel.Article">
               <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="Ref" ColumnName="Ref" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="LastUpdateOn" ColumnName="LastUpdateOn" />
                 <ScalarProperty Name="Locale" ColumnName="Locale" />
@@ -489,6 +487,21 @@ FROM [dbo].[Message] AS [Message]</DefiningQuery>
                 <ScalarProperty Name="Level" ColumnName="Level" />
                 <ScalarProperty Name="Thread" ColumnName="Thread" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="reddahModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AritclePhoto" ColumnName="AritclePhoto" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="From" ColumnName="From" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -612,16 +625,6 @@ FROM [dbo].[Message] AS [Message]</DefiningQuery>
               <MappingFragment StoreEntitySet="webpages_UsersInRoles">
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Messages">
-            <EntityTypeMapping TypeName="reddahModel.Message">
-              <MappingFragment StoreEntitySet="Message">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Msg" ColumnName="Msg" />
-                <ScalarProperty Name="To" ColumnName="To" />
-                <ScalarProperty Name="From" ColumnName="From" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

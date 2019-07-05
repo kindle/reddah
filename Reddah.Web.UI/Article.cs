@@ -44,6 +44,8 @@ public partial class Article
 
     public Nullable<int> Type { get; set; }
 
+    public Nullable<int> Ref { get; set; }
+
 }
 
 }

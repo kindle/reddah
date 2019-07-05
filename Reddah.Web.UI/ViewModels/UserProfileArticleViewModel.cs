@@ -130,6 +130,7 @@
                     ap.Content = item.Content;
                     ap.Type = item.Type;
                     ap.Locale = item.Locale;
+                    ap.Ref = item.Ref;
                     
                     apList.Add(ap);
                 }

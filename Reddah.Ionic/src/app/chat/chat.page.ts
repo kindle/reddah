@@ -67,7 +67,7 @@ export class ChatBase{
             
         }
         else{//download
-            this.reddah.toImageCache(key, key, 'org');
+            this.reddah.toFileCache(key, true);
         }
     }
 
@@ -165,15 +165,13 @@ export class ChatPage extends ChatBase implements OnInit  {
         let path = this.localStorageService.retrieve(guidName);
 
         if(path==null){
-            this.fileTransfer = this.transfer.create();  
             let target = this.file.externalRootDirectory +"reddah/"+ guidName;
             this.file.checkFile(this.file.externalRootDirectory +"reddah/", guidName)
-            //let target = this.file.applicationStorageDirectory + guidName;
-            //this.file.checkFile(this.file.applicationStorageDirectory, guidName)
             .then(_ =>{
                 this.localStorageService.store(guidName, target);
             })
             .catch(err =>{
+                this.fileTransfer = this.transfer.create();  
                 this.fileTransfer.download("https://login.reddah.com/uploadPhoto/"+guidName, target, true).then((entry) => {
                     this.localStorageService.store(guidName, target);
                 }, (error) => {

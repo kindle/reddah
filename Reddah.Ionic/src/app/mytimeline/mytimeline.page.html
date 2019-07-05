@@ -44,8 +44,8 @@
                 <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
                     <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 2px;margin-bottom:5px;width:96%;" [innerHTML]="reddah.summary(article.Title,50)"></div>
                 </ion-item>
-                <div *ngIf="article.Abstract&&article.Abstract.length>2" style="background-color:#eeeeee;margin: 10px 10px 0px 0;padding-bottom:10px;">
-                    <ion-item lines="none" color="light" (click)="viewArticle(article.Ref)">
+                <div *ngIf="article.Abstract&&article.Abstract.length>2" style="background-color:#eeeeee;margin: 5px 5px 0px 0;padding:0 5px 5px 5px;">
+                    <ion-item lines="none" color="light" (click)="viewArticle(article.Ref)" no-padding>
                         <ion-avatar class="avatar-top sharePhoto" *ngIf="article.Content">
                             <img [src]="article.Content" class="sharePortrait">
                         </ion-avatar>

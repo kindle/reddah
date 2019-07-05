@@ -18,13 +18,23 @@ using System;
 public partial class Message
 {
 
+    public int Id { get; set; }
+
     public string From { get; set; }
 
     public string To { get; set; }
 
     public string Msg { get; set; }
 
+    public int ArticleId { get; set; }
+
+    public string AritclePhoto { get; set; }
+
     public int Status { get; set; }
+
+    public int Type { get; set; }
+
+    public System.DateTime CreatedOn { get; set; }
 
 }
 

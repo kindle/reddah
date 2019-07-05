@@ -120,18 +120,21 @@ namespace Reddah.Web.Login.Controllers
                 string jwt = HttpContext.Current.Request["jwt"];
                 string thoughts = HttpContext.Current.Request["thoughts"];
                 string location = HttpContext.Current.Request["location"];
+                string shareTitle = HttpContext.Current.Request["abstract"];
+                string shareImageUrl = HttpContext.Current.Request["content"];
                 //this is actually fileurl array
                 string rorder = HttpContext.Current.Request["order"];
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 int feedbackType = js.Deserialize<int>(HttpContext.Current.Request["feedbackType"]);
                 int type = js.Deserialize<int>(HttpContext.Current.Request["type"]);
+                int refArticleId = js.Deserialize<int>(HttpContext.Current.Request["ref"]);
 
 
                 Dictionary<string, string> imageUrls = new Dictionary<string, string>();
 
                 HttpFileCollection hfc = HttpContext.Current.Request.Files;
 
-                if (String.IsNullOrWhiteSpace(thoughts) && hfc.Count == 0)
+                if (String.IsNullOrWhiteSpace(thoughts) && hfc.Count == 0 && shareTitle==null)
                     return Ok(new ApiResult(1, "No thoughts and photos"));
 
                 JwtResult jwtResult = AuthController.ValidJwt(jwt);
@@ -219,13 +222,16 @@ namespace Reddah.Web.Login.Controllers
                         db.Article.Add(new Article()
                         {
                             Title = thoughts,
-                            Content = string.Join("$$$", articleContentList),
+                            Content = shareImageUrl!=null?shareImageUrl:string.Join("$$$", articleContentList),
                             CreatedOn = DateTime.UtcNow,
                             Count = 0,
                             GroupName = location,
                             UserName = jwtResult.JwtUser.User,
                             Type = type,
-                            Abstract = feedbackType.ToString()
+                            Ref = refArticleId,
+                            Abstract = refArticleId > 0 ? shareTitle : feedbackType.ToString()
+                            //when type=9, insert feedbacktype else if share article insert title else insert empty
+
                         });
 
                         db.SaveChanges();
@@ -299,6 +305,7 @@ namespace Reddah.Web.Login.Controllers
                                  Locale = b.Locale,
                                  LastUpdateOn = b.LastUpdateOn,
                                  Type = b.Type,
+                                 Ref = b.Ref,
                                  UserNickName = u.NickName,
                                  UserPhoto = u.Photo,
                                  UserSex = u.Sex

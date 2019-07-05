@@ -73,6 +73,10 @@ alter table [dbo].[Comment] add
   [Type] INT NOT NULL DEFAULT 0,
   [Duration]  INT NOT NULL DEFAULT -1
 
+--20190704
+alter table article add 
+  [Ref] int default 0
+
 
 
         

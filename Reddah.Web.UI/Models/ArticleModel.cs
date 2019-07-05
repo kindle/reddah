@@ -26,6 +26,7 @@ namespace Reddah.Web.UI.Models
         public string Locale { get; set; }
         public string LastUpdateOn { get; set; }
         public Nullable<int> Type { get; set; }
+        public int? Ref { get; set; }
     }
 
     public class VoteModel {

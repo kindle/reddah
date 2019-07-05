@@ -40,6 +40,8 @@ public partial class reddahEntities1 : DbContext
 
     public DbSet<Log> Logs { get; set; }
 
+    public DbSet<Message> Messages { get; set; }
+
     public DbSet<Setting> Settings { get; set; }
 
     public DbSet<UploadFile> UploadFiles { get; set; }
@@ -61,8 +63,6 @@ public partial class reddahEntities1 : DbContext
     public DbSet<webpages_Roles> webpages_Roles { get; set; }
 
     public DbSet<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
-
-    public DbSet<Message> Messages { get; set; }
 
 }
 

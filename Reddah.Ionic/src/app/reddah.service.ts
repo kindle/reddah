@@ -750,35 +750,56 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         else
         {
             if(this.platform.is('cordova'))
-                this.toImageCache(cacheKey, cacheKey);
+                this.toFileCache(cacheKey);
             return cacheKey;
         }
     }
 
     private fileTransfer: FileTransferObject; 
-    toImageCache(webUrl, cacheKey, storePath='default'){
-        webUrl = webUrl.replace("///","https://");
+    toFileCache(webUrl, isVideo=false){
+        let cachedFilePath = this.localStorageService.retrieve(webUrl);
+        if(cachedFilePath==null){
+            webUrl = webUrl.replace("///","https://");
+            let webFileName = webUrl.toLowerCase().replace("https://login.reddah.com/uploadphoto/","");
+            let targetUrl = this.file.externalRootDirectory+"reddah/" + webFileName;
+
+            this.fileTransfer = this.transfer.create();  
+            this.fileTransfer.download(webUrl, targetUrl).then(
+            _ => {
+                if(isVideo)
+                {
+                    this.localStorageService.store(webUrl,(<any>window).Ionic.WebView.convertFileSrc(targetUrl));
+                }
+                else{
+                    this.localStorageService.store(webUrl, targetUrl);
+                    this.appCacheToOrg[(<any>window).Ionic.WebView.convertFileSrc(targetUrl)] = webUrl;
+                }
+            }, 
+            _ => { console.log(JSON.stringify(_)) });
+        }
+    } 
+
+    toImageCache(webUrl, cacheKey){
         let cachedImagePath = this.localStorageService.retrieve(cacheKey);
-        //check if changed or not downloaded, go to download it
-        let webImageName = webUrl.toLowerCase().replace("https://login.reddah.com/uploadphoto/","");
+
         let cacheImageName = "";
         if(cachedImagePath!=null){
             //cacheImageName = cachedImagePath.replace(this.file.applicationStorageDirectory,"");
             cacheImageName = cachedImagePath.replace(this.file.externalRootDirectory+"reddah/","");
         }
-        if(cachedImagePath==null||cacheImageName!=webImageName){
-            this.fileTransfer = this.transfer.create();  
-            //let target = this.file.applicationStorageDirectory + webImageName;
-            let target = this.file.externalRootDirectory+"reddah/" + webImageName;
-            this.fileTransfer.download(webUrl, target).then((entry) => {
-                //this.localStorageService.store(cacheKey, target);                
 
-                this.localStorageService.store(cacheKey, 
-                    storePath=='default'?(<any>window).Ionic.WebView.convertFileSrc(target):target);
-                this.appCacheToOrg[(<any>window).Ionic.WebView.convertFileSrc(target)] = webUrl;
-            }, (error) => {
-                console.log(JSON.stringify(error));
-            });
+        webUrl = webUrl.replace("///","https://");
+        let webImageName = webUrl.toLowerCase().replace("https://login.reddah.com/uploadphoto/","");
+
+        if(cachedImagePath==null||cacheImageName!=webImageName){
+            this.fileTransfer = this.transfer.create();
+            let targetUrl = this.file.externalRootDirectory+"reddah/" + webImageName;
+            this.fileTransfer.download(webUrl, targetUrl).then(
+            _ => {
+                this.localStorageService.store(cacheKey, targetUrl);
+                this.appCacheToOrg[(<any>window).Ionic.WebView.convertFileSrc(targetUrl)] = webUrl;
+            }, 
+            _ => { console.log(JSON.stringify(_)); });
         }
     } 
 
@@ -897,15 +918,6 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         if(n==null||n<0)
             n=0;
         return new Array(n);
-    }
-
-    async CachePhoto(url, key){
-        if(url){
-            let exist = this.localStorageService.retrieve(key);
-            if(!exist){
-                this.toImageCache(url, key);
-            }
-        }
     }
 
     getSendTime(dateStr){
