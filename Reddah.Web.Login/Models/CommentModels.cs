@@ -71,4 +71,28 @@ namespace Reddah.Web.Login
         public Article article { get; set; }
     }
 
+    public class AdvancedArticle: Article
+    {
+        public string ImageUrl { get; set; }
+
+        public AdvancedArticle(Article article)
+        {
+            this.Id = article.Id;
+            this.Title = article.Title;
+            this.Content = article.Content;
+            this.Abstract = article.Abstract;
+            this.CreatedOn = article.CreatedOn;
+            this.Up = article.Up;
+            this.Down = article.Down;
+            this.Count = article.Count;
+            this.UserName = article.UserName;
+            this.GroupName = article.GroupName;
+            this.Locale = article.Locale;
+            this.LastUpdateOn = article.LastUpdateOn;
+            this.Type = article.Type;
+            this.Ref = article.Ref;
+        }
+        
+    }
+
 }

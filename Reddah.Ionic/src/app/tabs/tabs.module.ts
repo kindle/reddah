@@ -13,7 +13,7 @@ import { FindPageModule } from './find/find.module';
 import { HomePageModule } from './home/home.module';
 import { MessagePageModule } from './message/message.module';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { PublisherPageModule } from './publisher/publisher.module';
 
 @NgModule({
   imports: [
@@ -26,10 +26,11 @@ import { TranslateModule } from '@ngx-translate/core';
       AboutPageModule,
       FindPageModule,
       ContactPageModule,
+      PublisherPageModule,
       TranslateModule.forChild(),
   ],
   declarations: [
-      TabsPage,
+      TabsPage
   ],
   exports:[
   ]

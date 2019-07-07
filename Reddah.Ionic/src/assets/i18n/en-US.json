@@ -53,6 +53,7 @@
         "Contact": "Friend",
         "Find": "Discover",
         "About": "Me",
+        "Publisher": "Public",
         "Header":{
             "GroupChat":"New Chat",
             "AddFriend":"Add Friend",

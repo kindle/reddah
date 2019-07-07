@@ -110,6 +110,7 @@ import { SigninPage } from './surface/signin/signin.page';
 import { SettingNickNamePage } from './settings/setting-nickname/setting-nickname.page'
 import { SettingSignaturePage } from './settings/setting-signature/setting-signature.page'
 import { SettingFontPage } from './settings/setting-font/setting-font.page';
+import { ShareArticleComponent } from './common/share-article/share-article.component';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -123,6 +124,7 @@ var firebaseConfig = {
 
 @NgModule({
     declarations: [
+        ShareArticleComponent,
         AppComponent,
         BookmarkPage,
         BookmarkPopPage,
@@ -180,6 +182,7 @@ var firebaseConfig = {
         SettingPrivacyPage,
         RegisterPage,
         SettingNickNamePage,SettingSignaturePage,
+        
     ],
     entryComponents: [
         BookmarkPage,
@@ -231,6 +234,7 @@ var firebaseConfig = {
         SettingPrivacyPage,
         RegisterPage,
         SettingNickNamePage,SettingSignaturePage,
+        
     ],
     imports: [
         BrowserModule, 

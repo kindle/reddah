@@ -8,6 +8,7 @@ import { FindPage } from './find/find.page';
 import { ContactPage } from './contact/contact.page';
 import { MessagePage } from './message/message.page';
 import { AuthGuard } from '../AuthGuard.service';
+import { PublisherPage } from './publisher/publisher.page';
 
 const routes: Routes = [
   {
@@ -47,6 +48,12 @@ const routes: Routes = [
         path: 'about',
         outlet: 'about',
         component: AboutPage,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'publisher',
+        outlet: 'publisher',
+        component: PublisherPage,
         canActivate: [AuthGuard],
       },
     ]

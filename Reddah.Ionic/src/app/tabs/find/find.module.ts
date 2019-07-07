@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FindPage } from './find.page';
 import { TranslateModule } from '@ngx-translate/core';
-
 import { HeaderModule } from '../../common/header/header.module';
 
 @NgModule({
@@ -17,7 +16,9 @@ import { HeaderModule } from '../../common/header/header.module';
     RouterModule.forChild([{ path: '', component: FindPage }]),
     TranslateModule.forChild()
   ],
-  declarations: [FindPage]
+  declarations: [
+    FindPage,
+  ]
 })
 export class FindPageModule {
   

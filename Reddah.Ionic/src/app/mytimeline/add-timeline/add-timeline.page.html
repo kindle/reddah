@@ -17,19 +17,8 @@
     <div *ngIf="postType==3">
       video
     </div>
-    <div *ngIf="postType==4" style="background-color:#eeeeee;margin: 0 15px;padding-bottom:5px;">
-        <ion-item lines="none" color="light">
-            <ion-avatar class="avatar-top sharePhoto" *ngIf="article.ImageUrl">
-                <img [src]="article.ImageUrl" class="sharePortrait">
-            </ion-avatar>
-            <ion-avatar class="avatar-top sharePhotoNone" *ngIf="!article.ImageUrl">
-                <ion-icon name="ios-link" color="dark" class="sharePortraitNone"></ion-icon>
-            </ion-avatar>
-            <ion-label class="marginleft" text-wrap style="margin-top:5px;margin-bottom:0;">
-                <span>{{reddahService.htmlDecode(article.Title)}}</span><br>
-                <ion-note color="dark"></ion-note>
-            </ion-label>
-        </ion-item>
+    <div style="margin: 0 15px;">
+      <app-share-article *ngIf="postType==4" [abstract]="article.Title" [image]="article.ImageUrl" [id]="article.Id"></app-share-article>
     </div>
     <ion-item lines="none">
       <ion-label></ion-label>

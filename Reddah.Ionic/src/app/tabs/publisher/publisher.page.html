@@ -1,17 +1,13 @@
-<app-header title="Menu.Contact"></app-header>
+<ion-item no-padding lines="none" color="light">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-label>{{ "Menu.Publisher" | translate }}</ion-label>
+    <ion-icon name="ios-search" slot="end" (click)="goSearch()" margin-end></ion-icon>
+    <ion-icon name="add" slot="end" (click)="goSearch()"></ion-icon>
+</ion-item>
 <ion-content>
-    <ion-item (click)="viewNewFriends()">
-        <ion-icon name="ios-person-add" slot="start" color="tertiary" class="portrait newFriend"></ion-icon>
-        <ion-label style="margin-left:10px;">新的朋友</ion-label>
-        <ion-badge slot="end" color="danger" *ngIf="requestCount>0">{{requestCount}}</ion-badge>
-    </ion-item>
     <ion-item (click)="goChooseGroupChat()">
-        <ion-icon name="ios-chatbubbles" slot="start" color="tertiary" class="portrait groupChat"></ion-icon>
-        <ion-label style="margin-left:10px;">群聊</ion-label>
-    </ion-item>
-    <ion-item (click)="goPublicPage()">
         <ion-icon name="ios-person" slot="start" color="tertiary" class="portrait publicPoster"></ion-icon>
-        <ion-label style="margin-left:10px;">公众号</ion-label>
+        <ion-label style="margin-left:10px;">注册公众号</ion-label>
     </ion-item>
     <ion-spinner name="dots" *ngIf="showLoading"></ion-spinner>
     <ion-list>

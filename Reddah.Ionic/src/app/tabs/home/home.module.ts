@@ -11,8 +11,8 @@ import { HeaderModule } from '../../common/header/header.module';
   imports: [
       IonicModule,
       CommonModule,
-      HeaderModule,
       FormsModule,
+      HeaderModule,
       RouterModule.forChild([{ path: 'home', component: HomePage }]),
       TranslateModule.forChild(),
   ],

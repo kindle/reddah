@@ -477,7 +477,9 @@ namespace Reddah.Web.Login.Controllers
                     var article = db.Article.FirstOrDefault(a => a.Id == articleId);
                     if (article != null)
                     {
-                        return Ok(new ApiResult(0, article));
+                        var advancedArticle = new AdvancedArticle(article);
+                        advancedArticle.ImageUrl = Helpers.GetFirstImageSrc(article.Content);
+                        return Ok(new ApiResult(0, advancedArticle));
                     }
                     else
                     {

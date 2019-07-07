@@ -21,7 +21,7 @@ import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
                 <ion-label>{{ 'Menu.Header.Scan' | translate }}</ion-label>
             </ion-item>
             <ion-item button (click)="feedback()">
-                <ion-icon slot="start" color="tertiary" name="ios-help-circle-outline"></ion-icon>  
+                <ion-icon slot="start" color="tertiary" name="mail"></ion-icon>  
                 <ion-label>{{ 'Menu.Header.Feedback' | translate }}</ion-label>
             </ion-item>
         </div>

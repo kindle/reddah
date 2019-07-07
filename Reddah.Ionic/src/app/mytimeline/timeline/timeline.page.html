@@ -39,35 +39,22 @@
                     </span>
                 </div>
                 <div class="articleContent">
-                    <ion-item no-padding lines="none" *ngIf="article.Abstract.length<3&&article.Content.length>0" (click)="goTsViewer(article)">
+                    <ion-item no-padding lines="none" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.length>0" (click)="goTsViewer(article)">
                         <ion-thumbnail slot="start">
-                            <img src="{{reddah.cache(article.Content.split('$$$')[0])}}">
+                            <img src="{{reddah.level2Cache(article.Content.split('$$$')[0])}}">
                         </ion-thumbnail>
                         <ion-label class="articleContentText" text-wrap>
                             <div [innerHTML]="reddah.summary(article.Title,20)" class="articleContentTextSummary"></div>
                             <div class="articleContentTextCount" *ngIf="article.Content.split('$$$').length>0">共{{article.Content.split('$$$').length}}张</div>
                         </ion-label>
                     </ion-item>
-                    <ion-item no-padding lines="none" *ngIf="article.Abstract.length<3&&article.Content.length===0" (click)="goTsViewer(article)">
+                    <ion-item no-padding lines="none" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.length===0" (click)="goTsViewer(article)">
                         <div [innerHTML]="reddah.summary(article.Title,20)" class="textOnlyArticle"></div>
                     </ion-item>
                     <ion-item no-padding lines="none" *ngIf="article.Abstract&&article.Abstract.length>2&&article.Title&&article.Title.length>0" (click)="goTsViewer(article)">
                         <div [innerHTML]="reddah.summary(article.Title,20)" class="textOnlyArticle"></div>
                     </ion-item>
-                    <div *ngIf="article.Abstract&&article.Abstract.length>2" (click)="viewArticle(article.Ref)" style="background-color:#eeeeee;margin: 5px 5px 0px 0;padding:5px 5px 5px 5px;">
-                        <ion-item lines="none" color="light" no-padding>
-                            <ion-avatar class="avatar-top sharePhoto" *ngIf="article.Content">
-                                <img [src]="article.Content" class="sharePortrait">
-                            </ion-avatar>
-                            <ion-avatar class="avatar-top sharePhotoNone" *ngIf="!article.Content">
-                                <ion-icon name="ios-link" color="dark" class="sharePortraitNone"></ion-icon>
-                            </ion-avatar>
-                            <ion-label class="marginleft" text-wrap style="margin-top:5px;margin-bottom:0;">
-                                <span>{{reddah.htmlDecode(article.Abstract)}}</span><br>
-                                <ion-note color="dark"></ion-note>
-                            </ion-label>
-                        </ion-item>
-                    </div>
+                    <app-share-article *ngIf="article.Abstract&&article.Abstract.length>2" [abstract]="article.Abstract" [image]="article.Content" [id]="article.Ref"></app-share-article>
                 </div>
             </div>
         </div>

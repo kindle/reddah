@@ -14,7 +14,7 @@
             <ion-note *ngIf="message.Type==1">#@$#!</ion-note>
             <h4>{{message.CreatedOn | date: 'HH:mm'}}</h4>
         </ion-label>
-        <img slot="end" src="{{reddah.cache(message.AritclePhoto)}}" class="messageContentPortrait">
+        <img slot="end" src="{{reddah.level2Cache(message.AritclePhoto)}}" class="messageContentPortrait">
     </ion-item>
     <ion-item lines="none" (click)="showAllMessage()" *ngIf="!showAll">
         <ion-label text-center>查看更早的消息...</ion-label>

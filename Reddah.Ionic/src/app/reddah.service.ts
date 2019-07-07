@@ -727,7 +727,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         }
     }
 
-    cache(cacheKey){
+    level2Cache(cacheKey){
         let preview = this.localStorageService.retrieve(cacheKey);
         let org = this.localStorageService.retrieve(cacheKey.replace("_reddah_preview",""))
         
@@ -755,12 +755,19 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         }
     }
 
+    getFileName(url){
+        let start = url.lastIndexOf('/')+1;
+        let end = url.indexOf('?');
+        end = (end==-1)?url.length:end;
+        return url.substring(start, end);
+    }
+
     private fileTransfer: FileTransferObject; 
     toFileCache(webUrl, isVideo=false){
         let cachedFilePath = this.localStorageService.retrieve(webUrl);
         if(cachedFilePath==null){
             webUrl = webUrl.replace("///","https://");
-            let webFileName = webUrl.toLowerCase().replace("https://login.reddah.com/uploadphoto/","");
+            let webFileName = this.getFileName(webUrl);
             let targetUrl = this.file.externalRootDirectory+"reddah/" + webFileName;
 
             this.fileTransfer = this.transfer.create();  
@@ -788,7 +795,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         }
 
         webUrl = webUrl.replace("///","https://");
-        let webImageName = webUrl.toLowerCase().replace("https://login.reddah.com/uploadphoto/","");
+        let webImageName = this.getFileName(webUrl);
 
         if(cachedImagePath==null||cacheImageName!=webImageName){
             this.fileTransfer = this.transfer.create();
@@ -812,27 +819,25 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         }
     } 
 
+    verifyImageFile(key){
+        let cachedPath = this.localStorageService.retrieve(key);
+        if(cachedPath&&this.platform.is('cordova')){
+            let fileName = this.getFileName(cachedPath);
+            let filePath = cachedPath.replace(fileName, "");
+            
+            this.file.checkFile(filePath, fileName).catch(_=>{
+                this.localStorageService.clear(key);
+            });
+        }
+    }
+
     getUserPhotos(userName, isTimeline=false){
         if(userName==null)
             return;
         try{
-            //check cache first
-            /*let cachedCoverPath = this.localStorageService.retrieve(`cover_${userName}`);
-            if(cachedCoverPath!=null&&this.platform.is('cordova')){
-                this.localStorageService.store("cover_"+userName, 
-                    (<any>window).Ionic.WebView.convertFileSrc(cachedCoverPath));
-                //bug when image not loaded, src width =0
-                if(isTimeline)
-                    this.drawCanvasBackground(cachedCoverPath);
-            }
-            else{
-                this.localStorageService.store("cover_"+userName, "assets/icon/timg.jpg");
-            }
-            let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${userName}`);
-            if(cachedCoverPath!=null&&this.platform.is('cordova')){
-                this.localStorageService.store("userphoto_"+userName,
-                    (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
-            }*/
+            
+            this.verifyImageFile(`cover_${userName}`);
+            this.verifyImageFile(`userphoto_${userName}`);
 
             //check from web
             let formData = new FormData();

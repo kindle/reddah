@@ -9,14 +9,13 @@ import { CacheService } from 'ionic-cache';
 import { UserPage } from '../../common/user/user.page';
 import { ChangeNoteNamePopPage } from '../../common/change-notename-pop.page';
 import { ChatChooseGroupPage } from '../../chat/chat-choose-group/chat-choose-group.page';
-import { PublisherPage } from '../publisher/publisher.page';
 
 @Component({
-    selector: 'app-contact',
-    templateUrl: 'contact.page.html',
-    styleUrls: ['contact.page.scss']
+    selector: 'app-publisher',
+    templateUrl: 'publisher.page.html',
+    styleUrls: ['publisher.page.scss']
 })
-export class ContactPage {
+export class PublisherPage {
 
     requestCount: number;
 
@@ -188,12 +187,5 @@ export class ContactPage {
             this.loadRequests();
             this.loadData();
         }
-    }
-
-    async goPublicPage(){
-        const modal = await this.modalController.create({
-            component: PublisherPage
-        });
-        await modal.present();
     }
 }
