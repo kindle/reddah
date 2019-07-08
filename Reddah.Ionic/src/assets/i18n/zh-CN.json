@@ -15,13 +15,14 @@
 
     "Register":{
         "Title":"注册",
+        "TitleSub":"注册订阅号",
         "ReadAgree":"您已阅读并同意：",
         "UserAgreement":"用户协议、",
         "Privacy":"隐私声明",
         "And":"和",
         "Content":"内容政策",
         "Loading":"正在注册...",
-        "Register.Success":"注册成功，请验证邮箱后登录..."
+        "Success":"注册成功，请验证邮箱后登录..."
     },
 
     "Input":{
@@ -29,12 +30,16 @@
         "Password": "密码",
         "ConfirmPassword": "确认密码",
         "Email": "电子邮件",
+        "Name":"名称",
+        "Description":"描述",
         "Error":{
             "UserNameEmpty":"请输入用户名",
             "PasswordEmpty":"请输入密码",
             "PasswordDifferent":"密码不一致",
             "EmailEmpty":"请输入电子邮件",
-            "Agree":"请同意用户协议"
+            "Agree":"请同意用户协议",
+            "SubNameEmpty":"请输入名称",
+            "SubDescEmpty":"请输入描述"
         }
     },
 

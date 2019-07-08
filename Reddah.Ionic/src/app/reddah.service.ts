@@ -38,12 +38,21 @@ export class ReddahService {
         private translate: TranslateService,
     ) { }
 
+    //******************************** */
+    private registersubUrl = 'https://login.reddah.com/api/auth/registersub'; 
     
+    registerSub(formData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.registersubUrl, formData)
+        .pipe(
+            tap(data => this.log('register sub')),
+            catchError(this.handleError('register sub', []))
+        );
+    }
     //******************************** */
     private registerUrl = 'https://login.reddah.com/api/auth/register'; 
     
     register(formData): Observable<any> {
-        //formData.append('jwt', this.getCurrentJwt());
         return this.http.post<any>(this.registerUrl, formData)
         .pipe(
             tap(data => this.log('register')),
@@ -278,6 +287,18 @@ export class ReddahService {
         .pipe(
             tap(data => this.log('get friends')),
             catchError(this.handleError('get friends', []))
+        );
+    }
+    //******************************** */
+    private subsUrl = 'https://login.reddah.com/api/article/subs'; 
+
+    getSubs(): Observable<any> {
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.subsUrl, formData)
+        .pipe(
+            tap(data => this.log('get subs')),
+            catchError(this.handleError('get subs', []))
         );
     }
     //******************************** */

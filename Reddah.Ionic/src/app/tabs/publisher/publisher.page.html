@@ -6,9 +6,13 @@
 </ion-item>
 <ion-content>
     <ion-item (click)="goApply()">
-        <ion-icon name="ios-person" slot="start" color="tertiary" class="portrait publicPoster"></ion-icon>
-        <ion-label style="margin-left:10px;">申请公众号</ion-label>
+        <ion-icon name="ios-person-add" slot="start" color="tertiary" class="portrait publicPoster"></ion-icon>
+        <ion-label style="margin-left:10px;">注册新的公众号</ion-label>
     </ion-item>
+    <ion-item (click)="goManage()">
+            <ion-icon name="ios-person" slot="start" color="tertiary" class="portrait myPublicPoster"></ion-icon>
+            <ion-label style="margin-left:10px;">管理我的公众号</ion-label>
+        </ion-item>
     <ion-spinner name="dots" *ngIf="showLoading"></ion-spinner>
     <ion-list>
         <ion-item-group *ngFor="let group of groupedContacts" lines="none">

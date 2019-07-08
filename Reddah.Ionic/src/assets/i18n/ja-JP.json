@@ -15,13 +15,14 @@
 
     "Register":{
       "Title":"レジスタ",
+      "TitleSub":"注册订阅号",
       "ReadAgree":"読んで同意しました:",
       "UserAgreement":"利用規約,",
       "Privacy":"プライバシーポリシー",
       "And":"&",
       "Content":"コンテンツポリシー",
       "Loading":"レジスタ...",
-      "Register.Success":"登録が成功しました。メールを確認して登録してください..."
+      "Success":"登録が成功しました。メールを確認して登録してください..."
     },
 
     "Input":{
@@ -29,12 +30,16 @@
       "Password": "パスワード",
       "ConfirmPassword": "パスワード確認",
       "Email": "電子メール",
+      "Name":"名称",
+      "Description":"描述",
       "Error":{
         "UserNameEmpty":"ユーザー名入力",
         "PasswordEmpty":"パスワード入力",
         "PasswordDifferent":"パスワードが一致しません",
         "EmailEmpty":"入力メール",
-        "Agree":"ユーザー同意に同意してください"
+        "Agree":"ユーザー同意に同意してください",
+        "SubNameEmpty":"请输入名称",
+        "SubDescEmpty":"请输入描述"
       }
     },
 

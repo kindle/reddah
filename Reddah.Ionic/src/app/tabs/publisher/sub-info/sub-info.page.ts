@@ -1,19 +1,19 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { SettingSignaturePage } from '../../settings/setting-signature/setting-signature.page'
+import { SettingSignaturePage } from '../../../settings/setting-signature/setting-signature.page'
 import { CacheService } from "ionic-cache";
-import { ChangePhotoPage } from '../change-photo/change-photo.page';
+import { ChangePhotoPage } from '../../../common/change-photo/change-photo.page';
 import { LocalStorageService } from 'ngx-webstorage';
-import { ReddahService } from '../../reddah.service';
-import { QrcardPage } from '../qrcard/qrcard.page';
-import { SettingNickNamePage } from '../../settings/setting-nickname/setting-nickname.page'
+import { ReddahService } from '../../../reddah.service';
+import { QrcardPage } from '../../../common/qrcard/qrcard.page';
+import { SettingNickNamePage } from '../../../settings/setting-nickname/setting-nickname.page'
 
 @Component({
-    selector: 'app-my-info',
-    templateUrl: './my-info.page.html',
-    styleUrls: ['./my-info.page.scss'],
+    selector: 'app-sub-info',
+    templateUrl: './sub-info.page.html',
+    styleUrls: ['./sub-info.page.scss'],
 })
-export class MyInfoPage implements OnInit {
+export class SubInfoPage implements OnInit {
 
     constructor(
         private modalController: ModalController,
@@ -25,9 +25,10 @@ export class MyInfoPage implements OnInit {
     }
 
     userName: string;
+    @Input() targetUserName;
 
     async ngOnInit() {
-        this.reddah.getUserPhotos(this.userName);
+        this.reddah.getUserPhotos(this.targetUserName);
     }
 
     async close() {
@@ -39,8 +40,9 @@ export class MyInfoPage implements OnInit {
         const userModal = await this.modalController.create({
           component: ChangePhotoPage,
           componentProps: { 
-              title: "更换头像",
-              tag : "portrait"
+              title: "更换Logo",
+              tag : "portrait",
+              targetUserName: this.targetUserName
           }
         });
           
@@ -48,7 +50,7 @@ export class MyInfoPage implements OnInit {
         const { data } = await userModal.onDidDismiss();
         if(data)
         {
-            this.reddah.getUserPhotos(this.userName);
+            this.reddah.getUserPhotos(this.targetUserName);
         }
         this.changed = data;
     }
@@ -65,28 +67,30 @@ export class MyInfoPage implements OnInit {
         const modal = await this.modalController.create({
             component: SettingNickNamePage,
             componentProps: { 
-                title: "设置昵称",
-                currentNickName: this.reddah.appData('usernickname_'+this.userName)
+                title: "设置名称",
+                currentNickName: this.reddah.appData('usernickname_'+this.targetUserName),
+                targetUserName: this.targetUserName
             }
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
         if(data||!data)
-            this.reddah.getUserPhotos(this.userName);
+            this.reddah.getUserPhotos(this.targetUserName);
     }
 
     async changeSignature(){
         const modal = await this.modalController.create({
             component: SettingSignaturePage,
-            componentProps: {
-                title: "设置个性签名",
-                currentSignature: this.reddah.appData('usersignature_'+this.userName)
+            componentProps: { 
+                title: "设置描述",
+                currentSignature: this.reddah.appData('usersignature_'+this.targetUserName),
+                targetUserName: this.targetUserName
             }
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
         if(data||!data)
-            this.reddah.getUserPhotos(this.userName);
+            this.reddah.getUserPhotos(this.targetUserName);
     }
 
 }

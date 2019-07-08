@@ -11,6 +11,7 @@ import { ChangeNoteNamePopPage } from '../../common/change-notename-pop.page';
 import { ChatChooseGroupPage } from '../../chat/chat-choose-group/chat-choose-group.page';
 import { SearchPage } from '../../common/search/search.page';
 import { CategoryPage } from './category/category.page';
+import { ManagePage } from './manage/manage.page';
 
 @Component({
     selector: 'app-publisher',
@@ -208,6 +209,13 @@ export class PublisherPage {
     async goApply(){
         const modal = await this.modalController.create({
             component: CategoryPage
+        });
+        await modal.present();
+    }
+
+    async goManage(){
+        const modal = await this.modalController.create({
+            component: ManagePage
         });
         await modal.present();
     }

@@ -13,10 +13,11 @@ import { ReddahService } from '../../reddah.service';
 export class SettingNickNamePage implements OnInit {
 
     @Input() currentNickName;
+    @Input() targetUserName;
+    @Input() title;
 
     submitClicked = false;
         
-    userName;
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
@@ -25,7 +26,7 @@ export class SettingNickNamePage implements OnInit {
         public authService: AuthService,
         private toastController: ToastController,
     ) {
-        this.userName = this.reddah.getCurrentUser();
+        
     }
 
     ngOnInit() {}
@@ -39,12 +40,13 @@ export class SettingNickNamePage implements OnInit {
         
         let formData = new FormData();
         formData.append("targetNickName", this.currentNickName);
+        formData.append("targetUserName", this.targetUserName);
         
         this.reddah.changeNickName(formData)
         .subscribe(result => 
         {
             if(result.Success==0){
-                this.localStorageService.store('usernickname_'+this.userName, this.currentNickName);
+                this.localStorageService.store('usernickname_'+this.targetUserName, this.currentNickName);
                 this.modalController.dismiss(true);
             }
             else

@@ -15,13 +15,14 @@
 
     "Register":{
         "Title":"Register",
+        "TitleSub":"Register Subscriber",
         "ReadAgree":"You have read and agreed:",
         "UserAgreement":"User Agreement,",
         "Privacy":"Privacy Policy",
         "And":"and",
         "Content":"Content Policy",
         "Loading":"Register...",
-        "Register.Success":"Registration is successful. Please verify your email and login..."
+        "Success":"Registration is successful. Please verify your email and login..."
     },
 
     "Input":{
@@ -29,12 +30,16 @@
         "Password": "Password",
         "ConfirmPassword": "Confirm Password",
         "Email": "Email",
+        "Name":"Name",
+        "Description":"Description",
         "Error":{
             "UserNameEmpty":"Please input user name",
             "PasswordEmpty":"Please input password",
             "PasswordDifferent":"Password & confirm password are different",
             "EmailEmpty":"Please input email",
-            "Agree":"Please agree with user agreement"
+            "Agree":"Please agree with user agreement",
+            "SubNameEmpty":"Please input name",
+            "SubDescEmpty":"Please input description"
         }
     },
 

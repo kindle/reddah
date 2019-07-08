@@ -15,13 +15,14 @@
 
     "Register":{
       "Title":"레지스터",
+      "TitleSub":"注册订阅号",
       "ReadAgree":"너 읽는 것에:",
       "UserAgreement":"사용자 협의,",
       "Privacy":"보안 정책",
       "And":"&",
       "Content":"내용 정책",
       "Loading":"레지스터...",
-      "Register.Success":"등록이 성공했으니, 메일박스를 검증한 후 로그인..."
+      "Success":"등록이 성공했으니, 메일박스를 검증한 후 로그인..."
     },
 
     "Input":{
@@ -29,12 +30,16 @@
       "Password": "비밀번호",
       "ConfirmPassword": "비밀번호 확인",
       "Email": "전자 우편",
+      "Name":"名称",
+      "Description":"描述",
       "Error":{
         "UserNameEmpty":"사용자 이름을 입력하십시오",
         "PasswordEmpty":"암호를 입력하십시오",
         "PasswordDifferent":"암호가 일치하지 않다",
         "EmailEmpty":"입력하십시오. 전자 우편",
-        "Agree":"사용자 협의 좀 동의한다"
+        "Agree":"사용자 협의 좀 동의한다",
+        "SubNameEmpty":"请输入名称",
+        "SubDescEmpty":"请输入描述"
       }
     },
 

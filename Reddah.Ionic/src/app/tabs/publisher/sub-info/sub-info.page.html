@@ -1,0 +1,41 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-label>基本信息</ion-label>
+</ion-item>
+<ion-content no-padding>
+    <div>
+        <ion-item (click)="changePhoto()" class="borderTop borderItem">
+            <ion-label class="title">Logo</ion-label>
+            <ion-thumbnail slot="end" style="padding:10px;margin-right:-10px;">
+                <img src="{{reddah.appData('userphoto_'+targetUserName)}}" class="portrait">
+            </ion-thumbnail>
+            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item (click)="changeNickName()">
+            <ion-label class="title">名称</ion-label>
+            <ion-note color="dark" slot="end">{{reddah.appData('usernickname_'+targetUserName)}}</ion-note>
+            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
+        <!--
+        <ion-item>
+            <ion-label class="title">Reddah ID</ion-label>
+            <ion-note slot="end" class="reddahId">{{targetUserName}}</ion-note>
+        </ion-item>
+        <ion-item lines="none" (click)="myQrCard()" class="borderItem borderBottom">
+            <ion-label class="title">二维码名片</ion-label>
+            <ion-icon name="ios-qr-scanner" slot="end"></ion-icon>
+            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
+        -->
+    </div>
+
+    <div class="gap lastGap">
+        <ion-item lines="none" class="borderTop borderItem" (click)="changeSignature()">
+            <ion-label class="title">描述</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
+        <ion-item lines="none" class="borderItem borderBottom">
+            <ion-note slot="start" color="dark" text-wrap>{{reddah.appData('usersignature_'+targetUserName)}}</ion-note>
+        </ion-item>
+    </div>
+</ion-content>

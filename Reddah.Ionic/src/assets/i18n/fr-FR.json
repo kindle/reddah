@@ -15,13 +15,14 @@
 
     "Register":{
       "Title":"Registre",
+      "TitleSub":"注册订阅号",
       "ReadAgree":"Vous avez lu et approuvé:",
       "UserAgreement":"Entente d'utilisation,",
       "Privacy":"Politique sur la protection des renseignements personnels",
       "And":"&",
       "Content":"En matière de contenu",
       "Loading":"Registre...",
-      "Register.Success":"S'il vous plaît vérifier l'enregistrement..."
+      "Success":"S'il vous plaît vérifier l'enregistrement..."
     },
 
     "Input":{
@@ -29,12 +30,16 @@
       "Password": "mot de passe",
       "ConfirmPassword": "Confirmer mot de passe",
       "Email": "Courriel",
+      "Name":"名称",
+      "Description":"描述",
       "Error":{
         "UserNameEmpty":"Veuillez entrer le nom d'utilisateur",
         "PasswordEmpty":"Veuillez entrer votre mot de passe",
         "PasswordDifferent":"Incohérence du mot de passe",
         "EmailEmpty":"Veuillez entrer courriel",
-        "Agree":"Veuillez accepter avec accord de l'utilisateur"
+        "Agree":"Veuillez accepter avec accord de l'utilisateur",
+        "SubNameEmpty":"请输入名称",
+        "SubDescEmpty":"请输入描述"
       }
     },
 

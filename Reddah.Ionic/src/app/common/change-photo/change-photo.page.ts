@@ -15,6 +15,7 @@ export class ChangePhotoPage implements OnInit {
 
     @Input() title: string;
     @Input() tag: string;
+    @Input() targetUserName: string;
     formData = new FormData();
 
     constructor(
@@ -27,7 +28,7 @@ export class ChangePhotoPage implements OnInit {
         ) { }
 
     async ngOnInit() {
-        
+        this.formData.append("targetUserName", this.targetUserName);
     }
 
     async close() {

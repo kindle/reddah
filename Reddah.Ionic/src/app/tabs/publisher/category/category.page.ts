@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { RegisterSubPage } from '../register-sub/register-sub.page';
 
 @Component({
   selector: 'app-category',
@@ -45,6 +46,18 @@ export class CategoryPage implements OnInit {
         if(type==1){
             //subscriber
             //open register sub
+            const modal = await this.modalController.create({
+                component: RegisterSubPage
+            });
+              
+            await modal.present();
+            const { data } = await modal.onDidDismiss();
+            if(data){
+
+            }
+            else{
+                
+            }
         }
         else if(type=2){
             //service

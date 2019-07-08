@@ -13,10 +13,11 @@ import { ReddahService } from '../../reddah.service';
 export class SettingSignaturePage implements OnInit {
 
     @Input() currentSignature;
+    @Input() targetUserName;
+    @Input() title;
 
     submitClicked = false;
         
-    userName;
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
@@ -25,7 +26,6 @@ export class SettingSignaturePage implements OnInit {
         public authService: AuthService,
         private toastController: ToastController,
     ) {
-        this.userName = this.reddah.getCurrentUser();
     }
 
     ngOnInit() {}
@@ -39,12 +39,13 @@ export class SettingSignaturePage implements OnInit {
         
         let formData = new FormData();
         formData.append("targetSignature", this.currentSignature);
+        formData.append("targetUserName", this.targetUserName);
         
         this.reddah.changeSignature(formData)
         .subscribe(result => 
         {
             if(result.Success==0){
-                this.localStorageService.store('usersignature_'+this.userName, this.currentSignature);
+                this.localStorageService.store('usersignature_'+this.targetUserName, this.currentSignature);
                 this.modalController.dismiss(true);
             }
             else

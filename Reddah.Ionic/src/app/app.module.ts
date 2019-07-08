@@ -112,6 +112,9 @@ import { SettingSignaturePage } from './settings/setting-signature/setting-signa
 import { SettingFontPage } from './settings/setting-font/setting-font.page';
 import { ShareArticleComponent } from './common/share-article/share-article.component';
 import { CategoryPage } from './tabs/publisher/category/category.page';
+import { RegisterSubPage } from './tabs/publisher/register-sub/register-sub.page';
+import { ManagePage } from './tabs/publisher/manage/manage.page';
+import { SubInfoPage } from './tabs/publisher/sub-info/sub-info.page';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -183,7 +186,8 @@ var firebaseConfig = {
         SettingPrivacyPage,
         RegisterPage,
         SettingNickNamePage,SettingSignaturePage,
-        CategoryPage,
+
+        CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,
     ],
     entryComponents: [
         BookmarkPage,
@@ -235,7 +239,8 @@ var firebaseConfig = {
         SettingPrivacyPage,
         RegisterPage,
         SettingNickNamePage,SettingSignaturePage,
-        CategoryPage,
+
+        CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,
     ],
     imports: [
         BrowserModule, 
