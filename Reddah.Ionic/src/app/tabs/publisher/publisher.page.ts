@@ -9,6 +9,8 @@ import { CacheService } from 'ionic-cache';
 import { UserPage } from '../../common/user/user.page';
 import { ChangeNoteNamePopPage } from '../../common/change-notename-pop.page';
 import { ChatChooseGroupPage } from '../../chat/chat-choose-group/chat-choose-group.page';
+import { SearchPage } from '../../common/search/search.page';
+import { CategoryPage } from './category/category.page';
 
 @Component({
     selector: 'app-publisher',
@@ -140,12 +142,7 @@ export class PublisherPage {
         }
     }
 
-    async goChooseGroupChat(){
-        const modal = await this.modalController.create({
-            component: ChatChooseGroupPage
-        });
-        await modal.present();
-    }
+    
 
     async goUser(userName){
         const modal = await this.modalController.create({
@@ -187,5 +184,31 @@ export class PublisherPage {
             this.loadRequests();
             this.loadData();
         }
+    }
+
+    async goLocalSearch(){
+        // filter contact list
+    }
+
+    async goSearch(){
+        const userModal = await this.modalController.create({
+            component: SearchPage,
+            componentProps: {
+                type: 3,//publisher only
+            }
+        });
+          
+        await userModal.present();
+    }
+
+    async close(){
+        await this.modalController.dismiss();
+    }
+
+    async goApply(){
+        const modal = await this.modalController.create({
+            component: CategoryPage
+        });
+        await modal.present();
     }
 }

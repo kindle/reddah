@@ -24,15 +24,16 @@ export class SearchPage implements OnInit {
 
     showTopic=true;
     selectedTopicId=0;
+    keywordPlaceholder = "搜索";
 
     topics = [
         [{id:1,name:'文章'},{id:2,name:'朋友圈'},{id:3,name:'好友'}],
         [{id:4,name:'公众号'},{id:5,name:'小程序'},{id:6,name:'股票'}],
     ];
 
-    chooseTopic(col, isSetFocus=true){
+    async chooseTopic(col, isSetFocus=true){
         this.showTopic = false;
-        this.searchKeyword.placeholder += col.name;
+        this.keywordPlaceholder += col.name;
         this.selectedTopicId = col.id;
         if(isSetFocus){
             setTimeout(() => {
@@ -58,20 +59,28 @@ export class SearchPage implements OnInit {
     firstLoading_t = false;
 
     async ngOnInit() {
-        if(this.key&&this.type!=-1){//come from clicking article label
-            this.chooseTopic([].concat.apply([],this.topics)[this.type], false);
-            this.searchKeyword.value = this.key;
-            this.search();
+        if(this.type&&this.type!=-1){//from clicking article label, search publisher
+            if(this.key){
+                this.chooseTopic([].concat.apply([],this.topics)[this.type], false);
+                this.searchKeyword.value = this.key;
+                this.search();
+            }
+            else{
+                this.chooseTopic([].concat.apply([],this.topics)[this.type]);
+            }
+        }        
+        else{//come from search user 404 this.type==-1
+            if(this.key){
+                this.searchKeyword.value = this.key;
+                this.search();
+            }
+            else{
+                setTimeout(() => {
+                    this.searchKeyword.setFocus();
+                },150);
+            }
         }
-        else if(this.type==-1){//come from search user 404
-            this.searchKeyword.value = this.key;
-            this.search();
-        }
-        else{
-            setTimeout(() => {
-                this.searchKeyword.setFocus();
-            },150);
-        }
+        
     }
 
     async more(type){
@@ -102,6 +111,14 @@ export class SearchPage implements OnInit {
             this.loadedIds_t=[];
             this.articles_t=[];
             this.searchTimelines(null);
+        }
+        else if(this.selectedTopicId==3)//friend
+        {
+            alert('todo')
+        }
+        else if(this.selectedTopicId==4)//publisher
+        {
+            alert('todo')
         }
         else if(this.selectedTopicId==6)//stock chart
         {

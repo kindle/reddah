@@ -1,13 +1,13 @@
 <ion-item no-padding lines="none" color="light">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-label>{{ "Menu.Publisher" | translate }}</ion-label>
-    <ion-icon name="ios-search" slot="end" (click)="goSearch()" margin-end></ion-icon>
+    <ion-icon name="ios-search" slot="end" (click)="goLocalSearch()" margin-end></ion-icon>
     <ion-icon name="add" slot="end" (click)="goSearch()"></ion-icon>
 </ion-item>
 <ion-content>
-    <ion-item (click)="goChooseGroupChat()">
+    <ion-item (click)="goApply()">
         <ion-icon name="ios-person" slot="start" color="tertiary" class="portrait publicPoster"></ion-icon>
-        <ion-label style="margin-left:10px;">注册公众号</ion-label>
+        <ion-label style="margin-left:10px;">申请公众号</ion-label>
     </ion-item>
     <ion-spinner name="dots" *ngIf="showLoading"></ion-spinner>
     <ion-list>

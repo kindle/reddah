@@ -1,7 +1,7 @@
 
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-input placeholder="搜索" #searchKeyword clearInput (keyup.enter)="search()"></ion-input>
+    <ion-input placeholder="{{keywordPlaceholder}}" #searchKeyword clearInput (keyup.enter)="search()"></ion-input>
 </ion-item>
 <ion-content no-padding style="background-color: white;" #searchResult>
     <ion-grid *ngIf="showTopic">

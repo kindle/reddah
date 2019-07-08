@@ -77,6 +77,9 @@ alter table [dbo].[Comment] add
 alter table article add 
   [Ref] int default 0
 
-
+--20190708
+alter table [dbo].[UserProfile] add
+  [Type] INT default 0 NOT NULL,  --0 normal user, 1 subscriber, 2 service
+  [limit] INT default 1 NOT NULL  --default limit 1 post per day
 
         

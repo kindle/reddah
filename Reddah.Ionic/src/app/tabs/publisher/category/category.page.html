@@ -1,0 +1,36 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-text>帐号分类</ion-text>
+</ion-item>
+<ion-content no-padding>
+    <ion-item (click)="chooseCategory(1)">
+        <ion-icon name="ios-list" slot="start" color="tertiary" class="portrait sub"></ion-icon>
+        <ion-label style="margin-left:10px;">
+            订阅号
+            <br>
+            <ion-note text-wrap>
+                为媒体和个人提供一种新的信息传播方式，构建与读者之间更好的沟通与管理模式。
+            </ion-note>
+        </ion-label>
+    </ion-item>
+    <ion-item (click)="chooseCategory(2)">
+        <ion-icon name="ios-person" slot="start" color="tertiary" class="portrait service"></ion-icon>
+        <ion-label style="margin-left:10px;">
+            服务号(暂未开通)
+            <br>
+            <ion-note text-wrap>
+                给企业和组织提供更强大的业务服务与用户管理能力，帮助企业快速实现全新的公众号服务平台。
+            </ion-note>
+        </ion-label>
+    </ion-item>
+    <ion-item (click)="chooseCategory(3)">
+        <ion-icon name="infinite" slot="start" color="tertiary" class="portrait mini"></ion-icon>
+        <ion-label style="margin-left:10px;">
+            小程序(暂未开通)
+            <br>
+            <ion-note text-wrap>
+                一种新的开放能力，可以在微信内被便捷地获取和传播，同时具有出色的使用体验。
+            </ion-note>
+        </ion-label>
+    </ion-item>
+</ion-content>
