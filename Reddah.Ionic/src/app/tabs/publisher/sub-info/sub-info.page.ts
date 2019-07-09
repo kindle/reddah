@@ -74,8 +74,10 @@ export class SubInfoPage implements OnInit {
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
-        if(data||!data)
+        if(data){
             this.reddah.getUserPhotos(this.targetUserName);
+        }
+        this.changed = data;
     }
 
     async changeSignature(){
@@ -89,8 +91,10 @@ export class SubInfoPage implements OnInit {
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
-        if(data||!data)
+        if(data){
             this.reddah.getUserPhotos(this.targetUserName);
+        }
+        this.changed = data;
     }
 
 }

@@ -39,7 +39,7 @@ export class SettingSignaturePage implements OnInit {
         
         let formData = new FormData();
         formData.append("targetSignature", this.currentSignature);
-        formData.append("targetUserName", this.targetUserName);
+        formData.append("targetUserName", this.targetUserName?this.targetUserName:"");
         
         this.reddah.changeSignature(formData)
         .subscribe(result => 

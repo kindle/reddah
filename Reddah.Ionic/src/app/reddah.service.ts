@@ -39,7 +39,7 @@ export class ReddahService {
     ) { }
 
     //******************************** */
-    private registersubUrl = 'https://login.reddah.com/api/auth/registersub'; 
+    private registersubUrl = 'https://login.reddah.com/api/pub/registersub'; 
     
     registerSub(formData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -290,7 +290,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private subsUrl = 'https://login.reddah.com/api/article/subs'; 
+    private subsUrl = 'https://login.reddah.com/api/pub/subs'; 
 
     getSubs(): Observable<any> {
         let formData = new FormData();
@@ -479,6 +479,20 @@ export class ReddahService {
         new Locale("ko-KR", "대한민국(Korea)"),
         new Locale("en-US", "English(US)"),
     ];
+
+    private publisherUrl = 'https://login.reddah.com/api/pub/getpublisher'; 
+    
+    getPublishers(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.publisherUrl, formData)
+        .pipe(
+            tap(data => this.log('fetched publishers')),
+            catchError(this.handleError('getReddah publishers', []))
+        );
+    }
+    //******************************** */
+
   
     private articlesUrl = 'https://reddah.com/api/webapi/getarticles'; 
     private userProfileModel: UserProfileModel;

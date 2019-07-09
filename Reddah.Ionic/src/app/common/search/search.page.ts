@@ -27,8 +27,8 @@ export class SearchPage implements OnInit {
     keywordPlaceholder = "搜索";
 
     topics = [
-        [{id:1,name:'文章'},{id:2,name:'朋友圈'},{id:3,name:'好友'}],
-        [{id:4,name:'公众号'},{id:5,name:'小程序'},{id:6,name:'股票'}],
+        [{id:1,name:'文章'},{id:2,name:'朋友圈'},{id:3,name:'公众号'}],
+        [{id:4,name:'小程序'},{id:6,name:'聊天记录'},{id:6,name:'股票'}],
     ];
 
     async chooseTopic(col, isSetFocus=true){
@@ -57,6 +57,7 @@ export class SearchPage implements OnInit {
 
     firstLoading_a = false;
     firstLoading_t = false;
+    firstLoading_p = false;
 
     async ngOnInit() {
         if(this.type&&this.type!=-1){//from clicking article label, search publisher
@@ -107,16 +108,23 @@ export class SearchPage implements OnInit {
         }
         else if(this.selectedTopicId==2)//timeline
         {
-            this.firstLoading_t = false;
+            this.firstLoading_t = true;
             this.loadedIds_t=[];
             this.articles_t=[];
             this.searchTimelines(null);
         }
-        else if(this.selectedTopicId==3)//friend
+        else if(this.selectedTopicId==3)//publisher
+        {
+            this.firstLoading_p = true;
+            this.loadedIds_p=[];
+            this.users_p=[];
+            this.searchPublisher(null);
+        }
+        else if(this.selectedTopicId==4)//mini
         {
             alert('todo')
         }
-        else if(this.selectedTopicId==4)//publisher
+        else if(this.selectedTopicId==4)//chat
         {
             alert('todo')
         }
@@ -192,6 +200,36 @@ export class SearchPage implements OnInit {
             if(event)
                 event.target.complete();
             this.firstLoading_t = false;
+        });
+    }
+
+    loadedIds_p=[];
+    users_p=[];
+    async searchPublisher(event, limit=10000){
+        
+        let cacheKey = "this.reddah.searchPublisher" + JSON.stringify(this.loadedIds_p) + this.locale + "search_publisher"+this.searchKeyword.value;
+        let formData = new FormData();
+        formData.append("key", this.searchKeyword.value);
+        formData.append("loadedIds", JSON.stringify(this.loadedIds_p));
+        let request = this.reddah.getPublishers(formData);
+        
+        this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
+        .subscribe(pubs => 
+        {
+            let i=0;
+            for(let pub of pubs){
+                if(i<limit)
+                {
+                    this.users_p.push(pub);
+                    this.loadedIds_p.push(pub.UserId);  
+                    i++;
+                }
+                else
+                    break;
+            }
+            if(event)
+                event.target.complete();
+            this.firstLoading_p = false;
         });
     }
 

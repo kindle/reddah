@@ -25,6 +25,10 @@ namespace Reddah.Web.Login.Controllers
     [RoutePrefix("api/auth")]
     public class AuthController : ApiBaseController
     {
+        /// <summary>
+        /// register normal personal account type==0
+        /// </summary>
+        /// <returns></returns>
         [Route("register")]
         public IHttpActionResult Register()
         {
@@ -137,7 +141,7 @@ namespace Reddah.Web.Login.Controllers
                 {
                     using (var db = new reddahEntities())
                     {
-                        var userExist = db.UserProfile.FirstOrDefault(u => u.UserName == user.UserName);
+                        var userExist = db.UserProfile.FirstOrDefault(u => u.UserName == user.UserName && u.Type==0);
                         if (userExist != null)
                         {
                             var mem = db.webpages_Membership.FirstOrDefault(m => m.UserId == userExist.UserId);

@@ -629,6 +629,7 @@ namespace Reddah.Web.Login.Controllers
             {
                 string jwt = HttpContext.Current.Request["jwt"];
                 string targetSignature = HttpContext.Current.Request["targetSignature"];
+                string targetUserName = HttpContext.Current.Request["targetUserName"];
 
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
@@ -640,9 +641,32 @@ namespace Reddah.Web.Login.Controllers
 
                 using (var db = new reddahEntities())
                 {
-                    var target = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
-                    target.Signature = targetSignature;
-                    db.SaveChanges();
+                    if (!string.IsNullOrWhiteSpace(targetUserName))
+                    {
+                        var target = db.UserProfile.FirstOrDefault(u => u.UserName == targetUserName && u.Type == 1
+                            && (u.CreatedBy == jwtResult.JwtUser.User ||
+                                (u.Admins.StartsWith(jwtResult.JwtUser.User + ",") ||
+                                        u.Admins.Contains("," + jwtResult.JwtUser.User + ",") ||
+                                        u.Admins.EndsWith("," + jwtResult.JwtUser.User))
+                         ));
+
+                        if (target != null)
+                        {
+                            target.Signature = targetSignature;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            return Ok(new ApiResult(2, "Can't perform this action:target:" + targetUserName + "current:" + jwtResult.JwtUser.User));
+                        }
+                    }
+                    else
+                    {
+                        var target = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+                        target.Signature = targetSignature;
+                        db.SaveChanges();
+                    }
+                    
 
                     return Ok(new ApiResult(0, "success"));
                 }
@@ -663,6 +687,7 @@ namespace Reddah.Web.Login.Controllers
             {
                 string jwt = HttpContext.Current.Request["jwt"];
                 string targetNickName = HttpContext.Current.Request["targetNickName"];
+                string targetUserName = HttpContext.Current.Request["targetUserName"];
 
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
@@ -674,9 +699,33 @@ namespace Reddah.Web.Login.Controllers
 
                 using (var db = new reddahEntities())
                 {
-                    var target = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
-                    target.NickName = targetNickName;
-                    db.SaveChanges();
+                    if (!string.IsNullOrWhiteSpace(targetUserName))
+                    {
+                        var target = db.UserProfile.FirstOrDefault(u => u.UserName == targetUserName && u.Type == 1
+                            && (u.CreatedBy == jwtResult.JwtUser.User ||
+                                (u.Admins.StartsWith(jwtResult.JwtUser.User + ",") ||
+                                        u.Admins.Contains("," + jwtResult.JwtUser.User + ",") ||
+                                        u.Admins.EndsWith("," + jwtResult.JwtUser.User))
+                         ));
+
+                        if (target != null)
+                        {
+                            target.NickName = targetNickName;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            return Ok(new ApiResult(2, "Can't perform this action:target:"+targetNickName+"current:"+jwtResult.JwtUser.User));
+                        }
+
+                        
+                    }
+                    else
+                    {
+                        var target = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+                        target.NickName = targetNickName;
+                        db.SaveChanges();
+                    }
 
                     return Ok(new ApiResult(0, "success"));
                 }
@@ -960,6 +1009,8 @@ namespace Reddah.Web.Login.Controllers
             {
                 string jwt = HttpContext.Current.Request["jwt"];
                 string tag = HttpContext.Current.Request["tag"];//cover|portrait
+                string targetUserName = HttpContext.Current.Request["targetUserName"];
+
                 List<string> imageUrls = new List<string>();
 
                 HttpFileCollection hfc = HttpContext.Current.Request.Files;
@@ -1019,21 +1070,49 @@ namespace Reddah.Web.Login.Controllers
                             }
                         }
 
-
-                        //update user info
-                        UserProfile user = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
-                        if (tag.Equals("cover", StringComparison.InvariantCultureIgnoreCase))
+                        if (!string.IsNullOrWhiteSpace(targetUserName))
                         {
-                            user.Cover = string.Format("///login.reddah.com/uploadPhoto/{0}", fileName);
+                            var target = db.UserProfile.FirstOrDefault(u => u.UserName == targetUserName && u.Type == 1
+                                && (u.CreatedBy == jwtResult.JwtUser.User ||
+                                    (u.Admins.StartsWith(jwtResult.JwtUser.User + ",") ||
+                                            u.Admins.Contains("," + jwtResult.JwtUser.User + ",") ||
+                                            u.Admins.EndsWith("," + jwtResult.JwtUser.User))
+                             ));
+
+                            if (target != null)
+                            {
+                                if (tag.Equals("cover", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    target.Cover = string.Format("///login.reddah.com/uploadPhoto/{0}", fileName);
+                                }
+                                else
+                                {
+                                    //portrait
+                                    target.Photo = string.Format("///login.reddah.com/uploadPhoto/{0}", fileName);
+                                }
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                return Ok(new ApiResult(2, "Can't perform this action:target:" + targetUserName + "current:" + jwtResult.JwtUser.User));
+                            }
                         }
                         else
                         {
-                            //portrait
-                            user.Photo = string.Format("///login.reddah.com/uploadPhoto/{0}", fileName);
+                            var target = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+                            if (tag.Equals("cover", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                target.Cover = string.Format("///login.reddah.com/uploadPhoto/{0}", fileName);
+                            }
+                            else
+                            {
+                                //portrait
+                                target.Photo = string.Format("///login.reddah.com/uploadPhoto/{0}", fileName);
+                            }
+
+                            db.SaveChanges();
                         }
-
-                        db.SaveChanges();
-
+            
                     }
                 }
                 catch (Exception ex)

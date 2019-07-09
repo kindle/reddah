@@ -82,4 +82,8 @@ alter table [dbo].[UserProfile] add
   [Type] INT default 0 NOT NULL,  --0 normal user, 1 subscriber, 2 service
   [limit] INT default 1 NOT NULL  --default limit 1 post per day
 
+alter table [dbo].[UserProfile] add
+  [CreatedBy] NVARCHAR (MAX) NULL, 
+  [Admins] NVARCHAR (MAX) NULL 
+
         

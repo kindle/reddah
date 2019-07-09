@@ -40,7 +40,7 @@ export class SettingNickNamePage implements OnInit {
         
         let formData = new FormData();
         formData.append("targetNickName", this.currentNickName);
-        formData.append("targetUserName", this.targetUserName);
+        formData.append("targetUserName", this.targetUserName?this.targetUserName:"");
         
         this.reddah.changeNickName(formData)
         .subscribe(result => 

@@ -10,7 +10,7 @@
         <div style="width:100%;border: 0px solid red;">
             <ion-card-header no-padding class="articleUserName">
                 <ion-card-title>
-                    <div class="user-name" [innerHTML]="reddah.htmlDecode(article.UserName)" (click)="goUser(article.UserName)"></div>
+                    <div class="user-name" [innerHTML]="reddah.getDisplayName(article.UserName)" (click)="goUser(article.UserName)"></div>
                 </ion-card-title>
             </ion-card-header>
             <div [innerHTML]="reddah.htmlDecode(article.Title)"></div>
@@ -38,7 +38,7 @@
             </ion-card-content>
             
             <ion-item no-padding lines="none">
-                <ion-note color="dark">{{article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss'}}</ion-note>
+                <ion-note color="dark">{{(article.CreatedOnOrg?article.CreatedOnOrg:article.CreatedOn)| date: 'yyyy-MM-dd HH:mm:ss'}}</ion-note>
                 <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
             </ion-item>
         </div>
