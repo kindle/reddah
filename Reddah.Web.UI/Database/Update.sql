@@ -86,4 +86,5 @@ alter table [dbo].[UserProfile] add
   [CreatedBy] NVARCHAR (MAX) NULL, 
   [Admins] NVARCHAR (MAX) NULL 
 
-        
+alter table article add
+  [Location] NVARCHAR(MAX) NULL

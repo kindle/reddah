@@ -142,7 +142,7 @@ export class AddTimelinePage implements OnInit {
     dragging = false;
     dragToDel = false;
     yourThoughts: string = "";
-    location = "";
+    location;
     formData = new FormData();
 
     async submit(){
@@ -153,7 +153,7 @@ export class AddTimelinePage implements OnInit {
         await loading.present();
         
         this.formData.append('thoughts', this.yourThoughts);
-        this.formData.append('location', this.location);
+        this.formData.append('location', JSON.stringify(this.location));
         //send the key in UI display order
         this.formData.append('order', this.photos.map(e=>e.fileUrl).join(","));
         this.formData.append('type', JSON.stringify(1));//feedback:9, normal:0, timeline:1
@@ -376,7 +376,7 @@ export class AddTimelinePage implements OnInit {
         await modal.present();
         const { data } = await modal.onDidDismiss();
         if(data){
-            
+            this.location = data;
         }
     }
 }

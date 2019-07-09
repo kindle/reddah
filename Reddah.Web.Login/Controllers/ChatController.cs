@@ -23,6 +23,7 @@ namespace Reddah.Web.Login.Controllers
     /// 2 two chat
     /// 3 group chat 
     /// 4 feedback
+    /// 22 two chat pub
     /// </summary>
     [RoutePrefix("api/chat")]
     public class ChatController : ApiBaseController
@@ -63,7 +64,7 @@ namespace Reddah.Web.Login.Controllers
                         existingChat.Type = 2;
                         existingChat.GroupName = targetUser + "," + jwtResult.JwtUser.User;
 
-                        existingChat.CreatedOn = DateTime.Now;
+                        existingChat.CreatedOn = DateTime.UtcNow;
                         existingChat.UserName = jwtResult.JwtUser.User;
                         existingChat.Title = "chat";
                         existingChat.Content = "chat";
@@ -136,7 +137,7 @@ namespace Reddah.Web.Login.Controllers
                     //group members
                     newGroupChat.GroupName = jwtResult.JwtUser.User + "," + string.Join(",", targetUsers);
                     
-                    newGroupChat.CreatedOn = DateTime.Now;
+                    newGroupChat.CreatedOn = DateTime.UtcNow;
                     newGroupChat.UserName = jwtResult.JwtUser.User; //group creator
                     newGroupChat.Title = "群聊"; //group title
                     newGroupChat.Content = "群公告"; //group anouncement

@@ -11,6 +11,7 @@ import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.com
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleTextPopPage } from '../../common/article-text-pop.page'
+import { LocationPage } from '../../common/location/location.page';
 
 @Component({
     selector: 'app-tsviewer',
@@ -265,5 +266,13 @@ export class TsViewerPage implements OnInit {
     async close(){
         await this.modalController.dismiss();
     }
-
+    
+    async goLocation(location){
+        const modal = await this.modalController.create({
+            component: LocationPage,
+            componentProps: { location: JSON.parse(location) }
+        });
+    
+        await modal.present();
+    }
 }

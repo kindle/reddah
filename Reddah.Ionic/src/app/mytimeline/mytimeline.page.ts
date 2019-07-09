@@ -16,6 +16,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { MessagePage } from '../mytimeline/message/message.page'
+import { LocationPage } from '../common/location/location.page';
 
 @Component({
     selector: 'app-mytimeline',
@@ -435,5 +436,14 @@ export class MyTimeLinePage implements OnInit {
         const { data } = await popover.onDidDismiss();
         if(data)
             this.reddah.getUserPhotos(this.userName, true);
+    }
+
+    async goLocation(location){
+        const modal = await this.modalController.create({
+            component: LocationPage,
+            componentProps: { location: JSON.parse(location) }
+        });
+    
+        await modal.present();
     }
 }

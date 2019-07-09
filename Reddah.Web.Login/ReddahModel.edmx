@@ -23,6 +23,7 @@
           <Property Name="LastUpdateOn" Type="datetime" />
           <Property Name="Type" Type="int" />
           <Property Name="Ref" Type="int" />
+          <Property Name="Location" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -258,6 +259,7 @@
           <Property Name="LastUpdateOn" Type="DateTime" Precision="3" />
           <Property Name="Type" Type="Int32" />
           <Property Name="Ref" Type="Int32" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -441,6 +443,7 @@
           <EntitySetMapping Name="Article">
             <EntityTypeMapping TypeName="reddahModel.Article">
               <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="Ref" ColumnName="Ref" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="LastUpdateOn" ColumnName="LastUpdateOn" />

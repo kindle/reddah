@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
-import { InfiniteScroll } from '@ionic/angular';
+import { InfiniteScroll, Platform } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, PopoverController, ActionSheetController  } from '@ionic/angular';
@@ -18,7 +18,8 @@ import L from 'leaflet-search';
   styleUrls: ['location.page.scss']
 })
 export class LocationPage implements OnInit {
-    
+    @Input() location;
+
     async close(){
         await this.modalController.dismiss();
     }
@@ -39,6 +40,7 @@ export class LocationPage implements OnInit {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         public actionSheetController: ActionSheetController,
+        private platform: Platform,
         ){
         
     }
@@ -50,7 +52,13 @@ export class LocationPage implements OnInit {
     }
 
     ionViewDidEnter() {
+        
         this.loadmap();
+
+        if(this.platform.is('cordova')&&this.location){
+            this.setLocation(this.location);
+        }
+        
     }
     
     markerGroup;
@@ -63,35 +71,37 @@ export class LocationPage implements OnInit {
             maxZoom: 18
         }).addTo(this.map);
 
-        this.map.locate({
-            setView: true, 
-            maxZoom: 10
-        }).on('locationfound', (e) => {
-            let marker = leaflet.marker([e.latitude, e.longitude]).on('click', () => {});
+        if(!this.location)
+        {
+            this.map.locate({
+                setView: true, 
+                maxZoom: 10
+            }).on('locationfound', (e) => {
+                let marker = leaflet.marker([e.latitude, e.longitude]).on('click', () => {});
 
-            this.markerGroup.addLayer(marker);
-            this.map.addLayer(this.markerGroup);
+                this.markerGroup.addLayer(marker);
+                this.map.addLayer(this.markerGroup);
 
-            //add search
-            /*var controlSearch = new L.Control.Search({
-                position:'topright',		
-                layer: marker,
-                initial: false,
-                zoom: 12,
-                marker: false
-            });
-            this.map.addControl( controlSearch );*/
+                //add search
+                /*var controlSearch = new L.Control.Search({
+                    position:'topright',		
+                    layer: marker,
+                    initial: false,
+                    zoom: 12,
+                    marker: false
+                });
+                this.map.addControl( controlSearch );*/
 
-            this.reddah.getNearby(e.latitude, e.longitude).subscribe(data=>{
-                //alert(JSON.stringify(data));
-                //alert(JSON.stringify(data._body.result.pois));
-                this.locations = data._body.result.pois;
-            });
+                this.reddah.getNearby(e.latitude, e.longitude).subscribe(data=>{
+                    //alert(JSON.stringify(data));
+                    //alert(JSON.stringify(data._body.result.pois));
+                    this.locations = data._body.result.pois;
+                });
 
-        }).on('locationerror', (err) => {
-            alert(err.message);
-        })
-
+            }).on('locationerror', (err) => {
+                alert(err.message);
+            })
+        }
         //var searchLayer = L.layerGroup().addTo(this.map);
         //... adding data in searchLayer ...
         //this.map.addControl( new L.Control.Search({layer: searchLayer}) );
@@ -120,7 +130,7 @@ export class LocationPage implements OnInit {
     }
 
     async confirm(){
-        this.modalController.dismiss({name: this.selectedItem.title, lat: this.selectedItem.location.lat, lng: this.selectedItem.location.lng});
+        this.modalController.dismiss(this.selectedItem);
     }
 
 }

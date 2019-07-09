@@ -28,5 +28,6 @@ namespace Reddah.Web.Login
         public Nullable<System.DateTime> LastUpdateOn { get; set; }
         public Nullable<int> Type { get; set; }
         public Nullable<int> Ref { get; set; }
+        public string Location { get; set; }
     }
 }

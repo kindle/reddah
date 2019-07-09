@@ -209,6 +209,164 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("getfocus")]
+        [HttpPost]
+        public IHttpActionResult getFocus()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string targetUser = HttpContext.Current.Request["targetUser"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    //if chat not exist, create one
+
+                    Article existingChat = db.Article.FirstOrDefault(a => (a.Type == 22 ||a.Type==220) &&
+                        (a.GroupName.StartsWith(targetUser + ",") ||
+                        a.GroupName.EndsWith("," + targetUser))
+                        &&
+                        (a.GroupName.StartsWith(jwtResult.JwtUser.User + ",") ||
+                        a.GroupName.EndsWith("," + jwtResult.JwtUser.User))
+                    );
+                    //a.GroupName.Split(',').Contains(targetUser) && a.GroupName.Split(',').Contains(jwtResult.JwtUser.User));
+
+                    if (existingChat == null)
+                    {
+                        existingChat = new Article();
+                        existingChat.Type = 22;
+                        existingChat.GroupName = targetUser + "," + jwtResult.JwtUser.User;
+
+                        existingChat.CreatedOn = DateTime.UtcNow;
+                        existingChat.UserName = jwtResult.JwtUser.User;
+                        existingChat.Title = "chat";
+                        existingChat.Content = "chat";
+                        existingChat.Abstract = "chat";
+                        db.Article.Add(existingChat);
+                        db.SaveChanges();
+                    }
+
+                    //has been unfocus before
+                    if (existingChat.Type == 220)
+                        existingChat.Type = 22;
+
+                    //start loading unread chat messages
+                    int pageCount = 10;
+                    var comments = (from c in db.Comment
+                                    join u in db.UserProfile on c.UserName equals u.UserName
+                                    where c.ArticleId == existingChat.Id
+                                    orderby c.Id descending
+                                    select new AdvancedComment
+                                    {
+                                        Id = c.Id,
+                                        ArticleId = c.ArticleId,
+                                        ParentId = c.ParentId,
+                                        Content = c.Content,
+                                        CreatedOn = c.CreatedOn,
+                                        Up = c.Up,
+                                        Down = c.Down,
+                                        Count = c.Count,
+                                        UserName = c.UserName,
+                                        Status = c.Status,
+                                        UserNickName = u.NickName,
+                                        UserPhoto = u.Photo,
+                                        UserSex = u.Sex,
+                                        Type = c.Type,
+                                        Duration = c.Duration
+                                    }).Take(pageCount).OrderBy(n => n.Id);
+
+                    return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+
+        }
+
+        [Route("unfocus")]
+        [HttpPost]
+        public IHttpActionResult unFocus()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string targetUser = HttpContext.Current.Request["targetUser"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    //if chat not exist, create one
+
+                    Article existingChat = db.Article.FirstOrDefault(a => a.Type == 22 &&
+                        (a.GroupName.StartsWith(targetUser + ",") ||
+                        a.GroupName.EndsWith("," + targetUser))
+                        &&
+                        (a.GroupName.StartsWith(jwtResult.JwtUser.User + ",") ||
+                        a.GroupName.EndsWith("," + jwtResult.JwtUser.User))
+                    );
+
+                    if (existingChat != null)
+                    {
+                        existingChat.Type = 220;
+                        db.SaveChanges();
+                    }
+
+                    //start loading unread chat messages
+                    int pageCount = 10;
+                    var comments = (from c in db.Comment
+                                    join u in db.UserProfile on c.UserName equals u.UserName
+                                    where c.ArticleId == existingChat.Id
+                                    orderby c.Id descending
+                                    select new AdvancedComment
+                                    {
+                                        Id = c.Id,
+                                        ArticleId = c.ArticleId,
+                                        ParentId = c.ParentId,
+                                        Content = c.Content,
+                                        CreatedOn = c.CreatedOn,
+                                        Up = c.Up,
+                                        Down = c.Down,
+                                        Count = c.Count,
+                                        UserName = c.UserName,
+                                        Status = c.Status,
+                                        UserNickName = u.NickName,
+                                        UserPhoto = u.Photo,
+                                        UserSex = u.Sex,
+                                        Type = c.Type,
+                                        Duration = c.Duration
+                                    }).Take(pageCount).OrderBy(n => n.Id);
+
+                    return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+
+        }
+
 
     }
 }

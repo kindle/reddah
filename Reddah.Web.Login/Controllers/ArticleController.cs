@@ -225,7 +225,8 @@ namespace Reddah.Web.Login.Controllers
                             Content = shareImageUrl!=null?shareImageUrl:string.Join("$$$", articleContentList),
                             CreatedOn = DateTime.UtcNow,
                             Count = 0,
-                            GroupName = location,
+                            GroupName = "",
+                            Location = location,
                             UserName = jwtResult.JwtUser.User,
                             Type = type,
                             Ref = refArticleId,
@@ -306,6 +307,7 @@ namespace Reddah.Web.Login.Controllers
                                  LastUpdateOn = b.LastUpdateOn,
                                  Type = b.Type,
                                  Ref = b.Ref,
+                                 Location = b.Location,
                                  UserNickName = u.NickName,
                                  UserPhoto = u.Photo,
                                  UserSex = u.Sex
@@ -701,6 +703,12 @@ namespace Reddah.Web.Login.Controllers
                 {
                     if (!string.IsNullOrWhiteSpace(targetUserName))
                     {
+                        var nickNameExist = db.UserProfile.FirstOrDefault(u => 
+                            (u.NickName == targetNickName || u.NickName.Contains(targetNickName)) 
+                            && u.Type==1);
+                        if (nickNameExist != null)
+                            return Ok(new ApiResult(3, "nickname exist"));
+
                         var target = db.UserProfile.FirstOrDefault(u => u.UserName == targetUserName && u.Type == 1
                             && (u.CreatedBy == jwtResult.JwtUser.User ||
                                 (u.Admins.StartsWith(jwtResult.JwtUser.User + ",") ||

@@ -1185,5 +1185,9 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         this.cacheService.clearGroup("ManageSubsPage");
     }
 
+    getJSON(text){
+        return JSON.parse(text);
+    }
+
 
 }
