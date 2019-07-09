@@ -9,6 +9,8 @@ import { PostviewerPage } from '../../postviewer/postviewer.page';
 import { StockPage } from '../stock/stock.page';
 import { NgOnChangesFeature } from '@angular/core/src/render3';
 import { TsViewerPage } from '../../mytimeline/tsviewer/tsviewer.page';
+import { UserPage } from '../user/user.page';
+import { PubPage } from '../../tabs/publisher/pub/pub.page';
 
 @Component({
     selector: 'app-search',
@@ -280,6 +282,22 @@ export class SearchPage implements OnInit {
         });
         
         await userModal.present();
+    }
+
+    async goPub(userName){
+        const modal = await this.modalController.create({
+            component: PubPage,
+            componentProps: { 
+                userName: userName
+            }
+        });
+          
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data||!data)
+        {
+            
+        }
     }
 
 }

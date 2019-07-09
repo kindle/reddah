@@ -1,0 +1,18 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-icon name="ios-more" slot="end" (click)="presentActionSheet()"></ion-icon>
+</ion-item>
+<ion-content style="background-color:white;">
+    <div style="display: flex;align-items: center;flex-direction: column;padding-top: 30px;">
+        <ion-thumbnail class="userPhoto">
+            <img src="{{reddah.appData('userphoto_'+userName)}}" (click)="viewer(reddah.appData('userphoto_'+userName))" class="portrait">
+        </ion-thumbnail>
+        <ion-label text-wrap style="margin: 20px;font-weight: bold;">{{reddah.appData('usernickname_'+userName)}}</ion-label>
+        <ion-label text-wrap text-center style="margin: 10px;padding: 10px 30px;">{{reddah.appData('usersignature_'+userName)}}</ion-label>
+    
+        <ion-note text-wrap style="margin: 10px 0 40px 0;">{{18}}位朋友关注</ion-note>
+    
+        <span class="user-name" (click)="addFriend()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0">关注公众号</span>
+        <span class="user-name" style="margin: 0 0 20px 0;" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">进入公众号首页 | 取消关注</span>
+    </div>
+</ion-content>

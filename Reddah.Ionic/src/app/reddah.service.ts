@@ -1179,5 +1179,11 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         this.localStorageService.clear("reddah_article_ids");
     }
 
+    async ClearPub(){
+        this.localStorageService.clear("Reddah_GroupedSubs");
+        this.localStorageService.clear("Reddah_Subs");
+        this.cacheService.clearGroup("ManageSubsPage");
+    }
+
 
 }

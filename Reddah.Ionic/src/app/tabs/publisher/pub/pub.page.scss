@@ -1,0 +1,54 @@
+.itemTitle {
+    margin-right: 10px;
+    line-height: 1.5;
+    min-width: 5em;
+}
+
+.portrait{
+    border-radius: 8px;
+}
+
+.gap{
+    padding-top: 10px;
+    background-color: #eeeeee;
+}
+
+.lastGap{
+    padding-bottom: 100%;
+}
+
+.borderTop {
+    border-top: 1px solid #dedede;
+}
+
+.borderBottom {
+    border-bottom: 1px solid #dedede;
+}
+
+.borderItem {
+}
+
+.userInfo { 
+    padding: 2px;
+    margin-left: 10px;
+}
+
+.cmd-title {
+    margin-left: 0.25em;
+}
+
+.userInfo h1 { 
+    padding: 2px;
+    padding-top: 15px;
+    margin-left: 10px;
+}
+
+.userPhoto{
+    padding: 5px;
+    width: 5em;
+    height: 5em;
+}
+
+[text-wrap]{
+    font-size: var(--ion-font-size);
+}

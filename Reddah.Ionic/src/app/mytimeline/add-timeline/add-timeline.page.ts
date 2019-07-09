@@ -374,5 +374,9 @@ export class AddTimelinePage implements OnInit {
         });
     
         await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            
+        }
     }
 }

@@ -119,4 +119,8 @@ export class LocationPage implements OnInit {
         this.map.flyTo([item.location.lat, item.location.lng], 15);
     }
 
+    async confirm(){
+        this.modalController.dismiss({name: this.selectedItem.title, lat: this.selectedItem.location.lat, lng: this.selectedItem.location.lng});
+    }
+
 }

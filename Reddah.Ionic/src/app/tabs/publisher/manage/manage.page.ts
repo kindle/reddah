@@ -118,11 +118,6 @@ export class ManagePage implements OnInit {
         });
     }
 
-    async clear(){
-        this.localStorageService.clear("Reddah_GroupedSubs");
-        this.localStorageService.clear("Reddah_Subs");
-        this.cacheService.clearGroup("ManageSubsPage");
-    }
 
     async subInfo(userName) {
         const myInfoModal = await this.modalController.create({
@@ -136,7 +131,7 @@ export class ManagePage implements OnInit {
         const { data } = await myInfoModal.onDidDismiss();
         //check if change
         if(data||!data){
-            this.clear();
+            this.reddah.ClearPub();
             this.ngOnInit();
             this.reddah.getUserPhotos(userName);
         }

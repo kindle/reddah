@@ -58,6 +58,7 @@ export class RegisterSubPage implements OnInit {
                 loading.dismiss();
                 if(result.Success==0){
                     this.reddah.toast(this.translate.instant("Register.Success"), "primary");
+                    
                     this.modalController.dismiss(true);
                 }
                 else{
