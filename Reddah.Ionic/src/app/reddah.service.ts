@@ -630,8 +630,8 @@ export class ReddahService {
     
     //******************************** */
     getNearby(lat, lon): Observable<any> {
-        let policy = 2;
-        let qqMapApi = `https://apis.map.qq.com/ws/geocoder/v1/?location=${lat},${lon}&output=jsonp&key=ARIBZ-BSK6D-2IL4Y-POZPV-ANU32-CIF56&poi_options=address_format=short;radius=5000;page_size=20;page_index=1;policy=${policy}&get_poi=1`;
+        let policy = 1;
+        let qqMapApi = `https://apis.map.qq.com/ws/geocoder/v1/?location=${lat},${lon}&output=jsonp&key=ARIBZ-BSK6D-2IL4Y-POZPV-ANU32-CIF56&poi_options=address_format=short;radius=5000;page_size=100;page_index=1;policy=${policy}&get_poi=1`;
 
         const searchParams = new URLSearchParams();
         searchParams.append('callback', 'JSONP_CALLBACK');

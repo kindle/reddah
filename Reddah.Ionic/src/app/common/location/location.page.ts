@@ -63,19 +63,35 @@ export class LocationPage implements OnInit {
     
     markerGroup;
     loadmap() {
+        /*let crs = leaflet.Proj.CRS('EPSG:3395',
+              '+proj=merc +lon_0=0 +k=1 +x_0=140 +y_0=-250 +datum=WGS84 +units=m +no_defs',
+        {
+            resolutions: function () {
+                let level = 19
+                var res = [];
+                res[0] = Math.pow(2, 18);
+                for (var i = 1; i < level; i++) {
+                    res[i] = Math.pow(2, (18 - i))
+                }
+                return res;
+            }(),
+            origin: [0, 0],
+            bounds: L.bounds([20037508.342789244, 0], [0, 20037508.342789244])
+        });*/
+
         this.map = leaflet.map("map").fitWorld();
         this.markerGroup = leaflet.featureGroup();
-        
         leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attributions: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
             maxZoom: 18
         }).addTo(this.map);
+        
 
         if(!this.location)
         {
             this.map.locate({
                 setView: true, 
-                maxZoom: 10
+                maxZoom: 15
             }).on('locationfound', (e) => {
                 let marker = leaflet.marker([e.latitude, e.longitude]).on('click', () => {});
 
@@ -124,7 +140,8 @@ export class LocationPage implements OnInit {
         this.flyMaker = leaflet.marker([item.location.lat, item.location.lng]);
         this.markerGroup.clearLayers();
         this.markerGroup.addLayer(this.flyMaker);
-        //this.map.addLayer(this.markerGroup);
+        if(this.location)
+            this.map.addLayer(this.markerGroup);
 
         this.map.flyTo([item.location.lat, item.location.lng], 15);
     }

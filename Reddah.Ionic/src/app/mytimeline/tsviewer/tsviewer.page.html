@@ -37,8 +37,7 @@
                 </div>
             </ion-card-content>
             <ion-item no-padding lines="none" style="margin-top:5px;" *ngIf="article.Location" (click)="goLocation(article.Location)">
-                <ion-icon name="pin" color="primary" slot="start"></ion-icon>
-                <ion-note color="dark">{{reddah.getJSON(article.Location).title}}</ion-note>
+                <ion-note color="secondary">{{reddah.getJSON(article.Location).title}}</ion-note>
             </ion-item>
             <ion-item no-padding lines="none">
                 <ion-note color="dark">{{(article.CreatedOnOrg?article.CreatedOnOrg:article.CreatedOn)| date: 'yyyy-MM-dd HH:mm:ss'}}</ion-note>
