@@ -492,6 +492,28 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private setFocusUrl = 'https://login.reddah.com/api/pub/setfocus'; 
+
+    setFocus(formData: FormData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.setFocusUrl, formData)
+        .pipe(
+            tap(data => this.log('set focus pub')),
+            catchError(this.handleError('set focus pub', []))
+        );
+    }
+    //******************************** */
+    private unFocusUrl = 'https://login.reddah.com/api/pub/unfocus'; 
+
+    unFocus(formData: FormData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.unFocusUrl, formData)
+        .pipe(
+            tap(data => this.log('unfocus pub')),
+            catchError(this.handleError('unfocus pub', []))
+        );
+    }
+    //******************************** */
 
   
     private articlesUrl = 'https://reddah.com/api/webapi/getarticles'; 

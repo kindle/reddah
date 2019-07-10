@@ -173,7 +173,7 @@ export class AppComponent {
 
         await alert.present().then(()=>{
             this.alertShown=true;
-        });;
+        });
     }
 
     // active hardware back button

@@ -12,7 +12,9 @@
     
         <ion-note text-wrap style="margin: 10px 0 40px 0;">{{18}}位朋友关注</ion-note>
     
-        <span class="user-name" (click)="addFriend()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0">关注公众号</span>
-        <span class="user-name" style="margin: 0 0 20px 0;" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">进入公众号首页 | 取消关注</span>
+        <span class="user-name" (click)="focus()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0">关注公众号</span>
+        <span class="user-name" style="margin: 0 0 20px 0;" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
+            <i (click)="chat()">进入公众号首页</i> | <i (click)="unfocus()">取消关注</i>
+        </span>
     </div>
 </ion-content>

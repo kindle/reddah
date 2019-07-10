@@ -161,13 +161,46 @@ export class PubPage implements OnInit {
         await alert.present();
     }
 
-    async addFriend(){
-        const applyFriendModal = await this.modalController.create({
-            component: ApplyFriendPage,
-            componentProps: { targetUserName: this.userName }
+    async focus(){
+        this.reddah.toTextCache(1, `userisfriend_${this.userName}_${this.currentUserName}`);
+        let formData = new FormData();
+        formData.append("targetUser",this.userName);
+        this.reddah.setFocus(formData).subscribe();
+    }
+
+    async unfocus(){
+        const alert = await this.alertController.create({
+            header: "",
+            message: `不再关注"${this.reddah.appData('usernickname_'+this.userName)}"后将不再收到其下发的消息`,
+            buttons: [
+              {
+                text: "仍然关注",
+                role: 'cancel',
+                cssClass: 'dark',
+                handler: () => {
+                  
+                }
+              }, {
+                text: "不再关注",
+                cssClass:'danger',
+                handler: () => {
+                    this.actualUnfocus();
+                }
+              }
+            ]
         });
-          
-        await applyFriendModal.present();
+
+        await alert.present().then(()=>{
+            
+        });
+        
+    }
+
+    async actualUnfocus(){
+        this.localStorageService.clear(`userisfriend_${this.userName}_${this.currentUserName}`);
+        let formData = new FormData();
+        formData.append("targetUser",this.userName);
+        this.reddah.unFocus(formData).subscribe();
     }
   
     async viewer(photo) {
@@ -206,6 +239,7 @@ export class PubPage implements OnInit {
             componentProps: { 
                 title: this.reddah.appData('usernotename_'+this.userName+'_'+this.currentUserName),
                 target: this.userName,
+                source: "pub"
                 
             }
         });

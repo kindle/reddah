@@ -16,6 +16,7 @@ import { ImageViewerComponent } from '../common/image-viewer/image-viewer.compon
 import { VideoViewerComponent } from '../common/video-viewer/video-viewer.component';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
+import { PubPage } from '../tabs/publisher/pub/pub.page';
 
 export class ChatBase{
     
@@ -82,6 +83,7 @@ export class ChatPage extends ChatBase implements OnInit  {
 
     @Input() title: any;
     @Input() target: any;
+    @Input() source;//source ==pub or ""
     
     @ViewChild('chatbox') chatbox;
 
@@ -212,12 +214,23 @@ export class ChatPage extends ChatBase implements OnInit  {
     }
 
     async option(){
-        const modal = await this.modalController.create({
-            component: ChatOptPage,
-            componentProps: { targetUser: this.target }
-        });
-        
-        await modal.present();
+        if(this.source){
+            const modal = await this.modalController.create({
+                component: PubPage,
+                componentProps: { userName: this.target }
+            });
+              
+            await modal.present();
+        }
+        else
+        {
+            const modal = await this.modalController.create({
+                component: ChatOptPage,
+                componentProps: { targetUser: this.target }
+            });
+            
+            await modal.present();
+        }
     }
 
     async checkIsToday(date){
