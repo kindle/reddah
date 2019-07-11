@@ -8,8 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import leaflet from 'leaflet';
-import L from 'leaflet-search';
+import L from 'leaflet';
+import 'proj4leaflet';
 //import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
 @Component({
@@ -19,6 +19,8 @@ import L from 'leaflet-search';
 })
 export class LocationPage implements OnInit {
     @Input() location;
+
+    inChina = true;
 
     async close(){
         await this.modalController.dismiss();
@@ -52,98 +54,115 @@ export class LocationPage implements OnInit {
     }
 
     ionViewDidEnter() {
-        
         this.loadmap();
 
-        if(this.platform.is('cordova')&&this.location){
+        if(this.location){
             this.setLocation(this.location);
         }
         
     }
-    
-    markerGroup;
-    loadmap() {
-        /*let crs = leaflet.Proj.CRS('EPSG:3395',
-              '+proj=merc +lon_0=0 +k=1 +x_0=140 +y_0=-250 +datum=WGS84 +units=m +no_defs',
-        {
-            resolutions: function () {
-                let level = 19
-                var res = [];
-                res[0] = Math.pow(2, 18);
-                for (var i = 1; i < level; i++) {
-                    res[i] = Math.pow(2, (18 - i))
-                }
-                return res;
-            }(),
-            origin: [0, 0],
-            bounds: L.bounds([20037508.342789244, 0], [0, 20037508.342789244])
-        });*/
 
-        this.map = leaflet.map("map").fitWorld();
-        this.markerGroup = leaflet.featureGroup();
-        leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attributions: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            maxZoom: 18
-        }).addTo(this.map);
+    extend(){
+        L.TileLayer.WebDogTileLayer = L.TileLayer.extend({
+            getTileUrl: function (tilePoint) {
+                let domain = new Map().set("a",0).set("b",1).set("c",2);
+                return L.Util.template(this._url, L.extend({
+                    s: domain.get(this._getSubdomain(tilePoint)),
+                    z: tilePoint.z,
+                    x: tilePoint.x,
+                    y: Math.pow(2, tilePoint.z) - 1 - tilePoint.y
+                }, this.options));
+            }
+
+        });
         
+        L.tileLayer.webdogTileLayer = (url, options)=> {
+            return new L.TileLayer.WebDogTileLayer(url, options);
+        };
+
+        this.tileUrl = "http://rt{s}.map.gtimg.com/realtimerender?z={z}&x={x}&y={y}&type=vector&style=0";   
+        this.tileOptions = {
+            subdomain: '012',
+            getUrlArgs: (tilePoint)=> {
+                return {
+                    z: tilePoint.z,
+                    x: tilePoint.x,
+                    y: Math.pow(2, tilePoint.z) - 1 - tilePoint.y
+                };
+            }  
+        };
+    }
+    
+    markerGroup; 
+    tileUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";  
+    tileOptions:any = { maxZoom: 18 };
+
+    loadmap() {
+
+        this.markerGroup = L.featureGroup();
+        this.map = L.map("map").fitWorld();
+
+        if(this.inChina){
+            //need to adjust location
+            this.extend()
+            L.tileLayer.webdogTileLayer(this.tileUrl, this.tileOptions).addTo(this.map);
+        }
+        else{
+            L.tileLayer(this.tileUrl, this.tileOptions).addTo(this.map);
+        }
 
         if(!this.location)
         {
-            this.map.locate({
-                setView: true, 
-                maxZoom: 15
-            }).on('locationfound', (e) => {
-                let marker = leaflet.marker([e.latitude, e.longitude]).on('click', () => {});
+            this.map.locate({ setView: true, maxZoom: 15 }).on('locationfound', (e) => {
+                if(this.inChina){
+                    this.reddah.getQqLocation(e.latitude, e.longitude).subscribe(data=>{
+                        if(data._body.status==0){
+                            let l = data._body.locations[0];
+                            let marker = L.marker([l.lat, l.lng]).on('click', () => {});
+    
+                            this.markerGroup.addLayer(marker);
+                            this.map.addLayer(this.markerGroup);
+    
+                            this.reddah.getNearby(l.lat, l.lng).subscribe(data=>{
+                                this.locations = data._body.result.pois;
+                            });
+                        }
+                        else{
+                            alert(data._body.message);
+                        }
+                        
+                    })
+                }
+                else{
+                    let marker = L.marker([e.latitude, e.longitude]).on('click', () => {});
 
-                this.markerGroup.addLayer(marker);
-                this.map.addLayer(this.markerGroup);
+                    this.markerGroup.addLayer(marker);
+                    this.map.addLayer(this.markerGroup);
 
-                //add search
-                /*var controlSearch = new L.Control.Search({
-                    position:'topright',		
-                    layer: marker,
-                    initial: false,
-                    zoom: 12,
-                    marker: false
-                });
-                this.map.addControl( controlSearch );*/
-
-                this.reddah.getNearby(e.latitude, e.longitude).subscribe(data=>{
-                    //alert(JSON.stringify(data));
-                    //alert(JSON.stringify(data._body.result.pois));
-                    this.locations = data._body.result.pois;
-                });
+                    this.reddah.getNearby(e.latitude, e.longitude).subscribe(data=>{
+                        this.locations = data._body.result.pois;
+                    });  
+                }
 
             }).on('locationerror', (err) => {
                 alert(err.message);
             })
         }
-        //var searchLayer = L.layerGroup().addTo(this.map);
-        //... adding data in searchLayer ...
-        //this.map.addControl( new L.Control.Search({layer: searchLayer}) );
-        //this.search("方舟大厦")
     }
 
-    /*async search(text){
-        // setup
-        const provider = new OpenStreetMapProvider();
-
-        // search
-        const results = await provider.search({ query: text });
-        console.log(results);
-    }*/
 
     flyMaker;
     selectedItem;
     setLocation(item){
         this.selectedItem = item;
-        this.flyMaker = leaflet.marker([item.location.lat, item.location.lng]);
+        
+        this.flyMaker = L.marker([item.location.lat, item.location.lng]);
         this.markerGroup.clearLayers();
         this.markerGroup.addLayer(this.flyMaker);
         if(this.location)
             this.map.addLayer(this.markerGroup);
 
-        this.map.flyTo([item.location.lat, item.location.lng], 15);
+        this.map.setView([item.location.lat, item.location.lng], 15);
     }
 
     async confirm(){

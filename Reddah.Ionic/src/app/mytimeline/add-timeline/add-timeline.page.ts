@@ -222,7 +222,7 @@ export class AddTimelinePage implements OnInit {
             this.photos.push(data);
             this.addPhotoToFormData(data);
         }, (err) => {
-            alert(JSON.stringify(err));
+            //alert(JSON.stringify(err));
         });
         
     }
@@ -295,7 +295,7 @@ export class AddTimelinePage implements OnInit {
             this.photos.push(data);
             this.addPhotoToFormData(data);
         }, (err) => {
-            alert(JSON.stringify(err));
+            //alert(JSON.stringify(err));
         });
         
     }

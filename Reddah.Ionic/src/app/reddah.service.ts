@@ -652,6 +652,7 @@ export class ReddahService {
     
     //******************************** */
     getNearby(lat, lon): Observable<any> {
+        
         let policy = 1;
         let qqMapApi = `https://apis.map.qq.com/ws/geocoder/v1/?location=${lat},${lon}&output=jsonp&key=ARIBZ-BSK6D-2IL4Y-POZPV-ANU32-CIF56&poi_options=address_format=short;radius=5000;page_size=100;page_index=1;policy=${policy}&get_poi=1`;
 
@@ -666,6 +667,24 @@ export class ReddahService {
         return this.jsonp.get(qqMapApi, this.options).pipe(
             tap(data => this.log('get nearby')),
             catchError(this.handleError('get nearby', []))
+        );
+    } 
+
+    getQqLocation(lat, lng): Observable<any> {
+        
+        let qqTranslateApi = `https://apis.map.qq.com/ws/coord/v1/translate?locations=${lat},${lng}&output=jsonp&type=1&key=ARIBZ-BSK6D-2IL4Y-POZPV-ANU32-CIF56`;
+
+        const searchParams = new URLSearchParams();
+        searchParams.append('callback', 'JSONP_CALLBACK');
+        if (!this.options) {
+          this.options = {headers: new Headers()};
+        }
+        this.options.headers.set('Content-Type', 'application/json:charset=UTF-8');
+        this.options.params = searchParams;
+
+        return this.jsonp.get(qqTranslateApi, this.options).pipe(
+            tap(data => this.log('get qq location')),
+            catchError(this.handleError('get qq location', []))
         );
     } 
 
