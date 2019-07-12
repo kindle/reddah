@@ -33,6 +33,9 @@ export class RegisterPage implements OnInit {
     async register() {
         if (this.username.length == 0) {
             this.reddah.toast(this.translate.instant("Input.Error.UserNameEmpty"));
+        }
+        else if (this.username.length >= 25) {
+            this.reddah.toast(this.translate.instant("Input.Error.UserNameTooLong"));
         }else if (this.password.length == 0) {
             this.reddah.toast(this.translate.instant("Input.Error.PasswordEmpty"));
         }else if (this.email.length == 0) {

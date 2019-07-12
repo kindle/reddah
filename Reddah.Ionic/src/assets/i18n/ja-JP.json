@@ -34,6 +34,7 @@
       "Description":"描述",
       "Error":{
         "UserNameEmpty":"ユーザー名入力",
+        "UserNameTooLong":"User name should be less than 25 characters",
         "PasswordEmpty":"パスワード入力",
         "PasswordDifferent":"パスワードが一致しません",
         "EmailEmpty":"入力メール",

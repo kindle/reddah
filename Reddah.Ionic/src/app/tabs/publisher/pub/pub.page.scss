@@ -52,3 +52,84 @@
 [text-wrap]{
     font-size: var(--ion-font-size);
 }
+
+video{
+    width: 100%;
+}
+.listInfoBlock {
+    overflow:hidden;
+}
+.listImage {
+    vertical-align: top;
+}
+.listImageWrapper {
+    float: left;
+    height: 120px;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 2px;
+}
+.BrowsePreviewImage
+{
+    width: 193px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    border: 1px solid #BDBEC1;
+    margin-top: 5px;
+}
+.listRight .listInfo {
+    color: #BDBEC1;
+}
+div.postClear {
+    clear: left;
+    height: 10px;
+}
+orgImage, .orgArticle {
+    display: none;
+}
+
+
+
+div.postModuleLiner
+{
+    border-color: #BDBEC1 ;
+    border-right: 0 none;
+    border-style: none none solid; 
+    border-width: 0 0 1px;
+    padding-bottom: 15px;
+    overflow: hidden;
+    margin: 10px 15px;
+}
+
+div.postClear {
+    clear: left;
+    height: 10px;
+}
+
+.listImage {
+    vertical-align: top;
+}
+
+.listRight .listInfo {
+    color: black;
+}
+
+.BrowsePreviewImage
+{
+    width: 193px; 
+    margin-bottom: 20px;
+    margin-right: 20px;
+    border: 1px solid #BDBEC1;
+    margin-top: 5px;
+}
+
+#homepage {
+    color: #636468;
+}
+
+.articleTitle{
+    display: block;
+    padding: 0px;
+    margin-top: 0.9em;
+    color: #107c10;
+}

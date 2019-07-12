@@ -50,7 +50,7 @@ export class ChatBase{
         let isLocal = this.reddah.isLocal(key);
         if(isLocal){//play
             let localPath = this.reddah.appData(key);
-            
+            alert(key+localPath)
             this.videoEditor.getVideoInfo({fileUri: localPath})
             .then(info=>{
                 let options: StreamingVideoOptions = {

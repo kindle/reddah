@@ -34,11 +34,11 @@
                 </span>
             </div>
             <div class="postClear"></div>
-            <div class="listInfo" style="color:#636468;display:flex;justify-content: space-between;" (click)="view(article)">
-                <div style="display: flex;">
+            <div class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
+                <div style="display: flex;" (click)="goUser(article.UserName)">
                     <span class="user-name" style="display: inline-block;vertical-align: middle;line-height: 1.5em;">{{reddah.getDisplayName(article.UserName)}}</span>
                 </div>
-                <div style="display: flex;">
+                <div style="display: flex;" (click)="view(article)">
                     <ion-icon name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
                 </div>
             </div>

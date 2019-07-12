@@ -160,7 +160,7 @@ export class PublisherPage {
         const userModal = await this.modalController.create({
             component: SearchPage,
             componentProps: {
-                type: 3,//publisher only
+                type: 2,//publisher only
             }
         });
           

@@ -66,7 +66,7 @@
         <ion-row *ngFor="let pub of users_p" (click)="goPub(pub.UserName)">
             <ion-item>
                 <ion-avatar slot="start" class="contactUserPhoto">
-                    <img src="{{reddah.appData('userphoto_'+pub.UserName)}}" class="contactPortrait">
+                    <img src="{{reddah.appDataPub('userphoto_'+pub.UserName)}}" class="contactPortrait">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
                     <span class="user-name" (press)="showChangeMenu($event, contact)">{{pub.NickName}}</span><br>

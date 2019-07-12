@@ -1,18 +1,19 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
-import { InfiniteScroll } from '@ionic/angular';
+import { InfiniteScroll, Content } from '@ionic/angular';
 import { ReddahService } from '../../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, PopoverController, ActionSheetController, NavParams, AlertController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { ApplyFriendPage } from '../../../friend/apply-friend/apply-friend.page';
-import { TimeLinePage } from '../../../mytimeline/timeline/timeline.page';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { ImageViewerComponent } from '../../../common/image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SettingNoteLabelPage } from '../../../settings/setting-note-label/setting-note-label.page';
 import { ChatPage } from '../../../chat/chat.page';
+import { Article } from '../../../model/article';
+import { PostviewerPage } from '../../../postviewer/postviewer.page';
+import { SearchPage } from '../../../common/search/search.page';
 
 @Component({
     selector: 'app-pub',
@@ -22,7 +23,14 @@ import { ChatPage } from '../../../chat/chat.page';
 export class PubPage implements OnInit {
     @Input() userName: string;
 
+    articles = [];
+    loadedIds = [];
+    
+    @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
+    @ViewChild('pageTop') pageTop: Content;
+
     currentUserName;
+    
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
@@ -39,69 +47,99 @@ export class PubPage implements OnInit {
         public actionSheetController: ActionSheetController,
         private navParams: NavParams,
         private alertController: AlertController,
-    ){}
-
-    ngOnInit(){
+    ){
         this.currentUserName = this.reddah.getCurrentUser();
         this.reddah.getUserPhotos(this.userName);
-        this.getTimeline();
     }
 
-    imageList = [];
-    loadedIds = [];
-    formData: FormData;
+    ngOnInit(){
+        let cacheArticles = this.localStorageService.retrieve("reddah_articles_"+this.userName);
+        let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids_"+this.userName);
+        if(cacheArticles){
+            this.articles = JSON.parse(cacheArticles);
+            this.loadedIds = JSON.parse(cacheArticleIds);
+        }
+        else
+        {
+            let locale = this.reddah.getCurrentLocale();
+            let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale + this.userName;
+            let request = this.reddah.getArticles(this.loadedIds, locale, "search", this.userName);
 
-    getTimeline(){
-        this.formData = new FormData();
-        this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
-        this.formData.append("targetUser", this.userName);
-
-        let cacheKey = "this.reddah.getTimeline"+this.userName;
-        console.log(`cacheKey:${cacheKey}`);
-        let request = this.reddah.getTimeline(this.formData);
-
-        this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
-            .subscribe(timeline => 
+            this.cacheService.loadFromObservable(cacheKey, request, "PubPage"+this.userName)
+            .subscribe(articles => 
             {
-                for(let article of timeline){
-                    
-                    article.Content.split('$$$').forEach((item)=>{
-                        if(this.imageList.length<3)  
-                            this.imageList.push(item);
-                    });
-                    
-                    if(this.imageList.length>=3)
-                        break;
+                for(let article of articles){
+                    this.articles.push(article);
+                    this.loadedIds.push(article.Id);
                 }
+                this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
+                this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.loadedIds));
+            });
+        }
+    }
+
+    
+
+    getArticles(event):void {
+        let locale = this.localStorageService.retrieve("Reddah_Locale");
+        if(locale==null)
+            locale = "en-US"
+
+        let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale+this.userName;
+        let request = this.reddah.getArticles(this.loadedIds, locale, "search", this.userName);
+
+        this.cacheService.loadFromObservable(cacheKey, request, "PubPage"+this.userName)
+        .subscribe(articles => 
+        {
+            for(let article of articles){
+                this.articles.push(article);
+                this.loadedIds.push(article.Id);  
             }
-        );
-    }
-
-    async viewTimeline(){
-        const timelineModal = await this.modalController.create({
-            component: TimeLinePage,
-            componentProps: { userName: this.userName }
+            this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
+            this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.loadedIds));
+            if(event){
+                event.target.complete();
+            }
         });
-          
-        await timelineModal.present();
-    }
+    }   
 
-    async close(isCloseParent=false){
-        await this.modalController.dismiss(isCloseParent);
-    }
-
-    clearCacheAndReload(){
-        this.cacheService.clearGroup("TimeLinePage"+this.userName);
-        this.imageList = [];
+    clearCacheAndReload(event){
+        this.pageTop.scrollToTop();
+        this.cacheService.clearGroup("PubPage"+this.userName);
+        this.localStorageService.clear("reddah_articles_"+this.userName);
+        this.localStorageService.clear("reddah_article_ids_"+this.userName);
+        this.articles = [];
         this.loadedIds = [];
-        this.ngOnInit();
+        this.getArticles(event);
     }
 
+    //drag down
     doRefresh(event) {
         setTimeout(() => {
-            this.clearCacheAndReload();
-            event.target.complete();
+            this.clearCacheAndReload(event);
         }, 2000);
+    }
+
+    loadData(event) {
+        this.getArticles(event);
+    }
+
+    async view(article: Article){
+        const viewerModal = await this.modalController.create({
+            component: PostviewerPage,
+            componentProps: { article: article }
+        });
+        
+        await viewerModal.present();
+        const { data } = await viewerModal.onDidDismiss();
+        if(data){
+            console.log(data)
+        }
+
+    }
+    
+    async close(isCloseParent=false){
+        await this.modalController.dismiss(isCloseParent);
     }
 
     async presentActionSheet() {
@@ -253,6 +291,18 @@ export class PubPage implements OnInit {
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
+    }
+
+    async goSearch(key){
+        const userModal = await this.modalController.create({
+            component: SearchPage,
+            componentProps: { 
+                key: key,
+                type: 0,//article only
+            }
+        });
+          
+        await userModal.present();
     }
 
 }

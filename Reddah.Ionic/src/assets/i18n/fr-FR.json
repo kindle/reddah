@@ -34,6 +34,7 @@
       "Description":"描述",
       "Error":{
         "UserNameEmpty":"Veuillez entrer le nom d'utilisateur",
+        "UserNameTooLong":"User name should be less than 25 characters",
         "PasswordEmpty":"Veuillez entrer votre mot de passe",
         "PasswordDifferent":"Incohérence du mot de passe",
         "EmailEmpty":"Veuillez entrer courriel",

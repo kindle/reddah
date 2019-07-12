@@ -9,6 +9,7 @@ import { CacheService } from "ionic-cache";
 import { UserPage } from '../common/user/user.page';
 import { SearchPage } from '../common/search/search.page';
 import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page';
+import { PubPage } from '../tabs/publisher/pub/pub.page';
 
 @Component({
     selector: 'app-postviewer',
@@ -133,15 +134,21 @@ export class PostviewerPage implements OnInit {
         await this.modalController.dismiss();
     }
 
+
     async goUser(userName){
-        const userModal = await this.modalController.create({
-            component: UserPage,
+        let isNormalUser = true;
+        //if(this.reddah.appData('usertype'+userName)==1)
+        if(userName.length==32)
+            isNormalUser = false;
+
+        const modal = await this.modalController.create({
+            component: isNormalUser?UserPage:PubPage,
             componentProps: { 
                 userName: userName
             }
         });
           
-        await userModal.present();
+        await modal.present();
     }
 
     async goSearch(key){

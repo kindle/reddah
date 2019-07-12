@@ -8,7 +8,7 @@
             <ion-item-divider color="light" lines="none">{{group.letter.toUpperCase()}}</ion-item-divider>
             <ion-item *ngFor="let sub of group.subs" (click)="subInfo(sub.UserName)">
                 <ion-avatar slot="start" class="contactUserPhoto">
-                    <img src="{{reddah.appData('userphoto_'+sub.UserName)}}" class="contactPortrait">
+                    <img src="{{reddah.appDataPub('userphoto_'+sub.UserName)}}" class="contactPortrait">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
                     <span class="user-name" (press)="showChangeMenu($event, contact)">{{sub.NickName}}</span><br>

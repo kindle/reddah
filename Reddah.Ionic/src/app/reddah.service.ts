@@ -532,14 +532,14 @@ export class ReddahService {
     private articlesUrl = 'https://reddah.com/api/webapi/getarticles'; 
     private userProfileModel: UserProfileModel;
 
-    getArticles(loadedIds: Number[], locale: String, menu: String, keyword="", type=0): Observable<Article[]> {
+    getArticles(loadedIds: Number[], locale: String, menu: String, keyword="", userName="", type=0): Observable<Article[]> {
         this.userProfileModel = new UserProfileModel();
         this.userProfileModel.LoadedIds = loadedIds;
         this.userProfileModel.Locale = locale;
         this.userProfileModel.Menu = menu;
         this.userProfileModel.Token = "";
         this.userProfileModel.Sub = "";
-        this.userProfileModel.User = "";
+        this.userProfileModel.User = userName;
         this.userProfileModel.Keyword = keyword;
         this.userProfileModel.Type = type;
 
@@ -800,7 +800,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
                 return (<any>window).Ionic.WebView.convertFileSrc(result);
             }
             else{
-                return "assets/icon/ios-paper-plane.svg";
+                return "assets/icon/photo.svg";
             }
         }
         else if(cacheKey.indexOf('cover_')>-1){
@@ -888,7 +888,8 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             _ => {
                 if(isVideo)
                 {
-                    this.localStorageService.store(webUrl,(<any>window).Ionic.WebView.convertFileSrc(targetUrl));
+                    //this.localStorageService.store(webUrl,(<any>window).Ionic.WebView.convertFileSrc(targetUrl));
+                    this.localStorageService.store(webUrl,"file://"+targetUrl);
                 }
                 else{
                     this.localStorageService.store(webUrl, targetUrl);
@@ -973,6 +974,8 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
                     this.toTextCache(userInfo.Location, `userlocation_${userName}`);
                 if(userInfo.Signature!=null)
                     this.toTextCache(userInfo.Signature, `usersignature_${userName}`);
+                if(userInfo.Type!=null)
+                    this.toTextCache(userInfo.Type, `usertype_${userName}`);
                 if(userInfo.NoteName!=null)
                     this.toTextCache(userInfo.NoteName, `usernotename_${userName}_${this.getCurrentUser()}`);
                 if(userInfo.UserName!=this.getCurrentUser()){

@@ -61,20 +61,19 @@ export class UserPage implements OnInit {
         let request = this.reddah.getTimeline(this.formData);
 
         this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
-            .subscribe(timeline => 
-            {
-                for(let article of timeline){
-                    
-                    article.Content.split('$$$').forEach((item)=>{
-                        if(this.imageList.length<3)  
-                            this.imageList.push(item);
-                    });
-                    
-                    if(this.imageList.length>=3)
-                        break;
-                }
+        .subscribe(timeline => 
+        {
+            for(let article of timeline){
+                
+                article.Content.split('$$$').forEach((item)=>{
+                    if(this.imageList.length<3&&item.length>0)  
+                        this.imageList.push(item);
+                });
+                
+                if(this.imageList.length>=3)
+                    break;
             }
-        );
+        });
     }
 
     async viewTimeline(){

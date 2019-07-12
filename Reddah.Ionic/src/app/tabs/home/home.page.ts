@@ -9,6 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { MyInfoPage } from '../../common/my-info/my-info.page';
 import { SearchPage } from '../../common/search/search.page';
+import { UserPage } from '../../common/user/user.page';
+import { PubPage } from '../publisher/pub/pub.page';
 
 @Component({
     selector: 'app-home',
@@ -147,6 +149,21 @@ export class HomePage implements OnInit {
         });
           
         await userModal.present();
+    }
+
+    async goUser(userName){
+        let isNormalUser = true;
+        if(userName.length==32)
+            isNormalUser = false;
+
+        const modal = await this.modalController.create({
+            component: isNormalUser?UserPage:PubPage,
+            componentProps: { 
+                userName: userName
+            }
+        });
+          
+        await modal.present();
     }
     
 }
