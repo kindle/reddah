@@ -165,7 +165,11 @@ export class PubPage implements OnInit {
         this.reddah.toTextCache(1, `userisfriend_${this.userName}_${this.currentUserName}`);
         let formData = new FormData();
         formData.append("targetUser",this.userName);
-        this.reddah.setFocus(formData).subscribe();
+        this.reddah.setFocus(formData).subscribe(_=>{
+            this.localStorageService.clear("Reddah_GroupedContacts_Pub");
+            this.localStorageService.clear("Reddah_Contacts_Pub");
+            this.cacheService.clearGroup("PubPage");
+        });
     }
 
     async unfocus(){
@@ -200,7 +204,11 @@ export class PubPage implements OnInit {
         this.localStorageService.clear(`userisfriend_${this.userName}_${this.currentUserName}`);
         let formData = new FormData();
         formData.append("targetUser",this.userName);
-        this.reddah.unFocus(formData).subscribe();
+        this.reddah.unFocus(formData).subscribe(_=>{
+            this.localStorageService.clear("Reddah_GroupedContacts_Pub");
+            this.localStorageService.clear("Reddah_Contacts_Pub");
+            this.cacheService.clearGroup("PubPage");
+        });
     }
   
     async viewer(photo) {

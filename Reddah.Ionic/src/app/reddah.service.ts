@@ -290,6 +290,19 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private focusPubsUrl = 'https://login.reddah.com/api/pub/focuspubs'; 
+
+    getFocusPubs(): Observable<any> {
+
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.focusPubsUrl, formData)
+        .pipe(
+            tap(data => this.log('get focus pubs')),
+            catchError(this.handleError('get focus pubs', []))
+        );
+    }
+    //******************************** */
     private subsUrl = 'https://login.reddah.com/api/pub/subs'; 
 
     getSubs(): Observable<any> {
@@ -778,6 +791,30 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
 
     //appPhoto = {};
     appCacheToOrg = {};
+    
+    appDataPub(cacheKey){
+        let result = this.localStorageService.retrieve(cacheKey);
+        
+        if(cacheKey.indexOf('userphoto_')>-1){
+            if(result&&this.platform.is('cordova')){
+                return (<any>window).Ionic.WebView.convertFileSrc(result);
+            }
+            else{
+                return "assets/icon/ios-paper-plane.svg";
+            }
+        }
+        else if(cacheKey.indexOf('cover_')>-1){
+            if(result&&this.platform.is('cordova')){
+                return (<any>window).Ionic.WebView.convertFileSrc(result);
+            }
+            else{
+                return "assets/icon/timg.jpg";
+            }
+        }
+        else{//pure text
+            return result==null ? "": result;
+        }
+    }
 
     appData(cacheKey){
         let result = this.localStorageService.retrieve(cacheKey);

@@ -18,7 +18,7 @@
     </ion-grid>
     <ion-grid *ngIf="selectedTopicId==1">
         <ion-row>
-            <ion-spinner name="bubbles" *ngIf="firstLoading_a"></ion-spinner>
+            <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_a"></ion-spinner></div>
             <ion-text *ngIf="firstLoading_t" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
             <span class="articleTab" *ngIf="articles_a.length>0">相关文章</span>
         </ion-row>
@@ -38,7 +38,7 @@
     </ion-grid>
     <ion-grid *ngIf="selectedTopicId==2">
         <ion-row>
-            <ion-spinner name="bubbles" *ngIf="firstLoading_t"></ion-spinner>
+            <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_t"></ion-spinner></div>
             <ion-text *ngIf="firstLoading_t" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
             <span class="articleTab" *ngIf="articles_t.length>0">相关朋友圈</span>
         </ion-row>
@@ -59,7 +59,7 @@
     </ion-grid>
     <ion-grid *ngIf="selectedTopicId==3">
         <ion-row>
-            <ion-spinner name="bubbles" *ngIf="firstLoading_p"></ion-spinner>
+            <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_p"></ion-spinner></div>
             <ion-text *ngIf="firstLoading_p" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
             <span class="articleTab" *ngIf="users_p.length>0">相关公众号</span>
         </ion-row>
@@ -77,7 +77,7 @@
     </ion-grid>
     <ion-grid *ngIf="selectedTopicId==0">
         <ion-row>
-            <ion-spinner name="bubbles" *ngIf="firstLoading_a"></ion-spinner>
+            <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_a"></ion-spinner></div>
             <ion-text *ngIf="firstLoading_a" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
             <span class="articleTab" *ngIf="articles_a.length>0">相关文章</span>
         </ion-row>
@@ -98,7 +98,7 @@
             <span class="articleTab" *ngIf="articles_a.length>0" (click)="more(0)">更多文章>></span>
         </ion-row>
         <ion-row>
-            <ion-spinner name="bubbles" *ngIf="firstLoading_t"></ion-spinner>
+            <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_t"></ion-spinner></div>
             <ion-text *ngIf="firstLoading_t" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
             <span class="articleTab" *ngIf="articles_t.length>0">相关朋友圈</span>
         </ion-row>

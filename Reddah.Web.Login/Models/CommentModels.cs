@@ -63,6 +63,16 @@ namespace Reddah.Web.Login
         public string Signature { get; set; }
     }
 
+    public class AdvancedPub : Article
+    {
+        public string UserName { get; set; }
+        public string UserNickName { get; set; }
+        public string Signature { get; set; }
+        public string UserPhoto { get; set; }
+        public string UserCover { get; set; }
+        public string Email { get; set; }
+    }
+
     public class AdvancedUserArticle: UserArticle
     {
         public string Title { get; set; }

@@ -410,6 +410,48 @@ namespace Reddah.Web.Login.Controllers
 
         }
 
+        [Route("focuspubs")]
+        [HttpPost]
+        public IHttpActionResult GetFocusPubs()
+        {
+            IEnumerable<AdvancedPub> query = null;
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    query = from a in db.Article
+                            join u in db.UserProfile on a.GroupName.Replace(","+ jwtResult.JwtUser.User, "") equals u.UserName
+                            where a.UserName == jwtResult.JwtUser.User && a.Type==22
+                            select new AdvancedPub
+                            {
+                                UserName = u.UserName,
+                                UserNickName = u.NickName,
+                                Signature = u.Signature,
+                                UserPhoto = u.Photo,
+                                UserCover = u.Cover,
+                                Email = u.Email
+                            };
+
+                    return Ok(query.ToList());
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
 
     }
 }

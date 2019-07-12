@@ -77,6 +77,8 @@ export class AuthService {
 
         this.localStorageService.clear("Reddah_GroupedContacts");
         this.localStorageService.clear("Reddah_Contacts");
+        this.localStorageService.clear("Reddah_GroupedContacts_Pub");
+        this.localStorageService.clear("Reddah_Contacts_pub");
 
         this.localStorageService.clear("Reddah_mytimeline");
         this.localStorageService.clear("Reddah_mytimeline_ids");

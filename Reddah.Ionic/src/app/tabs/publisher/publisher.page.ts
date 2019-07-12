@@ -8,10 +8,10 @@ import { ReddahService } from '../../reddah.service';
 import { CacheService } from 'ionic-cache';
 import { UserPage } from '../../common/user/user.page';
 import { ChangeNoteNamePopPage } from '../../common/change-notename-pop.page';
-import { ChatChooseGroupPage } from '../../chat/chat-choose-group/chat-choose-group.page';
 import { SearchPage } from '../../common/search/search.page';
 import { CategoryPage } from './category/category.page';
 import { ManagePage } from './manage/manage.page';
+import { PubPage } from './pub/pub.page';
 
 @Component({
     selector: 'app-publisher',
@@ -37,65 +37,52 @@ export class PublisherPage {
         )
     {
         this.userName = this.reddah.getCurrentUser();
-        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
+        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_Pub");
         if(cachedGroupContact){
             this.groupedContacts = JSON.parse(cachedGroupContact);
         }
         
         this.loadData();
-        this.loadRequests();
 
-    }
-
-    async loadRequests(){
-        let formData = new FormData();
-        let friendRequestList = [];
-        this.reddah.friendRequests(formData)
-        .subscribe(friendRequests => 
-        {
-            for(let friendRequest of friendRequests){
-                friendRequestList.push(friendRequest);
-            }
-            this.requestCount=friendRequestList.filter(a=>a.Approve!=1).length;
-        });
     }
 
     showLoading = false;
     loadData(){
-        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
-        let cachedContact = this.localStorageService.retrieve("Reddah_Contacts");
+        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_Pub");
+        let cachedContact = this.localStorageService.retrieve("Reddah_Contacts_Pub");
         if(!cachedGroupContact||!cachedContact)
         {
             this.showLoading = true;
         }
 
-        let cacheKey = "this.reddah.getFriends";
-        let request = this.reddah.getFriends();
+        let cacheKey = "this.reddah.getFocusPubs";
+        let request = this.reddah.getFocusPubs();
 
-        this.cacheService.loadFromObservable(cacheKey, request, "ContactPage")
-        .subscribe(contacts => 
+        this.cacheService.loadFromObservable(cacheKey, request, "PubPage")
+        .subscribe(pubs => 
         {
-            let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
-            let cachedContact = this.localStorageService.retrieve("Reddah_Contacts");
+            let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_Pub");
+            let cachedContact = this.localStorageService.retrieve("Reddah_Contacts_Pub");
 
-            if(cachedContact!=JSON.stringify(contacts)||!cachedGroupContact){
-                this.localStorageService.store("Reddah_Contacts", JSON.stringify(contacts));
-
-                for(let contact of contacts){
+            if(cachedContact!=JSON.stringify(pubs)||!cachedGroupContact){
+                this.localStorageService.store("Reddah_Contacts_Pub", JSON.stringify(pubs));
+                
+                for(let pub of pubs){
                     //cache user image
-                    this.reddah.getUserPhotos(contact.Watch);
-                    let cname = this.reddah.getDisplayName(contact.Watch);
+                    this.reddah.getUserPhotos(pub.UserName);
+                    let cname = pub.UserNickName;
+                    
                     let ch = cname.charAt(0);
                     
                     if(/^[A-Za-z]/.test(ch))//English
-                        contact.s = ch.toLowerCase();
+                        pub.s = ch.toLowerCase();
                     else
-                        contact.s = this.reddah.getSortLetter(ch,'zh');
+                        pub.s = this.reddah.getSortLetter(ch,'zh');
                 }
                 
-                this.groupContacts(contacts);
-                this.localStorageService.store("Reddah_GroupedContacts", JSON.stringify(this.groupedContacts));
-                this.localStorageService.store("Reddah_Contacts", JSON.stringify(contacts));
+                this.groupContacts(pubs);
+                this.localStorageService.store("Reddah_GroupedContacts_Pub", JSON.stringify(this.groupedContacts));
+                this.localStorageService.store("Reddah_Contacts_Pub", JSON.stringify(pubs));
             }
             
             this.showLoading = false;
@@ -136,34 +123,13 @@ export class PublisherPage {
         const { data } = await newFriendModal.onDidDismiss();
         if(data||!data)
         {
-            this.cacheService.clearGroup("ContactPage");
+            this.cacheService.clearGroup("PubPage");
             this.reddah.getUserPhotos(this.userName);
-            this.loadRequests();
             this.loadData();
         }
     }
 
     
-
-    async goUser(userName){
-        const modal = await this.modalController.create({
-            component: UserPage,
-            componentProps: { 
-                userName: userName
-            }
-        });
-          
-        await modal.present();
-        const { data } = await modal.onDidDismiss();
-        if(data||!data)
-        {
-            this.cacheService.clearGroup("ContactPage");
-            this.reddah.getUserPhotos(this.userName);
-            this.loadRequests();
-            this.loadData();
-        }
-    }
-
     async showChangeMenu(event, contact){
         const popover = await this.popoverController.create({
             component: ChangeNoteNamePopPage,
@@ -180,9 +146,8 @@ export class PublisherPage {
         const { data } = await popover.onDidDismiss();
         if(data||!data)
         {
-            this.cacheService.clearGroup("ContactPage");
+            this.cacheService.clearGroup("PubPage");
             this.reddah.getUserPhotos(this.userName);
-            this.loadRequests();
             this.loadData();
         }
     }
@@ -219,4 +184,21 @@ export class PublisherPage {
         });
         await modal.present();
     }
+
+    async goPub(userName){
+        const modal = await this.modalController.create({
+            component: PubPage,
+            componentProps: { 
+                userName: userName
+            }
+        });
+          
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data||!data)
+        {
+            this.loadData();
+        }
+    }
+
 }

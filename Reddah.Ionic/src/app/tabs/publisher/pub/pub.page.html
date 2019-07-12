@@ -5,7 +5,7 @@
 <ion-content style="background-color:white;">
     <div style="display: flex;align-items: center;flex-direction: column;padding-top: 30px;">
         <ion-thumbnail class="userPhoto">
-            <img src="{{reddah.appData('userphoto_'+userName)}}" (click)="viewer(reddah.appData('userphoto_'+userName))" class="portrait">
+            <img src="{{reddah.appDataPub('userphoto_'+userName)}}" (click)="viewer(reddah.appData('userphoto_'+userName))" class="portrait">
         </ion-thumbnail>
         <ion-label text-wrap style="margin: 20px;font-weight: bold;">{{reddah.appData('usernickname_'+userName)}}</ion-label>
         <ion-label text-wrap text-center style="margin: 10px;padding: 10px 30px;">{{reddah.appData('usersignature_'+userName)}}</ion-label>

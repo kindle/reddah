@@ -9,7 +9,7 @@ import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import L from 'leaflet';
-import 'proj4leaflet';
+//import 'proj4leaflet';
 //import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
 @Component({

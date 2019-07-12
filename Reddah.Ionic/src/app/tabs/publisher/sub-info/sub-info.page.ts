@@ -97,4 +97,7 @@ export class SubInfoPage implements OnInit {
         this.changed = data;
     }
 
+    async create(){
+        
+    }
 }
