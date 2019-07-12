@@ -889,7 +889,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
                 if(isVideo)
                 {
                     //this.localStorageService.store(webUrl,(<any>window).Ionic.WebView.convertFileSrc(targetUrl));
-                    this.localStorageService.store(webUrl,"file://"+targetUrl);
+                    this.localStorageService.store(webUrl, targetUrl);
                 }
                 else{
                     this.localStorageService.store(webUrl, targetUrl);
