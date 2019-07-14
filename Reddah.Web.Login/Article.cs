@@ -29,5 +29,8 @@ namespace Reddah.Web.Login
         public Nullable<int> Type { get; set; }
         public Nullable<int> Ref { get; set; }
         public string Location { get; set; }
+        public string CreatedBy { get; set; }
+        public string LastUpdateBy { get; set; }
+        public int Status { get; set; }
     }
 }

@@ -16,4 +16,5 @@ export class Article {
     Content : string;
     Type : number;
     Ref: number;
+    LastUpdateOn : string;
 }

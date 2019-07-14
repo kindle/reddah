@@ -34,6 +34,7 @@ import { Shake } from '@ionic-native/shake/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { VideoEditor } from '@ionic-native/video-editor/ngx';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -116,6 +117,7 @@ import { RegisterSubPage } from './tabs/publisher/register-sub/register-sub.page
 import { ManagePage } from './tabs/publisher/manage/manage.page';
 import { SubInfoPage } from './tabs/publisher/sub-info/sub-info.page';
 import { PubPage } from './tabs/publisher/pub/pub.page';
+import { AddArticlePage } from './tabs/publisher/add-article/add-article.page';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -188,7 +190,7 @@ var firebaseConfig = {
         RegisterPage,
         SettingNickNamePage,SettingSignaturePage,
 
-        CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,
+        CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,
     ],
     entryComponents: [
         BookmarkPage,
@@ -241,7 +243,7 @@ var firebaseConfig = {
         RegisterPage,
         SettingNickNamePage,SettingSignaturePage,
 
-        CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,
+        CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,
     ],
     imports: [
         BrowserModule, 
@@ -250,6 +252,7 @@ var firebaseConfig = {
         AppRoutingModule,
         HttpClientModule,
         JsonpModule,
+        CKEditorModule,
         HttpClientJsonpModule,
         IonicImageLoader.forRoot(),
         CacheModule.forRoot(),

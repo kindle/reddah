@@ -88,3 +88,10 @@ alter table [dbo].[UserProfile] add
 
 alter table article add
   [Location] NVARCHAR(MAX) NULL
+
+
+--20190714
+alter table article add
+  [CreatedBy] NVARCHAR(MAX) NULL,
+  [LastUpdateBy] NVARCHAR(MAX) NULL,
+  [Status] INT NOT NULL DEFAULT 0  --0: draft, 1: published

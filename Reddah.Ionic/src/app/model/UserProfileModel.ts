@@ -7,4 +7,5 @@ export class UserProfileModel {
     public User: String;
     public Keyword: String;
     public Type: Number;
+    public Status: Number;
 }

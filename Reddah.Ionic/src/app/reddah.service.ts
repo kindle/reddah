@@ -356,6 +356,19 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private addPubArticleUrl = 'https://login.reddah.com/api/pub/addpubarticle'; 
+
+    addPubArticle(formData: FormData): Observable<any> {
+
+      formData.append('jwt', this.getCurrentJwt());
+      
+      return this.http.post<any>(this.addPubArticleUrl, formData)
+      .pipe(
+          tap(data => this.log('add pub article')),
+          catchError(this.handleError('add pub article', []))
+      );
+    }
+    //******************************** */
 
 
 
@@ -532,7 +545,7 @@ export class ReddahService {
     private articlesUrl = 'https://reddah.com/api/webapi/getarticles'; 
     private userProfileModel: UserProfileModel;
 
-    getArticles(loadedIds: Number[], locale: String, menu: String, keyword="", userName="", type=0): Observable<Article[]> {
+    getArticles(loadedIds: Number[], locale: String, menu: String, keyword="", status=1, userName="", type=0): Observable<Article[]> {
         this.userProfileModel = new UserProfileModel();
         this.userProfileModel.LoadedIds = loadedIds;
         this.userProfileModel.Locale = locale;
@@ -542,6 +555,7 @@ export class ReddahService {
         this.userProfileModel.User = userName;
         this.userProfileModel.Keyword = keyword;
         this.userProfileModel.Type = type;
+        this.userProfileModel.Status = status;
 
         /*const httpOptions = {
           headers: new HttpHeaders({ 

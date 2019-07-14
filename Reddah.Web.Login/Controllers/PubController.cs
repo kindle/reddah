@@ -453,5 +453,104 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+
+        [Route("addpubarticle")]
+        [HttpPost]
+        public IHttpActionResult AddPubArticle()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string title = HttpContext.Current.Request["title"].Trim();
+                string content = HttpContext.Current.Request["content"].Trim();
+                string groupName = HttpContext.Current.Request["groupName"].Trim();
+                string targetUserName = HttpContext.Current.Request["targetUserName"].Trim();
+                string locale = HttpContext.Current.Request["locale"].Trim();
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int id = js.Deserialize<int>(HttpContext.Current.Request["id"]);
+
+                if (String.IsNullOrWhiteSpace(title))
+                    return Ok(new ApiResult(1, "title empty"));
+                if (String.IsNullOrWhiteSpace(content))
+                    return Ok(new ApiResult(1, "content empty"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                try
+                {
+                    using (var db = new reddahEntities())
+                    {
+                        if (id > 0)
+                        {
+                            //update pub article
+                            var existPubArticle = db.Article.FirstOrDefault(a => a.Id == id && a.Type == 0);
+                            if (existPubArticle!=null)
+                            {
+                                String[] articleGroupNames = groupName.Split(',');
+                                foreach (string articleGroupName in articleGroupNames)
+                                {
+                                    if (db.Group.FirstOrDefault(g => g.Name == articleGroupName.Trim()) == null)
+                                    {
+                                        db.Group.Add(new Group
+                                        {
+                                            Name = articleGroupName.Trim(),
+                                            CreatedOn = DateTime.Now
+                                        });
+                                    }
+                                }
+
+                                existPubArticle.Title = Helpers.HtmlEncode(title);
+                                existPubArticle.Content = Helpers.HtmlEncode(content);
+                                existPubArticle.GroupName = Helpers.HtmlEncode(groupName);
+                                existPubArticle.LastUpdateOn = DateTime.UtcNow;
+                                existPubArticle.LastUpdateBy = jwtResult.JwtUser.User;
+                            }
+                        }
+                        else
+                        {
+                            //add pub article
+                            db.Article.Add(new Article()
+                            {
+                                Title = Helpers.HtmlEncode(title),
+                                Content = Helpers.HtmlEncode(content),
+                                CreatedOn = DateTime.UtcNow,
+                                Count = 0,
+                                GroupName = Helpers.HtmlEncode(groupName),
+                                UserName = targetUserName,
+                                CreatedBy = jwtResult.JwtUser.User,
+                                LastUpdateOn = DateTime.UtcNow,
+                                LastUpdateBy = jwtResult.JwtUser.User,
+                                Locale = locale,
+                                Type = 0,
+                                Status = 0, //0 draft, 1 published
+                            });
+                        }
+
+                        db.SaveChanges();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Ok(new ApiResult(3, "Excepion:" + ex.Message.ToString()));
+                }
+
+
+                return Ok(new ApiResult(0, "New pub article added"));
+
+            }
+            catch (Exception ex1)
+            {
+                return Ok(new ApiResult(4, ex1.Message));
+            }
+
+
+
+        }
+
     }
 }

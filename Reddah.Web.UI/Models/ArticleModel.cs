@@ -24,7 +24,7 @@ namespace Reddah.Web.UI.Models
         public string GroupName { get; set; }
         public string Content { get; set; }
         public string Locale { get; set; }
-        public string LastUpdateOn { get; set; }
+        public DateTime? LastUpdateOn { get; set; }
         public Nullable<int> Type { get; set; }
         public int? Ref { get; set; }
     }
@@ -81,7 +81,8 @@ namespace Reddah.Web.UI.Models
         public string User;
         public string Keyword;
         public int Type;//1 timeline, others: article
-        
+        public int Status;//1 published, 0: draft
+
         //public Dictionary<string, int> habits;
     }
 

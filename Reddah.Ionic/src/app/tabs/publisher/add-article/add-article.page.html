@@ -1,0 +1,27 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" slot="start" (click)="close()" class="backbutton"></ion-icon>
+    <ion-button color="success" slot="end" (click)="submit()">保存</ion-button>
+    
+</ion-item>
+<ion-content>
+    <ion-item lines="none" class="gapBottom inputItem">
+        <ion-textarea autoresize [(ngModel)]="title" cols="20" placeholder="标题..."></ion-textarea>
+    </ion-item>
+    <ion-item lines="none">
+        <ckeditor style="width:100%;" [(ngModel)]="content"
+            debounce="500"
+            [config]="config">
+        </ckeditor> 
+    </ion-item>
+    <ion-item lines="none">
+        <ion-textarea autoresize [(ngModel)]="groupName" cols="20" placeholder="标签..."></ion-textarea>
+    </ion-item>
+    
+    素材列表
+    
+    <ion-item lines="none">    
+        <ion-button color="success" slot="end" (click)="preview()" *ngIf="article">预览</ion-button>
+        <ion-button color="success" slot="end" (click)="publish()" *ngIf="article">发布</ion-button>
+    </ion-item>
+
+</ion-content>

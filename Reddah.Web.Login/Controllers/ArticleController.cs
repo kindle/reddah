@@ -527,6 +527,7 @@ namespace Reddah.Web.Login.Controllers
                     userInfo.Location = user.Location??"未知";
                     userInfo.Signature = user.Signature;
                     userInfo.Cover = user.Cover;
+                    userInfo.Type = user.Type;
 
                     var findFriends = db.UserFriend.FirstOrDefault(f => (f.UserName == jwtResult.JwtUser.User && f.Watch == targetUser && f.Approve == 1) ||
                     (f.UserName == targetUser && f.Watch == jwtResult.JwtUser.User && f.Approve == 1));

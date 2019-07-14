@@ -311,7 +311,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/en/Reddah.Web.UI.resources.dll">
-      <publishTime>07/04/2019 12:27:49</publishTime>
+      <publishTime>07/14/2019 16:18:30</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -320,19 +320,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/fr-FR/Reddah.Web.UI.resources.dll">
-      <publishTime>07/04/2019 12:27:48</publishTime>
+      <publishTime>07/14/2019 16:18:30</publishTime>
     </File>
     <File Include="bin/ja-JP/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/ja-JP/Reddah.Web.UI.resources.dll">
-      <publishTime>07/04/2019 12:27:48</publishTime>
+      <publishTime>07/14/2019 16:18:30</publishTime>
     </File>
     <File Include="bin/ko-KR/BailinStudio.Web.UI.resources.dll">
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/ko-KR/Reddah.Web.UI.resources.dll">
-      <publishTime>07/04/2019 12:27:48</publishTime>
+      <publishTime>07/14/2019 16:18:30</publishTime>
     </File>
     <File Include="bin/log4net.dll">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -350,40 +350,40 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/16/2018 11:29:30</publishTime>
     </File>
     <File Include="bin/Reddah.Core.dll">
-      <publishTime>06/28/2019 07:14:06</publishTime>
+      <publishTime>07/14/2019 07:10:07</publishTime>
     </File>
     <File Include="bin/Reddah.Core.pdb">
-      <publishTime>06/28/2019 07:14:06</publishTime>
+      <publishTime>07/14/2019 07:10:07</publishTime>
     </File>
     <File Include="bin/Reddah.Encryption.dll">
-      <publishTime>06/28/2019 07:14:06</publishTime>
+      <publishTime>07/14/2019 07:10:08</publishTime>
     </File>
     <File Include="bin/Reddah.Encryption.pdb">
-      <publishTime>06/28/2019 07:14:06</publishTime>
+      <publishTime>07/14/2019 07:10:08</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Captcha.dll">
-      <publishTime>06/28/2019 07:14:06</publishTime>
+      <publishTime>07/14/2019 07:10:08</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Captcha.pdb">
-      <publishTime>06/28/2019 07:14:06</publishTime>
+      <publishTime>07/14/2019 07:10:09</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Core.dll">
-      <publishTime>06/28/2019 07:14:07</publishTime>
+      <publishTime>07/14/2019 07:10:08</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Core.pdb">
-      <publishTime>06/28/2019 07:14:07</publishTime>
+      <publishTime>07/14/2019 07:10:08</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Live.dll">
-      <publishTime>06/28/2019 07:14:07</publishTime>
+      <publishTime>07/14/2019 07:10:09</publishTime>
     </File>
     <File Include="bin/Reddah.Web.Live.pdb">
-      <publishTime>06/28/2019 07:14:07</publishTime>
+      <publishTime>07/14/2019 07:10:09</publishTime>
     </File>
     <File Include="bin/Reddah.Web.UI.dll">
-      <publishTime>07/04/2019 12:27:47</publishTime>
+      <publishTime>07/14/2019 16:18:29</publishTime>
     </File>
     <File Include="bin/Reddah.Web.UI.pdb">
-      <publishTime>07/04/2019 12:27:47</publishTime>
+      <publishTime>07/14/2019 16:18:29</publishTime>
     </File>
     <File Include="bin/Reddah.Web.UI.XML">
       <publishTime>01/19/2019 10:24:03</publishTime>
@@ -443,13 +443,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/09/2015 05:51:05</publishTime>
     </File>
     <File Include="bin/zh-CN/Reddah.Web.UI.resources.dll">
-      <publishTime>07/04/2019 12:27:49</publishTime>
+      <publishTime>07/14/2019 16:18:31</publishTime>
     </File>
     <File Include="Content/app/app.js">
       <publishTime>02/17/2019 07:22:38</publishTime>
     </File>
     <File Include="Content/app/article.js">
-      <publishTime>01/21/2019 15:46:28</publishTime>
+      <publishTime>07/14/2019 16:04:25</publishTime>
     </File>
     <File Include="Content/app/ckeditor/adapters/jquery.js">
       <publishTime>07/14/2016 06:07:09</publishTime>
@@ -2510,7 +2510,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2019 15:34:07</publishTime>
     </File>
     <File Include="Database/Update.sql">
-      <publishTime>07/04/2019 12:00:03</publishTime>
+      <publishTime>07/14/2019 07:06:02</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>11/24/2018 19:29:53</publishTime>
@@ -2576,7 +2576,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2019 10:24:03</publishTime>
     </File>
     <File Include="ReddahModel.edmx.diagram">
-      <publishTime>07/04/2019 12:07:25</publishTime>
+      <publishTime>07/14/2019 07:09:39</publishTime>
     </File>
     <File Include="Scripts/angular-1.2.16.js">
       <publishTime>06/23/2016 06:47:53</publishTime>
@@ -2876,7 +2876,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/23/2016 06:48:38</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/09/2019 16:49:51</publishTime>
+      <publishTime>07/14/2019 07:48:02</publishTime>
     </File>
     <File Include="Web.sitemap">
       <publishTime>11/26/2018 06:57:59</publishTime>

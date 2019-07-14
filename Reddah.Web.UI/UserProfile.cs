@@ -40,6 +40,14 @@ public partial class UserProfile
 
     public int UserSetStatus { get; set; }
 
+    public int Type { get; set; }
+
+    public int limit { get; set; }
+
+    public string CreatedBy { get; set; }
+
+    public string Admins { get; set; }
+
 }
 
 }

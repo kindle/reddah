@@ -53,6 +53,11 @@ namespace Reddah.Web.Login.Utilities
                 replacements[match.Groups[1].Value] : match.Groups[1].Value);
         }
 
+        public static string HtmlEncode(string text)
+        {
+            return HttpUtility.HtmlEncode(HideXss(HideSensitiveWords(text)));
+        }
+
         public static string Sha1(this string str)
         {
             var buffer = Encoding.UTF8.GetBytes(str);

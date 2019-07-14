@@ -32,7 +32,7 @@
                 if (userProfileModel.Menu.Equals("new", System.StringComparison.InvariantCultureIgnoreCase))
                 {
                     query = (from b in db.Articles
-                             where b.Locale.StartsWith(locale) &&
+                             where b.Status== userProfileModel.Status && b.Locale.StartsWith(locale) &&
                               !(loaded).Contains(b.Id)
                              orderby b.Id descending
                              select b)
@@ -42,7 +42,7 @@
                 {
                     //query according to user habits
                     query = (from b in db.Articles
-                             where b.Locale.StartsWith(locale) &&
+                             where b.Status == userProfileModel.Status && b.Locale.StartsWith(locale) &&
                               !(loaded).Contains(b.Id)
                              orderby b.Count descending, b.LastUpdateOn descending
                              select b)
@@ -51,7 +51,7 @@
                 else if (userProfileModel.Menu.Equals("hot", System.StringComparison.InvariantCultureIgnoreCase))
                 {
                     query = (from b in db.Articles
-                             where b.Locale.StartsWith(locale) &&
+                             where b.Status == userProfileModel.Status && b.Locale.StartsWith(locale) &&
                               !(loaded).Contains(b.Id)
                              orderby b.Count descending, b.LastUpdateOn descending
                              select b)
@@ -67,7 +67,7 @@
                     var g4 = ga.Length > 3 ? ga[3] : "";
                     var g5 = ga.Length > 4 ? ga[4] : "";
                     query = (from b in db.Articles
-                             where
+                             where b.Status == userProfileModel.Status &&
                                 b.GroupName.Contains(g1) &&
                                 b.GroupName.Contains(g2) &&
                                 b.GroupName.Contains(g3) &&
@@ -82,7 +82,7 @@
                 else if (userProfileModel.Menu.Equals("byuser", System.StringComparison.InvariantCultureIgnoreCase))
                 {
                     query = (from b in db.Articles
-                             where
+                             where b.Status == userProfileModel.Status &&
                                 b.UserName == userProfileModel.User &&
                                 b.Locale.StartsWith(locale) &&
                                 !(loaded).Contains(b.Id)
@@ -93,7 +93,7 @@
                 else if (userProfileModel.Menu.Equals("search", System.StringComparison.InvariantCultureIgnoreCase))
                 {
                     query = (from b in db.Articles
-                             where
+                             where b.Status == userProfileModel.Status &&
                                 (b.Title.Contains(userProfileModel.Keyword) ||
                                 b.Content.Contains(userProfileModel.Keyword) ||
                                 b.UserName.Contains(userProfileModel.Keyword) ||
@@ -101,6 +101,18 @@
                                 b.GroupName.Contains(userProfileModel.Keyword))  &&
                                 //b.Locale.StartsWith(locale) &&
                                 !(loaded).Contains(b.Id)&&
+                                b.Type == userProfileModel.Type
+                             orderby b.Id descending
+                             select b)
+                            .Take(pageCount);
+                }
+                else if (userProfileModel.Menu.Equals("draft", System.StringComparison.InvariantCultureIgnoreCase))
+                {
+                    query = (from b in db.Articles
+                             where b.Status == userProfileModel.Status &&
+                                b.UserName == userProfileModel.User &&
+                                //b.Locale.StartsWith(locale) &&
+                                !(loaded).Contains(b.Id) &&
                                 b.Type == userProfileModel.Type
                              orderby b.Id descending
                              select b)
@@ -131,6 +143,7 @@
                     ap.Type = item.Type;
                     ap.Locale = item.Locale;
                     ap.Ref = item.Ref;
+                    ap.LastUpdateOn = item.LastUpdateOn;
                     
                     apList.Add(ap);
                 }

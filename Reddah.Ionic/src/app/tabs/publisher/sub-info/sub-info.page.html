@@ -2,7 +2,7 @@
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-label>基本信息</ion-label>
 </ion-item>
-<ion-content no-padding>
+<ion-content #pageTop no-padding style="background-color: white;">
     <div>
         <ion-item (click)="changePhoto()" class="borderTop borderItem">
             <ion-label class="title">Logo</ion-label>
@@ -39,11 +39,23 @@
         </ion-item>
     </div>
 
-    <div class="gap lastGap">
-        <ion-item lines="none" (click)="create()" class="borderTop borderItem borderBottom">
+    <div class="gap">
+        <ion-item lines="none" (click)="add()" class="borderTop borderItem borderBottom">
             <ion-icon slot="start" name="clipboard" color="primary" size="medium"></ion-icon>
-            <ion-label>发文</ion-label>
+            <ion-label>写草稿</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
+
+    <div class="gap lastGap">
+        <ion-item *ngFor="let article of articles" lines="none" (click)="edit(article)" class="borderTop borderItem borderBottom">
+            <ion-label>{{reddah.htmlDecode(article.Title)}}</ion-label>
+            <ion-note slot="end">{{article.LastUpdateOn|date:'MM-dd HH:mm:ss'}}</ion-note>
+            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
+    </div>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content refreshingSpinner="bubbles">
+        </ion-refresher-content>
+    </ion-refresher>
 </ion-content>

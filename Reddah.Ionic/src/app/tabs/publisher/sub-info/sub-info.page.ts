@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, InfiniteScroll, Content } from '@ionic/angular';
 import { SettingSignaturePage } from '../../../settings/setting-signature/setting-signature.page'
 import { CacheService } from "ionic-cache";
 import { ChangePhotoPage } from '../../../common/change-photo/change-photo.page';
@@ -7,6 +7,9 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../../../reddah.service';
 import { QrcardPage } from '../../../common/qrcard/qrcard.page';
 import { SettingNickNamePage } from '../../../settings/setting-nickname/setting-nickname.page'
+import { AddArticlePage } from '../add-article/add-article.page';
+import { Article } from '../../../model/article';
+import { PostviewerPage } from '../../../postviewer/postviewer.page';
 
 @Component({
     selector: 'app-sub-info',
@@ -15,6 +18,16 @@ import { SettingNickNamePage } from '../../../settings/setting-nickname/setting-
 })
 export class SubInfoPage implements OnInit {
 
+    userName: string;
+    @Input() targetUserName;
+    
+    articles = [];
+    loadedIds = [];
+    
+    @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
+    @ViewChild('pageTop') pageTop: Content;
+
+
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
@@ -22,13 +35,94 @@ export class SubInfoPage implements OnInit {
         private cacheService: CacheService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
+        this.reddah.getUserPhotos(this.targetUserName);
     }
 
-    userName: string;
-    @Input() targetUserName;
+    
 
     async ngOnInit() {
-        this.reddah.getUserPhotos(this.targetUserName);
+        let cacheArticles = this.localStorageService.retrieve("reddah_articles_draft_"+this.targetUserName);
+        let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids_draft_"+this.targetUserName);
+        console.log(cacheArticles)
+        if(cacheArticles){
+            this.articles = JSON.parse(cacheArticles);
+            this.loadedIds = JSON.parse(cacheArticleIds);
+        }
+        else
+        {
+            let locale = this.reddah.getCurrentLocale();
+            let cacheKey = "this.reddah.getArticleDrafts" + JSON.stringify(this.loadedIds) + locale + this.targetUserName;
+            let request = this.reddah.getArticles(this.loadedIds, locale, "draft", "", 0, this.targetUserName);
+
+            this.cacheService.loadFromObservable(cacheKey, request, "SubInfoPage"+this.targetUserName)
+            .subscribe(articles => 
+            {
+                for(let article of articles){
+                    this.articles.push(article);
+                    this.loadedIds.push(article.Id);
+                }
+                this.localStorageService.store("reddah_articles_draft_"+this.targetUserName, JSON.stringify(this.articles));
+                this.localStorageService.store("reddah_article_ids_draft_"+this.targetUserName, JSON.stringify(this.loadedIds));
+            });
+        }
+    }
+
+    getArticles(event):void {
+        let locale = this.localStorageService.retrieve("Reddah_Locale");
+        if(locale==null)
+            locale = "en-US"
+
+        let cacheKey = "this.reddah.getArticleDrafts" + JSON.stringify(this.loadedIds) + locale+this.targetUserName;
+        let request = this.reddah.getArticles(this.loadedIds, locale, "draft", "", 0, this.targetUserName);
+
+        this.cacheService.loadFromObservable(cacheKey, request, "SubInfoPage"+this.targetUserName)
+        .subscribe(articles => 
+        {
+            for(let article of articles){
+                this.articles.push(article);
+                this.loadedIds.push(article.Id);  
+            }
+            this.localStorageService.store("reddah_articles_draft_"+this.targetUserName, JSON.stringify(this.articles));
+            this.localStorageService.store("reddah_article_ids_draft_"+this.targetUserName, JSON.stringify(this.loadedIds));
+            if(event){
+                event.target.complete();
+            }
+        });
+    }   
+
+    clearCacheAndReload(event){
+        this.pageTop.scrollToTop();
+        this.cacheService.clearGroup("SubInfoPage"+this.targetUserName);
+        this.localStorageService.clear("reddah_articles_draft_"+this.targetUserName);
+        this.localStorageService.clear("reddah_article_ids_draft_"+this.targetUserName);
+        this.articles = [];
+        this.loadedIds = [];
+        this.getArticles(event);
+    }
+
+    //drag down
+    doRefresh(event) {
+        setTimeout(() => {
+            this.clearCacheAndReload(event);
+        }, 2000);
+    }
+
+    loadData(event) {
+        this.getArticles(event);
+    }
+
+    async view(article: Article){
+        const viewerModal = await this.modalController.create({
+            component: PostviewerPage,
+            componentProps: { article: article }
+        });
+        
+        await viewerModal.present();
+        const { data } = await viewerModal.onDidDismiss();
+        if(data){
+            console.log(data)
+        }
+
     }
 
     async close() {
@@ -97,7 +191,37 @@ export class SubInfoPage implements OnInit {
         this.changed = data;
     }
 
-    async create(){
-        
+    async add(){
+        if(this.articles.length>=7){
+            this.reddah.toast("普通用户最多可以保存7个草稿", "primary")
+        }
+        else{   
+            const modal = await this.modalController.create({
+                component: AddArticlePage,
+                componentProps: { 
+                    targetUserName: this.targetUserName
+                }
+            });
+            await modal.present();
+            const {data} = await modal.onDidDismiss();
+            if(data||!data){
+                this.clearCacheAndReload(null)
+            }
+        }
+    }
+
+    async edit(article){
+        const modal = await this.modalController.create({
+            component: AddArticlePage,
+            componentProps: { 
+                targetUserName: this.targetUserName,
+                article: article,
+            }
+        });
+        await modal.present();
+        const {data} = await modal.onDidDismiss();
+        if(data||!data){
+            this.clearCacheAndReload(null)
+        }
     }
 }

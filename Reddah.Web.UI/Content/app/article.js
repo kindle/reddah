@@ -68,7 +68,8 @@
             Menu: menu,
             Sub: sub,
             User: user,
-            Keyword: keyword
+            Keyword: keyword,
+            Status: 1
         };
         $scope.loading = true;
         $scope.isLoadingMore = true;
