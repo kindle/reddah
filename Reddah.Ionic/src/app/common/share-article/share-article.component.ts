@@ -14,6 +14,7 @@ export class ShareArticleComponent {
     @Input() abstract: string; //article title
     @Input() image: string;  //article image
     @Input() id: number;  //article id
+    @Input() view=true; //default true click to view article
 
     constructor(
         private modalController: ModalController,
@@ -21,14 +22,16 @@ export class ShareArticleComponent {
     ) { }
 
     async viewArticle(articleId){
-        let formData = new FormData();
-        formData.append("ArticleId", JSON.stringify(articleId));
+        if(this.view){
+            let formData = new FormData();
+            formData.append("ArticleId", JSON.stringify(articleId));
 
-        this.reddah.getArticleById(formData).subscribe(data=>{
-            if(data.Success==0){
-                this.goArticleViewer(data.Message);
-            }
-        });
+            this.reddah.getArticleById(formData).subscribe(data=>{
+                if(data.Success==0){
+                    this.goArticleViewer(data.Message);
+                }
+            });
+        }
     } 
 
     async goArticleViewer(article: Article){

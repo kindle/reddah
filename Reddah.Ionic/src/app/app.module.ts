@@ -118,6 +118,7 @@ import { ManagePage } from './tabs/publisher/manage/manage.page';
 import { SubInfoPage } from './tabs/publisher/sub-info/sub-info.page';
 import { PubPage } from './tabs/publisher/pub/pub.page';
 import { AddArticlePage } from './tabs/publisher/add-article/add-article.page';
+import { MorePage } from './common/more/more.page';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -190,7 +191,7 @@ var firebaseConfig = {
         RegisterPage,
         SettingNickNamePage,SettingSignaturePage,
 
-        CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,
+        CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,
     ],
     entryComponents: [
         BookmarkPage,
@@ -243,7 +244,7 @@ var firebaseConfig = {
         RegisterPage,
         SettingNickNamePage,SettingSignaturePage,
 
-        CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,
+        CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,
     ],
     imports: [
         BrowserModule, 

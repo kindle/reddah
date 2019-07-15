@@ -36,6 +36,7 @@
                     </div>
                 </div>
             </ion-card-content>
+            <app-share-article *ngIf="article.Abstract&&article.Abstract.length>2" [abstract]="article.Abstract" [image]="article.Content" [id]="article.Ref"></app-share-article>
             <ion-item no-padding lines="none" style="margin-top:5px;" *ngIf="article.Location" (click)="goLocation(article.Location)">
                 <ion-note color="secondary">{{reddah.getJSON(article.Location).title}}</ion-note>
             </ion-item>
@@ -50,7 +51,7 @@
             <div style="width: 100%;">
                 <div class="like-arrow-up"></div>
                 <div class="likeSection">
-                    <ion-icon name="heart-empty" class="likeIcon"></ion-icon>
+                    <ion-icon name="heart-empty" class="likeIcon" style="font-size:15px;"></ion-icon>
                     <span class="likeUserName">
                         <img [src]="reddah.appData('userphoto_'+user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName)" (click)="goUser(user.userName,true)"
                         style="margin:0 3px;width:35px;height:35px;">

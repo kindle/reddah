@@ -34,28 +34,34 @@
     </div>
     <div class="gap">
         <ion-item class="borderTop" (click)="viewTimeline()">
-            <span class="itemTitle">朋友圈</span>
-            <ion-thumbnail *ngFor="let image of imageList" style="padding: 2px;">
+            <span class="itemTitle" style="line-height: 90px;">朋友圈</span>
+            <ion-thumbnail *ngFor="let image of imageList" style="padding: 5px;">
                 <img src="{{image}}">
             </ion-thumbnail>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
-        <ion-item class="borderBottom" lines="none">
-            <span class="itemTitle">更多信息</span>
+        <ion-item class="borderBottom" lines="none" (click)="goMore()">
+            <span class="itemTitle" style="line-height: 80px;">更多信息</span>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
     <div class="gap lastGap">
         <ion-item class="borderTop" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1" (click)="chat()">
-            <ion-icon name="chatboxes"></ion-icon>
-            <ion-label class="cmd-title">发消息</ion-label>
+            <div class="centerItem">
+                <ion-icon name="chatboxes"></ion-icon>
+                <ion-note color="dark" class="cmd-title">发消息</ion-note>
+            </div>
         </ion-item>
         <ion-item class="borderBottom" lines="none" href="/#" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
-            <ion-icon name="videocam"></ion-icon>
-            <ion-label class="cmd-title">音视频通话</ion-label>
+            <div class="centerItem">
+                <ion-icon name="videocam"></ion-icon>
+                <ion-note color="dark" class="cmd-title">音视频通话</ion-note>
+            </div>
         </ion-item>
         <ion-item  class="borderTop borderBottom" (click)="addFriend()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0&&userName!=reddah.getCurrentUser()">
-            <ion-label class="cmd-title">添加为好友</ion-label>
+            <div class="centerItem">
+                <ion-note color="dark" class="cmd-title">添加为好友</ion-note>
+            </div>
         </ion-item>
     </div>
 </ion-content>

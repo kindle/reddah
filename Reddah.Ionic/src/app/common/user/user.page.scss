@@ -28,6 +28,10 @@
 .borderItem {
 }
 
+.centerItem{
+    display: flex;justify-content: center;width:100%;
+}
+
 .userInfo { 
     padding: 2px;
     margin-left: 10px;

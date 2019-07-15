@@ -14,6 +14,7 @@ import { ChatPage } from '../../../chat/chat.page';
 import { Article } from '../../../model/article';
 import { PostviewerPage } from '../../../postviewer/postviewer.page';
 import { SearchPage } from '../../../common/search/search.page';
+import { MorePage } from '../../../common/more/more.page';
 
 @Component({
     selector: 'app-pub',
@@ -146,11 +147,10 @@ export class PubPage implements OnInit {
         const actionSheet = await this.actionSheetController.create({
             //header: '',
             buttons: [{
-              text: '更多资料',
+              text: '更多信息',
               icon: 'ios-more',
               handler: () => {
-                  //this.clearCacheAndReload();
-                  alert('go to 帐号主体 email')
+                  this.goMore();
               }
             }
             ].concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?
@@ -164,6 +164,14 @@ export class PubPage implements OnInit {
             )
         });
         await actionSheet.present();
+    }
+
+    async goMore(){
+        const modal = await this.modalController.create({
+            component: MorePage,
+        });
+        
+        await modal.present();
     }
 
     async delCinfirm(){

@@ -13,6 +13,7 @@ import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SettingNoteLabelPage } from '../../settings/setting-note-label/setting-note-label.page';
 import { ChatPage } from '../../chat/chat.page';
+import { MorePage } from '../more/more.page';
 
 @Component({
     selector: 'app-user',
@@ -216,6 +217,14 @@ export class UserPage implements OnInit {
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
+    }
+
+    async goMore(){
+        const modal = await this.modalController.create({
+            component: MorePage,
+        });
+        
+        await modal.present();
     }
 
 }

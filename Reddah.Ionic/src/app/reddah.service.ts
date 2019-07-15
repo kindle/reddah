@@ -988,6 +988,8 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
                     this.toTextCache(userInfo.Location, `userlocation_${userName}`);
                 if(userInfo.Signature!=null)
                     this.toTextCache(userInfo.Signature, `usersignature_${userName}`);
+                if(userInfo.Email!=null)
+                    this.toTextCache(userInfo.Email, `useremail_${userName}`);
                 if(userInfo.Type!=null)
                     this.toTextCache(userInfo.Type, `usertype_${userName}`);
                 if(userInfo.NoteName!=null)

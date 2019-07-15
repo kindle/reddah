@@ -50,7 +50,7 @@ export class ChatBase{
         let isLocal = this.reddah.isLocal(key);
         if(isLocal){//play
             let localPath = this.reddah.appData(key);
-            alert(key+localPath)
+            //alert(key+localPath)
             this.videoEditor.getVideoInfo({fileUri: localPath})
             .then(info=>{
                 let options: StreamingVideoOptions = {
@@ -61,7 +61,8 @@ export class ChatBase{
                     controls: true
                 };
                 
-                this.streamingMedia.playVideo(localPath, options);
+                let playWebUrlPath = (<any>window).Ionic.WebView.convertFileSrc(localPath);
+                this.streamingMedia.playVideo(playWebUrlPath, options);
             })
             .catch(err=>{alert(JSON.stringify(err))})
 
