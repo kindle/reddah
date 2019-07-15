@@ -35,6 +35,7 @@
         "Error":{
             "UserNameEmpty":"请输入用户名",
             "UserNameTooLong":"用户名不能超过25个字符",
+            "SubNameTooShort":"名称不能少于2个字符",
             "PasswordEmpty":"请输入密码",
             "PasswordDifferent":"密码不一致",
             "EmailEmpty":"请输入电子邮件",

@@ -140,7 +140,7 @@ export class HomePage implements OnInit {
     }
 
     async goSearch(key){
-        const userModal = await this.modalController.create({
+        const modal = await this.modalController.create({
             component: SearchPage,
             componentProps: { 
                 key: key,
@@ -148,7 +148,7 @@ export class HomePage implements OnInit {
             }
         });
           
-        await userModal.present();
+        await modal.present();
     }
 
     async goUser(userName){

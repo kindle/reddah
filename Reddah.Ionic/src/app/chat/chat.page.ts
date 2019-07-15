@@ -50,18 +50,19 @@ export class ChatBase{
         let isLocal = this.reddah.isLocal(key);
         if(isLocal){//play
             let localPath = this.reddah.appData(key);
-            //alert(key+localPath)
+            alert(key+localPath)
             this.videoEditor.getVideoInfo({fileUri: localPath})
             .then(info=>{
                 let options: StreamingVideoOptions = {
                     successCallback: () => { console.log('Video played') },
-                    errorCallback: (e) => { console.log('Error streaming') },
+                    errorCallback: (e) => { alert('Error streaming:'+JSON.stringify(e)) },
                     orientation: info.orientation,
                     shouldAutoClose: true,
                     controls: true
                 };
                 
                 let playWebUrlPath = (<any>window).Ionic.WebView.convertFileSrc(localPath);
+                alert(playWebUrlPath)
                 this.streamingMedia.playVideo(playWebUrlPath, options);
             })
             .catch(err=>{alert(JSON.stringify(err))})

@@ -154,10 +154,12 @@ export class AddArticlePage implements OnInit {
     }
 
     async preview(){
-        alert(JSON.stringify(this.article));
         const viewerModal = await this.modalController.create({
             component: PostviewerPage,
-            componentProps: { article: this.article }
+            componentProps: { 
+                article: this.article,
+                preview: true
+            }
         });
         
         await viewerModal.present();

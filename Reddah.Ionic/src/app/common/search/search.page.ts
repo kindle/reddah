@@ -62,7 +62,7 @@ export class SearchPage implements OnInit {
     firstLoading_p = false;
 
     async ngOnInit() {
-        if(this.type&&this.type!=-1){//from clicking article label, search publisher
+        if(this.type!=-1){//from clicking article label, search publisher
             if(this.key){
                 this.chooseTopic([].concat.apply([],this.topics)[this.type], false);
                 this.searchKeyword.value = this.key;

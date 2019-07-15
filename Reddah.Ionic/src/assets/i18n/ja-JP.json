@@ -35,6 +35,7 @@
       "Error":{
         "UserNameEmpty":"ユーザー名入力",
         "UserNameTooLong":"User name should be less than 25 characters",
+        "SubNameTooShort":"Name should be at least 2 characters",
         "PasswordEmpty":"パスワード入力",
         "PasswordDifferent":"パスワードが一致しません",
         "EmailEmpty":"入力メール",

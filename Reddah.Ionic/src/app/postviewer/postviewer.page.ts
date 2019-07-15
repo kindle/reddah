@@ -18,6 +18,7 @@ import { PubPage } from '../tabs/publisher/pub/pub.page';
 })
 export class PostviewerPage implements OnInit {
     @Input() article: Article;
+    @Input() preview= false;
     authoronly=true;
 
     constructor(

@@ -7,7 +7,7 @@
     <ion-item lines="none" class="gapBottom inputItem">
         <ion-textarea autoresize [(ngModel)]="title" cols="20" placeholder="标题..."></ion-textarea>
     </ion-item>
-    <ion-item lines="none">
+    <ion-item lines="none" no-padding>
         <ckeditor style="width:100%;" [(ngModel)]="content"
             debounce="500"
             [config]="config">

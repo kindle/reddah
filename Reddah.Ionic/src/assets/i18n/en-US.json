@@ -35,6 +35,7 @@
         "Error":{
             "UserNameEmpty":"Please input user name",
             "UserNameTooLong":"User name should be less than 25 characters",
+            "SubNameTooShort":"Name should be at least 2 characters",
             "PasswordEmpty":"Please input password",
             "PasswordDifferent":"Password & confirm password are different",
             "EmailEmpty":"Please input email",

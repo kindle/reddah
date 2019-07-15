@@ -50,7 +50,7 @@
     <div class="gap lastGap">
         <ion-item *ngFor="let article of articles" lines="none" (click)="edit(article)" class="borderTop borderItem borderBottom">
             <ion-label>{{reddah.htmlDecode(article.Title)}}</ion-label>
-            <ion-note slot="end">{{article.LastUpdateOn|date:'MM-dd HH:mm:ss'}}</ion-note>
+            <ion-note slot="end">{{reddah.getSendTime(article.LastUpdateOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>

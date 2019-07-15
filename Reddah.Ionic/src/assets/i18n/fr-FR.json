@@ -35,6 +35,7 @@
       "Error":{
         "UserNameEmpty":"Veuillez entrer le nom d'utilisateur",
         "UserNameTooLong":"User name should be less than 25 characters",
+        "SubNameTooShort":"Name should be at least 2 characters",
         "PasswordEmpty":"Veuillez entrer votre mot de passe",
         "PasswordDifferent":"Incohérence du mot de passe",
         "EmailEmpty":"Veuillez entrer courriel",

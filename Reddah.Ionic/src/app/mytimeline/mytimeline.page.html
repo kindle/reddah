@@ -80,7 +80,7 @@
                         <div class="likeSection">
                             <ion-icon name="heart-empty" class="likeIcon" style="font-size:15px;"></ion-icon>
                             <span class="likeUserName">
-                                <span class="friendName" (click)="goUser(user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName);last as isLast;">{{user.displayName}}{{isLast?"":", "}}</span>
+                                <span class="user-name" (click)="goUser(user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName);last as isLast;">{{user.displayName}}{{isLast?"":", "}}</span>
                             </span>
                         </div>
                     </div>

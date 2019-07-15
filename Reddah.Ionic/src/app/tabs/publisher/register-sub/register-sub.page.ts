@@ -32,6 +32,8 @@ export class RegisterSubPage implements OnInit {
     async register() {
         if (this.nickname.length == 0) {
             this.reddah.toast(this.translate.instant("Input.Error.SubNameEmpty"));
+        }else if (this.nickname.length < 2) {
+            this.reddah.toast(this.translate.instant("Input.Error.SubNameTooShort"));
         }else if (this.signature.length == 0) {
             this.reddah.toast(this.translate.instant("Input.Error.SubDescEmpty"));
         }else if (this.email.length == 0) {
