@@ -15,3 +15,9 @@ ion-slides {
     overflow-y: scroll;
     display: block;
 }
+
+video{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}

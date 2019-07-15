@@ -26,15 +26,16 @@ export class ChatBase{
         protected streamingMedia: StreamingMedia,
         protected videoEditor: VideoEditor,
     ){}
-/*
+
 ///pop up new window
-    async playVideo(comment){
+    async htmlPlayVideo(id, src, poster){
         
         const modal = await this.modalController.create({
             component: VideoViewerComponent,
             componentProps: {
-                id: comment.Id,
-                src: comment.Content,
+                id: id,
+                src: src,
+                poster: poster,
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
@@ -44,13 +45,13 @@ export class ChatBase{
         await modal.present();
 
     }
-*/
+
     async playVideo(comment){
         let key = comment.Content.toString().toLowerCase();
         let isLocal = this.reddah.isLocal(key);
         if(isLocal){//play
             let localPath = this.reddah.appData(key);
-            alert(key+localPath)
+            //alert(key+localPath)
             this.videoEditor.getVideoInfo({fileUri: localPath})
             .then(info=>{
                 let options: StreamingVideoOptions = {
@@ -62,8 +63,8 @@ export class ChatBase{
                 };
                 
                 let playWebUrlPath = (<any>window).Ionic.WebView.convertFileSrc(localPath);
-                alert(playWebUrlPath)
-                this.streamingMedia.playVideo(playWebUrlPath, options);
+                //this.streamingMedia.playVideo(playWebUrlPath, options);
+                this.htmlPlayVideo(comment.Id, playWebUrlPath, this.reddah.chatImageCache(comment.Content.toLowerCase().replace('.mp4','.jpg')));
             })
             .catch(err=>{alert(JSON.stringify(err))})
 

@@ -15,6 +15,7 @@ import { CacheService } from 'ionic-cache';
 export class VideoViewerComponent implements OnInit {
     @Input() id;
     @Input() src;
+    @Input() poster;
 
 
     private fileTransfer: FileTransferObject; 
@@ -41,72 +42,5 @@ export class VideoViewerComponent implements OnInit {
         this.modalController.dismiss();
     }
 
-
-    async downloadOrgImage(item) {
-        //set status as loading
-        item.isOrgViewed = 2;
-        // only against preview image
-        this.fileTransfer = this.transfer.create();  
-        //this.fileTransfer.onProgress((data)=>{
-        //    this.loadProgress = data.loaded/data.total*100;
-        //});
-        let orgImageUrl = item.webPreviewUrl.replace("///","https://").replace("_reddah_preview","");
-        let orgImageFileName = item.previewImageFileName.replace("_reddah_preview","");
-        //this.fileTransfer.download(orgImageUrl, this.file.applicationStorageDirectory + orgImageFileName).then((entry) => {
-        this.fileTransfer.download(orgImageUrl, this.file.externalRootDirectory+"reddah/" + orgImageFileName).then((entry) => {
-            //let localFileOrgImageUrl = this.file.applicationStorageDirectory + orgImageFileName;
-            let localFileOrgImageUrl = this.file.externalRootDirectory+"reddah/" + orgImageFileName;
-            //this.localStorageService.store(item.webPreviewUrl, localFileOrgImageUrl);
-            this.localStorageService.store(item.webPreviewUrl, 
-                (<any>window).Ionic.WebView.convertFileSrc(localFileOrgImageUrl));
-            
-        }, (error) => {
-            console.log(JSON.stringify(error));
-        });        
-    }
-
-    async downloadImage(item){
-        if(item.isOrgViewed!=1)
-        {
-            //download preview image
-            let source = item.webPreviewUrl.replace("///","https://");
-            let target = this.file.externalRootDirectory + "DCIM/Reddah/" + item.previewImageFileName;
-            let briefTarget = "DCIM/Reddah/" + item.previewImageFileName;
-            this.fileTransfer = this.transfer.create(); 
-            const toast = await this.toastController.create({
-                message: `图片已保存至${briefTarget}`,
-                showCloseButton: false,
-                position: 'bottom',
-                duration: 2500
-            });
-            this.fileTransfer.download(source, target, true).then((entry) => {
-                toast.present();
-            }, (error) => {
-                alert(JSON.stringify(error));
-            });
-        }
-        else
-        {
-            //copy from local directory
-            let fileName = item.previewImageFileName.replace("_reddah_preview","");
-            let path = item.localFileOrgImageUrl.replace(fileName, "");
-            let newFileName = fileName;
-            let newPath = this.file.externalRootDirectory + "DCIM/Reddah/";
-            
-            let briefTarget = "DCIM/Reddah/" + newFileName;
-            
-            const toast = await this.toastController.create({
-                message: `图片已保存至${briefTarget}`,
-                showCloseButton: false,
-                position: 'bottom',
-                duration: 2500
-            });
-            
-            this.file.copyFile(path, fileName, newPath, newFileName).then((data)=>{
-                toast.present();
-            });
-        }
-      
-    }
   
 }
