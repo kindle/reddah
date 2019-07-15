@@ -369,6 +369,19 @@ export class ReddahService {
       );
     }
     //******************************** */
+    private publishArticleUrl = 'https://login.reddah.com/api/pub/publisharticle'; 
+
+    publishArticle(formData: FormData): Observable<any> {
+
+      formData.append('jwt', this.getCurrentJwt());
+      
+      return this.http.post<any>(this.publishArticleUrl, formData)
+      .pipe(
+          tap(data => this.log('pub article')),
+          catchError(this.handleError('pub article', []))
+      );
+    }
+    //******************************** */
 
 
 

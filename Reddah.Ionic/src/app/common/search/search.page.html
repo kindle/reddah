@@ -46,7 +46,7 @@
             <div style="width:100%;border-bottom: 1px solid #eeeeee;padding: 10px 0;">
                 <span class="ts-article-title">{{reddah.summary(article.Title, 100, article.Locale)}}</span>
                 <ion-item style="margin: 8px 0;" lines="none" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0">
-                    <ion-thumbnail *ngFor="let image of article.Content.split('$$$').splice(0,3);index as i" style="padding: 1px;">
+                    <ion-thumbnail *ngFor="let image of article.Content.split('$$$').splice(0,3);index as i" style="padding: 3px;">
                         <img src="{{image}}">
                     </ion-thumbnail>
                 </ion-item>
@@ -106,7 +106,7 @@
             <div style="width:100%;border-bottom: 1px solid #eeeeee;padding: 10px 0;">
                 <span class="ts-article-title">{{reddah.summary(article_t.Title, 100, article_t.Locale)}}</span>
                 <ion-item style="margin: 8px 0;" lines="none" *ngIf="article_t.Content.split('$$$').length>0&&article_t.Content.split('$$$')[0].length>0">
-                    <ion-thumbnail *ngFor="let image of article_t.Content.split('$$$').splice(0,3);index as i" style="padding: 1px;">
+                    <ion-thumbnail *ngFor="let image of article_t.Content.split('$$$').splice(0,3);index as i" style="padding: 3px;">
                         <img src="{{image}}">
                     </ion-thumbnail>
                 </ion-item>

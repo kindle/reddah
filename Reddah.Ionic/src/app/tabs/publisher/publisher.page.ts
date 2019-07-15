@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ModalController, PopoverController } from '@ionic/angular';
+import { Component, ViewChild } from '@angular/core';
+import { ModalController, PopoverController, Content } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
@@ -42,12 +42,12 @@ export class PublisherPage {
             this.groupedContacts = JSON.parse(cachedGroupContact);
         }
         
-        this.loadData();
+        this.loadData(null);
 
     }
 
     showLoading = false;
-    loadData(){
+    loadData(event){
         let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_Pub");
         let cachedContact = this.localStorageService.retrieve("Reddah_Contacts_Pub");
         if(!cachedGroupContact||!cachedContact)
@@ -86,6 +86,9 @@ export class PublisherPage {
             }
             
             this.showLoading = false;
+            if(event){
+                event.target.complete();
+            }
             
         });  
     }
@@ -125,7 +128,7 @@ export class PublisherPage {
         {
             this.cacheService.clearGroup("PubPage");
             this.reddah.getUserPhotos(this.userName);
-            this.loadData();
+            this.loadData(null);
         }
     }
 
@@ -148,7 +151,7 @@ export class PublisherPage {
         {
             this.cacheService.clearGroup("PubPage");
             this.reddah.getUserPhotos(this.userName);
-            this.loadData();
+            this.loadData(null);
         }
     }
 
@@ -197,8 +200,27 @@ export class PublisherPage {
         const { data } = await modal.onDidDismiss();
         if(data||!data)
         {
-            this.loadData();
+            this.loadData(null);
         }
+    }
+
+    //drag down
+    doRefresh(event) {
+        setTimeout(() => {
+            this.clearCacheAndReload(event);
+        }, 2000);
+    }
+
+    @ViewChild('pageTop') pageTop: Content;
+    
+    clearCacheAndReload(event){
+        this.pageTop.scrollToTop();
+        this.cacheService.clearGroup("PubPage");
+        this.localStorageService.clear("Reddah_GroupedContacts_Pub");
+        this.localStorageService.clear("Reddah_Contacts_Pub");
+        this.contacts=[];
+        this.groupedContacts = [];
+        this.loadData(event);
     }
 
 }

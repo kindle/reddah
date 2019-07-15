@@ -38,15 +38,17 @@ export class SubInfoPage implements OnInit {
         this.reddah.getUserPhotos(this.targetUserName);
     }
 
-    
+    showLoading=false;
 
     async ngOnInit() {
+        this.showLoading = true;
         let cacheArticles = this.localStorageService.retrieve("reddah_articles_draft_"+this.targetUserName);
         let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids_draft_"+this.targetUserName);
-        console.log(cacheArticles)
+        
         if(cacheArticles){
             this.articles = JSON.parse(cacheArticles);
             this.loadedIds = JSON.parse(cacheArticleIds);
+            this.showLoading = false;
         }
         else
         {
@@ -61,6 +63,7 @@ export class SubInfoPage implements OnInit {
                     this.articles.push(article);
                     this.loadedIds.push(article.Id);
                 }
+                this.showLoading = false;
                 this.localStorageService.store("reddah_articles_draft_"+this.targetUserName, JSON.stringify(this.articles));
                 this.localStorageService.store("reddah_article_ids_draft_"+this.targetUserName, JSON.stringify(this.loadedIds));
             });
@@ -68,6 +71,7 @@ export class SubInfoPage implements OnInit {
     }
 
     getArticles(event):void {
+        this.showLoading = true;
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         if(locale==null)
             locale = "en-US"
@@ -82,6 +86,7 @@ export class SubInfoPage implements OnInit {
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);  
             }
+            this.showLoading = false;
             this.localStorageService.store("reddah_articles_draft_"+this.targetUserName, JSON.stringify(this.articles));
             this.localStorageService.store("reddah_article_ids_draft_"+this.targetUserName, JSON.stringify(this.loadedIds));
             if(event){
@@ -109,20 +114,6 @@ export class SubInfoPage implements OnInit {
 
     loadData(event) {
         this.getArticles(event);
-    }
-
-    async view(article: Article){
-        const viewerModal = await this.modalController.create({
-            component: PostviewerPage,
-            componentProps: { article: article }
-        });
-        
-        await viewerModal.present();
-        const { data } = await viewerModal.onDidDismiss();
-        if(data){
-            console.log(data)
-        }
-
     }
 
     async close() {
@@ -204,7 +195,7 @@ export class SubInfoPage implements OnInit {
             });
             await modal.present();
             const {data} = await modal.onDidDismiss();
-            if(data||!data){
+            if(data){
                 this.clearCacheAndReload(null)
             }
         }
@@ -220,7 +211,7 @@ export class SubInfoPage implements OnInit {
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
-        if(data||!data){
+        if(data){
             this.clearCacheAndReload(null)
         }
     }

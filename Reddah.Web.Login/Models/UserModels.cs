@@ -34,6 +34,7 @@ namespace Reddah.Web.Login
         public string Location { get; set; }
         public string Signature { get; set; }
         public string Cover { get; set; }
+        public string Email { get; set; }
 
         public string NoteName { get; set; }
         public bool IsFriend { get; set; }

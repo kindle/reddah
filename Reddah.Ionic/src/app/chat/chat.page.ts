@@ -25,6 +25,7 @@ export class ChatBase{
         protected reddah: ReddahService,
         protected streamingMedia: StreamingMedia,
         protected videoEditor: VideoEditor,
+        protected platform: Platform,
     ){}
 
 ///pop up new window
@@ -48,30 +49,35 @@ export class ChatBase{
 
     async playVideo(comment){
         let key = comment.Content.toString().toLowerCase();
-        let isLocal = this.reddah.isLocal(key);
-        if(isLocal){//play
-            let localPath = this.reddah.appData(key);
-            //alert(key+localPath)
-            this.videoEditor.getVideoInfo({fileUri: localPath})
-            .then(info=>{
-                let options: StreamingVideoOptions = {
-                    successCallback: () => { console.log('Video played') },
-                    errorCallback: (e) => { alert('Error streaming:'+JSON.stringify(e)) },
-                    orientation: info.orientation,
-                    shouldAutoClose: true,
-                    controls: true
-                };
-                
-                let playWebUrlPath = (<any>window).Ionic.WebView.convertFileSrc(localPath);
-                //this.streamingMedia.playVideo(playWebUrlPath, options);
-                this.htmlPlayVideo(comment.Id, playWebUrlPath, this.reddah.chatImageCache(comment.Content.toLowerCase().replace('.mp4','.jpg')));
-            })
-            .catch(err=>{alert(JSON.stringify(err))})
+        if(this.platform.is('cordova')){
+            let isLocal = this.reddah.isLocal(key);
+            if(isLocal){//play
+                let localPath = this.reddah.appData(key);
+                //alert(key+localPath)
+                this.videoEditor.getVideoInfo({fileUri: localPath})
+                .then(info=>{
+                    let options: StreamingVideoOptions = {
+                        successCallback: () => { console.log('Video played') },
+                        errorCallback: (e) => { alert('Error streaming:'+JSON.stringify(e)) },
+                        orientation: info.orientation,
+                        shouldAutoClose: true,
+                        controls: true
+                    };
+                    
+                    let playWebUrlPath = (<any>window).Ionic.WebView.convertFileSrc(localPath);
+                    //this.streamingMedia.playVideo(playWebUrlPath, options);
+                    this.htmlPlayVideo(comment.Id, playWebUrlPath, this.reddah.chatImageCache(comment.Content.toLowerCase().replace('.mp4','.jpg')));
+                })
+                .catch(err=>{alert(JSON.stringify(err))})
 
-            
+                
+            }
+            else{//download
+                this.reddah.toFileCache(key, true);
+            }
         }
-        else{//download
-            this.reddah.toFileCache(key, true);
+        else{
+            this.htmlPlayVideo(comment.Id, key, this.reddah.chatImageCache(comment.Content.toLowerCase().replace('.mp4','.jpg')));            
         }
     }
 
@@ -108,13 +114,13 @@ export class ChatPage extends ChatBase implements OnInit  {
         private nativeAudio: NativeAudio,
         private transfer: FileTransfer, 
         private file: File,
-        private platform: Platform,
+        public platform: Platform,
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
-        super(modalController, reddah, streamingMedia, videoEditor);
+        super(modalController, reddah, streamingMedia, videoEditor, platform);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }

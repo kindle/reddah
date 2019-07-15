@@ -115,9 +115,9 @@ export class AddArticlePage implements OnInit {
             loading.dismiss();
             if(result.Success==0)
             { 
-                //this.cacheService.clearGroup("MyTimeLinePage");
-                //this.localStorageService.clear("Reddah_mytimeline");
-                //this.localStorageService.clear("Reddah_mytimeline_ids");
+                this.cacheService.clearGroup("SubInfoPage"+this.targetUserName);
+                this.localStorageService.clear("reddah_articles_draft_"+this.targetUserName);
+                this.localStorageService.clear("reddah_article_ids_draft_"+this.targetUserName);
                 this.modalController.dismiss(true);
             }
             else
@@ -195,7 +195,42 @@ export class AddArticlePage implements OnInit {
 
     async actualPublish(){
         //change flag
+        if(this.article){
+            const loading = await this.loadingController.create({
+                message: 'loading...',
+                spinner: 'circles',
+            });
+            await loading.present();
 
+            let formData = new FormData();
+            formData.append('id', JSON.stringify(this.article.Id));
+            this.reddahService.publishArticle(formData)
+            .subscribe(result => {
+                loading.dismiss();
+                if(result.Success==0)
+                { 
+                    //clear draft list cache
+                    this.cacheService.clearGroup("SubInfoPage"+this.targetUserName);
+                    this.localStorageService.clear("reddah_articles_draft_"+this.targetUserName);
+                    this.localStorageService.clear("reddah_article_ids_draft_"+this.targetUserName);
+
+                    //clear publish user page cache
+                    this.cacheService.clearGroup("PubPage"+this.targetUserName);
+                    this.localStorageService.clear("reddah_articles_"+this.targetUserName);
+                    this.localStorageService.clear("reddah_article_ids_"+this.targetUserName);
+        
+                    this.modalController.dismiss(true);
+                }
+                else
+                {
+                    alert(result.Message);
+                }
+            },
+            error=>{
+                alert(JSON.stringify(error));
+            });
+        }
+        
         //send message to subscribers
     }
 

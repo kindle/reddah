@@ -62,17 +62,7 @@ export class SearchPage implements OnInit {
     firstLoading_p = false;
 
     async ngOnInit() {
-        if(this.type!=-1){//from clicking article label, search publisher
-            if(this.key){
-                this.chooseTopic([].concat.apply([],this.topics)[this.type], false);
-                this.searchKeyword.value = this.key;
-                this.search();
-            }
-            else{
-                this.chooseTopic([].concat.apply([],this.topics)[this.type]);
-            }
-        }        
-        else{//come from search user 404 this.type==-1
+        if(this.type==-1||this.type==null){//come from search user 404 this.type==-1
             if(this.key){
                 this.searchKeyword.value = this.key;
                 this.search();
@@ -82,6 +72,17 @@ export class SearchPage implements OnInit {
                     this.searchKeyword.setFocus();
                 },150);
             }
+        }        
+        else{//from clicking article label, search publisher
+            if(this.key){
+                this.chooseTopic([].concat.apply([],this.topics)[this.type], false);
+                this.searchKeyword.value = this.key;
+                this.search();
+            }
+            else{
+                this.chooseTopic([].concat.apply([],this.topics)[this.type]);
+            }
+            
         }
         
     }
@@ -183,7 +184,8 @@ export class SearchPage implements OnInit {
     async searchTimelines(event, limit=10000){
         
         let cacheKey = "this.reddah.searchTimelines" + JSON.stringify(this.loadedIds_t) + this.locale + "search_timeline"+this.searchKeyword.value;
-        let request = this.reddah.getArticles(this.loadedIds_t, this.locale, "search", this.searchKeyword.value, 1, "", 1);
+        //status=0 as there's no draft for timeline
+        let request = this.reddah.getArticles(this.loadedIds_t, this.locale, "search", this.searchKeyword.value, 0, "", 1);
         
         this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
         .subscribe(articles => 

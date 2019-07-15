@@ -54,11 +54,13 @@ export class PubPage implements OnInit {
     }
 
     ngOnInit(){
+        this.showLoading = true;
         let cacheArticles = this.localStorageService.retrieve("reddah_articles_"+this.userName);
         let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids_"+this.userName);
         if(cacheArticles){
             this.articles = JSON.parse(cacheArticles);
             this.loadedIds = JSON.parse(cacheArticleIds);
+            this.showLoading = false;
         }
         else
         {
@@ -69,18 +71,22 @@ export class PubPage implements OnInit {
             this.cacheService.loadFromObservable(cacheKey, request, "PubPage"+this.userName)
             .subscribe(articles => 
             {
+                this.articles = [];
+                this.loadedIds = [];
                 for(let article of articles){
                     this.articles.push(article);
                     this.loadedIds.push(article.Id);
                 }
+
                 this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
                 this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.loadedIds));
+                this.showLoading = false;
             });
         }
     }
 
     
-
+    showLoading=false;
     getArticles(event):void {
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         if(locale==null)
@@ -92,15 +98,20 @@ export class PubPage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "PubPage"+this.userName)
         .subscribe(articles => 
         {
+            this.articles = [];
+            this.loadedIds = [];
+
             for(let article of articles){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);  
             }
-            this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
-            this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.loadedIds));
+
             if(event){
                 event.target.complete();
             }
+
+            this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
+            this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.loadedIds));
         });
     }   
 

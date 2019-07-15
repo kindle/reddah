@@ -250,8 +250,8 @@ export class AddTimelinePage implements OnInit {
 
             this.videoEditor.trim({
                 fileUri: fileUrl, // path to input video
-                trimStart: 5, // time to start trimming in seconds
-                trimEnd: 15, // time to end trimming in seconds
+                trimStart: 0, // time to start trimming in seconds
+                trimEnd: 30, // time to end trimming in seconds
                 outputFileName: 'output-name', // output file name
                 progress: function(info) {} // optional, see docs on progress
             }).then((value)=>{alert(JSON.stringify(value))})

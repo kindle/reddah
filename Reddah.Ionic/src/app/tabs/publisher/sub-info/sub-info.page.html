@@ -48,6 +48,7 @@
     </div>
 
     <div class="gap lastGap">
+        <div style="display: flex; justify-content: center;"><ion-spinner name="dots" *ngIf="showLoading"></ion-spinner></div>
         <ion-item *ngFor="let article of articles" lines="none" (click)="edit(article)" class="borderTop borderItem borderBottom">
             <ion-label>{{reddah.htmlDecode(article.Title)}}</ion-label>
             <ion-note slot="end">{{reddah.getSendTime(article.LastUpdateOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>

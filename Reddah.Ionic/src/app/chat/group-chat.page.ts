@@ -41,13 +41,13 @@ export class GroupChatPage extends ChatBase implements OnInit {
         private transfer: FileTransfer, 
         private file: File,
         private media: Media,
-        private platform: Platform,
+        public platform: Platform,
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
-        super(modalController, reddah, streamingMedia, videoEditor);
+        super(modalController, reddah, streamingMedia, videoEditor, platform);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }

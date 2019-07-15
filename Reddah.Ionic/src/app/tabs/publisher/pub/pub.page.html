@@ -21,7 +21,7 @@
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
     </ion-refresher>
-    
+    <div style="display: flex; justify-content: center;"><ion-spinner name="dots" *ngIf="showLoading"></ion-spinner></div>
     <ng-template ngFor let-article let-i="index" [ngForOf]="articles" id="homepage" style="color: #636468;font-family: 'Segoe UI', Arial, sans-serif;">
         <div *ngIf="i%7==0" text-center style="padding-top:35px;color:#878787;">{{article.CreatedOnOrg| date: 'MM-dd HH:mm'}}</div>
         <div class="postModuleLiner">
