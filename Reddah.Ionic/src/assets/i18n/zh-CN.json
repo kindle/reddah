@@ -16,6 +16,7 @@
     "Register":{
         "Title":"注册",
         "TitleSub":"注册订阅号",
+        "TitleMini":"注册小程序",
         "ReadAgree":"您已阅读并同意：",
         "UserAgreement":"用户协议、",
         "Privacy":"隐私声明",

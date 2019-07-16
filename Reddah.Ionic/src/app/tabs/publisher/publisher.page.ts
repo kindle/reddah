@@ -6,7 +6,6 @@ import { NavController } from '@ionic/angular';
 import { NewFriendPage } from '../../friend/new-friend/new-friend.page';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from 'ionic-cache';
-import { UserPage } from '../../common/user/user.page';
 import { ChangeNoteNamePopPage } from '../../common/change-notename-pop.page';
 import { SearchPage } from '../../common/search/search.page';
 import { CategoryPage } from './category/category.page';
@@ -115,21 +114,6 @@ export class PublisherPage {
             } 
             currentContacts.push(value);
         });
-    }
-
-    async viewNewFriends(){
-        const newFriendModal = await this.modalController.create({
-            component: NewFriendPage,
-        });
-            
-        await newFriendModal.present();
-        const { data } = await newFriendModal.onDidDismiss();
-        if(data||!data)
-        {
-            this.cacheService.clearGroup("PubPage");
-            this.reddah.getUserPhotos(this.userName);
-            this.loadData(null);
-        }
     }
 
     

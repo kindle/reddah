@@ -39,6 +39,8 @@ namespace Reddah.Web.Login.Controllers
                 string signature = HttpContext.Current.Request["Signature"];
                 string email = HttpContext.Current.Request["Email"];
                 string locale = HttpContext.Current.Request["Locale"];
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int type = js.Deserialize<int>(HttpContext.Current.Request["Type"]);
 
                 if (String.IsNullOrWhiteSpace(userName))
                     return Ok(new ApiResult(1, "No user name"));
@@ -91,7 +93,7 @@ namespace Reddah.Web.Login.Controllers
                         true);
 
                     var userJustCreated = db.UserProfile.FirstOrDefault(u => u.UserName == userName);
-                    userJustCreated.Type = 1;
+                    userJustCreated.Type = type;
                     userJustCreated.NickName = nickName;
                     userJustCreated.Signature = signature;
                     userJustCreated.CreatedBy = jwtResult.JwtUser.User;

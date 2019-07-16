@@ -22,7 +22,7 @@ export class CategoryPage implements OnInit {
 
     constructor(private reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
+        public translate: TranslateService,
         public navController: NavController,
         private renderer: Renderer,
         public modalController: ModalController,
@@ -32,7 +32,7 @@ export class CategoryPage implements OnInit {
         private cacheService: CacheService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        public actionSheetController: ActionSheetController,
+        public actionSheetController: ActionSheetController
         ){
         
     }
@@ -42,28 +42,36 @@ export class CategoryPage implements OnInit {
     }
 
     async chooseCategory(type){
-        console.log(type)
         if(type==1){
             //subscriber
             //open register sub
-            const modal = await this.modalController.create({
-                component: RegisterSubPage
-            });
-              
-            await modal.present();
-            const { data } = await modal.onDidDismiss();
-            if(data){
-
-            }
-            else{
-                
-            }
+            this.registerByType(type, this.translate.instant("Register.TitleSub"));
         }
-        else if(type=2){
+        else if(type==2){
             //service
         }
-        else if(type=3){
+        else if(type==3){
             //mini program
+            this.registerByType(type, this.translate.instant("Register.TitleMini"));
+        }
+    }
+
+    async registerByType(type,title){
+        const modal = await this.modalController.create({
+            component: RegisterSubPage,
+            componentProps: { 
+                title: title,
+                type: type 
+            }
+        });
+          
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+
+        }
+        else{
+            
         }
     }
 

@@ -16,6 +16,7 @@
     "Register":{
       "Title":"레지스터",
       "TitleSub":"注册订阅号",
+      "TitleMini":"注册小程序",
       "ReadAgree":"너 읽는 것에:",
       "UserAgreement":"사용자 협의,",
       "Privacy":"보안 정책",

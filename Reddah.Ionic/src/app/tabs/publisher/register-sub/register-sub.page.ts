@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ReddahService } from '../../../reddah.service';
 import { LoadingController } from '@ionic/angular';
@@ -11,6 +11,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     styleUrls: ['./register-sub.page.scss'],
 })
 export class RegisterSubPage implements OnInit {
+    @Input() type;//1:sub,2:pub,3:mini
+    @Input() title : string;
 
     constructor(private modalController: ModalController,
         private reddah: ReddahService,
@@ -21,7 +23,7 @@ export class RegisterSubPage implements OnInit {
 
     locale;
     ngOnInit() {
-            this.locale = this.reddah.getCurrentLocale();
+        this.locale = this.reddah.getCurrentLocale();
     }
 
     nickname = "";//as sub name
@@ -50,6 +52,7 @@ export class RegisterSubPage implements OnInit {
             await loading.present();
             
             let formData = new FormData();
+            formData.append("Type", this.type);
             formData.append("NickName", this.nickname);
             formData.append("Signature", this.signature);
             formData.append("Email", this.email);
