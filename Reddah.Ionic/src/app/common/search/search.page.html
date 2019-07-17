@@ -75,6 +75,24 @@
             </ion-item>
         </ion-row>
     </ion-grid>
+    <ion-grid *ngIf="selectedTopicId==4">
+        <ion-row>
+            <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_m"></ion-spinner></div>
+            <ion-text *ngIf="firstLoading_m" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+            <span class="articleTab" *ngIf="users_m.length>0">相关小程序</span>
+        </ion-row>
+        <ion-row *ngFor="let pub of users_m" (click)="goMini(pub.UserName)">
+            <ion-item>
+                <ion-avatar slot="start" class="contactUserPhoto">
+                    <img src="{{reddah.appDataPub('userphoto_'+pub.UserName)}}" class="contactPortrait">
+                </ion-avatar>
+                <ion-label style="margin-left:10px;">
+                    <span class="user-name" (press)="showChangeMenu($event, contact)">{{pub.NickName}}</span><br>
+                    <ion-note color="dark">{{pub.Signature}}</ion-note>
+                </ion-label>
+            </ion-item>
+        </ion-row>
+    </ion-grid>
     <ion-grid *ngIf="selectedTopicId==0">
         <ion-row>
             <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_a"></ion-spinner></div>

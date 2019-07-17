@@ -7,10 +7,9 @@ import { ReddahService } from '../../reddah.service';
 import { Article } from "../../model/article";
 import { PostviewerPage } from '../../postviewer/postviewer.page';
 import { StockPage } from '../stock/stock.page';
-import { NgOnChangesFeature } from '@angular/core/src/render3';
 import { TsViewerPage } from '../../mytimeline/tsviewer/tsviewer.page';
-import { UserPage } from '../user/user.page';
 import { PubPage } from '../../tabs/publisher/pub/pub.page';
+import { MiniViewerComponent } from '../mini-viewer/mini-viewer.component';
 
 @Component({
     selector: 'app-search',
@@ -30,7 +29,7 @@ export class SearchPage implements OnInit {
 
     topics = [
         [{id:1,name:'文章'},{id:2,name:'朋友圈'},{id:3,name:'公众号'}],
-        [{id:4,name:'小程序'},{id:6,name:'聊天记录'},{id:6,name:'股票'}],
+        [{id:4,name:'小程序'},{id:5,name:'聊天记录'},{id:6,name:'股票'}],
     ];
 
     async chooseTopic(col, isSetFocus=true){
@@ -60,6 +59,7 @@ export class SearchPage implements OnInit {
     firstLoading_a = false;
     firstLoading_t = false;
     firstLoading_p = false;
+    firstLoading_m = false;
 
     async ngOnInit() {
         if(this.type==-1||this.type==null){//come from search user 404 this.type==-1
@@ -125,9 +125,12 @@ export class SearchPage implements OnInit {
         }
         else if(this.selectedTopicId==4)//mini
         {
-            alert('todo')
+            this.firstLoading_m = true;
+            this.loadedIds_m=[];
+            this.users_m=[];
+            this.searchMini(null);
         }
-        else if(this.selectedTopicId==4)//chat
+        else if(this.selectedTopicId==5)//chat
         {
             alert('todo')
         }
@@ -215,6 +218,7 @@ export class SearchPage implements OnInit {
         let formData = new FormData();
         formData.append("key", this.searchKeyword.value);
         formData.append("loadedIds", JSON.stringify(this.loadedIds_p));
+        formData.append("type", JSON.stringify(1));
         let request = this.reddah.getPublishers(formData);
         
         this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
@@ -234,6 +238,37 @@ export class SearchPage implements OnInit {
             if(event)
                 event.target.complete();
             this.firstLoading_p = false;
+        });
+    }
+
+    loadedIds_m=[];
+    users_m=[];
+    async searchMini(event, limit=10000){
+        
+        let cacheKey = "this.reddah.searchMini" + JSON.stringify(this.loadedIds_m) + this.locale + "search_publisher"+this.searchKeyword.value;
+        let formData = new FormData();
+        formData.append("key", this.searchKeyword.value);
+        formData.append("loadedIds", JSON.stringify(this.loadedIds_m));
+        formData.append("type", JSON.stringify(3));
+        let request = this.reddah.getPublishers(formData);
+        
+        this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
+        .subscribe(pubs => 
+        {
+            let i=0;
+            for(let pub of pubs){
+                if(i<limit)
+                {
+                    this.users_m.push(pub);
+                    this.loadedIds_m.push(pub.UserId);  
+                    i++;
+                }
+                else
+                    break;
+            }
+            if(event)
+                event.target.complete();
+            this.firstLoading_m = false;
         });
     }
 
@@ -291,6 +326,24 @@ export class SearchPage implements OnInit {
             component: PubPage,
             componentProps: { 
                 userName: userName
+            }
+        });
+          
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data||!data)
+        {
+            
+        }
+    }
+
+    async goMini(userName){
+
+        //open mini page
+        const modal = await this.modalController.create({
+            component: MiniViewerComponent,
+            componentProps: { 
+                content: userName
             }
         });
           

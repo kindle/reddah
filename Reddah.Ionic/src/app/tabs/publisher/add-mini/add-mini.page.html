@@ -8,7 +8,7 @@
         <ion-textarea autoresize [(ngModel)]="title" cols="20" placeholder="版本号..."></ion-textarea>
     </ion-item>
     <ion-item lines="none">
-        <ion-textarea autoresize [(ngModel)]="content" cols="20" rows="60" placeholder="源代码..."></ion-textarea>
+        <ion-textarea [(ngModel)]="content" cols="20" rows="30" placeholder="源代码..."></ion-textarea>
     </ion-item>
     <ion-item lines="none">    
         <ion-button color="success" slot="end" (click)="preview()" *ngIf="article">预览</ion-button>

@@ -55,6 +55,7 @@ import { SafePipe } from './safe.pipe';
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { ImageViewerComponent } from './common/image-viewer/image-viewer.component';
 import { VideoViewerComponent } from './common/video-viewer/video-viewer.component';
+import { MiniViewerComponent } from './common/mini-viewer/mini-viewer.component';
 import { SurfacePage } from './surface/surface.page';
 import { RegisterPage } from './surface/register/register.page';
 import { ScanPage } from './common/scan/scan.page';
@@ -154,7 +155,7 @@ var firebaseConfig = {
         NewFriendPage,
         PostviewerPage,
         SafePipe,
-        ImageViewerComponent,VideoViewerComponent,
+        ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,
         SurfacePage,
         CommentComponent,
         CommentTimelineComponent,
@@ -200,7 +201,7 @@ var firebaseConfig = {
         LocalePage,LocationPage,
         ChooseUserPage,
         PostviewerPage,
-        ImageViewerComponent,VideoViewerComponent,
+        ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,
         SurfacePage,
         AddCommentPage,
         AddFriendPage,
