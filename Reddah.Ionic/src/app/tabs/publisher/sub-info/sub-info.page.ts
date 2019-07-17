@@ -10,6 +10,7 @@ import { SettingNickNamePage } from '../../../settings/setting-nickname/setting-
 import { AddArticlePage } from '../add-article/add-article.page';
 import { Article } from '../../../model/article';
 import { PostviewerPage } from '../../../postviewer/postviewer.page';
+import { AddMiniPage } from '../add-mini/add-mini.page';
 
 @Component({
     selector: 'app-sub-info',
@@ -19,7 +20,7 @@ import { PostviewerPage } from '../../../postviewer/postviewer.page';
 export class SubInfoPage implements OnInit {
 
     userName: string;
-    @Input() targetUserName;
+    @Input() targetSub;
     
     articles = [];
     loadedIds = [];
@@ -35,15 +36,16 @@ export class SubInfoPage implements OnInit {
         private cacheService: CacheService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
-        this.reddah.getUserPhotos(this.targetUserName);
     }
 
     showLoading=false;
 
     async ngOnInit() {
+        this.reddah.getUserPhotos(this.targetSub.UserName);
+        
         this.showLoading = true;
-        let cacheArticles = this.localStorageService.retrieve("reddah_articles_draft_"+this.targetUserName);
-        let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids_draft_"+this.targetUserName);
+        let cacheArticles = this.localStorageService.retrieve("reddah_articles_draft_"+this.targetSub.UserName);
+        let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids_draft_"+this.targetSub.UserName);
         
         if(cacheArticles){
             this.articles = JSON.parse(cacheArticles);
@@ -53,10 +55,10 @@ export class SubInfoPage implements OnInit {
         else
         {
             let locale = this.reddah.getCurrentLocale();
-            let cacheKey = "this.reddah.getArticleDrafts" + JSON.stringify(this.loadedIds) + locale + this.targetUserName;
-            let request = this.reddah.getArticles(this.loadedIds, locale, "draft", "", 0, this.targetUserName);
+            let cacheKey = "this.reddah.getArticleDrafts" + JSON.stringify(this.loadedIds) + locale + this.targetSub.UserName;
+            let request = this.reddah.getArticles(this.loadedIds, locale, "draft", "", 0, this.targetSub.UserName);
 
-            this.cacheService.loadFromObservable(cacheKey, request, "SubInfoPage"+this.targetUserName)
+            this.cacheService.loadFromObservable(cacheKey, request, "SubInfoPage"+this.targetSub.UserName)
             .subscribe(articles => 
             {
                 for(let article of articles){
@@ -64,8 +66,8 @@ export class SubInfoPage implements OnInit {
                     this.loadedIds.push(article.Id);
                 }
                 this.showLoading = false;
-                this.localStorageService.store("reddah_articles_draft_"+this.targetUserName, JSON.stringify(this.articles));
-                this.localStorageService.store("reddah_article_ids_draft_"+this.targetUserName, JSON.stringify(this.loadedIds));
+                this.localStorageService.store("reddah_articles_draft_"+this.targetSub.UserName, JSON.stringify(this.articles));
+                this.localStorageService.store("reddah_article_ids_draft_"+this.targetSub.UserName, JSON.stringify(this.loadedIds));
             });
         }
     }
@@ -76,10 +78,10 @@ export class SubInfoPage implements OnInit {
         if(locale==null)
             locale = "en-US"
 
-        let cacheKey = "this.reddah.getArticleDrafts" + JSON.stringify(this.loadedIds) + locale+this.targetUserName;
-        let request = this.reddah.getArticles(this.loadedIds, locale, "draft", "", 0, this.targetUserName);
+        let cacheKey = "this.reddah.getArticleDrafts" + JSON.stringify(this.loadedIds) + locale+this.targetSub.UserName;
+        let request = this.reddah.getArticles(this.loadedIds, locale, "draft", "", 0, this.targetSub.UserName);
 
-        this.cacheService.loadFromObservable(cacheKey, request, "SubInfoPage"+this.targetUserName)
+        this.cacheService.loadFromObservable(cacheKey, request, "SubInfoPage"+this.targetSub.UserName)
         .subscribe(articles => 
         {
             for(let article of articles){
@@ -87,8 +89,8 @@ export class SubInfoPage implements OnInit {
                 this.loadedIds.push(article.Id);  
             }
             this.showLoading = false;
-            this.localStorageService.store("reddah_articles_draft_"+this.targetUserName, JSON.stringify(this.articles));
-            this.localStorageService.store("reddah_article_ids_draft_"+this.targetUserName, JSON.stringify(this.loadedIds));
+            this.localStorageService.store("reddah_articles_draft_"+this.targetSub.UserName, JSON.stringify(this.articles));
+            this.localStorageService.store("reddah_article_ids_draft_"+this.targetSub.UserName, JSON.stringify(this.loadedIds));
             if(event){
                 event.target.complete();
             }
@@ -97,9 +99,9 @@ export class SubInfoPage implements OnInit {
 
     clearCacheAndReload(event){
         this.pageTop.scrollToTop();
-        this.cacheService.clearGroup("SubInfoPage"+this.targetUserName);
-        this.localStorageService.clear("reddah_articles_draft_"+this.targetUserName);
-        this.localStorageService.clear("reddah_article_ids_draft_"+this.targetUserName);
+        this.cacheService.clearGroup("SubInfoPage"+this.targetSub.UserName);
+        this.localStorageService.clear("reddah_articles_draft_"+this.targetSub.UserName);
+        this.localStorageService.clear("reddah_article_ids_draft_"+this.targetSub.UserName);
         this.articles = [];
         this.loadedIds = [];
         this.getArticles(event);
@@ -127,7 +129,7 @@ export class SubInfoPage implements OnInit {
           componentProps: { 
               title: "更换Logo",
               tag : "portrait",
-              targetUserName: this.targetUserName
+              targetUserName: this.targetSub.UserName
           }
         });
           
@@ -135,7 +137,7 @@ export class SubInfoPage implements OnInit {
         const { data } = await userModal.onDidDismiss();
         if(data)
         {
-            this.reddah.getUserPhotos(this.targetUserName);
+            this.reddah.getUserPhotos(this.targetSub.UserName);
         }
         this.changed = data;
     }
@@ -153,14 +155,14 @@ export class SubInfoPage implements OnInit {
             component: SettingNickNamePage,
             componentProps: { 
                 title: "设置名称",
-                currentNickName: this.reddah.appData('usernickname_'+this.targetUserName),
-                targetUserName: this.targetUserName
+                currentNickName: this.reddah.appData('usernickname_'+this.targetSub.UserName),
+                targetUserName: this.targetSub.UserName
             }
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
         if(data){
-            this.reddah.getUserPhotos(this.targetUserName);
+            this.reddah.getUserPhotos(this.targetSub.UserName);
         }
         this.changed = data;
     }
@@ -170,19 +172,19 @@ export class SubInfoPage implements OnInit {
             component: SettingSignaturePage,
             componentProps: { 
                 title: "设置描述",
-                currentSignature: this.reddah.appData('usersignature_'+this.targetUserName),
-                targetUserName: this.targetUserName
+                currentSignature: this.reddah.appData('usersignature_'+this.targetSub.UserName),
+                targetUserName: this.targetSub.UserName
             }
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
         if(data){
-            this.reddah.getUserPhotos(this.targetUserName);
+            this.reddah.getUserPhotos(this.targetSub.UserName);
         }
         this.changed = data;
     }
 
-    async add(){
+    async addArticle(){
         if(this.articles.length>=7){
             this.reddah.toast("普通用户最多可以保存7个草稿", "primary")
         }
@@ -190,7 +192,7 @@ export class SubInfoPage implements OnInit {
             const modal = await this.modalController.create({
                 component: AddArticlePage,
                 componentProps: { 
-                    targetUserName: this.targetUserName
+                    targetUserName: this.targetSub.UserName
                 }
             });
             await modal.present();
@@ -201,11 +203,45 @@ export class SubInfoPage implements OnInit {
         }
     }
 
-    async edit(article){
+    async editArticle(article){
         const modal = await this.modalController.create({
             component: AddArticlePage,
             componentProps: { 
-                targetUserName: this.targetUserName,
+                targetUserName: this.targetSub.UserName,
+                article: article,
+            }
+        });
+        await modal.present();
+        const {data} = await modal.onDidDismiss();
+        if(data){
+            this.clearCacheAndReload(null)
+        }
+    }
+
+    async addMini(){
+        if(this.articles.length>=1){
+            this.reddah.toast("有一个未发布的版本", "primary")
+        }
+        else{   
+            const modal = await this.modalController.create({
+                component: AddMiniPage,
+                componentProps: { 
+                    targetUserName: this.targetSub.UserName
+                }
+            });
+            await modal.present();
+            const {data} = await modal.onDidDismiss();
+            if(data){
+                this.clearCacheAndReload(null)
+            }
+        }
+    }
+
+    async editMini(article){
+        const modal = await this.modalController.create({
+            component: AddMiniPage,
+            componentProps: { 
+                targetUserName: this.targetSub.UserName,
                 article: article,
             }
         });

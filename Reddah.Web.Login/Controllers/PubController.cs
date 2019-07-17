@@ -194,7 +194,7 @@ namespace Reddah.Web.Login.Controllers
                 using (var db = new reddahEntities())
                 {
                     query = from u in db.UserProfile
-                            where u.Type == 1 && (u.CreatedBy == jwtResult.JwtUser.User ||
+                            where u.Type != 0 && (u.CreatedBy == jwtResult.JwtUser.User ||
                                 (u.Admins.StartsWith(jwtResult.JwtUser.User + ",") ||
                                         u.Admins.Contains("," + jwtResult.JwtUser.User + ",") ||
                                         u.Admins.EndsWith("," + jwtResult.JwtUser.User)))

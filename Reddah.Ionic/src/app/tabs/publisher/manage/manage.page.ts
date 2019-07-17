@@ -119,11 +119,12 @@ export class ManagePage implements OnInit {
     }
 
 
-    async subInfo(userName) {
+    async subInfo(sub) {
+        console.log(sub)
         const myInfoModal = await this.modalController.create({
             component: SubInfoPage,
             componentProps: { 
-                targetUserName: userName
+                targetSub: sub
             }
         });
         
@@ -133,7 +134,7 @@ export class ManagePage implements OnInit {
         if(data||!data){
             this.reddah.ClearPub();
             this.ngOnInit();
-            this.reddah.getUserPhotos(userName);
+            this.reddah.getUserPhotos(sub.UserName);
         }
             
     }

@@ -6,9 +6,11 @@
     <ion-list>
         <ion-item-group *ngFor="let group of groupedSubs" lines="none">
             <ion-item-divider color="light" lines="none">{{group.letter.toUpperCase()}}</ion-item-divider>
-            <ion-item *ngFor="let sub of group.subs" (click)="subInfo(sub.UserName)">
+            <ion-item *ngFor="let sub of group.subs" (click)="subInfo(sub)">
                 <ion-avatar slot="start" class="contactUserPhoto">
-                    <img src="{{reddah.appDataPub('userphoto_'+sub.UserName)}}" class="contactPortrait">
+                    <ion-icon name="ios-list" color="tertiary" class="portrait sub" *ngIf="sub.Type==1"></ion-icon>
+                    <ion-icon name="ios-person" color="tertiary" class="portrait service" *ngIf="sub.Type==2"></ion-icon>
+                    <ion-icon name="infinite" color="tertiary" class="portrait mini" *ngIf="sub.Type==3"></ion-icon>
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
                     <span class="user-name" (press)="showChangeMenu($event, contact)">{{sub.NickName}}</span><br>

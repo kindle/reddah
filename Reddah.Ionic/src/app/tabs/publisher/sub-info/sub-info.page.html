@@ -7,19 +7,19 @@
         <ion-item (click)="changePhoto()" class="borderTop borderItem">
             <ion-label class="title">Logo</ion-label>
             <ion-thumbnail slot="end" style="padding:10px;margin-right:-10px;">
-                <img src="{{reddah.appDataPub('userphoto_'+targetUserName)}}" class="portrait">
+                <img src="{{reddah.appDataPub('userphoto_'+targetSub.UserName)}}" class="portrait">
             </ion-thumbnail>
             <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
         </ion-item>
         <ion-item lines="none" (click)="changeNickName()">
             <ion-label class="title">名称</ion-label>
-            <ion-note color="dark" slot="end">{{reddah.appData('usernickname_'+targetUserName)}}</ion-note>
+            <ion-note color="dark" slot="end">{{reddah.appData('usernickname_'+targetSub.UserName)}}</ion-note>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
         <!--
         <ion-item>
             <ion-label class="title">Reddah ID</ion-label>
-            <ion-note slot="end" class="reddahId">{{targetUserName}}</ion-note>
+            <ion-note slot="end" class="reddahId">{{targetSub.UserName}}</ion-note>
         </ion-item>
         <ion-item lines="none" (click)="myQrCard()" class="borderItem borderBottom">
             <ion-label class="title">二维码名片</ion-label>
@@ -35,26 +35,40 @@
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
         <ion-item lines="none" class="borderItem borderBottom">
-            <ion-note slot="start" color="dark" text-wrap>{{reddah.appData('usersignature_'+targetUserName)}}</ion-note>
+            <ion-note slot="start" color="dark" text-wrap>{{reddah.appData('usersignature_'+targetSub.UserName)}}</ion-note>
         </ion-item>
     </div>
 
     <div class="gap">
-        <ion-item lines="none" (click)="add()" class="borderTop borderItem borderBottom">
+        <ion-item lines="none" (click)="addArticle()" class="borderTop borderItem borderBottom" *ngIf="targetSub.Type!=3">
             <ion-icon slot="start" name="clipboard" color="primary" size="medium"></ion-icon>
             <ion-label>写草稿</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
+        <ion-item lines="none" (click)="addMini()" class="borderTop borderItem borderBottom" *ngIf="targetSub.Type==3">
+            <ion-icon slot="start" name="cloud-upload" color="primary" size="medium"></ion-icon>
+            <ion-label>发布新版本</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
     </div>
 
-    <div class="gap lastGap">
+    <div class="gap lastGap" *ngIf="targetSub.Type!=3">
         <div style="display: flex; justify-content: center;"><ion-spinner name="dots" *ngIf="showLoading"></ion-spinner></div>
-        <ion-item *ngFor="let article of articles" lines="none" (click)="edit(article)" class="borderTop borderItem borderBottom">
+        <ion-item *ngFor="let article of articles" lines="none" (click)="editArticle(article)" class="borderTop borderItem borderBottom">
             <ion-label>{{reddah.htmlDecode(article.Title)}}</ion-label>
             <ion-note slot="end">{{reddah.getSendTime(article.LastUpdateOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
+    <div class="gap lastGap" *ngIf="targetSub.Type==3">
+        <div style="display: flex; justify-content: center;"><ion-spinner name="dots" *ngIf="showLoading"></ion-spinner></div>
+        <ion-item *ngFor="let article of articles" lines="none" (click)="editMini(article)" class="borderTop borderItem borderBottom">
+            <ion-label>{{reddah.htmlDecode(article.Title)}}</ion-label>
+            <ion-note slot="end">{{reddah.getSendTime(article.LastUpdateOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
+            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
+    </div>
+
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
