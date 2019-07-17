@@ -1082,7 +1082,7 @@ namespace Reddah.Web.Login.Controllers
 
                         if (!string.IsNullOrWhiteSpace(targetUserName))
                         {
-                            var target = db.UserProfile.FirstOrDefault(u => u.UserName == targetUserName && u.Type == 1
+                            var target = db.UserProfile.FirstOrDefault(u => u.UserName == targetUserName && u.Type != 0
                                 && (u.CreatedBy == jwtResult.JwtUser.User ||
                                     (u.Admins.StartsWith(jwtResult.JwtUser.User + ",") ||
                                             u.Admins.Contains("," + jwtResult.JwtUser.User + ",") ||

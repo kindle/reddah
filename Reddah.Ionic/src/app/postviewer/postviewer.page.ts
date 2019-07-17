@@ -32,7 +32,8 @@ export class PostviewerPage implements OnInit {
     commentsData: any;
 
     ngOnInit() {
-        this.loadComments();
+        if(!this.preview)
+            this.loadComments();
     }
 
     async presentPopover(ev: any) {

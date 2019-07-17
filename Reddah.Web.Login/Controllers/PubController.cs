@@ -134,7 +134,8 @@ namespace Reddah.Web.Login.Controllers
 
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 int[] loadedIds = js.Deserialize<int[]>(HttpContext.Current.Request["loadedIds"]);
-                
+                int type = js.Deserialize<int>(HttpContext.Current.Request["type"]);
+
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
 
@@ -150,7 +151,7 @@ namespace Reddah.Web.Login.Controllers
                     int[] loaded = loadedIds == null ? new int[] { } : loadedIds;
 
                     query = (from u in db.UserProfile
-                             where u.Type == 1 &&
+                             where u.Type == type &&
                              (u.NickName.Contains(key) || u.Signature.Contains(key))
                              && !(loaded).Contains(u.UserId)
                              orderby u.UserId
