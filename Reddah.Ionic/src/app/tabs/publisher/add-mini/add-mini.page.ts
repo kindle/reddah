@@ -15,6 +15,7 @@ import { LocationPage } from '../../../common/location/location.page';
 import { VideoEditor } from '@ionic-native/video-editor/ngx';
 import { PostviewerPage } from '../../../postviewer/postviewer.page';
 import { Article } from '../../../model/article';
+import { MiniViewerComponent } from '../../../common/mini-viewer/mini-viewer.component';
 
 @Component({
     selector: 'app-add-mini',
@@ -154,22 +155,22 @@ export class AddMiniPage implements OnInit {
     }
 
     async preview(){
-        const viewerModal = await this.modalController.create({
-            component: PostviewerPage,
+        
+        //open mini page
+        const modal = await this.modalController.create({
+            component: MiniViewerComponent,
             componentProps: { 
-                article: this.article,
-                preview: true
+                content: this.article.Content
             }
         });
         
-        await viewerModal.present();
-
+        await modal.present();
     }
 
     async publish(){
         const alert = await this.alertController.create({
             header: "",
-            message: `确认发布之后，订阅用户将收到此更新`,
+            message: `确认发布之后，用户将收到此小程序的更新`,
             buttons: [
               {
                 text: "稍后发布",
@@ -204,7 +205,8 @@ export class AddMiniPage implements OnInit {
 
             let formData = new FormData();
             formData.append('id', JSON.stringify(this.article.Id));
-            this.reddahService.publishArticle(formData)
+            
+            this.reddahService.publishMini(formData)
             .subscribe(result => {
                 loading.dismiss();
                 if(result.Success==0)
@@ -214,11 +216,6 @@ export class AddMiniPage implements OnInit {
                     this.localStorageService.clear("reddah_articles_draft_"+this.targetUserName);
                     this.localStorageService.clear("reddah_article_ids_draft_"+this.targetUserName);
 
-                    //clear publish user page cache
-                    this.cacheService.clearGroup("PubPage"+this.targetUserName);
-                    this.localStorageService.clear("reddah_articles_"+this.targetUserName);
-                    this.localStorageService.clear("reddah_article_ids_"+this.targetUserName);
-        
                     this.modalController.dismiss(true);
                 }
                 else

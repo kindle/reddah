@@ -1,4 +1,4 @@
-<ion-tabs *ngIf="isAuthenticated()">
+<ion-tabs *ngIf="isAuthenticated()" appSwipetab (ionTabsDidChange)="ionTabsDidChange($event)" (tabChange)="onTabChange($event)" #myTabs>
     <ion-tab tab="message">
         <ion-router-outlet name="message"></ion-router-outlet>
     </ion-tab>

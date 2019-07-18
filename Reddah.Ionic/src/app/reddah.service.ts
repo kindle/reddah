@@ -382,6 +382,19 @@ export class ReddahService {
       );
     }
     //******************************** */
+    private publishMiniUrl = 'https://login.reddah.com/api/pub/publishprogram'; 
+
+    publishMini(formData: FormData): Observable<any> {
+
+      formData.append('jwt', this.getCurrentJwt());
+      
+      return this.http.post<any>(this.publishMiniUrl, formData)
+      .pipe(
+          tap(data => this.log('pub mini')),
+          catchError(this.handleError('pub mini', []))
+      );
+    }
+    //******************************** */
 
 
 

@@ -6,6 +6,8 @@ import { ModalController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ReddahService } from '../reddah.service';
+import { SwipeTabDirective } from '../swipe-tab.directive';
+import { Tabs } from '@ionic/angular';
 
 @Component({
     selector: 'app-tabs',
@@ -34,6 +36,20 @@ export class TabsPage implements OnInit {
         }
         
         
+    }
+
+    @ViewChild(SwipeTabDirective) swipeTabDirective: SwipeTabDirective;
+    @ViewChild('myTabs') tabRef: Tabs;
+
+
+    ionTabsDidChange($event) {
+        console.log('[TabsPage] ionTabsDidChange, $event: ', $event);
+        this.swipeTabDirective.onTabInitialized($event.tab);
+    }
+
+    onTabChange($event) {
+        console.log('[TabsPage] onTabChange, $event: ', $event);
+        this.tabRef.select($event);
     }
 
     

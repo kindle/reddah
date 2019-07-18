@@ -121,6 +121,7 @@ import { PubPage } from './tabs/publisher/pub/pub.page';
 import { AddArticlePage } from './tabs/publisher/add-article/add-article.page';
 import { MorePage } from './common/more/more.page';
 import { AddMiniPage } from './tabs/publisher/add-mini/add-mini.page';
+import { SwipeTabDirective } from './swipe-tab.directive';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -176,7 +177,7 @@ var firebaseConfig = {
         AddFeedbackPage,
         StockPage,
         CommentReplyPage,
-        AutoresizeDirective,
+        AutoresizeDirective,SwipeTabDirective,
         CommentBoxComponent,
         ChatBoxComponent,
         SearchPage,

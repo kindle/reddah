@@ -81,7 +81,7 @@
             <ion-text *ngIf="firstLoading_m" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
             <span class="articleTab" *ngIf="users_m.length>0">相关小程序</span>
         </ion-row>
-        <ion-row *ngFor="let pub of users_m" (click)="goMini(pub.UserName)">
+        <ion-row *ngFor="let pub of users_m" (click)="goMini(pub)">
             <ion-item>
                 <ion-avatar slot="start" class="contactUserPhoto">
                     <img src="{{reddah.appDataPub('userphoto_'+pub.UserName)}}" class="contactPortrait">

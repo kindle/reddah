@@ -337,13 +337,12 @@ export class SearchPage implements OnInit {
         }
     }
 
-    async goMini(userName){
-
+    async goMini(mini){
         //open mini page
         const modal = await this.modalController.create({
             component: MiniViewerComponent,
             componentProps: { 
-                content: userName
+                content: mini.Cover
             }
         });
           

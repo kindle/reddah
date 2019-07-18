@@ -1,35 +1,31 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController, ToastController, ActionSheetController, Slides } from '@ionic/angular';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { LocalStorageService } from 'ngx-webstorage';
-import 'hammerjs';
+import { Component, OnInit, Input, SecurityContext, ViewEncapsulation } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser'
+import { ModalController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
-import { CacheService } from 'ionic-cache';
 
 @Component({
     selector: 'app-mini-viewer',
     templateUrl: './mini-viewer.component.html',
-    styleUrls: ['./mini-viewer.component.scss']
+    styleUrls: ['./mini-viewer.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class MiniViewerComponent implements OnInit {
     @Input() content;
 
-    private fileTransfer: FileTransferObject; 
+    html;
 
     constructor(
         private modalController: ModalController,
-        private transfer: FileTransfer, 
-        private file: File,
-        private localStorageService: LocalStorageService,
-        private toastController: ToastController,
-        private actionSheetController: ActionSheetController,
         public reddah: ReddahService,
-        private cacheService: CacheService,
+        private sanitizer: DomSanitizer,
     ) {
     }
 
     ngOnInit() {
+        let text = this.reddah.htmlDecode(this.content);
+        
+        this.html = this.sanitizer.bypassSecurityTrustHtml(text);
+        
     }
 
     
