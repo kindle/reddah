@@ -611,5 +611,65 @@ namespace Reddah.Web.Login.Controllers
 
         }
 
+        [Route("publishprogram")]
+        [HttpPost]
+        public IHttpActionResult PublishProgram()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int id = js.Deserialize<int>(HttpContext.Current.Request["id"]);
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                try
+                {
+                    using (var db = new reddahEntities())
+                    {
+                        if (id > 0)
+                        {
+                            var draftPubArticle = db.Article.FirstOrDefault(a => a.Id == id && a.Type == 0 && a.Status == 0);
+                            if (draftPubArticle != null)
+                            {
+                                draftPubArticle.LastUpdateOn = DateTime.UtcNow;
+                                draftPubArticle.LastUpdateBy = jwtResult.JwtUser.User;
+                                draftPubArticle.Status = 1; //0 draft, 1 published
+                                var user = db.UserProfile.FirstOrDefault(u => u.UserName == draftPubArticle.UserName);
+                                if (user != null)
+                                    user.Cover = draftPubArticle.Content;
+                                else
+                                    Ok(new ApiResult(2, "mini program not exist"));
+                                db.SaveChanges();
+                            }
+                        }
+                        else
+                        {
+                            Ok(new ApiResult(2, "draft article not exist"));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Ok(new ApiResult(3, "Excepion:" + ex.Message.ToString()));
+                }
+
+
+                return Ok(new ApiResult(0, "mini program published"));
+
+            }
+            catch (Exception ex1)
+            {
+                return Ok(new ApiResult(4, ex1.Message));
+            }
+
+
+
+        }
+
     }
 }

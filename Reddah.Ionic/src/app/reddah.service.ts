@@ -19,6 +19,7 @@ import { LoadingController, NavController, ModalController, ToastController, Pla
 import { CacheService } from 'ionic-cache';
 import { TranslateService } from '@ngx-translate/core';
 import { TsViewerPage } from './mytimeline/tsviewer/tsviewer.page';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Injectable({
     providedIn: 'root'
@@ -36,6 +37,7 @@ export class ReddahService {
         private platform: Platform,
         private cacheService: CacheService,
         private translate: TranslateService,
+        private iab: InAppBrowser,
     ) { }
 
     //******************************** */
@@ -1312,5 +1314,17 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         return JSON.parse(text);
     }
 
+    openMini(webUrl, miniName){
+        this.fileTransfer = this.transfer.create();  
+        let targetUrl = this.file.externalRootDirectory+"reddah/mini/" + miniName;
+        this.fileTransfer.download(webUrl, targetUrl).then(
+        _ => {
+            let localUrl = (<any>window).Ionic.WebView.convertFileSrc(targetUrl);
+
+            const browser = this.iab.create(localUrl, 'location=no');
+            browser.show();
+        }, 
+        _ => { console.log(JSON.stringify(_)) });
+    }
 
 }
