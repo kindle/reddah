@@ -1,17 +1,11 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+
 /** Ionic CSS Variables **/
 :root {
-
-    /** primary 
-    --ion-color-primary: #3880ff;
-    --ion-color-primary-rgb: 56,128,255;
-    --ion-color-primary-contrast: #ffffff;
-    --ion-color-primary-contrast-rgb: 255,255,255;
-    --ion-color-primary-shade: #3171e0;
-    --ion-color-primary-tint: #4c8dff;
-    **/
+    
+    /** primary **/
     --ion-color-primary: #107c10;
     --ion-color-primary-rgb: 16,124,16;
     --ion-color-primary-contrast: #ffffff;
@@ -84,6 +78,13 @@
     --ion-color-light-shade: #d7d8da;
     --ion-color-light-tint: #f5f6f9;
 
+    /** mini**/
+    --ion-color-mini: #605ab0;
+    --ion-color-mini-rgb: 240,176,0;
+    --ion-color-mini-contrast: #000000;
+    --ion-color-mini-contrast-rgb: 0,0,0;
+    --ion-color-mini-shade: #d39b00;
+    --ion-color-mini-tint: #f2b81a;
 
     .common-comment-popover .popover-content {
         width: auto;
@@ -126,4 +127,14 @@
 * {
     font-size: var(--ion-font-size);
     font-family: var(--ion-font-family);
+    --ion-color-mini: #605ab0;
+}
+
+.ion-color-mini {
+    --ion-color-base: var(--ion-color-mini, #f00) !important;
+    --ion-color-base-rgb: var(--ion-color-mini-rgb, 56, 128, 255) !important;
+    --ion-color-contrast: var(--ion-color-mini-contrast, #06f) !important;
+    --ion-color-contrast-rgb: var(--ion-color-mini-contrast-rgb, 255, 255, 255) !important;
+    --ion-color-shade: var(--ion-color-mini-shade, #0001e0) !important;
+    --ion-color-tint: var(--ion-color-mini-tint, #ff80f0) !important
 }

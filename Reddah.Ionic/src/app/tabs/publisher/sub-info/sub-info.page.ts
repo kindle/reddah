@@ -11,6 +11,7 @@ import { AddArticlePage } from '../add-article/add-article.page';
 import { Article } from '../../../model/article';
 import { PostviewerPage } from '../../../postviewer/postviewer.page';
 import { AddMiniPage } from '../add-mini/add-mini.page';
+import { MiniViewerComponent } from '../../../common/mini-viewer/mini-viewer.component';
 
 @Component({
     selector: 'app-sub-info',
@@ -249,6 +250,23 @@ export class SubInfoPage implements OnInit {
         const {data} = await modal.onDidDismiss();
         if(data){
             this.clearCacheAndReload(null)
+        }
+    }
+
+    async goMini(mini){
+        //open mini page
+        const modal = await this.modalController.create({
+            component: MiniViewerComponent,
+            componentProps: { 
+                content: mini.Cover
+            }
+        });
+          
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data||!data)
+        {
+            
         }
     }
 }

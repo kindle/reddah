@@ -41,12 +41,17 @@
 
     <div class="gap">
         <ion-item lines="none" (click)="addArticle()" class="borderTop borderItem borderBottom" *ngIf="targetSub.Type!=3">
-            <ion-icon slot="start" name="clipboard" color="primary" size="medium"></ion-icon>
+            <ion-icon slot="start" name="clipboard" color="mini" size="medium"></ion-icon>
             <ion-label>写草稿</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
+        <ion-item lines="none" (click)="goMini(targetSub)" class="borderTop borderItem borderBottom" *ngIf="targetSub.Type==3&&targetSub.Cover">
+            <ion-icon slot="start" name="open" color="mini" size="medium"></ion-icon>
+            <ion-label>查看当前版本</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
         <ion-item lines="none" (click)="addMini()" class="borderTop borderItem borderBottom" *ngIf="targetSub.Type==3">
-            <ion-icon slot="start" name="cloud-upload" color="primary" size="medium"></ion-icon>
+            <ion-icon slot="start" name="cloud-upload" color="mini" size="medium"></ion-icon>
             <ion-label>发布新版本</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
@@ -63,6 +68,7 @@
     <div class="gap lastGap" *ngIf="targetSub.Type==3">
         <div style="display: flex; justify-content: center;"><ion-spinner name="dots" *ngIf="showLoading"></ion-spinner></div>
         <ion-item *ngFor="let article of articles" lines="none" (click)="editMini(article)" class="borderTop borderItem borderBottom">
+            <ion-icon slot="start" name="code-working" color="mini" size="medium"></ion-icon>
             <ion-label>{{reddah.htmlDecode(article.Title)}}</ion-label>
             <ion-note slot="end">{{reddah.getSendTime(article.LastUpdateOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
