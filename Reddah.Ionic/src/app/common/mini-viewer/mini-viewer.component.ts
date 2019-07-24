@@ -15,7 +15,8 @@ import { DOCUMENT } from '@angular/common';
     encapsulation: ViewEncapsulation.None,
 })
 export class MiniViewerComponent implements OnInit {
-    @Input() content;
+    @Input() content;//html
+    @Input() js;//js
 
     html;
 
@@ -38,20 +39,42 @@ export class MiniViewerComponent implements OnInit {
         //const browser = this.iab.create("https://login.reddah.com/uploadphoto/mini1.html","location=no");
         //browser.show();
 
-        this.addScript(`https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js`);
-        this.addScript("https://wow.techbrood.com/libs/zepto.1.1.4.min.js");
-        this.addScript("https://wow.techbrood.com/uploads/150101/jsapi_share.js");
-        this.addScript("https://wow.techbrood.com/uploads/150101/head.min.js");
-        this.addScript(`https://reddah.com/test4.js`);
+        this.addScriptByUrl(`https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js`);
+        this.addScriptByUrl("https://wow.techbrood.com/libs/zepto.1.1.4.min.js");
+        this.addScriptByUrl("https://wow.techbrood.com/uploads/150101/jsapi_share.js");
+        this.addScriptByUrl("https://wow.techbrood.com/uploads/150101/head.min.js");
+        //this.addScript(`https://reddah.com/test4.js`);
+
+        
+        //this.addScript(`https://wow.techbrood.com/uploads/140928/fruit-ninjia.js`);
+
+        //this.addScript(`https://reddah.com/100.js`);//sudo
+        this.addScriptByUrl(`https://reddah.com/101.js`);//doodle jump
+        
+        /*
+        let jstext = this.reddah.htmlDecode(this.js);
+        let safejs = this.sanitizer.bypassSecurityTrustScript(jstext);
+        this.addScriptByText(safejs);*/
     }
 
-    addScript(src){
+    addScriptByUrl(src){
         let s = this._renderer2.createElement('script');
         s.type = "text/javascript";
         s.src = src;
+        
 
         this._renderer2.appendChild(this._document.body, s);
     }
+
+    /*
+    addScriptByText(text){
+        let s = this._renderer2.createElement('script');
+        s.type = "text/javascript";
+        s.text = text;
+        
+
+        this._renderer2.appendChild(this._document.body, s);
+    }*/
 
     
     

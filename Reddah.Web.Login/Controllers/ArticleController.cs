@@ -78,7 +78,7 @@ namespace Reddah.Web.Login.Controllers
                         ArticleId = data.ArticleId,
                         ParentId = data.ParentId,
                         Content = System.Web.HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(data.Content))),
-                        CreatedOn = DateTime.Now,
+                        CreatedOn = DateTime.UtcNow,
                         UserName = jwtResult.JwtUser.User
                     });
 
@@ -188,7 +188,7 @@ namespace Reddah.Web.Login.Controllers
                                 file.Guid = guid;
                                 file.Format = fileFormat;
                                 file.UserName = jwtResult.JwtUser.User;
-                                file.CreatedOn = DateTime.Now;
+                                file.CreatedOn = DateTime.UtcNow;
                                 file.GroupName = "";
                                 file.Tag = "";
                                 db.UploadFile.Add(file);
@@ -777,14 +777,14 @@ namespace Reddah.Web.Login.Controllers
                         uf.UserName = jwtResult.JwtUser.User;
                         uf.Watch = targetUser;
                         uf.Just = message;
-                        uf.RequestOn = DateTime.Now;
+                        uf.RequestOn = DateTime.UtcNow;
                         uf.NoteName = targetNoteName;
                         db.UserFriend.Add(uf);
                     }
                     else
                     {
                         item.Just = item.Just==null?message:item.Just+"\r\n"+message;
-                        item.RequestOn = DateTime.Now;
+                        item.RequestOn = DateTime.UtcNow;
                         item.NoteName = targetNoteName;
                     }
 
@@ -983,7 +983,7 @@ namespace Reddah.Web.Login.Controllers
                             uf.UserName = jwtResult.JwtUser.User;
                             uf.Watch = requestUserName;
                             uf.Just = "confirmed";
-                            uf.RequestOn = DateTime.Now;
+                            uf.RequestOn = DateTime.UtcNow;
                             uf.NoteName = requestUserName;
                             uf.Approve = 1;
                             db.UserFriend.Add(uf);
@@ -991,7 +991,7 @@ namespace Reddah.Web.Login.Controllers
                         else
                         {
                             verse.Just = "confirmed";
-                            verse.RequestOn = DateTime.Now;
+                            verse.RequestOn = DateTime.UtcNow;
                             verse.NoteName = requestUserName;
                             verse.Approve = 1;
                         }
@@ -1068,7 +1068,7 @@ namespace Reddah.Web.Login.Controllers
                                 file.Guid = guid;
                                 file.Format = fileFormat;
                                 file.UserName = jwtResult.JwtUser.User;
-                                file.CreatedOn = DateTime.Now;
+                                file.CreatedOn = DateTime.UtcNow;
                                 file.GroupName = "";
                                 file.Tag = tag;
                                 db.UploadFile.Add(file);

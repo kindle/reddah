@@ -27,8 +27,9 @@ export class AddMiniPage implements OnInit {
     @Input() targetUserName;
     @Input() article;
     
-    title: string = "";
-    content: string = "";
+    title: string = "";//js
+    content: string = "";//html
+    abstract: string = "";//css
     groupName: string = "";
 
     config = {
@@ -80,10 +81,10 @@ export class AddMiniPage implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.article)
         if(this.article){
             this.title = this.reddahService.htmlDecode(this.article.Title);
             this.content = this.reddahService.htmlDecode(this.article.Content);
+            this.abstract = this.reddahService.htmlDecode(this.article.Abstract);
             this.groupName = this.reddahService.htmlDecode(this.article.GroupName);
         }
     }
@@ -91,7 +92,7 @@ export class AddMiniPage implements OnInit {
     
     
 
-    async submit(){
+    async save(){
         const loading = await this.loadingController.create({
             message: 'loading...',
             spinner: 'circles',
@@ -99,8 +100,9 @@ export class AddMiniPage implements OnInit {
         await loading.present();
 
         let formData = new FormData();
-        formData.append('title', this.title);
-        formData.append('content', this.content);
+        formData.append('title', this.title);//js
+        formData.append('content', this.content);//html
+        formData.append('abstract', this.abstract);//css
         formData.append('groupName', this.groupName);
         formData.append('targetUserName', this.targetUserName);
         formData.append('locale', this.reddahService.getCurrentLocale());
@@ -111,7 +113,7 @@ export class AddMiniPage implements OnInit {
             formData.append('id', JSON.stringify(-1));
         }
         
-        this.reddahService.addPubArticle(formData)
+        this.reddahService.addPubMini(formData)
         .subscribe(result => {
             loading.dismiss();
             if(result.Success==0)
@@ -160,7 +162,8 @@ export class AddMiniPage implements OnInit {
         const modal = await this.modalController.create({
             component: MiniViewerComponent,
             componentProps: { 
-                content: this.article.Content
+                content: this.article.Content,
+                js: this.article.Title
             }
         });
         

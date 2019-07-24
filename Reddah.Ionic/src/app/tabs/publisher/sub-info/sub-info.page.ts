@@ -219,7 +219,7 @@ export class SubInfoPage implements OnInit {
         }
     }
 
-    async addMini(){
+    async addMini(article){
         if(this.articles.length>=1){
             this.reddah.toast("有一个未发布的版本", "primary")
         }
@@ -227,7 +227,9 @@ export class SubInfoPage implements OnInit {
             const modal = await this.modalController.create({
                 component: AddMiniPage,
                 componentProps: { 
-                    targetUserName: this.targetSub.UserName
+                    targetUserName: this.targetSub.UserName,
+                    article: article
+
                 }
             });
             await modal.present();

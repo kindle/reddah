@@ -39,7 +39,7 @@
                     </ion-card-title>
                 </ion-card-header>
                 <div *ngIf="article.Title.length>0&&article.Title.length<100">
-                    <div style="background-color: white; padding: 2px 0;margin-bottom:0px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                    <div style="background-color: white; padding: 0 0 4px 0;margin-bottom:0px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
                 </div>
                 <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
                     <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 2px;margin-bottom:5px;width:96%;" [innerHTML]="reddah.summary(article.Title,50)"></div>
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </ion-card-content>
-                <ion-item no-padding lines="none" style="margin:2px 0;" *ngIf="article.Location" (click)="goLocation(article.Location)">
+                <ion-item no-padding lines="none" style="margin:2px 0;" *ngIf="article.Location&&article.Location.title" (click)="goLocation(article.Location)">
                     <ion-note color="secondary">{{reddah.getJSON(article.Location).title}}</ion-note>
                 </ion-item>
                 <ion-item no-padding lines="none" style="margin:2px 0;">

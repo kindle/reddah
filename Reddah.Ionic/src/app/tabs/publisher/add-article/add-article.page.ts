@@ -90,7 +90,7 @@ export class AddArticlePage implements OnInit {
     
     
 
-    async submit(){
+    async save(){
         const loading = await this.loadingController.create({
             message: 'loading...',
             spinner: 'circles',

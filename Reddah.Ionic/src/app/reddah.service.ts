@@ -371,6 +371,19 @@ export class ReddahService {
       );
     }
     //******************************** */
+    private addPubMiniUrl = 'https://login.reddah.com/api/pub/addpubmini'; 
+
+    addPubMini(formData: FormData): Observable<any> {
+
+      formData.append('jwt', this.getCurrentJwt());
+      
+      return this.http.post<any>(this.addPubMiniUrl, formData)
+      .pipe(
+          tap(data => this.log('add pub article')),
+          catchError(this.handleError('add pub article', []))
+      );
+    }
+    //******************************** */
     private publishArticleUrl = 'https://login.reddah.com/api/pub/publisharticle'; 
 
     publishArticle(formData: FormData): Observable<any> {
