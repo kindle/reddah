@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, SecurityContext, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, SecurityContext, ViewEncapsulation, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser'
-import { ModalController } from '@ionic/angular';
+import { ModalController, Content } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -15,8 +15,11 @@ import { DOCUMENT } from '@angular/common';
     encapsulation: ViewEncapsulation.None,
 })
 export class MiniViewerComponent implements OnInit {
+
+    @ViewChild('mini') mini: Content;
+    
     @Input() content;//html
-    @Input() js;//js
+    @Input() guid;//article.userName
 
     html;
 
@@ -40,16 +43,18 @@ export class MiniViewerComponent implements OnInit {
         //browser.show();
 
         this.addScriptByUrl(`https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js`);
-        this.addScriptByUrl("https://wow.techbrood.com/libs/zepto.1.1.4.min.js");
-        this.addScriptByUrl("https://wow.techbrood.com/uploads/150101/jsapi_share.js");
-        this.addScriptByUrl("https://wow.techbrood.com/uploads/150101/head.min.js");
+        //this.addScriptByUrl("https://wow.techbrood.com/libs/zepto.1.1.4.min.js");
+        //this.addScriptByUrl("https://wow.techbrood.com/uploads/150101/jsapi_share.js");
+        //this.addScriptByUrl("https://wow.techbrood.com/uploads/150101/head.min.js");
         //this.addScript(`https://reddah.com/test4.js`);
 
         
         //this.addScript(`https://wow.techbrood.com/uploads/140928/fruit-ninjia.js`);
 
         //this.addScript(`https://reddah.com/100.js`);//sudo
-        this.addScriptByUrl(`https://reddah.com/101.js`);//doodle jump
+        //this.addScriptByUrl(`https://reddah.com/101.js`);//doodle jump
+
+        //this.addScriptByUrl(`https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js`);
         
         /*
         let jstext = this.reddah.htmlDecode(this.js);
@@ -57,13 +62,57 @@ export class MiniViewerComponent implements OnInit {
         this.addScriptByText(safejs);*/
     }
 
+    ionViewDidEnter(){
+        this.addScriptByUrl(`https://login.reddah.com/uploadphoto/${this.guid}.js`);
+        this.addCssByUrl(`https://login.reddah.com/uploadphoto/${this.guid}.css`);
+        
+    }
+
     addScriptByUrl(src){
+        let key = this.guid+"_js";
+        /*let item = this._document.getElementById(key);
+        if(item){
+            this._document.body.removeChild(item);
+        }*/
+
         let s = this._renderer2.createElement('script');
         s.type = "text/javascript";
         s.src = src;
+        s.id = key;
         
+        this._renderer2.appendChild(
+            this._document.body.getElementsByTagName("app-mini-viewer")[0], s);
+        
+    }
 
-        this._renderer2.appendChild(this._document.body, s);
+    addCssByUrl(href){
+        let key = this.guid+"_css";
+        /*let item = this._document.getElementById(key);
+        if(item){
+            this._document.body.removeChild(item);
+        }*/
+        
+        let s = this._renderer2.createElement('link');
+        s.type = "text/css";
+        s.href = href;
+        s.rel = "stylesheet";
+        s.id = key;
+        this._renderer2.appendChild(
+            this._document.body.getElementsByTagName("app-mini-viewer")[0], s);
+    }
+
+    ionViewWillLeave(){
+        /*let key1 = this.guid+"_js";
+        let item1 = this._document.getElementById(key1);
+        if(item1){
+            this._document.body.removeChild(item1);
+        }
+
+        let key2 = this.guid+"_css";
+        let item2 = this._document.getElementById(key2);
+        if(item2){
+            this._document.body.removeChild(item2);
+        }*/
     }
 
     /*

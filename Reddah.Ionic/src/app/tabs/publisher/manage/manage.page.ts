@@ -131,7 +131,7 @@ export class ManagePage implements OnInit {
         await myInfoModal.present();
         const { data } = await myInfoModal.onDidDismiss();
         //check if change
-        if(data||!data){
+        if(data){
             this.reddah.ClearPub();
             this.ngOnInit();
             this.reddah.getUserPhotos(sub.UserName);

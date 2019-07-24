@@ -81,11 +81,24 @@ export class AddMiniPage implements OnInit {
     }
 
     ngOnInit() {
+        
         if(this.article){
             this.title = this.reddahService.htmlDecode(this.article.Title);
             this.content = this.reddahService.htmlDecode(this.article.Content);
             this.abstract = this.reddahService.htmlDecode(this.article.Abstract);
             this.groupName = this.reddahService.htmlDecode(this.article.GroupName);
+        }
+        else{
+            this.reddahService.getArticles([], "en-us", "draft", "", 1, this.targetUserName).subscribe(articles => 
+            {
+                if(articles.length>=1){
+                    let article = articles[0];
+                    this.title = this.reddahService.htmlDecode(article.Title);
+                    this.content = this.reddahService.htmlDecode(article.Content);
+                    this.abstract = this.reddahService.htmlDecode(article.Abstract);
+                    this.groupName = this.reddahService.htmlDecode(article.GroupName);
+                }
+            });
         }
     }
     
@@ -157,13 +170,12 @@ export class AddMiniPage implements OnInit {
     }
 
     async preview(){
-        
         //open mini page
         const modal = await this.modalController.create({
             component: MiniViewerComponent,
             componentProps: { 
                 content: this.article.Content,
-                js: this.article.Title
+                guid: this.article.UserName
             }
         });
         

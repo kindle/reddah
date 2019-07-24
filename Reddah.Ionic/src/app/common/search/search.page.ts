@@ -342,7 +342,8 @@ export class SearchPage implements OnInit {
         const modal = await this.modalController.create({
             component: MiniViewerComponent,
             componentProps: { 
-                content: mini.Cover
+                content: mini.Cover,
+                guid: mini.UserName
             }
         });
           
