@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, SecurityContext, ViewEncapsulation, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser'
-import { ModalController, Content } from '@ionic/angular';
+import { ModalController, Content, Platform } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
 
 
 @Component({
@@ -30,6 +31,8 @@ export class MiniViewerComponent implements OnInit {
         private webView: WebView,
         private iab: InAppBrowser,
         private _renderer2: Renderer2, 
+        private gyroscope: Gyroscope,
+        private platform: Platform,
         @Inject(DOCUMENT) private _document: Document
     ) {
     }
@@ -55,7 +58,44 @@ export class MiniViewerComponent implements OnInit {
         let jstext = this.reddah.htmlDecode(this.js);
         let safejs = this.sanitizer.bypassSecurityTrustScript(jstext);
         this.addScriptByText(safejs);*/
+        if(this.platform.is('cordova')){
+            this.gyroCurrent();
+        }
     }
+
+    xOrient=0;
+    yOrient;
+    zOrient;
+    timestamp;
+
+    gyroCurrent(){
+        let options: GyroscopeOptions = {
+            frequency: 1000
+        };
+
+        this.gyroscope.getCurrent(options)
+        .then((orientation: GyroscopeOrientation) => {
+            
+           this.xOrient=orientation.x;
+           this.yOrient=orientation.y;
+           this.zOrient=orientation.z;
+           this.timestamp=orientation.timestamp;
+   
+         })
+        .catch(err=>{
+            alert(JSON.stringify(err))
+        })
+
+        this.gyroscope.watch()
+        .subscribe((orientation: GyroscopeOrientation) => {
+            this.xOrient=orientation.x;
+            this.yOrient=orientation.y;
+            this.zOrient=orientation.z;
+            this.timestamp=orientation.timestamp;
+        });
+    }
+
+
 
     ionViewDidEnter(){
         this.addScriptByUrl(`https://login.reddah.com/uploadphoto/${this.guid}.js`);

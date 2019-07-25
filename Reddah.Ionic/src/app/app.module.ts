@@ -294,6 +294,7 @@ var firebaseConfig = {
         FileTransferObject,
         Globalization,
         Geolocation,
+        Gyroscope,
         MenuController,
         ModalController,
         PhotoLibrary,
