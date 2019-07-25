@@ -681,7 +681,7 @@ namespace Reddah.Web.Login.Controllers
                 Directory.CreateDirectory(HostingEnvironment.MapPath(uploadImageServerPath));
             }
 
-            using (StreamWriter sw = new StreamWriter(filePhysicalPath, true, System.Text.Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(filePhysicalPath, false, System.Text.Encoding.Default))
             {
                 sw.Write(content);
             }
