@@ -7,7 +7,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
+import { weibailin1 } from '../../../main';
 
+declare var rd: any;
 
 @Component({
     selector: 'app-mini-viewer',
@@ -33,6 +35,7 @@ export class MiniViewerComponent implements OnInit {
         private _renderer2: Renderer2, 
         private gyroscope: Gyroscope,
         private platform: Platform,
+        //private weibailin1: weibailin1,
         @Inject(DOCUMENT) private _document: Document
     ) {
     }
@@ -60,37 +63,55 @@ export class MiniViewerComponent implements OnInit {
         this.addScriptByText(safejs);*/
         if(this.platform.is('cordova')){
             this.gyroCurrent();
+            rd.test = function(){
+                alert(1);
+            }
         }
+        //this.weibailin1.weibailin2 = "00000333";
+        let a = new weibailin1();
+        a.weibailin2 = "xxxx";
+        
     }
 
-    xOrient=0;
+    
+    xOrient;
     yOrient;
     zOrient;
     timestamp;
+    text="";
 
     gyroCurrent(){
         let options: GyroscopeOptions = {
-            frequency: 1000
+            frequency: 100
         };
 
+        /*
         this.gyroscope.getCurrent(options)
         .then((orientation: GyroscopeOrientation) => {
-            
-           this.xOrient=orientation.x;
-           this.yOrient=orientation.y;
-           this.zOrient=orientation.z;
-           this.timestamp=orientation.timestamp;
+            if(orientation.x<this.xOrient)
+                this.text = "left1";
+            else
+                this.text = "right1";
+
+            this.xOrient=orientation.x;
+            this.yOrient=orientation.y;
+            this.zOrient=orientation.z;
+            this.timestamp=orientation.timestamp;
    
          })
         .catch(err=>{
             alert(JSON.stringify(err))
-        })
+        })*/
 
-        this.gyroscope.watch()
+        this.gyroscope.watch(options)
         .subscribe((orientation: GyroscopeOrientation) => {
-            this.xOrient=orientation.x;
-            this.yOrient=orientation.y;
-            this.zOrient=orientation.z;
+            if(orientation.z>=this.zOrient)
+                this.text = "left";
+            else
+                this.text = "right";
+            this.xOrient=parseFloat(orientation.x+"").toFixed(6);
+            this.yOrient=parseFloat(orientation.y+"").toFixed(6);
+            this.zOrient=parseFloat(orientation.z+"").toFixed(6);
             this.timestamp=orientation.timestamp;
         });
     }
