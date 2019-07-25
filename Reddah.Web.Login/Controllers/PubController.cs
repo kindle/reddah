@@ -104,12 +104,12 @@ namespace Reddah.Web.Login.Controllers
                     Helpers.Email(
                             new MailAddress("donotreply@reddah.com", "Reddah Public Platform Account"),
                             new MailAddress(email, userName),
-                            "Verify your email address‏ for {4}",
+                            string.Format("Verify your email address‏ for {0}", nickName),
                             string.Format("Dear {0}:\r\n" +
                             "Please visit this link to verify your email address:\r\n" +
                             "https://reddah.com/{1}/VerifyEmail?Userid={2}&EmailToken={3}" +
                             "\r\nAfter that, you can update your public platform account information. Thanks for using Reddah!",
-                            jwtResult.JwtUser.User, locale, userJustCreated.UserId, verifyToken, nickName)
+                            jwtResult.JwtUser.User, locale, userJustCreated.UserId, verifyToken)
                     );
                 }
 
@@ -640,6 +640,10 @@ namespace Reddah.Web.Login.Controllers
                                 Type = 0,
                                 Status = 0, //0 draft, 1 published
                             });
+
+                            this.saveMiniFile(targetUserName, "js", jsText, jwtResult.JwtUser.User, db);
+                            this.saveMiniFile(targetUserName, "html", htmlText, jwtResult.JwtUser.User, db);
+                            this.saveMiniFile(targetUserName, "css", cssText, jwtResult.JwtUser.User, db);
                         }
 
                         db.SaveChanges();
@@ -684,14 +688,18 @@ namespace Reddah.Web.Login.Controllers
                 
             var url = uploadedImagePath + fileName;
 
-            UploadFile file = new UploadFile();
-            file.Guid = miniGuid;
-            file.Format = fileFormat;
-            file.UserName = userName;
-            file.CreatedOn = DateTime.UtcNow;
-            file.GroupName = "";
-            file.Tag = "";
-            db.UploadFile.Add(file);
+            var exist = db.UploadFile.FirstOrDefault(u => u.Guid == miniGuid && u.Format == fileFormat);
+            if (exist == null)
+            {
+                UploadFile file = new UploadFile();
+                file.Guid = miniGuid;
+                file.Format = fileFormat;
+                file.UserName = userName;
+                file.CreatedOn = DateTime.UtcNow;
+                file.GroupName = "";
+                file.Tag = "";
+                db.UploadFile.Add(file);
+            }
         }
 
 

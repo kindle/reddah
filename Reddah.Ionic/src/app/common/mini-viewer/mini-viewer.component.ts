@@ -38,16 +38,11 @@ export class MiniViewerComponent implements OnInit {
         let text = this.reddah.htmlDecode(this.content);
         
         this.html = this.sanitizer.bypassSecurityTrustHtml(text);
-        //this.reddah.openMini("https://login.reddah.com/uploadphoto/mini1.html", "mini1.html");
-        //const browser = this.iab.create("https://login.reddah.com/uploadphoto/mini1.html","location=no");
-        //browser.show();
-
+        
         this.addScriptByUrl(`https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js`);
-        //this.addScriptByUrl("https://wow.techbrood.com/libs/zepto.1.1.4.min.js");
-        //this.addScriptByUrl("https://wow.techbrood.com/uploads/150101/jsapi_share.js");
-        //this.addScriptByUrl("https://wow.techbrood.com/uploads/150101/head.min.js");
-        //this.addScript(`https://reddah.com/test4.js`);
-
+        this.addScriptByUrl("https://wow.techbrood.com/libs/zepto.1.1.4.min.js");
+        this.addScriptByUrl("https://wow.techbrood.com/uploads/150101/jsapi_share.js");
+        this.addScriptByUrl("https://wow.techbrood.com/uploads/150101/head.min.js");
         
         //this.addScript(`https://wow.techbrood.com/uploads/140928/fruit-ninjia.js`);
 

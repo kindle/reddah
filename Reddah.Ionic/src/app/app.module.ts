@@ -17,6 +17,7 @@ import { Crop } from '@ionic-native/crop/ngx';
 import { Camera } from '@ionic-native/Camera/ngx'
 import { File } from '@ionic-native/file/ngx';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { QRScanner } from '@ionic-native/qr-scanner/ngx';

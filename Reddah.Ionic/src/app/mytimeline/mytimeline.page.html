@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </ion-card-content>
-                <ion-item no-padding lines="none" style="margin:2px 0;" *ngIf="article.Location&&article.Location.title" (click)="goLocation(article.Location)">
+                <ion-item no-padding lines="none" style="margin:2px 0;" *ngIf="article.Location" (click)="goLocation(article.Location)">
                     <ion-note color="secondary">{{reddah.getJSON(article.Location).title}}</ion-note>
                 </ion-item>
                 <ion-item no-padding lines="none" style="margin:2px 0;">
