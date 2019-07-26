@@ -11,7 +11,4 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
 
-declare var weibailin: any;
-export class weibailin1{
-  weibailin2:string;
-}
+  

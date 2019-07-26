@@ -34,6 +34,7 @@ import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { Shake } from '@ionic-native/shake/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { VideoEditor } from '@ionic-native/video-editor/ngx';
+import { Vibration } from '@ionic-native/vibration/ngx';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 import { CKEditorModule } from 'ckeditor4-angular';
 
@@ -311,6 +312,7 @@ var firebaseConfig = {
         Media,
         NativeAudio,
         VideoEditor,
+        Vibration,
         //Firebase,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     ],

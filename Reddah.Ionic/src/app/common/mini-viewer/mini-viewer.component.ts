@@ -7,9 +7,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
-import { weibailin1 } from '../../../main';
+import { Vibration } from '@ionic-native/vibration/ngx';
 
-declare var rd: any;
 
 @Component({
     selector: 'app-mini-viewer',
@@ -35,7 +34,7 @@ export class MiniViewerComponent implements OnInit {
         private _renderer2: Renderer2, 
         private gyroscope: Gyroscope,
         private platform: Platform,
-        //private weibailin1: weibailin1,
+        private vibration: Vibration,
         @Inject(DOCUMENT) private _document: Document
     ) {
     }
@@ -63,14 +62,45 @@ export class MiniViewerComponent implements OnInit {
         this.addScriptByText(safejs);*/
         if(this.platform.is('cordova')){
             this.gyroCurrent();
-            rd.test = function(){
-                alert(1);
-            }
         }
-        //this.weibailin1.weibailin2 = "00000333";
-        let a = new weibailin1();
-        a.weibailin2 = "xxxx";
+        this.initApi();
         
+    }
+
+    
+    initApi(){
+        window["reddahApi"] = {}; // global Object container; don't use var
+        window["reddahApi"].value = 1;
+        window["reddahApi"].increment = function() { window["reddahApi"].value++; }
+        window["reddahApi"].show = function() { alert(window["reddahApi"].value); }
+
+        //window["reddah"].value=6;
+        //window["reddah"].increment();
+        //window["reddah"].show(); // alerts 7
+        this.initGyro();
+        this.initVibration();
+    }
+
+    initGyro(){
+        let options: GyroscopeOptions = {
+            frequency: 100
+        };
+        
+        
+        /*window["reddahApi"].startGyro = function() { alert(window["reddahApi"].value); }
+        window["reddahApi"].stopGyro = function() { alert(window["reddahApi"].value); }
+        window["reddahApi"].onGyro = function() { 
+            return this.gyroscope.watch(options);
+        }*/
+
+        
+    }
+
+    initVibration(){
+        window["reddahApi"].vibrate = function() {
+            alert('vibrate');
+            this.vibration.vibrate(1000);
+        }
     }
 
     
