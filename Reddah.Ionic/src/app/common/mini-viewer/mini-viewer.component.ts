@@ -67,6 +67,7 @@ export class MiniViewerComponent implements OnInit {
         
     }
 
+
     
     initApi(){
         window["reddahApi"] = {}; // global Object container; don't use var
@@ -83,26 +84,24 @@ export class MiniViewerComponent implements OnInit {
 
     initGyro(){
         let options: GyroscopeOptions = {
-            frequency: 100
+            frequency: 20
         };
         
         
         /*window["reddahApi"].startGyro = function() { alert(window["reddahApi"].value); }
-        window["reddahApi"].stopGyro = function() { alert(window["reddahApi"].value); }
-        window["reddahApi"].onGyro = function() { 
+        window["reddahApi"].stopGyro = function() { alert(window["reddahApi"].value); }*/
+        window["reddahApi"].watchGyro = ()=> { 
             return this.gyroscope.watch(options);
-        }*/
+        }
 
         
     }
 
     initVibration(){
-        window["reddahApi"].vibrate = function() {
-            alert('vibrate');
+        window["reddahApi"].vibrate = ()=> {
             this.vibration.vibrate(1000);
         }
     }
-
     
     xOrient;
     yOrient;
