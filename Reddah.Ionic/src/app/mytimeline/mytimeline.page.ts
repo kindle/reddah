@@ -234,8 +234,7 @@ export class MyTimeLinePage implements OnInit {
           
         await postModal.present();
         const { data } = await postModal.onDidDismiss();
-        if(data||!data){
-            //this.clearCacheAndReload(null);
+        if(data){
             this.doRefresh(null);
         }
     }

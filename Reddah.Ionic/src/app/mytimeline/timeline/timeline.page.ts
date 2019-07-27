@@ -10,6 +10,10 @@ import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.com
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TsViewerPage } from '../tsviewer/tsviewer.page'
+import * as moment from 'moment';
+import { TimelinePopPage } from '../../common/timeline-pop.page';
+import { AddTimelinePage } from '../add-timeline/add-timeline.page';
+import { MessagePage } from '../message/message.page';
 
 @Component({
     selector: 'app-timeline',
@@ -63,6 +67,10 @@ export class TimeLinePage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
         .subscribe(timeline => 
         {
+            if(this.userName==this.reddah.getCurrentUser()){ 
+                var localTime = new Date();
+                this.articles.push({Id:0, CreatedOn: moment.utc(localTime).add(-1, 'minutes').format("YYYY-MM-DDTHH:mm:ss").toString(), Abstract:"",Content:""});  
+            }
             for(let article of timeline){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
@@ -167,5 +175,45 @@ export class TimeLinePage implements OnInit {
         });
         
         await userModal.present();
+    }
+
+    async post(ev: any) {
+        const popover = await this.popoverController.create({
+            component: TimelinePopPage,
+            animated: false,
+            translucent: true,
+            cssClass: 'post-option-popover'
+        });
+        await popover.present();
+        const { data } = await popover.onDidDismiss();
+        if(data==1||data==2||data==3){
+            //data=1: take a photo, data=2: lib photo, data=3: lib video
+            this.goPost(data);
+        }
+    }
+
+    async goPost(postType){
+        const postModal = await this.modalController.create({
+            component: AddTimelinePage,
+            componentProps: { postType: postType }
+        });
+          
+        await postModal.present();
+        const { data } = await postModal.onDidDismiss();
+        if(data){
+            this.clearCacheAndReload();
+        }
+    }
+
+    async goMessage(){
+        const modal = await this.modalController.create({
+            component: MessagePage,
+        });
+          
+        await modal.present();
+    }
+
+    isMe(){
+        return this.userName==this.reddah.getCurrentUser();
     }
 }

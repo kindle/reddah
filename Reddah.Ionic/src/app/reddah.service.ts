@@ -20,6 +20,7 @@ import { CacheService } from 'ionic-cache';
 import { TranslateService } from '@ngx-translate/core';
 import { TsViewerPage } from './mytimeline/tsviewer/tsviewer.page';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import * as moment from 'moment';
 
 @Injectable({
     providedIn: 'root'
@@ -1340,6 +1341,11 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             browser.show();
         }, 
         _ => { console.log(JSON.stringify(_)) });
+    }
+
+    utcToLocal(str, format="YYYY-MM-DD HH:mm:ss"){
+        let localTime = moment.utc(str).toDate();
+        return moment(localTime).format(format).toString();
     }
 
 
