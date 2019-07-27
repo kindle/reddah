@@ -1130,22 +1130,22 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         let minC =diffValue/minute;
         let secC =diffValue/second;
         if(yearC>=1){
-            result=parseInt(yearC+"") + " " +this.translate.instant("Time.YearsAgo");
+            result=parseInt(yearC+"") + "" +this.translate.instant("Time.YearsAgo");
         }
         else if(monthC>=1){
-            result=parseInt(monthC+"") + " " + this.translate.instant("Time.MonthsAgo");
+            result=parseInt(monthC+"") + "" + this.translate.instant("Time.MonthsAgo");
         }
         else if(weekC>=1){
-            result=parseInt(weekC+"") + " " + this.translate.instant("Time.WeeksAgo");
+            result=parseInt(weekC+"") + "" + this.translate.instant("Time.WeeksAgo");
         }
         else if(dayC>=1){
-            result=(parseInt(dayC+"")==1?this.translate.instant("Time.Yesterday"):parseInt(dayC+"") + " " +this.translate.instant("Time.DaysAgo"));
+            result=(parseInt(dayC+"")==1?this.translate.instant("Time.Yesterday"):parseInt(dayC+"") + "" +this.translate.instant("Time.DaysAgo"));
         }
         else if(hourC>=1){
-            result=parseInt(hourC+"") + " " +this.translate.instant("Time.HoursAgo");
+            result=parseInt(hourC+"") + "" +this.translate.instant("Time.HoursAgo");
         }
         else if(minC>=1){
-            result=parseInt(minC+"") + " " +this.translate.instant("Time.MinutesAgo");
+            result=parseInt(minC+"") + "" +this.translate.instant("Time.MinutesAgo");
         }
         else if(secC>=1){
             result=this.translate.instant("Time.JustNow");
@@ -1325,7 +1325,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     }
 
     getJSON(text){
-        if(text==null||text==undefined)
+        if(text==null||text=='undefined')
             return "";
         return JSON.parse(text);
     }

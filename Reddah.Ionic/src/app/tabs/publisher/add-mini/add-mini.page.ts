@@ -175,7 +175,8 @@ export class AddMiniPage implements OnInit {
             component: MiniViewerComponent,
             componentProps: { 
                 content: this.article.Content,
-                guid: this.article.UserName
+                guid: this.article.UserName,
+                version: this.article.Id
             }
         });
         

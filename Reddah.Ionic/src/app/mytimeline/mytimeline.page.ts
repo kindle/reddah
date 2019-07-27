@@ -445,4 +445,8 @@ export class MyTimeLinePage implements OnInit {
     
         await modal.present();
     }
+
+    isMe(userName){
+        return userName==this.reddah.getCurrentUser();
+    }
 }

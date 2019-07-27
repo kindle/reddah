@@ -343,7 +343,8 @@ export class SearchPage implements OnInit {
             component: MiniViewerComponent,
             componentProps: { 
                 content: mini.Cover,
-                guid: mini.UserName
+                guid: mini.UserName,
+                version: mini.Sex,
             }
         });
           

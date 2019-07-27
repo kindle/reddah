@@ -275,4 +275,8 @@ export class TsViewerPage implements OnInit {
     
         await modal.present();
     }
+
+    isMe(){
+        return this.article.UserName==this.reddah.getCurrentUser();
+    }
 }

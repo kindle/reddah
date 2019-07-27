@@ -31,19 +31,23 @@
 
 .timelineAvatar img {
     position: relative;
-    width: 90px;
-    height: 90px;
-    top: -50px;
+    width: 80px;
+    height: 80px;
+    top: -60px;
     margin-right: 15px;
     border-radius: 7%;
 }
 
 .timelineAvatar ion-label {
     position: relative;
-    top: -40px;
+    top: -30px;
     height: 30px;
-    margin-right: 20px;
+    margin-right: 15px;
     color: white;
+}
+
+.userNameTitle{
+   font-weight: bold;
 }
 
 .imgContainer {

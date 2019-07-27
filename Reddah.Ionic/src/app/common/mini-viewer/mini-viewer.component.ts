@@ -22,6 +22,7 @@ export class MiniViewerComponent implements OnInit {
     
     @Input() content;//html
     @Input() guid;//article.userName
+    @Input() version;// id as versions
 
     html;
 
@@ -145,11 +146,9 @@ export class MiniViewerComponent implements OnInit {
         });
     }
 
-
-
     ionViewDidEnter(){
-        this.addScriptByUrl(`https://login.reddah.com/uploadphoto/${this.guid}.js`);
-        this.addCssByUrl(`https://login.reddah.com/uploadphoto/${this.guid}.css`);
+        this.addScriptByUrl(`https://login.reddah.com/uploadphoto/${this.guid}.js?version=${this.version}`);
+        this.addCssByUrl(`https://login.reddah.com/uploadphoto/${this.guid}.css?version=${this.version}`);
         
     }
 

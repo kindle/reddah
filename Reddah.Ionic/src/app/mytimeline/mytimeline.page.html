@@ -28,7 +28,7 @@
             <img [src]="reddah.appData('userphoto_'+reddah.unReadMessage.slice(-1)[0].From)" class="messagePhoto">
             <span style="color:white;line-height:2.1em;margin:0.24em 0.8em;">{{reddah.unReadMessage.length}}条新消息</span>
         </div>
-        <div *ngFor="let article of articles" style="display: flex; border-bottom: 1px solid lightgrey; margin-bottom: 15px; padding-bottom: 10px;">
+        <div *ngFor="let article of articles" style="display: flex; border-bottom: 1px solid lightgrey; margin-top:10px; margin-bottom: 15px; padding-bottom: 10px;">
             <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
                 <img src="{{reddah.appData('userphoto_'+article.UserName)}}" class="portrait" (click)="goUser(article.UserName)">
             </div>
@@ -67,11 +67,12 @@
                         </div>
                     </div>
                 </ion-card-content>
-                <ion-item no-padding lines="none" style="margin:2px 0;" *ngIf="article.Location" (click)="goLocation(article.Location)">
+                <ion-item no-padding lines="none" style="margin:2px 0;" *ngIf="article.Location&&article.Location!='undefined'" (click)="goLocation(article.Location)">
                     <ion-note color="secondary">{{reddah.getJSON(article.Location).title}}</ion-note>
                 </ion-item>
                 <ion-item no-padding lines="none" style="margin:2px 0;">
                     <ion-note color="dark">{{reddah.getSendTime(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
+                    <ion-note color="secondary" style="margin-left: 5px;" *ngIf="isMe(article.UserName)">删除</ion-note>
                     <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
                 </ion-item>
                 <ion-item no-padding lines="none" *ngIf="reddah.getAllowedNames(article.GroupName).length>0">
