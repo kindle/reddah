@@ -789,9 +789,14 @@ namespace Reddah.Web.Login.Controllers
                                 draftPubArticle.Status = 1; //0 draft, 1 published
                                 var user = db.UserProfile.FirstOrDefault(u => u.UserName == draftPubArticle.UserName);
                                 if (user != null)
+                                {
                                     user.Cover = draftPubArticle.Content;
+                                    user.Sex = draftPubArticle.Id;
+                                }
                                 else
+                                {
                                     Ok(new ApiResult(2, "mini program not exist"));
+                                }
                                 db.SaveChanges();
                             }
                         }
