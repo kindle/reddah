@@ -50,7 +50,31 @@
                 <div class="articleContent" *ngIf="article.Id>0">
                     <ion-item no-padding lines="none" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.length>0" (click)="goTsViewer(article)">
                         <ion-thumbnail slot="start">
-                            <img src="{{reddah.level2Cache(article.Content.split('$$$')[0])}}">
+                            <div class="tsparent4" *ngIf="article.Content.split('$$$').length>=4">
+                                <div class="tscontainer" *ngFor="let image of article.Content.split('$$$').slice(0,4);index as i">
+                                    <img src="{{reddah.level2Cache(image)}}" class="tspicture">
+                                </div>
+                            </div>
+                            <div class="tsparent3" *ngIf="article.Content.split('$$$').length==3">
+                                <div class="tscontainer" style="grid-row: 1/3;">
+                                    <img src="{{reddah.level2Cache(article.Content.split('$$$')[0])}}" class="tspicture3">
+                                </div>
+                                <div class="tscontainer">
+                                    <img src="{{reddah.level2Cache(article.Content.split('$$$')[1])}}" class="tspicture3">
+                                </div>
+                                <div class="tscontainer">
+                                    <img src="{{reddah.level2Cache(article.Content.split('$$$')[2])}}" class="tspicture3">
+                                </div>
+                            </div>
+                            <div class="tsparent2" *ngIf="article.Content.split('$$$').length==2">
+                                <div class="tscontainer">
+                                    <img class="ts2p1" src="{{reddah.level2Cache(article.Content.split('$$$')[0])}}">
+                                </div>
+                                <div class="tscontainer">
+                                    <img class="ts2p2" src="{{reddah.level2Cache(article.Content.split('$$$')[1])}}">
+                                </div>
+                            </div>
+                            <img src="{{reddah.level2Cache(article.Content.split('$$$')[0])}}" *ngIf="article.Content.split('$$$').length==1">
                         </ion-thumbnail>
                         <ion-label class="articleContentText" text-wrap>
                             <div [innerHTML]="reddah.summary(article.Title,20)" class="articleContentTextSummary"></div>

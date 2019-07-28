@@ -110,3 +110,54 @@
 .userNameTitle{
     font-weight: bold;
 }
+
+
+.tscontainer {
+    position: relative;
+    padding-top: 100%;
+    overflow: hidden;
+}
+
+.tsparent4 {
+    display: grid;
+    grid-template-columns: 47% 47%;
+    grid-gap: 1px;
+}
+
+.tspicture {
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+
+.tsparent2 {
+    display: grid;
+    grid-template-columns: 48% 48%;
+    grid-gap: 1px;
+}
+
+.tspicture2 {
+    top:50%;
+    transform: translateY(-50%);
+}
+
+.tsparent3 {
+    display: grid;
+    grid-template-columns: 48% 48%;
+    grid-gap: 1px;
+}
+
+.tspicture3 {
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+
+.ts2p1{
+    top:50%;
+    transform: translateY(-50%);
+}
+
+.ts2p2{
+    
+}

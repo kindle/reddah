@@ -41,6 +41,10 @@ export class SearchPage implements OnInit {
                 this.searchKeyword.setFocus();
             },150);
         }
+
+        if(col.id==4){
+            this.loadRecentMini();
+        }
     }
 
     constructor(
@@ -151,6 +155,11 @@ export class SearchPage implements OnInit {
             this.articles_t=[];
             this.searchTimelines(null, 3);
         }
+    }
+
+    users_m_recent=[];
+    loadRecentMini(){
+        this.users_m_recent = this.reddah.loadRecentMini();
     }
 
     locale;
@@ -338,6 +347,7 @@ export class SearchPage implements OnInit {
     }
 
     async goMini(mini){
+        this.reddah.setRecentMini(mini);
         //open mini page
         const modal = await this.modalController.create({
             component: MiniViewerComponent,

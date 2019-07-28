@@ -46,15 +46,15 @@ export class MessagePage implements OnInit {
         
         this.reddah.setMessageRead().subscribe(data=>{
             if(data.Success==0){
-                this.reddah.unReadMessage = [];
+                this.reddah.storeReadMessage();
             }
         })
     }
 
     showAll = false;
-    showAllMessage(){
+    showStoredMessage(){
         this.showAll = true;
-        this.messages = this.reddah.getAllMessage();
+        this.messages = this.reddah.getStoredMessage();
     }
 
     
@@ -78,6 +78,10 @@ export class MessagePage implements OnInit {
         });
         
         await userModal.present();
+    }
+
+    async clear(){
+        this.reddah.clearStoredMessage();
     }
 
 }

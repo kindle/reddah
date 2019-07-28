@@ -1254,25 +1254,38 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     //    return [{userName:'wind', type:0},{userName:'duck6686', type:0}];
     //}
 
-    getAllMessage(){
-        return [
-            {userName:'wind', type:0},{userName:'duck6686', type:0},
-            {userName:'wind', type:0},{userName:'duck6686', type:0},
-            {userName:'wind', type:0},{userName:'duck6686', type:0}
-        ];
+    storeReadMessage(){
+        let readMessages = this.localStorageService.retrieve("Reddah_ReadMessages");
+        if(!readMessages)
+            readMessages = []
+        readMessages = readMessages.concat(this.unReadMessage);
+        this.localStorageService.store("Reddah_ReadMessages", readMessages);   
+        this.unReadMessage = [];
+    }
+
+    getStoredMessage(){
+        let readMessages = this.localStorageService.retrieve("Reddah_ReadMessages");
+        if(!readMessages)
+            readMessages = [];
+        
+        return readMessages;
+    }
+
+    clearStoredMessage(){
+        this.localStorageService.clear("Reddah_ReadMessages");
     }
 
     fontSizeMap = new Map()
-    .set(1,'16px')
-    .set(2,'18px')
-    .set(3,'20px')
-    .set(4,'22px')
-    .set(5,'24px')
-    .set(6,'26px')
-    .set(7,'28px')
-    .set(8,'30px')
-    .set(9,'32px')
-    .set(10,'34px');
+    .set(1,'12px')
+    .set(2,'13px')
+    .set(3,'14px')
+    .set(4,'15px')
+    .set(5,'16px')
+    .set(6,'17px')
+    .set(7,'18px')
+    .set(8,'19px')
+    .set(9,'20px')
+    .set(10,'21px');
 
     async toast(message: string, color="dark") {
         const toast = await this.toastController.create({
@@ -1348,5 +1361,30 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         return moment(localTime).format(format).toString();
     }
 
+    setRecentMini(mini){
+        let recent = this.localStorageService.retrieve("Reddah_Recent_Mini");
+        
+        if(!recent||recent.length==0){
+            recent = [];
+            recent.push(mini);
+        }
+        else{
+            recent.forEach((item,index)=>{
+                if(item.UserId==mini.UserId){
+                    recent.splice(index, 1);
+                }
+            });
+            recent.unshift(mini);
+        }
+        this.localStorageService.store("Reddah_Recent_Mini", recent);
+            
+    }
+
+    loadRecentMini(){
+        let recent = this.localStorageService.retrieve("Reddah_Recent_Mini");
+        if(!recent)
+            recent = [];
+        return recent;
+    }
 
 }

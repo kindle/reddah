@@ -1,4 +1,3 @@
-
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-input placeholder="{{keywordPlaceholder}}" #searchKeyword clearInput (keyup.enter)="search()"></ion-input>
@@ -80,6 +79,18 @@
             <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_m"></ion-spinner></div>
             <ion-text *ngIf="firstLoading_m" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
             <span class="articleTab" *ngIf="users_m.length>0">相关小程序</span>
+        </ion-row>
+        <ion-row *ngIf="searchKeyword.value.length==0">
+            <ion-item lines="none">
+                <div style="display: flex;flex-wrap: wrap;">
+                    <div style="display: flex;flex-direction: column;" *ngFor="let pub_recent of users_m_recent">
+                        <ion-avatar class="userPhoto" (click)="goMini(pub_recent)">
+                            <img src="{{reddah.appDataPub('userphoto_'+pub_recent.UserName)}}" class="portrait">
+                        </ion-avatar>
+                        <ion-label style="margin:0;width:65px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
+                    </div>
+                </div>
+            </ion-item>
         </ion-row>
         <ion-row *ngFor="let pub of users_m" (click)="goMini(pub)">
             <ion-item>
