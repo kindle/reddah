@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MyInfoPage } from '../../common/my-info/my-info.page';
 import { SettingListPage } from '../../settings/setting-list/setting-list.page';
 import { BookmarkPage } from '../../bookmark/bookmark.page';
+import { PlatformPage } from '../publisher/platform/platform.page';
 
 @Component({
     selector: 'app-about',
@@ -33,6 +34,14 @@ export class AboutPage implements OnInit {
     
     ngOnInit() {
         this.reddah.getUserPhotos(this.userName);
+    }
+
+    async goPlatform(){
+        const modal = await this.modalController.create({
+            component: PlatformPage,
+        });
+        
+        await modal.present();
     }
 
     async goSettings(){

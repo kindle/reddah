@@ -1,6 +1,6 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-input placeholder="{{keywordPlaceholder}}" #searchKeyword clearInput (keyup.enter)="search()"></ion-input>
+    <ion-input placeholder="{{keywordPlaceholder}}" #searchKeyword clearInput (keyup.enter)="search()" (ionChange)="onSearchchange()"></ion-input>
 </ion-item>
 <ion-content no-padding style="background-color: white;" #searchResult>
     <ion-grid *ngIf="showTopic">
@@ -60,9 +60,26 @@
         <ion-row>
             <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_p"></ion-spinner></div>
             <ion-text *ngIf="firstLoading_p" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
-            <span class="articleTab" *ngIf="users_p.length>0">相关公众号</span>
+            <span class="articleTab" *ngIf="users_p&&users_p.length>0">相关公众号</span>
         </ion-row>
-        <ion-row *ngFor="let pub of users_p" (click)="goPub(pub.UserName)">
+        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_p_recent.length>0">
+            <ion-item lines="none">
+                <ion-label>最近访问过的公众号</ion-label>
+            </ion-item>
+        </ion-row>
+        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0">
+            <ion-item lines="none">
+                <div style="display: flex;flex-wrap: wrap;">
+                    <div style="display: flex;flex-direction: column;margin-top:15px;" *ngFor="let pub_recent of users_p_recent">
+                        <ion-avatar class="userPhoto" (click)="goPub(pub_recent)">
+                            <img src="{{reddah.appDataPub('userphoto_'+pub_recent.UserName)}}" class="recentPortrait">
+                        </ion-avatar>
+                        <ion-label style="margin:0;padding:0 5px;width:75px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-row>
+        <ion-row *ngFor="let pub of users_p" (click)="goPub(pub)">
             <ion-item>
                 <ion-avatar slot="start" class="contactUserPhoto">
                     <img src="{{reddah.appDataPub('userphoto_'+pub.UserName)}}" class="contactPortrait">
@@ -78,16 +95,21 @@
         <ion-row>
             <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_m"></ion-spinner></div>
             <ion-text *ngIf="firstLoading_m" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
-            <span class="articleTab" *ngIf="users_m.length>0">相关小程序</span>
+            <span class="articleTab" *ngIf="users_m&&users_m.length>0">相关小程序</span>
         </ion-row>
-        <ion-row *ngIf="searchKeyword.value.length==0">
+        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_m_recent.length>0">
+            <ion-item lines="none">
+                <ion-label>最近使用过的小程序</ion-label>
+            </ion-item>
+        </ion-row>
+        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0">
             <ion-item lines="none">
                 <div style="display: flex;flex-wrap: wrap;">
-                    <div style="display: flex;flex-direction: column;" *ngFor="let pub_recent of users_m_recent">
+                    <div style="display: flex;flex-direction: column;margin-top:15px;" *ngFor="let pub_recent of users_m_recent">
                         <ion-avatar class="userPhoto" (click)="goMini(pub_recent)">
-                            <img src="{{reddah.appDataPub('userphoto_'+pub_recent.UserName)}}" class="portrait">
+                            <img src="{{reddah.appDataPub('userphoto_'+pub_recent.UserName)}}" class="recentPortrait">
                         </ion-avatar>
-                        <ion-label style="margin:0;width:65px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
+                        <ion-label style="margin:0;padding:0 5px;width:75px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
                     </div>
                 </div>
             </ion-item>

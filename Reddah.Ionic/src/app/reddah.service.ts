@@ -1361,27 +1361,27 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         return moment(localTime).format(format).toString();
     }
 
-    setRecentMini(mini){
-        let recent = this.localStorageService.retrieve("Reddah_Recent_Mini");
+    setRecent(user, type){
+        let recent = this.localStorageService.retrieve(`Reddah_Recent_${type}`);
         
         if(!recent||recent.length==0){
             recent = [];
-            recent.push(mini);
+            recent.push(user);
         }
         else{
             recent.forEach((item,index)=>{
-                if(item.UserId==mini.UserId){
+                if(item.UserId==user.UserId){
                     recent.splice(index, 1);
                 }
             });
-            recent.unshift(mini);
+            recent.unshift(user);
         }
-        this.localStorageService.store("Reddah_Recent_Mini", recent);
+        this.localStorageService.store(`Reddah_Recent_${type}`, recent);
             
     }
 
-    loadRecentMini(){
-        let recent = this.localStorageService.retrieve("Reddah_Recent_Mini");
+    loadRecent(type){
+        let recent = this.localStorageService.retrieve(`Reddah_Recent_${type}`);
         if(!recent)
             recent = [];
         return recent;

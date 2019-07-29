@@ -74,8 +74,10 @@
             "Shake":"Shake",
             "Look":"Top Stories",
             "Search":"Search",
+            "Event":"Event",
             "Buy":"Buy",
             "Play":"Game",
+            "Platform":"Open Platform",
             "Program":"Mini Program"
         }
     },

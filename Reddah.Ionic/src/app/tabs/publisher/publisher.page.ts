@@ -139,10 +139,6 @@ export class PublisherPage {
         }
     }
 
-    async goLocalSearch(){
-        // filter contact list
-    }
-
     async goSearch(){
         const userModal = await this.modalController.create({
             component: SearchPage,
@@ -158,19 +154,7 @@ export class PublisherPage {
         await this.modalController.dismiss();
     }
 
-    async goApply(){
-        const modal = await this.modalController.create({
-            component: CategoryPage
-        });
-        await modal.present();
-    }
-
-    async goManage(){
-        const modal = await this.modalController.create({
-            component: ManagePage
-        });
-        await modal.present();
-    }
+    
 
     async goPub(userName){
         const modal = await this.modalController.create({

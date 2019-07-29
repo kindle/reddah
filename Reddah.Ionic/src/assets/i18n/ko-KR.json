@@ -74,8 +74,10 @@
           "Shake":"흔들다",
           "Look":"좋은 이야기",
           "Search":"검색",
+          "Event":"Event",
           "Buy":"산",
           "Play":"게임",
+          "Platform":"Open Platform",
           "Program":"작은 프로그램"
       }
     },

@@ -74,8 +74,10 @@
           "Shake":"振る",
           "Look":"トップストーリー",
           "Search":"サーチ",
+          "Event":"Event",
           "Buy":"買い",
           "Play":"ゲーム",
+          "Platform":"Open Platform",
           "Program":"ミニプログラム"
       }
     },

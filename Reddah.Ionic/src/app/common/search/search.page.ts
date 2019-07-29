@@ -42,9 +42,13 @@ export class SearchPage implements OnInit {
             },150);
         }
 
-        if(col.id==4){
+        if(col.id==3){
+            this.loadRecentPub();
+        }
+        else if(col.id==4){
             this.loadRecentMini();
         }
+        
     }
 
     constructor(
@@ -102,8 +106,18 @@ export class SearchPage implements OnInit {
         await this.modalController.dismiss();
     }
 
+    async onSearchchange(){
+        if(this.searchKeyword.value.length==0)
+        {
+            this.users_p = [];
+            this.users_m = [];
+
+            return;
+        }
+    }
+
     async search(){
-        
+
         this.showTopic = false;
         
         if(this.selectedTopicId==1)//article
@@ -159,7 +173,12 @@ export class SearchPage implements OnInit {
 
     users_m_recent=[];
     loadRecentMini(){
-        this.users_m_recent = this.reddah.loadRecentMini();
+        this.users_m_recent = this.reddah.loadRecent(4);
+    }
+
+    users_p_recent=[];
+    loadRecentPub(){
+        this.users_p_recent = this.reddah.loadRecent(3);
     }
 
     locale;
@@ -330,11 +349,12 @@ export class SearchPage implements OnInit {
         await userModal.present();
     }
 
-    async goPub(userName){
+    async goPub(pub){
+        this.reddah.setRecent(pub,3);
         const modal = await this.modalController.create({
             component: PubPage,
             componentProps: { 
-                userName: userName
+                userName: pub.UserName
             }
         });
           
@@ -347,7 +367,7 @@ export class SearchPage implements OnInit {
     }
 
     async goMini(mini){
-        this.reddah.setRecentMini(mini);
+        this.reddah.setRecent(mini,4);
         //open mini page
         const modal = await this.modalController.create({
             component: MiniViewerComponent,

@@ -125,6 +125,7 @@ import { AddArticlePage } from './tabs/publisher/add-article/add-article.page';
 import { MorePage } from './common/more/more.page';
 import { AddMiniPage } from './tabs/publisher/add-mini/add-mini.page';
 import { SwipeTabDirective } from './swipe-tab.directive';
+import { PlatformPage } from './tabs/publisher/platform/platform.page';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -196,7 +197,7 @@ var firebaseConfig = {
         SettingPrivacyPage,
         RegisterPage,
         SettingNickNamePage,SettingSignaturePage,
-
+        PlatformPage,
         CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
     ],
     entryComponents: [
@@ -249,7 +250,7 @@ var firebaseConfig = {
         SettingPrivacyPage,
         RegisterPage,
         SettingNickNamePage,SettingSignaturePage,
-
+        PlatformPage,
         CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
     ],
     imports: [

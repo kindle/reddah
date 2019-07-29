@@ -74,8 +74,10 @@
             "Shake":"摇一摇",
             "Look":"开卷有益",
             "Search":"搜一搜",
+            "Event":"活动",
             "Buy":"购物",
             "Play":"游戏",
+            "Platform":"开放平台",
             "Program":"小程序"
         }
     },

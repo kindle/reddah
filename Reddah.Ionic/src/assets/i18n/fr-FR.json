@@ -74,8 +74,10 @@
           "Shake":"Agiter",
           "Look":"News",
           "Search":"Recherche",
+          "Event":"Event",
           "Buy":"Acheter",
           "Play":"Les jeux",
+          "Platform":"Open Platform",
           "Program":"Mini programme"
       }
     },
