@@ -2,7 +2,11 @@
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-text>管理我的公众号</ion-text>
 </ion-item>
-<ion-content no-padding>
+<ion-content no-padding #pageTop style="background-color: white;">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content refreshingSpinner="bubbles">
+        </ion-refresher-content>
+    </ion-refresher>
     <ion-list>
         <ion-item-group *ngFor="let group of groupedSubs" lines="none">
             <ion-item-divider color="light" lines="none">{{group.letter.toUpperCase()}}</ion-item-divider>

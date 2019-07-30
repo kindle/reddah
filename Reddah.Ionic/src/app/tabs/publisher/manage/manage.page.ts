@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
 import { ReddahService } from '../../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController, ActionSheetController  } from '@ionic/angular';
+import { LoadingController, NavController, PopoverController, ActionSheetController, Content  } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
@@ -48,11 +48,30 @@ export class ManagePage implements OnInit {
         if(cachedGroupSubs){
             this.groupedSubs = JSON.parse(cachedGroupSubs);
         }
-        this.loadData();
+        this.loadData(null);
+    }
+
+    //drag down
+    doRefresh(event) {
+        setTimeout(() => {
+            this.clearCacheAndReload(event);
+        }, 2000);
+    }
+
+    @ViewChild('pageTop') pageTop: Content;
+    
+    clearCacheAndReload(event){
+        this.pageTop.scrollToTop();
+        this.cacheService.clearGroup("ManageSubsPage");
+        this.localStorageService.clear("Reddah_GroupedSubs");
+        this.localStorageService.clear("Reddah_Subs");
+        this.groupedSubs=[];
+        this.subs = [];
+        this.loadData(event);
     }
 
     showLoading = false;
-    loadData(){
+    loadData(event){
         let cachedGroupSubs = this.localStorageService.retrieve("Reddah_GroupedSubs");
         let cachedSubs = this.localStorageService.retrieve("Reddah_Subs");
         if(!cachedGroupSubs||!cachedSubs)
@@ -90,6 +109,9 @@ export class ManagePage implements OnInit {
             }
             
             this.showLoading = false;
+            if(event){
+                event.target.complete();
+            }
             
         });  
     }
