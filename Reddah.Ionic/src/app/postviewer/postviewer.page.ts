@@ -10,6 +10,7 @@ import { UserPage } from '../common/user/user.page';
 import { SearchPage } from '../common/search/search.page';
 import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page';
 import { PubPage } from '../tabs/publisher/pub/pub.page';
+import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
 
 @Component({
     selector: 'app-postviewer',
@@ -51,9 +52,13 @@ export class PostviewerPage implements OnInit {
         {
             //await this.takePhoto();
         }
-        else//share to timeline
+        else if(data==2)//share to timeline
         {
             this.goPost(4);
+        }
+        else if(data==4){//report abuse
+            //use share function
+            this.feedback();
         }
     }
 
@@ -71,6 +76,20 @@ export class PostviewerPage implements OnInit {
         if(data||!data){
             
         }
+    }
+
+    async feedback() {
+        const modal = await this.modalController.create({
+            component: AddFeedbackPage,
+            componentProps: { 
+                title: "文章举报",
+                desc: "请输入文章违规描述",
+                feedbackType: 4,
+                article: this.article
+            }
+        });
+          
+        await modal.present();
     }
 
     @ViewChild('commentlist') commentlist;

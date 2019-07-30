@@ -12,6 +12,8 @@ import { ReddahService } from '../../reddah.service';
 })
 export class MorePage implements OnInit {
 
+    @Input() pub = false;
+
     userName;
     locale;
     

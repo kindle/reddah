@@ -57,7 +57,7 @@
 
     "Menu":{
         "Message": "消息",
-        "Recommend": "开卷有益",
+        "Recommend": "阅读",
         "Contact": "好友",
         "Find": "发现",
         "About": "我",
@@ -72,8 +72,8 @@
             "Timeline":"朋友圈",
             "Scan":"扫一扫",
             "Shake":"摇一摇",
-            "Look":"开卷有益",
-            "Search":"搜一搜",
+            "Look":"阅读",
+            "Search":"搜索",
             "Event":"活动",
             "Buy":"购物",
             "Play":"游戏",

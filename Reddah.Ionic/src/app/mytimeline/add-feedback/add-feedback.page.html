@@ -1,19 +1,22 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" slot="start" (click)="close()" class="backbutton"></ion-icon>
-    <ion-label>帮助与反馈</ion-label>
+    <ion-label>{{title?title:"帮助与反馈"}}</ion-label>
     <ion-button color="success" slot="end" (click)="submit()">提交</ion-button>
 </ion-item>
 <ion-content>
     <ion-item lines="none">
-        <ion-textarea autoresize [(ngModel)]="yourThoughts" rows="6" cols="20" placeholder="写下您遇到的问题或者建议，我们将不断改进。"></ion-textarea>
+        <ion-textarea autoresize [(ngModel)]="yourThoughts" rows="3" cols="20" [placeholder]="desc?desc:'写下您遇到的问题或者建议，我们将不断改进。'"></ion-textarea>
     </ion-item>
-    <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos">
+    <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="feedbackType!=4">
         <div class="imgSqure" *ngFor="let image of photos;index as i">
             <img [src]="image.webUrl" (click)="viewer(i, photos)">
         </div>
         <div class="imgSqure addImg" (click)="addNewPhoto($event)" *ngIf="photos.length<9">
           <ion-icon name="add" size="large" color="medium"></ion-icon>
         </div>
+    </div>
+    <div style="margin: 0 15px;">
+        <app-share-article *ngIf="feedbackType==4" [abstract]="article.Title" [image]="article.ImageUrl" [id]="article.Id"></app-share-article>
     </div>
     <ion-item lines="none">
         <ion-label></ion-label>

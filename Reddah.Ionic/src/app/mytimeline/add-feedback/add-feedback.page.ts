@@ -19,7 +19,12 @@ import { DragulaService } from 'ng2-dragula';
 })
 export class AddFeedbackPage implements OnInit {
 
+    @Input() title: string;
+    @Input() desc: string;
     @Input() postType: number;
+    @Input() feedbackType = 1;
+
+    @Input() article: any;
 
     constructor(
         private popoverController: PopoverController,
@@ -113,18 +118,28 @@ export class AddFeedbackPage implements OnInit {
     }
 
     feedbackTypes =[
-        { value:1, checked: true, text:'咨询建议' },
+        { value:1, checked: false, text:'咨询建议' },
         { value:2, checked: false, text:'信息出错' },
         { value:3, checked: false, text:'程序出错' },
-        { value:4, checked: false, text:'其它' },
+        { value:4, checked: false, text:'内容违规' },
+        { value:5, checked: false, text:'其它' },
     ]
-    feedbackType = 1;
+    
     changeFeedbackType(item) {
         this.feedbackType = item.value;
     }
     
     ngOnInit() {
-        
+        //4 article report abuse
+        this.feedbackTypes.forEach((item,index)=>{
+            if(item.value==this.feedbackType){
+                item.checked = true;
+            }
+            if(item.value==4&&this.feedbackType!=4)
+            {
+                this.feedbackTypes.splice(index,1);
+            }
+        })
     }
     
     photos = [];
@@ -145,6 +160,15 @@ export class AddFeedbackPage implements OnInit {
         this.formData.append('thoughts', this.yourThoughts);
         this.formData.append('location', this.location);
         this.formData.append('feedbackType', JSON.stringify(this.feedbackType));
+        if(this.feedbackType==4)//share
+        {
+            this.formData.append("abstract", this.reddahService.htmlDecode(this.article.Title));
+            this.formData.append("content", this.article.ImageUrl);
+            this.formData.append("ref", JSON.stringify(this.article.Id));
+        }
+        else{
+            this.formData.append("ref", JSON.stringify(0));
+        }
         this.formData.append('type', JSON.stringify(4));//feedback:4, normal:0, timeline:1, chat:2,groupchat:3,
         //send the key in UI display order
         this.formData.append('order', this.photos.map(e=>e.fileUrl).join(","));        

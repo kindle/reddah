@@ -180,6 +180,9 @@ export class PubPage implements OnInit {
     async goMore(){
         const modal = await this.modalController.create({
             component: MorePage,
+            componentProps: { 
+                pub: true
+            }
         });
         
         await modal.present();

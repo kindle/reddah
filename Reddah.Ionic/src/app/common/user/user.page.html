@@ -41,7 +41,7 @@
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
         <ion-item class="borderBottom" lines="none" (click)="goMore()">
-            <span class="itemTitle" style="line-height: 80px;">更多信息</span>
+            <span class="itemTitle">更多信息</span>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
@@ -52,12 +52,12 @@
                 <ion-note color="dark" class="cmd-title">发消息</ion-note>
             </div>
         </ion-item>
-        <ion-item class="borderBottom" lines="none" href="/#" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
+        <!--<ion-item class="borderBottom" lines="none" href="/#" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
             <div class="centerItem">
                 <ion-icon name="videocam"></ion-icon>
                 <ion-note color="dark" class="cmd-title">音视频通话</ion-note>
             </div>
-        </ion-item>
+        </ion-item>-->
         <ion-item  class="borderTop borderBottom" (click)="addFriend()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0&&userName!=reddah.getCurrentUser()">
             <div class="centerItem">
                 <ion-note color="dark" class="cmd-title">添加为好友</ion-note>
