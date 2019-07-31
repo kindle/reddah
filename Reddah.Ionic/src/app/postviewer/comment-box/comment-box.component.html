@@ -5,11 +5,16 @@
         <ion-input id="newComment" (click)="addNewComment(selectedArticleId, selectedCommentId)" 
             readonly padding-start placeholder="写评论..."></ion-input>
         
+        <ion-icon color="primary" name="text" size="medium" (click)="addNewComment(selectedArticleId, selectedCommentId)"></ion-icon>
+        30
+
         <ion-icon color="danger" name="bookmark" (click)="reddah.addBookmark(selectedArticleId)" size="medium"></ion-icon>
+        25
+
         <!--<ion-text (click)="bookmark()" margin-end>{{ 'Article.Bookmark' | translate }}</ion-text>-->
         
-        <ion-icon color="primary" name="share" size="medium"></ion-icon>
-        <!--<ion-text (click)="share()">{{ 'Article.Share' | translate }}</ion-text>-->
+        <!--<ion-icon color="primary" name="share" size="medium"></ion-icon>
+        <ion-text (click)="share()">{{ 'Article.Share' | translate }}</ion-text>-->
     </ion-item>
     <ion-item *ngIf="showEditBox">
         <ion-textarea autoresize padding #newComment id="newComment" [(ngModel)]="commentContent" rows="3" cols="21" 

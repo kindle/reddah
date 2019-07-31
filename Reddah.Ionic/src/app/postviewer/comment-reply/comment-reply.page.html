@@ -9,7 +9,7 @@
         </ion-avatar>
         <ion-label text-wrap>
             <div class="user-name">{{reddah.getDisplayName(comment.UserName)}}</div>
-            <span>{{comment.CreatedOn | date:'MM-dd HH:mm'}}</span><br>
+            <span>{{reddah.utcToLocal(comment.CreatedOn,"YY-MM-DD HH:mm")}}</span><br>
             <div (click)="commentbox.addNewComment(comment.ArticleId, comment.Id)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
         </ion-label>
     </ion-item>
@@ -41,7 +41,7 @@
                             <ion-icon name="ios-more" style="width:25px;height:25px;"></ion-icon>
                         </div>
                     </div>
-                    <span>{{reply.CreatedOn | date:'MM-dd HH:mm'}}</span>
+                    <span>{{reddah.utcToLocal(reply.CreatedOn,"YY-MM-DD HH:mm")}}</span>
                     <div *ngIf="reply.ParentId!=comment.Id" style="background-color:#eeeeee;padding:5px;">
                         <span class="user-name" (click)="goUser(GetUserNameByCommentId(comments,reply.ParentId))">{{reddah.getDisplayName(GetUserNameByCommentId(comments,reply.ParentId))}}</span> : <span [innerHTML]="reddah.htmlDecode(GetContentByCommentId(comments,reply.ParentId)) | safe: 'html'"></span>
                     </div>

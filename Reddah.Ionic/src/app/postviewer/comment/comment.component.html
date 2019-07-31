@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     
-                    <span>{{comment.CreatedOn | date:'MM-dd HH:mm'}}</span>
+                    <span>{{reddah.utcToLocal(comment.CreatedOn,"YY-MM-DD HH:mm")}}</span>
                     <div (click)="addNewComment(comment.ArticleId, comment.Id)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
                     <span (click)="viewReply(localComments, comment)" *ngIf="comment.Count&&comment.Count>0">查看{{comment.Count}}条回复>></span>
                 </ion-label>
