@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { NavController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
@@ -9,6 +9,8 @@ import { MyInfoPage } from '../../common/my-info/my-info.page';
 import { SettingListPage } from '../../settings/setting-list/setting-list.page';
 import { BookmarkPage } from '../../bookmark/bookmark.page';
 import { PlatformPage } from '../publisher/platform/platform.page';
+import { TimelinePopPage } from '../../common/timeline-pop.page';
+import { AddTimelinePage } from '../../mytimeline/add-timeline/add-timeline.page';
 
 @Component({
     selector: 'app-about',
@@ -23,6 +25,7 @@ export class AboutPage implements OnInit {
     constructor(
         private localStorageService: LocalStorageService,
         public modalController: ModalController,
+        private popoverController: PopoverController,
         public navController: NavController,
         public reddah: ReddahService,
         public authService: AuthService,
@@ -51,11 +54,6 @@ export class AboutPage implements OnInit {
         
         await modal.present();
     }
-
-    async takePhoto(){
-        //go take a photo to my timeline
-        
-    }
     
     async myInfo() {
         const myInfoModal = await this.modalController.create({
@@ -77,6 +75,34 @@ export class AboutPage implements OnInit {
         });
         
         await modal.present();
+    }
+
+    async post(ev: any) {
+        const popover = await this.popoverController.create({
+            component: TimelinePopPage,
+            animated: false,
+            translucent: true,
+            cssClass: 'post-option-popover'
+        });
+        await popover.present();
+        const { data } = await popover.onDidDismiss();
+        if(data==1||data==2||data==3){
+            //data=1: take a photo, data=2: lib photo, data=3: lib video
+            this.goPost(data);
+        }
+    }
+
+    async goPost(postType){
+        const postModal = await this.modalController.create({
+            component: AddTimelinePage,
+            componentProps: { postType: postType }
+        });
+          
+        await postModal.present();
+        const { data } = await postModal.onDidDismiss();
+        if(data){
+            
+        }
     }
 
 }

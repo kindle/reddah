@@ -98,6 +98,14 @@ namespace Reddah.Web.Login.Controllers
                         }
                     }
 
+                    var chatItem = db.Article.FirstOrDefault(a => a.Id == data.ArticleId);
+                    if (chatItem!=null)
+                    {
+                        chatItem.LastUpdateBy = jwtResult.JwtUser.User;
+                        chatItem.LastUpdateOn = DateTime.UtcNow;
+                        chatItem.Abstract = System.Web.HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(data.Content)));
+                    }
+
                     db.SaveChanges();
 
                 }

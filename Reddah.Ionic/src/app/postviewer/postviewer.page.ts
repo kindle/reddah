@@ -139,18 +139,6 @@ export class PostviewerPage implements OnInit {
         this.loadComments();
     }
 
-    bookmark(){
-        alert('bookmark');
-    }
-
-    share(){
-        alert('share');
-    }
-
-    popover(){
-        alert('show menu to report, delete.');
-    }
-
     async close() {
         await this.modalController.dismiss();
     }

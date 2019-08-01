@@ -327,4 +327,23 @@ export class PubPage implements OnInit {
         await userModal.present();
     }
 
+
+    header: any;
+    sticky: number;
+    showTitle = false;
+    onScroll($event)
+    {
+        let currentScrollTop = $event.detail.scrollTop;
+
+        let header = document.getElementById("scrollTag");
+        if(this.sticky==null)
+            this.sticky = header.offsetTop;
+
+        if ($event.detail.scrollTop > this.sticky) {
+            this.showTitle = true;
+        } else {
+            this.showTitle = false;
+        }
+    }
+
 }

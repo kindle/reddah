@@ -8,8 +8,8 @@
     <ion-grid *ngFor="let comment of messages">
         <ion-row>
             <ion-col no-padding>
-                <div text-center class="chatTime" *ngIf="checkIsToday(comment.CreatedOn)">{{comment.CreatedOn | date:'HH:mm'}}</div>
-                <div text-center class="chatTime" *ngIf="!checkIsToday(comment.CreatedOn)">{{comment.CreatedOn | date:'MM-dd HH:mm'}}</div>
+                <div text-center class="chatTime" *ngIf="checkIsToday(comment.CreatedOn)">{{reddah.utcToLocal(comment.CreatedOn,'HH:mm')}}</div>
+                <div text-center class="chatTime" *ngIf="!checkIsToday(comment.CreatedOn)">{{reddah.utcToLocal(comment.CreatedOn,'MM-dd HH:mm')}}</div>
             </ion-col>
         </ion-row>
         <ion-row>

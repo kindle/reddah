@@ -138,10 +138,10 @@ namespace Reddah.Web.Login.Controllers
                     newGroupChat.GroupName = jwtResult.JwtUser.User + "," + string.Join(",", targetUsers);
                     
                     newGroupChat.CreatedOn = DateTime.UtcNow;
-                    newGroupChat.UserName = jwtResult.JwtUser.User; //group creator
+                    newGroupChat.CreatedBy = jwtResult.JwtUser.User; //group creator
                     newGroupChat.Title = "群聊"; //group title
                     newGroupChat.Content = "群公告"; //group anouncement
-                    newGroupChat.Abstract = jwtResult.JwtUser.User; //group owners, default only 1 - the creator
+                    newGroupChat.UserName = jwtResult.JwtUser.User; //group owners, default only 1 - the creator
                     db.Article.Add(newGroupChat);
                     db.SaveChanges();
 
