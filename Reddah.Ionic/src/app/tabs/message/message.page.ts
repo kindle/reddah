@@ -54,6 +54,16 @@ export class MessagePage implements OnInit {
         return groupName.replace(this.currentUserName,"").replace(",","");
     }
 
+    async viewChat(message) {
+        if(message.Type==2){
+            this.chat(message.GroupName)
+        }
+        else if(message.Type==3)
+        {
+            this.goGroupChat(message);
+        }
+    }
+    
     async chat(groupName){
         let target = this.GetSender(groupName);
         const modal = await this.modalController.create({

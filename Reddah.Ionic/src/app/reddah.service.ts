@@ -1220,6 +1220,62 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         return dateStr;
     }
 
+    getSendTimeChat(dateStr){
+        if(!dateStr)
+            return "";
+        let dateTimeStamp = Date.parse(dateStr.replace(/-/gi,"/"));
+        let result = "";
+        let second = 1000;
+        let minute = 1000 * 60;
+        let hour = minute * 60;
+        let day = hour * 24;
+        let halfamonth = day * 15;
+        let month = day * 30;
+        let year = day *365;
+        let localnow = new Date().getTime();
+        //to utc now
+        let offset = new Date().getTimezoneOffset()*60*1000;
+        let now = new Date(localnow+offset).getTime(); 
+        
+        let diffValue = now - dateTimeStamp;
+        if(diffValue < 0){
+            if(diffValue>-1000*60)
+                return this.utcToLocal(dateStr,'HH:mm');
+            else 
+                return result;
+        }
+        let yearC =diffValue/year;
+        let monthC =diffValue/month;
+        let weekC =diffValue/(7*day);
+        let dayC =diffValue/day;
+        let hourC =diffValue/hour;
+        let minC =diffValue/minute;
+        let secC =diffValue/second;
+        if(yearC>=1){
+            result=parseInt(yearC+"") + "" +this.translate.instant("Time.YearsAgo");
+        }
+        else if(monthC>=1){
+            result=parseInt(monthC+"") + "" + this.translate.instant("Time.MonthsAgo");
+        }
+        else if(weekC>=1){
+            result=parseInt(weekC+"") + "" + this.translate.instant("Time.WeeksAgo");
+        }
+        else if(dayC>=1){
+            result=(parseInt(dayC+"")==1?this.translate.instant("Time.Yesterday"):parseInt(dayC+"") + "" +this.translate.instant("Time.DaysAgo"));
+        }
+        else if(hourC>=1){
+            result=this.utcToLocal(dateStr,'HH:mm');
+        }
+        else if(minC>=1){
+            result=this.utcToLocal(dateStr,'HH:mm');
+        }
+        else if(secC>=1){
+            result=this.utcToLocal(dateStr,'HH:mm');
+        }
+        
+        return result;
+    }
+
     async loadFriends(){
         let cachedContact = this.localStorageService.retrieve("Reddah_Contacts");
         if(!cachedContact){

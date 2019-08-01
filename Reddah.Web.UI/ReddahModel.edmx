@@ -27,6 +27,8 @@
           <Property Name="CreatedBy" Type="nvarchar(max)" />
           <Property Name="LastUpdateBy" Type="nvarchar(max)" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="LastUpdateContent" Type="nvarchar(max)" />
+          <Property Name="LastUpdateType" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -263,6 +265,8 @@
           <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdateBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateType" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -446,6 +450,8 @@
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="reddahModel.Article">
               <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="LastUpdateType" ColumnName="LastUpdateType" />
+                <ScalarProperty Name="LastUpdateContent" ColumnName="LastUpdateContent" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />

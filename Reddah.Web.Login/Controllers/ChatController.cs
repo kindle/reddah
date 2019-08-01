@@ -28,6 +28,48 @@ namespace Reddah.Web.Login.Controllers
     [RoutePrefix("api/chat")]
     public class ChatController : ApiBaseController
     {
+
+        [Route("getmessages")]
+        [HttpPost]
+        public IHttpActionResult GetMessages()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    int pageCount = 100;
+                    var messages = (from a in db.Article
+                                    //join u in db.UserProfile on c.UserName equals u.UserName
+                                    where (a.Type==2 || a.Type==3) && (a.GroupName.StartsWith(jwtResult.JwtUser.User + ",") ||
+                                        a.GroupName.Contains("," + jwtResult.JwtUser.User + ",") ||
+                                        a.GroupName.EndsWith("," + jwtResult.JwtUser.User))
+                                    orderby a.LastUpdateOn descending
+                                    select a).Take(pageCount);
+
+                    return Ok(new ApiResult(0, messages.ToList()));
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+
+        }
+
         [Route("getchat")]
         [HttpPost]
         public IHttpActionResult GetChat()
@@ -603,6 +645,11 @@ namespace Reddah.Web.Login.Controllers
                         if (article != null)
                         {
                             article.Count++;
+
+                            article.LastUpdateBy = jwtResult.JwtUser.User;
+                            article.LastUpdateOn = DateTime.UtcNow;
+                            article.LastUpdateContent = "";
+                            article.LastUpdateType = fileType;
                         }
 
                         if (parentCommentId != -1)

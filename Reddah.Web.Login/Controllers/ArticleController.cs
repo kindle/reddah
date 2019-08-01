@@ -103,7 +103,8 @@ namespace Reddah.Web.Login.Controllers
                     {
                         chatItem.LastUpdateBy = jwtResult.JwtUser.User;
                         chatItem.LastUpdateOn = DateTime.UtcNow;
-                        chatItem.Abstract = System.Web.HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(data.Content)));
+                        article.LastUpdateContent = System.Web.HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(data.Content)));
+                        article.LastUpdateType = 0;
                     }
 
                     db.SaveChanges();

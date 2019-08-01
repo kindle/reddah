@@ -95,3 +95,8 @@ alter table article add
   [CreatedBy] NVARCHAR(MAX) NULL,
   [LastUpdateBy] NVARCHAR(MAX) NULL,
   [Status] INT NOT NULL DEFAULT 0  --0: draft, 1: published
+
+--20190802
+alter table article add
+  [LastUpdateContent] NVARCHAR(MAX) NULL,
+  [LastUpdateType] INT NOT NULL DEFAULT 0 

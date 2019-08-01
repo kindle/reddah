@@ -32,5 +32,7 @@ namespace Reddah.Web.Login
         public string CreatedBy { get; set; }
         public string LastUpdateBy { get; set; }
         public int Status { get; set; }
+        public string LastUpdateContent { get; set; }
+        public int LastUpdateType { get; set; }
     }
 }

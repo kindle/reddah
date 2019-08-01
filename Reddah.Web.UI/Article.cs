@@ -54,6 +54,10 @@ public partial class Article
 
     public int Status { get; set; }
 
+    public string LastUpdateContent { get; set; }
+
+    public int LastUpdateType { get; set; }
+
 }
 
 }
