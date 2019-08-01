@@ -10,6 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { MyInfoPage } from '../../common/my-info/my-info.page';
 import { StatusBar } from '@ionic-native/status-bar';
+import { ChatPage } from '../../chat/chat.page';
+import { GroupChatPage } from '../../chat/group-chat.page';
 
 @Component({
     selector: 'app-message',
@@ -18,7 +20,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 })
 export class MessagePage implements OnInit {
 
-    userName: any;
+    currentUserName: any;
 
     constructor(
         public reddah : ReddahService,
@@ -30,13 +32,48 @@ export class MessagePage implements OnInit {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
     ){
-        this.userName = this.reddah.getCurrentUser();
+        this.currentUserName = this.reddah.getCurrentUser();
     }
 
     async ngOnInit(){
-        
+        this.loadData();
     }
-  
-    
 
+    messages = [];
+    loadData(){
+        this.reddah.getMessages().subscribe(data => 
+        {
+            console.log(data)
+            
+            this.messages = data.Message;
+            
+        });  
+    }
+
+    GetSender(groupName){
+        return groupName.replace(this.currentUserName,"").replace(",","");
+    }
+
+    async chat(groupName){
+        let target = this.GetSender(groupName);
+        const modal = await this.modalController.create({
+            component: ChatPage,
+            componentProps: { 
+                title: this.reddah.appData('usernotename_'+target+'_'+this.currentUserName),
+                target: target,
+            }
+        });
+        await modal.present();
+        const {data} = await modal.onDidDismiss();
+    }
+
+    async goGroupChat(groupChat){
+        const modal = await this.modalController.create({
+            component: GroupChatPage,
+            componentProps: {
+                groupChat: groupChat,
+            }
+        });
+        await modal.present();
+    }
 }

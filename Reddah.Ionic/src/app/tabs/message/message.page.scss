@@ -33,3 +33,21 @@ orgImage, .orgArticle {
     display: none;
 }
 
+
+
+
+.groupImages {
+    width: 40px; 
+    height: 40px; 
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 33% 33% 33%;
+    border-radius: 3px;
+    background-color: #eeeeee;
+}
+
+.contactPortrait{
+    border-radius: 3px;
+    width: 40px;
+    height: 40px;
+}

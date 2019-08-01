@@ -533,8 +533,18 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private getContactMessages = 'https://login.reddah.com/api/chat/getmessages'; 
 
-
+    getMessages(): Observable<any> {
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getContactMessages, formData)
+        .pipe(
+            tap(data => this.log('get messages')),
+            catchError(this.handleError('get messages', []))
+        );
+    }
+    //******************************** */
 
     private log(message: string) {
       console.log(message);

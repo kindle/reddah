@@ -1,5 +1,21 @@
-<app-header title="Menu.Message"></app-header>
+<app-header title="Menu.Message" (click)="loadData()"></app-header>
 <ion-content style="background-color: white;">
-    
-
+    <ion-item *ngFor="let message of messages">
+        <img *ngIf="message.Type==2" (click)="chat(message.GroupName)" src="{{reddah.appData('userphoto_'+GetSender(message.GroupName))}}" class="contactPortrait">
+        <div class="groupImages" *ngIf="message.Type==3" (click)="goGroupChat(message)">
+            <div *ngFor="let user of message.GroupName.split(',').slice(0,9)">
+                <img src="{{reddah.appData('userphoto_'+user)}}">
+            </div>
+        </div>
+        <ion-label style="margin-left:10px;">
+            <span class="user-name" *ngIf="message.Type==2">{{reddah.getDisplayName(GetSender(message.GroupName))}}</span>
+            <span class="user-name" *ngIf="message.Type==3">{{reddah.getDisplayName(message.LastUpdateBy)}}</span>
+            <br>
+            <ion-note color="dark">{{message.Abstract}}</ion-note>
+        </ion-label>
+        <ion-note slot="end">
+            {{reddah.utcToLocal(message.LastUpdateOn,'HH:mm')}}<br>
+            <ion-icon name="notifications-off" color="light" style="float:right;"></ion-icon>
+        </ion-note>
+    </ion-item>
 </ion-content>
