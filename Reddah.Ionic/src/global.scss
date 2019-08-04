@@ -132,3 +132,17 @@ ion-icon{
   color:black;
 }
 
+.new-point{
+  position: relative;
+}
+
+.new-point::before{
+  content: " ";
+  border: 5px solid red;
+  border-radius:5px;
+  position: absolute;
+  z-index: 10;
+  right: 0%;
+  margin-right: -5px;
+  margin-top: -3px;
+}

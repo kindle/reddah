@@ -1,15 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { InfiniteScroll, Content } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
-import { Article } from '../../model/article';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
-import { LocalePage } from '../../common/locale/locale.page';
-import { PostviewerPage } from '../../postviewer/postviewer.page';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
-import { MyInfoPage } from '../../common/my-info/my-info.page';
-import { StatusBar } from '@ionic-native/status-bar';
 import { ChatPage } from '../../chat/chat.page';
 import { GroupChatPage } from '../../chat/group-chat.page';
 
@@ -36,17 +30,49 @@ export class MessagePage implements OnInit {
     }
 
     async ngOnInit(){
-        this.loadData();
+        this.loadData(true);
+        setInterval(() => {
+            this.loadData(true);
+        },5000);
+    }
+
+    clear(){
+        this.localStorageService.clear("Reddah_Local_Messages");
+        this.messages = [];
+        this.loadData(false);
     }
 
     messages = [];
-    loadData(){
+    async loadData(isnew){
+        let localMessages = this.localStorageService.retrieve("Reddah_Local_Messages");
+        if(localMessages!=null){
+            this.messages = localMessages;
+        }
+
         this.reddah.getMessages().subscribe(data => 
         {
-            console.log(data)
-            
-            this.messages = data.Message;
-            
+            let netMessages = data.Message?data.Message.reverse():[];//from last to newest
+            netMessages.forEach((netMsg, indexN)=>{
+                netMsg.IsNew=isnew;
+                let found = false;
+                this.messages.forEach((localMsg, indexL)=>{
+                    if(netMsg.Id==localMsg.Id)
+                    {
+                        if(netMsg.LastUpdateOn!=localMsg.LastUpdateOn){
+                            this.messages.splice(indexL, 1);
+                            this.messages.unshift(netMsg);
+                            if(netMsg.LastUpdateBy==this.currentUserName)
+                                netMsg.IsNew = false;
+                        }
+                        found=true;
+                    }
+                });
+                if(!found)
+                {
+                    this.messages.unshift(netMsg);
+                }
+            });
+            this.localStorageService.store("Reddah_Local_Messages", this.messages);
         });  
     }
 
@@ -62,6 +88,7 @@ export class MessagePage implements OnInit {
         {
             this.goGroupChat(message);
         }
+        message.IsNew = false;
     }
     
     async chat(groupName){

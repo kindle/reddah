@@ -1,5 +1,4 @@
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,6 +10,7 @@ import { ContactPageModule } from './contact/contact.module';
 import { AboutPageModule } from './about/about.module';
 import { FindPageModule } from './find/find.module';
 import { HomePageModule } from './home/home.module';
+import { EarthPageModule } from './earth/earth.module';
 import { MessagePageModule } from './message/message.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { PublisherPageModule } from './publisher/publisher.module';
@@ -22,6 +22,7 @@ import { PublisherPageModule } from './publisher/publisher.module';
       FormsModule,
       TabsPageRoutingModule,
       HomePageModule,
+      EarthPageModule,
       MessagePageModule,
       AboutPageModule,
       FindPageModule,

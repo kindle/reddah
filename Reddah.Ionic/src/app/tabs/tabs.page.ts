@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Platform } from '@ionic/angular';
+import { Platform, Events } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ModalController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -15,7 +15,10 @@ import { Tabs } from '@ionic/angular';
     styleUrls: ['tabs.page.scss']
 })
 export class TabsPage implements OnInit {
-
+    
+    @ViewChild(SwipeTabDirective) swipeTabDirective: SwipeTabDirective;
+    @ViewChild('myTabs') tabRef: Tabs;
+    @ViewChild('map') map;
     @ViewChild('about') about;
 
     constructor(
@@ -26,20 +29,30 @@ export class TabsPage implements OnInit {
         private statusBar: StatusBar,
         private router: Router,
         public reddah: ReddahService,
-        ) {}
+        public events: Events,
+        
+    )
+    {
+        this.events.subscribe('tab:clicked', (data) => 
+        {
+            try{
+                let index = data['tab'];
+                let lat = data['lat'];
+                let lng = data['lng'];
+                //this.tabRef.select(this.map);
+                this.router.navigateByUrl(`/tabs/(map:map)?lat=${lat}&lng=${lng}`);
+            }catch(e){}
+        });
+    }
 
-    
     async ngOnInit(){
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         if(locale==null){
             
         }
         
-        
     }
 
-    @ViewChild(SwipeTabDirective) swipeTabDirective: SwipeTabDirective;
-    @ViewChild('myTabs') tabRef: Tabs;
 
 
     ionTabsDidChange($event) {

@@ -55,6 +55,7 @@ export class SigninPage implements OnInit {
                     this.modalController.dismiss(result.Message);
                     this.router.navigate(['/'], {
                         queryParams: {
+                            action: 'login'
                         }
                     });
                     this.cacheService.clearAll();

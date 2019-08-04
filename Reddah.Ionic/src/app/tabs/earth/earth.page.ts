@@ -1,126 +1,69 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { ReddahService } from '../reddah.service';
-import { LoadingController, ToastController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { InfiniteScroll, Content, Events } from '@ionic/angular';
+import { ReddahService } from '../../reddah.service';
+import { Article } from '../../model/article';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LocalePage } from '../common/locale/locale.page';
+import { LoadingController, NavController, ModalController } from '@ionic/angular';
+import { PostviewerPage } from '../../postviewer/postviewer.page';
+import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
-import { SigninPage } from './signin/signin.page';
+
+import { ActivatedRoute, Params, Router } from '@angular/router';
+
 //import dat from 'dat.gui'
 //import Stats from 'stats-js';
 //import TweenMax from "gsap";
-import PerspectiveTransform from '../../assets/js/css_globe_PerspectiveTransform.js'
-import TweenMax from '../../assets/js/TweenMax.min.js'
-import { AuthService } from '../auth.service';
-import { RegisterPage } from './register/register.page'
+import PerspectiveTransform from '../../../assets/js/css_globe_PerspectiveTransform.js'
+import TweenMax from '../../../assets/js/TweenMax.min.js'
+import { MapPage } from '../../map/map.page';
 
 @Component({
-    selector: 'app-surface',
-    templateUrl: './surface.page.html',
-    styleUrls: ['./surface.page.scss'],
+    selector: 'app-earth',
+    templateUrl: 'earth.page.html',
+    styleUrls: ['earth.page.scss']
 })
-export class SurfacePage implements OnInit {
+export class EarthPage implements OnInit {
 
-    constructor(private modalController: ModalController,
-        private reddah: ReddahService,
-        private loadingController: LoadingController,
-        private translateService: TranslateService,
-        private toastController: ToastController,
+    
+    userName: any;
+    constructor(
+        public reddah : ReddahService,
+        public loadingController: LoadingController,
+        public translateService: TranslateService,
+        public navController: NavController,
         private router: Router,
-        private cacheService: CacheService,
-        private authService: AuthService,
+        public modalController: ModalController,
         private localStorageService: LocalStorageService,
-        private translate: TranslateService,
-    ) {}
+        private cacheService: CacheService,
+        public activeRoute: ActivatedRoute,
+        public events: Events,
+    ){
+        this.userName = this.reddah.getCurrentUser();
+    }
 
-    ngOnInit() {
+    async ngOnInit(){
         this.init(null);
     }
 
-    isAuthenticated() {
-        return this.authService.authenticated();
-    }
-
-    async register(){
-        this.config.isWorldVisible = false;
+    async tap(){
+        
+        this.config.autoSpin = !this.config.autoSpin;
 
         const modal = await this.modalController.create({
-            component: RegisterPage
+            component: MapPage,
+            componentProps: {
+                lat: this.config.lat,
+                lng: this.config.lng
+            }
         });
           
         await modal.present();
         const { data } = await modal.onDidDismiss();
-        if(data){
-            this.signin();
+        if(data||!data)
+        {
+            this.config.autoSpin = true;
         }
-        else{
-            this.config.isWorldVisible = true;
-        }
-    }
-
-    async signin(){
-        this.config.isWorldVisible = false;
         
-        const modal = await this.modalController.create({
-            component: SigninPage
-        });
-        
-        await modal.present();
-        const { data } = await modal.onDidDismiss();
-        if(data){
-            let result = this.authService.exactToken(data);
-            if(result)
-                this.router.navigate(['']);
-        }
-        else{
-            this.config.isWorldVisible = true;
-        }
-    }
-
-    async locale(){
-        this.config.isWorldVisible = false;
-
-        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-        const changeLocaleModal = await this.modalController.create({
-            component: LocalePage,
-            componentProps: { orgLocale: currentLocale }
-        });
-        
-        await changeLocaleModal.present();
-        const { data } = await changeLocaleModal.onDidDismiss();
-        if(data){
-            let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-            this.translate.setDefaultLang(currentLocale);
-        }
-        this.config.isWorldVisible = true;
-        
-    }
-
-    tap(){
-        
-        
-        if(this.isAuthenticated()){
-            
-            //this.config.autoSpin = !this.config.autoSpin;
-            //this.config.isWorldVisible = false;
-            //this.config.isHaloVisible = false;
-            console.log(this.config.lat+"_"+this.config.lng);
-            console.log(this.dragLat +"++"+this.dragLng)
-            console.log(this.dragLat +"++"+this.dragLng)
-            
-
-            this.router.navigate(['map'], {
-                queryParams: {
-                    lat: this.config.lat,
-                    lng: this.config.lng
-                }
-            });
-        }
-        else{
-            this.config.autoSpin = !this.config.autoSpin;
-        }
     }
 
 
@@ -188,12 +131,12 @@ export class SurfacePage implements OnInit {
         
         this.world = document.querySelector('.world');
         this.worldBg = document.querySelector('.world-bg');
-        this.worldBg.style.backgroundImage = 'url(' + this.URLS.bg + ')';
+        //this.worldBg.style.backgroundImage = 'url(' + this.URLS.bg + ')';
         this.globe = document.querySelector('.world-globe');
         this.globeContainer = document.querySelector('.world-globe-doms-container');
         this.globePole = document.querySelector('.world-globe-pole');
         this.globeHalo = document.querySelector('.world-globe-halo');
-        this.globeHalo.style.backgroundImage = 'url(' + this.URLS.halo + ')';
+        //this.globeHalo.style.backgroundImage = 'url(' + this.URLS.halo + ')';
 
 
         this.regenerateGlobe();
@@ -495,5 +438,5 @@ export class SurfacePage implements OnInit {
         v1.ty = v1.py - y;
 
     }
-
+    
 }

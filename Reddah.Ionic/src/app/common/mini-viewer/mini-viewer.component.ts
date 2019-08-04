@@ -95,6 +95,13 @@ export class MiniViewerComponent implements OnInit {
     
     initApi(){
         window["reddahApi"] = {}; 
+        window["reddahApi"].UserName = this.reddah.getCurrentUser();
+        window["reddahApi"].Locale = this.reddah.getCurrentLocale();
+        //share to timeline
+        //share to friends
+        //send to leaderboard
+        //get leaderboard
+        
         this.initGyro();
         this.initVibration();
     }

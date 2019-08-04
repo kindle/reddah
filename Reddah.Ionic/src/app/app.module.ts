@@ -54,6 +54,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LocalePage } from './common/locale/locale.page';
 import { LocationPage } from './common/location/location.page'
+import { MapPage } from './map/map.page'
 import { SafePipe } from './safe.pipe';
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { ImageViewerComponent } from './common/image-viewer/image-viewer.component';
@@ -143,7 +144,7 @@ var firebaseConfig = {
         AppComponent,
         BookmarkPage,
         BookmarkPopPage,
-        LocalePage,LocationPage,
+        LocalePage,LocationPage,MapPage,
         ChooseUserPage,
         AddCommentPage,
         AddFriendPage,
@@ -203,7 +204,7 @@ var firebaseConfig = {
     entryComponents: [
         BookmarkPage,
         BookmarkPopPage,
-        LocalePage,LocationPage,
+        LocalePage,LocationPage,MapPage,
         ChooseUserPage,
         PostviewerPage,
         ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,

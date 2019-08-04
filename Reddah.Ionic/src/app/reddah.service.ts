@@ -1453,4 +1453,22 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         return recent;
     }
 
+    hasClass(el: Element, name: string): any {
+        return new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)").test(el.className);
+    }
+
+    addClass(el: Element, name: string): void {
+        if (!this.hasClass(el, name)) {
+            el.className = el.className ? [el.className, name].join(" ") : name;
+        }
+    }
+    removeClass(el: Element, name: string): void {
+        if (this.hasClass(el, name)) {
+            el.className = el.className.replace(
+            new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)", "g"),
+            ""
+            );
+        }
+    }
+
 }

@@ -82,6 +82,8 @@ export class AuthService {
 
         this.localStorageService.clear("Reddah_mytimeline");
         this.localStorageService.clear("Reddah_mytimeline_ids");
+
+        this.localStorageService.clear("Reddah_Local_Messages");
         
         window.location.reload();
     }

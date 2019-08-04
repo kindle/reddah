@@ -46,7 +46,7 @@ export class AddFeedbackPage implements OnInit {
 
         this.dragulaService.dragend('bag')
         .subscribe(({ name, el }) => {
-            this.removeClass(el, "ex-over");
+            this.reddahService.removeClass(el, "ex-over");
             this.dragToDel = false;
             this.dragging = false;
         });
@@ -81,37 +81,22 @@ export class AddFeedbackPage implements OnInit {
         .subscribe(({ el, container }) => {
             if(container.id=="delete-photo"){
                 this.dragToDel = true;
-                this.addClass(el, "ex-over");
+                this.reddahService.addClass(el, "ex-over");
             }
             else{
                 this.dragToDel = false;
-                this.removeClass(el, "ex-over");
+                this.reddahService.removeClass(el, "ex-over");
             }
         });
 
         this.dragulaService.out('bag')
         .subscribe(({ el, container }) => {
             this.dragToDel = false;
-            this.removeClass(el, "ex-over");
+            this.reddahService.removeClass(el, "ex-over");
         });
     }
 
-    private hasClass(el: Element, name: string): any {
-        return new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)").test(el.className);
-    }
-    private addClass(el: Element, name: string): void {
-        if (!this.hasClass(el, name)) {
-            el.className = el.className ? [el.className, name].join(" ") : name;
-        }
-    }
-    private removeClass(el: Element, name: string): void {
-        if (this.hasClass(el, name)) {
-            el.className = el.className.replace(
-            new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)", "g"),
-            ""
-            );
-        }
-    }
+    
 
     close(){
         this.modalController.dismiss();

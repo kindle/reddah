@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 import { HomePage } from './home/home.page';
 import { AboutPage } from './about/about.page';
+import { EarthPage } from './earth/earth.page';
 import { FindPage } from './find/find.page';
 import { ContactPage } from './contact/contact.page';
 import { MessagePage } from './message/message.page';
@@ -17,7 +18,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/tabs/(message:message)',
+        redirectTo: '/tabs/(earth:earth)',
         pathMatch: 'full',
       },
       {
@@ -30,6 +31,12 @@ const routes: Routes = [
         path: 'home',
         outlet: 'home',
         component: HomePage,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'earth',
+        outlet: 'earth',
+        component: EarthPage,
         canActivate: [AuthGuard],
       },
       {
