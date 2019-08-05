@@ -507,6 +507,10 @@ namespace Reddah.Web.Login.Controllers
                         if (article != null)
                         {
                             article.Count++;
+                            article.LastUpdateBy = jwtResult.JwtUser.User;
+                            article.LastUpdateOn = DateTime.UtcNow;
+                            article.LastUpdateContent = "";
+                            article.LastUpdateType = 1;
                         }
 
                         if (parentCommentId != -1)

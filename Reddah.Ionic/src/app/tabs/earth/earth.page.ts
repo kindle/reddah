@@ -45,9 +45,13 @@ export class EarthPage implements OnInit {
         this.init(null);
     }
 
-    async tap(){
+    async tap(evt){
         
         this.config.autoSpin = !this.config.autoSpin;
+
+        
+        console.log(evt.pageX+"_"+evt.pageY)
+        console.log(this.dragLat+"_"+this.dragLng)
 
         const modal = await this.modalController.create({
             component: MapPage,
@@ -64,6 +68,31 @@ export class EarthPage implements OnInit {
             this.config.autoSpin = true;
         }
         
+    }
+
+    panstart(evt){
+        this.isMouseDown = true;
+        this.dragX = evt.center.x;
+        this.dragY = evt.center.y;
+        this.dragLat = this.config.lat;
+        this.dragLng = this.config.lng;
+    }
+
+    panend(evt){
+        if (this.isMouseDown) {
+            this.isMouseDown = false;
+        } 
+    }
+
+    pan(evt){
+         if (this.isMouseDown) {
+            var dX = evt.center.x - this.dragX;
+            var dY = evt.center.y - this.dragY;
+            this.config.lat = this.clamp(this.dragLat + dY * 0.5, -90, 90);
+            //this.config.lng = this.clampLng(this.dragLng - dX * 0.5, -180, 180);
+            this.config.lng = this.clampLng(this.dragLng - dX * 0.5);
+            
+        }
     }
 
 
@@ -168,6 +197,8 @@ export class EarthPage implements OnInit {
         this.world.addEventListener('touchmove', this.touchPass(()=>this.onMouseMove));
         this.world.addEventListener('touchend', this.touchPass(()=>this.onMouseUp));
 */
+
+
         this.loop();
     }
 
@@ -187,6 +218,8 @@ export class EarthPage implements OnInit {
         this.dragY = evt.pageY;
         this.dragLat = this.config.lat;
         this.dragLng = this.config.lng;
+        console.log(this.dragX+"_"+this.dragY)
+        console.log(this.dragLat+"_"+this.dragLng)
     }
 
     onMouseMove(evt) {

@@ -1,6 +1,6 @@
 <app-header title="Menu.Earth"></app-header>
 <ion-content style="background-color: white;">
-    <div class="world" (click)="tap()">
+    <div class="world" (tap)="tap($event)" (panstart)="panstart($event)" (panend)="panend($event)" (pan)="pan($event)">
         <div class="world-bg"></div>
         <div class="world-globe">
             <div class="world-globe-pole"></div>
