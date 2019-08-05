@@ -49,10 +49,6 @@ export class EarthPage implements OnInit {
         
         this.config.autoSpin = !this.config.autoSpin;
 
-        
-        console.log(evt.pageX+"_"+evt.pageY)
-        console.log(this.dragLat+"_"+this.dragLng)
-
         const modal = await this.modalController.create({
             component: MapPage,
             componentProps: {
@@ -93,6 +89,15 @@ export class EarthPage implements OnInit {
             this.config.lng = this.clampLng(this.dragLng - dX * 0.5);
             
         }
+    }
+
+    async goMe(){
+        let locationJson = this.reddah.appData('userlocationjson_'+this.userName);
+        
+        let loc = JSON.parse(locationJson);
+        alert(loc.location.lat+"_"+loc.location.lng);
+        if(loc)
+            this.goTo(loc.location.lat, loc.location.lng);
     }
 
 
@@ -160,12 +165,12 @@ export class EarthPage implements OnInit {
         
         this.world = document.querySelector('.world');
         this.worldBg = document.querySelector('.world-bg');
-        //this.worldBg.style.backgroundImage = 'url(' + this.URLS.bg + ')';
+        this.worldBg.style.backgroundImage = 'url(' + this.URLS.bg + ')';
         this.globe = document.querySelector('.world-globe');
         this.globeContainer = document.querySelector('.world-globe-doms-container');
         this.globePole = document.querySelector('.world-globe-pole');
         this.globeHalo = document.querySelector('.world-globe-halo');
-        //this.globeHalo.style.backgroundImage = 'url(' + this.URLS.halo + ')';
+        this.globeHalo.style.backgroundImage = 'url(' + this.URLS.halo + ')';
 
 
         this.regenerateGlobe();

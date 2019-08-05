@@ -117,4 +117,30 @@ export class MapPage implements OnInit {
             }
         });
     }
+
+    async goMe(){
+        let locationJson = this.reddah.appData('userlocationjson_'+this.userName);
+        
+        let loc = JSON.parse(locationJson);
+        if(loc){
+            this.setLocation(loc);
+        }else{
+            this.map.locate({ setView: true, maxZoom: 15 }).on('locationfound', (e) => {
+                loc = {
+                    "title": this.userName,
+                    "location":{"lat":e.latitude,"lng":e.longitude}
+                }
+                this.setLocation(loc);
+
+                this.reddah.saveUserLocation(this.userName, loc);
+            }).on('locationerror', (err) => {
+                alert(err.message);
+            })
+        }
+            
+    }
+
+    async refresh(){
+        
+    }
 }

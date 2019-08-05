@@ -14,6 +14,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SettingNoteLabelPage } from '../../settings/setting-note-label/setting-note-label.page';
 import { ChatPage } from '../../chat/chat.page';
 import { MorePage } from '../more/more.page';
+import { LocationPage } from '../location/location.page';
 
 @Component({
     selector: 'app-user',
@@ -224,6 +225,16 @@ export class UserPage implements OnInit {
             component: MorePage,
         });
         
+        await modal.present();
+    }
+
+    async goLocation(){
+        let location = this.reddah.appData('userlocationjson_'+this.userName);
+        const modal = await this.modalController.create({
+            component: LocationPage,
+            componentProps: { location: JSON.parse(location) }
+        });
+    
         await modal.present();
     }
 

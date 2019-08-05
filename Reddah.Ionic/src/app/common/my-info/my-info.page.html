@@ -20,6 +20,12 @@
             <ion-label class="title">Reddah ID</ion-label>
             <ion-note slot="end" class="reddahId">{{userName}}</ion-note>
         </ion-item>
+        <ion-item (click)="changeLocation()">
+            <ion-note color="dark">位置</ion-note>
+            <ion-icon name="pin" slot="end" color="{{reddah.appData('userlocation_'+userName)?'primary':'dark'}}"></ion-icon>
+            <ion-label slot="end" style="width:auto;" *ngIf="reddah.appData('userlocation_'+userName)">{{reddah.appData('userlocation_'+userName)}}</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
         <ion-item lines="none" (click)="myQrCard()" class="borderItem borderBottom">
             <ion-label class="title">二维码名片</ion-label>
             <ion-icon name="ios-qr-scanner" slot="end"></ion-icon>

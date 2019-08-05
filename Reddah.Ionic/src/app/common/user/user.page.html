@@ -17,8 +17,7 @@
             <ion-icon class="cmd-title" name="ios-female" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
             <br>
             <span *ngIf="reddah.appData('usernickname_'+userName)">昵称：{{reddah.appData('usernickname_'+userName)}}</span><br>
-            <span>ID：{{userName}}</span><br>
-            <span *ngIf="reddah.appData('userlocation_'+userName)">地区：{{reddah.appData('userlocation_'+userName)}}</span>
+            <span>ID：{{userName}}</span>
         </ion-label>
     </ion-item>
 
@@ -26,6 +25,11 @@
         <ion-item class="borderTop" (click)="changeNoteName()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
             <ion-label>设置备注和标签</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
+        <ion-item (click)="goLocation()" *ngIf="reddah.appData('userlocation_'+userName)">
+            <span class="itemTitle">位置</span>
+            <ion-icon name="pin" color="primary" style="margin-right:5px;"></ion-icon>
+            <ion-label>{{reddah.appData('userlocation_'+userName)}}</ion-label>
         </ion-item>
         <ion-item class="borderBottom" lines="none">
             <span class="itemTitle">个性签名</span>

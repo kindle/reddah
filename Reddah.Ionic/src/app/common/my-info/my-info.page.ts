@@ -7,6 +7,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../../reddah.service';
 import { QrcardPage } from '../qrcard/qrcard.page';
 import { SettingNickNamePage } from '../../settings/setting-nickname/setting-nickname.page'
+import { LocationPage } from '../location/location.page';
 
 @Component({
     selector: 'app-my-info',
@@ -87,6 +88,18 @@ export class MyInfoPage implements OnInit {
         const {data} = await modal.onDidDismiss();
         if(data||!data)
             this.reddah.getUserPhotos(this.userName);
+    }
+
+    async changeLocation(){
+        const modal = await this.modalController.create({
+            component: LocationPage
+        });
+    
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            this.reddah.saveUserLocation(this.userName, data);
+        }
     }
 
 }

@@ -220,6 +220,33 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private changeLocationUrl = 'https://login.reddah.com/api/article/changelocation'; 
+
+    changeLocation(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.changeLocationUrl, formData)
+        .pipe(
+            tap(data => this.log('change location')),
+            catchError(this.handleError('change location', []))
+        );
+    }
+    saveUserLocation(userName, location){
+        let formData = new FormData();
+        formData.append("location", JSON.stringify(location));
+        
+        this.changeLocation(formData)
+        .subscribe(result => 
+        {
+            if(result.Success==0){
+                this.localStorageService.store('userlocation_'+userName, location.title);
+                this.localStorageService.store('userlocationjson_'+userName, location);
+            }
+            else
+                alert(result.Message);
+        });
+    }
+    //******************************** */
     private changeNickNameUrl = 'https://login.reddah.com/api/article/changenickname'; 
 
     changeNickName(formData: FormData): Observable<any> {
@@ -1036,8 +1063,11 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
                     this.toTextCache(userInfo.NickName, `usernickname_${userName}`);
                 if(userInfo.Sex!=null)
                     this.toTextCache(userInfo.Sex, `usersex_${userName}`);
-                if(userInfo.Location!=null)
-                    this.toTextCache(userInfo.Location, `userlocation_${userName}`);
+                if(userInfo.Location!=null){
+                    let locationTitle = JSON.parse(userInfo.Location).title;
+                    this.toTextCache(locationTitle, `userlocation_${userName}`);
+                    this.toTextCache(userInfo.Location, `userlocationjson_${userName}`);
+                }
                 if(userInfo.Signature!=null)
                     this.toTextCache(userInfo.Signature, `usersignature_${userName}`);
                 if(userInfo.Email!=null)
