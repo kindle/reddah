@@ -313,10 +313,13 @@ export class EarthPage implements OnInit {
     }
 
     loop(){
-        requestAnimationFrame(()=>{this.loop()});
-        //this.stats.begin();
-        this.render();
-        //this.stats.end();
+        try{
+            requestAnimationFrame(()=>{this.loop()});
+            //this.stats.begin();
+            this.render();
+            //this.stats.end();
+        }
+        catch(e){alert(JSON.stringify(e))}
     }
 
     render() {

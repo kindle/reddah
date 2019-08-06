@@ -10,6 +10,7 @@ import { CacheService } from "ionic-cache";
 
 import L from 'leaflet';
 import { ActivatedRoute, Params } from '@angular/router';
+import { UserPage } from '../common/user/user.page';
 
 @Component({
     selector: 'app-map',
@@ -31,7 +32,8 @@ export class MapPage implements OnInit {
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
-        public activeRoute: ActivatedRoute
+        public activeRoute: ActivatedRoute, 
+        private elementRef: ElementRef,
     ){
         this.userName = this.reddah.getCurrentUser();
         /*this.activeRoute.queryParams.subscribe((params: Params) => {
@@ -162,12 +164,31 @@ export class MapPage implements OnInit {
                 this.markerGroup.clearLayers();
                 data.Message.forEach((user, index) => {
                     this.reddah.getUserPhotos(user.UserName);
+                    //let content = L.DomUtil.create('div', 'content');
+                    let content = "<img id='"+user.UserName+"' style='float:left;margin-right:10px;border-radius:3px;' width=40 height=40 src="
+                        +this.reddah.appData('userphoto_'+user.UserName)+">"
+                        +this.reddah.getDisplayName(user.UserName);
+                    let popup = L.popup().setContent(content);
+                    /*L.DomEvent.on(popup, 'click', ()=>{
+                        this.goUser(user.UserName);
+                    });*/
+
+                    
+
                     this.flyMaker = L.marker([user.Lat, user.Lng]).addTo(this.map)
-                        .bindPopup("<img onclick='this.goUser('"+user.UserName+"')' style='float:left;margin-right:10px;border-radius:3px;' width=40 height=40 src="+this.reddah.appData('userphoto_'+user.UserName)+">"+
-                        this.reddah.getDisplayName(user.UserName));
+                        .bindPopup(popup);
                         //+"<br>"+this.reddah.appData('usersignature_'+user.UserName));
 
+                    this.flyMaker.on('popupopen', ()=> {
+                        this.elementRef.nativeElement.querySelector("#"+user.UserName)
+                        .addEventListener('click', (e)=>
+                        {
+                            this.goUser(user.UserName);
+                        });
+                    });
+                        
                     this.markerGroup.addLayer(this.flyMaker);
+
                 });
                 this.map.addLayer(this.markerGroup);
             }
@@ -175,6 +196,13 @@ export class MapPage implements OnInit {
     }
 
     async goUser(userName){
-        alert(userName)
+        const userModal = await this.modalController.create({
+            component: UserPage,
+            componentProps: { 
+                userName: userName
+            }
+        });
+          
+        await userModal.present();
     }
 }
