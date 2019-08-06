@@ -29,5 +29,7 @@ namespace Reddah.Web.Login
         public int limit { get; set; }
         public string CreatedBy { get; set; }
         public string Admins { get; set; }
+        public Nullable<decimal> Lat { get; set; }
+        public Nullable<decimal> Lng { get; set; }
     }
 }

@@ -100,3 +100,14 @@ alter table article add
 alter table article add
   [LastUpdateContent] NVARCHAR(MAX) NULL,
   [LastUpdateType] INT NOT NULL DEFAULT 0 
+
+--20190805
+ALTER TABLE [userprofile]
+ALTER COLUMN [Location] nvarchar(MAX) null
+
+ALTER TABLE [userprofile]
+ALTER COLUMN [Cover] nvarchar(MAX) null
+
+alter table [dbo].[UserProfile] add
+  [Lat] Decimal(20,16) NULL,
+  [Lng] Decimal(20,16) NULL

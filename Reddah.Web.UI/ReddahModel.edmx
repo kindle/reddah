@@ -139,8 +139,8 @@
           <Property Name="Signature" Type="nvarchar(max)" />
           <Property Name="Photo" Type="varchar(max)" />
           <Property Name="NickName" Type="nvarchar(max)" />
-          <Property Name="Location" Type="varchar(max)" />
-          <Property Name="Cover" Type="varchar(max)" />
+          <Property Name="Location" Type="nvarchar(max)" />
+          <Property Name="Cover" Type="nvarchar(max)" />
           <Property Name="SystemStatus" Type="int" Nullable="false" />
           <Property Name="UserSetStatus" Type="int" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
@@ -377,8 +377,8 @@
           <Property Name="Signature" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="NickName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Cover" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cover" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SystemStatus" Type="Int32" Nullable="false" />
           <Property Name="UserSetStatus" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />

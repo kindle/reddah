@@ -231,9 +231,11 @@ export class ReddahService {
             catchError(this.handleError('change location', []))
         );
     }
-    saveUserLocation(userName, location){
+    saveUserLocation(userName, location, lat, lng){
         let formData = new FormData();
         formData.append("location", JSON.stringify(location));
+        formData.append("lat", JSON.stringify(lat));
+        formData.append("lng", JSON.stringify(lng));
         
         this.changeLocation(formData)
         .subscribe(result => 
@@ -245,6 +247,25 @@ export class ReddahService {
             else
                 alert(result.Message);
         });
+    }
+
+    //******************************** */
+    private getusersbylocation = 'https://login.reddah.com/api/article/getusersbylocation'; 
+    getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh){
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append("latCenter", JSON.stringify(latCenter));
+        formData.append("lngCenter", JSON.stringify(lngCenter));
+        formData.append("latLow", JSON.stringify(latLow));
+        formData.append("latHigh", JSON.stringify(latHigh));
+        formData.append("lngLow", JSON.stringify(lngLow));
+        formData.append("lngHigh", JSON.stringify(lngHigh));
+        
+        return this.http.post<any>(this.getusersbylocation, formData)
+        .pipe(
+            tap(data => this.log('get users by location')),
+            catchError(this.handleError('get users by location', []))
+        );
     }
     //******************************** */
     private changeNickNameUrl = 'https://login.reddah.com/api/article/changenickname'; 

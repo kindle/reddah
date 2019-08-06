@@ -139,14 +139,16 @@
           <Property Name="Signature" Type="nvarchar(max)" />
           <Property Name="Photo" Type="varchar(max)" />
           <Property Name="NickName" Type="nvarchar(max)" />
-          <Property Name="Location" Type="varchar(max)" />
-          <Property Name="Cover" Type="varchar(max)" />
+          <Property Name="Location" Type="nvarchar(max)" />
+          <Property Name="Cover" Type="nvarchar(max)" />
           <Property Name="SystemStatus" Type="int" Nullable="false" />
           <Property Name="UserSetStatus" Type="int" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="limit" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar(max)" />
           <Property Name="Admins" Type="nvarchar(max)" />
+          <Property Name="Lat" Type="decimal" Precision="20" Scale="16" />
+          <Property Name="Lng" Type="decimal" Precision="20" Scale="16" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -380,14 +382,16 @@
           <Property Name="Signature" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="NickName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Cover" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cover" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SystemStatus" Type="Int32" Nullable="false" />
           <Property Name="UserSetStatus" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="limit" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Admins" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lat" Type="Decimal" Precision="20" Scale="16" />
+          <Property Name="Lng" Type="Decimal" Precision="20" Scale="16" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -585,6 +589,8 @@
           <EntitySetMapping Name="UserProfile">
             <EntityTypeMapping TypeName="reddahModel.UserProfile">
               <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
                 <ScalarProperty Name="Admins" ColumnName="Admins" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="limit" ColumnName="limit" />

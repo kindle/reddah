@@ -533,7 +533,7 @@ namespace Reddah.Web.Login.Controllers
                     userInfo.NickName = user.NickName??user.UserName;
                     userInfo.Sex = user.Sex??0;
                     userInfo.Photo = user.Photo;
-                    userInfo.Location = user.Location??"未知";
+                    userInfo.Location = user.Location;
                     userInfo.Signature = user.Signature;
                     userInfo.Cover = user.Cover;
                     userInfo.Type = user.Type;
@@ -624,6 +624,117 @@ namespace Reddah.Web.Login.Controllers
                     db.SaveChanges();
 
                     return Ok(new ApiResult(0, "success"));
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("changelocation")]
+        [HttpPost]
+        public IHttpActionResult ChangeLocation()
+        {
+            UserInfo userInfo = new UserInfo();
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string location = HttpContext.Current.Request["location"];
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                decimal lat = js.Deserialize<decimal>(HttpContext.Current.Request["lat"]);
+                decimal lng = js.Deserialize<decimal>(HttpContext.Current.Request["lng"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    if (!string.IsNullOrWhiteSpace(location))
+                    {
+                        var target = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+
+                        if (target != null)
+                        {
+                            target.Location = location;
+                            target.Lat = lat;
+                            target.Lng = lng;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            return Ok(new ApiResult(2, "user not exist:" + jwtResult.JwtUser.User));
+                        }
+                    }
+
+                    return Ok(new ApiResult(0, "success"));
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("getusersbylocation")]
+        [HttpPost]
+        public IHttpActionResult GetUsersByLocation()
+        {
+            IEnumerable<UserProfile> query = null;
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                decimal latCenter = js.Deserialize<decimal>(HttpContext.Current.Request["latCenter"]);
+                decimal lngCenter = js.Deserialize<decimal>(HttpContext.Current.Request["lngCenter"]);
+                decimal latLow = js.Deserialize<decimal>(HttpContext.Current.Request["latLow"]);
+                decimal latHigh = js.Deserialize<decimal>(HttpContext.Current.Request["latHigh"]);
+                decimal lngLow = js.Deserialize<decimal>(HttpContext.Current.Request["lngLow"]);
+                decimal lngHigh = js.Deserialize<decimal>(HttpContext.Current.Request["lngHigh"]);
+
+                
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var pageCount = 100;
+
+                    query = (from u in db.UserProfile
+                             where u.SystemStatus == 0 && u.Lat!=null && u.Lng!=null &&
+                                u.Lat < latHigh && u.Lat > latLow &&
+                                u.Lng < lngHigh && u.Lng > lngLow //has bug in the middle across 0 degree
+                             select new AdvancedUserProfile
+                             {
+                                 UserName = u.UserName,
+                                 Email = u.Email,
+                                 Sex = u.Sex,
+                                 Signature = u.Signature,
+                                 Photo = u.Photo,
+                                 NickName = u.NickName,
+                                 Cover = u.Cover,
+                                 Location = u.Location,
+                                 Lat = u.Lat,
+                                 Lng = u.Lng,
+                                 Distance = (u.Lat - latCenter)>0? (u.Lat - latCenter) : (u.Lat - latCenter)*-1 + 
+                                    (u.Lng - lngCenter)>0? (u.Lng - lngCenter) : (u.Lng - lngCenter)*-1,
+                             })
+                            .Take(pageCount).OrderBy(n => n.Distance);
+
+                    return Ok(new ApiResult(0, query.ToList()));
                 }
             }
             catch (Exception ex)

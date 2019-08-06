@@ -81,6 +81,12 @@ namespace Reddah.Web.Login
         public Article article { get; set; }
     }
 
+    public class AdvancedUserProfile : UserProfile
+    {
+        public decimal? Distance { get; set; }
+    }
+
+
     public class AdvancedArticle: Article
     {
         public string ImageUrl { get; set; }

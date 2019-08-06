@@ -98,7 +98,7 @@ export class MyInfoPage implements OnInit {
         await modal.present();
         const { data } = await modal.onDidDismiss();
         if(data){
-            this.reddah.saveUserLocation(this.userName, data);
+            this.reddah.saveUserLocation(this.userName, data, data.location.lat, data.location.lng);
         }
     }
 

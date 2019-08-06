@@ -16,8 +16,8 @@
         <EntityTypeShape EntityType="reddahModel.UserFriend" Width="1.5" PointX="2.75" PointY="8.75" />
         <EntityTypeShape EntityType="reddahModel.UserProfile" Width="1.5" PointX="8.75" PointY="3.75" />
         <EntityTypeShape EntityType="reddahModel.webpages_Membership" Width="1.5" PointX="4.75" PointY="8.75" />
-        <EntityTypeShape EntityType="reddahModel.webpages_OAuthMembership" Width="1.5" PointX="6.75" PointY="8.75" />
-        <EntityTypeShape EntityType="reddahModel.webpages_Privileges" Width="1.5" PointX="8.75" PointY="8.75" />
+        <EntityTypeShape EntityType="reddahModel.webpages_OAuthMembership" Width="1.5" PointX="6.75" PointY="9.75" />
+        <EntityTypeShape EntityType="reddahModel.webpages_Privileges" Width="1.5" PointX="8.75" PointY="9.75" />
         <EntityTypeShape EntityType="reddahModel.webpages_PrivilegesInRoles" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="reddahModel.webpages_Roles" Width="1.5" PointX="10.75" PointY="3.75" />
         <EntityTypeShape EntityType="reddahModel.webpages_UsersInRoles" Width="1.5" PointX="10.75" PointY="6.75" />

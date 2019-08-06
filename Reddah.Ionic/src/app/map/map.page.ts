@@ -98,14 +98,17 @@ export class MapPage implements OnInit {
     setLocation(item){
         this.selectedItem = item;
         
-        this.flyMaker = L.marker([item.location.lat, item.location.lng]);
+        this.flyMaker = L.marker([item.location.lat, item.location.lng]).addTo(this.map)
+            .bindPopup("<img style='float:left;margin-right:10px;border-radius:3px;' width=40 height=40 src="+this.reddah.appData('userphoto_'+this.userName)+">"+
+            this.reddah.appData('usersignature_'+this.userName));
+
         this.markerGroup.clearLayers();
         this.markerGroup.addLayer(this.flyMaker);
         if(this.location)
             this.map.addLayer(this.markerGroup);
 
         //this.map.setView([item.location.lat, item.location.lng], 15);
-        this.map.flyTo([item.location.lat, item.location.lng], 4);
+        this.map.flyTo([item.location.lat, item.location.lng], 6);
     }
 
     @ViewChild('about') about;
@@ -132,7 +135,7 @@ export class MapPage implements OnInit {
                 }
                 this.setLocation(loc);
 
-                this.reddah.saveUserLocation(this.userName, loc);
+                this.reddah.saveUserLocation(this.userName, loc, loc.location.lat, loc.location.lng);
             }).on('locationerror', (err) => {
                 alert(err.message);
             })
@@ -141,6 +144,37 @@ export class MapPage implements OnInit {
     }
 
     async refresh(){
-        
+        let center = this.map.getCenter();
+        let bounds = this.map.getBounds();
+        let ne = bounds._northEast;
+        let sw = bounds._southWest;
+
+        let latCenter = center.lat;
+        let lngCenter = center.lng;
+        let latLow = sw.lat; 
+        let latHigh = ne.lat;
+        let lngLow = sw.lng;
+        let lngHigh = ne.lng;
+
+        this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh).subscribe(data=>{
+            console.log(data)
+            if(data.Success==0){
+                this.markerGroup.clearLayers();
+                data.Message.forEach((user, index) => {
+                    this.reddah.getUserPhotos(user.UserName);
+                    this.flyMaker = L.marker([user.Lat, user.Lng]).addTo(this.map)
+                        .bindPopup("<img onclick='this.goUser('"+user.UserName+"')' style='float:left;margin-right:10px;border-radius:3px;' width=40 height=40 src="+this.reddah.appData('userphoto_'+user.UserName)+">"+
+                        this.reddah.getDisplayName(user.UserName));
+                        //+"<br>"+this.reddah.appData('usersignature_'+user.UserName));
+
+                    this.markerGroup.addLayer(this.flyMaker);
+                });
+                this.map.addLayer(this.markerGroup);
+            }
+        });
+    }
+
+    async goUser(userName){
+        alert(userName)
     }
 }
