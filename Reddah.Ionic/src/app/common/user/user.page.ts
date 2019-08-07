@@ -229,13 +229,31 @@ export class UserPage implements OnInit {
     }
 
     async goLocation(){
-        let location = this.reddah.appData('userlocationjson_'+this.userName);
+        if(this.userName!=this.reddah.getCurrentUser()){
+            let location = this.reddah.appData('userlocationjson_'+this.userName);
+            const modal = await this.modalController.create({
+                component: LocationPage,
+                componentProps: { location: JSON.parse(location) }
+            });
+        
+            await modal.present();
+        }
+        else{
+            this.changeLocation()
+        }
+        
+    }
+
+    async changeLocation(){
         const modal = await this.modalController.create({
-            component: LocationPage,
-            componentProps: { location: JSON.parse(location) }
+            component: LocationPage
         });
     
         await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            this.reddah.saveUserLocation(this.userName, data, data.location.lat, data.location.lng);
+        }
     }
 
 }

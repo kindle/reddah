@@ -1392,6 +1392,28 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         this.localStorageService.clear("Reddah_ReadMessages");
     }
 
+    getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    getRandomArray(m, n){
+        let a = [];
+        for(let i=0;i<n;i++)
+        {
+            a.push(i);
+        }
+        
+        let r=[];
+        for (let j=1; j<=m; ++j)
+        {
+            var k = Math.floor((Math.random() * (n-j)) + 1);
+            r.push(a[k]);
+            a[k] = a[n-j];
+        }
+
+        return r;
+    }
+
     fontSizeMap = new Map()
     .set(1,'12px')
     .set(2,'13px')
@@ -1520,6 +1542,13 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             ""
             );
         }
+    }
+
+    getTimeString(){
+        let today = new Date();
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        let time = today.getHours();// + ":" + today.getMinutes() + ":" + today.getSeconds();
+        return date + " " + time;
     }
 
 }

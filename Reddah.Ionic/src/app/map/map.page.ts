@@ -110,7 +110,7 @@ export class MapPage implements OnInit {
             this.flyMaker = L.marker([item.location.lat, item.location.lng]).addTo(this.map)
             //this.flyMaker = L.marker([item.location.lat, item.location.lng], {icon: redMarker}).addTo(this.map)
                 .bindPopup("<img style='float:left;margin-right:10px;border-radius:3px;' width=40 height=40 src="+this.reddah.appData('userphoto_'+this.userName)+">"+
-                this.reddah.appData('usersignature_'+this.userName));
+                this.reddah.appData('usersignature_'+this.userName), {closeButton: true});
 
             this.markerGroup.clearLayers();
             this.markerGroup.addLayer(this.flyMaker);
@@ -133,10 +133,15 @@ export class MapPage implements OnInit {
     }
 
     async goMe(){
+        
         let locationJson = this.reddah.appData('userlocationjson_'+this.userName);
         
-        let loc = JSON.parse(locationJson);
-        if(loc){
+        let loc = null;
+        try{
+            loc = JSON.parse(locationJson);
+        }catch(e){}
+        
+        if(loc&&loc.location){
             this.setLocation(loc);
         }else{
             this.map.locate({ setView: true, maxZoom: 15 }).on('locationfound', (e) => {
@@ -167,36 +172,50 @@ export class MapPage implements OnInit {
         let lngLow = sw.lng;
         let lngHigh = ne.lng;
 
-        this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh).subscribe(data=>{
-            console.log(data)
+        //get cache by current hour.
+        let cacheKey = `this.reddah.getUsersByLocation${latCenter}${lngCenter}${latLow}${latHigh}${lngLow}${lngHigh}${this.reddah.getTimeString()}`;
+        let request = this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh);
+
+        this.cacheService.loadFromObservable(cacheKey, request, "getUsersByLocation")
+        .subscribe(data=>{
             if(data.Success==0){
                 this.markerGroup.clearLayers();
+
+                let showArray = [];
+                let showNumber = 5;
+                if(data.Message.length<=showNumber){
+                    for(let i =0;i<data.Message.length;i++)
+                        showArray.push(i);
+                }else{
+                    showArray = this.reddah.getRandomArray(showNumber, data.Message.length);
+                }
                 data.Message.forEach((user, index) => {
                     this.reddah.getUserPhotos(user.UserName);
-                    //let content = L.DomUtil.create('div', 'content');
-                    let content = "<img id='"+user.UserName+"' style='float:left;margin-right:10px;border-radius:3px;' width=40 height=40 src="
-                        +this.reddah.appData('userphoto_'+user.UserName)+">"
-                        +this.reddah.getDisplayName(user.UserName);
-                    let popup = L.popup().setContent(content);
-                    /*L.DomEvent.on(popup, 'click', ()=>{
-                        this.goUser(user.UserName);
-                    });*/
-
-                    
-
-                    this.flyMaker = L.marker([user.Lat, user.Lng]).addTo(this.map)
-                        .bindPopup(popup,{closeButton: false});
-                        //+"<br>"+this.reddah.appData('usersignature_'+user.UserName));
-
-                    this.flyMaker.on('popupopen', ()=> {
-                        this.elementRef.nativeElement.querySelector("#"+user.UserName)
-                        .addEventListener('click', (e)=>
-                        {
+                    if(showArray.includes(index)){
+                        //let content = L.DomUtil.create('div', 'content');
+                        let content = "<img id='"+user.UserName+"' style='float:left;margin-right:10px;border-radius:3px;' width=40 height=40 src="
+                            +this.reddah.appData('userphoto_'+user.UserName)+"><br>"
+                            +this.reddah.getDisplayName(user.UserName);
+                        let popup = L.popup().setContent(content);
+                        /*L.DomEvent.on(popup, 'click', ()=>{
                             this.goUser(user.UserName);
-                        });
-                    });
+                        });*/
+
                         
-                    this.markerGroup.addLayer(this.flyMaker);
+                        this.flyMaker = L.marker([user.Lat, user.Lng]).addTo(this.map)
+                            .bindPopup(popup,{closeButton: true});
+                            //+"<br>"+this.reddah.appData('usersignature_'+user.UserName));
+
+                        this.flyMaker.on('popupopen', ()=> {
+                            this.elementRef.nativeElement.querySelector("#"+user.UserName)
+                            .addEventListener('click', (e)=>
+                            {
+                                this.goUser(user.UserName);
+                            });
+                        });
+                            
+                        this.markerGroup.addLayer(this.flyMaker);
+                    }
 
                 });
                 this.map.addLayer(this.markerGroup);
