@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 
 import L from 'leaflet';
+//import "../../assets/maker/leaflet.awesome-markers";
 import { ActivatedRoute, Params } from '@angular/router';
 import { UserPage } from '../common/user/user.page';
 
@@ -59,7 +60,7 @@ export class MapPage implements OnInit {
         if(this.location){
             this.location.location.lat = this.lat;
             this.location.location.lng = this.lng;
-            this.setLocation(this.location);
+            this.setLocation(this.location, false);
         }
     }
 
@@ -97,17 +98,25 @@ export class MapPage implements OnInit {
   
     flyMaker;
     selectedItem;
-    setLocation(item){
+    setLocation(item, showMaker=true){
         this.selectedItem = item;
         
-        this.flyMaker = L.marker([item.location.lat, item.location.lng]).addTo(this.map)
-            .bindPopup("<img style='float:left;margin-right:10px;border-radius:3px;' width=40 height=40 src="+this.reddah.appData('userphoto_'+this.userName)+">"+
-            this.reddah.appData('usersignature_'+this.userName));
+        if(showMaker){
+            /*var redMarker = L.AwesomeMarkers.icon({
+                icon: 'coffee',
+                markerColor: 'red'
+            });*/
+              
+            this.flyMaker = L.marker([item.location.lat, item.location.lng]).addTo(this.map)
+            //this.flyMaker = L.marker([item.location.lat, item.location.lng], {icon: redMarker}).addTo(this.map)
+                .bindPopup("<img style='float:left;margin-right:10px;border-radius:3px;' width=40 height=40 src="+this.reddah.appData('userphoto_'+this.userName)+">"+
+                this.reddah.appData('usersignature_'+this.userName));
 
-        this.markerGroup.clearLayers();
-        this.markerGroup.addLayer(this.flyMaker);
-        if(this.location)
-            this.map.addLayer(this.markerGroup);
+            this.markerGroup.clearLayers();
+            this.markerGroup.addLayer(this.flyMaker);
+            if(this.location)
+                this.map.addLayer(this.markerGroup);
+        }
 
         //this.map.setView([item.location.lat, item.location.lng], 15);
         this.map.flyTo([item.location.lat, item.location.lng], 6);
@@ -176,7 +185,7 @@ export class MapPage implements OnInit {
                     
 
                     this.flyMaker = L.marker([user.Lat, user.Lng]).addTo(this.map)
-                        .bindPopup(popup);
+                        .bindPopup(popup,{closeButton: false});
                         //+"<br>"+this.reddah.appData('usersignature_'+user.UserName));
 
                     this.flyMaker.on('popupopen', ()=> {

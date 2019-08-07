@@ -37,14 +37,14 @@
         </ion-item>
     </div>
     <div class="gap">
-        <ion-item class="borderTop" (click)="viewTimeline()">
+        <ion-item class="borderTop" (click)="viewTimeline()" *ngIf="imageList&&imageList.length>0">
             <span class="itemTitle" style="line-height: 90px;">朋友圈</span>
             <ion-thumbnail *ngFor="let image of imageList" style="padding: 5px;">
                 <img src="{{image}}">
             </ion-thumbnail>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
-        <ion-item class="borderBottom" lines="none" (click)="goMore()">
+        <ion-item class="borderBottom" lines="none" (click)="goMore()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
             <span class="itemTitle">更多信息</span>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>

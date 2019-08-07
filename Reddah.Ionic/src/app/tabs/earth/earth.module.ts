@@ -13,7 +13,7 @@ import { HeaderModule } from '../../common/header/header.module';
       CommonModule,
       FormsModule,
       HeaderModule,
-      RouterModule.forChild([{ path: 'map', component: EarthPage }]),
+      RouterModule.forChild([{ path: '', component: EarthPage }]),
       TranslateModule.forChild(),
   ],
   declarations: [

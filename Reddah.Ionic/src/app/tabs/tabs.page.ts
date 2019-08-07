@@ -45,6 +45,10 @@ export class TabsPage implements OnInit {
         });
     }
 
+    async gotoEarth(){
+        this.router.navigateByUrl(`/tabs/(earth:earth)`);
+    }
+
     async ngOnInit(){
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         if(locale==null){
