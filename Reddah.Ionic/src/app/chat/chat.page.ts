@@ -151,9 +151,7 @@ export class ChatPage extends ChatBase implements OnInit  {
                 this.messages =  data.Message.Comments;
                 this.chatId = data.Message.Seed;
                 setTimeout(() => {
-                    if(this.pageTop.scrollToBottom){
                         this.pageTop.scrollToBottom(0);
-                    }
                 },200)
                 if(this.platform.is('cordova'))
                 {
