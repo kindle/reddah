@@ -48,7 +48,7 @@
                         <div class="chat-box-others-1" *ngIf="comment.Type==1" (click)="play(comment.Content)">
                             <ion-icon name="ios-wifi" size="large" style="width:20px;height:18px;transform: rotate(90deg);margin:auto;"></ion-icon>
                             <div style="display: flex; line-height:38px;">
-                                <div>{{comment.Duration}}<0?0:comment.Duration''</div>
+                                <div>{{comment.Duration<0?0:comment.Duration}}''</div>
                                 <div style="width:5px;" *ngFor="let i of reddah.getArray(comment.Duration)">&nbsp;</div>
                             </div>
                         </div>

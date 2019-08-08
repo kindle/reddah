@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { Shake } from '@ionic-native/shake/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
     selector: 'app-shake',
@@ -40,6 +41,7 @@ export class ShakePage implements OnInit {
         private shake: Shake,
         private nativeAudio: NativeAudio,
         private platform: Platform,
+        private geolocation: Geolocation,
     ){
         this.userName = this.reddah.getCurrentUser();
 
@@ -52,12 +54,18 @@ export class ShakePage implements OnInit {
             });
         }
     }
+    
+    async ngOnInit(){
+        
+    }
 
     showShakebg = true;
     showAnimetebg = false;
     async shakeAni(){
         this.showShakebg = false;
         this.showAnimetebg = true;
+
+        this.shakeUser();
 
         setTimeout(() => {
             this.showAnimetebg = false;
@@ -66,9 +74,50 @@ export class ShakePage implements OnInit {
         }, 1000)
     }
 
+    async shakeUser(){
+        //get current lat,lng
+        this.geolocation.getCurrentPosition().then((resp) => {
 
-    async ngOnInit(){
+            let degree = 5;
+            let latCenter = resp.coords.latitude;
+            let lngCenter = resp.coords.longitude;
+            let latLow = (latCenter-degree)<-90?-90:(latCenter-degree); 
+            let latHigh = (latCenter+degree)>90?90:(latCenter+degree);
+            let lngLow = (lngCenter-degree)<-180?-180:(lngCenter-degree);
+            let lngHigh = (lngCenter+degree)>180?180:(lngCenter+degree);
+    
+            //get cache by current hour.
+            let cacheKey = `this.reddah.shakeUsersByLocation${latCenter}${lngCenter}${latLow}${latHigh}${lngLow}${lngHigh}${this.reddah.getTimeString()}`;
+            let request = this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh);
+    
+            this.cacheService.loadFromObservable(cacheKey, request, "shakeUsersByLocation")
+            .subscribe(data=>{
+                if(data.Success==0){
+                    let showArray = [];
+                    let showNumber = 1;
+                    if(data.Message.length<=showNumber){
+                        for(let i =0;i<data.Message.length;i++)
+                            showArray.push(i);
+                    }else{
+                        showArray = this.reddah.getRandomArray(showNumber, data.Message.length);
+                    }
+                    data.Message.forEach((user, index) => {
+                        this.reddah.getUserPhotos(user.UserName);
+                        if(showArray.includes(index)){
+                            alert(JSON.stringify(user));
+                        }
+    
+                    });
+                }
+            });
+
+        }).catch((error) => {
+            alert('Error getting location:'+JSON.stringify(error));
+        });
+
         
     }
+
+
     
 }

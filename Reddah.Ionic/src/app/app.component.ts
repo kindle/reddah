@@ -116,6 +116,7 @@ export class AppComponent {
             currentFontSize = 4;
         document.documentElement.style.setProperty(`--ion-font-size`, this.reddah.fontSizeMap.get(currentFontSize));
 
+        this.reddah.getUserPhotos(this.reddah.getCurrentUser());
 /*
         var firebaseConfig = {
             apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
