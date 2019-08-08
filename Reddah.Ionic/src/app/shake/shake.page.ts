@@ -10,6 +10,7 @@ import { CacheService } from "ionic-cache";
 import { Shake } from '@ionic-native/shake/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { UserPage } from '../common/user/user.page';
 
 @Component({
     selector: 'app-shake',
@@ -56,7 +57,7 @@ export class ShakePage implements OnInit {
     }
     
     async ngOnInit(){
-        
+        this.shakeUser();
     }
 
     showShakebg = true;
@@ -74,6 +75,7 @@ export class ShakePage implements OnInit {
         }, 1000)
     }
 
+    users=[];
     async shakeUser(){
         //get current lat,lng
         this.geolocation.getCurrentPosition().then((resp) => {
@@ -104,7 +106,9 @@ export class ShakePage implements OnInit {
                     data.Message.forEach((user, index) => {
                         this.reddah.getUserPhotos(user.UserName);
                         if(showArray.includes(index)){
-                            alert(JSON.stringify(user));
+                            
+                            this.users =[];
+                            this.users.push(user);
                         }
     
                     });
@@ -118,6 +122,15 @@ export class ShakePage implements OnInit {
         
     }
 
-
+    async goUser(userName){
+        const userModal = await this.modalController.create({
+            component: UserPage,
+            componentProps: { 
+                userName: userName
+            }
+        });
+          
+        await userModal.present();
+    }
     
 }

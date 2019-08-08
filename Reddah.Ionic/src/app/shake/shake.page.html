@@ -5,6 +5,17 @@
 <ion-content #pageTop style="background-color: white;">
     <div class="shakebg" *ngIf="showShakebg">
         <img src="assets/shake/shakeIcon.png"/>
+        <div style="position: absolute; bottom: 30px; margin:10px; width:100%;">
+            <ion-item style="position:relative;--background: #1d1d1d;" lines="none" *ngFor="let user of users" (click)="goUser(user.UserName)">
+                <ion-avatar class="contactUserPhoto">
+                    <img src="{{reddah.appData('userphoto_'+user.UserName)}}" class="contactPortrait">
+                </ion-avatar>
+                <ion-label style="margin-left:10px;">
+                    <span class="user-name">{{reddah.getDisplayName(user.UserName)}}</span><br>
+                    <ion-note color="tertiary">相距{{reddah.getRuffDistanceByDegree(user.Distance)}}公里</ion-note>
+                </ion-label>
+            </ion-item>
+        </div>
     </div>
     <div class="animetebg" *ngIf="showAnimetebg">
         <img class="flower" src="assets/shake/flower.png" />

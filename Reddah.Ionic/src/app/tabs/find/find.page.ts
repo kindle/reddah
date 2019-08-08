@@ -46,7 +46,11 @@ export class FindPage {
     }
 
     async shake(){
-        let myLocation = this.reddah.appData("userlocationjson_"+this.userName);
+        let myLocationstr = this.reddah.appData("userlocationjson_"+this.userName);
+        let myLocation = null;
+        try{
+            myLocation = JSON.parse(myLocationstr);
+        }catch(e){}
         if(myLocation&&myLocation.location){
             const modal = await this.modalController.create({
                 component: ShakePage

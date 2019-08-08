@@ -1551,4 +1551,12 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         return date + " " + time;
     }
 
+    getRuffDistanceByDegree(degree){
+        if(degree<0)
+            degree=degree*-1;
+        let meters = parseInt(111*1000*degree+"");
+        
+        return meters;
+    }
+
 }
