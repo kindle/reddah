@@ -231,18 +231,19 @@ export class ReddahService {
             catchError(this.handleError('change location', []))
         );
     }
-    saveUserLocation(userName, location, lat, lng){
+    saveUserLocation(userName, location, lat, lng, tag=""){
         let formData = new FormData();
         formData.append("location", JSON.stringify(location));
         formData.append("lat", JSON.stringify(lat));
         formData.append("lng", JSON.stringify(lng));
+        formData.append("tag", tag);
         
         this.changeLocation(formData)
         .subscribe(result => 
         {
             if(result.Success==0){
                 this.localStorageService.store('userlocation_'+userName, location.title);
-                this.localStorageService.store('userlocationjson_'+userName, location);
+                this.localStorageService.store('userlocationjson_'+userName, JSON.stringify(location));
             }
             else
                 alert(result.Message);
@@ -251,7 +252,7 @@ export class ReddahService {
 
     //******************************** */
     private getusersbylocation = 'https://login.reddah.com/api/article/getusersbylocation'; 
-    getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh){
+    getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, min=0){
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
         formData.append("latCenter", JSON.stringify(latCenter));
@@ -260,6 +261,7 @@ export class ReddahService {
         formData.append("latHigh", JSON.stringify(latHigh));
         formData.append("lngLow", JSON.stringify(lngLow));
         formData.append("lngHigh", JSON.stringify(lngHigh));
+        formData.append("min", JSON.stringify(min));
         
         return this.http.post<any>(this.getusersbylocation, formData)
         .pipe(
@@ -1544,10 +1546,17 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         }
     }
 
+    getHourString(){
+        let today = new Date();
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        let time = today.getHours();
+        return date + " " + time;
+    }
+
     getTimeString(){
         let today = new Date();
         let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        let time = today.getHours();// + ":" + today.getMinutes() + ":" + today.getSeconds();
+        let time = today.getHours() + ":" + today.getMinutes();// + ":" + today.getSeconds();
         return date + " " + time;
     }
 
@@ -1555,8 +1564,10 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         if(degree<0)
             degree=degree*-1;
         let meters = parseInt(111*1000*degree+"");
-        
-        return meters;
+        if(meters>1000){
+            return parseInt(meters/1000+"") + "公里"
+        }
+        return meters + "米";
     }
 
 }

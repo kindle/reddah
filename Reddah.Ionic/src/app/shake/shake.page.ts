@@ -57,7 +57,12 @@ export class ShakePage implements OnInit {
     }
     
     async ngOnInit(){
-        this.shakeUser();
+        
+    }
+
+    test(){
+        //test
+        this.shakeAni();
     }
 
     showShakebg = true;
@@ -75,6 +80,7 @@ export class ShakePage implements OnInit {
         }, 1000)
     }
 
+    isChanged = false;
     users=[];
     async shakeUser(){
         //get current lat,lng
@@ -88,12 +94,26 @@ export class ShakePage implements OnInit {
             let lngLow = (lngCenter-degree)<-180?-180:(lngCenter-degree);
             let lngHigh = (lngCenter+degree)>180?180:(lngCenter+degree);
     
+            //change my location
+            let loc = {
+                "title": this.userName,
+                "location":{"lat":latCenter,"lng":lngCenter}
+            }
+            if(!this.isChanged){
+                this.reddah.saveUserLocation(this.userName, loc, latCenter, lngCenter, "shake");
+                this.isChanged = true;
+            }
+            
+
             //get cache by current hour.
+            let mins = 4;
             let cacheKey = `this.reddah.shakeUsersByLocation${latCenter}${lngCenter}${latLow}${latHigh}${lngLow}${lngHigh}${this.reddah.getTimeString()}`;
-            let request = this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh);
+            //let request = this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, mins);
     
-            this.cacheService.loadFromObservable(cacheKey, request, "shakeUsersByLocation")
+            //this.cacheService.loadFromObservable(cacheKey, request, "shakeUsersByLocation")
+            this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, mins)
             .subscribe(data=>{
+                console.log(data)
                 if(data.Success==0){
                     let showArray = [];
                     let showNumber = 1;
@@ -112,6 +132,9 @@ export class ShakePage implements OnInit {
                         }
     
                     });
+                }
+                else{
+                    alert(JSON.stringify(data));
                 }
             });
 

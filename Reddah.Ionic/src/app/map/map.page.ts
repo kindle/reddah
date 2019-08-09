@@ -132,6 +132,7 @@ export class MapPage implements OnInit {
         });
     }
 
+    
     async goMe(){
         
         let locationJson = this.reddah.appData('userlocationjson_'+this.userName);
@@ -152,6 +153,8 @@ export class MapPage implements OnInit {
                 this.setLocation(loc);
 
                 this.reddah.saveUserLocation(this.userName, loc, loc.location.lat, loc.location.lng);
+                    
+                
             }).on('locationerror', (err) => {
                 alert(err.message);
             })
@@ -173,11 +176,12 @@ export class MapPage implements OnInit {
         let lngHigh = ne.lng;
 
         //get cache by current hour.
-        let cacheKey = `this.reddah.getUsersByLocation${latCenter}${lngCenter}${latLow}${latHigh}${lngLow}${lngHigh}${this.reddah.getTimeString()}`;
-        let request = this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh);
+        let cacheKey = `this.reddah.getUsersByLocation${latCenter}${lngCenter}${latLow}${latHigh}${lngLow}${lngHigh}${this.reddah.getHourString()}`;
+        let request = this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, 0);
 
         this.cacheService.loadFromObservable(cacheKey, request, "getUsersByLocation")
         .subscribe(data=>{
+            console.log(data)
             if(data.Success==0){
                 this.markerGroup.clearLayers();
 
