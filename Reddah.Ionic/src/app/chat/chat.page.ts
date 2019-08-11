@@ -20,13 +20,22 @@ import { PubPage } from '../tabs/publisher/pub/pub.page';
 
 export class ChatBase{
     
+    @Input() hasNewMsg: boolean;
+
     constructor(
         protected modalController: ModalController,
         protected reddah: ReddahService,
+        protected localStorageService: LocalStorageService,
         protected streamingMedia: StreamingMedia,
         protected videoEditor: VideoEditor,
         protected platform: Platform,
     ){}
+
+    userName: string;
+    locale: string;
+
+    message:string = ''
+    messages: object[];
 
 ///pop up new window
     async htmlPlayVideo(id, src, poster){
@@ -81,6 +90,24 @@ export class ChatBase{
         }
     }
 
+    async viewer(index, imageSrcArray) {
+        const modal = await this.modalController.create({
+            component: ImageViewerComponent,
+            componentProps: {
+                index: index,
+                imgSourceArray: imageSrcArray,
+                imgTitle: "",
+                imgDescription: "",
+                showDownload: true,
+            },
+            cssClass: 'modal-fullscreen',
+            keyboardClose: true,
+            showBackdrop: true
+        });
+    
+        return await modal.present();
+    }
+
 }
 
 @Component({
@@ -90,25 +117,22 @@ export class ChatBase{
 })
 export class ChatPage extends ChatBase implements OnInit  {
 
+    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild('chatbox') chatbox;
+
     @Input() title: any;
     @Input() target: any;
     @Input() source;//source ==pub or ""
-    
-    @ViewChild('chatbox') chatbox;
-
-    userName: string;
-    locale: string;
-
-    message:string = ''
-    messages: object[];
 
     //placeholder
     groupChat;
 
+    chatId = -1;
+
     constructor(
         public modalController: ModalController,
         public reddah: ReddahService,
-        private localStorageService: LocalStorageService,
+        public localStorageService: LocalStorageService,
         private cacheService: CacheService,
         private media: Media,
         private nativeAudio: NativeAudio,
@@ -120,12 +144,11 @@ export class ChatPage extends ChatBase implements OnInit  {
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
-        super(modalController, reddah, streamingMedia, videoEditor, platform);
+        super(modalController, reddah, localStorageService, streamingMedia, videoEditor, platform);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }
     
-    chatId = -1;
     ngOnInit() {
         //this.db.list('/chat').valueChanges().subscribe(data => {
         //    console.log(data)
@@ -135,24 +158,77 @@ export class ChatPage extends ChatBase implements OnInit  {
         this.getChat();
         
     }
+    
+    //test
+    clear(){
+        this.localStorageService.clear(`Reddah_Chat_${this.target}`);
+        this.messages = [];
+    }
 
     async childReloadComments(event){
+        this.hasNewMsg = true;
         this.getChat();
     }
 
-    @ViewChild('pageTop') pageTop: Content;
+    async getMoreHistory(evt){
+        let min = Math.min.apply(null,this.messages.map(item=>item["Id"]));
+        this.getHistory(-1*min, 20, evt);
+    }
+    
     async getChat(){
+        let chatHistory = this.localStorageService.retrieve(`Reddah_Chat_${this.target}`);
+        if(chatHistory==null){
+            //get latest 20 messages;
+            this.getHistory(0, 20);
+        }else{
+            if(this.hasNewMsg){
+                this.messages = chatHistory;
+                //get all latest messages;
+                let max = Math.max.apply(null,this.messages.map(item=>item["Id"]));
+                this.getHistory(max, 0);
+            }
+            else{
+                this.messages = chatHistory;
+                console.log(chatHistory)
+                setTimeout(() => {
+                    this.pageTop.scrollToBottom(0);
+                },200)
+            }
+        }
+    }
+
+    async getHistory(id, limit, event=null){
         let formData = new FormData();
         formData.append("targetUser", this.target);
+        formData.append("id", JSON.stringify(id));
+        formData.append("limit", JSON.stringify(limit));
         this.reddah.getChat(formData).subscribe(data=>{
             if(data.Success==0)
             {
-                console.log(data);
-                this.messages =  data.Message.Comments;
                 this.chatId = data.Message.Seed;
-                setTimeout(() => {
-                        this.pageTop.scrollToBottom(0);
-                },200)
+                if(id==0){//first load
+                    this.messages =  data.Message.Comments;
+                    setTimeout(() => {
+                        if(this.pageTop.scrollToBottom)
+                            this.pageTop.scrollToBottom(0);
+                    },200)
+                }
+                else if(id<0){//get previous
+                    this.messages = data.Message.Comments.concat(this.messages);
+                }
+                else{//new msg came in.
+                    this.messages = this.messages.concat(data.Message.Comments);
+                    setTimeout(() => {
+                        if(this.pageTop.scrollToBottom)
+                            this.pageTop.scrollToBottom(0);
+                    },200)
+                }
+                this.localStorageService.store(`Reddah_Chat_${this.target}`, this.messages);
+
+                if(event!=null){
+                    event.target.complete();
+                }
+
                 if(this.platform.is('cordova'))
                 {
                     this.messages.forEach((comment:any)=>{
@@ -168,6 +244,7 @@ export class ChatPage extends ChatBase implements OnInit  {
             }
         });
     }
+    
 
     private fileTransfer: FileTransferObject; 
     async preload(guidName){
@@ -274,23 +351,7 @@ export class ChatPage extends ChatBase implements OnInit  {
         await userModal.present();
     }
 
-    async viewer(index, imageSrcArray) {
-        const modal = await this.modalController.create({
-            component: ImageViewerComponent,
-            componentProps: {
-                index: index,
-                imgSourceArray: imageSrcArray,
-                imgTitle: "",
-                imgDescription: "",
-                showDownload: true,
-            },
-            cssClass: 'modal-fullscreen',
-            keyboardClose: true,
-            showBackdrop: true
-        });
     
-        return await modal.present();
-    }
 
     
 }

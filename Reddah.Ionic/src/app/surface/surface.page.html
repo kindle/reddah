@@ -1,4 +1,4 @@
-<div class="world" (click)="tap()">
+<div class="world" (click)="tap()" (panstart)="panstart($event)" (panend)="panend($event)" (pan)="pan($event)">
     <div class="world-bg"></div>
     <div class="world-globe">
         <div class="world-globe-pole"></div>

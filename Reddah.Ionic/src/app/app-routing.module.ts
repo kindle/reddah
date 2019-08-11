@@ -4,7 +4,6 @@ import { SelectiveStrategyService } from './selective-strategy.service';
 import { SurfacePage } from './surface/surface.page';
 import { ScanPage } from './common/scan/scan.page';
 import { MyTimeLinePage } from './mytimeline/mytimeline.page';
-import { AddTimelinePage } from './mytimeline/add-timeline/add-timeline.page';
 import { AuthGuard } from './AuthGuard.service';
 
 const routes: Routes = [

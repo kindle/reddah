@@ -22,21 +22,19 @@ import { ChatBase } from './chat.page';
 })
 export class GroupChatPage extends ChatBase implements OnInit {
 
+    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild('chatbox') chatbox;
+
     @Input() targetUsers: any;
     @Input() groupChat;
-    @ViewChild('chatbox') chatbox;
-    
 
-    userName: string;
-    locale: string;
-
-    message:string = ''
-    messages: object[];
+    title;
+    chatId = -1;
 
     constructor(
         public modalController: ModalController,
         public reddah: ReddahService,
-        private localStorageService: LocalStorageService,
+        public localStorageService: LocalStorageService,
         private cacheService: CacheService,
         private transfer: FileTransfer, 
         private file: File,
@@ -47,13 +45,11 @@ export class GroupChatPage extends ChatBase implements OnInit {
         //public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
-        super(modalController, reddah, streamingMedia, videoEditor, platform);
+        super(modalController, reddah, localStorageService, streamingMedia, videoEditor, platform);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }
-    
-    chatId = -1;
-    title;
+
     ngOnInit() {
         //this.db.list('/chat').valueChanges().subscribe(data => {
         //    console.log(data)
@@ -74,12 +70,6 @@ export class GroupChatPage extends ChatBase implements OnInit {
         }
         
     }
-
-    async childReloadComments(event){
-        this.getGroupChat();
-    }
-
-    @ViewChild('pageTop') pageTop: Content;
 
     async createGroupChat(){
         let formData = new FormData();
@@ -156,20 +146,75 @@ export class GroupChatPage extends ChatBase implements OnInit {
         });
         
     }
+
+    //test
+    clear(){
+        this.localStorageService.clear(`Reddah_Chat_${this.groupChat.Id}`);
+        this.messages = [];
+    }
+
+    async childReloadComments(event){
+        this.hasNewMsg = true;
+        this.getGroupChat();
+    }
     
+    async getMoreHistory(evt){
+        let min = Math.min.apply(null,this.messages.map(item=>item["Id"]));
+        this.getHistory(-1*min, 20, evt);
+    }
+
     async getGroupChat(){
+        let chatHistory = this.localStorageService.retrieve(`Reddah_Chat_${this.groupChat.Id}`);
+        if(chatHistory==null){
+            //get latest 20 messages;
+            this.getHistory(0, 20);
+        }else{
+            if(this.hasNewMsg){
+                this.messages = chatHistory;
+                //get all latest messages;
+                let max = Math.max.apply(null,this.messages.map(item=>item["Id"]));
+                this.getHistory(max, 0);
+            }
+            else{
+                this.messages = chatHistory;
+                setTimeout(() => {
+                    this.pageTop.scrollToBottom(0);
+                },200)
+            }
+        }
+    }
+
+    async getHistory(id, limit, event=null){
         let formData = new FormData();
         formData.append("groupChatId", JSON.stringify(this.groupChat.Id));
+        formData.append("id", JSON.stringify(id));
+        formData.append("limit", JSON.stringify(limit));
         this.reddah.getGroupChat(formData).subscribe(data=>{
             if(data.Success==0)
             {
-                console.log(data);
-                this.messages =  data.Message.Comments;
-                setTimeout(() => {
-                    if(this.pageTop.scrollToBottom){
-                        this.pageTop.scrollToBottom(0);
-                    }
-                },200)
+                if(id==0){//first load
+                    this.messages =  data.Message.Comments;
+                    setTimeout(() => {
+                        if(this.pageTop.scrollToBottom)
+                            this.pageTop.scrollToBottom(0);
+                    },200)
+                }
+                else if(id<0){//get previous
+                    this.messages = data.Message.Comments.concat(this.messages);
+                }
+                else{//new msg came in.
+                    this.messages = this.messages.concat(data.Message.Comments);
+                    setTimeout(() => {
+                        if(this.pageTop.scrollToBottom)
+                            this.pageTop.scrollToBottom(0);
+                    },200)
+                }
+                this.localStorageService.store(`Reddah_Chat_${this.groupChat.Id}`, this.messages);
+
+                if(event!=null){
+                    event.target.complete();
+                }
+
                 if(this.platform.is('cordova'))
                 {
                     this.messages.forEach((comment:any)=>{

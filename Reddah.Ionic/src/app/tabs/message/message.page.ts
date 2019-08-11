@@ -82,33 +82,35 @@ export class MessagePage implements OnInit {
 
     async viewChat(message) {
         if(message.Type==2){
-            this.chat(message.GroupName)
+            this.chat(message.GroupName, message.IsNew)
         }
         else if(message.Type==3)
         {
-            this.goGroupChat(message);
+            this.goGroupChat(message, message.IsNew);
         }
         message.IsNew = false;
     }
     
-    async chat(groupName){
+    async chat(groupName, hasNewMsg){
         let target = this.GetSender(groupName);
         const modal = await this.modalController.create({
             component: ChatPage,
             componentProps: { 
                 title: this.reddah.appData('usernotename_'+target+'_'+this.currentUserName),
                 target: target,
+                hasNewMsg: hasNewMsg,
             }
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
     }
 
-    async goGroupChat(groupChat){
+    async goGroupChat(groupChat, hasNewMsg){
         const modal = await this.modalController.create({
             component: GroupChatPage,
             componentProps: {
                 groupChat: groupChat,
+                hasNewMsg: hasNewMsg,
             }
         });
         await modal.present();

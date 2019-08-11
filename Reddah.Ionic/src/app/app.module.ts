@@ -56,6 +56,7 @@ import { LocalePage } from './common/locale/locale.page';
 import { LocationPage } from './common/location/location.page'
 import { MapPage } from './map/map.page'
 import { SafePipe } from './safe.pipe';
+import { EarthPage } from './tabs/earth/earth.page'
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { ImageViewerComponent } from './common/image-viewer/image-viewer.component';
 import { VideoViewerComponent } from './common/video-viewer/video-viewer.component';
@@ -144,7 +145,7 @@ var firebaseConfig = {
         AppComponent,
         BookmarkPage,
         BookmarkPopPage,
-        LocalePage,LocationPage,MapPage,
+        LocalePage,LocationPage,MapPage,EarthPage,
         ChooseUserPage,
         AddCommentPage,
         AddFriendPage,
@@ -204,7 +205,7 @@ var firebaseConfig = {
     entryComponents: [
         BookmarkPage,
         BookmarkPopPage,
-        LocalePage,LocationPage,MapPage,
+        LocalePage,LocationPage,MapPage,EarthPage,
         ChooseUserPage,
         PostviewerPage,
         ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,

@@ -744,6 +744,13 @@ export class ReddahService {
    */
     private handleError<T> (operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
+            //alert(JSON.stringify(error));
+            let msg = error.message;
+            if(msg.indexOf("failure response")>0)
+                this.toast("Service Unavailable. Please try again later", "danger")
+                
+            if(msg.indexOf("ERR_TIMED_OUT")>0)
+                this.toast("Service Unavailable. Please try again later", "danger")
             // TODO: send the error to remote logging infrastructure
             console.error(error); // log to console instead
 

@@ -108,12 +108,11 @@ export class ShakePage implements OnInit {
             //get cache by current hour.
             let mins = 4;
             let cacheKey = `this.reddah.shakeUsersByLocation${latCenter}${lngCenter}${latLow}${latHigh}${lngLow}${lngHigh}${this.reddah.getTimeString()}`;
-            //let request = this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, mins);
+            let request = this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, mins);
     
-            //this.cacheService.loadFromObservable(cacheKey, request, "shakeUsersByLocation")
-            this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, mins)
+            this.cacheService.loadFromObservable(cacheKey, request, "shakeUsersByLocation")
+            //this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, mins)
             .subscribe(data=>{
-                console.log(data)
                 if(data.Success==0){
                     let showArray = [];
                     let showNumber = 1;

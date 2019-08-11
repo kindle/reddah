@@ -15,9 +15,6 @@
     <ion-tab tab="about" #about>
         <ion-router-outlet name="about"></ion-router-outlet>
     </ion-tab>
-    <ion-tab tab="map" #map>
-        <ion-router-outlet name="map"></ion-router-outlet>
-    </ion-tab>
     <ion-tab tab="home">
         <ion-router-outlet name="home"></ion-router-outlet>
     </ion-tab>
@@ -31,7 +28,7 @@
         <ion-icon name="ios-people" style="width: 20%;position: relative;"></ion-icon>
         <ion-label class="tab">{{ 'Menu.Contact' | translate }}</ion-label>
       </ion-tab-button>
-      <ion-tab-button tab="map" href="/tabs/(earth:earth)">
+      <ion-tab-button (click)="openEarth()">
         <ion-icon name="globe" style="width: 80px;height:100%;position: absolute;"></ion-icon>
       </ion-tab-button>
       <!--<ion-tab-button tab="home" href="/tabs/(home:home)" (click)="change()">

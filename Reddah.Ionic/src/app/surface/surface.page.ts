@@ -123,6 +123,31 @@ export class SurfacePage implements OnInit {
         }
     }
 
+    panstart(evt){
+        this.isMouseDown = true;
+        this.dragX = evt.center.x;
+        this.dragY = evt.center.y;
+        this.dragLat = this.config.lat;
+        this.dragLng = this.config.lng;
+    }
+
+    panend(evt){
+        if (this.isMouseDown) {
+            this.isMouseDown = false;
+        } 
+    }
+
+    pan(evt){
+         if (this.isMouseDown) {
+            var dX = evt.center.x - this.dragX;
+            var dY = evt.center.y - this.dragY;
+            this.config.lat = this.clamp(this.dragLat + dY * 0.5, -90, 90);
+            //this.config.lng = this.clampLng(this.dragLng - dX * 0.5, -180, 180);
+            this.config.lng = this.clampLng(this.dragLng - dX * 0.5);
+            
+        }
+    }
+
 
     config = {
         percent: 0,

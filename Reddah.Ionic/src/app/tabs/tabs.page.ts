@@ -8,6 +8,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ReddahService } from '../reddah.service';
 import { SwipeTabDirective } from '../swipe-tab.directive';
 import { Tabs } from '@ionic/angular';
+import { EarthPage } from './earth/earth.page';
 
 @Component({
     selector: 'app-tabs',
@@ -18,7 +19,6 @@ export class TabsPage implements OnInit {
     
     @ViewChild(SwipeTabDirective) swipeTabDirective: SwipeTabDirective;
     @ViewChild('myTabs') tabRef: Tabs;
-    @ViewChild('map') map;
     @ViewChild('about') about;
 
     constructor(
@@ -45,9 +45,6 @@ export class TabsPage implements OnInit {
         });
     }
 
-    async gotoEarth(){
-        this.router.navigateByUrl(`/tabs/(earth:earth)`);
-    }
 
     async ngOnInit(){
         let locale = this.localStorageService.retrieve("Reddah_Locale");
@@ -123,6 +120,14 @@ export class TabsPage implements OnInit {
         if(locale==undefined||locale==null)
             return false;
         return true;
+    }
+
+    async openEarth(){
+        const modal = await this.modalController.create({
+            component: EarthPage
+        });
+        
+        await modal.present();
     }
 
 
