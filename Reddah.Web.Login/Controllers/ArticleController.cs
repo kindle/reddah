@@ -642,6 +642,8 @@ namespace Reddah.Web.Login.Controllers
             {
                 string jwt = HttpContext.Current.Request["jwt"];
                 string location = HttpContext.Current.Request["location"];
+                string tag = HttpContext.Current.Request["tag"];
+
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 decimal lat = js.Deserialize<decimal>(HttpContext.Current.Request["lat"]);
                 decimal lng = js.Deserialize<decimal>(HttpContext.Current.Request["lng"]);
@@ -665,6 +667,11 @@ namespace Reddah.Web.Login.Controllers
                             target.Location = location;
                             target.Lat = lat;
                             target.Lng = lng;
+                            if (tag == "shake")
+                            {
+                                target.LastShakeOn = DateTime.UtcNow;
+                            }
+                               
                             db.SaveChanges();
                         }
                         else
@@ -699,8 +706,9 @@ namespace Reddah.Web.Login.Controllers
                 decimal latHigh = js.Deserialize<decimal>(HttpContext.Current.Request["latHigh"]);
                 decimal lngLow = js.Deserialize<decimal>(HttpContext.Current.Request["lngLow"]);
                 decimal lngHigh = js.Deserialize<decimal>(HttpContext.Current.Request["lngHigh"]);
+                int min = js.Deserialize<int>(HttpContext.Current.Request["min"]);
 
-                
+
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
 
@@ -713,26 +721,55 @@ namespace Reddah.Web.Login.Controllers
                 {
                     var pageCount = 100;
 
-                    query = (from u in db.UserProfile
-                             where u.SystemStatus == 0 && u.Lat!=null && u.Lng!=null &&
-                                u.Lat < latHigh && u.Lat > latLow &&
-                                u.Lng < lngHigh && u.Lng > lngLow //has bug in the middle across 0 degree
-                             select new AdvancedUserProfile
-                             {
-                                 UserName = u.UserName,
-                                 Email = u.Email,
-                                 Sex = u.Sex,
-                                 Signature = u.Signature,
-                                 Photo = u.Photo,
-                                 NickName = u.NickName,
-                                 Cover = u.Cover,
-                                 Location = u.Location,
-                                 Lat = u.Lat,
-                                 Lng = u.Lng,
-                                 Distance = (u.Lat - latCenter)>0? (u.Lat - latCenter) : (u.Lat - latCenter)*-1 + 
-                                    (u.Lng - lngCenter)>0? (u.Lng - lngCenter) : (u.Lng - lngCenter)*-1,
-                             })
+                    if (min == 0)
+                    {
+                        query = (from u in db.UserProfile
+                                 where u.SystemStatus == 0 && u.Lat != null && u.Lng != null && u.UserName != jwtResult.JwtUser.User &&
+                                    u.Lat < latHigh && u.Lat > latLow &&
+                                    u.Lng < lngHigh && u.Lng > lngLow //has bug in the middle across 0 degree
+                                 select new AdvancedUserProfile
+                                 {
+                                     UserName = u.UserName,
+                                     Email = u.Email,
+                                     Sex = u.Sex,
+                                     Signature = u.Signature,
+                                     Photo = u.Photo,
+                                     NickName = u.NickName,
+                                     Cover = u.Cover,
+                                     Location = u.Location,
+                                     Lat = u.Lat,
+                                     Lng = u.Lng,
+                                     Distance = (u.Lat - latCenter) > 0 ? (u.Lat - latCenter) : (u.Lat - latCenter) * -1 +
+                                        (u.Lng - lngCenter) > 0 ? (u.Lng - lngCenter) : (u.Lng - lngCenter) * -1,
+                                 })
                             .Take(pageCount).OrderBy(n => n.Distance);
+                    }
+                    else
+                    {
+                        var limit = DateTime.UtcNow.AddMinutes(-min);
+                        query = (from u in db.UserProfile
+                                 where u.SystemStatus == 0 && u.Lat != null && u.Lng != null && u.UserName != jwtResult.JwtUser.User &&
+                                    u.LastShakeOn >= limit &&
+                                    u.Lat < latHigh && u.Lat > latLow &&
+                                    u.Lng < lngHigh && u.Lng > lngLow //has bug in the middle across 0 degree
+                                 select new AdvancedUserProfile
+                                 {
+                                     UserName = u.UserName,
+                                     Email = u.Email,
+                                     Sex = u.Sex,
+                                     Signature = u.Signature,
+                                     Photo = u.Photo,
+                                     NickName = u.NickName,
+                                     Cover = u.Cover,
+                                     Location = u.Location,
+                                     Lat = u.Lat,
+                                     Lng = u.Lng,
+                                     Distance = (u.Lat - latCenter) > 0 ? (u.Lat - latCenter) : (u.Lat - latCenter) * -1 +
+                                        (u.Lng - lngCenter) > 0 ? (u.Lng - lngCenter) : (u.Lng - lngCenter) * -1,
+                                 })
+                            .Take(pageCount).OrderBy(n => n.Distance);
+                    }
+                    
 
                     return Ok(new ApiResult(0, query.ToList()));
                 }

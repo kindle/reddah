@@ -111,3 +111,7 @@ ALTER COLUMN [Cover] nvarchar(MAX) null
 alter table [dbo].[UserProfile] add
   [Lat] Decimal(20,16) NULL,
   [Lng] Decimal(20,16) NULL
+
+--20190809
+alter table [dbo].[UserProfile] add 
+  [LastShakeOn] DATETIME NULL 
