@@ -89,6 +89,7 @@ import { AddFeedbackPage } from './mytimeline/add-feedback/add-feedback.page';
 import { StockPage } from './common/stock/stock.page';
 import { CommentReplyPage } from './postviewer/comment-reply/comment-reply.page';
 import { AutoresizeDirective } from './autoresize-textarea.directive';
+import { ImageLazyLoadDirective } from './image-lazy-load.directive';
 import { CommentBoxComponent } from './postviewer/comment-box/comment-box.component';
 import { ChatBoxComponent } from './chat/chat-box/chat-box.component';
 import { SearchPage } from './common/search/search.page';
@@ -187,7 +188,7 @@ var firebaseConfig = {
         AddFeedbackPage,
         StockPage,
         CommentReplyPage,
-        AutoresizeDirective,SwipeTabDirective,
+        AutoresizeDirective,SwipeTabDirective,ImageLazyLoadDirective,
         CommentBoxComponent,
         ChatBoxComponent,
         SearchPage,

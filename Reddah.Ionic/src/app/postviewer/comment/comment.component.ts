@@ -132,8 +132,9 @@ export class CommentComponent implements OnInit {
         alert(`write some...aid:${articleId},cid:${commentId}`);
     }
 
-    likeComment(commentId: number){
-        alert(`like...cid:${commentId}`);
+    likeComment(comment){
+        comment.like=!comment.like;
+        alert(`like...cid:${comment.Id}`);
     }
 
 

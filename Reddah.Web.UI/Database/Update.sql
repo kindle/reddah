@@ -68,7 +68,7 @@ alter table [dbo].[UserProfile] add
 --re-create userarticle
 
 --20190609
---default 0:text, 1:audio 2:video
+--default 0:text, 1:audio 2:image 3:video 4:link
 alter table [dbo].[Comment] add
   [Type] INT NOT NULL DEFAULT 0,
   [Duration]  INT NOT NULL DEFAULT -1
@@ -115,3 +115,8 @@ alter table [dbo].[UserProfile] add
 --20190809
 alter table [dbo].[UserProfile] add 
   [LastShakeOn] DATETIME NULL 
+
+
+--20190813
+alter table comment add 
+  [Abstract] NVARCHAR(MAX) NULL

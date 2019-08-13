@@ -142,7 +142,8 @@ namespace Reddah.Web.Login.Controllers
                                             UserPhoto = u.Photo,
                                             UserSex = u.Sex,
                                             Type = c.Type,
-                                            Duration = c.Duration
+                                            Duration = c.Duration,
+                                            Abstract = c.Abstract
                                         }).Take(limit).OrderBy(n => n.Id);
 
                         return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
@@ -169,7 +170,8 @@ namespace Reddah.Web.Login.Controllers
                                             UserPhoto = u.Photo,
                                             UserSex = u.Sex,
                                             Type = c.Type,
-                                            Duration = c.Duration
+                                            Duration = c.Duration,
+                                            Abstract = c.Abstract
                                         }).Take(limit).OrderBy(n => n.Id);
 
                         return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
@@ -196,7 +198,8 @@ namespace Reddah.Web.Login.Controllers
                                             UserPhoto = u.Photo,
                                             UserSex = u.Sex,
                                             Type = c.Type,
-                                            Duration = c.Duration
+                                            Duration = c.Duration,
+                                            Abstract = c.Abstract
                                         }).OrderBy(n => n.Id);
 
                         return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
@@ -244,6 +247,9 @@ namespace Reddah.Web.Login.Controllers
                     newGroupChat.Title = "群聊"; //group title
                     newGroupChat.Content = "群公告"; //group anouncement
                     newGroupChat.UserName = jwtResult.JwtUser.User; //group owners, default only 1 - the creator
+                    newGroupChat.LastUpdateBy = jwtResult.JwtUser.User;
+                    newGroupChat.LastUpdateContent = "我建了一个群，开始聊天吧！";
+                    newGroupChat.LastUpdateOn = DateTime.UtcNow;
                     db.Article.Add(newGroupChat);
                     db.SaveChanges();
 
@@ -312,7 +318,8 @@ namespace Reddah.Web.Login.Controllers
                                             UserPhoto = u.Photo,
                                             UserSex = u.Sex,
                                             Type = c.Type,
-                                            Duration = c.Duration
+                                            Duration = c.Duration,
+                                            Abstract = c.Abstract
                                         }).Take(limit).OrderBy(n => n.Id);
 
                         return Ok(new ApiResult(0, new SeededComments { Seed = groupChatId, Comments = comments.ToList() }));
@@ -339,7 +346,8 @@ namespace Reddah.Web.Login.Controllers
                                             UserPhoto = u.Photo,
                                             UserSex = u.Sex,
                                             Type = c.Type,
-                                            Duration = c.Duration
+                                            Duration = c.Duration,
+                                            Abstract = c.Abstract
                                         }).Take(limit).OrderBy(n => n.Id);
 
                         return Ok(new ApiResult(0, new SeededComments { Seed = groupChatId, Comments = comments.ToList() }));
@@ -366,7 +374,8 @@ namespace Reddah.Web.Login.Controllers
                                             UserPhoto = u.Photo,
                                             UserSex = u.Sex,
                                             Type = c.Type,
-                                            Duration = c.Duration
+                                            Duration = c.Duration,
+                                            Abstract = c.Abstract
                                         }).OrderBy(n => n.Id);
 
                         return Ok(new ApiResult(0, new SeededComments { Seed = groupChatId, Comments = comments.ToList() }));
@@ -802,5 +811,85 @@ namespace Reddah.Web.Login.Controllers
                 return Ok(new ApiResult(4, ex1.Message));
             }
         }
+
+        //--default 0:text, 1:audio 2:image 3:video 4:link
+        [Route("sharetofriend")]
+        [HttpPost]
+        public IHttpActionResult ShareToFriend()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string shareTitle = HttpContext.Current.Request["abstract"];
+                string shareImageUrl = HttpContext.Current.Request["content"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int refArticleId = js.Deserialize<int>(HttpContext.Current.Request["ref"]);
+                int chatId = js.Deserialize<int>(HttpContext.Current.Request["chatid"]);
+
+                if (shareTitle == null)
+                    return Ok(new ApiResult(1, "No title"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                try
+                {
+                    using (var db = new reddahEntities())
+                    {
+                        db.Comment.Add(new Comment()
+                        {
+                            ArticleId = chatId,
+                            ParentId = -1,
+                            Content = shareImageUrl,
+                            Abstract = shareTitle,
+                            Duration = refArticleId,
+                            CreatedOn = DateTime.UtcNow,
+                            UserName = jwtResult.JwtUser.User,
+                            Type = 4
+                        });
+
+
+                        var article = db.Article.FirstOrDefault(a => a.Id == chatId);
+                        if (article != null)
+                        {
+                            article.Count++;
+                        }
+
+                        var chatItem = db.Article.FirstOrDefault(a => a.Id == chatId);
+                        if (chatItem != null)
+                        {
+                            chatItem.LastUpdateBy = jwtResult.JwtUser.User;
+                            chatItem.LastUpdateOn = DateTime.UtcNow;
+                            article.LastUpdateContent = shareTitle;
+                            article.LastUpdateType = 4;
+                        }
+
+                        db.SaveChanges();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Ok(new ApiResult(3, "Excepion:" + ex.Message.ToString()));
+                }
+
+
+                return Ok(new ApiResult(0, "share to friend"));
+
+            }
+            catch (Exception e)
+            {
+                return Ok(new ApiResult(4, e.Message));
+            }
+
+
+
+        }
+
     }
+
+    
 }

@@ -46,6 +46,7 @@
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="Abstract" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -290,6 +291,7 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="Abstract" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -485,6 +487,7 @@
           <EntitySetMapping Name="Comment">
             <EntityTypeMapping TypeName="reddahModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="Abstract" ColumnName="Abstract" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

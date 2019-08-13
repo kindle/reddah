@@ -139,7 +139,8 @@ export class CommentReplyPage implements OnInit {
         });
     }
 
-    likeComment(id: number){
-
+    likeComment(comment){
+        comment.like=!comment.like;
+        alert(`like...cid:${comment.Id}`);
     }
 }

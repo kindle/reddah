@@ -953,6 +953,8 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     }
 
     appData(cacheKey){
+        return "assets/icon/anonymous.png";
+        
         let result = this.localStorageService.retrieve(cacheKey);
         
         if(cacheKey.indexOf('userphoto_')>-1){
