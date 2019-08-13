@@ -147,6 +147,9 @@
           <Property Name="limit" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar(max)" />
           <Property Name="Admins" Type="nvarchar(max)" />
+          <Property Name="Lat" Type="decimal" Precision="20" Scale="16" />
+          <Property Name="Lng" Type="decimal" Precision="20" Scale="16" />
+          <Property Name="LastShakeOn" Type="datetime" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -385,6 +388,9 @@
           <Property Name="limit" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Admins" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lat" Type="Decimal" Precision="20" Scale="16" />
+          <Property Name="Lng" Type="Decimal" Precision="20" Scale="16" />
+          <Property Name="LastShakeOn" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -582,6 +588,9 @@
           <EntitySetMapping Name="UserProfiles">
             <EntityTypeMapping TypeName="reddahModel.UserProfile">
               <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="LastShakeOn" ColumnName="LastShakeOn" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
                 <ScalarProperty Name="Admins" ColumnName="Admins" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="limit" ColumnName="limit" />

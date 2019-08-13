@@ -31,5 +31,6 @@ namespace Reddah.Web.Login
         public string Admins { get; set; }
         public Nullable<decimal> Lat { get; set; }
         public Nullable<decimal> Lng { get; set; }
+        public Nullable<System.DateTime> LastShakeOn { get; set; }
     }
 }

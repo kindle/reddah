@@ -79,6 +79,10 @@ namespace Reddah.Web.Login.Controllers
                 string jwt = HttpContext.Current.Request["jwt"];
                 string targetUser = HttpContext.Current.Request["targetUser"];
 
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int id = js.Deserialize<int>(HttpContext.Current.Request["id"]);
+                int limit = js.Deserialize<int>(HttpContext.Current.Request["limit"]);
+
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
 
@@ -116,31 +120,87 @@ namespace Reddah.Web.Login.Controllers
                     }
 
                     //start loading unread chat messages
-                    int pageCount = 10;
-                    var comments = (from c in db.Comment
-                                    join u in db.UserProfile on c.UserName equals u.UserName
-                                    where c.ArticleId == existingChat.Id
-                                    orderby c.Id descending
-                                    select new AdvancedComment
-                                    {
-                                        Id = c.Id,
-                                        ArticleId = c.ArticleId,
-                                        ParentId = c.ParentId,
-                                        Content = c.Content,
-                                        CreatedOn = c.CreatedOn,
-                                        Up = c.Up,
-                                        Down = c.Down,
-                                        Count = c.Count,
-                                        UserName = c.UserName,
-                                        Status = c.Status,
-                                        UserNickName = u.NickName,
-                                        UserPhoto = u.Photo,
-                                        UserSex = u.Sex,
-                                        Type=c.Type,
-                                        Duration=c.Duration
-                                    }).Take(pageCount).OrderBy(n=>n.Id);
+                    if (id == 0)
+                    {
+                        var comments = (from c in db.Comment
+                                        join u in db.UserProfile on c.UserName equals u.UserName
+                                        where c.ArticleId == existingChat.Id
+                                        orderby c.Id descending
+                                        select new AdvancedComment
+                                        {
+                                            Id = c.Id,
+                                            ArticleId = c.ArticleId,
+                                            ParentId = c.ParentId,
+                                            Content = c.Content,
+                                            CreatedOn = c.CreatedOn,
+                                            Up = c.Up,
+                                            Down = c.Down,
+                                            Count = c.Count,
+                                            UserName = c.UserName,
+                                            Status = c.Status,
+                                            UserNickName = u.NickName,
+                                            UserPhoto = u.Photo,
+                                            UserSex = u.Sex,
+                                            Type = c.Type,
+                                            Duration = c.Duration
+                                        }).Take(limit).OrderBy(n => n.Id);
 
-                    return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
+                        return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
+                    }
+                    else if (id < 0)
+                    {
+                        var comments = (from c in db.Comment
+                                        join u in db.UserProfile on c.UserName equals u.UserName
+                                        where c.ArticleId == existingChat.Id && c.Id < id * -1
+                                        orderby c.Id descending
+                                        select new AdvancedComment
+                                        {
+                                            Id = c.Id,
+                                            ArticleId = c.ArticleId,
+                                            ParentId = c.ParentId,
+                                            Content = c.Content,
+                                            CreatedOn = c.CreatedOn,
+                                            Up = c.Up,
+                                            Down = c.Down,
+                                            Count = c.Count,
+                                            UserName = c.UserName,
+                                            Status = c.Status,
+                                            UserNickName = u.NickName,
+                                            UserPhoto = u.Photo,
+                                            UserSex = u.Sex,
+                                            Type = c.Type,
+                                            Duration = c.Duration
+                                        }).Take(limit).OrderBy(n => n.Id);
+
+                        return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
+                    }
+                    else
+                    {
+                        var comments = (from c in db.Comment
+                                        join u in db.UserProfile on c.UserName equals u.UserName
+                                        where c.ArticleId == existingChat.Id && c.Id > id
+                                        orderby c.Id descending
+                                        select new AdvancedComment
+                                        {
+                                            Id = c.Id,
+                                            ArticleId = c.ArticleId,
+                                            ParentId = c.ParentId,
+                                            Content = c.Content,
+                                            CreatedOn = c.CreatedOn,
+                                            Up = c.Up,
+                                            Down = c.Down,
+                                            Count = c.Count,
+                                            UserName = c.UserName,
+                                            Status = c.Status,
+                                            UserNickName = u.NickName,
+                                            UserPhoto = u.Photo,
+                                            UserSex = u.Sex,
+                                            Type = c.Type,
+                                            Duration = c.Duration
+                                        }).OrderBy(n => n.Id);
+
+                        return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
+                    }
 
                 }
 
@@ -210,6 +270,8 @@ namespace Reddah.Web.Login.Controllers
                 
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 int groupChatId = js.Deserialize<int>(HttpContext.Current.Request["groupChatId"]);
+                int id = js.Deserialize<int>(HttpContext.Current.Request["id"]);
+                int limit = js.Deserialize<int>(HttpContext.Current.Request["limit"]);
 
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
@@ -228,31 +290,88 @@ namespace Reddah.Web.Login.Controllers
                         return Ok(new ApiResult(3, "group chat not exist"));
 
                     //start loading unread chat messages
-                    int pageCount = 20;
-                    var comments = (from c in db.Comment
-                                    join u in db.UserProfile on c.UserName equals u.UserName
-                                    where c.ArticleId == groupChatId
-                                    orderby c.Id descending
-                                    select new AdvancedComment
-                                    {
-                                        Id = c.Id,
-                                        ArticleId = c.ArticleId,
-                                        ParentId = c.ParentId,
-                                        Content = c.Content,
-                                        CreatedOn = c.CreatedOn,
-                                        Up = c.Up,
-                                        Down = c.Down,
-                                        Count = c.Count,
-                                        UserName = c.UserName,
-                                        Status = c.Status,
-                                        UserNickName = u.NickName,
-                                        UserPhoto = u.Photo,
-                                        UserSex = u.Sex,
-                                        Type=c.Type,
-                                        Duration=c.Duration
-                                    }).Take(pageCount).OrderBy(n => n.Id);
+                    if (id == 0)
+                    {
+                        var comments = (from c in db.Comment
+                                        join u in db.UserProfile on c.UserName equals u.UserName
+                                        where c.ArticleId == groupChatId
+                                        orderby c.Id descending
+                                        select new AdvancedComment
+                                        {
+                                            Id = c.Id,
+                                            ArticleId = c.ArticleId,
+                                            ParentId = c.ParentId,
+                                            Content = c.Content,
+                                            CreatedOn = c.CreatedOn,
+                                            Up = c.Up,
+                                            Down = c.Down,
+                                            Count = c.Count,
+                                            UserName = c.UserName,
+                                            Status = c.Status,
+                                            UserNickName = u.NickName,
+                                            UserPhoto = u.Photo,
+                                            UserSex = u.Sex,
+                                            Type = c.Type,
+                                            Duration = c.Duration
+                                        }).Take(limit).OrderBy(n => n.Id);
 
-                    return Ok(new ApiResult(0, new SeededComments { Seed = groupChatId, Comments = comments.ToList() }));
+                        return Ok(new ApiResult(0, new SeededComments { Seed = groupChatId, Comments = comments.ToList() }));
+                    }
+                    else if (id < 0)
+                    {
+                        var comments = (from c in db.Comment
+                                        join u in db.UserProfile on c.UserName equals u.UserName
+                                        where c.ArticleId == groupChatId && c.Id < id*-1
+                                        orderby c.Id descending
+                                        select new AdvancedComment
+                                        {
+                                            Id = c.Id,
+                                            ArticleId = c.ArticleId,
+                                            ParentId = c.ParentId,
+                                            Content = c.Content,
+                                            CreatedOn = c.CreatedOn,
+                                            Up = c.Up,
+                                            Down = c.Down,
+                                            Count = c.Count,
+                                            UserName = c.UserName,
+                                            Status = c.Status,
+                                            UserNickName = u.NickName,
+                                            UserPhoto = u.Photo,
+                                            UserSex = u.Sex,
+                                            Type = c.Type,
+                                            Duration = c.Duration
+                                        }).Take(limit).OrderBy(n => n.Id);
+
+                        return Ok(new ApiResult(0, new SeededComments { Seed = groupChatId, Comments = comments.ToList() }));
+                    }
+                    else
+                    {
+                        var comments = (from c in db.Comment
+                                        join u in db.UserProfile on c.UserName equals u.UserName
+                                        where c.ArticleId == groupChatId && c.Id>id
+                                        orderby c.Id descending
+                                        select new AdvancedComment
+                                        {
+                                            Id = c.Id,
+                                            ArticleId = c.ArticleId,
+                                            ParentId = c.ParentId,
+                                            Content = c.Content,
+                                            CreatedOn = c.CreatedOn,
+                                            Up = c.Up,
+                                            Down = c.Down,
+                                            Count = c.Count,
+                                            UserName = c.UserName,
+                                            Status = c.Status,
+                                            UserNickName = u.NickName,
+                                            UserPhoto = u.Photo,
+                                            UserSex = u.Sex,
+                                            Type = c.Type,
+                                            Duration = c.Duration
+                                        }).OrderBy(n => n.Id);
+
+                        return Ok(new ApiResult(0, new SeededComments { Seed = groupChatId, Comments = comments.ToList() }));
+                    }
+                    
 
                 }
 
