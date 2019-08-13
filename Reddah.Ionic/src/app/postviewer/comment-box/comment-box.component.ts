@@ -12,6 +12,7 @@ import { AddCommentPage } from '../add-comment/add-comment.page';
 export class CommentBoxComponent implements OnInit {
 
     @ViewChild('newComment') newComment;
+    @Input() count: number;
     @Input() selectedArticleId: number;
     @Input() selectedCommentId: number;
     @Output() reloadComments = new EventEmitter();

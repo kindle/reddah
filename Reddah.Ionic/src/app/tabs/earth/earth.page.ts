@@ -175,72 +175,13 @@ export class EarthPage implements OnInit {
 
         this.regenerateGlobe();
 
-        /*var gui = new dat.GUI();
-        gui.add(this.config, 'lat', -90, 90).listen();
-        gui.add(this.config, 'lng', -180, 180).listen();
-        gui.add(this.config, 'isHaloVisible');
-        gui.add(this.config, 'isPoleVisible');
-        gui.add(this.config, 'autoSpin');
-        gui.add(this.config, 'goToBristol');
-        gui.add(this.config, 'zoom', 0, 1).listen();
-        */
-
-        //this.stats = new Stats();
-        //this.stats.domElement.style.position = 'absolute';
-        //this.stats.domElement.style.left = 0;
-        //this.stats.domElement.style.top = 0;
-        //document.body.appendChild(this.stats.domElement);
-
         // events
         this.world.ondragstart = function() {
             return false;
         };
-        /*this.world.addEventListener('mousedown', ()=>this.onMouseDown);
-        this.world.addEventListener('mousemove', ()=>this.onMouseMove);
-        this.world.addEventListener('mouseup', ()=>this.onMouseUp);
-        this.world.addEventListener('touchstart', this.touchPass(()=>this.onMouseDown));
-        this.world.addEventListener('touchmove', this.touchPass(()=>this.onMouseMove));
-        this.world.addEventListener('touchend', this.touchPass(()=>this.onMouseUp));
-*/
 
 
         this.loop();
-    }
-
-    touchPass(func) {
-        return function(evt) {
-            evt.preventDefault();
-            func.call(this, {
-                pageX: evt.changedTouches[0].pageX,
-                pageY: evt.changedTouches[0].pageY
-            });
-        };
-    }
-
-    onMouseDown(evt) {
-        this.isMouseDown = true;
-        this.dragX = evt.pageX;
-        this.dragY = evt.pageY;
-        this.dragLat = this.config.lat;
-        this.dragLng = this.config.lng;
-        console.log(this.dragX+"_"+this.dragY)
-        console.log(this.dragLat+"_"+this.dragLng)
-    }
-
-    onMouseMove(evt) {
-        if (this.isMouseDown) {
-            var dX = evt.pageX - this.dragX;
-            var dY = evt.pageY - this.dragY;
-            this.config.lat = this.clamp(this.dragLat + dY * 0.5, -90, 90);
-            //this.config.lng = this.clampLng(this.dragLng - dX * 0.5, -180, 180);
-            
-        }
-    }
-
-    onMouseUp(evt) {
-        if (this.isMouseDown) {
-            this.isMouseDown = false;
-        }
     }
 
     regenerateGlobe() {
@@ -315,11 +256,10 @@ export class EarthPage implements OnInit {
     loop(){
         try{
             requestAnimationFrame(()=>{this.loop()});
-            //this.stats.begin();
             this.render();
-            //this.stats.end();
         }
-        catch(e){alert(JSON.stringify(e))}
+        catch(e){}
+        //catch(e){alert(JSON.stringify(e))}
     }
 
     render() {

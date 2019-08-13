@@ -138,4 +138,8 @@ export class CommentReplyPage implements OnInit {
             this.allRepliesCount = this.GetCommentCount(this.comments, this.comment.Id);
         });
     }
+
+    likeComment(id: number){
+
+    }
 }

@@ -38,11 +38,28 @@
     border-radius: 5px;
 }
 
+.chat-box-me-link {
+    min-height:40px; 
+    background-color: white; 
+    vertical-align: middle;
+    padding:0px;
+    border-radius: 5px;
+}
+
 .chat-arrow-right {
     margin-top: 15px;
     width: 0; 
     height: 0; 
     border-left: 5px solid #95ec69;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+.chat-arrow-right-link {
+    margin-top: 15px;
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid white;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
 }
@@ -65,6 +82,16 @@
     background-color: white; 
     vertical-align: middle;
     padding:10px;
+    border-radius: 5px;
+    overflow-wrap: break-word;
+}
+
+.chat-box-others-link{
+    min-height:40px; 
+    flex:1; 
+    background-color: white; 
+    vertical-align: middle;
+    padding:0px;
     border-radius: 5px;
     overflow-wrap: break-word;
 }

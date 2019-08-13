@@ -142,10 +142,12 @@ export class ChatBoxComponent implements OnInit {
 
     audioMediaObj;
 
+    isPressed=false;
     async startSpeak(){
-        if (this.platform.is('cordova')) {
-
+        this.isPressed=true;
         this.speakDesc = "松开 发送";
+        if (this.platform.is('cordova')) {
+            
 
     /*
             let fileName = this.reddah.generateFileName()+".m4a";
@@ -179,8 +181,11 @@ export class ChatBoxComponent implements OnInit {
 
 
     async stopSpeak(){
+        this.isPressed=false;
         this.speakDesc = "按住 说话";
-        this.audioMediaObj.stopRecord();
+        if (this.platform.is('cordova')) {
+            this.audioMediaObj.stopRecord();
+        }
     }
 
     uploadAudio(fileName){

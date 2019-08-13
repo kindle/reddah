@@ -128,6 +128,10 @@ import { MorePage } from './common/more/more.page';
 import { AddMiniPage } from './tabs/publisher/add-mini/add-mini.page';
 import { SwipeTabDirective } from './swipe-tab.directive';
 import { PlatformPage } from './tabs/publisher/platform/platform.page';
+import { ShareChooseChatPage } from './chat/share-choose-chat/share-choose-chat.page';
+import { ShareChooseUserPage } from './chat/share-choose-user/share-choose-user.page';
+import { ShareChooseGroupPage } from './chat/share-choose-group/share-choose-group.page';
+import { ShareArticleChatComponent } from './common/share-article-chat/share-article-chat.component';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -141,12 +145,12 @@ var firebaseConfig = {
 
 @NgModule({
     declarations: [
-        ShareArticleComponent,
+        ShareArticleComponent,ShareArticleChatComponent,
         AppComponent,
         BookmarkPage,
         BookmarkPopPage,
         LocalePage,LocationPage,MapPage,EarthPage,
-        ChooseUserPage,
+        ChooseUserPage,ShareChooseChatPage,
         AddCommentPage,
         AddFriendPage,
         ApplyFriendPage,
@@ -156,7 +160,7 @@ var firebaseConfig = {
         GroupChatPage,
         ChatOptPage,
         GroupChatOptPage,
-        ChatChooseUserPage,
+        ChatChooseUserPage,ShareChooseUserPage,ShareChooseGroupPage,
         ChatChooseGroupPage,
         MyInfoPage,MessagePage,
         NewFriendPage,
@@ -206,7 +210,7 @@ var firebaseConfig = {
         BookmarkPage,
         BookmarkPopPage,
         LocalePage,LocationPage,MapPage,EarthPage,
-        ChooseUserPage,
+        ChooseUserPage,ShareChooseChatPage,
         PostviewerPage,
         ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,
         SurfacePage,
@@ -219,7 +223,7 @@ var firebaseConfig = {
         GroupChatPage,
         ChatOptPage,
         GroupChatOptPage,
-        ChatChooseUserPage,
+        ChatChooseUserPage,ShareChooseUserPage,ShareChooseGroupPage,
         ChatChooseGroupPage,
         MyInfoPage,MessagePage,
         NewFriendPage,

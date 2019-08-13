@@ -181,7 +181,7 @@ export class ChatPage extends ChatBase implements OnInit  {
             //get latest 20 messages;
             this.getHistory(0, 20);
         }else{
-            if(this.hasNewMsg){
+            /*if(this.hasNewMsg){
                 this.messages = chatHistory;
                 //get all latest messages;
                 let max = Math.max.apply(null,this.messages.map(item=>item["Id"]));
@@ -189,11 +189,14 @@ export class ChatPage extends ChatBase implements OnInit  {
             }
             else{
                 this.messages = chatHistory;
-                console.log(chatHistory)
                 setTimeout(() => {
                     this.pageTop.scrollToBottom(0);
                 },200)
-            }
+            }*/
+            this.messages = chatHistory;
+            //get all latest messages;
+            let max = Math.max.apply(null,this.messages.map(item=>item["Id"]));
+            this.getHistory(max, 0);
         }
     }
 
@@ -240,7 +243,7 @@ export class ChatPage extends ChatBase implements OnInit  {
                 }
             }
             else{
-                alert(data);
+                alert(JSON.stringify(data));
             }
         });
     }
@@ -314,6 +317,12 @@ export class ChatPage extends ChatBase implements OnInit  {
             });
             
             await modal.present();
+
+            const { data } = await modal.onDidDismiss();
+            if(data=="clearchat")
+            {
+                this.clear();
+            }
         }
     }
 

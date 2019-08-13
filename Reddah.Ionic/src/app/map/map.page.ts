@@ -45,7 +45,6 @@ export class MapPage implements OnInit {
     }
 
     async ngOnInit(){
-        
     }
 
     @ViewChild('earth') mapContainer: ElementRef;
@@ -57,11 +56,13 @@ export class MapPage implements OnInit {
 
         this.loadmap();
         
-        if(this.location){
+        /*if(this.location){
             this.location.location.lat = this.lat;
             this.location.location.lng = this.lng;
             this.setLocation(this.location, false);
-        }
+        }*/
+        
+        this.goMe();
     }
 
     
@@ -75,25 +76,6 @@ export class MapPage implements OnInit {
         this.map = L.map("earth").fitWorld();
 
         L.tileLayer(this.tileUrl, this.tileOptions).addTo(this.map);
-        
-
-        /*if(!this.location)
-        {
-            this.map.locate({ setView: true, maxZoom: 15 }).on('locationfound', (e) => {
-                
-                let marker = L.marker([e.latitude, e.longitude]).on('click', () => {});
-
-                this.markerGroup.addLayer(marker);
-                this.map.addLayer(this.markerGroup);
-
-                //this.reddah.getNearby(e.latitude, e.longitude).subscribe(data=>{
-                //    this.locations = data._body.result.pois;
-                //});  
-
-            }).on('locationerror', (err) => {
-                alert(err.message);
-            })
-        }*/
     }
   
     flyMaker;
@@ -118,8 +100,8 @@ export class MapPage implements OnInit {
                 this.map.addLayer(this.markerGroup);
         }
 
-        //this.map.setView([item.location.lat, item.location.lng], 15);
-        this.map.flyTo([item.location.lat, item.location.lng], 6);
+        this.map.setView([item.location.lat, item.location.lng], 3);
+        //this.map.flyTo([item.location.lat, item.location.lng], 3);
     }
 
     @ViewChild('about') about;
@@ -197,9 +179,9 @@ export class MapPage implements OnInit {
                     this.reddah.getUserPhotos(user.UserName);
                     if(showArray.includes(index)){
                         //let content = L.DomUtil.create('div', 'content');
-                        let content = "<img id='"+user.UserName+"' style='float:left;margin-right:10px;border-radius:3px;' width=40 height=40 src="
-                            +this.reddah.appData('userphoto_'+user.UserName)+"><br>"
-                            +this.reddah.getDisplayName(user.UserName);
+                        let content = "<img id='"+user.UserName+"' style='margin-right:5px;border-radius:3px;' width=40 height=40 src="
+                            +this.reddah.appData('userphoto_'+user.UserName)+">"
+                            +this.reddah.getDisplayName(user.UserName)+"";
                         let popup = L.popup().setContent(content);
                         /*L.DomEvent.on(popup, 'click', ()=>{
                             this.goUser(user.UserName);

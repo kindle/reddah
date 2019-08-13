@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
@@ -6,14 +6,19 @@ import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { ChatPage } from '../../chat/chat.page';
 import { GroupChatPage } from '../../chat/group-chat.page';
+import { ChatChooseUserPage } from '../../chat/chat-choose-user/chat-choose-user.page';
+import { ShareChooseUserPage } from '../../chat/share-choose-user/share-choose-user.page';
 
 @Component({
-    selector: 'app-message',
-    templateUrl: 'message.page.html',
-    styleUrls: ['message.page.scss']
+    selector: 'app-share-choose-chat',
+    templateUrl: 'share-choose-chat.page.html',
+    styleUrls: ['share-choose-chat.page.scss']
 })
-export class MessagePage implements OnInit {
+export class ShareChooseChatPage implements OnInit {
 
+    @Input() title;
+    @Input() article: any;
+    
     currentUserName: any;
 
     constructor(
@@ -36,10 +41,22 @@ export class MessagePage implements OnInit {
         },5000);
     }
 
-    clear(){
-        this.localStorageService.clear("Reddah_Local_Messages");
-        this.messages = [];
-        this.loadData(false);
+    async createNewChat(){
+        const modal = await this.modalController.create({
+            component: ShareChooseUserPage,
+            componentProps: {
+                article: this.article,
+            }
+        });
+          
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data)
+            this.modalController.dismiss();
+    }
+
+    async close(){
+        await this.modalController.dismiss();
     }
 
     messages = [];
@@ -80,43 +97,27 @@ export class MessagePage implements OnInit {
         return groupName.replace(this.currentUserName,"").replace(",","");
     }
 
-    async viewChat(message) {
-        if(message.Type==2){
-            this.chat(message.GroupName, message.IsNew)
-        }
-        else if(message.Type==3)
-        {
-            this.goGroupChat(message, message.IsNew);
-        }
-        message.IsNew = false;
-    }
-    
-    async chat(groupName, hasNewMsg){
-        let target = this.GetSender(groupName);
-        const modal = await this.modalController.create({
-            component: ChatPage,
-            componentProps: { 
-                title: this.reddah.appData('usernotename_'+target+'_'+this.currentUserName),
-                target: target,
-                hasNewMsg: hasNewMsg,
-            }
-        });
-        await modal.present();
-        const {data} = await modal.onDidDismiss();
-    }
+    async chooseChat(message) {
+        let selectedArticleId = message.Id;
+        let formData = new FormData();
+        formData.append("abstract", this.reddah.htmlDecode(this.article.Title));
+        formData.append("content", this.article.ImageUrl);
+        formData.append("ref", JSON.stringify(this.article.Id));
+        formData.append("chatid", JSON.stringify(selectedArticleId));
 
-    async goGroupChat(groupChat, hasNewMsg){
-        const modal = await this.modalController.create({
-            component: GroupChatPage,
-            componentProps: {
-                groupChat: groupChat,
-                hasNewMsg: hasNewMsg,
-            }
-        });
-        await modal.present();
-        const { data } = await modal.onDidDismiss();
-        if(data=="delete"){
-           this.clear();
+        if(message.Type==2||message.Type==3){
+            this.reddah.shareToFriend(formData)
+            .subscribe(result => 
+            {
+                if(result.Success==0)
+                { 
+                    this.close()
+                }
+                else{
+                    alert(result.Message);
+                }
+            });
         }
+
     }
 }

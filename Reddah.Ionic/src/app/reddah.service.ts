@@ -96,6 +96,19 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private shareToFriendUrl = 'https://login.reddah.com/api/chat/sharetofriend'; 
+
+    shareToFriend(formData: FormData): Observable<any> {
+
+      formData.append('jwt', this.getCurrentJwt());
+      
+      return this.http.post<any>(this.shareToFriendUrl, formData)
+      .pipe(
+          tap(data => this.log('share to friend')),
+          catchError(this.handleError('share to friend', []))
+      );
+    }
+    //******************************** */
     private addPhotoCommentsUrl = 'https://login.reddah.com/api/chat/addphotocomments'; 
     addPhotoComments(formData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());

@@ -20,6 +20,7 @@
             <ion-note color="dark" *ngIf="message.LastUpdateType==1">[语音]</ion-note>
             <ion-note color="dark" *ngIf="message.LastUpdateType==2">[图片]</ion-note>
             <ion-note color="dark" *ngIf="message.LastUpdateType==3">[视频]</ion-note>
+            <ion-note color="dark" *ngIf="message.LastUpdateType==4">[Link]</ion-note>
         </ion-label>
         <ion-label style="margin-left:10px;" *ngIf="message.Type==3">
             <span class="user-name">{{message.Title}}</span>
@@ -28,6 +29,7 @@
             <ion-note color="dark" *ngIf="message.LastUpdateType==1">[语音]</ion-note>
             <ion-note color="dark" *ngIf="message.LastUpdateType==2">[图片]</ion-note>
             <ion-note color="dark" *ngIf="message.LastUpdateType==3">[视频]</ion-note>
+            <ion-note color="dark" *ngIf="message.LastUpdateType==4">[Link]</ion-note>
         </ion-label>
         <ion-note slot="end">
             {{reddah.getSendTimeChat(message.LastUpdateOn|date:'yyyy-MM-dd HH:mm:ss')}}<br>

@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
     templateUrl: './group-chat-opt.page.html',
     styleUrls: ['./group-chat-opt.page.scss'],
 })
-export class GroupChatOptPage implements OnInit {
+export class GroupChatOptPage {
 
     @Input() targetUsers;
     @Input() groupInfo;
@@ -36,9 +36,6 @@ export class GroupChatOptPage implements OnInit {
         private translate: TranslateService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
-    }
-
-    ngOnInit() {
     }
 
     async changeTitle(){
@@ -63,7 +60,25 @@ export class GroupChatOptPage implements OnInit {
     }
 
     async clearChat(){
+        const alert = await this.alertController.create({
+            header: this.translate.instant("Confirm.Title"),
+            message: this.translate.instant("Confirm.ClearChatMessage"),
+            buttons: [
+            {
+                text: this.translate.instant("Confirm.Cancel"),
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {}
+            }, 
+            {
+                text: this.translate.instant("Confirm.Yes"),
+                handler: () => {
+                    this.modalController.dismiss('clearchat');
+                }
+            }]
+        });
 
+        await alert.present().then(()=>{});
     }
 
     async report(){
@@ -115,6 +130,7 @@ export class GroupChatOptPage implements OnInit {
         this.reddah.deleteGroupChat(formData).subscribe(result=>{
             if(result.Success==0){
                 this.cacheService.clearGroup("ChatChooseGroupPage");
+                this.localStorageService.clear("Reddah_Local_Messages");
                 this.modalController.dismiss('delete');
             }
             else {

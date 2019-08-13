@@ -77,7 +77,6 @@ export class GroupChatPage extends ChatBase implements OnInit {
         this.reddah.createGroupChat(formData).subscribe(data=>{
             if(data.Success==0)
             {
-                console.log("asdf"+data);
                 //this.messages =  data.Message.Comments;
                 //this.groupChat.Id = data.Message.Id;
                 this.groupChat = data.Message;
@@ -169,7 +168,7 @@ export class GroupChatPage extends ChatBase implements OnInit {
             //get latest 20 messages;
             this.getHistory(0, 20);
         }else{
-            if(this.hasNewMsg){
+            /*if(this.hasNewMsg){
                 this.messages = chatHistory;
                 //get all latest messages;
                 let max = Math.max.apply(null,this.messages.map(item=>item["Id"]));
@@ -180,7 +179,11 @@ export class GroupChatPage extends ChatBase implements OnInit {
                 setTimeout(() => {
                     this.pageTop.scrollToBottom(0);
                 },200)
-            }
+            }*/
+            this.messages = chatHistory;
+            //get all latest messages;
+            let max = Math.max.apply(null,this.messages.map(item=>item["Id"]));
+            this.getHistory(max, 0);
         }
     }
 
@@ -226,7 +229,7 @@ export class GroupChatPage extends ChatBase implements OnInit {
                 }
             }
             else{
-                alert(data);
+                alert(JSON.stringify(data));
             }
         });
     }
@@ -247,9 +250,13 @@ export class GroupChatPage extends ChatBase implements OnInit {
         });
         
         await modal.present();
-        const {data} = await modal.onDidDismiss();
+        const { data } = await modal.onDidDismiss();
         if(data=='delete'){
             await this.modalController.dismiss('delete');
+        }
+        else if(data=="clearchat")
+        {
+            this.clear();
         }
     }
 

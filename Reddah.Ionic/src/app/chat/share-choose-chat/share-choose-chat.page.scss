@@ -1,0 +1,20 @@
+.singleGroupImage {
+    width: 50px; 
+    height: 50px; 
+    border-radius: 3px;
+    background-color: #eeeeee;
+}
+
+.singleGroupImage img{
+    border-radius: 3px;
+}
+
+.groupImages {
+    width: 50px; 
+    height: 50px; 
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 33% 33% 33%;
+    border-radius: 3px;
+    background-color: #eeeeee;
+}

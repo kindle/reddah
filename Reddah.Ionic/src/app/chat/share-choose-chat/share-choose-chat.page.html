@@ -1,0 +1,29 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon slot="start" name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-label slot="start">{{title}}</ion-label>
+</ion-item>
+<ion-content style="background-color: white;">
+    <ion-item (click)="createNewChat()">
+        创建新聊天
+    </ion-item>
+    <ion-item *ngFor="let message of messages" (click)="chooseChat(message)">
+        <div style="margin:5px 0px;">
+            <div class="singleGroupImage" *ngIf="message.Type==2">
+                <div>
+                    <img src="{{reddah.appData('userphoto_'+GetSender(message.GroupName))}}">
+                </div>
+            </div>
+            <div class="groupImages" *ngIf="message.Type==3">
+                <div *ngFor="let user of message.GroupName.split(',').slice(0,9)">
+                    <img src="{{reddah.appData('userphoto_'+user)}}">
+                </div>
+            </div>
+        </div>
+        <ion-label style="margin-left:10px;" *ngIf="message.Type==2">
+            <span class="user-name">{{reddah.getDisplayName(GetSender(message.GroupName))}}</span>
+        </ion-label>
+        <ion-label style="margin-left:10px;" *ngIf="message.Type==3">
+            <span class="user-name">{{message.Title}}</span>
+        </ion-label>
+    </ion-item>
+</ion-content>

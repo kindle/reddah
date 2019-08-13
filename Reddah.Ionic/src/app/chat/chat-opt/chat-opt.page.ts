@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, AlertController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
 import { LocalePage } from '../../common/locale/locale.page';
 import { UserPage } from '../../common/user/user.page';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-chat-opt',
@@ -28,7 +29,9 @@ export class ChatOptPage implements OnInit {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         public authService: AuthService,
+        private alertController: AlertController,
         private toastController: ToastController,
+        private translate: TranslateService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
@@ -49,7 +52,25 @@ export class ChatOptPage implements OnInit {
     }
 
     async clearChat(){
+        const alert = await this.alertController.create({
+            header: this.translate.instant("Confirm.Title"),
+            message: this.translate.instant("Confirm.ClearChatMessage"),
+            buttons: [
+            {
+                text: this.translate.instant("Confirm.Cancel"),
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {}
+            }, 
+            {
+                text: this.translate.instant("Confirm.Yes"),
+                handler: () => {
+                    this.modalController.dismiss('clearchat');
+                }
+            }]
+        });
 
+        await alert.present().then(()=>{});
     }
 
     async report(){

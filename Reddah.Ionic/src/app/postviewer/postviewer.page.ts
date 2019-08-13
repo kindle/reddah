@@ -11,6 +11,7 @@ import { SearchPage } from '../common/search/search.page';
 import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page';
 import { PubPage } from '../tabs/publisher/pub/pub.page';
 import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
+import { ShareChooseChatPage } from '../chat/share-choose-chat/share-choose-chat.page';
 
 @Component({
     selector: 'app-postviewer',
@@ -50,7 +51,15 @@ export class PostviewerPage implements OnInit {
         const { data } = await popover.onDidDismiss();
         if(data==1)//share to friend
         {
-            //await this.takePhoto();
+            const modal = await this.modalController.create({
+                component: ShareChooseChatPage,
+                componentProps: { 
+                    title: "选择",
+                    article: this.article,
+                }
+            });
+              
+            await modal.present();
         }
         else if(data==2)//share to timeline
         {

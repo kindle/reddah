@@ -9,6 +9,7 @@ import { ReddahService } from '../reddah.service';
 import { SwipeTabDirective } from '../swipe-tab.directive';
 import { Tabs } from '@ionic/angular';
 import { EarthPage } from './earth/earth.page';
+import { MapPage } from '../map/map.page';
 
 @Component({
     selector: 'app-tabs',
@@ -123,11 +124,25 @@ export class TabsPage implements OnInit {
     }
 
     async openEarth(){
-        const modal = await this.modalController.create({
-            component: EarthPage
-        });
-        
-        await modal.present();
+        let yearslater = false;
+        if(yearslater){
+            const modal = await this.modalController.create({
+                component: EarthPage
+            });
+            
+            await modal.present();
+        }
+        else{
+            const modal = await this.modalController.create({
+                component: MapPage,
+                componentProps: {
+                    //lat: this.config.lat,
+                    //lng: this.config.lng
+                }
+            });
+              
+            await modal.present();
+        }
     }
 
 

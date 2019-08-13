@@ -113,6 +113,7 @@
     "Article.Share": "分享",
     "Confirm.Title": "确认",
     "Confirm.Message": "确定要离开Reddah？",
+    "Confirm.ClearChatMessage": "确定要清除聊天记录？",
     "Confirm.LogoutMessage":"确定要退出？",
     "Confirm.LeaveGroupChatMessage":"确定要退出并删除？",
     "Confirm.Yes": "确定",
