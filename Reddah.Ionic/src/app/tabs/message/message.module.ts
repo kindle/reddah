@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MessagePage } from './message.page';
+//import { MessageListPage } from './message.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderModule } from '../../common/header/header.module';
 import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoadedImageProps } from 'ng-lazyload-image';
@@ -15,14 +15,14 @@ import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoa
       CommonModule,
       FormsModule,
       HeaderModule,
-      RouterModule.forChild([{ path: '', component: MessagePage }]),
+      //RouterModule.forChild([{ path: '', component: MessageListPage }]),
       TranslateModule.forChild(),
       LazyLoadImageModule.forRoot({
         preset: intersectionObserverPreset
       })
   ],
   declarations: [
-      MessagePage,
+      //MessageListPage,
   ]
 })
 export class MessagePageModule {}

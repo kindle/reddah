@@ -128,6 +128,7 @@
     font-size: var(--ion-font-size);
     font-family: var(--ion-font-family);
     --ion-color-mini: #605ab0;
+    --ion-color-subscribe: #2781d7;
 }
 
 .ion-color-mini {
@@ -137,4 +138,13 @@
     --ion-color-contrast-rgb: var(--ion-color-mini-contrast-rgb, 255, 255, 255) !important;
     --ion-color-shade: var(--ion-color-mini-shade, #0001e0) !important;
     --ion-color-tint: var(--ion-color-mini-tint, #ff80f0) !important
+}
+
+.ion-color-subscribe {
+    --ion-color-base: var(--ion-color-subscribe, #f00) !important;
+    --ion-color-base-rgb: var(--ion-color-subscribe-rgb, 56, 128, 255) !important;
+    --ion-color-contrast: var(--ion-color-subscribe-contrast, #06f) !important;
+    --ion-color-contrast-rgb: var(--ion-color-subscribe-contrast-rgb, 255, 255, 255) !important;
+    --ion-color-shade: var(--ion-color-subscribe-shade, #0001e0) !important;
+    --ion-color-tint: var(--ion-color-subscribe-tint, #ff80f0) !important
 }

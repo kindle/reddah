@@ -12,7 +12,7 @@ import { GroupChatPage } from '../../chat/group-chat.page';
     templateUrl: 'message.page.html',
     styleUrls: ['message.page.scss']
 })
-export class MessagePage implements OnInit {
+export class MessageListPage implements OnInit {
 
     currentUserName: any;
 
@@ -31,9 +31,9 @@ export class MessagePage implements OnInit {
 
     async ngOnInit(){
         this.loadData(true);
-        setInterval(() => {
+        /*setInterval(() => {
             this.loadData(true);
-        },5000);
+        },5000);*/
     }
 
     clear(){
@@ -118,5 +118,9 @@ export class MessagePage implements OnInit {
         if(data=="delete"){
            this.clear();
         }
+    }
+
+    async close(){
+        this.modalController.dismiss();
     }
 }

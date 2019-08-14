@@ -56,7 +56,7 @@
     },
 
     "Menu":{
-      "Message": "メッセージ",
+      "Message": "Chat",
       "Recommend": "推薦",
       "Earth":"Earth",
       "Contact": "友達",
@@ -70,7 +70,7 @@
         "Feedback":"フィードバック"
       },
       "FindSub":{
-          "Timeline":"友達の輪",
+          "Timeline":"Life",
           "Scan":"スキャン",
           "Shake":"振る",
           "Look":"トップストーリー",

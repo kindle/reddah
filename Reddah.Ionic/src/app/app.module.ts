@@ -77,6 +77,7 @@ import { CommentComponent } from './postviewer/comment/comment.component';
 import { CommentTimelineComponent } from './mytimeline/commentts/comment.component';
 import { TimeLinePage } from './mytimeline/timeline/timeline.page';
 import { MyTimeLinePage } from './mytimeline/mytimeline.page';
+import { MessageListPage } from './tabs/message/message.page';
 import { UserPage } from './common/user/user.page';
 import { ArticlePopPage } from './common/article-pop.page'
 import { HeaderAddPage } from './common/header-add-pop.page'
@@ -174,7 +175,7 @@ var firebaseConfig = {
         CommentComponent,
         CommentTimelineComponent,
         TimeLinePage,
-        MyTimeLinePage,
+        MyTimeLinePage,MessageListPage,
         UserPage,
         ArticlePopPage,
         HeaderAddPage,
@@ -239,7 +240,7 @@ var firebaseConfig = {
         TimelineCommentPopPage,
         ScanPage,
         SigninPage,
-        UserPage,
+        UserPage,MessageListPage,
         TimeLinePage,
         TsViewerPage,
         AddTimelinePage,

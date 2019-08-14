@@ -1,4 +1,8 @@
-<app-header title="Menu.Message" (click)="clear()"></app-header>
+<!--<app-header title="Menu.Message" (click)="clear()"></app-header>-->
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-label>{{ 'Menu.Message' | translate }}</ion-label>
+</ion-item>
 <ion-content style="background-color: white;">
     <ion-item *ngFor="let message of messages" (click)="viewChat(message)">
         <div [ngClass]="{'new-point':message.IsNew}" style="margin:5px 0px;">

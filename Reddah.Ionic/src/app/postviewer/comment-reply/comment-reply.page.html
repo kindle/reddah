@@ -36,7 +36,7 @@
                     <div style="display: flex;justify-content:space-between">
                         <span class="user-name" (click)="goUser(reply.UserName)">{{reddah.getDisplayName(reply.UserName)}}</span>
                         <div (click)="likeComment(comment)">
-                            <ion-icon name="ios-thumbs-up" [color]="comment.like?'primary':'medium'" size="small"></ion-icon>
+                            <ion-icon name="thumbs-up" [color]="comment.like?'primary':'medium'" size="small"></ion-icon>
                             <span style="color: gray;margin-left:2px;vertical-align: top;" *ngIf="comment.Count>0">{{reply.Count}}</span>
                         </div>
                     </div>

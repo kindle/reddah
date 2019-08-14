@@ -6,7 +6,7 @@ import { HomePage } from './home/home.page';
 import { AboutPage } from './about/about.page';
 import { FindPage } from './find/find.page';
 import { ContactPage } from './contact/contact.page';
-import { MessagePage } from './message/message.page';
+//import { MessagePage } from './message/message.page';
 import { AuthGuard } from '../AuthGuard.service';
 import { PublisherPage } from './publisher/publisher.page';
 
@@ -17,15 +17,15 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/tabs/(message:message)',
+        redirectTo: '/tabs/(home:home)',
         pathMatch: 'full',
       },
-      {
+      /*{
         path: 'message',
         outlet: 'message',
         component: MessagePage,
         canActivate: [AuthGuard],
-      },
+      },*/
       {
         path: 'home',
         outlet: 'home',
@@ -60,7 +60,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/(message:message)',
+    redirectTo: '/tabs/(home:home)',
     pathMatch: 'full'
   }
 ];
