@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { MessagePage } from './message.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderModule } from '../../common/header/header.module';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { HeaderModule } from '../../common/header/header.module';
       HeaderModule,
       RouterModule.forChild([{ path: '', component: MessagePage }]),
       TranslateModule.forChild(),
+      LazyLoadImageModule,
   ],
   declarations: [
       MessagePage,
