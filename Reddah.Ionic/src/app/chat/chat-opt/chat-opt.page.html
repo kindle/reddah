@@ -7,7 +7,7 @@
         <ion-item lines="none" class="borderTop borderItem borderBottom">
             <div style="display: flex;flex-direction: column;">
                 <ion-avatar class="userPhoto" (click)="goUser(targetUser)">
-                    <img src="{{reddah.appData('userphoto_'+targetUser)}}" class="grpPortrait">
+                    <img [defaultImage]="'assets/icon/anonymous.png'" [lazyLoad]="reddah.appData('userphoto_'+targetUser)" class="grpPortrait">
                 </ion-avatar>
                 <ion-label style="margin-top:0;width:65px;color:gray;" text-center>{{reddah.getDisplayName(targetUser)}}</ion-label>
             </div>

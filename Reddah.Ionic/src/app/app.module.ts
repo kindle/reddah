@@ -38,7 +38,8 @@ import { Vibration } from '@ionic-native/vibration/ngx';
 import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion/ngx';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 import { CKEditorModule } from 'ckeditor4-angular';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoadedImageProps } from 'ng-lazyload-image';
+
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -269,7 +270,9 @@ var firebaseConfig = {
         HttpClientModule,
         JsonpModule,
         CKEditorModule,
-        LazyLoadImageModule,
+        LazyLoadImageModule.forRoot({
+            preset: intersectionObserverPreset
+        }),
         HttpClientJsonpModule,
         IonicImageLoader.forRoot(),
         CacheModule.forRoot(),

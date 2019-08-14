@@ -1,15 +1,15 @@
 <app-header title="Menu.Message" (click)="clear()"></app-header>
-<ion-content style="background-color: white;" #container>
+<ion-content style="background-color: white;">
     <ion-item *ngFor="let message of messages" (click)="viewChat(message)">
         <div [ngClass]="{'new-point':message.IsNew}" style="margin:5px 0px;">
             <div class="singleGroupImage" *ngIf="message.Type==2">
                 <div>
-                    <img [useSrcset]="true" [lazyLoad]="reddah.appData('userphoto_'+GetSender(message.GroupName))" [scrollObservable]="container.ionScroll">
+                    <img [defaultImage]="'assets/icon/anonymous.png'" [lazyLoad]="reddah.appData('userphoto_'+GetSender(message.GroupName))">
                 </div>
             </div>
             <div class="groupImages" *ngIf="message.Type==3">
                 <div *ngFor="let user of message.GroupName.split(',').slice(0,9)">
-                    <img [useSrcset]="true" [lazyLoad]="reddah.appData('userphoto_'+user)" [scrollObservable]="container.ionScroll">
+                    <img [defaultImage]="'assets/icon/anonymous.png'" [lazyLoad]="reddah.appData('userphoto_'+user)">
                 </div>
             </div>
         </div>

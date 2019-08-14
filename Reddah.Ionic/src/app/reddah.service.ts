@@ -13,7 +13,6 @@ import { Locale } from './model/locale';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
-
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
@@ -966,6 +965,35 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         else if(cacheKey.indexOf('cover_')>-1){
             if(result&&this.platform.is('cordova')){
                 return (<any>window).Ionic.WebView.convertFileSrc(result);
+            }
+            else{
+                return "assets/icon/timg.jpg";
+            }
+        }
+        else{//pure text
+            return result==null ? "": result;
+        }
+    }
+
+    async appData2(cacheKey){     
+        let result = this.localStorageService.retrieve(cacheKey);
+        return await (<any>window).Ionic.WebView.convertFileSrc(result);
+    }
+
+    async appData1(cacheKey){        
+        let result = this.localStorageService.retrieve(cacheKey);
+        
+        if(cacheKey.indexOf('userphoto_')>-1){
+            if(result&&this.platform.is('cordova')){
+                return await (<any>window).Ionic.WebView.convertFileSrc(result);
+            }
+            else{
+                return "assets/icon/anonymous.png";
+            }
+        }
+        else if(cacheKey.indexOf('cover_')>-1){
+            if(result&&this.platform.is('cordova')){
+                return await (<any>window).Ionic.WebView.convertFileSrc(result);
             }
             else{
                 return "assets/icon/timg.jpg";

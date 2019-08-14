@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderModule } from '../../common/header/header.module';
+import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoadedImageProps } from 'ng-lazyload-image';
+
 
 @NgModule({
   imports: [
@@ -15,6 +17,9 @@ import { HeaderModule } from '../../common/header/header.module';
       HeaderModule,
       RouterModule.forChild([{ path: 'home', component: HomePage }]),
       TranslateModule.forChild(),
+      LazyLoadImageModule.forRoot({
+        preset: intersectionObserverPreset
+      })
   ],
   declarations: [
       HomePage,
