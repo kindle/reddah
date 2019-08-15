@@ -117,6 +117,18 @@ export class ReddahService {
             catchError(this.handleError('add photo comment', []))
         );
     }
+    private commentLikeUrl = 'https://login.reddah.com/api/article/commentlike'; 
+
+    commentLike(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.commentLikeUrl, formData)
+        .pipe(
+            tap(data => this.log('comment like')),
+            catchError(this.handleError('comment like', []))
+        );
+    }
+    //******************************** */
     //******************************** */
     private addTimelineUrl = 'https://login.reddah.com/api/article/addtimeline'; 
 
@@ -1475,6 +1487,8 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     .set(8,'19px')
     .set(9,'20px')
     .set(10,'21px');
+
+    articleLikeMap = new Map();
 
     async toast(message: string, color="dark") {
         const toast = await this.toastController.create({

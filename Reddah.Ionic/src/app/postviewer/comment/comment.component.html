@@ -26,7 +26,7 @@
                         <span class="user-name" (click)="goUser(comment.UserName)">{{reddah.getDisplayName(comment.UserName)}}</span>
                         <div style="display: flex;" (click)="likeComment(comment)">
                             <ion-icon name="thumbs-up" [color]="comment.like?'primary':'medium'" size="small"></ion-icon>
-                            <span style="color: gray;margin-left:2px;vertical-align: top;" *ngIf="comment.Count>0">{{comment.Count}}</span>
+                            <span style="color: gray;margin-left:2px;vertical-align: top;" *ngIf="comment.Up>0">{{comment.Up}}</span>
                         </div>
                     </div>
                     

@@ -9,7 +9,7 @@
             <div style="display: flex;flex-wrap: wrap;">
                 <div style="display: flex;flex-direction: column;" *ngFor="let uname of groupInfo.GroupName.split(',')">
                     <ion-avatar class="userPhoto" (click)="goUser(uname)">
-                        <img [defaultImage]="'assets/icon/anonymous.png'" [lazyLoad]="reddah.appData('userphoto_'+uname)" class="grpPortrait">
+                        <img [src]="reddah.appData('userphoto_'+uname)" class="grpPortrait">
                     </ion-avatar>
                     <ion-label style="margin-top:0;width:65px;color:gray;" text-center>{{reddah.getDisplayName(uname)}}</ion-label>
                 </div>
@@ -49,7 +49,7 @@
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
-
+<!--
     <div class="gap">
         <ion-item class="borderTop borderItem">
             <ion-label>消息免打扰</ion-label>
@@ -64,7 +64,7 @@
             <ion-toggle [(ngModel)]="strongReminder" color="success" slot="end"></ion-toggle>
         </ion-item>
     </div>
-
+-->
     <div class="gap">
         <ion-item class="borderTop borderItem">
             <ion-label>我在本群的昵称</ion-label>

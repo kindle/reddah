@@ -33,7 +33,9 @@ export class PostviewerPage implements OnInit {
 
     commentsData: any;
 
-    ngOnInit() {
+    ngOnInit() {}
+
+    ionViewDidEnter(){
         if(!this.preview)
             this.loadComments();
     }
@@ -103,14 +105,13 @@ export class PostviewerPage implements OnInit {
 
     @ViewChild('commentlist') commentlist;
 
-    loadComments(){
+    async loadComments(){
         let cacheKey = "this.reddah.getComments" + this.article.Id;
         let request = this.reddah.getComments(this.article.Id)
 
         this.cacheService.loadFromObservable(cacheKey, request)
         .subscribe(data => 
         {
-            console.log(data);
             this.commentsData = data;
             this.commentlist.init(data.Comments);
         });

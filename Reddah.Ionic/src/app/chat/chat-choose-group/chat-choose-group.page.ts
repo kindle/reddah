@@ -26,7 +26,9 @@ export class ChatChooseGroupPage implements OnInit {
         public authService: AuthService,
     ) {}
 
-    ngOnInit() {
+    ngOnInit() {}
+
+    ionViewDidEnter(){
         this.getGroupList();
     }
 
@@ -37,16 +39,16 @@ export class ChatChooseGroupPage implements OnInit {
         }, 2000);
     }
 
-    clearCacheAndReload(event){
+    async clearCacheAndReload(event){
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("ChatChooseGroupPage");
         this.groupList = [];
-        this.getGroupList(event);
+        await this.getGroupList(event);
     }
 
     groupList = [];
 
-    getGroupList(event=null){
+    async getGroupList(event=null){
         let cacheKey = "this.reddah.getGroupList";
         let formData = new FormData();
         let request = this.reddah.getGroupList(formData);

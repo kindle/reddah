@@ -84,6 +84,7 @@ export class CommentReplyPage implements OnInit {
             comments.forEach((element: any) => {
                 if(element.ParentId==id){
                     this.childrenIds.push(element.Id);
+                    element.like = this.reddah.articleLikeMap.has(this.reddah.getCurrentUser()+element.Id);
                     subTotal += this.GetCommentCount(comments, element.Id);
                 }
             });
@@ -139,8 +140,24 @@ export class CommentReplyPage implements OnInit {
         });
     }
 
-    likeComment(comment){
-        comment.like=!comment.like;
-        alert(`like...cid:${comment.Id}`);
+    likeComment(reply){
+
+        reply.Up = reply.Up + reply.like?-1:1;
+        reply.like=!reply.like;
+
+        let formData = new FormData();
+        formData.append("id", JSON.stringify(reply.Id));
+        formData.append("type", JSON.stringify(reply.like));
+        this.reddah.commentLike(formData);
+
+        let cacheKey = "this.reddah.getComments" + reply.ArticleId;
+        this.cacheService.clearGroup(cacheKey);
+
+        if(reply.like)
+            this.reddah.articleLikeMap.set(this.reddah.getCurrentUser()+reply.Id, "");
+        else
+            this.reddah.articleLikeMap.delete(this.reddah.getCurrentUser()+reply.Id);
+
+        this.localStorageService.store("Reddah_CommentLike", this.reddah.articleLikeMap);
     }
 }

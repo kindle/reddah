@@ -1,6 +1,6 @@
 <app-header title="Menu.Find"></app-header>
 <ion-content style="background-color: #eeeeee;">
-    <div>
+    <div class="gap">
         <ion-item class="borderTop borderItem" (click)="message()">
             <ion-icon name="ios-chatbubbles" slot="start" color="dark" size="medium"></ion-icon>
             <ion-label>{{ 'Menu.Message' | translate }}</ion-label>
@@ -9,25 +9,12 @@
         <ion-item lines="none" class="borderItem borderBottom" href="/mytimeline">
             <ion-icon name="camera" slot="start" size="medium"></ion-icon>
             <ion-text slot="start">{{ 'Menu.FindSub.Timeline' | translate }}</ion-text>
-            <!--<ion-badge slot="start" color="danger" *ngIf="reddah.unReadMessage.length>0">{{reddah.unReadMessage.length}}</ion-badge>-->
+            <ion-badge slot="start" color="danger" *ngIf="reddah.unReadMessage.length>0">{{reddah.unReadMessage.length}}</ion-badge>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
 
     <div class="gap">
-        <ion-item class="borderTop borderItem" href="/scan">
-            <ion-icon name="qr-scanner" slot="start" size="medium"></ion-icon>
-            <ion-label>{{ 'Menu.FindSub.Scan' | translate }}</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-        <ion-item lines="none" class="borderItem borderBottom" (click)="shake()">
-            <ion-icon name="ios-color-wand" slot="start" size="medium"></ion-icon>
-            <ion-label>{{ 'Menu.FindSub.Shake' | translate }}</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-    </div>
-
-    <div class="gap lastGap">
         <ion-item class="borderTop borderItem" href="#">
             <ion-icon name="ios-list" slot="start" color="subscribe" size="medium"></ion-icon>
             <ion-label>订阅号</ion-label>
@@ -36,6 +23,19 @@
         <ion-item lines="none" class="borderItem borderBottom" href="#">
             <ion-icon name="infinite" slot="start" color="mini" size="medium"></ion-icon>
             <ion-label>小程序</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
+    </div>
+
+    <div class="gap lastGap">
+        <ion-item class="borderTop borderItem" href="/scan">
+            <ion-icon name="qr-scanner" slot="start" size="medium"></ion-icon>
+            <ion-label>{{ 'Menu.FindSub.Scan' | translate }}</ion-label>
+            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        </ion-item>
+        <ion-item lines="none" class="borderItem borderBottom" (click)="shake()">
+            <ion-icon name="ios-color-wand" slot="start" size="medium"></ion-icon>
+            <ion-label>{{ 'Menu.FindSub.Shake' | translate }}</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
