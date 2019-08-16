@@ -23,13 +23,16 @@ export class PostviewerPage implements OnInit {
     @Input() preview= false;
     authoronly=true;
 
+    userName;
     constructor(
         public modalController: ModalController,
         private location: Location,
         public reddah : ReddahService,
         private popoverController: PopoverController,
         private cacheService: CacheService,
-    ) { }
+    ) { 
+        this.userName = this.reddah.getCurrentUser();
+    }
 
     commentsData: any;
 
@@ -108,8 +111,10 @@ export class PostviewerPage implements OnInit {
     async loadComments(){
         let cacheKey = "this.reddah.getComments" + this.article.Id;
         let request = this.reddah.getComments(this.article.Id)
+        
+        this.cacheService.loadFromObservable(cacheKey, request, cacheKey)
 
-        this.cacheService.loadFromObservable(cacheKey, request)
+        //this.reddah.getComments(this.article.Id)
         .subscribe(data => 
         {
             this.commentsData = data;

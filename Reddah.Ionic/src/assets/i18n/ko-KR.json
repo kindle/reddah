@@ -56,7 +56,7 @@
     },
 
     "Menu":{
-      "Message": "Chat",
+      "Message": "Message",
       "Recommend": "추천",
       "Earth":"Earth",
       "Contact": "친구",
@@ -70,7 +70,7 @@
         "Feedback":"피드백"
       },
       "FindSub":{
-          "Timeline":"Life",
+          "Timeline":"Aperture",
           "Scan":"스캔",
           "Shake":"흔들다",
           "Look":"좋은 이야기",

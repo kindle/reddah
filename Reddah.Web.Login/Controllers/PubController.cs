@@ -615,6 +615,7 @@ namespace Reddah.Web.Login.Controllers
                                 existPubArticle.GroupName = Helpers.HtmlEncode(groupName);
                                 existPubArticle.LastUpdateOn = DateTime.UtcNow;
                                 existPubArticle.LastUpdateBy = jwtResult.JwtUser.User;
+                                existPubArticle.LastUpdateType = 100;
 
                                 this.saveMiniFile(existPubArticle.UserName, "js", jsText, jwtResult.JwtUser.User, db);
                                 this.saveMiniFile(existPubArticle.UserName, "html", htmlText, jwtResult.JwtUser.User, db);
@@ -638,7 +639,8 @@ namespace Reddah.Web.Login.Controllers
                                 LastUpdateBy = jwtResult.JwtUser.User,
                                 Locale = locale,
                                 Type = 0,
-                                Status = 0, //0 draft, 1 published
+                                Status = 0, //0 draft, 1 published,
+                                LastUpdateType = 100
                             });
 
                             this.saveMiniFile(targetUserName, "js", jsText, jwtResult.JwtUser.User, db);

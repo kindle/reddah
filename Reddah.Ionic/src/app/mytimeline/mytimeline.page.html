@@ -45,7 +45,7 @@
                     <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 2px;margin-bottom:5px;width:96%;" [innerHTML]="reddah.summary(article.Title,50)"></div>
                 </ion-item>
                 <app-share-article *ngIf="article.Abstract&&article.Abstract.length>2" [abstract]="article.Abstract" [image]="article.Content" [id]="article.Ref"></app-share-article>
-                <ion-card-content style="display:block;" *ngIf="article.Abstract.length<3&&article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
+                <ion-card-content style="display:block;margin-right:15px;" *ngIf="article.Abstract.length<3&&article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>6">
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img src="{{reddah.level2Cache(image)}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))">

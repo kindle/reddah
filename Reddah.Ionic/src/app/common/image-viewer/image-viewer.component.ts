@@ -42,6 +42,10 @@ export class ImageViewerComponent implements OnInit {
             initialSlide: this.index,
         };
 
+        
+    }
+
+    ionViewDidEnter(){
         for(let i=0;i<this.imgSourceArray.length;i++){
             let preview = this.localStorageService.retrieve(this.imgSourceArray[i]);
             let org = this.localStorageService.retrieve(this.imgSourceArray[i].replace("_reddah_preview",""));

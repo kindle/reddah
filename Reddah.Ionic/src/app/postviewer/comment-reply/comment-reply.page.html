@@ -37,7 +37,7 @@
                         <span class="user-name" (click)="goUser(reply.UserName)">{{reddah.getDisplayName(reply.UserName)}}</span>
                         <div (click)="likeComment(reply)">
                             <ion-icon name="thumbs-up" [color]="reply.like?'primary':'medium'" size="small"></ion-icon>
-                            <span style="color: gray;margin-left:2px;vertical-align: top;" *ngIf="comment.Up>0">{{reply.Up}}</span>
+                            <span style="color: gray;margin-left:2px;vertical-align: top;" *ngIf="reply.Up>0">{{reply.Up}}</span>
                         </div>
                     </div>
                     <span>{{reddah.utcToLocal(reply.CreatedOn,"YY-MM-DD HH:mm")}}</span>

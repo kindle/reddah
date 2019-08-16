@@ -6,7 +6,7 @@
 <div *ngIf="data">
     <ion-item lines="none" color="light" id="TotalComments">
         <ion-label text-wrap>
-            全部回复 {{totalCommentCount}}
+            全部回复 {{count}}
         </ion-label>
         <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" 
         cancel-text="取消" ok-text="确定" #commentSortType>

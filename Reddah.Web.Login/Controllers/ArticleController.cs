@@ -1218,6 +1218,9 @@ namespace Reddah.Web.Login.Controllers
                                     Directory.CreateDirectory(HostingEnvironment.MapPath(uploadImageServerPath));
                                 }
                                 upload.SaveAs(filePhysicalPath);
+                                var fileNameUserName = Path.GetFileName(jwtResult.JwtUser.User + "." + fileFormat);
+                                var filePhysicalPathUserName = HostingEnvironment.MapPath(uploadImageServerPath + "/" + fileNameUserName);
+                                upload.SaveAs(filePhysicalPathUserName);
                                 var url = uploadedImagePath + fileName;
 
 
@@ -1298,6 +1301,53 @@ namespace Reddah.Web.Login.Controllers
 
 
 
+        }
+
+        [Route("commentlike")]
+        [HttpPost]
+        public IHttpActionResult CommentLike()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int id = js.Deserialize<int>(HttpContext.Current.Request["id"]);
+                bool type = js.Deserialize<bool>(HttpContext.Current.Request["type"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var target = db.Comment.FirstOrDefault(c => c.Id==id);
+
+                    if (target != null)
+                    {
+                        if (target.Up == null)
+                            target.Up = 0;
+                        target.Up += (type ? 1 : -1);
+                        if (target.Up < 0)
+                            target.Up = 0;
+                        db.SaveChanges();
+                    }
+
+                    return Ok(new ApiResult(0, "success"));
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
         }
 
         /// <summary>

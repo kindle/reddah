@@ -12,9 +12,9 @@ import { CacheService } from 'ionic-cache';
             </ion-item>
             <ion-item button (click)="back(2)">
                 <ion-icon slot="start" color="primary" name="aperture"></ion-icon>  
-                <ion-label>分享给朋友圈</ion-label>
+                <ion-label>分享到光圈</ion-label>
             </ion-item>
-            <ion-item button (click)="reddah.addBookmark(ArticleId)" margin-end>
+            <ion-item button (click)="reddah.addBookmark(ArticleId)">
                 <ion-icon slot="start" color="danger" name="bookmark"></ion-icon>  
                 <ion-label>收藏</ion-label>
             </ion-item> 

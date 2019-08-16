@@ -29,6 +29,7 @@ export class CommentReplyPage implements OnInit {
 
     @Output() commentClick = new EventEmitter();
 
+    userName;
     constructor(public reddah : ReddahService,
         public loadingController: LoadingController,
         public translateService: TranslateService,
@@ -43,7 +44,7 @@ export class CommentReplyPage implements OnInit {
         private activatedRoute: ActivatedRoute,
         public actionSheetController: ActionSheetController,
         ){
-        
+        this.userName = this.reddah.getCurrentUser();
     }
     
     customPopoverOptions: any = {
@@ -84,7 +85,7 @@ export class CommentReplyPage implements OnInit {
             comments.forEach((element: any) => {
                 if(element.ParentId==id){
                     this.childrenIds.push(element.Id);
-                    element.like = this.reddah.articleLikeMap.has(this.reddah.getCurrentUser()+element.Id);
+                    element.like = (this.localStorageService.retrieve(`Reddah_CommentLike_${this.userName}_${element.Id}`)!=null)
                     subTotal += this.GetCommentCount(comments, element.Id);
                 }
             });
@@ -142,22 +143,23 @@ export class CommentReplyPage implements OnInit {
 
     likeComment(reply){
 
-        reply.Up = reply.Up + reply.like?-1:1;
+        reply.Up = reply.Up + (reply.like?-1:1);
+        if(reply.Up<0)
+            reply.Up=0;
         reply.like=!reply.like;
 
         let formData = new FormData();
         formData.append("id", JSON.stringify(reply.Id));
         formData.append("type", JSON.stringify(reply.like));
-        this.reddah.commentLike(formData);
+        this.reddah.commentLike(formData).subscribe(data=>{});
 
         let cacheKey = "this.reddah.getComments" + reply.ArticleId;
         this.cacheService.clearGroup(cacheKey);
+        this.cacheService.removeItem(cacheKey);
 
         if(reply.like)
-            this.reddah.articleLikeMap.set(this.reddah.getCurrentUser()+reply.Id, "");
+            this.localStorageService.store(`Reddah_CommentLike_${this.userName}_${reply.Id}`, "");
         else
-            this.reddah.articleLikeMap.delete(this.reddah.getCurrentUser()+reply.Id);
-
-        this.localStorageService.store("Reddah_CommentLike", this.reddah.articleLikeMap);
+            this.localStorageService.clear(`Reddah_CommentLike_${this.userName}_${reply.Id}`);
     }
 }

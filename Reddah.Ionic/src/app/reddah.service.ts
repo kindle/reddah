@@ -1488,8 +1488,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     .set(9,'20px')
     .set(10,'21px');
 
-    articleLikeMap = new Map();
-
+    
     async toast(message: string, color="dark") {
         const toast = await this.toastController.create({
             message: message,

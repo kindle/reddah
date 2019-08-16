@@ -56,7 +56,7 @@
     },
 
     "Menu":{
-        "Message": "Chat",
+        "Message": "Message",
         "Recommend": "Recommend",
         "Earth":"Earth",
         "Contact": "Friend",
@@ -70,7 +70,7 @@
             "Feedback":"Feedback"
         },
         "FindSub":{
-            "Timeline":"Life",
+            "Timeline":"Aperture",
             "Scan":"Scan",
             "Shake":"Shake",
             "Look":"Read",

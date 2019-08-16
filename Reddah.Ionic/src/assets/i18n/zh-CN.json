@@ -56,7 +56,7 @@
     },
 
     "Menu":{
-        "Message": "聊天",
+        "Message": "消息",
         "Recommend": "阅读",
         "Earth":"地球",
         "Contact": "好友",
@@ -70,7 +70,7 @@
             "Feedback":"帮助与反馈"
         },
         "FindSub":{
-            "Timeline":"生活",
+            "Timeline":"光圈",
             "Scan":"扫一扫",
             "Shake":"摇一摇",
             "Look":"阅读",

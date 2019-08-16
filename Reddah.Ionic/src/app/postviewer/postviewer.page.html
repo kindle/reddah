@@ -20,7 +20,7 @@
             <div id="articleContent" (click)="viewer($event)" [innerHTML]="reddah.htmlDecode(article.Content) | safe: 'html'"></div>
         </ion-text>
     </div>
-    <app-comment *ngIf="!preview" #commentlist no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" (commentClick)="childCommentClick($event)" 
+    <app-comment *ngIf="!preview" #commentlist count="{{article.Count}}" no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" (commentClick)="childCommentClick($event)" 
         [articleauthor]="article.UserName"></app-comment>
 </ion-content>
 <app-comment-box *ngIf="!preview" #commentbox count="{{article.Count}}" selectedArticleId="{{article.Id}}" selectedCommentId="-1"

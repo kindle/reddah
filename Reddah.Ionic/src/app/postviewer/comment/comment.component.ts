@@ -6,7 +6,6 @@ import { CommentReplyPage } from '../comment-reply/comment-reply.page';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
-import { mapChildrenIntoArray } from '@angular/router/src/url_tree';
 
 @Component({
     selector: 'app-comment',
@@ -22,18 +21,22 @@ export class CommentComponent implements OnInit {
     @Input() pauthor;
     @Input() authoronly: boolean;
     @Input() articleauthor;
+    @Input() count: number;
 
     @Output() commentClick = new EventEmitter();
 
-    totalCommentCount: number;
+    //totalCommentCount: number;
 
+    userName;
     constructor(
         public reddah: ReddahService,
         private popoverController: PopoverController,
         private modalController: ModalController,
         private cacheService: CacheService,
         private localStorageService: LocalStorageService,
-    ) { }
+    ) { 
+        this.userName = this.reddah.getCurrentUser();
+    }
 
     ngOnInit() {
         if(this.data)
@@ -43,22 +46,18 @@ export class CommentComponent implements OnInit {
     }
 
     init(comments) {
-        let like = this.localStorageService.retrieve("Reddah_CommentLike");
-        if(like instanceof Map)
-            this.reddah.articleLikeMap = like;
-
         this.localComments = comments.concat();
-        this.totalCommentCount = this.GetCommentCount(this.localComments, -1);
+        //this.totalCommentCount = this.GetCommentCount(this.localComments, -1);
         this.localComments.forEach(comment=>{
         //  comment.CommentCount = this.GetCommentCount(this.localComments, comment.Id);
-            comment.like = this.reddah.articleLikeMap.has(this.reddah.getCurrentUser()+comment.Id);
+            comment.like = (this.localStorageService.retrieve(`Reddah_CommentLike_${this.userName}_${comment.Id}`)!=null)
             this.reddah.getUserPhotos(comment.UserName);
         });
         this.localComments.sort((a,b)=> b.Id-a.Id); 
         
     }
 
-
+/*
     GetCommentCount(comments, id){
         //replies for current comment
         let count = comments.filter(c=>c.ParentId==id).reduce((sum,c)=>{return sum+1},0);
@@ -75,7 +74,7 @@ export class CommentComponent implements OnInit {
         else{
             return 0;
         }
-    }
+    }*/
 
     customPopoverOptions: any = {
         //header: 'Hair Color',
@@ -142,23 +141,27 @@ export class CommentComponent implements OnInit {
 
     
     likeComment(comment){
-        comment.Up = comment.Up + comment.like?-1:1;
+        comment.Up = comment.Up + (comment.like?-1:1);
+        if(comment.Up<0)
+            comment.Up=0;
         comment.like=!comment.like;
 
         let formData = new FormData();
         formData.append("id", JSON.stringify(comment.Id));
         formData.append("type", JSON.stringify(comment.like));
-        this.reddah.commentLike(formData);
-        //.subscribe(data=>{alert(JSON.stringify(data)+comment.Id)});
+        this.reddah.commentLike(formData).subscribe(data=>{});
+
         let cacheKey = "this.reddah.getComments" + comment.ArticleId;
+        console.log(cacheKey);
         this.cacheService.clearGroup(cacheKey);
+        this.cacheService.removeItem(cacheKey);
 
         if(comment.like)
-            this.reddah.articleLikeMap.set(this.reddah.getCurrentUser()+comment.Id, "");
+            this.localStorageService.store(`Reddah_CommentLike_${this.userName}_${comment.Id}`, "");
         else
-            this.reddah.articleLikeMap.delete(this.reddah.getCurrentUser()+comment.Id);
+            this.localStorageService.clear(`Reddah_CommentLike_${this.userName}_${comment.Id}`);
 
-        this.localStorageService.store("Reddah_CommentLike", this.reddah.articleLikeMap);
+        
     }
 
 
