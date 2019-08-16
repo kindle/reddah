@@ -31,8 +31,8 @@
       "Password": "비밀번호",
       "ConfirmPassword": "비밀번호 확인",
       "Email": "전자 우편",
-      "Name":"名称",
-      "Description":"描述",
+      "Name":"이름",
+      "Description":"묘사",
       "Error":{
         "UserNameEmpty":"사용자 이름을 입력하십시오",
         "UserNameTooLong":"User name should be less than 25 characters",
@@ -56,7 +56,7 @@
     },
 
     "Menu":{
-      "Message": "Message",
+      "Message": "소식",
       "Recommend": "추천",
       "Earth":"Earth",
       "Contact": "친구",
@@ -70,7 +70,7 @@
         "Feedback":"피드백"
       },
       "FindSub":{
-          "Timeline":"Aperture",
+          "Timeline":"공경",
           "Scan":"스캔",
           "Shake":"흔들다",
           "Look":"좋은 이야기",

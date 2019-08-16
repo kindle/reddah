@@ -1,5 +1,9 @@
 <app-header title="Menu.Contact"></app-header>
-<ion-content>
+<ion-content #pageTop>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content refreshingSpinner="bubbles">
+        </ion-refresher-content>
+    </ion-refresher>
     <ion-item (click)="viewNewFriends()">
         <ion-icon name="ios-person-add" slot="start" color="tertiary" class="portrait newFriend"></ion-icon>
         <ion-label style="margin-left:10px;">新的朋友</ion-label>

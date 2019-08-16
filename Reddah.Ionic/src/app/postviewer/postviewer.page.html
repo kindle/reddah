@@ -23,6 +23,6 @@
     <app-comment *ngIf="!preview" #commentlist count="{{article.Count}}" no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" (commentClick)="childCommentClick($event)" 
         [articleauthor]="article.UserName"></app-comment>
 </ion-content>
-<app-comment-box *ngIf="!preview" #commentbox count="{{article.Count}}" selectedArticleId="{{article.Id}}" selectedCommentId="-1"
+<app-comment-box *ngIf="!preview" #commentbox count="{{article.Count}}" bookmark={{article.Down}} selectedArticleId="{{article.Id}}" selectedCommentId="-1"
     (reloadComments)="childReloadComments($event)"></app-comment-box>
     

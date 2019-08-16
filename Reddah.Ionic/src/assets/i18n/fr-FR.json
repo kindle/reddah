@@ -31,8 +31,8 @@
       "Password": "mot de passe",
       "ConfirmPassword": "Confirmer mot de passe",
       "Email": "Courriel",
-      "Name":"名称",
-      "Description":"描述",
+      "Name":"Nom",
+      "Description":"Description",
       "Error":{
         "UserNameEmpty":"Veuillez entrer le nom d'utilisateur",
         "UserNameTooLong":"User name should be less than 25 characters",
@@ -70,7 +70,7 @@
         "Feedback":"Commentaires"
       },
       "FindSub":{
-          "Timeline":"Aperture",
+          "Timeline":"Ouverture",
           "Scan":"Scan",
           "Shake":"Agiter",
           "Look":"News",

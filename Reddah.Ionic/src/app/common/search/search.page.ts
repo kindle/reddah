@@ -28,7 +28,7 @@ export class SearchPage implements OnInit {
     keywordPlaceholder = "搜索";
 
     topics = [
-        [{id:1,name:'文章'},{id:2,name:'朋友圈'},{id:3,name:'公众号'}],
+        [{id:1,name:'文章'},{id:2,name:'朋友圈'},{id:3,name:'订阅号'}],
         [{id:4,name:'小程序'},{id:5,name:'聊天记录'},{id:6,name:'股票'}],
     ];
 

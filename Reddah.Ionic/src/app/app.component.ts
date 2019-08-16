@@ -59,11 +59,16 @@ export class AppComponent {
                 result => console.log('Has permission?',result.hasPermission),
                 err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO)
             );
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
+                result => console.log('Has permission?',result.hasPermission),
+                err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
+            );
             
             this.androidPermissions.requestPermissions([
                 this.androidPermissions.PERMISSION.CAMERA, 
                 this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
                 this.androidPermissions.PERMISSION.RECORD_AUDIO,
+                this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
             ]);
         }
 

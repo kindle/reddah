@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ModalController, PopoverController } from '@ionic/angular';
+import { Component,ViewChild } from '@angular/core';
+import { ModalController, PopoverController, Content } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
@@ -24,6 +24,8 @@ export class ContactPage {
     groupedContacts = [];
     userName;
 
+    @ViewChild('pageTop') pageTop: Content;
+
     constructor(
         public reddah: ReddahService,
         public localStorageService: LocalStorageService,
@@ -40,9 +42,25 @@ export class ContactPage {
             this.groupedContacts = JSON.parse(cachedGroupContact);
         }
         
-        this.loadData();
+        this.loadData(null);
         this.loadRequests();
 
+    }
+
+    doRefresh(event) {
+        setTimeout(() => {
+            this.clearCacheAndReload(event);
+        }, 2000);
+    }
+
+    clearCacheAndReload(event){
+        this.pageTop.scrollToTop();
+        this.cacheService.clearGroup("ContactPage");
+        this.localStorageService.clear("Reddah_GroupedContacts");
+        this.localStorageService.clear("Reddah_Contacts");
+        this.contacts = [];
+        this.groupedContacts = [];
+        this.loadData(event);
     }
 
     async loadRequests(){
@@ -59,7 +77,7 @@ export class ContactPage {
     }
 
     showLoading = false;
-    loadData(){
+    loadData(event){
         let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
         let cachedContact = this.localStorageService.retrieve("Reddah_Contacts");
         if(!cachedGroupContact||!cachedContact)
@@ -97,6 +115,8 @@ export class ContactPage {
             }
             
             this.showLoading = false;
+            if(event)
+                event.target.complete();
             
         });  
     }
@@ -137,7 +157,7 @@ export class ContactPage {
             this.cacheService.clearGroup("ContactPage");
             this.reddah.getUserPhotos(this.userName);
             this.loadRequests();
-            this.loadData();
+            this.loadData(null);
         }
     }
 
@@ -163,7 +183,7 @@ export class ContactPage {
             this.cacheService.clearGroup("ContactPage");
             this.reddah.getUserPhotos(this.userName);
             this.loadRequests();
-            this.loadData();
+            this.loadData(null);
         }
     }
 
@@ -186,7 +206,7 @@ export class ContactPage {
             this.cacheService.clearGroup("ContactPage");
             this.reddah.getUserPhotos(this.userName);
             this.loadRequests();
-            this.loadData();
+            this.loadData(null);
         }
     }
 

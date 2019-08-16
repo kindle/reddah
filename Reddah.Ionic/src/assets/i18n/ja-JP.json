@@ -31,8 +31,8 @@
       "Password": "パスワード",
       "ConfirmPassword": "パスワード確認",
       "Email": "電子メール",
-      "Name":"名称",
-      "Description":"描述",
+      "Name":"なまえ",
+      "Description":"せつめい",
       "Error":{
         "UserNameEmpty":"ユーザー名入力",
         "UserNameTooLong":"User name should be less than 25 characters",
@@ -56,7 +56,7 @@
     },
 
     "Menu":{
-      "Message": "Message",
+      "Message": "メッセージ",
       "Recommend": "推薦",
       "Earth":"Earth",
       "Contact": "友達",
@@ -70,7 +70,7 @@
         "Feedback":"フィードバック"
       },
       "FindSub":{
-          "Timeline":"Aperture",
+          "Timeline":"しぼり",
           "Scan":"スキャン",
           "Shake":"振る",
           "Look":"トップストーリー",
