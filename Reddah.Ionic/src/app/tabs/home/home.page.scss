@@ -91,7 +91,7 @@ div.postClear {
 
 .parent {
     display: grid;
-    grid-template-columns: 33% 33% 33%;
+    grid-template-columns: 32% 33% 32%;
     grid-template-rows: 95px;
     grid-gap: 3px;
 }
@@ -107,4 +107,14 @@ div.postClear {
     transform: translateY(-50%);
     height:100%;
     object-fit: cover;
+}
+
+.left-radius{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.right-radius{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }

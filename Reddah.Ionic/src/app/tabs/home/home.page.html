@@ -33,8 +33,11 @@
                 <div class="postClear"></div>
                 <ion-card-content no-padding>
                     <div class="parent">
-                        <div class="container" *ngFor="let articleUrl of article.ImageUrls">
-                            <img [id]="articleUrl" (load)="reddah.adjustImage($event, articleUrl)"src="{{articleUrl}}" class="picture">
+                        <div class="container" *ngFor="let articleUrl of article.ImageUrls;index as i">
+                            <img [class.left-radius]="i==0" [class.right-radius]="i==2" [id]="articleUrl" (load)="reddah.adjustImage($event, articleUrl)"
+                            [defaultImage]="'assets/icon/noimage.jpg'" 
+                            [lazyLoad]="articleUrl" 
+                            [useSrcset]="true" class="picture">
                         </div>
                     </div>
                 </ion-card-content>
@@ -55,7 +58,10 @@
                 <div class="listImage">
                     <div class="listImageWrapper">
                         <!--<img class="lazy BrowsePreviewImage" onerror="this.style.display='none'" src="" data-original="{{articleUrl}}">-->
-                        <img class="BrowsePreviewImageOne" onerror="this.style.display='none'" src="{{article.ImageUrls[0]}}">
+                        <img class="BrowsePreviewImageOne" onerror="this.style.display='none'" 
+                        [defaultImage]="'assets/icon/noimage.jpg'" 
+                        [lazyLoad]="article.ImageUrls[0]" 
+                        [useSrcset]="true">
                     </div>
                 </div>
                 <span class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>

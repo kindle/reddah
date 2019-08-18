@@ -237,28 +237,38 @@ export class HomePage implements OnInit {
                 if(item.Id==article.Id)
                     this.articles.splice(index, 1);
             })
-            //cache remove
-            this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
+            
 
             //parameter
             if(data.Id==5){
                 this.dislikeUserNames.push(data.Key);
-                console.log(this.dislikeUserNames)
                 this.localStorageService.store("reddah_article_usernames", JSON.stringify(this.dislikeUserNames));
+                //ui delete
+                this.articles.forEach((item, index)=>{
+                    if(item.UserName==article.UserName)
+                        this.articles.splice(index, 1);
+                })
             }
             if(data.Id>10){
                 this.dislikeGroups.push(data.Key);
-                console.log(this.dislikeGroups)
                 this.localStorageService.store("reddah_article_groups", JSON.stringify(this.dislikeGroups));
+                //ui delete
+                this.articles.forEach((item, index)=>{
+                    if(item.GroupName.indexOf(data.Key+",")||
+                    item.GroupName.indexOf(","+data.Key+",")|| 
+                    item.GroupName.indexOf(","+data.Key))
+                        this.articles.splice(index, 1);
+                })
             }
+
+            //cache remove
+            this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
             
             //sys report
             //further, flink analytics etc.
 
             if(data.Id==-1)
                 this.feedback(article)
-
-
         }
         
     }
