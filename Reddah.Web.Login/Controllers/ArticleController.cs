@@ -1382,7 +1382,25 @@ namespace Reddah.Web.Login.Controllers
                         : db.UserArticle.FirstOrDefault(ua => ua.Content==content && ua.Type==1);
                     if(target==null)
                     {
-                        db.UserArticle.Add(new UserArticle { UserName = jwtResult.JwtUser.User, ArticleId = articleId, Content=content==null?string.Empty:content, Type = articleId>0?0:1, CreatedOn=DateTime.UtcNow });
+                        db.UserArticle.Add(new UserArticle {
+                            UserName = jwtResult.JwtUser.User,
+                            ArticleId = articleId,
+                            Content =content==null?string.Empty:content,
+                            Type = articleId>0?0:1,
+                            CreatedOn =DateTime.UtcNow
+                        });
+                        if (articleId > 0)
+                        {
+                            var article = db.Article.FirstOrDefault(a => a.Id == articleId);
+                            if (article != null)
+                            {
+                                if (article.Down != null)
+                                    article.Down += 1;
+                                else
+                                    article.Down = 1;
+                            }
+                        }
+                            
                         db.SaveChanges();
                     }
 
@@ -1425,6 +1443,17 @@ namespace Reddah.Web.Login.Controllers
                     if (target != null)
                     {
                         db.UserArticle.Remove(target);
+                        if (target.ArticleId > 0)
+                        {
+                            var article = db.Article.FirstOrDefault(a => a.Id == target.ArticleId);
+                            if (article != null)
+                            {
+                                if (article.Down != null&&article.Down>0)
+                                    article.Down -= 1;
+                                else
+                                    article.Down = 0;
+                            }
+                        }
                         db.SaveChanges();
                     }
 
