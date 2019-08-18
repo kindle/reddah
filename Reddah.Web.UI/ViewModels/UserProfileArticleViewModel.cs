@@ -28,6 +28,10 @@
             {
                 IEnumerable<Article> query = null;
                 int[] loaded = userProfileModel.LoadedIds == null ? new int[] { } : userProfileModel.LoadedIds;
+                string[] disgrp = userProfileModel.DislikeGroups == null ? new string[] { } : userProfileModel.DislikeGroups;
+                string[] disuser = userProfileModel.DislikeUserNames == null ? new string[] { } : userProfileModel.DislikeUserNames;
+
+                IEnumerable<string> grp = new List<string>(disgrp);
 
                 if (userProfileModel.Menu.Equals("new", System.StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -41,12 +45,63 @@
                 else if (userProfileModel.Menu.Equals("promoted", System.StringComparison.InvariantCultureIgnoreCase))
                 {
                     //query according to user habits
-                    query = (from b in db.Articles
+                    //too slow
+                    /*query = (from b in db.Articles.AsEnumerable()
                              where b.Status == userProfileModel.Status && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
-                              !(loaded).Contains(b.Id)
+                              //!(loaded).Contains(b.Id) && !(disgrp).Contains(b.GroupName) && !(disuser).Contains(b.UserName)
+                              !(loaded).Contains(b.Id) && !(disuser).Contains(b.UserName) && 
+                                grp.Intersect(b.GroupName.Split(',').ToList()).Count()==0
                              orderby b.Count descending, b.LastUpdateOn descending
                              select b)
-                            .Take(pageCount);
+                            .Take(pageCount);*/
+                    string grp0 = "-", grp1 = "-", grp2 = "-", grp3 = "-", grp4 = "-", grp5 = "-", grp6 = "-",
+                         grp7 = "-",  grp8 = "-", grp9 = "-", grp10 = "-";
+                    disgrp.Reverse();
+                    for(int i=0;i<disgrp.Length;i++)
+                    {
+                        if (i == 0)
+                            grp0 = disgrp[i];
+                        if (i == 1)
+                            grp1 = disgrp[i];
+                        if (i == 2)
+                            grp2 = disgrp[i];
+                        if (i == 3)
+                            grp3 = disgrp[i];
+                        if (i == 4)
+                            grp4 = disgrp[i];
+                        if (i == 5)
+                            grp5 = disgrp[i];
+                        if (i == 6)
+                            grp6 = disgrp[i];
+                        if (i == 7)
+                            grp7 = disgrp[i];
+                        if (i == 8)
+                            grp8 = disgrp[i];
+                        if (i == 9)
+                            grp9 = disgrp[i];
+                        if (i == 10)
+                            grp10 = disgrp[i];
+                        
+                    }
+
+                    query = (from b in db.Articles
+                             where b.Status == userProfileModel.Status && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
+                              //!(loaded).Contains(b.Id) && !(disgrp).Contains(b.GroupName) && !(disuser).Contains(b.UserName)
+                              !(loaded).Contains(b.Id) && !(disuser).Contains(b.UserName) &&
+                                !b.GroupName.Contains(grp0) &&
+                                !b.GroupName.Contains(grp1) &&
+                                !b.GroupName.Contains(grp2) &&
+                                !b.GroupName.Contains(grp3) &&
+                                !b.GroupName.Contains(grp4) &&
+                                !b.GroupName.Contains(grp5) &&
+                                !b.GroupName.Contains(grp6) &&
+                                !b.GroupName.Contains(grp7) &&
+                                !b.GroupName.Contains(grp8) &&
+                                !b.GroupName.Contains(grp9) &&
+                                !b.GroupName.Contains(grp10) 
+                             orderby b.Count descending, b.LastUpdateOn descending
+                             select b)
+                                .Take(pageCount);
                 }
                 else if (userProfileModel.Menu.Equals("hot", System.StringComparison.InvariantCultureIgnoreCase))
                 {

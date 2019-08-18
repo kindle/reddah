@@ -74,6 +74,8 @@ namespace Reddah.Web.UI.Models
     public class UserProfileModel
     {
         public int[] LoadedIds;
+        public string[] DislikeGroups;
+        public string[] DislikeUserNames;
         public string Locale;
         public string Token;
         public string Menu;
