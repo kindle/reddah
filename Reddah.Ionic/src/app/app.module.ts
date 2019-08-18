@@ -82,6 +82,7 @@ import { UserPage } from './common/user/user.page';
 import { ArticlePopPage } from './common/article-pop.page'
 import { HeaderAddPage } from './common/header-add-pop.page'
 import { ChangeCoverPopPage } from './common/change-cover-pop.page'
+import { ArticleDislikePopPage } from './common/article-dislike-pop.page'
 import { ArticleTextPopPage } from './common/article-text-pop.page'
 import { CommentPopPage } from './common/comment-pop.page'
 import { TimelinePopPage } from './common/timeline-pop.page'
@@ -179,7 +180,7 @@ var firebaseConfig = {
         UserPage,
         ArticlePopPage,
         HeaderAddPage,
-        ChangeCoverPopPage,
+        ChangeCoverPopPage,ArticleDislikePopPage,
         ArticleTextPopPage,
         CommentPopPage,
         TimelinePopPage,
@@ -233,7 +234,7 @@ var firebaseConfig = {
         NewFriendPage,
         ArticlePopPage,
         HeaderAddPage,
-        ChangeCoverPopPage,
+        ChangeCoverPopPage,ArticleDislikePopPage,
         ArticleTextPopPage,
         CommentPopPage,
         TimelinePopPage,

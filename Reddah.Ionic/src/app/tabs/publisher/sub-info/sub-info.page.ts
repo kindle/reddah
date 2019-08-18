@@ -57,7 +57,7 @@ export class SubInfoPage implements OnInit {
         {
             let locale = this.reddah.getCurrentLocale();
             let cacheKey = "this.reddah.getArticleDrafts" + JSON.stringify(this.loadedIds) + locale + this.targetSub.UserName;
-            let request = this.reddah.getArticles(this.loadedIds, locale, "draft", "", 0, this.targetSub.UserName);
+            let request = this.reddah.getArticles(this.loadedIds,[],[], locale, "draft", "", 0, this.targetSub.UserName);
 
             this.cacheService.loadFromObservable(cacheKey, request, "SubInfoPage"+this.targetSub.UserName)
             .subscribe(articles => 
@@ -80,7 +80,7 @@ export class SubInfoPage implements OnInit {
             locale = "en-US"
 
         let cacheKey = "this.reddah.getArticleDrafts" + JSON.stringify(this.loadedIds) + locale+this.targetSub.UserName;
-        let request = this.reddah.getArticles(this.loadedIds, locale, "draft", "", 0, this.targetSub.UserName);
+        let request = this.reddah.getArticles(this.loadedIds,[],[], locale, "draft", "", 0, this.targetSub.UserName);
 
         this.cacheService.loadFromObservable(cacheKey, request, "SubInfoPage"+this.targetSub.UserName)
         .subscribe(articles => 

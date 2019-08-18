@@ -3,7 +3,7 @@ import { InfiniteScroll, Content } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { Article } from '../../model/article';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, ModalController } from '@ionic/angular';
+import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
 import { PostviewerPage } from '../../postviewer/postviewer.page';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
@@ -11,6 +11,8 @@ import { MyInfoPage } from '../../common/my-info/my-info.page';
 import { SearchPage } from '../../common/search/search.page';
 import { UserPage } from '../../common/user/user.page';
 import { PubPage } from '../publisher/pub/pub.page';
+import { ArticleDislikePopPage } from '../../common/article-dislike-pop.page';
+import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
 
 @Component({
     selector: 'app-home',
@@ -21,6 +23,8 @@ export class HomePage implements OnInit {
 
     articles = [];
     loadedIds = [];
+    dislikeGroups = [];
+    dislikeUserNames = [];
 
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
     @ViewChild('pageTop') pageTop: Content;
@@ -31,7 +35,7 @@ export class HomePage implements OnInit {
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,
-
+        private popoverController: PopoverController,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
@@ -42,15 +46,25 @@ export class HomePage implements OnInit {
     async ngOnInit(){
         let cacheArticles = this.localStorageService.retrieve("reddah_articles");
         let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids");
+        let cacheDislikeGroups = this.localStorageService.retrieve("reddah_article_groups");
+        let cacheDislikeUserNames = this.localStorageService.retrieve("reddah_article_usernames");
         if(cacheArticles){
             this.articles = JSON.parse(cacheArticles);
             this.loadedIds = JSON.parse(cacheArticleIds);
+            this.dislikeGroups = JSON.parse(cacheDislikeGroups);
+            this.dislikeUserNames = JSON.parse(cacheDislikeUserNames);
         }
         else
         {
             let locale = this.reddah.getCurrentLocale();
-            let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale;
-            let request = this.reddah.getArticles(this.loadedIds, locale, "promoted");
+            let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds)
+                + JSON.stringify(this.dislikeGroups) + JSON.stringify(this.dislikeUserNames) 
+                + locale;
+            let request = this.reddah.getArticles(
+                this.loadedIds, 
+                this.dislikeGroups,
+                this.dislikeUserNames,
+                locale, "promoted");
 
             this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
             .subscribe(articles => 
@@ -62,6 +76,9 @@ export class HomePage implements OnInit {
                 }
                 this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
                 this.localStorageService.store("reddah_article_ids", JSON.stringify(this.loadedIds));
+                this.localStorageService.store("reddah_article_groups", JSON.stringify(this.dislikeGroups));
+                this.localStorageService.store("reddah_article_usernames", JSON.stringify(this.dislikeUserNames));
+                
             });
         }
     }
@@ -71,8 +88,14 @@ export class HomePage implements OnInit {
         if(locale==null)
             locale = "en-US"
 
-        let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale;
-        let request = this.reddah.getArticles(this.loadedIds, locale, "promoted");
+        let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds)
+            + JSON.stringify(this.dislikeGroups) + JSON.stringify(this.dislikeUserNames) 
+            + locale;
+        let request = this.reddah.getArticles(
+            this.loadedIds, 
+            this.dislikeGroups,
+            this.dislikeUserNames,
+            locale, "promoted");
 
         this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
         .subscribe(articles => 
@@ -84,6 +107,9 @@ export class HomePage implements OnInit {
             }
             this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
             this.localStorageService.store("reddah_article_ids", JSON.stringify(this.loadedIds));
+            this.localStorageService.store("reddah_article_groups", JSON.stringify(this.dislikeGroups));
+            this.localStorageService.store("reddah_article_usernames", JSON.stringify(this.dislikeUserNames));
+                
             if(event){
                 event.target.complete();
             }
@@ -95,8 +121,13 @@ export class HomePage implements OnInit {
         this.cacheService.clearGroup("HomePage");
         this.localStorageService.clear("reddah_articles");
         this.localStorageService.clear("reddah_article_ids");
+        this.localStorageService.clear("reddah_article_groups");
+        this.localStorageService.clear("reddah_article_usernames");
+            
         this.articles = [];
         this.loadedIds = [];
+        this.dislikeGroups = [];
+        this.dislikeUserNames = [];
         this.getArticles(event);
     }
 
@@ -166,4 +197,83 @@ export class HomePage implements OnInit {
         await modal.present();
     }
     
+    async dislike(event, article){
+        let reasons = [
+            [{Id:1, Title:"看过了", Key:"" },{Id:2, Title:"内容太水", Key:""}],
+        ];
+        reasons.push([
+            {Id:4, Title:`色情低俗`, Key:"" },
+            {Id:5, Title:`拉黑作者:${this.reddah.getDisplayName(article.UserName)}`, Key:article.UserName } ]);
+        
+        let startIndex = 100;
+        let group = article.GroupName.split(',');
+        let dislikeGroup = [];
+        for(let i=0;i<2;i++){
+            let last = group.slice(-1).pop();
+            if(last)
+            {
+                group.splice(group.length-1, 1);
+                dislikeGroup.unshift({Id:startIndex, Title:`不看:${last}`, Key: last});
+                startIndex++;
+            }
+        }
+        reasons.push(dislikeGroup);
+
+        const popover = await this.popoverController.create({
+            component: ArticleDislikePopPage,
+            componentProps: { Reasons: reasons },
+            //event: event,
+            translucent: true,
+            animated: false,
+            //enterAnimation: "am-fade",
+            cssClass: 'article-dislike-popover',
+        });
+        await popover.present();
+        const { data } = await popover.onDidDismiss();
+        if(data!=null)
+        {
+            //UI remove 
+            this.articles.forEach((item, index)=>{
+                if(item.Id==article.Id)
+                    this.articles.splice(index, 1);
+            })
+            //cache remove
+            this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
+
+            //parameter
+            if(data.Id==5){
+                this.dislikeUserNames.push(data.Key);
+                console.log(this.dislikeUserNames)
+                this.localStorageService.store("reddah_article_usernames", JSON.stringify(this.dislikeUserNames));
+            }
+            if(data.Id>10){
+                this.dislikeGroups.push(data.Key);
+                console.log(this.dislikeGroups)
+                this.localStorageService.store("reddah_article_groups", JSON.stringify(this.dislikeGroups));
+            }
+            
+            //sys report
+            //further, flink analytics etc.
+
+            if(data.Id==-1)
+                this.feedback(article)
+
+
+        }
+        
+    }
+
+    async feedback(article) {
+        const modal = await this.modalController.create({
+            component: AddFeedbackPage,
+            componentProps: { 
+                title: "文章举报",
+                desc: "请输入文章违规描述",
+                feedbackType: 4,
+                article: article
+            }
+        });
+          
+        await modal.present();
+    }
 }

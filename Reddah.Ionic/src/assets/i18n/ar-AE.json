@@ -1,12 +1,12 @@
 {
     "Surface":{
-        "Language": "Language",
-        "Login": "Login",
-        "Register": "Register"
+        "Language": "لغوي",
+        "Login": "تسجيل الدخول",
+        "Register": "للتسجيل"
     },
 
     "Login":{
-        "Title":"Login",
+        "Title": "تسجيل الدخول",
         "NoAccount":"No Account?",
         "RegisterNow":"Register Now",
         "ForgotPassword":"Forgot Password",
@@ -14,7 +14,7 @@
     },
 
     "Register":{
-        "Title":"Register",
+        "Title":"للتسجيل",
         "TitleSub":"Register Subscriber",
         "TitleMini":"注册小程序",
         "ReadAgree":"You have read and agreed:",

@@ -66,7 +66,7 @@ export class PubPage implements OnInit {
         {
             let locale = this.reddah.getCurrentLocale();
             let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale + this.userName;
-            let request = this.reddah.getArticles(this.loadedIds, locale, "search", this.userName);
+            let request = this.reddah.getArticles(this.loadedIds,[],[], locale, "search", this.userName);
 
             this.cacheService.loadFromObservable(cacheKey, request, "PubPage"+this.userName)
             .subscribe(articles => 
@@ -93,7 +93,7 @@ export class PubPage implements OnInit {
             locale = "en-US"
 
         let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds) + locale+this.userName;
-        let request = this.reddah.getArticles(this.loadedIds, locale, "search", this.userName);
+        let request = this.reddah.getArticles(this.loadedIds,[],[], locale, "search", this.userName);
 
         this.cacheService.loadFromObservable(cacheKey, request, "PubPage"+this.userName)
         .subscribe(articles => 

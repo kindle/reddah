@@ -5,9 +5,9 @@
         </ion-refresher-content>
     </ion-refresher>
     <ng-template ngFor let-article [ngForOf]="articles" id="homepage" style="color: #636468;font-family: 'Segoe UI', Arial, sans-serif;">
-        <div class="postModuleLiner">
-            <div *ngIf="article.VideoUrl.length>0">
-                <span class="article-title" (click)="view(article)">{{reddah.htmlDecode(article.Title)}}</span>
+        <div class="postModuleLiner" *ngIf="article.VideoUrl.length>0">
+            <div>
+                <span class="articleTitle" (click)="view(article)">{{reddah.htmlDecode(article.Title)}}</span>
                 <div class="postClear"></div>
                 <video id="video_{{article.Id}}" (click)="playVideo(article.Id)"
                         controls="controls" loop="true">
@@ -15,31 +15,82 @@
                 </video>
                 <div class="postClear"></div>
             </div>
-            <div *ngIf="article.VideoUrl.length==0" (click)="view(article)">
-                <span class="article-title articleTitle" *ngIf="article.ImageUrls.length>1">{{reddah.htmlDecode(article.Title)}}</span>
-                <div class="postClear" *ngIf="article.ImageUrls.length>1"></div>
-                <div class="listImage" ng-style="{display:article.ImageUrls.length>1?'flex':''}">
-                    <div class="listImageWrapper" *ngFor="let articleUrl of article.ImageUrls">
+            <div class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
+                <div style="display: flex;" (click)="goUser(article.UserName)">
+                    <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
+                        {{reddah.getDisplayName(article.UserName)}}
+                    </span>
+                    <ion-icon color="medium" name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
+                </div>
+                <div style="display: flex;" (click)="dislike($event, article)">
+                    <ion-icon color="medium" size="small" name="close"></ion-icon>
+                </div>
+            </div>
+        </div>
+        <div class="postModuleLiner" *ngIf="article.VideoUrl.length==0">
+            <div *ngIf="article.ImageUrls.length>=3" (click)="view(article)">
+                <span class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span>
+                <div class="postClear"></div>
+                <ion-card-content no-padding>
+                    <div class="parent">
+                        <div class="container" *ngFor="let articleUrl of article.ImageUrls">
+                            <img [id]="articleUrl" (load)="reddah.adjustImage($event, articleUrl)"src="{{articleUrl}}" class="picture">
+                        </div>
+                    </div>
+                </ion-card-content>
+            </div>
+            <div *ngIf="article.ImageUrls.length>=3" class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
+                <div style="display: flex;" (click)="goUser(article.UserName)">
+                    <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
+                        {{reddah.getDisplayName(article.UserName)}}
+                    </span>
+                    <ion-icon color="medium" name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
+                </div>
+                <div style="display: flex;" (click)="dislike($event, article)">
+                    <ion-icon color="medium" size="small" name="close"></ion-icon>
+                </div>
+            </div>
+
+            <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3" (click)="view(article)">
+                <div class="listImage">
+                    <div class="listImageWrapper">
                         <!--<img class="lazy BrowsePreviewImage" onerror="this.style.display='none'" src="" data-original="{{articleUrl}}">-->
-                        <img class="BrowsePreviewImage" onerror="this.style.display='none'" src="" src="{{articleUrl}}">
+                        <img class="BrowsePreviewImageOne" onerror="this.style.display='none'" src="{{article.ImageUrls[0]}}">
                     </div>
                 </div>
-                <span class="article-title articleTitle" *ngIf="article.ImageUrls.length<2">{{reddah.htmlDecode(article.Title)}}</span><br>
+                <span class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
                 <div style="color: #636468;">{{reddah.summary(article.Content, 100)}}</div>
             </div>
-            <div class="postClear"></div>
-            <div class="listInfo">
+            <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3" class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
+                <div style="display: flex;" (click)="goUser(article.UserName)">
+                    <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
+                        {{reddah.getDisplayName(article.UserName)}}
+                    </span>
+                    <ion-icon color="medium" name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
+                </div>
+                <div style="display: flex;" (click)="dislike($event, article)">
+                    <ion-icon color="medium" size="small" name="close"></ion-icon>
+                </div>
+            </div>
+
+            <div *ngIf="article.ImageUrls.length==0" (click)="view(article)">
+                <span class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
+                <div style="color: #636468;">{{reddah.summary(article.Content, 100)}}</div>
+            </div>
+            <div class="listInfo" *ngIf="article.ImageUrls.length==0">
                 <span *ngFor="let group of article.GroupName.split(',')" (click)="goSearch(group)" style="padding-right:5px;">
                     <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;margin-bottom:2px;">{{group}}</u>
                 </span>
             </div>
-            <div class="postClear"></div>
-            <div class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
+            <div *ngIf="article.ImageUrls.length==0" class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
                 <div style="display: flex;" (click)="goUser(article.UserName)">
-                    <span class="user-name" style="display: inline-block;vertical-align: middle;line-height: 1.5em;">{{reddah.getDisplayName(article.UserName)}}</span>
+                    <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
+                        {{reddah.getDisplayName(article.UserName)}}
+                    </span>
+                    <ion-icon color="medium" name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
                 </div>
-                <div style="display: flex;" (click)="view(article)">
-                    <ion-icon name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
+                <div style="display: flex;" (click)="dislike($event, article)">
+                    <ion-icon color="medium" size="small" name="close"></ion-icon>
                 </div>
             </div>
         </div>

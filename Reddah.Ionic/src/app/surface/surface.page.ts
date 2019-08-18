@@ -141,7 +141,8 @@ export class SurfacePage implements OnInit {
          if (this.isMouseDown) {
             var dX = evt.center.x - this.dragX;
             var dY = evt.center.y - this.dragY;
-            this.config.lat = this.clamp(this.dragLat + dY * 0.5, -90, 90);
+            //bug south earth glitch...
+            //this.config.lat = this.clamp(this.dragLat + dY * 0.5, -90, 90);
             //this.config.lng = this.clampLng(this.dragLng - dX * 0.5, -180, 180);
             this.config.lng = this.clampLng(this.dragLng - dX * 0.5);
             
@@ -151,14 +152,14 @@ export class SurfacePage implements OnInit {
 
     config = {
         percent: 0,
-        lat: 0,
-        lng: 0,
+        lat: 39.773949,
+        lng: 116.330711,
         segX: 14,
         segY: 12,
         isWorldVisible: true,
         isHaloVisible: true,
         isPoleVisible: true,
-        autoSpin: true,
+        autoSpin: false,
         zoom: 0,
 
         skipPreloaderAnimation: false,

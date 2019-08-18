@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular'
 import { ScanPage } from '../../common/scan/scan.page';
-import { StatusBar } from '@ionic-native/status-bar';
+import { PublisherPage } from '../publisher/publisher.page';
 import { SearchPage } from '../../common/search/search.page';
 import { ShakePage } from '../../shake/shake.page';
 import { ReddahService } from '../../reddah.service';
@@ -81,6 +81,14 @@ export class FindPage {
             component: MessageListPage
         });
     
+        await modal.present();
+    }
+
+
+    async goPublicPage(){
+        const modal = await this.modalController.create({
+            component: PublisherPage
+        });
         await modal.present();
     }
 

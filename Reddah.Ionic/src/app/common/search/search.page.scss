@@ -57,3 +57,27 @@
     width: 66px;
     height: 66px;
 }
+
+.listImage {
+    vertical-align: top;
+}
+
+.listImageWrapper {
+    float: left;
+    height: 90px;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.BrowsePreviewImageOne
+{
+    width: 95px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    border: 1px solid #BDBEC1;
+    margin-top: 0px;
+    border-radius: 3px;
+    height:100%;
+    object-fit: cover;
+}

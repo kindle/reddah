@@ -1,12 +1,12 @@
 {
     "Surface":{
-        "Language": "Language",
-        "Login": "Login",
-        "Register": "Register"
+        "Language": "Idiomas",
+        "Login": "Entrada",
+        "Register": "Registro"
     },
 
     "Login":{
-        "Title":"Login",
+        "Title":"Entrada",
         "NoAccount":"No Account?",
         "RegisterNow":"Register Now",
         "ForgotPassword":"Forgot Password",
@@ -14,7 +14,7 @@
     },
 
     "Register":{
-        "Title":"Register",
+        "Title":"Registro",
         "TitleSub":"Register Subscriber",
         "TitleMini":"注册小程序",
         "ReadAgree":"You have read and agreed:",

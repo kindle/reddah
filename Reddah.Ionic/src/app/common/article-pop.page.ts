@@ -7,7 +7,7 @@ import { CacheService } from 'ionic-cache';
     template: `
         <div (click)="close()">   
             <ion-item button (click)="back(1)">
-                <ion-icon slot="start" color="primary" name="share"></ion-icon>  
+                <ion-icon slot="start" color="secondary" name="share"></ion-icon>  
                 <ion-label>分享给好友</ion-label>
             </ion-item>
             <ion-item button (click)="back(2)">

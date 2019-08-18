@@ -1,8 +1,8 @@
 {
     "Surface":{
-        "Language": "Language",
+        "Language": "Lingua",
         "Login": "Login",
-        "Register": "Register"
+        "Register": "Registro"
     },
 
     "Login":{
@@ -14,7 +14,7 @@
     },
 
     "Register":{
-        "Title":"Register",
+        "Title":"Registro",
         "TitleSub":"Register Subscriber",
         "TitleMini":"注册小程序",
         "ReadAgree":"You have read and agreed:",

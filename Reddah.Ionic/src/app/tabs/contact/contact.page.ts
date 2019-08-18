@@ -9,7 +9,6 @@ import { CacheService } from 'ionic-cache';
 import { UserPage } from '../../common/user/user.page';
 import { ChangeNoteNamePopPage } from '../../common/change-notename-pop.page';
 import { ChatChooseGroupPage } from '../../chat/chat-choose-group/chat-choose-group.page';
-import { PublisherPage } from '../publisher/publisher.page';
 
 @Component({
     selector: 'app-contact',
@@ -208,12 +207,5 @@ export class ContactPage {
             this.loadRequests();
             this.loadData(null);
         }
-    }
-
-    async goPublicPage(){
-        const modal = await this.modalController.create({
-            component: PublisherPage
-        });
-        await modal.present();
     }
 }

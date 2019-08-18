@@ -1,12 +1,12 @@
 {
     "Surface":{
-        "Language": "Language",
-        "Login": "Login",
-        "Register": "Register"
+        "Language": "Γλώσσα",
+        "Login": "Σύνδεση",
+        "Register": "Μητρώο"
     },
 
     "Login":{
-        "Title":"Login",
+        "Title":"Σύνδεση",
         "NoAccount":"No Account?",
         "RegisterNow":"Register Now",
         "ForgotPassword":"Forgot Password",
@@ -14,7 +14,7 @@
     },
 
     "Register":{
-        "Title":"Register",
+        "Title":"Μητρώο",
         "TitleSub":"Register Subscriber",
         "TitleMini":"注册小程序",
         "ReadAgree":"You have read and agreed:",

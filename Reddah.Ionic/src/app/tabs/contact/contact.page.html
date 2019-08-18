@@ -13,10 +13,6 @@
         <ion-icon name="ios-chatbubbles" slot="start" color="tertiary" class="portrait groupChat"></ion-icon>
         <ion-label style="margin-left:10px;">群聊</ion-label>
     </ion-item>
-    <ion-item (click)="goPublicPage()">
-        <ion-icon name="ios-person" slot="start" color="tertiary" class="portrait publicPoster"></ion-icon>
-        <ion-label style="margin-left:10px;">公众号</ion-label>
-    </ion-item>
     <div style="display: flex; justify-content: center;"><ion-spinner name="dots" *ngIf="showLoading"></ion-spinner></div>
     <ion-list>
         <ion-item-group *ngFor="let group of groupedContacts" lines="none">

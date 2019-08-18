@@ -89,7 +89,7 @@ export class AddMiniPage implements OnInit {
             this.groupName = this.reddahService.htmlDecode(this.article.GroupName);
         }
         else{
-            this.reddahService.getArticles([], "en-us", "draft", "", 1, this.targetUserName).subscribe(articles => 
+            this.reddahService.getArticles([],[],[], "en-us", "draft", "", 1, this.targetUserName).subscribe(articles => 
             {
                 if(articles.length>=1){
                     let article = articles[0];

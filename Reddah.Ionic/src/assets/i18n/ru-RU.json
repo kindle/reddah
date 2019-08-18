@@ -1,12 +1,12 @@
 {
     "Surface":{
-        "Language": "Language",
-        "Login": "Login",
-        "Register": "Register"
+        "Language": "язык",
+        "Login": "Bход",
+        "Register": "Pегистрация"
     },
 
     "Login":{
-        "Title":"Login",
+        "Title":"Bход",
         "NoAccount":"No Account?",
         "RegisterNow":"Register Now",
         "ForgotPassword":"Forgot Password",
@@ -14,7 +14,7 @@
     },
 
     "Register":{
-        "Title":"Register",
+        "Title":"Pегистрация",
         "TitleSub":"Register Subscriber",
         "TitleMini":"注册小程序",
         "ReadAgree":"You have read and agreed:",

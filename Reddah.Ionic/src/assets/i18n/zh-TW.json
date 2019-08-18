@@ -1,12 +1,12 @@
 {
     "Surface":{
-        "Language": "语言",
-        "Login": "登录",
+        "Language": "語言",
+        "Login": "登入",
         "Register": "创建新账户"
     },
 
     "Login":{
-        "Title":"登录",
+        "Title":"登入",
         "NoAccount":"还没有帐号？",
         "RegisterNow":"立即注册",
         "ForgotPassword":"忘记密码",

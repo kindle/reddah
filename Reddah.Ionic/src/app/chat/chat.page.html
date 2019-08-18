@@ -72,7 +72,7 @@
                         </div>
                         <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==4"></div>
                         <div class="chat-box-others-link" *ngIf="comment.Type==4">
-                            <app-share-article-chat [abstract]="comment.Abstract" [image]="comment.ImageUrl" [id]="comment.Duration"></app-share-article-chat>
+                            <app-share-article-chat abstract="{{comment.Abstract}}" image="{{comment.ImageUrl}}" id="{{comment.Duration}}"></app-share-article-chat>
                         </div>
                     </div>
                 </div>

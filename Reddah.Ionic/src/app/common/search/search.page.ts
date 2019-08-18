@@ -188,7 +188,7 @@ export class SearchPage implements OnInit {
     async searchArticles(event, limit=10000){
         
         let cacheKey = "this.reddah.searchArticles" + JSON.stringify(this.loadedIds_a) + this.locale + "search_article"+this.searchKeyword.value;
-        let request = this.reddah.getArticles(this.loadedIds_a, this.locale, "search", this.searchKeyword.value, 1, "", 0);
+        let request = this.reddah.getArticles(this.loadedIds_a, [], [], this.locale, "search", this.searchKeyword.value, 1, "", 0);
         console.log(cacheKey);
         this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
         .subscribe(articles => 
@@ -216,7 +216,7 @@ export class SearchPage implements OnInit {
         
         let cacheKey = "this.reddah.searchTimelines" + JSON.stringify(this.loadedIds_t) + this.locale + "search_timeline"+this.searchKeyword.value;
         //status=0 as there's no draft for timeline
-        let request = this.reddah.getArticles(this.loadedIds_t, this.locale, "search", this.searchKeyword.value, 0, "", 1);
+        let request = this.reddah.getArticles(this.loadedIds_t, [], [], this.locale, "search", this.searchKeyword.value, 0, "", 1);
         
         this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
         .subscribe(articles => 

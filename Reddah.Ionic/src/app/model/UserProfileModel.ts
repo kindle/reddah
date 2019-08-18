@@ -1,5 +1,7 @@
 export class UserProfileModel {
     public LoadedIds: Number[];
+    public DislikeGroups: string[];
+    public DislikeUserNames: string[];
     public Locale: String;
     public Token: String;
     public Menu: String;

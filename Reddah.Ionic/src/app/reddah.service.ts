@@ -625,11 +625,21 @@ export class ReddahService {
     }
 
     public Locales = [
-        new Locale("zh-CN", "简体中文(China)"),
-        new Locale("fr-FR", "France"),
-        new Locale("ja-JP", "日本(Japan)"),
-        new Locale("ko-KR", "대한민국(Korea)"),
-        new Locale("en-US", "English(US)"),
+        new Locale("zh-CN", "简体中文 (zh-CN)"),
+        new Locale("en-US", "English (en-US)"),
+        new Locale("es-ES", "Español (es-ES)"),
+        new Locale("ar-AE", " عربي ، (ar-AE)"),
+        new Locale("ru-RU", "Pусский язык (ru-RU)"),
+        new Locale("pt-PT", "Português (pt-PT)"),
+        new Locale("ja-JP", "日本語 (ja-JP)"),
+        new Locale("de-DE", "Deutsch (de-DE)"),
+        new Locale("fr-FR", "Français (fr-FR)"),
+        new Locale("ko-KR", "한국어 (ko-KR)"),
+        new Locale("it-IT", "Italiano (it-IT)"),
+        new Locale("el-GR", "Ελληνικά (el-GR)"),
+        new Locale("nl-NL", "Nederlands (nl-NL)"),
+        new Locale("th-TH", "ภาษาไทย (th-TH)"),
+        new Locale("zh-TW", "繁體中文 (zh-TW)"),
     ];
 
     private publisherUrl = 'https://login.reddah.com/api/pub/getpublisher'; 
@@ -671,9 +681,16 @@ export class ReddahService {
     private articlesUrl = 'https://reddah.com/api/webapi/getarticles'; 
     private userProfileModel: UserProfileModel;
 
-    getArticles(loadedIds: Number[], locale: String, menu: String, keyword="", status=1, userName="", type=0): Observable<Article[]> {
+    getArticles(
+        loadedIds: Number[],
+        dislikeGroups: string[]=[],
+        dislikeUserNames: string[]=[], 
+        locale: String, menu: String, keyword="", status=1, userName="", type=0): Observable<Article[]> {
+        
         this.userProfileModel = new UserProfileModel();
         this.userProfileModel.LoadedIds = loadedIds;
+        this.userProfileModel.DislikeGroups = dislikeGroups;
+        this.userProfileModel.DislikeUserNames = dislikeUserNames;
         this.userProfileModel.Locale = locale;
         this.userProfileModel.Menu = menu;
         this.userProfileModel.Token = "";
@@ -682,17 +699,6 @@ export class ReddahService {
         this.userProfileModel.Keyword = keyword;
         this.userProfileModel.Type = type;
         this.userProfileModel.Status = status;
-
-        /*const httpOptions = {
-          headers: new HttpHeaders({ 
-            'Content-Type':'application/json',
-            'Access-Control-Allow-Origin*':'*',
-            'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
-            'Access-Control-Allow-Headers':'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-          }),
-          body: this.userProfileModel
-          
-        };*/
 
         return this.http.post<Article[]>(this.articlesUrl, this.userProfileModel)//httpOptions)
         .pipe(
@@ -1531,6 +1537,9 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     clearLocaleCache(){
         this.localStorageService.clear("reddah_articles");
         this.localStorageService.clear("reddah_article_ids");
+        this.localStorageService.clear("reddah_article_groups");
+        this.localStorageService.clear("reddah_article_usernames");
+        this.cacheService.clearGroup("HomePage");
     }
 
     async ClearPub(){
@@ -1629,6 +1638,12 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             return parseInt(meters/1000+"") + "公里"
         }
         return meters + "米";
+    }
+
+    async adjustImage(evt, img){
+        let image = document.getElementById(img);
+        if(image.offsetHeight<image.offsetWidth)
+            image.style.height = "100%";
     }
 
 }
