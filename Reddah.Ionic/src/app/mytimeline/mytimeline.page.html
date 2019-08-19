@@ -48,22 +48,33 @@
                 <ion-card-content style="display:block;margin-right:20px;" *ngIf="article.Abstract.length<3&&article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>6">
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                            <img [id]="image" (load)="reddah.adjustImage($event, image)" src="{{reddah.level2Cache(image)}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))">
+                            <img [id]="reddah.makeItId(image)" (load)="reddah.adjustImage($event, image)"
+                            [defaultImage]="'assets/icon/noimage.jpg'" 
+                            [lazyLoad]="reddah.level2Cache(image)" 
+                            [useSrcset]="true" class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
                     <div class="parent" *ngIf="article.Content.split('$$$').length==3||article.Content.split('$$$').length==5||article.Content.split('$$$').length==6">
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                            <img [id]="image" (load)="reddah.adjustImage($event, image)" src="{{reddah.level2Cache(image)}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))">
+                            <img [id]="reddah.makeItId(image)" (load)="reddah.adjustImage($event, image)" 
+                            [defaultImage]="'assets/icon/noimage.jpg'" 
+                            [lazyLoad]="reddah.level2Cache(image)" 
+                            [useSrcset]="true" class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
                     <div class="parent2" *ngIf="article.Content.split('$$$').length==2||article.Content.split('$$$').length==4">
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                            <img [id]="image" (load)="reddah.adjustImage($event, image)" src="{{reddah.level2Cache(image)}}" class="picture" (click)="viewer(i, article.Content.split('$$$'))">
+                            <img [id]="reddah.makeItId(image)" (load)="reddah.adjustImage($event, image)" 
+                            [defaultImage]="'assets/icon/noimage.jpg'" 
+                            [lazyLoad]="reddah.level2Cache(image)" 
+                            [useSrcset]="true" class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
                     <div class="parent3" *ngIf="article.Content.split('$$$').length==1">
                         <div class="container3">
-                            <img src="{{reddah.level2Cache(article.Content.split('$$$')[0])}}" class="picture3" (click)="viewer(0, article.Content.split('$$$'))">
+                            <img [defaultImage]="'assets/icon/noimage.jpg'" 
+                            [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[0])" 
+                            [useSrcset]="true" class="picture3" (click)="viewer(0, article.Content.split('$$$'))">
                         </div>
                     </div>
                 </ion-card-content>

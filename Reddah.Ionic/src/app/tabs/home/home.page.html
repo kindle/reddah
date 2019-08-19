@@ -34,7 +34,7 @@
                 <ion-card-content no-padding>
                     <div class="parent">
                         <div class="container" *ngFor="let articleUrl of article.ImageUrls;index as i">
-                            <img [class.left-radius]="i==0" [class.right-radius]="i==2" [id]="articleUrl" (load)="reddah.adjustImage($event, articleUrl)"
+                            <img [class.left-radius]="i==0" [class.right-radius]="i==2" [id]="reddah.makeItId(articleUrl)" (load)="reddah.adjustImage($event, articleUrl)"
                             [defaultImage]="'assets/icon/noimage.jpg'" 
                             [lazyLoad]="articleUrl" 
                             [useSrcset]="true" class="picture">
@@ -57,8 +57,8 @@
             <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3" (click)="view(article)">
                 <div class="listImage">
                     <div class="listImageWrapper">
-                        <!--<img class="lazy BrowsePreviewImage" onerror="this.style.display='none'" src="" data-original="{{articleUrl}}">-->
                         <img class="BrowsePreviewImageOne" onerror="this.style.display='none'" 
+                        [id]="reddah.makeItId(article.ImageUrls[0])" (load)="reddah.adjustImage($event, article.ImageUrls[0])"
                         [defaultImage]="'assets/icon/noimage.jpg'" 
                         [lazyLoad]="article.ImageUrls[0]" 
                         [useSrcset]="true">

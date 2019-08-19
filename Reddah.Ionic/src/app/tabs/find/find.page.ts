@@ -6,7 +6,6 @@ import { SearchPage } from '../../common/search/search.page';
 import { ShakePage } from '../../shake/shake.page';
 import { ReddahService } from '../../reddah.service';
 import { LocationPage } from '../../common/location/location.page';
-import { MessageListPage } from '../../tabs/message/message.page'
 
 @Component({
   selector: 'app-find',
@@ -75,15 +74,6 @@ export class FindPage {
             this.reddah.saveUserLocation(this.userName, data, data.location.lat, data.location.lng);
         }
     }
-
-    async message(){
-        const modal = await this.modalController.create({
-            component: MessageListPage
-        });
-    
-        await modal.present();
-    }
-
 
     async goPublicPage(){
         const modal = await this.modalController.create({

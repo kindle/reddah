@@ -233,10 +233,12 @@ export class HomePage implements OnInit {
         if(data!=null)
         {
             //UI remove 
-            this.articles.forEach((item, index)=>{
-                if(item.Id==article.Id)
-                    this.articles.splice(index, 1);
-            })
+            if(data.Id!=-1){
+                this.articles.forEach((item, index)=>{
+                    if(item.Id==article.Id)
+                        this.articles.splice(index, 1);
+                })
+            }
             
 
             //parameter
@@ -285,5 +287,13 @@ export class HomePage implements OnInit {
         });
           
         await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data==true)
+        {
+            this.articles.forEach((item, index)=>{
+                if(item.Id==article.Id)
+                    this.articles.splice(index, 1);
+            })
+        }
     }
 }

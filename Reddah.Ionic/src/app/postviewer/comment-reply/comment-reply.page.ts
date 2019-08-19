@@ -59,7 +59,7 @@ export class CommentReplyPage implements OnInit {
                 this.comments.sort((a,b)=> a.Id-b.Id);
                 break;
             case "mostlike":
-                this.comments.sort((a,b)=> b.Count-a.Count);
+                this.comments.sort((a,b)=> b.Down-a.Down);
                 break;
             case "latest":
             default:

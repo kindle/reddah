@@ -2,54 +2,52 @@
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-label>设置</ion-label>
 </ion-item>
-<ion-content no-padding style="background-color: white;" #searchResult>
-    <div>
-        <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="goAccount()">
-            <ion-label>账号与安全</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-    </div>
+<ion-content no-padding style="--background: #eeeeee;" #searchResult>
+    <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="goAccount()">
+        <ion-label>账号与安全</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
 
-    <div class="gap">
-        <ion-item class="borderTop borderItem">
-            <ion-label>新消息提醒</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-        <ion-item class="borderItem">
-            <ion-label>勿扰模式</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-        <ion-item class="borderItem">
-            <ion-label>聊天</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-        <ion-item class="borderItem" (click)="goPrivacy()">
-            <ion-label>隐私</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-        <ion-item lines="none" class="borderBottom borderItem" (click)="goGeneral()">
-            <ion-note slot="start" color="dark">通用</ion-note>
-            <ion-icon slot="start" name="globe" color="primary" size="medium"></ion-icon>
-            <ion-icon slot="start" name="ios-appstore" color="dark" size="medium"></ion-icon>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-      </ion-item>
-    </div>
-
-    <div class="gap">
-        <ion-item class="borderTop borderItem" (click)="goAbout()">
-            <ion-label>关于Reddah</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-        <ion-item lines="none" class="borderBottom borderItem" (click)="feedback()">
-            <ion-label>{{ 'Menu.Header.Feedback' | translate }}</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-      </ion-item>
-    </div>
-
-    <div class="gap lastGap" *ngIf="this.authService.authenticated()">
-        <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="logout()">
-            <ion-label>{{ 'Button.Logout' | translate }}</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-    </div>
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <ion-item class="borderTop borderItem">
+        <ion-label>新消息提醒</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item class="borderItem">
+        <ion-label>勿扰模式</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item class="borderItem">
+        <ion-label>聊天</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item class="borderItem" (click)="goPrivacy()">
+        <ion-label>隐私</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" class="borderBottom borderItem" (click)="goGeneral()">
+        <ion-note slot="start" color="dark">通用</ion-note>
+        <ion-icon slot="start" name="globe" color="primary" size="medium"></ion-icon>
+        <ion-icon slot="start" name="ios-appstore" color="dark" size="medium"></ion-icon>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+    
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <ion-item class="borderTop borderItem" (click)="goAbout()">
+        <ion-label>关于Reddah</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" class="borderBottom borderItem" (click)="feedback()">
+        <ion-label>{{ 'Menu.Header.Feedback' | translate }}</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+    
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <ion-item lines="none" class="borderTop borderItem borderBottom" *ngIf="this.authService.authenticated()" (click)="logout()">
+        <ion-label>{{ 'Button.Logout' | translate }}</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
 </ion-content>

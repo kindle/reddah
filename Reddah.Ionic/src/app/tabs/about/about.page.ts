@@ -11,6 +11,7 @@ import { BookmarkPage } from '../../bookmark/bookmark.page';
 import { PlatformPage } from '../publisher/platform/platform.page';
 import { TimelinePopPage } from '../../common/timeline-pop.page';
 import { AddTimelinePage } from '../../mytimeline/add-timeline/add-timeline.page';
+import { MessageListPage } from '../../tabs/message/message.page'
 
 @Component({
     selector: 'app-about',
@@ -103,6 +104,14 @@ export class AboutPage implements OnInit {
         if(data){
             
         }
+    }
+
+    async message(){
+        const modal = await this.modalController.create({
+            component: MessageListPage
+        });
+    
+        await modal.present();
     }
 
 }
