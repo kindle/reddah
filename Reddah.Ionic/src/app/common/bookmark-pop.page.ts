@@ -4,9 +4,6 @@ import { PopoverController } from '@ionic/angular';
 @Component({
     template: `
       <div>
-          <ion-item button (click)="close(0)">
-              <ion-label>转发</ion-label>
-          </ion-item>
           <ion-item button (click)="close(1)">
               <ion-label>删除</ion-label>
           </ion-item>

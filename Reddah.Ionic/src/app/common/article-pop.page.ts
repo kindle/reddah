@@ -19,7 +19,7 @@ import { CacheService } from 'ionic-cache';
                 <ion-label>收藏</ion-label>
             </ion-item> 
             <ion-item button (click)="back(4)">
-                <ion-icon slot="start" color="warning" name="alert"></ion-icon>  
+                <ion-icon slot="start" color="medium" name="alert"></ion-icon>  
                 <ion-label>举报</ion-label>
             </ion-item>
         </div>

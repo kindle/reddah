@@ -2,30 +2,24 @@
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-label>添加朋友</ion-label>
 </ion-item>
-<ion-content no-padding style="background-color: white;">
-
-    <ion-item>
+<ion-content no-padding style="--background: #eeeeee;">
+    <ion-item lines="none">
         <ion-icon name="ios-search" slot="start"></ion-icon>
-        <ion-note (click)="searchUser()">Reddah ID/User Name</ion-note>
+        <ion-note (click)="searchUser()" style="width: 100%;">Reddah ID/User Name</ion-note>
     </ion-item>
 
-    <ion-item>
-        <ion-label text-center (click)="myQrCard()">
-            我的二维码名片: {{userName}}
-            <ion-icon name="qr-scanner" slot="start"></ion-icon>
-        </ion-label>
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
-
-    
-    
-    <ion-item href="/scan" (click)="close()">
+    <ion-item lines="none" class="borderTop borderBottom" href="/scan" (click)="close()">
         <ion-icon name="qr-scanner" slot="start"></ion-icon>
         <ion-label>扫一扫</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
     </ion-item>
-    <ion-item href="#">
-        <ion-icon name="ios-person" slot="start"></ion-icon>
-        <ion-label>公众号</ion-label>
+
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <ion-item lines="none" class="borderTop borderBottom" (click)="myQrCard()">
+        <ion-label>我的二维码</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
     </ion-item>
     

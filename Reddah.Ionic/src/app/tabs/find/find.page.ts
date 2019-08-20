@@ -82,4 +82,15 @@ export class FindPage {
         await modal.present();
     }
 
+    async goMiniPage(){
+        const userModal = await this.modalController.create({
+            component: SearchPage,
+            componentProps: {
+                type: 3,//mini only
+            }
+        });
+          
+        await userModal.present();
+    }
+
 }

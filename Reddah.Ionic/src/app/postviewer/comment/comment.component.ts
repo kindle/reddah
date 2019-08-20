@@ -97,7 +97,7 @@ export class CommentComponent implements OnInit {
                 this.localComments.sort((a,b)=> a.Id-b.Id);
                 break;
             case "mostlike":
-                this.localComments.sort((a,b)=> b.Down-a.Down);
+                this.localComments.sort((a,b)=> b.Up-a.Up);
                 break;
             case "latest":
             default:
