@@ -2,25 +2,23 @@
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-label>聊天信息</ion-label>
 </ion-item>
-<ion-content no-padding style="background-color: #eeeeee;">
-    <div>
-        <ion-item lines="none" class="borderTop borderItem borderBottom">
-            <div style="display: flex;flex-direction: column;">
-                <ion-avatar class="userPhoto" (click)="goUser(targetUser)">
-                    <img [src]="reddah.appData('userphoto_'+targetUser)" class="grpPortrait">
-                </ion-avatar>
-                <ion-label style="margin-top:0;width:65px;color:gray;" text-center>{{reddah.getDisplayName(targetUser)}}</ion-label>
-            </div>
-        </ion-item>
-    </div>
-
-    <div class="gap">
-        <ion-item class="borderTop borderItem borderBottom" lines="none">
-            <ion-label>查找聊天记录</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-    </div>
+<ion-content no-padding style="--background: #eeeeee;">
+    <ion-item lines="none" class="borderTop borderItem borderBottom">
+        <div style="display: flex;flex-direction: column;">
+            <ion-avatar class="userPhoto" (click)="goUser(targetUser)">
+                <img [src]="reddah.appData('userphoto_'+targetUser)" class="grpPortrait">
+            </ion-avatar>
+            <ion-label style="margin-top:0;width:65px;color:gray;" text-center>{{reddah.getDisplayName(targetUser)}}</ion-label>
+        </div>
+    </ion-item>
 <!--
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <ion-item class="borderTop borderItem borderBottom" lines="none">
+        <ion-label>查找聊天记录</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+
     <div class="gap">
         <ion-item class="borderTop borderItem">
             <ion-label>消息免打扰</ion-label>
@@ -35,25 +33,26 @@
             <ion-toggle [(ngModel)]="strongReminder" color="success" slot="end"></ion-toggle>
         </ion-item>
     </div>
+
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <ion-item class="borderTop borderItem borderBottom" (click)="setBackground()" lines="none">
+        <ion-label>设置当前聊天背景</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+--> 
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <ion-item class="borderTop borderItem borderBottom" (click)="clearChat()" lines="none">
+        <ion-label>清空聊天记录</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+<!--
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <ion-item class="borderTop borderItem borderBottom" (click)="report()" lines="none">
+        <ion-label>投诉</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
 -->
-    <div class="gap">
-        <ion-item class="borderTop borderItem borderBottom" (click)="setBackground()" lines="none">
-            <ion-label>设置当前聊天背景</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-    </div>
-
-    <div class="gap">
-        <ion-item class="borderTop borderItem borderBottom" (click)="clearChat()" lines="none">
-            <ion-label>清空聊天记录</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-    </div>
-
-    <div class="gap lastGap">
-        <ion-item class="borderTop borderItem borderBottom" (click)="report()" lines="none">
-            <ion-label>投诉</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-    </div>
 </ion-content>

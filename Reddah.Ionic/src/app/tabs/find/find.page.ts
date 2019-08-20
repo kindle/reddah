@@ -6,7 +6,6 @@ import { SearchPage } from '../../common/search/search.page';
 import { ShakePage } from '../../shake/shake.page';
 import { ReddahService } from '../../reddah.service';
 import { LocationPage } from '../../common/location/location.page';
-import { MessageListPage } from '../../tabs/message/message.page'
 
 @Component({
   selector: 'app-find',
@@ -76,20 +75,22 @@ export class FindPage {
         }
     }
 
-    async message(){
-        const modal = await this.modalController.create({
-            component: MessageListPage
-        });
-    
-        await modal.present();
-    }
-
-
     async goPublicPage(){
         const modal = await this.modalController.create({
             component: PublisherPage
         });
         await modal.present();
+    }
+
+    async goMiniPage(){
+        const userModal = await this.modalController.create({
+            component: SearchPage,
+            componentProps: {
+                type: 3,//mini only
+            }
+        });
+          
+        await userModal.present();
     }
 
 }

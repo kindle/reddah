@@ -15,7 +15,7 @@
     <ion-grid *ngIf="showFacePanel" class="optionPanel">
         <ion-row *ngFor="let row of reddah.emojis">
             <ion-col *ngFor="let col of row" text-center>
-                <span (click)="faceSelection(col)" style="width: 80px;height: 80px;">{{col}}</span>
+                <span (click)="faceSelection(col)" style="font-size:30px;width: 80px;height: 80px;">{{col}}</span>
             </ion-col>
         </ion-row> 
     </ion-grid>

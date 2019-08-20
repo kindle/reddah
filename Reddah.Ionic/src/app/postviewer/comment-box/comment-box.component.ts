@@ -51,15 +51,18 @@ export class CommentBoxComponent implements OnInit {
         
         this.lastScrollTop = currentScrollTop;
         //total count as fixed header
-        let header = document.getElementById("TotalComments");
-        if(this.sticky==null)
-            this.sticky = header.offsetTop;
+        try{
+            let header = document.getElementById("TotalComments");
+            if(this.sticky==null)
+                this.sticky = header.offsetTop;
 
-        if ($event.detail.scrollTop > this.sticky) {
-            header.classList.add("sticky");
-        } else {
-            header.classList.remove("sticky");
+            if ($event.detail.scrollTop > this.sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
         }
+        catch(e){}
     }
 
 

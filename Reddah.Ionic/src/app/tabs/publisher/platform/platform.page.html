@@ -2,25 +2,23 @@
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-label style="font-weight: bold;">{{ 'Menu.FindSub.Platform' | translate }}</ion-label>
 </ion-item>
-<ion-content no-padding style="background-color: white;" #searchResult>
-    <div>
-        <ion-item class="borderTop borderItem" (click)="goApply()">
-            <ion-icon class="menuIcon" name="color-fill" slot="start" color="dark" size="medium"></ion-icon>
-            <ion-text slot="start">注册</ion-text>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-        <ion-item lines="none" class="borderItem borderBottom" (click)="goManage()">
-            <ion-icon class="menuIcon" name="ios-planet" slot="start" color="mini" size="medium"></ion-icon>
-            <ion-text slot="start">管理</ion-text>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-    </div>
-
-    <div class="gap lastGap">
-        <ion-item lines="none" class="borderTop borderItem borderBottom" href="#">
-            <ion-icon class="menuIcon" name="ios-document" slot="start" color="subscribe" size="medium"></ion-icon>
-            <ion-label>开发文档</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-    </div>
+<ion-content no-padding style="--background:#eeeeee;" #searchResult>
+    <ion-item class="borderTop borderItem" (click)="goApply()">
+        <ion-icon class="menuIcon" name="color-fill" slot="start" color="dark" size="medium"></ion-icon>
+        <ion-text slot="start">注册</ion-text>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" class="borderItem borderBottom" (click)="goManage()">
+        <ion-icon class="menuIcon" name="ios-planet" slot="start" color="mini" size="medium"></ion-icon>
+        <ion-text slot="start">管理</ion-text>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+    
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <ion-item lines="none" class="borderTop borderItem borderBottom" href="#">
+        <ion-icon class="menuIcon" name="ios-document" slot="start" color="subscribe" size="medium"></ion-icon>
+        <ion-label>开发文档</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
 </ion-content>
