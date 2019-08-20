@@ -73,6 +73,8 @@ namespace Reddah.Web.Login.Controllers
             {
                 using (var db = new reddahEntities())
                 {
+                    data.Content = data.Content.Replace("\n", "<br>");
+
                     db.Comment.Add(new Comment()
                     {
                         ArticleId = data.ArticleId,

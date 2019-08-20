@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Assistance_Title" xml:space="preserve">
+    <value>Assistance</value>
+  </data>
+  <data name="Browse_ShowLessText" xml:space="preserve">
+    <value>Show Less</value>
+  </data>
+  <data name="Browse_ShowMoreText" xml:space="preserve">
+    <value>Show More</value>
+  </data>
+  <data name="Browse_TopIssues" xml:space="preserve">
+    <value>Top Issues</value>
+  </data>
+  <data name="Footer_ChangeLocale" xml:space="preserve">
+    <value>English Country</value>
+  </data>
+  <data name="ChangeLocale_Title" xml:space="preserve">
+    <value>Set Your Default Country or Region</value>
+  </data>
+  <data name="ChangeLocale_Desc" xml:space="preserve">
+    <value>Select the default country or region you would like to see each time you visit Reddah.com.</value>
+  </data>
+  <data name="Header_Create" xml:space="preserve">
+    <value>Submit to Reddah</value>
+  </data>
+  <data name="Header_JoinNow" xml:space="preserve">
+    <value>Join Now</value>
+  </data>
+  <data name="Header_MyAccount" xml:space="preserve">
+    <value>My Account</value>
+  </data>
+  <data name="Header_SignIn" xml:space="preserve">
+    <value>Log In</value>
+  </data>
+  <data name="Header_SignOut" xml:space="preserve">
+    <value>Log Off</value>
+  </data>
+  <data name="Header_Want" xml:space="preserve">
+    <value>Want to join?</value>
+  </data>
+  <data name="Header_Or" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="Header_InSeconds" xml:space="preserve">
+    <value>in seconds.</value>
+  </data>
+  <data name="Menu_Controversial" xml:space="preserve">
+    <value>Controversial</value>
+  </data>
+  <data name="Menu_Gilded" xml:space="preserve">
+    <value>Gilded</value>
+  </data>
+  <data name="Menu_Hot" xml:space="preserve">
+    <value>Hot</value>
+  </data>
+  <data name="Menu_New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Menu_Promoted" xml:space="preserve">
+    <value>Promoted</value>
+  </data>
+  <data name="Menu_Rising" xml:space="preserve">
+    <value>Rising</value>
+  </data>
+  <data name="Menu_Games" xml:space="preserve">
+    <value>Games</value>
+  </data>
+  <data name="Menu_Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Menu_Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="Menu_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Menu_Top" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="Navi_Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Right_Feedbacks" xml:space="preserve">
+    <value>Feedbacks</value>
+  </data>
+  <data name="Right_DiscussAd" xml:space="preserve">
+    <value>Discuss on AD</value>
+  </data>
+  <data name="Right_ContactUs" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="Right_Feedbacks_Desc" xml:space="preserve">
+    <value>Get help from the knowledgeable Reddah Community and official Reddah Support!</value>
+  </data>
+  <data name="Right_DiscussAd_Desc" xml:space="preserve">
+    <value>A place for discussing the ads that reddah is currently running.</value>
+  </data>
+  <data name="Right_ContactUs_Desc" xml:space="preserve">
+    <value>Get in touch with an Reddah Support technician. We are ready and willing to help you!</value>
+  </data>
+  <data name="Right_Tags" xml:space="preserve">
+    <value>Scan QR Codes to download mobile App</value>
+  </data>
+  <data name="Article_TrendingSubReddah" xml:space="preserve">
+    <value>Trending Subreddahs</value>
+  </data>
+  <data name="Article_Comments" xml:space="preserve">
+    <value>comments</value>
+  </data>
+  <data name="Article_WhatThis" xml:space="preserve">
+    <value>what's this?</value>
+  </data>
+  <data name="Article_WhatThisTip" xml:space="preserve">
+    <value>This area shows new and upcoming links. Vote on links here to help them become popular, and click the forwards and backwards buttons to view more.</value>
+  </data>
+  <data name="Article_More" xml:space="preserve">
+    <value>View more:</value>
+  </data>
+  <data name="Article_Prev" xml:space="preserve">
+    <value>Prev</value>
+  </data>
+  <data name="Article_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Article_OrTry" xml:space="preserve">
+    <value>or try a</value>
+  </data>
+  <data name="Article_RandomSubReddah" xml:space="preserve">
+    <value>Random SubReddah</value>
+  </data>
+  <data name="Article_Likeit" xml:space="preserve">
+    <value>I like it!</value>
+  </data>
+  <data name="Article_Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="Article_CommentTitle" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Article_CommentCount" xml:space="preserve">
+    <value>comment(s)</value>
+  </data>
+  <data name="Article_Mapping" xml:space="preserve">
+    <value>Knowledge Mapping</value>
+  </data>
+  <data name="Login_UserName" xml:space="preserve">
+    <value>username</value>
+  </data>
+  <data name="Login_Password" xml:space="preserve">
+    <value>password</value>
+  </data>
+  <data name="Login_ConfirmPassword" xml:space="preserve">
+    <value>confirm password</value>
+  </data>
+  <data name="Login_Email" xml:space="preserve">
+    <value>email</value>
+  </data>
+  <data name="Login_RememberMe" xml:space="preserve">
+    <value>Keep me signed in</value>
+  </data>
+  <data name="Login_Signup" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="Login_CreateNewAccount" xml:space="preserve">
+    <value>CREATE A NEW ACCOUNT</value>
+  </data>
+  <data name="Login_AgreeWord" xml:space="preserve">
+    <value>By signing up, you agree to our</value>
+  </data>
+  <data name="Login_ReadWord" xml:space="preserve">
+    <value>and that you have read our</value>
+  </data>
+  <data name="Login_And" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="Login_Msg_WrongPW" xml:space="preserve">
+    <value>The user name or password provided is incorrect.</value>
+  </data>
+  <data name="Login_Msg_UserNameRequire" xml:space="preserve">
+    <value>The User Name field is required.</value>
+  </data>
+  <data name="Login_Msg_PasswordRequire" xml:space="preserve">
+    <value>The Password field is required.</value>
+  </data>
+  <data name="Login_Msg_EmailRequire" xml:space="preserve">
+    <value>The Email field is required.</value>
+  </data>
+  <data name="Footer_TermsOfUse" xml:space="preserve">
+    <value>Terms of Use</value>
+  </data>
+  <data name="Footer_PrivacyStatement" xml:space="preserve">
+    <value>Privacy Statement</value>
+  </data>
+  <data name="Footer_ContentPolicy" xml:space="preserve">
+    <value>Code of Conduct</value>
+  </data>
+  <data name="Footer_Press" xml:space="preserve">
+    <value>Press</value>
+  </data>
+  <data name="Footer_Jobs" xml:space="preserve">
+    <value>Jobs</value>
+  </data>
+  <data name="Footer_ForDevelopers" xml:space="preserve">
+    <value>For Developers</value>
+  </data>
+  <data name="Msg_Deleted" xml:space="preserve">
+    <value>The content was deleted</value>
+  </data>
+  <data name="Submit_PageTitle_New" xml:space="preserve">
+    <value>Submit to Reddah</value>
+  </data>
+  <data name="Submit_PageTitle_Edit" xml:space="preserve">
+    <value>Edit on Reddah</value>
+  </data>
+  <data name="Submit_PageDesc" xml:space="preserve">
+    <value>You are submitting a link. The key to a successful submission is interesting content and a descriptive title.</value>
+  </data>
+  <data name="Submit_Title" xml:space="preserve">
+    <value>Input the title</value>
+  </data>
+  <data name="Submit_Group" xml:space="preserve">
+    <value>Input the group, split by ,</value>
+  </data>
+  <data name="Submit_Abstract" xml:space="preserve">
+    <value>Input the abstract</value>
+  </data>
+  <data name="Submit_Captura_New" xml:space="preserve">
+    <value>Click to get a new one</value>
+  </data>
+  <data name="Submit_Captura_Robot" xml:space="preserve">
+    <value>Are you a robot?</value>
+  </data>
+  <data name="Submit_Button_Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Submit_Button_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Submit_Button_Login_New" xml:space="preserve">
+    <value>Please Login to Submit</value>
+  </data>
+  <data name="Submit_Button_Login_Edit" xml:space="preserve">
+    <value>Please Login to Edit</value>
+  </data>
+  <data name="Error_No_More_Result" xml:space="preserve">
+    <value>No more search result!</value>
+  </data>
+  <data name="Error_Server_Error" xml:space="preserve">
+    <value>Server error, please click here to refresh the page</value>
+  </data>
+  <data name="List_Submit" xml:space="preserve">
+    <value>submitted</value>
+  </data>
+  <data name="List_By" xml:space="preserve">
+    <value>by</value>
+  </data>
+  <data name="List_Time_Format" xml:space="preserve">
+    <value>{0} {1} ago</value>
+  </data>
+  <data name="List_Time_Just" xml:space="preserve">
+    <value>just now</value>
+  </data>
+  <data name="List_Time_Year" xml:space="preserve">
+    <value>year</value>
+  </data>
+  <data name="List_Time_Month" xml:space="preserve">
+    <value>month</value>
+  </data>
+  <data name="List_Time_Day" xml:space="preserve">
+    <value>day</value>
+  </data>
+  <data name="List_Time_Hour" xml:space="preserve">
+    <value>hour</value>
+  </data>
+  <data name="List_Time_Minute" xml:space="preserve">
+    <value>minute</value>
+  </data>
+  <data name="List_Time_Second" xml:space="preserve">
+    <value>second</value>
+  </data>
+  <data name="List_Time_Years" xml:space="preserve">
+    <value>years</value>
+  </data>
+  <data name="List_Time_Months" xml:space="preserve">
+    <value>months</value>
+  </data>
+  <data name="List_Time_Days" xml:space="preserve">
+    <value>days</value>
+  </data>
+  <data name="List_Time_Hours" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="List_Time_Minutes" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="List_Time_Seconds" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="List_LastUpdateOn" xml:space="preserve">
+    <value>Last updated on</value>
+  </data>
+  <data name="Comment_Reply" xml:space="preserve">
+    <value>Reply</value>
+  </data>
+  <data name="Comment_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Comment_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Comment_Hint" xml:space="preserve">
+    <value>do not post personal information, phone numbers, email addresses, names, etc, real or fake, or you will be banned without warning.</value>
+  </data>
+  <data name="Comment_Write" xml:space="preserve">
+    <value>Add Comment</value>
+  </data>
+  <data name="Comment_Good" xml:space="preserve">
+    <value>Good</value>
+  </data>
+</root>

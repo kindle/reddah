@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:D:\BailinStudio\reddah\Reddah.Web.UI\Resources\Resources.zh-CN.resx
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Assistance_Title" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="Browse_ShowLessText" xml:space="preserve">
+    <value>折叠全部</value>
+  </data>
+  <data name="Browse_ShowMoreText" xml:space="preserve">
+    <value>展开剩余的</value>
+  </data>
+  <data name="Browse_TopIssues" xml:space="preserve">
+    <value>Top Issues</value>
+  </data>
+  <data name="Footer_ChangeLocale" xml:space="preserve">
+    <value>中文(中华人民共和国)‎</value>
+  </data>
+  <data name="ChangeLocale_Title" xml:space="preserve">
+    <value>设置默认国家和区域</value>
+  </data>
+  <data name="ChangeLocale_Desc" xml:space="preserve">
+    <value>选择默认国家和区域以方便访问Reddah.com</value>
+  </data>
+  <data name="Header_Create" xml:space="preserve">
+    <value>发新贴子</value>
+  </data>
+  <data name="Header_JoinNow" xml:space="preserve">
+    <value>立即加入</value>
+  </data>
+  <data name="Header_MyAccount" xml:space="preserve">
+    <value>我的帐户</value>
+  </data>
+  <data name="Header_SignIn" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="Header_SignOut" xml:space="preserve">
+    <value>退出登录</value>
+  </data>
+  <data name="Header_Want" xml:space="preserve">
+    <value>想加入吗?</value>
+  </data>
+  <data name="Header_Or" xml:space="preserve">
+    <value>或</value>
+  </data>
+  <data name="Header_InSeconds" xml:space="preserve">
+    <value>即刻出发</value>
+  </data>
+  <data name="Navi_Home" xml:space="preserve">
+    <value>主页</value>
+  </data>
+  <data name="Menu_Controversial" xml:space="preserve">
+    <value>有争议的</value>
+  </data>
+  <data name="Menu_Gilded" xml:space="preserve">
+    <value>好评如潮</value>
+  </data>
+  <data name="Menu_Hot" xml:space="preserve">
+    <value>评论最多</value>
+  </data>
+  <data name="Menu_New" xml:space="preserve">
+    <value>最新</value>
+  </data>
+  <data name="Menu_Promoted" xml:space="preserve">
+    <value>推荐</value>
+  </data>
+  <data name="Menu_Rising" xml:space="preserve">
+    <value>上升</value>
+  </data>
+  <data name="Menu_Games" xml:space="preserve">
+    <value>游戏</value>
+  </data>
+  <data name="Menu_Download" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="Menu_Support" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="Menu_Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="Menu_Top" xml:space="preserve">
+    <value>热评榜</value>
+  </data>
+  <data name="Right_Feedbacks" xml:space="preserve">
+    <value>问题反馈</value>
+  </data>
+  <data name="Right_DiscussAd" xml:space="preserve">
+    <value>广告招商</value>
+  </data>
+  <data name="Right_ContactUs" xml:space="preserve">
+    <value>联系我们</value> 
+  </data>
+  <data name="Right_Feedbacks_Desc" xml:space="preserve">
+    <value>留言来获得网站官方的协助！</value>
+  </data>
+  <data name="Right_DiscussAd_Desc" xml:space="preserve">
+    <value>这是一个讨论广告合作的版块。</value>
+  </data>
+  <data name="Right_ContactUs_Desc" xml:space="preserve">
+    <value>留言与技术人员联系，我们已准备好帮助您！</value>
+  </data>
+  <data name="Right_Tags" xml:space="preserve">
+    <value>扫码安装手机APP</value>
+  </data>
+  <data name="Article_TrendingSubReddah" xml:space="preserve">
+    <value>热门主题</value>
+  </data>
+  <data name="Article_Comments" xml:space="preserve">
+    <value>评论</value>
+  </data>
+  <data name="Article_WhatThis" xml:space="preserve">
+    <value>这是什么？</value>
+  </data>
+  <data name="Article_WhatThisTip" xml:space="preserve">
+    <value>这个区域显示最新的帖子，为喜欢的帖子点赞吧！</value>
+  </data>
+  <data name="Article_More" xml:space="preserve">
+    <value>查看更多：</value>
+  </data>
+  <data name="Article_Prev" xml:space="preserve">
+    <value>前一页</value>
+  </data>
+  <data name="Article_Next" xml:space="preserve">
+    <value>下一页</value>
+  </data>
+  <data name="Article_OrTry" xml:space="preserve">
+    <value>或者试试</value>
+  </data>
+  <data name="Article_RandomSubReddah" xml:space="preserve">
+    <value>查看随机主题</value>
+  </data>
+  <data name="Article_Likeit" xml:space="preserve">
+    <value>我喜欢！</value>
+  </data>
+  <data name="Article_Share" xml:space="preserve">
+    <value>分享</value>
+  </data>
+  <data name="Article_CommentTitle" xml:space="preserve">
+    <value>精彩评论</value>
+  </data>
+  <data name="Article_CommentCount" xml:space="preserve">
+    <value>条</value>
+  </data>
+  <data name="Article_Mapping" xml:space="preserve">
+    <value>知识图谱</value>
+  </data>
+  <data name="Login_UserName" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="Login_Password" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="Login_ConfirmPassword" xml:space="preserve">
+    <value>确认密码</value>
+  </data>
+  <data name="Login_Email" xml:space="preserve">
+    <value>电子邮件</value>
+  </data>
+  <data name="Login_RememberMe" xml:space="preserve">
+    <value>保持登录状态</value>
+  </data>
+  <data name="Login_Signup" xml:space="preserve">
+    <value>注册</value>
+  </data>
+  <data name="Login_CreateNewAccount" xml:space="preserve">
+    <value>创建新账户</value>
+  </data>
+  <data name="Login_AgreeWord" xml:space="preserve">
+    <value>注册前，请同意我们的</value>
+  </data>
+  <data name="Login_ReadWord" xml:space="preserve">
+    <value>并请阅读我们的</value>
+  </data>
+  <data name="Login_And" xml:space="preserve">
+    <value>和</value>
+  </data>
+  <data name="Login_Msg_WrongPW" xml:space="preserve">
+    <value>用户名或密码错误</value>
+  </data>
+  <data name="Login_Msg_UserNameRequire" xml:space="preserve">
+    <value>用户名不能为空。</value>
+  </data>
+  <data name="Login_Msg_PasswordRequire" xml:space="preserve">
+    <value>密码不能为空。</value>
+  </data>
+  <data name="Login_Msg_EmailRequire" xml:space="preserve">
+    <value>电子邮件不能为空。</value>
+  </data>
+  <data name="Footer_TermsOfUse" xml:space="preserve">
+    <value>使用条款</value>
+  </data>
+  <data name="Footer_PrivacyStatement" xml:space="preserve">
+    <value>隐私声明</value>
+  </data>
+  <data name="Footer_ContentPolicy" xml:space="preserve">
+    <value>内容政策</value>
+  </data>
+  <data name="Footer_Press" xml:space="preserve">
+    <value>版权申诉</value>
+  </data>
+  <data name="Footer_Jobs" xml:space="preserve">
+    <value>工作机会</value>
+  </data>
+  <data name="Footer_ForDevelopers" xml:space="preserve">
+    <value>面向开发者</value>
+  </data>
+  <data name="Msg_Deleted" xml:space="preserve">
+    <value>此内容已经被删除</value>
+  </data>
+  <data name="Submit_PageTitle_New" xml:space="preserve">
+    <value>发新贴</value>
+  </data>
+  <data name="Submit_PageTitle_Edit" xml:space="preserve">
+    <value>贴子修改</value>
+  </data>
+  <data name="Submit_PageDesc" xml:space="preserve">
+    <value>请输入吸引人的标题或具有描述性的标题</value>
+  </data>
+  <data name="Submit_Title" xml:space="preserve">
+    <value>输入标题</value>
+  </data>
+  <data name="Submit_Group" xml:space="preserve">
+    <value>输入分组，请使用逗号分隔</value>
+  </data>
+  <data name="Submit_Abstract" xml:space="preserve">
+    <value>输入摘要</value>
+  </data>
+  <data name="Submit_Captura_New" xml:space="preserve">
+    <value>换个新的</value>
+  </data>
+  <data name="Submit_Captura_Robot" xml:space="preserve">
+    <value>你是机器人吗？</value>
+  </data>
+  <data name="Submit_Button_Submit" xml:space="preserve">
+    <value>提交</value>
+  </data>
+  <data name="Submit_Button_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Submit_Button_Login_New" xml:space="preserve">
+    <value>发新帖请登录</value>
+  </data>
+  <data name="Submit_Button_Login_Edit" xml:space="preserve">
+    <value>修改请登录</value>
+  </data>
+  <data name="Error_No_More_Result" xml:space="preserve">
+    <value>没有更多的查询结果了</value>
+  </data>
+  <data name="Error_Server_Error" xml:space="preserve">
+    <value>服务器错误，请点击刷新页面</value>
+  </data>
+  <data name="List_Submit" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="List_By" xml:space="preserve">
+    <value>发布者</value>
+  </data>
+  <data name="List_Time_Format" xml:space="preserve">
+    <value>{0}{1}前</value>
+  </data>
+  <data name="List_Time_Just" xml:space="preserve">
+    <value>刚刚</value>
+  </data>
+  <data name="List_Time_Year" xml:space="preserve">
+    <value>年</value>
+  </data>
+  <data name="List_Time_Month" xml:space="preserve">
+    <value>个月</value>
+  </data>
+  <data name="List_Time_Day" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="List_Time_Hour" xml:space="preserve">
+    <value>小时</value>
+  </data>
+  <data name="List_Time_Minute" xml:space="preserve">
+    <value>分钟</value>
+  </data>
+  <data name="List_Time_Second" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="List_Time_Years" xml:space="preserve">
+    <value>年</value>
+  </data>
+  <data name="List_Time_Months" xml:space="preserve">
+    <value>个月</value>
+  </data>
+  <data name="List_Time_Days" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="List_Time_Hours" xml:space="preserve">
+    <value>小时</value>
+  </data>
+  <data name="List_Time_Minutes" xml:space="preserve">
+    <value>分钟</value>
+  </data>
+  <data name="List_Time_Seconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="List_LastUpdateOn" xml:space="preserve">
+    <value>最后更新</value>
+  </data>
+  <data name="Comment_Reply" xml:space="preserve">
+    <value>回复</value>
+  </data>
+  <data name="Comment_Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Comment_Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Comment_Hint" xml:space="preserve">
+    <value>请不要输入个人信息，电话号码，电子邮件，真实姓名以及其他敏感信息，否则您的账户可能在没有警告的情况下被Reddah禁用。</value>
+  </data>
+  <data name="Comment_Write" xml:space="preserve">
+    <value>写评论</value>
+  </data>
+  <data name="Comment_Good" xml:space="preserve">
+    <value>点赞</value>
+  </data>
+</root>
