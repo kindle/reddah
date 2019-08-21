@@ -27,14 +27,14 @@
         <ion-label>设置备注和标签</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
-    <ion-item (click)="goLocation()" *ngIf="reddah.appData('userlocation_'+userName)">
-        <span class="itemTitle">位置</span>
-        <ion-icon name="pin" color="primary" style="margin-right:5px;"></ion-icon>
-        <ion-label>{{reddah.appData('userlocation_'+userName)}}</ion-label>
-    </ion-item>
-    <ion-item class="borderBottom" lines="none">
+    <ion-item lines="none">
         <span class="itemTitle">个性签名</span>
         <ion-label text-wrap>{{reddah.appData('usersignature_'+userName)}}</ion-label>
+    </ion-item>
+    <ion-item class="borderBottom" (click)="goLocation()" *ngIf="reddah.appData('userlocation_'+userName)">
+        <ion-icon name="pin" color="primary" style="margin-right:5px;"></ion-icon>
+        <span class="itemTitle">位置</span>
+        <ion-label>{{reddah.appData('userlocation_'+userName)}}</ion-label>
     </ion-item>
     
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
@@ -59,7 +59,7 @@
     <ion-item class="borderTop" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1" (click)="chat()">
         <div class="centerItem">
             <ion-icon name="chatboxes"></ion-icon>
-            <ion-note color="dark" class="cmd-title">发消息 </ion-note>
+            <ion-note color="dark" class="cmd-title">发消息</ion-note>
         </div>
     </ion-item>
     <!--<ion-item class="borderBottom" lines="none" href="/#" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
@@ -70,7 +70,7 @@
     </ion-item>-->
     <ion-item  class="borderTop borderBottom" (click)="addFriend()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0&&userName!=reddah.getCurrentUser()">
         <div class="centerItem">
-            <ion-note color="dark" class="cmd-title">添加为好友 </ion-note>
+            <ion-note color="dark" class="cmd-title">添加为好友</ion-note>
         </div>
     </ion-item>
 </ion-content>

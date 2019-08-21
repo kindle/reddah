@@ -41,7 +41,7 @@
         <ion-row>
             <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_t"></ion-spinner></div>
             <ion-text *ngIf="firstLoading_t" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
-            <span class="articleTab" *ngIf="articles_t.length>0">相关光圈</span>
+            <span class="articleTab" *ngIf="articles_t.length>0">相关时光圈</span>
         </ion-row>
         <ion-row *ngFor="let article of articles_t" (click)="goTsViewer(article)">
             <div style="width:100%;border-bottom: 1px solid #eeeeee;padding: 10px 0;">
@@ -155,7 +155,7 @@
         <ion-row>
             <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_t"></ion-spinner></div>
             <ion-text *ngIf="firstLoading_t" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
-            <span class="articleTab" *ngIf="articles_t.length>0">相关光圈</span>
+            <span class="articleTab" *ngIf="articles_t.length>0">相关时光圈</span>
         </ion-row>
         <ion-row *ngFor="let article_t of articles_t" (click)="goTsViewer(article_t)">
             <div style="width:100%;border-bottom: 1px solid #eeeeee;padding: 10px 0;">
@@ -172,7 +172,7 @@
             </div>
         </ion-row>
         <ion-row>
-            <span class="articleTab" *ngIf="articles_t.length>0" (click)="more(1)">更多光圈>></span>
+            <span class="articleTab" *ngIf="articles_t.length>0" (click)="more(1)">更多时光圈>></span>
         </ion-row>
     </ion-grid>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" *ngIf="selectedTopicId!=0">

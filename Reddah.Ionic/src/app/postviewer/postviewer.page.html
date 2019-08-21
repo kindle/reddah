@@ -4,7 +4,7 @@
 </ion-item>
 <ion-content [scrollEvents]="true" (ionScroll)="commentbox.onScroll($event)">
     <div style="padding-left: 10px;padding-top: 10px;padding-bottom: 10px;">
-        <span class="article-title" [innerHTML]="reddah.htmlDecode(article.Title) | safe: 'html'"></span>
+        <span style="font-size: larger;color:black;" class="article-title" [innerHTML]="reddah.htmlDecode(article.Title) | safe: 'html'"></span>
         <ion-item no-padding>
             <ion-text color="primary" (click)="goUser(article.UserName)">
                 <span class="user-name" [innerHTML]="reddah.getDisplayName(article.UserName) | safe: 'html'"></span>

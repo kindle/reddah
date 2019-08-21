@@ -142,7 +142,10 @@ export class GroupChatOptPage {
     async addToGroupChat(){
         const modal = await this.modalController.create({
             component: ChooseUserPage,
-            componentProps: { "addedUsers" : this.groupInfo.GroupName} 
+            componentProps: { 
+                "addedUsers" : this.groupInfo.GroupName,   
+                "delete": false
+            } 
         });
             
         await modal.present();
@@ -151,6 +154,32 @@ export class GroupChatOptPage {
             data.forEach((contact)=>{
                 this.groupInfo.GroupName += ","+contact.Watch;
             });
+
+            let formData = new FormData();
+            formData.append("Id", JSON.stringify(this.groupInfo.Id));
+            formData.append("UserNames", JSON.stringify(data.map(d=>d.Watch)));
+            this.reddah.addToGroupChat(formData).subscribe(data=>
+            {
+                if(data.Success==0){
+                    this.cacheService.clearGroup("ChatChooseGroupPage");
+                }    
+            });
+        }
+    }
+
+    async delFromGroupChat(){
+        const modal = await this.modalController.create({
+            component: ChooseUserPage,
+            componentProps: { 
+                "addedUsers" : this.groupInfo.GroupName,   
+                "delete": true
+            } 
+        });
+            
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            this.groupInfo.GroupName = data.join(',');
 
             let formData = new FormData();
             formData.append("Id", JSON.stringify(this.groupInfo.Id));

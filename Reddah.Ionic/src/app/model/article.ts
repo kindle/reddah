@@ -17,4 +17,5 @@ export class Article {
     Type : number;
     Ref: number;
     LastUpdateOn : string;
+    Read: boolean;
 }

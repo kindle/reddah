@@ -18,6 +18,12 @@
                 </div>
                 <ion-label style="margin-top:0;width:65px;color:gray;" text-center>&nbsp;</ion-label>
             </div>
+            <div *ngIf="userName==groupInfo.UserName" style="display: flex;flex-direction: column;">
+                <div>
+                    <ion-icon name="remove" size="large" color="medium" class="addToGroupChat" (click)="delFromGroupChat()"></ion-icon>
+                </div>
+                <ion-label style="margin-top:0;width:65px;color:gray;" text-center>&nbsp;</ion-label>
+            </div>
         </div>
     </ion-item>
     

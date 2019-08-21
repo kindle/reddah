@@ -83,7 +83,7 @@ export class HomePage implements OnInit {
         }
     }
   
-    getArticles(event):void {
+    getArticles(event, unshift=false):void {
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         if(locale==null)
             locale = "en-US"
@@ -100,10 +100,15 @@ export class HomePage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
         .subscribe(articles => 
         {
-            console.log(articles);
             for(let article of articles){
-                this.articles.push(article);
-                this.loadedIds.push(article.Id);  
+                if(unshift){
+                    this.articles.unshift(article);
+                    this.loadedIds.unshift(article.Id);  
+                }
+                else{
+                    this.articles.push(article);
+                    this.loadedIds.push(article.Id);  
+                }
             }
             this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
             this.localStorageService.store("reddah_article_ids", JSON.stringify(this.loadedIds));
@@ -132,6 +137,10 @@ export class HomePage implements OnInit {
     }
 
     //drag down
+    dragDown(event){
+        this.getArticles(event, true);
+    }
+
     doRefresh(event) {
         setTimeout(() => {
             this.clearCacheAndReload(event);
@@ -163,11 +172,12 @@ export class HomePage implements OnInit {
         });
         
         await viewerModal.present();
+        article.Read = true;
+        this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
         const { data } = await viewerModal.onDidDismiss();
         if(data){
             console.log(data)
         }
-
     }
 
     async goSearch(key){

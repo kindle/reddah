@@ -89,6 +89,7 @@ export class MessageListPage implements OnInit {
             this.goGroupChat(message, message.IsNew);
         }
         message.IsNew = false;
+        this.localStorageService.store("Reddah_Local_Messages", this.messages);
     }
     
     async chat(groupName, hasNewMsg){

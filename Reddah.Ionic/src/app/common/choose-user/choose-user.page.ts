@@ -14,6 +14,7 @@ export class ChooseUserPage implements OnInit {
 
     @Input() targetUser;
     @Input() addedUsers;
+    @Input() delete;
 
     userName;
     locale;
@@ -32,7 +33,11 @@ export class ChooseUserPage implements OnInit {
 
 
     ngOnInit() {
-        this.loadData();
+        if(this.delete)
+            this.loadData_delete();
+        else{
+            this.loadData();
+        }
     }
     
     async close() {
@@ -73,6 +78,33 @@ export class ChooseUserPage implements OnInit {
                 });
             });
         } 
+    }
+
+    loadData_delete(){
+        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
+        if(cachedGroupContact){
+            this.groupedContacts = JSON.parse(cachedGroupContact);
+            this.groupedContacts.forEach((item)=>{
+                item.contacts = item.contacts.filter(c=>this.addedUsers.split(',').includes(c.Watch));
+            });
+            this.groupedContacts = this.groupedContacts.filter(g=>g.contacts.length>0);
+        } 
+    }
+
+    async submit_delete(){
+        this.submitClicked= true;
+
+        let targetUsers = this.addedUsers.split(',');
+        this.groupedContacts.forEach((item)=>{
+            item.contacts.forEach((contact)=>{
+                if(contact.isChecked==true)
+                {
+                    targetUsers = targetUsers.filter(t=>t!=contact.Watch);
+                }
+            });
+        });
+        console.log(targetUsers)
+        this.modalController.dismiss(targetUsers);
     }
 
 }

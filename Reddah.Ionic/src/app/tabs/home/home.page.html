@@ -1,13 +1,13 @@
 <app-header title="Menu.Recommend"></app-header>
 <ion-content #pageTop style="background-color: white;">
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher slot="fixed" (ionRefresh)="dragDown($event)">
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
     </ion-refresher>
     <ng-template ngFor let-article [ngForOf]="articles" id="homepage" style="color: #636468;font-family: 'Segoe UI', Arial, sans-serif;">
         <div class="postModuleLiner" *ngIf="article.VideoUrl.length>0">
             <div>
-                <span class="articleTitle" (click)="view(article)">{{reddah.htmlDecode(article.Title)}}</span>
+                <span [class.articleTextRead]="article.Read" class="articleTitle" (click)="view(article)">{{reddah.htmlDecode(article.Title)}}</span>
                 <div class="postClear"></div>
                 <video id="video_{{article.Id}}" (click)="playVideo(article.Id)"
                         controls="controls" loop="true">
@@ -29,7 +29,7 @@
         </div>
         <div class="postModuleLiner" *ngIf="article.VideoUrl.length==0">
             <div *ngIf="article.ImageUrls.length>=3" (click)="view(article)">
-                <span class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span>
+                <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span>
                 <div class="postClear"></div>
                 <ion-card-content no-padding>
                     <div class="parent">
@@ -64,8 +64,8 @@
                         [useSrcset]="true">
                     </div>
                 </div>
-                <span class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
-                <div style="color: #636468;">{{reddah.summary(article.Content, 100)}}</div>
+                <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
+                <div [class.articleTextRead]="article.Read">{{reddah.summary(article.Content, 100)}}</div>
             </div>
             <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3" class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
                 <div style="display: flex;" (click)="goUser(article.UserName)">
@@ -80,8 +80,8 @@
             </div>
 
             <div *ngIf="article.ImageUrls.length==0" (click)="view(article)">
-                <span class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
-                <div style="color: #636468;">{{reddah.summary(article.Content, 100)}}</div>
+                <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
+                <div [class.articleTextRead]="article.Read">{{reddah.summary(article.Content, 100)}}</div>
             </div>
             <div class="listInfo" *ngIf="article.ImageUrls.length==0">
                 <span *ngFor="let group of article.GroupName.split(',')" (click)="goSearch(group)" style="padding-right:5px;">

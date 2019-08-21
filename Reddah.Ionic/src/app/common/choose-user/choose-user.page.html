@@ -1,7 +1,8 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-label>选择联系人</ion-label>
-    <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ 'Confirm.Submit' | translate }}</ion-button>
+    <ion-button *ngIf="!delete" color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ 'Confirm.Submit' | translate }}</ion-button>
+    <ion-button *ngIf="delete" color="danger" slot="end" (click)="submit_delete()" [disabled]="submitClicked">删除</ion-button>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;">
     <ion-list>
@@ -12,7 +13,7 @@
                     <img src="{{reddah.appData('userphoto_'+contact.Watch)}}" class="contactPortrait">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
-                    <h3>{{contact.NoteName?contact.NoteName:contact.Watch}}</h3>
+                    <h3>{{reddah.getDisplayName(contact.Watch)}}</h3>
                     <ion-note>{{contact.Signature}}</ion-note>
                 </ion-label>
                 <ion-checkbox slot="end" [(ngModel)]="contact.isChecked"></ion-checkbox>
