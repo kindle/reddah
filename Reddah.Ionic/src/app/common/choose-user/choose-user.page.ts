@@ -52,9 +52,9 @@ export class ChooseUserPage implements OnInit {
         let targetUsers = [];
         this.groupedContacts.forEach((item)=>{
             item.contacts.forEach((contact)=>{
-                if(contact.isChecked==true&&!this.addedUsers.split(',').includes(contact.Watch))
+                if(contact.isChecked==true)
                 {
-                    targetUsers.push(contact);
+                    targetUsers.push(contact.Watch);
                 }
             });
         });
@@ -103,8 +103,7 @@ export class ChooseUserPage implements OnInit {
                 }
             });
         });
-        console.log(targetUsers)
-        this.modalController.dismiss(targetUsers);
+        this.modalController.dismiss(targetUsers.filter(t=>t!=""));
     }
 
 }

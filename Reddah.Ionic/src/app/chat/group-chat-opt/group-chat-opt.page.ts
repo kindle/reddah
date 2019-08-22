@@ -86,7 +86,7 @@ export class GroupChatOptPage {
     }
     
     async close() {
-        await this.modalController.dismiss();
+        await this.modalController.dismiss(this.changeFlag);
     }
 
     async goUser(userName){
@@ -139,6 +139,7 @@ export class GroupChatOptPage {
         }); 
     }
 
+    changeFlag;
     async addToGroupChat(){
         const modal = await this.modalController.create({
             component: ChooseUserPage,
@@ -151,19 +152,20 @@ export class GroupChatOptPage {
         await modal.present();
         const { data } = await modal.onDidDismiss();
         if(data){
-            data.forEach((contact)=>{
-                this.groupInfo.GroupName += ","+contact.Watch;
-            });
+            
+            this.groupInfo.GroupName = data.join(',');
 
             let formData = new FormData();
             formData.append("Id", JSON.stringify(this.groupInfo.Id));
-            formData.append("UserNames", JSON.stringify(data.map(d=>d.Watch)));
+            formData.append("UserNames", JSON.stringify(data));
             this.reddah.addToGroupChat(formData).subscribe(data=>
             {
                 if(data.Success==0){
                     this.cacheService.clearGroup("ChatChooseGroupPage");
                 }    
             });
+
+            this.changeFlag = "update";
         }
     }
 
@@ -183,13 +185,15 @@ export class GroupChatOptPage {
 
             let formData = new FormData();
             formData.append("Id", JSON.stringify(this.groupInfo.Id));
-            formData.append("UserNames", JSON.stringify(data.map(d=>d.Watch)));
+            formData.append("UserNames", JSON.stringify(data));
             this.reddah.addToGroupChat(formData).subscribe(data=>
             {
                 if(data.Success==0){
                     this.cacheService.clearGroup("ChatChooseGroupPage");
                 }    
             });
+            
+            this.changeFlag = "update";
         }
     }
 

@@ -29,11 +29,16 @@ export class MessageListPage implements OnInit {
         this.currentUserName = this.reddah.getCurrentUser();
     }
 
+    refreshPage;
     async ngOnInit(){
         this.loadData(true);
-        /*setInterval(() => {
+        this.refreshPage = setInterval(() => {
             this.loadData(true);
-        },5000);*/
+        },5000);
+    }
+
+    ionViewWillLeave() {
+        clearInterval(this.refreshPage);
     }
 
     clear(){

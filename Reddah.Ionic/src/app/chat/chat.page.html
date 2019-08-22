@@ -16,7 +16,12 @@
                 <div text-center class="chatTime" *ngIf="!checkIsToday(comment.CreatedOn)">{{reddah.utcToLocal(comment.CreatedOn,'MM-dd HH:mm')}}</div>
             </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="comment.Type==1000">
+            <ion-col no-padding>
+                <div text-center class="chatTime">{{reddah.htmlDecode(comment.Content)}}</div>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="comment.Type<1000">
             <ion-col no-padding>
                 <div class="container-right" *ngIf="userName==comment.UserName">
                     <img [defaultImage]="'assets/icon/anonymous.png'" 

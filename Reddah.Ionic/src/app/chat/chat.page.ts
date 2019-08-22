@@ -243,7 +243,7 @@ export class ChatPage extends ChatBase implements OnInit  {
                 }
             }
             else{
-                alert(JSON.stringify(data));
+                console.log(JSON.stringify(data));
             }
         });
     }

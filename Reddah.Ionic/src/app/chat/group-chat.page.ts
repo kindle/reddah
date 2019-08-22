@@ -63,7 +63,6 @@ export class GroupChatPage extends ChatBase implements OnInit {
             this.createGroupChat();
         }
         else{
-            console.log(this.groupChat)
             this.getGroupChat();
             this.title = this.groupChat.Title;
             this.chatId = this.groupChat.Id;
@@ -253,6 +252,9 @@ export class GroupChatPage extends ChatBase implements OnInit {
         const { data } = await modal.onDidDismiss();
         if(data=='delete'){
             await this.modalController.dismiss('delete');
+        }
+        else if(data=="update"){
+            this.childReloadComments(null);
         }
         else if(data=="clearchat")
         {

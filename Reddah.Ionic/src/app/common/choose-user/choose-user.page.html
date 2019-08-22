@@ -16,7 +16,7 @@
                     <h3>{{reddah.getDisplayName(contact.Watch)}}</h3>
                     <ion-note>{{contact.Signature}}</ion-note>
                 </ion-label>
-                <ion-checkbox slot="end" [(ngModel)]="contact.isChecked"></ion-checkbox>
+                <ion-checkbox *ngIf="contact.Watch!=userName" slot="end" [(ngModel)]="contact.isChecked"></ion-checkbox>
             </ion-item>
         </ion-item-group>
     </ion-list>
