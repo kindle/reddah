@@ -121,6 +121,7 @@ import { BookmarkPopPage } from './common/bookmark-pop.page';
 import { SigninPage } from './surface/signin/signin.page';
 import { SettingNickNamePage } from './settings/setting-nickname/setting-nickname.page'
 import { SettingSignaturePage } from './settings/setting-signature/setting-signature.page'
+import { SettingSexPage } from './settings/setting-sex/setting-sex.page'
 import { SettingFontPage } from './settings/setting-font/setting-font.page';
 import { ShareArticleComponent } from './common/share-article/share-article.component';
 import { CategoryPage } from './tabs/publisher/category/category.page';
@@ -207,7 +208,7 @@ var firebaseConfig = {
         SettingAccountPage,
         SettingPrivacyPage,
         RegisterPage,
-        SettingNickNamePage,SettingSignaturePage,
+        SettingNickNamePage,SettingSignaturePage,SettingSexPage,
         PlatformPage,
         CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
     ],
@@ -260,7 +261,7 @@ var firebaseConfig = {
         SettingAccountPage,
         SettingPrivacyPage,
         RegisterPage,
-        SettingNickNamePage,SettingSignaturePage,
+        SettingNickNamePage,SettingSignaturePage,SettingSexPage,
         PlatformPage,
         CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
     ],

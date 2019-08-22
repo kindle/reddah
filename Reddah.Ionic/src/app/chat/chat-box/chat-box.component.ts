@@ -19,6 +19,8 @@ export class ChatBoxComponent implements OnInit {
     @Input() selectedArticleId: number;
     @Input() selectedCommentId: number;
     @Output() reloadComments = new EventEmitter();
+    @Output() localComments = new EventEmitter<any>();
+    
     @ViewChild('newChatComment') newChatComment;
     
     speakDesc="按住 说话";
@@ -54,7 +56,17 @@ export class ChatBoxComponent implements OnInit {
 
     async submit() {
         this.commentContent = "";
-        this.reddah.addComments(this.selectedArticleId, this.selectedCommentId, this.newChatComment.value)
+        let uuid = this.reddah.uuidv4();
+        this.localComments.emit({
+            id: this.selectedArticleId, 
+            text: this.newChatComment.value,
+            type: 0,
+            //uuid: uuid,
+        });
+        this.reddah.addComments(
+            this.selectedArticleId, 
+            this.selectedCommentId, 
+            this.newChatComment.value)
         .subscribe(result => 
         {
             if(result.Success==0)
@@ -468,6 +480,9 @@ export class ChatBoxComponent implements OnInit {
         this.formData.append("ArticleId", JSON.stringify(this.selectedArticleId));
         this.formData.append("CommentId", JSON.stringify(this.selectedCommentId));
         this.formData.append("FileType", JSON.stringify(type));
+
+        //this.localComments.emit({obj:this.formData});
+
         this.reddah.addPhotoComments(this.formData)
         .subscribe(result => 
         {

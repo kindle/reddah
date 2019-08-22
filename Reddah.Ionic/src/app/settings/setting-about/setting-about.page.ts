@@ -51,7 +51,7 @@ export class SettingAboutPage implements OnInit {
         });
 
         //upgrade auto when come in
-        this.upgrade();
+        //this.upgrade();
     }
 
     upgradeChecked = false;

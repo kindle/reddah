@@ -3,12 +3,17 @@
     <ion-label>隐私</ion-label>
 </ion-item>
 <ion-content no-padding style="--background: #eeeeee;">
-    
-    <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="goAbout()">
+  
+    <ion-item lines="none" class="borderTop borderBottom" (click)="changeShowLocation()">
+        <ion-label>不显示我的位置信息</ion-label>
+        <ion-toggle [(ngModel)]="showLocation" color="success" slot="end"></ion-toggle>
+    </ion-item>
+<!--  
+    <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="changeApproval()">
         <ion-label>加我为朋友时需要验证</ion-label>
         <ion-toggle [(ngModel)]="requireApproval" color="success" slot="end"></ion-toggle>
     </ion-item>
-<!--
+
     <ion-item lines="none" class="borderItem" (click)="goEmail()">
         <ion-label slot="start">向我推荐通讯录朋友</ion-label>
         <ion-toggle [(ngModel)]="recommendContacts" color="success" slot="end"></ion-toggle>
@@ -35,12 +40,15 @@
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
 -->
-    <ion-item class="borderTop borderItem" (click)="goAbout()">
-        <ion-label>允许陌生人查看十条朋友圈</ion-label>
+    
+    <ion-item class="borderTop borderItem" (click)="changeStrager()">
+        <ion-label>允许陌生人查看十条时光圈</ion-label>
         <ion-toggle [(ngModel)]="allowStranger" color="success" slot="end"></ion-toggle>
     </ion-item>
+
+<!--
     <ion-item class="borderBottom borderItem" (click)="goAbout()">
-        <ion-label>允许朋友查看朋友圈的范围</ion-label>
+        <ion-label>允许朋友查看时光圈的范围</ion-label>
         <ion-select value="0" (ionChange)="changeAllowTsPeriod(allowTsPeriod.value)" 
         cancel-text="取消" ok-text="确定" #allowTsPeriod>
             <ion-select-option value="6">最近半年</ion-select-option>
@@ -49,4 +57,5 @@
             <ion-select-option value="0">全部</ion-select-option>
         </ion-select>
     </ion-item>
+-->
 </ion-content>

@@ -58,7 +58,6 @@ export class ChooseUserPage implements OnInit {
                 }
             });
         });
-
         this.modalController.dismiss(targetUsers);
     }
 
@@ -95,6 +94,7 @@ export class ChooseUserPage implements OnInit {
         this.submitClicked= true;
 
         let targetUsers = this.addedUsers.split(',');
+        //alert(JSON.stringify(targetUsers))
         this.groupedContacts.forEach((item)=>{
             item.contacts.forEach((contact)=>{
                 if(contact.isChecked==true)
@@ -103,6 +103,7 @@ export class ChooseUserPage implements OnInit {
                 }
             });
         });
+        //alert(JSON.stringify(targetUsers.filter(t=>t!="")))
         this.modalController.dismiss(targetUsers.filter(t=>t!=""));
     }
 

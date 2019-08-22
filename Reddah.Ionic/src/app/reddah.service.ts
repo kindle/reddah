@@ -305,6 +305,18 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private changeSexUrl = 'https://login.reddah.com/api/article/changesex'; 
+
+    changeSex(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.changeSexUrl, formData)
+        .pipe(
+            tap(data => this.log('change sex')),
+            catchError(this.handleError('change sex', []))
+        );
+    }
+    //******************************** */
     private changeGroupChatTitleUrl = 'https://login.reddah.com/api/chat/changegroupchattitle'; 
 
     changeGroupChatTitle(formData: FormData): Observable<any> {
@@ -1126,7 +1138,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         }
     }
 
-    getUserPhotos(userName, isTimeline=false){
+    async getUserPhotos(userName, isTimeline=false){
         if(userName==null)
             return;
         try{
@@ -1138,10 +1150,9 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
             let formData = new FormData();
             formData.append("targetUser", userName);
 
-            this.getUserInfo(formData)
+            await this.getUserInfo(formData)
             .subscribe(userInfo => 
             {
-                console.log(userInfo);
                 if(userInfo.Cover!=null)
                     this.toImageCache(userInfo.Cover, `cover_${userName}`);
                 if(userInfo.Photo!=null)
@@ -1648,6 +1659,13 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
 
     makeItId(text){
         return text.replace("/","_");
+    }
+
+    uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
     }
 
 }

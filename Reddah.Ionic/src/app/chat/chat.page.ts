@@ -170,6 +170,21 @@ export class ChatPage extends ChatBase implements OnInit  {
         this.getChat();
     }
 
+    async childLocalComments(event){
+        let newmessage = { 
+            ArticleId: event.id, 
+            Content: event.text, 
+            UserName: this.userName,
+            Type: event.type,
+        }
+        this.messages.push(newmessage);
+        
+        setTimeout(() => {
+            if(this.pageTop.scrollToBottom)
+                this.pageTop.scrollToBottom(0);
+        },200)
+    }
+
     async getMoreHistory(evt){
         let min = Math.min.apply(null,this.messages.map(item=>item["Id"]));
         this.getHistory(-1*min, 20, evt);

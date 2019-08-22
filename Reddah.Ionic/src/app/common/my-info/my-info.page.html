@@ -12,7 +12,7 @@
     </ion-item>
     <ion-item>
         <ion-label class="title">Reddah ID</ion-label>
-        <ion-note slot="end" class="reddahId">{{userName}}</ion-note>
+        <ion-note color="dark" slot="end" class="reddahId">{{userName}}</ion-note>
     </ion-item>
     <ion-item lines="none" (click)="myQrCard()" class="borderItem borderBottom">
         <ion-label class="title">二维码名片</ion-label>
@@ -36,7 +36,13 @@
         <ion-note color="dark" slot="end">{{reddah.appData('usernickname_'+userName)}}</ion-note>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
-    <ion-item class="borderItem" (click)="changeSignature()">
+    <ion-item (click)="changeSex()">
+        <ion-label class="title">性别</ion-label>
+        <ion-icon slot="end" name="ios-male" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
+        <ion-icon slot="end" name="ios-female" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" (click)="changeSignature()">
         <ion-label class="title">个性签名</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>

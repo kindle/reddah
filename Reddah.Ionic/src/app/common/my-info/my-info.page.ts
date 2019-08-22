@@ -7,6 +7,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../../reddah.service';
 import { QrcardPage } from '../qrcard/qrcard.page';
 import { SettingNickNamePage } from '../../settings/setting-nickname/setting-nickname.page'
+import { SettingSexPage } from '../../settings/setting-sex/setting-sex.page'
 import { LocationPage } from '../location/location.page';
 
 @Component({
@@ -100,6 +101,20 @@ export class MyInfoPage implements OnInit {
         if(data){
             this.reddah.saveUserLocation(this.userName, data, data.location.lat, data.location.lng);
         }
+    }
+
+    async changeSex(){
+        const modal = await this.modalController.create({
+            component: SettingSexPage,
+            componentProps: {
+                title: "设置性别",
+                currentSex: this.reddah.appData('usersex_'+this.userName)
+            }
+        });
+        await modal.present();
+        const {data} = await modal.onDidDismiss();
+        if(data||!data)
+            this.reddah.getUserPhotos(this.userName);
     }
 
 }

@@ -1,0 +1,24 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-label>{{title}}</ion-label>
+    <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">完成</ion-button>
+</ion-item>
+<ion-content no-padding style="--background: #eeeeee;">
+    <ion-list>
+        <ion-radio-group allow-empty-selection>
+            <ion-list-header>
+                <ion-label color="dark">为自己设置性别</ion-label>
+            </ion-list-header>
+            <ion-item (click)="setSex(1)">
+                <ion-icon slot="start" name="ios-male" color="secondary"></ion-icon>
+                <ion-label color="secondary">男</ion-label>
+                <ion-radio slot="end" color="secondary" checked="{{currentSex==1}}"></ion-radio>
+            </ion-item>
+            <ion-item (click)="setSex(0)">
+                <ion-icon slot="start" name="ios-female" color="danger"></ion-icon>
+                <ion-label color="danger">女</ion-label>
+                <ion-radio slot="end" color="danger" checked="{{currentSex==0}}"></ion-radio>
+            </ion-item>
+        </ion-radio-group>
+    </ion-list>
+</ion-content>

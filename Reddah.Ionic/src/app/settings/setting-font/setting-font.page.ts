@@ -39,7 +39,7 @@ export class SettingFontPage implements OnInit {
         this.messages = [
             {Content: "预览字体大小", UserName: this.userName, Type:0},
             {Content: "拖动下面的滑块，可设置字体大小", UserName: '', Type:0},
-            {Content: "设置后，会改变聊天、菜单和朋友圈的字体大小。会当凌绝顶，一览众山小。", UserName: '', Type:0},
+            {Content: "设置后，会改变聊天、菜单和时光圈的字体大小。会当凌绝顶，一览众山小。", UserName: '', Type:0},
         ];
     }
     

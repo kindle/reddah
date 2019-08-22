@@ -155,6 +155,11 @@ export class GroupChatPage extends ChatBase implements OnInit {
         this.hasNewMsg = true;
         this.getGroupChat();
     }
+
+    async childLocalComments(event){
+        console.log("$$#")
+        console.log(event)
+    }
     
     async getMoreHistory(evt){
         let min = Math.min.apply(null,this.messages.map(item=>item["Id"]));

@@ -17,7 +17,8 @@ export class SettingPrivacyPage implements OnInit {
 
     requireApproval= true;
     recommendContacts= false;
-    allowStranger=false;
+    allowStranger=true;
+    showLocation=false;
     
     constructor(
         private modalController: ModalController,
@@ -56,9 +57,16 @@ export class SettingPrivacyPage implements OnInit {
 
     }
 
-    //foo
-    async goAbout(){}
+    async changeApproval(){
+        //this.requireApproval
+    }
 
-    
+    async changeStrager(){
+        //this.allowStranger
+    }
+
+    async changeShowLocation(){
+        //this.showLocation
+    }
 
 }

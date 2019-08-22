@@ -98,5 +98,5 @@
     </ion-grid>
 </ion-content>
 <app-chat-box #chatbox [(selectedArticleId)]="chatId" selectedCommentId="-1"
-    (reloadComments)="childReloadComments($event)"></app-chat-box>
+    (reloadComments)="childReloadComments($event)" (localComments)="childLocalComments($event)"></app-chat-box>
 
