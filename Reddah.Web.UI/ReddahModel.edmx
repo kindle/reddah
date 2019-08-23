@@ -46,6 +46,7 @@
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="Abstract" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -150,6 +151,8 @@
           <Property Name="Lat" Type="decimal" Precision="20" Scale="16" />
           <Property Name="Lng" Type="decimal" Precision="20" Scale="16" />
           <Property Name="LastShakeOn" Type="datetime" />
+          <Property Name="PrivacyShowLocation" Type="int" Nullable="false" />
+          <Property Name="PrivacyViewTs" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -287,6 +290,7 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="Abstract" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -391,6 +395,8 @@
           <Property Name="Lat" Type="Decimal" Precision="20" Scale="16" />
           <Property Name="Lng" Type="Decimal" Precision="20" Scale="16" />
           <Property Name="LastShakeOn" Type="DateTime" Precision="3" />
+          <Property Name="PrivacyShowLocation" Type="Int32" Nullable="false" />
+          <Property Name="PrivacyViewTs" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -482,6 +488,7 @@
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="reddahModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="Abstract" ColumnName="Abstract" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -588,6 +595,8 @@
           <EntitySetMapping Name="UserProfiles">
             <EntityTypeMapping TypeName="reddahModel.UserProfile">
               <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="PrivacyViewTs" ColumnName="PrivacyViewTs" />
+                <ScalarProperty Name="PrivacyShowLocation" ColumnName="PrivacyShowLocation" />
                 <ScalarProperty Name="LastShakeOn" ColumnName="LastShakeOn" />
                 <ScalarProperty Name="Lng" ColumnName="Lng" />
                 <ScalarProperty Name="Lat" ColumnName="Lat" />

@@ -905,6 +905,46 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("changesex")]
+        [HttpPost]
+        public IHttpActionResult ChangeSex()
+        {
+            UserInfo userInfo = new UserInfo();
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int userSex = js.Deserialize<int>(HttpContext.Current.Request["UserSex"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+
+                    var target = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+
+                    if (target != null)
+                    {
+                        target.Sex = userSex;
+                        db.SaveChanges();
+                    }
+
+                    return Ok(new ApiResult(0, "success"));
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
         [Route("addfriend")]
         [HttpPost]
         public IHttpActionResult AddFriend()

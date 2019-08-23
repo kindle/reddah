@@ -504,59 +504,60 @@ namespace Reddah.Web.Login.Controllers
                     {
                         var org = target.GroupName.Split(',');
                         
-                        if (org.Length != userNames.Length)
+                        //check delete
+                        var content = "\"{0}\"把\"{1}\"移出了群聊";
+                        var newlist = userNames.ToList();
+                        foreach (var item in org.ToList())
                         {
-                            if (org.Length > userNames.Length)//delete
+                            if (!newlist.Contains(item))
                             {
-                                var delUserNames = getDiffUserNames(org, userNames);
-
-                                var content = "\"{0}\"把\"{1}\"移出了群聊";
-
-                                foreach (var item in delUserNames)
+                                var msg = string.Format(content, jwtResult.JwtUser.User, item);
+                                db.Comment.Add(new Comment()
                                 {
-                                    var msg = string.Format(content, jwtResult.JwtUser.User, item);
-                                    db.Comment.Add(new Comment()
-                                    {
-                                        ArticleId = target.Id,
-                                        ParentId = -1,
-                                        Content = HttpUtility.HtmlEncode(msg),
-                                        CreatedOn = DateTime.UtcNow,
-                                        UserName = jwtResult.JwtUser.User,
-                                        Type=1000//system
-                                    });
+                                    ArticleId = target.Id,
+                                    ParentId = -1,
+                                    Content = HttpUtility.HtmlEncode(msg),
+                                    CreatedOn = DateTime.UtcNow,
+                                    UserName = jwtResult.JwtUser.User,
+                                    Type = 1000//system
+                                });
 
-                                    target.LastUpdateBy = jwtResult.JwtUser.User;
-                                    target.LastUpdateOn = DateTime.UtcNow;
-                                    target.LastUpdateContent = HttpUtility.HtmlEncode(msg);
-                                    target.LastUpdateType = 0;
-                                }
-                            }
-                            else//add
-                            {
-                                var addUserNames = getDiffUserNames(userNames, org);
-                                var content = "\"{0}\"邀请\"{1}\"加入了群聊";
-                                foreach (var item in addUserNames)
-                                {
-                                    var msg = string.Format(content, jwtResult.JwtUser.User, item);
-                                    db.Comment.Add(new Comment()
-                                    {
-                                        ArticleId = target.Id,
-                                        ParentId = -1,
-                                        Content = HttpUtility.HtmlEncode(msg),
-                                        CreatedOn = DateTime.UtcNow,
-                                        UserName = jwtResult.JwtUser.User,
-                                        Type = 1000//system
-                                    });
-
-                                    target.LastUpdateBy = jwtResult.JwtUser.User;
-                                    target.LastUpdateOn = DateTime.UtcNow;
-                                    target.LastUpdateContent = HttpUtility.HtmlEncode(msg);
-                                    target.LastUpdateType = 0;
-                                }
+                                target.LastUpdateBy = jwtResult.JwtUser.User;
+                                target.LastUpdateOn = DateTime.UtcNow;
+                                target.LastUpdateContent = HttpUtility.HtmlEncode(msg);
+                                target.LastUpdateType = 0;
                             }
                         }
+                           
 
-                        target.GroupName = string.Join(",", userNames.Select(x=>x!=""));
+                        //check add
+                        content = "\"{0}\"邀请\"{1}\"加入了群聊";
+                        var orglist = org.ToList();
+                        foreach (var item in userNames.ToList())
+                        {
+                            if (!orglist.Contains(item))
+                            {
+                                var msg = string.Format(content, jwtResult.JwtUser.User, item);
+                                db.Comment.Add(new Comment()
+                                {
+                                    ArticleId = target.Id,
+                                    ParentId = -1,
+                                    Content = HttpUtility.HtmlEncode(msg),
+                                    CreatedOn = DateTime.UtcNow,
+                                    UserName = jwtResult.JwtUser.User,
+                                    Type = 1000//system
+                                });
+
+                                target.LastUpdateBy = jwtResult.JwtUser.User;
+                                target.LastUpdateOn = DateTime.UtcNow;
+                                target.LastUpdateContent = HttpUtility.HtmlEncode(msg);
+                                target.LastUpdateType = 0;
+                            }
+                                    
+                        }
+                            
+
+                        target.GroupName = string.Join(",", userNames.Where(x => !string.IsNullOrEmpty(x)).ToArray());
 
                         db.SaveChanges();
                     }
@@ -572,28 +573,6 @@ namespace Reddah.Web.Login.Controllers
                 return Ok(new ApiResult(4, ex.Message));
             }
 
-        }
-
-        private List<string> getDiffUserNames(string[] more, string[] less)
-        {
-            var m = more.ToList();
-            var l = less.ToList();
-            
-            foreach(var item in l)
-            {
-                if (m.Contains(item))
-                {
-                    m.Remove(item);
-                }
-            }
-
-            foreach(var i in m)
-            {
-                if (i == "" || i == null)
-                    m.Remove(i);
-            }
-
-            return m;
         }
 
         [Route("changegroupchattitle")]

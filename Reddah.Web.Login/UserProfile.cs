@@ -32,5 +32,7 @@ namespace Reddah.Web.Login
         public Nullable<decimal> Lat { get; set; }
         public Nullable<decimal> Lng { get; set; }
         public Nullable<System.DateTime> LastShakeOn { get; set; }
+        public int PrivacyShowLocation { get; set; }
+        public int PrivacyViewTs { get; set; }
     }
 }

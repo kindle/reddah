@@ -104,11 +104,19 @@ export class MyInfoPage implements OnInit {
     }
 
     async changeSex(){
+        let currentValue = this.reddah.appData('usersex_'+this.userName);
+        if(currentValue instanceof Number)
+        {}    
+        else
+        {
+            currentValue = 1;
+        }
+
         const modal = await this.modalController.create({
             component: SettingSexPage,
             componentProps: {
                 title: "设置性别",
-                currentSex: this.reddah.appData('usersex_'+this.userName)
+                currentSex: currentValue
             }
         });
         await modal.present();

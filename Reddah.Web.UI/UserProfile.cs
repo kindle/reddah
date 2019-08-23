@@ -54,6 +54,10 @@ public partial class UserProfile
 
     public Nullable<System.DateTime> LastShakeOn { get; set; }
 
+    public int PrivacyShowLocation { get; set; }
+
+    public int PrivacyViewTs { get; set; }
+
 }
 
 }

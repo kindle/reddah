@@ -42,6 +42,8 @@ public partial class Comment
 
     public int Duration { get; set; }
 
+    public string Abstract { get; set; }
+
 }
 
 }

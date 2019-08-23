@@ -151,6 +151,8 @@
           <Property Name="Lat" Type="decimal" Precision="20" Scale="16" />
           <Property Name="Lng" Type="decimal" Precision="20" Scale="16" />
           <Property Name="LastShakeOn" Type="datetime" />
+          <Property Name="PrivacyShowLocation" Type="int" Nullable="false" />
+          <Property Name="PrivacyViewTs" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -396,6 +398,8 @@
           <Property Name="Lat" Type="Decimal" Precision="20" Scale="16" />
           <Property Name="Lng" Type="Decimal" Precision="20" Scale="16" />
           <Property Name="LastShakeOn" Type="DateTime" Precision="3" />
+          <Property Name="PrivacyShowLocation" Type="Int32" Nullable="false" />
+          <Property Name="PrivacyViewTs" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -594,6 +598,8 @@
           <EntitySetMapping Name="UserProfile">
             <EntityTypeMapping TypeName="reddahModel.UserProfile">
               <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="PrivacyViewTs" ColumnName="PrivacyViewTs" />
+                <ScalarProperty Name="PrivacyShowLocation" ColumnName="PrivacyShowLocation" />
                 <ScalarProperty Name="LastShakeOn" ColumnName="LastShakeOn" />
                 <ScalarProperty Name="Lng" ColumnName="Lng" />
                 <ScalarProperty Name="Lat" ColumnName="Lat" />
