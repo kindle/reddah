@@ -28,7 +28,8 @@
                 </div>
                 <div class="parent" *ngIf="article.Content.split('$$$').length==3||article.Content.split('$$$').length==5||article.Content.split('$$$').length==6">
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                        <img [id]="reddah.makeItId(image)" (load)="reddah.adjustImage($event, image)" 
+                        <img [id]="reddah.makeItId(image+'tsv')" 
+                            (load)="reddah.adjustImage($event, image+'tsv')" 
                             [defaultImage]="'assets/icon/noimage.jpg'" 
                             [lazyLoad]="reddah.level2Cache(image)" 
                             [useSrcset]="true" class="picture" (click)="viewer(i, article.Content.split('$$$'))">
@@ -36,7 +37,8 @@
                 </div>
                 <div class="parent2" *ngIf="article.Content.split('$$$').length==2||article.Content.split('$$$').length==4">
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                        <img [id]="reddah.makeItId(image)" (load)="reddah.adjustImage($event, image)" 
+                        <img [id]="reddah.makeItId(image+'tsv')" 
+                            (load)="reddah.adjustImage($event, image+'tsv')" 
                             [defaultImage]="'assets/icon/noimage.jpg'" 
                             [lazyLoad]="reddah.level2Cache(image)" 
                             [useSrcset]="true" class="picture" (click)="viewer(i, article.Content.split('$$$'))">

@@ -20,6 +20,7 @@ namespace Reddah.Web.Login
         public int ArticleId { get; set; }
         public int ParentId { get; set; }
         public string Content { get; set; }
+        public string Uid { get; set; }
     }
 
     public class NewTimeline : BaseModel

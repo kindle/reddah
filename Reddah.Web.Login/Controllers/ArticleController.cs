@@ -79,9 +79,10 @@ namespace Reddah.Web.Login.Controllers
                     {
                         ArticleId = data.ArticleId,
                         ParentId = data.ParentId,
-                        Content = System.Web.HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(data.Content))),
+                        Content = HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(data.Content))),
                         CreatedOn = DateTime.UtcNow,
-                        UserName = jwtResult.JwtUser.User
+                        UserName = jwtResult.JwtUser.User,
+                        Uid = data.Uid
                     });
 
 
@@ -232,7 +233,7 @@ namespace Reddah.Web.Login.Controllers
                         //add timeline article
                         db.Article.Add(new Article()
                         {
-                            Title = thoughts,
+                            Title = HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(thoughts.Replace("\n", "<br>")))),
                             Content = shareImageUrl!=null?shareImageUrl:string.Join("$$$", articleContentList),
                             CreatedOn = DateTime.UtcNow,
                             Count = 0,

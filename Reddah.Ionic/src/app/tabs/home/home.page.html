@@ -58,7 +58,8 @@
                 <div class="listImage">
                     <div class="listImageWrapper">
                         <img class="BrowsePreviewImageOne" onerror="this.style.display='none'" 
-                        [id]="reddah.makeItId(article.ImageUrls[0])" (load)="reddah.adjustImage($event, article.ImageUrls[0])"
+                        [id]="reddah.makeItId(article.ImageUrls[0]+'home')" 
+                        (load)="reddah.adjustImage($event, article.ImageUrls[0]+'home')"
                         [defaultImage]="'assets/icon/noimage.jpg'" 
                         [lazyLoad]="article.ImageUrls[0]" 
                         [useSrcset]="true">

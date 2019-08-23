@@ -27,5 +27,6 @@ namespace Reddah.Web.Login
         public int Type { get; set; }
         public int Duration { get; set; }
         public string Abstract { get; set; }
+        public string Uid { get; set; }
     }
 }

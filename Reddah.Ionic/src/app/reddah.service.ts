@@ -1268,23 +1268,30 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         let hourC =diffValue/hour;
         let minC =diffValue/minute;
         let secC =diffValue/second;
+
+        let split = " ";
+        
+        let doubleByteLocale = ["zh-CN","zh-TW","ja-JP","ko-KR"]
+        if(doubleByteLocale.includes(this.getCurrentLocale()))
+            split="";
+
         if(yearC>=1){
-            result=parseInt(yearC+"") + "" +this.translate.instant("Time.YearsAgo");
+            result=parseInt(yearC+"") + split +this.translate.instant("Time.YearsAgo");
         }
         else if(monthC>=1){
-            result=parseInt(monthC+"") + "" + this.translate.instant("Time.MonthsAgo");
+            result=parseInt(monthC+"") + split + this.translate.instant("Time.MonthsAgo");
         }
         else if(weekC>=1){
-            result=parseInt(weekC+"") + "" + this.translate.instant("Time.WeeksAgo");
+            result=parseInt(weekC+"") + split + this.translate.instant("Time.WeeksAgo");
         }
         else if(dayC>=1){
             result=(parseInt(dayC+"")==1?this.translate.instant("Time.Yesterday"):parseInt(dayC+"") + "" +this.translate.instant("Time.DaysAgo"));
         }
         else if(hourC>=1){
-            result=parseInt(hourC+"") + "" +this.translate.instant("Time.HoursAgo");
+            result=parseInt(hourC+"") + split +this.translate.instant("Time.HoursAgo");
         }
         else if(minC>=1){
-            result=parseInt(minC+"") + "" +this.translate.instant("Time.MinutesAgo");
+            result=parseInt(minC+"") + split +this.translate.instant("Time.MinutesAgo");
         }
         else if(secC>=1){
             result=this.translate.instant("Time.JustNow");

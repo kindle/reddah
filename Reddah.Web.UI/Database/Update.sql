@@ -126,6 +126,9 @@ alter table userprofile add
   [PrivacyShowLocation] int NOT NULL default 0,
   [PrivacyViewTs] int NOT NULL default 1
 
+alter table comment add
+  [Uid] NVARCHAR(MAX) NULL
+
 --remove column
 --alter table userprofile drop constraint DF__UserProfi__Priva__336AA144
 --alter table userprofile drop column privacystragerview

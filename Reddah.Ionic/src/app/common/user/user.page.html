@@ -42,7 +42,8 @@
     <ion-item lines="none" class="borderTop borderBottom" (click)="viewTimeline()" *ngIf="imageList&&imageList.length>0">
         <span class="itemTitle" style="line-height: 90px;">时光圈</span>
         <ion-thumbnail *ngFor="let image of imageList" style="padding: 5px;">
-            <img [id]="reddah.makeItId(image)" (load)="reddah.adjustImage($event, image)"
+            <img [id]="reddah.makeItId(image+'usr')" 
+                (load)="reddah.adjustImage($event, image+'usr')"
                 [defaultImage]="'assets/icon/noimage.jpg'" 
                 [lazyLoad]="image" 
                 [useSrcset]="true">
