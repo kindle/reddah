@@ -17,16 +17,18 @@ export class QueryCommentModel {
 }
 
 export class NewCommentModel {
-    constructor(jwt: string, articleId: number, parentId: number, content: string){
+    constructor(jwt: string, articleId: number, parentId: number, content: string, uid: string){
         this.Jwt = jwt;
         this.ArticleId = articleId;
         this.ParentId = parentId;
         this.Content = content;
+        this.Uid = uid;
     }
     public Jwt: string;
     public ArticleId: number;
     public ParentId: number;
     public Content: string;
+    public Uid: string;
 }
 
 export class NewTimelineModel {

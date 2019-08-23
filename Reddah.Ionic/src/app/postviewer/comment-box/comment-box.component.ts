@@ -98,8 +98,8 @@ export class CommentBoxComponent implements OnInit {
     submitClicked = false;
     async submit() {
         this.submitClicked = true;
-        
-        this.reddah.addComments(this.selectedArticleId, this.selectedCommentId, this.newComment.value)
+        let uid = this.reddah.uuidv4();
+        this.reddah.addComments(this.selectedArticleId, this.selectedCommentId, this.newComment.value, uid)
         .subscribe(result => 
         {
             if(result.Success==0)

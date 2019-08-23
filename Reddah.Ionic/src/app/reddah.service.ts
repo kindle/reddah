@@ -86,8 +86,8 @@ export class ReddahService {
     //******************************** */
     private addCommentsUrl = 'https://login.reddah.com/api/article/addcomments'; 
 
-    addComments(articleId: number, parentId: number, content: string): Observable<any> {
-        return this.http.post<any>(this.addCommentsUrl, new NewCommentModel(this.getCurrentJwt(), articleId, parentId, content))
+    addComments(articleId: number, parentId: number, content: string, uid : string): Observable<any> {
+        return this.http.post<any>(this.addCommentsUrl, new NewCommentModel(this.getCurrentJwt(), articleId, parentId, content, uid))
         .pipe(
             tap(data => this.log('add comment')),
             catchError(this.handleError('add comment', []))
@@ -1654,11 +1654,13 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         img = this.makeItId(img);
         let image = document.getElementById(img);
         if(image.offsetHeight<image.offsetWidth)
+        {
             image.style.height = "100%";
+        }
     }
 
     makeItId(text){
-        return text.replace("/","_");
+        return text.replace(/\//g,'_');;
     }
 
     uuidv4() {

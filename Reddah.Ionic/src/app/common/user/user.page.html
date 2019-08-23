@@ -27,7 +27,7 @@
         <ion-label>设置备注和标签</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
-    <ion-item lines="none">
+    <ion-item>
         <span class="itemTitle">个性签名</span>
         <ion-label text-wrap>{{reddah.appData('usersignature_'+userName)}}</ion-label>
     </ion-item>
@@ -50,6 +50,8 @@
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
 
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
     <ion-item class="borderTop borderBottom" lines="none" (click)="goMore()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
         <span class="itemTitle">更多信息</span>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
@@ -69,7 +71,7 @@
             <ion-note color="dark" class="cmd-title">音视频通话</ion-note>
         </div>
     </ion-item>-->
-    <ion-item  class="borderTop borderBottom" (click)="addFriend()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0&&userName!=reddah.getCurrentUser()">
+    <ion-item lines="none" class="borderTop borderBottom" (click)="addFriend()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0&&userName!=reddah.getCurrentUser()">
         <div class="centerItem">
             <ion-note color="dark" class="cmd-title">添加为好友</ion-note>
         </div>

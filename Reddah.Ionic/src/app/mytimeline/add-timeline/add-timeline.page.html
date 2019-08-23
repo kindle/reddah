@@ -8,7 +8,11 @@
     </ion-item>
     <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="postType<3">
         <div class="imgSqure" *ngFor="let image of photos;index as i">
-            <img [src]="image.webUrl" (click)="viewer(i, photos)">
+            <img [id]="reddah.makeItId(image.webUrl)" (load)="reddah.adjustImage($event, image.webUrl)"
+            [defaultImage]="'assets/icon/noimage.jpg'" 
+            [lazyLoad]="image.webUrl" 
+            [useSrcset]="true"
+            (click)="viewer(i, photos)">
         </div>
         <div class="imgSqure addImg" (click)="addNewPhoto($event)" *ngIf="photos.length<9">
           <ion-icon name="add" size="large" color="medium"></ion-icon>
@@ -29,6 +33,7 @@
       <ion-note color="{{location?'primary':'dark'}}">{{location?location.title:'所在位置'}}</ion-note>
       <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
     </ion-item>
+<!--
     <ion-item>
       <ion-icon name="person" slot="start"></ion-icon>
       <ion-label>谁可以看</ion-label>
@@ -39,8 +44,9 @@
       <ion-label>提醒谁看</ion-label>
       <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
     </ion-item>
+-->
 </ion-content>
-<ion-footer *ngIf="dragging" style="background-color: red;color: white;">
+<ion-footer *ngIf="dragging" style="--background:red;background-color: red;color: white;">
     <ion-row id="delete-photo" class="delete-area" align-items-center justify-content-center dragula="bag" [(dragulaModel)]="photos_trash">
         <ion-icon name="ios-trash" color="tertiary" size="medium"></ion-icon>
         <ion-text *ngIf="dragToDel" color="white">松手即可删除</ion-text>

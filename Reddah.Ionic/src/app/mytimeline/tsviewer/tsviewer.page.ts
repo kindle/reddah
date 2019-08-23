@@ -208,7 +208,8 @@ export class TsViewerPage implements OnInit {
         temp.Comments.push({'Id': 0, 'ArticleId': this.selectedArticleId, 'ParentId': this.selectedCommentId, 
             'Content': this.newComment.value, 'UserName': this.reddah.getCurrentUser()});
         
-        this.reddah.addComments(this.selectedArticleId, this.selectedCommentId, this.newComment.value)
+        let uid = this.reddah.uuidv4();
+        this.reddah.addComments(this.selectedArticleId, this.selectedCommentId, this.newComment.value, uid)
         .subscribe(data=>{
             this.newComment.value = "";
             let cacheKey1 = "this.reddah.getTimelineComments" + this.selectedArticleId;

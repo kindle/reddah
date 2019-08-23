@@ -52,7 +52,9 @@
                         <ion-thumbnail slot="start">
                             <div class="tsparent4" *ngIf="article.Content.split('$$$').length>=4">
                                 <div class="tscontainer" *ngFor="let image of article.Content.split('$$$').slice(0,4);index as i">
-                                    <img [defaultImage]="'assets/icon/noimage.jpg'" 
+                                    <img [id]="reddah.makeItId(reddah.level2Cache(image))" 
+                                        (load)="reddah.adjustImage($event, reddah.level2Cache(image))"
+                                        [defaultImage]="'assets/icon/noimage.jpg'" 
                                         [lazyLoad]="reddah.level2Cache(image)" 
                                         [useSrcset]="true" class="tspicture">
                                 </div>
@@ -64,12 +66,17 @@
                                         [useSrcset]="true" class="tspicture3">
                                 </div>
                                 <div class="tscontainer">
-                                    <img [defaultImage]="'assets/icon/noimage.jpg'" 
+                                    <img 
+                                        [id]="reddah.makeItId(reddah.level2Cache(article.Content.split('$$$')[1]))" 
+                                        (load)="reddah.adjustImage($event, reddah.level2Cache(article.Content.split('$$$')[1]))"
+                                        [defaultImage]="'assets/icon/noimage.jpg'" 
                                         [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[1])" 
                                         [useSrcset]="true" class="tspicture3">
                                 </div>
                                 <div class="tscontainer">
-                                    <img [defaultImage]="'assets/icon/noimage.jpg'" 
+                                    <img [id]="reddah.makeItId(reddah.level2Cache(article.Content.split('$$$')[2]))" 
+                                        (load)="reddah.adjustImage($event, reddah.level2Cache(article.Content.split('$$$')[2]))"
+                                        [defaultImage]="'assets/icon/noimage.jpg'" 
                                         [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[2])" 
                                         [useSrcset]="true" class="tspicture3">
                                 </div>
