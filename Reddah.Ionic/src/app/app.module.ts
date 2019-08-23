@@ -39,7 +39,8 @@ import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoadedImageProps } from 'ng-lazyload-image';
-
+import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { Network } from '@ionic-native/network/ngx';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -302,6 +303,8 @@ var firebaseConfig = {
         AuthService,
         AndroidPermissions,
         Camera,
+        Keyboard,
+        Network,
         Shake,
         Crop,
         InAppBrowser,
