@@ -23,8 +23,8 @@
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop borderBottom" lines="none" (click)="changeLocation()">
-        <ion-icon slot="start" name="pin" color="{{reddah.appData('userlocation_'+userName)?'primary':'dark'}}"></ion-icon>
         <ion-note slot="start" color="dark">位置</ion-note>
+        <ion-icon slot="start" name="pin" color="{{reddah.appData('userlocation_'+userName)?'primary':'dark'}}"></ion-icon>
         <ion-label slot="start" *ngIf="reddah.appData('userlocation_'+userName)">{{reddah.appData('userlocation_'+userName)}}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>

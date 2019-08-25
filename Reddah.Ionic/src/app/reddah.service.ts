@@ -243,6 +243,18 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private changePrivacyUrl = 'https://login.reddah.com/api/article/changeprivacy'; 
+
+    changePrivacy(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.changePrivacyUrl, formData)
+        .pipe(
+            tap(data => this.log('change privacy')),
+            catchError(this.handleError('change privacy', []))
+        );
+    }
+    //******************************** */
     private changeLocationUrl = 'https://login.reddah.com/api/article/changelocation'; 
 
     changeLocation(formData: FormData): Observable<any> {
@@ -945,13 +957,6 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
 
     QrUserKey = 'https://reddah.com/apk/reddah.apk?username=';
     
-    emojis = [
-        ['😀','😃','😄','😁','😆','😅'],
-        ['❤️','⚽️','🏀','🍎','🍉','☕️'],
-        ['🌈','☀️','🌧','🐶','🐱','🐷'],
-        ['😎','😱','😴','👍','👎','💪'],
-        ['🙏','😜','😡','😍','👻','💩']
-    ];
 
     //appPhoto = {};
     appCacheToOrg = {};
@@ -1117,7 +1122,7 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     } 
 
     toTextCache(text, cacheKey){
-        if(text){
+        if(text!=null){
             let cachedText = this.localStorageService.retrieve(cacheKey);
             
             if(cachedText!=text){
@@ -1177,6 +1182,17 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
                     this.toTextCache(userInfo.NoteName, `usernotename_${userName}_${this.getCurrentUser()}`);
                 if(userInfo.UserName!=this.getCurrentUser()){
                     this.toTextCache(userInfo.IsFriend?1:0, `userisfriend_${userName}_${this.getCurrentUser()}`);
+                }
+                if(userInfo.HideLocation!=null){
+                    //alert(userInfo.HideLocation);
+                    this.toTextCache(userInfo.HideLocation?1:0, `userhidelocation_${userName}`);
+                    //alert(this.appData(`userhidelocation_${userName}`));
+                }
+                if(userInfo.AllowTenTimeline!=null)
+                {
+                    //alert(userInfo.AllowTenTimeline);
+                    this.toTextCache(userInfo.AllowTenTimeline?1:0, `userallowtentimeline_${userName}`);
+                    //alert(this.appData(`userallowtentimeline_${userName}`));
                 }
             
             });
@@ -1660,9 +1676,15 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     async adjustImage(evt, img){
         img = this.makeItId(img);
         let image = document.getElementById(img);
+        console.log(img)
+        console.log(evt)
+        console.log(image.offsetHeight+"_"+image.offsetWidth)
         if(image.offsetHeight<image.offsetWidth)
         {
             image.style.height = "100%";
+        }
+        else{
+            image.style.height = "";
         }
     }
 

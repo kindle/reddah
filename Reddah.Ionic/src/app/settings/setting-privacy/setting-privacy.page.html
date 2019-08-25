@@ -4,9 +4,9 @@
 </ion-item>
 <ion-content no-padding style="--background: #eeeeee;">
   
-    <ion-item lines="none" class="borderTop borderBottom" (click)="changeShowLocation()">
+    <ion-item lines="none" class="borderTop borderBottom">
         <ion-label>不显示我的位置信息</ion-label>
-        <ion-toggle [(ngModel)]="showLocation" color="success" slot="end"></ion-toggle>
+        <ion-toggle [(ngModel)]="showLocation" color="success" slot="end" (ionChange)="changeShowLocation()"></ion-toggle>
     </ion-item>
 <!--  
     <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="changeApproval()">
@@ -41,9 +41,9 @@
     </ion-item>
 -->
     
-    <ion-item class="borderTop borderItem" (click)="changeStrager()">
+    <ion-item class="borderTop borderItem">
         <ion-label>允许陌生人查看十条时光圈</ion-label>
-        <ion-toggle [(ngModel)]="allowStranger" color="success" slot="end"></ion-toggle>
+        <ion-toggle [(ngModel)]="allowTenTimeline" color="success" slot="end" (ionChange)="changeAllowTenTimeline()"></ion-toggle>
     </ion-item>
 
 <!--

@@ -17,7 +17,7 @@ export class SettingPrivacyPage implements OnInit {
 
     requireApproval= true;
     recommendContacts= false;
-    allowStranger=true;
+    allowTenTimeline=true;
     showLocation=false;
     
     constructor(
@@ -34,6 +34,8 @@ export class SettingPrivacyPage implements OnInit {
 
 
     ngOnInit() {
+        this.showLocation = this.reddah.appData('userhidelocation_'+this.userName);
+        this.allowTenTimeline = this.reddah.appData('userallowtentimeline_'+this.userName);
     }
     
     async close() {
@@ -61,12 +63,20 @@ export class SettingPrivacyPage implements OnInit {
         //this.requireApproval
     }
 
-    async changeStrager(){
-        //this.allowStranger
+    async changeAllowTenTimeline(){
+        this.changePrivacy("timeline", this.allowTenTimeline);
     }
 
     async changeShowLocation(){
-        //this.showLocation
+        this.changePrivacy("location", this.showLocation);
+    }
+
+    private changePrivacy(type, value){
+        let formData = new FormData();
+        formData.append('targetType', type);
+        formData.append('targetValue', value?"True":"False");
+        this.reddah.changePrivacy(formData).subscribe(data=>{
+        });
     }
 
 }

@@ -125,6 +125,7 @@ import { SettingSignaturePage } from './settings/setting-signature/setting-signa
 import { SettingSexPage } from './settings/setting-sex/setting-sex.page'
 import { SettingFontPage } from './settings/setting-font/setting-font.page';
 import { ShareArticleComponent } from './common/share-article/share-article.component';
+import { ShareFaceComponent } from './common/share-face/share-face.component';
 import { CategoryPage } from './tabs/publisher/category/category.page';
 import { RegisterSubPage } from './tabs/publisher/register-sub/register-sub.page';
 import { ManagePage } from './tabs/publisher/manage/manage.page';
@@ -152,7 +153,7 @@ var firebaseConfig = {
 
 @NgModule({
     declarations: [
-        ShareArticleComponent,ShareArticleChatComponent,
+        ShareArticleComponent,ShareArticleChatComponent,ShareFaceComponent,
         AppComponent,
         BookmarkPage,
         BookmarkPopPage,

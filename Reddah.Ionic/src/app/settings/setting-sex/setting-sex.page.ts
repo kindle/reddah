@@ -30,7 +30,9 @@ export class SettingSexPage implements OnInit {
 
     userName: string;
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.currentSex = this.reddah.appData('usersex_'+this.userName);
+    }
     
     async close() {
         await this.modalController.dismiss();

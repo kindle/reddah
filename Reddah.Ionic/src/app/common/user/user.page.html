@@ -7,7 +7,7 @@
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
     </ion-refresher>
-    <ion-item lines="none">
+    <ion-item lines="none" class="borderTop borderBottom">
         <ion-thumbnail class="userPhoto">
             <img src="{{reddah.appData('userphoto_'+userName)}}" (click)="viewer(reddah.appData('userphoto_'+userName))" class="portrait">
         </ion-thumbnail>
@@ -23,23 +23,30 @@
 
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
-    <ion-item class="borderTop" (click)="changeNoteName()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
+    <ion-item class="borderTop" (click)="changeNoteName()" *ngIf="isFriend">
         <ion-label>设置备注和标签</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
-    <ion-item>
+    <ion-item lines="none" [class.borderTop]="!isFriend" class="borderBottom">
         <span class="itemTitle">个性签名</span>
         <ion-label text-wrap>{{reddah.appData('usersignature_'+userName)}}</ion-label>
     </ion-item>
-    <ion-item lines="none" class="borderBottom" (click)="goLocation()" *ngIf="reddah.appData('userlocation_'+userName)">
-        <ion-icon name="pin" color="primary" style="margin-right:5px;"></ion-icon>
+
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;" *ngIf="reddah.appData('userlocation_'+userName)&&
+        reddah.appData('userhidelocation_'+userName)==0">
+    </ion-item>
+    <ion-item lines="none" class="borderTop borderBottom" (click)="goLocation()" *ngIf="reddah.appData('userlocation_'+userName)&&
+        reddah.appData('userhidelocation_'+userName)==0">
         <span class="itemTitle">位置</span>
+        <ion-icon name="pin" color="primary" style="margin-right:5px;"></ion-icon>
         <ion-label>{{reddah.appData('userlocation_'+userName)}}</ion-label>
     </ion-item>
     
-    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;" 
+        *ngIf="imageList&&imageList.length>0&&reddah.appData('userallowtentimeline_'+this.userName)==1">
     </ion-item>
-    <ion-item lines="none" class="borderTop borderBottom" (click)="viewTimeline()" *ngIf="imageList&&imageList.length>0">
+    <ion-item lines="none" class="borderTop borderBottom" (click)="viewTimeline()" 
+        *ngIf="imageList&&imageList.length>0&&reddah.appData('userallowtentimeline_'+this.userName)==1">
         <span class="itemTitle" style="line-height: 90px;">时光圈</span>
         <ion-thumbnail *ngFor="let image of imageList" style="padding: 5px;">
             <img [id]="reddah.makeItId(image+'usr')" 
@@ -50,17 +57,24 @@
         </ion-thumbnail>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
-
-    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;" 
+        *ngIf="reddah.appData('userallowtentimeline_'+this.userName)!=1">
     </ion-item>
-    <ion-item class="borderTop borderBottom" lines="none" (click)="goMore()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
+    <ion-item lines="none" class="borderTop borderBottom" (click)="viewTimeline()" 
+        *ngIf="reddah.appData('userallowtentimeline_'+this.userName)!=1">
+        <span class="itemTitle" style="line-height: 90px;">时光圈</span>
+    </ion-item>
+
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;" *ngIf="isFriend">
+    </ion-item>
+    <ion-item class="borderTop borderBottom" lines="none" (click)="goMore()" *ngIf="isFriend">
         <span class="itemTitle">更多信息</span>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
     
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
-    <ion-item class="borderTop" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1" (click)="chat()">
+    <ion-item class="borderTop borderBottom" *ngIf="isFriend" (click)="chat()">
         <div class="centerItem">
             <ion-icon name="chatboxes"></ion-icon>
             <ion-note color="dark" class="cmd-title">发消息</ion-note>
@@ -72,7 +86,7 @@
             <ion-note color="dark" class="cmd-title">音视频通话</ion-note>
         </div>
     </ion-item>-->
-    <ion-item lines="none" class="borderTop borderBottom" (click)="addFriend()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0&&userName!=reddah.getCurrentUser()">
+    <ion-item lines="none" class="borderTop borderBottom" (click)="addFriend()" *ngIf="!isFriend&&userName!=reddah.getCurrentUser()">
         <div class="centerItem">
             <ion-note color="dark" class="cmd-title">添加为好友</ion-note>
         </div>

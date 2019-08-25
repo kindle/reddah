@@ -20,7 +20,7 @@ export class AddCommentPage implements OnInit {
 
     constructor(
         private modalController: ModalController,
-        public reddahService: ReddahService,
+        public reddah: ReddahService,
         private localStorageService: LocalStorageService,
     ) { }
 
@@ -30,20 +30,21 @@ export class AddCommentPage implements OnInit {
 
     @ViewChild('newComment') newComment;
 
+
     showFacePanel = false;
     toggleFacePanel(){
         this.showFacePanel= !this.showFacePanel;
     }
-
-    handleSelection(face) {
+    faceSelection(face) {
         this.newComment.value += face;
     }
+
 
     async submit() {
         this.submitClicked = true;
         //alert(`write some...aid:${this.articleId},cid:${this.commentId},content:${this.commentContent}`);
-        let uid = this.reddahService.uuidv4();
-        this.reddahService.addComments(this.articleId, this.commentId, this.commentContent, uid)
+        let uid = this.reddah.uuidv4();
+        this.reddah.addComments(this.articleId, this.commentId, this.commentContent, uid)
         .subscribe(result => 
             {
                 if(result.Success==0)

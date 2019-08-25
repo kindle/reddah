@@ -87,6 +87,7 @@ export class ChatBoxComponent implements OnInit {
         
     }
 
+
     showFacePanel = false;
     toggleFacePanel(){
         this.showFunctionPanel = false;
@@ -95,10 +96,10 @@ export class ChatBoxComponent implements OnInit {
             this.showSpeakBox = false;
         }
     }
-
     faceSelection(face) {
         this.newChatComment.value += face;
     }
+
 
     showFunctionPanel = false;
     toggleFunctionPanel(){

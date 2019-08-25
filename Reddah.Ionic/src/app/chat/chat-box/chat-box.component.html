@@ -12,13 +12,7 @@
         <ion-icon slot="end" name="add-circle-outline" size="medium" (click)="toggleFunctionPanel()" *ngIf="!commentContent"></ion-icon>
         <ion-button slot="end" (click)="submit()" color="primary" *ngIf="commentContent">发送</ion-button>
     </ion-item>
-    <ion-grid *ngIf="showFacePanel" class="optionPanel">
-        <ion-row *ngFor="let row of reddah.emojis">
-            <ion-col *ngFor="let col of row" text-center>
-                <span (click)="faceSelection(col)" style="font-size:28px;width: 80px;height: 80px;">{{col}}</span>
-            </ion-col>
-        </ion-row> 
-    </ion-grid>
+    <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
     <ion-slides [options]="slideOpts" [pager]="true" *ngIf="showFunctionPanel" class="optionPanel">
         <ion-slide *ngFor="let chatFunctions of chatFunctionGroups">
             <div class="funGrid">

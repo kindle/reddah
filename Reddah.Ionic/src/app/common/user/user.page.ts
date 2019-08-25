@@ -43,10 +43,13 @@ export class UserPage implements OnInit {
         private alertController: AlertController,
     ){}
 
+    isFriend = false;
+    
     ngOnInit(){
         this.currentUserName = this.reddah.getCurrentUser();
         this.reddah.getUserPhotos(this.userName);
         this.getTimeline();
+        this.isFriend = this.reddah.appData('userisfriend_'+this.userName+'_'+this.reddah.getCurrentUser())==1;
     }
 
     imageList = [];

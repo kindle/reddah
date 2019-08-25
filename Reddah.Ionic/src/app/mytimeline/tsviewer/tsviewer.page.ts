@@ -182,10 +182,15 @@ export class TsViewerPage implements OnInit {
         return await modal.present();
     }
   
+    
     showFacePanel = false;
     toggleFacePanel(){
       this.showFacePanel= !this.showFacePanel;
     }
+    faceSelection(face) {
+        this.newComment.value += face;
+    }
+
 
     commentData = new Map();
     authoronly = false;
@@ -236,10 +241,6 @@ export class TsViewerPage implements OnInit {
         },150);
     }
     
-    handleSelection(face) {
-        this.newComment.value += face;
-    }
-
     async goUser(userName){
         const userModal = await this.modalController.create({
             component: UserPage,

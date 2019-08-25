@@ -26,7 +26,7 @@ export class AddTimelinePage implements OnInit {
 
     constructor(
         private popoverController: PopoverController,
-        private reddahService: ReddahService,
+        private reddah: ReddahService,
         private navController: NavController,
         private file: File,
         private loadingController: LoadingController,
@@ -160,7 +160,7 @@ export class AddTimelinePage implements OnInit {
         this.formData.append('feedbackType', JSON.stringify(-1));
         if(this.postType==4)//share
         {
-            this.formData.append("abstract", this.reddahService.htmlDecode(this.article.Title));
+            this.formData.append("abstract", this.reddah.htmlDecode(this.article.Title));
             this.formData.append("content", this.article.ImageUrl);
             this.formData.append("ref", JSON.stringify(this.article.Id));
         }
@@ -169,7 +169,7 @@ export class AddTimelinePage implements OnInit {
         }
         //alert(this.photos.map(e=>e.fileUrl).join(","));
 
-        this.reddahService.addTimeline(this.formData)
+        this.reddah.addTimeline(this.formData)
         .subscribe(result => {
             loading.dismiss();
             if(result.Success==0)
@@ -378,5 +378,23 @@ export class AddTimelinePage implements OnInit {
         if(data){
             this.location = data;
         }
+    }
+
+    
+    showFacePanel = false;
+    toggleFacePanel(){
+        this.showFacePanel= !this.showFacePanel;
+    }
+    faceSelection(face) {
+        this.yourThoughts += face;
+    }
+
+
+    tap(event){
+        console.log(event)
+        if(event.target.id!="faceIcon"&&
+            event.target.id!="facePanel"&&
+            event.target.id!="thoughtTxt")
+            this.showFacePanel = false;
     }
 }

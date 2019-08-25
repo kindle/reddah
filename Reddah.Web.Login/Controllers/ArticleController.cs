@@ -541,6 +541,8 @@ namespace Reddah.Web.Login.Controllers
                     userInfo.Cover = user.Cover;
                     userInfo.Type = user.Type;
                     userInfo.Email = user.Email;
+                    userInfo.HideLocation = (user.PrivacyShowLocation == 1);
+                    userInfo.AllowTenTimeline = (user.PrivacyViewTs == 1);
 
                     var findFriends = db.UserFriend.FirstOrDefault(f => (f.UserName == jwtResult.JwtUser.User && f.Watch == targetUser && f.Approve == 1) ||
                     (f.UserName == targetUser && f.Watch == jwtResult.JwtUser.User && f.Approve == 1));
@@ -593,6 +595,49 @@ namespace Reddah.Web.Login.Controllers
                 }
 
 
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("changeprivacy")]
+        [HttpPost]
+        public IHttpActionResult ChangePrivacy()
+        {
+            UserInfo userInfo = new UserInfo();
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string targetType = HttpContext.Current.Request["targetType"];
+                string targetValue = HttpContext.Current.Request["targetValue"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var target = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+                    if(targetType=="location")
+                    {
+                        target.PrivacyShowLocation = (targetValue == "True" ? 1 : 0);
+                        db.SaveChanges();
+                    }
+                    if (targetType == "timeline")
+                    {
+                        target.PrivacyViewTs = (targetValue == "True" ? 1 : 0);
+                        db.SaveChanges();
+                    }
+
+                    return Ok(new ApiResult(0, "success"));
+                }
             }
             catch (Exception ex)
             {

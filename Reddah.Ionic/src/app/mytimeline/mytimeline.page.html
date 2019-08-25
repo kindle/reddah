@@ -129,11 +129,5 @@
         <ion-button (click)="SendComment(-1)" color="primary" [disabled]="newComment.value==null||newComment.value==''">发送</ion-button>
     </ion-item>
     
-    <ion-grid *ngIf="showFacePanel">
-        <ion-row *ngFor="let row of reddah.emojis">
-            <ion-col *ngFor="let col of row" text-center>
-                <span (click)="handleSelection(col)" style="width: 80px;height: 80px;">{{col}}</span>
-            </ion-col>
-        </ion-row> 
-    </ion-grid>
+    <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
 </ion-footer>

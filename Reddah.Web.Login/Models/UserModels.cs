@@ -38,5 +38,7 @@ namespace Reddah.Web.Login
 
         public string NoteName { get; set; }
         public bool IsFriend { get; set; }
+        public bool HideLocation { get; set; }
+        public bool AllowTenTimeline { get; set; }
     }
 }

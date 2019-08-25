@@ -2,10 +2,14 @@
     <ion-icon name="ios-arrow-back" slot="start" (click)="close()" class="backbutton"></ion-icon>
     <ion-button color="success" slot="end" (click)="submit()">发表</ion-button>
 </ion-item>
-<ion-content>
-    <ion-item lines="none">
-        <ion-textarea autoresize [(ngModel)]="yourThoughts" rows="{{postType==4?3:6}}" cols="20" placeholder="这一刻的想法..."></ion-textarea>
+<ion-content (click)="tap($event)">
+    <ion-item>
+        <ion-textarea id="thoughtTxt" autoresize [(ngModel)]="yourThoughts" rows="{{postType==4?3:6}}" cols="20" placeholder="这一刻的想法..."></ion-textarea>
     </ion-item>
+    <ion-item lines="none">
+        <ion-icon id="faceIcon" slot="start" name="happy" size="medium" (click)="toggleFacePanel()" margin-end></ion-icon>
+    </ion-item>
+    <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
     <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="postType<3">
         <div class="imgSqure" *ngFor="let image of photos;index as i">
             <img [id]="reddah.makeItId(image.webUrl)" (load)="reddah.adjustImage($event, image.webUrl)"

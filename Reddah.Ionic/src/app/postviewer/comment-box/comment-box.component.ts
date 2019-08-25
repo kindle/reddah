@@ -86,15 +86,16 @@ export class CommentBoxComponent implements OnInit {
         },150);
     }
 
+    
     showFacePanel = false;
     toggleFacePanel(){
         this.showFacePanel= !this.showFacePanel;
     }
-
-    handleSelection(face) {
+    faceSelection(face) {
         this.newComment.value += face;
     }
 
+    
     submitClicked = false;
     async submit() {
         this.submitClicked = true;

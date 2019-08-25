@@ -19,6 +19,7 @@ using System.Web;
 using Reddah.Web.Login.Utilities;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Web.Script.Serialization;
 
 namespace Reddah.Web.Login.Controllers
 {
@@ -255,6 +256,45 @@ namespace Reddah.Web.Login.Controllers
 
 
             return new JwtResult(0, "Success", jwtUser);
+        }
+
+        [Route("change")]
+        public IHttpActionResult Change()
+        {
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                string oldPassword = HttpContext.Current.Request["OldPassword"];
+                string newPassword = HttpContext.Current.Request["NewPassword"];
+
+                JwtResult jwtResult = ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                if(string.IsNullOrEmpty(oldPassword))
+                    return Ok(new ApiResult(2, "Empty old password"));
+
+                if (string.IsNullOrEmpty(newPassword))
+                    return Ok(new ApiResult(2, "Empty new password"));
+
+
+                if (Membership.ValidateUser(jwtResult.JwtUser.User, oldPassword))
+                {
+                    Membership.GetUser().ChangePassword(oldPassword, newPassword);
+                    return Ok(new ApiResult(0, "Success"));
+                }
+                else
+                {
+                    return Ok(new ApiResult(2, "Old Password is wrong"));
+                }
+            }
+            catch (Exception e)
+            {
+                return Ok(new ApiResult(3, e.Message.ToString()));
+            }
         }
     }
 }

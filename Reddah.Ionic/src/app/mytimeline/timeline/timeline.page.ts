@@ -77,6 +77,9 @@ export class TimeLinePage implements OnInit {
             }
             loading.dismiss();
         });
+
+        this.isFriend = this.reddah.appData('userisfriend_'+this.userName+'_'+this.reddah.getCurrentUser())==1;
+        this.nonFriendAllowTen = this.reddah.appData('userallowtentimeline_'+this.userName)==1;
     }
 
     async clearCacheAndReload(){
@@ -86,6 +89,9 @@ export class TimeLinePage implements OnInit {
         this.ngOnInit();
     }
   
+    isFriend = false;
+    nonFriendAllowTen = false;
+
     getTimeline(event):void {
         this.formData = new FormData();
         this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
@@ -99,8 +105,12 @@ export class TimeLinePage implements OnInit {
         .subscribe(timeline => 
         {
             for(let article of timeline){
-                this.articles.push(article);
-                this.loadedIds.push(article.Id);
+                if(this.isFriend||
+                    (!this.isFriend&&this.articles.length<10))
+                {
+                    this.articles.push(article);
+                    this.loadedIds.push(article.Id);
+                }
             }
             if(event)
                 event.target.complete();

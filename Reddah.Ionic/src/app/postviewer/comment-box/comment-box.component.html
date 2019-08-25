@@ -47,11 +47,5 @@
     <ion-item *ngIf="showEditBox">
         <ion-icon slot="end" name="happy" size="medium" (click)="toggleFacePanel()" margin-end></ion-icon>
     </ion-item>
-    <ion-grid *ngIf="showEditBox&&showFacePanel">
-        <ion-row *ngFor="let row of reddah.emojis">
-            <ion-col *ngFor="let col of row" text-center>
-                <span (click)="handleSelection(col)" style="width: 80px;height: 80px;">{{col}}</span>
-            </ion-col>
-        </ion-row> 
-    </ion-grid>
+    <app-share-face *ngIf="showEditBox&&showFacePanel" (select)="faceSelection($event)"></app-share-face>
 </ion-footer>
