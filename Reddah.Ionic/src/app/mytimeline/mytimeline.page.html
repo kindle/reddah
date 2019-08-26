@@ -75,9 +75,12 @@
                     </div>
                     <div class="parent3" *ngIf="article.Content.split('$$$').length==1">
                         <div class="container3">
-                            <img [defaultImage]="'assets/icon/noimage.jpg'" 
+                            <img [id]="reddah.makeItId(image+'mtl')" 
+                            (load)="reddah.adjustImage($event, image+'mtl')" 
+                            [defaultImage]="'assets/icon/noimage.jpg'" 
                             [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[0])" 
-                            [useSrcset]="true" class="picture3" (click)="viewer(0, article.Content.split('$$$'))">
+                            [useSrcset]="true" class="picture3" 
+                            (click)="viewer(0, article.Content.split('$$$'))">
                         </div>
                     </div>
                 </ion-card-content>

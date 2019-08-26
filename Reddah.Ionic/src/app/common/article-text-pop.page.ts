@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { ReddahService } from '../reddah.service';
 
 @Component({
     template: `
@@ -7,15 +8,14 @@ import { ModalController } from '@ionic/angular';
             <ion-icon slot="start" name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
         </ion-item>
         <ion-content padding>
-        <ion-label>
-            {{text}}
-        </ion-label>
+            <div [innerHTML]="reddah.htmlDecode(text)"></div>
         </ion-content>
     `
 })
 export class ArticleTextPopPage {
     constructor(
         public modalController: ModalController,
+        public reddah: ReddahService,
     ) {}
 
     @Input() text: string
