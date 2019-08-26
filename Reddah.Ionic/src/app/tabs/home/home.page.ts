@@ -69,7 +69,7 @@ export class HomePage implements OnInit {
             this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
             .subscribe(articles => 
             {
-                console.log(articles);
+                //console.log(articles);
                 for(let article of articles){
                     this.articles.push(article);
                     this.loadedIds.push(article.Id);
@@ -176,7 +176,7 @@ export class HomePage implements OnInit {
         this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
         const { data } = await viewerModal.onDidDismiss();
         if(data){
-            console.log(data)
+            //console.log(data)
         }
     }
 

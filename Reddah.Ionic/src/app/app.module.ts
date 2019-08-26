@@ -104,6 +104,7 @@ import { QrcardPage } from './common/qrcard/qrcard.page';
 import { SettingListPage } from './settings/setting-list/setting-list.page';
 import { SettingGePage } from './settings/setting-ge/setting-ge.page';
 import { SettingAboutPage } from './settings/setting-about/setting-about.page';
+import { SettingChangePasswordPage } from './settings/setting-change-password/setting-change-password.page';
 import { SettingNoteLabelPage } from './settings/setting-note-label/setting-note-label.page';
 import { SettingGroupChatTitlePage } from './settings/setting-group-chat-title/setting-group-chat-title.page';
 import { ChangeNoteNamePopPage } from './common/change-notename-pop.page';
@@ -201,7 +202,7 @@ var firebaseConfig = {
         SearchPage,
         ShakePage,
         SearchUserPage,
-        SettingAboutPage,
+        SettingAboutPage,SettingChangePasswordPage,
         SettingGePage,
         SettingListPage,
         SettingNoteLabelPage,
@@ -254,7 +255,7 @@ var firebaseConfig = {
         SearchPage,
         ShakePage,
         SearchUserPage,
-        SettingAboutPage,
+        SettingAboutPage,SettingChangePasswordPage,
         SettingGePage,
         SettingListPage,
         SettingNoteLabelPage,

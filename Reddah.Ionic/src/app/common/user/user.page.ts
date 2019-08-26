@@ -62,7 +62,7 @@ export class UserPage implements OnInit {
         this.formData.append("targetUser", this.userName);
 
         let cacheKey = "this.reddah.getTimeline"+this.userName;
-        console.log(`cacheKey:${cacheKey}`);
+        //console.log(`cacheKey:${cacheKey}`);
         let request = this.reddah.getTimeline(this.formData);
 
         this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
@@ -122,7 +122,7 @@ export class UserPage implements OnInit {
               text: 'Share',
               icon: 'share',
               handler: () => {
-                  console.log('Share clicked');
+                  //console.log('Share clicked');
               }
             }
             ].concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?

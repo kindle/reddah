@@ -78,8 +78,8 @@ export class CommentBoxComponent implements OnInit {
 
         this.selectedArticleId = articleId;
         this.selectedCommentId = commmentId;
-        console.log("selectedArticleId:"+this.selectedArticleId);
-        console.log("selectedCommentId:"+this.selectedCommentId);
+        //console.log("selectedArticleId:"+this.selectedArticleId);
+        //console.log("selectedCommentId:"+this.selectedCommentId);
 
         setTimeout(() => {
             this.newComment.setFocus();

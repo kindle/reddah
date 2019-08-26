@@ -258,8 +258,8 @@ namespace Reddah.Web.Login.Controllers
             return new JwtResult(0, "Success", jwtUser);
         }
 
-        [Route("change")]
-        public IHttpActionResult Change()
+        [Route("changepassword")]
+        public IHttpActionResult ChangePassword()
         {
 
             try
@@ -280,20 +280,26 @@ namespace Reddah.Web.Login.Controllers
                 if (string.IsNullOrEmpty(newPassword))
                     return Ok(new ApiResult(2, "Empty new password"));
 
+                if (!WebSecurity.Initialized && WebApiConfig.IsWebSecurityNotCalled)
+                {
+                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", false);
+                    WebApiConfig.IsWebSecurityNotCalled = false;
+                }
 
                 if (Membership.ValidateUser(jwtResult.JwtUser.User, oldPassword))
                 {
-                    Membership.GetUser().ChangePassword(oldPassword, newPassword);
+                    Membership.GetUser(jwtResult.JwtUser.User).ChangePassword(oldPassword, newPassword);
+                    //changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
                     return Ok(new ApiResult(0, "Success"));
                 }
                 else
                 {
-                    return Ok(new ApiResult(2, "Old Password is wrong"));
+                    return Ok(new ApiResult(3, "Old Password is wrong"));
                 }
             }
             catch (Exception e)
             {
-                return Ok(new ApiResult(3, e.Message.ToString()));
+                return Ok(new ApiResult(4, e.Message.ToString()));
             }
         }
     }

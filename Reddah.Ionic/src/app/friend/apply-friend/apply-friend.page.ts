@@ -46,7 +46,7 @@ export class ApplyFriendPage implements OnInit {
       this.reddahService.addFriend(this.formData)
           .subscribe(result => 
           {
-              console.log(result);
+              //console.log(result);
               this.modalController.dismiss(false);
           }
       );

@@ -79,7 +79,7 @@ export class AddArticlePage implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.article)
+        //console.log(this.article)
         if(this.article){
             this.title = this.reddahService.htmlDecode(this.article.Title);
             this.content = this.reddahService.htmlDecode(this.article.Content);

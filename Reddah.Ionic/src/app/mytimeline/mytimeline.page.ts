@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
-import { InfiniteScroll, Content, LoadingController, NavController, PopoverController, ModalController, } from '@ionic/angular';
+import { InfiniteScroll, Content, LoadingController, NavController, PopoverController, ModalController, AlertController, } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
@@ -58,6 +58,8 @@ export class MyTimeLinePage implements OnInit {
         private transfer: FileTransfer, 
         private file: File,
         private statusBar: StatusBar,
+        private alertController: AlertController,
+        private translate: TranslateService,
     ){
         this.userName = this.reddah.getCurrentUser();
     }
@@ -261,7 +263,7 @@ export class MyTimeLinePage implements OnInit {
                 this.reddah.like(likeAddFormData)
                 .subscribe(data => 
                 {
-                    console.log(JSON.stringify(data));
+                    //console.log(JSON.stringify(data));
                     this.cacheService.clearGroup("MyTimeLinePage");
                 });
                 
@@ -277,7 +279,7 @@ export class MyTimeLinePage implements OnInit {
                 this.reddah.like(likeRemoveFormData)  
                 .subscribe(data => 
                 {
-                    console.log(JSON.stringify(data));
+                    //console.log(JSON.stringify(data));
                     this.cacheService.clearGroup("MyTimeLinePage");
                 });
                 this.renderUiLike(id, "remove");
@@ -362,14 +364,14 @@ export class MyTimeLinePage implements OnInit {
     commentData = new Map();
     authoronly = false;
     async GetCommentsData(articleId: number){
-        console.log(`get ts comments:${articleId}`);
+        //console.log(`get ts comments:${articleId}`);
         let cacheKey = "this.reddah.getTimelineComments" + articleId;
         let request = this.reddah.getComments(articleId)
 
         this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
         .subscribe(data => 
         {
-            console.log('load comments:'+articleId+JSON.stringify(data));
+            //console.log('load comments:'+articleId+JSON.stringify(data));
             this.commentData.set(articleId, data);
         });
     }
@@ -452,5 +454,41 @@ export class MyTimeLinePage implements OnInit {
 
     isMe(userName){
         return userName==this.reddah.getCurrentUser();
+    }
+
+    async delete(article){
+        const alert = await this.alertController.create({
+            header: this.translate.instant("Confirm.Title"),
+            message: "确定要删除吗？",
+            buttons: [
+            {
+                text: this.translate.instant("Confirm.Cancel"),
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {}
+            }, 
+            {
+                text: this.translate.instant("Confirm.Yes"),
+                handler: () => {
+                    //ui delete
+                    this.articles.forEach((item, index)=>{
+                        if(item.Id==article.Id){
+                            this.articles.splice(index, 1);
+                        }
+                    })
+                    this.localStorageService.store("Reddah_mytimeline",this.articles);
+                    this.cacheService.clearGroup("MyTimeLinePage");
+                    
+                    //serivce delete
+                    let formData = new FormData();
+                    formData.append("Id",JSON.stringify(article.Id));
+                    this.reddah.deleteMyTimeline(formData).subscribe(data=>{
+                        
+                    });
+                }
+            }]
+        });
+
+        await alert.present().then(()=>{});
     }
 }

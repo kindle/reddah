@@ -55,8 +55,6 @@ export class TsViewerPage implements OnInit {
         this.reddah.getUserInfo(this.formData)
             .subscribe(userInfo => 
             {
-                console.log(JSON.stringify(userInfo));
-                
                 if(userInfo.Photo!=null)
                     this.userPhoto = userInfo.Photo;
                 
@@ -75,7 +73,6 @@ export class TsViewerPage implements OnInit {
 
     ionViewDidLoad() {
         let locale = this.localStorageService.retrieve("Reddah_Locale");
-        console.log(locale);
     }
     
 
@@ -99,7 +96,6 @@ export class TsViewerPage implements OnInit {
                 this.reddah.like(likeAddFormData)
                     .subscribe(data => 
                     {
-                        console.log(JSON.stringify(data));
                         this.cacheService.clearGroup("MyTimeLinePage");
                     }
                 );
@@ -114,12 +110,10 @@ export class TsViewerPage implements OnInit {
                 likeRemoveFormData.append("action", "remove");
                 likeRemoveFormData.append("id", id+"");
                 this.reddah.like(likeRemoveFormData)  
-                    .subscribe(data => 
-                    {
-                        console.log(JSON.stringify(data));
-                        this.cacheService.clearGroup("MyTimeLinePage");
-                    }
-                );
+                .subscribe(data => 
+                {
+                    this.cacheService.clearGroup("MyTimeLinePage");
+                });
                 this.renderUiLike(id, "remove");
             }
             
@@ -195,17 +189,16 @@ export class TsViewerPage implements OnInit {
     commentData = new Map();
     authoronly = false;
     async GetCommentsData(articleId: number){
-        console.log(`get ts comments:${articleId}`);
+        //console.log(`get ts comments:${articleId}`);
         let cacheKey = "this.reddah.getTimelineComments" + articleId;
         let request = this.reddah.getComments(articleId)
 
         this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
-            .subscribe(data => 
-            {
-                console.log('load comments:'+articleId+JSON.stringify(data));
-                this.commentData.set(articleId, data);
-            }
-        );
+        .subscribe(data => 
+        {
+            //console.log('load comments:'+articleId+JSON.stringify(data));
+            this.commentData.set(articleId, data);
+        });
     }
 
     SendComment(){

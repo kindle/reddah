@@ -299,7 +299,7 @@ namespace Reddah.Web.Login.Controllers
                     
                     query = (from b in db.Article
                              join u in db.UserProfile on b.UserName equals u.UserName
-                             where b.Type == 1 && (b.UserName == jwtResult.JwtUser.User || 
+                             where b.Type == 1 && b.Status!=-1 && (b.UserName == jwtResult.JwtUser.User || 
                              (from f in db.UserFriend where f.UserName == jwtResult.JwtUser.User && f.Approve==1 select f.Watch).ToList().Contains(b.UserName)) 
                              && !(loaded).Contains(b.Id)
                              orderby b.Id descending
@@ -1496,6 +1496,48 @@ namespace Reddah.Web.Login.Controllers
                 }
             }
             catch(DbEntityValidationException ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("deletemytimeline")]
+        [HttpPost]
+        public IHttpActionResult DeleteMyTimeline()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int id = js.Deserialize<int>(HttpContext.Current.Request["Id"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var target = db.Article.FirstOrDefault(a => a.Id == id);
+
+                    if (target != null)
+                    {
+                        target.Status = -1;
+                        db.SaveChanges();
+                    }
+
+                    return Ok(new ApiResult(0, "success"));
+                }
+            }
+            catch (DbEntityValidationException ex)
             {
                 return Ok(new ApiResult(4, ex.Message));
             }

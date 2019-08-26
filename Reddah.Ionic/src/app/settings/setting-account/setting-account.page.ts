@@ -4,6 +4,7 @@ import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
+import { SettingChangePasswordPage } from '../setting-change-password/setting-change-password.page';
 
 @Component({
     selector: 'app-setting-account',
@@ -39,8 +40,12 @@ export class SettingAccountPage implements OnInit {
         
     }
 
-    async goPassword(){
+    async changePassword(){
+        const modal = await this.modalController.create({
+            component: SettingChangePasswordPage,
+        });
         
+        await modal.present();
 
     }
 

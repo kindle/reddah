@@ -163,7 +163,7 @@ export class MapPage implements OnInit {
 
         this.cacheService.loadFromObservable(cacheKey, request, "getUsersByLocation")
         .subscribe(data=>{
-            console.log(data)
+            //console.log(data)
             if(data.Success==0){
                 this.markerGroup.clearLayers();
 

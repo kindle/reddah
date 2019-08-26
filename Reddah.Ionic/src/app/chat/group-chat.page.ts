@@ -113,7 +113,7 @@ export class GroupChatPage extends ChatBase implements OnInit {
                 this.fileTransfer.download("https://login.reddah.com/uploadPhoto/"+guidName, target, true).then((entry) => {
                     this.localStorageService.store(guidName, target);
                 }, (error) => {
-                    console.log(JSON.stringify(error));
+                    //console.log(JSON.stringify(error));
                     alert(JSON.stringify(error));
                 });
             });
@@ -138,7 +138,7 @@ export class GroupChatPage extends ChatBase implements OnInit {
                 let player = this.media.create(target.replace(/^file:\/\//, '') + audioFileName);
                 player.play();
             }, (error) => {
-                console.log(JSON.stringify(error));
+                //console.log(JSON.stringify(error));
                 alert(JSON.stringify(error));
             });
         });
@@ -157,8 +157,8 @@ export class GroupChatPage extends ChatBase implements OnInit {
     }
 
     async childLocalComments(event){
-        console.log("$$#")
-        console.log(event)
+        //console.log("$$#")
+        //console.log(event)
     }
     
     async getMoreHistory(evt){

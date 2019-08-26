@@ -48,7 +48,7 @@ export class ChatChooseUserPage implements OnInit {
     submitClicked=false;
     async submit(){
         this.submitClicked= true;
-        console.log(this.groupedContacts)
+        //console.log(this.groupedContacts)
 
         let targetUsers = [];
         this.groupedContacts.forEach((item)=>{

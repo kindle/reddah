@@ -189,7 +189,7 @@ export class SearchPage implements OnInit {
         
         let cacheKey = "this.reddah.searchArticles" + JSON.stringify(this.loadedIds_a) + this.locale + "search_article"+this.searchKeyword.value;
         let request = this.reddah.getArticles(this.loadedIds_a, [], [], this.locale, "search", this.searchKeyword.value, 1, "", 0);
-        console.log(cacheKey);
+        //console.log(cacheKey);
         this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
         .subscribe(articles => 
         {
@@ -324,7 +324,7 @@ export class SearchPage implements OnInit {
         await viewerModal.present();
         const { data } = await viewerModal.onDidDismiss();
         if(data){
-            console.log(data)
+            //console.log(data)
         }
 
     }

@@ -185,7 +185,7 @@ export class ImageViewerComponent implements OnInit {
                 }
             }
         }, (error) => {
-            console.log(JSON.stringify(error));
+            //console.log(JSON.stringify(error));
         });        
     }
 

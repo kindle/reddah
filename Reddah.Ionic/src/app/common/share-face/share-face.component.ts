@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 
 @Component({
@@ -6,27 +6,25 @@ import { ReddahService } from '../../reddah.service';
     templateUrl: './share-face.component.html',
     styleUrls: ['./share-face.component.scss']
 })
-export class ShareFaceComponent {
+export class ShareFaceComponent implements OnInit  {
 
     @Output() select = new EventEmitter<any>();
-
+    
+    emojis = [
+        [
+            '😀','😃','😄','😁','😆','😅',
+            '❤️','⚽️','🏀','🍎','🍉','☕️',
+            '🌈','☀️','🌧','🐶','🐱','🐷',
+            '😎','😱','😴','👍','👎','💪',
+        ],
+        [
+            '🙏','😜','😡','😍','👻','💩',
+        ]
+    ]; 
     slideOpts = {
         centeredSlides: 'true',
         initialSlide: 0,
     };
-    
-    emojis = [
-        [
-            ['😀','😃','😄','😁','😆','😅'],
-            ['❤️','⚽️','🏀','🍎','🍉','☕️'],
-            ['🌈','☀️','🌧','🐶','🐱','🐷'],
-            ['😎','😱','😴','👍','👎','💪'],
-        ],
-        [
-            ['🙏','😜','😡','😍','👻','💩'],
-        ]
-    ];
-
     constructor(
         public reddah: ReddahService,
     ) { }
@@ -35,6 +33,12 @@ export class ShareFaceComponent {
         this.select.emit(face);
     }
 
+    ngOnInit(){
+    }
+
+    ionViewWillEnter(){
+        
+    }
     
     
 

@@ -106,9 +106,9 @@ export class SurfacePage implements OnInit {
             //this.config.autoSpin = !this.config.autoSpin;
             //this.config.isWorldVisible = false;
             //this.config.isHaloVisible = false;
-            console.log(this.config.lat+"_"+this.config.lng);
-            console.log(this.dragLat +"++"+this.dragLng)
-            console.log(this.dragLat +"++"+this.dragLng)
+            //console.log(this.config.lat+"_"+this.config.lng);
+            //console.log(this.dragLat +"++"+this.dragLng)
+            //console.log(this.dragLat +"++"+this.dragLng)
             
 
             this.router.navigate(['map'], {

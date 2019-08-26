@@ -28,7 +28,7 @@ export class SwipeTabDirective implements OnInit, OnDestroy {
         public _el: ElementRef,
         private _renderer: Renderer2
     ) {
-        console.log('[SwipeTabDirective] constructor');
+        //console.log('[SwipeTabDirective] constructor');
     }
 
     ngOnInit() {
@@ -38,11 +38,11 @@ export class SwipeTabDirective implements OnInit, OnDestroy {
             this.tabNames.push(tabsList[i].tab);
         }
         this.tabCount = this.tabNames.length - 1;
-        console.log('[SwipeTabDirective] ngOnInit, tabNames: ', this.tabNames);
+        //console.log('[SwipeTabDirective] ngOnInit, tabNames: ', this.tabNames);
     }
 
     onTabInitialized(tabName: string): void {
-        console.log('[SwipeTabDirective] onTabInitialized, tabName: ', tabName);
+        //console.log('[SwipeTabDirective] onTabInitialized, tabName: ', tabName);
 
         this.currentTabIndex = this.tabNames.indexOf(tabName);
 

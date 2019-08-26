@@ -26,7 +26,7 @@ export class CommentTimelineComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(JSON.stringify(this.data));
+        //console.log(JSON.stringify(this.data));
     }
 
     async presentPopover(ev: any) {
@@ -60,7 +60,7 @@ export class CommentTimelineComponent implements OnInit {
 
     showAddComment(comment){
         //console.log(JSON.stringify(comment))
-        console.log(comment.Id+"_"+comment.ArticleId);
+        //console.log(comment.Id+"_"+comment.ArticleId);
         this.reply.emit({'articleId': comment.ArticleId, 'commentId': comment.Id, 'userName': comment.UserName});
 
     }

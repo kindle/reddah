@@ -142,7 +142,7 @@ export class ManagePage implements OnInit {
 
 
     async subInfo(sub) {
-        console.log(sub)
+        //console.log(sub)
         const myInfoModal = await this.modalController.create({
             component: SubInfoPage,
             componentProps: { 

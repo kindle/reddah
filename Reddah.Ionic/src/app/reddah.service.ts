@@ -308,24 +308,29 @@ export class ReddahService {
     private changeNickNameUrl = 'https://login.reddah.com/api/article/changenickname'; 
 
     changeNickName(formData: FormData): Observable<any> {
-
-        formData.append('jwt', this.getCurrentJwt());
-        return this.http.post<any>(this.changeNickNameUrl, formData)
-        .pipe(
-            tap(data => this.log('change nick name')),
-            catchError(this.handleError('change nick name', []))
-        );
+        return this.service(formData, this.changeNickNameUrl, 'change nick name');
     }
     //******************************** */
     private changeSexUrl = 'https://login.reddah.com/api/article/changesex'; 
 
     changeSex(formData: FormData): Observable<any> {
+        return this.service(formData, this.changeSexUrl, 'change sex');
+    }
+    //******************************** */
+    private changePasswordUrl = 'https://login.reddah.com/api/auth/changepassword'; 
+
+    changePassword(formData: FormData): Observable<any> {
+
+        return this.service(formData, this.changePasswordUrl, 'change password');
+    }
+    //******************************** */
+    service(formData: FormData, url, text): Observable<any> {
 
         formData.append('jwt', this.getCurrentJwt());
-        return this.http.post<any>(this.changeSexUrl, formData)
+        return this.http.post<any>(url, formData)
         .pipe(
-            tap(data => this.log('change sex')),
-            catchError(this.handleError('change sex', []))
+            tap(data => this.log(text)),
+            catchError(this.handleError(text, []))
         );
     }
     //******************************** */
@@ -435,25 +440,20 @@ export class ReddahService {
     //******************************** */
     private bookmarkUrl = 'https://login.reddah.com/api/article/bookmark'; 
 
-    bookmark(formData: FormData): Observable<any> {
-
-        formData.append('jwt', this.getCurrentJwt());
-        return this.http.post<any>(this.bookmarkUrl, formData)
-        .pipe(
-            tap(data => this.log('set bookmark')),
-            catchError(this.handleError('set bookmark', []))
-        );
+    bookmark(formData: FormData): Observable<any> {        
+        return this.service(formData, this.bookmarkUrl, "set bookmark");
     }
     //******************************** */
     private deleteBookmarkUrl = 'https://login.reddah.com/api/article/deletebookmark'; 
 
     deleteBookmark(formData: FormData): Observable<any> {
-        formData.append('jwt', this.getCurrentJwt());
-        return this.http.post<any>(this.deleteBookmarkUrl, formData)
-        .pipe(
-            tap(data => this.log('delete bookmark')),
-            catchError(this.handleError('delete bookmark', []))
-        );
+        return this.service(formData, this.deleteBookmarkUrl, "delete bookmark");
+    }
+    //******************************** */
+    private deleteMyTimelinekUrl = 'https://login.reddah.com/api/article/deletemytimeline'; 
+
+    deleteMyTimeline(formData: FormData): Observable<any> {
+        return this.service(formData, this.deleteMyTimelinekUrl, "delete my timeline");
     }
     //******************************** */
     private addPubArticleUrl = 'https://login.reddah.com/api/pub/addpubarticle'; 
@@ -644,7 +644,7 @@ export class ReddahService {
     //******************************** */
 
     private log(message: string) {
-      console.log(message);
+        //console.log(message);
     }
 
     public Locales = [
@@ -823,7 +823,7 @@ export class ReddahService {
     //d表示日线，m表示月线，w表示周线
     getStock(stock:string, period='d'): Observable<any> {
         let sohuStockApi = `https://q.stock.sohu.com/hisHq?code=cn_${stock}&start=19900716&end=20200720&stat=1&order=A&period=${period}&rt=jsonp`; 
-          console.log(sohuStockApi);
+        //  console.log(sohuStockApi);
 
         const searchParams = new URLSearchParams();
         searchParams.append('callback', 'JSONP_CALLBACK');
@@ -895,8 +895,8 @@ export class ReddahService {
         img.src = src;
         context.drawImage(img, 0, 0);
         var imgData = context.getImageData(1, 1, img.width, 3);
-        console.log(imgData.data)
-console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
+        //console.log(imgData.data)
+        //console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
         
         var canvas1 = document.createElement('canvas');
         canvas1.style.position = "absolute";
@@ -1676,9 +1676,6 @@ console.log(`r:${imgData.data[0]},g:${imgData.data[1]},b:${imgData.data[2]}`);
     async adjustImage(evt, img){
         img = this.makeItId(img);
         let image = document.getElementById(img);
-        console.log(img)
-        console.log(evt)
-        console.log(image.offsetHeight+"_"+image.offsetWidth)
         if(image.offsetHeight<image.offsetWidth)
         {
             image.style.height = "100%";

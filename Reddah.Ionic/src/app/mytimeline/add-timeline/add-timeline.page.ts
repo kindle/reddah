@@ -391,7 +391,7 @@ export class AddTimelinePage implements OnInit {
 
 
     tap(event){
-        console.log(event)
+        //console.log(event)
         if(event.target.id!="faceIcon"&&
             event.target.id!="facePanel"&&
             event.target.id!="thoughtTxt")

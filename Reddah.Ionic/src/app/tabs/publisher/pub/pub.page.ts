@@ -145,7 +145,7 @@ export class PubPage implements OnInit {
         await viewerModal.present();
         const { data } = await viewerModal.onDidDismiss();
         if(data){
-            console.log(data)
+            //console.log(data)
         }
 
     }

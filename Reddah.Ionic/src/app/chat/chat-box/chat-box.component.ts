@@ -333,7 +333,7 @@ export class ChatBoxComponent implements OnInit {
             let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
             this.addPhotoToFormData(data);
         }, (err) => {
-            console.log(JSON.stringify(err));
+            //console.log(JSON.stringify(err));
             //alert(JSON.stringify(err));
         });
         

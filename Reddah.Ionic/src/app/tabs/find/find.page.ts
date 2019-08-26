@@ -32,7 +32,7 @@ export class FindPage {
         await scanModal.present();
         const { data } = await scanModal.onDidDismiss();
         if(data){
-            console.log(data)
+            //console.log(data)
         }
 
     };

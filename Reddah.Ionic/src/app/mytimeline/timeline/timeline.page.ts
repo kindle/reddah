@@ -61,7 +61,7 @@ export class TimeLinePage implements OnInit {
         this.formData.append("targetUser", this.userName);
 
         let cacheKey = "this.reddah.getTimeline"+this.userName;
-        console.log(`cacheKey:${cacheKey}`);
+        //console.log(`cacheKey:${cacheKey}`);
         let request = this.reddah.getTimeline(this.formData);
 
         this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)
@@ -98,7 +98,7 @@ export class TimeLinePage implements OnInit {
         this.formData.append("targetUser", this.userName);
 
         let cacheKey = "this.reddah.getTimeline" + this.userName + this.loadedIds.join(',');
-        console.log(`loadmore_cacheKey:${cacheKey}`);
+        //console.log(`loadmore_cacheKey:${cacheKey}`);
         let request = this.reddah.getTimeline(this.formData);
         
         this.cacheService.loadFromObservable(cacheKey, request, "TimeLinePage"+this.userName)

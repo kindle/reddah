@@ -50,7 +50,7 @@ export class ShareChooseUserPage implements OnInit {
     submitClicked=false;
     async submit(){
         this.submitClicked= true;
-        console.log(this.groupedContacts)
+        //console.log(this.groupedContacts)
 
         let targetUsers = [];
         this.groupedContacts.forEach((item)=>{
@@ -139,7 +139,7 @@ export class ShareChooseUserPage implements OnInit {
 
                 let cname = contact.NoteName ? contact.NoteName : contact.Watch;
                 let ch = cname.charAt(0);
-                console.log(ch)
+                //console.log(ch)
                 if(/^[A-Za-z]/.test(ch))//English
                 {
                     contact.s = ch.toLowerCase();

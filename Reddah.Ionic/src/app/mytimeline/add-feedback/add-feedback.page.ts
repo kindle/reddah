@@ -212,7 +212,7 @@ export class AddFeedbackPage implements OnInit {
             this.photos.push(data);
             this.addPhotoToFormData(data);
         }, (err) => {
-            console.log(JSON.stringify(err));
+            //console.log(JSON.stringify(err));
         });
         
     }
@@ -233,7 +233,7 @@ export class AddFeedbackPage implements OnInit {
             this.photos.push(data);
             this.addPhotoToFormData(data);
         }, (err) => {
-            console.log(JSON.stringify(err));
+            //console.log(JSON.stringify(err));
             alert(JSON.stringify(err));
         });
         
