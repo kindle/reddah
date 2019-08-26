@@ -931,14 +931,16 @@ export class ReddahService {
         }
         return str;
     }
+    
+    doubleByteLocale = ["zh-CN","zh-TW","ja-JP","ko-KR"];
 
     summary(str: string, n: number, locale='en-US') {
         if(locale==null)
-            locale='zh-cn';
+            locale='en-US';
         locale = locale.toLowerCase();
-        if(locale=='en-us'||locale=='fr-fr')
+        if(!this.doubleByteLocale.includes(locale))
             n = 2*n;
-        str = this.htmlDecode(this.htmlDecode(str)).replace(/<[^>]+>/g, "");
+        str = this.htmlDecode(this.htmlDecode(str)).replace("<br>","\n").replace(/<[^>]+>/g, "");
         return this.subpost(str, n);
     }
 
@@ -1287,8 +1289,7 @@ export class ReddahService {
 
         let split = " ";
         
-        let doubleByteLocale = ["zh-CN","zh-TW","ja-JP","ko-KR"]
-        if(doubleByteLocale.includes(this.getCurrentLocale()))
+        if(this.doubleByteLocale.includes(this.getCurrentLocale()))
             split="";
 
         if(yearC>=1){
