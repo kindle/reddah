@@ -181,7 +181,7 @@ export class MapPage implements OnInit {
                         //let content = L.DomUtil.create('div', 'content');
                         let content = "<img id='"+user.UserName+"' style='margin-right:5px;border-radius:3px;' width=40 height=40 src="
                             +this.reddah.appData('userphoto_'+user.UserName)+">"
-                            +this.reddah.getDisplayName(user.UserName)+"";
+                            //+this.reddah.getDisplayName(user.UserName)+"";
                         let popup = L.popup().setContent(content);
                         /*L.DomEvent.on(popup, 'click', ()=>{
                             this.goUser(user.UserName);

@@ -1,7 +1,7 @@
 
 <ion-slides [options]="slideOpts" [pager]="true" class="optionPanel">
     <ion-slide *ngFor="let slide of emojis">
-        <div class="optionPanel" style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;">
+        <div class="optionPanel">
             <div *ngFor="let cell of slide" text-center>
                 <span (click)="faceSelection(cell)" class="singleFace">{{cell}}</span>
             </div>

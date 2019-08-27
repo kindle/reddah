@@ -63,9 +63,17 @@ namespace Reddah.Web.Login.Controllers
                     var userExist = db.UserProfile.FirstOrDefault(u => u.UserName == userName||u.UserName.Contains(userName));
                     if(userExist != null)
                         return Ok(new ApiResult(3, "User exist"));
-                    //var emailExist = db.UserProfile.FirstOrDefault(u => u.Email == email);
-                    //if (emailExist != null)
-                    //    return Ok(new ApiResult(3, "Email exist"));
+
+                    List<string> testEmail = new List<string>();
+                    testEmail.Add("weibailin@hotmail.com");
+                    //only test email can register multi-times
+                    if (!testEmail.Contains(email))
+                    {
+                        var emailExist = db.UserProfile.FirstOrDefault(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+                        if (emailExist != null)
+                            return Ok(new ApiResult(3, "Email already registered"));
+                    }
+                    
 
                     if (!WebSecurity.Initialized && WebApiConfig.IsWebSecurityNotCalled)
                     {
@@ -296,6 +304,89 @@ namespace Reddah.Web.Login.Controllers
                 {
                     return Ok(new ApiResult(3, "Old Password is wrong"));
                 }
+            }
+            catch (Exception e)
+            {
+                return Ok(new ApiResult(4, e.Message.ToString()));
+            }
+        }
+
+        [Route("generatetoken")]
+        public IHttpActionResult GenerateToken()
+        {
+            try
+            {
+                string email = HttpContext.Current.Request["Email"];
+
+                if (string.IsNullOrEmpty(email))
+                    return Ok(new ApiResult(2, "Empty email"));
+
+                using (var db = new reddahEntities())
+                {
+                    var target = db.UserProfile.FirstOrDefault(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+
+                    if (target != null)
+                    {
+                        if (!WebSecurity.Initialized && WebApiConfig.IsWebSecurityNotCalled)
+                        {
+                            WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", false);
+                            WebApiConfig.IsWebSecurityNotCalled = false;
+                        }
+
+                        string token = WebSecurity.GeneratePasswordResetToken(target.UserName, 1440);
+                        Helpers.Email(
+                                new MailAddress("donotreply@reddah.com", "Reddah Account"),
+                                new MailAddress(email, target.UserName),
+                                "Security token to reset password‏",
+                                string.Format("Dear {0}:\r\n" +
+                                "Please copy this token:\r\n" +
+                                "<span style='font-weight:bold;'>{1}</span>" +
+                                "\r\nto reset your password. Thanks for using Reddah!",
+                                target.UserName, token),
+                                true
+                        );
+                        return Ok(new ApiResult(0, "Success"));
+                    }
+
+                    return Ok(new ApiResult(2, "Email not registered"));
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                return Ok(new ApiResult(4, e.Message.ToString()));
+            }
+        }
+
+        [Route("resetpassword")]
+        public IHttpActionResult ResetPassword()
+        {
+            try
+            {
+                string token = HttpContext.Current.Request["Token"];
+                string password = HttpContext.Current.Request["Password"];
+
+                if (string.IsNullOrEmpty(token))
+                    return Ok(new ApiResult(2, "Token Empty"));
+
+                if (string.IsNullOrEmpty(password))
+                    return Ok(new ApiResult(2, "Password Empty"));
+
+                
+                if (!WebSecurity.Initialized && WebApiConfig.IsWebSecurityNotCalled)
+                {
+                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", false);
+                    WebApiConfig.IsWebSecurityNotCalled = false;
+                }
+
+                bool result = WebSecurity.ResetPassword(token, password);
+                if(result)
+                    return Ok(new ApiResult(0, "Success"));
+                else
+                    return Ok(new ApiResult(3, "Failed"));
+
+
             }
             catch (Exception e)
             {

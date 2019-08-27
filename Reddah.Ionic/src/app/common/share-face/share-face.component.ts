@@ -21,10 +21,12 @@ export class ShareFaceComponent implements OnInit  {
             '🙏','😜','😡','😍','👻','💩',
         ]
     ]; 
+
     slideOpts = {
         centeredSlides: 'true',
         initialSlide: 0,
     };
+    
     constructor(
         public reddah: ReddahService,
     ) { }

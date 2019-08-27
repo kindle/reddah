@@ -82,11 +82,11 @@ export class GroupChatPage extends ChatBase implements OnInit {
                 this.title = this.groupChat.Title;
                 this.chatId = this.groupChat.Id;
 
-                setTimeout(() => {
-                    if(this.pageTop.scrollToBottom){
-                        this.pageTop.scrollToBottom(0);
-                    }
-                },200)
+                
+                if(this.pageTop.scrollToBottom){
+                    this.pageTop.scrollToBottom(0);
+                }
+                
                 
                 this.cacheService.clearGroup("ChatChooseGroupPage");
             }

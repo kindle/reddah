@@ -124,7 +124,8 @@ namespace Reddah.Web.Login.Utilities
             MailAddress from,
             MailAddress to,
             string subject,
-            string body
+            string body,
+            bool isbodyHtml = false
             )
         {
 
@@ -142,6 +143,7 @@ namespace Reddah.Web.Login.Utilities
                 MailMessage message = new MailMessage(from, to);
                 message.Subject = subject;
                 message.Body = body;
+                message.IsBodyHtml = isbodyHtml;
                 client.Send(message);
             }
             catch (Exception e)

@@ -56,9 +56,6 @@ export class ChatBoxComponent implements OnInit {
 
     async submit() {
         this.commentContent = "";
-        setTimeout(() => {
-            this.newChatComment.setFocus();
-        },150); 
         let uid = this.reddah.uuidv4();
         this.localComments.emit({
             id: this.selectedArticleId, 

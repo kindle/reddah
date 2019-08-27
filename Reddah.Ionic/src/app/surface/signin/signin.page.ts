@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CacheService } from "ionic-cache";
 import { RegisterPage } from "../register/register.page"
+import { ForgotPage } from "../forgot/forgot.page";
 
 @Component({
     selector: 'app-signin',
@@ -80,6 +81,14 @@ export class SigninPage implements OnInit {
         const modal = await this.modalController.create({
             component: RegisterPage,
             componentProps: { url: '' }
+        });
+        
+        await modal.present();
+    }
+
+    async forgot(){
+        const modal = await this.modalController.create({
+            component: ForgotPage
         });
         
         await modal.present();

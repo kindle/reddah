@@ -32,9 +32,9 @@ export class MessageListPage implements OnInit {
     refreshPage;
     async ngOnInit(){
         this.loadData(true);
-        this.refreshPage = setInterval(() => {
+        /*this.refreshPage = setInterval(() => {
             this.loadData(true);
-        },5000);
+        },5000);*/
     }
 
     ionViewWillLeave() {

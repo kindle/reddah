@@ -787,7 +787,27 @@ export class ReddahService {
         return this.localStorageService.retrieve("Reddah_lastlogin_username");
     }
 
+    getLastLoginUserEmail(){
+        let lastLoginUser = this.getLoginUserName();
+        return "";
+    }
 
+    private getSecurityTokenUrl = 'https://login.reddah.com/api/auth/generatetoken'; 
+    getSecurityToken(formData){
+        return this.http.post<any>(this.getSecurityTokenUrl, formData)
+        .pipe(
+            tap(data => this.log('get security token')),
+            catchError(this.handleError('get security token', []))
+        );        
+    }
+    private resetPasswordUrl = 'https://login.reddah.com/api/auth/resetpassword'; 
+    resetPassword(formData){
+        return this.http.post<any>(this.resetPasswordUrl, formData)
+        .pipe(
+            tap(data => this.log('reset password')),
+            catchError(this.handleError('reset password', []))
+        );        
+    }
 
     /**
      * Handle Http operation that failed.
@@ -940,7 +960,7 @@ export class ReddahService {
         locale = locale.toLowerCase();
         if(!this.doubleByteLocale.includes(locale))
             n = 2*n;
-        str = this.htmlDecode(this.htmlDecode(str)).replace("<br>","\n").replace(/<[^>]+>/g, "");
+        str = this.htmlDecode(this.htmlDecode(str)).replace(/<br>/g,"\n").replace(/<[^>]+>/g, "").replace(/\n\n/g,"<br>");
         return this.subpost(str, n);
     }
 

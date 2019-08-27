@@ -76,11 +76,11 @@
                     </div>
                     <div class="parent3" *ngIf="article.Content.split('$$$').length==1">
                         <div class="container3">
-                            <img [id]="reddah.makeItId(image+'mtl')" 
-                            (load)="reddah.adjustImage($event, image+'mtl')" 
+                            <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtl')" 
+                            (load)="reddah.adjustImage($event, article.Content.split('$$$')[0]+'mtl')" 
                             [defaultImage]="'assets/icon/noimage.jpg'" 
                             [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[0])" 
-                            [useSrcset]="true" class="picture3" 
+                            [useSrcset]="true" class="picture" 
                             (click)="viewer(0, article.Content.split('$$$'))">
                         </div>
                     </div>

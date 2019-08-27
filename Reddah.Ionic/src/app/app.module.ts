@@ -121,6 +121,7 @@ import { ChatChooseGroupPage } from './chat/chat-choose-group/chat-choose-group.
 import { BookmarkPage } from './bookmark/bookmark.page';
 import { BookmarkPopPage } from './common/bookmark-pop.page';
 import { SigninPage } from './surface/signin/signin.page';
+import { ForgotPage } from './surface/forgot/forgot.page';
 import { SettingNickNamePage } from './settings/setting-nickname/setting-nickname.page'
 import { SettingSignaturePage } from './settings/setting-signature/setting-signature.page'
 import { SettingSexPage } from './settings/setting-sex/setting-sex.page'
@@ -190,7 +191,7 @@ var firebaseConfig = {
         TimelinePopPage,
         TimelineCommentPopPage,
         ScanPage,
-        SigninPage,
+        SigninPage,ForgotPage,
         TsViewerPage,
         AddTimelinePage,
         AddFeedbackPage,
@@ -244,8 +245,8 @@ var firebaseConfig = {
         TimelinePopPage,
         TimelineCommentPopPage,
         ScanPage,
-        SigninPage,
-        UserPage,MessageListPage,
+        SigninPage, ForgotPage,
+        UserPage, MessageListPage,
         TimeLinePage,
         TsViewerPage,
         AddTimelinePage,

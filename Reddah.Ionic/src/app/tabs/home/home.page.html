@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
-                <div [class.articleTextRead]="article.Read">{{reddah.summary(article.Content, 100)}}</div>
+                <div [class.articleTextRead]="article.Read">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
             </div>
             <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3" class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
                 <div style="display: flex;" (click)="goUser(article.UserName)">
@@ -82,7 +82,7 @@
 
             <div *ngIf="article.ImageUrls.length==0" (click)="view(article)">
                 <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
-                <div [class.articleTextRead]="article.Read">{{reddah.summary(article.Content, 100)}}</div>
+                <div [class.articleTextRead]="article.Read">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
             </div>
             <div class="listInfo" *ngIf="article.ImageUrls.length==0">
                 <span *ngFor="let group of article.GroupName.split(',')" (click)="goSearch(group)" style="padding-right:5px;">

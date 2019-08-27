@@ -179,10 +179,10 @@ export class ChatPage extends ChatBase implements OnInit  {
         }
         this.messages.push(newmessage);
         
-        setTimeout(() => {
-            if(this.pageTop.scrollToBottom)
-                this.pageTop.scrollToBottom(0);
-        },200)
+        
+        if(this.pageTop.scrollToBottom)
+            this.pageTop.scrollToBottom(0);
+    
     }
 
     async getMoreHistory(evt){
