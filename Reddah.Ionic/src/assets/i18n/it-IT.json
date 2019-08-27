@@ -7,37 +7,37 @@
 
     "Login":{
         "Title":"Login",
-        "NoAccount":"No Account?",
-        "RegisterNow":"Register Now",
-        "ForgotPassword":"Forgot Password",
+        "NoAccount":"Nessun conto?",
+        "RegisterNow":"Registrati ora",
+        "ForgotPassword":"Password dimenticata",
         "Loading":"Login..."
     },
 
     "Register":{
         "Title":"Registro",
-        "TitleSub":"Register Subscriber",
-        "TitleMini":"注册小程序",
-        "ReadAgree":"You have read and agreed:",
-        "UserAgreement":"User Agreement,",
-        "Privacy":"Privacy Policy",
-        "And":"and",
-        "Content":"Content Policy",
-        "Loading":"Register...",
-        "Success":"Registration is successful. Please verify your email and login..."
+        "TitleSub":"Regista editore",
+        "TitleMini":"Registra mini app",
+        "ReadAgree":"Hai letto e accettato",
+        "UserAgreement":"Accordo utente,",
+        "Privacy":"Norme sulla privacy",
+        "And":"e",
+        "Content":"Politica dei contenuti",
+        "Loading":"Registro...",
+        "Success":"La registrazione ha successo.Si prega di verificare la tua e -mail e login"
     },
 
     "Input":{
-        "UserName": "User Name",
+        "UserName": "Nome utente",
         "Password": "Password",
-        "ConfirmPassword": "Confirm Password",
+        "ConfirmPassword": "Conferma password",
         "Email": "Email",
-        "Name":"Name",
-        "Description":"Description",
+        "Name":"Nome",
+        "Description":"Designazione",
         "Error":{
-            "UserNameEmpty":"Please input user name",
-            "UserNameTooLong":"User name should be less than 25 characters",
-            "SubNameTooShort":"Name should be at least 2 characters",
-            "PasswordEmpty":"Please input password",
+            "UserNameEmpty":"Inserisci nome utente",
+            "UserNameTooLong":"Il nome utente dovrebbe essere meno di 25 caratteri",
+            "SubNameTooShort":"Il nome deve essere almeno 2 caratteri",
+            "PasswordEmpty":"Inserisci la password",
             "PasswordDifferent":"Password & confirm password are different",
             "EmailEmpty":"Please input email",
             "Agree":"Please agree with user agreement",

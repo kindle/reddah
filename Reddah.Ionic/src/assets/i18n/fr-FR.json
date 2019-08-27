@@ -7,37 +7,37 @@
 
     "Login":{
       "Title":"Connexion",
-      "NoAccount":"No de compte?",
-      "RegisterNow":"Inscrivez - vous maintenant",
-      "ForgotPassword":"Oubliez le mot de passe",
+      "NoAccount":"Zero?",
+      "RegisterNow":"Enregistrement immédiat",
+      "ForgotPassword":"Oublier le mot de passe",
       "Loading":"Connexion..."
     },
 
     "Register":{
       "Title":"Registre",
-      "TitleSub":"注册订阅号",
-      "TitleMini":"注册小程序",
-      "ReadAgree":"Vous avez lu et approuvé:",
-      "UserAgreement":"Entente d'utilisation,",
-      "Privacy":"Politique sur la protection des renseignements personnels",
-      "And":"&",
-      "Content":"En matière de contenu",
+      "TitleSub":"Serveur d 'enregistrement",
+      "TitleMini":"Immatriculation Mini Application",
+      "ReadAgree":"Tu l 'as lu et accepté",
+      "UserAgreement":"Protocole utilisateur,",
+      "Privacy":"Politique de la vie privée",
+      "And":"Et",
+      "Content":"Stratégie de contenu",
       "Loading":"Registre...",
-      "Success":"S'il vous plaît vérifier l'enregistrement..."
+      "Success":"Enregistrement réussi.Veuillez authentifier votre courrier électronique et l 'afficher"
     },
 
     "Input":{
-      "UserName": "nom d'utilisateur",
-      "Password": "mot de passe",
-      "ConfirmPassword": "Confirmer mot de passe",
-      "Email": "Courriel",
+      "UserName": "Nom d 'utilisateur",
+      "Password": "Mot de passe",
+      "ConfirmPassword": "Confirm password",
+      "Email": "Courrier électronique",
       "Name":"Nom",
-      "Description":"Description",
+      "Description":"Note",
       "Error":{
-        "UserNameEmpty":"Veuillez entrer le nom d'utilisateur",
-        "UserNameTooLong":"User name should be less than 25 characters",
-        "SubNameTooShort":"Name should be at least 2 characters",
-        "PasswordEmpty":"Veuillez entrer votre mot de passe",
+        "UserNameEmpty":"Veuillez saisir un nom d 'utilisateur",
+        "UserNameTooLong":"Nom d 'utilisateur doit être inférieur à 25 caractères",
+        "SubNameTooShort":"Le nom doit être au moins deux caractères",
+        "PasswordEmpty":"Entrez le mot de passe",
         "PasswordDifferent":"Incohérence du mot de passe",
         "EmailEmpty":"Veuillez entrer courriel",
         "Agree":"Veuillez accepter avec accord de l'utilisateur",

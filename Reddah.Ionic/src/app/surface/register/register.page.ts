@@ -21,7 +21,7 @@ export class RegisterPage implements OnInit {
 
     locale;
     ngOnInit() {
-            this.locale = this.reddah.getCurrentLocale();
+        this.locale = this.reddah.getCurrentLocale();
     }
 
     username = "";

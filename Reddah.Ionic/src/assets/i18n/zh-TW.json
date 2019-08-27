@@ -7,37 +7,37 @@
 
     "Login":{
         "Title":"登入",
-        "NoAccount":"还没有帐号？",
+        "NoAccount":"還沒有帳號？",
         "RegisterNow":"立即注册",
-        "ForgotPassword":"忘记密码",
-        "Loading":"正在登录..."
+        "ForgotPassword":"忘記密碼",
+        "Loading":"登入..."
     },
 
     "Register":{
         "Title":"注册",
-        "TitleSub":"注册订阅号",
-        "TitleMini":"注册小程序",
-        "ReadAgree":"您已阅读并同意：",
-        "UserAgreement":"用户协议、",
-        "Privacy":"隐私声明",
+        "TitleSub":"注册發佈者",
+        "TitleMini":"注册小程式",
+        "ReadAgree":"您已閱讀並同意",
+        "UserAgreement":"使用者協定、",
+        "Privacy":"隱私權聲明",
         "And":"和",
         "Content":"内容政策",
         "Loading":"正在注册...",
-        "Success":"注册成功，请验证邮箱后登录..."
+        "Success":"注册成功，請驗證郵箱後登入"
     },
 
     "Input":{
-        "UserName": "用户名",
-        "Password": "密码",
-        "ConfirmPassword": "确认密码",
-        "Email": "电子邮件",
-        "Name":"名称",
+        "UserName": "用戶名",
+        "Password": "密碼",
+        "ConfirmPassword": "確認密碼",
+        "Email": "電子郵件",
+        "Name":"名稱",
         "Description":"描述",
         "Error":{
-            "UserNameEmpty":"请输入用户名",
-            "UserNameTooLong":"用户名不能超过25个字符",
-            "SubNameTooShort":"名称不能少于2个字符",
-            "PasswordEmpty":"请输入密码",
+            "UserNameEmpty":"請輸入用戶名",
+            "UserNameTooLong":"用戶名不能超過25個字元",
+            "SubNameTooShort":"名稱不能少於2個字元",
+            "PasswordEmpty":"請輸入密碼",
             "PasswordDifferent":"密码不一致",
             "EmailEmpty":"请输入电子邮件",
             "Agree":"请同意用户协议",

@@ -7,37 +7,37 @@
 
     "Login":{
         "Title":"Σύνδεση",
-        "NoAccount":"No Account?",
-        "RegisterNow":"Register Now",
-        "ForgotPassword":"Forgot Password",
-        "Loading":"Login..."
+        "NoAccount":"Χωρίς λογαριασμό?",
+        "RegisterNow":"Εγγραφή τώρα",
+        "ForgotPassword":"Ξέχασα κωδικό",
+        "Loading":"Σύνδεση..."
     },
 
     "Register":{
         "Title":"Μητρώο",
-        "TitleSub":"Register Subscriber",
-        "TitleMini":"注册小程序",
-        "ReadAgree":"You have read and agreed:",
-        "UserAgreement":"User Agreement,",
-        "Privacy":"Privacy Policy",
-        "And":"and",
-        "Content":"Content Policy",
-        "Loading":"Register...",
-        "Success":"Registration is successful. Please verify your email and login..."
+        "TitleSub":"Μητρώος εκδότης",
+        "TitleMini":"Εγγραφή μίνι εφαρμογής",
+        "ReadAgree":"Διάβασες και συμφώνησες",
+        "UserAgreement":"Συμφωνία χρήσης,",
+        "Privacy":"Πολιτική ιδιωτικότητας",
+        "And":"και",
+        "Content":"Πολιτική περιεχομένου",
+        "Loading":"Μητρώο...",
+        "Success":"Η εγγραφή είναι επιτυχής.Παρακαλώ ελέγξτε το email και τη σύνδεση"
     },
 
     "Input":{
-        "UserName": "User Name",
-        "Password": "Password",
-        "ConfirmPassword": "Confirm Password",
+        "UserName": "Όνομα χρήστη",
+        "Password": "Κωδικός",
+        "ConfirmPassword": "Επιβεβαίωση κωδικού πρόσβασης",
         "Email": "Email",
-        "Name":"Name",
-        "Description":"Description",
+        "Name":"όνομα",
+        "Description":"Περιγραφή",
         "Error":{
-            "UserNameEmpty":"Please input user name",
-            "UserNameTooLong":"User name should be less than 25 characters",
-            "SubNameTooShort":"Name should be at least 2 characters",
-            "PasswordEmpty":"Please input password",
+            "UserNameEmpty":"Παρακαλώ εισάγετε όνομα χρήστη",
+            "UserNameTooLong":"Το όνομα χρήστη πρέπει να είναι μικρότερο από τους 25 χαρακτήρες",
+            "SubNameTooShort":"Το όνομα πρέπει να είναι τουλάχιστον δύο χαρακτήρες",
+            "PasswordEmpty":"Παρακαλώ εισάγετε κωδικό πρόσβασης",
             "PasswordDifferent":"Password & confirm password are different",
             "EmailEmpty":"Please input email",
             "Agree":"Please agree with user agreement",

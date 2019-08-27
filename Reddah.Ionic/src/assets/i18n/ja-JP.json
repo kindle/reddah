@@ -15,15 +15,15 @@
 
     "Register":{
       "Title":"レジスタ",
-      "TitleSub":"注册订阅号",
-      "TitleMini":"注册小程序",
-      "ReadAgree":"読んで同意しました:",
+      "TitleSub":"出版社に登録する",
+      "TitleMini":"ミニアプリ登録",
+      "ReadAgree":"読んで同意しました",
       "UserAgreement":"利用規約,",
       "Privacy":"プライバシーポリシー",
       "And":"&",
       "Content":"コンテンツポリシー",
       "Loading":"レジスタ...",
-      "Success":"登録が成功しました。メールを確認して登録してください..."
+      "Success":"登録は成功です。あなたのメールとログインを確認してください"
     },
 
     "Input":{
@@ -35,8 +35,8 @@
       "Description":"せつめい",
       "Error":{
         "UserNameEmpty":"ユーザー名入力",
-        "UserNameTooLong":"User name should be less than 25 characters",
-        "SubNameTooShort":"Name should be at least 2 characters",
+        "UserNameTooLong":"ユーザ名は25文字未満でなければなりません",
+        "SubNameTooShort":"名前は少なくとも2文字",
         "PasswordEmpty":"パスワード入力",
         "PasswordDifferent":"パスワードが一致しません",
         "EmailEmpty":"入力メール",

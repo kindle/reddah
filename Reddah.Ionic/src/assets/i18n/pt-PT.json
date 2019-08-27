@@ -7,37 +7,37 @@
 
     "Login":{
         "Title":"Logina",
-        "NoAccount":"No Account?",
-        "RegisterNow":"Register Now",
-        "ForgotPassword":"Forgot Password",
-        "Loading":"Login..."
+        "NoAccount":"Nenhuma conta?",
+        "RegisterNow":"Registar Agora",
+        "ForgotPassword":"Senha Esquecida",
+        "Loading":"Logina..."
     },
 
     "Register":{
         "Title":"Registo",
-        "TitleSub":"Register Subscriber",
-        "TitleMini":"注册小程序",
-        "ReadAgree":"You have read and agreed:",
-        "UserAgreement":"User Agreement,",
-        "Privacy":"Privacy Policy",
-        "And":"and",
-        "Content":"Content Policy",
-        "Loading":"Register...",
-        "Success":"Registration is successful. Please verify your email and login..."
+        "TitleSub":"Editor do registo",
+        "TitleMini":"Aplicativo de registo",
+        "ReadAgree":"Você Leu e concordou",
+        "UserAgreement":"Acordo de utilizador,",
+        "Privacy":"Política de privacidade",
+        "And":"e",
+        "Content":"Política de conteúdo",
+        "Loading":"Registo...",
+        "Success":"O registo é BEM sucedido.Por favor, verifique o SEU email e login"
     },
 
     "Input":{
-        "UserName": "User Name",
-        "Password": "Password",
-        "ConfirmPassword": "Confirm Password",
+        "UserName": "Nome do Utilizador",
+        "Password": "Senha",
+        "ConfirmPassword": "Confirmar senha",
         "Email": "Email",
-        "Name":"Name",
-        "Description":"Description",
+        "Name":"Nome",
+        "Description":"Descrição",
         "Error":{
-            "UserNameEmpty":"Please input user name",
-            "UserNameTooLong":"User name should be less than 25 characters",
-            "SubNameTooShort":"Name should be at least 2 characters",
-            "PasswordEmpty":"Please input password",
+            "UserNameEmpty":"Digite o Nome do usuário",
+            "UserNameTooLong":"O Nome do utilizador deve ser inferior a 25 caracteres",
+            "SubNameTooShort":"O Nome deve ser pelo Menos dois caracteres",
+            "PasswordEmpty":"Digite a senha",
             "PasswordDifferent":"Password & confirm password are different",
             "EmailEmpty":"Please input email",
             "Agree":"Please agree with user agreement",

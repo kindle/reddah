@@ -7,37 +7,37 @@
 
     "Login":{
         "Title":"Bход",
-        "NoAccount":"No Account?",
-        "RegisterNow":"Register Now",
-        "ForgotPassword":"Forgot Password",
-        "Loading":"Login..."
+        "NoAccount":"Hет счета?",
+        "RegisterNow":"Hемедленная регистрация",
+        "ForgotPassword":"забыть пароль",
+        "Loading":"Bход..."
     },
 
     "Register":{
         "Title":"Pегистрация",
-        "TitleSub":"Register Subscriber",
-        "TitleMini":"注册小程序",
-        "ReadAgree":"You have read and agreed:",
-        "UserAgreement":"User Agreement,",
-        "Privacy":"Privacy Policy",
-        "And":"and",
-        "Content":"Content Policy",
-        "Loading":"Register...",
-        "Success":"Registration is successful. Please verify your email and login..."
+        "TitleSub":"Сервер регистрации и опубликования",
+        "TitleMini":"зарегистрировать мини - приложения",
+        "ReadAgree":"Ты уже прочитал и согласился",
+        "UserAgreement":"Протокол пользователя,",
+        "Privacy":"политика уединения",
+        "And":"и",
+        "Content":"политика содержимого",
+        "Loading":"Pегистрация...",
+        "Success":"регистрация прошла успешно.Проверьте ваше электронное письмо и зайдите в систему"
     },
 
     "Input":{
-        "UserName": "User Name",
-        "Password": "Password",
-        "ConfirmPassword": "Confirm Password",
-        "Email": "Email",
-        "Name":"Name",
-        "Description":"Description",
+        "UserName": "Имя пользователя",
+        "Password": "пароль",
+        "ConfirmPassword": "подтвердить пароль",
+        "Email": "электронная почта",
+        "Name":"имя",
+        "Description":"Примечание",
         "Error":{
-            "UserNameEmpty":"Please input user name",
-            "UserNameTooLong":"User name should be less than 25 characters",
-            "SubNameTooShort":"Name should be at least 2 characters",
-            "PasswordEmpty":"Please input password",
+            "UserNameEmpty":"Введите имя пользователя",
+            "UserNameTooLong":"Имя пользователя должно быть меньше 25 символов",
+            "SubNameTooShort":"имя должно быть не менее 2 символов",
+            "PasswordEmpty":"Введите пароль",
             "PasswordDifferent":"Password & confirm password are different",
             "EmailEmpty":"Please input email",
             "Agree":"Please agree with user agreement",

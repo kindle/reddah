@@ -7,37 +7,37 @@
 
     "Login":{
         "Title": "تسجيل الدخول",
-        "NoAccount":"No Account?",
-        "RegisterNow":"Register Now",
-        "ForgotPassword":"Forgot Password",
-        "Loading":"Login..."
+        "NoAccount":"بدون حساب?",
+        "RegisterNow":"تسجيل فوري",
+        "ForgotPassword":"نسيت كلمة المرور",
+        "Loading":"تسجيل الدخول..."
     },
 
     "Register":{
         "Title":"للتسجيل",
-        "TitleSub":"Register Subscriber",
-        "TitleMini":"注册小程序",
-        "ReadAgree":"You have read and agreed:",
-        "UserAgreement":"User Agreement,",
-        "Privacy":"Privacy Policy",
-        "And":"and",
-        "Content":"Content Policy",
-        "Loading":"Register...",
-        "Success":"Registration is successful. Please verify your email and login..."
+        "TitleSub":"سجل خادم النشر",
+        "TitleMini":"تسجيل تطبيقات مصغرة",
+        "ReadAgree":"لقد قرأت ووافقت",
+        "UserAgreement":"بروتوكول مشترك",
+        "Privacy":"سياسة الخصوصية",
+        "And":"بيت",
+        "Content":"استراتيجية المحتوى",
+        "Loading":"للتسجيل...",
+        "Success":"سجل النجاحيرجى التحقق من البريد الإلكتروني الخاص بك وتسجيل الدخول"
     },
 
     "Input":{
-        "UserName": "User Name",
-        "Password": "Password",
-        "ConfirmPassword": "Confirm Password",
-        "Email": "Email",
-        "Name":"Name",
-        "Description":"Description",
+        "UserName": "يوزر نيم",
+        "Password": "باسوورد",
+        "ConfirmPassword": "تأكيد كلمة المرور",
+        "Email": "الايميل",
+        "Name":"الاسم الاول",
+        "Description":"إيضاح",
         "Error":{
-            "UserNameEmpty":"Please input user name",
-            "UserNameTooLong":"User name should be less than 25 characters",
-            "SubNameTooShort":"Name should be at least 2 characters",
-            "PasswordEmpty":"Please input password",
+            "UserNameEmpty":"الرجاء إدخال اسم المستخدم",
+            "UserNameTooLong":"اسم المستخدم يجب أن يكون أقل من حرف 25",
+            "SubNameTooShort":"الاسم يجب أن يكون على الأقل اثنين من الشخصيات",
+            "PasswordEmpty":"الرجاء إدخال كلمة السر",
             "PasswordDifferent":"Password & confirm password are different",
             "EmailEmpty":"Please input email",
             "Agree":"Please agree with user agreement",

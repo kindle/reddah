@@ -15,15 +15,15 @@
 
     "Register":{
         "Title":"Register",
-        "TitleSub":"Register Subscriber",
-        "TitleMini":"注册小程序",
-        "ReadAgree":"You have read and agreed:",
+        "TitleSub":"Register publisher",
+        "TitleMini":"Register mini app",
+        "ReadAgree":"You have read and agreed",
         "UserAgreement":"User Agreement,",
         "Privacy":"Privacy Policy",
-        "And":"and",
+        "And":"&",
         "Content":"Content Policy",
         "Loading":"Register...",
-        "Success":"Registration is successful. Please verify your email and login..."
+        "Success":"Registration is successful. Please verify your email and login"
     },
 
     "Input":{
