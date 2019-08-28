@@ -76,8 +76,8 @@
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" *ngIf="isFriend" (click)="chat()">
         <div class="centerItem">
-            <ion-icon name="ios-text"></ion-icon>
-            <ion-note color="dark" class="cmd-title">发消息</ion-note>
+            <ion-icon class="cmd-icon" color="secondary" name="ios-text"></ion-icon>
+            <ion-note color="secondary" class="cmd-title cmd-line">发消息</ion-note>
         </div>
     </ion-item>
     <!--<ion-item class="borderBottom" lines="none" href="/#" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
@@ -88,7 +88,8 @@
     </ion-item>-->
     <ion-item lines="none" class="borderTop borderBottom" (click)="addFriend()" *ngIf="!isFriend&&userName!=reddah.getCurrentUser()">
         <div class="centerItem">
-            <ion-note color="dark" class="cmd-title">添加为好友</ion-note>
+            <ion-icon class="cmd-icon" color="secondary" name="add"></ion-icon>
+            <ion-note color="secondary" class="cmd-title cmd-line">添加为好友</ion-note>
         </div>
     </ion-item>
 </ion-content>

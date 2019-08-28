@@ -4,8 +4,8 @@
 </ion-item>
 <ion-content no-padding style="--background: #eeeeee;" #searchResult>
     <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="goAccount()">
-        <ion-icon slot="start" name="ios-person" color="dark" size="medium"></ion-icon>
-        <ion-note color="dark" slot="start">{{ 'About.Account' | translate }}</ion-note>
+        <ion-icon class="menuIcon" slot="start" name="ios-person" color="dark" size="medium"></ion-icon>
+        <ion-note color="dark">{{ 'About.Account' | translate }}</ion-note>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
 
@@ -26,12 +26,12 @@
     </ion-item>
 -->
     <ion-item class="borderItem" (click)="goPrivacy()">
-        <ion-icon slot="start" name="key" color="dark" size="medium"></ion-icon>
-        <ion-note color="dark" slot="start">{{ 'About.Privacy' | translate }}</ion-note>
+        <ion-icon class="menuIcon" slot="start" name="key" color="medium" size="medium"></ion-icon>
+        <ion-note color="dark">{{ 'About.Privacy' | translate }}</ion-note>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item lines="none" class="borderBottom borderItem" (click)="goGeneral()">
-        <ion-icon slot="start" name="globe" color="primary" size="medium"></ion-icon>
+        <ion-icon class="menuIcon" slot="start" name="globe" color="primary" size="medium"></ion-icon>
         <ion-note slot="start" color="dark">{{ 'About.General' | translate }}</ion-note>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
@@ -39,10 +39,12 @@
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop borderItem" (click)="goAbout()">
+        <ion-icon class="menuIcon" slot="start" name="information-circle-outline" color="secondary" size="medium"></ion-icon>
         <ion-label>{{ 'About.About' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item lines="none" class="borderBottom borderItem" (click)="feedback()">
+        <ion-icon class="menuIcon" slot="start" name="mail" color="medium" size="medium"></ion-icon>
         <ion-label>{{ 'Menu.Header.Feedback' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
@@ -50,6 +52,7 @@
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item lines="none" class="borderTop borderItem borderBottom" *ngIf="this.authService.authenticated()" (click)="logout()">
+        <ion-icon class="menuIcon" slot="start" name="log-out" color="dark" size="medium"></ion-icon>
         <ion-label>{{ 'Button.Logout' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>

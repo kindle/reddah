@@ -15,7 +15,7 @@
             <ion-avatar slot="start" style="margin:5px;" (click)="goUser(request.UserName)">
                 <img src="{{reddah.appData('userphoto_'+request.UserName)}}" class="portrait">
             </ion-avatar>
-            <ion-label style="margin-left:10px;">
+            <ion-label style="margin-left:10px;" (click)="goUser(request.UserName)">
                 <span>{{reddah.getDisplayName(request.UserName)}}</span>
                 <ion-icon name="ios-male" *ngIf="sex==1"></ion-icon>
                 <ion-icon name="ios-female" *ngIf="sex==0" color="danger"></ion-icon><br>
