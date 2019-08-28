@@ -43,7 +43,8 @@ export class GroupChatOptPage {
             component: SettingGroupChatTitlePage,
             componentProps: { 
                 targetGroupChatId: this.groupInfo.Id,
-                currentTitle: this.groupInfo.Title
+                currentTitle: this.groupInfo.Title,
+                title: '设置群名称',
             }
         });
         await modal.present();
@@ -51,6 +52,24 @@ export class GroupChatOptPage {
         if(data)
         {
             this.groupInfo.Title = data.newTitle;
+            this.cacheService.clearGroup("ChatChooseGroupPage");
+        }
+    }
+
+    async changeAnnounce(){
+        const modal = await this.modalController.create({
+            component: SettingGroupChatTitlePage,
+            componentProps: { 
+                targetGroupChatId: this.groupInfo.Id,
+                currentContent: this.groupInfo.Content,
+                title: '设置群公告',
+            }
+        });
+        await modal.present();
+        const {data} = await modal.onDidDismiss();
+        if(data)
+        {
+            this.groupInfo.Content = data.newText;
             this.cacheService.clearGroup("ChatChooseGroupPage");
         }
     }

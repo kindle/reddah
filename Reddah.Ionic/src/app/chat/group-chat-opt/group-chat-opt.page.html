@@ -45,7 +45,7 @@
     <ion-item class="borderItem" lines="none">
         <ion-label>群公告</ion-label>
     </ion-item>
-    <ion-item lines="none" class="borderItem borderBottom">
+    <ion-item lines="none" class="borderItem borderBottom" (click)="changeAnnounce()">
         <ion-note color="dark" text-wrap margin-bottom margin-end>{{groupInfo.Content}}</ion-note>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>

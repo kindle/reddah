@@ -1,11 +1,11 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-label>设置群名称</ion-label>
+    <ion-label>{{title}}</ion-label>
     <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">完成</ion-button>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;">
     <ion-item no-padding margin>
-        <ion-label position="stacked">为群聊设置名称</ion-label>
-        <ion-input margin-top type="text" [(ngModel)]="currentTitle" clearInput [disabled]="submitClicked"></ion-input>
+        <ion-label position="stacked">{{title}}</ion-label>
+        <ion-input margin-top type="text" [(ngModel)]="currentText" clearInput [disabled]="submitClicked"></ion-input>
     </ion-item>
 </ion-content>

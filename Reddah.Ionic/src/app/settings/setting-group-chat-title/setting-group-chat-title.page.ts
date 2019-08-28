@@ -14,6 +14,11 @@ export class SettingGroupChatTitlePage implements OnInit {
 
     @Input() targetGroupChatId;
     @Input() currentTitle;
+    @Input() currentContent;
+    @Input() title;
+
+    currentText;
+    type;
 
     submitClicked = false;
         
@@ -26,7 +31,16 @@ export class SettingGroupChatTitlePage implements OnInit {
         private toastController: ToastController,
     ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        if(this.currentTitle!=null&&this.currentTitle.length>0){
+            this.currentText = this.currentTitle;
+            this.type="title";
+        }
+        else{
+            this.currentText = this.currentContent;
+            this.type="content";
+        }
+    }
     
     async close() {
         await this.modalController.dismiss();
@@ -37,13 +51,14 @@ export class SettingGroupChatTitlePage implements OnInit {
         
         let formData = new FormData();
         formData.append("targetGroupChatId", JSON.stringify(this.targetGroupChatId));
-        formData.append("targetTitle", this.currentTitle);
+        formData.append("targetText", this.currentText);
+        formData.append("targetType", this.type);
         
         this.reddah.changeGroupChatTitle(formData)
         .subscribe(result => 
         {
             if(result.Success==0){
-                this.modalController.dismiss({newTitle: this.currentTitle});
+                this.modalController.dismiss({newText: this.currentText});
             }
             else
                 alert(result.Message);

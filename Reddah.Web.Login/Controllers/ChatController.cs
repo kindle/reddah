@@ -584,7 +584,8 @@ namespace Reddah.Web.Login.Controllers
             try
             {
                 string jwt = HttpContext.Current.Request["jwt"];
-                string targetTitle = HttpContext.Current.Request["targetTitle"];
+                string targetText = HttpContext.Current.Request["targetText"];
+                string targetType = HttpContext.Current.Request["targetType"];
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 int targetGroupChatId = js.Deserialize<int>(HttpContext.Current.Request["targetGroupChatId"]);
 
@@ -599,7 +600,10 @@ namespace Reddah.Web.Login.Controllers
                 using (var db = new reddahEntities())
                 {
                     var target = db.Article.FirstOrDefault(a => a.Id==targetGroupChatId && a.Type==3);
-                    target.Title = targetTitle;
+                    if(targetType=="title")
+                        target.Title = targetText;
+                    else
+                        target.Content = targetText;
                     db.SaveChanges();
 
                     return Ok(new ApiResult(0, "success"));
