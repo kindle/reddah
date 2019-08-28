@@ -6,12 +6,12 @@
     </ion-refresher>
     <ion-item (click)="viewNewFriends()">
         <ion-icon name="ios-person-add" slot="start" color="tertiary" class="portrait newFriend"></ion-icon>
-        <ion-label style="margin-left:10px;">新的朋友</ion-label>
+        <ion-label style="margin-left:10px;">{{ 'Menu.NewFriends' | translate }}</ion-label>
         <ion-badge slot="end" color="danger" *ngIf="requestCount>0">{{requestCount}}</ion-badge>
     </ion-item>
     <ion-item (click)="goChooseGroupChat()">
         <ion-icon name="ios-chatbubbles" slot="start" color="tertiary" class="portrait groupChat"></ion-icon>
-        <ion-label style="margin-left:10px;">群聊</ion-label>
+        <ion-label style="margin-left:10px;">{{ 'Menu.GroupChat' | translate }}</ion-label>
     </ion-item>
     <div style="display: flex; justify-content: center;"><ion-spinner name="dots" *ngIf="showLoading"></ion-spinner></div>
     <ion-list>

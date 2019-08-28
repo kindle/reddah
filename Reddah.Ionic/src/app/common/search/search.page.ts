@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
-
+import { TranslateService } from '@ngx-translate/core';
 import { ReddahService } from '../../reddah.service';
 import { Article } from "../../model/article";
 import { PostviewerPage } from '../../postviewer/postviewer.page';
@@ -25,16 +25,25 @@ export class SearchPage implements OnInit {
 
     showTopic=true;
     selectedTopicId=0;
-    keywordPlaceholder = "搜索";
+    keywordPlaceholder = this.translate.instant("Search.Title");
 
     topics = [
-        [{id:1,name:'文章'},{id:2,name:'时光圈'},{id:3,name:'订阅号'}],
-        [{id:4,name:'小程序'}/*,{id:5,name:'聊天记录'},{id:6,name:'股票'}*/],
+        [
+            {id:1,name:this.translate.instant("Search.Article")},
+            {id:2,name:this.translate.instant("Search.Aperture")},
+            {id:3,name:this.translate.instant("Search.Publisher")}
+        ],
+        [
+            {id:4,name:this.translate.instant("Search.MiniApp")},
+            {},
+            {}
+        ],
+        /*,{id:5,name:'聊天记录'},{id:6,name:'股票'}*/
     ];
 
     async chooseTopic(col, isSetFocus=true){
         this.showTopic = false;
-        this.keywordPlaceholder += col.name;
+        this.keywordPlaceholder = col.name;
         this.selectedTopicId = col.id;
         if(isSetFocus){
             setTimeout(() => {
@@ -56,6 +65,7 @@ export class SearchPage implements OnInit {
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
+        private translate: TranslateService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();

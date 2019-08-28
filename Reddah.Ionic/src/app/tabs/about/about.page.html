@@ -28,7 +28,7 @@
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" (click)="goBookmark()">
         <ion-icon class="menuIcon" slot="start" name="bookmark" color="danger" size="medium"></ion-icon>
-        <ion-label>收藏</ion-label>
+        <ion-label>{{ 'Menu.Mark' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
 <!--
@@ -61,7 +61,7 @@
     </ion-item>
     <ion-item lines="none" (click)="goSettings()" class="borderTop borderItem borderBottom">
         <ion-icon class="menuIcon" slot="start" name="settings" color="primary" size="medium"></ion-icon>
-        <ion-label>设置</ion-label>
+        <ion-label>{{ 'Menu.Settings' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
 </ion-content>

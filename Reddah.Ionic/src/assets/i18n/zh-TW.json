@@ -38,8 +38,8 @@
             "UserNameTooLong":"用戶名不能超過25個字元",
             "SubNameTooShort":"名稱不能少於2個字元",
             "PasswordEmpty":"請輸入密碼",
-            "PasswordDifferent":"密码不一致",
-            "EmailEmpty":"请输入电子邮件",
+            "PasswordDifferent":"密碼不一致",
+            "EmailEmpty":"請輸入電子郵件",
             "Agree":"请同意用户协议",
             "SubNameEmpty":"请输入名称",
             "SubDescEmpty":"请输入描述"
@@ -60,9 +60,14 @@
         "Recommend": "阅读",
         "Earth":"地球",
         "Contact": "好友",
-        "Find": "发现",
+        "Find": "探索",
         "About": "我",
         "Publisher": "订阅号",
+        "MiniApp": "小程序",
+        "NewFriends": "新朋友",
+        "GroupChat": "群聊",
+        "Mark": "收藏",
+        "Settings": "設定",
         "Header":{
             "GroupChat":"发起群聊",
             "AddFriend":"添加朋友",
@@ -83,6 +88,31 @@
         }
     },
 
+    "Search":{
+        "Title": "搜索",
+        "Filter": "搜索指定内容",
+        "Article":"文章",
+        "Aperture":"时光圈",
+        "Publisher":"订阅号",
+        "MiniApp":"小程序",
+        "Recently":"最近用过",
+        "More":"更多"
+    },
+
+    "About":{
+        "Account":"帐户",
+        "Privacy":"隐私",
+        "General":"通用",
+        "About":"关于",
+        "Feedback":"帮助反馈",
+
+        "About.CurrentVersion": "当前版本",
+        "About.CheckUpgrade": "检查新版本",
+        "About.CurrentLocale": "语言",
+        "About.ChangeLocale": "更换语言",
+        "About.CurrentUser": "当前用户"
+    },
+
     "Time.YearsAgo": "年前",
     "Time.MonthsAgo": "个月前",
     "Time.WeeksAgo": "周前",
@@ -100,11 +130,7 @@
     "Article.Comments": "评论",
     
     
-    "About.CurrentVersion": "当前版本",
-    "About.CheckUpgrade": "检查新版本",
-    "About.CurrentLocale": "语言",
-    "About.ChangeLocale": "更换语言",
-    "About.CurrentUser": "当前用户",
+    
     "Comment.Comment": "写评论",
     "Comment.Like": "点赞",
     "Comment.Delete": "删除",

@@ -22,12 +22,12 @@
     </ion-item>
     <ion-item class="borderTop borderItem" (click)="goPublicPage()">
         <ion-icon class="menuIcon" name="ios-list" slot="start" color="subscribe" size="medium"></ion-icon>
-        <ion-label>订阅号</ion-label>
+        <ion-label>{{ 'Menu.Publisher' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item lines="none" class="borderItem borderBottom" (click)="goMiniPage()">
         <ion-icon class="menuIcon" name="infinite" slot="start" color="mini" size="medium"></ion-icon>
-        <ion-label>小程序</ion-label>
+        <ion-label>{{ 'Menu.MiniApp' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
     
