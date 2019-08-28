@@ -29,12 +29,12 @@ export class SearchPage implements OnInit {
 
     topics = [
         [
-            {id:1,name:this.translate.instant("Search.Article")},
-            {id:2,name:this.translate.instant("Search.Aperture")},
-            {id:3,name:this.translate.instant("Search.Publisher")}
+            {id:1,name:this.translate.instant("Menu.Recommend")},
+            {id:2,name:this.translate.instant("Menu.Timeline")},
+            {id:3,name:this.translate.instant("Menu.Publisher")}
         ],
         [
-            {id:4,name:this.translate.instant("Search.MiniApp")},
+            {id:4,name:this.translate.instant("Menu.MiniApp")},
             {},
             {}
         ],

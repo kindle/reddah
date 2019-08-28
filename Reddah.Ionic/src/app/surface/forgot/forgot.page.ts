@@ -60,7 +60,7 @@ export class ForgotPage implements OnInit {
             {
                 loading.dismiss();
                 if(result.Success==0){
-                    this.reddah.toast("Please get security token from your Email", "primary");
+                    this.reddah.toast(this.translate.instant("Input.Error.GetTokenFromEmail"), "primary");
                     //show change password ui
                     this.taber = false;
                 }

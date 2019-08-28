@@ -40,63 +40,54 @@
             "PasswordEmpty":"Digite a senha",
             "PasswordDifferent":"Senha e confirmação de senha são diferentes",
             "EmailEmpty":"Por favor insira e - mail",
-            "Agree":"Please agree with user agreement",
-            "SubNameEmpty":"Please input name",
-            "SubDescEmpty":"Please input description"
+            "Agree":"Por favor, Concorde com o acordo do utilizador",
+            "SubNameEmpty":"Por favor, Nome de Entrada",
+            "SubDescEmpty":"Por favor, descrição de Entrada",
+            "GetTokenFromEmail":"Por favor, pegue a ficha de segurança do SEU e -mail"
         }
     },
 
     "Button":{
-        "Login": "Login",
-        "Register": "Register",
+        "Login": "Logina",
+        "Register": "Registo",
         "Logout": "Logout",
-        "Back": "Back",
-        "Close": "Close",
-        "Loading":"loading..."
+        "Back": "Volta para trás",
+        "Close": "Fechar",
+        "Loading":"carga...",
+        "Reset":"Senha Esquecida",
+        "Token":"Título de segurança",
+        "ChangePassword":"Alterar senha"
     },
 
     "Menu":{
-        "Message": "Message",
-        "Recommend": "Article",
-        "Earth":"Earth",
-        "Contact": "Friend",
+        "Message": "Mensagem",
+        "Recommend": "Artigo",
+        "Earth":"Aarde",
+        "Contact": "Amigo",
         "Find": "Explorar",
-        "About": "Me",
-        "Publisher": "Publisher",
+        "About": "Eu",
+        "Publisher": "Editor",
         "MiniApp": "Mini App",
-        "NewFriends": "New Friends",
-        "GroupChat": "Group Chat",
-        "Mark": "Mark",
-        "Settings": "Settings",
+        "NewFriends": "Novo Amigo",
+        "GroupChat": "Conversa de Grupo",
+        "Mark": "Marcar",
+        "Settings": "Configurações",
         "Header":{
-            "GroupChat":"New Chat",
-            "AddFriend":"Add Friend",
-            "Scan":"Scan",
-            "Feedback":"Feedback"
+            "GroupChat":"Nova Conversa",
+            "AddFriend":"Adicionar um Amigo",
+            "Scan":"Digitalizar",
+            "Feedback":"Reacção"
         },
-        "FindSub":{
-            "Timeline":"Aperture",
-            "Scan":"Scan",
-            "Shake":"Shake",
-            "Look":"Read",
-            "Search":"Search",
-            "Event":"Event",
-            "Buy":"Buy",
-            "Play":"Game",
-            "Platform":"Open Platform",
-            "Program":"Mini Program"
-        }
+        "Timeline":"Apertar",
+        "Shake":"Agitar",
+        "Platform":"Abrir Plataforma"
     },
 
     "Search":{
-        "Title":"Search",
-        "Filter":"Filter by",
-        "Article":"Article",
-        "Aperture":"Aperture",
-        "Publisher":"Publisher",
-        "MiniApp":"MiniApp",
-        "Recently":"Recently used",
-        "More":"More"
+        "Title":"Pesquisar",
+        "Filter":"Filtro por",
+        "Recently":"Utilizado recentemente",
+        "More":"Mais"
     },
 
     "About":{
@@ -104,7 +95,12 @@
         "Privacy":"Privacy",
         "General":"General",
         "About":"About",
-        "Feedback":"Feedback",
+        "Photo":"Photo",
+        "Card":"Card",
+        "Location":"Location",
+        "Nickname":"Nickname",
+        "Sex":"Sex",
+        "Signature":"Signature",
 
         "CurrentVersion": "Version",
         "CheckUpgrade": "Check Latest Version",

@@ -41,8 +41,9 @@
         "PasswordDifferent":"パスワードと確認パスワードが異なる",
         "EmailEmpty":"入力メール",
         "Agree":"ユーザー同意に同意してください",
-        "SubNameEmpty":"请输入名称",
-        "SubDescEmpty":"请输入描述"
+        "SubNameEmpty":"入力名",
+        "SubDescEmpty":"説明を入力してください",
+        "GetTokenFromEmail":"メールからセキュリティトークンを取得してください"
       }
     },
 
@@ -52,51 +53,41 @@
       "Logout": "ログアウト",
       "Back": "戻る",
       "Close": "クローズ",
-      "Loading":"読み込み..."
+      "Loading":"読み込み...",
+      "Reset":"パスワード忘れ",
+      "Token":"セキュリティトークン",
+      "ChangePassword":"パスワード変更"
     },
 
     "Menu":{
       "Message": "メッセージ",
-      "Recommend": "推薦",
-      "Earth":"Earth",
+      "Recommend": "記事",
+      "Earth":"アース",
       "Contact": "友達",
       "Find": "探検する",
       "About": "私",
-      "Publisher": "Publisher",
-      "MiniApp": "Mini App",
-      "NewFriends": "New Friends",
-      "GroupChat": "Group Chat",
-      "Mark": "Mark",
-      "Settings": "Settings",
+      "Publisher": "出版社",
+      "MiniApp": "ミニアプリ",
+      "NewFriends": "新しい友人",
+      "GroupChat": "グループチャット",
+      "Mark": "マーク",
+      "Settings": "設定",
       "Header":{
-        "GroupChat":"雑談を始める",
+        "GroupChat":"新しいチャット",
         "AddFriend":"友達を追加",
         "Scan":"スキャン",
         "Feedback":"フィードバック"
       },
-      "FindSub":{
-          "Timeline":"しぼり",
-          "Scan":"スキャン",
-          "Shake":"振る",
-          "Look":"トップストーリー",
-          "Search":"サーチ",
-          "Event":"Event",
-          "Buy":"買い",
-          "Play":"ゲーム",
-          "Platform":"Open Platform",
-          "Program":"ミニプログラム"
-      }
+      "Timeline":"絞り",
+      "Shake":"振る",
+      "Platform":"オープンプラットホーム"
     },
 
     "Search":{
-        "Title":"Search",
-        "Filter":"Filter by",
-        "Article":"Article",
-        "Aperture":"Aperture",
-        "Publisher":"Publisher",
-        "MiniApp":"MiniApp",
-        "Recently":"Recently used",
-        "More":"More"
+        "Title":"サーチ",
+        "Filter":"によるフィルタ",
+        "Recently":"最近使われる",
+        "More":"その他"
     },
 
     "About":{
@@ -104,7 +95,12 @@
         "Privacy":"Privacy",
         "General":"General",
         "About":"About",
-        "Feedback":"Feedback",
+        "Photo":"Photo",
+        "Card":"Card",
+        "Location":"Location",
+        "Nickname":"Nickname",
+        "Sex":"Sex",
+        "Signature":"Signature",
 
         "CurrentVersion": "Version",
         "CheckUpgrade": "Check Latest Version",

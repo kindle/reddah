@@ -3,42 +3,41 @@
 </ion-item>
 <ion-content style="background-color: white;">
     <ion-item lines="none" class="sectionGapTop inputItem" no-padding>
-        <h2 class="title">Reset Password</h2>
+        <h2 class="title">{{ 'Button.Reset' | translate }}</h2>
     </ion-item>
         
     <div *ngIf="taber">
         <ion-item lines="none" class="sectionGapTop gapBottom inputItem" no-padding>
-            <ion-note style="font-size: xx-large;margin-right:10px;color:black;">获取安全令牌</ion-note>
-            <ion-note (click)="change()">更改密码</ion-note>
+            <ion-note style="font-size: xx-large;margin-right:10px;color:black;">{{ 'Button.Token' | translate }}</ion-note>
+            <ion-note (click)="change()">{{ 'Button.ChangePassword' | translate }}</ion-note>
         </ion-item>
         <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
             <ion-input type="text" placeholder="{{ 'Input.Email' | translate }}" [(ngModel)]="email" clearInput></ion-input>
         </ion-item>
-        <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="token()" expand="block">生成安全令牌</ion-button>
+        <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="token()" expand="block"></ion-button>
     </div>
 
 
     <div *ngIf="!taber">
         <ion-item lines="none" class="sectionGapTop gapBottom inputItem" no-padding>
-            <ion-note (click)="change()">获取安全令牌</ion-note>
-            <ion-note style="font-size: xx-large;margin-left:10px;color:black;">更改密码</ion-note>
+            <ion-note (click)="change()">{{ 'Button.Token' | translate }}</ion-note>
+            <ion-note style="font-size: xx-large;margin-left:10px;color:black;">{{ 'Button.ChangePassword' | translate }}</ion-note>
         </ion-item>
         <ion-item class="gapBottom inputItem" no-padding>
-            <ion-input type="password" placeholder="新密码" [(ngModel)]="password" clearInput></ion-input>
+            <ion-input type="password" placeholder="{{ 'Input.Password' | translate }}" [(ngModel)]="password" clearInput></ion-input>
         </ion-item>
         <ion-item class="gapBottom inputItem" no-padding>
-            <ion-input type="password" placeholder="确认密码" [(ngModel)]="confirmPassword" clearInput></ion-input>
+            <ion-input type="password" placeholder="{{ 'Input.ConfirmPassword' | translate }}" [(ngModel)]="confirmPassword" clearInput></ion-input>
         </ion-item>
         <ion-item class="gapBottom inputItem" no-padding>
-            <ion-input type="text" placeholder="安全令牌" [(ngModel)]="myToken" clearInput></ion-input>
+            <ion-input type="text" placeholder="{{ 'Button.Token' | translate }}" [(ngModel)]="myToken" clearInput></ion-input>
         </ion-item>
-        <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="submit()" expand="block">确定</ion-button>
+        <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="submit()" expand="block">{{ 'Confirm.Yes' | translate }}</ion-button>
     </div>
 
     <div class="conductArea" text-center>
         <p class="copyright">
-            CopyRight © 2015-2019 Reddah.com<br>
-            All Rights Reserved.
+            Reddah.com<br>
         </p>
     </div>
 </ion-content>
