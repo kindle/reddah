@@ -91,22 +91,22 @@
     },
 
     "About":{
-        "Account":"Account",
+        "Account":"Conto",
         "Privacy":"Privacy",
-        "General":"General",
-        "About":"About",
-        "Photo":"Photo",
-        "Card":"Card",
-        "Location":"Location",
+        "General":"Generale",
+        "About":"Informazioni",
+        "Photo":"Foto",
+        "Card":"Carta",
+        "Location":"Posizione",
         "Nickname":"Nickname",
-        "Sex":"Sex",
-        "Signature":"Signature",
+        "Sex":"Sesso",
+        "Signature":"Firma",
 
-        "CurrentVersion": "Version",
-        "CheckUpgrade": "Check Latest Version",
+        "CurrentVersion": "Versione corrente",
+        "CheckUpgrade": "Aggiornamento",
         "CurrentLocale": "Locale",
-        "ChangeLocale": "Change Locale",
-        "CurrentUser": "Current User"
+        "ChangeLocale": "Cambia locale",
+        "CurrentUser": "Utente attuale"
     },
 
     "Time.YearsAgo": "year(s) ago",
@@ -125,16 +125,16 @@
     "Comment.Comment": "Comment",
     "Comment.Like": "Like",
     "Comment.Delete": "Delete",
-    "Comment.Tip": "Enter some comment here...",
+    "Comment.Tip": "Inserisci qui un commento...",
     "Article.Bookmark": "Bookmark",
     "Article.Share": "Share",
-    "Confirm.Title": "Confirm",
-    "Confirm.Message": "Do you want to exit Reddah?",
-    "Confirm.ClearChatMessage": "Do you want to clear all the chat messages?",
-    "Confirm.LogoutMessage":"Do you want to logout?",
-    "Confirm.LeaveGroupChatMessage":"Do you want to quit and delete?",
-    "Confirm.Yes": "Yes",
-    "Confirm.Cancel": "Cancel",
-    "Confirm.Submit": "Submit"
+    "Confirm.Title": "Conferma",
+    "Confirm.Message": "Vuoi uscire da Reddah?",
+    "Confirm.ClearChatMessage": "Vuoi cancellare tutti i messaggi di chat?",
+    "Confirm.LogoutMessage":"Vuoi fare il logout?",
+    "Confirm.LeaveGroupChatMessage":"Vuoi smettere e cancellare?",
+    "Confirm.Yes": "Sì",
+    "Confirm.Cancel": "Annulla",
+    "Confirm.Submit": "Invia"
 
 }

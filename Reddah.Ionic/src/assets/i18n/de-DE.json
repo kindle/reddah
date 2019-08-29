@@ -91,22 +91,22 @@
     },
 
     "About":{
-        "Account":"Account",
-        "Privacy":"Privacy",
-        "General":"General",
-        "About":"About",
-        "Photo":"Photo",
-        "Card":"Card",
-        "Location":"Location",
-        "Nickname":"Nickname",
-        "Sex":"Sex",
-        "Signature":"Signature",
+        "Account":"Konto",
+        "Privacy":"Datenschutz",
+        "General":"Allgemeines",
+        "About":"Über",
+        "Photo":"Foto",
+        "Card":"Karte",
+        "Location":"Lage",
+        "Nickname":"Spitzname",
+        "Sex":"Geschlecht",
+        "Signature":"Unterschrift",
 
-        "CurrentVersion": "Version",
-        "CheckUpgrade": "Check Latest Version",
-        "CurrentLocale": "Locale",
-        "ChangeLocale": "Change Locale",
-        "CurrentUser": "Current User"
+        "CurrentVersion": "Aktuelle Version",
+        "CheckUpgrade": "Upgrade",
+        "CurrentLocale": "Lokal",
+        "ChangeLocale": "Ort ändern",
+        "CurrentUser": "Aktueller Benutzer"
     },
 
     "Time.YearsAgo": "year(s) ago",
@@ -125,16 +125,16 @@
     "Comment.Comment": "Comment",
     "Comment.Like": "Like",
     "Comment.Delete": "Delete",
-    "Comment.Tip": "Enter some comment here...",
+    "Comment.Tip": "Geben Sie hier einen Kommentar ein...",
     "Article.Bookmark": "Bookmark",
     "Article.Share": "Share",
-    "Confirm.Title": "Confirm",
-    "Confirm.Message": "Do you want to exit Reddah?",
-    "Confirm.ClearChatMessage": "Do you want to clear all the chat messages?",
-    "Confirm.LogoutMessage":"Do you want to logout?",
-    "Confirm.LeaveGroupChatMessage":"Do you want to quit and delete?",
-    "Confirm.Yes": "Yes",
-    "Confirm.Cancel": "Cancel",
-    "Confirm.Submit": "Submit"
+    "Confirm.Title": "Bestätigen",
+    "Confirm.Message": "Wollen Sie Reddah verlassen?",
+    "Confirm.ClearChatMessage": "Möchten Sie alle Chats löschen?",
+    "Confirm.LogoutMessage":"Wollen Sie sich abmelden?",
+    "Confirm.LeaveGroupChatMessage":"Möchten Sie kündigen und löschen?",
+    "Confirm.Yes": "Ja",
+    "Confirm.Cancel": "Abbrechen",
+    "Confirm.Submit": "Senden"
 
 }

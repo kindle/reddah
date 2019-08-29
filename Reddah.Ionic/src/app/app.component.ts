@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewChildren,QueryList } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform, ModalController, AlertController, ActionSheetController, PopoverController, IonRouterOutlet, MenuController, LoadingController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -152,7 +152,7 @@ export class AppComponent {
     timePeriodToExit = 2000;
 
     @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
-
+    @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
     
     public alertShown:boolean = false;
 
@@ -185,67 +185,59 @@ export class AppComponent {
     // active hardware back button
     backButtonEvent() {
         this.platform.backButton.subscribe(async () => {
-            let popFlag = true;
+            // close action sheet
             try {
                 const element = await this.actionSheetCtrl.getTop();
                 if (element) {
                     element.dismiss();
-                    popFlag = false;
+                    return;
                 }
-            } catch (error) {}
+            } catch (error) {
+            }
 
             // close popover
             try {
                 const element = await this.popoverCtrl.getTop();
                 if (element) {
                     element.dismiss();
-                    popFlag = false;
+                    return;
                 }
-            } catch (error) {}
+            } catch (error) {
+            }
 
-            // loading control
-            try {
-                const element = await this.loadingController.getTop();
-                if (element) {
-                    element.dismiss();
-                    popFlag = false;
-                }
-            } catch (error) {}
-            
             // close modal
             try {
                 const element = await this.modalController.getTop();
                 if (element) {
                     element.dismiss();
-                    popFlag = false;
+                    return;
                 }
-            } catch (error) {}
+            } catch (error) {
+                console.log(error);
 
-            //close side menua
+            }
+
+            // close side menua
             try {
                 const element = await this.menu.getOpen();
-                if (element !== null) {
+                if (element) {
                     this.menu.close();
-                    popFlag = false;
+                    return;
 
                 }
 
-            } catch (error) {}
+            } catch (error) {
 
-            if(popFlag)
-            {
-                if(this.router.url.startsWith('/tabs/(home:home)')||
-                this.router.url==('/')) 
-                {
-                    if(this.alertShown==false){
-                        this.presentAlertConfirm();  
-                    }
-                }
-                else if(this.routerOutlet && this.routerOutlet.canGoBack())
-                {
-                    this.routerOutlet.pop();
-                }  
             }
+
+            this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
+                if (outlet && outlet.canGoBack()) {
+                    outlet.pop();
+                } else {
+                    this.presentAlertConfirm();
+                    event.preventDefault();
+                }
+            });
         });
     }
 

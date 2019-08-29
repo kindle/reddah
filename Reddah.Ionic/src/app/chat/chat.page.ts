@@ -176,6 +176,7 @@ export class ChatPage extends ChatBase implements OnInit  {
             Content: event.text, 
             UserName: this.userName,
             Type: event.type,
+            Uid: event.uid
         }
         this.messages.push(newmessage);
         
@@ -224,6 +225,7 @@ export class ChatPage extends ChatBase implements OnInit  {
             if(data.Success==0)
             {
                 this.chatId = data.Message.Seed;
+                this.chatbox.selectedArticleId = this.chatId;
                 if(id==0){//first load
                     this.messages =  data.Message.Comments;
                     setTimeout(() => {

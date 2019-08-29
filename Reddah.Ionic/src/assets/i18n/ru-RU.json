@@ -91,22 +91,22 @@
     },
 
     "About":{
-        "Account":"Account",
-        "Privacy":"Privacy",
-        "General":"General",
-        "About":"About",
-        "Photo":"Photo",
-        "Card":"Card",
-        "Location":"Location",
-        "Nickname":"Nickname",
-        "Sex":"Sex",
-        "Signature":"Signature",
+        "Account":"счёт",
+        "Privacy":"Конфиденциальность",
+        "General":"Общее описание",
+        "About":"О",
+        "Photo":"фото",
+        "Card":"калория",
+        "Location":"место",
+        "Nickname":"прозвище",
+        "Sex":"характер",
+        "Signature":"подпись",
 
-        "CurrentVersion": "Version",
-        "CheckUpgrade": "Check Latest Version",
-        "CurrentLocale": "Locale",
-        "ChangeLocale": "Change Locale",
-        "CurrentUser": "Current User"
+        "CurrentVersion": "текущая версия",
+        "CheckUpgrade": "эскалация",
+        "CurrentLocale": "место работы",
+        "ChangeLocale": "Изменить параметры области",
+        "CurrentUser": "текущий пользователь"
     },
 
     "Time.YearsAgo": "year(s) ago",
@@ -125,16 +125,16 @@
     "Comment.Comment": "Comment",
     "Comment.Like": "Like",
     "Comment.Delete": "Delete",
-    "Comment.Tip": "Enter some comment here...",
+    "Comment.Tip": "Введите комментарий...",
     "Article.Bookmark": "Bookmark",
     "Article.Share": "Share",
-    "Confirm.Title": "Confirm",
-    "Confirm.Message": "Do you want to exit Reddah?",
-    "Confirm.ClearChatMessage": "Do you want to clear all the chat messages?",
-    "Confirm.LogoutMessage":"Do you want to logout?",
-    "Confirm.LeaveGroupChatMessage":"Do you want to quit and delete?",
-    "Confirm.Yes": "Yes",
-    "Confirm.Cancel": "Cancel",
-    "Confirm.Submit": "Submit"
+    "Confirm.Title": "подтверждение",
+    "Confirm.Message": "Ты хочешь выйти из Reddah?",
+    "Confirm.ClearChatMessage": "Очистить все разговоры?",
+    "Confirm.LogoutMessage":"Нужно ли списать?",
+    "Confirm.LeaveGroupChatMessage":"выйти и удалить?",
+    "Confirm.Yes": "Да",
+    "Confirm.Cancel": "отмена",
+    "Confirm.Submit": "представление"
 
 }

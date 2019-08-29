@@ -91,22 +91,22 @@
     },
 
     "About":{
-        "Account":"Account",
-        "Privacy":"Privacy",
-        "General":"General",
-        "About":"About",
-        "Photo":"Photo",
-        "Card":"Card",
-        "Location":"Location",
-        "Nickname":"Nickname",
-        "Sex":"Sex",
-        "Signature":"Signature",
+        "Account":"계좌",
+        "Privacy":"프라이버시",
+        "General":"개술",
+        "About":"에 관해",
+        "Photo":"사진",
+        "Card":"카드",
+        "Location":"위치",
+        "Nickname":"별명",
+        "Sex":"성",
+        "Signature":"서명하다",
 
-        "CurrentVersion": "Version",
-        "CheckUpgrade": "Check Latest Version",
-        "CurrentLocale": "Locale",
-        "ChangeLocale": "Change Locale",
-        "CurrentUser": "Current User"
+        "CurrentVersion": "현재 버전",
+        "CheckUpgrade": "업그레이드",
+        "CurrentLocale": "현장",
+        "ChangeLocale": "영역 설정 변경",
+        "CurrentUser": "현재 사용자"
     },
 
 
@@ -132,15 +132,15 @@
     "Comment.Comment": "comment",
     "Comment.Like": "Like",
     "Comment.Delete": "Delete",
-    "Comment.Tip": "Enter some comment here...",
+    "Comment.Tip": "여기에 주석을 입력해서...",
     "Article.Bookmark": "Bookmark",
     "Article.Share": "Share",
-    "Confirm.Title": "Confirm",
-    "Confirm.Message": "Do you want to exit Reddah?",
-    "Confirm.ClearChatMessage": "Do you want to clear all the chat messages?",
-    "Confirm.LogoutMessage":"Do you want to logout?",
-    "Confirm.LeaveGroupChatMessage":"Do you want to quit and delete?",
-    "Confirm.Yes": "Yes",
-    "Confirm.Cancel": "Cancel",
-    "Confirm.Submit": "Submit"
+    "Confirm.Title": "확인",
+    "Confirm.Message": "Reddah 탈퇴하고 싶어요?",
+    "Confirm.ClearChatMessage": "모든 채팅 정보를 삭제합니까?",
+    "Confirm.LogoutMessage":"취소해야 합니까?",
+    "Confirm.LeaveGroupChatMessage":"종료하고 삭제하시겠습니까?",
+    "Confirm.Yes": "네",
+    "Confirm.Cancel": "취소",
+    "Confirm.Submit": "제출하다"
   }

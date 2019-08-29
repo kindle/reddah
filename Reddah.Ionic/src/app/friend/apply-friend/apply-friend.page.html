@@ -8,16 +8,18 @@
 
 <ion-content padding style="--background: white;">
     <ion-item no-padding margin>
-      <ion-label position="stacked">你需要发送验证申请，等对方通过</ion-label>
-      <ion-input margin-top type="text" [(ngModel)]="message" clearInput #newRequest></ion-input>
+      <ion-label position="stacked" style="font-size: x-large;">你需要发送验证申请，等对方通过</ion-label>
+      <ion-textarea autoresize margin-top type="text" [(ngModel)]="message" clearInput #newRequest></ion-textarea>
     </ion-item>
     <ion-item no-padding margin>
-      <ion-label position="stacked">为朋友设置备注</ion-label>
+      <ion-label position="stacked" style="font-size: x-large;">为朋友设置备注</ion-label>
       <ion-input margin-top type="text" [(ngModel)]="targetNoteName" clearInput></ion-input>
     </ion-item>
+<!--
     <ion-item lines="none" no-padding margin>
-      <ion-label position="stacked" no-margin>设置时光圈和视频动态权限</ion-label>
-      <ion-label position="stacked">不让他(她)看</ion-label>
+      <ion-label position="stacked" style="font-size: x-large;" no-margin>设置时光圈和视频动态权限</ion-label>
+      <ion-label position="stacked" style="font-size: x-large;">不让他(她)看</ion-label>
       <ion-toggle [(ngModel)]="permission" color="success" slot="end"></ion-toggle>
     </ion-item>
+-->
 </ion-content>

@@ -91,22 +91,22 @@
     },
 
     "About":{
-        "Account":"Account",
-        "Privacy":"Privacy",
-        "General":"General",
-        "About":"About",
-        "Photo":"Photo",
-        "Card":"Card",
-        "Location":"Location",
-        "Nickname":"Nickname",
-        "Sex":"Sex",
-        "Signature":"Signature",
+        "Account":"Λογαριασμός",
+        "Privacy":"Ιδιότητα",
+        "General":"Γενικά",
+        "About":"Περίπου",
+        "Photo":"Φωτογραφία",
+        "Card":"Κάρτα",
+        "Location":"Τοποθεσία",
+        "Nickname":"Ψευδώνυμο",
+        "Sex":"Φύλο",
+        "Signature":"Υπογραφή",
 
-        "CurrentVersion": "Version",
-        "CheckUpgrade": "Check Latest Version",
-        "CurrentLocale": "Locale",
-        "ChangeLocale": "Change Locale",
-        "CurrentUser": "Current User"
+        "CurrentVersion": "Τρέχουσα έκδοση",
+        "CheckUpgrade": "Αναβάθμιση",
+        "CurrentLocale": "Τοπικό",
+        "ChangeLocale": "Τροποποίηση τοποθεσίας",
+        "CurrentUser": "Τρέχων χρήστης"
     },
 
     "Time.YearsAgo": "year(s) ago",
@@ -125,16 +125,16 @@
     "Comment.Comment": "Comment",
     "Comment.Like": "Like",
     "Comment.Delete": "Delete",
-    "Comment.Tip": "Enter some comment here...",
+    "Comment.Tip": "Εισάγετε κάποιο σχόλιο εδώ...",
     "Article.Bookmark": "Bookmark",
     "Article.Share": "Share",
-    "Confirm.Title": "Confirm",
-    "Confirm.Message": "Do you want to exit Reddah?",
-    "Confirm.ClearChatMessage": "Do you want to clear all the chat messages?",
-    "Confirm.LogoutMessage":"Do you want to logout?",
-    "Confirm.LeaveGroupChatMessage":"Do you want to quit and delete?",
-    "Confirm.Yes": "Yes",
-    "Confirm.Cancel": "Cancel",
-    "Confirm.Submit": "Submit"
+    "Confirm.Title": "Επιβεβαίωση",
+    "Confirm.Message": "Θέλεις να βγεις από το Ρέντα?",
+    "Confirm.ClearChatMessage": "Θέλεις να καθαρίσεις όλα τα μηνύματα?",
+    "Confirm.LogoutMessage":"Θέλεις να βγάλεις λογότυπο?",
+    "Confirm.LeaveGroupChatMessage":"Επιθυμείτε την έξοδο και τη διαγραφή?",
+    "Confirm.Yes": "Ναι",
+    "Confirm.Cancel": "Ακύρωση",
+    "Confirm.Submit": "Υποβολή"
 
 }

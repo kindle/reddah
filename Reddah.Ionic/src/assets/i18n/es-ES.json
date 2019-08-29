@@ -91,22 +91,22 @@
     },
 
     "About":{
-        "Account":"Account",
-        "Privacy":"Privacy",
-        "General":"General",
-        "About":"About",
-        "Photo":"Photo",
-        "Card":"Card",
-        "Location":"Location",
-        "Nickname":"Nickname",
-        "Sex":"Sex",
-        "Signature":"Signature",
+        "Account":"Cuenta",
+        "Privacy":"Privacidad",
+        "General":"Generalidades",
+        "About":"Sobre",
+        "Photo":"Foto",
+        "Card":"Tarjeta",
+        "Location":"Ubicación",
+        "Nickname":"Apodo",
+        "Sex":"Sexo",
+        "Signature":"Firma",
 
-        "CurrentVersion": "Version",
-        "CheckUpgrade": "Check Latest Version",
-        "CurrentLocale": "Locale",
-        "ChangeLocale": "Change Locale",
-        "CurrentUser": "Current User"
+        "CurrentVersion": "Versión actual",
+        "CheckUpgrade": "Ascensos",
+        "CurrentLocale": "Escena",
+        "ChangeLocale": "Cambiar configuración deárea",
+        "CurrentUser": "Usuario actual"
     },
 
     "Time.YearsAgo": "year(s) ago",
@@ -125,16 +125,16 @@
     "Comment.Comment": "Comment",
     "Comment.Like": "Like",
     "Comment.Delete": "Delete",
-    "Comment.Tip": "Enter some comment here...",
+    "Comment.Tip": "Introduzca aquíla nota...",
     "Article.Bookmark": "Bookmark",
     "Article.Share": "Share",
-    "Confirm.Title": "Confirm",
-    "Confirm.Message": "Do you want to exit Reddah?",
-    "Confirm.ClearChatMessage": "Do you want to clear all the chat messages?",
-    "Confirm.LogoutMessage":"Do you want to logout?",
-    "Confirm.LeaveGroupChatMessage":"Do you want to quit and delete?",
-    "Confirm.Yes": "Yes",
-    "Confirm.Cancel": "Cancel",
-    "Confirm.Submit": "Submit"
+    "Confirm.Title": "Confirmar",
+    "Confirm.Message": "Quieres dejar a reddah?",
+    "Confirm.ClearChatMessage": "Borra toda la información de chat?",
+    "Confirm.LogoutMessage":"Quiere pasar a pérdidas y ganancias?",
+    "Confirm.LeaveGroupChatMessage":"Quiere pasar a pérdidas y ganancias?",
+    "Confirm.Yes": "Sí",
+    "Confirm.Cancel": "Cancelar",
+    "Confirm.Submit": "Presentación"
 
 }

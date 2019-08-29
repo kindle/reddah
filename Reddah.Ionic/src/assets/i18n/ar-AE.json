@@ -91,22 +91,22 @@
     },
 
     "About":{
-        "Account":"Account",
-        "Privacy":"Privacy",
-        "General":"General",
-        "About":"About",
-        "Photo":"Photo",
-        "Card":"Card",
-        "Location":"Location",
-        "Nickname":"Nickname",
-        "Sex":"Sex",
-        "Signature":"Signature",
+        "Account":"حساب",
+        "Privacy":"الخصوصية",
+        "General":"لمحة عامة",
+        "About":"عبير",
+        "Photo":"صور ،",
+        "Card":"كرت",
+        "Location":"الموقع",
+        "Nickname":"كنية",
+        "Sex":"سكس xxx",
+        "Signature":"توقيع",
 
-        "CurrentVersion": "Version",
-        "CheckUpgrade": "Check Latest Version",
-        "CurrentLocale": "Locale",
-        "ChangeLocale": "Change Locale",
-        "CurrentUser": "Current User"
+        "CurrentVersion": "النسخة الحالية",
+        "CheckUpgrade": "تصعيد",
+        "CurrentLocale": "مشهد",
+        "ChangeLocale": "تغيير إعدادات المنطقة",
+        "CurrentUser": "المستخدم الحالي"
     },
 
     "Time.YearsAgo": "year(s) ago",
@@ -126,16 +126,16 @@
     "Comment.Comment": "Comment",
     "Comment.Like": "Like",
     "Comment.Delete": "Delete",
-    "Comment.Tip": "Enter some comment here...",
+    "Comment.Tip": "أدخل التعليقات هنا",
     "Article.Bookmark": "Bookmark",
     "Article.Share": "Share",
-    "Confirm.Title": "Confirm",
-    "Confirm.Message": "Do you want to exit Reddah?",
-    "Confirm.ClearChatMessage": "Do you want to clear all the chat messages?",
-    "Confirm.LogoutMessage":"Do you want to logout?",
-    "Confirm.LeaveGroupChatMessage":"Do you want to quit and delete?",
-    "Confirm.Yes": "Yes",
-    "Confirm.Cancel": "Cancel",
-    "Confirm.Submit": "Submit"
+    "Confirm.Title": "أكد",
+    "Confirm.Message": "هل تريد الخروج من الردة ؟",
+    "Confirm.ClearChatMessage": "مسح جميع رسائل الدردشة ؟",
+    "Confirm.LogoutMessage":"هل تريد تسجيل الخروج ؟",
+    "Confirm.LeaveGroupChatMessage":"هل تريد الخروج وحذف ؟",
+    "Confirm.Yes": "نعم",
+    "Confirm.Cancel": "ألغى",
+    "Confirm.Submit": "قدم"
 
 }
