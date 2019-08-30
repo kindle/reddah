@@ -7,7 +7,9 @@ import { ReddahService } from '../../reddah.service';
 import { LocalePage } from '../../common/locale/locale.page';
 import { UserPage } from '../../common/user/user.page';
 import { ChatPage } from '../chat.page';
+import { ChatFirePage } from '../../chatfire/chat-fire.page';
 import { GroupChatPage } from '../group-chat.page';
+import { GroupChatFirePage } from '../../chatfire/group-chat-fire.page';
 import { ChatChooseGroupPage } from '../chat-choose-group/chat-choose-group.page';
 
 @Component({
@@ -62,7 +64,8 @@ export class ChatChooseUserPage implements OnInit {
 
         if(targetUsers.length==1){//2 people chat
             const modal = await this.modalController.create({
-                component: ChatPage,
+                //component: ChatPage,
+                component: ChatFirePage,
                 componentProps: { 
                     title: this.reddah.appData('usernotename_'+targetUsers[0].Watch+'_'+this.userName),
                     target: targetUsers[0].Watch,
@@ -74,7 +77,8 @@ export class ChatChooseUserPage implements OnInit {
         else//real group chat
         {
             const modal = await this.modalController.create({
-                component: GroupChatPage,
+                //component: GroupChatPage,
+                component: GroupChatFirePage,
                 componentProps: {
                     targetUsers: targetUsers,
                 }

@@ -40,6 +40,14 @@
     </div>
 
     <div class="gap">
+        <ion-item lines="none" class="borderTop borderItem borderBottom">
+            <ion-icon slot="start" name="megaphone" color="medium" size="medium"></ion-icon>
+            <ion-label color="medium">编辑发布等功能暂未开放</ion-label>
+            <ion-icon name="ios-arrow-forward" color="medium" slot="end" size="small"></ion-icon>
+        </ion-item>
+    </div>
+<!--
+    <div class="gap">
         <ion-item lines="none" (click)="addArticle()" class="borderTop borderItem borderBottom" *ngIf="targetSub.Type!=3">
             <ion-icon slot="start" name="clipboard" color="mini" size="medium"></ion-icon>
             <ion-label>写草稿</ion-label>
@@ -74,7 +82,7 @@
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
-
+-->
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>

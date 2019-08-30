@@ -7,6 +7,10 @@ import { CacheService } from "ionic-cache";
 import { ChatPage } from '../../chat/chat.page';
 import { GroupChatPage } from '../../chat/group-chat.page';
 
+import { ChatFirePage } from '../../chatfire/chat-fire.page';
+import { GroupChatFirePage } from '../../chatfire/group-chat-fire.page';
+
+
 @Component({
     selector: 'app-message',
     templateUrl: 'message.page.html',
@@ -100,7 +104,8 @@ export class MessageListPage implements OnInit {
     async chat(groupName, hasNewMsg){
         let target = this.GetSender(groupName);
         const modal = await this.modalController.create({
-            component: ChatPage,
+            //component: ChatPage,
+            component: ChatFirePage,
             componentProps: { 
                 title: this.reddah.appData('usernotename_'+target+'_'+this.currentUserName),
                 target: target,
@@ -113,7 +118,8 @@ export class MessageListPage implements OnInit {
 
     async goGroupChat(groupChat, hasNewMsg){
         const modal = await this.modalController.create({
-            component: GroupChatPage,
+            //component: GroupChatPage,
+            component: GroupChatFirePage,
             componentProps: {
                 groupChat: groupChat,
                 hasNewMsg: hasNewMsg,

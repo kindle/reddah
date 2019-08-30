@@ -23,7 +23,8 @@
       "And":"Et",
       "Content":"Stratégie de contenu",
       "Loading":"Registre...",
-      "Success":"Enregistrement réussi.Veuillez authentifier votre courrier électronique et l 'afficher"
+      "Success":"Enregistrement réussi.Veuillez authentifier votre courrier électronique et l 'afficher",
+      "Manage":"Manage"
     },
 
     "Input":{

@@ -23,7 +23,8 @@
       "And":"&",
       "Content":"내용 정책",
       "Loading":"레지스터...",
-      "Success":"등록 성공.전자 우편 및 로그인"
+      "Success":"등록 성공.전자 우편 및 로그인",
+      "Manage":"Manage"
     },
 
     "Input":{

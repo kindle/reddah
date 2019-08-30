@@ -23,7 +23,8 @@
         "And":"e",
         "Content":"Política de conteúdo",
         "Loading":"Registo...",
-        "Success":"O registo é BEM sucedido.Por favor, verifique o SEU email e login"
+        "Success":"O registo é BEM sucedido.Por favor, verifique o SEU email e login",
+        "Manage":"Manage"
     },
 
     "Input":{

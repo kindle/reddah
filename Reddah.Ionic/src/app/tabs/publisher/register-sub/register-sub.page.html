@@ -3,7 +3,7 @@
 </ion-item>
 <ion-content style="background-color: white;">
     <ion-item lines="none" class="sectionGapTop inputItem gapBottom" no-padding>
-        <h2 class="title">{{ title | translate }}</h2>
+        <h2 class="title" [class.pub-title]="type==1" [class.mini-title]="type==3">{{ title | translate }}</h2>
     </ion-item>
 
     <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
@@ -30,7 +30,9 @@
         </ion-note>
     </div> 
 
-    <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="register()" expand="block">{{ 'Button.Register' | translate }}</ion-button>
+    <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="register()" expand="block">
+        {{ 'Button.Register' | translate }}
+    </ion-button>
     
 </ion-content>
 <!--

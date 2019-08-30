@@ -97,6 +97,7 @@ import { AutoresizeDirective } from './autoresize-textarea.directive';
 import { ImageLazyLoadDirective } from './image-lazy-load.directive';
 import { CommentBoxComponent } from './postviewer/comment-box/comment-box.component';
 import { ChatBoxComponent } from './chat/chat-box/chat-box.component';
+import { ChatFireBoxComponent } from './chatfire/chat-fire-box/chat-fire-box.component';
 import { SearchPage } from './common/search/search.page';
 import { MessagePage } from './mytimeline/message/message.page'
 import { SearchUserPage } from './friend/search-user/search-user.page';
@@ -112,7 +113,9 @@ import { SettingAccountPage } from './settings/setting-account/setting-account.p
 import { SettingPrivacyPage } from './settings/setting-privacy/setting-privacy.page';
 import { ShakePage } from './shake/shake.page';
 import { ChatPage } from './chat/chat.page';
+import { ChatFirePage } from './chatfire/chat-fire.page';
 import { GroupChatPage } from './chat/group-chat.page';
+import { GroupChatFirePage } from './chatfire/group-chat-fire.page';
 import { ChatOptPage } from './chat/chat-opt/chat-opt.page';
 import { GroupChatOptPage } from './chat/group-chat-opt/group-chat-opt.page';
 import { ChatChooseUserPage } from './chat/chat-choose-user/chat-choose-user.page';
@@ -166,8 +169,8 @@ var firebaseConfig = {
         ApplyFriendPage,
         ChangePhotoPage,
         ChangeNoteNamePopPage,
-        ChatPage,
-        GroupChatPage,
+        ChatPage,ChatFirePage,
+        GroupChatPage,GroupChatFirePage,
         ChatOptPage,
         GroupChatOptPage,
         ChatChooseUserPage,ShareChooseUserPage,ShareChooseGroupPage,
@@ -199,7 +202,7 @@ var firebaseConfig = {
         CommentReplyPage,
         AutoresizeDirective,SwipeTabDirective,ImageLazyLoadDirective,
         CommentBoxComponent,
-        ChatBoxComponent,
+        ChatBoxComponent,ChatFireBoxComponent,
         SearchPage,
         ShakePage,
         SearchUserPage,
@@ -229,8 +232,8 @@ var firebaseConfig = {
         ApplyFriendPage,
         ChangePhotoPage,
         ChangeNoteNamePopPage,
-        ChatPage,
-        GroupChatPage,
+        ChatPage,ChatFirePage,
+        GroupChatPage,GroupChatFirePage,
         ChatOptPage,
         GroupChatOptPage,
         ChatChooseUserPage,ShareChooseUserPage,ShareChooseGroupPage,

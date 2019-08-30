@@ -286,10 +286,12 @@ export class ReddahService {
     }
 
     //******************************** */
+    //type 0:girl, 1:boy
     private getusersbylocation = 'https://login.reddah.com/api/article/getusersbylocation'; 
-    getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, min=0){
+    getUsersByLocation(type, latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, min=0){
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
+        formData.append("type", JSON.stringify(type));
         formData.append("latCenter", JSON.stringify(latCenter));
         formData.append("lngCenter", JSON.stringify(lngCenter));
         formData.append("latLow", JSON.stringify(latLow));

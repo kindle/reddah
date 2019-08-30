@@ -71,7 +71,8 @@ export class ShareChooseGroupPage implements OnInit {
 
     async goGroupChat(groupChat){
         /*const modal = await this.modalController.create({
-            component: GroupChatPage,
+            //component: GroupChatPage,
+            component: GroupChatFirePage,
             componentProps: {
                 groupChat: groupChat,
             }

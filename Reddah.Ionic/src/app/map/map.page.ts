@@ -144,7 +144,7 @@ export class MapPage implements OnInit {
             
     }
 
-    async refresh(){
+    async refresh(type){
         let center = this.map.getCenter();
         let bounds = this.map.getBounds();
         let ne = bounds._northEast;
@@ -158,8 +158,8 @@ export class MapPage implements OnInit {
         let lngHigh = ne.lng;
 
         //get cache by current hour.
-        let cacheKey = `this.reddah.getUsersByLocation${latCenter}${lngCenter}${latLow}${latHigh}${lngLow}${lngHigh}${this.reddah.getHourString()}`;
-        let request = this.reddah.getUsersByLocation(latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, 0);
+        let cacheKey = `this.reddah.getUsersByLocation${type}${latCenter}${lngCenter}${latLow}${latHigh}${lngLow}${lngHigh}${this.reddah.getHourString()}`;
+        let request = this.reddah.getUsersByLocation(type, latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, 0);
 
         this.cacheService.loadFromObservable(cacheKey, request, "getUsersByLocation")
         .subscribe(data=>{

@@ -748,6 +748,7 @@ namespace Reddah.Web.Login.Controllers
                 string jwt = HttpContext.Current.Request["jwt"];
                 
                 JavaScriptSerializer js = new JavaScriptSerializer();
+                int type = js.Deserialize<int>(HttpContext.Current.Request["type"]);
                 decimal latCenter = js.Deserialize<decimal>(HttpContext.Current.Request["latCenter"]);
                 decimal lngCenter = js.Deserialize<decimal>(HttpContext.Current.Request["lngCenter"]);
                 decimal latLow = js.Deserialize<decimal>(HttpContext.Current.Request["latLow"]);
@@ -772,7 +773,7 @@ namespace Reddah.Web.Login.Controllers
                     if (min == 0)
                     {
                         query = (from u in db.UserProfile
-                                 where u.SystemStatus == 0 && u.Lat != null && u.Lng != null && u.UserName != jwtResult.JwtUser.User &&
+                                 where u.Sex == type && u.SystemStatus == 0 && u.Lat != null && u.Lng != null && u.UserName != jwtResult.JwtUser.User &&
                                     u.Lat < latHigh && u.Lat > latLow &&
                                     u.Lng < lngHigh && u.Lng > lngLow //has bug in the middle across 0 degree
                                  select new AdvancedUserProfile
@@ -796,7 +797,7 @@ namespace Reddah.Web.Login.Controllers
                     {
                         var limit = DateTime.UtcNow.AddMinutes(-min);
                         query = (from u in db.UserProfile
-                                 where u.SystemStatus == 0 && u.Lat != null && u.Lng != null && u.UserName != jwtResult.JwtUser.User &&
+                                 where u.Sex == type && u.SystemStatus == 0 && u.Lat != null && u.Lng != null && u.UserName != jwtResult.JwtUser.User &&
                                     u.LastShakeOn >= limit &&
                                     u.Lat < latHigh && u.Lat > latLow &&
                                     u.Lng < lngHigh && u.Lng > lngLow //has bug in the middle across 0 degree

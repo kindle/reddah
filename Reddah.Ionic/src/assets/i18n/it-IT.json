@@ -23,7 +23,8 @@
         "And":"e",
         "Content":"Politica dei contenuti",
         "Loading":"Registro...",
-        "Success":"La registrazione ha successo.Si prega di verificare la tua e -mail e login"
+        "Success":"La registrazione ha successo.Si prega di verificare la tua e -mail e login",
+        "Manage":"Manage"
     },
 
     "Input":{

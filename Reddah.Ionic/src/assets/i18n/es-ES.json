@@ -23,7 +23,8 @@
         "And":"y",
         "Content":"Política de contenido",
         "Loading":"Registro...",
-        "Success":"Inscripción exitosa.Por favor compruebe su correo electrónico"
+        "Success":"Inscripción exitosa.Por favor compruebe su correo electrónico",
+        "Manage":"Manage"
     },
 
     "Input":{

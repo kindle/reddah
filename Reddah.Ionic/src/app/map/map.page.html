@@ -13,8 +13,11 @@
             </ion-fab-button>
         </ion-fab-list>
         <ion-fab-list side="top">
-            <ion-fab-button (click)="refresh()">
-                <ion-icon name="ios-refresh"></ion-icon>
+            <ion-fab-button (click)="refresh(1)">
+                <ion-icon color="subscribe" name="male"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button (click)="refresh(0)">
+                <ion-icon color="danger" name="female"></ion-icon>
             </ion-fab-button>
         </ion-fab-list>
     </ion-fab>

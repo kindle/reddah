@@ -1,0 +1,109 @@
+
+<ion-item color="light" no-padding lines="none">
+    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-label>{{title}}</ion-label>
+    <ion-icon slot="icon-only" slot="end" name="ios-more" (click)="option()"></ion-icon>
+</ion-item>
+<ion-content no-padding style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatbox.hide()"> 
+    <ion-refresher slot="fixed" (ionRefresh)="getMoreHistory($event)">
+        <ion-refresher-content refreshingSpinner="bubbles">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-grid *ngFor="let comment of messages">
+        <ion-row *ngIf="comment.Type==0||comment.Type==1000">
+            <ion-col no-padding>
+                <div text-center class="chatTime" *ngIf="checkIsToday(comment.CreatedOn)">{{reddah.utcToLocal(comment.CreatedOn,'HH:mm')}}</div>
+                <div text-center class="chatTime" *ngIf="!checkIsToday(comment.CreatedOn)">{{reddah.utcToLocal(comment.CreatedOn,'MM-dd HH:mm')}}</div>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="comment.Type==1000">
+            <ion-col no-padding>
+                <div text-center class="chatTime">{{reddah.htmlDecode(comment.Content)}}</div>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="comment.Type==0">
+            <ion-col no-padding>
+                <div class="container-right" *ngIf="userName==comment.UserName">
+                    <img [src]="reddah.appData('userphoto_'+comment.UserName)"
+                        class="portrait" (click)="goUser(comment.UserName)">
+                    <div class="arrow-box-right">
+                        <div class="chat-box-me" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                        <div class="chat-arrow-right" style="flex:auto 0;"></div>
+                    </div>
+<!--
+                    <div class="arrow-box-right" *ngIf="comment.Type<2">
+                        <div class="chat-box-me" *ngIf="comment.Type==0" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                        <div class="chat-box-me-1" *ngIf="comment.Type==1" (click)="play(comment.Content)">
+                            <ion-icon slot="start" name="ios-wifi" size="large" style="width:20px;height:18px;transform: rotate(-90deg);margin:auto;"></ion-icon>
+                            <div style="display: flex; line-height:38px;">
+                                <div style="width:5px;" *ngFor="let i of reddah.getArray(comment.Duration)">&nbsp;</div>
+                                <div>{{comment.Duration<0?0:comment.Duration}}''</div>
+                            </div>
+                        </div>
+                        <div class="chat-arrow-right" style="flex:auto 0;"></div>
+                    </div>                
+                    <div class="arrow-box-right-photo" *ngIf="comment.Type==2">
+                        <div class="parent3-me">
+                            <img [defaultImage]="'assets/icon/noimage.jpg'" 
+                            [lazyLoad]="reddah.chatImageCache(comment.Content)" 
+                            [useSrcset]="true" class="picture3" (click)="viewer(0, [comment.Content])">
+                        </div>
+                    </div>
+                    <div class="arrow-box-right-photo" *ngIf="comment.Type==3">
+                        <div class="parent3-me">
+                            <img [defaultImage]="'assets/icon/noimage.jpg'" 
+                            [lazyLoad]="reddah.chatImageCache(comment.Content.toLowerCase().replace('.mp4','.jpg'))" 
+                            [useSrcset]="true" class="picture3" 
+                            (click)="playVideo(comment)" [class.notdownload]="!reddah.isLocal(comment.Content)">
+                            <div style="position: absolute;bottom:0;margin:0.6em;"><ion-icon name="videocam" color="light"></ion-icon></div>
+                        </div>
+                    </div>
+                    <div class="arrow-box-right" *ngIf="comment.Type==4">
+                        <div class="chat-box-me-link">
+                            <app-share-article-chat [abstract]="comment.Abstract" [image]="comment.ImageUrl" [id]="comment.Duration"></app-share-article-chat>
+                        </div>
+                        <div class="chat-arrow-right-link" style="flex:auto 0;"></div>
+                    </div>
+-->
+                </div>
+                <div class="container-left" *ngIf="userName!=comment.UserName">
+                    <img [src]="reddah.appData('userphoto_'+comment.UserName)"
+                        class="portrait" (click)="goUser(comment.UserName)">
+                    <div style="display: flex;margin-left:5px;">
+                        <div class="chat-arrow-left" style="flex:0 auto;"></div>
+                        <div class="chat-box-others" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                        
+<!--
+                        <div class="chat-box-others-1" *ngIf="comment.Type==1" (click)="play(comment.Content)">
+                            <ion-icon name="ios-wifi" size="large" style="width:20px;height:18px;transform: rotate(90deg);margin:auto;"></ion-icon>
+                            <div style="display: flex; line-height:38px;">
+                                <div>{{comment.Duration<0?0:comment.Duration}}''</div>
+                                <div style="width:5px;" *ngFor="let i of reddah.getArray(comment.Duration)">&nbsp;</div>
+                            </div>
+                        </div>
+                        <div class="parent3" *ngIf="comment.Type==2">
+                            <img [defaultImage]="'assets/icon/noimage.jpg'" 
+                                [lazyLoad]="reddah.chatImageCache(comment.Content)" 
+                                [useSrcset]="true" class="picture3" (click)="viewer(0, [comment.Content])">
+                        </div>
+                        <div class="parent3" *ngIf="comment.Type==3">
+                            <img [defaultImage]="'assets/icon/noimage.jpg'" 
+                                [lazyLoad]="reddah.chatImageCache(comment.Content.toLowerCase().replace('.mp4','.jpg'))" 
+                                [useSrcset]="true" class="picture3"
+                                (click)="playVideo(comment)" [class.notdownload]="!reddah.isLocal(comment.Content)">
+                            <div style="position: absolute;bottom:0;margin:0.6em;"><ion-icon name="videocam" color="light"></ion-icon></div>
+                        </div>
+                        <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==4"></div>
+                        <div class="chat-box-others-link" *ngIf="comment.Type==4">
+                            <app-share-article-chat abstract="{{comment.Abstract}}" image="{{comment.ImageUrl}}" id="{{comment.Duration}}"></app-share-article-chat>
+                        </div>
+-->
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<app-chat-fire-box #chatbox [(selectedArticleId)]="chatId" selectedCommentId="-1"
+    (reloadComments)="childReloadComments($event)" (localComments)="childLocalComments($event)"></app-chat-fire-box>
+

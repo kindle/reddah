@@ -11,6 +11,7 @@ import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SettingNoteLabelPage } from '../../../settings/setting-note-label/setting-note-label.page';
 import { ChatPage } from '../../../chat/chat.page';
+import { ChatFirePage } from '../../../chatfire/chat-fire.page';
 import { Article } from '../../../model/article';
 import { PostviewerPage } from '../../../postviewer/postviewer.page';
 import { SearchPage } from '../../../common/search/search.page';
@@ -303,7 +304,8 @@ export class PubPage implements OnInit {
 
     async chat(){
         const modal = await this.modalController.create({
-            component: ChatPage,
+            //component: ChatPage,
+            component: ChatFirePage,
             componentProps: { 
                 title: this.reddah.appData('usernotename_'+this.userName+'_'+this.currentUserName),
                 target: this.userName,

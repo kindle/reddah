@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController, ToastController, Content } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { GroupChatPage } from '../group-chat.page';
+import { GroupChatFirePage } from '../../chatfire/group-chat-fire.page';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
 import { ChatChooseUserPage } from '../../chat/chat-choose-user/chat-choose-user.page';
@@ -71,7 +72,8 @@ export class ChatChooseGroupPage implements OnInit {
 
     async goGroupChat(groupChat){
         const modal = await this.modalController.create({
-            component: GroupChatPage,
+            //component: GroupChatPage,
+            component: GroupChatFirePage,
             componentProps: {
                 groupChat: groupChat,
             }
