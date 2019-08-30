@@ -24,7 +24,7 @@
         "Content":"политика содержимого",
         "Loading":"Pегистрация...",
         "Success":"регистрация прошла успешно.Проверьте ваше электронное письмо и зайдите в систему",
-        "Manage":"Manage"
+        "Manage":"управление"
     },
 
     "Input":{
@@ -44,7 +44,9 @@
             "Agree":"Протокол пользователя",
             "SubNameEmpty":"Введите имя",
             "SubDescEmpty":"Пожалуйста, Введите описание",
-            "GetTokenFromEmail":"получить жетон безопасности из вашего почтового ящика"
+            "GetTokenFromEmail":"получить жетон безопасности из вашего почтового ящика",
+            "NetworkError":"Нет сетевого соединения",
+            "ServiceError":"Системные службы обновляются, попробуйте позже"
         }
     },
 
@@ -113,22 +115,18 @@
     "Time.YearsAgo": "year(s) ago",
     "Time.MonthsAgo": "month(s) ago",
     "Time.WeeksAgo": "week(s) ago",
-    "Time.Today": "Today",
-    "Time.Yesterday": "Yesterday",
+    "Time.Today": "сегодня",
+    "Time.Yesterday": "вчера",
     "Time.DaysAgo": "days ago",
     "Time.HoursAgo": "hour(s) ago",
     "Time.MinutesAgo": "mins ago",
-    "Time.JustNow": "Just now",
+    "Time.JustNow": "только что",
 
-    "Article.Loading": "Please wait",
-    "Article.Comments": "comments",
-    
-    "Comment.Comment": "Comment",
-    "Comment.Like": "Like",
-    "Comment.Delete": "Delete",
+    "Article.Loading": "Подождите",
+    "Comment.Comment": "Примечания",
+    "Comment.Like": "любить",
+    "Comment.Delete": "Удалить",
     "Comment.Tip": "Введите комментарий...",
-    "Article.Bookmark": "Bookmark",
-    "Article.Share": "Share",
     "Confirm.Title": "подтверждение",
     "Confirm.Message": "Ты хочешь выйти из Reddah?",
     "Confirm.ClearChatMessage": "Очистить все разговоры?",

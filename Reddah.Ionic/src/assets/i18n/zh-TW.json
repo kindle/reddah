@@ -44,7 +44,9 @@
             "Agree":"請同意用戶協議",
             "SubNameEmpty":"請輸入名稱",
             "SubDescEmpty":"請輸入描述",
-            "GetTokenFromEmail":"請登錄您的電子郵箱獲取安全令牌"
+            "GetTokenFromEmail":"請登錄您的電子郵箱獲取安全令牌",
+            "NetworkError":"沒有網絡連接",
+            "ServiceError":"系統服務正在更新，請稍後再試"
         }
     },
 
@@ -111,29 +113,23 @@
     },
 
     "Time.YearsAgo": "年前",
-    "Time.MonthsAgo": "个月前",
+    "Time.MonthsAgo": "個月前",
     "Time.WeeksAgo": "周前",
     "Time.Today": "今天",
     "Time.Yesterday": "昨天",
     "Time.DaysAgo": "天前",
-    "Time.HoursAgo": "小时前",
-    "Time.MinutesAgo": "分钟前",
-    "Time.JustNow": "刚刚",
+    "Time.HoursAgo": "小時前",
+    "Time.MinutesAgo": "分鐘前",
+    "Time.JustNow": "剛剛",
 
 
     
 
-    "Article.Loading": "请稍等...",
-    "Article.Comments": "评论",
-    
-    
-    
-    "Comment.Comment": "写评论",
-    "Comment.Like": "点赞",
-    "Comment.Delete": "删除",
+    "Article.Loading": "請稍等...",
+    "Comment.Comment": "寫評論",
+    "Comment.Like": "點贊",
+    "Comment.Delete": "刪除",
     "Comment.Tip": "寫點什麼...",
-    "Article.Bookmark": "收藏",
-    "Article.Share": "分享",
     "Confirm.Title": "確認",
     "Confirm.Message": "確定要離開Reddah？",
     "Confirm.ClearChatMessage": "確定要清除當天記錄？",

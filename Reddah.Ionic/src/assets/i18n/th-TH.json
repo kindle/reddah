@@ -24,7 +24,7 @@
         "Content":"กลยุทธ์เนื้อหา",
         "Loading":"ลงทะเบียน...",
         "Success":"ลงทะเบียนเรียบร้อยแล้ว กรุณาตรวจสอบอีเมลของคุณและเข้าสู่ระบบ",
-        "Manage":"Manage"
+        "Manage":"ควบคุมดูแล"
     },
 
     "Input":{
@@ -44,7 +44,9 @@
             "Agree":"โปรดยอมรับข้อตกลงของผู้ใช้",
             "SubNameEmpty":"กรุณาใส่ชื่อ",
             "SubDescEmpty":"โปรดระบุรายละเอียด",
-            "GetTokenFromEmail":"ได้รับการรักษาความปลอดภัยโทเค็นจากอีเมลของคุณ"
+            "GetTokenFromEmail":"ได้รับการรักษาความปลอดภัยโทเค็นจากอีเมลของคุณ",
+            "NetworkError":"ไม่มีการเชื่อมต่อเครือข่าย",
+            "ServiceError":"บริการระบบมีการปรับปรุงโปรดลองอีกครั้งในภายหลัง"
         }
     },
 
@@ -113,22 +115,18 @@
     "Time.YearsAgo": "year(s) ago",
     "Time.MonthsAgo": "month(s) ago",
     "Time.WeeksAgo": "week(s) ago",
-    "Time.Today": "Today",
-    "Time.Yesterday": "Yesterday",
+    "Time.Today": "วันนี้",
+    "Time.Yesterday": "เมื่อวาน",
     "Time.DaysAgo": "days ago",
     "Time.HoursAgo": "hour(s) ago",
     "Time.MinutesAgo": "mins ago",
-    "Time.JustNow": "Just now",
+    "Time.JustNow": "เมื่อกี้นี้",
 
-    "Article.Loading": "Please wait",
-    "Article.Comments": "comments",
-    
-    "Comment.Comment": "Comment",
-    "Comment.Like": "Like",
-    "Comment.Delete": "Delete",
+    "Article.Loading": "โปรดรอสักครู่",
+    "Comment.Comment": "ข้อคิดเห็น",
+    "Comment.Like": "ชอบ",
+    "Comment.Delete": "ลบทิ้ง",
     "Comment.Tip": "พิมพ์บันทึกย่อของคุณที่นี่",
-    "Article.Bookmark": "Bookmark",
-    "Article.Share": "Share",
     "Confirm.Title": "ยืนยัน",
     "Confirm.Message": "คุณต้องการที่จะออกจากรีดด้า",
     "Confirm.ClearChatMessage": "คุณต้องการที่จะล้างข้อมูลการสนทนาทั้งหมด",

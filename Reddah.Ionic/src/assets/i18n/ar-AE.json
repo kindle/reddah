@@ -24,7 +24,7 @@
         "Content":"استراتيجية المحتوى",
         "Loading":"للتسجيل...",
         "Success":"سجل النجاحيرجى التحقق من البريد الإلكتروني الخاص بك وتسجيل الدخول",
-        "Manage":"Manage"
+        "Manage":"الإدارة"
     },
 
     "Input":{
@@ -44,7 +44,9 @@
             "Agree":"يرجى الاتفاق على اتفاق المستخدم",
             "SubNameEmpty":"الرجاء إدخال اسم",
             "SubDescEmpty":"الرجاء إدخال وصف",
-            "GetTokenFromEmail":"الحصول على رمز الأمان من البريد الإلكتروني الخاص بك"
+            "GetTokenFromEmail":"الحصول على رمز الأمان من البريد الإلكتروني الخاص بك",
+            "NetworkError":"لا اتصال إنترنت",
+            "ServiceError":"خدمة نظام التحديث ، يرجى المحاولة مرة أخرى في وقت لاحق"
         }
     },
 
@@ -113,23 +115,18 @@
     "Time.YearsAgo": "year(s) ago",
     "Time.MonthsAgo": "month(s) ago",
     "Time.WeeksAgo": "week(s) ago",
-    "Time.Today": "Today",
-    "Time.Yesterday": "Yesterday",
+    "Time.Today": "تودي",
+    "Time.Yesterday": "أمس",
     "Time.DaysAgo": "days ago",
     "Time.HoursAgo": "hour(s) ago",
     "Time.MinutesAgo": "mins ago",
-    "Time.JustNow": "Just now",
+    "Time.JustNow": "فقط الآن",
 
-    "Article.Loading": "Please wait",
-    "Article.Comments": "comments",
-    
-    
-    "Comment.Comment": "Comment",
-    "Comment.Like": "Like",
-    "Comment.Delete": "Delete",
+    "Article.Loading": "انتظر من فضلك",
+    "Comment.Comment": "شروح",
+    "Comment.Like": "محبوب",
+    "Comment.Delete": "حذف",
     "Comment.Tip": "أدخل التعليقات هنا",
-    "Article.Bookmark": "Bookmark",
-    "Article.Share": "Share",
     "Confirm.Title": "أكد",
     "Confirm.Message": "هل تريد الخروج من الردة ؟",
     "Confirm.ClearChatMessage": "مسح جميع رسائل الدردشة ؟",

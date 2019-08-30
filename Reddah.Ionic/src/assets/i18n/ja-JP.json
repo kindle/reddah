@@ -24,7 +24,7 @@
       "Content":"コンテンツポリシー",
       "Loading":"レジスタ...",
       "Success":"登録は成功です。あなたのメールとログインを確認してください",
-      "Manage":"Manage"
+      "Manage":"管理する"
     },
 
     "Input":{
@@ -44,7 +44,9 @@
         "Agree":"ユーザー同意に同意してください",
         "SubNameEmpty":"入力名",
         "SubDescEmpty":"説明を入力してください",
-        "GetTokenFromEmail":"メールからセキュリティトークンを取得してください"
+        "GetTokenFromEmail":"メールからセキュリティトークンを取得してください",
+        "NetworkError":"ネットワーク接続がありません",
+        "ServiceError":"システムサービスが更新されていますので、後で試してみてください"
       }
     },
 
@@ -118,18 +120,14 @@
     "Time.DaysAgo": "day(s) ago",
     "Time.HoursAgo": "hour(s) ago",
     "Time.MinutesAgo": "minute(s) ago",
-    "Time.JustNow": "just now",
+    "Time.JustNow": "ジャストナウ",
     
     
     "Article.Loading": "少々お待ちください",
-    "Article.Comments": "コメント",
-    
-    "Comment.Comment": "comment",
-    "Comment.Like": "Like",
-    "Comment.Delete": "Delete",
+    "Comment.Comment": "コメント",
+    "Comment.Like": "ライク",
+    "Comment.Delete": "削除",
     "Comment.Tip": "コメントしますか？",
-    "Article.Bookmark": "Bookmark",
-    "Article.Share": "Share",
     "Confirm.Title": "確認",
     "Confirm.Message": "Reddahを終了しますか？",
     "Confirm.ClearChatMessage": "すべてのチャットメッセージをクリアしますか？",

@@ -44,7 +44,9 @@
             "Agree":"请同意用户协议",
             "SubNameEmpty":"请输入名称",
             "SubDescEmpty":"请输入描述",
-            "GetTokenFromEmail":"请登录您的电子邮箱获取安全令牌"
+            "GetTokenFromEmail":"请登录您的电子邮箱获取安全令牌",
+            "NetworkError":"没有网络连接",
+            "ServiceError":"系统服务正在更新，请稍后再试"
         }
     },
 
@@ -124,16 +126,10 @@
     
 
     "Article.Loading": "请稍等...",
-    "Article.Comments": "评论",
-    
-    
-    
     "Comment.Comment": "写评论",
     "Comment.Like": "点赞",
     "Comment.Delete": "删除",
     "Comment.Tip": "写点什么...",
-    "Article.Bookmark": "收藏",
-    "Article.Share": "分享",
     "Confirm.Title": "确认",
     "Confirm.Message": "确定要离开Reddah？",
     "Confirm.ClearChatMessage": "确定要清除聊天记录？",

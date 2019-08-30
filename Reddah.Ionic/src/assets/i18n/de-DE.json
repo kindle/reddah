@@ -24,7 +24,7 @@
         "Content":"Inhaltliche Richtlinien",
         "Loading":"Registrieren...",
         "Success":"Die Registrierung ist erfolgreich.Bitte überprüfen Sie Ihre E -Mail und Login",
-        "Manage":"Manage"
+        "Manage":"Verwalten"
     },
 
     "Input":{
@@ -44,7 +44,9 @@
             "Agree":"Bitte stimmen Sie mit der Nutzervereinbarung überein",
             "SubNameEmpty":"Bitte geben Sie den Namen",
             "SubDescEmpty":"Bitte geben Sie eine Beschreibung",
-            "GetTokenFromEmail":"Bitte erhalten Sie Sicherheitstoken von Ihrer E -Mail"
+            "GetTokenFromEmail":"Bitte erhalten Sie Sicherheitstoken von Ihrer E -Mail",
+            "NetworkError":"Keine Netzwerkverbindung",
+            "ServiceError":"Der Systemservice wird aktualisiert. Bitte versuchen Sie es später noch einmal"
         }
     },
 
@@ -113,22 +115,18 @@
     "Time.YearsAgo": "year(s) ago",
     "Time.MonthsAgo": "month(s) ago",
     "Time.WeeksAgo": "week(s) ago",
-    "Time.Today": "Today",
-    "Time.Yesterday": "Yesterday",
+    "Time.Today": "Heute",
+    "Time.Yesterday": "Gestern",
     "Time.DaysAgo": "days ago",
     "Time.HoursAgo": "hour(s) ago",
     "Time.MinutesAgo": "mins ago",
-    "Time.JustNow": "Just now",
+    "Time.JustNow": "Gerade jetzt",
 
-    "Article.Loading": "Please wait",
-    "Article.Comments": "comments",
-    
-    "Comment.Comment": "Comment",
-    "Comment.Like": "Like",
-    "Comment.Delete": "Delete",
+    "Article.Loading": "Bitte warten Sie",
+    "Comment.Comment": "Kommentar",
+    "Comment.Like": "Wie",
+    "Comment.Delete": "Löschen",
     "Comment.Tip": "Geben Sie hier einen Kommentar ein...",
-    "Article.Bookmark": "Bookmark",
-    "Article.Share": "Share",
     "Confirm.Title": "Bestätigen",
     "Confirm.Message": "Wollen Sie Reddah verlassen?",
     "Confirm.ClearChatMessage": "Möchten Sie alle Chats löschen?",

@@ -44,7 +44,9 @@
             "Agree":"Please agree with user agreement",
             "SubNameEmpty":"Please input name",
             "SubDescEmpty":"Please input description",
-            "GetTokenFromEmail":"Please get security token from your Email"
+            "GetTokenFromEmail":"Please get security token from your Email",
+            "NetworkError":"No network connection",
+            "ServiceError":"The system service is being updated. Please try again later"
         }
     },
 
@@ -125,14 +127,10 @@
     "Time.JustNow": "Just now",
 
     "Article.Loading": "Please wait",
-    "Article.Comments": "comments",
-    
     "Comment.Comment": "Comment",
     "Comment.Like": "Like",
     "Comment.Delete": "Delete",
     "Comment.Tip": "Enter some comment here...",
-    "Article.Bookmark": "Bookmark",
-    "Article.Share": "Share",
     "Confirm.Title": "Confirm",
     "Confirm.Message": "Do you want to exit Reddah?",
     "Confirm.ClearChatMessage": "Do you want to clear all the chat messages?",

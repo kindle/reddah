@@ -24,7 +24,7 @@
         "Content":"Πολιτική περιεχομένου",
         "Loading":"Μητρώο...",
         "Success":"Η εγγραφή είναι επιτυχής.Παρακαλώ ελέγξτε το email και τη σύνδεση",
-        "Manage":"Manage"
+        "Manage":"Διαχείριση"
     },
 
     "Input":{
@@ -44,7 +44,9 @@
             "Agree":"Παρακαλείσθε να συμφωνήσετε με τη συμφωνία χρήστη",
             "SubNameEmpty":"Παρακαλώ εισάγετε όνομα",
             "SubDescEmpty":"Παρακαλώ εισάγετε περιγραφή",
-            "GetTokenFromEmail":"Παρακαλώ, πάρτε το σήμα ασφαλείας από το email σας"
+            "GetTokenFromEmail":"Παρακαλώ, πάρτε το σήμα ασφαλείας από το email σας",
+            "NetworkError":"Δεν υπάρχει σύνδεση δικτύου",
+            "ServiceError":"Η υπηρεσία συστήματος ενημερώνεται. Παρακαλώ δοκιμάστε ξανά αργότερα"
         }
     },
 
@@ -113,22 +115,18 @@
     "Time.YearsAgo": "year(s) ago",
     "Time.MonthsAgo": "month(s) ago",
     "Time.WeeksAgo": "week(s) ago",
-    "Time.Today": "Today",
-    "Time.Yesterday": "Yesterday",
+    "Time.Today": "Σήμερα",
+    "Time.Yesterday": "Εχθές",
     "Time.DaysAgo": "days ago",
     "Time.HoursAgo": "hour(s) ago",
     "Time.MinutesAgo": "mins ago",
-    "Time.JustNow": "Just now",
+    "Time.JustNow": "Μόλις τώρα",
 
-    "Article.Loading": "Please wait",
-    "Article.Comments": "comments",
-    
-    "Comment.Comment": "Comment",
-    "Comment.Like": "Like",
-    "Comment.Delete": "Delete",
+    "Article.Loading": "Παρακαλώ περιμένετε",
+    "Comment.Comment": "Σχόλιο",
+    "Comment.Like": "Όπως",
+    "Comment.Delete": "Διαγραφή",
     "Comment.Tip": "Εισάγετε κάποιο σχόλιο εδώ...",
-    "Article.Bookmark": "Bookmark",
-    "Article.Share": "Share",
     "Confirm.Title": "Επιβεβαίωση",
     "Confirm.Message": "Θέλεις να βγεις από το Ρέντα?",
     "Confirm.ClearChatMessage": "Θέλεις να καθαρίσεις όλα τα μηνύματα?",

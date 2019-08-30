@@ -24,7 +24,7 @@
         "Content":"Inhoud Beleid",
         "Loading":"Registratie...",
         "Success":"Registratie is succesvol.Controleer uw e -mail en login",
-        "Manage":"Manage"
+        "Manage":"Beheer"
     },
 
     "Input":{
@@ -44,7 +44,9 @@
             "Agree":"Gelieve akkoord te gaan met gebruikersovereenkomst",
             "SubNameEmpty":"Voer naam in",
             "SubDescEmpty":"Voer een beschrijving in",
-            "GetTokenFromEmail":"Zorg voor beveiliging uit je e -mail"
+            "GetTokenFromEmail":"Zorg voor beveiliging uit je e -mail",
+            "NetworkError":"Geen netwerkverbinding",
+            "ServiceError":"De systeemdienst wordt bijgewerkt. Probeer het later opnieuw"
         }
     },
 
@@ -113,22 +115,18 @@
     "Time.YearsAgo": "year(s) ago",
     "Time.MonthsAgo": "month(s) ago",
     "Time.WeeksAgo": "week(s) ago",
-    "Time.Today": "Today",
-    "Time.Yesterday": "Yesterday",
+    "Time.Today": "Vandaag",
+    "Time.Yesterday": "Gisteren",
     "Time.DaysAgo": "days ago",
     "Time.HoursAgo": "hour(s) ago",
     "Time.MinutesAgo": "mins ago",
-    "Time.JustNow": "Just now",
+    "Time.JustNow": "Net nu",
 
-    "Article.Loading": "Please wait",
-    "Article.Comments": "comments",
-    
-    "Comment.Comment": "Comment",
-    "Comment.Like": "Like",
-    "Comment.Delete": "Delete",
+    "Article.Loading": "Wacht even",
+    "Comment.Comment": "Commentaar",
+    "Comment.Like": "Zoals",
+    "Comment.Delete": "Verwijderen",
     "Comment.Tip": "Voer hier wat commentaar in...",
-    "Article.Bookmark": "Bookmark",
-    "Article.Share": "Share",
     "Confirm.Title": "Bevestiging",
     "Confirm.Message": "Wil je Reddah verlaten?",
     "Confirm.ClearChatMessage": "Wilt u alle chatberichten wissen?",

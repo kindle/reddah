@@ -24,7 +24,7 @@
       "Content":"내용 정책",
       "Loading":"레지스터...",
       "Success":"등록 성공.전자 우편 및 로그인",
-      "Manage":"Manage"
+      "Manage":"관리"
     },
 
     "Input":{
@@ -44,7 +44,9 @@
         "Agree":"사용자 협의 좀 동의한다",
         "SubNameEmpty":"이름을 입력하십시오",
         "SubDescEmpty":"설명을 입력하십시오",
-        "GetTokenFromEmail":"당신의 이메일에서 안전 포켓을 얻으십시오"
+        "GetTokenFromEmail":"당신의 이메일에서 안전 포켓을 얻으십시오",
+        "NetworkError":"네트워크 연결 없음",
+        "ServiceError":"시스템 서비스 업데이트 중입니다. 잠시 후에 다시 시도하십시오"
       }
     },
 
@@ -119,23 +121,15 @@
     "Time.DaysAgo": "day(s) ago",
     "Time.HoursAgo": "hour(s) ago",
     "Time.MinutesAgo": "minute(s) ago",
-    "Time.JustNow": "just now",
+    "Time.JustNow": "방금",
     
     
     
     "Article.Loading": "잠깐만 기다리세요",
-    "Article.Comments": "의견",
-    "Button.SignIn": "로그인",
-    "Button.Logout": "Logout",
-    "Button.Register": "Register",
-    "Button.Back": "Back",
-    
-    "Comment.Comment": "comment",
-    "Comment.Like": "Like",
-    "Comment.Delete": "Delete",
+    "Comment.Comment": "주석",
+    "Comment.Like": "좋아하다",
+    "Comment.Delete": "삭제",
     "Comment.Tip": "여기에 주석을 입력해서...",
-    "Article.Bookmark": "Bookmark",
-    "Article.Share": "Share",
     "Confirm.Title": "확인",
     "Confirm.Message": "Reddah 탈퇴하고 싶어요?",
     "Confirm.ClearChatMessage": "모든 채팅 정보를 삭제합니까?",

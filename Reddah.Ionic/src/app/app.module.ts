@@ -296,8 +296,8 @@ var firebaseConfig = {
             }
         }),
         NgxQRCodeModule,
-        //AngularFireModule.initializeApp(firebaseConfig),
-        //AngularFireDatabaseModule,
+        AngularFireModule.initializeApp(firebaseConfig),
+        AngularFireDatabaseModule,
     ],
     exports:[
     ],

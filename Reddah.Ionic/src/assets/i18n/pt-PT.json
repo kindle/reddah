@@ -24,7 +24,7 @@
         "Content":"Política de conteúdo",
         "Loading":"Registo...",
         "Success":"O registo é BEM sucedido.Por favor, verifique o SEU email e login",
-        "Manage":"Manage"
+        "Manage":"Gerir"
     },
 
     "Input":{
@@ -44,7 +44,9 @@
             "Agree":"Por favor, Concorde com o acordo do utilizador",
             "SubNameEmpty":"Por favor, Nome de Entrada",
             "SubDescEmpty":"Por favor, descrição de Entrada",
-            "GetTokenFromEmail":"Por favor, pegue a ficha de segurança do SEU e -mail"
+            "GetTokenFromEmail":"Por favor, pegue a ficha de segurança do SEU e -mail",
+            "NetworkError":"Sem conexão de rede",
+            "ServiceError":"O serviço de sistema está sendo atualizado. Tente novamente Mais tarde"
         }
     },
 
@@ -113,22 +115,18 @@
     "Time.YearsAgo": "year(s) ago",
     "Time.MonthsAgo": "month(s) ago",
     "Time.WeeksAgo": "week(s) ago",
-    "Time.Today": "Today",
-    "Time.Yesterday": "Yesterday",
+    "Time.Today": "Hoje",
+    "Time.Yesterday": "Ontem",
     "Time.DaysAgo": "days ago",
     "Time.HoursAgo": "hour(s) ago",
     "Time.MinutesAgo": "mins ago",
-    "Time.JustNow": "Just now",
+    "Time.JustNow": "Agora Mesmo",
 
-    "Article.Loading": "Please wait",
-    "Article.Comments": "comments",
-    
-    "Comment.Comment": "Comment",
-    "Comment.Like": "Like",
-    "Comment.Delete": "Delete",
+    "Article.Loading": "Por favor, espere",
+    "Comment.Comment": "Comentário",
+    "Comment.Like": "Tipo",
+    "Comment.Delete": "Apagar",
     "Comment.Tip": "Digite algum comentário aqui...",
-    "Article.Bookmark": "Bookmark",
-    "Article.Share": "Share",
     "Confirm.Title": "Confirmar",
     "Confirm.Message": "Você quer sair de Reddah?",
     "Confirm.ClearChatMessage": "Você quer limpar todas as mensagens de bate -papo?",

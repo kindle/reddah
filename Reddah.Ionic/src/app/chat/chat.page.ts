@@ -6,8 +6,8 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
 import { ChatOptPage } from '../chat/chat-opt/chat-opt.page';
 import { UserPage } from '../common/user/user.page';
-//import { AngularFireDatabase } from 'angularfire2/database';
-//import { Firebase } from '@ionic-native/firebase/ngx';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
@@ -237,7 +237,13 @@ export class ChatPage extends ChatBase implements OnInit  {
                     this.messages = data.Message.Comments.concat(this.messages);
                 }
                 else{//new msg came in.
-                    this.messages = this.messages.concat(data.Message.Comments);
+                    //this.messages = this.messages.concat(data.Message.Comments);
+                    this.messages = this.messages.concat(data.Message.Comments.filter((item)=>
+                    {
+                        return this.messages.map(m=>m["uid"]).indexOf(item.uid) < 0;
+                    }));
+
+
                     setTimeout(() => {
                         if(this.pageTop.scrollToBottom)
                             this.pageTop.scrollToBottom(0);

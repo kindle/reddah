@@ -6,8 +6,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
 import { ChatOptPage } from '../chat/chat-opt/chat-opt.page';
 import { UserPage } from '../common/user/user.page';
-//import { AngularFireDatabase } from 'angularfire2/database';
-//import { Firebase } from '@ionic-native/firebase/ngx';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
@@ -141,7 +140,7 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         public platform: Platform,
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
-        //public db: AngularFireDatabase,
+        public db: AngularFireDatabase,
         //private firebase: Firebase
     ) { 
         super(modalController, reddah, localStorageService, streamingMedia, videoEditor, platform);
@@ -150,13 +149,18 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
     }
     
     ngOnInit() {
-        //this.db.list('/chat').valueChanges().subscribe(data => {
-        //    console.log(data)
-        //    this.messages = data
-        //});
-
         this.getChat();
-        
+    }
+
+    firebaseInited = false;
+    initFirebase(){
+        this.firebaseInited = true;
+        if(this.chatId>0){
+            this.db.list(this.chatId+"").valueChanges().subscribe(data => {
+                this.getChat();
+                this.db.list(this.chatId+"").remove();
+            });
+        }
     }
     
     //test
@@ -211,12 +215,13 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
             }*/
             this.messages = chatHistory;
             //get all latest messages;
-            let max = Math.max.apply(null,this.messages.map(item=>item["Id"]));
+            let max = Math.max.apply(null,this.messages.map(item=>item["Id"]).filter(m=>m!=null));
             this.getHistory(max, 0);
         }
     }
 
     async getHistory(id, limit, event=null){
+        alert(id+"_"+limit)
         let formData = new FormData();
         formData.append("targetUser", this.target);
         formData.append("id", JSON.stringify(id));
@@ -226,6 +231,11 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
             {
                 this.chatId = data.Message.Seed;
                 this.chatbox.selectedArticleId = this.chatId;
+                if(!this.firebaseInited)
+                {
+                    this.initFirebase();
+                }
+
                 if(id==0){//first load
                     this.messages =  data.Message.Comments;
                     setTimeout(() => {
@@ -238,6 +248,7 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
                 }
                 else{//new msg came in.
                     this.messages = this.messages.concat(data.Message.Comments);
+                    alert(JSON.stringify(this.messages))
                     setTimeout(() => {
                         if(this.pageTop.scrollToBottom)
                             this.pageTop.scrollToBottom(0);

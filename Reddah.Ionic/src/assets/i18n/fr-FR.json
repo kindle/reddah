@@ -24,7 +24,7 @@
       "Content":"Stratégie de contenu",
       "Loading":"Registre...",
       "Success":"Enregistrement réussi.Veuillez authentifier votre courrier électronique et l 'afficher",
-      "Manage":"Manage"
+      "Manage":"Gestion"
     },
 
     "Input":{
@@ -44,7 +44,9 @@
         "Agree":"Veuillez accepter avec accord de l'utilisateur",
         "SubNameEmpty":"Veuillez saisir le nom",
         "SubDescEmpty":"Veuillez saisir les instructions",
-        "GetTokenFromEmail":"Veuillez obtenir un jeton de sécurité à partir de votre courriel"
+        "GetTokenFromEmail":"Veuillez obtenir un jeton de sécurité à partir de votre courriel",
+        "NetworkError":"Sans connexion Internet",
+        "ServiceError":"Le service du système est en cours de mise à jour"
       }
     },
 
@@ -118,19 +120,14 @@
     "Time.DaysAgo": "day(s) ago",
     "Time.HoursAgo": "hour(s) ago",
     "Time.MinutesAgo": "minute(s) ago",
-    "Time.JustNow": "just now",
+    "Time.JustNow": "Tout à l 'heure",
     
     
     "Article.Loading": "Un instant",
-    "Article.Comments": "commentaires",
-    "Article.Like": "like",
-    
-    "Comment.Comment": "comment",
-    "Comment.Like": "Like",
+    "Comment.Comment": "Notes",
+    "Comment.Like": "Oui",
     "Comment.Delete": "Delete",
     "Comment.Tip": "Saisissez ici le commentaire",
-    "Article.Bookmark": "Bookmark",
-    "Article.Share": "Share",
     "Confirm.Title": "Confirmation",
     "Confirm.Message": "Tu veux quitter reddah?",
     "Confirm.ClearChatMessage": "Est - ce que tout est effacé?",

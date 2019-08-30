@@ -8,6 +8,7 @@ import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
     selector: 'app-chat-fire-box',
@@ -34,9 +35,19 @@ export class ChatFireBoxComponent implements OnInit {
         private media: Media,
         private platform: Platform,
         private videoEditor: VideoEditor,
+        public db: AngularFireDatabase,
     ) { }
 
     ngOnInit() {
+    }
+
+    firebaseSend(chatId, userName, type, content){
+        this.db.list(chatId).push({
+            userName: userName,
+            type: type,
+            message: content
+        }).then(() => {
+        })
     }
     
     showSpeakBox=false;
@@ -63,6 +74,12 @@ export class ChatFireBoxComponent implements OnInit {
             type: 0,
             uid: uid,
         });
+        this.firebaseSend(
+            this.selectedArticleId, 
+            this.reddah.getCurrentUser(), 
+            0, 
+            this.newChatComment.value);
+        
         this.reddah.addComments(
             this.selectedArticleId, 
             this.selectedCommentId, 
