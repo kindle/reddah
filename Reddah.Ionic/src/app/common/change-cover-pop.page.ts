@@ -5,7 +5,7 @@ import { PopoverController, ModalController } from '@ionic/angular';
 @Component({
   template: `
       <ion-item button (click)="change()">
-          <ion-label>更换相册封面</ion-label>
+          <ion-label>{{ 'Comment.Delete' | translate }}</ion-label>
       </ion-item>
   `
 })
@@ -22,7 +22,7 @@ export class ChangeCoverPopPage {
       const changePhotoModal = await this.modalController.create({
           component: ChangePhotoPage,
           componentProps: { 
-            title : "更换相册封面",
+            title : "{{ 'Comment.Delete' | translate }}",
             tag : "cover"
           }
       });

@@ -1,6 +1,6 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-text>评论详情</ion-text>
+    <ion-text>{{ 'Comment.Comment' | translate }}</ion-text>
 </ion-item>
 <ion-content padding [scrollEvents]="true" (ionScroll)="commentbox.onScroll($event)">
     <ion-item lines="none" no-padding>
@@ -16,14 +16,14 @@
 
     <ion-item lines="none" no-padding>
         <ion-label text-wrap>
-            全部回复 {{allRepliesCount}}
+            {{ 'Comment.Comment' | translate }} {{allRepliesCount}}
         </ion-label>
         <!-- [interfaceOptions]="customPopoverOptions" interface="popover" -->
         <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" 
-        cancel-text="取消" ok-text="确定" #commentSortType>
-            <ion-select-option value="latest">按最新</ion-select-option>
-            <ion-select-option value="oldest">按最早</ion-select-option>
-            <ion-select-option value="mostlike">按赞</ion-select-option>
+        cancelText="{{ 'Confirm.Cancel' | translate }}" okText="{{ 'Confirm.Yes' | translate }}" #commentSortType>
+            <ion-select-option value="latest">{{ 'Confirm.ByLatest' | translate }}</ion-select-option>
+            <ion-select-option value="oldest">{{ 'Confirm.ByEarly' | translate }}</ion-select-option>
+            <ion-select-option value="mostlike">{{ 'Confirm.ByLike' | translate }}</ion-select-option>
         </ion-select>
     </ion-item>
     <div *ngFor="let reply of comments">

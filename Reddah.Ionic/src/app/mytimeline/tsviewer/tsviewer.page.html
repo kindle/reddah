@@ -57,7 +57,7 @@
             </ion-item>
             <ion-item no-padding lines="none">
                 <ion-note color="dark">{{reddah.utcToLocal(article.CreatedOnOrg?article.CreatedOnOrg:article.CreatedOn,'YYYY-MM-DD HH:mm:ss')}}</ion-note>
-                <ion-note color="secondary" style="margin-left: 5px;" *ngIf="isMe()">删除</ion-note>
+                <ion-note color="secondary" style="margin-left: 5px;" *ngIf="isMe()">{{ 'Comment.Delete' | translate }}</ion-note>
                 <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
             </ion-item>
         </div>
@@ -93,7 +93,7 @@
     <ion-item margin-end>
         <ion-input #newComment id="newComment" placeholder="{{selectedReplyPlaceholder}}" padding-start></ion-input>
         <ion-icon name="happy" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>
-        <ion-button (click)="SendComment()" color="primary">发送</ion-button>
+        <ion-button (click)="SendComment()" color="primary">{{ 'Confirm.Submit' | translate }}</ion-button>
     </ion-item>
     
     <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>

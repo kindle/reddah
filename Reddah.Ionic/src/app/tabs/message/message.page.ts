@@ -33,7 +33,7 @@ export class MessageListPage implements OnInit {
         this.currentUserName = this.reddah.getCurrentUser();
     }
 
-    refreshPage;
+    //refreshPage;
     async ngOnInit(){
         this.loadData(true);
         /*this.refreshPage = setInterval(() => {
@@ -41,9 +41,10 @@ export class MessageListPage implements OnInit {
         },5000);*/
     }
 
+    /*
     ionViewWillLeave() {
         clearInterval(this.refreshPage);
-    }
+    }*/
 
     clear(){
         this.localStorageService.clear("Reddah_Local_Messages");
@@ -114,6 +115,9 @@ export class MessageListPage implements OnInit {
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
+        if(data||!data){
+            this.loadData(true);
+        }
     }
 
     async goGroupChat(groupChat, hasNewMsg){
@@ -129,6 +133,9 @@ export class MessageListPage implements OnInit {
         const { data } = await modal.onDidDismiss();
         if(data=="delete"){
            this.clear();
+        }
+        if(data||!data){
+            this.loadData(true);
         }
     }
 

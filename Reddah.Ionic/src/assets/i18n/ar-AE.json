@@ -134,6 +134,23 @@
     "Confirm.LeaveGroupChatMessage":"هل تريد الخروج وحذف ؟",
     "Confirm.Yes": "نعم",
     "Confirm.Cancel": "ألغى",
-    "Confirm.Submit": "قدم"
+    "Confirm.Submit": "قدم",
+    "Confirm.ByLatest":"Latest",
+    "Confirm.ByEarly":"Earliest",
+    "Confirm.ByLike":"Like",
+
+    "Pop":{
+        "NoRecommend":"Hide",
+        "Report":"Report",
+        "Nointerest":"Not Interested",
+        "ToFriend":"Share with friend",
+        "ToAperture":"Share to Aperture",
+        "ChangeCover":"Change cover",
+        "Note":"Note",
+        "TakePhoto":"Camera",
+        "Photo":"Take a photo",
+        "SelectPhoto":"photo from album",
+        "SelectVideo":"video from album"
+    }
 
 }

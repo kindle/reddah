@@ -6,6 +6,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
 import { GroupChatOptPage } from '../chat/group-chat-opt/group-chat-opt.page';
 import { UserPage } from '../common/user/user.page';
+//import { AngularFireDatabase } from '@angular/fire/database';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
@@ -43,7 +44,6 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
         //public db: AngularFireDatabase,
-        //private firebase: Firebase
     ) { 
         super(modalController, reddah, localStorageService, streamingMedia, videoEditor, platform);
         this.userName = this.reddah.getCurrentUser();
@@ -51,14 +51,6 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
     }
 
     ngOnInit() {
-        //this.db.list('/chat').valueChanges().subscribe(data => {
-        //    console.log(data)
-        //    this.messages = data
-        //});
-
-        ///if(false)
-            //creategroupchat;
-        //this.getGroupChat();
         if(this.targetUsers!=null&&this.groupChat==null){
             this.createGroupChat();
         }
@@ -67,6 +59,9 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
             this.title = this.groupChat.Title;
             this.chatId = this.groupChat.Id;
         }
+        this.refreshPage = setInterval(()=>{
+            this.getGroupChat();
+        }, 5000)
         
     }
 
@@ -145,6 +140,22 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
         
     }
 
+    /*
+    firebaseInited = false;
+    initFirebase(){
+        this.firebaseInited = true;
+        if(this.chatId>0){
+
+            //this.db.list(this.chatId+"").remove();
+
+            this.db.list(this.chatId+"").valueChanges()
+            .subscribe(data => {
+                this.getGroupChat();
+                
+            });
+        }
+    }*/
+
     //test
     clear(){
         this.localStorageService.clear(`Reddah_Chat_${this.groupChat.Id}`);
@@ -157,12 +168,22 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
     }
 
     async childLocalComments(event){
-        //console.log("$$#")
-        //console.log(event)
+        let newmessage = {
+            Id:null,
+            ArticleId: event.id, 
+            Content: event.text, 
+            UserName: this.userName,
+            Type: event.type,
+            Uid: event.uid
+        }
+        this.messages.push(newmessage);
+        
+        if(this.pageTop.scrollToBottom)
+            this.pageTop.scrollToBottom(0);
     }
     
     async getMoreHistory(evt){
-        let min = Math.min.apply(null,this.messages.map(item=>item["Id"]));
+        let min = Math.min.apply(null,this.messages.map(item=>item["Id"]).filter(m=>m!=null));
         this.getHistory(-1*min, 20, evt);
     }
 
@@ -172,21 +193,9 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
             //get latest 20 messages;
             this.getHistory(0, 20);
         }else{
-            /*if(this.hasNewMsg){
-                this.messages = chatHistory;
-                //get all latest messages;
-                let max = Math.max.apply(null,this.messages.map(item=>item["Id"]));
-                this.getHistory(max, 0);
-            }
-            else{
-                this.messages = chatHistory;
-                setTimeout(() => {
-                    this.pageTop.scrollToBottom(0);
-                },200)
-            }*/
             this.messages = chatHistory;
             //get all latest messages;
-            let max = Math.max.apply(null,this.messages.map(item=>item["Id"]));
+            let max = Math.max.apply(null,this.messages.map(item=>item["Id"]).filter(m=>m!=null));
             this.getHistory(max, 0);
         }
     }
@@ -199,6 +208,11 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
         this.reddah.getGroupChat(formData).subscribe(data=>{
             if(data.Success==0)
             {
+                /*if(!this.firebaseInited)
+                {
+                    this.initFirebase();
+                }*/
+
                 if(id==0){//first load
                     this.messages =  data.Message.Comments;
                     setTimeout(() => {
@@ -210,9 +224,24 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
                     this.messages = data.Message.Comments.concat(this.messages);
                 }
                 else{//new msg came in.
-                    this.messages = this.messages.concat(data.Message.Comments);
+                    //update local
+                    this.messages.forEach((item,index)=>{
+                        if(item["Id"]==null){
+                            let mact = data.Message.Comments.filter(n=>n["Uid"]==item["Uid"]);
+                            if(mact!=null){
+                                this.messages[index]["Id"] = mact[0]["Id"];
+                            }
+                        }
+                    });
+                    //sync others
+                    this.messages = this.messages.concat(data.Message.Comments.filter(item=>
+                        !this.messages.map(m=>m["Id"]).includes(item["Id"])
+                    ));
+                    
+                    this.messages.sort((a,b)=>a["Id"]-b["Id"]);
+
                     setTimeout(() => {
-                        if(this.pageTop.scrollToBottom)
+                        if(this.pageTop.scrollToBottom&&!this.didScrollUp)
                             this.pageTop.scrollToBottom(0);
                     },200)
                 }

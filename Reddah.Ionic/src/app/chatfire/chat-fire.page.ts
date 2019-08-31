@@ -6,7 +6,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
 import { ChatOptPage } from '../chat/chat-opt/chat-opt.page';
 import { UserPage } from '../common/user/user.page';
-import { AngularFireDatabase } from '@angular/fire/database';
+//import { AngularFireDatabase } from '@angular/fire/database';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
@@ -107,6 +107,28 @@ export class ChatFireBase{
         return await modal.present();
     }
 
+    refreshPage;
+    ionViewWillLeave() {
+        clearInterval(this.refreshPage);
+    }
+
+    private lastScrollTop: number = 0;
+    didScrollUp = false;
+    onScroll($event) {
+        let currentScrollTop = $event.detail.scrollTop;
+
+        if(currentScrollTop > this.lastScrollTop)
+        {
+            //'down';
+
+        }
+        else
+        {
+            //'up';
+            this.didScrollUp = true;
+        }
+    }
+
 }
 
 @Component({
@@ -140,8 +162,7 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         public platform: Platform,
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
-        public db: AngularFireDatabase,
-        //private firebase: Firebase
+        //public db: AngularFireDatabase,        
     ) { 
         super(modalController, reddah, localStorageService, streamingMedia, videoEditor, platform);
         this.userName = this.reddah.getCurrentUser();
@@ -150,18 +171,31 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
     
     ngOnInit() {
         this.getChat();
+        this.refreshPage = setInterval(()=>{
+            this.getChat();
+        },5000)
     }
 
+    /*
     firebaseInited = false;
     initFirebase(){
         this.firebaseInited = true;
         if(this.chatId>0){
-            this.db.list(this.chatId+"").valueChanges().subscribe(data => {
+
+            this.db.list(this.chatId+"").valueChanges()
+            .subscribe(dataMessageComments => {
+                this.reddah.toast(JSON.stringify(dataMessageComments))
+                //sync others
+                this.messages = this.messages.concat(dataMessageComments.filter(item=>
+                    !this.messages.map(m=>m["Uid"]).includes(item["Uid"])
+                ));
+
+                //sync up
                 this.getChat();
-                this.db.list(this.chatId+"").remove();
             });
         }
     }
+    */
     
     //test
     clear(){
@@ -175,7 +209,8 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
     }
 
     async childLocalComments(event){
-        let newmessage = { 
+        let newmessage = {
+            Id:null,
             ArticleId: event.id, 
             Content: event.text, 
             UserName: this.userName,
@@ -184,14 +219,13 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         }
         this.messages.push(newmessage);
         
-        
         if(this.pageTop.scrollToBottom)
             this.pageTop.scrollToBottom(0);
     
     }
 
     async getMoreHistory(evt){
-        let min = Math.min.apply(null,this.messages.map(item=>item["Id"]));
+        let min = Math.min.apply(null,this.messages.map(item=>item["Id"]).filter(m=>m!=null));
         this.getHistory(-1*min, 20, evt);
     }
     
@@ -201,18 +235,6 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
             //get latest 20 messages;
             this.getHistory(0, 20);
         }else{
-            /*if(this.hasNewMsg){
-                this.messages = chatHistory;
-                //get all latest messages;
-                let max = Math.max.apply(null,this.messages.map(item=>item["Id"]));
-                this.getHistory(max, 0);
-            }
-            else{
-                this.messages = chatHistory;
-                setTimeout(() => {
-                    this.pageTop.scrollToBottom(0);
-                },200)
-            }*/
             this.messages = chatHistory;
             //get all latest messages;
             let max = Math.max.apply(null,this.messages.map(item=>item["Id"]).filter(m=>m!=null));
@@ -221,7 +243,7 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
     }
 
     async getHistory(id, limit, event=null){
-        alert(id+"_"+limit)
+        
         let formData = new FormData();
         formData.append("targetUser", this.target);
         formData.append("id", JSON.stringify(id));
@@ -231,10 +253,10 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
             {
                 this.chatId = data.Message.Seed;
                 this.chatbox.selectedArticleId = this.chatId;
-                if(!this.firebaseInited)
+                /*if(!this.firebaseInited)
                 {
                     this.initFirebase();
-                }
+                }*/
 
                 if(id==0){//first load
                     this.messages =  data.Message.Comments;
@@ -247,10 +269,25 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
                     this.messages = data.Message.Comments.concat(this.messages);
                 }
                 else{//new msg came in.
-                    this.messages = this.messages.concat(data.Message.Comments);
-                    alert(JSON.stringify(this.messages))
+                    //update local
+                    this.messages.forEach((item,index)=>{
+                        if(item["Id"]==null){
+                            let mact = data.Message.Comments.filter(n=>n["Uid"]==item["Uid"]);
+                            if(mact!=null){
+                                this.messages[index]["Id"] = mact[0]["Id"];
+                            }
+                        }
+                    });
+                    //sync others
+                    this.messages = this.messages.concat(data.Message.Comments.filter(item=>
+                        !this.messages.map(m=>m["Id"]).includes(item["Id"])
+                    ));
+
+                    //console.log(this.messages)
+                    this.messages.sort((a,b)=>a["Id"]-b["Id"]);
+                    
                     setTimeout(() => {
-                        if(this.pageTop.scrollToBottom)
+                        if(this.pageTop.scrollToBottom&&!this.didScrollUp)
                             this.pageTop.scrollToBottom(0);
                     },200)
                 }

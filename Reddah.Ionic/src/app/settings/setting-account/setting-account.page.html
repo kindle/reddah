@@ -5,18 +5,18 @@
 <ion-content no-padding style="--background: #eeeeee;">
     
     <ion-item class="borderTop borderItem">
-        <ion-label>帐号</ion-label>
+        <ion-label>{{ 'About.Account' | translate }}</ion-label>
         <ion-text slot="end">{{userName}}</ion-text>
     </ion-item>
     <ion-item lines="none" class="borderBottom borderItem" (click)="goEmail()">
-        <ion-label>电子邮件</ion-label>
+        <ion-label>{{ 'Input.Email' | translate }}</ion-label>
         <ion-text slot="end">{{reddah.appData('useremail_'+userName)}}</ion-text>
     </ion-item>
     
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop borderItem borderBottom" (click)="changePassword()" lines="none">
-        <ion-label>更改密码</ion-label>
+        <ion-label>{{ 'Button.ChangePassword' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
     

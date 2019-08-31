@@ -4,14 +4,14 @@ import { PopoverController } from '@ionic/angular';
 @Component({
   template: `
       <ion-item button (click)="select(1)">
-          <ion-label>拍摄</ion-label>
-          <ion-text slot="end" style="font-size:14px;color:gray;padding-right:10px;">照片</ion-text>
+          <ion-label>{{ 'Pop.TakePhoto' | translate }}</ion-label>
+          <ion-text slot="end" style="font-size:14px;color:gray;padding-right:10px;">{{ 'Pop.Photo' | translate }}</ion-text>
       </ion-item>
       <ion-item button (click)="select(2)" lines="none">
-          <ion-label>从相册选择照片</ion-label>
+          <ion-label>{{ 'Pop.SelectPhoto' | translate }}</ion-label>
       </ion-item>
       <ion-item button (click)="select(3)" lines="none">
-          <ion-label>从相册选择视频</ion-label>
+          <ion-label>{{ 'Pop.SelectVideo' | translate }}</ion-label>
       </ion-item>
   `
 })

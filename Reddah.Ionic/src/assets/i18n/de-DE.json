@@ -134,6 +134,23 @@
     "Confirm.LeaveGroupChatMessage":"Möchten Sie kündigen und löschen?",
     "Confirm.Yes": "Ja",
     "Confirm.Cancel": "Abbrechen",
-    "Confirm.Submit": "Senden"
+    "Confirm.Submit": "Senden",
+    "Confirm.ByLatest":"Latest",
+    "Confirm.ByEarly":"Earliest",
+    "Confirm.ByLike":"Like",
+
+    "Pop":{
+        "NoRecommend":"Hide",
+        "Report":"Report",
+        "Nointerest":"Not Interested",
+        "ToFriend":"Share with friend",
+        "ToAperture":"Share to Aperture",
+        "ChangeCover":"Change cover",
+        "Note":"Note",
+        "TakePhoto":"Camera",
+        "Photo":"Take a photo",
+        "SelectPhoto":"photo from album",
+        "SelectVideo":"video from album"
+    }
 
 }

@@ -76,7 +76,7 @@
         "Mark": "收藏",
         "Settings": "設定",
         "Header":{
-            "GroupChat":"發起群聊",
+            "GroupChat":"發起聊天",
             "AddFriend":"添加朋友",
             "Scan":"掃描",
             "Feedback":"幫助與反饋"
@@ -105,11 +105,11 @@
         "Sex":"性别",
         "Signature":"個人簽名",
 
-        "About.CurrentVersion": "當前版本",
-        "About.CheckUpgrade": "檢查新版本",
+        "CurrentVersion": "當前版本",
+        "CheckUpgrade": "檢查新版本",
         "About.CurrentLocale": "語言",
-        "About.ChangeLocale": "更換語言",
-        "About.CurrentUser": "當前用戶"
+        "ChangeLocale": "更換語言",
+        "CurrentUser": "當前用戶"
     },
 
     "Time.YearsAgo": "年前",
@@ -137,5 +137,22 @@
     "Confirm.LeaveGroupChatMessage":"確定要退出並删除？",
     "Confirm.Yes": "確定",
     "Confirm.Cancel": "取消",
-    "Confirm.Submit": "提交"
+    "Confirm.Submit": "提交",
+    "Confirm.ByLatest":"按最新",
+    "Confirm.ByEarly":"按最早",
+    "Confirm.ByLike":"按赞",
+
+    "Pop":{
+        "NoRecommend":"减少推荐",
+        "Report":"举报",
+        "Nointerest":"不感兴趣",
+        "ToFriend":"分享给好友",
+        "ToAperture":"分享到时光圈",
+        "ChangeCover":"更换相册封面",
+        "Note":"设置备注和标签",
+        "TakePhoto":"拍摄",
+        "Photo":"照片",
+        "SelectPhoto":"从相册选择照片",
+        "SelectVideo":"从相册选择视频"
+    }
 }

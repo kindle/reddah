@@ -6,7 +6,7 @@
 <ion-content no-padding style="background-color: white;">
     <ion-item *ngIf="!user404">
         <ion-icon name="ios-person-add" slot="start" color="tertiary" class="portrait"></ion-icon>
-        <ion-label style="margin-left:10px;">搜索:<font color="#107c10">{{searchKeyword.value}}</font></ion-label>
+        <ion-label style="margin-left:10px;">{{ 'Search.Title' | translate }}:<font color="#107c10">{{searchKeyword.value}}</font></ion-label>
     </ion-item>
 
     <div text-center *ngIf="user404" class="user404">
@@ -16,8 +16,8 @@
     <ion-item *ngIf="user404" (click)="searchMore()">
         <ion-icon name="ios-search" slot="start" color="tertiary" class="portrait"></ion-icon>
         <ion-label style="margin-left:10px;">
-            搜一搜 <font color="#107c10">{{searchKeyword.value}}</font>
-            <p class="desc">小程序、订阅号号、文章、时光圈等</p>
+            {{ 'Search.Title' | translate }} <font color="#107c10">{{searchKeyword.value}}</font>
+            <p class="desc">小程序、订阅号、文章、时光圈等</p>
         </ion-label>
     </ion-item>
 </ion-content>

@@ -5,7 +5,7 @@ import { SettingNoteLabelPage } from '../settings/setting-note-label/setting-not
 @Component({
   template: `
       <ion-item button (click)="change()">
-          <ion-label>设置备注和标签</ion-label>
+          <ion-label>{{ 'Pop.Note' | translate }}</ion-label>
       </ion-item>
   `
 })

@@ -20,7 +20,7 @@
         <ion-label style="margin-left:10px;" *ngIf="message.Type==2">
             <span class="user-name">{{reddah.getDisplayName(GetSender(message.GroupName))}}</span>
             <br>
-            <ion-note color="dark" *ngIf="message.LastUpdateType==0">{{reddah.htmlDecode(message.LastUpdateContent)}}</ion-note>
+            <ion-note color="dark" *ngIf="message.LastUpdateType==0">{{reddah.summary(message.LastUpdateContent)}}</ion-note>
             <ion-note color="dark" *ngIf="message.LastUpdateType==1">[语音]</ion-note>
             <ion-note color="dark" *ngIf="message.LastUpdateType==2">[图片]</ion-note>
             <ion-note color="dark" *ngIf="message.LastUpdateType==3">[视频]</ion-note>
@@ -29,7 +29,7 @@
         <ion-label style="margin-left:10px;" *ngIf="message.Type==3">
             <span class="user-name">{{message.Title}}</span>
             <br>
-            <ion-note color="dark" *ngIf="message.LastUpdateType==0">{{reddah.getDisplayName(message.LastUpdateBy)}}: {{reddah.htmlDecode(message.LastUpdateContent)}}</ion-note>
+            <ion-note color="dark" *ngIf="message.LastUpdateType==0">{{reddah.getDisplayName(message.LastUpdateBy)}}: {{reddah.summary(message.LastUpdateContent)}}</ion-note>
             <ion-note color="dark" *ngIf="message.LastUpdateType==1">[语音]</ion-note>
             <ion-note color="dark" *ngIf="message.LastUpdateType==2">[图片]</ion-note>
             <ion-note color="dark" *ngIf="message.LastUpdateType==3">[视频]</ion-note>

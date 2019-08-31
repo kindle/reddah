@@ -9,8 +9,6 @@ import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserPage } from '../../common/user/user.page';
-import * as HighCharts from 'highcharts';
-var Highcharts = require('highcharts/highstock');
 
 @Component({
     selector: 'app-comment-reply',

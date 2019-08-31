@@ -134,6 +134,23 @@
     "Confirm.LeaveGroupChatMessage":"Você quer parar e apagar?",
     "Confirm.Yes": "Sim",
     "Confirm.Cancel": "Cancelar",
-    "Confirm.Submit": "Enviar"
+    "Confirm.Submit": "Enviar",
+    "Confirm.ByLatest":"Latest",
+    "Confirm.ByEarly":"Earliest",
+    "Confirm.ByLike":"Like",
+
+    "Pop":{
+        "NoRecommend":"Hide",
+        "Report":"Report",
+        "Nointerest":"Not Interested",
+        "ToFriend":"Share with friend",
+        "ToAperture":"Share to Aperture",
+        "ChangeCover":"Change cover",
+        "Note":"Note",
+        "TakePhoto":"Camera",
+        "Photo":"Take a photo",
+        "SelectPhoto":"photo from album",
+        "SelectVideo":"video from album"
+    }
 
 }

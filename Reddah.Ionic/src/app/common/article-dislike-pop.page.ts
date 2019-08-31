@@ -6,11 +6,11 @@ import { PopoverController, ModalController } from '@ionic/angular';
       <ion-grid>
           <ion-row>
               <ion-col>
-                  <div class="dislike-title">减少推荐</div>
+                  <div class="dislike-title">{{ 'Pop.NoRecommend' | translate }}</div>
               </ion-col>
               <ion-col>
                   <div class="dislike-title-right" (click)="close(feedback)">
-                    举报<ion-icon size="small" color="medium" name="alert"></ion-icon>
+                  {{ 'Pop.Report' | translate }}<ion-icon size="small" color="medium" name="alert"></ion-icon>
                   </div>
               </ion-col>
           </ion-row>
@@ -24,7 +24,7 @@ import { PopoverController, ModalController } from '@ionic/angular';
           </ion-row>
           <ion-row>
               <ion-col (click)="close(default)">
-                  <div class="dislike-noreason">不感兴趣</div>
+                  <div class="dislike-noreason">{{ 'Pop.Nointerest' | translate }}</div>
               </ion-col>
           </ion-row>
       </ion-grid>

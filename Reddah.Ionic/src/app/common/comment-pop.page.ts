@@ -6,15 +6,15 @@ import { PopoverController } from '@ionic/angular';
       <ion-list>
         <ion-item button (click)="foo()">
             <ion-icon slot="start" color="warning" name="alert"></ion-icon>  
-            <ion-label>Report this comment</ion-label>
+            <ion-label>{{ 'Pop.Report' | translate }}</ion-label>
         </ion-item>
         <ion-item button (click)="foo()">
             <ion-icon slot="start" color="dark" name="trash"></ion-icon>  
-            <ion-label>Detete this comment</ion-label>
+            <ion-label>{{ 'Comment.Delete' | translate }}</ion-label>
         </ion-item>
         <ion-item button (click)="close()">
             <ion-icon slot="start" color="danger" name="close"></ion-icon>
-            <ion-label>Close</ion-label>
+            <ion-label>{{ 'Button.Close' | translate }}</ion-label>
         </ion-item>
       </ion-list>
     `

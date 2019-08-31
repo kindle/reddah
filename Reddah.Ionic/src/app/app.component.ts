@@ -9,7 +9,7 @@ import { Toast } from '@ionic-native/toast/ngx';
 import { ImageLoaderConfigService } from 'ionic-image-loader';
 import { CacheService } from "ionic-cache";
 import { File } from '@ionic-native/file/ngx';
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Globalization } from '@ionic-native/globalization';
@@ -122,18 +122,7 @@ export class AppComponent {
         document.documentElement.style.setProperty(`--ion-font-size`, this.reddah.fontSizeMap.get(currentFontSize));
 
         this.reddah.getUserPhotos(this.reddah.getCurrentUser());
-/*
-        var firebaseConfig = {
-            apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
-            authDomain: "reddah-com.firebaseapp.com",
-            databaseURL: "https://reddah-com.firebaseio.com",
-            projectId: "reddah-com",
-            storageBucket: "reddah-com.appspot.com",
-            messagingSenderId: "64237460591",
-            appId: "1:64237460591:web:4f2a4411eca1162f"
-          };
-          */
-        //firebase.initializeApp(firebaseConfig);
+
     }
 
     initializeApp() {
@@ -234,8 +223,10 @@ export class AppComponent {
                 if (outlet && outlet.canGoBack()) {
                     outlet.pop();
                 } else {
-                    this.presentAlertConfirm();
-                    event.preventDefault();
+                    if(this.router.url.indexOf("home")>0)
+                    {
+                        this.presentAlertConfirm();
+                    }
                 }
             });
         });

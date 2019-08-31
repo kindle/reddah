@@ -143,7 +143,8 @@ namespace Reddah.Web.Login.Controllers
                                             UserSex = u.Sex,
                                             Type = c.Type,
                                             Duration = c.Duration,
-                                            Abstract = c.Abstract
+                                            Abstract = c.Abstract,
+                                            Uid = c.Uid
                                         }).Take(limit).OrderBy(n => n.Id);
 
                         return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
@@ -171,7 +172,8 @@ namespace Reddah.Web.Login.Controllers
                                             UserSex = u.Sex,
                                             Type = c.Type,
                                             Duration = c.Duration,
-                                            Abstract = c.Abstract
+                                            Abstract = c.Abstract,
+                                            Uid = c.Uid
                                         }).Take(limit).OrderBy(n => n.Id);
 
                         return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
@@ -199,7 +201,8 @@ namespace Reddah.Web.Login.Controllers
                                             UserSex = u.Sex,
                                             Type = c.Type,
                                             Duration = c.Duration,
-                                            Abstract = c.Abstract
+                                            Abstract = c.Abstract,
+                                            Uid = c.Uid
                                         }).OrderBy(n => n.Id);
 
                         return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));
@@ -319,7 +322,8 @@ namespace Reddah.Web.Login.Controllers
                                             UserSex = u.Sex,
                                             Type = c.Type,
                                             Duration = c.Duration,
-                                            Abstract = c.Abstract
+                                            Abstract = c.Abstract,
+                                            Uid = c.Uid
                                         }).Take(limit).OrderBy(n => n.Id);
 
                         return Ok(new ApiResult(0, new SeededComments { Seed = groupChatId, Comments = comments.ToList() }));
@@ -347,7 +351,8 @@ namespace Reddah.Web.Login.Controllers
                                             UserSex = u.Sex,
                                             Type = c.Type,
                                             Duration = c.Duration,
-                                            Abstract = c.Abstract
+                                            Abstract = c.Abstract,
+                                            Uid = c.Uid
                                         }).Take(limit).OrderBy(n => n.Id);
 
                         return Ok(new ApiResult(0, new SeededComments { Seed = groupChatId, Comments = comments.ToList() }));
@@ -375,7 +380,8 @@ namespace Reddah.Web.Login.Controllers
                                             UserSex = u.Sex,
                                             Type = c.Type,
                                             Duration = c.Duration,
-                                            Abstract = c.Abstract
+                                            Abstract = c.Abstract,
+                                            Uid = c.Uid
                                         }).OrderBy(n => n.Id);
 
                         return Ok(new ApiResult(0, new SeededComments { Seed = groupChatId, Comments = comments.ToList() }));

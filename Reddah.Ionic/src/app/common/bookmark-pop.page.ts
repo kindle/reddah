@@ -5,7 +5,7 @@ import { PopoverController } from '@ionic/angular';
     template: `
       <div>
           <ion-item button (click)="close(1)">
-              <ion-label>删除</ion-label>
+              <ion-label>{{ 'Comment.Delete' | translate }}</ion-label>
           </ion-item>
       </div>
     `

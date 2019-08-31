@@ -25,9 +25,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-//import { AngularFireModule } from 'angularfire2';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
+//import { AngularFireModule } from '@angular/fire';
+//import { AngularFireDatabaseModule } from '@angular/fire/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions } from '@ionic-native/media-capture/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx'; 
@@ -296,8 +295,8 @@ var firebaseConfig = {
             }
         }),
         NgxQRCodeModule,
-        AngularFireModule.initializeApp(firebaseConfig),
-        AngularFireDatabaseModule,
+        //AngularFireModule.initializeApp(firebaseConfig),
+        //AngularFireDatabaseModule,
     ],
     exports:[
     ],

@@ -6,13 +6,13 @@
 <div *ngIf="data">
     <ion-item lines="none" color="light" id="TotalComments">
         <ion-label text-wrap>
-            全部回复 {{count}}
+            {{ 'Comment.Comment' | translate }} {{count}}
         </ion-label>
         <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" 
-        cancel-text="取消" ok-text="确定" #commentSortType>
-            <ion-select-option value="latest">按最新</ion-select-option>
-            <ion-select-option value="oldest">按最早</ion-select-option>
-            <ion-select-option value="mostlike">按赞</ion-select-option>
+        cancelText="{{ 'Confirm.Cancel' | translate }}" okText="{{ 'Confirm.Yes' | translate }}" #commentSortType>
+            <ion-select-option value="latest">{{ 'Confirm.ByLatest' | translate }}</ion-select-option>
+            <ion-select-option value="oldest">{{ 'Confirm.ByEarly' | translate }}</ion-select-option>
+            <ion-select-option value="mostlike">{{ 'Confirm.ByLike' | translate }}</ion-select-option>
         </ion-select>
     </ion-item>
     <div *ngFor="let comment of localComments">
@@ -32,7 +32,7 @@
                     
                     <span>{{reddah.utcToLocal(comment.CreatedOn,"YY-MM-DD HH:mm")}}</span>
                     <div (click)="addNewComment(comment.ArticleId, comment.Id)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
-                    <span (click)="viewReply(localComments, comment)" *ngIf="comment.Count&&comment.Count>0">查看{{comment.Count}}条回复>></span>
+                    <span (click)="viewReply(localComments, comment)" *ngIf="comment.Count&&comment.Count>0">{{ 'Comment.Comment' | translate }} {{comment.Count}}>></span>
                 </ion-label>
             </ion-item>
         </li>

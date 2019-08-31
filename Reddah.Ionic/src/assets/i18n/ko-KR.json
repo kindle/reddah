@@ -137,5 +137,22 @@
     "Confirm.LeaveGroupChatMessage":"종료하고 삭제하시겠습니까?",
     "Confirm.Yes": "네",
     "Confirm.Cancel": "취소",
-    "Confirm.Submit": "제출하다"
+    "Confirm.Submit": "제출하다",
+    "Confirm.ByLatest":"Latest",
+    "Confirm.ByEarly":"Earliest",
+    "Confirm.ByLike":"Like",
+
+    "Pop":{
+        "NoRecommend":"Hide",
+        "Report":"Report",
+        "Nointerest":"Not Interested",
+        "ToFriend":"Share with friend",
+        "ToAperture":"Share to Aperture",
+        "ChangeCover":"Change cover",
+        "Note":"Note",
+        "TakePhoto":"Camera",
+        "Photo":"Take a photo",
+        "SelectPhoto":"photo from album",
+        "SelectVideo":"video from album"
+    }
   }

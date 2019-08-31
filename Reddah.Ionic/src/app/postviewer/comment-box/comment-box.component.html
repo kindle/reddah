@@ -3,26 +3,14 @@
     <ion-item *ngIf="!showEditBox">
         <ion-icon name="create" size="medium" (click)="addNewComment(selectedArticleId, selectedCommentId)"></ion-icon>
         <ion-input id="newComment" (click)="addNewComment(selectedArticleId, selectedCommentId)" 
-            readonly padding-start placeholder="写评论..."></ion-input>
+            readonly padding-start placeholder="{{ 'Comment.Comment' | translate }}..."></ion-input>
         
         <ion-icon color="primary" name="text" size="medium" (click)="addNewComment(selectedArticleId, selectedCommentId)"></ion-icon>
         {{count}}
-
-<!--
-        <ion-icon color="secondary" name="share" (click)="reddah.addBookmark(selectedArticleId)" size="medium"></ion-icon>
-        
-        <ion-icon color="danger" name="bookmark" (click)="reddah.addBookmark(selectedArticleId)" size="medium"></ion-icon>
-        {{bookmark}}
--->
-
-        <!--<ion-text (click)="bookmark()" margin-end>{{ 'Article.Bookmark' | translate }}</ion-text>-->
-        
-        <!--<ion-icon color="primary" name="share" size="medium"></ion-icon>
-        <ion-text (click)="share()">{{ 'Article.Share' | translate }}</ion-text>-->
     </ion-item>
     <ion-item *ngIf="showEditBox">
         <ion-textarea autoresize padding #newComment id="newComment" [(ngModel)]="commentContent" rows="3" cols="21" 
-        placeholder="说说你的看法..." [disabled]="submitClicked"></ion-textarea>    
+        placeholder="{{ 'Comment.Tip' | translate }}" [disabled]="submitClicked"></ion-textarea>    
         <ion-buttons>
             <ion-grid>
                 <ion-row>
@@ -38,7 +26,7 @@
                 <ion-row>
                     <ion-col>
                         <ion-button (click)="submit()" position="stack" color="primary" 
-                        [disabled]="submitClicked||commentContent==null||commentContent==''">发送</ion-button>
+                        [disabled]="submitClicked||commentContent==null||commentContent==''">{{ 'Confirm.Submit' | translate }}</ion-button>
                     </ion-col>
                 </ion-row>
             </ion-grid>
