@@ -12,12 +12,12 @@
         </ion-item>
         <ion-item class="borderItem" (click)="goFontSize()">
             <ion-icon slot="start" name="ios-appstore" color="dark" size="medium"></ion-icon>
-            <ion-label>字体大小</ion-label>
+            <ion-label>{{ 'Common.Font' | translate }}</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
         <ion-item lines="none" class="borderBottom borderItem" (click)="clearCache()">
             <ion-icon slot="start" name="ios-trash" color="medium" size="medium"></ion-icon>
-            <ion-label>清除缓存</ion-label>
+            <ion-label>{{ 'Common.Cache' | translate }}</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>

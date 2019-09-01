@@ -4,7 +4,8 @@
 </ion-item>
 <ion-content (click)="tap($event)">
     <ion-item>
-        <ion-textarea id="thoughtTxt" autoresize [(ngModel)]="yourThoughts" rows="{{postType==4?3:6}}" cols="20" placeholder="这一刻的想法..."></ion-textarea>
+        <ion-textarea id="thoughtTxt" autoresize [(ngModel)]="yourThoughts" rows="{{postType==4?3:6}}" cols="20" 
+        placeholder="{{ 'Pop.YourThoughts' | translate }}..."></ion-textarea>
     </ion-item>
     <ion-item lines="none">
         <ion-icon id="faceIcon" slot="start" name="happy" size="medium" (click)="toggleFacePanel()" margin-end></ion-icon>
@@ -34,7 +35,7 @@
     </ion-item>
     <ion-item lines="none" (click)="getLocation()">
       <ion-icon name="pin" slot="start" color="{{location?'primary':'dark'}}"></ion-icon>
-      <ion-note color="{{location?'primary':'dark'}}">{{location?location.title:'所在位置'}}</ion-note>
+      <ion-note color="{{location?'primary':'dark'}}">{{location?location.title:'About.Location' | translate}}</ion-note>
       <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
     </ion-item>
 <!--
@@ -53,7 +54,7 @@
 <ion-footer *ngIf="dragging" style="--background:red;background-color: red;color: white;">
     <ion-row id="delete-photo" class="delete-area" align-items-center justify-content-center dragula="bag" [(dragulaModel)]="photos_trash">
         <ion-icon name="ios-trash" color="tertiary" size="medium"></ion-icon>
-        <ion-text *ngIf="dragToDel" color="white">松手即可删除</ion-text>
-        <ion-text *ngIf="!dragToDel">拖动到此处删除</ion-text>
+        <ion-text *ngIf="dragToDel" color="white">{{ 'Pop.ReleaseToDel' | translate }}</ion-text>
+        <ion-text *ngIf="!dragToDel">{{ 'Pop.DragToDel' | translate }}</ion-text>
     </ion-row>
 </ion-footer>

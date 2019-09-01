@@ -39,6 +39,7 @@ export class HomePage implements OnInit {
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
+        private translate:TranslateService,
     ){
         this.userName = this.reddah.getCurrentUser();
     }
@@ -209,11 +210,11 @@ export class HomePage implements OnInit {
     
     async dislike(event, article){
         let reasons = [
-            [{Id:1, Title:"看过了", Key:"" },{Id:2, Title:"内容太水", Key:""}],
+            [{Id:1, Title:this.translate.instant("Pop.SawIt"), Key:"" },{Id:2, Title:this.translate.instant("Pop.Trash"), Key:""}],
         ];
         reasons.push([
-            {Id:4, Title:`色情低俗`, Key:"" },
-            {Id:5, Title:`拉黑作者:${this.reddah.getDisplayName(article.UserName)}`, Key:article.UserName } ]);
+            {Id:4, Title:this.translate.instant("Pop.Porn"), Key:"" },
+            {Id:5, Title:`${this.translate.instant("Pop.NoAuthor")}:${this.reddah.getDisplayName(article.UserName)}`, Key:article.UserName } ]);
         
         let startIndex = 100;
         let group = article.GroupName.split(',');
@@ -223,7 +224,7 @@ export class HomePage implements OnInit {
             if(last)
             {
                 group.splice(group.length-1, 1);
-                dislikeGroup.unshift({Id:startIndex, Title:`不看:${last}`, Key: last});
+                dislikeGroup.unshift({Id:startIndex, Title:`${this.translate.instant("Pop.Porn")}:${last}`, Key: last});
                 startIndex++;
             }
         }
@@ -289,8 +290,8 @@ export class HomePage implements OnInit {
         const modal = await this.modalController.create({
             component: AddFeedbackPage,
             componentProps: { 
-                title: "文章举报",
-                desc: "请输入文章违规描述",
+                title: this.translate.instant("Pop.Report"),
+                desc: this.translate.instant("Pop.ReportReason"),
                 feedbackType: 4,
                 article: article
             }

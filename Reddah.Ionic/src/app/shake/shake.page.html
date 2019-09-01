@@ -1,6 +1,6 @@
 <ion-item no-padding lines="none" color="dark" (click)="test()">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-label>摇一摇</ion-label>
+    <ion-label>{{ 'Menu.Shake' | translate }}</ion-label>
 </ion-item>
 <ion-content #pageTop style="background-color: white;">
     <div class="shakebg" *ngIf="showShakebg">
@@ -15,7 +15,7 @@
                     <ion-icon size="small" class="cmd-title" name="ios-male" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
                     <ion-icon size="small" class="cmd-title" name="ios-female" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
                     <br>
-                    <ion-note color="tertiary">相距{{reddah.getRuffDistanceByDegree(user.Distance)}}</ion-note>
+                    <ion-note color="tertiary">{{ 'Common.Distance' | translate }}{{reddah.getRuffDistanceByDegree(user.Distance)}}</ion-note>
                 </ion-label>
             </ion-item>
         </div>

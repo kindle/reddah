@@ -49,6 +49,7 @@ export class PubPage implements OnInit {
         public actionSheetController: ActionSheetController,
         private navParams: NavParams,
         private alertController: AlertController,
+        private translate: TranslateService,
     ){
         this.currentUserName = this.reddah.getCurrentUser();
         this.reddah.getUserPhotos(this.userName);
@@ -159,7 +160,7 @@ export class PubPage implements OnInit {
         const actionSheet = await this.actionSheetController.create({
             //header: '',
             buttons: [{
-              text: '更多信息',
+              text: this.translate.instant("Search.More"),
               icon: 'ios-more',
               handler: () => {
                   this.goMore();
@@ -167,7 +168,7 @@ export class PubPage implements OnInit {
             }
             ].concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?
                 [{
-                    text: '分享给好友',
+                    text: this.translate.instant("Pop.ToFriend"),
                     icon: 'share',
                     handler: () => {
                         //this.delCinfirm();                  
@@ -191,18 +192,18 @@ export class PubPage implements OnInit {
 
     async delCinfirm(){
         const alert = await this.alertController.create({
-          header: '删除确认',
-          message: '确定要删除好友吗？',
+          header: this.translate.instant("Confirm.Title"),
+          message: this.translate.instant("Confirm.DeleteMessage"),
           buttons: [
             {
-                text: '取消',
+                text: this.translate.instant("Confirm.Cancel"),
                 cssClass: 'secondary',
                 handler: (blah) => {
                     
                 }
             }, 
             {
-                text: '删除',
+                text: this.translate.instant("Comment.Delete"),
                 handler: () => {
                     let formData = new FormData();
                     formData.append("targetUser", this.userName);
@@ -236,17 +237,16 @@ export class PubPage implements OnInit {
     async unfocus(){
         const alert = await this.alertController.create({
             header: "",
-            message: `不再关注"${this.reddah.appData('usernickname_'+this.userName)}"后将不再收到其下发的消息`,
+            message: `${this.translate.instant("Pop.StillUnfocus")}
+                ${this.reddah.appData('usernickname_'+this.userName)} ${this.translate.instant("Comment.UnfocusMessage")}`,
             buttons: [
               {
-                text: "仍然关注",
+                text: this.translate.instant("Pop.StillFocus"),
                 role: 'cancel',
                 cssClass: 'dark',
-                handler: () => {
-                  
-                }
+                handler: () => {}
               }, {
-                text: "不再关注",
+                text: this.translate.instant("Comment.StillUnfocus"),
                 cssClass:'danger',
                 handler: () => {
                     this.actualUnfocus();

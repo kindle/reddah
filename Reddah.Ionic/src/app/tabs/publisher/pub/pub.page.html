@@ -11,11 +11,11 @@
         <ion-label text-wrap style="margin: 20px;font-weight: bold;">{{reddah.appData('usernickname_'+userName)}}</ion-label>
         <ion-label id="scrollTag" text-wrap text-center style="margin: 10px;padding: 10px 30px;">{{reddah.appData('usersignature_'+userName)}}</ion-label>
     
-        <ion-note text-wrap style="margin: 10px 0 40px 0;">{{18}}位朋友关注</ion-note>
+        <!--<ion-note text-wrap style="margin: 10px 0 40px 0;display:none;">{{18}}位朋友关注</ion-note>-->
     
-        <span class="user-name" (click)="focus()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0">关注公众号</span>
+        <span class="user-name" (click)="focus()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0">{{ 'Pop.Focus' | translate }}</span>
         <span class="user-name" style="margin: 0 0 20px 0;" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
-            <i (click)="chat()">进入公众号首页</i> | <i (click)="unfocus()">取消关注</i>
+            <i (click)="chat()">{{ 'Pop.EnterPub' | translate }}</i> | <i (click)="unfocus()">{{ 'Pop.Unfocus' | translate }}</i>
         </span>
     </div>
     <ion-refresher (ionRefresh)="doRefresh($event)">

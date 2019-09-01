@@ -1,6 +1,6 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-text>帐号分类</ion-text>
+    <ion-text>{{ 'Common.Category' | translate }}</ion-text>
 </ion-item>
 <ion-content no-padding>
     <ion-item (click)="chooseCategory(1)">
@@ -9,7 +9,7 @@
             {{ 'Menu.Publisher' | translate }}
             <br>
             <ion-note text-wrap color="dark">
-                为媒体和个人提供一种新的信息传播方式，构建与读者之间更好的沟通与管理模式。
+                {{ 'Common.PubDesc' | translate }}
             </ion-note>
         </ion-label>
     </ion-item>
@@ -19,7 +19,7 @@
             {{ 'Menu.MiniApp' | translate }}
             <br>
             <ion-note text-wrap color="dark">
-                一种新的开放能力，可以在微信内被便捷地获取和传播，同时具有出色的使用体验。
+                {{ 'Common.MiniDesc' | translate }}
             </ion-note>
         </ion-label>
     </ion-item>

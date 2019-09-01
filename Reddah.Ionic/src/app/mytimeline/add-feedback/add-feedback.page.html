@@ -1,11 +1,12 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" slot="start" (click)="close()" class="backbutton"></ion-icon>
-    <ion-label>{{title?title:"帮助与反馈"}}</ion-label>
+    <ion-label>{{title?title:'Menu.Header.Feedback' | translate}}</ion-label>
     <ion-button color="success" slot="end" (click)="submit()">{{ 'Confirm.Submit' | translate }}</ion-button>
 </ion-item>
 <ion-content>
     <ion-item lines="none">
-        <ion-textarea autoresize [(ngModel)]="yourThoughts" rows="3" cols="20" [placeholder]="desc?desc:'写下您遇到的问题或者建议，我们将不断改进。'"></ion-textarea>
+        <ion-textarea autoresize [(ngModel)]="yourThoughts" rows="3" cols="20" 
+        [placeholder]="desc?desc:'Pop.FeedbackThoughts' | translate"></ion-textarea>
     </ion-item>
     <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="feedbackType!=4">
         <div class="imgSqure" *ngFor="let image of photos;index as i">
@@ -41,7 +42,7 @@
 <ion-footer *ngIf="dragging" style="background-color: red;color: white;">
     <ion-row id="delete-photo" class="delete-area" align-items-center justify-content-center dragula="bag" [(dragulaModel)]="photos_trash">
         <ion-icon name="ios-trash" color="tertiary" size="medium"></ion-icon>
-        <ion-text *ngIf="dragToDel" color="white">松手即可删除</ion-text>
-        <ion-text *ngIf="!dragToDel">拖动到此处删除</ion-text>
+        <ion-text *ngIf="dragToDel" color="white">{{ 'Pop.ReleaseToDel' | translate }}</ion-text>
+        <ion-text *ngIf="!dragToDel">{{ 'Pop.DragToDel' | translate }}</ion-text>
     </ion-row>
 </ion-footer>

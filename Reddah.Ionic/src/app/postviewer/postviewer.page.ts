@@ -12,6 +12,7 @@ import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page';
 import { PubPage } from '../tabs/publisher/pub/pub.page';
 import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
 import { ShareChooseChatPage } from '../chat/share-choose-chat/share-choose-chat.page';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-postviewer',
@@ -30,6 +31,7 @@ export class PostviewerPage implements OnInit {
         public reddah : ReddahService,
         private popoverController: PopoverController,
         private cacheService: CacheService,
+        private translate: TranslateService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
     }
@@ -59,7 +61,7 @@ export class PostviewerPage implements OnInit {
             const modal = await this.modalController.create({
                 component: ShareChooseChatPage,
                 componentProps: { 
-                    title: "选择",
+                    title: this.translate.instant("Common.Choose"),
                     article: this.article,
                 }
             });
@@ -96,8 +98,8 @@ export class PostviewerPage implements OnInit {
         const modal = await this.modalController.create({
             component: AddFeedbackPage,
             componentProps: { 
-                title: "文章举报",
-                desc: "请输入文章违规描述",
+                title: this.translate.instant("Pop.Report"),
+                desc: this.translate.instant("Pop.ReportReason"),
                 feedbackType: 4,
                 article: this.article
             }

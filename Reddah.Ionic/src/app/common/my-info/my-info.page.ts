@@ -9,6 +9,7 @@ import { QrcardPage } from '../qrcard/qrcard.page';
 import { SettingNickNamePage } from '../../settings/setting-nickname/setting-nickname.page'
 import { SettingSexPage } from '../../settings/setting-sex/setting-sex.page'
 import { LocationPage } from '../location/location.page';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-my-info',
@@ -22,6 +23,7 @@ export class MyInfoPage implements OnInit {
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
+        private translate: TranslateService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
     }
@@ -41,7 +43,7 @@ export class MyInfoPage implements OnInit {
         const userModal = await this.modalController.create({
           component: ChangePhotoPage,
           componentProps: { 
-              title: "更换头像",
+              title: this.translate.instant("About.Photo"),
               tag : "portrait"
           }
         });
@@ -67,7 +69,7 @@ export class MyInfoPage implements OnInit {
         const modal = await this.modalController.create({
             component: SettingNickNamePage,
             componentProps: { 
-                title: "设置昵称",
+                title: this.translate.instant("About.Nickname"),
                 currentNickName: this.reddah.appData('usernickname_'+this.userName)
             }
         });
@@ -81,7 +83,7 @@ export class MyInfoPage implements OnInit {
         const modal = await this.modalController.create({
             component: SettingSignaturePage,
             componentProps: {
-                title: "设置个性签名",
+                title: this.translate.instant("About.Signaure"),
                 currentSignature: this.reddah.appData('usersignature_'+this.userName)
             }
         });
@@ -115,7 +117,7 @@ export class MyInfoPage implements OnInit {
         const modal = await this.modalController.create({
             component: SettingSexPage,
             componentProps: {
-                title: "设置性别",
+                title: this.translate.instant("About.Sex"),
                 currentSex: currentValue
             }
         });

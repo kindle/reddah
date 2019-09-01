@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
-import { InfiniteScroll } from '@ionic/angular';
+import { Component, OnInit, Renderer, Input } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, PopoverController, ActionSheetController, NavParams, AlertController } from '@ionic/angular';
@@ -12,7 +11,6 @@ import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SettingNoteLabelPage } from '../../settings/setting-note-label/setting-note-label.page';
-import { ChatPage } from '../../chat/chat.page';
 import { ChatFirePage } from '../../chatfire/chat-fire.page';
 import { MorePage } from '../more/more.page';
 import { LocationPage } from '../location/location.page';
@@ -42,6 +40,7 @@ export class UserPage implements OnInit {
         public actionSheetController: ActionSheetController,
         private navParams: NavParams,
         private alertController: AlertController,
+        private translate: TranslateService,
     ){}
 
     isFriend = false;
@@ -113,7 +112,7 @@ export class UserPage implements OnInit {
         const actionSheet = await this.actionSheetController.create({
             //header: '',
             buttons: [{
-              text: '刷新',
+              text: this.translate.instant("Common.Refresh"),
               icon: 'refresh',
               handler: () => {
                   this.clearCacheAndReload();
@@ -128,7 +127,7 @@ export class UserPage implements OnInit {
             }
             ].concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?
                 [{
-                    text: '删除好友',
+                    text: this.translate.instant("Comment.Delete"),
                     icon: 'ios-trash',
                     handler: () => {
                         this.delCinfirm();                  
@@ -141,18 +140,18 @@ export class UserPage implements OnInit {
 
     async delCinfirm(){
         const alert = await this.alertController.create({
-          header: '删除确认',
-          message: '确定要删除好友吗？',
+          header: this.translate.instant("Confirm.Title"),
+          message: this.translate.instant("Confirm.DeleteMessage"),
           buttons: [
             {
-                text: '取消',
+                text: this.translate.instant("Confirm.Cancel"),
                 cssClass: 'secondary',
                 handler: (blah) => {
                     
                 }
             }, 
             {
-                text: '删除',
+                text: this.translate.instant("Comment.Delete"),
                 handler: () => {
                     let formData = new FormData();
                     formData.append("targetUser", this.userName);

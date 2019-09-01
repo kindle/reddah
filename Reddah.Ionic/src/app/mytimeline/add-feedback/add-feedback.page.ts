@@ -11,6 +11,7 @@ import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { DragulaService } from 'ng2-dragula';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-add-feedback',
@@ -38,6 +39,7 @@ export class AddFeedbackPage implements OnInit {
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
         private dragulaService: DragulaService,
+        private translate: TranslateService,
     ) { 
         this.dragulaService.drag('bag')
         .subscribe(({ name, el }) => {
@@ -103,11 +105,11 @@ export class AddFeedbackPage implements OnInit {
     }
 
     feedbackTypes =[
-        { value:1, checked: false, text:'咨询建议' },
-        { value:2, checked: false, text:'信息出错' },
-        { value:3, checked: false, text:'程序出错' },
-        { value:4, checked: false, text:'内容违规' },
-        { value:5, checked: false, text:'其它' },
+        { value:1, checked: false, text:this.translate.instant("Pop.Suggest") },
+        { value:2, checked: false, text:this.translate.instant("Pop.ContentWrong") },
+        { value:3, checked: false, text:this.translate.instant("Pop.CodeError") },
+        { value:4, checked: false, text:this.translate.instant("Pop.ContentInvalid") },
+        { value:5, checked: false, text:this.translate.instant("Pop.ContentOther") },
     ]
     
     changeFeedbackType(item) {

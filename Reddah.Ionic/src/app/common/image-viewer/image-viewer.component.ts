@@ -6,6 +6,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import 'hammerjs';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from 'ionic-cache';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-image-viewer',
@@ -32,6 +33,7 @@ export class ImageViewerComponent implements OnInit {
         private actionSheetController: ActionSheetController,
         public reddah: ReddahService,
         private cacheService: CacheService,
+        public translate: TranslateService,
     ) {
     }
 
@@ -112,15 +114,15 @@ export class ImageViewerComponent implements OnInit {
     async showMenu(item){
         const actionSheet = await this.actionSheetController.create({
             buttons: [
-            {
-                text: '发送给朋友',
+            /*{
+                text: this.translate.instant("Pop.ToFriend"),
                 icon: 'share',
                 handler: () => {
                     
                 }
-            }, 
+            },*/ 
             {
-                text: '收藏',
+                text: this.translate.instant("Menu.Mark"),
                 icon: 'bookmark',
                 handler: () => {
                     let formData = new FormData();
@@ -132,7 +134,7 @@ export class ImageViewerComponent implements OnInit {
                 }
             }, 
             {
-                text: '保存图片',
+                text: this.translate.instant("Common.Save"),
                 icon: 'ios-save',
                 handler: () => {
                     this.downloadImage(item);
@@ -198,7 +200,7 @@ export class ImageViewerComponent implements OnInit {
             let briefTarget = "DCIM/Reddah/" + item.previewImageFileName;
             this.fileTransfer = this.transfer.create(); 
             const toast = await this.toastController.create({
-                message: `图片已保存至${briefTarget}`,
+                message: `${this.translate.instant("Common.Save")}:${briefTarget}`,
                 showCloseButton: false,
                 position: 'bottom',
                 duration: 2500
@@ -220,7 +222,7 @@ export class ImageViewerComponent implements OnInit {
             let briefTarget = "DCIM/Reddah/" + newFileName;
             
             const toast = await this.toastController.create({
-                message: `图片已保存至${briefTarget}`,
+                message: `${this.translate.instant("Common.Save")}:${briefTarget}`,
                 showCloseButton: false,
                 position: 'bottom',
                 duration: 2500

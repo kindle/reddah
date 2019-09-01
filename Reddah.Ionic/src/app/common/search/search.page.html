@@ -29,7 +29,7 @@
                         <img class="BrowsePreviewImageOne" src="{{article.ImageUrls[0]}}">
                     </ion-avatar>
                     <ion-label>
-                        <p class="articleContent" text-wrap>{{reddah.summary(article.Content, 100, article.Locale)}}</p>
+                        <p class="articleContent" text-wrap [innerHTML]="reddah.summary(article.Content, 100, article.Locale)"></p>
                         <ion-note class="user-name">{{reddah.getDisplayName(article.UserName)}}</ion-note>
                         <ion-note class="articleFooterTime">{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
                     </ion-label>
@@ -142,7 +142,7 @@
                         <img src="{{article_a.ImageUrls[0]}}">
                     </ion-avatar>
                     <ion-label>
-                        <p class="articleContent" text-wrap>{{reddah.summary(article_a.Content, 100, article_a.Locale)}}</p>
+                        <p class="articleContent" text-wrap [innerHTML]="reddah.summary(article_a.Content, 100, article_a.Locale)"></p>
                         <ion-note class="user-name">{{reddah.getDisplayName(article_a.UserName)}}</ion-note>
                         <ion-note class="articleFooterTime">{{reddah.getSendTime(article_a.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
                     </ion-label>

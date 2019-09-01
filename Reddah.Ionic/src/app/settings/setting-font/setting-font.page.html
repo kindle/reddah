@@ -1,6 +1,6 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-label>字体大小</ion-label>
+    <ion-label>{{ 'Common.Font' | translate }}</ion-label>
 </ion-item>
 <ion-content no-padding style="--background: #eeeeee;">
     <ion-grid *ngFor="let comment of messages">

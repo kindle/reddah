@@ -12,6 +12,7 @@ import { Article } from '../../../model/article';
 import { PostviewerPage } from '../../../postviewer/postviewer.page';
 import { AddMiniPage } from '../add-mini/add-mini.page';
 import { MiniViewerComponent } from '../../../common/mini-viewer/mini-viewer.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-sub-info',
@@ -35,6 +36,7 @@ export class SubInfoPage implements OnInit {
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
+        private translate: TranslateService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
     }
@@ -128,7 +130,7 @@ export class SubInfoPage implements OnInit {
         const userModal = await this.modalController.create({
           component: ChangePhotoPage,
           componentProps: { 
-              title: "更换Logo",
+              title: this.translate.instant("About.Photo"),
               tag : "portrait",
               targetUserName: this.targetSub.UserName
           }
@@ -155,7 +157,7 @@ export class SubInfoPage implements OnInit {
         const modal = await this.modalController.create({
             component: SettingNickNamePage,
             componentProps: { 
-                title: "设置名称",
+                title: this.translate.instant("Input.Name"),
                 currentNickName: this.reddah.appData('usernickname_'+this.targetSub.UserName),
                 targetUserName: this.targetSub.UserName
             }
@@ -172,7 +174,7 @@ export class SubInfoPage implements OnInit {
         const modal = await this.modalController.create({
             component: SettingSignaturePage,
             componentProps: { 
-                title: "设置描述",
+                title: this.translate.instant("Input.Description"),
                 currentSignature: this.reddah.appData('usersignature_'+this.targetSub.UserName),
                 targetUserName: this.targetSub.UserName
             }

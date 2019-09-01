@@ -1,8 +1,8 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-label>选择联系人</ion-label>
+    <ion-label>{{ 'Menu.Contact' | translate }}</ion-label>
     <ion-button *ngIf="!delete" color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ 'Confirm.Submit' | translate }}</ion-button>
-    <ion-button *ngIf="delete" color="danger" slot="end" (click)="submit_delete()" [disabled]="submitClicked">删除</ion-button>
+    <ion-button *ngIf="delete" color="danger" slot="end" (click)="submit_delete()" [disabled]="submitClicked">{{ 'Comment.Delete' | translate }}</ion-button>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;">
     <ion-list>

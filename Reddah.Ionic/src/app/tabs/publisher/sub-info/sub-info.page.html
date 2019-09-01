@@ -1,18 +1,18 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-label>基本信息</ion-label>
+    <ion-label>{{ 'About.Account' | translate }}</ion-label>
 </ion-item>
 <ion-content #pageTop no-padding style="background-color: white;">
     <div>
         <ion-item (click)="changePhoto()" class="borderTop borderItem">
-            <ion-label class="title">Logo</ion-label>
+            <ion-label class="title">{{ 'About.Photo' | translate }}</ion-label>
             <ion-thumbnail slot="end" style="padding:10px;margin-right:-10px;">
                 <img src="{{reddah.appDataPub('userphoto_'+targetSub.UserName)}}" class="portrait">
             </ion-thumbnail>
             <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
         </ion-item>
         <ion-item lines="none" (click)="changeNickName()">
-            <ion-label class="title">名称</ion-label>
+            <ion-label class="title">{{ 'Input.Name' | translate }}</ion-label>
             <ion-note color="dark" slot="end">{{reddah.appData('usernickname_'+targetSub.UserName)}}</ion-note>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
@@ -31,7 +31,7 @@
 
     <div class="gap">
         <ion-item lines="none" class="borderTop borderItem" (click)="changeSignature()">
-            <ion-label class="title">描述</ion-label>
+            <ion-label class="title">{{ 'Input.Description' | translate }}</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
         <ion-item lines="none" class="borderItem borderBottom">
@@ -42,7 +42,7 @@
     <div class="gap">
         <ion-item lines="none" class="borderTop borderItem borderBottom">
             <ion-icon slot="start" name="megaphone" color="medium" size="medium"></ion-icon>
-            <ion-label color="medium">编辑发布等功能暂未开放</ion-label>
+            <ion-label color="medium">{{ 'Common.FeatureNotOpen' | translate }}</ion-label>
             <ion-icon name="ios-arrow-forward" color="medium" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
@@ -50,17 +50,17 @@
     <div class="gap">
         <ion-item lines="none" (click)="addArticle()" class="borderTop borderItem borderBottom" *ngIf="targetSub.Type!=3">
             <ion-icon slot="start" name="clipboard" color="mini" size="medium"></ion-icon>
-            <ion-label>写草稿</ion-label>
+            <ion-label>{{ 'Common.Draft' | translate }}</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
         <ion-item lines="none" (click)="goMini(targetSub)" class="borderTop borderItem borderBottom" *ngIf="targetSub.Type==3&&targetSub.Cover">
             <ion-icon slot="start" name="open" color="mini" size="medium"></ion-icon>
-            <ion-label>查看当前版本</ion-label>
+            <ion-label>{{ 'Common.Test' | translate }}</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
         <ion-item lines="none" (click)="addMini()" class="borderTop borderItem borderBottom" *ngIf="targetSub.Type==3">
             <ion-icon slot="start" name="cloud-upload" color="mini" size="medium"></ion-icon>
-            <ion-label>发布新版本</ion-label>
+            <ion-label>{{ 'Common.Publish' | translate }}</ion-label>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
@@ -77,7 +77,7 @@
         <div style="display: flex; justify-content: center;"><ion-spinner name="dots" *ngIf="showLoading"></ion-spinner></div>
         <ion-item *ngFor="let article of articles" lines="none" (click)="editMini(article)" class="borderTop borderItem borderBottom">
             <ion-icon slot="start" name="code-working" color="mini" size="medium"></ion-icon>
-            <ion-label>查看代码</ion-label>
+            <ion-label>{{ 'Common.View' | translate }}</ion-label>
             <ion-note slot="end">{{reddah.getSendTime(article.LastUpdateOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>

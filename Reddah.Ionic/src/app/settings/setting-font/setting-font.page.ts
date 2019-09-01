@@ -1,11 +1,9 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
-import { SettingAboutPage } from '../setting-about/setting-about.page';
-import { LocalePage } from '../../common/locale/locale.page';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -37,9 +35,9 @@ export class SettingFontPage implements OnInit {
     messages;
     ngOnInit() {
         this.messages = [
-            {Content: "预览字体大小", UserName: this.userName, Type:0},
-            {Content: "拖动下面的滑块，可设置字体大小", UserName: '', Type:0},
-            {Content: "设置后，会改变聊天、菜单和时光圈的字体大小。会当凌绝顶，一览众山小。", UserName: '', Type:0},
+            {Content: this.translate.instant("Common.Font1"), UserName: this.userName, Type:0},
+            {Content: this.translate.instant("Common.Font2"), UserName: '', Type:0},
+            {Content: this.translate.instant("Common.Font3"), UserName: '', Type:0},
         ];
     }
     

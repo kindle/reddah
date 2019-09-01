@@ -962,7 +962,10 @@ export class ReddahService {
         locale = locale.toLowerCase();
         if(!this.doubleByteLocale.includes(locale))
             n = 2*n;
-        str = this.htmlDecode(this.htmlDecode(str)).replace(/<br>/g,"\n").replace(/<[^>]+>/g, "").replace(/\n\n/g,"<br>");
+        str = this.htmlDecode(this.htmlDecode(str))
+            .replace(/<br>/g,"\n")
+            .replace(/<[^>]+>/g, "")
+            .replace(/\n\n/g,"<br>");
         return this.subpost(str, n);
     }
 
@@ -1571,10 +1574,11 @@ export class ReddahService {
     }
 
     async addBookmarkFormData(formData){
+        let text = `${this.translate.instant("Pop.Marked")}:${this.translate.instant("Menu.About")}/${this.translate.instant("Menu.Mark")}`;
         this.bookmark(formData).subscribe(result=>{
             if(result.Success==0)
             {
-                this.toast(`已收藏，请到到"我/收藏"查看`, "primary");
+                this.toast(text, "primary");
                 this.cacheService.clearGroup("BookmarkPage");
             }
             else{

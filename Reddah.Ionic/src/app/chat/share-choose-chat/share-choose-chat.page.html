@@ -4,7 +4,7 @@
 </ion-item>
 <ion-content style="background-color: white;">
     <ion-item (click)="createNewChat()">
-        创建新聊天
+        {{ 'Menu.Header.GroupChat' | translate }}
     </ion-item>
     <ion-item *ngFor="let message of messages" (click)="chooseChat(message)">
         <div style="margin:5px 0px;">

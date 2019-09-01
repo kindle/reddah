@@ -1,6 +1,6 @@
 <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload($event)">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-label>选择群聊</ion-label>
+    <ion-label>{{ 'Common.Choose' | translate }}</ion-label>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;" #pageTop>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
