@@ -1,6 +1,6 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-label>聊天信息</ion-label>
+    <ion-label>{{ 'Common.Option' | translate }}</ion-label>
 </ion-item>
 <ion-content no-padding style="--background: #eeeeee;">
     <ion-item lines="none" class="borderTop borderItem borderBottom">
@@ -44,7 +44,7 @@
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop borderItem borderBottom" (click)="clearChat()" lines="none">
-        <ion-label>清空聊天记录</ion-label>
+        <ion-label>{{ 'Common.ClearChat' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
 <!--

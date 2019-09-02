@@ -954,7 +954,7 @@ export class ReddahService {
         return str;
     }
     
-    doubleByteLocale = ["zh-CN","zh-TW","ja-JP","ko-KR"];
+    doubleByteLocale = ["zh-cn","zh-tw","ja-jp","ko-kr"];
 
     summary(str: string, n: number, locale='en-US') {
         if(locale==null)
@@ -967,6 +967,10 @@ export class ReddahService {
             .replace(/<[^>]+>/g, "")
             .replace(/\n\n/g,"<br>");
         return this.subpost(str, n);
+    }
+
+    summaryMsg(str: string, n: number, locale='en-US') {
+        return this.summary(str, n, locale).replace(/<[^>]+>/g, "");
     }
 
     playVideo(id: string) {
@@ -1314,8 +1318,9 @@ export class ReddahService {
 
         let split = " ";
         
-        if(this.doubleByteLocale.includes(this.getCurrentLocale()))
+        if(this.doubleByteLocale.includes(this.getCurrentLocale().toLowerCase())){
             split="";
+        }
 
         if(yearC>=1){
             result=parseInt(yearC+"") + split +this.translate.instant("Time.YearsAgo");

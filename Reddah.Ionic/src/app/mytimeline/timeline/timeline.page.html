@@ -117,12 +117,12 @@
         </div>
         <ion-item lines="none" *ngIf="isFriend==false&&nonFriendAllowTen==true">
             <ion-note text-center style="width: 100%;" color="medium">
-                ----{{ 'Common.AllowTenMessage' | translate }}----
+                {{ 'Common.AllowTenMessage' | translate }}
             </ion-note>
         </ion-item>
         <ion-item lines="none" *ngIf="isFriend==false&&nonFriendAllowTen==false">
             <ion-note text-center style="width: 100%;" color="medium">
-                ----{{ 'Common.NoPermissionMessage' | translate }}----
+                {{ 'Common.NoPermissionMessage' | translate }}
             </ion-note>
         </ion-item>
 

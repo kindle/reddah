@@ -32,7 +32,7 @@
                     
                     <span>{{reddah.utcToLocal(comment.CreatedOn,"YY-MM-DD HH:mm")}}</span>
                     <div (click)="addNewComment(comment.ArticleId, comment.Id)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
-                    <span (click)="viewReply(localComments, comment)" *ngIf="comment.Count&&comment.Count>0">{{ 'Comment.Comment' | translate }} {{comment.Count}}>></span>
+                    <span (click)="viewReply(localComments, comment)" *ngIf="comment.Count&&comment.Count>0">{{ 'Comment.MoreComment' | translate }} {{comment.Count}}>></span>
                 </ion-label>
             </ion-item>
         </li>
