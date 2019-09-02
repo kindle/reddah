@@ -224,7 +224,7 @@ export class HomePage implements OnInit {
             if(last)
             {
                 group.splice(group.length-1, 1);
-                dislikeGroup.unshift({Id:startIndex, Title:`${this.translate.instant("Pop.Porn")}:${last}`, Key: last});
+                dislikeGroup.unshift({Id:startIndex, Title:`${this.translate.instant("Pop.Dislike")}:${last}`, Key: last});
                 startIndex++;
             }
         }

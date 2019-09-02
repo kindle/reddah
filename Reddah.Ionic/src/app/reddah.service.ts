@@ -1285,6 +1285,7 @@ export class ReddahService {
     }
 
     getSendTime(dateStr){
+        
         if(!dateStr)
             return "";
         let dateTimeStamp = Date.parse(dateStr.replace(/-/gi,"/"));
@@ -1316,10 +1317,9 @@ export class ReddahService {
         let minC =diffValue/minute;
         let secC =diffValue/second;
 
-        let split = " ";
-        
-        if(this.doubleByteLocale.includes(this.getCurrentLocale().toLowerCase())){
-            split="";
+        let split = "";
+        if(!this.doubleByteLocale.includes(this.getCurrentLocale().toLowerCase())){
+            split=" ";
         }
 
         if(yearC>=1){
@@ -1332,7 +1332,7 @@ export class ReddahService {
             result=parseInt(weekC+"") + split + this.translate.instant("Time.WeeksAgo");
         }
         else if(dayC>=1){
-            result=(parseInt(dayC+"")==1?this.translate.instant("Time.Yesterday"):parseInt(dayC+"") + "" +this.translate.instant("Time.DaysAgo"));
+            result=(parseInt(dayC+"")==1?this.translate.instant("Time.Yesterday"):parseInt(dayC+"") + split +this.translate.instant("Time.DaysAgo"));
         }
         else if(hourC>=1){
             result=parseInt(hourC+"") + split +this.translate.instant("Time.HoursAgo");
