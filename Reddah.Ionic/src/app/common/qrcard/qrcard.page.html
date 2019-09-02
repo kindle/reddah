@@ -1,13 +1,13 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-text>二维码名片</ion-text>
-    <ion-icon name="ios-more" slot="end" (click)="presentActionSheet()"></ion-icon>
+    <ion-text>{{ 'About.Card' | translate }}</ion-text>
+    <!--<ion-icon name="ios-more" slot="end" (click)="presentActionSheet()"></ion-icon>-->
 </ion-item>
 <ion-content no-padding>
     <ion-card *ngIf="createdCode" text-center>
         <ngx-qrcode qrc-element-type="img" [qrc-value]="createdCode" qrc-class="qrsize"></ngx-qrcode>
         <ion-card-content text-center>
-            <span>扫一扫上面的二维码图片，加我为好友</span>
+            <span>{{ 'Common.ScanToAdd' | translate }}</span>
         </ion-card-content>
     </ion-card>
 </ion-content>

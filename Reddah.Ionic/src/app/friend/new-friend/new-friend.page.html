@@ -1,13 +1,13 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon slot="start" name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-label slot="start">新的朋友</ion-label>
+    <ion-label slot="start">{{ 'Common.NewFriend' | translate }}</ion-label>
     <ion-icon slot="end" name="ios-add" (click)="addFriend()"></ion-icon>
 </ion-item>
 <ion-content>
     <ion-list>
         <ion-item>
             <ion-icon name="ios-search" slot="start"></ion-icon>
-            <ion-note (click)="searchUser()" style="width:100%;">Reddah ID/User Name</ion-note>
+            <ion-note (click)="searchUser()" style="width:100%;">{{ 'Input.UserName' | translate }}</ion-note>
         </ion-item>
     </ion-list>
     <ion-list>
@@ -19,11 +19,11 @@
                 <span>{{reddah.getDisplayName(request.UserName)}}</span>
                 <ion-icon name="ios-male" *ngIf="sex==1"></ion-icon>
                 <ion-icon name="ios-female" *ngIf="sex==0" color="danger"></ion-icon><br>
-                <ion-note>{{request.Just=="confirmed"?"对方已同意":request.Just}}</ion-note>
+                <ion-note>{{(request.Just=="confirmed")?('Common.Accepted' | translate):request.Just}}</ion-note>
             </ion-label>
             <div slot="end">
-                <ion-button color="success" (click)="accept(request.UserName)" *ngIf="!request.Approve">接受</ion-button>
-                <ion-note *ngIf="request.Approve">已添加</ion-note>
+                <ion-button color="success" (click)="accept(request.UserName)" *ngIf="!request.Approve">{{ 'Common.Accept' | translate }}</ion-button>
+                <ion-note *ngIf="request.Approve">{{ 'Common.Added' | translate }}</ion-note>
             </div>
         </ion-item>
     </ion-list>

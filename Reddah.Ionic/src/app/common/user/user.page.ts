@@ -118,13 +118,13 @@ export class UserPage implements OnInit {
                   this.clearCacheAndReload();
               }
             }, 
-            {
+            /*{
               text: 'Share',
               icon: 'share',
               handler: () => {
                   //console.log('Share clicked');
               }
-            }
+            }*/
             ].concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?
                 [{
                     text: this.translate.instant("Comment.Delete"),

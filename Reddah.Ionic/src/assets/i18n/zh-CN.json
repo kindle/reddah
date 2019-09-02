@@ -105,6 +105,8 @@
         "Location":"位置",
         "Nickname":"昵称",
         "Sex":"性别",
+        "Male":"男",
+        "Female":"女",
         "Signature":"个性签名",
 
         "CurrentVersion": "当前版本",
@@ -207,6 +209,20 @@
         "Developer":"开发者",
         "ServicePhone":"客服电话",
         "Owner":"帐号主体",
-        "OwnerDesc":"主体认证需提交由相关主管部门颁发的可证明机构合法性的证件，例如：企业营业执照、事业单位法人登记证书、机关单位法人登记证书、社会团体法人登记证书、民办非企业单位登记证书等。"
+        "OwnerDesc":"主体认证需提交由相关主管部门颁发的可证明机构合法性的证件，例如：企业营业执照、事业单位法人登记证书、机关单位法人登记证书、社会团体法人登记证书、民办非企业单位登记证书等。",
+        "CacheClear":"已清除缓存",
+        "NewFriend":"新的朋友",
+        "Accept":"接受",
+        "Added":"已添加",
+        "Accepted":"对方已同意",
+        "Option":"选项",
+        "DeleteAndQuit":"删除并退出",
+        "ClearChat":"清空聊天记录",
+        "Clear":"清空",
+        "AllowTenMessage":"非对方的朋友只显示最近十条时光圈",
+        "NoPermissionMessage":"非对方的朋友不能查看他（她）的时光圈",
+        "Details":"详情",
+        "ScanToAdd":"扫一扫上面的二维码图片，加我为好友"
+
     }
 }

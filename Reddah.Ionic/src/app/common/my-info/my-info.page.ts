@@ -83,7 +83,7 @@ export class MyInfoPage implements OnInit {
         const modal = await this.modalController.create({
             component: SettingSignaturePage,
             componentProps: {
-                title: this.translate.instant("About.Signaure"),
+                title: this.translate.instant("About.Signature"),
                 currentSignature: this.reddah.appData('usersignature_'+this.userName)
             }
         });

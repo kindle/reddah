@@ -105,6 +105,8 @@
         "Location":"Ubicación",
         "Nickname":"Apodo",
         "Sex":"Sexo",
+        "Male":"Male",
+        "Female":"Female",
         "Signature":"Firma",
 
         "CurrentVersion": "Versión actual",
@@ -202,7 +204,20 @@
         "Developer":"Developer",
         "ServicePhone":"Service Photo",
         "Owner":"Owner",
-        "OwnerDesc":"Subject certification shall submit certificates certifying the legitimacy of institutions issued by relevant competent authorities, such as business licenses of enterprises, certificates of registration of legal persons of institutions, certificates of registration of legal persons of organs, certificates of registration of legal persons of social organizations, certificates of registration of private non-enterprise units, etc."
+        "OwnerDesc":"Subject certification shall submit certificates certifying the legitimacy of institutions issued by relevant competent authorities, such as business licenses of enterprises, certificates of registration of legal persons of institutions, certificates of registration of legal persons of organs, certificates of registration of legal persons of social organizations, certificates of registration of private non-enterprise units, etc.",
+        "CacheClear":"Cache is clear",
+        "NewFriend":"New Friends",
+        "Accept":"Accept",
+        "Added":"Added",
+        "Accepted":"Accepted",
+        "Option":"Options",
+        "DeleteAndQuit":"Delete and quit",
+        "ClearChat":"Clear chat",
+        "Clear":"Clear",
+        "AllowTenMessage":"Strangers can only view 10 Aperture messages",
+        "NoPermissionMessage":"Strangers can't view Aperture messages",
+        "Details":"Details",
+        "ScanToAdd":"Scan the QR code to add friend"
     }
 
 }

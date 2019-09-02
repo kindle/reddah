@@ -1,6 +1,6 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-text>聊天信息({{groupInfo.GroupName.split(",").length}})</ion-text>
+    <ion-text>{{ 'Common.Option' | translate }}({{groupInfo.GroupName.split(",").length}})</ion-text>
     <ion-icon name="notifications-off" *ngIf="noDisturb" size="small" color="medium"></ion-icon>
 </ion-item>
 <ion-content no-padding style="--background: #eeeeee;">
@@ -30,7 +30,7 @@
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop borderItem" lines="none" (click)="changeTitle()">
-        <ion-text slot="start">群聊名称</ion-text>
+        <ion-text slot="start">{{ 'Input.Name' | translate }}</ion-text>
         <ion-label color="dark" slot="end" *ngIf="groupInfo.Title.length>10">{{groupInfo.Title}}</ion-label>
         <ion-note color="dark" slot="end" *ngIf="groupInfo.Title.length<=10">{{groupInfo.Title}}</ion-note>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
@@ -43,7 +43,7 @@
     </ion-item>
 -->
     <ion-item class="borderItem" lines="none">
-        <ion-label>群公告</ion-label>
+        <ion-label>{{ 'Input.Description' | translate }}</ion-label>
     </ion-item>
     <ion-item lines="none" class="borderItem borderBottom" (click)="changeAnnounce()">
         <ion-note color="dark" text-wrap margin-bottom margin-end>{{groupInfo.Content}}</ion-note>
@@ -95,7 +95,7 @@
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop borderItem borderBottom" (click)="clearChat()" lines="none">
-        <ion-label>清空聊天记录</ion-label>
+        <ion-label>{{ 'Common.ClearChat' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
 <!--
@@ -109,6 +109,6 @@
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop borderItem borderBottom" (click)="leaveGroupChatConfirm()" lines="none" text-center>
-        <ion-label color="danger">删除并退出</ion-label>
+        <ion-label color="danger">{{ 'Common.Option' | translate }}</ion-label>
     </ion-item>
 </ion-content>

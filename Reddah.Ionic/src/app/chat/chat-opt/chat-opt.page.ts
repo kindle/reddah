@@ -103,18 +103,7 @@ export class ChatOptPage implements OnInit {
 
     async clearCache(){
         this.cacheService.clearAll();
-        this.presentToastWithOptions("已清除缓存");
-    }
-
-    async presentToastWithOptions(message: string) {
-        const toast = await this.toastController.create({
-            message: message,
-            showCloseButton: true,
-            position: 'top',
-            closeButtonText: 'Close',
-            duration: 3000
-        });
-        toast.present();
+        this.reddah.toast(this.translate.instant("Common.CacheClear"));
     }
 
     async goUser(userName){

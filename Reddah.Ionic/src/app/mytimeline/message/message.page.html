@@ -1,7 +1,7 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-text>{{ 'Menu.Message' | translate }}</ion-text>
-    <ion-text slot="end" (click)="clear()">清空</ion-text>
+    <ion-text slot="end" (click)="clear()">{{ 'Common.Clear' | translate }}</ion-text>
 </ion-item>
 <ion-content no-padding>
     <ion-item *ngFor="let message of messages" (click)="viewTimeline(message.ArticleId)">
@@ -17,6 +17,6 @@
         <img slot="end" src="{{reddah.level2Cache(message.AritclePhoto)}}" class="messageContentPortrait">
     </ion-item>
     <ion-item lines="none" (click)="showStoredMessage()" *ngIf="!showAll">
-        <ion-label text-center>查看更早的消息...</ion-label>
+        <ion-label text-center>{{ 'Search.More' | translate }}...</ion-label>
     </ion-item>    
 </ion-content>

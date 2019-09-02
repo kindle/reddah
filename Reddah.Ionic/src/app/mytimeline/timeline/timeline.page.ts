@@ -89,8 +89,8 @@ export class TimeLinePage implements OnInit {
         this.ngOnInit();
     }
   
-    isFriend = false;
-    nonFriendAllowTen = false;
+    isFriend;
+    nonFriendAllowTen;
 
     getTimeline(event):void {
         this.formData = new FormData();

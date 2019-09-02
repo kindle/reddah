@@ -22,8 +22,8 @@
             <img src="{{reddah.appData('userphoto_'+userName)}}">
         </div>
         <div class="signature">{{reddah.appData('usersignature_'+userName)}}</div>
-        <div *ngIf="isFriend||
-                (!isFriend&&nonFriendAllowTen)">
+        <div *ngIf="isFriend==true||
+                (isFriend==false&&nonFriendAllowTen==true)">
             <div *ngFor="let article of articles;index as i">
                 <p *ngIf="i==0||(i>0&&reddah.utcToLocal(articles[i-1].CreatedOn).substring(0,4)!=reddah.utcToLocal(article.CreatedOn).substring(0,4))" class="yearTitle">
                     {{reddah.utcToLocal(article.CreatedOn).substring(0,4)}}年
@@ -115,14 +115,14 @@
                 </div>
             </div>
         </div>
-        <ion-item lines="none" *ngIf="!isFriend&&nonFriendAllowTen">
+        <ion-item lines="none" *ngIf="isFriend==false&&nonFriendAllowTen==true">
             <ion-note text-center style="width: 100%;" color="medium">
-                ----非对方的朋友只显示最近十条时光圈----
+                ----{{ 'Common.AllowTenMessage' | translate }}----
             </ion-note>
         </ion-item>
-        <ion-item lines="none" *ngIf="!isFriend&&!nonFriendAllowTen">
+        <ion-item lines="none" *ngIf="isFriend==false&&nonFriendAllowTen==false">
             <ion-note text-center style="width: 100%;" color="medium">
-                ----非对方的朋友不能查看他（她）的时光圈----
+                ----{{ 'Common.NoPermissionMessage' | translate }}----
             </ion-note>
         </ion-item>
 
