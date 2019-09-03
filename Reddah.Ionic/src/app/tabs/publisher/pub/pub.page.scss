@@ -53,6 +53,10 @@
     font-size: var(--ion-font-size);
 }
 
+.alert-message, .sc-ion-alert-md{
+    font-size: var(--ion-font-size) !important;
+}
+
 video{
     width: 100%;
 }

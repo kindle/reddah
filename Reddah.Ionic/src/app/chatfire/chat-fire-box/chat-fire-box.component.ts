@@ -76,7 +76,7 @@ export class ChatFireBoxComponent implements OnInit {
         let uid = this.reddah.uuidv4();
         this.localComments.emit({
             id: this.selectedArticleId, 
-            text: this.newChatComment.value,
+            text: this.newChatComment.value.replace(/\n/g,"&lt;br&gt;"),
             type: 0,
             uid: uid,
         });
@@ -105,6 +105,10 @@ export class ChatFireBoxComponent implements OnInit {
                 alert(result.Message);
             }
         });
+
+        setTimeout(() => {
+            this.newChatComment.setFocus();
+        }, 500);
         
     }
 

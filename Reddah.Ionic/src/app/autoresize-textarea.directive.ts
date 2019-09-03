@@ -9,6 +9,11 @@ export class AutoresizeDirective {
         this.adjust();
     }
 
+    @HostListener('focus', ['$event.target'])
+    onFocus(textArea: HTMLTextAreaElement): void {
+        this.adjust();
+    }
+
     @Input('autoresize') maxHeight: number;
     
     constructor(public element: ElementRef) {}

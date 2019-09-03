@@ -11,26 +11,22 @@
         <ion-item lines="none" class="borderBottom borderItem" (click)="goEmail()">
             <ion-label>{{ 'Input.Email' | translate }}</ion-label>
             <ion-text slot="end">{{reddah.appData('useremail_'+userName)}}</ion-text>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
 
     <div class="gap" *ngIf="pub">
         <ion-item class="borderTop borderItem borderBottom" (click)="goCert()" lines="none">
             <ion-label>{{ 'Common.ServicePhone' | translate }}</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
 
     <div class="gap lastGap" *ngIf="pub">
         <ion-item lines="none" class="borderTop borderItem" (click)="callService()">
             <ion-label slot="start">{{ 'Common.Owner' | translate }}</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
         <ion-item lines="none" class="borderItem borderBottom">
-            <ion-note slot="start" text-wrap>
+            <ion-note slot="start" text-wrap style="padding-bottom: 20px;">
                 {{ 'Common.OwnerDesc' | translate }}
-                <br>
             </ion-note>
         </ion-item>
     </div>

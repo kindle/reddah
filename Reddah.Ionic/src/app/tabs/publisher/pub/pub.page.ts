@@ -237,17 +237,16 @@ export class PubPage implements OnInit {
     async unfocus(){
         const alert = await this.alertController.create({
             header: "",
-            message: `${this.translate.instant("Pop.StillUnfocus")}
-                ${this.reddah.appData('usernickname_'+this.userName)} ${this.translate.instant("Comment.UnfocusMessage")}`,
+            message: `${this.translate.instant("Pop.StillUnfocus")}${this.reddah.appData('usernickname_'+this.userName)} ${this.translate.instant("Pop.UnfocusMessage")}`,
             buttons: [
               {
                 text: this.translate.instant("Pop.StillFocus"),
                 role: 'cancel',
-                cssClass: 'dark',
+                cssClass: 'cssdark',
                 handler: () => {}
               }, {
-                text: this.translate.instant("Comment.StillUnfocus"),
-                cssClass:'danger',
+                text: this.translate.instant("Pop.StillUnfocus"),
+                cssClass:'cssdanger',
                 handler: () => {
                     this.actualUnfocus();
                 }
@@ -255,9 +254,7 @@ export class PubPage implements OnInit {
             ]
         });
 
-        await alert.present().then(()=>{
-            
-        });
+        await alert.present().then(()=>{});
         
     }
 

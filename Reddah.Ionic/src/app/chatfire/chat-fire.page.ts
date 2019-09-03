@@ -275,6 +275,7 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
                             let mact = data.Message.Comments.filter(n=>n["Uid"]==item["Uid"]);
                             if(mact!=null){
                                 this.messages[index]["Id"] = mact[0]["Id"];
+                                this.messages[index]["Content"] = mact[0]["Content"];
                             }
                         }
                     });

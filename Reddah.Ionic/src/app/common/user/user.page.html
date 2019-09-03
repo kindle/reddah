@@ -47,7 +47,7 @@
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" (click)="viewTimeline()" 
         *ngIf="imageList&&imageList.length>0&&reddah.appData('userallowtentimeline_'+this.userName)==1">
-        <span class="itemTitle" style="line-height: 90px;">{{ 'Menu.Timeline' | translate }}</span>
+        <span class="itemTitle span-eclipse" style="line-height: 90px;">{{ 'Menu.Timeline' | translate }}</span>
         <ion-thumbnail *ngFor="let image of imageList" style="padding: 5px;">
             <img [id]="reddah.makeItId(image+'usr')" 
                 (load)="reddah.adjustImage($event, image+'usr')"

@@ -124,11 +124,11 @@ ion-icon{
   margin-top:0.33em;
 }
 
-.danger{
+.cssdanger{
   color:red;
 }
 
-.dark{
+.cssdark{
   color:black;
 }
 
@@ -182,4 +182,10 @@ ion-icon{
   color: white;
   border-radius: 5px;
   margin: 10px 0;
+}
+
+.span-eclipse{
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
 }
