@@ -116,7 +116,7 @@ export class ChatFireBase{
     didScrollUp = false;
     onScroll($event) {
         let currentScrollTop = $event.detail.scrollTop;
-
+        
         if(currentScrollTop > this.lastScrollTop)
         {
             //'down';
@@ -127,6 +127,7 @@ export class ChatFireBase{
             //'up';
             this.didScrollUp = true;
         }
+        this.lastScrollTop = currentScrollTop;
     }
 
 }

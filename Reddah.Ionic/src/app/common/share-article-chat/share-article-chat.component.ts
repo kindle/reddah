@@ -21,14 +21,17 @@ export class ShareArticleChatComponent {
         public reddah: ReddahService,
     ) { }
 
-    async viewArticle(articleId){
+    async viewArticle(){
         if(this.view){
             let formData = new FormData();
-            formData.append("ArticleId", JSON.stringify(articleId));
+            formData.append("ArticleId", this.id+"");
 
             this.reddah.getArticleById(formData).subscribe(data=>{
                 if(data.Success==0){
                     this.goArticleViewer(data.Message);
+                }
+                else{
+                    alert(JSON.stringify(data))
                 }
             });
         }
