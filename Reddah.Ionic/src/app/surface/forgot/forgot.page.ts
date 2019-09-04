@@ -55,6 +55,12 @@ export class ForgotPage implements OnInit {
             
             let formData = new FormData();
             formData.append("Email", this.email)
+            //mail
+            formData.append("MailTitle", this.translate.instant("Mail.Reset.Title"));
+            formData.append("MailSub", this.translate.instant("Mail.Reset.Sub"));
+            formData.append("MailParaStart", this.translate.instant("Mail.Reset.ParaStart"));
+            formData.append("MailParaEnd", this.translate.instant("Mail.Reset.ParaEnd"));
+
             this.reddah.getSecurityToken(formData)
             .subscribe(result => 
             {
@@ -65,7 +71,8 @@ export class ForgotPage implements OnInit {
                     this.taber = false;
                 }
                 else {
-                    this.reddah.toast(result.Message, "danger");
+                    let msg = this.translate.instant(`Service.${result.Success}`);
+                    this.reddah.toast(msg, "danger");
                 }
                 
             });
@@ -83,7 +90,7 @@ export class ForgotPage implements OnInit {
             this.reddah.toast(this.translate.instant("Input.Error.PasswordDifferent"));
         } 
         else if (this.myToken.length == 0) {
-            this.reddah.toast(this.translate.instant("请输入安全令牌"));
+            this.reddah.toast(this.translate.instant("Input.Error.TokenEmpty"));
         } 
         else {
             const loading = await this.loadingController.create({
@@ -100,11 +107,12 @@ export class ForgotPage implements OnInit {
             {
                 loading.dismiss();
                 if(result.Success==0){
-                    this.reddah.toast("Reset password successfully, please login", "primary");
+                    this.reddah.toast(this.translate.instant("Input.Error.ResetResult"), "primary");
                     this.close();
                 }
                 else {
-                    this.reddah.toast(result.Message, "danger");
+                    let msg = this.translate.instant(`Service.${result.Success}`);
+                    this.reddah.toast(msg, "danger");
                 }
                 
             });

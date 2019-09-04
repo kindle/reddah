@@ -8,11 +8,11 @@ import { CacheService } from 'ionic-cache';
         <div (click)="close()">   
             <ion-item button (click)="back(1)">
                 <ion-icon slot="start" color="secondary" name="share"></ion-icon>  
-                <ion-label>{{ 'Pop.ToFriend' | translate }}</ion-label>
+                <ion-label>{{ 'Menu.Contact' | translate }}</ion-label>
             </ion-item>
             <ion-item button (click)="back(2)">
                 <ion-icon slot="start" color="primary" name="aperture"></ion-icon>  
-                <ion-label>{{ 'Pop.ToAperture' | translate }}</ion-label>
+                <ion-label>{{ 'Menu.Timeline' | translate }}</ion-label>
             </ion-item>
             <ion-item button (click)="reddah.addBookmark(ArticleId)">
                 <ion-icon slot="start" color="danger" name="bookmark"></ion-icon>  

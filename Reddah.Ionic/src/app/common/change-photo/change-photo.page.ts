@@ -3,7 +3,7 @@ import { ModalController, LoadingController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../../reddah.service';
 import { File, FileEntry } from '@ionic-native/file/ngx';
-import { LocalStorageService } from 'ngx-webstorage';
+import { TranslateService } from '@ngx-translate/core';
 import { Crop } from '@ionic-native/crop/ngx';
 
 @Component({
@@ -22,7 +22,7 @@ export class ChangePhotoPage implements OnInit {
         private modalController: ModalController,
         private loadingController: LoadingController,
         private reddahService: ReddahService,
-        private localStorageService: LocalStorageService,
+        private translate: TranslateService,
         private crop: Crop,
         private file: File,
         ) { }
@@ -127,7 +127,7 @@ export class ChangePhotoPage implements OnInit {
 
     async changePhoto(){
         const loading = await this.loadingController.create({
-            message: 'uploading images...',
+            message: this.translate.instant("Article.Loading"),
             spinner: 'circles',
         });
         await loading.present();

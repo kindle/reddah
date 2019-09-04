@@ -1,5 +1,4 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -7,19 +6,12 @@ using System.Security.Claims;
 using System.Text;
 using System.Web.Http;
 using System.Linq;
-using System.Web.Helpers;
-using System.Security.Cryptography;
-using System.Web.ApplicationServices;
 using WebMatrix.WebData;
-using Org.BouncyCastle.Crypto;
 using System.Web.Security;
-using System.Data.Entity;
-using System.Web.Http.Cors;
 using System.Web;
 using Reddah.Web.Login.Utilities;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
-using System.Web.Script.Serialization;
 
 namespace Reddah.Web.Login.Controllers
 {
@@ -40,6 +32,11 @@ namespace Reddah.Web.Login.Controllers
                 string email = HttpContext.Current.Request["Email"];
                 string locale = HttpContext.Current.Request["Locale"];
 
+                string emailTitle = HttpContext.Current.Request["MailTitle"];
+                string emailSub = HttpContext.Current.Request["MailSub"];
+                string emailParaStart = HttpContext.Current.Request["MailParaStart"];
+                string emailParaEnd = HttpContext.Current.Request["MailParaEnd"];
+
                 if (String.IsNullOrWhiteSpace(userName))
                     return Ok(new ApiResult(1, "No user name"));
 
@@ -52,17 +49,17 @@ namespace Reddah.Web.Login.Controllers
                 //Regex reg = new Regex(@"^\w+$");//字母、数字和下划线
                 Regex reg = new Regex("^[a-zA-Z]\\w{5,17}$");//字母开头，字母、数字和下划线
                 if (!reg.IsMatch(userName))
-                    return Ok(new ApiResult(2, "user name invalid"));
+                    return Ok(new ApiResult(1001, "user name invalid"));
 
                 reg = new Regex("^\\s*([A-Za-z0-9_-]+(\\.\\w+)*@(\\w+\\.)+\\w{2,5})\\s*$");//valid email
                 if (!reg.IsMatch(email))
-                    return Ok(new ApiResult(2, "Email invalid"));
+                    return Ok(new ApiResult(1002, "Email invalid"));
 
                 using (var db = new reddahEntities())
                 {
                     var userExist = db.UserProfile.FirstOrDefault(u => u.UserName == userName||u.UserName.Contains(userName));
                     if(userExist != null)
-                        return Ok(new ApiResult(3, "User exist"));
+                        return Ok(new ApiResult(1003, "User exist"));
 
                     List<string> testEmail = new List<string>();
                     testEmail.Add("weibailin@hotmail.com");
@@ -71,7 +68,7 @@ namespace Reddah.Web.Login.Controllers
                     {
                         var emailExist = db.UserProfile.FirstOrDefault(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
                         if (emailExist != null)
-                            return Ok(new ApiResult(3, "Email already registered"));
+                            return Ok(new ApiResult(1004, "Email already registered"));
                     }
                     
 
@@ -89,14 +86,15 @@ namespace Reddah.Web.Login.Controllers
 
                     var userJustCreated = db.UserProfile.FirstOrDefault(u => u.UserName == userName);
                     Helpers.Email(
-                            new MailAddress("donotreply@reddah.com", "Reddah Account"),
+                            new MailAddress("donotreply@reddah.com", emailTitle),
                             new MailAddress(email, userName),
-                            "Verify your email address‏",
+                            emailSub,
                             string.Format("Dear {0}:\r\n" +
-                            "Please visit this link to verify your email address:\r\n" +
+                            emailParaStart+":\r\n" +
                             "https://reddah.com/{1}/VerifyEmail?Userid={2}&EmailToken={3}" +
-                            "\r\nAfter that, you can login. Thanks for using Reddah!",
-                            userName, locale, userJustCreated.UserId, verifyToken)
+                            "\r\n"+ emailParaEnd,
+                            userName, locale, userJustCreated.UserId, verifyToken),
+                            true
                     );
                 }
 
@@ -158,18 +156,18 @@ namespace Reddah.Web.Login.Controllers
                             {
                                 if (mem.IsConfirmed!=true)
                                 {
-                                    return Ok(new ApiResult(3, "email not verified"));
+                                    return Ok(new ApiResult(1005, "email not verified"));
                                 }
                             }
                         }
                     }
 
-                    return Ok(new ApiResult(2, "Username or Password is wrong"));
+                    return Ok(new ApiResult(1006, "Username or Password is wrong"));
                 }
             }
             catch (Exception e)
             {
-                return Ok(new ApiResult(3, e.Message.ToString()));
+                return Ok(new ApiResult(4, e.Message.ToString()));
             }
         }
        
@@ -266,57 +264,17 @@ namespace Reddah.Web.Login.Controllers
             return new JwtResult(0, "Success", jwtUser);
         }
 
-        [Route("changepassword")]
-        public IHttpActionResult ChangePassword()
-        {
-
-            try
-            {
-                string jwt = HttpContext.Current.Request["jwt"];
-
-                string oldPassword = HttpContext.Current.Request["OldPassword"];
-                string newPassword = HttpContext.Current.Request["NewPassword"];
-
-                JwtResult jwtResult = ValidJwt(jwt);
-
-                if (jwtResult.Success != 0)
-                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
-
-                if(string.IsNullOrEmpty(oldPassword))
-                    return Ok(new ApiResult(2, "Empty old password"));
-
-                if (string.IsNullOrEmpty(newPassword))
-                    return Ok(new ApiResult(2, "Empty new password"));
-
-                if (!WebSecurity.Initialized && WebApiConfig.IsWebSecurityNotCalled)
-                {
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", false);
-                    WebApiConfig.IsWebSecurityNotCalled = false;
-                }
-
-                if (Membership.ValidateUser(jwtResult.JwtUser.User, oldPassword))
-                {
-                    Membership.GetUser(jwtResult.JwtUser.User).ChangePassword(oldPassword, newPassword);
-                    //changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
-                    return Ok(new ApiResult(0, "Success"));
-                }
-                else
-                {
-                    return Ok(new ApiResult(3, "Old Password is wrong"));
-                }
-            }
-            catch (Exception e)
-            {
-                return Ok(new ApiResult(4, e.Message.ToString()));
-            }
-        }
-
         [Route("generatetoken")]
         public IHttpActionResult GenerateToken()
         {
             try
             {
                 string email = HttpContext.Current.Request["Email"];
+
+                string emailTitle = HttpContext.Current.Request["MailTitle"];
+                string emailSub = HttpContext.Current.Request["MailSub"];
+                string emailParaStart = HttpContext.Current.Request["MailParaStart"];
+                string emailParaEnd = HttpContext.Current.Request["MailParaEnd"];
 
                 if (string.IsNullOrEmpty(email))
                     return Ok(new ApiResult(2, "Empty email"));
@@ -335,20 +293,20 @@ namespace Reddah.Web.Login.Controllers
 
                         string token = WebSecurity.GeneratePasswordResetToken(target.UserName, 1440);
                         Helpers.Email(
-                                new MailAddress("donotreply@reddah.com", "Reddah Account"),
+                                new MailAddress("donotreply@reddah.com", emailTitle),
                                 new MailAddress(email, target.UserName),
-                                "Security token to reset password‏",
+                                emailSub,
                                 string.Format("Dear {0}:\r\n" +
-                                "Please copy this token:\r\n" +
+                                emailParaStart+":\r\n" +
                                 "<span style='font-weight:bold;'>{1}</span>" +
-                                "\r\nto reset your password. Thanks for using Reddah!",
+                                "\r\n"+ emailParaEnd,
                                 target.UserName, token),
                                 true
                         );
                         return Ok(new ApiResult(0, "Success"));
                     }
 
-                    return Ok(new ApiResult(2, "Email not registered"));
+                    return Ok(new ApiResult(1007, "Email not registered"));
                 }
 
 
@@ -384,9 +342,55 @@ namespace Reddah.Web.Login.Controllers
                 if(result)
                     return Ok(new ApiResult(0, "Success"));
                 else
-                    return Ok(new ApiResult(3, "Failed"));
+                    return Ok(new ApiResult(1008, "Failed"));
 
 
+            }
+            catch (Exception e)
+            {
+                return Ok(new ApiResult(4, e.Message.ToString()));
+            }
+        }
+
+
+        [Route("changepassword")]
+        public IHttpActionResult ChangePassword()
+        {
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                string oldPassword = HttpContext.Current.Request["OldPassword"];
+                string newPassword = HttpContext.Current.Request["NewPassword"];
+
+                JwtResult jwtResult = ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                if (string.IsNullOrEmpty(oldPassword))
+                    return Ok(new ApiResult(2, "Empty old password"));
+
+                if (string.IsNullOrEmpty(newPassword))
+                    return Ok(new ApiResult(2, "Empty new password"));
+
+                if (!WebSecurity.Initialized && WebApiConfig.IsWebSecurityNotCalled)
+                {
+                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", false);
+                    WebApiConfig.IsWebSecurityNotCalled = false;
+                }
+
+                if (Membership.ValidateUser(jwtResult.JwtUser.User, oldPassword))
+                {
+                    Membership.GetUser(jwtResult.JwtUser.User).ChangePassword(oldPassword, newPassword);
+                    //changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                    return Ok(new ApiResult(0, "Success"));
+                }
+                else
+                {
+                    return Ok(new ApiResult(1009, "Old Password is wrong"));
+                }
             }
             catch (Exception e)
             {

@@ -32,7 +32,7 @@
 
 .chat-box-me {
     min-height:40px; 
-    background-color: #95ec69; 
+    background-color: #ffff66; /*#95ec69;*/
     vertical-align: middle;
     padding:10px;
     border-radius: 5px;
@@ -45,13 +45,14 @@
     vertical-align: middle;
     padding:0px;
     border-radius: 5px;
+    margin-left:50px;
 }
 
 .chat-arrow-right {
     margin-top: 15px;
     width: 0; 
     height: 0; 
-    border-left: 5px solid #95ec69;
+    border-left: 5px solid #ffff66; /*#95ec69;*/
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
 }
@@ -96,6 +97,7 @@
     padding:0px;
     border-radius: 5px;
     overflow-wrap: break-word;
+    margin-right:50px;
 }
 
 .chat-arrow-left {

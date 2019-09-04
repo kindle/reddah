@@ -59,6 +59,12 @@ export class RegisterPage implements OnInit {
             formData.append("Password", this.password);
             formData.append("Email", this.email);
             formData.append("Locale", this.reddah.getCurrentLocale());
+            //mail
+            formData.append("MailTitle", this.translate.instant("Mail.Register.Title"));
+            formData.append("MailSub", this.translate.instant("Mail.Register.Sub"));
+            formData.append("MailParaStart", this.translate.instant("Mail.Register.ParaStart"));
+            formData.append("MailParaEnd", this.translate.instant("Mail.Register.ParaEnd"));
+
             this.reddah.register(formData)
             .subscribe(result => 
             {
@@ -69,7 +75,8 @@ export class RegisterPage implements OnInit {
                     this.modalController.dismiss(true);
                 }
                 else{
-                    this.reddah.toast(result.Message, "danger");
+                    let msg = this.translate.instant(`Service.${result.Success}`);
+                    this.reddah.toast(msg, "danger");
                 }
                 
             });

@@ -21,8 +21,9 @@
           <ion-icon name="add" size="large" color="medium"></ion-icon>
         </div>
     </div>
-    <div style="margin: 0 15px;">
-        <app-share-article *ngIf="feedbackType==4" [abstract]="article.Title" [image]="article.ImageUrl" [id]="article.Id"></app-share-article>
+    <div class="ref-container">
+        <app-share-article *ngIf="feedbackType==4" [abstract]="article.Title" 
+        [image]="article.ImageUrl" [id]="article.Id"></app-share-article>
     </div>
     <ion-item lines="none">
         <ion-label></ion-label>

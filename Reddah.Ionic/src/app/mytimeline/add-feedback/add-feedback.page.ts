@@ -139,7 +139,7 @@ export class AddFeedbackPage implements OnInit {
 
     async submit(){
         const loading = await this.loadingController.create({
-            message: 'uploading images...',
+            message: this.translate.instant("Article.Loading"),
             spinner: 'circles',
         });
         await loading.present();

@@ -48,3 +48,13 @@
     display: none;
     width: 1px;
 }
+
+.ref-container{
+    margin: 0 15px;
+    min-height:40px; 
+    flex:1; 
+    vertical-align: middle;
+    padding:0px;
+    border-radius: 5px;
+    overflow-wrap: break-word;
+}

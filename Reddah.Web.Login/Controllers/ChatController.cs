@@ -145,6 +145,7 @@ namespace Reddah.Web.Login.Controllers
                                             Duration = c.Duration,
                                             Abstract = c.Abstract,
                                             Uid = c.Uid
+
                                         }).Take(limit).OrderBy(n => n.Id);
 
                         return Ok(new ApiResult(0, new SeededComments { Seed = existingChat.Id, Comments = comments.ToList() }));

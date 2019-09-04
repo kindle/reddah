@@ -5,7 +5,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../../reddah.service';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -31,7 +31,7 @@ export class AddTimelinePage implements OnInit {
         private file: File,
         private loadingController: LoadingController,
         private activatedRoute: ActivatedRoute,
-        private router: Router,
+        private translate: TranslateService,
         private cacheService: CacheService,
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
@@ -147,7 +147,7 @@ export class AddTimelinePage implements OnInit {
 
     async submit(){
         const loading = await this.loadingController.create({
-            message: 'uploading images...',
+            message: this.translate.instant("Article.Loading"),
             spinner: 'circles',
         });
         await loading.present();

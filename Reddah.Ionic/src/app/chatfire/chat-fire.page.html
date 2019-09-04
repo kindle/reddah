@@ -34,7 +34,8 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                     </div>
                     <div class="arrow-box-right" *ngIf="comment.Type==4">
                         <div class="chat-box-me-link">
-                            <app-share-article-chat [abstract]="comment.Abstract" [image]="comment.ImageUrl" [id]="comment.Duration"></app-share-article-chat>
+                            <app-share-article-chat [abstract]="comment.Abstract"
+                             [image]="comment.Content" [id]="comment.Duration"></app-share-article-chat>
                         </div>
                         <div class="chat-arrow-right-link" style="flex:auto 0;"></div>
                     </div>
@@ -82,7 +83,8 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                         <div class="chat-box-others" *ngIf="comment.Type==0" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
                         <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==4"></div>
                         <div class="chat-box-others-link" *ngIf="comment.Type==4">
-                            <app-share-article-chat abstract="{{comment.Abstract}}" image="{{comment.ImageUrl}}" id="{{comment.Duration}}"></app-share-article-chat>
+                            <app-share-article-chat [abstract]="comment.Abstract"
+                            [image]="comment.Content" [id]="comment.Duration"></app-share-article-chat>
                         </div>
 <!--
                         <div class="chat-box-others-1" *ngIf="comment.Type==1" (click)="play(comment.Content)">
