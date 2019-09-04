@@ -46,8 +46,8 @@
             "Agree":"請同意用戶協議",
             "SubNameEmpty":"請輸入名稱",
             "SubDescEmpty":"請輸入描述",
-            "TokenEmpty":"Please input security token",
-            "ResetResult":"Reset password successfully, please login",
+            "TokenEmpty":"請輸入安全權杖",
+            "ResetResult":"重置密碼成功！請重新登入",
             "GetTokenFromEmail":"請登錄您的電子郵箱獲取安全令牌",
             "NetworkError":"沒有網絡連接",
             "ServiceError":"系統服務正在更新，請稍後再試"
@@ -224,34 +224,34 @@
         "NoPermissionMessage":"非對方的朋友不能查看他（她）的時光圈",
         "Details":"詳情",
         "ScanToAdd":"掃壹掃上面的二維碼圖片，加我為好友",
-        "Original":"Original"
+        "Original":"查看原圖"
     },
 
     "Mail":{
         "Register":{
-            "Title":"Reddah Account",
-            "Sub":"Verify your email address‏",
-            "ParaStart":"Please visit this link to verify your email address",
-            "ParaEnd":"After that, you can login. Thanks for using Reddah!"
+            "Title":"Reddah帳戶郵件",
+            "Sub":"請驗證您的郵箱‏",
+            "ParaStart":"請訪問以下連結來驗證您的郵箱",
+            "ParaEnd":"完成後您可以登入App，感謝您使用Reddah!"
         },
         "Reset":{
-            "Title":"Reddah Account",
-            "Sub":"Security token to reset password",
-            "ParaStart":"Please copy this token to reset your password",
-            "ParaEnd":"Thanks for using Reddah!"
+            "Title":"Reddah帳戶郵件",
+            "Sub":"使用安全權杖重置密碼",
+            "ParaStart":"請複製以下安全權杖用來重置密碼",
+            "ParaEnd":"感謝您使用Reddah!"
         }
     },
 
     "Service":{
-        "4": "Service Error, please try again later",
-        "1001":"User name must contain 6-18 letters and numbers. No special characters allowed",
-        "1002":"Email is invalid",
-        "1003":"User name exists",
-        "1004":"Email is registered",
-        "1005":"Please go to your mailbox to verify your email",
-        "1006":"User name or password is wrong",
-        "1007":"Email is not registered",
-        "1008":"Reset password failed, please check if security token is correct",
-        "1009":"Old password is wrong"
+        "4": "服務錯誤，請稍後重試",
+        "1001":"用戶名為6-18比特字母數位組合，不允許使用特殊字元",
+        "1002":"無效的Email地址",
+        "1003":"用戶名已存在",
+        "1004":"Email地址已經被注册過了",
+        "1005":"請訪問您的郵箱驗證Email地址有效",
+        "1006":"用戶名或密碼錯誤",
+        "1007":"Email沒有被注册過",
+        "1008":"重置密碼失敗，請查看輸入的安全權杖是否正確",
+        "1009":"舊密碼錯誤"
     }
 }

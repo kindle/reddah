@@ -46,8 +46,8 @@
         "Agree":"ユーザー同意に同意してください",
         "SubNameEmpty":"入力名",
         "SubDescEmpty":"説明を入力してください",
-        "TokenEmpty":"Please input security token",
-        "ResetResult":"Reset password successfully, please login",
+        "TokenEmpty":"セキュリティトークンを入力してください",
+        "ResetResult":"パスワードのリセット",
         "GetTokenFromEmail":"メールからセキュリティトークンを取得してください",
         "NetworkError":"ネットワーク接続がありません",
         "ServiceError":"システムサービスが更新されていますので、後で試してみてください"
@@ -222,34 +222,34 @@
         "NoPermissionMessage":"見知らぬ人はアパーチャメッセージを見ることができません",
         "Details":"詳細",
         "ScanToAdd":"友達を追加するには、QRコードをスキャン",
-        "Original":"Original"
+        "Original":"オリジナル"
     },
 
     "Mail":{
         "Register":{
-            "Title":"Reddah Account",
-            "Sub":"Verify your email address‏",
-            "ParaStart":"Please visit this link to verify your email address",
-            "ParaEnd":"After that, you can login. Thanks for using Reddah!"
+            "Title":"Reddahアカウント",
+            "Sub":"メールアドレスを確認‏",
+            "ParaStart":"あなたのメールアドレスを確認するには、このリンクをご覧ください",
+            "ParaEnd":"その後、ログインできます。Reddahを使用していただきありがとうございます！"
         },
         "Reset":{
-            "Title":"Reddah Account",
-            "Sub":"Security token to reset password",
-            "ParaStart":"Please copy this token to reset your password",
-            "ParaEnd":"Thanks for using Reddah!"
+            "Title":"Reddahアカウント",
+            "Sub":"パスワードをリセットするセキュリティトークン",
+            "ParaStart":"パスワードをリセットするにはこのトークンをコピーしてください",
+            "ParaEnd":"Reddahを使用していただきありがとうございます！"
         }
     },
 
     "Service":{
-        "4": "Service Error, please try again later",
-        "1001":"User name must contain 6-18 letters and numbers. No special characters allowed",
-        "1002":"Email is invalid",
-        "1003":"User name exists",
-        "1004":"Email is registered",
-        "1005":"Please go to your mailbox to verify your email",
-        "1006":"User name or password is wrong",
-        "1007":"Email is not registered",
-        "1008":"Reset password failed, please check if security token is correct",
-        "1009":"Old password is wrong"
+        "4": "サービスエラー、後で再度お試しください",
+        "1001":"ユーザー名は6 - 18文字と数字を含まなければなりません。特殊文字は許されません",
+        "1002":"メールが無効です",
+        "1003":"ユーザ名が存在する",
+        "1004":"メール登録",
+        "1005":"メールを確認するためにメールボックスに行ってください",
+        "1006":"ユーザー名またはパスワードが間違っている",
+        "1007":"メールが登録されていません",
+        "1008":"リセットパスワードが失敗した場合、セキュリティトークンが正しいかどうかを確認してください",
+        "1009":"古いパスワードが間違っている"
     }
   }

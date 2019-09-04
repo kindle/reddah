@@ -46,8 +46,8 @@
         "Agree":"사용자 협의 좀 동의한다",
         "SubNameEmpty":"이름을 입력하십시오",
         "SubDescEmpty":"설명을 입력하십시오",
-        "TokenEmpty":"Please input security token",
-        "ResetResult":"Reset password successfully, please login",
+        "TokenEmpty":"안전 포켓을 입력하십시오",
+        "ResetResult":"비밀번호 초기화",
         "GetTokenFromEmail":"당신의 이메일에서 안전 포켓을 얻으십시오",
         "NetworkError":"네트워크 연결 없음",
         "ServiceError":"시스템 서비스 업데이트 중입니다. 잠시 후에 다시 시도하십시오"
@@ -224,34 +224,34 @@
         "NoPermissionMessage":"낯선 사람 은 서클 정보 를 볼 수 없다",
         "Details":"세부",
         "ScanToAdd":"검색 QR코드 친구 추가",
-        "Original":"Original"
+        "Original":"원본"
     },
 
     "Mail":{
         "Register":{
-            "Title":"Reddah Account",
-            "Sub":"Verify your email address‏",
-            "ParaStart":"Please visit this link to verify your email address",
-            "ParaEnd":"After that, you can login. Thanks for using Reddah!"
+            "Title":"Reddah 계정",
+            "Sub":"전자 우편 주소 검증",
+            "ParaStart":"이메일 주소를 검증하기 위해 이 링크를 방문하십시오",
+            "ParaEnd":"후에 로그인할 수 있습니다.Reddah 사용해주셔서 감사합니다!"
         },
         "Reset":{
-            "Title":"Reddah Account",
-            "Sub":"Security token to reset password",
-            "ParaStart":"Please copy this token to reset your password",
-            "ParaEnd":"Thanks for using Reddah!"
+            "Title":"Reddah 계정",
+            "Sub":"비밀번호 초기화",
+            "ParaStart":"비밀번호 초기화",
+            "ParaEnd":"Reddah 사용해주셔서 감사합니다!"
         }
     },
 
     "Service":{
-        "4": "Service Error, please try again later",
-        "1001":"User name must contain 6-18 letters and numbers. No special characters allowed",
-        "1002":"Email is invalid",
-        "1003":"User name exists",
-        "1004":"Email is registered",
-        "1005":"Please go to your mailbox to verify your email",
-        "1006":"User name or password is wrong",
-        "1007":"Email is not registered",
-        "1008":"Reset password failed, please check if security token is correct",
-        "1009":"Old password is wrong"
+        "4": "서비스 오류는 잠시 후에 다시 시도하십시오",
+        "1001":"사용자 이름은 반드시 6 -18개의 자모와 숫자를 포함해야 한다.특수 문자 사용하지 않기",
+        "1002":"전자 우편 무효",
+        "1003":"사용자 이름이 이미 존재합니다",
+        "1004":"전자 우편 등록",
+        "1005":"메일박스로 옮겨 메일 인증",
+        "1006":"사용자 이름이나 비밀번호 오류",
+        "1007":"전자 우편 등록",
+        "1008":"비밀번호를 초기화하는 데 실패하였으니 안전 포켓이 올바른 것인지 확인하십시오",
+        "1009":"낡은 암호 오류"
     }
   }

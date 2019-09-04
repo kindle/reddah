@@ -46,8 +46,8 @@
         "Agree":"Veuillez accepter avec accord de l'utilisateur",
         "SubNameEmpty":"Veuillez saisir le nom",
         "SubDescEmpty":"Veuillez saisir les instructions",
-        "TokenEmpty":"Please input security token",
-        "ResetResult":"Reset password successfully, please login",
+        "TokenEmpty":"Veuillez saisir le jeton de sécurité",
+        "ResetResult":"Reset Password success",
         "GetTokenFromEmail":"Veuillez obtenir un jeton de sécurité à partir de votre courriel",
         "NetworkError":"Sans connexion Internet",
         "ServiceError":"Le service du système est en cours de mise à jour"
@@ -227,29 +227,29 @@
 
     "Mail":{
         "Register":{
-            "Title":"Reddah Account",
-            "Sub":"Verify your email address‏",
-            "ParaStart":"Please visit this link to verify your email address",
-            "ParaEnd":"After that, you can login. Thanks for using Reddah!"
+            "Title":"Compte reddah",
+            "Sub":"Vérifier votre adresse électronique‏",
+            "ParaStart":"Veuillez accéder à ce lien pour vérifier votre adresse électronique",
+            "ParaEnd":"Après, vous pouvez vous connecter.Merci d 'avoir utilisé reddah!"
         },
         "Reset":{
-            "Title":"Reddah Account",
-            "Sub":"Security token to reset password",
-            "ParaStart":"Please copy this token to reset your password",
-            "ParaEnd":"Thanks for using Reddah!"
+            "Title":"Compte reddah",
+            "Sub":"Jeton de sécurité pour le remplacement du mot de passe",
+            "ParaStart":"Veuillez copier ce jeton pour remplacer le mot de passe",
+            "ParaEnd":"Merci d 'avoir utilisé reddah!"
         }
     },
 
     "Service":{
-        "4": "Service Error, please try again later",
-        "1001":"User name must contain 6-18 letters and numbers. No special characters allowed",
-        "1002":"Email is invalid",
-        "1003":"User name exists",
-        "1004":"Email is registered",
-        "1005":"Please go to your mailbox to verify your email",
-        "1006":"User name or password is wrong",
-        "1007":"Email is not registered",
-        "1008":"Reset password failed, please check if security token is correct",
-        "1009":"Old password is wrong"
+        "4": "Erreur de service, Veuillez réessayer plus tard",
+        "1001":"Le nom d 'utilisateur doit contenir entre 6 et 18 lettres et chiffres.Caractère spécial non autorisé",
+        "1002":"Courrier électronique non valable",
+        "1003":"Nom d 'utilisateur",
+        "1004":"Courrier électronique enregistré",
+        "1005":"Veuillez vérifier votre e - mail",
+        "1006":"Erreur de nom d 'utilisateur ou de mot de passe",
+        "1007":"Courrier électronique non enregistré",
+        "1008":"Impossible de réinitialiser le mot de passe. Vérifiez si le jeton de sécurité est correct",
+        "1009":"Erreur de code"
     }
   }
