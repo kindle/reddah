@@ -121,7 +121,7 @@ export class AddMaterialPage implements OnInit {
         
         this.formData.append('thoughts', this.yourThoughts);
         this.formData.append('location', this.location);
-        this.formData.append('feedbackType', JSON.stringify(this.feedbackType));
+        this.formData.append('feedbackType', JSON.stringify(-1));
         
         this.formData.append("ref", JSON.stringify(0));
         this.formData.append('type', JSON.stringify(5));//material:5, feedback:4, normal:0, timeline:1, chat:2,groupchat:3,
