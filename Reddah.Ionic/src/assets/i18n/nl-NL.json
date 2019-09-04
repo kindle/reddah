@@ -221,7 +221,14 @@
         "NoPermissionMessage":"Vreemden kunnen geen bericht zien",
         "Details":"Details",
         "ScanToAdd":"Scan de QR -code om een vriend toe te voegen",
-        "Original":"Oorspronkelijk"
+        "Original":"Oorspronkelijk",
+        "ApplyFriend":"U moet een aanvraag sturen en wachten op goedkeuring",
+        "ApplyFriendMe":"Dat ben ik",
+        "Label":"etiket",
+        "MaxDraft":"Gewone gebruikers kunnen tot drie ontwerpen besparen",
+        "WorkingCopyExist":"Er is een ongepubliceerde versie",
+        "MyPhoto":"Mijn materiaal",
+        "AddPhoto":"Materiaal toevoegen"
     },
 
     "Mail":{
@@ -249,7 +256,8 @@
         "1006":"Gebruikersnaam of wachtwoord is verkeerd",
         "1007":"E -mail is niet geregistreerd",
         "1008":"Wachtwoord terugzetten is mislukt, controleer of het beveiligingsteken correct is",
-        "1009":"Oud wachtwoord is verkeerd"
+        "1009":"Oud wachtwoord is verkeerd",
+        "1010":"Selecteer een materiaal"
     }
 
 }

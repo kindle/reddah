@@ -221,7 +221,14 @@
         "NoPermissionMessage":"Estranhos não podem ver mensagens de Aperture",
         "Details":"Detalhes",
         "ScanToAdd":"Digitalizar o código QR para adicionar Amigo",
-        "Original":"Original"
+        "Original":"Original",
+        "ApplyFriend":"Você Precisa enviar um pedido e esperar PELA aprovação",
+        "ApplyFriendMe":"Eu sou",
+        "Label":"Rótulo",
+        "MaxDraft":"Os usuários comuns podem economizar até três rascunhos",
+        "WorkingCopyExist":"Há UMA versão não publicada",
+        "MyPhoto":"O MEU material",
+        "AddPhoto":"Adicionar material"
     },
 
     "Mail":{
@@ -249,7 +256,8 @@
         "1006":"Nome ou senha do usuário é errado",
         "1007":"E -mail não está registrado",
         "1008":"Reiniciar senha falhou, por favor verifique se o item de segurança está correto",
-        "1009":"Senha Antiga está errada"
+        "1009":"Senha Antiga está errada",
+        "1010":"Por favor, selecione um material"
     }
 
 }

@@ -14,16 +14,11 @@ import { DragulaService } from 'ng2-dragula';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-    selector: 'app-add-feedback',
-    templateUrl: './add-feedback.page.html',
-    styleUrls: ['./add-feedback.page.scss'],
+    selector: 'app-add-material',
+    templateUrl: './add-material.page.html',
+    styleUrls: ['./add-material.page.scss'],
 })
-export class AddFeedbackPage implements OnInit {
-
-    @Input() title: string;
-    @Input() desc: string;
-    @Input() postType: number;
-    @Input() feedbackType = 1;
+export class AddMaterialPage implements OnInit {
 
     @Input() article: any;
 
@@ -104,29 +99,9 @@ export class AddFeedbackPage implements OnInit {
         this.modalController.dismiss();
     }
 
-    feedbackTypes =[
-        { value:1, checked: false, text:this.translate.instant("Pop.Suggest") },
-        { value:2, checked: false, text:this.translate.instant("Pop.ContentWrong") },
-        { value:3, checked: false, text:this.translate.instant("Pop.CodeError") },
-        { value:4, checked: false, text:this.translate.instant("Pop.ContentInvalid") },
-        { value:5, checked: false, text:this.translate.instant("Pop.ContentOther") },
-    ]
     
-    changeFeedbackType(item) {
-        this.feedbackType = item.value;
-    }
     
     ngOnInit() {
-        //4 article report abuse
-        this.feedbackTypes.forEach((item,index)=>{
-            if(item.value==this.feedbackType){
-                item.checked = true;
-            }
-            if(item.value==4&&this.feedbackType!=4)
-            {
-                this.feedbackTypes.splice(index,1);
-            }
-        })
     }
     
     photos = [];
@@ -147,16 +122,9 @@ export class AddFeedbackPage implements OnInit {
         this.formData.append('thoughts', this.yourThoughts);
         this.formData.append('location', this.location);
         this.formData.append('feedbackType', JSON.stringify(this.feedbackType));
-        if(this.feedbackType==4)//share
-        {
-            this.formData.append("abstract", this.reddahService.htmlDecode(this.article.Title));
-            this.formData.append("content", this.article.ImageUrl);
-            this.formData.append("ref", JSON.stringify(this.article.Id));
-        }
-        else{
-            this.formData.append("ref", JSON.stringify(0));
-        }
-        this.formData.append('type', JSON.stringify(4));//material:5, feedback:4, normal:0, timeline:1, chat:2,groupchat:3,
+        
+        this.formData.append("ref", JSON.stringify(0));
+        this.formData.append('type', JSON.stringify(5));//material:5, feedback:4, normal:0, timeline:1, chat:2,groupchat:3,
         //send the key in UI display order
         this.formData.append('order', this.photos.map(e=>e.fileUrl).join(","));        
 

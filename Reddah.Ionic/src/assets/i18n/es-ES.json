@@ -221,7 +221,14 @@
         "NoPermissionMessage":"Extraños no pueden ver la información",
         "Details":"Detalles",
         "ScanToAdd":"Buscar código binario añadir amigo",
-        "Original":"Original"
+        "Original":"Original",
+        "ApplyFriend":"Debe enviar la solicitud y esperar la aprobación",
+        "ApplyFriendMe":"Lo soy",
+        "Label":"Etiqueta",
+        "MaxDraft":"Los usuarios habituales pueden guardar hasta tres borradores",
+        "WorkingCopyExist":"Hay una versión sin publicar",
+        "MyPhoto":"Mi material",
+        "AddPhoto":"Añadir material"
     },
 
     "Mail":{
@@ -249,7 +256,8 @@
         "1006":"Error de usuario o contraseña",
         "1007":"Correo electrónico no registrado",
         "1008":"La contraseña de sustitución falló.Compruebe si la orden de Seguridad es correcta",
-        "1009":"Código antiguo"
+        "1009":"Código antiguo",
+        "1010":"Por favor seleccione un material"
     }
 
 }

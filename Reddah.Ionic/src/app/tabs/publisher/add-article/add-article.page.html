@@ -1,11 +1,11 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" slot="start" (click)="close()" class="backbutton"></ion-icon>
-    <ion-button color="success" slot="end" (click)="save()">保存</ion-button>
+    <ion-button color="success" slot="end" (click)="save()">{{ 'Common.Save' | translate }}</ion-button>
     
 </ion-item>
 <ion-content>
     <ion-item lines="none" class="gapBottom inputItem">
-        <ion-textarea autoresize [(ngModel)]="title" cols="20" placeholder="标题..."></ion-textarea>
+        <ion-textarea autoresize [(ngModel)]="title" cols="20" placeholder="{{ 'Input.Name' | translate }}..."></ion-textarea>
     </ion-item>
     <ion-item lines="none" no-padding>
         <ckeditor style="width:100%;" [(ngModel)]="content"
@@ -14,14 +14,25 @@
         </ckeditor> 
     </ion-item>
     <ion-item lines="none">
-        <ion-textarea autoresize [(ngModel)]="groupName" cols="20" placeholder="标签..."></ion-textarea>
+        <ion-textarea autoresize [(ngModel)]="groupName" cols="20" placeholder="{{ 'Common.Label' | translate }}... L1,L2,L3 e.g."></ion-textarea>
     </ion-item>
     
-    素材列表
-    
     <ion-item lines="none">    
-        <ion-button color="success" slot="end" (click)="preview()" *ngIf="article">预览</ion-button>
-        <ion-button color="success" slot="end" (click)="publish()" *ngIf="article">发布</ion-button>
+        <ion-button class="buttonGapTop gapBottom inputItem" slot="start" color="secondary" (click)="SelectPhoto()">
+            {{ 'Common.MyPhoto' | translate }}
+        </ion-button>
+        <ion-button class="buttonGapTop gapBottom inputItem" slot="start" color="secondary" (click)="AddPhoto()">
+            {{ 'Common.AddPhoto' | translate }}
+        </ion-button>
+    </ion-item>
+    
+    <ion-item lines="none" style="position:absolute;bottom:20px;right:0px;">    
+        <ion-button color="success" slot="end" (click)="preview()" *ngIf="article">
+            {{ 'Common.View' | translate }}
+        </ion-button>
+        <ion-button color="success" slot="end" (click)="publish()" *ngIf="article">
+            {{ 'Common.Publish' | translate }}
+        </ion-button>
     </ion-item>
 
 </ion-content>

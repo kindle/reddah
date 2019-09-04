@@ -225,7 +225,14 @@
         "NoPermissionMessage":"Strangers can't view Aperture messages",
         "Details":"Details",
         "ScanToAdd":"Scan the QR code to add friend",
-        "Original":"Original"
+        "Original":"Original",
+        "ApplyFriend":"You need to send a application and wait for approval",
+        "ApplyFriendMe":"I am",
+        "Label":"Label",
+        "MaxDraft":"Ordinary users can save up to 3 drafts",
+        "WorkingCopyExist":"There's an unpublished version",
+        "MyPhoto":"My Material",
+        "AddPhoto":"Add Material"
     },
 
     "Mail":{
@@ -253,7 +260,8 @@
         "1006":"User name or password is wrong",
         "1007":"Email is not registered",
         "1008":"Reset password failed, please check if security token is correct",
-        "1009":"Old password is wrong"
+        "1009":"Old password is wrong",
+        "1010":"Please select a material"
     }
 
 }

@@ -221,7 +221,14 @@
         "NoPermissionMessage":"Fremde können keine Nachrichten sehen",
         "Details":"Details",
         "ScanToAdd":"Scannen Sie den QR -Code, um Freund hinzuzufügen",
-        "Original":"Original"
+        "Original":"Original",
+        "ApplyFriend":"Sie müssen einen Antrag senden und auf Genehmigung warten",
+        "ApplyFriendMe":"Bin ich",
+        "Label":"Etikett",
+        "MaxDraft":"Normale Benutzer können bis zu drei Entwürfe speichern",
+        "WorkingCopyExist":"Es gibt eine unveröffentlichte Version",
+        "MyPhoto":"Mein Material",
+        "AddPhoto":"Material hinzufügen"
     },
 
     "Mail":{
@@ -249,7 +256,8 @@
         "1006":"Benutzername oder Passwort ist falsch",
         "1007":"E -Mail ist nicht registriert",
         "1008":"Passwort zurücksetzen fehlgeschlagen, überprüfen Sie bitte, ob Sicherheitstoken korrekt ist",
-        "1009":"Das alte Passwort ist falsch"
+        "1009":"Das alte Passwort ist falsch",
+        "1010":"Bitte wählen Sie ein Material"
     }
 
 }

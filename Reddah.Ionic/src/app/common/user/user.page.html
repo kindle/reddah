@@ -16,7 +16,8 @@
             <ion-icon class="cmd-title" name="ios-male" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
             <ion-icon class="cmd-title" name="ios-female" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
             <br>
-            <span *ngIf="reddah.appData('usernickname_'+userName)">{{ 'About.Nickname' | translate }} {{reddah.appData('usernickname_'+userName)}}</span><br>
+            <span *ngIf="reddah.appData('usernickname_'+userName)">
+                {{ 'About.Nickname' | translate }}: {{reddah.appData('usernickname_'+userName)}}</span><br>
             <span>ID：{{userName}}</span>
         </ion-label>
     </ion-item>

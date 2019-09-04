@@ -222,7 +222,14 @@
         "NoPermissionMessage":"Les étrangers ne peuvent pas voir les infos",
         "Details":"Détails",
         "ScanToAdd":"Scan 2D Code",
-        "Original":"Original"
+        "Original":"Original",
+        "ApplyFriend":"Vous devez envoyer la demande en attendant son approbation",
+        "ApplyFriendMe":"Oui",
+        "Label":"Label",
+        "MaxDraft":"Les utilisateurs ordinaires peuvent enregistrer jusqu 'à trois projets",
+        "WorkingCopyExist":"Il y a une version non publiée",
+        "MyPhoto":"Mon matériel",
+        "AddPhoto":"Matériau d 'addition"
     },
 
     "Mail":{
@@ -250,6 +257,7 @@
         "1006":"Erreur de nom d 'utilisateur ou de mot de passe",
         "1007":"Courrier électronique non enregistré",
         "1008":"Impossible de réinitialiser le mot de passe. Vérifiez si le jeton de sécurité est correct",
-        "1009":"Erreur de code"
+        "1009":"Erreur de code",
+        "1010":"Sélectionnez un matériau"
     }
   }

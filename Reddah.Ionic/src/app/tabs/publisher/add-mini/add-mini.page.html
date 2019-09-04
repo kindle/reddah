@@ -1,6 +1,6 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" slot="start" (click)="close()" class="backbutton"></ion-icon>
-    <ion-button color="success" slot="end" (click)="save()">保存</ion-button>
+    <ion-button color="success" slot="end" (click)="save()">{{ 'Common.Save' | translate }}</ion-button>
     
 </ion-item>
 <ion-content>
@@ -14,8 +14,8 @@
         <ion-textarea style="border: 1px solid gray; margin-bottom: 5px;" [(ngModel)]="abstract" cols="20" rows="10" placeholder="css..."></ion-textarea>
     </ion-item>
     <ion-item lines="none">
-        <ion-button color="success" slot="end" (click)="preview()" *ngIf="article">预览</ion-button>
-        <ion-button color="success" slot="end" (click)="publish()" *ngIf="article">发布</ion-button>
+        <ion-button color="success" slot="end" (click)="preview()" *ngIf="article">{{ 'Common.View' | translate }}</ion-button>
+        <ion-button color="success" slot="end" (click)="publish()" *ngIf="article">{{ 'Common.Publish' | translate }}</ion-button>
     </ion-item>
 
 </ion-content>

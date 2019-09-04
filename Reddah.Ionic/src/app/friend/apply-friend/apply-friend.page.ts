@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
-import { LocalStorageService } from 'ngx-webstorage';
+import { TranslateService } from '@ngx-translate/core';
 import { ReddahService } from '../../reddah.service';
 
 @Component({
@@ -23,11 +23,11 @@ export class ApplyFriendPage implements OnInit {
   constructor(
       private modalController: ModalController,
       private reddahService: ReddahService,
-      private localStorageService: LocalStorageService
+      private translate: TranslateService,
   ) { }
 
   async ngOnInit() {
-      this.message = `我是${this.reddahService.getCurrentUser()}`; 
+      this.message = `${this.translate.instant('Common.ApplyFriendMe')} ${this.reddahService.getCurrentUser()}`; 
       this.targetNoteName = this.targetUserName;
       setTimeout(() => {
         this.newRequest.setFocus();

@@ -11,10 +11,9 @@ import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ImageViewerComponent } from '../../../common/image-viewer/image-viewer.component';
 import { DragulaService } from 'ng2-dragula';
-import { LocationPage } from '../../../common/location/location.page';
-import { VideoEditor } from '@ionic-native/video-editor/ngx';
+import { AddMaterialPage } from '../../../mytimeline/add-material/add-material.page';
 import { PostviewerPage } from '../../../postviewer/postviewer.page';
-import { Article } from '../../../model/article';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-add-article',
@@ -67,7 +66,7 @@ export class AddArticlePage implements OnInit {
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
         private dragulaService: DragulaService,
-        private videoEditor: VideoEditor,
+        private translate: TranslateService,
         private alertController: AlertController,
     ) { 
         
@@ -92,7 +91,7 @@ export class AddArticlePage implements OnInit {
 
     async save(){
         const loading = await this.loadingController.create({
-            message: 'loading...',
+            message: this.translate.instant('Article.Loading'),
             spinner: 'circles',
         });
         await loading.present();
@@ -169,17 +168,17 @@ export class AddArticlePage implements OnInit {
     async publish(){
         const alert = await this.alertController.create({
             header: "",
-            message: `确认发布之后，订阅用户将收到此更新`,
+            message: this.translate.instant('Common.Publish'),
             buttons: [
               {
-                text: "稍后发布",
+                text: this.translate.instant('Confirm.Cancel'),
                 role: 'cancel',
                 cssClass: 'dark',
                 handler: () => {
                   
                 }
               }, {
-                text: "确认发布",
+                text: this.translate.instant('Confirm.Yes'),
                 cssClass:'danger',
                 handler: () => {
                     this.actualPublish();
@@ -197,7 +196,7 @@ export class AddArticlePage implements OnInit {
         //change flag
         if(this.article){
             const loading = await this.loadingController.create({
-                message: 'loading...',
+                message: this.translate.instant('Article.Loading'),
                 spinner: 'circles',
             });
             await loading.present();
@@ -234,4 +233,19 @@ export class AddArticlePage implements OnInit {
         //send message to subscribers
     }
 
+
+    async SelectPhoto(){
+
+    }
+
+    async AddPhoto(){
+        const modal = await this.modalController.create({
+            component: AddMaterialPage,
+            componentProps: { 
+                article: this.article
+            }
+        });
+          
+        await modal.present();
+    }
 }

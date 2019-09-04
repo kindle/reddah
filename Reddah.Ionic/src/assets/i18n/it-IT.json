@@ -221,7 +221,14 @@
         "NoPermissionMessage":"Gli sconosciuti non possono vedere messaggi di apertura",
         "Details":"Dettagli",
         "ScanToAdd":"Scansiona il codice QR per aggiungere amico",
-        "Original":"Originale"
+        "Original":"Originale",
+        "ApplyFriend":"Devi inviare una domanda e aspettare l'approvazione",
+        "ApplyFriendMe":"Lo sono",
+        "Label":"etichetta",
+        "MaxDraft":"Gli utenti ordinari possono risparmiare fino a tre bozze",
+        "WorkingCopyExist":"C'è una versione inedita",
+        "MyPhoto":"Il mio materiale",
+        "AddPhoto":"Aggiungi materiale"
     },
 
     "Mail":{
@@ -249,7 +256,8 @@
         "1006":"Nome utente o password è sbagliato",
         "1007":"La posta elettronica non è registrata",
         "1008":"Azzera la password non riuscita, controlla se il segno di sicurezza è corretto",
-        "1009":"Vecchia password è sbagliata"
+        "1009":"Vecchia password è sbagliata",
+        "1010":"Selezionare un materiale"
     }
 
 }

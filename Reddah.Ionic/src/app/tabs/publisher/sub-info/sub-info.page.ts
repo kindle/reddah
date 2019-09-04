@@ -188,8 +188,8 @@ export class SubInfoPage implements OnInit {
     }
 
     async addArticle(){
-        if(this.articles.length>=7){
-            this.reddah.toast("普通用户最多可以保存7个草稿", "primary")
+        if(this.articles.length>=3){
+            this.reddah.toast(this.translate.instant("Common.MaxDraft"), "primary")
         }
         else{   
             const modal = await this.modalController.create({
@@ -223,7 +223,7 @@ export class SubInfoPage implements OnInit {
 
     async addMini(){
         if(this.articles.length>=1){
-            this.reddah.toast("有一个未发布的版本", "primary")
+            this.reddah.toast(this.translate.instant("Common.WorkingCopyExist"), "primary")
         }
         else{   
             const modal = await this.modalController.create({

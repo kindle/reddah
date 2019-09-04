@@ -75,13 +75,12 @@ export class ContactPage {
         });
     }
 
-    showLoading = false;
     loadData(event){
         let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
         let cachedContact = this.localStorageService.retrieve("Reddah_Contacts");
         if(!cachedGroupContact||!cachedContact)
         {
-            this.showLoading = true;
+            //this.showLoading = true;
         }
 
         let cacheKey = "this.reddah.getFriends";
@@ -113,7 +112,6 @@ export class ContactPage {
                 this.localStorageService.store("Reddah_Contacts", JSON.stringify(contacts));
             }
             
-            this.showLoading = false;
             if(event)
                 event.target.complete();
             
