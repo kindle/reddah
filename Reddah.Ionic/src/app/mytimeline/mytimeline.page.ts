@@ -289,7 +289,7 @@ export class MyTimeLinePage implements OnInit {
                 this.showAddComment = true;
                 this.selectedArticleId = id;
                 this.selectedCommentId = -1;
-                this.selectedReplyPlaceholder = "评论";
+                this.selectedReplyPlaceholder = this.translate.instant("Comment.Comment");
                 setTimeout(() => {
                     this.newComment.setFocus();
                 },150);
@@ -397,7 +397,7 @@ export class MyTimeLinePage implements OnInit {
         this.selectedArticleId = event.articleId;
         this.selectedCommentId = event.commentId;
         this.showAddComment = true;
-        this.selectedReplyPlaceholder = "回复" + this.reddah.getDisplayName(event.userName) + ":";
+        this.selectedReplyPlaceholder = this.translate.instant("Comment.Comment") + this.reddah.getDisplayName(event.userName) + ":";
 
         if(this.selectedArticleId!=event.articleId||this.selectedCommentId!=event.commentId)
         {
@@ -459,7 +459,7 @@ export class MyTimeLinePage implements OnInit {
     async delete(article){
         const alert = await this.alertController.create({
             header: this.translate.instant("Confirm.Title"),
-            message: "确定要删除吗？",
+            message: this.translate.instant("Confirm.DeleteMessage"),
             buttons: [
             {
                 text: this.translate.instant("Confirm.Cancel"),

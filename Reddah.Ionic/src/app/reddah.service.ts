@@ -174,13 +174,13 @@ export class ReddahService {
     //******************************** */
     private getMaterialUrl = 'https://login.reddah.com/api/pub/getmaterial'; 
 
-    getMaterial(formData: FormData): Observable<any> {
+    getMyMaterial(formData: FormData): Observable<any> {
 
         formData.append('jwt', this.getCurrentJwt());
         return this.http.post<any>(this.getMaterialUrl, formData)
         .pipe(
-            tap(data => this.log('get material')),
-            catchError(this.handleError('get material', []))
+            tap(data => this.log('get my material')),
+            catchError(this.handleError('get my material', []))
         );
     }
     //******************************** */

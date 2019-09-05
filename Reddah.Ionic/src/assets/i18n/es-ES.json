@@ -228,7 +228,8 @@
         "MaxDraft":"Los usuarios habituales pueden guardar hasta tres borradores",
         "WorkingCopyExist":"Hay una versión sin publicar",
         "MyPhoto":"Mi material",
-        "AddPhoto":"Añadir material"
+        "AddPhoto":"Añadir material",
+        "Copy":"Copia"
     },
 
     "Mail":{

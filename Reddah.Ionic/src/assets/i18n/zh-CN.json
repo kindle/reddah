@@ -232,8 +232,8 @@
         "Label":"标签",
         "MaxDraft":"普通用户最多可以保存3个草稿",
         "WorkingCopyExist":"有一个未发布的版本",
-        "MyPhoto":"我的素材",
-        "AddPhoto":"添加素材"
+        "AddPhoto":"添加素材",
+        "Copy":"复制图片地址"
     },
 
     "Mail":{

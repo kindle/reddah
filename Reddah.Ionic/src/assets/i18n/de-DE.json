@@ -228,7 +228,8 @@
         "MaxDraft":"Normale Benutzer können bis zu drei Entwürfe speichern",
         "WorkingCopyExist":"Es gibt eine unveröffentlichte Version",
         "MyPhoto":"Mein Material",
-        "AddPhoto":"Material hinzufügen"
+        "AddPhoto":"Material hinzufügen",
+        "Copy":"Kopieren"
     },
 
     "Mail":{

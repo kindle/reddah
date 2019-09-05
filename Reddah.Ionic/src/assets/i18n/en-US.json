@@ -232,7 +232,8 @@
         "MaxDraft":"Ordinary users can save up to 3 drafts",
         "WorkingCopyExist":"There's an unpublished version",
         "MyPhoto":"My Material",
-        "AddPhoto":"Add Material"
+        "AddPhoto":"Add Material",
+        "Copy":"Copy"
     },
 
     "Mail":{

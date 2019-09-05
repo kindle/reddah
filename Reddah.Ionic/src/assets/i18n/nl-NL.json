@@ -228,7 +228,8 @@
         "MaxDraft":"Gewone gebruikers kunnen tot drie ontwerpen besparen",
         "WorkingCopyExist":"Er is een ongepubliceerde versie",
         "MyPhoto":"Mijn materiaal",
-        "AddPhoto":"Materiaal toevoegen"
+        "AddPhoto":"Materiaal toevoegen",
+        "Copy":"Kopiëren"
     },
 
     "Mail":{

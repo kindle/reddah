@@ -231,7 +231,8 @@
         "MaxDraft":"普通用戶最多可以保存3個草稿",
         "WorkingCopyExist":"有一個未發佈的版本",
         "MyPhoto":"我的素材",
-        "AddPhoto":"添加素材"
+        "AddPhoto":"添加素材",
+        "Copy":"復制圖片地址"
     },
 
     "Mail":{

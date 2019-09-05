@@ -228,7 +228,8 @@
         "MaxDraft":"Gli utenti ordinari possono risparmiare fino a tre bozze",
         "WorkingCopyExist":"C'è una versione inedita",
         "MyPhoto":"Il mio materiale",
-        "AddPhoto":"Aggiungi materiale"
+        "AddPhoto":"Aggiungi materiale",
+        "Copy":"Copia"
     },
 
     "Mail":{

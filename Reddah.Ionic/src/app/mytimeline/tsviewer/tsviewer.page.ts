@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, Input, Renderer } from '@angular/core';
-import { InfiniteScroll, Content } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, PopoverController, AlertController, NavParams } from '@ionic/angular';
@@ -42,7 +41,7 @@ export class TsViewerPage implements OnInit {
         private cacheService: CacheService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private navParams: NavParams,
+        private translate: TranslateService,
         ){
             //this.userName = this.reddah.getCurrentUser();
     }
@@ -118,7 +117,7 @@ export class TsViewerPage implements OnInit {
             }
             
             if(data==3){
-                this.selectedReplyPlaceholder = "评论";
+                this.selectedReplyPlaceholder = this.translate.instant("Comment.Comment");
                 setTimeout(() => {
                     this.newComment.setFocus();
                 },150);
@@ -223,7 +222,7 @@ export class TsViewerPage implements OnInit {
     showAddCommentFromChildren(event){
         this.selectedArticleId = event.articleId;
         this.selectedCommentId = event.commentId;
-        this.selectedReplyPlaceholder = "回复" + this.reddah.getDisplayName(event.userName) + ":";
+        this.selectedReplyPlaceholder = this.translate.instant("Comment.Comment") + this.reddah.getDisplayName(event.userName) + ":";
 
         if(this.selectedArticleId!=event.articleId||this.selectedCommentId!=event.commentId)
         {

@@ -229,7 +229,8 @@
         "MaxDraft":"普通のユーザーは最大3つの草稿を保存することができます",
         "WorkingCopyExist":"未発表版がある",
         "MyPhoto":"マイマテリアル",
-        "AddPhoto":"材料を加える"
+        "AddPhoto":"材料を加える",
+        "Copy":"コピー"
     },
 
     "Mail":{

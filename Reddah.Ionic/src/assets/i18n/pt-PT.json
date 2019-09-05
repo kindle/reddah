@@ -228,7 +228,8 @@
         "MaxDraft":"Os usuários comuns podem economizar até três rascunhos",
         "WorkingCopyExist":"Há UMA versão não publicada",
         "MyPhoto":"O MEU material",
-        "AddPhoto":"Adicionar material"
+        "AddPhoto":"Adicionar material",
+        "Copy":"Copiar"
     },
 
     "Mail":{

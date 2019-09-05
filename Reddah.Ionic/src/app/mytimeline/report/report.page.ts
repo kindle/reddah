@@ -1,19 +1,17 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
-import { InfiniteScroll } from '@ionic/angular';
+import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { InfiniteScroll, Content, LoadingController, NavController, PopoverController, ModalController, AlertController, } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
+import { UserPage } from '../../common/user/user.page';
+import { ReportCommentPopPage } from '../../common/report-comment-pop.page'
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { TsViewerPage } from '../tsviewer/tsviewer.page'
-import * as moment from 'moment';
-import { TimelinePopPage } from '../../common/timeline-pop.page';
-import { AddTimelinePage } from '../add-timeline/add-timeline.page';
-import { MessagePage } from '../message/message.page';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ArticleTextPopPage } from '../../common/article-text-pop.page'
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
     selector: 'app-report',
@@ -21,16 +19,22 @@ import { MessagePage } from '../message/message.page';
     styleUrls: ['report.page.scss']
 })
 export class ReportPage implements OnInit {
-    @Input() userName: string;
-
+    userName: string;
     articles = [];
     loadedIds = [];
     formData: FormData;
+    showAddComment = false;
 
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
+    @ViewChild('newComment') newComment;
+    @ViewChild('pageTop') pageTop: Content;
+        
+    loadData(event) {
+        this.getMyTimeline(event);
+    }
 
-    async goback(){
-        await this.modalController.dismiss();
+    goback(){
+        this.modalController.dismiss();
     }
 
     constructor(
@@ -42,74 +46,115 @@ export class ReportPage implements OnInit {
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private popoverController: PopoverController,
-        private photoLibrary: PhotoLibrary,
         private cacheService: CacheService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        ){
+        private transfer: FileTransfer, 
+        private file: File,
+        private statusBar: StatusBar,
+        private alertController: AlertController,
+        private translate: TranslateService,
+    ){
+        this.userName = this.reddah.getCurrentUser();
     }
     
     async ngOnInit(){
         this.reddah.getUserPhotos(this.userName, true);
-        const loading = await this.loadingController.create({
-            message: this.translateService.instant("Article.Loading"),
-            spinner: 'circles',
-        });
-        await loading.present();
-        this.formData = new FormData();
-        this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
-        this.formData.append("targetUser", this.userName);
 
-        let cacheKey = "this.reddah.getReport"+this.userName;
-        //console.log(`cacheKey:${cacheKey}`);
+        let cachedArticles = this.localStorageService.retrieve("Reddah_report");
+        let cachedIds = this.localStorageService.retrieve("Reddah_report_ids");
+        if(cachedArticles){
+            this.articles = JSON.parse(cachedArticles);
+            this.loadedIds = JSON.parse(cachedIds);
+        }
+
+        this.formData = new FormData();
+        this.formData.append("loadedIds", JSON.stringify([]));
+
+        let cacheKey = "this.reddah.getReport";
         let request = this.reddah.getReport(this.formData);
 
-        this.cacheService.loadFromObservable(cacheKey, request, "ReportPage"+this.userName)
+        this.cacheService.loadFromObservable(cacheKey, request, "ReportPage")
         .subscribe(timeline => 
         {
-            if(this.userName==this.reddah.getCurrentUser()){ 
-                var localTime = new Date();
-                this.articles.push({Id:0, CreatedOn: moment.utc(localTime).add(-1, 'minutes').format("YYYY-MM-DDTHH:mm:ss").toString(), Abstract:"",Content:""});  
+            if(cachedArticles!=JSON.stringify(timeline))
+            {
+                this.articles = [];
+                this.loadedIds = [];
+                this.commentData = new Map();
+
+                for(let article of timeline){
+                    this.articles.push(article);
+                    this.loadedIds.push(article.Id);
+                    
+                    //cache user image
+                    this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
+                    //cache preview image
+                    article.Content.split('$$$').forEach((previewImageUrl)=>{
+                        this.reddah.toFileCache(previewImageUrl);
+                    });
+                    this.GetCommentsData(article.Id);
+                }
+
+                this.localStorageService.store("Reddah_report",JSON.stringify(timeline));
+                this.localStorageService.store("Reddah_report_ids",JSON.stringify(this.loadedIds));
+
             }
-            for(let article of timeline){
-                this.articles.push(article);
-                this.loadedIds.push(article.Id);
+            else{
+                for(let article of timeline){
+                    this.GetCommentsData(article.Id);
+                }
             }
-            loading.dismiss();
         });
     }
 
-    async clearCacheAndReload(){
-        this.cacheService.clearGroup("ReportPage"+this.userName);
-        this.articles = [];
-        this.loadedIds = [];
-        this.ngOnInit();
-    }
-  
-    getReport(event):void {
+    getMyTimeline(event):void {
         this.formData = new FormData();
         this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
-        this.formData.append("targetUser", this.userName);
-
-        let cacheKey = "this.reddah.getReport" + this.userName + this.loadedIds.join(',');
-        //console.log(`loadmore_cacheKey:${cacheKey}`);
-        let request = this.reddah.getReport(this.formData);
         
-        this.cacheService.loadFromObservable(cacheKey, request, "ReportPage"+this.userName)
+        let cacheKey = "this.reddah.getReport" + this.loadedIds.join(',');
+        let request = this.reddah.getMyTimeline(this.formData);
+        
+        this.cacheService.loadFromObservable(cacheKey, request, "ReportPage")
         .subscribe(timeline => 
         {
             for(let article of timeline){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
+                
+                //cache user image
+                this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
+                //cache preview image
+                article.Content.split('$$$').forEach((previewImageUrl)=>{
+                    this.reddah.toFileCache(previewImageUrl);
+                });
+                this.GetCommentsData(article.Id);
             }
-            if(event)
+
+            this.localStorageService.store("Reddah_report", JSON.stringify(timeline));
+            this.localStorageService.store("Reddah_report_ids", JSON.stringify(this.loadedIds));
+
+            if(event){
                 event.target.complete();
+            }
         });
 
     }
 
-    loadData(event) {
-        this.getReport(event);
+    clearCacheAndReload(event){
+        this.pageTop.scrollToTop();
+        this.cacheService.clearGroup("ReportPage");
+        this.loadedIds = [-1];
+        this.articles = [];
+        this.localStorageService.clear("Reddah_report");
+        this.localStorageService.clear("Reddah_report_ids");
+        this.getMyTimeline(event);
+    }
+
+    doRefresh(event) {
+        setTimeout(() => {
+            this.clearCacheAndReload(event);
+        }, 2000);
     }
 
     @ViewChild('headerStart')
@@ -121,23 +166,26 @@ export class ReportPage implements OnInit {
     
 
     onScroll($event) {
-        //console.log($event.detail.scrollTop+" "+this.timelineCover.nativeElement.scrollHeight)
+
+        this.showAddComment = false;
+        
         let offset = this.timelineCover.nativeElement.scrollHeight - $event.detail.scrollTop;
+        
         if(offset>=250)
         {
             this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'visible');
-            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
             this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', '8');
+            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
+            
         }
         else if(offset<250 && offset>=150)
         {
-            //console.log('start change'+offset)
             let opacity = (offset-150)/100;
             if(opacity<0) opacity=0;
             this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', opacity+'');
             this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
         }
-        else if(offset<150 && offset>=0){
+        else if(offset<150 && offset>=-150){
             let opacity = (1-(offset-150)/100);
             if(opacity>1) opacity=1;
             this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'opacity', opacity+'');
@@ -146,7 +194,107 @@ export class ReportPage implements OnInit {
         {
             this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
             this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
+            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'opacity', '8');
         }
+    }
+
+    async presentPopover(event: Event, id: any, groupNames: string) {
+        let liked = this.reddah.getAllowedNames(groupNames).map(x=>x.displayName)
+            .includes(this.reddah.getDisplayName(this.reddah.getCurrentUser()));
+        //let liked = groupNames.split(',').includes(this.reddah.getDisplayName(this.reddah.getCurrentUser()));
+        const popover = await this.popoverController.create({
+            component: ReportCommentPopPage,
+            componentProps: { liked: liked },
+            event: event,
+            translucent: true,
+            cssClass: 'common-comment-popover'
+        });
+        await popover.present();
+        const { data } = await popover.onDidDismiss();
+        if(data){
+            if(data==1)
+            {
+                //set status=-1
+                //set read, give award point
+                //delete in UI
+
+                /*let likeAddFormData = new FormData();
+                likeAddFormData.append("action", "add");
+                likeAddFormData.append("id", id+"");
+                this.reddah.like(likeAddFormData)
+                .subscribe(data => 
+                {
+                    //console.log(JSON.stringify(data));
+                    this.cacheService.clearGroup("ReportPage");
+                });
+                
+                this.renderUiLike(id, "add");*/
+                
+            }
+
+            if(data==2)
+            {
+                //set read, no award points
+                //delete in UI
+
+                /*let likeRemoveFormData = new FormData();
+                likeRemoveFormData.append("action", "remove");
+                likeRemoveFormData.append("id", id+"");
+                this.reddah.like(likeRemoveFormData)  
+                .subscribe(data => 
+                {
+                    //console.log(JSON.stringify(data));
+                    this.cacheService.clearGroup("ReportPage");
+                });
+                this.renderUiLike(id, "remove");*/
+            }
+            
+            if(data==3){
+                this.showAddComment = true;
+                this.selectedArticleId = id;
+                this.selectedCommentId = -1;
+                this.selectedReplyPlaceholder = this.translate.instant("Comment.Comment");
+                setTimeout(() => {
+                    this.newComment.setFocus();
+                },150);
+            }
+        }
+    }
+
+    selectedArticleId: number;
+    selectedCommentId: number;
+
+    renderUiLike(id: number, action: string){
+        this.articles.forEach((item, index, alias)=> {
+            if(item.Id==id){
+                let currentUser = this.reddah.getCurrentUser();
+                if(action=="add"){
+                    if(item.GroupName.length==0){
+                        item.GroupName = currentUser;//this.reddah.getDisplayName(currentUser);
+                    }
+                    else {
+                        item.GroupName += "," + currentUser;//this.reddah.getDisplayName(currentUser);
+                    }
+                }
+
+                if(action=="remove"){
+                    if(item.GroupName==currentUser){//this.reddah.getDisplayName(currentUser)){
+                        item.GroupName="";
+                    }
+                    else {
+                        let groupNames = item.GroupName.split(',');
+                        groupNames.forEach((gitem, gindex, galias)=>{
+                            if(gitem==currentUser){//this.reddah.getDisplayName(currentUser)){
+                                groupNames.splice(gindex, 1);
+                            }
+                        });
+                        item.GroupName = groupNames.join(',');
+                    }
+                }
+                
+                return false;
+            }
+        });
     }
 
     async viewer(index, imageSrcArray) {
@@ -156,7 +304,8 @@ export class ReportPage implements OnInit {
                 index: index,
                 imgSourceArray: imageSrcArray,
                 imgTitle: "",
-                imgDescription: ""
+                imgDescription: "",
+                showDownload: true,
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
@@ -164,56 +313,124 @@ export class ReportPage implements OnInit {
         });
     
         return await modal.present();
-    } 
+    }
+  
+    
+    showFacePanel = false;
+    toggleFacePanel(){
+      this.showFacePanel= !this.showFacePanel;
+    }
+    faceSelection(face) {
+        this.newComment.value += face;
+    }
 
-    async goTsViewer(article){
+
+    commentData = new Map();
+    authoronly = false;
+    async GetCommentsData(articleId: number){
+        //console.log(`get ts comments:${articleId}`);
+        let cacheKey = "this.reddah.getReportComments" + articleId;
+        let request = this.reddah.getComments(articleId)
+
+        this.cacheService.loadFromObservable(cacheKey, request, "MyReportPage")
+        .subscribe(data => 
+        {
+            //console.log('load comments:'+articleId+JSON.stringify(data));
+            this.commentData.set(articleId, data);
+        });
+    }
+
+    SendComment(){
+        this.showAddComment = false;
+        
+        let temp = this.commentData.get(this.selectedArticleId);
+        temp.Comments.push({'Id': 0, 'ArticleId': this.selectedArticleId, 'ParentId': this.selectedCommentId, 
+            'Content': this.newComment.value, 'UserName': this.reddah.getCurrentUser()});
+        
+        let uid = this.reddah.uuidv4();
+        this.reddah.addComments(this.selectedArticleId, this.selectedCommentId, this.newComment.value, uid)
+        .subscribe(data=>{
+            let cacheKey = "this.reddah.getReportComments" + this.selectedArticleId;
+            this.cacheService.removeItem(cacheKey);
+            this.GetCommentsData(this.selectedArticleId);
+        });
+    }
+
+    selectedReplyPlaceholder: string;
+    showAddCommentFromChildren(event){
+        this.selectedArticleId = event.articleId;
+        this.selectedCommentId = event.commentId;
+        this.showAddComment = true;
+        this.selectedReplyPlaceholder = this.translate.instant("Comment.Comment") + this.reddah.getDisplayName(event.userName) + ":";
+
+        if(this.selectedArticleId!=event.articleId||this.selectedCommentId!=event.commentId)
+        {
+            this.newComment = "";
+        }
+        setTimeout(() => {
+            this.newComment.setFocus();
+        },150);
+    }
+    
+    
+
+    async goUser(userName){
         const userModal = await this.modalController.create({
-            component: TsViewerPage,
+            component: UserPage,
             componentProps: { 
-                article: article
+                userName: userName
             }
         });
-        
+          
         await userModal.present();
     }
 
-    async post(ev: any) {
-        const popover = await this.popoverController.create({
-            component: TimelinePopPage,
-            animated: false,
-            translucent: true,
-            cssClass: 'post-option-popover'
-        });
-        await popover.present();
-        const { data } = await popover.onDidDismiss();
-        if(data==1||data==2||data==3){
-            //data=1: take a photo, data=2: lib photo, data=3: lib video
-            this.goPost(data);
-        }
-    }
-
-    async goPost(postType){
-        const postModal = await this.modalController.create({
-            component: AddTimelinePage,
-            componentProps: { postType: postType }
+    async fullText(text){
+        const textModal = await this.modalController.create({
+            component: ArticleTextPopPage,
+            componentProps: { text: text }
         });
           
-        await postModal.present();
-        const { data } = await postModal.onDidDismiss();
-        if(data){
-            this.clearCacheAndReload();
-        }
+        await textModal.present();
     }
 
-    async goMessage(){
-        const modal = await this.modalController.create({
-            component: MessagePage,
+    isMe(userName){
+        return userName==this.reddah.getCurrentUser();
+    }
+
+    async delete(article){
+        const alert = await this.alertController.create({
+            header: this.translate.instant("Confirm.Title"),
+            message: this.translate.instant("Confirm.DeleteMessage"),
+            buttons: [
+            {
+                text: this.translate.instant("Confirm.Cancel"),
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {}
+            }, 
+            {
+                text: this.translate.instant("Confirm.Yes"),
+                handler: () => {
+                    //ui delete
+                    this.articles.forEach((item, index)=>{
+                        if(item.Id==article.Id){
+                            this.articles.splice(index, 1);
+                        }
+                    })
+                    this.localStorageService.store("Reddah_report",this.articles);
+                    this.cacheService.clearGroup("ReportPage");
+                    
+                    //serivce delete
+                    let formData = new FormData();
+                    formData.append("Id",JSON.stringify(article.Id));
+                    this.reddah.deleteMyTimeline(formData).subscribe(data=>{
+                        
+                    });
+                }
+            }]
         });
-          
-        await modal.present();
-    }
 
-    isMe(){
-        return this.userName==this.reddah.getCurrentUser();
+        await alert.present().then(()=>{});
     }
 }

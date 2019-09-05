@@ -231,7 +231,8 @@
         "MaxDraft":"일반 사용자는 최대 3부 초고를 보존할 수 있다",
         "WorkingCopyExist":"발표되지 않은 버전이 있어요",
         "MyPhoto":"내 재료",
-        "AddPhoto":"재질 추가"
+        "AddPhoto":"재질 추가",
+        "Copy":"카피"
     },
 
     "Mail":{

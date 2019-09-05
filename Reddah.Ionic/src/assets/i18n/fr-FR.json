@@ -229,7 +229,8 @@
         "MaxDraft":"Les utilisateurs ordinaires peuvent enregistrer jusqu 'à trois projets",
         "WorkingCopyExist":"Il y a une version non publiée",
         "MyPhoto":"Mon matériel",
-        "AddPhoto":"Matériau d 'addition"
+        "AddPhoto":"Matériau d 'addition",
+        "Copy":"Copy"
     },
 
     "Mail":{

@@ -7,6 +7,7 @@ import 'hammerjs';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from 'ionic-cache';
 import { TranslateService } from '@ngx-translate/core';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @Component({
     selector: 'app-image-viewer',
@@ -34,6 +35,7 @@ export class ImageViewerComponent implements OnInit {
         public reddah: ReddahService,
         private cacheService: CacheService,
         public translate: TranslateService,
+        private clipboard: Clipboard
     ) {
     }
 
@@ -121,6 +123,15 @@ export class ImageViewerComponent implements OnInit {
                     
                 }
             },*/ 
+            {
+                text: this.translate.instant("Common.Copy"),
+                icon: 'copy',
+                handler: () => {
+                    let url = item.webPreviewUrl;
+                    this.clipboard.copy(url);
+                    this.reddah.toast(this.translate.instant("Common.Copy")+url, "primary");
+                }
+            },
             {
                 text: this.translate.instant("Menu.Mark"),
                 icon: 'bookmark',

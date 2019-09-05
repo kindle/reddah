@@ -1,19 +1,18 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
-import { InfiniteScroll } from '@ionic/angular';
+import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { InfiniteScroll, Content, LoadingController, NavController, PopoverController, ModalController, AlertController, } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
+import { TimelinePopPage } from '../../common/timeline-pop.page';
+import { UserPage } from '../../common/user/user.page';
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { TsViewerPage } from '../tsviewer/tsviewer.page'
-import * as moment from 'moment';
-import { TimelinePopPage } from '../../common/timeline-pop.page';
-import { AddTimelinePage } from '../add-timeline/add-timeline.page';
-import { MessagePage } from '../message/message.page';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ArticleTextPopPage } from '../../common/article-text-pop.page'
+import { AddMaterialPage } from '../../mytimeline/add-material/add-material.page'
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
     selector: 'app-material',
@@ -21,16 +20,21 @@ import { MessagePage } from '../message/message.page';
     styleUrls: ['material.page.scss']
 })
 export class MaterialPage implements OnInit {
-    @Input() userName: string;
-
+    userName: string;
     articles = [];
     loadedIds = [];
     formData: FormData;
+    showAddComment = false;
 
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
+    @ViewChild('pageTop') pageTop: Content;
+        
+    loadData(event) {
+        this.getMyMaterial(event);
+    }
 
-    async goback(){
-        await this.modalController.dismiss();
+    close(){
+        this.modalController.dismiss();
     }
 
     constructor(
@@ -42,84 +46,112 @@ export class MaterialPage implements OnInit {
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private popoverController: PopoverController,
-        private photoLibrary: PhotoLibrary,
         private cacheService: CacheService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        ){
+        private transfer: FileTransfer, 
+        private file: File,
+        private statusBar: StatusBar,
+        private alertController: AlertController,
+        private translate: TranslateService,
+    ){
+        this.userName = this.reddah.getCurrentUser();
     }
     
     async ngOnInit(){
         this.reddah.getUserPhotos(this.userName, true);
-        const loading = await this.loadingController.create({
-            message: this.translateService.instant("Article.Loading"),
-            spinner: 'circles',
-        });
-        await loading.present();
+
+        let cachedArticles = this.localStorageService.retrieve("Reddah_mymaterial");
+        let cachedIds = this.localStorageService.retrieve("Reddah_mymaterial_ids");
+        if(cachedArticles){
+            this.articles = JSON.parse(cachedArticles);
+            this.loadedIds = JSON.parse(cachedIds);
+        }
+
         this.formData = new FormData();
-        this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
-        this.formData.append("targetUser", this.userName);
+        this.formData.append("loadedIds", JSON.stringify([]));
 
-        let cacheKey = "this.reddah.getMaterial"+this.userName;
-        //console.log(`cacheKey:${cacheKey}`);
-        let request = this.reddah.getMaterial(this.formData);
+        let cacheKey = "this.reddah.getMyMaterial";
+        let request = this.reddah.getMyMaterial(this.formData);
 
-        this.cacheService.loadFromObservable(cacheKey, request, "MaterialPage"+this.userName)
-        .subscribe(timeline => 
+        this.cacheService.loadFromObservable(cacheKey, request, "MyMaterialPage")
+        .subscribe(material => 
         {
-            if(this.userName==this.reddah.getCurrentUser()){ 
-                var localTime = new Date();
-                this.articles.push({Id:0, CreatedOn: moment.utc(localTime).add(-1, 'minutes').format("YYYY-MM-DDTHH:mm:ss").toString(), Abstract:"",Content:""});  
-            }
-            for(let article of timeline){
-                this.articles.push(article);
-                this.loadedIds.push(article.Id);
-            }
-            loading.dismiss();
-        });
+            if(cachedArticles!=JSON.stringify(material))
+            {
+                this.articles = [];
+                this.loadedIds = [];
 
-        this.isFriend = this.reddah.appData('userisfriend_'+this.userName+'_'+this.reddah.getCurrentUser())==1;
-        this.nonFriendAllowTen = this.reddah.appData('userallowtentimeline_'+this.userName)==1;
-    }
-
-    async clearCacheAndReload(){
-        this.cacheService.clearGroup("MaterialPage"+this.userName);
-        this.articles = [];
-        this.loadedIds = [];
-        this.ngOnInit();
-    }
-  
-    isFriend;
-    nonFriendAllowTen;
-
-    getMaterial(event):void {
-        this.formData = new FormData();
-        this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
-        this.formData.append("targetUser", this.userName);
-
-        let cacheKey = "this.reddah.getMaterial" + this.userName + this.loadedIds.join(',');
-        //console.log(`loadmore_cacheKey:${cacheKey}`);
-        let request = this.reddah.getMaterial(this.formData);
-        
-        this.cacheService.loadFromObservable(cacheKey, request, "MaterialPage"+this.userName)
-        .subscribe(timeline => 
-        {
-            for(let article of timeline){
-                if(this.isFriend||
-                    (!this.isFriend&&this.articles.length<10))
-                {
+                for(let article of material){
                     this.articles.push(article);
                     this.loadedIds.push(article.Id);
+                    
+                    //cache user image
+                    this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
+                    //cache preview image
+                    article.Content.split('$$$').forEach((previewImageUrl)=>{
+                        this.reddah.toFileCache(previewImageUrl);
+                    });
+                    
                 }
+
+                this.localStorageService.store("Reddah_mymaterial",JSON.stringify(material));
+                this.localStorageService.store("Reddah_mymaterial_ids",JSON.stringify(this.loadedIds));
+
             }
-            if(event)
+        });
+    }
+    
+    isMe(userName){
+        return userName==this.reddah.getCurrentUser();
+    }
+
+    getMyMaterial(event):void {
+        this.formData = new FormData();
+        this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
+        
+        let cacheKey = "this.reddah.getMyMaterial" + this.loadedIds.join(',');
+        let request = this.reddah.getMyMaterial(this.formData);
+        
+        this.cacheService.loadFromObservable(cacheKey, request, "MyMaterialPage")
+        .subscribe(material => 
+        {
+            for(let article of material){
+                this.articles.push(article);
+                this.loadedIds.push(article.Id);
+                
+                //cache user image
+                this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
+                //cache preview image
+                article.Content.split('$$$').forEach((previewImageUrl)=>{
+                    this.reddah.toFileCache(previewImageUrl);
+                });
+            }
+
+            this.localStorageService.store("Reddah_mymaterial", JSON.stringify(material));
+            this.localStorageService.store("Reddah_mymaterial_ids", JSON.stringify(this.loadedIds));
+
+            if(event){
                 event.target.complete();
+            }
         });
 
     }
 
-    loadData(event) {
-        this.getMaterial(event);
+    clearCacheAndReload(event){
+        this.pageTop.scrollToTop();
+        this.cacheService.clearGroup("MyMaterialPage");
+        this.loadedIds = [-1];
+        this.articles = [];
+        this.localStorageService.clear("Reddah_mymaterial");
+        this.localStorageService.clear("Reddah_mymaterial_ids");
+        this.getMyMaterial(event);
+    }
+
+    doRefresh(event) {
+        setTimeout(() => {
+            this.clearCacheAndReload(event);
+        }, 2000);
     }
 
     @ViewChild('headerStart')
@@ -131,23 +163,26 @@ export class MaterialPage implements OnInit {
     
 
     onScroll($event) {
-        //console.log($event.detail.scrollTop+" "+this.timelineCover.nativeElement.scrollHeight)
+
+        this.showAddComment = false;
+        
         let offset = this.timelineCover.nativeElement.scrollHeight - $event.detail.scrollTop;
+        
         if(offset>=250)
         {
             this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'visible');
-            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
             this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', '8');
+            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
+            
         }
         else if(offset<250 && offset>=150)
         {
-            //console.log('start change'+offset)
             let opacity = (offset-150)/100;
             if(opacity<0) opacity=0;
             this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', opacity+'');
             this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
         }
-        else if(offset<150 && offset>=0){
+        else if(offset<150 && offset>=-150){
             let opacity = (1-(offset-150)/100);
             if(opacity>1) opacity=1;
             this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'opacity', opacity+'');
@@ -156,35 +191,8 @@ export class MaterialPage implements OnInit {
         {
             this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
             this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
+            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'opacity', '8');
         }
-    }
-
-    async viewer(index, imageSrcArray) {
-        const modal = await this.modalController.create({
-            component: ImageViewerComponent,
-            componentProps: {
-                index: index,
-                imgSourceArray: imageSrcArray,
-                imgTitle: "",
-                imgDescription: ""
-            },
-            cssClass: 'modal-fullscreen',
-            keyboardClose: true,
-            showBackdrop: true
-        });
-    
-        return await modal.present();
-    } 
-
-    async goTsViewer(article){
-        const userModal = await this.modalController.create({
-            component: TsViewerPage,
-            componentProps: { 
-                article: article
-            }
-        });
-        
-        await userModal.present();
     }
 
     async post(ev: any) {
@@ -204,26 +212,89 @@ export class MaterialPage implements OnInit {
 
     async goPost(postType){
         const postModal = await this.modalController.create({
-            component: AddTimelinePage,
+            component: AddMaterialPage,
             componentProps: { postType: postType }
         });
           
         await postModal.present();
         const { data } = await postModal.onDidDismiss();
         if(data){
-            this.clearCacheAndReload();
+            this.doRefresh(null);
         }
     }
 
-    async goMessage(){
+    async viewer(index, imageSrcArray) {
         const modal = await this.modalController.create({
-            component: MessagePage,
+            component: ImageViewerComponent,
+            componentProps: {
+                index: index,
+                imgSourceArray: imageSrcArray,
+                imgTitle: "",
+                imgDescription: "",
+                showDownload: true,
+            },
+            cssClass: 'modal-fullscreen',
+            keyboardClose: true,
+            showBackdrop: true
+        });
+    
+        return await modal.present();
+    }
+  
+    async goUser(userName){
+        const userModal = await this.modalController.create({
+            component: UserPage,
+            componentProps: { 
+                userName: userName
+            }
         });
           
-        await modal.present();
+        await userModal.present();
     }
 
-    isMe(){
-        return this.userName==this.reddah.getCurrentUser();
+    async fullText(text){
+        const textModal = await this.modalController.create({
+            component: ArticleTextPopPage,
+            componentProps: { text: text }
+        });
+          
+        await textModal.present();
+    }
+
+
+    async delete(article){
+        const alert = await this.alertController.create({
+            header: this.translate.instant("Confirm.Title"),
+            message: this.translate.instant("Confirm.DeleteMessage"),
+            buttons: [
+            {
+                text: this.translate.instant("Confirm.Cancel"),
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {}
+            }, 
+            {
+                text: this.translate.instant("Confirm.Yes"),
+                handler: () => {
+                    //ui delete
+                    this.articles.forEach((item, index)=>{
+                        if(item.Id==article.Id){
+                            this.articles.splice(index, 1);
+                        }
+                    })
+                    this.localStorageService.store("Reddah_mymaterial",this.articles);
+                    this.cacheService.clearGroup("MyMaterialPage");
+                    
+                    //serivce delete
+                    let formData = new FormData();
+                    formData.append("Id",JSON.stringify(article.Id));
+                    this.reddah.deleteMyTimeline(formData).subscribe(data=>{
+                        
+                    });
+                }
+            }]
+        });
+
+        await alert.present().then(()=>{});
     }
 }

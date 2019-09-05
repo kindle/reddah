@@ -40,6 +40,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoadedImageProps } from 'ng-lazyload-image';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Network } from '@ionic-native/network/ngx';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -88,7 +89,8 @@ import { ArticleDislikePopPage } from './common/article-dislike-pop.page'
 import { ArticleTextPopPage } from './common/article-text-pop.page'
 import { CommentPopPage } from './common/comment-pop.page'
 import { TimelinePopPage } from './common/timeline-pop.page'
-import { TimelineCommentPopPage } from './common/timeline-comment-pop.page'
+import { TimelineCommentPopPage } from './common/timeline-comment-pop.page';
+import { ReportCommentPopPage } from './common/report-comment-pop.page';
 import { TsViewerPage } from './mytimeline/tsviewer/tsviewer.page'
 import { AddTimelinePage } from './mytimeline/add-timeline/add-timeline.page';
 import { AddFeedbackPage } from './mytimeline/add-feedback/add-feedback.page';
@@ -194,7 +196,7 @@ var firebaseConfig = {
         ArticleTextPopPage,
         CommentPopPage,
         TimelinePopPage,
-        TimelineCommentPopPage,
+        TimelineCommentPopPage,ReportCommentPopPage,
         ScanPage,
         SigninPage,ForgotPage,
         TsViewerPage,
@@ -248,7 +250,7 @@ var firebaseConfig = {
         ArticleTextPopPage,
         CommentPopPage,
         TimelinePopPage,
-        TimelineCommentPopPage,
+        TimelineCommentPopPage,ReportCommentPopPage,
         ScanPage,
         SigninPage, ForgotPage,
         UserPage, MessageListPage,
@@ -310,7 +312,7 @@ var firebaseConfig = {
         AlertController,
         AuthService,
         AndroidPermissions,
-        Camera,
+        Camera,Clipboard,
         Keyboard,
         Network,
         Shake,
