@@ -7,7 +7,7 @@ import { File, FileEntry } from '@ionic-native/file/ngx';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 import { CacheService } from "ionic-cache";
-import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
+import { MaterialPage } from '../../../mytimeline/material/material.page';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ImageViewerComponent } from '../../../common/image-viewer/image-viewer.component';
 import { DragulaService } from 'ng2-dragula';
@@ -235,7 +235,13 @@ export class AddArticlePage implements OnInit {
 
 
     async SelectPhoto(){
-
+        const modal = await this.modalController.create({
+            component: MaterialPage,
+            componentProps: { 
+            }
+        });
+          
+        await modal.present();
     }
 
     async AddPhoto(){

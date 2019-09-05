@@ -12,6 +12,7 @@ import { PlatformPage } from '../publisher/platform/platform.page';
 import { TimelinePopPage } from '../../common/timeline-pop.page';
 import { AddTimelinePage } from '../../mytimeline/add-timeline/add-timeline.page';
 import { MessageListPage } from '../../tabs/message/message.page'
+import { ReportPage } from '../../mytimeline/report/report.page';
 
 @Component({
     selector: 'app-about',
@@ -114,4 +115,13 @@ export class AboutPage implements OnInit {
         await modal.present();
     }
 
+    async goReport(){
+        const modal = await this.modalController.create({
+            component: ReportPage,
+            componentProps: { 
+            }
+        });
+          
+        await modal.present();
+    }
 }

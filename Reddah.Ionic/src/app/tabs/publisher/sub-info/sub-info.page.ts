@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController, InfiniteScroll, Content } from '@ionic/angular';
+import { ModalController, InfiniteScroll, Content, Platform } from '@ionic/angular';
 import { SettingSignaturePage } from '../../../settings/setting-signature/setting-signature.page'
 import { CacheService } from "ionic-cache";
 import { ChangePhotoPage } from '../../../common/change-photo/change-photo.page';
@@ -31,14 +31,17 @@ export class SubInfoPage implements OnInit {
     @ViewChild('pageTop') pageTop: Content;
 
 
+    isCordova = false;
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         private translate: TranslateService,
+        private platform: Platform,
     ) { 
         this.userName = this.reddah.getCurrentUser();
+        this.isCordova = this.platform.is('cordova')
     }
 
     showLoading=false;

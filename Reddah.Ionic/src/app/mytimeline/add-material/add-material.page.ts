@@ -1,14 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PopoverController, NavController, LoadingController, ModalController } from '@ionic/angular'
+import { PopoverController, LoadingController, ModalController } from '@ionic/angular'
 import { TimelinePopPage } from '../../common/timeline-pop.page';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../../reddah.service';
 import { File, FileEntry } from '@ionic-native/file/ngx';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Router } from '@angular/router';
-import { CacheService } from "ionic-cache";
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
-import { LocalStorageService } from 'ngx-webstorage';
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { DragulaService } from 'ng2-dragula';
 import { TranslateService } from '@ngx-translate/core';
@@ -25,13 +21,8 @@ export class AddMaterialPage implements OnInit {
     constructor(
         private popoverController: PopoverController,
         private reddahService: ReddahService,
-        private navController: NavController,
         private file: File,
         private loadingController: LoadingController,
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
-        private cacheService: CacheService,
-        private localStorageService: LocalStorageService,
         private modalController: ModalController,
         private dragulaService: DragulaService,
         private translate: TranslateService,

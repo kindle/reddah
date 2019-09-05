@@ -172,6 +172,30 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private getMaterialUrl = 'https://login.reddah.com/api/pub/getmaterial'; 
+
+    getMaterial(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getMaterialUrl, formData)
+        .pipe(
+            tap(data => this.log('get material')),
+            catchError(this.handleError('get material', []))
+        );
+    }
+    //******************************** */
+    private getReportUrl = 'https://login.reddah.com/api/admin/getreport'; 
+
+    getReport(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getReportUrl, formData)
+        .pipe(
+            tap(data => this.log('get report')),
+            catchError(this.handleError('get report', []))
+        );
+    }
+    //******************************** */
     private getUserInfoUrl = 'https://login.reddah.com/api/article/getuser'; 
 
     getUserInfo(formData: FormData): Observable<any> {

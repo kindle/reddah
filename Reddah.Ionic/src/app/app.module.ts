@@ -76,6 +76,8 @@ import { NewFriendPage } from './friend/new-friend/new-friend.page';
 import { CommentComponent } from './postviewer/comment/comment.component';
 import { CommentTimelineComponent } from './mytimeline/commentts/comment.component';
 import { TimeLinePage } from './mytimeline/timeline/timeline.page';
+import { MaterialPage } from './mytimeline/material/material.page';
+import { ReportPage } from './mytimeline/report/report.page';
 import { MyTimeLinePage } from './mytimeline/mytimeline.page';
 import { MessageListPage } from './tabs/message/message.page';
 import { UserPage } from './common/user/user.page';
@@ -183,7 +185,7 @@ var firebaseConfig = {
         SurfacePage,
         CommentComponent,
         CommentTimelineComponent,
-        TimeLinePage,
+        TimeLinePage,MaterialPage,ReportPage,
         MyTimeLinePage,MessageListPage,
         UserPage,
         ArticlePopPage,
@@ -250,7 +252,7 @@ var firebaseConfig = {
         ScanPage,
         SigninPage, ForgotPage,
         UserPage, MessageListPage,
-        TimeLinePage,
+        TimeLinePage,MaterialPage,ReportPage,
         TsViewerPage,
         AddTimelinePage,
         AddFeedbackPage,AddMaterialPage,

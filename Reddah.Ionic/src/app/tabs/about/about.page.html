@@ -49,6 +49,15 @@
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
 -->
+
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="goReport()">
+        <ion-icon class="menuIcon" name="information-circle-outline" color="dark" slot="start"></ion-icon>
+        <ion-label>{{ 'Menu.Header.Feedback' | translate }}</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="goPlatform()">

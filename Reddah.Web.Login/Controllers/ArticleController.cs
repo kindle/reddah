@@ -149,6 +149,9 @@ namespace Reddah.Web.Login.Controllers
                 if (String.IsNullOrWhiteSpace(thoughts) && hfc.Count == 0 && shareTitle==null)
                     return Ok(new ApiResult(1, "No thoughts and photos"));
 
+                if (hfc.Count == 0 && type==5)
+                    return Ok(new ApiResult(1010, "No materials uploaded"));
+
                 JwtResult jwtResult = AuthController.ValidJwt(jwt);
 
                 if (jwtResult.Success != 0)

@@ -89,10 +89,10 @@ namespace Reddah.Web.Login.Controllers
                             new MailAddress("donotreply@reddah.com", emailTitle),
                             new MailAddress(email, userName),
                             emailSub,
-                            string.Format("Dear {0}:\r\n" +
-                            emailParaStart+":\r\n" +
+                            string.Format("{0}:<br>" +
+                            emailParaStart+ ":<br>" +
                             "https://reddah.com/{1}/VerifyEmail?Userid={2}&EmailToken={3}" +
-                            "\r\n"+ emailParaEnd,
+                            "<br>" + emailParaEnd,
                             userName, locale, userJustCreated.UserId, verifyToken),
                             true
                     );
@@ -296,10 +296,10 @@ namespace Reddah.Web.Login.Controllers
                                 new MailAddress("donotreply@reddah.com", emailTitle),
                                 new MailAddress(email, target.UserName),
                                 emailSub,
-                                string.Format("Dear {0}:\r\n" +
-                                emailParaStart+":\r\n" +
+                                string.Format("{0}:<br>" +
+                                emailParaStart+ ":<br>" +
                                 "<span style='font-weight:bold;'>{1}</span>" +
-                                "\r\n"+ emailParaEnd,
+                                "<br>" + emailParaEnd,
                                 target.UserName, token),
                                 true
                         );

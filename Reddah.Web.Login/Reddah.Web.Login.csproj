@@ -160,6 +160,7 @@
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ApiBaseController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\PubController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />

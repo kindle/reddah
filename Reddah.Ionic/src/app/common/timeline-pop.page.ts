@@ -10,9 +10,10 @@ import { PopoverController } from '@ionic/angular';
       <ion-item button (click)="select(2)" lines="none">
           <ion-label>{{ 'Pop.SelectPhoto' | translate }}</ion-label>
       </ion-item>
+      <!--
       <ion-item button (click)="select(3)" lines="none">
           <ion-label>{{ 'Pop.SelectVideo' | translate }}</ion-label>
-      </ion-item>
+      </ion-item>-->
   `
 })
 export class TimelinePopPage {

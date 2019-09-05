@@ -1,0 +1,140 @@
+<ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" style="background-color:white;">
+    <div class="headerStart" #headerStart>
+        <ion-item color="transparent" no-padding lines="none"  (dblclick)="clearCacheAndReload()">
+            <ion-icon name="ios-arrow-back" color="tertiary" slot="start" (click)="goback()" class="backbutton"></ion-icon>
+            <ion-label></ion-label>
+            <ion-icon name="text" color="tertiary" slot="end" (click)="goMessage()" *ngIf="isMe()"></ion-icon>
+        </ion-item>
+    </div>
+    <div class="headerOnScroll" #headerOnScroll>
+        <ion-item color="light" no-padding lines="none">
+            <ion-icon name="ios-arrow-back" slot="start" (click)="goback()" class="backbutton"></ion-icon>
+            <ion-label>{{reddah.getDisplayName(userName)}}</ion-label>
+            <ion-icon name="text" slot="end" (click)="goMessage()" *ngIf="isMe()"></ion-icon>
+        </ion-item>
+    </div>
+    <div>   
+        <div class="timelineCover" #timelineCover>
+            <img src="{{reddah.appData('cover_'+userName)}}">
+        </div>
+        <div class="timelineAvatar">
+            <ion-label class="userNameTitle">{{userName}}</ion-label>
+            <img src="{{reddah.appData('userphoto_'+userName)}}">
+        </div>
+        <div class="signature">{{reddah.appData('usersignature_'+userName)}}</div>
+        <div *ngIf="isFriend==true||
+                (isFriend==false&&nonFriendAllowTen==true)">
+            <div *ngFor="let article of articles;index as i">
+                <p *ngIf="i==0||(i>0&&reddah.utcToLocal(articles[i-1].CreatedOn).substring(0,4)!=reddah.utcToLocal(article.CreatedOn).substring(0,4))" class="yearTitle">
+                    {{reddah.utcToLocal(article.CreatedOn).substring(0,4)}}年
+                </p>
+                <div class="article">
+                    <div class="articleDate" *ngIf="reddah.getSendTimeShort(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')!=(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')">
+                        <span *ngIf="i==0||(i>0&&articles[i-1].CreatedOn.split('T')[0]!=article.CreatedOn.split('T')[0])" 
+                            class="dayTitle span-eclipse">
+                            {{reddah.getSendTimeShort(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}
+                        </span>
+                    </div>
+                    <div class="articleDate" *ngIf="reddah.getSendTimeShort(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')==(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')">
+                        <span *ngIf="i==0||(i>0&&reddah.utcToLocal(articles[i-1].CreatedOn).split(' ')[0]!=reddah.utcToLocal(article.CreatedOn).split(' ')[0])" class="dayTitle">
+                            {{reddah.utcToLocal(article.CreatedOn,'DD')}}
+                        </span>
+                        <span *ngIf="i==0||(i>0&&reddah.utcToLocal(articles[i-1].CreatedOn).split(' ')[0]!=reddah.utcToLocal(article.CreatedOn).split(' ')[0])" class="monthTitle">
+                            {{reddah.utcToLocal(article.CreatedOn,'MM')}}月
+                        </span>
+                    </div>
+                    <div class="articleContent" *ngIf="article.Id==0">
+                        <ion-item no-padding lines="none" (click)="post($event)">
+                            <ion-thumbnail slot="start">
+                                <img src="assets/icon/noimage.jpg">
+                            </ion-thumbnail>
+                        </ion-item>
+                    </div>
+                    <div class="articleContent" *ngIf="article.Id>0">
+                        <ion-item no-padding lines="none" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.length>0" (click)="goTsViewer(article)">
+                            <ion-thumbnail slot="start">
+                                <div class="tsparent4" *ngIf="article.Content.split('$$$').length>=4">
+                                    <div class="tscontainer" *ngFor="let image of article.Content.split('$$$').slice(0,4);index as i">
+                                        <img [id]="reddah.makeItId(image+'tl')" 
+                                            (load)="reddah.adjustImage($event, image+'tl')"
+                                            [defaultImage]="'assets/icon/noimage.jpg'" 
+                                            [lazyLoad]="reddah.level2Cache(image)" 
+                                            [useSrcset]="true" class="tspicture">
+                                    </div>
+                                </div>
+                                <div class="tsparent3" *ngIf="article.Content.split('$$$').length==3">
+                                    <div class="tscontainer" style="grid-row: 1/3;">
+                                        <img [defaultImage]="'assets/icon/noimage.jpg'" 
+                                            [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[0])" 
+                                            [useSrcset]="true" class="tspicture3">
+                                    </div>
+                                    <div class="tscontainer">
+                                        <img 
+                                            [id]="reddah.makeItId(article.Content.split('$$$')[1]+'tl')" 
+                                            (load)="reddah.adjustImage($event, article.Content.split('$$$')[1]+'tl')"
+                                            [defaultImage]="'assets/icon/noimage.jpg'" 
+                                            [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[1])" 
+                                            [useSrcset]="true" class="tspicture3">
+                                    </div>
+                                    <div class="tscontainer">
+                                        <img [id]="reddah.makeItId(article.Content.split('$$$')[2]+'tl')" 
+                                            (load)="reddah.adjustImage($event, article.Content.split('$$$')[2]+'tl')"
+                                            [defaultImage]="'assets/icon/noimage.jpg'" 
+                                            [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[2])" 
+                                            [useSrcset]="true" class="tspicture3">
+                                    </div>
+                                </div>
+                                <div class="tsparent2" *ngIf="article.Content.split('$$$').length==2">
+                                    <div class="tscontainer">
+                                        <img class="ts2p1" [defaultImage]="'assets/icon/noimage.jpg'" 
+                                            [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[0])" 
+                                            [useSrcset]="true">
+                                    </div>
+                                    <div class="tscontainer">
+                                        <img class="ts2p2" [defaultImage]="'assets/icon/noimage.jpg'" 
+                                            [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[1])" 
+                                            [useSrcset]="true">
+                                    </div>
+                                </div>
+                                <img [defaultImage]="'assets/icon/noimage.jpg'" 
+                                    [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[0])" 
+                                    [useSrcset]="true" *ngIf="article.Content.split('$$$').length==1">
+                            </ion-thumbnail>
+                            <ion-label class="articleContentText" text-wrap>
+                                <div [innerHTML]="reddah.summary(article.Title,20)" class="articleContentTextSummary"></div>
+                                <div class="articleContentTextCount" *ngIf="article.Content.split('$$$').length>0">共{{article.Content.split('$$$').length}}张</div>
+                            </ion-label>
+                        </ion-item>
+                        <ion-item no-padding lines="none" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.length===0" (click)="goTsViewer(article)">
+                            <div [innerHTML]="reddah.summary(article.Title,20)" class="textOnlyArticle"></div>
+                        </ion-item>
+                        <ion-item no-padding lines="none" *ngIf="article.Abstract&&article.Abstract.length>2&&article.Title&&article.Title.length>0" (click)="goTsViewer(article)">
+                            <div [innerHTML]="reddah.summary(article.Title,20)" class="textOnlyArticle"></div>
+                        </ion-item>
+                        <app-share-article *ngIf="article.Abstract&&article.Abstract.length>2" [abstract]="article.Abstract" [image]="article.Content" [id]="article.Ref" (click)="goTsViewer(article)" [view]="false"></app-share-article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ion-item lines="none" *ngIf="isFriend==false">
+        </ion-item>
+
+        <ion-item lines="none" *ngIf="isFriend==false&&nonFriendAllowTen==true">
+            <ion-note text-center style="width: 100%;" color="medium">
+                {{ 'Common.AllowTenMessage' | translate }}
+            </ion-note>
+        </ion-item>
+        <ion-item lines="none" *ngIf="isFriend==false&&nonFriendAllowTen==false">
+            <ion-note text-center style="width: 100%;" color="medium">
+                {{ 'Common.NoPermissionMessage' | translate }}
+            </ion-note>
+        </ion-item>
+
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles"
+                loadingText="{{ 'Button.Loading' | translate }}">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </div>
+</ion-content>
