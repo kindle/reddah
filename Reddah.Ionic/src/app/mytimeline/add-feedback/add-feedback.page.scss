@@ -12,6 +12,7 @@
     text-align: center;
     vertical-align:middle;
     margin: 2px;
+
     overflow: hidden;
 }
 
@@ -20,7 +21,6 @@
     position: relative;
     top:50%;
     transform: translateY(-50%);
-    object-fit: cover;
 }
 
 .imgSqure ion-icon {
@@ -49,12 +49,7 @@
     width: 1px;
 }
 
-.ref-container{
-    margin: 0 15px;
-    min-height:40px; 
-    flex:1; 
-    vertical-align: middle;
-    padding:0px;
-    border-radius: 5px;
-    overflow-wrap: break-word;
-}
+.avatar-top {
+    margin: 5px 0px 0 0;
+    margin-bottom: auto;
+ }

@@ -10,8 +10,8 @@
     </ion-item>
     <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="feedbackType!=4">
         <div class="imgSqure" *ngFor="let image of photos;index as i">
-            <img [id]="reddah.makeItId(image.webUrl+'af')" 
-            (load)="reddah.adjustImage($event, image.webUrl+'af')"
+            <img [id]="reddah.makeItId(image.webUrl+'adfb')" 
+            (load)="reddah.adjustImage($event, image.webUrl+'adfb')"
             [defaultImage]="'assets/icon/noimage.jpg'" 
             [lazyLoad]="image.webUrl" 
             [useSrcset]="true"

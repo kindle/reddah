@@ -30,7 +30,7 @@ export class ReportPage implements OnInit {
     @ViewChild('pageTop') pageTop: Content;
         
     loadData(event) {
-        this.getMyTimeline(event);
+        this.getReport(event);
     }
 
     goback(){
@@ -75,15 +75,15 @@ export class ReportPage implements OnInit {
         let request = this.reddah.getReport(this.formData);
 
         this.cacheService.loadFromObservable(cacheKey, request, "ReportPage")
-        .subscribe(timeline => 
+        .subscribe(report => 
         {
-            if(cachedArticles!=JSON.stringify(timeline))
+            if(cachedArticles!=JSON.stringify(report))
             {
                 this.articles = [];
                 this.loadedIds = [];
                 this.commentData = new Map();
 
-                for(let article of timeline){
+                for(let article of report){
                     this.articles.push(article);
                     this.loadedIds.push(article.Id);
                     
@@ -96,29 +96,29 @@ export class ReportPage implements OnInit {
                     this.GetCommentsData(article.Id);
                 }
 
-                this.localStorageService.store("Reddah_report",JSON.stringify(timeline));
+                this.localStorageService.store("Reddah_report",JSON.stringify(report));
                 this.localStorageService.store("Reddah_report_ids",JSON.stringify(this.loadedIds));
 
             }
             else{
-                for(let article of timeline){
+                for(let article of report){
                     this.GetCommentsData(article.Id);
                 }
             }
         });
     }
 
-    getMyTimeline(event):void {
+    getReport(event):void {
         this.formData = new FormData();
         this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
         
         let cacheKey = "this.reddah.getReport" + this.loadedIds.join(',');
-        let request = this.reddah.getMyTimeline(this.formData);
+        let request = this.reddah.getReport(this.formData);
         
         this.cacheService.loadFromObservable(cacheKey, request, "ReportPage")
-        .subscribe(timeline => 
+        .subscribe(report => 
         {
-            for(let article of timeline){
+            for(let article of report){
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
                 
@@ -131,7 +131,7 @@ export class ReportPage implements OnInit {
                 this.GetCommentsData(article.Id);
             }
 
-            this.localStorageService.store("Reddah_report", JSON.stringify(timeline));
+            this.localStorageService.store("Reddah_report", JSON.stringify(report));
             this.localStorageService.store("Reddah_report_ids", JSON.stringify(this.loadedIds));
 
             if(event){
@@ -148,7 +148,7 @@ export class ReportPage implements OnInit {
         this.articles = [];
         this.localStorageService.clear("Reddah_report");
         this.localStorageService.clear("Reddah_report_ids");
-        this.getMyTimeline(event);
+        this.getReport(event);
     }
 
     doRefresh(event) {

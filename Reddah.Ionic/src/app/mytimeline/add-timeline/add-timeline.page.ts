@@ -119,11 +119,13 @@ export class AddTimelinePage implements OnInit {
     ngOnInit() {
         if(this.postType==1)//photo
         {
-            this.takePhoto();
+            //this.takePhoto();
+            this.reddah.takePhoto(this.photos, this.formData);
         }
         else if(this.postType==2)//photo//from lib
         {
-            this.fromLibPhoto();
+            //this.fromLibPhoto();
+            this.reddah.fromLibPhoto(this.photos, this.formData);
         }
         else if(this.postType==3){//video from lib
             this.fromLibVideo();
@@ -200,14 +202,16 @@ export class AddTimelinePage implements OnInit {
         const { data } = await popover.onDidDismiss();
         if(data==1)//photo
         {
-            await this.takePhoto();
+            //await this.takePhoto();
+            await this.reddah.takePhoto(this.photos, this.formData);
         }
         else//from library
         {
-            await this.fromLibPhoto();
+            //await this.fromLibPhoto();
+            await this.reddah.fromLibPhoto(this.photos, this.formData);
         }
     }
-
+/*
     async takePhoto(){
         const options: CameraOptions = {
             quality: 100,
@@ -226,7 +230,7 @@ export class AddTimelinePage implements OnInit {
         });
         
     }
-
+*/
     async fromLibVideo()
     {
         const options: CameraOptions = {
@@ -278,7 +282,7 @@ export class AddTimelinePage implements OnInit {
         });
         
     }
-
+/*
     async fromLibPhoto()
     {
         const options: CameraOptions = {
@@ -346,7 +350,7 @@ export class AddTimelinePage implements OnInit {
             console.error(JSON.stringify(err));
         });
     }
-
+*/
     async viewer(index, imageSrcArray) {
         let newImageSrcArray = [];
         imageSrcArray.forEach((item)=>{

@@ -11,7 +11,7 @@ import { UserProfileModel } from './model/UserProfileModel';
 import { UserModel, QueryCommentModel, NewCommentModel, NewTimelineModel } from './model/UserModel';
 import { Locale } from './model/locale';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file/ngx';
+import { File, FileEntry } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
@@ -20,6 +20,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { TsViewerPage } from './mytimeline/tsviewer/tsviewer.page';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import * as moment from 'moment';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 
 @Injectable({
     providedIn: 'root'
@@ -1752,4 +1754,90 @@ export class ReddahService {
         });
     }
 
+    async takePhoto(photos, formData){
+        const options: CameraOptions = {
+            quality: 100,
+            destinationType: Camera.DestinationType.FILE_URI,
+            encodingType: Camera.EncodingType.JPEG,
+            mediaType: Camera.MediaType.PICTURE,
+            correctOrientation: true
+        }
+          
+        Camera.getPicture(options).then((imageData) => {
+            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
+            photos.push(data);
+            this.addPhotoToFormData(data, formData);
+        }, (err) => {
+            //alert(JSON.stringify(err));
+        });
+        
+    }
+
+    async fromLibPhoto(photos, formData)
+    {
+        const options: CameraOptions = {
+            quality: 100,
+            destinationType: Camera.DestinationType.FILE_URI,
+            encodingType: Camera.EncodingType.JPEG,
+            mediaType: Camera.MediaType.PICTURE,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            correctOrientation: true
+        }
+          
+        Camera.getPicture(options).then((imageData) => {
+            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
+            photos.push(data);
+            this.addPhotoToFormData(data, formData);
+        }, (err) => {
+            //alert(JSON.stringify(err));
+        });
+        
+    }
+
+    addPhotoToFormData(photo, formData){
+        //append org photo form data
+        this.prepareData(photo.fileUrl, photo.fileUrl, formData);
+
+        //append preview photo form data
+        let orgFileName = photo.fileUrl.substring(photo.fileUrl.lastIndexOf('/')+1);
+        let fileExtention = orgFileName.substring(orgFileName.lastIndexOf('.'));
+        //remove ?****
+        let removdQFileExtention = fileExtention.lastIndexOf('?')==-1 ? 
+            fileExtention : fileExtention.replace(fileExtention.substring(fileExtention.lastIndexOf('?')),"");
+        
+        let previewFileName = orgFileName.replace(fileExtention,"") + "_reddah_preview" + removdQFileExtention;
+        //alert(photo.fileUrl+"_"+previewFileName);
+        let options = {
+            uri: photo.fileUrl,
+            folderName: 'reddah',
+            fileName: previewFileName,
+            quality: 20,
+            width: 800,
+            height: 800
+        } as ImageResizerOptions;
+        ImageResizer
+            .resize(options)
+            .then((filePath: string) => this.prepareData(filePath, photo.fileUrl+"_reddah_preview", formData))
+            .catch(e => alert(e));
+    }
+
+    prepareData(filePath, formKey, formData) {
+        this.file.resolveLocalFilesystemUrl(filePath)
+        .then(entry => {
+            ( <FileEntry> entry).file(file => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    //org image data
+                    const imgBlob = new Blob([reader.result], {
+                        type: file.type
+                    });
+                    formData.append(formKey, imgBlob, file.name);
+                };
+                reader.readAsArrayBuffer(file);
+            })
+        })
+        .catch(err => {
+            console.error(JSON.stringify(err));
+        });
+    }
 }

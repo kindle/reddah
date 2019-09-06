@@ -29,7 +29,7 @@ export class AddFeedbackPage implements OnInit {
 
     constructor(
         private popoverController: PopoverController,
-        private reddahService: ReddahService,
+        private reddah: ReddahService,
         private navController: NavController,
         private file: File,
         private loadingController: LoadingController,
@@ -48,7 +48,7 @@ export class AddFeedbackPage implements OnInit {
 
         this.dragulaService.dragend('bag')
         .subscribe(({ name, el }) => {
-            this.reddahService.removeClass(el, "ex-over");
+            this.reddah.removeClass(el, "ex-over");
             this.dragToDel = false;
             this.dragging = false;
         });
@@ -83,18 +83,18 @@ export class AddFeedbackPage implements OnInit {
         .subscribe(({ el, container }) => {
             if(container.id=="delete-photo"){
                 this.dragToDel = true;
-                this.reddahService.addClass(el, "ex-over");
+                this.reddah.addClass(el, "ex-over");
             }
             else{
                 this.dragToDel = false;
-                this.reddahService.removeClass(el, "ex-over");
+                this.reddah.removeClass(el, "ex-over");
             }
         });
 
         this.dragulaService.out('bag')
         .subscribe(({ el, container }) => {
             this.dragToDel = false;
-            this.reddahService.removeClass(el, "ex-over");
+            this.reddah.removeClass(el, "ex-over");
         });
     }
 
@@ -149,7 +149,7 @@ export class AddFeedbackPage implements OnInit {
         this.formData.append('feedbackType', JSON.stringify(this.feedbackType));
         if(this.feedbackType==4)//share
         {
-            this.formData.append("abstract", this.reddahService.htmlDecode(this.article.Title));
+            this.formData.append("abstract", this.reddah.htmlDecode(this.article.Title));
             this.formData.append("content", this.article.ImageUrl);
             this.formData.append("ref", JSON.stringify(this.article.Id));
         }
@@ -160,7 +160,7 @@ export class AddFeedbackPage implements OnInit {
         //send the key in UI display order
         this.formData.append('order', this.photos.map(e=>e.fileUrl).join(","));        
 
-        this.reddahService.addTimeline(this.formData)
+        this.reddah.addTimeline(this.formData)
         .subscribe(result => 
             {
                 loading.dismiss();
@@ -192,98 +192,12 @@ export class AddFeedbackPage implements OnInit {
         const { data } = await popover.onDidDismiss();
         if(data==1)//photo
         {
-            await this.takePhoto();
+            await this.reddah.takePhoto(this.photos, this.formData);
         }
         else//from library
         {
-            await this.fromLib();
+            await this.reddah.fromLibPhoto(this.photos, this.formData);
         }
-    }
-
-    async takePhoto(){
-        const options: CameraOptions = {
-            quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
-            encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE,
-            correctOrientation: true
-        }
-          
-        Camera.getPicture(options).then((imageData) => {
-            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
-            this.photos.push(data);
-            this.addPhotoToFormData(data);
-        }, (err) => {
-            //console.log(JSON.stringify(err));
-        });
-        
-    }
-
-    async fromLib()
-    {
-        const options: CameraOptions = {
-            quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
-            encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE,
-            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-            correctOrientation: true
-        }
-          
-        Camera.getPicture(options).then((imageData) => {
-            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
-            this.photos.push(data);
-            this.addPhotoToFormData(data);
-        }, (err) => {
-            //console.log(JSON.stringify(err));
-            alert(JSON.stringify(err));
-        });
-        
-    }
-
-    addPhotoToFormData(photo){
-        //append org photo form data
-        this.prepareData(photo.fileUrl, photo.fileUrl);
-
-        //append preview photo form data
-        let orgFileName = photo.fileUrl.substring(photo.fileUrl.lastIndexOf('/')+1);
-        let fileExtention = orgFileName.substring(orgFileName.lastIndexOf('.'));
-        //remove ?****
-        let removdQFileExtention = fileExtention.replace(fileExtention.substring(fileExtention.lastIndexOf('?')),"");
-        let previewFileName = orgFileName.replace(fileExtention,"") + "_reddah_preview" + removdQFileExtention;
-        //alert(photo.fileUrl+"_"+previewFileName);
-        let options = {
-            uri: photo.fileUrl,
-            folderName: 'reddah',
-            fileName: previewFileName,
-            quality: 20,
-            width: 800,
-            height: 800
-        } as ImageResizerOptions;
-        ImageResizer
-            .resize(options)
-            .then((filePath: string) => this.prepareData(filePath, photo.fileUrl+"_reddah_preview"))
-            .catch(e => alert(e));
-    }
-
-    prepareData(filePath, formKey) {
-        this.file.resolveLocalFilesystemUrl(filePath)
-        .then(entry => {
-            ( <FileEntry> entry).file(file => {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    //org image data
-                    const imgBlob = new Blob([reader.result], {
-                        type: file.type
-                    });
-                    this.formData.append(formKey, imgBlob, file.name);
-                };
-                reader.readAsArrayBuffer(file);
-            })
-        })
-        .catch(err => {
-            console.error(JSON.stringify(err));
-        });
     }
 
     async viewer(index, imageSrcArray) {
