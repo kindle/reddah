@@ -540,6 +540,7 @@ namespace Reddah.Web.Login.Controllers
                     userInfo.Sex = user.Sex??0;
                     userInfo.Photo = user.Photo;
                     userInfo.Location = user.Location;
+                    userInfo.Admins = user.Admins;
                     userInfo.Signature = user.Signature;
                     userInfo.Cover = user.Cover;
                     userInfo.Type = user.Type;
