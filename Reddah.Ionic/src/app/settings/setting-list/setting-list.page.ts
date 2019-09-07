@@ -9,7 +9,7 @@ import { SettingAccountPage } from '../setting-account/setting-account.page';
 import { SettingGePage } from '../setting-ge/setting-ge.page';
 import { SettingPrivacyPage } from '../setting-privacy/setting-privacy.page';
 import { TranslateService } from '@ngx-translate/core';
-import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
+import { MyReportPage } from '../../mytimeline/myreport/myreport.page';
 
 @Component({
     selector: 'app-setting-list',
@@ -97,9 +97,9 @@ export class SettingListPage implements OnInit {
         await modal.present();
     }
 
-    async feedback() {
+    async goMyReport() {
         const modal = await this.modalController.create({
-            component: AddFeedbackPage,
+            component: MyReportPage,
         });
           
         await modal.present();

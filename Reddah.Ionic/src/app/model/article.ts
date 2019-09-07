@@ -18,4 +18,5 @@ export class Article {
     Ref: number;
     LastUpdateOn : string;
     Read: boolean;
+    Admins: string;
 }

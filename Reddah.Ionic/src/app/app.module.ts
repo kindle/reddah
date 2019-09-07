@@ -79,6 +79,7 @@ import { CommentTimelineComponent } from './mytimeline/commentts/comment.compone
 import { TimeLinePage } from './mytimeline/timeline/timeline.page';
 import { MaterialPage } from './mytimeline/material/material.page';
 import { ReportPage } from './mytimeline/report/report.page';
+import { MyReportPage } from './mytimeline/myreport/myreport.page';
 import { MyTimeLinePage } from './mytimeline/mytimeline.page';
 import { MessageListPage } from './tabs/message/message.page';
 import { UserPage } from './common/user/user.page';
@@ -187,7 +188,7 @@ var firebaseConfig = {
         SurfacePage,
         CommentComponent,
         CommentTimelineComponent,
-        TimeLinePage,MaterialPage,ReportPage,
+        TimeLinePage,MaterialPage,ReportPage,MyReportPage,
         MyTimeLinePage,MessageListPage,
         UserPage,
         ArticlePopPage,
@@ -254,7 +255,7 @@ var firebaseConfig = {
         ScanPage,
         SigninPage, ForgotPage,
         UserPage, MessageListPage,
-        TimeLinePage,MaterialPage,ReportPage,
+        TimeLinePage,MaterialPage,ReportPage,MyReportPage,
         TsViewerPage,
         AddTimelinePage,
         AddFeedbackPage,AddMaterialPage,

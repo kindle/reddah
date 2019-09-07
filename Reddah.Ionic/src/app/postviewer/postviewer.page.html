@@ -9,8 +9,13 @@
             <ion-text color="primary" (click)="goUser(article.UserName)">
                 <span class="user-name" [innerHTML]="reddah.getDisplayName(article.UserName) | safe: 'html'"></span>
             </ion-text>
+            
+            <ion-icon *ngIf="!asNormalUser" slot="end" (click)="likeComment(comment)" name="trash" color="danger" size="small"></ion-icon>
+            <ion-icon *ngIf="!asNormalUser" slot="end" (click)="likeComment(comment)" name="eye-off" color="medium" size="small"></ion-icon>
+            
             <ion-text style="margin-left:5px;" color="dark" margin-end>{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-text>     
         </ion-item>
+        {{test}}
         <div class="listInfo">
             <span *ngFor="let group of article.GroupName.split(',')" (click)="goSearch(group)" style="padding-right:5px;">
                 <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;margin-bottom:2px;">{{group}}</u>
@@ -20,9 +25,15 @@
             <div id="articleContent" (click)="viewer($event)" [innerHTML]="reddah.htmlDecode(article.Content) | safe: 'html'"></div>
         </ion-text>
     </div>
-    <app-comment *ngIf="!preview" #commentlist count="{{article.Count}}" no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" (commentClick)="childCommentClick($event)" 
+    <app-comment [(normal)]="asNormalUser" *ngIf="!preview" #commentlist count="{{article.Count}}" no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" (commentClick)="childCommentClick($event)" 
         [articleauthor]="article.UserName"></app-comment>
 </ion-content>
 <app-comment-box *ngIf="!preview" #commentbox count="{{article.Count}}" bookmark={{article.Down}} selectedArticleId="{{article.Id}}" selectedCommentId="-1"
     (reloadComments)="childReloadComments($event)"></app-comment-box>
+<ion-fab vertical="center" horizontal="end" slot="fixed" *ngIf="isAdmin()">
+    <ion-fab-button (click)="switchToAdmin()">
+        <ion-icon name="hammer" *ngIf="asNormalUser"></ion-icon>
+        <ion-icon name="arrow-back" *ngIf="!asNormalUser"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
     

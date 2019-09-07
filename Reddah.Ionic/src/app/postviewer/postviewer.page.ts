@@ -38,7 +38,11 @@ export class PostviewerPage implements OnInit {
 
     commentsData: any;
 
-    ngOnInit() {}
+    test;
+    ngOnInit() {
+        this.reddah.getUserPhotos(this.article.UserName);
+        this.test = this.reddah.getCurrentJwt();
+    }
 
     ionViewDidEnter(){
         if(!this.preview)
@@ -187,6 +191,16 @@ export class PostviewerPage implements OnInit {
         });
           
         await userModal.present();
+    }
+
+    asNormalUser = true;
+    async switchToAdmin(){
+        this.asNormalUser = !this.asNormalUser;
+    }
+
+    isAdmin(){
+        let admins = this.reddah.appData("useradmins_"+this.article.UserName).split(',');
+        return admins.includes(this.userName)
     }
 
 }

@@ -76,6 +76,12 @@ export class SettingGePage implements OnInit {
 
     async clearCache(){
         this.cacheService.clearAll();
+        //clear article block _options
+        this.localStorageService.store("reddah_articles", JSON.stringify([]));
+        this.localStorageService.store("reddah_article_ids", JSON.stringify([]));
+        this.localStorageService.store("reddah_article_groups", JSON.stringify([]));
+        this.localStorageService.store("reddah_article_usernames", JSON.stringify([]));
+        this.cacheService.clearGroup("HomePage");
         //this.localStorageService.clear(); //this will force logout
         this.reddah.toast(this.translate.instant("Common.CacheClear"));
     }

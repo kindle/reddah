@@ -7,6 +7,7 @@ import { ReddahService } from '../../../reddah.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CategoryPage } from '../category/category.page';
 import { ManagePage } from '../manage/manage.page';
+import { ReportPage } from '../../../mytimeline/report/report.page';
 
 @Component({
     selector: 'app-platform',
@@ -54,5 +55,13 @@ export class PlatformPage implements OnInit {
         await modal.present();
     }
 
-
+    async goReport(){
+        const modal = await this.modalController.create({
+            component: ReportPage,
+            componentProps: { 
+            }
+        });
+          
+        await modal.present();
+    }
 }

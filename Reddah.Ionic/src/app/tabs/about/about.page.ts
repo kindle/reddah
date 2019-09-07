@@ -115,13 +115,7 @@ export class AboutPage implements OnInit {
         await modal.present();
     }
 
-    async goReport(){
-        const modal = await this.modalController.create({
-            component: ReportPage,
-            componentProps: { 
-            }
-        });
-          
-        await modal.present();
+    async goCredit(){
+        
     }
 }

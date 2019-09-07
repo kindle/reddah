@@ -24,6 +24,7 @@ export class CommentReplyPage implements OnInit {
 
     @Input() comments: any;
     @Input() comment: any;
+    @Input() normal;
 
     @Output() commentClick = new EventEmitter();
 

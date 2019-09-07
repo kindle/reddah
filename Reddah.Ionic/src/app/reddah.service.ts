@@ -198,6 +198,18 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private getMyReportUrl = 'https://login.reddah.com/api/admin/getmyreport'; 
+
+    getMyReport(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getMyReportUrl, formData)
+        .pipe(
+            tap(data => this.log('get my report')),
+            catchError(this.handleError('get my report', []))
+        );
+    }
+    //******************************** */
     private getUserInfoUrl = 'https://login.reddah.com/api/article/getuser'; 
 
     getUserInfo(formData: FormData): Observable<any> {
@@ -1229,6 +1241,8 @@ export class ReddahService {
                     this.toTextCache(locationTitle, `userlocation_${userName}`);
                     this.toTextCache(userInfo.Location, `userlocationjson_${userName}`);
                 }
+                if(userInfo.Admins!=null)
+                    this.toTextCache(userInfo.Admins, `useradmins_${userName}`);
                 if(userInfo.Signature!=null)
                     this.toTextCache(userInfo.Signature, `usersignature_${userName}`);
                 if(userInfo.Email!=null)

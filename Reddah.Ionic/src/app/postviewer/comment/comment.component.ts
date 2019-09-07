@@ -22,9 +22,9 @@ export class CommentComponent implements OnInit {
     @Input() authoronly: boolean;
     @Input() articleauthor;
     @Input() count: number;
-
+    @Input() normal;
     @Output() commentClick = new EventEmitter();
-
+    
     //totalCommentCount: number;
 
     userName;
@@ -112,6 +112,7 @@ export class CommentComponent implements OnInit {
             componentProps: { 
                 comments: comments,
                 comment: comment,
+                normal: this.normal
             }
         });
         
