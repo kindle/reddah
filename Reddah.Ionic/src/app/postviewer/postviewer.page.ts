@@ -13,6 +13,7 @@ import { PubPage } from '../tabs/publisher/pub/pub.page';
 import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
 import { ShareChooseChatPage } from '../chat/share-choose-chat/share-choose-chat.page';
 import { TranslateService } from '@ngx-translate/core';
+import { SettingFontPage } from '../settings/setting-font/setting-font.page';
 
 @Component({
     selector: 'app-postviewer',
@@ -78,6 +79,13 @@ export class PostviewerPage implements OnInit {
         else if(data==4){//report abuse
             //use share function
             this.feedback();
+        }
+        else if(data==5){//change font size
+            const modal = await this.modalController.create({
+                component: SettingFontPage,
+            });
+            
+            await modal.present();
         }
     }
 

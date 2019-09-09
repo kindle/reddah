@@ -22,6 +22,10 @@ import { CacheService } from 'ionic-cache';
                 <ion-icon slot="start" color="medium" name="alert"></ion-icon>  
                 <ion-label>{{ 'Pop.Report' | translate }}</ion-label>
             </ion-item>
+            <ion-item button (click)="back(5)">
+                <ion-icon slot="start" color="dark" name="ios-appstore"></ion-icon>  
+                <ion-label>{{ 'Common.Font' | translate }}</ion-label>
+            </ion-item>
         </div>
     `
 })

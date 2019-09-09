@@ -2,20 +2,20 @@
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-label>{{ 'About.Account' | translate }}</ion-label>
 </ion-item>
-<ion-content #pageTop no-padding style="background-color: white;">
-    <div>
-        <ion-item (click)="changePhoto()" class="borderTop borderItem">
-            <ion-label class="title">{{ 'About.Photo' | translate }}</ion-label>
-            <ion-thumbnail slot="end" style="padding:10px;margin-right:-10px;">
-                <img src="{{reddah.appDataPub('userphoto_'+targetSub.UserName)}}" class="portrait">
-            </ion-thumbnail>
-            <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item lines="none" (click)="changeNickName()">
-            <ion-label class="title">{{ 'Input.Name' | translate }}</ion-label>
-            <ion-note color="dark" slot="end">{{reddah.appData('usernickname_'+targetSub.UserName)}}</ion-note>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
+<ion-content #pageTop no-padding style="--background:#eeeeee;background-color:#eeeeee;">
+    
+    <ion-item (click)="changePhoto()" class="borderTop borderItem">
+        <ion-label class="title">{{ 'About.Photo' | translate }}</ion-label>
+        <ion-thumbnail slot="end" style="padding:10px;margin-right:-10px;">
+            <img src="{{reddah.appDataPub('userphoto_'+targetSub.UserName)}}" class="portrait">
+        </ion-thumbnail>
+        <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" (click)="changeNickName()">
+        <ion-label class="title">{{ 'Input.Name' | translate }}</ion-label>
+        <ion-note color="dark" slot="end">{{reddah.appData('usernickname_'+targetSub.UserName)}}</ion-note>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
         <!--
         <ion-item>
             <ion-label class="title">Reddah ID</ion-label>
@@ -27,19 +27,20 @@
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
         -->
-    </div>
+    
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <ion-item lines="none" class="borderTop borderItem" (click)="changeSignature()">
+        <ion-label class="title">{{ 'Input.Description' | translate }}</ion-label>
+    </ion-item>
+    <ion-item lines="none" class="borderItem borderBottom">
+        <ion-note slot="start" color="dark" text-wrap>{{reddah.appData('usersignature_'+targetSub.UserName)}}</ion-note>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
 
-    <div class="gap">
-        <ion-item lines="none" class="borderTop borderItem" (click)="changeSignature()">
-            <ion-label class="title">{{ 'Input.Description' | translate }}</ion-label>
-        </ion-item>
-        <ion-item lines="none" class="borderItem borderBottom">
-            <ion-note slot="start" color="dark" text-wrap>{{reddah.appData('usersignature_'+targetSub.UserName)}}</ion-note>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-        </ion-item>
-    </div>
-
-    <div class="gap" *ngIf="targetSub.Type==1">
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <div *ngIf="targetSub.Type==1">
         <ion-item lines="none" (click)="addArticle()" class="borderTop borderBottom">
             <ion-icon slot="start" name="add" color="subscribe" size="medium"></ion-icon>
             <ion-label>{{ 'Common.Draft' | translate }}</ion-label>
@@ -47,7 +48,9 @@
         </ion-item>
     </div>
 
-    <div class="gap lastGap" *ngIf="targetSub.Type==1">
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <div *ngIf="targetSub.Type==1">
         <div style="display: flex; justify-content: center;"><ion-spinner name="dots" 
             *ngIf="showLoading"></ion-spinner></div>
         <ion-item *ngFor="let article of articles;index as i" lines="none" (click)="editArticle(article)" class="borderTop borderItem borderBottom">
@@ -58,8 +61,9 @@
         </ion-item>
     </div>
 
-
-    <div class="gap" *ngIf="isCordova&&targetSub.Type==3">
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <div *ngIf="isCordova&&targetSub.Type==3">
         <ion-item lines="none" class="borderTop borderItem borderBottom">
             <ion-icon slot="start" name="megaphone" color="medium" size="medium"></ion-icon>
             <ion-label color="medium">{{ 'Common.FeatureNotOpen' | translate }}</ion-label>
@@ -67,7 +71,9 @@
         </ion-item>
     </div>
     
-    <div class="gap lastGap" *ngIf="!isCordova&&targetSub.Type==3">
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <div *ngIf="!isCordova&&targetSub.Type==3">
         <ion-item lines="none" (click)="addMini()" class="borderTop borderBottom" *ngIf="!showLoading&&articles&&articles.length==0">
             <ion-icon slot="start" name="add" color="mini" size="medium"></ion-icon>
             <ion-label>{{ 'Common.Draft' | translate }}</ion-label>

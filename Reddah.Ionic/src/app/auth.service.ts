@@ -5,6 +5,7 @@ import { RegisterPage } from './surface/register/register.page';
 import { SurfacePage } from './surface/surface.page';
 import { ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
+import { CacheService } from 'ionic-cache';
 
 @Injectable()
 export class AuthService {
@@ -13,6 +14,7 @@ export class AuthService {
         private modalController: ModalController,
         private reddahService: ReddahService,
         private localStorageService: LocalStorageService,
+        private cacheService: CacheService,
     ){}
 
     authenticated(): boolean {
@@ -77,11 +79,15 @@ export class AuthService {
 
         this.localStorageService.clear("Reddah_GroupedContacts");
         this.localStorageService.clear("Reddah_Contacts");
+        this.cacheService.clearGroup("ContactPage");
         this.localStorageService.clear("Reddah_GroupedContacts_Pub");
         this.localStorageService.clear("Reddah_Contacts_pub");
+        this.cacheService.clearGroup("PubPage");
 
         this.localStorageService.clear("Reddah_mytimeline");
         this.localStorageService.clear("Reddah_mytimeline_ids");
+
+
 
         this.localStorageService.clear("Reddah_Local_Messages");
         
