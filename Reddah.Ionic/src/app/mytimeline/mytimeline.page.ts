@@ -482,7 +482,7 @@ export class MyTimeLinePage implements OnInit {
                     //serivce delete
                     let formData = new FormData();
                     formData.append("Id",JSON.stringify(article.Id));
-                    this.reddah.deleteMyTimeline(formData).subscribe(data=>{
+                    this.reddah.deleteArticle(formData).subscribe(data=>{
                         
                     });
                 }

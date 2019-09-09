@@ -109,7 +109,7 @@ export class AuthService {
             , user= body.aud
         ;
 
-        if(!this.isExpired(exp)){
+        if(!this.reddahService.isExpired(exp)){
             this.reddahService.setCurrentUser(user);
             return true;
         }
@@ -119,9 +119,5 @@ export class AuthService {
         }
     }
 
-    isExpired(exp:number): boolean {
-        if(!exp) return true;
-        let now = Date.now();
-        return now >= exp*1000;
-    }
+    
 }

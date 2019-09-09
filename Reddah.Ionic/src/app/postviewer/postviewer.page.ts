@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController, PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController, AlertController } from '@ionic/angular';
 import { Article } from '../model/article';
 import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 import { Location } from '@angular/common';
@@ -32,16 +32,15 @@ export class PostviewerPage implements OnInit {
         private popoverController: PopoverController,
         private cacheService: CacheService,
         private translate: TranslateService,
+        private alertController: AlertController,
     ) { 
         this.userName = this.reddah.getCurrentUser();
     }
 
     commentsData: any;
 
-    test;
     ngOnInit() {
         this.reddah.getUserPhotos(this.article.UserName);
-        this.test = this.reddah.getCurrentJwt();
     }
 
     ionViewDidEnter(){
@@ -125,6 +124,8 @@ export class PostviewerPage implements OnInit {
         {
             this.commentsData = data;
             this.commentlist.init(data.Comments);
+            //this.commentlist.data = data.Comments;
+            //this.commentlist.init();
         });
     }
 
@@ -156,7 +157,7 @@ export class PostviewerPage implements OnInit {
         this.commentbox.addNewComment(this.article.Id, $event.commentId);
     }
 
-    childReloadComments($event){
+    childReloadComments(event){
         this.loadComments();
     }
 
@@ -199,8 +200,44 @@ export class PostviewerPage implements OnInit {
     }
 
     isAdmin(){
+        //pub admins
         let admins = this.reddah.appData("useradmins_"+this.article.UserName).split(',');
-        return admins.includes(this.userName)
+        // system admin
+        let superAdmin = this.reddah.checkPermission("2");//2: delete post permission
+        return admins.includes(this.userName)||superAdmin;
+    }
+
+    async delete(){
+            const alert = await this.alertController.create({
+              header: this.translate.instant("Confirm.Title"),
+              message: this.translate.instant("Confirm.DeleteMessage"),
+              buttons: [
+                {
+                    text: this.translate.instant("Confirm.Cancel"),
+                    cssClass: 'secondary',
+                    handler: _ => {}
+                }, 
+                {
+                    text: this.translate.instant("Comment.Delete"),
+                    handler: () => {
+                        let formData = new FormData();
+                        formData.append("Id", JSON.stringify(this.article.Id));
+                        this.reddah.deleteArticle(formData).subscribe(result=>{
+                            if(result.Success==0){
+                                
+                            }
+                            else{
+                                let msg = this.translate.instant(`Service.${result.Success}`);
+                                this.reddah.toast(msg, "danger");
+                            }
+                        });
+                    }
+                }
+            ]
+        });
+    
+        await alert.present();
+        
     }
 
 }

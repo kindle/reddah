@@ -258,7 +258,9 @@
         "1007":"E -mail não está registrado",
         "1008":"Reiniciar senha falhou, por favor verifique se o item de segurança está correto",
         "1009":"Senha Antiga está errada",
-        "1010":"Por favor, selecione um material"
+        "1010":"Por favor, selecione um material",
+        "1011":"Sem permissão para apagar o artigo",
+        "1012":"Sem permissão para apagar comentários"
     }
 
 }

@@ -258,7 +258,9 @@
         "1007":"E -Mail ist nicht registriert",
         "1008":"Passwort zurücksetzen fehlgeschlagen, überprüfen Sie bitte, ob Sicherheitstoken korrekt ist",
         "1009":"Das alte Passwort ist falsch",
-        "1010":"Bitte wählen Sie ein Material"
+        "1010":"Bitte wählen Sie ein Material",
+        "1011":"Keine Berechtigung, Artikel zu löschen",
+        "1012":"Keine Berechtigung, Kommentar zu löschen"
     }
 
 }

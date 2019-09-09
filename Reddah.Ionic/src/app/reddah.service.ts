@@ -490,10 +490,16 @@ export class ReddahService {
         return this.service(formData, this.deleteBookmarkUrl, "delete bookmark");
     }
     //******************************** */
-    private deleteMyTimelinekUrl = 'https://login.reddah.com/api/article/deletemytimeline'; 
+    private deleteArticleUrl = 'https://login.reddah.com/api/article/deletearticle'; 
 
-    deleteMyTimeline(formData: FormData): Observable<any> {
-        return this.service(formData, this.deleteMyTimelinekUrl, "delete my timeline");
+    deleteArticle(formData: FormData): Observable<any> {
+        return this.service(formData, this.deleteArticleUrl, "delete article");
+    }
+    //******************************** */
+    private deleteCommentUrl = 'https://login.reddah.com/api/article/deletecomment'; 
+
+    deleteComment(formData: FormData): Observable<any> {
+        return this.service(formData, this.deleteCommentUrl, "delete comment");
     }
     //******************************** */
     private addPubArticleUrl = 'https://login.reddah.com/api/pub/addpubarticle'; 
@@ -1853,5 +1859,42 @@ export class ReddahService {
         .catch(err => {
             console.error(JSON.stringify(err));
         });
+    }
+
+    checkPermission(permissionId){
+        let jwt  = this.getCurrentJwt();
+        let parts = jwt.split('.');
+        let bodyEnc = parts[1];
+        if(!bodyEnc){
+            return false;
+        }
+        let bodyStr = atob(bodyEnc)
+            , body;
+
+        try{
+            body = JSON.parse(bodyStr);
+        }
+        catch(e){
+            body = {};
+        }
+
+        let exp = body.exp
+            , user= body.aud
+        ;
+
+        if(this.isExpired(exp)){
+            return false;
+        }
+        //console.log(body)
+        if(body[permissionId]!=null)
+            return true;
+        return false;
+        
+    }
+
+    isExpired(exp:number): boolean {
+        if(!exp) return true;
+        let now = Date.now();
+        return now >= exp*1000;
     }
 }

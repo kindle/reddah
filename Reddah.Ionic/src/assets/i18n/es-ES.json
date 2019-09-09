@@ -258,7 +258,9 @@
         "1007":"Correo electrónico no registrado",
         "1008":"La contraseña de sustitución falló.Compruebe si la orden de Seguridad es correcta",
         "1009":"Código antiguo",
-        "1010":"Por favor seleccione un material"
+        "1010":"Por favor seleccione un material",
+        "1011":"No se puede borrar un artículo",
+        "1012":"Sin poder borrar comentarios"
     }
 
 }

@@ -1,13 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
-import { InfiniteScroll } from '@ionic/angular';
+import { Component, OnInit, Output, EventEmitter, Input, NgZone } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController, ActionSheetController  } from '@ionic/angular';
+import { LoadingController, NavController, ActionSheetController, AlertController  } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { CacheService } from "ionic-cache";
-import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserPage } from '../../common/user/user.page';
 
 @Component({
@@ -16,10 +13,10 @@ import { UserPage } from '../../common/user/user.page';
     styleUrls: ['comment-reply.page.scss']
 })
 export class CommentReplyPage implements OnInit {
-    flagAddComment=false;
+    UpdateComment=false;
 
     async close(){
-        await this.modalController.dismiss(this.flagAddComment);
+        await this.modalController.dismiss(this.UpdateComment);
     }
 
     @Input() comments: any;
@@ -31,17 +28,14 @@ export class CommentReplyPage implements OnInit {
     userName;
     constructor(public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
+        public translate: TranslateService,
         public navController: NavController,
-        private renderer: Renderer,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
-        private popoverController: PopoverController,
-        private photoLibrary: PhotoLibrary,
+        private alertController: AlertController,
         private cacheService: CacheService,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
         public actionSheetController: ActionSheetController,
+        private zone: NgZone,
         ){
         this.userName = this.reddah.getCurrentUser();
     }
@@ -133,7 +127,7 @@ export class CommentReplyPage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request)
         .subscribe(data => 
         {
-            this.flagAddComment = true;
+            this.UpdateComment = true;
             this.comments = data.Comments;
             this.comments.sort((a,b)=> b.Id-a.Id);
             this.allRepliesCount = this.GetCommentCount(this.comments, this.comment.Id);
@@ -160,5 +154,51 @@ export class CommentReplyPage implements OnInit {
             this.localStorageService.store(`Reddah_CommentLike_${this.userName}_${reply.Id}`, "");
         else
             this.localStorageService.clear(`Reddah_CommentLike_${this.userName}_${reply.Id}`);
+    }
+
+    canDelete(comment){
+        let isMyComment = comment.UserName == this.userName;
+        return !this.normal || isMyComment;
+    }
+
+    async delete(comment){
+            const alertCtl = await this.alertController.create({
+              header: this.translate.instant("Confirm.Title"),
+              message: this.translate.instant("Confirm.DeleteMessage"),
+              buttons: [
+                {
+                    text: this.translate.instant("Confirm.Cancel"),
+                    cssClass: 'secondary',
+                    handler: _ => {}
+                }, 
+                {
+                    text: this.translate.instant("Comment.Delete"),
+                    handler: () => {
+                        let formData = new FormData();
+                        formData.append("Id", JSON.stringify(comment.Id));
+                        this.reddah.deleteComment(formData).subscribe(result=>{
+                            if(result.Success==0){
+                                let cacheKey = "this.reddah.getComments" + comment.ArticleId;
+                                this.cacheService.removeItem(cacheKey);
+                                this.cacheService.clearGroup(cacheKey);
+                                
+                                this.UpdateComment = true;
+                                this.zone.run(()=>{
+                                    this.comments = this.comments.filter(c => c.Id != comment.Id);
+                                })
+                            }
+                            else{
+                                let msg = this.translate.instant(`Service.${result.Success}`);
+                                this.reddah.toast(msg, "danger")
+                            }
+                                
+                        });
+                    }
+                }
+            ]
+        });
+    
+        await alertCtl.present();
+        
     }
 }

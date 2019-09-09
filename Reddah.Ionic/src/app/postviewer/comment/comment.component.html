@@ -24,10 +24,11 @@
                 <ion-label text-wrap>
                     <div style="display: flex;justify-content:space-between;">
                         <span class="user-name" (click)="goUser(comment.UserName)">{{reddah.getDisplayName(comment.UserName)}}</span>
-                        <div *ngIf="!normal">
-                            <ion-icon (click)="likeComment(comment)" name="trash" color="danger" size="small"></ion-icon>
-                            <ion-icon (click)="likeComment(comment)" name="eye-off" color="medium" size="small"></ion-icon>
-                        </div>
+                        
+                        <ion-note *ngIf="canDelete(comment)" color="danger" slot="end" (click)="delete(comment)">
+                            [{{'Comment.Delete' | translate }}]
+                        </ion-note>
+
                         <div *ngIf="normal" style="display: flex;">
                             <ion-icon (click)="likeComment(comment)" name="thumbs-up" [color]="comment.like?'primary':'medium'" size="small"></ion-icon>
                             <span (click)="likeComment(comment)" style="color: gray;margin-left:2px;vertical-align: top;" *ngIf="comment.Up>0">{{comment.Up}}</span>

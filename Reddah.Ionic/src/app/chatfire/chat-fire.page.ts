@@ -369,12 +369,13 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
 
     async option(){
         if(this.source){
-            const modal = await this.modalController.create({
+            /*const modal = await this.modalController.create({
                 component: PubPage,
                 componentProps: { userName: this.target }
             });
               
-            await modal.present();
+            await modal.present();*/
+            this.close();
         }
         else
         {

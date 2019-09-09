@@ -258,7 +258,9 @@
         "1007":"E -mail is niet geregistreerd",
         "1008":"Wachtwoord terugzetten is mislukt, controleer of het beveiligingsteken correct is",
         "1009":"Oud wachtwoord is verkeerd",
-        "1010":"Selecteer een materiaal"
+        "1010":"Selecteer een materiaal",
+        "1011":"Geen toestemming om artikel te verwijderen",
+        "1012":"Geen toestemming om commentaar te verwijderen"
     }
 
 }

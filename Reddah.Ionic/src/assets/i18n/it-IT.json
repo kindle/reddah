@@ -258,7 +258,9 @@
         "1007":"La posta elettronica non è registrata",
         "1008":"Azzera la password non riuscita, controlla se il segno di sicurezza è corretto",
         "1009":"Vecchia password è sbagliata",
-        "1010":"Selezionare un materiale"
+        "1010":"Selezionare un materiale",
+        "1011":"Nessun permesso per eliminare l 'articolo",
+        "1012":"Nessun permesso per eliminare il commento"
     }
 
 }

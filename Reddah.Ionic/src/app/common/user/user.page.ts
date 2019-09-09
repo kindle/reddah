@@ -130,7 +130,7 @@ export class UserPage implements OnInit {
                     text: this.translate.instant("Comment.Delete"),
                     icon: 'ios-trash',
                     handler: () => {
-                        this.delCinfirm();                  
+                        this.delConfirm();                  
                     }
                 }]:[]
             )
@@ -138,7 +138,7 @@ export class UserPage implements OnInit {
         await actionSheet.present();
     }
 
-    async delCinfirm(){
+    async delConfirm(){
         const alert = await this.alertController.create({
           header: this.translate.instant("Confirm.Title"),
           message: this.translate.instant("Confirm.DeleteMessage"),

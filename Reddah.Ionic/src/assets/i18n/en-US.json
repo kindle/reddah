@@ -262,7 +262,9 @@
         "1007":"Email is not registered",
         "1008":"Reset password failed, please check if security token is correct",
         "1009":"Old password is wrong",
-        "1010":"Please select a material"
+        "1010":"Please select a material",
+        "1011":"No permission to delete article",
+        "1012":"No permission to delete comment"
     }
 
 }
