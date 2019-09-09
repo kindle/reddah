@@ -128,9 +128,10 @@ namespace Reddah.Web.Login.Controllers
                     var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
                     var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
-                    var claims = new List<Claim>();
-                    claims.Add(new Claim("100", "view"));
-                    claims.Add(new Claim("101", "post"));
+                    var claims = GetPermissionClaims(user.UserName);
+                        //= new List<Claim>();
+                    //claims.Add(new Claim("100", "view"));
+                    //claims.Add(new Claim("101", "post"));
 
                     var tokeOptions = new JwtSecurityToken(
                         issuer: "https://login.reddah.com",
@@ -170,7 +171,27 @@ namespace Reddah.Web.Login.Controllers
                 return Ok(new ApiResult(4, e.Message.ToString()));
             }
         }
-       
+
+        private List<Claim> GetPermissionClaims(string userName)
+        {
+            var list = new List<Claim>();
+            using (var db = new reddahEntities())
+            {
+                var user = db.UserProfile.FirstOrDefault(u => u.UserName == userName);
+                if (user!=null)
+                {
+                    var query = (from ur in db.webpages_UsersInRoles
+                                 join pr in db.webpages_PrivilegesInRoles on ur.RoleId equals pr.RoleId
+                                 where ur.UserId == user.UserId
+                                 select pr.PrivilegeId);
+                    foreach(int privilegeId in query.ToList())
+                    {
+                        list.Add(new Claim(privilegeId.ToString(), "PrivilegeId"));
+                    }
+                }
+            }
+            return list;
+        }
 
         [Route("verify")]
         [HttpPost]

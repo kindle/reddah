@@ -29,7 +29,7 @@ namespace Reddah.Web.Login.Controllers
             {
                 var comments = (from c in db.Comment
                                 join u in db.UserProfile on c.UserName equals u.UserName
-                                where c.ArticleId == query.ArticleId
+                                where c.ArticleId == query.ArticleId && c.Status!=-1
                                 orderby c.CreatedOn ascending
                                 select new AdvancedComment
                                 {
@@ -1512,9 +1512,9 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
-        [Route("deletemytimeline")]
+        [Route("deletearticle")]
         [HttpPost]
-        public IHttpActionResult DeleteMyTimeline()
+        public IHttpActionResult DeleteArticle()
         {
             try
             {
@@ -1537,8 +1537,121 @@ namespace Reddah.Web.Login.Controllers
 
                     if (target != null)
                     {
-                        target.Status = -1;
-                        db.SaveChanges();
+                        bool canDelete = false;
+                        
+                        var pub = db.UserProfile.FirstOrDefault(u => u.UserName == target.UserName);
+                        if (pub.Admins.Split(',').Contains(jwtResult.JwtUser.User))
+                        {
+                            canDelete = true;
+                            //log...
+                        }
+                        var user = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+                        var query = (from ur in db.webpages_UsersInRoles
+                                         join pr in db.webpages_PrivilegesInRoles on ur.RoleId equals pr.RoleId
+                                         where ur.UserId == user.UserId && pr.PrivilegeId ==2 //2:delete post permission
+                                     select pr.PrivilegeId);
+                        if (query.ToList().Count>0) 
+                        {
+                            canDelete = true;
+                            //log...
+                        }
+
+
+                        if(canDelete)
+                        {
+                            target.Status = -1;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            return Ok(new ApiResult(1011, "No permission"));
+                        }
+                    }
+
+                    return Ok(new ApiResult(0, "success"));
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("deletecomment")]
+        [HttpPost]
+        public IHttpActionResult DeleteComment()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int id = js.Deserialize<int>(HttpContext.Current.Request["Id"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var comment = db.Comment.FirstOrDefault(c => c.Id == id);
+                    var article = db.Article.FirstOrDefault(a => a.Id == comment.ArticleId);
+
+                    if (comment != null&& article!=null)
+                    {
+                        var pub = db.UserProfile.FirstOrDefault(u => u.UserName == article.UserName);
+                        bool canDelete = false;
+                        if (pub.Admins.Split(',').Contains(jwtResult.JwtUser.User))
+                        {
+                            canDelete = true;
+                            //log...
+                        }
+
+                        if (comment.UserName == jwtResult.JwtUser.User)
+                        {
+                            canDelete = true;
+                            //log ...
+                        }
+
+                        var user = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+
+                        var query = (from ur in db.webpages_UsersInRoles
+                                     join pr in db.webpages_PrivilegesInRoles on ur.RoleId equals pr.RoleId
+                                     where ur.UserId == user.UserId && pr.PrivilegeId== 3 //3:delete comment permission
+                                     select pr.PrivilegeId);
+                        if (query.ToList().Count>0) 
+                        {
+                            canDelete = true;
+                            //log...
+                        }
+
+
+                        if(canDelete)
+                        {
+                            comment.Status = -1;
+                            article.Count--;
+                            if(comment.ParentId != -1)
+                            {
+                                var parentComment = db.Comment.FirstOrDefault(c => c.Id == comment.ParentId);
+                                if (parentComment != null)
+                                {
+                                    parentComment.Count--;
+                                }
+                            }
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            return Ok(new ApiResult(1012, "No permission"));
+                        }
                     }
 
                     return Ok(new ApiResult(0, "success"));
