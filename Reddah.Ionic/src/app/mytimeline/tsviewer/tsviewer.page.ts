@@ -29,6 +29,7 @@ export class TsViewerPage implements OnInit {
         this.navController.goBack(true);
     }
 
+    isFriend;
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
@@ -44,6 +45,7 @@ export class TsViewerPage implements OnInit {
         private translate: TranslateService,
         ){
             //this.userName = this.reddah.getCurrentUser();
+            
     }
 
     userPhoto: string = "assets/icon/anonymous.png";
@@ -68,6 +70,10 @@ export class TsViewerPage implements OnInit {
         this.selectedCommentId = -1;
 
         this.GetCommentsData(this.article.Id);
+
+        this.isFriend = this.article.UserName==this.reddah.getCurrentUser() ||
+            this.reddah.appData('userisfriend_'+this.article.UserName+'_'+this.reddah.getCurrentUser())==1;
+        
     }
 
     ionViewDidLoad() {

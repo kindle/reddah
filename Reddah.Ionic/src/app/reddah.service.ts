@@ -1021,10 +1021,12 @@ export class ReddahService {
 
     playVideo(id: string) {
         let v = document.querySelector('#video_' + id)[0];
-        if (v.paused) {
-            v.play();
-        } else {
-            v.pause();
+        if(v){
+            if (v.paused) {
+                v.play();
+            } else {
+                v.pause();
+            }
         }
     }
     

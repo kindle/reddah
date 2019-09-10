@@ -64,4 +64,10 @@ export class PlatformPage implements OnInit {
           
         await modal.present();
     }
+
+    isSuperAdmin(){
+        // system admin
+        let superAdmin = this.reddah.checkPermission("2");//2: delete post permission
+        return superAdmin;
+    }
 }

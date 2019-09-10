@@ -19,9 +19,14 @@
                 <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;margin-bottom:2px;">{{group}}</u>
             </span>
         </div>
-        <ion-text color="dark">
+        <ion-text color="dark" *ngIf="!article.VideoUrl">
             <div id="articleContent" (click)="viewer($event)" [innerHTML]="reddah.htmlDecode(article.Content) | safe: 'html'"></div>
         </ion-text>
+        <div *ngIf="article.VideoUrl" style="padding: 10px 10px 10px 0;">
+            <video style="width:100%;" id="video_{{article.Id}}" [poster]="" [src]="article.VideoUrl" controls>
+                your browser does not support playing video
+            </video>
+        </div>
     </div>
     <app-comment [(normal)]="asNormalUser" *ngIf="!preview" #commentlist count="{{article.Count}}" no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" (commentClick)="childCommentClick($event)" 
         [articleauthor]="article.UserName"></app-comment>

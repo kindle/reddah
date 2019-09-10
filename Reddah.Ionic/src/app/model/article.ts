@@ -19,4 +19,5 @@ export class Article {
     LastUpdateOn : string;
     Read: boolean;
     Admins: string;
+    VideoUrl: string;
 }
