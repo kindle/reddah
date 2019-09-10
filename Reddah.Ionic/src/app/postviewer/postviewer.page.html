@@ -28,7 +28,7 @@
 </ion-content>
 <app-comment-box *ngIf="!preview" #commentbox count="{{article.Count}}" bookmark={{article.Down}} selectedArticleId="{{article.Id}}" selectedCommentId="-1"
     (reloadComments)="childReloadComments($event)"></app-comment-box>
-<ion-fab vertical="center" horizontal="end" slot="fixed" *ngIf="isAdmin()">
+<ion-fab vertical="center" horizontal="end" slot="fixed" *ngIf="!preview&&isAdmin()">
     <ion-fab-button (click)="switchToAdmin()">
         <ion-icon name="build" *ngIf="asNormalUser"></ion-icon>
         <ion-icon name="ios-person" *ngIf="!asNormalUser"></ion-icon>

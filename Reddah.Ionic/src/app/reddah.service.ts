@@ -1010,6 +1010,8 @@ export class ReddahService {
             .replace(/<br>/g,"\n")
             .replace(/<[^>]+>/g, "")
             .replace(/\n\n/g,"<br>");
+        if(str.startsWith("<br>"))
+            str = str.replace("<br>", "");
         return this.subpost(str, n);
     }
 

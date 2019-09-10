@@ -74,9 +74,10 @@
                 <div style="display: flex;flex-wrap: wrap;">
                     <div style="display: flex;flex-direction: column;margin-top:15px;" *ngFor="let pub_recent of users_p_recent">
                         <ion-avatar class="userPhoto" (click)="goPub(pub_recent)">
-                            <img src="{{reddah.appDataPub('userphoto_'+pub_recent.UserName)}}" class="recentPortrait">
+                            <img *ngIf="pub_recent.Photo" src="{{reddah.appDataPub('userphoto_'+pub_recent.UserName)}}" class="recentPortrait">
+                            <ion-icon *ngIf="!pub_recent.Photo" name="ios-list" color="tertiary" class="sub recentPortrait"></ion-icon>
                         </ion-avatar>
-                        <ion-label style="margin:3px 0 0 0;padding:0 5px;width:75px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
+                        <ion-label style="margin:3px 0 0 0;padding:3px 5px;width:75px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
                     </div>
                 </div>
             </ion-item>
@@ -87,7 +88,7 @@
                     <img src="{{reddah.appDataPub('userphoto_'+pub.UserName)}}" class="contactPortrait">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
-                    <span class="user-name" (press)="showChangeMenu($event, contact)">{{pub.NickName}}</span><br>
+                    <div class="user-name" (press)="showChangeMenu($event, contact)">{{pub.NickName}}</div>
                     <ion-note color="dark">{{pub.Signature}}</ion-note>
                 </ion-label>
             </ion-item>
@@ -109,9 +110,10 @@
                 <div style="display: flex;flex-wrap: wrap;">
                     <div style="display: flex;flex-direction: column;margin-top:15px;" *ngFor="let pub_recent of users_m_recent">
                         <ion-avatar class="userPhoto" (click)="goMini(pub_recent)">
-                            <img src="{{reddah.appDataPub('userphoto_'+pub_recent.UserName)}}" class="recentPortrait">
+                            <img *ngIf="pub_recent.Photo" src="{{reddah.appDataPub('userphoto_'+pub_recent.UserName)}}" class="recentPortrait">
+                            <ion-icon *ngIf="!pub_recent.Photo" name="infinite" color="tertiary" class="mini recentPortrait"></ion-icon>
                         </ion-avatar>
-                        <ion-label style="margin:0;padding:0 5px;width:75px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
+                        <ion-label style="margin:0;padding:3px 5px;width:75px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
                     </div>
                 </div>
             </ion-item>
@@ -122,7 +124,7 @@
                     <img src="{{reddah.appDataPub('userphoto_'+pub.UserName)}}" class="contactPortrait">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
-                    <span class="user-name" (press)="showChangeMenu($event, contact)">{{pub.NickName}}</span><br>
+                    <div class="user-name" (press)="showChangeMenu($event, contact)">{{pub.NickName}}</div>
                     <ion-note color="dark">{{pub.Signature}}</ion-note>
                 </ion-label>
             </ion-item>
@@ -139,7 +141,7 @@
                 <span class="article-title articleTitle">{{reddah.htmlDecode(article_a.Title)}}</span>
                 <ion-item>
                     <ion-avatar class="avatar-top" *ngIf="article_a.ImageUrls.length>0">
-                        <img src="{{article_a.ImageUrls[0]}}">
+                        <img class="BrowsePreviewImageOne" src="{{article_a.ImageUrls[0]}}">
                     </ion-avatar>
                     <ion-label>
                         <p class="articleContent" text-wrap [innerHTML]="reddah.summary(article_a.Content, 100, article_a.Locale)"></p>
