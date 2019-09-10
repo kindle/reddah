@@ -234,7 +234,8 @@
         "WorkingCopyExist":"有一个未发布的版本",
         "MyPhoto":"我的素材",
         "AddPhoto":"添加素材",
-        "Copy":"复制图片地址"
+        "Copy":"复制图片地址",
+        "UserNotExist":"用户不存在"
     },
 
     "Mail":{

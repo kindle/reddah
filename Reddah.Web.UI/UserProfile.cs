@@ -58,6 +58,8 @@ public partial class UserProfile
 
     public int PrivacyViewTs { get; set; }
 
+    public int Point { get; set; }
+
 }
 
 }

@@ -371,7 +371,7 @@ namespace Reddah.Web.Login.Controllers
                     int[] loaded = loadedIds == null ? new int[] { } : loadedIds;
 
                     query = (from b in db.Article
-                             where b.Type == 1 && b.UserName == targetUser &&
+                             where b.Type == 1 && b.UserName == targetUser && b.Status!=-1 &&
                                      !(loaded).Contains(b.Id)
                              orderby b.Id descending
                              select b)
@@ -541,6 +541,7 @@ namespace Reddah.Web.Login.Controllers
                     userInfo.Photo = user.Photo;
                     userInfo.Location = user.Location;
                     userInfo.Admins = user.Admins;
+                    userInfo.Point = user.Point;
                     userInfo.Signature = user.Signature;
                     userInfo.Cover = user.Cover;
                     userInfo.Type = user.Type;

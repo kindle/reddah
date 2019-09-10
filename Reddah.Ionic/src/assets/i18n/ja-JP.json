@@ -230,7 +230,8 @@
         "WorkingCopyExist":"未発表版がある",
         "MyPhoto":"マイマテリアル",
         "AddPhoto":"材料を加える",
-        "Copy":"コピー画像アドレス"
+        "Copy":"コピー画像アドレス",
+        "UserNotExist":"User does not exist"
     },
 
     "Mail":{

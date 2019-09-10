@@ -47,6 +47,7 @@
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Duration" Type="int" Nullable="false" />
           <Property Name="Abstract" Type="nvarchar(max)" />
+          <Property Name="Uid" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -85,6 +86,19 @@
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Point">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="From" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="To" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OldV" Type="int" Nullable="false" />
+          <Property Name="V" Type="int" Nullable="false" />
+          <Property Name="NewV" Type="int" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Setting">
           <Key>
@@ -153,6 +167,7 @@
           <Property Name="LastShakeOn" Type="datetime" />
           <Property Name="PrivacyShowLocation" Type="int" Nullable="false" />
           <Property Name="PrivacyViewTs" Type="int" Nullable="false" />
+          <Property Name="Point" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -215,6 +230,7 @@
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Point" EntityType="Self.Point" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UploadFile" EntityType="Self.UploadFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserArticle" EntityType="Self.UserArticle" Schema="dbo" store:Type="Tables" />
@@ -237,6 +253,7 @@
           <EntitySet Name="Groups" EntityType="reddahModel.Group" />
           <EntitySet Name="Logs" EntityType="reddahModel.Log" />
           <EntitySet Name="Messages" EntityType="reddahModel.Message" />
+          <EntitySet Name="Points" EntityType="reddahModel.Point" />
           <EntitySet Name="Settings" EntityType="reddahModel.Setting" />
           <EntitySet Name="UploadFiles" EntityType="reddahModel.UploadFile" />
           <EntitySet Name="UserArticles" EntityType="reddahModel.UserArticle" />
@@ -291,6 +308,7 @@
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="Duration" Type="Int32" Nullable="false" />
           <Property Name="Abstract" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Uid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -329,6 +347,19 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Point">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="From" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="To" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OldV" Type="Int32" Nullable="false" />
+          <Property Name="V" Type="Int32" Nullable="false" />
+          <Property Name="NewV" Type="Int32" Nullable="false" />
+          <Property Name="Reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Setting">
           <Key>
@@ -397,6 +428,7 @@
           <Property Name="LastShakeOn" Type="DateTime" Precision="3" />
           <Property Name="PrivacyShowLocation" Type="Int32" Nullable="false" />
           <Property Name="PrivacyViewTs" Type="Int32" Nullable="false" />
+          <Property Name="Point" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -488,6 +520,7 @@
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="reddahModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
                 <ScalarProperty Name="Abstract" ColumnName="Abstract" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -545,6 +578,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Points">
+            <EntityTypeMapping TypeName="reddahModel.Point">
+              <MappingFragment StoreEntitySet="Point">
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="NewV" ColumnName="NewV" />
+                <ScalarProperty Name="V" ColumnName="V" />
+                <ScalarProperty Name="OldV" ColumnName="OldV" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="From" ColumnName="From" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="reddahModel.Setting">
               <MappingFragment StoreEntitySet="Setting">
@@ -595,6 +642,7 @@
           <EntitySetMapping Name="UserProfiles">
             <EntityTypeMapping TypeName="reddahModel.UserProfile">
               <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="Point" ColumnName="Point" />
                 <ScalarProperty Name="PrivacyViewTs" ColumnName="PrivacyViewTs" />
                 <ScalarProperty Name="PrivacyShowLocation" ColumnName="PrivacyShowLocation" />
                 <ScalarProperty Name="LastShakeOn" ColumnName="LastShakeOn" />

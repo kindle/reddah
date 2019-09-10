@@ -15,36 +15,24 @@ namespace Reddah.Web.UI
 using System;
     using System.Collections.Generic;
     
-public partial class Comment
+public partial class Point
 {
 
     public int Id { get; set; }
 
-    public int ArticleId { get; set; }
-
-    public int ParentId { get; set; }
-
-    public string Content { get; set; }
-
     public System.DateTime CreatedOn { get; set; }
 
-    public Nullable<int> Up { get; set; }
+    public string From { get; set; }
 
-    public Nullable<int> Down { get; set; }
+    public string To { get; set; }
 
-    public int Count { get; set; }
+    public int OldV { get; set; }
 
-    public string UserName { get; set; }
+    public int V { get; set; }
 
-    public int Status { get; set; }
+    public int NewV { get; set; }
 
-    public int Type { get; set; }
-
-    public int Duration { get; set; }
-
-    public string Abstract { get; set; }
-
-    public string Uid { get; set; }
+    public string Reason { get; set; }
 
 }
 

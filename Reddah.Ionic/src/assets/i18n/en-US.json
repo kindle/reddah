@@ -233,7 +233,8 @@
         "WorkingCopyExist":"There's an unpublished version",
         "MyPhoto":"My Material",
         "AddPhoto":"Add Material",
-        "Copy":"Copy Image Address"
+        "Copy":"Copy Image Address",
+        "UserNotExist":"User does not exist"
     },
 
     "Mail":{

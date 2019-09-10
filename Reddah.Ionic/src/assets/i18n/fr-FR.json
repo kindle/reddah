@@ -230,7 +230,8 @@
         "WorkingCopyExist":"Il y a une version non publiée",
         "MyPhoto":"Mon matériel",
         "AddPhoto":"Matériau d 'addition",
-        "Copy":"Copier l 'adresse d' image"
+        "Copy":"Copier l 'adresse d' image",
+        "UserNotExist":"User does not exist"
     },
 
     "Mail":{

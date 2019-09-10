@@ -187,6 +187,9 @@
     </Compile>
     <Compile Include="Models\CommentModels.cs" />
     <Compile Include="Models\ApiResultModels.cs" />
+    <Compile Include="Point.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReddahModel.Context.cs">
       <AutoGen>True</AutoGen>

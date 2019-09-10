@@ -229,7 +229,8 @@
         "WorkingCopyExist":"هناك نسخة غير منشورة",
         "MyPhoto":"بلدي المواد",
         "AddPhoto":"مادة مضافة",
-        "Copy":"نسخ عنوان الصورة"
+        "Copy":"نسخ عنوان الصورة",
+        "UserNotExist":"User does not exist"
     },
 
     "Mail":{

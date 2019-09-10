@@ -241,6 +241,9 @@
     <Compile Include="Models\StartSectionModule.cs" />
     <Compile Include="Models\SolutionModel.cs" />
     <Compile Include="Models\SectionModel.cs" />
+    <Compile Include="Point.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReddahModel.Context.cs">
       <AutoGen>True</AutoGen>

@@ -42,6 +42,8 @@ public partial class reddahEntities1 : DbContext
 
     public DbSet<Message> Messages { get; set; }
 
+    public DbSet<Point> Points { get; set; }
+
     public DbSet<Setting> Settings { get; set; }
 
     public DbSet<UploadFile> UploadFiles { get; set; }

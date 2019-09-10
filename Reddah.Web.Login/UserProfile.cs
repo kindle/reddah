@@ -34,5 +34,6 @@ namespace Reddah.Web.Login
         public Nullable<System.DateTime> LastShakeOn { get; set; }
         public int PrivacyShowLocation { get; set; }
         public int PrivacyViewTs { get; set; }
+        public int Point { get; set; }
     }
 }

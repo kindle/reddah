@@ -232,7 +232,8 @@
         "WorkingCopyExist":"有一個未發佈的版本",
         "MyPhoto":"我的素材",
         "AddPhoto":"添加素材",
-        "Copy":"復制圖片地址"
+        "Copy":"復制圖片地址",
+        "UserNotExist":"用户不存在"
     },
 
     "Mail":{

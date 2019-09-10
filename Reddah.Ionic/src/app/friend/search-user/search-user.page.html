@@ -10,14 +10,14 @@
     </ion-item>
 
     <div text-center *ngIf="user404" class="user404">
-            该用户不存在
+        {{ 'Common.UserNotExist' | translate }}
     </div>
 
     <ion-item *ngIf="user404" (click)="searchMore()">
         <ion-icon name="ios-search" slot="start" color="tertiary" class="portrait"></ion-icon>
         <ion-label style="margin-left:10px;">
             {{ 'Search.Title' | translate }} <font color="#107c10">{{searchKeyword.value}}</font>
-            <p class="desc">小程序、订阅号、文章、时光圈等</p>
+            <p class="desc">{{ 'Menu.MiniApp' | translate }}、{{ 'Menu.Publisher' | translate }}、{{ 'Menu.Recommend' | translate }}、{{ 'Menu.Timeline' | translate }}</p>
         </ion-label>
     </ion-item>
 </ion-content>

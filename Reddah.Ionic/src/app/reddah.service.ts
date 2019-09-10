@@ -1253,6 +1253,8 @@ export class ReddahService {
                 }
                 if(userInfo.Admins!=null)
                     this.toTextCache(userInfo.Admins, `useradmins_${userName}`);
+                if(userInfo.Point!=null)
+                    this.toTextCache(userInfo.Point, `userpoint_${userName}`);
                 if(userInfo.Signature!=null)
                     this.toTextCache(userInfo.Signature, `usersignature_${userName}`);
                 if(userInfo.Email!=null)

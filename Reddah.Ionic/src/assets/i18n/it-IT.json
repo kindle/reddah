@@ -229,7 +229,8 @@
         "WorkingCopyExist":"C'è una versione inedita",
         "MyPhoto":"Il mio materiale",
         "AddPhoto":"Aggiungi materiale",
-        "Copy":"Copia indirizzo immagine"
+        "Copy":"Copia indirizzo immagine",
+        "UserNotExist":"User does not exist"
     },
 
     "Mail":{

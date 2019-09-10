@@ -229,7 +229,8 @@
         "WorkingCopyExist":"Er is een ongepubliceerde versie",
         "MyPhoto":"Mijn materiaal",
         "AddPhoto":"Materiaal toevoegen",
-        "Copy":"Afbeeldadres kopiëren"
+        "Copy":"Afbeeldadres kopiëren",
+        "UserNotExist":"User does not exist"
     },
 
     "Mail":{

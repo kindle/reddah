@@ -229,7 +229,8 @@
         "WorkingCopyExist":"Υπάρχει μια αδημοσίευτη έκδοση",
         "MyPhoto":"Το υλικό μου",
         "AddPhoto":"Προσθήκη υλικού",
-        "Copy":"Αντιγραφή διεύθυνσης εικόνας"
+        "Copy":"Αντιγραφή διεύθυνσης εικόνας",
+        "UserNotExist":"User does not exist"
     },
 
     "Mail":{

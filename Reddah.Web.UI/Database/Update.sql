@@ -132,3 +132,21 @@ alter table comment add
 --remove column
 --alter table userprofile drop constraint DF__UserProfi__Priva__336AA144
 --alter table userprofile drop column privacystragerview
+
+--20190913
+CREATE TABLE [dbo].[Point]
+(
+	[Id] INT IDENTITY(1,1) NOT NULL, 
+    [CreatedOn] DATETIME NOT NULL, 
+	[From] NVARCHAR(MAX) NOT NULL, 
+    [To] NVARCHAR(MAX) NOT NULL, 
+	[OldV] INT NOT NULL DEFAULT 0, 
+	[V] INT NOT NULL DEFAULT 0, 
+    [NewV] INT NOT NULL DEFAULT 0,
+	[Reason] NVARCHAR(MAX) NOT NULL,
+	CONSTRAINT [PK_dbo.Point] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+alter table userprofile add 
+  [Point] int NOT NULL default 0
+

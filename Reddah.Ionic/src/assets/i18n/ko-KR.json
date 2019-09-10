@@ -232,7 +232,8 @@
         "WorkingCopyExist":"발표되지 않은 버전이 있어요",
         "MyPhoto":"내 재료",
         "AddPhoto":"재질 추가",
-        "Copy":"그림 주소 복사"
+        "Copy":"그림 주소 복사",
+        "UserNotExist":"User does not exist"
     },
 
     "Mail":{

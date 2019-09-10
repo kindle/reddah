@@ -229,7 +229,8 @@
         "WorkingCopyExist":"มีรุ่นที่ยังไม่ได้เผยแพร่",
         "MyPhoto":"วัสดุของฉัน",
         "AddPhoto":"เพิ่มวัสดุ",
-        "Copy":"คัดลอกที่อยู่ภาพ"
+        "Copy":"คัดลอกที่อยู่ภาพ",
+        "UserNotExist":"User does not exist"
     },
 
     "Mail":{
