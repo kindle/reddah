@@ -230,7 +230,7 @@
         "MyPhoto":"Το υλικό μου",
         "AddPhoto":"Προσθήκη υλικού",
         "Copy":"Αντιγραφή διεύθυνσης εικόνας",
-        "UserNotExist":"User does not exist"
+        "UserNotExist":"Ο χρήστης δεν υπάρχει"
     },
 
     "Mail":{

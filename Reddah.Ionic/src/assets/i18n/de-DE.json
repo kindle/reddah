@@ -230,7 +230,7 @@
         "MyPhoto":"Mein Material",
         "AddPhoto":"Material hinzufügen",
         "Copy":"Kopieren der Bildadresse",
-        "UserNotExist":"User does not exist"
+        "UserNotExist":"Der Benutzer existiert nicht"
     },
 
     "Mail":{
