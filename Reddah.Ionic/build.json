@@ -1,10 +1,17 @@
 {
-  "ios": {
-      "debug": {
-          "buildFlag": ["-UseModernBuildSystem=0"]
-      },
-      "release": {
-          "buildFlag": ["-UseModernBuildSystem=0"]
-      }
-  }
+    "ios": {
+        "debug": {
+            "buildFlag": ["-UseModernBuildSystem=0"]
+        },
+        "release": {
+            "buildFlag": ["-UseModernBuildSystem=0"]
+        }
+    },
+    "windows":{
+        "release":{
+            "packageCertificateKeyFile":"platforms\\windows\\CordovaApp.Windows10_StoreKey.pfx",
+            "packageThumbprint": "ABCABCABCABC123123123123",
+            "publisherId":"CN=8C4AC8E3-4BB1-430E-8B23-ADE09EDCF6AE"
+        }
+    }
 }
