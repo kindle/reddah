@@ -44,6 +44,28 @@ export class AppComponent {
         //private firebase: Firebase,
     ) {
         this.initializeApp();
+        
+        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+        if(currentLocale==null){
+            if(this.platform.is('cordova'))
+            {
+                Globalization.getPreferredLanguage()
+                .then(res => {
+                    this.localStorageService.store("Reddah_Locale", res.value);
+                    this.translate.setDefaultLang(res.value);
+                })
+                .catch(e => console.log(JSON.stringify(e)));
+            }
+            else{
+                let defaultLocale ="en-US"
+                this.localStorageService.store("Reddah_Locale", defaultLocale);
+                this.translate.setDefaultLang(defaultLocale);
+            }
+
+        }
+        else{
+            this.translate.setDefaultLang(currentLocale);
+        }
 
         if(this.platform.is('cordova'))
         {
@@ -90,20 +112,6 @@ export class AppComponent {
         this.cacheService.enableCache(true);
         this.cacheService.setDefaultTTL(365 * 24 * 60 * 60); //set default cache TTL for 365 days
 
-        
-        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-        if(currentLocale==null){
-            Globalization.getPreferredLanguage()
-            .then(res => {
-                this.localStorageService.store("Reddah_Locale", res.value);
-                this.translate.setDefaultLang(res.value);
-            })
-            .catch(e => alert(JSON.stringify(e)));
-
-        }
-        else{
-            this.translate.setDefaultLang(currentLocale);
-        }
 
         //load friends to cache for permission check
         if(this.authService.authenticated())
