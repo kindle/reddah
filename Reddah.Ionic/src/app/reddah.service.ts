@@ -866,10 +866,10 @@ export class ReddahService {
             //alert(JSON.stringify(error));
             let msg = error.message;
             if(msg.indexOf("failure response")>0)
-                this.toast("Network Unavailable. Please try again later", "danger")
+                this.toast(this.translate.instant("Input.Error.NetworkError"), "danger")
                 
             if(msg.indexOf("ERR_TIMED_OUT")>0)
-                this.toast("Service Unavailable. Please try again later", "danger")
+                this.toast(this.translate.instant("Input.Error.ServiceError"), "danger")
             // TODO: send the error to remote logging infrastructure
             console.error(error); // log to console instead
 
