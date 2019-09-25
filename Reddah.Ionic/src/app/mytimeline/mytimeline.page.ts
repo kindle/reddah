@@ -107,6 +107,7 @@ export class MyTimeLinePage implements OnInit {
                     //cache preview image
                     article.Content.split('$$$').forEach((previewImageUrl)=>{
                         this.reddah.toFileCache(previewImageUrl);
+                        //this.reddah.toImageCache(previewImageUrl, previewImageUrl);
                     });
                     this.GetCommentsData(article.Id);
                 }

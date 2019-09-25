@@ -70,10 +70,16 @@ export class HomePage implements OnInit {
             this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
             .subscribe(articles => 
             {
+                let publishers = new Set<string>();
                 //console.log(articles);
                 for(let article of articles){
                     this.articles.push(article);
                     this.loadedIds.push(article.Id);
+                    if(!publishers.has(article.UserName))
+                    {
+                        publishers.add(article.UserName);
+                        this.reddah.getUserPhotos(article.UserName);
+                    }
                 }
                 this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
                 this.localStorageService.store("reddah_article_ids", JSON.stringify(this.loadedIds));

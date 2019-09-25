@@ -1,10 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { InfiniteScroll, Content } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
-import { Article } from '../model/article';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
-import { PostviewerPage } from '../postviewer/postviewer.page';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 
