@@ -46,6 +46,7 @@ export class AppComponent {
         this.initializeApp();
         
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+        let defaultLocale ="en-US"
         if(currentLocale==null){
             if(this.platform.is('cordova'))
             {
@@ -54,10 +55,15 @@ export class AppComponent {
                     this.localStorageService.store("Reddah_Locale", res.value);
                     this.translate.setDefaultLang(res.value);
                 })
-                .catch(e => console.log(JSON.stringify(e)));
+                .catch(e => 
+                    {
+                        console.log(JSON.stringify(e))
+                        this.localStorageService.store("Reddah_Locale", defaultLocale);
+                        this.translate.setDefaultLang(defaultLocale);
+                    }
+                );
             }
             else{
-                let defaultLocale ="en-US"
                 this.localStorageService.store("Reddah_Locale", defaultLocale);
                 this.translate.setDefaultLang(defaultLocale);
             }
@@ -67,7 +73,7 @@ export class AppComponent {
             this.translate.setDefaultLang(currentLocale);
         }
 
-        if(this.platform.is('cordova'))
+        if(this.platform.is('android'))
         {
             this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
                 result => console.log('Has permission?',result.hasPermission),

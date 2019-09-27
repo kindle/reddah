@@ -22,7 +22,7 @@ export class ChangeCoverPopPage {
       const changePhotoModal = await this.modalController.create({
           component: ChangePhotoPage,
           componentProps: { 
-            title : "{{ 'Comment.Delete' | translate }}",
+            title : "{{ 'Pop.ChangeCover' | translate }}",
             tag : "cover"
           }
       });

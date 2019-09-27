@@ -33,7 +33,8 @@
                 <ion-card-content no-padding>
                     <div class="parent">
                         <div class="container" *ngFor="let articleUrl of article.ImageUrls;index as i">
-                            <img [class.left-radius]="i==0" [class.right-radius]="i==2" [id]="reddah.makeItId(articleUrl)" (load)="reddah.adjustImage($event, articleUrl)"
+                            <img [class.left-radius]="i==0" [class.right-radius]="i==2" [id]="reddah.makeItId(articleUrl)" 
+                            (load)="reddah.adjustImage($event, articleUrl)"
                             [src]="articleUrl" class="picture">
                         </div>
                     </div>

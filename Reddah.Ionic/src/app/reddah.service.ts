@@ -11,7 +11,7 @@ import { UserProfileModel } from './model/UserProfileModel';
 import { UserModel, QueryCommentModel, NewCommentModel, NewTimelineModel } from './model/UserModel';
 import { Locale } from './model/locale';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { File, FileEntry } from '@ionic-native/file/ngx';
+import { File, FileEntry } from '@ionic-native/file';
 import { LocalStorageService } from 'ngx-webstorage';
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
@@ -32,8 +32,7 @@ export class ReddahService {
         private http: HttpClient,
         private localStorageService: LocalStorageService,
         private jsonp: Jsonp,
-        private transfer: FileTransfer, 
-        private file: File,
+        private transfer: FileTransfer,
         private modalController: ModalController,
         private toastController: ToastController,
         private platform: Platform,
@@ -1118,15 +1117,25 @@ export class ReddahService {
     }
 
     level2Cache(cacheKey){
-        let preview = this.localStorageService.retrieve(cacheKey);
-        let org = this.localStorageService.retrieve(cacheKey.replace("_reddah_preview",""))
+        //cacheKey = cacheKey.replace("///","https://")
+
+        //if(this.platform.is('android')){
+            let preview = this.localStorageService.retrieve(cacheKey);
+            let org = this.localStorageService.retrieve(cacheKey.replace("_reddah_preview",""))
+    
+            if(org)
+                return (<any>window).Ionic.WebView.convertFileSrc(org);
+            else if(preview)
+                return (<any>window).Ionic.WebView.convertFileSrc(preview);
+            else
+            {
+                return cacheKey;
+            }
+        //}
+        //else{
+        //    return cacheKey;
+        //}
         
-        if(org)
-            return (<any>window).Ionic.WebView.convertFileSrc(org);
-        else if(preview)
-            return (<any>window).Ionic.WebView.convertFileSrc(preview);
-        else
-            return cacheKey;
     }
 
     chatImageCache(cacheKey){
@@ -1154,12 +1163,15 @@ export class ReddahService {
 
     private fileTransfer: FileTransferObject; 
     toFileCache(webUrl, isVideo=false){
+        let deviceDirectory = this.getDeviceDirectory();
+        
         let cachedFilePath = this.localStorageService.retrieve(webUrl);
+        //alert("webUrl:"+webUrl+cachedFilePath);
         if(cachedFilePath==null){
             webUrl = webUrl.replace("///","https://");
             let webFileName = this.getFileName(webUrl);
-            let targetUrl = this.file.externalRootDirectory+"reddah/" + webFileName;
-
+            let targetUrl = deviceDirectory+"reddah/" + webFileName;
+            //alert(webFileName+"____"+targetUrl)
             this.fileTransfer = this.transfer.create();  
             this.fileTransfer.download(webUrl, targetUrl).then(
             _ => {
@@ -1170,19 +1182,40 @@ export class ReddahService {
                 }
                 else{
                     this.localStorageService.store(webUrl, targetUrl);
+                    
                     this.appCacheToOrg[(<any>window).Ionic.WebView.convertFileSrc(targetUrl)] = webUrl;
                 }
+                //alert(webUrl)
             }, 
-            _ => { console.log(JSON.stringify(_)) });
+            _ => { 
+                //alert(JSON.stringify(_))
+                console.log(JSON.stringify(_)) });
         }
     } 
 
+    private getDeviceDirectory(){
+        let dir = File.externalRootDirectory;
+        if(this.platform.is('android'))
+        {
+            dir = File.externalRootDirectory;
+        }
+        else if(this.platform.is('ipad')||this.platform.is('iphone')||this.platform.is('ios')){
+            dir = File.cacheDirectory;
+        }
+        else {
+            
+        }
+        return dir;
+    }
+
     toImageCache(webUrl, cacheKey){
+        let deviceDirectory = this.getDeviceDirectory();
+        
         let cachedImagePath = this.localStorageService.retrieve(cacheKey);
 
         let cacheImageName = "";
         if(cachedImagePath!=null){
-            cacheImageName = cachedImagePath.replace(this.file.externalRootDirectory+"reddah/","");
+            cacheImageName = cachedImagePath.replace(deviceDirectory+"reddah/","");
         }
 
         webUrl = webUrl.replace("///","https://");
@@ -1190,7 +1223,7 @@ export class ReddahService {
 
         if(cachedImagePath==null||cacheImageName!=webImageName){
             this.fileTransfer = this.transfer.create();
-            let targetUrl = this.file.externalRootDirectory+"reddah/" + webImageName;
+            let targetUrl = deviceDirectory+"reddah/" + webImageName;
             this.fileTransfer.download(webUrl, targetUrl).then(
             _ => {
                 this.localStorageService.store(cacheKey, targetUrl);
@@ -1212,13 +1245,19 @@ export class ReddahService {
 
     verifyImageFile(key){
         let cachedPath = this.localStorageService.retrieve(key);
-        if(cachedPath&&this.platform.is('cordova')){
+        if(cachedPath&&this.platform.is('android')){
             let fileName = this.getFileName(cachedPath);
             let filePath = cachedPath.replace(fileName, "");
             
-            this.file.checkFile(filePath, fileName).catch(_=>{
-                this.localStorageService.clear(key);
-            });
+            File.checkFile(filePath, fileName).then(
+                (files) => {
+                    console.log("files found" + files)
+                }
+                ).catch(
+                (err) => {
+                    this.localStorageService.clear(key);
+                }
+            );
         }
     }
 
@@ -1672,8 +1711,10 @@ export class ReddahService {
     }
 
     openMini(webUrl, miniName){
+        let deviceDirectory = this.getDeviceDirectory();
+
         this.fileTransfer = this.transfer.create();  
-        let targetUrl = this.file.externalRootDirectory+"reddah/mini/" + miniName;
+        let targetUrl = deviceDirectory+"reddah/mini/" + miniName;
         this.fileTransfer.download(webUrl, targetUrl).then(
         _ => {
             let localUrl = (<any>window).Ionic.WebView.convertFileSrc(targetUrl);
@@ -1848,7 +1889,7 @@ export class ReddahService {
     }
 
     prepareData(filePath, formKey, formData) {
-        this.file.resolveLocalFilesystemUrl(filePath)
+        File.resolveLocalFilesystemUrl(filePath)
         .then(entry => {
             ( <FileEntry> entry).file(file => {
                 const reader = new FileReader();

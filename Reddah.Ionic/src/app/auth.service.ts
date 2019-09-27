@@ -3,6 +3,7 @@ import { ReddahService } from './reddah.service';
 import { SigninPage } from './surface/signin/signin.page';
 import { RegisterPage } from './surface/register/register.page';
 import { SurfacePage } from './surface/surface.page';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { CacheService } from 'ionic-cache';
@@ -15,6 +16,7 @@ export class AuthService {
         private reddahService: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
+        private router: Router,
     ){}
 
     authenticated(): boolean {
@@ -90,8 +92,14 @@ export class AuthService {
 
 
         this.localStorageService.clear("Reddah_Local_Messages");
+        this.localStorageService.clear();
         
         window.location.reload();
+        //this.router.navigate(['/surface'], {
+        //    queryParams: {
+        //    }
+        //});
+        
     }
 
 
