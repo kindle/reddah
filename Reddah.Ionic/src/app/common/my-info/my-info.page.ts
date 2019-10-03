@@ -45,7 +45,7 @@ export class MyInfoPage implements OnInit {
           componentProps: { 
               title: this.translate.instant("About.Photo"),
               tag : "portrait",
-              targetUserName: this.userName
+              targetUserName: ""
           }
         });
           

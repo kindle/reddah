@@ -11,7 +11,7 @@ import { UserProfileModel } from './model/UserProfileModel';
 import { UserModel, QueryCommentModel, NewCommentModel, NewTimelineModel } from './model/UserModel';
 import { Locale } from './model/locale';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { File, FileEntry } from '@ionic-native/file';
+import { File, FileEntry } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
@@ -33,6 +33,7 @@ export class ReddahService {
         private localStorageService: LocalStorageService,
         private jsonp: Jsonp,
         private transfer: FileTransfer,
+        private file: File,
         private modalController: ModalController,
         private toastController: ToastController,
         private platform: Platform,
@@ -1194,13 +1195,13 @@ export class ReddahService {
     } 
 
     private getDeviceDirectory(){
-        let dir = File.externalRootDirectory;
+        let dir = this.file.externalRootDirectory;
         if(this.platform.is('android'))
         {
-            dir = File.externalRootDirectory;
+            dir = this.file.externalRootDirectory;
         }
         else if(this.platform.is('ipad')||this.platform.is('iphone')||this.platform.is('ios')){
-            dir = File.cacheDirectory;
+            dir = this.file.cacheDirectory;
         }
         else {
             
@@ -1249,7 +1250,7 @@ export class ReddahService {
             let fileName = this.getFileName(cachedPath);
             let filePath = cachedPath.replace(fileName, "");
             
-            File.checkFile(filePath, fileName).then(
+            this.file.checkFile(filePath, fileName).then(
                 (files) => {
                     console.log("files found" + files)
                 }
@@ -1889,7 +1890,7 @@ export class ReddahService {
     }
 
     prepareData(filePath, formKey, formData) {
-        File.resolveLocalFilesystemUrl(filePath)
+        this.file.resolveLocalFilesystemUrl(filePath)
         .then(entry => {
             ( <FileEntry> entry).file(file => {
                 const reader = new FileReader();

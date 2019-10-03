@@ -41,6 +41,10 @@ export class MapPage implements OnInit {
         
     }
 
+    close(){
+        this.modalController.dismiss();
+    }
+
     async ngOnInit(){
     }
 
@@ -70,7 +74,7 @@ export class MapPage implements OnInit {
     loadmap() {
 
         this.markerGroup = L.featureGroup();
-        this.map = L.map("earth").fitWorld();
+        this.map = L.map("earth", {attributionControl: false}).fitWorld();
 
         L.tileLayer(this.tileUrl, this.tileOptions).addTo(this.map);
     }

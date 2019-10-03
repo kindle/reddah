@@ -28,7 +28,7 @@ export class ChangePhotoPage implements OnInit {
         ) { }
 
     async ngOnInit() {
-        this.formData.append("targetUserName", this.targetUserName);
+        
     }
 
     async close() {
@@ -61,7 +61,7 @@ export class ChangePhotoPage implements OnInit {
             this.crop.crop(imageData, { quality: 100, targetWidth: -1, targetHeight: -1 })
             .then(
                     newCropImageData => {
-                    console.log('new image path is: ' + newCropImageData);
+                    //console.log('new image path is: ' + newCropImageData);
                     this.prepareData(newCropImageData);
                 },
                 error => console.error('Error cropping image', error)
@@ -91,7 +91,7 @@ export class ChangePhotoPage implements OnInit {
             this.crop.crop(imageData, { quality: 100, targetWidth: -1, targetHeight: -1 })
             .then(
                     newCropImageData => {
-                    console.log('new image path is: ' + newCropImageData);
+                    //console.log('new image path is: ' + newCropImageData);
                     this.prepareData(newCropImageData);
                 },
                 error => console.error('Error cropping image', error)
@@ -133,6 +133,12 @@ export class ChangePhotoPage implements OnInit {
         await loading.present();
 
         this.formData.append('tag', this.tag);
+        if(this.targetUserName!=null&&this.targetUserName.length>0)
+        {
+            //only sub-info page change photo check if is admin
+            //my-info and my timeline change cover do not check, just send empty
+            this.formData.append("targetUserName", this.targetUserName);
+        }
         this.reddahService.updateUserPhoto(this.formData)
         .subscribe(result => 
             {
@@ -144,7 +150,7 @@ export class ChangePhotoPage implements OnInit {
                 }
                 else
                 {
-                    alert(result.Message);
+                    //alert(result.Message);
                     this.modalController.dismiss(false);
                 }
                 

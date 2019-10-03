@@ -92,7 +92,7 @@ export class AuthService {
 
 
         this.localStorageService.clear("Reddah_Local_Messages");
-        this.localStorageService.clear();
+        //this.localStorageService.clear();
         
         window.location.reload();
         //this.router.navigate(['/surface'], {
