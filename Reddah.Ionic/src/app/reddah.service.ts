@@ -1118,9 +1118,9 @@ export class ReddahService {
     }
 
     level2Cache(cacheKey){
-        //cacheKey = cacheKey.replace("///","https://")
+        cacheKey = cacheKey.replace("///","https://")
 
-        //if(this.platform.is('android')){
+        if(this.platform.is('android')){
             let preview = this.localStorageService.retrieve(cacheKey);
             let org = this.localStorageService.retrieve(cacheKey.replace("_reddah_preview",""))
     
@@ -1132,10 +1132,10 @@ export class ReddahService {
             {
                 return cacheKey;
             }
-        //}
-        //else{
-        //    return cacheKey;
-        //}
+        }
+        else{
+            return cacheKey;
+        }
         
     }
 
@@ -1802,6 +1802,9 @@ export class ReddahService {
     async adjustImage(evt, img){
         img = this.makeItId(img);
         let image = document.getElementById(img);
+        if(image["src"]==null||image["src"]==""){
+            image["src"] = "assets/icon/noimage.jpg";
+        }
         if(image.offsetHeight<image.offsetWidth)
         {
             image.style.height = "100%";
