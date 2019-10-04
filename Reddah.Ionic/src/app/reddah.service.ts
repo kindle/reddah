@@ -1802,9 +1802,7 @@ export class ReddahService {
     async adjustImage(evt, img){
         img = this.makeItId(img);
         let image = document.getElementById(img);
-        if(image["src"]==null||image["src"]==""){
-            image["src"] = "assets/icon/noimage.jpg";
-        }
+        
         if(image.offsetHeight<image.offsetWidth)
         {
             image.style.height = "100%";
