@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController, ToastController, ActionSheetController, Slides } from '@ionic/angular';
+import { ModalController, ToastController, ActionSheetController, Slides, Platform } from '@ionic/angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -15,9 +15,9 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     styleUrls: ['./image-viewer.component.scss']
 })
 export class ImageViewerComponent implements OnInit {
-    @Input() index = 0;
-    @Input() imgSourceArray: any = [];
-    enhanceImgSourceArray: any = [];
+    @Input() index;
+    @Input() imgSourceArray;
+    //enhanceImgSourceArray;
     @Input() imgTitle = '';
     @Input() imgDescription = '';
     @Input() showDownload = false;
@@ -35,56 +35,52 @@ export class ImageViewerComponent implements OnInit {
         public reddah: ReddahService,
         private cacheService: CacheService,
         public translate: TranslateService,
-        private clipboard: Clipboard
+        private clipboard: Clipboard,
+        private platform: Platform,
     ) {
     }
 
+    isCordova = true;
     //0: web preview url, 1:local preview, 2: on-going, 3: local org, 
     ngOnInit() {
+        this.isCordova = this.platform.is('cordova');
         this.slideOpts = {
             centeredSlides: 'true',
             initialSlide: this.index,
         };
 
-        
-    }
-
-    ionViewDidEnter(){
         for(let i=0;i<this.imgSourceArray.length;i++){
-            let preview = this.localStorageService.retrieve(this.imgSourceArray[i]);
-            let org = this.localStorageService.retrieve(this.imgSourceArray[i].replace("_reddah_preview",""));
-            let fileName = this.imgSourceArray[i].replace("///login.reddah.com/uploadPhoto/","");
+            let preview = this.localStorageService.retrieve(this.imgSourceArray[i].webPreviewUrl);
+            let org = this.localStorageService.retrieve(this.imgSourceArray[i].webPreviewUrl.replace("_reddah_preview",""));
+            let fileName = this.imgSourceArray[i].webPreviewUrl.replace("///login.reddah.com/uploadPhoto/","");
 
+            this.imgSourceArray[i].webPreviewUrl = this.imgSourceArray[i].webPreviewUrl.replace("///login.reddah.com","https://login.reddah.com")
             if(org){
                 let localUrl = (<any>window).Ionic.WebView.convertFileSrc(org);
-                this.enhanceImgSourceArray[i] = { 
-                    webPreviewUrl: this.imgSourceArray[i],
-                    localhostImageUrl: localUrl,
-                    localFileImageUrl: org,
-                    previewImageFileName: fileName,
-                    isOrgViewed: 3, 
-                }
+                this.imgSourceArray[i].localhostImageUrl = localUrl;
+                this.imgSourceArray[i].localFileImageUrl = org;
+                this.imgSourceArray[i].previewImageFileName = fileName;
+                this.imgSourceArray[i].isOrgViewed = 3;
             }
             else if(preview){
                 let localUrl = (<any>window).Ionic.WebView.convertFileSrc(org);
-                this.enhanceImgSourceArray[i] = { 
-                    webPreviewUrl: this.imgSourceArray[i], 
-                    localhostImageUrl: localUrl,
-                    localFileImageUrl: preview,
-                    previewImageFileName: fileName,
-                    isOrgViewed: 1,
-                }
+                this.imgSourceArray[i].localhostImageUrl = localUrl;
+                this.imgSourceArray[i].localFileImageUrl = preview;
+                this.imgSourceArray[i].previewImageFileName = fileName;
+                this.imgSourceArray[i].isOrgViewed = 1;
             }else{
-                this.enhanceImgSourceArray[i] = { 
-                    webPreviewUrl: this.imgSourceArray[i], 
-                    localhostImageUrl: '',
-                    localFileImageUrl: '',
-                    previewImageFileName: fileName,
-                    isOrgViewed: 0,
-                }
+                this.imgSourceArray[i].localhostImageUrl = '';
+                this.imgSourceArray[i].localFileImageUrl = '';
+                this.imgSourceArray[i].previewImageFileName = fileName;
+                this.imgSourceArray[i].isOrgViewed = 0;
             }
 
         }
+    }
+
+    flag = false;
+    ionViewDidEnter(){
+        
 
         //if(this.index>=0&&this.index<this.enhanceImgSourceArray.length){
         //    this.downloadOrgImage(this.enhanceImgSourceArray[this.index]);
@@ -166,6 +162,10 @@ export class ImageViewerComponent implements OnInit {
             //    if(item.isOrgViewed==0)
             //        this.downloadOrgImage(item);
             //}
+
+            //alert(index)
+
+            this.flag = true;
         });
         
     }
@@ -190,9 +190,9 @@ export class ImageViewerComponent implements OnInit {
             for(let i=0;i<this.imgSourceArray.length;i++){
                 if(this.imgSourceArray[i]===item.webPreviewUrl){
                     let localhostImageUrl = (<any>window).Ionic.WebView.convertFileSrc(localFileImageUrl);
-                    this.enhanceImgSourceArray[i].localhostImageUrl = localhostImageUrl;
-                    this.enhanceImgSourceArray[i].localFileImageUrl = localFileImageUrl;
-                    this.enhanceImgSourceArray[i].isOrgViewed = 3;
+                    this.imgSourceArray[i].localhostImageUrl = localhostImageUrl;
+                    this.imgSourceArray[i].localFileImageUrl = localFileImageUrl;
+                    this.imgSourceArray[i].isOrgViewed = 3;
 
                     break;
                 }

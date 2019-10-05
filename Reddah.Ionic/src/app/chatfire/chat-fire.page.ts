@@ -94,7 +94,7 @@ export class ChatFireBase{
             component: ImageViewerComponent,
             componentProps: {
                 index: index,
-                imgSourceArray: imageSrcArray,
+                imgSourceArray: this.reddah.preImageArray(imageSrcArray),
                 imgTitle: "",
                 imgDescription: "",
                 showDownload: true,

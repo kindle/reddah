@@ -73,32 +73,35 @@ export class AppComponent {
             this.translate.setDefaultLang(currentLocale);
         }
 
-        if(this.platform.is('android'))
-        {
-            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
-                result => console.log('Has permission?',result.hasPermission),
-                err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
-            );
-            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE).then(
-                result => console.log('Has permission?',result.hasPermission),
-                err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
-            );
-            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO).then(
-                result => console.log('Has permission?',result.hasPermission),
-                err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO)
-            );
-            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
-                result => console.log('Has permission?',result.hasPermission),
-                err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
-            );
-            
-            this.androidPermissions.requestPermissions([
-                this.androidPermissions.PERMISSION.CAMERA, 
-                this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
-                this.androidPermissions.PERMISSION.RECORD_AUDIO,
-                this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
-            ]);
-        }
+        this.platform.ready().then(() => {
+            if(this.platform.is('android'))
+            {
+                this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+                    result => console.log('Has permission?',result.hasPermission),
+                    err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
+                );
+                this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE).then(
+                    result => console.log('Has permission?',result.hasPermission),
+                    err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
+                );
+                this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO).then(
+                    result => console.log('Has permission?',result.hasPermission),
+                    err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO)
+                );
+                this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
+                    result => console.log('Has permission?',result.hasPermission),
+                    err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
+                );
+                
+                this.androidPermissions.requestPermissions([
+                    this.androidPermissions.PERMISSION.CAMERA, 
+                    this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
+                    this.androidPermissions.PERMISSION.RECORD_AUDIO,
+                    this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+                ]);
+            }
+        })
+        
 
         this.imageLoaderConfigService.useImageTag(true);
         this.imageLoaderConfigService.enableSpinner(false);
@@ -240,6 +243,7 @@ export class AppComponent {
                     if(this.router.url.indexOf("home")>0)
                     {
                         this.presentAlertConfirm();
+                        return;
                     }
                 }
             });

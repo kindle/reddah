@@ -44,11 +44,18 @@ export class HomePage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
     }
 
+
+    publishers = new Set<string>();
+    firstLoad = false;
     async ngOnInit(){
+        
+
         let cacheArticles = this.localStorageService.retrieve("reddah_articles");
         let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids");
         let cacheDislikeGroups = this.localStorageService.retrieve("reddah_article_groups");
         let cacheDislikeUserNames = this.localStorageService.retrieve("reddah_article_usernames");
+    
+        
         if(cacheArticles){
             this.articles = JSON.parse(cacheArticles);
             this.loadedIds = JSON.parse(cacheArticleIds);
@@ -57,6 +64,7 @@ export class HomePage implements OnInit {
         }
         else
         {
+            this.firstLoad = true;
             let locale = this.reddah.getCurrentLocale();
             let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds)
                 + JSON.stringify(this.dislikeGroups) + JSON.stringify(this.dislikeUserNames) 
@@ -70,14 +78,12 @@ export class HomePage implements OnInit {
             this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
             .subscribe(articles => 
             {
-                let publishers = new Set<string>();
-                //console.log(articles);
                 for(let article of articles){
                     this.articles.push(article);
                     this.loadedIds.push(article.Id);
-                    if(!publishers.has(article.UserName))
+                    if(!this.publishers.has(article.UserName))
                     {
-                        publishers.add(article.UserName);
+                        this.publishers.add(article.UserName);
                         this.reddah.getUserPhotos(article.UserName);
                     }
                 }
@@ -86,6 +92,7 @@ export class HomePage implements OnInit {
                 this.localStorageService.store("reddah_article_groups", JSON.stringify(this.dislikeGroups));
                 this.localStorageService.store("reddah_article_usernames", JSON.stringify(this.dislikeUserNames));
                 
+                this.firstLoad = false;
             });
         }
     }
@@ -115,6 +122,11 @@ export class HomePage implements OnInit {
                 else{
                     this.articles.push(article);
                     this.loadedIds.push(article.Id);  
+                }
+                if(!this.publishers.has(article.UserName))
+                {
+                    this.publishers.add(article.UserName);
+                    this.reddah.getUserPhotos(article.UserName);
                 }
             }
             this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));

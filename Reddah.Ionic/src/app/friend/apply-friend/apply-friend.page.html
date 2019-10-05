@@ -5,11 +5,11 @@
 </ion-item>
 <ion-content padding style="--background: white;">
     <ion-item no-padding margin>
-      <ion-label position="stacked" style="font-size: x-large;">{{ 'Common.ApplyFriend' | translate }}</ion-label>
+      <ion-label text-wrap position="stacked" style="font-size: large;">{{ 'Common.ApplyFriend' | translate }}</ion-label>
       <ion-textarea autoresize margin-top type="text" [(ngModel)]="message" clearInput #newRequest></ion-textarea>
     </ion-item>
     <ion-item no-padding margin>
-      <ion-label position="stacked" style="font-size: x-large;">{{ 'Pop.Note' | translate }}</ion-label>
+      <ion-label position="stacked" style="font-size: large;">{{ 'Pop.Note' | translate }}</ion-label>
       <ion-input margin-top type="text" [(ngModel)]="targetNoteName" clearInput></ion-input>
     </ion-item>
 <!--

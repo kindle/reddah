@@ -140,7 +140,7 @@ export class AddArticlePage implements OnInit {
             component: ImageViewerComponent,
             componentProps: {
                 index: index,
-                imgSourceArray: newImageSrcArray,
+                imgSourceArray: this.reddahService.preImageArray(newImageSrcArray),
                 imgTitle: "",
                 imgDescription: ""
             },

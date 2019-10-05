@@ -21,7 +21,8 @@
                     <img src="{{reddah.appData('userphoto_'+contact.Watch)}}" class="contactPortrait">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
-                    <span class="user-name" (press)="showChangeMenu($event, contact)">{{reddah.getDisplayName(contact.Watch)}}</span><br>
+                    <span class="user-name" (press)="showChangeMenu($event, contact)">{{reddah.getDisplayName(contact.Watch,100)}}</span>
+                    <br>
                     <ion-note color="dark">{{contact.Signature}}</ion-note>
                 </ion-label>
             </ion-item>

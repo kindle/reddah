@@ -983,6 +983,9 @@ export class ReddahService {
         temp = null;
         
         output = output.replace(/\"\/uploadPhoto/g, "\"\/\/\/reddah.com\/uploadPhoto");
+        output = output.replace(/\"\/\/\/reddah.com\/uploadPhoto/g, "\"https:\/\/reddah.com\/uploadPhoto");
+        output = output.replace(/\"\/\/\/login.reddah.com\/uploadPhoto/g, "\"https:\/\/login.reddah.com\/uploadPhoto");
+        
         return output;
     }
 
@@ -1068,18 +1071,30 @@ export class ReddahService {
         let result = this.localStorageService.retrieve(cacheKey);
         
         if(cacheKey.indexOf('userphoto_')>-1){
-            if(result&&this.platform.is('cordova')){
-                return (<any>window).Ionic.WebView.convertFileSrc(result);
+            if(this.platform.is('cordova')){
+                if(result)
+                    return (<any>window).Ionic.WebView.convertFileSrc(result);
+                else
+                    return "assets/icon/anonymous.png";
             }
             else{
+                let url = this.localStorageService.retrieve(cacheKey+"_url");
+                if(url)
+                    return url
                 return "assets/icon/anonymous.png";
             }
         }
         else if(cacheKey.indexOf('cover_')>-1){
-            if(result&&this.platform.is('cordova')){
-                return (<any>window).Ionic.WebView.convertFileSrc(result);
+            if(this.platform.is('cordova')){
+                if(result)
+                    return (<any>window).Ionic.WebView.convertFileSrc(result);
+                else
+                    return "assets/icon/timg.png";
             }
             else{
+                let url = this.localStorageService.retrieve(cacheKey+"_url");
+                if(url)
+                    return url
                 return "assets/icon/timg.jpg";
             }
         }
@@ -1118,23 +1133,24 @@ export class ReddahService {
     }
 
     level2Cache(cacheKey){
-        cacheKey = cacheKey.replace("///","https://")
-
         if(this.platform.is('android')){
             let preview = this.localStorageService.retrieve(cacheKey);
             let org = this.localStorageService.retrieve(cacheKey.replace("_reddah_preview",""))
     
-            if(org)
+            if(org){
                 return (<any>window).Ionic.WebView.convertFileSrc(org);
+            }
             else if(preview)
+            {
                 return (<any>window).Ionic.WebView.convertFileSrc(preview);
+            }
             else
             {
-                return cacheKey;
+                return cacheKey.replace("///","https://");
             }
         }
         else{
-            return cacheKey;
+            return cacheKey.replace("///","https://");
         }
         
     }
@@ -1277,10 +1293,14 @@ export class ReddahService {
             await this.getUserInfo(formData)
             .subscribe(userInfo => 
             {
-                if(userInfo.Cover!=null)
+                if(userInfo.Cover!=null){
                     this.toImageCache(userInfo.Cover, `cover_${userName}`);
-                if(userInfo.Photo!=null)
+                    this.localStorageService.store(`cover_${userName}_url`,userInfo.Cover);
+                }
+                if(userInfo.Photo!=null){
                     this.toImageCache(userInfo.Photo, `userphoto_${userName}`);
+                    this.localStorageService.store(`userphoto_${userName}_url`,userInfo.Photo)
+                }
                           
                 if(userInfo.NickName!=null)
                     this.toTextCache(userInfo.NickName, `usernickname_${userName}`);
@@ -1363,11 +1383,11 @@ export class ReddahService {
         return date.getFullYear().toString() + this.complement(date.getMonth() + 1) + this.complement(date.getDate()) + this.complement(date.getHours()) + this.complement(date.getMinutes()) + this.complement(date.getSeconds());
     }
 
-    getDisplayName(userName){
+    getDisplayName(userName, count=15){
         let currentUserName = this.getCurrentUser();
         let name = this.appData('usernotename_'+userName+"_"+currentUserName) ? this.appData('usernotename_'+userName+"_"+currentUserName) :
             (this.appData('usernickname_'+userName) ? this.appData('usernickname_'+userName) : userName);
-        return this.summary(name, 15, this.getCurrentLocale());    
+        return this.summary(name, count, this.getCurrentLocale());    
     }
     
     getArray(n){
@@ -1945,5 +1965,18 @@ export class ReddahService {
         if(!exp) return true;
         let now = Date.now();
         return now >= exp*1000;
+    }
+
+    preImageArray(imageSrcArray){
+        return imageSrcArray.map(item=>{
+            return {
+                webPreviewUrl: item
+            }
+        });
+    }
+
+    parseImage(url){
+        url = url.replace("///", "https://");
+        return url;
     }
 }

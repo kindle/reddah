@@ -135,7 +135,7 @@ export class BookmarkPage implements OnInit {
         const modal = await this.modalController.create({
             component: ImageViewerComponent,
             componentProps: {
-              imgSourceArray: [photo],
+              imgSourceArray: this.reddah.preImageArray([photo]),
               imgTitle: "",
               imgDescription: ""
             },

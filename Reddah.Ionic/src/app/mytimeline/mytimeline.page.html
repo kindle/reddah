@@ -21,7 +21,7 @@
             <img src="{{reddah.appData('cover_'+userName)}}" (click)="changeCover()">
         </div>
         <div class="timelineAvatar">
-            <ion-label class="userNameTitle">{{reddah.getDisplayName(userName)}}</ion-label>
+            <ion-label class="userNameTitle">{{reddah.getDisplayName(userName,100)}}</ion-label>
             <img src="{{reddah.appData('userphoto_'+userName)}}" (click)="goUser(userName)">
         </div>
         <div (click)="goMessage()" *ngIf="reddah.unReadMessage.length>0" class="messageBox">
@@ -35,7 +35,7 @@
             <div style="width:100%;border: 0px solid red;">
                 <ion-card-header no-padding class="articleUserName">
                     <ion-card-title>
-                        <div (click)="goUser(article.UserName)" class="user-name">{{reddah.getDisplayName(article.UserName)}}</div>
+                        <div (click)="goUser(article.UserName)" class="user-name">{{reddah.getDisplayName(article.UserName,100)}}</div>
                     </ion-card-title>
                 </ion-card-header>
                 <div *ngIf="article.Title.length>0&&article.Title.length<100">
@@ -51,7 +51,9 @@
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtl')" 
                             (load)="reddah.adjustImage($event, image+'mtl')"
-                            [src]="reddah.level2Cache(image)" 
+                            [defaultImage]="'assets/icon/noimage.jpg'"
+                            [lazyLoad]="reddah.level2Cache(image)" 
+                            [useSrcset]="true"  
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
@@ -59,7 +61,9 @@
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtl')" 
                             (load)="reddah.adjustImage($event, image+'mtl')"
-                            [src]="reddah.level2Cache(image)"
+                            [defaultImage]="'assets/icon/noimage.jpg'"
+                            [lazyLoad]="reddah.level2Cache(image)" 
+                            [useSrcset]="true" 
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
@@ -67,7 +71,9 @@
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtl')" 
                             (load)="reddah.adjustImage($event, image+'mtl')"
-                            [src]="reddah.level2Cache(image)" 
+                            [defaultImage]="'assets/icon/noimage.jpg'"
+                            [lazyLoad]="reddah.level2Cache(image)" 
+                            [useSrcset]="true"  
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
@@ -75,7 +81,9 @@
                         <div class="container3">
                             <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtl')" 
                             (load)="reddah.adjustImage($event, article.Content.split('$$$')[0]+'mtl')"
-                            [src]="reddah.level2Cache(article.Content.split('$$$')[0])"
+                            [defaultImage]="'assets/icon/noimage.jpg'"
+                            [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[0])" 
+                            [useSrcset]="true" 
                             class="picture" (click)="viewer(0, article.Content.split('$$$'))">
                         </div>
                     </div>

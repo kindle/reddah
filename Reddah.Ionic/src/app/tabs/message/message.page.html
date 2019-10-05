@@ -8,12 +8,20 @@
         <div [ngClass]="{'new-point':message.IsNew}" style="margin:5px 0px;">
             <div class="singleGroupImage" *ngIf="message.Type==2">
                 <div>
-                    <img [src]="reddah.appData('userphoto_'+GetSender(message.GroupName))">
+                    <img 
+                        [defaultImage]="'assets/icon/noimage.jpg'"
+                        [lazyLoad]="reddah.appData('userphoto_'+GetSender(message.GroupName))" 
+                        [useSrcset]="true"
+                        >
                 </div>
             </div>
             <div class="groupImages" *ngIf="message.Type==3">
                 <div *ngFor="let user of message.GroupName.split(',').slice(0,9)">
-                    <img [src]="reddah.appData('userphoto_'+user)">
+                    <img 
+                        [defaultImage]="'assets/icon/noimage.jpg'"
+                        [lazyLoad]="reddah.appData('userphoto_'+user)" 
+                        [useSrcset]="true"
+                        >
                 </div>
             </div>
         </div>
