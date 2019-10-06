@@ -245,6 +245,10 @@ export class AppComponent {
                         this.presentAlertConfirm();
                         return;
                     }
+                    if(this.router.url.indexOf("surface")>0)
+                    {
+                        this.router.navigate(['/']);
+                    }
                 }
             });
         });

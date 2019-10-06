@@ -181,7 +181,11 @@
         "EnterPub":"Entre",
         "StillFocus":"Manter o foco",
         "StillUnfocus":"Não focalizar",
-        "UnfocusMessage":"Você não VAI Mais receber suas mensagens"
+        "UnfocusMessage":"Você não VAI Mais receber suas mensagens",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":""
     },
 
     "Common":{

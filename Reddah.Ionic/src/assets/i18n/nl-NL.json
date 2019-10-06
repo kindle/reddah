@@ -181,7 +181,11 @@
         "EnterPub":"Voer",
         "StillFocus":"Blijf focussen",
         "StillUnfocus":"Niet focussen",
-        "UnfocusMessage":"U ontvangt de berichten niet meer"
+        "UnfocusMessage":"U ontvangt de berichten niet meer",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":""
     },
 
     "Common":{

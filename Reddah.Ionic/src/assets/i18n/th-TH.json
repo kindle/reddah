@@ -181,7 +181,11 @@
         "EnterPub":"เข้า",
         "StillFocus":"ตั้งสมาธิ",
         "StillUnfocus":"ไม่ต้องมีสมาธิ",
-        "UnfocusMessage":"คุณจะไม่ได้ยินจากเขาอีก"
+        "UnfocusMessage":"คุณจะไม่ได้ยินจากเขาอีก",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":""
     },
 
     "Common":{

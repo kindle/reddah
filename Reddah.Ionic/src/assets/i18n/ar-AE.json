@@ -181,7 +181,11 @@
         "EnterPub":"أدخل",
         "StillFocus":"الحفاظ على التركيز",
         "StillUnfocus":"لا تركز",
-        "UnfocusMessage":"أنت لن تحصل على الرسالة مرة أخرى"
+        "UnfocusMessage":"أنت لن تحصل على الرسالة مرة أخرى",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":""
     },
 
     "Common":{

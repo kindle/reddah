@@ -184,7 +184,11 @@
         "EnterPub":"進入公眾號",
         "StillFocus":"仍然關註",
         "StillUnfocus":"不再關註",
-        "UnfocusMessage":"您將不再收到其下發的消息"
+        "UnfocusMessage":"您將不再收到其下發的消息",
+        "KM":"公裏",
+        "M":"米",
+        "Year":"年",
+        "Month":"月"
     },
 
     "Common":{

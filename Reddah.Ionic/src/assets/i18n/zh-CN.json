@@ -184,9 +184,11 @@
         "EnterPub":"进入公众号",
         "StillFocus":"仍然关注",
         "StillUnfocus":"不再关注",
-        "UnfocusMessage":"您将不再收到其下发的消息"
-
-
+        "UnfocusMessage":"您将不再收到其下发的消息",
+        "KM":"公里",
+        "M":"米",
+        "Year":"年",
+        "Month":"月"
     },
 
     "Common":{

@@ -184,7 +184,11 @@
         "EnterPub":"들어서다",
         "StillFocus":"집중하다",
         "StillUnfocus":"주의력을 집중하지 마세요",
-        "UnfocusMessage":"너는 다시는 그 소식을 받지 않을 것이다"
+        "UnfocusMessage":"너는 다시는 그 소식을 받지 않을 것이다",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":""
     },
 
     "Common":{

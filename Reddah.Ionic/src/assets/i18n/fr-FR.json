@@ -182,7 +182,11 @@
         "EnterPub":"Entrer",
         "StillFocus":"Reste concentré",
         "StillUnfocus":"Ne te concentre pas",
-        "UnfocusMessage":"Tu n 'auras plus de nouvelles"
+        "UnfocusMessage":"Tu n 'auras plus de nouvelles",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":""
     },
 
     "Common":{

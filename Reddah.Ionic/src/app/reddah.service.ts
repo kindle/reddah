@@ -1067,8 +1067,9 @@ export class ReddahService {
         }
     }
 
-    appData(cacheKey){        
-        let result = this.localStorageService.retrieve(cacheKey);
+    appData(cacheKey){    
+        let storedKey = cacheKey.replace("///","https://")
+        let result = this.localStorageService.retrieve(storedKey);
         
         if(cacheKey.indexOf('userphoto_')>-1){
             if(this.platform.is('cordova')){
@@ -1089,7 +1090,7 @@ export class ReddahService {
                 if(result)
                     return (<any>window).Ionic.WebView.convertFileSrc(result);
                 else
-                    return "assets/icon/timg.png";
+                    return "assets/icon/timg.jpg";
             }
             else{
                 let url = this.localStorageService.retrieve(cacheKey+"_url");
@@ -1134,8 +1135,9 @@ export class ReddahService {
 
     level2Cache(cacheKey){
         if(this.platform.is('android')){
-            let preview = this.localStorageService.retrieve(cacheKey);
-            let org = this.localStorageService.retrieve(cacheKey.replace("_reddah_preview",""))
+            let storekey = cacheKey.replace("///","https://")
+            let preview = this.localStorageService.retrieve(storekey);
+            let org = this.localStorageService.retrieve(storekey.replace("_reddah_preview",""))
     
             if(org){
                 return (<any>window).Ionic.WebView.convertFileSrc(org);
@@ -1210,7 +1212,7 @@ export class ReddahService {
         }
     } 
 
-    private getDeviceDirectory(){
+    getDeviceDirectory(){
         let dir = this.file.externalRootDirectory;
         if(this.platform.is('android'))
         {
@@ -1814,9 +1816,9 @@ export class ReddahService {
             degree=degree*-1;
         let meters = parseInt(111*1000*degree+"");
         if(meters>1000){
-            return parseInt(meters/1000+"") + "公里"
+            return parseInt(meters/1000+"") + this.translate.instant("Pop.KM")
         }
-        return meters + "米";
+        return meters + this.translate.instant("Pop.M");
     }
 
     async adjustImage(evt, img){
@@ -1979,4 +1981,6 @@ export class ReddahService {
         url = url.replace("///", "https://");
         return url;
     }
+    
+    publishers = new Set<string>();
 }

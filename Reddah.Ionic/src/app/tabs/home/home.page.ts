@@ -44,8 +44,6 @@ export class HomePage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
     }
 
-
-    publishers = new Set<string>();
     firstLoad = false;
     async ngOnInit(){
         
@@ -81,9 +79,9 @@ export class HomePage implements OnInit {
                 for(let article of articles){
                     this.articles.push(article);
                     this.loadedIds.push(article.Id);
-                    if(!this.publishers.has(article.UserName))
+                    if(!this.reddah.publishers.has(article.UserName))
                     {
-                        this.publishers.add(article.UserName);
+                        this.reddah.publishers.add(article.UserName);
                         this.reddah.getUserPhotos(article.UserName);
                     }
                 }
@@ -123,9 +121,9 @@ export class HomePage implements OnInit {
                     this.articles.push(article);
                     this.loadedIds.push(article.Id);  
                 }
-                if(!this.publishers.has(article.UserName))
+                if(!this.reddah.publishers.has(article.UserName))
                 {
-                    this.publishers.add(article.UserName);
+                    this.reddah.publishers.add(article.UserName);
                     this.reddah.getUserPhotos(article.UserName);
                 }
             }

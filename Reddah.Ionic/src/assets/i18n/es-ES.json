@@ -181,7 +181,11 @@
         "EnterPub":"Entrada",
         "StillFocus":"Concéntrate",
         "StillUnfocus":"No te concentres",
-        "UnfocusMessage":"No volverás a saber deél"
+        "UnfocusMessage":"No volverás a saber deél",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":""
     },
 
     "Common":{

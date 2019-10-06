@@ -181,7 +181,11 @@
         "EnterPub":"Εισάγετε",
         "StillFocus":"Μείνε συγκεντρωμένος",
         "StillUnfocus":"Μην εστιάζεις",
-        "UnfocusMessage":"Δεν θα λάβεις τα μηνύματά του πια"
+        "UnfocusMessage":"Δεν θα λάβεις τα μηνύματά του πια",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":""
     },
 
     "Common":{

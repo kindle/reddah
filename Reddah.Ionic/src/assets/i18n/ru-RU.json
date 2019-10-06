@@ -181,7 +181,11 @@
         "EnterPub":"войти",
         "StillFocus":"сохранять сосредоточенность",
         "StillUnfocus":"не фокусироваться",
-        "UnfocusMessage":"Ты больше не получишь его"
+        "UnfocusMessage":"Ты больше не получишь его",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":""
     },
 
     "Common":{

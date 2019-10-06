@@ -181,7 +181,11 @@
         "EnterPub":"Eingabe",
         "StillFocus":"Konzentrieren Sie sich",
         "StillUnfocus":"Nicht fokussieren",
-        "UnfocusMessage":"Du wirst seine Nachrichten nicht mehr empfangen"
+        "UnfocusMessage":"Du wirst seine Nachrichten nicht mehr empfangen",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":""
     },
 
     "Common":{
