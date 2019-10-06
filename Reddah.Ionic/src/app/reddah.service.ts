@@ -1104,6 +1104,29 @@ export class ReddahService {
         }
     }
 
+    appDataUserPhoto(cacheKey){  
+        let result = this.localStorageService.retrieve(cacheKey); 
+        if(result&&this.platform.is('cordova')){
+            return (<any>window).Ionic.WebView.convertFileSrc(result);
+        }
+
+        let url = this.localStorageService.retrieve(cacheKey+"_url"); 
+        if(url)
+            return url.replace("///","https://");
+        return "assets/icon/anonymous.png";
+    }
+
+    appDataMap(cacheKey, url){
+        let result = this.localStorageService.retrieve(cacheKey); 
+        if(result&&this.platform.is('cordova')){
+            return (<any>window).Ionic.WebView.convertFileSrc(result);
+        }
+
+        if(url)
+            return url.replace("///","https://");
+        return "assets/icon/anonymous.png";
+    }
+
     async appData2(cacheKey){     
         let result = this.localStorageService.retrieve(cacheKey);
         return await (<any>window).Ionic.WebView.convertFileSrc(result);
