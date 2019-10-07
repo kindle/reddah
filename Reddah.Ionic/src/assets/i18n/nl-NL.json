@@ -185,7 +185,19 @@
         "KM":"KM",
         "M":"M",
         "Year":"",
-        "Month":""
+        "Month":"",
+        "MsgCount":"Bericht",
+        "GroupChatTitle":"Titel groep",
+        "GroupChatAnnouce":"Groepsmededeling",
+        "GroupChatUpdate":"Ik heb een groepsgesprek gemaakt, laten we praten!",
+        "AddToGrp":"uitgenodigd voor de groepschat",
+        "KickGrp":"verwijderd van de groepschat",
+        "PressSpeak":"Wacht met praten",
+        "ReleaseSend":"Loslaten om te verzenden",
+        "FunImageLib":"Album",
+        "FunCamera":"Camera",
+        "FunVideoLib":"Video Bibliotheek",
+        "FunVideo":"Video"
     },
 
     "Common":{

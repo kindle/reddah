@@ -4,11 +4,6 @@ import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
-import { LocalePage } from '../../common/locale/locale.page';
-import { UserPage } from '../../common/user/user.page';
-import { ChatPage } from '../chat.page';
-import { GroupChatPage } from '../group-chat.page';
-import { ChatChooseGroupPage } from '../chat-choose-group/chat-choose-group.page';
 import { ShareChooseGroupPage } from '../share-choose-group/share-choose-group.page';
 
 @Component({

@@ -13,11 +13,9 @@ import { Locale } from './model/locale';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
-import { PostviewerPage } from './postviewer/postviewer.page';
 import { LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
 import { TranslateService } from '@ngx-translate/core';
-import { TsViewerPage } from './mytimeline/tsviewer/tsviewer.page';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import * as moment from 'moment';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -34,7 +32,6 @@ export class ReddahService {
         private jsonp: Jsonp,
         private transfer: FileTransfer,
         private file: File,
-        private modalController: ModalController,
         private toastController: ToastController,
         private platform: Platform,
         private cacheService: CacheService,
@@ -576,6 +573,11 @@ export class ReddahService {
 
     createGroupChat(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
+
+        formData.append("title", this.translate.instant("Pop.GroupChatTitle"));
+        formData.append("annouce", this.translate.instant("Pop.GroupChatAnnouce"));
+        formData.append("update", this.translate.instant("Pop.GroupChatUpdate"));
+
         return this.http.post<any>(this.createGroupChatUrl, formData)
         .pipe(
             tap(data => this.log('create group chat')),
@@ -620,6 +622,8 @@ export class ReddahService {
 
     addToGroupChat(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
+        formData.append('add', this.translate.instant('Pop.AddToGrp'));
+        formData.append('kick', this.translate.instant('Pop.KickGrp'));
         return this.http.post<any>(this.addToGroupChatUrl, formData)
         .pipe(
             tap(data => this.log('add to group chat')),
@@ -2006,4 +2010,9 @@ export class ReddahService {
     }
     
     publishers = new Set<string>();
+
+    async checkIsToday(date){
+        let cur = new Date(date);
+        return cur.getDate()==new Date().getDate();
+    }
 }

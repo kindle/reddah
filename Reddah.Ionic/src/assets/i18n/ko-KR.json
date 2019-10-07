@@ -188,7 +188,19 @@
         "KM":"KM",
         "M":"M",
         "Year":"",
-        "Month":""
+        "Month":"",
+        "MsgCount":"소식",
+        "GroupChatTitle":"그룹 제목",
+        "GroupChatAnnouce":"단체 통지",
+        "GroupChatUpdate":"나는 단체 채팅을 만들었는데, 우리 이야기합시다!",
+        "AddToGrp":"초청 을 받아 단체 채팅 에 참가하다",
+        "KickGrp":"단체 채팅에서 삭제",
+        "PressSpeak":"끊지 마라",
+        "ReleaseSend":"발송하다",
+        "FunImageLib":"앨범",
+        "FunCamera":"카메라",
+        "FunVideoLib":"영상 도서관",
+        "FunVideo":"비디오"
     },
 
     "Common":{

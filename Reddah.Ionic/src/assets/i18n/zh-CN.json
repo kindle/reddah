@@ -188,7 +188,19 @@
         "KM":"公里",
         "M":"米",
         "Year":"年",
-        "Month":"月"
+        "Month":"月",
+        "MsgCount":"条新消息",
+        "GroupChatTitle":"群聊",
+        "GroupChatAnnouce":"群公告",
+        "GroupChatUpdate":"我建了一个群，开始聊天吧！",
+        "AddToGrp":"加入了群聊",
+        "KickGrp":"移出了群聊",
+        "PressSpeak":"按住 说话",
+        "ReleaseSend":"松开 发送",
+        "FunImageLib":"相册",
+        "FunCamera":"拍照片",
+        "FunVideoLib":"视频库",
+        "FunVideo":"拍视频"
     },
 
     "Common":{

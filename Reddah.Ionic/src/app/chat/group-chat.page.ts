@@ -193,6 +193,7 @@ export class GroupChatPage extends ChatBase implements OnInit {
 
     async getHistory(id, limit, event=null){
         let formData = new FormData();
+        id = id<0?0:id;//error handling
         formData.append("groupChatId", JSON.stringify(this.groupChat.Id));
         formData.append("id", JSON.stringify(id));
         formData.append("limit", JSON.stringify(limit));

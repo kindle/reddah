@@ -185,7 +185,19 @@
         "KM":"KM",
         "M":"M",
         "Year":"",
-        "Month":""
+        "Month":"",
+        "MsgCount":"Messaggio",
+        "GroupChatTitle":"Titolo del gruppo",
+        "GroupChatAnnouce":"Avviso di gruppo",
+        "GroupChatUpdate":"Ho creato una chat di gruppo, parliamo!",
+        "AddToGrp":"invitato alla chat di gruppo",
+        "KickGrp":"rimosso dalla chat di gruppo",
+        "PressSpeak":"Trattieni a parlare",
+        "ReleaseSend":"Rilascio da inviare",
+        "FunImageLib":"Album",
+        "FunCamera":"Camera",
+        "FunVideoLib":"Libreria video",
+        "FunVideo":"Video"
     },
 
     "Common":{

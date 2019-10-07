@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
-import { CacheService } from "ionic-cache";
 import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions,CaptureVideoOptions } from '@ionic-native/media-capture';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx'; 
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-chat-box',
@@ -23,17 +23,16 @@ export class ChatBoxComponent implements OnInit {
     
     @ViewChild('newChatComment') newChatComment;
     
-    speakDesc="按住 说话";
+    speakDesc=this.translate.instant('Pop.PressSpeak');
     commentContent: string;
 
     constructor(
         public reddah : ReddahService,
-        private cacheService: CacheService,
-        private modalController: ModalController,
         private file: File,
         private media: Media,
         private platform: Platform,
         private videoEditor: VideoEditor,
+        private translate: TranslateService,
     ) { }
 
     ngOnInit() {
@@ -127,10 +126,10 @@ export class ChatBoxComponent implements OnInit {
 
     chatFunctionGroups = [
         [
-            {id:1, icon:'images',name:'相册'},
-            {id:2, icon:'camera',name:'拍照片'},
-            {id:3, icon:'play-circle',name:'视频库'},
-            {id:4, icon:'videocam',name:'拍视频'},
+            {id:1, icon:'images',name: this.translate.instant('Pop.FunImageLib')}, //相册
+            {id:2, icon:'camera',name:this.translate.instant('Pop.FunCamera')}, //拍照片
+            {id:3, icon:'play-circle',name:this.translate.instant('Pop.FunVideoLib')}, //视频库
+            {id:4, icon:'videocam',name:this.translate.instant('Pop.FunVideo')}, //拍视频
             /*{id:5, icon:'pin',name:'位置'},
             {id:6, icon:'repeat',name:'转账'},
             {id:7, icon:'mic',name:'语音输入'},
@@ -160,7 +159,7 @@ export class ChatBoxComponent implements OnInit {
     isPressed=false;
     async startSpeak(){
         this.isPressed=true;
-        this.speakDesc = "松开 发送";
+        this.speakDesc = this.translate.instant('Pop.ReleaseSend');
         if (this.platform.is('cordova')) {
             
 
@@ -197,7 +196,7 @@ export class ChatBoxComponent implements OnInit {
 
     async stopSpeak(){
         this.isPressed=false;
-        this.speakDesc = "按住 说话";
+        this.speakDesc = this.translate.instant('Pop.PressSpeak');
         if (this.platform.is('cordova')) {
             this.audioMediaObj.stopRecord();
         }

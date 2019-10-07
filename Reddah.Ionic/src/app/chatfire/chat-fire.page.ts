@@ -394,11 +394,6 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         }
     }
 
-    async checkIsToday(date){
-        let cur = new Date(date);
-        return cur.getDate()==new Date().getDate();
-    }
-
     /*sendMessage(){
         this.reddah.addComments(this.chatId, -1, this.message).subscribe(data=>{
             this.getChat();

@@ -185,7 +185,19 @@
         "KM":"KM",
         "M":"M",
         "Year":"",
-        "Month":""
+        "Month":"",
+        "MsgCount":"رسالة",
+        "GroupChatTitle":"اسم المجموعة",
+        "GroupChatAnnouce":"مجموعة اشعار",
+        "GroupChatUpdate":"لقد خلقت مجموعة من الدردشة لنتحدث",
+        "AddToGrp":"دعيت إلى مجموعة دردشة",
+        "KickGrp":"حذف من مجموعة دردشة",
+        "PressSpeak":"انتظر",
+        "ReleaseSend":"نشر لإرسال",
+        "FunImageLib":"ألبومات",
+        "FunCamera":"الكاميرا",
+        "FunVideoLib":"مكتبة الفيديو",
+        "FunVideo":"ويديو"
     },
 
     "Common":{

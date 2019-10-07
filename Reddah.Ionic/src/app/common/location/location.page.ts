@@ -80,7 +80,7 @@ export class LocationPage implements OnInit {
             return new L.TileLayer.WebDogTileLayer(url, options);
         };
 
-        this.tileUrl = "http://rt{s}.map.gtimg.com/realtimerender?z={z}&x={x}&y={y}&type=vector&style=0";   
+        this.tileUrl = "https://rt{s}.map.gtimg.com/realtimerender?z={z}&x={x}&y={y}&type=vector&style=0";   
         this.tileOptions = {
             subdomain: '012',
             getUrlArgs: (tilePoint)=> {
@@ -94,7 +94,7 @@ export class LocationPage implements OnInit {
     }
     
     markerGroup; 
-    tileUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";  
+    tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";  
     tileOptions:any = { maxZoom: 18 };
 
     loadmap() {

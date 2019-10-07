@@ -186,7 +186,19 @@
         "KM":"KM",
         "M":"M",
         "Year":"",
-        "Month":""
+        "Month":"",
+        "MsgCount":"メッセージ",
+        "GroupChatTitle":"グループタイトル",
+        "GroupChatAnnouce":"グループ通知",
+        "GroupChatUpdate":"私はグループチャットを作成し、話をしましょう！",
+        "AddToGrp":"グループチャットに招待",
+        "KickGrp":"グループチャットから削除",
+        "PressSpeak":"ホールドトゥトーク",
+        "ReleaseSend":"送信するリリース",
+        "FunImageLib":"アルバム",
+        "FunCamera":"カメラ",
+        "FunVideoLib":"ビデオライブラリ",
+        "FunVideo":"ビデオ"
     },
 
     "Common":{

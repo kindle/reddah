@@ -1,7 +1,7 @@
 <div (click)="viewArticle()" class="container">
     <ion-item lines="none" color="light" no-padding style="padding-bottom:5px;">
         <ion-avatar class="avatar-top sharePhoto" *ngIf="image">
-            <img [src]="image" class="sharePortrait">
+            <img [src]="reddah.parseImage(image)" class="sharePortrait">
         </ion-avatar>
         <ion-avatar class="avatar-top sharePhotoNone" *ngIf="!image">
             <ion-icon name="ios-link" color="dark" class="sharePortraitNone"></ion-icon>

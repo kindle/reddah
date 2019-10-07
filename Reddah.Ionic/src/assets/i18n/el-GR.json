@@ -185,7 +185,19 @@
         "KM":"KM",
         "M":"M",
         "Year":"",
-        "Month":""
+        "Month":"",
+        "MsgCount":"Μήνυμα",
+        "GroupChatTitle":"Όνομα ομάδας",
+        "GroupChatAnnouce":"Ομαδική ανακοίνωση",
+        "GroupChatUpdate":"Δημιούργησα μια ομαδική συζήτηση, ας μιλήσουμε!",
+        "AddToGrp":"προσκλήθηκε στην ομαδική συνομιλία",
+        "KickGrp":"Αφαίρεση από την ομαδική συνομιλία",
+        "PressSpeak":"Κράτα τα λόγια σου",
+        "ReleaseSend":"Απελευθέρωση για αποστολή",
+        "FunImageLib":"Άλμπουμ",
+        "FunCamera":"Κάμερα",
+        "FunVideoLib":"Βιβλιοθήκη",
+        "FunVideo":"Βίντεο"
     },
 
     "Common":{

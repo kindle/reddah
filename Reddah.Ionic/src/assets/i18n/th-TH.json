@@ -185,7 +185,19 @@
         "KM":"KM",
         "M":"M",
         "Year":"",
-        "Month":""
+        "Month":"",
+        "MsgCount":"จดหมายสั้น",
+        "GroupChatTitle":"ชื่อกลุ่ม",
+        "GroupChatAnnouce":"ประกาศกลุ่ม",
+        "GroupChatUpdate":"ฉันสร้างกลุ่มสนทนามาคุยกัน",
+        "AddToGrp":"ได้รับเชิญให้เข้าร่วมกลุ่มสนทนา",
+        "KickGrp":"ลบจากกลุ่มสนทนา",
+        "PressSpeak":"เดี๋ยวก่อน",
+        "ReleaseSend":"เผยแพร่เพื่อส่ง",
+        "FunImageLib":"อัลบั้ม",
+        "FunCamera":"กล้องถ่ายรูป",
+        "FunVideoLib":"ห้องสมุดภาพ",
+        "FunVideo":"วีดีโอ"
     },
 
     "Common":{
