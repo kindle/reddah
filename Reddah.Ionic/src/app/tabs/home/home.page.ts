@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
 
     firstLoad = false;
     async ngOnInit(){
-        
+        this.reddah.getUserPhotos(this.userName);
 
         let cacheArticles = this.localStorageService.retrieve("reddah_articles");
         let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids");
