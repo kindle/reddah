@@ -227,6 +227,10 @@ namespace Reddah.Web.Login.Controllers
             try
             {
                 string jwt = HttpContext.Current.Request["jwt"];
+                string grpTitle = HttpContext.Current.Request["title"];
+                string grpAnnouce = HttpContext.Current.Request["annouce"];
+                string grpUpdate = HttpContext.Current.Request["update"];
+
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 string[] targetUsers = js.Deserialize<string[]>(HttpContext.Current.Request["targetUsers"]);
 
@@ -248,11 +252,11 @@ namespace Reddah.Web.Login.Controllers
                     
                     newGroupChat.CreatedOn = DateTime.UtcNow;
                     newGroupChat.CreatedBy = jwtResult.JwtUser.User; //group creator
-                    newGroupChat.Title = "群聊"; //group title
-                    newGroupChat.Content = "群公告"; //group anouncement
+                    newGroupChat.Title = grpTitle; //group title
+                    newGroupChat.Content = grpAnnouce; //group anouncement
                     newGroupChat.UserName = jwtResult.JwtUser.User; //group owners, default only 1 - the creator
                     newGroupChat.LastUpdateBy = jwtResult.JwtUser.User;
-                    newGroupChat.LastUpdateContent = "我建了一个群，开始聊天吧！";
+                    newGroupChat.LastUpdateContent = grpUpdate;
                     newGroupChat.LastUpdateOn = DateTime.UtcNow;
                     db.Article.Add(newGroupChat);
                     db.SaveChanges();
@@ -492,6 +496,8 @@ namespace Reddah.Web.Login.Controllers
             try
             {
                 string jwt = HttpContext.Current.Request["jwt"];
+                string addLoc = HttpContext.Current.Request["add"];
+                string kickLoc = HttpContext.Current.Request["kick"];
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 int id = js.Deserialize<int>(HttpContext.Current.Request["Id"]);
                 string[] userNames = js.Deserialize<string[]>(HttpContext.Current.Request["UserNames"]);
@@ -512,7 +518,7 @@ namespace Reddah.Web.Login.Controllers
                         var org = target.GroupName.Split(',');
                         
                         //check delete
-                        var content = "\"{0}\"把\"{1}\"移出了群聊";
+                        var content = "\"{0}\": \"{1}\"" + kickLoc;
                         var newlist = userNames.ToList();
                         foreach (var item in org.ToList())
                         {
@@ -538,7 +544,7 @@ namespace Reddah.Web.Login.Controllers
                            
 
                         //check add
-                        content = "\"{0}\"邀请\"{1}\"加入了群聊";
+                        content = "\"{0}\": \"{1}\"" + addLoc;
                         var orglist = org.ToList();
                         foreach (var item in userNames.ToList())
                         {
