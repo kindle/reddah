@@ -181,7 +181,23 @@
         "EnterPub":"Entre",
         "StillFocus":"Manter o foco",
         "StillUnfocus":"Não focalizar",
-        "UnfocusMessage":"Você não VAI Mais receber suas mensagens"
+        "UnfocusMessage":"Você não VAI Mais receber suas mensagens",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":"",
+        "MsgCount":"Mensagem",
+        "GroupChatTitle":"Título do Grupo",
+        "GroupChatAnnouce":"Aviso de Grupo",
+        "GroupChatUpdate":"Criei UMA conversa EM Grupo, vamos conversar!",
+        "AddToGrp":"Convidado para o chat do Grupo",
+        "KickGrp":"Removido do chat do Grupo",
+        "PressSpeak":"Segure para falar",
+        "ReleaseSend":"Liberar para Enviar",
+        "FunImageLib":"Álbum",
+        "FunCamera":"Câmera",
+        "FunVideoLib":"Biblioteca de vídeo",
+        "FunVideo":"Video"
     },
 
     "Common":{
@@ -201,7 +217,7 @@
         "View":"Visão",
         "Category":"Categoria de conta",
         "PubDesc":"Ele fornece UMA Nova forma de divulgação de informação para OS meios de comunicação e indivíduos, e constrói um Melhor modelo de comunicação e gestão com OS leitores.",
-        "MiniDesc":"Uma Nova capacidade Aberta Pode ser facilmente acessada e disseminada EM Wechat, e TEM excelente experiência EM USO.",
+        "MiniDesc":"Uma Nova capacidade Aberta Pode ser facilmente acessada e disseminada EM Reddah, e TEM excelente experiência EM USO.",
         "HideMyLocation":"Não mostrar a minha localização",
         "AllowTenTimeline":"Permitir que estranhos vejam 10 Aperture",
         "Developer":"Desenvolvedor",

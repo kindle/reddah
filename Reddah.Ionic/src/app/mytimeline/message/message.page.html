@@ -12,7 +12,8 @@
             <h3 class="user-name">{{reddah.getDisplayName(message.From)}}</h3>
             <ion-icon name="heart-empty" class="likeIcon" *ngIf="message.Type==0"></ion-icon>
             <ion-note *ngIf="message.Type==1">#@$#!</ion-note>
-            <h4>{{message.CreatedOn | date: 'HH:mm'}}</h4>
+            <h4 *ngIf="reddah.checkIsToday(message.CreatedOn)">{{reddah.utcToLocal(message.CreatedOn,'HH:mm')}}</h4>
+            <h4 *ngIf="!reddah.checkIsToday(message.CreatedOn)">{{reddah.utcToLocal(message.CreatedOn,'MM-dd HH:mm')}}</h4>
         </ion-label>
         <img slot="end" src="{{reddah.level2Cache(message.AritclePhoto)}}" class="messageContentPortrait">
     </ion-item>

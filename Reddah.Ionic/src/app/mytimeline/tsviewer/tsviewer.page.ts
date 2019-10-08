@@ -11,6 +11,7 @@ import { CacheService } from "ionic-cache";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleTextPopPage } from '../../common/article-text-pop.page'
 import { LocationPage } from '../../common/location/location.page';
+import { ApplyFriendPage } from '../../friend/apply-friend/apply-friend.page';
 
 @Component({
     selector: 'app-tsviewer',
@@ -169,7 +170,7 @@ export class TsViewerPage implements OnInit {
             component: ImageViewerComponent,
             componentProps: {
                 index: index,
-                imgSourceArray: imageSrcArray,
+                imgSourceArray: this.reddah.preImageArray(imageSrcArray),
                 imgTitle: "",
                 imgDescription: ""
             },
@@ -278,5 +279,14 @@ export class TsViewerPage implements OnInit {
 
     isMe(){
         return this.article.UserName==this.reddah.getCurrentUser();
+    }
+
+    async addFriend(){
+        const applyFriendModal = await this.modalController.create({
+            component: ApplyFriendPage,
+            componentProps: { targetUserName: this.article.UserName }
+        });
+          
+        await applyFriendModal.present();
     }
 }

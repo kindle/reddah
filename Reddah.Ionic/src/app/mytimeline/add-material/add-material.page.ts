@@ -168,7 +168,7 @@ export class AddMaterialPage implements OnInit {
             component: ImageViewerComponent,
             componentProps: {
                 index: index,
-                imgSourceArray: newImageSrcArray,
+                imgSourceArray: this.reddah.preImageArray(newImageSrcArray),
                 imgTitle: "",
                 imgDescription: ""
             },

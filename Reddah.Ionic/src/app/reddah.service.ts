@@ -13,11 +13,9 @@ import { Locale } from './model/locale';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
-import { PostviewerPage } from './postviewer/postviewer.page';
 import { LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
 import { TranslateService } from '@ngx-translate/core';
-import { TsViewerPage } from './mytimeline/tsviewer/tsviewer.page';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import * as moment from 'moment';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -32,9 +30,8 @@ export class ReddahService {
         private http: HttpClient,
         private localStorageService: LocalStorageService,
         private jsonp: Jsonp,
-        private transfer: FileTransfer, 
+        private transfer: FileTransfer,
         private file: File,
-        private modalController: ModalController,
         private toastController: ToastController,
         private platform: Platform,
         private cacheService: CacheService,
@@ -576,6 +573,11 @@ export class ReddahService {
 
     createGroupChat(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
+
+        formData.append("title", this.translate.instant("Pop.GroupChatTitle"));
+        formData.append("annouce", this.translate.instant("Pop.GroupChatAnnouce"));
+        formData.append("update", this.translate.instant("Pop.GroupChatUpdate"));
+
         return this.http.post<any>(this.createGroupChatUrl, formData)
         .pipe(
             tap(data => this.log('create group chat')),
@@ -620,6 +622,8 @@ export class ReddahService {
 
     addToGroupChat(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
+        formData.append('add', this.translate.instant('Pop.AddToGrp'));
+        formData.append('kick', this.translate.instant('Pop.KickGrp'));
         return this.http.post<any>(this.addToGroupChatUrl, formData)
         .pipe(
             tap(data => this.log('add to group chat')),
@@ -983,6 +987,9 @@ export class ReddahService {
         temp = null;
         
         output = output.replace(/\"\/uploadPhoto/g, "\"\/\/\/reddah.com\/uploadPhoto");
+        output = output.replace(/\"\/\/\/reddah.com\/uploadPhoto/g, "\"https:\/\/reddah.com\/uploadPhoto");
+        output = output.replace(/\"\/\/\/login.reddah.com\/uploadPhoto/g, "\"https:\/\/login.reddah.com\/uploadPhoto");
+        
         return output;
     }
 
@@ -1064,28 +1071,64 @@ export class ReddahService {
         }
     }
 
-    appData(cacheKey){        
-        let result = this.localStorageService.retrieve(cacheKey);
+    appData(cacheKey){    
+        let storedKey = cacheKey.replace("///","https://")
+        let result = this.localStorageService.retrieve(storedKey);
         
         if(cacheKey.indexOf('userphoto_')>-1){
-            if(result&&this.platform.is('cordova')){
-                return (<any>window).Ionic.WebView.convertFileSrc(result);
+            if(this.platform.is('cordova')){
+                if(result)
+                    return (<any>window).Ionic.WebView.convertFileSrc(result);
+                else
+                    return "assets/icon/anonymous.png";
             }
             else{
+                let url = this.localStorageService.retrieve(cacheKey+"_url");
+                if(url)
+                    return url
                 return "assets/icon/anonymous.png";
             }
         }
         else if(cacheKey.indexOf('cover_')>-1){
-            if(result&&this.platform.is('cordova')){
-                return (<any>window).Ionic.WebView.convertFileSrc(result);
+            if(this.platform.is('cordova')){
+                if(result)
+                    return (<any>window).Ionic.WebView.convertFileSrc(result);
+                else
+                    return "assets/icon/timg.jpg";
             }
             else{
+                let url = this.localStorageService.retrieve(cacheKey+"_url");
+                if(url)
+                    return url
                 return "assets/icon/timg.jpg";
             }
         }
         else{//pure text
             return result==null ? "": result;
         }
+    }
+
+    appDataUserPhoto(cacheKey){  
+        let result = this.localStorageService.retrieve(cacheKey); 
+        if(result&&this.platform.is('cordova')){
+            return (<any>window).Ionic.WebView.convertFileSrc(result);
+        }
+
+        let url = this.localStorageService.retrieve(cacheKey+"_url"); 
+        if(url)
+            return url.replace("///","https://");
+        return "assets/icon/anonymous.png";
+    }
+
+    appDataMap(cacheKey, url){
+        let result = this.localStorageService.retrieve(cacheKey); 
+        if(result&&this.platform.is('cordova')){
+            return (<any>window).Ionic.WebView.convertFileSrc(result);
+        }
+
+        if(url)
+            return url.replace("///","https://");
+        return "assets/icon/anonymous.png";
     }
 
     async appData2(cacheKey){     
@@ -1118,15 +1161,27 @@ export class ReddahService {
     }
 
     level2Cache(cacheKey){
-        let preview = this.localStorageService.retrieve(cacheKey);
-        let org = this.localStorageService.retrieve(cacheKey.replace("_reddah_preview",""))
+        if(this.platform.is('android')){
+            let storekey = cacheKey.replace("///","https://")
+            let preview = this.localStorageService.retrieve(storekey);
+            let org = this.localStorageService.retrieve(storekey.replace("_reddah_preview",""))
+    
+            if(org){
+                return (<any>window).Ionic.WebView.convertFileSrc(org);
+            }
+            else if(preview)
+            {
+                return (<any>window).Ionic.WebView.convertFileSrc(preview);
+            }
+            else
+            {
+                return cacheKey.replace("///","https://");
+            }
+        }
+        else{
+            return cacheKey.replace("///","https://");
+        }
         
-        if(org)
-            return (<any>window).Ionic.WebView.convertFileSrc(org);
-        else if(preview)
-            return (<any>window).Ionic.WebView.convertFileSrc(preview);
-        else
-            return cacheKey;
     }
 
     chatImageCache(cacheKey){
@@ -1154,12 +1209,15 @@ export class ReddahService {
 
     private fileTransfer: FileTransferObject; 
     toFileCache(webUrl, isVideo=false){
+        let deviceDirectory = this.getDeviceDirectory();
+        
         let cachedFilePath = this.localStorageService.retrieve(webUrl);
+        //alert("webUrl:"+webUrl+cachedFilePath);
         if(cachedFilePath==null){
             webUrl = webUrl.replace("///","https://");
             let webFileName = this.getFileName(webUrl);
-            let targetUrl = this.file.externalRootDirectory+"reddah/" + webFileName;
-
+            let targetUrl = deviceDirectory+"reddah/" + webFileName;
+            //alert(webFileName+"____"+targetUrl)
             this.fileTransfer = this.transfer.create();  
             this.fileTransfer.download(webUrl, targetUrl).then(
             _ => {
@@ -1170,19 +1228,40 @@ export class ReddahService {
                 }
                 else{
                     this.localStorageService.store(webUrl, targetUrl);
+                    
                     this.appCacheToOrg[(<any>window).Ionic.WebView.convertFileSrc(targetUrl)] = webUrl;
                 }
+                //alert(webUrl)
             }, 
-            _ => { console.log(JSON.stringify(_)) });
+            _ => { 
+                //alert(JSON.stringify(_))
+                console.log(JSON.stringify(_)) });
         }
     } 
 
+    getDeviceDirectory(){
+        let dir = this.file.externalRootDirectory;
+        if(this.platform.is('android'))
+        {
+            dir = this.file.externalRootDirectory;
+        }
+        else if(this.platform.is('ipad')||this.platform.is('iphone')||this.platform.is('ios')){
+            dir = this.file.cacheDirectory;
+        }
+        else {
+            
+        }
+        return dir;
+    }
+
     toImageCache(webUrl, cacheKey){
+        let deviceDirectory = this.getDeviceDirectory();
+        
         let cachedImagePath = this.localStorageService.retrieve(cacheKey);
 
         let cacheImageName = "";
         if(cachedImagePath!=null){
-            cacheImageName = cachedImagePath.replace(this.file.externalRootDirectory+"reddah/","");
+            cacheImageName = cachedImagePath.replace(deviceDirectory+"reddah/","");
         }
 
         webUrl = webUrl.replace("///","https://");
@@ -1190,7 +1269,7 @@ export class ReddahService {
 
         if(cachedImagePath==null||cacheImageName!=webImageName){
             this.fileTransfer = this.transfer.create();
-            let targetUrl = this.file.externalRootDirectory+"reddah/" + webImageName;
+            let targetUrl = deviceDirectory+"reddah/" + webImageName;
             this.fileTransfer.download(webUrl, targetUrl).then(
             _ => {
                 this.localStorageService.store(cacheKey, targetUrl);
@@ -1212,13 +1291,19 @@ export class ReddahService {
 
     verifyImageFile(key){
         let cachedPath = this.localStorageService.retrieve(key);
-        if(cachedPath&&this.platform.is('cordova')){
+        if(cachedPath&&this.platform.is('android')){
             let fileName = this.getFileName(cachedPath);
             let filePath = cachedPath.replace(fileName, "");
             
-            this.file.checkFile(filePath, fileName).catch(_=>{
-                this.localStorageService.clear(key);
-            });
+            this.file.checkFile(filePath, fileName).then(
+                (files) => {
+                    console.log("files found" + files)
+                }
+                ).catch(
+                (err) => {
+                    this.localStorageService.clear(key);
+                }
+            );
         }
     }
 
@@ -1237,10 +1322,14 @@ export class ReddahService {
             await this.getUserInfo(formData)
             .subscribe(userInfo => 
             {
-                if(userInfo.Cover!=null)
+                if(userInfo.Cover!=null){
                     this.toImageCache(userInfo.Cover, `cover_${userName}`);
-                if(userInfo.Photo!=null)
+                    this.localStorageService.store(`cover_${userName}_url`,userInfo.Cover);
+                }
+                if(userInfo.Photo!=null){
                     this.toImageCache(userInfo.Photo, `userphoto_${userName}`);
+                    this.localStorageService.store(`userphoto_${userName}_url`,userInfo.Photo)
+                }
                           
                 if(userInfo.NickName!=null)
                     this.toTextCache(userInfo.NickName, `usernickname_${userName}`);
@@ -1323,11 +1412,11 @@ export class ReddahService {
         return date.getFullYear().toString() + this.complement(date.getMonth() + 1) + this.complement(date.getDate()) + this.complement(date.getHours()) + this.complement(date.getMinutes()) + this.complement(date.getSeconds());
     }
 
-    getDisplayName(userName){
+    getDisplayName(userName, count=15){
         let currentUserName = this.getCurrentUser();
         let name = this.appData('usernotename_'+userName+"_"+currentUserName) ? this.appData('usernotename_'+userName+"_"+currentUserName) :
             (this.appData('usernickname_'+userName) ? this.appData('usernickname_'+userName) : userName);
-        return this.summary(name, 15, this.getCurrentLocale());    
+        return this.summary(name, count, this.getCurrentLocale());    
     }
     
     getArray(n){
@@ -1672,8 +1761,10 @@ export class ReddahService {
     }
 
     openMini(webUrl, miniName){
+        let deviceDirectory = this.getDeviceDirectory();
+
         this.fileTransfer = this.transfer.create();  
-        let targetUrl = this.file.externalRootDirectory+"reddah/mini/" + miniName;
+        let targetUrl = deviceDirectory+"reddah/mini/" + miniName;
         this.fileTransfer.download(webUrl, targetUrl).then(
         _ => {
             let localUrl = (<any>window).Ionic.WebView.convertFileSrc(targetUrl);
@@ -1752,14 +1843,15 @@ export class ReddahService {
             degree=degree*-1;
         let meters = parseInt(111*1000*degree+"");
         if(meters>1000){
-            return parseInt(meters/1000+"") + "公里"
+            return parseInt(meters/1000+"") + this.translate.instant("Pop.KM")
         }
-        return meters + "米";
+        return meters + this.translate.instant("Pop.M");
     }
 
     async adjustImage(evt, img){
         img = this.makeItId(img);
         let image = document.getElementById(img);
+        
         if(image.offsetHeight<image.offsetWidth)
         {
             image.style.height = "100%";
@@ -1902,5 +1994,25 @@ export class ReddahService {
         if(!exp) return true;
         let now = Date.now();
         return now >= exp*1000;
+    }
+
+    preImageArray(imageSrcArray){
+        return imageSrcArray.map(item=>{
+            return {
+                webPreviewUrl: item
+            }
+        });
+    }
+
+    parseImage(url){
+        url = url.replace("///", "https://");
+        return url;
+    }
+    
+    publishers = new Set<string>();
+
+    async checkIsToday(date){
+        let cur = new Date(date);
+        return cur.getDate()==new Date().getDate();
     }
 }

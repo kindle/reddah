@@ -1,6 +1,6 @@
 <app-header title="Menu.Find"></app-header>
 <ion-content no-padding class="findContent">
-    <ion-item lines="none" class="borderTop borderBottom" href="/mytimeline">
+    <ion-item lines="none" class="borderTop borderBottom" href="/mytimeline" detail="false">
         <ion-icon class="menuIcon" name="aperture" slot="start" size="medium" color="primary"></ion-icon>
         <ion-text slot="start">{{ 'Menu.Timeline' | translate }}</ion-text>
         <ion-badge slot="start" color="danger" *ngIf="reddah.unReadMessage.length>0">{{reddah.unReadMessage.length}}</ion-badge>
@@ -8,7 +8,7 @@
     </ion-item>
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
-    <ion-item class="borderTop" href="/scan">
+    <ion-item class="borderTop" href="/scan" detail="false">
         <ion-icon class="menuIcon" name="qr-scanner" slot="start" size="medium"></ion-icon>
         <ion-label>{{ 'Menu.Header.Scan' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>

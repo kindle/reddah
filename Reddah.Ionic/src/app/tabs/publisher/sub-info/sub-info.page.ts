@@ -8,8 +8,6 @@ import { ReddahService } from '../../../reddah.service';
 import { QrcardPage } from '../../../common/qrcard/qrcard.page';
 import { SettingNickNamePage } from '../../../settings/setting-nickname/setting-nickname.page'
 import { AddArticlePage } from '../add-article/add-article.page';
-import { Article } from '../../../model/article';
-import { PostviewerPage } from '../../../postviewer/postviewer.page';
 import { AddMiniPage } from '../add-mini/add-mini.page';
 import { MiniViewerComponent } from '../../../common/mini-viewer/mini-viewer.component';
 import { TranslateService } from '@ngx-translate/core';

@@ -209,6 +209,11 @@ export class SearchPage implements OnInit {
                 {
                     this.articles_a.push(article);
                     this.loadedIds_a.push(article.Id);  
+                    if(!this.reddah.publishers.has(article.UserName))
+                    {
+                        this.reddah.publishers.add(article.UserName);
+                        this.reddah.getUserPhotos(article.UserName);
+                    }
                     i++;
                 }
                 else
@@ -237,6 +242,11 @@ export class SearchPage implements OnInit {
                 {
                     this.articles_t.push(article);
                     this.loadedIds_t.push(article.Id);  
+                    if(!this.reddah.publishers.has(article.UserName))
+                    {
+                        this.reddah.publishers.add(article.UserName);
+                        this.reddah.getUserPhotos(article.UserName);
+                    }
                     i++;
                 }
                 else

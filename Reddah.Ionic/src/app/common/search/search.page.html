@@ -17,8 +17,10 @@
     </ion-grid>
     <ion-grid *ngIf="selectedTopicId==1">
         <ion-row>
-            <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_a"></ion-spinner></div>
-            <ion-text *ngIf="firstLoading_t" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+            <div *ngIf="firstLoading_a" style="display: flex; justify-content: center;width:100%;margin:15px;">
+                <ion-spinner name="bubbles"></ion-spinner>
+                <ion-text class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+            </div>
             <span class="articleTab" *ngIf="articles_a.length>0">{{ 'Menu.Recommend' | translate }}</span>
         </ion-row>
         <ion-row *ngFor="let article of articles_a" (click)="view(article)">
@@ -26,11 +28,11 @@
                 <span class="article-title articleTitle">{{reddah.htmlDecode(article.Title)}}</span>
                 <ion-item>
                     <ion-avatar class="avatar-top" *ngIf="article.ImageUrls.length>0">
-                        <img class="BrowsePreviewImageOne" src="{{article.ImageUrls[0]}}">
+                        <img class="BrowsePreviewImageOne" src="{{reddah.parseImage(article.ImageUrls[0])}}">
                     </ion-avatar>
                     <ion-label>
                         <p class="articleContent" text-wrap [innerHTML]="reddah.summary(article.Content, 100, article.Locale)"></p>
-                        <ion-note class="user-name">{{reddah.getDisplayName(article.UserName)}}</ion-note>
+                        <ion-note class="user-name">{{reddah.getDisplayName(article.UserName, 20)}}</ion-note>
                         <ion-note class="articleFooterTime">{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
                     </ion-label>
                 </ion-item>
@@ -39,20 +41,22 @@
     </ion-grid>
     <ion-grid *ngIf="selectedTopicId==2">
         <ion-row>
-            <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_t"></ion-spinner></div>
-            <ion-text *ngIf="firstLoading_t" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
-            <span class="articleTab" *ngIf="articles_t.length>0">{{ 'Menu.Timeline' | translate }}</span>
+            <div *ngIf="firstLoading_t" style="display: flex; justify-content: center;width:100%;margin:15px;">
+                <ion-spinner name="bubbles"></ion-spinner>
+                <ion-text class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+            </div>
+            <span class="articleTab" style="margin-left:3px;" *ngIf="articles_t.length>0">{{ 'Menu.Timeline' | translate }}</span>
         </ion-row>
         <ion-row *ngFor="let article of articles_t" (click)="goTsViewer(article)">
             <div style="width:100%;border-bottom: 1px solid #eeeeee;padding: 10px 0;">
                 <span class="ts-article-title" [innerHTML]="reddah.summary(article.Title, 100, article.Locale)"></span>
                 <ion-item style="margin: 8px 0;" lines="none" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0">
                     <ion-thumbnail *ngFor="let image of article.Content.split('$$$').splice(0,3);index as i" style="padding: 3px;">
-                        <img src="{{image}}">
+                        <img src="{{reddah.parseImage(image)}}">
                     </ion-thumbnail>
                 </ion-item>
                 <ion-label class="articleTitle">
-                    <ion-note class="user-name">{{reddah.getDisplayName(article.UserName)}}</ion-note>
+                    <ion-note class="user-name" style="margin-left:3px;">{{reddah.getDisplayName(article.UserName, 20)}}</ion-note>
                     <ion-note class="articleFooterTime">{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
                 </ion-label>
             </div>
@@ -60,8 +64,10 @@
     </ion-grid>
     <ion-grid *ngIf="selectedTopicId==3">
         <ion-row>
-            <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_p"></ion-spinner></div>
-            <ion-text *ngIf="firstLoading_p" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+            <div *ngIf="firstLoading_p" style="display: flex; justify-content: center;width:100%;margin:15px;">
+                <ion-spinner name="bubbles"></ion-spinner>
+                <ion-text class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+            </div>
             <span class="articleTab" *ngIf="users_p&&users_p.length>0">{{ 'Menu.Publisher' | translate }}</span>
         </ion-row>
         <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_p_recent.length>0">
@@ -96,9 +102,10 @@
     </ion-grid>
     <ion-grid *ngIf="selectedTopicId==4">
         <ion-row>
-            <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_m"></ion-spinner></div>
-            <ion-text *ngIf="firstLoading_m" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
-            <span class="articleTab" *ngIf="users_m&&users_m.length>0">{{ 'Menu.MiniApp' | translate }}</span>
+            <div *ngIf="firstLoading_m" style="display: flex; justify-content: center;width:100%;margin:15px;">
+                <ion-spinner name="bubbles"></ion-spinner>
+                <ion-text class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+            </div><span class="articleTab" *ngIf="users_m&&users_m.length>0">{{ 'Menu.MiniApp' | translate }}</span>
         </ion-row>
         <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_m_recent.length>0">
             <ion-item lines="none">
@@ -132,8 +139,10 @@
     </ion-grid>
     <ion-grid *ngIf="selectedTopicId==0">
         <ion-row>
-            <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_a"></ion-spinner></div>
-            <ion-text *ngIf="firstLoading_a" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+            <div *ngIf="firstLoading_a" style="display: flex; justify-content: center;width:100%;margin:15px;">
+                <ion-spinner name="bubbles"></ion-spinner>
+                <ion-text class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+            </div>
             <span class="articleTab" *ngIf="articles_a.length>0">{{ 'Menu.Recommend' | translate }}</span>
         </ion-row>
         <ion-row *ngFor="let article_a of articles_a" (click)="view(article_a)">
@@ -141,11 +150,11 @@
                 <span class="article-title articleTitle">{{reddah.htmlDecode(article_a.Title)}}</span>
                 <ion-item>
                     <ion-avatar class="avatar-top" *ngIf="article_a.ImageUrls.length>0">
-                        <img class="BrowsePreviewImageOne" src="{{article_a.ImageUrls[0]}}">
+                        <img class="BrowsePreviewImageOne" src="{{reddah.parseImage(article_a.ImageUrls[0])}}">
                     </ion-avatar>
                     <ion-label>
                         <p class="articleContent" text-wrap [innerHTML]="reddah.summary(article_a.Content, 100, article_a.Locale)"></p>
-                        <ion-note class="user-name">{{reddah.getDisplayName(article_a.UserName)}}</ion-note>
+                        <ion-note class="user-name">{{reddah.getDisplayName(article_a.UserName, 20)}}</ion-note>
                         <ion-note class="articleFooterTime">{{reddah.getSendTime(article_a.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
                     </ion-label>
                 </ion-item>
@@ -155,8 +164,10 @@
             <span class="articleTab" *ngIf="articles_a.length>0" (click)="more(0)">{{ 'Search.More' | translate }}>></span>
         </ion-row>
         <ion-row>
-            <div style="display: flex; justify-content: center;"><ion-spinner name="bubbles" *ngIf="firstLoading_t"></ion-spinner></div>
-            <ion-text *ngIf="firstLoading_t" class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+            <div *ngIf="firstLoading_t" style="display: flex; justify-content: center;width:100%;margin:15px;">
+                <ion-spinner name="bubbles"></ion-spinner>
+                <ion-text class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+            </div>
             <span class="articleTab" *ngIf="articles_t.length>0">{{ 'Menu.Timeline' | translate }}</span>
         </ion-row>
         <ion-row *ngFor="let article_t of articles_t" (click)="goTsViewer(article_t)">
@@ -164,11 +175,11 @@
                 <span class="ts-article-title" [innerHTML]="reddah.summary(article_t.Title, 100, article_t.Locale)"></span>
                 <ion-item style="margin: 8px 0;" lines="none" *ngIf="article_t.Content.split('$$$').length>0&&article_t.Content.split('$$$')[0].length>0">
                     <ion-thumbnail *ngFor="let image of article_t.Content.split('$$$').splice(0,3);index as i" style="padding: 3px;">
-                        <img src="{{image}}">
+                        <img src="{{reddah.parseImage(image)}}">
                     </ion-thumbnail>
                 </ion-item>
                 <ion-label class="articleTitle">
-                    <ion-note class="user-name">{{reddah.getDisplayName(article_t.UserName)}}</ion-note>
+                    <ion-note class="user-name">{{reddah.getDisplayName(article_t.UserName, 20)}}</ion-note>
                     <ion-note class="articleFooterTime">{{reddah.getSendTime(article_t.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
                 </ion-label>
             </div>

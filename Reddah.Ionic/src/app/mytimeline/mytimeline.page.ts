@@ -339,7 +339,7 @@ export class MyTimeLinePage implements OnInit {
             component: ImageViewerComponent,
             componentProps: {
                 index: index,
-                imgSourceArray: imageSrcArray,
+                imgSourceArray: this.reddah.preImageArray(imageSrcArray),
                 imgTitle: "",
                 imgDescription: "",
                 showDownload: true,
@@ -440,8 +440,10 @@ export class MyTimeLinePage implements OnInit {
         });
         await popover.present();
         const { data } = await popover.onDidDismiss();
-        if(data)
+        if(data==true)
+        {
             this.reddah.getUserPhotos(this.userName, true);
+        }
     }
 
     async goLocation(location){

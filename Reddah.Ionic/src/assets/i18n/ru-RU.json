@@ -181,7 +181,23 @@
         "EnterPub":"войти",
         "StillFocus":"сохранять сосредоточенность",
         "StillUnfocus":"не фокусироваться",
-        "UnfocusMessage":"Ты больше не получишь его"
+        "UnfocusMessage":"Ты больше не получишь его",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":"",
+        "MsgCount":"сообщение",
+        "GroupChatTitle":"название группы",
+        "GroupChatAnnouce":"групповое оповещение",
+        "GroupChatUpdate":"Я создал группу разговоров, давайте поговорим!",
+        "AddToGrp":"принять участие в групповом разговоре",
+        "KickGrp":"Удалить из разговоров",
+        "PressSpeak":"не вешать трубку",
+        "ReleaseSend":"опубликовать для отправки",
+        "FunImageLib":"альбом",
+        "FunCamera":"фотоаппарат",
+        "FunVideoLib":"библиотека изображений",
+        "FunVideo":"видео"
     },
 
     "Common":{

@@ -94,7 +94,7 @@ export class ChatFireBase{
             component: ImageViewerComponent,
             componentProps: {
                 index: index,
-                imgSourceArray: imageSrcArray,
+                imgSourceArray: this.reddah.preImageArray(imageSrcArray),
                 imgTitle: "",
                 imgDescription: "",
                 showDownload: true,
@@ -321,8 +321,8 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         let path = this.localStorageService.retrieve(guidName);
 
         if(path==null){
-            let target = this.file.externalRootDirectory +"reddah/"+ guidName;
-            this.file.checkFile(this.file.externalRootDirectory +"reddah/", guidName)
+            let target = this.reddah.getDeviceDirectory() +"reddah/"+ guidName;
+            this.file.checkFile(this.reddah.getDeviceDirectory() +"reddah/", guidName)
             .then(_ =>{
                 this.localStorageService.store(guidName, target);
             })
@@ -340,7 +340,7 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
     }
 
     async play(audioFileName){
-        let target = this.file.externalRootDirectory +"reddah/";
+        let target = this.reddah.getDeviceDirectory() +"reddah/";
         //let target = this.file.applicationStorageDirectory;
 
         //error handling, check again
@@ -392,11 +392,6 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
                 this.clear();
             }
         }
-    }
-
-    async checkIsToday(date){
-        let cur = new Date(date);
-        return cur.getDate()==new Date().getDate();
     }
 
     /*sendMessage(){

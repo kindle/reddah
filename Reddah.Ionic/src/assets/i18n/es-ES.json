@@ -181,7 +181,23 @@
         "EnterPub":"Entrada",
         "StillFocus":"Concéntrate",
         "StillUnfocus":"No te concentres",
-        "UnfocusMessage":"No volverás a saber deél"
+        "UnfocusMessage":"No volverás a saber deél",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":"",
+        "MsgCount":"Mensaje",
+        "GroupChatTitle":"Título del grupo",
+        "GroupChatAnnouce":"Aviso grupal",
+        "GroupChatUpdate":"Creé un chat grupal, ¡hablemos!",
+        "AddToGrp":"invitado al chat grupal",
+        "KickGrp":"eliminado del chat grupal",
+        "PressSpeak":"Mantenga presionado para hablar",
+        "ReleaseSend":"Liberar para enviar",
+        "FunImageLib":"Álbum",
+        "FunCamera":"Cámara",
+        "FunVideoLib":"Videoteca",
+        "FunVideo":"Vídeo"
     },
 
     "Common":{

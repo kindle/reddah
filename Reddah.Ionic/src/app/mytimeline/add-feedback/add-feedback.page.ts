@@ -196,7 +196,7 @@ export class AddFeedbackPage implements OnInit {
             component: ImageViewerComponent,
             componentProps: {
                 index: index,
-                imgSourceArray: newImageSrcArray,
+                imgSourceArray: this.reddah.preImageArray(newImageSrcArray),
                 imgTitle: "",
                 imgDescription: ""
             },

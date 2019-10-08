@@ -181,7 +181,23 @@
         "EnterPub":"Eingabe",
         "StillFocus":"Konzentrieren Sie sich",
         "StillUnfocus":"Nicht fokussieren",
-        "UnfocusMessage":"Du wirst seine Nachrichten nicht mehr empfangen"
+        "UnfocusMessage":"Du wirst seine Nachrichten nicht mehr empfangen",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":"",
+        "MsgCount":"Nachricht",
+        "GroupChatTitle":"Name der Gruppe",
+        "GroupChatAnnouce":"Mitteilung der Gruppe",
+        "GroupChatUpdate":"Ich habe einen Gruppenchat geschaffen, lass uns reden!",
+        "AddToGrp":"zum Gruppenchat eingeladen",
+        "KickGrp":"aus dem Gruppenchat entfernt",
+        "PressSpeak":"Rede halten",
+        "ReleaseSend":"Freigabe zu senden",
+        "FunImageLib":"Album",
+        "FunCamera":"Kamera",
+        "FunVideoLib":"VideoLibName",
+        "FunVideo":"Video"
     },
 
     "Common":{
@@ -201,7 +217,7 @@
         "View":"Ansicht",
         "Category":"Kategorie des Kontos",
         "PubDesc":"Es bietet eine neue Art der Informationsverbreitung für Medien und Einzelpersonen und baut mit den Lesern ein besseres Kommunikations - und Managementmodell auf.",
-        "MiniDesc":"Eine neue offene Fähigkeit ist in Wechat leicht zugänglich und verbreitet, und sie hat eine ausgezeichnete Erfahrung in der Anwendung.",
+        "MiniDesc":"Eine neue offene Fähigkeit ist in Reddah leicht zugänglich und verbreitet, und sie hat eine ausgezeichnete Erfahrung in der Anwendung.",
         "HideMyLocation":"Meine Position nicht anzeigen",
         "AllowTenTimeline":"Erlauben Sie Fremden, 10 Blende anzusehen",
         "Developer":"Entwickler",

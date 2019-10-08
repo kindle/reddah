@@ -182,7 +182,23 @@
         "EnterPub":"Entrer",
         "StillFocus":"Reste concentré",
         "StillUnfocus":"Ne te concentre pas",
-        "UnfocusMessage":"Tu n 'auras plus de nouvelles"
+        "UnfocusMessage":"Tu n 'auras plus de nouvelles",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":"",
+        "MsgCount":"Message",
+        "GroupChatTitle":"Titre du Groupe",
+        "GroupChatAnnouce":"Notification de groupe",
+        "GroupChatUpdate":"J'ai créé un groupe de discussion. Parlons!",
+        "AddToGrp":"être invité à participer à une discussion de groupe",
+        "KickGrp":"supprimer de la discussion de groupe",
+        "PressSpeak":"Ne raccroche pas",
+        "ReleaseSend":"Publier pour envoyer",
+        "FunImageLib":"Album",
+        "FunCamera":"Appareil Photo",
+        "FunVideoLib":"Vidéo Libray",
+        "FunVideo":"Vidéo"
     },
 
     "Common":{

@@ -182,7 +182,23 @@
         "EnterPub":"エンター",
         "StillFocus":"ステイフォーカス",
         "StillUnfocus":"フォーカスしない",
-        "UnfocusMessage":"あなたはもうそのメッセージを受け取りません"
+        "UnfocusMessage":"あなたはもうそのメッセージを受け取りません",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":"",
+        "MsgCount":"メッセージ",
+        "GroupChatTitle":"グループタイトル",
+        "GroupChatAnnouce":"グループ通知",
+        "GroupChatUpdate":"私はグループチャットを作成し、話をしましょう！",
+        "AddToGrp":"グループチャットに招待",
+        "KickGrp":"グループチャットから削除",
+        "PressSpeak":"ホールドトゥトーク",
+        "ReleaseSend":"送信するリリース",
+        "FunImageLib":"アルバム",
+        "FunCamera":"カメラ",
+        "FunVideoLib":"ビデオライブラリ",
+        "FunVideo":"ビデオ"
     },
 
     "Common":{
@@ -202,7 +218,7 @@
         "View":"ビュー",
         "Category":"アカウントカテゴリ",
         "PubDesc":"これは、メディアや個人のための情報発信の新しい方法を提供し、読者とのより良いコミュニケーションと管理モデルを構築します。",
-        "MiniDesc":"新しいオープン機能を簡単にアクセスすることができますWechatで普及し、それは使用中の優れた経験を持っています。",
+        "MiniDesc":"新しいオープン機能を簡単にアクセスすることができますReddahで普及し、それは使用中の優れた経験を持っています。",
         "HideMyLocation":"私の場所を表示しない",
         "AllowTenTimeline":"見知らぬ人に10開口を見る",
         "Developer":"開発者",

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ChangePhotoPage } from '../common/change-photo/change-photo.page';
 import { PopoverController, ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   template: `
-      <ion-item button (click)="change()">
-          <ion-label>{{ 'Comment.Delete' | translate }}</ion-label>
+      <ion-item lines="none" button (click)="change()">
+          <ion-label>{{ 'Pop.ChangeCover' | translate }}</ion-label>
       </ion-item>
   `
 })
@@ -13,6 +14,7 @@ export class ChangeCoverPopPage {
   constructor(
       public popoverController: PopoverController,
       public modalController: ModalController,
+      public translateService: TranslateService,
   ) {}
 
   async change(){
@@ -22,8 +24,9 @@ export class ChangeCoverPopPage {
       const changePhotoModal = await this.modalController.create({
           component: ChangePhotoPage,
           componentProps: { 
-            title : "{{ 'Comment.Delete' | translate }}",
-            tag : "cover"
+            title : this.translateService.instant("Pop.ChangeCover"),
+            tag : "cover",
+            targetUserName: ""
           }
       });
         

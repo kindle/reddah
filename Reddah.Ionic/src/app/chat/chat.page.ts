@@ -95,7 +95,7 @@ export class ChatBase{
             component: ImageViewerComponent,
             componentProps: {
                 index: index,
-                imgSourceArray: imageSrcArray,
+                imgSourceArray: this.reddah.preImageArray(imageSrcArray),
                 imgTitle: "",
                 imgDescription: "",
                 showDownload: true,
@@ -277,8 +277,8 @@ export class ChatPage extends ChatBase implements OnInit  {
         let path = this.localStorageService.retrieve(guidName);
 
         if(path==null){
-            let target = this.file.externalRootDirectory +"reddah/"+ guidName;
-            this.file.checkFile(this.file.externalRootDirectory +"reddah/", guidName)
+            let target = this.reddah.getDeviceDirectory() +"reddah/"+ guidName;
+            this.file.checkFile(this.reddah.getDeviceDirectory() +"reddah/", guidName)
             .then(_ =>{
                 this.localStorageService.store(guidName, target);
             })
@@ -296,7 +296,7 @@ export class ChatPage extends ChatBase implements OnInit  {
     }
 
     async play(audioFileName){
-        let target = this.file.externalRootDirectory +"reddah/";
+        let target = this.reddah.getDeviceDirectory() +"reddah/";
         //let target = this.file.applicationStorageDirectory;
 
         //error handling, check again

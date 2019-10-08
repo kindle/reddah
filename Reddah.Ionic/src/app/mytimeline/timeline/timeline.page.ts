@@ -79,6 +79,7 @@ export class TimeLinePage implements OnInit {
         });
 
         this.isFriend = this.reddah.appData('userisfriend_'+this.userName+'_'+this.reddah.getCurrentUser())==1;
+        
         this.nonFriendAllowTen = this.reddah.appData('userallowtentimeline_'+this.userName)==1;
     }
 
@@ -105,7 +106,7 @@ export class TimeLinePage implements OnInit {
         .subscribe(timeline => 
         {
             for(let article of timeline){
-                if(this.isFriend||
+                if(this.isFriend||this.isMe()||
                     (!this.isFriend&&this.articles.length<10))
                 {
                     this.articles.push(article);
@@ -164,7 +165,7 @@ export class TimeLinePage implements OnInit {
             component: ImageViewerComponent,
             componentProps: {
                 index: index,
-                imgSourceArray: imageSrcArray,
+                imgSourceArray: this.reddah.preImageArray(imageSrcArray),
                 imgTitle: "",
                 imgDescription: ""
             },

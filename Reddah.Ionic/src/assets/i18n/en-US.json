@@ -185,7 +185,23 @@
         "EnterPub":"Enter",
         "StillFocus":"Stay Focus",
         "StillUnfocus":"Do not focus",
-        "UnfocusMessage":"You won't receive its messages any more"
+        "UnfocusMessage":"You won't receive its messages any more",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":"",
+        "MsgCount":"Message",
+        "GroupChatTitle":"Group Name",
+        "GroupChatAnnouce":"Group Notice",
+        "GroupChatUpdate":"I created a group chat, let's talk!",
+        "AddToGrp":"invited to the group chat",
+        "KickGrp":"removed from the group chat",
+        "PressSpeak":"Hold to Talk",
+        "ReleaseSend":"Release to Send",
+        "FunImageLib":"Album",
+        "FunCamera":"Camera",
+        "FunVideoLib":"VideoLib",
+        "FunVideo":"Video"
     },
 
     "Common":{
@@ -205,7 +221,7 @@
         "View":"View",
         "Category":"Account Category",
         "PubDesc":"It provides a new way of information dissemination for the media and individuals, and builds a better communication and management model with readers.",
-        "MiniDesc":"A new open capability can be easily accessed and disseminated in Wechat, and it has excellent experience in use.",
+        "MiniDesc":"A new open capability can be easily accessed and disseminated in Reddah, and it has excellent experience in use.",
         "HideMyLocation":"Do not display my location",
         "AllowTenTimeline":"Allow stranger to view 10 Aperture",
         "Developer":"Developer",

@@ -4,6 +4,7 @@
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
     </ion-refresher>
+    <ion-spinner name="bubbles" *ngIf="firstLoad" style="margin:15px 50%;transform: translateX(-50%);"></ion-spinner>
     <ng-template ngFor let-article [ngForOf]="articles" id="homepage" style="color: #636468;font-family: 'Segoe UI', Arial, sans-serif;">
         <div class="postModuleLiner" *ngIf="article.VideoUrl.length>0">
             <div>
@@ -33,8 +34,12 @@
                 <ion-card-content no-padding>
                     <div class="parent">
                         <div class="container" *ngFor="let articleUrl of article.ImageUrls;index as i">
-                            <img [class.left-radius]="i==0" [class.right-radius]="i==2" [id]="reddah.makeItId(articleUrl)" (load)="reddah.adjustImage($event, articleUrl)"
-                            [src]="articleUrl" class="picture">
+                            <img [class.left-radius]="i==0" [class.right-radius]="i==2" [id]="reddah.makeItId(articleUrl)" 
+                            (load)="reddah.adjustImage($event, articleUrl)"
+                            [defaultImage]="'assets/icon/noimage.jpg'"
+                            [lazyLoad]="reddah.level2Cache(articleUrl)" 
+                            [useSrcset]="true" 
+                            class="picture">
                         </div>
                     </div>
                 </ion-card-content>
@@ -57,7 +62,9 @@
                         <img class="BrowsePreviewImageOne" onerror="this.style.display='none'" 
                         [id]="reddah.makeItId(article.ImageUrls[0]+'home')" 
                         (load)="reddah.adjustImage($event, article.ImageUrls[0]+'home')"
-                        [src]="article.ImageUrls[0]">
+                        [defaultImage]="'assets/icon/noimage.jpg'"
+                        [lazyLoad]="reddah.level2Cache(article.ImageUrls[0])" 
+                        [useSrcset]="true" >
                     </div>
                 </div>
                 <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
@@ -85,11 +92,12 @@
                 </span>
             </div>
             <div *ngIf="article.ImageUrls.length==0" class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
-                <div style="display: flex;" (click)="goUser(article.UserName)">
-                    <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
+                <div style="display: flex;">
+                    <span (click)="goUser(article.UserName)" class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
                         {{reddah.getDisplayName(article.UserName)}}
                     </span>
-                    <ion-icon color="medium" name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
+                    <ion-icon (click)="view(article)" color="medium" name="text"></ion-icon>
+                    <span (click)="view(article)" style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
                 </div>
                 <div style="display: flex;" (click)="dislike($event, article)">
                     <ion-icon color="medium" size="small" name="close"></ion-icon>

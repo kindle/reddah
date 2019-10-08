@@ -2,6 +2,14 @@
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
     <ion-title>{{ 'Common.Details' | translate }}</ion-title>
 </ion-item>
+<ion-content *ngIf="!isFriend" style="background-color: white;">
+    <ion-item lines="none" class="borderTop borderBottom" (click)="addFriend()" *ngIf="!isFriend&&userName!=reddah.getCurrentUser()">
+        <div class="centerItem">
+            <ion-icon class="cmd-icon" color="secondary" name="add"></ion-icon>
+            <ion-note color="secondary" class="cmd-title cmd-line">{{ 'Menu.Header.AddFriend' | translate }}</ion-note>
+        </div>
+    </ion-item>
+</ion-content>
 <ion-content *ngIf="isFriend">
     <div style="display: flex; border-bottom: 0px solid lightgrey; margin: 15px 5px; padding-bottom: 0px;">
         <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
@@ -10,7 +18,7 @@
         <div style="width:100%;border: 0px solid red;">
             <ion-card-header no-padding class="articleUserName">
                 <ion-card-title>
-                    <div class="user-name" [innerHTML]="reddah.getDisplayName(article.UserName)" (click)="goUser(article.UserName)"></div>
+                    <div class="user-name" [innerHTML]="reddah.getDisplayName(article.UserName,100)" (click)="goUser(article.UserName)"></div>
                 </ion-card-title>
             </ion-card-header>
             <div [innerHTML]="reddah.htmlDecode(article.Title)" style="padding: 0 0 4px 0;" *ngIf="article.Title"></div>
@@ -20,7 +28,10 @@
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                         <img [id]="reddah.makeItId(image)" 
                             (load)="reddah.adjustImage($event, image)"
-                            [src]="reddah.level2Cache(image)" class="picture" 
+                            [defaultImage]="'assets/icon/noimage.jpg'"
+                            [lazyLoad]="reddah.level2Cache(image)" 
+                            [useSrcset]="true"
+                            class="picture" 
                             (click)="viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
@@ -28,7 +39,9 @@
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                         <img [id]="reddah.makeItId(image+'tsv')" 
                             (load)="reddah.adjustImage($event, image+'tsv')" 
-                            [src]="reddah.level2Cache(image)" 
+                            [defaultImage]="'assets/icon/noimage.jpg'"
+                            [lazyLoad]="reddah.level2Cache(image)" 
+                            [useSrcset]="true"
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
@@ -36,7 +49,9 @@
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                         <img [id]="reddah.makeItId(image+'tsv')" 
                             (load)="reddah.adjustImage($event, image+'tsv')" 
-                            [src]="reddah.level2Cache(image)" 
+                            [defaultImage]="'assets/icon/noimage.jpg'"
+                            [lazyLoad]="reddah.level2Cache(image)" 
+                            [useSrcset]="true" 
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
@@ -44,7 +59,9 @@
                     <div class="container3">
                         <img 
                             [id]="reddah.makeItId(article.Content.split('$$$')[0]+'tsv')" 
-                            [src]="reddah.level2Cache(article.Content.split('$$$')[0])" 
+                            [defaultImage]="'assets/icon/noimage.jpg'"
+                            [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[0])" 
+                            [useSrcset]="true"
                             class="picture3" (click)="viewer(0, article.Content.split('$$$'))">
                     </div>
                 </div>
@@ -86,7 +103,7 @@
         </ion-item>
     </div>
 </ion-content>
-<ion-footer style="background-color: white;">
+<ion-footer *ngIf="isFriend" style="background-color: white;">
     <ion-item margin-end>
         <ion-input #newComment id="newComment" placeholder="{{selectedReplyPlaceholder}}" padding-start></ion-input>
         <ion-icon name="happy" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>

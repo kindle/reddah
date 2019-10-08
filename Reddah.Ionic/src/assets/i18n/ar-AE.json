@@ -181,7 +181,23 @@
         "EnterPub":"أدخل",
         "StillFocus":"الحفاظ على التركيز",
         "StillUnfocus":"لا تركز",
-        "UnfocusMessage":"أنت لن تحصل على الرسالة مرة أخرى"
+        "UnfocusMessage":"أنت لن تحصل على الرسالة مرة أخرى",
+        "KM":"KM",
+        "M":"M",
+        "Year":"",
+        "Month":"",
+        "MsgCount":"رسالة",
+        "GroupChatTitle":"اسم المجموعة",
+        "GroupChatAnnouce":"مجموعة اشعار",
+        "GroupChatUpdate":"لقد خلقت مجموعة من الدردشة لنتحدث",
+        "AddToGrp":"دعيت إلى مجموعة دردشة",
+        "KickGrp":"حذف من مجموعة دردشة",
+        "PressSpeak":"انتظر",
+        "ReleaseSend":"نشر لإرسال",
+        "FunImageLib":"ألبومات",
+        "FunCamera":"الكاميرا",
+        "FunVideoLib":"مكتبة الفيديو",
+        "FunVideo":"ويديو"
     },
 
     "Common":{

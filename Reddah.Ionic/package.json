@@ -21,7 +21,7 @@
     "@angular/platform-browser": "^7.2.3",
     "@angular/platform-browser-dynamic": "^7.2.3",
     "@angular/router": "^7.2.3",
-    "@ionic-native/android-permissions": "^5.8.0",
+    "@ionic-native/android-permissions": "^5.14.0",
     "@ionic-native/app-update": "^5.1.0",
     "@ionic-native/app-version": "^5.1.0",
     "@ionic-native/camera": "^5.1.0",
@@ -181,7 +181,8 @@
       "cordova-plugin-shake": {},
       "cordova-plugin-nativeaudio": {},
       "cordova-plugin-geolocation": {},
-      "cordova-plugin-video-editor": {}
+      "cordova-plugin-video-editor": {},
+      "cordova-plugin-android-permissions": {}
     },
     "platforms": [
       "ios",

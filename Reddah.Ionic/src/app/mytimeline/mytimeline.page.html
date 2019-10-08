@@ -18,15 +18,16 @@
             <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>
         </ion-refresher>  
         <div class="timelineCover" #timelineCover>
-            <img src="{{reddah.appData('cover_'+userName)}}" (click)="changeCover()">
+            <img [src]="reddah.appData('cover_'+userName)"
+                (click)="changeCover()">
         </div>
         <div class="timelineAvatar">
-            <ion-label class="userNameTitle">{{reddah.getDisplayName(userName)}}</ion-label>
+            <ion-label class="userNameTitle">{{reddah.getDisplayName(userName,100)}}</ion-label>
             <img src="{{reddah.appData('userphoto_'+userName)}}" (click)="goUser(userName)">
         </div>
         <div (click)="goMessage()" *ngIf="reddah.unReadMessage.length>0" class="messageBox">
             <img [src]="reddah.appData('userphoto_'+reddah.unReadMessage.slice(-1)[0].From)" class="messagePhoto">
-            <span class="span-eclipse" style="color:white;line-height:2.1em;margin:0.24em 0.8em;">{{reddah.unReadMessage.length}} {{ 'Menu.Message' | translate }}</span>
+            <span class="span-eclipse" style="color:white;line-height:2.1em;margin:0.24em 0.8em;">{{reddah.unReadMessage.length}} {{ 'Pop.MsgCount' | translate }}</span>
         </div>
         <div *ngFor="let article of articles" style="display: flex; border-bottom: 1px solid lightgrey; margin-top:10px; margin-bottom: 15px; padding-bottom: 10px;">
             <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
@@ -35,7 +36,7 @@
             <div style="width:100%;border: 0px solid red;">
                 <ion-card-header no-padding class="articleUserName">
                     <ion-card-title>
-                        <div (click)="goUser(article.UserName)" class="user-name">{{reddah.getDisplayName(article.UserName)}}</div>
+                        <div (click)="goUser(article.UserName)" class="user-name">{{reddah.getDisplayName(article.UserName,100)}}</div>
                     </ion-card-title>
                 </ion-card-header>
                 <div *ngIf="article.Title.length>0&&article.Title.length<100">
@@ -51,7 +52,7 @@
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtl')" 
                             (load)="reddah.adjustImage($event, image+'mtl')"
-                            [src]="reddah.level2Cache(image)" 
+                            [src]="reddah.level2Cache(image)"
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
@@ -67,7 +68,7 @@
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtl')" 
                             (load)="reddah.adjustImage($event, image+'mtl')"
-                            [src]="reddah.level2Cache(image)" 
+                            [src]="reddah.level2Cache(image)"
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
@@ -75,7 +76,7 @@
                         <div class="container3">
                             <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtl')" 
                             (load)="reddah.adjustImage($event, article.Content.split('$$$')[0]+'mtl')"
-                            [src]="reddah.level2Cache(article.Content.split('$$$')[0])"
+                            [src]="reddah.level2Cache(article.Content.split('$$$')[0])" 
                             class="picture" (click)="viewer(0, article.Content.split('$$$'))">
                         </div>
                     </div>

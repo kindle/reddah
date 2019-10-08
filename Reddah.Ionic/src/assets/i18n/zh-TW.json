@@ -184,7 +184,23 @@
         "EnterPub":"進入公眾號",
         "StillFocus":"仍然關註",
         "StillUnfocus":"不再關註",
-        "UnfocusMessage":"您將不再收到其下發的消息"
+        "UnfocusMessage":"您將不再收到其下發的消息",
+        "KM":"公裏",
+        "M":"米",
+        "Year":"年",
+        "Month":"月",
+        "MsgCount":"條新消息",
+        "GroupChatTitle":"群聊",
+        "GroupChatAnnouce":"群公告",
+        "GroupChatUpdate":"我建了壹個群，開始聊天吧！",
+        "AddToGrp":"加入了群聊",
+        "KickGrp":"移出了群聊",
+        "PressSpeak":"按住 說話",
+        "ReleaseSend":"松開 發送",
+        "FunImageLib":"相冊",
+        "FunCamera":"拍照片",
+        "FunVideoLib":"視頻庫",
+        "FunVideo":"拍視頻"
     },
 
     "Common":{
@@ -204,7 +220,7 @@
         "View":"查看",
         "Category":"帳號分類",
         "PubDesc":"為媒體和個人提供壹種新的信息傳播方式，構建與讀者之間更好的溝通與管理模式。",
-        "MiniDesc":"壹種新的開放能力，可以在微信內被便捷地獲取和傳播，同時具有出色的使用體驗。",
+        "MiniDesc":"壹種新的開放能力，可以在Reddah內被便捷地獲取和傳播，同時具有出色的使用體驗。",
         "HideMyLocation":"不顯示我的位置信息",
         "AllowTenTimeline":"允許陌生人查看十條時光圈",
         "Developer":"開發者",

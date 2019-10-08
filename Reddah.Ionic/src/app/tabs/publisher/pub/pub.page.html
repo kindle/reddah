@@ -52,7 +52,10 @@
                     <div class="parent">
                         <div class="container" *ngFor="let articleUrl of article.ImageUrls;index as i">
                             <img [class.left-radius]="i==0" [class.right-radius]="i==2" [id]="reddah.makeItId(articleUrl)" (load)="reddah.adjustImage($event, articleUrl)"
-                            [src]="articleUrl" class="picture">
+                                [defaultImage]="'assets/icon/noimage.jpg'"
+                                [lazyLoad]="reddah.level2Cache(articleUrl)" 
+                                [useSrcset]="true"
+                                class="picture">
                         </div>
                     </div>
                 </ion-card-content>
@@ -72,7 +75,10 @@
                         <img class="BrowsePreviewImageOne" onerror="this.style.display='none'" 
                         [id]="reddah.makeItId(article.ImageUrls[0]+'pubhome')" 
                         (load)="reddah.adjustImage($event, article.ImageUrls[0]+'pubhome')"
-                        [src]="article.ImageUrls[0]">
+                        [defaultImage]="'assets/icon/noimage.jpg'"
+                        [lazyLoad]="reddah.level2Cache(article.ImageUrls[0])" 
+                        [useSrcset]="true"
+                        >
                     </div>
                 </div>
                 <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>

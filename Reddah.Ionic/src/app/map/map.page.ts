@@ -41,6 +41,10 @@ export class MapPage implements OnInit {
         
     }
 
+    close(){
+        this.modalController.dismiss();
+    }
+
     async ngOnInit(){
     }
 
@@ -64,13 +68,13 @@ export class MapPage implements OnInit {
 
     
     markerGroup; 
-    tileUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";  
+    tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";  
     tileOptions:any = { maxZoom: 15 };
 
     loadmap() {
 
         this.markerGroup = L.featureGroup();
-        this.map = L.map("earth").fitWorld();
+        this.map = L.map("earth", {attributionControl: false}).fitWorld();
 
         L.tileLayer(this.tileUrl, this.tileOptions).addTo(this.map);
     }
@@ -86,15 +90,18 @@ export class MapPage implements OnInit {
                 markerColor: 'red'
             });*/
               
+            
             this.flyMaker = L.marker([item.location.lat, item.location.lng]).addTo(this.map)
             //this.flyMaker = L.marker([item.location.lat, item.location.lng], {icon: redMarker}).addTo(this.map)
-                .bindPopup("<img style='float:left;margin-right:10px;border-radius:3px;' width=40 height=40 src="+this.reddah.appData('userphoto_'+this.userName)+">"+
+                .bindPopup("<img style='float:left;margin-right:10px;border-radius:3px;' width=40 height=40 src="
+                +this.reddah.appData('userphoto_'+this.userName)+">"+
                 this.reddah.appData('usersignature_'+this.userName), {closeButton: true});
-
             this.markerGroup.clearLayers();
             this.markerGroup.addLayer(this.flyMaker);
             if(this.location)
                 this.map.addLayer(this.markerGroup);
+
+            
         }
 
         this.map.setView([item.location.lat, item.location.lng], 3);
@@ -177,7 +184,7 @@ export class MapPage implements OnInit {
                     if(showArray.includes(index)){
                         //let content = L.DomUtil.create('div', 'content');
                         let content = "<img id='"+user.UserName+"' style='margin-right:5px;border-radius:3px;' width=40 height=40 src="
-                            +this.reddah.appData('userphoto_'+user.UserName)+">"
+                            +this.reddah.appDataMap('userphoto_'+user.UserName, user.Photo)+">"
                             //+this.reddah.getDisplayName(user.UserName)+"";
                         let popup = L.popup().setContent(content);
                         /*L.DomEvent.on(popup, 'click', ()=>{
