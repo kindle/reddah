@@ -49,9 +49,8 @@
                             <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                                 <img [id]="reddah.makeItId(image+'mtl')" 
                                 (load)="reddah.adjustImage($event, image+'mtl')"
-                                [defaultImage]="'assets/icon/noimage.jpg'"
-                                [lazyLoad]="reddah.level2Cache(image)" 
-                                [useSrcset]="true"
+                                onerror="this.src='assets/icon/noimage.jpg'"
+                                [src]="reddah.level2Cache(image)" 
                                 class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                             </div>
                         </div>
@@ -59,9 +58,8 @@
                             <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                                 <img [id]="reddah.makeItId(image+'mtl')" 
                                 (load)="reddah.adjustImage($event, image+'mtl')" 
-                                [defaultImage]="'assets/icon/noimage.jpg'"
-                                [lazyLoad]="reddah.level2Cache(image)" 
-                                [useSrcset]="true"
+                                onerror="this.src='assets/icon/noimage.jpg'"
+                                [src]="reddah.level2Cache(image)" 
                                 class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                             </div>
                         </div>
@@ -69,9 +67,8 @@
                             <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                                 <img [id]="reddah.makeItId(image+'mtl')" 
                                 (load)="reddah.adjustImage($event, image+'mtl')"  
-                                [defaultImage]="'assets/icon/noimage.jpg'"
-                                [lazyLoad]="reddah.level2Cache(image)" 
-                                [useSrcset]="true"
+                                onerror="this.src='assets/icon/noimage.jpg'"
+                                [src]="reddah.level2Cache(image)" 
                                 class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                             </div>
                         </div>
@@ -79,9 +76,8 @@
                             <div class="container3">
                                 <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtl')" 
                                 (load)="reddah.adjustImage($event, article.Content.split('$$$')[0]+'mtl')" 
-                                [defaultImage]="'assets/icon/noimage.jpg'"
-                                [lazyLoad]="reddah.level2Cache(article.Content.split('$$$')[0])" 
-                                [useSrcset]="true" 
+                                onerror="this.src='assets/icon/noimage.jpg'"
+                                [src]="reddah.level2Cache(article.Content.split('$$$')[0])" 
                                 class="picture" 
                                 (click)="viewer(0, article.Content.split('$$$'))">
                             </div>

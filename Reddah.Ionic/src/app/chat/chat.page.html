@@ -39,16 +39,16 @@
                     </div>
                     <div class="arrow-box-right-photo" *ngIf="comment.Type==2">
                         <div class="parent3-me">
-                            <img [defaultImage]="'assets/icon/noimage.jpg'" 
-                            [lazyLoad]="reddah.chatImageCache(comment.Content)" 
-                            [useSrcset]="true" class="picture3" (click)="viewer(0, [comment.Content])">
+                            <img onerror="this.src='assets/icon/noimage.jpg'" 
+                            [src]="reddah.chatImageCache(comment.Content)" 
+                            class="picture3" (click)="viewer(0, [comment.Content])">
                         </div>
                     </div>
                     <div class="arrow-box-right-photo" *ngIf="comment.Type==3">
                         <div class="parent3-me">
-                            <img [defaultImage]="'assets/icon/noimage.jpg'" 
-                            [lazyLoad]="reddah.chatImageCache(comment.Content.toLowerCase().replace('.mp4','.jpg'))" 
-                            [useSrcset]="true" class="picture3" 
+                            <img onerror="this.src='assets/icon/noimage.jpg'" 
+                            [src]="reddah.chatImageCache(comment.Content.toLowerCase().replace('.mp4','.jpg'))" 
+                            class="picture3" 
                             (click)="playVideo(comment)" [class.notdownload]="!reddah.isLocal(comment.Content)">
                             <div style="position: absolute;bottom:0;margin:0.6em;"><ion-icon name="videocam" color="light"></ion-icon></div>
                         </div>
@@ -74,14 +74,14 @@
                             </div>
                         </div>
                         <div class="parent3" *ngIf="comment.Type==2">
-                            <img [defaultImage]="'assets/icon/noimage.jpg'" 
-                                [lazyLoad]="reddah.chatImageCache(comment.Content)" 
-                                [useSrcset]="true" class="picture3" (click)="viewer(0, [comment.Content])">
+                            <img onerror="this.src='assets/icon/noimage.jpg'" 
+                                [src]="reddah.chatImageCache(comment.Content)" 
+                                class="picture3" (click)="viewer(0, [comment.Content])">
                         </div>
                         <div class="parent3" *ngIf="comment.Type==3">
-                            <img [defaultImage]="'assets/icon/noimage.jpg'" 
-                                [lazyLoad]="reddah.chatImageCache(comment.Content.toLowerCase().replace('.mp4','.jpg'))" 
-                                [useSrcset]="true" class="picture3"
+                            <img onerror="this.src='assets/icon/noimage.jpg'" 
+                                [src]="reddah.chatImageCache(comment.Content.toLowerCase().replace('.mp4','.jpg'))" 
+                                class="picture3"
                                 (click)="playVideo(comment)" [class.notdownload]="!reddah.isLocal(comment.Content)">
                             <div style="position: absolute;bottom:0;margin:0.6em;"><ion-icon name="videocam" color="light"></ion-icon></div>
                         </div>

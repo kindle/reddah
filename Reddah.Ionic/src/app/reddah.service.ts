@@ -1848,10 +1848,10 @@ export class ReddahService {
         return meters + this.translate.instant("Pop.M");
     }
 
-    async adjustImage(evt, img){
-        img = this.makeItId(img);
+    async adjustImage(evt, url){
+        let img = this.makeItId(url);
         let image = document.getElementById(img);
-        
+
         if(image.offsetHeight<image.offsetWidth)
         {
             image.style.height = "100%";
@@ -1862,7 +1862,7 @@ export class ReddahService {
     }
 
     makeItId(text){
-        return text.replace(/\//g,'_');;
+        return text.replace(/\//g,'_');
     }
 
     uuidv4() {
