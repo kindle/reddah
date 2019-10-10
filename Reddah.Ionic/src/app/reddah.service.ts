@@ -1848,21 +1848,38 @@ export class ReddahService {
         return meters + this.translate.instant("Pop.M");
     }
 
-    async adjustImage(evt, url){
-        let img = this.makeItId(url);
-        let image = document.getElementById(img);
+    async adjustImage(url, flag){
+        let imgId = this.makeItId(url+flag);
+        let image = document.getElementById(imgId);
+        //image.setAttribute("src", this.level2Cache(url))
 
-        if(image.offsetHeight<image.offsetWidth)
-        {
-            image.style.height = "100%";
-        }
-        else{
-            image.style.height = "";
+        if(image){
+            if(image.offsetHeight<image.offsetWidth)
+            {
+                image.style.height = "100%";
+                this.localStorageService.store(imgId+"adjusth", true);
+            }
+            else{
+                if(flag=="home"){
+                    let result = this.localStorageService.retrieve(imgId+"adjusth");
+                    if(result)
+                    {
+                        image.style.height = "100%";
+                    }
+                    else
+                    {
+                        image.style.height = "";
+                    }
+                }
+                else{
+                    image.style.height = "";
+                }
+            }
         }
     }
 
     makeItId(text){
-        return text.replace(/\//g,'_');
+        return text.replace(/[\/:,.%-]/g,'_');
     }
 
     uuidv4() {
@@ -1999,7 +2016,7 @@ export class ReddahService {
     preImageArray(imageSrcArray){
         return imageSrcArray.map(item=>{
             return {
-                webPreviewUrl: item
+                webPreviewUrl: this.parseImage(item)
             }
         });
     }

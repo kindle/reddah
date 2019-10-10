@@ -273,9 +273,10 @@ export class PubPage implements OnInit {
         const modal = await this.modalController.create({
             component: ImageViewerComponent,
             componentProps: {
-              imgSourceArray: this.reddah.preImageArray([photo]),
-              imgTitle: "",
-              imgDescription: ""
+                index:0,
+                imgSourceArray: this.reddah.preImageArray([photo]),
+                imgTitle: "",
+                imgDescription: ""
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,

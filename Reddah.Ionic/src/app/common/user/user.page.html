@@ -51,10 +51,8 @@
         <span class="itemTitle span-eclipse" style="line-height: 90px;">{{ 'Menu.Timeline' | translate }}</span>
         <ion-thumbnail *ngFor="let image of imageList" style="padding: 5px;">
             <img [id]="reddah.makeItId(image+'usr')" 
-                (load)="reddah.adjustImage($event, image+'usr')"
-                onerror="this.src='assets/icon/noimage.jpg'"
-                [src]="reddah.level2Cache(image)" 
-                >
+                (load)="reddah.adjustImage(image, 'usr')"
+                [src]="reddah.level2Cache(image)">
         </ion-thumbnail>
     </ion-item>
     <ion-item lines="none" style="--background:#eeeeee;height:10px;" 

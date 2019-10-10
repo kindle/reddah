@@ -51,9 +51,9 @@
                 <ion-card-content no-padding>
                     <div class="parent">
                         <div class="container" *ngFor="let articleUrl of article.ImageUrls;index as i">
-                            <img [class.left-radius]="i==0" [class.right-radius]="i==2" [id]="reddah.makeItId(articleUrl)" (load)="reddah.adjustImage($event, articleUrl)"
-                                onerror="this.src='assets/icon/noimage.jpg'"
-                                [src]="reddah.level2Cache(articleUrl)" 
+                            <img [class.left-radius]="i==0" [class.right-radius]="i==2" [id]="reddah.makeItId(articleUrl)" 
+                                (load)="reddah.adjustImage(articleUrl, 'pubhome')"
+                                [src]="reddah.level2Cache(articleUrl)"
                                 class="picture">
                         </div>
                     </div>
@@ -73,8 +73,7 @@
                     <div class="listImageWrapper">
                         <img class="BrowsePreviewImageOne" onerror="this.style.display='none'" 
                         [id]="reddah.makeItId(article.ImageUrls[0]+'pubhome')" 
-                        (load)="reddah.adjustImage($event, article.ImageUrls[0]+'pubhome')"
-                        onerror="this.src='assets/icon/noimage.jpg'"
+                        (load)="reddah.adjustImage(article.ImageUrls[0], 'pubhome')"
                         [src]="reddah.level2Cache(article.ImageUrls[0])">
                     </div>
                 </div>

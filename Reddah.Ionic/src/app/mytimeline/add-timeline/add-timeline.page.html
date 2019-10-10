@@ -14,9 +14,8 @@
     <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="postType<3">
         <div class="imgSqure" *ngFor="let image of photos;index as i">
             <img [id]="reddah.makeItId(image.webUrl+'addtl')" 
-            (load)="reddah.adjustImage($event, image.webUrl+'addtl')" 
-            onerror="this.src='assets/icon/noimage.jpg'"
-            [src]="reddah.level2Cache(image.webUrl)" 
+            (load)="reddah.adjustImage(image.webUrl, 'addtl')" 
+            [src]="reddah.level2Cache(image.webUrl)"
             (click)="viewer(i, photos)">
         </div>
         <div class="imgSqure addImg" (click)="addNewPhoto($event)" *ngIf="photos.length<9">

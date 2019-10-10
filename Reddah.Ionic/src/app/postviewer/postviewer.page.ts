@@ -143,6 +143,7 @@ export class PostviewerPage implements OnInit {
             const modal = await this.modalController.create({
                 component: ImageViewerComponent,
                 componentProps: {
+                    index:0,
                     imgSourceArray: this.reddah.preImageArray([target.src]),
                     imgTitle: "",
                     imgDescription: ""

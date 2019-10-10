@@ -36,9 +36,9 @@
                         <div class="container" *ngFor="let articleUrl of article.ImageUrls;index as i">
                             <img [class.left-radius]="i==0" [class.right-radius]="i==2" 
                                 [id]="reddah.makeItId(articleUrl+'home')"  
+                                (load)="reddah.adjustImage(articleUrl, 'home')"
                                 onerror="this.src='/assets/icon/noimage.jpg'"
-                                (load)="reddah.adjustImage($event, articleUrl+'home')"
-                                src="{{reddah.level2Cache(articleUrl)}}" 
+                                [src]="reddah.level2Cache(articleUrl)" 
                                 class="picture">
                         </div>
                     </div>
@@ -59,11 +59,11 @@
             <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3" (click)="view(article)">
                 <div class="listImage">
                     <div class="listImageWrapper">
-                        <img class="BrowsePreviewImageOne" onerror="this.src='/assets/icon/noimage.jpg'" 
+                        <img class="BrowsePreviewImageOne"
                         [id]="reddah.makeItId(article.ImageUrls[0]+'home')" 
-                        (load)="reddah.adjustImage($event, article.ImageUrls[0]+'home')"
-                        src="{{reddah.level2Cache(article.ImageUrls[0])}}"
-                        >
+                        (load)="reddah.adjustImage(article.ImageUrls[0], 'home')"
+                        onerror="this.src='/assets/icon/noimage.jpg'"
+                        [src]="reddah.level2Cache(article.ImageUrls[0])">
                     </div>
                 </div>
                 <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
