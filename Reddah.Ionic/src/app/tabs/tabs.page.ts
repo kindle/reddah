@@ -22,6 +22,9 @@ export class TabsPage implements OnInit {
     @ViewChild('myTabs') tabRef: Tabs;
     @ViewChild('about') about;
 
+    isAndroid = false;
+    isIos = false;
+
     constructor(
         private authService: AuthService,
         private platform: Platform,
@@ -53,6 +56,12 @@ export class TabsPage implements OnInit {
             
         }
         
+        if(this.platform.is('android')){
+            this.isAndroid = true;
+        }
+        else if(this.platform.is('iphone')||this.platform.is('ipad')||this.platform.is('ios')){ 
+            this.isIos = true;
+        }
     }
 
 

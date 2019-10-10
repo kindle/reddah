@@ -26,9 +26,10 @@
         </ion-tab-button>
         
         <ion-tab-button tab="find" href="/tabs/(find:find)" (click)="change()">
-            <ion-icon name="compass" style="width: 20%;position: relative;"></ion-icon>
+            <div style="position:absolute;right:20px;top:10px;" [ngClass]="{'new-point':isIos&&reddah.unReadMessage.length>0}"></div>
+            <ion-icon name="compass" style="width:20%;position: relative;"></ion-icon>
             <ion-label class="tab">{{ 'Menu.Find' | translate }}</ion-label>
-            <ion-badge class="tab-count" color="danger" *ngIf="reddah.unReadMessage.length>0">{{reddah.unReadMessage.length}}</ion-badge>
+            <ion-badge class="tab-count" color="danger" *ngIf="!isIos&&reddah.unReadMessage.length>0">{{reddah.unReadMessage.length}}</ion-badge>
         </ion-tab-button>
         
         <ion-tab-button (click)="openEarth()">
