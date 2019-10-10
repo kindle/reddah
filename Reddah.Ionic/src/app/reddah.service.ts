@@ -1076,7 +1076,7 @@ export class ReddahService {
         let result = this.localStorageService.retrieve(storedKey);
         
         if(cacheKey.indexOf('userphoto_')>-1){
-            if(this.platform.is('cordova')){
+            if(this.platform.is('android')){
                 if(result)
                     return (<any>window).Ionic.WebView.convertFileSrc(result);
                 else
@@ -1090,7 +1090,7 @@ export class ReddahService {
             }
         }
         else if(cacheKey.indexOf('cover_')>-1){
-            if(this.platform.is('cordova')){
+            if(this.platform.is('android')){
                 if(result)
                     return (<any>window).Ionic.WebView.convertFileSrc(result);
                 else
@@ -1851,7 +1851,6 @@ export class ReddahService {
     async adjustImage(url, flag){
         let imgId = this.makeItId(url+flag);
         let image = document.getElementById(imgId);
-        //image.setAttribute("src", this.level2Cache(url))
 
         if(image){
             if(image.offsetHeight<image.offsetWidth)
