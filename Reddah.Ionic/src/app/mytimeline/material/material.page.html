@@ -1,9 +1,9 @@
 <ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop style="background-color:white;">
     <div class="headerStart" #headerStart slot="fixed">
         <ion-item color="transparent" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
-            <ion-icon name="ios-arrow-back" color="dark" slot="start" (click)="close()" class="backbutton"></ion-icon>
-            <ion-label color="dark">{{ 'Common.MyPhoto' | translate }}</ion-label>
-            <ion-icon name="add" color="dark" slot="end" (click)="post($event)"></ion-icon>
+            <ion-icon name="ios-arrow-back" color="light" slot="start" (click)="close()" class="backbutton"></ion-icon>
+            <ion-label color="light">{{ 'Common.MyPhoto' | translate }}</ion-label>
+            <ion-icon name="add" color="light" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll slot="fixed">

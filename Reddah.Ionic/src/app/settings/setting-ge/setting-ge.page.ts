@@ -69,7 +69,7 @@ export class SettingGePage implements OnInit {
         if(data){
             //let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
             //this.translate.setDefaultLang(currentLocale);
-            window.location.reload();
+            this.reddah.windowReload();
         }
 
     }

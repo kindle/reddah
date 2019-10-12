@@ -96,7 +96,7 @@ export class ChatOptPage implements OnInit {
         await changeLocaleModal.present();
         const { data } = await changeLocaleModal.onDidDismiss();
         if(data){
-            window.location.reload();
+            this.reddah.windowReload();
         }
 
     }

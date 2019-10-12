@@ -20,6 +20,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import * as moment from 'moment';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -33,10 +34,12 @@ export class ReddahService {
         private transfer: FileTransfer,
         private file: File,
         private toastController: ToastController,
+        private modalController: ModalController,
         private platform: Platform,
         private cacheService: CacheService,
         private translate: TranslateService,
         private iab: InAppBrowser,
+        private router: Router,
     ) { }
 
     //******************************** */
@@ -1046,32 +1049,8 @@ export class ReddahService {
 
     //appPhoto = {};
     appCacheToOrg = {};
-    
-    appDataPub(cacheKey){
-        let result = this.localStorageService.retrieve(cacheKey);
-        
-        if(cacheKey.indexOf('userphoto_')>-1){
-            if(result&&this.platform.is('cordova')){
-                return (<any>window).Ionic.WebView.convertFileSrc(result);
-            }
-            else{
-                return "assets/icon/photo.svg";
-            }
-        }
-        else if(cacheKey.indexOf('cover_')>-1){
-            if(result&&this.platform.is('cordova')){
-                return (<any>window).Ionic.WebView.convertFileSrc(result);
-            }
-            else{
-                return "assets/icon/timg.jpg";
-            }
-        }
-        else{//pure text
-            return result==null ? "": result;
-        }
-    }
 
-    appData(cacheKey){    
+    appData(cacheKey, userPhotoName="anonymous.png"){    
         let storedKey = cacheKey.replace("///","https://")
         let result = this.localStorageService.retrieve(storedKey);
         
@@ -1080,13 +1059,13 @@ export class ReddahService {
                 if(result)
                     return (<any>window).Ionic.WebView.convertFileSrc(result);
                 else
-                    return "assets/icon/anonymous.png";
+                    return "assets/icon/"+userPhotoName;
             }
             else{
                 let url = this.localStorageService.retrieve(cacheKey+"_url");
                 if(url)
                     return url
-                return "assets/icon/anonymous.png";
+                return "assets/icon/"+userPhotoName;
             }
         }
         else if(cacheKey.indexOf('cover_')>-1){
@@ -2030,5 +2009,19 @@ export class ReddahService {
     async checkIsToday(date){
         let cur = new Date(date);
         return cur.getDate()==new Date().getDate();
+    }
+
+    windowReload(){
+        if(this.platform.is('android')){
+            window.location.reload();
+        }
+        else{
+            this.modalController.dismiss()
+            this.router.navigate([''], {
+                queryParams: {
+                    action: 'login'
+                }
+            });
+        }
     }
 }

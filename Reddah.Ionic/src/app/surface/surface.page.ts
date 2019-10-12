@@ -71,12 +71,14 @@ export class SurfacePage implements OnInit {
         const { data } = await modal.onDidDismiss();
         if(data){
             let result = this.authService.exactToken(data);
-            if(result)
+            if(result){
                 this.router.navigate(['']);
+            }
         }
-        else{
+        
+        setTimeout(() => {
             this.config.isWorldVisible = true;
-        }
+        }, 5000)
     }
 
     async locale(){

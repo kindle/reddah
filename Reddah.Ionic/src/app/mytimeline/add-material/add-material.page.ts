@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AddMaterialPage implements OnInit {
 
+    @Input() postType: number;
     @Input() article: any;
 
     constructor(
@@ -93,6 +94,16 @@ export class AddMaterialPage implements OnInit {
     
     
     ngOnInit() {
+        if(this.postType==1)//photo
+        {
+            //this.takePhoto();
+            this.reddah.takePhoto(this.photos, this.formData);
+        }
+        else if(this.postType==2)//photo//from lib
+        {
+            //this.fromLibPhoto();
+            this.reddah.fromLibPhoto(this.photos, this.formData);
+        }
     }
     
     photos = [];

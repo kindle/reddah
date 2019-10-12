@@ -7,7 +7,7 @@
     <ion-item (click)="changePhoto()" class="borderTop borderItem">
         <ion-label class="title">{{ 'About.Photo' | translate }}</ion-label>
         <ion-thumbnail slot="end" style="padding:10px;margin-right:-10px;">
-            <img src="{{reddah.appDataPub('userphoto_'+targetSub.UserName)}}" class="portrait">
+            <img src="{{reddah.appData('userphoto_'+targetSub.UserName, 'photo.svg')}}" class="portrait">
         </ion-thumbnail>
         <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
     </ion-item>

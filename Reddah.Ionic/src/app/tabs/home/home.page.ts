@@ -55,8 +55,9 @@ export class HomePage implements OnInit {
     
         
         if(cacheArticles){
-            this.articles = JSON.parse(cacheArticles);
-            this.loadedIds = JSON.parse(cacheArticleIds);
+            let top = 20;
+            this.articles = JSON.parse(cacheArticles).slice(0,top);
+            this.loadedIds = JSON.parse(cacheArticleIds).slice(0,top);
             this.dislikeGroups = JSON.parse(cacheDislikeGroups);
             this.dislikeUserNames = JSON.parse(cacheDislikeUserNames);
         }
