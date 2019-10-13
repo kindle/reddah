@@ -26,7 +26,7 @@ export class QrcardPage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
     }
 
-    async ngOnInit() {
+    ngOnInit() {
         this.createdCode = `${this.reddah.QrUserKey}${this.userName}`;
     }
 

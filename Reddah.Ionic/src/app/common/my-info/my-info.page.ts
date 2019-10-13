@@ -30,7 +30,7 @@ export class MyInfoPage implements OnInit {
 
     userName: string;
 
-    async ngOnInit() {
+    ngOnInit() {
         this.reddah.getUserPhotos(this.userName);
     }
 

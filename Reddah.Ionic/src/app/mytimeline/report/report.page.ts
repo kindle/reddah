@@ -58,7 +58,7 @@ export class ReportPage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
     }
     
-    async ngOnInit(){
+    ngOnInit(){
         this.reddah.getUserPhotos(this.userName, true);
 
         let cachedArticles = this.localStorageService.retrieve("Reddah_report");

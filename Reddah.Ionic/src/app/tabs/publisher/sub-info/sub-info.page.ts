@@ -44,7 +44,7 @@ export class SubInfoPage implements OnInit {
 
     showLoading=false;
 
-    async ngOnInit() {
+    ngOnInit() {
         this.reddah.getUserPhotos(this.targetSub.UserName);
         
         this.showLoading = true;

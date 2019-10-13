@@ -41,7 +41,7 @@ export class EarthPage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
     }
 
-    async ngOnInit(){
+    ngOnInit(){
         this.init(null);
     }
 

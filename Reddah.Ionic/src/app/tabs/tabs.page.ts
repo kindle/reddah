@@ -50,7 +50,7 @@ export class TabsPage implements OnInit {
     }
 
 
-    async ngOnInit(){
+    ngOnInit(){
         let locale = this.localStorageService.retrieve("Reddah_Locale");
         if(locale==null){
             

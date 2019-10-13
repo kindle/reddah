@@ -56,7 +56,7 @@ export class ShakePage implements OnInit {
         }
     }
     
-    async ngOnInit(){
+    ngOnInit(){
         
     }
 

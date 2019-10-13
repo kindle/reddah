@@ -22,7 +22,7 @@ export class AddFriendPage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
     }
 
-    async ngOnInit() {
+    ngOnInit() {
         
     }
 

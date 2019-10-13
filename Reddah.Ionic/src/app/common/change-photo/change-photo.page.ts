@@ -27,7 +27,7 @@ export class ChangePhotoPage implements OnInit {
         private file: File,
         ) { }
 
-    async ngOnInit() {
+    ngOnInit() {
         
     }
 

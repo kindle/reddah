@@ -25,7 +25,7 @@ export class SearchUserPage implements OnInit {
     }
 
     user404= false;
-    async ngOnInit() {
+    ngOnInit() {
         
         setTimeout(() => {
             this.searchKeyword.setFocus();

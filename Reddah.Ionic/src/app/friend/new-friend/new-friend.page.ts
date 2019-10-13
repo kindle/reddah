@@ -21,7 +21,7 @@ export class NewFriendPage implements OnInit {
             public reddah: ReddahService,
             private localStorageService: LocalStorageService) { }
 
-    async ngOnInit() {
+    ngOnInit() {
         this.loadRequests();
     }
 

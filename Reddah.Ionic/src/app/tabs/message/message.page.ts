@@ -34,7 +34,7 @@ export class MessageListPage implements OnInit {
     }
 
     //refreshPage;
-    async ngOnInit(){
+    ngOnInit(){
         this.loadData(true);
         /*this.refreshPage = setInterval(() => {
             this.loadData(true);

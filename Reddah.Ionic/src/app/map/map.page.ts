@@ -45,7 +45,7 @@ export class MapPage implements OnInit {
         this.modalController.dismiss();
     }
 
-    async ngOnInit(){
+    ngOnInit(){
     }
 
     @ViewChild('earth') mapContainer: ElementRef;

@@ -34,7 +34,7 @@ export class ShareChooseChatPage implements OnInit {
         this.currentUserName = this.reddah.getCurrentUser();
     }
 
-    async ngOnInit(){
+    ngOnInit(){
         this.loadData(true);
         setInterval(() => {
             this.loadData(true);

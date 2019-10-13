@@ -64,7 +64,7 @@ export class TsViewerPage implements OnInit {
         );
     }
     
-    async ngOnInit(){
+    ngOnInit(){
         this.getUserInfo();
         //for comment init
         this.selectedArticleId = this.article.Id;

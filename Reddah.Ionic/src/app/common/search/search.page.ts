@@ -79,7 +79,7 @@ export class SearchPage implements OnInit {
     firstLoading_p = false;
     firstLoading_m = false;
 
-    async ngOnInit() {
+    ngOnInit() {
         if(this.type==-1||this.type==null){//come from search user 404 this.type==-1
             if(this.key){
                 this.searchKeyword.value = this.key;

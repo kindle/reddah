@@ -16,7 +16,7 @@
         </ion-item>
         <div class="listInfo">
             <span *ngFor="let group of article.GroupName.split(',')" (click)="goSearch(group)" style="padding-right:5px;">
-                <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;margin-bottom:2px;">{{group}}</u>
+                <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;margin-bottom:2px;">{{group.trim()}}</u>
             </span>
         </div>
         <ion-text color="dark" *ngIf="!article.VideoUrl">

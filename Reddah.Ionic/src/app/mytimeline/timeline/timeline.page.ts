@@ -1,14 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
 import { InfiniteScroll } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
-import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, PopoverController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
-import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TsViewerPage } from '../tsviewer/tsviewer.page'
 import * as moment from 'moment';
 import { TimelinePopPage } from '../../common/timeline-pop.page';
@@ -40,12 +37,8 @@ export class TimeLinePage implements OnInit {
         public navController: NavController,
         private renderer: Renderer,
         public modalController: ModalController,
-        private localStorageService: LocalStorageService,
         private popoverController: PopoverController,
-        private photoLibrary: PhotoLibrary,
         private cacheService: CacheService,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
         ){
     }
     

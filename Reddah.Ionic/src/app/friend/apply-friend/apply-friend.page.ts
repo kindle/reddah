@@ -26,7 +26,7 @@ export class ApplyFriendPage implements OnInit {
       private translate: TranslateService,
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
       this.message = `${this.translate.instant('Common.ApplyFriendMe')} ${this.reddahService.getCurrentUser()}`; 
       this.targetNoteName = this.targetUserName;
       setTimeout(() => {

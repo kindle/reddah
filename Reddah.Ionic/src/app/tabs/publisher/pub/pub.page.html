@@ -95,7 +95,7 @@
             </div>
             <div class="listInfo" *ngIf="article.ImageUrls.length==0">
                 <span *ngFor="let group of article.GroupName.split(',')" (click)="goSearch(group)" style="padding-right:5px;">
-                    <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;margin-bottom:2px;">{{group}}</u>
+                    <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;margin-bottom:2px;">{{group.trim()}}</u>
                 </span>
             </div>
             <div *ngIf="article.ImageUrls.length==0" class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
