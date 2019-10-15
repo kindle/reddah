@@ -81,7 +81,8 @@ export class SigninPage implements OnInit {
     async goRegister(){
         const modal = await this.modalController.create({
             component: RegisterPage,
-            componentProps: { url: '' }
+            componentProps: { url: '' },
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -89,7 +90,9 @@ export class SigninPage implements OnInit {
 
     async forgot(){
         const modal = await this.modalController.create({
-            component: ForgotPage
+            component: ForgotPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();

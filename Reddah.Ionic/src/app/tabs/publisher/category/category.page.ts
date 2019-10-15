@@ -62,7 +62,8 @@ export class CategoryPage implements OnInit {
             componentProps: { 
                 title: title,
                 type: type 
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

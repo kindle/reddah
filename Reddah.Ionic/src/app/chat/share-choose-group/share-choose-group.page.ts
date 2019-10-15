@@ -75,7 +75,8 @@ export class ShareChooseGroupPage implements OnInit {
             component: GroupChatFirePage,
             componentProps: {
                 groupChat: groupChat,
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();

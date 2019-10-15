@@ -28,7 +28,8 @@ export class AuthService {
     async register() {
         const modal = await this.modalController.create({
             component: RegisterPage,
-            componentProps: { url: '' }
+            componentProps: { url: '' },
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -44,7 +45,8 @@ export class AuthService {
     async signin() {
         const modal = await this.modalController.create({
             component: SigninPage,
-            componentProps: { url: '' }
+            componentProps: { url: '' },
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -60,7 +62,8 @@ export class AuthService {
     async surface() {
         const modal = await this.modalController.create({
             component: SurfacePage,
-            componentProps: { url: '' }
+            componentProps: { url: '' },
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();

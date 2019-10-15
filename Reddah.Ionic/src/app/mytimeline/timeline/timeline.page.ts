@@ -175,7 +175,8 @@ export class TimeLinePage implements OnInit {
             component: TsViewerPage,
             componentProps: { 
                 article: article
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         
         await userModal.present();
@@ -199,7 +200,8 @@ export class TimeLinePage implements OnInit {
     async goPost(postType){
         const postModal = await this.modalController.create({
             component: AddTimelinePage,
-            componentProps: { postType: postType }
+            componentProps: { postType: postType },
+            cssClass: "modal-fullscreen",
         });
           
         await postModal.present();
@@ -212,6 +214,8 @@ export class TimeLinePage implements OnInit {
     async goMessage(){
         const modal = await this.modalController.create({
             component: MessagePage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

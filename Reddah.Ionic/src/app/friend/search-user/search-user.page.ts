@@ -69,7 +69,8 @@ export class SearchUserPage implements OnInit {
             componentProps: { 
                 key: this.searchKeyword.value,
                 type: -1
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await userModal.present();
@@ -80,7 +81,8 @@ export class SearchUserPage implements OnInit {
             component: UserPage,
             componentProps: { 
                 userName: userName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await userModal.present();

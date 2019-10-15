@@ -379,7 +379,8 @@ export class ReportPage implements OnInit {
             component: UserPage,
             componentProps: { 
                 userName: userName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await userModal.present();
@@ -388,7 +389,8 @@ export class ReportPage implements OnInit {
     async fullText(text){
         const textModal = await this.modalController.create({
             component: ArticleTextPopPage,
-            componentProps: { text: text }
+            componentProps: { text: text },
+            cssClass: "modal-fullscreen",
         });
           
         await textModal.present();

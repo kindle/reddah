@@ -134,7 +134,8 @@ export class SubInfoPage implements OnInit {
               title: this.translate.instant("About.Photo"),
               tag : "portrait",
               targetUserName: this.targetSub.UserName
-          }
+          },
+          cssClass: "modal-fullscreen",
         });
           
         await userModal.present();
@@ -148,7 +149,9 @@ export class SubInfoPage implements OnInit {
 
     async myQrCard(){
         const qrModal = await this.modalController.create({
-            component: QrcardPage
+            component: QrcardPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await qrModal.present();
@@ -161,7 +164,8 @@ export class SubInfoPage implements OnInit {
                 title: this.translate.instant("Input.Name"),
                 currentNickName: this.reddah.appData('usernickname_'+this.targetSub.UserName),
                 targetUserName: this.targetSub.UserName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -178,7 +182,8 @@ export class SubInfoPage implements OnInit {
                 title: this.translate.instant("Input.Description"),
                 currentSignature: this.reddah.appData('usersignature_'+this.targetSub.UserName),
                 targetUserName: this.targetSub.UserName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -197,7 +202,8 @@ export class SubInfoPage implements OnInit {
                 component: AddArticlePage,
                 componentProps: { 
                     targetUserName: this.targetSub.UserName
-                }
+                },
+                cssClass: "modal-fullscreen",
             });
             await modal.present();
             const {data} = await modal.onDidDismiss();
@@ -213,7 +219,8 @@ export class SubInfoPage implements OnInit {
             componentProps: { 
                 targetUserName: this.targetSub.UserName,
                 article: article,
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -232,7 +239,8 @@ export class SubInfoPage implements OnInit {
                 componentProps: { 
                     targetUserName: this.targetSub.UserName,
 
-                }
+                },
+                cssClass: "modal-fullscreen",
             });
             await modal.present();
             const {data} = await modal.onDidDismiss();
@@ -248,7 +256,8 @@ export class SubInfoPage implements OnInit {
             componentProps: { 
                 targetUserName: this.targetSub.UserName,
                 article: article,
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -265,7 +274,8 @@ export class SubInfoPage implements OnInit {
                 content: mini.Cover,
                 guid: mini.UserName,
                 version: mini.Sex,
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

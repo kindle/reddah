@@ -47,7 +47,9 @@ export class SurfacePage implements OnInit {
         this.config.isWorldVisible = false;
 
         const modal = await this.modalController.create({
-            component: RegisterPage
+            component: RegisterPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();
@@ -64,7 +66,9 @@ export class SurfacePage implements OnInit {
         this.config.isWorldVisible = false;
         
         const modal = await this.modalController.create({
-            component: SigninPage
+            component: SigninPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -87,7 +91,8 @@ export class SurfacePage implements OnInit {
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
         const changeLocaleModal = await this.modalController.create({
             component: LocalePage,
-            componentProps: { orgLocale: currentLocale }
+            componentProps: { orgLocale: currentLocale },
+            cssClass: "modal-fullscreen",
         });
         
         await changeLocaleModal.present();

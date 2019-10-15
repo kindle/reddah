@@ -59,7 +59,9 @@ export class NewFriendPage implements OnInit {
 
     async addFriend(){
         const modal = await this.modalController.create({
-            component: AddFriendPage
+            component: AddFriendPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();
@@ -67,7 +69,9 @@ export class NewFriendPage implements OnInit {
 
     async searchUser(){
         const modal = await this.modalController.create({
-            component: SearchUserPage
+            component: SearchUserPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();
@@ -105,7 +109,8 @@ export class NewFriendPage implements OnInit {
             component: UserPage,
             componentProps: { 
                 userName: userName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await userModal.present();

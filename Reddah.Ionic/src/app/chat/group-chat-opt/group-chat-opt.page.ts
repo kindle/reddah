@@ -45,7 +45,8 @@ export class GroupChatOptPage {
                 targetGroupChatId: this.groupInfo.Id,
                 currentTitle: this.groupInfo.Title,
                 title: '设置群名称',
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -63,7 +64,8 @@ export class GroupChatOptPage {
                 targetGroupChatId: this.groupInfo.Id,
                 currentContent: this.groupInfo.Content,
                 title: '设置群公告',
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -113,7 +115,8 @@ export class GroupChatOptPage {
             component: UserPage,
             componentProps: { 
                 userName: userName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
             
         await userModal.present();
@@ -165,7 +168,8 @@ export class GroupChatOptPage {
             componentProps: { 
                 "addedUsers" : this.groupInfo.GroupName,   
                 "delete": false
-            } 
+            },
+            cssClass: "modal-fullscreen",
         });
             
         await modal.present();
@@ -194,7 +198,8 @@ export class GroupChatOptPage {
             componentProps: { 
                 "addedUsers" : this.groupInfo.GroupName,   
                 "delete": true
-            } 
+            },
+            cssClass: "modal-fullscreen",
         });
             
         await modal.present();

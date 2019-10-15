@@ -141,7 +141,8 @@ export class PubPage implements OnInit {
     async view(article: Article){
         const viewerModal = await this.modalController.create({
             component: PostviewerPage,
-            componentProps: { article: article }
+            componentProps: { article: article },
+            cssClass: "modal-fullscreen",
         });
         
         await viewerModal.present();
@@ -184,7 +185,8 @@ export class PubPage implements OnInit {
             component: MorePage,
             componentProps: { 
                 pub: true
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -292,7 +294,8 @@ export class PubPage implements OnInit {
             componentProps: { 
                 targetUserName: this.userName,
                 currentNoteName: this.reddah.appData('usernotename_'+this.userName+'_'+this.currentUserName)
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -308,8 +311,8 @@ export class PubPage implements OnInit {
                 title: this.reddah.appData('usernotename_'+this.userName+'_'+this.currentUserName),
                 target: this.userName,
                 source: "pub"
-                
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -321,7 +324,8 @@ export class PubPage implements OnInit {
             componentProps: { 
                 key: key,
                 type: 0,//article only
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await userModal.present();

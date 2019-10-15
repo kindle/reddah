@@ -111,6 +111,8 @@ export class SettingAboutPage implements OnInit {
     async feedback() {
         const modal = await this.modalController.create({
             component: AddFeedbackPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

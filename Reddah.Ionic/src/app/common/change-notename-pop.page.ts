@@ -28,7 +28,8 @@ export class ChangeNoteNamePopPage {
             componentProps: { 
                 targetUserName: this.targetUserName,
                 currentNoteName: this.currentNoteName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
             
         await modal.present();

@@ -69,7 +69,8 @@ export class ChatChooseUserPage implements OnInit {
                 componentProps: { 
                     title: this.reddah.appData('usernotename_'+targetUsers[0].Watch+'_'+this.userName),
                     target: targetUsers[0].Watch,
-                }
+                },
+                cssClass: "modal-fullscreen",
             });
             await modal.present();
             const {data} = await modal.onDidDismiss();
@@ -81,7 +82,8 @@ export class ChatChooseUserPage implements OnInit {
                 component: GroupChatFirePage,
                 componentProps: {
                     targetUsers: targetUsers,
-                }
+                },
+                cssClass: "modal-fullscreen",
             });
             await modal.present();
             //const {data} = await modal.onDidDismiss();
@@ -152,7 +154,9 @@ export class ChatChooseUserPage implements OnInit {
 
     async goChooseGroupChat(){
         const modal = await this.modalController.create({
-            component: ChatChooseGroupPage
+            component: ChatChooseGroupPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
     }

@@ -74,7 +74,8 @@ export class MessagePage implements OnInit {
             component: TsViewerPage,
             componentProps: { 
                 article: article
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         
         await userModal.present();

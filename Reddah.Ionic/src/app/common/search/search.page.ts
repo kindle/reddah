@@ -338,7 +338,8 @@ export class SearchPage implements OnInit {
     async view(article: Article){
         const viewerModal = await this.modalController.create({
             component: PostviewerPage,
-            componentProps: { article: article }
+            componentProps: { article: article },
+            cssClass: "modal-fullscreen",
         });
         
         await viewerModal.present();
@@ -352,7 +353,8 @@ export class SearchPage implements OnInit {
     async viewStock(){
         const stockModal = await this.modalController.create({
             component: StockPage,
-            componentProps: { s: this.searchKeyword.value }
+            componentProps: { s: this.searchKeyword.value },
+            cssClass: "modal-fullscreen",
         });
         
         await stockModal.present();
@@ -363,7 +365,8 @@ export class SearchPage implements OnInit {
             component: TsViewerPage,
             componentProps: { 
                 article: article
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         
         await userModal.present();
@@ -375,7 +378,8 @@ export class SearchPage implements OnInit {
             component: PubPage,
             componentProps: { 
                 userName: pub.UserName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();
@@ -395,7 +399,8 @@ export class SearchPage implements OnInit {
                 content: mini.Cover,
                 guid: mini.UserName,
                 version: mini.Sex,
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

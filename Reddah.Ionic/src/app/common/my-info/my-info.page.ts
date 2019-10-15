@@ -46,7 +46,8 @@ export class MyInfoPage implements OnInit {
               title: this.translate.instant("About.Photo"),
               tag : "portrait",
               targetUserName: ""
-          }
+          },
+          cssClass: "modal-fullscreen",
         });
           
         await userModal.present();
@@ -60,7 +61,9 @@ export class MyInfoPage implements OnInit {
 
     async myQrCard(){
         const qrModal = await this.modalController.create({
-            component: QrcardPage
+            component: QrcardPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await qrModal.present();
@@ -72,7 +75,8 @@ export class MyInfoPage implements OnInit {
             componentProps: { 
                 title: this.translate.instant("About.Nickname"),
                 currentNickName: this.reddah.appData('usernickname_'+this.userName)
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -86,7 +90,8 @@ export class MyInfoPage implements OnInit {
             componentProps: {
                 title: this.translate.instant("About.Signature"),
                 currentSignature: this.reddah.appData('usersignature_'+this.userName)
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -96,7 +101,9 @@ export class MyInfoPage implements OnInit {
 
     async changeLocation(){
         const modal = await this.modalController.create({
-            component: LocationPage
+            component: LocationPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
     
         await modal.present();
@@ -120,7 +127,8 @@ export class MyInfoPage implements OnInit {
             componentProps: {
                 title: this.translate.instant("About.Sex"),
                 currentSex: currentValue
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();

@@ -44,6 +44,8 @@ export class AboutPage implements OnInit {
     async goPlatform(){
         const modal = await this.modalController.create({
             component: PlatformPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -52,6 +54,8 @@ export class AboutPage implements OnInit {
     async goSettings(){
         const modal = await this.modalController.create({
             component: SettingListPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -60,7 +64,8 @@ export class AboutPage implements OnInit {
     async myInfo() {
         const myInfoModal = await this.modalController.create({
             component: MyInfoPage,
-            componentProps: {  }
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await myInfoModal.present();
@@ -73,7 +78,8 @@ export class AboutPage implements OnInit {
     async goBookmark(){
         const modal = await this.modalController.create({
             component: BookmarkPage,
-            componentProps: {  }
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -97,7 +103,8 @@ export class AboutPage implements OnInit {
     async goPost(postType){
         const postModal = await this.modalController.create({
             component: AddTimelinePage,
-            componentProps: { postType: postType }
+            componentProps: { postType: postType },
+            cssClass: "modal-fullscreen",
         });
           
         await postModal.present();
@@ -109,7 +116,9 @@ export class AboutPage implements OnInit {
 
     async message(){
         const modal = await this.modalController.create({
-            component: MessageListPage
+            component: MessageListPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
     
         await modal.present();

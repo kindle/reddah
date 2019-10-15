@@ -374,7 +374,9 @@ export class AddTimelinePage implements OnInit {
 
     async getLocation(){
         const modal = await this.modalController.create({
-            component: LocationPage
+            component: LocationPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
     
         await modal.present();

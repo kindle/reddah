@@ -84,7 +84,8 @@ export class UserPage implements OnInit {
     async viewTimeline(){
         const timelineModal = await this.modalController.create({
             component: TimeLinePage,
-            componentProps: { userName: this.userName }
+            componentProps: { userName: this.userName },
+            cssClass: "modal-fullscreen",
         });
           
         await timelineModal.present();
@@ -174,7 +175,8 @@ export class UserPage implements OnInit {
     async addFriend(){
         const applyFriendModal = await this.modalController.create({
             component: ApplyFriendPage,
-            componentProps: { targetUserName: this.userName }
+            componentProps: { targetUserName: this.userName },
+            cssClass: "modal-fullscreen",
         });
           
         await applyFriendModal.present();
@@ -203,7 +205,8 @@ export class UserPage implements OnInit {
             componentProps: { 
                 targetUserName: this.userName,
                 currentNoteName: this.reddah.appData('usernotename_'+this.userName+'_'+this.currentUserName)
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -218,8 +221,8 @@ export class UserPage implements OnInit {
             componentProps: { 
                 title: this.reddah.appData('usernotename_'+this.userName+'_'+this.currentUserName),
                 target: this.userName,
-                
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -228,6 +231,8 @@ export class UserPage implements OnInit {
     async goMore(){
         const modal = await this.modalController.create({
             component: MorePage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -238,7 +243,8 @@ export class UserPage implements OnInit {
             let location = this.reddah.appData('userlocationjson_'+this.userName);
             const modal = await this.modalController.create({
                 component: LocationPage,
-                componentProps: { location: JSON.parse(location) }
+                componentProps: { location: JSON.parse(location) },
+                cssClass: "modal-fullscreen",
             });
         
             await modal.present();
@@ -251,7 +257,9 @@ export class UserPage implements OnInit {
 
     async changeLocation(){
         const modal = await this.modalController.create({
-            component: LocationPage
+            component: LocationPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
     
         await modal.present();

@@ -32,7 +32,9 @@ export class AddFriendPage implements OnInit {
 
     async searchUser(){
         const modal = await this.modalController.create({
-            component: SearchUserPage
+            component: SearchUserPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();
@@ -40,7 +42,9 @@ export class AddFriendPage implements OnInit {
 
     async myQrCard(){
         const modal = await this.modalController.create({
-            component: QrcardPage
+            component: QrcardPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();

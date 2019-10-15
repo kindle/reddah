@@ -33,7 +33,7 @@
     <ion-item lines="none" class="borderTop borderItem" (click)="changeSignature()">
         <ion-label class="title">{{ 'Input.Description' | translate }}</ion-label>
     </ion-item>
-    <ion-item lines="none" class="borderItem borderBottom">
+    <ion-item lines="none" class="borderItem borderBottom" (click)="changeSignature()">
         <ion-note slot="start" color="dark" text-wrap>{{reddah.appData('usersignature_'+targetSub.UserName)}}</ion-note>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
@@ -60,20 +60,10 @@
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
-
-    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
-    </ion-item>
-    <div *ngIf="isCordova&&targetSub.Type==3">
-        <ion-item lines="none" class="borderTop borderItem borderBottom">
-            <ion-icon slot="start" name="megaphone" color="medium" size="medium"></ion-icon>
-            <ion-label color="medium">{{ 'Common.FeatureNotOpen' | translate }}</ion-label>
-            <ion-icon name="ios-arrow-forward" color="medium" slot="end" size="small"></ion-icon>
-        </ion-item>
-    </div>
     
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
-    <div *ngIf="!isCordova&&targetSub.Type==3">
+    <div *ngIf="targetSub.Type==3">
         <ion-item lines="none" (click)="addMini()" class="borderTop borderBottom" *ngIf="!showLoading&&articles&&articles.length==0">
             <ion-icon slot="start" name="add" color="mini" size="medium"></ion-icon>
             <ion-label>{{ 'Common.Draft' | translate }}</ion-label>

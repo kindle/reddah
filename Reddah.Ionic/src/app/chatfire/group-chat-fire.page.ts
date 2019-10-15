@@ -280,7 +280,8 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
             componentProps: { 
                 targetUsers: this.targetUsers,
                 groupInfo: this.groupChat
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -325,7 +326,8 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
             component: UserPage,
             componentProps: { 
                 userName: userName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
             
         await userModal.present();

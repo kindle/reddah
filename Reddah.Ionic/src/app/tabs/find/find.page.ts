@@ -26,7 +26,8 @@ export class FindPage {
     async startScanner(){
         const scanModal = await this.modalController.create({
             component: ScanPage,
-            componentProps: { }
+            componentProps: { },
+            cssClass: "modal-fullscreen",
         });
         
         await scanModal.present();
@@ -39,7 +40,9 @@ export class FindPage {
 
     async goSearch(){
         const userModal = await this.modalController.create({
-            component: SearchPage
+            component: SearchPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await userModal.present();
@@ -53,7 +56,9 @@ export class FindPage {
         }catch(e){}
         if(myLocation&&myLocation.location){
             const modal = await this.modalController.create({
-                component: ShakePage
+                component: ShakePage,
+                componentProps: {},
+                cssClass: "modal-fullscreen",
             });
               
             await modal.present();
@@ -65,7 +70,9 @@ export class FindPage {
 
     async changeLocation(){
         const modal = await this.modalController.create({
-            component: LocationPage
+            component: LocationPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
     
         await modal.present();
@@ -77,7 +84,9 @@ export class FindPage {
 
     async goPublicPage(){
         const modal = await this.modalController.create({
-            component: PublisherPage
+            component: PublisherPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
     }
@@ -87,7 +96,8 @@ export class FindPage {
             component: SearchPage,
             componentProps: {
                 type: 3,//mini only
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await userModal.present();

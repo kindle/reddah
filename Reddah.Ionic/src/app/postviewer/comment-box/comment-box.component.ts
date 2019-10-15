@@ -128,7 +128,8 @@ export class CommentBoxComponent implements OnInit {
                 articleId: articleId,
                 commentId: commentId,
                 text: this.commentContent,
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         
         await addCommentModal.present();

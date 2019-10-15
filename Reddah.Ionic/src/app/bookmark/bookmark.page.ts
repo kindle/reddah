@@ -120,7 +120,8 @@ export class BookmarkPage implements OnInit {
     async view(article: Article){
         const viewerModal = await this.modalController.create({
             component: PostviewerPage,
-            componentProps: { article: article }
+            componentProps: { article: article },
+            cssClass: "modal-fullscreen",
         });
         
         await viewerModal.present();

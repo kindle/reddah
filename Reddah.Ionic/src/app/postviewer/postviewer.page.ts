@@ -67,7 +67,8 @@ export class PostviewerPage implements OnInit {
                 componentProps: { 
                     title: this.translate.instant("Common.Choose"),
                     article: this.article,
-                }
+                },
+                cssClass: "modal-fullscreen",
             });
               
             await modal.present();
@@ -83,6 +84,8 @@ export class PostviewerPage implements OnInit {
         else if(data==5){//change font size
             const modal = await this.modalController.create({
                 component: SettingFontPage,
+                componentProps: {},
+                cssClass: "modal-fullscreen",
             });
             
             await modal.present();
@@ -95,7 +98,8 @@ export class PostviewerPage implements OnInit {
             componentProps: { 
                 postType: postType,
                 article: this.article
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await postModal.present();
@@ -113,7 +117,8 @@ export class PostviewerPage implements OnInit {
                 desc: this.translate.instant("Pop.ReportReason"),
                 feedbackType: 4,
                 article: this.article
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();
@@ -185,7 +190,8 @@ export class PostviewerPage implements OnInit {
             component: isNormalUser?UserPage:PubPage,
             componentProps: { 
                 userName: userName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();
@@ -197,7 +203,8 @@ export class PostviewerPage implements OnInit {
             componentProps: { 
                 key: key,
                 type: 0,//article only
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await userModal.present();

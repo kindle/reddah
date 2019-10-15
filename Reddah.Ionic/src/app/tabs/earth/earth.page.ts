@@ -54,7 +54,8 @@ export class EarthPage implements OnInit {
             componentProps: {
                 lat: this.config.lat,
                 lng: this.config.lng
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

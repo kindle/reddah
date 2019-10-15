@@ -136,7 +136,9 @@ export class TabsPage implements OnInit {
         let yearslater = false;
         if(yearslater){
             const modal = await this.modalController.create({
-                component: EarthPage
+                component: EarthPage,
+                componentProps: {},
+                cssClass: "modal-fullscreen",
             });
             
             await modal.present();
@@ -147,7 +149,8 @@ export class TabsPage implements OnInit {
                 componentProps: {
                     //lat: this.config.lat,
                     //lng: this.config.lng
-                }
+                },
+                cssClass: "modal-fullscreen",
             });
               
             await modal.present();

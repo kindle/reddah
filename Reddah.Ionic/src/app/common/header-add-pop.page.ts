@@ -40,6 +40,8 @@ export class HeaderAddPage {
     async feedback() {
         const modal = await this.modalController.create({
             component: AddFeedbackPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();
@@ -52,6 +54,8 @@ export class HeaderAddPage {
     async addFriend(){
         const addFriendModal = await this.modalController.create({
             component: AddFriendPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await addFriendModal.present();
@@ -60,6 +64,8 @@ export class HeaderAddPage {
     async createGroupChat(){
         const modal = await this.modalController.create({
             component: ChatChooseUserPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

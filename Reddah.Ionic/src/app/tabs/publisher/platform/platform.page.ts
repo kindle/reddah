@@ -43,14 +43,18 @@ export class PlatformPage implements OnInit {
 
     async goApply(){
         const modal = await this.modalController.create({
-            component: CategoryPage
+            component: CategoryPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
     }
 
     async goManage(){
         const modal = await this.modalController.create({
-            component: ManagePage
+            component: ManagePage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
     }
@@ -59,7 +63,8 @@ export class PlatformPage implements OnInit {
         const modal = await this.modalController.create({
             component: ReportPage,
             componentProps: { 
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

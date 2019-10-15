@@ -27,7 +27,8 @@ export class ChangeCoverPopPage {
             title : this.translateService.instant("Pop.ChangeCover"),
             tag : "cover",
             targetUserName: ""
-          }
+          },
+          cssClass: "modal-fullscreen",
       });
         
       await changePhotoModal.present();

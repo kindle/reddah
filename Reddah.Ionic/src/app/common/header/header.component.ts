@@ -20,7 +20,9 @@ export class HeaderComponent {
 
     async goSearch(){
         const userModal = await this.modalController.create({
-            component: SearchPage
+            component: SearchPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await userModal.present();

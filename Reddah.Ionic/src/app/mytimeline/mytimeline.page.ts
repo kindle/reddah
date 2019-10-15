@@ -68,6 +68,8 @@ export class MyTimeLinePage implements OnInit {
     async goMessage(){
         const modal = await this.modalController.create({
             component: MessagePage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();
@@ -232,7 +234,8 @@ export class MyTimeLinePage implements OnInit {
     async goPost(postType){
         const postModal = await this.modalController.create({
             component: AddTimelinePage,
-            componentProps: { postType: postType }
+            componentProps: { postType: postType },
+            cssClass: "modal-fullscreen",
         });
           
         await postModal.present();
@@ -416,7 +419,8 @@ export class MyTimeLinePage implements OnInit {
             component: UserPage,
             componentProps: { 
                 userName: userName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await userModal.present();
@@ -425,7 +429,8 @@ export class MyTimeLinePage implements OnInit {
     async fullText(text){
         const textModal = await this.modalController.create({
             component: ArticleTextPopPage,
-            componentProps: { text: text }
+            componentProps: { text: text },
+            cssClass: "modal-fullscreen",
         });
           
         await textModal.present();
@@ -449,7 +454,8 @@ export class MyTimeLinePage implements OnInit {
     async goLocation(location){
         const modal = await this.modalController.create({
             component: LocationPage,
-            componentProps: { location: JSON.parse(location) }
+            componentProps: { location: JSON.parse(location) },
+            cssClass: "modal-fullscreen",
         });
     
         await modal.present();

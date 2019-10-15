@@ -147,7 +147,8 @@ export class ManagePage implements OnInit {
             component: SubInfoPage,
             componentProps: { 
                 targetSub: sub
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         
         await myInfoModal.present();

@@ -246,6 +246,7 @@ export class TsViewerPage implements OnInit {
             componentProps: { 
                 userName: userName,
             },
+            cssClass: "modal-fullscreen",
         });
         
         await userModal.present();
@@ -258,7 +259,8 @@ export class TsViewerPage implements OnInit {
     async fullText(text){
         const textModal = await this.modalController.create({
             component: ArticleTextPopPage,
-            componentProps: { text: text }
+            componentProps: { text: text },
+            cssClass: "modal-fullscreen",
         });
           
         await textModal.present();
@@ -271,7 +273,8 @@ export class TsViewerPage implements OnInit {
     async goLocation(location){
         const modal = await this.modalController.create({
             component: LocationPage,
-            componentProps: { location: JSON.parse(location) }
+            componentProps: { location: JSON.parse(location) },
+            cssClass: "modal-fullscreen",
         });
     
         await modal.present();
@@ -284,7 +287,8 @@ export class TsViewerPage implements OnInit {
     async addFriend(){
         const applyFriendModal = await this.modalController.create({
             component: ApplyFriendPage,
-            componentProps: { targetUserName: this.article.UserName }
+            componentProps: { targetUserName: this.article.UserName },
+            cssClass: "modal-fullscreen",
         });
           
         await applyFriendModal.present();

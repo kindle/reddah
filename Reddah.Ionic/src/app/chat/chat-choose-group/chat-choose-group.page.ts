@@ -76,7 +76,8 @@ export class ChatChooseGroupPage implements OnInit {
             component: GroupChatFirePage,
             componentProps: {
                 groupChat: groupChat,
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -88,6 +89,8 @@ export class ChatChooseGroupPage implements OnInit {
     async createGroupChat(){
         const modal = await this.modalController.create({
             component: ChatChooseUserPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

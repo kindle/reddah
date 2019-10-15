@@ -173,7 +173,8 @@ export class HomePage implements OnInit {
     async myInfo() {
         const myInfoModal = await this.modalController.create({
             component: MyInfoPage,
-            componentProps: {  }
+            componentProps: {  },
+            cssClass: "modal-fullscreen",
         });
         
         await myInfoModal.present();
@@ -186,7 +187,8 @@ export class HomePage implements OnInit {
     async view(article: Article){
         const viewerModal = await this.modalController.create({
             component: PostviewerPage,
-            componentProps: { article: article }
+            componentProps: { article: article },
+            cssClass: "modal-fullscreen",
         });
         
         await viewerModal.present();
@@ -204,7 +206,8 @@ export class HomePage implements OnInit {
             componentProps: { 
                 key: key,
                 type: 0,//article only
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();
@@ -219,7 +222,8 @@ export class HomePage implements OnInit {
             component: isNormalUser?UserPage:PubPage,
             componentProps: { 
                 userName: userName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();
@@ -311,7 +315,8 @@ export class HomePage implements OnInit {
                 desc: this.translate.instant("Pop.ReportReason"),
                 feedbackType: 4,
                 article: article
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

@@ -178,7 +178,8 @@ export class ShareChooseUserPage implements OnInit {
             component: ShareChooseGroupPage,
             componentProps: {
                 article: this.article,
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const { data } = await modal.onDidDismiss();

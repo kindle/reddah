@@ -1686,7 +1686,8 @@ export class ReddahService {
             position: 'top',
             closeButtonText: this.translate.instant("Button.Close"),
             duration: 3000,
-            color: color
+            color: color,
+            cssClass: "toast-style"
         });
         toast.present();
     }

@@ -68,6 +68,8 @@ export class SettingListPage implements OnInit {
     async goAbout(){
         const modal = await this.modalController.create({
             component: SettingAboutPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -76,6 +78,8 @@ export class SettingListPage implements OnInit {
     async goAccount(){
         const modal = await this.modalController.create({
             component: SettingAccountPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -84,6 +88,8 @@ export class SettingListPage implements OnInit {
     async goPrivacy(){
         const modal = await this.modalController.create({
             component: SettingPrivacyPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -92,6 +98,8 @@ export class SettingListPage implements OnInit {
     async goGeneral(){
         const modal = await this.modalController.create({
             component: SettingGePage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();
@@ -100,6 +108,8 @@ export class SettingListPage implements OnInit {
     async goMyReport() {
         const modal = await this.modalController.create({
             component: MyReportPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

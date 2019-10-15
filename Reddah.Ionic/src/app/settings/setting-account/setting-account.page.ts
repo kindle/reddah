@@ -43,6 +43,8 @@ export class SettingAccountPage implements OnInit {
     async changePassword(){
         const modal = await this.modalController.create({
             component: SettingChangePasswordPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();

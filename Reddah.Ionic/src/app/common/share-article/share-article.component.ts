@@ -40,7 +40,8 @@ export class ShareArticleComponent {
     async goArticleViewer(article: Article){
         const viewerModal = await this.modalController.create({
             component: PostviewerPage,
-            componentProps: { article: article }
+            componentProps: { article: article },
+            cssClass: "modal-fullscreen",
         });
         
         await viewerModal.present();

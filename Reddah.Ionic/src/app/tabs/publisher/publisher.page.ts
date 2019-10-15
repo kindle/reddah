@@ -144,7 +144,8 @@ export class PublisherPage {
             component: SearchPage,
             componentProps: {
                 type: 2,//publisher only
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await userModal.present();
@@ -161,7 +162,8 @@ export class PublisherPage {
             component: PubPage,
             componentProps: { 
                 userName: userName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

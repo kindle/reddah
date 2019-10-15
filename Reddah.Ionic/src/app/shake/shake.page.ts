@@ -149,7 +149,8 @@ export class ShakePage implements OnInit {
             component: UserPage,
             componentProps: { 
                 userName: userName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await userModal.present();

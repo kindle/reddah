@@ -100,6 +100,21 @@ div.postClear {
     grid-gap: 3px;
 }
 
+@media only screen and (min-width: 700px) {
+    .parent {
+        grid-template-rows: 195px;
+    }
+
+    .listImageWrapper {
+        height: 195px;
+    }
+    
+    .BrowsePreviewImageOne
+    {
+        width: 195px;
+    }
+}
+
 .container {
     position: relative;
     overflow: hidden;
@@ -110,6 +125,7 @@ div.postClear {
     top:50%;
     transform: translateY(-50%);
     object-fit: cover;
+    width:100%;
 }
 
 .left-radius{

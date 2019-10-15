@@ -177,7 +177,8 @@ export class AddMiniPage implements OnInit {
                 content: this.article.Content,
                 guid: this.article.UserName,
                 version: this.article.Id
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         
         await modal.present();

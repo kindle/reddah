@@ -46,7 +46,8 @@ export class ShareChooseChatPage implements OnInit {
             component: ShareChooseUserPage,
             componentProps: {
                 article: this.article,
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

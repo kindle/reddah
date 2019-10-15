@@ -116,7 +116,8 @@ export class CommentComponent implements OnInit {
                 comments: comments,
                 comment: comment,
                 normal: this.normal
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         
         await replayModal.present();
@@ -171,7 +172,8 @@ export class CommentComponent implements OnInit {
             component: UserPage,
             componentProps: { 
                 userName: userName,
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await userModal.present();

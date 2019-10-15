@@ -371,7 +371,8 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         if(this.source){
             /*const modal = await this.modalController.create({
                 component: PubPage,
-                componentProps: { userName: this.target }
+                componentProps: { userName: this.target },
+            cssClass: "modal-fullscreen",
             });
               
             await modal.present();*/
@@ -381,7 +382,8 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         {
             const modal = await this.modalController.create({
                 component: ChatOptPage,
-                componentProps: { targetUser: this.target }
+                componentProps: { targetUser: this.target },
+                cssClass: "modal-fullscreen",
             });
             
             await modal.present();
@@ -417,7 +419,8 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
             component: UserPage,
             componentProps: { 
                 userName: userName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
             
         await userModal.present();

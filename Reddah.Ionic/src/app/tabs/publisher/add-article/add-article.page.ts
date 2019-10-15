@@ -158,7 +158,8 @@ export class AddArticlePage implements OnInit {
             componentProps: { 
                 article: this.article,
                 preview: true
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         
         await viewerModal.present();
@@ -238,7 +239,8 @@ export class AddArticlePage implements OnInit {
         const modal = await this.modalController.create({
             component: MaterialPage,
             componentProps: { 
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();
@@ -249,7 +251,8 @@ export class AddArticlePage implements OnInit {
             component: AddMaterialPage,
             componentProps: { 
                 article: this.article
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();

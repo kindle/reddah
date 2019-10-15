@@ -111,7 +111,8 @@ export class MessageListPage implements OnInit {
                 title: this.reddah.appData('usernotename_'+target+'_'+this.currentUserName),
                 target: target,
                 hasNewMsg: hasNewMsg,
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -127,7 +128,8 @@ export class MessageListPage implements OnInit {
             componentProps: {
                 groupChat: groupChat,
                 hasNewMsg: hasNewMsg,
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
         const { data } = await modal.onDidDismiss();

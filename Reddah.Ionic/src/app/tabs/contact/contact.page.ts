@@ -145,6 +145,8 @@ export class ContactPage {
     async viewNewFriends(){
         const newFriendModal = await this.modalController.create({
             component: NewFriendPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
             
         await newFriendModal.present();
@@ -160,7 +162,9 @@ export class ContactPage {
 
     async goChooseGroupChat(){
         const modal = await this.modalController.create({
-            component: ChatChooseGroupPage
+            component: ChatChooseGroupPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
         });
         await modal.present();
     }
@@ -170,7 +174,8 @@ export class ContactPage {
             component: UserPage,
             componentProps: { 
                 userName: userName
-            }
+            },
+            cssClass: "modal-fullscreen",
         });
           
         await modal.present();
