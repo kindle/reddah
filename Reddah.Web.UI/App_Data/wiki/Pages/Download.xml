@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentType Name="SolutionArticle">
-  <Title>Download Reddah Mobile App</Title>
+  <!--<Title>Download Reddah Mobile App</Title>
   <Module>
     <ModuleType>StartSectionModule</ModuleType>
     <Text>Scan QR Codes</Text>
@@ -12,10 +12,43 @@
     <ImageUrl>/Images/reddah.apk.png</ImageUrl>
     <Text></Text>
     <ImageLink></ImageLink>
-  </Module>
+  </Module>-->
+  <Title>Download</Title>
   <Module>
     <ModuleType>StartSectionModule</ModuleType>
-    <Text>Download from a direct link</Text>
+    <Text>Get the Reddah that’s right for you from App store</Text>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Medium</Style>
+    <Caption>Apple</Caption>
+    <ImageUrl>/images/apps-applestore.svg</ImageUrl>
+    <Text></Text>
+    <ImageLink>
+      <![CDATA[https://apps.apple.com/cn/app/id1481532281?l=en_US]]>
+    </ImageLink>
+  </Module>
+  <Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Medium</Style>
+    <Caption>Android</Caption>
+    <ImageUrl>/images/apps-googleplay.png</ImageUrl>
+    <Text></Text>
+    <ImageLink>
+      <![CDATA[https://play.google.com/store/apps/details?id=com.reddah.app&hl=en_US]]>
+    </ImageLink>
+  </Module>
+  <!--<Module>
+    <ModuleType>OneImageModule</ModuleType>
+    <Style>Medium</Style>
+    <Caption>Windows</Caption>
+    <ImageUrl>/images/apps-winstore.png</ImageUrl>
+    <Text></Text>
+    <ImageLink></ImageLink>
+  </Module>-->
+  <Module>
+    <ModuleType>StartSectionModule</ModuleType>
+    <Text>Download Android APK from a direct link</Text>
   </Module>
   <Module>
     <ModuleType>TextModule</ModuleType>
@@ -33,52 +66,21 @@
           font-weight: 400;
           -webkit-transition: .2s background-color ease-in-out;
           transition: .2s background-color ease-in-out;
+          width:327px;
+          border-radius:10px;
+          height:90px;
       }
       .home-downloadbutton small {
           display: block;
           font-size: 1rem;
       }
       </style>
-      Click here to download: 
+      Click to download
       <br/>
-      <a href="///reddah.com/apk/Reddah.apk" class="home-downloadbutton" title="Download reddah.com android apk">
+      <a href="///reddah.com/apk/Reddah.apk" class="home-downloadbutton" title="Click to download">
         Reddah.apk
         <small>Latest Features</small>
       </a>
-      <br/>
-      ]]>
-    </Text>
-  </Module>
-  <Module>
-    <ModuleType>StartSectionModule</ModuleType>
-    <Text>Get the Reddah that’s right for you from App store</Text>
-  </Module>
-  <Module>
-    <ModuleType>TextModule</ModuleType>
-    <Text>
-      <![CDATA[
-      <style>
-      .landing-sectionImgs{
-          
-      }
-      .landing-sectionImg{
-          width: 167px;
-          height: 50px;
-          margin-right: 30px;
-      }
-      </style>
-      <br/>
-      <div class="landing-sectionImgs">
-        <a href="#comingsoon" class="outlookAppstore">
-          <img class="outlookAppstore landing-sectionImg" src="/images/apps-applestore.svg" alt="Download on the App Store">
-        </a>
-        <a href="#comingsoon" class="outlookPlaystore">
-          <img class="outlookPlaystore landing-sectionImg" src="/images/apps-googleplay.png" alt="Get it on Google Play">
-        </a>
-        <a href="#comingsoon" class="outlookWinstore">
-          <img class="outlookWinstore landing-sectionImg" src="/images/apps-winstore.png" alt="Get it on Windows 10">
-        </a>
-      </div>
       <br/>
       ]]>
     </Text>

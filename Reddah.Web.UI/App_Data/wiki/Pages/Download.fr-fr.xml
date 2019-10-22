@@ -13,10 +13,10 @@
     <Text></Text>
     <ImageLink></ImageLink>
   </Module>-->
-  <Title>下载</Title>
+  <Title>Télécharger</Title>
   <Module>
     <ModuleType>StartSectionModule</ModuleType>
-    <Text>应用商店下载</Text>
+    <Text>Pour obtenir un reddah qui vous convient à partir d 'app store</Text>
   </Module>
   <Module>
     <ModuleType>OneImageModule</ModuleType>
@@ -25,7 +25,7 @@
     <ImageUrl>/images/apps-applestore.svg</ImageUrl>
     <Text></Text>
     <ImageLink>
-      <![CDATA[https://apps.apple.com/cn/app/id1481532281?l=zh_CN]]>
+      <![CDATA[https://apps.apple.com/cn/app/id1481532281?l=fr_FR]]>
     </ImageLink>
   </Module>
   <Module>
@@ -35,12 +35,12 @@
     <ImageUrl>/images/apps-googleplay.png</ImageUrl>
     <Text></Text>
     <ImageLink>
-      <![CDATA[https://play.google.com/store/apps/details?id=com.reddah.app&hl=zh_CN]]>
+      <![CDATA[https://play.google.com/store/apps/details?id=com.reddah.app&hl=fr_FR]]>
     </ImageLink>
   </Module>
   <Module>
     <ModuleType>StartSectionModule</ModuleType>
-    <Text>点击下载</Text>
+    <Text>Télécharger à partir d 'un lien direct</Text>
   </Module>
   <Module>
     <ModuleType>TextModule</ModuleType>
@@ -67,11 +67,11 @@
           font-size: 1rem;
       }
       </style>
-      点击下载
+      Cliquez sur
       <br/>
-      <a href="///reddah.com/apk/Reddah.apk" class="home-downloadbutton" title="点击下载">
+      <a href="///reddah.com/apk/Reddah.apk" class="home-downloadbutton" title="Cliquez sur">
         Reddah.apk
-        <small>最新版本</small>
+        <small>Frais</small>
       </a>
       <br/>
       ]]>

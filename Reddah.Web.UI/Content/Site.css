@@ -872,7 +872,7 @@ Two images Module
 
 img.ImageModule
 {
-    border: 1px;
+    border: 0px;
     border-style:solid;
     border-color: #BDBEC1;
     margin-right: 20px;
