@@ -54,12 +54,29 @@ export class LocationPage implements OnInit {
     }
 
     ionViewDidEnter() {
+        this.checkInChina();
         this.loadmap();
 
         if(this.location){
             this.setLocation(this.location);
         }
         
+    }
+
+    checkInChina(){
+        let item = this.location;
+        if(item){
+            let clat = item.location.lat, clng = item.location.lng;
+            if(clat>3.86&&clat<53.55&&
+                clng>73.66&&clng<135.05)
+            {
+                this.inChina = true;
+            }
+            else{
+                this.inChina = false;
+            }
+            
+        }
     }
 
     extend(){
@@ -100,7 +117,7 @@ export class LocationPage implements OnInit {
     loadmap() {
 
         this.markerGroup = L.featureGroup();
-        this.map = L.map("map").fitWorld();
+        this.map = L.map("map", {attributionControl: false}).fitWorld();
 
         if(this.inChina){
             //need to adjust location
@@ -125,6 +142,10 @@ export class LocationPage implements OnInit {
     
                             this.reddah.getNearby(l.lat, l.lng).subscribe(data=>{
                                 this.locations = data._body.result.pois;
+                                if(this.locations.length==0){
+                                    this.locations = [{"id":0,"title":"Current",
+                                    "location":{"lat":e.latitude,"lng":e.longitude}}];
+                                }
                             });
                         }
                         else{
