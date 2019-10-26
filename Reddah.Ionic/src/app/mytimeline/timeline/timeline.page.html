@@ -1,15 +1,19 @@
 <ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" style="background-color:white;">
     <div class="headerStart" #headerStart>
         <ion-item color="transparent" no-padding lines="none"  (dblclick)="clearCacheAndReload()">
-            <ion-icon name="ios-arrow-back" color="tertiary" slot="start" (click)="goback()" class="backbutton"></ion-icon>
+            <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
+                <ion-icon slot="start" is-active="false" name="ios-arrow-back"></ion-icon>
+            </ion-button>
             <ion-label></ion-label>
             <ion-icon name="text" color="tertiary" slot="end" (click)="goMessage()" *ngIf="isMe()"></ion-icon>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll>
         <ion-item color="light" no-padding lines="none">
-            <ion-icon name="ios-arrow-back" slot="start" (click)="goback()" class="backbutton"></ion-icon>
-            <ion-label>{{reddah.getDisplayName(userName)}}</ion-label>
+            <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
+                <ion-icon slot="start" is-active="false" name="ios-arrow-back"></ion-icon>
+                <ion-label style="text-transform: none;">{{reddah.getDisplayName(userName)}}</ion-label>
+            </ion-button>
             <ion-icon name="text" slot="end" (click)="goMessage()" *ngIf="isMe()"></ion-icon>
         </ion-item>
     </div>
