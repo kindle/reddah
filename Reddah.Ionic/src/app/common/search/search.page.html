@@ -1,5 +1,7 @@
 <ion-item color="light" no-padding lines="none">
-    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-button clear icon-start color="transparent" (click)="close()" style="--box-shadow: none;">
+        <ion-icon slot="start" is-active="false" name="ios-arrow-back"></ion-icon>
+    </ion-button>
     <ion-input placeholder="{{keywordPlaceholder}}" #searchKeyword clearInput (keyup.enter)="search()" (ionChange)="onSearchchange()"></ion-input>
 </ion-item>
 <ion-content no-padding style="background-color: white;" #searchResult>
@@ -11,7 +13,10 @@
         </ion-row>
         <ion-row *ngFor="let row of topics" style="padding:10px;">
             <ion-col *ngFor="let col of row" text-center>
-                <ion-text (click)="chooseTopic(col)">{{col.name}}</ion-text>
+                <ion-button clear color="transparent" (click)="chooseTopic(col)" style="--box-shadow: none;"
+                    *ngIf="col.name">
+                    <ion-text color="dark" style="text-transform: none;">{{col.name}}</ion-text>
+                </ion-button>
             </ion-col>
         </ion-row> 
     </ion-grid>

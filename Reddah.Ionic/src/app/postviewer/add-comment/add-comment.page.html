@@ -1,13 +1,14 @@
 <ion-item color="light" no-padding lines="none">
-    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-title>{{ 'Comment.Comment' | translate }}</ion-title>
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+    </ion-button>
+    <ion-title style="padding-left:0px;text-transform: none;">{{ 'Comment.Comment' | translate }}</ion-title>
     <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked||commentContent==null||commentContent==''">{{ 'Confirm.Submit' | translate }}</ion-button>
 </ion-item>
-<ion-content padding style="--background: #eeeeee;">
-    
+<ion-content padding style="--background: white;">
     <ion-textarea autoresize padding #newComment id="newComment" [(ngModel)]="commentContent" rows="6" cols="20" placeholder="{{ 'Comment.Tip' | translate }}"></ion-textarea>
     
-    <ion-item lines="none" style="--background: #eeeeee;">
+    <ion-item lines="none" style="--background: white;">
         <ion-icon name="happy" slot="end" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>
     </ion-item>
     <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>

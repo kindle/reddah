@@ -1,8 +1,10 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon slot="start" is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
     </ion-button>
-    <ion-icon slot="icon-only" slot="end" name="ios-more" (click)="presentPopover($event)" *ngIf="!preview"></ion-icon>
+    <ion-button clear slot="end" color="light" (click)="presentPopover($event)" style="--box-shadow: none;" *ngIf="!preview">
+        <ion-icon slot="icon-only" is-active="false" name="ios-more"></ion-icon>
+    </ion-button>
 </ion-item>
 <ion-content [scrollEvents]="true" (ionScroll)="commentbox.onScroll($event)">
     <div style="padding-left: 10px;padding-top: 10px;padding-bottom: 10px;">

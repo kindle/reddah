@@ -1,6 +1,10 @@
 <ion-item no-padding lines="none" color="light">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton" *ngIf="back"></ion-icon>
     <ion-title style="font-weight: bold;">{{ title | translate }}</ion-title>
-    <ion-icon name="ios-search" slot="end" (click)="goSearch()" margin-end></ion-icon>
-    <ion-icon name="ios-add-circle-outline" slot="end" (click)="add($event)" margin-start></ion-icon>
+    <ion-button clear slot="end" color="light" (click)="goSearch()" style="--box-shadow: none;">
+        <ion-icon slot="icon-only" is-active="false" name="ios-search"></ion-icon>
+    </ion-button>
+    <ion-button clear slot="end" color="light" (click)="add($event)" style="--box-shadow: none;">
+        <ion-icon slot="icon-only" is-active="false" name="ios-add-circle-outline"></ion-icon>
+    </ion-button>
 </ion-item>

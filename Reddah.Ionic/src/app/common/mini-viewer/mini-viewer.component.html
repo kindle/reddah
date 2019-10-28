@@ -1,2 +1,7 @@
 <ion-content style="--background: white;" [innerHTML]="html" id="mini-container">
 </ion-content>
+<ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="close()" color="light" mini>
+        <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
