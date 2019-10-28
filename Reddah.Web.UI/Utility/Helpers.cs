@@ -262,7 +262,7 @@
                 replacements[match.Groups[1].Value] : match.Groups[1].Value);
         }
 
-        public static string HideXss(string text)
+        public static string HideXss(string text="")
         {
             var re = new Regex(@"\b(\w+)\b", RegexOptions.Compiled);
             var replacements = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -284,8 +284,15 @@
                 {"<object>", "(object)"},
                 {"&lt;script&gt;", "(script)"},
             };
-            return re.Replace(text, match => replacements.ContainsKey(match.Groups[1].Value) ?
-                replacements[match.Groups[1].Value] : match.Groups[1].Value);
+
+            var result = text;
+            try
+            {
+                result = re.Replace(text, match => replacements.ContainsKey(match.Groups[1].Value) ?
+                   replacements[match.Groups[1].Value] : match.Groups[1].Value);
+            }
+            catch { }
+            return result;
         }
 
         public static string HtmlEncode(string text)
