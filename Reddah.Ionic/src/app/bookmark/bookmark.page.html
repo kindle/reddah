@@ -1,5 +1,7 @@
 <ion-item color="light" no-padding lines="none">
-    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+    </ion-button>
     <ion-label>{{ 'Menu.Mark' | translate }}</ion-label>
     <!--<ion-icon name="ios-add" (click)="createNote()" slot="end"></ion-icon>-->
 </ion-item>

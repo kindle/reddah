@@ -1,5 +1,7 @@
 <ion-item color="light" no-padding lines="none">
-    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+    </ion-button>
     <ion-text>{{ 'Common.Category' | translate }}</ion-text>
 </ion-item>
 <ion-content no-padding>

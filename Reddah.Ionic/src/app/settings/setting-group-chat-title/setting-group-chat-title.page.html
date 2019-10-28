@@ -1,7 +1,9 @@
 <ion-item color="light" no-padding lines="none">
-    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+    </ion-button>
     <ion-label>{{title}}</ion-label>
-    <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">完成</ion-button>
+    <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ 'Confirm.Submit' | translate }}</ion-button>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;">
     <ion-item no-padding margin>

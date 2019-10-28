@@ -13,9 +13,9 @@
         </ion-row>
         <ion-row *ngFor="let row of topics" style="padding:10px;">
             <ion-col *ngFor="let col of row" text-center>
-                <ion-button clear color="transparent" (click)="chooseTopic(col)" style="--box-shadow: none;"
+                <ion-button no-margin no-padding clear color="transparent" (click)="chooseTopic(col)" style="--box-shadow: none;"
                     *ngIf="col.name">
-                    <ion-text color="dark" style="text-transform: none;">{{col.name}}</ion-text>
+                    <ion-text color="dark" style="padding:0;text-transform: none;">{{col.name}}</ion-text>
                 </ion-button>
             </ion-col>
         </ion-row> 

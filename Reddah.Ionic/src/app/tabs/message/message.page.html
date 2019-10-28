@@ -1,6 +1,8 @@
 <!--<app-header title="Menu.Message" (click)="clear()"></app-header>-->
 <ion-item color="light" no-padding lines="none">
-    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+    </ion-button>
     <ion-label>{{ 'Menu.Message' | translate }}</ion-label>
 </ion-item>
 <ion-content style="background-color: white;">

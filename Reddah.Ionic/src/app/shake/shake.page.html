@@ -1,5 +1,7 @@
-<ion-item no-padding lines="none" color="dark" (click)="test()">
-    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+<ion-item no-padding lines="none" color="dark" (click)="shakeAni()">
+    <ion-button clear icon-start color="transparent" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+    </ion-button>
     <ion-label>{{ 'Menu.Shake' | translate }}</ion-label>
 </ion-item>
 <ion-content #pageTop style="background-color: white;">

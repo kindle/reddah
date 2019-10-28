@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { UserPage } from '../user/user.page';
 import { ReddahService } from '../../reddah.service';
 import { QrcardPage } from '../qrcard/qrcard.page';
@@ -15,11 +15,16 @@ export class ScanPage implements OnInit {
     constructor(
         public reddah: ReddahService,
         private modalController: ModalController,
+        public navController: NavController,
     ) { }
 
     debug = "";
     ngOnInit(){
         this.scanner();
+    }
+
+    close(){
+        this.navController.goBack(true);
     }
 
     // Show scanner 

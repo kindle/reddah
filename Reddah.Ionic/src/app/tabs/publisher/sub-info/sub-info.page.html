@@ -1,5 +1,7 @@
 <ion-item color="light" no-padding lines="none">
-    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+    </ion-button>
     <ion-label>{{ 'About.Account' | translate }}</ion-label>
 </ion-item>
 <ion-content #pageTop no-padding style="--background:#eeeeee;background-color:#eeeeee;">

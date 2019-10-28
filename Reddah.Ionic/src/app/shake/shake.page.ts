@@ -60,11 +60,6 @@ export class ShakePage implements OnInit {
         
     }
 
-    test(){
-        //test
-        this.shakeAni();
-    }
-
     showShakebg = true;
     showAnimetebg = false;
     async shakeAni(){

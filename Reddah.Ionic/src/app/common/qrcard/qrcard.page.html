@@ -1,5 +1,7 @@
 <ion-item color="light" no-padding lines="none">
-    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+    </ion-button>
     <ion-text>{{ 'About.Card' | translate }}</ion-text>
     <!--<ion-icon name="ios-more" slot="end" (click)="presentActionSheet()"></ion-icon>-->
 </ion-item>

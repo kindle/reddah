@@ -1,8 +1,12 @@
 
 <ion-item color="light" no-padding lines="none">
-    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+    </ion-button>
     <ion-label>{{title}}</ion-label>
-    <ion-icon slot="icon-only" slot="end" name="ios-more" (click)="option()"></ion-icon>
+    <ion-button clear slot="end" color="light" (click)="option()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-more"></ion-icon>
+    </ion-button>
 </ion-item>
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" no-padding 
 style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatbox.hide()"> 

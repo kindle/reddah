@@ -1,6 +1,10 @@
 <ion-item color="light" no-padding lines="none">
-    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-icon name="ios-more" slot="end" (click)="presentActionSheet()"></ion-icon>
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+    </ion-button>
+    <ion-button clear slot="end" color="light" (click)="presentActionSheet()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-more"></ion-icon>
+    </ion-button>
 </ion-item>
 <ion-content style="align-items: center; --background:#eeeeee;background-color:#eeeeee;">
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" spinner="none">

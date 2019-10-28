@@ -10,10 +10,10 @@
         <ion-fab-list side="start">
             <ion-fab-button (click)="goMe()">
                 <ion-icon color="subscribe" name="ios-locate"></ion-icon>
-            </ion-fab-button>
+            </ion-fab-button><!--
             <ion-fab-button (click)="close()">
                 <ion-icon color="dark" name="backspace"></ion-icon>
-            </ion-fab-button>
+            </ion-fab-button>-->
         </ion-fab-list>
         <ion-fab-list side="top">
             <ion-fab-button (click)="refresh(1)">
@@ -25,3 +25,8 @@
         </ion-fab-list>
     </ion-fab>
 </ion-content>
+<ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="close()" color="light" mini>
+        <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+</ion-fab>

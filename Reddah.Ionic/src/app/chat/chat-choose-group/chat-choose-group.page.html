@@ -1,7 +1,11 @@
 <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload($event)">
-    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+    </ion-button>
     <ion-label>{{ 'Common.Choose' | translate }}</ion-label>
-    <ion-icon name="ios-add" (click)="createGroupChat()" slot="end"></ion-icon>
+    <ion-button clear slot="end" color="light" (click)="createGroupChat()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-add"></ion-icon>
+    </ion-button>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;" #pageTop>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
