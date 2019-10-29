@@ -81,7 +81,7 @@ namespace Reddah.Web.UI.Controllers
 
             if (!(User.Identity.Name.Equals(article.UserName) || Helpers.Acl(User.Identity.Name, PrivilegeList.EditPost)))
             {
-                ViewBag.Error = "you can't edit other people's post!";
+                ViewBag.Error = "no permission to edit the post!";
             }
 
             return View("~/Views/Submit/edit.cshtml", article);
