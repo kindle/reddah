@@ -5,7 +5,6 @@
 
     using Reddah.Web.UI.Models;
     using Reddah.Web.UI.Utility;
-    using System.Globalization;
 
     public class UserProfileArticleViewModel
     {
@@ -26,7 +25,7 @@
 
             using (var db = new reddahEntities1())
             {
-                IEnumerable<Article> query = null;
+                IEnumerable<PubArticle> query = null;
                 int[] loaded = userProfileModel.LoadedIds == null ? new int[] { } : userProfileModel.LoadedIds;
                 string[] disgrp = userProfileModel.DislikeGroups == null ? new string[] { } : userProfileModel.DislikeGroups;
                 string[] disuser = userProfileModel.DislikeUserNames == null ? new string[] { } : userProfileModel.DislikeUserNames;
@@ -36,10 +35,34 @@
                 if (userProfileModel.Menu.Equals("new", System.StringComparison.InvariantCultureIgnoreCase))
                 {
                     query = (from b in db.Articles
+                             join u in db.UserProfiles on b.UserName equals u.UserName
                              where b.Status== userProfileModel.Status && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
                               !(loaded).Contains(b.Id)
                              orderby b.Id descending
-                             select b)
+                             select new PubArticle()
+                             {
+                                 Id = b.Id,
+                                 Title = b.Title,
+                                 Content = b.Content,
+                                 Abstract = b.Abstract,
+                                 CreatedOn = b.CreatedOn,
+                                 Up = b.Up,
+                                 Down = b.Down,
+                                 Count = b.Count,
+                                 UserName = b.UserName,
+                                 GroupName = b.GroupName,
+                                 Locale = b.Locale,
+                                 LastUpdateOn = b.LastUpdateOn,
+                                 Type = b.Type,
+                                 Ref = b.Ref,
+                                 Location = b.Location,
+                                 CreatedBy = b.CreatedBy,
+                                 LastUpdateBy = b.LastUpdateBy,
+                                 Status = b.Status,
+                                 LastUpdateContent = b.LastUpdateContent,
+                                 LastUpdateType = b.LastUpdateType,
+                                 PubName = u.NickName ?? u.UserName
+                             })
                             .Take(pageCount);
                 }
                 else if (userProfileModel.Menu.Equals("promoted", System.StringComparison.InvariantCultureIgnoreCase))
@@ -85,6 +108,7 @@
                     }
 
                     query = (from b in db.Articles
+                             join u in db.UserProfiles on b.UserName equals u.UserName
                              where b.Status == userProfileModel.Status && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
                               //!(loaded).Contains(b.Id) && !(disgrp).Contains(b.GroupName) && !(disuser).Contains(b.UserName)
                               !(loaded).Contains(b.Id) && !(disuser).Contains(b.UserName) &&
@@ -100,16 +124,63 @@
                                 !b.GroupName.Contains(grp9) &&
                                 !b.GroupName.Contains(grp10) 
                              orderby b.Count descending, b.LastUpdateOn descending
-                             select b)
-                                .Take(pageCount);
+                             select new PubArticle()
+                             {
+                                 Id = b.Id,
+                                Title = b.Title,
+                                Content = b.Content,
+                                Abstract = b.Abstract,
+                                CreatedOn = b.CreatedOn,
+                                Up = b.Up,
+                                Down = b.Down,
+                                Count = b.Count,
+                                UserName = b.UserName,
+                                GroupName = b.GroupName,
+                                Locale = b.Locale,
+                                LastUpdateOn = b.LastUpdateOn,
+                                Type = b.Type,
+                                Ref = b.Ref,
+                                Location = b.Location,
+                                CreatedBy = b.CreatedBy,
+                                LastUpdateBy = b.LastUpdateBy,
+                                Status = b.Status,
+                                LastUpdateContent = b.LastUpdateContent,
+                                LastUpdateType = b.LastUpdateType,
+                                PubName = u.NickName ?? u.UserName
+                             })
+                            .Take(pageCount);
                 }
                 else if (userProfileModel.Menu.Equals("hot", System.StringComparison.InvariantCultureIgnoreCase))
                 {
                     query = (from b in db.Articles
+                             join u in db.UserProfiles on b.UserName equals u.UserName
                              where b.Status == userProfileModel.Status && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
                               !(loaded).Contains(b.Id)
                              orderby b.Count descending, b.LastUpdateOn descending
-                             select b)
+                             select new PubArticle()
+                             {
+                                 Id = b.Id,
+                                 Title = b.Title,
+                                 Content = b.Content,
+                                 Abstract = b.Abstract,
+                                 CreatedOn = b.CreatedOn,
+                                 Up = b.Up,
+                                 Down = b.Down,
+                                 Count = b.Count,
+                                 UserName = b.UserName,
+                                 GroupName = b.GroupName,
+                                 Locale = b.Locale,
+                                 LastUpdateOn = b.LastUpdateOn,
+                                 Type = b.Type,
+                                 Ref = b.Ref,
+                                 Location = b.Location,
+                                 CreatedBy = b.CreatedBy,
+                                 LastUpdateBy = b.LastUpdateBy,
+                                 Status = b.Status,
+                                 LastUpdateContent = b.LastUpdateContent,
+                                 LastUpdateType = b.LastUpdateType,
+                                 PubName = u.NickName ?? u.UserName
+                             })
                             .Take(pageCount);
                 }
                 else if (userProfileModel.Menu.Equals("bysub", System.StringComparison.InvariantCultureIgnoreCase))
@@ -122,6 +193,7 @@
                     var g4 = ga.Length > 3 ? ga[3] : "";
                     var g5 = ga.Length > 4 ? ga[4] : "";
                     query = (from b in db.Articles
+                             join u in db.UserProfiles on b.UserName equals u.UserName
                              where b.Status == userProfileModel.Status && b.LastUpdateType != 100 &&
                                 b.GroupName.Contains(g1) &&
                                 b.GroupName.Contains(g2) &&
@@ -131,23 +203,71 @@
                                 b.Locale.StartsWith(locale) &&
                                 !(loaded).Contains(b.Id)
                              orderby b.Count descending, b.LastUpdateOn descending
-                             select b)
+                             select new PubArticle()
+                             {
+                                 Id = b.Id,
+                                 Title = b.Title,
+                                 Content = b.Content,
+                                 Abstract = b.Abstract,
+                                 CreatedOn = b.CreatedOn,
+                                 Up = b.Up,
+                                 Down = b.Down,
+                                 Count = b.Count,
+                                 UserName = b.UserName,
+                                 GroupName = b.GroupName,
+                                 Locale = b.Locale,
+                                 LastUpdateOn = b.LastUpdateOn,
+                                 Type = b.Type,
+                                 Ref = b.Ref,
+                                 Location = b.Location,
+                                 CreatedBy = b.CreatedBy,
+                                 LastUpdateBy = b.LastUpdateBy,
+                                 Status = b.Status,
+                                 LastUpdateContent = b.LastUpdateContent,
+                                 LastUpdateType = b.LastUpdateType,
+                                 PubName = u.NickName ?? u.UserName
+                             })
                             .Take(pageCount);
                 }
                 else if (userProfileModel.Menu.Equals("byuser", System.StringComparison.InvariantCultureIgnoreCase))
                 {
                     query = (from b in db.Articles
+                             join u in db.UserProfiles on b.UserName equals u.UserName
                              where b.Status == userProfileModel.Status && b.LastUpdateType != 100 &&
                                 b.UserName == userProfileModel.User &&
                                 b.Locale.StartsWith(locale) &&
                                 !(loaded).Contains(b.Id)
                              orderby b.Id descending
-                             select b)
+                             select new PubArticle()
+                             {
+                                 Id = b.Id,
+                                 Title = b.Title,
+                                 Content = b.Content,
+                                 Abstract = b.Abstract,
+                                 CreatedOn = b.CreatedOn,
+                                 Up = b.Up,
+                                 Down = b.Down,
+                                 Count = b.Count,
+                                 UserName = b.UserName,
+                                 GroupName = b.GroupName,
+                                 Locale = b.Locale,
+                                 LastUpdateOn = b.LastUpdateOn,
+                                 Type = b.Type,
+                                 Ref = b.Ref,
+                                 Location = b.Location,
+                                 CreatedBy = b.CreatedBy,
+                                 LastUpdateBy = b.LastUpdateBy,
+                                 Status = b.Status,
+                                 LastUpdateContent = b.LastUpdateContent,
+                                 LastUpdateType = b.LastUpdateType,
+                                 PubName = u.NickName ?? u.UserName
+                             })
                             .Take(pageCount);
                 }
                 else if (userProfileModel.Menu.Equals("search", System.StringComparison.InvariantCultureIgnoreCase))
                 {
                     query = (from b in db.Articles
+                             join u in db.UserProfiles on b.UserName equals u.UserName
                              where b.Status == userProfileModel.Status && b.LastUpdateType!=100 &&
                                 (b.Title.Contains(userProfileModel.Keyword) ||
                                 b.Content.Contains(userProfileModel.Keyword) ||
@@ -158,19 +278,66 @@
                                 !(loaded).Contains(b.Id)&&
                                 b.Type == userProfileModel.Type
                              orderby b.Id descending
-                             select b)
+                             select new PubArticle()
+                             {
+                                 Id = b.Id,
+                                 Title = b.Title,
+                                 Content = b.Content,
+                                 Abstract = b.Abstract,
+                                 CreatedOn = b.CreatedOn,
+                                 Up = b.Up,
+                                 Down = b.Down,
+                                 Count = b.Count,
+                                 UserName = b.UserName,
+                                 GroupName = b.GroupName,
+                                 Locale = b.Locale,
+                                 LastUpdateOn = b.LastUpdateOn,
+                                 Type = b.Type,
+                                 Ref = b.Ref,
+                                 Location = b.Location,
+                                 CreatedBy = b.CreatedBy,
+                                 LastUpdateBy = b.LastUpdateBy,
+                                 Status = b.Status,
+                                 LastUpdateContent = b.LastUpdateContent,
+                                 LastUpdateType = b.LastUpdateType,
+                                 PubName = u.NickName ?? u.UserName
+                             })
                             .Take(pageCount);
                 }
                 else if (userProfileModel.Menu.Equals("draft", System.StringComparison.InvariantCultureIgnoreCase))
                 {
                     query = (from b in db.Articles
+                             join u in db.UserProfiles on b.UserName equals u.UserName
                              where b.Status == userProfileModel.Status &&
                                 b.UserName == userProfileModel.User &&
                                 //b.Locale.StartsWith(locale) &&
                                 !(loaded).Contains(b.Id) &&
                                 b.Type == userProfileModel.Type
                              orderby b.Id descending
-                             select b)
+                             select new PubArticle()
+                             {
+                                 Id = b.Id,
+                                 Title = b.Title,
+                                 Content = b.Content,
+                                 Abstract = b.Abstract,
+                                 CreatedOn = b.CreatedOn,
+                                 Up = b.Up,
+                                 Down = b.Down,
+                                 Count = b.Count,
+                                 UserName = b.UserName,
+                                 GroupName = b.GroupName,
+                                 Locale = b.Locale,
+                                 LastUpdateOn = b.LastUpdateOn,
+                                 Type = b.Type,
+                                 Ref = b.Ref,
+                                 Location = b.Location,
+                                 CreatedBy = b.CreatedBy,
+                                 LastUpdateBy = b.LastUpdateBy,
+                                 Status = b.Status,
+                                 LastUpdateContent = b.LastUpdateContent,
+                                 LastUpdateType = b.LastUpdateType,
+                                 PubName = u.NickName ?? u.UserName
+                             })
                             .Take(pageCount);
                 }
 
@@ -199,6 +366,7 @@
                     ap.Locale = item.Locale;
                     ap.Ref = item.Ref;
                     ap.LastUpdateOn = item.LastUpdateOn;
+                    ap.PubName = item.PubName;
                     
                     apList.Add(ap);
                 }

@@ -27,6 +27,7 @@ namespace Reddah.Web.UI.Models
         public DateTime? LastUpdateOn { get; set; }
         public Nullable<int> Type { get; set; }
         public int? Ref { get; set; }
+        public string PubName { get; set; }
     }
 
     public class VoteModel {
@@ -93,5 +94,12 @@ namespace Reddah.Web.UI.Models
         public string Name;
         public string Locale;
         public string Desc;
+    }
+
+    public class PubArticle : Article
+    {
+        public PubArticle() { }
+
+        public string PubName;
     }
 }
