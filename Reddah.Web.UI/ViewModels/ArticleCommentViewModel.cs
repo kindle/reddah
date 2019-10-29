@@ -46,6 +46,8 @@
                     Article.GroupName = item.GroupName;
                     Article.Content = item.Content;
                     Article.LastUpdateOn = item.LastUpdateOn;
+                    var temp = db.UserProfiles.FirstOrDefault(up => up.UserName == item.UserName);
+                    Article.PubName = temp.NickName ?? temp.UserName;
                 }
 
                 var comments = (from c in db.Comments

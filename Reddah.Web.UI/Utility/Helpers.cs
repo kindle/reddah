@@ -307,7 +307,7 @@
 
         public static string ReplaceHtmlTag(string html)
         {
-            string stroutput = html;
+            string stroutput = html??"";
             Regex regex = new Regex(@"<[^>]+>|</[^>]+>");
 
             stroutput = regex.Replace(stroutput, "");
@@ -316,7 +316,7 @@
 
         public static string ToAudioString(string html)
         {
-            html = HtmlDecode(html);
+            html = HtmlDecode(html??"");
             html = System.Web.HttpUtility.HtmlDecode(html);
 
             return SubString(ReplaceHtmlTag(html), Math.Min(500, html.Length - 1));

@@ -88,7 +88,7 @@
     </div>
     <div class="postClear"></div>
     <div class="listInfo">
-        @Resources.List_Submit @Model.Article.CreatedOn @Resources.List_By <a href="/@locale/user/@Model.Article.UserName">@Model.Article.UserName</a>
+        @Resources.List_Submit @Model.Article.CreatedOn @Resources.List_By <a href="/@locale/user/@Model.Article.UserName">@Model.Article.PubName</a>
         @foreach (string g in Model.Article.GroupName.Trim().Split(','))
         {
             <a href="/@locale/r/@Helpers.HtmlDecode(g)"><u>@Helpers.HtmlDecode(g)</u> </a>
