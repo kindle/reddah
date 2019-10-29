@@ -144,7 +144,7 @@ import { PubPage } from './tabs/publisher/pub/pub.page';
 import { AddArticlePage } from './tabs/publisher/add-article/add-article.page';
 import { MorePage } from './common/more/more.page';
 import { AddMiniPage } from './tabs/publisher/add-mini/add-mini.page';
-import { SwipeTabDirective } from './swipe-tab.directive';
+//import { SwipeTabDirective } from './swipe-tab.directive';
 import { PlatformPage } from './tabs/publisher/platform/platform.page';
 import { ShareChooseChatPage } from './chat/share-choose-chat/share-choose-chat.page';
 import { ShareChooseUserPage } from './chat/share-choose-user/share-choose-user.page';
@@ -205,7 +205,9 @@ var firebaseConfig = {
         AddFeedbackPage,AddMaterialPage,
         StockPage,
         CommentReplyPage,
-        AutoresizeDirective,SwipeTabDirective,ImageLazyLoadDirective,
+        AutoresizeDirective,
+        //SwipeTabDirective,
+        ImageLazyLoadDirective,
         CommentBoxComponent,
         ChatBoxComponent,ChatFireBoxComponent,
         SearchPage,

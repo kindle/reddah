@@ -160,12 +160,19 @@ export class MapPage implements OnInit {
         let latHigh = ne.lat;
         let lngLow = sw.lng;
         let lngHigh = ne.lng;
+        //if(lngLow<-180)
+        //    lngLow+=180
+        //if(lngHigh>180)
+        //    lngHigh-=180
+        //alert(`center:${latCenter}_${lngCenter} lat:(${latLow}, ${latHigh})_lng:(${lngLow}, ${lngHigh})`);
 
         //get cache by current hour.
-        let cacheKey = `this.reddah.getUsersByLocation${type}${latCenter}${lngCenter}${latLow}${latHigh}${lngLow}${lngHigh}${this.reddah.getHourString()}`;
-        let request = this.reddah.getUsersByLocation(type, latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, 0);
+        //let cacheKey = `this.reddah.getUsersByLocation${type}${latCenter}${lngCenter}${latLow}${latHigh}${lngLow}${lngHigh}${this.reddah.getHourString()}`;
+        //let request = this.reddah.getUsersByLocation(type, latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, 0);
+        //this.cacheService.loadFromObservable(cacheKey, request, "getUsersByLocation")
 
-        this.cacheService.loadFromObservable(cacheKey, request, "getUsersByLocation")
+        //do not use cache when user count is too low
+        this.reddah.getUsersByLocation(type, latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, 0)
         .subscribe(data=>{
             //console.log(data)
             if(data.Success==0){
