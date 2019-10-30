@@ -25,7 +25,7 @@
     "@ionic-native/app-update": "^5.1.0",
     "@ionic-native/app-version": "^5.1.0",
     "@ionic-native/camera": "^5.1.0",
-    "@ionic-native/clipboard": "^5.13.0",
+    "@ionic-native/clipboard": "^5.15.1",
     "@ionic-native/core": "^5.1.0",
     "@ionic-native/crop": "^5.2.0",
     "@ionic-native/device-motion": "^5.10.0",
@@ -184,7 +184,8 @@
       "cordova-plugin-android-permissions": {},
       "cordova-plugin-add-swift-support": {},
       "cordova-plugin-gyroscope": {},
-      "cordova-plugin-vibration": {}
+      "cordova-plugin-vibration": {},
+      "cordova-clipboard": {}
     },
     "platforms": [
       "ios",
