@@ -872,8 +872,10 @@ export class ReddahService {
         return (error: any): Observable<T> => {
             //alert(JSON.stringify(error));
             let msg = error.message;
-            if(msg.indexOf("failure response")>0)
-                this.toast(this.translate.instant("Input.Error.NetworkError"), "danger")
+            if(msg.indexOf("failure response")>0){
+                if(this.translate.instant("Input.Error.NetworkError")!="Input.Error.NetworkError")
+                    this.toast(this.translate.instant("Input.Error.NetworkError"), "danger")
+            }
                 
             if(msg.indexOf("ERR_TIMED_OUT")>0)
                 this.toast(this.translate.instant("Input.Error.ServiceError"), "danger")

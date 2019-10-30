@@ -15,7 +15,7 @@
             <ion-row>
                 <ion-item lines="none" (click)="view(bookmark.article)" (press)="showChangeMenu($event, bookmark)">
                     <ion-avatar slot="start" class="avatar-top" *ngIf="bookmark.PreviewPhoto.length>0">
-                        <img src="{{bookmark.PreviewPhoto}}">
+                        <img src="{{reddah.parseImage(bookmark.PreviewPhoto)}}">
                     </ion-avatar>
                     <ion-label text-wrap style="margin-top:0;">{{reddah.htmlDecode(bookmark.Title)}}</ion-label>
                 </ion-item>
