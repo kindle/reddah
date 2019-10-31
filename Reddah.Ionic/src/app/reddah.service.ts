@@ -1788,6 +1788,18 @@ export class ReddahService {
         return recent;
     }
 
+
+    private suggestMiniUrl = 'https://login.reddah.com/api/article/suggestmini'; 
+    getSuggestMinis(): Observable<any> {
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.suggestMiniUrl, formData)
+        .pipe(
+            tap(data => this.log('get suggest minis')),
+            catchError(this.handleError('get suggest minis', []))
+        );
+    }
+
     hasClass(el: Element, name: string): any {
         return new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)").test(el.className);
     }

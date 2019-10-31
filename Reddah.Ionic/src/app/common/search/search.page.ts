@@ -191,6 +191,17 @@ export class SearchPage implements OnInit {
         this.users_p_recent = this.reddah.loadRecent(3);
     }
 
+    users_p_suggest=[];
+    loadSuggestMini(){
+        let recents = this.reddah.loadRecent(4);
+        let cacheKey = "this.reddah.getSuggestMinis";
+        let request = this.reddah.getSuggestMinis();
+
+        this.cacheService.loadFromObservable(cacheKey, request, "SearchPage").subscribe(data=>{
+            this.users_p_suggest = recents;
+        })
+    }
+
     locale;
 
     loadedIds_a=[];

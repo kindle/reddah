@@ -83,7 +83,7 @@
         <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0">
             <ion-item lines="none">
                 <div style="display: flex;flex-wrap: wrap;">
-                    <div style="display: flex;flex-direction: column;margin-top:15px;" *ngFor="let pub_recent of users_p_recent">
+                    <div style="display: flex;flex-direction: column;margin-top:15px;margin-right:15px;" *ngFor="let pub_recent of users_p_recent">
                         <ion-avatar class="userPhoto" (click)="goPub(pub_recent)">
                             <img *ngIf="pub_recent.Photo" src="{{reddah.appData('userphoto_'+pub_recent.UserName, 'photo.svg')}}" class="recentPortrait">
                             <ion-icon *ngIf="!pub_recent.Photo" name="ios-list" color="tertiary" class="sub recentPortrait"></ion-icon>
@@ -122,7 +122,8 @@
                 <div style="display: flex;flex-wrap: wrap;">
                     <div style="display: flex;flex-direction: column;margin-top:15px;" *ngFor="let pub_recent of users_m_recent">
                         <ion-avatar class="userPhoto" (click)="goMini(pub_recent)">
-                            <img *ngIf="pub_recent.Photo" src="{{reddah.appData('userphoto_'+pub_recent.UserName, 'photo.svg')}}" class="recentPortrait">
+                            <img *ngIf="pub_recent.Photo" src="{{reddah.appData('userphoto_'+pub_recent.UserName, 'photo.svg')}}" 
+                                class="borderPortrait recentPortrait">
                             <ion-icon *ngIf="!pub_recent.Photo" name="infinite" color="tertiary" class="mini recentPortrait"></ion-icon>
                         </ion-avatar>
                         <ion-label style="margin:0;padding:3px 5px;width:75px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
@@ -130,10 +131,29 @@
                 </div>
             </ion-item>
         </ion-row>
+        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_p_suggest.length>0">
+            <ion-item lines="none">
+                <ion-label>{{ 'Pop.Suggest' | translate }}</ion-label>
+            </ion-item>
+        </ion-row>
+        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0">
+            <ion-item lines="none">
+                <div style="display: flex;flex-wrap: wrap;">
+                    <div style="display: flex;flex-direction: column;margin-top:15px;" *ngFor="let pub_sgg of users_p_suggest">
+                        <ion-avatar class="userPhoto" (click)="goMini(pub_sgg)">
+                            <img *ngIf="pub_sgg.Photo" src="{{reddah.appData('userphoto_'+pub_sgg.UserName, 'photo.svg')}}" 
+                                class="borderPortrait recentPortrait">
+                            <ion-icon *ngIf="!pub_sgg.Photo" name="infinite" color="tertiary" class="mini recentPortrait"></ion-icon>
+                        </ion-avatar>
+                        <ion-label style="margin:0;padding:3px 5px;width:75px;color:gray;" text-center>{{pub_sgg.NickName}}</ion-label>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-row>
         <ion-row *ngFor="let pub of users_m" (click)="goMini(pub)">
             <ion-item>
                 <ion-avatar slot="start" class="contactUserPhoto">
-                    <img src="{{reddah.appData('userphoto_'+pub.UserName, 'photo.svg')}}" class="contactPortrait">
+                    <img src="{{reddah.appData('userphoto_'+pub.UserName, 'photo.svg')}}" class="borderPortrait contactPortrait">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
                     <div class="user-name" (press)="showChangeMenu($event, contact)">{{pub.NickName}}</div>

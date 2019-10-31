@@ -1442,6 +1442,7 @@ loadLevel(initialLevel);
 unipointer.bindStartEvent(canvas);
 window.addEventListener('mousemove', onHoverMousemove);
 animate();
+window["reddahApi"].loadCompleted();
 
 // -------------------------- drag rotation -------------------------- //
 

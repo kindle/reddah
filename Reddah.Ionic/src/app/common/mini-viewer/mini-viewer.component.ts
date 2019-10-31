@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SecurityContext, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, SecurityContext, ViewEncapsulation, ViewChild, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser'
 import { ModalController, Content, Platform } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
@@ -36,6 +36,7 @@ export class MiniViewerComponent implements OnInit {
         private gyroscope: Gyroscope,
         private platform: Platform,
         private vibration: Vibration,
+        private zone: NgZone,
         @Inject(DOCUMENT) private _document: Document
     ) {
     }
@@ -81,22 +82,33 @@ export class MiniViewerComponent implements OnInit {
         this.addScriptByUrl(`https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js`);
         this.addScriptByUrl(`https://secure.aadcdn.microsoftonline-p.com/lib/1.0.0/js/msal.js`);
         
+        this.initApi();
+
         if(this.platform.is('cordova')){
-            this.initApi();
+            this.initNativeApi();
         }
-        
     }
+
+    loaded = false;
 
     ionViewDidEnter(){
         this.addScriptByUrl(`https://login.reddah.com/uploadphoto/${this.guid}.js?version=${this.version}`);
         this.addCssByUrl(`https://login.reddah.com/uploadphoto/${this.guid}.css?version=${this.version}`);
-        
     }
     
     initApi(){
-        window["reddahApi"] = {}; 
+        window["reddahApi"] = {};
         window["reddahApi"].UserName = this.reddah.getCurrentUser();
         window["reddahApi"].Locale = this.reddah.getCurrentLocale();
+        window["reddahApi"].loadCompleted = ()=> { 
+            this.zone.run(()=>{
+                this.loaded = true;
+            })
+        }
+    }
+
+    initNativeApi(){
+        
         //share to timeline
         //share to friends
         //send to leaderboard
