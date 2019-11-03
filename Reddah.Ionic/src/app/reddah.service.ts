@@ -1789,7 +1789,7 @@ export class ReddahService {
     }
 
 
-    private suggestMiniUrl = 'https://login.reddah.com/api/article/suggestmini'; 
+    private suggestMiniUrl = 'https://login.reddah.com/api/pub/getsuggestmini'; 
     getSuggestMinis(): Observable<any> {
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());

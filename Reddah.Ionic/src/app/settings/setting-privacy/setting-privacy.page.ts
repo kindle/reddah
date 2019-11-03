@@ -23,10 +23,7 @@ export class SettingPrivacyPage implements OnInit {
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
-        private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
         public authService: AuthService,
-        private toastController: ToastController,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
@@ -64,18 +61,22 @@ export class SettingPrivacyPage implements OnInit {
     }
 
     async changeAllowTenTimeline(){
-        this.changePrivacy("timeline", this.allowTenTimeline);
+        this.changePrivacy("timeline", this.allowTenTimeline, 'userallowtentimeline');
+        
     }
 
     async changeShowLocation(){
-        this.changePrivacy("location", this.showLocation);
+        this.changePrivacy("location", this.showLocation, 'userhidelocation');
     }
 
-    private changePrivacy(type, value){
+    private changePrivacy(type, value, r_key){
         let formData = new FormData();
         formData.append('targetType', type);
         formData.append('targetValue', value?"True":"False");
         this.reddah.changePrivacy(formData).subscribe(data=>{
+            if(data.Success==0){
+                this.reddah.toTextCache(value?1:0, `${r_key}_${this.userName}`);
+            }
         });
     }
 

@@ -117,7 +117,7 @@
                 <ion-label>{{ 'Search.Recently' | translate }}</ion-label>
             </ion-item>
         </ion-row>
-        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0">
+        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_m_recent.length>0">
             <ion-item lines="none">
                 <div style="display: flex;flex-wrap: wrap;">
                     <div style="display: flex;flex-direction: column;margin-top:15px;" *ngFor="let pub_recent of users_m_recent">
@@ -131,12 +131,12 @@
                 </div>
             </ion-item>
         </ion-row>
-        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_p_suggest.length>0">
+        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_p_suggest.length>0&&users_m_recent.length==0">
             <ion-item lines="none">
-                <ion-label>{{ 'Pop.Suggest' | translate }}</ion-label>
+                <ion-label>{{ 'Menu.MiniApp' | translate }} {{ 'Pop.Suggest' | translate }}</ion-label>
             </ion-item>
         </ion-row>
-        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0">
+        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_p_suggest.length>0&&users_m_recent.length==0">
             <ion-item lines="none">
                 <div style="display: flex;flex-wrap: wrap;">
                     <div style="display: flex;flex-direction: column;margin-top:15px;" *ngFor="let pub_sgg of users_p_suggest">

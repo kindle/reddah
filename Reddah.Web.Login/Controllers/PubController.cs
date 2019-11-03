@@ -1,19 +1,14 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 
 using System.Web.Http;
 using System.Linq;
 using System.Data.Entity;
-using System.Web.Http.Cors;
 using Reddah.Web.Login.Utilities;
 using System.Web;
 using System.Web.Hosting;
 using System.IO;
 using System.Web.Script.Serialization;
-using System.Data.Entity.Validation;
 using System.Text.RegularExpressions;
 using WebMatrix.WebData;
 using System.Net.Mail;
@@ -880,6 +875,58 @@ namespace Reddah.Web.Login.Controllers
                                  UserSex = u.Sex
                              })
                             .Take(pageCount);
+
+                    return Ok(query.ToList());
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("getsuggestmini")]
+        [HttpPost]
+        public IHttpActionResult GetSuggestMini()
+        {
+            IEnumerable<UserInfo> query = null;
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    query = (from user in db.UserProfile
+                             where user.Type == 3 && user.Point>0
+                             orderby user.Point descending
+                             select new UserInfo
+                             {
+                                UserName = user.UserName,
+                                NickName = user.NickName ?? user.UserName,
+                                Sex = user.Sex ?? 0,
+                                Photo = user.Photo,
+                                Location = user.Location,
+                                Admins = user.Admins,
+                                Point = user.Point,
+                                Signature = user.Signature,
+                                Cover = user.Cover,
+                                Type = user.Type,
+                                Email = user.Email,
+                                HideLocation = (user.PrivacyShowLocation == 1),
+                                AllowTenTimeline = (user.PrivacyViewTs == 1)
+                    }).Take(50);
 
                     return Ok(query.ToList());
 

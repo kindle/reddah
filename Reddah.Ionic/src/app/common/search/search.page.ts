@@ -56,6 +56,7 @@ export class SearchPage implements OnInit {
         }
         else if(col.id==4){
             this.loadRecentMini();
+            this.loadSuggestMini();
         }
         
     }
@@ -193,12 +194,22 @@ export class SearchPage implements OnInit {
 
     users_p_suggest=[];
     loadSuggestMini(){
-        let recents = this.reddah.loadRecent(4);
+        let recentList = this.reddah.loadRecent(4).map(x=>x.UserName);
         let cacheKey = "this.reddah.getSuggestMinis";
-        let request = this.reddah.getSuggestMinis();
+        //let request = this.reddah.getSuggestMinis();
 
-        this.cacheService.loadFromObservable(cacheKey, request, "SearchPage").subscribe(data=>{
-            this.users_p_suggest = recents;
+        //this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
+        this.reddah.getSuggestMinis()
+        .subscribe(data=>{
+            
+            data.forEach((item, index, alias)=>{
+                if(recentList.indexOf(item.UserName)>-1){
+                    item.isRecent = true;
+                }
+            });
+
+            this.users_p_suggest = data.filter(x=>!x.isRecent);
+
         })
     }
 

@@ -1,13 +1,9 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 
 using System.Web.Http;
 using System.Linq;
 using System.Data.Entity;
-using System.Web.Http.Cors;
 using Reddah.Web.Login.Utilities;
 using System.Web;
 using System.Web.Hosting;
@@ -267,9 +263,6 @@ namespace Reddah.Web.Login.Controllers
             {
                 return Ok(new ApiResult(4, ex1.Message));
             }
-
-            
-
         }
 
         [Route("getmytimeline")]

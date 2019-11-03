@@ -43,7 +43,7 @@
     </ion-item>
 -->
     
-    <ion-item class="borderTop borderItem">
+    <ion-item lines="none" class="borderTop borderItem borderBottom">
         <ion-label>{{ 'Common.AllowTenTimeline' | translate }}</ion-label>
         <ion-toggle [(ngModel)]="allowTenTimeline" color="success" slot="end" (ionChange)="changeAllowTenTimeline()"></ion-toggle>
     </ion-item>
