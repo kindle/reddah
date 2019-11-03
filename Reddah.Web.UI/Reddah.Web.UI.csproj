@@ -365,6 +365,12 @@
     <Content Include="App_Data\wiki\Images\ReddahDemo.png" />
     <Content Include="App_Data\wiki\Images\StartMenu.png" />
     <Content Include="App_Data\wiki\Images\twitter.png" />
+    <Content Include="App_Data\wiki\Pages\Api\index.xml" />
+    <Content Include="App_Data\wiki\Pages\Api\sys\dogfood.xml" />
+    <Content Include="App_Data\wiki\Pages\Api\sys\register.xml" />
+    <Content Include="App_Data\wiki\Pages\Api\sys\loadcompleted.xml" />
+    <Content Include="App_Data\wiki\Pages\Api\native\gyroscope.xml" />
+    <Content Include="App_Data\wiki\Pages\Api\native\vibration.xml" />
     <Content Include="App_Data\wiki\Pages\Apps\Demo\BailinBlocks\NavigationList.xml" />
     <Content Include="App_Data\wiki\Pages\Apps\Demo\ChineseCheckers\NavigationList.xml" />
     <Content Include="App_Data\wiki\Pages\Apps\Demo\NavigationList.xml" />
@@ -455,6 +461,9 @@
     <Content Include="Content\Images\skin\MountainInkTopShortGrad.jpg" />
     <Content Include="Content\Images\noimage.jpg" />
     <Content Include="Content\Images\skin\MountainInkTop.jpg" />
+    <Content Include="Content\Images\wiki\alert_icon25x25.png" />
+    <Content Include="Content\Images\wiki\info_icon25x25.png" />
+    <Content Include="Content\Images\wiki\ok_icon25x25.png" />
     <Content Include="Content\Images\wiki\pdf_icon25x25.png" />
     <Content Include="Content\ng-tags-input.css" />
     <Content Include="Content\Site.mobile.css" />
