@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentType Name="FamilyArticle">
+  <Title>Reddah Open Platform Tutorial</Title>
+  <FamilyGroupContainer>
+    <FamilyGroupContent>
+      <Title>What membership activity do you need to complete?</Title>
+      <FamilySubGroupContent>
+        <Title>Renew or cancel your membership</Title>
+        <FamilySubGroupContentLink>
+          <Title>Renew your Reddah LIVE Gold Membership</Title>
+          <ImageUrl>/Content/Images/wiki/info_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/native/vibration</ArticleUrl>
+          <Description>Learn how to renew your Reddah LIVE membership either from your computer or on your console. </Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Cancel Your Reddah LIVE Gold Membership</Title>
+          <ImageUrl>/Content/Images/wiki/alert_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/native/gyroscope</ArticleUrl>
+          <Description>Find out how to cancel your membership or turn off auto-renewal.</Description>
+        </FamilySubGroupContentLink>
+      </FamilySubGroupContent>
+      <FamilySubGroupContent>
+        <Title>Update your payment options</Title>
+        <FamilySubGroupContentLink>
+          <Title>Add or Edit an Reddah LIVE Payment Option</Title>
+          <ImageUrl>/Content/Images/wiki/ok_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/sys/dogfood</ArticleUrl>
+          <Description>Learn how to add or change a payment option (such as a credit card) associated with your Reddah LIVE account.</Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Change Payment for an Reddah LIVE Membership</Title>
+          <ImageUrl></ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/sys/loadcompleted</ArticleUrl>
+          <Description>Learn how to change the payment option associated with your paid Reddah LIVE membership. This procedure can help you reinstate a suspended account.</Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Remove an Reddah LIVE Payment Option </Title>
+          <ImageUrl></ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/sys/register</ArticleUrl>
+          <Description>Learn how to remove a payment option (such as a credit card) from your Reddah LIVE account.</Description>
+        </FamilySubGroupContentLink>
+      </FamilySubGroupContent>
+    </FamilyGroupContent>
+    <FamilyGroupContent>
+      <Title>Group 2</Title>
+      <FamilySubGroupContent>
+        <Title>Manage your Microsoft account</Title>
+        <FamilySubGroupContentLink>
+          <Title>Manage Your Microsoft account</Title>
+          <ImageUrl></ImageUrl>
+          <ArticleUrl></ArticleUrl>
+          <Description>Learn how to view, change, and manage password options for your Microsoft account and Reddah LIVE membership.</Description>
+        </FamilySubGroupContentLink>
+      </FamilySubGroupContent>
+    </FamilyGroupContent>
+   </FamilyGroupContainer>
+  <!--<DeflectionModule>
+    <Visible>False</Visible>
+    <Id></Id>
+    <Title>HardDeflection title</Title>
+    <Type>HardDeflection</Type>
+    <ButtonText></ButtonText>
+    <ButtonLink></ButtonLink>
+    <Description></Description>
+    <Articles>
+      <Article>
+        <Title></Title>
+        <Link></Link>
+      </Article>
+    </Articles>
+  </DeflectionModule>-->
+</ContentType>
