@@ -74,7 +74,6 @@ export class SettingGePage implements OnInit {
             //this.translate.setDefaultLang(currentLocale);
             this.reddah.windowReload();
         }
-
     }
 
     async clearCache(){
@@ -85,6 +84,8 @@ export class SettingGePage implements OnInit {
         this.localStorageService.store("reddah_article_groups", JSON.stringify([]));
         this.localStorageService.store("reddah_article_usernames", JSON.stringify([]));
         this.cacheService.clearGroup("HomePage");
+        this.localStorageService.clear(`Reddah_Recent_3`);
+        this.localStorageService.clear(`Reddah_Recent_4`);
         //this.localStorageService.clear(); //this will force logout
         this.reddah.toast(this.translate.instant("Common.CacheClear"));
     }

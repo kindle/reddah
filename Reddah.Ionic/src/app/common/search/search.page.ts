@@ -206,6 +206,7 @@ export class SearchPage implements OnInit {
                 if(recentList.indexOf(item.UserName)>-1){
                     item.isRecent = true;
                 }
+                this.reddah.getUserPhotos(item.UserName);
             });
 
             this.users_p_suggest = data.filter(x=>!x.isRecent);
