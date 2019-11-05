@@ -542,11 +542,25 @@ namespace Reddah.Web.Login.Controllers
                     userInfo.HideLocation = (user.PrivacyShowLocation == 1);
                     userInfo.AllowTenTimeline = (user.PrivacyViewTs == 1);
 
-                    var findFriends = db.UserFriend.FirstOrDefault(f => (f.UserName == jwtResult.JwtUser.User && f.Watch == targetUser && f.Approve == 1) ||
-                    (f.UserName == targetUser && f.Watch == jwtResult.JwtUser.User && f.Approve == 1));
-                    userInfo.IsFriend = findFriends != null;
-                    if(userInfo.IsFriend)
-                        userInfo.NoteName = db.UserFriend.FirstOrDefault(f=>f.UserName == jwtResult.JwtUser.User && f.Watch==targetUser && f.Approve == 1).NoteName;
+                    if (user.Type == 0)
+                    {
+                        var findFriends = db.UserFriend.FirstOrDefault(f => (f.UserName == jwtResult.JwtUser.User && f.Watch == targetUser && f.Approve == 1) ||
+                        (f.UserName == targetUser && f.Watch == jwtResult.JwtUser.User && f.Approve == 1));
+                        userInfo.IsFriend = findFriends != null;
+
+                        if (userInfo.IsFriend)
+                            userInfo.NoteName = db.UserFriend.FirstOrDefault(f => f.UserName == jwtResult.JwtUser.User && f.Watch == targetUser && f.Approve == 1).NoteName;
+                    }
+                    else
+                    {
+                        var findPubFocus = db.Article.FirstOrDefault(a => a.Type == 22 &&
+                        (a.GroupName.StartsWith(targetUser + ",") ||
+                        a.GroupName.EndsWith("," + targetUser))
+                        &&
+                        (a.GroupName.StartsWith(jwtResult.JwtUser.User + ",") ||
+                        a.GroupName.EndsWith("," + jwtResult.JwtUser.User)));
+                        userInfo.IsFriend = findPubFocus != null;
+                    }
                     
                     return Ok(userInfo);
 

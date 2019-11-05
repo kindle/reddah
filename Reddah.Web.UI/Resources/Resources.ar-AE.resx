@@ -192,6 +192,9 @@
   <data name="Menu_Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="Menu_OpenPlatform" xml:space="preserve">
+    <value>منصة مفتوحة</value>
+  </data>
   <data name="Menu_Top" xml:space="preserve">
     <value>Top</value>
   </data>

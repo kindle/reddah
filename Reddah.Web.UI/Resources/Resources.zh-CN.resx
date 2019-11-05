@@ -195,6 +195,9 @@
   <data name="Menu_Search" xml:space="preserve">
     <value>搜索</value>
   </data>
+  <data name="Menu_OpenPlatform" xml:space="preserve">
+    <value>开放平台</value>
+  </data>
   <data name="Menu_Top" xml:space="preserve">
     <value>热评榜</value>
   </data>

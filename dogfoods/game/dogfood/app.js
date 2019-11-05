@@ -5,7 +5,6 @@
  */
 
 /* jshint unused: true, undef: true, strict: true */
-
 (function(global, factory) {
     // universal module definition
     /* jshint strict: false */
@@ -1442,7 +1441,14 @@ loadLevel(initialLevel);
 unipointer.bindStartEvent(canvas);
 window.addEventListener('mousemove', onHoverMousemove);
 animate();
+loadLocalization();
 window["reddahApi"].loadCompleted();
+
+//----localization-----//
+function loadLocalization(){
+	
+}
+const title = "lalal"
 
 // -------------------------- drag rotation -------------------------- //
 

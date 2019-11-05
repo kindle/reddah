@@ -282,6 +282,14 @@ namespace Reddah.Web.UI.Resources
             }
         }
 
+        public static string Menu_OpenPlatform
+        {
+            get
+            {
+                return ResourceManager.GetString("Menu_OpenPlatform", resourceCulture);
+            }
+        }
+
         public static string Menu_Top
         {
             get

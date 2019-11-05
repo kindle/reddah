@@ -388,6 +388,9 @@
     <Content Include="App_Data\wiki\Pages\Apps\Reddah\Tips\NavigationList.xml" />
     <Content Include="App_Data\wiki\Pages\Apps\Reddah\Tutorial\NavigationList.xml" />
     <Content Include="App_Data\wiki\Pages\BrowseNavigate.xml" />
+    <Content Include="App_Data\wiki\Pages\Download.fr-fr.xml" />
+    <Content Include="App_Data\wiki\Pages\Download.ja-jp.xml" />
+    <Content Include="App_Data\wiki\Pages\Download.ko-kr.xml" />
     <Content Include="App_Data\wiki\Pages\Download.xml" />
     <Content Include="App_Data\wiki\Pages\Download.zh-cn.xml" />
     <Content Include="App_Data\wiki\Pages\Download.bak.xml" />

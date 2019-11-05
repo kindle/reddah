@@ -51,7 +51,7 @@
           display: inline-block;
           margin: 10px 4px;
           padding: .2em .6em;
-          background-color: #026e00;
+          background-color: #cb0000;
           color: #fff !important;
           border-radius: 2px;
           font-size: 30px;

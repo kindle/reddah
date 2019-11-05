@@ -192,6 +192,9 @@
   <data name="Menu_Search" xml:space="preserve">
     <value>검색</value>
   </data>
+  <data name="Menu_OpenPlatform" xml:space="preserve">
+    <value>개방식 플랫폼</value>
+  </data>
   <data name="Menu_Top" xml:space="preserve">
     <value>Top</value>
   </data>
