@@ -8,13 +8,9 @@ import { UserPage } from '../common/user/user.page';
 import { TimelineCommentPopPage } from '../common/timeline-comment-pop.page'
 import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
-import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleTextPopPage } from '../common/article-text-pop.page'
 import { ChangeCoverPopPage } from '../common/change-cover-pop.page'
 import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page'
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { MessagePage } from '../mytimeline/message/message.page'
 import { LocationPage } from '../common/location/location.page';
 
@@ -53,11 +49,6 @@ export class MyTimeLinePage implements OnInit {
         private localStorageService: LocalStorageService,
         private popoverController: PopoverController,
         private cacheService: CacheService,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
-        private transfer: FileTransfer, 
-        private file: File,
-        private statusBar: StatusBar,
         private alertController: AlertController,
         private translate: TranslateService,
     ){

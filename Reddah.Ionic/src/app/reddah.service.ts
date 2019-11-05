@@ -1685,7 +1685,7 @@ export class ReddahService {
         const toast = await this.toastController.create({
             message: message,
             showCloseButton: true,
-            position: 'top',
+            position: "top",
             closeButtonText: this.translate.instant("Button.Close"),
             duration: 3000,
             color: color,

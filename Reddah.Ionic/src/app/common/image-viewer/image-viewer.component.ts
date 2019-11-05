@@ -174,6 +174,10 @@ export class ImageViewerComponent implements OnInit {
     }
     //loadProgress : any;
 
+    getFileName(str){
+        let lastSplashIndex = str.lastIndexOf('/');
+        return str.substring(lastSplashIndex+1);
+    }
     async downloadOrgImage(item) {
         //set status as loading
         item.isOrgViewed = 2;
@@ -183,7 +187,7 @@ export class ImageViewerComponent implements OnInit {
         //    this.loadProgress = data.loaded/data.total*100;
         //});
         let orgImageUrl = item.webPreviewUrl.replace("///","https://").replace("_reddah_preview","");
-        let orgImageFileName = item.previewImageFileName.replace("_reddah_preview","");
+        let orgImageFileName = this.getFileName(item.previewImageFileName.replace("_reddah_preview",""));
         //this.fileTransfer.download(orgImageUrl, this.file.applicationStorageDirectory + orgImageFileName).then((entry) => {
         this.fileTransfer.download(orgImageUrl, this.reddah.getDeviceDirectory()+"reddah/" + orgImageFileName).then((entry) => {
             //let localFileImageUrl = this.file.applicationStorageDirectory + orgImageFileName;
@@ -210,8 +214,8 @@ export class ImageViewerComponent implements OnInit {
         {
             //download preview image
             let source = item.webPreviewUrl.replace("///","https://");
-            let target = this.reddah.getDeviceDirectory() + "DCIM/Reddah/" + item.previewImageFileName;
-            let briefTarget = "DCIM/Reddah/" + item.previewImageFileName;
+            let target = this.reddah.getDeviceDirectory() + "DCIM/Reddah/" + this.getFileName(item.previewImageFileName);
+            let briefTarget = "DCIM/Reddah/";// + item.previewImageFileName;
             this.fileTransfer = this.transfer.create(); 
             const toast = await this.toastController.create({
                 message: `${this.translate.instant("Common.Save")}:${briefTarget}`,
@@ -228,12 +232,12 @@ export class ImageViewerComponent implements OnInit {
         else
         {
             //copy from local directory
-            let fileName = item.previewImageFileName.replace("_reddah_preview","");
+            let fileName = this.getFileName(item.previewImageFileName.replace("_reddah_preview",""));
             let path = item.localFileImageUrl.replace(fileName, "");
             let newFileName = fileName;
             let newPath = this.reddah.getDeviceDirectory() + "DCIM/Reddah/";
             
-            let briefTarget = "DCIM/Reddah/" + newFileName;
+            let briefTarget = "DCIM/Reddah/";// + newFileName;
             
             const toast = await this.toastController.create({
                 message: `${this.translate.instant("Common.Save")}:${briefTarget}`,
