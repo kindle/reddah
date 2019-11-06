@@ -43,28 +43,42 @@ export class AppComponent {
         private authService: AuthService,
         //private firebase: Firebase,
     ) {
-        this.initializeApp();
+        try{
+            this.initializeApp();
+        }
+        catch(ex){
+            console.log(ex)
+        }
+    }
+
+    initializeApp() {
+        this.platform.ready().then(() => {
+            //this.statusBar.overlaysWebView(true);
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
+            this.initPlugins();
+        });
         
+        // Initialize BackButton Eevent.
+        this.backButtonEvent();
+    }
+
+    initPlugins(){
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
         let defaultLocale ="en-US"
         if(currentLocale==null){
             if(this.platform.is('cordova'))
             {
-                try{
-                    Globalization.getPreferredLanguage()
-                    .then(res => {
-                        this.localStorageService.store("Reddah_Locale", res.value);
-                        this.translate.setDefaultLang(res.value);
-                    })
-                    .catch(e => {
-                        this.localStorageService.store("Reddah_Locale", defaultLocale);
-                        this.translate.setDefaultLang(defaultLocale);
-                    });
-                }
-                catch(ex){
+                
+                Globalization.getPreferredLanguage()
+                .then(res => {
+                    this.localStorageService.store("Reddah_Locale", res.value);
+                    this.translate.setDefaultLang(res.value);
+                })
+                .catch(e => {
                     this.localStorageService.store("Reddah_Locale", defaultLocale);
                     this.translate.setDefaultLang(defaultLocale);
-                }
+                });
             }
             else{
                 this.localStorageService.store("Reddah_Locale", defaultLocale);
@@ -142,18 +156,6 @@ export class AppComponent {
         document.documentElement.style.setProperty(`--ion-font-size`, this.reddah.fontSizeMap.get(currentFontSize));
 
         this.reddah.getUserPhotos(this.reddah.getCurrentUser());
-
-    }
-
-    initializeApp() {
-        this.platform.ready().then(() => {
-            //this.statusBar.overlaysWebView(true);
-            this.statusBar.styleDefault();
-            this.splashScreen.hide();
-        });
-        
-        // Initialize BackButton Eevent.
-        this.backButtonEvent();
     }
 
     // set up hardware back button event.
@@ -240,9 +242,12 @@ export class AppComponent {
             }
 
             this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
-                if (outlet && outlet.canGoBack()) {
+                if (outlet && outlet.canGoBack()) 
+                {
                     outlet.pop();
-                } else {
+                } 
+                else 
+                {
                     if(this.router.url.indexOf("home")>0)
                     {
                         this.presentAlertConfirm();

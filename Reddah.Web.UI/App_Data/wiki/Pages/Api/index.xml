@@ -3,7 +3,7 @@
   <Title>Open Platform</Title>
   <FamilyGroupContainer>
     <FamilyGroupContent>
-      <Title>Reddah Publisher</Title>
+      <Title>For content managers: Reddah Publisher</Title>
       <FamilySubGroupContent>
         <Title>What your need to know before start?</Title>
         <FamilySubGroupContentLink>
@@ -51,14 +51,68 @@
       </FamilySubGroupContent>
     </FamilyGroupContent>
     <FamilyGroupContent>
-      <Title>Reddah Mini App</Title>
+      <Title>For developers: Reddah Mini App</Title>
       <FamilySubGroupContent>
-        <Title>What membership activity do you need to complete?</Title>
+        <Title>What Mini App membership activity do you need to complete?</Title>
         <FamilySubGroupContentLink>
-          <Title>Manage Your Microsoft account</Title>
-          <ImageUrl></ImageUrl>
-          <ArticleUrl></ArticleUrl>
-          <Description>Learn how to view, change, and manage password options for your Microsoft account and Reddah LIVE membership.</Description>
+          <Title>Register Mini App Membership</Title>
+          <ImageUrl>/Content/Images/wiki/ok_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/sys/register</ArticleUrl>
+          <Description>Learn how to register your Reddah Publisher membership via app. </Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Update your Mini App profile</Title>
+          <ImageUrl>/Content/Images/wiki/ok_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/native/gyroscope</ArticleUrl>
+          <Description>Find out how to update your publisher profile, change your logo description, etc.</Description>
+        </FamilySubGroupContentLink>
+      </FamilySubGroupContent>
+      <FamilySubGroupContent>
+        <Title>Native API</Title>
+        <FamilySubGroupContentLink>
+          <Title>Vibration</Title>
+          <ImageUrl>/Content/Images/wiki/info_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/native/vibration</ArticleUrl>
+          <Description>Learn how to publish your article and make it visible to the readers.</Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Gyroscope</Title>
+          <ImageUrl>/Content/Images/wiki/info_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/native/gyroscope</ArticleUrl>
+          <Description>Learn how to manage comments and remove a post (such as a wrongly published article) from your publisher account.</Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>UserName</Title>
+          <ImageUrl>/Content/Images/wiki/info_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/sys/dogfood</ArticleUrl>
+          <Description>Learn how to add or refer to a material (such as a photo) associated with your Reddah account.</Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Locale</Title>
+          <ImageUrl>/Content/Images/wiki/info_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/sys/dogfood</ArticleUrl>
+          <Description>Learn how to add or refer to a material (such as a photo) associated with your Reddah account.</Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+            <Title>LoadCompleted</Title>
+            <ImageUrl>/Content/Images/wiki/info_icon25x25.png</ImageUrl>
+            <ArticleUrl>t/wiki/Pages/api/sys/loadcompleted</ArticleUrl>
+            <Description>Learn how to publish your article and make it visible to the readers.</Description>
+          </FamilySubGroupContentLink>
+      </FamilySubGroupContent>
+      <FamilySubGroupContent>
+        <Title>Demo and Sample Code</Title>
+        <FamilySubGroupContentLink>
+          <Title>Game: DogFood</Title>
+          <ImageUrl>/Content/Images/wiki/ok_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/sys/register</ArticleUrl>
+          <Description>Learn how to create your Mini app in one minute. </Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Game: Jump</Title>
+          <ImageUrl>/Content/Images/wiki/ok_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/sys/register</ArticleUrl>
+          <Description>Learn how to use native API in your Mini app. </Description>
         </FamilySubGroupContentLink>
       </FamilySubGroupContent>
     </FamilyGroupContent>

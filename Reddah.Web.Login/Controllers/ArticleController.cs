@@ -1546,13 +1546,24 @@ namespace Reddah.Web.Login.Controllers
                     if (target != null)
                     {
                         bool canDelete = false;
-                        
-                        var pub = db.UserProfile.FirstOrDefault(u => u.UserName == target.UserName);
-                        if (pub.Admins.Split(',').Contains(jwtResult.JwtUser.User))
+
+                        if (target.Type == 0)//pub article
                         {
-                            canDelete = true;
-                            //log...
+                            var pub = db.UserProfile.FirstOrDefault(u => u.UserName == target.UserName);
+                            if (pub.Admins.Split(',').Contains(jwtResult.JwtUser.User))
+                            {
+                                canDelete = true;
+                                //log...
+                            }
                         }
+                        if(target.Type==1)//mytimeline
+                        {
+                            if (target.UserName == jwtResult.JwtUser.User)
+                            {
+                                canDelete = true;
+                            }
+                        }
+
                         var user = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
                         var query = (from ur in db.webpages_UsersInRoles
                                          join pr in db.webpages_PrivilegesInRoles on ur.RoleId equals pr.RoleId

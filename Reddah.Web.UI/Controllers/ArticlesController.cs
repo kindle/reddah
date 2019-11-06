@@ -90,6 +90,8 @@
 
                 if (PresentationTemplate == "FamilyArticle")
                 {
+                    presentationView = Request.Browser.IsMobileDevice ?
+                    "~/Views/Articles/FamilyArticle.mobile.cshtml" : "~/Views/Articles/FamilyArticle.cshtml";
                     return View(presentationView, new FamilyArticleViewModel(path));
                 }
                 else if (PresentationTemplate == "NavigationList")

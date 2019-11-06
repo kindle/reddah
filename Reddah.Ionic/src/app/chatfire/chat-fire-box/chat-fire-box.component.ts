@@ -437,7 +437,7 @@ export class ChatFireBoxComponent implements OnInit {
             uri: photo.fileUrl,
             folderName: 'reddah',
             fileName: previewFileName,
-            quality: 20,
+            quality: 40,
             width: 800,
             height: 800
         } as ImageResizerOptions;

@@ -413,6 +413,7 @@ export class SearchPage implements OnInit {
         }
     }
 
+    
     async goMini(mini){
         this.reddah.setRecent(mini,4);
         //open mini page
