@@ -249,7 +249,8 @@
         "MyPhoto":"我的素材",
         "AddPhoto":"添加素材",
         "Copy":"復制圖片地址",
-        "UserNotExist":"用戶不存在"
+        "UserNotExist":"用戶不存在",
+        "Document":"文檔"
     },
 
     "Mail":{

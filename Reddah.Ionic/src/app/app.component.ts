@@ -50,18 +50,21 @@ export class AppComponent {
         if(currentLocale==null){
             if(this.platform.is('cordova'))
             {
-                Globalization.getPreferredLanguage()
-                .then(res => {
-                    this.localStorageService.store("Reddah_Locale", res.value);
-                    this.translate.setDefaultLang(res.value);
-                })
-                .catch(e => 
-                    {
-                        console.log(JSON.stringify(e))
+                try{
+                    Globalization.getPreferredLanguage()
+                    .then(res => {
+                        this.localStorageService.store("Reddah_Locale", res.value);
+                        this.translate.setDefaultLang(res.value);
+                    })
+                    .catch(e => {
                         this.localStorageService.store("Reddah_Locale", defaultLocale);
                         this.translate.setDefaultLang(defaultLocale);
-                    }
-                );
+                    });
+                }
+                catch(ex){
+                    this.localStorageService.store("Reddah_Locale", defaultLocale);
+                    this.translate.setDefaultLang(defaultLocale);
+                }
             }
             else{
                 this.localStorageService.store("Reddah_Locale", defaultLocale);
@@ -249,7 +252,9 @@ export class AppComponent {
                     {
                         this.router.navigate(['/']);
                     }
+                    //alert("*"+this.router.url)
                 }
+                
             });
         });
     }

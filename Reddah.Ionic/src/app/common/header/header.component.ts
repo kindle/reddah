@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ModalController, PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController, Platform } from '@ionic/angular';
 import { SearchPage } from '../search/search.page';
 import { HeaderAddPage } from '../header-add-pop.page';
 
@@ -16,6 +16,7 @@ export class HeaderComponent {
     constructor(
         private modalController: ModalController,
         private popoverController: PopoverController,
+        private platform: Platform,
     ) { }
 
     async goSearch(){
@@ -29,11 +30,19 @@ export class HeaderComponent {
     }
 
     async add(ev: any) {
+        let cssName = 'header-add-popover';
+        if(this.platform.is('android')){
+            cssName = 'header-add-popover';
+        }
+        else{
+            cssName = 'header-add-popover-ios';
+        }
+
         const popover = await this.popoverController.create({
             component: HeaderAddPage,
             event: ev,
             translucent: true,
-            cssClass: 'header-add-popover'
+            cssClass: cssName
         });
         return await popover.present();
     }

@@ -250,7 +250,8 @@
         "MyPhoto":"My Material",
         "AddPhoto":"Add Material",
         "Copy":"Copy Image Address",
-        "UserNotExist":"User does not exist"
+        "UserNotExist":"User does not exist",
+        "Document":"Document"
     },
 
     "Mail":{

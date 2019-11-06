@@ -1,8 +1,9 @@
-<ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop style="background-color:white;">
+<img [src]="reddah.appData('cover_'+userName)" style="position:fixed;">
+<ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop>
     <div class="headerStart" #headerStart slot="fixed">
         <ion-item color="transparent" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
             <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
-                <ion-icon slot="start" color="tertiary" is-active="false" name="ios-arrow-back"></ion-icon>
+                <ion-icon color="tertiary" is-active="false" name="ios-arrow-back"></ion-icon>
             </ion-button>
             <ion-label></ion-label>
             <ion-icon name="camera" color="tertiary" slot="end" (click)="post($event)"></ion-icon>
@@ -11,19 +12,18 @@
     <div class="headerOnScroll" #headerOnScroll slot="fixed">
         <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
             <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
-                <ion-icon slot="start" is-active="false" name="ios-arrow-back"></ion-icon>
+                <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
                 <ion-label style="text-transform: none;">{{ 'Menu.Timeline' | translate }}</ion-label>
             </ion-button>
             <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
-    <div> 
+    <div>
         <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
             <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>
         </ion-refresher>  
         <div class="timelineCover" #timelineCover>
-            <img [src]="reddah.appData('cover_'+userName)"
-                (click)="changeCover()">
+            <img [src]="reddah.appData('cover_'+userName)" (click)="changeCover()">
         </div>
         <div class="timelineAvatar">
             <ion-label class="userNameTitle">{{reddah.getDisplayName(userName,100)}}</ion-label>

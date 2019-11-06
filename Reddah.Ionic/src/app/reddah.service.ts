@@ -1236,27 +1236,30 @@ export class ReddahService {
     }
 
     toImageCache(webUrl, cacheKey){
-        let deviceDirectory = this.getDeviceDirectory();
-        
-        let cachedImagePath = this.localStorageService.retrieve(cacheKey);
+        if(webUrl!=null){
+            let deviceDirectory = this.getDeviceDirectory();
+            
+            let cachedImagePath = this.localStorageService.retrieve(cacheKey);
 
-        let cacheImageName = "";
-        if(cachedImagePath!=null){
-            cacheImageName = cachedImagePath.replace(deviceDirectory+"reddah/","");
-        }
+            let cacheImageName = "";
+            if(cachedImagePath!=null){
+                cacheImageName = cachedImagePath.replace(deviceDirectory+"reddah/","");
+            }
 
-        webUrl = webUrl.replace("///","https://");
-        let webImageName = this.getFileName(webUrl);
+            
+            webUrl = webUrl.replace("///","https://");
+            let webImageName = this.getFileName(webUrl);
 
-        if(cachedImagePath==null||cacheImageName!=webImageName){
-            this.fileTransfer = this.transfer.create();
-            let targetUrl = deviceDirectory+"reddah/" + webImageName;
-            this.fileTransfer.download(webUrl, targetUrl).then(
-            _ => {
-                this.localStorageService.store(cacheKey, targetUrl);
-                this.appCacheToOrg[(<any>window).Ionic.WebView.convertFileSrc(targetUrl)] = webUrl;
-            }, 
-            _ => { console.log(JSON.stringify(_)); });
+            if(cachedImagePath==null||cacheImageName!=webImageName){
+                this.fileTransfer = this.transfer.create();
+                let targetUrl = deviceDirectory+"reddah/" + webImageName;
+                this.fileTransfer.download(webUrl, targetUrl).then(
+                _ => {
+                    this.localStorageService.store(cacheKey, targetUrl);
+                    this.appCacheToOrg[(<any>window).Ionic.WebView.convertFileSrc(targetUrl)] = webUrl;
+                }, 
+                _ => { console.log(JSON.stringify(_)); });
+            }
         }
     } 
 

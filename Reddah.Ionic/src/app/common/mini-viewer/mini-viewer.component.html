@@ -5,6 +5,11 @@
         <ion-icon name="close"></ion-icon>
     </ion-fab-button>
 </ion-fab>
+<ion-fab vertical="top" horizontal="start" slot="fixed" [hidden]="loaded">
+    <ion-fab-button (click)="close()" color="light" mini>
+        <ion-icon name="ios-arrow-back"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
 <ion-content center text-center class="vertical-align-content" 
     style="--background:white;" [hidden]="loaded">
     <ion-grid style="height:80%;">

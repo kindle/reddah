@@ -141,7 +141,13 @@
         width: 10em;
         --ion-background-color: #222428;
         --ion-text-color: white;
-    }  
+    } 
+    
+    .header-add-popover-ios .popover-content {
+        width: 11em;
+        --ion-background-color: #222428;
+        --ion-text-color: white;
+    } 
 
     .article-pop-popover .popover-content {
         width: 10em;

@@ -247,7 +247,8 @@
         "MyPhoto":"Mon matériel",
         "AddPhoto":"Matériau d 'addition",
         "Copy":"Copier l 'adresse d' image",
-        "UserNotExist":"L 'utilisateur n' existe pas"
+        "UserNotExist":"L 'utilisateur n' existe pas",
+        "Document":"Documentation"
     },
 
     "Mail":{

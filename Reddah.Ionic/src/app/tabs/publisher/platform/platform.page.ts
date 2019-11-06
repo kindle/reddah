@@ -1,10 +1,8 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
-import { CacheService } from "ionic-cache";
-import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../../auth.service';
 import { ReddahService } from '../../../reddah.service';
-import { TranslateService } from '@ngx-translate/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { CategoryPage } from '../category/category.page';
 import { ManagePage } from '../manage/manage.page';
 import { ReportPage } from '../../../mytimeline/report/report.page';
@@ -22,16 +20,17 @@ export class PlatformPage implements OnInit {
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
-        private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
         public authService: AuthService,
-        private alertController: AlertController,
-        private translate: TranslateService,
+        private iab: InAppBrowser,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }
 
+    async goDoc(){
+        const browser = this.iab.create(`https://reddah.com/${this.locale}/t/wiki/Pages/api/index`);
+        browser.show();
+    }
 
     ngOnInit() {
 

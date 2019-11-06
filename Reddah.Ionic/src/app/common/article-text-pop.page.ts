@@ -5,7 +5,7 @@ import { ReddahService } from '../reddah.service';
 @Component({
     template: `
         <ion-item color="light" no-padding lines="none">
-            <ion-icon slot="start" name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
+            <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
         </ion-item>
         <ion-content padding>
             <div [innerHTML]="reddah.htmlDecode(text)"></div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, NgZone } from '@angular/core';
 import { ModalController, ToastController, ActionSheetController, Slides, Platform } from '@ionic/angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -32,10 +32,10 @@ export class ImageViewerComponent implements OnInit {
         private toastController: ToastController,
         private actionSheetController: ActionSheetController,
         public reddah: ReddahService,
-        private cacheService: CacheService,
         public translate: TranslateService,
         private clipboard: Clipboard,
         private platform: Platform,
+        private zone: NgZone,
     ) {
     }
 
@@ -178,9 +178,19 @@ export class ImageViewerComponent implements OnInit {
         let lastSplashIndex = str.lastIndexOf('/');
         return str.substring(lastSplashIndex+1);
     }
-    async downloadOrgImage(item) {
+    async downloadOrgImage(item, cp = false) {
+        let briefTarget = "DCIM/Reddah/";// + newFileName;
+        const toast = await this.toastController.create({
+            message: `${this.translate.instant("Common.Save")}:${briefTarget}`,
+            showCloseButton: false,
+            position: 'bottom',
+            duration: 2500
+        });
+
         //set status as loading
-        item.isOrgViewed = 2;
+        this.zone.run(() => {
+            item.isOrgViewed = 2;
+        })
         // only against preview image
         this.fileTransfer = this.transfer.create();  
         //this.fileTransfer.onProgress((data)=>{
@@ -197,12 +207,26 @@ export class ImageViewerComponent implements OnInit {
             for(let i=0;i<this.imgSourceArray.length;i++){
                 if(this.imgSourceArray[i].webPreviewUrl===item.webPreviewUrl){
                     let localhostImageUrl = (<any>window).Ionic.WebView.convertFileSrc(localFileImageUrl);
-                    this.imgSourceArray[i].localhostImageUrl = localhostImageUrl;
-                    this.imgSourceArray[i].localFileImageUrl = localFileImageUrl;
-                    this.imgSourceArray[i].isOrgViewed = 3;
-
+                    this.zone.run(() => {
+                        this.imgSourceArray[i].localhostImageUrl = localhostImageUrl;
+                        this.imgSourceArray[i].localFileImageUrl = localFileImageUrl;
+                        this.imgSourceArray[i].isOrgViewed = 3;
+                    });
+                    
                     break;
                 }
+            }
+
+            if(cp==true){
+                //copy from local directory
+                let fileName = this.getFileName(item.previewImageFileName.replace("_reddah_preview",""));
+                let path = item.localFileImageUrl.replace(fileName, "");
+                let newFileName = fileName;
+                let newPath = this.reddah.getDeviceDirectory() + "DCIM/Reddah/";
+
+                this.file.copyFile(path, fileName, newPath, newFileName).then((data)=>{
+                    toast.present();
+                });
             }
         }, (error) => {
             //console.log(JSON.stringify(error));
@@ -210,47 +234,36 @@ export class ImageViewerComponent implements OnInit {
     }
 
     async downloadImage(item){
-        if(item.isOrgViewed!=1)
+        if(item.isOrgViewed==3)//already download org image
         {
-            //download preview image
-            let source = item.webPreviewUrl.replace("///","https://");
-            let target = this.reddah.getDeviceDirectory() + "DCIM/Reddah/" + this.getFileName(item.previewImageFileName);
-            let briefTarget = "DCIM/Reddah/";// + item.previewImageFileName;
-            this.fileTransfer = this.transfer.create(); 
-            const toast = await this.toastController.create({
-                message: `${this.translate.instant("Common.Save")}:${briefTarget}`,
-                showCloseButton: false,
-                position: 'bottom',
-                duration: 2500
-            });
-            this.fileTransfer.download(source, target, true).then((entry) => {
-                toast.present();
-            }, (error) => {
-                alert(JSON.stringify(error));
-            });
+            this.copy(item);
         }
         else
         {
-            //copy from local directory
-            let fileName = this.getFileName(item.previewImageFileName.replace("_reddah_preview",""));
-            let path = item.localFileImageUrl.replace(fileName, "");
-            let newFileName = fileName;
-            let newPath = this.reddah.getDeviceDirectory() + "DCIM/Reddah/";
-            
-            let briefTarget = "DCIM/Reddah/";// + newFileName;
-            
-            const toast = await this.toastController.create({
-                message: `${this.translate.instant("Common.Save")}:${briefTarget}`,
-                showCloseButton: false,
-                position: 'bottom',
-                duration: 2500
-            });
-            
-            this.file.copyFile(path, fileName, newPath, newFileName).then((data)=>{
-                toast.present();
-            });
+           this.downloadOrgImage(item, true);
         }
       
+    }
+
+    async copy(item){
+        //copy from local directory
+        let fileName = this.getFileName(item.previewImageFileName.replace("_reddah_preview",""));
+        let path = item.localFileImageUrl.replace(fileName, "");
+        let newFileName = fileName;
+        let newPath = this.reddah.getDeviceDirectory() + "DCIM/Reddah/";
+
+        let briefTarget = "DCIM/Reddah/";// + newFileName;
+
+        const toast = await this.toastController.create({
+            message: `${this.translate.instant("Common.Save")}:${briefTarget}`,
+            showCloseButton: false,
+            position: 'bottom',
+            duration: 2500
+        });
+
+        this.file.copyFile(path, fileName, newPath, newFileName).then((data)=>{
+            toast.present();
+        });
     }
   
 }

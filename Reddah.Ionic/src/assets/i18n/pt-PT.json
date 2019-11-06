@@ -246,7 +246,8 @@
         "MyPhoto":"O MEU material",
         "AddPhoto":"Adicionar material",
         "Copy":"Copiar Endereço Da Imagem",
-        "UserNotExist":"O usuário não existe"
+        "UserNotExist":"O usuário não existe",
+        "Document":"Documento"
     },
 
     "Mail":{

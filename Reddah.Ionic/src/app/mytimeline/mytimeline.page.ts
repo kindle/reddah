@@ -470,7 +470,15 @@ export class MyTimeLinePage implements OnInit {
             {
                 text: this.translate.instant("Confirm.Yes"),
                 handler: () => {
-                    //ui delete
+                    //serivce delete
+                    
+                    let formData = new FormData();
+                    formData.append("Id",JSON.stringify(article.Id));
+                    this.reddah.deleteArticle(formData).subscribe(data=>{
+                        console.log(JSON.stringify(data));
+                    });
+
+                    //UI delete
                     this.articles.forEach((item, index)=>{
                         if(item.Id==article.Id){
                             this.articles.splice(index, 1);
@@ -478,13 +486,6 @@ export class MyTimeLinePage implements OnInit {
                     })
                     this.localStorageService.store("Reddah_mytimeline",this.articles);
                     this.cacheService.clearGroup("MyTimeLinePage");
-                    
-                    //serivce delete
-                    let formData = new FormData();
-                    formData.append("Id",JSON.stringify(article.Id));
-                    this.reddah.deleteArticle(formData).subscribe(data=>{
-                        
-                    });
                 }
             }]
         });
