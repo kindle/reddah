@@ -1,50 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentType Name="FamilyArticle">
-  <Title>Reddah Open Platform Tutorial</Title>
+  <Title>Open Platform</Title>
   <FamilyGroupContainer>
     <FamilyGroupContent>
-      <Title>What membership activity do you need to complete?</Title>
+      <Title>Reddah Publisher</Title>
       <FamilySubGroupContent>
-        <Title>Renew or cancel your membership</Title>
+        <Title>What your need to know before start?</Title>
         <FamilySubGroupContentLink>
-          <Title>Renew your Reddah LIVE Gold Membership</Title>
-          <ImageUrl>/Content/Images/wiki/info_icon25x25.png</ImageUrl>
-          <ArticleUrl>t/wiki/Pages/api/native/vibration</ArticleUrl>
-          <Description>Learn how to renew your Reddah LIVE membership either from your computer or on your console. </Description>
-        </FamilySubGroupContentLink>
-        <FamilySubGroupContentLink>
-          <Title>Cancel Your Reddah LIVE Gold Membership</Title>
+          <Title>Content Policy</Title>
           <ImageUrl>/Content/Images/wiki/alert_icon25x25.png</ImageUrl>
-          <ArticleUrl>t/wiki/Pages/api/native/gyroscope</ArticleUrl>
-          <Description>Find out how to cancel your membership or turn off auto-renewal.</Description>
+          <ArticleUrl>t/wiki/Pages/api/sys/dogfood</ArticleUrl>
+          <Description>Reddah will power thousands of distinct online communities. these terms and your conduct make that possible.</Description>
         </FamilySubGroupContentLink>
       </FamilySubGroupContent>
       <FamilySubGroupContent>
-        <Title>Update your payment options</Title>
+        <Title>What publisher membership activity do you need to complete?</Title>
         <FamilySubGroupContentLink>
-          <Title>Add or Edit an Reddah LIVE Payment Option</Title>
+          <Title>Register publisher Membership</Title>
           <ImageUrl>/Content/Images/wiki/ok_icon25x25.png</ImageUrl>
-          <ArticleUrl>t/wiki/Pages/api/sys/dogfood</ArticleUrl>
-          <Description>Learn how to add or change a payment option (such as a credit card) associated with your Reddah LIVE account.</Description>
-        </FamilySubGroupContentLink>
-        <FamilySubGroupContentLink>
-          <Title>Change Payment for an Reddah LIVE Membership</Title>
-          <ImageUrl></ImageUrl>
-          <ArticleUrl>t/wiki/Pages/api/sys/loadcompleted</ArticleUrl>
-          <Description>Learn how to change the payment option associated with your paid Reddah LIVE membership. This procedure can help you reinstate a suspended account.</Description>
-        </FamilySubGroupContentLink>
-        <FamilySubGroupContentLink>
-          <Title>Remove an Reddah LIVE Payment Option </Title>
-          <ImageUrl></ImageUrl>
           <ArticleUrl>t/wiki/Pages/api/sys/register</ArticleUrl>
-          <Description>Learn how to remove a payment option (such as a credit card) from your Reddah LIVE account.</Description>
+          <Description>Learn how to register your Reddah Publisher membership via app. </Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Update your profile to be attractive</Title>
+          <ImageUrl>/Content/Images/wiki/ok_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/native/gyroscope</ArticleUrl>
+          <Description>Find out how to update your publisher profile, change your logo description, etc.</Description>
+        </FamilySubGroupContentLink>
+      </FamilySubGroupContent>
+      <FamilySubGroupContent>
+        <Title>Manage your publisher content</Title>
+        <FamilySubGroupContentLink>
+          <Title>Add materials and draft a article</Title>
+          <ImageUrl>/Content/Images/wiki/info_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/sys/dogfood</ArticleUrl>
+          <Description>Learn how to add or refer to a material (such as a photo) associated with your Reddah account.</Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Publish your articles</Title>
+          <ImageUrl>/Content/Images/wiki/info_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/sys/loadcompleted</ArticleUrl>
+          <Description>Learn how to publish your article and make it visible to the readers.</Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Manage or remove your articles</Title>
+          <ImageUrl>/Content/Images/wiki/info_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/wiki/Pages/api/native/vibration</ArticleUrl>
+          <Description>Learn how to manage comments and remove a post (such as a wrongly published article) from your publisher account.</Description>
         </FamilySubGroupContentLink>
       </FamilySubGroupContent>
     </FamilyGroupContent>
     <FamilyGroupContent>
-      <Title>Group 2</Title>
+      <Title>Reddah Mini App</Title>
       <FamilySubGroupContent>
-        <Title>Manage your Microsoft account</Title>
+        <Title>What membership activity do you need to complete?</Title>
         <FamilySubGroupContentLink>
           <Title>Manage Your Microsoft account</Title>
           <ImageUrl></ImageUrl>
