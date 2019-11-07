@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { InfiniteScroll, Content, Platform } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
@@ -15,6 +15,7 @@ import { VideoEditor } from '@ionic-native/video-editor/ngx'
 //import { AngularFireDatabase } from 'angularfire2/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 import { ChatFireBase } from './chat-fire.page';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @Component({
     selector: 'app-group-chat-fire',
@@ -34,6 +35,7 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
 
     constructor(
         public modalController: ModalController,
+        public popoverController: PopoverController,
         public reddah: ReddahService,
         public localStorageService: LocalStorageService,
         private cacheService: CacheService,
@@ -43,9 +45,11 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
         public platform: Platform,
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
+        public clipboard: Clipboard,
         //public db: AngularFireDatabase,
     ) { 
-        super(modalController, reddah, localStorageService, streamingMedia, videoEditor, platform);
+        super(modalController, popoverController, reddah, localStorageService, 
+            streamingMedia, videoEditor, platform, clipboard);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }

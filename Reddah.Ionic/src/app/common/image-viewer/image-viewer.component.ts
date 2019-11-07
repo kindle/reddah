@@ -5,7 +5,6 @@ import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
 import 'hammerjs';
 import { ReddahService } from '../../reddah.service';
-import { CacheService } from 'ionic-cache';
 import { TranslateService } from '@ngx-translate/core';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 

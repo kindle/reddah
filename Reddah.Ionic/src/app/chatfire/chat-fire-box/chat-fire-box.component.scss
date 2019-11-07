@@ -1,10 +1,12 @@
 .newChatComment {
     border: solid grey 0px;
     border-radius: 5px;
-    margin: 10px 10px;
+    margin: 6px 10px;
     padding: 0px 5px;
     --background: white;
     overflow: hidden;
+    font-size:large;
+    font-weight: normal;
 }
 
 .newChatCommentPress {

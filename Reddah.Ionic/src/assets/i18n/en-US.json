@@ -251,7 +251,8 @@
         "AddPhoto":"Add Material",
         "Copy":"Copy Image Address",
         "UserNotExist":"User does not exist",
-        "Document":"Document"
+        "Document":"Document",
+        "CopyChat":"Copy"
     },
 
     "Mail":{

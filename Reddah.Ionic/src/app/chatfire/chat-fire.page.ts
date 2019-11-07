@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Content, Platform } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
-import { CacheService } from "ionic-cache";
+import { ModalController, PopoverController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
 import { ChatOptPage } from '../chat/chat-opt/chat-opt.page';
@@ -15,7 +14,8 @@ import { ImageViewerComponent } from '../common/image-viewer/image-viewer.compon
 import { VideoViewerComponent } from '../common/video-viewer/video-viewer.component';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
-import { PubPage } from '../tabs/publisher/pub/pub.page';
+import { ChatPopPage } from '../common/chat-pop.page';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 export class ChatFireBase{
     
@@ -23,11 +23,13 @@ export class ChatFireBase{
 
     constructor(
         protected modalController: ModalController,
+        protected popoverController: PopoverController,
         protected reddah: ReddahService,
         protected localStorageService: LocalStorageService,
         protected streamingMedia: StreamingMedia,
         protected videoEditor: VideoEditor,
         protected platform: Platform,
+        protected clipboard: Clipboard,
     ){}
 
     userName: string;
@@ -130,6 +132,22 @@ export class ChatFireBase{
         this.lastScrollTop = currentScrollTop;
     }
 
+    async showChatMenu(ev: any, content){
+        const popover = await this.popoverController.create({
+            component: ChatPopPage,
+            event: ev,
+            cssClass: 'chat-pop-popover'
+        });
+
+        await popover.present();
+        const { data } = await popover.onDidDismiss();
+        
+        if(data==1)//copy
+        {
+            this.clipboard.copy(content);
+        }
+    }
+
 }
 
 @Component({
@@ -153,9 +171,9 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
 
     constructor(
         public modalController: ModalController,
+        public popoverController: PopoverController,
         public reddah: ReddahService,
         public localStorageService: LocalStorageService,
-        private cacheService: CacheService,
         private media: Media,
         private nativeAudio: NativeAudio,
         private transfer: FileTransfer, 
@@ -163,9 +181,11 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         public platform: Platform,
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
+        public clipboard: Clipboard,
         //public db: AngularFireDatabase,        
     ) { 
-        super(modalController, reddah, localStorageService, streamingMedia, videoEditor, platform);
+        super(modalController, popoverController, reddah, localStorageService, 
+            streamingMedia, videoEditor, platform, clipboard);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }

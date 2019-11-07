@@ -250,7 +250,8 @@
         "AddPhoto":"재질 추가",
         "Copy":"그림 주소 복사",
         "UserNotExist":"사용자가 존재하지 않습니다",
-        "Document":"파일"
+        "Document":"파일",
+        "CopyChat":"복제"
     },
 
     "Mail":{

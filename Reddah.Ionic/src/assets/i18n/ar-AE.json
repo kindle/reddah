@@ -247,7 +247,8 @@
         "AddPhoto":"مادة مضافة",
         "Copy":"نسخ عنوان الصورة",
         "UserNotExist":"المستخدم غير موجود",
-        "Document":"فايل"
+        "Document":"فايل",
+        "CopyChat":"نسخ"
     },
 
     "Mail":{

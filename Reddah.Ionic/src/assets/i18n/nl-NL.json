@@ -247,7 +247,8 @@
         "AddPhoto":"Materiaal toevoegen",
         "Copy":"Afbeeldadres kopiëren",
         "UserNotExist":"Gebruiker bestaat niet",
-        "Document":"Document"
+        "Document":"Document",
+        "CopyChat":"Kopiëren"
     },
 
     "Mail":{

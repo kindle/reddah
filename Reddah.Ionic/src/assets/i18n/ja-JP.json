@@ -248,7 +248,8 @@
         "AddPhoto":"材料を加える",
         "Copy":"コピー画像アドレス",
         "UserNotExist":"ユーザが存在しません",
-        "Document":"書類"
+        "Document":"書類",
+        "CopyChat":"コピー"
     },
 
     "Mail":{

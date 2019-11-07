@@ -250,7 +250,8 @@
         "AddPhoto":"添加素材",
         "Copy":"復制圖片地址",
         "UserNotExist":"用戶不存在",
-        "Document":"文檔"
+        "Document":"文檔",
+        "CopyChat":"復制"
     },
 
     "Mail":{

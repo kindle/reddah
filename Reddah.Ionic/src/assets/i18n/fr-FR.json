@@ -248,7 +248,8 @@
         "AddPhoto":"Matériau d 'addition",
         "Copy":"Copier l 'adresse d' image",
         "UserNotExist":"L 'utilisateur n' existe pas",
-        "Document":"Documentation"
+        "Document":"Documentation",
+        "CopyChat":"Copier"
     },
 
     "Mail":{

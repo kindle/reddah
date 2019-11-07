@@ -128,6 +128,7 @@ import { ChooseUserPage } from './common/choose-user/choose-user.page';
 import { ChatChooseGroupPage } from './chat/chat-choose-group/chat-choose-group.page';
 import { BookmarkPage } from './bookmark/bookmark.page';
 import { BookmarkPopPage } from './common/bookmark-pop.page';
+import { ChatPopPage } from './common/chat-pop.page';
 import { SigninPage } from './surface/signin/signin.page';
 import { ForgotPage } from './surface/forgot/forgot.page';
 import { SettingNickNamePage } from './settings/setting-nickname/setting-nickname.page'
@@ -166,7 +167,7 @@ var firebaseConfig = {
         ShareArticleComponent,ShareArticleChatComponent,ShareFaceComponent,
         AppComponent,
         BookmarkPage,
-        BookmarkPopPage,
+        BookmarkPopPage,ChatPopPage,
         LocalePage,LocationPage,MapPage,EarthPage,
         ChooseUserPage,ShareChooseChatPage,
         AddCommentPage,
@@ -228,7 +229,7 @@ var firebaseConfig = {
     ],
     entryComponents: [
         BookmarkPage,
-        BookmarkPopPage,
+        BookmarkPopPage,ChatPopPage,
         LocalePage,LocationPage,MapPage,EarthPage,
         ChooseUserPage,ShareChooseChatPage,
         PostviewerPage,

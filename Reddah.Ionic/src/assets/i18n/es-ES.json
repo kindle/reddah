@@ -247,7 +247,8 @@
         "AddPhoto":"Añadir material",
         "Copy":"Copiar dirección de imagen",
         "UserNotExist":"Usuario no existente",
-        "Document":"Documentación"
+        "Document":"Documentación",
+        "CopyChat":"Copiar"
     },
 
     "Mail":{

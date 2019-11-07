@@ -4,8 +4,6 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
-import { ChatPage } from '../../chat/chat.page';
-import { GroupChatPage } from '../../chat/group-chat.page';
 
 import { ChatFirePage } from '../../chatfire/chat-fire.page';
 import { GroupChatFirePage } from '../../chatfire/group-chat-fire.page';
@@ -63,6 +61,7 @@ export class MessageListPage implements OnInit {
         {
             let netMessages = data.Message?data.Message.reverse():[];//from last to newest
             netMessages.forEach((netMsg, indexN)=>{
+                console.log(netMsg)
                 netMsg.IsNew=isnew;
                 let found = false;
                 this.messages.forEach((localMsg, indexL)=>{
@@ -80,6 +79,12 @@ export class MessageListPage implements OnInit {
                 if(!found)
                 {
                     this.messages.unshift(netMsg);
+                    
+                    netMsg.GroupName.split(',').forEach((user, index)=>{
+                        if(user!=this.currentUserName){
+                            this.reddah.getUserPhotos(user);
+                        }
+                    });
                 }
             });
             this.localStorageService.store("Reddah_Local_Messages", this.messages);

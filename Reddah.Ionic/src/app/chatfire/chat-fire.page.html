@@ -33,7 +33,7 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                         class="portrait" (click)="goUser(comment.UserName)">
                     <div class="arrow-box-right" *ngIf="comment.Type==0">
                         <div style="margin-right:-45px;" *ngIf="comment.Id==null">*</div>
-                        <div class="chat-box-me" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                        <div class="chat-box-me" (press)="showChatMenu($event, comment.Content)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
                         <div class="chat-arrow-right" style="flex:auto 0;"></div>
                     </div>
                     <div class="arrow-box-right" *ngIf="comment.Type==4">
@@ -84,7 +84,7 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                         class="portrait" (click)="goUser(comment.UserName)">
                     <div style="display: flex;margin-left:5px;">
                         <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==0"></div>
-                        <div class="chat-box-others" *ngIf="comment.Type==0" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                        <div class="chat-box-others" *ngIf="comment.Type==0" (press)="showChatMenu($event, comment.Content)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
                         <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==4"></div>
                         <div class="chat-box-others-link" *ngIf="comment.Type==4">
                             <app-share-article-chat [abstract]="comment.Abstract"

@@ -431,7 +431,7 @@ export class MyTimeLinePage implements OnInit {
         const popover = await this.popoverController.create({
             component: ChangeCoverPopPage,
             translucent: true,
-            animated: false,
+            animated: true,
             cssClass: 'change-cover-popover',
         });
         await popover.present();
