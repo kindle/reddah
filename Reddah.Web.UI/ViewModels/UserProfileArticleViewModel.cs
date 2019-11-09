@@ -149,6 +149,50 @@
                                 PubName = u.NickName ?? u.UserName
                              })
                             .Take(pageCount);
+                    if (query.ToList().Count==0)
+                    {
+                        query = (from b in db.Articles
+                                 join u in db.UserProfiles on b.UserName equals u.UserName
+                                 where b.Status == userProfileModel.Status && b.LastUpdateType != 100 &&
+                                  !(loaded).Contains(b.Id) && !(disuser).Contains(b.UserName) &&
+                                    !b.GroupName.Contains(grp0) &&
+                                    !b.GroupName.Contains(grp1) &&
+                                    !b.GroupName.Contains(grp2) &&
+                                    !b.GroupName.Contains(grp3) &&
+                                    !b.GroupName.Contains(grp4) &&
+                                    !b.GroupName.Contains(grp5) &&
+                                    !b.GroupName.Contains(grp6) &&
+                                    !b.GroupName.Contains(grp7) &&
+                                    !b.GroupName.Contains(grp8) &&
+                                    !b.GroupName.Contains(grp9) &&
+                                    !b.GroupName.Contains(grp10)
+                                 orderby b.Count descending, b.LastUpdateOn descending
+                                 select new PubArticle()
+                                 {
+                                     Id = b.Id,
+                                     Title = b.Title,
+                                     Content = b.Content,
+                                     Abstract = b.Abstract,
+                                     CreatedOn = b.CreatedOn,
+                                     Up = b.Up,
+                                     Down = b.Down,
+                                     Count = b.Count,
+                                     UserName = b.UserName,
+                                     GroupName = b.GroupName,
+                                     Locale = b.Locale,
+                                     LastUpdateOn = b.LastUpdateOn,
+                                     Type = b.Type,
+                                     Ref = b.Ref,
+                                     Location = b.Location,
+                                     CreatedBy = b.CreatedBy,
+                                     LastUpdateBy = b.LastUpdateBy,
+                                     Status = b.Status,
+                                     LastUpdateContent = b.LastUpdateContent,
+                                     LastUpdateType = b.LastUpdateType,
+                                     PubName = u.NickName ?? u.UserName
+                                 })
+                            .Take(pageCount);
+                    }
                 }
                 else if (userProfileModel.Menu.Equals("hot", System.StringComparison.InvariantCultureIgnoreCase))
                 {
