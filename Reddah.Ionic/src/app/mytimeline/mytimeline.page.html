@@ -13,8 +13,8 @@
         <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
             <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
                 <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
-                <ion-label style="text-transform: none;">{{ 'Menu.Timeline' | translate }}</ion-label>
             </ion-button>
+            <ion-label style="text-transform: none;">{{ 'Menu.Timeline' | translate }}</ion-label>
             <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>

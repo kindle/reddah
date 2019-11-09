@@ -5,6 +5,7 @@ import { SurfacePage } from './surface/surface.page';
 import { ScanPage } from './common/scan/scan.page';
 import { MyTimeLinePage } from './mytimeline/mytimeline.page';
 import { AuthGuard } from './AuthGuard.service';
+import { SearchPage } from './common/search/search.page';
 
 const routes: Routes = [
     { 
@@ -20,6 +21,11 @@ const routes: Routes = [
     { 
         path: 'mytimeline', 
         component: MyTimeLinePage,
+        canActivate: [AuthGuard],
+    },
+    { 
+        path: 'search', 
+        component: SearchPage,
         canActivate: [AuthGuard],
     },
     { 

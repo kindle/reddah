@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../../reddah.service';
@@ -19,6 +19,7 @@ export class LocalePage implements OnInit {
         private modalController: ModalController,
         private translate: TranslateService,
         public reddah: ReddahService,
+        private zone: NgZone,
         ) {
     }
 
@@ -31,6 +32,7 @@ export class LocalePage implements OnInit {
         this.selectedLocale = selector;
         this.translate.use(selector);
         this.reddah.clearLocaleCache();
+        
         await this.modalController.dismiss(selector!==this.orgLocale);
     }
 

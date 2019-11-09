@@ -4,7 +4,7 @@
     </ion-button>
     <ion-input placeholder="{{keywordPlaceholder}}" #searchKeyword clearInput (keyup.enter)="search()" (ionChange)="onSearchchange()"></ion-input>
 </ion-item>
-<ion-content no-padding style="background-color: white;" #searchResult>
+<ion-content no-padding style="height:100%;background-color: white;" #searchResult>
     <ion-grid *ngIf="showTopic">
         <ion-row style="padding:10px;">
             <ion-col text-center>
@@ -87,7 +87,7 @@
                         <ion-avatar class="userPhoto" (click)="goPub(pub_recent)">
                             <img *ngIf="pub_recent.Photo" src="{{reddah.appData('userphoto_'+pub_recent.UserName, 'photo.svg')}}" class="recentPortrait">
                             <ion-icon *ngIf="!pub_recent.Photo" name="ios-list" color="tertiary" class="sub recentPortrait"></ion-icon>
-                        </ion-avatar>
+                        </ion-avatar><br>
                         <ion-label style="margin:3px 0 0 0;padding:3px 5px;width:75px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                             <img *ngIf="pub_recent.Photo" src="{{reddah.appData('userphoto_'+pub_recent.UserName, 'photo.svg')}}" 
                                 class="borderPortrait recentPortrait">
                             <ion-icon *ngIf="!pub_recent.Photo" name="infinite" color="tertiary" class="mini recentPortrait"></ion-icon>
-                        </ion-avatar>
+                        </ion-avatar><br>
                         <ion-label style="margin:0;padding:3px 5px;width:75px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                             <img *ngIf="pub_sgg.Photo" src="{{reddah.appData('userphoto_'+pub_sgg.UserName, 'photo.svg')}}" 
                                 class="borderPortrait recentPortrait">
                             <ion-icon *ngIf="!pub_sgg.Photo" name="infinite" color="tertiary" class="mini recentPortrait"></ion-icon>
-                        </ion-avatar>
+                        </ion-avatar><br>
                         <ion-label style="margin:0;padding:3px 5px;width:75px;color:gray;" text-center>{{pub_sgg.NickName}}</ion-label>
                     </div>
                 </div>

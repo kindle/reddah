@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { NavController } from '@ionic/angular';
@@ -12,7 +12,7 @@ import { PlatformPage } from '../publisher/platform/platform.page';
 import { TimelinePopPage } from '../../common/timeline-pop.page';
 import { AddTimelinePage } from '../../mytimeline/add-timeline/add-timeline.page';
 import { MessageListPage } from '../../tabs/message/message.page'
-import { ReportPage } from '../../mytimeline/report/report.page';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-about',
@@ -32,6 +32,9 @@ export class AboutPage implements OnInit {
         public reddah: ReddahService,
         public authService: AuthService,
         public translateService: TranslateService,
+        private translate: TranslateService,
+        private router: Router,
+        private zone: NgZone,
     ) {
         this.userName = "Not Set";
         this.userName = this.localStorageService.retrieve("Reddah_CurrentUser");
@@ -52,13 +55,18 @@ export class AboutPage implements OnInit {
     }
 
     async goSettings(){
+        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
         const modal = await this.modalController.create({
             component: SettingListPage,
-            componentProps: {},
+            componentProps: {currentLocale:currentLocale},
             cssClass: "modal-fullscreen",
         });
         
         await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            this.authService.logout();
+        }
     }
     
     async myInfo() {

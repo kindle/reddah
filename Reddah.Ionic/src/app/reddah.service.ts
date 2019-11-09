@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import {
@@ -13,7 +13,7 @@ import { Locale } from './model/locale';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
+import { AlertController, LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
 import { TranslateService } from '@ngx-translate/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -35,11 +35,13 @@ export class ReddahService {
         private file: File,
         private toastController: ToastController,
         private modalController: ModalController,
+        private alertController: AlertController,
         private platform: Platform,
         private cacheService: CacheService,
         private translate: TranslateService,
         private iab: InAppBrowser,
         private router: Router,
+        private ngZone: NgZone,
     ) { }
 
     //******************************** */
@@ -2034,12 +2036,11 @@ export class ReddahService {
             window.location.reload();
         }
         else{
-            this.modalController.dismiss()
-            this.router.navigate([''], {
-                queryParams: {
-                    action: 'login'
-                }
-            });
+            //this.modalController.dismiss();
+            
+            //this.router.navigate([''])
+            
         }
-    }
+    }  
+
 }

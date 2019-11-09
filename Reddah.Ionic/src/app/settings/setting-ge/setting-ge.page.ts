@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, NgZone } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
@@ -17,6 +17,7 @@ export class SettingGePage implements OnInit {
 
     userName;
     locale;
+    @Input() currentLocale;
     
     constructor(
         private modalController: ModalController,
@@ -25,6 +26,7 @@ export class SettingGePage implements OnInit {
         private cacheService: CacheService,
         public authService: AuthService,
         private translate: TranslateService,
+        private zone: NgZone,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
@@ -60,19 +62,24 @@ export class SettingGePage implements OnInit {
 
     currentLocaleInfo;
     async changeLocale(){
-        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
         const changeLocaleModal = await this.modalController.create({
             component: LocalePage,
-            componentProps: { orgLocale: currentLocale },
+            componentProps: { orgLocale: this.currentLocale },
             cssClass: "modal-fullscreen",
         });
         
         await changeLocaleModal.present();
         const { data } = await changeLocaleModal.onDidDismiss();
         if(data){
-            //let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-            //this.translate.setDefaultLang(currentLocale);
-            this.reddah.windowReload();
+            this.zone.run(()=>{
+                let newLocale = this.localStorageService.retrieve("Reddah_Locale");
+                this.translate.setDefaultLang(newLocale);
+                
+                this.reddah.Locales.forEach((value, index, arr)=>{
+                    if(newLocale===value.Name)
+                        this.currentLocaleInfo = value.Description;
+                });
+            })
         }
     }
 
@@ -84,7 +91,9 @@ export class SettingGePage implements OnInit {
         this.localStorageService.store("reddah_article_groups", JSON.stringify([]));
         this.localStorageService.store("reddah_article_usernames", JSON.stringify([]));
         this.cacheService.clearGroup("HomePage");
+        //clear pub history
         this.localStorageService.clear(`Reddah_Recent_3`);
+        //clear mini history
         this.localStorageService.clear(`Reddah_Recent_4`);
         //this.localStorageService.clear(); //this will force logout
         this.reddah.toast(this.translate.instant("Common.CacheClear"));

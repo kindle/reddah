@@ -1,7 +1,7 @@
 <ion-item no-padding lines="none" color="light">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton" *ngIf="back"></ion-icon>
     <ion-title style="font-weight: bold;">{{ title | translate }}</ion-title>
-    <ion-button clear slot="end" color="light" (click)="goSearch()" style="--box-shadow: none;">
+    <ion-button clear slot="end" color="light"  href="/search" detail="false" style="--box-shadow: none;">
         <ion-icon slot="icon-only" is-active="false" name="ios-search"></ion-icon>
     </ion-button>
     <ion-button clear slot="end" color="light" (click)="add($event)" style="--box-shadow: none;">

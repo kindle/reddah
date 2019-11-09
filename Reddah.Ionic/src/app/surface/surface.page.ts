@@ -33,9 +33,14 @@ export class SurfacePage implements OnInit {
         private authService: AuthService,
         private localStorageService: LocalStorageService,
         private translate: TranslateService,
-    ) {}
+    ) {
+        
+    }
 
     ngOnInit() {
+        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+        this.translate.setDefaultLang(currentLocale);
+        this.translate.use(currentLocale);
         this.init(null);
     }
 

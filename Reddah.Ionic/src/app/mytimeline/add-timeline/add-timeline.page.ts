@@ -7,7 +7,6 @@ import { File, FileEntry } from '@ionic-native/file/ngx';
 import { ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
-import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { DragulaService } from 'ng2-dragula';
@@ -27,10 +26,7 @@ export class AddTimelinePage implements OnInit {
     constructor(
         private popoverController: PopoverController,
         private reddah: ReddahService,
-        private navController: NavController,
-        private file: File,
         private loadingController: LoadingController,
-        private activatedRoute: ActivatedRoute,
         private translate: TranslateService,
         private cacheService: CacheService,
         private localStorageService: LocalStorageService,

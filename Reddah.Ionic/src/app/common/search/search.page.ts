@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
-import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
 import { ReddahService } from '../../reddah.service';
 import { Article } from "../../model/article";
@@ -10,6 +9,7 @@ import { StockPage } from '../stock/stock.page';
 import { TsViewerPage } from '../../mytimeline/tsviewer/tsviewer.page';
 import { PubPage } from '../../tabs/publisher/pub/pub.page';
 import { MiniViewerComponent } from '../mini-viewer/mini-viewer.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-search',
@@ -64,12 +64,14 @@ export class SearchPage implements OnInit {
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
-        private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         private translate: TranslateService,
+        public navController: NavController,
+        private router: ActivatedRoute,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
+        this.type = this.router.snapshot.queryParams["type"];
     }
 
     @ViewChild('searchKeyword') searchKeyword;
@@ -107,6 +109,7 @@ export class SearchPage implements OnInit {
     }
 
     async more(type){
+        this.locale = this.reddah.getCurrentLocale();
         this.key = this.searchKeyword.value;
         this.type = type;
         this.ngOnInit(); 
@@ -114,7 +117,16 @@ export class SearchPage implements OnInit {
     }
 
     async close() {
-        await this.modalController.dismiss();
+        // close modal
+        try {
+            const element = await this.modalController.getTop();
+            if (element) {
+                element.dismiss();
+                return;
+            }
+        } catch (error) {
+        }
+        this.navController.goBack(true);
     }
 
     async onSearchchange(){
@@ -219,7 +231,7 @@ export class SearchPage implements OnInit {
     loadedIds_a=[];
     articles_a=[];
     async searchArticles(event, limit=10000){
-        
+        this.locale = this.reddah.getCurrentLocale();
         let cacheKey = "this.reddah.searchArticles" + JSON.stringify(this.loadedIds_a) + this.locale + "search_article"+this.searchKeyword.value;
         let request = this.reddah.getArticles(this.loadedIds_a, [], [], this.locale, "search", this.searchKeyword.value, 1, "", 0);
         //console.log(cacheKey);
@@ -251,7 +263,7 @@ export class SearchPage implements OnInit {
     loadedIds_t=[];
     articles_t=[];
     async searchTimelines(event, limit=10000){
-        
+        this.locale = this.reddah.getCurrentLocale();
         let cacheKey = "this.reddah.searchTimelines" + JSON.stringify(this.loadedIds_t) + this.locale + "search_timeline"+this.searchKeyword.value;
         //status=0 as there's no draft for timeline
         let request = this.reddah.getArticles(this.loadedIds_t, [], [], this.locale, "search", this.searchKeyword.value, 0, "", 1);
@@ -284,7 +296,7 @@ export class SearchPage implements OnInit {
     loadedIds_p=[];
     users_p=[];
     async searchPublisher(event, limit=10000){
-        
+        this.locale = this.reddah.getCurrentLocale();
         let cacheKey = "this.reddah.searchPublisher" + JSON.stringify(this.loadedIds_p) + this.locale + "search_publisher"+this.searchKeyword.value;
         let formData = new FormData();
         formData.append("key", this.searchKeyword.value);
@@ -315,7 +327,7 @@ export class SearchPage implements OnInit {
     loadedIds_m=[];
     users_m=[];
     async searchMini(event, limit=10000){
-        
+        this.locale = this.reddah.getCurrentLocale();
         let cacheKey = "this.reddah.searchMini" + JSON.stringify(this.loadedIds_m) + this.locale + "search_publisher"+this.searchKeyword.value;
         let formData = new FormData();
         formData.append("key", this.searchKeyword.value);

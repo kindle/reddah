@@ -3,9 +3,11 @@ import { ReddahService } from './reddah.service';
 import { SigninPage } from './surface/signin/signin.page';
 import { RegisterPage } from './surface/register/register.page';
 import { SurfacePage } from './surface/surface.page';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { CacheService } from 'ionic-cache';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class AuthService {
@@ -15,6 +17,9 @@ export class AuthService {
         private reddahService: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
+        private platform: Platform,
+        private router: Router,
+        private translate: TranslateService,
     ){}
 
     authenticated(): boolean {
@@ -95,13 +100,21 @@ export class AuthService {
         this.localStorageService.clear("Reddah_Local_Messages");
         //this.localStorageService.clear();
         
-        this.reddahService.windowReload();
-        
-        //this.router.navigate(['/surface'], {
-        //    queryParams: {
-        //    }
-        //});
-        
+        if(this.platform.is('android')){
+            window.location.reload();
+        }
+        else{
+            this.modalController.dismiss();
+
+            let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+            this.translate.setDefaultLang(currentLocale);
+            this.translate.use(currentLocale);
+
+            this.router.navigate(['/surface'], {
+                queryParams: {
+                }
+            });
+        }
     }
 
 

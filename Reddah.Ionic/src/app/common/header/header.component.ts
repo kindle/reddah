@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { ModalController, PopoverController, Platform } from '@ionic/angular';
 import { SearchPage } from '../search/search.page';
 import { HeaderAddPage } from '../header-add-pop.page';
+import { LocalStorageService } from 'ngx-webstorage';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-header',
@@ -17,16 +19,22 @@ export class HeaderComponent {
         private modalController: ModalController,
         private popoverController: PopoverController,
         private platform: Platform,
-    ) { }
+        private localStorageService: LocalStorageService,
+        private translate: TranslateService,
+    ) { 
+        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+        this.translate.setDefaultLang(currentLocale);
+        this.translate.use(currentLocale);
+    }
 
     async goSearch(){
-        const userModal = await this.modalController.create({
+        const modal = await this.modalController.create({
             component: SearchPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
         });
-          
-        await userModal.present();
+        
+        await modal.present();
     }
 
     async add(ev: any) {

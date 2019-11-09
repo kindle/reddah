@@ -7,7 +7,7 @@ import { JsonpModule } from '@angular/http';
 import { AlertController, ActionSheetController, 
          IonicModule, IonicRouteStrategy, IonRouterOutlet,
          Platform, PopoverController,
-         ModalController, MenuController } from '@ionic/angular';
+         ModalController, MenuController, NavController } from '@ionic/angular';
 
 
 import { AppVersion } from '@ionic-native/app-version/ngx';
@@ -311,6 +311,7 @@ var firebaseConfig = {
     ],
     providers: [
         ActionSheetController,
+        NavController,
         AppVersion,
         AppUpdate,
         AlertController,

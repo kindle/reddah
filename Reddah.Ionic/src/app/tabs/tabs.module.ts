@@ -11,9 +11,13 @@ import { AboutPageModule } from './about/about.module';
 import { FindPageModule } from './find/find.module';
 import { HomePageModule } from './home/home.module';
 //import { MessagePageModule } from './message/message.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { PublisherPageModule } from './publisher/publisher.module';
 import { DirectivesModule } from '../directives.module';
+import { HttpLoaderFactory } from '../app.module';
+import { HttpClient } from '@angular/common/http';
+
+import { NavParams } from '@ionic/angular';
 
 @NgModule({
   imports: [
@@ -27,13 +31,19 @@ import { DirectivesModule } from '../directives.module';
       FindPageModule,
       ContactPageModule,
       PublisherPageModule,
-      TranslateModule.forChild(),
+      TranslateModule.forRoot({
+          loader: {
+              provide: TranslateLoader,
+              useFactory: HttpLoaderFactory,
+              deps: [HttpClient]
+          }
+      }),
       DirectivesModule,
   ],
   declarations: [
       TabsPage
   ],
   exports:[
-  ]
+  ],
 })
 export class TabsPageModule {}

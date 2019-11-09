@@ -20,6 +20,7 @@ export class SettingListPage implements OnInit {
 
     userName;
     locale;
+    @Input() currentLocale;
     
     constructor(
         private modalController: ModalController,
@@ -98,11 +99,15 @@ export class SettingListPage implements OnInit {
     async goGeneral(){
         const modal = await this.modalController.create({
             component: SettingGePage,
-            componentProps: {},
+            componentProps: {currentLocale:this.currentLocale},
             cssClass: "modal-fullscreen",
         });
         
         await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            this.modalController.dismiss(data);
+        }
     }
 
     async goMyReport() {

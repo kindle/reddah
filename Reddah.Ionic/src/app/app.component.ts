@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewChildren,QueryList } from '@angular/core';
+import { Component, ViewChild, ViewChildren,QueryList, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform, ModalController, AlertController, ActionSheetController, PopoverController, IonRouterOutlet, MenuController, LoadingController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -41,6 +41,7 @@ export class AppComponent {
         private androidPermissions: AndroidPermissions,
         private reddah: ReddahService,
         private authService: AuthService,
+        private zone: NgZone,
         //private firebase: Firebase,
     ) {
         try{
@@ -68,8 +69,7 @@ export class AppComponent {
         let defaultLocale ="en-US"
         if(currentLocale==null){
             if(this.platform.is('cordova'))
-            {
-                
+            { 
                 Globalization.getPreferredLanguage()
                 .then(res => {
                     this.localStorageService.store("Reddah_Locale", res.value);
@@ -83,11 +83,15 @@ export class AppComponent {
             else{
                 this.localStorageService.store("Reddah_Locale", defaultLocale);
                 this.translate.setDefaultLang(defaultLocale);
+                this.translate.use(defaultLocale);
             }
 
         }
         else{
-            this.translate.setDefaultLang(currentLocale);
+            this.zone.run(()=>{
+                this.translate.setDefaultLang(currentLocale);
+                this.translate.use(currentLocale);
+            })
         }
 
         this.platform.ready().then(() => {
