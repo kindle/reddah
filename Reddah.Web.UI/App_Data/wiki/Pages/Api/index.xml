@@ -7,10 +7,22 @@
       <FamilySubGroupContent>
         <Title>What your need to know before start?</Title>
         <FamilySubGroupContentLink>
-          <Title>Content Policy</Title>
-          <ImageUrl>/Content/Images/wiki/alert_icon25x25.png</ImageUrl>
-          <ArticleUrl>t/wiki/Pages/api/sys/dogfood</ArticleUrl>
+          <Title>Privacy Policy</Title>
+          <ImageUrl>/Content/Images/wiki/info_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/help/privacypolicy</ArticleUrl>
+          <Description>We want you to understand how and why Reddah collects, uses, and shares information about you when you access and use Reddah’s websites, mobile apps, widgets, and other online products and services (collectively, the "Services") or when you otherwise interact with us.</Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>User Agreement</Title>
+          <ImageUrl>/Content/Images/wiki/info_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/help/useragreement</ArticleUrl>
           <Description>Reddah will power thousands of distinct online communities. these terms and your conduct make that possible.</Description>
+        </FamilySubGroupContentLink>
+        <FamilySubGroupContentLink>
+          <Title>Content Policy</Title>
+          <ImageUrl>/Content/Images/wiki/info_icon25x25.png</ImageUrl>
+          <ArticleUrl>t/help/contentpolicy</ArticleUrl>
+          <Description>Reddah is a platform for communities to discuss, connect, and share in an open environment. While participating, it’s important to keep in mind this value above all others: show enough respect to others so that we all may continue to enjoy Reddah for what it is.</Description>
         </FamilySubGroupContentLink>
       </FamilySubGroupContent>
       <FamilySubGroupContent>
@@ -18,7 +30,7 @@
         <FamilySubGroupContentLink>
           <Title>Register publisher Membership</Title>
           <ImageUrl>/Content/Images/wiki/ok_icon25x25.png</ImageUrl>
-          <ArticleUrl>t/wiki/Pages/api/sys/register</ArticleUrl>
+          <ArticleUrl>t/wiki/Pages/api/article/register</ArticleUrl>
           <Description>Learn how to register your Reddah Publisher membership via app. </Description>
         </FamilySubGroupContentLink>
         <FamilySubGroupContentLink>
