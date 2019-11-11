@@ -1,8 +1,3 @@
-<html>
-    <head>
-        <meta http-equiv="content-type" content="text/JavaScript;charset=utf-8" />
-    </head>
-
 <div class="top-bar">
     <button class="button level-select-button" id="id_levels">Levels</button>
 </div>
@@ -11,13 +6,13 @@
 
 <canvas></canvas>
 <p class="instruction"></p>
-<button class="button next-level-button">Next level</button>
+<button class="button next-level-button" id="id_next">Next level</button>
 
 <div class="levels">
 
     <pre id="intro-fixed1" data-blurb="Tutorial">
 blurb: Tutorial
-instruction: Drag cub to star
+instruction: <span id="id_ins1">Drag cub to star</span>
 ---
 *=.=.
     !
@@ -28,7 +23,7 @@ instruction: Drag cub to star
 
     <pre id="intro-fixed2" data-blurb="Tutorial">
 blurb: Tutorial
-instruction: Drag grid to rotate. Cub and star moves with grid. Orange links stay in place.
+instruction: <span id="id_ins2">Drag grid to rotate. Cub and star moves with grid. Orange links stay in place.</span>
 ---
 * . .
     !
@@ -37,8 +32,8 @@ instruction: Drag grid to rotate. Cub and star moves with grid. Orange links sta
 @=.=.
 </pre>
 
-    <pre id="intro-fixed3" data-blurb="��">
-blurb: ��
+    <pre id="intro-fixed3" data-blurb="?">
+blurb: ?
 ---
 @=. .
 
@@ -49,7 +44,7 @@ blurb: ��
 
     <pre id="intro-free1" data-blurb="Tutorial">
 blurb: Tutorial
-instruction: Blue links move with grid. Rotate grid to connect blue and orange links in different ways.
+instruction: <span id="id_ins3">Blue links move with grid. Rotate grid to connect blue and orange links in different ways.</span>
 ---
 @-. .
 !   | 
@@ -58,8 +53,8 @@ instruction: Blue links move with grid. Rotate grid to connect blue and orange l
 *-.-.
 </pre>
 
-    <pre id="m3x3-2-med" data-blurb="��">
-blurb: ��
+    <pre id="m3x3-2-med" data-blurb="?">
+blurb: ?
 ---
 . . *
 | | | 
@@ -68,8 +63,8 @@ blurb: ��
 @ .=.
 </pre>
 
-    <pre id="m3x3-fixed-switch" data-blurb="��">
-blurb: ��
+    <pre id="m3x3-fixed-switch" data-blurb="?">
+blurb: ?
 ---
 *=.-.
  
@@ -78,8 +73,8 @@ blurb: ��
 @-. .
 </pre>
 
-    <pre id="m4x4-2" data-blurb="��">
-blurb: ��
+    <pre id="m4x4-2" data-blurb="?">
+blurb: ?
 ---
 . .=. .
   | !  
@@ -90,8 +85,8 @@ blurb: ��
 . @-. .
 </pre>
 
-    <pre id="m4x4-1" data-blurb="��">
-blurb: ��
+    <pre id="m4x4-1" data-blurb="?">
+blurb: ?
 ---
 . . . .
        
@@ -102,8 +97,8 @@ blurb: ��
 . . . .
 </pre>
 
-    <pre id="m4x4-3" data-blurb="��">
-blurb: ��
+    <pre id="m4x4-3" data-blurb="?">
+blurb: ?
 ---
 . @ . .
 ! |    
@@ -114,8 +109,8 @@ blurb: ��
 . * . .
 </pre>
 
-    <pre id="m4x4-4" data-blurb="��">
-blurb: ��
+    <pre id="m4x4-4" data-blurb="?">
+blurb: ?
 ---
 . . . .
        
@@ -126,8 +121,8 @@ blurb: ��
 .=.=. @
 </pre>
 
-    <pre id="m4x4-5" data-blurb="��">
-blurb: ��
+    <pre id="m4x4-5" data-blurb="?">
+blurb: ?
 ---
 .-.-.-.
 |       
@@ -138,8 +133,8 @@ blurb: ��
 .-.-. .
 </pre>
 
-    <pre id="m4x4-6-med" data-blurb="��">
-blurb: ��
+    <pre id="m4x4-6-med" data-blurb="?">
+blurb: ?
 ---
 . * . .
 
@@ -150,8 +145,8 @@ blurb: ��
 .=. @ .
 </pre>
 
-    <pre id="m4x4-7-hard1" data-blurb="���">
-blurb: ���
+    <pre id="m4x4-7-hard1" data-blurb="??">
+blurb: ??
 ---
 . . *-.
        
@@ -162,8 +157,8 @@ blurb: ���
 @-.-.=.
 </pre>
 
-    <pre id="m4x4-8-hard2" data-blurb="���">
-blurb: ���
+    <pre id="m4x4-8-hard2" data-blurb="??">
+blurb: ??
 ---
 .-@ .=.
        
@@ -174,8 +169,8 @@ blurb: ���
 . .=.-.
 </pre>
 
-    <pre id="m4x4-9-hard1" data-blurb="���">
-blurb: ���
+    <pre id="m4x4-9-hard1" data-blurb="??">
+blurb: ??
 ---
 . . .=.
   !    
@@ -186,8 +181,8 @@ blurb: ���
 . . * .
 </pre>
 
-    <pre id="m4x4-10-hard1" data-blurb="���">
-blurb: ���
+    <pre id="m4x4-10-hard1" data-blurb="??">
+blurb: ??
 ---
 . @=. .
   |   
@@ -198,7 +193,7 @@ blurb: ���
 . * . .
 </pre>
 
-    <pre id="m5x5-3" data-blurb="��">
+    <pre id="m5x5-3" data-blurb="?">
 . . . . .
   | !   
 . . .-. .
@@ -210,7 +205,7 @@ blurb: ���
 . @ . . .
 </pre>
 
-    <pre id="m5x5-1" data-blurb="��">
+    <pre id="m5x5-1" data-blurb="?">
 @-.-. .-.
     |    
 . . . . .
@@ -222,7 +217,7 @@ blurb: ���
 . .=.-* .
 </pre>
 
-    <pre id="m5x5-2" data-blurb="���">
+    <pre id="m5x5-2" data-blurb="??">
 . . . . .
         
 . .=.-. @
@@ -234,7 +229,7 @@ blurb: ���
 * . . . .
 </pre>
 
-    <pre id="m5x5-4" data-blurb="���">
+    <pre id="m5x5-4" data-blurb="??">
 . . . .-.
       ! 
 . .-. . .
@@ -246,7 +241,7 @@ blurb: ���
 .-@=. .=.
 </pre>
 
-    <pre id="m5x5-5" data-blurb="���">
+    <pre id="m5x5-5" data-blurb="??">
 . . . . .
 
 . . .-. *
@@ -258,7 +253,7 @@ blurb: ���
 . @-. . .
 </pre>
 
-    <pre id="m5x5-6" data-blurb="���">
+    <pre id="m5x5-6" data-blurb="??">
 . . .-.-.
 !   !    
 . .=.-. .
@@ -270,7 +265,7 @@ blurb: ���
 .=. .-.=.
 </pre>
 
-    <pre id="m5x5-7" data-blurb="����">
+    <pre id="m5x5-7" data-blurb="???">
 .=* . @=.
 |
 . .=. . .
@@ -282,7 +277,7 @@ blurb: ���
 . .-.-. .
 </pre>
 
-    <pre id="m5x5-8" data-blurb="����">
+    <pre id="m5x5-8" data-blurb="???">
 . * . .-.
   |     
 . . .=.-.
@@ -294,7 +289,7 @@ blurb: ���
 . . .=.-@
 </pre>
 
-    <pre id="m5x5-9" data-blurb="����">
+    <pre id="m5x5-9" data-blurb="???">
 .-.-. . .
     |    
 . . . .-@
@@ -306,7 +301,7 @@ blurb: ���
 . . .=. .
 </pre>
 
-    <pre id="m5x5-10" data-blurb="���">
+    <pre id="m5x5-10" data-blurb="??">
 . . . . .
          
 . . . .-@
@@ -318,7 +313,7 @@ blurb: ���
 . . . . .
 </pre>
 
-    <pre id="m5x5-11" data-blurb="����">
+    <pre id="m5x5-11" data-blurb="???">
 . . . .=.
   |     
 . . . .=.
@@ -330,7 +325,7 @@ blurb: ���
 .-@ . * .
 </pre>
 
-    <pre id="m5x5-12" data-blurb="���">
+    <pre id="m5x5-12" data-blurb="??">
 . . .=.=.
         
 . . . . .
@@ -342,7 +337,7 @@ blurb: ���
 * . .=.=.
 </pre>
 
-    <pre id="m6x6-1-hard1" data-blurb="����">
+    <pre id="m6x6-1-hard1" data-blurb="???">
 . . * . . .
   ! | |  
 . .-. .-. .
@@ -356,7 +351,7 @@ blurb: ���
 . .=. . .-.
 </pre>
 
-    <pre id="m6x6-2" data-blurb="����">
+    <pre id="m6x6-2" data-blurb="???">
 @ .=. . .=.
   | | !
 . . . .=. .
@@ -370,7 +365,7 @@ blurb: ���
 .-. . . .=.
 </pre>
 
-    <pre id="m6x6-3" data-blurb="����">
+    <pre id="m6x6-3" data-blurb="???">
 .=. .=.-.-*
   |        
 .-. . . . .
@@ -385,7 +380,7 @@ blurb: ���
 </pre>
 
     <pre id="pivot-4x4-intro" data-blurb="Tutorial">
-instruction: Green links pivot with grid, but point in the same direction
+instruction: <span id="id_ins4">Green links pivot with grid, but point in the same direction</span>
 ---
 . .-* .
   |    
@@ -396,7 +391,7 @@ instruction: Green links pivot with grid, but point in the same direction
 . @ . .
 </pre>
 
-    <pre id="pivot-5x5-2" data-blurb="���">
+    <pre id="pivot-5x5-2" data-blurb="??">
 . . .-.-@
         
 . .<. . .
@@ -408,7 +403,7 @@ instruction: Green links pivot with grid, but point in the same direction
 . . . . .
 </pre>
 
-    <pre id="pivot-5x5-swirly" data-blurb="����">
+    <pre id="pivot-5x5-swirly" data-blurb="???">
 . . . . .
       ^ 
 .<. . . *
@@ -420,7 +415,7 @@ instruction: Green links pivot with grid, but point in the same direction
 . . . . .
 </pre>
 
-    <pre id="pivot-5x5-1" data-blurb="����">
+    <pre id="pivot-5x5-1" data-blurb="???">
 . .-. . .
       ^ 
 . .<.=.=.
@@ -432,7 +427,7 @@ instruction: Green links pivot with grid, but point in the same direction
 . . . . .
 </pre>
 
-    <pre id="pivot-5x5-3" data-blurb="���">
+    <pre id="pivot-5x5-3" data-blurb="??">
 .=. . .-*
     v   
 . . . . .
@@ -444,7 +439,7 @@ instruction: Green links pivot with grid, but point in the same direction
 .<. . . .
 </pre>
 
-    <pre id="pivot-5x5-4" data-blurb="����">
+    <pre id="pivot-5x5-4" data-blurb="???">
 .-.-. @>.
 !     ^ 
 . . . . .
@@ -456,7 +451,7 @@ instruction: Green links pivot with grid, but point in the same direction
 . . .-. .>
 </pre>
 
-    <pre id="pivot-5x5-5" data-blurb="����">
+    <pre id="pivot-5x5-5" data-blurb="???">
 .-. . . *
         
 . .>. . .
@@ -468,7 +463,7 @@ instruction: Green links pivot with grid, but point in the same direction
 @=.=. . .
 </pre>
 
-    <pre id="pivot-5x5-6" data-blurb="����">
+    <pre id="pivot-5x5-6" data-blurb="???">
 . . .>. .
   ! |    
 @=. .-. .
@@ -480,7 +475,7 @@ instruction: Green links pivot with grid, but point in the same direction
 . *>.<. .
 </pre>
 
-    <pre id="pivot-5x5-7" data-blurb="����">
+    <pre id="pivot-5x5-7" data-blurb="???">
 * . @ . .
 v   |   
 . . . . .
@@ -493,7 +488,7 @@ v   |
     v
 </pre>
 
-    <pre id="pivot-6x6-1" data-blurb="����">
+    <pre id="pivot-6x6-1" data-blurb="???">
 . . . . . .
 | v         
 @ . . . . *
@@ -507,7 +502,7 @@ v
 .>. . . . .
 </pre>
 
-    <pre id="pivot-6x6-3" data-blurb="����">
+    <pre id="pivot-6x6-3" data-blurb="???">
 . @-. .>.-.
           
 . . . . . .
@@ -521,7 +516,7 @@ v
 . .=. . .=.>
 </pre>
 
-    <pre id="pivot-6x6-2" data-blurb="����">
+    <pre id="pivot-6x6-2" data-blurb="???">
 . .-.-. .=.
       v   
 . . . . . .
@@ -537,5 +532,3 @@ v
 
 
 </div>
-
-</html>

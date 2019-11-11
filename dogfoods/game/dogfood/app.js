@@ -1,4 +1,4 @@
-/**
+﻿/**
  * EvEmitter v1.0.2
  * Lil' event emitter
  * MIT License
@@ -1436,39 +1436,47 @@ function loadLevel(id) {
 // ----- init ----- //
 
 var initialLevel = localStorage.getItem('currentLevel') || levels[0];
+loadLocalization();
 loadLevel(initialLevel);
 
 unipointer.bindStartEvent(canvas);
 window.addEventListener('mousemove', onHoverMousemove);
 animate();
-loadLocalization();
+//loadLocalization();
 window["reddahApi"].loadCompleted();
 
 //----localization-----//
 
 function loadLocalization(){
-    let localeStrings = {
+	let localeStrings = {
         "en-US":{
             "levels":"Levels",
+			"next":"Next Level",
             "tutorial":"Tutorial",
             "instruction1":"Drag cub to star",
             "instruction2":"Drag grid to rotate. Cub and star moves with grid. Orange links stay in place.",
             "instruction3":"Blue links move with grid. Rotate grid to connect blue and orange links in different ways",
-            "instruction4":"Green links pivot with grid, but point in the same direction",
+            "instruction4":"Green links pivot with grid, but point in the same direction"
         },
         "zh-CN":{
             "levels":"关卡",
+			"next":"下一关",
             "tutorial":"教程",
             "instruction1":"拖动小狗吃星星",
             "instruction2":"拖动格子旋转。小狗和星星都跟着格子旋转，棕色的连线保持不变。",
             "instruction3":"蓝色连线跟着格子旋转。旋转格子可以使蓝色连线和棕色连线连在一起。",
-            "instruction4":"绿线可以用来中转，但它的朝向始终不变。",
+            "instruction4":"绿线可以用来中转，但它的朝向始终不变。"
         }
     }
 
+	
     let currentLocale = window["reddahApi"].Locale;
     document.getElementById("id_levels").innerHTML = localeStrings[currentLocale].levels;
-
+	document.getElementById("id_next").innerHTML = localeStrings[currentLocale].next;
+	document.getElementById("id_ins1").innerHTML = localeStrings[currentLocale].instruction1;
+	document.getElementById("id_ins2").innerHTML = localeStrings[currentLocale].instruction2;
+	document.getElementById("id_ins3").innerHTML = localeStrings[currentLocale].instruction3;
+	document.getElementById("id_ins4").innerHTML = localeStrings[currentLocale].instruction4;
 }
 
 // -------------------------- drag rotation -------------------------- //

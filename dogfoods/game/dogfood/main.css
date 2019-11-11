@@ -53,7 +53,7 @@ canvas {
 .top-bar {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 10px;
 }
 .level-select-button {
     position: relative;
