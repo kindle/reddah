@@ -366,9 +366,10 @@
     <Content Include="App_Data\wiki\Images\StartMenu.png" />
     <Content Include="App_Data\wiki\Images\twitter.png" />
     <Content Include="App_Data\wiki\Pages\Api\index.xml" />
-    <Content Include="App_Data\wiki\Pages\Api\sys\dogfood.xml" />
-    <Content Include="App_Data\wiki\Pages\Api\sys\register.xml" />
-    <Content Include="App_Data\wiki\Pages\Api\sys\loadcompleted.xml" />
+    <Content Include="App_Data\wiki\Pages\Api\article\dogfood.xml" />
+    <Content Include="App_Data\wiki\Pages\Api\article\register.xml" />
+    <Content Include="App_Data\wiki\Pages\Api\article\loadcompleted.xml" />
+    <Content Include="App_Data\wiki\Pages\Api\mini\register.xml" />
     <Content Include="App_Data\wiki\Pages\Api\native\gyroscope.xml" />
     <Content Include="App_Data\wiki\Pages\Api\native\vibration.xml" />
     <Content Include="App_Data\wiki\Pages\Apps\Demo\BailinBlocks\NavigationList.xml" />
