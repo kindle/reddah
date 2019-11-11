@@ -1445,10 +1445,31 @@ loadLocalization();
 window["reddahApi"].loadCompleted();
 
 //----localization-----//
+
 function loadLocalization(){
-	
+    let localeStrings = {
+        "en-US":{
+            "levels":"Levels",
+            "tutorial":"Tutorial",
+            "instruction1":"Drag cub to star",
+            "instruction2":"Drag grid to rotate. Cub and star moves with grid. Orange links stay in place.",
+            "instruction3":"Blue links move with grid. Rotate grid to connect blue and orange links in different ways",
+            "instruction4":"Green links pivot with grid, but point in the same direction",
+        },
+        "zh-CN":{
+            "levels":"关卡",
+            "tutorial":"教程",
+            "instruction1":"拖动小狗吃星星",
+            "instruction2":"拖动格子旋转。小狗和星星都跟着格子旋转，棕色的连线保持不变。",
+            "instruction3":"蓝色连线跟着格子旋转。旋转格子可以使蓝色连线和棕色连线连在一起。",
+            "instruction4":"绿线可以用来中转，但它的朝向始终不变。",
+        }
+    }
+
+    let currentLocale = window["reddahApi"].Locale;
+    document.getElementById("id_levels").innerHTML = localeStrings[currentLocale].levels;
+
 }
-const title = "lalal"
 
 // -------------------------- drag rotation -------------------------- //
 
