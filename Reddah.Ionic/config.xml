@@ -124,6 +124,7 @@
     <plugin name="cordova-clipboard" spec="^1.3.0" />
     <plugin name="cordova-plugin-globalization" spec="^1.11.0" />
     <plugin name="cordova-plugin-add-swift-support" spec="^1.6.0" />
-    <engine name="ios" spec="^4.5.5" />
     <engine name="android" spec="^7.1.4" />
+    <engine name="ios" spec="^4.5.5" />
+    <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
 </widget>
