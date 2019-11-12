@@ -1471,6 +1471,10 @@ function loadLocalization(){
 
 	
     let currentLocale = window["reddahApi"].Locale;
+    let support = ["en-US","zh-CN"];
+	if(support.indexOf(currentLocale)==-1)
+    	currentLocale="en-US";
+    	
     document.getElementById("id_levels").innerHTML = localeStrings[currentLocale].levels;
 	document.getElementById("id_next").innerHTML = localeStrings[currentLocale].next;
 	document.getElementById("id_ins1").innerHTML = localeStrings[currentLocale].instruction1;

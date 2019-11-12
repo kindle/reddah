@@ -21,6 +21,7 @@ import * as moment from 'moment';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { Router } from '@angular/router';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Injectable({
     providedIn: 'root'
@@ -42,6 +43,7 @@ export class ReddahService {
         private iab: InAppBrowser,
         private router: Router,
         private ngZone: NgZone,
+        private localNotifications: LocalNotifications,
     ) { }
 
     //******************************** */
@@ -1029,7 +1031,7 @@ export class ReddahService {
         return this.subpost(str, n);
     }
 
-    summaryMsg(str: string, n: number, locale='en-US') {
+    summaryMsg(str: string, n: number=100, locale='en-US') {
         return this.summary(str, n, locale).replace(/<[^>]+>/g, "");
     }
 
@@ -2042,5 +2044,14 @@ export class ReddahService {
             
         }
     }  
+
+    notify(title, text){
+        this.localNotifications.schedule({
+            title: title,
+            text: text,
+            //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+            //data: { secret: key }
+          });
+    }
 
 }

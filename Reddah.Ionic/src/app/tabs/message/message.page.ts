@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, ModalController } from '@ionic/angular';
+import { LoadingController, NavController, ModalController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 
@@ -23,7 +23,7 @@ export class MessageListPage implements OnInit {
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,
-
+        private platform: Platform,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
@@ -78,13 +78,26 @@ export class MessageListPage implements OnInit {
                 });
                 if(!found)
                 {
+                    let title = "";
+                    let text = "";
+                    if(netMsg.Type==2){//people
+                        title = netMsg.GroupName;
+                    } 
+                    else if(netMsg.Type==3){//group
+                        title = netMsg.Title;
+                    }
+
                     this.messages.unshift(netMsg);
                     
                     netMsg.GroupName.split(',').forEach((user, index)=>{
                         if(user!=this.currentUserName){
                             this.reddah.getUserPhotos(user);
+                            text = `${user}: ${this.reddah.summaryMsg(netMsg.LastUpdateContent)}`;
                         }
                     });
+                    if(this.platform.is('cordova')){
+                        this.reddah.notify(title, text);
+                    }
                 }
             });
             this.localStorageService.store("Reddah_Local_Messages", this.messages);

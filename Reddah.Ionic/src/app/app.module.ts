@@ -25,6 +25,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 //import { AngularFireModule } from '@angular/fire';
 //import { AngularFireDatabaseModule } from '@angular/fire/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
@@ -346,6 +347,7 @@ var firebaseConfig = {
         MediaCapture,
         Media,
         NativeAudio,
+        LocalNotifications,
         VideoEditor,
         Vibration,DeviceMotion,
         //Firebase,
