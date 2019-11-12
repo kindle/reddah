@@ -251,7 +251,10 @@
         "Copy":"复制图片地址",
         "UserNotExist":"用户不存在",
         "Document":"文档",
-        "CopyChat":"复制"
+        "CopyChat":"复制",
+        "MiniPubMsg":"确认发布之后，用户将收到此小程序的更新",
+        "CancelPublish":"稍后发布",
+        "ConfirmPublish":"确认发布"
     },
 
     "Mail":{

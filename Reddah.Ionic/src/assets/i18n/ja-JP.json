@@ -249,7 +249,10 @@
         "Copy":"コピー画像アドレス",
         "UserNotExist":"ユーザが存在しません",
         "Document":"書類",
-        "CopyChat":"コピー"
+        "CopyChat":"コピー",
+        "MiniPubMsg":"出版を確認することにより、ユーザーが更新されます",
+        "CancelPublish":"後で発表する",
+        "ConfirmPublish":"出版を確認する"
     },
 
     "Mail":{

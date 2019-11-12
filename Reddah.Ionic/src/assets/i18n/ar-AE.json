@@ -248,7 +248,10 @@
         "Copy":"نسخ عنوان الصورة",
         "UserNotExist":"المستخدم غير موجود",
         "Document":"فايل",
-        "CopyChat":"نسخ"
+        "CopyChat":"نسخ",
+        "MiniPubMsg":"By confirming the publication, users will receive the update",
+        "CancelPublish":"Publish later",
+        "ConfirmPublish":"Confirm publishing"
     },
 
     "Mail":{

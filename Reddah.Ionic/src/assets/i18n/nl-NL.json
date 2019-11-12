@@ -248,7 +248,10 @@
         "Copy":"Afbeeldadres kopiëren",
         "UserNotExist":"Gebruiker bestaat niet",
         "Document":"Document",
-        "CopyChat":"Kopiëren"
+        "CopyChat":"Kopiëren",
+        "MiniPubMsg":"Door de publicatie te bevestigen, zullen gebruikers de update ontvangen",
+        "CancelPublish":"Uitgegeven later",
+        "ConfirmPublish":"Bestand bevestigen"
     },
 
     "Mail":{

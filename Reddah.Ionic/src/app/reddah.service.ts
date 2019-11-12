@@ -1002,13 +1002,13 @@ export class ReddahService {
         return output;
     }
 
-    subpost(str: string, n: number) {
+    subpost(str: string, n: number, sufix="...") {
         var r = /[^\u4e00-\u9fa5]/g;
         if (str.replace(r, "mm").length <= n) { return str; }
         var m = Math.floor(n/2);
         for (var i = m; i < str.length; i++) {
             if (str.substr(0, i).replace(r, "mm").length >= n) {
-                return str.substr(0, i) + "...";
+                return str.substr(0, i) + sufix;
             }
         }
         return str;
@@ -1029,6 +1029,19 @@ export class ReddahService {
         if(str.startsWith("<br>"))
             str = str.replace("<br>", "");
         return this.subpost(str, n);
+    }
+
+    summaryShort(str: string, n: number, fix: string,  locale='en-US') {
+        if(locale==null)
+            locale='en-US';
+        locale = locale.toLowerCase();
+        if(!this.doubleByteLocale.includes(locale))
+            n = 2*n;
+        str = this.htmlDecode(str)
+            
+        if(str.startsWith("<br>"))
+            str = str.replace("<br>", "");
+        return this.subpost(str, n, fix);
     }
 
     summaryMsg(str: string, n: number=100, locale='en-US') {

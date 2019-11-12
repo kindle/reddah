@@ -249,7 +249,10 @@
         "Copy":"Copier l 'adresse d' image",
         "UserNotExist":"L 'utilisateur n' existe pas",
         "Document":"Documentation",
-        "CopyChat":"Copier"
+        "CopyChat":"Copier",
+        "MiniPubMsg":"L 'utilisateur recevra la mise à jour par confirmation de la publication",
+        "CancelPublish":"Publication ultérieure",
+        "ConfirmPublish":"Confirmation"
     },
 
     "Mail":{

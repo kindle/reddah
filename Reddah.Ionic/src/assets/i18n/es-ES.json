@@ -248,7 +248,10 @@
         "Copy":"Copiar dirección de imagen",
         "UserNotExist":"Usuario no existente",
         "Document":"Documentación",
-        "CopyChat":"Copiar"
+        "CopyChat":"Copiar",
+        "MiniPubMsg":"Al confirmar la publicación, el usuario recibirá la actualización",
+        "CancelPublish":"Publicar más tarde",
+        "ConfirmPublish":"Confirmar publicación"
     },
 
     "Mail":{

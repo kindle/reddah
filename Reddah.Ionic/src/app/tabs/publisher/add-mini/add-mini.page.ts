@@ -1,21 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PopoverController, NavController, LoadingController, ModalController, AlertController } from '@ionic/angular'
-import { TimelinePopPage } from '../../../common/timeline-pop.page';
-import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../../../reddah.service';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 import { CacheService } from "ionic-cache";
-import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ImageViewerComponent } from '../../../common/image-viewer/image-viewer.component';
 import { DragulaService } from 'ng2-dragula';
-import { LocationPage } from '../../../common/location/location.page';
 import { VideoEditor } from '@ionic-native/video-editor/ngx';
-import { PostviewerPage } from '../../../postviewer/postviewer.page';
-import { Article } from '../../../model/article';
 import { MiniViewerComponent } from '../../../common/mini-viewer/mini-viewer.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-add-mini',
@@ -58,22 +53,14 @@ export class AddMiniPage implements OnInit {
     
     
     constructor(
-        private popoverController: PopoverController,
         private reddahService: ReddahService,
-        private navController: NavController,
-        private file: File,
         private loadingController: LoadingController,
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
         private cacheService: CacheService,
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
-        private dragulaService: DragulaService,
-        private videoEditor: VideoEditor,
         private alertController: AlertController,
-    ) { 
-        
-    }
+        private translate: TranslateService,
+    ) {}
 
 
     close(){
@@ -187,17 +174,17 @@ export class AddMiniPage implements OnInit {
     async publish(){
         const alert = await this.alertController.create({
             header: "",
-            message: `确认发布之后，用户将收到此小程序的更新`,
+            message: this.translate.instant("Common.MiniPubMsg"),
             buttons: [
               {
-                text: "稍后发布",
+                text: this.translate.instant("Common.CancelPublish"),
                 role: 'cancel',
                 cssClass: 'dark',
                 handler: () => {
                   
                 }
               }, {
-                text: "确认发布",
+                text: this.translate.instant("Common.ConfirmPublish"),
                 cssClass:'danger',
                 handler: () => {
                     this.actualPublish();

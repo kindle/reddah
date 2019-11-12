@@ -252,7 +252,10 @@
         "Copy":"Copy Image Address",
         "UserNotExist":"User does not exist",
         "Document":"Document",
-        "CopyChat":"Copy"
+        "CopyChat":"Copy",
+        "MiniPubMsg":"By confirming the publication, users will receive the update",
+        "CancelPublish":"Publish later",
+        "ConfirmPublish":"Confirm publishing"
     },
 
     "Mail":{
