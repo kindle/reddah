@@ -118,7 +118,7 @@ export class AppComponent {
                     this.androidPermissions.PERMISSION.CAMERA, 
                     this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
                     this.androidPermissions.PERMISSION.RECORD_AUDIO,
-                    this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+                    this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION
                 ]);
             }
         })

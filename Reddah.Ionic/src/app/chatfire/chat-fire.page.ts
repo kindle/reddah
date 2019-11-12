@@ -16,6 +16,7 @@ import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-m
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
 import { ChatPopPage } from '../common/chat-pop.page';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 export class ChatFireBase{
     
@@ -182,6 +183,7 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
         public clipboard: Clipboard,
+        private notification: LocalNotifications,
         //public db: AngularFireDatabase,        
     ) { 
         super(modalController, popoverController, reddah, localStorageService, 
@@ -290,20 +292,43 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
                     this.messages = data.Message.Comments.concat(this.messages);
                 }
                 else{//new msg came in.
-                    //update local
-                    this.messages.forEach((item,index)=>{
-                        if(item["Id"]==null){
-                            let mact = data.Message.Comments.filter(n=>n["Uid"]==item["Uid"]);
-                            if(mact!=null){
-                                this.messages[index]["Id"] = mact[0]["Id"];
-                                this.messages[index]["Content"] = mact[0]["Content"];
+                    try{
+                        //update local
+                        this.messages.forEach((item,index)=>{
+                            if(item["Id"]==null){
+                                let mact = data.Message.Comments.filter(n=>n["Uid"]==item["Uid"]);
+                                if(mact!=null){
+                                    this.messages[index]["Id"] = mact[0]["Id"];
+                                    this.messages[index]["Content"] = mact[0]["Content"];
+                                }
                             }
-                        }
-                    });
+                        });
+                    }catch{}
                     //sync others
-                    this.messages = this.messages.concat(data.Message.Comments.filter(item=>
+                    let otherMsgs = data.Message.Comments.filter(item=>
                         !this.messages.map(m=>m["Id"]).includes(item["Id"])
-                    ));
+                    );
+                    this.messages = this.messages.concat(otherMsgs);
+
+                    otherMsgs.forEach((m, i)=>{
+                        let ti = this.title;
+                        let tx = "";
+                        if(m.Type==0){
+                            tx += `${this.reddah.summary(m.Content,100)}`
+                        }
+                        else if(m.Type==4){
+                            tx += `[Link]`; 
+                        }
+                        
+                        this.notification.schedule({
+                            id: m.Id,
+                            title: ti,
+                            text: tx,
+                            data: { secret: 'secret' },
+                            foreground: true,
+                            icon: m.UserPhoto.replace("///","https")
+                        });
+                    })
 
                     //console.log(this.messages)
                     this.messages.sort((a,b)=>a["Id"]-b["Id"]);

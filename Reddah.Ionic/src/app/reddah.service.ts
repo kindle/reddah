@@ -2047,11 +2047,14 @@ export class ReddahService {
 
     notify(title, text){
         this.localNotifications.schedule({
+            id: 1,
             title: title,
             text: text,
+            sound: null,
+            data: { secret: "key" }
             //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
             //data: { secret: key }
-          });
+        });
     }
 
 }

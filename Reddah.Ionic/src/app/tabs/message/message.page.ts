@@ -1,12 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { CacheService } from "ionic-cache";
-
 import { ChatFirePage } from '../../chatfire/chat-fire.page';
 import { GroupChatFirePage } from '../../chatfire/group-chat-fire.page';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
 @Component({
@@ -26,7 +25,9 @@ export class MessageListPage implements OnInit {
         private platform: Platform,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
+        private zone: NgZone,
+        private notification: LocalNotifications,
+
     ){
         this.currentUserName = this.reddah.getCurrentUser();
     }
@@ -61,7 +62,6 @@ export class MessageListPage implements OnInit {
         {
             let netMessages = data.Message?data.Message.reverse():[];//from last to newest
             netMessages.forEach((netMsg, indexN)=>{
-                console.log(netMsg)
                 netMsg.IsNew=isnew;
                 let found = false;
                 this.messages.forEach((localMsg, indexL)=>{
@@ -95,6 +95,7 @@ export class MessageListPage implements OnInit {
                             text = `${user}: ${this.reddah.summaryMsg(netMsg.LastUpdateContent)}`;
                         }
                     });
+
                     if(this.platform.is('cordova')){
                         this.reddah.notify(title, text);
                     }

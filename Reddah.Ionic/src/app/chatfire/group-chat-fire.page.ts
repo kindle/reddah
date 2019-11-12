@@ -16,6 +16,7 @@ import { VideoEditor } from '@ionic-native/video-editor/ngx'
 //import { Firebase } from '@ionic-native/firebase/ngx';
 import { ChatFireBase } from './chat-fire.page';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
     selector: 'app-group-chat-fire',
@@ -46,6 +47,7 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
         public clipboard: Clipboard,
+        private notification: LocalNotifications,
         //public db: AngularFireDatabase,
     ) { 
         super(modalController, popoverController, reddah, localStorageService, 
@@ -239,9 +241,30 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
                         }
                     });
                     //sync others
-                    this.messages = this.messages.concat(data.Message.Comments.filter(item=>
+                    let otherMsgs = data.Message.Comments.filter(item=>
                         !this.messages.map(m=>m["Id"]).includes(item["Id"])
-                    ));
+                    );
+                    this.messages = this.messages.concat(otherMsgs);
+
+                    otherMsgs.forEach((m, i)=>{
+                        let ti = this.title;
+                        let tx = `${this.reddah.getDisplayName(m.UserName)}: `;
+                        if(m.Type==0){
+                            tx += `${this.reddah.summary(m.Content,100)}`
+                        }
+                        else if(m.Type==4){
+                            tx += `[Link]`; 
+                        }
+                        
+                        this.notification.schedule({
+                            id: m.Id,
+                            title: ti,
+                            text: tx,
+                            data: { secret: 'secret' },
+                            foreground: true,
+                            icon: m.UserPhoto.replace("///","https")
+                        });
+                    })
                     
                     this.messages.sort((a,b)=>a["Id"]-b["Id"]);
 
