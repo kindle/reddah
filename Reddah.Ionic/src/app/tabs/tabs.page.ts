@@ -10,6 +10,7 @@ import { SwipeTabDirective } from '../swipe-tab.directive';
 import { Tabs } from '@ionic/angular';
 import { EarthPage } from './earth/earth.page';
 import { MapPage } from '../map/map.page';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-tabs',
@@ -30,13 +31,16 @@ export class TabsPage implements OnInit {
         private platform: Platform,
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
-        private statusBar: StatusBar,
         private router: Router,
         public reddah: ReddahService,
         public events: Events,
-        
+        private translate: TranslateService,
     )
     {
+        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+        this.translate.setDefaultLang(currentLocale);
+        this.translate.use(currentLocale);
+
         this.events.subscribe('tab:clicked', (data) => 
         {
             try{

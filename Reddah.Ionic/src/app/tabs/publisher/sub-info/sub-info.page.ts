@@ -11,6 +11,7 @@ import { AddArticlePage } from '../add-article/add-article.page';
 import { AddMiniPage } from '../add-mini/add-mini.page';
 import { MiniViewerComponent } from '../../../common/mini-viewer/mini-viewer.component';
 import { TranslateService } from '@ngx-translate/core';
+import { MaterialPage } from '../../../mytimeline/material/material.page';
 
 @Component({
     selector: 'app-sub-info',
@@ -145,6 +146,17 @@ export class SubInfoPage implements OnInit {
             this.reddah.getUserPhotos(this.targetSub.UserName);
         }
         this.changed = data;
+    }
+
+    async SelectPhoto(){
+        const modal = await this.modalController.create({
+            component: MaterialPage,
+            componentProps: { 
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await modal.present();
     }
 
     async myQrCard(){

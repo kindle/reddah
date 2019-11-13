@@ -81,6 +81,7 @@ export class AboutPage implements OnInit {
         //check if change
         if(data)
             this.reddah.getUserPhotos(this.userName);
+        
     }
 
     async goBookmark(){
@@ -132,7 +133,7 @@ export class AboutPage implements OnInit {
         await modal.present();
     }
 
-    async goCredit(){
-        
+    async goCredit(event){
+        event.stopPropagation();
     }
 }

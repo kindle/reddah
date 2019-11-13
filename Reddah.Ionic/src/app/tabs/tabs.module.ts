@@ -17,8 +17,6 @@ import { DirectivesModule } from '../directives.module';
 import { HttpLoaderFactory } from '../app.module';
 import { HttpClient } from '@angular/common/http';
 
-import { NavParams } from '@ionic/angular';
-
 @NgModule({
   imports: [
       IonicModule,
