@@ -247,23 +247,23 @@ function init() {
             if (player.vy < -7 && player.vy > -15) player.dir = "right_land";
         }
 
-var lastz=0;
-window["reddahApi"].watchGyro().subscribe(data=>{
-if(data.z>lastz)
-{
-            dir = "left";
-player.isMovingLeft = true;
-player.isMovingRight = false;
-          
-        } else {
-            dir = "right";
-  player.isMovingLeft = false;
-            player.isMovingRight = true;
-        }
-lastz=data.z;
+        var lastv=0;
+        window["reddahApi"].watchGyro().subscribe(data=>{
+            if(data.z>lastv)
+            {
+                dir = "left";
+                player.isMovingLeft = true;
+                player.isMovingRight = false;
+            } 
+            else 
+            {
+                dir = "right";
+                player.isMovingLeft = false;
+                player.isMovingRight = true;
+            }
+            lastv=data.z;   
+        });
 
-           
-});
         //Adding keyboard controls
         document.onkeydown = function(e) {
             var key = e.keyCode;
@@ -314,10 +314,11 @@ lastz=data.z;
         }
 
         // Speed limits!
-        if (player.vx > 8)
-            player.vx = 8;
-        else if (player.vx < -8)
-            player.vx = -8;
+        let speedLimits = 8;
+        if (player.vx > speedLimits)
+            player.vx = speedLimits;
+        else if (player.vx < -speedLimits)
+            player.vx = -speedLimits;
 
         //console.log(player.vx);
 
@@ -607,25 +608,6 @@ function playerJump() {
         }
     };
 
-var lastz=0;
-
-window["reddahApi"].watchGyro().subscribe(data=>{
-    if(data.z>lastz)
-    {
-            dir = "left";
-player.isMovingLeft = true;
-player.isMovingRight = false;
-          
-        } else {
-            dir = "right";
-  player.isMovingLeft = false;
-            player.isMovingRight = true;
-        }
-    lastz=data.z;
-
-           
-});
-
 
     document.onkeyup = function(e) {
         var key = e.keyCode;
@@ -677,3 +659,5 @@ menuLoop = function() {
 };
 
 menuLoop();
+
+window["reddahApi"].loadCompleted();
