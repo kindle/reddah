@@ -245,6 +245,9 @@
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rank.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ReddahModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

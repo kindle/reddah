@@ -31,6 +31,7 @@ namespace Reddah.Web.Login
         public virtual DbSet<Log> Log { get; set; }
         public virtual DbSet<Message> Message { get; set; }
         public virtual DbSet<Point> Point { get; set; }
+        public virtual DbSet<Rank> Rank { get; set; }
         public virtual DbSet<Setting> Setting { get; set; }
         public virtual DbSet<UploadFile> UploadFile { get; set; }
         public virtual DbSet<UserArticle> UserArticle { get; set; }

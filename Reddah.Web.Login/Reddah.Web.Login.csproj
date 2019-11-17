@@ -161,6 +161,8 @@
     </Compile>
     <Compile Include="Controllers\ApiBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\PointController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\PubController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
@@ -191,6 +193,9 @@
       <DependentUpon>ReddahModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rank.cs">
+      <DependentUpon>ReddahModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ReddahModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
