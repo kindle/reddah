@@ -1366,10 +1366,18 @@ var levels = [];
         var listItem = document.createElement('li');
         listItem.className = 'level-list__item';
         var id = pre.id;
+        var difficulty = pre.getAttribute('data-blurb').length;
+        var stars = "Tutorial";
+        if(difficulty<4){
+            stars ="";
+            for(let star=0;star<difficulty;star++)
+                stars+="☆";
+        }
+        
         listItem.innerHTML = '<span class="level-list__item__number">' + (i + 1) +
             '</span> <span class="level-list__item__blurb">' +
-            pre.getAttribute('data-blurb') + '</span>' +
-            '<span class="level-list__item__check">?</span>';
+            stars + '</span>' +
+            '<span class="level-list__item__check">OK</span>';
         listItem.setAttribute('data-id', id);
         fragment.appendChild(listItem);
         levels.push(id);

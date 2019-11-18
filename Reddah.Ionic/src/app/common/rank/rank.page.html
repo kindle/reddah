@@ -1,0 +1,33 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+    </ion-button>
+    <ion-label>{{ 'Menu.LeaderBoard' | translate }}</ion-label>
+</ion-item>
+<ion-content #pageTop style="background-color: white;">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content refreshingSpinner="bubbles">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-card class="welcome-card" *ngFor="let item of rank">
+        <ion-grid>
+            <ion-row>
+                <ion-item lines="none" style="width:100%;">
+                    <ion-label text-wrap style="margin-top:0;">{{reddah.htmlDecode(item.UserName)}}</ion-label>
+                    <ion-text slot="end">{{reddah.htmlDecode(item.Score)}}</ion-text>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <ion-item lines="none">
+                    <ion-label slot="start" class="articleFooter" style="min-width: 300px;">
+                        {{item.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss'}}
+                    </ion-label>
+                </ion-item> 
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'Button.Loading' | translate }}">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

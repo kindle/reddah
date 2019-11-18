@@ -78,6 +78,8 @@
         "NewFriends": "新朋友",
         "GroupChat": "群聊",
         "Mark": "收藏",
+        "MyPoints": "我的积分",
+        "LeaderBoard":"排行榜",
         "Settings": "设置",
         "Header":{
             "GroupChat":"发起聊天",

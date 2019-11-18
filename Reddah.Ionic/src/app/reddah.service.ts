@@ -798,6 +798,39 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private pointsUrl = 'https://login.reddah.com/api/point/getpointlist'; 
+    
+    getPoints(formData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.pointsUrl, formData)
+        .pipe(
+            tap(data => this.log('fetched points')),
+            catchError(this.handleError('getReddahPoints', []))
+        );
+    }
+    //******************************** */
+    private rankUrl = 'https://login.reddah.com/api/game/globalrank'; 
+    
+    getGlobalRank(formData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.rankUrl, formData)
+        .pipe(
+            tap(data => this.log('fetched rank')),
+            catchError(this.handleError('getReddahRank', []))
+        );
+    }
+    //******************************** */
+    private rankUpdateGameScoreUrl = 'https://login.reddah.com/api/game/updatemyrank'; 
+    
+    uploadGameScore(formData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.rankUpdateGameScoreUrl, formData)
+        .pipe(
+            tap(data => this.log('fetched rank')),
+            catchError(this.handleError('getReddahRank', []))
+        );
+    }
+    //******************************** */
 
     setCurrentUser(userName: string){
         this.localStorageService.store("Reddah_CurrentUser",userName);

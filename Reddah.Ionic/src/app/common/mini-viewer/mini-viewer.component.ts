@@ -8,6 +8,7 @@ import { Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
 import { Vibration } from '@ionic-native/vibration/ngx';
+import { RankPage } from '../rank/rank.page';
 
 
 @Component({
@@ -100,10 +101,23 @@ export class MiniViewerComponent implements OnInit {
         window["reddahApi"] = {};
         window["reddahApi"].UserName = this.reddah.getCurrentUser();
         window["reddahApi"].Locale = this.reddah.getCurrentLocale();
+        window["reddahApi"].Jwt = this.reddah.getCurrentJwt();
         window["reddahApi"].loadCompleted = ()=> { 
             this.zone.run(()=>{
                 this.loaded = true;
             })
+        }
+        window["reddahApi"].uploadScore = (n: Number, sub="")=> {
+            let appId = this.guid;
+            let appSub = sub;
+            let score = n;
+            let data = new FormData();
+            data.append("appId", appId);
+            data.append("appSub", appSub);
+            data.append("Score", JSON.stringify(score));
+            this.reddah.uploadGameScore(data).subscribe(data=>{
+                alert(JSON.stringify(data));
+            });
         }
     }
 
@@ -134,5 +148,21 @@ export class MiniViewerComponent implements OnInit {
         }
     }
 
-  
+    share(){
+
+    }
+
+    async rank(){
+        const modal = await this.modalController.create({
+            component: RankPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+    
+        await modal.present();
+    }
+
+    report(){
+
+    }
 }

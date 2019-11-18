@@ -13,6 +13,7 @@ import { TimelinePopPage } from '../../common/timeline-pop.page';
 import { AddTimelinePage } from '../../mytimeline/add-timeline/add-timeline.page';
 import { MessageListPage } from '../../tabs/message/message.page'
 import { Router } from '@angular/router';
+import { PointPage } from '../../common/point/point.page';
 
 @Component({
     selector: 'app-about',
@@ -135,5 +136,13 @@ export class AboutPage implements OnInit {
 
     async goCredit(event){
         event.stopPropagation();
+
+        const modal = await this.modalController.create({
+            component: PointPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+    
+        await modal.present();
     }
 }
