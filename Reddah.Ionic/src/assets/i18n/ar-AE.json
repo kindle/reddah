@@ -251,9 +251,9 @@
         "UserNotExist":"المستخدم غير موجود",
         "Document":"فايل",
         "CopyChat":"نسخ",
-        "MiniPubMsg":"By confirming the publication, users will receive the update",
-        "CancelPublish":"Publish later",
-        "ConfirmPublish":"Confirm publishing"
+        "MiniPubMsg":"من خلال تأكيد نشر المستخدم سوف تتلقى التحديثات",
+        "CancelPublish":"الآخرة",
+        "ConfirmPublish":"صدر"
     },
 
     "Mail":{

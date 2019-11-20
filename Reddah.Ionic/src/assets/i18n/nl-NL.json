@@ -252,8 +252,8 @@
         "Document":"Document",
         "CopyChat":"Kopiëren",
         "MiniPubMsg":"Door de publicatie te bevestigen, zullen gebruikers de update ontvangen",
-        "CancelPublish":"Uitgegeven later",
-        "ConfirmPublish":"Bestand bevestigen"
+        "CancelPublish":"Later",
+        "ConfirmPublish":"Uitgegeven"
     },
 
     "Mail":{

@@ -253,8 +253,8 @@
         "Document":"書類",
         "CopyChat":"コピー",
         "MiniPubMsg":"出版を確認することにより、ユーザーが更新されます",
-        "CancelPublish":"後で発表する",
-        "ConfirmPublish":"出版を確認する"
+        "CancelPublish":"後で",
+        "ConfirmPublish":"出版"
     },
 
     "Mail":{

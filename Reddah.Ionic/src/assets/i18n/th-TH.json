@@ -252,8 +252,8 @@
         "Document":"แฟ้มเอกสาร",
         "CopyChat":"ทำสำเนา",
         "MiniPubMsg":"โดยการยืนยันการประกาศผู้ใช้จะได้รับการปรับปรุง",
-        "CancelPublish":"ประกาศในภายหลัง",
-        "ConfirmPublish":"ยืนยันสิ่งพิมพ์"
+        "CancelPublish":"หลังจากนั้น",
+        "ConfirmPublish":"จัดพิมพ์"
     },
 
     "Mail":{

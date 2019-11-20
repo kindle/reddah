@@ -256,8 +256,8 @@
         "Document":"Document",
         "CopyChat":"Copy",
         "MiniPubMsg":"By confirming the publication, users will receive the update",
-        "CancelPublish":"Publish later",
-        "ConfirmPublish":"Confirm publishing"
+        "CancelPublish":"Later",
+        "ConfirmPublish":"Publish"
     },
 
     "Mail":{

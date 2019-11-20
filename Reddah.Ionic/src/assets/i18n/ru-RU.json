@@ -252,8 +252,8 @@
         "Document":"Документация",
         "CopyChat":"копировать",
         "MiniPubMsg":"подтверждение публикации, пользователь получит обновление",
-        "CancelPublish":"А потом",
-        "ConfirmPublish":"подтверждать выпуск"
+        "CancelPublish":"потом",
+        "ConfirmPublish":"ппубликовать"
     },
 
     "Mail":{
