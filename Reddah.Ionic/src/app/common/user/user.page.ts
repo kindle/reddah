@@ -53,6 +53,7 @@ export class UserPage implements OnInit {
     }
 
     imageList = [];
+    appList = [];
     loadedIds = [];
     formData: FormData;
 

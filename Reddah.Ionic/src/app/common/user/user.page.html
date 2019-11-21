@@ -67,6 +67,17 @@
         <span class="itemTitle" style="line-height: 90px;">{{ 'Menu.Timeline' | translate }}</span>
     </ion-item>
 
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
+    <ion-item class="borderTop borderBottom" lines="none">
+        <span class="itemTitle span-eclipse" style="line-height: 90px;">{{ 'Search.MiniApp' | translate }}</span>
+        <ion-thumbnail *ngFor="let image of imageList" style="padding: 5px;">
+            <img [id]="reddah.makeItId(image+'usr')" 
+                (load)="reddah.adjustImage(image, 'usr')"
+                [src]="reddah.level2Cache(image)">
+        </ion-thumbnail>
+    </ion-item>
+
     <ion-item lines="none" style="--background:#eeeeee;height:10px;" *ngIf="isFriend">
     </ion-item>
     <ion-item class="borderTop borderBottom" lines="none" (click)="goMore()" *ngIf="isFriend">
