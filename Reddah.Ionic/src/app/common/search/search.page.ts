@@ -447,9 +447,7 @@ export class SearchPage implements OnInit {
         }
 
         this.reddah.setRecent(mini,4);
-        this.reddah.setRecentUseMini(mini.UserName).subscribe(data=>{
-            
-        });
+        this.reddah.setRecentUseMini(mini.UserName).subscribe(data=>{});
     }
 
 }

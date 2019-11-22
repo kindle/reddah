@@ -1000,5 +1000,50 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("getusedmini")]
+        [HttpPost]
+        public IHttpActionResult GetUsedMini()
+        {
+            IEnumerable<UserProfile> query = null;
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string targetUser = HttpContext.Current.Request["targetUser"];
+                
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var item = db.UserProfile.FirstOrDefault(u => u.UserName == targetUser);
+                    if (item != null)
+                    {
+                        var usedMinis = item.UsedMini;
+
+                        var pageCount = 10;
+                        query = (from u in db.UserProfile
+                                 where 
+                                 item.UsedMini.StartsWith(u.UserName + ",") ||
+                                        item.UsedMini.Contains("," + u.UserName + ",") ||
+                                        item.UsedMini.EndsWith("," + u.UserName)
+                                 select u)
+                                .Take(pageCount);
+
+                    }
+                    return Ok(query.ToList());
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
     }
 }

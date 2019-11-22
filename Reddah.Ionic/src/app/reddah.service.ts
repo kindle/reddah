@@ -178,6 +178,18 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private getUsedMiniUrl = 'https://login.reddah.com/api/pub/getusedmini'; 
+
+    getUsedMini(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getUsedMiniUrl, formData)
+        .pipe(
+            tap(data => this.log('get used mini')),
+            catchError(this.handleError('get used mini', []))
+        );
+    }
+    //******************************** */
     private getMaterialUrl = 'https://login.reddah.com/api/pub/getmaterial'; 
 
     getMyMaterial(formData: FormData): Observable<any> {

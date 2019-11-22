@@ -71,10 +71,10 @@
     </ion-item>
     <ion-item class="borderTop borderBottom" lines="none">
         <span class="itemTitle span-eclipse" style="line-height: 90px;">{{ 'Search.MiniApp' | translate }}</span>
-        <ion-thumbnail *ngFor="let image of imageList" style="padding: 5px;">
-            <img [id]="reddah.makeItId(image+'usr')" 
-                (load)="reddah.adjustImage(image, 'usr')"
-                [src]="reddah.level2Cache(image)">
+        <ion-thumbnail *ngFor="let app of appList" style="padding: 5px;">
+            <img [id]="reddah.makeItId(app+'usr')" 
+                (load)="reddah.adjustImage(app, 'usr')"
+                [src]="reddah.level2Cache(app)">
         </ion-thumbnail>
     </ion-item>
 

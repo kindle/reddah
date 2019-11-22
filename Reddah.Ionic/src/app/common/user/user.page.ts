@@ -82,6 +82,30 @@ export class UserPage implements OnInit {
         });
     }
 
+    getUsedMini(){
+        this.formData = new FormData();
+        this.formData.append("targetUser", this.userName);
+
+        let cacheKey = "this.reddah.getUsedMini"+this.userName;
+        let request = this.reddah.getUsedMini(this.formData);
+
+        this.cacheService.loadFromObservable(cacheKey, request, "UserPage"+this.userName)
+        .subscribe(minis => 
+        {
+            for(let mini of minis){
+                
+                //article.Content.split('$$$').forEach((item)=>{
+                //    if(this.imageList.length<3&&item.length>0)  
+                //        this.imageList.push(item);
+                //});
+                this.appList.push(mini);
+                
+                if(this.appList.length>=3)
+                    break;
+            }
+        });
+    }
+
     async viewTimeline(){
         const timelineModal = await this.modalController.create({
             component: TimeLinePage,
