@@ -35,5 +35,8 @@ namespace Reddah.Web.Login
         public int PrivacyShowLocation { get; set; }
         public int PrivacyViewTs { get; set; }
         public int Point { get; set; }
+        public string UsedMini { get; set; }
+        public Nullable<System.DateTime> LastUsedOn { get; set; }
+        public string LastLocale { get; set; }
     }
 }

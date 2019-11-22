@@ -427,7 +427,7 @@ export class SearchPage implements OnInit {
 
     
     async goMini(mini){
-        this.reddah.setRecent(mini,4);
+        
         //open mini page
         const modal = await this.modalController.create({
             component: MiniViewerComponent,
@@ -445,6 +445,11 @@ export class SearchPage implements OnInit {
         {
             
         }
+
+        this.reddah.setRecent(mini,4);
+        this.reddah.setRecentUseMini(mini.UserName).subscribe(data=>{
+            
+        });
     }
 
 }

@@ -1841,6 +1841,22 @@ export class ReddahService {
         return recent;
     }
 
+    //setUserRecentUseMini
+    //******************************** */
+    private setUserRecentUseMini = 'https://login.reddah.com/api/pub/setrecentmini'; 
+
+    setRecentUseMini(miniUserName): Observable<any> {
+        let formData = new FormData();
+        formData.append('id', miniUserName);
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.setUserRecentUseMini, formData)
+        .pipe(
+            tap(data => this.log('set user recent used mini')),
+            catchError(this.handleError('set user recent used mini', []))
+        );
+    }
+    //******************************** */
+
 
     private suggestMiniUrl = 'https://login.reddah.com/api/pub/getsuggestmini'; 
     getSuggestMinis(): Observable<any> {

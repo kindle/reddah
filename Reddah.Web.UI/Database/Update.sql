@@ -148,7 +148,7 @@ CREATE TABLE [dbo].[Point]
 );
 
 alter table userprofile add 
-  [Point] int NOT NULL default 0
+    [Point] int NOT NULL default 0
 
 --20191115 add leaderboard for games
 CREATE TABLE [dbo].[Rank]
@@ -161,3 +161,9 @@ CREATE TABLE [dbo].[Rank]
 	[CreatedOn] DATETIME NOT NULL, 
 	CONSTRAINT [PK_dbo.Rank] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
+--20191122 
+alter table userprofile add 
+	[UsedMini] NVARCHAR(MAX) NULL, 
+	[LastUsedOn] DATETIME NULL, 
+	[LastLocale] VARCHAR(10) NULL

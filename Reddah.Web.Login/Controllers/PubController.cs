@@ -940,5 +940,65 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("setrecentmini")]
+        [HttpPost]
+        public IHttpActionResult SetUserRecentMini()
+        {
+            UserInfo userInfo = new UserInfo();
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string targetMiniId = HttpContext.Current.Request["id"];
+
+                if (String.IsNullOrWhiteSpace(targetMiniId))
+                    return Ok(new ApiResult(1, "No Mini Id"));
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var target = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User && u.Type == 0);
+
+                    if (target != null)
+                    {
+                        var usedMin = target.UsedMini;
+                        if (string.IsNullOrWhiteSpace(usedMin))
+                        {
+                            target.UsedMini = targetMiniId;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            if (usedMin != targetMiniId)
+                            {
+                                usedMin = usedMin.Replace(targetMiniId + ",", "");
+                                usedMin = usedMin.Replace("," + targetMiniId + ",", "");
+                                usedMin = usedMin.Replace("," + targetMiniId, "");
+                                usedMin = targetMiniId + "," + usedMin;
+                                target.UsedMini = usedMin;
+                                db.SaveChanges();
+                            }
+                        }
+                        return Ok(new ApiResult(0, "success"));
+                    }
+                    else
+                    {
+                        return Ok(new ApiResult(2, "user does not exist:" + jwtResult.JwtUser.User));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
     }
 }
