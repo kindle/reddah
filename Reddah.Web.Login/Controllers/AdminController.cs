@@ -63,7 +63,8 @@ namespace Reddah.Web.Login.Controllers
                                  Location = b.Location,
                                  UserNickName = u.NickName,
                                  UserPhoto = u.Photo,
-                                 UserSex = u.Sex
+                                 UserSex = u.Sex,
+                                 LastUpdateType = b.LastUpdateType
                              })
                             .Take(pageCount);
 
@@ -130,7 +131,8 @@ namespace Reddah.Web.Login.Controllers
                                  Location = b.Location,
                                  UserNickName = u.NickName,
                                  UserPhoto = u.Photo,
-                                 UserSex = u.Sex
+                                 UserSex = u.Sex,
+                                 LastUpdateType = b.LastUpdateType
                              })
                             .Take(pageCount);
 

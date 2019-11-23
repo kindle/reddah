@@ -1045,5 +1045,47 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        //mini or pub
+        [Route("getuserbyid")]
+        [HttpPost]
+        public IHttpActionResult GetUserById()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                int id = int.Parse(HttpContext.Current.Request["Id"]);
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+
+                    var user = db.UserProfile.FirstOrDefault(a => a.UserId == id);
+                    if (user != null)
+                    {
+                        return Ok(new ApiResult(0, user));
+                    }
+                    else
+                    {
+                        return Ok(new ApiResult(3, "User not found"));
+                    }
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
     }
 }

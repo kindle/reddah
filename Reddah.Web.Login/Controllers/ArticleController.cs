@@ -136,6 +136,8 @@ namespace Reddah.Web.Login.Controllers
                 int feedbackType = js.Deserialize<int>(HttpContext.Current.Request["feedbackType"]);
                 int type = js.Deserialize<int>(HttpContext.Current.Request["type"]);
                 int refArticleId = js.Deserialize<int>(HttpContext.Current.Request["ref"]);
+                //4:article 5:mini
+                int userType = js.Deserialize<int>(HttpContext.Current.Request["utype"]);
 
 
                 Dictionary<string, string> imageUrls = new Dictionary<string, string>();
@@ -241,7 +243,8 @@ namespace Reddah.Web.Login.Controllers
                             UserName = jwtResult.JwtUser.User,
                             Type = type,
                             Ref = refArticleId,
-                            Abstract = refArticleId > 0 ? shareTitle : feedbackType.ToString()
+                            Abstract = refArticleId > 0 ? shareTitle : feedbackType.ToString(),
+                            LastUpdateType = userType
                             //when type=9, insert feedbacktype else if share article insert title else insert empty
 
                         });

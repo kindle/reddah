@@ -885,7 +885,7 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
-        //--default 0:text, 1:audio 2:image 3:video 4:link
+        //--default 0:text, 1:audio 2:image 3:video 4:link 5: mini
         [Route("sharetofriend")]
         [HttpPost]
         public IHttpActionResult ShareToFriend()
@@ -899,6 +899,7 @@ namespace Reddah.Web.Login.Controllers
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 int refArticleId = js.Deserialize<int>(HttpContext.Current.Request["ref"]);
                 int chatId = js.Deserialize<int>(HttpContext.Current.Request["chatid"]);
+                int articleType = js.Deserialize<int>(HttpContext.Current.Request["type"]);
 
                 if (shareTitle == null)
                     return Ok(new ApiResult(1, "No title"));
@@ -921,7 +922,8 @@ namespace Reddah.Web.Login.Controllers
                             Duration = refArticleId,
                             CreatedOn = DateTime.UtcNow,
                             UserName = jwtResult.JwtUser.User,
-                            Type = 4
+                            Type = articleType,
+
                         });
 
 
@@ -937,7 +939,7 @@ namespace Reddah.Web.Login.Controllers
                             chatItem.LastUpdateBy = jwtResult.JwtUser.User;
                             chatItem.LastUpdateOn = DateTime.UtcNow;
                             article.LastUpdateContent = shareTitle;
-                            article.LastUpdateType = 4;
+                            article.LastUpdateType = articleType;
                         }
 
                         db.SaveChanges();
