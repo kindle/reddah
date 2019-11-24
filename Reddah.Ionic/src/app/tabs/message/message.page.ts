@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, ModalController, Platform } from '@ionic/angular';
+import { LoadingController, NavController, ModalController, Platform, AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { ChatFirePage } from '../../chatfire/chat-fire.page';
 import { GroupChatFirePage } from '../../chatfire/group-chat-fire.page';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-
 
 @Component({
     selector: 'app-message',
@@ -25,11 +23,44 @@ export class MessageListPage implements OnInit {
         private platform: Platform,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
-        private zone: NgZone,
-        private notification: LocalNotifications,
+        private translate: TranslateService,
+        private alertController: AlertController,
 
     ){
         this.currentUserName = this.reddah.getCurrentUser();
+    }
+
+    async deleteConfirm(message) {
+        const alert = await this.alertController.create({
+            header: this.translate.instant("Confirm.Title"),
+            message: this.translate.instant("Confirm.DeleteMessage"),
+            buttons: [
+              {
+                text: this.translate.instant("Confirm.Cancel"),
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: (blah) => {
+                }
+              }, {
+                text: this.translate.instant("Confirm.Yes"),
+                handler: () => {
+                    /*let foundFlag = false;
+                    this.messages.forEach((m, index)=>{
+                        if(!foundFlag&&m.Id==message.Id)
+                        {
+                            this.messages.splice(index, 1);
+                            foundFlag = true;
+                        }
+                    });*/
+                    message["delete"]=true;
+                    message.IsNew = false;
+                    this.localStorageService.store("Reddah_Local_Messages", this.messages);
+                }
+              }
+            ]
+        });
+
+        await alert.present().then(()=>{});
     }
 
     //refreshPage;

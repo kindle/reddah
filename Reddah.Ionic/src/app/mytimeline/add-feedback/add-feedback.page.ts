@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { PopoverController, LoadingController, ModalController } from '@ionic/angular'
 import { TimelinePopPage } from '../../common/timeline-pop.page';
 import { ReddahService } from '../../reddah.service';
@@ -27,6 +27,7 @@ export class AddFeedbackPage implements OnInit {
         private modalController: ModalController,
         private dragulaService: DragulaService,
         private translate: TranslateService,
+        private ngZone: NgZone,
     ) { 
         this.dragulaService.drag('bag')
         .subscribe(({ name, el }) => {
@@ -104,6 +105,7 @@ export class AddFeedbackPage implements OnInit {
     }
     
     ngOnInit() {
+        console.log(this.article)
         //4 article report abuse
         this.feedbackTypes.forEach((item,index)=>{
             if(item.value==this.feedbackType){
@@ -136,9 +138,19 @@ export class AddFeedbackPage implements OnInit {
         this.formData.append('feedbackType', JSON.stringify(this.feedbackType));
         if(this.feedbackType==4)//share
         {
-            this.formData.append("abstract", this.reddah.htmlDecode(this.article.Title));
-            this.formData.append("content", this.article.ImageUrl);
-            this.formData.append("ref", JSON.stringify(this.article.Id));
+            if(this.article.Type==0){
+                this.formData.append("abstract", this.reddah.htmlDecode(this.article.Title));
+                this.formData.append("content", this.article.ImageUrl);
+                this.formData.append("ref", JSON.stringify(this.article.Id));
+                this.formData.append("utype", 4+"");
+            }
+            else if(this.article.Type==3)
+            {
+                this.formData.append("abstract", this.reddah.htmlDecode(this.article.NickName+": "+this.article.Signature));
+                this.formData.append("content", this.article.Photo);
+                this.formData.append("ref", this.article.UserId);
+                this.formData.append("utype", 5+"");
+            }
         }
         else{
             this.formData.append("ref", JSON.stringify(0));

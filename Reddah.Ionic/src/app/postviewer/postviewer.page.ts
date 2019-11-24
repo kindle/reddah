@@ -14,6 +14,7 @@ import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
 import { ShareChooseChatPage } from '../chat/share-choose-chat/share-choose-chat.page';
 import { TranslateService } from '@ngx-translate/core';
 import { SettingFontPage } from '../settings/setting-font/setting-font.page';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
     selector: 'app-postviewer',

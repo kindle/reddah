@@ -6,42 +6,51 @@
     <ion-label>{{ 'Menu.Message' | translate }}</ion-label>
 </ion-item>
 <ion-content style="background-color: white;">
-    <ion-item *ngFor="let message of messages" (click)="viewChat(message)">
-        <div [ngClass]="{'new-point':message.IsNew}" style="margin:5px 0px;">
-            <div class="singleGroupImage" *ngIf="message.Type==2">
-                <div>
-                    <img onerror="this.src='assets/icon/noimage.jpg'"
-                        [src]="reddah.appData('userphoto_'+GetSender(message.GroupName))">
+    <ion-item-sliding *ngFor="let message of messages">
+        <ion-item (click)="viewChat(message)" *ngIf="message.delete!=true">
+            <div [ngClass]="{'new-point':message.IsNew}" style="margin:5px 0px;">
+                <div class="singleGroupImage" *ngIf="message.Type==2">
+                    <div>
+                        <img onerror="this.src='assets/icon/noimage.jpg'"
+                            [src]="reddah.appData('userphoto_'+GetSender(message.GroupName))">
+                    </div>
+                </div>
+                <div class="groupImages" *ngIf="message.Type==3">
+                    <div *ngFor="let user of message.GroupName.split(',').slice(0,9)">
+                        <img onerror="this.src='assets/icon/noimage.jpg'"
+                            [src]="reddah.appData('userphoto_'+user)" >
+                    </div>
                 </div>
             </div>
-            <div class="groupImages" *ngIf="message.Type==3">
-                <div *ngFor="let user of message.GroupName.split(',').slice(0,9)">
-                    <img onerror="this.src='assets/icon/noimage.jpg'"
-                        [src]="reddah.appData('userphoto_'+user)" >
-                </div>
-            </div>
-        </div>
-        <ion-label style="margin-left:10px;" *ngIf="message.Type==2">
-            <span class="user-name">{{reddah.getDisplayName(GetSender(message.GroupName))}}</span>
-            <br>
-            <ion-note color="dark" *ngIf="message.LastUpdateType==0">{{reddah.summaryMsg(message.LastUpdateContent)}}</ion-note>
-            <ion-note color="dark" *ngIf="message.LastUpdateType==1">[语音]</ion-note>
-            <ion-note color="dark" *ngIf="message.LastUpdateType==2">[图片]</ion-note>
-            <ion-note color="dark" *ngIf="message.LastUpdateType==3">[视频]</ion-note>
-            <ion-note color="dark" *ngIf="message.LastUpdateType==4">[Link]</ion-note>
-        </ion-label>
-        <ion-label style="margin-left:10px;" *ngIf="message.Type==3">
-            <span class="user-name">{{message.Title}}</span>
-            <br>
-            <ion-note color="dark" *ngIf="message.LastUpdateType==0">{{reddah.getDisplayName(message.LastUpdateBy)}}: {{reddah.summaryMsg(message.LastUpdateContent)}}</ion-note>
-            <ion-note color="dark" *ngIf="message.LastUpdateType==1">[语音]</ion-note>
-            <ion-note color="dark" *ngIf="message.LastUpdateType==2">[图片]</ion-note>
-            <ion-note color="dark" *ngIf="message.LastUpdateType==3">[视频]</ion-note>
-            <ion-note color="dark" *ngIf="message.LastUpdateType==4">[Link]</ion-note>
-        </ion-label>
-        <ion-note slot="end">
-            {{reddah.getSendTimeChat(message.LastUpdateOn|date:'yyyy-MM-dd HH:mm:ss')}}<br>
-            <ion-icon name="notifications-off" color="light" style="float:right;"></ion-icon>
-        </ion-note>
-    </ion-item>
+            <ion-label style="margin-left:10px;" *ngIf="message.Type==2">
+                <span class="user-name">{{reddah.getDisplayName(GetSender(message.GroupName))}}</span>
+                <br>
+                <ion-note color="dark" *ngIf="message.LastUpdateType==0">{{reddah.summaryMsg(message.LastUpdateContent)}}</ion-note>
+                <ion-note color="dark" *ngIf="message.LastUpdateType==1">[语音]</ion-note>
+                <ion-note color="dark" *ngIf="message.LastUpdateType==2">[图片]</ion-note>
+                <ion-note color="dark" *ngIf="message.LastUpdateType==3">[视频]</ion-note>
+                <ion-note color="dark" *ngIf="message.LastUpdateType==4">[Link]</ion-note>
+                <ion-note color="dark" *ngIf="message.LastUpdateType==5">[Mini]</ion-note>
+            </ion-label>
+            <ion-label style="margin-left:10px;" *ngIf="message.Type==3">
+                <span class="user-name">{{message.Title}}</span>
+                <br>
+                <ion-note color="dark" *ngIf="message.LastUpdateType==0">{{reddah.getDisplayName(message.LastUpdateBy)}}: {{reddah.summaryMsg(message.LastUpdateContent)}}</ion-note>
+                <ion-note color="dark" *ngIf="message.LastUpdateType==1">[语音]</ion-note>
+                <ion-note color="dark" *ngIf="message.LastUpdateType==2">[图片]</ion-note>
+                <ion-note color="dark" *ngIf="message.LastUpdateType==3">[视频]</ion-note>
+                <ion-note color="dark" *ngIf="message.LastUpdateType==4">[Link]</ion-note>
+                <ion-note color="dark" *ngIf="message.LastUpdateType==5">[Mini]</ion-note>
+            </ion-label>
+            <ion-note slot="end">
+                {{reddah.getSendTimeChat(message.LastUpdateOn|date:'yyyy-MM-dd HH:mm:ss')}}<br>
+                <ion-icon name="notifications-off" color="light" style="float:right;"></ion-icon>
+            </ion-note>
+        </ion-item>
+        <ion-item-options side="right">
+            <button ion-button color="danger" (click)="deleteConfirm(message)">
+                Delete
+            </button>
+        </ion-item-options>
+    </ion-item-sliding>
 </ion-content>

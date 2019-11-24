@@ -699,6 +699,17 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private getuserbyidUrl = 'https://login.reddah.com/api/pub/getuserbyid'; 
+
+    getUserById(formData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getuserbyidUrl, formData)
+        .pipe(
+            tap(data => this.log('get user by id')),
+            catchError(this.handleError('get user by id', []))
+        );
+    }
+    //******************************** */
     private getContactMessages = 'https://login.reddah.com/api/chat/getmessages'; 
 
     getMessages(): Observable<any> {
@@ -843,6 +854,11 @@ export class ReddahService {
         );
     }
     //******************************** */
+    reloadLocaleSettings(){
+        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+        this.translate.setDefaultLang(currentLocale);
+        this.translate.use(currentLocale);
+    }
 
     setCurrentUser(userName: string){
         this.localStorageService.store("Reddah_CurrentUser",userName);

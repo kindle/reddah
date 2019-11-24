@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LocalePage } from '../common/locale/locale.page';
-import { CacheService } from "ionic-cache";
 import { SigninPage } from './signin/signin.page';
 //import dat from 'dat.gui'
 //import Stats from 'stats-js';
@@ -15,6 +14,7 @@ import PerspectiveTransform from '../../assets/js/css_globe_PerspectiveTransform
 import TweenMax from '../../assets/js/TweenMax.min.js'
 import { AuthService } from '../auth.service';
 import { RegisterPage } from './register/register.page'
+import { Globalization } from '@ionic-native/globalization';
 
 @Component({
     selector: 'app-surface',
@@ -27,9 +27,8 @@ export class SurfacePage implements OnInit {
         private reddah: ReddahService,
         private loadingController: LoadingController,
         private translateService: TranslateService,
-        private toastController: ToastController,
+        private platform: Platform,
         private router: Router,
-        private cacheService: CacheService,
         private authService: AuthService,
         private localStorageService: LocalStorageService,
         private translate: TranslateService,
@@ -39,8 +38,31 @@ export class SurfacePage implements OnInit {
 
     ngOnInit() {
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-        this.translate.setDefaultLang(currentLocale);
-        this.translate.use(currentLocale);
+        let defaultLocale ="en-US"
+        if(currentLocale==null){
+            if(this.platform.is('cordova'))
+            { 
+                Globalization.getPreferredLanguage()
+                .then(res => {
+                    this.localStorageService.store("Reddah_Locale", res.value);
+                    this.translate.setDefaultLang(res.value);
+                })
+                .catch(e => {
+                    this.localStorageService.store("Reddah_Locale", defaultLocale);
+                    this.translate.setDefaultLang(defaultLocale);
+                });
+            }
+            else{
+                this.localStorageService.store("Reddah_Locale", defaultLocale);
+                this.translate.setDefaultLang(defaultLocale);
+                this.translate.use(defaultLocale);
+            }
+
+        }
+        else{
+            this.translate.setDefaultLang(currentLocale);
+            this.translate.use(currentLocale);
+        }
         this.init(null);
     }
 

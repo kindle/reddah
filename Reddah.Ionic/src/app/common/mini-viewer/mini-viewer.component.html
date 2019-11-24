@@ -1,6 +1,6 @@
 <ion-content style="--background: white;" [innerHTML]="html" id="mini-container" [hidden]="!loaded">
 </ion-content>
-<ion-fab vertical="top" horizontal="end" slot="fixed" [hidden]="!loaded">
+<ion-fab absolute-drag startRight="10" startTop="10" [hidden]="!loaded">
     <ion-fab-button color="light" mini>
         <ion-icon color="medium" name="menu"></ion-icon>
     </ion-fab-button>
@@ -13,9 +13,9 @@
         <ion-fab-button (click)="share()">
             <ion-icon color="secondary" name="share"></ion-icon>
         </ion-fab-button>
-        <ion-fab-button (click)="rank()">
+        <!--<ion-fab-button (click)="rank()">
             <ion-icon color="primary" name="podium"></ion-icon>
-        </ion-fab-button>
+        </ion-fab-button>-->
         <ion-fab-button (click)="report()">
             <ion-icon color="medium" name="alert"></ion-icon>
         </ion-fab-button>

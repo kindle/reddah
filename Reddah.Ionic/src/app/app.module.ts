@@ -99,6 +99,7 @@ import { AddFeedbackPage } from './mytimeline/add-feedback/add-feedback.page';
 import { AddMaterialPage } from './mytimeline/add-material/add-material.page';
 import { StockPage } from './common/stock/stock.page';
 import { CommentReplyPage } from './postviewer/comment-reply/comment-reply.page';
+import { AbsoluteDragDirective } from './absolute-drag.directive';
 import { AutoresizeDirective } from './autoresize-textarea.directive';
 import { ImageLazyLoadDirective } from './image-lazy-load.directive';
 import { CommentBoxComponent } from './postviewer/comment-box/comment-box.component';
@@ -212,6 +213,7 @@ var firebaseConfig = {
         StockPage,
         CommentReplyPage,
         AutoresizeDirective,
+        AbsoluteDragDirective,
         //SwipeTabDirective,
         ImageLazyLoadDirective,
         CommentBoxComponent,

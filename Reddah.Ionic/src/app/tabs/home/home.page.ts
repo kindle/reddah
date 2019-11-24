@@ -185,6 +185,7 @@ export class HomePage implements OnInit {
     }
     
     async view(article: Article){
+        this.reddah.reloadLocaleSettings();
         const viewerModal = await this.modalController.create({
             component: PostviewerPage,
             componentProps: { article: article },

@@ -10,6 +10,8 @@ import { TsViewerPage } from '../../mytimeline/tsviewer/tsviewer.page';
 import { PubPage } from '../../tabs/publisher/pub/pub.page';
 import { MiniViewerComponent } from '../mini-viewer/mini-viewer.component';
 import { ActivatedRoute } from '@angular/router';
+import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
+import { ShareChooseChatPage } from '../../chat/share-choose-chat/share-choose-chat.page';
 
 @Component({
     selector: 'app-search',
@@ -443,7 +445,32 @@ export class SearchPage implements OnInit {
         const { data } = await modal.onDidDismiss();
         if(data||!data)
         {
-            
+            if(data=='report'){
+                const modal = await this.modalController.create({
+                    component: AddFeedbackPage,
+                    componentProps: { 
+                        title: this.translate.instant("Pop.Report"),
+                        desc: this.translate.instant("Pop.ReportReason"),
+                        feedbackType: 4,
+                        article: mini
+                    },
+                    cssClass: "modal-fullscreen",
+                });
+                  
+                await modal.present();
+            }
+            else if(data=='share'){
+                const modal = await this.modalController.create({
+                    component: ShareChooseChatPage,
+                    componentProps: { 
+                        title: this.translate.instant("Common.Choose"),
+                        article: mini,
+                    },
+                    cssClass: "modal-fullscreen",
+                });
+                  
+                await modal.present();        
+            }
         }
 
         this.reddah.setRecent(mini,4);

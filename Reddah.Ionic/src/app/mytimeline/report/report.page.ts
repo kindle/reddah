@@ -47,11 +47,6 @@ export class ReportPage implements OnInit {
         private localStorageService: LocalStorageService,
         private popoverController: PopoverController,
         private cacheService: CacheService,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
-        private transfer: FileTransfer, 
-        private file: File,
-        private statusBar: StatusBar,
         private alertController: AlertController,
         private translate: TranslateService,
     ){

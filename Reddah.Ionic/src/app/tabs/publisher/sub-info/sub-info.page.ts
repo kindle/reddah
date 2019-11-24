@@ -12,6 +12,8 @@ import { AddMiniPage } from '../add-mini/add-mini.page';
 import { MiniViewerComponent } from '../../../common/mini-viewer/mini-viewer.component';
 import { TranslateService } from '@ngx-translate/core';
 import { MaterialPage } from '../../../mytimeline/material/material.page';
+import { ShareChooseChatPage } from '../../../chat/share-choose-chat/share-choose-chat.page';
+import { AddFeedbackPage } from '../../../mytimeline/add-feedback/add-feedback.page';
 
 @Component({
     selector: 'app-sub-info',
@@ -279,6 +281,7 @@ export class SubInfoPage implements OnInit {
     }
 
     async goMini(mini){
+        
         //open mini page
         const modal = await this.modalController.create({
             component: MiniViewerComponent,
@@ -294,7 +297,35 @@ export class SubInfoPage implements OnInit {
         const { data } = await modal.onDidDismiss();
         if(data||!data)
         {
-            
+            if(data=='report'){
+                const modal = await this.modalController.create({
+                    component: AddFeedbackPage,
+                    componentProps: { 
+                        title: this.translate.instant("Pop.Report"),
+                        desc: this.translate.instant("Pop.ReportReason"),
+                        feedbackType: 4,
+                        article: mini
+                    },
+                    cssClass: "modal-fullscreen",
+                });
+                  
+                await modal.present();
+            }
+            else if(data=='share'){
+                const modal = await this.modalController.create({
+                    component: ShareChooseChatPage,
+                    componentProps: { 
+                        title: this.translate.instant("Common.Choose"),
+                        article: mini,
+                    },
+                    cssClass: "modal-fullscreen",
+                });
+                  
+                await modal.present();        
+            }
         }
+
+        this.reddah.setRecent(mini,4);
+        this.reddah.setRecentUseMini(mini.UserName).subscribe(data=>{});
     }
 }

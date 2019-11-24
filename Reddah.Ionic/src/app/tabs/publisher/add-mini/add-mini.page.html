@@ -1,21 +1,70 @@
 <ion-item color="light" no-padding lines="none">
     <ion-icon name="ios-arrow-back" slot="start" (click)="close()" class="backbutton"></ion-icon>
     <ion-button color="success" slot="end" (click)="save()">{{ 'Common.Save' | translate }}</ion-button>
-    
 </ion-item>
 <ion-content>
-    <ion-item lines="none" class="gapBottom inputItem">
-        <ion-textarea style="border: 1px solid gray; margin-bottom: 5px;" autoresize [(ngModel)]="title" cols="20" rows="10" placeholder="js..."></ion-textarea>
-    </ion-item>
-    <ion-item lines="none">
-        <ion-textarea style="border: 1px solid gray; margin-bottom: 5px;" [(ngModel)]="content" cols="20" rows="10" placeholder="html..."></ion-textarea>
-    </ion-item>
-    <ion-item lines="none">
-        <ion-textarea style="border: 1px solid gray; margin-bottom: 5px;" [(ngModel)]="abstract" cols="20" rows="10" placeholder="css..."></ion-textarea>
-    </ion-item>
-    <ion-item lines="none">
-        <ion-button color="success" slot="end" (click)="preview()" *ngIf="article">{{ 'Common.Test' | translate }}</ion-button>
-        <ion-button color="success" slot="end" (click)="publish()" *ngIf="article">{{ 'Common.Publish' | translate }}</ion-button>
+    <ion-tabs>
+        <ion-tab tab="html">
+            <ion-header translucent>
+                <ion-toolbar>
+                    <ion-title>HTML</ion-title>
+                </ion-toolbar>
+            </ion-header>
+    
+            <ion-content fullscreen class="ion-padding">
+                <ion-textarea style="border: 1px solid gray; margin-bottom: 5px; height:100%;" 
+                    autoresize [(ngModel)]="content" cols="20" rows="10" placeholder="html...">
+                </ion-textarea>
+            </ion-content>
+        </ion-tab>
+    
+        <ion-tab tab="js">
+            <ion-header translucent>
+                <ion-toolbar>
+                    <ion-title>Javascript</ion-title>
+                </ion-toolbar>
+            </ion-header>
+    
+            <ion-content fullscreen class="ion-padding">
+                <ion-textarea style="border: 1px solid gray; margin-bottom: 5px; height:100%;" 
+                    autoresize [(ngModel)]="title" cols="20" rows="10" placeholder="js...">
+                </ion-textarea>
+            </ion-content>
+        </ion-tab>
+    
+        <ion-tab tab="css">
+            <ion-header translucent>
+                <ion-toolbar>
+                    <ion-title>Css</ion-title>
+                </ion-toolbar>
+            </ion-header>
+    
+            <ion-content fullscreen class="ion-padding">
+                <ion-textarea style="border: 1px solid gray; margin-bottom: 5px; height:100%;" 
+                    autoresize [(ngModel)]="abstract" cols="20" rows="10" placeholder="css...">
+                </ion-textarea>
+            </ion-content>
+        </ion-tab>
+    
+        <ion-tab-bar slot="bottom">
+            <ion-tab-button tab="html">
+                <ion-label>HTML</ion-label>
+                <ion-icon name="logo-html5"></ion-icon>
+            </ion-tab-button>
+            <ion-tab-button tab="js">
+                <ion-label color="dark">Javascript</ion-label>
+                <ion-icon name="logo-javascript" color="warning"></ion-icon>
+            </ion-tab-button>
+            <ion-tab-button tab="css">
+                <ion-label color="mini">CSS</ion-label>
+                <ion-icon name="logo-css3" color="mini"></ion-icon>
+            </ion-tab-button>
+        </ion-tab-bar>
+    </ion-tabs>
+
+    <ion-item lines="none" *ngIf="article">
+        <ion-button color="success" slot="end" (click)="preview()">{{ 'Common.Test' | translate }}</ion-button>
+        <ion-button color="success" slot="end" (click)="publish()">{{ 'Common.Publish' | translate }}</ion-button>
     </ion-item>
 
 </ion-content>

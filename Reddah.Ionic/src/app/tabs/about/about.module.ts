@@ -9,7 +9,6 @@ import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoa
 import { HttpLoaderFactory } from '../../app.module';
 import { HttpClient } from '@angular/common/http';
 
-
 @NgModule({
   imports: [
     IonicModule,

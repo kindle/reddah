@@ -12,7 +12,6 @@ import { PlatformPage } from '../publisher/platform/platform.page';
 import { TimelinePopPage } from '../../common/timeline-pop.page';
 import { AddTimelinePage } from '../../mytimeline/add-timeline/add-timeline.page';
 import { MessageListPage } from '../../tabs/message/message.page'
-import { Router } from '@angular/router';
 import { PointPage } from '../../common/point/point.page';
 
 @Component({
@@ -32,10 +31,7 @@ export class AboutPage implements OnInit {
         public navController: NavController,
         public reddah: ReddahService,
         public authService: AuthService,
-        public translateService: TranslateService,
-        private translate: TranslateService,
-        private router: Router,
-        private zone: NgZone,
+        public translateService: TranslateService
     ) {
         this.userName = "Not Set";
         this.userName = this.localStorageService.retrieve("Reddah_CurrentUser");
@@ -125,6 +121,7 @@ export class AboutPage implements OnInit {
     }
 
     async message(){
+        this.reddah.reloadLocaleSettings();
         const modal = await this.modalController.create({
             component: MessageListPage,
             componentProps: {},

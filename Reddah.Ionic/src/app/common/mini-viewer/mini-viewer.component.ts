@@ -9,6 +9,7 @@ import { DOCUMENT } from '@angular/common';
 import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { RankPage } from '../rank/rank.page';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class MiniViewerComponent implements OnInit {
         private modalController: ModalController,
         public reddah: ReddahService,
         public sanitizer: DomSanitizer,
-        private webView: WebView,
+        private translate: TranslateService,
         private iab: InAppBrowser,
         private _renderer2: Renderer2, 
         private gyroscope: Gyroscope,
@@ -149,7 +150,7 @@ export class MiniViewerComponent implements OnInit {
     }
 
     share(){
-
+        this.modalController.dismiss('share');
     }
 
     async rank(){
@@ -162,7 +163,7 @@ export class MiniViewerComponent implements OnInit {
         await modal.present();
     }
 
-    report(){
-
+    async report(){
+        this.modalController.dismiss('report');
     }
 }

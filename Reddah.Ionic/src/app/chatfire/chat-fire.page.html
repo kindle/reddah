@@ -26,7 +26,7 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                 <div text-center class="chatTime">{{reddah.htmlDecode(comment.Content)}}</div>
             </ion-col>
         </ion-row>
-        <ion-row *ngIf="comment.Type==0||comment.Type==4">
+        <ion-row *ngIf="comment.Type==0||comment.Type==4||comment.Type==5">
             <ion-col no-padding>
                 <div class="container-right" *ngIf="userName==comment.UserName">
                     <img [src]="reddah.appData('userphoto_'+comment.UserName)"
@@ -36,10 +36,10 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                         <div class="chat-box-me" (press)="showChatMenu($event, comment.Content)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
                         <div class="chat-arrow-right" style="flex:auto 0;"></div>
                     </div>
-                    <div class="arrow-box-right" *ngIf="comment.Type==4">
+                    <div class="arrow-box-right" *ngIf="comment.Type==4||comment.Type==5">
                         <div class="chat-box-me-link">
                             <app-share-article-chat [abstract]="comment.Abstract"
-                             [image]="comment.Content" [id]="comment.Duration"></app-share-article-chat>
+                             [image]="comment.Content" [id]="comment.Duration" [type]="comment.Type"></app-share-article-chat>
                         </div>
                         <div class="chat-arrow-right-link" style="flex:auto 0;"></div>
                     </div>
@@ -85,10 +85,10 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                     <div style="display: flex;margin-left:5px;">
                         <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==0"></div>
                         <div class="chat-box-others" *ngIf="comment.Type==0" (press)="showChatMenu($event, comment.Content)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
-                        <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==4"></div>
-                        <div class="chat-box-others-link" *ngIf="comment.Type==4">
+                        <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==4||comment.Type==5"></div>
+                        <div class="chat-box-others-link" *ngIf="comment.Type==4||comment.Type==5">
                             <app-share-article-chat [abstract]="comment.Abstract"
-                            [image]="comment.Content" [id]="comment.Duration"></app-share-article-chat>
+                            [image]="comment.Content" [id]="comment.Duration" [type]="comment.Type"></app-share-article-chat>
                         </div>
 <!--
                         <div class="chat-box-others-1" *ngIf="comment.Type==1" (click)="play(comment.Content)">

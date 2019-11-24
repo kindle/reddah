@@ -22,8 +22,10 @@
         </div>
     </div>
     <div class="ref-container">
-        <app-share-article *ngIf="feedbackType==4" [abstract]="article.Title" 
-        [image]="article.ImageUrl" [id]="article.Id"></app-share-article>
+        <app-share-article *ngIf="feedbackType==4&&article.Type==3" [view]="false" abstract="{{article.NickName+': '+article.Signature}}" 
+        [image]="article.Photo" [id]="article.UserId" [type]="5"></app-share-article>
+        <app-share-article *ngIf="feedbackType==4&&article.Type==0" [abstract]="article.Title" 
+        [image]="article.ImageUrl" [id]="article.Id" [type]="4"></app-share-article>
     </div>
     <ion-item lines="none">
         <ion-label></ion-label>

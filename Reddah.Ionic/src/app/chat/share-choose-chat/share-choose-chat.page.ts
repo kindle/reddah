@@ -3,10 +3,6 @@ import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { CacheService } from "ionic-cache";
-import { ChatPage } from '../../chat/chat.page';
-import { GroupChatPage } from '../../chat/group-chat.page';
-import { ChatChooseUserPage } from '../../chat/chat-choose-user/chat-choose-user.page';
 import { ShareChooseUserPage } from '../../chat/share-choose-user/share-choose-user.page';
 
 @Component({
@@ -28,8 +24,7 @@ export class ShareChooseChatPage implements OnInit {
         public navController: NavController,
 
         public modalController: ModalController,
-        private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
+        private localStorageService: LocalStorageService
     ){
         this.currentUserName = this.reddah.getCurrentUser();
     }
@@ -101,9 +96,20 @@ export class ShareChooseChatPage implements OnInit {
     async chooseChat(message) {
         let selectedArticleId = message.Id;
         let formData = new FormData();
-        formData.append("abstract", this.reddah.htmlDecode(this.article.Title));
-        formData.append("content", this.article.ImageUrl);
-        formData.append("ref", JSON.stringify(this.article.Id));
+        if(this.article.Type==0){
+            formData.append("abstract", this.reddah.htmlDecode(this.article.Title));
+            formData.append("content", this.article.ImageUrl);
+            formData.append("ref", JSON.stringify(this.article.Id));
+            //--default 0:text, 1:audio 2:image 3:video 4:article 5:mini
+            formData.append("type", 4+"");
+        }
+        else if(this.article.Type==3){
+            formData.append("abstract", this.reddah.htmlDecode(this.article.NickName+": "+this.article.Signature));
+            formData.append("content", this.article.Photo);
+            formData.append("ref", JSON.stringify(this.article.UserId));
+            formData.append("type", 5+"");
+        }
+        
         formData.append("chatid", JSON.stringify(selectedArticleId));
 
         if(message.Type==2||message.Type==3){

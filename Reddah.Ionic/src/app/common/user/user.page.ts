@@ -14,6 +14,9 @@ import { SettingNoteLabelPage } from '../../settings/setting-note-label/setting-
 import { ChatFirePage } from '../../chatfire/chat-fire.page';
 import { MorePage } from '../more/more.page';
 import { LocationPage } from '../location/location.page';
+import { MiniViewerComponent } from '../mini-viewer/mini-viewer.component';
+import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
+import { ShareChooseChatPage } from '../../chat/share-choose-chat/share-choose-chat.page';
 
 @Component({
     selector: 'app-user',
@@ -49,6 +52,7 @@ export class UserPage implements OnInit {
         this.currentUserName = this.reddah.getCurrentUser();
         this.reddah.getUserPhotos(this.userName);
         this.getTimeline();
+        this.getUsedMini();
         this.isFriend = this.reddah.appData('userisfriend_'+this.userName+'_'+this.reddah.getCurrentUser())==1;
     }
 
@@ -93,17 +97,61 @@ export class UserPage implements OnInit {
         .subscribe(minis => 
         {
             for(let mini of minis){
-                
-                //article.Content.split('$$$').forEach((item)=>{
-                //    if(this.imageList.length<3&&item.length>0)  
-                //        this.imageList.push(item);
-                //});
                 this.appList.push(mini);
                 
                 if(this.appList.length>=3)
                     break;
             }
         });
+    }
+
+    async goMini(mini){
+        
+        //open mini page
+        const modal = await this.modalController.create({
+            component: MiniViewerComponent,
+            componentProps: { 
+                content: mini.Cover,
+                guid: mini.UserName,
+                version: mini.Sex,
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data||!data)
+        {
+            if(data=='report'){
+                const modal = await this.modalController.create({
+                    component: AddFeedbackPage,
+                    componentProps: { 
+                        title: this.translate.instant("Pop.Report"),
+                        desc: this.translate.instant("Pop.ReportReason"),
+                        feedbackType: 4,
+                        article: mini
+                    },
+                    cssClass: "modal-fullscreen",
+                });
+                  
+                await modal.present();
+            }
+            else if(data=='share'){
+                const modal = await this.modalController.create({
+                    component: ShareChooseChatPage,
+                    componentProps: { 
+                        title: this.translate.instant("Common.Choose"),
+                        article: mini,
+                    },
+                    cssClass: "modal-fullscreen",
+                });
+                  
+                await modal.present();        
+            }
+        }
+
+        this.reddah.setRecent(mini,4);
+        this.reddah.setRecentUseMini(mini.UserName).subscribe(data=>{});
     }
 
     async viewTimeline(){
@@ -124,6 +172,7 @@ export class UserPage implements OnInit {
         this.cacheService.clearGroup("TimeLinePage"+this.userName);
         this.imageList = [];
         this.loadedIds = [];
+        this.appList = [];
         this.ngOnInit();
     }
 
