@@ -133,6 +133,7 @@ export class AboutPage implements OnInit {
 
     async goCredit(event){
         event.stopPropagation();
+        return;
 
         const modal = await this.modalController.create({
             component: PointPage,

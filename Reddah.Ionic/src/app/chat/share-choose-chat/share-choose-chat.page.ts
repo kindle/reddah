@@ -105,7 +105,7 @@ export class ShareChooseChatPage implements OnInit {
         }
         else if(this.article.Type==3){
             formData.append("abstract", this.reddah.htmlDecode(this.article.NickName+": "+this.article.Signature));
-            formData.append("content", this.article.Photo);
+            formData.append("content", this.reddah.parseImage(this.article.Photo));
             formData.append("ref", JSON.stringify(this.article.UserId));
             formData.append("type", 5+"");
         }

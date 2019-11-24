@@ -147,7 +147,7 @@ export class AddFeedbackPage implements OnInit {
             else if(this.article.Type==3)
             {
                 this.formData.append("abstract", this.reddah.htmlDecode(this.article.NickName+": "+this.article.Signature));
-                this.formData.append("content", this.article.Photo);
+                this.formData.append("content", this.reddah.parseImage(this.article.Photo));
                 this.formData.append("ref", this.article.UserId);
                 this.formData.append("utype", 5+"");
             }
