@@ -26,6 +26,7 @@ namespace Reddah.Web.Login
 
     public class UserInfo
     {
+        public int UserId { get; set; }
         public int Type { get; set; }
         public string UserName { get; set; }
         public string NickName { get; set; }

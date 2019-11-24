@@ -913,6 +913,7 @@ namespace Reddah.Web.Login.Controllers
                              orderby user.Point descending
                              select new UserInfo
                              {
+                                UserId = user.UserId,
                                 UserName = user.UserName,
                                 NickName = user.NickName ?? user.UserName,
                                 Sex = user.Sex ?? 0,
