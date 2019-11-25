@@ -137,8 +137,10 @@ namespace Reddah.Web.Login.Controllers
                 int type = js.Deserialize<int>(HttpContext.Current.Request["type"]);
                 int refArticleId = js.Deserialize<int>(HttpContext.Current.Request["ref"]);
                 //4:article 5:mini
-                int userType = js.Deserialize<int>(HttpContext.Current.Request["utype"]);
-
+                int userType = 0;
+                if(HttpContext.Current.Request["utype"]!=null)
+                    userType = js.Deserialize<int>(HttpContext.Current.Request["utype"]);
+                
 
                 Dictionary<string, string> imageUrls = new Dictionary<string, string>();
 

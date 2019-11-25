@@ -89,10 +89,10 @@ namespace Reddah.Web.Login.Controllers
                             new MailAddress("donotreply@reddah.com", emailTitle),
                             new MailAddress(email, userName),
                             emailSub,
-                            string.Format("{0}:<br>" +
-                            emailParaStart+ ":<br>" +
+                            string.Format("Hi {0}!<br><br>" +
+                            emailParaStart+ ":<br><br>" +
                             "https://reddah.com/{1}/VerifyEmail?Userid={2}&EmailToken={3}" +
-                            "<br>" + emailParaEnd,
+                            "<br><br>" + emailParaEnd,
                             userName, locale, userJustCreated.UserId, verifyToken),
                             true
                     );
