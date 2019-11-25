@@ -20,7 +20,8 @@ import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ng
 import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
-import { QRScanner } from '@ionic-native/qr-scanner/ngx';
+//import { QRScanner } from '@ionic-native/qr-scanner/ngx';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
@@ -37,7 +38,7 @@ import { VideoEditor } from '@ionic-native/video-editor/ngx';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion/ngx';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
-import { CKEditorModule } from 'ckeditor4-angular';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoadedImageProps } from 'ng-lazyload-image';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Network } from '@ionic-native/network/ngx';
@@ -345,7 +346,8 @@ var firebaseConfig = {
         PhotoLibrary,
         Platform,
         PopoverController,
-        QRScanner,
+        //QRScanner,
+        BarcodeScanner,
         ReddahService,
         StatusBar,
         SplashScreen,

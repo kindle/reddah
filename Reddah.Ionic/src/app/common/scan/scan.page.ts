@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+//import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ModalController, NavController } from '@ionic/angular';
 import { UserPage } from '../user/user.page';
 import { ReddahService } from '../../reddah.service';
-import { QrcardPage } from '../qrcard/qrcard.page';
 
 @Component({
     selector: 'app-scan',
@@ -16,6 +16,7 @@ export class ScanPage implements OnInit {
         public reddah: ReddahService,
         private modalController: ModalController,
         public navController: NavController,
+        private barcodeScanner: BarcodeScanner,
     ) { }
 
     debug = "";
@@ -27,6 +28,15 @@ export class ScanPage implements OnInit {
         this.navController.goBack(true);
     }
 
+    scanner(){
+        this.barcodeScanner.scan().then(barcodeData => {
+            console.log('Barcode data', barcodeData);
+            alert(JSON.stringify(barcodeData))
+           }).catch(err => {
+               console.log('Error', err);
+           });
+    }
+    /*
     // Show scanner 
     scanner() {
         (window.document.querySelector('html') as HTMLElement).classList.add('cameraView');
@@ -82,11 +92,12 @@ export class ScanPage implements OnInit {
 
         
     }
+    */
 
     ionViewWillLeave() {
         (window.document.querySelector('html') as HTMLElement).classList.remove('cameraView');
-        QRScanner.hide();
-        QRScanner.destroy();
+        //QRScanner.hide();
+        //QRScanner.destroy();
     }
 
     light=false;
@@ -94,18 +105,18 @@ export class ScanPage implements OnInit {
     
     toggleLight() {
         if (this.light) {
-          QRScanner.disableLight();
+          //QRScanner.disableLight();
         } else {
-          QRScanner.enableLight();
+          //QRScanner.enableLight();
         }
         this.light = !this.light;
     }
   
     toggleCamera() {
         if (this.frontCamera) {
-          QRScanner.useBackCamera();
+          //QRScanner.useBackCamera();
         } else {
-          QRScanner.useFrontCamera();
+          //QRScanner.useFrontCamera();
         }
         this.frontCamera = !this.frontCamera;
     }
