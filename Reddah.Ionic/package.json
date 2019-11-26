@@ -191,10 +191,10 @@
       "cordova-clipboard": {},
       "cordova-plugin-globalization": {},
       "cordova-plugin-local-notification": {},
-      "cordova-plugin-add-swift-support": {}
+      "cordova-plugin-add-swift-support": {},
+      "cordova-plugin-barcodescanner": {}
     },
     "platforms": [
-      "ios",
       "android"
     ]
   },

@@ -126,4 +126,5 @@
     </plugin>
     <engine name="android" spec="^7.1.4" />
     <engine name="ios" spec="^4.5.5" />
+    <plugin name="cordova-plugin-barcodescanner" spec="^0.7.4" />
 </widget>
