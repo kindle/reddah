@@ -71,7 +71,9 @@
     "cordova-plugin-app-version": "0.1.9",
     "cordova-plugin-appversion": "1.0.0",
     "cordova-plugin-badge": "^0.8.8",
+    "cordova-plugin-barcodescanner": "^0.7.4",
     "cordova-plugin-camera": "4.0.3",
+    "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-crop": "^0.4.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-device-motion": "2.0.1",
@@ -186,15 +188,14 @@
       "cordova-plugin-android-permissions": {},
       "cordova-plugin-gyroscope": {},
       "cordova-plugin-vibration": {},
-      "cordova-plugin-barcode-scanner": {},
       "cordova-clipboard": {},
       "cordova-plugin-globalization": {},
       "cordova-plugin-local-notification": {},
       "cordova-plugin-add-swift-support": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   },
   "main": "index.js",
