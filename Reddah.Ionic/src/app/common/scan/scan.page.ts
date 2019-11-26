@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-//import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ModalController, NavController } from '@ionic/angular';
 import { UserPage } from '../user/user.page';
 import { ReddahService } from '../../reddah.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: 'app-scan',
@@ -17,6 +17,7 @@ export class ScanPage implements OnInit {
         private modalController: ModalController,
         public navController: NavController,
         private barcodeScanner: BarcodeScanner,
+        private iab: InAppBrowser,
     ) { }
 
     debug = "";
@@ -30,11 +31,18 @@ export class ScanPage implements OnInit {
 
     scanner(){
         this.barcodeScanner.scan().then(barcodeData => {
-            console.log('Barcode data', barcodeData);
-            alert(JSON.stringify(barcodeData))
-           }).catch(err => {
-               console.log('Error', err);
-           });
+            let text = barcodeData.text;
+            if(text.startsWith(this.reddah.QrUserKey))
+            {
+                this.goUser(text.replace(this.reddah.QrUserKey,""));
+            }
+            else{
+                const browser = this.iab.create(text);
+                browser.show();
+            }
+        }).catch(err => {
+            console.log('Error', err);
+        });
     }
     /*
     // Show scanner 
@@ -107,6 +115,7 @@ export class ScanPage implements OnInit {
         if (this.light) {
           //QRScanner.disableLight();
         } else {
+            BarcodeScanner
           //QRScanner.enableLight();
         }
         this.light = !this.light;

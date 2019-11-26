@@ -264,8 +264,8 @@
         "Register":{
             "Title":"Reddah Account",
             "Sub":"Verify your email address‏",
-            "ParaStart":"Please visit this link to verify your email address",
-            "ParaEnd":"After that, you can login. Thanks for using Reddah!"
+            "ParaStart":"Welcome to Reddah! To verify your email so that you can login, click the following link",
+            "ParaEnd":"Thanks for joining the community. Can't wait to see what you post.<br><br>Reddah ♥ you!"
         },
         "Reset":{
             "Title":"Reddah Account",
