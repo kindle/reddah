@@ -25,7 +25,6 @@
     "@ionic-native/android-permissions": "^5.14.0",
     "@ionic-native/app-update": "^5.1.0",
     "@ionic-native/app-version": "^5.1.0",
-    "@ionic-native/barcode-scanner": "^5.17.0",
     "@ionic-native/camera": "^5.1.0",
     "@ionic-native/clipboard": "^5.15.1",
     "@ionic-native/core": "^5.1.0",
@@ -191,10 +190,7 @@
       "cordova-plugin-local-notification": {},
       "cordova-plugin-add-swift-support": {}
     },
-    "platforms": [
-      "android",
-      "ios"
-    ]
+    "platforms": ["android","ios"]
   },
   "main": "index.js",
   "license": "ISC"
