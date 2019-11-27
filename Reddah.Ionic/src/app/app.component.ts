@@ -5,10 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'ngx-webstorage';
-import { Toast } from '@ionic-native/toast/ngx';
 import { ImageLoaderConfigService } from 'ionic-image-loader';
 import { CacheService } from "ionic-cache";
-import { File } from '@ionic-native/file/ngx';
 //import * as firebase from 'firebase';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
@@ -41,20 +39,21 @@ export class AppComponent {
         private zone: NgZone,
         //private firebase: Firebase,
     ) {
-        try{
-            this.initializeApp();
-        }
-        catch(ex){
-            console.log(ex)
-        }
+        this.initializeApp();
     }
 
     initializeApp() {
         this.platform.ready().then(() => {
-            //this.statusBar.overlaysWebView(true);
+            this.statusBar.overlaysWebView(false);
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            this.initPlugins();
+            
+            try{
+                this.initPlugins();
+            }
+            catch(ex){
+                console.log(ex)
+            }
         });
         
         // Initialize BackButton Eevent.
