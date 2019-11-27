@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+//import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ModalController, NavController } from '@ionic/angular';
 import { UserPage } from '../user/user.page';
 import { ReddahService } from '../../reddah.service';
@@ -16,7 +16,7 @@ export class ScanPage implements OnInit {
         public reddah: ReddahService,
         private modalController: ModalController,
         public navController: NavController,
-        private barcodeScanner: BarcodeScanner,
+        //private barcodeScanner: BarcodeScanner,
         private iab: InAppBrowser,
     ) { }
 
@@ -30,7 +30,7 @@ export class ScanPage implements OnInit {
     }
 
     scanner(){
-        this.barcodeScanner.scan().then(barcodeData => {
+        /*this.barcodeScanner.scan().then(barcodeData => {
             let text = barcodeData.text;
             if(text.startsWith(this.reddah.QrUserKey))
             {
@@ -42,7 +42,7 @@ export class ScanPage implements OnInit {
             }
         }).catch(err => {
             console.log('Error', err);
-        });
+        });*/
     }
     /*
     // Show scanner 

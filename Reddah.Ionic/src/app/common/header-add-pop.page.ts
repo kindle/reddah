@@ -16,10 +16,10 @@ import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
                 <ion-icon slot="start" color="tertiary" name="ios-person-add"></ion-icon>  
                 <ion-label>{{ 'Menu.Header.AddFriend' | translate }}</ion-label>
             </ion-item>
-            <ion-item button href="/scan">
+            <!--<ion-item button href="/scan">
                 <ion-icon slot="start" color="tertiary" name="ios-qr-scanner"></ion-icon>  
                 <ion-label>{{ 'Menu.Header.Scan' | translate }}</ion-label>
-            </ion-item>
+            </ion-item>-->
             <ion-item button (click)="feedback()">
                 <ion-icon slot="start" color="tertiary" name="mail"></ion-icon>  
                 <ion-label>{{ 'Menu.Header.Feedback' | translate }}</ion-label>

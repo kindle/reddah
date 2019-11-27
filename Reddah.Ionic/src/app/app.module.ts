@@ -21,7 +21,7 @@ import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 //import { QRScanner } from '@ionic-native/qr-scanner/ngx';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+//import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
@@ -347,7 +347,7 @@ var firebaseConfig = {
         Platform,
         PopoverController,
         //QRScanner,
-        BarcodeScanner,
+        //BarcodeScanner,
         ReddahService,
         StatusBar,
         SplashScreen,
