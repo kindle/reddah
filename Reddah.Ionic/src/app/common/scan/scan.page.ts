@@ -115,7 +115,6 @@ export class ScanPage implements OnInit {
         if (this.light) {
           //QRScanner.disableLight();
         } else {
-            BarcodeScanner
           //QRScanner.enableLight();
         }
         this.light = !this.light;
