@@ -29,7 +29,8 @@
       video
     </div>
     <div style="margin: 0 15px;">
-      <app-share-article *ngIf="postType==4" [abstract]="article.Title" [image]="article.ImageUrl" [id]="article.Id"></app-share-article>
+      <app-share-article *ngIf="postType==4" [abstract]="article.Title" 
+      [image]="article.ImageUrl" [id]="article.Id" [type]="4"></app-share-article>
     </div>
     <ion-item lines="none">
       <ion-label></ion-label>

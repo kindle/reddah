@@ -53,7 +53,7 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
-        <preference name="UseSwiftLanguageVersion" value="3" />
+        <preference name="UseSwiftLanguageVersion" value="4" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <preference name="StatusBarOverlaysWebView" value="false" />
@@ -143,6 +143,6 @@
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="To choose photos" />
     </plugin>
     <plugin name="cordova-plugin-add-swift-support" spec="^1.7.2" />
-    <engine name="ios" spec="^4.5.5" />
     <engine name="android" spec="^7.1.4" />
+    <engine name="ios" spec="^4.5.5" />
 </widget>
