@@ -36,6 +36,7 @@ import { Shake } from '@ionic-native/shake/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { VideoEditor } from '@ionic-native/video-editor/ngx';
 import { Vibration } from '@ionic-native/vibration/ngx';
+import { Device } from '@ionic-native/device/ngx';
 import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion/ngx';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -359,7 +360,7 @@ var firebaseConfig = {
         NativeAudio,
         LocalNotifications,
         VideoEditor,
-        Vibration,DeviceMotion,
+        Vibration,DeviceMotion,Device,
         //Firebase,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     ],

@@ -28,11 +28,11 @@ const routes: Routes = [
         component: SearchPage,
         canActivate: [AuthGuard],
     },
-    { 
+    /*{ 
         path: 'scan',
         component: ScanPage,
     },
-    /*{ 
+    { 
         path: 'post',
         component: AddTimelinePage,
     },*/

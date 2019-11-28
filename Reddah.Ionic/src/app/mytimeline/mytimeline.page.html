@@ -1,4 +1,4 @@
-<img [src]="reddah.appData('cover_'+userName)" style="position:fixed;">
+<img [src]="reddah.appData('cover_'+userName)" style="position:fixed;z-index: -1;">
 <ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop>
     <div class="headerStart" #headerStart slot="fixed">
         <ion-item color="transparent" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">

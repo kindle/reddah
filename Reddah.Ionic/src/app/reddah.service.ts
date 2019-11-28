@@ -22,6 +22,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { Router } from '@angular/router';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Device } from '@ionic-native/device/ngx';
 
 @Injectable({
     providedIn: 'root'
@@ -44,6 +45,7 @@ export class ReddahService {
         private router: Router,
         private ngZone: NgZone,
         private localNotifications: LocalNotifications,
+        private device: Device,
     ) { }
 
     //******************************** */
@@ -908,6 +910,23 @@ export class ReddahService {
     getLastLoginUserEmail(){
         let lastLoginUser = this.getLoginUserName();
         return "";
+    }
+
+    async updateUserDeviceInfo(){
+        let info = this.device.platform + "_" + this.device.version + this.device.isVirtual?"_Virtual":"";
+        let data = new FormData();
+        data.append("info",info);
+        //this.updateDeviceInfo(data).subscribe();
+    }
+
+    private updateUserDeviceInfoUrl = 'https://login.reddah.com/api/auth/updatedeviceinfo'; 
+    updateDeviceInfo(formData){
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.updateUserDeviceInfoUrl, formData)
+        .pipe(
+            tap(data => this.log('update device info')),
+            catchError(this.handleError('update device info', []))
+        );        
     }
 
     private getSecurityTokenUrl = 'https://login.reddah.com/api/auth/generatetoken'; 

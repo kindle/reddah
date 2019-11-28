@@ -60,6 +60,7 @@ export class SigninPage implements OnInit {
                         }
                     });
                     this.cacheService.clearAll();
+                    this.reddah.updateUserDeviceInfo();
                 }
                 else {
                     let msg = this.translate.instant(`Service.${result.Success}`);
