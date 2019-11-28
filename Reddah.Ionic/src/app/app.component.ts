@@ -39,7 +39,12 @@ export class AppComponent {
         private zone: NgZone,
         //private firebase: Firebase,
     ) {
-        this.initializeApp();
+        try{
+            this.initializeApp();
+        }
+        catch(ex){
+            console.log(ex)
+        }
     }
 
     initializeApp() {
@@ -47,13 +52,7 @@ export class AppComponent {
             this.statusBar.overlaysWebView(false);
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            
-            try{
-                this.initPlugins();
-            }
-            catch(ex){
-                console.log(ex)
-            }
+            this.initPlugins();
         });
         
         // Initialize BackButton Eevent.

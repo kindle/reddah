@@ -913,13 +913,15 @@ export class ReddahService {
     }
 
     async updateUserDeviceInfo(){
-        let info = this.device.platform + "_" + this.device.version + this.device.isVirtual?"_Virtual":"";
-        let data = new FormData();
-        data.append("info",info);
-        //this.updateDeviceInfo(data).subscribe();
+        if(this.platform.is('cordova')){ 
+            let info = `${this.device.platform}_${this.device.version}_${this.device.isVirtual?"Virtual":"Device"}_${this.device.uuid}`;
+            let data = new FormData();
+            data.append("info",info);
+            this.updateDeviceInfo(data).subscribe();
+        }
     }
 
-    private updateUserDeviceInfoUrl = 'https://login.reddah.com/api/auth/updatedeviceinfo'; 
+    private updateUserDeviceInfoUrl = 'https://login.reddah.com/api/user/updatedeviceinfo'; 
     updateDeviceInfo(formData){
         formData.append('jwt', this.getCurrentJwt());
         return this.http.post<any>(this.updateUserDeviceInfoUrl, formData)

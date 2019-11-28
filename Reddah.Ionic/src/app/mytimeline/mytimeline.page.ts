@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
-import { InfiniteScroll, Content, LoadingController, NavController, PopoverController, ModalController, AlertController, } from '@ionic/angular';
+import { InfiniteScroll, Content, LoadingController, NavController, PopoverController, ModalController, AlertController, Platform, } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
@@ -51,6 +51,7 @@ export class MyTimeLinePage implements OnInit {
         private cacheService: CacheService,
         private alertController: AlertController,
         private translate: TranslateService,
+        private platform: Platform,
     ){
         this.userName = this.reddah.getCurrentUser();
     }
@@ -65,8 +66,12 @@ export class MyTimeLinePage implements OnInit {
           
         await modal.present();
     }
-    
+
+    isAndroid = false;
     ngOnInit(){
+        if(this.platform.is('android')){
+            this.isAndroid = true;
+        }
         this.reddah.getUserPhotos(this.userName, true);
 
         let cachedArticles = this.localStorageService.retrieve("Reddah_mytimeline");
