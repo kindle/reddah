@@ -109,7 +109,8 @@
         <div class="post postModuleLiner" ng-repeat="article in aiArticles" on-finish-render-posts>
             <div class="postClear"></div>
             <div ng-if="article.VideoUrl.length>0">
-                <h2><a class="hand" ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))">{{htmlDecode(article.Title)}}</a> <i class="fa fa-window-maximize hand" ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))"></i></h2>
+                <h2><a class="hand" ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))">{{htmlDecode(article.Title)}}</a> 
+                <i class="fa fa-window-maximize hand" ng-click="viewArticle('@locale', urlDecode(article.GroupName), article.Id, urlDecode(article.Title))"></i></h2>
                 <div class="postClear"></div>
                 <video id="video_{{article.Id}}" ng-click="playVideo(article.Id)" ng-attr-src="{{trustAsResourceUrl(article.VideoUrl)}}"
                        ng-attr-poster="{{article.VideoPoster}}"
@@ -132,7 +133,7 @@
             <div class="listInfo" style="margin-top: 5px;">
                 <a href="/@locale/r/{{urlDecode(article.GroupName)}}/comments/{{article.Id}}/{{urlDecode(article.Title)}}/" target="_blank">{{article.Comments}} @Resources.Article_Comments </a> <!--share save hide report-->
                 <span ng-repeat="group in article.GroupName.split(',')">
-                    <a href="/@locale/r/{{group}}"><u>{{group}}</u></a>
+                    <a href="/@locale/r/{{htmlDecode(group)}}"><u>{{htmlDecode(group)}}</u></a>
                 </span>
                 @Resources.List_Submit {{article.CreatedOn}} @Resources.List_By <a href="/@locale/user/{{article.UserName}}">{{article.PubName}}</a>
             </div>

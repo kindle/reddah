@@ -161,6 +161,7 @@
     </Compile>
     <Compile Include="Controllers\ApiBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\PointController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\PubController.cs" />
