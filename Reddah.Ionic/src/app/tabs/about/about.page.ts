@@ -13,6 +13,7 @@ import { TimelinePopPage } from '../../common/timeline-pop.page';
 import { AddTimelinePage } from '../../mytimeline/add-timeline/add-timeline.page';
 import { MessageListPage } from '../../tabs/message/message.page'
 import { PointPage } from '../../common/point/point.page';
+import { PunchPage } from '../../common/punch/punch.page';
 
 @Component({
     selector: 'app-about',
@@ -133,10 +134,10 @@ export class AboutPage implements OnInit {
 
     async goCredit(event){
         event.stopPropagation();
-        return;
 
         const modal = await this.modalController.create({
-            component: PointPage,
+            //component: PointPage,
+            component: PunchPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
         });

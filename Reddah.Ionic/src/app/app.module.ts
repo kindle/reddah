@@ -17,7 +17,7 @@ import { Crop } from '@ionic-native/crop/ngx';
 import { Camera } from '@ionic-native/Camera/ngx'
 import { File } from '@ionic-native/file/ngx';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
+import { Gyroscope } from '@ionic-native/gyroscope/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 //import { QRScanner } from '@ionic-native/qr-scanner/ngx';
@@ -37,7 +37,6 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { VideoEditor } from '@ionic-native/video-editor/ngx';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { Device } from '@ionic-native/device/ngx';
-import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion/ngx';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -134,6 +133,7 @@ import { ChatChooseGroupPage } from './chat/chat-choose-group/chat-choose-group.
 import { BookmarkPage } from './bookmark/bookmark.page';
 import { BookmarkPopPage } from './common/bookmark-pop.page';
 import { PointPage } from './common/point/point.page';
+import { PunchPage } from './common/punch/punch.page';
 import { RankPage } from './common/rank/rank.page';
 import { ChatPopPage } from './common/chat-pop.page';
 import { SigninPage } from './surface/signin/signin.page';
@@ -175,7 +175,7 @@ var firebaseConfig = {
         AppComponent,
         BookmarkPage,
         BookmarkPopPage,ChatPopPage,
-        PointPage,
+        PointPage,PunchPage,
         RankPage,
         LocalePage,LocationPage,MapPage,EarthPage,
         ChooseUserPage,ShareChooseChatPage,
@@ -240,7 +240,7 @@ var firebaseConfig = {
     entryComponents: [
         BookmarkPage,
         BookmarkPopPage,ChatPopPage,
-        PointPage,
+        PointPage,PunchPage,
         RankPage,
         LocalePage,LocationPage,MapPage,EarthPage,
         ChooseUserPage,ShareChooseChatPage,
@@ -361,7 +361,7 @@ var firebaseConfig = {
         NativeAudio,
         LocalNotifications,
         VideoEditor,
-        Vibration,DeviceMotion,Device,SpeechRecognition,
+        Vibration,DeviceMotion,Device,
         //Firebase,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     ],
