@@ -47,7 +47,7 @@ namespace Reddah.Web.Login.Controllers
                     return Ok(new ApiResult(1, "No email"));
 
                 //Regex reg = new Regex(@"^\w+$");//字母、数字和下划线
-                Regex reg = new Regex("^[a-zA-Z]\\w{5,17}$");//字母开头，字母、数字和下划线
+                Regex reg = new Regex("^[a-zA-Z0-9]\\w{5,17}$");//字母、数字
                 if (!reg.IsMatch(userName))
                     return Ok(new ApiResult(1001, "user name invalid"));
 
