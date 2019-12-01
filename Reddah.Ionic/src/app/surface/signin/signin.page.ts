@@ -8,9 +8,9 @@ import { CacheService } from "ionic-cache";
 import { RegisterPage } from "../register/register.page"
 import { ForgotPage } from "../forgot/forgot.page";
 
-import * as THREE from 'three';
+/*import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { MeshLine, MeshLineMaterial } from 'three.meshline';
+import { MeshLine, MeshLineMaterial } from 'three.meshline';*/
 
 @Component({
     selector: 'app-signin',
@@ -32,7 +32,7 @@ export class SigninPage implements OnInit {
         if(lastLoginUserName)
             this.username = lastLoginUserName;
 
-        this.drawBackground();
+        //this.drawBackground();
     }
 
     
@@ -109,7 +109,7 @@ export class SigninPage implements OnInit {
 
         
 
-    
+    /*
     
     drawBackground(){
     
@@ -530,7 +530,7 @@ export class SigninPage implements OnInit {
 
         
     }
-
+*/
 }
 
 
