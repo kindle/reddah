@@ -189,3 +189,9 @@ ion-icon{
   text-overflow:ellipsis;
   overflow:hidden;
 }
+
+.login-bg {
+  top: 0;
+  position: fixed;
+  z-index: 0;
+}
