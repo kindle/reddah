@@ -3,7 +3,7 @@ import { AuthService } from '../auth.service';
 import { Platform, Events } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ModalController } from '@ionic/angular';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ReddahService } from '../reddah.service';
 import { SwipeTabDirective } from '../swipe-tab.directive';
@@ -35,6 +35,7 @@ export class TabsPage implements OnInit {
         public reddah: ReddahService,
         public events: Events,
         private translate: TranslateService,
+        private speechRecognition: SpeechRecognition, 
     )
     {
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
@@ -65,6 +66,49 @@ export class TabsPage implements OnInit {
         }
         else if(this.platform.is('iphone')||this.platform.is('ipad')||this.platform.is('ios')){ 
             this.isIos = true;
+        }
+
+        if(this.platform.is('cordova')){
+            
+
+            // Stop the recognition process (iOS only)
+            //this.speechRecognition.stopListening()
+
+            // Get the list of supported languages
+            this.speechRecognition.getSupportedLanguages()
+            .then(
+            (languages: string[]) => alert(JSON.stringify(languages)),
+            (error) => console.log(error)
+            )
+
+            // Check permission
+            this.speechRecognition.hasPermission()
+            .then((hasPermission: boolean) => console.log(hasPermission))
+
+            // Request permissions
+            this.speechRecognition.requestPermission()
+            .then(
+            () => console.log('Granted'),
+            () => console.log('Denied')
+            )
+
+            // Check feature available
+            //this.speechRecognition.isRecognitionAvailable()
+            //.then((available: boolean) => console.log(available))
+
+            let options = {
+                language: "en-US",
+                matches: 5,
+                prompt: true,      // Android only
+                showPopup: true,  // Android only
+                showPartial: true
+              }
+            // Start the recognition process
+            this.speechRecognition.startListening(options)
+            .subscribe(
+            (matches: string[]) => alert(JSON.stringify(matches)),
+            (onerror) => console.log('error:', onerror)
+            )
         }
     }
 
