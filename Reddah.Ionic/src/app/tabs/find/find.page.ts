@@ -8,6 +8,7 @@ import { ReddahService } from '../../reddah.service';
 import { LocationPage } from '../../common/location/location.page';
 import { MagicMirrorPage } from '../../common/magic-mirror/magic-mirror.page';
 import { BlackHolePage } from '../../common/black-hole/black-hole.page';
+import { WormHolePage } from '../../common/worm-hole/worm-hole.page';
 
 @Component({
   selector: 'app-find',
@@ -118,7 +119,7 @@ export class FindPage {
 
     async blackHole(){
         const modal = await this.modalController.create({
-            component: BlackHolePage,
+            component: WormHolePage,
             componentProps: {},
             cssClass: "modal-fullscreen",
         });

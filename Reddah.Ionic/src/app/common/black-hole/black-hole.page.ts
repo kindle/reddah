@@ -59,17 +59,21 @@ export class BlackHolePage implements OnInit {
         let mouse;
         let hover;
 
-        Array.prototype.lerp = function(target, speed) {
+        Array.prototype.lerping = function(target, speed) {
             this.forEach((n, i) => (this[i] = lerp(n, target[i], speed)));
         };
+        /*function lerping(source, target, speed){
+            source.forEach((n, i) => (source[i] = lerp(n, target[i], speed)));
+        } */
 
         function Particle() {
         
-            this.init();
             
-            /*get = color() {
+            
+            this.color=()=> {
                 return `hsla(${this.hue}, 50%, 80%, ${fadeInOut(this.life, this.ttl)})`;
-            }*/
+            }
+
             this.init = ()=> {
                 this.life = 0;
                 this.ttl = randIn(50, 200);
@@ -77,7 +81,8 @@ export class BlackHolePage implements OnInit {
                 this.size = randIn(0.5, 2);
                 this.position = [rand(canvas.a.width), rand(canvas.a.height)];
                 this.lastPosition = [...this.position];
-                this.direction = angle(...this.position, ...center) - HALF_PI;
+                //this.direction = angle(...this.position, ...center) - HALF_PI;
+                this.direction = angle(this.position[0], this.position[1], center[0], center[1]) - HALF_PI;
                 this.velocity = [
                     cos(this.direction) * this.speed,
                     sin(this.direction) * this.speed
@@ -90,7 +95,7 @@ export class BlackHolePage implements OnInit {
                 ctx.a.globalAlpha = 0.1;
                 ctx.a.filter = "blur(4px)";
                 ctx.a.lineWidth = 1;
-                ctx.a.strokeStyle = this.color;
+                ctx.a.strokeStyle = this.color();
                 ctx.a.beginPath();
                 ctx.a.arc(...center, eventHorizon, 0, TAU);
                 ctx.a.closePath();
@@ -102,12 +107,12 @@ export class BlackHolePage implements OnInit {
             this.update = ()=> {
                 this.lastPosition = [...this.position];
                 this.direction = lerp(
-                    angle(...this.lastPosition, ...center),
-                    angle(...this.position, ...center),
+                    angle(this.lastPosition[0], this.lastPosition[1], center[0], center[1]),
+                    angle(this.position[0], this.position[1], center[0], center[1]),
                     0.01
                 );
-                this.speed = fadeOut(dist(...this.position, ...center), canvas.a.width) * gravStrength;
-                this.velocity.lerp(
+                this.speed = fadeOut(dist(this.position[0], this.position[1], center[0], center[1]), canvas.a.width) * gravStrength;
+                this.velocity.lerping(
                     [cos(this.direction) * this.speed, sin(this.direction) * this.speed],
                     0.01
                 );
@@ -115,14 +120,14 @@ export class BlackHolePage implements OnInit {
                 this.position[1] += this.velocity[1];
     
                 this.life++ > this.ttl && this.init();
-                dist(...this.position, ...center) <= eventHorizon && this.die();
+                dist(this.position[0], this.position[1], center[0], center[1]) <= eventHorizon && this.die();
     
                 return this;
             }
             this.draw = ()=> {
                 ctx.a.save();
                 ctx.a.lineWidth = this.size;
-                ctx.a.strokeStyle = this.color;
+                ctx.a.strokeStyle = this.color();
                 ctx.a.beginPath();
                 ctx.a.moveTo(...this.lastPosition);
                 ctx.a.lineTo(...this.position);
@@ -132,6 +137,8 @@ export class BlackHolePage implements OnInit {
     
                 return this;
             }
+
+            this.init();
         }
     
         function setup() {
@@ -219,7 +226,7 @@ export class BlackHolePage implements OnInit {
             ctx.b.fillStyle = "rgba(0,0,0,0.5)";
             ctx.b.fillRect(0, 0, canvas.a.width, canvas.a.height);
     
-            center.lerp(hover ? mouse : [0.5 * canvas.a.width, 0.5 * canvas.a.height], 0.05);
+            center.lerping(hover ? mouse : [0.5 * canvas.a.width, 0.5 * canvas.a.height], 0.05);
             
             let i;
     
@@ -232,7 +239,8 @@ export class BlackHolePage implements OnInit {
             window.requestAnimationFrame(draw);
         }
         
-        window.addEventListener("load", setup);
+        //window.addEventListener("load", setup);
+        setup();
         window.addEventListener("resize", resize);
         window.addEventListener("mousemove", mouseHandler);
         window.addEventListener("mouseout", mouseHandler);
@@ -249,3 +257,4 @@ export class BlackHolePage implements OnInit {
   
     
 }
+
