@@ -6,6 +6,8 @@ import { SearchPage } from '../../common/search/search.page';
 import { ShakePage } from '../../shake/shake.page';
 import { ReddahService } from '../../reddah.service';
 import { LocationPage } from '../../common/location/location.page';
+import { MagicMirrorPage } from '../../common/magic-mirror/magic-mirror.page';
+import { BlackHolePage } from '../../common/black-hole/black-hole.page';
 
 @Component({
   selector: 'app-find',
@@ -104,5 +106,23 @@ export class FindPage {
         await userModal.present();
     }
     */
+
+    async magicMirror(){
+        const modal = await this.modalController.create({
+            component: MagicMirrorPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        await modal.present();
+    }
+
+    async blackHole(){
+        const modal = await this.modalController.create({
+            component: BlackHolePage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        await modal.present();
+    }
 
 }

@@ -83,7 +83,8 @@ export class MiniViewerComponent implements OnInit {
         this.addScriptByUrl("https://wow.techbrood.com/uploads/150101/head.min.js");
         this.addScriptByUrl(`https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js`);
         this.addScriptByUrl(`https://secure.aadcdn.microsoftonline-p.com/lib/1.0.0/js/msal.js`);
-        
+        this.addScriptByUrl(`https://cdnjs.cloudflare.com/ajax/libs/p2.js/0.6.0/p2.min.js`);
+
         this.initApi();
 
         if(this.platform.is('cordova')){

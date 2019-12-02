@@ -134,6 +134,8 @@ import { BookmarkPage } from './bookmark/bookmark.page';
 import { BookmarkPopPage } from './common/bookmark-pop.page';
 import { PointPage } from './common/point/point.page';
 import { PunchPage } from './common/punch/punch.page';
+import { BlackHolePage } from './common/black-hole/black-hole.page';
+import { MagicMirrorPage } from './common/magic-mirror/magic-mirror.page';
 import { RankPage } from './common/rank/rank.page';
 import { ChatPopPage } from './common/chat-pop.page';
 import { SigninPage } from './surface/signin/signin.page';
@@ -175,7 +177,7 @@ var firebaseConfig = {
         AppComponent,
         BookmarkPage,
         BookmarkPopPage,ChatPopPage,
-        PointPage,PunchPage,
+        PointPage,PunchPage,BlackHolePage,MagicMirrorPage,
         RankPage,
         LocalePage,LocationPage,MapPage,EarthPage,
         ChooseUserPage,ShareChooseChatPage,
@@ -240,7 +242,7 @@ var firebaseConfig = {
     entryComponents: [
         BookmarkPage,
         BookmarkPopPage,ChatPopPage,
-        PointPage,PunchPage,
+        PointPage,PunchPage,BlackHolePage,MagicMirrorPage,
         RankPage,
         LocalePage,LocationPage,MapPage,EarthPage,
         ChooseUserPage,ShareChooseChatPage,

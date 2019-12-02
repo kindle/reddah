@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
+import { LoadingController, NavController, ModalController, PopoverController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 
@@ -24,7 +24,7 @@ export class PunchPage implements OnInit {
         private popoverController: PopoverController,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
+        private platform: Platform,
 
     ){
         
@@ -35,13 +35,12 @@ export class PunchPage implements OnInit {
     async ngOnInit(){
         var p2 = require('p2');
 
-
-        const TWO_PI = Math.PI * 2;
-        const HALF_PI = Math.PI * 0.5;
+        const TWO_PI_P = Math.PI * 2;
+        const HALF_PI_P = Math.PI * 0.5;
         // canvas settings
         let drawingCanvas = document.getElementById("drawing_canvas"),
-            viewWidth = 600,
-            viewHeight = 600,//768,
+            viewWidth = this.platform.width(),
+            viewHeight = 600, //this.platform.height(),//768,
             viewCenterX = viewWidth * 0.5,
             viewCenterY = viewHeight * 0.5,
             ctx,
@@ -80,7 +79,6 @@ export class PunchPage implements OnInit {
 
         statusLabel.innerHTML = 'Give it a good spin!';
         
-
         function initDrawingCanvas(drawingCanvas) {
             drawingCanvas.width = viewWidth;
             drawingCanvas.height = viewHeight;
@@ -177,10 +175,10 @@ export class PunchPage implements OnInit {
 
         function spawnPartices() {
             for (var i = 0; i < 200; i++) {
-                var p0 = new this.Point(viewCenterX, viewCenterY - 64);
-                var p1 = new this.Point(viewCenterX, 0);
-                var p2 = new this.Point(Math.random() * viewWidth, Math.random() * viewCenterY);
-                var p3 = new this.Point(Math.random() * viewWidth, viewHeight + 64);
+                var p0 = new Point(viewCenterX, viewCenterY - 64);
+                var p1 = new Point(viewCenterX, 0);
+                var p2 = new Point(Math.random() * viewWidth, Math.random() * viewCenterY);
+                var p3 = new Point(Math.random() * viewWidth, viewHeight + 64);
 
                 particles.push(new Particle(p0, p1, p2, p3));
             }
@@ -198,8 +196,9 @@ export class PunchPage implements OnInit {
             // but stepping twice seems to help
             // considering there are only a few bodies, this is ok for now.
             
-            //world.step(timeStep * 0.5);
-            //world.step(timeStep * 0.5);
+            world.islandSplit = false;
+            world.step(timeStep * 0.5);
+            world.step(timeStep * 0.5);
 
             if (wheelSpinning === true && wheelStopped === false &&
                 wheel.wbody.angularVelocity < 1 && arrow.hasStopped()) {
@@ -210,12 +209,14 @@ export class PunchPage implements OnInit {
                 wheelSpinning = false;
 
                 wheel.wbody.angularVelocity = 0;
-
-                if (win) {
+                    
+                
+                if (win===0) {
                     spawnPartices();
-                    statusLabel.innerHTML = 'Woop woop!'
-                } else {
-                    statusLabel.innerHTML = 'Too bad! Invite a Facebook friend to try again!';
+                    statusLabel.innerHTML = 'Woop woop!+3'
+                }
+                else {
+                    statusLabel.innerHTML = 'Too bad! Invite a friend to try again!';
                 }
             }
         }
@@ -257,7 +258,7 @@ export class PunchPage implements OnInit {
             this.pPinRadius = this.pinRadius * ppm;
             this.pPinPositions = [];
 
-            this.deltaPI = TWO_PI / this.segments;
+            this.deltaPI = TWO_PI_P / this.segments;
 
             
             //this.createBody();
@@ -284,8 +285,8 @@ export class PunchPage implements OnInit {
             
 
             for (var i = 0; i < l; i++) {
-                let x = Math.cos(i / l * TWO_PI) * this.pinDistance,
-                    y = Math.sin(i / l * TWO_PI) * this.pinDistance;
+                let x = Math.cos(i / l * TWO_PI_P) * this.pinDistance,
+                    y = Math.sin(i / l * TWO_PI_P) * this.pinDistance;
                 
                 let pin = new p2.Circle(this.pinRadius);
 
@@ -301,15 +302,20 @@ export class PunchPage implements OnInit {
                 ctx.translate(this.pX, this.pY);
 
                 ctx.beginPath();
-                ctx.fillStyle = '#DB9E36';
-                ctx.arc(0, 0, this.pRadius + 24, 0, TWO_PI);
+                ctx.fillStyle = '#ffce00';
+                ctx.arc(0, 0, this.pRadius + 24, 0, TWO_PI_P);
                 ctx.fill();
                 ctx.fillRect(-12, 0, 24, 400);
 
                 ctx.rotate(-this.wbody.angle);
 
                 for (var i = 0; i < this.segments; i++) {
-                    ctx.fillStyle = (i % 2 === 0) ? '#BD4932' : '#FFFAD5';
+                    let magicn = i % 2;
+                    
+                    ctx.fillStyle = (magicn === 0) ? 'rgb(219,19,39)' : '#ffffff'//white/red;
+                        /*(
+                          (magicn === 1) ? 'rgb(219,19,39)' :'rgb(255,225,32)' ///red/yellow
+                        );*/
                     ctx.beginPath();
                     ctx.arc(0, 0, this.pRadius, i * this.deltaPI, (i + 1) * this.deltaPI);
                     ctx.lineTo(0, 0);
@@ -321,7 +327,7 @@ export class PunchPage implements OnInit {
 
                 this.pPinPositions.forEach(function(p) {
                     ctx.beginPath();
-                    ctx.arc(p[0], p[1], this.pPinRadius, 0, TWO_PI);
+                    ctx.arc(p[0], p[1], this.pPinRadius, 0, TWO_PI_P);
                     ctx.fill();
                 }, this);
 
@@ -329,10 +335,10 @@ export class PunchPage implements OnInit {
             } 
             
             this.gotLucky = function() {
-                var currentRotation = wheel.wbody.angle % TWO_PI,
+                var currentRotation = wheel.wbody.angle % TWO_PI_P,
                     currentSegment = Math.floor(currentRotation / this.deltaPI);
 
-                return (currentSegment % 2 === 0);
+                return (currentSegment % 2);
             }
         };
 
@@ -411,9 +417,9 @@ export class PunchPage implements OnInit {
 
 
             this.hasStopped= function() {
-                var angle = Math.abs(this.abody.angle % TWO_PI);
+                var angle = Math.abs(this.abody.angle % TWO_PI_P);
 
-                return (angle < 1e-3 || (TWO_PI - angle) < 1e-3);
+                return (angle < 1e-3 || (TWO_PI_P - angle) < 1e-3);
             }
             this.update= function() {
 
@@ -463,7 +469,7 @@ export class PunchPage implements OnInit {
                 var dx = p.x - this.x;
                 var dy = p.y - this.y;
 
-                this.r = Math.atan2(dy, dx) + HALF_PI;
+                this.r = Math.atan2(dy, dx) + HALF_PI_P;
                 this.sy = Math.sin(Math.PI * f * 10);
                 this.x = p.x;
                 this.y = p.y;
