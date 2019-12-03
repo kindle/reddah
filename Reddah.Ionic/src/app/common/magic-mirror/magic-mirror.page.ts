@@ -4,7 +4,8 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
-import TweenMax from '../../../assets/js/TweenMax.min.js'
+//import TweenMax from '../../../assets/js/TweenMax.min.js'
+import { Power4,Elastic,TweenMax } from "gsap";
 
 @Component({
     selector: 'app-magic-mirror',
@@ -43,27 +44,35 @@ export class MagicMirrorPage implements OnInit {
         let transitions = ['center', 'random']
         let transitionType = 0;
 
-        $(document).ready(function() {
-            preload();
-        });
-
-        function preload() {
-            for (var i = 0; i < photoCount; i++) {
-                $('#preload').append('<img src="http://placekitten.com/500/' + (500 + i) + '">')
-            };
-            $(window).load(function() {
-                setup();
-            });
-        }
+        
+        for (var i = 0; i < photoCount; i++) {
+            let image = new Image();
+            image.src = `http://placekitten.com/500/` + (500 + i) 
+            document.getElementById('preload').appendChild(image);
+        };
+        
 
         function setup() {
-            $('#photo-holder').html('');
+            document.getElementById('photo-holder').childNodes.forEach(item=>{
+                this.removeChild(item);
+            })
             for (var i = 0; i < pieceCount; i++) {
                 var newWidth = (((100 - (100 / pieceCount) * i)) / 100) * 100; //((pieceWidth - ((pieceWidth / pieceCount) * i)) / pieceWidth) * 100;
                 var newBackgroundSize = 100 + (100 - newWidth) / newWidth * 100; //100 + (100 - newWidth);
                 var newTop = ((100 / pieceCount) * i) / 2;
 
-                $('#photo-holder').append('<div class="section" id="piece' + i + '" style="top: ' + newTop + '%; left: ' + newTop + '%; width: ' + newWidth + '%; height: ' + newWidth + '%; background-size:' + newBackgroundSize + '%; background-image: url(\'http://placekitten.com/500/' + (500 + onPhoto) + '\')"></div>')
+                let divNode = document.createElement('div') as HTMLDivElement
+                divNode.id = 'piece' + i;
+                divNode.className = "section";
+                divNode.style.setProperty("top", newTop+"%");
+                divNode.style.setProperty("left", newTop+"%");
+                divNode.style.setProperty("width", newWidth+"%");
+                divNode.style.setProperty("height", newWidth+"%");
+                divNode.style.setProperty("background-size", newBackgroundSize+"%");
+                divNode.style.setProperty("background-image", "url('http://placekitten.com/500/'" + (500 + onPhoto)+")");
+
+                document.getElementById('photo-holder').appendChild(divNode);
+
             };
             nextSlide();
         }
@@ -77,9 +86,9 @@ export class MagicMirrorPage implements OnInit {
             }
 
             for (var i = 0; i < pieceCount; i++) {
-                var spinDelay = 0;
-                var spin = 360;
-                var piece = $('#piece' + i);
+                let spinDelay = 0;
+                let spin = 360;
+                let piece = document.getElementById('piece' + i);
 
                 switch (transitions[transitionType]) {
                     case 'random':
@@ -117,6 +126,9 @@ export class MagicMirrorPage implements OnInit {
                 delay = setInterval(nextSlide, 1000);
             }
         }
+
+
+        setup();
     }
     
 }

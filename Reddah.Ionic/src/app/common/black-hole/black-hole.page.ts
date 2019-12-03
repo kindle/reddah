@@ -59,17 +59,11 @@ export class BlackHolePage implements OnInit {
         let mouse;
         let hover;
 
-        Array.prototype.lerping = function(target, speed) {
-            this.forEach((n, i) => (this[i] = lerp(n, target[i], speed)));
-        };
-        /*function lerping(source, target, speed){
-            source.forEach((n, i) => (source[i] = lerp(n, target[i], speed)));
-        } */
+        function lerping(arr, target, speed){
+            this.forEach((n, i) => (arr[i] = lerp(n, target[i], speed)));
+        }
 
         function Particle() {
-        
-            
-            
             this.color=()=> {
                 return `hsla(${this.hue}, 50%, 80%, ${fadeInOut(this.life, this.ttl)})`;
             }
@@ -112,7 +106,7 @@ export class BlackHolePage implements OnInit {
                     0.01
                 );
                 this.speed = fadeOut(dist(this.position[0], this.position[1], center[0], center[1]), canvas.a.width) * gravStrength;
-                this.velocity.lerping(
+                lerping(this.velocity,
                     [cos(this.direction) * this.speed, sin(this.direction) * this.speed],
                     0.01
                 );
@@ -226,7 +220,7 @@ export class BlackHolePage implements OnInit {
             ctx.b.fillStyle = "rgba(0,0,0,0.5)";
             ctx.b.fillRect(0, 0, canvas.a.width, canvas.a.height);
     
-            center.lerping(hover ? mouse : [0.5 * canvas.a.width, 0.5 * canvas.a.height], 0.05);
+            lerping(center, hover ? mouse : [0.5 * canvas.a.width, 0.5 * canvas.a.height], 0.05);
             
             let i;
     

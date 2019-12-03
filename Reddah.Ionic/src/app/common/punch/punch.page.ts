@@ -3,7 +3,6 @@ import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, PopoverController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { CacheService } from "ionic-cache";
 
 @Component({
     selector: 'app-punch',
@@ -84,10 +83,29 @@ export class PunchPage implements OnInit {
             drawingCanvas.height = viewHeight;
             ctx = drawingCanvas.getContext('2d');
 
+            /*
             drawingCanvas.addEventListener('mousemove', updateMouseBodyPosition);
             drawingCanvas.addEventListener('mousedown', checkStartDrag);
             drawingCanvas.addEventListener('mouseup', checkEndDrag);
             drawingCanvas.addEventListener('mouseout', checkEndDrag);
+            *//////////
+            let hammer = new window['Hammer'](drawingCanvas);
+            hammer.get('pan').set({ direction: window['Hammer'].DIRECTION_ALL });
+
+            hammer.on('panstart', (e)=>{ 
+                checkStartDrag(e);
+            });
+            hammer.on('panend', (e)=>{ 
+                checkEndDrag(e);
+            });
+
+           
+            hammer.on('pan', (e) => {
+                var p = getPhysicsCoord(e);
+                mouseBody.position[0] = p.x;
+                mouseBody.position[1] = p.y;
+            });
+
         }
 
         function updateMouseBodyPosition(e) {
@@ -136,8 +154,8 @@ export class PunchPage implements OnInit {
         function getPhysicsCoord(e) {
             drawingCanvas = document.getElementById("drawing_canvas");
             var rect = drawingCanvas.getBoundingClientRect(),
-                x = (e.clientX - rect.left) / ppm,
-                y = physicsHeight - (e.clientY - rect.top) / ppm;
+                x = (e.center.x - rect.left) / ppm,
+                y = physicsHeight - (e.center.y - rect.top) / ppm;
 
             return {
                 x: x,
