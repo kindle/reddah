@@ -23,6 +23,7 @@ import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { Router } from '@angular/router';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Device } from '@ionic-native/device/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 @Injectable({
     providedIn: 'root'
@@ -46,6 +47,7 @@ export class ReddahService {
         private ngZone: NgZone,
         private localNotifications: LocalNotifications,
         private device: Device,
+        private appVersion: AppVersion,
     ) { }
 
     //******************************** */
@@ -912,12 +914,26 @@ export class ReddahService {
         return "";
     }
 
+    getVersionNumber(): Promise<string> {
+        return new Promise((resolve) => {
+            this.appVersion.getVersionNumber().then((value: string) => {
+                resolve(value);
+            }).catch(err => {
+                alert(err);
+            });
+        });
+    }
+
     async updateUserDeviceInfo(){
         if(this.platform.is('cordova')){ 
-            let info = `${this.device.platform}_${this.device.version}_${this.device.isVirtual?"Virtual":"Device"}_${this.device.uuid}`;
-            let data = new FormData();
-            data.append("info",info);
-            this.updateDeviceInfo(data).subscribe();
+            this.getVersionNumber().then(appversion => {
+                let info = `${this.device.platform}_${this.device.version}_
+                    ${this.device.isVirtual?"Virtual":"Device"}_${this.device.uuid}_
+                    ${this.getCurrentLocale()}_${appversion}`;
+                let data = new FormData();
+                data.append("info",info);
+                this.updateDeviceInfo(data).subscribe();
+            });            
         }
     }
 

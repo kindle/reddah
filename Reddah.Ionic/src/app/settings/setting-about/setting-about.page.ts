@@ -35,18 +35,8 @@ export class SettingAboutPage implements OnInit {
         
     }
 
-    getVersionNumber(): Promise<string> {
-        return new Promise((resolve) => {
-            this.appVersion.getVersionNumber().then((value: string) => {
-                resolve(value);
-            }).catch(err => {
-                alert(err);
-            });
-        });
-    }
-
     ngOnInit() {
-        this.getVersionNumber().then(version => {
+        this.reddah.getVersionNumber().then(version => {
             this.version = version;
         });
 
@@ -59,7 +49,7 @@ export class SettingAboutPage implements OnInit {
         this.upgradeChecked = true;
         const updateUrl = 'https://reddah.com/apk/update.xml';
         if (this.isMobile()) {
-            this.getVersionNumber().then(version => {
+            this.reddah.getVersionNumber().then(version => {
                 if (this.isAndroid()) {
                     this.appUpdate.checkAppUpdate(updateUrl).then(data => {});
                 } else {

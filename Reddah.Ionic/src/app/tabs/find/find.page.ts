@@ -9,6 +9,7 @@ import { LocationPage } from '../../common/location/location.page';
 import { MagicMirrorPage } from '../../common/magic-mirror/magic-mirror.page';
 import { BlackHolePage } from '../../common/black-hole/black-hole.page';
 import { WormHolePage } from '../../common/worm-hole/worm-hole.page';
+import { MysticPage } from '../../common/mystic/mystic.page';
 
 @Component({
   selector: 'app-find',
@@ -126,4 +127,12 @@ export class FindPage {
         await modal.present();
     }
 
+    async mystic(){
+        const modal = await this.modalController.create({
+            component: MysticPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        await modal.present();
+    }
 }

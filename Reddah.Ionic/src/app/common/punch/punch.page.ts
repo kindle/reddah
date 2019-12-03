@@ -99,11 +99,12 @@ export class PunchPage implements OnInit {
                 checkEndDrag(e);
             });
 
-           
+            hammer.on('press', (e)=>{ 
+                checkEndDrag(e);
+            });
+          
             hammer.on('pan', (e) => {
-                var p = getPhysicsCoord(e);
-                mouseBody.position[0] = p.x;
-                mouseBody.position[1] = p.y;
+                updateMouseBodyPosition(e);
             });
 
         }
@@ -115,80 +116,88 @@ export class PunchPage implements OnInit {
         }
 
         function checkStartDrag(e) {
-            if (world.hitTest(mouseBody.position, [wheel.wbody])[0]) {
+            try{
+                if (world.hitTest(mouseBody.position, [wheel.wbody])[0]) {
 
-                mouseConstraint = new p2.RevoluteConstraint(mouseBody, wheel.wbody, {
-                    worldPivot: mouseBody.position,
-                    collideConnected: false
-                });
+                    mouseConstraint = new p2.RevoluteConstraint(mouseBody, wheel.wbody, {
+                        worldPivot: mouseBody.position,
+                        collideConnected: false
+                    });
 
-                world.addConstraint(mouseConstraint);
-            }
+                    world.addConstraint(mouseConstraint);
+                }
 
-            if (wheelSpinning === true) {
-                wheelSpinning = false;
-                wheelStopped = true;
-                statusLabel.innerHTML = "Impatience will not be rewarded.";
-            }
+                if (wheelSpinning === true) {
+                    wheelSpinning = false;
+                    wheelStopped = true;
+                    statusLabel.innerHTML = "Impatience will not be rewarded.";
+                }
+            }catch{}
         }
 
         function checkEndDrag(e) {
-            if (mouseConstraint) {
-                world.removeConstraint(mouseConstraint);
-                mouseConstraint = null;
+            try{
+                if (mouseConstraint) {
+                    world.removeConstraint(mouseConstraint);
+                    mouseConstraint = null;
 
-                if (wheelSpinning === false && wheelStopped === true) {
-                    if (Math.abs(wheel.wbody.angularVelocity) > 7.5) {
-                        wheelSpinning = true;
-                        wheelStopped = false;
-                        console.log('good spin');
-                        statusLabel.innerHTML = '...clack clack clack clack clack clack...'
-                    } else {
-                        console.log('sissy');
-                        statusLabel.innerHTML = 'Come on, you can spin harder than that.'
+                    if (wheelSpinning === false && wheelStopped === true) {
+                        if (Math.abs(wheel.wbody.angularVelocity) > 7.5) {
+                            wheelSpinning = true;
+                            wheelStopped = false;
+                            console.log('good spin');
+                            statusLabel.innerHTML = '...clack clack clack clack clack clack...'
+                        } else {
+                            console.log('sissy');
+                            statusLabel.innerHTML = 'Come on, you can spin harder than that.'
+                        }
                     }
                 }
-            }
+            }catch{}
         }
 
         function getPhysicsCoord(e) {
-            drawingCanvas = document.getElementById("drawing_canvas");
-            var rect = drawingCanvas.getBoundingClientRect(),
-                x = (e.center.x - rect.left) / ppm,
-                y = physicsHeight - (e.center.y - rect.top) / ppm;
+            try{
+                drawingCanvas = document.getElementById("drawing_canvas");
+                var rect = drawingCanvas.getBoundingClientRect(),
+                    x = (e.center.x - rect.left) / ppm,
+                    y = physicsHeight - (e.center.y - rect.top) / ppm;
 
-            return {
-                x: x,
-                y: y
-            };
+                return {
+                    x: x,
+                    y: y
+                };
+            }catch{}
         }
 
         function initPhysics() {
-            world = new p2.World();
-            world.solver.iterations = 100;
-            world.solver.tolerance = 0;
+            try{
+                world = new p2.World();
+                world.solver.iterations = 100;
+                world.solver.tolerance = 0;
 
-            arrowMaterial = new p2.Material();
-            pinMaterial = new p2.Material();
-            contactMaterial = new p2.ContactMaterial(arrowMaterial, pinMaterial, {
-                friction: 0.0,
-                restitution: 0.1
-            });
-            world.addContactMaterial(contactMaterial);
+                arrowMaterial = new p2.Material();
+                pinMaterial = new p2.Material();
+                contactMaterial = new p2.ContactMaterial(arrowMaterial, pinMaterial, {
+                    friction: 0.0,
+                    restitution: 0.1
+                });
+                world.addContactMaterial(contactMaterial);
 
-            var wheelRadius = 8,
-                wheelX = physicsCenterX,
-                wheelY = wheelRadius + 4,
-                arrowX = wheelX,
-                arrowY = wheelY + wheelRadius + 0.625;
+                var wheelRadius = 8,
+                    wheelX = physicsCenterX,
+                    wheelY = wheelRadius + 4,
+                    arrowX = wheelX,
+                    arrowY = wheelY + wheelRadius + 0.625;
 
-            wheel = new Wheel(wheelX, wheelY, wheelRadius, 32, 0.25, 7.5);
-            wheel.wbody.angle = (Math.PI / 32.5);
-            wheel.wbody.angularVelocity = 5;
-            arrow = new Arrow(arrowX, arrowY, 0.5, 1.5);
-            mouseBody = new p2.Body();
+                wheel = new Wheel(wheelX, wheelY, wheelRadius, 32, 0.25, 7.5);
+                wheel.wbody.angle = (Math.PI / 32.5);
+                wheel.wbody.angularVelocity = 5;
+                arrow = new Arrow(arrowX, arrowY, 0.5, 1.5);
+                mouseBody = new p2.Body();
 
-            world.addBody(mouseBody);
+                world.addBody(mouseBody);
+            }catch{}
         }
 
         function spawnPartices() {
@@ -203,40 +212,42 @@ export class PunchPage implements OnInit {
         }
 
         function update() {
-            particles.forEach(function(p) {
-                p.update();
-                if (p.complete) {
-                    particles.splice(particles.indexOf(p), 1);
-                }
-            });
+            try{
+                particles.forEach(function(p) {
+                    p.update();
+                    if (p.complete) {
+                        particles.splice(particles.indexOf(p), 1);
+                    }
+                });
 
-            // p2 does not support continuous collision detection :(
-            // but stepping twice seems to help
-            // considering there are only a few bodies, this is ok for now.
-            
-            world.islandSplit = false;
-            world.step(timeStep * 0.5);
-            world.step(timeStep * 0.5);
-
-            if (wheelSpinning === true && wheelStopped === false &&
-                wheel.wbody.angularVelocity < 1 && arrow.hasStopped()) {
-
-                var win = wheel.gotLucky();
-
-                wheelStopped = true;
-                wheelSpinning = false;
-
-                wheel.wbody.angularVelocity = 0;
-                    
+                // p2 does not support continuous collision detection :(
+                // but stepping twice seems to help
+                // considering there are only a few bodies, this is ok for now.
                 
-                if (win===0) {
-                    spawnPartices();
-                    statusLabel.innerHTML = 'Woop woop!+3'
+                world.islandSplit = false;
+                world.step(timeStep * 0.5);
+                world.step(timeStep * 0.5);
+
+                if (wheelSpinning === true && wheelStopped === false &&
+                    wheel.wbody.angularVelocity < 1 && arrow.hasStopped()) {
+
+                    var win = wheel.gotLucky();
+
+                    wheelStopped = true;
+                    wheelSpinning = false;
+
+                    wheel.wbody.angularVelocity = 0;
+                        
+                    
+                    if (win===0) {
+                        spawnPartices();
+                        statusLabel.innerHTML = 'Woop woop!+3'
+                    }
+                    else {
+                        statusLabel.innerHTML = 'Too bad! Invite a friend to try again!';
+                    }
                 }
-                else {
-                    statusLabel.innerHTML = 'Too bad! Invite a friend to try again!';
-                }
-            }
+            }catch{}
         }
 
         function draw() {

@@ -315,8 +315,9 @@ export class WormHolePage implements OnInit {
     }
 
     getUserInHole(e){
-        let fx = e.center.x;
-        let fy = e.center.y;
+        let rdm = Math.floor((Math.random()*100)+1);
+        let fx = e.center.x+rdm;
+        let fy = e.center.y+rdm;
         let rdmfpn = fx%2==1?1:-1;
         let latCenter = (fx%90)*rdmfpn;
         rdmfpn = fx%2==1?1:-1;
