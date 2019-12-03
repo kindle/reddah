@@ -70,7 +70,7 @@ export class WormHolePage implements OnInit {
         hammer.on('press', (e) => {
             clicked = true;
             //find the recommend user and pop up
-            this.getUserInHole();
+            this.getUserInHole(e);
         });
 
         /*
@@ -312,12 +312,15 @@ export class WormHolePage implements OnInit {
         image.onload = ()=> {
             init(image);
         }
-
     }
 
-    getUserInHole(){
-        let latCenter = 0;
-        let lngCenter = 0;
+    getUserInHole(e){
+        let fx = e.center.x;
+        let fy = e.center.y;
+        let rdmfpn = fx%2==1?1:-1;
+        let latCenter = (fx%90)*rdmfpn;
+        rdmfpn = fx%2==1?1:-1;
+        let lngCenter = (fy%180)*rdmfpn;
         let latLow = -90; 
         let latHigh = 90;
         let lngLow = -180;
@@ -329,7 +332,7 @@ export class WormHolePage implements OnInit {
         .subscribe(data=>{
             if(data.Success==0){
                 let showArray = [];
-                let showNumber = 5;
+                let showNumber = 10;
                 if(data.Message.length<=showNumber){
                     for(let i =0;i<data.Message.length;i++)
                         showArray.push(i);
