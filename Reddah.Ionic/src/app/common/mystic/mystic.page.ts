@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, PopoverController, Platform, Content } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { CacheService } from "ionic-cache";
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
@@ -15,6 +13,9 @@ import { VideoEditor } from '@ionic-native/video-editor/ngx'
 import { ChatPopPage } from '../../common/chat-pop.page';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { ChatOptPage } from '../../chat/chat-opt/chat-opt.page';
+import { UserPage } from '../user/user.page';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-mystic',
@@ -47,6 +48,7 @@ export class MysticPage implements OnInit {
         public videoEditor: VideoEditor,
         public clipboard: Clipboard,
         private notification: LocalNotifications,
+        private translate: TranslateService,
         //public db: AngularFireDatabase,        
     ) { 
         
@@ -138,7 +140,6 @@ export class MysticPage implements OnInit {
     @ViewChild('chatbox') chatbox;
 
     @Input() title: any;
-    @Input() target: any;
     @Input() source;//source ==pub or ""
 
     //placeholder
@@ -149,15 +150,16 @@ export class MysticPage implements OnInit {
     
     ngOnInit() {
         this.getChat();
+        /*()
         this.refreshPage = setInterval(()=>{
             this.getChat();
-        },5000)
+        },5000)*/
     }
 
     
     //test
     clear(){
-        this.localStorageService.clear(`Reddah_Chat_${this.target}`);
+        this.localStorageService.clear(`Reddah_Mystic_Chat_${this.userName}`);
         this.messages = [];
     }
 
@@ -188,22 +190,47 @@ export class MysticPage implements OnInit {
     }
     
     async getChat(){
-        let chatHistory = this.localStorageService.retrieve(`Reddah_Chat_${this.target}`);
+        let chatHistory = this.localStorageService.retrieve(`Reddah_Mystic_Chat_${this.userName}`);
         if(chatHistory==null){
+            this.generateChat();
             //get latest 20 messages;
-            this.getHistory(0, 20);
+            //this.getHistory(0, 20);
         }else{
-            this.messages = chatHistory;
+            //this.messages = chatHistory;
             //get all latest messages;
-            let max = Math.max.apply(null,this.messages.map(item=>item["Id"]).filter(m=>m!=null));
-            this.getHistory(max, 0);
+            //let max = Math.max.apply(null,this.messages.map(item=>item["Id"]).filter(m=>m!=null));
+            //this.getHistory(max, 0);
         }
     }
 
-    async getHistory(id, limit, event=null){
+    addMessage(msg){
+        let maxId = Math.max.apply(null,this.messages.map(item=>item["Id"]).filter(m=>m!=null));
+        msg.Id = maxId+1;
+        this.messages.push(msg);
+        this.localStorageService.store(`Reddah_Mystic_Chat_${this.userName}`, this.messages);
+    }
+    async generateChat(){
+        if(this.messages==null||this.messages.length==0){
+            this.messages = [];
+            setTimeout(()=>{
+                this.addMessage({
+                    //Content: this.translate.instant("Common.Font1"), 
+                    Content: 'Hello, welcome to Reddah 😀', 
+                    UserName: 'Mystic', 
+                    Type:0
+                });
+            },3000)
+        }
+        else
+        {
+
+        }
         
+    }
+
+    async getHistory(id, limit, event=null){
         let formData = new FormData();
-        formData.append("targetUser", this.target);
+        formData.append("targetUser", this.userName);
         formData.append("id", JSON.stringify(id));
         formData.append("limit", JSON.stringify(limit));
         this.reddah.getChat(formData).subscribe(data=>{
@@ -273,7 +300,7 @@ export class MysticPage implements OnInit {
                             this.pageTop.scrollToBottom(0);
                     },200)
                 }
-                this.localStorageService.store(`Reddah_Chat_${this.target}`, this.messages);
+                this.localStorageService.store(`Reddah_Mystic_Chat_${this.userName}`, this.messages);
 
                 if(event!=null){
                     event.target.complete();
@@ -362,7 +389,7 @@ export class MysticPage implements OnInit {
         {
             const modal = await this.modalController.create({
                 component: ChatOptPage,
-                componentProps: { targetUser: this.target },
+                componentProps: { targetUser: this.userName },
                 cssClass: "modal-fullscreen",
             });
             
@@ -389,13 +416,6 @@ export class MysticPage implements OnInit {
         await userModal.present();
     }
 
-    
-
-    
-
-    
-
-  
     
 }
 

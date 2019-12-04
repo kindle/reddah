@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
-import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
+import { LoadingController, NavController, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Power4,Elastic,TweenMax } from "gsap";
 import * as $ from 'jquery';
@@ -13,6 +13,7 @@ import * as $ from 'jquery';
 export class MagicMirrorPage implements OnInit {
 
     async close(){
+        clearInterval(this.delay);
         this.modalController.dismiss();
     }
 
@@ -22,92 +23,84 @@ export class MagicMirrorPage implements OnInit {
         public translateService: TranslateService,
         public navController: NavController,
         public modalController: ModalController,
-
     ){ }
-
+    
+    delay;
+    photoCount = 6;
+    pieceCount = 6;
+    onPhoto = 0;
+    pieceCompleteCount = 0;
     
 
+    transitions = ['center', 'random']
+    transitionType = 0;
+
     async ngOnInit(){
-        let photoCount = 6;
-        let pieceCount = 6;
-        let onPhoto = 0;
-        let pieceCompleteCount = 0;
-        let delay;
-
-        let transitions = ['center', 'random']
-        let transitionType = 0;
-
-        for (let i = 0; i < photoCount; i++) {
-            $('#preload').append('<img src="http://placekitten.com/500/' + (500 + i) + '">')
+        for (let i = 0; i < this.photoCount; i++) {
+            $('#preload').append('<img src="/assets/500/' + (500 + i) + '.jpeg">')
         };
         
-        
+        $('#photo-holder').html('');
+        for (let i = 0; i < this.pieceCount; i++) {
+            let newWidth = (((100 - (100 / this.pieceCount) * i)) / 100) * 100; 
+            let newBackgroundSize = 100 + (100 - newWidth) / newWidth * 100; 
+            let newTop = ((100 / this.pieceCount) * i) / 2;
 
-        function setup() {
-            $('#photo-holder').html('');
-            for (let i = 0; i < pieceCount; i++) {
-                let newWidth = (((100 - (100 / pieceCount) * i)) / 100) * 100; //((pieceWidth - ((pieceWidth / pieceCount) * i)) / pieceWidth) * 100;
-                let newBackgroundSize = 100 + (100 - newWidth) / newWidth * 100; //100 + (100 - newWidth);
-                let newTop = ((100 / pieceCount) * i) / 2;
+            $('#photo-holder').append('<div class="section" id="piece' + i + '" style="top: ' + newTop + '%; left: ' + newTop + '%; width: ' + newWidth + '%; height: ' + newWidth + '%; background-size:' + newBackgroundSize + '%; background-image: url(\'/assets/500/' + (500 + this.onPhoto) + '.jpeg\')"></div>')
+        };
+        this.nextSlide();
+    }
 
-                $('#photo-holder').append('<div class="section" id="piece' + i + '" style="top: ' + newTop + '%; left: ' + newTop + '%; width: ' + newWidth + '%; height: ' + newWidth + '%; background-size:' + newBackgroundSize + '%; background-image: url(\'http://placekitten.com/500/' + (500 + onPhoto) + '\')"></div>')
-            };
-            nextSlide(onPhoto);
+    nextSlide() {
+        clearInterval(this.delay);
+        this.pieceCompleteCount = 0;
+        ++this.onPhoto;
+        if (this.onPhoto >= this.photoCount) {
+            this.onPhoto = 0;
         }
 
-        function nextSlide(onPhoto) {
-            clearInterval(delay);
-            pieceCompleteCount = 0;
-            ++onPhoto;
-            if (onPhoto >= photoCount) {
-                onPhoto = 0;
+        for (let i = 0; i < this.pieceCount; i++) {
+            let spinDelay = 0;
+            let spin = 360;
+            let piece = $('#piece' + i);
+
+            switch (this.transitions[this.transitionType]) {
+                case 'random':
+                    spinDelay = Math.random() / 2;
+                    spin = Math.random() * 360;
+                    break;
+                case 'center':
+                    spinDelay = (this.pieceCount - i) / 10;
+                    spin = 181;
+                    break;
             }
-
-            for (let i = 0; i < pieceCount; i++) {
-                let spinDelay = 0;
-                let spin = 360;
-                let piece = $('#piece' + i);
-
-                switch (transitions[transitionType]) {
-                    case 'random':
-                        spinDelay = Math.random() / 2;
-                        spin = Math.random() * 360;
-                        break;
-                    case 'center':
-                        spinDelay = (pieceCount - i) / 10;
-                        spin = 181;
-                        break;
-                }
-
-                TweenMax.to(piece, 1, {
-                    delay: spinDelay,
-                    directionalRotation: spin + '_long',
-                    onComplete: completeRotation(piece, onPhoto),
-                    onCompleteParams: [piece, onPhoto],
-                    ease: Power4.easeIn
-                })
-            }
-        }
-
-        function completeRotation(piece, onPhoto) {
-            piece.css('background-image', 'url(http://placekitten.com/500/' + (500 + onPhoto) + ')');
-            TweenMax.to(piece, 2, {
-                directionalRotation: '0_short',
-                onComplete: ()=>{
-                    ++pieceCompleteCount;
-                    if (pieceCompleteCount == pieceCount) {
-                        delay = setInterval(()=>nextSlide(onPhoto), 1000);
-                    }
-                },
-                ease: Elastic.easeOut
+console.log(1+"_"+piece+i);
+            TweenMax.to(piece, 1, {
+                delay: spinDelay,
+                directionalRotation: spin + '_long',
+                onComplete: this.completeRotation(piece),
+                onCompleteParams: [piece],
+                ease: Power4.easeIn
             })
         }
+    }
 
+    completeRotation(piece) {
+        console.log(2+"_"+piece+this.onPhoto);
+        piece.css('background-image', 'url(/assets/500/' + (500 + this.onPhoto) + '.jpeg)');
+        TweenMax.to(piece, 2, {
+            directionalRotation: '0_short',
+            onComplete: this.test(),
+            ease: Elastic.easeOut
+        })
+    }
 
-        
-        setup();
-        
-
+    test(){
+        console.log(3+"_"+this.pieceCompleteCount+"_"+this.pieceCount)
+        ++this.pieceCompleteCount;
+        if (this.pieceCompleteCount == this.pieceCount-1) {
+            this.delay = setInterval(()=>this.nextSlide(), 1000);
+        }
     }
     
 }
