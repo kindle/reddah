@@ -6,10 +6,6 @@
 </ion-item>
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" no-padding 
 style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatbox.hide()"> 
-    <ion-refresher slot="fixed" (ionRefresh)="getMoreHistory($event)">
-        <ion-refresher-content refreshingSpinner="bubbles">
-        </ion-refresher-content>
-    </ion-refresher>
     <ion-grid *ngFor="let comment of messages">
         <ion-row *ngIf="comment.Type==0||comment.Type==1000">
             <ion-col no-padding>
