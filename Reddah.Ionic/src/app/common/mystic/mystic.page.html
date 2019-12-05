@@ -80,7 +80,13 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                         class="portrait" (click)="goUser(comment.UserName)">
                     <div style="display: flex;margin-left:5px;">
                         <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==0"></div>
-                        <div class="chat-box-others" *ngIf="comment.Type==0" (press)="showChatMenu($event, comment.Content)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                        <div class="chat-box-others" *ngIf="comment.Type==0" 
+                            (press)="showChatMenu($event, comment.Content)">
+                            {{reddah.htmlDecode(comment.Content)}}
+                            <br>
+                            <ion-button class="actionButton" size="small" color="primary" 
+                            *ngIf="comment.Action!=null" (click)="setInfo(comment.Action)">click me</ion-button>
+                        </div>
                         <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==4||comment.Type==5"></div>
                         <div class="chat-box-others-link" *ngIf="comment.Type==4||comment.Type==5">
                             <app-share-article-chat [abstract]="comment.Abstract"
@@ -117,5 +123,5 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
         </ion-row>
     </ion-grid>
 </ion-content>
-<app-chat-fire-box #chatbox [(selectedArticleId)]="chatId" selectedCommentId="-1"
-    (reloadComments)="childReloadComments($event)" (localComments)="childLocalComments($event)"></app-chat-fire-box>
+<app-chat-mystic-box #chatbox [(selectedArticleId)]="chatId" selectedCommentId="-1"
+    (reloadComments)="childReloadComments($event)" (localComments)="childLocalComments($event)"></app-chat-mystic-box>
