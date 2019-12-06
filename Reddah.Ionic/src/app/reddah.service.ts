@@ -194,6 +194,19 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private nplChatUrl = 'https://login.reddah.com/api/ai/nlp'; 
+
+    getNlpChat(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.nplChatUrl, formData)
+        .pipe(
+            tap(data => this.log('get nlp chat')),
+            catchError(this.handleError('get nlp chat', []))
+        );
+    }
+    
+    //******************************** */
     private getMaterialUrl = 'https://login.reddah.com/api/pub/getmaterial'; 
 
     getMyMaterial(formData: FormData): Observable<any> {

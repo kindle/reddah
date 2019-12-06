@@ -24,7 +24,6 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                     <img [src]="reddah.appData('userphoto_'+comment.UserName)"
                         class="portrait" (click)="goUser(comment.UserName)">
                     <div class="arrow-box-right" *ngIf="comment.Type==0">
-                        <div style="margin-right:-45px;" *ngIf="comment.Id==null">*</div>
                         <div class="chat-box-me" (press)="showChatMenu($event, comment.Content)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
                         <div class="chat-arrow-right" style="flex:auto 0;"></div>
                     </div>

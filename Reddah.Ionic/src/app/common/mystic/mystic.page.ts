@@ -219,14 +219,21 @@ export class MysticPage implements OnInit {
         },3000)
     }
 
-    async generateReactiveChat(userText){
+    formData;
+    async generateReactiveChat(inputText){
         if(this.generateChat())
         {
-            this.addMessage({
-                //Content: this.translate.instant("Common.Font1"), 
-                Content: 'you said sth.'+userText, 
-                UserName: 'Mystic', 
-                Type:0
+            this.formData.append("locale", this.reddah.getCurrentLocale());
+            this.formData.append("content", inputText);
+            this.reddah.getNlpChat(this.formData).subscribe(data=>{
+                if(data.Success==0){
+                    this.addMessage({
+                        //Content: this.translate.instant("Common.Font1"), 
+                        Content: data.Message, 
+                        UserName: 'Mystic', 
+                        Type:0,
+                    });
+                }
             });
         }
     }
@@ -264,8 +271,8 @@ export class MysticPage implements OnInit {
             }
             //sex
             if(continueFlag){
-                let user_sex = this.reddah.appData('usersex_'+this.userName);
-                if(user_sex==-1){
+                let user_sex_set = this.localStorageService.retrieve("user_sex_set"+this.userName);
+                if(user_sex_set==null){
                     this.addMessage({ 
                         Content: `Are you a boy or a girl?`, 
                         UserName: 'Mystic', 
@@ -348,7 +355,6 @@ export class MysticPage implements OnInit {
     }
 
     loadedIds=[];
-    formData;
     getTimeline(){
         this.formData = new FormData();
         this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
@@ -419,7 +425,7 @@ export class MysticPage implements OnInit {
         {}    
         else
         {
-            currentValue = 1;
+            currentValue = 0;
         }
 
         const modal = await this.modalController.create({
@@ -432,8 +438,11 @@ export class MysticPage implements OnInit {
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
-        if(data||!data)
+        if(data)
+        {
             this.reddah.getUserPhotos(this.userName);
+            this.localStorageService.store("user_sex_set"+this.userName, data);
+        }
     }
 
     async changeSignature(){
