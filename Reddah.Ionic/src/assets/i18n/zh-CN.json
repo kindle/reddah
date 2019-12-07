@@ -259,7 +259,8 @@
         "CopyChat":"复制",
         "MiniPubMsg":"确认发布之后，用户将收到此小程序的更新",
         "CancelPublish":"稍后发布",
-        "ConfirmPublish":"确认发布"
+        "ConfirmPublish":"确认发布",
+        "LoginToView":"请登录后查看"
     },
 
     "Mail":{

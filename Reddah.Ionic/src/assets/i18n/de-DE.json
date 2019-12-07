@@ -256,7 +256,8 @@
         "CopyChat":"Kopieren",
         "MiniPubMsg":"Durch die Bestätigung der Veröffentlichung erhalten die Nutzer das Update",
         "CancelPublish":"Später",
-        "ConfirmPublish":"Veröffentlichung"
+        "ConfirmPublish":"Veröffentlichung",
+        "LoginToView":"Bitte melden Sie sich an, um weitere Informationen zu erhalten"
     },
 
     "Mail":{

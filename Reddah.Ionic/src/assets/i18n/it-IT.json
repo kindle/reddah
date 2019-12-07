@@ -256,7 +256,8 @@
         "CopyChat":"Copia",
         "MiniPubMsg":"Confermando la pubblicazione, gli utenti riceveranno l'aggiornamento",
         "CancelPublish":"Dopo",
-        "ConfirmPublish":"Pubblica"
+        "ConfirmPublish":"Pubblica",
+        "LoginToView":"Dance Login per saperne di più"
     },
 
     "Mail":{

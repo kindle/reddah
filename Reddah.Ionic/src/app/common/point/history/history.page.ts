@@ -1,18 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { InfiniteScroll, Content } from '@ionic/angular';
-import { ReddahService } from '../../reddah.service';
+import { ReddahService } from '../../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
-import { HistoryPage } from './history/history.page';
 
 @Component({
-    selector: 'app-point',
-    templateUrl: 'point.page.html',
-    styleUrls: ['point.page.scss']
+    selector: 'app-history',
+    templateUrl: 'history.page.html',
+    styleUrls: ['history.page.scss']
 })
-export class PointPage implements OnInit {
+export class HistoryPage implements OnInit {
 
     points = [];
     loadedIds = [];
@@ -112,16 +111,6 @@ export class PointPage implements OnInit {
     //drag up
     loadData(event) {
         this.getPoints(event);
-    }
-
-    async pointDetails(){
-        const modal = await this.modalController.create({
-            component: HistoryPage,
-            componentProps: {},
-            cssClass: "modal-fullscreen",
-        });
-    
-        await modal.present();
     }
     
 }

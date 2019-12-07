@@ -260,7 +260,8 @@
         "CopyChat":"Copy",
         "MiniPubMsg":"By confirming the publication, users will receive the update",
         "CancelPublish":"Later",
-        "ConfirmPublish":"Publish"
+        "ConfirmPublish":"Publish",
+        "LoginToView":"Plese login to find more"
     },
 
     "Mail":{

@@ -256,7 +256,8 @@
         "CopyChat":"Copiar",
         "MiniPubMsg":"Al confirmar la publicación, el usuario recibirá la actualización",
         "CancelPublish":"Después",
-        "ConfirmPublish":"Publicar"
+        "ConfirmPublish":"Publicar",
+        "LoginToView":"Registro de danzas"
     },
 
     "Mail":{

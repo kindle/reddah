@@ -257,7 +257,8 @@
         "CopyChat":"コピー",
         "MiniPubMsg":"出版を確認することにより、ユーザーが更新されます",
         "CancelPublish":"後で",
-        "ConfirmPublish":"出版"
+        "ConfirmPublish":"出版",
+        "LoginToView":"ダンス登録してもっと探します"
     },
 
     "Mail":{

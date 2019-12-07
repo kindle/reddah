@@ -14,6 +14,7 @@ import { AddTimelinePage } from '../../mytimeline/add-timeline/add-timeline.page
 import { MessageListPage } from '../../tabs/message/message.page'
 import { PointPage } from '../../common/point/point.page';
 import { PunchPage } from '../../common/punch/punch.page';
+import { HistoryPage } from '../../common/point/history/history.page';
 
 @Component({
     selector: 'app-about',
@@ -136,8 +137,7 @@ export class AboutPage implements OnInit {
         event.stopPropagation();
 
         const modal = await this.modalController.create({
-            //component: PointPage,
-            component: PunchPage,
+            component: PointPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
         });

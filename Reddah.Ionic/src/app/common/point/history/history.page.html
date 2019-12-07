@@ -2,10 +2,7 @@
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
         <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
     </ion-button>
-    <ion-label>{{ 'Menu.MyPoints' | translate }}</ion-label>
-    <ion-button clear slot="end" color="light" (click)="pointDetails()" style="--box-shadow: none;">
-        {{ 'Common.Details' | translate }}
-    </ion-button>
+    <ion-label>{{ 'Common.Details' | translate }}</ion-label>
 </ion-item>
 <ion-content #pageTop style="background-color: white;">
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">

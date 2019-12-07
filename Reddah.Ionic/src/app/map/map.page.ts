@@ -19,6 +19,7 @@ export class MapPage implements OnInit {
 
     @Input() lat: any;
     @Input() lng: any;
+    @Input() readonly = false;
     userName: any;
 
     constructor(
@@ -203,13 +204,20 @@ export class MapPage implements OnInit {
                             .bindPopup(popup,{closeButton: true});
                             //+"<br>"+this.reddah.appData('usersignature_'+user.UserName));
 
+                        
                         this.flyMaker.on('popupopen', ()=> {
                             this.elementRef.nativeElement.querySelector("#"+user.UserName)
                             .addEventListener('click', (e)=>
                             {
-                                this.goUser(user.UserName);
+                                if(!this.readonly){
+                                    this.goUser(user.UserName);
+                                }
+                                else{
+                                    this.reddah.toast(this.translateService.instant("Common.LoginToView"));
+                                }
                             });
                         });
+                        
                             
                         this.markerGroup.addLayer(this.flyMaker);
                     }

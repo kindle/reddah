@@ -259,7 +259,8 @@
         "CopyChat":"복제",
         "MiniPubMsg":"확인 발표를 통해 사용자가 업데이트를 받을 것입니다",
         "CancelPublish":"나중에 발표",
-        "ConfirmPublish":"게시 확인"
+        "ConfirmPublish":"게시 확인",
+        "LoginToView":"안무 로그인"
     },
 
     "Mail":{

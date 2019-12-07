@@ -15,6 +15,7 @@ import TweenMax from '../../assets/js/TweenMax.min.js'
 import { AuthService } from '../auth.service';
 import { RegisterPage } from './register/register.page'
 import { Globalization } from '@ionic-native/globalization';
+import { MapPage } from '../map/map.page';
 
 @Component({
     selector: 'app-surface',
@@ -64,6 +65,7 @@ export class SurfacePage implements OnInit {
             this.translate.use(currentLocale);
         }
         this.init(null);
+        setTimeout(()=>{this.tap()},2000)
     }
 
     isAuthenticated() {
@@ -130,6 +132,20 @@ export class SurfacePage implements OnInit {
         }
         this.config.isWorldVisible = true;
         
+    }
+
+    async goMap(){
+        const modal = await this.modalController.create({
+            component: MapPage,
+            componentProps: {
+                readonly: true
+                //lat: this.config.lat,
+                //lng: this.config.lng
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await modal.present();
     }
 
     tap(){

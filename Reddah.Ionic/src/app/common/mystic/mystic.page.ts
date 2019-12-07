@@ -158,13 +158,13 @@ export class MysticPage implements OnInit {
 
     
     ngOnInit() {
-        this.getChat();
+        this.generateChat();
     }
 
     
     //test
     clear(){
-        this.localStorageService.clear(`Reddah_Mystic_Chat_${this.userName}`);
+        //this.localStorageService.clear(`Reddah_Mystic_Chat_${this.userName}`);
         this.messages = [];
     }
 
@@ -185,10 +185,11 @@ export class MysticPage implements OnInit {
 
         setTimeout(()=>{
             this.generateReactiveChat(event.text);
-        },2000);
+        },1000);
         
     }
     
+    /*
     async getChat(){
         let chatHistory = this.localStorageService.retrieve(`Reddah_Mystic_Chat_${this.userName}`);
         if(chatHistory==null){
@@ -202,14 +203,14 @@ export class MysticPage implements OnInit {
             //let max = Math.max.apply(null,this.messages.map(item=>item["Id"]).filter(m=>m!=null));
             //this.getHistory(max, 0);
         }
-    }
+    }*/
 
     addMessage(msg){
         let maxId = Math.max.apply(null,this.messages.map(item=>item["Id"]).filter(m=>m!=null));
         msg.Id = maxId+1;
         
         this.messages.push(msg);
-        this.localStorageService.store(`Reddah_Mystic_Chat_${this.userName}`, this.messages);
+        //this.localStorageService.store(`Reddah_Mystic_Chat_${this.userName}`, this.messages);
     
         if(this.pageTop.scrollToBottom){
             this.pageTop.scrollToBottom(0);
@@ -218,7 +219,7 @@ export class MysticPage implements OnInit {
             if(this.pageTop.scrollToBottom){
                 this.pageTop.scrollToBottom(0);
             }
-        },3000)
+        },1000)
     }
 
     formData;
@@ -293,7 +294,7 @@ export class MysticPage implements OnInit {
                     Type:0,
                     Id:0,
                 });
-            },3000)
+            },1000)
         }
         else
         {

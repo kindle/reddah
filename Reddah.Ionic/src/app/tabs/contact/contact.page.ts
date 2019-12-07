@@ -9,6 +9,7 @@ import { CacheService } from 'ionic-cache';
 import { UserPage } from '../../common/user/user.page';
 import { ChangeNoteNamePopPage } from '../../common/change-notename-pop.page';
 import { ChatChooseGroupPage } from '../../chat/chat-choose-group/chat-choose-group.page';
+import { MysticPage } from '../../common/mystic/mystic.page';
 
 @Component({
     selector: 'app-contact',
@@ -210,5 +211,14 @@ export class ContactPage {
             this.loadRequests();
             this.loadData(null);
         }
+    }
+    
+    async mystic(){
+        const modal = await this.modalController.create({
+            component: MysticPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        await modal.present();
     }
 }

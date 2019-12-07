@@ -256,7 +256,8 @@
         "CopyChat":"копировать",
         "MiniPubMsg":"подтверждение публикации, пользователь получит обновление",
         "CancelPublish":"потом",
-        "ConfirmPublish":"ппубликовать"
+        "ConfirmPublish":"ппубликовать",
+        "LoginToView":"танец для поиска"
     },
 
     "Mail":{

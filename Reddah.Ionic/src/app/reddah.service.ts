@@ -1028,7 +1028,7 @@ export class ReddahService {
             catchError(this.handleError('get stock', []))
         );
     } 
-    
+
     //******************************** */
     getNearby(lat, lon): Observable<any> {
         

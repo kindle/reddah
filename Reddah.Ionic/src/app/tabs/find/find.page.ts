@@ -126,13 +126,4 @@ export class FindPage {
         });
         await modal.present();
     }
-
-    async mystic(){
-        const modal = await this.modalController.create({
-            component: MysticPage,
-            componentProps: {},
-            cssClass: "modal-fullscreen",
-        });
-        await modal.present();
-    }
 }

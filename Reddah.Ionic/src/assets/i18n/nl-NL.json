@@ -256,7 +256,8 @@
         "CopyChat":"Kopiëren",
         "MiniPubMsg":"Door de publicatie te bevestigen, zullen gebruikers de update ontvangen",
         "CancelPublish":"Later",
-        "ConfirmPublish":"Uitgegeven"
+        "ConfirmPublish":"Uitgegeven",
+        "LoginToView":"Dance Login voor meer"
     },
 
     "Mail":{

@@ -259,7 +259,8 @@
         "CopyChat":"復制",
         "MiniPubMsg":"確認發佈之後，用戶將收到此小程式的更新",
         "CancelPublish":"稍後發佈",        
-        "ConfirmPublish":"確認發佈"
+        "ConfirmPublish":"確認發佈",
+        "LoginToView":"請登入後查看"
     },
 
     "Mail":{

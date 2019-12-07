@@ -256,7 +256,8 @@
         "CopyChat":"Copiar",
         "MiniPubMsg":"Ao confirmar a publicação, OS utilizadores receberão a actualização",
         "CancelPublish":"Depois",
-        "ConfirmPublish":"Publicar"
+        "ConfirmPublish":"Publicar",
+        "LoginToView":"Dance Login para encontrar Mais"
     },
 
     "Mail":{

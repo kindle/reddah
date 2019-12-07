@@ -134,6 +134,7 @@ import { ChatChooseGroupPage } from './chat/chat-choose-group/chat-choose-group.
 import { BookmarkPage } from './bookmark/bookmark.page';
 import { BookmarkPopPage } from './common/bookmark-pop.page';
 import { PointPage } from './common/point/point.page';
+import { HistoryPage } from './common/point/history/history.page';
 import { PunchPage } from './common/punch/punch.page';
 import { BlackHolePage } from './common/black-hole/black-hole.page';
 import { WormHolePage } from './common/worm-hole/worm-hole.page';
@@ -180,7 +181,7 @@ var firebaseConfig = {
         AppComponent,
         BookmarkPage,
         BookmarkPopPage,ChatPopPage,
-        PointPage,PunchPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
+        PointPage,HistoryPage,PunchPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
         RankPage,
         LocalePage,LocationPage,MapPage,EarthPage,
         ChooseUserPage,ShareChooseChatPage,
@@ -245,7 +246,7 @@ var firebaseConfig = {
     entryComponents: [
         BookmarkPage,
         BookmarkPopPage,ChatPopPage,
-        PointPage,PunchPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
+        PointPage,HistoryPage,PunchPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
         RankPage,
         LocalePage,LocationPage,MapPage,EarthPage,
         ChooseUserPage,ShareChooseChatPage,

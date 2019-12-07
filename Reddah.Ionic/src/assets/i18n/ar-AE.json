@@ -256,7 +256,8 @@
         "CopyChat":"نسخ",
         "MiniPubMsg":"من خلال تأكيد نشر المستخدم سوف تتلقى التحديثات",
         "CancelPublish":"الآخرة",
-        "ConfirmPublish":"صدر"
+        "ConfirmPublish":"صدر",
+        "LoginToView":"الرقص تسجيل الدخول لمعرفة المزيد"
     },
 
     "Mail":{

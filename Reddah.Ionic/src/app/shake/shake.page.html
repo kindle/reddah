@@ -17,7 +17,7 @@
                     <ion-icon size="small" class="cmd-title" name="ios-male" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
                     <ion-icon size="small" class="cmd-title" name="ios-female" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
                     <br>
-                    <ion-note color="tertiary">{{ 'Common.Distance' | translate }}{{reddah.getRuffDistanceByDegree(user.Distance)}}</ion-note>
+                    <ion-note color="tertiary">{{ 'Common.Distance' | translate }}: {{reddah.getRuffDistanceByDegree(user.Distance)}}</ion-note>
                 </ion-label>
             </ion-item>
         </div>
