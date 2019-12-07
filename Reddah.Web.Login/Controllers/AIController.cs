@@ -1,41 +1,23 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System;
 
 using System.Web.Http;
-using System.Linq;
-using System.Data.Entity;
-using System.Web.Http.Cors;
-using Reddah.Web.Login.Utilities;
 using System.Web;
-using System.Web.Hosting;
-using System.IO;
-using System.Web.Script.Serialization;
-using System.Data.Entity.Validation;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Reddah.Web.Login.Controllers
 {
-    /// <summary>
-    /// 0 normal
-    /// 1 timeline
-    /// 2 two chat
-    /// 3 group chat 
-    /// 4 feedback
-    /// 22 two chat pub
-    /// </summary>
     [RoutePrefix("api/ai")]
     public class AIController : ApiBaseController
     {
         [Route("nlp")]
         [HttpPost]
-        public IHttpActionResult GetNlpChat()
+        public async Task<IHttpActionResult> GetNlpChat()
         {
             try
             {
                 string jwt = HttpContext.Current.Request["jwt"];
-                string content = HttpContext.Current.Request["content"];
+                string text = HttpContext.Current.Request["content"];
                 string locale = HttpContext.Current.Request["locale"];
 
 
@@ -47,10 +29,29 @@ namespace Reddah.Web.Login.Controllers
                 if (jwtResult.Success != 0)
                     return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
 
+                string serviceUrl = "https://console.dialogflow.com/api-client/demo/embedded";
+                string projectId_en_US = "ee71c857-1854-433c-84e8-78b53b87fd99";
+                string projectId_zh_CN = "4d498fad-2a1f-4240-9b67-497b0cdac651";
 
-                string text = "Hi, I'm a robot";
+                string projectId = projectId_en_US;
+                if (locale == "zh-CN")
+                    projectId = projectId_zh_CN;
 
-                return Ok(new ApiResult(0, text));
+                string sessionId = jwtResult.JwtUser.User + "_" + locale;
+
+                var client = new HttpClient();
+                var queryString = HttpUtility.ParseQueryString(string.Empty);
+
+                var endpointUri = String.Format("{0}/{1}/demoQuery?q={2}&sessionId={3}",
+                        serviceUrl, projectId, text, sessionId);
+
+                var response = await client.GetAsync(endpointUri);
+
+                var strResponseContent = await response.Content.ReadAsStringAsync();
+
+                string responseText = strResponseContent.ToString();
+
+                return Ok(new ApiResult(0, responseText));
 
 
             }
