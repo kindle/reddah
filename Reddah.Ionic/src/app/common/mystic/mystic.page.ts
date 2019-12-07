@@ -23,6 +23,7 @@ import { SettingSexPage } from '../../settings/setting-sex/setting-sex.page';
 import { MapPage } from '../../map/map.page';
 import { AddTimelinePage } from '../../mytimeline/add-timeline/add-timeline.page';
 import { TimelinePopPage } from '../timeline-pop.page';
+import { ApiAiClient } from 'api-ai-javascript/es6/ApiAiClient'
 
 @Component({
     selector: 'app-mystic',
@@ -176,6 +177,7 @@ export class MysticPage implements OnInit {
     async childLocalComments(event){
         this.addMessage({
             //Content: this.translate.instant("Common.Font1"), 
+            CreatedOn: Date.now(),
             Content: event.text, 
             UserName: this.userName, 
             Type: event.type
@@ -226,15 +228,56 @@ export class MysticPage implements OnInit {
             this.formData.append("locale", this.reddah.getCurrentLocale());
             this.formData.append("content", inputText);
             this.reddah.getNlpChat(this.formData).subscribe(data=>{
+                let response = JSON.parse(data.Message)
+                let answer = response.result.fulfillment.speech;
+                //let time = (response.timestamp+"").split('.')[0].replace("T"," ");
+                let time = (response.timestamp+"")
+                console.log(time)
                 if(data.Success==0){
                     this.addMessage({
                         //Content: this.translate.instant("Common.Font1"), 
-                        Content: data.Message, 
+                        CreatedOn: time,
+                        Content: answer, 
                         UserName: 'Mystic', 
                         Type:0,
                     });
                 }
             });
+
+            /*
+            this.reddah.getDfChat(inputText).subscribe(data=>{
+                console.log(data);
+                this.addMessage({
+                    //Content: this.translate.instant("Common.Font1"), 
+                    Content: data, 
+                    UserName: 'Mystic', 
+                    Type:0,
+                });
+            })*/
+
+            /*
+            let token = "";
+            const en_us_token = "b43ae9dcee7b42d489c115c747604fdd";
+            const zh_cn_token = "66dc4f2fb4ff49efaac6edda55eb0df1";
+            if(this.reddah.getCurrentLocale()=="zh_CN")
+            {
+                token = zh_cn_token;
+            }
+            else{
+                token = en_us_token;
+            }
+            const client = new ApiAiClient({ accessToken: token });
+            client.textRequest(inputText)
+            .then(res => {
+                const speech = res.result.fulfillment.speech;
+                this.addMessage({
+                    //Content: this.translate.instant("Common.Font1"), 
+                    Content: speech, 
+                    UserName: 'Mystic', 
+                    Type:0,
+                });
+            });
+            */
         }
     }
     
