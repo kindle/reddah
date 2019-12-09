@@ -275,6 +275,51 @@
         }
     },
 
+    "Mystic": {
+        "Welcome":"Hello, welcome to Reddah 😀",
+        "AddPhoto":"You don't have a photo yet, would you like to add a photo?",
+        "SetSex":"Are you a boy or a girl?",
+        "SetSignature":"You don't have a signature yet, would you like to add a signature?",
+        "AddFriend":"Find a new friend in the map?",
+        "AddPost":"Create a new post in your timeline?",
+        "AddGame":"Want to play a game?"
+    },
+
+    "Point": {
+        "TotalPointTitle":"Total Points",
+        "Slogan":"Make progress every day",
+        "RuleTitle":"Point Rules",
+        "TodayTotal":"Today you got",
+        "Fen":"point(s)",
+        "AlreadyGot":"You got",
+        "DailyMax":"daily maximum",
+        "OnceMax":"maximum",
+        "Letsgo":"Go",
+        "Done":"Done",
+        "TaskLoginTitle":"Login",
+        "TaskLoginDescp":"Login Today",
+        "TaskReadTitle":"Read Article",
+        "TaskReadDescp":"Each time you read an article",
+        "TaskMarkTitle":"Mark Article",
+        "TaskMarkDescp":"Each time you mark an article",
+        "TaskShareTitle":"Share Article",
+        "TaskShareDescp":"Each time you share an article",
+        "TaskCommentTitle":"Comment Article",
+        "TaskCommentDescp":"Each time you comment an article",
+        "TaskFirstPhotoTitle":"Photo",
+        "TaskFirstPhotoDescp":"First time to upload photo",
+        "TaskFirstSignatureTitle":"Signature",
+        "TaskFirstSignatureDescp":"First time to add a signature",
+        "TaskFirstTimelineTitle":"Timeline",
+        "TaskFirstTimelineDescp":"First time to add a timeline",
+        "TaskFirstGameTitle":"Mini App",
+        "TaskFirstGameDescp":"First time to use Mini App",
+        "TaskFirstFriendTitle":"Apply Friend",
+        "TaskFirstFriendDescp":"First time to apply for friend",
+        "TaskFirstShakeTitle":"Shake",
+        "TaskFirstShakeDescp":"First time to use shake"
+    },
+    
     "Service":{
         "4": "Σφάλμα υπηρεσίας, παρακαλώ δοκιμάστε ξανά αργότερα",
         "1001":"Το όνομα χρήστη πρέπει να περιέχει γράμματα και αριθμούς 6 -18.Δεν επιτρέπονται ειδικοί χαρακτήρες",

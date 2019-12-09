@@ -14,13 +14,15 @@
             <ion-row>
                 <ion-item lines="none" style="width:100%;">
                     <ion-label text-wrap style="margin-top:0;">{{reddah.htmlDecode(point.Reason)}}</ion-label>
-                    <ion-text slot="end">{{reddah.htmlDecode(point.V)}}</ion-text>
+                    <ion-text slot="end" *ngIf="point.V>0" color="primary">+{{point.V}}</ion-text>
+                    <ion-text slot="end" *ngIf="point.V==0">{{point.V}}</ion-text>
+                    <ion-text slot="end" *ngIf="point.V<0" color="danger">-{{point.V}}</ion-text>
                 </ion-item>
             </ion-row>
             <ion-row>
                 <ion-item lines="none">
                     <ion-label slot="start" class="articleFooter" style="min-width: 300px;">
-                        {{point.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss'}}
+                        {{reddah.utcToLocal(point.CreatedOn, 'YYYY-MM-DD HH:mm:ss')}}
                     </ion-label>
                 </ion-item> 
             </ion-row>

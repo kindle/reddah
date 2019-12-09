@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -136,6 +136,7 @@ import { BookmarkPopPage } from './common/bookmark-pop.page';
 import { PointPage } from './common/point/point.page';
 import { HistoryPage } from './common/point/history/history.page';
 import { PunchPage } from './common/punch/punch.page';
+import { PunchClockPage } from './common/point/punch-clock/punch-clock.page';
 import { BlackHolePage } from './common/black-hole/black-hole.page';
 import { WormHolePage } from './common/worm-hole/worm-hole.page';
 import { MagicMirrorPage } from './common/magic-mirror/magic-mirror.page';
@@ -181,7 +182,7 @@ var firebaseConfig = {
         AppComponent,
         BookmarkPage,
         BookmarkPopPage,ChatPopPage,
-        PointPage,HistoryPage,PunchPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
+        PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
         RankPage,
         LocalePage,LocationPage,MapPage,EarthPage,
         ChooseUserPage,ShareChooseChatPage,
@@ -246,7 +247,7 @@ var firebaseConfig = {
     entryComponents: [
         BookmarkPage,
         BookmarkPopPage,ChatPopPage,
-        PointPage,HistoryPage,PunchPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
+        PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
         RankPage,
         LocalePage,LocationPage,MapPage,EarthPage,
         ChooseUserPage,ShareChooseChatPage,
@@ -298,6 +299,7 @@ var firebaseConfig = {
         PlatformPage,
         CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     imports: [
         BrowserModule, 
         FormsModule,

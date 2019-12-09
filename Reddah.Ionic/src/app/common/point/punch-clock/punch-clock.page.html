@@ -1,0 +1,62 @@
+<ion-content color="point">
+    <div class="bg1">
+        {{ 'Point.PunchClock' | translate }}
+    </div>
+    <div class="bg2">
+        T
+    </div>
+
+    <ion-item lines="none" color="transparent" class="title" style="--background:transparent;">
+        <ion-card-title color="light" style="font-size: large;font-weight: bold;">{{ 'Point.PunchClock' | translate }}</ion-card-title>
+        <ion-button clear slot="end" color="transparent" (click)="close()" style="--box-shadow: none;">
+            <ion-icon is-active="false" name="close"></ion-icon>
+        </ion-button>
+    </ion-item>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-item lines="none" color="transparent" style="--background:transparent;">
+                <ion-icon name="checkmark-circle" color="tertiary"></ion-icon>
+                <ion-card-subtitle style="color:#fff;text-align: center;margin-left:5px;">
+                    今天已签到，获得奖励
+                </ion-card-subtitle>
+            </ion-item>
+            <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;">
+                1分
+            </ion-card-title>
+            <ion-card-content style="color:#fff;text-align: center;">
+            </ion-card-content>
+        </ion-card-header>
+    </ion-card>
+
+    <ion-card color="tertiary">
+        <ion-item lines="none" color="transparent" class="title">
+            <ion-card-title color="dark" style="font-size: large;font-weight: bold;color:#000;">
+                {{ 'Point.PunchClockTitle' | translate }} ({{select_month}})
+            </ion-card-title>
+        </ion-item>
+        <div class="app-common-bg">
+            <div class="calendar-table-item" ></div>
+            <div class="calendar-table-item" ></div>
+            <div class="calendar-table-item" ></div>
+            <div class="calendar-table-item" ></div>
+            <div class="calendar-table-item" ></div>
+            <div class="calendar-table-item" ></div>
+            <div class="calendar-table-item" ></div>
+            <div class="calendar-table-riqi" *ngFor="let day of days" 
+                [ngClass]="{'currentDay':day.day==active_day}" (click)="change_day(day.day)">
+                <div style="justify-content: center;align-items: center;
+                    font-size: 15px;border: 1px solid white;
+                    border-radius: 50%;
+                    height: 3.2rem;
+                    width: 3.2rem;
+                    padding: 4px" 
+                [ngClass]="{'choosedDay':day.choosed}">
+                    <div style="color:#000;">{{day.day}}</div>
+                    <div *ngIf="day.choosed" style="margin-left:5px;">✅</div>
+                </div>
+            </div>
+        </div>
+    </ion-card>
+    
+</ion-content>

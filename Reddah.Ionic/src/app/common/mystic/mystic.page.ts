@@ -176,7 +176,6 @@ export class MysticPage implements OnInit {
     //user input sth.
     async childLocalComments(event){
         this.addMessage({
-            //Content: this.translate.instant("Common.Font1"), 
             CreatedOn: Date.now(),
             Content: event.text, 
             UserName: this.userName, 
@@ -188,26 +187,14 @@ export class MysticPage implements OnInit {
         },1000);
         
     }
-    
-    /*
-    async getChat(){
-        let chatHistory = this.localStorageService.retrieve(`Reddah_Mystic_Chat_${this.userName}`);
-        if(chatHistory==null){
-            this.generateChat();
-            //get latest 20 messages;
-            //this.getHistory(0, 20);
-        }else{
-            this.messages = chatHistory;
-            this.generateChat();
-            //get all latest messages;
-            //let max = Math.max.apply(null,this.messages.map(item=>item["Id"]).filter(m=>m!=null));
-            //this.getHistory(max, 0);
-        }
-    }*/
 
     addMessage(msg){
         let maxId = Math.max.apply(null,this.messages.map(item=>item["Id"]).filter(m=>m!=null));
         msg.Id = maxId+1;
+
+        if(msg.CreatedOn==null){
+            msg.CreatedOn = Date.now();
+        }
         
         this.messages.push(msg);
         //this.localStorageService.store(`Reddah_Mystic_Chat_${this.userName}`, this.messages);
@@ -231,12 +218,10 @@ export class MysticPage implements OnInit {
             this.reddah.getNlpChat(this.formData).subscribe(data=>{
                 let response = JSON.parse(data.Message)
                 let answer = response.result.fulfillment.speech;
-                //let time = (response.timestamp+"").split('.')[0].replace("T"," ");
                 let time = (response.timestamp+"")
-                console.log(time)
+                
                 if(data.Success==0){
                     this.addMessage({
-                        //Content: this.translate.instant("Common.Font1"), 
                         CreatedOn: time,
                         Content: answer, 
                         UserName: 'Mystic', 
@@ -245,17 +230,7 @@ export class MysticPage implements OnInit {
                 }
             });
 
-            /*
-            this.reddah.getDfChat(inputText).subscribe(data=>{
-                console.log(data);
-                this.addMessage({
-                    //Content: this.translate.instant("Common.Font1"), 
-                    Content: data, 
-                    UserName: 'Mystic', 
-                    Type:0,
-                });
-            })*/
-
+            
             /*
             let token = "";
             const en_us_token = "b43ae9dcee7b42d489c115c747604fdd";
@@ -288,8 +263,7 @@ export class MysticPage implements OnInit {
             this.messages = [];
             setTimeout(()=>{
                 this.addMessage({
-                    //Content: this.translate.instant("Common.Font1"), 
-                    Content: 'Hello, welcome to Reddah 😀', 
+                    Content: this.translate.instant("Mystic.Welcome"), 
                     UserName: 'Mystic', 
                     Type:0,
                     Id:0,
@@ -304,8 +278,7 @@ export class MysticPage implements OnInit {
                 if(user_photo=="assets/icon/anonymous.png"){
                     console.log('no photo yet')
                     this.addMessage({
-                        //Content: this.translate.instant("Common.Font1"), 
-                        Content: `You don't have a photo yet, would you like to add a photo?`, 
+                        Content: this.translate.instant("Mystic.AddPhoto"), 
                         UserName: 'Mystic', 
                         Type:0,
                         Action: 0,
@@ -318,7 +291,7 @@ export class MysticPage implements OnInit {
                 let user_sex_set = this.localStorageService.retrieve("user_sex_set"+this.userName);
                 if(user_sex_set==null){
                     this.addMessage({ 
-                        Content: `Are you a boy or a girl?`, 
+                        Content: this.translate.instant("Mystic.SetSex"), 
                         UserName: 'Mystic', 
                         Type:0,
                         Action: 1,
@@ -332,7 +305,7 @@ export class MysticPage implements OnInit {
                 let user_signature = this.reddah.appData('usersignature_'+this.userName);
                 if(user_signature==null||user_signature.length==0){
                     this.addMessage({
-                        Content: `You don't have a signature yet, would you like to add a signature?`, 
+                        Content: this.translate.instant("Mystic.SetSignature"), 
                         UserName: 'Mystic', 
                         Type:0,
                         Action: 2,
@@ -348,7 +321,7 @@ export class MysticPage implements OnInit {
                 
                 if(cachedContact==null||cachedContact.length==0){
                     this.addMessage({
-                        Content: `Find a new friend in the map?`, 
+                        Content: this.translate.instant("Mystic.AddFriend"), 
                         UserName: 'Mystic', 
                         Type:0,
                         Action: 3,
@@ -364,7 +337,7 @@ export class MysticPage implements OnInit {
                 {
                     if(timeline.length==0){
                         this.addMessage({
-                            Content: `Create a new post in your timeline?`, 
+                            Content: this.translate.instant("Mystic.AddPost"), 
                             UserName: 'Mystic', 
                             Type:0,
                             Action: 4,
@@ -374,6 +347,7 @@ export class MysticPage implements OnInit {
                 });
             }
 
+            /*
             //play a game
             if(continueFlag){
                 this.getUsedMini()
@@ -381,7 +355,7 @@ export class MysticPage implements OnInit {
                 {
                     if(minis.length==0){
                         this.addMessage({
-                            Content: `Want to play a game?`, 
+                            Content: this.translate.instant("Mystic.AddGame"), 
                             UserName: 'Mystic', 
                             Type:0,
                             Action: 5,
@@ -390,6 +364,7 @@ export class MysticPage implements OnInit {
                     }
                 });
             }
+            */
 
             //check user punch today
         }

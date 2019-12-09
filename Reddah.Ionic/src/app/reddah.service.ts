@@ -840,12 +840,24 @@ export class ReddahService {
     //******************************** */
     private pointsUrl = 'https://login.reddah.com/api/point/getpointlist'; 
     
-    getPoints(formData): Observable<any> {
+    getPoints(): Observable<any> {
+        let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
         return this.http.post<any>(this.pointsUrl, formData)
         .pipe(
             tap(data => this.log('fetched points')),
             catchError(this.handleError('getReddahPoints', []))
+        );
+    }
+    private pointPunchClockUrl = 'https://login.reddah.com/api/point/daily'; 
+    
+    punchClock(): Observable<any> {
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.pointPunchClockUrl, formData)
+        .pipe(
+            tap(data => this.log('punch clock')),
+            catchError(this.handleError('punch clock', []))
         );
     }
     //******************************** */
@@ -1126,6 +1138,22 @@ export class ReddahService {
     }
     
     doubleByteLocale = ["zh-cn","zh-tw","ja-jp","ko-kr"];
+
+    lan2(a,b){
+        if(this.doubleByteLocale.includes(this.getCurrentLocale().toLowerCase())) 
+        {
+            return a+b;
+        }
+        return a+" "+b;
+    }
+
+    lan3(a,b,c){
+        if(this.doubleByteLocale.includes(this.getCurrentLocale().toLowerCase())) 
+        {
+            return a+b+c;
+        }
+        return a+" "+b+" "+c;
+    }
 
     summary(str: string, n: number, locale='en-US') {
         if(locale==null)

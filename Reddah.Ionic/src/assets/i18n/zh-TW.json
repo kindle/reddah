@@ -278,6 +278,51 @@
         }
     },
 
+    "Mystic": {
+        "Welcome":"您好，欢迎使用Reddah 😀",
+        "AddPhoto":"您还没有头像，上传一个吧！",
+        "SetSex":"你是帅哥还是美女？",
+        "SetSignature":"添加一个展示个性的签名吧！",
+        "AddFriend":"还没有好友？去地图上找一个聊聊吧",
+        "AddPost":"没有发过时光圈？来，发一个看看！",
+        "AddGame":"看看有趣的游戏吧"
+    },
+
+    "Point": {
+        "TotalPointTitle":"总积分",
+        "Slogan":"每天进步一点",
+        "RuleTitle":"积分规则",
+        "TodayTotal":"今日已累积",
+        "Fen":"分",
+        "AlreadyGot":"已获得",
+        "DailyMax":"每日上限",
+        "OnceMax":"上限",
+        "Letsgo":"去完成",
+        "Done":"已完成",
+        "TaskLoginTitle":"登录",
+        "TaskLoginDescp":"每日首次登录",
+        "TaskReadTitle":"阅读文章",
+        "TaskReadDescp":"每有效阅读一篇",
+        "TaskMarkTitle":"收藏文章",
+        "TaskMarkDescp":"每收藏文章一次",
+        "TaskShareTitle":"分享文章",
+        "TaskShareDescp":"每分享文章一次",
+        "TaskCommentTitle":"发表观点",
+        "TaskCommentDescp":"每发表一个有效观点",
+        "TaskFirstPhotoTitle":"头像",
+        "TaskFirstPhotoDescp":"首次上传头像",
+        "TaskFirstSignatureTitle":"签名",
+        "TaskFirstSignatureDescp":"首次上传个性签名",
+        "TaskFirstTimelineTitle":"时光圈",
+        "TaskFirstTimelineDescp":"首次发布时光圈",
+        "TaskFirstGameTitle":"小程序",
+        "TaskFirstGameDescp":"首次使用小程序",
+        "TaskFirstFriendTitle":"加好友",
+        "TaskFirstFriendDescp":"首次申请加好友",
+        "TaskFirstShakeTitle":"摇一摇",
+        "TaskFirstShakeDescp":"首次使用摇一摇"
+    },
+    
     "Service":{
         "4": "服務錯誤，請稍後重試",
         "1001":"用戶名為6-18比特字母數位組合，不允許使用特殊字元",

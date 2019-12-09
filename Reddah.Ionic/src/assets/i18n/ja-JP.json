@@ -276,19 +276,64 @@
         }
     },
 
+    "Mystic": {
+      "Welcome":"Hello, welcome to Reddah 😀",
+      "AddPhoto":"You don't have a photo yet, would you like to add a photo?",
+      "SetSex":"Are you a boy or a girl?",
+      "SetSignature":"You don't have a signature yet, would you like to add a signature?",
+      "AddFriend":"Find a new friend in the map?",
+      "AddPost":"Create a new post in your timeline?",
+      "AddGame":"Want to play a game?"
+    },
+
+    "Point": {
+        "TotalPointTitle":"Total Points",
+        "Slogan":"Make progress every day",
+        "RuleTitle":"Point Rules",
+        "TodayTotal":"Today you got",
+        "Fen":"point(s)",
+        "AlreadyGot":"You got",
+        "DailyMax":"daily maximum",
+        "OnceMax":"maximum",
+        "Letsgo":"Go",
+        "Done":"Done",
+        "TaskLoginTitle":"Login",
+        "TaskLoginDescp":"Login Today",
+        "TaskReadTitle":"Read Article",
+        "TaskReadDescp":"Each time you read an article",
+        "TaskMarkTitle":"Mark Article",
+        "TaskMarkDescp":"Each time you mark an article",
+        "TaskShareTitle":"Share Article",
+        "TaskShareDescp":"Each time you share an article",
+        "TaskCommentTitle":"Comment Article",
+        "TaskCommentDescp":"Each time you comment an article",
+        "TaskFirstPhotoTitle":"Photo",
+        "TaskFirstPhotoDescp":"First time to upload photo",
+        "TaskFirstSignatureTitle":"Signature",
+        "TaskFirstSignatureDescp":"First time to add a signature",
+        "TaskFirstTimelineTitle":"Timeline",
+        "TaskFirstTimelineDescp":"First time to add a timeline",
+        "TaskFirstGameTitle":"Mini App",
+        "TaskFirstGameDescp":"First time to use Mini App",
+        "TaskFirstFriendTitle":"Apply Friend",
+        "TaskFirstFriendDescp":"First time to apply for friend",
+        "TaskFirstShakeTitle":"Shake",
+        "TaskFirstShakeDescp":"First time to use shake"
+    },
+    
     "Service":{
-        "4": "サービスエラー、後で再度お試しください",
-        "1001":"ユーザー名は6 - 18文字と数字を含まなければなりません。特殊文字は許されません",
-        "1002":"メールが無効です",
-        "1003":"ユーザ名が存在する",
-        "1004":"メール登録",
-        "1005":"メールを確認するためにメールボックスに行ってください",
-        "1006":"ユーザー名またはパスワードが間違っている",
-        "1007":"メールが登録されていません",
-        "1008":"リセットパスワードが失敗した場合、セキュリティトークンが正しいかどうかを確認してください",
-        "1009":"古いパスワードが間違っている",
-        "1010":"材料の選択",
-        "1011":"記事を削除する許可",
-        "1012":"コメントを削除する許可"
-    }
+          "4": "サービスエラー、後で再度お試しください",
+          "1001":"ユーザー名は6 - 18文字と数字を含まなければなりません。特殊文字は許されません",
+          "1002":"メールが無効です",
+          "1003":"ユーザ名が存在する",
+          "1004":"メール登録",
+          "1005":"メールを確認するためにメールボックスに行ってください",
+          "1006":"ユーザー名またはパスワードが間違っている",
+          "1007":"メールが登録されていません",
+          "1008":"リセットパスワードが失敗した場合、セキュリティトークンが正しいかどうかを確認してください",
+          "1009":"古いパスワードが間違っている",
+          "1010":"材料の選択",
+          "1011":"記事を削除する許可",
+          "1012":"コメントを削除する許可"
+      }
   }

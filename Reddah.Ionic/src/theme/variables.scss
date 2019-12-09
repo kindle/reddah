@@ -86,6 +86,9 @@
     --ion-color-mini-shade: #d39b00;
     --ion-color-mini-tint: #f2b81a;
 
+    /** point**/
+    --ion-color-mini: #fe7c58;
+
     .modal-fullscreen {
         .modal-wrapper {
             position: absolute;
@@ -174,18 +177,12 @@
 
 .ion-color-mini {
     --ion-color-base: var(--ion-color-mini, #f00) !important;
-    --ion-color-base-rgb: var(--ion-color-mini-rgb, 56, 128, 255) !important;
-    --ion-color-contrast: var(--ion-color-mini-contrast, #06f) !important;
-    --ion-color-contrast-rgb: var(--ion-color-mini-contrast-rgb, 255, 255, 255) !important;
-    --ion-color-shade: var(--ion-color-mini-shade, #0001e0) !important;
-    --ion-color-tint: var(--ion-color-mini-tint, #ff80f0) !important
 }
 
 .ion-color-subscribe {
     --ion-color-base: var(--ion-color-subscribe, #f00) !important;
-    --ion-color-base-rgb: var(--ion-color-subscribe-rgb, 56, 128, 255) !important;
-    --ion-color-contrast: var(--ion-color-subscribe-contrast, #06f) !important;
-    --ion-color-contrast-rgb: var(--ion-color-subscribe-contrast-rgb, 255, 255, 255) !important;
-    --ion-color-shade: var(--ion-color-subscribe-shade, #0001e0) !important;
-    --ion-color-tint: var(--ion-color-subscribe-tint, #ff80f0) !important
+}
+
+.ion-color-point {
+    --ion-color-base: var(--ion-color-point, #fe7c58) !important;
 }

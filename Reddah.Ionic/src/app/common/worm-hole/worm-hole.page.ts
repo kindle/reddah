@@ -340,7 +340,8 @@ export class WormHolePage implements OnInit {
                 }else{
                     showArray = this.reddah.getRandomArray(showNumber, data.Message.length);
                 }
-                let foundUser = data.Message[0];
+                
+                let foundUser = data.Message[showArray[0]];
                 this.reddah.getUserPhotos(foundUser.UserName);
 
                 this.goUser(foundUser.UserName);

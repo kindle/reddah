@@ -46,49 +46,50 @@ export class HistoryPage implements OnInit {
         });
         await loading.present();
 
-        this.points = [];
-        this.loadedIds = [];
+        let cacheKey = "this.reddah.getPointHistory";
+        let request = this.reddah.getPoints();
 
-        let cacheKey = "this.reddah.getPoints" + JSON.stringify(this.loadedIds);
-        let formData = new FormData();
-        formData.append("loadedIds", JSON.stringify(this.loadedIds));
-        let request = this.reddah.getPoints(formData);
-
-        this.cacheService.loadFromObservable(cacheKey, request, "PointPage")
+        this.cacheService.loadFromObservable(cacheKey, request, "HistoryPage")
         .subscribe(result => 
         {
             console.log(result.Message)
+            for(let point of result){
+                this.points.push(point); 
+            }
+            /*
             if(result.Success==0){
-                console.log(this.points);
+                console.log(result);
                 for(let point of result.Message){
-                    this.points.push(point);
-                    this.loadedIds.push(point.Id);  
+                    this.points.push(point); 
                 }
             }
             else{
                 console.log(result.Message);
-            }
+            }*/
             
             loading.dismiss();
         });
     }
   
     getPoints(event):void {
-        let cacheKey = "this.reddah.getPoints" + JSON.stringify(this.loadedIds);
-        let formData = new FormData();
-        formData.append("loadedIds", JSON.stringify(this.loadedIds));
-        let request = this.reddah.getPoints(formData);
+        this.points = [];
+        let cacheKey = "this.reddah.getPointHistory";
+        let request = this.reddah.getPoints();
 
-        this.cacheService.loadFromObservable(cacheKey, request, "PointPage")
+        this.cacheService.loadFromObservable(cacheKey, request, "HistoryPage")
         .subscribe(result => 
         {
             console.log(result)
-            if(result.Success==0){
-                for(let point of result.Message){
-                    this.points.push(point);
-                    this.loadedIds.push(point.Id);  
-                }
+            for(let point of result){
+                this.points.push(point);
             }
+            /*
+            if(result.Success==0){
+                //for(let point of result.Message){
+                for(let point of result){
+                    this.points.push(point);
+                }
+            }*/
             
             if(event)
                 event.target.complete();
@@ -97,7 +98,7 @@ export class HistoryPage implements OnInit {
 
     clearCacheAndReload(event){
         this.pageTop.scrollToTop();
-        this.cacheService.clearGroup("PointPage");
+        this.cacheService.clearGroup("HistoryPage");
         this.getPoints(event);
     }
 

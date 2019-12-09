@@ -1,36 +1,74 @@
-<ion-item color="light" no-padding lines="none">
-    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
-    </ion-button>
-    <ion-label>{{ 'Menu.MyPoints' | translate }}</ion-label>
-    <ion-button clear slot="end" color="light" (click)="pointDetails()" style="--box-shadow: none;">
-        {{ 'Common.Details' | translate }}
-    </ion-button>
-</ion-item>
-<ion-content #pageTop style="background-color: white;">
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content refreshingSpinner="bubbles">
-        </ion-refresher-content>
-    </ion-refresher>
-    <ion-card class="welcome-card" *ngFor="let point of points">
-        <ion-grid>
-            <ion-row>
-                <ion-item lines="none" style="width:100%;">
-                    <ion-label text-wrap style="margin-top:0;">{{reddah.htmlDecode(point.Reason)}}</ion-label>
-                    <ion-text slot="end">{{reddah.htmlDecode(point.V)}}</ion-text>
-                </ion-item>
-            </ion-row>
-            <ion-row>
-                <ion-item lines="none">
-                    <ion-label slot="start" class="articleFooter" style="min-width: 300px;">
-                        {{point.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss'}}
-                    </ion-label>
-                </ion-item> 
-            </ion-row>
-        </ion-grid>
+<ion-content color="point">
+    <div class="bg1">
+        {{ 'Menu.MyPoints' | translate }}
+    </div>
+    <div class="bg2">
+        P
+    </div>
+
+    <ion-item lines="none" color="transparent" class="title" style="--background:transparent;">
+        <ion-button clear icon-start color="transparent" (click)="close()" style="--box-shadow: none;">
+            <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        </ion-button>
+        <ion-card-title color="light" style="font-size: large;font-weight: bold;">{{ 'Menu.MyPoints' | translate }}</ion-card-title>
+        <ion-button clear slot="end" color="transparent" (click)="pointDetails()" 
+            style="--box-shadow: none;text-transform: none;font-size: large;">
+            {{ 'Common.Details' | translate }}
+        </ion-button>
+    </ion-item>
+
+    <ion-card class="welcome-card" color="light">
+        <ion-item lines="none">
+            <ion-icon name="calendar" color="dark"></ion-icon>
+            <ion-card-title>{{ 'Point.PunchClock' | translate }}</ion-card-title>
+            <ion-button clear slot="end" color="warning" (click)="punchClock()" 
+                style="--box-shadow: none;text-transform: none;">
+                {{ 'Point.Letsgo' | translate }}
+            </ion-button>
+            <!--<ion-button clear slot="end" color="light" 
+                style="--box-shadow: none;text-transform: none;" *ngIf="task.got>=task.max">
+                {{ 'Point.Done' | translate }}
+            </ion-button>-->
+        </ion-item>
     </ion-card>
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'Button.Loading' | translate }}">
-        </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle style="color:#fff;text-align: center;">
+                {{ 'Point.TotalPointTitle' | translate }}
+            </ion-card-subtitle>
+            <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;">
+                {{reddah.appData('userpoint_'+userName)}}
+            </ion-card-title>
+            <ion-card-content style="color:#fff;text-align: center;">
+                {{ 'Point.Slogan' | translate }}
+            </ion-card-content>
+        </ion-card-header>
+    </ion-card>
+
+    <ion-item lines="none" color="transparent" class="title">
+        <ion-card-title color="light" style="font-size: large;font-weight: bold;">{{ 'Point.RuleTitle' | translate }}</ion-card-title>
+        <ion-text style="font-size: large;" color="light" slot="end">{{ reddah.lan3('Point.TodayTotal' | translate, 1, 'Point.Fen' | translate) }}</ion-text>
+    </ion-item>
+
+    <ion-card class="welcome-card" color="light" *ngFor="let task of tasks">
+        <ion-item lines="none">
+            <ion-card-title>{{task.title}}</ion-card-title>
+            <ion-button clear slot="end" color="warning" (click)="close()" 
+                style="--box-shadow: none;text-transform: none;" *ngIf="task.got<task.max">
+                {{ 'Point.Letsgo' | translate }}
+            </ion-button>
+            <ion-button clear slot="end" color="light" 
+                style="--box-shadow: none;text-transform: none;" *ngIf="task.got>=task.max">
+                {{ 'Point.Done' | translate }}
+            </ion-button>
+        </ion-item>
+        <ion-card-content>
+            <p>{{ reddah.lan2(task.point, 'Point.Fen' | translate) }} / {{task.description}}</p>
+            <p *ngIf="task.type==0">{{ reddah.lan3('Point.AlreadyGot' | translate, task.got, 'Point.Fen' | translate) }}
+                / {{ reddah.lan3('Point.DailyMax' | translate, task.max,  'Point.Fen' | translate) }}</p>
+            <p *ngIf="task.type==1">{{ reddah.lan3('Point.AlreadyGot' | translate, task.got, 'Point.Fen' | translate) }}
+                / {{ reddah.lan3('Point.OnceMax' | translate, task.max,  'Point.Fen' | translate) }}</p>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

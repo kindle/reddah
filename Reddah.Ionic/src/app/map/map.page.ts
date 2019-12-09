@@ -29,8 +29,6 @@ export class MapPage implements OnInit {
         public navController: NavController,
 
         public modalController: ModalController,
-        private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
         public activeRoute: ActivatedRoute, 
         private elementRef: ElementRef,
     ){
@@ -57,12 +55,6 @@ export class MapPage implements OnInit {
     ionViewDidEnter() {
 
         this.loadmap();
-        
-        /*if(this.location){
-            this.location.location.lat = this.lat;
-            this.location.location.lng = this.lng;
-            this.setLocation(this.location, false);
-        }*/
         
         this.goMe();
     }
@@ -133,17 +125,24 @@ export class MapPage implements OnInit {
             this.setLocation(loc);
         }else{
             this.map.locate({ setView: true, maxZoom: 15 }).on('locationfound', (e) => {
-                loc = {
-                    "title": this.userName,
-                    "location":{"lat":e.latitude,"lng":e.longitude}
+                if(!this.readonly){
+                    loc = {
+                        "title": this.userName,
+                        "location":{"lat":e.latitude,"lng":e.longitude}
+                    }
+                    this.setLocation(loc);
+                    this.reddah.saveUserLocation(this.userName, loc, loc.location.lat, loc.location.lng);
                 }
-                this.setLocation(loc);
-
-                this.reddah.saveUserLocation(this.userName, loc, loc.location.lat, loc.location.lng);
-                    
+                else{
+                    loc = {
+                        "title": this.translateService.instant("Menu.About"),
+                        "location":{"lat":e.latitude,"lng":e.longitude}
+                    }
+                    this.setLocation(loc, false);
+                }
                 
             }).on('locationerror', (err) => {
-                alert(err.message);
+                console.log(err.message);
             })
         }
             

@@ -1,0 +1,63 @@
+.app-common-bg{
+    position: relative;
+    width: 100%;
+}
+.calendar-table-item{
+    padding: 5px;
+    width: 14.28%;
+    float: left;
+    text-align: center;
+}
+.calendar-table-riqi{
+    padding: 5px;
+    width: 14.28%;
+    float: left;
+    text-align: center;
+}
+.workCalendar{
+    border-radius: 8px;box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    -webkit-box-shadow: 0 4px 16px rgba(0,0,0,.12); 
+    margin-top: 15rem;padding: 1rem 0;
+    overflow: hidden;
+}
+.choosedDay{
+    color: #07AA67;
+    background: #EAFBF4;
+}
+
+.title{
+    margin-top: 20px;
+}
+
+.bg1 {
+    position:absolute;
+    font-size: 50px;
+    color:#fc8b6d;
+    margin-top: 20px;  
+    margin-left: -10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width:80%;
+}
+
+.bg2 {
+    position:absolute;
+    font-size: 500px;
+    color:#fc8b6d;
+    margin-left: -100px;
+}
+
+.chip {
+    --background:white;
+    width:31%;
+    border-radius: 5px;
+}
+
+.list {
+    margin: 0;
+}
+
+ion-item {
+    --ion-color-base: var(--ion-item-background, transparent);
+}
