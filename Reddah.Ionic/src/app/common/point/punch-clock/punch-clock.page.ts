@@ -17,6 +17,7 @@ export class PunchClockPage implements OnInit {
         this.modalController.dismiss();
     }
 
+    userName;
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
@@ -27,11 +28,33 @@ export class PunchClockPage implements OnInit {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
 
-    ){}
+    ){
+        this.userName = this.reddah.getCurrentUser();
 
+    }
+
+    punchClockLoading = true;
+    pointPunchToday = 0;
+    punchedDays = [];
     async ngOnInit(){
         this.reddah.punchClock().subscribe(data=>{
-            alert(JSON.stringify(data));
+            //console.log(JSON.stringify(data));
+            if(data.Success==0){
+                this.pointPunchToday = data.Message.GotPoint;
+                this.localStorageService.store(`userpoint_${this.userName}`, data.Message.UserPoint);
+                this.punchedDays = [];
+                for(let history of data.Message.History){
+                    let localDateTime = this.reddah.utcToLocal(history.CreatedOn, 'YYYY-MM-DD');
+                    //console.log(localDateTime);
+                    let historyMonth = new Date(localDateTime).getMonth() + 1;
+                    let historyDay = new Date(localDateTime).getDate()+"";
+                    if(this.select_month == historyMonth){
+                        this.punchedDays.push(historyDay);
+                    }
+                }
+                //console.log(this.punchedDays);
+                this.punchClockLoading = false;
+            }
         });
         this.showTime();
     }
@@ -113,13 +136,13 @@ export class PunchClockPage implements OnInit {
         var date = new Date(this.select_year, this.select_month-1);
         
             if(this.select_month>1){
-            this.showDays(date.getFullYear(), date.getMonth() - 1 + 1)
-            this.select_year = date.getFullYear();
-            this.select_month = date.getMonth()-1 + 1;
+                this.showDays(date.getFullYear(), date.getMonth() - 1 + 1)
+                this.select_year = date.getFullYear();
+                this.select_month = date.getMonth()-1 + 1;
             }else {
-            this.showDays(date.getFullYear()-1, 12)
-            this.select_month = 12;
-            this.select_year = this.select_year -1;
+                this.showDays(date.getFullYear()-1, 12)
+                this.select_month = 12;
+                this.select_year = this.select_year -1;
             }
     }
 

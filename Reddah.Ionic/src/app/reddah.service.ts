@@ -854,6 +854,7 @@ export class ReddahService {
     punchClock(): Observable<any> {
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
+        formData.append('offset', JSON.stringify((new Date()).getTimezoneOffset()));
         return this.http.post<any>(this.pointPunchClockUrl, formData)
         .pipe(
             tap(data => this.log('punch clock')),

@@ -52,20 +52,14 @@ export class HistoryPage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "HistoryPage")
         .subscribe(result => 
         {
-            console.log(result.Message)
-            for(let point of result){
-                this.points.push(point); 
-            }
-            /*
             if(result.Success==0){
-                console.log(result);
                 for(let point of result.Message){
                     this.points.push(point); 
                 }
             }
             else{
                 console.log(result.Message);
-            }*/
+            }
             
             loading.dismiss();
         });
@@ -79,17 +73,12 @@ export class HistoryPage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "HistoryPage")
         .subscribe(result => 
         {
-            console.log(result)
-            for(let point of result){
-                this.points.push(point);
-            }
-            /*
+            alert(JSON.stringify(result));
             if(result.Success==0){
-                //for(let point of result.Message){
-                for(let point of result){
+                for(let point of result.Message){
                     this.points.push(point);
                 }
-            }*/
+            }
             
             if(event)
                 event.target.complete();

@@ -18,11 +18,15 @@
             <ion-item lines="none" color="transparent" style="--background:transparent;">
                 <ion-icon name="checkmark-circle" color="tertiary"></ion-icon>
                 <ion-card-subtitle style="color:#fff;text-align: center;margin-left:5px;">
-                    今天已签到，获得奖励
+                    <p *ngIf="punchClockLoading">正在签到，请稍等。。。</p>
+                    <p *ngIf="!punchClockLoading">今天已签到，获得奖励</p>
                 </ion-card-subtitle>
             </ion-item>
-            <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;">
-                1分
+            <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;" *ngIf="punchClockLoading">
+                ...
+            </ion-card-title>
+            <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;" *ngIf="!punchClockLoading">
+                {{pointPunchToday}}分
             </ion-card-title>
             <ion-card-content style="color:#fff;text-align: center;">
             </ion-card-content>
@@ -44,16 +48,16 @@
             <div class="calendar-table-item" ></div>
             <div class="calendar-table-item" ></div>
             <div class="calendar-table-riqi" *ngFor="let day of days" 
-                [ngClass]="{'currentDay':day.day==active_day}" (click)="change_day(day.day)">
+                [ngClass]="{'currentDay':punchedDays.includes(day.day)}" (click)="change_day(day.day)">
                 <div style="justify-content: center;align-items: center;
                     font-size: 15px;border: 1px solid white;
                     border-radius: 50%;
                     height: 3.2rem;
                     width: 3.2rem;
                     padding: 4px" 
-                [ngClass]="{'choosedDay':day.choosed}">
+                [ngClass]="{'choosedDay':punchedDays.includes(day.day)}">
                     <div style="color:#000;">{{day.day}}</div>
-                    <div *ngIf="day.choosed" style="margin-left:5px;">✅</div>
+                    <div *ngIf="punchedDays.includes(day.day)" style="margin-left:5px;">✅</div>
                 </div>
             </div>
         </div>
