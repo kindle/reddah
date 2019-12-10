@@ -30,7 +30,8 @@ export class PunchClockPage implements OnInit {
 
     ){
         this.userName = this.reddah.getCurrentUser();
-
+        this.punchedDays = this.localStorageService.retrieve("Reddah_PunchClock");
+        this.pointPunchToday = this.localStorageService.retrieve("Reddah_PunchClock_PointToday");
     }
 
     punchClockLoading = true;
@@ -53,6 +54,12 @@ export class PunchClockPage implements OnInit {
                     }
                 }
                 //console.log(this.punchedDays);
+                this.punchClockLoading = false;
+                this.localStorageService.store("Reddah_PunchClock", this.punchedDays);
+                this.localStorageService.store("Reddah_PunchClock_PointToday", this.punchedDays);
+            }
+            if(data.Success==3){
+                //already punched 
                 this.punchClockLoading = false;
             }
         });
