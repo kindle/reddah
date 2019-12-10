@@ -48,10 +48,10 @@ export class HomePage implements OnInit {
     ngOnInit(){
         this.reddah.getUserPhotos(this.userName);
 
-        let cacheArticles = this.localStorageService.retrieve("reddah_articles");
-        let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids");
-        let cacheDislikeGroups = this.localStorageService.retrieve("reddah_article_groups");
-        let cacheDislikeUserNames = this.localStorageService.retrieve("reddah_article_usernames");
+        let cacheArticles = this.localStorageService.retrieve("reddah_articles_"+this.userName);
+        let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids_"+this.userName);
+        let cacheDislikeGroups = this.localStorageService.retrieve("reddah_article_groups_"+this.userName);
+        let cacheDislikeUserNames = this.localStorageService.retrieve("reddah_article_usernames_"+this.userName);
     
         
         if(cacheArticles){
@@ -86,10 +86,10 @@ export class HomePage implements OnInit {
                         this.reddah.getUserPhotos(article.UserName);
                     }
                 }
-                this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
-                this.localStorageService.store("reddah_article_ids", JSON.stringify(this.loadedIds));
-                this.localStorageService.store("reddah_article_groups", JSON.stringify(this.dislikeGroups));
-                this.localStorageService.store("reddah_article_usernames", JSON.stringify(this.dislikeUserNames));
+                this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
+                this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.loadedIds));
+                this.localStorageService.store("reddah_article_groups_"+this.userName, JSON.stringify(this.dislikeGroups));
+                this.localStorageService.store("reddah_article_usernames_"+this.userName, JSON.stringify(this.dislikeUserNames));
                 
                 this.firstLoad = false;
             });
@@ -128,10 +128,10 @@ export class HomePage implements OnInit {
                     this.reddah.getUserPhotos(article.UserName);
                 }
             }
-            this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
-            this.localStorageService.store("reddah_article_ids", JSON.stringify(this.loadedIds));
-            this.localStorageService.store("reddah_article_groups", JSON.stringify(this.dislikeGroups));
-            this.localStorageService.store("reddah_article_usernames", JSON.stringify(this.dislikeUserNames));
+            this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
+            this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.loadedIds));
+            this.localStorageService.store("reddah_article_groups_"+this.userName, JSON.stringify(this.dislikeGroups));
+            this.localStorageService.store("reddah_article_usernames_"+this.userName, JSON.stringify(this.dislikeUserNames));
                 
             if(event){
                 event.target.complete();
@@ -142,10 +142,10 @@ export class HomePage implements OnInit {
     clearCacheAndReload(event){
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("HomePage");
-        this.localStorageService.clear("reddah_articles");
-        this.localStorageService.clear("reddah_article_ids");
-        this.localStorageService.clear("reddah_article_groups");
-        this.localStorageService.clear("reddah_article_usernames");
+        this.localStorageService.clear("reddah_articles_"+this.userName);
+        this.localStorageService.clear("reddah_article_ids_"+this.userName);
+        this.localStorageService.clear("reddah_article_groups_"+this.userName);
+        this.localStorageService.clear("reddah_article_usernames_"+this.userName);
             
         this.articles = [];
         this.loadedIds = [];
@@ -194,7 +194,7 @@ export class HomePage implements OnInit {
         
         await viewerModal.present();
         article.Read = true;
-        this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
+        this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
         const { data } = await viewerModal.onDidDismiss();
         if(data){
             //console.log(data)
@@ -277,7 +277,7 @@ export class HomePage implements OnInit {
             //parameter
             if(data.Id==5){
                 this.dislikeUserNames.push(data.Key);
-                this.localStorageService.store("reddah_article_usernames", JSON.stringify(this.dislikeUserNames));
+                this.localStorageService.store("reddah_article_usernames_"+this.userName, JSON.stringify(this.dislikeUserNames));
                 //ui delete
                 this.articles.forEach((item, index)=>{
                     if(item.UserName==article.UserName)
@@ -286,7 +286,7 @@ export class HomePage implements OnInit {
             }
             if(data.Id>10){
                 this.dislikeGroups.push(data.Key);
-                this.localStorageService.store("reddah_article_groups", JSON.stringify(this.dislikeGroups));
+                this.localStorageService.store("reddah_article_groups_"+this.userName, JSON.stringify(this.dislikeGroups));
                 //ui delete
                 this.articles.forEach((item, index)=>{
                     if(item.GroupName.indexOf(data.Key+",")||
@@ -297,7 +297,7 @@ export class HomePage implements OnInit {
             }
 
             //cache remove
-            this.localStorageService.store("reddah_articles", JSON.stringify(this.articles));
+            this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
             
             //sys report
             //further, flink analytics etc.

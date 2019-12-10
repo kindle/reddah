@@ -44,7 +44,7 @@ export class ManagePage implements OnInit {
     userName;
 
     ngOnInit(){
-        let cachedGroupSubs = this.localStorageService.retrieve("Reddah_GroupedSubs");
+        let cachedGroupSubs = this.localStorageService.retrieve("Reddah_GroupedSubs_"+this.userName);
         if(cachedGroupSubs){
             this.groupedSubs = JSON.parse(cachedGroupSubs);
         }
@@ -63,8 +63,8 @@ export class ManagePage implements OnInit {
     clearCacheAndReload(event){
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("ManageSubsPage");
-        this.localStorageService.clear("Reddah_GroupedSubs");
-        this.localStorageService.clear("Reddah_Subs");
+        this.localStorageService.clear("Reddah_GroupedSubs_"+this.userName);
+        this.localStorageService.clear("Reddah_Subs_"+this.userName);
         this.groupedSubs=[];
         this.subs = [];
         this.loadData(event);
@@ -72,8 +72,8 @@ export class ManagePage implements OnInit {
 
     showLoading = false;
     loadData(event){
-        let cachedGroupSubs = this.localStorageService.retrieve("Reddah_GroupedSubs");
-        let cachedSubs = this.localStorageService.retrieve("Reddah_Subs");
+        let cachedGroupSubs = this.localStorageService.retrieve("Reddah_GroupedSubs_"+this.userName);
+        let cachedSubs = this.localStorageService.retrieve("Reddah_Subs_"+this.userName);
         if(!cachedGroupSubs||!cachedSubs)
         {
             this.showLoading = true;
@@ -85,11 +85,11 @@ export class ManagePage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "ManageSubsPage")
         .subscribe(subs => 
         {
-            let cachedGroupSubs = this.localStorageService.retrieve("Reddah_GroupedSubs");
-            let cachedSubs = this.localStorageService.retrieve("Reddah_Subs");
+            let cachedGroupSubs = this.localStorageService.retrieve("Reddah_GroupedSubs_"+this.userName);
+            let cachedSubs = this.localStorageService.retrieve("Reddah_Subs_"+this.userName);
 
             if(cachedSubs!=JSON.stringify(subs)||!cachedGroupSubs){
-                this.localStorageService.store("Reddah_Subs", JSON.stringify(subs));
+                this.localStorageService.store("Reddah_Subs_"+this.userName, JSON.stringify(subs));
 
                 for(let sub of subs){
                     //cache user image
@@ -104,8 +104,8 @@ export class ManagePage implements OnInit {
                 }
                 
                 this.groupSubs(subs);
-                this.localStorageService.store("Reddah_GroupedSubs", JSON.stringify(this.groupedSubs));
-                this.localStorageService.store("Reddah_Subs", JSON.stringify(subs));
+                this.localStorageService.store("Reddah_GroupedSubs_"+this.userName, JSON.stringify(this.groupedSubs));
+                this.localStorageService.store("Reddah_Subs_"+this.userName, JSON.stringify(subs));
             }
             
             this.showLoading = false;

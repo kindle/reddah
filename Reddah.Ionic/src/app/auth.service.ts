@@ -85,19 +85,19 @@ export class AuthService {
     logout(): void {
         this.reddahService.logoutClear();
 
-        this.localStorageService.clear("Reddah_GroupedContacts");
-        this.localStorageService.clear("Reddah_Contacts");
+        this.localStorageService.clear("Reddah_GroupedContacts_"+this.reddahService.getCurrentUser());
+        this.localStorageService.clear("Reddah_Contacts_"+this.reddahService.getCurrentUser());
         this.cacheService.clearGroup("ContactPage");
-        this.localStorageService.clear("Reddah_GroupedContacts_Pub");
-        this.localStorageService.clear("Reddah_Contacts_pub");
+        this.localStorageService.clear("Reddah_GroupedContacts_Pub_"+this.reddahService.getCurrentUser());
+        this.localStorageService.clear("Reddah_Contacts_pub_"+this.reddahService.getCurrentUser());
         this.cacheService.clearGroup("PubPage");
 
-        this.localStorageService.clear("Reddah_mytimeline");
-        this.localStorageService.clear("Reddah_mytimeline_ids");
+        this.localStorageService.clear("Reddah_mytimeline_"+this.reddahService.getCurrentUser());
+        this.localStorageService.clear("Reddah_mytimeline_ids_"+this.reddahService.getCurrentUser());
 
 
 
-        this.localStorageService.clear("Reddah_Local_Messages");
+        this.localStorageService.clear("Reddah_Local_Messages_"+this.reddahService.getCurrentUser());
         //this.localStorageService.clear();
         
         if(this.platform.is('android')){

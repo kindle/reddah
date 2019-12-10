@@ -65,7 +65,7 @@ export class ChooseUserPage implements OnInit {
     groupedContacts = [];
 
     loadData(){
-        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
+        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_"+this.userName);
         if(cachedGroupContact){
             this.groupedContacts = JSON.parse(cachedGroupContact);
             this.groupedContacts.forEach((item)=>{
@@ -80,7 +80,7 @@ export class ChooseUserPage implements OnInit {
     }
 
     loadData_delete(){
-        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
+        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_"+this.userName);
         if(cachedGroupContact){
             this.groupedContacts = JSON.parse(cachedGroupContact);
             this.groupedContacts.forEach((item)=>{

@@ -221,8 +221,8 @@ export class PubPage implements OnInit {
         let formData = new FormData();
         formData.append("targetUser",this.userName);
         this.reddah.setFocus(formData).subscribe(_=>{
-            this.localStorageService.clear("Reddah_GroupedContacts_Pub");
-            this.localStorageService.clear("Reddah_Contacts_Pub");
+            this.localStorageService.clear("Reddah_GroupedContacts_Pub_"+this.userName);
+            this.localStorageService.clear("Reddah_Contacts_Pub_"+this.userName);
             this.cacheService.clearGroup("PubPage");
         });
     }
@@ -256,8 +256,8 @@ export class PubPage implements OnInit {
         let formData = new FormData();
         formData.append("targetUser",this.userName);
         this.reddah.unFocus(formData).subscribe(_=>{
-            this.localStorageService.clear("Reddah_GroupedContacts_Pub");
-            this.localStorageService.clear("Reddah_Contacts_Pub");
+            this.localStorageService.clear("Reddah_GroupedContacts_Pub_"+this.userName);
+            this.localStorageService.clear("Reddah_Contacts_Pub_"+this.userName);
             this.cacheService.clearGroup("PubPage");
         });
     }

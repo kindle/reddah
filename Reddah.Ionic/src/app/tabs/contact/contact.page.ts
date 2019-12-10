@@ -37,7 +37,7 @@ export class ContactPage {
         )
     {
         this.userName = this.reddah.getCurrentUser();
-        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
+        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_"+this.userName);
         if(cachedGroupContact){
             this.groupedContacts = JSON.parse(cachedGroupContact);
         }
@@ -56,8 +56,8 @@ export class ContactPage {
     clearCacheAndReload(event){
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("ContactPage");
-        this.localStorageService.clear("Reddah_GroupedContacts");
-        this.localStorageService.clear("Reddah_Contacts");
+        this.localStorageService.clear("Reddah_GroupedContacts_"+this.userName);
+        this.localStorageService.clear("Reddah_Contacts_"+this.userName);
         this.contacts = [];
         this.groupedContacts = [];
         this.loadData(event);
@@ -77,8 +77,8 @@ export class ContactPage {
     }
 
     loadData(event){
-        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
-        let cachedContact = this.localStorageService.retrieve("Reddah_Contacts");
+        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_"+this.userName);
+        let cachedContact = this.localStorageService.retrieve("Reddah_Contacts_"+this.userName);
         if(!cachedGroupContact||!cachedContact)
         {
             //this.showLoading = true;
@@ -90,8 +90,8 @@ export class ContactPage {
         this.cacheService.loadFromObservable(cacheKey, request, "ContactPage")
         .subscribe(contacts => 
         {
-            let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts");
-            let cachedContact = this.localStorageService.retrieve("Reddah_Contacts");
+            let cachedGroupContact = this.localStorageService.retrieve("_"+this.userName);
+            let cachedContact = this.localStorageService.retrieve("Reddah_Contacts_"+this.userName);
 
             if(cachedContact!=JSON.stringify(contacts)||!cachedGroupContact){
                 this.localStorageService.store("Reddah_Contacts", JSON.stringify(contacts));
@@ -109,8 +109,8 @@ export class ContactPage {
                 }
                 
                 this.groupContacts(contacts);
-                this.localStorageService.store("Reddah_GroupedContacts", JSON.stringify(this.groupedContacts));
-                this.localStorageService.store("Reddah_Contacts", JSON.stringify(contacts));
+                this.localStorageService.store("Reddah_GroupedContacts_"+this.userName, JSON.stringify(this.groupedContacts));
+                this.localStorageService.store("Reddah_Contacts_"+this.userName, JSON.stringify(contacts));
             }
             
             if(event)

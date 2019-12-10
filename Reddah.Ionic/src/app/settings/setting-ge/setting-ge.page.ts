@@ -86,15 +86,15 @@ export class SettingGePage implements OnInit {
     async clearCache(){
         this.cacheService.clearAll();
         //clear article block _options
-        this.localStorageService.store("reddah_articles", JSON.stringify([]));
-        this.localStorageService.store("reddah_article_ids", JSON.stringify([]));
-        this.localStorageService.store("reddah_article_groups", JSON.stringify([]));
-        this.localStorageService.store("reddah_article_usernames", JSON.stringify([]));
+        this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify([]));
+        this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify([]));
+        this.localStorageService.store("reddah_article_groups_"+this.userName, JSON.stringify([]));
+        this.localStorageService.store("reddah_article_usernames_"+this.userName, JSON.stringify([]));
         this.cacheService.clearGroup("HomePage");
         //clear pub history
-        this.localStorageService.clear(`Reddah_Recent_3`);
+        this.localStorageService.clear("Reddah_Recent_3_"+this.userName);
         //clear mini history
-        this.localStorageService.clear(`Reddah_Recent_4`);
+        this.localStorageService.clear("Reddah_Recent_4_"+this.userName);
         //this.localStorageService.clear(); //this will force logout
         this.reddah.toast(this.translate.instant("Common.CacheClear"));
     }

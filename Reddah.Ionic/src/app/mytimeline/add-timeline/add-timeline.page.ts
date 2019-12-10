@@ -173,8 +173,8 @@ export class AddTimelinePage implements OnInit {
             if(result.Success==0)
             { 
                 this.cacheService.clearGroup("MyTimeLinePage");
-                this.localStorageService.clear("Reddah_mytimeline");
-                this.localStorageService.clear("Reddah_mytimeline_ids");
+                this.localStorageService.clear("Reddah_mytimeline_"+this.reddah.getCurrentUser());
+                this.localStorageService.clear("Reddah_mytimeline_ids_"+this.reddah.getCurrentUser());
                 this.modalController.dismiss(true);
             }
             else

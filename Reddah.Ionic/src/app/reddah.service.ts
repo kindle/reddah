@@ -1883,17 +1883,17 @@ export class ReddahService {
     }
 
     clearLocaleCache(){
-        this.localStorageService.clear("reddah_articles");
-        this.localStorageService.clear("reddah_article_ids");
-        this.localStorageService.clear("reddah_article_groups");
-        this.localStorageService.clear("reddah_article_usernames");
-        this.cacheService.clearGroup("HomePage");
+        //this.localStorageService.clear("reddah_articles");
+        //this.localStorageService.clear("reddah_article_ids");
+        //this.localStorageService.clear("reddah_article_groups");
+        //this.localStorageService.clear("reddah_article_usernames");
+        //this.cacheService.clearGroup("HomePage");
     }
 
     async ClearPub(){
-        this.localStorageService.clear("Reddah_GroupedSubs");
-        this.localStorageService.clear("Reddah_Subs");
-        this.cacheService.clearGroup("ManageSubsPage");
+        //this.localStorageService.clear("Reddah_GroupedSubs");
+        //this.localStorageService.clear("Reddah_Subs");
+        //this.cacheService.clearGroup("ManageSubsPage");
     }
 
     getJSON(text){
@@ -1923,7 +1923,7 @@ export class ReddahService {
     }
 
     setRecent(user, type){
-        let recent = this.localStorageService.retrieve(`Reddah_Recent_${type}`);
+        let recent = this.localStorageService.retrieve(`Reddah_Recent_${type}_${this.getCurrentUser()}`);
         
         if(!recent||recent.length==0){
             recent = [];
@@ -1937,12 +1937,12 @@ export class ReddahService {
             });
             recent.unshift(user);
         }
-        this.localStorageService.store(`Reddah_Recent_${type}`, recent);
+        this.localStorageService.store(`Reddah_Recent_${type}_${this.getCurrentUser()}`, recent);
             
     }
 
     loadRecent(type){
-        let recent = this.localStorageService.retrieve(`Reddah_Recent_${type}`);
+        let recent = this.localStorageService.retrieve(`Reddah_Recent_${type}_${this.getCurrentUser()}`);
         if(!recent)
             recent = [];
         return recent;

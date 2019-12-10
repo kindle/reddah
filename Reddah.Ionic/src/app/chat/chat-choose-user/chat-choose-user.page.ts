@@ -62,7 +62,11 @@ export class ChatChooseUserPage implements OnInit {
             });
         });
 
-        if(targetUsers.length==1){//2 people chat
+        if(targetUsers.length==0){//no people selected
+            this.submitClicked= false;
+        }
+        else if(targetUsers.length==1){//2 people chat
+            this.close();
             const modal = await this.modalController.create({
                 //component: ChatPage,
                 component: ChatFirePage,
@@ -77,6 +81,7 @@ export class ChatChooseUserPage implements OnInit {
         }
         else//real group chat
         {
+            this.close();
             const modal = await this.modalController.create({
                 //component: GroupChatPage,
                 component: GroupChatFirePage,

@@ -57,7 +57,7 @@ export class ShareChooseChatPage implements OnInit {
 
     messages = [];
     async loadData(isnew){
-        let localMessages = this.localStorageService.retrieve("Reddah_Local_Messages");
+        let localMessages = this.localStorageService.retrieve("Reddah_Local_Messages_"+this.reddah.getCurrentUser());
         if(localMessages!=null){
             this.messages = localMessages;
         }
@@ -85,7 +85,7 @@ export class ShareChooseChatPage implements OnInit {
                     this.messages.unshift(netMsg);
                 }
             });
-            this.localStorageService.store("Reddah_Local_Messages", this.messages);
+            this.localStorageService.store("Reddah_Local_Messages_"+this.reddah.getCurrentUser(), this.messages);
         });  
     }
 

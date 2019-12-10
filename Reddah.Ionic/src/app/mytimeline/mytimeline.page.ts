@@ -74,8 +74,8 @@ export class MyTimeLinePage implements OnInit {
         }
         this.reddah.getUserPhotos(this.userName, true);
 
-        let cachedArticles = this.localStorageService.retrieve("Reddah_mytimeline");
-        let cachedIds = this.localStorageService.retrieve("Reddah_mytimeline_ids");
+        let cachedArticles = this.localStorageService.retrieve("Reddah_mytimeline_"+this.userName);
+        let cachedIds = this.localStorageService.retrieve("Reddah_mytimeline_ids_"+this.userName);
         if(cachedArticles){
             this.articles = JSON.parse(cachedArticles);
             this.loadedIds = JSON.parse(cachedIds);
@@ -110,8 +110,8 @@ export class MyTimeLinePage implements OnInit {
                     this.GetCommentsData(article.Id);
                 }
 
-                this.localStorageService.store("Reddah_mytimeline",JSON.stringify(timeline));
-                this.localStorageService.store("Reddah_mytimeline_ids",JSON.stringify(this.loadedIds));
+                this.localStorageService.store("Reddah_mytimeline_"+this.userName,JSON.stringify(timeline));
+                this.localStorageService.store("Reddah_mytimeline_ids_"+this.userName,JSON.stringify(this.loadedIds));
 
             }
             else{
@@ -145,8 +145,8 @@ export class MyTimeLinePage implements OnInit {
                 this.GetCommentsData(article.Id);
             }
 
-            this.localStorageService.store("Reddah_mytimeline", JSON.stringify(timeline));
-            this.localStorageService.store("Reddah_mytimeline_ids", JSON.stringify(this.loadedIds));
+            this.localStorageService.store("Reddah_mytimeline_"+this.userName, JSON.stringify(timeline));
+            this.localStorageService.store("Reddah_mytimeline_ids_"+this.userName, JSON.stringify(this.loadedIds));
 
             if(event){
                 event.target.complete();
@@ -160,8 +160,8 @@ export class MyTimeLinePage implements OnInit {
         this.cacheService.clearGroup("MyTimeLinePage");
         this.loadedIds = [-1];
         this.articles = [];
-        this.localStorageService.clear("Reddah_mytimeline");
-        this.localStorageService.clear("Reddah_mytimeline_ids");
+        this.localStorageService.clear("Reddah_mytimeline_"+this.userName);
+        this.localStorageService.clear("Reddah_mytimeline_ids_"+this.userName);
         this.getMyTimeline(event);
     }
 
@@ -489,7 +489,7 @@ export class MyTimeLinePage implements OnInit {
                             this.articles.splice(index, 1);
                         }
                     })
-                    this.localStorageService.store("Reddah_mytimeline",this.articles);
+                    this.localStorageService.store("Reddah_mytimeline_"+this.userName,this.articles);
                     this.cacheService.clearGroup("MyTimeLinePage");
                 }
             }]

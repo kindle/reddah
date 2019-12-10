@@ -56,7 +56,8 @@ export class MapPage implements OnInit {
 
         this.loadmap();
         
-        this.goMe();
+        this.goMe(true);
+
     }
 
     
@@ -112,7 +113,7 @@ export class MapPage implements OnInit {
     }
 
     
-    async goMe(){
+    async goMe(auto=false){
         
         let locationJson = this.reddah.appData('userlocationjson_'+this.userName);
         
@@ -139,6 +140,10 @@ export class MapPage implements OnInit {
                         "location":{"lat":e.latitude,"lng":e.longitude}
                     }
                     this.setLocation(loc, false);
+                    
+                    if(auto){
+                        this.refresh(0);
+                    }
                 }
                 
             }).on('locationerror', (err) => {

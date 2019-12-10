@@ -33,7 +33,7 @@ export class PublisherPage {
         )
     {
         this.userName = this.reddah.getCurrentUser();
-        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_Pub");
+        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_Pub_"+this.userName);
         if(cachedGroupContact){
             this.groupedContacts = JSON.parse(cachedGroupContact);
         }
@@ -44,8 +44,8 @@ export class PublisherPage {
 
     showLoading = false;
     loadData(event){
-        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_Pub");
-        let cachedContact = this.localStorageService.retrieve("Reddah_Contacts_Pub");
+        let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_Pub_"+this.userName);
+        let cachedContact = this.localStorageService.retrieve("Reddah_Contacts_Pub_"+this.userName);
         if(!cachedGroupContact||!cachedContact)
         {
             this.showLoading = true;
@@ -57,8 +57,8 @@ export class PublisherPage {
         this.cacheService.loadFromObservable(cacheKey, request, "PubPage")
         .subscribe(pubs => 
         {
-            let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_Pub");
-            let cachedContact = this.localStorageService.retrieve("Reddah_Contacts_Pub");
+            let cachedGroupContact = this.localStorageService.retrieve("Reddah_GroupedContacts_Pub_"+this.userName);
+            let cachedContact = this.localStorageService.retrieve("Reddah_Contacts_Pub_"+this.userName);
 
             if(cachedContact!=JSON.stringify(pubs)||!cachedGroupContact){
                 this.localStorageService.store("Reddah_Contacts_Pub", JSON.stringify(pubs));
@@ -77,8 +77,8 @@ export class PublisherPage {
                 }
                 
                 this.groupContacts(pubs);
-                this.localStorageService.store("Reddah_GroupedContacts_Pub", JSON.stringify(this.groupedContacts));
-                this.localStorageService.store("Reddah_Contacts_Pub", JSON.stringify(pubs));
+                this.localStorageService.store("Reddah_GroupedContacts_Pub_"+this.userName, JSON.stringify(this.groupedContacts));
+                this.localStorageService.store("Reddah_Contacts_Pub_"+this.userName, JSON.stringify(pubs));
             }
             
             this.showLoading = false;
@@ -183,8 +183,8 @@ export class PublisherPage {
     clearCacheAndReload(event){
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("PubPage");
-        this.localStorageService.clear("Reddah_GroupedContacts_Pub");
-        this.localStorageService.clear("Reddah_Contacts_Pub");
+        this.localStorageService.clear("Reddah_GroupedContacts_Pub_"+this.userName);
+        this.localStorageService.clear("Reddah_Contacts_Pub_"+this.userName);
         this.contacts=[];
         this.groupedContacts = [];
         this.loadData(event);

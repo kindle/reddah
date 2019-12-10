@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace Reddah.Web.Login
 {
@@ -43,5 +44,12 @@ namespace Reddah.Web.Login
         public bool IsFriend { get; set; }
         public bool HideLocation { get; set; }
         public bool AllowTenTimeline { get; set; }
+    }
+
+    public class PointInfo
+    {
+        public int GotPoint { get; set; }
+        public int UserPoint { get; set; }
+        public List<Point> History { get; set; }
     }
 }

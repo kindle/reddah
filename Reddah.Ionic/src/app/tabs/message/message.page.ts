@@ -54,7 +54,7 @@ export class MessageListPage implements OnInit {
                     });*/
                     message["delete"]=true;
                     message.IsNew = false;
-                    this.localStorageService.store("Reddah_Local_Messages", this.messages);
+                    this.localStorageService.store("Reddah_Local_Messages_"+this.reddah.getCurrentUser(), this.messages);
                 }
               }
             ]
@@ -77,14 +77,14 @@ export class MessageListPage implements OnInit {
     }*/
 
     clear(){
-        this.localStorageService.clear("Reddah_Local_Messages");
+        this.localStorageService.clear("Reddah_Local_Messages_"+this.reddah.getCurrentUser());
         this.messages = [];
         this.loadData(false);
     }
 
     messages = [];
     async loadData(isnew){
-        let localMessages = this.localStorageService.retrieve("Reddah_Local_Messages");
+        let localMessages = this.localStorageService.retrieve("Reddah_Local_Messages_"+this.reddah.getCurrentUser());
         if(localMessages!=null){
             this.messages = localMessages;
         }
@@ -132,7 +132,7 @@ export class MessageListPage implements OnInit {
                     }
                 }
             });
-            this.localStorageService.store("Reddah_Local_Messages", this.messages);
+            this.localStorageService.store("Reddah_Local_Messages_"+this.reddah.getCurrentUser(), this.messages);
         });  
     }
 
@@ -149,7 +149,7 @@ export class MessageListPage implements OnInit {
             this.goGroupChat(message, message.IsNew);
         }
         message.IsNew = false;
-        this.localStorageService.store("Reddah_Local_Messages", this.messages);
+        this.localStorageService.store("Reddah_Local_Messages_"+this.reddah.getCurrentUser(), this.messages);
     }
     
     async chat(groupName, hasNewMsg){

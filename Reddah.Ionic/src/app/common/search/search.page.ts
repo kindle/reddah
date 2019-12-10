@@ -12,6 +12,7 @@ import { MiniViewerComponent } from '../mini-viewer/mini-viewer.component';
 import { ActivatedRoute } from '@angular/router';
 import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
 import { ShareChooseChatPage } from '../../chat/share-choose-chat/share-choose-chat.page';
+import { AddFriendPage } from '../../friend/add-friend/add-friend.page';
 
 @Component({
     selector: 'app-search',
@@ -37,7 +38,7 @@ export class SearchPage implements OnInit {
         ],
         [
             {id:4,name:this.translate.instant("Menu.MiniApp")},
-            {},
+            {id:5,name:this.translate.instant("Menu.Contact")},
             {}
         ],
         /*,{id:5,name:'聊天记录'},{id:6,name:'股票'}*/
@@ -59,6 +60,16 @@ export class SearchPage implements OnInit {
         else if(col.id==4){
             this.loadRecentMini();
             this.loadSuggestMini();
+        }
+        else if(col.id==5){
+            this.close();
+            const addFriendModal = await this.modalController.create({
+                component: AddFriendPage,
+                componentProps: {},
+                cssClass: "modal-fullscreen",
+            });
+              
+            await addFriendModal.present();
         }
         
     }

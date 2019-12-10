@@ -26,7 +26,7 @@
                 ...
             </ion-card-title>
             <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;" *ngIf="!punchClockLoading">
-                {{pointPunchToday}}分
+                +{{pointPunchToday}}分
             </ion-card-title>
             <ion-card-content style="color:#fff;text-align: center;">
             </ion-card-content>
@@ -51,13 +51,15 @@
                 [ngClass]="{'currentDay':punchedDays.includes(day.day)}" (click)="change_day(day.day)">
                 <div style="justify-content: center;align-items: center;
                     font-size: 15px;border: 1px solid white;
-                    border-radius: 50%;
+                    border-radius: 5px;
                     height: 3.2rem;
                     width: 3.2rem;
                     padding: 4px" 
                 [ngClass]="{'choosedDay':punchedDays.includes(day.day)}">
                     <div style="color:#000;">{{day.day}}</div>
-                    <div *ngIf="punchedDays.includes(day.day)" style="margin-left:5px;">✅</div>
+                    <div *ngIf="punchedDays.includes(day.day)">
+                        <ion-icon color="success" size="small" name="checkmark-circle"></ion-icon>
+                    </div>
                 </div>
             </div>
         </div>

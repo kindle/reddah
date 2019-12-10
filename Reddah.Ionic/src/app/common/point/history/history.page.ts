@@ -73,7 +73,7 @@ export class HistoryPage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "HistoryPage")
         .subscribe(result => 
         {
-            alert(JSON.stringify(result));
+            //alert(JSON.stringify(result));
             if(result.Success==0){
                 for(let point of result.Message){
                     this.points.push(point);

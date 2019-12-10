@@ -30,8 +30,14 @@ export class PunchClockPage implements OnInit {
 
     ){
         this.userName = this.reddah.getCurrentUser();
-        this.punchedDays = this.localStorageService.retrieve("Reddah_PunchClock");
-        this.pointPunchToday = this.localStorageService.retrieve("Reddah_PunchClock_PointToday");
+        let cachedPunchedDays = this.localStorageService.retrieve("Reddah_PunchClock_"+this.userName);
+        if(cachedPunchedDays!=null){
+            this.punchedDays = cachedPunchedDays;
+        }
+        let cachedPointPunchToday = this.localStorageService.retrieve("Reddah_PunchClock_PointToday_"+this.userName);
+        if(cachedPointPunchToday!=null){
+            this.pointPunchToday = cachedPointPunchToday;
+        }
     }
 
     punchClockLoading = true;
@@ -39,8 +45,8 @@ export class PunchClockPage implements OnInit {
     punchedDays = [];
     async ngOnInit(){
         this.reddah.punchClock().subscribe(data=>{
-            //console.log(JSON.stringify(data));
-            if(data.Success==0){
+            console.log(JSON.stringify(data));
+            if(data.Success==0||data.Success==3){
                 this.pointPunchToday = data.Message.GotPoint;
                 this.localStorageService.store(`userpoint_${this.userName}`, data.Message.UserPoint);
                 this.punchedDays = [];
@@ -55,13 +61,10 @@ export class PunchClockPage implements OnInit {
                 }
                 //console.log(this.punchedDays);
                 this.punchClockLoading = false;
-                this.localStorageService.store("Reddah_PunchClock", this.punchedDays);
-                this.localStorageService.store("Reddah_PunchClock_PointToday", this.punchedDays);
+                this.localStorageService.store("Reddah_PunchClock_"+this.userName, this.punchedDays);
+                this.localStorageService.store("Reddah_PunchClock_PointToday_"+this.userName, this.punchedDays);
             }
-            if(data.Success==3){
-                //already punched 
-                this.punchClockLoading = false;
-            }
+            
         });
         this.showTime();
     }

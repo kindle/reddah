@@ -57,7 +57,11 @@ export class ShareChooseUserPage implements OnInit {
             });
         });
 
+        if(targetUsers.length==0){//no people selected
+            this.submitClicked= false;
+        }
         if(targetUsers.length==1){//2 people chat
+            this.close();
             let formData = new FormData();
             formData.append("targetUser", targetUsers[0].Watch);
             formData.append("id", JSON.stringify(0));
@@ -75,6 +79,7 @@ export class ShareChooseUserPage implements OnInit {
         }
         else//real group chat
         {
+            this.close();
             let formData = new FormData();
             formData.append("targetUsers", JSON.stringify(targetUsers.map(t=>t.Watch)));
             this.reddah.createGroupChat(formData).subscribe(data=>{

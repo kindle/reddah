@@ -1,3 +1,4 @@
+
 <ion-content color="point">
     <div class="bg1">
         {{ 'Menu.MyPoints' | translate }}
@@ -6,7 +7,7 @@
         P
     </div>
 
-    <ion-item lines="none" color="transparent" class="title" style="--background:transparent;">
+    <ion-item no-padding lines="none" color="transparent" class="title" style="--background:transparent;">
         <ion-button clear icon-start color="transparent" (click)="close()" style="--box-shadow: none;">
             <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
         </ion-button>
@@ -16,21 +17,6 @@
             {{ 'Common.Details' | translate }}
         </ion-button>
     </ion-item>
-
-    <ion-card class="welcome-card" color="light">
-        <ion-item lines="none">
-            <ion-icon name="calendar" color="dark"></ion-icon>
-            <ion-card-title>{{ 'Point.PunchClock' | translate }}</ion-card-title>
-            <ion-button clear slot="end" color="warning" (click)="punchClock()" 
-                style="--box-shadow: none;text-transform: none;">
-                {{ 'Point.Letsgo' | translate }}
-            </ion-button>
-            <!--<ion-button clear slot="end" color="light" 
-                style="--box-shadow: none;text-transform: none;" *ngIf="task.got>=task.max">
-                {{ 'Point.Done' | translate }}
-            </ion-button>-->
-        </ion-item>
-    </ion-card>
 
     <ion-card>
         <ion-card-header>
@@ -48,8 +34,23 @@
 
     <ion-item lines="none" color="transparent" class="title">
         <ion-card-title color="light" style="font-size: large;font-weight: bold;">{{ 'Point.RuleTitle' | translate }}</ion-card-title>
-        <ion-text style="font-size: large;" color="light" slot="end">{{ reddah.lan3('Point.TodayTotal' | translate, 1, 'Point.Fen' | translate) }}</ion-text>
+        <ion-text style="font-size: large;" color="light" slot="end">{{ reddah.lan3('Point.TodayTotal' | translate, '+'+1, 'Point.Fen' | translate) }}</ion-text>
     </ion-item>
+
+    <ion-card class="welcome-card" color="light">
+        <ion-item lines="none">
+            <ion-icon name="calendar" color="dark"></ion-icon>
+            <ion-card-title>{{ 'Point.PunchClock' | translate }}</ion-card-title>
+            <ion-button clear slot="end" color="warning" (click)="punchClock()" 
+                style="--box-shadow: none;text-transform: none;">
+                {{ 'Point.Letsgo' | translate }}
+            </ion-button>
+            <!--<ion-button clear slot="end" color="light" 
+                style="--box-shadow: none;text-transform: none;" *ngIf="task.got>=task.max">
+                {{ 'Point.Done' | translate }}
+            </ion-button>-->
+        </ion-item>
+    </ion-card>
 
     <ion-card class="welcome-card" color="light" *ngFor="let task of tasks">
         <ion-item lines="none">

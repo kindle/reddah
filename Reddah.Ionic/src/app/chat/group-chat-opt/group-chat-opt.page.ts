@@ -152,7 +152,7 @@ export class GroupChatOptPage {
         this.reddah.deleteGroupChat(formData).subscribe(result=>{
             if(result.Success==0){
                 this.cacheService.clearGroup("ChatChooseGroupPage");
-                this.localStorageService.clear("Reddah_Local_Messages");
+                this.localStorageService.clear("Reddah_Local_Messages_"+this.userName);
                 this.modalController.dismiss('delete');
             }
             else {
