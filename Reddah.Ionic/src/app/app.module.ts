@@ -8,7 +8,7 @@ import { AlertController, ActionSheetController,
          IonicModule, IonicRouteStrategy, IonRouterOutlet,
          Platform, PopoverController,
          ModalController, MenuController, NavController } from '@ionic/angular';
-
+import { DatePipe } from '@angular/common';
 
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
@@ -355,7 +355,7 @@ var firebaseConfig = {
         ModalController,
         PhotoLibrary,
         Platform,
-        PopoverController,
+        PopoverController,DatePipe,
         //QRScanner,
         //BarcodeScanner,
         ReddahService,

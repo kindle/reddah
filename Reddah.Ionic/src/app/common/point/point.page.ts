@@ -6,6 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { HistoryPage } from './history/history.page';
 import { PunchClockPage } from './punch-clock/punch-clock.page';
+import { LocalStorageService } from 'ngx-webstorage';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-point',
@@ -35,10 +37,12 @@ export class PointPage implements OnInit {
         public modalController: ModalController,
         private translate: TranslateService,
         private cacheService: CacheService,
-
+        private localStorageService: LocalStorageService,
+        private datePipe: DatePipe,
     ){
         this.userName = this.reddah.getCurrentUser();
     }
+
 
     async ngOnInit(){
         
@@ -83,106 +87,7 @@ export class PointPage implements OnInit {
         await modal.present();
     }
 
-    tasks=[
-        {
-            id:1, 
-            title: this.translate.instant("Point.TaskLoginTitle"),
-            description: this.translate.instant("Point.TaskLoginDescp"),
-            point: 1, 
-            got: 1,
-            max: 1,
-            type: 0, //0:daily 1:once
-        },
-        {
-            id:2, 
-            title: this.translate.instant("Point.TaskReadTitle"),
-            description: this.translate.instant("Point.TaskReadDescp"),
-            point: 1, 
-            got: 1,
-            max: 6,
-            type: 0,
-        },
-        {
-            id:3, 
-            title: this.translate.instant("Point.TaskMarkTitle"),
-            description: this.translate.instant("Point.TaskMarkDescp"),
-            point: 1, 
-            got: 1,
-            max: 2,
-            type: 0,
-        },
-        {
-            id:4, 
-            title: this.translate.instant("Point.TaskShareTitle"),
-            description: this.translate.instant("Point.TaskShareDescp"),
-            point: 1, 
-            got: 1,
-            max: 2,
-            type: 0,
-        },
-        {
-            id:5, 
-            title: this.translate.instant("Point.TaskCommentTitle"),
-            description: this.translate.instant("Point.TaskCommentDescp"),
-            point: 1, 
-            got: 1,
-            max: 3,
-            type: 0,
-        },
-        {
-            id:6, 
-            title: this.translate.instant("Point.TaskFirstPhotoTitle"),
-            description: this.translate.instant("Point.TaskFirstPhotoDescp"),
-            point: 10, 
-            got: 0,
-            max: 10,
-            type: 1,
-        },
-        {
-            id:7, 
-            title: this.translate.instant("Point.TaskFirstSignatureTitle"),
-            description: this.translate.instant("Point.TaskFirstSignatureDescp"),
-            point: 10, 
-            got: 10,
-            max: 10,
-            type: 1,
-        },
-        {
-            id:8, 
-            title: this.translate.instant("Point.TaskFirstTimelineTitle"),
-            description: this.translate.instant("Point.TaskFirstTimelineDescp"),
-            point: 10, 
-            got: 0,
-            max: 10,
-            type: 1,
-        },
-        {
-            id:9, 
-            title: this.translate.instant("Point.TaskFirstGameTitle"),
-            description: this.translate.instant("Point.TaskFirstGameDescp"),
-            point: 5, 
-            got: 0,
-            max: 5,
-            type: 1,
-        },
-        {
-            id:10, 
-            title: this.translate.instant("Point.TaskFirstFriendTitle"),
-            description: this.translate.instant("Point.TaskFirstFriendDescp"),
-            point: 10, 
-            got: 0,
-            max: 10,
-            type: 1,
-        },
-        {
-            id:11, 
-            title: this.translate.instant("Point.TaskFirstShakeTitle"),
-            description: this.translate.instant("Point.TaskFirstShakeDescp"),
-            point: 10, 
-            got: 0,
-            max: 10,
-            type: 1,
-        },
-    ];
+
+    
     
 }

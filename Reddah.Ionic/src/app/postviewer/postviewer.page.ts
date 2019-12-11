@@ -35,6 +35,7 @@ export class PostviewerPage implements OnInit {
         private cacheService: CacheService,
         private translate: TranslateService,
         private alertController: AlertController,
+        private localStorageService: LocalStorageService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
     }
@@ -43,6 +44,17 @@ export class PostviewerPage implements OnInit {
 
     ngOnInit() {
         this.reddah.getUserPhotos(this.article.UserName);
+        if(!this.reddah.checkPoint(this.reddah.pointTasks[1])){
+            this.reddah.getPointRead().subscribe(data=>{
+                console.log(data)
+                if(data.Success==0||data.Success==3){ 
+                    this.localStorageService.store(`Reddah_Read_PointToday_${this.reddah.getTodayString()}_${this.reddah.getCurrentUser()}`, data.Message.GotPoint);
+                    if(data.Success==0){
+                        this.reddah.toast("阅读文章+"+data.Message.GotPoint+"/"+this.reddah.pointTasks[1].max+"分", "primary");
+                    }
+                }
+            });
+        }
     }
 
     ionViewDidEnter(){

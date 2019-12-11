@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { InfiniteScroll, Content } from '@ionic/angular';
+import { DatePipe } from '@angular/common';
 import { ReddahService } from '../../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
@@ -27,7 +27,7 @@ export class PunchClockPage implements OnInit {
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
-
+        private datePipe: DatePipe,
     ){
         this.userName = this.reddah.getCurrentUser();
         let cachedPunchedDays = this.localStorageService.retrieve("Reddah_PunchClock_"+this.userName);
@@ -48,7 +48,7 @@ export class PunchClockPage implements OnInit {
             console.log(JSON.stringify(data));
             if(data.Success==0||data.Success==3){
                 this.pointPunchToday = data.Message.GotPoint;
-                this.localStorageService.store(`userpoint_${this.userName}`, data.Message.UserPoint);
+                //this.localStorageService.store(`userpoint_${this.userName}`, data.Message.UserPoint);
                 this.punchedDays = [];
                 for(let history of data.Message.History){
                     let localDateTime = this.reddah.utcToLocal(history.CreatedOn, 'YYYY-MM-DD');
@@ -62,7 +62,8 @@ export class PunchClockPage implements OnInit {
                 //console.log(this.punchedDays);
                 this.punchClockLoading = false;
                 this.localStorageService.store("Reddah_PunchClock_"+this.userName, this.punchedDays);
-                this.localStorageService.store("Reddah_PunchClock_PointToday_"+this.userName, this.punchedDays);
+                let todayStr = this.datePipe.transform(new Date(),"yyyy-MM-dd"); 
+                this.localStorageService.store(`Reddah_PunchClock_PointToday_${todayStr}_${this.userName}`, this.pointPunchToday);
             }
             
         });

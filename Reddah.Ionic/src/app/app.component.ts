@@ -147,6 +147,17 @@ export class AppComponent {
                     this.reddah.unReadMessage = data.Message;
                 }
             });
+
+            if(!this.reddah.checkPoint(this.reddah.pointTasks[0])){
+                this.reddah.getPointLogin().subscribe(data=>{
+                    if(data.Success==0||data.Success==3){ 
+                        this.localStorageService.store(`Reddah_Login_PointToday_${this.reddah.getTodayString()}_${this.reddah.getCurrentUser()}`, data.Message.GotPoint);
+                        if(data.Success==0){
+                            this.reddah.toast("登录获得积分+"+data.Message.GotPoint+"分", "primary");
+                        }
+                    }
+                });
+            }
         }
         
         let currentFontSize = this.localStorageService.retrieve("Reddah_fontsize");
