@@ -317,7 +317,9 @@
         "TaskFirstFriendTitle":"Apply Friend",
         "TaskFirstFriendDescp":"First time to apply for friend",
         "TaskFirstShakeTitle":"Shake",
-        "TaskFirstShakeDescp":"First time to use shake"
+        "TaskFirstShakeDescp":"First time to use shake",
+        "PunchClock":"Daily Punch",
+        "PunchClockTitle":"Punch Calendar"
     },
     
     "Service":{

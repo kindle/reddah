@@ -321,7 +321,9 @@
         "TaskFirstFriendTitle":"加好友",
         "TaskFirstFriendDescp":"首次申请加好友",
         "TaskFirstShakeTitle":"摇一摇",
-        "TaskFirstShakeDescp":"首次使用摇一摇"
+        "TaskFirstShakeDescp":"首次使用摇一摇",
+        "PunchClock":"每日签到",
+        "PunchClockTitle":"签到日历"
     },
     
     "Service":{

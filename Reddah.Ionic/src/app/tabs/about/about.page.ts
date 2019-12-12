@@ -136,6 +136,8 @@ export class AboutPage implements OnInit {
     async goCredit(event){
         event.stopPropagation();
 
+        this.reddah.reloadLocaleSettings();
+
         const modal = await this.modalController.create({
             component: PointPage,
             componentProps: {},

@@ -54,7 +54,7 @@
 
     <ion-card class="welcome-card" color="light" *ngFor="let task of reddah.pointTasks">
         <ion-item lines="none">
-            <ion-card-title>{{task.title}}</ion-card-title>
+            <ion-card-title>{{ task.title | translate }}</ion-card-title>
             <ion-button clear slot="end" color="warning" (click)="close()" 
                 style="--box-shadow: none;text-transform: none;" *ngIf="!reddah.checkPoint(task)">
                 {{ 'Point.Letsgo' | translate }}
@@ -65,7 +65,7 @@
             </ion-button>
         </ion-item>
         <ion-card-content>
-            <p>{{ reddah.lan2(task.point, 'Point.Fen' | translate) }} / {{task.description}}</p>
+            <p>{{ reddah.lan2(task.point, 'Point.Fen' | translate) }} / {{ task.description | translate}}</p>
             <p *ngIf="task.type==0">{{ reddah.lan3('Point.AlreadyGot' | translate, reddah.getCurrentPoint(task), 'Point.Fen' | translate) }}
                 / {{ reddah.lan3('Point.DailyMax' | translate, task.max,  'Point.Fen' | translate) }}</p>
             <p *ngIf="task.type==1">{{ reddah.lan3('Point.AlreadyGot' | translate, reddah.getCurrentPoint(task), 'Point.Fen' | translate) }}
