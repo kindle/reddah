@@ -51,8 +51,8 @@ export class ShareChooseChatPage implements OnInit {
             this.modalController.dismiss();
     }
 
-    async close(){
-        await this.modalController.dismiss();
+    async close(flag=false){
+        await this.modalController.dismiss(flag);
     }
 
     messages = [];
@@ -118,7 +118,7 @@ export class ShareChooseChatPage implements OnInit {
             {
                 if(result.Success==0)
                 { 
-                    this.close()
+                    this.close(true)
                 }
                 else{
                     alert(result.Message);

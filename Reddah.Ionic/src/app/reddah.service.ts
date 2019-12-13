@@ -887,11 +887,45 @@ export class ReddahService {
         );
     }
 
+    private getPointMarkUrl = 'https://login.reddah.com/api/point/mark'; 
+    getPointMark(): Observable<any> {
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append('offset', JSON.stringify((new Date()).getTimezoneOffset()));
+        return this.http.post<any>(this.getPointMarkUrl, formData)
+        .pipe(
+            tap(data => this.log('get point mark')),
+            catchError(this.handleError('get point mark', []))
+        );
+    }
+
+    private getPointShareUrl = 'https://login.reddah.com/api/point/share'; 
+    getPointShare(): Observable<any> {
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append('offset', JSON.stringify((new Date()).getTimezoneOffset()));
+        return this.http.post<any>(this.getPointShareUrl, formData)
+        .pipe(
+            tap(data => this.log('get point share')),
+            catchError(this.handleError('get point share', []))
+        );
+    }
+
+    private getPointCommentUrl = 'https://login.reddah.com/api/point/comment'; 
+    getPointComment(): Observable<any> {
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append('offset', JSON.stringify((new Date()).getTimezoneOffset()));
+        return this.http.post<any>(this.getPointCommentUrl, formData)
+        .pipe(
+            tap(data => this.log('get point comment')),
+            catchError(this.handleError('get point comment', []))
+        );
+    }
+
     getTodayString(){
         return this.datePipe.transform(new Date(),"yyyy-MM-dd"); 
     }
-
-    
 
     pointTasks=[
         {
@@ -899,7 +933,7 @@ export class ReddahService {
             title: this.translate.instant("Point.TaskLoginTitle"),
             description: this.translate.instant("Point.TaskLoginDescp"),
             point: 1, 
-            got: 1,
+            key: "Login",
             max: 1,
             type: 0, //0:daily 1:once
         },
@@ -908,7 +942,7 @@ export class ReddahService {
             title: this.translate.instant("Point.TaskReadTitle"),
             description: this.translate.instant("Point.TaskReadDescp"),
             point: 1, 
-            got: 1,
+            key: "Read",
             max: 6,
             type: 0,
         },
@@ -917,7 +951,7 @@ export class ReddahService {
             title: this.translate.instant("Point.TaskMarkTitle"),
             description: this.translate.instant("Point.TaskMarkDescp"),
             point: 1, 
-            got: 1,
+            key: "Mark",
             max: 2,
             type: 0,
         },
@@ -926,7 +960,7 @@ export class ReddahService {
             title: this.translate.instant("Point.TaskShareTitle"),
             description: this.translate.instant("Point.TaskShareDescp"),
             point: 1, 
-            got: 1,
+            key: "Share",
             max: 2,
             type: 0,
         },
@@ -935,7 +969,7 @@ export class ReddahService {
             title: this.translate.instant("Point.TaskCommentTitle"),
             description: this.translate.instant("Point.TaskCommentDescp"),
             point: 1, 
-            got: 1,
+            key: "Comment",
             max: 3,
             type: 0,
         },
@@ -944,7 +978,7 @@ export class ReddahService {
             title: this.translate.instant("Point.TaskFirstPhotoTitle"),
             description: this.translate.instant("Point.TaskFirstPhotoDescp"),
             point: 10, 
-            got: 0,
+            key: "Photo",
             max: 10,
             type: 1,
         },
@@ -953,7 +987,7 @@ export class ReddahService {
             title: this.translate.instant("Point.TaskFirstSignatureTitle"),
             description: this.translate.instant("Point.TaskFirstSignatureDescp"),
             point: 10, 
-            got: 10,
+            key: "Signature",
             max: 10,
             type: 1,
         },
@@ -962,7 +996,7 @@ export class ReddahService {
             title: this.translate.instant("Point.TaskFirstTimelineTitle"),
             description: this.translate.instant("Point.TaskFirstTimelineDescp"),
             point: 10, 
-            got: 0,
+            key: "Timeline",
             max: 10,
             type: 1,
         },
@@ -970,9 +1004,9 @@ export class ReddahService {
             id:9, 
             title: this.translate.instant("Point.TaskFirstGameTitle"),
             description: this.translate.instant("Point.TaskFirstGameDescp"),
-            point: 5, 
-            got: 0,
-            max: 5,
+            point: 10, 
+            key: "Mini",
+            max: 10,
             type: 1,
         },
         {
@@ -980,7 +1014,7 @@ export class ReddahService {
             title: this.translate.instant("Point.TaskFirstFriendTitle"),
             description: this.translate.instant("Point.TaskFirstFriendDescp"),
             point: 10, 
-            got: 0,
+            key: "Friend",
             max: 10,
             type: 1,
         },
@@ -989,45 +1023,62 @@ export class ReddahService {
             title: this.translate.instant("Point.TaskFirstShakeTitle"),
             description: this.translate.instant("Point.TaskFirstShakeDescp"),
             point: 10, 
-            got: 0,
+            key: "Shake",
             max: 10,
             type: 1,
         },
     ];
 
-    checkPointPunchClock(){
-        return this.localStorageService.retrieve(`Reddah_PunchClock_PointToday_${this.getTodayString()}_${this.getCurrentUser()}`);
-    }
 
-    checkPointLogin(){
-        return this.localStorageService.retrieve(`Reddah_Login_PointToday_${this.getTodayString()}_${this.getCurrentUser()}`);
-    }
-
-    //not completed return false;
-    checkPoint(task){
+    //not completed return false; 
+    isPointDone(task){
         if(task["id"]==1){//login
-            return this.localStorageService.retrieve(`Reddah_Login_PointToday_${this.getTodayString()}_${this.getCurrentUser()}`) != null;
+            return this.getPoint(task.key)==task.max;
         }
-        else if(task["id"]==2){//read
-            let earnPoint = this.localStorageService.retrieve(`Reddah_Read_PointToday_${this.getTodayString()}_${this.getCurrentUser()}`);
-            if(earnPoint==null||earnPoint<6)
-                return false;
-            return true;
+        else if(task["id"]>=2&&task["id"]<=5){//login,read,mark,share,comment
+            return this.getPoint(task.key)>=task.max;
         }
         else 
-            return false;
+            return this.getPointNoDate(task.key);
     }
 
     getCurrentPoint(task){
-        if(task["id"]==1){//login
-            return this.localStorageService.retrieve(`Reddah_Login_PointToday_${this.getTodayString()}_${this.getCurrentUser()}`);
+        if(task["id"]>=1&&task["id"]<=5){//login,read,mark,share,comment
+            return this.getPoint(task.key);
         }
-        else if(task["id"]==2){//read
-            return this.localStorageService.retrieve(`Reddah_Read_PointToday_${this.getTodayString()}_${this.getCurrentUser()}`);
-            
+        else {
+            return this.getPointNoDate(task.key);
         }
-        else 
-            return 0;
+    }
+
+    getPoint(key){
+        let point = this.localStorageService.retrieve(`Reddah_${key}_PointToday_${this.getTodayString()}_${this.getCurrentUser()}`);
+        return point?point:0;
+    }
+
+    setPoint(key, value){
+        this.localStorageService.store(`Reddah_${key}_PointToday_${this.getTodayString()}_${this.getCurrentUser()}`, value);
+    }
+
+    getPointNoDate(key){
+        let point = this.localStorageService.retrieve(`Reddah_${key}_Point_${this.getCurrentUser()}`);
+        return point===true?10:0;
+    }
+
+    setPointNoDate(key, value){
+        this.localStorageService.store(`Reddah_${key}_Point_${this.getCurrentUser()}`, value);
+    }
+
+    private checkOncePointUrl = 'https://login.reddah.com/api/point/checkonce'; 
+    checkOncePoint(): Observable<any> {
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append('offset', JSON.stringify((new Date()).getTimezoneOffset()));
+        return this.http.post<any>(this.checkOncePointUrl, formData)
+        .pipe(
+            tap(data => this.log('check once point')),
+            catchError(this.handleError('check once point', []))
+        );
     }
 
     //******************************** */
@@ -2027,7 +2078,24 @@ export class ReddahService {
         let formData = new FormData();
         formData.append("ArticleId", JSON.stringify(articleId));
         
-        this.addBookmarkFormData(formData);
+        this.addBookmarkFormData(formData).then(_=>{
+            setTimeout(()=>{
+                if(!this.isPointDone(this.pointTasks[3])){
+                    this.getPointMark().subscribe(data=>{
+                        if(data.Success==0||data.Success==3){ 
+                            this.setPoint('Mark', data.Message.GotPoint);
+                            if(data.Success==0){
+                                this.toast(
+                                    this.translate.instant("Point.TaskMarkTitle")+
+                                    " +"+data.Message.GotPoint+
+                                    this.translate.instant("Point.Fen"),
+                                "primary");
+                            }
+                        }
+                    });
+                }
+            },3000)
+        });
     }
 
     async addBookmarkFormData(formData){

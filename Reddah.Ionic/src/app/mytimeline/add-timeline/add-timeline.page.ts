@@ -108,8 +108,8 @@ export class AddTimelinePage implements OnInit {
         }
     }
 
-    close(){
-        this.modalController.dismiss();
+    close(flag=false){
+        this.modalController.dismiss(flag);
     }
 
     ngOnInit() {
@@ -175,7 +175,7 @@ export class AddTimelinePage implements OnInit {
                 this.cacheService.clearGroup("MyTimeLinePage");
                 this.localStorageService.clear("Reddah_mytimeline_"+this.reddah.getCurrentUser());
                 this.localStorageService.clear("Reddah_mytimeline_ids_"+this.reddah.getCurrentUser());
-                this.modalController.dismiss(true);
+                this.close(true);
             }
             else
             {

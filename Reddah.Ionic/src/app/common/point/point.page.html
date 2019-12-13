@@ -34,7 +34,7 @@
 
     <ion-item lines="none" color="transparent" class="title">
         <ion-card-title color="light" style="font-size: large;font-weight: bold;">{{ 'Point.RuleTitle' | translate }}</ion-card-title>
-        <ion-text style="font-size: large;" color="light" slot="end">{{ reddah.lan3('Point.TodayTotal' | translate, '+'+1, 'Point.Fen' | translate) }}</ion-text>
+        <ion-text style="font-size: large;" color="light" slot="end">{{ reddah.lan3('Point.TodayTotal' | translate, '+'+reddah.getPoint('TodayTotalPoint'), 'Point.Fen' | translate) }}</ion-text>
     </ion-item>
 
     <ion-card class="welcome-card" color="light">
@@ -42,11 +42,11 @@
             <ion-icon name="calendar" color="dark"></ion-icon>
             <ion-card-title>{{ 'Point.PunchClock' | translate }}</ion-card-title>
             <ion-button clear slot="end" color="warning" (click)="punchClock()" 
-                style="--box-shadow: none;text-transform: none;" *ngIf="!reddah.checkPointPunchClock()">
+                style="--box-shadow: none;text-transform: none;" *ngIf="!reddah.getPoint('PunchClock')">
                 {{ 'Point.Letsgo' | translate }}
             </ion-button>
             <ion-button clear slot="end" color="light" (click)="punchClock()" 
-                style="--box-shadow: none;text-transform: none;" *ngIf="reddah.checkPointPunchClock()">
+                style="--box-shadow: none;text-transform: none;" *ngIf="reddah.getPoint('PunchClock')">
                 {{ 'Point.Done' | translate }}
             </ion-button>
         </ion-item>
@@ -56,11 +56,11 @@
         <ion-item lines="none">
             <ion-card-title>{{ task.title | translate }}</ion-card-title>
             <ion-button clear slot="end" color="warning" (click)="close()" 
-                style="--box-shadow: none;text-transform: none;" *ngIf="!reddah.checkPoint(task)">
+                style="--box-shadow: none;text-transform: none;" *ngIf="!reddah.isPointDone(task)">
                 {{ 'Point.Letsgo' | translate }}
             </ion-button>
             <ion-button clear slot="end" color="light" 
-                style="--box-shadow: none;text-transform: none;" *ngIf="reddah.checkPoint(task)">
+                style="--box-shadow: none;text-transform: none;" *ngIf="reddah.isPointDone(task)">
                 {{ 'Point.Done' | translate }}
             </ion-button>
         </ion-item>

@@ -140,24 +140,21 @@ export class ChangePhotoPage implements OnInit {
             this.formData.append("targetUserName", this.targetUserName);
         }
         this.reddahService.updateUserPhoto(this.formData)
-        .subscribe(result => 
-            {
-                loading.dismiss();
-                
-                if(result.Success==0)
-                { 
-                    this.modalController.dismiss(true);
-                }
-                else
-                {
-                    //alert(result.Message);
-                    this.modalController.dismiss(false);
-                }
-                
-            },
-            error=>{
-                console.log(JSON.stringify(error));
+        .subscribe(result => {
+            loading.dismiss();
+            
+            if(result.Success==0)
+            { 
+                this.modalController.dismiss(true);
             }
-        );
+            else
+            {
+                this.modalController.dismiss(false);
+            }
+            
+        },
+        error=>{
+            console.log(JSON.stringify(error));
+        });
     }
 }

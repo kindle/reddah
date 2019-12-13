@@ -35,31 +35,55 @@ export class PostviewerPage implements OnInit {
         private cacheService: CacheService,
         private translate: TranslateService,
         private alertController: AlertController,
-        private localStorageService: LocalStorageService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
     }
 
     commentsData: any;
 
+    effeciveRead;
     ngOnInit() {
         this.reddah.getUserPhotos(this.article.UserName);
-        if(!this.reddah.checkPoint(this.reddah.pointTasks[1])){
-            this.reddah.getPointRead().subscribe(data=>{
-                console.log(data)
-                if(data.Success==0||data.Success==3){ 
-                    this.localStorageService.store(`Reddah_Read_PointToday_${this.reddah.getTodayString()}_${this.reddah.getCurrentUser()}`, data.Message.GotPoint);
-                    if(data.Success==0){
-                        this.reddah.toast("阅读文章+"+data.Message.GotPoint+"/"+this.reddah.pointTasks[1].max+"分", "primary");
+
+        this.effeciveRead = setTimeout(() => {
+            if(!this.reddah.isPointDone(this.reddah.pointTasks[1])){
+                this.reddah.getPointRead().subscribe(data=>{
+                    if(data.Success==0||data.Success==3){ 
+                        this.reddah.setPoint('Read', data.Message.GotPoint);
+                        if(data.Success==0){
+                            this.reddah.toast(
+                                this.translate.instant("Point.TaskReadTitle")+
+                                " +"+data.Message.GotPoint+
+                                this.translate.instant("Point.Fen"),
+                            "primary");
+                        }
+                        this.reddah.getUserPhotos(this.userName);
                     }
-                }
-            });
-        }
+                });
+            }
+        },5000);
     }
 
     ionViewDidEnter(){
         if(!this.preview)
             this.loadComments();
+    }
+
+    getSharePoint(){
+        if(!this.reddah.isPointDone(this.reddah.pointTasks[4])){
+            this.reddah.getPointShare().subscribe(data=>{
+                if(data.Success==0||data.Success==3){ 
+                    this.reddah.setPoint('Share', data.Message.GotPoint);
+                    if(data.Success==0){
+                        this.reddah.toast(
+                            this.translate.instant("Point.TaskShareTitle")+
+                            " +"+data.Message.GotPoint+
+                            this.translate.instant("Point.Fen"),
+                        "primary");
+                    }
+                }
+            });
+        }
     }
 
     async presentPopover(ev: any) {
@@ -85,6 +109,10 @@ export class PostviewerPage implements OnInit {
             });
               
             await modal.present();
+            const { data } = await modal.onDidDismiss();
+            if(data){
+                this.getSharePoint();
+            }
         }
         else if(data==2)//share to timeline
         {
@@ -117,8 +145,8 @@ export class PostviewerPage implements OnInit {
           
         await postModal.present();
         const { data } = await postModal.onDidDismiss();
-        if(data||!data){
-            
+        if(data){
+            this.getSharePoint();
         }
     }
 
@@ -177,6 +205,7 @@ export class PostviewerPage implements OnInit {
 
     goback(){
         this.location.back();
+        clearTimeout(this.effeciveRead);
     }
 
     @ViewChild('commentbox') commentbox;
@@ -186,9 +215,26 @@ export class PostviewerPage implements OnInit {
 
     childReloadComments(event){
         this.loadComments();
+        setTimeout(()=>{
+            if(!this.reddah.isPointDone(this.reddah.pointTasks[5])){
+                this.reddah.getPointComment().subscribe(data=>{
+                    if(data.Success==0||data.Success==3){ 
+                        this.reddah.setPoint('Comment', data.Message.GotPoint);
+                        if(data.Success==0){
+                            this.reddah.toast(
+                                this.translate.instant("Point.TaskCommentTitle")+
+                                " +"+data.Message.GotPoint+
+                                this.translate.instant("Point.Fen"),
+                            "primary");
+                        }
+                    }
+                });
+            }
+        })
     }
 
     async close() {
+        clearTimeout(this.effeciveRead);
         await this.modalController.dismiss();
     }
 

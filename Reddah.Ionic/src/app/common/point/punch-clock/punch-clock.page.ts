@@ -14,7 +14,7 @@ import { CacheService } from "ionic-cache";
 export class PunchClockPage implements OnInit {
 
     async close(){
-        this.modalController.dismiss();
+        this.modalController.dismiss(this.flag);
     }
 
     userName;
@@ -43,16 +43,15 @@ export class PunchClockPage implements OnInit {
     punchClockLoading = true;
     pointPunchToday = 0;
     punchedDays = [];
+    flag = false;
     async ngOnInit(){
         this.reddah.punchClock().subscribe(data=>{
-            console.log(JSON.stringify(data));
             if(data.Success==0||data.Success==3){
                 this.pointPunchToday = data.Message.GotPoint;
-                //this.localStorageService.store(`userpoint_${this.userName}`, data.Message.UserPoint);
+                
                 this.punchedDays = [];
                 for(let history of data.Message.History){
                     let localDateTime = this.reddah.utcToLocal(history.CreatedOn, 'YYYY-MM-DD');
-                    //console.log(localDateTime);
                     let historyMonth = new Date(localDateTime).getMonth() + 1;
                     let historyDay = new Date(localDateTime).getDate()+"";
                     if(this.select_month == historyMonth){
@@ -62,8 +61,11 @@ export class PunchClockPage implements OnInit {
                 //console.log(this.punchedDays);
                 this.punchClockLoading = false;
                 this.localStorageService.store("Reddah_PunchClock_"+this.userName, this.punchedDays);
-                let todayStr = this.datePipe.transform(new Date(),"yyyy-MM-dd"); 
-                this.localStorageService.store(`Reddah_PunchClock_PointToday_${todayStr}_${this.userName}`, this.pointPunchToday);
+                this.reddah.setPoint("PunchClock",data.Message.GotPoint)
+
+                if(data.Success==0){
+                    this.flag = true;
+                }
             }
             
         });

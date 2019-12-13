@@ -45,7 +45,20 @@ export class PointPage implements OnInit {
 
 
     async ngOnInit(){
+        this.reddah.checkOncePoint().subscribe(data=>{
+            if(data.Success==0){
+                this.reddah.setPointNoDate("Photo", data.Message.Photo);
+                this.reddah.setPointNoDate("Signature", data.Message.Signature);
+                this.reddah.setPointNoDate("Timeline", data.Message.Timeline);
+                this.reddah.setPointNoDate("Mini", data.Message.Mini);
+                this.reddah.setPointNoDate("Friend", data.Message.Friend);
+                this.reddah.setPointNoDate("Shake", data.Message.Shake);
+                this.reddah.setPoint("TodayTotalPoint", data.Message.TodayTotalPoint)
+            }
+        });
         
+        
+        this.reddah.getUserPhotos(this.userName);
     }
      
 
@@ -85,6 +98,10 @@ export class PointPage implements OnInit {
         });
     
         await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            this.ngOnInit();
+        }
     }
 
 

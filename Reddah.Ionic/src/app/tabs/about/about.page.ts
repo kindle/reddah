@@ -40,6 +40,21 @@ export class AboutPage implements OnInit {
     }
     
     ngOnInit() {
+        if(!this.reddah.isPointDone(this.reddah.pointTasks[0])){
+            this.reddah.getPointLogin().subscribe(data=>{
+                if(data.Success==0||data.Success==3){ 
+                    this.localStorageService.store(`Reddah_Login_PointToday_${this.reddah.getTodayString()}_${this.reddah.getCurrentUser()}`, data.Message.GotPoint);
+                    if(data.Success==0){
+                        this.reddah.toast(
+                            this.translateService.instant("Point.TaskLoginTitle")+
+                            " +"+data.Message.GotPoint+
+                            this.translateService.instant("Point.Fen"),
+                        "primary");
+                    }
+                }
+            });
+        }
+        
         this.reddah.getUserPhotos(this.userName);
     }
 
