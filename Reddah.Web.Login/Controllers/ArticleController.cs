@@ -233,6 +233,26 @@ namespace Reddah.Web.Login.Controllers
                             }
                         }
 
+                        //award point for first time to add timeline
+                        var gotPointBefore = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "timeline");
+                        if (gotPointBefore == null)
+                        {
+                            var mypoint = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+                            int awardPoint = 10;
+                            var point = new Point()
+                            {
+                                CreatedOn = DateTime.UtcNow,
+                                From = "Reddah",
+                                To = jwtResult.JwtUser.User,
+                                OldV = mypoint.Point,
+                                V = awardPoint,
+                                NewV = mypoint.Point + awardPoint,
+                                Reason = "timeline"
+                            };
+                            db.Point.Add(point);
+                            mypoint.Point = mypoint.Point + awardPoint;
+                        }
+
                         //add timeline article
                         db.Article.Add(new Article()
                         {
@@ -734,6 +754,24 @@ namespace Reddah.Web.Login.Controllers
                             target.Lng = lng;
                             if (tag == "shake")
                             {
+                                //award point for first time to use shake
+                                var gotPointBefore = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "shake");
+                                if (gotPointBefore == null)
+                                {
+                                    int awardPoint = 10;
+                                    var point = new Point()
+                                    {
+                                        CreatedOn = DateTime.UtcNow,
+                                        From = "Reddah",
+                                        To = jwtResult.JwtUser.User,
+                                        OldV = target.Point,
+                                        V = awardPoint,
+                                        NewV = target.Point + awardPoint,
+                                        Reason = "shake"
+                                    };
+                                    db.Point.Add(point);
+                                    target.Point = target.Point + awardPoint;
+                                }
                                 target.LastShakeOn = DateTime.UtcNow;
                             }
                                
@@ -892,6 +930,24 @@ namespace Reddah.Web.Login.Controllers
                     else
                     {
                         var target = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+                        //award point for first time to add signature
+                        var gotPointBefore = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "signature");
+                        if (gotPointBefore == null)
+                        {
+                            int awardPoint = 10;
+                            var point = new Point()
+                            {
+                                CreatedOn = DateTime.UtcNow,
+                                From = "Reddah",
+                                To = jwtResult.JwtUser.User,
+                                OldV = target.Point,
+                                V = awardPoint,
+                                NewV = target.Point + awardPoint,
+                                Reason = "signature"
+                            };
+                            db.Point.Add(point);
+                            target.Point = target.Point + awardPoint;
+                        }
                         target.Signature = targetSignature;
                         db.SaveChanges();
                     }
@@ -1038,6 +1094,26 @@ namespace Reddah.Web.Login.Controllers
                     var item = db.UserFriend.FirstOrDefault(f => f.UserName == jwtResult.JwtUser.User && f.Watch == targetUser);
                     if (item == null)
                     {
+                        //award point for first time to apply for friend
+                        var gotPointBefore = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "friend");
+                        if (gotPointBefore == null)
+                        {
+                            var mypoint = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+                            int awardPoint = 10;
+                            var point = new Point()
+                            {
+                                CreatedOn = DateTime.UtcNow,
+                                From = "Reddah",
+                                To = jwtResult.JwtUser.User,
+                                OldV = mypoint.Point,
+                                V = awardPoint,
+                                NewV = mypoint.Point + awardPoint,
+                                Reason = "friend"
+                            };
+                            db.Point.Add(point);
+                            mypoint.Point = mypoint.Point + awardPoint;
+                        }
+
                         var uf = new UserFriend();
                         uf.UserName = jwtResult.JwtUser.User;
                         uf.Watch = targetUser;
@@ -1384,6 +1460,24 @@ namespace Reddah.Web.Login.Controllers
                             }
                             else
                             {
+                                //award point for first time to upload photo 
+                                var gotPointBefore = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "photo");
+                                if (gotPointBefore == null)
+                                {
+                                    int awardPoint = 10;
+                                    var point = new Point()
+                                    {
+                                        CreatedOn = DateTime.UtcNow,
+                                        From = "Reddah",
+                                        To = jwtResult.JwtUser.User,
+                                        OldV = target.Point,
+                                        V = awardPoint,
+                                        NewV = target.Point + awardPoint,
+                                        Reason = "photo"
+                                    };
+                                    db.Point.Add(point);
+                                    target.Point = target.Point + awardPoint;
+                                }
                                 //portrait
                                 target.Photo = string.Format("///login.reddah.com/uploadPhoto/{0}", fileName);
                             }

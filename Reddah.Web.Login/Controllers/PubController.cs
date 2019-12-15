@@ -973,7 +973,6 @@ namespace Reddah.Web.Login.Controllers
                         if (string.IsNullOrWhiteSpace(usedMin))
                         {
                             target.UsedMini = targetMiniId;
-                            db.SaveChanges();
                         }
                         else
                         {
@@ -984,9 +983,31 @@ namespace Reddah.Web.Login.Controllers
                                 usedMin = usedMin.Replace("," + targetMiniId, "");
                                 usedMin = targetMiniId + "," + usedMin;
                                 target.UsedMini = usedMin;
-                                db.SaveChanges();
                             }
                         }
+
+                        //award point for first time to using mini app
+                        var gotPointBefore = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "mini");
+                        if (gotPointBefore == null)
+                        {
+                            int awardPoint = 10;
+                            var point = new Point()
+                            {
+                                CreatedOn = DateTime.UtcNow,
+                                From = "Reddah",
+                                To = jwtResult.JwtUser.User,
+                                OldV = target.Point,
+                                V = awardPoint,
+                                NewV = target.Point + awardPoint,
+                                Reason = "mini"
+                            };
+                            db.Point.Add(point);
+                            target.Point = target.Point + awardPoint;
+                        }
+
+                        db.SaveChanges();
+
+
                         return Ok(new ApiResult(0, "success"));
                     }
                     else

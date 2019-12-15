@@ -82,6 +82,19 @@ namespace Reddah.Web.Login
         public Article article { get; set; }
     }
 
+    public class PointCheckOnce
+    {
+        public bool Photo { get; set; }
+        public bool Signature { get; set; }
+        public bool Timeline { get; set; }
+        public bool Mini { get; set; }
+        public bool Friend { get; set; }
+        public bool Shake { get; set; }
+        public int TodayTotalPoint { get; set; }
+        public string Test { get; set; }
+
+    }
+
     public class AdvancedUserProfile : UserProfile
     {
         public decimal? Distance { get; set; }

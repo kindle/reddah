@@ -21,6 +21,8 @@ namespace Reddah.Web.Login.Controllers
             try
             {
                 string jwt = HttpContext.Current.Request["jwt"];
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int id = js.Deserialize<int>(HttpContext.Current.Request["id"]);
 
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
@@ -34,11 +36,23 @@ namespace Reddah.Web.Login.Controllers
                 {
                     var pageCount = 20;
 
-                    query = (from p in db.Point
-                             where p.To == jwtResult.JwtUser.User
-                             orderby p.Id descending
-                             select p)
+                    if(id==0)
+                    {
+                        query = (from p in db.Point
+                                 where p.To == jwtResult.JwtUser.User
+                                 orderby p.Id descending
+                                 select p)
                             .Take(pageCount);
+                    }
+                    else
+                    {
+                        query = (from p in db.Point
+                                 where p.To == jwtResult.JwtUser.User && p.Id < id
+                                 orderby p.Id descending
+                                 select p)
+                            .Take(pageCount);
+                    }
+                    
 
                     return Ok(new ApiResult(0, query.ToList()));
                 }
@@ -252,8 +266,7 @@ namespace Reddah.Web.Login.Controllers
             return Ok(new ApiResult(0, pointInfo));
         }
 
-        [Route("read")]
-        public IHttpActionResult Read()
+        private IHttpActionResult MaxPoint(string reason, int awardPoint, int maxPoint)
         {
             string jwt = HttpContext.Current.Request["jwt"];
             JavaScriptSerializer js = new JavaScriptSerializer();
@@ -267,88 +280,159 @@ namespace Reddah.Web.Login.Controllers
             if (jwtResult.Success != 0)
                 return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
 
-            int AwardPoint = 1;
+            string userName = jwtResult.JwtUser.User;
+
             PointInfo pointInfo = new PointInfo();
 
             using (var db = new reddahEntities())
             {
-                var punchClockList = db.Point.Where(p => p.To == jwtResult.JwtUser.User && p.Reason == "read")
-                    .OrderByDescending(d => d.Id).Take(6).ToList();
+                var pointList = db.Point.Where(p => p.To == userName && p.Reason == reason)
+                    .OrderByDescending(d => d.Id).Take(maxPoint).ToList();
                 int count = 0;
                 var lastDay = DateTime.UtcNow.AddMinutes(-1 * minitesOffset);
-                var userCurrentPoint = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User).Point;
+                var userCurrentPoint = db.UserProfile.FirstOrDefault(u => u.UserName == userName).Point;
 
-                if (punchClockList.Count == 0)
+                if (pointList.Count == 0)
                 {
                     var point = new Point()
                     {
                         CreatedOn = DateTime.UtcNow,
                         From = "Reddah",
-                        To = jwtResult.JwtUser.User,
+                        To = userName,
                         OldV = userCurrentPoint,
-                        V = AwardPoint,
-                        NewV = userCurrentPoint+AwardPoint,
-                        Reason = "read"
+                        V = awardPoint,
+                        NewV = userCurrentPoint + awardPoint,
+                        Reason = reason
                     };
                     db.Point.Add(point);
-                    db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User).Point = point.NewV;
+                    db.UserProfile.FirstOrDefault(u => u.UserName == userName).Point = point.NewV;
                     db.SaveChanges();
 
-                    pointInfo.GotPoint = AwardPoint;
+                    pointInfo.GotPoint = awardPoint;
                     pointInfo.UserPoint = point.NewV;
                     pointInfo.History = new List<Point> { point };
                 }
                 else
                 {
-                    
-                    for (int i = 0; i < punchClockList.Count; i++)
+
+                    for (int i = 0; i < pointList.Count; i++)
                     {
-                        var pcLocalTime = punchClockList[i].CreatedOn.AddMinutes(-1 * minitesOffset);
+                        var pcLocalTime = pointList[i].CreatedOn.AddMinutes(-1 * minitesOffset);
                         if (lastDay.Day == pcLocalTime.Day)
                         {
                             count++;
                         }
                     }
 
-                    if (count < 6)
+                    if (count < maxPoint)
                     {
                         var point = new Point()
                         {
                             CreatedOn = DateTime.UtcNow,
                             From = "Reddah",
-                            To = jwtResult.JwtUser.User,
+                            To = userName,
                             OldV = userCurrentPoint,
-                            V = AwardPoint,
-                            NewV = userCurrentPoint + AwardPoint,
-                            Reason = "read"
+                            V = awardPoint,
+                            NewV = userCurrentPoint + awardPoint,
+                            Reason = reason
                         };
                         db.Point.Add(point);
-                        db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User).Point = point.NewV;
+                        db.UserProfile.FirstOrDefault(u => u.UserName == userName).Point = point.NewV;
 
                         db.SaveChanges();
 
-                        pointInfo.GotPoint = count+1;
+                        pointInfo.GotPoint = count + 1;
                         pointInfo.UserPoint = point.NewV;
-                        punchClockList.Add(point);
-                        pointInfo.History = punchClockList;
+                        pointList.Add(point);
+                        pointInfo.History = pointList;
                     }
                     else
                     {
                         //already read full today
-                        pointInfo.GotPoint = punchClockList[0].V;
-                        pointInfo.UserPoint = punchClockList[0].NewV;
-                        pointInfo.History = punchClockList;
+                        pointInfo.GotPoint = pointList[0].V;
+                        pointInfo.UserPoint = pointList[0].NewV;
+                        pointInfo.History = pointList;
 
                         return Ok(new ApiResult(3, pointInfo));
                     }
                 }
-                
-
-
-
             }
 
             return Ok(new ApiResult(0, pointInfo));
+        }
+
+
+        [Route("read")]
+        public IHttpActionResult Read()
+        {
+            int awardPoint = 1;
+            int maxPoint = 6;
+            return MaxPoint("read", awardPoint, maxPoint);
+        }
+
+        [Route("mark")]
+        public IHttpActionResult Mark()
+        {
+            int awardPoint = 1;
+            int maxPoint = 2;
+            return MaxPoint("mark", awardPoint, maxPoint);
+        }
+
+        [Route("share")]
+        public IHttpActionResult Share()
+        {
+            int awardPoint = 1;
+            int maxPoint = 2;
+            return MaxPoint("share", awardPoint, maxPoint);
+        }
+
+        [Route("comment")]
+        public IHttpActionResult Comment()
+        {
+            int awardPoint = 1;
+            int maxPoint = 3;
+            return MaxPoint("comment", awardPoint, maxPoint);
+        }
+
+        [Route("checkonce")]
+        public IHttpActionResult CheckOnce()
+        {
+            string jwt = HttpContext.Current.Request["jwt"];
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            int minitesOffset = js.Deserialize<int>(HttpContext.Current.Request["offset"]);
+
+            if (String.IsNullOrWhiteSpace(jwt))
+                return Ok(new ApiResult(1, "No Jwt string"));
+
+            JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+            if (jwtResult.Success != 0)
+                return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+            PointCheckOnce result = new PointCheckOnce();
+            result.TodayTotalPoint = 0;
+
+            using (var db = new reddahEntities())
+            {
+                result.Photo = db.Point.FirstOrDefault(p=>p.To==jwtResult.JwtUser.User&&p.Reason=="photo")!=null;
+                result.Signature = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "signature") != null;
+                result.Timeline = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "timeline") != null;
+                result.Mini = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "mini") != null;
+                result.Friend = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "friend") != null;
+                result.Shake = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "shake") != null;
+                var today = DateTime.UtcNow.AddMinutes(-1 * minitesOffset);
+                var todayPoints = db.Point.Where(p => p.To == jwtResult.JwtUser.User).OrderByDescending(p=>p.Id).Take(100).ToList();
+                foreach(var p in todayPoints)
+                {
+                    if(p.CreatedOn.AddMinutes(-1 * minitesOffset).Date == today.Date)
+                    {
+                        result.TodayTotalPoint += p.V;
+                    }
+                }
+
+            }
+
+            return Ok(new ApiResult(0, result));
         }
     }
 }
