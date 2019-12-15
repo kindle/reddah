@@ -14,7 +14,7 @@ import { CacheService } from "ionic-cache";
 export class HistoryPage implements OnInit {
 
     points = [];
-    loadedIds = [];
+    lastId = 0;
 
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
     @ViewChild('pageTop') pageTop: Content;
@@ -30,9 +30,7 @@ export class HistoryPage implements OnInit {
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,
-        private popoverController: PopoverController,
         public modalController: ModalController,
-        private localStorageService: LocalStorageService,
         private cacheService: CacheService,
 
     ){
@@ -46,8 +44,10 @@ export class HistoryPage implements OnInit {
         });
         await loading.present();
 
-        let cacheKey = "this.reddah.getPointHistory";
-        let request = this.reddah.getPoints();
+        let formData = new FormData();
+        formData.append("id", JSON.stringify(this.lastId));
+        let cacheKey = "this.reddah.getPointHistory"+this.lastId;
+        let request = this.reddah.getPoints(formData);
 
         this.cacheService.loadFromObservable(cacheKey, request, "HistoryPage")
         .subscribe(result => 
@@ -55,6 +55,7 @@ export class HistoryPage implements OnInit {
             if(result.Success==0){
                 for(let point of result.Message){
                     this.points.push(point); 
+                    this.lastId = point.Id;
                 }
             }
             else{
@@ -66,17 +67,18 @@ export class HistoryPage implements OnInit {
     }
   
     getPoints(event):void {
-        this.points = [];
-        let cacheKey = "this.reddah.getPointHistory";
-        let request = this.reddah.getPoints();
+        let formData = new FormData();
+        formData.append("id", JSON.stringify(this.lastId));
+        let cacheKey = "this.reddah.getPointHistory"+this.lastId;
+        let request = this.reddah.getPoints(formData);
 
         this.cacheService.loadFromObservable(cacheKey, request, "HistoryPage")
         .subscribe(result => 
         {
-            //alert(JSON.stringify(result));
             if(result.Success==0){
                 for(let point of result.Message){
                     this.points.push(point);
+                    this.lastId = point.Id;
                 }
             }
             
@@ -88,6 +90,8 @@ export class HistoryPage implements OnInit {
     clearCacheAndReload(event){
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("HistoryPage");
+        this.points = [];
+        this.lastId = 0;
         this.getPoints(event);
     }
 
@@ -98,8 +102,7 @@ export class HistoryPage implements OnInit {
         }, 2000);
     }
 
-    //drag up
-    loadData(event) {
+    loadMoreData(event) {
         this.getPoints(event);
     }
     

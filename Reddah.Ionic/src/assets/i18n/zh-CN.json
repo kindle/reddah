@@ -323,7 +323,12 @@
         "TaskFirstShakeTitle":"使用摇一摇",
         "TaskFirstShakeDescp":"首次使用摇一摇",
         "PunchClock":"每日签到",
-        "PunchClockTitle":"签到日历"
+        "PunchClockTitle":"签到日历",
+        "PunchLoading":"正在签到，请稍等。。。",
+        "PunchResult":"今天已签到，已经获得奖励积分",
+        "PointHistory":"积分记录",
+        "Award":"奖励"
+
     },
 
     "Service":{

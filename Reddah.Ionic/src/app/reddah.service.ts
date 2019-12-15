@@ -842,8 +842,7 @@ export class ReddahService {
     //******************************** */
     private pointsUrl = 'https://login.reddah.com/api/point/getpointlist'; 
     
-    getPoints(): Observable<any> {
-        let formData = new FormData();
+    getPoints(formData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
         return this.http.post<any>(this.pointsUrl, formData)
         .pipe(
@@ -1028,6 +1027,24 @@ export class ReddahService {
             type: 1,
         },
     ];
+
+    getNameByReason(reason){
+
+    }
+
+    pointReason = new Map()
+    .set('punchclock',this.translate.instant("Point.PunchClock"))
+    .set('login',this.translate.instant("Point.TaskLoginTitle"))
+    .set('read',this.translate.instant("Point.TaskReadTitle"))
+    .set('mark',this.translate.instant("Point.TaskMarkTitle"))
+    .set('share',this.translate.instant("Point.TaskShareTitle"))
+    .set('comment',this.translate.instant("Point.TaskCommentTitle"))
+    .set('photo',this.translate.instant("Point.TaskFirstPhotoTitle"))
+    .set('signature',this.translate.instant("Point.TaskFirstSignatureTitle"))
+    .set('timeline',this.translate.instant("Point.TaskFirstTimelineTitle"))
+    .set('mini',this.translate.instant("Point.TaskFirstGameTitle"))
+    .set('friend',this.translate.instant("Point.TaskFirstFriendTitle"))
+    .set('shake',this.translate.instant("Point.TaskFirstShakeTitle"));
 
 
     //not completed return false; 
@@ -2087,8 +2104,9 @@ export class ReddahService {
                             if(data.Success==0){
                                 this.toast(
                                     this.translate.instant("Point.TaskMarkTitle")+
-                                    " +"+data.Message.GotPoint+
-                                    this.translate.instant("Point.Fen"),
+                                    this.lan2(
+                                        " +"+data.Message.GotPoint+"/"+this.pointTasks[3].max,
+                                        this.translate.instant("Point.Fen")),
                                 "primary");
                             }
                         }

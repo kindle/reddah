@@ -18,15 +18,15 @@
             <ion-item lines="none" color="transparent" style="--background:transparent;">
                 <ion-icon name="checkmark-circle" color="tertiary"></ion-icon>
                 <ion-card-subtitle style="color:#fff;text-align: center;margin-left:5px;">
-                    <p *ngIf="punchClockLoading">正在签到，请稍等。。。</p>
-                    <p *ngIf="!punchClockLoading">今天已签到，获得奖励</p>
+                    <p *ngIf="punchClockLoading">{{ 'Point.PunchLoading' | translate }}</p>
+                    <p *ngIf="!punchClockLoading">{{ 'Point.PunchResult' | translate }}</p>
                 </ion-card-subtitle>
             </ion-item>
             <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;" *ngIf="punchClockLoading">
                 ...
             </ion-card-title>
             <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;" *ngIf="!punchClockLoading">
-                +{{pointPunchToday}}分
+                +{{pointPunchToday}}
             </ion-card-title>
             <ion-card-content style="color:#fff;text-align: center;">
             </ion-card-content>

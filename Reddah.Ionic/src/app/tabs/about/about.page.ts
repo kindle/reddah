@@ -47,9 +47,10 @@ export class AboutPage implements OnInit {
                     if(data.Success==0){
                         this.reddah.toast(
                             this.translateService.instant("Point.TaskLoginTitle")+
-                            " +"+data.Message.GotPoint+
-                            this.translateService.instant("Point.Fen"),
+                            " +"+this.reddah.lan2(data.Message.GotPoint,
+                            this.translateService.instant("Point.Fen")),
                         "primary");
+                        this.reddah.getUserPhotos(this.userName);
                     }
                 }
             });

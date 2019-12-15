@@ -14,7 +14,6 @@ import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
 import { ShareChooseChatPage } from '../chat/share-choose-chat/share-choose-chat.page';
 import { TranslateService } from '@ngx-translate/core';
 import { SettingFontPage } from '../settings/setting-font/setting-font.page';
-import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
     selector: 'app-postviewer',
@@ -44,17 +43,18 @@ export class PostviewerPage implements OnInit {
     effeciveRead;
     ngOnInit() {
         this.reddah.getUserPhotos(this.article.UserName);
-
+console.log(this.article)
         this.effeciveRead = setTimeout(() => {
-            if(!this.reddah.isPointDone(this.reddah.pointTasks[1])){
+            if(!this.article.Read&&!this.reddah.isPointDone(this.reddah.pointTasks[1])){
                 this.reddah.getPointRead().subscribe(data=>{
                     if(data.Success==0||data.Success==3){ 
                         this.reddah.setPoint('Read', data.Message.GotPoint);
                         if(data.Success==0){
                             this.reddah.toast(
                                 this.translate.instant("Point.TaskReadTitle")+
-                                " +"+data.Message.GotPoint+
-                                this.translate.instant("Point.Fen"),
+                                this.reddah.lan2(
+                                    " +"+data.Message.GotPoint+"/"+this.reddah.pointTasks[1].max,
+                                    this.translate.instant("Point.Fen")),
                             "primary");
                         }
                         this.reddah.getUserPhotos(this.userName);
@@ -77,8 +77,9 @@ export class PostviewerPage implements OnInit {
                     if(data.Success==0){
                         this.reddah.toast(
                             this.translate.instant("Point.TaskShareTitle")+
-                            " +"+data.Message.GotPoint+
-                            this.translate.instant("Point.Fen"),
+                            this.reddah.lan2(
+                                " +"+data.Message.GotPoint+"/"+this.reddah.pointTasks[4].max,
+                                this.translate.instant("Point.Fen")),
                         "primary");
                     }
                 }
@@ -223,8 +224,9 @@ export class PostviewerPage implements OnInit {
                         if(data.Success==0){
                             this.reddah.toast(
                                 this.translate.instant("Point.TaskCommentTitle")+
-                                " +"+data.Message.GotPoint+
-                                this.translate.instant("Point.Fen"),
+                                this.reddah.lan2(
+                                    " +"+data.Message.GotPoint+"/"+this.reddah.pointTasks[5].max,
+                                    this.translate.instant("Point.Fen")),
                             "primary");
                         }
                     }

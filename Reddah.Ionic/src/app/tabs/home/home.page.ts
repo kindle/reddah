@@ -193,11 +193,10 @@ export class HomePage implements OnInit {
         });
         
         await viewerModal.present();
-        article.Read = true;
         this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
         const { data } = await viewerModal.onDidDismiss();
-        if(data){
-            //console.log(data)
+        if(data||!data){   
+            article.Read = true;
         }
     }
 

@@ -90,6 +90,7 @@ export class MyTimeLinePage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
         .subscribe(timeline => 
         {
+            console.log(timeline);
             if(cachedArticles!=JSON.stringify(timeline))
             {
                 this.articles = [];

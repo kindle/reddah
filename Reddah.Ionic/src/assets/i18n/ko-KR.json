@@ -293,7 +293,7 @@
         "TotalPointTitle":"Total Points",
         "Slogan":"Make progress every day",
         "RuleTitle":"Point Rules",
-        "TodayTotal":"Today you got",
+        "TodayTotal":"Today:",
         "Fen":"point(s)",
         "AlreadyGot":"You got",
         "DailyMax":"daily maximum",
@@ -323,7 +323,11 @@
         "TaskFirstShakeTitle":"Shake",
         "TaskFirstShakeDescp":"First time to use shake",
         "PunchClock":"Daily Punch",
-        "PunchClockTitle":"Punch Calendar"
+        "PunchClockTitle":"Punch Calendar",
+        "PunchLoading":"Checking in, please wait... ",
+        "PunchResult":"Today is done, point you earned",
+        "PointHistory":"Point History",
+        "Award":"Award"
     },
     
     "Service":{

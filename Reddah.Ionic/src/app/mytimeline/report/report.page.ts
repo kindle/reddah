@@ -7,11 +7,7 @@ import { UserPage } from '../../common/user/user.page';
 import { ReportCommentPopPage } from '../../common/report-comment-pop.page'
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
-import { Router, ActivatedRoute } from '@angular/router';
 import { ArticleTextPopPage } from '../../common/article-text-pop.page'
-import { FileTransfer } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
     selector: 'app-report',
@@ -136,11 +132,13 @@ export class ReportPage implements OnInit {
 
     }
 
+    loadCommentTick = 0;
     clearCacheAndReload(event){
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("ReportPage");
         this.loadedIds = [-1];
         this.articles = [];
+        this.loadCommentTick++;
         this.localStorageService.clear("Reddah_report");
         this.localStorageService.clear("Reddah_report_ids");
         this.getReport(event);
@@ -224,6 +222,8 @@ export class ReportPage implements OnInit {
                 });
                 
                 this.renderUiLike(id, "add");*/
+
+                
                 
             }
 
@@ -323,14 +323,12 @@ export class ReportPage implements OnInit {
     commentData = new Map();
     authoronly = false;
     async GetCommentsData(articleId: number){
-        //console.log(`get ts comments:${articleId}`);
-        let cacheKey = "this.reddah.getReportComments" + articleId;
+        let cacheKey = "this.reddah.getReportComments" + articleId+"_"+this.loadCommentTick;
         let request = this.reddah.getComments(articleId)
 
         this.cacheService.loadFromObservable(cacheKey, request, "MyReportPage")
         .subscribe(data => 
         {
-            //console.log('load comments:'+articleId+JSON.stringify(data));
             this.commentData.set(articleId, data);
         });
     }

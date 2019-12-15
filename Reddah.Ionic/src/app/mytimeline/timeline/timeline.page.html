@@ -116,7 +116,10 @@
                         <ion-item no-padding lines="none" *ngIf="article.Abstract&&article.Abstract.length>2&&article.Title&&article.Title.length>0" (click)="goTsViewer(article)">
                             <div [innerHTML]="reddah.summary(article.Title,20)" class="textOnlyArticle"></div>
                         </ion-item>
-                        <app-share-article *ngIf="article.Abstract&&article.Abstract.length>2" [abstract]="article.Abstract" [image]="article.Content" [id]="article.Ref" (click)="goTsViewer(article)" [view]="false"></app-share-article>
+                        <app-share-article *ngIf="article.Abstract&&article.Abstract.length>2" 
+                            [abstract]="article.Abstract" [image]="article.Content" 
+                            [id]="article.Ref" (click)="goTsViewer(article)" 
+                            [type]="article.Type" [view]="false"></app-share-article>
                     </div>
                 </div>
             </div>
