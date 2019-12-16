@@ -1028,8 +1028,54 @@ export class ReddahService {
         },
     ];
 
-    getNameByReason(reason){
+    userLevel(userName){
+        let point = this.appData('userpoint_'+userName);
+        if(point<200){
+            return this.translate.instant("Point.Level_Illiterate");
+        }
+        else if(point<300){
+            return this.translate.instant("Point.Level_Bronze");
+        }
+        else if(point<500){
+            return this.translate.instant("Point.Level_Silver");
+        }
+        else if(point<700){
+            return this.translate.instant("Point.Level_Gold");
+        }
+        else if(point<1000){
+            return this.translate.instant("Point.Level_Illiterate");
+        }
+        else if(point<2000){
+            return this.translate.instant("Point.Level_Diamond");
+        }
+        else{
+            return this.translate.instant("Point.Level_Erudite");
+        }
+    }
 
+    userLevelIcon(userName){
+        let point = this.appData('userpoint_'+userName);
+        if(point<200){
+            return 1;
+        }
+        else if(point<300){
+            return 2;
+        }
+        else if(point<500){
+            return 3;
+        }
+        else if(point<700){
+            return 4;
+        }
+        else if(point<1000){
+            return 5;
+        }
+        else if(point<2000){
+            return 6;
+        }
+        else{
+            return 7;
+        }
     }
 
     pointReason = new Map()

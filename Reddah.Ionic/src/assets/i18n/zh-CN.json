@@ -331,7 +331,15 @@
         "Award":"奖励",
         "TaskReportTitle":"举报反馈",
         "TaskReportAwardComment":"感谢反馈，积分奖励",
-        "TaskReportNoAwardComment":"感谢反馈"
+        "TaskReportNoAwardComment":"感谢反馈",
+        "PointLevel":"等级",
+        "Level_Illiterate":"白丁",
+        "Level_Bronze":"青铜",
+        "Level_Silver":"白银",
+        "Level_Gold":"黄金",
+        "Level_Platinum":"铂金",
+        "Level_Diamond":"钻石",
+        "Level_Erudite":"鸿儒"
     },
 
     "Service":{

@@ -26,10 +26,48 @@
             <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;">
                 {{reddah.appData('userpoint_'+userName)}}
             </ion-card-title>
-            <ion-card-content style="color:#fff;text-align: center;">
-                {{ 'Point.Slogan' | translate }}
+            <ion-card-content style="color:#fff;text-align: center;" (click)="showRule()">
+                {{ 'Point.PointLevel' | translate }}: {{ reddah.userLevel(userName) | translate }}
             </ion-card-content>
         </ion-card-header>
+    </ion-card>
+
+    <ion-card class="welcome-card" color="light" *ngIf="display">
+        <ion-item lines="none">
+            <ion-icon style="margin-left:30px;" name="noexist" color="dark"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ 'Point.Level_Illiterate' | translate }}</ion-card-title>
+            <ion-label slot="end">0-199</ion-label>
+        </ion-item>
+        <ion-item lines="none" style="background-color:#d7d8da;">
+            <ion-icon style="margin-left:30px;" name="ribbon" color="dark"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ 'Point.Level_Bronze' | translate }}</ion-card-title>
+            <ion-label slot="end">200-299</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-icon style="margin-left:30px;" name="star-outline" color="primary"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ 'Point.Level_Silver' | translate }}</ion-card-title>
+            <ion-label slot="end">300-499</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-icon style="margin-left:30px;" name="star" color="gold"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ 'Point.Level_Gold' | translate }}</ion-card-title>
+            <ion-label slot="end">500-699</ion-label>
+        </ion-item>
+        <ion-item lines="none" style="background-color:#d7d8da;">
+            <ion-icon style="margin-left:30px;" name="medal" color="point"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ 'Point.Level_Platinum' | translate }}</ion-card-title>
+            <ion-label slot="end">700-999</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-icon style="margin-left:30px;" name="trophy" color="diamond"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ 'Point.Level_Diamond' | translate }}</ion-card-title>
+            <ion-label slot="end">1000-1999</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-icon style="margin-left:30px;" name="school" color="dark"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ 'Point.Level_Erudite' | translate }}</ion-card-title>
+            <ion-label slot="end">2000~</ion-label>
+        </ion-item>
     </ion-card>
 
     <ion-item lines="none" color="transparent" class="title">

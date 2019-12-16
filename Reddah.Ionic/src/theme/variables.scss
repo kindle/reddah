@@ -89,6 +89,12 @@
     /** point**/
     --ion-color-point: #fe7c58;
 
+    /** gold**/
+    --ion-color-gold: #ffce00;
+
+    /** diamond**/
+    --ion-color-diamond: #24d6ea;
+
     .modal-fullscreen {
         .modal-wrapper {
             position: absolute;
@@ -185,4 +191,12 @@
 
 .ion-color-point {
     --ion-color-base: var(--ion-color-point, #fe7c58) !important;
+}
+
+.ion-color-gold {
+    --ion-color-base: var(--ion-color-gold, #ffce00) !important;
+}
+
+.ion-color-diamond {
+    --ion-color-base: var(--ion-color-diamond, #24d6ea) !important;
 }

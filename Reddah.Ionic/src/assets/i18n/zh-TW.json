@@ -331,7 +331,15 @@
         "Award":"獎勵",
         "TaskReportTitle":"舉報反馈",
         "TaskReportAwardComment":"感謝迴響，积分獎勵",
-        "TaskReportNoAwardComment":"感謝迴響"
+        "TaskReportNoAwardComment":"感謝迴響",
+        "PointLevel":"等級",
+        "Level_Illiterate":"白丁",
+        "Level_Bronze":"青銅",
+        "Level_Silver":"白銀",
+        "Level_Gold":"黃金",
+        "Level_Platinum":"白金",
+        "Level_Diamond":"鑽石",
+        "Level_Erudite":"鴻儒"
     },
     
     "Service":{

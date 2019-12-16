@@ -108,7 +108,7 @@ export class HomePage implements OnInit {
             this.loadedIds, 
             this.dislikeGroups,
             this.dislikeUserNames,
-            locale, "promoted");
+            locale, "random");
 
         this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
         .subscribe(articles => 

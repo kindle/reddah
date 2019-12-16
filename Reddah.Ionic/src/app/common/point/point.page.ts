@@ -249,5 +249,10 @@ export class PointPage implements OnInit {
           
         await modal.present();
     }
+
+    display=false;
+    showRule(){
+        this.display = !this.display;
+    }
     
 }

@@ -329,7 +329,15 @@
       "Award":"Award",
       "TaskReportTitle":"Report&Feedback",
       "TaskReportAwardComment":"Thanks for report! Points award",
-      "TaskReportNoAwardComment":"Thanks for report!"
+      "TaskReportNoAwardComment":"Thanks for report!",
+      "PointLevel":"Level",
+      "Level_Illiterate":"Illiterate",
+      "Level_Bronze":"Bronze",
+      "Level_Silver":"Silver",
+      "Level_Gold":"Gold",
+      "Level_Platinum":"Platinum",
+      "Level_Diamond":"Diamond",
+      "Level_Erudite":"Erudite"
   },
 
   "Service":{
