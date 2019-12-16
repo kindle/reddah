@@ -22,5 +22,6 @@ namespace Reddah.Web.Login
         public int V { get; set; }
         public int NewV { get; set; }
         public string Reason { get; set; }
+        public Nullable<int> Ref { get; set; }
     }
 }

@@ -167,3 +167,7 @@ alter table userprofile add
 	[UsedMini] NVARCHAR(MAX) NULL, 
 	[LastUsedOn] DATETIME NULL, 
 	[LastLocale] VARCHAR(10) NULL
+
+--20191216
+alter table point add 
+	[Ref] INT NULL DEFAULT 0 

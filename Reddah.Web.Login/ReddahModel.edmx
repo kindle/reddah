@@ -99,6 +99,7 @@
           <Property Name="V" Type="int" Nullable="false" />
           <Property Name="NewV" Type="int" Nullable="false" />
           <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ref" Type="int" />
         </EntityType>
         <EntityType Name="Rank">
           <Key>
@@ -379,6 +380,7 @@
           <Property Name="V" Type="Int32" Nullable="false" />
           <Property Name="NewV" Type="Int32" Nullable="false" />
           <Property Name="Reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ref" Type="Int32" />
         </EntityType>
         <EntityType Name="Rank">
           <Key>
@@ -614,6 +616,7 @@
           <EntitySetMapping Name="Point">
             <EntityTypeMapping TypeName="reddahModel.Point">
               <MappingFragment StoreEntitySet="Point">
+                <ScalarProperty Name="Ref" ColumnName="Ref" />
                 <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="NewV" ColumnName="NewV" />
                 <ScalarProperty Name="V" ColumnName="V" />

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Data.Entity;
 using System.Web;
 using System.Web.Script.Serialization;
+using Reddah.Web.Login.Utilities;
 
 namespace Reddah.Web.Login.Controllers
 {
@@ -433,6 +434,98 @@ namespace Reddah.Web.Login.Controllers
             }
 
             return Ok(new ApiResult(0, result));
+        }
+
+        [Route("reportaward")]
+        public IHttpActionResult ReportAward()
+        {
+            string jwt = HttpContext.Current.Request["jwt"];
+            string content = HttpContext.Current.Request["content"];
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            
+            int articleId = js.Deserialize<int>(HttpContext.Current.Request["id"]);
+            int dataType = js.Deserialize<int>(HttpContext.Current.Request["data"]);
+
+            if (String.IsNullOrWhiteSpace(jwt))
+                return Ok(new ApiResult(1, "No Jwt string"));
+
+            JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+            if (jwtResult.Success != 0)
+                return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+            
+            using (var db = new reddahEntities())
+            {
+                var item = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Ref == articleId);
+                if (item != null)
+                {
+                    return Ok(new ApiResult(3, "already award"));
+                }
+                else
+                {
+                    const int AwardPoint = 30;
+                    var reporter = db.Article.FirstOrDefault(a => a.Id == articleId);
+                    if (reporter != null)
+                    {
+                        var userCurrentPoint = db.UserProfile.FirstOrDefault(u => u.UserName == reporter.UserName).Point;
+
+                        //award
+                        if (dataType == 1)
+                        {
+                            var point = new Point()
+                            {
+                                CreatedOn = DateTime.UtcNow,
+                                From = jwtResult.JwtUser.User,
+                                To = reporter.UserName,
+                                OldV = userCurrentPoint,
+                                V = AwardPoint,
+                                NewV = userCurrentPoint + AwardPoint,
+                                Reason = "report"
+                            };
+                            db.Point.Add(point);
+                            db.UserProfile.FirstOrDefault(u => u.UserName == reporter.UserName).Point = point.NewV;
+
+                            db.Comment.Add(new Comment()
+                            {
+                                ArticleId = articleId,
+                                ParentId = -1,
+                                Content = HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(content+" +"+AwardPoint))),
+                                CreatedOn = DateTime.UtcNow,
+                                UserName = jwtResult.JwtUser.User,
+                                Uid = ""
+                            });
+
+                        }
+                        else
+                        {
+                            db.Comment.Add(new Comment()
+                            {
+                                ArticleId = articleId,
+                                ParentId = -1,
+                                Content = HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(content))),
+                                CreatedOn = DateTime.UtcNow,
+                                UserName = jwtResult.JwtUser.User,
+                                Uid = ""
+                            });
+                        }
+
+                        //close article
+                        //reporter.Status = -1;
+
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        return Ok(new ApiResult(3, "report article missing"));
+                    }
+                    
+                }
+
+            }
+
+            return Ok(new ApiResult(0, ""));
         }
     }
 }

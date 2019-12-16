@@ -34,6 +34,8 @@ public partial class Point
 
     public string Reason { get; set; }
 
+    public Nullable<int> Ref { get; set; }
+
 }
 
 }

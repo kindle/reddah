@@ -99,6 +99,7 @@
           <Property Name="V" Type="int" Nullable="false" />
           <Property Name="NewV" Type="int" Nullable="false" />
           <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ref" Type="int" />
         </EntityType>
         <EntityType Name="Rank">
           <Key>
@@ -179,6 +180,9 @@
           <Property Name="PrivacyShowLocation" Type="int" Nullable="false" />
           <Property Name="PrivacyViewTs" Type="int" Nullable="false" />
           <Property Name="Point" Type="int" Nullable="false" />
+          <Property Name="UsedMini" Type="nvarchar(max)" />
+          <Property Name="LastUsedOn" Type="datetime" />
+          <Property Name="LastLocale" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -373,6 +377,7 @@
           <Property Name="V" Type="Int32" Nullable="false" />
           <Property Name="NewV" Type="Int32" Nullable="false" />
           <Property Name="Reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ref" Type="Int32" />
         </EntityType>
         <EntityType Name="Rank">
           <Key>
@@ -453,6 +458,9 @@
           <Property Name="PrivacyShowLocation" Type="Int32" Nullable="false" />
           <Property Name="PrivacyViewTs" Type="Int32" Nullable="false" />
           <Property Name="Point" Type="Int32" Nullable="false" />
+          <Property Name="UsedMini" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastUsedOn" Type="DateTime" Precision="3" />
+          <Property Name="LastLocale" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -605,6 +613,7 @@
           <EntitySetMapping Name="Points">
             <EntityTypeMapping TypeName="reddahModel.Point">
               <MappingFragment StoreEntitySet="Point">
+                <ScalarProperty Name="Ref" ColumnName="Ref" />
                 <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="NewV" ColumnName="NewV" />
                 <ScalarProperty Name="V" ColumnName="V" />
@@ -678,6 +687,9 @@
           <EntitySetMapping Name="UserProfiles">
             <EntityTypeMapping TypeName="reddahModel.UserProfile">
               <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="LastLocale" ColumnName="LastLocale" />
+                <ScalarProperty Name="LastUsedOn" ColumnName="LastUsedOn" />
+                <ScalarProperty Name="UsedMini" ColumnName="UsedMini" />
                 <ScalarProperty Name="Point" ColumnName="Point" />
                 <ScalarProperty Name="PrivacyViewTs" ColumnName="PrivacyViewTs" />
                 <ScalarProperty Name="PrivacyShowLocation" ColumnName="PrivacyShowLocation" />

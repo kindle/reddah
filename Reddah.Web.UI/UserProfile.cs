@@ -60,6 +60,12 @@ public partial class UserProfile
 
     public int Point { get; set; }
 
+    public string UsedMini { get; set; }
+
+    public Nullable<System.DateTime> LastUsedOn { get; set; }
+
+    public string LastLocale { get; set; }
+
 }
 
 }
