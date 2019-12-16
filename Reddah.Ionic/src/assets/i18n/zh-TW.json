@@ -261,7 +261,8 @@
         "MiniPubMsg":"確認發佈之後，用戶將收到此小程式的更新",
         "CancelPublish":"稍後發佈",        
         "ConfirmPublish":"確認發佈",
-        "LoginToView":"請登入後查看"
+        "LoginToView":"請登入後查看",
+        "MyFeedback":"我的迴響"
     },
 
     "Mail":{
@@ -327,7 +328,10 @@
         "PunchLoading":"正在簽到，請稍等。。。",
         "PunchResult":"今天已簽到，已經獲得獎勵積分",
         "PointHistory":"積分記錄",
-        "Award":"獎勵"
+        "Award":"獎勵",
+        "TaskReportTitle":"舉報反馈",
+        "TaskReportAwardComment":"感謝迴響，积分獎勵",
+        "TaskReportNoAwardComment":"感謝迴響"
     },
     
     "Service":{

@@ -258,7 +258,8 @@
         "MiniPubMsg":"подтверждение публикации, пользователь получит обновление",
         "CancelPublish":"потом",
         "ConfirmPublish":"ппубликовать",
-        "LoginToView":"танец для поиска"
+        "LoginToView":"танец для поиска",
+        "MyFeedback":"My Feedback"
     },
 
     "Mail":{
@@ -324,7 +325,10 @@
         "PunchLoading":"Checking in, please wait... ",
         "PunchResult":"Today is done, point you earned",
         "PointHistory":"Point History",
-        "Award":"Award"
+        "Award":"Award",
+        "TaskReportTitle":"Report&Feedback",
+        "TaskReportAwardComment":"Thanks for report! Points award",
+        "TaskReportNoAwardComment":"Thanks for report!"
     },
     
     "Service":{

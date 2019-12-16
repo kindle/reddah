@@ -262,7 +262,8 @@
         "MiniPubMsg":"By confirming the publication, users will receive the update",
         "CancelPublish":"Later",
         "ConfirmPublish":"Publish",
-        "LoginToView":"Plese login to find more"
+        "LoginToView":"Plese login to find more",
+        "MyFeedback":"My Feedback"
     },
 
     "Mail":{
@@ -328,7 +329,10 @@
         "PunchLoading":"Checking in, please wait... ",
         "PunchResult":"Today is done, point you earned",
         "PointHistory":"Point History",
-        "Award":"Award"
+        "Award":"Award",
+        "TaskReportTitle":"Report&Feedback",
+        "TaskReportAwardComment":"Thanks for report! Points award",
+        "TaskReportNoAwardComment":"Thanks for report!"
     },
 
     "Service":{

@@ -55,7 +55,7 @@
     <ion-card class="welcome-card" color="light" *ngFor="let task of reddah.pointTasks">
         <ion-item lines="none">
             <ion-card-title>{{ task.title | translate }}</ion-card-title>
-            <ion-button clear slot="end" color="warning" (click)="close()" 
+            <ion-button clear slot="end" color="warning" (click)="doTask(task)" 
                 style="--box-shadow: none;text-transform: none;" *ngIf="!reddah.isPointDone(task)">
                 {{ 'Point.Letsgo' | translate }}
             </ion-button>

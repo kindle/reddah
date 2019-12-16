@@ -258,7 +258,8 @@
         "MiniPubMsg":"من خلال تأكيد نشر المستخدم سوف تتلقى التحديثات",
         "CancelPublish":"الآخرة",
         "ConfirmPublish":"صدر",
-        "LoginToView":"الرقص تسجيل الدخول لمعرفة المزيد"
+        "LoginToView":"الرقص تسجيل الدخول لمعرفة المزيد",
+        "MyFeedback":"My Feedback"
     },
 
     "Mail":{
@@ -324,7 +325,10 @@
         "PunchLoading":"Checking in, please wait... ",
         "PunchResult":"Today is done, point you earned",
         "PointHistory":"Point History",
-        "Award":"Award"
+        "Award":"Award",
+        "TaskReportTitle":"Report&Feedback",
+        "TaskReportAwardComment":"Thanks for report! Points award",
+        "TaskReportNoAwardComment":"Thanks for report!"
     },
     
     "Service":{

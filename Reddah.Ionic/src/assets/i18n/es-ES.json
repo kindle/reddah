@@ -258,7 +258,8 @@
         "MiniPubMsg":"Al confirmar la publicación, el usuario recibirá la actualización",
         "CancelPublish":"Después",
         "ConfirmPublish":"Publicar",
-        "LoginToView":"Registro de danzas"
+        "LoginToView":"Registro de danzas",
+        "MyFeedback":"My Feedback"
     },
 
     "Mail":{
@@ -324,7 +325,10 @@
         "PunchLoading":"Checking in, please wait... ",
         "PunchResult":"Today is done, point you earned",
         "PointHistory":"Point History",
-        "Award":"Award"
+        "Award":"Award",
+        "TaskReportTitle":"Report&Feedback",
+        "TaskReportAwardComment":"Thanks for report! Points award",
+        "TaskReportNoAwardComment":"Thanks for report!"
     },
     
     "Service":{

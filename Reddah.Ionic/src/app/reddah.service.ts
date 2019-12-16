@@ -1044,7 +1044,8 @@ export class ReddahService {
     .set('timeline',this.translate.instant("Point.TaskFirstTimelineTitle"))
     .set('mini',this.translate.instant("Point.TaskFirstGameTitle"))
     .set('friend',this.translate.instant("Point.TaskFirstFriendTitle"))
-    .set('shake',this.translate.instant("Point.TaskFirstShakeTitle"));
+    .set('shake',this.translate.instant("Point.TaskFirstShakeTitle"))
+    .set('report',this.translate.instant("Point.TaskReportTitle"));
 
 
     //not completed return false; 
@@ -1095,6 +1096,17 @@ export class ReddahService {
         .pipe(
             tap(data => this.log('check once point')),
             catchError(this.handleError('check once point', []))
+        );
+    }
+
+    //admin award
+    private reportAwardUrl = 'https://login.reddah.com/api/point/reportaward'; 
+    reportAward(formData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.reportAwardUrl, formData)
+        .pipe(
+            tap(data => this.log('point report award')),
+            catchError(this.handleError('point report award', []))
         );
     }
 

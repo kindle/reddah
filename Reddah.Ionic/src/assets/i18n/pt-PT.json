@@ -258,7 +258,8 @@
         "MiniPubMsg":"Ao confirmar a publicação, OS utilizadores receberão a actualização",
         "CancelPublish":"Depois",
         "ConfirmPublish":"Publicar",
-        "LoginToView":"Dance Login para encontrar Mais"
+        "LoginToView":"Dance Login para encontrar Mais",
+        "MyFeedback":"My Feedback"
     },
 
     "Mail":{
@@ -324,7 +325,10 @@
         "PunchLoading":"Checking in, please wait... ",
         "PunchResult":"Today is done, point you earned",
         "PointHistory":"Point History",
-        "Award":"Award"
+        "Award":"Award",
+        "TaskReportTitle":"Report&Feedback",
+        "TaskReportAwardComment":"Thanks for report! Points award",
+        "TaskReportNoAwardComment":"Thanks for report!"
     },
     
     "Service":{

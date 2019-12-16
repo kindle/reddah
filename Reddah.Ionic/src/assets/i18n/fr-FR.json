@@ -259,7 +259,8 @@
         "MiniPubMsg":"L 'utilisateur recevra la mise à jour par confirmation de la publication",
         "CancelPublish":"Après",
         "ConfirmPublish":"Publication",
-        "LoginToView":"Chorégraphie pour trouver plus"
+        "LoginToView":"Chorégraphie pour trouver plus",
+        "MyFeedback":"My Feedback"
     },
 
     "Mail":{
@@ -325,7 +326,10 @@
       "PunchLoading":"Checking in, please wait... ",
       "PunchResult":"Today is done, point you earned",
       "PointHistory":"Point History",
-      "Award":"Award"
+      "Award":"Award",
+      "TaskReportTitle":"Report&Feedback",
+      "TaskReportAwardComment":"Thanks for report! Points award",
+      "TaskReportNoAwardComment":"Thanks for report!"
   },
 
   "Service":{

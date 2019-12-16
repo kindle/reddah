@@ -261,7 +261,8 @@
         "MiniPubMsg":"确认发布之后，用户将收到此小程序的更新",
         "CancelPublish":"稍后发布",
         "ConfirmPublish":"确认发布",
-        "LoginToView":"请登录后查看"
+        "LoginToView":"请登录后查看",
+        "MyFeedback":"我的反馈"
     },
 
     "Mail":{
@@ -327,8 +328,10 @@
         "PunchLoading":"正在签到，请稍等。。。",
         "PunchResult":"今天已签到，已经获得奖励积分",
         "PointHistory":"积分记录",
-        "Award":"奖励"
-
+        "Award":"奖励",
+        "TaskReportTitle":"举报反馈",
+        "TaskReportAwardComment":"感谢反馈，积分奖励",
+        "TaskReportNoAwardComment":"感谢反馈"
     },
 
     "Service":{

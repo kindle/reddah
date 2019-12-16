@@ -259,7 +259,8 @@
         "MiniPubMsg":"出版を確認することにより、ユーザーが更新されます",
         "CancelPublish":"後で",
         "ConfirmPublish":"出版",
-        "LoginToView":"ダンス登録してもっと探します"
+        "LoginToView":"ダンス登録してもっと探します",
+        "MyFeedback":"My Feedback"
     },
 
     "Mail":{
@@ -325,7 +326,10 @@
         "PunchLoading":"Checking in, please wait... ",
         "PunchResult":"Today is done, point you earned",
         "PointHistory":"Point History",
-        "Award":"Award"
+        "Award":"Award",
+        "TaskReportTitle":"Report&Feedback",
+        "TaskReportAwardComment":"Thanks for report! Points award",
+        "TaskReportNoAwardComment":"Thanks for report!"
     },
     
     "Service":{

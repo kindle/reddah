@@ -258,7 +258,8 @@
         "MiniPubMsg":"Door de publicatie te bevestigen, zullen gebruikers de update ontvangen",
         "CancelPublish":"Later",
         "ConfirmPublish":"Uitgegeven",
-        "LoginToView":"Dance Login voor meer"
+        "LoginToView":"Dance Login voor meer",
+        "MyFeedback":"My Feedback"
     },
 
     "Mail":{
@@ -323,7 +324,10 @@
         "PunchLoading":"Checking in, please wait... ",
         "PunchResult":"Today is done, point you earned",
         "PointHistory":"Point History",
-        "Award":"Award"
+        "Award":"Award",
+        "TaskReportTitle":"Report&Feedback",
+        "TaskReportAwardComment":"Thanks for report! Points award",
+        "TaskReportNoAwardComment":"Thanks for report!"
     },
     
     "Service":{

@@ -261,7 +261,8 @@
         "MiniPubMsg":"확인 발표를 통해 사용자가 업데이트를 받을 것입니다",
         "CancelPublish":"나중에 발표",
         "ConfirmPublish":"게시 확인",
-        "LoginToView":"안무 로그인"
+        "LoginToView":"안무 로그인",
+        "MyFeedback":"My Feedback"
     },
 
     "Mail":{
@@ -327,7 +328,10 @@
         "PunchLoading":"Checking in, please wait... ",
         "PunchResult":"Today is done, point you earned",
         "PointHistory":"Point History",
-        "Award":"Award"
+        "Award":"Award",
+        "TaskReportTitle":"Report&Feedback",
+        "TaskReportAwardComment":"Thanks for report! Points award",
+        "TaskReportNoAwardComment":"Thanks for report!"
     },
     
     "Service":{

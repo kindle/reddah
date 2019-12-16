@@ -258,7 +258,8 @@
         "MiniPubMsg":"โดยการยืนยันการประกาศผู้ใช้จะได้รับการปรับปรุง",
         "CancelPublish":"หลังจากนั้น",
         "ConfirmPublish":"จัดพิมพ์",
-        "LoginToView":"เข้าสู่ระบบเพื่อค้นหาข้อมูลเพิ่มเติม"
+        "LoginToView":"เข้าสู่ระบบเพื่อค้นหาข้อมูลเพิ่มเติม",
+        "MyFeedback":"My Feedback"
     },
 
     "Mail":{
@@ -324,7 +325,10 @@
         "PunchLoading":"Checking in, please wait... ",
         "PunchResult":"Today is done, point you earned",
         "PointHistory":"Point History",
-        "Award":"Award"
+        "Award":"Award",
+        "TaskReportTitle":"Report&Feedback",
+        "TaskReportAwardComment":"Thanks for report! Points award",
+        "TaskReportNoAwardComment":"Thanks for report!"
     },
     
     "Service":{

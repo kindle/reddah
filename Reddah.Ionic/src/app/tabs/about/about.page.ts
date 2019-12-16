@@ -15,6 +15,7 @@ import { MessageListPage } from '../../tabs/message/message.page'
 import { PointPage } from '../../common/point/point.page';
 import { PunchPage } from '../../common/punch/punch.page';
 import { HistoryPage } from '../../common/point/history/history.page';
+import { MyReportPage } from '../../mytimeline/myreport/myreport.page';
 
 @Component({
     selector: 'app-about',
@@ -160,6 +161,16 @@ export class AboutPage implements OnInit {
             cssClass: "modal-fullscreen",
         });
     
+        await modal.present();
+    }
+
+    async goMyReport() {
+        const modal = await this.modalController.create({
+            component: MyReportPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+          
         await modal.present();
     }
 }

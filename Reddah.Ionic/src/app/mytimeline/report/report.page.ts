@@ -205,43 +205,35 @@ export class ReportPage implements OnInit {
         await popover.present();
         const { data } = await popover.onDidDismiss();
         if(data){
+            this.formData = new FormData();
             if(data==1)
             {
-                //set status=-1
-                //set read, give award point
-                //delete in UI
-
-                /*let likeAddFormData = new FormData();
-                likeAddFormData.append("action", "add");
-                likeAddFormData.append("id", id+"");
-                this.reddah.like(likeAddFormData)
-                .subscribe(data => 
-                {
-                    //console.log(JSON.stringify(data));
-                    this.cacheService.clearGroup("ReportPage");
+                this.formData.append("id", JSON.stringify(id))
+                this.formData.append("data", JSON.stringify(1))
+                this.formData.append("content", "感谢反馈，积分奖励")
+                this.reddah.reportAward(this.formData).subscribe(data=>{
+                    if(data.Success==0||data.Success==3){ 
+                        if(data.Success==0){
+                            //refresh
+                        }
+                    }
                 });
-                
-                this.renderUiLike(id, "add");*/
 
-                
-                
+
             }
 
             if(data==2)
             {
-                //set read, no award points
-                //delete in UI
-
-                /*let likeRemoveFormData = new FormData();
-                likeRemoveFormData.append("action", "remove");
-                likeRemoveFormData.append("id", id+"");
-                this.reddah.like(likeRemoveFormData)  
-                .subscribe(data => 
-                {
-                    //console.log(JSON.stringify(data));
-                    this.cacheService.clearGroup("ReportPage");
+                this.formData.append("id", JSON.stringify(id))
+                this.formData.append("data", JSON.stringify(2))
+                this.formData.append("content", "感谢反馈")
+                this.reddah.reportAward(this.formData).subscribe(data=>{
+                    if(data.Success==0||data.Success==3){ 
+                        if(data.Success==0){
+                            //refresh
+                        }
+                    }
                 });
-                this.renderUiLike(id, "remove");*/
             }
             
             if(data==3){

@@ -110,14 +110,4 @@ export class SettingListPage implements OnInit {
         }
     }
 
-    async goMyReport() {
-        const modal = await this.modalController.create({
-            component: MyReportPage,
-            componentProps: {},
-            cssClass: "modal-fullscreen",
-        });
-          
-        await modal.present();
-    }
-
 }

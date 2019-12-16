@@ -258,7 +258,8 @@
         "MiniPubMsg":"Durch die Bestätigung der Veröffentlichung erhalten die Nutzer das Update",
         "CancelPublish":"Später",
         "ConfirmPublish":"Veröffentlichung",
-        "LoginToView":"Bitte melden Sie sich an, um weitere Informationen zu erhalten"
+        "LoginToView":"Bitte melden Sie sich an, um weitere Informationen zu erhalten",
+        "MyFeedback":"My Feedback"
     },
 
     "Mail":{
@@ -324,7 +325,10 @@
         "PunchLoading":"Checking in, please wait... ",
         "PunchResult":"Today is done, point you earned",
         "PointHistory":"Point History",
-        "Award":"Award"
+        "Award":"Award",
+        "TaskReportTitle":"Report&Feedback",
+        "TaskReportAwardComment":"Thanks for report! Points award",
+        "TaskReportNoAwardComment":"Thanks for report!"
     },
     
     "Service":{
