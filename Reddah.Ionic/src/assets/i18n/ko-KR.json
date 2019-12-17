@@ -89,9 +89,9 @@
       },
       "Timeline":"공경",
       "Shake":"흔들거리다",
-      "MagicMirror":"Magic Mirror",
-      "BlackHole":"Black Hole",
-      "Mystic":"Mystic",
+      "MagicMirror":"마경",
+      "BlackHole":"블랙홀",
+      "Mystic":"차트만",
       "Platform":"개방식 플랫폼"
     },
 
@@ -262,7 +262,7 @@
         "CancelPublish":"나중에 발표",
         "ConfirmPublish":"게시 확인",
         "LoginToView":"안무 로그인",
-        "MyFeedback":"My Feedback"
+        "MyFeedback":"나의 피드백"
     },
 
     "Mail":{
@@ -281,26 +281,25 @@
     },
 
     "Mystic": {
-      "Welcome":"Hello, welcome to Reddah 😀",
-      "AddPhoto":"You don't have a photo yet, would you like to add a photo?",
-      "SetSex":"Are you a boy or a girl?",
-      "SetSignature":"You don't have a signature yet, would you like to add a signature?",
-      "AddFriend":"Find a new friend in the map?",
-      "AddPost":"Create a new post in your timeline?",
-      "AddGame":"Want to play a game?"
+      "Welcome":"안녕하세요 😀",
+      "AddPhoto":"사진을 아직 첨가하지 않으셨습니까?",
+      "SetSex":"너는 남자냐 여자냐?",
+      "SetSignature":"서명하지 않았습니다. 서명을 추가하시겠습니까?",
+      "AddFriend":"지도에서 새 친구를 하나 찾습니까?",
+      "AddPost":"너의 시간 라인에 새로운 게시물을 생성합니까?",
+      "AddGame":"게임 하고 싶어요?"
     },
 
     "Point": {
-        "TotalPointTitle":"Total Points",
-        "Slogan":"Make progress every day",
-        "RuleTitle":"Point Rules",
-        "TodayTotal":"Today:",
-        "Fen":"point(s)",
-        "AlreadyGot":"You got",
-        "DailyMax":"daily maximum",
-        "OnceMax":"maximum",
-        "Letsgo":"Go",
-        "Done":"Done",
+        "TotalPointTitle":"총점",
+        "RuleTitle":"점규칙",
+        "TodayTotal":"오늘",
+        "Fen":"점",
+        "AlreadyGot":"너 있다",
+        "DailyMax":"일일 최대치",
+        "OnceMax":"최대 값",
+        "Letsgo":"가다",
+        "Done":"다은",
         "TaskLoginTitle":"Login",
         "TaskLoginDescp":"Login Today",
         "TaskReadTitle":"Read Article",

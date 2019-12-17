@@ -89,9 +89,9 @@
         },
         "Timeline":"Diafragma",
         "Shake":"Schudden",
-        "MagicMirror":"Magic Mirror",
-        "BlackHole":"Black Hole",
-        "Mystic":"Mystic",
+        "MagicMirror":"Magische spiegel",
+        "BlackHole":"Zwart gat",
+        "Mystic":"Chatman",
         "Platform":"Platform openen"
     },
 
@@ -259,7 +259,7 @@
         "CancelPublish":"Later",
         "ConfirmPublish":"Uitgegeven",
         "LoginToView":"Dance Login voor meer",
-        "MyFeedback":"My Feedback"
+        "MyFeedback":"Mijn feedback"
     },
 
     "Mail":{
@@ -278,25 +278,24 @@
     },
 
     "Mystic": {
-        "Welcome":"Hello, welcome to Reddah 😀",
-        "AddPhoto":"You don't have a photo yet, would you like to add a photo?",
-        "SetSex":"Are you a boy or a girl?",
-        "SetSignature":"You don't have a signature yet, would you like to add a signature?",
-        "AddFriend":"Find a new friend in the map?",
-        "AddPost":"Create a new post in your timeline?",
-        "AddGame":"Want to play a game?"
+        "Welcome":"Hallo, welkom in Reddah 😀",
+        "AddPhoto":"Je hebt nog geen foto, wil je een foto toevoegen?",
+        "SetSex":"Ben je een jongen of een meisje?",
+        "SetSignature":"Je hebt nog geen handtekening, wil je een handtekening toevoegen?",
+        "AddFriend":"Vind je een nieuwe vriend op de kaart?",
+        "AddPost":"Een nieuwe post creëren in je tijdlijn?",
+        "AddGame":"Wil je een spelletje spelen?"
     },
     "Point": {
-        "TotalPointTitle":"Total Points",
-        "Slogan":"Make progress every day",
-        "RuleTitle":"Point Rules",
-        "TodayTotal":"Today:",
-        "Fen":"point(s)",
-        "AlreadyGot":"You got",
-        "DailyMax":"daily maximum",
-        "OnceMax":"maximum",
-        "Letsgo":"Go",
-        "Done":"Done",
+        "TotalPointTitle":"Totaal punten",
+        "RuleTitle":"Regels van punten",
+        "TodayTotal":"Vandaag",
+        "Fen":"punt(s)",
+        "AlreadyGot":"Je hebt",
+        "DailyMax":"dagelijks max",
+        "OnceMax":"max",
+        "Letsgo":"Ga",
+        "Done":"Gedaan",
         "TaskLoginTitle":"Login",
         "TaskLoginDescp":"Login Today",
         "TaskReadTitle":"Read Article",

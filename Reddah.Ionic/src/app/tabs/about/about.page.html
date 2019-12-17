@@ -13,10 +13,6 @@
         <ion-label slot="start">
             <div style="padding:5px 0 5px 0;">{{reddah.getDisplayName(userName)}}</div>
             <div style="display: flex;margin-top:5px;">
-                <span (click)="goCredit($event)" style="color: gray;vertical-align: top;line-height: 18px;" 
-                    *ngIf="reddah.userLevelIcon(userName)==1">
-                    {{ 'Point.TotalPointTitle' | translate }}
-                </span>
                 <ion-icon (click)="goCredit($event)" name="ribbon" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==2"></ion-icon>
                 <ion-icon (click)="goCredit($event)" name="star-outline" color="primary" size="small" *ngIf="reddah.userLevelIcon(userName)==3"></ion-icon>
                 <ion-icon (click)="goCredit($event)" name="star" color="gold" size="small" *ngIf="reddah.userLevelIcon(userName)==4"></ion-icon>

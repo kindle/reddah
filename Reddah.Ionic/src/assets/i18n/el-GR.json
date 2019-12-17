@@ -89,9 +89,9 @@
         },
         "Timeline":"Διάφραγμα",
         "Shake":"ανακίνηση",
-        "MagicMirror":"Magic Mirror",
-        "BlackHole":"Black Hole",
-        "Mystic":"Mystic",
+        "MagicMirror":"Μαγικό καθρέφτη",
+        "BlackHole":"Μαύρη Τρύπα",
+        "Mystic":"Chatman",
         "Platform":"Άνοιγμα πλατφόρμας"
     },
 
@@ -259,7 +259,7 @@
         "CancelPublish":"Αργότερα",
         "ConfirmPublish":"Δημοσίευση",
         "LoginToView":"Σύνδεση χορού για να βρεις περισσότερα",
-        "MyFeedback":"My Feedback"
+        "MyFeedback":"Η ανατροφοδότησή μου"
     },
 
     "Mail":{
@@ -278,26 +278,25 @@
     },
 
     "Mystic": {
-        "Welcome":"Hello, welcome to Reddah 😀",
-        "AddPhoto":"You don't have a photo yet, would you like to add a photo?",
-        "SetSex":"Are you a boy or a girl?",
-        "SetSignature":"You don't have a signature yet, would you like to add a signature?",
-        "AddFriend":"Find a new friend in the map?",
-        "AddPost":"Create a new post in your timeline?",
-        "AddGame":"Want to play a game?"
+        "Welcome":"Καλώς ήρθατε στο Ρέντα 😀",
+        "AddPhoto":"Δεν έχετε ακόμα φωτογραφία, θα θέλατε να προσθέσετε μια φωτογραφία?",
+        "SetSex":"Είσαι αγόρι ή κορίτσι?",
+        "SetSignature":"Δεν έχετε ακόμα υπογραφή, θα θέλατε να προσθέσετε μια υπογραφή?",
+        "AddFriend":"Βρήκες νέο φίλο στον χάρτη?",
+        "AddPost":"Δημιουργία νέας θέσης στο χρονολόγιο σας?",
+        "AddGame":"Θες να παίξουμε ένα παιχνίδι?"
     },
 
     "Point": {
-        "TotalPointTitle":"Total Points",
-        "Slogan":"Make progress every day",
-        "RuleTitle":"Point Rules",
-        "TodayTotal":"Today:",
-        "Fen":"point(s)",
-        "AlreadyGot":"You got",
-        "DailyMax":"daily maximum",
-        "OnceMax":"maximum",
-        "Letsgo":"Go",
-        "Done":"Done",
+        "TotalPointTitle":"Σύνολο σημείων",
+        "RuleTitle":"Κανόνες σημείων",
+        "TodayTotal":"Σήμερα",
+        "Fen":"σημεία",
+        "AlreadyGot":"Εσύ έχεις",
+        "DailyMax":"ημερήσια μέγιστη",
+        "OnceMax":"μέγιστη",
+        "Letsgo":"Πήγαινε",
+        "Done":"Έγινε",
         "TaskLoginTitle":"Login",
         "TaskLoginDescp":"Login Today",
         "TaskReadTitle":"Read Article",

@@ -89,9 +89,9 @@
       },
       "Timeline":"絞り",
       "Shake":"振る",
-      "MagicMirror":"Magic Mirror",
-      "BlackHole":"Black Hole",
-      "Mystic":"Mystic",
+      "MagicMirror":"マジックミラー",
+      "BlackHole":"ブラックホール",
+      "Mystic":"チャタマン",
       "Platform":"オープンプラットホーム"
     },
 
@@ -260,7 +260,7 @@
         "CancelPublish":"後で",
         "ConfirmPublish":"出版",
         "LoginToView":"ダンス登録してもっと探します",
-        "MyFeedback":"My Feedback"
+        "MyFeedback":"フィードバック"
     },
 
     "Mail":{
@@ -279,26 +279,25 @@
     },
 
     "Mystic": {
-      "Welcome":"Hello, welcome to Reddah 😀",
-      "AddPhoto":"You don't have a photo yet, would you like to add a photo?",
-      "SetSex":"Are you a boy or a girl?",
-      "SetSignature":"You don't have a signature yet, would you like to add a signature?",
-      "AddFriend":"Find a new friend in the map?",
-      "AddPost":"Create a new post in your timeline?",
-      "AddGame":"Want to play a game?"
+      "Welcome":"こんにちは、Reddahへようこそ 😀",
+      "AddPhoto":"あなたはまだ写真を持っていない、あなたは写真を追加したいですか?",
+      "SetSex":"あなたは男の子か女の子ですか?",
+      "SetSignature":"あなたはまだ署名を持っていない、あなたは署名を追加するか?",
+      "AddFriend":"地図で新しい友達を見つけるか?",
+      "AddPost":"あなたのタイムラインに新しい投稿を作成する?",
+      "AddGame":"したいゲームをプレイするには?"
     },
 
     "Point": {
-        "TotalPointTitle":"Total Points",
-        "Slogan":"Make progress every day",
-        "RuleTitle":"Point Rules",
-        "TodayTotal":"Today:",
-        "Fen":"point(s)",
-        "AlreadyGot":"You got",
-        "DailyMax":"daily maximum",
-        "OnceMax":"maximum",
-        "Letsgo":"Go",
-        "Done":"Done",
+        "TotalPointTitle":"合計点",
+        "RuleTitle":"ポイントルール",
+        "TodayTotal":"今日",
+        "Fen":"ポイント",
+        "AlreadyGot":"あなたが得た",
+        "DailyMax":"デイリーマックス",
+        "OnceMax":"マックス",
+        "Letsgo":"試み",
+        "Done":"完了",
         "TaskLoginTitle":"Login",
         "TaskLoginDescp":"Login Today",
         "TaskReadTitle":"Read Article",

@@ -89,9 +89,9 @@
         },
         "Timeline":"فتحة العدسة",
         "Shake":"هز",
-        "MagicMirror":"Magic Mirror",
-        "BlackHole":"Black Hole",
-        "Mystic":"Mystic",
+        "MagicMirror":"مرآة سحرية",
+        "BlackHole":"الثقب الأسود",
+        "Mystic":"تشاتمان",
         "Platform":"منصة مفتوحة"
     },
 
@@ -259,7 +259,7 @@
         "CancelPublish":"الآخرة",
         "ConfirmPublish":"صدر",
         "LoginToView":"الرقص تسجيل الدخول لمعرفة المزيد",
-        "MyFeedback":"My Feedback"
+        "MyFeedback":"بلدي ردود الفعل"
     },
 
     "Mail":{
@@ -278,26 +278,25 @@
     },
 
     "Mystic": {
-        "Welcome":"Hello, welcome to Reddah 😀",
-        "AddPhoto":"You don't have a photo yet, would you like to add a photo?",
-        "SetSex":"Are you a boy or a girl?",
-        "SetSignature":"You don't have a signature yet, would you like to add a signature?",
-        "AddFriend":"Find a new friend in the map?",
-        "AddPost":"Create a new post in your timeline?",
-        "AddGame":"Want to play a game?"
+        "Welcome":"مرحبا بكم في الردة",
+        "AddPhoto":"لم يكن لديك صور هل تريد إضافة صور ؟",
+        "SetSex":"هل أنت ولد أم بنت ؟",
+        "SetSignature":"أنت لم توقع بعد ، هل تريد إضافة توقيع ؟",
+        "AddFriend":"العثور على صديق جديد على الخريطة ؟",
+        "AddPost":"إنشاء وظيفة جديدة على الخط الزمني الخاص بك ؟",
+        "AddGame":"تريد أن تلعب لعبة ؟"
     },
 
     "Point": {
-        "TotalPointTitle":"Total Points",
-        "Slogan":"Make progress every day",
-        "RuleTitle":"Point Rules",
-        "TodayTotal":"Today:",
-        "Fen":"point(s)",
-        "AlreadyGot":"You got",
-        "DailyMax":"daily maximum",
-        "OnceMax":"maximum",
-        "Letsgo":"Go",
-        "Done":"Done",
+        "TotalPointTitle":"مجموع النقاط",
+        "RuleTitle":"نقطة القاعدة",
+        "TodayTotal":"تودي",
+        "Fen":"نقطة",
+        "AlreadyGot":"لديك",
+        "DailyMax":"الحد الأقصى اليومي",
+        "OnceMax":"ماكس",
+        "Letsgo":"هيا بنا",
+        "Done":"دورن",
         "TaskLoginTitle":"Login",
         "TaskLoginDescp":"Login Today",
         "TaskReadTitle":"Read Article",

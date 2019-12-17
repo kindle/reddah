@@ -89,9 +89,9 @@
         },
         "Timeline":"หลุม",
         "Shake":"เขย่าตัว",
-        "MagicMirror":"Magic Mirror",
-        "BlackHole":"Black Hole",
-        "Mystic":"Mystic",
+        "MagicMirror":"กระจกวิเศษ",
+        "BlackHole":"หลุมดำ",
+        "Mystic":"แชตเมน",
         "Platform":"แพลตฟอร์มเปิด"
     },
 
@@ -259,7 +259,7 @@
         "CancelPublish":"หลังจากนั้น",
         "ConfirmPublish":"จัดพิมพ์",
         "LoginToView":"เข้าสู่ระบบเพื่อค้นหาข้อมูลเพิ่มเติม",
-        "MyFeedback":"My Feedback"
+        "MyFeedback":"ความคิดเห็นของฉัน"
     },
 
     "Mail":{
@@ -278,26 +278,25 @@
     },
 
     "Mystic": {
-        "Welcome":"Hello, welcome to Reddah 😀",
-        "AddPhoto":"You don't have a photo yet, would you like to add a photo?",
-        "SetSex":"Are you a boy or a girl?",
-        "SetSignature":"You don't have a signature yet, would you like to add a signature?",
-        "AddFriend":"Find a new friend in the map?",
-        "AddPost":"Create a new post in your timeline?",
-        "AddGame":"Want to play a game?"
+        "Welcome":"สวัสดีครับยินดีต้อนรับสู่รีดา 😀",
+        "AddPhoto":"คุณยังไม่มีรูปเลยคุณต้องการเพิ่มรูปไหม?",
+        "SetSex":"คุณเป็นผู้ชายหรือผู้หญิง?",
+        "SetSignature":"คุณยังไม่ได้เซ็นคุณต้องการที่จะเพิ่มลายเซ็นของคุณ?",
+        "AddFriend":"หาเพื่อนใหม่บนแผนที่?",
+        "AddPost":"สร้างการโพสต์ใหม่ในเวลาของคุณ?",
+        "AddGame":"อยากเล่นเกม?"
     },
 
     "Point": {
-        "TotalPointTitle":"Total Points",
-        "Slogan":"Make progress every day",
-        "RuleTitle":"Point Rules",
-        "TodayTotal":"Today:",
-        "Fen":"point(s)",
-        "AlreadyGot":"You got",
-        "DailyMax":"daily maximum",
-        "OnceMax":"maximum",
-        "Letsgo":"Go",
-        "Done":"Done",
+        "TotalPointTitle":"จำนวนรวม",
+        "RuleTitle":"กฎจุด",
+        "TodayTotal":"วันนี้",
+        "Fen":"จุดสำคัญ",
+        "AlreadyGot":"คุณมี",
+        "DailyMax":"สูงสุดรายวัน",
+        "OnceMax":"สูงสุด",
+        "Letsgo":"ไปเถอะ",
+        "Done":"ดอน",
         "TaskLoginTitle":"Login",
         "TaskLoginDescp":"Login Today",
         "TaskReadTitle":"Read Article",

@@ -89,9 +89,9 @@
         },
         "Timeline":"Apertura",
         "Shake":"Sacudir",
-        "MagicMirror":"Magic Mirror",
-        "BlackHole":"Black Hole",
-        "Mystic":"Mystic",
+        "MagicMirror":"Espejo",
+        "BlackHole":"Agujero negro",
+        "Mystic":"Chatman",
         "Platform":"Plataforma abierta"
     },
 
@@ -259,7 +259,7 @@
         "CancelPublish":"Después",
         "ConfirmPublish":"Publicar",
         "LoginToView":"Registro de danzas",
-        "MyFeedback":"My Feedback"
+        "MyFeedback":"Mi respuesta"
     },
 
     "Mail":{
@@ -278,26 +278,25 @@
     },
 
     "Mystic": {
-        "Welcome":"Hello, welcome to Reddah 😀",
-        "AddPhoto":"You don't have a photo yet, would you like to add a photo?",
-        "SetSex":"Are you a boy or a girl?",
-        "SetSignature":"You don't have a signature yet, would you like to add a signature?",
-        "AddFriend":"Find a new friend in the map?",
-        "AddPost":"Create a new post in your timeline?",
-        "AddGame":"Want to play a game?"
+        "Welcome":"Hola. Bienvenido a reddah 😀",
+        "AddPhoto":"No se me ocurre nada, pero se me hace tarde?",
+        "SetSex":"Eres niño o niña?",
+        "SetSignature":"No tiene una firma que añadir?",
+        "AddFriend":"Buscas un nuevo amigo en el mapa?",
+        "AddPost":"Crear un nuevo mensaje en tu línea de tiempo?",
+        "AddGame":"Quieres jugar un juego?"
     },
 
     "Point": {
-        "TotalPointTitle":"Total Points",
-        "Slogan":"Make progress every day",
-        "RuleTitle":"Point Rules",
-        "TodayTotal":"Today:",
-        "Fen":"point(s)",
-        "AlreadyGot":"You got",
-        "DailyMax":"daily maximum",
-        "OnceMax":"maximum",
-        "Letsgo":"Go",
-        "Done":"Done",
+        "TotalPointTitle":"Total",
+        "RuleTitle":"Reglas de punto",
+        "TodayTotal":"Hoy",
+        "Fen":"Punto",
+        "AlreadyGot":"Sí",
+        "DailyMax":"Valor máximo del día",
+        "OnceMax":"Valor máximo",
+        "Letsgo":"Ve",
+        "Done":"Dorne",
         "TaskLoginTitle":"Login",
         "TaskLoginDescp":"Login Today",
         "TaskReadTitle":"Read Article",

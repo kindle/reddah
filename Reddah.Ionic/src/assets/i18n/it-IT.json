@@ -89,9 +89,9 @@
         },
         "Timeline":"Apertura",
         "Shake":"Agitare",
-        "MagicMirror":"Magic Mirror",
-        "BlackHole":"Black Hole",
-        "Mystic":"Mystic",
+        "MagicMirror":"Specchio magico",
+        "BlackHole":"Buco nero",
+        "Mystic":"Chatman",
         "Platform":"Piattaforma aperta"
     },
 
@@ -259,7 +259,7 @@
         "CancelPublish":"Dopo",
         "ConfirmPublish":"Pubblica",
         "LoginToView":"Dance Login per saperne di più",
-        "MyFeedback":"My Feedback"
+        "MyFeedback":"Il mio feedback"
     },
 
     "Mail":{
@@ -278,26 +278,25 @@
     },
 
     "Mystic": {
-        "Welcome":"Hello, welcome to Reddah 😀",
-        "AddPhoto":"You don't have a photo yet, would you like to add a photo?",
-        "SetSex":"Are you a boy or a girl?",
-        "SetSignature":"You don't have a signature yet, would you like to add a signature?",
-        "AddFriend":"Find a new friend in the map?",
-        "AddPost":"Create a new post in your timeline?",
-        "AddGame":"Want to play a game?"
+        "Welcome":"Ciao, benvenuto a Reddah 😀",
+        "AddPhoto":"Non hai ancora una foto, vuoi aggiungere una foto?",
+        "SetSex":"Sei un maschio o una femmina?",
+        "SetSignature":"Non avete ancora una firma, volete aggiungere una firma?",
+        "AddFriend":"Trovato un nuovo amico nella mappa?",
+        "AddPost":"Creare un nuovo posto nella tua linea temporale?",
+        "AddGame":"Vuoi fare un gioco?"
     },
 
     "Point": {
-        "TotalPointTitle":"Total Points",
-        "Slogan":"Make progress every day",
-        "RuleTitle":"Point Rules",
-        "TodayTotal":"Today:",
-        "Fen":"point(s)",
-        "AlreadyGot":"You got",
-        "DailyMax":"daily maximum",
-        "OnceMax":"maximum",
-        "Letsgo":"Go",
-        "Done":"Done",
+        "TotalPointTitle":"Punti totali",
+        "RuleTitle":"Regole dei punti",
+        "TodayTotal":"Oggi",
+        "Fen":"punti",
+        "AlreadyGot":"Tu hai",
+        "DailyMax":"al massimo",
+        "OnceMax":"max",
+        "Letsgo":"Vai",
+        "Done":"Fatto",
         "TaskLoginTitle":"Login",
         "TaskLoginDescp":"Login Today",
         "TaskReadTitle":"Read Article",

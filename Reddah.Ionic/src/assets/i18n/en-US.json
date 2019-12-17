@@ -91,7 +91,7 @@
         "Shake":"Shake",
         "MagicMirror":"Magic Mirror",
         "BlackHole":"Black Hole",
-        "Mystic":"Mystic",
+        "Mystic":"Chatman",
         "Platform":"Open Platform"
     },
 
@@ -293,13 +293,12 @@
 
     "Point": {
         "TotalPointTitle":"Total Points",
-        "Slogan":"Make progress every day",
         "RuleTitle":"Point Rules",
         "TodayTotal":"Today:",
         "Fen":"point(s)",
         "AlreadyGot":"You got",
-        "DailyMax":"daily maximum",
-        "OnceMax":"maximum",
+        "DailyMax":"daily max",
+        "OnceMax":"max",
         "Letsgo":"Go",
         "Done":"Done",
         "TaskLoginTitle":"Login",

@@ -89,9 +89,9 @@
         },
         "Timeline":"апертура",
         "Shake":"взбалтывание",
-        "MagicMirror":"Magic Mirror",
-        "BlackHole":"Black Hole",
-        "Mystic":"Mystic",
+        "MagicMirror":"Волшебное зеркало",
+        "BlackHole":"чёрная дыра",
+        "Mystic":"чатман",
         "Platform":"открытая платформа"
     },
 
@@ -259,7 +259,7 @@
         "CancelPublish":"потом",
         "ConfirmPublish":"ппубликовать",
         "LoginToView":"танец для поиска",
-        "MyFeedback":"My Feedback"
+        "MyFeedback":"обратная связь"
     },
 
     "Mail":{
@@ -278,26 +278,25 @@
     },
 
     "Mystic": {
-        "Welcome":"Hello, welcome to Reddah 😀",
-        "AddPhoto":"You don't have a photo yet, would you like to add a photo?",
-        "SetSex":"Are you a boy or a girl?",
-        "SetSignature":"You don't have a signature yet, would you like to add a signature?",
-        "AddFriend":"Find a new friend in the map?",
-        "AddPost":"Create a new post in your timeline?",
-        "AddGame":"Want to play a game?"
+        "Welcome":"Привет, добро пожаловать в Reddah 😀",
+        "AddPhoto":"у вас еще нет фотографии, хотите добавить фотографию?",
+        "SetSex":"Ты мальчик или девочка?",
+        "SetSignature":"Вы еще не подписали и хотите ли добавить подпись?",
+        "AddFriend":"найти нового друга на карте?",
+        "AddPost":"Создать новый пост в вашей временной линии?",
+        "AddGame":"Хочешь поиграть?"
     },
 
     "Point": {
-        "TotalPointTitle":"Total Points",
-        "Slogan":"Make progress every day",
-        "RuleTitle":"Point Rules",
-        "TodayTotal":"Today:",
-        "Fen":"point(s)",
-        "AlreadyGot":"You got",
-        "DailyMax":"daily maximum",
-        "OnceMax":"maximum",
-        "Letsgo":"Go",
-        "Done":"Done",
+        "TotalPointTitle":"общий балл",
+        "RuleTitle":"Правило точки",
+        "TodayTotal":"сегодня",
+        "Fen":"точка",
+        "AlreadyGot":"У тебя есть",
+        "DailyMax":"суточный максимум",
+        "OnceMax":"максимум",
+        "Letsgo":"Давай",
+        "Done":"добрая милость",
         "TaskLoginTitle":"Login",
         "TaskLoginDescp":"Login Today",
         "TaskReadTitle":"Read Article",
