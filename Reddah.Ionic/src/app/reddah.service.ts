@@ -1672,7 +1672,24 @@ export class ReddahService {
         }
     } 
 
+    //for normal image download
     getDeviceDirectory(){
+        let dir = this.file.externalRootDirectory;
+        if(this.platform.is('android'))
+        {
+            dir = this.file.externalApplicationStorageDirectory;
+        }
+        else if(this.platform.is('ipad')||this.platform.is('iphone')||this.platform.is('ios')){
+            dir = this.file.cacheDirectory;
+        }
+        else {
+            
+        }
+        return dir;
+    }
+
+    //for copy image
+    getOutputDeviceDirectory(){
         let dir = this.file.externalRootDirectory;
         if(this.platform.is('android'))
         {

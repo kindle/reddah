@@ -127,7 +127,7 @@ export class ImageViewerComponent implements OnInit {
                 handler: () => {
                     let url = item.webPreviewUrl;
                     this.clipboard.copy(url);
-                    this.reddah.toast(this.translate.instant("Common.Copy")+url, "primary");
+                    this.reddah.toast(url, "primary");
                 }
             },
             {
@@ -221,7 +221,7 @@ export class ImageViewerComponent implements OnInit {
                 let fileName = this.getFileName(item.previewImageFileName.replace("_reddah_preview",""));
                 let path = item.localFileImageUrl.replace(fileName, "");
                 let newFileName = fileName;
-                let newPath = this.reddah.getDeviceDirectory() + "DCIM/Reddah/";
+                let newPath = this.reddah.getOutputDeviceDirectory() + "DCIM/Reddah/";
 
                 this.file.copyFile(path, fileName, newPath, newFileName).then((data)=>{
                     toast.present();
@@ -249,7 +249,7 @@ export class ImageViewerComponent implements OnInit {
         let fileName = this.getFileName(item.previewImageFileName.replace("_reddah_preview",""));
         let path = item.localFileImageUrl.replace(fileName, "");
         let newFileName = fileName;
-        let newPath = this.reddah.getDeviceDirectory() + "DCIM/Reddah/";
+        let newPath = this.reddah.getOutputDeviceDirectory() + "DCIM/Reddah/";
 
         let briefTarget = "DCIM/Reddah/";// + newFileName;
 

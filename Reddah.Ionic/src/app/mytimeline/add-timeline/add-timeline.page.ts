@@ -143,6 +143,14 @@ export class AddTimelinePage implements OnInit {
     location;
     formData = new FormData();
 
+    pressImage(){
+        this.dragging = true;
+    }
+
+    pressUpImage(){
+        this.dragging = false;
+    }
+
     async submit(){
         const loading = await this.loadingController.create({
             message: this.translate.instant("Article.Loading"),

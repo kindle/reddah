@@ -18,7 +18,7 @@
             <img [id]="reddah.makeItId(image.webUrl+'addtl')" 
             (load)="reddah.adjustImage(image.webUrl, 'addtl')" 
             [src]="reddah.level2Cache(image.webUrl)"
-            (click)="viewer(i, photos)">
+            (click)="viewer(i, photos)" (press)="pressImage()" (pressup)="pressUpImage()">
         </div>
         <div class="imgSqure addImg" (click)="addNewPhoto($event)" *ngIf="photos.length<9">
           <ion-icon name="add" size="large" color="medium"></ion-icon>
@@ -55,7 +55,7 @@
 </ion-content>
 <ion-footer *ngIf="dragging" style="--background:red;background-color: red;color: white;">
     <ion-row id="delete-photo" class="delete-area" align-items-center justify-content-center dragula="bag" [(dragulaModel)]="photos_trash">
-        <ion-icon name="ios-trash" color="tertiary" size="medium"></ion-icon>
+        <ion-icon name="ios-trash" color="tertiary" size="small"></ion-icon>
         <ion-text *ngIf="dragToDel" color="white">{{ 'Pop.ReleaseToDel' | translate }}</ion-text>
         <ion-text *ngIf="!dragToDel">{{ 'Pop.DragToDel' | translate }}</ion-text>
     </ion-row>
