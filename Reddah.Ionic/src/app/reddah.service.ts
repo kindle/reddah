@@ -52,6 +52,9 @@ export class ReddahService {
         private datePipe: DatePipe,
     ) { }
 
+    articles = [];
+    loadedIds = [];
+
     //******************************** */
     private registersubUrl = 'https://login.reddah.com/api/pub/registersub'; 
     
@@ -71,6 +74,16 @@ export class ReddahService {
         .pipe(
             tap(data => this.log('register')),
             catchError(this.handleError('register', []))
+        );
+    }
+    //******************************** */
+    private checkUserNameUrl = 'https://login.reddah.com/api/auth/checkusername'; 
+    
+    checkUserName(formData): Observable<any> {
+        return this.http.post<any>(this.checkUserNameUrl, formData)
+        .pipe(
+            tap(data => this.log('check user name')),
+            catchError(this.handleError('check user name', []))
         );
     }
     //******************************** */

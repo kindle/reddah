@@ -6,20 +6,31 @@
         <h2 class="title">{{ 'Register.Title' | translate }}</h2>
     </ion-item>
 
+    <ion-item lines="none" class="sectionGapTop gapBottom inputItem" no-padding *ngIf="errorMessage.length>0">
+        <ion-text color="danger">
+            {{errorMessage}}
+        </ion-text>
+    </ion-item>
+
     <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
-        <ion-input type="text" placeholder="{{ 'Input.UserName' | translate }}" [(ngModel)]="username" clearInput></ion-input>
+        <ion-input type="text" placeholder="{{ 'Input.UserName' | translate }}" 
+        [(ngModel)]="username" clearInput (ionBlur)="checkUserName()"></ion-input>
+        <ion-spinner name="dots" slot="end" *ngIf="checkFlagUserName"></ion-spinner>
     </ion-item>
 
     <ion-item class="gapBottom inputItem" no-padding>
-        <ion-input type="password" placeholder="{{ 'Input.Password' | translate }}" [(ngModel)]="password" clearInput></ion-input>
+        <ion-input type="password" placeholder="{{ 'Input.Password' | translate }}" 
+        [(ngModel)]="password" clearInput></ion-input>
     </ion-item>
 
     <ion-item class="gapBottom inputItem" no-padding>
-        <ion-input type="password" placeholder="{{ 'Input.ConfirmPassword' | translate }}" [(ngModel)]="confirmpassword" clearInput></ion-input>
+        <ion-input type="password" placeholder="{{ 'Input.ConfirmPassword' | translate }}" 
+        [(ngModel)]="confirmpassword" clearInput (ionBlur)="checkConfirmPassword()"></ion-input>
     </ion-item>
 
     <ion-item class="gapBottom inputItem" no-padding>
-        <ion-input type="text" placeholder="{{ 'Input.Email' | translate }}" [(ngModel)]="email" clearInput></ion-input>
+        <ion-input type="text" placeholder="{{ 'Input.Email' | translate }}" 
+        [(ngModel)]="email" clearInput (ionBlur)="checkEmail()"></ion-input>
     </ion-item>
     
     <ion-item lines="none" class="gapBottom inputItem" no-padding>

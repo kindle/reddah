@@ -21,8 +21,7 @@ import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page
 })
 export class HomePage implements OnInit {
 
-    articles = [];
-    loadedIds = [];
+    
     dislikeGroups = [];
     dislikeUserNames = [];
 
@@ -42,6 +41,8 @@ export class HomePage implements OnInit {
         private translate:TranslateService,
     ){
         this.userName = this.reddah.getCurrentUser();
+        this.reddah.articles = [];
+        this.reddah.loadedIds = [];
     }
 
     firstLoad = false;
@@ -56,8 +57,8 @@ export class HomePage implements OnInit {
         
         if(cacheArticles){
             let top = 20;
-            this.articles = JSON.parse(cacheArticles).slice(0,top);
-            this.loadedIds = JSON.parse(cacheArticleIds).slice(0,top);
+            this.reddah.articles = JSON.parse(cacheArticles).slice(0,top);
+            this.reddah.loadedIds = JSON.parse(cacheArticleIds).slice(0,top);
             this.dislikeGroups = JSON.parse(cacheDislikeGroups);
             this.dislikeUserNames = JSON.parse(cacheDislikeUserNames);
         }
@@ -65,11 +66,11 @@ export class HomePage implements OnInit {
         {
             this.firstLoad = true;
             let locale = this.reddah.getCurrentLocale();
-            let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds)
+            let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.reddah.loadedIds)
                 + JSON.stringify(this.dislikeGroups) + JSON.stringify(this.dislikeUserNames) 
                 + locale;
             let request = this.reddah.getArticles(
-                this.loadedIds, 
+                this.reddah.loadedIds, 
                 this.dislikeGroups,
                 this.dislikeUserNames,
                 locale, "promoted");
@@ -78,16 +79,16 @@ export class HomePage implements OnInit {
             .subscribe(articles => 
             {
                 for(let article of articles){
-                    this.articles.push(article);
-                    this.loadedIds.push(article.Id);
+                    this.reddah.articles.push(article);
+                    this.reddah.loadedIds.push(article.Id);
                     if(!this.reddah.publishers.has(article.UserName))
                     {
                         this.reddah.publishers.add(article.UserName);
                         this.reddah.getUserPhotos(article.UserName);
                     }
                 }
-                this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
-                this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.loadedIds));
+                this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
+                this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.reddah.loadedIds));
                 this.localStorageService.store("reddah_article_groups_"+this.userName, JSON.stringify(this.dislikeGroups));
                 this.localStorageService.store("reddah_article_usernames_"+this.userName, JSON.stringify(this.dislikeUserNames));
                 
@@ -101,11 +102,11 @@ export class HomePage implements OnInit {
         if(locale==null)
             locale = "en-US"
 
-        let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.loadedIds)
+        let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.reddah.loadedIds)
             + JSON.stringify(this.dislikeGroups) + JSON.stringify(this.dislikeUserNames) 
             + locale;
         let request = this.reddah.getArticles(
-            this.loadedIds, 
+            this.reddah.loadedIds, 
             this.dislikeGroups,
             this.dislikeUserNames,
             locale, "random");
@@ -115,12 +116,12 @@ export class HomePage implements OnInit {
         {
             for(let article of articles){
                 if(unshift){
-                    this.articles.unshift(article);
-                    this.loadedIds.unshift(article.Id);  
+                    this.reddah.articles.unshift(article);
+                    this.reddah.loadedIds.unshift(article.Id);  
                 }
                 else{
-                    this.articles.push(article);
-                    this.loadedIds.push(article.Id);  
+                    this.reddah.articles.push(article);
+                    this.reddah.loadedIds.push(article.Id);  
                 }
                 if(!this.reddah.publishers.has(article.UserName))
                 {
@@ -128,8 +129,8 @@ export class HomePage implements OnInit {
                     this.reddah.getUserPhotos(article.UserName);
                 }
             }
-            this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
-            this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.loadedIds));
+            this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
+            this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.reddah.loadedIds));
             this.localStorageService.store("reddah_article_groups_"+this.userName, JSON.stringify(this.dislikeGroups));
             this.localStorageService.store("reddah_article_usernames_"+this.userName, JSON.stringify(this.dislikeUserNames));
                 
@@ -147,8 +148,8 @@ export class HomePage implements OnInit {
         this.localStorageService.clear("reddah_article_groups_"+this.userName);
         this.localStorageService.clear("reddah_article_usernames_"+this.userName);
             
-        this.articles = [];
-        this.loadedIds = [];
+        this.reddah.articles = [];
+        this.reddah.loadedIds = [];
         this.dislikeGroups = [];
         this.dislikeUserNames = [];
         this.getArticles(event);
@@ -193,7 +194,7 @@ export class HomePage implements OnInit {
         });
         
         await viewerModal.present();
-        this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
+        this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
         const { data } = await viewerModal.onDidDismiss();
         if(data||!data){   
             article.Read = true;
@@ -266,9 +267,9 @@ export class HomePage implements OnInit {
         {
             //UI remove 
             if(data.Id!=-1){
-                this.articles.forEach((item, index)=>{
+                this.reddah.articles.forEach((item, index)=>{
                     if(item.Id==article.Id)
-                        this.articles.splice(index, 1);
+                        this.reddah.articles.splice(index, 1);
                 })
             }
             
@@ -278,25 +279,25 @@ export class HomePage implements OnInit {
                 this.dislikeUserNames.push(data.Key);
                 this.localStorageService.store("reddah_article_usernames_"+this.userName, JSON.stringify(this.dislikeUserNames));
                 //ui delete
-                this.articles.forEach((item, index)=>{
+                this.reddah.articles.forEach((item, index)=>{
                     if(item.UserName==article.UserName)
-                        this.articles.splice(index, 1);
+                        this.reddah.articles.splice(index, 1);
                 })
             }
             if(data.Id>10){
                 this.dislikeGroups.push(data.Key);
                 this.localStorageService.store("reddah_article_groups_"+this.userName, JSON.stringify(this.dislikeGroups));
                 //ui delete
-                this.articles.forEach((item, index)=>{
+                this.reddah.articles.forEach((item, index)=>{
                     if(item.GroupName.indexOf(data.Key+",")||
                     item.GroupName.indexOf(","+data.Key+",")|| 
                     item.GroupName.indexOf(","+data.Key))
-                        this.articles.splice(index, 1);
+                        this.reddah.articles.splice(index, 1);
                 })
             }
 
             //cache remove
-            this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
+            this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
             
             //sys report
             //further, flink analytics etc.
@@ -323,9 +324,9 @@ export class HomePage implements OnInit {
         const { data } = await modal.onDidDismiss();
         if(data==true)
         {
-            this.articles.forEach((item, index)=>{
+            this.reddah.articles.forEach((item, index)=>{
                 if(item.Id==article.Id)
-                    this.articles.splice(index, 1);
+                    this.reddah.articles.splice(index, 1);
             })
         }
     }

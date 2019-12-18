@@ -82,7 +82,9 @@ namespace Reddah.Web.Login.Controllers
                         userName,
                         password,
                         new { Email = email },
-                        true);
+                        false);
+                        //do not verify as some emaill can't got mail
+                        //true);
 
                     var userJustCreated = db.UserProfile.FirstOrDefault(u => u.UserName == userName);
                     Helpers.Email(
@@ -96,6 +98,40 @@ namespace Reddah.Web.Login.Controllers
                             userName, locale, userJustCreated.UserId, verifyToken),
                             true
                     );
+                }
+
+                return Ok(new ApiResult(0, ""));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        /// <summary>
+        /// register normal personal account type==0
+        /// </summary>
+        /// <returns></returns>
+        [Route("checkusername")]
+        public IHttpActionResult CheckUserName()
+        {
+            try
+            {
+                string userName = HttpContext.Current.Request["UserName"];
+                
+                if (String.IsNullOrWhiteSpace(userName))
+                    return Ok(new ApiResult(1, "No user name"));
+
+                //Regex reg = new Regex(@"^\w+$");//字母、数字和下划线
+                Regex reg = new Regex("^[a-zA-Z0-9]\\w{5,17}$");//字母、数字
+                if (!reg.IsMatch(userName))
+                    return Ok(new ApiResult(1001, "user name invalid"));
+
+                using (var db = new reddahEntities())
+                {
+                    var userExist = db.UserProfile.FirstOrDefault(u => u.UserName == userName || u.UserName.Contains(userName));
+                    if (userExist != null)
+                        return Ok(new ApiResult(1003, "User exist"));
                 }
 
                 return Ok(new ApiResult(0, ""));

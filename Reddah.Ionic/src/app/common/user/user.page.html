@@ -22,14 +22,14 @@
                 <ion-icon class="cmd-title" name="ios-female" size="small" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
             </ion-item>
             <ion-item lines="none" no-padding no-margin>
+                <ion-icon name="radio-button-off" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==1"></ion-icon>
                 <ion-icon name="ribbon" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==2"></ion-icon>
                 <ion-icon name="star-outline" color="primary" size="small" *ngIf="reddah.userLevelIcon(userName)==3"></ion-icon>
                 <ion-icon name="star" color="gold" size="small" *ngIf="reddah.userLevelIcon(userName)==4"></ion-icon>
                 <ion-icon name="medal" color="point" size="small" *ngIf="reddah.userLevelIcon(userName)==5"></ion-icon>
                 <ion-icon name="trophy" color="diamond" size="small" *ngIf="reddah.userLevelIcon(userName)==6"></ion-icon>
                 <ion-icon name="school" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==7"></ion-icon>
-                
-                <span *ngIf="reddah.appData('usernickname_'+userName)">
+                <span style="margin-left:5px;" *ngIf="reddah.appData('usernickname_'+userName)">
                     {{ reddah.userLevel(userName) | translate }}
                 </span>
             </ion-item>

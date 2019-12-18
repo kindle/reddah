@@ -5,7 +5,7 @@
         </ion-refresher-content>
     </ion-refresher>
     <ion-spinner name="bubbles" *ngIf="firstLoad" style="margin:15px 50%;transform: translateX(-50%);"></ion-spinner>
-    <ng-template ngFor let-article [ngForOf]="articles" id="homepage" style="color: #636468;font-family: 'Segoe UI', Arial, sans-serif;">
+    <ng-template ngFor let-article [ngForOf]="reddah.articles" id="homepage" style="color: #636468;font-family: 'Segoe UI', Arial, sans-serif;">
         <div class="postModuleLiner" *ngIf="article.VideoUrl.length>0">
             <div>
                 <span [class.articleTextRead]="article.Read" class="articleTitle" (click)="view(article)">{{reddah.htmlDecode(article.Title)}}</span>

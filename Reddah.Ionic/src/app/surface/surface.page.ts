@@ -65,7 +65,7 @@ export class SurfacePage implements OnInit {
             this.translate.use(currentLocale);
         }
         this.init(null);
-        setTimeout(()=>{this.tap()},2000)
+        setTimeout(()=>{this.tap()},1500)
     }
 
     isAuthenticated() {

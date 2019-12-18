@@ -4,6 +4,8 @@ import { ReddahService } from '../../reddah.service';
 import { LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { CacheService } from 'ionic-cache';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
     selector: 'app-register',
@@ -17,6 +19,8 @@ export class RegisterPage implements OnInit {
         private loadingController: LoadingController,
         private translate: TranslateService,
         private iab: InAppBrowser,
+        private cacheService: CacheService,
+        private localStorageService: LocalStorageService,
     ) { }
 
     locale;
@@ -34,7 +38,7 @@ export class RegisterPage implements OnInit {
         if (this.username.length == 0) {
             this.reddah.toast(this.translate.instant("Input.Error.UserNameEmpty"));
         }
-        else if (this.username.length >= 25) {
+        else if (this.username.length > 18) {
             this.reddah.toast(this.translate.instant("Input.Error.UserNameTooLong"));
         }else if (this.password.length == 0) {
             this.reddah.toast(this.translate.instant("Input.Error.PasswordEmpty"));
@@ -73,6 +77,7 @@ export class RegisterPage implements OnInit {
                     this.reddah.setLoginUserName(this.username);
                     this.reddah.toast(this.translate.instant("Register.Success"), "primary");
                     this.modalController.dismiss(true);
+                    this.preloadArticles();
                 }
                 else{
                     let msg = this.translate.instant(`Service.${result.Success}`);
@@ -103,5 +108,85 @@ export class RegisterPage implements OnInit {
         });
         
         browser.close();*/
+    }
+
+    errorMessage = "";
+    checkFlagUserName = false;
+    async checkUserName(){
+        if(this.username.length<6||this.username.length>18){
+            this.errorMessage = this.translate.instant(`Service.1001`);
+            return;
+        }
+
+        this.checkFlagUserName = true;
+        let formData = new FormData();
+        formData.append("username",this.username)
+        this.reddah.checkUserName(formData).subscribe(data=>{
+            if(data.Success==0)
+            {
+                this.errorMessage = "";
+            }
+            else{
+                this.errorMessage = this.translate.instant(`Service.${data.Success}`);
+            }
+            this.checkFlagUserName = false;
+        })
+
+    }
+
+    checkConfirmPassword(){
+        if (this.password!=this.confirmpassword) {
+            this.errorMessage = this.translate.instant("Input.Error.PasswordDifferent");
+        }
+        else{
+            this.errorMessage = "";
+        }
+    }
+
+
+    checkEmail(){
+        if(this.isEmail(this.email)){
+            this.errorMessage = "";
+        }
+        else{
+            this.errorMessage = this.translate.instant(`Service.1002`);
+        }
+    }
+
+    private isEmail(email):boolean
+    {
+        const emailReg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/g
+        return emailReg.test(email);
+    }
+
+    async preloadArticles(){
+        let locale = this.reddah.getCurrentLocale();
+        let cacheKey = "this.reddah.getArticles" + JSON.stringify([])
+            + JSON.stringify([]) + JSON.stringify([]) 
+            + locale;
+        let request = this.reddah.getArticles(
+            [], 
+            [],
+            [],
+            locale, "promoted");
+
+        this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
+        .subscribe(articles => 
+        {
+            for(let article of articles){
+                this.reddah.articles.push(article);
+                this.reddah.loadedIds.push(article.Id);
+                if(!this.reddah.publishers.has(article.UserName))
+                {
+                    this.reddah.publishers.add(article.UserName);
+                    this.reddah.getUserPhotos(article.UserName);
+                }
+            }
+            this.localStorageService.store("reddah_articles_"+this.username, JSON.stringify(this.reddah.articles));
+            this.localStorageService.store("reddah_article_ids_"+this.username, JSON.stringify(this.reddah.loadedIds));
+            this.localStorageService.store("reddah_article_groups_"+this.username, JSON.stringify([]));
+            this.localStorageService.store("reddah_article_usernames_"+this.username, JSON.stringify([]));
+            
+        });
     }
 }
