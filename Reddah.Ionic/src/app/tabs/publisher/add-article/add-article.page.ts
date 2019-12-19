@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PopoverController, NavController, LoadingController, ModalController, AlertController } from '@ionic/angular'
-import { TimelinePopPage } from '../../../common/timeline-pop.page';
-import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../../../reddah.service';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -14,6 +12,14 @@ import { DragulaService } from 'ng2-dragula';
 import { AddMaterialPage } from '../../../mytimeline/add-material/add-material.page';
 import { PostviewerPage } from '../../../postviewer/postviewer.page';
 import { TranslateService } from '@ngx-translate/core';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+//import Image from '@ckeditor/ckeditor5-image/src/image';
+//import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
+//import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
+//import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
+//import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
+
+
 
 @Component({
     selector: 'app-add-article',
@@ -22,6 +28,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AddArticlePage implements OnInit {
 
+    public Editor = ClassicEditor;
+    
+
     @Input() targetUserName;
     @Input() article;
     
@@ -29,25 +38,38 @@ export class AddArticlePage implements OnInit {
     content: string = "";
     groupName: string = "";
 
+    
     config = {
         language: this.reddahService.getCurrentLocale(),
         //uiColor: '#9AB8F3',
-        toolbar_Reddah: [[
+        toolbar: [
+            'ImageUpload',
+            'insertTable',
+            'mediaEmbed',
+            
             'Bold', 'Italic', 'Strike', 'RemoveFormat', '-', 
             'Undo','Redo','-',
 
             'Styles', 'Format', '-',
-            'Table', 'Image', 'HorizontalRule', '-',
+            'Table', 'HorizontalRule', '-',
         
             'NumberedList', 'BulletedList', 'Blockquote', '-', 
             'Link', 'Unlink', 'Anchor', '-', 
             
             'Source'
-        ]],
-
-        toolbar: 'Reddah',
-
-        
+        ],
+        ckfinder: {
+			// eslint-disable-next-line max-len
+			uploadUrl: 'https://cksource.com/weuy2g4ryt278ywiue/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+        },
+        image: {
+            toolbar: [
+                'imageStyle:full',
+                'imageStyle:side',
+                '|',
+                'imageTextAlternative'
+            ]
+        },
         //filebrowserBrowseUrl: '&&&&&',
         //filebrowserUploadUrl: '&&&'
     };
@@ -69,7 +91,15 @@ export class AddArticlePage implements OnInit {
         private translate: TranslateService,
         private alertController: AlertController,
     ) { 
-        
+        /*ClassicEditor
+        .create( document.querySelector( '#editor' ), {
+            plugins: [ Image, ImageToolbar, ImageCaption, ImageStyle, ImageResize ],
+            image: {
+                toolbar: [ 'imageTextAlternative', '|', 'imageStyle:full', 'imageStyle:side' ]
+            }
+        } )
+        .then()
+        .catch();*/
     }
 
 

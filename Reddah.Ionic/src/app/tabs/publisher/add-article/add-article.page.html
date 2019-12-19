@@ -9,7 +9,8 @@
         <ion-textarea autoresize [(ngModel)]="title" cols="20" placeholder="{{ 'Input.Name' | translate }}..."></ion-textarea>
     </ion-item>
     <ion-item lines="none" no-padding>
-        <ckeditor style="width:100%;" [(ngModel)]="content"
+        <ckeditor style="width:100%;" [editor]="Editor" 
+            [data]="content"
             debounce="500"
             [config]="config">
         </ckeditor> 
