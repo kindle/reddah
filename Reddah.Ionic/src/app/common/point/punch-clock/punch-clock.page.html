@@ -23,7 +23,7 @@
                 </ion-card-subtitle>
             </ion-item>
             <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;" *ngIf="punchClockLoading">
-                ...
+                <ion-spinner name="dots"></ion-spinner>
             </ion-card-title>
             <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;" *ngIf="!punchClockLoading">
                 +{{pointPunchToday}}

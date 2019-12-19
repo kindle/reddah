@@ -31,6 +31,7 @@ namespace Reddah.Web.Login.Controllers
                 string password = HttpContext.Current.Request["Password"];
                 string email = HttpContext.Current.Request["Email"];
                 string locale = HttpContext.Current.Request["Locale"];
+                string hasToken = HttpContext.Current.Request["Token"];
 
                 string emailTitle = HttpContext.Current.Request["MailTitle"];
                 string emailSub = HttpContext.Current.Request["MailSub"];
@@ -82,7 +83,7 @@ namespace Reddah.Web.Login.Controllers
                         userName,
                         password,
                         new { Email = email },
-                        false);
+                        string.IsNullOrWhiteSpace(hasToken));
                         //do not verify as some emaill can't got mail
                         //true);
 

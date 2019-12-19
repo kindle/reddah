@@ -93,6 +93,10 @@ export class SigninPage implements OnInit {
         });
         
         await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            this.reddah.preloadArticles(data)
+        }
     }
 
     async forgot(){

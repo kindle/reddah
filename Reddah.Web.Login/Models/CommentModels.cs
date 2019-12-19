@@ -92,6 +92,10 @@ namespace Reddah.Web.Login
         public bool Shake { get; set; }
         public int TodayTotalPoint { get; set; }
         public string Test { get; set; }
+        public int TodayRead { get; set; }
+        public int TodayMark { get; set; }
+        public int TodayShare { get; set; }
+        public int TodayComment { get; set; }
 
     }
 

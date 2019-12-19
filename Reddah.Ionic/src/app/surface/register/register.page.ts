@@ -76,8 +76,7 @@ export class RegisterPage implements OnInit {
                 if(result.Success==0){
                     this.reddah.setLoginUserName(this.username);
                     this.reddah.toast(this.translate.instant("Register.Success"), "primary");
-                    this.modalController.dismiss(true);
-                    this.preloadArticles();
+                    this.modalController.dismiss(this.username);
                 }
                 else{
                     let msg = this.translate.instant(`Service.${result.Success}`);
@@ -159,34 +158,4 @@ export class RegisterPage implements OnInit {
         return emailReg.test(email);
     }
 
-    async preloadArticles(){
-        let locale = this.reddah.getCurrentLocale();
-        let cacheKey = "this.reddah.getArticles" + JSON.stringify([])
-            + JSON.stringify([]) + JSON.stringify([]) 
-            + locale;
-        let request = this.reddah.getArticles(
-            [], 
-            [],
-            [],
-            locale, "promoted");
-
-        this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
-        .subscribe(articles => 
-        {
-            for(let article of articles){
-                this.reddah.articles.push(article);
-                this.reddah.loadedIds.push(article.Id);
-                if(!this.reddah.publishers.has(article.UserName))
-                {
-                    this.reddah.publishers.add(article.UserName);
-                    this.reddah.getUserPhotos(article.UserName);
-                }
-            }
-            this.localStorageService.store("reddah_articles_"+this.username, JSON.stringify(this.reddah.articles));
-            this.localStorageService.store("reddah_article_ids_"+this.username, JSON.stringify(this.reddah.loadedIds));
-            this.localStorageService.store("reddah_article_groups_"+this.username, JSON.stringify([]));
-            this.localStorageService.store("reddah_article_usernames_"+this.username, JSON.stringify([]));
-            
-        });
-    }
 }

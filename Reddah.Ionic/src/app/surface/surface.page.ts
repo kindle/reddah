@@ -16,6 +16,7 @@ import { AuthService } from '../auth.service';
 import { RegisterPage } from './register/register.page'
 import { Globalization } from '@ionic-native/globalization';
 import { MapPage } from '../map/map.page';
+import { CacheService } from 'ionic-cache';
 
 @Component({
     selector: 'app-surface',
@@ -33,6 +34,7 @@ export class SurfacePage implements OnInit {
         private authService: AuthService,
         private localStorageService: LocalStorageService,
         private translate: TranslateService,
+        private cacheService: CacheService,
     ) {
         
     }
@@ -84,6 +86,7 @@ export class SurfacePage implements OnInit {
         await modal.present();
         const { data } = await modal.onDidDismiss();
         if(data){
+            this.reddah.preloadArticles(data)
             this.signin();
         }
         else{

@@ -55,6 +55,37 @@ export class ReddahService {
     articles = [];
     loadedIds = [];
 
+    async preloadArticles(username){
+        let locale = this.getCurrentLocale();
+        let cacheKey = "this.reddah.getArticles" + JSON.stringify([])
+            + JSON.stringify([]) + JSON.stringify([]) 
+            + locale;
+        let request = this.getArticles(
+            [], 
+            [],
+            [],
+            locale, "promoted");
+
+        this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
+        .subscribe(articles => 
+        {
+            for(let article of articles){
+                this.articles.push(article);
+                this.loadedIds.push(article.Id);
+                if(!this.publishers.has(article.UserName))
+                {
+                    this.publishers.add(article.UserName);
+                    this.getUserPhotos(article.UserName);
+                }
+            }
+            this.localStorageService.store("reddah_articles_"+username, JSON.stringify(this.articles));
+            this.localStorageService.store("reddah_article_ids_"+username, JSON.stringify(this.loadedIds));
+            this.localStorageService.store("reddah_article_groups_"+username, JSON.stringify([]));
+            this.localStorageService.store("reddah_article_usernames_"+username, JSON.stringify([]));
+            
+        });
+    }
+
     //******************************** */
     private registersubUrl = 'https://login.reddah.com/api/pub/registersub'; 
     
@@ -1834,6 +1865,25 @@ export class ReddahService {
                 }
             
             });
+
+            if(userName==this.getCurrentUser()){
+                this.checkOncePoint().subscribe(data=>{
+                    if(data.Success==0){
+                        this.setPointNoDate("Photo", data.Message.Photo);
+                        this.setPointNoDate("Signature", data.Message.Signature);
+                        this.setPointNoDate("Timeline", data.Message.Timeline);
+                        this.setPointNoDate("Mini", data.Message.Mini);
+                        this.setPointNoDate("Friend", data.Message.Friend);
+                        this.setPointNoDate("Shake", data.Message.Shake);
+                        this.setPoint("TodayTotalPoint", data.Message.TodayTotalPoint)
+                        this.setPoint('Read', data.Message.TodayRead);
+                        this.setPoint('Mark', data.Message.TodayMark);
+                        this.setPoint('Share', data.Message.TodayShare);
+                        this.setPoint('Comment', data.Message.TodayComment);
+                    }
+                });
+            }
+            
         }
         catch(error){
             alert(error)

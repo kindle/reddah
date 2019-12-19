@@ -421,6 +421,7 @@ namespace Reddah.Web.Login.Controllers
                 result.Mini = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "mini") != null;
                 result.Friend = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "friend") != null;
                 result.Shake = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "shake") != null;
+
                 var today = DateTime.UtcNow.AddMinutes(-1 * minitesOffset);
                 var todayPoints = db.Point.Where(p => p.To == jwtResult.JwtUser.User).OrderByDescending(p=>p.Id).Take(100).ToList();
                 foreach(var p in todayPoints)
@@ -428,6 +429,22 @@ namespace Reddah.Web.Login.Controllers
                     if(p.CreatedOn.AddMinutes(-1 * minitesOffset).Date == today.Date)
                     {
                         result.TodayTotalPoint += p.V;
+                        if (p.Reason == "read")
+                        {
+                            result.TodayRead += p.V;
+                        }
+                        else if (p.Reason == "mark")
+                        {
+                            result.TodayMark += p.V;
+                        }
+                        else if (p.Reason == "share")
+                        {
+                            result.TodayShare += p.V;
+                        }
+                        else if (p.Reason == "comment")
+                        {
+                            result.TodayComment += p.V;
+                        }
                     }
                 }
 
