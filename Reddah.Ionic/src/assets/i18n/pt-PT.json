@@ -12,7 +12,6 @@
         "ForgotPassword":"Senha Esquecida",
         "Loading":"Logina..."
     },
-
     "Register":{
         "Title":"Registo",
         "TitleSub":"Editor do registo",
@@ -24,7 +23,8 @@
         "Content":"Política de conteúdo",
         "Loading":"Registo...",
         "Success":"O registo é BEM sucedido.Por favor, login",
-        "Manage":"Gerir"
+        "Manage":"Gerir",
+        "SuccessNonUser":"O registo é BEM sucedido"
     },
 
     "Input":{
@@ -263,11 +263,15 @@
     },
 
     "Mail":{
+        "Title":"Conta Reddah",
+        "ParaEnd":"Depois disso, Pode fazer login.Obrigado por usar Reddah!",
         "Register":{
-            "Title":"Conta Reddah",
             "Sub":"Verificar o seu endereço de e-mail‏",
-            "ParaStart":"Por favor, visite este link para verificar o seu endereço de e-mail",
-            "ParaEnd":"Depois disso, Pode fazer login.Obrigado por usar Reddah!"
+            "ParaStart":"Por favor, visite este link para verificar o seu endereço de e-mail"
+        },
+        "RegisterPub":{
+            "Sub":"Ansioso para ver seu trabalho",
+            "ParaStart":"Bem-vinda! Para visualizar o documento, clique no seguinte link"
         },
         "Reset":{
             "Title":"Conta Reddah",
@@ -320,6 +324,8 @@
         "TaskFirstFriendDescp":"Primeira vez para se candidatar a Amigo",
         "TaskFirstShakeTitle":"Agitar",
         "TaskFirstShakeDescp":"Primeira vez que USAR shake",
+        "TaskFirstEmailTitle":"Verificar e-mail",
+        "TaskFirstEmailDescp":"Primeira vez para verificar o email",
         "PunchClock":"Pontapé Diário",
         "PunchClockTitle":"Calendário de Pontos",
         "PunchLoading":"Verificando, por favor espere...",

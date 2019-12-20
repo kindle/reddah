@@ -15,6 +15,7 @@ import { ChangePhotoPage } from '../change-photo/change-photo.page';
 import { SettingSignaturePage } from '../../settings/setting-signature/setting-signature.page';
 import { TimelinePopPage } from '../timeline-pop.page';
 import { AddTimelinePage } from '../../mytimeline/add-timeline/add-timeline.page';
+import { SettingAccountPage } from '../../settings/setting-account/setting-account.page';
 
 @Component({
     selector: 'app-point',
@@ -122,6 +123,9 @@ export class PointPage implements OnInit {
         else if(task.id==11){//shake
             this.shake();
         }
+        else if(task.id==12){//email
+            this.email();
+        }
         else{
             this.close();
         }
@@ -225,6 +229,22 @@ export class PointPage implements OnInit {
         const { data } = await modal.onDidDismiss();
         if(data){
             this.reddah.saveUserLocation(this.userName, data, data.location.lat, data.location.lng);
+        }
+    }
+
+    async email(){
+        const modal = await this.modalController.create({
+            component: SettingAccountPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        
+        await modal.present();
+          
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            this.reddah.getUserPhotos(this.userName);
         }
     }
 

@@ -24,7 +24,8 @@
         "Content":"内容政策",
         "Loading":"正在注册...",
         "Success":"注册成功，請登入",
-        "Manage":"管理"
+        "Manage":"管理",
+        "SuccessNonUser":"注册成功"
     },
 
     "Input":{
@@ -266,11 +267,15 @@
     },
 
     "Mail":{
+        "Title":"Reddah帳戶郵件",
+        "ParaEnd":"完成後您可以登入App，感謝您使用Reddah!",
         "Register":{
-            "Title":"Reddah帳戶郵件",
             "Sub":"請驗證您的郵箱‏",
-            "ParaStart":"請訪問以下連結來驗證您的郵箱",
-            "ParaEnd":"完成後您可以登入App，感謝您使用Reddah!"
+            "ParaStart":"請訪問以下連結來驗證您的郵箱"            
+        },
+        "RegisterPub":{
+            "Sub":"期待看到您的作品",
+            "ParaStart":"歡迎加入！ 請點擊以下鏈接查看文檔"
         },
         "Reset":{
             "Title":"Reddah帳戶郵件",
@@ -323,6 +328,8 @@
         "TaskFirstFriendDescp":"首次申請加好友",
         "TaskFirstShakeTitle":"搖一搖",
         "TaskFirstShakeDescp":"首次使用搖一搖",
+        "TaskFirstEmailTitle":"驗證郵箱",
+        "TaskFirstEmailDescp":"首次驗證郵箱",
         "PunchClock":"每日簽到",
         "PunchClockTitle":"簽到行事曆",
         "PunchLoading":"正在簽到，請稍等。。。",

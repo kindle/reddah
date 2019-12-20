@@ -24,7 +24,8 @@
         "Content":"Política de contenido",
         "Loading":"Registro...",
         "Success":"Inscripción exitosa. Por favor",
-        "Manage":"Gestión"
+        "Manage":"Gestión",
+        "SuccessNonUser":"Inscripción exitosa"
     },
 
     "Input":{
@@ -263,11 +264,15 @@
     },
 
     "Mail":{
+        "Title":"Cuenta reddah",
+        "ParaEnd":"Gracias por tu visita.¡Gracias por usar reddah!",
         "Register":{
-            "Title":"Cuenta reddah",
             "Sub":"Comprobar su dirección de correo electrónico‏",
-            "ParaStart":"Consulte este enlace para verificar su dirección de correo electrónico",
-            "ParaEnd":"Gracias por tu visita.¡Gracias por usar reddah!"
+            "ParaStart":"Consulte este enlace para verificar su dirección de correo electrónico"
+        },
+        "RegisterPub":{
+            "Sub":"Estoy deseando ver tu trabajo",
+            "ParaStart":"Bienvenido! Para ver el documento, haga clic en el enlace siguiente"
         },
         "Reset":{
             "Title":"Cuenta reddah",
@@ -320,6 +325,8 @@
         "TaskFirstFriendDescp":"Primera solicitud de un amigo",
         "TaskFirstShakeTitle":"Sacudir",
         "TaskFirstShakeDescp":"Usar primero Shake",
+        "TaskFirstEmailTitle":"Verificar correo electrónico",
+        "TaskFirstEmailDescp":"Primera vez para verificar el correo electrónico",
         "PunchClock":"Perforación diaria",
         "PunchClockTitle":"Calendario de perforación",
         "PunchLoading":"Se están haciendo los trámites de registro",

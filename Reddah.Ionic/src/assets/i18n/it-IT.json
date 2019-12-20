@@ -24,7 +24,8 @@
         "Content":"Politica dei contenuti",
         "Loading":"Registro...",
         "Success":"La registrazione ha successo.Accedi per favore",
-        "Manage":"Gestisci"
+        "Manage":"Gestisci",
+        "SuccessNonUser":"La registrazione è riuscita"
     },
 
     "Input":{
@@ -263,11 +264,15 @@
     },
 
     "Mail":{
+        "Title":"Reddah Account",
+        "ParaEnd":"Dopo di che, puoi effettuare il login.Grazie per aver usato Reddah!",
         "Register":{
-            "Title":"Reddah Account",
             "Sub":"Verifica il tuo indirizzo email",
-            "ParaStart":"Visita questo link per verificare il tuo indirizzo email",
-            "ParaEnd":"Dopo di che, puoi effettuare il login.Grazie per aver usato Reddah!"
+            "ParaStart":"Visita questo link per verificare il tuo indirizzo email"            
+        },
+        "RegisterPub":{
+            "Sub":"Non vedo l'ora di vedere il tuo lavoro",
+            "ParaStart":"Benvenuti! Per visualizzare il documento, fare clic sul seguente link"
         },
         "Reset":{
             "Title":"Reddah Account",
@@ -320,6 +325,8 @@
         "TaskFirstFriendDescp":"La prima volta a fare domanda per un amico",
         "TaskFirstShakeTitle":"Agitare",
         "TaskFirstShakeDescp":"La prima volta che si usa shake",
+        "TaskFirstEmailTitle":"Verifica Email",
+        "TaskFirstEmailDescp":"Prima volta per verificare l'email",
         "PunchClock":"Quotidiano",
         "PunchClockTitle":"Passa il calendario",
         "PunchLoading":"Sto controllando, aspetta...",

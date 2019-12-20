@@ -64,10 +64,10 @@ export class RegisterPage implements OnInit {
             formData.append("Email", this.email);
             formData.append("Locale", this.reddah.getCurrentLocale());
             //mail
-            formData.append("MailTitle", this.translate.instant("Mail.Register.Title"));
+            formData.append("MailTitle", this.translate.instant("Mail.Title"));
             formData.append("MailSub", this.translate.instant("Mail.Register.Sub"));
             formData.append("MailParaStart", this.translate.instant("Mail.Register.ParaStart"));
-            formData.append("MailParaEnd", this.translate.instant("Mail.Register.ParaEnd"));
+            formData.append("MailParaEnd", this.translate.instant("Mail.ParaEnd"));
 
             this.reddah.register(formData)
             .subscribe(result => 

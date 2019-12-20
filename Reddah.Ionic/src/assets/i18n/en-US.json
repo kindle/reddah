@@ -24,7 +24,8 @@
         "Content":"Content Policy",
         "Loading":"Register...",
         "Success":"Registration is successful. Please login",
-        "Manage":"Manage"
+        "Manage":"Manage",
+        "SuccessNonUser":"Registration is successful"
     },
 
     "Input":{
@@ -267,11 +268,15 @@
     },
 
     "Mail":{
+        "Title":"Reddah Account",
+        "ParaEnd":"Thanks for joining the community. Can't wait to see what you post.<br><br>Reddah ♥ you!",
         "Register":{
-            "Title":"Reddah Account",
             "Sub":"Verify your email address‏",
-            "ParaStart":"Welcome to Reddah! To verify your email, click the following link",
-            "ParaEnd":"Thanks for joining the community. Can't wait to see what you post.<br><br>Reddah ♥ you!"
+            "ParaStart":"Welcome to Reddah! To verify your email, click the following link"
+        },
+        "RegisterPub":{
+            "Sub":"Looking forward to seeing your work",
+            "ParaStart":"Welcome! To view the document, click the following link"
         },
         "Reset":{
             "Title":"Reddah Account",
@@ -324,6 +329,8 @@
         "TaskFirstFriendDescp":"First time to apply for friend",
         "TaskFirstShakeTitle":"Shake",
         "TaskFirstShakeDescp":"First time to use shake",
+        "TaskFirstEmailTitle":"Verify Email",
+        "TaskFirstEmailDescp":"First time to verify Email",
         "PunchClock":"Daily Punch",
         "PunchClockTitle":"Punch Calendar",
         "PunchLoading":"Checking in, please wait... ",

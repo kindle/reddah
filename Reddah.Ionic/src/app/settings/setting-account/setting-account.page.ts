@@ -36,7 +36,7 @@ export class SettingAccountPage implements OnInit {
     }
     
     async close() {
-        await this.modalController.dismiss();
+        await this.modalController.dismiss(this.verifyFlag);
     }
 
     async goEmail() {
@@ -62,10 +62,10 @@ export class SettingAccountPage implements OnInit {
     async verifyEmail(){
         let formData = new FormData();
         formData.append("Locale", this.reddah.getCurrentLocale());
-        formData.append("MailTitle", this.translate.instant("Mail.Register.Title"));
+        formData.append("MailTitle", this.translate.instant("Mail.Title"));
         formData.append("MailSub", this.translate.instant("Mail.Register.Sub"));
         formData.append("MailParaStart", this.translate.instant("Mail.Register.ParaStart"));
-        formData.append("MailParaEnd", this.translate.instant("Mail.Register.ParaEnd"));
+        formData.append("MailParaEnd", this.translate.instant("Mail.ParaEnd"));
         this.reddah.sendVerfiyEmail(formData).subscribe(data=>{
             this.reddah.toast(this.translate.instant("Service.1005"), "primary");
         });

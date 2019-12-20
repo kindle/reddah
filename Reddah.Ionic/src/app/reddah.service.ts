@@ -1082,6 +1082,15 @@ export class ReddahService {
             max: 10,
             type: 1,
         },
+        {
+            id:12, 
+            title: this.translate.instant("Point.TaskFirstEmailTitle"),
+            description: this.translate.instant("Point.TaskFirstEmailDescp"),
+            point: 10, 
+            key: "Email",
+            max: 10,
+            type: 1,
+        },
     ];
 
     userLevel(userName){
@@ -1135,6 +1144,7 @@ export class ReddahService {
     }
 
     pointReason = new Map()
+    //use get
     .set('punchclock',this.translate.instant("Point.PunchClock"))
     .set('login',this.translate.instant("Point.TaskLoginTitle"))
     .set('read',this.translate.instant("Point.TaskReadTitle"))
@@ -1147,6 +1157,9 @@ export class ReddahService {
     .set('mini',this.translate.instant("Point.TaskFirstGameTitle"))
     .set('friend',this.translate.instant("Point.TaskFirstFriendTitle"))
     .set('shake',this.translate.instant("Point.TaskFirstShakeTitle"))
+    .set('email',this.translate.instant("Point.TaskFirstEmailTitle"))
+
+    //admin give
     .set('report',this.translate.instant("Point.TaskReportTitle"));
 
 
@@ -1831,6 +1844,7 @@ export class ReddahService {
             await this.getUserInfo(formData)
             .subscribe(userInfo => 
             {
+                //console.log(userInfo)
                 if(userInfo.Cover!=null){
                     this.toImageCache(userInfo.Cover, `cover_${userName}`);
                     this.localStorageService.store(`cover_${userName}_url`,userInfo.Cover);
@@ -1891,6 +1905,7 @@ export class ReddahService {
                         this.setPointNoDate("Mini", data.Message.Mini);
                         this.setPointNoDate("Friend", data.Message.Friend);
                         this.setPointNoDate("Shake", data.Message.Shake);
+                        this.setPointNoDate("Email", data.Message.Email);
                         this.setPoint("TodayTotalPoint", data.Message.TodayTotalPoint)
                         this.setPoint('Read', data.Message.TodayRead);
                         this.setPoint('Mark', data.Message.TodayMark);

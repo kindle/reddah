@@ -24,7 +24,8 @@
       "Content":"Stratégie de contenu",
       "Loading":"Registre...",
       "Success":"Enregistrement réussi.Connectez - vous",
-      "Manage":"Gestion"
+      "Manage":"Gestion",
+      "SuccessNonUser":"Enregistrement réussi"
     },
 
     "Input":{
@@ -264,11 +265,15 @@
     },
 
     "Mail":{
+        "Title":"Compte reddah",
+        "ParaEnd":"Après, vous pouvez vous connecter.Merci d 'avoir utilisé reddah!",
         "Register":{
-            "Title":"Compte reddah",
             "Sub":"Vérifier votre adresse électronique‏",
-            "ParaStart":"Veuillez accéder à ce lien pour vérifier votre adresse électronique",
-            "ParaEnd":"Après, vous pouvez vous connecter.Merci d 'avoir utilisé reddah!"
+            "ParaStart":"Veuillez accéder à ce lien pour vérifier votre adresse électronique"
+        },
+        "RegisterPub":{
+            "Sub":"J'ai hâte de voir ton travail",
+            "ParaStart":"Bienvenue! Pour consulter un document, cliquez sur le lien suivant"
         },
         "Reset":{
             "Title":"Compte reddah",
@@ -321,6 +326,8 @@
       "TaskFirstFriendDescp":"Un ami pour la première fois",
       "TaskFirstShakeTitle":"Secouer",
       "TaskFirstShakeDescp":"Première utilisation de Shake",
+      "TaskFirstEmailTitle":"Vérifier les courriels",
+      "TaskFirstEmailDescp":"Première vérification de l'e-mail",
       "PunchClock":"Perforation quotidienne",
       "PunchClockTitle":"Calendrier de perforation",
       "PunchLoading":"Les formalités d 'entrée sont en cours",

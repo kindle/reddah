@@ -24,6 +24,7 @@ export class RegisterSubPage implements OnInit {
     locale;
     ngOnInit() {
         this.locale = this.reddah.getCurrentLocale();
+        this.email = this.reddah.appData('useremail_'+this.reddah.getCurrentUser());
     }
 
     nickname = "";//as sub name
@@ -57,12 +58,17 @@ export class RegisterSubPage implements OnInit {
             formData.append("Signature", this.signature);
             formData.append("Email", this.email);
             formData.append("Locale", this.reddah.getCurrentLocale());
+            //mail
+            formData.append("MailTitle", this.translate.instant("Mail.Title"));
+            formData.append("MailSub", this.translate.instant("Mail.RegisterPub.Sub"));
+            formData.append("MailParaStart", this.translate.instant("Mail.RegisterPub.ParaStart"));
+            formData.append("MailParaEnd", this.translate.instant("Mail.ParaEnd"));
             this.reddah.registerSub(formData)
             .subscribe(result => 
             {
                 loading.dismiss();
                 if(result.Success==0){
-                    this.reddah.toast(this.translate.instant("Register.Success"), "primary");
+                    this.reddah.toast(this.translate.instant("Register.SuccessNonUser"), "primary");
                     
                     this.modalController.dismiss(true);
                 }

@@ -24,7 +24,8 @@
         "Content":"Inhoud Beleid",
         "Loading":"Registratie...",
         "Success":"Registratie is succesvol.Gelieve in te loggen",
-        "Manage":"Beheer"
+        "Manage":"Beheer",
+        "SuccessNonUser":"Registratie is succesvol"
     },
 
     "Input":{
@@ -263,11 +264,15 @@
     },
 
     "Mail":{
+        "Title":"Account Reddah",
+        "ParaEnd":"Daarna kun je inloggen. Bedankt voor het gebruik van Reddah!",
         "Register":{
-            "Title":"Account Reddah",
-            "Sub":"Verifieer uw e -mailadres‏",
-            "ParaStart":"Gelieve deze link te bezoeken om uw e -mailadres te verifiëren",
-            "ParaEnd":"Daarna kun je inloggen.Bedankt voor het gebruik van Reddah!"
+            "Sub":"Verifieer uw e-mailadres‏",
+            "ParaStart":"Gelieve deze link te bezoeken om uw e-mailadres te verifiëren"
+        },
+        "RegisterPub":{
+            "Sub":"Ik kijk uit naar je werk",
+            "ParaStart":"Welkom. Om het document te bekijken, klik op de volgende link"
         },
         "Reset":{
             "Title":"Account Reddah",
@@ -319,6 +324,8 @@
         "TaskFirstFriendDescp":"Eerste keer om een vriend aan te vragen",
         "TaskFirstShakeTitle":"Schudden",
         "TaskFirstShakeDescp":"Eerste keer om shake te gebruiken",
+        "TaskFirstEmailTitle":"Verifieer Email",
+        "TaskFirstEmailDescp":"Eerste keer om e-mail te verifiëren",
         "PunchClock":"Dagelijkse punch",
         "PunchClockTitle":"Agenda openen",
         "PunchLoading":"Even inchecken. Wacht even",

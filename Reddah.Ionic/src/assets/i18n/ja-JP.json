@@ -24,7 +24,8 @@
       "Content":"コンテンツポリシー",
       "Loading":"レジスタ...",
       "Success":"登録は成功です。ログインしてください",
-      "Manage":"管理する"
+      "Manage":"管理する",
+      "SuccessNonUser":"登録は成功です"
     },
 
     "Input":{
@@ -264,11 +265,15 @@
     },
 
     "Mail":{
+        "Title":"Reddahアカウント",
+        "ParaEnd":"その後、ログインできます。Reddahを使用していただきありがとうございます！",
         "Register":{
-            "Title":"Reddahアカウント",
             "Sub":"メールアドレスを確認‏",
-            "ParaStart":"あなたのメールアドレスを確認するには、このリンクをご覧ください",
-            "ParaEnd":"その後、ログインできます。Reddahを使用していただきありがとうございます！"
+            "ParaStart":"ようこそ！ドキュメントを表示するには、次のリンクをクリックします"
+        },
+        "RegisterPub":{
+            "Sub":"お楽しみにお仕事",
+            "ParaStart":"Welcome! To view the document, click the following link"
         },
         "Reset":{
             "Title":"Reddahアカウント",
@@ -321,6 +326,8 @@
         "TaskFirstFriendDescp":"フレンドになりたい人",
         "TaskFirstShakeTitle":"振る",
         "TaskFirstShakeDescp":"初めての握手",
+        "TaskFirstEmailTitle":"Eメールを確認します",
+        "TaskFirstEmailDescp":"メールを初めて確認する",
         "PunchClock":"デイリーパンチ",
         "PunchClockTitle":"パンチカレンダー",
         "PunchLoading":"チェックインしてください",

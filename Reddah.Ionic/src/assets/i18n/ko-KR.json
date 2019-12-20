@@ -24,7 +24,8 @@
       "Content":"내용 정책",
       "Loading":"레지스터...",
       "Success":"등록 성공.로그인",
-      "Manage":"관리"
+      "Manage":"관리",
+      "SuccessNonUser":"등록 성공"
     },
 
     "Input":{
@@ -266,11 +267,15 @@
     },
 
     "Mail":{
+        "Title":"Reddah 계정",
+        "ParaEnd":"후에 로그인할 수 있습니다.Reddah 사용해주셔서 감사합니다!",
         "Register":{
-            "Title":"Reddah 계정",
             "Sub":"전자 우편 주소 검증",
-            "ParaStart":"이메일 주소를 검증하기 위해 이 링크를 방문하십시오",
-            "ParaEnd":"후에 로그인할 수 있습니다.Reddah 사용해주셔서 감사합니다!"
+            "ParaStart":"이메일 주소를 검증하기 위해 이 링크를 방문하십시오"            
+        },
+        "RegisterPub":{
+            "Sub":"너의 작품을 보고 싶어",
+            "ParaStart":"어서 오세요. 문서를 보려면 다음 링크를 누르십시오"
         },
         "Reset":{
             "Title":"Reddah 계정",
@@ -323,6 +328,8 @@
         "TaskFirstFriendDescp":"첫 신청 친구",
         "TaskFirstShakeTitle":"흔들거리다",
         "TaskFirstShakeDescp":"처음으로 shake 사용",
+        "TaskFirstEmailTitle":"이메일 확인",
+        "TaskFirstEmailDescp":"처음으로 이메일 확인",
         "PunchClock":"매일 구멍을 뚫다",
         "PunchClockTitle":"타공 달력",
         "PunchLoading":"입주 수속을 하고 있으니 기다려 주십시오",

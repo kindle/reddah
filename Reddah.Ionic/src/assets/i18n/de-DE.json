@@ -24,7 +24,8 @@
         "Content":"Inhaltliche Richtlinien",
         "Loading":"Registrieren...",
         "Success":"Die Registrierung ist erfolgreich.Bitte einloggen",
-        "Manage":"Verwalten"
+        "Manage":"Verwalten",
+        "SuccessNonUser":"Die Registrierung ist erfolgreich"
     },
 
     "Input":{
@@ -263,11 +264,15 @@
     },
 
     "Mail":{
+        "Title":"Konto Reddah",
+        "ParaEnd":"Danach können Sie sich anmelden.Danke für Reddah!",
         "Register":{
-            "Title":"Konto Reddah",
-            "Sub":"Überprüfen Sie Ihre E -Mail -Adresse‏",
-            "ParaStart":"Bitte besuchen Sie diesen Link, um Ihre E -Mail -Adresse zu überprüfen",
-            "ParaEnd":"Danach können Sie sich anmelden.Danke für Reddah!"
+            "Sub":"Überprüfen Sie Ihre E-Mail Adresse‏",
+            "ParaStart":"Bitte besuchen Sie diesen Link, um Ihre E-Mail Adresse zu überprüfen"
+        },
+        "RegisterPub":{
+            "Sub":"Ich freue mich auf Ihre Arbeit",
+            "ParaStart":"Willkommen! Um das Dokument zu sehen, klicken Sie auf den folgenden Link"
         },
         "Reset":{
             "Title":"Konto Reddah",
@@ -320,6 +325,8 @@
         "TaskFirstFriendDescp":"Das erste Mal, um einen Freund zu beantragen",
         "TaskFirstShakeTitle":"Schütteln",
         "TaskFirstShakeDescp":"Zum ersten Mal schütteln",
+        "TaskFirstEmailTitle":"E-Mail bestätigen",
+        "TaskFirstEmailDescp":"Zum ersten Mal zur Bestätigung der E-Mail",
         "PunchClock":"Täglicher Punch",
         "PunchClockTitle":"Kalender stanzen",
         "PunchLoading":"Bitte warten Sie...",
