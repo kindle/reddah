@@ -275,7 +275,8 @@
             "Sub":"Jeton de sécurité pour le remplacement du mot de passe",
             "ParaStart":"Veuillez copier ce jeton pour remplacer le mot de passe",
             "ParaEnd":"Merci d 'avoir utilisé reddah!"
-        }
+        },
+        "Verify":"Authentification de courrier électronique"
     },
 
     "Mystic": {

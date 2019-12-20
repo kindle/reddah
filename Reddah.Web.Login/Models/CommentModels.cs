@@ -96,6 +96,7 @@ namespace Reddah.Web.Login
         public int TodayMark { get; set; }
         public int TodayShare { get; set; }
         public int TodayComment { get; set; }
+        public int PunchToday { get; set; }
 
     }
 

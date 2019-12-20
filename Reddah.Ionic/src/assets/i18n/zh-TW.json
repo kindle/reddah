@@ -277,7 +277,8 @@
             "Sub":"使用安全權杖重置密碼",
             "ParaStart":"請複製以下安全權杖用來重置密碼",
             "ParaEnd":"感謝您使用Reddah!"
-        }
+        },
+        "Verify":"驗證郵件"
     },
 
     "Mystic": {

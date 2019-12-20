@@ -274,7 +274,8 @@
             "Sub":"Ficheiro de segurança para repor a senha",
             "ParaStart":"Por favor, copie este item para reiniciar a sua senha",
             "ParaEnd":"Obrigado por usar Reddah!"
-        }
+        },
+        "Verify":"Verificar e-mail"
     },
 
     "Mystic": {

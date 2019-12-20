@@ -277,7 +277,8 @@
             "Sub":"비밀번호 초기화",
             "ParaStart":"비밀번호 초기화",
             "ParaEnd":"Reddah 사용해주셔서 감사합니다!"
-        }
+        },
+        "Verify":"이메일 검증"
     },
 
     "Mystic": {

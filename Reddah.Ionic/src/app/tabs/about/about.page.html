@@ -12,16 +12,16 @@
         </ion-thumbnail>
         <ion-label slot="start">
             <div style="padding:5px 0 5px 0;">{{reddah.getDisplayName(userName)}}</div>
-            <div style="display: flex;margin-top:5px;">
-                <ion-icon (click)="goCredit($event)" name="radio-button-off" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==1"></ion-icon>
-                <ion-icon (click)="goCredit($event)" name="ribbon" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==2"></ion-icon>
-                <ion-icon (click)="goCredit($event)" name="star-outline" color="primary" size="small" *ngIf="reddah.userLevelIcon(userName)==3"></ion-icon>
-                <ion-icon (click)="goCredit($event)" name="star" color="gold" size="small" *ngIf="reddah.userLevelIcon(userName)==4"></ion-icon>
-                <ion-icon (click)="goCredit($event)" name="medal" color="point" size="small" *ngIf="reddah.userLevelIcon(userName)==5"></ion-icon>
-                <ion-icon (click)="goCredit($event)" name="trophy" color="diamond" size="small" *ngIf="reddah.userLevelIcon(userName)==6"></ion-icon>
-                <ion-icon (click)="goCredit($event)" name="school" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==7"></ion-icon>
-                <span (click)="goCredit($event)" style="color: gray;margin-left:5px;vertical-align: top;line-height: 18px;">
-                    {{ reddah.userLevel(userName) | translate }}
+            <div style="display: flex;margin-top:5px;" (click)="goCredit($event)">
+                <ion-icon name="radio-button-off" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==1"></ion-icon>
+                <ion-icon name="ribbon" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==2"></ion-icon>
+                <ion-icon name="star-outline" color="primary" size="small" *ngIf="reddah.userLevelIcon(userName)==3"></ion-icon>
+                <ion-icon name="star" color="gold" size="small" *ngIf="reddah.userLevelIcon(userName)==4"></ion-icon>
+                <ion-icon name="medal" color="point" size="small" *ngIf="reddah.userLevelIcon(userName)==5"></ion-icon>
+                <ion-icon name="trophy" color="diamond" size="small" *ngIf="reddah.userLevelIcon(userName)==6"></ion-icon>
+                <ion-icon name="school" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==7"></ion-icon>
+                <span style="color: gray;margin-left:5px;vertical-align: top;line-height: 18px;">
+                    {{ reddah.appData('userpoint_'+userName) }}
                 </span>
             </div>
         </ion-label>

@@ -274,7 +274,8 @@
             "Sub":"Veiligheidsteken voor het terugzetten van het wachtwoord",
             "ParaStart":"Kopieer dit token om je wachtwoord te kunnen resetten",
             "ParaEnd":"Bedankt voor het gebruik van Reddah!"
-        }
+        },
+        "Verify":"Verifieer e-mail"
     },
 
     "Mystic": {

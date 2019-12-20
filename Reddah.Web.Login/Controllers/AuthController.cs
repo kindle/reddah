@@ -84,24 +84,78 @@ namespace Reddah.Web.Login.Controllers
                         password,
                         new { Email = email },
                         string.IsNullOrWhiteSpace(hasToken));
-                        //do not verify as some emaill can't got mail
-                        //true);
+                    //do not verify as some emaill can't got mail
+                    //true);
 
-                    var userJustCreated = db.UserProfile.FirstOrDefault(u => u.UserName == userName);
-                    Helpers.Email(
-                            new MailAddress("donotreply@reddah.com", emailTitle),
-                            new MailAddress(email, userName),
-                            emailSub,
-                            string.Format("Hi {0}!<br><br>" +
-                            emailParaStart+ ":<br><br>" +
-                            "https://reddah.com/{1}/VerifyEmail?Userid={2}&EmailToken={3}" +
-                            "<br><br>" + emailParaEnd,
-                            userName, locale, userJustCreated.UserId, verifyToken),
-                            true
-                    );
+                    if (string.IsNullOrWhiteSpace(hasToken))
+                    {
+                        var userJustCreated = db.UserProfile.FirstOrDefault(u => u.UserName == userName);
+                        Helpers.Email(
+                                new MailAddress("donotreply@reddah.com", emailTitle),
+                                new MailAddress(email, userName),
+                                emailSub,
+                                string.Format("Hi {0}!<br><br>" +
+                                emailParaStart + ":<br><br>" +
+                                "https://reddah.com/{1}/VerifyEmail?Userid={2}&EmailToken={3}" +
+                                "<br><br>" + emailParaEnd,
+                                userName, locale, userJustCreated.UserId, verifyToken),
+                                true
+                        );
+                    }
                 }
 
                 return Ok(new ApiResult(0, ""));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("verifyemail")]
+        public IHttpActionResult VeifyEmail()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                string locale = HttpContext.Current.Request["Locale"];
+                string emailTitle = HttpContext.Current.Request["MailTitle"];
+                string emailSub = HttpContext.Current.Request["MailSub"];
+                string emailParaStart = HttpContext.Current.Request["MailParaStart"];
+                string emailParaEnd = HttpContext.Current.Request["MailParaEnd"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var verifyToken = Guid.NewGuid().ToString().Replace("-","");
+                    var userToVerify = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+                    var userm = db.webpages_Membership.FirstOrDefault(m => m.UserId == userToVerify.UserId);
+                    userm.ConfirmationToken = verifyToken;
+                    db.SaveChanges();
+
+                    Helpers.Email(
+                        new MailAddress("donotreply@reddah.com", emailTitle),
+                        new MailAddress(userToVerify.Email, jwtResult.JwtUser.User),
+                        emailSub,
+                        string.Format("Hi {0}!<br><br>" +
+                        emailParaStart + ":<br><br>" +
+                        "https://reddah.com/{1}/VerifyEmail?Userid={2}&EmailToken={3}" +
+                        "<br><br>" + emailParaEnd,
+                        jwtResult.JwtUser.User, locale, userToVerify.UserId, verifyToken),
+                        true
+                    );
+
+                    return Ok(new ApiResult(0, ""));
+                }
+
             }
             catch (Exception ex)
             {
@@ -161,6 +215,7 @@ namespace Reddah.Web.Login.Controllers
                 }
 
                 if (Membership.ValidateUser(user.UserName, user.Password))
+                //if(WebSecurity.Login(user.UserName, user.Password))
                 {
                     var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
                     var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);

@@ -5,6 +5,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
 import { SettingChangePasswordPage } from '../setting-change-password/setting-change-password.page';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-setting-account',
@@ -23,6 +24,7 @@ export class SettingAccountPage implements OnInit {
         private cacheService: CacheService,
         public authService: AuthService,
         private toastController: ToastController,
+        private translate: TranslateService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
@@ -30,6 +32,7 @@ export class SettingAccountPage implements OnInit {
 
 
     ngOnInit() {
+        this.reddah.getUserPhotos(this.userName);
     }
     
     async close() {
@@ -55,6 +58,24 @@ export class SettingAccountPage implements OnInit {
         
     }
 
+    verifyFlag = false;
+    async verifyEmail(){
+        let formData = new FormData();
+        formData.append("Locale", this.reddah.getCurrentLocale());
+        formData.append("MailTitle", this.translate.instant("Mail.Register.Title"));
+        formData.append("MailSub", this.translate.instant("Mail.Register.Sub"));
+        formData.append("MailParaStart", this.translate.instant("Mail.Register.ParaStart"));
+        formData.append("MailParaEnd", this.translate.instant("Mail.Register.ParaEnd"));
+        this.reddah.sendVerfiyEmail(formData).subscribe(data=>{
+            this.reddah.toast(this.translate.instant("Service.1005"), "primary");
+        });
+
+        this.verifyFlag = true;
+    }
+
+    async refreshVerify(){
+        this.reddah.getUserPhotos(this.userName);
+    }
     
 
 }

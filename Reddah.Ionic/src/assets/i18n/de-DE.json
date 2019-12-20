@@ -274,7 +274,8 @@
             "Sub":"Sicherheitstoken zum Zurücksetzen des Passworts",
             "ParaStart":"Bitte kopieren Sie dieses Token, um Ihr Passwort zurückzusetzen",
             "ParaEnd":"Danke für Reddah!"
-        }
+        },
+        "Verify":"E-Mail überprüfen"
     },
 
     "Mystic": {

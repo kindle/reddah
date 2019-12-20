@@ -44,6 +44,8 @@ namespace Reddah.Web.Login
         public bool IsFriend { get; set; }
         public bool HideLocation { get; set; }
         public bool AllowTenTimeline { get; set; }
+
+        public bool EmailVerified { get; set; }
     }
 
     public class PointInfo

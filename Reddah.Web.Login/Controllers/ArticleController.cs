@@ -586,7 +586,15 @@ namespace Reddah.Web.Login.Controllers
                         a.GroupName.EndsWith("," + jwtResult.JwtUser.User)));
                         userInfo.IsFriend = findPubFocus != null;
                     }
+
+                    var usermem = db.webpages_Membership.FirstOrDefault(m => m.UserId == user.UserId);
+                    if (usermem != null)
+                    {
+                        userInfo.EmailVerified = (usermem.IsConfirmed == true && usermem.ConfirmationToken.Length == 23);
+                    }
                     
+
+
                     return Ok(userInfo);
 
                 }

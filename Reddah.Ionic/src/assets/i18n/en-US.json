@@ -270,7 +270,7 @@
         "Register":{
             "Title":"Reddah Account",
             "Sub":"Verify your email address‏",
-            "ParaStart":"Welcome to Reddah! To verify your email so that you can login, click the following link",
+            "ParaStart":"Welcome to Reddah! To verify your email, click the following link",
             "ParaEnd":"Thanks for joining the community. Can't wait to see what you post.<br><br>Reddah ♥ you!"
         },
         "Reset":{
@@ -278,7 +278,8 @@
             "Sub":"Security token to reset password",
             "ParaStart":"Please copy this token to reset your password",
             "ParaEnd":"Thanks for using Reddah!"
-        }
+        },
+        "Verify":"Verify Email"
     },
 
     "Mystic": {

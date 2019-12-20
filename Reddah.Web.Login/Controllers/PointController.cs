@@ -445,6 +445,10 @@ namespace Reddah.Web.Login.Controllers
                         {
                             result.TodayComment += p.V;
                         }
+                        else if (p.Reason == "punchclock")
+                        {
+                            result.PunchToday = p.V;
+                        }
                     }
                 }
 

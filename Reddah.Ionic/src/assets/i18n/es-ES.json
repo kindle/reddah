@@ -274,7 +274,8 @@
             "Sub":"Orden de Seguridad para cambiar la contraseña",
             "ParaStart":"Copia esta orden para cambiar la contraseña",
             "ParaEnd":"¡Gracias por usar reddah!"
-        }
+        },
+        "Verify":"Verificar correo electrónico"
     },
 
     "Mystic": {

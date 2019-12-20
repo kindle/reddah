@@ -274,7 +274,8 @@
             "Sub":"pegno di sicurezza per resettare la password",
             "ParaStart":"Per favore copia questo gettone per reimpostare la password",
             "ParaEnd":"Grazie per aver usato Reddah!"
-        }
+        },
+        "Verify":"Verifica posta elettronica"
     },
 
     "Mystic": {

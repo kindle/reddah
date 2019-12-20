@@ -31,7 +31,7 @@ namespace Reddah.Web.UI.Controllers
                     var item = context.webpages_Membership.FirstOrDefault(u => u.UserId == intUserId);
                     if (item != null)
                     {
-                        if (item.IsConfirmed == true)
+                        if (item.IsConfirmed == true && item.ConfirmationToken.Length==23)
                         {
                             ViewBag.VerifySuccessState = VerifySuccessState.AlreadyVerified;
                         }
@@ -39,6 +39,7 @@ namespace Reddah.Web.UI.Controllers
                         {
                             if (item.ConfirmationToken == emailToken)
                             {
+                                item.ConfirmationToken = item.ConfirmationToken.Substring(0, 23);
                                 item.IsConfirmed = true;
                                 context.SaveChanges();
                                 ViewBag.VerifySuccessState = VerifySuccessState.Success;

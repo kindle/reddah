@@ -129,6 +129,18 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private verifyEmailUrl = 'https://login.reddah.com/api/auth/verifyemail'; 
+
+    sendVerfiyEmail(formData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.verifyEmailUrl, formData)
+        .pipe(
+            tap(data => this.log('verify email')),
+            catchError(this.handleError('verify email', []))
+        );
+    }
+
+    //******************************** */
     private getCommentsUrl = 'https://login.reddah.com/api/article/getcomments'; 
 
     getComments(articleId: number): Observable<any> {
@@ -1863,6 +1875,10 @@ export class ReddahService {
                     this.toTextCache(userInfo.AllowTenTimeline?1:0, `userallowtentimeline_${userName}`);
                     //alert(this.appData(`userallowtentimeline_${userName}`));
                 }
+
+                if(userInfo.EmailVerified!=null){
+                    this.toTextCache(userInfo.EmailVerified, `useremailverified_${userName}`);
+                }
             
             });
 
@@ -1880,6 +1896,7 @@ export class ReddahService {
                         this.setPoint('Mark', data.Message.TodayMark);
                         this.setPoint('Share', data.Message.TodayShare);
                         this.setPoint('Comment', data.Message.TodayComment);
+                        this.setPoint("PunchClock",data.Message.PunchToday);
                     }
                 });
             }

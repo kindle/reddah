@@ -277,7 +277,8 @@
             "Sub":"使用安全令牌重置密码",
             "ParaStart":"请复制以下安全令牌用来重置密码",
             "ParaEnd":"感谢您使用Reddah!"
-        }
+        },
+        "Verify":"验证邮箱"
     },
 
     "Mystic": {

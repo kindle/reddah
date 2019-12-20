@@ -157,7 +157,7 @@ export class PointPage implements OnInit {
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
-        if(data||!data)
+        if(data)
             this.reddah.getUserPhotos(this.userName);
     }
 
@@ -186,7 +186,7 @@ export class PointPage implements OnInit {
         await postModal.present();
         const { data } = await postModal.onDidDismiss();
         if(data){
-            
+            this.reddah.getUserPhotos(this.userName);
         }
     }
     
@@ -204,6 +204,10 @@ export class PointPage implements OnInit {
             });
               
             await modal.present();
+            const { data } = await modal.onDidDismiss();
+            if(data||!data){
+                this.reddah.getUserPhotos(this.userName);
+            }
         }
         else{
             this.changeLocation();
@@ -235,6 +239,10 @@ export class PointPage implements OnInit {
         });
           
         await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data||!data){
+            this.reddah.getUserPhotos(this.userName);
+        }
     }
 
     display=false;
