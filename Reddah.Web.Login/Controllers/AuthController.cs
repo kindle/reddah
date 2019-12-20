@@ -31,7 +31,6 @@ namespace Reddah.Web.Login.Controllers
                 string password = HttpContext.Current.Request["Password"];
                 string email = HttpContext.Current.Request["Email"];
                 string locale = HttpContext.Current.Request["Locale"];
-                string hasToken = HttpContext.Current.Request["Token"];
 
                 string emailTitle = HttpContext.Current.Request["MailTitle"];
                 string emailSub = HttpContext.Current.Request["MailSub"];
@@ -83,25 +82,7 @@ namespace Reddah.Web.Login.Controllers
                         userName,
                         password,
                         new { Email = email },
-                        string.IsNullOrWhiteSpace(hasToken));
-                    //do not verify as some emaill can't got mail
-                    //true);
-
-                    if (string.IsNullOrWhiteSpace(hasToken))
-                    {
-                        var userJustCreated = db.UserProfile.FirstOrDefault(u => u.UserName == userName);
-                        Helpers.Email(
-                                new MailAddress("donotreply@reddah.com", emailTitle),
-                                new MailAddress(email, userName),
-                                emailSub,
-                                string.Format("Hi {0}!<br><br>" +
-                                emailParaStart + ":<br><br>" +
-                                "https://reddah.com/{1}/VerifyEmail?Userid={2}&EmailToken={3}" +
-                                "<br><br>" + emailParaEnd,
-                                userName, locale, userJustCreated.UserId, verifyToken),
-                                true
-                        );
-                    }
+                        false);
                 }
 
                 return Ok(new ApiResult(0, ""));

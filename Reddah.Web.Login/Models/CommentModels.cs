@@ -90,6 +90,7 @@ namespace Reddah.Web.Login
         public bool Mini { get; set; }
         public bool Friend { get; set; }
         public bool Shake { get; set; }
+        public bool Email { get; set; }
         public int TodayTotalPoint { get; set; }
         public string Test { get; set; }
         public int TodayRead { get; set; }
