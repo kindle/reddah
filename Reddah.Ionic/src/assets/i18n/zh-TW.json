@@ -268,7 +268,7 @@
 
     "Mail":{
         "Title":"Reddah帳戶郵件",
-        "ParaEnd":"完成後您可以登入App，感謝您使用Reddah!",
+        "ParaEnd":"感謝加入Reddah，期待看到您的作品。<br><br>Reddah ♥ 您!",
         "Register":{
             "Sub":"請驗證您的郵箱‏",
             "ParaStart":"請訪問以下連結來驗證您的郵箱"            
