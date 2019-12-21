@@ -421,6 +421,7 @@ namespace Reddah.Web.Login.Controllers
                 result.Mini = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "mini") != null;
                 result.Friend = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "friend") != null;
                 result.Shake = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "shake") != null;
+                result.Email = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "email") != null;
 
                 var today = DateTime.UtcNow.AddMinutes(-1 * minitesOffset);
                 var todayPoints = db.Point.Where(p => p.To == jwtResult.JwtUser.User).OrderByDescending(p=>p.Id).Take(100).ToList();

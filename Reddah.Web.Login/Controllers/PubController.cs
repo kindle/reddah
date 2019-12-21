@@ -34,6 +34,12 @@ namespace Reddah.Web.Login.Controllers
                 string signature = HttpContext.Current.Request["Signature"];
                 string email = HttpContext.Current.Request["Email"];
                 string locale = HttpContext.Current.Request["Locale"];
+
+                string emailTitle = HttpContext.Current.Request["MailTitle"];
+                string emailSub = HttpContext.Current.Request["MailSub"];
+                string emailParaStart = HttpContext.Current.Request["MailParaStart"];
+                string emailParaEnd = HttpContext.Current.Request["MailParaEnd"];
+
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 int type = js.Deserialize<int>(HttpContext.Current.Request["Type"]);
 
@@ -97,14 +103,15 @@ namespace Reddah.Web.Login.Controllers
                     db.SaveChanges();
 
                     Helpers.Email(
-                            new MailAddress("donotreply@reddah.com", "Reddah Public Platform Account"),
-                            new MailAddress(email, userName),
-                            string.Format("Verify your email address‏ for {0}", nickName),
-                            string.Format("Dear {0}:\r\n" +
-                            "Please visit this link to verify your email address:\r\n" +
-                            "https://reddah.com/{1}/VerifyEmail?Userid={2}&EmailToken={3}" +
-                            "\r\nAfter that, you can update your public platform account information. Thanks for using Reddah!",
-                            jwtResult.JwtUser.User, locale, userJustCreated.UserId, verifyToken)
+                            new MailAddress("donotreply@reddah.com", emailTitle),
+                            new MailAddress(email, jwtResult.JwtUser.User),
+                            nickName,
+                            string.Format("Hi {0}!<br><br>" +
+                            emailParaStart + ":<br><br>" +
+                            "https://reddah.com/{1}/t/wiki/Pages/api/index" +
+                            "<br><br>" + emailParaEnd,
+                                jwtResult.JwtUser.User, locale),
+                            true
                     );
                 }
 

@@ -590,7 +590,7 @@ namespace Reddah.Web.Login.Controllers
                     var usermem = db.webpages_Membership.FirstOrDefault(m => m.UserId == user.UserId);
                     if (usermem != null)
                     {
-                        userInfo.EmailVerified = (usermem.IsConfirmed == true && usermem.ConfirmationToken.Length == 23);
+                        userInfo.EmailVerified = (usermem.IsConfirmed == true && usermem.ConfirmationToken!=null && usermem.ConfirmationToken.Length == 23);
                     }
                     
 
