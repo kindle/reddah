@@ -6,7 +6,7 @@
         <ion-icon slot="icon-only" is-active="false" name="ios-more"></ion-icon>
     </ion-button>
 </ion-item>
-<ion-content [scrollEvents]="true" (ionScroll)="commentbox.onScroll($event)">
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
     <div style="padding-left: 10px;padding-top: 10px;padding-bottom: 10px;">
         <span style="font-size: larger;color:black;" class="article-title" [innerHTML]="reddah.htmlDecode(article.Title) | safe: 'html'"></span>
         <ion-item no-padding>

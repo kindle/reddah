@@ -53,6 +53,7 @@ export class MyTimeLinePage implements OnInit {
         private translate: TranslateService,
         private platform: Platform,
     ){
+        this.reddah.reloadLocaleSettings();
         this.userName = this.reddah.getCurrentUser();
     }
 

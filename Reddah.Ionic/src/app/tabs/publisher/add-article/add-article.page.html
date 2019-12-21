@@ -2,15 +2,23 @@
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
         <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
     </ion-button>
-    <ion-button color="success" slot="end" (click)="save()">{{ 'Common.Save' | translate }}</ion-button>
+    <ion-button color="success" slot="end" (click)="preview()" *ngIf="article">
+        {{ 'Common.Test' | translate }}
+    </ion-button>
+    <ion-button color="success" slot="end" (click)="publish()" *ngIf="article">
+        {{ 'Common.Publish' | translate }}
+    </ion-button>
+    <ion-button color="success" slot="end" (click)="save()">
+        {{ 'Common.Save' | translate }}
+    </ion-button>
 </ion-item>
 <ion-content>
     <ion-item lines="none" class="gapBottom inputItem">
         <ion-textarea autoresize [(ngModel)]="title" cols="20" placeholder="{{ 'Input.Name' | translate }}..."></ion-textarea>
     </ion-item>
     <ion-item lines="none" no-padding>
-        <ckeditor style="width:100%;" [editor]="Editor" 
-            [data]="content"
+        <ckeditor style="width:100%;" [editor]="Editor"
+            [(ngModel)]="content"
             debounce="500"
             [config]="config">
         </ckeditor> 
@@ -22,15 +30,6 @@
     <ion-item lines="none">    
         <ion-button class="buttonGapTop gapBottom inputItem" slot="start" color="secondary" (click)="SelectPhoto()">
             {{ 'Common.MyPhoto' | translate }}
-        </ion-button>
-    </ion-item>
-    
-    <ion-item lines="none" style="position:absolute;bottom:20px;right:0px;">    
-        <ion-button color="success" slot="end" (click)="preview()" *ngIf="article">
-            {{ 'Common.Test' | translate }}
-        </ion-button>
-        <ion-button color="success" slot="end" (click)="publish()" *ngIf="article">
-            {{ 'Common.Publish' | translate }}
         </ion-button>
     </ion-item>
 

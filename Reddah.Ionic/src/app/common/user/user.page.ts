@@ -305,7 +305,7 @@ export class UserPage implements OnInit {
     async goMore(){
         const modal = await this.modalController.create({
             component: MorePage,
-            componentProps: {},
+            componentProps: { target : this.userName},
             cssClass: "modal-fullscreen",
         });
         

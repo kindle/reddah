@@ -191,7 +191,15 @@ ion-icon{
 }
 
 .login-bg {
-  top: 0;
-  position: fixed;
-  z-index: 0;
+    top: 0;
+    position: fixed;
+    z-index: 0;
+}
+
+figure {
+    margin: 0!important;
+}
+
+figure>img{
+    width:-webkit-fill-available !important;
 }

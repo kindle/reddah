@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController, PopoverController, AlertController } from '@ionic/angular';
+import { ModalController, PopoverController, AlertController, Content } from '@ionic/angular';
 import { Article } from '../model/article';
 import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 import { Location } from '@angular/common';
@@ -43,7 +43,7 @@ export class PostviewerPage implements OnInit {
     effeciveRead;
     ngOnInit() {
         this.reddah.getUserPhotos(this.article.UserName);
-console.log(this.article)
+
         this.effeciveRead = setTimeout(() => {
             if(!this.article.Read&&!this.reddah.isPointDone(this.reddah.pointTasks[1])){
                 this.reddah.getPointRead().subscribe(data=>{
@@ -315,6 +315,11 @@ console.log(this.article)
     
         await alert.present();
         
+    }
+
+    async onScroll(event){
+        if(!this.preview)
+            this.commentbox.onScroll(event)
     }
 
 }

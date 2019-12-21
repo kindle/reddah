@@ -14,6 +14,8 @@ export class MorePage implements OnInit {
 
     @Input() pub = false;
 
+    @Input() target;
+
     userName;
     locale;
     

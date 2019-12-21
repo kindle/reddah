@@ -181,7 +181,7 @@ export class ContactPage {
           
         await modal.present();
         const { data } = await modal.onDidDismiss();
-        if(data||!data)
+        if(data)
         {
             this.cacheService.clearGroup("ContactPage");
             this.reddah.getUserPhotos(this.userName);
