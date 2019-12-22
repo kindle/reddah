@@ -66,6 +66,10 @@ public partial class UserProfile
 
     public string LastLocale { get; set; }
 
+    public string Lan { get; set; }
+
+    public string Lan1 { get; set; }
+
 }
 
 }

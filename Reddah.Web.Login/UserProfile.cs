@@ -38,5 +38,7 @@ namespace Reddah.Web.Login
         public string UsedMini { get; set; }
         public Nullable<System.DateTime> LastUsedOn { get; set; }
         public string LastLocale { get; set; }
+        public string Lan { get; set; }
+        public string Lan1 { get; set; }
     }
 }

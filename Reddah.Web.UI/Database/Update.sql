@@ -171,3 +171,8 @@ alter table userprofile add
 --20191216
 alter table point add 
 	[Ref] INT NULL DEFAULT 0 
+
+--20191222
+alter table userprofile add 
+	[Lan] VARCHAR(10) NULL, 
+	[Lan1] NVARCHAR(MAX) NULL 

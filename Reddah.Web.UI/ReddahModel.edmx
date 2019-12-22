@@ -183,6 +183,8 @@
           <Property Name="UsedMini" Type="nvarchar(max)" />
           <Property Name="LastUsedOn" Type="datetime" />
           <Property Name="LastLocale" Type="varchar" MaxLength="10" />
+          <Property Name="Lan" Type="varchar" MaxLength="10" />
+          <Property Name="Lan1" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -461,6 +463,8 @@
           <Property Name="UsedMini" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastUsedOn" Type="DateTime" Precision="3" />
           <Property Name="LastLocale" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Lan" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Lan1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -687,6 +691,8 @@
           <EntitySetMapping Name="UserProfiles">
             <EntityTypeMapping TypeName="reddahModel.UserProfile">
               <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="Lan1" ColumnName="Lan1" />
+                <ScalarProperty Name="Lan" ColumnName="Lan" />
                 <ScalarProperty Name="LastLocale" ColumnName="LastLocale" />
                 <ScalarProperty Name="LastUsedOn" ColumnName="LastUsedOn" />
                 <ScalarProperty Name="UsedMini" ColumnName="UsedMini" />

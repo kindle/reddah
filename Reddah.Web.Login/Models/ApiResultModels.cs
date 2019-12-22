@@ -29,4 +29,10 @@ namespace Reddah.Web.Login
             this.JwtUser = jwtUser;
         }
     }
+
+    public class PhotoResult
+    {
+        public bool uploaded { get; set; }
+        public string url { get; set; }
+    }
 }

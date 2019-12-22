@@ -83,6 +83,9 @@ namespace Reddah.Web.Login.Controllers
                         password,
                         new { Email = email },
                         false);
+                    var userJustCreated = db.UserProfile.FirstOrDefault(u => u.UserName == userName);
+                    userJustCreated.Lan = locale;
+                    db.SaveChanges();
                 }
 
                 return Ok(new ApiResult(0, ""));
