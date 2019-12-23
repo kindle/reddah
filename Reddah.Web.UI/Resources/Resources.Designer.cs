@@ -929,5 +929,53 @@ namespace Reddah.Web.UI.Resources
                 return ResourceManager.GetString("Comment_Good", resourceCulture);
             }
         }
+
+        public static string Email_AlreadyVerified
+        {
+            get
+            {
+                return ResourceManager.GetString("Email_AlreadyVerified", resourceCulture);
+            }
+        }
+
+        public static string Email_WrongToken
+        {
+            get
+            {
+                return ResourceManager.GetString("Email_WrongToken", resourceCulture);
+            }
+        }
+
+        public static string Email_UserNotExist
+        {
+            get
+            {
+                return ResourceManager.GetString("Email_UserNotExist", resourceCulture);
+            }
+        }
+
+        public static string Email_VerifyOK
+        {
+            get
+            {
+                return ResourceManager.GetString("Email_VerifyOK", resourceCulture);
+            }
+        }
+
+        public static string Email_NotVerified
+        {
+            get
+            {
+                return ResourceManager.GetString("Email_NotVerified", resourceCulture);
+            }
+        }
+
+        public static string Email_UnkownError
+        {
+            get
+            {
+                return ResourceManager.GetString("Email_UnkownError", resourceCulture);
+            }
+        }
     }
 }

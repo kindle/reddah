@@ -14,8 +14,9 @@
 
     <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
         <ion-input type="text" placeholder="{{ 'Input.UserName' | translate }}" 
-        [(ngModel)]="username" clearInput (ionBlur)="checkUserName()"></ion-input>
+        [(ngModel)]="username" clearInput (ionBlur)="checkUserName()" (ionFocus)="focusUserName()"></ion-input>
         <ion-spinner name="dots" slot="end" *ngIf="checkFlagUserName"></ion-spinner>
+        <ion-icon slot="end" name="checkmark-circle" color="primary" *ngIf="checkFlagUserNamePass"></ion-icon>
     </ion-item>
 
     <ion-item class="gapBottom inputItem" no-padding>

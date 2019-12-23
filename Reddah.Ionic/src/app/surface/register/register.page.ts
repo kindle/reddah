@@ -107,6 +107,7 @@ export class RegisterPage implements OnInit {
 
     errorMessage = "";
     checkFlagUserName = false;
+    checkFlagUserNamePass = false;
     async checkUserName(){
         if(this.username.length<6||this.username.length>18){
             this.errorMessage = this.translate.instant(`Service.1001`);
@@ -120,6 +121,7 @@ export class RegisterPage implements OnInit {
             if(data.Success==0)
             {
                 this.errorMessage = "";
+                this.checkFlagUserNamePass = true;
             }
             else{
                 this.errorMessage = this.translate.instant(`Service.${data.Success}`);
@@ -127,6 +129,10 @@ export class RegisterPage implements OnInit {
             this.checkFlagUserName = false;
         })
 
+    }
+
+    focusUserName(){
+        this.checkFlagUserNamePass = false;
     }
 
     checkConfirmPassword(){

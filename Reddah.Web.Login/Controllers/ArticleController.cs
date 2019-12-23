@@ -566,6 +566,7 @@ namespace Reddah.Web.Login.Controllers
                     userInfo.Email = user.Email;
                     userInfo.HideLocation = (user.PrivacyShowLocation == 1);
                     userInfo.AllowTenTimeline = (user.PrivacyViewTs == 1);
+                    userInfo.Lan = user.Lan;
 
                     if (user.Type == 0)
                     {
@@ -818,6 +819,7 @@ namespace Reddah.Web.Login.Controllers
                 decimal latHigh = js.Deserialize<decimal>(HttpContext.Current.Request["latHigh"]);
                 decimal lngLow = js.Deserialize<decimal>(HttpContext.Current.Request["lngLow"]);
                 decimal lngHigh = js.Deserialize<decimal>(HttpContext.Current.Request["lngHigh"]);
+                
                 int min = js.Deserialize<int>(HttpContext.Current.Request["min"]);
 
 

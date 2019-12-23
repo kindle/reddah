@@ -46,6 +46,7 @@ namespace Reddah.Web.Login
         public bool AllowTenTimeline { get; set; }
 
         public bool EmailVerified { get; set; }
+        public string Lan { get; set; }
     }
 
     public class PointInfo

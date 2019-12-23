@@ -96,6 +96,9 @@ export class SigninPage implements OnInit {
         const { data } = await modal.onDidDismiss();
         if(data){
             this.reddah.preloadArticles(data)
+            let lastLoginUserName = this.reddah.getLoginUserName();
+            if(lastLoginUserName)
+                this.username = lastLoginUserName;
         }
     }
 

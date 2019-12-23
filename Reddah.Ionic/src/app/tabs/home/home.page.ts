@@ -21,10 +21,6 @@ import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page
 })
 export class HomePage implements OnInit {
 
-    
-    dislikeGroups = [];
-    dislikeUserNames = [];
-
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
     @ViewChild('pageTop') pageTop: Content;
     
@@ -43,6 +39,8 @@ export class HomePage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
         this.reddah.articles = [];
         this.reddah.loadedIds = [];
+        this.reddah.dislikeGroups = [];
+        this.reddah.dislikeUserNames = [];
     }
 
     firstLoad = false;
@@ -59,20 +57,21 @@ export class HomePage implements OnInit {
             let top = 20;
             this.reddah.articles = JSON.parse(cacheArticles).slice(0,top);
             this.reddah.loadedIds = JSON.parse(cacheArticleIds).slice(0,top);
-            this.dislikeGroups = JSON.parse(cacheDislikeGroups);
-            this.dislikeUserNames = JSON.parse(cacheDislikeUserNames);
+            this.reddah.dislikeGroups = JSON.parse(cacheDislikeGroups);
+            this.reddah.dislikeUserNames = JSON.parse(cacheDislikeUserNames);
+            this.reddah.fillCacheArticles();
         }
         else
         {
             this.firstLoad = true;
             let locale = this.reddah.getCurrentLocale();
             let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.reddah.loadedIds)
-                + JSON.stringify(this.dislikeGroups) + JSON.stringify(this.dislikeUserNames) 
+                + JSON.stringify(this.reddah.dislikeGroups) + JSON.stringify(this.reddah.dislikeUserNames) 
                 + locale;
             let request = this.reddah.getArticles(
                 this.reddah.loadedIds, 
-                this.dislikeGroups,
-                this.dislikeUserNames,
+                this.reddah.dislikeGroups,
+                this.reddah.dislikeUserNames,
                 locale, "promoted");
 
             this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
@@ -89,32 +88,33 @@ export class HomePage implements OnInit {
                 }
                 this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
                 this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.reddah.loadedIds));
-                this.localStorageService.store("reddah_article_groups_"+this.userName, JSON.stringify(this.dislikeGroups));
-                this.localStorageService.store("reddah_article_usernames_"+this.userName, JSON.stringify(this.dislikeUserNames));
-                
+                this.localStorageService.store("reddah_article_groups_"+this.userName, JSON.stringify(this.reddah.dislikeGroups));
+                this.localStorageService.store("reddah_article_usernames_"+this.userName, JSON.stringify(this.reddah.dislikeUserNames));
+       
+                this.reddah.fillCacheArticles();
                 this.firstLoad = false;
             });
         }
+       
     }
   
-    getArticles(event, unshift=false):void {
-        let locale = this.localStorageService.retrieve("Reddah_Locale");
-        if(locale==null)
-            locale = "en-US"
+    
 
-        let cacheKey = "this.reddah.getArticles" + JSON.stringify(this.reddah.loadedIds)
-            + JSON.stringify(this.dislikeGroups) + JSON.stringify(this.dislikeUserNames) 
-            + locale;
-        let request = this.reddah.getArticles(
-            this.reddah.loadedIds, 
-            this.dislikeGroups,
-            this.dislikeUserNames,
-            locale, "random");
+    //drag down
+    dragDown(event){
+        this.getCacheArticles(event, true);
+    }
 
-        this.cacheService.loadFromObservable(cacheKey, request, "HomePage")
-        .subscribe(articles => 
-        {
-            for(let article of articles){
+    //drag up
+    loadData(event) {
+        this.getCacheArticles(event);
+    }
+
+    getCacheArticles(event, unshift=false):void {
+        let count = 10;
+        for(let i=1;i<=count;i++){
+            let article = this.reddah.ArticleCacheQueue.pop();
+            if(article!=null){
                 if(unshift){
                     this.reddah.articles.unshift(article);
                     this.reddah.loadedIds.unshift(article.Id);  
@@ -123,53 +123,15 @@ export class HomePage implements OnInit {
                     this.reddah.articles.push(article);
                     this.reddah.loadedIds.push(article.Id);  
                 }
-                if(!this.reddah.publishers.has(article.UserName))
-                {
-                    this.reddah.publishers.add(article.UserName);
-                    this.reddah.getUserPhotos(article.UserName);
-                }
             }
-            this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
-            this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.reddah.loadedIds));
-            this.localStorageService.store("reddah_article_groups_"+this.userName, JSON.stringify(this.dislikeGroups));
-            this.localStorageService.store("reddah_article_usernames_"+this.userName, JSON.stringify(this.dislikeUserNames));
-                
-            if(event){
-                event.target.complete();
-            }
-        });
+        }
+        this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
+
+        if(event){
+            event.target.complete();
+        }
+        this.reddah.fillCacheArticles();
     }    
-
-    clearCacheAndReload(event){
-        this.pageTop.scrollToTop();
-        this.cacheService.clearGroup("HomePage");
-        this.localStorageService.clear("reddah_articles_"+this.userName);
-        this.localStorageService.clear("reddah_article_ids_"+this.userName);
-        this.localStorageService.clear("reddah_article_groups_"+this.userName);
-        this.localStorageService.clear("reddah_article_usernames_"+this.userName);
-            
-        this.reddah.articles = [];
-        this.reddah.loadedIds = [];
-        this.dislikeGroups = [];
-        this.dislikeUserNames = [];
-        this.getArticles(event);
-    }
-
-    //drag down
-    dragDown(event){
-        this.getArticles(event, true);
-    }
-
-    doRefresh(event) {
-        setTimeout(() => {
-            this.clearCacheAndReload(event);
-        }, 2000);
-    }
-
-    //drag up
-    loadData(event) {
-        this.getArticles(event);
-    }
 
     async myInfo() {
         const myInfoModal = await this.modalController.create({
@@ -276,8 +238,8 @@ export class HomePage implements OnInit {
 
             //parameter
             if(data.Id==5){
-                this.dislikeUserNames.push(data.Key);
-                this.localStorageService.store("reddah_article_usernames_"+this.userName, JSON.stringify(this.dislikeUserNames));
+                this.reddah.dislikeUserNames.push(data.Key);
+                this.localStorageService.store("reddah_article_usernames_"+this.userName, JSON.stringify(this.reddah.dislikeUserNames));
                 //ui delete
                 this.reddah.articles.forEach((item, index)=>{
                     if(item.UserName==article.UserName)
@@ -285,8 +247,8 @@ export class HomePage implements OnInit {
                 })
             }
             if(data.Id>10){
-                this.dislikeGroups.push(data.Key);
-                this.localStorageService.store("reddah_article_groups_"+this.userName, JSON.stringify(this.dislikeGroups));
+                this.reddah.dislikeGroups.push(data.Key);
+                this.localStorageService.store("reddah_article_groups_"+this.userName, JSON.stringify(this.reddah.dislikeGroups));
                 //ui delete
                 this.reddah.articles.forEach((item, index)=>{
                     if(item.GroupName.indexOf(data.Key+",")||

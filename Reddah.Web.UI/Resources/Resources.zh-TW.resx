@@ -438,4 +438,22 @@
   <data name="Comment_Good" xml:space="preserve">
     <value>点赞</value>
   </data>
+  <data name="Email_AlreadyVerified" xml:space="preserve">
+      <value>電子郵件已驗證</value>
+  </data>
+  <data name="Email_WrongToken" xml:space="preserve">
+      <value>安全令牌錯誤，請檢查</value>
+  </data>
+  <data name="Email_UserNotExist" xml:space="preserve">
+      <value>用戶不存在</value>
+  </data>
+  <data name="Email_VerifyOK" xml:space="preserve">
+      <value>恭喜您！郵箱驗證成功</value>
+  </data>
+  <data name="Email_NotVerified" xml:space="preserve">
+      <value>郵箱未驗證</value>
+  </data>
+  <data name="Email_UnkownError" xml:space="preserve">
+      <value>未知錯誤，請稍後重試</value>
+  </data>
 </root>

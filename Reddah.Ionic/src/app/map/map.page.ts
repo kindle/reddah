@@ -99,12 +99,7 @@ export class MapPage implements OnInit {
             
         }
 
-        if(this.readonly){
-            this.map.flyTo([item.location.lat, item.location.lng], 3);
-        }
-        else{
-            this.map.setView([item.location.lat, item.location.lng], 3);
-        }
+        this.map.setView([item.location.lat, item.location.lng], 3);
     }
 
     @ViewChild('about') about;

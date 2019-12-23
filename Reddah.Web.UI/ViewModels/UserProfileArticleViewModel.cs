@@ -19,6 +19,7 @@
         private List<ArticlePreview> GetUserProfileArticles(UserProfileModel userProfileModel)
         {
             const int pageCount = 10;
+            const int randomPageCount = 30;
             var apList = new List<ArticlePreview>();
 
             //string locale = CultureInfo.CurrentUICulture.Name.ToLowerInvariant().Split('-')[0];
@@ -279,7 +280,7 @@
                                  LastUpdateType = b.LastUpdateType,
                                  PubName = u.NickName ?? u.UserName
                              }).OrderBy(e => Guid.NewGuid())
-                            .Take(pageCount);
+                            .Take(randomPageCount);
                     if (query.ToList().Count == 0)
                     {
                         query = (from b in db.Articles
@@ -322,7 +323,7 @@
                                      LastUpdateType = b.LastUpdateType,
                                      PubName = u.NickName ?? u.UserName
                                  }).OrderBy(e => Guid.NewGuid())
-                            .Take(pageCount);
+                            .Take(randomPageCount);
                     }
                 }
                 else if (userProfileModel.Menu.Equals("hot", System.StringComparison.InvariantCultureIgnoreCase))

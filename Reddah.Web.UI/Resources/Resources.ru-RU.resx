@@ -438,4 +438,22 @@
   <data name="Comment_Good" xml:space="preserve">
     <value>Good</value>
   </data>
+  <data name="Email_AlreadyVerified" xml:space="preserve">
+      <value>почтовый ящик проверен</value>
+  </data>
+  <data name="Email_WrongToken" xml:space="preserve">
+      <value>ошибка знака безопасности, проверьте, пожалуйста</value>
+  </data>
+  <data name="Email_UserNotExist" xml:space="preserve">
+      <value>пользователь не существует</value>
+  </data>
+  <data name="Email_VerifyOK" xml:space="preserve">
+      <value>поздравляю вас!  проверка почтового ящика прошла успешно</value>
+  </data>
+  <data name="Email_NotVerified" xml:space="preserve">
+      <value>почтовый ящик не проверен</value>
+  </data>
+  <data name="Email_UnkownError" xml:space="preserve">
+      <value>Неизвестная ошибка, попробуйте позже</value>
+  </data>
 </root>

@@ -8,7 +8,7 @@ import {
 import { catchError, map, tap } from 'rxjs/operators';
 import { Article } from "./model/article";
 import { UserProfileModel } from './model/UserProfileModel';
-import { UserModel, QueryCommentModel, NewCommentModel, NewTimelineModel } from './model/UserModel';
+import { UserModel, QueryCommentModel, NewCommentModel, NewTimelineModel, Queue } from './model/UserModel';
 import { Locale } from './model/locale';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File, FileEntry } from '@ionic-native/file/ngx';
@@ -25,6 +25,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { DatePipe } from '@angular/common';
+import { QueueScheduler } from 'rxjs/internal/scheduler/QueueScheduler';
 
 @Injectable({
     providedIn: 'root'
@@ -54,6 +55,8 @@ export class ReddahService {
 
     articles = [];
     loadedIds = [];
+    dislikeGroups = [];
+    dislikeUserNames = [];
 
     async preloadArticles(username){
         let locale = this.getCurrentLocale();
@@ -82,9 +85,39 @@ export class ReddahService {
             this.localStorageService.store("reddah_article_ids_"+username, JSON.stringify(this.loadedIds));
             this.localStorageService.store("reddah_article_groups_"+username, JSON.stringify([]));
             this.localStorageService.store("reddah_article_usernames_"+username, JSON.stringify([]));
-            
+            this.fillCacheArticles();
         });
     }
+
+    async fillCacheArticles() {
+        if(this.ArticleCacheQueue.length()<30){
+            let locale = this.getCurrentLocale();
+
+            this.getArticles(
+                this.loadedIds, 
+                this.dislikeGroups,
+                this.dislikeUserNames,
+                locale, "random")
+            .subscribe(articles => 
+            {
+                for(let article of articles){
+                    this.ArticleCacheQueue.push(article);
+                    this.loadedIds.push(article.Id);  
+                
+                    if(!this.publishers.has(article.UserName))
+                    {
+                        this.publishers.add(article.UserName);
+                        this.getUserPhotos(article.UserName);
+                    }
+                }
+                let userName = this.getCurrentUser();
+                this.localStorageService.store("reddah_article_ids_"+userName, JSON.stringify(this.loadedIds));
+                this.localStorageService.store("reddah_article_groups_"+userName, JSON.stringify(this.dislikeGroups));
+                this.localStorageService.store("reddah_article_usernames_"+userName, JSON.stringify(this.dislikeUserNames));
+                    
+            });
+        }
+    }    
 
     //******************************** */
     private registersubUrl = 'https://login.reddah.com/api/pub/registersub'; 
@@ -855,7 +888,8 @@ export class ReddahService {
     }
     //******************************** */
 
-  
+    
+
     private articlesUrl = 'https://reddah.com/api/webapi/getarticles'; 
     private userProfileModel: UserProfileModel;
 
@@ -884,6 +918,10 @@ export class ReddahService {
             catchError(this.handleError('getReddahSubs', []))
         );
     }
+
+    ArticleCacheQueue = new Queue<any>(); 
+
+
     //******************************** */
     private bookmarksUrl = 'https://login.reddah.com/api/article/getbookmarks'; 
     

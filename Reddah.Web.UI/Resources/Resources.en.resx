@@ -438,4 +438,22 @@
   <data name="Comment_Good" xml:space="preserve">
     <value>Good</value>
   </data>
+  <data name="Email_AlreadyVerified" xml:space="preserve">
+      <value>Your Email is verified</value>
+  </data>
+  <data name="Email_WrongToken" xml:space="preserve">
+      <value>The token is wrong, please check it</value>
+  </data>
+  <data name="Email_UserNotExist" xml:space="preserve">
+      <value>The user does not exist</value>
+  </data>
+  <data name="Email_VerifyOK" xml:space="preserve">
+      <value>Congrats! You have successfully verified your email</value>
+  </data>
+  <data name="Email_NotVerified" xml:space="preserve">
+      <value>The email is not verified</value>
+  </data>
+  <data name="Email_UnkownError" xml:space="preserve">
+      <value>Unknown Error, please try again later</value>
+  </data>
 </root>

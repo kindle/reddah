@@ -438,4 +438,22 @@
   <data name="Comment_Good" xml:space="preserve">
     <value>Good</value>
   </data>
+  <data name="Email_AlreadyVerified" xml:space="preserve">
+      <value>กล่องจดหมายถูกตรวจสอบแล้ว</value>
+  </data>
+  <data name="Email_WrongToken" xml:space="preserve">
+      <value>การรักษาความปลอดภัยสัญญาณข้อผิดพลาดโปรดตรวจสอบ</value>
+  </data>
+  <data name="Email_UserNotExist" xml:space="preserve">
+      <value>ผู้ใช้ไม่มี</value>
+  </data>
+  <data name="Email_VerifyOK" xml:space="preserve">
+      <value>ยินดีด้วยนะ กล่องจดหมายตรวจสอบเรียบร้อยแล้ว</value>
+  </data>
+  <data name="Email_NotVerified" xml:space="preserve">
+      <value>กล่องจดหมายที่ไม่ได้รับการยืนยัน</value>
+  </data>
+  <data name="Email_UnkownError" xml:space="preserve">
+      <value>ข้อผิดพลาดที่ไม่รู้จักโปรดลองอีกครั้งในภายหลัง</value>
+  </data>
 </root>
