@@ -4,6 +4,7 @@ import { SearchPage } from '../search/search.page';
 import { HeaderAddPage } from '../header-add-pop.page';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
+import { ReddahService } from '../../reddah.service';
 
 @Component({
     selector: 'app-header',
@@ -21,6 +22,7 @@ export class HeaderComponent {
         private platform: Platform,
         private localStorageService: LocalStorageService,
         private translate: TranslateService,
+        private reddah: ReddahService,
     ) { 
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
         this.translate.setDefaultLang(currentLocale);
@@ -28,6 +30,7 @@ export class HeaderComponent {
     }
 
     async goSearch(){
+        this.reddah.reloadLocaleSettings();
         const modal = await this.modalController.create({
             component: SearchPage,
             componentProps: {},

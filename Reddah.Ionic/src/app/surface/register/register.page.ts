@@ -4,8 +4,6 @@ import { ReddahService } from '../../reddah.service';
 import { LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { CacheService } from 'ionic-cache';
-import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
     selector: 'app-register',
@@ -18,9 +16,7 @@ export class RegisterPage implements OnInit {
         private reddah: ReddahService,
         private loadingController: LoadingController,
         private translate: TranslateService,
-        private iab: InAppBrowser,
-        private cacheService: CacheService,
-        private localStorageService: LocalStorageService,
+        private iab: InAppBrowser
     ) { }
 
     locale;

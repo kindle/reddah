@@ -95,7 +95,7 @@ export class PointPage implements OnInit {
         await modal.present();
         const { data } = await modal.onDidDismiss();
         if(data){
-            this.ngOnInit();
+            this.reddah.getUserPhotos(this.userName);
         }
     }
 

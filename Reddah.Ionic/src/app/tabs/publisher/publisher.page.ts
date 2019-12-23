@@ -113,29 +113,6 @@ export class PublisherPage {
         });
     }
 
-    
-    async showChangeMenu(event, contact){
-        const popover = await this.popoverController.create({
-            component: ChangeNoteNamePopPage,
-            componentProps: { 
-                targetUserName: contact.Watch,
-                currentNoteName: contact.NoteName ? contact.NoteName : contact.Watch,   
-            },
-            event: event,
-            animated: false,
-            translucent: true,
-            cssClass: 'change-note-label-popover'
-        });
-        await popover.present();
-        const { data } = await popover.onDidDismiss();
-        if(data||!data)
-        {
-            this.cacheService.clearGroup("PubPage");
-            this.reddah.getUserPhotos(this.userName);
-            this.loadData(null);
-        }
-    }
-
     async goSearch(){
         const userModal = await this.modalController.create({
             component: SearchPage,

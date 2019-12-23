@@ -44,24 +44,26 @@ export class PostviewerPage implements OnInit {
     ngOnInit() {
         this.reddah.getUserPhotos(this.article.UserName);
 
-        this.effeciveRead = setTimeout(() => {
-            if(!this.article.Read&&!this.reddah.isPointDone(this.reddah.pointTasks[1])){
-                this.reddah.getPointRead().subscribe(data=>{
-                    if(data.Success==0||data.Success==3){ 
-                        this.reddah.setPoint('Read', data.Message.GotPoint);
-                        if(data.Success==0){
-                            this.reddah.toast(
-                                this.translate.instant("Point.TaskReadTitle")+
-                                this.reddah.lan2(
-                                    " +"+data.Message.GotPoint+"/"+this.reddah.pointTasks[1].max,
-                                    this.translate.instant("Point.Fen")),
-                            "primary");
+        if(!this.preview){
+            this.effeciveRead = setTimeout(() => {
+                if(!this.article.Read&&!this.reddah.isPointDone(this.reddah.pointTasks[1])){
+                    this.reddah.getPointRead().subscribe(data=>{
+                        if(data.Success==0||data.Success==3){ 
+                            this.reddah.setPoint('Read', data.Message.GotPoint);
+                            if(data.Success==0){
+                                this.reddah.toast(
+                                    this.translate.instant("Point.TaskReadTitle")+
+                                    this.reddah.lan2(
+                                        " +"+data.Message.GotPoint+"/"+this.reddah.pointTasks[1].max,
+                                        this.translate.instant("Point.Fen")),
+                                "primary");
+                            }
+                            this.reddah.getUserPhotos(this.userName);
                         }
-                        this.reddah.getUserPhotos(this.userName);
-                    }
-                });
-            }
-        },5000);
+                    });
+                }
+            },5000);
+        }
     }
 
     ionViewDidEnter(){
@@ -70,7 +72,7 @@ export class PostviewerPage implements OnInit {
     }
 
     getSharePoint(){
-        if(!this.reddah.isPointDone(this.reddah.pointTasks[4])){
+        if(!this.reddah.isPointDone(this.reddah.pointTasks[3])){
             this.reddah.getPointShare().subscribe(data=>{
                 if(data.Success==0||data.Success==3){ 
                     this.reddah.setPoint('Share', data.Message.GotPoint);
@@ -78,7 +80,7 @@ export class PostviewerPage implements OnInit {
                         this.reddah.toast(
                             this.translate.instant("Point.TaskShareTitle")+
                             this.reddah.lan2(
-                                " +"+data.Message.GotPoint+"/"+this.reddah.pointTasks[4].max,
+                                " +"+data.Message.GotPoint+"/"+this.reddah.pointTasks[3].max,
                                 this.translate.instant("Point.Fen")),
                         "primary");
                     }
@@ -216,23 +218,22 @@ export class PostviewerPage implements OnInit {
 
     childReloadComments(event){
         this.loadComments();
-        setTimeout(()=>{
-            if(!this.reddah.isPointDone(this.reddah.pointTasks[5])){
-                this.reddah.getPointComment().subscribe(data=>{
-                    if(data.Success==0||data.Success==3){ 
-                        this.reddah.setPoint('Comment', data.Message.GotPoint);
-                        if(data.Success==0){
-                            this.reddah.toast(
-                                this.translate.instant("Point.TaskCommentTitle")+
-                                this.reddah.lan2(
-                                    " +"+data.Message.GotPoint+"/"+this.reddah.pointTasks[5].max,
-                                    this.translate.instant("Point.Fen")),
-                            "primary");
-                        }
+        if(!this.reddah.isPointDone(this.reddah.pointTasks[4])){
+            this.reddah.getPointComment().subscribe(data=>{
+                console.log(data)
+                if(data.Success==0||data.Success==3){ 
+                    this.reddah.setPoint('Comment', data.Message.GotPoint);
+                    if(data.Success==0){
+                        this.reddah.toast(
+                            this.translate.instant("Point.TaskCommentTitle")+
+                            this.reddah.lan2(
+                                " +"+data.Message.GotPoint+"/"+this.reddah.pointTasks[4].max,
+                                this.translate.instant("Point.Fen")),
+                        "primary");
                     }
-                });
-            }
-        })
+                }
+            });
+        }
     }
 
     async close() {

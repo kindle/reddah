@@ -13,24 +13,28 @@
     </ion-button>
 </ion-item>
 <ion-content>
-    <ion-item lines="none" class="gapBottom inputItem">
-        <ion-textarea autoresize [(ngModel)]="title" cols="20" placeholder="{{ 'Input.Name' | translate }}..."></ion-textarea>
+    <ion-item lines="none" class="gapItem">
+        <ion-textarea style="border-bottom: 1px solid gray;" 
+        autoresize [(ngModel)]="title" cols="20" 
+        placeholder="{{ 'Input.Name' | translate }}..."></ion-textarea>
     </ion-item>
     <ion-item lines="none" no-padding>
-        <ckeditor style="width:100%;" [editor]="Editor"
+        <ckeditor style="width:100%;margin-left:15px;" [editor]="Editor"
             [(ngModel)]="content"
             debounce="500"
             [config]="config">
         </ckeditor> 
     </ion-item>
-    <ion-item lines="none">
-        <ion-textarea autoresize [(ngModel)]="groupName" cols="20" placeholder="{{ 'Common.Label' | translate }}... L1,L2,L3 e.g."></ion-textarea>
+    <ion-item lines="none" class="gapItem">
+        <ion-textarea  style="border-bottom: 1px solid gray;" 
+        autoresize [(ngModel)]="groupName" cols="20" 
+        placeholder="{{ 'Common.Label' | translate }}... L1,L2,L3 e.g."></ion-textarea>
     </ion-item>
-    
+    <!--
     <ion-item lines="none">    
         <ion-button class="buttonGapTop gapBottom inputItem" slot="start" color="secondary" (click)="SelectPhoto()">
             {{ 'Common.MyPhoto' | translate }}
         </ion-button>
-    </ion-item>
+    </ion-item>-->
 
 </ion-content>

@@ -53,3 +53,11 @@
     margin: 5px 0px 0 0;
     margin-bottom: auto;
 }
+
+::ng-deep .ck.ck-editor__main>.ck-editor__editable {
+    height: 500px;
+}
+
+.gapItem{
+    margin: 10px 0;
+}

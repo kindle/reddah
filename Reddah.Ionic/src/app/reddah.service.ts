@@ -1165,10 +1165,12 @@ export class ReddahService {
 
     //not completed return false; 
     isPointDone(task){
+        console.log(task);
         if(task["id"]==1){//login
             return this.getPoint(task.key)==task.max;
         }
         else if(task["id"]>=2&&task["id"]<=5){//login,read,mark,share,comment
+            
             return this.getPoint(task.key)>=task.max;
         }
         else 

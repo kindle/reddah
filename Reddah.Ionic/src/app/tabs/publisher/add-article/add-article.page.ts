@@ -13,6 +13,8 @@ import { AddMaterialPage } from '../../../mytimeline/add-material/add-material.p
 import { PostviewerPage } from '../../../postviewer/postviewer.page';
 import { TranslateService } from '@ngx-translate/core';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+//import * as InlineEditor from '@ckeditor/ckeditor5-build-inline';
+
 //import Image from '@ckeditor/ckeditor5-image/src/image';
 //import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 //import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
@@ -28,6 +30,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 })
 export class AddArticlePage implements OnInit {
 
+    //public Editor = InlineEditor;
     public Editor = ClassicEditor;
     
 
@@ -41,9 +44,16 @@ export class AddArticlePage implements OnInit {
     
     config = {
         language: this.reddahService.getCurrentLocale(),
-        //uiColor: '#9AB8F3',
         toolbar: [
-            'ImageUpload',
+             
+        //"|", "alignment:left", "alignment:center", "alignment:right", "alignment:adjust", 
+        "bold", "italic", "blockQuote", "link", 
+        "|", "bulletedList", "numberedList", "imageUpload", 'insertTable','mediaEmbed',
+        "|", "undo", "redo",
+        "|", "heading",],
+       /*
+        toolbar: [
+            'Code','ImageUpload',
             'insertTable',
             'mediaEmbed',
             
@@ -56,12 +66,12 @@ export class AddArticlePage implements OnInit {
             'NumberedList', 'BulletedList', 'Blockquote', '-', 
             'Link', 'Unlink', 'Anchor', '-', 
             
-            'Source'
-        ],
+            
+        ],*/
         ckfinder: {
 			// eslint-disable-next-line max-len
             //uploadUrl: 'https://cksource.com/weuy2g4ryt278ywiue/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
-            uploadUrl: 'https://www.reddah.com/upload'
+            uploadUrl: 'https://login.reddah.com/api/photo/upload?jwt='+this.reddahService.getCurrentJwt()
         },
         image: {
             toolbar: [
@@ -101,6 +111,7 @@ export class AddArticlePage implements OnInit {
         } )
         .then()
         .catch();*/
+        
     }
 
 

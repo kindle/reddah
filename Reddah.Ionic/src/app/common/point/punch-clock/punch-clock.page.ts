@@ -23,11 +23,8 @@ export class PunchClockPage implements OnInit {
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,
-        private popoverController: PopoverController,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
-        private datePipe: DatePipe,
     ){
         this.userName = this.reddah.getCurrentUser();
         let cachedPunchedDays = this.localStorageService.retrieve("Reddah_PunchClock_"+this.userName);

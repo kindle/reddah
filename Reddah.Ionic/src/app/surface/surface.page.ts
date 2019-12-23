@@ -111,10 +111,10 @@ export class SurfacePage implements OnInit {
                 this.router.navigate(['']);
             }
         }
-        
-        setTimeout(() => {
+        else
+        {
             this.config.isWorldVisible = true;
-        }, 5000)
+        }
     }
 
     async locale(){
