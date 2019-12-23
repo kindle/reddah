@@ -9,6 +9,7 @@ import L from 'leaflet';
 //import "../../assets/maker/leaflet.awesome-markers";
 import { ActivatedRoute, Params } from '@angular/router';
 import { UserPage } from '../common/user/user.page';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
     selector: 'app-map',
@@ -165,21 +166,52 @@ export class MapPage implements OnInit {
 
         let latCenter = center.lat;
         let lngCenter = center.lng;
+        let orgLngCenter = center.lng;
         let latLow = sw.lat; 
         let latHigh = ne.lat;
         let lngLow = sw.lng;
+        let orgLngLow = sw.lng;
         let lngHigh = ne.lng;
-        //if(lngLow<-180)
-        //    lngLow+=180
-        //if(lngHigh>180)
-        //    lngHigh-=180
-        //alert(`center:${latCenter}_${lngCenter} lat:(${latLow}, ${latHigh})_lng:(${lngLow}, ${lngHigh})`);
+        let orgLngHigh = ne.lng;
+        
+        //alert(`center_lng:_${lngCenter} _lng:(${lngLow}, ${lngHigh})`);
 
+        //adjust
+        lngCenter = lngCenter % 360;
+        if (lngCenter >= 180)
+        {
+            lngCenter = lngCenter - 360;
+        }
+        if (lngCenter <= -180)
+        {
+            lngCenter = -lngCenter - 360;
+        }
+        lngLow = lngLow % 360;
+        if (lngLow >= 180)
+        {
+            lngLow = lngLow - 360;
+        }
+        if (lngLow <= -180)
+        {
+            lngLow = -lngLow - 360;
+        }
+        lngHigh = lngHigh % 360;
+        if (lngHigh >= 180)
+        {
+            lngHigh = lngHigh - 360;
+        }
+        if (lngHigh <= -180)
+        {
+            lngHigh = -lngHigh - 360;
+        }
+        //let lngOffset = lngCenter-orgLngCenter;
+        //console.log(lngOffset)
+        //alert(`center_lng:_${lngCenter} _lng:(${lngLow}, ${lngHigh})`);
         //get cache by current hour.
         //let cacheKey = `this.reddah.getUsersByLocation${type}${latCenter}${lngCenter}${latLow}${latHigh}${lngLow}${lngHigh}${this.reddah.getHourString()}`;
         //let request = this.reddah.getUsersByLocation(type, latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, 0);
         //this.cacheService.loadFromObservable(cacheKey, request, "getUsersByLocation")
-
+        this.map.setView([latCenter, lngCenter], this.map.getZoom());
         //do not use cache when user count is too low
         this.reddah.getUsersByLocation(type, latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, 0)
         .subscribe(data=>{

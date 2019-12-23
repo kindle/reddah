@@ -1303,7 +1303,7 @@ export class ReddahService {
 
     getLastLoginUserEmail(){
         let lastLoginUser = this.getLoginUserName();
-        return "";
+        return this.appData("useremail_"+lastLoginUser);
     }
 
     getVersionNumber(): Promise<string> {
@@ -1873,6 +1873,8 @@ export class ReddahService {
                     this.toTextCache(userInfo.Signature, `usersignature_${userName}`);
                 if(userInfo.Email!=null)
                     this.toTextCache(userInfo.Email, `useremail_${userName}`);
+                if(userInfo.Lan!=null)
+                    this.toTextCache(userInfo.Lan, `userlan_${userName}`);
                 if(userInfo.Type!=null)
                     this.toTextCache(userInfo.Type, `usertype_${userName}`);
                 if(userInfo.NoteName!=null)
@@ -1924,6 +1926,11 @@ export class ReddahService {
         }
     }
     
+    getUserLan(targetUserName){
+        let locale = this.appData("userlan_"+targetUserName);
+        let result = this.Locales.filter(l=>l.Name.toLowerCase()==locale.toLowerCase());
+        return result==null?"":result[0]["Description"];
+    }
 
     GetCache(url){
         if(this.platform.is('cordova')){

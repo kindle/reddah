@@ -84,6 +84,7 @@ export class TabsPage implements OnInit {
     
 
     change(page=null){
+        this.reddah.reloadLocaleSettings();
         if(page=="about"){
             this.about.checked = false;
         }

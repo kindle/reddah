@@ -56,6 +56,13 @@
         <ion-icon name="pin" color="primary" style="margin-right:5px;"></ion-icon>
         <ion-label>{{reddah.appData('userlocation_'+userName)}}</ion-label>
     </ion-item>
+
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;" *ngIf="reddah.appData('userlan_'+userName)">
+    </ion-item>
+    <ion-item lines="none" class="borderTop borderBottom" *ngIf="reddah.appData('userlan_'+userName)">
+        <span class="itemTitle">{{ 'Surface.Language' | translate }}</span>
+        <ion-label>{{reddah.getUserLan(userName)}}</ion-label>
+    </ion-item>
     
     <ion-item lines="none" style="--background:#eeeeee;height:10px;" 
         *ngIf="imageList&&imageList.length>0&&reddah.appData('userallowtentimeline_'+this.userName)==1">
