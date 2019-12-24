@@ -183,7 +183,7 @@ namespace Reddah.Web.Login.Controllers
                     {
                         var comments = (from c in db.Comment
                                         join u in db.UserProfile on c.UserName equals u.UserName
-                                        where c.ArticleId == existingChat.Id && c.Id > id
+                                        where c.ArticleId == existingChat.Id && c.Id >= id
                                         orderby c.Id descending
                                         select new AdvancedComment
                                         {

@@ -1315,7 +1315,7 @@ namespace Reddah.Web.Login.Controllers
 
                 if (jwtResult.Success != 0)
                     return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
-
+                
                 using (var db = new reddahEntities())
                 {
                     var item = db.UserFriend.FirstOrDefault(f => f.UserName == requestUserName && f.Watch == jwtResult.JwtUser.User);
@@ -1346,6 +1346,7 @@ namespace Reddah.Web.Login.Controllers
                             verse.NoteName = requestUserName;
                             verse.Approve = 1;
                         }
+                        
                     }
 
                     db.SaveChanges();
