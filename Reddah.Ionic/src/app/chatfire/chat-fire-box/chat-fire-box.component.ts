@@ -96,6 +96,7 @@ export class ChatFireBoxComponent implements OnInit {
         {
             if(result.Success==0)
             { 
+                //console.log('msg went db')
                 this.reloadComments.emit();
                 this.showFacePanel = false;
                 this.showFunctionPanel = false;

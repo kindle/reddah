@@ -222,11 +222,12 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
     
     //test
     clear(){
-        this.localStorageService.clear(`Reddah_Chat_${this.target}`);
+        this.localStorageService.clear(`Reddah_Chat_${this.chatId}`);
         this.messages = [];
     }
 
     async childReloadComments(event){
+        //console.log('ui refresh again')
         this.hasNewMsg = true;
         this.getChat();
     }
@@ -242,9 +243,14 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         }
         this.messages.push(newmessage);
         
-        if(this.pageTop.scrollToBottom)
-            this.pageTop.scrollToBottom(0);
-    
+        this.scrollToBottom();
+    }
+
+    private scrollToBottom(){
+        setTimeout(() => {
+            if(this.pageTop.scrollToBottom)
+                this.pageTop.scrollToBottom(0);
+        },200)
     }
 
     async getMoreHistory(evt){
@@ -253,20 +259,27 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
     }
     
     async getChat(){
-        let chatHistory = this.localStorageService.retrieve(`Reddah_Chat_${this.target}`);
-        if(chatHistory==null){
+        let chatHistory = this.localStorageService.retrieve(`Reddah_Chat_${this.chatId}`);
+        if(this.chatId==-1||chatHistory==null){
             //get latest 20 messages;
             this.getHistory(0, 20);
+            //console.log('chatid=-1 or no cache locally')
         }else{
             this.messages = chatHistory;
             //get all latest messages;
             let max = Math.max.apply(null,this.messages.map(item=>item["Id"]).filter(m=>m!=null));
-            this.getHistory(max, 0);
+            if(max==-Infinity)
+            {
+                this.getHistory(0, 20);
+            }
+            else{
+                this.getHistory(max, 0);
+            }
         }
     }
 
     async getHistory(id, limit, event=null){
-        
+        //console.log(id+"_"+limit)
         let formData = new FormData();
         formData.append("targetUser", this.target);
         formData.append("id", JSON.stringify(id));
@@ -283,23 +296,25 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
 
                 if(id==0){//first load
                     this.messages =  data.Message.Comments;
-                    setTimeout(() => {
-                        if(this.pageTop.scrollToBottom)
-                            this.pageTop.scrollToBottom(0);
-                    },200)
+                    this.scrollToBottom();
                 }
                 else if(id<0){//get previous
+                    //console.log("id<0...")
                     this.messages = data.Message.Comments.concat(this.messages);
                 }
                 else{//new msg came in.
+                    //console.log('other new msg came in...')
                     try{
                         //update local
                         this.messages.forEach((item,index)=>{
                             if(item["Id"]==null){
+                                //console.log('start compare')
                                 let mact = data.Message.Comments.filter(n=>n["Uid"]==item["Uid"]);
                                 if(mact!=null){
+                                    //console.log(item)
                                     this.messages[index]["Id"] = mact[0]["Id"];
                                     this.messages[index]["Content"] = mact[0]["Content"];
+                                    //console.log(this.messages)
                                 }
                             }
                         });
@@ -326,7 +341,7 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
                             text: tx,
                             data: { secret: 'secret' },
                             foreground: true,
-                            icon: m.UserPhoto.replace("///","https")
+                            icon: m.UserPhoto?m.UserPhoto.replace("///","https"):m.UserPhoto
                         });
                     })
 
@@ -338,13 +353,14 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
                             this.pageTop.scrollToBottom(0);
                     },200)
                 }
-                this.localStorageService.store(`Reddah_Chat_${this.target}`, this.messages);
+                //console.log('save msg')
+                //console.log(this.messages)
+                this.localStorageService.store(`Reddah_Chat_${this.chatId}`, this.messages);
 
                 if(event!=null){
                     event.target.complete();
                 }
-
-                if(this.platform.is('cordova'))
+                /*if(this.platform.is('cordova'))
                 {
                     this.messages.forEach((comment:any)=>{
                         if(comment.Type==1&&comment.Duration>=0)//audio only
@@ -352,7 +368,7 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
                             this.preload(comment["Content"]);   
                         }
                     })
-                }
+                }*/
             }
             else{
                 //console.log(JSON.stringify(data));

@@ -111,26 +111,35 @@ export class HomePage implements OnInit {
     }
 
     getCacheArticles(event, unshift=false):void {
-        let count = 10;
-        for(let i=1;i<=count;i++){
-            let article = this.reddah.ArticleCacheQueue.pop();
-            if(article!=null){
-                if(unshift){
-                    this.reddah.articles.unshift(article);
-                    this.reddah.loadedIds.unshift(article.Id);  
-                }
-                else{
-                    this.reddah.articles.push(article);
-                    this.reddah.loadedIds.push(article.Id);  
+        if(this.reddah.ArticleCacheQueue.length()==0){
+            setTimeout(()=>{
+                this.getCacheArticles(event, unshift);
+            },1000)
+        }
+        else{
+            let count = 10;
+            for(let i=1;i<=count;i++){
+                let article = this.reddah.ArticleCacheQueue.pop();
+                if(article!=null){
+                    if(unshift){
+                        this.reddah.articles.unshift(article);
+                        this.reddah.loadedIds.unshift(article.Id);  
+                    }
+                    else{
+                        this.reddah.articles.push(article);
+                        this.reddah.loadedIds.push(article.Id);  
+                    }
                 }
             }
-        }
-        this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
+            this.localStorageService.store("reddah_cache_queue_"+this.userName, JSON.stringify(this.reddah.ArticleCacheQueue));
+            this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
 
-        if(event){
-            event.target.complete();
+            if(event){
+                event.target.complete();
+            }
+            this.reddah.fillCacheArticles();
+            
         }
-        this.reddah.fillCacheArticles();
     }    
 
     async myInfo() {
