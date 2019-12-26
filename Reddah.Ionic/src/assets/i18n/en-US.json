@@ -264,7 +264,8 @@
         "CancelPublish":"Later",
         "ConfirmPublish":"Publish",
         "LoginToView":"Plese login to find more",
-        "MyFeedback":"My Feedback"
+        "MyFeedback":"My Feedback",
+        "MapSlogan":"To know people from all over the world"
     },
 
     "Mail":{

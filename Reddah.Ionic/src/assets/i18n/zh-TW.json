@@ -263,7 +263,8 @@
         "CancelPublish":"稍後發佈",        
         "ConfirmPublish":"確認發佈",
         "LoginToView":"請登入後查看",
-        "MyFeedback":"我的迴響"
+        "MyFeedback":"我的迴響",
+        "MapSlogan":"海內存知己，天涯若比鄰"
     },
 
     "Mail":{

@@ -132,6 +132,11 @@ export class AddTimelinePage implements OnInit {
         else if(this.postType==5){//placeholder
             //
         }
+
+        let draftThoughts = this.localStorageService.retrieve("Reddah_Mytimeline_Draft"+this.reddah.getCurrentUser());
+        if(draftThoughts!=null){
+            this.yourThoughts = draftThoughts;
+        }
     }
     
     //photos = [{fileUrl: '1', webUrl:'web1'},{fileUrl: '2', webUrl:'web2'},{fileUrl: '3', webUrl:'web3'}];
@@ -149,6 +154,10 @@ export class AddTimelinePage implements OnInit {
 
     pressUpImage(){
         this.dragging = false;
+    }
+
+    async saveDraft(){
+        this.localStorageService.store("Reddah_Mytimeline_Draft"+this.reddah.getCurrentUser(),this.yourThoughts);
     }
 
     async submit(){
@@ -183,6 +192,7 @@ export class AddTimelinePage implements OnInit {
                 this.cacheService.clearGroup("MyTimeLinePage");
                 this.localStorageService.clear("Reddah_mytimeline_"+this.reddah.getCurrentUser());
                 this.localStorageService.clear("Reddah_mytimeline_ids_"+this.reddah.getCurrentUser());
+                this.localStorageService.clear("Reddah_Mytimeline_Draft"+this.reddah.getCurrentUser());
                 this.close(true);
             }
             else

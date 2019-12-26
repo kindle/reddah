@@ -13,6 +13,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Globalization } from '@ionic-native/globalization';
 import { ReddahService } from './reddah.service';
 import { AuthService } from './auth.service';
+import { Queue } from './model/UserModel';
 
 @Component({
     selector: 'app-root',
@@ -147,6 +148,11 @@ export class AppComponent {
                     this.reddah.unReadMessage = data.Message;
                 }
             });
+            let localCache = this.localStorageService.retrieve("reddah_cache_queue_"+this.reddah.getCurrentUser());
+            if(localCache!=null){
+                this.reddah.ArticleCacheQueue = new Queue<any>();
+                this.reddah.ArticleCacheQueue._store = JSON.parse(localCache);
+            }
         }
         
         let currentFontSize = this.localStorageService.retrieve("Reddah_fontsize");

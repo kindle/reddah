@@ -134,7 +134,7 @@ export class CommentBoxComponent implements OnInit {
         
         await addCommentModal.present();
         const { data } = await addCommentModal.onDidDismiss();
-        if(data){
+        if(data.action=='submit'){
             this.commentContent = "";
             let cacheKey = "this.reddah.getComments" + this.selectedArticleId;
             this.cacheService.removeItem(cacheKey);

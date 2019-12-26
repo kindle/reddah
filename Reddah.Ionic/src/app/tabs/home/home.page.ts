@@ -111,7 +111,7 @@ export class HomePage implements OnInit {
     }
 
     getCacheArticles(event, unshift=false):void {
-        if(this.reddah.ArticleCacheQueue.length()==0){
+        if(this.reddah.ArticleCacheQueue==null||this.reddah.ArticleCacheQueue.length()==0){
             setTimeout(()=>{
                 this.getCacheArticles(event, unshift);
             },1000)
@@ -131,7 +131,7 @@ export class HomePage implements OnInit {
                     }
                 }
             }
-            this.localStorageService.store("reddah_cache_queue_"+this.userName, JSON.stringify(this.reddah.ArticleCacheQueue));
+            this.localStorageService.store("reddah_cache_queue_"+this.userName, JSON.stringify(this.reddah.ArticleCacheQueue._store));
             this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
 
             if(event){

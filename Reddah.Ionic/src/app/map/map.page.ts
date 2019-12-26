@@ -1,15 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { ReddahService } from '../reddah.service';
-import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { CacheService } from "ionic-cache";
 
 import L from 'leaflet';
 //import "../../assets/maker/leaflet.awesome-markers";
 import { ActivatedRoute, Params } from '@angular/router';
 import { UserPage } from '../common/user/user.page';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
     selector: 'app-map',

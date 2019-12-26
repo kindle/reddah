@@ -111,7 +111,7 @@ export class ReddahService {
                     }
                 }
                 let userName = this.getCurrentUser();
-                this.localStorageService.store("reddah_cache_queue_"+userName, JSON.stringify(this.ArticleCacheQueue));
+                this.localStorageService.store("reddah_cache_queue_"+userName, JSON.stringify(this.ArticleCacheQueue._store));
                 this.localStorageService.store("reddah_article_ids_"+userName, JSON.stringify(this.loadedIds));
                 this.localStorageService.store("reddah_article_groups_"+userName, JSON.stringify(this.dislikeGroups));
                 this.localStorageService.store("reddah_article_usernames_"+userName, JSON.stringify(this.dislikeUserNames));

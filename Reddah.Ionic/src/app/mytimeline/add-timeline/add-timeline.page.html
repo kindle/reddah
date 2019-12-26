@@ -6,7 +6,7 @@
 </ion-item>
 <ion-content (click)="tap($event)">
     <ion-item>
-        <ion-textarea id="thoughtTxt" autoresize [(ngModel)]="yourThoughts" rows="{{postType==4?3:6}}" cols="20" 
+        <ion-textarea id="thoughtTxt" (ionBlur)="saveDraft()" autoresize [(ngModel)]="yourThoughts" rows="{{postType==4?3:6}}" cols="20" 
         placeholder="{{ 'Pop.YourThoughts' | translate }}..."></ion-textarea>
     </ion-item>
     <ion-item lines="none">
