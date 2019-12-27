@@ -31,16 +31,15 @@
         <ion-label></ion-label>
     </ion-item>
     
-    <ion-list>
+    <ion-list *ngIf="feedbackType!=6">
         <ion-radio-group>
             <ion-item *ngFor="let item of feedbackTypes" (click)="changeFeedbackType(item)">
                 <ion-radio value="{{item.value}}" checked="{{item.checked}}"></ion-radio>
                 <ion-label>{{item.text}}</ion-label>
             </ion-item>
         </ion-radio-group>
-      </ion-list>
+    </ion-list>
 
-    
 </ion-content>
 <ion-footer *ngIf="dragging" style="background-color: red;color: white;">
     <ion-row id="delete-photo" class="delete-area" align-items-center justify-content-center dragula="bag" [(dragulaModel)]="photos_trash">

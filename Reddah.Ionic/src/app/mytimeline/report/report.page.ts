@@ -210,7 +210,7 @@ export class ReportPage implements OnInit {
             {
                 this.formData.append("id", JSON.stringify(id))
                 this.formData.append("data", JSON.stringify(1))
-                this.formData.append("content", "感谢反馈，积分奖励")
+                this.formData.append("content", this.translate.instant('Point.TaskReportAwardComment'))
                 this.reddah.reportAward(this.formData).subscribe(data=>{
                     if(data.Success==0||data.Success==3){ 
                         if(data.Success==0){
@@ -226,7 +226,7 @@ export class ReportPage implements OnInit {
             {
                 this.formData.append("id", JSON.stringify(id))
                 this.formData.append("data", JSON.stringify(2))
-                this.formData.append("content", "感谢反馈")
+                this.formData.append("content", this.translate.instant('Point.TaskReportNoAwardComment'))
                 this.reddah.reportAward(this.formData).subscribe(data=>{
                     if(data.Success==0||data.Success==3){ 
                         if(data.Success==0){

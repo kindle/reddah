@@ -19,6 +19,7 @@ export class AddFeedbackPage implements OnInit {
     @Input() feedbackType = 1;
 
     @Input() article: any;
+    @Input() userName;
 
     constructor(
         private popoverController: PopoverController,
@@ -105,7 +106,11 @@ export class AddFeedbackPage implements OnInit {
     }
     
     ngOnInit() {
-        console.log(this.article)
+        if(this.feedbackType==6){
+            this.feedbackTypes = [
+                { value:6, checked: true, text:this.translate.instant("Pop.Report") }
+            ];
+        }
         //4 article report abuse
         this.feedbackTypes.forEach((item,index)=>{
             if(item.value==this.feedbackType){
@@ -151,6 +156,11 @@ export class AddFeedbackPage implements OnInit {
                 this.formData.append("ref", this.article.UserId);
                 this.formData.append("utype", 5+"");
             }
+        }
+        else if(this.feedbackType==6){//user report abuse
+            this.formData.append("abstract", this.userName);
+            this.formData.append("utype", 6+"");
+            this.formData.append("ref", JSON.stringify(6));
         }
         else{
             this.formData.append("ref", JSON.stringify(0));

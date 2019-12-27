@@ -202,15 +202,40 @@ export class UserPage implements OnInit {
             }*/
             ].concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?
                 [{
-                    text: this.translate.instant("Comment.Delete"),
-                    icon: 'ios-trash',
+                    text: this.translate.instant("Pop.Report"),
+                    icon: 'alert',
                     handler: () => {
-                        this.delConfirm();                  
+                        this.report();                  
                     }
                 }]:[]
-            )
+            ).concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?
+            [{
+                text: this.translate.instant("Comment.Delete"),
+                icon: 'ios-trash',
+                handler: () => {
+                    this.delConfirm();                  
+                }
+            }]:[]
+        )
         });
         await actionSheet.present();
+    }
+
+    async report(){
+        this.close();
+        const modal = await this.modalController.create({
+            component: AddFeedbackPage,
+            componentProps: { 
+                title: this.translate.instant("Pop.Report"),
+                desc: this.translate.instant("Pop.ReportUserReason"),
+                feedbackType: 6,
+                article: null,
+                userName: this.userName
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await modal.present();
     }
 
     async delConfirm(){
