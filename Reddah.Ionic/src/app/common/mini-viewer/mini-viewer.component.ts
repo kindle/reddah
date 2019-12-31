@@ -11,6 +11,7 @@ import { Vibration } from '@ionic-native/vibration/ngx';
 import { RankPage } from '../rank/rank.page';
 import { TranslateService } from '@ngx-translate/core';
 
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
     selector: 'app-mini-viewer',
@@ -132,6 +133,8 @@ export class MiniViewerComponent implements OnInit {
         
         this.initGyro();
         this.initVibration();
+        this.initCameraPhoto();
+        this.initLibPhoto();
     }
 
     initGyro(){
@@ -147,6 +150,35 @@ export class MiniViewerComponent implements OnInit {
     initVibration(){
         window["reddahApi"].vibrate = ()=> {
             this.vibration.vibrate(1000);
+        }
+    }
+
+    initCameraPhoto(){
+        window["reddahApi"].camera = ()=>{
+            const options: CameraOptions = {
+                quality: 100,
+                destinationType: Camera.DestinationType.FILE_URI,
+                encodingType: Camera.EncodingType.JPEG,
+                mediaType: Camera.MediaType.PICTURE,
+                correctOrientation: true
+            }
+                
+            return Camera.getPicture(options);
+        }
+    }
+
+    initLibPhoto(){
+        window["reddahApi"].album = ()=>{
+            const options: CameraOptions = {
+                quality: 100,
+                destinationType: Camera.DestinationType.FILE_URI,
+                encodingType: Camera.EncodingType.JPEG,
+                mediaType: Camera.MediaType.PICTURE,
+                sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                correctOrientation: true
+            }
+                
+            return Camera.getPicture(options);
         }
     }
 

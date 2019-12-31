@@ -25,7 +25,6 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { DatePipe } from '@angular/common';
-import { QueueScheduler } from 'rxjs/internal/scheduler/QueueScheduler';
 
 @Injectable({
     providedIn: 'root'
@@ -1204,7 +1203,7 @@ export class ReddahService {
 
     //not completed return false; 
     isPointDone(task){
-        console.log(task);
+        //console.log(task);
         if(task["id"]==1){//login
             return this.getPoint(task.key)==task.max;
         }
@@ -1621,7 +1620,9 @@ export class ReddahService {
         if(cacheKey.indexOf('userphoto_')>-1){
             if(this.platform.is('android')){
                 if(result)
+                {
                     return (<any>window).Ionic.WebView.convertFileSrc(result);
+                }
                 else
                     return "assets/icon/"+userPhotoName;
             }
@@ -1704,27 +1705,31 @@ export class ReddahService {
     }
 
     level2Cache(cacheKey){
-        if(this.platform.is('android')){
-            let storekey = cacheKey.replace("///","https://")
-            let preview = this.localStorageService.retrieve(storekey);
-            let org = this.localStorageService.retrieve(storekey.replace("_reddah_preview",""))
-    
-            if(org){
-                return (<any>window).Ionic.WebView.convertFileSrc(org);
+        if(cacheKey){
+            if(this.platform.is('android')){
+                let storekey = cacheKey.replace("///","https://")
+                let preview = this.localStorageService.retrieve(storekey);
+                let org = this.localStorageService.retrieve(storekey.replace("_reddah_preview",""))
+        
+                if(org){
+                    return (<any>window).Ionic.WebView.convertFileSrc(org);
+                }
+                else if(preview)
+                {
+                    return (<any>window).Ionic.WebView.convertFileSrc(preview);
+                }
+                else
+                {
+                    return cacheKey.replace("///","https://");
+                }
             }
-            else if(preview)
-            {
-                return (<any>window).Ionic.WebView.convertFileSrc(preview);
-            }
-            else
-            {
+            else{
                 return cacheKey.replace("///","https://");
             }
         }
         else{
-            return cacheKey.replace("///","https://");
+            return cacheKey;
         }
-        
     }
 
     chatImageCache(cacheKey){

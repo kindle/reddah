@@ -47,7 +47,7 @@
                     <div style="background-color: white; padding: 0 0 4px 0;margin-bottom:0px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
                 </div>
                 <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
-                    <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 2px;margin-bottom:5px;width:96%;" 
+                    <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 12px;margin-bottom:5px;width:96%;" 
                     [innerHTML]="reddah.summaryShort(article.Title, 100, '......')"></div>
                 </ion-item>
                 <app-share-article *ngIf="article.Abstract&&article.Abstract.length>2" [abstract]="article.Abstract" [image]="article.Content" [id]="article.Ref" [type]="article.Type"></app-share-article>
