@@ -401,27 +401,39 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
     }
 
     async play(audioFileName){
-        let target = this.reddah.getDeviceDirectory() +"reddah/";
-        //let target = this.file.applicationStorageDirectory;
+        /*
+        if(this.platform.is('cordova')){
+            let target = this.reddah.getDeviceDirectory() +"reddah/";
+            //let target = this.file.applicationStorageDirectory;
+            alert(target+audioFileName)
 
-        //error handling, check again
-        this.file.checkFile(target, audioFileName)
-        .then(_ =>{
-            this.localStorageService.store(audioFileName, target);
-            let player = this.media.create(target.replace(/^file:\/\//, '') + audioFileName);
-            player.play();
-        })
-        .catch(err =>{
-            this.fileTransfer.download("https://login.reddah.com/uploadPhoto/"+audioFileName, target+ audioFileName, true).then((entry) => {
+            //error handling, check again
+            this.file.checkFile(target, audioFileName)
+            .then(_ =>{
                 this.localStorageService.store(audioFileName, target);
                 let player = this.media.create(target.replace(/^file:\/\//, '') + audioFileName);
                 player.play();
-            }, (error) => {
-                //console.log(JSON.stringify(error));
-                alert(JSON.stringify(error));
+            })
+            .catch(err =>{
+                this.fileTransfer.download("https://login.reddah.com/uploadPhoto/"+audioFileName, target+ audioFileName, true).then((entry) => {
+                    this.localStorageService.store(audioFileName, target);
+                    let player = this.media.create(target.replace(/^file:\/\//, '') + audioFileName);
+                    player.play();
+                }, (error) => {
+                    //console.log(JSON.stringify(error));
+                    alert(JSON.stringify(error));
+                });
             });
-        });
-        
+        }
+        else{
+            let audioChatUrl = "https://login.reddah.com/uploadPhoto/"+audioFileName;
+            console.log(audioChatUrl)
+            var audio = new Audio(audioChatUrl);
+            audio.play();
+        }*/
+        let audioChatUrl = "https://login.reddah.com/uploadPhoto/"+audioFileName;
+        var audio = new Audio(audioChatUrl);
+        audio.play();
     }
 
     async close() {

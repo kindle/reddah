@@ -25,6 +25,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { DatePipe } from '@angular/common';
+import { Md5 } from 'ts-md5/dist/md5';
 
 @Injectable({
     providedIn: 'root'
@@ -296,7 +297,108 @@ export class ReddahService {
             catchError(this.handleError('get nlp chat', []))
         );
     }
+     
     
+
+    getQqNlpChat(params, appKey): Observable<any> {
+
+        let nplQqChatUrl = "https://api.ai.qq.com/fcgi-bin/nlp/nlp_textchat";
+        /*return this.http.post<any>(this.nplQqChatUrl, params)
+        .pipe(
+            tap(data => this.log('get qq nlp chat')),
+            catchError(this.handleError('get qq nlp chat', []))
+        );*/
+
+
+            
+        nplQqChatUrl += "?"
+        for (var key of Object.keys(params)) {
+            let value = params[key];
+            if(value!=""){
+                nplQqChatUrl += key + '=' + encodeURIComponent(value) + '&';
+            }
+        }
+        nplQqChatUrl += 'app_key=' + appKey;
+
+        
+        console.log(nplQqChatUrl)
+
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append("locale", this.getCurrentLocale());
+        formData.append("content", nplQqChatUrl);
+        return this.http.post<any>(this.nplChatUrl, formData)
+        .pipe(
+            tap(data => this.log('get nlp chat')),
+            catchError(this.handleError('get nlp chat', []))
+        );
+
+/*
+        if (!this.options) {
+            this.options = {headers: new Headers()};
+        }
+        this.options.headers.set('Content-Type', 'application/json; charset=utf-8');
+        this.http.get<any>(this.nplQqChatUrl,this.options).subscribe(data=>{
+            console.log(data);
+        })
+
+        this.http.get(this.nplQqChatUrl, {responseType: 'text'})
+        .subscribe(res=>{ console.log(res) })
+*/
+        //return this.http.get(this.nplQqChatUrl)
+        //.pipe(
+        //    tap(data => this.log('get qq nlp chat')),
+        //    catchError(this.handleError('get qq nlp chat', []))
+        //);
+
+
+/*
+        if (!this.options) {
+            this.options = {headers: new Headers()};
+        }
+        this.options.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+
+        this.options.params = params;
+
+        //this.jsonp.get(this.nplQqChatUrl, this.options).map()
+        this.jsonp.get(this.nplQqChatUrl).subscribe(data => {
+            console.log(data)
+          });
+
+
+        return this.jsonp.get(this.nplQqChatUrl, this.options).pipe(
+            tap(data => this.log('get qq nlp chat')),
+            catchError(this.handleError('get qq nlp chat', []))
+        );
+        */
+    }
+
+    getReqSign(o, appkey){
+        console.log(o);
+        o = this.ksort(o);
+
+        let str = "";
+        for (var key of Object.keys(o)) {
+            let value = o[key];
+            if(value!=""){
+                str += key + '=' + encodeURIComponent(value) + '&';
+            }
+        }
+        str += 'app_key=' + appkey;
+
+        let sign = Md5.hashStr(str)+"";
+        return sign.toUpperCase();
+    }
+
+    ksort(o) {
+        let sorted = {},
+        keys = Object.keys(o);
+        keys.sort();
+        keys.forEach((key)=>{
+          sorted[key] = o[key];
+        })
+        return sorted;
+    }
     //******************************** */
     private getMaterialUrl = 'https://login.reddah.com/api/pub/getmaterial'; 
 
@@ -1403,16 +1505,19 @@ export class ReddahService {
     private handleError<T> (operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             //alert(JSON.stringify(error));
-            let msg = error.message;
-            if(msg.indexOf("failure response")>0){
-                if(this.translate.instant("Input.Error.NetworkError")!="Input.Error.NetworkError")
-                    this.toast(this.translate.instant("Input.Error.NetworkError"), "danger")
-            }
-                
-            if(msg.indexOf("ERR_TIMED_OUT")>0)
-                this.toast(this.translate.instant("Input.Error.ServiceError"), "danger")
             // TODO: send the error to remote logging infrastructure
             console.error(error); // log to console instead
+
+            let msg = error.message;
+            if(msg!=null){
+                if(msg.indexOf("failure response")>0){
+                    if(this.translate.instant("Input.Error.NetworkError")!="Input.Error.NetworkError")
+                        this.toast(this.translate.instant("Input.Error.NetworkError"), "danger")
+                }
+                    
+                if(msg.indexOf("ERR_TIMED_OUT")>0)
+                    this.toast(this.translate.instant("Input.Error.ServiceError"), "danger")
+            }
 
             // TODO: better job of transforming error for user consumption
             this.log(`${operation} failed: ${error.message}`);
@@ -2533,6 +2638,13 @@ export class ReddahService {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
+        });
+    }
+
+    nonce_str() {
+        return 'xxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 10 | 0, v = r;
+            return v.toString(10);
         });
     }
 

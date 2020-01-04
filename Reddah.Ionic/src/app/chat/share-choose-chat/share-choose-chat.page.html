@@ -12,7 +12,8 @@
         <div style="margin:5px 0px;">
             <div class="singleGroupImage" *ngIf="message.Type==2">
                 <div>
-                    <img src="{{reddah.appData('userphoto_'+GetSender(message.GroupName))}}">
+                    <img src="{{reddah.appData('userphoto_'+GetSender(message.GroupName))}}"
+                    onerror="this.src='assets/icon/anonymous.png';">
                 </div>
             </div>
             <div class="groupImages" *ngIf="message.Type==3">

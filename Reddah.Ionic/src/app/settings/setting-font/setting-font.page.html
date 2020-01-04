@@ -9,14 +9,16 @@
         <ion-row>
             <ion-col no-padding>
                 <div class="container-right" *ngIf="userName==comment.UserName">
-                    <img src="{{reddah.appData('userphoto_'+comment.UserName)}}" class="portrait" (click)="goUser(comment.UserName)">
+                    <img src="{{reddah.appData('userphoto_'+comment.UserName)}}" class="portrait"
+                    onerror="this.src='assets/icon/anonymous.png';">
                     <div class="arrow-box-right" *ngIf="comment.Type<2">
                         <div class="chat-box-me" *ngIf="comment.Type==0" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
                         <div class="chat-arrow-right" style="flex:auto 0;"></div>
                     </div>
                 </div>
                 <div class="container-left" *ngIf="userName!=comment.UserName">
-                    <img src="{{reddah.appData('userphoto_'+comment.UserName)}}" class="portrait" (click)="goUser(comment.UserName)">
+                    <img src="{{reddah.appData('userphoto_'+comment.UserName)}}" class="portrait"
+                    onerror="this.src='assets/icon/anonymous.png';">
                     <div style="display: flex;margin-left:5px;">
                         <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type<2"></div>
                         <div class="chat-box-others" *ngIf="comment.Type==0" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>

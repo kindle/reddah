@@ -212,6 +212,7 @@ export class ChatFireBoxComponent implements OnInit {
             let filePath = this.reddah.getDeviceDirectory().replace(/^file:\/\//, '') + "/reddah/" + fileName;
             //let filePath = this.file.applicationStorageDirectory.replace(/^file:\/\//, '') + fileName;
             this.audioMediaObj = this.media.create(filePath);
+            //this.localStorageService.store(fileName, target);
             this.audioMediaObj.startRecord();
             this.audioMediaObj.onSuccess.subscribe(() => {
                 this.uploadAudio(fileName);

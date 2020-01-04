@@ -60,9 +60,9 @@ export class MysticPage implements OnInit {
         private cacheService: CacheService,
         private zone: NgZone,       
     ) { 
-        
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
+        this.getMysticPhoto();
     }
     
 ///pop up new window
@@ -213,25 +213,7 @@ export class MysticPage implements OnInit {
     async generateReactiveChat(inputText){
         if(this.generateChat())
         {
-            this.formData.append("locale", this.reddah.getCurrentLocale());
-            this.formData.append("content", inputText);
-            this.reddah.getNlpChat(this.formData).subscribe(data=>{
-                let response = JSON.parse(data.Message)
-                let answer = response.result.fulfillment.speech;
-                let time = (response.timestamp+"")
-                
-                if(data.Success==0){
-                    this.addMessage({
-                        CreatedOn: time,
-                        Content: answer, 
-                        UserName: 'Mystic', 
-                        Type:0,
-                    });
-                }
-            });
-
-            
-            /*
+            /*google mobile api
             let token = "";
             const en_us_token = "b43ae9dcee7b42d489c115c747604fdd";
             const zh_cn_token = "66dc4f2fb4ff49efaac6edda55eb0df1";
@@ -254,7 +236,76 @@ export class MysticPage implements OnInit {
                 });
             });
             */
+
+
+            console.log(this.reddah.getCurrentLocale())
+            if(this.reddah.getCurrentLocale()=="zh-CN"||
+            this.reddah.getCurrentLocale()=="zh-TW")
+            {//qq api
+                let app_id = 2127183732;
+                let app_key = "493J0jD8PPeNUHNz";
+                let time_stamp = new Date().getTime();
+                let nonce_str = this.reddah.nonce_str();
+                
+                let session = this.reddah.getCurrentUser();
+                let question = inputText;
+
+                let params = {
+                    "app_id":app_id,
+                    "time_stamp":Math.floor(time_stamp/1000),
+                    "nonce_str":nonce_str,
+                    "session":session,
+                    "question":question,
+                    "sign":""
+                }
+                
+                params["sign"] = this.reddah.getReqSign(params, app_key);
+                
+                this.reddah.getQqNlpChat(params, app_key).subscribe(data=>{
+                    let response = JSON.parse(data.Message)
+                    let answer = response.data.answer;
+                    let time = new Date().getTime();
+                    
+                    if(data.Success==0){
+                        if(response.ret!=0)
+                        {
+                            answer = "换个问题试试。";
+                        }
+                        this.addMessage({
+                            CreatedOn: time,
+                            Content: answer, 
+                            UserName: 'Mystic', 
+                            Type:0,
+                        });
+                    }
+                });
+            }
+            else//(this.reddah.getCurrentLocale()=="en-US")
+            {
+                this.formData.append("locale", this.reddah.getCurrentLocale());
+                this.formData.append("content", inputText);
+                this.reddah.getNlpChat(this.formData).subscribe(data=>{
+                    let response = JSON.parse(data.Message)
+                    let answer = response.result.fulfillment.speech;
+                    let time = (response.timestamp+"")
+                    
+                    if(data.Success==0){
+                        this.addMessage({
+                            CreatedOn: time,
+                            Content: answer, 
+                            UserName: 'Mystic', 
+                            Type:0,
+                        });
+                    }
+                });
+            }
+
         }
+    }
+
+    mysticPhoto = "assets/500/500.jpeg";
+    getMysticPhoto(){
+        this.mysticPhoto = "assets/500/50" + this.reddah.getRandomInt(8)+".jpeg";
     }
     
     generateChat(){

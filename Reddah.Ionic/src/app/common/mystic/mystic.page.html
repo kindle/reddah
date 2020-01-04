@@ -22,7 +22,7 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
             <ion-col no-padding>
                 <div class="container-right" *ngIf="userName==comment.UserName">
                     <img [src]="reddah.appData('userphoto_'+comment.UserName)"
-                        class="portrait" (click)="goUser(comment.UserName)">
+                        class="portrait">
                     <div class="arrow-box-right" *ngIf="comment.Type==0">
                         <div class="chat-box-me" (press)="showChatMenu($event, comment.Content)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
                         <div class="chat-arrow-right" style="flex:auto 0;"></div>
@@ -71,8 +71,7 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
 -->
                 </div>
                 <div class="container-left" *ngIf="userName!=comment.UserName">
-                    <img [src]="reddah.appData('userphoto_'+comment.UserName)"
-                        class="portrait" (click)="goUser(comment.UserName)">
+                    <img [src]="mysticPhoto" class="portrait" (click)="viewer(0, [mysticPhoto])">
                     <div style="display: flex;margin-left:5px;">
                         <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==0"></div>
                         <div class="chat-box-others" *ngIf="comment.Type==0" 

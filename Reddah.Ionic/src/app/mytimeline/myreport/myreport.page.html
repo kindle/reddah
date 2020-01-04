@@ -16,11 +16,13 @@
                 <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>
             </ion-refresher>  
             <div class="timelineCover" #timelineCover>
-                <img src="{{reddah.appData('cover_'+userName)}}">
+                <img src="{{reddah.appData('cover_'+userName)}}" 
+                onerror="this.src='assets/icon/timg.jpg';">
             </div>
             <div class="timelineAvatar">
                 <ion-label class="userNameTitle">{{reddah.getDisplayName(userName)}}</ion-label>
-                <img src="{{reddah.appData('userphoto_'+userName)}}" (click)="goUser(userName)">
+                <img src="{{reddah.appData('userphoto_'+userName)}}"
+                onerror="this.src='assets/icon/anonymous.png';">
             </div>
             <div (click)="goMessage()" *ngIf="reddah.unReadMessage.length>0" class="messageBox">
                 <img [src]="reddah.appData('userphoto_'+reddah.unReadMessage.slice(-1)[0].From)" class="messagePhoto">

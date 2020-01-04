@@ -8,7 +8,8 @@
     </ion-item>
     <ion-item lines="none" class="borderBottom" (click)="myInfo()">
         <ion-thumbnail slot="start" style="padding: 5px;">
-          <img src="{{reddah.appData('userphoto_'+userName)}}" class="portrait">
+          <img src="{{reddah.appData('userphoto_'+userName)}}" class="portrait"
+            onerror="this.src='assets/icon/anonymous.png';">
         </ion-thumbnail>
         <ion-label slot="start">
             <div style="padding:5px 0 5px 0;">{{reddah.getDisplayName(userName)}}</div>

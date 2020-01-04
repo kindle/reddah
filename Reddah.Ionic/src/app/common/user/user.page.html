@@ -13,13 +13,16 @@
     </ion-refresher>
     <ion-item lines="none" class="borderTop borderBottom">
         <ion-thumbnail class="userPhoto">
-            <img src="{{reddah.appData('userphoto_'+userName)}}" (click)="viewer(reddah.appData('userphoto_'+userName))" class="portrait portrait-user">
+            <img src="{{reddah.appData('userphoto_'+userName)}}" 
+            (click)="viewer(reddah.appData('userphoto_'+userName))" 
+            class="portrait portrait-user"
+            onerror="this.src='assets/icon/anonymous.png';">
         </ion-thumbnail>
         <ion-label>
             <div style="display: flex;padding:5px 0 5px 0;">
-                    <span class="user-name">{{reddah.getDisplayName(userName, 100)}}</span>
-                    <ion-icon class="cmd-title" name="ios-male" size="small" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
-                    <ion-icon class="cmd-title" name="ios-female" size="small" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
+                <span class="user-name">{{reddah.getDisplayName(userName, 100)}}</span>
+                <ion-icon class="cmd-title" name="ios-male" size="small" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
+                <ion-icon class="cmd-title" name="ios-female" size="small" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
             </div>
             <div style="display: flex;margin-top:5px;">
                 <ion-icon name="radio-button-off" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==1"></ion-icon>
