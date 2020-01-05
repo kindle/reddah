@@ -151,5 +151,25 @@ namespace Reddah.Web.Login.Utilities
 
             }
         }
+        
+        private static MD5 md5 = MD5.Create();
+
+        public static string Md5(string sourceStr)
+        {
+            return Md5(Encoding.UTF8, sourceStr);
+        }
+
+        public static string Md5(Encoding encode, string sourceStr)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            byte[] source = md5.ComputeHash(encode.GetBytes(sourceStr));
+            for (int i = 0; i < source.Length; i++)
+            {
+                sb.Append(source[i].ToString("x2"));
+            }
+
+            return sb.ToString();
+        }
     }
 }
