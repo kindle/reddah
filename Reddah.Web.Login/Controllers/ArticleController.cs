@@ -861,7 +861,9 @@ namespace Reddah.Web.Login.Controllers
                     }
                     else
                     {
-                        var limit = DateTime.UtcNow.AddMinutes(-min);
+                        //var limit = DateTime.UtcNow.AddMinutes(-min); use days as users is not many
+                        var limit = DateTime.UtcNow.AddMonths(-min);
+
                         query = (from u in db.UserProfile
                                  where (type == -1 || u.Sex == type) 
                                     && u.SystemStatus == 0 && u.PrivacyShowLocation == 0 && u.Lat != null && u.Lng != null && u.UserName != jwtResult.JwtUser.User &&
