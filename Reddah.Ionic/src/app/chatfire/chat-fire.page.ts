@@ -52,16 +52,23 @@ export class ChatFireBase{
     speakUnPress(){
         this.speakPressing = false;
     }
-
+    audio = new Audio();
+    lastPlayComment = null;
     async play(comment){
-        let audioChatUrl = "https://login.reddah.com/uploadPhoto/"+comment.Content;
-        comment.isPlaying= true;
-        var audio = new Audio(audioChatUrl);
-        audio.play();
-        audio.addEventListener('ended', ()=>{
-            this.nativeAudio.play("bi");
-            comment.isPlaying= false;
-        });
+        if(!comment.isPlaying){
+            if(this.lastPlayComment!=null){
+                this.lastPlayComment.isPlaying = false;
+            }
+            let audioChatUrl = "https://login.reddah.com/uploadPhoto/"+comment.Content;
+            comment.isPlaying= true;
+            this.audio.src = audioChatUrl; 
+            this.audio.play();
+            this.audio.addEventListener('ended', ()=>{
+                this.nativeAudio.play("bi");
+                comment.isPlaying= false;
+            });
+            this.lastPlayComment = comment;
+        }
     }
 ///pop up new window
     async htmlPlayVideo(id, src, poster){
