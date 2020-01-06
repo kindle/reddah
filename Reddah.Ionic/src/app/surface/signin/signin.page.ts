@@ -77,6 +77,10 @@ export class SigninPage implements OnInit {
         }
     }
 
+    checkLogin(){
+        return this.username=="" ||this.password=="";
+    }
+
     async close(){
         await this.modalController.dismiss(null);
     }

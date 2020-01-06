@@ -75,6 +75,7 @@ import { AddCommentPage } from './postviewer/add-comment/add-comment.page';
 import { AddFriendPage } from './friend/add-friend/add-friend.page';
 import { ApplyFriendPage } from './friend/apply-friend/apply-friend.page';
 import { ChangePhotoPage } from './common/change-photo/change-photo.page';
+import { ChangeChatBgPage } from './common/change-chat-bg/change-chat-bg.page';
 import { MyInfoPage } from './common/my-info/my-info.page';
 import { NewFriendPage } from './friend/new-friend/new-friend.page';
 import { CommentComponent } from './postviewer/comment/comment.component';
@@ -189,7 +190,7 @@ var firebaseConfig = {
         AddCommentPage,
         AddFriendPage,
         ApplyFriendPage,
-        ChangePhotoPage,
+        ChangePhotoPage,ChangeChatBgPage,
         ChangeNoteNamePopPage,
         ChatPage,ChatFirePage,
         GroupChatPage,GroupChatFirePage,
@@ -257,7 +258,7 @@ var firebaseConfig = {
         AddCommentPage,
         AddFriendPage,
         ApplyFriendPage,
-        ChangePhotoPage,
+        ChangePhotoPage,ChangeChatBgPage,
         ChangeNoteNamePopPage,
         ChatPage,ChatFirePage,
         GroupChatPage,GroupChatFirePage,

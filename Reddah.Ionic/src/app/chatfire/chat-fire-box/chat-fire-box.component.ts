@@ -8,6 +8,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
 import { TranslateService } from '@ngx-translate/core';
+import { Vibration } from '@ionic-native/vibration/ngx';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 //import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
@@ -21,6 +23,9 @@ export class ChatFireBoxComponent implements OnInit {
     @Input() selectedCommentId: number;
     @Output() reloadComments = new EventEmitter();
     @Output() localComments = new EventEmitter<any>();
+
+    @Output() speakPress = new EventEmitter();
+    @Output() speakUnPress = new EventEmitter();
     
     @ViewChild('newChatComment') newChatComment;
     
@@ -34,8 +39,14 @@ export class ChatFireBoxComponent implements OnInit {
         private platform: Platform,
         private videoEditor: VideoEditor,
         private translate: TranslateService,
+        private vibration: Vibration,
+        private nativeAudio: NativeAudio,
         //public db: AngularFireDatabase,
-    ) { }
+    ) { 
+        if (this.platform.is('cordova')) {
+            this.nativeAudio.preloadSimple('xiu', 'assets/sound/xiu.mp3')
+        }
+    }
 
     ngOnInit() {
     }
@@ -188,9 +199,10 @@ export class ChatFireBoxComponent implements OnInit {
     isPressed=false;
     async startSpeak(){
         this.isPressed=true;
+        this.speakPress.emit();
         this.speakDesc = this.translate.instant('Pop.ReleaseSend');
         if (this.platform.is('cordova')) {
-            
+            this.vibration.vibrate(200);
 
     /*
             let fileName = this.reddah.generateFileName()+".m4a";
@@ -226,8 +238,10 @@ export class ChatFireBoxComponent implements OnInit {
 
     async stopSpeak(){
         this.isPressed=false;
+        this.speakUnPress.emit();
         this.speakDesc = this.translate.instant('Pop.PressSpeak');
         if (this.platform.is('cordova')) {
+            this.nativeAudio.play("xiu");
             this.audioMediaObj.stopRecord();
         }
     }

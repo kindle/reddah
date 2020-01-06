@@ -7,6 +7,7 @@ import { ReddahService } from '../../reddah.service';
 import { LocalePage } from '../../common/locale/locale.page';
 import { UserPage } from '../../common/user/user.page';
 import { TranslateService } from '@ngx-translate/core';
+import { ChangeChatBgPage } from '../../common/change-chat-bg/change-chat-bg.page';
 
 @Component({
     selector: 'app-chat-opt',
@@ -47,8 +48,26 @@ export class ChatOptPage implements OnInit {
         });
     }
 
-    async setBackground(){
 
+    changed = false;
+    async setBackground(){
+        const userModal = await this.modalController.create({
+            component: ChangeChatBgPage,
+            componentProps: { 
+                title: this.translate.instant("About.Photo"),
+                tag : "portrait",
+                targetUserName: ""
+            },
+            cssClass: "modal-fullscreen",
+        });
+            
+        await userModal.present();
+        const { data } = await userModal.onDidDismiss();
+        if(data)
+        {
+            //this.reddah.getUserPhotos(this.userName);
+        }
+        this.changed = data;
     }
 
     async clearChat(){

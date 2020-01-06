@@ -86,14 +86,17 @@
     --ion-color-mini-shade: #d39b00;
     --ion-color-mini-tint: #f2b81a;
 
-    /** point**/
+    /** point **/
     --ion-color-point: #fe7c58;
 
-    /** gold**/
+    /** gold **/
     --ion-color-gold: #ffce00;
 
-    /** diamond**/
+    /** diamond **/
     --ion-color-diamond: #24d6ea;
+
+    /** smoke **/
+    --ion-color-smoke: rgb(247,247,247);
 
     .modal-fullscreen {
         .modal-wrapper {
@@ -199,4 +202,8 @@
 
 .ion-color-diamond {
     --ion-color-base: var(--ion-color-diamond, #24d6ea) !important;
+}
+
+.ion-color-smoke {
+    --ion-color-base: var(--ion-color-smoke, rgb(247,247,247)) !important;
 }

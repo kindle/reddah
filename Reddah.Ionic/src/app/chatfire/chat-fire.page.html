@@ -35,11 +35,14 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                         <div style="margin-right:-45px;" *ngIf="comment.Type==0&&comment.Id==null">*</div>
                         <div class="chat-box-me" (press)="showChatMenu($event, comment.Content)" 
                         [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'" *ngIf="comment.Type==0"></div>
-                        <div class="chat-box-me-1" *ngIf="comment.Type==1" (click)="play(comment.Content)">
-                            <ion-icon slot="start" name="ios-wifi" size="large" style="width:20px;height:18px;transform: rotate(-90deg);margin:auto;"></ion-icon>
+                        <div class="chat-box-me-1" *ngIf="comment.Type==1" (click)="play(comment)">
+                            <ion-icon slot="start" name="ios-wifi" size="large" 
+                            style="width:20px;height:18px;transform: rotate(-90deg);margin:auto;"
+                            *ngIf="!comment.isPlaying"></ion-icon>
+                            <div class="bg-right voicePlay" *ngIf="comment.isPlaying"></div>
                             <div style="display: flex; line-height:38px;">
                                 <div style="width:5px;" *ngFor="let i of reddah.getArray(comment.Duration)">&nbsp;</div>
-                                <div>{{comment.Duration<0?0:comment.Duration}}''</div>
+                                <div>{{comment.Duration<1?1:comment.Duration}}''</div>
                             </div>
                         </div>
                         <div class="chat-arrow-right" style="flex:auto 0;"></div>
@@ -84,10 +87,12 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                         <div class="chat-box-others" *ngIf="comment.Type==0" 
                         (press)="showChatMenu($event, comment.Content)" 
                         [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
-                        <div class="chat-box-others-1" *ngIf="comment.Type==1" (click)="play(comment.Content)">
-                            <ion-icon name="ios-wifi" size="large" style="width:20px;height:18px;transform: rotate(90deg);margin:auto;"></ion-icon>
+                        <div class="chat-box-others-1" *ngIf="comment.Type==1" (click)="play(comment)">
+                            <ion-icon name="ios-wifi" size="large" style="width:20px;height:18px;transform: rotate(90deg);margin:auto;"
+                            *ngIf="!comment.isPlaying"></ion-icon>
+                            <div class="bg-left voicePlay" *ngIf="comment.isPlaying"></div>
                             <div style="display: flex; line-height:38px;">
-                                <div>{{comment.Duration<0?0:comment.Duration}}''</div>
+                                <div>{{comment.Duration<1?1:comment.Duration}}''</div>
                                 <div style="width:5px;" *ngFor="let i of reddah.getArray(comment.Duration)">&nbsp;</div>
                             </div>
                         </div>
@@ -123,6 +128,10 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
         </ion-row>
     </ion-grid>
 </ion-content>
+<div class="speakBox" *ngIf="speakPressing">
+    <ion-icon name="mic" color="tertiary" class="speak"></ion-icon>
+</div>
 <app-chat-fire-box #chatbox [(selectedArticleId)]="chatId" selectedCommentId="-1"
-    (reloadComments)="childReloadComments($event)" (localComments)="childLocalComments($event)"></app-chat-fire-box>
+    (reloadComments)="childReloadComments($event)" (localComments)="childLocalComments($event)"
+    (speakPress)="speakPress()" (speakUnPress)="speakUnPress()"></app-chat-fire-box>
 

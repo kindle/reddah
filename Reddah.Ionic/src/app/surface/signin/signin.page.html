@@ -19,7 +19,8 @@
     <ion-item class="gapBottom inputItem" no-padding>
         <ion-input type="password" placeholder="{{ 'Input.Password' | translate }}" [(ngModel)]="password" clearInput></ion-input>
     </ion-item>
-    <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="logIn()" expand="block">{{ 'Button.Login' | translate }}</ion-button>
+    <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="logIn()" expand="block"
+    [disabled]="checkLogin()">{{ 'Button.Login' | translate }}</ion-button>
     <div text-center class="forget" (click)="forgot()">{{ 'Login.ForgotPassword' | translate }}</div>    
     <div class="conductArea" text-center>
         <p class="copyright">

@@ -83,6 +83,11 @@ export class RegisterPage implements OnInit {
         }
     }
 
+    checkRegister(){
+        return this.username=="" ||this.password==""||this.confirmpassword==""||this.email==""
+        ||this.agreed==false||this.errorMessage!="";
+    }
+
     async close(){
         await this.modalController.dismiss(null);
     }

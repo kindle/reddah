@@ -36,26 +36,26 @@
             <ion-toggle [(ngModel)]="strongReminder" color="success" slot="end"></ion-toggle>
         </ion-item>
     </div>
-
+-->
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop borderItem borderBottom" (click)="setBackground()" lines="none">
         <ion-label>设置当前聊天背景</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
---> 
+ 
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop borderItem borderBottom" (click)="clearChat()" lines="none">
         <ion-label>{{ 'Common.ClearChat' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
-<!--
+
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop borderItem borderBottom" (click)="report()" lines="none">
-        <ion-label>投诉</ion-label>
+        <ion-label>{{ 'Pop.Report' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
--->
+
 </ion-content>

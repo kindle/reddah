@@ -31,7 +31,12 @@ export class ChatFireBase{
         protected videoEditor: VideoEditor,
         protected platform: Platform,
         protected clipboard: Clipboard,
-    ){}
+        protected nativeAudio: NativeAudio,
+    ){
+        if (this.platform.is('cordova')) {
+            this.nativeAudio.preloadSimple('bi', 'assets/sound/bi.mp3')
+        }
+    }
 
     userName: string;
     locale: string;
@@ -39,6 +44,25 @@ export class ChatFireBase{
     message:string = ''
     messages: object[];
 
+    speakPressing = false;
+    speakPress(){
+        this.speakPressing = true;
+    }
+
+    speakUnPress(){
+        this.speakPressing = false;
+    }
+
+    async play(comment){
+        let audioChatUrl = "https://login.reddah.com/uploadPhoto/"+comment.Content;
+        comment.isPlaying= true;
+        var audio = new Audio(audioChatUrl);
+        audio.play();
+        audio.addEventListener('ended', ()=>{
+            this.nativeAudio.play("bi");
+            comment.isPlaying= false;
+        });
+    }
 ///pop up new window
     async htmlPlayVideo(id, src, poster){
         
@@ -176,18 +200,18 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         public reddah: ReddahService,
         public localStorageService: LocalStorageService,
         private media: Media,
-        private nativeAudio: NativeAudio,
         private transfer: FileTransfer, 
         private file: File,
         public platform: Platform,
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
         public clipboard: Clipboard,
+        public nativeAudio: NativeAudio,
         private notification: LocalNotifications,
         //public db: AngularFireDatabase,        
     ) { 
         super(modalController, popoverController, reddah, localStorageService, 
-            streamingMedia, videoEditor, platform, clipboard);
+            streamingMedia, videoEditor, platform, clipboard, nativeAudio);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }
@@ -400,7 +424,7 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         
     }
 
-    async play(audioFileName){
+    //async play(audioFileName){
         /*
         if(this.platform.is('cordova')){
             let target = this.reddah.getDeviceDirectory() +"reddah/";
@@ -431,10 +455,13 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
             var audio = new Audio(audioChatUrl);
             audio.play();
         }*/
-        let audioChatUrl = "https://login.reddah.com/uploadPhoto/"+audioFileName;
-        var audio = new Audio(audioChatUrl);
-        audio.play();
-    }
+        //let audioChatUrl = "https://login.reddah.com/uploadPhoto/"+audioFileName;
+        //var audio = new Audio(audioChatUrl);
+        ///audio.play();
+        //audio.addEventListener('ended', ()=>{
+            
+        //});
+    //}
 
     async close() {
         await this.modalController.dismiss();

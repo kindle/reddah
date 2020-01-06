@@ -17,6 +17,7 @@ import { VideoEditor } from '@ionic-native/video-editor/ngx'
 import { ChatFireBase } from './chat-fire.page';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 @Component({
     selector: 'app-group-chat-fire',
@@ -47,11 +48,12 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
         public clipboard: Clipboard,
+        public nativeAudio: NativeAudio,
         private notification: LocalNotifications,
         //public db: AngularFireDatabase,
     ) { 
         super(modalController, popoverController, reddah, localStorageService, 
-            streamingMedia, videoEditor, platform, clipboard);
+            streamingMedia, videoEditor, platform, clipboard, nativeAudio);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }
@@ -122,7 +124,7 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
         
     }
 
-    async play(audioFileName){
+    /*async play(audioFileName){
         let target = this.reddah.getDeviceDirectory() +"reddah/";
         //let target = this.file.applicationStorageDirectory;
 
@@ -144,7 +146,7 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
             });
         });
         
-    }
+    }*/
 
     /*
     firebaseInited = false;
