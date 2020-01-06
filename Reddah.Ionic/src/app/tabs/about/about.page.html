@@ -12,7 +12,7 @@
             onerror="this.src='assets/icon/anonymous.png';">
         </ion-thumbnail>
         <ion-label slot="start">
-            <div style="padding:5px 0 5px 0;">{{reddah.getDisplayName(userName)}}</div>
+            <div style="padding:5px 0 5px 0;" (click)="goCredit($event)">{{reddah.getDisplayName(userName)}}</div>
             <div style="display: flex;margin-top:5px;" (click)="goCredit($event)">
                 <ion-icon name="radio-button-off" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==1"></ion-icon>
                 <ion-icon name="ribbon" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==2"></ion-icon>

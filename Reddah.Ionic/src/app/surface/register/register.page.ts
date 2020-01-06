@@ -165,4 +165,27 @@ export class RegisterPage implements OnInit {
         return emailReg.test(email);
     }
 
+    strength = "";
+    testPwStrength() {
+        var strongRegex = new RegExp(
+                "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+            ),
+            mediumRegex = new RegExp(
+                "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
+            );
+
+        if(this.password==""){
+            this.strength = "";
+        }
+        else if (strongRegex.test(this.password)) {
+            this.strength = "green";
+        } else if (mediumRegex.test(this.password)) {
+            this.strength = "orange";
+        } else {
+            this.strength = "red";
+        }
+
+    }
+
+
 }

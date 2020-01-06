@@ -102,3 +102,20 @@
 .policy{
     color: #107c10;
 }
+
+
+
+.pw-weak{
+    border-bottom: 3px solid orange;
+    width: 30%;
+}
+
+.pw-medium{
+    border-bottom: 3px solid skyblue;
+    width: 60%;
+}
+
+.pw-strong{
+    border-bottom: 3px solid #107c10;
+    width: 100%;
+}

@@ -1235,16 +1235,16 @@ export class ReddahService {
 
     userLevel(userName){
         let point = this.appData('userpoint_'+userName);
-        if(point<200){
+        if(point<50){
             return this.translate.instant("Point.Level_Illiterate");
         }
-        else if(point<300){
+        else if(point<150){
             return this.translate.instant("Point.Level_Bronze");
         }
-        else if(point<500){
+        else if(point<300){
             return this.translate.instant("Point.Level_Silver");
         }
-        else if(point<700){
+        else if(point<500){
             return this.translate.instant("Point.Level_Gold");
         }
         else if(point<1000){
@@ -1260,16 +1260,16 @@ export class ReddahService {
 
     userLevelIcon(userName){
         let point = this.appData('userpoint_'+userName);
-        if(point<200){
+        if(point<50){
             return 1;
         }
-        else if(point<300){
+        else if(point<150){
             return 2;
         }
-        else if(point<500){
+        else if(point<300){
             return 3;
         }
-        else if(point<700){
+        else if(point<500){
             return 4;
         }
         else if(point<1000){

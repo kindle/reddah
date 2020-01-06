@@ -130,6 +130,7 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
 </ion-content>
 <div class="speakBox" *ngIf="speakPressing">
     <ion-icon name="mic" color="tertiary" class="speak"></ion-icon>
+    <div></div>
 </div>
 <app-chat-fire-box #chatbox [(selectedArticleId)]="chatId" selectedCommentId="-1"
     (reloadComments)="childReloadComments($event)" (localComments)="childLocalComments($event)"
