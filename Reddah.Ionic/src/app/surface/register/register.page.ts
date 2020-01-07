@@ -180,9 +180,9 @@ export class RegisterPage implements OnInit {
         else if (strongRegex.test(this.password)) {
             this.strength = "green";
         } else if (mediumRegex.test(this.password)) {
-            this.strength = "orange";
+            this.strength = "blue";
         } else {
-            this.strength = "red";
+            this.strength = "orange";
         }
 
     }

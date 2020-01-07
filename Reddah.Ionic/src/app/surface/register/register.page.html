@@ -21,10 +21,22 @@
 
     <ion-item lines="{{password==''?'':'none'}}" class="gapBottom inputItem" no-padding>
         <ion-input type="password" placeholder="{{ 'Input.Password' | translate }}" 
-            [(ngModel)]="password" clearInput (keyup)="testPwStrength()" (input)="testPwStrength()"
-            [class.pw-weak]="strength=='red'"
-            [class.pw-medium]="strength=='orange'"
-            [class.pw-strong]="strength=='green'"></ion-input>
+            [(ngModel)]="password" clearInput (keyup)="testPwStrength()"></ion-input>
+    </ion-item>
+    <ion-item class="inputItem item-small" style="margin-top:0;margin-bottom:0;"
+        no-padding lines="none" *ngIf="password!=''">
+        <div *ngIf="strength=='orange'||strength=='blue'||strength=='green'"
+        [class.pw-weak]="strength=='orange'"
+        [class.pw-medium]="strength=='blue'"
+        [class.pw-strong]="strength=='green'"></div>
+        <div *ngIf="strength=='blue'||strength=='green'" style="margin-left:3px;"
+        [class.pw-weak]="strength=='orange'"
+        [class.pw-medium]="strength=='blue'"
+        [class.pw-strong]="strength=='green'"></div>
+        <div *ngIf="strength=='green'" style="margin-left:3px;"
+        [class.pw-weak]="strength=='orange'"
+        [class.pw-medium]="strength=='blue'"
+        [class.pw-strong]="strength=='green'"></div>
     </ion-item>
 
     <ion-item class="gapBottom inputItem" no-padding>

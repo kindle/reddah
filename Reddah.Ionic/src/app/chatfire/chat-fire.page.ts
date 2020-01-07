@@ -64,7 +64,9 @@ export class ChatFireBase{
             this.audio.src = audioChatUrl; 
             this.audio.play();
             this.audio.addEventListener('ended', ()=>{
-                this.nativeAudio.play("bi");
+                if(comment.isPlaying){
+                    this.nativeAudio.play("bi");
+                }
                 comment.isPlaying= false;
             });
             this.lastPlayComment = comment;

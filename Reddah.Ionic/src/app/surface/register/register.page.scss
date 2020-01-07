@@ -104,18 +104,24 @@
 }
 
 
-
-.pw-weak{
-    border-bottom: 3px solid orange;
-    width: 30%;
+.item-small {
+    --min-height: 0px;
 }
 
-.pw-medium{
-    border-bottom: 3px solid skyblue;
-    width: 60%;
+.pw-weak {
+    border-bottom: 5px solid orange;
+    width: 33%;
+    border-radius: 2px;
 }
 
-.pw-strong{
-    border-bottom: 3px solid #107c10;
-    width: 100%;
+.pw-medium {
+    border-bottom: 5px solid skyblue;
+    width: 33%;
+    border-radius: 2px;
+}
+
+.pw-strong {
+    border-bottom: 5px solid #107c10;
+    width: 33%;
+    border-radius: 2px;
 }

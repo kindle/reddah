@@ -1,10 +1,21 @@
 .speak {
-    width: 200px; 
-    height: 200px; 
+    width: 180px; 
+    height: 180px; 
     margin: 10px; 
     padding: 30px;
     background-color: rgb(87,87,87);
-    border-radius: 10px;
+    border-radius: 50%;
+    animation: shadow-pulse 1s infinite;
+}
+
+@keyframes shadow-pulse
+{
+     0% {
+          box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+     }
+     100% {
+          box-shadow: 0 0 0 250px rgba(0, 0, 0, 0);
+     }
 }
 
 .speakBox {
