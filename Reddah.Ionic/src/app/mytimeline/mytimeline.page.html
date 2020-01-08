@@ -1,5 +1,6 @@
-<img [src]="reddah.appData('cover_'+userName)" style="position:fixed;" *ngIf="isAndroid">
-<ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop>
+<img [src]="reddah.appData('cover_'+userName)" style="position: fixed;" #timelineCoverImage
+    onerror="this.src='assets/icon/timg.jpg';">
+<ion-content style="--background: transparent;" id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop>
     <div class="headerStart" #headerStart slot="fixed">
         <ion-item color="transparent" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
             <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
@@ -18,13 +19,14 @@
             <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
+    
     <div>
-        <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher slot="fixed" (ionPull)="doPull($event)" (ionRefresh)="doRefresh($event)">
             <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>
         </ion-refresher>  
-        <div class="timelineCover" #timelineCover>
-            <img [src]="reddah.appData('cover_'+userName)" (click)="changeCover()"
-                onerror="this.src='assets/icon/timg.jpg';">
+        <div class="timelineCover" #timelineCover (click)="changeCover()">
+           <!--<img [src]="reddah.appData('cover_'+userName)" 
+                onerror="this.src='assets/icon/timg.jpg';">-->
         </div>
         <div class="timelineAvatar">
             <ion-label class="userNameTitle">{{reddah.getDisplayName(userName,100)}}</ion-label>
@@ -35,7 +37,8 @@
             <img [src]="reddah.appData('userphoto_'+reddah.unReadMessage.slice(-1)[0].From)" class="messagePhoto">
             <span class="span-eclipse" style="color:white;line-height:2.1em;margin:0.24em 0.8em;">{{reddah.unReadMessage.length}} {{ 'Pop.MsgCount' | translate }}</span>
         </div>
-        <div *ngFor="let article of articles" style="display: flex; border-bottom: 1px solid lightgrey; margin-top:10px; margin-bottom: 15px; padding-bottom: 10px;">
+        <div *ngFor="let article of articles" 
+        style="background-color: white; display: flex; border-bottom: 1px solid lightgrey; padding-top:25px; padding-bottom: 10px;">
             <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
                 <img src="{{reddah.appData('userphoto_'+article.UserName)}}" class="portrait" (click)="goUser(article.UserName)">
             </div>
@@ -119,7 +122,7 @@
                     </div>
                 </ion-item>
             </div>
-        </div>
+        </div >
         
         <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
             <ion-infinite-scroll-content loadingSpinner="bubbles" 

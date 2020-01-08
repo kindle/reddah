@@ -173,13 +173,20 @@ export class MyTimeLinePage implements OnInit {
         }, 2000);
     }
 
+    doPull(event){
+        console.log(event.path);
+        console.log(event.path[3].offsetHeight);
+        this.timelineCoverImage.nativeElement.style.transform = "scale(1.2)";
+    }
+
     @ViewChild('headerStart')
     headerStart:ElementRef;
     @ViewChild('headerOnScroll')
     headerOnScroll:ElementRef;
     @ViewChild('timelineCover')
     timelineCover:ElementRef;
-    
+    @ViewChild('timelineCoverImage')
+    timelineCoverImage:ElementRef;
 
     onScroll($event) {
 
