@@ -5,17 +5,17 @@
     <ion-label>{{ 'Search.More' | translate }}</ion-label>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;">
-    <div>
+    <div class="gap lastGap">
         <ion-item class="borderTop borderItem borderTop" *ngIf="pub">
             <ion-label>{{ 'Common.Developer' | translate }}</ion-label>
-            <ion-note slot="end"></ion-note>
+            <ion-text slot="end">{{reddah.appData('useradmins_'+target)}}</ion-text>
         </ion-item>
         <ion-item lines="none" class="borderBottom borderItem" (click)="goEmail()">
             <ion-label>{{ 'Input.Email' | translate }}</ion-label>
             <ion-text slot="end">{{reddah.appData('useremail_'+target)}}</ion-text>
         </ion-item>
     </div>
-
+<!--
     <div class="gap" *ngIf="pub">
         <ion-item class="borderTop borderItem borderBottom" (click)="goCert()" lines="none">
             <ion-label>{{ 'Common.ServicePhone' | translate }}</ion-label>
@@ -32,4 +32,5 @@
             </ion-note>
         </ion-item>
     </div>
+-->
 </ion-content>

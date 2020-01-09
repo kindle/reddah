@@ -151,14 +151,9 @@ export class PubPage implements OnInit {
     async presentActionSheet() {
         const actionSheet = await this.actionSheetController.create({
             //header: '',
-            buttons: [{
-              text: this.translate.instant("Search.More"),
-              icon: 'ios-more',
-              handler: () => {
-                  this.goMore();
-              }
-            }
-            ].concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?
+            buttons: []
+            /*
+            .concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?
                 [{
                     text: this.translate.instant("Pop.ToFriend"),
                     icon: 'share',
@@ -166,7 +161,16 @@ export class PubPage implements OnInit {
                         //this.delCinfirm();                  
                     }
                 }]:[]
-            )
+            )*/
+            .concat([
+                {
+                    text: this.translate.instant("Search.More"),
+                    icon: 'ios-more',
+                    handler: () => {
+                        this.goMore();
+                    }
+                }
+            ])
         });
         await actionSheet.present();
     }
@@ -175,7 +179,8 @@ export class PubPage implements OnInit {
         const modal = await this.modalController.create({
             component: MorePage,
             componentProps: { 
-                pub: true
+                pub: true,
+                target: this.userName
             },
             cssClass: "modal-fullscreen",
         });

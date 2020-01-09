@@ -36,6 +36,11 @@ export class AddArticlePage implements OnInit {
 
     @Input() targetUserName;
     @Input() article;
+    @Input() action;
+
+    isAdminEdit(){
+        return this.action == 'AdminEdit';
+    }
     
     title: string = "";
     content: string = "";

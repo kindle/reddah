@@ -2,10 +2,10 @@
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
         <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
     </ion-button>
-    <ion-button color="success" slot="end" (click)="preview()" *ngIf="article">
+    <ion-button color="success" slot="end" (click)="preview()" *ngIf="article&&!isAdminEdit()">
         {{ 'Common.Test' | translate }}
     </ion-button>
-    <ion-button color="success" slot="end" (click)="publish()" *ngIf="article">
+    <ion-button color="success" slot="end" (click)="publish()" *ngIf="article&&!isAdminEdit()">
         {{ 'Common.Publish' | translate }}
     </ion-button>
     <ion-button color="success" slot="end" (click)="save()">

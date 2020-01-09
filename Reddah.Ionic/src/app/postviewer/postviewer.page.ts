@@ -14,6 +14,7 @@ import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
 import { ShareChooseChatPage } from '../chat/share-choose-chat/share-choose-chat.page';
 import { TranslateService } from '@ngx-translate/core';
 import { SettingFontPage } from '../settings/setting-font/setting-font.page';
+import { AddArticlePage } from '../tabs/publisher/add-article/add-article.page';
 
 @Component({
     selector: 'app-postviewer',
@@ -321,6 +322,23 @@ export class PostviewerPage implements OnInit {
     async onScroll(event){
         if(!this.preview)
             this.commentbox.onScroll(event)
+    }
+
+    async edit(){
+        const modal = await this.modalController.create({
+            component: AddArticlePage,
+            componentProps: { 
+                targetUserName: this.article.UserName,
+                article: this.article,
+                action: 'AdminEdit'
+            },
+            cssClass: "modal-fullscreen",
+        });
+        await modal.present();
+        const {data} = await modal.onDidDismiss();
+        if(data){
+            this.close();
+        }
     }
 
 }
