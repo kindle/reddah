@@ -36,9 +36,11 @@ export class SettingAboutPage implements OnInit {
     }
 
     ngOnInit() {
-        this.reddah.getVersionNumber().then(version => {
-            this.version = version;
-        });
+        if(this.platform.is('cordova')){
+            this.reddah.getVersionNumber().then(version => {
+                this.version = version;
+            });
+        }
 
         //upgrade auto when come in
         //this.upgrade();
@@ -106,6 +108,17 @@ export class SettingAboutPage implements OnInit {
         });
           
         await modal.present();
+    }
+
+    async buymebeer(){
+        if(this.platform.is('android'))
+        {
+
+        }
+        if(this.platform.is('ios')){
+
+        }
+        //others
     }
 
 }

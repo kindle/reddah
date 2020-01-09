@@ -146,6 +146,11 @@ export class MyReportPage implements OnInit {
         setTimeout(() => {
             this.clearCacheAndReload(event);
         }, 2000);
+        this.reportCoverImage.nativeElement.style.transform = "scale(1)";
+    }
+
+    doPull(event){
+        this.reportCoverImage.nativeElement.style.transform = "scale(1.3)";
     }
 
     @ViewChild('headerStart')
@@ -154,6 +159,8 @@ export class MyReportPage implements OnInit {
     headerOnScroll:ElementRef;
     @ViewChild('timelineCover')
     timelineCover:ElementRef;
+    @ViewChild('reportCoverImage')
+    reportCoverImage:ElementRef;
     
 
     onScroll($event) {

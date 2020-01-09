@@ -11,6 +11,7 @@ import { BlackHolePage } from '../../common/black-hole/black-hole.page';
 import { WormHolePage } from '../../common/worm-hole/worm-hole.page';
 import { LocalStorageService } from 'ngx-webstorage';
 import {  ActivatedRoute, Params } from '@angular/router';
+import { MysticPage } from '../../common/mystic/mystic.page';
 
 @Component({
   selector: 'app-find',
@@ -125,6 +126,15 @@ export class FindPage {
     async blackHole(){
         const modal = await this.modalController.create({
             component: WormHolePage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        await modal.present();
+    }
+
+    async mystic(){
+        const modal = await this.modalController.create({
+            component: MysticPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
         });

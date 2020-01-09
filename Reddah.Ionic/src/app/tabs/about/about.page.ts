@@ -16,6 +16,7 @@ import { PointPage } from '../../common/point/point.page';
 import { PunchPage } from '../../common/punch/punch.page';
 import { HistoryPage } from '../../common/point/history/history.page';
 import { MyReportPage } from '../../mytimeline/myreport/myreport.page';
+import { PunchClockPage } from '../../common/point/punch-clock/punch-clock.page';
 
 @Component({
     selector: 'app-about',
@@ -172,5 +173,19 @@ export class AboutPage implements OnInit {
         });
           
         await modal.present();
+    }
+    
+    async punchClock(){
+        const modal = await this.modalController.create({
+            component: PunchClockPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+    
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            this.reddah.getUserPhotos(this.reddah.getCurrentUser());
+        }
     }
 }

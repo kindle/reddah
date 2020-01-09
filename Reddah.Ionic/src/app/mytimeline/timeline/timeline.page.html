@@ -106,8 +106,8 @@
                                     *ngIf="article.Content.split('$$$').length==1">
                             </ion-thumbnail>
                             <ion-label class="articleContentText" text-wrap>
-                                <div [innerHTML]="reddah.summary(article.Title,20)" class="articleContentTextSummary"></div>
-                                <div class="articleContentTextCount" *ngIf="article.Content.split('$$$').length>0">{{article.Content.split('$$$').length}}张图片</div>
+                                <div [innerHTML]="reddah.summary(article.Title,10)" class="articleContentTextSummary"></div>
+                                <div class="articleContentTextCount" *ngIf="article.Content.split('$$$').length>0">{{reddah.lan2(article.Content.split('$$$').length, 'Common.Pictures' | translate) }}</div>
                             </ion-label>
                         </ion-item>
                         <ion-item no-padding lines="none" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.length===0" (click)="goTsViewer(article)">

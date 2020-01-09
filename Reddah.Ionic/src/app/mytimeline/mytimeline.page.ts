@@ -91,7 +91,7 @@ export class MyTimeLinePage implements OnInit {
         this.cacheService.loadFromObservable(cacheKey, request, "MyTimeLinePage")
         .subscribe(timeline => 
         {
-            console.log(timeline);
+            //console.log(timeline);
             if(cachedArticles!=JSON.stringify(timeline))
             {
                 this.articles = [];
@@ -171,11 +171,12 @@ export class MyTimeLinePage implements OnInit {
         setTimeout(() => {
             this.clearCacheAndReload(event);
         }, 2000);
+        this.timelineCoverImage.nativeElement.style.transform = "scale(1)";
     }
 
     doPull(event){
-        console.log(event.path);
-        console.log(event.path[3].offsetHeight);
+        //console.log(event.path);
+        //console.log(event.path[3].offsetHeight);
         this.timelineCoverImage.nativeElement.style.transform = "scale(1.2)";
     }
 
@@ -489,7 +490,7 @@ export class MyTimeLinePage implements OnInit {
                     let formData = new FormData();
                     formData.append("Id",JSON.stringify(article.Id));
                     this.reddah.deleteArticle(formData).subscribe(data=>{
-                        console.log(JSON.stringify(data));
+                        //console.log(JSON.stringify(data));
                     });
 
                     //UI delete

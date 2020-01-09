@@ -92,7 +92,7 @@
         "Shake":"Schudden",
         "MagicMirror":"Magische spiegel",
         "BlackHole":"Zwart gat",
-        "Mystic":"Chatman",
+        "Mystic":"Chat Kat",
         "Platform":"Platform openen"
     },
 
@@ -121,7 +121,8 @@
         "CheckUpgrade": "Upgrade",
         "CurrentLocale": "Lokaal",
         "ChangeLocale": "Wijzig locatie",
-        "CurrentUser": "Huidige gebruiker"
+        "CurrentUser": "Huidige gebruiker",
+        "BuyBeer":"Koop een biertje voor me"
     },
 
     "Time.YearsAgo": "jaar",
@@ -262,7 +263,8 @@
         "ConfirmPublish":"Uitgegeven",
         "LoginToView":"Dance Login voor meer",
         "MyFeedback":"Mijn feedback",
-        "MapSlogan":"Om mensen van over de hele wereld te kennen"
+        "MapSlogan":"Om mensen van over de hele wereld te kennen",
+        "Pictures":"afbeelding"
     },
 
     "Mail":{

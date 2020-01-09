@@ -92,7 +92,7 @@
         "Shake":"搖壹搖",
         "MagicMirror":"魔鏡",
         "BlackHole":"黑洞",
-        "Mystic":"智慧閒聊",
+        "Mystic":"聊天小猫",
         "Platform":"開放平臺"
     },
 
@@ -121,7 +121,8 @@
         "CheckUpgrade": "檢查新版本",
         "About.CurrentLocale": "語言",
         "ChangeLocale": "更換語言",
-        "CurrentUser": "當前用戶"
+        "CurrentUser": "當前用戶",
+        "BuyBeer":"不錯~打賞！繼續努力~"
     },
 
     "Time.YearsAgo": "年前",
@@ -265,7 +266,8 @@
         "ConfirmPublish":"確認發佈",
         "LoginToView":"請登入後查看",
         "MyFeedback":"我的迴響",
-        "MapSlogan":"海內存知己，天涯若比鄰"
+        "MapSlogan":"海內存知己，天涯若比鄰",
+        "Pictures":"張圖片"
     },
 
     "Mail":{

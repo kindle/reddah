@@ -92,7 +92,7 @@
         "Shake":"Sacudir",
         "MagicMirror":"Espejo",
         "BlackHole":"Agujero negro",
-        "Mystic":"Chatman",
+        "Mystic":"Gato parlanchín",
         "Platform":"Plataforma abierta"
     },
 
@@ -121,7 +121,8 @@
         "CheckUpgrade": "Ascensos",
         "CurrentLocale": "Escena",
         "ChangeLocale": "Cambiar configuración deárea",
-        "CurrentUser": "Usuario actual"
+        "CurrentUser": "Usuario actual",
+        "BuyBeer":"Cómprame una cerveza"
     },
 
     "Time.YearsAgo": "Año",
@@ -262,7 +263,8 @@
         "ConfirmPublish":"Publicar",
         "LoginToView":"Registro de danzas",
         "MyFeedback":"Mi respuesta",
-        "MapSlogan":"Conocer gente de todo el mundo"
+        "MapSlogan":"Conocer gente de todo el mundo",
+        "Pictures":"imagen"
     },
 
     "Mail":{

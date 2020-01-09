@@ -92,7 +92,7 @@
       "Shake":"振る",
       "MagicMirror":"マジックミラー",
       "BlackHole":"ブラックホール",
-      "Mystic":"チャタマン",
+      "Mystic":"チャット",
       "Platform":"オープンプラットホーム"
     },
 
@@ -121,7 +121,8 @@
         "CheckUpgrade": "アップグレード",
         "CurrentLocale": "ロケール",
         "ChangeLocale": "ロケールを変更する",
-        "CurrentUser": "現在のユーザー"
+        "CurrentUser": "現在のユーザー",
+        "BuyBeer":"ビールを買ってください"
     },
 
     "Time.YearsAgo": "年",
@@ -263,7 +264,8 @@
         "ConfirmPublish":"出版",
         "LoginToView":"ダンス登録してもっと探します",
         "MyFeedback":"フィードバック",
-        "MapSlogan":"世界中から人を知る"
+        "MapSlogan":"世界中から人を知る",
+        "Pictures":"イメージ"
     },
 
     "Mail":{

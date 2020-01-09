@@ -93,6 +93,10 @@ export class MiniViewerComponent implements OnInit {
         }
     }
 
+    bodyClick(){
+
+    }
+    
     loaded = false;
 
     ionViewDidEnter(){

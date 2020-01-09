@@ -92,7 +92,7 @@
         "Shake":"เขย่าตัว",
         "MagicMirror":"กระจกวิเศษ",
         "BlackHole":"หลุมดำ",
-        "Mystic":"แชตเมน",
+        "Mystic":"แมวพูดคุย",
         "Platform":"แพลตฟอร์มเปิด"
     },
 
@@ -121,7 +121,8 @@
         "CheckUpgrade": "การยกระดับ",
         "CurrentLocale": "สถานที่เกิดเหตุ",
         "ChangeLocale": "เปลี่ยนการตั้งค่าภูมิภาค",
-        "CurrentUser": "ผู้ใช้ปัจจุบัน"
+        "CurrentUser": "ผู้ใช้ปัจจุบัน",
+        "BuyBeer":"ซื้อเบียร์ให้ฉัน"
     },
 
     "Time.YearsAgo": "ปี",
@@ -262,7 +263,8 @@
         "ConfirmPublish":"จัดพิมพ์",
         "LoginToView":"เข้าสู่ระบบเพื่อค้นหาข้อมูลเพิ่มเติม",
         "MyFeedback":"ความคิดเห็นของฉัน",
-        "MapSlogan":"รู้จักคนทั่วโลก"
+        "MapSlogan":"รู้จักคนทั่วโลก",
+        "Pictures":"รูปร่างลักษณะ"
     },
 
     "Mail":{

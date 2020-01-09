@@ -5,6 +5,7 @@ import { HeaderAddPage } from '../header-add-pop.page';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
 import { ReddahService } from '../../reddah.service';
+import { PunchClockPage } from '../point/punch-clock/punch-clock.page';
 
 @Component({
     selector: 'app-header',

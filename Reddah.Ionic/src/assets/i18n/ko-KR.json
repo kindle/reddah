@@ -92,7 +92,7 @@
       "Shake":"흔들거리다",
       "MagicMirror":"마경",
       "BlackHole":"블랙홀",
-      "Mystic":"차트만",
+      "Mystic":"고양이 이야기",
       "Platform":"개방식 플랫폼"
     },
 
@@ -121,7 +121,8 @@
         "CheckUpgrade": "업그레이드",
         "CurrentLocale": "현장",
         "ChangeLocale": "영역 설정 변경",
-        "CurrentUser": "현재 사용자"
+        "CurrentUser": "현재 사용자",
+        "BuyBeer":"맥주 한 잔 사주세요"
     },
 
 
@@ -265,7 +266,8 @@
         "ConfirmPublish":"게시 확인",
         "LoginToView":"안무 로그인",
         "MyFeedback":"나의 피드백",
-        "MapSlogan":"세계 각지를 아는 사람"
+        "MapSlogan":"세계 각지를 아는 사람",
+        "Pictures":"형상"
     },
 
     "Mail":{

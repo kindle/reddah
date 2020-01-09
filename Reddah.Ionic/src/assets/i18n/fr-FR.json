@@ -92,7 +92,7 @@
       "Shake":"Secouer",
       "MagicMirror":"Miroir magique",
       "BlackHole":"Trou noir",
-      "Mystic":"Chatman",
+      "Mystic":"Chat de chat",
       "Platform":"Open Platform"
     },
 
@@ -121,7 +121,8 @@
         "CheckUpgrade": "Check Latest Version",
         "CurrentLocale": "Sur place",
         "ChangeLocale": "Modifier les paramètres de zone",
-        "CurrentUser": "Utilisateur actuel"
+        "CurrentUser": "Utilisateur actuel",
+        "BuyBeer":"Achète - moi une bière"
     },
 
     "Time.YearsAgo": "Année",
@@ -263,7 +264,8 @@
         "ConfirmPublish":"Publication",
         "LoginToView":"Chorégraphie pour trouver plus",
         "MyFeedback":"Mon retour",
-        "MapSlogan":"Je connais des gens du monde entier"
+        "MapSlogan":"Je connais des gens du monde entier",
+        "Pictures":"image"
     },
 
     "Mail":{

@@ -27,17 +27,17 @@
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
 -->
-    <ion-item class="borderItem" (click)="goPrivacy()">
+    <ion-item class="borderTop borderItem" (click)="goPrivacy()">
         <ion-icon class="menuIcon" slot="start" name="key" color="medium" size="medium"></ion-icon>
         <ion-note color="dark">{{ 'About.Privacy' | translate }}</ion-note>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
-    <ion-item lines="none" class="borderBottom borderItem" (click)="goGeneral()">
+    <ion-item class="borderItem" (click)="goGeneral()">
         <ion-icon class="menuIcon" slot="start" name="globe" color="primary" size="medium"></ion-icon>
-        <ion-note slot="start" color="dark">{{ 'About.General' | translate }}</ion-note>
+        <ion-note color="dark">{{ 'About.General' | translate }}</ion-note>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
-    <ion-item class="borderBottom" (click)="goAbout()">
+    <ion-item lines="none" class="borderBottom" (click)="goAbout()">
         <ion-icon class="menuIcon" slot="start" name="information-circle-outline" color="secondary" size="medium"></ion-icon>
         <ion-label>{{ 'About.About' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>

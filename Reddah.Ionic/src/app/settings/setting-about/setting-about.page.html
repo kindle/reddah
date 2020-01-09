@@ -9,20 +9,25 @@
         <p class="title">Reddah</p>
         <p class="version">{{ 'About.CurrentVersion' | translate }} {{version}}</p>
     </div>
+
+    <ion-item class="borderItem" (click)="buymebeer()">
+        <ion-icon class="menuIcon" slot="start" name="beer" color="dark" size="medium"></ion-icon>
+        <ion-label>{{ 'About.BuyBeer' | translate }}</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" class="borderBottom" (click)="feedback()">
+        <ion-icon class="menuIcon" slot="start" name="logo-twitch" color="dark" size="medium"></ion-icon>
+        <ion-label>{{ 'Menu.Header.Feedback' | translate }}</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+
 <!--
-    <ion-item class="borderTop borderItem">
-        <ion-label>功能介绍</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-    </ion-item>
-    <ion-item class="borderItem">
-        <ion-label>投诉</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-    </ion-item>
     <ion-item lines="none" class="borderBottom borderItem" (click)="upgrade()">
         <ion-label>{{ 'About.CheckUpgrade' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
 -->
+
     <div class="conductArea" text-center>
         <p class="copyright">
             Reddah.com<br>

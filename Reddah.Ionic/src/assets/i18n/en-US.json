@@ -92,7 +92,7 @@
         "Shake":"Shake",
         "MagicMirror":"Magic Mirror",
         "BlackHole":"Black Hole",
-        "Mystic":"Chatman",
+        "Mystic":"Chat Cat",
         "Platform":"Open Platform"
     },
 
@@ -125,7 +125,8 @@
         "CheckUpgrade": "Check Latest Version",
         "CurrentLocale": "Locale",
         "ChangeLocale": "Change Locale",
-        "CurrentUser": "Current User"
+        "CurrentUser": "Current User",
+        "BuyBeer":"Buy me a beer"
     },
 
     "Time.YearsAgo": "year(s) ago",
@@ -266,7 +267,8 @@
         "ConfirmPublish":"Publish",
         "LoginToView":"Plese login to find more",
         "MyFeedback":"My Feedback",
-        "MapSlogan":"To know people from all over the world"
+        "MapSlogan":"To know people from all over the world",
+        "Pictures":"image"
     },
 
     "Mail":{

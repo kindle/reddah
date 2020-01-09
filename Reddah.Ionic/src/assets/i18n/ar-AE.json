@@ -92,7 +92,7 @@
         "Shake":"هز",
         "MagicMirror":"مرآة سحرية",
         "BlackHole":"الثقب الأسود",
-        "Mystic":"تشاتمان",
+        "Mystic":"دردشة القط",
         "Platform":"منصة مفتوحة"
     },
 
@@ -121,7 +121,8 @@
         "CheckUpgrade": "تصعيد",
         "CurrentLocale": "مشهد",
         "ChangeLocale": "تغيير إعدادات المنطقة",
-        "CurrentUser": "المستخدم الحالي"
+        "CurrentUser": "المستخدم الحالي",
+        "BuyBeer":"يبيع لي البيرة"
     },
 
     "Time.YearsAgo": "نيان",
@@ -262,7 +263,8 @@
         "ConfirmPublish":"صدر",
         "LoginToView":"الرقص تسجيل الدخول لمعرفة المزيد",
         "MyFeedback":"بلدي ردود الفعل",
-        "MapSlogan":"التعرف على الناس في جميع أنحاء العالم"
+        "MapSlogan":"التعرف على الناس في جميع أنحاء العالم",
+        "Pictures":"صور ،"
     },
 
     "Mail":{

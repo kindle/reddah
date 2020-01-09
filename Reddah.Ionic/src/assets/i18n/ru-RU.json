@@ -92,7 +92,7 @@
         "Shake":"взбалтывание",
         "MagicMirror":"Волшебное зеркало",
         "BlackHole":"чёрная дыра",
-        "Mystic":"чатман",
+        "Mystic":"говорящая кошка",
         "Platform":"открытая платформа"
     },
 
@@ -121,7 +121,8 @@
         "CheckUpgrade": "эскалация",
         "CurrentLocale": "место работы",
         "ChangeLocale": "Изменить параметры области",
-        "CurrentUser": "текущий пользователь"
+        "CurrentUser": "текущий пользователь",
+        "BuyBeer":"Я водка"
     },
 
     "Time.YearsAgo": "год",
@@ -262,7 +263,8 @@
         "ConfirmPublish":"ппубликовать",
         "LoginToView":"танец для поиска",
         "MyFeedback":"обратная связь",
-        "MapSlogan":"знать людей по всему миру"
+        "MapSlogan":"знать людей по всему миру",
+        "Pictures":"образ"
     },
 
     "Mail":{
