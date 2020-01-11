@@ -571,6 +571,27 @@ export class ReddahService {
         );
     }
     //******************************** */
+    //type 0:girl, 1:boy
+    private getstorybylocation = 'https://login.reddah.com/api/article/getstorybylocation'; 
+    getStoryByLocation(type, latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, min=0){
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append("type", JSON.stringify(type));
+        formData.append("latCenter", JSON.stringify(latCenter));
+        formData.append("lngCenter", JSON.stringify(lngCenter));
+        formData.append("latLow", JSON.stringify(latLow));
+        formData.append("latHigh", JSON.stringify(latHigh));
+        formData.append("lngLow", JSON.stringify(lngLow));
+        formData.append("lngHigh", JSON.stringify(lngHigh));
+        formData.append("min", JSON.stringify(min));
+        
+        return this.http.post<any>(this.getstorybylocation, formData)
+        .pipe(
+            tap(data => this.log('get story by location')),
+            catchError(this.handleError('get story by location', []))
+        );
+    }
+    //******************************** */
     private changeNickNameUrl = 'https://login.reddah.com/api/article/changenickname'; 
 
     changeNickName(formData: FormData): Observable<any> {

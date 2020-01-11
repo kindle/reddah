@@ -10,6 +10,7 @@ import { UserPage } from '../../common/user/user.page';
 import { ChangeNoteNamePopPage } from '../../common/change-notename-pop.page';
 import { ChatChooseGroupPage } from '../../chat/chat-choose-group/chat-choose-group.page';
 import { MysticPage } from '../../common/mystic/mystic.page';
+import { MessageListPage } from '../message/message.page';
 
 @Component({
     selector: 'app-contact',
@@ -219,6 +220,18 @@ export class ContactPage {
             componentProps: {},
             cssClass: "modal-fullscreen",
         });
+        await modal.present();
+    }
+
+
+    async message(){
+        this.reddah.reloadLocaleSettings();
+        const modal = await this.modalController.create({
+            component: MessageListPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+    
         await modal.present();
     }
 }

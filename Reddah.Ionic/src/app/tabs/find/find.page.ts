@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular'
 import { ScanPage } from '../../common/scan/scan.page';
-import { PublisherPage } from '../publisher/publisher.page';
 import { SearchPage } from '../../common/search/search.page';
 import { ShakePage } from '../../shake/shake.page';
 import { ReddahService } from '../../reddah.service';
@@ -12,6 +11,7 @@ import { WormHolePage } from '../../common/worm-hole/worm-hole.page';
 import { LocalStorageService } from 'ngx-webstorage';
 import {  ActivatedRoute, Params } from '@angular/router';
 import { MysticPage } from '../../common/mystic/mystic.page';
+import { StoryPage } from '../../story/story.page';
 
 @Component({
   selector: 'app-find',
@@ -27,10 +27,7 @@ export class FindPage {
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
         private activeRoute: ActivatedRoute
-    ){
-
-
-    }
+    ){}
 
     async startScanner(){
         const scanModal = await this.modalController.create({
@@ -91,28 +88,6 @@ export class FindPage {
         }
     }
 
-    async goPublicPage(){
-        const modal = await this.modalController.create({
-            component: PublisherPage,
-            componentProps: {},
-            cssClass: "modal-fullscreen",
-        });
-        await modal.present();
-    }
-
-    /*
-    async goMiniPage(){
-        const userModal = await this.modalController.create({
-            component: SearchPage,
-            componentProps: {
-                type: 3,//mini only
-            },
-            cssClass: "modal-fullscreen",
-        });
-          
-        await userModal.present();
-    }
-    */
 
     async magicMirror(){
         const modal = await this.modalController.create({
@@ -138,6 +113,19 @@ export class FindPage {
             componentProps: {},
             cssClass: "modal-fullscreen",
         });
+        await modal.present();
+    }
+
+    async story(){
+        const modal = await this.modalController.create({
+            component: StoryPage,
+            componentProps: {
+                //lat: this.config.lat,
+                //lng: this.config.lng
+            },
+            cssClass: "modal-fullscreen",
+        });
+            
         await modal.present();
     }
 }

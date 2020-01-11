@@ -11,12 +11,10 @@ import { BookmarkPage } from '../../bookmark/bookmark.page';
 import { PlatformPage } from '../publisher/platform/platform.page';
 import { TimelinePopPage } from '../../common/timeline-pop.page';
 import { AddTimelinePage } from '../../mytimeline/add-timeline/add-timeline.page';
-import { MessageListPage } from '../../tabs/message/message.page'
 import { PointPage } from '../../common/point/point.page';
-import { PunchPage } from '../../common/punch/punch.page';
-import { HistoryPage } from '../../common/point/history/history.page';
 import { MyReportPage } from '../../mytimeline/myreport/myreport.page';
 import { PunchClockPage } from '../../common/point/punch-clock/punch-clock.page';
+import { PublisherPage } from '../publisher/publisher.page';
 
 @Component({
     selector: 'app-about',
@@ -140,17 +138,6 @@ export class AboutPage implements OnInit {
         }
     }
 
-    async message(){
-        this.reddah.reloadLocaleSettings();
-        const modal = await this.modalController.create({
-            component: MessageListPage,
-            componentProps: {},
-            cssClass: "modal-fullscreen",
-        });
-    
-        await modal.present();
-    }
-
     async goCredit(event){
         event.stopPropagation();
 
@@ -188,4 +175,28 @@ export class AboutPage implements OnInit {
             this.reddah.getUserPhotos(this.reddah.getCurrentUser());
         }
     }
+
+
+    async goPublicPage(){
+        const modal = await this.modalController.create({
+            component: PublisherPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        await modal.present();
+    }
+
+    /*
+    async goMiniPage(){
+        const userModal = await this.modalController.create({
+            component: SearchPage,
+            componentProps: {
+                type: 3,//mini only
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await userModal.present();
+    }
+    */
 }

@@ -22,6 +22,8 @@ export class AddTimelinePage implements OnInit {
 
     @Input() postType: number;
     @Input() article: any;
+    //opt?'story'
+    @Input() action: any;
 
     constructor(
         private popoverController: PopoverController,
@@ -161,6 +163,14 @@ export class AddTimelinePage implements OnInit {
     }
 
     async submit(){
+
+        if(this.action=="story"){
+            if(this.location==null){
+                this.reddah.toast("You should choose a location");
+                return;
+            }
+        }
+
         const loading = await this.loadingController.create({
             message: this.translate.instant("Article.Loading"),
             spinner: 'circles',
@@ -171,7 +181,16 @@ export class AddTimelinePage implements OnInit {
         this.formData.append('location', JSON.stringify(this.location));
         //send the key in UI display order
         this.formData.append('order', this.photos.map(e=>e.fileUrl).join(","));
-        this.formData.append('type', JSON.stringify(1));//feedback:9, normal:0, timeline:1
+        //feedback:9, normal:0, timeline:1, story:11
+        this.formData.append('action', this.action);
+        if(this.action=="story"){
+            this.formData.append('type', JSON.stringify(11));
+            this.formData.append('lat', this.location.location.lat);
+            this.formData.append('lng', this.location.location.lng);
+        }
+        else{
+            this.formData.append('type', JSON.stringify(1));
+        }
         this.formData.append('feedbackType', JSON.stringify(-1));
         if(this.postType==4)//share
         {

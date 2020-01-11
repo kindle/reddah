@@ -61,6 +61,7 @@ import { AppComponent } from './app.component';
 import { LocalePage } from './common/locale/locale.page';
 import { LocationPage } from './common/location/location.page'
 import { MapPage } from './map/map.page'
+import { StoryPage } from './story/story.page'
 import { SafePipe } from './safe.pipe';
 import { EarthPage } from './tabs/earth/earth.page'
 import { PostviewerPage } from './postviewer/postviewer.page';
@@ -185,7 +186,7 @@ var firebaseConfig = {
         BookmarkPopPage,ChatPopPage,
         PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
         RankPage,
-        LocalePage,LocationPage,MapPage,EarthPage,
+        LocalePage,LocationPage,MapPage,StoryPage,EarthPage,
         ChooseUserPage,ShareChooseChatPage,
         AddCommentPage,
         AddFriendPage,
@@ -250,7 +251,7 @@ var firebaseConfig = {
         BookmarkPopPage,ChatPopPage,
         PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
         RankPage,
-        LocalePage,LocationPage,MapPage,EarthPage,
+        LocalePage,LocationPage,MapPage,StoryPage,EarthPage,
         ChooseUserPage,ShareChooseChatPage,
         PostviewerPage,
         ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,

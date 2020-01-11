@@ -93,7 +93,8 @@
         "MagicMirror":"Espejo",
         "BlackHole":"Agujero negro",
         "Mystic":"Gato parlanchín",
-        "Platform":"Plataforma abierta"
+        "Platform":"Plataforma abierta",
+        "Story":"Historia corta"
     },
 
     "Search":{
