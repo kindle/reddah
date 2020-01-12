@@ -8,6 +8,7 @@ import L from 'leaflet';
 import { ActivatedRoute, Params } from '@angular/router';
 import { UserPage } from '../common/user/user.page';
 import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page';
+import { TsViewerPage } from '../mytimeline/tsviewer/tsviewer.page';
 
 @Component({
     selector: 'app-story',
@@ -97,7 +98,7 @@ export class StoryPage implements OnInit {
             
         }
 
-        this.map.setView([item.location.lat, item.location.lng], 3);
+        this.map.setView([item.location.lat, item.location.lng], 11);
     }
 
     @ViewChild('about') about;
@@ -206,6 +207,7 @@ export class StoryPage implements OnInit {
         //this.cacheService.loadFromObservable(cacheKey, request, "getUsersByLocation")
         this.map.setView([latCenter, lngCenter], this.map.getZoom());
         //do not use cache when user count is too low
+        console.log(`${type}, ${latCenter}, ${lngCenter}, ${latLow}, ${latHigh}, ${lngLow}, ${lngHigh}`)
         this.reddah.getStoryByLocation(type, latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, 0)
         .subscribe(data=>{
             //console.log(data)
@@ -224,9 +226,15 @@ export class StoryPage implements OnInit {
                     this.reddah.getUserPhotos(user.UserName);
                     if(showArray.includes(index)){
                         //let content = L.DomUtil.create('div', 'content');
-                        let content = "<img id='"+user.UserName+"' style='margin-right:5px;border-radius:3px;' width=40 height=40 src="
-                            +this.reddah.appDataMap('userphoto_'+user.UserName, user.Photo)+">"
-                            //+this.reddah.getDisplayName(user.UserName)+"";
+                        let photos = user.Content.split('$$$');
+                        let samplePhoto = "";
+                        if(photos.length>0)
+                            samplePhoto = photos[0];
+                        /*let content = "<img id='"+user.Id+""+"' style='float:left;margin-right:5px;border-radius:3px;' width=40 height=40 src="
+                            +this.reddah.appDataMap('userphoto_'+user.UserName, samplePhoto)+">"
+                            +this.reddah.summary(user.Title, 20)+"";*/
+                        //let content = "<div (click)='"+this.goTsViewer(user)+"'>"+this.reddah.summary(user.Title, 20)+"</div>"
+                        let content = "<div (onclick)='goTsViewer("+user+")'>"+this.reddah.summary(user.Title, 20)+"</div>"
                         let popup = L.popup().setContent(content);
                         /*L.DomEvent.on(popup, 'click', ()=>{
                             this.goUser(user.UserName);
@@ -237,19 +245,15 @@ export class StoryPage implements OnInit {
                             .bindPopup(popup,{closeButton: true});
                             //+"<br>"+this.reddah.appData('usersignature_'+user.UserName));
 
-                        
+                        /*
                         this.flyMaker.on('popupopen', ()=> {
-                            this.elementRef.nativeElement.querySelector("#"+user.UserName)
+                            this.elementRef.nativeElement.querySelector("#"+user.Id)
                             .addEventListener('click', (e)=>
                             {
-                                if(!this.readonly){
-                                    this.goUser(user.UserName);
-                                }
-                                else{
-                                    this.reddah.toast(this.translateService.instant("Common.LoginToView"));
-                                }
+                                console.log(e)
+                                this.goTsViewer(user);
                             });
-                        });
+                        });*/
                         
                             
                         this.markerGroup.addLayer(this.flyMaker);
@@ -259,6 +263,18 @@ export class StoryPage implements OnInit {
                 this.map.addLayer(this.markerGroup);
             }
         });
+    }
+
+    async goTsViewer(article){
+        const userModal = await this.modalController.create({
+            component: TsViewerPage,
+            componentProps: { 
+                article: article
+            },
+            cssClass: "modal-fullscreen",
+        });
+        
+        await userModal.present();
     }
 
     async goUser(userName){

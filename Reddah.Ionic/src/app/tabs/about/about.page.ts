@@ -59,15 +59,6 @@ export class AboutPage implements OnInit {
         this.reddah.getUserPhotos(this.userName);
     }
 
-    async goPlatform(){
-        const modal = await this.modalController.create({
-            component: PlatformPage,
-            componentProps: {},
-            cssClass: "modal-fullscreen",
-        });
-        
-        await modal.present();
-    }
 
     async goSettings(){
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");

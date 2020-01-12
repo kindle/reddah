@@ -1,27 +1,33 @@
 <app-header title="Menu.Find"></app-header>
 <ion-content no-padding class="findContent">
-    <ion-item lines="none" class="borderTop borderBottom" (click)="story()">
+    <ion-item lines="none" class="borderTop borderBottom" (click)="map()">
+        <ion-icon class="menuIcon" name="globe" slot="start" size="medium"></ion-icon>
+        <ion-label>{{ 'Menu.Earth' | translate }}</ion-label>
+        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <!--
+    <ion-item lines="none" class="borderBottom" (click)="story()">
         <ion-icon class="menuIcon" name="ios-bulb" slot="start" size="medium" color="primary"></ion-icon>
         <ion-label>{{ 'Menu.Story' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
+-->
+
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
-    <!--
-    <ion-item lines="none" class="borderTop borderBottom" href="/mytimeline" detail="false">
-        <ion-icon class="menuIcon" name="aperture" slot="start" size="medium" color="primary"></ion-icon>
-        <ion-text slot="start">{{ 'Menu.Timeline' | translate }}</ion-text>
-        <ion-badge slot="start" color="danger" *ngIf="reddah.unReadMessage.length>0">{{reddah.unReadMessage.length}}</ion-badge>
+    <ion-item lines="none" class="borderTop borderBottom" (click)="mystic()">
+        <ion-icon class="menuIcon" color="point" name="logo-octocat" slot="start" size="medium"></ion-icon>
+        <ion-label>{{ 'Menu.Mystic' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
-    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
-    </ion-item>
-    -->
     <!--<ion-item class="borderTop" href="/scan" detail="false">
         <ion-icon class="menuIcon" name="qr-scanner" slot="start" size="medium"></ion-icon>
         <ion-label>{{ 'Menu.Header.Scan' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>-->
+
+    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    </ion-item>
     <ion-item class="borderTop" (click)="shake()">
         <ion-icon class="menuIcon" name="ios-color-wand" slot="start" size="medium"></ion-icon>
         <ion-label>{{ 'Menu.Shake' | translate }}</ion-label>
@@ -38,25 +44,16 @@
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
 
+
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
-    <ion-item lines="none" class="borderTop borderBottom" (click)="mystic()">
-        <ion-icon class="menuIcon" color="point" name="logo-octocat" slot="start" size="medium"></ion-icon>
-        <ion-label>{{ 'Menu.Mystic' | translate }}</ion-label>
+    <ion-item lines="none" class="borderTop borderBottom" (click)="goPlatform()">
+        <ion-icon class="menuIcon" name="ios-flask" color="mini" slot="start"></ion-icon>
+        <ion-label>{{ 'Menu.Platform' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
 
-    
-
-    <!--
-    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
-    </ion-item>
-    <ion-item lines="none" class="borderTop borderBottom" (click)="mystic()" detail="false">
-        <ion-icon class="menuIcon" name="ios-person" slot="start" color="dark" size="medium"></ion-icon>
-        <ion-label>{{ 'Menu.Mystic' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
-    </ion-item>-->
-    
+   
 
     <!--<div class="gap">
         <ion-item class="borderTop borderItem" href="/tabs/(home:home)">

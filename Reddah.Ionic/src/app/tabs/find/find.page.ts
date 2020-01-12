@@ -12,6 +12,8 @@ import { LocalStorageService } from 'ngx-webstorage';
 import {  ActivatedRoute, Params } from '@angular/router';
 import { MysticPage } from '../../common/mystic/mystic.page';
 import { StoryPage } from '../../story/story.page';
+import { MapPage } from '../../map/map.page';
+import { PlatformPage } from '../publisher/platform/platform.page';
 
 @Component({
   selector: 'app-find',
@@ -126,6 +128,30 @@ export class FindPage {
             cssClass: "modal-fullscreen",
         });
             
+        await modal.present();
+    }
+
+    async map(){
+        const modal = await this.modalController.create({
+            component: MapPage,
+            componentProps: {
+                //lat: this.config.lat,
+                //lng: this.config.lng
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await modal.present();
+    }
+
+
+    async goPlatform(){
+        const modal = await this.modalController.create({
+            component: PlatformPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        
         await modal.present();
     }
 }
