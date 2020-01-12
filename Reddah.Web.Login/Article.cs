@@ -34,5 +34,7 @@ namespace Reddah.Web.Login
         public int Status { get; set; }
         public string LastUpdateContent { get; set; }
         public int LastUpdateType { get; set; }
+        public Nullable<decimal> Lat { get; set; }
+        public Nullable<decimal> Lng { get; set; }
     }
 }

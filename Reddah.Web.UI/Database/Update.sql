@@ -176,3 +176,8 @@ alter table point add
 alter table userprofile add 
 	[Lan] VARCHAR(10) NULL, 
 	[Lan1] NVARCHAR(MAX) NULL 
+
+--20200111
+alter table [dbo].[article] add
+  [Lat] Decimal(20,16) NULL,
+  [Lng] Decimal(20,16) NULL

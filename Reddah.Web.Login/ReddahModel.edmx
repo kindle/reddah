@@ -29,6 +29,8 @@
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="LastUpdateContent" Type="nvarchar(max)" />
           <Property Name="LastUpdateType" Type="int" Nullable="false" />
+          <Property Name="Lat" Type="decimal" Precision="20" Scale="16" />
+          <Property Name="Lng" Type="decimal" Precision="20" Scale="16" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -312,6 +314,8 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdateType" Type="Int32" Nullable="false" />
+          <Property Name="Lat" Type="Decimal" Precision="20" Scale="16" />
+          <Property Name="Lng" Type="Decimal" Precision="20" Scale="16" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -533,6 +537,8 @@
           <EntitySetMapping Name="Article">
             <EntityTypeMapping TypeName="reddahModel.Article">
               <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
                 <ScalarProperty Name="LastUpdateType" ColumnName="LastUpdateType" />
                 <ScalarProperty Name="LastUpdateContent" ColumnName="LastUpdateContent" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

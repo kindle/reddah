@@ -106,6 +106,11 @@ namespace Reddah.Web.Login
         public decimal? Distance { get; set; }
     }
 
+    public class AdvancedStory : Article
+    {
+        public decimal? Distance { get; set; }
+    }
+
 
     public class AdvancedArticle: Article
     {

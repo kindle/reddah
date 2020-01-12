@@ -126,6 +126,9 @@ namespace Reddah.Web.Login.Controllers
             try
             {
                 string jwt = HttpContext.Current.Request["jwt"];
+                string myaction = HttpContext.Current.Request["action"];
+                string lat = HttpContext.Current.Request["lat"];
+                string lng = HttpContext.Current.Request["lng"];
                 string thoughts = HttpContext.Current.Request["thoughts"];
                 string location = HttpContext.Current.Request["location"];
                 string shareTitle = HttpContext.Current.Request["abstract"];
@@ -254,10 +257,10 @@ namespace Reddah.Web.Login.Controllers
                         }
 
                         //add timeline article
-                        db.Article.Add(new Article()
+                        var newArticle = new Article()
                         {
                             Title = HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(thoughts.Replace("\n", "<br>")))),
-                            Content = shareImageUrl!=null?shareImageUrl:string.Join("$$$", articleContentList),
+                            Content = shareImageUrl != null ? shareImageUrl : string.Join("$$$", articleContentList),
                             CreatedOn = DateTime.UtcNow,
                             Count = 0,
                             GroupName = "",
@@ -268,8 +271,15 @@ namespace Reddah.Web.Login.Controllers
                             Abstract = refArticleId > 0 ? shareTitle : feedbackType.ToString(),
                             LastUpdateType = userType
                             //when type=9, insert feedbacktype else if share article insert title else insert empty
+                            //when type==11, add a story
 
-                        });
+                        };
+                        if (myaction == "story")
+                        {
+                            newArticle.Lat = Decimal.Parse(lat);
+                            newArticle.Lng = Decimal.Parse(lng);
+                        }
+                        db.Article.Add(newArticle);
 
                         db.SaveChanges();
 
@@ -841,7 +851,7 @@ namespace Reddah.Web.Login.Controllers
                                  where (type==-1 || u.Sex == type)
                                     && u.SystemStatus == 0 && u.PrivacyShowLocation==0 && u.Lat != null && u.Lng != null && u.UserName != jwtResult.JwtUser.User &&
                                     u.Lat < latHigh && u.Lat > latLow &&
-                                    u.Lng < lngHigh && u.Lng > lngLow //has bug in the middle across 0 degree
+                                    u.Lng < lngHigh && u.Lng > lngLow 
                                  select new AdvancedUserProfile
                                  {
                                      UserName = u.UserName,
@@ -869,7 +879,7 @@ namespace Reddah.Web.Login.Controllers
                                     && u.SystemStatus == 0 && u.PrivacyShowLocation == 0 && u.Lat != null && u.Lng != null && u.UserName != jwtResult.JwtUser.User &&
                                     u.LastShakeOn >= limit &&
                                     u.Lat < latHigh && u.Lat > latLow &&
-                                    u.Lng < lngHigh && u.Lng > lngLow //has bug in the middle across 0 degree
+                                    u.Lng < lngHigh && u.Lng > lngLow 
                                  select new AdvancedUserProfile
                                  {
                                      UserName = u.UserName,
@@ -888,6 +898,117 @@ namespace Reddah.Web.Login.Controllers
                             .Take(pageCount).OrderBy(n => n.Distance);
                     }
                     
+
+                    return Ok(new ApiResult(0, query.ToList()));
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("getstorybylocation")]
+        [HttpPost]
+        public IHttpActionResult GetStoryByLocation()
+        {
+            IEnumerable<AdvancedStory> query = null;
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int type = js.Deserialize<int>(HttpContext.Current.Request["type"]);
+                decimal latCenter = js.Deserialize<decimal>(HttpContext.Current.Request["latCenter"]);
+                decimal lngCenter = js.Deserialize<decimal>(HttpContext.Current.Request["lngCenter"]);
+                decimal latLow = js.Deserialize<decimal>(HttpContext.Current.Request["latLow"]);
+                decimal latHigh = js.Deserialize<decimal>(HttpContext.Current.Request["latHigh"]);
+                decimal lngLow = js.Deserialize<decimal>(HttpContext.Current.Request["lngLow"]);
+                decimal lngHigh = js.Deserialize<decimal>(HttpContext.Current.Request["lngHigh"]);
+
+                int min = js.Deserialize<int>(HttpContext.Current.Request["min"]);
+
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var pageCount = 100;
+                    //return Ok(new ApiResult(2, min));
+                    if (min == 0)
+                    {
+                        query = (from u in db.Article
+                                 where u.Type == 11 &&//story
+                                    u.Status == 0 && u.UserName != jwtResult.JwtUser.User &&
+                                    u.Lat < latHigh && u.Lat > latLow &&
+                                    u.Lng < lngHigh && u.Lng > lngLow 
+                                 select new AdvancedStory
+                                 {
+                                     Id = u.Id,
+                                     Title = u.Title,
+                                     Content = u.Content,
+                                     Abstract = u.Abstract,
+                                     CreatedOn = u.CreatedOn,
+                                     Up = u.Up,
+                                     Down = u.Down,
+                                     Count = u.Count,
+                                     UserName = u.UserName,
+                                     GroupName = u.GroupName,
+                                     Locale = u.Locale,
+                                     LastUpdateOn = u.LastUpdateOn,
+                                     Type = u.Type,
+                                     Ref = u.Ref,
+                                     Location = u.Location,
+                                     Lat = u.Lat,
+                                     Lng = u.Lng,
+                                     Distance = (u.Lat - latCenter) > 0 ? (u.Lat - latCenter) : (u.Lat - latCenter) * -1 +
+                                        (u.Lng - lngCenter) > 0 ? (u.Lng - lngCenter) : (u.Lng - lngCenter) * -1,
+                                 })
+                            .Take(pageCount).OrderBy(n => n.Distance);
+                    }
+                    else
+                    {
+                        //var limit = DateTime.UtcNow.AddMinutes(-min); use days as users is not many
+                        var limit = DateTime.UtcNow.AddMonths(-min);
+
+                        query = (from u in db.Article
+                                 where u.Type == 11
+                                    && u.Status == 0 && u.UserName != jwtResult.JwtUser.User &&
+                                    u.CreatedOn >= limit &&
+                                    u.Lat < latHigh && u.Lat > latLow &&
+                                    u.Lng < lngHigh && u.Lng > lngLow 
+                                 select new AdvancedStory
+                                 {
+                                     Id = u.Id,
+                                     Title = u.Title,
+                                     Content = u.Content,
+                                     Abstract = u.Abstract,
+                                     CreatedOn = u.CreatedOn,
+                                     Up = u.Up,
+                                     Down = u.Down,
+                                     Count = u.Count,
+                                     UserName = u.UserName,
+                                     GroupName = u.GroupName,
+                                     Locale = u.Locale,
+                                     LastUpdateOn = u.LastUpdateOn,
+                                     Type = u.Type,
+                                     Ref = u.Ref,
+                                     Location = u.Location,
+                                     Lat = u.Lat,
+                                     Lng = u.Lng,
+                                     Distance = (u.Lat - latCenter) > 0 ? (u.Lat - latCenter) : (u.Lat - latCenter) * -1 +
+                                        (u.Lng - lngCenter) > 0 ? (u.Lng - lngCenter) : (u.Lng - lngCenter) * -1,
+                                 })
+                            .Take(pageCount).OrderBy(n => n.Distance);
+                    }
+
 
                     return Ok(new ApiResult(0, query.ToList()));
                 }
