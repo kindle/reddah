@@ -157,9 +157,11 @@
 .messageBox{
    background-color: #585858;
    border-radius: 0.25em;
-   padding:0.15em;
+   padding-left:0.15em;
+   padding-right:0.15em;
    color:white;
-   margin: 0.6em 50%;
+   margin-left:50%;
+   margin-right:50%;
    transform: translateX(-50%);
    width:9.5em;
    vertical-align: middle;
