@@ -8,6 +8,9 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { Platform } from '@ionic/angular'; 
 import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
+import { AlertController, ActionSheetController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: 'app-setting-about',
@@ -29,10 +32,13 @@ export class SettingAboutPage implements OnInit {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         public authService: AuthService,
+        private actionSheetController: ActionSheetController,
+        private translate: TranslateService,
+        private iab: InAppBrowser,
+        private alertController: AlertController,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
-        
     }
 
     ngOnInit() {
@@ -118,7 +124,52 @@ export class SettingAboutPage implements OnInit {
         if(this.platform.is('ios')){
 
         }
-        //others
+
+        const actionSheet = await this.actionSheetController.create({
+            header: this.translate.instant("About.BuyBeer"),
+            buttons: [{
+              text: 'Alipay',
+              role: 'destructive',
+              cssClass: 'pay-alipay',
+              handler: () => {
+                this.alipayQrCode();
+              }
+            }, {
+              text: 'Wechat',
+              cssClass: 'pay-wechatpay',
+              handler: () => {
+                this.wechatpayQrCode();
+              }
+            }, {
+              text: 'Paypal',
+              cssClass: 'pay-paypal',
+              handler: () => {
+                this.iab.create("https://paypal.me/reddah", '_system');
+              }
+            }
+        ]
+        });
+        await actionSheet.present();
+    }
+
+    async alipayQrCode() {
+        const alert = await this.alertController.create({
+            header: this.translate.instant("Menu.PressPay"),
+            cssClass: 'pay-code',
+            message: "<img src='/assets/icon/AlipayCode.jpeg'>",
+        });
+    
+        await alert.present();
+    }
+
+    async wechatpayQrCode() {
+        const alert = await this.alertController.create({
+            header: this.translate.instant("Menu.PressPay"),
+            cssClass: 'pay-code',
+            message: "<img src='/assets/icon/WechatZan.jpeg'>",
+        });
+    
+        await alert.present();
     }
 
 }

@@ -203,3 +203,35 @@ figure {
 figure>img{
     width:-webkit-fill-available !important;
 }
+
+.pay-alipay{
+    background-image: url('/assets/icon/alipay.png') !important;
+    background-repeat: no-repeat !important;
+    background-size: 30px 30px !important;
+    background-position: 15px 15px !important;
+    padding-left: 80px !important;
+}
+
+.pay-wechatpay{
+  background-image: url('/assets/icon/wechatpay.png') !important;
+  background-repeat: no-repeat !important;
+  background-size: 30px 30px !important;
+  background-position: 15px 15px !important;
+  padding-left: 80px !important;
+}
+
+.pay-paypal{
+  background-image: url('/assets/icon/paypal.png') !important;
+  background-repeat: no-repeat !important;
+  background-size: 30px 30px !important;
+  background-position: 15px 15px !important;
+  padding-left: 80px !important;
+}
+
+.pay-code{
+  max-height: unset !important;
+}
+
+.alert-message.sc-ion-alert-md{
+  max-height: unset !important;
+}
