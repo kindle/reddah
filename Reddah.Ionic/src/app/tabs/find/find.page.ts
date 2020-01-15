@@ -14,6 +14,7 @@ import { MysticPage } from '../../common/mystic/mystic.page';
 import { StoryPage } from '../../story/story.page';
 import { MapPage } from '../../map/map.page';
 import { PlatformPage } from '../publisher/platform/platform.page';
+import { EarthBoxComponent } from '../../common/earth-box/earth-box.component';
 
 @Component({
   selector: 'app-find',

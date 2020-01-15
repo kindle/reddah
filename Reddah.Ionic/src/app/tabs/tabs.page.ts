@@ -65,6 +65,12 @@ export class TabsPage implements OnInit {
         else if(this.platform.is('iphone')||this.platform.is('ipad')||this.platform.is('ios')){ 
             this.isIos = true;
         }
+
+        this.reddah.renewJwt().subscribe(data=>{
+            if(data.Success==0){ 
+                this.reddah.setCurrentJwt(data.Message);
+            }
+        });
     }
 
 

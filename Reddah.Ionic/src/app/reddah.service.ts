@@ -1091,6 +1091,17 @@ export class ReddahService {
         );
     }
 
+    private renewJwtUrl = 'https://login.reddah.com/api/auth/renewjwt'; 
+    renewJwt(): Observable<any> {
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.renewJwtUrl, formData)
+        .pipe(
+            tap(data => this.log('renew jwt')),
+            catchError(this.handleError('renew jwt', []))
+        );
+    }
+
     private getPointReadUrl = 'https://login.reddah.com/api/point/read'; 
     getPointRead(): Observable<any> {
         let formData = new FormData();

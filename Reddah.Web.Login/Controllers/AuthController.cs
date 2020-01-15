@@ -214,7 +214,7 @@ namespace Reddah.Web.Login.Controllers
                         audience: user.UserName,
                         claims: claims,
                         //expires: DateTime.Now.AddMinutes(20),
-                        expires: DateTime.Now.AddMonths(1),
+                        expires: DateTime.Now.AddDays(3),
                         signingCredentials: signinCredentials
                     );
 
@@ -223,7 +223,7 @@ namespace Reddah.Web.Login.Controllers
                 }
                 else
                 {
-                    using (var db = new reddahEntities())
+                    /*using (var db = new reddahEntities())
                     {
                         var userExist = db.UserProfile.FirstOrDefault(u => u.UserName == user.UserName && u.Type==0);
                         if (userExist != null)
@@ -237,10 +237,52 @@ namespace Reddah.Web.Login.Controllers
                                 }
                             }
                         }
-                    }
+                    }*/
 
                     return Ok(new ApiResult(1006, "Username or Password is wrong"));
                 }
+            }
+            catch (Exception e)
+            {
+                return Ok(new ApiResult(4, e.Message.ToString()));
+            }
+        }
+
+        [Route("renewjwt")]
+        public IHttpActionResult RenewJwt()
+        {
+            string jwt = HttpContext.Current.Request["jwt"];
+
+            if (String.IsNullOrWhiteSpace(jwt))
+                return Ok(new ApiResult(1, "No Jwt string"));
+
+            JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+            if (jwtResult.Success != 0)
+                return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+            
+            try
+            {
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
+                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+                var claims = GetPermissionClaims(jwtResult.JwtUser.User);
+                //= new List<Claim>();
+                //claims.Add(new Claim("100", "view"));
+                //claims.Add(new Claim("101", "post"));
+
+                var tokeOptions = new JwtSecurityToken(
+                    issuer: "https://login.reddah.com",
+                    audience: jwtResult.JwtUser.User,
+                    claims: claims,
+                    //expires: DateTime.Now.AddMinutes(20),
+                    expires: DateTime.Now.AddDays(3),
+                    signingCredentials: signinCredentials
+                );
+
+                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+                return Ok(new ApiResult(0, tokenString));
+                
             }
             catch (Exception e)
             {
