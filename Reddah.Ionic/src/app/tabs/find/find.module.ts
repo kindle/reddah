@@ -10,8 +10,9 @@ import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoa
 
 import { EarthBoxComponent } from '../../common/earth-box/earth-box.component';
 
+
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  //schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     IonicModule,
     CommonModule,
@@ -24,7 +25,7 @@ import { EarthBoxComponent } from '../../common/earth-box/earth-box.component';
     })
   ],
   declarations: [
-    FindPage,
+    FindPage,EarthBoxComponent,
   ]
 })
 export class FindPageModule {

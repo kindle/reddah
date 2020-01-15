@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
-
 import { TimelineMax, TweenMax, Power0, Power1 } from "gsap";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-earth-box',

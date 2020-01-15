@@ -1,5 +1,5 @@
 <app-header title="Menu.Find"></app-header>
-<ion-content no-padding class="findContent">
+<ion-content no-padding class="findContent" (click)="showEarthBox()">
     <ion-item lines="none" class="borderTop borderBottom" (click)="map()">
         <ion-icon class="menuIcon" name="globe" slot="start" size="medium"></ion-icon>
         <ion-label>{{ 'Menu.Earth' | translate }}</ion-label>
@@ -44,7 +44,6 @@
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
 
-
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" (click)="goPlatform()">
@@ -86,9 +85,10 @@
             <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
+    
     -->
-    <app-earth1-box test="12345"></app-earth1-box>
 
+    <app-earth-box #earthbox *ngIf="showBox"></app-earth-box>
 </ion-content>
 
 

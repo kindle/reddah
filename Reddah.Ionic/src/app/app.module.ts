@@ -109,7 +109,6 @@ import { ImageLazyLoadDirective } from './image-lazy-load.directive';
 import { CommentBoxComponent } from './postviewer/comment-box/comment-box.component';
 import { ChatBoxComponent } from './chat/chat-box/chat-box.component';
 import { ChatFireBoxComponent } from './chatfire/chat-fire-box/chat-fire-box.component';
-import { EarthBoxComponent } from './common/earth-box/earth-box.component';
 import { ChatMysticBoxComponent } from './common/mystic/chat-mystic-box/chat-mystic-box.component';
 import { SearchPage } from './common/search/search.page';
 import { MessagePage } from './mytimeline/message/message.page'
@@ -230,7 +229,7 @@ var firebaseConfig = {
         //SwipeTabDirective,
         ImageLazyLoadDirective,
         CommentBoxComponent,
-        ChatBoxComponent,ChatFireBoxComponent,ChatMysticBoxComponent,EarthBoxComponent,
+        ChatBoxComponent,ChatFireBoxComponent,ChatMysticBoxComponent,
         SearchPage,
         ShakePage,
         SearchUserPage,

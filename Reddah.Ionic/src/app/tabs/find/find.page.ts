@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular'
 import { ScanPage } from '../../common/scan/scan.page';
 import { SearchPage } from '../../common/search/search.page';
@@ -154,5 +154,12 @@ export class FindPage {
         });
         
         await modal.present();
+    }
+
+
+    @ViewChild('earthbox') earthbox;
+    showBox= false;
+    async showEarthBox(){
+        this.showBox = true;
     }
 }
