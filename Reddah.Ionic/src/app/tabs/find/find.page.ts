@@ -145,7 +145,6 @@ export class FindPage {
         await modal.present();
     }
 
-
     async goPlatform(){
         const modal = await this.modalController.create({
             component: PlatformPage,
@@ -156,10 +155,9 @@ export class FindPage {
         await modal.present();
     }
 
-
     @ViewChild('earthbox') earthbox;
     showBox= false;
     async showEarthBox(){
-        this.showBox = true;
+        //this.showBox = !this.showBox;
     }
 }

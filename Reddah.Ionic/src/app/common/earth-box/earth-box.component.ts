@@ -25,7 +25,6 @@ export class EarthBoxComponent implements OnInit {
         var locations = $('.location');
         var timeline = new TimelineMax();
 
-
         //IE FIX | START
         msieversion();
 
