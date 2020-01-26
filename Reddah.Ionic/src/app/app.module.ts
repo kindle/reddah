@@ -44,6 +44,7 @@ import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoa
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { AppRate } from '@ionic-native/app-rate/ngx';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -336,6 +337,7 @@ var firebaseConfig = {
         NavController,
         AppVersion,
         AppUpdate,
+        AppRate,
         AlertController,
         AuthService,
         AndroidPermissions,

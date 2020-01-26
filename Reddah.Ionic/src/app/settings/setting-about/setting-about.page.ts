@@ -4,7 +4,7 @@ import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
-import { AppVersion } from '@ionic-native/app-version/ngx';
+import { AppRate } from '@ionic-native/app-rate/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { Platform } from '@ionic/angular'; 
 import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
@@ -24,7 +24,7 @@ export class SettingAboutPage implements OnInit {
     version;
 
     constructor(
-        private appVersion: AppVersion,
+        private appRate: AppRate,
         private appUpdate: AppUpdate,
         private platform: Platform,
         private modalController: ModalController,
@@ -106,14 +106,17 @@ export class SettingAboutPage implements OnInit {
         this.authService.logout();
     }
 
-    async feedback() {
-        const modal = await this.modalController.create({
-            component: AddFeedbackPage,
-            componentProps: {},
-            cssClass: "modal-fullscreen",
-        });
+    async like() {
+        this.appRate.preferences = {
+            usesUntilPrompt: 3,
+            storeAppURL: {
+                ios: '1481532281',
+                android: 'market://details?id=com.reddah.app',
+                windows: 'ms-windows-store://review/?ProductId=9nblggh0b2b9'
+            }
+        }
           
-        await modal.present();
+        this.appRate.promptForRating(false);
     }
 
     async buymebeer(){
@@ -154,7 +157,7 @@ export class SettingAboutPage implements OnInit {
 
     async alipayQrCode() {
         const alert = await this.alertController.create({
-            header: this.translate.instant("Menu.PressPay"),
+            //header: this.translate.instant("About.BuyBeer"),
             cssClass: 'pay-code',
             message: "<img src='/assets/icon/AlipayCode.jpeg'>",
         });
@@ -164,7 +167,7 @@ export class SettingAboutPage implements OnInit {
 
     async wechatpayQrCode() {
         const alert = await this.alertController.create({
-            header: this.translate.instant("Menu.PressPay"),
+            //header: this.translate.instant("About.BuyBeer"),
             cssClass: 'pay-code',
             message: "<img src='/assets/icon/WechatZan.jpeg'>",
         });

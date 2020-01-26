@@ -26,6 +26,7 @@
     "@ckeditor/ckeditor5-build-inline": "^16.0.0",
     "@ckeditor/ckeditor5-image": "^16.0.0",
     "@ionic-native/android-permissions": "^5.14.0",
+    "@ionic-native/app-rate": "^5.19.1",
     "@ionic-native/app-update": "^5.1.0",
     "@ionic-native/app-version": "^5.1.0",
     "@ionic-native/camera": "^5.1.0",
@@ -207,8 +208,8 @@
       "cordova-plugin-speechrecognition": {}
     },
     "platforms": [
-      "ios",
-      "android"
+      "android",
+      "ios"
     ]
   },
   "main": "index.js",
