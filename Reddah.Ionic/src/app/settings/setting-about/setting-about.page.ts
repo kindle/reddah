@@ -7,7 +7,6 @@ import { ReddahService } from '../../reddah.service';
 import { AppRate } from '@ionic-native/app-rate/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { Platform } from '@ionic/angular'; 
-import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
 import { AlertController, ActionSheetController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -24,13 +23,10 @@ export class SettingAboutPage implements OnInit {
     version;
 
     constructor(
-        private appRate: AppRate,
         private appUpdate: AppUpdate,
         private platform: Platform,
         private modalController: ModalController,
         public reddah: ReddahService,
-        private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
         public authService: AuthService,
         private actionSheetController: ActionSheetController,
         private translate: TranslateService,
@@ -107,16 +103,19 @@ export class SettingAboutPage implements OnInit {
     }
 
     async like() {
-        this.appRate.preferences = {
-            usesUntilPrompt: 3,
-            storeAppURL: {
-                ios: '1481532281',
-                android: 'market://details?id=com.reddah.app',
-                windows: 'ms-windows-store://review/?ProductId=9nblggh0b2b9'
-            }
+        let iosId = 1481532281;
+        let storeAppURL = "ms-windows-store://pdp/?productid=9NBLGGH0B2B9";
+        if(this.platform.is('ios')){
+            storeAppURL = `itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=${iosId}&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software`;
         }
-          
-        this.appRate.promptForRating(false);
+        else if(this.platform.is('android')){
+            storeAppURL = "market://details?id=com.reddah.app";
+        }
+        else{
+            storeAppURL = `https://apps.apple.com/cn/app/id${iosId}?l=${this.reddah.getCurrentLocale()}`;
+        }
+
+        this.iab.create(storeAppURL, '_system');
     }
 
     async buymebeer(){
@@ -130,26 +129,30 @@ export class SettingAboutPage implements OnInit {
 
         const actionSheet = await this.actionSheetController.create({
             header: this.translate.instant("About.BuyBeer"),
-            buttons: [{
+            buttons: [
+            {
+                text: 'Paypal',
+                cssClass: 'pay-paypal',
+                handler: () => {
+                    this.iab.create("https://paypal.me/reddah", '_system');
+                }
+            },
+            {
               text: 'Alipay',
               role: 'destructive',
               cssClass: 'pay-alipay',
               handler: () => {
                 this.alipayQrCode();
               }
-            }, {
+            }, 
+            {
               text: 'Wechat',
               cssClass: 'pay-wechatpay',
               handler: () => {
                 this.wechatpayQrCode();
               }
-            }, {
-              text: 'Paypal',
-              cssClass: 'pay-paypal',
-              handler: () => {
-                this.iab.create("https://paypal.me/reddah", '_system');
-              }
             }
+            
         ]
         });
         await actionSheet.present();

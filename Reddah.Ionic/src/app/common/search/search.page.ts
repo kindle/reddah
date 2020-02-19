@@ -85,7 +85,11 @@ export class SearchPage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
         this.type = this.router.snapshot.queryParams["type"];
+
+        this.articleHistories = this.reddah.getArticleHistory();
     }
+
+
 
     @ViewChild('searchKeyword') searchKeyword;
     @ViewChild('searchResult') searchResult;
@@ -152,6 +156,19 @@ export class SearchPage implements OnInit {
         }
     }
 
+
+    articleHistories=[];
+
+    searchHistory(value){
+        this.searchKeyword.value = value;
+        this.search();
+    }
+
+    clearArticleHistory(){
+        this.articleHistories = [];
+        this.reddah.clearArticleHistory();
+    }
+
     async search(){
 
         this.showTopic = false;
@@ -162,6 +179,17 @@ export class SearchPage implements OnInit {
             this.loadedIds_a=[];
             this.articles_a=[];
             this.searchArticles(null);
+
+            let hisIndex = this.articleHistories.indexOf(this.searchKeyword.value);
+            if(hisIndex>-1){
+                this.articleHistories.splice(hisIndex, 1);
+            }
+            
+            this.articleHistories.unshift(this.searchKeyword.value);
+            if(this.articleHistories.length>10){
+                this.articleHistories.splice(10,1);
+            }
+            this.reddah.saveArticleHistory(this.articleHistories);
         }
         else if(this.selectedTopicId==2)//timeline
         {

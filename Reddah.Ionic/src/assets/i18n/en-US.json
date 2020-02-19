@@ -101,12 +101,9 @@
     "Search":{
         "Title":"Search",
         "Filter":"Filter by",
-        "Article":"Article",
-        "Aperture":"Aperture",
-        "Publisher":"Publisher",
-        "MiniApp":"Mini App",
         "Recently":"Recently used",
-        "More":"More"
+        "More":"More",
+        "SearchHistory":"Search history"
     },
 
     "About":{

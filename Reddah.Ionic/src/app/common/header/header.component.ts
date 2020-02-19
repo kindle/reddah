@@ -5,7 +5,6 @@ import { HeaderAddPage } from '../header-add-pop.page';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
 import { ReddahService } from '../../reddah.service';
-import { PunchClockPage } from '../point/punch-clock/punch-clock.page';
 
 @Component({
     selector: 'app-header',
@@ -23,7 +22,7 @@ export class HeaderComponent {
         private platform: Platform,
         private localStorageService: LocalStorageService,
         private translate: TranslateService,
-        private reddah: ReddahService,
+        public reddah: ReddahService,
     ) { 
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
         this.translate.setDefaultLang(currentLocale);

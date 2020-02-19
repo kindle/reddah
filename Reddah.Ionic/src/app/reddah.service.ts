@@ -58,6 +58,8 @@ export class ReddahService {
     dislikeGroups = [];
     dislikeUserNames = [];
 
+    networkConnected = true;
+
     async preloadArticles(username){
         let locale = this.getCurrentLocale();
         let cacheKey = "this.reddah.getArticles" + JSON.stringify([])
@@ -1542,10 +1544,10 @@ export class ReddahService {
 
             let msg = error.message;
             if(msg!=null){
-                if(msg.indexOf("failure response")>0){
+                /*if(msg.indexOf("failure response")>0){
                     if(this.translate.instant("Input.Error.NetworkError")!="Input.Error.NetworkError")
                         this.toast(this.translate.instant("Input.Error.NetworkError"), "danger")
-                }
+                }*/
                     
                 if(msg.indexOf("ERR_TIMED_OUT")>0)
                     this.toast(this.translate.instant("Input.Error.ServiceError"), "danger")
@@ -2110,7 +2112,24 @@ export class ReddahService {
     getUserLan(targetUserName){
         let locale = this.appData("userlan_"+targetUserName);
         let result = this.Locales.filter(l=>l.Name.toLowerCase()==locale.toLowerCase());
-        return result==null?"":result[0]["Description"];
+        return result==null||result.length==0?(
+            locale==null?"":locale
+        ):result[0]["Description"];
+    }
+
+    getArticleHistory(){
+        let cache = this.localStorageService.retrieve("Reddah_Search_Article");
+        if(cache!=null)
+            return cache;
+        else return [];
+    }
+
+    saveArticleHistory(value){
+        this.localStorageService.store("Reddah_Search_Article", value)
+    }
+
+    clearArticleHistory(){
+        this.localStorageService.clear("Reddah_Search_Article");
     }
 
     GetCache(url){

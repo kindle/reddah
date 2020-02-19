@@ -101,7 +101,8 @@
         "Title":"Pesquisar",
         "Filter":"Filtro por",
         "Recently":"Utilizado recentemente",
-        "More":"Mais"
+        "More":"Mais",
+        "SearchHistory":"Histórico de pesquisa"
     },
 
     "About":{

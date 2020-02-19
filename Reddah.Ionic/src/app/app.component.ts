@@ -14,6 +14,7 @@ import { Globalization } from '@ionic-native/globalization';
 import { ReddahService } from './reddah.service';
 import { AuthService } from './auth.service';
 import { Queue } from './model/UserModel';
+import { Network } from '@ionic-native/network/ngx';
 
 @Component({
     selector: 'app-root',
@@ -38,6 +39,7 @@ export class AppComponent {
         private reddah: ReddahService,
         private authService: AuthService,
         private zone: NgZone,
+        private network: Network,
         //private firebase: Firebase,
     ) {
         try{
@@ -161,6 +163,14 @@ export class AppComponent {
         document.documentElement.style.setProperty(`--ion-font-size`, this.reddah.fontSizeMap.get(currentFontSize));
 
         this.reddah.getUserPhotos(this.reddah.getCurrentUser());
+
+        this.network.onDisconnect().subscribe(() => {
+            this.reddah.networkConnected = false;
+        });
+        
+        this.network.onConnect().subscribe(() => {
+            this.reddah.networkConnected = true;
+        });
     }
 
     // set up hardware back button event.

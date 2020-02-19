@@ -27,7 +27,6 @@
     <preference name="SplashScreenDelay" value="0" />
     <preference name="windows-target-version" value="10.0" />
     <preference name="windows-phone-target-version" value="10.0" />
-    <preference name="android-minSdkVersion" value="19" />
     <preference name="android-targetSdkVersion" value="28" />
     <platform name="android">
         <allow-intent href="market:*" />
@@ -144,6 +143,7 @@
     </plugin>
     <plugin name="cordova-plugin-add-swift-support" spec="^1.7.2" />
     <plugin name="cordova-plugin-speechrecognition" spec="^1.2.0" />
-    <engine name="ios" spec="^4.5.5" />
     <engine name="android" spec="^7.1.4" />
+    <engine name="ios" spec="^4.5.5" />
+    <plugin name="cordova-plugin-network-information" spec="^2.0.2" />
 </widget>

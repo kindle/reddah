@@ -1,3 +1,7 @@
+<ion-item style="--background:rgb(254,237,238)" lines="none" *ngIf="!reddah.networkConnected">
+    <ion-icon slot="start" name="wifi" color="medium"></ion-icon>
+    <ion-label color="medium">{{ 'Input.Error.NetworkError' | translate }}</ion-label>
+</ion-item>
 <ion-item no-padding lines="none" color="light">
     <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton" *ngIf="back"></ion-icon>
     <ion-title style="font-weight: bold;">{{ title | translate }}</ion-title>

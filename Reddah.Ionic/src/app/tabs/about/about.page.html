@@ -1,3 +1,7 @@
+<ion-item style="--background:rgb(254,237,238)" lines="none" *ngIf="!reddah.networkConnected">
+    <ion-icon slot="start" name="wifi" color="medium"></ion-icon>
+    <ion-label color="medium">{{ 'Input.Error.NetworkError' | translate }}</ion-label>
+</ion-item>
 <ion-content no-padding class="aboutContent">
     <ion-item lines="none">
         <ion-button clear slot="end" color="transparent" (click)="punchClock()" style="--box-shadow: none;">

@@ -21,6 +21,15 @@
         </ion-row> 
     </ion-grid>
     <ion-grid *ngIf="selectedTopicId==1">
+        <ion-item no-padding lines="none" *ngIf="articleHistories.length">
+            <ion-label class="chip-box-header">{{ 'Search.SearchHistory' | translate }}</ion-label>
+            <ion-icon name="trash" color="light" (click)="clearArticleHistory()" slot="end"></ion-icon>
+        </ion-item>
+        <div class="chip-box">
+            <ion-chip outline color="light" class="chip-gap" *ngFor="let articleHistory of articleHistories">
+                <ion-label (click)="searchHistory(articleHistory)">{{articleHistory}}</ion-label>
+            </ion-chip>
+        </div>
         <ion-row>
             <div *ngIf="firstLoading_a" style="display: flex; justify-content: center;width:100%;margin:15px;">
                 <ion-spinner name="bubbles"></ion-spinner>

@@ -102,7 +102,8 @@
         "Title": "搜索",
         "Filter": "搜索指定內容",
         "Recently":"最近用過",
-        "More":"更多"
+        "More":"更多",
+        "SearchHistory":"搜索歷史"
     },
 
     "About":{

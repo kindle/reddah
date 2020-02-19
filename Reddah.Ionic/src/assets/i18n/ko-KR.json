@@ -102,7 +102,8 @@
         "Title":"수색",
         "Filter":"선별 의거",
         "Recently":"최근에 사용했어요",
-        "More":"더"
+        "More":"더",
+        "SearchHistory":"검색 기록"
     },
 
     "About":{
