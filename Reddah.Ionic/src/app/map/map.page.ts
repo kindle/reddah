@@ -223,7 +223,7 @@ export class MapPage implements OnInit {
                     this.reddah.getUserPhotos(user.UserName);
                     if(showArray.includes(index)){
                         //let content = L.DomUtil.create('div', 'content');
-                        let content = "<img id='"+user.UserName+"' style='margin-right:5px;border-radius:3px;' width=40 height=40 src="
+                        let content = "<img id='id_"+user.UserName+"' style='margin-right:5px;border-radius:3px;' width=40 height=40 src="
                             +this.reddah.appDataMap('userphoto_'+user.UserName, user.Photo)+">"
                             //+this.reddah.getDisplayName(user.UserName)+"";
                         let popup = L.popup().setContent(content);
@@ -238,7 +238,7 @@ export class MapPage implements OnInit {
 
                         
                         this.flyMaker.on('popupopen', ()=> {
-                            this.elementRef.nativeElement.querySelector("#"+user.UserName)
+                            this.elementRef.nativeElement.querySelector("#id_"+user.UserName)
                             .addEventListener('click', (e)=>
                             {
                                 if(!this.readonly){

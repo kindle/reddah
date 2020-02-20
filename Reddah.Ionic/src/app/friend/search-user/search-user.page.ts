@@ -18,10 +18,9 @@ export class SearchUserPage implements OnInit {
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
-        private localStorageService: LocalStorageService,
         private cacheService: CacheService,
     ) { 
-        
+        this.userHistories = this.reddah.getHistory(5);
     }
 
     user404= false;
@@ -61,6 +60,9 @@ export class SearchUserPage implements OnInit {
                 alert(result.Message);
             }
         });
+
+
+        this.reddah.refreshHistoryCache(this.userHistories, this.searchKeyword.value, 5);
     }
 
     async searchMore(){
@@ -88,4 +90,19 @@ export class SearchUserPage implements OnInit {
         await userModal.present();
     }
 
+
+    userHistories=[];
+
+    searchHistory(value){
+        this.searchKeyword.value = value;
+        this.search();
+    }
+
+    clearHistory(id){
+        if(id==5)
+            this.userHistories = [];
+
+        if(id==5)
+            this.reddah.clearHistory(id);
+    }
 }

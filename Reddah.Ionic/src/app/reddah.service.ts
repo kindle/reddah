@@ -2117,19 +2117,33 @@ export class ReddahService {
         ):result[0]["Description"];
     }
 
-    getArticleHistory(){
-        let cache = this.localStorageService.retrieve("Reddah_Search_Article");
+    getHistory(id){
+        let cache = this.localStorageService.retrieve(`Reddah_Search_${id}`);
         if(cache!=null)
             return cache;
         else return [];
     }
 
-    saveArticleHistory(value){
-        this.localStorageService.store("Reddah_Search_Article", value)
+    saveHistory(id, value){
+        this.localStorageService.store(`Reddah_Search_${id}`, value)
     }
 
-    clearArticleHistory(){
-        this.localStorageService.clear("Reddah_Search_Article");
+    clearHistory(id){
+        this.localStorageService.clear(`Reddah_Search_${id}`);
+    }
+
+
+    refreshHistoryCache(arr, key, id){
+        let hisIndex = arr.indexOf(key);
+        if(hisIndex>-1){
+            arr.splice(hisIndex, 1);
+        }
+        
+        arr.unshift(key);
+        if(arr.length>10){
+            arr.splice(10,1);
+        }
+        this.saveHistory(id, arr);
     }
 
     GetCache(url){

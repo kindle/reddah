@@ -86,7 +86,8 @@ export class SearchPage implements OnInit {
         this.locale = this.reddah.getCurrentLocale();
         this.type = this.router.snapshot.queryParams["type"];
 
-        this.articleHistories = this.reddah.getArticleHistory();
+        this.articleHistories = this.reddah.getHistory(1);
+        this.apertureHistories = this.reddah.getHistory(2);
     }
 
 
@@ -158,15 +159,21 @@ export class SearchPage implements OnInit {
 
 
     articleHistories=[];
+    apertureHistories=[];
 
     searchHistory(value){
         this.searchKeyword.value = value;
         this.search();
     }
 
-    clearArticleHistory(){
-        this.articleHistories = [];
-        this.reddah.clearArticleHistory();
+    clearHistory(id){
+        if(id==1)
+            this.articleHistories = [];
+        if(id==2)
+            this.apertureHistories = [];
+
+        if(id==1||id==2)
+            this.reddah.clearHistory(id);
     }
 
     async search(){
@@ -180,23 +187,16 @@ export class SearchPage implements OnInit {
             this.articles_a=[];
             this.searchArticles(null);
 
-            let hisIndex = this.articleHistories.indexOf(this.searchKeyword.value);
-            if(hisIndex>-1){
-                this.articleHistories.splice(hisIndex, 1);
-            }
-            
-            this.articleHistories.unshift(this.searchKeyword.value);
-            if(this.articleHistories.length>10){
-                this.articleHistories.splice(10,1);
-            }
-            this.reddah.saveArticleHistory(this.articleHistories);
+            this.reddah.refreshHistoryCache(this.articleHistories, this.searchKeyword.value, 1);
         }
-        else if(this.selectedTopicId==2)//timeline
+        else if(this.selectedTopicId==2)//timeline/aperture
         {
             this.firstLoading_t = true;
             this.loadedIds_t=[];
             this.articles_t=[];
             this.searchTimelines(null);
+
+            this.reddah.refreshHistoryCache(this.apertureHistories, this.searchKeyword.value, 2);
         }
         else if(this.selectedTopicId==3)//publisher
         {
@@ -212,7 +212,7 @@ export class SearchPage implements OnInit {
             this.users_m=[];
             this.searchMini(null);
         }
-        else if(this.selectedTopicId==5)//chat
+        else if(this.selectedTopicId==5)//contact
         {
             alert('todo')
         }

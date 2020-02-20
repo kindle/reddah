@@ -143,7 +143,7 @@
     </plugin>
     <plugin name="cordova-plugin-add-swift-support" spec="^1.7.2" />
     <plugin name="cordova-plugin-speechrecognition" spec="^1.2.0" />
+    <plugin name="cordova-plugin-network-information" spec="^2.0.2" />
     <engine name="android" spec="^7.1.4" />
     <engine name="ios" spec="^4.5.5" />
-    <plugin name="cordova-plugin-network-information" spec="^2.0.2" />
 </widget>
