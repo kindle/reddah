@@ -12,6 +12,7 @@ import { RankPage } from '../rank/rank.page';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 
 @Component({
     selector: 'app-mini-viewer',
@@ -149,7 +150,30 @@ export class MiniViewerComponent implements OnInit {
 
             return this.reddah.getQqMusk(params, app_key);
         }
+
+        window["reddahApi"].viewImage = (base64ImageData)=>{
+            this.viewer(base64ImageData);
+        }
+
     }
+
+    async viewer(data) {
+        const modal = await this.modalController.create({
+            component: ImageViewerComponent,
+            componentProps: {
+                index:0,
+                imgSourceArray: this.reddah.preImageArray([data]),
+                imgTitle: "",
+                imgDescription: ""
+            },
+            cssClass: 'modal-fullscreen',
+            keyboardClose: true,
+            showBackdrop: true
+        });
+    
+        return await modal.present();
+    }
+
 
     initNativeApi(){
         

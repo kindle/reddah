@@ -361,7 +361,6 @@ namespace Reddah.Web.Login.Controllers
             {
                 return Ok(new ApiResult(4, ex.Message));
             }
-
         }
 
         private async Task<string> QqAiTask(string locale, string user, string uri, FormUrlEncodedContent content, string thread)
