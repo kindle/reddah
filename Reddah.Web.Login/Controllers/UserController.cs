@@ -5,6 +5,8 @@ using System.Web.Http;
 using System.Linq;
 using System.Data.Entity;
 using System.Web;
+using System.Xml.Linq;
+using System.Xml;
 
 namespace Reddah.Web.Login.Controllers
 {
@@ -33,7 +35,7 @@ namespace Reddah.Web.Login.Controllers
                     var user = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
                     if (user != null)
                     {
-                        if (user.Type==0)
+                        if (user.Type == 0)
                         {
                             user.Admins = info;
                             db.SaveChanges();
@@ -49,7 +51,5 @@ namespace Reddah.Web.Login.Controllers
                 return Ok(new ApiResult(4, ex.Message));
             }
         }
-
-        
     }
 }
