@@ -300,7 +300,39 @@ export class ReddahService {
         );
     }
      
-    
+    //******************************** */
+    qq_app_id=2127183732;
+    qq_app_key="493J0jD8PPeNUHNz";
+    //******************************** */
+    private qqMuskUrl = 'https://login.reddah.com/api/ai/qqmusk'; 
+
+    getQqMusk(params, appKey): Promise<any> {
+        let muskQqChatUrl = "https://api.ai.qq.com/fcgi-bin/ptu/ptu_facedecoration";
+
+        muskQqChatUrl += "?"
+        for (var key of Object.keys(params)) {
+            let value = params[key];
+            if(value!=""&&key!="image"){
+                muskQqChatUrl += key + '=' + encodeURIComponent(value) + '&';
+            }
+        }
+        muskQqChatUrl += 'app_key=' + appKey;
+
+        //console.log(muskQqChatUrl)
+
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append("locale", this.getCurrentLocale());
+        formData.append("url", muskQqChatUrl);
+        formData.append("image", params["image"])
+
+        return this.http.post<any>(this.qqMuskUrl, formData)
+        .pipe(
+            tap(data => this.log('get qq musk')),
+            catchError(this.handleError('get qq musk', []))
+        ).toPromise();
+
+    }
 
     getQqNlpChat(params, appKey): Observable<any> {
 
@@ -373,6 +405,23 @@ export class ReddahService {
             catchError(this.handleError('get qq nlp chat', []))
         );
         */
+    }
+
+    getReqSignImage(o, appkey){
+        console.log(o);
+        o = this.ksort(o);
+
+        let str = "";
+        for (var key of Object.keys(o)) {
+            let value = o[key];
+            if(value!=""){
+                str += key + '=' + btoa(value) + '&';
+            }
+        }
+        str += 'app_key=' + appkey;
+
+        let sign = Md5.hashStr(str)+"";
+        return sign.toUpperCase();
     }
 
     getReqSign(o, appkey){

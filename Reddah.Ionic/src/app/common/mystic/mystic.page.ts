@@ -58,7 +58,7 @@ export class MysticPage implements OnInit {
         private notification: LocalNotifications,
         private translate: TranslateService,
         private cacheService: CacheService,
-        private zone: NgZone,       
+        private zone: NgZone,     
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
@@ -242,8 +242,8 @@ export class MysticPage implements OnInit {
             if(this.reddah.getCurrentLocale()=="zh-CN"||
             this.reddah.getCurrentLocale()=="zh-TW")
             {//qq api
-                let app_id = 2127183732;
-                let app_key = "493J0jD8PPeNUHNz";
+                let app_id = this.reddah.qq_app_id;
+                let app_key = this.reddah.qq_app_key;
                 let time_stamp = new Date().getTime();
                 let nonce_str = this.reddah.nonce_str();
                 

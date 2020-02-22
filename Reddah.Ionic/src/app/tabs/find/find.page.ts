@@ -101,6 +101,15 @@ export class FindPage {
         await modal.present();
     }
 
+    async magicMirrorCat(){
+        const modal = await this.modalController.create({
+            component: MagicMirrorPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        await modal.present();
+    }
+
     async blackHole(){
         const modal = await this.modalController.create({
             component: WormHolePage,

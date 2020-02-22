@@ -1,14 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PopoverController, NavController, LoadingController, ModalController, AlertController } from '@ionic/angular'
 import { ReddahService } from '../../../reddah.service';
-import { File, FileEntry } from '@ionic-native/file/ngx';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Router } from '@angular/router';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { ImageViewerComponent } from '../../../common/image-viewer/image-viewer.component';
-import { DragulaService } from 'ng2-dragula';
-import { VideoEditor } from '@ionic-native/video-editor/ngx';
 import { MiniViewerComponent } from '../../../common/mini-viewer/mini-viewer.component';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -67,6 +62,11 @@ export class AddMiniPage implements OnInit {
         this.modalController.dismiss();
     }
 
+    loading = true;
+    GetLoading(text){
+        return this.loading?`${text} ${this.translate.instant('Button.Loading')}`:text;
+    }
+
     ngOnInit() {
         
         if(this.article){
@@ -74,6 +74,7 @@ export class AddMiniPage implements OnInit {
             this.content = this.reddahService.htmlDecode(this.article.Content);
             this.abstract = this.reddahService.htmlDecode(this.article.Abstract);
             this.groupName = this.reddahService.htmlDecode(this.article.GroupName);
+            this.loading = false;
         }
         else{
             this.reddahService.getArticles([],[],[], "en-us", "draft", "", 1, this.targetUserName).subscribe(articles => 
@@ -84,6 +85,7 @@ export class AddMiniPage implements OnInit {
                     this.content = this.reddahService.htmlDecode(article.Content);
                     this.abstract = this.reddahService.htmlDecode(article.Abstract);
                     this.groupName = this.reddahService.htmlDecode(article.GroupName);
+                    this.loading = false;
                 }
             });
         }

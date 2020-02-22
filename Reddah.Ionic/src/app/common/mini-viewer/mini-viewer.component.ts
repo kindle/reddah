@@ -86,6 +86,7 @@ export class MiniViewerComponent implements OnInit {
         //this.addScriptByUrl(`https://secure.aadcdn.microsoftonline-p.com/lib/1.0.0/js/msal.js`);
         //this.addScriptByUrl(`https://cdnjs.cloudflare.com/ajax/libs/p2.js/0.6.0/p2.min.js`);
 
+        //non-native api
         this.initApi();
 
         if(this.platform.is('cordova')){
@@ -125,6 +126,28 @@ export class MiniViewerComponent implements OnInit {
             this.reddah.uploadGameScore(data).subscribe(data=>{
                 alert(JSON.stringify(data));
             });
+        }
+        //decoration:1-22
+        //base64image less than 500k
+        window["reddahApi"].qqMusk = (decoration, base64Image)=>{
+            let app_id = this.reddah.qq_app_id;
+            let app_key = this.reddah.qq_app_key;
+            let time_stamp = new Date().getTime();
+            let nonce_str = this.reddah.nonce_str();
+            
+            let params = {
+                "app_id":app_id,
+                "time_stamp":Math.floor(time_stamp/1000),
+                "nonce_str":nonce_str,
+                "decoration":decoration,
+                "image":base64Image,
+                "sign":"",
+                "app_key":""
+            }
+            params["sign"] = this.reddah.getReqSign(params, app_key);
+            //console.log(params)
+
+            return this.reddah.getQqMusk(params, app_key);
         }
     }
 
