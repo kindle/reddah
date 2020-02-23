@@ -164,7 +164,8 @@ export class MiniViewerComponent implements OnInit {
                 index:0,
                 imgSourceArray: this.reddah.preImageArray([data]),
                 imgTitle: "",
-                imgDescription: ""
+                imgDescription: "",
+                base64: true
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,

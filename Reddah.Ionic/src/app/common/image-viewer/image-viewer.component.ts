@@ -19,6 +19,7 @@ export class ImageViewerComponent implements OnInit {
     @Input() imgTitle = '';
     @Input() imgDescription = '';
     @Input() showDownload = false;
+    @Input() base64 = false;
 
     slideOpts = {};
     private fileTransfer: FileTransferObject; 
@@ -112,46 +113,81 @@ export class ImageViewerComponent implements OnInit {
     }
 
     async showMenu(item){
-        const actionSheet = await this.actionSheetController.create({
-            buttons: [
-            /*{
-                text: this.translate.instant("Pop.ToFriend"),
-                icon: 'share',
-                handler: () => {
-                    
-                }
-            },*/ 
-            {
-                text: this.translate.instant("Common.Copy"),
-                icon: 'copy',
-                handler: () => {
-                    let url = item.webPreviewUrl;
-                    this.clipboard.copy(url);
-                    this.reddah.toast(url, "primary");
-                }
-            },
-            {
-                text: this.translate.instant("Menu.Mark"),
-                icon: 'bookmark',
-                handler: () => {
-                    let formData = new FormData();
-                    formData.append("ArticleId", JSON.stringify(-1));
-                    let orgurl = this.reddah.appCacheToOrg[item.webPreviewUrl];
-                    formData.append("Content", orgurl==null?item.webPreviewUrl:orgurl);
-                    
-                    this.reddah.addBookmarkFormData(formData);
-                }
-            }, 
-            {
-                text: this.translate.instant("Common.Save"),
-                icon: 'ios-save',
-                handler: () => {
-                    this.downloadImage(item);
-                }
-            }, 
-            ]
-          });
-          await actionSheet.present();
+        if(this.base64){
+            const actionSheet = await this.actionSheetController.create({
+                buttons: [
+                {
+                    text: this.translate.instant("Menu.Mark"),
+                    icon: 'bookmark',
+                    handler: () => {
+                        let formData = new FormData();
+                        formData.append("ArticleId", JSON.stringify(-1));
+                        let orgurl = this.reddah.appCacheToOrg[item.webPreviewUrl];
+                        formData.append("Content", orgurl==null?item.webPreviewUrl:orgurl);
+                        
+                        this.reddah.addBookmarkFormData(formData);
+                    }
+                }, 
+                {
+                    text: this.translate.instant("Common.Save"),
+                    icon: 'ios-save',
+                    handler: () => {
+                        let link = document.createElement("a");
+                        let base64string = this.imgSourceArray[0].webPreviewUrl;
+                        //base64string = base64string.replace("image/jpeg", "image/octet-stream");
+                        link.setAttribute("href", base64string);
+                        link.setAttribute("download", "reddah");
+                        link.click();
+                    }
+                }, 
+                ]
+            });
+            await actionSheet.present();
+        }
+        else{
+            const actionSheet = await this.actionSheetController.create({
+                buttons: [
+                /*{
+                    text: this.translate.instant("Pop.ToFriend"),
+                    icon: 'share',
+                    handler: () => {
+                        
+                    }
+                },*/ 
+                {
+                    text: this.translate.instant("Common.Copy"),
+                    icon: 'copy',
+                    handler: () => {
+                        let url = item.webPreviewUrl;
+                        this.clipboard.copy(url);
+                        this.reddah.toast(url, "primary");
+                    }
+                },
+                {
+                    text: this.translate.instant("Menu.Mark"),
+                    icon: 'bookmark',
+                    handler: () => {
+                        let formData = new FormData();
+                        formData.append("ArticleId", JSON.stringify(-1));
+                        let orgurl = this.reddah.appCacheToOrg[item.webPreviewUrl];
+                        formData.append("Content", orgurl==null?item.webPreviewUrl:orgurl);
+                        
+                        this.reddah.addBookmarkFormData(formData);
+                    }
+                }, 
+                {
+                    text: this.translate.instant("Common.Save"),
+                    icon: 'ios-save',
+                    handler: () => {
+                        this.downloadImage(item);
+                    }
+                }, 
+                ]
+            });
+            await actionSheet.present();
+          
+
+        }
     }
 
     @ViewChild(Slides) slides: Slides;
