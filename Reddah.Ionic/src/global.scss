@@ -235,3 +235,16 @@ figure>img{
 .alert-message.sc-ion-alert-md{
   max-height: unset !important;
 }
+
+ion-loading.custom-loading {
+  .loading-wrapper {
+      background-color: transparent;
+  }
+  .loading-spinner{
+      
+      .ion-spinner{
+          width:50px;
+          height:50px;
+      }
+  }
+}

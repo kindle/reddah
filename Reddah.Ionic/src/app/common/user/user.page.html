@@ -45,7 +45,7 @@
         <ion-label>{{ 'Pop.Note' | translate }}</ion-label>
         <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
     </ion-item>
-    <ion-item lines="none" [class.borderTop]="!isFriend" class="borderBottom">
+    <ion-item lines="none" [class.borderTop]="!isFriend" class="borderBottom" *ngIf="reddah.appData('usersignature_'+userName)!=''">
         <span class="itemTitle">{{ 'About.Signature' | translate }}</span>
         <ion-label text-wrap>{{reddah.appData('usersignature_'+userName)}}</ion-label>
     </ion-item>

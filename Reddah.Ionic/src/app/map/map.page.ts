@@ -151,6 +151,13 @@ export class MapPage implements OnInit {
     }
 
     async refresh(type){
+        const loading = await this.loadingController.create({
+            cssClass: 'custom-loading',
+            spinner:'bubbles',
+            duration: 2000,
+        });
+        await loading.present();
+
         let center = this.map.getCenter();
         let bounds = this.map.getBounds();
         let ne = bounds._northEast;
@@ -257,6 +264,7 @@ export class MapPage implements OnInit {
                 });
                 this.map.addLayer(this.markerGroup);
             }
+            loading.dismiss();
         });
     }
 

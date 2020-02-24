@@ -51,6 +51,7 @@ export class ReddahService {
         private device: Device,
         private appVersion: AppVersion,
         private datePipe: DatePipe,
+        private loadingController: LoadingController,
     ) { }
 
     articles = [];
@@ -306,7 +307,7 @@ export class ReddahService {
     //******************************** */
     private qqMuskUrl = 'https://login.reddah.com/api/ai/qqmusk'; 
 
-    getQqMusk(params, appKey): Promise<any> {
+    async getQqMusk(params, appKey): Promise<any> {
         let muskQqChatUrl = "https://api.ai.qq.com/fcgi-bin/ptu/ptu_facedecoration";
 
         muskQqChatUrl += "?"
@@ -328,7 +329,10 @@ export class ReddahService {
 
         return this.http.post<any>(this.qqMuskUrl, formData)
         .pipe(
-            tap(data => this.log('get qq musk')),
+            tap(data => {
+                this.log('get qq musk')
+                
+            }),
             catchError(this.handleError('get qq musk', []))
         ).toPromise();
 

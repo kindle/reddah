@@ -139,13 +139,13 @@
         <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_m_recent.length>0">
             <ion-item lines="none">
                 <div style="display: flex;flex-wrap: wrap;">
-                    <div style="display: flex;flex-direction: column;margin-top:15px;" *ngFor="let pub_recent of users_m_recent">
+                    <div style="display: flex;flex-direction: column;margin-top:15px;min-width: 75px;" *ngFor="let pub_recent of users_m_recent">
                         <ion-avatar class="userPhoto" (click)="goMini(pub_recent)">
                             <img *ngIf="pub_recent.Photo" src="{{reddah.appData('userphoto_'+pub_recent.UserName, 'photo.svg')}}" 
                                 class="borderPortrait recentPortrait">
                             <ion-icon *ngIf="!pub_recent.Photo" name="infinite" color="tertiary" class="mini recentPortrait"></ion-icon>
                         </ion-avatar><br>
-                        <ion-label style="margin:0;padding:3px 5px;width:75px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
+                        <ion-label style="margin:0;padding:0 5px;width:75px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
                     </div>
                 </div>
             </ion-item>
@@ -158,13 +158,13 @@
         <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_p_suggest.length>0&&users_m_recent.length==0">
             <ion-item lines="none">
                 <div style="display: flex;flex-wrap: wrap;">
-                    <div style="display: flex;flex-direction: column;margin-top:15px;" *ngFor="let pub_sgg of users_p_suggest">
+                    <div style="display: flex;flex-direction: column;margin-top:15px;min-width: 75px;" *ngFor="let pub_sgg of users_p_suggest">
                         <ion-avatar class="userPhoto" (click)="goMini(pub_sgg)">
                             <img *ngIf="pub_sgg.Photo" src="{{reddah.appData('userphoto_'+pub_sgg.UserName, 'photo.svg')}}" 
                                 class="borderPortrait recentPortrait">
                             <ion-icon *ngIf="!pub_sgg.Photo" name="infinite" color="tertiary" class="mini recentPortrait"></ion-icon>
                         </ion-avatar><br>
-                        <ion-label style="margin:0;padding:3px 5px;width:75px;color:gray;" text-center>{{pub_sgg.NickName}}</ion-label>
+                        <ion-label style="margin:0;padding:0 5px;width:75px;color:gray;" text-center>{{pub_sgg.NickName}}</ion-label>
                     </div>
                 </div>
             </ion-item>

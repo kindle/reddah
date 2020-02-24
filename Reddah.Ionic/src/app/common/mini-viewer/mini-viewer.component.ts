@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SecurityContext, ViewEncapsulation, ViewChild, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser'
-import { ModalController, Content, Platform } from '@ionic/angular';
+import { ModalController, Content, Platform, LoadingController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -41,7 +41,8 @@ export class MiniViewerComponent implements OnInit {
         private platform: Platform,
         private vibration: Vibration,
         private zone: NgZone,
-        @Inject(DOCUMENT) private _document: Document
+        @Inject(DOCUMENT) private _document: Document,
+        private loadingController: LoadingController,
     ) {
     }
 
@@ -152,7 +153,23 @@ export class MiniViewerComponent implements OnInit {
         }
 
         window["reddahApi"].viewImage = (base64ImageData)=>{
-            this.viewer(base64ImageData);
+            return this.viewer(base64ImageData);
+        }
+
+        let loading;
+        window["reddahApi"].loadingStart = async (spinner, duration)=>{
+            loading = await this.loadingController.create({
+                cssClass: 'custom-loading',
+                spinner:spinner,
+                duration: duration,
+            });
+            await loading.present();
+        }
+
+        window["reddahApi"].loadingStop = ()=>{
+            if(loading){
+                setTimeout(() => {loading.dismiss();},3000)
+            }
         }
 
     }

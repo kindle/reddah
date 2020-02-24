@@ -9,12 +9,15 @@ import { MagicMirrorPage } from '../../common/magic-mirror/magic-mirror.page';
 import { BlackHolePage } from '../../common/black-hole/black-hole.page';
 import { WormHolePage } from '../../common/worm-hole/worm-hole.page';
 import { LocalStorageService } from 'ngx-webstorage';
-import {  ActivatedRoute, Params } from '@angular/router';
+import {  ActivatedRoute, Params, Router } from '@angular/router';
 import { MysticPage } from '../../common/mystic/mystic.page';
 import { StoryPage } from '../../story/story.page';
 import { MapPage } from '../../map/map.page';
 import { PlatformPage } from '../publisher/platform/platform.page';
-import { EarthBoxComponent } from '../../common/earth-box/earth-box.component';
+import { ShareChooseChatPage } from '../../chat/share-choose-chat/share-choose-chat.page';
+import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
+import { MiniViewerComponent } from '../../common/mini-viewer/mini-viewer.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-find',
@@ -24,13 +27,39 @@ import { EarthBoxComponent } from '../../common/earth-box/earth-box.component';
 export class FindPage {
 
     userName;
+    user_apps=[];
 
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
-        private activeRoute: ActivatedRoute
-    ){}
+        private translate: TranslateService,
+        private router: Router,
+    ){
+        this.user_apps = this.reddah.loadRecent(4);
+        this.loadSuggestMini();
+    }
+
+    loadSuggestMini(){
+        let recentList = this.reddah.loadRecent(4).map(x=>x.UserName);
+        let cacheKey = "this.reddah.getSuggestMinis";
+        //let request = this.reddah.getSuggestMinis();
+
+        //this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
+        this.reddah.getSuggestMinis()
+        .subscribe(data=>{
+            
+            data.forEach((item, index, alias)=>{
+                if(recentList.indexOf(item.UserName)>-1){
+                    item.isRecent = true;
+                }
+                this.reddah.getUserPhotos(item.UserName);
+            });
+
+            this.user_apps = this.user_apps.concat(data.filter(x=>!x.isRecent));
+
+        })
+    }
 
     async startScanner(){
         const scanModal = await this.modalController.create({
@@ -168,5 +197,64 @@ export class FindPage {
     showBox= false;
     async showEarthBox(){
         //this.showBox = !this.showBox;
+    }
+
+    goMoreApp(){
+        this.router.navigate(['/search'], {
+            queryParams: {
+                type:3
+            }
+        });
+    }
+
+    async goMini(mini){
+        
+        //open mini page
+        const modal = await this.modalController.create({
+            component: MiniViewerComponent,
+            componentProps: { 
+                content: mini.Cover,
+                guid: mini.UserName,
+                version: mini.Sex,
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data||!data)
+        {
+            if(data=='report'){
+                const modal = await this.modalController.create({
+                    component: AddFeedbackPage,
+                    componentProps: { 
+                        title: this.translate.instant("Pop.Report"),
+                        desc: this.translate.instant("Pop.ReportReason"),
+                        feedbackType: 4,
+                        article: mini
+                    },
+                    cssClass: "modal-fullscreen",
+                });
+                  
+                await modal.present();
+            }
+            else if(data=='share'){
+                const modal = await this.modalController.create({
+                    component: ShareChooseChatPage,
+                    componentProps: { 
+                        title: this.translate.instant("Common.Choose"),
+                        article: mini,
+                    },
+                    cssClass: "modal-fullscreen",
+                });
+                  
+                await modal.present();        
+            }
+        }
+
+        this.reddah.setRecent(mini,4);
+        this.reddah.setRecentUseMini(mini.UserName).subscribe(data=>{
+            this.user_apps = this.reddah.loadRecent(4);
+        });
     }
 }
