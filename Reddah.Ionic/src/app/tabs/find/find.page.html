@@ -97,21 +97,19 @@
     <ion-row *ngIf="user_apps.length>0" style="background-color: white;">
         <ion-item style="width:100%;" no-padding>
             <div class="mini-box">
-                <div style="display: flex;flex-direction: column;margin-top:15px;min-width: 100px;" *ngFor="let user_app of user_apps">
+                <div class="mini-box-item" *ngFor="let user_app of user_apps">
                     <ion-avatar (click)="goMini(user_app)">
                         <img *ngIf="user_app.Photo" src="{{reddah.appData('userphoto_'+user_app.UserName, 'photo.svg')}}" 
                             class="borderPortrait recentPortrait">
                         <ion-icon *ngIf="!user_app.Photo" size="small" name="infinite" color="tertiary" class="mini recentPortrait"></ion-icon>
-                    </ion-avatar><br>
-                    <ion-label style="margin:0;padding:0 5px;width:100px;color:gray;" text-center>{{user_app.NickName}}</ion-label>
+                    </ion-avatar>
+                    <ion-label class="mini-box-label" text-center>{{user_app.NickName}}</ion-label>
                 </div>
-                <div style="display: flex;flex-direction: column;margin-top:15px;min-width: 100px;"
-                (click)="goMoreApp()"
-                *ngIf="user_apps.length>0">
+                <div class="mini-box-item" (click)="goMoreApp()" *ngIf="user_apps.length>0">
                     <ion-avatar>
                         <ion-icon name="ios-more" size="small" color="medium" class="more recentPortrait"></ion-icon>
-                    </ion-avatar><br>
-                    <ion-label style="margin:0;padding:0 5px;width:100px;color:gray;" text-center>{{ 'Search.More' | translate }}</ion-label>
+                    </ion-avatar>
+                    <ion-label class="mini-box-label" text-center>{{ 'Search.More' | translate }}</ion-label>
                 </div>
             </div>
         </ion-item>

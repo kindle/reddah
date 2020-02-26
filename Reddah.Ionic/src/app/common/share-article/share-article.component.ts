@@ -82,7 +82,8 @@ export class ShareArticleComponent {
             componentProps: { 
                 content: mini.Cover,
                 guid: mini.UserName,
-                version: mini.Sex,
+                //version: mini.Sex,//always use the latest version
+                version: this.reddah.appData('usersex_'+mini.UserName)
             },
             cssClass: "modal-fullscreen",
         });

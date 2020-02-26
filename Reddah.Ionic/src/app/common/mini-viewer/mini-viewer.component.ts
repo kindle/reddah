@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SecurityContext, ViewEncapsulation, ViewChild, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser'
-import { ModalController, Content, Platform, LoadingController } from '@ionic/angular';
+import { ModalController, Content, Platform, LoadingController, AlertController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -43,6 +43,7 @@ export class MiniViewerComponent implements OnInit {
         private zone: NgZone,
         @Inject(DOCUMENT) private _document: Document,
         private loadingController: LoadingController,
+        private alertController: AlertController,
     ) {
     }
 
@@ -170,6 +171,16 @@ export class MiniViewerComponent implements OnInit {
             if(loading){
                 setTimeout(() => {loading.dismiss();},3000)
             }
+        }
+
+        window["reddahApi"].alert = async (header, message)=>{
+            const alert = await this.alertController.create({
+                header: header,
+                message: message,
+                cssClass: 'outage-message',
+            });
+    
+            await alert.present();
         }
 
     }

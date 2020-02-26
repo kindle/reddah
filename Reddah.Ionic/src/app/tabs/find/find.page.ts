@@ -46,6 +46,11 @@ export class FindPage {
         //let request = this.reddah.getSuggestMinis();
 
         //this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
+
+        recentList.forEach((item, index, alias)=>{
+            this.reddah.getUserPhotos(item.UserName);
+        });
+
         this.reddah.getSuggestMinis()
         .subscribe(data=>{
             
@@ -215,7 +220,8 @@ export class FindPage {
             componentProps: { 
                 content: mini.Cover,
                 guid: mini.UserName,
-                version: mini.Sex,
+                //version: mini.Sex,//always use the latest version
+                version: this.reddah.appData('usersex_'+mini.UserName)
             },
             cssClass: "modal-fullscreen",
         });
