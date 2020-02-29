@@ -337,6 +337,94 @@ export class ReddahService {
         ).toPromise();
 
     }
+    //******************************** */
+    private qqReadUrl = 'https://login.reddah.com/api/ai/qqread'; 
+
+    async getQqRead(params, appKey): Promise<any> {
+        let readQqChatUrl = "https://api.ai.qq.com/fcgi-bin/nlp/nlp_imagetranslate";
+
+        readQqChatUrl += "?"
+        for (var key of Object.keys(params)) {
+            let value = params[key];
+            if(value!=""&&key!="image"){
+                readQqChatUrl += key + '=' + encodeURIComponent(value) + '&';
+            }
+        }
+        readQqChatUrl += 'app_key=' + appKey;
+
+        //console.log(readQqChatUrl)
+
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append("locale", this.getCurrentLocale());
+        formData.append("url", readQqChatUrl);
+        formData.append("image", params["image"])
+
+        return this.http.post<any>(this.qqReadUrl, formData)
+        .pipe(
+            tap(data => {
+                this.log('get qq read')
+            }),
+            catchError(this.handleError('get qq read', []))
+        ).toPromise();
+
+    }
+
+    private nplTranslateUrl = 'https://login.reddah.com/api/ai/translate'; 
+    getQqTextTranslate(params, appKey): Observable<any> {
+
+        let nlpQqTextUrl = "https://api.ai.qq.com/fcgi-bin/nlp/nlp_texttranslate";
+
+        nlpQqTextUrl += "?"
+        for (var key of Object.keys(params)) {
+            let value = params[key];
+            if(value!=""){
+                nlpQqTextUrl += key + '=' + encodeURIComponent(value) + '&';
+            }
+        }
+        nlpQqTextUrl += 'app_key=' + appKey;
+
+        
+        console.log(nlpQqTextUrl)
+
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append("locale", this.getCurrentLocale());
+        formData.append("url", nlpQqTextUrl);
+        return this.http.post<any>(this.nplTranslateUrl, formData)
+        .pipe(
+            tap(data => this.log('get nlp translate')),
+            catchError(this.handleError('get nlp translate', []))
+        );
+    }
+
+    private aaiAudioPlayUrl = 'https://login.reddah.com/api/ai/audio'; 
+    getQqAudioPlay(params, appKey): Observable<any> {
+
+        let aaiQqAudioUrl = "https://api.ai.qq.com/fcgi-bin/aai/aai_tts";
+
+        aaiQqAudioUrl += "?"
+        for (var key of Object.keys(params)) {
+            let value = params[key];
+            if(value!==""){
+                aaiQqAudioUrl += key + '=' + encodeURIComponent(value) + '&';
+            }
+        }
+        aaiQqAudioUrl += 'app_key=' + appKey;
+
+        
+        console.log(aaiQqAudioUrl)
+
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append("locale", this.getCurrentLocale());
+        formData.append("url", aaiQqAudioUrl);
+        return this.http.post<any>(this.aaiAudioPlayUrl, formData)
+        .pipe(
+            tap(data => this.log('get audio play')),
+            catchError(this.handleError('get audio play', []))
+        );
+    }
 
     getQqNlpChat(params, appKey): Observable<any> {
 
@@ -411,6 +499,32 @@ export class ReddahService {
         */
     }
 
+    adjustLan(){
+        let value = this.getCurrentLocale().split("-")[0];
+        
+        //due to qq dev missunderstood lan and region...
+        value = value.replace("ja","jp");
+        value = value.replace("ko","kr");
+        
+        return value;
+    }
+
+    specialChars(str){
+        let value = str.trim().split(" ").join("+");
+        return value;
+    }
+
+    getAudioDuration(msg){
+        if(msg.Base64){
+            let audio = new Audio();
+            audio.src = "data:audio/wav;base64," + msg.Content; 
+            audio.onloadeddata=()=>{
+                console.log(audio.duration);
+                msg.Duration = Math.ceil(audio.duration);
+            }
+        }
+    }
+
     getReqSignImage(o, appkey){
         console.log(o);
         o = this.ksort(o);
@@ -418,7 +532,7 @@ export class ReddahService {
         let str = "";
         for (var key of Object.keys(o)) {
             let value = o[key];
-            if(value!=""){
+            if(value!==""){
                 str += key + '=' + btoa(value) + '&';
             }
         }
@@ -435,7 +549,7 @@ export class ReddahService {
         let str = "";
         for (var key of Object.keys(o)) {
             let value = o[key];
-            if(value!=""){
+            if(value!==""){
                 str += key + '=' + encodeURIComponent(value) + '&';
             }
         }

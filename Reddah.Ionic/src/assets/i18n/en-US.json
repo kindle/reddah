@@ -298,7 +298,10 @@
         "SetSignature":"You don't have a signature yet, would you like to add a signature?",
         "AddFriend":"Find a new friend in the map?",
         "AddPost":"Create a new post in your timeline?",
-        "AddGame":"Want to play a game?"
+        "AddGame":"Want to play a game?",
+        "Typing":"Typing...",
+        "Thinking":"Thinking...",
+        "ChangeQuest":"I don't know what to say, could you change a topic?"
     },
 
     "Point": {

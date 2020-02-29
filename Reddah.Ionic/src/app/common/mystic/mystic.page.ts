@@ -41,6 +41,7 @@ export class MysticPage implements OnInit {
     message:string = ''
     messages: object[];
 
+    writing = 0;
     
     constructor(
         public modalController: ModalController,
@@ -58,11 +59,14 @@ export class MysticPage implements OnInit {
         private notification: LocalNotifications,
         private translate: TranslateService,
         private cacheService: CacheService,
-        private zone: NgZone,     
+        private zone: NgZone,   
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
         this.getMysticPhoto();
+        if (this.platform.is('cordova')) {
+            this.nativeAudio.preloadSimple('bi', 'assets/sound/bi.mp3')
+        }
     }
     
 ///pop up new window
@@ -210,6 +214,7 @@ export class MysticPage implements OnInit {
     }
 
     formData;
+    lastInputText;
     async generateReactiveChat(inputText){
         if(this.generateChat())
         {
@@ -237,51 +242,267 @@ export class MysticPage implements OnInit {
             });
             */
 
+            this.writing = 1;
 
-            console.log(this.reddah.getCurrentLocale())
+            let app_id = this.reddah.qq_app_id;
+            let app_key = this.reddah.qq_app_key;
+            let time_stamp = new Date().getTime();
+            let nonce_str = this.reddah.nonce_str();
+            
+            let session = this.reddah.getCurrentUser();
+            let question = this.reddah.specialChars(inputText);
+
+            let params1 = {
+                "app_id":app_id,
+                "time_stamp":Math.floor(time_stamp/1000),
+                "nonce_str":nonce_str,
+                "session":session,
+                "question":question,
+                "sign":""
+            }
+            
+            params1["sign"] = this.reddah.getReqSign(params1, app_key);
+            
             if(this.reddah.getCurrentLocale()=="zh-CN"||
             this.reddah.getCurrentLocale()=="zh-TW")
             {//qq api
-                let app_id = this.reddah.qq_app_id;
-                let app_key = this.reddah.qq_app_key;
-                let time_stamp = new Date().getTime();
-                let nonce_str = this.reddah.nonce_str();
-                
-                let session = this.reddah.getCurrentUser();
-                let question = inputText;
-
-                let params = {
-                    "app_id":app_id,
-                    "time_stamp":Math.floor(time_stamp/1000),
-                    "nonce_str":nonce_str,
-                    "session":session,
-                    "question":question,
-                    "sign":""
-                }
-                
-                params["sign"] = this.reddah.getReqSign(params, app_key);
-                
-                this.reddah.getQqNlpChat(params, app_key).subscribe(data=>{
-                    let response = JSON.parse(data.Message)
-                    let answer = response.data.answer;
+                this.reddah.getQqNlpChat(params1, app_key).subscribe(data=>{
+                    let response1 = JSON.parse(data.Message)
+                    let answer = response1.data.answer;
                     let time = new Date().getTime();
                     
                     if(data.Success==0){
-                        if(response.ret!=0)
+                        if(response1.ret!=0)
                         {
-                            answer = "换个问题试试。";
+                            answer = this.translate.instant("Mystic.ChangeQuest");
                         }
-                        this.addMessage({
-                            CreatedOn: time,
-                            Content: answer, 
-                            UserName: 'Mystic', 
-                            Type:0,
-                        });
+                        else{
+                            let audioMagicNumber = this.reddah.getRandomInt(4);
+                            console.log(audioMagicNumber)
+                            if(audioMagicNumber==0){//random audio output
+                                let params4 = {
+                                    "app_id":app_id,
+                                    "time_stamp":Math.floor(time_stamp/1000),
+                                    "nonce_str":nonce_str,
+                                    "speaker":this.reddah.appData('usersex_'+this.userName)==1?1:this.girlVoice,
+                                    "format":2,
+                                    "volume":0,
+                                    "speed":100,
+                                    "text":this.reddah.specialChars(answer),
+                                    "aht":0,
+                                    "apc":58,
+                                    "sign":""
+                                }
+                                setTimeout(()=>{this.writing = 2;},1000);
+                                params4["sign"] = this.reddah.getReqSign(params4, app_key);
+                                this.reddah.getQqAudioPlay(params4, app_key).subscribe(data=>{
+                                    console.log(data)
+                                    let response4 = JSON.parse(data.Message)
+                                    let audioAnswer = response4.data.speech;
+                                    let time = new Date().getTime();
+                                    this.zone.run(()=>{this.writing = 0;});
+                                    if(data.Success==0){
+                                        if(response4.ret!=0)
+                                        {
+                                            if(response1.ret==0){
+                                                this.addMessage({
+                                                    CreatedOn: time,
+                                                    Content: response1.data.answer, 
+                                                    UserName: 'Mystic', 
+                                                    Type:0
+                                                });
+                                            }
+                                            else{
+                                                this.addMessage({
+                                                    CreatedOn: time,
+                                                    Content: this.translate.instant("Mystic.ChangeQuest"), 
+                                                    UserName: 'Mystic', 
+                                                    Type:0
+                                                });
+                                            }
+                                        }
+                                        else{
+                                            let newMsg = {
+                                                CreatedOn: time,
+                                                Content: audioAnswer, 
+                                                UserName: 'Mystic', 
+                                                Type:1,
+                                                Base64: true,
+                                                Duration: 1
+                                            };
+                                            this.reddah.getAudioDuration(newMsg);
+                                            this.addMessage(newMsg);
+                                        }
+                                    }
+                                    this.zone.run(()=>{this.writing = 0;});
+                                    
+                                });
+                            }
+                            else{//text output
+                                this.addMessage({
+                                    CreatedOn: time,
+                                    Content: answer, 
+                                    UserName: 'Mystic', 
+                                    Type:0,
+                                });
+                            }
+                        }
+                        
                     }
+                    this.writing = 0;
                 });
+                
             }
             else//(this.reddah.getCurrentLocale()=="en-US")
             {
+                let params1 = {
+                    "app_id":app_id,
+                    "time_stamp":Math.floor(time_stamp/1000),
+                    "nonce_str":nonce_str,
+                    "text":question,
+                    "source":this.reddah.adjustLan(),
+                    "target":"zh",
+                    "sign":""
+                }
+                
+                params1["sign"] = this.reddah.getReqSign(params1, app_key);
+
+                this.reddah.getQqTextTranslate(params1, app_key).subscribe(data=>{
+                    console.log(data)
+                    let response1 = JSON.parse(data.Message)
+                    let traslatedQuestion = response1.data.target_text;
+                    this.zone.run(()=>{this.writing = 0;});
+                    if(data.Success==0){
+                        if(response1.ret!=0)
+                        {
+                            traslatedQuestion = this.translate.instant("Mystic.ChangeQuest");
+                        }
+                        let params2 = {
+                            "app_id":app_id,
+                            "time_stamp":Math.floor(time_stamp/1000),
+                            "nonce_str":nonce_str,
+                            "session":session,
+                            "question":this.reddah.specialChars(traslatedQuestion),
+                            "sign":""
+                        }
+                        
+                        params2["sign"] = this.reddah.getReqSign(params2, app_key);
+                        setTimeout(()=>{this.writing = 1;},2000);
+                        this.reddah.getQqNlpChat(params2, app_key).subscribe(data=>{
+                            let response2 = JSON.parse(data.Message)
+                            let answer = response2.data.answer;
+                            this.zone.run(()=>{this.writing = 0;});
+                            if(data.Success==0){
+                                if(response2.ret!=0)
+                                {
+                                    answer = this.translate.instant("Mystic.ChangeQuest");
+                                }
+                                setTimeout(()=>{this.writing = 1;},1000);
+                                
+                                let params3 = {
+                                    "app_id":app_id,
+                                    "time_stamp":Math.floor(time_stamp/1000),
+                                    "nonce_str":nonce_str,
+                                    "text":this.reddah.specialChars(answer),
+                                    "source":"zh",
+                                    "target":this.reddah.adjustLan(),
+                                    "sign":""
+                                }
+                                
+                                params3["sign"] = this.reddah.getReqSign(params3, app_key);
+                                this.reddah.getQqTextTranslate(params3, app_key).subscribe(data=>{
+                                    console.log(data)
+                                    let response3 = JSON.parse(data.Message)
+                                    let traslatedAnswer = response3.data.target_text;
+                                    let time = new Date().getTime();
+                                    this.zone.run(()=>{this.writing = 0;});
+                                    if(data.Success==0){
+                                        if(response3.ret!=0)
+                                        {
+                                            traslatedAnswer = this.translate.instant("Mystic.ChangeQuest");
+                                        }
+                                        let audioMagicNumber = this.reddah.getRandomInt(2);
+                                        console.log(audioMagicNumber)
+                                        if(audioMagicNumber<-11){//random audio output only zh has audio
+                                            let params4 = {
+                                                "app_id":app_id,
+                                                "time_stamp":Math.floor(time_stamp/1000),
+                                                "nonce_str":nonce_str,
+                                                "speaker":this.reddah.appData('usersex_'+this.userName)==1?1:this.girlVoice,
+                                                "format":2,
+                                                "volume":0,
+                                                "speed":100,
+                                                "text":this.reddah.specialChars(traslatedAnswer),
+                                                "aht":0,
+                                                "apc":58,
+                                                "sign":""
+                                            }
+                                            setTimeout(()=>{this.writing = 1;},1000);
+                                            params4["sign"] = this.reddah.getReqSign(params4, app_key);
+                                            this.reddah.getQqAudioPlay(params4, app_key).subscribe(data=>{
+                                                console.log(data)
+                                                let response4 = JSON.parse(data.Message)
+                                                let audioAnswer = response4.data.speech;
+                                                let time = new Date().getTime();
+                                                this.zone.run(()=>{this.writing = 0;});
+                                                if(data.Success==0){
+                                                    if(response4.ret!=0)
+                                                    {
+                                                        if(response2.ret==0){
+                                                            this.addMessage({
+                                                                CreatedOn: time,
+                                                                Content: response2.data.answer, 
+                                                                UserName: 'Mystic', 
+                                                                Type:0
+                                                            });
+                                                        }
+                                                        else{
+                                                            this.addMessage({
+                                                                CreatedOn: time,
+                                                                Content: this.translate.instant("Mystic.ChangeQuest"), 
+                                                                UserName: 'Mystic', 
+                                                                Type:0
+                                                            });
+                                                        }
+                                                    }
+                                                    else{
+                                                        let newMsg = {
+                                                            CreatedOn: time,
+                                                            Content: audioAnswer, 
+                                                            UserName: 'Mystic', 
+                                                            Type:1,
+                                                            Base64: true,
+                                                            Duration: 1
+                                                        };
+                                                        this.reddah.getAudioDuration(newMsg);
+                                                        this.addMessage(newMsg);
+                                                    }
+                                                }
+                                                this.zone.run(()=>{this.writing = 0;});
+                                                
+                                            });
+                                        }
+                                        else{//text output
+                                            this.addMessage({
+                                                CreatedOn: time,
+                                                Content: traslatedAnswer, 
+                                                UserName: 'Mystic', 
+                                                Type:0,
+                                            });
+                                        }
+                                    }
+                                });
+                                
+
+                            }
+                            
+                        });
+
+                    }
+                    
+                });
+
+                /*
                 this.formData.append("locale", this.reddah.getCurrentLocale());
                 this.formData.append("content", inputText);
                 this.reddah.getNlpChat(this.formData).subscribe(data=>{
@@ -297,17 +518,60 @@ export class MysticPage implements OnInit {
                             Type:0,
                         });
                     }
-                });
+                    this.writing = 0;
+                });*/
+
             }
 
+            
+
+        }
+        else{
+            this.lastInputText = inputText;
+        }
+    }
+
+    audio = new Audio();
+    lastPlayComment = null;
+    async play(comment){
+        if(!comment.isPlaying){
+            if(this.lastPlayComment!=null){
+                this.lastPlayComment.isPlaying = false;
+            }
+            let audioChatUrl = comment.Base64? "data:audio/wav;base64," + comment.Content:
+                "https://login.reddah.com/uploadPhoto/"+comment.Content;
+            comment.isPlaying= true;
+            this.audio.src = audioChatUrl; 
+            this.audio.play();
+            this.audio.addEventListener('ended', ()=>{
+                if(comment.isPlaying){
+                    this.nativeAudio.play("bi");
+                }
+                comment.isPlaying= false;
+            });
+            this.lastPlayComment = comment;
         }
     }
 
     mysticPhoto = "assets/500/500.jpeg";
     getMysticPhoto(){
         this.mysticPhoto = "assets/500/50" + this.reddah.getRandomInt(8)+".jpeg";
+        let rv = this.reddah.getRandomInt(2);
+        if(rv==0)
+            this.girlVoice = 5;
+        if(rv==1)
+            this.girlVoice = 6;    
+        if(rv==2)
+            this.girlVoice = 7;
     }
+
+    girlVoice = 5;
+
     
+
+    photoPopped = false;
+    postPopped = false;
+
     generateChat(){
         let continueFlag = true;
         if(this.messages==null||this.messages.length==0){
@@ -326,7 +590,7 @@ export class MysticPage implements OnInit {
             //photo
             if(continueFlag){
                 let user_photo = this.reddah.appData('userphoto_'+this.userName);
-                if(user_photo=="assets/icon/anonymous.png"){
+                if(user_photo=="assets/icon/anonymous.png"&&!this.photoPopped){
                     console.log('no photo yet')
                     this.addMessage({
                         Content: this.translate.instant("Mystic.AddPhoto"), 
@@ -334,6 +598,7 @@ export class MysticPage implements OnInit {
                         Type:0,
                         Action: 0,
                     });
+                    this.photoPopped = true;
                     continueFlag = false;
                 }
             }
@@ -386,13 +651,14 @@ export class MysticPage implements OnInit {
                 this.getTimeline()
                 .subscribe(timeline => 
                 {
-                    if(timeline.length==0){
+                    if(timeline.length==0&&!this.postPopped){
                         this.addMessage({
                             Content: this.translate.instant("Mystic.AddPost"), 
                             UserName: 'Mystic', 
                             Type:0,
                             Action: 4,
                         });
+                        this.postPopped = true;
                         continueFlag = false;
                     }
                 });
@@ -486,6 +752,7 @@ export class MysticPage implements OnInit {
         if(data)
         {
             this.reddah.getUserPhotos(this.userName);
+            setTimeout(()=>this.generateReactiveChat(this.lastInputText),3000);
         }
     }
 
@@ -512,6 +779,8 @@ export class MysticPage implements OnInit {
         {
             this.reddah.getUserPhotos(this.userName);
             this.localStorageService.store("user_sex_set"+this.userName, data);
+            
+            setTimeout(()=>this.generateReactiveChat(this.lastInputText),3000);
         }
     }
 
@@ -526,8 +795,10 @@ export class MysticPage implements OnInit {
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
-        if(data||!data)
+        if(data||!data){
             this.reddah.getUserPhotos(this.userName);
+            setTimeout(()=>this.generateReactiveChat(this.lastInputText),3000);
+        }
     }
 
     async openMap(){
@@ -541,6 +812,10 @@ export class MysticPage implements OnInit {
         });
             
         await modal.present();
+        const {data} = await modal.onDidDismiss();
+        if(data||!data){
+            setTimeout(()=>this.generateReactiveChat(this.lastInputText),3000);
+        }
     }
 
     async post(ev: any) {
@@ -567,7 +842,7 @@ export class MysticPage implements OnInit {
         await postModal.present();
         const { data } = await postModal.onDidDismiss();
         if(data){
-            
+            setTimeout(()=>this.generateReactiveChat(this.lastInputText),3000);
         }
     }
 

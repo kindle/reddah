@@ -299,7 +299,10 @@
       "SetSignature":"Vous n 'avez pas encore signé, voulez - vous ajouter une signature?",
       "AddFriend":"Trouver un nouvel ami sur la carte?",
       "AddPost":"Créer un nouveau poster sur votre ligne de temps?",
-      "AddGame":"Tu veux jouer?"
+      "AddGame":"Tu veux jouer?",
+      "Typing":"L’autre partie entre...",
+      "Thinking":"Je réfléchis...",
+      "ChangeQuest":"Je ne sais pas quoi dire, pourriez-vous changer un sujet?"
   },
 
   "Point": {

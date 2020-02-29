@@ -298,7 +298,10 @@
         "SetSignature":"Sie haben noch keine Unterschrift, möchten Sie eine Unterschrift hinzufügen?",
         "AddFriend":"Einen neuen Freund auf der Karte finden?",
         "AddPost":"Einen neuen Beitrag in Ihrer Zeitlinie erstellen?",
-        "AddGame":"Willst du ein Spiel spielen?"
+        "AddGame":"Willst du ein Spiel spielen?",
+        "Typing":"Eingabe...",
+        "Thinking":"Ich denke an...",
+        "ChangeQuest":"Ich weiß nicht, was ich sagen soll, könntest du ein Thema ändern?"
     },
 
     "Point": {

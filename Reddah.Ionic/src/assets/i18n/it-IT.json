@@ -298,7 +298,10 @@
         "SetSignature":"Non avete ancora una firma, volete aggiungere una firma?",
         "AddFriend":"Trovato un nuovo amico nella mappa?",
         "AddPost":"Creare un nuovo posto nella tua linea temporale?",
-        "AddGame":"Vuoi fare un gioco?"
+        "AddGame":"Vuoi fare un gioco?",
+        "Typing":"L'altra parte sta entrando...",
+        "Thinking":"Pensare a...",
+        "ChangeQuest":"Non so cosa dire, potresti cambiare argomento?"
     },
 
     "Point": {

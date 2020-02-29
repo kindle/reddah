@@ -153,6 +153,30 @@ export class MiniViewerComponent implements OnInit {
             return this.reddah.getQqMusk(params, app_key);
         }
 
+        window["reddahApi"].qqRead = (base64Image)=>{
+            let app_id = this.reddah.qq_app_id;
+            let app_key = this.reddah.qq_app_key;
+            let time_stamp = new Date().getTime();
+            let nonce_str = this.reddah.nonce_str();
+            
+            let params = {
+                "app_id":app_id,
+                "time_stamp":Math.floor(time_stamp/1000),
+                "nonce_str":nonce_str,
+                "session_id":nonce_str,
+                "scene":"doc",
+                "image":base64Image,
+                "sign":"",
+                "app_key":"",
+                "source":"zh",
+                "target":"zh"
+            }
+            params["sign"] = this.reddah.getReqSign(params, app_key);
+            //console.log(params)
+
+            return this.reddah.getQqRead(params, app_key);
+        }
+
         window["reddahApi"].viewImage = (base64ImageData)=>{
             return this.viewer(base64ImageData);
         }
@@ -169,7 +193,7 @@ export class MiniViewerComponent implements OnInit {
 
         window["reddahApi"].loadingStop = ()=>{
             if(loading){
-                setTimeout(() => {loading.dismiss();},3000)
+                loading.dismiss();
             }
         }
 

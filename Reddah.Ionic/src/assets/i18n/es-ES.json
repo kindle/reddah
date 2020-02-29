@@ -298,7 +298,10 @@
         "SetSignature":"No tiene una firma que añadir?",
         "AddFriend":"Buscas un nuevo amigo en el mapa?",
         "AddPost":"Crear un nuevo mensaje en tu línea de tiempo?",
-        "AddGame":"Quieres jugar un juego?"
+        "AddGame":"Quieres jugar un juego?",
+        "Typing":"La otra parte está entrando...",
+        "Thinking":"Pensando...",
+        "ChangeQuest":"No sé qué decir, ¿podrías cambiar un tema?"
     },
 
     "Point": {

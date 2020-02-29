@@ -298,7 +298,10 @@
         "SetSignature":"Je hebt nog geen handtekening, wil je een handtekening toevoegen?",
         "AddFriend":"Vind je een nieuwe vriend op de kaart?",
         "AddPost":"Een nieuwe post creëren in je tijdlijn?",
-        "AddGame":"Wil je een spelletje spelen?"
+        "AddGame":"Wil je een spelletje spelen?",
+        "Typing":"De andere partij is het invoeren van ...",
+        "Thinking":"Ik denk aan...",
+        "ChangeQuest":"Ik weet niet wat te zeggen, kun je een onderwerp veranderen?"
     },
     "Point": {
         "TotalPointTitle":"Totaal punten",

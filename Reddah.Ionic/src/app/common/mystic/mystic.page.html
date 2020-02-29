@@ -2,7 +2,9 @@
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
         <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
     </ion-button>
-    <ion-label>{{ 'Menu.Mystic' | translate }}</ion-label>
+    <ion-label *ngIf="writing==0">{{ 'Menu.Mystic' | translate }}</ion-label>
+    <ion-label *ngIf="writing==1">{{ 'Mystic.Typing' | translate }}</ion-label>
+    <ion-label *ngIf="writing==2">{{ 'Mystic.Thinking' | translate }}</ion-label>
 </ion-item>
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" no-padding 
 style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatbox.hide()"> 
@@ -18,13 +20,27 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                 <div text-center class="chatTime">{{reddah.htmlDecode(comment.Content)}}</div>
             </ion-col>
         </ion-row>
-        <ion-row *ngIf="comment.Type==0||comment.Type==4||comment.Type==5">
+        <ion-row *ngIf="comment.Type==0||comment.Type==1||comment.Type==4||comment.Type==5">
             <ion-col no-padding>
                 <div class="container-right" *ngIf="userName==comment.UserName">
                     <img [src]="reddah.appData('userphoto_'+comment.UserName)"
                         class="portrait">
-                    <div class="arrow-box-right" *ngIf="comment.Type==0">
-                        <div class="chat-box-me" (press)="showChatMenu($event, comment.Content)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                    <div class="arrow-box-right" *ngIf="comment.Type<2">
+                        <div style="margin-right:-40px;margin-top:5px;" *ngIf="comment.Type==0&&comment.Id==null">
+                            <ion-spinner name="crescent"></ion-spinner>
+                        </div>
+                        <div class="chat-box-me" (press)="showChatMenu($event, comment.Content)" 
+                        [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'" *ngIf="comment.Type==0"></div>
+                        <div class="chat-box-me-1" *ngIf="comment.Type==1" (click)="play(comment)">
+                            <ion-icon slot="start" name="ios-wifi" size="large" 
+                            style="width:20px;height:18px;transform: rotate(-90deg);margin:auto;"
+                            *ngIf="!comment.isPlaying"></ion-icon>
+                            <div class="bg-right voicePlay" *ngIf="comment.isPlaying"></div>
+                            <div style="display: flex; line-height:38px;">
+                                <div style="width:5px;" *ngFor="let i of reddah.getArray(comment.Duration)">&nbsp;</div>
+                                <div>{{comment.Duration<1?1:comment.Duration}}''</div>
+                            </div>
+                        </div>
                         <div class="chat-arrow-right" style="flex:auto 0;"></div>
                     </div>
                     <div class="arrow-box-right" *ngIf="comment.Type==4||comment.Type==5">
@@ -80,6 +96,15 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                             <br>
                             <ion-button class="actionButton" size="small" color="primary" 
                             *ngIf="comment.Action!=null" (click)="setInfo(comment.Action)">click me</ion-button>
+                        </div>
+                        <div class="chat-box-others-1" *ngIf="comment.Type==1" (click)="play(comment)">
+                            <ion-icon name="ios-wifi" size="large" style="width:20px;height:18px;transform: rotate(90deg);margin:auto;"
+                            *ngIf="!comment.isPlaying"></ion-icon>
+                            <div class="bg-left voicePlay" *ngIf="comment.isPlaying"></div>
+                            <div style="display: flex; line-height:38px;">
+                                <div>{{comment.Duration<1?1:comment.Duration}}''</div>
+                                <div style="width:5px;" *ngFor="let i of reddah.getArray(comment.Duration)">&nbsp;</div>
+                            </div>
                         </div>
                         <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==4||comment.Type==5"></div>
                         <div class="chat-box-others-link" *ngIf="comment.Type==4||comment.Type==5">

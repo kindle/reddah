@@ -297,7 +297,10 @@
         "SetSignature":"Você não TEM UMA assinatura ainda, gostaria de adicionar UMA assinatura?",
         "AddFriend":"Encontrar um novo amigo no map a?",
         "AddPost":"Criar um novo Posto Na SUA Linha do tempo?",
-        "AddGame":"Quer jogar um jogo?"
+        "AddGame":"Quer jogar um jogo?",
+        "Typing":"A outra parte está a entrar...",
+        "Thinking":"Pensando sobre...",
+        "ChangeQuest":"Não sei o que dizer, pode mudar um tópico?"
     },
 
     "Point": {

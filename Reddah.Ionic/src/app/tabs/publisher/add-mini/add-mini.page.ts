@@ -67,17 +67,26 @@ export class AddMiniPage implements OnInit {
         return this.loading?`${text} ${this.translate.instant('Button.Loading')}`:text;
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         
+        const loadingCtrl = await this.loadingController.create({
+            cssClass: 'custom-loading',
+            spinner:"bubbles",
+            duration: 30*1000,
+        });
+        await loadingCtrl.present();
+
         if(this.article){
             this.title = this.reddahService.htmlDecode(this.article.Title);
             this.content = this.reddahService.htmlDecode(this.article.Content);
             this.abstract = this.reddahService.htmlDecode(this.article.Abstract);
             this.groupName = this.reddahService.htmlDecode(this.article.GroupName);
             this.loading = false;
+            loadingCtrl.dismiss();
         }
         else{
-            this.reddahService.getArticles([],[],[], "en-us", "draft", "", 1, this.targetUserName).subscribe(articles => 
+            this.reddahService.getArticles([],[],[], "en-us", "draft", "", 1, this.targetUserName)
+            .subscribe(articles => 
             {
                 if(articles.length>=1){
                     let article = articles[0];
@@ -85,8 +94,9 @@ export class AddMiniPage implements OnInit {
                     this.content = this.reddahService.htmlDecode(article.Content);
                     this.abstract = this.reddahService.htmlDecode(article.Abstract);
                     this.groupName = this.reddahService.htmlDecode(article.GroupName);
-                    this.loading = false;
                 }
+                this.loading = false;
+                loadingCtrl.dismiss();
             });
         }
     }

@@ -301,7 +301,10 @@
         "SetSignature":"添加一个展示个性的签名吧！",
         "AddFriend":"还没有好友？去地图上找一个聊聊吧",
         "AddPost":"没有发过时光圈？来，发一个看看！",
-        "AddGame":"看看有趣的游戏吧"
+        "AddGame":"看看有趣的游戏吧",
+        "Typing":"對方正在輸入...",
+        "Thinking":"正在思考...",
+        "ChangeQuest":"你難倒我了，換個問題吧~"
     },
 
     "Point": {
