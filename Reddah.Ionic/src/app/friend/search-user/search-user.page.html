@@ -6,7 +6,7 @@
     <ion-input placeholder="UserName" #searchKeyword clearInput (keyup.enter)="search()" (ionChange)="onchange()"></ion-input>
 </ion-item>
 <ion-content no-padding style="background-color: white;">
-    <ion-item *ngIf="!user404">
+    <ion-item *ngIf="!user404" (click)="search()">
         <ion-icon name="ios-person-add" slot="start" color="tertiary" class="portrait"></ion-icon>
         <ion-label style="margin-left:10px;">{{ 'Search.Title' | translate }}:<font color="#107c10">{{searchKeyword.value}}</font></ion-label>
     </ion-item>

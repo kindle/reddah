@@ -169,7 +169,7 @@ export class MiniViewerComponent implements OnInit {
                 "sign":"",
                 "app_key":"",
                 "source":"zh",
-                "target":"zh"
+                "target":"en"
             }
             params["sign"] = this.reddah.getReqSign(params, app_key);
             //console.log(params)

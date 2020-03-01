@@ -313,7 +313,7 @@ export class ReddahService {
         muskQqChatUrl += "?"
         for (var key of Object.keys(params)) {
             let value = params[key];
-            if(value!=""&&key!="image"){
+            if(value!==""&&key!="image"){
                 muskQqChatUrl += key + '=' + encodeURIComponent(value) + '&';
             }
         }
@@ -346,13 +346,13 @@ export class ReddahService {
         readQqChatUrl += "?"
         for (var key of Object.keys(params)) {
             let value = params[key];
-            if(value!=""&&key!="image"){
+            if(value!==""&&key!=="image"){
                 readQqChatUrl += key + '=' + encodeURIComponent(value) + '&';
             }
         }
         readQqChatUrl += 'app_key=' + appKey;
 
-        //console.log(readQqChatUrl)
+        console.log(readQqChatUrl)
 
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());

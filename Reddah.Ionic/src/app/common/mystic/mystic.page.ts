@@ -146,7 +146,9 @@ export class MysticPage implements OnInit {
         }
     }
 
-    
+    copyToInput(content){
+        this.chatbox.commentContent = content;
+    }
 
     
     @ViewChild('pageTop') pageTop: Content;
@@ -278,13 +280,13 @@ export class MysticPage implements OnInit {
                         }
                         else{
                             let audioMagicNumber = this.reddah.getRandomInt(4);
-                            console.log(audioMagicNumber)
+                            console.log(this.reddah.appData('usersex_'+this.userName))
                             if(audioMagicNumber==0){//random audio output
                                 let params4 = {
                                     "app_id":app_id,
                                     "time_stamp":Math.floor(time_stamp/1000),
                                     "nonce_str":nonce_str,
-                                    "speaker":this.reddah.appData('usersex_'+this.userName)==1?1:this.girlVoice,
+                                    "speaker":this.reddah.appData('usersex_'+this.userName)===1?this.girlVoice:1,
                                     "format":2,
                                     "volume":0,
                                     "speed":100,
@@ -328,7 +330,8 @@ export class MysticPage implements OnInit {
                                                 UserName: 'Mystic', 
                                                 Type:1,
                                                 Base64: true,
-                                                Duration: 1
+                                                Duration: 1,
+                                                Played: false
                                             };
                                             this.reddah.getAudioDuration(newMsg);
                                             this.addMessage(newMsg);
@@ -428,7 +431,7 @@ export class MysticPage implements OnInit {
                                                 "app_id":app_id,
                                                 "time_stamp":Math.floor(time_stamp/1000),
                                                 "nonce_str":nonce_str,
-                                                "speaker":this.reddah.appData('usersex_'+this.userName)==1?1:this.girlVoice,
+                                                "speaker":this.reddah.appData('usersex_'+this.userName)===1?this.girlVoice:1,
                                                 "format":2,
                                                 "volume":0,
                                                 "speed":100,
@@ -472,7 +475,8 @@ export class MysticPage implements OnInit {
                                                             UserName: 'Mystic', 
                                                             Type:1,
                                                             Base64: true,
-                                                            Duration: 1
+                                                            Duration: 1,
+                                                            Played: false
                                                         };
                                                         this.reddah.getAudioDuration(newMsg);
                                                         this.addMessage(newMsg);
@@ -549,6 +553,7 @@ export class MysticPage implements OnInit {
                 }
                 comment.isPlaying= false;
             });
+            comment.Played = true;
             this.lastPlayComment = comment;
         }
     }

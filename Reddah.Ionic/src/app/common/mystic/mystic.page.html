@@ -29,7 +29,7 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                         <div style="margin-right:-40px;margin-top:5px;" *ngIf="comment.Type==0&&comment.Id==null">
                             <ion-spinner name="crescent"></ion-spinner>
                         </div>
-                        <div class="chat-box-me" (press)="showChatMenu($event, comment.Content)" 
+                        <div class="chat-box-me" (press)="showChatMenu($event, comment.Content)" (click)="copyToInput(comment.Content)"
                         [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'" *ngIf="comment.Type==0"></div>
                         <div class="chat-box-me-1" *ngIf="comment.Type==1" (click)="play(comment)">
                             <ion-icon slot="start" name="ios-wifi" size="large" 
@@ -91,7 +91,7 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                     <div style="display: flex;margin-left:5px;">
                         <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==0"></div>
                         <div class="chat-box-others" *ngIf="comment.Type==0" 
-                            (press)="showChatMenu($event, comment.Content)">
+                            (press)="showChatMenu($event, comment.Content)" (click)="copyToInput(comment.Content)">
                             {{reddah.htmlDecode(comment.Content)}}
                             <br>
                             <ion-button class="actionButton" size="small" color="primary" 
@@ -106,6 +106,7 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                                 <div style="width:5px;" *ngFor="let i of reddah.getArray(comment.Duration)">&nbsp;</div>
                             </div>
                         </div>
+                        <div *ngIf="comment.Type==1&&!comment.Played" style="margin: 20px 0 0 10px;" class="new-point"></div>
                         <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==4||comment.Type==5"></div>
                         <div class="chat-box-others-link" *ngIf="comment.Type==4||comment.Type==5">
                             <app-share-article-chat [abstract]="comment.Abstract"
