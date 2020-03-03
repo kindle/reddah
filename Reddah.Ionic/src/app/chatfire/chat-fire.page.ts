@@ -21,6 +21,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 export class ChatFireBase{
     
     @Input() hasNewMsg: boolean;
+    @ViewChild('chatbox') chatbox;
 
     constructor(
         protected modalController: ModalController,
@@ -69,8 +70,13 @@ export class ChatFireBase{
                 }
                 comment.isPlaying= false;
             });
+            this.localStorageService.store("Reddah_Audio_Chat_Id_"+comment.Id,"Played")
             this.lastPlayComment = comment;
         }
+    }
+
+    audioPlayed(comment){
+        return this.localStorageService.retrieve("Reddah_Audio_Chat_Id_"+comment.Id)!=null;
     }
 ///pop up new window
     async htmlPlayVideo(id, src, poster){
@@ -89,6 +95,10 @@ export class ChatFireBase{
     
         await modal.present();
 
+    }
+
+    copyToInput(content){
+        this.chatbox.commentContent = content;
     }
 
     async playVideo(comment){
@@ -192,7 +202,6 @@ export class ChatFireBase{
 export class ChatFirePage extends ChatFireBase implements OnInit  {
 
     @ViewChild('pageTop') pageTop: Content;
-    @ViewChild('chatbox') chatbox;
 
     @Input() title: any;
     @Input() target: any;

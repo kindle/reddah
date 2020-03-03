@@ -252,7 +252,7 @@ export class MysticPage implements OnInit {
             let nonce_str = this.reddah.nonce_str();
             
             let session = this.reddah.getCurrentUser();
-            let question = this.reddah.specialChars(inputText);
+            let question = inputText;
 
             let params1 = {
                 "app_id":app_id,
@@ -279,9 +279,20 @@ export class MysticPage implements OnInit {
                             answer = this.translate.instant("Mystic.ChangeQuest");
                         }
                         else{
-                            let audioMagicNumber = this.reddah.getRandomInt(4);
-                            console.log(this.reddah.appData('usersex_'+this.userName))
-                            if(audioMagicNumber==0){//random audio output
+                            let audioMagicNumber = this.reddah.getRandomInt(3);//4
+                            answer = answer.trim();
+                            //test matrix
+                            //answer = "果然我的魅力无敌,终于把你吸引来了,哈哈哈";//pass
+                            //answer = "果然我的魅力无敌 终于把你吸引来了 哈哈哈";//pass
+                            /*answer = `李白（701年－762年），字太白，号青莲居士，唐朝浪漫主义诗人，被后人誉为“诗仙”。祖籍陇西成纪(待考)，
+                            出生于西域碎叶城，4岁再随父迁至剑南道绵州。李白存世诗文千余篇，有《李太白集》传世。762年病逝，享年61岁。
+                            其墓在今安徽当涂，四川江油、湖北安陆有纪念馆。%20其代表作包括《将进酒》《静夜思》《黄鹤楼送孟浩然之广陵》
+                            《望庐山瀑布》《行路难·其一》。`;*/// less than 50 chars, 150kb
+                            //answer = "what's your name?";//pass
+                            //answer = "what is your name?";//pass
+                            //answer = "私は何を言うべきか分からない、あなたはトピックを変更することができますか?";//qq fail
+        
+                            if(answer.length<50&&audioMagicNumber==0){//random audio output
                                 let params4 = {
                                     "app_id":app_id,
                                     "time_stamp":Math.floor(time_stamp/1000),
@@ -290,7 +301,7 @@ export class MysticPage implements OnInit {
                                     "format":2,
                                     "volume":0,
                                     "speed":100,
-                                    "text":this.reddah.specialChars(answer),
+                                    "text":answer,
                                     "aht":0,
                                     "apc":58,
                                     "sign":""
@@ -385,7 +396,7 @@ export class MysticPage implements OnInit {
                             "time_stamp":Math.floor(time_stamp/1000),
                             "nonce_str":nonce_str,
                             "session":session,
-                            "question":this.reddah.specialChars(traslatedQuestion),
+                            "question":traslatedQuestion,
                             "sign":""
                         }
                         
@@ -406,7 +417,7 @@ export class MysticPage implements OnInit {
                                     "app_id":app_id,
                                     "time_stamp":Math.floor(time_stamp/1000),
                                     "nonce_str":nonce_str,
-                                    "text":this.reddah.specialChars(answer),
+                                    "text":answer,
                                     "source":"zh",
                                     "target":this.reddah.adjustLan(),
                                     "sign":""
@@ -424,9 +435,10 @@ export class MysticPage implements OnInit {
                                         {
                                             traslatedAnswer = this.translate.instant("Mystic.ChangeQuest");
                                         }
-                                        let audioMagicNumber = this.reddah.getRandomInt(2);
+                                        let audioMagicNumber = this.reddah.getRandomInt(3);
                                         console.log(audioMagicNumber)
-                                        if(audioMagicNumber<-11){//random audio output only zh has audio
+                                        let isEnUs = this.reddah.getCurrentLocale()=="en-US";
+                                        if(isEnUs&&audioMagicNumber==0){//random audio output only zh has audio
                                             let params4 = {
                                                 "app_id":app_id,
                                                 "time_stamp":Math.floor(time_stamp/1000),
@@ -435,7 +447,7 @@ export class MysticPage implements OnInit {
                                                 "format":2,
                                                 "volume":0,
                                                 "speed":100,
-                                                "text":this.reddah.specialChars(traslatedAnswer),
+                                                "text":traslatedAnswer,
                                                 "aht":0,
                                                 "apc":58,
                                                 "sign":""

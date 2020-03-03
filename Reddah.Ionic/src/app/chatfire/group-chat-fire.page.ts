@@ -27,7 +27,6 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
 export class GroupChatFirePage extends ChatFireBase implements OnInit {
 
     @ViewChild('pageTop') pageTop: Content;
-    @ViewChild('chatbox') chatbox;
 
     @Input() targetUsers: any;
     @Input() groupChat;

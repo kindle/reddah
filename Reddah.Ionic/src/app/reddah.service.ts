@@ -509,10 +509,9 @@ export class ReddahService {
         return value;
     }
 
-    specialChars(str){
-        let value = str.trim().split(" ").join("+");
-        return value;
-    }
+    
+
+
 
     getAudioDuration(msg){
         if(msg.Base64){
@@ -533,7 +532,7 @@ export class ReddahService {
         for (var key of Object.keys(o)) {
             let value = o[key];
             if(value!==""){
-                str += key + '=' + btoa(value) + '&';
+                str += key + '=' + this.php_encodeURIComponent(value) + '&';
             }
         }
         str += 'app_key=' + appkey;
@@ -550,13 +549,27 @@ export class ReddahService {
         for (var key of Object.keys(o)) {
             let value = o[key];
             if(value!==""){
-                str += key + '=' + encodeURIComponent(value) + '&';
+                str += key + '=' + this.php_encodeURIComponent(value) + '&';
             }
         }
         str += 'app_key=' + appkey;
 
         let sign = Md5.hashStr(str)+"";
         return sign.toUpperCase();
+    }
+
+    //qq encode using php
+    php_encodeURIComponent(str){
+        console.log(str);
+        let value = encodeURIComponent(str);
+        value = value.split("%20").join("+");
+        value = value.split("'").join("%27");
+        value = value.split("!").join("%21");
+        value = value.split("*").join("%2A");
+        value = value.split("(").join("%28");
+        value = value.split(")").join("%29");
+        value = value.split("~").join("%7E");
+        return value;
     }
 
     ksort(o) {
