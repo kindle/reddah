@@ -230,7 +230,9 @@ export class ChatFireBoxComponent implements OnInit {
                 this.uploadAudio(fileName);
             }); 
             this.audioMediaObj.onError.subscribe(err => {
-                alert('Record fail! Error: ' + err)
+                //alert('Record fail! Error: ' + err)
+                this.audioMediaObj.stopRecord();
+                this.isPressed=false;
             });
         }
     }
