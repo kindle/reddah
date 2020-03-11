@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
-import { JsonpModule } from '@angular/http';
+//import { JsonpModule } from '@angular/http';
 import { AlertController, ActionSheetController, 
          IonicModule, IonicRouteStrategy, IonRouterOutlet,
          Platform, PopoverController,
@@ -49,10 +49,10 @@ import { AppRate } from '@ionic-native/app-rate/ngx';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgxWebstorageModule } from 'ngx-webstorage';
-import { IonicImageLoader } from 'ionic-image-loader';
+//import { IonicImageLoader } from 'ionic-image-loader';
 import { CacheModule } from "ionic-cache";
 import { DragulaModule } from 'ng2-dragula';
-import { NgxQRCodeModule } from 'ngx-qrcode2';
+//import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ReddahService } from './reddah.service';
@@ -309,13 +309,13 @@ var firebaseConfig = {
         IonicModule.forRoot(), 
         AppRoutingModule,
         HttpClientModule,
-        JsonpModule,
+        //JsonpModule,
         CKEditorModule,
         LazyLoadImageModule.forRoot({
             preset: intersectionObserverPreset
         }),
         HttpClientJsonpModule,
-        IonicImageLoader.forRoot(),
+        //IonicImageLoader.forRoot(),
         CacheModule.forRoot(),
         NgxWebstorageModule.forRoot(),
         DragulaModule.forRoot(),
@@ -326,7 +326,7 @@ var firebaseConfig = {
                 deps: [HttpClient]
             }
         }),
-        NgxQRCodeModule,
+        //NgxQRCodeModule,
         //AngularFireModule.initializeApp(firebaseConfig),
         //AngularFireDatabaseModule,
     ],
@@ -347,7 +347,7 @@ var firebaseConfig = {
         Shake,
         Crop,
         InAppBrowser,
-        IonicImageLoader,
+        //IonicImageLoader,
         IonRouterOutlet,
         File,
         FileTransfer,

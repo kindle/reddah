@@ -1,10 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
-import {
-  Headers, Http, JsonpModule, XHRBackend, RequestOptions, RequestOptionsArgs, Jsonp,
-  JSONPBackend, URLSearchParams, QueryEncoder, ResponseContentType
-} from '@angular/http';
+import { HttpClient, HttpHeaders,
+    HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Article } from "./model/article";
 import { UserProfileModel } from './model/UserProfileModel';
@@ -35,7 +32,6 @@ export class ReddahService {
     constructor(
         private http: HttpClient,
         private localStorageService: LocalStorageService,
-        private jsonp: Jsonp,
         private transfer: FileTransfer,
         private file: File,
         private toastController: ToastController,
@@ -1759,7 +1755,7 @@ export class ReddahService {
         this.options.headers.set('Content-Type', 'application/json:charset=UTF-8');
         this.options.params = searchParams;
 
-        return this.jsonp.get(sohuStockApi, this.options).pipe(
+        return this.http.jsonp(sohuStockApi, this.options).pipe(
             tap(data => this.log('get stock')),
             catchError(this.handleError('get stock', []))
         );
@@ -1797,7 +1793,7 @@ export class ReddahService {
         this.options.headers.set('Content-Type', 'application/json:charset=UTF-8');
         this.options.params = searchParams;
 
-        return this.jsonp.get(qqTranslateApi, this.options).pipe(
+        return this.http.jsonp(qqTranslateApi, this.options).pipe(
             tap(data => this.log('get qq location')),
             catchError(this.handleError('get qq location', []))
         );

@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'ngx-webstorage';
-import { ImageLoaderConfigService } from 'ionic-image-loader';
+//import { ImageLoaderConfigService } from 'ionic-image-loader';
 import { CacheService } from "ionic-cache";
 //import * as firebase from 'firebase';
 //import { Firebase } from '@ionic-native/firebase/ngx';
@@ -33,7 +33,7 @@ export class AppComponent {
         private alertController: AlertController,
         private popoverCtrl: PopoverController,
         private router: Router,
-        private imageLoaderConfigService: ImageLoaderConfigService,
+        //private imageLoaderConfigService: ImageLoaderConfigService,
         private cacheService: CacheService,
         private androidPermissions: AndroidPermissions,
         private reddah: ReddahService,
@@ -121,7 +121,7 @@ export class AppComponent {
             }
         })
         
-
+/*
         this.imageLoaderConfigService.useImageTag(true);
         this.imageLoaderConfigService.enableSpinner(false);
         this.imageLoaderConfigService.setConcurrency(10);
@@ -130,7 +130,7 @@ export class AppComponent {
         this.imageLoaderConfigService.setMaximumCacheAge(365 * 24 * 60 * 60 * 1000); // 365 days
         this.imageLoaderConfigService.cacheDirectoryType = "cache";
         this.imageLoaderConfigService.enableFallbackAsPlaceholder(true);
-        this.imageLoaderConfigService.setFallbackUrl('assets/icon/noimage.jpg');
+        this.imageLoaderConfigService.setFallbackUrl('assets/icon/noimage.jpg');*/;
         //this.file.dataDirectory = "/reddah";
         //this.file.createDir("/","reddah", false);
         
