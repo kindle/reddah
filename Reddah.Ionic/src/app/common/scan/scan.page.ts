@@ -26,7 +26,7 @@ export class ScanPage implements OnInit {
     }
 
     close(){
-        this.navController.goBack(true);
+        this.navController.back();
     }
 
     scanner(){

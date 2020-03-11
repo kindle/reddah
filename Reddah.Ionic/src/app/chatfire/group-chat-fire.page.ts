@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { InfiniteScroll, Content, Platform } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent, Platform } from '@ionic/angular';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
@@ -26,7 +26,7 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
 })
 export class GroupChatFirePage extends ChatFireBase implements OnInit {
 
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild('pageTop') pageTop: IonContent;
 
     @Input() targetUsers: any;
     @Input() groupChat;

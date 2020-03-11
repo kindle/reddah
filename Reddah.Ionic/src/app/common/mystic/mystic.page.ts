@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input, NgZone } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, ModalController, PopoverController, Platform, Content } from '@ionic/angular';
+import { LoadingController, NavController, ModalController, PopoverController, Platform, IonContent } from '@ionic/angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
@@ -151,7 +151,7 @@ export class MysticPage implements OnInit {
     }
 
     
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild('pageTop') pageTop: IonContent;
     @ViewChild('chatbox') chatbox;
 
     @Input() title: any;

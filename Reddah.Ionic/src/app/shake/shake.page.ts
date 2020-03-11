@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { InfiniteScroll, Content, Platform } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent, Platform } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../model/article';
 import { LocalStorageService } from 'ngx-webstorage';

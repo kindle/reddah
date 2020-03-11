@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { InfiniteScroll, Content } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 import { ReddahService } from '../../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
@@ -16,8 +16,8 @@ export class HistoryPage implements OnInit {
     points = [];
     lastId = 0;
 
-    @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+    @ViewChild('pageTop') pageTop: IonContent;
     
     userName: any;
 

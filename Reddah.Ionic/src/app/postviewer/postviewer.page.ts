@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController, PopoverController, AlertController, Content } from '@ionic/angular';
+import { ModalController, PopoverController, AlertController, IonContent } from '@ionic/angular';
 import { Article } from '../model/article';
 import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 import { Location } from '@angular/common';

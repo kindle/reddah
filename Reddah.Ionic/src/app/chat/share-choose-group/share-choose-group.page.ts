@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController, ToastController, Content } from '@ionic/angular';
+import { ModalController, ToastController, IonContent } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { GroupChatPage } from '../group-chat.page';
 import { AuthService } from '../../auth.service';
@@ -13,7 +13,7 @@ import { ChatChooseUserPage } from '../../chat/chat-choose-user/chat-choose-user
 })
 export class ShareChooseGroupPage implements OnInit {
 
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild('pageTop') pageTop: IonContent;
 
     @Input() article: any;
     

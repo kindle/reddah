@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
-import { InfiniteScroll } from '@ionic/angular';
+import { Component, OnInit, ViewChild, ElementRef, Input, Renderer2 } from '@angular/core';
+import { IonInfiniteScroll } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, PopoverController, ActionSheetController  } from '@ionic/angular';
@@ -27,7 +27,7 @@ export class StockPage implements OnInit {
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,
-        private renderer: Renderer,
+        private renderer: Renderer2,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private popoverController: PopoverController,

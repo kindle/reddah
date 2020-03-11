@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { ModalController, PopoverController, Content } from '@ionic/angular';
+import { ModalController, PopoverController, IonContent } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
@@ -25,7 +25,7 @@ export class ContactPage {
     groupedContacts = [];
     userName;
 
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild('pageTop') pageTop: IonContent;
 
     constructor(
         public reddah: ReddahService,

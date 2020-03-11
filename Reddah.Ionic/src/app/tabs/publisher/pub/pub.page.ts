@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
-import { InfiniteScroll, Content } from '@ionic/angular';
+import { Component, OnInit, ViewChild, ElementRef, Input, Renderer2 } from '@angular/core';
+import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 import { ReddahService } from '../../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, PopoverController, ActionSheetController, NavParams, AlertController } from '@ionic/angular';
@@ -25,8 +25,8 @@ export class PubPage implements OnInit {
     articles = [];
     loadedIds = [];
     
-    @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+    @ViewChild('pageTop') pageTop: IonContent;
 
     currentUserName;
     

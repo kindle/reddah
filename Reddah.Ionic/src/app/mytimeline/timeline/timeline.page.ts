@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
-import { InfiniteScroll } from '@ionic/angular';
+import { Component, OnInit, ViewChild, ElementRef, Input, Renderer2 } from '@angular/core';
+import { IonInfiniteScroll } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LoadingController, NavController, PopoverController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
@@ -24,7 +24,7 @@ export class TimeLinePage implements OnInit {
     loadedIds = [];
     formData: FormData;
 
-    @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
     async goback(){
         await this.modalController.dismiss();
@@ -35,7 +35,7 @@ export class TimeLinePage implements OnInit {
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,
-        private renderer: Renderer,
+        private renderer: Renderer2,
         public modalController: ModalController,
         private popoverController: PopoverController,
         private cacheService: CacheService,
@@ -129,27 +129,27 @@ export class TimeLinePage implements OnInit {
         let offset = this.timelineCover.nativeElement.scrollHeight - $event.detail.scrollTop;
         if(offset>=250)
         {
-            this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'visible');
-            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
-            this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', '8');
+            this.renderer.setStyle(this.headerStart.nativeElement, 'visibility', 'visible');
+            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
+            this.renderer.setStyle(this.headerStart.nativeElement, 'opacity', '8');
         }
         else if(offset<250 && offset>=150)
         {
             //console.log('start change'+offset)
             let opacity = (offset-150)/100;
             if(opacity<0) opacity=0;
-            this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', opacity+'');
-            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
+            this.renderer.setStyle(this.headerStart.nativeElement, 'opacity', opacity + '');
+            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
         }
         else if(offset<150 && offset>=0){
             let opacity = (1-(offset-150)/100);
             if(opacity>1) opacity=1;
-            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'opacity', opacity+'');
+            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'opacity', opacity + '');
         }
         else
         {
-            this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
-            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
+            this.renderer.setStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
+            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
         }
     }
 

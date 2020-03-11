@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Renderer } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Renderer2 } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, PopoverController, AlertController, NavParams } from '@ionic/angular';
@@ -27,7 +27,7 @@ export class TsViewerPage implements OnInit {
     @ViewChild('newComment') newComment;
     
     goback(){
-        this.navController.goBack(true);
+        this.navController.back();
     }
 
     isFriend;
@@ -36,7 +36,7 @@ export class TsViewerPage implements OnInit {
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,
-        private renderer: Renderer,
+        private renderer: Renderer2,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private popoverController: PopoverController,

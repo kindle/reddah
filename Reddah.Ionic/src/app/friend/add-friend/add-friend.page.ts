@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, Renderer, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { QrcardPage } from '../../common/qrcard/qrcard.page';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -19,7 +19,7 @@ export class AddFriendPage implements OnInit {
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
-        public renderer: Renderer,
+        public renderer: Renderer2,
     ) { 
         this.userName = this.reddah.getCurrentUser();
     }

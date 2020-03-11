@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { InfiniteScroll, Content } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -27,8 +27,8 @@ export class PointPage implements OnInit {
     points = [];
     loadedIds = [];
 
-    @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+    @ViewChild('pageTop') pageTop: IonContent;
     
     userName: any;
 

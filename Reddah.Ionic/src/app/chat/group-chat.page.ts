@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { InfiniteScroll, Content, Platform } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent, Platform } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
@@ -22,7 +22,7 @@ import { ChatBase } from './chat.page';
 })
 export class GroupChatPage extends ChatBase implements OnInit {
 
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild('pageTop') pageTop: IonContent;
     @ViewChild('chatbox') chatbox;
 
     @Input() targetUsers: any;

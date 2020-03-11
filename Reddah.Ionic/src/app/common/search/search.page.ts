@@ -144,7 +144,7 @@ export class SearchPage implements OnInit {
             }
         } catch (error) {
         }
-        this.navController.goBack(true);
+        this.navController.back();
     }
 
     async onSearchchange(){

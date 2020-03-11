@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Content, Platform } from '@ionic/angular';
+import { Component, OnInit, Input, ViewChild, Directive } from '@angular/core';
+import { IonContent, Platform } from '@ionic/angular';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../reddah.service';
@@ -18,6 +18,7 @@ import { ChatPopPage } from '../common/chat-pop.page';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
+@Directive()
 export class ChatFireBase{
     
     @Input() hasNewMsg: boolean;
@@ -201,7 +202,7 @@ export class ChatFireBase{
 })
 export class ChatFirePage extends ChatFireBase implements OnInit  {
 
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild('pageTop') pageTop: IonContent;
 
     @Input() title: any;
     @Input() target: any;

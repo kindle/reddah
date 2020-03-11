@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, NgZone } from '@angular/core';
-import { ModalController, ToastController, ActionSheetController, Slides, Platform } from '@ionic/angular';
+import { ModalController, ToastController, ActionSheetController, Platform, IonSlides } from '@ionic/angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -190,7 +190,7 @@ export class ImageViewerComponent implements OnInit {
         }
     }
 
-    @ViewChild(Slides) slides: Slides;
+    @ViewChild(IonSlides) slides: IonSlides;
 
     ionSlideWillChange(){
         this.slides.getActiveIndex().then(index=>
@@ -217,7 +217,7 @@ export class ImageViewerComponent implements OnInit {
         let briefTarget = "DCIM/Reddah/";// + newFileName;
         const toast = await this.toastController.create({
             message: `${this.translate.instant("Common.Save")}:${briefTarget}`,
-            showCloseButton: false,
+            //showCloseButton: false,
             position: 'bottom',
             duration: 2500
         });
@@ -291,7 +291,7 @@ export class ImageViewerComponent implements OnInit {
 
         const toast = await this.toastController.create({
             message: `${this.translate.instant("Common.Save")}:${briefTarget}`,
-            showCloseButton: false,
+            //showCloseButton: false,
             position: 'bottom',
             duration: 2500
         });

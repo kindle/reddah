@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SecurityContext, ViewEncapsulation, ViewChild, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser'
-import { ModalController, Content, Platform, LoadingController, AlertController } from '@ionic/angular';
+import { ModalController, IonContent, Platform, LoadingController, AlertController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -22,7 +22,7 @@ import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 })
 export class MiniViewerComponent implements OnInit {
 
-    @ViewChild('mini') mini: Content;
+    @ViewChild('mini') mini: IonContent;
     
     @Input() content;//html
     @Input() guid;//article.userName

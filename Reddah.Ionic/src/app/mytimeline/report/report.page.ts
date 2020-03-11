@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
-import { InfiniteScroll, Content, LoadingController, NavController, PopoverController, ModalController, AlertController, } from '@ionic/angular';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { IonInfiniteScroll, IonContent, LoadingController, NavController, PopoverController, ModalController, AlertController, } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,9 +21,9 @@ export class ReportPage implements OnInit {
     formData: FormData;
     showAddComment = false;
 
-    @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
     @ViewChild('newComment') newComment;
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild('pageTop') pageTop: IonContent;
         
     loadData(event) {
         this.getReport(event);
@@ -38,7 +38,7 @@ export class ReportPage implements OnInit {
         public loadingController: LoadingController,
         public translateService: TranslateService,
         public navController: NavController,
-        private renderer: Renderer,
+        private renderer: Renderer2,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private popoverController: PopoverController,
@@ -166,28 +166,28 @@ export class ReportPage implements OnInit {
         
         if(offset>=250)
         {
-            this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'visible');
-            this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', '8');
-            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
+            this.renderer.setStyle(this.headerStart.nativeElement, 'visibility', 'visible');
+            this.renderer.setStyle(this.headerStart.nativeElement, 'opacity', '8');
+            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
             
         }
         else if(offset<250 && offset>=150)
         {
             let opacity = (offset-150)/100;
             if(opacity<0) opacity=0;
-            this.renderer.setElementStyle(this.headerStart.nativeElement, 'opacity', opacity+'');
-            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
+            this.renderer.setStyle(this.headerStart.nativeElement, 'opacity', opacity + '');
+            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
         }
         else if(offset<150 && offset>=-150){
             let opacity = (1-(offset-150)/100);
             if(opacity>1) opacity=1;
-            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'opacity', opacity+'');
+            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'opacity', opacity + '');
         }
         else
         {
-            this.renderer.setElementStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
-            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
-            this.renderer.setElementStyle(this.headerOnScroll.nativeElement, 'opacity', '8');
+            this.renderer.setStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
+            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
+            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'opacity', '8');
         }
     }
 

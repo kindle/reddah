@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Platform, Events } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ModalController } from '@ionic/angular';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ReddahService } from '../reddah.service';
 import { SwipeTabDirective } from '../swipe-tab.directive';
-import { Tabs } from '@ionic/angular';
+import { IonTabs } from '@ionic/angular';
 import { EarthPage } from './earth/earth.page';
 import { MapPage } from '../map/map.page';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,7 +19,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class TabsPage implements OnInit {
     
     @ViewChild(SwipeTabDirective) swipeTabDirective: SwipeTabDirective;
-    @ViewChild('myTabs') tabRef: Tabs;
+    @ViewChild('myTabs') tabRef: IonTabs;
     @ViewChild('about') about;
 
     isAndroid = false;
@@ -32,14 +32,14 @@ export class TabsPage implements OnInit {
         private modalController: ModalController,
         private router: Router,
         public reddah: ReddahService,
-        public events: Events,
+        //public events: Event,
         private translate: TranslateService,
     )
     {
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
         this.translate.setDefaultLang(currentLocale);
         this.translate.use(currentLocale);
-
+/*
         this.events.subscribe('tab:clicked', (data) => 
         {
             try{
@@ -50,6 +50,7 @@ export class TabsPage implements OnInit {
                 this.router.navigateByUrl(`/tabs/(map:map)?lat=${lat}&lng=${lng}`);
             }catch(e){}
         });
+*/
     }
 
 

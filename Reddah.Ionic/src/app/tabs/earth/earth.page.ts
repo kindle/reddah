@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { InfiniteScroll, Content, Events } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { Article } from '../../model/article';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -36,7 +36,7 @@ export class EarthPage implements OnInit {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         public activeRoute: ActivatedRoute,
-        public events: Events,
+        //: Events,
     ){
         this.userName = this.reddah.getCurrentUser();
     }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController, InfiniteScroll, Content, Platform } from '@ionic/angular';
+import { ModalController, IonInfiniteScroll, IonContent, Platform } from '@ionic/angular';
 import { SettingSignaturePage } from '../../../settings/setting-signature/setting-signature.page'
 import { CacheService } from "ionic-cache";
 import { ChangePhotoPage } from '../../../common/change-photo/change-photo.page';
@@ -28,8 +28,8 @@ export class SubInfoPage implements OnInit {
     articles = [];
     loadedIds = [];
     
-    @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+    @ViewChild('pageTop') pageTop: IonContent;
 
 
     isCordova = false;

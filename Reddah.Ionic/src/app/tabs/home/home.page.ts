@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { InfiniteScroll, Content } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { Article } from '../../model/article';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -21,8 +21,8 @@ import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page
 })
 export class HomePage implements OnInit {
 
-    @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+    @ViewChild('pageTop') pageTop: IonContent;
     
     userName: any;
     constructor(

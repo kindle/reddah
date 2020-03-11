@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalController, Slides } from '@ionic/angular';
+import { ModalController, IonSlides } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -40,7 +40,7 @@ export class ForgotPage implements OnInit {
         initialSlide: 0,
     };
 
-    @ViewChild(Slides) slides: Slides;
+    @ViewChild(IonSlides) slides: IonSlides;
     
     async token() {
         if (this.email.length == 0) {

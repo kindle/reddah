@@ -23,6 +23,7 @@ import { Device } from '@ionic-native/device/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { DatePipe } from '@angular/common';
 import { Md5 } from 'ts-md5/dist/md5';
+import { ToastOptions } from '@ionic-native/toast/ngx';
 
 @Injectable({
     providedIn: 'root'
@@ -1775,7 +1776,7 @@ export class ReddahService {
         this.options.headers.set('Content-Type', 'application/json:charset=UTF-8');
         this.options.params = searchParams;
 
-        return this.jsonp.get(qqMapApi, this.options).pipe(
+        return this.http.jsonp(qqMapApi, this.options).pipe(
             tap(data => this.log('get nearby')),
             catchError(this.handleError('get nearby', []))
         );
@@ -2646,13 +2647,12 @@ export class ReddahService {
     .set(9,'20px')
     .set(10,'21px');
 
-    
     async toast(message: string, color="dark") {
         const toast = await this.toastController.create({
             message: message,
-            showCloseButton: true,
+            //showCloseButton: true,
             position: "top",
-            closeButtonText: this.translate.instant("Button.Close"),
+            //closeButtonText: this.translate.instant("Button.Close"),
             duration: 3000,
             color: color,
             cssClass: "toast-style"

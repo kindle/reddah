@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { InfiniteScroll, Content } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../model/article';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -20,8 +20,8 @@ export class BookmarkPage implements OnInit {
     bookmarks = [];
     loadedIds = [];
 
-    @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+    @ViewChild('pageTop') pageTop: IonContent;
     
     userName: any;
 

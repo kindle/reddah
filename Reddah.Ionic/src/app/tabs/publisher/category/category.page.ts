@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Renderer2 } from '@angular/core';
 import { ReddahService } from '../../../reddah.service';
 import { LoadingController, NavController, PopoverController, ActionSheetController  } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';

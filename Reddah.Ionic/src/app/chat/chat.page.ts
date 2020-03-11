@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { InfiniteScroll, Content, Platform } from '@ionic/angular';
+import { Component, OnInit, Input, ViewChild, Directive } from '@angular/core';
+import { IonInfiniteScroll, IonContent, Platform } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
@@ -18,6 +18,7 @@ import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-m
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
 import { PubPage } from '../tabs/publisher/pub/pub.page';
 
+@Directive()
 export class ChatBase{
     
     @Input() hasNewMsg: boolean;
@@ -117,7 +118,7 @@ export class ChatBase{
 })
 export class ChatPage extends ChatBase implements OnInit  {
 
-    @ViewChild('pageTop') pageTop: Content;
+    @ViewChild('pageTop') pageTop: IonContent;
     @ViewChild('chatbox') chatbox;
 
     @Input() title: any;
