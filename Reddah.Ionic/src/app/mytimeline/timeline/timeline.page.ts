@@ -3,7 +3,6 @@ import { IonInfiniteScroll } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LoadingController, NavController, PopoverController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
 import { TsViewerPage } from '../tsviewer/tsviewer.page'
@@ -33,7 +32,6 @@ export class TimeLinePage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
         private renderer: Renderer2,
         public modalController: ModalController,
@@ -45,7 +43,7 @@ export class TimeLinePage implements OnInit {
     async ngOnInit(){
         this.reddah.getUserPhotos(this.userName, true);
         const loading = await this.loadingController.create({
-            message: this.translateService.instant("Article.Loading"),
+            message: this.reddah.instant("Article.Loading"),
             spinner: 'circles',
         });
         await loading.present();

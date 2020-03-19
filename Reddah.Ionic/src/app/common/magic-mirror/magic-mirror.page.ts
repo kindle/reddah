@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { Power4,Elastic,TweenMax } from "gsap";
 import * as $ from 'jquery';
 
@@ -20,7 +19,6 @@ export class MagicMirrorPage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
         public modalController: ModalController,
     ){ }

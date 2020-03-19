@@ -1,9 +1,9 @@
 <ion-item no-padding lines="none" color="light">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-label style="font-weight: bold;">{{ "Menu.Publisher" | translate }}</ion-label>
-    <ion-icon name="ios-add" slot="end" (click)="goSearch()"></ion-icon>
+    <ion-label style="font-weight: bold;">{{ reddah.instant("Menu.Publisher") }}</ion-label>
+    <ion-icon name="add-outline"slot="end" (click)="goSearch()"></ion-icon>
 </ion-item>
 <ion-content #pageTop style="background-color:white;">
     <ion-refresher (ionRefresh)="doRefresh($event)">

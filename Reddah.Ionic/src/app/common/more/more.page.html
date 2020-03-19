@@ -1,34 +1,34 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-label>{{ 'Search.More' | translate }}</ion-label>
+    <ion-label>{{ reddah.instant('Search.More') }}</ion-label>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;">
     <div class="gap lastGap">
         <ion-item class="borderTop borderItem borderTop" *ngIf="pub">
-            <ion-label>{{ 'Common.Developer' | translate }}</ion-label>
+            <ion-label>{{ reddah.instant('Common.Developer') }}</ion-label>
             <ion-text slot="end">{{reddah.appData('useradmins_'+target)}}</ion-text>
         </ion-item>
         <ion-item lines="none" class="borderBottom borderItem" (click)="goEmail()">
-            <ion-label>{{ 'Input.Email' | translate }}</ion-label>
+            <ion-label>{{ reddah.instant('Input.Email') }}</ion-label>
             <ion-text slot="end">{{reddah.appData('useremail_'+target)}}</ion-text>
         </ion-item>
     </div>
 <!--
     <div class="gap" *ngIf="pub">
         <ion-item class="borderTop borderItem borderBottom" (click)="goCert()" lines="none">
-            <ion-label>{{ 'Common.ServicePhone' | translate }}</ion-label>
+            <ion-label>{{ reddah.instant('Common.ServicePhone') }}</ion-label>
         </ion-item>
     </div>
 
     <div class="gap lastGap" *ngIf="pub">
         <ion-item lines="none" class="borderTop borderItem" (click)="callService()">
-            <ion-label slot="start">{{ 'Common.Owner' | translate }}</ion-label>
+            <ion-label slot="start">{{ reddah.instant('Common.Owner') }}</ion-label>
         </ion-item>
         <ion-item lines="none" class="borderItem borderBottom">
             <ion-note slot="start" text-wrap style="padding-bottom: 20px;">
-                {{ 'Common.OwnerDesc' | translate }}
+                {{ reddah.instant('Common.OwnerDesc') }}
             </ion-note>
         </ion-item>
     </div>

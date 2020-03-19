@@ -1,27 +1,27 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-label *ngIf="writing==0">{{ 'Menu.Mystic' | translate }}</ion-label>
-    <ion-label *ngIf="writing==1">{{ 'Mystic.Typing' | translate }}</ion-label>
-    <ion-label *ngIf="writing==2">{{ 'Mystic.Thinking' | translate }}</ion-label>
+    <ion-label *ngIf="writing==0">{{ reddah.instant('Menu.Mystic') }}</ion-label>
+    <ion-label *ngIf="writing==1">{{ reddah.instant('Mystic.Typing') }}</ion-label>
+    <ion-label *ngIf="writing==2">{{ reddah.instant('Mystic.Thinking') }}</ion-label>
 </ion-item>
-<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" no-padding 
-style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatbox.hide()"> 
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" 
+style="background-color: #eeeeee;--background: #eeeeee;padding:0;" #pageTop (click)="chatbox.hide()"> 
     <ion-grid *ngFor="let comment of messages">
         <ion-row *ngIf="comment.Type==0||comment.Type==1000">
-            <ion-col no-padding>
-                <div text-center class="chatTime" *ngIf="reddah.checkIsToday(comment.CreatedOn)">{{reddah.utcToLocal(comment.CreatedOn,'HH:mm')}}</div>
-                <div text-center class="chatTime" *ngIf="!reddah.checkIsToday(comment.CreatedOn)">{{reddah.utcToLocal(comment.CreatedOn,'MM-dd HH:mm')}}</div>
+            <ion-col style="padding:0;">
+                <div class="chatTime" *ngIf="reddah.checkIsToday(comment.CreatedOn)">{{reddah.utcToLocal(comment.CreatedOn,'HH:mm')}}</div>
+                <div class="chatTime" *ngIf="!reddah.checkIsToday(comment.CreatedOn)">{{reddah.utcToLocal(comment.CreatedOn,'MM-dd HH:mm')}}</div>
             </ion-col>
         </ion-row>
         <ion-row *ngIf="comment.Type==1000">
-            <ion-col no-padding>
-                <div text-center class="chatTime">{{reddah.htmlDecode(comment.Content)}}</div>
+            <ion-col style="padding:0;">
+                <div class="chatTime">{{reddah.htmlDecode(comment.Content)}}</div>
             </ion-col>
         </ion-row>
         <ion-row *ngIf="comment.Type==0||comment.Type==1||comment.Type==4||comment.Type==5">
-            <ion-col no-padding>
+            <ion-col style="padding:0;">
                 <div class="container-right" *ngIf="userName==comment.UserName">
                     <img [src]="reddah.appData('userphoto_'+comment.UserName)"
                         class="portrait">
@@ -32,7 +32,7 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                         <div class="chat-box-me" (press)="showChatMenu($event, comment.Content)" (click)="copyToInput(comment.Content)"
                         [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'" *ngIf="comment.Type==0"></div>
                         <div class="chat-box-me-1" *ngIf="comment.Type==1" (click)="play(comment)">
-                            <ion-icon slot="start" name="ios-wifi" size="large" 
+                            <ion-icon slot="start" name="wifi-outline"size="large" 
                             style="width:20px;height:18px;transform: rotate(-90deg);margin:auto;"
                             *ngIf="!comment.isPlaying"></ion-icon>
                             <div class="bg-right voicePlay" *ngIf="comment.isPlaying"></div>
@@ -98,7 +98,7 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
                             *ngIf="comment.Action!=null" (click)="setInfo(comment.Action)">click me</ion-button>
                         </div>
                         <div class="chat-box-others-1" *ngIf="comment.Type==1" (click)="play(comment)">
-                            <ion-icon name="ios-wifi" size="large" style="width:20px;height:18px;transform: rotate(90deg);margin:auto;"
+                            <ion-icon name="wifi-outline"size="large" style="width:20px;height:18px;transform: rotate(90deg);margin:auto;"
                             *ngIf="!comment.isPlaying"></ion-icon>
                             <div class="bg-left voicePlay" *ngIf="comment.isPlaying"></div>
                             <div style="display: flex; line-height:38px;">

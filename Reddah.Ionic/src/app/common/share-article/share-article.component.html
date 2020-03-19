@@ -1,16 +1,13 @@
 <div (click)="viewArticle()" class="container" *ngIf="type==4||type==1">
-    <ion-item lines="none" color="light" no-padding style="padding-bottom:5px;">
-        <ion-avatar class="avatar-top sharePhoto" *ngIf="image">
-            <img [src]="reddah.parseImage(image)" class="sharePortrait">
-        </ion-avatar>
-        <ion-avatar class="avatar-top sharePhotoNone" *ngIf="!image">
-            <ion-icon name="ios-link" color="dark" class="sharePortraitNone"></ion-icon>
-        </ion-avatar>
-        <ion-label class="marginleft" text-wrap class="label-style">
-            <span>{{reddah.htmlDecode(abstract)}}</span><br>
-            <ion-note color="dark"></ion-note>
-        </ion-label>
-    </ion-item>
+    <ion-Label>
+        <div style="display: flex;margin:5px 0;">
+            <img [src]="reddah.parseImage(image)" class="sharePortrait" *ngIf="image">
+            <ion-icon name="link" color="dark" class="sharePortraitNone" *ngIf="!image"></ion-icon>
+            <span style="margin-left:8px;align-self: center;">
+                {{reddah.htmlDecode(abstract)}}
+            </span>
+        </div>
+    </ion-Label>
 </div>
 <div (click)="viewMini()" class="container" *ngIf="type==5">
     <ion-item lines="none" color="light" no-padding style="padding-bottom:5px;">
@@ -18,7 +15,7 @@
             <img [src]="reddah.parseImage(image)" class="sharePortrait">
         </ion-avatar>
         <ion-avatar class="avatar-top sharePhotoNone" *ngIf="!image">
-            <ion-icon name="ios-link" color="dark" class="sharePortraitNone"></ion-icon>
+            <ion-icon name="link"color="dark" class="sharePortraitNone"></ion-icon>
         </ion-avatar>
         <ion-label class="marginleft" text-wrap class="label-style">
             <span>{{reddah.htmlDecode(abstract)}}</span><br>

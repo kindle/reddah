@@ -1,13 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Renderer2 } from '@angular/core';
-import { IonInfiniteScroll, Platform } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
-import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController, ActionSheetController  } from '@ionic/angular';
+import { LoadingController, NavController, ActionSheetController  } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
-import { CacheService } from "ionic-cache";
-import { Router, ActivatedRoute, Params } from '@angular/router';
 import L from 'leaflet';
 //import 'proj4leaflet';
 //import { OpenStreetMapProvider } from 'leaflet-geosearch';
@@ -29,20 +23,11 @@ export class LocationPage implements OnInit {
     @ViewChild('map') mapContainer: ElementRef;
     map: any;
 
-    constructor(private reddah : ReddahService,
+    constructor(public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
-        private renderer: Renderer2,
         public modalController: ModalController,
-        private localStorageService: LocalStorageService,
-        private popoverController: PopoverController,
-        private photoLibrary: PhotoLibrary,
-        private cacheService: CacheService,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
         public actionSheetController: ActionSheetController,
-        private platform: Platform,
         ){
         
     }

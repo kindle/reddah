@@ -1,25 +1,25 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
     <ion-label>{{title}}</ion-label>
-    <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ 'Confirm.Submit' | translate }}</ion-button>
+    <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ reddah.instant('Confirm.Submit') }}</ion-button>
 </ion-item>
 <ion-content no-padding style="--background: #eeeeee;">
     <ion-list>
-        <ion-radio-group allow-empty-selection>
+        <ion-radio-group value="{{currentSex}}">
             <ion-list-header>
-                <ion-label color="dark">{{ 'About.Sex' | translate }}</ion-label>
+                <ion-label color="dark">{{ reddah.instant('About.Sex') }}</ion-label>
             </ion-list-header>
             <ion-item (click)="setSex(1)">
-                <ion-icon slot="start" name="ios-male" color="secondary"></ion-icon>
-                <ion-label color="secondary">{{ 'About.Male' | translate }}</ion-label>
-                <ion-radio slot="end" color="secondary" checked="{{currentSex==1}}"></ion-radio>
+                <ion-icon slot="start" name="male-outline"color="subscribe"></ion-icon>
+                <ion-label color="subscribe">{{ reddah.instant('About.Male') }}</ion-label>
+                <ion-radio slot="end" color="subscribe" value="1"></ion-radio>
             </ion-item>
             <ion-item (click)="setSex(0)">
-                <ion-icon slot="start" name="ios-female" color="danger"></ion-icon>
-                <ion-label color="danger">{{ 'About.Female' | translate }}</ion-label>
-                <ion-radio slot="end" color="danger" checked="{{currentSex==0}}"></ion-radio>
+                <ion-icon slot="start" name="female-outline"color="danger"></ion-icon>
+                <ion-label color="danger">{{ reddah.instant('About.Female') }}</ion-label>
+                <ion-radio slot="end" color="danger" value="0"></ion-radio>
             </ion-item>
         </ion-radio-group>
     </ion-list>

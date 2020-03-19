@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController, ToastController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
@@ -7,7 +7,6 @@ import { ReddahService } from '../../reddah.service';
 import { ChooseUserPage } from '../../common/choose-user/choose-user.page';
 import { UserPage } from '../../common/user/user.page';
 import { SettingGroupChatTitlePage } from '../../settings/setting-group-chat-title/setting-group-chat-title.page';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-group-chat-opt',
@@ -31,9 +30,7 @@ export class GroupChatOptPage {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         public authService: AuthService,
-        private toastController: ToastController,
         private alertController: AlertController,
-        private translate: TranslateService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
     }
@@ -82,17 +79,17 @@ export class GroupChatOptPage {
 
     async clearChat(){
         const alert = await this.alertController.create({
-            header: this.translate.instant("Confirm.Title"),
-            message: this.translate.instant("Confirm.ClearChatMessage"),
+            header: this.reddah.instant("Confirm.Title"),
+            message: this.reddah.instant("Confirm.ClearChatMessage"),
             buttons: [
             {
-                text: this.translate.instant("Confirm.Cancel"),
+                text: this.reddah.instant("Confirm.Cancel"),
                 role: 'cancel',
                 cssClass: 'secondary',
                 handler: () => {}
             }, 
             {
-                text: this.translate.instant("Confirm.Yes"),
+                text: this.reddah.instant("Confirm.Yes"),
                 handler: () => {
                     this.modalController.dismiss('clearchat');
                 }
@@ -124,17 +121,17 @@ export class GroupChatOptPage {
 
     async leaveGroupChatConfirm(){
         const alert = await this.alertController.create({
-            header: this.translate.instant("Confirm.Title"),
-            message: this.translate.instant("Confirm.LeaveGroupChatMessage"),
+            header: this.reddah.instant("Confirm.Title"),
+            message: this.reddah.instant("Confirm.LeaveGroupChatMessage"),
             buttons: [
             {
-                text: this.translate.instant("Confirm.Cancel"),
+                text: this.reddah.instant("Confirm.Cancel"),
                 role: 'cancel',
                 cssClass: 'secondary',
                 handler: () => {}
             }, 
             {
-                text: this.translate.instant("Confirm.Yes"),
+                text: this.reddah.instant("Confirm.Yes"),
                 handler: () => {
                     this.leaveGroupChat()
                 }

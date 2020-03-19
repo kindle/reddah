@@ -20,7 +20,7 @@
                     <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
                         {{reddah.getDisplayName(article.UserName)}}
                     </span>
-                    <ion-icon color="medium" name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
+                    <ion-icon color="medium" name="chatbox-ellipses-outline"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
                 </div>
                 <div style="display: flex;" (click)="dislike($event, article)">
                     <ion-icon color="medium" size="small" name="close"></ion-icon>
@@ -31,7 +31,7 @@
             <div *ngIf="article.ImageUrls.length>=3" (click)="view(article)">
                 <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span>
                 <div class="postClear"></div>
-                <ion-card-content no-padding>
+                <ion-card-content style="padding:0;">
                     <div class="parent">
                         <div class="container" *ngFor="let articleUrl of article.ImageUrls;index as i">
                             <img [class.left-radius]="i==0" [class.right-radius]="i==2" 
@@ -49,7 +49,7 @@
                     <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
                         {{reddah.getDisplayName(article.UserName)}}
                     </span>
-                    <ion-icon color="medium" name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
+                    <ion-icon color="medium" name="chatbox-ellipses-outline"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
                 </div>
                 <div style="display: flex;" (click)="dislike($event, article)">
                     <ion-icon color="medium" size="small" name="close"></ion-icon>
@@ -74,7 +74,7 @@
                     <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
                         {{reddah.getDisplayName(article.UserName)}}
                     </span>
-                    <ion-icon color="medium" name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
+                    <ion-icon color="medium" name="chatbox-ellipses-outline"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
                 </div>
                 <div style="display: flex;" (click)="dislike($event, article)">
                     <ion-icon color="medium" size="small" name="close"></ion-icon>
@@ -95,7 +95,7 @@
                     <span (click)="goUser(article.UserName)" class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
                         {{reddah.getDisplayName(article.UserName)}}
                     </span>
-                    <ion-icon (click)="view(article)" color="medium" name="text"></ion-icon>
+                    <ion-icon (click)="view(article)" color="medium" name="chatbox-ellipses-outline"></ion-icon>
                     <span (click)="view(article)" style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
                 </div>
                 <div style="display: flex;" (click)="dislike($event, article)">
@@ -105,7 +105,7 @@
         </div>
     </ng-template>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'Button.Loading' | translate }}">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ reddah.instant('Button.Loading') }}">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

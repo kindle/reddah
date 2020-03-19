@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewChild, Input, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController, AlertController, NavParams } from '@ionic/angular';
+import { LoadingController, NavController, PopoverController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { UserPage } from '../../common/user/user.page';
 import { TimelineCommentPopPage } from '../../common/timeline-comment-pop.page'
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
-import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleTextPopPage } from '../../common/article-text-pop.page'
 import { LocationPage } from '../../common/location/location.page';
 import { ApplyFriendPage } from '../../friend/apply-friend/apply-friend.page';
@@ -31,21 +29,17 @@ export class TsViewerPage implements OnInit {
     }
 
     isFriend;
+    userName;
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
-        private renderer: Renderer2,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private popoverController: PopoverController,
         private cacheService: CacheService,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
-        private translate: TranslateService,
         ){
-            //this.userName = this.reddah.getCurrentUser();
+            this.userName = this.reddah.getCurrentUser();
             
     }
 
@@ -124,7 +118,7 @@ export class TsViewerPage implements OnInit {
             }
             
             if(data==3){
-                this.selectedReplyPlaceholder = this.translate.instant("Comment.Comment");
+                this.selectedReplyPlaceholder = this.reddah.instant("Comment.Comment");
                 setTimeout(() => {
                     this.newComment.setFocus();
                 },150);
@@ -229,7 +223,7 @@ export class TsViewerPage implements OnInit {
     showAddCommentFromChildren(event){
         this.selectedArticleId = event.articleId;
         this.selectedCommentId = event.commentId;
-        this.selectedReplyPlaceholder = this.translate.instant("Comment.Comment") + this.reddah.getDisplayName(event.userName) + ":";
+        this.selectedReplyPlaceholder = this.reddah.instant("Comment.Comment") + this.reddah.getDisplayName(event.userName) + ":";
 
         if(this.selectedArticleId!=event.articleId||this.selectedCommentId!=event.commentId)
         {

@@ -1,10 +1,10 @@
 <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload($event)">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-label>{{ 'Common.Choose' | translate }}</ion-label>
+    <ion-label>{{ reddah.instant('Common.Choose') }}</ion-label>
     <ion-button clear slot="end" color="light" (click)="createGroupChat()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-add"></ion-icon>
+        <ion-icon is-active="false" name="add-outline"></ion-icon>
     </ion-button>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;" #pageTop>

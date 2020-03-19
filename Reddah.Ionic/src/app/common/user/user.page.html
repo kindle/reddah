@@ -1,9 +1,9 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
     <ion-button clear slot="end" color="light" (click)="presentActionSheet()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-more"></ion-icon>
+        <ion-icon is-active="false" name="ellipsis-horizontal-outline"></ion-icon>
     </ion-button>
 </ion-item>
 <ion-content style="align-items: center; --background:#eeeeee;background-color:#eeeeee;">
@@ -20,20 +20,14 @@
         </ion-thumbnail>
         <ion-label>
             <div style="display: flex;padding:5px 0 5px 0;">
-                <span class="user-name">{{reddah.getDisplayName(userName, 100)}}</span>
-                <ion-icon class="cmd-title" name="ios-male" size="small" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
-                <ion-icon class="cmd-title" name="ios-female" size="small" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
+                <ion-label class="user-name">{{reddah.getDisplayName(userName, 100)}}</ion-label>
+                <ion-icon class="cmd-title" name="male-outline"size="small" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
+                <ion-icon class="cmd-title" name="female-outline"size="small" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
             </div>
             <div style="display: flex;margin-top:5px;">
-                <ion-icon name="radio-button-off" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==1"></ion-icon>
-                <ion-icon name="ribbon" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==2"></ion-icon>
-                <ion-icon name="star-outline" color="primary" size="small" *ngIf="reddah.userLevelIcon(userName)==3"></ion-icon>
-                <ion-icon name="star" color="gold" size="small" *ngIf="reddah.userLevelIcon(userName)==4"></ion-icon>
-                <ion-icon name="medal" color="point" size="small" *ngIf="reddah.userLevelIcon(userName)==5"></ion-icon>
-                <ion-icon name="trophy" color="diamond" size="small" *ngIf="reddah.userLevelIcon(userName)==6"></ion-icon>
-                <ion-icon name="school" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==7"></ion-icon>
+                <ion-icon *ngFor="let i of reddah.userLevelIconNumber(userName)" name="{{reddah.userLevelIcon(userName)}}" color="{{reddah.userLevelIconColor(userName)}}" size="small"></ion-icon>
                 <span style="margin-left:5px;" *ngIf="reddah.appData('usernickname_'+userName)">
-                    {{ reddah.userLevel(userName) | translate }}
+                    {{ reddah.instant(reddah.userLevel(userName)) }}
                 </span>
             </div>
         </ion-label>
@@ -42,11 +36,11 @@
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop" (click)="changeNoteName()" *ngIf="isFriend">
-        <ion-label>{{ 'Pop.Note' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-label>{{ reddah.instant('Pop.Note') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item lines="none" [class.borderTop]="!isFriend" class="borderBottom" *ngIf="reddah.appData('usersignature_'+userName)!=''">
-        <span class="itemTitle">{{ 'About.Signature' | translate }}</span>
+        <span class="itemTitle">{{ reddah.instant('About.Signature') }}</span>
         <ion-label text-wrap>{{reddah.appData('usersignature_'+userName)}}</ion-label>
     </ion-item>
 
@@ -55,15 +49,15 @@
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" (click)="goLocation()" *ngIf="reddah.appData('userlocation_'+userName)&&
         reddah.appData('userhidelocation_'+userName)==0">
-        <span class="itemTitle">{{ 'About.Location' | translate }}</span>
-        <ion-icon name="pin" color="primary" style="margin-right:5px;"></ion-icon>
+        <span class="itemTitle">{{ reddah.instant('About.Location') }}</span>
+        <ion-icon name="location-outline" color="primary" style="margin-right:5px;"></ion-icon>
         <ion-label>{{reddah.appData('userlocation_'+userName)}}</ion-label>
     </ion-item>
 
     <ion-item lines="none" style="--background:#eeeeee;height:10px;" *ngIf="reddah.appData('userlan_'+userName)">
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" *ngIf="reddah.appData('userlan_'+userName)">
-        <span class="itemTitle">{{ 'Surface.Language' | translate }}</span>
+        <span class="itemTitle">{{ reddah.instant('Surface.Language') }}</span>
         <ion-label>{{reddah.getUserLan(userName)}}</ion-label>
     </ion-item>
     
@@ -72,7 +66,7 @@
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" (click)="viewTimeline()" 
         *ngIf="imageList&&imageList.length>0&&reddah.appData('userallowtentimeline_'+this.userName)==1">
-        <span class="itemTitle span-eclipse" style="line-height: 90px;">{{ 'Menu.Timeline' | translate }}</span>
+        <span class="itemTitle span-eclipse" style="line-height: 90px;">{{ reddah.instant('Menu.Timeline') }}</span>
         <ion-thumbnail *ngFor="let image of imageList" style="padding: 5px;">
             <img [id]="reddah.makeItId(image+'usr')" 
                 (load)="reddah.adjustImage(image, 'usr')"
@@ -84,13 +78,13 @@
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" (click)="viewTimeline()" 
         *ngIf="reddah.appData('userallowtentimeline_'+this.userName)!=1">
-        <span class="itemTitle" style="line-height: 90px;">{{ 'Menu.Timeline' | translate }}</span>
+        <span class="itemTitle" style="line-height: 90px;">{{ reddah.instant('Menu.Timeline') }}</span>
     </ion-item>
 
     <ion-item lines="none" style="--background:#eeeeee;height:10px;" *ngIf="appList&&appList.length>0">
     </ion-item>
     <ion-item class="borderTop borderBottom" lines="none" *ngIf="appList&&appList.length>0">
-        <span class="itemTitle span-eclipse" style="line-height: 30px;">{{ 'Menu.MiniApp' | translate }}</span>
+        <span class="itemTitle span-eclipse" style="line-height: 30px;">{{ reddah.instant('Menu.MiniApp') }}</span>
         <ion-thumbnail *ngFor="let app of appList" style="padding: 5px;">
             <img [id]="reddah.makeItId(app.Photo+'usr')" 
                 (load)="reddah.adjustImage(app.Photo, 'usr')"
@@ -102,16 +96,16 @@
     <ion-item lines="none" style="--background:#eeeeee;height:10px;" *ngIf="isFriend">
     </ion-item>
     <ion-item class="borderTop borderBottom" lines="none" (click)="goMore()" *ngIf="isFriend">
-        <span class="itemTitle">{{ 'Search.More' | translate }}</span>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <span class="itemTitle">{{ reddah.instant('Search.More') }}</span>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" *ngIf="isFriend" (click)="chat()">
         <div class="centerItem">
-            <ion-icon class="cmd-icon" color="secondary" name="ios-text"></ion-icon>
-            <ion-note color="secondary" class="cmd-title cmd-line">{{ 'Menu.Header.GroupChat' | translate }}</ion-note>
+            <ion-icon class="cmd-icon" color="secondary" name="chatbubbles-outline"></ion-icon>
+            <ion-note color="secondary" class="cmd-title cmd-line">{{ reddah.instant('Menu.Header.GroupChat') }}</ion-note>
         </div>
     </ion-item>
     <!--<ion-item class="borderBottom" lines="none" href="/#" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
@@ -123,7 +117,7 @@
     <ion-item lines="none" class="borderTop borderBottom" (click)="addFriend()" *ngIf="!isFriend&&userName!=reddah.getCurrentUser()">
         <div class="centerItem">
             <ion-icon class="cmd-icon" color="secondary" name="add"></ion-icon>
-            <ion-note color="secondary" class="cmd-title cmd-line">{{ 'Menu.Header.AddFriend' | translate }}</ion-note>
+            <ion-note color="secondary" class="cmd-title cmd-line">{{ reddah.instant('Menu.Header.AddFriend') }}</ion-note>
         </div>
     </ion-item>
 </ion-content>

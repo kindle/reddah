@@ -1,14 +1,14 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-label>{{ 'Menu.Settings' | translate }}</ion-label>
+    <ion-label>{{ reddah.instant('Menu.Settings') }}</ion-label>
 </ion-item>
 <ion-content no-padding style="--background: #eeeeee;" #searchResult>
     <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="goAccount()">
-        <ion-icon class="menuIcon" slot="start" name="ios-person" color="dark" size="medium"></ion-icon>
-        <ion-note color="dark">{{ 'About.Account' | translate }}</ion-note>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon class="menuIcon" slot="start" name="person"color="dark" size="medium"></ion-icon>
+        <ion-label color="dark">{{ reddah.instant('About.Account') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
@@ -16,38 +16,38 @@
 <!--
     <ion-item class="borderTop borderItem">
         <ion-label>新消息提醒</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item class="borderItem">
         <ion-label>勿扰模式</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item class="borderItem">
         <ion-label>聊天</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 -->
     <ion-item class="borderTop borderItem" (click)="goPrivacy()">
-        <ion-icon class="menuIcon" slot="start" name="key" color="medium" size="medium"></ion-icon>
-        <ion-note color="dark">{{ 'About.Privacy' | translate }}</ion-note>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon class="menuIcon" slot="start" name="key"color="medium" size="medium"></ion-icon>
+        <ion-label color="dark">{{ reddah.instant('About.Privacy') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item class="borderItem" (click)="goGeneral()">
-        <ion-icon class="menuIcon" slot="start" name="globe" color="primary" size="medium"></ion-icon>
-        <ion-note color="dark">{{ 'About.General' | translate }}</ion-note>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon class="menuIcon" slot="start" name="earth"color="primary" size="medium"></ion-icon>
+        <ion-label color="dark">{{ reddah.instant('About.General') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item lines="none" class="borderBottom" (click)="goAbout()">
-        <ion-icon class="menuIcon" slot="start" name="information-circle-outline" color="secondary" size="medium"></ion-icon>
-        <ion-label>{{ 'About.About' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon class="menuIcon" slot="start" name="information-circle-outline"color="secondary" size="medium"></ion-icon>
+        <ion-label>{{ reddah.instant('About.About') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item lines="none" class="borderTop borderItem borderBottom" *ngIf="this.authService.authenticated()" (click)="logout()">
-        <ion-icon class="menuIcon" slot="start" name="log-out" color="dark" size="medium"></ion-icon>
-        <ion-label>{{ 'Button.Logout' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon class="menuIcon" slot="start" name="log-out"color="dark" size="medium"></ion-icon>
+        <ion-label>{{ reddah.instant('Button.Logout') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 </ion-content>

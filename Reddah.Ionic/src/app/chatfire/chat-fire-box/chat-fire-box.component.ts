@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { ModalController, Platform } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
-import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions,CaptureVideoOptions } from '@ionic-native/media-capture';
+import { MediaCapture, MediaFile, CaptureError, CaptureVideoOptions } from '@ionic-native/media-capture/ngx';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx'; 
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
-import { TranslateService } from '@ngx-translate/core';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 //import { AngularFireDatabase } from '@angular/fire/database';
@@ -29,7 +28,7 @@ export class ChatFireBoxComponent implements OnInit {
     
     @ViewChild('newChatComment') newChatComment;
     
-    speakDesc=this.translate.instant('Pop.PressSpeak');
+    speakDesc=this.reddah.instant('Pop.PressSpeak');
     commentContent: string;
 
     constructor(
@@ -38,9 +37,10 @@ export class ChatFireBoxComponent implements OnInit {
         private media: Media,
         private platform: Platform,
         private videoEditor: VideoEditor,
-        private translate: TranslateService,
         private vibration: Vibration,
         private nativeAudio: NativeAudio,
+        private camera: Camera,
+        private mediaCapture: MediaCapture,
         //public db: AngularFireDatabase,
     ) { 
         if (this.platform.is('cordova')) {
@@ -166,10 +166,10 @@ export class ChatFireBoxComponent implements OnInit {
 
     chatFunctionGroups = [
         [
-            {id:1, icon:'images',name: this.translate.instant('Pop.FunImageLib')}, //相册
-            {id:2, icon:'camera',name:this.translate.instant('Pop.FunCamera')}, //拍照片
-            {id:3, icon:'play-circle',name:this.translate.instant('Pop.FunVideoLib')}, //视频库
-            {id:4, icon:'videocam',name:this.translate.instant('Pop.FunVideo')}, //拍视频
+            {id:1, icon:'images',name: this.reddah.instant('Pop.FunImageLib')}, //相册
+            {id:2, icon:'camera',name:this.reddah.instant('Pop.FunCamera')}, //拍照片
+            {id:3, icon:'play-circle',name:this.reddah.instant('Pop.FunVideoLib')}, //视频库
+            {id:4, icon:'videocam',name:this.reddah.instant('Pop.FunVideo')}, //拍视频
             /*{id:5, icon:'pin',name:'位置'},
             {id:6, icon:'repeat',name:'转账'},
             {id:7, icon:'mic',name:'语音输入'},
@@ -200,7 +200,7 @@ export class ChatFireBoxComponent implements OnInit {
     async startSpeak(){
         this.isPressed=true;
         this.speakPress.emit();
-        this.speakDesc = this.translate.instant('Pop.ReleaseSend');
+        this.speakDesc = this.reddah.instant('Pop.ReleaseSend');
         if (this.platform.is('cordova')) {
             this.vibration.vibrate(200);
 
@@ -241,7 +241,7 @@ export class ChatFireBoxComponent implements OnInit {
     async stopSpeak(){
         this.isPressed=false;
         this.speakUnPress.emit();
-        this.speakDesc = this.translate.instant('Pop.PressSpeak');
+        this.speakDesc = this.reddah.instant('Pop.PressSpeak');
         if (this.platform.is('cordova')) {
             this.nativeAudio.play("xiu");
             this.audioMediaObj.stopRecord();
@@ -364,14 +364,14 @@ export class ChatFireBoxComponent implements OnInit {
     {
         const options: CameraOptions = {
             quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
-            encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE,
-            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
             correctOrientation: true
         }
         
-        Camera.getPicture(options).then((imageData) => {
+        this.camera.getPicture(options).then((imageData) => {
             let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
             this.addPhotoToFormData(data);
         }, (err) => {
@@ -384,13 +384,13 @@ export class ChatFireBoxComponent implements OnInit {
     async takePhoto(){
         const options: CameraOptions = {
             quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
-            encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
             correctOrientation: true
         }
         
-        Camera.getPicture(options).then((imageData) => {
+        this.camera.getPicture(options).then((imageData) => {
             let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
             this.addPhotoToFormData(data);
         }, (err) => {
@@ -403,13 +403,13 @@ export class ChatFireBoxComponent implements OnInit {
     {
         const options: CameraOptions = {
             quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
-            mediaType: Camera.MediaType.VIDEO,
-            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            mediaType: this.camera.MediaType.VIDEO,
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
             correctOrientation: true
         }
         
-        Camera.getPicture(options).then((imageData) => {
+        this.camera.getPicture(options).then((imageData) => {
             let data = {fileUrl: "file://"+imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
             //alert(JSON.stringify(data));
             this.addVideoToFormData(data);
@@ -421,7 +421,7 @@ export class ChatFireBoxComponent implements OnInit {
 
     async takeVideo(){
         let options: CaptureVideoOptions = { limit: 1, duration: 60, quality: 100 };									
-        MediaCapture.captureVideo(options).then(									
+        this.mediaCapture.captureVideo(options).then(									
             (mediaFiles: MediaFile[]) => {
                 //alert(JSON.stringify(mediaFiles));
                 let data = {fileUrl: mediaFiles[0].fullPath, webUrl: (<any>window).Ionic.WebView.convertFileSrc(mediaFiles[0].fullPath)};

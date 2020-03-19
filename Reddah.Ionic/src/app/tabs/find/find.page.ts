@@ -6,10 +6,8 @@ import { ShakePage } from '../../shake/shake.page';
 import { ReddahService } from '../../reddah.service';
 import { LocationPage } from '../../common/location/location.page';
 import { MagicMirrorPage } from '../../common/magic-mirror/magic-mirror.page';
-import { BlackHolePage } from '../../common/black-hole/black-hole.page';
 import { WormHolePage } from '../../common/worm-hole/worm-hole.page';
-import { LocalStorageService } from 'ngx-webstorage';
-import {  ActivatedRoute, Params, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { MysticPage } from '../../common/mystic/mystic.page';
 import { StoryPage } from '../../story/story.page';
 import { MapPage } from '../../map/map.page';
@@ -17,7 +15,6 @@ import { PlatformPage } from '../publisher/platform/platform.page';
 import { ShareChooseChatPage } from '../../chat/share-choose-chat/share-choose-chat.page';
 import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
 import { MiniViewerComponent } from '../../common/mini-viewer/mini-viewer.component';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-find',
@@ -32,8 +29,6 @@ export class FindPage {
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
-        private localStorageService: LocalStorageService,
-        private translate: TranslateService,
         private router: Router,
     ){
         this.user_apps = this.reddah.loadRecent(4);
@@ -234,8 +229,8 @@ export class FindPage {
                 const modal = await this.modalController.create({
                     component: AddFeedbackPage,
                     componentProps: { 
-                        title: this.translate.instant("Pop.Report"),
-                        desc: this.translate.instant("Pop.ReportReason"),
+                        title: this.reddah.instant("Pop.Report"),
+                        desc: this.reddah.instant("Pop.ReportReason"),
                         feedbackType: 4,
                         article: mini
                     },
@@ -248,7 +243,7 @@ export class FindPage {
                 const modal = await this.modalController.create({
                     component: ShareChooseChatPage,
                     componentProps: { 
-                        title: this.translate.instant("Common.Choose"),
+                        title: this.reddah.instant("Common.Choose"),
                         article: mini,
                     },
                     cssClass: "modal-fullscreen",

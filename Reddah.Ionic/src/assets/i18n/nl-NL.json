@@ -161,6 +161,7 @@
 
     "Pop":{
         "NoRecommend":"Verbergen",
+        "Recommend":"Aanbevolen",
         "Report":"Verslag",
         "ReportReason":"Voer een concrete reden in...",
         "ReportUserReason":"Voer de specifieke reden van de klacht in",

@@ -5,7 +5,6 @@ import { Article } from '../../model/article';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
 import { PostviewerPage } from '../../postviewer/postviewer.page';
-import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { MyInfoPage } from '../../common/my-info/my-info.page';
 import { SearchPage } from '../../common/search/search.page';
@@ -28,13 +27,12 @@ export class HomePage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
         private popoverController: PopoverController,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
-        private translate:TranslateService,
+        //private translate:TranslateService,
     ){
         this.userName = this.reddah.getCurrentUser();
         this.reddah.articles = [];
@@ -203,11 +201,11 @@ export class HomePage implements OnInit {
     
     async dislike(event, article){
         let reasons = [
-            [{Id:1, Title:this.translate.instant("Pop.SawIt"), Key:"" },{Id:2, Title:this.translate.instant("Pop.Trash"), Key:""}],
+            [{Id:1, Title:this.reddah.instant("Pop.SawIt"), Key:"" },{Id:2, Title:this.reddah.instant("Pop.Trash"), Key:""}],
         ];
         reasons.push([
-            {Id:4, Title:this.translate.instant("Pop.Porn"), Key:"" },
-            {Id:5, Title:`${this.translate.instant("Pop.NoAuthor")}:${this.reddah.getDisplayName(article.UserName)}`, Key:article.UserName } ]);
+            {Id:4, Title:this.reddah.instant("Pop.Porn"), Key:"" },
+            {Id:5, Title:`${this.reddah.instant("Pop.NoAuthor")}:${this.reddah.getDisplayName(article.UserName)}`, Key:article.UserName } ]);
         
         let startIndex = 100;
         let group = article.GroupName.split(',');
@@ -217,7 +215,7 @@ export class HomePage implements OnInit {
             if(last)
             {
                 group.splice(group.length-1, 1);
-                dislikeGroup.unshift({Id:startIndex, Title:`${this.translate.instant("Pop.Dislike")}:${last}`, Key: last});
+                dislikeGroup.unshift({Id:startIndex, Title:`${this.reddah.instant("Pop.Dislike")}:${last}`, Key: last});
                 startIndex++;
             }
         }
@@ -283,8 +281,8 @@ export class HomePage implements OnInit {
         const modal = await this.modalController.create({
             component: AddFeedbackPage,
             componentProps: { 
-                title: this.translate.instant("Pop.Report"),
-                desc: this.translate.instant("Pop.ReportReason"),
+                title: this.reddah.instant("Pop.Report"),
+                desc: this.reddah.instant("Pop.ReportReason"),
                 feedbackType: 4,
                 article: article
             },

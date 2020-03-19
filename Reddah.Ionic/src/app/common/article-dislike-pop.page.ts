@@ -1,16 +1,17 @@
 import { Component, Input } from '@angular/core';
 import { PopoverController, ModalController } from '@ionic/angular';
+import { ReddahService } from '../reddah.service';
 
 @Component({
   template: `
       <ion-grid>
           <ion-row>
               <ion-col>
-                  <div class="dislike-title">{{ 'Pop.NoRecommend' | translate }}</div>
+                  <div class="dislike-title">{{ reddah.instant('Pop.NoRecommend') }}</div>
               </ion-col>
               <ion-col>
                   <div class="dislike-title-right" (click)="close(feedback)">
-                  {{ 'Pop.Report' | translate }}<ion-icon size="small" color="medium" name="alert"></ion-icon>
+                  {{ reddah.instant('Pop.Report') }}<ion-icon style="margin-right:5px;" size="small" color="medium" name="alert-circle-outline"></ion-icon>
                   </div>
               </ion-col>
           </ion-row>
@@ -24,7 +25,7 @@ import { PopoverController, ModalController } from '@ionic/angular';
           </ion-row>
           <ion-row>
               <ion-col (click)="close(default)">
-                  <div class="dislike-noreason">{{ 'Pop.Nointerest' | translate }}</div>
+                  <div class="dislike-noreason">{{ reddah.instant('Pop.Nointerest') }}</div>
               </ion-col>
           </ion-row>
       </ion-grid>
@@ -38,6 +39,7 @@ export class ArticleDislikePopPage {
   feedback = {Id:-1, Title:""};
 
   constructor(
+      public reddah: ReddahService,
       public popoverController: PopoverController,
       public modalController: ModalController,
   ) {}

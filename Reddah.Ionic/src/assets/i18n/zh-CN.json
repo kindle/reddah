@@ -164,6 +164,7 @@
 
     "Pop":{
         "NoRecommend":"减少推荐",
+        "Recommend":"推荐",
         "Report":"举报",
         "ReportReason":"请输入具体的文章违规描述...",
         "ReportUserReason":"请输入投诉该帐号的具体原因...",

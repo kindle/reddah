@@ -4,7 +4,7 @@
             <img [src]="reddah.parseImage(image)" class="sharePortrait">
         </ion-avatar>
         <ion-avatar class="avatar-top sharePhotoNone" *ngIf="!image">
-            <ion-icon name="ios-link" color="dark" class="sharePortraitNone"></ion-icon>
+            <ion-icon name="link-outline"color="dark" class="sharePortraitNone"></ion-icon>
         </ion-avatar>
         <ion-label class="marginleft" text-wrap class="label-style">
             <span style="color:black;">{{reddah.htmlDecode(abstract)}}</span><br>
@@ -19,10 +19,10 @@
     </ion-item>
     <ion-item lines="none" color="tertiary" no-padding style="padding-bottom:5px;">
         <img [src]="reddah.parseImage(image)" class="sharePortraitBig" *ngIf="image">
-        <ion-icon name="ios-link" color="dark" class="sharePortraitNoneBig" *ngIf="!image"></ion-icon>
+        <ion-icon name="link"color="dark" class="sharePortraitNoneBig" *ngIf="!image"></ion-icon>
     </ion-item>
     <ion-item lines="none" color="tertiary" no-margin no-padding style="padding-left:10px;border-top:1px solid #eeeeee;">
         <ion-icon name="infinite" color="mini" class="portrait mini"></ion-icon>
-        <ion-label color="dark" style="margin-left:5px;">{{ 'Menu.MiniApp' | translate }}</ion-label>
+        <ion-label color="dark" style="margin-left:5px;">{{ reddah.instant('Menu.MiniApp') }}</ion-label>
     </ion-item>
 </div>

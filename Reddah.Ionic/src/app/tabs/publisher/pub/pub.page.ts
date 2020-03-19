@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 import { ReddahService } from '../../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController, ActionSheetController, NavParams, AlertController } from '@ionic/angular';
+import { LoadingController, NavController, ActionSheetController, AlertController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { ImageViewerComponent } from '../../../common/image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
 import { SettingNoteLabelPage } from '../../../settings/setting-note-label/setting-note-label.page';
@@ -13,6 +12,7 @@ import { Article } from '../../../model/article';
 import { PostviewerPage } from '../../../postviewer/postviewer.page';
 import { SearchPage } from '../../../common/search/search.page';
 import { MorePage } from '../../../common/more/more.page';
+import { UserPage } from 'src/app/common/user/user.page';
 
 @Component({
     selector: 'app-pub',
@@ -33,14 +33,12 @@ export class PubPage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         public actionSheetController: ActionSheetController,
         private alertController: AlertController,
-        private translate: TranslateService,
     ){
         this.currentUserName = this.reddah.getCurrentUser();
         this.reddah.getUserPhotos(this.userName);
@@ -78,6 +76,21 @@ export class PubPage implements OnInit {
         }
     }
 
+    async goUser(userName){
+        const userModal = await this.modalController.create({
+            component: UserPage,
+            componentProps: { 
+                userName: userName
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await userModal.present();
+    }
+    
+    playVideo(id){
+        
+    }
     
     showLoading=false;
     getArticles(event):void {
@@ -164,8 +177,8 @@ export class PubPage implements OnInit {
             )*/
             .concat([
                 {
-                    text: this.translate.instant("Search.More"),
-                    icon: 'ios-more',
+                    text: this.reddah.instant("Search.More"),
+                    icon: 'ellipsis-horizontal-outline',
                     handler: () => {
                         this.goMore();
                     }
@@ -190,18 +203,18 @@ export class PubPage implements OnInit {
 
     async delCinfirm(){
         const alert = await this.alertController.create({
-          header: this.translate.instant("Confirm.Title"),
-          message: this.translate.instant("Confirm.DeleteMessage"),
+          header: this.reddah.instant("Confirm.Title"),
+          message: this.reddah.instant("Confirm.DeleteMessage"),
           buttons: [
             {
-                text: this.translate.instant("Confirm.Cancel"),
+                text: this.reddah.instant("Confirm.Cancel"),
                 cssClass: 'secondary',
                 handler: (blah) => {
                     
                 }
             }, 
             {
-                text: this.translate.instant("Comment.Delete"),
+                text: this.reddah.instant("Comment.Delete"),
                 handler: () => {
                     let formData = new FormData();
                     formData.append("targetUser", this.userName);
@@ -235,15 +248,15 @@ export class PubPage implements OnInit {
     async unfocus(){
         const alert = await this.alertController.create({
             header: "",
-            message: `${this.translate.instant("Pop.StillUnfocus")}${this.reddah.appData('usernickname_'+this.userName)} ${this.translate.instant("Pop.UnfocusMessage")}`,
+            message: `${this.reddah.instant("Pop.StillUnfocus")}${this.reddah.appData('usernickname_'+this.userName)} ${this.reddah.instant("Pop.UnfocusMessage")}`,
             buttons: [
               {
-                text: this.translate.instant("Pop.StillFocus"),
+                text: this.reddah.instant("Pop.StillFocus"),
                 role: 'cancel',
                 cssClass: 'cssdark',
                 handler: () => {}
               }, {
-                text: this.translate.instant("Pop.StillUnfocus"),
+                text: this.reddah.instant("Pop.StillUnfocus"),
                 cssClass:'cssdanger',
                 handler: () => {
                     this.actualUnfocus();

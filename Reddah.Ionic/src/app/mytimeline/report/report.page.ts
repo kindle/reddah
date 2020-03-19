@@ -33,10 +33,11 @@ export class ReportPage implements OnInit {
         this.modalController.dismiss();
     }
 
+    goMessage(){}
+
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
         private renderer: Renderer2,
         public modalController: ModalController,
@@ -44,7 +45,6 @@ export class ReportPage implements OnInit {
         private popoverController: PopoverController,
         private cacheService: CacheService,
         private alertController: AlertController,
-        private translate: TranslateService,
     ){
         this.userName = this.reddah.getCurrentUser();
     }
@@ -210,7 +210,7 @@ export class ReportPage implements OnInit {
             {
                 this.formData.append("id", JSON.stringify(id))
                 this.formData.append("data", JSON.stringify(1))
-                this.formData.append("content", this.translate.instant('Point.TaskReportAwardComment'))
+                this.formData.append("content", this.reddah.instant('Point.TaskReportAwardComment'))
                 this.reddah.reportAward(this.formData).subscribe(data=>{
                     if(data.Success==0||data.Success==3){ 
                         if(data.Success==0){
@@ -226,7 +226,7 @@ export class ReportPage implements OnInit {
             {
                 this.formData.append("id", JSON.stringify(id))
                 this.formData.append("data", JSON.stringify(2))
-                this.formData.append("content", this.translate.instant('Point.TaskReportNoAwardComment'))
+                this.formData.append("content", this.reddah.instant('Point.TaskReportNoAwardComment'))
                 this.reddah.reportAward(this.formData).subscribe(data=>{
                     if(data.Success==0||data.Success==3){ 
                         if(data.Success==0){
@@ -240,7 +240,7 @@ export class ReportPage implements OnInit {
                 this.showAddComment = true;
                 this.selectedArticleId = id;
                 this.selectedCommentId = -1;
-                this.selectedReplyPlaceholder = this.translate.instant("Comment.Comment");
+                this.selectedReplyPlaceholder = this.reddah.instant("Comment.Comment");
                 setTimeout(() => {
                     this.newComment.setFocus();
                 },150);
@@ -346,7 +346,7 @@ export class ReportPage implements OnInit {
         this.selectedArticleId = event.articleId;
         this.selectedCommentId = event.commentId;
         this.showAddComment = true;
-        this.selectedReplyPlaceholder = this.translate.instant("Comment.Comment") + this.reddah.getDisplayName(event.userName) + ":";
+        this.selectedReplyPlaceholder = this.reddah.instant("Comment.Comment") + this.reddah.getDisplayName(event.userName) + ":";
 
         if(this.selectedArticleId!=event.articleId||this.selectedCommentId!=event.commentId)
         {
@@ -387,17 +387,17 @@ export class ReportPage implements OnInit {
 
     async delete(article){
         const alert = await this.alertController.create({
-            header: this.translate.instant("Confirm.Title"),
-            message: this.translate.instant("Confirm.DeleteMessage"),
+            header: this.reddah.instant("Confirm.Title"),
+            message: this.reddah.instant("Confirm.DeleteMessage"),
             buttons: [
             {
-                text: this.translate.instant("Confirm.Cancel"),
+                text: this.reddah.instant("Confirm.Cancel"),
                 role: 'cancel',
                 cssClass: 'secondary',
                 handler: () => {}
             }, 
             {
-                text: this.translate.instant("Confirm.Yes"),
+                text: this.reddah.instant("Confirm.Yes"),
                 handler: () => {
                     //ui delete
                     this.articles.forEach((item, index)=>{

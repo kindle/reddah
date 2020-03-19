@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, LoadingController } from '@ionic/angular';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ReddahService } from '../../reddah.service';
 import { File, FileEntry } from '@ionic-native/file/ngx';
-import { TranslateService } from '@ngx-translate/core';
 import { Crop } from '@ionic-native/crop/ngx';
 
 @Component({
@@ -21,10 +20,10 @@ export class ChangePhotoPage implements OnInit {
     constructor(
         private modalController: ModalController,
         private loadingController: LoadingController,
-        private reddahService: ReddahService,
-        private translate: TranslateService,
+        public reddah: ReddahService,
         private crop: Crop,
         private file: File,
+        private camera: Camera,
         ) { }
 
     ngOnInit() {
@@ -51,13 +50,13 @@ export class ChangePhotoPage implements OnInit {
     async takePhoto(){
         const options: CameraOptions = {
             quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
-            encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
             correctOrientation: true
         }
             
-        Camera.getPicture(options).then((imageData) => {
+        this.camera.getPicture(options).then((imageData) => {
             this.crop.crop(imageData, { quality: 100, targetWidth: -1, targetHeight: -1 })
             .then(
                     newCropImageData => {
@@ -77,14 +76,14 @@ export class ChangePhotoPage implements OnInit {
     {
         const options: CameraOptions = {
             quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
-            encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE,
-            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
             correctOrientation: true
         }
             
-        Camera.getPicture(options).then((imageData) => {
+        this.camera.getPicture(options).then((imageData) => {
             //this.photos.push((<any>window).Ionic.WebView.convertFileSrc(imageData));
             //this.prepareData(imageData);
             //this.prepareData((<any>window).Ionic.WebView.convertFileSrc(imageData));
@@ -127,7 +126,7 @@ export class ChangePhotoPage implements OnInit {
 
     async changePhoto(){
         const loading = await this.loadingController.create({
-            message: this.translate.instant("Article.Loading"),
+            message: this.reddah.instant("Article.Loading"),
             spinner: 'circles',
         });
         await loading.present();
@@ -139,7 +138,7 @@ export class ChangePhotoPage implements OnInit {
             //my-info and my timeline change cover do not check, just send empty
             this.formData.append("targetUserName", this.targetUserName);
         }
-        this.reddahService.updateUserPhoto(this.formData)
+        this.reddah.updateUserPhoto(this.formData)
         .subscribe(result => {
             loading.dismiss();
             

@@ -161,6 +161,7 @@
 
     "Pop":{
         "NoRecommend":"Hide",
+        "Recommend":"Recommend",
         "Report":"Report",
         "ReportReason":"Please input a concrete reason...",
         "ReportUserReason":"Please enter the specific reason for the complaint...",

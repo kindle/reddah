@@ -161,6 +161,7 @@
 
     "Pop":{
         "NoRecommend":"Ocultar",
+        "Recommend":"Recomendaciones",
         "Report":"Informe",
         "ReportReason":"Por favor,introduzca la razón...",
         "ReportUserReason":"Por favor, introduzca el motivo específico de la queja",

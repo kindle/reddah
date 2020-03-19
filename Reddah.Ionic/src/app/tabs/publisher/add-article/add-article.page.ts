@@ -1,17 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PopoverController, NavController, LoadingController, ModalController, AlertController } from '@ionic/angular'
+import { LoadingController, ModalController, AlertController } from '@ionic/angular'
 import { ReddahService } from '../../../reddah.service';
-import { File, FileEntry } from '@ionic-native/file/ngx';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Router } from '@angular/router';
 import { CacheService } from "ionic-cache";
 import { MaterialPage } from '../../../mytimeline/material/material.page';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ImageViewerComponent } from '../../../common/image-viewer/image-viewer.component';
-import { DragulaService } from 'ng2-dragula';
 import { AddMaterialPage } from '../../../mytimeline/add-material/add-material.page';
 import { PostviewerPage } from '../../../postviewer/postviewer.page';
-import { TranslateService } from '@ngx-translate/core';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 //import * as InlineEditor from '@ckeditor/ckeditor5-build-inline';
 
@@ -93,19 +88,13 @@ export class AddArticlePage implements OnInit {
     
     
     constructor(
-        private popoverController: PopoverController,
-        private reddahService: ReddahService,
-        private navController: NavController,
-        private file: File,
+        public reddahService: ReddahService,
         private loadingController: LoadingController,
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
         private cacheService: CacheService,
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
-        private dragulaService: DragulaService,
-        private translate: TranslateService,
         private alertController: AlertController,
+        public reddah: ReddahService,
     ) { 
         /*ClassicEditor
         .create( document.querySelector( '#editor' ), {
@@ -138,7 +127,7 @@ export class AddArticlePage implements OnInit {
 
     async save(){
         const loading = await this.loadingController.create({
-            message: this.translate.instant('Article.Loading'),
+            message: this.reddahService.instant('Article.Loading'),
             spinner: 'circles',
         });
         await loading.present();
@@ -216,17 +205,17 @@ export class AddArticlePage implements OnInit {
     async publish(){
         const alert = await this.alertController.create({
             header: "",
-            message: this.translate.instant('Common.Publish'),
+            message: this.reddahService.instant('Common.Publish'),
             buttons: [
               {
-                text: this.translate.instant('Confirm.Cancel'),
+                text: this.reddahService.instant('Confirm.Cancel'),
                 role: 'cancel',
                 cssClass: 'dark',
                 handler: () => {
                   
                 }
               }, {
-                text: this.translate.instant('Confirm.Yes'),
+                text: this.reddahService.instant('Confirm.Yes'),
                 cssClass:'danger',
                 handler: () => {
                     this.actualPublish();
@@ -244,7 +233,7 @@ export class AddArticlePage implements OnInit {
         //change flag
         if(this.article){
             const loading = await this.loadingController.create({
-                message: this.translate.instant('Article.Loading'),
+                message: this.reddahService.instant('Article.Loading'),
                 spinner: 'circles',
             });
             await loading.present();

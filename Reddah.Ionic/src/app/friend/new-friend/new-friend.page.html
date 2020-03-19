@@ -1,17 +1,17 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-label>{{ 'Common.NewFriend' | translate }}</ion-label>
+    <ion-label>{{ reddah.instant('Common.NewFriend') }}</ion-label>
     <ion-button clear slot="end" color="light" (click)="addFriend()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-add"></ion-icon>
+        <ion-icon is-active="false" name="add-outline"></ion-icon>
     </ion-button>
 </ion-item>
 <ion-content>
     <ion-list>
         <ion-item>
-            <ion-icon name="ios-search" slot="start"></ion-icon>
-            <ion-note (click)="searchUser()" style="width:100%;">{{ 'Input.UserName' | translate }}</ion-note>
+            <ion-icon name="search-outline"slot="start"></ion-icon>
+            <ion-note (click)="searchUser()" style="width:100%;">{{ reddah.instant('Input.UserName') }}</ion-note>
         </ion-item>
     </ion-list>
     <ion-list>
@@ -21,13 +21,13 @@
             </ion-avatar>
             <ion-label style="margin-left:10px;" (click)="goUser(request.UserName)">
                 <span>{{reddah.getDisplayName(request.UserName)}}</span>
-                <ion-icon name="ios-male" *ngIf="sex==1"></ion-icon>
-                <ion-icon name="ios-female" *ngIf="sex==0" color="danger"></ion-icon><br>
-                <ion-note>{{(request.Just=="confirmed")?('Common.Accepted' | translate):request.Just}}</ion-note>
+                <ion-icon name="male"*ngIf="reddah.appData('usersex_'+request.UserName)==1"></ion-icon>
+                <ion-icon name="female"*ngIf="reddah.appData('usersex_'+request.UserName)==0" color="danger"></ion-icon><br>
+                <ion-label>{{(request.Just=="confirmed")?(reddah.instant('Common.Accepted')):request.Just}}</ion-label>
             </ion-label>
             <div slot="end">
-                <ion-button color="success" (click)="accept(request.UserName)" *ngIf="!request.Approve">{{ 'Common.Accept' | translate }}</ion-button>
-                <ion-note *ngIf="request.Approve">{{ 'Common.Added' | translate }}</ion-note>
+                <ion-button color="success" (click)="accept(request.UserName)" *ngIf="!request.Approve">{{ reddah.instant('Common.Accept') }}</ion-button>
+                <ion-note *ngIf="request.Approve">{{ reddah.instant('Common.Added') }}</ion-note>
             </div>
         </ion-item>
     </ion-list>

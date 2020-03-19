@@ -162,6 +162,7 @@
 
     "Pop":{
         "NoRecommend":"Cacher",
+        "Recommend":"Recommander",
         "Report":"Rapports",
         "ReportReason":"Veuillez préciser pourquoi...",
         "ReportUserReason":"Veuillez saisir la raison exacte de votre plainte",

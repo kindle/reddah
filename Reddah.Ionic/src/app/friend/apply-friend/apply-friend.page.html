@@ -1,17 +1,17 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="transparent" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-label>{{ 'Menu.Header.AddFriend' | translate }}</ion-label>
-    <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ 'Confirm.Submit' | translate }}</ion-button>
+    <ion-label>{{ reddah.instant('Menu.Header.AddFriend') }}</ion-label>
+    <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ reddah.instant('Confirm.Submit') }}</ion-button>
 </ion-item>
 <ion-content padding style="--background: white;">
     <ion-item no-padding margin>
-      <ion-label text-wrap position="stacked" style="font-size: large;">{{ 'Common.ApplyFriend' | translate }}</ion-label>
+      <ion-label text-wrap position="stacked" style="font-size: large;">{{ reddah.instant('Common.ApplyFriend') }}</ion-label>
       <ion-textarea autoresize margin-top type="text" [(ngModel)]="message" clearInput #newRequest></ion-textarea>
     </ion-item>
     <ion-item no-padding margin>
-      <ion-label position="stacked" style="font-size: large;">{{ 'Pop.Note' | translate }}</ion-label>
+      <ion-label position="stacked" style="font-size: large;">{{ reddah.instant('Pop.Note') }}</ion-label>
       <ion-input margin-top type="text" [(ngModel)]="targetNoteName" clearInput></ion-input>
     </ion-item>
 <!--

@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { ReddahService } from '../reddah.service';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 
 import L from 'leaflet';
 //import "../../assets/maker/leaflet.awesome-markers";
-import { ActivatedRoute, Params } from '@angular/router';
 import { UserPage } from '../common/user/user.page';
 
 @Component({
@@ -23,11 +21,9 @@ export class MapPage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
 
         public modalController: ModalController,
-        public activeRoute: ActivatedRoute, 
         private elementRef: ElementRef,
     ){
         this.userName = this.reddah.getCurrentUser();
@@ -133,7 +129,7 @@ export class MapPage implements OnInit {
                 }
                 else{
                     loc = {
-                        "title": this.translateService.instant("Menu.About"),
+                        "title": this.reddah.instant("Menu.About"),
                         "location":{"lat":e.latitude,"lng":e.longitude}
                     }
                     this.setLocation(loc, false);
@@ -251,7 +247,7 @@ export class MapPage implements OnInit {
                                     this.goUser(user.UserName);
                                 }
                                 else{
-                                    this.reddah.toast(this.translateService.instant("Common.LoginToView"));
+                                    this.reddah.toast(this.reddah.instant("Common.LoginToView"));
                                 }
                             });
                         });

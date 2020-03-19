@@ -7,19 +7,17 @@ import { ModalController, Platform } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { CacheService } from 'ionic-cache';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class AuthService {
 
     constructor(
         private modalController: ModalController,
-        private reddahService: ReddahService,
+        public reddahService: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         private platform: Platform,
         private router: Router,
-        private translate: TranslateService,
     ){}
 
     authenticated(): boolean {
@@ -65,6 +63,7 @@ export class AuthService {
     }
 
     async surface() {
+        /*
         const modal = await this.modalController.create({
             component: SurfacePage,
             componentProps: { url: '' },
@@ -79,6 +78,7 @@ export class AuthService {
             this.exactToken(data);
         }
         return false;
+        */
     }
 
 
@@ -107,8 +107,8 @@ export class AuthService {
             this.modalController.dismiss();
 
             let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-            this.translate.setDefaultLang(currentLocale);
-            this.translate.use(currentLocale);
+            
+            this.reddahService.loadTranslate(currentLocale);
 
             this.router.navigate(['/surface'], {
                 queryParams: {

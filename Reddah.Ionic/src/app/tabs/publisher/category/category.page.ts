@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReddahService } from '../../../reddah.service';
-import { LoadingController, NavController, PopoverController, ActionSheetController  } from '@ionic/angular';
+import { LoadingController, NavController, ActionSheetController  } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { RegisterSubPage } from '../register-sub/register-sub.page';
 
 @Component({
@@ -17,9 +16,8 @@ export class CategoryPage implements OnInit {
     }
 
     constructor(
-        private reddah : ReddahService,
+        public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translate: TranslateService,
         public navController: NavController,
         public modalController: ModalController,
         public actionSheetController: ActionSheetController
@@ -35,14 +33,14 @@ export class CategoryPage implements OnInit {
         if(type==1){
             //subscriber
             //open register sub
-            this.registerByType(type, this.translate.instant("Register.TitleSub"));
+            this.registerByType(type, this.reddah.instant("Register.TitleSub"));
         }
         else if(type==2){
             //service
         }
         else if(type==3){
             //mini program
-            this.registerByType(type, this.translate.instant("Register.TitleMini"));
+            this.registerByType(type, this.reddah.instant("Register.TitleMini"));
         }
     }
 

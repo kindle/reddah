@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { PopoverController, ModalController } from '@ionic/angular';
 import { SettingNoteLabelPage } from '../settings/setting-note-label/setting-note-label.page';
+import { ReddahService } from '../reddah.service';
 
 @Component({
   template: `
       <ion-item button (click)="change()">
-          <ion-label>{{ 'Pop.Note' | translate }}</ion-label>
+          <ion-label>{{ reddah.instant('Pop.Note') }}</ion-label>
       </ion-item>
   `
 })
@@ -17,6 +18,7 @@ export class ChangeNoteNamePopPage {
     constructor(
         public popoverController: PopoverController,
         public modalController: ModalController,
+        public reddah: ReddahService,
     ) {}
 
     async change(){

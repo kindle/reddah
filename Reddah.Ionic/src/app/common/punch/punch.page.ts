@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
-import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, ModalController, PopoverController, Platform } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { LoadingController, NavController, ModalController, Platform } from '@ionic/angular';
 
 @Component({
     selector: 'app-punch',
@@ -18,19 +16,14 @@ export class PunchPage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
-        private popoverController: PopoverController,
         public modalController: ModalController,
-        private localStorageService: LocalStorageService,
         private platform: Platform,
-
     ){
-        
     }
-
+    async ngOnInit(){}
     
-
+/*
     async ngOnInit(){
         var p2 = require('p2');
 
@@ -83,12 +76,12 @@ export class PunchPage implements OnInit {
             drawingCanvas.height = viewHeight;
             ctx = drawingCanvas.getContext('2d');
 
-            /*
-            drawingCanvas.addEventListener('mousemove', updateMouseBodyPosition);
-            drawingCanvas.addEventListener('mousedown', checkStartDrag);
-            drawingCanvas.addEventListener('mouseup', checkEndDrag);
-            drawingCanvas.addEventListener('mouseout', checkEndDrag);
-            *//////////
+            //
+            //drawingCanvas.addEventListener('mousemove', updateMouseBodyPosition);
+            //drawingCanvas.addEventListener('mousedown', checkStartDrag);
+            //drawingCanvas.addEventListener('mouseup', checkEndDrag);
+            //drawingCanvas.addEventListener('mouseout', checkEndDrag);
+            ////////////
             let hammer = new window['Hammer'](drawingCanvas);
             hammer.get('pan').set({ direction: window['Hammer'].DIRECTION_ALL });
 
@@ -342,9 +335,9 @@ export class PunchPage implements OnInit {
                     let magicn = i % 2;
                     
                     ctx.fillStyle = (magicn === 0) ? 'rgb(219,19,39)' : '#ffffff'//white/red;
-                        /*(
-                          (magicn === 1) ? 'rgb(219,19,39)' :'rgb(255,225,32)' ///red/yellow
-                        );*/
+                        ///
+                         // (magicn === 1) ? 'rgb(219,19,39)' :'rgb(255,225,32)' ///red/yellow
+                        //);
                     ctx.beginPath();
                     ctx.arc(0, 0, this.pRadius, i * this.deltaPI, (i + 1) * this.deltaPI);
                     ctx.lineTo(0, 0);
@@ -524,13 +517,13 @@ export class PunchPage implements OnInit {
         /////////////////////////////
         // math
         /////////////////////////////
-        /**
-         * easing equations from http://gizma.com/easing/
-         * t = current time
-         * b = start value
-         * c = delta value
-         * d = duration
-         */
+        //
+         // easing equations from http://gizma.com/easing/
+         // t = current time
+         // b = start value
+         // c = delta value
+         // d = duration
+         ///
         var Ease = {
             inCubic: function(t, b, c, d) {
                 t /= d;
@@ -562,8 +555,8 @@ export class PunchPage implements OnInit {
 
             return p;
         }
-        
+       
     }
-  
+  */ 
     
 }

@@ -1,14 +1,14 @@
 <ion-item style="--background:rgb(254,237,238)" lines="none" *ngIf="!reddah.networkConnected">
-    <ion-icon slot="start" name="wifi" color="medium"></ion-icon>
-    <ion-label color="medium">{{ 'Input.Error.NetworkError' | translate }}</ion-label>
+    <ion-icon slot="start" name="wifi"color="medium"></ion-icon>
+    <ion-label color="medium">{{ reddah.instant('Input.Error.NetworkError') }}</ion-label>
 </ion-item>
 <ion-content no-padding class="aboutContent">
     <ion-item lines="none">
         <ion-button clear slot="end" color="transparent" (click)="punchClock()" style="--box-shadow: none;">
-            <ion-icon color="point" is-active="false" name="calendar"></ion-icon>
+            <ion-icon color="point" is-active="false" name="today-outline"></ion-icon>
         </ion-button>
         <ion-button clear slot="end" color="transparent" (click)="goPost(1)" style="--box-shadow: none;">
-            <ion-icon color="dark" is-active="false" name="camera"></ion-icon>
+            <ion-icon color="dark" is-active="false" name="camera-outline"></ion-icon>
         </ion-button>
     </ion-item>
     <ion-item lines="none" style="--background:white;height:10px;">
@@ -21,85 +21,79 @@
         <ion-label slot="start">
             <div style="padding:5px 0 5px 0;" (click)="goCredit($event)">{{reddah.getDisplayName(userName)}}</div>
             <div style="display: flex;margin-top:5px;" (click)="goCredit($event)">
-                <ion-icon name="radio-button-off" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==1"></ion-icon>
-                <ion-icon name="ribbon" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==2"></ion-icon>
-                <ion-icon name="star-outline" color="primary" size="small" *ngIf="reddah.userLevelIcon(userName)==3"></ion-icon>
-                <ion-icon name="star" color="gold" size="small" *ngIf="reddah.userLevelIcon(userName)==4"></ion-icon>
-                <ion-icon name="medal" color="point" size="small" *ngIf="reddah.userLevelIcon(userName)==5"></ion-icon>
-                <ion-icon name="trophy" color="diamond" size="small" *ngIf="reddah.userLevelIcon(userName)==6"></ion-icon>
-                <ion-icon name="school" color="dark" size="small" *ngIf="reddah.userLevelIcon(userName)==7"></ion-icon>
+                <ion-icon *ngFor="let i of reddah.userLevelIconNumber(userName)" name="{{reddah.userLevelIcon(userName)}}" color="{{reddah.userLevelIconColor(userName)}}" size="small"></ion-icon>
                 <span style="color: gray;margin-left:5px;vertical-align: top;line-height: 18px;">
                     {{ reddah.appData('userpoint_'+userName) }}
                 </span>
             </div>
         </ion-label>
-        <ion-icon name="ios-qr-scanner" slot="end"></ion-icon>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="qr-code-outline"slot="end"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 <!--
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" (click)="goCredit($event)">
         <ion-icon class="menuIcon" name="ribbon" slot="start" color="point" size="medium"></ion-icon>
-        <ion-label>{{ 'Point.PointHistory' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-label>{{ reddah.instant('Point.PointHistory') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 -->
     
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop" (click)="goBookmark()">
-        <ion-icon class="menuIcon" slot="start" name="bookmark" color="danger" size="medium"></ion-icon>
-        <ion-label>{{ 'Menu.Mark' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon class="menuIcon" slot="start" name="bookmark"color="danger" size="medium"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.Mark') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item (click)="goPublicPage()">
-        <ion-icon class="menuIcon" name="ios-list" slot="start" color="subscribe" size="medium"></ion-icon>
-        <ion-label>{{ 'Menu.Publisher' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon class="menuIcon" name="list"slot="start" color="subscribe" size="medium"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.Publisher') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item lines="none" class="borderBottom" href="/search?type=3" detail="false">
-        <ion-icon class="menuIcon" name="infinite" slot="start" color="mini" size="medium"></ion-icon>
-        <ion-label>{{ 'Menu.MiniApp' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon class="menuIcon" name="infinite"slot="start" color="mini" size="medium"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.MiniApp') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 
 <!--
     <ion-item class="borderItem">
         <ion-icon slot="start" name="images" color="secondary" size="medium"></ion-icon>
         <ion-label>相册</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item class="borderItem">
         <ion-icon slot="start" name="card" color="warning" size="medium"></ion-icon>
         <ion-label>卡包</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 
     <ion-item lines="none" class="borderItem borderBottom">
         <ion-icon class="menuIcon" slot="start" name="happy" color="default" size="medium"></ion-icon>
         <ion-label>表情</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 -->
 
     <!--
     <ion-item class="borderTop" (click)="goPlatform()">
         <ion-icon class="menuIcon" name="ios-flask" color="mini" slot="start"></ion-icon>
-        <ion-label>{{ 'Menu.Platform' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.Platform') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>-->
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop" (click)="goMyReport()">
-        <ion-icon class="menuIcon" slot="start" name="logo-twitch" color="dark" size="medium"></ion-icon>
-        <ion-label>{{ 'Common.MyFeedback' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon class="menuIcon" slot="start" name="logo-twitch"color="dark" size="medium"></ion-icon>
+        <ion-label>{{ reddah.instant('Common.MyFeedback') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item lines="none" class="borderBottom" (click)="goSettings()">
-        <ion-icon class="menuIcon" slot="start" name="settings" color="primary" size="medium"></ion-icon>
-        <ion-label>{{ 'Menu.Settings' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon class="menuIcon" slot="start" name="settings"color="primary" size="medium"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.Settings') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 </ion-content>
 

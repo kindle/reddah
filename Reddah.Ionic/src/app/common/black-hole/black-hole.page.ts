@@ -1,9 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
-import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { CacheService } from "ionic-cache";
 
 @Component({
     selector: 'app-black-hole',
@@ -19,18 +16,9 @@ export class BlackHolePage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
-        private popoverController: PopoverController,
         public modalController: ModalController,
-        private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
-
-    ){
-        
-    }
-
-    
+    ){}
 
     async ngOnInit(){
         

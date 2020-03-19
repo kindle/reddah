@@ -1,8 +1,8 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-label>{{ 'Point.PointHistory' | translate }}</ion-label>
+    <ion-label>{{ reddah.instant('Point.PointHistory') }}</ion-label>
 </ion-item>
 <ion-content #pageTop style="background-color: white;">
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
@@ -13,7 +13,7 @@
         <ion-grid>
             <ion-row>
                 <ion-item lines="none" style="width:100%;">
-                    <ion-label text-wrap style="margin-top:0;">{{reddah.pointReason.get(point.Reason) | translate}}</ion-label>
+                    <ion-label text-wrap style="margin-top:0;">{{reddah.pointReason.get(point.Reason)}}</ion-label>
                     <ion-text slot="end" *ngIf="point.V>0" style="font-weight: bold;font-size:large;" color="danger">+{{point.V}}</ion-text>
                     <ion-text slot="end" *ngIf="point.V==0" style="font-weight: bold;font-size:large;" color="dark">{{point.V}}</ion-text>
                     <ion-text slot="end" *ngIf="point.V<0" style="font-weight: bold;font-size:large;" color="primary">-{{point.V}}</ion-text>
@@ -29,7 +29,7 @@
         </ion-grid>
     </ion-card>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
-        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'Button.Loading' | translate }}">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ reddah.instant('Button.Loading') }}">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

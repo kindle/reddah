@@ -1,10 +1,10 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
     <ion-text *ngIf="showTitle">{{reddah.appData('usernickname_'+userName)}}</ion-text>
     <ion-button clear slot="end" color="light" (click)="presentActionSheet()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-more"></ion-icon>
+        <ion-icon is-active="false" name="ellipsis-horizontal"></ion-icon>
     </ion-button>
 </ion-item>
 <ion-content #pageTop style="background-color:white;" [scrollEvents]="true" (ionScroll)="onScroll($event)">
@@ -13,13 +13,13 @@
             <img src="{{reddah.appData('userphoto_'+userName, 'photo.svg')}}" (click)="viewer(reddah.appData('userphoto_'+userName))" class="portrait">
         </ion-thumbnail>
         <ion-label text-wrap style="margin: 20px;font-weight: bold;">{{reddah.appData('usernickname_'+userName)}}</ion-label>
-        <ion-label id="scrollTag" text-wrap text-center style="margin: 10px;padding: 10px 30px;">{{reddah.appData('usersignature_'+userName)}}</ion-label>
+        <ion-label id="scrollTag" text-wrap style="margin: 10px;padding: 10px 30px;text-align: center;">{{reddah.appData('usersignature_'+userName)}}</ion-label>
     
         <!--<ion-note text-wrap style="margin: 10px 0 40px 0;display:none;">{{18}}位朋友关注</ion-note>-->
     
-        <span class="user-name" (click)="focus()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0">{{ 'Pop.Focus' | translate }}</span>
+        <span class="user-name" (click)="focus()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0">{{ reddah.instant('Pop.Focus') }}</span>
         <span class="user-name" style="margin: 0 0 20px 0;" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
-            <i (click)="chat()">{{ 'Pop.EnterPub' | translate }}</i> | <i (click)="unfocus()">{{ 'Pop.Unfocus' | translate }}</i>
+            <i (click)="chat()">{{ reddah.instant('Pop.EnterPub') }}</i> | <i (click)="unfocus()">{{ reddah.instant('Pop.Unfocus') }}</i>
         </span>
     </div>
     <ion-refresher (ionRefresh)="doRefresh($event)">
@@ -28,7 +28,7 @@
     </ion-refresher>
     <div style="display: flex; justify-content: center;"><ion-spinner name="dots" *ngIf="showLoading"></ion-spinner></div>
     <ng-template ngFor let-article let-i="index" [ngForOf]="articles" id="homepage" style="color: #636468;font-family: 'Segoe UI', Arial, sans-serif;">
-        <div *ngIf="i%7==0" text-center style="padding-top:35px;color:#878787;">{{article.CreatedOnOrg| date: 'MM-dd HH:mm'}}</div>
+        <div *ngIf="i%7==0" style="padding-top:35px;color:#878787;text-align:center;">{{article.CreatedOnOrg| date: 'MM-dd HH:mm'}}</div>
         <div class="postModuleLiner" *ngIf="article.VideoUrl.length>0">
             <div>
                 <span [class.articleTextRead]="article.Read" class="articleTitle" (click)="view(article)">{{reddah.htmlDecode(article.Title)}}</span>
@@ -40,8 +40,8 @@
                 <div class="postClear"></div>
             </div>
             <div class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
-                <div style="display: flex;" (click)="goUser(article.UserName)">
-                    <ion-icon color="medium" name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
+                <div style="display: flex;margin-top:5px;" (click)="goUser(article.UserName)">
+                    <ion-icon color="medium" name="chatbox-ellipses-outline"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
                     <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
                         
                     </span>
@@ -64,8 +64,8 @@
                 </ion-card-content>
             </div>
             <div *ngIf="article.ImageUrls.length>=3" class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
-                <div style="display: flex;" (click)="goUser(article.UserName)">
-                    <ion-icon color="medium" name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
+                <div style="display: flex;margin-top:5px;" (click)="goUser(article.UserName)">
+                    <ion-icon color="medium" name="chatbox-ellipses-outline"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
                     <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
                         
                     </span>
@@ -85,8 +85,8 @@
                 <div [class.articleTextRead]="article.Read">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
             </div>
             <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3" class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
-                <div style="display: flex;" (click)="goUser(article.UserName)">
-                    <ion-icon color="medium" name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
+                <div style="display: flex;margin-top:5px;" (click)="goUser(article.UserName)">
+                    <ion-icon color="medium" name="chatbox-ellipses-outline"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
                     <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
                         
                     </span>
@@ -103,8 +103,8 @@
                 </span>
             </div>
             <div *ngIf="article.ImageUrls.length==0" class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
-                <div style="display: flex;" (click)="goUser(article.UserName)">
-                    <ion-icon color="medium" name="text"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
+                <div style="display: flex;margin-top:5px;" (click)="goUser(article.UserName)">
+                    <ion-icon color="medium" name="chatbox-ellipses-outline"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
                     <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
                         
                     </span>
@@ -114,7 +114,7 @@
     </ng-template>
     
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'Button.Loading' | translate }}">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ reddah.instant('Button.Loading') }}">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

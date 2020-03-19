@@ -1,15 +1,15 @@
 <ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop style="background-color:white;">
     <div class="headerStart" #headerStart slot="fixed">
         <ion-item color="transparent" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
-            <ion-icon name="ios-arrow-back" color="light" slot="start" (click)="close()" class="backbutton"></ion-icon>
-            <ion-label color="light">{{ 'Common.MyPhoto' | translate }}</ion-label>
+            <ion-icon name="arrow-back-outline"color="light" slot="start" (click)="close()" class="backbutton"></ion-icon>
+            <ion-label color="light">{{ reddah.instant('Common.MyPhoto') }}</ion-label>
             <ion-icon name="add" color="light" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll slot="fixed">
         <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
-            <ion-icon name="ios-arrow-back" slot="start" (click)="close()" class="backbutton"></ion-icon>
-            <ion-label>{{ 'Common.MyPhoto' | translate }}</ion-label>
+            <ion-icon name="arrow-back-outline"slot="start" (click)="close()" class="backbutton"></ion-icon>
+            <ion-label>{{ reddah.instant('Common.MyPhoto') }}</ion-label>
             <ion-icon name="add" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
@@ -25,7 +25,7 @@
             </div>
             <div style="width:100%;border: 0px solid red;">
                 <div *ngIf="article.Title.length>0&&article.Title.length<100">
-                    <div style="background-color: white; padding: 0 0 4px 0;margin-bottom:0px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                    <div style="background-color: white; padding: 0 0 4px 15px;margin-bottom:0px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
                 </div>
                 <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
                     <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 2px;margin-bottom:5px;width:96%;" 
@@ -71,14 +71,14 @@
                 </ion-item>
                 <ion-item no-padding lines="none" style="margin:2px 0;">
                     <ion-note color="dark">{{reddah.getSendTime(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
-                    <ion-note color="secondary" style="margin-left: 5px;" *ngIf="isMe(article.UserName)" (click)="delete(article)">{{ 'Comment.Delete' | translate }}</ion-note>
+                    <ion-note color="secondary" style="margin-left: 5px;" *ngIf="isMe(article.UserName)" (click)="delete(article)">{{ reddah.instant('Comment.Delete') }}</ion-note>
                 </ion-item>
             </div>
         </div>
         
         <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
             <ion-infinite-scroll-content loadingSpinner="bubbles" 
-                loadingText="{{ 'Button.Loading' | translate }}">
+                loadingText="{{ reddah.instant('Button.Loading') }}">
             </ion-infinite-scroll-content>
         </ion-infinite-scroll>
     </div>

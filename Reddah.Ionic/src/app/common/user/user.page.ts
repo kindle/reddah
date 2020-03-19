@@ -1,15 +1,12 @@
 import { Component, OnInit, Input, Renderer2 } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController, ActionSheetController, NavParams, AlertController } from '@ionic/angular';
+import { LoadingController, NavController, ActionSheetController, NavParams, AlertController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { ApplyFriendPage } from '../../friend/apply-friend/apply-friend.page';
 import { TimeLinePage } from '../../mytimeline/timeline/timeline.page';
-import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
-import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SettingNoteLabelPage } from '../../settings/setting-note-label/setting-note-label.page';
 import { ChatFirePage } from '../../chatfire/chat-fire.page';
 import { MorePage } from '../more/more.page';
@@ -30,20 +27,12 @@ export class UserPage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
-        private renderer: Renderer2,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
-        private popoverController: PopoverController,
-        private photoLibrary: PhotoLibrary,
         private cacheService: CacheService,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
         public actionSheetController: ActionSheetController,
-        private navParams: NavParams,
         private alertController: AlertController,
-        private translate: TranslateService,
     ){}
 
     isFriend = false;
@@ -127,8 +116,8 @@ export class UserPage implements OnInit {
                 const modal = await this.modalController.create({
                     component: AddFeedbackPage,
                     componentProps: { 
-                        title: this.translate.instant("Pop.Report"),
-                        desc: this.translate.instant("Pop.ReportReason"),
+                        title: this.reddah.instant("Pop.Report"),
+                        desc: this.reddah.instant("Pop.ReportReason"),
                         feedbackType: 4,
                         article: mini
                     },
@@ -141,7 +130,7 @@ export class UserPage implements OnInit {
                 const modal = await this.modalController.create({
                     component: ShareChooseChatPage,
                     componentProps: { 
-                        title: this.translate.instant("Common.Choose"),
+                        title: this.reddah.instant("Common.Choose"),
                         article: mini,
                     },
                     cssClass: "modal-fullscreen",
@@ -188,7 +177,7 @@ export class UserPage implements OnInit {
         const actionSheet = await this.actionSheetController.create({
             //header: '',
             buttons: [{
-              text: this.translate.instant("Common.Refresh"),
+              text: this.reddah.instant("Common.Refresh"),
               icon: 'refresh',
               handler: () => {
                   this.clearCacheAndReload();
@@ -203,7 +192,7 @@ export class UserPage implements OnInit {
             }*/
             ].concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?
                 [{
-                    text: this.translate.instant("Pop.Report"),
+                    text: this.reddah.instant("Pop.Report"),
                     icon: 'alert',
                     handler: () => {
                         this.report();                  
@@ -211,7 +200,7 @@ export class UserPage implements OnInit {
                 }]:[]
             ).concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?
             [{
-                text: this.translate.instant("Comment.Delete"),
+                text: this.reddah.instant("Comment.Delete"),
                 icon: 'ios-trash',
                 handler: () => {
                     this.delConfirm();                  
@@ -227,8 +216,8 @@ export class UserPage implements OnInit {
         const modal = await this.modalController.create({
             component: AddFeedbackPage,
             componentProps: { 
-                title: this.translate.instant("Pop.Report"),
-                desc: this.translate.instant("Pop.ReportUserReason"),
+                title: this.reddah.instant("Pop.Report"),
+                desc: this.reddah.instant("Pop.ReportUserReason"),
                 feedbackType: 6,
                 article: null,
                 userName: this.userName
@@ -241,18 +230,18 @@ export class UserPage implements OnInit {
 
     async delConfirm(){
         const alert = await this.alertController.create({
-          header: this.translate.instant("Confirm.Title"),
-          message: this.translate.instant("Confirm.DeleteMessage"),
+          header: this.reddah.instant("Confirm.Title"),
+          message: this.reddah.instant("Confirm.DeleteMessage"),
           buttons: [
             {
-                text: this.translate.instant("Confirm.Cancel"),
+                text: this.reddah.instant("Confirm.Cancel"),
                 cssClass: 'secondary',
                 handler: (blah) => {
                     
                 }
             }, 
             {
-                text: this.translate.instant("Comment.Delete"),
+                text: this.reddah.instant("Comment.Delete"),
                 handler: () => {
                     let formData = new FormData();
                     formData.append("targetUser", this.userName);

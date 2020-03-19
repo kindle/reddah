@@ -20,12 +20,8 @@ export class WormHolePage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
-        private popoverController: PopoverController,
-        public modalController: ModalController,
-        private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
+        public modalController: ModalController
     ){}
 
     async ngOnInit(){

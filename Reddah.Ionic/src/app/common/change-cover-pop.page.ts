@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { ChangePhotoPage } from '../common/change-photo/change-photo.page';
 import { PopoverController, ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { ReddahService } from '../reddah.service';
 
 @Component({
   template: `
       <ion-item lines="none" button (click)="change()">
-          <ion-label>{{ 'Pop.ChangeCover' | translate }}</ion-label>
+          <ion-label>{{ reddah.instant('Pop.ChangeCover') }}</ion-label>
       </ion-item>
   `
 })
@@ -14,7 +14,7 @@ export class ChangeCoverPopPage {
   constructor(
       public popoverController: PopoverController,
       public modalController: ModalController,
-      public translateService: TranslateService,
+      public reddah: ReddahService,
   ) {}
 
   async change(){
@@ -24,9 +24,9 @@ export class ChangeCoverPopPage {
       const changePhotoModal = await this.modalController.create({
           component: ChangePhotoPage,
           componentProps: { 
-            title : this.translateService.instant("Pop.ChangeCover"),
-            tag : "cover",
-            targetUserName: ""
+              title : this.reddah.instant("Pop.ChangeCover"),
+              tag : "cover",
+              targetUserName: ""
           },
           cssClass: "modal-fullscreen",
       });

@@ -23,10 +23,10 @@
 </ion-fab>
 <ion-fab vertical="top" horizontal="start" slot="fixed" [hidden]="loaded">
     <ion-fab-button (click)="close()" color="light" mini>
-        <ion-icon name="ios-arrow-back"></ion-icon>
+        <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-fab-button>
 </ion-fab>
-<ion-content center text-center class="vertical-align-content" (click)="bodyClick()"
+<ion-content class="vertical-align-content" (click)="bodyClick()"
     style="--background:white;" [hidden]="loaded">
     <ion-grid style="height:80%;">
           <ion-row center style="width:100%;">
@@ -34,7 +34,7 @@
                         <img class="logoPortrait" src="{{reddah.appData('userphoto_'+guid, 'photo.svg')}}">
                         <br>
                         <h2 no-padding no-margin>
-                          {{ 'Button.Loading' | translate }}
+                          {{ reddah.instant('Button.Loading') }}
                         </h2>
                 </ion-col>
           </ion-row>

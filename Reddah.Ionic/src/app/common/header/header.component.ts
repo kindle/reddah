@@ -3,7 +3,6 @@ import { ModalController, PopoverController, Platform } from '@ionic/angular';
 import { SearchPage } from '../search/search.page';
 import { HeaderAddPage } from '../header-add-pop.page';
 import { LocalStorageService } from 'ngx-webstorage';
-import { TranslateService } from '@ngx-translate/core';
 import { ReddahService } from '../../reddah.service';
 
 @Component({
@@ -21,12 +20,10 @@ export class HeaderComponent {
         private popoverController: PopoverController,
         private platform: Platform,
         private localStorageService: LocalStorageService,
-        private translate: TranslateService,
         public reddah: ReddahService,
     ) { 
-        let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-        this.translate.setDefaultLang(currentLocale);
-        this.translate.use(currentLocale);
+        //let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+        //this.reddah.loadTranslate(currentLocale);
     }
 
     async goSearch(){

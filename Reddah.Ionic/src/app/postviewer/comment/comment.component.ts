@@ -30,7 +30,6 @@ export class CommentComponent implements OnInit {
     userName;
     constructor(
         public reddah: ReddahService,
-        public translate: TranslateService,
         private popoverController: PopoverController,
         private modalController: ModalController,
         private cacheService: CacheService,
@@ -191,16 +190,16 @@ export class CommentComponent implements OnInit {
 
     async delete(comment){
             const alertCtl = await this.alertController.create({
-              header: this.translate.instant("Confirm.Title"),
-              message: this.translate.instant("Confirm.DeleteMessage"),
+              header: this.reddah.instant("Confirm.Title"),
+              message: this.reddah.instant("Confirm.DeleteMessage"),
               buttons: [
                 {
-                    text: this.translate.instant("Confirm.Cancel"),
+                    text: this.reddah.instant("Confirm.Cancel"),
                     cssClass: 'secondary',
                     handler: _ => {}
                 }, 
                 {
-                    text: this.translate.instant("Comment.Delete"),
+                    text: this.reddah.instant("Comment.Delete"),
                     handler: () => {
                         let formData = new FormData();
                         formData.append("Id", JSON.stringify(comment.Id));
@@ -216,7 +215,7 @@ export class CommentComponent implements OnInit {
                                 
                             }
                             else{
-                                let msg = this.translate.instant(`Service.${result.Success}`);
+                                let msg = this.reddah.instant(`Service.${result.Success}`);
                                 this.reddah.toast(msg, "danger")
                             }
                             

@@ -1,15 +1,15 @@
 <ion-footer class="chat-footer">
     <ion-item lines="none" color="light">
-        <ion-icon name="mic" size="medium" (click)="switchSpeak()" *ngIf="!showSpeakBox"></ion-icon>
+        <ion-icon name="mic-outline"size="medium" (click)="switchSpeak()" *ngIf="!showSpeakBox"></ion-icon>
         <ion-textarea class="newChatComment" autoresize rows="1" cols="21" (click)="hide()"
         #newChatComment id="newChatComment" [(ngModel)]="commentContent" *ngIf="!showSpeakBox"></ion-textarea>
-        <ion-icon name="apps" size="medium" (click)="switchSpeak()" *ngIf="showSpeakBox"></ion-icon>
-        <ion-textarea [class.audio-pressed]="isPressed" class="newChatComment" autoresize readonly rows="1" cols="21" text-center
+        <ion-icon name="apps-outline"size="medium" (click)="switchSpeak()" *ngIf="showSpeakBox"></ion-icon>
+        <ion-textarea [class.audio-pressed]="isPressed" class="newChatComment" autoresize readonly rows="1" cols="21"
         placeholder="{{speakDesc}}" *ngIf="showSpeakBox" (press)="startSpeak()" (pressup)="stopSpeak()"></ion-textarea>
         
-        <ion-icon slot="end" name="happy" size="medium" (click)="toggleFacePanel()" *ngIf="!showFacePanel"></ion-icon>
-        <ion-icon slot="end" name="apps" size="medium" (click)="toggleFacePanel()" *ngIf="showFacePanel"></ion-icon>
-        <ion-icon slot="end" name="add-circle-outline" size="medium" (click)="toggleFunctionPanel()" *ngIf="!commentContent"></ion-icon>
+        <ion-icon slot="end" name="happy-outline"size="medium" (click)="toggleFacePanel()" *ngIf="!showFacePanel"></ion-icon>
+        <ion-icon slot="end" name="apps-outline"size="medium" (click)="toggleFacePanel()" *ngIf="showFacePanel"></ion-icon>
+        <ion-icon slot="end" name="add-circle-outline"size="medium" (click)="toggleFunctionPanel()" *ngIf="!commentContent"></ion-icon>
         <ion-button slot="end" (click)="submit()" color="primary" *ngIf="commentContent" [disabled]="selectedArticleId<0">发送</ion-button>
     </ion-item>
     <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>

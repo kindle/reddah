@@ -1,14 +1,10 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { CacheService } from "ionic-cache";
-import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
-import { AppRate } from '@ionic-native/app-rate/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { Platform } from '@ionic/angular'; 
 import { AlertController, ActionSheetController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
@@ -29,7 +25,6 @@ export class SettingAboutPage implements OnInit {
         public reddah: ReddahService,
         public authService: AuthService,
         private actionSheetController: ActionSheetController,
-        private translate: TranslateService,
         private iab: InAppBrowser,
         private alertController: AlertController,
     ) { 
@@ -128,7 +123,7 @@ export class SettingAboutPage implements OnInit {
         }
 
         const actionSheet = await this.actionSheetController.create({
-            header: this.translate.instant("About.BuyBeer"),
+            header: this.reddah.instant("About.BuyBeer"),
             buttons: [
             {
                 text: 'Paypal',

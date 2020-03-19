@@ -1,15 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, Renderer2 } from '@angular/core';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { Component, OnInit, Input } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
-import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController, ActionSheetController  } from '@ionic/angular';
+import { LoadingController, NavController, ActionSheetController  } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
-import { CacheService } from "ionic-cache";
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import * as HighCharts from 'highcharts';
-var Highcharts = require('highcharts/highstock');
+//var Highcharts = require('highcharts/highstock');
 
 @Component({
   selector: 'app-stock',
@@ -23,18 +16,10 @@ export class StockPage implements OnInit {
 
     @Input() s: string;
 
-    constructor(private reddah : ReddahService,
+    constructor(public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
-        private renderer: Renderer2,
         public modalController: ModalController,
-        private localStorageService: LocalStorageService,
-        private popoverController: PopoverController,
-        private photoLibrary: PhotoLibrary,
-        private cacheService: CacheService,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
         public actionSheetController: ActionSheetController,
         ){
         
@@ -83,7 +68,7 @@ export class StockPage implements OnInit {
                 console.log(ohlc);
                 console.log(volume);
 
-
+/*
                 Highcharts.stockChart('container', {
                     title: {
                         text: this.s + ' Historical'
@@ -161,6 +146,7 @@ export class StockPage implements OnInit {
                     }
                     ]
                 });
+                */
             }
         });
     }

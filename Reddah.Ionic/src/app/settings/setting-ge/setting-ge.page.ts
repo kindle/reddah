@@ -5,7 +5,6 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
 import { LocalePage } from '../../common/locale/locale.page';
-import { TranslateService } from '@ngx-translate/core';
 import { SettingFontPage } from '../setting-font/setting-font.page';
 
 @Component({
@@ -25,7 +24,6 @@ export class SettingGePage implements OnInit {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         public authService: AuthService,
-        private translate: TranslateService,
         private zone: NgZone,
     ) { 
         this.userName = this.reddah.getCurrentUser();
@@ -71,15 +69,14 @@ export class SettingGePage implements OnInit {
         await changeLocaleModal.present();
         const { data } = await changeLocaleModal.onDidDismiss();
         if(data){
-            this.zone.run(()=>{
-                let newLocale = this.localStorageService.retrieve("Reddah_Locale");
-                this.translate.setDefaultLang(newLocale);
-                
-                this.reddah.Locales.forEach((value, index, arr)=>{
-                    if(newLocale===value.Name)
-                        this.currentLocaleInfo = value.Description;
-                });
-            })
+            let newLocale = this.localStorageService.retrieve("Reddah_Locale");
+            this.reddah.loadTranslate(newLocale);
+            
+            this.reddah.Locales.forEach((value, index, arr)=>{
+                if(newLocale===value.Name)
+                    this.currentLocaleInfo = value.Description;
+            });
+            this.currentLocale = newLocale;
         }
     }
 
@@ -96,7 +93,7 @@ export class SettingGePage implements OnInit {
         //clear mini history
         this.localStorageService.clear("Reddah_Recent_4_"+this.userName);
         //this.localStorageService.clear(); //this will force logout
-        this.reddah.toast(this.translate.instant("Common.CacheClear"));
+        this.reddah.toast(this.reddah.instant("Common.CacheClear"));
     }
 
 }

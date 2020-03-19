@@ -10,7 +10,7 @@ import { CacheService } from "ionic-cache";
 //import * as firebase from 'firebase';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { Globalization } from '@ionic-native/globalization';
+import { Globalization } from '@ionic-native/globalization/ngx';
 import { ReddahService } from './reddah.service';
 import { AuthService } from './auth.service';
 import { Queue } from './model/UserModel';
@@ -25,7 +25,6 @@ export class AppComponent {
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
-        private translate: TranslateService,
         private localStorageService: LocalStorageService,
         public modalController: ModalController,
         private menu: MenuController,
@@ -33,10 +32,11 @@ export class AppComponent {
         private alertController: AlertController,
         private popoverCtrl: PopoverController,
         private router: Router,
+        private globalization: Globalization,
         //private imageLoaderConfigService: ImageLoaderConfigService,
         private cacheService: CacheService,
         private androidPermissions: AndroidPermissions,
-        private reddah: ReddahService,
+        public reddah: ReddahService,
         private authService: AuthService,
         private zone: NgZone,
         private network: Network,
@@ -68,27 +68,31 @@ export class AppComponent {
         if(currentLocale==null){
             if(this.platform.is('cordova'))
             { 
-                Globalization.getPreferredLanguage()
+                this.globalization.getPreferredLanguage()
                 .then(res => {
                     this.localStorageService.store("Reddah_Locale", res.value);
-                    this.translate.setDefaultLang(res.value);
+                    //this.translate.setDefaultLang(res.value);
+                    this.reddah.loadTranslate(res.value);
                 })
                 .catch(e => {
                     this.localStorageService.store("Reddah_Locale", defaultLocale);
-                    this.translate.setDefaultLang(defaultLocale);
+                    //this.translate.setDefaultLang(defaultLocale);
+                    this.reddah.loadTranslate(defaultLocale);
                 });
             }
             else{
                 this.localStorageService.store("Reddah_Locale", defaultLocale);
-                this.translate.setDefaultLang(defaultLocale);
-                this.translate.use(defaultLocale);
+                //this.translate.setDefaultLang(defaultLocale);
+                this.reddah.loadTranslate(defaultLocale);
+                //this.translate.use(defaultLocale);
             }
 
         }
         else{
             this.zone.run(()=>{
-                this.translate.setDefaultLang(currentLocale);
-                this.translate.use(currentLocale);
+                //this.translate.setDefaultLang(currentLocale);
+                //this.translate.use(currentLocale);
+                this.reddah.loadTranslate(currentLocale);
             })
         }
 
@@ -177,25 +181,25 @@ export class AppComponent {
     lastTimeBackPress = 0;
     timePeriodToExit = 2000;
 
-    @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
-    @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
+    //@ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
+    //@ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
     
     public alertShown:boolean = false;
 
     async presentAlertConfirm() {
         const alert = await this.alertController.create({
-            header: this.translate.instant("Confirm.Title"),
-            message: this.translate.instant("Confirm.Message"),
+            header: this.reddah.instant("Confirm.Title"),
+            message: this.reddah.instant("Confirm.Message"),
             buttons: [
               {
-                text: this.translate.instant("Confirm.Cancel"),
+                text: this.reddah.instant("Confirm.Cancel"),
                 role: 'cancel',
                 cssClass: 'secondary',
                 handler: (blah) => {
                   this.alertShown=false;
                 }
               }, {
-                text: this.translate.instant("Confirm.Yes"),
+                text: this.reddah.instant("Confirm.Yes"),
                 handler: () => {
                   navigator['app'].exitApp();
                 }
@@ -255,7 +259,7 @@ export class AppComponent {
             } catch (error) {
 
             }
-
+/*
             this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
                 if (outlet && outlet.canGoBack()) 
                 {
@@ -276,7 +280,9 @@ export class AppComponent {
                 }
                 
             });
+*/
         });
+
     }
 
 }

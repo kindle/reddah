@@ -1,9 +1,9 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-text>{{ 'Menu.Message' | translate }}</ion-text>
-    <ion-text slot="end" (click)="clear()">{{ 'Common.Clear' | translate }}</ion-text>
+    <ion-text>{{ reddah.instant('Menu.Message') }}</ion-text>
+    <ion-text slot="end" (click)="clear()">{{ reddah.instant('Common.Clear') }}</ion-text>
 </ion-item>
 <ion-content no-padding>
     <ion-item *ngFor="let message of messages" (click)="viewTimeline(message.ArticleId)">
@@ -12,7 +12,7 @@
         </ion-avatar>
         <ion-label style="margin-left:10px;">
             <h3 class="user-name">{{reddah.getDisplayName(message.From)}}</h3>
-            <ion-icon name="heart-empty" class="likeIcon" *ngIf="message.Type==0"></ion-icon>
+            <ion-icon name="heart-outline" class="likeIcon" *ngIf="message.Type==0"></ion-icon>
             <ion-note *ngIf="message.Type==1">#@$#!</ion-note>
             <h4 *ngIf="reddah.checkIsToday(message.CreatedOn)">{{reddah.utcToLocal(message.CreatedOn,'HH:mm')}}</h4>
             <h4 *ngIf="!reddah.checkIsToday(message.CreatedOn)">{{reddah.utcToLocal(message.CreatedOn,'MM-dd HH:mm')}}</h4>
@@ -20,6 +20,6 @@
         <img slot="end" src="{{reddah.level2Cache(message.AritclePhoto)}}" class="messageContentPortrait">
     </ion-item>
     <ion-item lines="none" (click)="showStoredMessage()" *ngIf="!showAll">
-        <ion-label text-center>{{ 'Search.More' | translate }}...</ion-label>
+        <ion-label style="text-align:center;">{{ reddah.instant('Search.More') }}...</ion-label>
     </ion-item>    
 </ion-content>

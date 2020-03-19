@@ -2,10 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController, IonSlides } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LoadingController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { CacheService } from "ionic-cache";
-import { RegisterPage } from "../register/register.page"
 
 @Component({
     selector: 'app-forgot',
@@ -15,11 +11,8 @@ import { RegisterPage } from "../register/register.page"
 export class ForgotPage implements OnInit {
 
     constructor(private modalController: ModalController,
-        private reddah: ReddahService,
+        public reddah: ReddahService,
         private loadingController: LoadingController,
-        private translate: TranslateService,
-        private router: Router,
-        private cacheService: CacheService,
     ) { }
 
     ngOnInit() {
@@ -44,11 +37,11 @@ export class ForgotPage implements OnInit {
     
     async token() {
         if (this.email.length == 0) {
-            this.reddah.toast(this.translate.instant("Input.Error.EmailEmpty"));
+            this.reddah.toast(this.reddah.instant("Input.Error.EmailEmpty"));
         } 
         else {
             const loading = await this.loadingController.create({
-                message: this.translate.instant("Button.Loading"),
+                message: this.reddah.instant("Button.Loading"),
                 spinner: 'circles',
             });
             await loading.present();
@@ -56,22 +49,22 @@ export class ForgotPage implements OnInit {
             let formData = new FormData();
             formData.append("Email", this.email)
             //mail
-            formData.append("MailTitle", this.translate.instant("Mail.Reset.Title"));
-            formData.append("MailSub", this.translate.instant("Mail.Reset.Sub"));
-            formData.append("MailParaStart", this.translate.instant("Mail.Reset.ParaStart"));
-            formData.append("MailParaEnd", this.translate.instant("Mail.Reset.ParaEnd"));
+            formData.append("MailTitle", this.reddah.instant("Mail.Reset.Title"));
+            formData.append("MailSub", this.reddah.instant("Mail.Reset.Sub"));
+            formData.append("MailParaStart", this.reddah.instant("Mail.Reset.ParaStart"));
+            formData.append("MailParaEnd", this.reddah.instant("Mail.Reset.ParaEnd"));
 
             this.reddah.getSecurityToken(formData)
             .subscribe(result => 
             {
                 loading.dismiss();
                 if(result.Success==0){
-                    this.reddah.toast(this.translate.instant("Input.Error.GetTokenFromEmail"), "primary");
+                    this.reddah.toast(this.reddah.instant("Input.Error.GetTokenFromEmail"), "primary");
                     //show change password ui
                     this.taber = false;
                 }
                 else {
-                    let msg = this.translate.instant(`Service.${result.Success}`);
+                    let msg = this.reddah.instant(`Service.${result.Success}`);
                     this.reddah.toast(msg, "danger");
                 }
                 
@@ -81,20 +74,20 @@ export class ForgotPage implements OnInit {
 
     async submit(){
         if (this.password.length == 0) {
-            this.reddah.toast(this.translate.instant("Input.Error.PasswordEmpty"));
+            this.reddah.toast(this.reddah.instant("Input.Error.PasswordEmpty"));
         } 
         else if (this.confirmPassword.length == 0) {
-            this.reddah.toast(this.translate.instant("Input.Error.PasswordEmpty"));
+            this.reddah.toast(this.reddah.instant("Input.Error.PasswordEmpty"));
         } 
         else if (this.password != this.confirmPassword) {
-            this.reddah.toast(this.translate.instant("Input.Error.PasswordDifferent"));
+            this.reddah.toast(this.reddah.instant("Input.Error.PasswordDifferent"));
         } 
         else if (this.myToken.length == 0) {
-            this.reddah.toast(this.translate.instant("Input.Error.TokenEmpty"));
+            this.reddah.toast(this.reddah.instant("Input.Error.TokenEmpty"));
         } 
         else {
             const loading = await this.loadingController.create({
-                message: this.translate.instant("Button.Loading"),
+                message: this.reddah.instant("Button.Loading"),
                 spinner: 'circles',
             });
             await loading.present();
@@ -107,11 +100,11 @@ export class ForgotPage implements OnInit {
             {
                 loading.dismiss();
                 if(result.Success==0){
-                    this.reddah.toast(this.translate.instant("Input.Error.ResetResult"), "primary");
+                    this.reddah.toast(this.reddah.instant("Input.Error.ResetResult"), "primary");
                     this.close();
                 }
                 else {
-                    let msg = this.translate.instant(`Service.${result.Success}`);
+                    let msg = this.reddah.instant(`Service.${result.Success}`);
                     this.reddah.toast(msg, "danger");
                 }
                 

@@ -1,10 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { ReddahService } from '../../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { CacheService } from "ionic-cache";
 
 @Component({
     selector: 'app-punch-clock',
@@ -21,7 +18,6 @@ export class PunchClockPage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,

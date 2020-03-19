@@ -12,18 +12,15 @@ import { File, FileEntry } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
 import { AlertController, LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
-import { TranslateService } from '@ngx-translate/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import * as moment from 'moment';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
-import { Router } from '@angular/router';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { DatePipe } from '@angular/common';
 import { Md5 } from 'ts-md5/dist/md5';
-import { ToastOptions } from '@ionic-native/toast/ngx';
 
 @Injectable({
     providedIn: 'root'
@@ -36,20 +33,17 @@ export class ReddahService {
         private transfer: FileTransfer,
         private file: File,
         private toastController: ToastController,
-        private modalController: ModalController,
-        private alertController: AlertController,
         private platform: Platform,
         private cacheService: CacheService,
-        private translate: TranslateService,
         private iab: InAppBrowser,
-        private router: Router,
-        private ngZone: NgZone,
         private localNotifications: LocalNotifications,
         private device: Device,
         private appVersion: AppVersion,
         private datePipe: DatePipe,
-        private loadingController: LoadingController,
-    ) { }
+        private camera: Camera,
+    ) { 
+
+    }
 
     articles = [];
     loadedIds = [];
@@ -1003,9 +997,9 @@ export class ReddahService {
     createGroupChat(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
 
-        formData.append("title", this.translate.instant("Pop.GroupChatTitle"));
-        formData.append("annouce", this.translate.instant("Pop.GroupChatAnnouce"));
-        formData.append("update", this.translate.instant("Pop.GroupChatUpdate"));
+        formData.append("title", this.instant("Pop.GroupChatTitle"));
+        formData.append("annouce", this.instant("Pop.GroupChatAnnouce"));
+        formData.append("update", this.instant("Pop.GroupChatUpdate"));
 
         return this.http.post<any>(this.createGroupChatUrl, formData)
         .pipe(
@@ -1051,8 +1045,8 @@ export class ReddahService {
 
     addToGroupChat(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
-        formData.append('add', this.translate.instant('Pop.AddToGrp'));
-        formData.append('kick', this.translate.instant('Pop.KickGrp'));
+        formData.append('add', this.instant('Pop.AddToGrp'));
+        formData.append('kick', this.instant('Pop.KickGrp'));
         return this.http.post<any>(this.addToGroupChatUrl, formData)
         .pipe(
             tap(data => this.log('add to group chat')),
@@ -1333,185 +1327,279 @@ export class ReddahService {
         return this.datePipe.transform(new Date(),"yyyy-MM-dd"); 
     }
 
-    pointTasks=[
-        {
-            id:1, 
-            title: this.translate.instant("Point.TaskLoginTitle"),
-            description: this.translate.instant("Point.TaskLoginDescp"),
-            point: 1, 
-            key: "Login",
-            max: 1,
-            type: 0, //0:daily 1:once
-        },
-        {
-            id:2, 
-            title: this.translate.instant("Point.TaskReadTitle"),
-            description: this.translate.instant("Point.TaskReadDescp"),
-            point: 1, 
-            key: "Read",
-            max: 6,
-            type: 0,
-        },
-        {
-            id:3, 
-            title: this.translate.instant("Point.TaskMarkTitle"),
-            description: this.translate.instant("Point.TaskMarkDescp"),
-            point: 1, 
-            key: "Mark",
-            max: 2,
-            type: 0,
-        },
-        {
-            id:4, 
-            title: this.translate.instant("Point.TaskShareTitle"),
-            description: this.translate.instant("Point.TaskShareDescp"),
-            point: 1, 
-            key: "Share",
-            max: 2,
-            type: 0,
-        },
-        {
-            id:5, 
-            title: this.translate.instant("Point.TaskCommentTitle"),
-            description: this.translate.instant("Point.TaskCommentDescp"),
-            point: 1, 
-            key: "Comment",
-            max: 3,
-            type: 0,
-        },
-        {
-            id:6, 
-            title: this.translate.instant("Point.TaskFirstPhotoTitle"),
-            description: this.translate.instant("Point.TaskFirstPhotoDescp"),
-            point: 10, 
-            key: "Photo",
-            max: 10,
-            type: 1,
-        },
-        {
-            id:7, 
-            title: this.translate.instant("Point.TaskFirstSignatureTitle"),
-            description: this.translate.instant("Point.TaskFirstSignatureDescp"),
-            point: 10, 
-            key: "Signature",
-            max: 10,
-            type: 1,
-        },
-        {
-            id:8, 
-            title: this.translate.instant("Point.TaskFirstTimelineTitle"),
-            description: this.translate.instant("Point.TaskFirstTimelineDescp"),
-            point: 10, 
-            key: "Timeline",
-            max: 10,
-            type: 1,
-        },
-        {
-            id:9, 
-            title: this.translate.instant("Point.TaskFirstGameTitle"),
-            description: this.translate.instant("Point.TaskFirstGameDescp"),
-            point: 10, 
-            key: "Mini",
-            max: 10,
-            type: 1,
-        },
-        {
-            id:10, 
-            title: this.translate.instant("Point.TaskFirstFriendTitle"),
-            description: this.translate.instant("Point.TaskFirstFriendDescp"),
-            point: 10, 
-            key: "Friend",
-            max: 10,
-            type: 1,
-        },
-        {
-            id:11, 
-            title: this.translate.instant("Point.TaskFirstShakeTitle"),
-            description: this.translate.instant("Point.TaskFirstShakeDescp"),
-            point: 10, 
-            key: "Shake",
-            max: 10,
-            type: 1,
-        },
-        {
-            id:12, 
-            title: this.translate.instant("Point.TaskFirstEmailTitle"),
-            description: this.translate.instant("Point.TaskFirstEmailDescp"),
-            point: 10, 
-            key: "Email",
-            max: 10,
-            type: 1,
-        },
-    ];
+    pointTasks=[];
+    initPointTask(){
+        this.pointTasks=[
+            {
+                id:1, 
+                title: this.instant("Point.TaskLoginTitle"),
+                description: this.instant("Point.TaskLoginDescp"),
+                point: 1, 
+                key: "Login",
+                max: 1,
+                type: 0, //0:daily 1:once
+            },
+            {
+                id:2, 
+                title: this.instant("Point.TaskReadTitle"),
+                description: this.instant("Point.TaskReadDescp"),
+                point: 1, 
+                key: "Read",
+                max: 6,
+                type: 0,
+            },
+            {
+                id:3, 
+                title: this.instant("Point.TaskMarkTitle"),
+                description: this.instant("Point.TaskMarkDescp"),
+                point: 1, 
+                key: "Mark",
+                max: 2,
+                type: 0,
+            },
+            {
+                id:4, 
+                title: this.instant("Point.TaskShareTitle"),
+                description: this.instant("Point.TaskShareDescp"),
+                point: 1, 
+                key: "Share",
+                max: 2,
+                type: 0,
+            },
+            {
+                id:5, 
+                title: this.instant("Point.TaskCommentTitle"),
+                description: this.instant("Point.TaskCommentDescp"),
+                point: 1, 
+                key: "Comment",
+                max: 3,
+                type: 0,
+            },
+            {
+                id:6, 
+                title: this.instant("Point.TaskFirstPhotoTitle"),
+                description: this.instant("Point.TaskFirstPhotoDescp"),
+                point: 10, 
+                key: "Photo",
+                max: 10,
+                type: 1,
+            },
+            {
+                id:7, 
+                title: this.instant("Point.TaskFirstSignatureTitle"),
+                description: this.instant("Point.TaskFirstSignatureDescp"),
+                point: 10, 
+                key: "Signature",
+                max: 10,
+                type: 1,
+            },
+            {
+                id:8, 
+                title: this.instant("Point.TaskFirstTimelineTitle"),
+                description: this.instant("Point.TaskFirstTimelineDescp"),
+                point: 10, 
+                key: "Timeline",
+                max: 10,
+                type: 1,
+            },
+            {
+                id:9, 
+                title: this.instant("Point.TaskFirstGameTitle"),
+                description: this.instant("Point.TaskFirstGameDescp"),
+                point: 10, 
+                key: "Mini",
+                max: 10,
+                type: 1,
+            },
+            {
+                id:10, 
+                title: this.instant("Point.TaskFirstFriendTitle"),
+                description: this.instant("Point.TaskFirstFriendDescp"),
+                point: 10, 
+                key: "Friend",
+                max: 10,
+                type: 1,
+            },
+            {
+                id:11, 
+                title: this.instant("Point.TaskFirstShakeTitle"),
+                description: this.instant("Point.TaskFirstShakeDescp"),
+                point: 10, 
+                key: "Shake",
+                max: 10,
+                type: 1,
+            },
+            {
+                id:12, 
+                title: this.instant("Point.TaskFirstEmailTitle"),
+                description: this.instant("Point.TaskFirstEmailDescp"),
+                point: 10, 
+                key: "Email",
+                max: 10,
+                type: 1,
+            },
+        ];
+
+        this.pointReason = new Map()
+        //use get
+        .set('punchclock',this.instant("Point.PunchClock"))
+        .set('login',this.instant("Point.TaskLoginTitle"))
+        .set('read',this.instant("Point.TaskReadTitle"))
+        .set('mark',this.instant("Point.TaskMarkTitle"))
+        .set('share',this.instant("Point.TaskShareTitle"))
+        .set('comment',this.instant("Point.TaskCommentTitle"))
+        .set('photo',this.instant("Point.TaskFirstPhotoTitle"))
+        .set('signature',this.instant("Point.TaskFirstSignatureTitle"))
+        .set('timeline',this.instant("Point.TaskFirstTimelineTitle"))
+        .set('mini',this.instant("Point.TaskFirstGameTitle"))
+        .set('friend',this.instant("Point.TaskFirstFriendTitle"))
+        .set('shake',this.instant("Point.TaskFirstShakeTitle"))
+        .set('email',this.instant("Point.TaskFirstEmailTitle"))
+
+        //admin give
+        .set('report',this.instant("Point.TaskReportTitle"));   
+    }
+    
 
     userLevel(userName){
         let point = this.appData('userpoint_'+userName);
         if(point<50){
-            return this.translate.instant("Point.Level_Illiterate");
+            return this.instant("Point.Level_Illiterate");
         }
         else if(point<150){
-            return this.translate.instant("Point.Level_Bronze");
+            return this.instant("Point.Level_Bronze");
         }
         else if(point<300){
-            return this.translate.instant("Point.Level_Silver");
+            return this.instant("Point.Level_Silver");
         }
         else if(point<500){
-            return this.translate.instant("Point.Level_Gold");
+            return this.instant("Point.Level_Gold");
         }
         else if(point<1000){
-            return this.translate.instant("Point.Level_Illiterate");
+            return this.instant("Point.Level_Illiterate");
         }
         else if(point<2000){
-            return this.translate.instant("Point.Level_Diamond");
+            return this.instant("Point.Level_Diamond");
         }
         else{
-            return this.translate.instant("Point.Level_Erudite");
+            return this.instant("Point.Level_Erudite");
         }
+    }
+
+    userLevelIconNumber(userName){
+        let point = this.appData('userpoint_'+userName);
+        let returnValue = 1;
+        if(point<50){
+            if(point<15)
+                returnValue = 1;
+            else if(point<30)
+                returnValue = 2;
+            else
+                returnValue = 3;
+        }
+        else if(point<150){
+            if(point<80)
+                returnValue = 1;
+            else if(point<120)
+                returnValue = 2;
+            else
+                returnValue = 3;
+        }
+        else if(point<300){
+            if(point<200)
+                returnValue = 1;
+            else if(point<250)
+                returnValue = 2;
+            else
+                returnValue = 3;
+        }
+        else if(point<500){
+            if(point<375)
+                returnValue = 1;
+            else if(point<450)
+                returnValue = 2;
+            else
+                returnValue = 3;
+        }
+        else if(point<1000){
+            if(point<700)
+                returnValue = 1;
+            else if(point<900)
+                returnValue = 2;
+            else
+                returnValue = 3;
+        }
+        else if(point<2000){
+            if(point<1300)
+                returnValue = 1;
+            else if(point<1600)
+                returnValue = 2;
+            else
+                returnValue = 3;
+        }
+        else{
+            if(point<2500)
+                returnValue = 1;
+            else if(point<3000)
+                returnValue = 2;
+            else
+                returnValue = 3;
+        }
+        return new Array(returnValue);
     }
 
     userLevelIcon(userName){
         let point = this.appData('userpoint_'+userName);
         if(point<50){
-            return 1;
+            return "leaf";
         }
         else if(point<150){
-            return 2;
+            return "ribbon";
         }
         else if(point<300){
-            return 3;
+            return "star-outline";
         }
         else if(point<500){
-            return 4;
+            return "star";
         }
         else if(point<1000){
-            return 5;
+            return "medal";
         }
         else if(point<2000){
-            return 6;
+            return "trophy";
         }
         else{
-            return 7;
+            return "school";
+        }
+    }
+
+    userLevelIconColor(userName){
+        let point = this.appData('userpoint_'+userName);
+        if(point<50){
+            return "primary";
+        }
+        else if(point<150){
+            return "dark";
+        }
+        else if(point<300){
+            return "primary";
+        }
+        else if(point<500){
+            return "gold";
+        }
+        else if(point<1000){
+            return "point";
+        }
+        else if(point<2000){
+            return "diamond";
+        }
+        else{
+            return "dark";
         }
     }
 
     pointReason = new Map()
-    //use get
-    .set('punchclock',this.translate.instant("Point.PunchClock"))
-    .set('login',this.translate.instant("Point.TaskLoginTitle"))
-    .set('read',this.translate.instant("Point.TaskReadTitle"))
-    .set('mark',this.translate.instant("Point.TaskMarkTitle"))
-    .set('share',this.translate.instant("Point.TaskShareTitle"))
-    .set('comment',this.translate.instant("Point.TaskCommentTitle"))
-    .set('photo',this.translate.instant("Point.TaskFirstPhotoTitle"))
-    .set('signature',this.translate.instant("Point.TaskFirstSignatureTitle"))
-    .set('timeline',this.translate.instant("Point.TaskFirstTimelineTitle"))
-    .set('mini',this.translate.instant("Point.TaskFirstGameTitle"))
-    .set('friend',this.translate.instant("Point.TaskFirstFriendTitle"))
-    .set('shake',this.translate.instant("Point.TaskFirstShakeTitle"))
-    .set('email',this.translate.instant("Point.TaskFirstEmailTitle"))
-
-    //admin give
-    .set('report',this.translate.instant("Point.TaskReportTitle"));
+    
 
 
     //not completed return false; 
@@ -1603,8 +1691,7 @@ export class ReddahService {
     //******************************** */
     reloadLocaleSettings(){
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-        this.translate.setDefaultLang(currentLocale);
-        this.translate.use(currentLocale);
+        this.loadTranslate(currentLocale);
     }
 
     setCurrentUser(userName: string){
@@ -1727,7 +1814,7 @@ export class ReddahService {
                 }*/
                     
                 if(msg.indexOf("ERR_TIMED_OUT")>0)
-                    this.toast(this.translate.instant("Input.Error.ServiceError"), "danger")
+                    this.toast(this.instant("Input.Error.ServiceError"), "danger")
             }
 
             // TODO: better job of transforming error for user consumption
@@ -2311,6 +2398,9 @@ export class ReddahService {
 
 
     refreshHistoryCache(arr, key, id){
+        if(key=="")
+            return;
+
         let hisIndex = arr.indexOf(key);
         if(hisIndex>-1){
             arr.splice(hisIndex, 1);
@@ -2394,7 +2484,7 @@ export class ReddahService {
         let diffValue = now - dateTimeStamp;
         if(diffValue < 0){
             if(diffValue>-1000*60)
-                return this.translate.instant("Time.JustNow");
+                return this.instant("Time.JustNow");
             else 
                 return result;
         }
@@ -2412,25 +2502,25 @@ export class ReddahService {
         }
 
         if(yearC>=1){
-            result=parseInt(yearC+"") + split +this.translate.instant("Time.YearsAgo");
+            result=parseInt(yearC+"") + split +this.instant("Time.YearsAgo");
         }
         else if(monthC>=1){
-            result=parseInt(monthC+"") + split + this.translate.instant("Time.MonthsAgo");
+            result=parseInt(monthC+"") + split + this.instant("Time.MonthsAgo");
         }
         else if(weekC>=1){
-            result=parseInt(weekC+"") + split + this.translate.instant("Time.WeeksAgo");
+            result=parseInt(weekC+"") + split + this.instant("Time.WeeksAgo");
         }
         else if(dayC>=1){
-            result=(parseInt(dayC+"")==1?this.translate.instant("Time.Yesterday"):parseInt(dayC+"") + split +this.translate.instant("Time.DaysAgo"));
+            result=(parseInt(dayC+"")==1?this.instant("Time.Yesterday"):parseInt(dayC+"") + split +this.instant("Time.DaysAgo"));
         }
         else if(hourC>=1){
-            result=parseInt(hourC+"") + split +this.translate.instant("Time.HoursAgo");
+            result=parseInt(hourC+"") + split +this.instant("Time.HoursAgo");
         }
         else if(minC>=1){
-            result=parseInt(minC+"") + split +this.translate.instant("Time.MinutesAgo");
+            result=parseInt(minC+"") + split +this.instant("Time.MinutesAgo");
         }
         else if(secC>=1){
-            result=this.translate.instant("Time.JustNow");
+            result=this.instant("Time.JustNow");
         }
         
         return result;
@@ -2456,7 +2546,7 @@ export class ReddahService {
         let diffValue = now - dateTimeStamp;
         if(diffValue < 0){
             if(diffValue>-1000*60)
-                return this.translate.instant("Time.Today");
+                return this.instant("Time.Today");
             else 
                 return dateStr;
         }
@@ -2477,16 +2567,16 @@ export class ReddahService {
             return dateStr;
         }
         else if(dayC>=1){
-            result=(parseInt(dayC+"")==1?this.translate.instant("Time.Yesterday"):dateStr);
+            result=(parseInt(dayC+"")==1?this.instant("Time.Yesterday"):dateStr);
         }
         else if(hourC>=1){
-            return this.translate.instant("Time.Today");
+            return this.instant("Time.Today");
         }
         else if(minC>=1){
-            return this.translate.instant("Time.Today");
+            return this.instant("Time.Today");
         }
         else if(secC>=1){
-            return this.translate.instant("Time.Today");
+            return this.instant("Time.Today");
         }
         
         return dateStr;
@@ -2524,16 +2614,16 @@ export class ReddahService {
         let minC =diffValue/minute;
         let secC =diffValue/second;
         if(yearC>=1){
-            result=parseInt(yearC+"") + "" +this.translate.instant("Time.YearsAgo");
+            result=parseInt(yearC+"") + "" +this.instant("Time.YearsAgo");
         }
         else if(monthC>=1){
-            result=parseInt(monthC+"") + "" + this.translate.instant("Time.MonthsAgo");
+            result=parseInt(monthC+"") + "" + this.instant("Time.MonthsAgo");
         }
         else if(weekC>=1){
-            result=parseInt(weekC+"") + "" + this.translate.instant("Time.WeeksAgo");
+            result=parseInt(weekC+"") + "" + this.instant("Time.WeeksAgo");
         }
         else if(dayC>=1){
-            result=(parseInt(dayC+"")==1?this.translate.instant("Time.Yesterday"):parseInt(dayC+"") + "" +this.translate.instant("Time.DaysAgo"));
+            result=(parseInt(dayC+"")==1?this.instant("Time.Yesterday"):parseInt(dayC+"") + "" +this.instant("Time.DaysAgo"));
         }
         else if(hourC>=1){
             result=this.utcToLocal(dateStr,'HH:mm');
@@ -2672,10 +2762,10 @@ export class ReddahService {
                             this.setPoint('Mark', data.Message.GotPoint);
                             if(data.Success==0){
                                 this.toast(
-                                    this.translate.instant("Point.TaskMarkTitle")+
+                                    this.instant("Point.TaskMarkTitle")+
                                     this.lan2(
                                         " +"+data.Message.GotPoint+"/"+this.pointTasks[3].max,
-                                        this.translate.instant("Point.Fen")),
+                                        this.instant("Point.Fen")),
                                 "primary");
                             }
                         }
@@ -2686,7 +2776,7 @@ export class ReddahService {
     }
 
     async addBookmarkFormData(formData){
-        let text = `${this.translate.instant("Pop.Marked")}:${this.translate.instant("Menu.About")}/${this.translate.instant("Menu.Mark")}`;
+        let text = `${this.instant("Pop.Marked")}:${this.instant("Menu.About")}/${this.instant("Menu.Mark")}`;
         this.bookmark(formData).subscribe(result=>{
             if(result.Success==0)
             {
@@ -2837,9 +2927,9 @@ export class ReddahService {
             degree=degree*-1;
         let meters = parseInt(111*1000*degree+"");
         if(meters>1000){
-            return parseInt(meters/1000+"") + this.translate.instant("Pop.KM")
+            return parseInt(meters/1000+"") + this.instant("Pop.KM")
         }
-        return meters + this.translate.instant("Pop.M");
+        return meters + this.instant("Pop.M");
     }
 
     async adjustImage(url, flag){
@@ -2892,13 +2982,13 @@ export class ReddahService {
     async takePhoto(photos, formData){
         const options: CameraOptions = {
             quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
-            encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
             correctOrientation: true
         }
           
-        Camera.getPicture(options).then((imageData) => {
+        this.camera.getPicture(options).then((imageData) => {
             let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
             photos.push(data);
             this.addPhotoToFormData(data, formData);
@@ -2912,14 +3002,14 @@ export class ReddahService {
     {
         const options: CameraOptions = {
             quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
-            encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE,
-            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
             correctOrientation: true
         }
           
-        Camera.getPicture(options).then((imageData) => {
+        this.camera.getPicture(options).then((imageData) => {
             let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
             photos.push(data);
             this.addPhotoToFormData(data, formData);
@@ -3055,6 +3145,33 @@ export class ReddahService {
             //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
             //data: { secret: key }
         });
+    }
+
+    localeData;
+    loadTranslate(locale){
+        this.http.get<any>(`assets/i18n/${locale}.json`)
+        .subscribe(res =>{
+            this.localeData=this.flatten(res);
+            this.initPointTask();
+        }, error =>{
+            console.log(error);
+        });
+    }
+
+    instant(key){
+        return this.localeData[key];
+    }
+
+    flatten (obj, prefix = [], current = {}) {
+        if (typeof (obj) === 'object' && obj !== null) {
+          Object.keys(obj).forEach(key => {
+            this.flatten(obj[key], prefix.concat(key), current)
+          })
+        } else {
+          current[prefix.join('.')] = obj
+        }
+      
+        return current
     }
 
 }

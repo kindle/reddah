@@ -4,11 +4,9 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { NavController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { AuthService } from '../../auth.service';
-import { TranslateService } from '@ngx-translate/core';
 import { MyInfoPage } from '../../common/my-info/my-info.page';
 import { SettingListPage } from '../../settings/setting-list/setting-list.page';
 import { BookmarkPage } from '../../bookmark/bookmark.page';
-import { PlatformPage } from '../publisher/platform/platform.page';
 import { TimelinePopPage } from '../../common/timeline-pop.page';
 import { AddTimelinePage } from '../../mytimeline/add-timeline/add-timeline.page';
 import { PointPage } from '../../common/point/point.page';
@@ -23,6 +21,7 @@ import { PublisherPage } from '../publisher/publisher.page';
 })
 export class AboutPage implements OnInit {
     
+    //checked = false;
     userName: string;
     nickName: string;
 
@@ -33,7 +32,6 @@ export class AboutPage implements OnInit {
         public navController: NavController,
         public reddah: ReddahService,
         public authService: AuthService,
-        public translateService: TranslateService
     ) {
         this.userName = "Not Set";
         this.userName = this.localStorageService.retrieve("Reddah_CurrentUser");
@@ -46,9 +44,9 @@ export class AboutPage implements OnInit {
                     this.localStorageService.store(`Reddah_Login_PointToday_${this.reddah.getTodayString()}_${this.reddah.getCurrentUser()}`, data.Message.GotPoint);
                     if(data.Success==0){
                         this.reddah.toast(
-                            this.translateService.instant("Point.TaskLoginTitle")+
+                            this.reddah.instant("Point.TaskLoginTitle")+
                             " +"+this.reddah.lan2(data.Message.GotPoint,
-                            this.translateService.instant("Point.Fen")),
+                            this.reddah.instant("Point.Fen")),
                         "primary");
                         this.reddah.getUserPhotos(this.userName);
                     }

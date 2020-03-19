@@ -1,10 +1,10 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-label>{{ 'Menu.Contact' | translate }}</ion-label>
-    <ion-button *ngIf="!delete" color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ 'Confirm.Submit' | translate }}</ion-button>
-    <ion-button *ngIf="delete" color="danger" slot="end" (click)="submit_delete()" [disabled]="submitClicked">{{ 'Comment.Delete' | translate }}</ion-button>
+    <ion-label>{{ reddah.instant('Menu.Contact') }}</ion-label>
+    <ion-button *ngIf="!delete" color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ reddah.instant('Confirm.Submit') }}</ion-button>
+    <ion-button *ngIf="delete" color="danger" slot="end" (click)="submit_delete()" [disabled]="submitClicked">{{ reddah.instant('Comment.Delete') }}</ion-button>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;">
     <ion-list>

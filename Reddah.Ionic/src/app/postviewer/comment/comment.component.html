@@ -6,13 +6,13 @@
 <div *ngIf="data">
     <ion-item lines="none" color="light" id="TotalComments">
         <ion-label text-wrap>
-            {{ 'Comment.Comment' | translate }} {{count}}
+            {{ reddah.instant('Comment.Comment') }} {{count}}
         </ion-label>
         <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" 
-        cancelText="{{ 'Confirm.Cancel' | translate }}" okText="{{ 'Confirm.Yes' | translate }}" #commentSortType>
-            <ion-select-option value="latest">{{ 'Confirm.ByLatest' | translate }}</ion-select-option>
-            <ion-select-option value="oldest">{{ 'Confirm.ByEarly' | translate }}</ion-select-option>
-            <ion-select-option value="mostlike">{{ 'Confirm.ByLike' | translate }}</ion-select-option>
+        cancelText="{{ reddah.instant('Confirm.Cancel') }}" okText="{{ reddah.instant('Confirm.Yes') }}" #commentSortType>
+            <ion-select-option value="latest">{{ reddah.instant('Confirm.ByLatest') }}</ion-select-option>
+            <ion-select-option value="oldest">{{ reddah.instant('Confirm.ByEarly') }}</ion-select-option>
+            <ion-select-option value="mostlike">{{ reddah.instant('Confirm.ByLike') }}</ion-select-option>
         </ion-select>
     </ion-item>
     <div *ngFor="let comment of localComments">
@@ -26,7 +26,7 @@
                         <span class="user-name" (click)="goUser(comment.UserName)">{{reddah.getDisplayName(comment.UserName)}}</span>
                         
                         <ion-note *ngIf="canDelete(comment)" color="danger" slot="end" (click)="delete(comment)">
-                            [{{'Comment.Delete' | translate }}]
+                            [{{reddah.instant('Comment.Delete') }}]
                         </ion-note>
 
                         <div *ngIf="normal" style="display: flex;">
@@ -37,7 +37,7 @@
                     
                     <span>{{reddah.utcToLocal(comment.CreatedOn,"YY-MM-DD HH:mm")}}</span>
                     <div (click)="addNewComment(comment.ArticleId, comment.Id)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
-                    <span style="font-weight:bold;color:#566890;" (click)="viewReply(localComments, comment)" *ngIf="comment.Count&&comment.Count>0">{{ 'Comment.MoreComment' | translate }} {{comment.Count}}>></span>
+                    <span style="font-weight:bold;color:#566890;" (click)="viewReply(localComments, comment)" *ngIf="comment.Count&&comment.Count>0">{{ reddah.instant('Comment.MoreComment') }} {{comment.Count}}>></span>
                 </ion-label>
             </ion-item>
         </li>

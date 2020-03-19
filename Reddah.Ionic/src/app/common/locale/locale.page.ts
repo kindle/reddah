@@ -2,7 +2,6 @@ import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../../reddah.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-locale',
@@ -17,9 +16,7 @@ export class LocalePage implements OnInit {
     constructor(
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
-        private translate: TranslateService,
         public reddah: ReddahService,
-        private zone: NgZone,
         ) {
     }
 
@@ -30,7 +27,7 @@ export class LocalePage implements OnInit {
     async changeLocale(selector: string) {
         this.localStorageService.store("Reddah_Locale", selector);
         this.selectedLocale = selector;
-        this.translate.use(selector);
+        this.reddah.loadTranslate(selector);
         this.reddah.clearLocaleCache();
         
         await this.modalController.dismiss(selector!==this.orgLocale);

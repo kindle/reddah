@@ -8,14 +8,14 @@
                 <img [src]="reddah.level2Cache(item.webPreviewUrl)" height="100vh">
             </div>
             <ion-item no-padding color="dark" style="position: absolute; bottom: 40px;margin:0 50%;transform: translateX(-50%);" *ngIf="item.isOrgViewed!=3&&showDownload&&isCordova">
-                <ion-title id="downloadOrgImage" (click)="downloadOrgImage(item)" *ngIf="item.isOrgViewed==0||item.isOrgViewed==1">{{'Common.Original' | translate}}</ion-title>
-                <ion-title id="downloadOrgImage" (dblclick)="downloadOrgImage(item)" *ngIf="item.isOrgViewed==2">{{'Article.Loading' | translate}}</ion-title>
+                <ion-title id="downloadOrgImage" (click)="downloadOrgImage(item)" *ngIf="item.isOrgViewed==0||item.isOrgViewed==1">{{reddah.instant('Common.Original')}}</ion-title>
+                <ion-title id="downloadOrgImage" (dblclick)="downloadOrgImage(item)" *ngIf="item.isOrgViewed==2">{{reddah.instant('Article.Loading')}}</ion-title>
             </ion-item>
         </ion-slide>
     </ion-slides>
 </ion-content>
 <ion-footer *ngIf="imgDescription">
-    <ion-toolbar color="dark" text-center>
+    <ion-toolbar color="dark" style="text-align:center;">
         <ion-text>{{ imgDescription }}</ion-text>
     </ion-toolbar>
 </ion-footer>

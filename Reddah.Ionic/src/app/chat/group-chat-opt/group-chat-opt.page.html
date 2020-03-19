@@ -1,8 +1,8 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-text>{{ 'Common.Option' | translate }}({{groupInfo.GroupName.split(",").length}})</ion-text>
+    <ion-text>{{ reddah.instant('Common.Option') }}({{groupInfo.GroupName.split(",").length}})</ion-text>
     <ion-icon name="notifications-off" *ngIf="noDisturb" size="small" color="medium"></ion-icon>
 </ion-item>
 <ion-content no-padding style="--background: #eeeeee;">
@@ -13,19 +13,19 @@
                     <img [src]="reddah.appData('userphoto_'+uname)" class="grpPortrait"
                     onerror="this.src='assets/icon/anonymous.png';">
                 </ion-avatar>
-                <ion-label style="margin-top:0;width:65px;color:gray;" text-center>{{reddah.getDisplayName(uname)}}</ion-label>
+                <ion-label style="margin-top:0;width:65px;color:gray;text-align:center;">{{reddah.getDisplayName(uname)}}</ion-label>
             </div>
             <div style="display: flex;flex-direction: column;">
                 <div>
                     <ion-icon name="add" size="large" color="medium" class="addToGroupChat" (click)="addToGroupChat()"></ion-icon>
                 </div>
-                <ion-label style="margin-top:0;width:65px;color:gray;" text-center>&nbsp;</ion-label>
+                <ion-label style="margin-top:0;width:65px;color:gray;text-align:center;">&nbsp;</ion-label>
             </div>
             <div *ngIf="userName==groupInfo.UserName" style="display: flex;flex-direction: column;">
                 <div>
                     <ion-icon name="remove" size="large" color="medium" class="addToGroupChat" (click)="delFromGroupChat()"></ion-icon>
                 </div>
-                <ion-label style="margin-top:0;width:65px;color:gray;" text-center>&nbsp;</ion-label>
+                <ion-label style="margin-top:0;width:65px;color:gray;text-align:center;">&nbsp;</ion-label>
             </div>
         </div>
     </ion-item>
@@ -33,24 +33,24 @@
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop borderItem" lines="none" (click)="changeTitle()">
-        <ion-text slot="start">{{ 'Input.Name' | translate }}</ion-text>
+        <ion-text slot="start">{{ reddah.instant('Input.Name') }}</ion-text>
         <ion-label color="dark" slot="end" *ngIf="groupInfo.Title.length>10">{{groupInfo.Title}}</ion-label>
         <ion-note color="dark" slot="end" *ngIf="groupInfo.Title.length<=10">{{groupInfo.Title}}</ion-note>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 <!--
     <ion-item class="borderItem" lines="none">
         <ion-label>群二维码</ion-label>
         <ion-icon name="ios-qr-scanner" slot="end" size="small"></ion-icon>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 -->
     <ion-item class="borderItem" lines="none">
-        <ion-label>{{ 'Input.Description' | translate }}</ion-label>
+        <ion-label>{{ reddah.instant('Input.Description') }}</ion-label>
     </ion-item>
     <ion-item lines="none" class="borderItem borderBottom" (click)="changeAnnounce()">
         <ion-note color="dark" text-wrap margin-bottom margin-end>{{groupInfo.Content}}</ion-note>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     
 <!--
@@ -58,7 +58,7 @@
     </ion-item>
     <ion-item class="borderTop borderItem borderBottom" lines="none">
         <ion-label>查找聊天记录</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     
     <div class="gap">
@@ -81,7 +81,7 @@
     <ion-item class="borderTop borderItem">
         <ion-label>我在本群的昵称</ion-label>
         <ion-note color="dark" slot="end">昵称</ion-note>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item class="borderItem borderBottom" lines="none">
         <ion-label>显示群成员昵称</ion-label>
@@ -92,26 +92,26 @@
     </ion-item>
     <ion-item class="borderTop borderItem borderBottom" (click)="setBackground()" lines="none">
         <ion-label>设置当前聊天背景</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 -->
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop borderItem borderBottom" (click)="clearChat()" lines="none">
-        <ion-label>{{ 'Common.ClearChat' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-label>{{ reddah.instant('Common.ClearChat') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 <!--
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item class="borderTop borderItem borderBottom" (click)="report()" lines="none">
-        <ion-label>{{ 'Pop.Report' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-label>{{ reddah.instant('Pop.Report') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 -->
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
-    <ion-item class="borderTop borderItem borderBottom" (click)="leaveGroupChatConfirm()" lines="none" text-center>
-        <ion-label color="danger">{{ 'Common.DeleteAndQuit' | translate }}</ion-label>
+    <ion-item class="borderTop borderItem borderBottom" (click)="leaveGroupChatConfirm()" lines="none" style="text-align:center;">
+        <ion-label color="danger">{{ reddah.instant('Common.DeleteAndQuit') }}</ion-label>
     </ion-item>
 </ion-content>

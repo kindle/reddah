@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, NgZone } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
@@ -21,17 +21,14 @@ export class SettingSexPage implements OnInit {
         private modalController: ModalController,
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
         public authService: AuthService,
-        private toastController: ToastController,
     ) {
         this.userName = this.reddah.getCurrentUser();
     }
 
     userName: string;
 
-    ngOnInit() {
-        this.currentSex = this.reddah.appData('usersex_'+this.userName);
+    async ngOnInit() {
     }
     
     async close() {

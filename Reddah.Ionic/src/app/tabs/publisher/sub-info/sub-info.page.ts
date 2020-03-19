@@ -10,7 +10,6 @@ import { SettingNickNamePage } from '../../../settings/setting-nickname/setting-
 import { AddArticlePage } from '../add-article/add-article.page';
 import { AddMiniPage } from '../add-mini/add-mini.page';
 import { MiniViewerComponent } from '../../../common/mini-viewer/mini-viewer.component';
-import { TranslateService } from '@ngx-translate/core';
 import { MaterialPage } from '../../../mytimeline/material/material.page';
 import { ShareChooseChatPage } from '../../../chat/share-choose-chat/share-choose-chat.page';
 import { AddFeedbackPage } from '../../../mytimeline/add-feedback/add-feedback.page';
@@ -38,7 +37,6 @@ export class SubInfoPage implements OnInit {
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
-        private translate: TranslateService,
         private platform: Platform,
     ) { 
         this.userName = this.reddah.getCurrentUser();
@@ -134,7 +132,7 @@ export class SubInfoPage implements OnInit {
         const userModal = await this.modalController.create({
           component: ChangePhotoPage,
           componentProps: { 
-              title: this.translate.instant("About.Photo"),
+              title: this.reddah.instant("About.Photo"),
               tag : "portrait",
               targetUserName: this.targetSub.UserName
           },
@@ -175,7 +173,7 @@ export class SubInfoPage implements OnInit {
         const modal = await this.modalController.create({
             component: SettingNickNamePage,
             componentProps: { 
-                title: this.translate.instant("Input.Name"),
+                title: this.reddah.instant("Input.Name"),
                 currentNickName: this.reddah.appData('usernickname_'+this.targetSub.UserName),
                 targetUserName: this.targetSub.UserName
             },
@@ -193,7 +191,7 @@ export class SubInfoPage implements OnInit {
         const modal = await this.modalController.create({
             component: SettingSignaturePage,
             componentProps: { 
-                title: this.translate.instant("Input.Description"),
+                title: this.reddah.instant("Input.Description"),
                 currentSignature: this.reddah.appData('usersignature_'+this.targetSub.UserName),
                 targetUserName: this.targetSub.UserName
             },
@@ -209,7 +207,7 @@ export class SubInfoPage implements OnInit {
 
     async addArticle(){
         if(this.articles.length>=3){
-            this.reddah.toast(this.translate.instant("Common.MaxDraft"), "primary")
+            this.reddah.toast(this.reddah.instant("Common.MaxDraft"), "primary")
         }
         else{   
             const modal = await this.modalController.create({
@@ -245,7 +243,7 @@ export class SubInfoPage implements OnInit {
 
     async addMini(){
         if(this.articles.length>=1){
-            this.reddah.toast(this.translate.instant("Common.WorkingCopyExist"), "primary")
+            this.reddah.toast(this.reddah.instant("Common.WorkingCopyExist"), "primary")
         }
         else{   
             const modal = await this.modalController.create({
@@ -302,8 +300,8 @@ export class SubInfoPage implements OnInit {
                 const modal = await this.modalController.create({
                     component: AddFeedbackPage,
                     componentProps: { 
-                        title: this.translate.instant("Pop.Report"),
-                        desc: this.translate.instant("Pop.ReportReason"),
+                        title: this.reddah.instant("Pop.Report"),
+                        desc: this.reddah.instant("Pop.ReportReason"),
                         feedbackType: 4,
                         article: mini
                     },
@@ -316,7 +314,7 @@ export class SubInfoPage implements OnInit {
                 const modal = await this.modalController.create({
                     component: ShareChooseChatPage,
                     componentProps: { 
-                        title: this.translate.instant("Common.Choose"),
+                        title: this.reddah.instant("Common.Choose"),
                         article: mini,
                     },
                     cssClass: "modal-fullscreen",

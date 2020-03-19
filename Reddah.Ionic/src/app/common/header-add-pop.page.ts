@@ -9,20 +9,20 @@ import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
     template: `
         <div (click)="close()">
             <ion-item button (click)="createGroupChat()">
-                <ion-icon slot="start" color="tertiary" name="ios-chatbubbles"></ion-icon>  
-                <ion-label>{{ 'Menu.Header.GroupChat' | translate }}</ion-label>
+                <ion-icon slot="start" style="margin-right:15px;" color="tertiary" name="chatbubbles"></ion-icon>  
+                <ion-label>{{ reddah.instant('Menu.Header.GroupChat') }}</ion-label>
             </ion-item>
             <ion-item button (click)="addFriend()">
-                <ion-icon slot="start" color="tertiary" name="ios-person-add"></ion-icon>  
-                <ion-label>{{ 'Menu.Header.AddFriend' | translate }}</ion-label>
+                <ion-icon slot="start" style="margin-right:15px;" color="tertiary" name="person-add"></ion-icon>  
+                <ion-label>{{ reddah.instant('Menu.Header.AddFriend') }}</ion-label>
             </ion-item>
             <!--<ion-item button href="/scan">
-                <ion-icon slot="start" color="tertiary" name="ios-qr-scanner"></ion-icon>  
-                <ion-label>{{ 'Menu.Header.Scan' | translate }}</ion-label>
+                <ion-icon slot="start" style="margin-right:15px;" color="tertiary" name="qr-scanner"></ion-icon>  
+                <ion-label>{{ reddah.instant('Menu.Header.Scan') }}</ion-label>
             </ion-item>-->
             <ion-item button (click)="feedback()">
-                <ion-icon slot="start" color="tertiary" name="mail"></ion-icon>  
-                <ion-label>{{ 'Menu.Header.Feedback' | translate }}</ion-label>
+                <ion-icon slot="start" style="margin-right:15px;" color="tertiary" name="mail"></ion-icon>  
+                <ion-label>{{ reddah.instant('Menu.Header.Feedback') }}</ion-label>
             </ion-item>
         </div>
     `

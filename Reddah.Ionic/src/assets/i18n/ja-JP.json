@@ -161,7 +161,8 @@
     "Confirm.ByLike":"ライク",
 
     "Pop":{
-        "NoRecommend":"秀",
+        "NoRecommend":"おすすめを減らす",
+        "Recommend":"おすすめ",
         "Report":"レポート",
         "ReportReason":"具体的な理由を入力してください...",
         "ReportUserReason":"このアカウントに対するクレームの具体的な原因を入力してください",

@@ -15,7 +15,7 @@ import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoa
       CommonModule,
       FormsModule,
       HeaderModule,
-      RouterModule.forChild([{ path: 'home', component: HomePage }]),
+      RouterModule.forChild([{ path: '', component: HomePage }]),
       TranslateModule.forChild(),
       LazyLoadImageModule.forRoot({
         preset: intersectionObserverPreset

@@ -12,7 +12,6 @@ import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page';
 import { PubPage } from '../tabs/publisher/pub/pub.page';
 import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
 import { ShareChooseChatPage } from '../chat/share-choose-chat/share-choose-chat.page';
-import { TranslateService } from '@ngx-translate/core';
 import { SettingFontPage } from '../settings/setting-font/setting-font.page';
 import { AddArticlePage } from '../tabs/publisher/add-article/add-article.page';
 
@@ -33,7 +32,6 @@ export class PostviewerPage implements OnInit {
         public reddah : ReddahService,
         private popoverController: PopoverController,
         private cacheService: CacheService,
-        private translate: TranslateService,
         private alertController: AlertController,
     ) { 
         this.userName = this.reddah.getCurrentUser();
@@ -53,10 +51,10 @@ export class PostviewerPage implements OnInit {
                             this.reddah.setPoint('Read', data.Message.GotPoint);
                             if(data.Success==0){
                                 this.reddah.toast(
-                                    this.translate.instant("Point.TaskReadTitle")+
+                                    this.reddah.instant("Point.TaskReadTitle")+
                                     this.reddah.lan2(
                                         " +"+data.Message.GotPoint+"/"+this.reddah.pointTasks[1].max,
-                                        this.translate.instant("Point.Fen")),
+                                        this.reddah.instant("Point.Fen")),
                                 "primary");
                             }
                             this.reddah.getUserPhotos(this.userName);
@@ -79,10 +77,10 @@ export class PostviewerPage implements OnInit {
                     this.reddah.setPoint('Share', data.Message.GotPoint);
                     if(data.Success==0){
                         this.reddah.toast(
-                            this.translate.instant("Point.TaskShareTitle")+
+                            this.reddah.instant("Point.TaskShareTitle")+
                             this.reddah.lan2(
                                 " +"+data.Message.GotPoint+"/"+this.reddah.pointTasks[3].max,
-                                this.translate.instant("Point.Fen")),
+                                this.reddah.instant("Point.Fen")),
                         "primary");
                     }
                 }
@@ -106,7 +104,7 @@ export class PostviewerPage implements OnInit {
             const modal = await this.modalController.create({
                 component: ShareChooseChatPage,
                 componentProps: { 
-                    title: this.translate.instant("Common.Choose"),
+                    title: this.reddah.instant("Common.Choose"),
                     article: this.article,
                 },
                 cssClass: "modal-fullscreen",
@@ -158,8 +156,8 @@ export class PostviewerPage implements OnInit {
         const modal = await this.modalController.create({
             component: AddFeedbackPage,
             componentProps: { 
-                title: this.translate.instant("Pop.Report"),
-                desc: this.translate.instant("Pop.ReportReason"),
+                title: this.reddah.instant("Pop.Report"),
+                desc: this.reddah.instant("Pop.ReportReason"),
                 feedbackType: 4,
                 article: this.article
             },
@@ -226,10 +224,10 @@ export class PostviewerPage implements OnInit {
                     this.reddah.setPoint('Comment', data.Message.GotPoint);
                     if(data.Success==0){
                         this.reddah.toast(
-                            this.translate.instant("Point.TaskCommentTitle")+
+                            this.reddah.instant("Point.TaskCommentTitle")+
                             this.reddah.lan2(
                                 " +"+data.Message.GotPoint+"/"+this.reddah.pointTasks[4].max,
-                                this.translate.instant("Point.Fen")),
+                                this.reddah.instant("Point.Fen")),
                         "primary");
                     }
                 }
@@ -288,16 +286,16 @@ export class PostviewerPage implements OnInit {
 
     async delete(){
             const alert = await this.alertController.create({
-              header: this.translate.instant("Confirm.Title"),
-              message: this.translate.instant("Confirm.DeleteMessage"),
+              header: this.reddah.instant("Confirm.Title"),
+              message: this.reddah.instant("Confirm.DeleteMessage"),
               buttons: [
                 {
-                    text: this.translate.instant("Confirm.Cancel"),
+                    text: this.reddah.instant("Confirm.Cancel"),
                     cssClass: 'secondary',
                     handler: _ => {}
                 }, 
                 {
-                    text: this.translate.instant("Comment.Delete"),
+                    text: this.reddah.instant("Comment.Delete"),
                     handler: () => {
                         let formData = new FormData();
                         formData.append("Id", JSON.stringify(this.article.Id));
@@ -306,7 +304,7 @@ export class PostviewerPage implements OnInit {
                                 
                             }
                             else{
-                                let msg = this.translate.instant(`Service.${result.Success}`);
+                                let msg = this.reddah.instant(`Service.${result.Success}`);
                                 this.reddah.toast(msg, "danger");
                             }
                         });

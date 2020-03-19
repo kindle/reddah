@@ -161,6 +161,7 @@
 
     "Pop":{
         "NoRecommend":"Verstecken",
+        "Recommend":"Empfehlenswert",
         "Report":"Bericht",
         "ReportReason":"Bitte geben Sie einen konkreten Grund ein...",
         "ReportUserReason":"Bitte geben Sie den spezifischen Grund für die Beschwerde ein",

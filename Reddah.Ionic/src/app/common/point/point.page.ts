@@ -2,12 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { HistoryPage } from './history/history.page';
 import { PunchClockPage } from './punch-clock/punch-clock.page';
-import { LocalStorageService } from 'ngx-webstorage';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { LocationPage } from '../location/location.page';
 import { ShakePage } from '../../shake/shake.page';
 import { MapPage } from '../../map/map.page';
@@ -39,13 +37,10 @@ export class PointPage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
         private popoverController: PopoverController,
         public modalController: ModalController,
-        private translate: TranslateService,
         private cacheService: CacheService,
-        private localStorageService: LocalStorageService,
         private router: Router,
     ){
         this.userName = this.reddah.getCurrentUser();
@@ -135,7 +130,7 @@ export class PointPage implements OnInit {
         const userModal = await this.modalController.create({
           component: ChangePhotoPage,
           componentProps: { 
-              title: this.translate.instant("About.Photo"),
+              title: this.reddah.instant("About.Photo"),
               tag : "portrait",
               targetUserName: ""
           },
@@ -154,7 +149,7 @@ export class PointPage implements OnInit {
         const modal = await this.modalController.create({
             component: SettingSignaturePage,
             componentProps: {
-                title: this.translate.instant("About.Signature"),
+                title: this.reddah.instant("About.Signature"),
                 currentSignature: this.reddah.appData('usersignature_'+this.userName)
             },
             cssClass: "modal-fullscreen",

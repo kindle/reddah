@@ -1,14 +1,14 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-title style="padding-left:0px;text-transform: none;">{{title?title:'Menu.Header.Feedback' | translate}}</ion-title>
-    <ion-button color="success" slot="end" (click)="submit()">{{ 'Confirm.Submit' | translate }}</ion-button>
+    <ion-title style="padding-left:0px;text-transform: none;">{{title?title:reddah.instant('Menu.Header.Feedback')}}</ion-title>
+    <ion-button color="success" slot="end" (click)="submit()">{{ reddah.instant('Confirm.Submit') }}</ion-button>
 </ion-item>
 <ion-content>
     <ion-item lines="none">
         <ion-textarea autoresize [(ngModel)]="yourThoughts" rows="3" cols="20" 
-        [placeholder]="desc?desc:'Pop.FeedbackThoughts' | translate"></ion-textarea>
+        [placeholder]="desc?desc:reddah.instant('Pop.FeedbackThoughts')"></ion-textarea>
     </ion-item>
     <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="feedbackType!=4">
         <div class="imgSqure" *ngFor="let image of photos;index as i">
@@ -35,7 +35,7 @@
         <ion-radio-group>
             <ion-item *ngFor="let item of feedbackTypes" (click)="changeFeedbackType(item)">
                 <ion-radio value="{{item.value}}" checked="{{item.checked}}"></ion-radio>
-                <ion-label>{{item.text}}</ion-label>
+                <ion-label style="margin-left:10px;">{{item.text}}</ion-label>
             </ion-item>
         </ion-radio-group>
     </ion-list>
@@ -43,8 +43,8 @@
 </ion-content>
 <ion-footer *ngIf="dragging" style="background-color: red;color: white;">
     <ion-row id="delete-photo" class="delete-area" align-items-center justify-content-center dragula="bag" [(dragulaModel)]="photos_trash">
-        <ion-icon name="ios-trash" color="tertiary" size="medium"></ion-icon>
-        <ion-text *ngIf="dragToDel" color="white">{{ 'Pop.ReleaseToDel' | translate }}</ion-text>
-        <ion-text *ngIf="!dragToDel">{{ 'Pop.DragToDel' | translate }}</ion-text>
+        <ion-icon name="trash-outline"color="tertiary" size="medium"></ion-icon>
+        <ion-text *ngIf="dragToDel" color="white">{{ reddah.instant('Pop.ReleaseToDel') }}</ion-text>
+        <ion-text *ngIf="!dragToDel">{{ reddah.instant('Pop.DragToDel') }}</ion-text>
     </ion-row>
 </ion-footer>

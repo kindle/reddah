@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PopoverController, NavController, LoadingController, ModalController, AlertController } from '@ionic/angular'
+import { LoadingController, ModalController, AlertController } from '@ionic/angular'
 import { ReddahService } from '../../../reddah.service';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { ImageViewerComponent } from '../../../common/image-viewer/image-viewer.component';
 import { MiniViewerComponent } from '../../../common/mini-viewer/mini-viewer.component';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-add-mini',
@@ -48,13 +47,13 @@ export class AddMiniPage implements OnInit {
     
     
     constructor(
-        private reddahService: ReddahService,
+        public reddahService: ReddahService,
         private loadingController: LoadingController,
         private cacheService: CacheService,
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
         private alertController: AlertController,
-        private translate: TranslateService,
+        public reddah: ReddahService,
     ) {}
 
 
@@ -64,7 +63,7 @@ export class AddMiniPage implements OnInit {
 
     loading = true;
     GetLoading(text){
-        return this.loading?`${text} ${this.translate.instant('Button.Loading')}`:text;
+        return this.loading?`${text} ${this.reddahService.instant('Button.Loading')}`:text;
     }
 
     async ngOnInit() {
@@ -186,17 +185,17 @@ export class AddMiniPage implements OnInit {
     async publish(){
         const alert = await this.alertController.create({
             header: "",
-            message: this.translate.instant("Common.MiniPubMsg"),
+            message: this.reddahService.instant("Common.MiniPubMsg"),
             buttons: [
               {
-                text: this.translate.instant("Common.CancelPublish"),
+                text: this.reddahService.instant("Common.CancelPublish"),
                 role: 'cancel',
                 cssClass: 'dark',
                 handler: () => {
                   
                 }
               }, {
-                text: this.translate.instant("Common.ConfirmPublish"),
+                text: this.reddahService.instant("Common.ConfirmPublish"),
                 cssClass:'danger',
                 handler: () => {
                     this.actualPublish();

@@ -160,6 +160,7 @@
 
     "Pop":{
         "NoRecommend":"Ocultar",
+        "Recommend":"Recomendação",
         "Report":"Relatório",
         "ReportReason":"Por favor, introduza UMA razão concreta...",
         "ReportUserReason":"Indique a razão específica Da queixa",

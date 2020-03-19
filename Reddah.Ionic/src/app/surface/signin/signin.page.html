@@ -1,28 +1,28 @@
 <ion-item color="light" no-padding lines="none">
-    <ion-icon slot="end" name="close" (click)="close()" class="backbutton"></ion-icon>
+    <ion-icon slot="end" name="close-outline" (click)="close()" class="backbutton"></ion-icon>
 </ion-item>
 <ion-content style="background-color: white;" id="container">
     <ion-item lines="none" class="sectionGapTop inputItem" no-padding>
-        <h2 class="title">{{ 'Login.Title' | translate }}</h2>
+        <h2 class="title">{{ reddah.instant('Login.Title') }}</h2>
     </ion-item>
     <ion-item lines="none" class="gapBottom inputItem" position="stack" no-padding>
         <ion-note slot="start" text-wrap color="dark">
-            {{ 'Login.NoAccount' | translate }}
+            {{ reddah.instant('Login.NoAccount') }}
             <span style="color: #107c10;margin-left:5px;" (click)="goRegister()">
-                {{ 'Login.RegisterNow' | translate }}
+                {{ reddah.instant('Login.RegisterNow') }}
             </span>
         </ion-note>
     </ion-item>
     <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
-        <ion-input type="text" placeholder="{{ 'Input.UserName' | translate }}" [(ngModel)]="username" clearInput></ion-input>
+        <ion-input type="text" placeholder="{{ reddah.instant('Input.UserName') }}" [(ngModel)]="username" clearInput></ion-input>
     </ion-item>
     <ion-item class="gapBottom inputItem" no-padding>
-        <ion-input type="password" placeholder="{{ 'Input.Password' | translate }}" [(ngModel)]="password" clearInput></ion-input>
+        <ion-input type="password" placeholder="{{ reddah.instant('Input.Password') }}" [(ngModel)]="password" clearInput></ion-input>
     </ion-item>
     <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="logIn()" expand="block"
-    [disabled]="checkLogin()">{{ 'Button.Login' | translate }}</ion-button>
-    <div text-center class="forget" (click)="forgot()">{{ 'Login.ForgotPassword' | translate }}</div>    
-    <div class="conductArea" text-center>
+    [disabled]="checkLogin()">{{ reddah.instant('Button.Login') }}</ion-button>
+    <div class="forget" (click)="forgot()">{{ reddah.instant('Login.ForgotPassword') }}</div>    
+    <div class="conductArea">
         <p class="copyright">
             Reddah.com<br>
         </p>

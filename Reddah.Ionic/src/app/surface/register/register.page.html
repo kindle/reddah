@@ -1,9 +1,9 @@
 <ion-item color="light" no-padding lines="none">
-    <ion-icon slot="end" name="close" (click)="close()" class="backbutton"></ion-icon>
+    <ion-icon slot="end" name="close-outline" (click)="close()" class="backbutton"></ion-icon>
 </ion-item>
 <ion-content style="background-color: white;">
     <ion-item lines="none" class="sectionGapTop inputItem gapBottom" no-padding>
-        <h2 class="title">{{ 'Register.Title' | translate }}</h2>
+        <h2 class="title">{{ reddah.instant('Register.Title') }}</h2>
     </ion-item>
 
     <ion-item lines="none" class="sectionGapTop gapBottom inputItem" no-padding *ngIf="errorMessage.length>0">
@@ -13,14 +13,14 @@
     </ion-item>
 
     <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
-        <ion-input type="text" placeholder="{{ 'Input.UserName' | translate }}" 
+        <ion-input type="text" placeholder="{{ reddah.instant('Input.UserName') }}" 
         [(ngModel)]="username" clearInput (ionBlur)="checkUserName()" (ionFocus)="focusUserName()"></ion-input>
         <ion-spinner name="dots" slot="end" *ngIf="checkFlagUserName"></ion-spinner>
-        <ion-icon slot="end" name="checkmark-circle" color="primary" *ngIf="checkFlagUserNamePass"></ion-icon>
+        <ion-icon slot="end" name="checkmark-circle-outline" color="primary" *ngIf="checkFlagUserNamePass"></ion-icon>
     </ion-item>
 
     <ion-item lines="{{password==''?'':'none'}}" class="gapBottom inputItem" no-padding>
-        <ion-input type="password" placeholder="{{ 'Input.Password' | translate }}" 
+        <ion-input type="password" placeholder="{{ reddah.instant('Input.Password') }}" 
             [(ngModel)]="password" clearInput (keyup)="testPwStrength()"></ion-input>
     </ion-item>
     <ion-item class="inputItem item-small" style="margin-top:0;margin-bottom:0;"
@@ -30,43 +30,40 @@
         [class.pw-medium]="strength=='blue'"
         [class.pw-strong]="strength=='green'"></div>
         <div *ngIf="strength=='blue'||strength=='green'" style="margin-left:3px;"
-        [class.pw-weak]="strength=='orange'"
         [class.pw-medium]="strength=='blue'"
         [class.pw-strong]="strength=='green'"></div>
         <div *ngIf="strength=='green'" style="margin-left:3px;"
-        [class.pw-weak]="strength=='orange'"
-        [class.pw-medium]="strength=='blue'"
         [class.pw-strong]="strength=='green'"></div>
     </ion-item>
 
     <ion-item class="gapBottom inputItem" no-padding>
-        <ion-input type="password" placeholder="{{ 'Input.ConfirmPassword' | translate }}" 
+        <ion-input type="password" placeholder="{{ reddah.instant('Input.ConfirmPassword') }}" 
         [(ngModel)]="confirmpassword" clearInput (ionBlur)="checkConfirmPassword()"></ion-input>
     </ion-item>
 
     <ion-item class="gapBottom inputItem" no-padding>
-        <ion-input type="text" placeholder="{{ 'Input.Email' | translate }}" 
+        <ion-input type="text" placeholder="{{ reddah.instant('Input.Email') }}" 
         [(ngModel)]="email" clearInput (ionBlur)="checkEmail()"></ion-input>
     </ion-item>
     
     <ion-item lines="none" class="gapBottom inputItem" no-padding>
-        <ion-checkbox [(ngModel)]="agreed"></ion-checkbox>{{ 'Register.ReadAgree' | translate }}
+        <ion-checkbox [(ngModel)]="agreed"></ion-checkbox>{{ reddah.instant('Register.ReadAgree') }}
     </ion-item>
     
     <div class="inputItem">
         <ion-note text-wrap color="dark">
-            <span class="policy" (click)="browse('useragreement')">{{ 'Register.UserAgreement' | translate }}</span>
-            <span class="policy" (click)="browse('privacypolicy')">{{ 'Register.Privacy' | translate }}</span> {{ 'Register.And' | translate }}
-            <span class="policy" (click)="browse('contentpolicy')">{{ 'Register.Content' | translate }}</span>。
+            <span class="policy" (click)="browse('useragreement')">{{ reddah.instant('Register.UserAgreement') }}</span>
+            <span class="policy" (click)="browse('privacypolicy')">{{ reddah.instant('Register.Privacy') }}</span> {{ reddah.instant('Register.And') }}
+            <span class="policy" (click)="browse('contentpolicy')">{{ reddah.instant('Register.Content') }}</span>。
         </ion-note>
     </div> 
 
     <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="register()"
-     expand="block" [disabled]="checkRegister()">{{ 'Button.Register' | translate }}</ion-button>
+     expand="block" [disabled]="checkRegister()">{{ reddah.instant('Button.Register') }}</ion-button>
     
 </ion-content>
 <div class="footer">
-    <div class="conductArea" text-center>
+    <div class="conductArea">
         <p class="copyright">
             Reddah.com<br>
         </p>

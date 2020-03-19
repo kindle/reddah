@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LoadingController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { CacheService } from "ionic-cache";
 import { RegisterPage } from "../register/register.page"
 import { ForgotPage } from "../forgot/forgot.page";
@@ -20,9 +19,8 @@ import { MeshLine, MeshLineMaterial } from 'three.meshline';*/
 export class SigninPage implements OnInit {
 
     constructor(private modalController: ModalController,
-        private reddah: ReddahService,
+        public reddah: ReddahService,
         private loadingController: LoadingController,
-        private translate: TranslateService,
         private router: Router,
         private cacheService: CacheService,
     ) { }
@@ -41,12 +39,12 @@ export class SigninPage implements OnInit {
     
     async logIn() {
         if (this.username.length == 0) {
-            this.reddah.toast(this.translate.instant("Input.Error.UserNameEmpty"));
+            this.reddah.toast(this.reddah.instant("Input.Error.UserNameEmpty"));
         } else if (this.password.length == 0) {
-            this.reddah.toast(this.translate.instant("Input.Error.PasswordEmpty"));
+            this.reddah.toast(this.reddah.instant("Input.Error.PasswordEmpty"));
         } else {
             const loading = await this.loadingController.create({
-                message: this.translate.instant("Login.Loading"),
+                message: this.reddah.instant("Login.Loading"),
                 spinner: 'circles',
             });
             await loading.present();
@@ -69,7 +67,7 @@ export class SigninPage implements OnInit {
                     this.reddah.updateUserDeviceInfo();
                 }
                 else {
-                    let msg = this.translate.instant(`Service.${result.Success}`);
+                    let msg = this.reddah.instant(`Service.${result.Success}`);
                     this.reddah.toast(msg, "danger");
                 }
                 

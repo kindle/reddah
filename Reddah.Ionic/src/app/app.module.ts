@@ -14,7 +14,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Crop } from '@ionic-native/crop/ngx';
-import { Camera } from '@ionic-native/Camera/ngx'
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { Gyroscope } from '@ionic-native/gyroscope/ngx';
@@ -209,7 +209,8 @@ var firebaseConfig = {
         CommentComponent,
         CommentTimelineComponent,
         TimeLinePage,MaterialPage,ReportPage,MyReportPage,
-        MyTimeLinePage,MessageListPage,
+        MyTimeLinePage,
+        MessageListPage,
         UserPage,
         ArticlePopPage,
         HeaderAddPage,
@@ -286,7 +287,7 @@ var firebaseConfig = {
         AddFeedbackPage,AddMaterialPage,
         StockPage,
         CommentReplyPage,
-        SearchPage,
+        //SearchPage,
         ShakePage,
         SearchUserPage,
         SettingAboutPage,SettingChangePasswordPage,
@@ -348,7 +349,7 @@ var firebaseConfig = {
         Crop,
         InAppBrowser,
         //IonicImageLoader,
-        IonRouterOutlet,
+        //IonRouterOutlet,
         File,
         FileTransfer,
         FileTransferObject,

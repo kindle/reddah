@@ -1,22 +1,22 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-label>{{ 'About.Account' | translate }}</ion-label>
+    <ion-label>{{ reddah.instant('About.Account') }}</ion-label>
 </ion-item>
 <ion-content #pageTop no-padding style="--background:#eeeeee;background-color:#eeeeee;">
     
     <ion-item (click)="changePhoto()" class="borderTop borderItem">
-        <ion-label class="title">{{ 'About.Photo' | translate }}</ion-label>
+        <ion-label class="title">{{ reddah.instant('About.Photo') }}</ion-label>
         <ion-thumbnail slot="end" style="padding:10px;margin-right:-10px;">
             <img src="{{reddah.appData('userphoto_'+targetSub.UserName, 'photo.svg')}}" class="portrait">
         </ion-thumbnail>
-        <ion-icon name="ios-arrow-forward" slot="end"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end"></ion-icon>
     </ion-item>
     <ion-item lines="none" class="borderBottom borderItem"  (click)="changeNickName()">
-        <ion-label class="title">{{ 'Input.Name' | translate }}</ion-label>
+        <ion-label class="title">{{ reddah.instant('Input.Name') }}</ion-label>
         <ion-note color="dark" slot="end">{{reddah.appData('usernickname_'+targetSub.UserName)}}</ion-note>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
         <!--
         <ion-item>
@@ -26,18 +26,18 @@
         <ion-item lines="none" (click)="myQrCard()" class="borderItem borderBottom">
             <ion-label class="title">二维码名片</ion-label>
             <ion-icon name="ios-qr-scanner" slot="end"></ion-icon>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+            <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
         </ion-item>
         -->
     
     <ion-item lines="none" style="--background:#eeeeee;height:10px;">
     </ion-item>
     <ion-item lines="none" class="borderTop borderItem" (click)="changeSignature()">
-        <ion-label class="title">{{ 'Input.Description' | translate }}</ion-label>
+        <ion-label class="title">{{ reddah.instant('Input.Description') }}</ion-label>
     </ion-item>
     <ion-item lines="none" class="borderItem borderBottom" (click)="changeSignature()">
         <ion-note slot="start" color="dark" text-wrap>{{reddah.appData('usersignature_'+targetSub.UserName)}}</ion-note>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 
     <ion-item lines="none" style="--background:#eeeeee;height:10px;" *ngIf="targetSub.Type==3">
@@ -45,8 +45,8 @@
     <div *ngIf="targetSub.Type==3">
         <ion-item lines="none" (click)="SelectPhoto()" class="borderTop borderBottom">
             <ion-icon slot="start" name="images" color="subscribe" size="medium"></ion-icon>
-            <ion-label>{{ 'Common.MyPhoto' | translate }}</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+            <ion-label>{{ reddah.instant('Common.MyPhoto') }}</ion-label>
+            <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
 
@@ -55,8 +55,8 @@
     <div *ngIf="targetSub.Type==1">
         <ion-item lines="none" (click)="addArticle()" class="borderTop borderBottom">
             <ion-icon slot="start" name="add" color="subscribe" size="medium"></ion-icon>
-            <ion-label>{{ 'Common.Draft' | translate }}</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+            <ion-label>{{ reddah.instant('Common.Draft') }}</ion-label>
+            <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
 
@@ -69,7 +69,7 @@
             <ion-icon slot="start" name="clipboard" color="dark" size="medium"></ion-icon>
             <ion-label>{{i+1}} {{reddah.htmlDecode(article.Title)}}</ion-label>
             <ion-note slot="end">{{reddah.getSendTime(article.LastUpdateOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+            <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
     
@@ -77,17 +77,17 @@
     </ion-item>
     <div *ngIf="targetSub.Type==3">
         <ion-item lines="none" (click)="addMini()" class="borderTop borderBottom" *ngIf="!showLoading&&articles&&articles.length==0">
-            <ion-icon slot="start" name="add" color="mini" size="medium"></ion-icon>
-            <ion-label>{{ 'Common.Draft' | translate }}</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+            <ion-icon slot="start" name="add"color="mini" size="medium"></ion-icon>
+            <ion-label>{{ reddah.instant('Common.Draft') }}</ion-label>
+            <ion-icon name="ios-arrow-forward"slot="end" size="small"></ion-icon>
         </ion-item>
         <div style="display: flex; justify-content: center;"><ion-spinner name="dots" 
             *ngIf="showLoading"></ion-spinner></div>
         <ion-item *ngFor="let article of articles" lines="none" (click)="editMini(article)" class="borderTop borderItem borderBottom">
-            <ion-icon slot="start" name="code-working" color="mini" size="medium"></ion-icon>
-            <ion-label>{{ 'Common.Draft' | translate }}</ion-label>
+            <ion-icon slot="start" name="code-working"color="mini" size="medium"></ion-icon>
+            <ion-label>{{ reddah.instant('Common.Draft') }}</ion-label>
             <ion-note slot="end">{{reddah.getSendTime(article.LastUpdateOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+            <ion-icon name="arrow-forward"slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
 

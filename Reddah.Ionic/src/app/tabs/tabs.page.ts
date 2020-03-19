@@ -3,13 +3,11 @@ import { AuthService } from '../auth.service';
 import { Platform } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ModalController } from '@ionic/angular';
-import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ReddahService } from '../reddah.service';
 import { SwipeTabDirective } from '../swipe-tab.directive';
 import { IonTabs } from '@ionic/angular';
 import { EarthPage } from './earth/earth.page';
 import { MapPage } from '../map/map.page';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-tabs',
@@ -30,15 +28,11 @@ export class TabsPage implements OnInit {
         private platform: Platform,
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
-        private router: Router,
         public reddah: ReddahService,
-        //public events: Event,
-        private translate: TranslateService,
     )
     {
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-        this.translate.setDefaultLang(currentLocale);
-        this.translate.use(currentLocale);
+        this.reddah.loadTranslate(currentLocale);
 /*
         this.events.subscribe('tab:clicked', (data) => 
         {
@@ -78,7 +72,7 @@ export class TabsPage implements OnInit {
 
     ionTabsDidChange($event) {
         //console.log('[TabsPage] ionTabsDidChange, $event: ', $event);
-        this.swipeTabDirective.onTabInitialized($event.tab);
+        //this.swipeTabDirective.onTabInitialized($event.tab);
     }
 
     onTabChange($event) {
@@ -92,9 +86,9 @@ export class TabsPage implements OnInit {
 
     change(page=null){
         this.reddah.reloadLocaleSettings();
-        if(page=="about"){
+        /*if(page=="about"){
             this.about.checked = false;
-        }
+        }*/
         /*if(page=="about"){
             this.statusBar.overlaysWebView(true);
             this.statusBar.backgroundColorByHexString("#ffffff");

@@ -1,21 +1,18 @@
 import { Component, OnInit, ViewChild, Input, NgZone } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, ModalController, PopoverController, Platform, IonContent } from '@ionic/angular';
+import { ModalController, PopoverController, Platform, IonContent } from '@ionic/angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { VideoViewerComponent } from '../../common/video-viewer/video-viewer.component';
-import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
+import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
 import { ChatPopPage } from '../../common/chat-pop.page';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { ChatOptPage } from '../../chat/chat-opt/chat-opt.page';
 import { UserPage } from '../user/user.page';
-import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from 'ionic-cache';
 import { ChangePhotoPage } from '../change-photo/change-photo.page';
 import { SettingSignaturePage } from '../../settings/setting-signature/setting-signature.page';
@@ -48,7 +45,6 @@ export class MysticPage implements OnInit {
         public popoverController: PopoverController,
         public reddah: ReddahService,
         public localStorageService: LocalStorageService,
-        private media: Media,
         private nativeAudio: NativeAudio,
         private transfer: FileTransfer, 
         private file: File,
@@ -56,8 +52,6 @@ export class MysticPage implements OnInit {
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
         public clipboard: Clipboard,
-        private notification: LocalNotifications,
-        private translate: TranslateService,
         private cacheService: CacheService,
         private zone: NgZone,   
     ) { 
@@ -276,7 +270,7 @@ export class MysticPage implements OnInit {
                     if(data.Success==0){
                         if(response1.ret!=0)
                         {
-                            answer = this.translate.instant("Mystic.ChangeQuest");
+                            answer = this.reddah.instant("Mystic.ChangeQuest");
                         }
                         else{
                             let audioMagicNumber = this.reddah.getRandomInt(3);//4
@@ -328,7 +322,7 @@ export class MysticPage implements OnInit {
                                             else{
                                                 this.addMessage({
                                                     CreatedOn: time,
-                                                    Content: this.translate.instant("Mystic.ChangeQuest"), 
+                                                    Content: this.reddah.instant("Mystic.ChangeQuest"), 
                                                     UserName: 'Mystic', 
                                                     Type:0
                                                 });
@@ -389,7 +383,7 @@ export class MysticPage implements OnInit {
                     if(data.Success==0){
                         if(response1.ret!=0)
                         {
-                            traslatedQuestion = this.translate.instant("Mystic.ChangeQuest");
+                            traslatedQuestion = this.reddah.instant("Mystic.ChangeQuest");
                         }
                         let params2 = {
                             "app_id":app_id,
@@ -409,7 +403,7 @@ export class MysticPage implements OnInit {
                             if(data.Success==0){
                                 if(response2.ret!=0)
                                 {
-                                    answer = this.translate.instant("Mystic.ChangeQuest");
+                                    answer = this.reddah.instant("Mystic.ChangeQuest");
                                 }
                                 setTimeout(()=>{this.writing = 1;},1000);
                                 
@@ -433,7 +427,7 @@ export class MysticPage implements OnInit {
                                     if(data.Success==0){
                                         if(response3.ret!=0)
                                         {
-                                            traslatedAnswer = this.translate.instant("Mystic.ChangeQuest");
+                                            traslatedAnswer = this.reddah.instant("Mystic.ChangeQuest");
                                         }
                                         let audioMagicNumber = this.reddah.getRandomInt(3);
                                         console.log(audioMagicNumber)
@@ -474,7 +468,7 @@ export class MysticPage implements OnInit {
                                                         else{
                                                             this.addMessage({
                                                                 CreatedOn: time,
-                                                                Content: this.translate.instant("Mystic.ChangeQuest"), 
+                                                                Content: this.reddah.instant("Mystic.ChangeQuest"), 
                                                                 UserName: 'Mystic', 
                                                                 Type:0
                                                             });
@@ -595,7 +589,7 @@ export class MysticPage implements OnInit {
             this.messages = [];
             setTimeout(()=>{
                 this.addMessage({
-                    Content: this.translate.instant("Mystic.Welcome"), 
+                    Content: this.reddah.instant("Mystic.Welcome"), 
                     UserName: 'Mystic', 
                     Type:0,
                     Id:0,
@@ -610,7 +604,7 @@ export class MysticPage implements OnInit {
                 if(user_photo=="assets/icon/anonymous.png"&&!this.photoPopped){
                     console.log('no photo yet')
                     this.addMessage({
-                        Content: this.translate.instant("Mystic.AddPhoto"), 
+                        Content: this.reddah.instant("Mystic.AddPhoto"), 
                         UserName: 'Mystic', 
                         Type:0,
                         Action: 0,
@@ -624,7 +618,7 @@ export class MysticPage implements OnInit {
                 let user_sex_set = this.localStorageService.retrieve("user_sex_set"+this.userName);
                 if(user_sex_set==null){
                     this.addMessage({ 
-                        Content: this.translate.instant("Mystic.SetSex"), 
+                        Content: this.reddah.instant("Mystic.SetSex"), 
                         UserName: 'Mystic', 
                         Type:0,
                         Action: 1,
@@ -638,7 +632,7 @@ export class MysticPage implements OnInit {
                 let user_signature = this.reddah.appData('usersignature_'+this.userName);
                 if(user_signature==null||user_signature.length==0){
                     this.addMessage({
-                        Content: this.translate.instant("Mystic.SetSignature"), 
+                        Content: this.reddah.instant("Mystic.SetSignature"), 
                         UserName: 'Mystic', 
                         Type:0,
                         Action: 2,
@@ -654,7 +648,7 @@ export class MysticPage implements OnInit {
                 
                 if(cachedContact==null||cachedContact.length==0){
                     this.addMessage({
-                        Content: this.translate.instant("Mystic.AddFriend"), 
+                        Content: this.reddah.instant("Mystic.AddFriend"), 
                         UserName: 'Mystic', 
                         Type:0,
                         Action: 3,
@@ -670,7 +664,7 @@ export class MysticPage implements OnInit {
                 {
                     if(timeline.length==0&&!this.postPopped){
                         this.addMessage({
-                            Content: this.translate.instant("Mystic.AddPost"), 
+                            Content: this.reddah.instant("Mystic.AddPost"), 
                             UserName: 'Mystic', 
                             Type:0,
                             Action: 4,
@@ -757,7 +751,7 @@ export class MysticPage implements OnInit {
         const userModal = await this.modalController.create({
           component: ChangePhotoPage,
           componentProps: { 
-              title: this.translate.instant("About.Photo"),
+              title: this.reddah.instant("About.Photo"),
               tag : "portrait",
               targetUserName: ""
           },
@@ -785,7 +779,7 @@ export class MysticPage implements OnInit {
         const modal = await this.modalController.create({
             component: SettingSexPage,
             componentProps: {
-                title: this.translate.instant("About.Sex"),
+                title: this.reddah.instant("About.Sex"),
                 currentSex: currentValue
             },
             cssClass: "modal-fullscreen",
@@ -805,7 +799,7 @@ export class MysticPage implements OnInit {
         const modal = await this.modalController.create({
             component: SettingSignaturePage,
             componentProps: {
-                title: this.translate.instant("About.Signature"),
+                title: this.reddah.instant("About.Signature"),
                 currentSignature: this.reddah.appData('usersignature_'+this.userName)
             },
             cssClass: "modal-fullscreen",

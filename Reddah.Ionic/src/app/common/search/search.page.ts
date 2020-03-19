@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController, NavController, NavParams } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
-import { TranslateService } from '@ngx-translate/core';
 import { ReddahService } from '../../reddah.service';
 import { Article } from "../../model/article";
 import { PostviewerPage } from '../../postviewer/postviewer.page';
@@ -28,17 +27,17 @@ export class SearchPage implements OnInit {
 
     showTopic=true;
     selectedTopicId=0;
-    keywordPlaceholder = this.translate.instant("Search.Title");
+    keywordPlaceholder = this.reddah.instant("Search.Title");
 
     topics = [
         [
-            {id:1,name:this.translate.instant("Menu.Recommend")},
-            {id:2,name:this.translate.instant("Menu.Timeline")},
-            {id:3,name:this.translate.instant("Menu.Publisher")}
+            {id:1,name:this.reddah.instant("Menu.Recommend")},
+            {id:2,name:this.reddah.instant("Menu.Timeline")},
+            {id:3,name:this.reddah.instant("Menu.Publisher")}
         ],
         [
-            {id:4,name:this.translate.instant("Menu.MiniApp")},
-            {id:5,name:this.translate.instant("Menu.Contact")},
+            {id:4,name:this.reddah.instant("Menu.MiniApp")},
+            {id:5,name:this.reddah.instant("Menu.Contact")},
             {}
         ],
         /*,{id:5,name:'聊天记录'},{id:6,name:'股票'}*/
@@ -49,9 +48,9 @@ export class SearchPage implements OnInit {
         this.keywordPlaceholder = col.name;
         this.selectedTopicId = col.id;
         if(isSetFocus){
-            setTimeout(() => {
-                this.searchKeyword.setFocus();
-            },150);
+            //setTimeout(() => {
+            //    this.searchKeyword.setFocus();
+            //},150);
         }
 
         if(col.id==3){
@@ -62,23 +61,20 @@ export class SearchPage implements OnInit {
             this.loadSuggestMini();
         }
         else if(col.id==5){
-            this.close();
             const addFriendModal = await this.modalController.create({
                 component: AddFriendPage,
                 componentProps: {},
                 cssClass: "modal-fullscreen",
             });
-              
+
             await addFriendModal.present();
         }
-        
     }
 
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
         private cacheService: CacheService,
-        private translate: TranslateService,
         public navController: NavController,
         private router: ActivatedRoute,
     ) { 
@@ -93,6 +89,7 @@ export class SearchPage implements OnInit {
 
 
     @ViewChild('searchKeyword') searchKeyword;
+    searchKeywordModel;
     @ViewChild('searchResult') searchResult;
 
     firstLoading_a = false;
@@ -103,19 +100,19 @@ export class SearchPage implements OnInit {
     ngOnInit() {
         if(this.type==-1||this.type==null){//come from search user 404 this.type==-1
             if(this.key){
-                this.searchKeyword.value = this.key;
+                this.searchKeywordModel = this.key;
                 this.search();
             }
             else{
-                setTimeout(() => {
-                    this.searchKeyword.setFocus();
-                },150);
+                //setTimeout(() => {
+                //    this.searchKeyword.setFocus();
+                //},150);
             }
         }        
         else{//from clicking article label, search publisher
             if(this.key){
                 this.chooseTopic([].concat.apply([],this.topics)[this.type], false);
-                this.searchKeyword.value = this.key;
+                this.searchKeywordModel = this.key;
                 this.search();
             }
             else{
@@ -128,7 +125,7 @@ export class SearchPage implements OnInit {
 
     async more(type){
         this.locale = this.reddah.getCurrentLocale();
-        this.key = this.searchKeyword.value;
+        this.key = this.searchKeywordModel;
         this.type = type;
         this.ngOnInit(); 
 
@@ -148,7 +145,7 @@ export class SearchPage implements OnInit {
     }
 
     async onSearchchange(){
-        if(this.searchKeyword.value.length==0)
+        if(this.searchKeywordModel.length==0)
         {
             this.users_p = [];
             this.users_m = [];
@@ -162,7 +159,7 @@ export class SearchPage implements OnInit {
     apertureHistories=[];
 
     searchHistory(value){
-        this.searchKeyword.value = value;
+        this.searchKeywordModel = value;
         this.search();
     }
 
@@ -187,7 +184,7 @@ export class SearchPage implements OnInit {
             this.articles_a=[];
             this.searchArticles(null);
 
-            this.reddah.refreshHistoryCache(this.articleHistories, this.searchKeyword.value, 1);
+            this.reddah.refreshHistoryCache(this.articleHistories, this.searchKeywordModel, 1);
         }
         else if(this.selectedTopicId==2)//timeline/aperture
         {
@@ -196,7 +193,7 @@ export class SearchPage implements OnInit {
             this.articles_t=[];
             this.searchTimelines(null);
 
-            this.reddah.refreshHistoryCache(this.apertureHistories, this.searchKeyword.value, 2);
+            this.reddah.refreshHistoryCache(this.apertureHistories, this.searchKeywordModel, 2);
         }
         else if(this.selectedTopicId==3)//publisher
         {
@@ -273,8 +270,8 @@ export class SearchPage implements OnInit {
     articles_a=[];
     async searchArticles(event, limit=10000){
         this.locale = this.reddah.getCurrentLocale();
-        let cacheKey = "this.reddah.searchArticles" + JSON.stringify(this.loadedIds_a) + this.locale + "search_article"+this.searchKeyword.value;
-        let request = this.reddah.getArticles(this.loadedIds_a, [], [], this.locale, "search", this.searchKeyword.value, 1, "", 0);
+        let cacheKey = "this.reddah.searchArticles" + JSON.stringify(this.loadedIds_a) + this.locale + "search_article"+this.searchKeywordModel;
+        let request = this.reddah.getArticles(this.loadedIds_a, [], [], this.locale, "search", this.searchKeywordModel, 1, "", 0);
         //console.log(cacheKey);
         this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
         .subscribe(articles => 
@@ -305,9 +302,9 @@ export class SearchPage implements OnInit {
     articles_t=[];
     async searchTimelines(event, limit=10000){
         this.locale = this.reddah.getCurrentLocale();
-        let cacheKey = "this.reddah.searchTimelines" + JSON.stringify(this.loadedIds_t) + this.locale + "search_timeline"+this.searchKeyword.value;
+        let cacheKey = "this.reddah.searchTimelines" + JSON.stringify(this.loadedIds_t) + this.locale + "search_timeline"+this.searchKeywordModel;
         //status=0 as there's no draft for timeline
-        let request = this.reddah.getArticles(this.loadedIds_t, [], [], this.locale, "search", this.searchKeyword.value, 0, "", 1);
+        let request = this.reddah.getArticles(this.loadedIds_t, [], [], this.locale, "search", this.searchKeywordModel, 0, "", 1);
         
         this.cacheService.loadFromObservable(cacheKey, request, "SearchPage")
         .subscribe(articles => 
@@ -338,9 +335,9 @@ export class SearchPage implements OnInit {
     users_p=[];
     async searchPublisher(event, limit=10000){
         this.locale = this.reddah.getCurrentLocale();
-        let cacheKey = "this.reddah.searchPublisher" + JSON.stringify(this.loadedIds_p) + this.locale + "search_publisher"+this.searchKeyword.value;
+        let cacheKey = "this.reddah.searchPublisher" + JSON.stringify(this.loadedIds_p) + this.locale + "search_publisher"+this.searchKeywordModel;
         let formData = new FormData();
-        formData.append("key", this.searchKeyword.value);
+        formData.append("key", this.searchKeywordModel);
         formData.append("loadedIds", JSON.stringify(this.loadedIds_p));
         formData.append("type", JSON.stringify(1));
         let request = this.reddah.getPublishers(formData);
@@ -369,9 +366,9 @@ export class SearchPage implements OnInit {
     users_m=[];
     async searchMini(event, limit=10000){
         this.locale = this.reddah.getCurrentLocale();
-        let cacheKey = "this.reddah.searchMini" + JSON.stringify(this.loadedIds_m) + this.locale + "search_publisher"+this.searchKeyword.value;
+        let cacheKey = "this.reddah.searchMini" + JSON.stringify(this.loadedIds_m) + this.locale + "search_publisher"+this.searchKeywordModel;
         let formData = new FormData();
-        formData.append("key", this.searchKeyword.value);
+        formData.append("key", this.searchKeywordModel);
         formData.append("loadedIds", JSON.stringify(this.loadedIds_m));
         formData.append("type", JSON.stringify(3));
         let request = this.reddah.getPublishers(formData);
@@ -429,7 +426,7 @@ export class SearchPage implements OnInit {
     async viewStock(){
         const stockModal = await this.modalController.create({
             component: StockPage,
-            componentProps: { s: this.searchKeyword.value },
+            componentProps: { s: this.searchKeywordModel },
             cssClass: "modal-fullscreen",
         });
         
@@ -489,8 +486,8 @@ export class SearchPage implements OnInit {
                 const modal = await this.modalController.create({
                     component: AddFeedbackPage,
                     componentProps: { 
-                        title: this.translate.instant("Pop.Report"),
-                        desc: this.translate.instant("Pop.ReportReason"),
+                        title: this.reddah.instant("Pop.Report"),
+                        desc: this.reddah.instant("Pop.ReportReason"),
                         feedbackType: 4,
                         article: mini
                     },
@@ -503,7 +500,7 @@ export class SearchPage implements OnInit {
                 const modal = await this.modalController.create({
                     component: ShareChooseChatPage,
                     componentProps: { 
-                        title: this.translate.instant("Common.Choose"),
+                        title: this.reddah.instant("Common.Choose"),
                         article: mini,
                     },
                     cssClass: "modal-fullscreen",

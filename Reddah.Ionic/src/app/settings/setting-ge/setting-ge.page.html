@@ -1,26 +1,26 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-label>{{ 'About.General' | translate }}</ion-label>
+    <ion-label>{{ reddah.instant('About.General') }}</ion-label>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;">
     <div class="lastGap">
         <ion-item class="borderTop borderItem" (click)="changeLocale()">
-            <ion-icon slot="start" name="globe" color="primary" size="medium"></ion-icon>
-            <ion-label>{{ 'About.ChangeLocale' | translate }}</ion-label>
+            <ion-icon slot="start" name="earth"color="primary" size="medium"></ion-icon>
+            <ion-label>{{ reddah.instant('About.ChangeLocale') }}</ion-label>
             <ion-text slot="end">{{currentLocaleInfo}}</ion-text>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+            <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
         </ion-item>
         <ion-item class="borderItem" (click)="goFontSize()">
-            <ion-icon slot="start" name="ios-appstore" color="dark" size="medium"></ion-icon>
-            <ion-label>{{ 'Common.Font' | translate }}</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+            <ion-icon slot="start" name="text-outline"color="dark" size="medium"></ion-icon>
+            <ion-label>{{ reddah.instant('Common.Font') }}</ion-label>
+            <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
         </ion-item>
         <ion-item lines="none" class="borderBottom borderItem" (click)="clearCache()">
-            <ion-icon slot="start" name="ios-trash" color="medium" size="medium"></ion-icon>
-            <ion-label>{{ 'Common.Cache' | translate }}</ion-label>
-            <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+            <ion-icon slot="start" name="trash"color="medium" size="medium"></ion-icon>
+            <ion-label>{{ reddah.instant('Common.Cache') }}</ion-label>
+            <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
         </ion-item>
     </div>
 </ion-content>

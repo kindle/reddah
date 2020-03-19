@@ -164,6 +164,7 @@
 
     "Pop":{
         "NoRecommend":"숨기다",
+        "Recommend":"추천 하 다",
         "Report":"리포트",
         "ReportReason":"구체적인 원인을 입력하십시오...",
         "ReportUserReason":"이 계좌의 구체적인 원인을 입력하십시오",

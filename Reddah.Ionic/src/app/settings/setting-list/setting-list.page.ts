@@ -1,15 +1,11 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
-import { CacheService } from "ionic-cache";
-import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
 import { SettingAboutPage } from '../setting-about/setting-about.page';
 import { SettingAccountPage } from '../setting-account/setting-account.page';
 import { SettingGePage } from '../setting-ge/setting-ge.page';
 import { SettingPrivacyPage } from '../setting-privacy/setting-privacy.page';
-import { TranslateService } from '@ngx-translate/core';
-import { MyReportPage } from '../../mytimeline/myreport/myreport.page';
 
 @Component({
     selector: 'app-setting-list',
@@ -25,11 +21,8 @@ export class SettingListPage implements OnInit {
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
-        private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
         public authService: AuthService,
         private alertController: AlertController,
-        private translate: TranslateService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
@@ -46,17 +39,17 @@ export class SettingListPage implements OnInit {
 
     async logout() {
         const alert = await this.alertController.create({
-            header: this.translate.instant("Confirm.Title"),
-            message: this.translate.instant("Confirm.LogoutMessage"),
+            header: this.reddah.instant("Confirm.Title"),
+            message: this.reddah.instant("Confirm.LogoutMessage"),
             buttons: [
             {
-                text: this.translate.instant("Confirm.Cancel"),
+                text: this.reddah.instant("Confirm.Cancel"),
                 role: 'cancel',
                 cssClass: 'secondary',
                 handler: () => {}
             }, 
             {
-                text: this.translate.instant("Confirm.Yes"),
+                text: this.reddah.instant("Confirm.Yes"),
                 handler: () => {
                     this.authService.logout();
                 }

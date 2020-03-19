@@ -1,18 +1,18 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="transparent" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-input placeholder="{{keywordPlaceholder}}" #searchKeyword clearInput (keyup.enter)="search()" (ionChange)="onSearchchange()"></ion-input>
+    <ion-input placeholder="{{keywordPlaceholder}}" [(ngModel)]="searchKeywordModel" #searchKeyword clearInput (keyup.enter)="search()" (ionChange)="onSearchchange()"></ion-input>
 </ion-item>
 <ion-content no-padding style="height:100%;background-color: white;" #searchResult>
     <ion-grid *ngIf="showTopic">
         <ion-row style="padding:10px;">
-            <ion-col text-center>
-                <ion-note>{{ 'Search.Filter' | translate }}</ion-note>
+            <ion-col style="text-align:center;">
+                <ion-note>{{ reddah.instant('Search.Filter') }}</ion-note>
             </ion-col>
         </ion-row>
         <ion-row *ngFor="let row of topics" style="padding:10px;">
-            <ion-col *ngFor="let col of row" text-center>
+            <ion-col *ngFor="let col of row" style="text-align:center;">
                 <ion-button no-margin no-padding clear color="transparent" (click)="chooseTopic(col)" style="--box-shadow: none;"
                     *ngIf="col.name">
                     <ion-text color="dark" style="padding:0;text-transform: none;">{{col.name}}</ion-text>
@@ -22,21 +22,21 @@
     </ion-grid>
     <ion-grid *ngIf="selectedTopicId==1">
         <!--<app-search-history id="1" data="articleHistories"></app-search-history>-->
-        <ion-item no-padding lines="none" *ngIf="articleHistories.length">
-            <ion-label class="chip-box-header">{{ 'Search.SearchHistory' | translate }}</ion-label>
+        <ion-item no-padding lines="none" *ngIf="articleHistories.length>0">
+            <ion-label class="chip-box-header">{{ reddah.instant('Search.SearchHistory') }}</ion-label>
             <ion-icon name="trash" color="light" (click)="clearHistory(1)" slot="end"></ion-icon>
         </ion-item>
         <div class="chip-box">
             <ion-chip outline color="light" class="chip-gap" *ngFor="let history of articleHistories">
-                <ion-label (click)="searchHistory(history)">{{history}}</ion-label>
+                <ion-label color="dark" (click)="searchHistory(history)">{{history}}</ion-label>
             </ion-chip>
         </div>
         <ion-row>
             <div *ngIf="firstLoading_a" style="display: flex; justify-content: center;width:100%;margin:15px;">
                 <ion-spinner name="bubbles"></ion-spinner>
-                <ion-text class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+                <ion-text class="loadingText">{{ reddah.instant('Button.Loading') }}</ion-text>
             </div>
-            <span class="articleTab" *ngIf="articles_a.length>0">{{ 'Menu.Recommend' | translate }}</span>
+            <span class="articleTab" *ngIf="articles_a.length>0">{{ reddah.instant('Menu.Recommend') }}</span>
         </ion-row>
         <ion-row *ngFor="let article of articles_a" (click)="view(article)">
             <div>
@@ -55,21 +55,21 @@
         </ion-row>
     </ion-grid>
     <ion-grid *ngIf="selectedTopicId==2">
-        <ion-item no-padding lines="none" *ngIf="apertureHistories.length">
-            <ion-label class="chip-box-header">{{ 'Search.SearchHistory' | translate }}</ion-label>
+        <ion-item no-padding lines="none" *ngIf="apertureHistories.length>0">
+            <ion-label class="chip-box-header">{{ reddah.instant('Search.SearchHistory') }}</ion-label>
             <ion-icon name="trash" color="light" (click)="clearHistory(2)" slot="end"></ion-icon>
         </ion-item>
         <div class="chip-box">
             <ion-chip outline color="light" class="chip-gap" *ngFor="let history of apertureHistories">
-                <ion-label (click)="searchHistory(history)">{{history}}</ion-label>
+                <ion-label color="dark" (click)="searchHistory(history)">{{history}}</ion-label>
             </ion-chip>
         </div>
         <ion-row>
             <div *ngIf="firstLoading_t" style="display: flex; justify-content: center;width:100%;margin:15px;">
                 <ion-spinner name="bubbles"></ion-spinner>
-                <ion-text class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+                <ion-text class="loadingText">{{ reddah.instant('Button.Loading') }}</ion-text>
             </div>
-            <span class="articleTab" style="margin-left:3px;" *ngIf="articles_t.length>0">{{ 'Menu.Timeline' | translate }}</span>
+            <span class="articleTab" style="margin-left:3px;" *ngIf="articles_t.length>0">{{ reddah.instant('Menu.Timeline') }}</span>
         </ion-row>
         <ion-row *ngFor="let article of articles_t" (click)="goTsViewer(article)">
             <div style="width:100%;border-bottom: 1px solid #eeeeee;padding: 10px 0;">
@@ -90,24 +90,24 @@
         <ion-row>
             <div *ngIf="firstLoading_p" style="display: flex; justify-content: center;width:100%;margin:15px;">
                 <ion-spinner name="bubbles"></ion-spinner>
-                <ion-text class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+                <ion-text class="loadingText">{{ reddah.instant('Button.Loading') }}</ion-text>
             </div>
-            <span class="articleTab" *ngIf="users_p&&users_p.length>0">{{ 'Menu.Publisher' | translate }}</span>
+            <span class="articleTab" *ngIf="users_p&&users_p.length>0">{{ reddah.instant('Menu.Publisher') }}</span>
         </ion-row>
-        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_p_recent.length>0">
+        <ion-row *ngIf="searchKeywordModel==null||searchKeywordModel==''&&users_p_recent.length>0">
             <ion-item lines="none">
-                <ion-label>{{ 'Search.Recently' | translate }}</ion-label>
+                <ion-label>{{ reddah.instant('Search.Recently') }}</ion-label>
             </ion-item>
         </ion-row>
-        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0">
+        <ion-row *ngIf="searchKeywordModel==null||searchKeywordModel==''">
             <ion-item lines="none">
                 <div style="display: flex;flex-wrap: wrap;">
                     <div style="display: flex;flex-direction: column;margin-top:15px;margin-right:15px;" *ngFor="let pub_recent of users_p_recent">
                         <ion-avatar class="userPhoto" (click)="goPub(pub_recent)">
                             <img *ngIf="pub_recent.Photo" src="{{reddah.appData('userphoto_'+pub_recent.UserName, 'photo.svg')}}" class="recentPortrait">
-                            <ion-icon *ngIf="!pub_recent.Photo" name="ios-list" color="tertiary" class="sub recentPortrait"></ion-icon>
+                            <ion-icon *ngIf="!pub_recent.Photo" name="list-outline"color="tertiary" class="sub recentPortrait"></ion-icon>
                         </ion-avatar><br>
-                        <ion-label style="margin:3px 0 0 0;padding:3px 5px;width:75px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
+                        <ion-label style="margin:3px 0 0 0;padding:3px 5px;width:75px;color:gray;text-align:center;">{{pub_recent.NickName}}</ion-label>
                     </div>
                 </div>
             </ion-item>
@@ -118,7 +118,7 @@
                     <img src="{{reddah.appData('userphoto_'+pub.UserName, 'photo.svg')}}" class="contactPortrait">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
-                    <div class="user-name" (press)="showChangeMenu($event, contact)">{{pub.NickName}}</div>
+                    <div class="user-name">{{pub.NickName}}</div>
                     <ion-note color="dark">{{pub.Signature}}</ion-note>
                 </ion-label>
             </ion-item>
@@ -128,15 +128,15 @@
         <ion-row>
             <div *ngIf="firstLoading_m" style="display: flex; justify-content: center;width:100%;margin:15px;">
                 <ion-spinner name="bubbles"></ion-spinner>
-                <ion-text class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
-            </div><span class="articleTab" *ngIf="users_m&&users_m.length>0">{{ 'Menu.MiniApp' | translate }}</span>
+                <ion-text class="loadingText">{{ reddah.instant('Button.Loading') }}</ion-text>
+            </div><span class="articleTab" *ngIf="users_m&&users_m.length>0">{{ reddah.instant('Menu.MiniApp') }}</span>
         </ion-row>
-        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_m_recent.length>0">
+        <ion-row *ngIf="(searchKeywordModel==null||searchKeywordModel=='')&&users_m_recent.length>0">
             <ion-item lines="none">
-                <ion-label>{{ 'Search.Recently' | translate }}</ion-label>
+                <ion-label>{{ reddah.instant('Search.Recently') }}</ion-label>
             </ion-item>
         </ion-row>
-        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_m_recent.length>0">
+        <ion-row *ngIf="(searchKeywordModel==null||searchKeywordModel=='')&&users_m_recent.length>0">
             <ion-item lines="none">
                 <div style="display: flex;flex-wrap: wrap;">
                     <div style="display: flex;flex-direction: column;margin-top:15px;min-width: 75px;" *ngFor="let pub_recent of users_m_recent">
@@ -145,17 +145,17 @@
                                 class="borderPortrait recentPortrait">
                             <ion-icon *ngIf="!pub_recent.Photo" name="infinite" color="tertiary" class="mini recentPortrait"></ion-icon>
                         </ion-avatar><br>
-                        <ion-label style="margin:0;padding:0 5px;width:75px;color:gray;" text-center>{{pub_recent.NickName}}</ion-label>
+                        <ion-label style="margin:0;padding:0 5px;width:75px;color:gray;text-align: center;">{{pub_recent.NickName}}</ion-label>
                     </div>
                 </div>
             </ion-item>
         </ion-row>
-        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_p_suggest.length>0&&users_m_recent.length==0">
+        <ion-row *ngIf="(searchKeywordModel==null||searchKeywordModel=='')&&users_p_suggest.length>0&&users_m_recent.length==0">
             <ion-item lines="none">
-                <ion-label>{{ 'Menu.MiniApp' | translate }}</ion-label>
+                <ion-label style="margin-left:5px;">{{ reddah.instant('Pop.Recommend') }}</ion-label>
             </ion-item>
         </ion-row>
-        <ion-row *ngIf="searchKeyword.value==null||searchKeyword.value.length==0&&users_p_suggest.length>0&&users_m_recent.length==0">
+        <ion-row *ngIf="(searchKeywordModel==null||searchKeywordModel=='')&&users_p_suggest.length>0&&users_m_recent.length==0">
             <ion-item lines="none">
                 <div style="display: flex;flex-wrap: wrap;">
                     <div style="display: flex;flex-direction: column;margin-top:15px;min-width: 75px;" *ngFor="let pub_sgg of users_p_suggest">
@@ -164,7 +164,7 @@
                                 class="borderPortrait recentPortrait">
                             <ion-icon *ngIf="!pub_sgg.Photo" name="infinite" color="tertiary" class="mini recentPortrait"></ion-icon>
                         </ion-avatar><br>
-                        <ion-label style="margin:0;padding:0 5px;width:75px;color:gray;" text-center>{{pub_sgg.NickName}}</ion-label>
+                        <ion-label style="margin:0;padding:0 5px;width:75px;color:gray;text-align:center;">{{pub_sgg.NickName}}</ion-label>
                     </div>
                 </div>
             </ion-item>
@@ -175,7 +175,7 @@
                     <img src="{{reddah.appData('userphoto_'+pub.UserName, 'photo.svg')}}" class="borderPortrait contactPortrait">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
-                    <div class="user-name" (press)="showChangeMenu($event, contact)">{{pub.NickName}}</div>
+                    <div class="user-name">{{pub.NickName}}</div>
                     <ion-note color="dark">{{pub.Signature}}</ion-note>
                 </ion-label>
             </ion-item>
@@ -185,9 +185,9 @@
         <ion-row>
             <div *ngIf="firstLoading_a" style="display: flex; justify-content: center;width:100%;margin:15px;">
                 <ion-spinner name="bubbles"></ion-spinner>
-                <ion-text class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+                <ion-text class="loadingText">{{ reddah.instant('Button.Loading') }}</ion-text>
             </div>
-            <span class="articleTab" *ngIf="articles_a.length>0">{{ 'Menu.Recommend' | translate }}</span>
+            <span class="articleTab" *ngIf="articles_a.length>0">{{ reddah.instant('Menu.Recommend') }}</span>
         </ion-row>
         <ion-row *ngFor="let article_a of articles_a" (click)="view(article_a)">
             <div>
@@ -205,14 +205,14 @@
             </div>
         </ion-row>
         <ion-row>
-            <span class="articleTab" *ngIf="articles_a.length>0" (click)="more(0)">{{ 'Search.More' | translate }}>></span>
+            <span class="articleTab" *ngIf="articles_a.length>0" (click)="more(0)">{{ reddah.instant('Search.More') }}>></span>
         </ion-row>
         <ion-row>
             <div *ngIf="firstLoading_t" style="display: flex; justify-content: center;width:100%;margin:15px;">
                 <ion-spinner name="bubbles"></ion-spinner>
-                <ion-text class="loadingText">{{ 'Button.Loading' | translate }}</ion-text>
+                <ion-text class="loadingText">{{ reddah.instant('Button.Loading') }}</ion-text>
             </div>
-            <span class="articleTab" *ngIf="articles_t.length>0">{{ 'Menu.Timeline' | translate }}</span>
+            <span class="articleTab" *ngIf="articles_t.length>0">{{ reddah.instant('Menu.Timeline') }}</span>
         </ion-row>
         <ion-row *ngFor="let article_t of articles_t" (click)="goTsViewer(article_t)">
             <div style="width:100%;border-bottom: 1px solid #eeeeee;padding: 10px 0;">
@@ -229,11 +229,11 @@
             </div>
         </ion-row>
         <ion-row>
-            <span class="articleTab" *ngIf="articles_t.length>0" (click)="more(1)">{{ 'Search.More' | translate }}>></span>
+            <span class="articleTab" *ngIf="articles_t.length>0" (click)="more(1)">{{ reddah.instant('Search.More') }}>></span>
         </ion-row>
     </ion-grid>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" *ngIf="selectedTopicId!=0">
-        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'Button.Loading' | translate }}">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ reddah.instant('Button.Loading') }}">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

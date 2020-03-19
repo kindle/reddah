@@ -4,19 +4,19 @@
     <div class="headerStart" #headerStart slot="fixed">
         <ion-item color="transparent" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
             <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
-                <ion-icon color="tertiary" is-active="false" name="ios-arrow-back"></ion-icon>
+                <ion-icon color="tertiary" is-active="false" name="arrow-back-outline"></ion-icon>
             </ion-button>
             <ion-label></ion-label>
-            <ion-icon name="camera" color="tertiary" slot="end" (click)="post($event)"></ion-icon>
+            <ion-icon name="camera-outline"color="tertiary" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll slot="fixed">
         <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
             <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
-                <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+                <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
             </ion-button>
-            <ion-label style="text-transform: none;">{{ 'Menu.Timeline' | translate }}</ion-label>
-            <ion-icon name="camera" slot="end" (click)="post($event)"></ion-icon>
+            <ion-label style="text-transform: none;">{{ reddah.instant('Menu.Timeline') }}</ion-label>
+            <ion-icon name="camera-outline"slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
     
@@ -35,10 +35,10 @@
         </div>
         <div (click)="goMessage()" *ngIf="reddah.unReadMessage.length>0" class="messageBox">
             <img [src]="reddah.appData('userphoto_'+reddah.unReadMessage.slice(-1)[0].From)" class="messagePhoto">
-            <span class="span-eclipse" style="color:white;line-height:2.1em;margin:0.24em 0.8em;">{{reddah.unReadMessage.length}} {{ 'Pop.MsgCount' | translate }}</span>
+            <span class="span-eclipse" style="color:white;line-height:2.1em;margin:0.24em 0.8em;">{{reddah.unReadMessage.length}} {{ reddah.instant('Pop.MsgCount') }}</span>
         </div>
         <div *ngFor="let article of articles" 
-        style="background-color: white; display: flex; border-bottom: 1px solid lightgrey; padding-top:25px; padding-bottom: 10px;">
+        style="background-color: white; display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
             <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
                 <img src="{{reddah.appData('userphoto_'+article.UserName)}}" class="portrait" (click)="goUser(article.UserName)">
             </div>
@@ -49,13 +49,15 @@
                     </ion-card-title>
                 </ion-card-header>
                 <div *ngIf="article.Title.length>0&&article.Title.length<100">
-                    <div style="background-color: white; padding: 0 0 4px 0;margin-bottom:0px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                    <div style="background-color: white; padding: 0 0 4px 15px;margin-bottom:0px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
                 </div>
                 <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
                     <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 12px;margin-bottom:5px;width:96%;" 
                     [innerHTML]="reddah.summaryShort(article.Title, 100, '......')"></div>
                 </ion-item>
-                <app-share-article *ngIf="article.Abstract&&article.Abstract.length>2" [abstract]="article.Abstract" [image]="article.Content" [id]="article.Ref" [type]="article.Type"></app-share-article>
+                <ion-card-content *ngIf="article.Abstract&&article.Abstract.length>2">
+                    <app-share-article [abstract]="article.Abstract" [image]="article.Content" [id]="article.Ref" [type]="article.Type"></app-share-article>
+                </ion-card-content>
                 <ion-card-content style="display:block;margin-right:20px;" *ngIf="article.Abstract.length<3&&article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>6">
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
@@ -91,18 +93,18 @@
                     </div>
                 </ion-card-content>
                 <ion-item no-padding lines="none" style="margin:2px 0;" *ngIf="article.Location&&article.Location!='undefined'" (click)="goLocation(article.Location)">
-                    <ion-note color="secondary">{{reddah.getJSON(article.Location).title}}</ion-note>
+                    <ion-label color="secondary">{{reddah.getJSON(article.Location).title}}</ion-label>
                 </ion-item>
                 <ion-item no-padding lines="none" style="margin:2px 0;">
-                    <ion-note color="dark">{{reddah.getSendTime(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
-                    <ion-note color="secondary" style="margin-left: 5px;" *ngIf="isMe(article.UserName)" (click)="delete(article)">{{ 'Comment.Delete' | translate }}</ion-note>
-                    <ion-icon name="ios-more" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
+                    <ion-text color="dark">{{reddah.getSendTime(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-text>
+                    <ion-text color="secondary" style="margin-left: 5px;" *ngIf="isMe(article.UserName)" (click)="delete(article)">{{ reddah.instant('Comment.Delete') }}</ion-text>
+                    <ion-icon name="ellipsis-horizontal"slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
                 </ion-item>
                 <ion-item no-padding lines="none" *ngIf="reddah.getAllowedNames(article.GroupName).length>0">
                     <div style="width: 100%;">
                         <div class="like-arrow-up"></div>
                         <div class="likeSection">
-                            <ion-icon name="heart-empty" class="likeIcon" style="font-size:15px;"></ion-icon>
+                            <ion-icon name="heart-outline" class="likeIcon" style="font-size:15px;"></ion-icon>
                             <span class="likeUserName">
                                 <span class="user-name" (click)="goUser(user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName);last as isLast;">{{user.displayName}}{{isLast?"":", "}}</span>
                             </span>
@@ -126,17 +128,17 @@
         
         <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
             <ion-infinite-scroll-content loadingSpinner="bubbles" 
-                loadingText="{{ 'Button.Loading' | translate }}">
+                loadingText="{{ reddah.instant('Button.Loading') }}">
             </ion-infinite-scroll-content>
         </ion-infinite-scroll>
     </div>
 </ion-content>
 <ion-footer *ngIf="showAddComment">
-    <ion-item margin-end>
-        <ion-input #newComment id="newComment" placeholder="{{selectedReplyPlaceholder}}" padding-start></ion-input>
-        <ion-icon name="happy" size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>
-        <ion-button (click)="SendComment(-1)" color="primary" [disabled]="newComment.value==null||newComment.value==''">{{ 'Confirm.Submit' | translate }}</ion-button>
-    </ion-item>
+    <div style="display:flex;">
+        <ion-input #newComment id="newComment" placeholder="{{selectedReplyPlaceholder}}" style="padding-left:5px !important;"></ion-input>
+        <ion-icon style="align-self:center;" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
+        <ion-button (click)="SendComment()" color="primary" [disabled]="newComment.value==null||newComment.value==''">{{ reddah.instant('Confirm.Submit') }}</ion-button>
+    </div>
     
     <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
 </ion-footer>

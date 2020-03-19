@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ReddahService } from '../../../reddah.service';
 import { LoadingController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
@@ -15,9 +14,8 @@ export class RegisterSubPage implements OnInit {
     @Input() title : string;
 
     constructor(private modalController: ModalController,
-        private reddah: ReddahService,
+        public reddah: ReddahService,
         private loadingController: LoadingController,
-        private translate: TranslateService,
         private iab: InAppBrowser,
     ) { }
 
@@ -34,20 +32,20 @@ export class RegisterSubPage implements OnInit {
 
     async register() {
         if (this.nickname.length == 0) {
-            this.reddah.toast(this.translate.instant("Input.Error.SubNameEmpty"));
+            this.reddah.toast(this.reddah.instant("Input.Error.SubNameEmpty"));
         }else if (this.nickname.length < 2) {
-            this.reddah.toast(this.translate.instant("Input.Error.SubNameTooShort"));
+            this.reddah.toast(this.reddah.instant("Input.Error.SubNameTooShort"));
         }else if (this.signature.length == 0) {
-            this.reddah.toast(this.translate.instant("Input.Error.SubDescEmpty"));
+            this.reddah.toast(this.reddah.instant("Input.Error.SubDescEmpty"));
         }else if (this.email.length == 0) {
-            this.reddah.toast(this.translate.instant("Input.Error.EmailEmpty"));
+            this.reddah.toast(this.reddah.instant("Input.Error.EmailEmpty"));
         }
         else if (!this.agreed) {
-            this.reddah.toast(this.translate.instant("Input.Error.Agree"));
+            this.reddah.toast(this.reddah.instant("Input.Error.Agree"));
         }
         else {
             const loading = await this.loadingController.create({
-                message: this.translate.instant("Register.Loading"),
+                message: this.reddah.instant("Register.Loading"),
                 spinner: 'circles',
             });
             await loading.present();
@@ -59,16 +57,16 @@ export class RegisterSubPage implements OnInit {
             formData.append("Email", this.email);
             formData.append("Locale", this.reddah.getCurrentLocale());
             //mail
-            formData.append("MailTitle", this.translate.instant("Mail.Title"));
-            formData.append("MailSub", this.translate.instant("Mail.RegisterPub.Sub"));
-            formData.append("MailParaStart", this.translate.instant("Mail.RegisterPub.ParaStart"));
-            formData.append("MailParaEnd", this.translate.instant("Mail.ParaEnd"));
+            formData.append("MailTitle", this.reddah.instant("Mail.Title"));
+            formData.append("MailSub", this.reddah.instant("Mail.RegisterPub.Sub"));
+            formData.append("MailParaStart", this.reddah.instant("Mail.RegisterPub.ParaStart"));
+            formData.append("MailParaEnd", this.reddah.instant("Mail.ParaEnd"));
             this.reddah.registerSub(formData)
             .subscribe(result => 
             {
                 loading.dismiss();
                 if(result.Success==0){
-                    this.reddah.toast(this.translate.instant("Register.SuccessNonUser"), "primary");
+                    this.reddah.toast(this.reddah.instant("Register.SuccessNonUser"), "primary");
                     
                     this.modalController.dismiss(true);
                 }

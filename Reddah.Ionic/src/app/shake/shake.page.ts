@@ -1,11 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonInfiniteScroll, IonContent, Platform } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
-import { Article } from '../model/article';
-import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
-import { PostviewerPage } from '../postviewer/postviewer.page';
-import { TranslateService } from '@ngx-translate/core';
+import { LoadingController, NavController, ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { Shake } from '@ionic-native/shake/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
@@ -33,11 +29,8 @@ export class ShakePage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
-        private popoverController: PopoverController,
         public modalController: ModalController,
-        private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         private shake: Shake,
         private nativeAudio: NativeAudio,

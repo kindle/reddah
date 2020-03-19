@@ -1,14 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { IonInfiniteScroll, IonContent } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
-import { Article } from '../../model/article';
-import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
-import { PostviewerPage } from '../../postviewer/postviewer.page';
-import { TranslateService } from '@ngx-translate/core';
-import { CacheService } from "ionic-cache";
-
-import { ActivatedRoute, Params, Router } from '@angular/router';
 
 //import dat from 'dat.gui'
 //import Stats from 'stats-js';
@@ -29,14 +21,8 @@ export class EarthPage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
-        private router: Router,
         public modalController: ModalController,
-        private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
-        public activeRoute: ActivatedRoute,
-        //: Events,
     ){
         this.userName = this.reddah.getCurrentUser();
     }

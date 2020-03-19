@@ -1,14 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReddahService } from '../../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingController, NavController, PopoverController, ActionSheetController, IonContent  } from '@ionic/angular';
+import { LoadingController, NavController, ActionSheetController, IonContent  } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { CacheService } from "ionic-cache";
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { RegisterSubPage } from '../register-sub/register-sub.page';
-import { UserPage } from '../../../common/user/user.page';
 import { SubInfoPage } from '../sub-info/sub-info.page';
 
 @Component({
@@ -22,18 +17,12 @@ export class ManagePage implements OnInit {
         await this.modalController.dismiss();
     }
 
-    constructor(private reddah : ReddahService,
+    constructor(public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
-        private renderer: Renderer2,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
-        private popoverController: PopoverController,
-        private photoLibrary: PhotoLibrary,
         private cacheService: CacheService,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
         public actionSheetController: ActionSheetController,
         ){
         

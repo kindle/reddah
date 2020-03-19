@@ -1,13 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PopoverController, LoadingController, ModalController } from '@ionic/angular'
 import { TimelinePopPage } from '../../common/timeline-pop.page';
-import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ReddahService } from '../../reddah.service';
-import { File, FileEntry } from '@ionic-native/file/ngx';
-import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { DragulaService } from 'ng2-dragula';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-add-material',
@@ -21,12 +17,10 @@ export class AddMaterialPage implements OnInit {
 
     constructor(
         private popoverController: PopoverController,
-        private reddah: ReddahService,
-        private file: File,
+        public reddah: ReddahService,
         private loadingController: LoadingController,
         private modalController: ModalController,
         private dragulaService: DragulaService,
-        private translate: TranslateService,
     ) { 
         this.dragulaService.drag('bag')
         .subscribe(({ name, el }) => {
@@ -116,7 +110,7 @@ export class AddMaterialPage implements OnInit {
 
     async submit(){
         const loading = await this.loadingController.create({
-            message: this.translate.instant("Article.Loading"),
+            message: this.reddah.instant("Article.Loading"),
             spinner: 'circles',
         });
         await loading.present();

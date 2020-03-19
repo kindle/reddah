@@ -6,7 +6,6 @@ import { PostviewerPage } from '../../postviewer/postviewer.page';
 import { ShareChooseChatPage } from '../../chat/share-choose-chat/share-choose-chat.page';
 import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
 import { MiniViewerComponent } from '../mini-viewer/mini-viewer.component';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-share-article',
@@ -24,7 +23,6 @@ export class ShareArticleComponent {
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
-        private translate: TranslateService
     ) { }
 
     async viewArticle(){
@@ -96,8 +94,8 @@ export class ShareArticleComponent {
                 const modal = await this.modalController.create({
                     component: AddFeedbackPage,
                     componentProps: { 
-                        title: this.translate.instant("Pop.Report"),
-                        desc: this.translate.instant("Pop.ReportReason"),
+                        title: this.reddah.instant("Pop.Report"),
+                        desc: this.reddah.instant("Pop.ReportReason"),
                         feedbackType: 4,
                         article: mini
                     },
@@ -110,7 +108,7 @@ export class ShareArticleComponent {
                 const modal = await this.modalController.create({
                     component: ShareChooseChatPage,
                     componentProps: { 
-                        title: this.translate.instant("Common.Choose"),
+                        title: this.reddah.instant("Common.Choose"),
                         article: mini,
                     },
                     cssClass: "modal-fullscreen",

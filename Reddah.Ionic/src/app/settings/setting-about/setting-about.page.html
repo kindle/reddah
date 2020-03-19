@@ -1,34 +1,34 @@
 <ion-item color="light" no-padding lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
 </ion-item>
 <ion-content padding style="background-color: white;">
-    <div class="logoArea" text-center>
+    <div class="logoArea">
         <img class="logo" src="assets/icon/drawable-xxxhdpi-icon.png">
         <p class="title">Reddah</p>
-        <p class="version">{{ 'About.CurrentVersion' | translate }} {{version}}</p>
+        <p class="version">{{ reddah.instant('About.CurrentVersion') }} {{version}}</p>
     </div>
 
     <ion-item class="borderItem" (click)="buymebeer()">
         <ion-icon class="menuIcon" slot="start" name="beer" color="dark" size="medium"></ion-icon>
-        <ion-label>{{ 'About.BuyBeer' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-label>{{ reddah.instant('About.BuyBeer') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item lines="none" class="borderBottom" (click)="like()">
         <ion-icon class="menuIcon" slot="start" name="thumbs-up" color="dark" size="medium"></ion-icon>
-        <ion-label>{{ 'Menu.Header.Feedback' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.Header.Feedback') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 
 <!--
     <ion-item lines="none" class="borderBottom borderItem" (click)="upgrade()">
-        <ion-label>{{ 'About.CheckUpgrade' | translate }}</ion-label>
-        <ion-icon name="ios-arrow-forward" slot="end" size="small"></ion-icon>
+        <ion-label>{{ reddah.instant('About.CheckUpgrade') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 -->
 
-    <div class="conductArea" text-center>
+    <div class="conductArea">
         <p class="copyright">
             Reddah.com<br>
         </p>

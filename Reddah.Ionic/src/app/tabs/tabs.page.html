@@ -1,53 +1,31 @@
-<ion-tabs *ngIf="isAuthenticated()" appSwipetab 
+<!--appSwipetab-->
+<ion-tabs *ngIf="isAuthenticated()" 
 (ionTabsDidChange)="ionTabsDidChange($event)" (tabChange)="onTabChange($event)" #myTabs>
-    <ion-tab tab="message">
-        <ion-router-outlet name="message"></ion-router-outlet>
-    </ion-tab>
-    <ion-tab tab="contact">
-        <ion-router-outlet name="contact"></ion-router-outlet>
-    </ion-tab>
-    <ion-tab tab="earth">
-      <ion-router-outlet name="earth"></ion-router-outlet>
-    </ion-tab>
-    <ion-tab tab="find">
-        <ion-router-outlet name="find"></ion-router-outlet>
-    </ion-tab>
-    <ion-tab tab="about" #about>
-        <ion-router-outlet name="about"></ion-router-outlet>
-    </ion-tab>
-    <ion-tab tab="home">
-        <ion-router-outlet name="home"></ion-router-outlet>
-    </ion-tab>
-
     <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="home" href="/tabs/(home:home)" (click)="change()">
-            <ion-icon name="book" style="width: 20%;position: relative;"></ion-icon>
-            <ion-label class="tab">{{ 'Menu.Recommend' | translate }}</ion-label>
+        <ion-tab-button tab="home" href="/tabs/home" (click)="change()">
+            <ion-icon name="book" style="position: relative;"></ion-icon>
+            <ion-label class="tab">{{ reddah.instant('Menu.Recommend') }}</ion-label>
         </ion-tab-button>
         
-        <ion-tab-button tab="find" href="/tabs/(find:find)" (click)="change()">
-            <ion-icon name="compass" style="width:20%;position: relative;"></ion-icon>
-            <ion-label class="tab">{{ 'Menu.Find' | translate }}</ion-label>
+        <ion-tab-button tab="find" href="/tabs/find" (click)="change()">
+            <ion-icon name="compass" style="position: relative;"></ion-icon>
+            <ion-label class="tab">{{ reddah.instant('Menu.Find') }}</ion-label>
         </ion-tab-button>
         
         <ion-tab-button (click)="openEarth()">
-            <ion-icon name="globe" style="margin-top:-3px; width: 80px;height:100%;position: absolute;"></ion-icon>
+            <ion-icon name="earth" style="margin-top:-3px; width: 80px;height:100%;position: absolute;"></ion-icon>
         </ion-tab-button>
 
-        <ion-tab-button tab="contact" href="/tabs/(contact:contact)" (click)="change()">
+        <ion-tab-button tab="contact" href="/tabs/contact" (click)="change()">
             <div style="position:absolute;right:20px;top:10px;" 
                 [ngClass]="{'new-point':reddah.unReadMessage.length>0}"></div>
-            <ion-icon name="ios-people" style="width: 20%;position: relative;"></ion-icon>
-            <ion-label class="tab">{{ 'Menu.Contact' | translate }}</ion-label>
-            <!--<ion-badge class="tab-count" color="danger" 
-                *ngIf="!isIos&&reddah.unReadMessage.length>0">
-                {{reddah.unReadMessage.length}}
-            </ion-badge>-->
+            <ion-icon name="people" style="position: relative;"></ion-icon>
+            <ion-label class="tab">{{ reddah.instant('Menu.Contact') }}</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="about" href="/tabs/(about:about)" (click)="change('about')">
-            <ion-icon name="person" style="width: 20%;position: relative;"></ion-icon>
-            <ion-label class="tab">{{ 'Menu.About' | translate }}</ion-label>
+        <ion-tab-button tab="about" href="/tabs/about" (click)="change('about')">
+            <ion-icon name="person" style="position: relative;"></ion-icon>
+            <ion-label class="tab">{{ reddah.instant('Menu.About') }}</ion-label>
         </ion-tab-button>
     </ion-tab-bar>
 </ion-tabs>

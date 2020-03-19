@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
-import { LoadingController, ToastController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LocalePage } from '../common/locale/locale.page';
 import { SigninPage } from './signin/signin.page';
@@ -14,9 +12,8 @@ import PerspectiveTransform from '../../assets/js/css_globe_PerspectiveTransform
 import TweenMax from '../../assets/js/TweenMax.min.js'
 import { AuthService } from '../auth.service';
 import { RegisterPage } from './register/register.page'
-import { Globalization } from '@ionic-native/globalization';
+import { Globalization } from '@ionic-native/globalization/ngx';
 import { MapPage } from '../map/map.page';
-import { CacheService } from 'ionic-cache';
 
 @Component({
     selector: 'app-surface',
@@ -26,18 +23,13 @@ import { CacheService } from 'ionic-cache';
 export class SurfacePage implements OnInit {
 
     constructor(private modalController: ModalController,
-        private reddah: ReddahService,
-        private loadingController: LoadingController,
-        private translateService: TranslateService,
+        public reddah: ReddahService,
         private platform: Platform,
         private router: Router,
         private authService: AuthService,
         private localStorageService: LocalStorageService,
-        private translate: TranslateService,
-        private cacheService: CacheService,
-    ) {
-        
-    }
+        private globalization: Globalization,
+    ) {}
 
     ngOnInit() {
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
@@ -45,26 +37,24 @@ export class SurfacePage implements OnInit {
         if(currentLocale==null){
             if(this.platform.is('cordova'))
             { 
-                Globalization.getPreferredLanguage()
+                this.globalization.getPreferredLanguage()
                 .then(res => {
                     this.localStorageService.store("Reddah_Locale", res.value);
-                    this.translate.setDefaultLang(res.value);
+                    this.reddah.loadTranslate(res.value);
                 })
                 .catch(e => {
                     this.localStorageService.store("Reddah_Locale", defaultLocale);
-                    this.translate.setDefaultLang(defaultLocale);
+                    this.reddah.loadTranslate(defaultLocale);
                 });
             }
             else{
                 this.localStorageService.store("Reddah_Locale", defaultLocale);
-                this.translate.setDefaultLang(defaultLocale);
-                this.translate.use(defaultLocale);
+                this.reddah.loadTranslate(defaultLocale);
             }
 
         }
         else{
-            this.translate.setDefaultLang(currentLocale);
-            this.translate.use(currentLocale);
+            this.reddah.loadTranslate(currentLocale);
         }
         this.init(null);
         setTimeout(()=>{this.tap()},1500)
@@ -131,7 +121,7 @@ export class SurfacePage implements OnInit {
         const { data } = await changeLocaleModal.onDidDismiss();
         if(data){
             let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-            this.translate.setDefaultLang(currentLocale);
+            this.reddah.loadTranslate(currentLocale);
         }
         this.config.isWorldVisible = true;
         

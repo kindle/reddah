@@ -17,9 +17,9 @@ export class NewFriendPage implements OnInit {
     friendRequestList = [];
 
     constructor(
-            private modalController: ModalController,
-            public reddah: ReddahService,
-            private localStorageService: LocalStorageService) { }
+        private modalController: ModalController,
+        public reddah: ReddahService,
+        private localStorageService: LocalStorageService) { }
 
     ngOnInit() {
         this.loadRequests();

@@ -1,8 +1,8 @@
 <ion-item no-padding lines="none" color="dark" (click)="shakeAni()">
     <ion-button clear icon-start color="transparent" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ios-arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-label>{{ 'Menu.Shake' | translate }}</ion-label>
+    <ion-label>{{ reddah.instant('Menu.Shake') }}</ion-label>
 </ion-item>
 <ion-content #pageTop style="background-color: white;">
     <div class="shakebg" *ngIf="showShakebg">
@@ -14,10 +14,10 @@
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
                     <span class="user-name" style="color:white;">{{reddah.getDisplayName(user.UserName)}}</span>
-                    <ion-icon size="small" class="cmd-title" name="ios-male" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
-                    <ion-icon size="small" class="cmd-title" name="ios-female" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
+                    <ion-icon size="small" class="cmd-title" name="male-outline"*ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
+                    <ion-icon size="small" class="cmd-title" name="female-outline"*ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
                     <br>
-                    <ion-note color="tertiary">{{ 'Common.Distance' | translate }}: {{reddah.getRuffDistanceByDegree(user.Distance)}}</ion-note>
+                    <ion-note color="tertiary">{{ reddah.instant('Common.Distance') }}: {{reddah.getRuffDistanceByDegree(user.Distance)}}</ion-note>
                 </ion-label>
             </ion-item>
         </div>

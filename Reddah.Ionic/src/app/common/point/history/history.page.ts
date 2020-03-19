@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 import { ReddahService } from '../../../reddah.service';
-import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 
 @Component({
@@ -28,7 +26,6 @@ export class HistoryPage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
         public modalController: ModalController,
         private cacheService: CacheService,
@@ -39,7 +36,7 @@ export class HistoryPage implements OnInit {
 
     async ngOnInit(){
         const loading = await this.loadingController.create({
-            message: this.translateService.instant("Article.Loading"),
+            message: this.reddah.instant("Article.Loading"),
             spinner: 'circles',
         });
         await loading.present();

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LoadingController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
@@ -12,10 +11,10 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 })
 export class RegisterPage implements OnInit {
 
-    constructor(private modalController: ModalController,
-        private reddah: ReddahService,
+    constructor(
+        private modalController: ModalController,
+        public reddah: ReddahService,
         private loadingController: LoadingController,
-        private translate: TranslateService,
         private iab: InAppBrowser
     ) { }
 
@@ -32,24 +31,24 @@ export class RegisterPage implements OnInit {
 
     async register() {
         if (this.username.length == 0) {
-            this.reddah.toast(this.translate.instant("Input.Error.UserNameEmpty"));
+            this.reddah.toast(this.reddah.instant("Input.Error.UserNameEmpty"));
         }
         else if (this.username.length > 18) {
-            this.reddah.toast(this.translate.instant("Input.Error.UserNameTooLong"));
+            this.reddah.toast(this.reddah.instant("Input.Error.UserNameTooLong"));
         }else if (this.password.length == 0) {
-            this.reddah.toast(this.translate.instant("Input.Error.PasswordEmpty"));
+            this.reddah.toast(this.reddah.instant("Input.Error.PasswordEmpty"));
         }else if (this.email.length == 0) {
-            this.reddah.toast(this.translate.instant("Input.Error.EmailEmpty"));
+            this.reddah.toast(this.reddah.instant("Input.Error.EmailEmpty"));
         }
         else if (this.password!=this.confirmpassword) {
-            this.reddah.toast(this.translate.instant("Input.Error.PasswordDifferent"));
+            this.reddah.toast(this.reddah.instant("Input.Error.PasswordDifferent"));
         }
         else if (!this.agreed) {
-            this.reddah.toast(this.translate.instant("Input.Error.Agree"));
+            this.reddah.toast(this.reddah.instant("Input.Error.Agree"));
         }
         else {
             const loading = await this.loadingController.create({
-                message: this.translate.instant("Register.Loading"),
+                message: this.reddah.instant("Register.Loading"),
                 spinner: 'circles',
             });
             await loading.present();
@@ -60,10 +59,10 @@ export class RegisterPage implements OnInit {
             formData.append("Email", this.email);
             formData.append("Locale", this.reddah.getCurrentLocale());
             //mail
-            formData.append("MailTitle", this.translate.instant("Mail.Title"));
-            formData.append("MailSub", this.translate.instant("Mail.Register.Sub"));
-            formData.append("MailParaStart", this.translate.instant("Mail.Register.ParaStart"));
-            formData.append("MailParaEnd", this.translate.instant("Mail.ParaEnd"));
+            formData.append("MailTitle", this.reddah.instant("Mail.Title"));
+            formData.append("MailSub", this.reddah.instant("Mail.Register.Sub"));
+            formData.append("MailParaStart", this.reddah.instant("Mail.Register.ParaStart"));
+            formData.append("MailParaEnd", this.reddah.instant("Mail.ParaEnd"));
 
             this.reddah.register(formData)
             .subscribe(result => 
@@ -71,11 +70,11 @@ export class RegisterPage implements OnInit {
                 loading.dismiss();
                 if(result.Success==0){
                     this.reddah.setLoginUserName(this.username);
-                    this.reddah.toast(this.translate.instant("Register.Success"), "primary");
+                    this.reddah.toast(this.reddah.instant("Register.Success"), "primary");
                     this.modalController.dismiss(this.username);
                 }
                 else{
-                    let msg = this.translate.instant(`Service.${result.Success}`);
+                    let msg = this.reddah.instant(`Service.${result.Success}`);
                     this.reddah.toast(msg, "danger");
                 }
                 
@@ -115,7 +114,7 @@ export class RegisterPage implements OnInit {
     checkFlagUserNamePass = false;
     async checkUserName(){
         if(this.username.length<6||this.username.length>18){
-            this.errorMessage = this.translate.instant(`Service.1001`);
+            this.errorMessage = this.reddah.instant(`Service.1001`);
             return;
         }
 
@@ -129,7 +128,7 @@ export class RegisterPage implements OnInit {
                 this.checkFlagUserNamePass = true;
             }
             else{
-                this.errorMessage = this.translate.instant(`Service.${data.Success}`);
+                this.errorMessage = this.reddah.instant(`Service.${data.Success}`);
             }
             this.checkFlagUserName = false;
         })
@@ -142,7 +141,7 @@ export class RegisterPage implements OnInit {
 
     checkConfirmPassword(){
         if (this.password!=this.confirmpassword) {
-            this.errorMessage = this.translate.instant("Input.Error.PasswordDifferent");
+            this.errorMessage = this.reddah.instant("Input.Error.PasswordDifferent");
         }
         else{
             this.errorMessage = "";
@@ -155,7 +154,7 @@ export class RegisterPage implements OnInit {
             this.errorMessage = "";
         }
         else{
-            this.errorMessage = this.translate.instant(`Service.1002`);
+            this.errorMessage = this.reddah.instant(`Service.1002`);
         }
     }
 

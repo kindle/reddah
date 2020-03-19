@@ -1,6 +1,6 @@
 <ion-item color="light" no-padding lines="none">
-    <ion-icon name="ios-arrow-back" (click)="close()" class="backbutton"></ion-icon>
-    <ion-text>{{ 'Comment.Comment' | translate }}</ion-text>
+    <ion-icon name="arrow-back-outline" (click)="close()" class="backbutton"></ion-icon>
+    <ion-text>{{ reddah.instant('Comment.Comment') }}</ion-text>
 </ion-item>
 <ion-content padding [scrollEvents]="true" (ionScroll)="commentbox.onScroll($event)">
     <ion-item lines="none" no-padding>
@@ -16,14 +16,14 @@
 
     <ion-item lines="none" no-padding>
         <ion-label text-wrap>
-            {{ 'Comment.Comment' | translate }} {{allRepliesCount}}
+            {{ reddah.instant('Comment.Comment') }} {{allRepliesCount}}
         </ion-label>
         <!-- [interfaceOptions]="customPopoverOptions" interface="popover" -->
         <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" 
-        cancelText="{{ 'Confirm.Cancel' | translate }}" okText="{{ 'Confirm.Yes' | translate }}" #commentSortType>
-            <ion-select-option value="latest">{{ 'Confirm.ByLatest' | translate }}</ion-select-option>
-            <ion-select-option value="oldest">{{ 'Confirm.ByEarly' | translate }}</ion-select-option>
-            <ion-select-option value="mostlike">{{ 'Confirm.ByLike' | translate }}</ion-select-option>
+        cancelText="{{ reddah.instant('Confirm.Cancel') }}" okText="{{ reddah.instant('Confirm.Yes') }}" #commentSortType>
+            <ion-select-option value="latest">{{ reddah.instant('Confirm.ByLatest') }}</ion-select-option>
+            <ion-select-option value="oldest">{{ reddah.instant('Confirm.ByEarly') }}</ion-select-option>
+            <ion-select-option value="mostlike">{{ reddah.instant('Confirm.ByLike') }}</ion-select-option>
         </ion-select>
     </ion-item>
     <div *ngFor="let reply of comments">
@@ -36,7 +36,7 @@
                     <div style="display: flex;justify-content:space-between">
                         <span class="user-name" (click)="goUser(reply.UserName)">{{reddah.getDisplayName(reply.UserName)}}</span>
                         <ion-note *ngIf="canDelete(reply)" color="danger" slot="end" (click)="delete(reply)">
-                            [{{'Comment.Delete' | translate }}]
+                            [{{reddah.instant('Comment.Delete') }}]
                         </ion-note>
                         <div *ngIf="normal" (click)="likeComment(reply)">
                             <ion-icon name="thumbs-up" [color]="reply.like?'primary':'medium'" size="small"></ion-icon>

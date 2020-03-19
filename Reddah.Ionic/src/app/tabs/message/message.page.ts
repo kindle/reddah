@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, Platform, AlertController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { ChatFirePage } from '../../chatfire/chat-fire.page';
 import { GroupChatFirePage } from '../../chatfire/group-chat-fire.page';
 
@@ -18,12 +17,10 @@ export class MessageListPage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
         private platform: Platform,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
-        private translate: TranslateService,
         private alertController: AlertController,
 
     ){
@@ -32,17 +29,17 @@ export class MessageListPage implements OnInit {
 
     async deleteConfirm(message) {
         const alert = await this.alertController.create({
-            header: this.translate.instant("Confirm.Title"),
-            message: this.translate.instant("Confirm.DeleteMessage"),
+            header: this.reddah.instant("Confirm.Title"),
+            message: this.reddah.instant("Confirm.DeleteMessage"),
             buttons: [
               {
-                text: this.translate.instant("Confirm.Cancel"),
+                text: this.reddah.instant("Confirm.Cancel"),
                 role: 'cancel',
                 cssClass: 'secondary',
                 handler: (blah) => {
                 }
               }, {
-                text: this.translate.instant("Confirm.Yes"),
+                text: this.reddah.instant("Confirm.Yes"),
                 handler: () => {
                     /*let foundFlag = false;
                     this.messages.forEach((m, index)=>{
@@ -141,6 +138,7 @@ export class MessageListPage implements OnInit {
     }
 
     async viewChat(message) {
+        console.log(message)
         if(message.Type==2){
             this.chat(message.GroupName, message.IsNew)
         }

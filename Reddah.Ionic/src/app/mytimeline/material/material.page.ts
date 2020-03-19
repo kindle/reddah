@@ -2,17 +2,12 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/co
 import { IonInfiniteScroll, IonContent, LoadingController, NavController, PopoverController, ModalController, AlertController, } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { TranslateService } from '@ngx-translate/core';
 import { TimelinePopPage } from '../../common/timeline-pop.page';
 import { UserPage } from '../../common/user/user.page';
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
-import { Router, ActivatedRoute } from '@angular/router';
 import { ArticleTextPopPage } from '../../common/article-text-pop.page'
 import { AddMaterialPage } from '../../mytimeline/add-material/add-material.page'
-import { FileTransfer } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
     selector: 'app-material',
@@ -37,23 +32,25 @@ export class MaterialPage implements OnInit {
         this.modalController.dismiss();
     }
 
+
+    playVideo(id){
+        
+    }
+
+    goLocation(location){
+
+    }
+    
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
         private renderer: Renderer2,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private popoverController: PopoverController,
         private cacheService: CacheService,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
-        private transfer: FileTransfer, 
-        private file: File,
-        private statusBar: StatusBar,
         private alertController: AlertController,
-        private translate: TranslateService,
     ){
         this.userName = this.reddah.getCurrentUser();
     }
@@ -267,17 +264,17 @@ export class MaterialPage implements OnInit {
 
     async delete(article){
         const alert = await this.alertController.create({
-            header: this.translate.instant("Confirm.Title"),
-            message: this.translate.instant("Confirm.DeleteMessage"),
+            header: this.reddah.instant("Confirm.Title"),
+            message: this.reddah.instant("Confirm.DeleteMessage"),
             buttons: [
             {
-                text: this.translate.instant("Confirm.Cancel"),
+                text: this.reddah.instant("Confirm.Cancel"),
                 role: 'cancel',
                 cssClass: 'secondary',
                 handler: () => {}
             }, 
             {
-                text: this.translate.instant("Confirm.Yes"),
+                text: this.reddah.instant("Confirm.Yes"),
                 handler: () => {
                     //ui delete
                     this.articles.forEach((item, index)=>{

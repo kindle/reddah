@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ReddahService } from '../../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { ShareChooseUserPage } from '../../chat/share-choose-user/share-choose-user.page';
 
 @Component({
@@ -20,7 +19,6 @@ export class ShareChooseChatPage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
 
         public modalController: ModalController,

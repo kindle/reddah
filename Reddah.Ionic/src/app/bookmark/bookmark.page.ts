@@ -2,10 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../model/article';
-import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
 import { PostviewerPage } from '../postviewer/postviewer.page';
-import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { BookmarkPopPage } from '../common/bookmark-pop.page';
 import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
@@ -32,11 +30,9 @@ export class BookmarkPage implements OnInit {
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
-        public translateService: TranslateService,
         public navController: NavController,
         private popoverController: PopoverController,
         public modalController: ModalController,
-        private localStorageService: LocalStorageService,
         private cacheService: CacheService,
 
     ){
@@ -45,7 +41,7 @@ export class BookmarkPage implements OnInit {
 
     async ngOnInit(){
         const loading = await this.loadingController.create({
-            message: this.translateService.instant("Article.Loading"),
+            message: this.reddah.instant("Article.Loading"),
             spinner: 'circles',
         });
         await loading.present();

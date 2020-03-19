@@ -5,7 +5,6 @@ import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
 import 'hammerjs';
 import { ReddahService } from '../../reddah.service';
-import { TranslateService } from '@ngx-translate/core';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @Component({
@@ -32,7 +31,6 @@ export class ImageViewerComponent implements OnInit {
         private toastController: ToastController,
         private actionSheetController: ActionSheetController,
         public reddah: ReddahService,
-        public translate: TranslateService,
         private clipboard: Clipboard,
         private platform: Platform,
         private zone: NgZone,
@@ -117,7 +115,7 @@ export class ImageViewerComponent implements OnInit {
             const actionSheet = await this.actionSheetController.create({
                 buttons: [
                 {
-                    text: this.translate.instant("Menu.Mark"),
+                    text: this.reddah.instant("Menu.Mark"),
                     icon: 'bookmark',
                     handler: () => {
                         let formData = new FormData();
@@ -129,7 +127,7 @@ export class ImageViewerComponent implements OnInit {
                     }
                 }, 
                 {
-                    text: this.translate.instant("Common.Save"),
+                    text: this.reddah.instant("Common.Save"),
                     icon: 'ios-save',
                     handler: () => {
                         let link = document.createElement("a");
@@ -155,7 +153,7 @@ export class ImageViewerComponent implements OnInit {
                     }
                 },*/ 
                 {
-                    text: this.translate.instant("Common.Copy"),
+                    text: this.reddah.instant("Common.Copy"),
                     icon: 'copy',
                     handler: () => {
                         let url = item.webPreviewUrl;
@@ -164,7 +162,7 @@ export class ImageViewerComponent implements OnInit {
                     }
                 },
                 {
-                    text: this.translate.instant("Menu.Mark"),
+                    text: this.reddah.instant("Menu.Mark"),
                     icon: 'bookmark',
                     handler: () => {
                         let formData = new FormData();
@@ -176,7 +174,7 @@ export class ImageViewerComponent implements OnInit {
                     }
                 }, 
                 {
-                    text: this.translate.instant("Common.Save"),
+                    text: this.reddah.instant("Common.Save"),
                     icon: 'ios-save',
                     handler: () => {
                         this.downloadImage(item);
@@ -216,7 +214,7 @@ export class ImageViewerComponent implements OnInit {
     async downloadOrgImage(item, cp = false) {
         let briefTarget = "DCIM/Reddah/";// + newFileName;
         const toast = await this.toastController.create({
-            message: `${this.translate.instant("Common.Save")}:${briefTarget}`,
+            message: `${this.reddah.instant("Common.Save")}:${briefTarget}`,
             //showCloseButton: false,
             position: 'bottom',
             duration: 2500
@@ -290,7 +288,7 @@ export class ImageViewerComponent implements OnInit {
         let briefTarget = "DCIM/Reddah/";// + newFileName;
 
         const toast = await this.toastController.create({
-            message: `${this.translate.instant("Common.Save")}:${briefTarget}`,
+            message: `${this.reddah.instant("Common.Save")}:${briefTarget}`,
             //showCloseButton: false,
             position: 'bottom',
             duration: 2500

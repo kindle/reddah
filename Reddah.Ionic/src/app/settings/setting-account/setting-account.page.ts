@@ -20,11 +20,7 @@ export class SettingAccountPage implements OnInit {
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
-        private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
         public authService: AuthService,
-        private toastController: ToastController,
-        private translate: TranslateService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
@@ -62,12 +58,12 @@ export class SettingAccountPage implements OnInit {
     async verifyEmail(){
         let formData = new FormData();
         formData.append("Locale", this.reddah.getCurrentLocale());
-        formData.append("MailTitle", this.translate.instant("Mail.Title"));
-        formData.append("MailSub", this.translate.instant("Mail.Register.Sub"));
-        formData.append("MailParaStart", this.translate.instant("Mail.Register.ParaStart"));
-        formData.append("MailParaEnd", this.translate.instant("Mail.ParaEnd"));
+        formData.append("MailTitle", this.reddah.instant("Mail.Title"));
+        formData.append("MailSub", this.reddah.instant("Mail.Register.Sub"));
+        formData.append("MailParaStart", this.reddah.instant("Mail.Register.ParaStart"));
+        formData.append("MailParaEnd", this.reddah.instant("Mail.ParaEnd"));
         this.reddah.sendVerfiyEmail(formData).subscribe(data=>{
-            this.reddah.toast(this.translate.instant("Service.1005"), "primary");
+            this.reddah.toast(this.reddah.instant("Service.1005"), "primary");
         });
 
         this.verifyFlag = true;

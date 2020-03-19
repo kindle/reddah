@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-
-import { TranslateService } from '@ngx-translate/core';
 import { ReddahService } from '../../reddah.service';
 
 @Component({
@@ -22,12 +20,12 @@ export class ApplyFriendPage implements OnInit {
 
   constructor(
       private modalController: ModalController,
-      private reddahService: ReddahService,
-      private translate: TranslateService,
+      public reddahService: ReddahService,
+      public reddah: ReddahService,
   ) { }
 
   ngOnInit() {
-      this.message = `${this.translate.instant('Common.ApplyFriendMe')} ${this.reddahService.getCurrentUser()}`; 
+      this.message = `${this.reddahService.instant('Common.ApplyFriendMe')} ${this.reddahService.getCurrentUser()}`; 
       this.targetNoteName = this.targetUserName;
       setTimeout(() => {
         this.newRequest.setFocus();

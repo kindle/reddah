@@ -1,6 +1,6 @@
 <ion-item color="light" no-padding lines="none">
-    <ion-icon name="ios-arrow-back" slot="start" (click)="close()" class="backbutton"></ion-icon>
-    <ion-button color="success" slot="end" (click)="save()" [disabled]="loading">{{ 'Common.Save' | translate }}</ion-button>
+    <ion-icon name="arrow-back-outline"slot="start" (click)="close()" class="backbutton"></ion-icon>
+    <ion-button color="success" slot="end" (click)="save()" [disabled]="loading">{{ reddah.instant('Common.Save') }}</ion-button>
 </ion-item>
 <ion-content>
     <ion-tabs>
@@ -63,8 +63,8 @@
     </ion-tabs>
 
     <ion-item lines="none" *ngIf="article">
-        <ion-button color="success" slot="end" (click)="preview()">{{ 'Common.Test' | translate }}</ion-button>
-        <ion-button color="success" slot="end" (click)="publish()">{{ 'Common.Publish' | translate }}</ion-button>
+        <ion-button color="success" slot="end" (click)="preview()">{{ reddah.instant('Common.Test') }}</ion-button>
+        <ion-button color="success" slot="end" (click)="publish()">{{ reddah.instant('Common.Publish') }}</ion-button>
     </ion-item>
 
 </ion-content>

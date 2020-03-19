@@ -20,9 +20,7 @@ export class SettingFontPage implements OnInit {
         private modalController: ModalController,
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
         public authService: AuthService,
-        private translate: TranslateService,
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
@@ -35,9 +33,9 @@ export class SettingFontPage implements OnInit {
     messages;
     ngOnInit() {
         this.messages = [
-            {Content: this.translate.instant("Common.Font1"), UserName: this.userName, Type:0},
-            {Content: this.translate.instant("Common.Font2"), UserName: '', Type:0},
-            {Content: this.translate.instant("Common.Font3"), UserName: '', Type:0},
+            {Content: this.reddah.instant("Common.Font1"), UserName: this.userName, Type:0},
+            {Content: this.reddah.instant("Common.Font2"), UserName: '', Type:0},
+            {Content: this.reddah.instant("Common.Font3"), UserName: '', Type:0},
         ];
     }
     

@@ -161,6 +161,7 @@
 
     "Pop":{
         "NoRecommend":"Nascondi",
+        "Recommend":"Raccomanda",
         "Report":"Rapporto",
         "ReportReason":"Per favore, inserisci una ragione concreta...",
         "ReportUserReason":"Indicare il motivo specifico della denuncia",

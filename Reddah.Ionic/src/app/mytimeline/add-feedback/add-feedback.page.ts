@@ -23,12 +23,10 @@ export class AddFeedbackPage implements OnInit {
 
     constructor(
         private popoverController: PopoverController,
-        private reddah: ReddahService,
+        public reddah: ReddahService,
         private loadingController: LoadingController,
         private modalController: ModalController,
         private dragulaService: DragulaService,
-        private translate: TranslateService,
-        private ngZone: NgZone,
     ) { 
         this.dragulaService.drag('bag')
         .subscribe(({ name, el }) => {
@@ -94,11 +92,11 @@ export class AddFeedbackPage implements OnInit {
     }
 
     feedbackTypes =[
-        { value:1, checked: false, text:this.translate.instant("Pop.Suggest") },
-        { value:2, checked: false, text:this.translate.instant("Pop.ContentWrong") },
-        { value:3, checked: false, text:this.translate.instant("Pop.CodeError") },
-        { value:4, checked: false, text:this.translate.instant("Pop.ContentInvalid") },
-        { value:5, checked: false, text:this.translate.instant("Pop.ContentOther") },
+        { value:1, checked: false, text:this.reddah.instant("Pop.Suggest") },
+        { value:2, checked: false, text:this.reddah.instant("Pop.ContentWrong") },
+        { value:3, checked: false, text:this.reddah.instant("Pop.CodeError") },
+        { value:4, checked: false, text:this.reddah.instant("Pop.ContentInvalid") },
+        { value:5, checked: false, text:this.reddah.instant("Pop.ContentOther") },
     ]
     
     changeFeedbackType(item) {
@@ -108,7 +106,7 @@ export class AddFeedbackPage implements OnInit {
     ngOnInit() {
         if(this.feedbackType==6){
             this.feedbackTypes = [
-                { value:6, checked: true, text:this.translate.instant("Pop.Report") }
+                { value:6, checked: true, text:this.reddah.instant("Pop.Report") }
             ];
         }
         //4 article report abuse
@@ -133,7 +131,7 @@ export class AddFeedbackPage implements OnInit {
 
     async submit(){
         const loading = await this.loadingController.create({
-            message: this.translate.instant("Article.Loading"),
+            message: this.reddah.instant("Article.Loading"),
             spinner: 'circles',
         });
         await loading.present();

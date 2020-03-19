@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
-import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../../reddah.service';
 import { UserPage } from '../../common/user/user.page'
 import { SearchPage } from '../../common/search/search.page'

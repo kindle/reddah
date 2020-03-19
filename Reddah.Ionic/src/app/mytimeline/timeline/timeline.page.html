@@ -2,19 +2,19 @@
     <div class="headerStart" #headerStart>
         <ion-item color="transparent" no-padding lines="none"  (dblclick)="clearCacheAndReload()">
             <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
-                <ion-icon slot="start" is-active="false" name="ios-arrow-back"></ion-icon>
+                <ion-icon slot="start" is-active="false" name="arrow-back-outline"></ion-icon>
             </ion-button>
             <ion-label></ion-label>
-            <ion-icon name="text" color="tertiary" slot="end" (click)="goMessage()" *ngIf="isMe()"></ion-icon>
+            <ion-icon name="chatbox-ellipses-outline" color="tertiary" slot="end" (click)="goMessage()" *ngIf="isMe()"></ion-icon>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll>
         <ion-item color="light" no-padding lines="none">
             <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
-                <ion-icon slot="start" is-active="false" name="ios-arrow-back"></ion-icon>
+                <ion-icon slot="start" is-active="false" name="arrow-back-outline"></ion-icon>
                 <ion-label style="text-transform: none;">{{reddah.getDisplayName(userName)}}</ion-label>
             </ion-button>
-            <ion-icon name="text" slot="end" (click)="goMessage()" *ngIf="isMe()"></ion-icon>
+            <ion-icon name="chatbox-ellipses-outline" slot="end" (click)="goMessage()" *ngIf="isMe()"></ion-icon>
         </ion-item>
     </div>
     <div>   
@@ -30,7 +30,7 @@
                 (isFriend==false&&nonFriendAllowTen==true)">
             <div *ngFor="let article of articles;index as i">
                 <p *ngIf="i==0||(i>0&&reddah.utcToLocal(articles[i-1].CreatedOn).substring(0,4)!=reddah.utcToLocal(article.CreatedOn).substring(0,4))" class="yearTitle">
-                    {{reddah.utcToLocal(article.CreatedOn).substring(0,4)}}{{ 'Pop.Year' | translate }}
+                    {{reddah.utcToLocal(article.CreatedOn).substring(0,4)}}{{ reddah.instant('Pop.Year') }}
                 </p>
                 <div class="article">
                     <div class="articleDate" *ngIf="reddah.getSendTimeShort(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')!=(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')">
@@ -44,7 +44,7 @@
                             {{reddah.utcToLocal(article.CreatedOn,'DD')}}
                         </span>
                         <span *ngIf="i==0||(i>0&&reddah.utcToLocal(articles[i-1].CreatedOn).split(' ')[0]!=reddah.utcToLocal(article.CreatedOn).split(' ')[0])" class="monthTitle">
-                            {{reddah.utcToLocal(article.CreatedOn,'MM')}}{{ 'Pop.Month' | translate }}
+                            {{reddah.utcToLocal(article.CreatedOn,'MM')}}{{ reddah.instant('Pop.Month') }}
                         </span>
                     </div>
                     <div class="articleContent" *ngIf="article.Id==0">
@@ -107,7 +107,7 @@
                             </ion-thumbnail>
                             <ion-label class="articleContentText" text-wrap>
                                 <div [innerHTML]="reddah.summary(article.Title,10)" class="articleContentTextSummary"></div>
-                                <div class="articleContentTextCount" *ngIf="article.Content.split('$$$').length>0">{{reddah.lan2(article.Content.split('$$$').length, 'Common.Pictures' | translate) }}</div>
+                                <div class="articleContentTextCount" *ngIf="article.Content.split('$$$').length>0">{{reddah.lan2(article.Content.split('$$$').length, reddah.instant('Common.Pictures')) }}</div>
                             </ion-label>
                         </ion-item>
                         <ion-item no-padding lines="none" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.length===0" (click)="goTsViewer(article)">
@@ -129,19 +129,19 @@
         </ion-item>
 
         <ion-item lines="none" *ngIf="!isMe()&&isFriend==false&&nonFriendAllowTen==true">
-            <ion-note text-center style="width: 100%;" color="medium">
-                {{ 'Common.AllowTenMessage' | translate }}
+            <ion-note style="width: 100%;text-align:center;" color="medium">
+                {{ reddah.instant('Common.AllowTenMessage') }}
             </ion-note>
         </ion-item>
         <ion-item lines="none" *ngIf="!isMe()&&isFriend==false&&nonFriendAllowTen==false">
-            <ion-note text-center style="width: 100%;" color="medium">
-                {{ 'Common.NoPermissionMessage' | translate }}
+            <ion-note style="width: 100%;text-align:center;" color="medium">
+                {{ reddah.instant('Common.NoPermissionMessage') }}
             </ion-note>
         </ion-item>
 
         <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
             <ion-infinite-scroll-content loadingSpinner="bubbles"
-                loadingText="{{ 'Button.Loading' | translate }}">
+                loadingText="{{ reddah.instant('Button.Loading') }}">
             </ion-infinite-scroll-content>
         </ion-infinite-scroll>
     </div>

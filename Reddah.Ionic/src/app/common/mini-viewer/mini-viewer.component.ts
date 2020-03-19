@@ -1,17 +1,14 @@
-import { Component, OnInit, Input, SecurityContext, ViewEncapsulation, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ViewChild, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser'
 import { ModalController, IonContent, Platform, LoadingController, AlertController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
+import { Gyroscope, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { RankPage } from '../rank/rank.page';
-import { TranslateService } from '@ngx-translate/core';
 
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 
 @Component({
@@ -34,8 +31,6 @@ export class MiniViewerComponent implements OnInit {
         private modalController: ModalController,
         public reddah: ReddahService,
         public sanitizer: DomSanitizer,
-        private translate: TranslateService,
-        private iab: InAppBrowser,
         private _renderer2: Renderer2, 
         private gyroscope: Gyroscope,
         private platform: Platform,
@@ -44,6 +39,7 @@ export class MiniViewerComponent implements OnInit {
         @Inject(DOCUMENT) private _document: Document,
         private loadingController: LoadingController,
         private alertController: AlertController,
+        private camera: Camera,
     ) {
     }
 
@@ -261,13 +257,13 @@ export class MiniViewerComponent implements OnInit {
         window["reddahApi"].camera = ()=>{
             const options: CameraOptions = {
                 quality: 100,
-                destinationType: Camera.DestinationType.FILE_URI,
-                encodingType: Camera.EncodingType.JPEG,
-                mediaType: Camera.MediaType.PICTURE,
+                destinationType: this.camera.DestinationType.FILE_URI,
+                encodingType: this.camera.EncodingType.JPEG,
+                mediaType: this.camera.MediaType.PICTURE,
                 correctOrientation: true
             }
                 
-            return Camera.getPicture(options);
+            return this.camera.getPicture(options);
         }
     }
 
@@ -275,14 +271,14 @@ export class MiniViewerComponent implements OnInit {
         window["reddahApi"].album = ()=>{
             const options: CameraOptions = {
                 quality: 100,
-                destinationType: Camera.DestinationType.FILE_URI,
-                encodingType: Camera.EncodingType.JPEG,
-                mediaType: Camera.MediaType.PICTURE,
-                sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                destinationType: this.camera.DestinationType.FILE_URI,
+                encodingType: this.camera.EncodingType.JPEG,
+                mediaType: this.camera.MediaType.PICTURE,
+                sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
                 correctOrientation: true
             }
                 
-            return Camera.getPicture(options);
+            return this.camera.getPicture(options);
         }
     }
 

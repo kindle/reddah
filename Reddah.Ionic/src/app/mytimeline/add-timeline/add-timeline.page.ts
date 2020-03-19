@@ -1,11 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PopoverController, NavController, LoadingController, ModalController } from '@ionic/angular'
+import { PopoverController, LoadingController, ModalController } from '@ionic/angular'
 import { TimelinePopPage } from '../../common/timeline-pop.page';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ReddahService } from '../../reddah.service';
-import { File, FileEntry } from '@ionic-native/file/ngx';
-import { ActivatedRoute, Params } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
@@ -27,14 +24,14 @@ export class AddTimelinePage implements OnInit {
 
     constructor(
         private popoverController: PopoverController,
-        private reddah: ReddahService,
+        public reddah: ReddahService,
         private loadingController: LoadingController,
-        private translate: TranslateService,
         private cacheService: CacheService,
         private localStorageService: LocalStorageService,
         private modalController: ModalController,
         private dragulaService: DragulaService,
         private videoEditor: VideoEditor,
+        private camera: Camera,
     ) { 
         this.dragulaService.drag('bag')
         .subscribe(({ name, el }) => {
@@ -172,7 +169,7 @@ export class AddTimelinePage implements OnInit {
         }
 
         const loading = await this.loadingController.create({
-            message: this.translate.instant("Article.Loading"),
+            message: this.reddah.instant("Article.Loading"),
             spinner: 'circles',
         });
         await loading.present();
@@ -248,13 +245,13 @@ export class AddTimelinePage implements OnInit {
     async takePhoto(){
         const options: CameraOptions = {
             quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
-            encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
             correctOrientation: true
         }
           
-        Camera.getPicture(options).then((imageData) => {
+        this.camera.getPicture(options).then((imageData) => {
             let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
             this.photos.push(data);
             this.addPhotoToFormData(data);
@@ -268,13 +265,13 @@ export class AddTimelinePage implements OnInit {
     {
         const options: CameraOptions = {
             quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
-            mediaType: Camera.MediaType.VIDEO,
-            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            mediaType: this.camera.MediaType.VIDEO,
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
             correctOrientation: true
         }
           
-        Camera.getPicture(options).then((imageData) => {
+        this.camera.getPicture(options).then((imageData) => {
             let fileUrl = "file://"+imageData;
             alert(fileUrl);
 
@@ -320,14 +317,14 @@ export class AddTimelinePage implements OnInit {
     {
         const options: CameraOptions = {
             quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
-            encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE,
-            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
             correctOrientation: true
         }
           
-        Camera.getPicture(options).then((imageData) => {
+        this.camera.getPicture(options).then((imageData) => {
             let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
             this.photos.push(data);
             this.addPhotoToFormData(data);

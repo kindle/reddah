@@ -4,7 +4,7 @@
 }
 
 .shakebg{
-	background: url('assets/shake/shakeBg.png') ;
+	background: url('/assets/shake/shakeBg.png');
 }
 
 .shakebg img,.animetebg .flower{
@@ -37,7 +37,7 @@
 }
 
 .animetebg .flower{
-	background: url('assets/shake/flower.png');
+	background: url('/assets/shake/flower.png');
 	z-index: 1;
 }
 
@@ -46,7 +46,7 @@
     top: -5px;
 	width:100%;
 	height: 50%;
-	background: url('assets/shake/shakeBg.png');
+	background: url('/assets/shake/shakeBg.png');
 	z-index: 2;
 }
 
@@ -63,7 +63,7 @@
     bottom: -10px;
 	width:100%;
 	height: 10px;
-	background: url('assets/shake/topBar.png') repeat-x;
+	background: url('/assets/shake/topBar.png') repeat-x;
 }
 
 .animetebg .bottomShakeBox{
@@ -71,7 +71,7 @@
     bottom: -5px;
 	width:100%;
 	height: 50%;
-	background: url('assets/shake/shakeBg.png');
+	background: url('/assets/shake/shakeBg.png');
 	z-index: 2;
 }
 
@@ -80,7 +80,7 @@
     top: -10px;
 	width:100%;
 	height: 10px;
-	background: url('assets/shake/bottomBar.png') repeat-x;
+	background: url('/assets/shake/bottomBar.png') repeat-x;
 }
 
 .animetebg .bottomShakeBox .bottomShake{

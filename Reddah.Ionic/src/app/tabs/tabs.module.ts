@@ -31,13 +31,6 @@ import { HttpClient } from '@angular/common/http';
       FindPageModule,
       ContactPageModule,
       PublisherPageModule,
-      TranslateModule.forRoot({
-          loader: {
-              provide: TranslateLoader,
-              useFactory: HttpLoaderFactory,
-              deps: [HttpClient]
-          }
-      }),
       DirectivesModule,
   ],
   declarations: [
