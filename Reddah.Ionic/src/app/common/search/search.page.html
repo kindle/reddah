@@ -24,10 +24,10 @@
         <!--<app-search-history id="1" data="articleHistories"></app-search-history>-->
         <ion-item no-padding lines="none" *ngIf="articleHistories.length>0">
             <ion-label class="chip-box-header">{{ reddah.instant('Search.SearchHistory') }}</ion-label>
-            <ion-icon name="trash" color="light" (click)="clearHistory(1)" slot="end"></ion-icon>
+            <ion-icon name="trash" color="medium" (click)="clearHistory(1)" slot="end"></ion-icon>
         </ion-item>
         <div class="chip-box">
-            <ion-chip outline color="light" class="chip-gap" *ngFor="let history of articleHistories">
+            <ion-chip color="medium" class="chip-gap" *ngFor="let history of articleHistories">
                 <ion-label color="dark" (click)="searchHistory(history)">{{history}}</ion-label>
             </ion-chip>
         </div>
@@ -57,10 +57,10 @@
     <ion-grid *ngIf="selectedTopicId==2">
         <ion-item no-padding lines="none" *ngIf="apertureHistories.length>0">
             <ion-label class="chip-box-header">{{ reddah.instant('Search.SearchHistory') }}</ion-label>
-            <ion-icon name="trash" color="light" (click)="clearHistory(2)" slot="end"></ion-icon>
+            <ion-icon name="trash" color="medium" (click)="clearHistory(2)" slot="end"></ion-icon>
         </ion-item>
         <div class="chip-box">
-            <ion-chip outline color="light" class="chip-gap" *ngFor="let history of apertureHistories">
+            <ion-chip color="medium" class="chip-gap" *ngFor="let history of apertureHistories">
                 <ion-label color="dark" (click)="searchHistory(history)">{{history}}</ion-label>
             </ion-chip>
         </div>
@@ -105,7 +105,7 @@
                     <div style="display: flex;flex-direction: column;margin-top:15px;margin-right:15px;" *ngFor="let pub_recent of users_p_recent">
                         <ion-avatar class="userPhoto" (click)="goPub(pub_recent)">
                             <img *ngIf="pub_recent.Photo" src="{{reddah.appData('userphoto_'+pub_recent.UserName, 'photo.svg')}}" class="recentPortrait">
-                            <ion-icon *ngIf="!pub_recent.Photo" name="list-outline"color="tertiary" class="sub recentPortrait"></ion-icon>
+                            <ion-icon *ngIf="!pub_recent.Photo" name="list-outline" color="tertiary" class="sub recentPortrait"></ion-icon>
                         </ion-avatar><br>
                         <ion-label style="margin:3px 0 0 0;padding:3px 5px;width:75px;color:gray;text-align:center;">{{pub_recent.NickName}}</ion-label>
                     </div>

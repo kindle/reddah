@@ -25,10 +25,10 @@
 
     <ion-item no-padding lines="none" *ngIf="userHistories.length" style="margin-top:5px;">
         <ion-label class="chip-box-header">{{ reddah.instant('Search.SearchHistory') }}</ion-label>
-        <ion-icon name="trash" color="light" (click)="clearHistory(5)" slot="end"></ion-icon>
+        <ion-icon name="trash" color="medium" (click)="clearHistory(5)" slot="end"></ion-icon>
     </ion-item>
     <div class="chip-box">
-        <ion-chip outline color="light" class="chip-gap" *ngFor="let history of userHistories">
+        <ion-chip color="medium" class="chip-gap" *ngFor="let history of userHistories">
             <ion-label (click)="searchHistory(history)">{{history}}</ion-label>
         </ion-chip>
     </div>

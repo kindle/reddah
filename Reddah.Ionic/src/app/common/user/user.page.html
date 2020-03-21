@@ -18,13 +18,13 @@
             class="portrait portrait-user"
             onerror="this.src='assets/icon/anonymous.png';">
         </ion-thumbnail>
-        <ion-label>
-            <div style="display: flex;padding:5px 0 5px 0;">
+        <ion-label style="margin-top:0;">
+            <div style="display: flex;padding:0 0 5px 0;">
                 <ion-label class="user-name">{{reddah.getDisplayName(userName, 100)}}</ion-label>
-                <ion-icon class="cmd-title" name="male-outline"size="small" *ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
-                <ion-icon class="cmd-title" name="female-outline"size="small" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
+                <ion-icon class="cmd-title" name="male-outline" size="small" *ngIf="reddah.appData('usersex_'+userName)==1" color="diamond"></ion-icon>
+                <ion-icon class="cmd-title" name="female-outline" size="small" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
             </div>
-            <div style="display: flex;margin-top:5px;">
+            <div style="display: flex;">
                 <ion-icon *ngFor="let i of reddah.userLevelIconNumber(userName)" name="{{reddah.userLevelIcon(userName)}}" color="{{reddah.userLevelIconColor(userName)}}" size="small"></ion-icon>
                 <span style="margin-left:5px;" *ngIf="reddah.appData('usernickname_'+userName)">
                     {{ reddah.instant(reddah.userLevel(userName)) }}

@@ -9,25 +9,36 @@
 </ion-item>
 <ion-content>
     <ion-list>
-        <ion-item>
-            <ion-icon name="search-outline"slot="start"></ion-icon>
-            <ion-note (click)="searchUser()" style="width:100%;">{{ reddah.instant('Input.UserName') }}</ion-note>
+        <ion-item (click)="searchUser()">
+            <ion-avatar slot="start" style="margin:5px;">
+                <ion-icon name="search-outline" size="small" color="tertiary" class="portrait"></ion-icon>
+                
+            </ion-avatar>
+            <ion-label style="margin-left:10px;width:100%;">
+                {{ reddah.instant('Search.Title') }}
+            </ion-label>
         </ion-item>
     </ion-list>
     <ion-list>
         <ion-item *ngFor="let request of friendRequestList">
             <ion-avatar slot="start" style="margin:5px;" (click)="goUser(request.UserName)">
-                <img src="{{reddah.appData('userphoto_'+request.UserName)}}" class="portrait">
+                <img src="{{reddah.appData('userphoto_'+request.UserName)}}" class="user-portrait">
             </ion-avatar>
             <ion-label style="margin-left:10px;" (click)="goUser(request.UserName)">
-                <span>{{reddah.getDisplayName(request.UserName)}}</span>
-                <ion-icon name="male"*ngIf="reddah.appData('usersex_'+request.UserName)==1"></ion-icon>
-                <ion-icon name="female"*ngIf="reddah.appData('usersex_'+request.UserName)==0" color="danger"></ion-icon><br>
-                <ion-label>{{(request.Just=="confirmed")?(reddah.instant('Common.Accepted')):request.Just}}</ion-label>
+                <div style="display: flex;padding:0 0 5px 0;">
+                    <ion-label class="user-name">{{reddah.getDisplayName(request.UserName)}}</ion-label>
+                    <ion-icon name="male" *ngIf="reddah.appData('usersex_'+request.UserName)==1" size="small" color="diamond"></ion-icon>
+                    <ion-icon name="female" *ngIf="reddah.appData('usersex_'+request.UserName)==0" size="small" color="danger"></ion-icon><br>
+                </div>
+                <div style="display: flex;">
+                    <ion-label>{{(request.Just=="confirmed")?(reddah.instant('Common.Accepted')):request.Just}}</ion-label>
+                </div>
             </ion-label>
-            <div slot="end">
-                <ion-button color="success" (click)="accept(request.UserName)" *ngIf="!request.Approve">{{ reddah.instant('Common.Accept') }}</ion-button>
-                <ion-note *ngIf="request.Approve">{{ reddah.instant('Common.Added') }}</ion-note>
+            <div slot="end" *ngIf="request.Approve">
+                <ion-button [disabled]="true">{{ reddah.instant('Common.Added') }}</ion-button>
+            </div>
+            <div slot="end" *ngIf="!request.Approve">
+                <ion-button (click)="accept(request.UserName)">{{ reddah.instant('Common.Accept') }}</ion-button>
             </div>
         </ion-item>
     </ion-list>
