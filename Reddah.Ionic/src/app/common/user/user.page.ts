@@ -201,7 +201,7 @@ export class UserPage implements OnInit {
             ).concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?
             [{
                 text: this.reddah.instant("Comment.Delete"),
-                icon: 'ios-trash',
+                icon: 'trash-outline',
                 handler: () => {
                     this.delConfirm();                  
                 }
@@ -304,8 +304,7 @@ export class UserPage implements OnInit {
     }
 
     async chat(){
-        const modal = await this.modalController.create({
-            //component: ChatPage,
+        const chatModal = await this.modalController.create({
             component: ChatFirePage,
             componentProps: { 
                 title: this.reddah.appData('usernotename_'+this.userName+'_'+this.currentUserName),
@@ -313,8 +312,8 @@ export class UserPage implements OnInit {
             },
             cssClass: "modal-fullscreen",
         });
-        await modal.present();
-        const {data} = await modal.onDidDismiss();
+        await chatModal.present();
+        //const {data} = await modal.onDidDismiss();
     }
 
     async goMore(){

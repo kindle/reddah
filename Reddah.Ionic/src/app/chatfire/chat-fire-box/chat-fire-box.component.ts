@@ -4,7 +4,7 @@ import { ReddahService } from '../../reddah.service';
 import { MediaCapture, MediaFile, CaptureError, CaptureVideoOptions } from '@ionic-native/media-capture/ngx';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx'; 
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
 import { Vibration } from '@ionic-native/vibration/ngx';

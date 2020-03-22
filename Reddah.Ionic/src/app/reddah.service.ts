@@ -1601,6 +1601,23 @@ export class ReddahService {
     pointReason = new Map()
     
 
+    getSharePoint(){
+        if(!this.isPointDone(this.pointTasks[3])){
+            this.getPointShare().subscribe(data=>{
+                if(data.Success==0||data.Success==3){ 
+                    this.setPoint('Share', data.Message.GotPoint);
+                    if(data.Success==0){
+                        this.toast(
+                            this.instant("Point.TaskShareTitle")+
+                            this.lan2(
+                                " +"+data.Message.GotPoint+"/"+this.pointTasks[3].max,
+                                this.instant("Point.Fen")),
+                        "primary");
+                    }
+                }
+            });
+        }
+    }
 
     //not completed return false; 
     isPointDone(task){

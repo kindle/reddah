@@ -182,8 +182,8 @@ export class MyReportPage implements OnInit {
             this.renderer.setStyle(this.headerStart.nativeElement, 'opacity', opacity + '');
             this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
         }
-        else if(offset<150 && offset>=-150){
-            let opacity = (1-(offset-150)/100);
+        else if(offset<150 && offset>=0){
+            let opacity = (1-(offset-0)/100);
             if(opacity>1) opacity=1;
             this.renderer.setStyle(this.headerOnScroll.nativeElement, 'opacity', opacity + '');
         }

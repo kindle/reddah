@@ -6,7 +6,7 @@ import { ReddahService } from '../reddah.service';
     template: `
         <div (click)="close()">   
             <ion-item button (click)="back(1)">
-                <ion-icon slot="start" style="margin-right:10px;" color="secondary" name="share"></ion-icon>  
+                <ion-icon slot="start" style="margin-right:10px;" color="secondary" name="share-social-outline"></ion-icon>  
                 <ion-label>{{ reddah.instant('Menu.Contact') }}</ion-label>
             </ion-item>
             <ion-item button (click)="back(2)">
@@ -18,7 +18,7 @@ import { ReddahService } from '../reddah.service';
                 <ion-label>{{ reddah.instant('Menu.Mark') }}</ion-label>
             </ion-item>
             <ion-item button (click)="back(4)">
-                <ion-icon slot="start" style="margin-right:10px;" color="medium" name="alert-circle-outline"></ion-icon>  
+                <ion-icon slot="start" style="margin-right:10px;" color="dark" name="warning-outline"></ion-icon>  
                 <ion-label>{{ reddah.instant('Pop.Report') }}</ion-label>
             </ion-item>
             <ion-item button (click)="back(5)">

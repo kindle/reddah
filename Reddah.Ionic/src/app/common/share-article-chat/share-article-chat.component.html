@@ -1,18 +1,19 @@
 <div (click)="viewArticle()" class="container" *ngIf="type==4">
-    <ion-item lines="none" color="tertiary" no-padding style="padding-bottom:5px;">
-        <ion-avatar class="avatar-top sharePhoto" *ngIf="image">
-            <img [src]="reddah.parseImage(image)" class="sharePortrait">
-        </ion-avatar>
-        <ion-avatar class="avatar-top sharePhotoNone" *ngIf="!image">
-            <ion-icon name="link-outline" color="dark" class="sharePortraitNone"></ion-icon>
-        </ion-avatar>
-        <ion-label class="marginleft" text-wrap class="label-style">
-            <span style="color:black;">{{reddah.htmlDecode(abstract)}}</span><br>
-            <ion-note color="dark"></ion-note>
-        </ion-label>
-    </ion-item>
+    <ion-Label>
+        <div style="display: flex;margin:5px 0 10px 0;">
+            <img [src]="reddah.parseImage(image)" class="sharePortrait" *ngIf="image">
+            <ion-icon name="link" color="dark" class="sharePortraitNone" *ngIf="!image"></ion-icon>
+            <span style="margin-left:8px;align-self: center;">
+                {{reddah.htmlDecode(abstract)}}
+            </span>
+        </div>
+    </ion-Label>
+    <div style="display: flex;padding-top:5px;border-top:1px solid #dddddd;">
+        <ion-icon name="book-outline" size="small" color="dark" class="portrait mini"></ion-icon>
+        <ion-label color="dark" style="margin-left:5px;">{{ reddah.instant('Menu.Recommend') }}</ion-label>
+    </div>
 </div>
-<div (click)="viewMini()" *ngIf="type==5">
+<div (click)="viewMini()" class="container" *ngIf="type==5">
     <ion-item lines="none" color="tertiary" no-padding style="padding-bottom:5px;">
         <ion-text color="dark" style="margin-left:10px;max-width:200px;">
             {{reddah.htmlDecode(abstract)}}</ion-text>
@@ -21,8 +22,8 @@
         <img [src]="reddah.parseImage(image)" class="sharePortraitBig" *ngIf="image">
         <ion-icon name="link" color="dark" class="sharePortraitNoneBig" *ngIf="!image"></ion-icon>
     </ion-item>
-    <ion-item lines="none" color="tertiary" no-margin no-padding style="padding-left:10px;border-top:1px solid #eeeeee;">
+    <div style="display: flex;padding-top:5px;border-top:1px solid #dddddd;">
         <ion-icon name="infinite" color="mini" class="portrait mini"></ion-icon>
         <ion-label color="dark" style="margin-left:5px;">{{ reddah.instant('Menu.MiniApp') }}</ion-label>
-    </ion-item>
+    </div>
 </div>

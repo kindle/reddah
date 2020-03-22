@@ -11,7 +11,7 @@ import { ReddahService } from '../reddah.service';
               </ion-col>
               <ion-col>
                   <div class="dislike-title-right" (click)="close(feedback)">
-                  {{ reddah.instant('Pop.Report') }}<ion-icon style="margin-right:5px;" size="small" color="medium" name="alert-circle-outline"></ion-icon>
+                  {{ reddah.instant('Pop.Report') }}<ion-icon style="margin-right:5px;" size="small" color="dark" name="warning-outline"></ion-icon>
                   </div>
               </ion-col>
           </ion-row>

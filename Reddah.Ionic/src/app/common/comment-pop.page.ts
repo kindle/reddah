@@ -6,7 +6,7 @@ import { ReddahService } from '../reddah.service';
     template: `
       <ion-list>
         <ion-item button (click)="foo()">
-            <ion-icon slot="start" color="warning" name="alert"></ion-icon>  
+            <ion-icon slot="start" color="dark" name="warning-outline"></ion-icon>  
             <ion-label>{{ reddah.instant('Pop.Report') }}</ion-label>
         </ion-item>
         <ion-item button (click)="foo()">

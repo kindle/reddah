@@ -52,9 +52,10 @@
                     <ion-icon name="person-outline"></ion-icon>
                     <ion-Text style="margin-left:5px;">{{reddah.getDisplayName(article.Abstract)}}</ion-Text>
                 </ion-item>
-                <app-share-article *ngIf="article.Abstract&&article.Abstract.length>2" 
-                    [abstract]="article.Abstract" [image]="article.Content" 
-                    [id]="article.Ref" [type]="article.LastUpdateType"></app-share-article>
+                <ion-card-content *ngIf="article.Abstract&&article.Abstract.length>2">
+                    <app-share-article [abstract]="article.Abstract" [image]="article.Content" 
+                        [id]="article.Ref" [type]="article.LastUpdateType"></app-share-article>
+                </ion-card-content>
                 <ion-card-content style="display:block;margin-right:20px;" *ngIf="(article.LastUpdateType==6||article.Abstract.length<3)&&article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>6">
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">

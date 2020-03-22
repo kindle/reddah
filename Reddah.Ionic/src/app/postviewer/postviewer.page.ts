@@ -70,24 +70,6 @@ export class PostviewerPage implements OnInit {
             this.loadComments();
     }
 
-    getSharePoint(){
-        if(!this.reddah.isPointDone(this.reddah.pointTasks[3])){
-            this.reddah.getPointShare().subscribe(data=>{
-                if(data.Success==0||data.Success==3){ 
-                    this.reddah.setPoint('Share', data.Message.GotPoint);
-                    if(data.Success==0){
-                        this.reddah.toast(
-                            this.reddah.instant("Point.TaskShareTitle")+
-                            this.reddah.lan2(
-                                " +"+data.Message.GotPoint+"/"+this.reddah.pointTasks[3].max,
-                                this.reddah.instant("Point.Fen")),
-                        "primary");
-                    }
-                }
-            });
-        }
-    }
-
     async presentPopover(ev: any) {
         const popover = await this.popoverController.create({
             component: ArticlePopPage,
@@ -113,7 +95,7 @@ export class PostviewerPage implements OnInit {
             await modal.present();
             const { data } = await modal.onDidDismiss();
             if(data){
-                this.getSharePoint();
+                this.reddah.getSharePoint();
             }
         }
         else if(data==2)//share to timeline
@@ -148,7 +130,7 @@ export class PostviewerPage implements OnInit {
         await postModal.present();
         const { data } = await postModal.onDidDismiss();
         if(data){
-            this.getSharePoint();
+            this.reddah.getSharePoint();
         }
     }
 

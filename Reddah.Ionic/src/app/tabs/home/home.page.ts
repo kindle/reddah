@@ -12,6 +12,7 @@ import { UserPage } from '../../common/user/user.page';
 import { PubPage } from '../publisher/pub/pub.page';
 import { ArticleDislikePopPage } from '../../common/article-dislike-pop.page';
 import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
+import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
 
 @Component({
     selector: 'app-home',
@@ -167,6 +168,24 @@ export class HomePage implements OnInit {
         const { data } = await viewerModal.onDidDismiss();
         if(data||!data){   
             article.Read = true;
+        }
+    }
+
+    async goPost(article){
+        console.log(article)
+        const postModal = await this.modalController.create({
+            component: AddTimelinePage,
+            componentProps: { 
+                postType: 4,
+                article: article
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await postModal.present();
+        const { data } = await postModal.onDidDismiss();
+        if(data){
+            this.reddah.getSharePoint();
         }
     }
 

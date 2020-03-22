@@ -3,7 +3,7 @@
         <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
     </ion-button>
     <ion-button clear slot="end" color="light" (click)="presentActionSheet()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="ellipsis-horizontal-outline"></ion-icon>
+        <ion-icon is-active="false" name="ellipsis-horizontal"></ion-icon>
     </ion-button>
 </ion-item>
 <ion-content style="align-items: center; --background:#eeeeee;background-color:#eeeeee;">
@@ -14,9 +14,9 @@
     <ion-item lines="none" class="borderTop borderBottom">
         <ion-thumbnail class="userPhoto">
             <img src="{{reddah.appData('userphoto_'+userName)}}" 
-            (click)="viewer(reddah.appData('userphoto_'+userName))" 
-            class="portrait portrait-user"
-            onerror="this.src='assets/icon/anonymous.png';">
+                (click)="viewer(reddah.appData('userphoto_'+userName))" 
+                class="portrait portrait-user"
+                onerror="this.src='assets/icon/anonymous.png';">
         </ion-thumbnail>
         <ion-label style="margin-top:0;">
             <div style="display: flex;padding:0 0 5px 0;">
@@ -27,7 +27,7 @@
             <div style="display: flex;">
                 <ion-icon *ngFor="let i of reddah.userLevelIconNumber(userName)" name="{{reddah.userLevelIcon(userName)}}" color="{{reddah.userLevelIconColor(userName)}}" size="small"></ion-icon>
                 <span style="margin-left:5px;" *ngIf="reddah.appData('usernickname_'+userName)">
-                    {{ reddah.instant(reddah.userLevel(userName)) }}
+                    {{ reddah.appData('userpoint_'+userName) }} {{ reddah.userLevel(userName) }}
                 </span>
             </div>
         </ion-label>
