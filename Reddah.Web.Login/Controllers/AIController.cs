@@ -8,15 +8,17 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Reddah.Web.Login.Utilities;
 using System.Text;
-using System.Web.Script.Serialization;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
+using System.IO;
 
 namespace Reddah.Web.Login.Controllers
 {
     [RoutePrefix("api/ai")]
     public class AIController : ApiBaseController
     {
+        /*****************************************/
+        /**************text api***************************/
+        /*****************************************/
         [Route("nlp")]
         [HttpPost]
         public async Task<IHttpActionResult> GetNlpChat()
@@ -24,9 +26,9 @@ namespace Reddah.Web.Login.Controllers
             try
             {
                 string jwt = HttpContext.Current.Request["jwt"];
-                string text = HttpContext.Current.Request["content"];
                 string locale = HttpContext.Current.Request["locale"];
-                
+                string text = HttpContext.Current.Request["content"];
+
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
 
@@ -35,6 +37,7 @@ namespace Reddah.Web.Login.Controllers
                 if (jwtResult.Success != 0)
                     return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
 
+                /*
                 if(locale == "zh-CN"|| locale == "zh-TW")
                 {
                     return Ok(new ApiResult(0, await this.QqNlp(
@@ -48,7 +51,11 @@ namespace Reddah.Web.Login.Controllers
                         locale, 
                         jwtResult.JwtUser.User, 
                         text)));
-                }
+                }*/
+                return Ok(new ApiResult(0, await this.QqNlp(
+                        locale,
+                        jwtResult.JwtUser.User,
+                        text)));
             }
             catch (Exception ex)
             {
@@ -56,6 +63,69 @@ namespace Reddah.Web.Login.Controllers
             }
 
         }
+
+        [Route("translate")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetQqTranslate()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string locale = HttpContext.Current.Request["locale"];
+                string url = HttpContext.Current.Request["url"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                return Ok(new ApiResult(0, await this.QqAiTextTask(
+                    locale,
+                    jwtResult.JwtUser.User,
+                    url,
+                    "translate")));
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("audio")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetQqAudio()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string locale = HttpContext.Current.Request["locale"];
+                string url = HttpContext.Current.Request["url"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                return Ok(new ApiResult(0, await this.QqAiTextTask(
+                    locale,
+                    jwtResult.JwtUser.User,
+                    url,
+                    "audio")));
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
 
         private async Task<string> GoogleNlp(string locale, string user, string text)
         {
@@ -104,7 +174,6 @@ namespace Reddah.Web.Login.Controllers
 
         private async Task<string> QqNlp(string locale, string user, string uri)
         {
-            
             var client = new HttpClient();
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             
@@ -131,6 +200,32 @@ namespace Reddah.Web.Login.Controllers
         }
 
 
+        private async Task<string> QqAiTextTask(string locale, string user, string uri, string topic)
+        {
+            var client = new HttpClient();
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+
+            using (var db = new reddahEntities())
+            {
+                var log = new Log();
+
+                log.Date = DateTime.UtcNow;
+                log.Thread = topic;
+                log.Level = locale;
+                log.Logger = user;
+                log.Message = uri;
+                db.Log.Add(log);
+                db.SaveChanges();
+            }
+
+            var response = await client.GetAsync(uri);
+
+            var strResponseContent = await response.Content.ReadAsStringAsync();
+
+            string responseText = strResponseContent.ToString();
+
+            return responseText;
+        }
 
 
 
@@ -229,6 +324,9 @@ namespace Reddah.Web.Login.Controllers
         }
 
 
+        /*****************************************/
+        /**************image api***************************/
+        /*****************************************/
         [Route("qqmusk")]
         [HttpPost]
         public async Task<IHttpActionResult> GetQqMusk()
@@ -240,107 +338,11 @@ namespace Reddah.Web.Login.Controllers
                 string url = HttpContext.Current.Request["url"];
                 string image = HttpContext.Current.Request["image"];
 
-                /*
-                var musk = new FaceMusk();
-                musk.app_id = app_id;
-                musk.decoration = decoration;
-                musk.time_stamp = time_stamp;
-                musk.app_key = app_key;
-                musk.nonce_str = nonce_str;
-                musk.sign = sign;
-                musk.image = image;
-
-                var myContent = JsonConvert.SerializeObject(musk);
-                var buffer = Encoding.UTF8.GetBytes(myContent);
-                var byteContent = new ByteArrayContent(buffer);
-                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                */
-
-                /*
-                var content = new List<KeyValuePair<string, object>>
-                {
-                    new KeyValuePair<string, object>("app_id", app_id),
-                    new KeyValuePair<string, object>("decoration", decoration),
-                    new KeyValuePair<string, object>("time_stamp", time_stamp),
-                    new KeyValuePair<string, object>("app_key", app_key),
-                    new KeyValuePair<string, object>("nonce_str", nonce_str),
-                    new KeyValuePair<string, object>("sign", sign),
-                    new KeyValuePair<string, object>("image", image),
-
-                };
-
-                var mycontent = new StringContent(content.ToString());
-                */
-
-                /*
-                var content = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                */
-
-                /*
-                var content = new List<KeyValuePair<string, string>>
-                {
-                    new KeyValuePair<string, string>("app_id", app_id.ToString()),
-                    new KeyValuePair<string, string>("decoration", decoration.ToString()),
-                    new KeyValuePair<string, string>("time_stamp", time_stamp.ToString()),
-                    new KeyValuePair<string, string>("app_key", app_key),
-                    new KeyValuePair<string, string>("nonce_str", nonce_str),
-                    new KeyValuePair<string, string>("sign", sign),
-                    new KeyValuePair<string, string>("image", image),
-
-                };
-
-                var mycontent = new StringContent(content.ToString());
-                */
-
-                /*
-                var data = new
-                {
-                    app_id = app_id,
-                    decoration = decoration,
-                    time_stamp = time_stamp,
-                    app_key = app_key,
-                    nonce_str = nonce_str,
-                    sign = sign,
-                    image = image
-                };
-                var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                */
-
-                /*
-                var content = new StringContent(JsonConvert.SerializeObject(jsonObject), Encoding.UTF8, "application/json");
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                */
-
-                /*
-                var multiContent = new MultipartFormDataContent();
-                var content1 = new List<KeyValuePair<string, int>>
-                {
-                    new KeyValuePair<string, int>("app_id", app_id),
-                    new KeyValuePair<string, int>("decoration", decoration),
-                    new KeyValuePair<string, int>("time_stamp", time_stamp),
-                };
-                var content2 = new FormUrlEncodedContent(new[]
-                {
-                    new KeyValuePair<string, string>("app_key", app_key),
-                    new KeyValuePair<string, string>("nonce_str", nonce_str),
-                    new KeyValuePair<string, string>("sign", sign),
-                    new KeyValuePair<string, string>("image", image)
-                });
-
-                multiContent.Add(new StringContent(content1.ToString()));
-                multiContent.Add(content2);
-                */
-
-
                 var fcontent = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("image", image)
                 });
-
-
-                //var content = new StringContent(str, Encoding.UTF8, "application/json");
+                
 
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
@@ -363,6 +365,44 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("qqread")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetQqRead()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string locale = HttpContext.Current.Request["locale"];
+                string url = HttpContext.Current.Request["url"];
+                string image = HttpContext.Current.Request["image"];
+
+                var fcontent = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("image", image)
+                });
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                return Ok(new ApiResult(0, await this.QqAiTask(
+                    locale,
+                    jwtResult.JwtUser.User,
+                    url,
+                    fcontent,
+                    "qqread")));
+                
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+        
         private async Task<string> QqAiTask(string locale, string user, string uri, FormUrlEncodedContent content, string thread)
         {
             var client = new HttpClient();
@@ -389,7 +429,11 @@ namespace Reddah.Web.Login.Controllers
 
             return responseText;
         }
+
+        
     }
 
     
+
+
 }
