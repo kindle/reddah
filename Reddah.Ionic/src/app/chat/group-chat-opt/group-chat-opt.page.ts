@@ -41,7 +41,7 @@ export class GroupChatOptPage {
             componentProps: { 
                 targetGroupChatId: this.groupInfo.Id,
                 currentTitle: this.groupInfo.Title,
-                title: '设置群名称',
+                title: this.reddah.instant("Pop.GroupChatTitle"),
             },
             cssClass: "modal-fullscreen",
         });
@@ -60,7 +60,7 @@ export class GroupChatOptPage {
             componentProps: { 
                 targetGroupChatId: this.groupInfo.Id,
                 currentContent: this.groupInfo.Content,
-                title: '设置群公告',
+                title: this.reddah.instant("Pop.GroupChatAnnouce"),
             },
             cssClass: "modal-fullscreen",
         });

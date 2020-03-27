@@ -215,6 +215,8 @@
     },
 
     "Common":{
+        "AllowLikeShake":"Net als Trillingen",
+        "AllowDarkMode":"Nachtmodus",
         "Distance":"Afstand",
         "Refresh":"Verfrissen",
         "Choose":"Kies",

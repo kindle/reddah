@@ -198,6 +198,7 @@ export class PostviewerPage implements OnInit {
     }
 
     childReloadComments(event){
+        console.log('childReloadComments')
         this.loadComments();
         if(!this.reddah.isPointDone(this.reddah.pointTasks[4])){
             this.reddah.getPointComment().subscribe(data=>{

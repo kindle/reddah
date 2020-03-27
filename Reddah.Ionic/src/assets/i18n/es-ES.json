@@ -215,6 +215,8 @@
     },
 
     "Common":{
+        "AllowLikeShake":"Like Vibration",
+        "AllowDarkMode":"Modo Nocturno",
         "Distance":"Distancia",
         "Refresh":"Actualizar",
         "Choose":"Elección",

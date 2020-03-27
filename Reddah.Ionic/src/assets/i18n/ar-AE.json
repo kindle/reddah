@@ -215,6 +215,8 @@
     },
 
     "Common":{
+        "AllowLikeShake":"مثل الاهتزاز",
+        "AllowDarkMode":"الوضع الليلي",
         "Distance":"مسافة",
         "Refresh":"منعش",
         "Choose":"اختار",

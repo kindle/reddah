@@ -164,7 +164,7 @@
 
     "Pop":{
         "NoRecommend":"減少推薦",
-        "NoRecommend":"推薦",
+        "Recommend":"推薦",
         "Report":"舉報",
         "ReportReason":"請輸入具體的文章違規描述...",
         "ReportUserReason":"請輸入投訴該帳號的具體原因...",
@@ -218,6 +218,8 @@
     },
 
     "Common":{
+        "AllowLikeShake":"點贊震動",
+        "AllowDarkMode":"夜間模式",
         "Distance":"距離",
         "Refresh":"刷新",
         "Choose":"選擇",

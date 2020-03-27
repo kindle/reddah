@@ -215,6 +215,8 @@
     },
 
     "Common":{
+        "AllowLikeShake":"Как вибрация",
+        "AllowDarkMode":"Ночной режим",
         "Distance":"расстояние",
         "Refresh":"Обновить",
         "Choose":"выбор",

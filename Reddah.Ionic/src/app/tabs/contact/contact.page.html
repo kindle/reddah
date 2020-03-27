@@ -40,9 +40,20 @@
                     onerror="this.src='assets/icon/anonymous.png';">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
-                    <span class="user-name" (press)="showChangeMenu($event, contact)">{{reddah.getDisplayName(contact.Watch,100)}}</span>
-                    <br>
-                    <ion-note color="dark">{{contact.Signature}}</ion-note>
+                    <div style="display: flex;padding:0 0 5px 0;">
+                        <ion-label class="user-name">{{reddah.getDisplayName(contact.Watch, 100)}}</ion-label>
+                        <ion-icon class="cmd-title" name="male-outline" size="small" *ngIf="reddah.appData('usersex_'+contact.Watch)==1" color="diamond"></ion-icon>
+                        <ion-icon class="cmd-title" name="female-outline" size="small" *ngIf="reddah.appData('usersex_'+contact.Watch)==0" color="danger"></ion-icon>
+                    </div>
+                    <div style="display: flex;padding:0 0 5px 0;">
+                        <ion-icon *ngFor="let i of reddah.userLevelIconNumber(contact.Watch)" name="{{reddah.userLevelIcon(contact.Watch)}}" color="{{reddah.userLevelIconColor(contact.Watch)}}" size="small"></ion-icon>
+                        <span style="margin-left:5px;" *ngIf="reddah.appData('usernickname_'+contact.Watch)">
+                            {{ reddah.appData('userpoint_'+contact.Watch) }} {{ reddah.userLevel(contact.Watch) }}
+                        </span>
+                    </div>
+                    <div style="display: flex;white-space: pre-line;">
+                        {{contact.Signature}}
+                    </div>
                 </ion-label>
             </ion-item>
         </ion-item-group>

@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController, ActionSheetController } from '@ionic/angular';
 
-import { CacheService } from "ionic-cache";
-import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../../reddah.service';
 
 
@@ -19,8 +17,6 @@ export class QrcardPage implements OnInit {
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
-        private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
         private actionSheetController: ActionSheetController,
     ) { 
         this.userName = this.reddah.getCurrentUser();

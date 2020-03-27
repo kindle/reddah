@@ -218,6 +218,8 @@
     },
 
     "Common":{
+        "AllowLikeShake":"点赞震动",
+        "AllowDarkMode":"夜间模式",
         "Distance":"距离",
         "Refresh":"刷新",
         "Choose":"选择",

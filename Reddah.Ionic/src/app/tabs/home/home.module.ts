@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderModule } from '../../common/header/header.module';
 import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoadedImageProps } from 'ng-lazyload-image';
+import { ArticleActionBarComponent } from './article-action-bar/article-action-bar.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoa
   ],
   declarations: [
       HomePage,
+      ArticleActionBarComponent,
   ]
 })
 export class HomePageModule {}

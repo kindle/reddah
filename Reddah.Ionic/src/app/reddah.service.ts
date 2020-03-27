@@ -224,6 +224,29 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private articleLikeUrl = 'https://login.reddah.com/api/article/articlelike'; 
+
+    articleLike(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.articleLikeUrl, formData)
+        .pipe(
+            tap(data => this.log('article like')),
+            catchError(this.handleError('article like', []))
+        );
+    }
+    //******************************** */
+    private articleForwardUrl = 'https://login.reddah.com/api/article/articleforward'; 
+
+    articleForward(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.articleForwardUrl, formData)
+        .pipe(
+            tap(data => this.log('article forward')),
+            catchError(this.handleError('article forward', []))
+        );
+    }
     //******************************** */
     private addTimelineUrl = 'https://login.reddah.com/api/article/addtimeline'; 
 
@@ -2760,7 +2783,7 @@ export class ReddahService {
             //showCloseButton: true,
             position: "top",
             //closeButtonText: this.translate.instant("Button.Close"),
-            duration: 3000,
+            duration: 1000,
             color: color,
             cssClass: "toast-style"
         });
@@ -3189,6 +3212,24 @@ export class ReddahService {
         }
       
         return current
+    }
+
+    getLikeShake(){
+        let cachedLikeShake = this.localStorageService.retrieve("Reddah_Settings_LikeShake");
+        return cachedLikeShake==null?true:cachedLikeShake;
+    }
+
+    setLikeShake(value){
+        this.localStorageService.store("Reddah_Settings_LikeShake", value);
+    }
+
+    getNightMode(){
+        let cachedNightMode = this.localStorageService.retrieve("Reddah_Settings_NightMode");
+        return cachedNightMode==null?true:cachedNightMode;
+    }
+
+    setNightMode(value){
+        this.localStorageService.store("Reddah_Settings_NightMode", value);
     }
 
 }

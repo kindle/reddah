@@ -22,7 +22,8 @@
     
     <div>
         <ion-refresher slot="fixed" (ionPull)="doPull($event)" (ionRefresh)="doRefresh($event)">
-            <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>
+            <ion-refresher-content 
+            refreshingSpinner="bubbles"></ion-refresher-content>
         </ion-refresher>  
         <div class="timelineCover" #timelineCover (click)="changeCover()">
            <!--<img [src]="reddah.appData('cover_'+userName)" 

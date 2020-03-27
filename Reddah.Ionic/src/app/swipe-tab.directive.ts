@@ -7,7 +7,7 @@ import {
     Renderer2,
     OnDestroy
 } from '@angular/core';
-import { HammerManager, Hammer } from 'hammerjs';
+//import { HammerManager, Hammer } from 'hammerjs';
 
 @Directive({
     selector: '[appSwipetab]',

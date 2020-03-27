@@ -7,7 +7,9 @@
 </ion-item>
 <ion-content no-padding>
     <ion-card *ngIf="createdCode" style="text-align:center;">
-        <ngx-qrcode qrc-element-type="img" [qrc-value]="createdCode" qrc-class="qrsize"></ngx-qrcode>
+        <qr-code [value]="createdCode" size="300" errorCorrectionLevel="M"></qr-code>
+        <!--<ngx-qrcode qrc-element-type="img" [qrc-value]="createdCode" qrc-class="qrsize"></ngx-qrcode>
+        -->
         <ion-card-content style="text-align:center;">
             <span>{{ reddah.instant('Common.ScanToAdd') }}</span>
         </ion-card-content>

@@ -1,0 +1,21 @@
+<div class="bar-container">
+    <div style="display: flex;">
+        <!--<span (click)="goUser(article.UserName)" class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
+            {{reddah.getDisplayName(article.UserName)}}
+        </span>-->
+        <ion-icon (click)="goPost(article)" color="dark" name="arrow-redo-outline"></ion-icon>
+        <span (click)="goPost(article)" class="action-count" *ngIf="article.Down>0">{{article.Down}}</span>
+
+        <ion-icon (click)="view(article)" color="dark" name="chatbox-ellipses-outline" class="action-margin"></ion-icon>
+        <span (click)="view(article)" class="action-count">{{article.Comments}}</span>
+
+        <ion-icon (click)="likeArticle(article)" *ngIf="!article.like" 
+            name="heart-outline" class="action-margin"></ion-icon>
+        <ion-icon (click)="likeArticle(article)" *ngIf="article.like" color="primary"
+            name="heart-circle-outline" class="action-margin"></ion-icon>
+        <span (click)="likeArticle(article)" class="action-count" *ngIf="article.Up>0">{{article.Up}}</span>
+    </div>
+    <div style="display: flex;" (click)="dislike($event, article)">
+        <ion-icon color="medium" size="small" name="close"></ion-icon>
+    </div>
+</div>

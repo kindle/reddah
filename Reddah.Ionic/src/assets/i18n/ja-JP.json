@@ -216,6 +216,8 @@
     },
 
     "Common":{
+        "AllowLikeShake":"振動のように",
+        "AllowDarkMode":"ナイトモード",
         "Distance":"ディスタンス",
         "Refresh":"リフレッシュ",
         "Choose":"選択",

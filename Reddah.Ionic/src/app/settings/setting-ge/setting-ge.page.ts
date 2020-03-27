@@ -17,6 +17,16 @@ export class SettingGePage implements OnInit {
     userName;
     locale;
     @Input() currentLocale;
+
+    likeShake = true;
+    changeLikeShake(){
+        this.reddah.setLikeShake(this.likeShake);
+    }
+
+    nightMode = false;
+    changeNightMode(){
+        this.reddah.setNightMode(this.nightMode);
+    }
     
     constructor(
         private modalController: ModalController,
@@ -28,6 +38,8 @@ export class SettingGePage implements OnInit {
     ) { 
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
+        this.likeShake = this.reddah.getLikeShake();
+        this.nightMode = this.reddah.getNightMode();
     }
 
 

@@ -1,5 +1,5 @@
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
@@ -53,6 +53,7 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
 import { CacheModule } from "ionic-cache";
 import { DragulaModule } from 'ng2-dragula';
 //import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { QrCodeModule } from 'ng-qrcode';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ReddahService } from './reddah.service';
@@ -327,6 +328,7 @@ var firebaseConfig = {
                 deps: [HttpClient]
             }
         }),
+        QrCodeModule,
         //NgxQRCodeModule,
         //AngularFireModule.initializeApp(firebaseConfig),
         //AngularFireDatabaseModule,

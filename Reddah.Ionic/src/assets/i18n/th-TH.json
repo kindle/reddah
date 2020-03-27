@@ -215,6 +215,8 @@
     },
 
     "Common":{
+        "AllowLikeShake":"เช่น การสั่นสะเทือน",
+        "AllowDarkMode":"โหมดกลางคืน",
         "Distance":"ระยะห่าง",
         "Refresh":"ทำให้สดชื่น",
         "Choose":"คัดเลือก",

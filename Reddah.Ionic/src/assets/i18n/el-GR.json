@@ -215,6 +215,8 @@
     },
 
     "Common":{
+        "AllowLikeShake":"Όπως η δόνηση",
+        "AllowDarkMode":"Νυχτερινή λειτουργία",
         "Distance":"Απόσταση",
         "Refresh":"Ανανέωση",
         "Choose":"Επιλογή",

@@ -218,6 +218,8 @@
     },
 
     "Common":{
+        "AllowLikeShake":"진동처럼",
+        "AllowDarkMode":"야간 모드",
         "Distance":"거리",
         "Refresh":"새로 고침",
         "Choose":"선택",
