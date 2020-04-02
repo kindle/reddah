@@ -31,8 +31,9 @@
 
 .sharePortraitNone{
     border-radius: 0px;
-    width: 30px;
+    min-width: 30px;
     height: 30px;
+    object-fit:cover;
 }
 
 .marginleft{

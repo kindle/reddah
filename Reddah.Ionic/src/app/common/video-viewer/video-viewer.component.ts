@@ -3,7 +3,7 @@ import { ModalController, ToastController, ActionSheetController, IonSlides } fr
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
-import 'hammerjs';
+//import 'hammerjs';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from 'ionic-cache';
 

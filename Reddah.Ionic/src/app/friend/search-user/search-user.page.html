@@ -1,7 +1,7 @@
 
-<ion-item color="light" no-padding lines="none">
+<ion-item color="light" style="--padding-start:0;" lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
     </ion-button>
     <ion-input placeholder="{{ reddah.instant('Input.UserName') }}" #searchKeyword clearInput (keyup.enter)="search()" (ionChange)="onchange()"></ion-input>
 </ion-item>

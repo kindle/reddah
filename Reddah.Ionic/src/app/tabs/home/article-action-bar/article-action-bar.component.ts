@@ -45,7 +45,6 @@ export class ArticleActionBarComponent {
     }
     
     async goPost(article){
-        console.log(article)
         const postModal = await this.modalController.create({
             component: AddTimelinePage,
             componentProps: { 
@@ -64,7 +63,6 @@ export class ArticleActionBarComponent {
     }
 
     fwdArticle(article){
-        console.log(article)
         article.Down = article.Down + 1;
         if(article.Down<0)
             article.Down=0;

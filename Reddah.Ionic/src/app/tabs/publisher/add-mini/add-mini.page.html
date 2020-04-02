@@ -1,5 +1,5 @@
-<ion-item color="light" no-padding lines="none">
-    <ion-icon name="arrow-back-outline"slot="start" (click)="close()" class="backbutton"></ion-icon>
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-icon name="chevron-back-outline" slot="start" (click)="close()" class="backbutton"></ion-icon>
     <ion-button color="success" slot="end" (click)="save()" [disabled]="loading">{{ reddah.instant('Common.Save') }}</ion-button>
 </ion-item>
 <ion-content>

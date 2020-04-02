@@ -167,6 +167,7 @@ export class SurfacePage implements OnInit {
     }
 
     panstart(evt){
+        console.log('panstart...')
         this.isMouseDown = true;
         this.dragX = evt.center.x;
         this.dragY = evt.center.y;
@@ -181,6 +182,7 @@ export class SurfacePage implements OnInit {
     }
 
     pan(evt){
+        console.log('pan...')
          if (this.isMouseDown) {
             var dX = evt.center.x - this.dragX;
             var dY = evt.center.y - this.dragY;

@@ -1,10 +1,10 @@
-<ion-item color="light" no-padding lines="none">
+<ion-item color="light" style="--padding-start:0;" lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
     </ion-button>
     <ion-label>{{ reddah.instant('Menu.Settings') }}</ion-label>
 </ion-item>
-<ion-content no-padding style="--background: #eeeeee;" #searchResult>
+<ion-content no-padding class="common-content" #searchResult>
     <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="goAccount()">
         <ion-icon class="menuIcon" slot="start" name="person"color="dark" size="medium"></ion-icon>
         <ion-label color="dark">{{ reddah.instant('About.Account') }}</ion-label>

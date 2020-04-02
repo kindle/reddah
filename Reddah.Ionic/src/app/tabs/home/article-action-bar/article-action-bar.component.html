@@ -4,16 +4,22 @@
             {{reddah.getDisplayName(article.UserName)}}
         </span>-->
         <ion-icon (click)="goPost(article)" color="dark" name="arrow-redo-outline"></ion-icon>
-        <span (click)="goPost(article)" class="action-count" *ngIf="article.Down>0">{{article.Down}}</span>
+        <ion-text color="dark" (click)="goPost(article)" class="action-count" *ngIf="article.Down>0">
+            {{article.Down}}
+        </ion-text>
 
         <ion-icon (click)="view(article)" color="dark" name="chatbox-ellipses-outline" class="action-margin"></ion-icon>
-        <span (click)="view(article)" class="action-count">{{article.Comments}}</span>
+        <ion-text color="dark" (click)="view(article)" class="action-count">
+            {{article.Comments}}
+        </ion-text>
 
-        <ion-icon (click)="likeArticle(article)" *ngIf="!article.like" 
+        <ion-icon (click)="likeArticle(article)" *ngIf="!article.like" color="dark"
             name="heart-outline" class="action-margin"></ion-icon>
-        <ion-icon (click)="likeArticle(article)" *ngIf="article.like" color="primary"
+        <ion-icon (click)="likeArticle(article)" *ngIf="article.like" color="dark"
             name="heart-circle-outline" class="action-margin"></ion-icon>
-        <span (click)="likeArticle(article)" class="action-count" *ngIf="article.Up>0">{{article.Up}}</span>
+        <ion-text color="dark" (click)="likeArticle(article)" class="action-count" *ngIf="article.Up>0">
+            {{article.Up}}
+        </ion-text>
     </div>
     <div style="display: flex;" (click)="dislike($event, article)">
         <ion-icon color="medium" size="small" name="close"></ion-icon>

@@ -2,18 +2,18 @@
     onerror="this.src='assets/icon/timg.jpg';">
 <ion-content style="--background: transparent;" id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop>
     <div class="headerStart" #headerStart slot="fixed">
-        <ion-item color="transparent" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
+        <ion-item color="transparent" style="--padding-start:0;" lines="none" (dblclick)="clearCacheAndReload(null)">
             <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
-                <ion-icon color="tertiary" is-active="false" name="arrow-back-outline"></ion-icon>
+                <ion-icon color="tertiary" is-active="false" name="chevron-back-outline"></ion-icon>
             </ion-button>
             <ion-label></ion-label>
             <ion-icon name="camera-outline"color="tertiary" slot="end" (click)="post($event)"></ion-icon>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll slot="fixed">
-        <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
+        <ion-item color="light" style="--padding-start:0;" lines="none" (dblclick)="clearCacheAndReload(null)">
             <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
-                <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
+                <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
             </ion-button>
             <ion-label style="text-transform: none;">{{ reddah.instant('Menu.Timeline') }}</ion-label>
             <ion-icon name="camera-outline"slot="end" (click)="post($event)"></ion-icon>
@@ -40,7 +40,7 @@
         </div>
         <div *ngFor="let article of articles" 
         style="background-color: white; display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
-            <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
+            <div style="width:70px;padding: 0 0 0 10px; border: 0px solid blue;">
                 <img src="{{reddah.appData('userphoto_'+article.UserName)}}" class="portrait" (click)="goUser(article.UserName)">
             </div>
             <div style="width:100%;border: 0px solid red;">
@@ -105,7 +105,7 @@
                     <div style="width: 100%;">
                         <div class="like-arrow-up"></div>
                         <div class="likeSection">
-                            <ion-icon name="heart-outline" class="likeIcon" style="font-size:15px;"></ion-icon>
+                            <ion-icon name="heart-outline" color="danger" class="likeIcon" style="font-size:15px;"></ion-icon>
                             <span class="likeUserName">
                                 <span class="user-name" (click)="goUser(user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName);last as isLast;">{{user.displayName}}{{isLast?"":", "}}</span>
                             </span>

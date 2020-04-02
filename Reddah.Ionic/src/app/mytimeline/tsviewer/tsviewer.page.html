@@ -2,7 +2,7 @@
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
         <ion-icon is-active="false" name="arrow-back"></ion-icon>
     </ion-button>
-    <ion-title>{{ reddah.instant('Common.Details') }}</ion-title>
+    <ion-text>{{ reddah.instant('Common.Details') }}</ion-text>
 </ion-item>
 <ion-content *ngIf="!isFriend" style="background-color: white;">
     <ion-item lines="none" class="borderTop borderBottom" (click)="addFriend()" *ngIf="!isFriend&&userName!=reddah.getCurrentUser()">
@@ -14,7 +14,7 @@
 </ion-content>
 <ion-content *ngIf="isFriend">
     <div style="display: flex; border-bottom: 0px solid lightgrey; margin: 15px 5px; padding-bottom: 0px;">
-        <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">
+        <div style="width:70px;padding: 0 0 0 10px; border: 0px solid blue;">
             <img [src]="reddah.appData('userphoto_'+article.UserName)" class="border: 1px solid gray;" (click)="goUser(article.UserName)">
         </div>
         <div style="width:100%;border: 0px solid red;">
@@ -65,8 +65,8 @@
                 <ion-note color="secondary">{{reddah.getJSON(article.Location).title}}</ion-note>
             </ion-item>
             <ion-item no-padding lines="none">
-                <ion-note color="dark">{{reddah.utcToLocal(article.CreatedOnOrg?article.CreatedOnOrg:article.CreatedOn,'YYYY-MM-DD HH:mm:ss')}}</ion-note>
-                <ion-note color="secondary" style="margin-left: 5px;" *ngIf="isMe()">{{ reddah.instant('Comment.Delete') }}</ion-note>
+                <ion-label style="min-width:fit-content;" color="dark">{{reddah.utcToLocal(article.CreatedOnOrg?article.CreatedOnOrg:article.CreatedOn,'YYYY-MM-DD HH:mm:ss')}}</ion-label>
+                <ion-label color="secondary" style="margin-left: 5px;" *ngIf="isMe()">{{ reddah.instant('Comment.Delete') }}</ion-label>
                 <ion-icon name="ellipsis-horizontal"slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
             </ion-item>
         </div>
@@ -76,7 +76,7 @@
             <div style="width: 100%;">
                 <div class="like-arrow-up"></div>
                 <div class="likeSection">
-                    <ion-icon name="heart-outline" class="likeIcon" style="font-size:15px;"></ion-icon>
+                    <ion-icon name="heart-outline" color="danger" class="likeIcon" style="font-size:15px;"></ion-icon>
                     <span class="likeUserName">
                         <img [src]="reddah.appData('userphoto_'+user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName)" (click)="goUser(user.userName)"
                         style="margin:0 3px;width:35px;height:35px;">

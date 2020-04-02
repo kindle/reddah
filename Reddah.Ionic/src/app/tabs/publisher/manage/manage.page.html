@@ -1,6 +1,6 @@
-<ion-item color="light" no-padding lines="none">
+<ion-item color="light" style="--padding-start:0;" lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
     </ion-button>
     <ion-text>{{ reddah.instant('Register.Manage') }}</ion-text>
 </ion-item>
@@ -14,9 +14,9 @@
             <ion-item-divider color="light" lines="none">{{group.letter.toUpperCase()}}</ion-item-divider>
             <ion-item *ngFor="let sub of group.subs" (click)="subInfo(sub)">
                 <ion-avatar slot="start" class="contactUserPhoto">
-                    <ion-icon name="list-outline"color="white" class="portrait sub" *ngIf="sub.Type==1"></ion-icon>
-                    <ion-icon name="person-outline"color="tertiary" class="portrait service" *ngIf="sub.Type==2"></ion-icon>
-                    <ion-icon name="infinite-outline"color="tertiary" class="portrait mini" *ngIf="sub.Type==3"></ion-icon>
+                    <ion-icon name="list-outline" color="tertiary" class="portrait sub" *ngIf="sub.Type==1"></ion-icon>
+                    <ion-icon name="person-outline" color="tertiary" class="portrait service" *ngIf="sub.Type==2"></ion-icon>
+                    <ion-icon name="infinite-outline" color="tertiary" class="portrait mini" *ngIf="sub.Type==3"></ion-icon>
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">
                     <span class="user-name">{{sub.NickName}}</span><br>

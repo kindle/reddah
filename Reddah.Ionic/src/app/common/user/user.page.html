@@ -1,6 +1,6 @@
-<ion-item color="light" no-padding lines="none">
+<ion-item color="light" style="--padding-start:0;" lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
     </ion-button>
     <ion-button clear slot="end" color="light" (click)="presentActionSheet()" style="--box-shadow: none;">
         <ion-icon is-active="false" name="ellipsis-horizontal"></ion-icon>
@@ -12,10 +12,10 @@
         </ion-refresher-content>
     </ion-refresher>
     <ion-item lines="none" class="borderTop borderBottom">
-        <ion-thumbnail class="userPhoto">
+        <ion-thumbnail style="margin: 10px 35px 10px 0;">
             <img src="{{reddah.appData('userphoto_'+userName)}}" 
                 (click)="viewer(reddah.appData('userphoto_'+userName))" 
-                class="portrait portrait-user"
+                class="portrait"
                 onerror="this.src='assets/icon/anonymous.png';">
         </ion-thumbnail>
         <ion-label style="margin-top:0;">
@@ -64,10 +64,10 @@
     <ion-item lines="none" style="--background:#eeeeee;height:10px;" 
         *ngIf="imageList&&imageList.length>0&&reddah.appData('userallowtentimeline_'+this.userName)==1">
     </ion-item>
-    <ion-item lines="none" class="borderTop borderBottom" (click)="viewTimeline()" 
+    <ion-item style="--padding:0;" lines="none" class="borderTop borderBottom" (click)="viewTimeline()" 
         *ngIf="imageList&&imageList.length>0&&reddah.appData('userallowtentimeline_'+this.userName)==1">
         <span class="itemTitle span-eclipse" style="line-height: 90px;">{{ reddah.instant('Menu.Timeline') }}</span>
-        <ion-thumbnail *ngFor="let image of imageList" style="padding: 5px;">
+        <ion-thumbnail *ngFor="let image of imageList" style="margin-right:5px;">
             <img [id]="reddah.makeItId(image+'usr')" 
                 (load)="reddah.adjustImage(image, 'usr')"
                 [src]="reddah.level2Cache(image)">
@@ -85,7 +85,7 @@
     </ion-item>
     <ion-item class="borderTop borderBottom" lines="none" *ngIf="appList&&appList.length>0">
         <span class="itemTitle span-eclipse" style="line-height: 30px;">{{ reddah.instant('Menu.MiniApp') }}</span>
-        <ion-thumbnail *ngFor="let app of appList" style="padding: 5px;">
+        <ion-thumbnail *ngFor="let app of appList" style="margin-right: 5px;">
             <img [id]="reddah.makeItId(app.Photo+'usr')" 
                 (load)="reddah.adjustImage(app.Photo, 'usr')"
                 [src]="reddah.level2Cache(app.Photo)"

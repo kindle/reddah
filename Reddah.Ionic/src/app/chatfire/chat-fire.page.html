@@ -1,7 +1,7 @@
 
-<ion-item color="light" no-padding lines="none">
+<ion-item color="light" style="--padding-start:0;" lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
     </ion-button>
     <ion-label>{{title}}</ion-label>
     <ion-button clear slot="end" color="light" (click)="option()" style="--box-shadow: none;">
@@ -131,7 +131,7 @@ style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatb
         </ion-row>
     </ion-grid>
 </ion-content>
-<div class="speakBox" *ngIf="speakPressing">
+<div class="speakBox" *ngIf="speakPressing" (click)="chatbox.stopSpeak()">
     <ion-icon name="mic" color="tertiary" class="speak"></ion-icon>
 </div>
 <app-chat-fire-box #chatbox [(selectedArticleId)]="chatId" selectedCommentId="-1"

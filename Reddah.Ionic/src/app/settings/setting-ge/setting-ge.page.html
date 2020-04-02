@@ -1,6 +1,6 @@
-<ion-item color="light" no-padding lines="none">
+<ion-item color="light" style="--padding-start:0;" lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="arrow-back-outline"></ion-icon>
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
     </ion-button>
     <ion-label>{{ reddah.instant('About.General') }}</ion-label>
 </ion-item>
@@ -22,12 +22,14 @@
             <ion-label>{{ reddah.instant('Common.AllowLikeShake') }}</ion-label>
             <ion-toggle [(ngModel)]="likeShake" color="success" slot="end" (ionChange)="changeLikeShake()"></ion-toggle>
         </ion-item>
+        <!--
         <ion-item class="borderItem">
             <ion-icon slot="start" name="sunny-outline" color="warning" size="medium" *ngIf="!nightMode"></ion-icon>
             <ion-icon slot="start" name="moon-outline" color="dark" size="medium" *ngIf="nightMode"></ion-icon>
             <ion-label>{{ reddah.instant('Common.AllowDarkMode') }}</ion-label>
             <ion-toggle [(ngModel)]="nightMode" color="success" slot="end" (ionChange)="changeNightMode()"></ion-toggle>
         </ion-item>
+        -->
         <ion-item lines="none" class="borderBottom borderItem" (click)="clearCache()">
             <ion-icon slot="start" name="trash" color="medium" size="medium"></ion-icon>
             <ion-label>{{ reddah.instant('Common.Cache') }}</ion-label>

@@ -23,6 +23,10 @@ export class TabsPage implements OnInit {
     isAndroid = false;
     isIos = false;
 
+    onPress(evt){
+        console.log('test...')
+    }
+
     constructor(
         private authService: AuthService,
         private platform: Platform,

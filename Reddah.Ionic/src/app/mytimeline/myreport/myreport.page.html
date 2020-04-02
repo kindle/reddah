@@ -2,14 +2,14 @@
     onerror="this.src='assets/icon/timg.jpg';">
 <ion-content style="--background: transparent;" id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop>
     <div class="headerStart" #headerStart slot="fixed">
-        <ion-item color="transparent" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
-            <ion-icon name="arrow-back-outline" color="tertiary" slot="start" (click)="goback()" class="backbutton"></ion-icon>
+        <ion-item color="transparent" style="--padding-start:0;" lines="none" (dblclick)="clearCacheAndReload(null)">
+            <ion-icon name="chevron-back-outline" color="tertiary" slot="start" (click)="goback()" class="backbutton"></ion-icon>
             <ion-label></ion-label>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll slot="fixed">
-        <ion-item color="light" no-padding lines="none" (dblclick)="clearCacheAndReload(null)">
-            <ion-icon name="arrow-back-outline"slot="start" (click)="goback()" class="backbutton"></ion-icon>
+        <ion-item color="light" style="--padding-start:0;" lines="none" (dblclick)="clearCacheAndReload(null)">
+            <ion-icon name="chevron-back-outline"slot="start" (click)="goback()" class="backbutton"></ion-icon>
             <ion-label>{{ reddah.instant('Menu.Header.Feedback') }}</ion-label>
         </ion-item>
     </div>

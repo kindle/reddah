@@ -1,5 +1,5 @@
-<ion-item color="light" no-padding lines="none">
-    <ion-icon name="arrow-back-outline" (click)="close()" class="backbutton"></ion-icon>
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-icon name="chevron-back-outline" (click)="close()" class="backbutton"></ion-icon>
     <ion-label>{{ reddah.instant('Menu.Header.GroupChat') }}</ion-label>
     <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ reddah.instant('Confirm.Submit') }}</ion-button>
 </ion-item>

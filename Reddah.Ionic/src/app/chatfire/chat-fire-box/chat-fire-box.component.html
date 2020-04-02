@@ -6,8 +6,7 @@
         #newChatComment id="newChatComment" [(ngModel)]="commentContent" *ngIf="!showSpeakBox"></ion-textarea>
         <ion-icon name="apps" size="medium" (click)="switchSpeak()" *ngIf="showSpeakBox"></ion-icon>
         <ion-textarea [class.audio-pressed]="isPressed" class="newChatComment text-center" autoresize readonly rows="1" cols="21"
-        placeholder="{{speakDesc}}" *ngIf="showSpeakBox"
-        ion-long-press (press)="startSpeak()" (pressUp)="stopSpeak()"></ion-textarea>
+        placeholder="{{speakDesc}}" *ngIf="showSpeakBox" (press)="startSpeak()" (pressUp)="stopSpeak()"></ion-textarea>
         
         <ion-icon slot="end" name="happy-outline" size="medium" (click)="toggleFacePanel()" *ngIf="!showFacePanel"></ion-icon>
         <!--<ion-icon slot="end" name="apps" size="medium" (click)="toggleFacePanel()" *ngIf="showFacePanel"></ion-icon>

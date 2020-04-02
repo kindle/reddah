@@ -1,17 +1,17 @@
 <ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" style="background-color:white;">
     <div class="headerStart" #headerStart>
-        <ion-item color="transparent" no-padding lines="none"  (dblclick)="clearCacheAndReload()">
+        <ion-item color="transparent" style="--padding-start:0;" lines="none"  (dblclick)="clearCacheAndReload()">
             <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
-                <ion-icon slot="start" is-active="false" name="arrow-back-outline"></ion-icon>
+                <ion-icon slot="start" is-active="false" name="chevron-back-outline"></ion-icon>
             </ion-button>
             <ion-label></ion-label>
             <ion-icon name="chatbox-ellipses-outline" color="tertiary" slot="end" (click)="goMessage()" *ngIf="isMe()"></ion-icon>
         </ion-item>
     </div>
     <div class="headerOnScroll" #headerOnScroll>
-        <ion-item color="light" no-padding lines="none">
+        <ion-item color="light" style="--padding-start:0;" lines="none">
             <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
-                <ion-icon slot="start" is-active="false" name="arrow-back-outline"></ion-icon>
+                <ion-icon slot="start" is-active="false" name="chevron-back-outline"></ion-icon>
                 <ion-label style="text-transform: none;">{{reddah.getDisplayName(userName)}}</ion-label>
             </ion-button>
             <ion-icon name="chatbox-ellipses-outline" slot="end" (click)="goMessage()" *ngIf="isMe()"></ion-icon>
@@ -48,14 +48,14 @@
                         </span>
                     </div>
                     <div class="articleContent" *ngIf="article.Id==0">
-                        <ion-item no-padding lines="none" (click)="post($event)">
+                        <ion-item style="--padding-start:0;" lines="none" (click)="post($event)">
                             <ion-thumbnail slot="start">
                                 <img src="assets/icon/noimage.jpg">
                             </ion-thumbnail>
                         </ion-item>
                     </div>
                     <div class="articleContent" *ngIf="article.Id>0">
-                        <ion-item no-padding lines="none" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.length>0" (click)="goTsViewer(article)">
+                        <ion-item style="--padding-start:0;" lines="none" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.length>0" (click)="goTsViewer(article)">
                             <ion-thumbnail slot="start">
                                 <div class="tsparent4" *ngIf="article.Content.split('$$$').length>=4">
                                     <div class="tscontainer" *ngFor="let image of article.Content.split('$$$').slice(0,4);index as i">
@@ -110,10 +110,10 @@
                                 <div class="articleContentTextCount" *ngIf="article.Content.split('$$$').length>0">{{reddah.lan2(article.Content.split('$$$').length, reddah.instant('Common.Pictures')) }}</div>
                             </ion-label>
                         </ion-item>
-                        <ion-item no-padding lines="none" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.length===0" (click)="goTsViewer(article)">
+                        <ion-item style="--padding-start:0;" lines="none" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.length===0" (click)="goTsViewer(article)">
                             <div [innerHTML]="reddah.summary(article.Title,20)" class="textOnlyArticle"></div>
                         </ion-item>
-                        <ion-item no-padding lines="none" *ngIf="article.Abstract&&article.Abstract.length>2&&article.Title&&article.Title.length>0" (click)="goTsViewer(article)">
+                        <ion-item style="--padding-start:0;" lines="none" *ngIf="article.Abstract&&article.Abstract.length>2&&article.Title&&article.Title.length>0" (click)="goTsViewer(article)">
                             <div [innerHTML]="reddah.summary(article.Title,20)" class="textOnlyArticle"></div>
                         </ion-item>
                         <app-share-article *ngIf="article.Abstract&&article.Abstract.length>2" 

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonInfiniteScroll, IonContent, IonRefresher } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent, IonRefresher, ActionSheetController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { Article } from '../../model/article';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -10,6 +10,7 @@ import { MyInfoPage } from '../../common/my-info/my-info.page';
 import { SearchPage } from '../../common/search/search.page';
 import { UserPage } from '../../common/user/user.page';
 import { PubPage } from '../publisher/pub/pub.page';
+import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
 
 @Component({
     selector: 'app-home',
@@ -26,6 +27,7 @@ export class HomePage implements OnInit {
         public loadingController: LoadingController,
         public navController: NavController,
         private popoverController: PopoverController,
+        private actionSheetController: ActionSheetController,
         public modalController: ModalController,
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
@@ -96,7 +98,49 @@ export class HomePage implements OnInit {
        
     }
   
-    
+    async create(){
+        const actionSheet = await this.actionSheetController.create({
+            //header: this.reddah.instant('Pop.YourThoughts'),
+            buttons: [{
+                text: this.reddah.instant('Menu.Recommend'),
+                role: 'destructive',
+                icon: 'create-outline',
+                handler: () => {
+                    
+                }
+            }, {
+                text: this.reddah.instant('Pop.TakePhoto'),
+                icon: 'camera-outline',
+                role: 'destructive',
+                handler: () => {
+                    this.goPost(1);
+                }
+            }, {
+                text: this.reddah.instant('Pop.SelectPhoto'),
+                icon: 'image-outline',
+                role: 'destructive',
+                handler: () => {
+                    this.goPost(2);
+                }
+            }]
+        });
+        await actionSheet.present();
+        
+    }
+
+    async goPost(postType){
+        const postModal = await this.modalController.create({
+            component: AddTimelinePage,
+            componentProps: { postType: postType },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await postModal.present();
+        const { data } = await postModal.onDidDismiss();
+        if(data){
+            this.doRefresh(null);
+        }
+    }
 
     //drag down
     doRefresh(event){

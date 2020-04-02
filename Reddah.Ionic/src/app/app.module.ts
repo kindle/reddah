@@ -1,5 +1,5 @@
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
@@ -169,6 +169,7 @@ import { ShareChooseChatPage } from './chat/share-choose-chat/share-choose-chat.
 import { ShareChooseUserPage } from './chat/share-choose-user/share-choose-user.page';
 import { ShareChooseGroupPage } from './chat/share-choose-group/share-choose-group.page';
 import { ShareArticleChatComponent } from './common/share-article-chat/share-article-chat.component';
+//import { IonicGestureConfig } from './IonicGestureConfig';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -306,7 +307,7 @@ var firebaseConfig = {
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     imports: [
-        BrowserModule, 
+        BrowserModule, HammerModule,
         FormsModule,
         IonicModule.forRoot(), 
         AppRoutingModule,
@@ -379,6 +380,7 @@ var firebaseConfig = {
         Vibration,DeviceMotion,Device,
         //Firebase,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
+        //{ provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig }
     ],
     bootstrap: [AppComponent]
 })

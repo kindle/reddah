@@ -1,5 +1,5 @@
 <!--appSwipetab-->
-<ion-tabs *ngIf="isAuthenticated()" 
+<ion-tabs *ngIf="isAuthenticated()" (press)="onPress($event)"
 (ionTabsDidChange)="ionTabsDidChange($event)" (tabChange)="onTabChange($event)" #myTabs>
     <ion-tab-bar slot="bottom">
         <ion-tab-button tab="home" href="/tabs/home" (click)="change()">

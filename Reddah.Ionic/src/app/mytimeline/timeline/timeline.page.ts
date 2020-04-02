@@ -140,7 +140,7 @@ export class TimeLinePage implements OnInit {
             this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
         }
         else if(offset<150 && offset>=0){
-            let opacity = (1-(offset-150)/100);
+            let opacity = (1-(offset-0)/100);
             if(opacity>1) opacity=1;
             this.renderer.setStyle(this.headerOnScroll.nativeElement, 'opacity', opacity + '');
         }
@@ -148,6 +148,7 @@ export class TimeLinePage implements OnInit {
         {
             this.renderer.setStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
             this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
+            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'opacity', '8');
         }
     }
 

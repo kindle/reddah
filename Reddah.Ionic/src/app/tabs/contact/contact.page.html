@@ -5,25 +5,24 @@
         </ion-refresher-content>
     </ion-refresher>
     <ion-item class="borderTop" href="/mytimeline" detail="false">
-        <ion-icon class="mytl" name="aperture"slot="start" size="large" color="primary"></ion-icon>
+        <ion-icon class="mytl" name="aperture" slot="start" size="large" color="primary"></ion-icon>
         <ion-text style="margin-left:10px;">{{ reddah.instant('Menu.Timeline') }}</ion-text>
         <ion-badge slot="end" color="danger" *ngIf="reddah.unReadMessage.length>0">{{reddah.unReadMessage.length}}</ion-badge>
     </ion-item>
-    <ion-item lines="none" class="borderBottom" (click)="message()">
-        <ion-icon class="msg" name="mail"slot="start" color="medium" size="large"></ion-icon>
+    <ion-item class="borderItem" (click)="message()">
+        <ion-icon class="msg" name="mail" slot="start" color="medium" size="large"></ion-icon>
         <ion-label style="margin-left:10px;">{{ reddah.instant('Menu.Message') }}</ion-label>
     </ion-item>
-    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    
+    <ion-item class="borderItem" (click)="goChooseGroupChat()">
+        <ion-icon class="msg" name="chatbubbles-outline" slot="start" color="dark" size="large"></ion-icon>
+        <ion-label style="margin-left:10px;">{{ reddah.instant('Menu.GroupChat') }}</ion-label>
     </ion-item>
 
-    <ion-item class="borderTop" (click)="viewNewFriends()">
-        <ion-icon name="person-add"slot="start" color="tertiary" class="portrait newFriend"></ion-icon>
+    <ion-item lines="none" class="borderBottom" (click)="viewNewFriends()">
+        <ion-icon class="msg" name="people-outline" slot="start" color="warning" size="large"></ion-icon>
         <ion-label style="margin-left:10px;">{{ reddah.instant('Menu.NewFriends') }}</ion-label>
         <ion-badge slot="end" color="danger" *ngIf="requestCount>0">{{requestCount}}</ion-badge>
-    </ion-item>
-    <ion-item lines="none" class="borderBottom" (click)="goChooseGroupChat()">
-        <ion-icon name="chatbubbles"slot="start" color="tertiary" class="portrait groupChat"></ion-icon>
-        <ion-label style="margin-left:10px;">{{ reddah.instant('Menu.GroupChat') }}</ion-label>
     </ion-item>
     <!--
     <ion-item (click)="mystic()">
