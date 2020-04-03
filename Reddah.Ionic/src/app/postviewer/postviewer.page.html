@@ -9,20 +9,42 @@
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
     <div style="padding-left: 10px;padding-top: 10px;padding-bottom: 10px;">
         <span style="font-size: larger;color:black;" class="article-title" [innerHTML]="reddah.htmlDecode(article.Title) | safe: 'html'"></span>
+        
+        <ion-item lines="none" style="--padding-start:0;">
+            <ion-thumbnail style="margin: 10px 10px 10px 0;">
+                <img src="{{reddah.appData('userphoto_'+article.UserName)}}" 
+                    (click)="viewer(reddah.appData('userphoto_'+article.UserName))" 
+                    class="portrait"
+                    onerror="this.src='assets/icon/anonymous.png';">
+            </ion-thumbnail>
+            <ion-label style="margin-top:0;">
+                <div style="display: flex;padding:0 0 5px 0;">
+                    <ion-label class="user-name">{{reddah.getDisplayName(article.UserName, 100)}}</ion-label>
+                    <ion-icon class="cmd-title" name="male-outline" size="small" *ngIf="reddah.appData('usersex_'+article.UserName)==1" color="diamond"></ion-icon>
+                    <ion-icon class="cmd-title" name="female-outline" size="small" *ngIf="reddah.appData('usersex_'+article.UserName)==0" color="danger"></ion-icon>
+                </div>
+                <div style="display: flex;">
+                    <ion-text color="dark">{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-text>
+                </div>
+            </ion-label>
+            <div slot="end">
+                <ion-chip style="--background:#107c10;">
+                    <ion-label color="tertiary" (click)="focus()" *ngIf="reddah.appData('userisfriend_'+article.UserName+'_'+this.userName)==0">
+                        {{reddah.instant('Pop.Focus')}}
+                    </ion-label>
+                    <ion-label color="tertiary" (click)="unFocus()" *ngIf="reddah.appData('userisfriend_'+article.UserName+'_'+this.userName)==1">
+                        {{reddah.instant('Pop.Unfocus')}}
+                    </ion-label>
+                </ion-chip>
+            </div>
+        </ion-item>
         <div style="margin:10px 0;">
-            <ion-text color="primary" (click)="goUser(article.UserName)">
-                <span class="user-name" [innerHTML]="reddah.getDisplayName(article.UserName) | safe: 'html'"></span>
-            </ion-text>
-            <ion-text style="margin-left:5px;" color="dark" margin-end>{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-text>     
-            
-            <ion-note *ngIf="!asNormalUser" color="danger" slot="end" (click)="delete()">[{{reddah.instant('Comment.Delete') }}]</ion-note>
+            <ion-note *ngIf="!asNormalUser" color="danger" slot="end" (click)="delete()" style="margin-right:10px;">
+                [{{reddah.instant('Comment.Delete') }}]
+            </ion-note>
             <ion-note *ngIf="!asNormalUser" color="danger" slot="end" (click)="edit()">[{{reddah.instant('Comment.Edit') }}]</ion-note>
         </div>
-        <div class="listInfo">
-            <span *ngFor="let group of article.GroupName.split(',')" (click)="goSearch(group)" style="padding-right:5px;">
-                <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;margin-bottom:2px;">{{group.trim()}}</u>
-            </span>
-        </div>
+        
         <ion-text color="dark" *ngIf="!article.VideoUrl">
             <div id="articleContent" (click)="viewer($event)" [innerHTML]="reddah.htmlDecode(article.Content) | safe: 'html'"></div>
         </ion-text>
@@ -30,6 +52,15 @@
             <video style="width:100%;" id="video_{{article.Id}}" [poster]="" [src]="article.VideoUrl" controls>
                 your browser does not support playing video
             </video>
+        </div>
+        <div class="listInfo">
+            <ion-chip style="--background:#eeeeee;" *ngFor="let group of article.GroupName.split(',')">
+                <ion-icon name="chatbubble-ellipses-outline" (click)="goSearch(group)" color="dark" size="small"></ion-icon>
+                <ion-label color="dark" (click)="goSearch(group)">
+                    {{group.trim()}}
+                </ion-label>
+                <ion-icon style="transform:scale(0.7);" name="caret-forward-outline" (click)="goSearch(group)" color="medium" size="small"></ion-icon>
+            </ion-chip>
         </div>
     </div>
     <app-comment [(normal)]="asNormalUser" *ngIf="!preview" #commentlist count="{{article.Count}}" no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" (commentClick)="childCommentClick($event)" 

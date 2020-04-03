@@ -235,14 +235,7 @@ export class PubPage implements OnInit {
     }
 
     async focus(){
-        this.reddah.toTextCache(1, `userisfriend_${this.userName}_${this.currentUserName}`);
-        let formData = new FormData();
-        formData.append("targetUser",this.userName);
-        this.reddah.setFocus(formData).subscribe(_=>{
-            this.localStorageService.clear("Reddah_GroupedContacts_Pub_"+this.userName);
-            this.localStorageService.clear("Reddah_Contacts_Pub_"+this.userName);
-            this.cacheService.clearGroup("PubPage");
-        });
+        this.reddah.focusPub(this.currentUserName, this.userName);
     }
 
     async unfocus(){
@@ -255,11 +248,12 @@ export class PubPage implements OnInit {
                 role: 'cancel',
                 cssClass: 'cssdark',
                 handler: () => {}
-              }, {
+              }, 
+              {
                 text: this.reddah.instant("Pop.StillUnfocus"),
                 cssClass:'cssdanger',
                 handler: () => {
-                    this.actualUnfocus();
+                    this.reddah.unFocusPub(this.currentUserName, this.userName);
                 }
               }
             ]
@@ -267,17 +261,6 @@ export class PubPage implements OnInit {
 
         await alert.present().then(()=>{});
         
-    }
-
-    async actualUnfocus(){
-        this.localStorageService.clear(`userisfriend_${this.userName}_${this.currentUserName}`);
-        let formData = new FormData();
-        formData.append("targetUser",this.userName);
-        this.reddah.unFocus(formData).subscribe(_=>{
-            this.localStorageService.clear("Reddah_GroupedContacts_Pub_"+this.userName);
-            this.localStorageService.clear("Reddah_Contacts_Pub_"+this.userName);
-            this.cacheService.clearGroup("PubPage");
-        });
     }
   
     async viewer(photo) {

@@ -62,9 +62,13 @@
                 <div [class.articleTextRead]="article.Read">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
             </div>
             <div class="listInfo" *ngIf="article.ImageUrls.length==0">
-                <span *ngFor="let group of article.GroupName.split(',')" (click)="goSearch(group)" style="padding-right:5px;">
-                    <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;margin-bottom:2px;">{{group.trim()}}</u>
-                </span>
+                <ion-chip style="--background:#eeeeee;" *ngFor="let group of article.GroupName.split(',')">
+                    <ion-icon name="chatbubble-ellipses-outline" (click)="goSearch(group)" color="dark" size="small"></ion-icon>
+                    <ion-label color="dark" (click)="goSearch(group)">
+                        {{group.trim()}}
+                    </ion-label>
+                    <ion-icon style="transform:scale(0.7);" name="caret-forward-outline" (click)="goSearch(group)" color="medium" size="small"></ion-icon>
+                </ion-chip>
             </div>
             <app-article-action-bar [article]="article" [userName]="userName" 
             *ngIf="article.ImageUrls.length==0"></app-article-action-bar>

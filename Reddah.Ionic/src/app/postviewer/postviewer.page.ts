@@ -66,9 +66,41 @@ export class PostviewerPage implements OnInit {
     }
 
     ionViewDidEnter(){
+        console.log(this.article)
         if(!this.preview)
             this.loadComments();
     }
+
+    async focus(){
+        this.reddah.focusPub(this.userName, this.article.UserName);
+    }
+
+    async unFocus(){
+        const alert = await this.alertController.create({
+            header: "",
+            message: `${this.reddah.instant("Pop.StillUnfocus")}${this.reddah.getDisplayName(this.article.UserName, 100)} ${this.reddah.instant("Pop.UnfocusMessage")}`,
+            buttons: [
+                {
+                    text: this.reddah.instant("Pop.StillFocus"),
+                    role: 'cancel',
+                    cssClass: 'cssdark',
+                    handler: () => {}
+                    }, 
+                {
+                    text: this.reddah.instant("Pop.StillUnfocus"),
+                    cssClass:'cssdanger',
+                    handler: () => {
+                        this.reddah.unFocusPub(this.userName, this.article.UserName);
+                    }
+                }
+            ]
+        });
+
+        await alert.present().then(()=>{});
+            
+        
+    }
+    
 
     async presentPopover(ev: any) {
         const popover = await this.popoverController.create({

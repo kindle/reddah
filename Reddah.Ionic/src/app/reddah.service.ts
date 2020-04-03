@@ -878,6 +878,28 @@ export class ReddahService {
         );
     }
     //******************************** */
+    focusPub(personUserName, pubUserName){
+        this.toTextCache(1, `userisfriend_${pubUserName}_${personUserName}`);
+        let formData = new FormData();
+        formData.append("targetUser", pubUserName);
+        this.setFocus(formData).subscribe(_=>{
+            this.localStorageService.clear("Reddah_GroupedContacts_Pub_"+pubUserName);
+            this.localStorageService.clear("Reddah_Contacts_Pub_"+pubUserName);
+            this.cacheService.clearGroup("PubPage");
+        });
+    }
+
+    unFocusPub(personUserName, pubUserName){
+        this.localStorageService.clear(`userisfriend_${pubUserName}_${personUserName}`);
+        let formData = new FormData();
+        formData.append("targetUser",pubUserName);
+        this.unFocus(formData).subscribe(_=>{
+            this.localStorageService.clear("Reddah_GroupedContacts_Pub_"+pubUserName);
+            this.localStorageService.clear("Reddah_Contacts_Pub_"+pubUserName);
+            this.cacheService.clearGroup("PubPage");
+        });
+    }
+
     private focusPubsUrl = 'https://login.reddah.com/api/pub/focuspubs'; 
 
     getFocusPubs(): Observable<any> {

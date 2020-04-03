@@ -11,7 +11,7 @@
         </ion-refresher-content>
     </ion-refresher>
     <div style="display: flex; justify-content: center;"><ion-spinner name="dots" *ngIf="showLoading"></ion-spinner></div>
-    <ion-list>
+    <ion-list style="padding-top:0;">
         <ion-item-group *ngFor="let group of groupedContacts" lines="none">
             <ion-item-divider color="light" lines="none">{{group.letter.toUpperCase()}}</ion-item-divider>
             <ion-item *ngFor="let pub of group.contacts" (click)="goPub(pub.UserName)">
