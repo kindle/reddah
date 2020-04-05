@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from 'ionic-cache';
-import { ChangeNoteNamePopPage } from '../../common/change-notename-pop.page';
 import { SearchPage } from '../../common/search/search.page';
 import { PubPage } from './pub/pub.page';
 

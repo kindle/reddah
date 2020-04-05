@@ -2,12 +2,40 @@
 <ion-content style="z-index: 0;">
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">  
         <ion-refresher-content  
-        pullingIcon="tennisball-outline"  
+        pullingIcon="refresh-outline"  
         pullingText="{{reddah.instant('Common.MapSlogan')}}"
         refreshingSpinner="bubbles"></ion-refresher-content>  
     </ion-refresher>  
     
     <ion-spinner name="bubbles" *ngIf="firstLoad" style="margin:15px 50%;transform: translateX(-50%);"></ion-spinner>
+    <div *ngIf="firstLoad">
+        <ng-template ngFor let-article [ngForOf]="[1,1,1,1,1,1,1]" style="color: #636468;font-family: 'Segoe UI', Arial, sans-serif;">
+            <div class="postModuleLiner">
+                <div>
+                    <span class="articleTitle">
+                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                    </span>
+                    <div>
+                        <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+                    </div>
+                </div>
+                <div>
+                    <div class="postClear"></div>
+                    <ion-card-content style="padding:0;">
+                        <div class="sk-parent">
+                            <div class="container" *ngFor="let articleUrl of [1,1,1];index as i">
+                                <ion-avatar slot="start">
+                                    <ion-skeleton-text animated style="border-radius: 0;"></ion-skeleton-text>
+                                </ion-avatar>
+                            </div>
+                        </div>
+                    </ion-card-content>
+                </div>
+                <app-article-action-bar></app-article-action-bar>
+            </div>
+        </ng-template>
+    </div>
+
     <ng-template ngFor let-article [ngForOf]="reddah.articles" id="homepage" style="color: #636468;font-family: 'Segoe UI', Arial, sans-serif;">
         <div class="postModuleLiner" *ngIf="article.VideoUrl.length>0">
             <div>

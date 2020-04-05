@@ -77,6 +77,11 @@
     grid-gap: 3px;
  }
 
+ .sk-container {
+   position: relative;
+   overflow: hidden;
+}
+
 .container {
    position: relative;
    padding-top: 100%;
@@ -139,7 +144,7 @@
    height: 0; 
    border-left: 8px solid transparent;
    border-right: 8px solid transparent;
-   border-bottom: 8px solid #eeeeee;
+   border-bottom: 10px solid #eeeeee;
 }
 
 .articleUserName{

@@ -39,7 +39,6 @@ export class HomePage implements OnInit {
         this.reddah.dislikeGroups = [];
         this.reddah.dislikeUserNames = [];
     }
-
     firstLoad = false;
     ngOnInit(){
         this.reddah.getUserPhotos(this.userName);
@@ -49,8 +48,8 @@ export class HomePage implements OnInit {
         let cacheDislikeGroups = this.localStorageService.retrieve("reddah_article_groups_"+this.userName);
         let cacheDislikeUserNames = this.localStorageService.retrieve("reddah_article_usernames_"+this.userName);
     
-        
-        if(cacheArticles){
+        let cacheArticleArray = JSON.parse(cacheArticles);
+        if(cacheArticles&&cacheArticleArray.length>0){
             let top = 20;
             this.reddah.articles = JSON.parse(cacheArticles).slice(0,top);
             this.reddah.articles.forEach(article=>{

@@ -116,7 +116,7 @@ export class ImageViewerComponent implements OnInit {
                 buttons: [
                 {
                     text: this.reddah.instant("Menu.Mark"),
-                    icon: 'bookmark',
+                    icon: 'bookmark-outline',
                     handler: () => {
                         let formData = new FormData();
                         formData.append("ArticleId", JSON.stringify(-1));
@@ -128,7 +128,7 @@ export class ImageViewerComponent implements OnInit {
                 }, 
                 {
                     text: this.reddah.instant("Common.Save"),
-                    icon: 'ios-save',
+                    icon: 'save-outline',
                     handler: () => {
                         let link = document.createElement("a");
                         let base64string = this.imgSourceArray[0].webPreviewUrl;
@@ -154,7 +154,7 @@ export class ImageViewerComponent implements OnInit {
                 },*/ 
                 {
                     text: this.reddah.instant("Common.Copy"),
-                    icon: 'copy',
+                    icon: 'copy-outline',
                     handler: () => {
                         let url = item.webPreviewUrl;
                         this.clipboard.copy(url);
@@ -163,7 +163,7 @@ export class ImageViewerComponent implements OnInit {
                 },
                 {
                     text: this.reddah.instant("Menu.Mark"),
-                    icon: 'bookmark',
+                    icon: 'bookmark-outline',
                     handler: () => {
                         let formData = new FormData();
                         formData.append("ArticleId", JSON.stringify(-1));
@@ -175,7 +175,7 @@ export class ImageViewerComponent implements OnInit {
                 }, 
                 {
                     text: this.reddah.instant("Common.Save"),
-                    icon: 'ios-save',
+                    icon: 'save-outline',
                     handler: () => {
                         this.downloadImage(item);
                     }

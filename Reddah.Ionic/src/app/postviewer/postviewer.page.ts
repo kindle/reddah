@@ -75,6 +75,18 @@ export class PostviewerPage implements OnInit {
         this.reddah.focusPub(this.userName, this.article.UserName);
     }
 
+    async enterPub(){
+        const modal = await this.modalController.create({
+            component: PubPage,
+            componentProps: { 
+                userName: this.article.UserName
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await modal.present();
+    }
+/*
     async unFocus(){
         const alert = await this.alertController.create({
             header: "",
@@ -100,7 +112,7 @@ export class PostviewerPage implements OnInit {
             
         
     }
-    
+*/
 
     async presentPopover(ev: any) {
         const popover = await this.popoverController.create({

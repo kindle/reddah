@@ -1,4 +1,4 @@
-<div class="bar-container">
+<div class="bar-container" *ngIf="article">
     <div style="display: flex;">
         <!--<span (click)="goUser(article.UserName)" class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
             {{reddah.getDisplayName(article.UserName)}}
@@ -15,7 +15,7 @@
 
         <ion-icon (click)="likeArticle(article)" *ngIf="!article.like" color="dark"
             name="heart-outline" class="action-margin"></ion-icon>
-        <ion-icon (click)="likeArticle(article)" *ngIf="article.like" color="dark"
+        <ion-icon (click)="likeArticle(article)" *ngIf="article.like" color="danger"
             name="heart-circle-outline" class="action-margin"></ion-icon>
         <ion-text color="dark" (click)="likeArticle(article)" class="action-count" *ngIf="article.Up>0">
             {{article.Up}}
@@ -23,5 +23,17 @@
     </div>
     <div style="display: flex;" (click)="dislike($event, article)">
         <ion-icon color="medium" size="small" name="close"></ion-icon>
+    </div>
+</div>
+<div class="bar-container" *ngIf="!article">
+    <div style="display: flex;">
+        <ion-icon color="light" size="small" name="square"></ion-icon>
+
+        <ion-icon color="light" size="small" name="square" class="action-margin"></ion-icon>
+        
+        <ion-icon color="light" size="small" name="square" class="action-margin"></ion-icon>
+    </div>
+    <div style="display: flex;">
+        <ion-icon color="light" size="small" name="square"></ion-icon>
     </div>
 </div>

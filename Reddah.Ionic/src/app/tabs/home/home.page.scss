@@ -88,6 +88,11 @@ div.postClear {
     color: #828388;
 }
 
+.sk-parent {
+    display: grid;
+    grid-template-columns: 32% 33% 32%;
+    grid-gap: 3px;
+}
 
 .parent {
     display: grid;

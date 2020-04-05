@@ -25,6 +25,7 @@ export class MyTimeLinePage implements OnInit {
     loadedIds = [];
     formData: FormData;
     showAddComment = false;
+    loading = false;
 
     @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
     @ViewChild('newComment') newComment;
@@ -149,12 +150,14 @@ export class MyTimeLinePage implements OnInit {
 
             if(event){
                 event.target.complete();
+                this.loading = false;
             }
         });
 
     }
 
     clearCacheAndReload(event){
+        this.loading = true;
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("MyTimeLinePage");
         this.loadedIds = [-1];
@@ -192,6 +195,9 @@ export class MyTimeLinePage implements OnInit {
         
         let offset = this.timelineCover.nativeElement.scrollHeight - $event.detail.scrollTop;
         
+        let newTop = offset-300;
+        this.renderer.setStyle(this.timelineCoverImage.nativeElement, 'top', newTop+'px');
+
         if(offset>=250)
         {
             this.renderer.setStyle(this.headerStart.nativeElement, 'visibility', 'visible');
@@ -206,12 +212,16 @@ export class MyTimeLinePage implements OnInit {
             this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
         }
         else if(offset<150 && offset>=0){
+            this.renderer.setStyle(this.timelineCoverImage.nativeElement, 'visibility', 'visible');
+
             let opacity = (1-(offset-0)/100);
             if(opacity>1) opacity=1;
             this.renderer.setStyle(this.headerOnScroll.nativeElement, 'opacity', opacity + '');
         }
         else
         {
+            this.renderer.setStyle(this.timelineCoverImage.nativeElement, 'visibility', 'hidden');
+
             this.renderer.setStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
             this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
             this.renderer.setStyle(this.headerOnScroll.nativeElement, 'opacity', '8');

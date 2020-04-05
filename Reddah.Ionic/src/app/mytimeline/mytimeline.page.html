@@ -38,6 +38,39 @@
             <img [src]="reddah.appData('userphoto_'+reddah.unReadMessage.slice(-1)[0].From)" class="messagePhoto">
             <span class="span-eclipse" style="color:white;line-height:2.1em;margin:0.24em 0.8em;">{{reddah.unReadMessage.length}} {{ reddah.instant('Pop.MsgCount') }}</span>
         </div>
+
+        <div *ngIf="loading">
+            <div *ngFor="let skeletonItem of [1,1,1,1,1]"
+            style="background-color: white; display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
+                <div style="width:70px;padding: 0 0 0 10px; border: 0px solid blue;">
+                    <ion-avatar slot="start">
+                        <ion-skeleton-text animated style="border-radius: 0;"></ion-skeleton-text>
+                    </ion-avatar>
+                </div>
+                <div style="width:100%;border: 0px solid red;">
+                    <ion-card-header no-padding class="articleUserName">
+                        <ion-card-title>
+                            <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                        </ion-card-title>
+                    </ion-card-header>
+                    <div>
+                        <div style="background-color: white; padding: 0 0 4px 15px;margin-bottom:0px;">
+                            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                        </div>
+                    </div>
+                    <ion-card-content style="display:block;margin-right:20px;">
+                        <div class="parent">
+                            <div class="sk-container" *ngFor="let item of [1,1,1];index as i">
+                                <ion-avatar slot="start">
+                                    <ion-skeleton-text animated style="border-radius: 0;"></ion-skeleton-text>
+                                </ion-avatar>
+                            </div>
+                        </div>
+                    </ion-card-content>
+                </div>
+            </div>
+        </div>
+
         <div *ngFor="let article of articles" 
         style="background-color: white; display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
             <div style="width:70px;padding: 0 0 0 10px; border: 0px solid blue;">
@@ -50,10 +83,10 @@
                     </ion-card-title>
                 </ion-card-header>
                 <div *ngIf="article.Title.length>0&&article.Title.length<100">
-                    <div style="background-color: white; padding: 0 0 4px 15px;margin-bottom:0px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                    <div style="background-color: white; padding: 0 0 4px 15px;margin-bottom:0px;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
                 </div>
                 <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
-                    <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 12px;margin-bottom:5px;width:96%;" 
+                    <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 12px;margin-bottom:5px;" 
                     [innerHTML]="reddah.summaryShort(article.Title, 100, '......')"></div>
                 </ion-item>
                 <ion-card-content *ngIf="article.Abstract&&article.Abstract.length>2">
@@ -125,7 +158,7 @@
                     </div>
                 </ion-item>
             </div>
-        </div >
+        </div>
         
         <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
             <ion-infinite-scroll-content loadingSpinner="bubbles" 

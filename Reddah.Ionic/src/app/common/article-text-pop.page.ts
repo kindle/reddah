@@ -6,9 +6,10 @@ import { ReddahService } from '../reddah.service';
     template: `
         <ion-item color="light" style="--padding-start:0;" lines="none">
             <ion-icon name="chevron-back-outline" (click)="close()" class="backbutton"></ion-icon>
+            
         </ion-item>
         <ion-content padding>
-            <div [innerHTML]="reddah.htmlDecode(text)"></div>
+            <div [innerHTML]="reddah.htmlDecode(text)" style="padding:10px;"></div>
         </ion-content>
     `
 })
