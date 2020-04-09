@@ -8,7 +8,7 @@
 </ion-item>
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
     <div style="padding: 10px;">
-        <span style="font-size: larger;color:black;" class="article-title" [innerHTML]="reddah.htmlDecode(article.Title) | safe: 'html'"></span>
+        <ion-text color="dark" class="view-article-title" [innerHTML]="reddah.htmlDecode(article.Title) | safe: 'html'"></ion-text>
         
         <ion-item lines="none" style="--padding-start:0;">
             <ion-thumbnail style="margin: 10px 10px 10px 0;">
@@ -56,7 +56,7 @@
             </video>
         </div>
         <div class="listInfo">
-            <ion-chip style="--background:#eeeeee;" *ngFor="let group of article.GroupName.split(',')">
+            <ion-chip style="--background:var(--ion-chip-background);" *ngFor="let group of article.GroupName.split(',')">
                 <ion-icon name="chatbubble-ellipses-outline" (click)="goSearch(group)" color="dark" size="small"></ion-icon>
                 <ion-label color="dark" (click)="goSearch(group)">
                     {{group.trim()}}

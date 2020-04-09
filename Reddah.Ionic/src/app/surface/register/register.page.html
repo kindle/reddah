@@ -46,17 +46,21 @@
         [(ngModel)]="email" clearInput (ionBlur)="checkEmail()"></ion-input>
     </ion-item>
     
-    <ion-item lines="none" class="gapBottom inputItem" no-padding>
-        <ion-checkbox [(ngModel)]="agreed"></ion-checkbox>{{ reddah.instant('Register.ReadAgree') }}
+    <ion-item lines="none" class="gapBottom inputItem">
+        <ion-checkbox [(ngModel)]="agreed"></ion-checkbox>
+        <ion-text style="margin-left:10px;">
+            {{ reddah.instant('Register.ReadAgree') }}
+        </ion-text>
     </ion-item>
     
-    <div class="inputItem">
+    <ion-item lines="none" class="inputItem">
         <ion-note text-wrap color="dark">
             <span class="policy" (click)="browse('useragreement')">{{ reddah.instant('Register.UserAgreement') }}</span>
-            <span class="policy" (click)="browse('privacypolicy')">{{ reddah.instant('Register.Privacy') }}</span> {{ reddah.instant('Register.And') }}
-            <span class="policy" (click)="browse('contentpolicy')">{{ reddah.instant('Register.Content') }}</span>。
+            <span class="policy" (click)="browse('privacypolicy')">{{ reddah.instant('Register.Privacy') }}</span>
+            {{ reddah.instant('Register.And') }}
+            <span class="policy" (click)="browse('contentpolicy')">{{ reddah.instant('Register.Content') }}</span>
         </ion-note>
-    </div> 
+    </ion-item>
 
     <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="register()"
      expand="block" [disabled]="checkRegister()">{{ reddah.instant('Button.Register') }}</ion-button>
@@ -65,7 +69,7 @@
 <div class="footer">
     <div class="conductArea">
         <p class="copyright">
-            Reddah.com<br>
+            reddah.com<br>
         </p>
     </div>
 </div>

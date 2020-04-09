@@ -53,8 +53,10 @@ export class CommentBoxComponent implements OnInit {
         //total count as fixed header
         try{
             let header = document.getElementById("TotalComments");
-            if(this.sticky==null)
+            
+            if(header.offsetTop>0){
                 this.sticky = header.offsetTop;
+            }
 
             if ($event.detail.scrollTop > this.sticky) {
                 header.classList.add("sticky");

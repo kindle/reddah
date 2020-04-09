@@ -35,7 +35,16 @@ export class MyTimeLinePage implements OnInit {
         this.getMyTimeline(event);
     }
 
-    goback(){
+    async goback(){
+        // close modal
+        try {
+            const element = await this.modalController.getTop();
+            if (element) {
+                element.dismiss();
+                return;
+            }
+        } catch (error) {
+        }
         this.navController.back();
     }
 
@@ -150,8 +159,9 @@ export class MyTimeLinePage implements OnInit {
 
             if(event){
                 event.target.complete();
-                this.loading = false;
             }
+
+            this.loading = false;
         });
 
     }

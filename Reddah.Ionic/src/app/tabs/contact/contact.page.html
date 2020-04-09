@@ -4,7 +4,7 @@
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
     </ion-refresher>
-    <ion-item class="borderTop" href="/mytimeline" detail="false">
+    <ion-item class="borderTop" (click)="goMyTimeline()" detail="false">
         <ion-icon class="mytl" name="aperture" slot="start" size="large" color="primary"></ion-icon>
         <ion-text style="margin-left:10px;">{{ reddah.instant('Menu.Timeline') }}</ion-text>
         <ion-badge slot="end" color="danger" *ngIf="reddah.unReadMessage.length>0">{{reddah.unReadMessage.length}}</ion-badge>

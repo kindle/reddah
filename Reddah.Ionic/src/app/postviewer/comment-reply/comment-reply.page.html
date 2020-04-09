@@ -40,8 +40,8 @@
                         </ion-note>
                         <div *ngIf="normal" style="display: flex;align-items: center;" (click)="likeComment(reply)">
                             <ion-icon name="heart-outline" *ngIf="!reply.like" color="dark" size="small"></ion-icon>
-                            <ion-icon name="heart-circle-outline" *ngIf="reply.like" color="primary" size="small"></ion-icon>
-                            <span style="color: gray;margin-left:2px;vertical-align: top;" *ngIf="reply.Up>0">{{reply.Up}}</span>
+                            <ion-icon name="heart-circle-outline" *ngIf="reply.like" color="danger" size="small"></ion-icon>
+                            <span color="dark" style="margin-left:2px;vertical-align: top;" *ngIf="reply.Up>0">{{reply.Up}}</span>
                         </div>
                     </div>
                     <span>{{reddah.utcToLocal(reply.CreatedOn,"YY-MM-DD HH:mm")}}</span>

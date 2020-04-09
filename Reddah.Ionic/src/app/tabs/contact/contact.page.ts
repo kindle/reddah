@@ -11,6 +11,7 @@ import { ChangeNoteNamePopPage } from '../../common/change-notename-pop.page';
 import { ChatChooseGroupPage } from '../../chat/chat-choose-group/chat-choose-group.page';
 import { MysticPage } from '../../common/mystic/mystic.page';
 import { MessageListPage } from '../message/message.page';
+import { MyTimeLinePage } from 'src/app/mytimeline/mytimeline.page';
 
 @Component({
     selector: 'app-contact',
@@ -232,6 +233,18 @@ export class ContactPage {
             cssClass: "modal-fullscreen",
         });
     
+        await modal.present();
+    }
+
+
+    async goMyTimeline(){
+        const modal = await this.modalController.create({
+            component: MyTimeLinePage,
+            componentProps: {
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
         await modal.present();
     }
 }

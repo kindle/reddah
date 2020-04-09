@@ -9,7 +9,7 @@
     <div *ngIf="taber">
         <ion-item lines="none" class="sectionGapTop gapBottom inputItem" no-padding>
             <ion-note style="font-size: xx-large;margin-right:10px;color:black;">{{ reddah.instant('Button.Token') }}</ion-note>
-            <ion-note (click)="change()">{{ reddah.instant('Button.ChangePassword') }}</ion-note>
+            <ion-note (click)="change()" style="align-self: auto;">{{ reddah.instant('Button.ChangePassword') }}</ion-note>
         </ion-item>
         <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
             <ion-input type="text" placeholder="{{ reddah.instant('Input.Email') }}" [(ngModel)]="email" clearInput></ion-input>
@@ -20,7 +20,7 @@
 
     <div *ngIf="!taber">
         <ion-item lines="none" class="sectionGapTop gapBottom inputItem" no-padding>
-            <ion-note (click)="change()">{{ reddah.instant('Button.Token') }}</ion-note>
+            <ion-note (click)="change()" style="align-self: auto;">{{ reddah.instant('Button.Token') }}</ion-note>
             <ion-note style="font-size: xx-large;margin-left:10px;color:black;">{{ reddah.instant('Button.ChangePassword') }}</ion-note>
         </ion-item>
         <ion-item class="gapBottom inputItem" no-padding>
@@ -37,7 +37,7 @@
 
     <div class="conductArea">
         <p class="copyright">
-            Reddah.com<br>
+            reddah.com<br>
         </p>
     </div>
 </ion-content>

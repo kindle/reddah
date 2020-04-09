@@ -11,6 +11,7 @@ import { SearchPage } from '../../common/search/search.page';
 import { UserPage } from '../../common/user/user.page';
 import { PubPage } from '../publisher/pub/pub.page';
 import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
+import { MyTimeLinePage } from 'src/app/mytimeline/mytimeline.page';
 
 @Component({
     selector: 'app-home',
@@ -95,6 +96,21 @@ export class HomePage implements OnInit {
             });
         }
        
+    }
+
+    showSearchBar = true;
+    lastScrollTop;
+    async onScroll($event){
+        let currentScrollTop = $event.detail.scrollTop;
+        if(currentScrollTop > this.lastScrollTop){
+            //this.direction = 'down';
+            this.showSearchBar = false;
+        }else{
+            //this.direction = 'up';
+            this.showSearchBar = true;
+        }
+        
+        this.lastScrollTop = currentScrollTop;
     }
   
     async create(){
@@ -218,7 +234,18 @@ export class HomePage implements OnInit {
             component: SearchPage,
             componentProps: { 
                 key: key,
-                type: 0,//article only
+                //type: 0,//article only
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await modal.present();
+    }
+
+    async goMessage(){
+        const modal = await this.modalController.create({
+            component: MyTimeLinePage,
+            componentProps: {
             },
             cssClass: "modal-fullscreen",
         });

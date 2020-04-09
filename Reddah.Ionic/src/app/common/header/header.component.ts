@@ -19,21 +19,20 @@ export class HeaderComponent {
         private modalController: ModalController,
         private popoverController: PopoverController,
         private platform: Platform,
-        private localStorageService: LocalStorageService,
         public reddah: ReddahService,
     ) { 
-        //let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-        //this.reddah.loadTranslate(currentLocale);
     }
 
-    async goSearch(){
-        this.reddah.reloadLocaleSettings();
+    async goSearch(key){
         const modal = await this.modalController.create({
             component: SearchPage,
-            componentProps: {},
+            componentProps: { 
+                key: key,
+                //type: 0,//article only
+            },
             cssClass: "modal-fullscreen",
         });
-        
+          
         await modal.present();
     }
 

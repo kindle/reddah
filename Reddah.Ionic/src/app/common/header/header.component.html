@@ -6,7 +6,7 @@
     <ion-icon name="chevron-back-outline" (click)="close()" class="backbutton" *ngIf="back"></ion-icon>
     <ion-title class="header-title">{{ reddah.instant(title) }}</ion-title>
 
-    <ion-button clear slot="end" color="light" href="/search" detail="false" style="--box-shadow: none;">
+    <ion-button clear slot="end" color="light" (click)="goSearch()" detail="false" style="--box-shadow: none;">
         <ion-icon slot="icon-only" is-active="false" name="search-outline"></ion-icon>
     </ion-button>
     <ion-button clear slot="end" color="light" (click)="add($event)" style="--box-shadow: none;">
