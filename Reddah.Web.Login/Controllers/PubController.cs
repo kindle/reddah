@@ -1060,7 +1060,8 @@ namespace Reddah.Web.Login.Controllers
                                  where 
                                  item.UsedMini.StartsWith(u.UserName + ",") ||
                                         item.UsedMini.Contains("," + u.UserName + ",") ||
-                                        item.UsedMini.EndsWith("," + u.UserName)
+                                        item.UsedMini.EndsWith("," + u.UserName) ||
+                                        item.UsedMini == u.UserName
                                  select u)
                                 .Take(pageCount);
 
