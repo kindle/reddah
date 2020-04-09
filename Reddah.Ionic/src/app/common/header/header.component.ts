@@ -23,7 +23,7 @@ export class HeaderComponent {
     ) { 
     }
 
-    async goSearch(key){
+    async goSearch(key=''){
         const modal = await this.modalController.create({
             component: SearchPage,
             componentProps: { 
