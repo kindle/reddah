@@ -142,6 +142,13 @@
     
 
     "Article.Loading": "請稍等...",
+    "Article.Content": "正文",
+    "Article.Comment": "評論",
+    "Article.Forward": "轉寄",
+    "Article.Like": "贊",
+    "Article.Hot": "熱點",
+    "Article.Recommend": "推薦",
+
     "Comment.Comment": "寫評論",
     "Comment.MoreComment":"更多評論",
     "Comment.Like": "點贊",

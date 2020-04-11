@@ -1,13 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { ModalController, PopoverController, Platform } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { ReddahService } from '../../../reddah.service';
-import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
 import { LocalStorageService } from 'ngx-webstorage';
 import { AddFeedbackPage } from 'src/app/mytimeline/add-feedback/add-feedback.page';
 import { ArticleDislikePopPage } from 'src/app/common/article-dislike-pop.page';
 import { Article } from 'src/app/model/article';
 import { PostviewerPage } from 'src/app/postviewer/postviewer.page';
-import { Vibration } from '@ionic-native/vibration/ngx';
+import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
 
 @Component({
     selector: 'app-article-action-bar',
@@ -24,12 +23,9 @@ export class ArticleActionBarComponent {
         private popoverController: PopoverController,
         public reddah: ReddahService,
         private localStorageService: LocalStorageService,
-        private platform: Platform,
-        private vibration: Vibration,
     ) { }
 
     async view(article: Article){
-        this.reddah.reloadLocaleSettings();
         const viewerModal = await this.modalController.create({
             component: PostviewerPage,
             componentProps: { article: article },
@@ -43,8 +39,8 @@ export class ArticleActionBarComponent {
             article.Read = true;
         }
     }
-    
-    async goPost(article){
+
+    async forwardArticle(article){
         const postModal = await this.modalController.create({
             component: AddTimelinePage,
             componentProps: { 
@@ -57,47 +53,8 @@ export class ArticleActionBarComponent {
         await postModal.present();
         const { data } = await postModal.onDidDismiss();
         if(data){
-            this.fwdArticle(article);
+            this.reddah.fwdArticle(article);
             this.reddah.getSharePoint();
-        }
-    }
-
-    fwdArticle(article){
-        article.Down = article.Down + 1;
-        if(article.Down<0)
-            article.Down=0;
-
-        let formData = new FormData();
-        formData.append("id", JSON.stringify(article.Id));
-        formData.append("type", JSON.stringify(true));
-        this.reddah.articleForward(formData).subscribe(data=>{});
-
-        this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
-    }
-
-    likeArticle(article){
-        //console.log(article)
-        article.Up = article.Up + (article.like?-1:1);
-        if(article.Up<0)
-            article.Up=0;
-        article.like=!article.like;
-
-        let formData = new FormData();
-        formData.append("id", JSON.stringify(article.Id));
-        formData.append("type", JSON.stringify(article.like));
-        this.reddah.articleLike(formData).subscribe(data=>{});
-
-        this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
-
-        if(article.like)
-            this.localStorageService.store(`Reddah_ArticleLike_${this.userName}_${article.Id}`, "");
-        else
-            this.localStorageService.clear(`Reddah_ArticleLike_${this.userName}_${article.Id}`);
-
-        if(this.platform.is('cordova')){
-            if(this.reddah.getLikeShake()){
-                this.vibration.vibrate(100);
-            }
         }
     }
 

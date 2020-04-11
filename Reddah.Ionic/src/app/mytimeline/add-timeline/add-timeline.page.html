@@ -7,10 +7,11 @@
 <ion-content (click)="tap($event)">
     <ion-item>
         <ion-textarea id="thoughtTxt" (ionBlur)="saveDraft()" autoresize [(ngModel)]="yourThoughts" rows="{{postType==4?3:6}}" cols="20" 
-        placeholder="{{ reddah.instant('Pop.YourThoughts') }}..."></ion-textarea>
+        placeholder="{{ reddah.instant('Pop.YourThoughts') }}..."
+        style="margin: 0 10px 0 0;"></ion-textarea>
     </ion-item>
     <ion-item lines="none">
-        <ion-icon id="faceIcon" slot="start" name="happy-outline"size="medium" (click)="toggleFacePanel()" margin-end></ion-icon>
+        <ion-icon id="faceIcon" slot="start" name="happy-outline" size="medium" (click)="toggleFacePanel()" margin-end></ion-icon>
     </ion-item>
     <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
     <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="postType<3">
@@ -36,9 +37,9 @@
       <ion-label></ion-label>
     </ion-item>
     <ion-item lines="none" (click)="getLocation()">
-      <ion-icon name="location-outline"slot="start" color="{{location?'primary':'dark'}}"></ion-icon>
-      <ion-label color="{{location?'primary':'dark'}}">{{location?location.title:reddah.instant('About.Location')}}</ion-label>
-      <ion-icon name="chevron-forward-outline"slot="end"></ion-icon>
+      <ion-icon name="location-outline" color="{{location?'primary':'dark'}}"></ion-icon>
+      <ion-text color="{{location?'primary':'dark'}}" style="margin-left:5px;">{{location?location.title:reddah.instant('About.Location')}}</ion-text>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
     </ion-item>
 <!--
     <ion-item>
@@ -55,7 +56,7 @@
 </ion-content>
 <ion-footer *ngIf="dragging" style="--background:red;background-color: red;color: white;">
     <ion-row id="delete-photo" class="delete-area" align-items-center justify-content-center dragula="bag" [(dragulaModel)]="photos_trash">
-        <ion-icon name="trash-outline"color="tertiary" size="small"></ion-icon>
+        <ion-icon name="trash-outline" color="tertiary" size="small"></ion-icon>
         <ion-text *ngIf="dragToDel" color="white">{{ reddah.instant('Pop.ReleaseToDel') }}</ion-text>
         <ion-text *ngIf="!dragToDel">{{ reddah.instant('Pop.DragToDel') }}</ion-text>
     </ion-row>

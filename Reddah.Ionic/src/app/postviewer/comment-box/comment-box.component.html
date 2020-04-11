@@ -1,14 +1,25 @@
 <!--{{selectedArticleId}} {{selectedCommentId}}-->
 <ion-footer *ngIf="direction=='up'" class="content">
-    <ion-item *ngIf="!showEditBox">
-        <ion-icon name="create-outline"size="medium" (click)="addNewComment(selectedArticleId, selectedCommentId)"></ion-icon>
+    <ion-item *ngIf="!showEditBox" style="--padding-start:10px;--inner-padding-end:10px;">
+        <ion-icon name="arrow-redo-outline" size="medium" color="dark" (click)="forwardArticle(article)"></ion-icon>
+        <ion-text color="dark" (click)="forwardArticle(article)" class="action-count" *ngIf="article.Down>0">
+            {{reddah.shortCount(article.Down)}}
+        </ion-text>
         <ion-input id="newComment" (click)="addNewComment(selectedArticleId, selectedCommentId)" 
             readonly style="padding-left:5px !important;" placeholder="{{ reddah.instant('Comment.Comment') }}..."></ion-input>
         
         <ion-icon color="primary" style="margin-right:5px;" name="chatbox-ellipses-outline"size="medium" (click)="addNewComment(selectedArticleId, selectedCommentId)"></ion-icon>
-        {{count}}
+        {{reddah.shortCount(count)}}
+
+        <ion-icon (click)="reddah.likeArticle(article)" *ngIf="!article.like" color="dark"
+            name="heart-outline" style="margin-right:5px;margin-left:5px;"></ion-icon>
+        <ion-icon (click)="reddah.likeArticle(article)" *ngIf="article.like" color="danger"
+            name="heart-circle-outline" style="margin-right:5px;margin-left:5px;"></ion-icon>
+        <ion-text color="dark" (click)="reddah.likeArticle(article)" *ngIf="article.Up>0">
+            {{reddah.shortCount(article.Up)}}
+        </ion-text>
     </ion-item>
-    <ion-item *ngIf="showEditBox">
+    <ion-item *ngIf="showEditBox" style="--padding-top:5px;--padding-start:5px;--inner-padding-end:0;">
         <ion-textarea autoresize padding #newComment id="newComment" [(ngModel)]="commentContent" rows="3" cols="21" 
         style="padding-left:5px !important;"
         placeholder="{{ reddah.instant('Comment.Tip') }}" [disabled]="submitClicked"></ion-textarea>    
@@ -34,7 +45,8 @@
         </ion-buttons>
     </ion-item>
     <ion-item *ngIf="showEditBox">
-        <ion-icon slot="end" name="happy-outline"size="medium" (click)="toggleFacePanel()" margin-end></ion-icon>
+        <ion-icon slot="end" name="at-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
+        <ion-icon slot="end" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
     </ion-item>
     <app-share-face *ngIf="showEditBox&&showFacePanel" (select)="faceSelection($event)"></app-share-face>
 </ion-footer>

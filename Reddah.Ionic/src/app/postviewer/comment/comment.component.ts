@@ -1,12 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter, NgZone } from '@angular/core';
-import { PopoverController, ModalController, AlertController } from '@ionic/angular'
+import { PopoverController, ModalController, AlertController, NavController } from '@ionic/angular'
 import { CommentPopPage } from '../../common/comment-pop.page'
 import { UserPage } from '../../common/user/user.page';
 import { CommentReplyPage } from '../comment-reply/comment-reply.page';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-comment',
@@ -36,6 +35,7 @@ export class CommentComponent implements OnInit {
         private localStorageService: LocalStorageService,
         private alertController: AlertController,
         private zone: NgZone,
+        private navController: NavController,
     ) { 
         this.userName = this.reddah.getCurrentUser();
     }
@@ -230,5 +230,18 @@ export class CommentComponent implements OnInit {
         if(data||!data){
             this.reloadComments.emit();
         }*/
+    }
+
+    async goback(){
+        // close modal
+        try {
+            const element = await this.modalController.getTop();
+            if (element) {
+                element.dismiss();
+                return;
+            }
+        } catch (error) {
+        }
+        this.navController.back();
     }
 }

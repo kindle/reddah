@@ -139,6 +139,13 @@
     "Time.JustNow": "только что",
 
     "Article.Loading": "Подождите",
+    "Article.Content": "Тела",
+    "Article.Comment": "Комментарии",
+    "Article.Forward": "Вперед",
+    "Article.Like": "Похвалы",
+    "Article.Hot": "Горячие",
+    "Article.Recommend": "Рекомендуется",
+
     "Comment.Comment": "Примечания",
     "Comment.MoreComment":"Дополнительные комментарии",
     "Comment.Like": "любить",

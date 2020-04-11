@@ -139,6 +139,13 @@
     "Time.JustNow": "เมื่อกี้นี้",
 
     "Article.Loading": "โปรดรอสักครู่",
+    "Article.Content": "ร่าง กาย",
+    "Article.Comment": "ความ คิด เห็น",
+    "Article.Forward": "ไป ข้าง หน้า",
+    "Article.Like": "สรรเสริญ",
+    "Article.Hot": "ร้อน",
+    "Article.Recommend": "แนะ นำ",
+
     "Comment.Comment": "ข้อคิดเห็น",
     "Comment.MoreComment":"แสดงความคิดเห็นเพิ่มเติม",
     "Comment.Like": "ชอบ",

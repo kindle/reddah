@@ -139,6 +139,13 @@
     "Time.JustNow": "فقط الآن",
 
     "Article.Loading": "انتظر من فضلك",
+    "Article.Content": "الجسم",
+    "Article.Comment": "تعليقات",
+    "Article.Forward": "الي الامام",
+    "Article.Like": "الثناء",
+    "Article.Hot": "الساخنه",
+    "Article.Recommend": "اوصت",
+
     "Comment.Comment": "شروح",
     "Comment.MoreComment":"المزيد من التعليقات",
     "Comment.Like": "محبوب",

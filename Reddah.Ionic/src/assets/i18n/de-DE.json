@@ -139,6 +139,13 @@
     "Time.JustNow": "Gerade jetzt",
 
     "Article.Loading": "Bitte warten Sie",
+    "Article.Content": "Körper",
+    "Article.Comment": "Kommentare",
+    "Article.Forward": "vorwärts",
+    "Article.Like": "Lob",
+    "Article.Hot": "Heiß",
+    "Article.Recommend": "Empfohlen",
+
     "Comment.Comment": "Kommentar",
     "Comment.MoreComment":"Weitere Kommentare",
     "Comment.Like": "Wie",

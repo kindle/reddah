@@ -25,8 +25,11 @@ export class ShareArticleComponent {
         public reddah: ReddahService,
     ) { }
 
+    canClick = true;
+
     async viewArticle(){
-        if(this.view){
+        if(this.view&&this.canClick){
+            this.canClick = false;
             let formData = new FormData();
             formData.append("ArticleId", this.id+"");
 
@@ -50,14 +53,16 @@ export class ShareArticleComponent {
         
         await viewerModal.present();
         const { data } = await viewerModal.onDidDismiss();
-        if(data){
+        if(data||!data){
             //console.log(data)
+            this.canClick = true;
         }
 
     }
 
     async viewMini(){
-        if(this.view){
+        if(this.view&&this.canClick){
+            this.canClick = false;
             let formData = new FormData();
             formData.append("Id", this.id+"");
 
@@ -116,6 +121,7 @@ export class ShareArticleComponent {
                   
                 await modal.present();        
             }
+            this.canClick = true;
         }
 
         this.reddah.setRecent(mini,4);

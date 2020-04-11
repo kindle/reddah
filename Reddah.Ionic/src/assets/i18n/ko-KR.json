@@ -142,6 +142,13 @@
     
     
     "Article.Loading": "잠깐만 기다리세요",
+    "Article.Content": "몸",
+    "Article.Comment": "코멘트",
+    "Article.Forward": "전달",
+    "Article.Like": "칭찬",
+    "Article.Hot": "뜨거운",
+    "Article.Recommend": "권장",
+
     "Comment.Comment": "주석",
     "Comment.MoreComment":"더 이상",
     "Comment.Like": "좋아하다",

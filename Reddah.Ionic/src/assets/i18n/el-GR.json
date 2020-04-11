@@ -139,6 +139,13 @@
     "Time.JustNow": "Μόλις τώρα",
 
     "Article.Loading": "Παρακαλώ περιμένετε",
+    "Article.Content": "Σώμα",
+    "Article.Comment": "Σχόλια",
+    "Article.Forward": "Εμπρός",
+    "Article.Like": "Επαίνους",
+    "Article.Hot": "Ζεστό",
+    "Article.Recommend": "Συνιστάται",
+
     "Comment.Comment": "Σχόλιο",
     "Comment.MoreComment":"Περισσότερα σχόλια",
     "Comment.Like": "Όπως",

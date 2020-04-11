@@ -21,6 +21,8 @@ import { Device } from '@ionic-native/device/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { DatePipe } from '@angular/common';
 import { Md5 } from 'ts-md5/dist/md5';
+import { AddTimelinePage } from './mytimeline/add-timeline/add-timeline.page';
+import { Vibration } from '@ionic-native/vibration/ngx';
 
 @Injectable({
     providedIn: 'root'
@@ -41,6 +43,8 @@ export class ReddahService {
         private appVersion: AppVersion,
         private datePipe: DatePipe,
         private camera: Camera,
+        private modalController: ModalController,
+        private vibration: Vibration,
     ) { 
 
     }
@@ -3252,6 +3256,60 @@ export class ReddahService {
 
     setNightMode(value){
         this.localStorageService.store("Reddah_Settings_NightMode", value);
+    }
+
+
+
+
+    
+
+    fwdArticle(article){
+        article.Down = article.Down + 1;
+        if(article.Down<0)
+            article.Down=0;
+
+        let formData = new FormData();
+        formData.append("id", JSON.stringify(article.Id));
+        formData.append("type", JSON.stringify(true));
+        this.articleForward(formData).subscribe(data=>{});
+
+        this.localStorageService.store("reddah_articles_"+this.getCurrentUser(), JSON.stringify(this.articles));
+    }
+
+    likeArticle(article){
+        let userName = this.getCurrentUser()
+        //console.log(article)
+        article.Up = article.Up + (article.like?-1:1);
+        if(article.Up<0)
+            article.Up=0;
+        article.like=!article.like;
+
+        let formData = new FormData();
+        formData.append("id", JSON.stringify(article.Id));
+        formData.append("type", JSON.stringify(article.like));
+        this.articleLike(formData).subscribe(data=>{});
+
+        this.localStorageService.store("reddah_articles_"+userName, JSON.stringify(this.articles));
+
+        if(article.like)
+            this.localStorageService.store(`Reddah_ArticleLike_${userName}_${article.Id}`, "");
+        else
+            this.localStorageService.clear(`Reddah_ArticleLike_${userName}_${article.Id}`);
+
+        if(this.platform.is('cordova')){
+            if(this.getLikeShake()){
+                this.vibration.vibrate(100);
+            }
+        }
+    }
+
+    shortCount(n){
+        if(n>10000)
+            return Math.floor(n/10000)+"w";
+        else if(n>1000)
+            return Math.floor(n/1000)+"k";
+        else
+            return n;
     }
 
 }

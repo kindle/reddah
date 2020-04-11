@@ -3,6 +3,7 @@ import { ModalController, PopoverController } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from "ionic-cache";
 import { AddCommentPage } from '../add-comment/add-comment.page';
+import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
 
 @Component({
     selector: 'app-comment-box',
@@ -12,6 +13,7 @@ import { AddCommentPage } from '../add-comment/add-comment.page';
 export class CommentBoxComponent implements OnInit {
 
     @ViewChild('newComment') newComment;
+    @Input() article;
     @Input() count: number;
     @Input() bookmark: number;
     @Input() selectedArticleId: number;
@@ -97,7 +99,23 @@ export class CommentBoxComponent implements OnInit {
         this.newComment.value += face;
     }
 
-    
+    async forwardArticle(article){
+        const postModal = await this.modalController.create({
+            component: AddTimelinePage,
+            componentProps: { 
+                postType: 4,
+                article: article
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await postModal.present();
+        const { data } = await postModal.onDidDismiss();
+        if(data){
+            this.reddah.fwdArticle(article);
+            this.reddah.getSharePoint();
+        }
+    }
     submitClicked = false;
     async submit() {
         this.submitClicked = true;

@@ -98,7 +98,7 @@ export class HomePage implements OnInit {
        
     }
 
-    showSearchBar = true;
+    showSearchBar = false;
     lastScrollTop;
     async onScroll($event){
         let currentScrollTop = $event.detail.scrollTop;

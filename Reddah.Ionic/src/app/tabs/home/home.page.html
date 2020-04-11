@@ -2,19 +2,19 @@
     <ion-icon slot="start" name="wifi" color="medium"></ion-icon>
     <ion-label color="medium">{{ reddah.instant('Input.Error.NetworkError') }}</ion-label>
 </ion-item>
-<ion-item *ngIf="showSearchBar" (click)="goSearch()" lines="none" color="light" style="--padding-start:0;--padding-end:0;">
+<div *ngIf="showSearchBar" (click)="goSearch()" style="background-color:var(--ion-color-light);padding:0 5px;">
     <ion-searchbar placeholder="{{reddah.instant('Search.Title')}}"></ion-searchbar>
-</ion-item>
+</div>
 <ion-item lines="none" color="light">
     <ion-title class="header-title">{{ reddah.instant('Menu.Recommend') }}</ion-title>
 
     <ion-button *ngIf="!showSearchBar" clear slot="end" color="light" (click)="goSearch()" detail="false" style="--box-shadow: none;">
         <ion-icon slot="icon-only" is-active="false" name="search-outline"></ion-icon>
     </ion-button>
-    <ion-button clear slot="end" color="light" (click)="goMessage()" style="--box-shadow: none;">
+    <div clear slot="end" icon-start color="light" (click)="goMessage()" style="--box-shadow: none;">
         <ion-icon slot="icon-only" is-active="false" name="mail-outline" *ngIf="reddah.unReadMessage.length==0"></ion-icon>
         <ion-icon slot="icon-only" is-active="false" name="mail-unread-outline" color="danger" *ngIf="reddah.unReadMessage.length>0"></ion-icon>
-    </ion-button>
+    </div>
 </ion-item>
 <ion-content style="z-index: 0;" [scrollEvents]="true" (ionScroll)="onScroll($event)">
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">  

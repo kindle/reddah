@@ -22,10 +22,10 @@ export class AutoresizeDirective {
         this.adjust();
     }
     adjust(): void {
-        let shadowRoot = this.element.nativeElement.shadowRoot;
-        if(shadowRoot){
-            let ta = shadowRoot.querySelector("textarea"), newHeight;
-          
+        //let rootElement = this.element.nativeElement.shadowRoot;
+        let rootElement = this.element.nativeElement;
+        if(rootElement){
+            let ta = rootElement.querySelector("textarea"), newHeight;
             if (ta) {
                 ta.style.overflow = "hidden";
                 ta.style.height = "auto";

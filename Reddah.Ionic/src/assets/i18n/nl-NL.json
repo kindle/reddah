@@ -138,7 +138,14 @@
     "Time.MinutesAgo": "minuut",
     "Time.JustNow": "Net nu",
 
-    "Article.Loading": "Wacht even",
+    "Article.Loading": "Gewoon wachten ...",
+    "Article.Content": "Lichaam",
+    "Article.Comment": "Opmerkingen",
+    "Article.Forward": "Doorsturen",
+    "Article.Like": "Lof",
+    "Article.Hot": "Hot",
+    "Article.Recommend": "Aanbevolen",
+
     "Comment.Comment": "Commentaar",
     "Comment.MoreComment":"Meer opmerkingen",
     "Comment.Like": "Zoals",

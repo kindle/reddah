@@ -140,6 +140,13 @@
     
     
     "Article.Loading": "Un instant",
+    "Article.Content": "Corps",
+    "Article.Comment": "Commentaires",
+    "Article.Forward": "Avant",
+    "Article.Like": "Louange",
+    "Article.Hot": "Chaud",
+    "Article.Recommend": "Recommandé",
+
     "Comment.Comment": "Notes",
     "Comment.MoreComment":"Plus de commentaires",
     "Comment.Like": "Oui",

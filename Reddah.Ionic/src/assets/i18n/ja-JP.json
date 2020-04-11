@@ -140,6 +140,13 @@
     
     
     "Article.Loading": "少々お待ちください",
+    "Article.Content": "本文",
+    "Article.Comment": "論評",
+    "Article.Forward": "転送",
+    "Article.Like": "ゼイン",
+    "Article.Hot": "ホットスポット",
+    "Article.Recommend": "おすすめ",
+
     "Comment.Comment": "コメント",
     "Comment.MoreComment":"もっと見る",
     "Comment.Like": "ライク",

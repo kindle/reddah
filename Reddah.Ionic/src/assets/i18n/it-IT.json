@@ -139,6 +139,13 @@
     "Time.JustNow": "Proprio ora",
 
     "Article.Loading": "Per favore, aspetta",
+    "Article.Content": "Corpo",
+    "Article.Comment": "Commenti",
+    "Article.Forward": "Avanti",
+    "Article.Like": "Lode",
+    "Article.Hot": "Caldo",
+    "Article.Recommend": "Consigliato",
+
     "Comment.Comment": "Commento",
     "Comment.MoreComment":"Altri commenti",
     "Comment.Like": "Tipo",

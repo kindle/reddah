@@ -139,6 +139,13 @@
     "Time.JustNow": "Antes",
 
     "Article.Loading": "Un momento...Por favor",
+    "Article.Content": "Cuerpo",
+    "Article.Comment": "Comentarios",
+    "Article.Forward": "Adelante",
+    "Article.Like": "Alabanza",
+    "Article.Hot": "Caliente",
+    "Article.Recommend": "Recomienda",
+
     "Comment.Comment": "Notas",
     "Comment.MoreComment":"Más comentarios",
     "Comment.Like": "Gustar",

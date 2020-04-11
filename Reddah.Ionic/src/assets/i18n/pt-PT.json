@@ -137,7 +137,14 @@
     "Time.MinutesAgo": "Minuto",
     "Time.JustNow": "Agora Mesmo",
 
-    "Article.Loading": "Por favor, espere",
+    "Article.Loading": "Apenas espere...",
+    "Article.Content": "Corpo",
+    "Article.Comment": "Comentários",
+    "Article.Forward": "Para a frente",
+    "Article.Like": "Louvor",
+    "Article.Hot": "Quente",
+    "Article.Recommend": "Recomendado",
+
     "Comment.Comment": "Comentário",
     "Comment.MoreComment":"Mais Comentários",
     "Comment.Like": "Tipo",

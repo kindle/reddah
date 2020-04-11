@@ -142,6 +142,13 @@
     
 
     "Article.Loading": "请稍等...",
+    "Article.Content": "正文",
+    "Article.Comment": "评论",
+    "Article.Forward": "转发",
+    "Article.Like": "赞",
+    "Article.Hot": "热点",
+    "Article.Recommend": "推荐",
+
     "Comment.Comment": "写评论",
     "Comment.MoreComment":"更多评论",
     "Comment.Like": "点赞",
