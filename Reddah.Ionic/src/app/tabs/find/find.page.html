@@ -30,7 +30,7 @@
         <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>-->
 
-    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    <ion-item lines="none" style="--background:var(--ion-color-light);height:10px;">
     </ion-item>
     <ion-item class="borderTop" (click)="shake()">
         <ion-icon class="menuIcon" name="color-wand"slot="start" size="medium"></ion-icon>
@@ -48,7 +48,7 @@
         <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 
-    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    <ion-item lines="none" style="--background:var(--ion-color-light);height:10px;">
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" (click)="goPlatform()">
         <ion-icon class="menuIcon" name="flask"color="mini" slot="start"></ion-icon>
@@ -92,22 +92,22 @@
     
     -->
 
-    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    <ion-item lines="none" style="--background:var(--ion-color-light);height:10px;">
     </ion-item>
-    <ion-row *ngIf="user_apps.length>0" style="background-color: white;">
+    <ion-row *ngIf="user_apps.length>0">
         <ion-item style="width:100%;padding:0px;" class="borderTop borderBottom" lines="none">
             <div class="mini-box">
                 <div class="mini-box-item" *ngFor="let user_app of user_apps">
                     <ion-avatar (click)="goMini(user_app)">
                         <img *ngIf="user_app.Photo" src="{{reddah.appData('userphoto_'+user_app.UserName, 'photo.svg')}}" 
                             class="borderPortrait recentPortrait">
-                        <ion-icon *ngIf="!user_app.Photo" size="small" name="infinite-outline"color="tertiary" class="mini recentPortrait"></ion-icon>
+                        <ion-icon *ngIf="!user_app.Photo" size="small" name="infinite-outline" color="tertiary" class="mini recentPortrait"></ion-icon>
                     </ion-avatar>
                     <ion-label class="mini-box-label">{{user_app.NickName}}</ion-label>
                 </div>
                 <div class="mini-box-item" (click)="goMoreApp()" *ngIf="user_apps.length>0">
                     <ion-avatar>
-                        <ion-icon name="ellipsis-horizontal"size="small" color="medium" class="more recentPortrait"></ion-icon>
+                        <ion-icon name="ellipsis-horizontal" size="small" color="medium" class="more recentPortrait"></ion-icon>
                     </ion-avatar>
                     <ion-label class="mini-box-label">{{ reddah.instant('Search.More') }}</ion-label>
                 </div>
