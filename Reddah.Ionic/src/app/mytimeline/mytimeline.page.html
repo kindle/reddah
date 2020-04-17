@@ -29,7 +29,7 @@
            <!--<img [src]="reddah.appData('cover_'+userName)" 
                 onerror="this.src='assets/icon/timg.jpg';">-->
         </div>
-        <div class="timelineAvatar">
+        <div class="timelineAvatar" style="background-color: var(--ion-color-tertiary);">
             <ion-label class="userNameTitle">{{reddah.getDisplayName(userName,100)}}</ion-label>
             <img src="{{reddah.appData('userphoto_'+userName)}}" (click)="goUser(userName)"
                 onerror="this.src='assets/icon/anonymous.png';">
@@ -41,7 +41,7 @@
 
         <div *ngIf="loading">
             <div *ngFor="let skeletonItem of [1,1,1,1,1]"
-            style="background-color: white; display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
+            style="background-color:var(--ion-color-white); display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
                 <div style="width:70px;padding: 0 0 0 10px; border: 0px solid blue;">
                     <ion-avatar slot="start">
                         <ion-skeleton-text animated style="border-radius: 0;"></ion-skeleton-text>
@@ -72,7 +72,7 @@
         </div>
 
         <div *ngFor="let article of articles" 
-        style="background-color: white; display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
+        style="background-color: var(--ion-color-tertiary); display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
             <div style="width:70px;padding: 0 0 0 10px; border: 0px solid blue;">
                 <img src="{{reddah.appData('userphoto_'+article.UserName)}}" class="portrait" (click)="goUser(article.UserName)">
             </div>
@@ -83,10 +83,10 @@
                     </ion-card-title>
                 </ion-card-header>
                 <div *ngIf="article.Title.length>0&&article.Title.length<100">
-                    <div style="background-color: white; padding: 0 0 4px 15px;margin-bottom:0px;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                    <div style="padding: 0 0 4px 15px;margin-bottom:0px;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
                 </div>
-                <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
-                    <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 12px;margin-bottom:5px;" 
+                <ion-item style="--background:transparent;" lines="none" *ngIf="article.Title.length>=100">
+                    <div (click)="fullText(article.Title)" style="background-color:var(--ion-color-light); padding: 12px;margin-bottom:5px;" 
                     [innerHTML]="reddah.summaryShort(article.Title, 100, '......')"></div>
                 </ion-item>
                 <ion-card-content *ngIf="article.Abstract&&article.Abstract.length>2">
@@ -126,15 +126,15 @@
                         </div>
                     </div>
                 </ion-card-content>
-                <ion-item no-padding lines="none" style="margin:2px 0;" *ngIf="article.Location&&article.Location!='undefined'" (click)="goLocation(article.Location)">
+                <ion-item style="--background:transparent;margin:2px 0;" lines="none" *ngIf="article.Location&&article.Location!='undefined'" (click)="goLocation(article.Location)">
                     <ion-label color="secondary">{{reddah.getJSON(article.Location).title}}</ion-label>
                 </ion-item>
-                <ion-item no-padding lines="none" style="margin:2px 0;">
+                <ion-item style="--background:transparent;margin:2px 0;" lines="none">
                     <ion-text color="dark">{{reddah.getSendTime(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-text>
                     <ion-text color="secondary" style="margin-left: 5px;" *ngIf="isMe(article.UserName)" (click)="delete(article)">{{ reddah.instant('Comment.Delete') }}</ion-text>
                     <ion-icon name="ellipsis-horizontal" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
                 </ion-item>
-                <ion-item no-padding lines="none" *ngIf="reddah.getAllowedNames(article.GroupName).length>0">
+                <ion-item style="--background:transparent;" lines="none" *ngIf="reddah.getAllowedNames(article.GroupName).length>0">
                     <div style="width: 100%;">
                         <div class="like-arrow-up"></div>
                         <div class="likeSection">
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                 </ion-item>
-                <ion-item no-padding lines="none" *ngIf="commentData.get(article.Id)&&reddah.getAllowedComments(commentData.get(article.Id)).length>0">
+                <ion-item style="--background:transparent;" lines="none" *ngIf="commentData.get(article.Id)&&reddah.getAllowedComments(commentData.get(article.Id)).length>0">
                     <div style="width: 100%;">
                         <div class="like-arrow-up" *ngIf="reddah.getAllowedNames(article.GroupName).length==0"></div>
                         <div class="like-spliter" *ngIf="reddah.getAllowedNames(article.GroupName).length>0"></div>

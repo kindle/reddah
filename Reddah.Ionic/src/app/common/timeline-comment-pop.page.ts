@@ -4,7 +4,7 @@ import { ReddahService } from '../reddah.service';
 
 @Component({
     template: `
-        <ion-item lines="none">
+        <ion-item lines="none" color="light">
             <div style="display: flex;margin-top:5px;">
                 <ion-icon slot="start" (click)="close(1)" color="danger" name="heart-outline" size="medium" *ngIf="!liked"></ion-icon>
                 <ion-label style="margin-left:5px;" slot="start" color="dark" (click)="close(1)" *ngIf="!liked">{{ reddah.instant('Comment.Like') }}</ion-label>

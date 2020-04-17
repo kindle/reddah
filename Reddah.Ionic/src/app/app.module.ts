@@ -1,5 +1,6 @@
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
@@ -169,6 +170,7 @@ import { ShareChooseChatPage } from './chat/share-choose-chat/share-choose-chat.
 import { ShareChooseUserPage } from './chat/share-choose-user/share-choose-user.page';
 import { ShareChooseGroupPage } from './chat/share-choose-group/share-choose-group.page';
 import { ShareArticleChatComponent } from './common/share-article-chat/share-article-chat.component';
+import { AtChooseUserPage } from './chat/at-choose-user/at-choose-user.page';
 //import { IonicGestureConfig } from './IonicGestureConfig';
 
 var firebaseConfig = {
@@ -200,7 +202,7 @@ var firebaseConfig = {
         GroupChatPage,GroupChatFirePage,
         ChatOptPage,
         GroupChatOptPage,
-        ChatChooseUserPage,ShareChooseUserPage,ShareChooseGroupPage,
+        ChatChooseUserPage,ShareChooseUserPage,ShareChooseGroupPage,AtChooseUserPage,
         ChatChooseGroupPage,
         MyInfoPage,MessagePage,
         NewFriendPage,
@@ -269,7 +271,7 @@ var firebaseConfig = {
         GroupChatPage,GroupChatFirePage,
         ChatOptPage,
         GroupChatOptPage,
-        ChatChooseUserPage,ShareChooseUserPage,ShareChooseGroupPage,
+        ChatChooseUserPage,ShareChooseUserPage,ShareChooseGroupPage,AtChooseUserPage,
         ChatChooseGroupPage,
         MyInfoPage,MessagePage,
         NewFriendPage,
@@ -308,6 +310,7 @@ var firebaseConfig = {
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     imports: [
         BrowserModule, HammerModule,
+        BrowserAnimationsModule,
         FormsModule,
         IonicModule.forRoot(), 
         AppRoutingModule,

@@ -213,6 +213,7 @@ export class MyTimeLinePage implements OnInit {
             this.renderer.setStyle(this.headerStart.nativeElement, 'visibility', 'visible');
             this.renderer.setStyle(this.headerStart.nativeElement, 'opacity', '8');
             this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
+            this.renderer.setStyle(this.timelineCoverImage.nativeElement, 'visibility', 'visible');
         }
         else if(offset<250 && offset>=150)
         {

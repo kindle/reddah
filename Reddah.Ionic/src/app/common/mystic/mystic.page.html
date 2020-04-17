@@ -6,8 +6,7 @@
     <ion-label *ngIf="writing==1">{{ reddah.instant('Mystic.Typing') }}</ion-label>
     <ion-label *ngIf="writing==2">{{ reddah.instant('Mystic.Thinking') }}</ion-label>
 </ion-item>
-<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" 
-style="background-color: #eeeeee;--background: #eeeeee;padding:0;" #pageTop (click)="chatbox.hide()"> 
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" class="common-content" #pageTop (click)="chatbox.hide()"> 
     <ion-grid *ngFor="let comment of messages">
         <ion-row *ngIf="comment.Type==0||comment.Type==1000">
             <ion-col style="padding:0;">

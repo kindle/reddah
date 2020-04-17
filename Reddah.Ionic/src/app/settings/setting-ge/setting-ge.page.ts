@@ -26,6 +26,22 @@ export class SettingGePage implements OnInit {
     nightMode = false;
     changeNightMode(){
         this.reddah.setNightMode(this.nightMode);
+        let systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+        systemDark.addListener(this.colorTest);
+        if(this.nightMode){
+            document.body.setAttribute('data-theme', 'dark');
+        }
+        else{
+            document.body.setAttribute('data-theme', 'light');
+        }
+    }
+
+    colorTest(systemInitiatedDark) {
+        if (systemInitiatedDark.matches) {
+            document.body.setAttribute('data-theme', 'dark');		
+        } else {
+            document.body.setAttribute('data-theme', 'light');
+        }
     }
     
     constructor(

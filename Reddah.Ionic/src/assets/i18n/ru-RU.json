@@ -145,6 +145,8 @@
     "Article.Like": "Похвалы",
     "Article.Hot": "Горячие",
     "Article.Recommend": "Рекомендуется",
+    "Article.CurrentLocation": "Текущее местоположение",
+    "Article.Mention": "Упомянуть",
 
     "Comment.Comment": "Примечания",
     "Comment.MoreComment":"Дополнительные комментарии",

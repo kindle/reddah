@@ -146,6 +146,8 @@
     "Article.Like": "ゼイン",
     "Article.Hot": "ホットスポット",
     "Article.Recommend": "おすすめ",
+    "Article.CurrentLocation": "現在の場所",
+    "Article.Mention": "言及",
 
     "Comment.Comment": "コメント",
     "Comment.MoreComment":"もっと見る",

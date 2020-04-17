@@ -10,7 +10,7 @@
 
         <ion-icon (click)="view(article)" color="dark" name="chatbox-ellipses-outline" class="action-margin"></ion-icon>
         <ion-text color="dark" (click)="view(article)" class="action-count">
-            {{reddah.shortCount(article.Comments)}}
+            {{reddah.shortCount(article.Count)}}
         </ion-text>
 
         <ion-icon (click)="reddah.likeArticle(article)" *ngIf="!article.like" color="dark"

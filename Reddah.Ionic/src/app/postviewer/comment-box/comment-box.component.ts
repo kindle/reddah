@@ -4,6 +4,7 @@ import { ReddahService } from '../../reddah.service';
 import { CacheService } from "ionic-cache";
 import { AddCommentPage } from '../add-comment/add-comment.page';
 import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
+import { AtChooseUserPage } from 'src/app/chat/at-choose-user/at-choose-user.page';
 
 @Component({
     selector: 'app-comment-box',
@@ -14,8 +15,6 @@ export class CommentBoxComponent implements OnInit {
 
     @ViewChild('newComment') newComment;
     @Input() article;
-    @Input() count: number;
-    @Input() bookmark: number;
     @Input() selectedArticleId: number;
     @Input() selectedCommentId: number;
     @Output() reloadComments = new EventEmitter();
@@ -132,11 +131,14 @@ export class CommentBoxComponent implements OnInit {
                 this.cacheService.removeItem(cacheKey2);
                 this.reloadComments.emit();
                 this.showEditBox = false;
+                
             }
             else{
                 alert(result.Message);
             }
         });
+
+        this.reddah.commentArticle(this.article);
         
     }
 
@@ -161,5 +163,23 @@ export class CommentBoxComponent implements OnInit {
             this.reloadComments.emit();
         }
 
+    }
+
+    async chooseAtUser(){
+        const modal = await this.modalController.create({
+            component: AtChooseUserPage,
+            componentProps: { 
+                article: this.article,
+            },
+            cssClass: "modal-fullscreen",
+        });
+            
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            data.forEach((item)=>{
+                this.newComment.value += '@'+item.Watch;
+            })
+        }
     }
 }

@@ -1,7 +1,7 @@
 import { Directive, HostListener, ElementRef, Input } from "@angular/core";
 
 @Directive({
-    selector: "ion-textarea[autoresize]" // Attribute selector
+    selector: "ion-textarea[autoresize]" 
 })
 export class AutoresizeDirective {
     @HostListener('input', ['$event.target'])
@@ -9,7 +9,7 @@ export class AutoresizeDirective {
         this.adjust();
     }
 
-    @HostListener('focus', ['$event.target'])
+    @HostListener('click', ['$event.target'])
     onFocus(textArea: HTMLTextAreaElement): void {
         this.adjust();
     }
@@ -21,8 +21,9 @@ export class AutoresizeDirective {
     ngOnInit(): void {
         this.adjust();
     }
+
     adjust(): void {
-        //let rootElement = this.element.nativeElement.shadowRoot;
+        //let rootElement = this.element.nativeElement.shadowRoot; 
         let rootElement = this.element.nativeElement;
         if(rootElement){
             let ta = rootElement.querySelector("textarea"), newHeight;

@@ -12,11 +12,12 @@
         </ion-text>
     </ion-item>
 
-    <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
+    <ion-item class="sectionGapTop gapBottom inputItem">
+        <ion-icon name="checkmark-circle-outline" color="primary" *ngIf="!checkFlagUserName&&checkFlagUserNamePass" style="margin-right:5px;"></ion-icon>
+        <ion-spinner name="dots" *ngIf="checkFlagUserName" style="margin-right:5px;"></ion-spinner>
         <ion-input type="text" placeholder="{{ reddah.instant('Input.UserName') }}" 
         [(ngModel)]="username" clearInput (ionBlur)="checkUserName()" (ionFocus)="focusUserName()"></ion-input>
-        <ion-spinner name="dots" slot="end" *ngIf="checkFlagUserName"></ion-spinner>
-        <ion-icon slot="end" name="checkmark-circle-outline" color="primary" *ngIf="checkFlagUserNamePass"></ion-icon>
+        <ion-icon slot="end" name="refresh-circle-outline" color="primary" (click)="generateUserName()"></ion-icon>
     </ion-item>
 
     <ion-item lines="{{password==''?'':'none'}}" class="gapBottom inputItem" no-padding>

@@ -144,6 +144,8 @@
     "Article.Like": "Louvor",
     "Article.Hot": "Quente",
     "Article.Recommend": "Recomendado",
+    "Article.CurrentLocation": "Localização atual",
+    "Article.Mention": "Lembra-me quem está a ver",
 
     "Comment.Comment": "Comentário",
     "Comment.MoreComment":"Mais Comentários",

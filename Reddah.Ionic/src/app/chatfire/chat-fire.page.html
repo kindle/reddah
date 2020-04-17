@@ -8,8 +8,7 @@
         <ion-icon is-active="false" name="ellipsis-horizontal"></ion-icon>
     </ion-button>
 </ion-item>
-<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" no-padding 
-style="background-color: #eeeeee;--background: #eeeeee;" #pageTop (click)="chatbox.hide()"> 
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)" class="common-content" #pageTop (click)="chatbox.hide()"> 
     <ion-refresher slot="fixed" (ionRefresh)="getMoreHistory($event)">
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>

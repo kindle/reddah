@@ -145,6 +145,8 @@
     "Article.Like": "Lob",
     "Article.Hot": "Heiß",
     "Article.Recommend": "Empfohlen",
+    "Article.CurrentLocation": "Aktueller Standort",
+    "Article.Mention": "Erwähnen",
 
     "Comment.Comment": "Kommentar",
     "Comment.MoreComment":"Weitere Kommentare",

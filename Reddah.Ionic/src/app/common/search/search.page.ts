@@ -61,6 +61,7 @@ export class SearchPage implements OnInit {
             this.loadSuggestMini();
         }
         else if(col.id==5){
+            this.close();
             const addFriendModal = await this.modalController.create({
                 component: AddFriendPage,
                 componentProps: {},
@@ -211,7 +212,7 @@ export class SearchPage implements OnInit {
         }
         else if(this.selectedTopicId==5)//contact
         {
-            alert('todo')
+            //alert('todo')
         }
         else if(this.selectedTopicId==6)//stock chart
         {

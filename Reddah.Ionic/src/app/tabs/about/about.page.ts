@@ -13,6 +13,7 @@ import { PointPage } from '../../common/point/point.page';
 import { MyReportPage } from '../../mytimeline/myreport/myreport.page';
 import { PunchClockPage } from '../../common/point/punch-clock/punch-clock.page';
 import { PublisherPage } from '../publisher/publisher.page';
+import { SearchPage } from 'src/app/common/search/search.page';
 
 @Component({
     selector: 'app-about',
@@ -97,6 +98,21 @@ export class AboutPage implements OnInit {
         
         await modal.present();
     }
+
+    async goSearch(type){
+        const modal = await this.modalController.create({
+            component: SearchPage,
+            componentProps: {
+                type: type
+            },
+            cssClass: "modal-fullscreen",
+        });
+        
+        await modal.present();
+    }
+
+    
+
 
     async post(ev: any) {
         const popover = await this.popoverController.create({

@@ -21,6 +21,7 @@ export class RegisterPage implements OnInit {
     locale;
     ngOnInit() {
         this.locale = this.reddah.getCurrentLocale();
+        this.generateUserName();
     }
 
     username = "";
@@ -107,6 +108,11 @@ export class RegisterPage implements OnInit {
         });
         
         browser.close();*/
+    }
+
+    generateUserName(){
+        this.username = this.reddah.generateUserName();
+        this.checkUserName();
     }
 
     errorMessage = "";

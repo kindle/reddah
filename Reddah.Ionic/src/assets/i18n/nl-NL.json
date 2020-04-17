@@ -145,6 +145,8 @@
     "Article.Like": "Lof",
     "Article.Hot": "Hot",
     "Article.Recommend": "Aanbevolen",
+    "Article.CurrentLocation": "Huidige locatie",
+    "Article.Mention": "Herinner eraan wie er kijkt",
 
     "Comment.Comment": "Commentaar",
     "Comment.MoreComment":"Meer opmerkingen",

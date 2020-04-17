@@ -4,14 +4,14 @@
     </ion-button>  
     <ion-label>{{ reddah.instant('Menu.Header.AddFriend') }}</ion-label>
 </ion-item>
-<ion-content no-padding style="--background: #eeeeee;">
+<ion-content class="common-content">
     <ion-item lines="none">
         <ion-icon name="search-outline"></ion-icon>
         <ion-label (click)="searchUser()" style="margin-left:15px;width: 100%;" color="medium">
             Reddah ID/{{ reddah.instant('Input.UserName') }}</ion-label>
     </ion-item>
 <!--
-    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    <ion-item lines="none" class="common-splitter">
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" href="/scan" (click)="close()">
         <ion-icon name="qr-scanner" slot="start"></ion-icon>
@@ -19,7 +19,7 @@
         <ion-icon name="chevron-forward-outline"slot="end"></ion-icon>
     </ion-item>-->
 
-    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    <ion-item lines="none" class="common-splitter">
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" (click)="myQrCard()">
         <ion-label>{{ reddah.instant('About.Card') }}</ion-label>

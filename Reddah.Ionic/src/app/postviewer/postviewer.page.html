@@ -70,7 +70,7 @@
     <app-comment [(normal)]="asNormalUser" *ngIf="!preview" #commentlist count="{{article.Count}}" no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" (commentClick)="childCommentClick($event)" 
         [articleauthor]="article.UserName"></app-comment>
 </ion-content>
-<app-comment-box *ngIf="!preview" #commentbox [(article)]="article" count="{{article.Count}}" bookmark={{article.Down}} selectedArticleId="{{article.Id}}" selectedCommentId="-1"
+<app-comment-box *ngIf="!preview" #commentbox [(article)]="article" selectedArticleId="{{article.Id}}" selectedCommentId="-1"
     (reloadComments)="childReloadComments($event)"></app-comment-box>
 <ion-fab vertical="center" horizontal="end" slot="fixed" *ngIf="!preview&&isAdmin()">
     <ion-fab-button (click)="switchToAdmin()">

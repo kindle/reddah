@@ -4,7 +4,7 @@
     </ion-button>
     <ion-label>{{title}}</ion-label>
 </ion-item>
-<ion-content style="--background: #eeeeee;">
+<ion-content class="common-content">
     <ion-item class="borderTop"  (click)="select(2)">
         <ion-icon slot="start" name="images-outline"color="dark" size="medium"></ion-icon>
         <ion-label>{{ reddah.instant('Pop.SelectPhoto') }}</ion-label>
@@ -16,7 +16,7 @@
         <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 <!--
-    <ion-item lines="none" style="--background:#eeeeee;height:10px;">
+    <ion-item lines="none" class="common-splitter">
     </ion-item>
     <ion-item>
         <ion-label>图片处理小程序</ion-label>

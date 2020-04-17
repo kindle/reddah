@@ -148,6 +148,8 @@
     "Article.Like": "贊",
     "Article.Hot": "熱點",
     "Article.Recommend": "推薦",
+    "Article.CurrentLocation": "所在位置",
+    "Article.Mention": "提醒誰看",
 
     "Comment.Comment": "寫評論",
     "Comment.MoreComment":"更多評論",

@@ -56,7 +56,7 @@
                     </div>
                     <div class="articleContent" *ngIf="article.Id>0">
                         <ion-item style="--padding-start:0;" lines="none" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.length>0" (click)="goTsViewer(article)">
-                            <ion-thumbnail slot="start">
+                            <ion-thumbnail slot="start" style="margin-top:3px;margin-bottom: auto;">
                                 <div class="tsparent4" *ngIf="article.Content.split('$$$').length>=4">
                                     <div class="tscontainer" *ngFor="let image of article.Content.split('$$$').slice(0,4);index as i">
                                         <img [id]="reddah.makeItId(image+'tl')" 

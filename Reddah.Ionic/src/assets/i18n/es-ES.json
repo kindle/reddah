@@ -145,6 +145,8 @@
     "Article.Like": "Alabanza",
     "Article.Hot": "Caliente",
     "Article.Recommend": "Recomienda",
+    "Article.CurrentLocation": "Ubicación actual",
+    "Article.Mention": "Mención",
 
     "Comment.Comment": "Notas",
     "Comment.MoreComment":"Más comentarios",

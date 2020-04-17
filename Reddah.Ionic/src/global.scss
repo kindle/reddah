@@ -133,7 +133,7 @@ ion-icon{
 
 .listInfo {
   color: #BDBEC1;
-  margin-top:0.33em;
+  margin-top:10px;
 }
 
 .cssdanger{
@@ -190,6 +190,16 @@ ion-icon{
 
 .common-content{
   --background: var(--ion-color-light);
+}
+
+.common-content-padding{
+  --padding-start:10px;
+  --inner-padding-end:10px;
+}
+
+.common-splitter{
+  --background:var(--ion-color-light);
+  height:10px;
 }
 
 .dislike-noreason{
@@ -264,4 +274,7 @@ ion-loading.custom-loading {
           height:50px;
       }
   }
+}
+.no-padding-end{
+  --inner-padding-end:5px;
 }

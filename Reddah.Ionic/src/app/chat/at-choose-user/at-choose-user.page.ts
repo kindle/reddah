@@ -4,20 +4,13 @@ import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
-import { LocalePage } from '../../common/locale/locale.page';
-import { UserPage } from '../../common/user/user.page';
-import { ChatPage } from '../chat.page';
-import { ChatFirePage } from '../../chatfire/chat-fire.page';
-import { GroupChatPage } from '../group-chat.page';
-import { GroupChatFirePage } from '../../chatfire/group-chat-fire.page';
-import { ChatChooseGroupPage } from '../chat-choose-group/chat-choose-group.page';
 
 @Component({
-    selector: 'app-chat-choose-user',
-    templateUrl: './chat-choose-user.page.html',
-    styleUrls: ['./chat-choose-user.page.scss'],
+    selector: 'app-at-choose-user',
+    templateUrl: './at-choose-user.page.html',
+    styleUrls: ['./at-choose-user.page.scss'],
 })
-export class ChatChooseUserPage implements OnInit {
+export class AtChooseUserPage implements OnInit {
 
     @Input() targetUser;
     userName;
@@ -42,16 +35,15 @@ export class ChatChooseUserPage implements OnInit {
 
     
     
-    async close() {
-        await this.modalController.dismiss();
+    async close(targetUsers) {
+        await this.modalController.dismiss(targetUsers);
     }
 
     
     submitClicked=false;
     async submit(){
         this.submitClicked= true;
-        //console.log(this.groupedContacts)
-
+        
         let targetUsers = [];
         this.groupedContacts.forEach((item)=>{
             item.contacts.forEach((contact)=>{
@@ -65,33 +57,9 @@ export class ChatChooseUserPage implements OnInit {
         if(targetUsers.length==0){//no people selected
             this.submitClicked= false;
         }
-        else if(targetUsers.length==1){//2 people chat
-            this.close();
-            const modal = await this.modalController.create({
-                //component: ChatPage,
-                component: ChatFirePage,
-                componentProps: { 
-                    title: this.reddah.appData('usernotename_'+targetUsers[0].Watch+'_'+this.userName),
-                    target: targetUsers[0].Watch,
-                },
-                cssClass: "modal-fullscreen",
-            });
-            await modal.present();
-            const {data} = await modal.onDidDismiss();
-        }
-        else//real group chat
+        else
         {
-            this.close();
-            const modal = await this.modalController.create({
-                //component: GroupChatPage,
-                component: GroupChatFirePage,
-                componentProps: {
-                    targetUsers: targetUsers,
-                },
-                cssClass: "modal-fullscreen",
-            });
-            await modal.present();
-            //const {data} = await modal.onDidDismiss();
+            this.close(targetUsers);
         }
     }
 
@@ -118,7 +86,7 @@ export class ChatChooseUserPage implements OnInit {
 
                 let cname = contact.NoteName ? contact.NoteName : contact.Watch;
                 let ch = cname.charAt(0);
-                console.log(ch)
+                
                 if(/^[A-Za-z]/.test(ch))//English
                 {
                     contact.s = ch.toLowerCase();
@@ -128,18 +96,17 @@ export class ChatChooseUserPage implements OnInit {
                     contact.s = this.reddah.getSortLetter(ch,'zh');
                 }
             }
-                        
-            this.groupContacts(contacts);
+              
+            this.contacts = contacts;
+            this.groupContacts(this.contacts);
             
         });  
     }
 
-    groupContacts(contacts){
-
-        this.contacts = [];
+    groupContacts(customContacts){
         this.groupedContacts = [];
 
-        let sortedContacts = contacts.sort((a,b)=> 
+        let sortedContacts = customContacts.sort((a,b)=> 
         {
             var nameA = a.s.toUpperCase(); 
             var nameB = b.s.toUpperCase(); 
@@ -152,6 +119,7 @@ export class ChatChooseUserPage implements OnInit {
 
             return 0;
         });
+        console.log(sortedContacts)
         let currentLetter = false;
         let currentContacts = [];
 
@@ -169,12 +137,16 @@ export class ChatChooseUserPage implements OnInit {
         });
     }
 
-    async goChooseGroupChat(){
-        const modal = await this.modalController.create({
-            component: ChatChooseGroupPage,
-            componentProps: {},
-            cssClass: "modal-fullscreen",
-        });
-        await modal.present();
+    filterUsers(ev) {
+        var val = ev.target.value;
+
+        let filterContacts = this.contacts.filter((item) => {
+            return (item.Watch.toLowerCase().indexOf(val.toLowerCase()) > -1)||
+            (item.UserNickName!=null&&item.UserNickName.toLowerCase().indexOf(val.toLowerCase()) > -1)||
+            (item.NoteName!=null&&item.NoteName.toLowerCase().indexOf(val.toLowerCase()) > -1)||
+            (item.s.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        })
+
+        this.groupContacts(filterContacts);
     }
 }

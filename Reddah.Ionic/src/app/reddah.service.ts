@@ -23,6 +23,7 @@ import { DatePipe } from '@angular/common';
 import { Md5 } from 'ts-md5/dist/md5';
 import { AddTimelinePage } from './mytimeline/add-timeline/add-timeline.page';
 import { Vibration } from '@ionic-native/vibration/ngx';
+import { createAnimation } from '@ionic/core'
 
 @Injectable({
     providedIn: 'root'
@@ -45,6 +46,8 @@ export class ReddahService {
         private camera: Camera,
         private modalController: ModalController,
         private vibration: Vibration,
+        private ngZone: NgZone,
+        
     ) { 
 
     }
@@ -1919,15 +1922,15 @@ export class ReddahService {
     getNearby(lat, lon): Observable<any> {
         
         let policy = 1;
-        let qqMapApi = `https://apis.map.qq.com/ws/geocoder/v1/?location=${lat},${lon}&output=jsonp&key=ARIBZ-BSK6D-2IL4Y-POZPV-ANU32-CIF56&poi_options=address_format=short;radius=5000;page_size=100;page_index=1;policy=${policy}&get_poi=1`;
+        let qqMapApi = `https://apis.map.qq.com/ws/geocoder/v1/?location=${lat},${lon}&output=jsonp&key=ARIBZ-BSK6D-2IL4Y-POZPV-ANU32-CIF56&poi_options=address_format=short;radius=5000;page_size=100;page_index=1;policy=${policy}&get_poi=1&callback=JSONP_CALLBACK`;
 
         const searchParams = new URLSearchParams();
-        searchParams.append('callback', 'JSONP_CALLBACK');
+        //searchParams.append('callback', 'JSONP_CALLBACK');
         if (!this.options) {
           this.options = {headers: new Headers()};
         }
         this.options.headers.set('Content-Type', 'application/json:charset=UTF-8');
-        this.options.params = searchParams;
+        //this.options.params = searchParams;
 
         return this.http.jsonp(qqMapApi, this.options).pipe(
             tap(data => this.log('get nearby')),
@@ -1937,7 +1940,7 @@ export class ReddahService {
 
     getQqLocation(lat, lng): Observable<any> {
         
-        let qqTranslateApi = `https://apis.map.qq.com/ws/coord/v1/translate?locations=${lat},${lng}&output=jsonp&type=1&key=ARIBZ-BSK6D-2IL4Y-POZPV-ANU32-CIF56`;
+        let qqTranslateApi = `https://apis.map.qq.com/ws/coord/v1/translate?locations=${lat},${lng}&output=jsonp&type=1&key=ARIBZ-BSK6D-2IL4Y-POZPV-ANU32-CIF56&callback=JSONP_CALLBACK`;
 
         const searchParams = new URLSearchParams();
         searchParams.append('callback', 'JSONP_CALLBACK');
@@ -1945,7 +1948,7 @@ export class ReddahService {
           this.options = {headers: new Headers()};
         }
         this.options.headers.set('Content-Type', 'application/json:charset=UTF-8');
-        this.options.params = searchParams;
+        //this.options.params = searchParams;
 
         return this.http.jsonp(qqTranslateApi, this.options).pipe(
             tap(data => this.log('get qq location')),
@@ -2811,7 +2814,9 @@ export class ReddahService {
             //closeButtonText: this.translate.instant("Button.Close"),
             duration: 1000,
             color: color,
-            cssClass: "toast-style"
+            cssClass: "toast-style",
+            //enterAnimation: this.enterAnimation,
+            //leaveAnimation: this.leaveAnimation
         });
         toast.present();
     }
@@ -3303,6 +3308,10 @@ export class ReddahService {
         }
     }
 
+    commentArticle(article){
+        article.Count = article.Count + 1;
+    }
+
     shortCount(n){
         if(n>10000)
             return Math.floor(n/10000)+"w";
@@ -3310,6 +3319,36 @@ export class ReddahService {
             return Math.floor(n/1000)+"k";
         else
             return n;
+    }
+
+    generateUserName(){
+        const prefix = "rd";
+        let name = prefix + this.nonce_str().substring(0,6);
+
+        return name;
+    }
+
+    enterAnimation = (baseEl: any) => {
+      const backdropAnimation = createAnimation()
+        .addElement(baseEl.querySelector('ion-backdrop')!)
+        .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
+
+      const wrapperAnimation = createAnimation()
+        .addElement(baseEl.querySelector('.modal-wrapper')!)
+        .keyframes([
+          { offset: 0, opacity: '0', transform: 'scale(0)' },
+          { offset: 1, opacity: '0.99', transform: 'scale(1)' }
+        ]);
+
+      return createAnimation()
+        .addElement(baseEl)
+        .easing('ease-out')
+        .duration(500)
+        .addAnimation([backdropAnimation, wrapperAnimation]);
+    }
+
+    leaveAnimation = (baseEl: any) => {
+      return this.enterAnimation(baseEl).direction('reverse');
     }
 
 }

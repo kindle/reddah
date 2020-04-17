@@ -11,7 +11,8 @@
         style="margin: 0 10px 0 0;"></ion-textarea>
     </ion-item>
     <ion-item lines="none">
-        <ion-icon id="faceIcon" slot="start" name="happy-outline" size="medium" (click)="toggleFacePanel()" margin-end></ion-icon>
+        <ion-icon slot="end" name="at-outline" size="medium" (click)="chooseAtUser()"></ion-icon>
+        <ion-icon slot="end" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
     </ion-item>
     <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
     <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="postType<3">
@@ -35,23 +36,24 @@
     </div>
     <ion-item lines="none" style="--background:var(--ion-item-background);height:10px;">
     </ion-item>
-    <ion-item lines="none" (click)="getLocation()">
+    <ion-item (click)="getLocation()">
       <ion-icon name="location-outline" color="{{location?'primary':'dark'}}"></ion-icon>
-      <ion-text color="{{location?'primary':'dark'}}" style="margin-left:5px;">{{location?location.title:reddah.instant('About.Location')}}</ion-text>
+      <ion-text color="{{location?'primary':'dark'}}" style="margin-left:5px;">{{location?location.title:reddah.instant('Article.CurrentLocation')}}</ion-text>
       <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item (click)="chooseAtUser()">
+      <ion-icon name="at"></ion-icon>
+      <ion-text style="margin-left: 5px;">{{ reddah.instant('Article.Mention') }}</ion-text>
+      <ion-icon name="chevron-forward-outline"slot="end"></ion-icon>
     </ion-item>
 <!--
     <ion-item>
       <ion-icon name="person" slot="start"></ion-icon>
       <ion-label>谁可以看</ion-label>
       <ion-icon name="chevron-forward-outline"slot="end"></ion-icon>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="at" slot="start"></ion-icon>
-      <ion-label>提醒谁看</ion-label>
-      <ion-icon name="chevron-forward-outline"slot="end"></ion-icon>
-    </ion-item>
--->
+    </ion-item>-->
+    
+
 </ion-content>
 <ion-footer *ngIf="dragging" style="--background:red;background-color: red;color: white;">
     <ion-row id="delete-photo" class="delete-area" align-items-center justify-content-center dragula="bag" [(dragulaModel)]="photos_trash">

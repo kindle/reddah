@@ -201,4 +201,17 @@ export class CommentReplyPage implements OnInit {
         await alertCtl.present();
         
     }
+
+    async goback(){
+        // close modal
+        try {
+            const element = await this.modalController.getTop();
+            if (element) {
+                element.dismiss();
+                return;
+            }
+        } catch (error) {
+        }
+        this.navController.back();
+    }
 }

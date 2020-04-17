@@ -145,6 +145,8 @@
     "Article.Like": "สรรเสริญ",
     "Article.Hot": "ร้อน",
     "Article.Recommend": "แนะ นำ",
+    "Article.CurrentLocation": "ที่ตั้งปัจจุบัน",
+    "Article.Mention": "การกล่าวถึง",
 
     "Comment.Comment": "ข้อคิดเห็น",
     "Comment.MoreComment":"แสดงความคิดเห็นเพิ่มเติม",

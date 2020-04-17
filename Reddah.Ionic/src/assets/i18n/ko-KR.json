@@ -148,6 +148,8 @@
     "Article.Like": "칭찬",
     "Article.Hot": "뜨거운",
     "Article.Recommend": "권장",
+    "Article.CurrentLocation": "현재 위치",
+    "Article.Mention": "언급",
 
     "Comment.Comment": "주석",
     "Comment.MoreComment":"더 이상",

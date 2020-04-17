@@ -118,23 +118,23 @@ export class LocationPage implements OnInit {
             this.map.locate({ setView: true, maxZoom: 15 }).on('locationfound', (e) => {
                 if(this.inChina){
                     this.reddah.getQqLocation(e.latitude, e.longitude).subscribe(data=>{
-                        if(data._body.status==0){
-                            let l = data._body.locations[0];
+                        if(data.status==0){
+                            let l = data.locations[0];
                             let marker = L.marker([l.lat, l.lng]).on('click', () => {});
     
                             this.markerGroup.addLayer(marker);
                             this.map.addLayer(this.markerGroup);
     
                             this.reddah.getNearby(l.lat, l.lng).subscribe(data=>{
-                                this.locations = data._body.result.pois;
+                                this.locations = data.result.pois;
                                 if(this.locations.length==0){
-                                    this.locations = [{"id":0,"title":"Current",
+                                    this.locations = [{"id":0,"title":this.reddah.instant('Article.CurrentLocation'),
                                     "location":{"lat":e.latitude,"lng":e.longitude}}];
                                 }
                             });
                         }
                         else{
-                            alert(data._body.message);
+                            alert(data.message);
                         }
                         
                     })
@@ -151,7 +151,8 @@ export class LocationPage implements OnInit {
                 }
 
             }).on('locationerror', (err) => {
-                alert(err.message);
+                //console.log(err.message);
+                //this.test(31.273139,121.64594);
             })
         }
     }
@@ -161,14 +162,16 @@ export class LocationPage implements OnInit {
     selectedItem;
     setLocation(item){
         this.selectedItem = item;
-        
-        this.flyMaker = L.marker([item.location.lat, item.location.lng]);
-        this.markerGroup.clearLayers();
-        this.markerGroup.addLayer(this.flyMaker);
-        if(this.location)
-            this.map.addLayer(this.markerGroup);
+        console.log(item)
+        if(item!=null&&item.location!=null){
+            this.flyMaker = L.marker([item.location.lat, item.location.lng]);
+            this.markerGroup.clearLayers();
+            this.markerGroup.addLayer(this.flyMaker);
+            if(this.location)
+                this.map.addLayer(this.markerGroup);
 
-        this.map.setView([item.location.lat, item.location.lng], 15);
+            this.map.setView([item.location.lat, item.location.lng], 15);
+        }
     }
 
     async confirm(){

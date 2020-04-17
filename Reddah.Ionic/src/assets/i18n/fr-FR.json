@@ -146,6 +146,8 @@
     "Article.Like": "Louange",
     "Article.Hot": "Chaud",
     "Article.Recommend": "Recommandé",
+    "Article.CurrentLocation": "Emplacement actuel",
+    "Article.Mention": "Mentionner",
 
     "Comment.Comment": "Notes",
     "Comment.MoreComment":"Plus de commentaires",

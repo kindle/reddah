@@ -9,6 +9,7 @@ import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.com
 import { DragulaService } from 'ng2-dragula';
 import { LocationPage } from '../../common/location/location.page';
 import { VideoEditor } from '@ionic-native/video-editor/ngx';
+import { AtChooseUserPage } from 'src/app/chat/at-choose-user/at-choose-user.page';
 
 @Component({
     selector: 'app-add-timeline',
@@ -432,5 +433,23 @@ export class AddTimelinePage implements OnInit {
             event.target.id!="facePanel"&&
             event.target.id!="thoughtTxt")
             this.showFacePanel = false;
+    }
+
+    async chooseAtUser(){
+        const modal = await this.modalController.create({
+            component: AtChooseUserPage,
+            componentProps: { 
+                article: this.article,
+            },
+            cssClass: "modal-fullscreen",
+        });
+            
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            data.forEach((item)=>{
+                this.yourThoughts += '@'+item.Watch;
+            })
+        }
     }
 }

@@ -1,9 +1,11 @@
-<ion-item color="light" style="--padding-start:0;" lines="none">
-    <ion-icon name="chevron-back-outline" (click)="close()" class="backbutton"></ion-icon>
-    <ion-text>{{ reddah.instant('Comment.Comment') }}</ion-text>
+<ion-item color="light" style="--padding-start:0;--inner-padding-end:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-label style="text-align: center;">{{ reddah.instant('Article.Comment') }}</ion-label>
 </ion-item>
 <ion-content padding [scrollEvents]="true" (ionScroll)="commentbox.onScroll($event)">
-    <ion-item lines="none" no-padding>
+    <ion-item lines="none" class="common-content-padding">
         <ion-avatar slot="start" class="avatar-top">
             <img src="{{reddah.appData('userphoto_'+comment.UserName)}}" class="portrait">
         </ion-avatar>
@@ -14,9 +16,12 @@
         </ion-label>
     </ion-item>
 
-    <ion-item lines="none" no-padding>
-        <ion-label text-wrap>
-            {{ reddah.instant('Comment.Comment') }} {{allRepliesCount}}
+    <ion-item lines="none" color="light" style="--padding-start:0;">
+        <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
+            <ion-icon color="dark" is-active="false" name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <ion-label>
+            {{ reddah.instant('Article.Comment') }} {{reddah.shortCount(allRepliesCount)}}
         </ion-label>
         <!-- [interfaceOptions]="customPopoverOptions" interface="popover" -->
         <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" 
@@ -28,7 +33,7 @@
     </ion-item>
     <div *ngFor="let reply of comments">
         <li *ngIf="childrenIds.includes(reply.Id)">
-            <ion-item lines="none" no-padding>
+            <ion-item lines="none" class="common-content-padding">
                 <ion-avatar slot="start" class="avatar-top" (click)="goUser(reply.UserName)">
                     <img src="{{reddah.appData('userphoto_'+reply.UserName)}}" class="portrait">
                 </ion-avatar>
@@ -54,5 +59,5 @@
         </li>
     </div>
 </ion-content>
-<app-comment-box #commentbox selectedArticleId="{{comment.ArticleId}}" selectedCommentId="{{comment.Id}}"
+<app-comment-box #commentbox [(article)]="comment" selectedArticleId="{{comment.ArticleId}}" selectedCommentId="{{comment.Id}}"
     (reloadComments)="childReloadComments($event)"></app-comment-box>

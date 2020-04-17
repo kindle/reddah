@@ -5,7 +5,7 @@ import { ReddahService } from '../reddah.service';
 
 @Component({
   template: `
-      <ion-item lines="none" button (click)="change()">
+      <ion-item lines="none" button (click)="change()" color="light">
           <ion-label>{{ reddah.instant('Pop.ChangeCover') }}</ion-label>
       </ion-item>
   `

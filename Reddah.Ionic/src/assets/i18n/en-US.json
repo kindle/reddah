@@ -145,6 +145,8 @@
     "Article.Like": "Like",
     "Article.Hot": "Hot",
     "Article.Recommend": "Recommended",
+    "Article.CurrentLocation": "Current location",
+    "Article.Mention": "Mention",
 
     "Comment.Comment": "Comment",
     "Comment.MoreComment":"More Comments",
