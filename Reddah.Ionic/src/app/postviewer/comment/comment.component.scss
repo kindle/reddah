@@ -25,3 +25,14 @@ ul, li {
 [text-wrap]{
     font-size: var(--ion-font-size);
 }
+
+.action-count{
+    padding-left:3px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.5em;
+}
+
+.action-margin{
+    margin-left: 40px;
+}

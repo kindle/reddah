@@ -45,6 +45,7 @@ export class ArticleActionBarComponent {
             component: AddTimelinePage,
             componentProps: { 
                 postType: 4,
+                title: this.reddah.instant('Article.Forward'),
                 article: article
             },
             cssClass: "modal-fullscreen",

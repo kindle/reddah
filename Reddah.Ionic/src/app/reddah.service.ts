@@ -1901,16 +1901,16 @@ export class ReddahService {
     options: any;
     //d表示日线，m表示月线，w表示周线
     getStock(stock:string, period='d'): Observable<any> {
-        let sohuStockApi = `https://q.stock.sohu.com/hisHq?code=cn_${stock}&start=19900716&end=20200720&stat=1&order=A&period=${period}&rt=jsonp`; 
+        let sohuStockApi = `https://q.stock.sohu.com/hisHq?code=cn_${stock}&start=19900716&end=20200720&stat=1&order=A&period=${period}&rt=jsonp&callback=JSONP_CALLBACK`; 
         //  console.log(sohuStockApi);
 
-        const searchParams = new URLSearchParams();
-        searchParams.append('callback', 'JSONP_CALLBACK');
+        //const searchParams = new URLSearchParams();
+        //searchParams.append('callback', 'JSONP_CALLBACK');
         if (!this.options) {
           this.options = {headers: new Headers()};
         }
         this.options.headers.set('Content-Type', 'application/json:charset=UTF-8');
-        this.options.params = searchParams;
+        //this.options.params = searchParams;
 
         return this.http.jsonp(sohuStockApi, this.options).pipe(
             tap(data => this.log('get stock')),
@@ -1924,7 +1924,7 @@ export class ReddahService {
         let policy = 1;
         let qqMapApi = `https://apis.map.qq.com/ws/geocoder/v1/?location=${lat},${lon}&output=jsonp&key=ARIBZ-BSK6D-2IL4Y-POZPV-ANU32-CIF56&poi_options=address_format=short;radius=5000;page_size=100;page_index=1;policy=${policy}&get_poi=1&callback=JSONP_CALLBACK`;
 
-        const searchParams = new URLSearchParams();
+        //const searchParams = new URLSearchParams();
         //searchParams.append('callback', 'JSONP_CALLBACK');
         if (!this.options) {
           this.options = {headers: new Headers()};
@@ -1942,8 +1942,8 @@ export class ReddahService {
         
         let qqTranslateApi = `https://apis.map.qq.com/ws/coord/v1/translate?locations=${lat},${lng}&output=jsonp&type=1&key=ARIBZ-BSK6D-2IL4Y-POZPV-ANU32-CIF56&callback=JSONP_CALLBACK`;
 
-        const searchParams = new URLSearchParams();
-        searchParams.append('callback', 'JSONP_CALLBACK');
+        //const searchParams = new URLSearchParams();
+        //searchParams.append('callback', 'JSONP_CALLBACK');
         if (!this.options) {
           this.options = {headers: new Headers()};
         }

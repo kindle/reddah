@@ -18,6 +18,7 @@ import { AtChooseUserPage } from 'src/app/chat/at-choose-user/at-choose-user.pag
 })
 export class AddTimelinePage implements OnInit {
 
+    @Input() title;
     @Input() postType: number;
     @Input() article: any;
     //opt?'story'
@@ -420,7 +421,7 @@ export class AddTimelinePage implements OnInit {
     
     showFacePanel = false;
     toggleFacePanel(){
-        this.showFacePanel= !this.showFacePanel;
+        this.showFacePanel = !this.showFacePanel;
     }
     faceSelection(face) {
         this.yourThoughts += face;
@@ -432,7 +433,9 @@ export class AddTimelinePage implements OnInit {
         if(event.target.id!="faceIcon"&&
             event.target.id!="facePanel"&&
             event.target.id!="thoughtTxt")
-            this.showFacePanel = false;
+            {
+                this.showFacePanel = false;
+            }
     }
 
     async chooseAtUser(){
@@ -451,5 +454,13 @@ export class AddTimelinePage implements OnInit {
                 this.yourThoughts += '@'+item.Watch;
             })
         }
+    }
+
+    chooseTags(){
+
+    }
+
+    chooseStock(){
+        
     }
 }

@@ -14,6 +14,11 @@ export class AutoresizeDirective {
         this.adjust();
     }
 
+    @HostListener('ionChange', ['$event.target'])
+    change(textArea: HTMLTextAreaElement): void {
+        this.adjust();
+    }
+
     @Input('autoresize') maxHeight: number;
     
     constructor(public element: ElementRef) {}

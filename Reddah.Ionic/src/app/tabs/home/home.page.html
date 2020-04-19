@@ -107,7 +107,7 @@
                 <div [class.articleTextRead]="article.Read">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
             </div>
             <div class="listInfo" *ngIf="article.ImageUrls.length==0">
-                <ion-chip style="--background:var(--ion-chip-background);" *ngFor="let group of article.GroupName.split(',')">
+                <ion-chip style="--background:var(--ion-chip-background);" *ngFor="let group of article.GroupName.split(',').slice(-2)">
                     <ion-icon name="chatbubble-ellipses-outline" (click)="goSearch(group)" color="dark" size="small"></ion-icon>
                     <ion-label color="dark" (click)="goSearch(group)">
                         {{group.trim()}}

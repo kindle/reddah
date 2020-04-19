@@ -182,4 +182,12 @@ export class CommentBoxComponent implements OnInit {
             })
         }
     }
+
+    chooseTags(){
+
+    }
+
+    chooseStock(){
+        
+    }
 }

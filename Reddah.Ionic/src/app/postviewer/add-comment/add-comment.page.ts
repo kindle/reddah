@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../../reddah.service';
+import { AtChooseUserPage } from 'src/app/chat/at-choose-user/at-choose-user.page';
 
 @Component({
     selector: 'app-add-comment',
@@ -65,6 +66,33 @@ export class AddCommentPage implements OnInit {
 
     async close() {
         await this.modalController.dismiss({ action: 'cancel', text: this.commentContent});
+    }
+
+
+    async chooseAtUser(){
+        const modal = await this.modalController.create({
+            component: AtChooseUserPage,
+            componentProps: { 
+                article: null
+            },
+            cssClass: "modal-fullscreen",
+        });
+            
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            data.forEach((item)=>{
+                this.newComment.value += '@'+item.Watch;
+            })
+        }
+    }
+    
+    chooseTags(){
+
+    }
+
+    chooseStock(){
+        
     }
 
 }

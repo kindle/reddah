@@ -40,9 +40,15 @@
             </ion-grid>
         </ion-buttons>
     </ion-item>
-    <ion-item *ngIf="showEditBox">
+    <div style="display: flex; justify-content: space-around;margin:10px;" *ngIf="showEditBox">
+        <ion-icon slot="end" name="pricetags-outline" size="medium" (click)="chooseTags()"></ion-icon>
+        <ion-icon slot="end" name="bar-chart-outline" size="medium" (click)="chooseStock()"></ion-icon>
+        <ion-icon slot="end" name="at-outline" size="medium" (click)="chooseAtUser()"></ion-icon>
+        <ion-icon id="faceIcon" slot="end" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
+    </div>
+    <!--<ion-item *ngIf="showEditBox">
         <ion-icon slot="end" name="at-outline" size="medium" (click)="chooseAtUser()"></ion-icon>
         <ion-icon slot="end" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
-    </ion-item>
+    </ion-item>-->
     <app-share-face *ngIf="showEditBox&&showFacePanel" (select)="faceSelection($event)"></app-share-face>
 </ion-footer>

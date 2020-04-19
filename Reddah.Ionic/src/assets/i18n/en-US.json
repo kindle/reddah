@@ -95,7 +95,8 @@
         "Mystic":"AI Cat",
         "Platform":"Open Platform",
         "Story":"Short Story",
-        "PressPay":"Long press QR code to reward"
+        "PressPay":"Long press QR code to reward",
+        "Equity":"Equity"
     },
 
     "Search":{

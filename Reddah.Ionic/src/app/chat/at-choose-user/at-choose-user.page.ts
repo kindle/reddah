@@ -35,7 +35,7 @@ export class AtChooseUserPage implements OnInit {
 
     
     
-    async close(targetUsers) {
+    async close(targetUsers=[]) {
         await this.modalController.dismiss(targetUsers);
     }
 

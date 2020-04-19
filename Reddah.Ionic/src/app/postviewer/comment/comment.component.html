@@ -33,10 +33,20 @@
                             [{{reddah.instant('Comment.Delete') }}]
                         </ion-note>
 
-                        <div *ngIf="normal" style="display: flex;align-items: center;" (click)="likeComment(comment)">
-                            <ion-icon name="heart-outline" *ngIf="!comment.like" color="dark" size="small"></ion-icon>
-                            <ion-icon name="heart-circle-outline" *ngIf="comment.like" color="danger" size="small"></ion-icon>
-                            <span color="dark" style="margin-left:2px;vertical-align: top;" *ngIf="comment.Up>0">{{comment.Up}}</span>
+                        <div *ngIf="normal" style="display: flex;align-items: center;">
+                            <ion-icon (click)="addNewComment(comment.ArticleId, comment.Id)" color="dark" 
+                                name="chatbox-ellipses-outline"></ion-icon>
+                            <ion-text color="dark" (click)="addNewComment(comment.ArticleId, comment.Id)" class="action-count">
+                                {{reddah.shortCount(comment.Count)}}
+                            </ion-text>
+
+                            <ion-icon (click)="likeComment(comment)" name="heart-outline" *ngIf="!comment.like" 
+                                color="dark" size="small" class="action-margin"></ion-icon>
+                            <ion-icon (click)="likeComment(comment)" name="heart-circle-outline" *ngIf="comment.like" 
+                                color="danger" size="small" class="action-margin"></ion-icon>
+                            <ion-text color="dark" (click)="likeComment(comment)" class="action-count" *ngIf="comment.Up>0">
+                                {{reddah.shortCount(comment.Up)}}
+                            </ion-text>
                         </div>
                     </div>
                     
