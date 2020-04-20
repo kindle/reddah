@@ -252,7 +252,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <EntityDeploy Include="ReddahModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ReddahModel.Designer.cs</LastGenOutput>
@@ -260,6 +259,9 @@
     <Content Include="ReddahModel.edmx.diagram">
       <DependentUpon>ReddahModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\reddah-cu - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\reddah-ea - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\whois.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

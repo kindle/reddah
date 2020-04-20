@@ -120,6 +120,28 @@ namespace Reddah.Web.Login.Utilities
             return GetRelativeUrl(matchString);
         }
 
+        public static string[] GetFirstImageSrc(string content, int n)
+        {
+            List<string> list = new List<string>();
+            var matches = Regex.Matches(System.Web.HttpUtility.HtmlDecode(content), "<img.+?src=[\"'](.+?)[\"'].*?>", RegexOptions.IgnoreCase);
+            var count = 0;
+            foreach (Match m in matches)
+            {
+                if (count < n)
+                {
+                    if (!string.IsNullOrWhiteSpace(m.Groups[1].Value))
+                    {
+                        list.Add(GetRelativeUrl(m.Groups[1].Value));
+                        count++;
+                    }
+                }
+                else
+                    break;
+            }
+
+            return list.ToArray<string>();
+        }
+
         public static void Email(
             MailAddress from,
             MailAddress to,
