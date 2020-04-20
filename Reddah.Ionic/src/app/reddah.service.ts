@@ -21,7 +21,6 @@ import { Device } from '@ionic-native/device/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { DatePipe } from '@angular/common';
 import { Md5 } from 'ts-md5/dist/md5';
-import { AddTimelinePage } from './mytimeline/add-timeline/add-timeline.page';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { createAnimation } from '@ionic/core'
 
@@ -29,6 +28,13 @@ import { createAnimation } from '@ionic/core'
     providedIn: 'root'
 })
 export class ReddahService {
+
+    //whois
+    //domain = `${this.domain}';
+    
+    //azaure
+    //domain = 'https://reddah-ea.azurewebsites.net';
+    domain = 'https://reddah-cu.azurewebsites.net';
 
     constructor(
         private http: HttpClient,
@@ -122,7 +128,7 @@ export class ReddahService {
     }    
 
     //******************************** */
-    private registersubUrl = 'https://login.reddah.com/api/pub/registersub'; 
+    private registersubUrl = `${this.domain}/api/pub/registersub`; 
     
     registerSub(formData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -133,7 +139,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private registerUrl = 'https://login.reddah.com/api/auth/register'; 
+    private registerUrl = `${this.domain}/api/auth/register`; 
     
     register(formData): Observable<any> {
         return this.http.post<any>(this.registerUrl, formData)
@@ -143,7 +149,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private checkUserNameUrl = 'https://login.reddah.com/api/auth/checkusername'; 
+    private checkUserNameUrl = `${this.domain}/api/auth/checkusername`; 
     
     checkUserName(formData): Observable<any> {
         return this.http.post<any>(this.checkUserNameUrl, formData)
@@ -153,7 +159,8 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private loginUrl = 'https://login.reddah.com/api/auth/sign'; 
+    
+    private loginUrl = `${this.domain}/api/auth/sign`; 
 
     login(userName: string, password: string): Observable<any> {
 
@@ -164,7 +171,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private verifyEmailUrl = 'https://login.reddah.com/api/auth/verifyemail'; 
+    private verifyEmailUrl = `${this.domain}/api/auth/verifyemail`; 
 
     sendVerfiyEmail(formData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -176,7 +183,7 @@ export class ReddahService {
     }
 
     //******************************** */
-    private getCommentsUrl = 'https://login.reddah.com/api/article/getcomments'; 
+    private getCommentsUrl = `${this.domain}/api/article/getcomments`; 
 
     getComments(articleId: number): Observable<any> {
 
@@ -187,7 +194,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private addCommentsUrl = 'https://login.reddah.com/api/article/addcomments'; 
+    private addCommentsUrl = `${this.domain}/api/article/addcomments`; 
 
     addComments(articleId: number, parentId: number, content: string, uid : string): Observable<any> {
         return this.http.post<any>(this.addCommentsUrl, new NewCommentModel(this.getCurrentJwt(), articleId, parentId, content, uid))
@@ -197,7 +204,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private shareToFriendUrl = 'https://login.reddah.com/api/chat/sharetofriend'; 
+    private shareToFriendUrl = `${this.domain}/api/chat/sharetofriend`; 
 
     shareToFriend(formData: FormData): Observable<any> {
 
@@ -210,7 +217,7 @@ export class ReddahService {
       );
     }
     //******************************** */
-    private addPhotoCommentsUrl = 'https://login.reddah.com/api/chat/addphotocomments'; 
+    private addPhotoCommentsUrl = `${this.domain}/api/chat/addphotocomments`; 
     addPhotoComments(formData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
         return this.http.post<any>(this.addPhotoCommentsUrl, formData)
@@ -219,7 +226,7 @@ export class ReddahService {
             catchError(this.handleError('add photo comment', []))
         );
     }
-    private commentLikeUrl = 'https://login.reddah.com/api/article/commentlike'; 
+    private commentLikeUrl = `${this.domain}/api/article/commentlike`; 
 
     commentLike(formData: FormData): Observable<any> {
 
@@ -231,7 +238,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private articleLikeUrl = 'https://login.reddah.com/api/article/articlelike'; 
+    private articleLikeUrl = `${this.domain}/api/article/articlelike`; 
 
     articleLike(formData: FormData): Observable<any> {
 
@@ -243,7 +250,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private articleForwardUrl = 'https://login.reddah.com/api/article/articleforward'; 
+    private articleForwardUrl = `${this.domain}/api/article/articleforward`; 
 
     articleForward(formData: FormData): Observable<any> {
 
@@ -255,7 +262,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private addTimelineUrl = 'https://login.reddah.com/api/article/addtimeline'; 
+    private addTimelineUrl = `${this.domain}/api/article/addtimeline`; 
 
     addTimeline(formData: FormData): Observable<any> {
 
@@ -274,7 +281,7 @@ export class ReddahService {
       );
     }
     //******************************** */
-    private getMyTimelineUrl = 'https://login.reddah.com/api/article/getmytimeline'; 
+    private getMyTimelineUrl = `${this.domain}/api/article/getmytimeline`; 
 
     getMyTimeline(formData: FormData): Observable<any> {
 
@@ -286,7 +293,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private getTimelineUrl = 'https://login.reddah.com/api/article/gettimeline'; 
+    private getTimelineUrl = `${this.domain}/api/article/gettimeline`; 
 
     getTimeline(formData: FormData): Observable<any> {
 
@@ -298,7 +305,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private getUsedMiniUrl = 'https://login.reddah.com/api/pub/getusedmini'; 
+    private getUsedMiniUrl = `${this.domain}/api/pub/getusedmini`; 
 
     getUsedMini(formData: FormData): Observable<any> {
 
@@ -310,7 +317,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private nplChatUrl = 'https://login.reddah.com/api/ai/nlp'; 
+    private nplChatUrl = `${this.domain}/api/ai/nlp`; 
 
     getNlpChat(formData: FormData): Observable<any> {
 
@@ -326,7 +333,7 @@ export class ReddahService {
     qq_app_id=2127183732;
     qq_app_key="493J0jD8PPeNUHNz";
     //******************************** */
-    private qqMuskUrl = 'https://login.reddah.com/api/ai/qqmusk'; 
+    private qqMuskUrl = `${this.domain}/api/ai/qqmusk`; 
 
     async getQqMusk(params, appKey): Promise<any> {
         let muskQqChatUrl = "https://api.ai.qq.com/fcgi-bin/ptu/ptu_facedecoration";
@@ -359,7 +366,7 @@ export class ReddahService {
 
     }
     //******************************** */
-    private qqReadUrl = 'https://login.reddah.com/api/ai/qqread'; 
+    private qqReadUrl = `${this.domain}/api/ai/qqread`; 
 
     async getQqRead(params, appKey): Promise<any> {
         let readQqChatUrl = "https://api.ai.qq.com/fcgi-bin/nlp/nlp_imagetranslate";
@@ -391,7 +398,7 @@ export class ReddahService {
 
     }
 
-    private nplTranslateUrl = 'https://login.reddah.com/api/ai/translate'; 
+    private nplTranslateUrl = `${this.domain}/api/ai/translate`; 
     getQqTextTranslate(params, appKey): Observable<any> {
 
         let nlpQqTextUrl = "https://api.ai.qq.com/fcgi-bin/nlp/nlp_texttranslate";
@@ -419,7 +426,7 @@ export class ReddahService {
         );
     }
 
-    private aaiAudioPlayUrl = 'https://login.reddah.com/api/ai/audio'; 
+    private aaiAudioPlayUrl = `${this.domain}/api/ai/audio`; 
     getQqAudioPlay(params, appKey): Observable<any> {
 
         let aaiQqAudioUrl = "https://api.ai.qq.com/fcgi-bin/aai/aai_tts";
@@ -603,7 +610,7 @@ export class ReddahService {
         return sorted;
     }
     //******************************** */
-    private getMaterialUrl = 'https://login.reddah.com/api/pub/getmaterial'; 
+    private getMaterialUrl = `${this.domain}/api/pub/getmaterial`; 
 
     getMyMaterial(formData: FormData): Observable<any> {
 
@@ -615,7 +622,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private getReportUrl = 'https://login.reddah.com/api/admin/getreport'; 
+    private getReportUrl = `${this.domain}/api/admin/getreport`; 
 
     getReport(formData: FormData): Observable<any> {
 
@@ -627,7 +634,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private getMyReportUrl = 'https://login.reddah.com/api/admin/getmyreport'; 
+    private getMyReportUrl = `${this.domain}/api/admin/getmyreport`; 
 
     getMyReport(formData: FormData): Observable<any> {
 
@@ -639,7 +646,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private getUserInfoUrl = 'https://login.reddah.com/api/article/getuser'; 
+    private getUserInfoUrl = `${this.domain}/api/article/getuser`; 
 
     getUserInfo(formData: FormData): Observable<any> {
 
@@ -651,7 +658,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private timelineLikeUrl = 'https://login.reddah.com/api/article/like'; 
+    private timelineLikeUrl = `${this.domain}/api/article/like`; 
 
     like(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -662,7 +669,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private searchUserUrl = 'https://login.reddah.com/api/article/searchuser'; 
+    private searchUserUrl = `${this.domain}/api/article/searchuser`; 
 
     searchUser(formData: FormData): Observable<any> {
 
@@ -674,7 +681,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private addFriendUrl = 'https://login.reddah.com/api/article/addfriend'; 
+    private addFriendUrl = `${this.domain}/api/article/addfriend`; 
 
     addFriend(formData: FormData): Observable<any> {
 
@@ -686,7 +693,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private changeNoteNameUrl = 'https://login.reddah.com/api/article/changenotename'; 
+    private changeNoteNameUrl = `${this.domain}/api/article/changenotename`; 
 
     changeNoteName(formData: FormData): Observable<any> {
 
@@ -698,7 +705,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private changeSignatureUrl = 'https://login.reddah.com/api/article/changesignature'; 
+    private changeSignatureUrl = `${this.domain}/api/article/changesignature`; 
 
     changeSignature(formData: FormData): Observable<any> {
 
@@ -710,7 +717,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private changePrivacyUrl = 'https://login.reddah.com/api/article/changeprivacy'; 
+    private changePrivacyUrl = `${this.domain}/api/article/changeprivacy`; 
 
     changePrivacy(formData: FormData): Observable<any> {
 
@@ -722,7 +729,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private changeLocationUrl = 'https://login.reddah.com/api/article/changelocation'; 
+    private changeLocationUrl = `${this.domain}/api/article/changelocation`; 
 
     changeLocation(formData: FormData): Observable<any> {
 
@@ -754,7 +761,7 @@ export class ReddahService {
 
     //******************************** */
     //type 0:girl, 1:boy
-    private getusersbylocation = 'https://login.reddah.com/api/article/getusersbylocation'; 
+    private getusersbylocation = `${this.domain}/api/article/getusersbylocation`; 
     getUsersByLocation(type, latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, min=0){
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
@@ -775,7 +782,7 @@ export class ReddahService {
     }
     //******************************** */
     //type 0:girl, 1:boy
-    private getstorybylocation = 'https://login.reddah.com/api/article/getstorybylocation'; 
+    private getstorybylocation = `${this.domain}/api/article/getstorybylocation`; 
     getStoryByLocation(type, latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, min=0){
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
@@ -795,19 +802,19 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private changeNickNameUrl = 'https://login.reddah.com/api/article/changenickname'; 
+    private changeNickNameUrl = `${this.domain}/api/article/changenickname`; 
 
     changeNickName(formData: FormData): Observable<any> {
         return this.service(formData, this.changeNickNameUrl, 'change nick name');
     }
     //******************************** */
-    private changeSexUrl = 'https://login.reddah.com/api/article/changesex'; 
+    private changeSexUrl = `${this.domain}/api/article/changesex`; 
 
     changeSex(formData: FormData): Observable<any> {
         return this.service(formData, this.changeSexUrl, 'change sex');
     }
     //******************************** */
-    private changePasswordUrl = 'https://login.reddah.com/api/auth/changepassword'; 
+    private changePasswordUrl = `${this.domain}/api/auth/changepassword`; 
 
     changePassword(formData: FormData): Observable<any> {
 
@@ -824,7 +831,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private changeGroupChatTitleUrl = 'https://login.reddah.com/api/chat/changegroupchattitle'; 
+    private changeGroupChatTitleUrl = `${this.domain}/api/chat/changegroupchattitle`; 
 
     changeGroupChatTitle(formData: FormData): Observable<any> {
 
@@ -836,7 +843,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private removeFriendUrl = 'https://login.reddah.com/api/article/removefriend'; 
+    private removeFriendUrl = `${this.domain}/api/article/removefriend`; 
 
     removeFriend(formData: FormData): Observable<any> {
 
@@ -848,7 +855,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private approveFriendUrl = 'https://login.reddah.com/api/article/approvefriend'; 
+    private approveFriendUrl = `${this.domain}/api/article/approvefriend`; 
 
     approveFriend(formData: FormData): Observable<any> {
 
@@ -860,7 +867,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private friendRequestsUrl = 'https://login.reddah.com/api/article/friendrequests'; 
+    private friendRequestsUrl = `${this.domain}/api/article/friendrequests`; 
 
     friendRequests(formData: FormData): Observable<any> {
 
@@ -872,7 +879,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private friendsUrl = 'https://login.reddah.com/api/article/friends'; 
+    private friendsUrl = `${this.domain}/api/article/friends`; 
 
     getFriends(): Observable<any> {
 
@@ -907,7 +914,7 @@ export class ReddahService {
         });
     }
 
-    private focusPubsUrl = 'https://login.reddah.com/api/pub/focuspubs'; 
+    private focusPubsUrl = `${this.domain}/api/pub/focuspubs`; 
 
     getFocusPubs(): Observable<any> {
 
@@ -920,7 +927,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private subsUrl = 'https://login.reddah.com/api/pub/subs'; 
+    private subsUrl = `${this.domain}/api/pub/subs`; 
 
     getSubs(): Observable<any> {
         let formData = new FormData();
@@ -932,7 +939,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private updateUserPhotoUrl = 'https://login.reddah.com/api/article/updateuserphoto'; 
+    private updateUserPhotoUrl = `${this.domain}/api/article/updateuserphoto`; 
 
     updateUserPhoto(formData: FormData): Observable<any> {
 
@@ -950,31 +957,31 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private bookmarkUrl = 'https://login.reddah.com/api/article/bookmark'; 
+    private bookmarkUrl = `${this.domain}/api/article/bookmark`; 
 
     bookmark(formData: FormData): Observable<any> {        
         return this.service(formData, this.bookmarkUrl, "set bookmark");
     }
     //******************************** */
-    private deleteBookmarkUrl = 'https://login.reddah.com/api/article/deletebookmark'; 
+    private deleteBookmarkUrl = `${this.domain}/api/article/deletebookmark`; 
 
     deleteBookmark(formData: FormData): Observable<any> {
         return this.service(formData, this.deleteBookmarkUrl, "delete bookmark");
     }
     //******************************** */
-    private deleteArticleUrl = 'https://login.reddah.com/api/article/deletearticle'; 
+    private deleteArticleUrl = `${this.domain}/api/article/deletearticle`; 
 
     deleteArticle(formData: FormData): Observable<any> {
         return this.service(formData, this.deleteArticleUrl, "delete article");
     }
     //******************************** */
-    private deleteCommentUrl = 'https://login.reddah.com/api/article/deletecomment'; 
+    private deleteCommentUrl = `${this.domain}/api/article/deletecomment`; 
 
     deleteComment(formData: FormData): Observable<any> {
         return this.service(formData, this.deleteCommentUrl, "delete comment");
     }
     //******************************** */
-    private addPubArticleUrl = 'https://login.reddah.com/api/pub/addpubarticle'; 
+    private addPubArticleUrl = `${this.domain}/api/pub/addpubarticle`; 
 
     addPubArticle(formData: FormData): Observable<any> {
 
@@ -987,7 +994,7 @@ export class ReddahService {
       );
     }
     //******************************** */
-    private addPubMiniUrl = 'https://login.reddah.com/api/pub/addpubmini'; 
+    private addPubMiniUrl = `${this.domain}/api/pub/addpubmini`; 
 
     addPubMini(formData: FormData): Observable<any> {
 
@@ -1000,7 +1007,7 @@ export class ReddahService {
       );
     }
     //******************************** */
-    private publishArticleUrl = 'https://login.reddah.com/api/pub/publisharticle'; 
+    private publishArticleUrl = `${this.domain}/api/pub/publisharticle`; 
 
     publishArticle(formData: FormData): Observable<any> {
 
@@ -1013,7 +1020,7 @@ export class ReddahService {
       );
     }
     //******************************** */
-    private publishMiniUrl = 'https://login.reddah.com/api/pub/publishprogram'; 
+    private publishMiniUrl = `${this.domain}/api/pub/publishprogram`; 
 
     publishMini(formData: FormData): Observable<any> {
 
@@ -1033,7 +1040,7 @@ export class ReddahService {
 
 
     //******************************** */
-    private getChatUrl = 'https://login.reddah.com/api/chat/getchat'; 
+    private getChatUrl = `${this.domain}/api/chat/getchat`; 
 
     getChat(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1044,7 +1051,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private createGroupChatUrl = 'https://login.reddah.com/api/chat/creategroupchat'; 
+    private createGroupChatUrl = `${this.domain}/api/chat/creategroupchat`; 
 
     createGroupChat(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1060,7 +1067,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private getGroupChatUrl = 'https://login.reddah.com/api/chat/getgroupchat'; 
+    private getGroupChatUrl = `${this.domain}/api/chat/getgroupchat`; 
 
     getGroupChat(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1071,7 +1078,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private getGroupListUrl = 'https://login.reddah.com/api/chat/getgrouplist'; 
+    private getGroupListUrl = `${this.domain}/api/chat/getgrouplist`; 
 
     getGroupList(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1082,7 +1089,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private deleteGroupChatUrl = 'https://login.reddah.com/api/chat/deletegroupchat'; 
+    private deleteGroupChatUrl = `${this.domain}/api/chat/deletegroupchat`; 
 
     deleteGroupChat(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1093,7 +1100,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private addToGroupChatUrl = 'https://login.reddah.com/api/chat/addtogroupchat'; 
+    private addToGroupChatUrl = `${this.domain}/api/chat/addtogroupchat`; 
 
     addToGroupChat(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1107,7 +1114,7 @@ export class ReddahService {
     }
     //******************************** */
 
-    private addAudioChatUrl = 'https://login.reddah.com/api/chat/addaudiochat'; 
+    private addAudioChatUrl = `${this.domain}/api/chat/addaudiochat`; 
 
     addAudioChat(formData: FormData): Observable<any> {
 
@@ -1120,7 +1127,7 @@ export class ReddahService {
       );
     }
     //******************************** */
-    private messageunreadUrl = 'https://login.reddah.com/api/article/messageunread'; 
+    private messageunreadUrl = `${this.domain}/api/article/messageunread`; 
 
     getMessageUnread(): Observable<any> {
         let formData = new FormData();
@@ -1132,7 +1139,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private messagesetreadUrl = 'https://login.reddah.com/api/article/messagesetread'; 
+    private messagesetreadUrl = `${this.domain}/api/article/messagesetread`; 
 
     setMessageRead(): Observable<any> {
         let formData = new FormData();
@@ -1144,7 +1151,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private getarticlebyidUrl = 'https://login.reddah.com/api/article/getarticlebyid'; 
+    private getarticlebyidUrl = `${this.domain}/api/article/getarticlebyid`; 
 
     getArticleById(formData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1155,7 +1162,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private getuserbyidUrl = 'https://login.reddah.com/api/pub/getuserbyid'; 
+    private getuserbyidUrl = `${this.domain}/api/pub/getuserbyid`; 
 
     getUserById(formData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1166,7 +1173,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private getContactMessages = 'https://login.reddah.com/api/chat/getmessages'; 
+    private getContactMessages = `${this.domain}/api/chat/getmessages`; 
 
     getMessages(): Observable<any> {
         let formData = new FormData();
@@ -1201,7 +1208,7 @@ export class ReddahService {
         new Locale("zh-TW", "繁體中文 (zh-TW)"),
     ];
 
-    private publisherUrl = 'https://login.reddah.com/api/pub/getpublisher'; 
+    private publisherUrl = `${this.domain}/api/pub/getpublisher`; 
     
     getPublishers(formData: FormData): Observable<any> {
 
@@ -1213,7 +1220,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private setFocusUrl = 'https://login.reddah.com/api/pub/setfocus'; 
+    private setFocusUrl = `${this.domain}/api/pub/setfocus`; 
 
     setFocus(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1224,7 +1231,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private unFocusUrl = 'https://login.reddah.com/api/pub/unfocus'; 
+    private unFocusUrl = `${this.domain}/api/pub/unfocus`; 
 
     unFocus(formData: FormData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1271,7 +1278,7 @@ export class ReddahService {
 
 
     //******************************** */
-    private bookmarksUrl = 'https://login.reddah.com/api/article/getbookmarks'; 
+    private bookmarksUrl = `${this.domain}/api/article/getbookmarks`; 
     
     getBookmarks(formData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1282,7 +1289,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private pointsUrl = 'https://login.reddah.com/api/point/getpointlist'; 
+    private pointsUrl = `${this.domain}/api/point/getpointlist`; 
     
     getPoints(formData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1292,7 +1299,7 @@ export class ReddahService {
             catchError(this.handleError('getReddahPoints', []))
         );
     }
-    private pointPunchClockUrl = 'https://login.reddah.com/api/point/punchclock'; 
+    private pointPunchClockUrl = `${this.domain}/api/point/punchclock`; 
     punchClock(): Observable<any> {
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
@@ -1304,7 +1311,7 @@ export class ReddahService {
         );
     }
 
-    private getPointLoginUrl = 'https://login.reddah.com/api/point/login'; 
+    private getPointLoginUrl = `${this.domain}/api/point/login`; 
     getPointLogin(): Observable<any> {
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
@@ -1316,7 +1323,7 @@ export class ReddahService {
         );
     }
 
-    private renewJwtUrl = 'https://login.reddah.com/api/auth/renewjwt'; 
+    private renewJwtUrl = `${this.domain}/api/auth/renewjwt`; 
     renewJwt(): Observable<any> {
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
@@ -1327,7 +1334,7 @@ export class ReddahService {
         );
     }
 
-    private getPointReadUrl = 'https://login.reddah.com/api/point/read'; 
+    private getPointReadUrl = `${this.domain}/api/point/read`; 
     getPointRead(): Observable<any> {
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
@@ -1339,7 +1346,7 @@ export class ReddahService {
         );
     }
 
-    private getPointMarkUrl = 'https://login.reddah.com/api/point/mark'; 
+    private getPointMarkUrl = `${this.domain}/api/point/mark`; 
     getPointMark(): Observable<any> {
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
@@ -1351,7 +1358,7 @@ export class ReddahService {
         );
     }
 
-    private getPointShareUrl = 'https://login.reddah.com/api/point/share'; 
+    private getPointShareUrl = `${this.domain}/api/point/share`; 
     getPointShare(): Observable<any> {
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
@@ -1363,7 +1370,7 @@ export class ReddahService {
         );
     }
 
-    private getPointCommentUrl = 'https://login.reddah.com/api/point/comment'; 
+    private getPointCommentUrl = `${this.domain}/api/point/comment`; 
     getPointComment(): Observable<any> {
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
@@ -1712,7 +1719,7 @@ export class ReddahService {
         this.localStorageService.store(`Reddah_${key}_Point_${this.getCurrentUser()}`, value);
     }
 
-    private checkOncePointUrl = 'https://login.reddah.com/api/point/checkonce'; 
+    private checkOncePointUrl = `${this.domain}/api/point/checkonce`; 
     checkOncePoint(): Observable<any> {
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
@@ -1725,7 +1732,7 @@ export class ReddahService {
     }
 
     //admin award
-    private reportAwardUrl = 'https://login.reddah.com/api/point/reportaward'; 
+    private reportAwardUrl = `${this.domain}/api/point/reportaward`;
     reportAward(formData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
         return this.http.post<any>(this.reportAwardUrl, formData)
@@ -1736,7 +1743,7 @@ export class ReddahService {
     }
 
     //******************************** */
-    private rankUrl = 'https://login.reddah.com/api/game/globalrank'; 
+    private rankUrl = `${this.domain}/api/game/globalrank`; 
     
     getGlobalRank(formData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1747,7 +1754,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private rankUpdateGameScoreUrl = 'https://login.reddah.com/api/game/updatemyrank'; 
+    private rankUpdateGameScoreUrl = `${this.domain}/api/game/updatemyrank`; 
     
     uploadGameScore(formData): Observable<any> {
         formData.append('jwt', this.getCurrentJwt());
@@ -1836,7 +1843,7 @@ export class ReddahService {
         }
     }
 
-    private updateUserDeviceInfoUrl = 'https://login.reddah.com/api/user/updatedeviceinfo'; 
+    private updateUserDeviceInfoUrl = `${this.domain}/api/user/updatedeviceinfo`; 
     updateDeviceInfo(formData){
         formData.append('jwt', this.getCurrentJwt());
         return this.http.post<any>(this.updateUserDeviceInfoUrl, formData)
@@ -1846,7 +1853,7 @@ export class ReddahService {
         );        
     }
 
-    private getSecurityTokenUrl = 'https://login.reddah.com/api/auth/generatetoken'; 
+    private getSecurityTokenUrl = `${this.domain}/api/auth/generatetoken`; 
     getSecurityToken(formData){
         return this.http.post<any>(this.getSecurityTokenUrl, formData)
         .pipe(
@@ -1854,7 +1861,7 @@ export class ReddahService {
             catchError(this.handleError('get security token', []))
         );        
     }
-    private resetPasswordUrl = 'https://login.reddah.com/api/auth/resetpassword'; 
+    private resetPasswordUrl = `${this.domain}/api/auth/resetpassword`; 
     resetPassword(formData){
         return this.http.post<any>(this.resetPasswordUrl, formData)
         .pipe(
@@ -2935,7 +2942,7 @@ export class ReddahService {
 
     //setUserRecentUseMini
     //******************************** */
-    private setUserRecentUseMini = 'https://login.reddah.com/api/pub/setrecentmini'; 
+    private setUserRecentUseMini = `${this.domain}/api/pub/setrecentmini`; 
 
     setRecentUseMini(miniUserName): Observable<any> {
         let formData = new FormData();
@@ -2950,7 +2957,7 @@ export class ReddahService {
     //******************************** */
 
 
-    private suggestMiniUrl = 'https://login.reddah.com/api/pub/getsuggestmini'; 
+    private suggestMiniUrl = `${this.domain}/api/pub/getsuggestmini`; 
     getSuggestMinis(): Observable<any> {
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());

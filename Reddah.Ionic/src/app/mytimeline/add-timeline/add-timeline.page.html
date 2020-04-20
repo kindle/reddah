@@ -1,7 +1,9 @@
 <ion-item color="light" lines="none">
-    <ion-button color="light" slot="start" (click)="close()">{{ reddah.instant('Confirm.Cancel') }}</ion-button> 
+    <ion-button color="light" slot="start" (click)="close()"
+    style="text-transform: capitalize;">{{ reddah.instant('Confirm.Cancel') }}</ion-button> 
     <ion-label style="text-align: center;">{{ title }}</ion-label>
-    <ion-button color="success" slot="end" (click)="submit()">{{ reddah.instant('Common.Publish') }}</ion-button>
+    <ion-button color="success" slot="end" (click)="submit()"
+    style="text-transform: capitalize;">{{ reddah.instant('Common.Publish') }}</ion-button>
 </ion-item>
 <ion-content (click)="tap($event)">
     <ion-item>

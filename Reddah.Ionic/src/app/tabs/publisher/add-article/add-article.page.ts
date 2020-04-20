@@ -71,7 +71,7 @@ export class AddArticlePage implements OnInit {
         ckfinder: {
 			// eslint-disable-next-line max-len
             //uploadUrl: 'https://cksource.com/weuy2g4ryt278ywiue/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
-            uploadUrl: 'https://login.reddah.com/api/photo/upload?jwt='+this.reddahService.getCurrentJwt()
+            uploadUrl: `${this.reddah.domain}/api/photo/upload?jwt=${this.reddahService.getCurrentJwt()}`
         },
         image: {
             toolbar: [
