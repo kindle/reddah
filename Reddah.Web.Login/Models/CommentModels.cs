@@ -136,4 +136,55 @@ namespace Reddah.Web.Login
         
     }
 
+    public class ArticlePreview
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
+        public string[] ImageUrls { get; set; }
+        public string VideoUrl { get; set; }
+        public string VideoPoster { get; set; }
+        public string ArticleUrl { get; set; }
+        public int Count { get; set; }
+        public int Up { get; set; }
+        public int Down { get; set; }
+        public int Comments { get; set; }
+        public string Abstract { get; set; }
+        public string CreatedOn { get; set; }
+        public DateTime CreatedOnOrg { get; set; }
+        public string UserName { get; set; }
+        public string GroupName { get; set; }
+        public string Content { get; set; }
+        public string Locale { get; set; }
+        public DateTime? LastUpdateOn { get; set; }
+        public Nullable<int> Type { get; set; }
+        public int? Ref { get; set; }
+        public string PubName { get; set; }
+    }
+
+    public class UserProfileModel
+    {
+        public int[] LoadedIds;
+        public string[] DislikeGroups;
+        public string[] DislikeUserNames;
+        public string Locale;
+        public string Token;
+        public string Menu;
+        public string Sub;
+        public string User;
+        public string Keyword;
+        public int Type;//1 timeline, others: article
+        public int Status;//1 published, 0: draft
+
+        //public Dictionary<string, int> habits;
+    }
+
+    public class PubArticle : Article
+    {
+        public PubArticle() { }
+
+        public string PubName;
+    }
+
 }
