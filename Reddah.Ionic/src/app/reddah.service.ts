@@ -30,11 +30,17 @@ import { createAnimation } from '@ionic/core'
 export class ReddahService {
 
     //whois
-    //domain = `${this.domain}';
+    //domain = 'https://loging.reddah.com/';
     
     //azaure
-    //domain = 'https://reddah-ea.azurewebsites.net';
-    domain = 'https://reddah-cu.azurewebsites.net';
+    //domain = 'https://reddah-cu.azurewebsites.net';
+    domain = 'https://reddah-ea.azurewebsites.net';
+    
+    //blob = "https://login.reddah.com/uploadPhoto/";
+    blobPhoto = "https://reddah.blob.core.windows.net/photo/"
+    blobCode = "https://reddah.blob.core.windows.net/code/"
+    blobFile = "https://reddah.blob.core.windows.net/file/"
+
 
     constructor(
         private http: HttpClient,
@@ -262,7 +268,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private addTimelineUrl = `${this.domain}/api/article/addtimeline`; 
+    private addTimelineUrl = `${this.domain}/api/article/azureaddtimeline`; 
 
     addTimeline(formData: FormData): Observable<any> {
 
@@ -1245,7 +1251,8 @@ export class ReddahService {
 
     
 
-    private articlesUrl = 'https://reddah.com/api/webapi/getarticles'; 
+    //private articlesUrl = 'https://reddah.com/api/webapi/getarticles'; 
+    private articlesUrl = `${this.domain}/api/article/getarticles`; 
     private userProfileModel: UserProfileModel;
 
     getArticles(
@@ -2092,7 +2099,14 @@ export class ReddahService {
     //appPhoto = {};
     appCacheToOrg = {};
 
-    appData(cacheKey, userPhotoName="anonymous.png"){    
+    azureFix(cacheKey){
+        return cacheKey.replace("login.reddah.com/uploadPhoto",
+        "reddah.blob.core.windows.net/photo")
+    }
+
+    appData(cacheKey, userPhotoName="anonymous.png"){  
+        cacheKey = this.azureFix(cacheKey);
+        
         let storedKey = cacheKey.replace("///","https://")
         let result = this.localStorageService.retrieve(storedKey);
         
@@ -2184,6 +2198,7 @@ export class ReddahService {
     }
 
     level2Cache(cacheKey){
+        cacheKey = this.azureFix(cacheKey);
         if(cacheKey){
             if(this.platform.is('android')){
                 let storekey = cacheKey.replace("///","https://")

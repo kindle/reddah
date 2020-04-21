@@ -167,7 +167,7 @@ export class MyTimeLinePage implements OnInit {
     }
 
     clearCacheAndReload(event){
-        this.loading = true;
+        //this.loading = true;
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("MyTimeLinePage");
         this.loadedIds = [-1];
