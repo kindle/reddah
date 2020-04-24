@@ -53,7 +53,8 @@ export class ImageViewerComponent implements OnInit {
             let preview = this.localStorageService.retrieve(storedKey);
             let org = this.localStorageService.retrieve(storedKey.replace("_reddah_preview",""));
             
-            this.imgSourceArray[i].webPreviewUrl = this.imgSourceArray[i].webPreviewUrl.replace("///login.reddah.com","https://login.reddah.com")
+            this.imgSourceArray[i].webPreviewUrl = this.imgSourceArray[i].webPreviewUrl
+                .replace("///login.reddah.com","https://login.reddah.com")
             if(org){
                 let localUrl = (<any>window).Ionic.WebView.convertFileSrc(org);
                 this.imgSourceArray[i].localhostImageUrl = localUrl;

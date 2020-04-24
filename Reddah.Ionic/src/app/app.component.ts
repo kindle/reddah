@@ -51,6 +51,7 @@ export class AppComponent {
     }
 
     initializeApp() {
+        this.reddah.initCurrentNetwork();
         this.platform.ready().then(() => {
             this.statusBar.overlaysWebView(false);
             this.statusBar.styleDefault();

@@ -112,6 +112,7 @@
         "Privacy":"Ιδιότητα",
         "General":"Γενικά",
         "About":"Περίπου",
+        "Network":"Δικτύου",
         "Photo":"Φωτογραφία",
         "Card":"Κάρτα",
         "Location":"Τοποθεσία",
@@ -170,6 +171,7 @@
     "Confirm.ByLike":"Όπως",
 
     "Pop":{
+        "SysUpdate":"Ενημέρωση {0} άρθρου",
         "NoRecommend":"Απόκρυψη",
         "Recommend":"Συνιστά",
         "Report":"Έκθεση",

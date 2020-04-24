@@ -112,6 +112,7 @@
         "Privacy":"Конфиденциальность",
         "General":"Общее описание",
         "About":"О",
+        "Network":"Интернет",
         "Photo":"фото",
         "Card":"калория",
         "Location":"место",
@@ -170,6 +171,7 @@
     "Confirm.ByLike":"любить",
 
     "Pop":{
+        "SysUpdate":"Обновление {0} статьи",
         "NoRecommend":"Скрыть",
         "Recommend":"рекомендовать",
         "Report":"Доклад",

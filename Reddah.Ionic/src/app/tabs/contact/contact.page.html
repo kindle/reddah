@@ -30,7 +30,7 @@
         <ion-label style="margin-left:10px;">{{ reddah.instant('Menu.Mystic') }}</ion-label>
     </ion-item>-->
     
-    <ion-list>
+    <ion-list style="padding-top:0 !important;">
         <ion-item-group *ngFor="let group of groupedContacts" lines="none">
             <ion-item-divider color="light" lines="none">{{group.letter.toUpperCase()}}</ion-item-divider>
             <ion-item *ngFor="let contact of group.contacts" (click)="goUser(contact.Watch)">

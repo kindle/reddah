@@ -6,6 +6,8 @@ import { SettingAboutPage } from '../setting-about/setting-about.page';
 import { SettingAccountPage } from '../setting-account/setting-account.page';
 import { SettingGePage } from '../setting-ge/setting-ge.page';
 import { SettingPrivacyPage } from '../setting-privacy/setting-privacy.page';
+import { AddFeedbackPage } from 'src/app/mytimeline/add-feedback/add-feedback.page';
+import { SettingNetworkPage } from '../setting-network/setting-network.page';
 
 @Component({
     selector: 'app-setting-list',
@@ -59,9 +61,10 @@ export class SettingListPage implements OnInit {
         await alert.present().then(()=>{});
     }
 
-    async goAbout(){
+
+    async goAccount(){
         const modal = await this.modalController.create({
-            component: SettingAboutPage,
+            component: SettingAccountPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
         });
@@ -69,9 +72,9 @@ export class SettingListPage implements OnInit {
         await modal.present();
     }
 
-    async goAccount(){
+    async goNetwork(){
         const modal = await this.modalController.create({
-            component: SettingAccountPage,
+            component: SettingNetworkPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
         });
@@ -101,6 +104,28 @@ export class SettingListPage implements OnInit {
         if(data){
             this.modalController.dismiss(data);
         }
+    }
+
+
+    async goAbout(){
+        const modal = await this.modalController.create({
+            component: SettingAboutPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        
+        await modal.present();
+    }
+
+
+    async goFeedback(){
+        const modal = await this.modalController.create({
+            component: AddFeedbackPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+          
+        await modal.present();
     }
 
 }

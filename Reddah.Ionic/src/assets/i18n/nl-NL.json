@@ -112,6 +112,7 @@
         "Privacy":"Privacy",
         "General":"Algemeen",
         "About":"Over",
+        "Network":"Netwerk",
         "Photo":"Foto",
         "Card":"Kaart",
         "Location":"Locatie",
@@ -170,6 +171,7 @@
     "Confirm.ByLike":"Zoals",
 
     "Pop":{
+        "SysUpdate":"{0}-artikel bijwerken",
         "NoRecommend":"Verbergen",
         "Recommend":"Aanbevolen",
         "Report":"Verslag",

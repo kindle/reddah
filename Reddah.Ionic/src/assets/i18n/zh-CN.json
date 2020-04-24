@@ -112,6 +112,7 @@
         "Privacy":"隐私",
         "General":"通用",
         "About":"关于",
+        "Network":"网络",
         "Photo":"头像",
         "Card":"我的名片",
         "Location":"位置",
@@ -173,6 +174,7 @@
     "Confirm.ByLike":"按赞",
 
     "Pop":{
+        "SysUpdate":"更新{0}篇文章",
         "NoRecommend":"减少推荐",
         "Recommend":"推荐",
         "Report":"举报",

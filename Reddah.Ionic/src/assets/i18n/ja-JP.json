@@ -112,6 +112,7 @@
         "Privacy":"プライバシー",
         "General":"一般",
         "About":"アバウト",
+        "Network":"ネットワーク",
         "Photo":"写真",
         "Card":"カード",
         "Location":"ロケーション",
@@ -171,6 +172,7 @@
     "Confirm.ByLike":"ライク",
 
     "Pop":{
+        "SysUpdate":"記事の更新{0}",
         "NoRecommend":"おすすめを減らす",
         "Recommend":"おすすめ",
         "Report":"レポート",

@@ -10,7 +10,7 @@
 </ion-item>
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
     <div style="padding: 10px;">
-        <ion-text color="dark" class="view-article-title" [innerHTML]="reddah.htmlDecode(article.Title) | safe: 'html'"></ion-text>
+        <ion-text color="primary" class="view-article-title" [innerHTML]="reddah.htmlDecode(article.Title) | safe: 'html'"></ion-text>
         
         <ion-item lines="none" style="--padding-start:0;--inner-padding-end:0;">
             <ion-thumbnail style="margin: 10px 10px 10px 0;">
@@ -22,8 +22,6 @@
             <ion-label style="margin-top:0;">
                 <div style="display: flex;padding:0 0 5px 0;">
                     <ion-label class="user-name">{{reddah.getDisplayName(article.UserName, 100)}}</ion-label>
-                    <ion-icon class="cmd-title" name="male-outline" size="small" *ngIf="reddah.appData('usersex_'+article.UserName)==1" color="diamond"></ion-icon>
-                    <ion-icon class="cmd-title" name="female-outline" size="small" *ngIf="reddah.appData('usersex_'+article.UserName)==0" color="danger"></ion-icon>
                 </div>
                 <div style="display: flex;">
                     <ion-text color="dark">{{reddah.getSendTime(article.CreatedOnOrg| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-text>
@@ -59,7 +57,7 @@
         </div>
         <div class="listInfo">
             <ion-chip style="--background:var(--ion-chip-background);" *ngFor="let group of article.GroupName.split(',')">
-                <ion-icon name="chatbubble-ellipses-outline" (click)="goSearch(group)" color="dark" size="small"></ion-icon>
+                <ion-icon name="search-outline" (click)="goSearch(group)" color="dark" size="small"></ion-icon>
                 <ion-label color="dark" (click)="goSearch(group)">
                     {{group.trim()}}
                 </ion-label>
@@ -67,8 +65,8 @@
             </ion-chip>
         </div>
     </div>
-    <app-comment [(normal)]="asNormalUser" *ngIf="!preview" #commentlist count="{{article.Count}}" no-padding [data]="commentsData" [depth]="1" [authoronly]="authoronly" (commentClick)="childCommentClick($event)" 
-        [articleauthor]="article.UserName"></app-comment>
+    <app-comment [(normal)]="asNormalUser" *ngIf="!preview" #commentlist [(article)]="article" 
+     [data]="commentsData" [depth]="1" [authoronly]="authoronly" (commentClick)="childCommentClick($event)"></app-comment>
 </ion-content>
 <app-comment-box *ngIf="!preview" #commentbox [(article)]="article" selectedArticleId="{{article.Id}}" selectedCommentId="-1"
     (reloadComments)="childReloadComments($event)"></app-comment-box>

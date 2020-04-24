@@ -112,6 +112,7 @@
         "Privacy":"Privacidad",
         "General":"Generalidades",
         "About":"Sobre",
+        "Network":"Red",
         "Photo":"Foto",
         "Card":"Tarjeta",
         "Location":"Ubicación",
@@ -170,6 +171,7 @@
     "Confirm.ByLike":"Gustar",
 
     "Pop":{
+        "SysUpdate":"Actualizar {0} artículo",
         "NoRecommend":"Ocultar",
         "Recommend":"Recomendaciones",
         "Report":"Informe",

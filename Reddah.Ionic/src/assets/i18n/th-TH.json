@@ -112,6 +112,7 @@
         "Privacy":"ความดำมืด",
         "General":"ภาพรวม",
         "About":"เกี่ยวกับ",
+        "Network":"อินเทอร์เน็ต",
         "Photo":"รูปถ่าย",
         "Card":"ไพ่",
         "Location":"ตำแหน่งในทีม",
@@ -170,6 +171,7 @@
     "Confirm.ByLike":"ชอบ",
 
     "Pop":{
+        "SysUpdate":"ปรับปรุงบทความ{0}",
         "NoRecommend":"กลบล้าง",
         "Recommend":"แนะนำ",
         "Report":"รายงาน",

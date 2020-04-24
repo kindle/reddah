@@ -112,6 +112,7 @@
         "Privacy":"Privacy",
         "General":"Generale",
         "About":"Informazioni",
+        "Network":"Rete",
         "Photo":"Foto",
         "Card":"Carta",
         "Location":"Posizione",
@@ -170,6 +171,7 @@
     "Confirm.ByLike":"Tipo",
 
     "Pop":{
+        "SysUpdate":"Aggiornare {0} articolo",
         "NoRecommend":"Nascondi",
         "Recommend":"Raccomanda",
         "Report":"Rapporto",

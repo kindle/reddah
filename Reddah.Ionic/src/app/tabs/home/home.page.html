@@ -18,10 +18,7 @@
 </ion-item>
 <ion-content style="z-index: 0;" [scrollEvents]="true" (ionScroll)="onScroll($event)">
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">  
-        <ion-refresher-content  
-        pullingIcon="refresh-outline"  
-        pullingText="{{reddah.instant('Common.MapSlogan')}}"
-        refreshingSpinner="bubbles"></ion-refresher-content>  
+        <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>  
     </ion-refresher>  
     
     <ion-spinner name="bubbles" *ngIf="firstLoad" style="margin:15px 50%;transform: translateX(-50%);"></ion-spinner>
@@ -108,7 +105,7 @@
             </div>
             <div class="listInfo" *ngIf="article.ImageUrls.length==0">
                 <ion-chip style="--background:var(--ion-chip-background);" *ngFor="let group of article.GroupName.split(',').slice(-2)">
-                    <ion-icon name="chatbubble-ellipses-outline" (click)="goSearch(group)" color="dark" size="small"></ion-icon>
+                    <ion-icon name="search-outline" (click)="goSearch(group)" color="dark" size="small"></ion-icon>
                     <ion-label color="dark" (click)="goSearch(group)">
                         {{group.trim()}}
                     </ion-label>

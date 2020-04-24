@@ -7,6 +7,7 @@ import { ReportCommentPopPage } from '../../common/report-comment-pop.page'
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { CacheService } from "ionic-cache";
 import { ArticleTextPopPage } from '../../common/article-text-pop.page'
+import { AddFeedbackPage } from '../add-feedback/add-feedback.page';
 
 @Component({
     selector: 'app-myreport',
@@ -145,54 +146,9 @@ export class MyReportPage implements OnInit {
         setTimeout(() => {
             this.clearCacheAndReload(event);
         }, 2000);
-        this.reportCoverImage.nativeElement.style.transform = "scale(1)";
     }
 
     doPull(event){
-        this.reportCoverImage.nativeElement.style.transform = "scale(1.3)";
-    }
-
-    @ViewChild('headerStart')
-    headerStart:ElementRef;
-    @ViewChild('headerOnScroll')
-    headerOnScroll:ElementRef;
-    @ViewChild('timelineCover')
-    timelineCover:ElementRef;
-    @ViewChild('reportCoverImage')
-    reportCoverImage:ElementRef;
-    
-
-    onScroll($event) {
-
-        this.showAddComment = false;
-        
-        let offset = this.timelineCover.nativeElement.scrollHeight - $event.detail.scrollTop;
-        
-        if(offset>=250)
-        {
-            this.renderer.setStyle(this.headerStart.nativeElement, 'visibility', 'visible');
-            this.renderer.setStyle(this.headerStart.nativeElement, 'opacity', '8');
-            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
-            
-        }
-        else if(offset<250 && offset>=150)
-        {
-            let opacity = (offset-150)/100;
-            if(opacity<0) opacity=0;
-            this.renderer.setStyle(this.headerStart.nativeElement, 'opacity', opacity + '');
-            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
-        }
-        else if(offset<150 && offset>=0){
-            let opacity = (1-(offset-0)/100);
-            if(opacity>1) opacity=1;
-            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'opacity', opacity + '');
-        }
-        else
-        {
-            this.renderer.setStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
-            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
-            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'opacity', '8');
-        }
     }
 
     async presentPopover(event: Event, id: any, groupNames: string) {
@@ -431,5 +387,15 @@ export class MyReportPage implements OnInit {
         });
 
         await alert.present().then(()=>{});
+    }
+
+    async addFeedback(){
+        const modal = await this.modalController.create({
+            component: AddFeedbackPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+          
+        await modal.present();
     }
 }

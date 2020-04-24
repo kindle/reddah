@@ -4,8 +4,8 @@
 /** Ionic CSS Variables **/
 :root {
     
-  /** primary **/
-  --ion-color-primary: #107c10;
+  /** primary cce8cf**/
+  --ion-color-primary: #075b07;
   --ion-color-primary-rgb: 16,124,16;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255,255,255;
@@ -124,6 +124,14 @@
           max-width: auto;
       }
   }
+
+  .toast-update{
+    /*ionic bug, default 700px*/
+    .toast-wrapper  {
+        max-width: auto;
+        margin-top: 50px;
+    }
+}
 /*
   .refresher-pulling{
     display:flex;

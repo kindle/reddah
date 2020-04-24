@@ -100,8 +100,8 @@ export class MiniViewerComponent implements OnInit {
     loaded = false;
 
     ionViewDidEnter(){
-        this.addScriptByUrl(`https://login.reddah.com/uploadphoto/${this.guid}.js?version=${this.version}`);
-        this.addCssByUrl(`https://login.reddah.com/uploadphoto/${this.guid}.css?version=${this.version}`);
+        this.addScriptByUrl(`${this.reddah.storageCode}${this.guid}.js?version=${this.version}`);
+        this.addCssByUrl(`${this.reddah.storageCode}${this.guid}.css?version=${this.version}`);
     }
     
     initApi(){

@@ -174,27 +174,34 @@ export class HomePage implements OnInit {
             },1000)
         }
         else{
-            let count = 10;
-            for(let i=1;i<=count;i++){
-                let article = this.reddah.ArticleCacheQueue.pop();
-                if(article!=null){
-                    if(unshift){
-                        this.reddah.articles.unshift(article);
-                        this.reddah.loadedIds.unshift(article.Id);  
-                    }
-                    else{
-                        this.reddah.articles.push(article);
-                        this.reddah.loadedIds.push(article.Id);  
+            setTimeout(()=>{  
+                let count = 10;
+                for(let i=1;i<=count;i++){
+                    let article = this.reddah.ArticleCacheQueue.pop();
+                    if(article!=null){
+                        if(unshift){
+                            this.reddah.articles.unshift(article);
+                            this.reddah.loadedIds.unshift(article.Id);  
+                        }
+                        else{
+                            this.reddah.articles.push(article);
+                            this.reddah.loadedIds.push(article.Id);  
+                        }
                     }
                 }
-            }
-            this.localStorageService.store("reddah_cache_queue_"+this.userName, JSON.stringify(this.reddah.ArticleCacheQueue._store));
-            this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
+                this.localStorageService.store("reddah_cache_queue_"+this.userName, JSON.stringify(this.reddah.ArticleCacheQueue._store));
+                this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
 
-            if(event){
-                event.target.complete();
-            }
-            this.reddah.fillCacheArticles();
+                if(event){
+                    event.target.complete();
+                    this.reddah.toast(
+                        `${this.reddah.instant('Pop.SysUpdate').replace("{0}",count)}`, 
+                        "primary",
+                        "toast-update"
+                        )
+                }
+                this.reddah.fillCacheArticles();
+            },1000)
             
         }
     }    

@@ -29,17 +29,72 @@ import { createAnimation } from '@ionic/core'
 })
 export class ReddahService {
 
-    //whois
-    //domain = 'https://loging.reddah.com/';
-    
-    //azaure
-    //domain = 'https://reddah-cu.azurewebsites.net';
+    //default azure
+    cloud = "azure";
     domain = 'https://reddah-ea.azurewebsites.net';
-    
-    //blob = "https://login.reddah.com/uploadPhoto/";
-    blobPhoto = "https://reddah.blob.core.windows.net/photo/"
-    blobCode = "https://reddah.blob.core.windows.net/code/"
-    blobFile = "https://reddah.blob.core.windows.net/file/"
+    storagePhoto = "https://reddah.blob.core.windows.net/photo/"
+    storageCode = "https://reddah.blob.core.windows.net/code/"
+    storageFile = "https://reddah.blob.core.windows.net/file/"
+
+    initCurrentNetwork(){
+        this.setCurrentNetwork(this.getCurrentNetwork());
+    }
+
+    setCurrentNetwork(n){
+        this.localStorageService.store("Reddah_Network", n);
+        if(n==1)//data center
+        {
+            this.cloud = "";
+            /****DataCenter:Whois****/
+            //default data center: whois
+            this.domain = 'https://loging.reddah.com/';
+            this.storagePhoto = "https://login.reddah.com/uploadPhoto/";
+            //mini js,css,html
+            this.storageCode = "https://login.reddah.com/uploadPhoto/";
+            //vidio,audio,pdf,transfer temp files
+            this.storageFile = "https://login.reddah.com/uploadPhoto/";
+        }
+        else if(n==2)//azure
+        {
+            this.cloud = "azure";
+            /****Azure****/
+            //domain = 'https://reddah-cu.azurewebsites.net';
+            this.domain = 'https://reddah-ea.azurewebsites.net';
+            this.storagePhoto = "https://reddah.blob.core.windows.net/photo/"
+            this.storageCode = "https://reddah.blob.core.windows.net/code/"
+            this.storageFile = "https://reddah.blob.core.windows.net/file/"
+        }
+        else if(n==3)//aws
+        {
+            this.cloud = "aws";
+            //todo
+        }
+    }
+
+    getCurrentNetwork(){
+        let network = this.localStorageService.retrieve("Reddah_Network");
+        if(network==undefined||network==null)
+            network = 1;
+        return network;
+    }
+
+    cloudFix(cacheKey){
+        if(this.cloud=="azure"){
+            cacheKey = cacheKey
+                .replace("login.reddah.com/uploadPhoto",
+                "reddah.blob.core.windows.net/photo")
+                .replace("reddah.com/uploadPhoto",
+                "reddah.blob.core.windows.net/photo")
+        }else{
+            
+        }
+
+        return cacheKey
+        .replace("///","https://")
+        .replace("http://","https://")
+    }
+
+
 
 
     constructor(
@@ -61,7 +116,7 @@ export class ReddahService {
         private ngZone: NgZone,
         
     ) { 
-
+        
     }
 
     articles = [];
@@ -268,7 +323,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private addTimelineUrl = `${this.domain}/api/article/azureaddtimeline`; 
+    private addTimelineUrl = `${this.domain}/api/article/addtimeline${this.cloud}`; 
 
     addTimeline(formData: FormData): Observable<any> {
 
@@ -1120,7 +1175,7 @@ export class ReddahService {
     }
     //******************************** */
 
-    private addAudioChatUrl = `${this.domain}/api/chat/addaudiochat`; 
+    private addAudioChatUrl = `${this.domain}/api/chat/addaudiochat${this.cloud}`; 
 
     addAudioChat(formData: FormData): Observable<any> {
 
@@ -1542,7 +1597,7 @@ export class ReddahService {
             return this.instant("Point.Level_Gold");
         }
         else if(point<1000){
-            return this.instant("Point.Level_Illiterate");
+            return this.instant("Point.Level_Platinum");
         }
         else if(point<2000){
             return this.instant("Point.Level_Diamond");
@@ -2099,14 +2154,7 @@ export class ReddahService {
     //appPhoto = {};
     appCacheToOrg = {};
 
-    azureFix(cacheKey){
-        return cacheKey.replace("login.reddah.com/uploadPhoto",
-        "reddah.blob.core.windows.net/photo")
-    }
-
     appData(cacheKey, userPhotoName="anonymous.png"){  
-        cacheKey = this.azureFix(cacheKey);
-        
         let storedKey = cacheKey.replace("///","https://")
         let result = this.localStorageService.retrieve(storedKey);
         
@@ -2122,7 +2170,7 @@ export class ReddahService {
             else{
                 let url = this.localStorageService.retrieve(cacheKey+"_url");
                 if(url)
-                    return url
+                    return this.cloudFix(url);
                 return "assets/icon/"+userPhotoName;
             }
         }
@@ -2136,7 +2184,7 @@ export class ReddahService {
             else{
                 let url = this.localStorageService.retrieve(cacheKey+"_url");
                 if(url)
-                    return url
+                    return this.cloudFix(url);
                 return "assets/icon/timg.jpg";
             }
         }
@@ -2153,7 +2201,7 @@ export class ReddahService {
 
         let url = this.localStorageService.retrieve(cacheKey+"_url"); 
         if(url)
-            return url.replace("///","https://");
+            return this.cloudFix(url);
         return "assets/icon/anonymous.png";
     }
 
@@ -2164,7 +2212,7 @@ export class ReddahService {
         }
 
         if(url)
-            return url.replace("///","https://");
+            return this.cloudFix(url);
         return "assets/icon/anonymous.png";
     }
 
@@ -2198,7 +2246,7 @@ export class ReddahService {
     }
 
     level2Cache(cacheKey){
-        cacheKey = this.azureFix(cacheKey);
+        cacheKey = this.cloudFix(cacheKey);
         if(cacheKey){
             if(this.platform.is('android')){
                 let storekey = cacheKey.replace("///","https://")
@@ -2214,11 +2262,11 @@ export class ReddahService {
                 }
                 else
                 {
-                    return cacheKey.replace("///","https://");
+                    return cacheKey;
                 }
             }
             else{
-                return cacheKey.replace("///","https://");
+                return cacheKey;
             }
         }
         else{
@@ -2828,7 +2876,7 @@ export class ReddahService {
     .set(9,'20px')
     .set(10,'21px');
 
-    async toast(message: string, color="dark") {
+    async toast(message: string, color="dark", style="toast-style") {
         const toast = await this.toastController.create({
             message: message,
             //showCloseButton: true,
@@ -2836,8 +2884,20 @@ export class ReddahService {
             //closeButtonText: this.translate.instant("Button.Close"),
             duration: 1000,
             color: color,
-            cssClass: "toast-style",
-            //enterAnimation: this.enterAnimation,
+            cssClass: style,
+        });
+        toast.present();
+    }
+
+    async toastWithAnimation(message: string, color="dark", style="toast-style") {
+        const toast = await this.toastController.create({
+            message: message,
+            animated:true,
+            position: "top",
+            duration: 1000,
+            color: color,
+            cssClass: style,
+            enterAnimation: this.enterAnimation,
             //leaveAnimation: this.leaveAnimation
         });
         toast.present();
@@ -3205,6 +3265,7 @@ export class ReddahService {
     }
 
     parseImage(url){
+        url = this.cloudFix(url);
         url = url.replace("///", "https://");
         return url;
     }
@@ -3350,27 +3411,27 @@ export class ReddahService {
         return name;
     }
 
-    enterAnimation = (baseEl: any) => {
+    enterAnimation = () => {
       const backdropAnimation = createAnimation()
-        .addElement(baseEl.querySelector('ion-backdrop')!)
+        .addElement(document.querySelector('ion-backdrop')!)
         .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
 
       const wrapperAnimation = createAnimation()
-        .addElement(baseEl.querySelector('.modal-wrapper')!)
+        .addElement(document.querySelector('.toast-wrapper')!)
         .keyframes([
           { offset: 0, opacity: '0', transform: 'scale(0)' },
           { offset: 1, opacity: '0.99', transform: 'scale(1)' }
         ]);
 
       return createAnimation()
-        .addElement(baseEl)
+        .addElement(document)
         .easing('ease-out')
-        .duration(500)
+        .duration(3000)
         .addAnimation([backdropAnimation, wrapperAnimation]);
     }
 
-    leaveAnimation = (baseEl: any) => {
-      return this.enterAnimation(baseEl).direction('reverse');
+    leaveAnimation = () => {
+      return this.enterAnimation().direction('reverse');
     }
 
 }

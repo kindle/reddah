@@ -549,7 +549,7 @@ export class MysticPage implements OnInit {
                 this.lastPlayComment.isPlaying = false;
             }
             let audioChatUrl = comment.Base64? "data:audio/wav;base64," + comment.Content:
-                "https://login.reddah.com/uploadPhoto/"+comment.Content;
+                this.reddah.storageFile+comment.Content;
             comment.isPlaying= true;
             this.audio.src = audioChatUrl; 
             this.audio.play();
@@ -874,7 +874,7 @@ export class MysticPage implements OnInit {
             })
             .catch(err =>{
                 this.fileTransfer = this.transfer.create();  
-                this.fileTransfer.download("https://login.reddah.com/uploadPhoto/"+guidName, target, true).then((entry) => {
+                this.fileTransfer.download(this.reddah.storageFile+guidName, target, true).then((entry) => {
                     this.localStorageService.store(guidName, target);
                 }, (error) => {
                     //console.log(JSON.stringify(error));

@@ -5,7 +5,7 @@
     <ion-text>{{ reddah.instant('Register.Manage') }}</ion-text>
 </ion-item>
 <ion-content no-padding #pageTop style="background-color: white;">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
     </ion-refresher>

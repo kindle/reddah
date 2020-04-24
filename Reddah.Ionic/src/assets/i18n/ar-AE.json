@@ -112,6 +112,7 @@
         "Privacy":"الخصوصية",
         "General":"لمحة عامة",
         "About":"عبير",
+        "Network":"الشبكه",
         "Photo":"صور ،",
         "Card":"كرت",
         "Location":"الموقع",
@@ -170,6 +171,7 @@
     "Confirm.ByLike":"محبوب",
 
     "Pop":{
+        "SysUpdate":"تحديث {0} المقالة",
         "NoRecommend":"اختبأ",
         "Recommend":"أوصى",
         "Report":"ريبورتاج",

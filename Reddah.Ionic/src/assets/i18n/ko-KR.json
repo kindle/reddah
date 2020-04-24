@@ -112,6 +112,7 @@
         "Privacy":"프라이버시",
         "General":"개술",
         "About":"에 관해",
+        "Network":"네트워크",
         "Photo":"사진",
         "Card":"카드",
         "Location":"위치",
@@ -173,6 +174,7 @@
     "Confirm.ByLike":"좋아하다",
 
     "Pop":{
+        "SysUpdate":"{0} 기사 업데이트",
         "NoRecommend":"숨기다",
         "Recommend":"추천 하 다",
         "Report":"리포트",

@@ -171,6 +171,7 @@ import { ShareChooseUserPage } from './chat/share-choose-user/share-choose-user.
 import { ShareChooseGroupPage } from './chat/share-choose-group/share-choose-group.page';
 import { ShareArticleChatComponent } from './common/share-article-chat/share-article-chat.component';
 import { AtChooseUserPage } from './chat/at-choose-user/at-choose-user.page';
+import { SettingNetworkPage } from './settings/setting-network/setting-network.page';
 //import { IonicGestureConfig } from './IonicGestureConfig';
 
 var firebaseConfig = {
@@ -245,7 +246,7 @@ var firebaseConfig = {
         SettingNoteLabelPage,
         SettingGroupChatTitlePage,SettingFontPage,
         QrcardPage,
-        SettingAccountPage,
+        SettingAccountPage,SettingNetworkPage,
         SettingPrivacyPage,
         RegisterPage,
         SettingNickNamePage,SettingSignaturePage,SettingSexPage,
@@ -300,7 +301,7 @@ var firebaseConfig = {
         SettingNoteLabelPage,
         SettingGroupChatTitlePage,SettingFontPage,
         QrcardPage,
-        SettingAccountPage,
+        SettingAccountPage,SettingNetworkPage,
         SettingPrivacyPage,
         RegisterPage,
         SettingNickNamePage,SettingSignaturePage,SettingSexPage,

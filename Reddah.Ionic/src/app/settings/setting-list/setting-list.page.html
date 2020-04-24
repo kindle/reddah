@@ -5,7 +5,7 @@
     <ion-label>{{ reddah.instant('Menu.Settings') }}</ion-label>
 </ion-item>
 <ion-content no-padding class="common-content" #searchResult>
-    <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="goAccount()">
+    <ion-item lines="none" class="borderTop borderBottom" (click)="goAccount()">
         <ion-icon class="menuIcon" slot="start" name="person"color="dark" size="medium"></ion-icon>
         <ion-label color="dark">{{ reddah.instant('About.Account') }}</ion-label>
         <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
@@ -27,19 +27,35 @@
         <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 -->
-    <ion-item class="borderTop borderItem" (click)="goPrivacy()">
+    <ion-item class="borderTop" (click)="goPrivacy()">
         <ion-icon class="menuIcon" slot="start" name="key"color="medium" size="medium"></ion-icon>
         <ion-label color="dark">{{ reddah.instant('About.Privacy') }}</ion-label>
         <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
-    <ion-item class="borderItem" (click)="goGeneral()">
+    <ion-item lines="none"  class="borderBottom" (click)="goGeneral()">
         <ion-icon class="menuIcon" slot="start" name="earth"color="primary" size="medium"></ion-icon>
         <ion-label color="dark">{{ reddah.instant('About.General') }}</ion-label>
         <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
-    <ion-item lines="none" class="borderBottom" (click)="goAbout()">
+
+    <ion-item lines="none" class="common-splitter">
+    </ion-item>
+    <ion-item class="borderTop" (click)="goAbout()">
         <ion-icon class="menuIcon" slot="start" name="information-circle-outline"color="secondary" size="medium"></ion-icon>
         <ion-label>{{ reddah.instant('About.About') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" class="borderBottom" (click)="goFeedback()">
+        <ion-icon class="menuIcon" slot="start" name="mail-outline"color="secondary" size="medium"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.Header.Feedback') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none" class="common-splitter">
+    </ion-item>
+    <ion-item lines="none" class="borderTop borderBottom" (click)="goNetwork()">
+        <ion-icon class="menuIcon" slot="start" name="git-network"color="dark" size="medium"></ion-icon>
+        <ion-label color="dark">{{ reddah.instant('About.Network') }}</ion-label>
         <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     

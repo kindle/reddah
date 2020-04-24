@@ -285,7 +285,7 @@ export class ChatPage extends ChatBase implements OnInit  {
             })
             .catch(err =>{
                 this.fileTransfer = this.transfer.create();  
-                this.fileTransfer.download("https://login.reddah.com/uploadPhoto/"+guidName, target, true).then((entry) => {
+                this.fileTransfer.download(this.reddah.storageFile+guidName, target, true).then((entry) => {
                     this.localStorageService.store(guidName, target);
                 }, (error) => {
                     //console.log(JSON.stringify(error));
@@ -308,7 +308,7 @@ export class ChatPage extends ChatBase implements OnInit  {
             player.play();
         })
         .catch(err =>{
-            this.fileTransfer.download("https://login.reddah.com/uploadPhoto/"+audioFileName, target+ audioFileName, true).then((entry) => {
+            this.fileTransfer.download(this.reddah.storageFile+audioFileName, target+ audioFileName, true).then((entry) => {
                 this.localStorageService.store(audioFileName, target);
                 let player = this.media.create(target.replace(/^file:\/\//, '') + audioFileName);
                 player.play();

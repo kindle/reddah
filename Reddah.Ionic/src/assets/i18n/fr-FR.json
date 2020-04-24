@@ -112,6 +112,7 @@
         "Privacy":"Privacy",
         "General":"Description générale",
         "About":"Sur",
+        "Network":"Réseau",
         "Photo":"Photo",
         "Card":"Coupez",
         "Location":"Position",
@@ -171,6 +172,7 @@
     "Confirm.ByLike":"Oui",
 
     "Pop":{
+        "SysUpdate":"Mettre à jour {0} article",
         "NoRecommend":"Cacher",
         "Recommend":"Recommander",
         "Report":"Rapports",

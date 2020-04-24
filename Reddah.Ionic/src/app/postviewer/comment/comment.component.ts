@@ -14,14 +14,13 @@ import { LocalStorageService } from 'ngx-webstorage';
 })
 export class CommentComponent implements OnInit {
 
+    @Input() article;
     @Input() data;
     localComments: any;
     @Input() depth: number;
     @Input() ptext;
     @Input() pauthor;
     @Input() authoronly: boolean;
-    @Input() articleauthor;
-    @Input() count: number;
     @Input() normal;
     @Output() commentClick = new EventEmitter();
     //totalCommentCount: number;
@@ -215,11 +214,13 @@ export class CommentComponent implements OnInit {
                                 
                             }
                             else{
+                                this.article.Count = this.article.Count + 1;
                                 let msg = this.reddah.instant(`Service.${result.Success}`);
                                 this.reddah.toast(msg, "danger")
                             }
                             
                         });
+                        this.article.Count = this.article.Count - 1;
                     }
                 }
             ]
