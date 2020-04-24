@@ -10,6 +10,7 @@ using System.Web.Hosting;
 using System.IO;
 using System.Web.Script.Serialization;
 using System.Data.Entity.Validation;
+using Azure.Storage.Blobs;
 
 namespace Reddah.Web.Login.Controllers
 {
@@ -665,6 +666,192 @@ namespace Reddah.Web.Login.Controllers
 
             return Ok(new ApiResult(0, "New Comment Added"));
 
+        }
+
+
+        [Route("addtimelineazure")]
+        [HttpPost]
+        public IHttpActionResult AddTimelineAzure()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string myaction = HttpContext.Current.Request["action"];
+                string lat = HttpContext.Current.Request["lat"];
+                string lng = HttpContext.Current.Request["lng"];
+                string thoughts = HttpContext.Current.Request["thoughts"];
+                string location = HttpContext.Current.Request["location"];
+                string shareTitle = HttpContext.Current.Request["abstract"];
+                string shareImageUrl = HttpContext.Current.Request["content"];
+                //this is actually fileurl array
+                string rorder = HttpContext.Current.Request["order"];
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int feedbackType = js.Deserialize<int>(HttpContext.Current.Request["feedbackType"]);
+                int type = js.Deserialize<int>(HttpContext.Current.Request["type"]);
+                int refArticleId = js.Deserialize<int>(HttpContext.Current.Request["ref"]);
+                //4:article 5:mini
+                int userType = 0;
+                if (HttpContext.Current.Request["utype"] != null)
+                    userType = js.Deserialize<int>(HttpContext.Current.Request["utype"]);
+
+
+                Dictionary<string, string> imageUrls = new Dictionary<string, string>();
+
+                HttpFileCollection hfc = HttpContext.Current.Request.Files;
+
+                if (String.IsNullOrWhiteSpace(thoughts) && hfc.Count == 0 && shareTitle == null)
+                    return Ok(new ApiResult(1, "No thoughts and photos"));
+
+                if (hfc.Count == 0 && type == 5)
+                    return Ok(new ApiResult(1010, "No materials uploaded"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                try
+                {
+                    string[] order = rorder.Split(',');
+
+                    using (var db = new reddahEntities())
+                    {
+                        Dictionary<string, string> dict = new Dictionary<string, string>();
+                        foreach (string rfilename in HttpContext.Current.Request.Files)
+                        {
+                            //upload image first
+                            string guid = Guid.NewGuid().ToString().Replace("-", "");
+                            string containerName = "photo";
+
+                            HttpPostedFile upload = HttpContext.Current.Request.Files[rfilename];
+                            var fileNameKey = rfilename.Replace("_reddah_preview", "");
+                            if (!dict.Keys.Contains(fileNameKey))
+                            {
+                                dict.Add(fileNameKey, guid);
+                            }
+                            else
+                            {
+                                guid = dict[fileNameKey];
+                            }
+                            if (upload.FileName.Contains("_reddah_preview"))
+                            {
+                                guid += "_reddah_preview";
+                            }
+
+                            try
+                            {
+                                var fileFormat = upload.FileName.Substring(upload.FileName.LastIndexOf('.')).Replace(".", "");
+                                var fileNameWithExt = Path.GetFileName(guid + "." + fileFormat);
+
+                                //string connectionString = Environment.GetEnvironmentVariable("REDDAH_AZURE_STORAGE_CONNECTION_STRING");
+                                BlobServiceClient blobServiceClient = new BlobServiceClient(base.GetAzureConnectionString());
+                                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+                                BlobClient blobClient = containerClient.GetBlobClient(fileNameWithExt);
+                                //blobClient.SetAccessTier("Cool");
+                                //blobClient.SetAccessTier(Azure.Storage.Blobs.Models.AccessTier.Cool);
+                                blobClient.Upload(upload.InputStream, false);
+
+
+
+                                var url = "https://reddah.blob.core.windows.net/" + containerName + "/" + fileNameWithExt;
+
+
+                                UploadFile file = new UploadFile();
+                                file.Guid = guid;
+                                file.Format = fileFormat;
+                                file.UserName = jwtResult.JwtUser.User;
+                                file.CreatedOn = DateTime.UtcNow;
+                                file.GroupName = "";
+                                file.Tag = "";
+                                db.UploadFile.Add(file);
+                                if (upload.FileName.Contains("_reddah_preview."))
+                                {
+                                    if (!imageUrls.Values.Contains(url))
+                                    {
+                                        imageUrls.Add(guid.Replace("_reddah_preview", ""), url);
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                return Ok(new ApiResult(1, ex.Message));
+                            }
+                        }
+
+                        //deal with photo order
+                        List<string> articleContentList = new List<string>();
+                        foreach (string key in order)
+                        {
+                            if (dict.ContainsKey(key))
+                            {
+                                string targetGuid = dict[key];
+                                if (imageUrls.ContainsKey(targetGuid))
+                                    articleContentList.Add(imageUrls[targetGuid]);
+                            }
+                        }
+
+                        //award point for first time to add timeline
+                        var gotPointBefore = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "timeline");
+                        if (gotPointBefore == null)
+                        {
+                            var mypoint = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+                            int awardPoint = 10;
+                            var point = new Point()
+                            {
+                                CreatedOn = DateTime.UtcNow,
+                                From = "Reddah",
+                                To = jwtResult.JwtUser.User,
+                                OldV = mypoint.Point,
+                                V = awardPoint,
+                                NewV = mypoint.Point + awardPoint,
+                                Reason = "timeline"
+                            };
+                            db.Point.Add(point);
+                            mypoint.Point = mypoint.Point + awardPoint;
+                        }
+
+                        //add timeline article
+                        var newArticle = new Article()
+                        {
+                            Title = HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(thoughts.Replace("\n", "<br>")))),
+                            Content = shareImageUrl != null ? shareImageUrl : string.Join("$$$", articleContentList),
+                            CreatedOn = DateTime.UtcNow,
+                            Count = 0,
+                            GroupName = "",
+                            Location = location,
+                            UserName = jwtResult.JwtUser.User,
+                            Type = type,
+                            Ref = refArticleId,
+                            Abstract = refArticleId > 0 ? shareTitle : feedbackType.ToString(),
+                            LastUpdateType = userType
+                            //when type=9, insert feedbacktype else if share article insert title else insert empty
+                            //when type==11, add a story
+
+                        };
+                        if (myaction == "story")
+                        {
+                            newArticle.Lat = Decimal.Parse(lat);
+                            newArticle.Lng = Decimal.Parse(lng);
+                        }
+                        db.Article.Add(newArticle);
+
+                        db.SaveChanges();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Ok(new ApiResult(3, "Excepion:" + ex.Message.ToString()));
+                }
+
+
+                return Ok(new ApiResult(0, "New Timeline Added"));
+
+            }
+            catch (Exception ex1)
+            {
+                return Ok(new ApiResult(4, ex1.Message));
+            }
         }
 
         [Route("addtimeline")]
