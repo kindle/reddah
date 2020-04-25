@@ -220,7 +220,7 @@ export class CommentComponent implements OnInit {
                             }
                             
                         });
-                        this.article.Count = this.article.Count - 1;
+                        this.article.Count = this.article.Count>0?this.article.Count - 1:0;
                     }
                 }
             ]

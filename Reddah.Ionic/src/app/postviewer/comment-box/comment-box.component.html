@@ -9,7 +9,7 @@
             readonly style="padding-left:5px !important;margin-right:5px !important;" placeholder="{{ reddah.instant('Comment.Comment') }}..."></ion-input>
         
         <ion-icon color="primary" style="margin-right:5px;" name="chatbox-ellipses-outline"size="medium" (click)="addNewComment(selectedArticleId, selectedCommentId)"></ion-icon>
-        {{reddah.shortCount(article.Count)}}
+        {{article.Count>0?reddah.shortCount(article.Count):''}}
 
         <ion-icon (click)="reddah.likeArticle(article)" *ngIf="!article.like" color="dark"
             name="heart-outline" style="margin-right:5px;margin-left:5px;"></ion-icon>

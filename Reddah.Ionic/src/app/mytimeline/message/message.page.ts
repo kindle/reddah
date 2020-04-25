@@ -3,6 +3,7 @@ import { ReddahService } from '../../reddah.service';
 import { LoadingController, NavController, ActionSheetController  } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { TsViewerPage } from '../tsviewer/tsviewer.page';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-message',
@@ -15,6 +16,7 @@ export class MessagePage implements OnInit {
         await this.modalController.dismiss();
     }
 
+    type;//0:mytimeline, 1:pub comments, 2:@,reply in comments
     messages;
 
     constructor(
@@ -23,16 +25,18 @@ export class MessagePage implements OnInit {
         public navController: NavController,
         public modalController: ModalController,
         public actionSheetController: ActionSheetController,
+        private router: ActivatedRoute,
         ){
         
+        this.type = this.router.snapshot.queryParams["type"];
     }
         
     ngOnInit(){
-        this.messages = this.reddah.unReadMessage;
+        this.messages = this.reddah.unReadMessage.filter(m=>m.Type==this.type);
         
-        this.reddah.setMessageRead().subscribe(data=>{
+        this.reddah.setMessageRead(0).subscribe(data=>{
             if(data.Success==0){
-                this.reddah.storeReadMessage();
+                this.reddah.storeReadMessage(this.type);
             }
         })
     }

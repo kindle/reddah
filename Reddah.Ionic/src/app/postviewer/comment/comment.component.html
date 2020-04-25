@@ -10,7 +10,7 @@
             <ion-icon color="dark" is-active="false" name="chevron-back-outline"></ion-icon>
         </ion-button>
         <ion-label>
-            {{ reddah.instant('Article.Comment') }} {{reddah.shortCount(article.Count)}}
+            {{ reddah.instant('Article.Comment') }} {{article.Count>0?reddah.shortCount(article.Count):''}}
         </ion-label>
         <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" 
         cancelText="{{ reddah.instant('Confirm.Cancel') }}" okText="{{ reddah.instant('Confirm.Yes') }}" #commentSortType>

@@ -14,6 +14,23 @@ export class MessageListPage implements OnInit {
 
     currentUserName: any;
 
+    categories = [{
+        title: "评论我的",
+        color: "primary",
+        name: "chatbubble-ellipses-outline",
+        type: 2
+    },{
+        title: "@我的",
+        color: "secondary",
+        name: "at-outline",
+        type: 2
+    },{
+        title: "点赞我的",
+        color: "danger",
+        name: "heart-circle-outline",
+        type: 2
+    }]
+
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,

@@ -6,6 +6,17 @@
     <ion-label>{{ reddah.instant('Menu.Message') }}</ion-label>
 </ion-item>
 <ion-content style="background-color: white;">
+    <ion-item *ngFor="let category of categories">
+        <div style="margin:5px 0px;">
+            <div class="singleGroupImage category-image">
+                <ion-icon size="large" [color]="category.color" is-active="false" [name]="category.name"></ion-icon>
+            </div>
+        </div>
+        <ion-label style="margin-left:10px;">
+            <span class="user-name">{{category.title}}</span>
+        </ion-label>
+        <ion-badge slot="end" color="danger" *ngIf="reddah.getUnReadMessageCount(category.type)>0">{{reddah.shortCount(reddah.getUnReadMessageCount(category.type))}}</ion-badge>
+    </ion-item>
     <ion-item-sliding *ngFor="let message of messages">
         <ion-item (click)="viewChat(message)" *ngIf="message.delete!=true">
             <div [ngClass]="{'new-point':message.IsNew}" style="margin:5px 0px;">

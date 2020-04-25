@@ -1202,9 +1202,10 @@ export class ReddahService {
     //******************************** */
     private messagesetreadUrl = `${this.domain}/api/article/messagesetread`; 
 
-    setMessageRead(): Observable<any> {
+    setMessageRead(n): Observable<any> {
         let formData = new FormData();
         formData.append('jwt', this.getCurrentJwt());
+        formData.append('type', JSON.stringify(n));
         return this.http.post<any>(this.messagesetreadUrl, formData)
         .pipe(
             tap(data => this.log('set msg as read')),
@@ -2753,16 +2754,16 @@ export class ReddahService {
         let minC =diffValue/minute;
         let secC =diffValue/second;
         if(yearC>=1){
-            result=parseInt(yearC+"") + "" +this.instant("Time.YearsAgo");
+            result=this.lan2(parseInt(yearC+""), this.instant("Time.YearsAgo"));
         }
         else if(monthC>=1){
-            result=parseInt(monthC+"") + "" + this.instant("Time.MonthsAgo");
+            result=this.lan2(parseInt(monthC+""), this.instant("Time.MonthsAgo"));
         }
         else if(weekC>=1){
-            result=parseInt(weekC+"") + "" + this.instant("Time.WeeksAgo");
+            result=this.lan2(parseInt(weekC+""), this.instant("Time.WeeksAgo"));
         }
         else if(dayC>=1){
-            result=(parseInt(dayC+"")==1?this.instant("Time.Yesterday"):parseInt(dayC+"") + "" +this.instant("Time.DaysAgo"));
+            result=(parseInt(dayC+"")==1?this.instant("Time.Yesterday"):this.lan2(parseInt(dayC+""), this.instant("Time.DaysAgo")));
         }
         else if(hourC>=1){
             result=this.utcToLocal(dateStr,'HH:mm');
@@ -2821,13 +2822,18 @@ export class ReddahService {
     //    return [{userName:'wind', type:0},{userName:'duck6686', type:0}];
     //}
 
-    storeReadMessage(){
+    getUnReadMessageCount(n){
+        return this.unReadMessage.filter(m=>m.Type==n).length;
+    }
+
+    //n 0:mytimeline, 1:, 2:comment
+    storeReadMessage(n){
         let readMessages = this.localStorageService.retrieve("Reddah_ReadMessages");
         if(!readMessages)
             readMessages = []
-        readMessages = readMessages.concat(this.unReadMessage);
+        readMessages = readMessages.concat(this.unReadMessage.filter(m=>m.Type==n));
         this.localStorageService.store("Reddah_ReadMessages", readMessages);   
-        this.unReadMessage = [];
+        this.unReadMessage = this.unReadMessage.filter(m=>m.Type!=n);
     }
 
     getStoredMessage(){

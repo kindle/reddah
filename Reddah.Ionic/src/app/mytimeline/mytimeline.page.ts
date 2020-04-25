@@ -68,7 +68,7 @@ export class MyTimeLinePage implements OnInit {
     async goMessage(){
         const modal = await this.modalController.create({
             component: MessagePage,
-            componentProps: {},
+            componentProps: {type:0},
             cssClass: "modal-fullscreen",
         });
           

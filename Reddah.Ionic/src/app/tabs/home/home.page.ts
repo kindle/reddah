@@ -12,6 +12,7 @@ import { UserPage } from '../../common/user/user.page';
 import { PubPage } from '../publisher/pub/pub.page';
 import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
 import { MyTimeLinePage } from 'src/app/mytimeline/mytimeline.page';
+import { MessageListPage } from '../message/message.page';
 
 @Component({
     selector: 'app-home',
@@ -101,6 +102,9 @@ export class HomePage implements OnInit {
     showSearchBar = false;
     lastScrollTop;
     async onScroll($event){
+
+
+        console.log(this.reddah.unReadMessage)
         let currentScrollTop = $event.detail.scrollTop;
         if(currentScrollTop > this.lastScrollTop){
             //this.direction = 'down';
@@ -251,7 +255,7 @@ export class HomePage implements OnInit {
 
     async goMessage(){
         const modal = await this.modalController.create({
-            component: MyTimeLinePage,
+            component: MessageListPage,
             componentProps: {
             },
             cssClass: "modal-fullscreen",
