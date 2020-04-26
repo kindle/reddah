@@ -14,6 +14,8 @@ import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
 import { ShareChooseChatPage } from '../chat/share-choose-chat/share-choose-chat.page';
 import { SettingFontPage } from '../settings/setting-font/setting-font.page';
 import { AddArticlePage } from '../tabs/publisher/add-article/add-article.page';
+import { LocationPage } from '../common/location/location.page';
+import { ArticleTextPopPage } from '../common/article-text-pop.page';
 
 @Component({
     selector: 'app-postviewer',
@@ -22,8 +24,9 @@ import { AddArticlePage } from '../tabs/publisher/add-article/add-article.page';
 })
 export class PostviewerPage implements OnInit {
     @Input() article: Article;
-    @Input() preview= false;
+    @Input() preview = false;
     authoronly=true;
+    @Input() isTopic = false;
 
     userName;
     constructor(
@@ -35,6 +38,49 @@ export class PostviewerPage implements OnInit {
         private alertController: AlertController,
     ) { 
         this.userName = this.reddah.getCurrentUser();
+    }
+
+
+    isMe(userName){
+        return userName==this.reddah.getCurrentUser();
+    }
+
+    async goLocation(location){
+        const modal = await this.modalController.create({
+            component: LocationPage,
+            componentProps: { location: JSON.parse(location) },
+            cssClass: "modal-fullscreen",
+        });
+    
+        await modal.present();
+    }
+
+    async topicViewer(index, imageSrcArray) {
+        const modal = await this.modalController.create({
+            component: ImageViewerComponent,
+            componentProps: {
+                index: index,
+                imgSourceArray: this.reddah.preImageArray(imageSrcArray),
+                imgTitle: "",
+                imgDescription: "",
+                showDownload: true,
+            },
+            cssClass: 'modal-fullscreen',
+            keyboardClose: true,
+            showBackdrop: true
+        });
+    
+        return await modal.present();
+    }
+
+    async fullText(text){
+        const textModal = await this.modalController.create({
+            component: ArticleTextPopPage,
+            componentProps: { text: text },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await textModal.present();
     }
 
     commentsData: any;

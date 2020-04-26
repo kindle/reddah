@@ -39,12 +39,12 @@
     </div>
     <ion-item lines="none" style="--background:var(--ion-item-background);height:10px;">
     </ion-item>
-    <ion-item (click)="getLocation()">
+    <ion-item (click)="getLocation()" *ngIf="action!='topic'">
       <ion-icon name="location-outline" color="{{location?'primary':'dark'}}"></ion-icon>
       <ion-text color="{{location?'primary':'dark'}}" style="margin-left:5px;">{{location?location.title:reddah.instant('Article.CurrentLocation')}}</ion-text>
       <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
     </ion-item>
-    <ion-item (click)="chooseAtUser()">
+    <ion-item (click)="chooseAtUser()" *ngIf="action!='topic'">
       <ion-icon name="at"></ion-icon>
       <ion-text style="margin-left: 5px;">{{ reddah.instant('Article.Mention') }}</ion-text>
       <ion-icon name="chevron-forward-outline"slot="end"></ion-icon>

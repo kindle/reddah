@@ -10,6 +10,7 @@ import { RankPage } from '../rank/rank.page';
 
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
+import { TopicPage } from 'src/app/topic/topic.page';
 
 @Component({
     selector: 'app-mini-viewer',
@@ -19,8 +20,7 @@ import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 })
 export class MiniViewerComponent implements OnInit {
 
-    @ViewChild('mini') mini: IonContent;
-    
+    @Input() mini;
     @Input() content;//html
     @Input() guid;//article.userName
     @Input() version;// id as versions
@@ -280,6 +280,18 @@ export class MiniViewerComponent implements OnInit {
                 
             return this.camera.getPicture(options);
         }
+    }
+
+    async topic(){
+        const modal = await this.modalController.create({
+            component: TopicPage,
+            componentProps: {
+                mini: this.mini
+            },
+            cssClass: "modal-fullscreen",
+        });
+    
+        await modal.present();
     }
 
     share(){

@@ -13,9 +13,20 @@
             </div>
         </div>
         <ion-label style="margin-left:10px;">
-            <span class="user-name">{{category.title}}</span>
+            <span color="dark">{{category.title}}</span>
+            <br>
+            <ion-note color="medium">@名字 {{category.desc}}</ion-note>
         </ion-label>
-        <ion-badge slot="end" color="danger" *ngIf="reddah.getUnReadMessageCount(category.type)>0">{{reddah.shortCount(reddah.getUnReadMessageCount(category.type))}}</ion-badge>
+        <ion-note slot="end" style="padding:10px 5px;">
+            <!--{{reddah.getSendTimeChat(message.LastUpdateOn|date:'yyyy-MM-dd HH:mm:ss')}}-->
+            10:11
+            <br>
+            <ion-badge color="danger" style="float:right;margin-top:5px;font-size: smaller;" 
+                *ngIf="reddah.getUnReadMessageCount(category.type)>0">
+                {{reddah.shortCount(reddah.getUnReadMessageCount(category.type))}}
+            </ion-badge>
+        </ion-note>
+        
     </ion-item>
     <ion-item-sliding *ngFor="let message of messages">
         <ion-item (click)="viewChat(message)" *ngIf="message.delete!=true">
@@ -36,26 +47,26 @@
             <ion-label style="margin-left:10px;" *ngIf="message.Type==2">
                 <span class="user-name">{{reddah.getDisplayName(GetSender(message.GroupName))}}</span>
                 <br>
-                <ion-note color="dark" *ngIf="message.LastUpdateType==0">{{reddah.summaryMsg(message.LastUpdateContent)}}</ion-note>
-                <ion-note color="dark" *ngIf="message.LastUpdateType==1">[语音]</ion-note>
-                <ion-note color="dark" *ngIf="message.LastUpdateType==2">[图片]</ion-note>
-                <ion-note color="dark" *ngIf="message.LastUpdateType==3">[视频]</ion-note>
-                <ion-note color="dark" *ngIf="message.LastUpdateType==4">[Link]</ion-note>
-                <ion-note color="dark" *ngIf="message.LastUpdateType==5">[Mini]</ion-note>
+                <ion-note color="medium" *ngIf="message.LastUpdateType==0">{{reddah.summaryMsg(message.LastUpdateContent)}}</ion-note>
+                <ion-note color="medium" *ngIf="message.LastUpdateType==1">[语音]</ion-note>
+                <ion-note color="medium" *ngIf="message.LastUpdateType==2">[图片]</ion-note>
+                <ion-note color="medium" *ngIf="message.LastUpdateType==3">[视频]</ion-note>
+                <ion-note color="medium" *ngIf="message.LastUpdateType==4">[Link]</ion-note>
+                <ion-note color="medium" *ngIf="message.LastUpdateType==5">[Mini]</ion-note>
             </ion-label>
             <ion-label style="margin-left:10px;" *ngIf="message.Type==3">
                 <span class="user-name">{{message.Title}}</span>
                 <br>
-                <ion-note color="dark" *ngIf="message.LastUpdateType==0">{{reddah.getDisplayName(message.LastUpdateBy)}}: {{reddah.summaryMsg(message.LastUpdateContent)}}</ion-note>
-                <ion-note color="dark" *ngIf="message.LastUpdateType==1">[语音]</ion-note>
-                <ion-note color="dark" *ngIf="message.LastUpdateType==2">[图片]</ion-note>
-                <ion-note color="dark" *ngIf="message.LastUpdateType==3">[视频]</ion-note>
-                <ion-note color="dark" *ngIf="message.LastUpdateType==4">[Link]</ion-note>
-                <ion-note color="dark" *ngIf="message.LastUpdateType==5">[Mini]</ion-note>
+                <ion-note color="medium" *ngIf="message.LastUpdateType==0">{{reddah.getDisplayName(message.LastUpdateBy)}}: {{reddah.summaryMsg(message.LastUpdateContent)}}</ion-note>
+                <ion-note color="medium" *ngIf="message.LastUpdateType==1">[语音]</ion-note>
+                <ion-note color="medium" *ngIf="message.LastUpdateType==2">[图片]</ion-note>
+                <ion-note color="medium" *ngIf="message.LastUpdateType==3">[视频]</ion-note>
+                <ion-note color="medium" *ngIf="message.LastUpdateType==4">[Link]</ion-note>
+                <ion-note color="medium" *ngIf="message.LastUpdateType==5">[Mini]</ion-note>
             </ion-label>
             <ion-note slot="end">
                 {{reddah.getSendTimeChat(message.LastUpdateOn|date:'yyyy-MM-dd HH:mm:ss')}}<br>
-                <ion-icon name="notifications-off" color="light" style="float:right;"></ion-icon>
+                <ion-icon name="notifications-off" color="light" style="float:right;margin-top:5px"></ion-icon>
             </ion-note>
         </ion-item>
         <ion-item-options side="end">

@@ -172,6 +172,7 @@ export class AddMiniPage implements OnInit {
         const modal = await this.modalController.create({
             component: MiniViewerComponent,
             componentProps: { 
+                mini: this.article,
                 content: this.article.Content,
                 guid: this.article.UserName,
                 version: this.article.Id

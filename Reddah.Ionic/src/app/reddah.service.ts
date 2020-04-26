@@ -354,6 +354,18 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private getMyTopicUrl = `${this.domain}/api/article/getmytopic`; 
+
+    getMyTopic(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getMyTopicUrl, formData)
+        .pipe(
+            tap(data => this.log('get my topic')),
+            catchError(this.handleError('get my topic', []))
+        );
+    }
+    //******************************** */
     private getTimelineUrl = `${this.domain}/api/article/gettimeline`; 
 
     getTimeline(formData: FormData): Observable<any> {

@@ -21,8 +21,15 @@ export class AddTimelinePage implements OnInit {
     @Input() title;
     @Input() postType: number;
     @Input() article: any;
-    //opt?'story'
+    //opt?'story'|'topic'
     @Input() action: any;
+
+
+    //add for topic
+    //timeline article type:1, 
+    //topic article type:6
+    //story article type: 11
+    @Input() mini;
 
     constructor(
         private popoverController: PopoverController,
@@ -186,6 +193,10 @@ export class AddTimelinePage implements OnInit {
             this.formData.append('type', JSON.stringify(11));
             this.formData.append('lat', this.location.location.lat);
             this.formData.append('lng', this.location.location.lng);
+        }
+        else if(this.action=="topic"){
+            this.formData.append('type', JSON.stringify(6));
+            this.formData.append('abstract', this.mini.UserName);
         }
         else{
             this.formData.append('type', JSON.stringify(1));

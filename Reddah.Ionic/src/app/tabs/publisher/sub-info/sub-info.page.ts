@@ -284,6 +284,7 @@ export class SubInfoPage implements OnInit {
         const modal = await this.modalController.create({
             component: MiniViewerComponent,
             componentProps: { 
+                mini: mini,
                 content: mini.Cover,
                 guid: mini.UserName,
                 //version: mini.Sex,//always use the latest version

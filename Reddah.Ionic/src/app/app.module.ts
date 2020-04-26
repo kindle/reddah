@@ -100,6 +100,7 @@ import { CommentPopPage } from './common/comment-pop.page'
 import { TimelinePopPage } from './common/timeline-pop.page'
 import { TimelineCommentPopPage } from './common/timeline-comment-pop.page';
 import { ReportCommentPopPage } from './common/report-comment-pop.page';
+import { TopicPage } from './topic/topic.page';
 import { TsViewerPage } from './mytimeline/tsviewer/tsviewer.page'
 import { AddTimelinePage } from './mytimeline/add-timeline/add-timeline.page';
 import { AddFeedbackPage } from './mytimeline/add-feedback/add-feedback.page';
@@ -173,6 +174,7 @@ import { ShareArticleChatComponent } from './common/share-article-chat/share-art
 import { AtChooseUserPage } from './chat/at-choose-user/at-choose-user.page';
 import { SettingNetworkPage } from './settings/setting-network/setting-network.page';
 //import { IonicGestureConfig } from './IonicGestureConfig';
+import { TopicActionBarComponent } from './topic/topic-action-bar/topic-action-bar.component';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -186,6 +188,8 @@ var firebaseConfig = {
 
 @NgModule({
     declarations: [
+        TopicActionBarComponent,
+        TopicPage,
         ShareArticleComponent,ShareArticleChatComponent,ShareFaceComponent,
         AppComponent,
         BookmarkPage,
@@ -254,6 +258,7 @@ var firebaseConfig = {
         CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
     ],
     entryComponents: [
+        TopicPage,
         BookmarkPage,
         BookmarkPopPage,ChatPopPage,
         PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,

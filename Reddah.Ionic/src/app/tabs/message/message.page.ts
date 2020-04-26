@@ -18,17 +18,20 @@ export class MessageListPage implements OnInit {
         title: "评论我的",
         color: "primary",
         name: "chatbubble-ellipses-outline",
-        type: 2
+        type: 2,
+        desc: "评论了你的帖子"
     },{
-        title: "@我的",
+        title: "提到我的",
         color: "secondary",
         name: "at-outline",
-        type: 2
+        type: 2,
+        desc: "提到了你"
     },{
-        title: "点赞我的",
+        title: "赞我的",
         color: "danger",
         name: "heart-circle-outline",
-        type: 2
+        type: 2,
+        desc: "赞了你的帖子"
     }]
 
     constructor(
