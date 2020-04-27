@@ -8,21 +8,29 @@
     </ion-button>
 </ion-item>
 <ion-content #pageTop style="background-color:white;" [scrollEvents]="true" (ionScroll)="onScroll($event)">
-    <div style="display: flex;align-items: center;flex-direction: column;padding-top: 30px;">
-        <ion-thumbnail class="userPhoto">
-            <img src="{{reddah.appData('userphoto_'+userName, 'photo.svg')}}" (click)="viewer(reddah.appData('userphoto_'+userName))" class="portrait">
-        </ion-thumbnail>
-        <ion-label text-wrap style="margin: 20px;font-weight: bold;">{{reddah.appData('usernickname_'+userName)}}</ion-label>
-        <ion-label id="scrollTag" text-wrap style="margin: 10px;padding: 10px 30px;text-align: center;">{{reddah.appData('usersignature_'+userName)}}</ion-label>
-    
-        <!--<ion-note text-wrap style="margin: 10px 0 40px 0;display:none;">{{18}}位朋友关注</ion-note>-->
-    
-        <span class="user-name" (click)="focus()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0">{{ reddah.instant('Pop.Focus') }}</span>
-        <span class="user-name" style="margin: 0 0 20px 0;" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
-            <i (click)="chat()">{{ reddah.instant('Pop.EnterPub') }}</i> | <i (click)="unfocus()">{{ reddah.instant('Pop.Unfocus') }}</i>
-        </span>
-    </div>
-    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-item lines="none" style="--padding-start:10px;--padding-top:20px;">
+        <ion-avatar class="userPhoto">
+          <img src="{{reddah.appData('userphoto_'+userName, 'photo.svg')}}" (click)="viewer(reddah.appData('userphoto_'+userName))" class="portrait" >
+        </ion-avatar>
+        <ion-label text-wrap style="margin-left:5px;" (click)="goMore()">
+          <h2 style="color:var(--ion-color-dark);font-weight: bold;">{{reddah.appData('usernickname_'+userName)}}</h2>
+          <h3 class="show-two-lines">{{reddah.appData('usersignature_'+userName)}}</h3>
+        </ion-label>
+        <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-segment id="scrollTag">
+        <ion-segment-button value="call" (click)="focus()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==0">
+          <ion-label>{{ reddah.instant('Pop.Focus') }}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="call" (click)="chat()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
+            <ion-label>{{ reddah.instant('Pop.EnterPub') }}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="map" (click)="unfocus()" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
+          <ion-label>{{ reddah.instant('Pop.Unfocus') }}</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
     </ion-refresher>
@@ -40,39 +48,13 @@
                 <div class="postClear"></div>
             </div>
             <div class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
-                <div style="display: flex;margin-top:5px;" (click)="goUser(article.UserName)">
-                    <ion-icon color="medium" name="chatbox-ellipses-outline"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
-                    <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
-                        
-                    </span>
+                <div style="display: flex;margin-top:5px;">
+                    <app-topic-action-bar [article]="article" [userName]="userName"></app-topic-action-bar>
                 </div>
             </div>
         </div>
         <div class="postModuleLiner" *ngIf="article.VideoUrl.length==0">
-            <div *ngIf="article.ImageUrls.length>=3" (click)="view(article)">
-                <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span>
-                <div class="postClear"></div>
-                <ion-card-content no-padding>
-                    <div class="parent">
-                        <div class="container" *ngFor="let articleUrl of article.ImageUrls;index as i">
-                            <img [class.left-radius]="i==0" [class.right-radius]="i==2" [id]="reddah.makeItId(articleUrl)" 
-                                (load)="reddah.adjustImage(articleUrl, 'pubhome')"
-                                [src]="reddah.level2Cache(articleUrl)"
-                                class="picture">
-                        </div>
-                    </div>
-                </ion-card-content>
-            </div>
-            <div *ngIf="article.ImageUrls.length>=3" class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
-                <div style="display: flex;margin-top:5px;" (click)="goUser(article.UserName)">
-                    <ion-icon color="medium" name="chatbox-ellipses-outline"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
-                    <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
-                        
-                    </span>
-                </div>
-            </div>
-
-            <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3" (click)="view(article)">
+            <div *ngIf="article.ImageUrls.length>0" (click)="view(article)">
                 <div class="listImage">
                     <div class="listImageWrapper">
                         <img class="BrowsePreviewImageOne" onerror="this.style.display='none'" 
@@ -84,14 +66,6 @@
                 <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
                 <div [class.articleTextRead]="article.Read">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
             </div>
-            <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3" class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
-                <div style="display: flex;margin-top:5px;" (click)="goUser(article.UserName)">
-                    <ion-icon color="medium" name="chatbox-ellipses-outline"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
-                    <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
-                        
-                    </span>
-                </div>
-            </div>
 
             <div *ngIf="article.ImageUrls.length==0" (click)="view(article)">
                 <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
@@ -102,12 +76,9 @@
                     <u style="border-bottom: 1px solid #ff3030;text-decoration: none;color:#107c10;margin-bottom:2px;">{{group.trim()}}</u>
                 </span>
             </div>
-            <div *ngIf="article.ImageUrls.length==0" class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
-                <div style="display: flex;margin-top:5px;" (click)="goUser(article.UserName)">
-                    <ion-icon color="medium" name="chatbox-ellipses-outline"></ion-icon><span style="padding-left:3px;display: inline-block;vertical-align: middle;line-height: 1.5em;">{{article.Comments}}</span>
-                    <span class="user-name" style="margin-right:10px;display: inline-block;vertical-align: middle;line-height: 1.5em;">
-                        
-                    </span>
+            <div class="listInfo" style="color:#636468;display:flex;justify-content: space-between;">
+                <div style="display: flex;margin-top:5px;">
+                    <app-topic-action-bar [article]="article" [userName]="userName"></app-topic-action-bar>
                 </div>
             </div>
         </div>

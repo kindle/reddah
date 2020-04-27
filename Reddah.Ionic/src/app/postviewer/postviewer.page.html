@@ -9,7 +9,7 @@
     </ion-button>
 </ion-item>
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
-    <div style="padding: 10px;" *ngIf="!isTopic">
+    <div style="padding: 10px;" *ngIf="article.Type==0">
         <ion-text color="primary" class="view-article-title" [innerHTML]="reddah.htmlDecode(article.Title) | safe: 'html'"></ion-text>
         
         <ion-item lines="none" style="--padding-start:0;--inner-padding-end:0;">
@@ -65,7 +65,7 @@
             </ion-chip>
         </div>
     </div>
-    <div *ngIf="isTopic">
+    <div *ngIf="article.Type==6">
         <div style="width:100%;border: 0px solid red;">
             <ion-item lines="none">
                 <ion-thumbnail style="margin: 10px 0 0 0;">

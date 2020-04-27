@@ -5,14 +5,33 @@
     <ion-label>{{ reddah.instant('Search.More') }}</ion-label>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;">
-    <div class="gap lastGap">
-        <ion-item class="borderTop borderItem borderTop" *ngIf="pub">
-            <ion-label>{{ reddah.instant('Common.Developer') }}</ion-label>
+    <div class="gap" *ngIf="pub">
+        <ion-item lines="none" class="borderTop">
+            <ion-label slot="start">公众号简介</ion-label>
+        </ion-item>
+        <ion-item lines="none" class="borderBottom">
+            <ion-note slot="start" text-wrap style="padding-bottom: 20px;padding-top:0;">
+                {{ reddah.appData('usersignature_'+target) }}
+            </ion-note>
+        </ion-item>
+    </div>
+    <div class="gap">
+        <ion-item class="borderTop" *ngIf="pub">
+            <ion-label>创建者</ion-label>
             <ion-text slot="end">{{reddah.appData('useradmins_'+target)}}</ion-text>
         </ion-item>
         <ion-item lines="none" class="borderBottom borderItem" (click)="goEmail()">
             <ion-label>{{ reddah.instant('Input.Email') }}</ion-label>
             <ion-text slot="end">{{reddah.appData('useremail_'+target)}}</ion-text>
+        </ion-item>
+    </div>
+    <div class="gap lastGap" *ngIf="pub">
+        <ion-item lines="none" class="borderTop">
+            <ion-label slot="start">管理员</ion-label>
+        </ion-item>
+        <ion-item lines="none" class="borderBottom" style="--padding-bottom:20px;">
+            <img [src]="reddah.appData('userphoto_'+adminName)" *ngFor="let adminName of getAdmins()"
+                class="portrait" (click)="goUser(adminName)">
         </ion-item>
     </div>
 <!--

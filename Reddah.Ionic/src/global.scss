@@ -28,6 +28,17 @@
 
 @import "./app/common/scan/scan.page.scss";
 //@import "./app/postviewer/postviewer.page.scss";
+#articleContent img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+#newComment {
+  border: solid grey 1px;
+  border-radius: 5px;
+  margin: 5px 0 5px 5px;
+  padding: 0;
+}
 @import "./app/mytimeline/timeline/timeline.page.scss";
 @import "./app/common/user/user.page.scss";
 

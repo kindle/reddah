@@ -4,6 +4,7 @@ import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
+import { UserPage } from '../user/user.page';
 
 @Component({
     selector: 'app-more',
@@ -52,6 +53,20 @@ export class MorePage implements OnInit {
         
     }
 
+    getAdmins(){
+        return this.reddah.appData('useradmins_'+this.target).split(',');
+    }
     
+    async goUser(userName){
+        const userModal = await this.modalController.create({
+            component: UserPage,
+            componentProps: { 
+                userName: userName
+            },
+            cssClass: "modal-fullscreen",
+        });
+            
+        await userModal.present();
+    }
 
 }
