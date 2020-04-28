@@ -171,6 +171,13 @@
     "Confirm.ByLike":"Όπως",
 
     "Pop":{
+        "Invite":"Προσκαλέσετε",
+        "SaySomething":"Πες κάτι...",
+        "AlreadyShared":"Κοινόχρηστο",
+        "PubBrief":"Εισαγάγει",
+        "Creator":"Δημιουργός",
+        "Admins":"Διαχειριστές",
+        "Reply":"Απάντηση",
         "SysUpdate":"Ενημέρωση {0} άρθρου",
         "NoRecommend":"Απόκρυψη",
         "Recommend":"Συνιστά",

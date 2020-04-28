@@ -15,6 +15,7 @@ export class AddCommentPage implements OnInit {
     @Input() articleId: number
     @Input() commentId: number
     @Input() text: string;
+    @Input() placeHolder: string;
 
     commentContent: string;
     submitClicked=false;
@@ -22,7 +23,6 @@ export class AddCommentPage implements OnInit {
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
-        private localStorageService: LocalStorageService,
     ) { }
 
     ngOnInit() {

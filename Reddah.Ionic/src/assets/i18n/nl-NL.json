@@ -171,6 +171,13 @@
     "Confirm.ByLike":"Zoals",
 
     "Pop":{
+        "Invite":"Nodig",
+        "SaySomething":"Zeg iets...",
+        "AlreadyShared":"Gedeelde",
+        "PubBrief":"Introduceren",
+        "Creator":"Schepper",
+        "Admins":"Beheerders",
+        "Reply":"Antwoord",
         "SysUpdate":"{0}-artikel bijwerken",
         "NoRecommend":"Verbergen",
         "Recommend":"Aanbevolen",

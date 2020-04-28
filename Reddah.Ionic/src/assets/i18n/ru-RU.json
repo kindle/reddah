@@ -171,6 +171,13 @@
     "Confirm.ByLike":"любить",
 
     "Pop":{
+        "Invite":"Пригласить",
+        "SaySomething":"Скажи что-нибудь...",
+        "AlreadyShared":"Общий",
+        "PubBrief":"Представить",
+        "Creator":"Создатель",
+        "Admins":"Администраторы",
+        "Reply":"Ответ",
         "SysUpdate":"Обновление {0} статьи",
         "NoRecommend":"Скрыть",
         "Recommend":"рекомендовать",

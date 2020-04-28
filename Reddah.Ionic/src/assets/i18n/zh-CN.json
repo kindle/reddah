@@ -174,6 +174,13 @@
     "Confirm.ByLike":"按赞",
 
     "Pop":{
+        "Invite":"邀请",
+        "SaySomething":"说点什么...",
+        "AlreadyShared":"已分享",
+        "PubBrief":"公众号简介",
+        "Creator":"创建者",
+        "Admins":"管理员",
+        "Reply":"回复",
         "SysUpdate":"更新{0}篇文章",
         "NoRecommend":"减少推荐",
         "Recommend":"推荐",
@@ -192,7 +199,7 @@
         "SawIt":"看过了",
         "Trash":"内容太水",
         "Porn":"色情低俗",
-        "NoAuthor":"拉黑作者",
+        "NoAuthor":"拉黑",
         "Dislike":"不看",
         "Suggest":"咨询建议",
         "ContentWrong":"信息出错",

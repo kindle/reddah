@@ -93,10 +93,16 @@ export class ShareChooseChatPage implements OnInit {
 
     async chooseChat(message) {
         let selectedArticleId = message.Id;
+        console.log(this.article)
         let formData = new FormData();
-        if(this.article.Type==0){
+        if(this.article.Type==0||this.article.Type==6){
             formData.append("abstract", this.reddah.htmlDecode(this.article.Title));
-            formData.append("content", this.article.ImageUrl);
+            if(this.article.ImageUrl==null||this.article.ImageUrl.length==0){
+                formData.append("content", this.reddah.getFirstImage(this.article.Content));
+            }
+            else{
+                formData.append("content", this.article.ImageUrl);
+            }
             formData.append("ref", JSON.stringify(this.article.Id));
             //--default 0:text, 1:audio 2:image 3:video 4:article 5:mini
             formData.append("type", 4+"");
@@ -116,6 +122,7 @@ export class ShareChooseChatPage implements OnInit {
             {
                 if(result.Success==0)
                 { 
+                    this.reddah.toast(this.reddah.instant('Pop.AlreadyShared'),"primary");
                     this.close(true)
                 }
                 else{

@@ -174,6 +174,13 @@
     "Confirm.ByLike":"按贊",
 
     "Pop":{
+        "Invite":"邀請",
+        "SaySomething":"說點什麼...",
+        "AlreadyShared":"已分享",
+        "PubBrief":"公眾號簡介",
+        "Creator":"建立者",
+        "Admins":"管理員",
+        "Reply":"回覆",
         "SysUpdate":"更新{0}篇文章",
         "NoRecommend":"減少推薦",
         "Recommend":"推薦",
@@ -192,7 +199,7 @@
         "SawIt":"看過了",
         "Trash":"內容太水",
         "Porn":"色情低俗",
-        "NoAuthor":"拉黑作者",
+        "NoAuthor":"拉黑",
         "Dislike":"不看",
         "Suggest":"咨詢建議",
         "ContentWrong":"信息出錯",

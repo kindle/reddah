@@ -12,7 +12,7 @@
         <ion-label text-wrap>
             <div class="user-name">{{reddah.getDisplayName(comment.UserName)}}</div>
             <span>{{reddah.utcToLocal(comment.CreatedOn,"YY-MM-DD HH:mm")}}</span><br>
-            <div (click)="commentbox.addNewComment(comment.ArticleId, comment.Id)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+            <div (click)="commentbox.addNewComment(comment.ArticleId, comment.Id, comment.UserName)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
         </ion-label>
     </ion-item>
 
@@ -44,8 +44,8 @@
                             [{{reddah.instant('Comment.Delete') }}]
                         </ion-note>
                         <div *ngIf="normal" style="display: flex;align-items: center;" (click)="likeComment(reply)">
-                            <ion-icon name="heart-outline" *ngIf="!reply.like" color="dark" size="small"></ion-icon>
-                            <ion-icon name="heart-circle-outline" *ngIf="reply.like" color="danger" size="small"></ion-icon>
+                            <ion-icon name="heart-outline" *ngIf="!reply.like" color="warning"></ion-icon>
+                            <ion-icon name="heart-circle-outline" *ngIf="reply.like" color="danger"></ion-icon>
                             <span color="dark" style="margin-left:2px;vertical-align: top;" *ngIf="reply.Up>0">{{reply.Up}}</span>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                     <div *ngIf="reply.ParentId!=comment.Id" style="background-color:#eeeeee;padding:5px;">
                         <span class="user-name" (click)="goUser(GetUserNameByCommentId(comments,reply.ParentId))">{{reddah.getDisplayName(GetUserNameByCommentId(comments,reply.ParentId))}}</span> : <span [innerHTML]="reddah.htmlDecode(GetContentByCommentId(comments,reply.ParentId)) | safe: 'html'"></span>
                     </div>
-                    <div (click)="commentbox.addNewComment(reply.ArticleId, reply.Id)" [innerHTML]="reddah.htmlDecode(reply.Content) | safe: 'html'"></div>
+                    <div (click)="commentbox.addNewComment(reply.ArticleId, reply.Id, reply.UserName)" [innerHTML]="reddah.htmlDecode(reply.Content) | safe: 'html'"></div>
                 </ion-label>
             </ion-item>
         </li>

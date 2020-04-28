@@ -70,8 +70,10 @@ export class CommentBoxComponent implements OnInit {
 
 
     showEditBox=false;
+    replyUserNamePlaceHolder;
 
-    async addNewComment(articleId, commmentId){
+    async addNewComment(articleId, commmentId, commentUserName){
+        this.replyUserNamePlaceHolder = commentUserName;
         //show the whole write comment box
         this.direction = 'up';
         //show text area, hide input single line
@@ -142,7 +144,7 @@ export class CommentBoxComponent implements OnInit {
         
     }
 
-    async newPopComment(articleId: number, commentId: number){
+    async newPopComment(articleId: number, commentId: number, newPopComment){
         
         const addCommentModal = await this.modalController.create({
             component: AddCommentPage,
@@ -150,6 +152,7 @@ export class CommentBoxComponent implements OnInit {
                 articleId: articleId,
                 commentId: commentId,
                 text: this.commentContent,
+                placeHolder: newPopComment
             },
             cssClass: "modal-fullscreen",
         });

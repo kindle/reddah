@@ -205,7 +205,12 @@ export class AddTimelinePage implements OnInit {
         if(this.postType==4)//share
         {
             this.formData.append("abstract", this.reddah.htmlDecode(this.article.Title));
-            this.formData.append("content", this.article.ImageUrl);
+            if(this.article.ImageUrl==null||this.article.ImageUrl.length==0){
+                this.formData.append("content", this.reddah.getFirstImage(this.article.Content));
+            }
+            else{
+                this.formData.append("content", this.article.ImageUrl);
+            }
             this.formData.append("ref", JSON.stringify(this.article.Id));
         }
         else{

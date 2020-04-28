@@ -171,6 +171,13 @@
     "Confirm.ByLike":"Tipo",
 
     "Pop":{
+        "Invite":"Invitare",
+        "SaySomething":"Dì qualcosa...",
+        "AlreadyShared":"condiviso",
+        "PubBrief":"Introdurre",
+        "Creator":"Creatore",
+        "Admins":"Gli amministratori",
+        "Reply":"Risposta",
         "SysUpdate":"Aggiornare {0} articolo",
         "NoRecommend":"Nascondi",
         "Recommend":"Raccomanda",

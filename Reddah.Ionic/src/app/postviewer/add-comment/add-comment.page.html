@@ -10,7 +10,7 @@
 <ion-content>
     <div style="margin:5px;">
         <ion-textarea autoresize #newComment id="newComment" [(ngModel)]="commentContent" 
-        rows="6" cols="20" placeholder="{{ reddah.instant('Comment.Tip') }}"
+        rows="6" cols="20" placeholder="{{placeHolder ? reddah.instant('Pop.Reply')+'@'+placeHolder:reddah.instant('Comment.Tip') }}"
         style="margin:0;"></ion-textarea>
     </div>
     <div style="display: flex; justify-content: space-around;margin:10px;">

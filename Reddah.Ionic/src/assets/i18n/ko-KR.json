@@ -174,6 +174,13 @@
     "Confirm.ByLike":"좋아하다",
 
     "Pop":{
+        "Invite":"초대",
+        "SaySomething":"뭐라고 말해 보세요...",
+        "AlreadyShared":"공유",
+        "PubBrief":"소개",
+        "Creator":"창조 자",
+        "Admins":"관리자",
+        "Reply":"응답",
         "SysUpdate":"{0} 기사 업데이트",
         "NoRecommend":"숨기다",
         "Recommend":"추천 하 다",

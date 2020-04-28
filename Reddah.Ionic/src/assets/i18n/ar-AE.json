@@ -171,6 +171,13 @@
     "Confirm.ByLike":"محبوب",
 
     "Pop":{
+        "Invite":"دعوه",
+        "SaySomething":"انطق بكلمة...",
+        "AlreadyShared":"المشتركه",
+        "PubBrief":"ادخال",
+        "Creator":"الخالق",
+        "Admins":"المسؤولين",
+        "Reply":"الرد",
         "SysUpdate":"تحديث {0} المقالة",
         "NoRecommend":"اختبأ",
         "Recommend":"أوصى",

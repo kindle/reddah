@@ -30,7 +30,7 @@
             <div slot="end">
                 <ion-chip style="--background:#107c10;" (click)="focus()" *ngIf="reddah.appData('userisfriend_'+article.UserName+'_'+this.userName)==0">
                     <ion-label color="tertiary">
-                        {{reddah.instant('Pop.Focus')}}
+                        +{{reddah.instant('Pop.Focus')}}
                     </ion-label>
                 </ion-chip>
                 <ion-chip (click)="enterPub()" *ngIf="reddah.appData('userisfriend_'+article.UserName+'_'+this.userName)==1">

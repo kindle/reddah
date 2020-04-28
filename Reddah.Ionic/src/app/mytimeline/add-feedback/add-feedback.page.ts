@@ -85,8 +85,6 @@ export class AddFeedbackPage implements OnInit {
         });
     }
 
-    
-
     close(){
         this.modalController.dismiss();
     }
@@ -101,6 +99,14 @@ export class AddFeedbackPage implements OnInit {
     
     changeFeedbackType(item) {
         this.feedbackType = item.value;
+        this.feedbackTypes.forEach((item,index)=>{
+            if(item.value==this.feedbackType){
+                item.checked = true;
+            }
+            else{
+                item.checked = false;
+            }
+        })
     }
     
     ngOnInit() {

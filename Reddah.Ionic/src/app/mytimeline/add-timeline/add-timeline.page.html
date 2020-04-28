@@ -34,8 +34,10 @@
       video
     </div>
     <div style="margin: 0 10px;border-radius: 5px;">
-      <app-share-article *ngIf="postType==4" [abstract]="article.Title" 
+      <app-share-article *ngIf="postType==4&&article.Type!=6" [abstract]="article.Title" 
       [image]="article.ImageUrl" [id]="article.Id" [type]="4"></app-share-article>
+      <app-share-article *ngIf="postType==4&&article.Type==6" [abstract]="article.Title" 
+      [image]="reddah.getFirstImage(article.Content)" [id]="article.Id" [type]="4"></app-share-article>
     </div>
     <ion-item lines="none" style="--background:var(--ion-item-background);height:10px;">
     </ion-item>

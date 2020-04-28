@@ -7,7 +7,7 @@
 <ion-content no-padding style="background-color: #eeeeee;">
     <div class="gap" *ngIf="pub">
         <ion-item lines="none" class="borderTop">
-            <ion-label slot="start">公众号简介</ion-label>
+            <ion-label slot="start">{{reddah.instant('Pop.PubBrief')}}</ion-label>
         </ion-item>
         <ion-item lines="none" class="borderBottom">
             <ion-note slot="start" text-wrap style="padding-bottom: 20px;padding-top:0;">
@@ -17,7 +17,7 @@
     </div>
     <div class="gap">
         <ion-item class="borderTop" *ngIf="pub">
-            <ion-label>创建者</ion-label>
+            <ion-label>{{reddah.instant('Pop.Creator')}}</ion-label>
             <ion-text slot="end">{{reddah.appData('useradmins_'+target)}}</ion-text>
         </ion-item>
         <ion-item lines="none" class="borderBottom borderItem" (click)="goEmail()">
@@ -27,7 +27,7 @@
     </div>
     <div class="gap lastGap" *ngIf="pub">
         <ion-item lines="none" class="borderTop">
-            <ion-label slot="start">管理员</ion-label>
+            <ion-label slot="start">{{reddah.instant('Pop.Admins')}}</ion-label>
         </ion-item>
         <ion-item lines="none" class="borderBottom" style="--padding-bottom:20px;">
             <img [src]="reddah.appData('userphoto_'+adminName)" *ngFor="let adminName of getAdmins()"

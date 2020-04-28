@@ -2608,6 +2608,14 @@ export class ReddahService {
             (this.appData('usernickname_'+userName) ? this.appData('usernickname_'+userName) : userName);
         return this.summary(name, count, this.getCurrentLocale());    
     }
+
+    getFirstImage(text){
+        let result = text.split('$$$');
+        if(result.length==0)
+            return null;
+        else
+            return result[0];
+    }
     
     getArray(n){
         if(n==null||n<0)

@@ -177,9 +177,9 @@ export class CommentComponent implements OnInit {
         await userModal.present();
     }
   
-    async addNewComment(articleId, commentId){
+    async addNewComment(articleId, commentId, commentUserName){
         //show parent(postviewer.page) show comment box
-        this.commentClick.emit({articleId: articleId, commentId: commentId});
+        this.commentClick.emit({articleId: articleId, commentId: commentId, commentUserName: this.reddah.getDisplayName(commentUserName)});
     }
 
     canDelete(comment){

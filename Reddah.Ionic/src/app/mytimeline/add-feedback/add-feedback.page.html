@@ -24,8 +24,10 @@
     <div class="ref-container">
         <app-share-article *ngIf="feedbackType==4&&article.Type==3" [view]="false" abstract="{{article.NickName+': '+article.Signature}}" 
         [image]="article.Photo" [id]="article.UserId" [type]="5"></app-share-article>
-        <app-share-article *ngIf="feedbackType==4&&(article.Type==0||article.Type==6)" [abstract]="article.Title" 
+        <app-share-article *ngIf="feedbackType==4&&article.Type==0" [abstract]="article.Title" 
         [image]="article.ImageUrl" [id]="article.Id" [type]="4"></app-share-article>
+        <app-share-article *ngIf="feedbackType==4&&article.Type==6" [abstract]="article.Title" 
+        [image]="reddah.getFirstImage(article.Content)" [id]="article.Id" [type]="4"></app-share-article>
     </div>
     <ion-item lines="none">
         <ion-label></ion-label>
@@ -34,7 +36,9 @@
     <ion-list *ngIf="feedbackType!=6">
         <ion-radio-group>
             <ion-item *ngFor="let item of feedbackTypes" (click)="changeFeedbackType(item)">
-                <ion-radio value="{{item.value}}" checked="{{item.checked}}"></ion-radio>
+                <!--<ion-radio value="{{item.value}}" checked="{{item.checked}}"></ion-radio>-->
+                <ion-icon name="radio-button-on-outline" color="primary" *ngIf="item.checked"></ion-icon>
+                <ion-icon name="radio-button-off-outline" *ngIf="!item.checked"></ion-icon>
                 <ion-label style="margin-left:10px;">{{item.text}}</ion-label>
             </ion-item>
         </ion-radio-group>

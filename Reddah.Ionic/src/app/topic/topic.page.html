@@ -22,12 +22,12 @@
         <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>  
     </ion-refresher>  
     <div class="topicCover" #timelineCover>
-        <img [src]="reddah.appData('cover_'+userName)">
+        <img [src]="reddah.appData('cover_'+mini.UserName)">
     </div>
     <div class="topicAvatar">
         <ion-chip style="--background:var(--ion-chip-background);" (click)="share()">
             <ion-icon color="dark" name="add-outline"></ion-icon>
-            <ion-label color="dark">邀请</ion-label>
+            <ion-label color="dark">{{reddah.instant('Pop.Invite')}}</ion-label>
         </ion-chip>
     </div>
     <ion-item style="--inner-padding-end:0;margin-right:15px;">
@@ -37,7 +37,7 @@
     </ion-item>
     <ion-item lines="none" (click)="post($event)">
         <img class="portrait" [src]="reddah.appData('userphoto_'+userName)">
-        <ion-label style="margin-left: 10px;">说点什么...</ion-label>
+        <ion-label style="margin-left: 10px;">{{reddah.instant('Pop.SaySomething')}}...</ion-label>
         <div class="singleGroupImage category-image">
             <ion-icon name="camera-outline"></ion-icon>
         </div>

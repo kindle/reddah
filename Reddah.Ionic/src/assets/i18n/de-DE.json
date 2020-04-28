@@ -171,6 +171,13 @@
     "Confirm.ByLike":"Wie",
 
     "Pop":{
+        "Invite":"einladen",
+        "SaySomething":"Sag etwas...",
+        "AlreadyShared":"geteilt",
+        "PubBrief":"Einzuführen",
+        "Creator":"Schöpfer",
+        "Admins":"Administratoren",
+        "Reply":"Antwort",
         "SysUpdate":"Update {0} Artikel",
         "NoRecommend":"Verstecken",
         "Recommend":"Empfehlenswert",

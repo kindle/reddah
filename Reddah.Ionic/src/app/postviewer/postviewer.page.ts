@@ -284,7 +284,7 @@ export class PostviewerPage implements OnInit {
 
     @ViewChild('commentbox') commentbox;
     childCommentClick($event){
-        this.commentbox.addNewComment(this.article.Id, $event.commentId);
+        this.commentbox.addNewComment(this.article.Id, $event.commentId, $event.commentUserName);
     }
 
     childReloadComments(event){

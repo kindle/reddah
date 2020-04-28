@@ -1,7 +1,7 @@
 <div (click)="viewArticle()" class="container" *ngIf="type==4">
     <ion-Label>
         <div style="display: flex;margin:5px 0 10px 0;">
-            <img [src]="reddah.parseImage(image)" class="sharePortrait" *ngIf="image">
+            <img src="{{reddah.parseImage(image)}}" class="sharePortrait" *ngIf="image">
             <ion-icon name="link" color="dark" class="sharePortraitNone" *ngIf="!image"></ion-icon>
             <span style="margin-left:8px;align-self: center;">
                 {{reddah.htmlDecode(abstract)}}

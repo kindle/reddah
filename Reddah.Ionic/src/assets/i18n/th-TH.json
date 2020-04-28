@@ -171,6 +171,13 @@
     "Confirm.ByLike":"ชอบ",
 
     "Pop":{
+        "Invite":"เชิญ",
+        "SaySomething":"พูดอะไรบ้างสิ...",
+        "AlreadyShared":"แชร์",
+        "PubBrief":"แนะ นำ",
+        "Creator":"สร้าง",
+        "Admins":"ผู้ดูแลระบบ",
+        "Reply":"ตอบกลับ",
         "SysUpdate":"ปรับปรุงบทความ{0}",
         "NoRecommend":"กลบล้าง",
         "Recommend":"แนะนำ",

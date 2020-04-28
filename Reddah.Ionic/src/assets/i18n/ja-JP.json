@@ -172,6 +172,13 @@
     "Confirm.ByLike":"ライク",
 
     "Pop":{
+        "Invite":"招待",
+        "SaySomething":"何かいってください...",
+        "AlreadyShared":"共有",
+        "PubBrief":"紹介",
+        "Creator":"作成者",
+        "Admins":"管理者",
+        "Reply":"返信",
         "SysUpdate":"記事の更新{0}",
         "NoRecommend":"おすすめを減らす",
         "Recommend":"おすすめ",
