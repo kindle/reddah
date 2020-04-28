@@ -635,6 +635,42 @@ namespace Reddah.Web.Login.Controllers
                     if (article != null)
                     {
                         article.Count++;
+
+                        //user or pub
+                        var comUser = db.UserProfile.FirstOrDefault(u => u.UserName == article.UserName);
+                        if (comUser.Type == 0)//person user
+                        {
+                            var msg = new Message()
+                            {
+                                From = jwtResult.JwtUser.User,
+                                To = article.UserName,
+                                Msg = "comment",
+                                ArticleId = article.Id,
+                                AritclePhoto = System.Web.HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(data.Content))),
+                                Type = 2,
+                                CreatedOn = DateTime.UtcNow,
+                                Status = 0
+                            };
+                            db.Message.Add(msg);
+                        }
+                        else if (comUser.Type == 1)//pub user
+                        {
+                            foreach(var adminUser in comUser.Admins.Split(','))
+                            {
+                                var msg = new Message()
+                                {
+                                    From = jwtResult.JwtUser.User,
+                                    To = adminUser,
+                                    Msg = "comment",
+                                    ArticleId = article.Id,
+                                    AritclePhoto = System.Web.HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(data.Content))),
+                                    Type = 2,
+                                    CreatedOn = DateTime.UtcNow,
+                                    Status = 0
+                                };
+                                db.Message.Add(msg);
+                            }
+                        }
                     }
 
                     if (data.ParentId != -1)
@@ -833,6 +869,11 @@ namespace Reddah.Web.Login.Controllers
                             newArticle.Lat = Decimal.Parse(lat);
                             newArticle.Lng = Decimal.Parse(lng);
                         }
+                        if (myaction == "topic")
+                        {
+                            //mini username
+                            newArticle.Abstract = shareTitle;
+                        }
                         db.Article.Add(newArticle);
 
                         db.SaveChanges();
@@ -1014,6 +1055,11 @@ namespace Reddah.Web.Login.Controllers
                             newArticle.Lat = Decimal.Parse(lat);
                             newArticle.Lng = Decimal.Parse(lng);
                         }
+                        if (myaction == "topic")
+                        {
+                            //mini username
+                            newArticle.Abstract = shareTitle;
+                        }
                         db.Article.Add(newArticle);
 
                         db.SaveChanges();
@@ -1067,6 +1113,74 @@ namespace Reddah.Web.Login.Controllers
                              join u in db.UserProfile on b.UserName equals u.UserName
                              where b.Type == 1 && b.Status!=-1 && (b.UserName == jwtResult.JwtUser.User || 
                              (from f in db.UserFriend where f.UserName == jwtResult.JwtUser.User && f.Approve==1 select f.Watch).ToList().Contains(b.UserName)) 
+                             && !(loaded).Contains(b.Id)
+                             orderby b.Id descending
+                             select new AdvancedTimeline
+                             {
+                                 Id = b.Id,
+                                 Title = b.Title,
+                                 Content = b.Content,
+                                 Abstract = b.Abstract,
+                                 CreatedOn = b.CreatedOn,
+                                 Up = b.Up,
+                                 Down = b.Down,
+                                 Count = b.Count,
+                                 UserName = b.UserName,
+                                 GroupName = b.GroupName,
+                                 Locale = b.Locale,
+                                 LastUpdateOn = b.LastUpdateOn,
+                                 Type = b.Type,
+                                 Ref = b.Ref,
+                                 Location = b.Location,
+                                 UserNickName = u.NickName,
+                                 UserPhoto = u.Photo,
+                                 UserSex = u.Sex
+                             })
+                            .Take(pageCount);
+
+                    return Ok(query.ToList());
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("getmytopic")]
+        [HttpPost]
+        public IHttpActionResult GetMyTopic()
+        {
+            IEnumerable<Article> query = null;
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int[] loadedIds = js.Deserialize<int[]>(HttpContext.Current.Request["loadedIds"]);
+                string topicUserName = HttpContext.Current.Request["abstract"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var pageCount = 10;
+
+                    int[] loaded = loadedIds == null ? new int[] { } : loadedIds;
+
+                    query = (from b in db.Article
+                             join u in db.UserProfile on b.UserName equals u.UserName
+                             where b.Type == 6 && b.Status != -1 && b.Abstract == topicUserName
                              && !(loaded).Contains(b.Id)
                              orderby b.Id descending
                              select new AdvancedTimeline
@@ -2897,6 +3011,10 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        /// <summary>
+        /// type:0 mytimeline, type:1 pub article comment, type:2 arcile reply/@you
+        /// </summary>
+        /// <returns></returns>
         [Route("messagesetread")]
         [HttpPost]
         public IHttpActionResult MessageSetRead()
@@ -2908,6 +3026,10 @@ namespace Reddah.Web.Login.Controllers
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
 
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int msgType = js.Deserialize<int>(HttpContext.Current.Request["type"]);
+
+
                 JwtResult jwtResult = AuthController.ValidJwt(jwt);
 
                 if (jwtResult.Success != 0)
@@ -2915,7 +3037,7 @@ namespace Reddah.Web.Login.Controllers
 
                 using (var db = new reddahEntities())
                 {
-                    var messages = db.Message.Where(x => x.To == jwtResult.JwtUser.User&&x.Status==0);
+                    var messages = db.Message.Where(x => x.To == jwtResult.JwtUser.User&&x.Status==0&&x.Type== msgType);
                     foreach(var msg in messages)
                     {
                         msg.Status = 1;
