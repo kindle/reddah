@@ -23,6 +23,8 @@ import { DatePipe } from '@angular/common';
 import { Md5 } from 'ts-md5/dist/md5';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { createAnimation } from '@ionic/core'
+import { Router } from '@angular/router';
+import { SigninPage } from './surface/signin/signin.page';
 
 @Injectable({
     providedIn: 'root'
@@ -113,8 +115,9 @@ export class ReddahService {
         private camera: Camera,
         private modalController: ModalController,
         private vibration: Vibration,
+        private alertController: AlertController,
         private ngZone: NgZone,
-        
+        private router: Router,
     ) { 
         
     }
@@ -1262,6 +1265,11 @@ export class ReddahService {
 
     private log(message: string) {
         //console.log(message);
+        //console.log(this.jwtExpired())
+        if(message!="login"&&this.jwtExpired())
+        {
+            this.logout();
+        }
     }
 
     public Locales = [
@@ -1943,6 +1951,70 @@ export class ReddahService {
             tap(data => this.log('reset password')),
             catchError(this.handleError('reset password', []))
         );        
+    }
+
+
+
+    logout() {
+        this.logoutClear();
+
+        this.localStorageService.clear("Reddah_GroupedContacts_"+this.getCurrentUser());
+        this.localStorageService.clear("Reddah_Contacts_"+this.getCurrentUser());
+        this.cacheService.clearGroup("ContactPage");
+        this.localStorageService.clear("Reddah_GroupedContacts_Pub_"+this.getCurrentUser());
+        this.localStorageService.clear("Reddah_Contacts_pub_"+this.getCurrentUser());
+        this.cacheService.clearGroup("PubPage");
+
+        this.localStorageService.clear("Reddah_mytimeline_"+this.getCurrentUser());
+        this.localStorageService.clear("Reddah_mytimeline_ids_"+this.getCurrentUser());
+
+
+
+        this.localStorageService.clear("Reddah_Local_Messages_"+this.getCurrentUser());
+        //this.localStorageService.clear();
+        
+        if(this.platform.is('android')){
+            window.location.reload();
+        }
+        else{
+            this.modalController.dismiss();
+
+            let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
+            
+            this.loadTranslate(currentLocale);
+
+            this.router.navigate(['/surface'], {
+                queryParams: {
+                }
+            });
+        }
+    }
+
+    jwtExpired(){
+        let curjwt = this.getCurrentJwt();
+        console.log(curjwt)
+        if(curjwt==""||curjwt==null)
+            return true;
+        let parts = curjwt.split('.');
+        let bodyEnc = parts[1];
+        if(!bodyEnc){
+            return false;
+        }
+        let bodyStr = atob(bodyEnc)
+            , body;
+
+        try{
+            body = JSON.parse(bodyStr);
+        }
+        catch(e){
+            body = {};
+        }
+
+        let exp = body.exp
+            , user= body.aud
+        ;
+
+        return this.isExpired(exp);
     }
 
     /**
@@ -3279,6 +3351,9 @@ export class ReddahService {
     isExpired(exp:number): boolean {
         if(!exp) return true;
         let now = Date.now();
+        console.log(now+"_"+exp*1000)
+
+
         return now >= exp*1000;
     }
 

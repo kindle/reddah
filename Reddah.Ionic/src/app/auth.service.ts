@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ReddahService } from './reddah.service';
 import { SigninPage } from './surface/signin/signin.page';
 import { RegisterPage } from './surface/register/register.page';
-import { SurfacePage } from './surface/surface.page';
 import { ModalController, Platform } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { CacheService } from 'ionic-cache';
@@ -83,38 +82,7 @@ export class AuthService {
 
 
     logout(): void {
-        this.reddahService.logoutClear();
-
-        this.localStorageService.clear("Reddah_GroupedContacts_"+this.reddahService.getCurrentUser());
-        this.localStorageService.clear("Reddah_Contacts_"+this.reddahService.getCurrentUser());
-        this.cacheService.clearGroup("ContactPage");
-        this.localStorageService.clear("Reddah_GroupedContacts_Pub_"+this.reddahService.getCurrentUser());
-        this.localStorageService.clear("Reddah_Contacts_pub_"+this.reddahService.getCurrentUser());
-        this.cacheService.clearGroup("PubPage");
-
-        this.localStorageService.clear("Reddah_mytimeline_"+this.reddahService.getCurrentUser());
-        this.localStorageService.clear("Reddah_mytimeline_ids_"+this.reddahService.getCurrentUser());
-
-
-
-        this.localStorageService.clear("Reddah_Local_Messages_"+this.reddahService.getCurrentUser());
-        //this.localStorageService.clear();
-        
-        if(this.platform.is('android')){
-            window.location.reload();
-        }
-        else{
-            this.modalController.dismiss();
-
-            let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-            
-            this.reddahService.loadTranslate(currentLocale);
-
-            this.router.navigate(['/surface'], {
-                queryParams: {
-                }
-            });
-        }
+        this.reddahService.logout();
     }
 
 
@@ -147,6 +115,5 @@ export class AuthService {
           return false;
         }
     }
-
     
 }
