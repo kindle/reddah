@@ -19,12 +19,12 @@
                 onerror="this.src='assets/icon/anonymous.png';">
         </ion-thumbnail>
         <ion-label style="margin-top:0;">
-            <div style="display: flex;padding:0 0 5px 0;">
+            <div style="display: flex;padding:0 0 5px 0;align-items: center;">
                 <ion-label class="user-name">{{reddah.getDisplayName(userName, 100)}}</ion-label>
                 <ion-icon class="cmd-title" name="male-outline" size="small" *ngIf="reddah.appData('usersex_'+userName)==1" color="diamond"></ion-icon>
                 <ion-icon class="cmd-title" name="female-outline" size="small" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
             </div>
-            <div style="display: flex;">
+            <div style="display: flex;align-items: center;">
                 <ion-icon *ngFor="let i of reddah.userLevelIconNumber(userName)" name="{{reddah.userLevelIcon(userName)}}" color="{{reddah.userLevelIconColor(userName)}}" size="small"></ion-icon>
                 <span style="margin-left:5px;" *ngIf="reddah.appData('usernickname_'+userName)">
                     {{ reddah.appData('userpoint_'+userName) }} {{ reddah.userLevel(userName) }}

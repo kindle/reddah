@@ -46,7 +46,7 @@ export class AddArticlePage implements OnInit {
         language: this.reddahService.getCurrentLocale(),
         toolbar: [
              
-        //"|", "alignment:left", "alignment:center", "alignment:right", "alignment:adjust", 
+        "|", "alignment:left", "alignment:center", "alignment:right", "alignment:adjust", 
         "bold", "italic", "blockQuote", "link", 
         "|", "bulletedList", "numberedList", "imageUpload", 'insertTable','mediaEmbed',
         "|", "undo", "redo",

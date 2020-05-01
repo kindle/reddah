@@ -79,10 +79,17 @@ export class TopicPage implements OnInit {
         this.reddah.getUserPhotos(this.mini.UserName, true);
 
         let cachedArticles = this.localStorageService.retrieve("Reddah_mytopic_"+this.mini.UserName);
-        let cachedIds = this.localStorageService.retrieve("Reddah_mytopic_ids_"+this.mini.UserName);
-        if(cachedArticles){
-            this.articles = JSON.parse(cachedArticles);
-            this.loadedIds = JSON.parse(cachedIds);
+        let cachedArticleIds = this.localStorageService.retrieve("Reddah_mytopic_ids_"+this.mini.UserName);
+        let cacheArticleArray = JSON.parse(cachedArticles);
+        if(cachedArticles&&cacheArticleArray.length>0){
+            let top = 20;
+            this.articles = JSON.parse(cachedArticles).slice(0,top);
+            this.articles.forEach(article=>{
+                article.like = (this.localStorageService.retrieve(`Reddah_ArticleLike_${this.userName}_${article.Id}`)!=null)
+            });
+            this.loadedIds = JSON.parse(cachedArticleIds).slice(0,top);
+            //autofill
+            //refer to home, todo
         }
         else{
             this.formData = new FormData();
@@ -97,7 +104,6 @@ export class TopicPage implements OnInit {
             {
                 if(cachedArticles!=JSON.stringify(timeline))
                 {
-                    console.log('diff')
                     this.articles = [];
                     this.loadedIds = [];
                     this.commentData = new Map();

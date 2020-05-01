@@ -19,9 +19,7 @@
 <ion-content style="z-index: 0;" [scrollEvents]="true" (ionScroll)="onScroll($event)">
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">  
         <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>  
-    </ion-refresher>  
-    
-    <ion-spinner name="bubbles" *ngIf="firstLoad" style="margin:15px 50%;transform: translateX(-50%);"></ion-spinner>
+    </ion-refresher>
     <div *ngIf="firstLoad">
         <ng-template ngFor let-article [ngForOf]="[1,1,1,1,1,1,1]" style="color: #636468;font-family: 'Segoe UI', Arial, sans-serif;">
             <div class="postModuleLiner">

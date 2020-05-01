@@ -44,6 +44,28 @@ export class ImageViewerComponent implements OnInit {
         this.slideOpts = {
             centeredSlides: 'true',
             initialSlide: this.index,
+            zoom: true,
+            spaceBetween: 30,
+            effect: 'flip',
+            //effect: 'fade',
+            /*effect: 'cube',
+            grabCursor: true,
+            cubeEffect: {
+                shadow: true,
+                slideShadows: true,
+                shadowOffset: 20,
+                shadowScale: 0.94,
+            },
+
+            effect: 'flip',
+            grabCursor: true,
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },*/
         };
 
         for(let i=0;i<this.imgSourceArray.length;i++){

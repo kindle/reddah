@@ -111,8 +111,8 @@
                     </div>
                     <div class="parent2" *ngIf="article.Content.split('$$$').length==2||article.Content.split('$$$').length==4">
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                            <img [id]="reddah.makeItId(image+'mtl')" 
-                            (load)="reddah.adjustImage(image, 'mtl')"
+                            <img [id]="reddah.makeItId(image+'mtl24')" 
+                            (load)="reddah.adjustImage(image, 'mtl24')"
                             [src]="reddah.level2Cache(image)"
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                         </div>
@@ -127,6 +127,7 @@
                     </div>
                 </ion-card-content>
                 <ion-item style="--background:transparent;margin:2px 0;" lines="none" *ngIf="article.Location&&article.Location!='undefined'" (click)="goLocation(article.Location)">
+                    <ion-icon name="location-outline" color="primary" style="margin-right:5px;"></ion-icon>
                     <ion-label color="secondary">{{reddah.getJSON(article.Location).title}}</ion-label>
                 </ion-item>
                 <ion-item style="--background:transparent;margin:2px 0;" lines="none">

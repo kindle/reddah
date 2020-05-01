@@ -20,8 +20,8 @@
                     onerror="this.src='assets/icon/anonymous.png';">
             </ion-thumbnail>
             <ion-label style="margin-top:0;">
-                <div style="display: flex;padding:0 0 5px 0;">
-                    <ion-label class="user-name">{{reddah.getDisplayName(article.UserName, 100)}}</ion-label>
+                <div style="display: flex;padding:0 0 5px 0;align-items: center;">
+                    <ion-label class="user-name" style="font-size:large;">{{reddah.getDisplayName(article.UserName, 100)}}</ion-label>
                     <ion-badge color="danger" style="margin-left:5px;">{{reddah.instant('Menu.Publisher')}}</ion-badge>
                 </div>
                 <div style="display: flex;">

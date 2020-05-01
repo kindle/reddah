@@ -46,8 +46,8 @@ export class PubPage implements OnInit {
 
     ngOnInit(){
         this.showLoading = true;
-        let cacheArticles = this.localStorageService.retrieve("reddah_articles_"+this.userName);
-        let cacheArticleIds = this.localStorageService.retrieve("reddah_article_ids_"+this.userName);
+        let cacheArticles = this.localStorageService.retrieve("reddah_pub_articles_"+this.userName);
+        let cacheArticleIds = this.localStorageService.retrieve("reddah_pub_article_ids_"+this.userName);
         if(cacheArticles){
             this.articles = JSON.parse(cacheArticles);
             this.loadedIds = JSON.parse(cacheArticleIds);
@@ -69,8 +69,8 @@ export class PubPage implements OnInit {
                     this.loadedIds.push(article.Id);
                 }
 
-                this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
-                this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.loadedIds));
+                this.localStorageService.store("reddah_pub_articles_"+this.userName, JSON.stringify(this.articles));
+                this.localStorageService.store("reddah_pub_article_ids_"+this.userName, JSON.stringify(this.loadedIds));
                 this.showLoading = false;
             });
         }
@@ -116,16 +116,16 @@ export class PubPage implements OnInit {
                 event.target.complete();
             }
 
-            this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.articles));
-            this.localStorageService.store("reddah_article_ids_"+this.userName, JSON.stringify(this.loadedIds));
+            this.localStorageService.store("reddah_pub_articles_"+this.userName, JSON.stringify(this.articles));
+            this.localStorageService.store("reddah_pub_article_ids_"+this.userName, JSON.stringify(this.loadedIds));
         });
     }   
 
     clearCacheAndReload(event){
         this.pageTop.scrollToTop();
         this.cacheService.clearGroup("PubPage"+this.userName);
-        this.localStorageService.clear("reddah_articles_"+this.userName);
-        this.localStorageService.clear("reddah_article_ids_"+this.userName);
+        this.localStorageService.clear("reddah_pub_articles_"+this.userName);
+        this.localStorageService.clear("reddah_pub_article_ids_"+this.userName);
         this.articles = [];
         this.loadedIds = [];
         this.getArticles(event);

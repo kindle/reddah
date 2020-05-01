@@ -33,7 +33,7 @@ export class ArticleActionBarComponent {
         });
         
         await viewerModal.present();
-        this.localStorageService.store("reddah_articles_"+this.userName, JSON.stringify(this.reddah.articles));
+        
         const { data } = await viewerModal.onDidDismiss();
         if(data||!data){   
             article.Read = true;

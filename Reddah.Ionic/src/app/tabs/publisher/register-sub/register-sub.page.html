@@ -5,7 +5,7 @@
 </ion-item>
 <ion-content style="background-color: white;">
     <ion-item lines="none" class="sectionGapTop inputItem gapBottom" no-padding>
-        <h2 class="title" [class.pub-title]="type==1" [class.mini-title]="type==3">{{ reddah.instant(title) }}</h2>
+        <h2 class="title" [class.pub-title]="type==1" [class.mini-title]="type==3">{{ title }}</h2>
     </ion-item>
 
     <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
@@ -22,9 +22,9 @@
     </ion-item>
     
     <ion-item lines="none" class="gapBottom inputItem" no-padding>
-        <ion-checkbox [(ngModel)]="agreed"></ion-checkbox>{{ reddah.instant('Register.ReadAgree') }}
+        <ion-checkbox [(ngModel)]="agreed" style="margin-right:10px;"></ion-checkbox>{{ reddah.instant('Register.ReadAgree') }}
     </ion-item>
-    <div class="inputItem">
+    <div class="inputItem" style="padding-left:15px">
         <ion-note text-wrap color="dark">
             <span class="policy" (click)="browse('useragreement')">{{ reddah.instant('Register.UserAgreement') }}</span>
             <span class="policy" (click)="browse('privacypolicy')">{{ reddah.instant('Register.Privacy') }}</span> {{ reddah.instant('Register.And') }}

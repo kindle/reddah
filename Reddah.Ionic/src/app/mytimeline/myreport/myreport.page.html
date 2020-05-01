@@ -11,10 +11,6 @@
         <ion-refresher slot="fixed" (ionPull)="doPull($event)" (ionRefresh)="doRefresh($event)">
             <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>
         </ion-refresher>
-        <div (click)="goMessage()" *ngIf="reddah.unReadMessage.length>0" class="messageBox">
-            <img [src]="reddah.appData('userphoto_'+reddah.unReadMessage.slice(-1)[0].From)" class="messagePhoto">
-            <span class="span-eclipse" style="color:white;line-height:2.1em;margin:0.24em 0.8em;">{{reddah.unReadMessage.length}} {{ reddah.instant('Menu.Message') }}</span>
-        </div>
         <div *ngFor="let article of articles" 
         style="background-color: white; display: flex; border-bottom: 1px solid lightgrey; padding-top:25px; padding-bottom: 10px;">
             <div style="width:70px;padding: 0px 10px; border: 0px solid blue;">

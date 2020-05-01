@@ -1015,7 +1015,7 @@ export class ReddahService {
         );
     }
     //******************************** */
-    private updateUserPhotoUrl = `${this.domain}/api/article/updateuserphoto`; 
+    private updateUserPhotoUrl = `${this.domain}/api/article/updateuserphoto${this.cloud}`; 
 
     updateUserPhoto(formData: FormData): Observable<any> {
 
@@ -2290,7 +2290,6 @@ export class ReddahService {
             }
             else{
                 let url = this.localStorageService.retrieve(cacheKey+"_url");
-                console.log(cacheKey)
                 if(url!=null)
                     return this.cloudFix(url);
                 return "assets/icon/timg.jpg";
@@ -3514,26 +3513,20 @@ export class ReddahService {
         }
     }
 
-    likeTopic(article, topicUserName, topics){
+    likeTopic(article, cacheKey, collection){
         let userName = this.getCurrentUser()
-        //console.log(article)
+        
         article.Up = article.Up + (article.like?-1:1);
         if(article.Up<0)
             article.Up=0;
         article.like=!article.like;
-/*
-        topics.forEach(topic=>{
-            if(topic.Id==article.Id){
-                topic = article;
-            }
-        })*/
 
         let formData = new FormData();
         formData.append("id", JSON.stringify(article.Id));
         formData.append("type", JSON.stringify(article.like));
         this.articleLike(formData).subscribe(data=>{});
-console.log(topics)
-        this.localStorageService.store("Reddah_mytopic_"+topicUserName, JSON.stringify(topics));
+
+        this.localStorageService.store(cacheKey, JSON.stringify(collection));
 
         if(article.like)
             this.localStorageService.store(`Reddah_ArticleLike_${userName}_${article.Id}`, "");
@@ -3546,6 +3539,7 @@ console.log(topics)
             }
         }
     }
+
 
     commentArticle(article){
         article.Count = article.Count + 1;
