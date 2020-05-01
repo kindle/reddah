@@ -213,7 +213,7 @@ namespace Reddah.Web.Login.Controllers
                         issuer: "https://login.reddah.com",
                         audience: user.UserName,
                         claims: claims,
-                        //expires: DateTime.Now.AddMinutes(20),
+                        //expires: DateTime.Now.AddMinutes(1),
                         expires: DateTime.Now.AddDays(3),
                         signingCredentials: signinCredentials
                     );
@@ -275,7 +275,7 @@ namespace Reddah.Web.Login.Controllers
                     issuer: "https://login.reddah.com",
                     audience: jwtResult.JwtUser.User,
                     claims: claims,
-                    //expires: DateTime.Now.AddMinutes(20),
+                    //expires: DateTime.Now.AddMinutes(1),
                     expires: DateTime.Now.AddDays(3),
                     signingCredentials: signinCredentials
                 );
@@ -395,7 +395,7 @@ namespace Reddah.Web.Login.Controllers
             }
             catch (Exception ex)
             {
-                new JwtResult(1, ex.Message.ToString(), null);
+                return new JwtResult(1, ex.Message.ToString(), null);
             }
 
 
