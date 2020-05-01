@@ -17,6 +17,8 @@ export class TopicActionBarComponent {
 
     @Input() article;
     @Input() userName;
+    @Input() mini;
+    @Input() articles;
 
     constructor(
         private modalController: ModalController,

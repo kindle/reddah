@@ -76,7 +76,7 @@ export class TopicPage implements OnInit {
         if(this.platform.is('android')){
             this.isAndroid = true;
         }
-        this.reddah.getUserPhotos(this.userName, true);
+        this.reddah.getUserPhotos(this.mini.UserName, true);
 
         let cachedArticles = this.localStorageService.retrieve("Reddah_mytopic_"+this.mini.UserName);
         let cachedIds = this.localStorageService.retrieve("Reddah_mytopic_ids_"+this.mini.UserName);
@@ -84,47 +84,54 @@ export class TopicPage implements OnInit {
             this.articles = JSON.parse(cachedArticles);
             this.loadedIds = JSON.parse(cachedIds);
         }
-
-        this.formData = new FormData();
-        this.formData.append("loadedIds", JSON.stringify([]));
-        this.formData.append("abstract", this.mini.UserName);
-
-        let cacheKey = "this.reddah.getMyTopic"+this.mini.UserName;
-        let request = this.reddah.getMyTopic(this.formData);
-
-        this.cacheService.loadFromObservable(cacheKey, request, "MyTopicPage")
-        .subscribe(timeline => 
-        {
-            if(cachedArticles!=JSON.stringify(timeline))
+        else{
+            this.formData = new FormData();
+            this.formData.append("loadedIds", JSON.stringify([]));
+            this.formData.append("abstract", this.mini.UserName);
+    
+            let cacheKey = "this.reddah.getMyTopic"+this.mini.UserName;
+            let request = this.reddah.getMyTopic(this.formData);
+    
+            this.cacheService.loadFromObservable(cacheKey, request, "MyTopicPage")
+            .subscribe(timeline => 
             {
-                this.articles = [];
-                this.loadedIds = [];
-                this.commentData = new Map();
-
-                for(let article of timeline){
-                    this.articles.push(article);
-                    this.loadedIds.push(article.Id);
-                    
-                    //cache user image
-                    this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
-                    //cache preview image
-                    article.Content.split('$$$').forEach((previewImageUrl)=>{
-                        this.reddah.toFileCache(previewImageUrl);
-                        //this.reddah.toImageCache(previewImageUrl, previewImageUrl);
-                    });
-                    this.GetCommentsData(article.Id);
+                if(cachedArticles!=JSON.stringify(timeline))
+                {
+                    console.log('diff')
+                    this.articles = [];
+                    this.loadedIds = [];
+                    this.commentData = new Map();
+    
+                    for(let article of timeline){
+    
+                        article.like = (this.localStorageService.retrieve(`Reddah_ArticleLike_${this.userName}_${article.Id}`)!=null)
+    
+                        this.articles.push(article);
+                        this.loadedIds.push(article.Id);
+                        this.reddah.getUserPhotos(article.UserName);
+                        //cache user image
+                        this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
+                        //cache preview image
+                        article.Content.split('$$$').forEach((previewImageUrl)=>{
+                            this.reddah.toFileCache(previewImageUrl);
+                            //this.reddah.toImageCache(previewImageUrl, previewImageUrl);
+                        });
+                        this.GetCommentsData(article.Id);
+                    }
+    
+                    this.localStorageService.store("Reddah_mytopic_"+this.mini.UserName, JSON.stringify(timeline));
+                    this.localStorageService.store("Reddah_mytopic_ids_"+this.mini.UserName, JSON.stringify(this.loadedIds));
+    
                 }
-
-                this.localStorageService.store("Reddah_mytopic_"+this.mini.UserName,JSON.stringify(timeline));
-                this.localStorageService.store("Reddah_mytopic_ids_"+this.mini.UserName,JSON.stringify(this.loadedIds));
-
-            }
-            else{
-                for(let article of timeline){
-                    this.GetCommentsData(article.Id);
+                else{
+                    for(let article of timeline){
+                        this.GetCommentsData(article.Id);
+                    }
                 }
-            }
-        });
+            });
+        }
+
+        
     }
 
     getMyTimeline(event):void {
@@ -139,9 +146,10 @@ export class TopicPage implements OnInit {
         .subscribe(timeline => 
         {
             for(let article of timeline){
+                article.like = (this.localStorageService.retrieve(`Reddah_ArticleLike_${this.userName}_${article.Id}`)!=null)
                 this.articles.push(article);
                 this.loadedIds.push(article.Id);
-                
+                this.reddah.getUserPhotos(article.UserName);
                 //cache user image
                 this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
                 //cache preview image
@@ -213,6 +221,7 @@ export class TopicPage implements OnInit {
             this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
             this.renderer.setStyle(this.headerOnScroll.nativeElement, 'opacity', '8');
         }
+        
     }
   
     async presentPopover(event: Event, id: any, groupNames: string) {

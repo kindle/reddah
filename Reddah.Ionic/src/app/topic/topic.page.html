@@ -22,7 +22,8 @@
         <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>  
     </ion-refresher>  
     <div class="topicCover" #timelineCover>
-        <img [src]="reddah.appData('cover_'+mini.UserName)">
+        <img [src]="reddah.appData('userphoto_'+mini.UserName)">
+        <!--usedmini-->
     </div>
     <div class="topicAvatar">
         <ion-chip style="--background:var(--ion-chip-background);" (click)="share()">
@@ -108,39 +109,39 @@
             <ion-card-content style="display:block;margin-right:20px;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                 <div class="parent" *ngIf="article.Content.split('$$$').length>6">
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                        <img [id]="reddah.makeItId(image+'mtl')" 
-                        (load)="reddah.adjustImage(image, 'mtl')"
+                        <img [id]="reddah.makeItId(image+'mtltp')" 
+                        (load)="reddah.adjustImage(image, 'mtltp')"
                         [src]="reddah.level2Cache(image)"
                         class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
                 <div class="parent" *ngIf="article.Content.split('$$$').length==3||article.Content.split('$$$').length==5||article.Content.split('$$$').length==6">
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                        <img [id]="reddah.makeItId(image+'mtl')" 
-                        (load)="reddah.adjustImage(image, 'mtl')"
+                        <img [id]="reddah.makeItId(image+'mtltp')" 
+                        (load)="reddah.adjustImage(image, 'mtltp')"
                         [src]="reddah.level2Cache(image)"
                         class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
                 <div class="parent2" *ngIf="article.Content.split('$$$').length==2||article.Content.split('$$$').length==4">
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                        <img [id]="reddah.makeItId(image+'mtl')" 
-                        (load)="reddah.adjustImage(image, 'mtl')"
+                        <img [id]="reddah.makeItId(image+'mtltp')" 
+                        (load)="reddah.adjustImage(image, 'mtltp')"
                         [src]="reddah.level2Cache(image)"
                         class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
                 <div class="parent3" *ngIf="article.Content.split('$$$').length==1">
                     <div class="container3">
-                        <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtl')" 
-                        (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'mtl')"
+                        <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtltp')" 
+                        (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'mtltp')"
                         [src]="reddah.level2Cache(article.Content.split('$$$')[0])"
                         class="picture" (click)="viewer(0, article.Content.split('$$$'))">
                     </div>
                 </div>
             </ion-card-content>
             <ion-item style="--background:transparent;margin:2px 0;" lines="none">
-                <app-topic-action-bar [article]="article" [userName]="userName"></app-topic-action-bar>
+                <app-topic-action-bar [article]="article" [userName]="userName" [mini]="mini" [articles]="articles"></app-topic-action-bar>
             </ion-item>
         </div>
     </div>

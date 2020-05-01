@@ -172,6 +172,9 @@
     "Confirm.ByLatest":"按最新",
     "Confirm.ByEarly":"按最早",
     "Confirm.ByLike":"按贊",
+    "Confirm.LoginExpireTitle":"请重新登录",
+    "Confirm.LoginExpireMessage":"由于您长时间没有操作，Token已过期，请点击确定并重新登录",
+    "Confirm.Network":"如果你遇到服务中断，无法登陆等问题，可以尝试切换网络",
 
     "Pop":{
         "Invite":"邀請",

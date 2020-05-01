@@ -1264,10 +1264,32 @@ export class ReddahService {
     //******************************** */
 
     private log(message: string) {
-        //console.log(message);
-        //console.log(this.jwtExpired())
         if(message!="login"&&this.jwtExpired())
         {
+            if(this.logoutConfirmPopup==false)
+                this.loginExpiredConfirm();
+        }
+    }
+
+    logoutConfirmPopup = false;
+    private async loginExpiredConfirm() {
+        this.logoutConfirmPopup = true;
+        const alert = await this.alertController.create({
+            header: this.instant('Confirm.LoginExpireTitle'),
+            message: this.instant('Confirm.LoginExpireMessage'),
+            buttons: [{
+                text: this.instant('Confirm.Yes'),
+                handler: () => {
+                    this.logout();
+                }
+            }]
+        });
+    
+        await alert.present();
+        const {data} = await alert.onDidDismiss();
+        if(data||!data)
+        {
+            this.logoutConfirmPopup = false;
             this.logout();
         }
     }
@@ -1992,7 +2014,7 @@ export class ReddahService {
 
     jwtExpired(){
         let curjwt = this.getCurrentJwt();
-        console.log(curjwt)
+        //console.log(curjwt)
         if(curjwt==""||curjwt==null)
             return true;
         let parts = curjwt.split('.');
@@ -2268,7 +2290,8 @@ export class ReddahService {
             }
             else{
                 let url = this.localStorageService.retrieve(cacheKey+"_url");
-                if(url)
+                console.log(cacheKey)
+                if(url!=null)
                     return this.cloudFix(url);
                 return "assets/icon/timg.jpg";
             }
@@ -3351,8 +3374,7 @@ export class ReddahService {
     isExpired(exp:number): boolean {
         if(!exp) return true;
         let now = Date.now();
-        console.log(now+"_"+exp*1000)
-
+        //console.log(now+"_"+exp*1000)
 
         return now >= exp*1000;
     }
@@ -3479,6 +3501,39 @@ export class ReddahService {
         this.articleLike(formData).subscribe(data=>{});
 
         this.localStorageService.store("reddah_articles_"+userName, JSON.stringify(this.articles));
+
+        if(article.like)
+            this.localStorageService.store(`Reddah_ArticleLike_${userName}_${article.Id}`, "");
+        else
+            this.localStorageService.clear(`Reddah_ArticleLike_${userName}_${article.Id}`);
+
+        if(this.platform.is('cordova')){
+            if(this.getLikeShake()){
+                this.vibration.vibrate(100);
+            }
+        }
+    }
+
+    likeTopic(article, topicUserName, topics){
+        let userName = this.getCurrentUser()
+        //console.log(article)
+        article.Up = article.Up + (article.like?-1:1);
+        if(article.Up<0)
+            article.Up=0;
+        article.like=!article.like;
+/*
+        topics.forEach(topic=>{
+            if(topic.Id==article.Id){
+                topic = article;
+            }
+        })*/
+
+        let formData = new FormData();
+        formData.append("id", JSON.stringify(article.Id));
+        formData.append("type", JSON.stringify(article.like));
+        this.articleLike(formData).subscribe(data=>{});
+console.log(topics)
+        this.localStorageService.store("Reddah_mytopic_"+topicUserName, JSON.stringify(topics));
 
         if(article.like)
             this.localStorageService.store(`Reddah_ArticleLike_${userName}_${article.Id}`, "");
