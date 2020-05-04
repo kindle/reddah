@@ -24,7 +24,6 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { createAnimation } from '@ionic/core'
 import { Router } from '@angular/router';
-import { SigninPage } from './surface/signin/signin.page';
 
 @Injectable({
     providedIn: 'root'
@@ -76,7 +75,7 @@ export class ReddahService {
     getCurrentNetwork(){
         let network = this.localStorageService.retrieve("Reddah_Network");
         if(network==undefined||network==null)
-            network = 1;
+            network = 2;
         return network;
     }
 
@@ -260,12 +259,27 @@ export class ReddahService {
     //******************************** */
     private addCommentsUrl = `${this.domain}/api/article/addcomments`; 
 
-    addComments(articleId: number, parentId: number, content: string, uid : string): Observable<any> {
-        return this.http.post<any>(this.addCommentsUrl, new NewCommentModel(this.getCurrentJwt(), articleId, parentId, content, uid))
+    addComments(articleId: number, parentId: number, content: string, uid : string, atUsers=""): Observable<any> {
+        atUsers = this.fixAtUsers(atUsers, content);
+        console.log('at users')
+        console.log(atUsers)
+        return this.http.post<any>(this.addCommentsUrl, 
+            new NewCommentModel(this.getCurrentJwt(), articleId, parentId, content, uid, atUsers))
         .pipe(
             tap(data => this.log('add comment')),
             catchError(this.handleError('add comment', []))
         );
+    }
+    private fixAtUsers(atUsers, content){
+        let users = atUsers.split(',');
+        let fixedUsers = [];
+        users.forEach((user)=>{
+            if(content.indexOf('@'+user)>-1)
+            {
+                fixedUsers.push(user);
+            }
+        })
+        return fixedUsers.join(',');
     }
     //******************************** */
     private shareToFriendUrl = `${this.domain}/api/chat/sharetofriend`; 
@@ -2940,7 +2954,25 @@ export class ReddahService {
         return this.unReadMessage.filter(m=>m.Type==n).length;
     }
 
-    //n 0:mytimeline, 1:, 2:comment
+    getUnReadMessageTopUser(n){
+        let unReadMsg = this.unReadMessage.filter(m=>m.Type==n);
+        if(unReadMsg.length==0){
+            return "";
+        }
+        
+        return this.getDisplayName(unReadMsg.slice(-1)[0].From);
+    }
+
+    getUnReadMessageTopTime(n){
+        let unReadMsg = this.unReadMessage.filter(m=>m.Type==n);
+        if(unReadMsg.length==0){
+            return "";
+        }
+        
+        return unReadMsg.slice(-1)[0].CreatedOn;
+    }
+
+    //n 0:mytimeline, 1@:, 2:comment
     storeReadMessage(n){
         let readMessages = this.localStorageService.retrieve("Reddah_ReadMessages");
         if(!readMessages)

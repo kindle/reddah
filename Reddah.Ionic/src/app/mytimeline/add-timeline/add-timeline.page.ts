@@ -216,6 +216,7 @@ export class AddTimelinePage implements OnInit {
         else{
             this.formData.append("ref", JSON.stringify(0));
         }
+        this.formData.append("at", this.atUsers);
         //alert(this.photos.map(e=>e.fileUrl).join(","));
 
         this.reddah.addTimeline(this.formData)
@@ -454,6 +455,7 @@ export class AddTimelinePage implements OnInit {
             }
     }
 
+    atUsers = "";
     async chooseAtUser(){
         const modal = await this.modalController.create({
             component: AtChooseUserPage,
@@ -466,9 +468,12 @@ export class AddTimelinePage implements OnInit {
         await modal.present();
         const { data } = await modal.onDidDismiss();
         if(data){
+            let tempUsers = [];
             data.forEach((item)=>{
                 this.yourThoughts += '@'+item.Watch;
+                tempUsers.push(item.Watch);
             })
+            this.atUsers = tempUsers.join(',');
         }
     }
 

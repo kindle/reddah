@@ -6,18 +6,31 @@
     <ion-text slot="end" (click)="clear()">{{ reddah.instant('Common.Clear') }}</ion-text>
 </ion-item>
 <ion-content no-padding>
-    <ion-item *ngFor="let message of messages" (click)="viewTimeline(message.ArticleId)">
+    <ion-item *ngFor="let message of messages" (click)="viewItem(message.ArticleId)">
         <ion-avatar slot="start" class="messageUserPhoto">
             <img src="{{reddah.appData('userphoto_'+message.From)}}" class="messagePortrait">
         </ion-avatar>
-        <ion-label style="margin-left:10px;">
+        <ion-label *ngIf="message.Type==0">
             <h3 class="user-name">{{reddah.getDisplayName(message.From)}}</h3>
-            <ion-icon name="heart-outline" class="likeIcon" *ngIf="message.Type==0"></ion-icon>
-            <ion-note *ngIf="message.Type==1">#@$#!</ion-note>
             <h4 *ngIf="reddah.checkIsToday(message.CreatedOn)">{{reddah.utcToLocal(message.CreatedOn,'HH:mm')}}</h4>
             <h4 *ngIf="!reddah.checkIsToday(message.CreatedOn)">{{reddah.utcToLocal(message.CreatedOn,'MM-dd HH:mm')}}</h4>
         </ion-label>
-        <img slot="end" src="{{reddah.level2Cache(message.AritclePhoto)}}" class="messageContentPortrait">
+        <img slot="end" *ngIf="message.Type==0&&message.AritclePhoto"
+        src="{{reddah.level2Cache(message.AritclePhoto)}}" class="messageContentPortrait">
+
+        <ion-label *ngIf="message.Type>0">
+            <h3 class="user-name">{{reddah.getDisplayName(message.From)}}</h3>
+            <ion-icon name="heart-circle-outline" color="danger" class="likeIcon" *ngIf="message.Type==3"></ion-icon>
+            <ion-note *ngIf="message.Type==1">{{'提到了你'}}</ion-note>
+            <ion-note *ngIf="message.Type==2">{{message.AritclePhoto}}</ion-note>
+        </ion-label>
+        <div slot="end" *ngIf="message.Type>0">
+            <span *ngIf="reddah.checkIsToday(message.CreatedOn)">{{reddah.utcToLocal(message.CreatedOn,'HH:mm')}}</span>
+            <span *ngIf="!reddah.checkIsToday(message.CreatedOn)">
+                reddah.getSendTime(message.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')
+            </span>
+        </div>
+        
     </ion-item>
     <ion-item lines="none" (click)="showStoredMessage()" *ngIf="!showAll">
         <ion-label style="text-align:center;">{{ reddah.instant('Search.More') }}...</ion-label>

@@ -121,7 +121,12 @@ export class CommentBoxComponent implements OnInit {
     async submit() {
         this.submitClicked = true;
         let uid = this.reddah.uuidv4();
-        this.reddah.addComments(this.selectedArticleId, this.selectedCommentId, this.newComment.value, uid)
+        this.reddah.addComments(
+            this.selectedArticleId, 
+            this.selectedCommentId, 
+            this.newComment.value, 
+            uid,
+            this.atUsers)
         .subscribe(result => 
         {
             if(result.Success==0)
@@ -168,6 +173,7 @@ export class CommentBoxComponent implements OnInit {
 
     }
 
+    atUsers = "";
     async chooseAtUser(){
         const modal = await this.modalController.create({
             component: AtChooseUserPage,
@@ -180,9 +186,12 @@ export class CommentBoxComponent implements OnInit {
         await modal.present();
         const { data } = await modal.onDidDismiss();
         if(data){
+            let tempUsers = [];
             data.forEach((item)=>{
                 this.newComment.value += '@'+item.Watch;
+                tempUsers.push(item.Watch);
             })
+            this.atUsers = tempUsers.join(',');
         }
     }
 

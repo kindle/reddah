@@ -45,7 +45,7 @@ export class AddCommentPage implements OnInit {
         this.submitClicked = true;
         //alert(`write some...aid:${this.articleId},cid:${this.commentId},content:${this.commentContent}`);
         let uid = this.reddah.uuidv4();
-        this.reddah.addComments(this.articleId, this.commentId, this.commentContent, uid)
+        this.reddah.addComments(this.articleId, this.commentId, this.commentContent, uid, this.atUsers)
         .subscribe(result => 
             {
                 if(result.Success==0)
@@ -68,7 +68,7 @@ export class AddCommentPage implements OnInit {
         await this.modalController.dismiss({ action: 'cancel', text: this.commentContent});
     }
 
-
+    atUsers = "";
     async chooseAtUser(){
         const modal = await this.modalController.create({
             component: AtChooseUserPage,
@@ -81,9 +81,12 @@ export class AddCommentPage implements OnInit {
         await modal.present();
         const { data } = await modal.onDidDismiss();
         if(data){
+            let tempUsers = [];
             data.forEach((item)=>{
                 this.newComment.value += '@'+item.Watch;
+                tempUsers.push(item.Watch);
             })
+            this.atUsers = tempUsers.join(',');
         }
     }
     

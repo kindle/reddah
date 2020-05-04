@@ -63,7 +63,7 @@
         </div>
         <div class="postModuleLiner" *ngIf="article.VideoUrl.length==0">
             <div *ngIf="article.ImageUrls.length>=3" (click)="view(article)">
-                <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span>
+                <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span>
                 <div class="postClear"></div>
                 <ion-card-content style="padding:0;">
                     <div class="parent">
@@ -91,16 +91,35 @@
                         [src]="reddah.level2Cache(article.ImageUrls[0])">
                     </div>
                 </div>
-                <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
-                <div [class.articleTextRead]="article.Read">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
+                <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span><br>
+                <div [class.articleTextRead]="article.Read" class="show-two-lines">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
             </div>
             <app-article-action-bar [article]="article" [userName]="userName" 
             *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3"></app-article-action-bar>
 
             <div *ngIf="article.ImageUrls.length==0" (click)="view(article)">
-                <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>
-                <div [class.articleTextRead]="article.Read">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
+                <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span><br>
+                <div [class.articleTextRead]="article.Read" class="show-two-lines">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
             </div>
+
+            <div>
+
+{{article.Admins}}
+            </div>
+
+            <div style="border-left:2px solid gray;padding-left: 10px;margin-top:10px;"
+                [class.articleTextRead]="article.Read"
+                *ngIf="article.LastUpdateContent&&article.LastUpdateContent.length>0">
+                <ion-chip color="primary" style="border-radius: 0;margin:0;padding:0 5px;" 
+                    *ngIf="article.Admins&&article.Admins.split(',').indexOf(article.LastUpdateBy)>-1">
+                    <ion-label style="font-size: smaller;">作者</ion-label>
+                </ion-chip>
+                {{reddah.getDisplayName(article.LastUpdateBy)}}:
+                <div class="show-two-lines" [class.articleTextRead]="article.Read">
+                    {{reddah.htmlDecode(article.LastUpdateContent)}}
+                </div>
+            </div>
+
             <div class="listInfo" *ngIf="article.ImageUrls.length==0">
                 <ion-chip style="--background:var(--ion-chip-background);" *ngFor="let group of article.GroupName.split(',').slice(-2)">
                     <ion-icon name="search-outline" (click)="goSearch(group)" color="dark" size="small"></ion-icon>

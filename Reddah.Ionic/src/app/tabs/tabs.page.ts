@@ -67,7 +67,6 @@ export class TabsPage implements OnInit {
 
         this.reddah.renewJwt().subscribe(data=>{
             if(data.Success==0){ 
-                console.log(data)
                 this.reddah.setCurrentJwt(data.Message);
             }
         });

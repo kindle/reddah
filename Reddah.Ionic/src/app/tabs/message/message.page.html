@@ -6,7 +6,7 @@
     <ion-label>{{ reddah.instant('Menu.Message') }}</ion-label>
 </ion-item>
 <ion-content style="background-color: white;">
-    <ion-item *ngFor="let category of categories">
+    <ion-item *ngFor="let category of categories" (click)="goMessage(category.type)">
         <div style="margin:5px 0px;">
             <div class="singleGroupImage category-image">
                 <ion-icon size="large" [color]="category.color" is-active="false" [name]="category.name"></ion-icon>
@@ -15,11 +15,12 @@
         <ion-label style="margin-left:10px;">
             <span color="dark">{{category.title}}</span>
             <br>
-            <ion-note color="medium">@名字 {{category.desc}}</ion-note>
+            <ion-note color="medium" *ngIf="reddah.getUnReadMessageCount(category.type)>0">
+                @{{reddah.getUnReadMessageTopUser(category.type)}} {{category.desc}}
+            </ion-note>
         </ion-label>
         <ion-note slot="end" style="padding:10px 5px;">
-            <!--{{reddah.getSendTimeChat(message.LastUpdateOn|date:'yyyy-MM-dd HH:mm:ss')}}-->
-            10:11
+            {{reddah.getSendTimeChat(reddah.getUnReadMessageTopTime(category.type)|date:'yyyy-MM-dd HH:mm:ss')}}
             <br>
             <ion-badge color="danger" style="float:right;margin-top:5px;font-size: smaller;" 
                 *ngIf="reddah.getUnReadMessageCount(category.type)>0">

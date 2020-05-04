@@ -20,4 +20,6 @@ export class Article {
     Read: boolean;
     Admins: string;
     VideoUrl: string;
+    LastUpdateBy: string;
+    LastUpdateContent: string;
 }

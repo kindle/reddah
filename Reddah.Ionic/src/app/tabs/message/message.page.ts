@@ -4,6 +4,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingController, NavController, ModalController, Platform, AlertController } from '@ionic/angular';
 import { ChatFirePage } from '../../chatfire/chat-fire.page';
 import { GroupChatFirePage } from '../../chatfire/group-chat-fire.page';
+import { MessagePage } from 'src/app/mytimeline/message/message.page';
 
 @Component({
     selector: 'app-message',
@@ -24,13 +25,13 @@ export class MessageListPage implements OnInit {
         title: "提到我的",
         color: "secondary",
         name: "at-outline",
-        type: 2,
+        type: 1,
         desc: "提到了你"
     },{
         title: "赞我的",
         color: "danger",
         name: "heart-circle-outline",
-        type: 2,
+        type: 3,
         desc: "赞了你的帖子"
     }]
 
@@ -211,5 +212,15 @@ export class MessageListPage implements OnInit {
 
     async close(){
         this.modalController.dismiss();
+    }
+
+    async goMessage(type){
+        const modal = await this.modalController.create({
+            component: MessagePage,
+            componentProps: {type:type},
+            cssClass: "modal-fullscreen",
+        });
+          
+        await modal.present();
     }
 }

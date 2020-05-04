@@ -4,6 +4,7 @@ import { LoadingController, NavController, ActionSheetController  } from '@ionic
 import { ModalController } from '@ionic/angular';
 import { TsViewerPage } from '../tsviewer/tsviewer.page';
 import { ActivatedRoute } from '@angular/router';
+import { PostviewerPage } from 'src/app/postviewer/postviewer.page';
 
 @Component({
   selector: 'app-message',
@@ -16,7 +17,7 @@ export class MessagePage implements OnInit {
         await this.modalController.dismiss();
     }
 
-    type;//0:mytimeline, 1:pub comments, 2:@,reply in comments
+    type;//0:mytimeline, 1:@, 2:reply in comments,3:like
     messages;
 
     constructor(
@@ -32,9 +33,9 @@ export class MessagePage implements OnInit {
     }
         
     ngOnInit(){
-        this.messages = this.reddah.unReadMessage.filter(m=>m.Type==this.type);
+        this.messages = this.reddah.unReadMessage.filter(m=>m.Type==this.type).sort((a,b)=>b.Id-a.Id);
         
-        this.reddah.setMessageRead(0).subscribe(data=>{
+        this.reddah.setMessageRead(this.type).subscribe(data=>{
             if(data.Success==0){
                 this.reddah.storeReadMessage(this.type);
             }
@@ -47,17 +48,24 @@ export class MessagePage implements OnInit {
         this.messages = this.reddah.getStoredMessage();
     }
 
-    
-    async viewTimeline(articleId){
+    async viewItem(articleId){
         let formData = new FormData();
         formData.append("ArticleId", JSON.stringify(articleId));
 
         this.reddah.getArticleById(formData).subscribe(data=>{
             if(data.Success==0){
-                this.goTsViewer(data.Message);
+                if(this.type==0)//timeline
+                {
+                    this.goTsViewer(data.Message);
+                }
+                else
+                {
+                    this.goArticleViewer(data.Message);
+                }
             }
         });
-    } 
+        
+    }
 
     async goTsViewer(article){
         const userModal = await this.modalController.create({
@@ -69,6 +77,17 @@ export class MessagePage implements OnInit {
         });
         
         await userModal.present();
+    }
+
+    async goArticleViewer(article){
+        this.reddah.reloadLocaleSettings();
+        const viewerModal = await this.modalController.create({
+            component: PostviewerPage,
+            componentProps: { article: article },
+            cssClass: "modal-fullscreen",
+        });
+        
+        await viewerModal.present();
     }
 
     async clear(){

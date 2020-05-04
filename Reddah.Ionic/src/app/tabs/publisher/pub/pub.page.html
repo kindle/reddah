@@ -8,7 +8,7 @@
     </ion-button>
 </ion-item>
 <ion-content #pageTop style="background-color:white;" [scrollEvents]="true" (ionScroll)="onScroll($event)">
-    <ion-item lines="none" style="--padding-start:10px;--padding-top:20px;">
+    <ion-item lines="none" style="--padding-start:10px;--padding-top:10px;">
         <ion-avatar class="userPhoto">
           <img src="{{reddah.appData('userphoto_'+userName, 'photo.svg')}}" (click)="viewer(reddah.appData('userphoto_'+userName))" class="portrait" >
         </ion-avatar>
