@@ -2,11 +2,11 @@
 <ion-tabs *ngIf="isAuthenticated()" (press)="onPress($event)"
 (ionTabsDidChange)="ionTabsDidChange($event)" (tabChange)="onTabChange($event)" #myTabs>
     <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="home" href="/tabs/home" (click)="change()">
+         <ion-tab-button tab="home" href="/tabs/home" (click)="change()">
             <ion-icon name="book" style="position: relative;"></ion-icon>
             <ion-label class="tab">{{ reddah.instant('Menu.Recommend') }}</ion-label>
         </ion-tab-button>
-        
+   
         <ion-tab-button tab="find" href="/tabs/find" (click)="change()">
             <ion-icon name="compass" style="position: relative;"></ion-icon>
             <ion-label class="tab">{{ reddah.instant('Menu.Find') }}</ion-label>
@@ -18,7 +18,7 @@
 
         <ion-tab-button tab="contact" href="/tabs/contact" (click)="change()">
             <div style="position:absolute;right:10px;top:10px;" 
-                [ngClass]="{'new-point':reddah.unReadMessage.length>0}"></div>
+                [ngClass]="{'new-point':reddah.unReadMessage&&reddah.unReadMessage.length>0}"></div>
             <ion-icon name="people" style="position: relative;"></ion-icon>
             <ion-label class="tab">{{ reddah.instant('Menu.Contact') }}</ion-label>
         </ion-tab-button>

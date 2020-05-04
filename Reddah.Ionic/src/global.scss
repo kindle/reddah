@@ -183,11 +183,21 @@ ion-icon{
 }
 
 .show-two-lines{
-  text-overflow: -o-ellipsis-lastline;
+  text-overflow: -o-ellipsis-lastline !important;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
+  display: -webkit-box !important;
   -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  color:var(--ion-color-dark);
+}
+
+.show-three-lines{
+  text-overflow: -o-ellipsis-lastline !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   color:var(--ion-color-dark);
 }

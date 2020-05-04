@@ -45,7 +45,7 @@ export class MessagePage implements OnInit {
     showAll = false;
     showStoredMessage(){
         this.showAll = true;
-        this.messages = this.reddah.getStoredMessage();
+        this.messages = this.reddah.getStoredMessage(this.type);
     }
 
     async viewItem(articleId){
@@ -91,7 +91,8 @@ export class MessagePage implements OnInit {
     }
 
     async clear(){
-        this.reddah.clearStoredMessage();
+        this.reddah.clearStoredMessage(this.type);
+        this.showStoredMessage();
     }
 
 }

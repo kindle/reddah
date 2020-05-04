@@ -51,7 +51,7 @@
     <ng-template ngFor let-article [ngForOf]="reddah.articles" id="homepage" style="color: #636468;font-family: 'Segoe UI', Arial, sans-serif;">
         <div class="postModuleLiner" *ngIf="article.VideoUrl.length>0">
             <div>
-                <span [class.articleTextRead]="article.Read" class="articleTitle" (click)="view(article)">{{reddah.htmlDecode(article.Title)}}</span>
+                <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines" (click)="view(article)">{{reddah.htmlDecode(article.Title)}}</span>
                 <div class="postClear"></div>
                 <video id="video_{{article.Id}}" [poster]="" [src]="article.VideoUrl" controls>
                     your browser does not support playing video
@@ -78,8 +78,6 @@
                     </div>
                 </ion-card-content>
             </div>
-            <app-article-action-bar [article]="article" [userName]="userName" 
-            *ngIf="article.ImageUrls.length>=3"></app-article-action-bar>
 
             <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3" (click)="view(article)">
                 <div class="listImage">
@@ -92,27 +90,33 @@
                     </div>
                 </div>
                 <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span><br>
-                <div [class.articleTextRead]="article.Read" class="show-two-lines">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
+                <div [class.articleTextRead]="article.Read" class="show-three-lines">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
             </div>
-            <app-article-action-bar [article]="article" [userName]="userName" 
-            *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3"></app-article-action-bar>
+            <div class="listInfo" *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3">
+                <ion-chip style="--background:var(--ion-chip-background);" *ngFor="let group of getGroupNames(article.GroupName)">
+                    <ion-icon name="search-outline" (click)="goSearch(group)" color="dark" size="small"></ion-icon>
+                    <ion-label color="dark" (click)="goSearch(group)">
+                        {{group.trim()}}
+                    </ion-label>
+                    <ion-icon style="transform:scale(0.7);" name="caret-forward-outline" (click)="goSearch(group)" color="medium" size="small"></ion-icon>
+                </ion-chip>
+            </div>
 
             <div *ngIf="article.ImageUrls.length==0" (click)="view(article)">
                 <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span><br>
                 <div [class.articleTextRead]="article.Read" class="show-two-lines">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
             </div>
 
-            <div>
-
-{{article.Admins}}
-            </div>
-
-            <div style="border-left:2px solid gray;padding-left: 10px;margin-top:10px;"
-                [class.articleTextRead]="article.Read"
+            <div style="border-left:2px solid var(--ion-color-primary);padding-left: 10px;margin-top:10px;"
+                [class.articleTextRead]="article.Read" (click)="view(article)"
                 *ngIf="article.LastUpdateContent&&article.LastUpdateContent.length>0">
                 <ion-chip color="primary" style="border-radius: 0;margin:0;padding:0 5px;" 
-                    *ngIf="article.Admins&&article.Admins.split(',').indexOf(article.LastUpdateBy)>-1">
+                    *ngIf="article.LastUpdateBy!=userName&&article.Admins&&article.Admins.split(',').indexOf(article.LastUpdateBy)>-1">
                     <ion-label style="font-size: smaller;">作者</ion-label>
+                </ion-chip>
+                <ion-chip color="danger" style="border-radius: 0;margin:0;padding:0 5px;" 
+                    *ngIf="article.LastUpdateBy==userName">
+                    <ion-label style="font-size: smaller;">我</ion-label>
                 </ion-chip>
                 {{reddah.getDisplayName(article.LastUpdateBy)}}:
                 <div class="show-two-lines" [class.articleTextRead]="article.Read">
@@ -121,7 +125,7 @@
             </div>
 
             <div class="listInfo" *ngIf="article.ImageUrls.length==0">
-                <ion-chip style="--background:var(--ion-chip-background);" *ngFor="let group of article.GroupName.split(',').slice(-2)">
+                <ion-chip style="--background:var(--ion-chip-background);" *ngFor="let group of getGroupNames(article.GroupName)">
                     <ion-icon name="search-outline" (click)="goSearch(group)" color="dark" size="small"></ion-icon>
                     <ion-label color="dark" (click)="goSearch(group)">
                         {{group.trim()}}
@@ -129,8 +133,7 @@
                     <ion-icon style="transform:scale(0.7);" name="caret-forward-outline" (click)="goSearch(group)" color="medium" size="small"></ion-icon>
                 </ion-chip>
             </div>
-            <app-article-action-bar [article]="article" [userName]="userName" 
-            *ngIf="article.ImageUrls.length==0"></app-article-action-bar>
+            <app-article-action-bar [article]="article" [userName]="userName"></app-article-action-bar>
         </div>
     </ng-template>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">

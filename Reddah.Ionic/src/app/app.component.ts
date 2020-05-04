@@ -31,7 +31,6 @@ export class AppComponent {
         private actionSheetCtrl: ActionSheetController,
         private alertController: AlertController,
         private popoverCtrl: PopoverController,
-        private router: Router,
         private globalization: Globalization,
         //private imageLoaderConfigService: ImageLoaderConfigService,
         private cacheService: CacheService,
@@ -51,7 +50,7 @@ export class AppComponent {
     }
 
     initializeApp() {
-        this.reddah.initCurrentNetwork();
+        //this.reddah.initCurrentNetwork();
         this.platform.ready().then(() => {
             this.statusBar.overlaysWebView(false);
             this.statusBar.styleDefault();
@@ -72,29 +71,21 @@ export class AppComponent {
                 this.globalization.getPreferredLanguage()
                 .then(res => {
                     this.localStorageService.store("Reddah_Locale", res.value);
-                    //this.translate.setDefaultLang(res.value);
                     this.reddah.loadTranslate(res.value);
                 })
                 .catch(e => {
                     this.localStorageService.store("Reddah_Locale", defaultLocale);
-                    //this.translate.setDefaultLang(defaultLocale);
                     this.reddah.loadTranslate(defaultLocale);
                 });
             }
             else{
                 this.localStorageService.store("Reddah_Locale", defaultLocale);
-                //this.translate.setDefaultLang(defaultLocale);
                 this.reddah.loadTranslate(defaultLocale);
-                //this.translate.use(defaultLocale);
             }
 
         }
         else{
-            this.zone.run(()=>{
-                //this.translate.setDefaultLang(currentLocale);
-                //this.translate.use(currentLocale);
-                this.reddah.loadTranslate(currentLocale);
-            })
+            this.reddah.loadTranslate(currentLocale);
         }
 
         this.platform.ready().then(() => {

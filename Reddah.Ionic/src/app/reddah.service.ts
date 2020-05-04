@@ -2868,6 +2868,7 @@ export class ReddahService {
         let now = new Date(localnow+offset).getTime(); 
         
         let diffValue = now - dateTimeStamp;
+        
         if(diffValue < 0){
             if(diffValue>-1000*60)
                 return this.utcToLocal(dateStr,'HH:mm');
@@ -2982,16 +2983,21 @@ export class ReddahService {
         this.unReadMessage = this.unReadMessage.filter(m=>m.Type!=n);
     }
 
-    getStoredMessage(){
+    getStoredMessage(n){
         let readMessages = this.localStorageService.retrieve("Reddah_ReadMessages");
         if(!readMessages)
             readMessages = [];
         
-        return readMessages;
+        return readMessages.filter(s=>s.Type=n).sort((a,b)=>b.Id-a.Id);
     }
 
-    clearStoredMessage(){
-        this.localStorageService.clear("Reddah_ReadMessages");
+    clearStoredMessage(n){
+        let readMessages = this.localStorageService.retrieve("Reddah_ReadMessages");
+        if(!readMessages)
+            readMessages = [];
+        
+        readMessages = readMessages.filter(m=>m.Type!=n);
+        this.localStorageService.store("Reddah_ReadMessages", readMessages);
     }
 
     getRandomInt(max) {

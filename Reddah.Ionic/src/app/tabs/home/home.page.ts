@@ -99,6 +99,15 @@ export class HomePage implements OnInit {
        
     }
 
+    getGroupNames(groupName){
+        let names = groupName.split(',').filter(x=>x.trim().length>0)
+        return names.slice(-1);
+        /*if(names.length>0){
+            return names.length==1? names[0]: names.slice(-1);
+        }
+        return [];*/
+    }
+
     showSearchBar = false;
     lastScrollTop;
     async onScroll($event){
