@@ -149,6 +149,13 @@
     "Article.Recommend": "Aanbevolen",
     "Article.CurrentLocation": "Huidige locatie",
     "Article.Mention": "Herinner eraan wie er kijkt",
+    "Article.Author":"Auteur",
+    "Article.CommentMe":"Commentaar",
+    "Article.AtMe":"Vermelden",
+    "Article.LikeMe":"Als",
+    "Article.CommentYours":"Reageren op je bericht",
+    "Article.AtYou":"Noemde u",
+    "Article.LikeYours":"Vond je bericht leuk",
 
     "Comment.Comment": "Commentaar",
     "Comment.MoreComment":"Meer opmerkingen",
@@ -169,9 +176,10 @@
     "Confirm.ByLatest":"Laatste",
     "Confirm.ByEarly":"Vroegst",
     "Confirm.ByLike":"Zoals",
-    "Confirm.LoginExpireTitle":"请重新登录",
-    "Confirm.LoginExpireMessage":"由于您长时间没有操作，Token已过期，请点击确定并重新登录",
-    "Confirm.Network":"如果你遇到服务中断，无法登陆等问题，可以尝试切换网络",
+    "Confirm.LoginExpireTitle":"Log hier opnieuw in",
+    "Confirm.LoginExpireMessage":"Token is verlopen vanwege uw lange afwezigheid, klik op OK en meld u opnieuw aan",
+    "Confirm.Network":"Als u een onderbreking van de service ondervindt, niet in staat bent om in te loggen, enz., u proberen van netwerk te wisselen",
+    "Confirm.ClickMe":"Klik op mij",
 
     "Pop":{
         "Invite":"Nodig",

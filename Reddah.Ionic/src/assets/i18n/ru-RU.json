@@ -149,6 +149,13 @@
     "Article.Recommend": "Рекомендуется",
     "Article.CurrentLocation": "Текущее местоположение",
     "Article.Mention": "Упомянуть",
+    "Article.Author":"Автор",
+    "Article.CommentMe":"Комментарий",
+    "Article.AtMe":"Упомянуть",
+    "Article.LikeMe":"Как",
+    "Article.CommentYours":"Комментирует ваш пост",
+    "Article.AtYou":"Упомянутые вы",
+    "Article.LikeYours":"Понравилась ваша должность",
 
     "Comment.Comment": "Примечания",
     "Comment.MoreComment":"Дополнительные комментарии",
@@ -169,9 +176,10 @@
     "Confirm.ByLatest":"последний",
     "Confirm.ByEarly":"ранний",
     "Confirm.ByLike":"любить",
-    "Confirm.LoginExpireTitle":"请重新登录",
-    "Confirm.LoginExpireMessage":"由于您长时间没有操作，Token已过期，请点击确定并重新登录",
-    "Confirm.Network":"如果你遇到服务中断，无法登陆等问题，可以尝试切换网络",
+    "Confirm.LoginExpireTitle":"Пожалуйста, вопием снова",
+    "Confirm.LoginExpireMessage":"Срок действия токена истек из-за вашего длительного отсутствия, пожалуйста, нажмите OK и повторно впишитесь в",
+    "Confirm.Network":"Если вы испытываете прерывание обслуживания, не в состоянии войти в систему и т.д., вы можете попробовать переключить сети",
+    "Confirm.ClickMe":"Нажмите на меня",
 
     "Pop":{
         "Invite":"Пригласить",

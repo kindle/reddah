@@ -152,6 +152,13 @@
     "Article.Recommend": "권장",
     "Article.CurrentLocation": "현재 위치",
     "Article.Mention": "언급",
+    "Article.Author":"자동",
+    "Article.CommentMe":"コムメント",
+    "Article.AtMe":"",
+    "Article.LikeMe":"릭",
+    "Article.CommentYours":"귀하의 게시물에 댓글",
+    "Article.AtYou":"당신을 언급 했다",
+    "Article.LikeYours":"귀하의 게시물을 칭찬",
 
     "Comment.Comment": "주석",
     "Comment.MoreComment":"더 이상",
@@ -172,9 +179,10 @@
     "Confirm.ByLatest":"최신",
     "Confirm.ByEarly":"최초의",
     "Confirm.ByLike":"좋아하다",
-    "Confirm.LoginExpireTitle":"请重新登录",
-    "Confirm.LoginExpireMessage":"由于您长时间没有操作，Token已过期，请点击确定并重新登录",
-    "Confirm.Network":"如果你遇到服务中断，无法登陆等问题，可以尝试切换网络",
+    "Confirm.LoginExpireTitle":"다시 로그인 하세요",
+    "Confirm.LoginExpireMessage":"오랜 시간 사용 하지 않기 때문에, 동쪽 연의 만료 된 경우에는 [OK]를 클릭 하 여 다시 로그인 합니다",
+    "Confirm.Network":"서비스 중단 이나 로그인 할 수 없는 문제가 발생 했을 때 네트워크를 전환 해 보십시오",
+    "Confirm.ClickMe":"클릭 미",
 
     "Pop":{
         "Invite":"초대",

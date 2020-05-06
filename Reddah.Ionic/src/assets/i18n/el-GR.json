@@ -149,6 +149,13 @@
     "Article.Recommend": "Συνιστάται",
     "Article.CurrentLocation": "Τρέχουσα θέση",
     "Article.Mention": "Αναφέρω",
+    "Article.Author":"Συγγραφέας",
+    "Article.CommentMe":"Σχόλιο",
+    "Article.AtMe":"Αναφέρω",
+    "Article.LikeMe":"Όπως",
+    "Article.CommentYours":"Σχολίασε τη θέση σας",
+    "Article.AtYou":"Σας ανέφερε",
+    "Article.LikeYours":"Σας ανέφερε",
 
     "Comment.Comment": "Σχόλιο",
     "Comment.MoreComment":"Περισσότερα σχόλια",
@@ -169,9 +176,10 @@
     "Confirm.ByLatest":"Τελευταία",
     "Confirm.ByEarly":"Πρόωρη",
     "Confirm.ByLike":"Όπως",
-    "Confirm.LoginExpireTitle":"请重新登录",
-    "Confirm.LoginExpireMessage":"由于您长时间没有操作，Token已过期，请点击确定并重新登录",
-    "Confirm.Network":"如果你遇到服务中断，无法登陆等问题，可以尝试切换网络",
+    "Confirm.LoginExpireTitle":"Συνδεθείτε ξανά",
+    "Confirm.LoginExpireMessage":"Το διακριτικό έχει λήξει λόγω της μακράς απουσίας σας, κάντε κλικ στο κουμπί OK και συνδεθείτε ξανά",
+    "Confirm.Network":"Εάν αντιμετωπίζετε διακοπή υπηρεσίας, δεν μπορείτε να συνδεθείτε κ.λπ., μπορείτε να δοκιμάσετε την εναλλαγή δικτύων",
+    "Confirm.ClickMe":"Κάντε κλικ σε μένα",
 
     "Pop":{
         "Invite":"Προσκαλέσετε",

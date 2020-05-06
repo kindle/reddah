@@ -150,6 +150,13 @@
     "Article.Recommend": "おすすめ",
     "Article.CurrentLocation": "現在の場所",
     "Article.Mention": "言及",
+    "Article.Author":"オート",
+    "Article.CommentMe":"コムメント",
+    "Article.AtMe":"メンティオン",
+    "Article.LikeMe":"リック",
+    "Article.CommentYours":"あなたの投稿にコメント",
+    "Article.AtYou":"あなたを言及",
+    "Article.LikeYours":"リックドユールポスト",
 
     "Comment.Comment": "コメント",
     "Comment.MoreComment":"もっと見る",
@@ -170,9 +177,10 @@
     "Confirm.ByLatest":"最新",
     "Confirm.ByEarly":"最も早い",
     "Confirm.ByLike":"ライク",
-    "Confirm.LoginExpireTitle":"请重新登录",
-    "Confirm.LoginExpireMessage":"由于您长时间没有操作，Token已过期，请点击确定并重新登录",
-    "Confirm.Network":"如果你遇到服务中断，无法登陆等问题，可以尝试切换网络",
+    "Confirm.LoginExpireTitle":"再度サインインしてください",
+    "Confirm.LoginExpireMessage":"長時間操作していないため、東研の期限が切れている場合は、[OK] をクリックして再度サインインします",
+    "Confirm.Network":"サービスの中断やログインできない問題が発生した場合は、ネットワークを切り替えてみてください",
+    "Confirm.ClickMe":"クリックミー",
 
     "Pop":{
         "Invite":"招待",

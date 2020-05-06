@@ -149,6 +149,13 @@
     "Article.Recommend": "แนะ นำ",
     "Article.CurrentLocation": "ที่ตั้งปัจจุบัน",
     "Article.Mention": "การกล่าวถึง",
+    "Article.Author":"สร้าง",
+    "Article.CommentMe":"ความ คิด เห็น",
+    "Article.AtMe":"การกล่าวถึง",
+    "Article.LikeMe":"ชอบ",
+    "Article.CommentYours":"แสดงความคิดเห็นในโพสต์ของคุณ",
+    "Article.AtYou":"คุณกล่าวถึงคุณ",
+    "Article.LikeYours":"ชอบโพสต์ของคุณ",
 
     "Comment.Comment": "ข้อคิดเห็น",
     "Comment.MoreComment":"แสดงความคิดเห็นเพิ่มเติม",
@@ -169,9 +176,10 @@
     "Confirm.ByLatest":"ใหม่ล่าสุด",
     "Confirm.ByEarly":"เร็วที่สุด",
     "Confirm.ByLike":"ชอบ",
-    "Confirm.LoginExpireTitle":"请重新登录",
-    "Confirm.LoginExpireMessage":"由于您长时间没有操作，Token已过期，请点击确定并重新登录",
-    "Confirm.Network":"如果你遇到服务中断，无法登陆等问题，可以尝试切换网络",
+    "Confirm.LoginExpireTitle":"กรุณาเข้าสู่ระบบอีกครั้ง",
+    "Confirm.LoginExpireMessage":"โทเค็นหมดอายุแล้วเนื่องจากขาดนานของคุณโปรดคลิก OK และลงชื่อเข้าใช้อีกครั้ง",
+    "Confirm.Network":"หากคุณพบการขัดจังหวะการบริการ, ไม่สามารถเข้าสู่ระบบ, ฯลฯ, คุณสามารถลองเปลี่ยนเครือข่าย",
+    "Confirm.ClickMe":"คลิกฉัน",
 
     "Pop":{
         "Invite":"เชิญ",

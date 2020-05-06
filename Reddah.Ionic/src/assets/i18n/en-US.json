@@ -149,6 +149,13 @@
     "Article.Recommend": "Recommended",
     "Article.CurrentLocation": "Current location",
     "Article.Mention": "Mention",
+    "Article.Author":"Author",
+    "Article.CommentMe":"Comment",
+    "Article.AtMe":"Mention",
+    "Article.LikeMe":"Like",
+    "Article.CommentYours":"Commented your post",
+    "Article.AtYou":"Mentioned you",
+    "Article.LikeYours":"Liked your post",
 
     "Comment.Comment": "Comment",
     "Comment.MoreComment":"More Comments",
@@ -169,9 +176,10 @@
     "Confirm.ByLatest":"Latest",
     "Confirm.ByEarly":"Earliest",
     "Confirm.ByLike":"Like",
-    "Confirm.LoginExpireTitle":"请重新登录",
-    "Confirm.LoginExpireMessage":"由于您长时间没有操作，Token已过期，请点击确定并重新登录",
-    "Confirm.Network":"如果你遇到服务中断，无法登陆等问题，可以尝试切换网络",
+    "Confirm.LoginExpireTitle":"Please sign in again",
+    "Confirm.LoginExpireMessage":"Token has expired due to your long absence, please click OK and re-sign in",
+    "Confirm.Network":"If you experience service interruption, unable to log in, etc., you can try switching networks",
+    "Confirm.ClickMe":"Click me",
 
     "Pop":{
         "Invite":"Invite",

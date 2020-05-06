@@ -152,6 +152,13 @@
     "Article.Recommend": "推薦",
     "Article.CurrentLocation": "所在位置",
     "Article.Mention": "提醒誰看",
+    "Article.Author":"作者",
+    "Article.CommentMe":"評論我的",
+    "Article.AtMe":"提到我的",
+    "Article.LikeMe":"讚我的",
+    "Article.CommentYours":"評論了你的帖子",
+    "Article.AtYou":"提到了你",
+    "Article.LikeYours":"讚了你的帖子",
 
     "Comment.Comment": "寫評論",
     "Comment.MoreComment":"更多評論",
@@ -172,9 +179,10 @@
     "Confirm.ByLatest":"按最新",
     "Confirm.ByEarly":"按最早",
     "Confirm.ByLike":"按贊",
-    "Confirm.LoginExpireTitle":"请重新登录",
-    "Confirm.LoginExpireMessage":"由于您长时间没有操作，Token已过期，请点击确定并重新登录",
-    "Confirm.Network":"如果你遇到服务中断，无法登陆等问题，可以尝试切换网络",
+    "Confirm.LoginExpireTitle":"請重新登錄",
+    "Confirm.LoginExpireMessage":"由于你長時間冇操作, token 已經過期, 請點擊確定並重新登錄",
+    "Confirm.Network":"如果你遇到服務中斷, 無法登陸等問題, 可以嘗試切換網絡",
+    "Confirm.ClickMe":"點我",
 
     "Pop":{
         "Invite":"邀請",

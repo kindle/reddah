@@ -149,6 +149,13 @@
     "Article.Recommend": "اوصت",
     "Article.CurrentLocation": "المنصب الحالي",
     "Article.Mention": "اذكر",
+    "Article.Author":"المؤلف",
+    "Article.CommentMe":"التعليق",
+    "Article.AtMe":"اذكر",
+    "Article.LikeMe":"مثل",
+    "Article.CommentYours":"علقت على مشاركتك",
+    "Article.AtYou":"ذكرك",
+    "Article.LikeYours":"أعجبني مشاركتك",
 
     "Comment.Comment": "شروح",
     "Comment.MoreComment":"المزيد من التعليقات",
@@ -169,9 +176,10 @@
     "Confirm.ByLatest":"آخر الأخبار",
     "Confirm.ByEarly":"في أقرب وقت ممكن",
     "Confirm.ByLike":"محبوب",
-    "Confirm.LoginExpireTitle":"请重新登录",
-    "Confirm.LoginExpireMessage":"由于您长时间没有操作，Token已过期，请点击确定并重新登录",
-    "Confirm.Network":"如果你遇到服务中断，无法登陆等问题，可以尝试切换网络",
+    "Confirm.LoginExpireTitle":"يرجى تسجيل الدخول مرة أخرى",
+    "Confirm.LoginExpireMessage":"انتهت صلاحية الرمز المميز بسبب غيابك الطويل، يرجى النقر فوق موافق وإعادة تسجيل الدخول",
+    "Confirm.Network":"إذا واجهت انقطاع الخدمة، أو تعذر تسجيل الدخول، وما إلى ذلك، يمكنك محاولة تبديل الشبكات",
+    "Confirm.ClickMe":"انقر فوق لي",
 
     "Pop":{
         "Invite":"دعوه",
