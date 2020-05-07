@@ -77,7 +77,8 @@ namespace Reddah.Web.Login.Controllers
                                     Status = b.Status,
                                     LastUpdateContent = b.LastUpdateContent,
                                     LastUpdateType = b.LastUpdateType,
-                                    PubName = u.NickName ?? u.UserName
+                                    PubName = u.NickName ?? u.UserName,
+                                    Admins = u.Admins,
                                 })
                             .Take(pageCount);
                 }
@@ -162,7 +163,8 @@ namespace Reddah.Web.Login.Controllers
                                     Status = b.Status,
                                     LastUpdateContent = b.LastUpdateContent,
                                     LastUpdateType = b.LastUpdateType,
-                                    PubName = u.NickName ?? u.UserName
+                                    PubName = u.NickName ?? u.UserName,
+                                    Admins = u.Admins,
                                 })
                             .Take(pageCount);
                     if (query.ToList().Count == 0)
@@ -205,7 +207,8 @@ namespace Reddah.Web.Login.Controllers
                                         Status = b.Status,
                                         LastUpdateContent = b.LastUpdateContent,
                                         LastUpdateType = b.LastUpdateType,
-                                        PubName = u.NickName ?? u.UserName
+                                        PubName = u.NickName ?? u.UserName,
+                                        Admins = u.Admins,
                                     })
                             .Take(pageCount);
                     }
@@ -292,7 +295,8 @@ namespace Reddah.Web.Login.Controllers
                                     Status = b.Status,
                                     LastUpdateContent = b.LastUpdateContent,
                                     LastUpdateType = b.LastUpdateType,
-                                    PubName = u.NickName ?? u.UserName
+                                    PubName = u.NickName ?? u.UserName,
+                                    Admins = u.Admins,
                                 }).OrderBy(e => Guid.NewGuid())
                             .Take(randomPageCount);
                     if (query.ToList().Count == 0)
@@ -335,7 +339,8 @@ namespace Reddah.Web.Login.Controllers
                                         Status = b.Status,
                                         LastUpdateContent = b.LastUpdateContent,
                                         LastUpdateType = b.LastUpdateType,
-                                        PubName = u.NickName ?? u.UserName
+                                        PubName = u.NickName ?? u.UserName,
+                                        Admins = u.Admins,
                                     }).OrderBy(e => Guid.NewGuid())
                             .Take(randomPageCount);
                     }
@@ -369,7 +374,8 @@ namespace Reddah.Web.Login.Controllers
                                     Status = b.Status,
                                     LastUpdateContent = b.LastUpdateContent,
                                     LastUpdateType = b.LastUpdateType,
-                                    PubName = u.NickName ?? u.UserName
+                                    PubName = u.NickName ?? u.UserName,
+                                    Admins = u.Admins,
                                 })
                             .Take(pageCount);
                 }
@@ -415,7 +421,8 @@ namespace Reddah.Web.Login.Controllers
                                     Status = b.Status,
                                     LastUpdateContent = b.LastUpdateContent,
                                     LastUpdateType = b.LastUpdateType,
-                                    PubName = u.NickName ?? u.UserName
+                                    PubName = u.NickName ?? u.UserName,
+                                    Admins = u.Admins,
                                 })
                             .Take(pageCount);
                 }
@@ -450,7 +457,8 @@ namespace Reddah.Web.Login.Controllers
                                     Status = b.Status,
                                     LastUpdateContent = b.LastUpdateContent,
                                     LastUpdateType = b.LastUpdateType,
-                                    PubName = u.NickName ?? u.UserName
+                                    PubName = u.NickName ?? u.UserName,
+                                    Admins = u.Admins,
                                 })
                             .Take(pageCount);
                 }
@@ -490,7 +498,8 @@ namespace Reddah.Web.Login.Controllers
                                     Status = b.Status,
                                     LastUpdateContent = b.LastUpdateContent,
                                     LastUpdateType = b.LastUpdateType,
-                                    PubName = u.NickName ?? u.UserName
+                                    PubName = u.NickName ?? u.UserName,
+                                    Admins = u.Admins,
                                 })
                             .Take(pageCount);
                 }
@@ -526,7 +535,8 @@ namespace Reddah.Web.Login.Controllers
                                     Status = b.Status,
                                     LastUpdateContent = b.LastUpdateContent,
                                     LastUpdateType = b.LastUpdateType,
-                                    PubName = u.NickName ?? u.UserName
+                                    PubName = u.NickName ?? u.UserName,
+                                    Admins = u.Admins,
                                 })
                             .Take(pageCount);
                 }
@@ -557,6 +567,9 @@ namespace Reddah.Web.Login.Controllers
                     ap.Ref = item.Ref;
                     ap.LastUpdateOn = item.LastUpdateOn;
                     ap.PubName = item.PubName;
+                    ap.LastUpdateBy = item.LastUpdateBy;
+                    ap.LastUpdateContent = item.LastUpdateContent;
+                    ap.Admins = item.Admins;
 
                     apList.Add(ap);
                 }
@@ -602,6 +615,11 @@ namespace Reddah.Web.Login.Controllers
 
         }
 
+        /// <summary>
+        /// 0:mytimeline, 1:@ 2:comment, 3:like
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [Route("addcomments")]
         [HttpPost]
         public IHttpActionResult AddComments([FromBody]NewComment data)
@@ -635,6 +653,14 @@ namespace Reddah.Web.Login.Controllers
                     if (article != null)
                     {
                         article.Count++;
+                        article.LastUpdateBy = jwtResult.JwtUser.User;
+                        var lastContent = System.Web.HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(data.Content)));
+                        if(!string.IsNullOrWhiteSpace(lastContent))
+                        {
+                            article.LastUpdateContent = lastContent;
+                            article.LastUpdateOn = DateTime.UtcNow;
+                        }
+                        
 
                         //user or pub
                         var comUser = db.UserProfile.FirstOrDefault(u => u.UserName == article.UserName);
@@ -670,6 +696,25 @@ namespace Reddah.Web.Login.Controllers
                                 };
                                 db.Message.Add(msg);
                             }
+                        }
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(data.AtUsers))
+                    {
+                        foreach(var atUserName in data.AtUsers.Split(','))
+                        {
+                            var msg = new Message()
+                            {
+                                From = jwtResult.JwtUser.User,
+                                To = atUserName,
+                                Msg = "at",
+                                ArticleId = article.Id,
+                                AritclePhoto = System.Web.HttpUtility.HtmlEncode(Helpers.HideSensitiveWords(Helpers.HideXss(data.Content))),
+                                Type = 1,
+                                CreatedOn = DateTime.UtcNow,
+                                Status = 0
+                            };
+                            db.Message.Add(msg);
                         }
                     }
 
@@ -729,7 +774,7 @@ namespace Reddah.Web.Login.Controllers
                 int userType = 0;
                 if (HttpContext.Current.Request["utype"] != null)
                     userType = js.Deserialize<int>(HttpContext.Current.Request["utype"]);
-
+                string atUsers = HttpContext.Current.Request["at"];
 
                 Dictionary<string, string> imageUrls = new Dictionary<string, string>();
 
@@ -875,6 +920,25 @@ namespace Reddah.Web.Login.Controllers
                             newArticle.Abstract = shareTitle;
                         }
                         db.Article.Add(newArticle);
+
+                        if (!string.IsNullOrWhiteSpace(atUsers))
+                        {
+                            foreach (var atUserName in atUsers.Split(','))
+                            {
+                                var msg = new Message()
+                                {
+                                    From = jwtResult.JwtUser.User,
+                                    To = atUserName,
+                                    Msg = "at",
+                                    ArticleId = newArticle.Id,
+                                    AritclePhoto = null,
+                                    Type = 1,
+                                    CreatedOn = DateTime.UtcNow,
+                                    Status = 0
+                                };
+                                db.Message.Add(msg);
+                            }
+                        }
 
                         db.SaveChanges();
 
@@ -2492,6 +2556,153 @@ namespace Reddah.Web.Login.Controllers
 
         }
 
+        [Route("updateuserphotoazure")]
+        [HttpPost]
+        public IHttpActionResult UpdateUserPhotoAzure()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string tag = HttpContext.Current.Request["tag"];//cover|portrait
+                string targetUserName = HttpContext.Current.Request["targetUserName"];
+
+                List<string> imageUrls = new List<string>();
+
+                HttpFileCollection hfc = HttpContext.Current.Request.Files;
+
+                if (String.IsNullOrWhiteSpace(tag))
+                    return Ok(new ApiResult(1, "No tag"));
+
+                if (hfc.Count == 0)
+                    return Ok(new ApiResult(1, "No photo"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                try
+                {
+                    using (var db = new reddahEntities())
+                    {
+                        var fileName = "";
+
+                        foreach (string rfilename in HttpContext.Current.Request.Files)
+                        {
+                            //upload image first
+                            string guid = Guid.NewGuid().ToString().Replace("-", "");
+                            string containerName = "photo";
+
+                            HttpPostedFile upload = HttpContext.Current.Request.Files[rfilename];
+
+                            try
+                            {
+                                var fileFormat = upload.FileName.Substring(upload.FileName.LastIndexOf('.')).Replace(".", "");
+                                var fileNameWithExt = Path.GetFileName(guid + "." + fileFormat);
+
+                                //string connectionString = Environment.GetEnvironmentVariable("REDDAH_AZURE_STORAGE_CONNECTION_STRING");
+                                BlobServiceClient blobServiceClient = new BlobServiceClient(base.GetAzureConnectionString());
+                                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+                                BlobClient blobClient = containerClient.GetBlobClient(fileNameWithExt);
+                                //blobClient.SetAccessTier(Azure.Storage.Blobs.Models.AccessTier.Cool);
+                                blobClient.Upload(upload.InputStream, false);
+                                fileName = "https://reddah.blob.core.windows.net/" + containerName + "/" + fileNameWithExt;
+
+
+                                UploadFile file = new UploadFile();
+                                file.Guid = guid;
+                                file.Format = fileFormat;
+                                file.UserName = jwtResult.JwtUser.User;
+                                file.CreatedOn = DateTime.UtcNow;
+                                file.GroupName = "";
+                                file.Tag = tag;
+                                db.UploadFile.Add(file);
+                                imageUrls.Add(fileName);
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(targetUserName))
+                        {
+                            var target = db.UserProfile.FirstOrDefault(u => u.UserName == targetUserName && u.Type != 0
+                                && (u.CreatedBy == jwtResult.JwtUser.User ||
+                                    (u.Admins.StartsWith(jwtResult.JwtUser.User + ",") ||
+                                            u.Admins.Contains("," + jwtResult.JwtUser.User + ",") ||
+                                            u.Admins.EndsWith("," + jwtResult.JwtUser.User))
+                             ));
+
+                            if (target != null)
+                            {
+                                if (tag.Equals("cover", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    target.Cover = fileName;
+                                }
+                                else
+                                {
+                                    //portrait
+                                    target.Photo = fileName;
+                                }
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                return Ok(new ApiResult(2, "Can't perform this action:target:" + targetUserName + "current:" + jwtResult.JwtUser.User));
+                            }
+                        }
+                        else
+                        {
+                            var target = db.UserProfile.FirstOrDefault(u => u.UserName == jwtResult.JwtUser.User);
+                            if (tag.Equals("cover", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                target.Cover = fileName;
+                            }
+                            else
+                            {
+                                //award point for first time to upload photo 
+                                var gotPointBefore = db.Point.FirstOrDefault(p => p.To == jwtResult.JwtUser.User && p.Reason == "photo");
+                                if (gotPointBefore == null)
+                                {
+                                    int awardPoint = 10;
+                                    var point = new Point()
+                                    {
+                                        CreatedOn = DateTime.UtcNow,
+                                        From = "Reddah",
+                                        To = jwtResult.JwtUser.User,
+                                        OldV = target.Point,
+                                        V = awardPoint,
+                                        NewV = target.Point + awardPoint,
+                                        Reason = "photo"
+                                    };
+                                    db.Point.Add(point);
+                                    target.Point = target.Point + awardPoint;
+                                }
+                                //portrait
+                                target.Photo = fileName;
+                            }
+
+                            db.SaveChanges();
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Ok(new ApiResult(3, "Excepion:" + ex.Message.ToString()));
+                }
+
+
+                return Ok(new ApiResult(0, "User " + tag + " photo updated"));
+
+            }
+            catch (Exception ex1)
+            {
+                return Ok(new ApiResult(4, ex1.Message));
+            }
+        }
+
         [Route("commentlike")]
         [HttpPost]
         public IHttpActionResult CommentLike()
@@ -2523,6 +2734,20 @@ namespace Reddah.Web.Login.Controllers
                         target.Up += (type ? 1 : -1);
                         if (target.Up < 0)
                             target.Up = 0;
+
+                        var msg = new Message()
+                        {
+                            From = jwtResult.JwtUser.User,
+                            To = target.UserName,
+                            Msg = "like",
+                            ArticleId = target.ArticleId,
+                            AritclePhoto = null,
+                            Type = 3,
+                            CreatedOn = DateTime.UtcNow,
+                            Status = 0
+                        };
+                        db.Message.Add(msg);
+
                         db.SaveChanges();
                     }
 
