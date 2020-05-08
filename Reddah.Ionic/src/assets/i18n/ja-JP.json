@@ -181,6 +181,7 @@
     "Confirm.LoginExpireMessage":"長時間操作していないため、東研の期限が切れている場合は、[OK] をクリックして再度サインインします",
     "Confirm.Network":"サービスの中断やログインできない問題が発生した場合は、ネットワークを切り替えてみてください",
     "Confirm.ClickMe":"クリックミー",
+    "Confirm.ShowAll":"全文を展開",
 
     "Pop":{
         "Invite":"招待",

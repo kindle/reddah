@@ -20,7 +20,7 @@
         <ion-label *ngIf="message.Type>0">
             <h3 class="user-name">{{reddah.getDisplayName(message.From)}}</h3>
             <ion-icon name="heart-circle-outline" color="danger" class="likeIcon" *ngIf="message.Type==3"></ion-icon>
-            <ion-note *ngIf="message.Type==1">{{'提到了你'}}</ion-note>
+            <ion-note *ngIf="message.Type==1">{{reddah.instant('Article.AtYou')}}</ion-note>
             <ion-note *ngIf="message.Type==2">{{message.AritclePhoto}}</ion-note>
         </ion-label>
         <div slot="end" *ngIf="message.Type>0">
@@ -31,6 +31,7 @@
         
     </ion-item>
     <ion-item lines="none" (click)="showStoredMessage()" *ngIf="!showAll">
-        <ion-label style="text-align:center;">{{ reddah.instant('Search.More') }}...</ion-label>
+        <ion-label style="text-align:center;" *ngIf="type==0">{{ reddah.instant('Search.More') }}...</ion-label>
+        <ion-label style="text-align:center;" *ngIf="type!=0">{{ reddah.instant('Article.History') }}</ion-label>
     </ion-item>    
 </ion-content>

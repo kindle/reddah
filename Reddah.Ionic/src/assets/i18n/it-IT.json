@@ -180,6 +180,7 @@
     "Confirm.LoginExpireMessage":"Token è scaduto a causa della tua lunga assenza, fai clic su OK e accedi di nuovo",
     "Confirm.Network":"Se si verifica un'interruzione del servizio, l'impossibilità di accedere e così via, è possibile provare a",
     "Confirm.ClickMe":"Fai clic su di me",
+    "Confirm.ShowAll":"Mostra di più",
 
     "Pop":{
         "Invite":"Invitare",

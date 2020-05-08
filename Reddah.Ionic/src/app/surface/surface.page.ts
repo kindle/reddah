@@ -14,6 +14,7 @@ import { AuthService } from '../auth.service';
 import { RegisterPage } from './register/register.page'
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { MapPage } from '../map/map.page';
+import { SettingNetworkPage } from '../settings/setting-network/setting-network.page';
 
 @Component({
     selector: 'app-surface',
@@ -101,10 +102,10 @@ export class SurfacePage implements OnInit {
                 this.router.navigate(['']);
             }
         }
-        else
-        {
+        //else
+        //{
             this.config.isWorldVisible = true;
-        }
+        //}
     }
 
     async locale(){
@@ -125,6 +126,16 @@ export class SurfacePage implements OnInit {
         }
         this.config.isWorldVisible = true;
         
+    }
+
+    async network(){
+        const modal = await this.modalController.create({
+            component: SettingNetworkPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        
+        await modal.present();
     }
 
     async goMap(){

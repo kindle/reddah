@@ -183,6 +183,7 @@
     "Confirm.LoginExpireMessage":"오랜 시간 사용 하지 않기 때문에, 동쪽 연의 만료 된 경우에는 [OK]를 클릭 하 여 다시 로그인 합니다",
     "Confirm.Network":"서비스 중단 이나 로그인 할 수 없는 문제가 발생 했을 때 네트워크를 전환 해 보십시오",
     "Confirm.ClickMe":"클릭 미",
+    "Confirm.ShowAll":"전체 확장",
 
     "Pop":{
         "Invite":"초대",

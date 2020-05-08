@@ -153,6 +153,9 @@
     "Article.CurrentLocation": "所在位置",
     "Article.Mention": "提醒谁看",
     "Article.Author":"作者",
+    "Article.History":"历史消息",
+    "Article.System":"系统消息",
+    "Article.SystemInfo":"请查收",
     "Article.CommentMe":"评论我的",
     "Article.AtMe":"提到我的",
     "Article.LikeMe":"赞我的",
@@ -183,6 +186,7 @@
     "Confirm.LoginExpireMessage":"由于您长时间没有操作，Token已过期，请点击确定并重新登录",
     "Confirm.Network":"如果你遇到服务中断，无法登陆等问题，可以尝试切换网络",
     "Confirm.ClickMe":"点我",
+    "Confirm.ShowAll":"展开全文",
 
     "Pop":{
         "Invite":"邀请",
@@ -348,7 +352,7 @@
         "AlreadyGot":"已获得",
         "DailyMax":"每日上限",
         "OnceMax":"上限",
-        "Letsgo":"去完成",
+        "Letsgo":"开始",
         "Done":"已完成",
         "TaskLoginTitle":"登录",
         "TaskLoginDescp":"每日首次登录",

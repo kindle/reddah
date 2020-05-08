@@ -180,6 +180,7 @@
     "Confirm.LoginExpireMessage":"Token ha expirado debido a su larga ausencia, haga clic en Aceptar y vuelva a iniciar sesión",
     "Confirm.Network":"Si experimenta interrupción del servicio, no puede iniciar sesión, etc., puede intentar cambiar de red",
     "Confirm.ClickMe":"Haz clic en mí",
+    "Confirm.ShowAll":"Mostrar más",
 
     "Pop":{
         "Invite":"Invitar",

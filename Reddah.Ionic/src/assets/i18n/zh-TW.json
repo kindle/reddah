@@ -183,6 +183,7 @@
     "Confirm.LoginExpireMessage":"由于你長時間冇操作, token 已經過期, 請點擊確定並重新登錄",
     "Confirm.Network":"如果你遇到服務中斷, 無法登陸等問題, 可以嘗試切換網絡",
     "Confirm.ClickMe":"點我",
+    "Confirm.ShowAll":"展開全文",
 
     "Pop":{
         "Invite":"邀請",
@@ -348,7 +349,7 @@
         "AlreadyGot":"已獲得",
         "DailyMax":"每日上限",
         "OnceMax":"上限",
-        "Letsgo":"去完成",
+        "Letsgo":"初時",
         "Done":"已完成",
         "TaskLoginTitle":"登入",
         "TaskLoginDescp":"每日首次登入",

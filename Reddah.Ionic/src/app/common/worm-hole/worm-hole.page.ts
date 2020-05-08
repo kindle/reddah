@@ -66,7 +66,9 @@ export class WormHolePage implements OnInit {
         hammer.on('press', (e) => {
             clicked = true;
             //find the recommend user and pop up
-            this.getUserInHole(e);
+            setTimeout(() => {
+                this.getUserInHole(e);
+            },3000)
         });
 
         /*

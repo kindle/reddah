@@ -141,7 +141,9 @@ export class MysticPage implements OnInit {
     }
 
     copyToInput(content){
-        this.chatbox.commentContent = content;
+        if(content.Action!=null)
+            return;
+        this.chatbox.commentContent = content.Content;
     }
 
     

@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
-import { SettingChangePasswordPage } from '../setting-change-password/setting-change-password.page';
 
 @Component({
     selector: 'app-setting-network',
@@ -11,7 +10,7 @@ import { SettingChangePasswordPage } from '../setting-change-password/setting-ch
 })
 export class SettingNetworkPage implements OnInit {
 
-    currentNetwork = 1;
+    currentNetwork = 2;
     
     constructor(
         private modalController: ModalController,

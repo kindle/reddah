@@ -16,23 +16,29 @@ export class MessageListPage implements OnInit {
     currentUserName: any;
 
     categories = [{
-        title: "评论我的",
+        title: this.reddah.instant('Article.System'),
+        color: "success",
+        name: "information-circle-outline",
+        type: 4,
+        desc: this.reddah.instant('Article.SystemInfo')
+    },{
+        title: this.reddah.instant('Article.CommentMe'),
         color: "primary",
         name: "chatbubble-ellipses-outline",
         type: 2,
-        desc: "评论了你的帖子"
+        desc: this.reddah.instant('Article.CommentYours')
     },{
-        title: "提到我的",
+        title: this.reddah.instant('Article.AtMe'),
         color: "secondary",
         name: "at-outline",
         type: 1,
-        desc: "提到了你"
+        desc: this.reddah.instant('Article.AtYou')
     },{
-        title: "赞我的",
+        title: this.reddah.instant('Article.LikeMe'),
         color: "danger",
         name: "heart-circle-outline",
         type: 3,
-        desc: "赞了你的帖子"
+        desc: this.reddah.instant('Article.LikeYours')
     }]
 
     constructor(

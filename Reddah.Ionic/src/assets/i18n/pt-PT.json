@@ -179,6 +179,7 @@
     "Confirm.LoginExpireMessage":"Token expirou devido à sua longa ausência, clique em OK e re-inscreva-se",
     "Confirm.Network":"Se experimentar a interrupção do serviço, incapaz de fazer login, etc., pode tentar mudar de redes",
     "Confirm.ClickMe":"Clique em mim",
+    "Confirm.ShowAll":"Mostrar Mais",
 
     "Pop":{
         "Invite":"Convidar",

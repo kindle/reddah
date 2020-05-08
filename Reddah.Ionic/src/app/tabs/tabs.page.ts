@@ -70,6 +70,8 @@ export class TabsPage implements OnInit {
                 this.reddah.setCurrentJwt(data.Message);
             }
         });
+
+        this.loadMessages();
     }
 
 
@@ -84,7 +86,13 @@ export class TabsPage implements OnInit {
         this.tabRef.select($event);
     }
 
-    
+    loadMessages(){
+        this.reddah.getMessageUnread().subscribe(data=>{
+            if(data.Success==0){
+                this.reddah.unReadMessage = data.Message;
+            }
+        });
+    }
 
     
 
@@ -108,11 +116,7 @@ export class TabsPage implements OnInit {
                 this.statusBar.styleDefault();
             }
         }*/
-        this.reddah.getMessageUnread().subscribe(data=>{
-            if(data.Success==0){
-                this.reddah.unReadMessage = data.Message;
-            }
-        });
+        this.loadMessages();
     }
 
     

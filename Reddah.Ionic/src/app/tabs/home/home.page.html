@@ -109,14 +109,14 @@
 
             <div style="border-left:2px solid var(--ion-color-primary);padding-left: 10px;margin-top:10px;"
                 [class.articleTextRead]="article.Read" (click)="view(article)"
-                *ngIf="article.LastUpdateContent&&article.LastUpdateContent.length>0">
+                *ngIf="article.LastUpdateContent&&article.LastUpdateContent.length>10">
                 <ion-chip color="primary" style="border-radius: 0;margin:0;padding:0 5px;" 
                     *ngIf="article.LastUpdateBy!=userName&&article.Admins&&article.Admins.split(',').indexOf(article.LastUpdateBy)>-1">
-                    <ion-label style="font-size: smaller;">作者</ion-label>
+                    <ion-label style="font-size: smaller;">{{reddah.instant('Article.Author')}}</ion-label>
                 </ion-chip>
                 <ion-chip color="danger" style="border-radius: 0;margin:0;padding:0 5px;" 
                     *ngIf="article.LastUpdateBy==userName">
-                    <ion-label style="font-size: smaller;">我</ion-label>
+                    <ion-label style="font-size: smaller;">{{reddah.instant('Menu.About')}}</ion-label>
                 </ion-chip>
                 {{reddah.getDisplayName(article.LastUpdateBy)}}:
                 <div class="show-two-lines" [class.articleTextRead]="article.Read">

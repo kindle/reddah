@@ -30,7 +30,7 @@ import { Router } from '@angular/router';
 })
 export class ReddahService {
 
-    //default azure
+    //default 2 azure East Asia
     cloud = "azure";
     domain = 'https://reddah-ea.azurewebsites.net';
     storagePhoto = "https://reddah.blob.core.windows.net/photo/"
@@ -43,10 +43,10 @@ export class ReddahService {
 
     setCurrentNetwork(n){
         this.localStorageService.store("Reddah_Network", n);
-        if(n==1)//data center
+        /*if(n==1)//data center
         {
             this.cloud = "";
-            /****DataCenter:Whois****/
+            //////DataCenter:Whois/////
             //default data center: whois
             this.domain = 'https://loging.reddah.com/';
             this.storagePhoto = "https://login.reddah.com/uploadPhoto/";
@@ -54,8 +54,18 @@ export class ReddahService {
             this.storageCode = "https://login.reddah.com/uploadPhoto/";
             //vidio,audio,pdf,transfer temp files
             this.storageFile = "https://login.reddah.com/uploadPhoto/";
+        }*/
+        if(n==1)//azure central us
+        {
+            this.cloud = "azure";
+            /****Azure****/
+            //domain = 'https://reddah-cu.azurewebsites.net';
+            this.domain = 'https://reddah-cu.azurewebsites.net';
+            this.storagePhoto = "https://reddah.blob.core.windows.net/photo/"
+            this.storageCode = "https://reddah.blob.core.windows.net/code/"
+            this.storageFile = "https://reddah.blob.core.windows.net/file/"
         }
-        else if(n==2)//azure
+        else if(n==2)//azure East Asia
         {
             this.cloud = "azure";
             /****Azure****/
@@ -3113,6 +3123,8 @@ export class ReddahService {
         //this.localStorageService.clear("reddah_article_groups");
         //this.localStorageService.clear("reddah_article_usernames");
         //this.cacheService.clearGroup("HomePage");
+        this.articles = [];
+        this.fillCacheArticles();
     }
 
     async ClearPub(){
@@ -3620,6 +3632,15 @@ export class ReddahService {
 
     leaveAnimation = () => {
       return this.enterAnimation().direction('reverse');
+    }
+
+    showComments = new Set();
+    commentShowAll(id){
+        this.showComments.add(id);
+    }
+
+    leftPercentage(content){
+        return Math.floor((content.length-100)/content.length*100)+'%';
     }
 
 }
