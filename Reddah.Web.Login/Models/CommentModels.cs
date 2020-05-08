@@ -21,6 +21,7 @@ namespace Reddah.Web.Login
         public int ParentId { get; set; }
         public string Content { get; set; }
         public string Uid { get; set; }
+        public string AtUsers { get; set; }
     }
 
     public class NewTimeline : BaseModel
@@ -161,6 +162,9 @@ namespace Reddah.Web.Login
         public Nullable<int> Type { get; set; }
         public int? Ref { get; set; }
         public string PubName { get; set; }
+        public string LastUpdateBy { get; set; }
+        public string LastUpdateContent { get; set; }
+        public string Admins { get; set; }
     }
 
     public class UserProfileModel
@@ -185,6 +189,7 @@ namespace Reddah.Web.Login
         public PubArticle() { }
 
         public string PubName;
+        public string Admins;
     }
 
 }
