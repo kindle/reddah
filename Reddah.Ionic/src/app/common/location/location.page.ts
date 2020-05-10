@@ -170,7 +170,7 @@ export class LocationPage implements OnInit {
             if(this.location)
                 this.map.addLayer(this.markerGroup);
 
-            this.map.setView([item.location.lat, item.location.lng], 15);
+            this.map.setView([item.location.lat, item.location.lng], 5);
         }
     }
 

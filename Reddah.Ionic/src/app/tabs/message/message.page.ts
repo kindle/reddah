@@ -220,10 +220,13 @@ export class MessageListPage implements OnInit {
         this.modalController.dismiss();
     }
 
-    async goMessage(type){
+    async goMessage(category){
         const modal = await this.modalController.create({
             component: MessagePage,
-            componentProps: {type:type},
+            componentProps: {
+                type:category.type,
+                title:category.title
+            },
             cssClass: "modal-fullscreen",
         });
           

@@ -223,8 +223,8 @@ export class MapPage implements OnInit {
                     showArray = this.reddah.getRandomArray(showNumber, data.Message.length);
                 }
                 data.Message.forEach((user, index) => {
-                    this.reddah.getUserPhotos(user.UserName);
                     if(showArray.includes(index)){
+                        this.reddah.getUserPhotos(user.UserName);
                         //let content = L.DomUtil.create('div', 'content');
                         let content = "<img id='id_"+user.UserName+"' style='margin-right:5px;border-radius:3px;' width=40 height=40 src="
                             +this.reddah.appDataMap('userphoto_'+user.UserName, user.Photo)+">";

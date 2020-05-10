@@ -160,8 +160,6 @@ export class TabsPage implements OnInit {
             const modal = await this.modalController.create({
                 component: MapPage,
                 componentProps: {
-                    //lat: this.config.lat,
-                    //lng: this.config.lng
                 },
                 cssClass: "modal-fullscreen",
             });

@@ -99,7 +99,7 @@ export class SurfacePage implements OnInit {
         if(data){
             let result = this.authService.exactToken(data);
             if(result){
-                this.router.navigate(['']);
+                this.router.navigate(['/surface']);
             }
         }
         //else
@@ -139,22 +139,23 @@ export class SurfacePage implements OnInit {
     }
 
     async goMap(){
+        if(!this.isAuthenticated())
+            return;
+
         const modal = await this.modalController.create({
             component: MapPage,
             componentProps: {
-                readonly: true
-                //lat: this.config.lat,
-                //lng: this.config.lng
+                readonly: false,
+                lat: this.config.lat,
+                lng: this.config.lng
             },
             cssClass: "modal-fullscreen",
         });
-          
+            
         await modal.present();
     }
 
     tap(){
-        
-        
         if(this.isAuthenticated()){
             
             //this.config.autoSpin = !this.config.autoSpin;
@@ -164,17 +165,18 @@ export class SurfacePage implements OnInit {
             //console.log(this.dragLat +"++"+this.dragLng)
             //console.log(this.dragLat +"++"+this.dragLng)
             
-
+/*
             this.router.navigate(['map'], {
                 queryParams: {
                     lat: this.config.lat,
                     lng: this.config.lng
                 }
-            });
+            });*/
         }
         else{
-            this.config.autoSpin = !this.config.autoSpin;
+            
         }
+        this.config.autoSpin = !this.config.autoSpin;
     }
 
     panstart(evt){

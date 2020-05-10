@@ -6,7 +6,7 @@
         <div class="world-globe-halo"></div>
     </div>
 </div>
-<ion-text color="light" (click)="network()" style="position:absolute;left:15px;top:15px;padding:5px;">{{ reddah.instant('About.Network') }}</ion-text> 
+<ion-text *ngIf="!isAuthenticated()" color="light" (click)="network()" style="position:absolute;left:15px;top:15px;padding:5px;">{{ reddah.instant('About.Network') }}</ion-text> 
 <ion-text color="light" (click)="locale()" style="position:absolute;right:15px;top:15px;padding:5px;">{{ reddah.instant('Surface.Language') }}</ion-text>     
 <ion-button *ngIf="!isAuthenticated()" color="primary" (click)="signin()" style="position:absolute;left:15px;bottom:15px;text-transform: none;">{{ reddah.instant('Surface.Login') }}</ion-button>
 <ion-button *ngIf="!isAuthenticated()" color="light" (click)="register()" style="position:absolute;right:15px;bottom:15px;text-transform: none;">{{ reddah.instant('Surface.Register') }}</ion-button>

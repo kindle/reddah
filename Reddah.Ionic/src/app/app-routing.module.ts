@@ -5,13 +5,15 @@ import { MyTimeLinePage } from './mytimeline/mytimeline.page';
 import { AuthGuard } from './AuthGuard.service';
 import { SearchPage } from './common/search/search.page';
 import { SurfacePage } from './surface/surface.page';
+import { TabsPage } from './tabs/tabs.page';
 
 const routes: Routes = [
     { 
         path: '', 
-        loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+        //component: TabsPage,
+        loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
         //canActivateChild: [AuthGuard]
-        //canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
     },
     { 
         path: 'surface', 

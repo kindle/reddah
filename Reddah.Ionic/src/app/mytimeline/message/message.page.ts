@@ -18,6 +18,7 @@ export class MessagePage implements OnInit {
     }
 
     type;//0:mytimeline, 1:@, 2:reply in comments,3:like
+    title;
     messages;
 
     constructor(

@@ -1288,7 +1288,8 @@ export class ReddahService {
     //******************************** */
 
     private log(message: string) {
-        if(message!="login"&&this.jwtExpired())
+        if(message!="login"&&message!="get users by location"
+        &&this.jwtExpired())
         {
             if(this.logoutConfirmPopup==false)
                 this.loginExpiredConfirm();

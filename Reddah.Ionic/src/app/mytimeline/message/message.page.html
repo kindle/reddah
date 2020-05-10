@@ -2,7 +2,7 @@
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
         <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
     </ion-button>
-    <ion-text>{{ reddah.instant('Menu.Message') }}</ion-text>
+    <ion-text>{{ title==null?reddah.instant('Menu.Message'):title }}</ion-text>
     <ion-text slot="end" (click)="clear()">{{ reddah.instant('Common.Clear') }}</ion-text>
 </ion-item>
 <ion-content no-padding>

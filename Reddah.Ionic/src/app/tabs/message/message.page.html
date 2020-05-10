@@ -6,7 +6,7 @@
     <ion-label>{{ reddah.instant('Menu.Message') }}</ion-label>
 </ion-item>
 <ion-content style="background-color: white;">
-    <ion-item *ngFor="let category of categories" (click)="goMessage(category.type)">
+    <ion-item *ngFor="let category of categories" (click)="goMessage(category)">
         <div style="margin:5px 0px;">
             <div class="singleGroupImage category-image">
                 <ion-icon size="large" [color]="category.color" is-active="false" [name]="category.name"></ion-icon>
