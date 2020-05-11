@@ -41,9 +41,44 @@ export class ReddahService {
         this.setCurrentNetwork(this.getCurrentNetwork());
     }
 
+    networks = [
+        {
+            Id: 1, 
+            Name:"Central US", 
+            Speed: 0,
+            cloud: "azure",
+            domain: "https://reddah-cu.azurewebsites.net",
+            storagePhoto: "https://reddah.blob.core.windows.net/photo/",
+            storageCode: "https://reddah.blob.core.windows.net/code/",
+            storageFile: "https://reddah.blob.core.windows.net/file/",
+        },
+        {
+            Id: 2, 
+            Name:"East Asia", 
+            Speed: 0,
+            cloud: "azure",
+            domain: "https://reddah-ea.azurewebsites.net",
+            storagePhoto: "https://reddah.blob.core.windows.net/photo/",
+            storageCode: "https://reddah.blob.core.windows.net/code/",
+            storageFile: "https://reddah.blob.core.windows.net/file/",
+        },
+    ]
+
     setCurrentNetwork(n){
         this.localStorageService.store("Reddah_Network", n);
-        /*if(n==1)//data center
+        let currentNetwork = this.networks.filter(network=>network.Id==n)[0];
+        if(currentNetwork==null){
+            alert('Network not found');
+            return;
+        }
+
+        this.cloud = currentNetwork.cloud;
+        
+        this.domain = currentNetwork.domain;
+        this.storagePhoto = currentNetwork.storagePhoto;
+        this.storageCode = currentNetwork.storageCode;
+        this.storageFile = currentNetwork.storageFile;
+        /*if//data center
         {
             this.cloud = "";
             //////DataCenter:Whois/////
@@ -55,31 +90,6 @@ export class ReddahService {
             //vidio,audio,pdf,transfer temp files
             this.storageFile = "https://login.reddah.com/uploadPhoto/";
         }*/
-        if(n==1)//azure central us
-        {
-            this.cloud = "azure";
-            /****Azure****/
-            //domain = 'https://reddah-cu.azurewebsites.net';
-            this.domain = 'https://reddah-cu.azurewebsites.net';
-            this.storagePhoto = "https://reddah.blob.core.windows.net/photo/"
-            this.storageCode = "https://reddah.blob.core.windows.net/code/"
-            this.storageFile = "https://reddah.blob.core.windows.net/file/"
-        }
-        else if(n==2)//azure East Asia
-        {
-            this.cloud = "azure";
-            /****Azure****/
-            //domain = 'https://reddah-cu.azurewebsites.net';
-            this.domain = 'https://reddah-ea.azurewebsites.net';
-            this.storagePhoto = "https://reddah.blob.core.windows.net/photo/"
-            this.storageCode = "https://reddah.blob.core.windows.net/code/"
-            this.storageFile = "https://reddah.blob.core.windows.net/file/"
-        }
-        else if(n==3)//aws
-        {
-            this.cloud = "aws";
-            //todo
-        }
     }
 
     getCurrentNetwork(){
@@ -217,7 +227,7 @@ export class ReddahService {
     register(formData): Observable<any> {
         return this.http.post<any>(this.registerUrl, formData)
         .pipe(
-            tap(data => this.log('register')),
+            tap(data => this.log('register', false)),
             catchError(this.handleError('register', []))
         );
     }
@@ -227,7 +237,7 @@ export class ReddahService {
     checkUserName(formData): Observable<any> {
         return this.http.post<any>(this.checkUserNameUrl, formData)
         .pipe(
-            tap(data => this.log('check user name')),
+            tap(data => this.log('check user name', false)),
             catchError(this.handleError('check user name', []))
         );
     }
@@ -239,7 +249,7 @@ export class ReddahService {
 
         return this.http.post<any>(this.loginUrl, new UserModel(userName, password))
         .pipe(
-            tap(data => this.log('login')),
+            tap(data => this.log('login', false)),
             catchError(this.handleError('login', []))
         );
     }
@@ -876,7 +886,7 @@ export class ReddahService {
         
         return this.http.post<any>(this.getusersbylocation, formData)
         .pipe(
-            tap(data => this.log('get users by location')),
+            tap(data => this.log('get users by location', false)),
             catchError(this.handleError('get users by location', []))
         );
     }
@@ -1287,12 +1297,12 @@ export class ReddahService {
     }
     //******************************** */
 
-    private log(message: string) {
-        if(message!="login"&&message!="get users by location"
-        &&this.jwtExpired())
+    private log(message, check = true) {
+        if(check&&this.jwtExpired())
         {
-            if(this.logoutConfirmPopup==false)
+            if(this.logoutConfirmPopup==false){
                 this.loginExpiredConfirm();
+            }
         }
     }
 
@@ -1372,6 +1382,19 @@ export class ReddahService {
     }
     //******************************** */
 
+    private healthCheckUrl = `/api/values/healthcheck`; 
+
+    healthCheck(network): Observable<any> {
+        return this.http.post<any>(network.domain+this.healthCheckUrl, null)
+        .pipe(
+            tap(data => {
+                this.log('healthcheck', false);
+                console.log(data);
+            }),
+            catchError(this.handleError('healthcheck', []))
+        );
+    }
+    //******************************** */
     
 
     //private articlesUrl = 'https://reddah.com/api/webapi/getarticles'; 
@@ -1987,7 +2010,7 @@ export class ReddahService {
     getSecurityToken(formData){
         return this.http.post<any>(this.getSecurityTokenUrl, formData)
         .pipe(
-            tap(data => this.log('get security token')),
+            tap(data => this.log('get security token', false)),
             catchError(this.handleError('get security token', []))
         );        
     }
@@ -1995,7 +2018,7 @@ export class ReddahService {
     resetPassword(formData){
         return this.http.post<any>(this.resetPasswordUrl, formData)
         .pipe(
-            tap(data => this.log('reset password')),
+            tap(data => this.log('reset password',false)),
             catchError(this.handleError('reset password', []))
         );        
     }

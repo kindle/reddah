@@ -17,20 +17,12 @@
     <ion-item lines="none" class="common-splitter">
     </ion-item>
 
-    <ion-item class="borderTop borderItem" (click)="changeNetwork(1)">
-        <ion-label>Central US</ion-label>
+    <ion-item [ngClass]="{'borderTop':isFirst, 'borderBottom':isLast}" 
+        lines="{{isLast?'none':''}}"
+        (click)="changeNetwork(network.Id)" *ngFor="let network of reddah.networks;first as isFirst;last as isLast">
+        <ion-label><b>{{network.Name}}</b> - {{network["latency"]}}</ion-label>
         <ion-icon name="checkmark-circle-outline" color="success" slot="end" 
-        *ngIf="currentNetwork==1"></ion-icon>
+        *ngIf="isNetworkSelected(network)"></ion-icon>
     </ion-item>
-    <ion-item class="borderItem" (click)="changeNetwork(2)">
-        <ion-label>East Asia</ion-label>
-        <ion-icon name="checkmark-circle-outline" color="success" slot="end" 
-        *ngIf="currentNetwork==2"></ion-icon>
-    </ion-item>
-    <!--
-    <ion-item class="borderItem" (click)="changeNetwork(3)">
-        <ion-label>Amazon AWS</ion-label>
-        <ion-icon name="checkmark-circle-outline" color="success" slot="end" 
-        *ngIf="currentNetwork==3"></ion-icon>
-    </ion-item>-->
+
 </ion-content>

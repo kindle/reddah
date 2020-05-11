@@ -20,11 +20,18 @@ export class SettingNetworkPage implements OnInit {
         this.currentNetwork = this.reddah.getCurrentNetwork();
     }
 
-
+    refreshPage;
     ngOnInit() {
-        
+        this.test();
+        this.refreshPage = setInterval(()=>{
+            this.test();
+        },3000);
     }
-    
+
+    ionViewWillLeave() {
+        clearInterval(this.refreshPage);
+    }
+
     async close() {
         await this.modalController.dismiss();
     }
@@ -32,6 +39,22 @@ export class SettingNetworkPage implements OnInit {
     async changeNetwork(n){
         this.currentNetwork = n;
         this.reddah.setCurrentNetwork(n);
+    }
+
+    
+
+    isNetworkSelected(network){
+        return this.currentNetwork==network.Id;
+    }
+
+    async test(){
+        this.reddah.networks.forEach((network, index, alias)=>{
+            network["start"] = new Date().getTime();
+            this.reddah.healthCheck(network).subscribe(data=>{
+                let end =  new Date().getTime();
+                network["latency"] = end - network["start"] + "ms";
+            });
+        })
     }
 
 }
