@@ -121,6 +121,7 @@
         "Male":"남성",
         "Female":"여성",
         "Signature":"서명하다",
+        "DefaultSignature":"这个人很懒，什么都没有留下",
 
         "CurrentVersion": "현재 버전",
         "CheckUpgrade": "업그레이드",

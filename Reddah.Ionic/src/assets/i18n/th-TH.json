@@ -121,6 +121,7 @@
         "Male":"ผู้ชาย",
         "Female":"ผู้หญิง",
         "Signature":"ลงนาม",
+        "DefaultSignature":"这个人很懒，什么都没有留下",
 
         "CurrentVersion": "รุ่นปัจจุบัน",
         "CheckUpgrade": "การยกระดับ",

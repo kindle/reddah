@@ -121,6 +121,7 @@
         "Male":"Αρσενικό",
         "Female":"Θηλυκό",
         "Signature":"Υπογραφή",
+        "DefaultSignature":"这个人很懒，什么都没有留下",
 
         "CurrentVersion": "Τρέχουσα έκδοση",
         "CheckUpgrade": "Αναβάθμιση",

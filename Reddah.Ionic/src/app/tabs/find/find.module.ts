@@ -9,6 +9,7 @@ import { HeaderModule } from '../../common/header/header.module';
 import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoadedImageProps } from 'ng-lazyload-image';
 
 import { EarthBoxComponent } from '../../common/earth-box/earth-box.component';
+import { FindActionBarComponent } from './find-action-bar/find-action-bar.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { EarthBoxComponent } from '../../common/earth-box/earth-box.component';
   ],
   declarations: [
     FindPage,EarthBoxComponent,
+    FindActionBarComponent,
   ]
 })
 export class FindPageModule {

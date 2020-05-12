@@ -48,3 +48,64 @@
     margin-top:-10px;
     text-align: center;
 }
+
+
+.fd-parent {
+    display: grid;
+    grid-template-columns: 31% 31% 31%;
+    grid-gap: 3px;
+}
+
+.fd-parent2 {
+    display: grid;
+    grid-template-columns: 47% 47%;
+    grid-gap: 3px;
+}
+
+.fd-parent3 {
+    display: grid;
+    grid-template-columns: 61.8%;
+    grid-gap: 3px;
+}
+
+.fd-sk-container {
+   position: relative;
+   overflow: hidden;
+}
+
+.fd-container {
+   position: relative;
+   padding-top: 100%;
+   overflow: hidden;
+}
+
+.fd-picture {
+   position: absolute;
+   top:50%;
+   transform: translateY(-50%);
+   object-fit: cover;
+}
+
+.fd-container3 {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: relative;
+   padding-top: 100%;
+   overflow: hidden;
+   margin-top: 5px;
+}
+
+.fd-picture3 {
+   position: absolute;
+   flex-shrink: 0;
+   min-width: 100%;
+   top:0;
+   left:0;
+}
+
+.fd-portrait{
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+}

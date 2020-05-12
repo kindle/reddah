@@ -121,6 +121,7 @@
         "Male":"Mannelijk",
         "Female":"Vrouw",
         "Signature":"Handtekening",
+        "DefaultSignature":"这个人很懒，什么都没有留下",
 
         "CurrentVersion": "Huidige versie",
         "CheckUpgrade": "Upgrade",

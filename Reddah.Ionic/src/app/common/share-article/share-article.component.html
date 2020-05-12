@@ -3,8 +3,8 @@
         <div style="display: flex;margin:5px 0 10px 0;">
             <img [src]="reddah.parseImage(image)" class="sharePortrait" *ngIf="image">
             <ion-icon name="link" color="dark" class="sharePortraitNone" *ngIf="!image"></ion-icon>
-            <span style="margin-left:8px;align-self: center;">
-                {{reddah.htmlDecode(abstract)}}
+            <span style="margin-left:8px;align-self: center;" class="show-three-lines"
+                [innerHTML]="reddah.htmlDecode(abstract)">
             </span>
         </div>
     </ion-Label>

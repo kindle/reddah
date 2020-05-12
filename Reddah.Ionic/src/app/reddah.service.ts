@@ -403,6 +403,30 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private getUserTopicUrl = `${this.domain}/api/article/getusertopic`; 
+
+    getUserTopic(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getUserTopicUrl, formData)
+        .pipe(
+            tap(data => this.log('get user topic')),
+            catchError(this.handleError('get user topic', []))
+        );
+    }
+    //******************************** */
+    private getFindPageTopicUrl = `${this.domain}/api/article/getfindtopic`; 
+
+    getFindPageTopic(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getFindPageTopicUrl, formData)
+        .pipe(
+            tap(data => this.log('get find topic')),
+            catchError(this.handleError('get find topic', []))
+        );
+    }
+    //******************************** */
     private getTimelineUrl = `${this.domain}/api/article/gettimeline`; 
 
     getTimeline(formData: FormData): Observable<any> {

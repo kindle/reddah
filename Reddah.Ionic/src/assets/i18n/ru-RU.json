@@ -121,6 +121,7 @@
         "Male":"мужской пол",
         "Female":"женский пол",
         "Signature":"подпись",
+        "DefaultSignature":"这个人很懒，什么都没有留下",
 
         "CurrentVersion": "текущая версия",
         "CheckUpgrade": "эскалация",

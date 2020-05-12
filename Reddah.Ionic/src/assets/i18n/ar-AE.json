@@ -121,6 +121,7 @@
         "Male":"ذكور",
         "Female":"أنوثة",
         "Signature":"توقيع",
+        "DefaultSignature":"这个人很懒，什么都没有留下",
 
         "CurrentVersion": "النسخة الحالية",
         "CheckUpgrade": "تصعيد",

@@ -25,7 +25,7 @@ export class SettingNetworkPage implements OnInit {
         this.test();
         this.refreshPage = setInterval(()=>{
             this.test();
-        },3000);
+        },5000);
     }
 
     ionViewWillLeave() {

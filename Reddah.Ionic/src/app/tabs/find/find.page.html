@@ -117,6 +117,118 @@
 
 
     <app-earth-box #earthbox *ngIf="showBox"></app-earth-box>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">  
+        <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>  
+    </ion-refresher>
+
+    <ion-item lines="none" class="common-splitter">
+    </ion-item>
+    <div *ngFor="let article of findPageArticles" 
+        style="background-color: var(--ion-color-tertiary); display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
+        <div style="width:100%;border: 0px solid red;" *ngIf="article.Title&&article.Content">
+            <ion-item lines="none">
+                <ion-thumbnail style="margin: 10px 0 0 0;">
+                    <img src="{{reddah.appData('userphoto_'+article.UserName)}}" 
+                        (click)="goUser(article.UserName)" class="fd-portrait"
+                        onerror="this.src='assets/icon/anonymous.png';">
+                </ion-thumbnail>
+                <ion-label style="margin-top:0;">
+                    <div style="display: flex;padding:0 0 5px 0;">
+                        <ion-label class="user-name">{{reddah.getDisplayName(article.UserName, 100)}}</ion-label>
+                    </div>
+                    <div style="display: flex;">
+                        <ion-text color="dark">{{reddah.getSendTime(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-text>
+                        <ion-text color="secondary" style="margin-left: 5px;" *ngIf="isMe(article.UserName)" (click)="delete(article)">{{ reddah.instant('Comment.Delete') }}</ion-text>
+                    </div>
+                </ion-label>
+                <ion-icon name="ellipsis-horizontal" slot="end" (click)="fd_report(article)"></ion-icon>
+            </ion-item>
+            
+            <div *ngIf="article.Title.length>0&&article.Title.length<100">
+                <div style="padding: 0 0 4px 15px;margin-bottom:0px;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+            </div>
+            
+            
+            <ion-item style="--background:transparent;" lines="none" *ngIf="article.Title.length>=100">
+                <div (click)="fullText(article.Title)" style="background-color:var(--ion-color-light); padding: 12px;margin-bottom:5px;" 
+                [innerHTML]="reddah.summaryShort(article.Title, 100, '......')"></div>
+            </ion-item>
+
+            <ion-card-content style="display:block;margin-right:20px;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
+                <div class="fd-parent" *ngIf="article.Content.split('$$$').length>6">
+                    <div class="fd-container" *ngFor="let image of article.Content.split('$$$');index as i">
+                        <img [id]="reddah.makeItId(image+'mtlfdtp')" 
+                        (load)="reddah.adjustImage(image, 'mtlfdtp')"
+                        [src]="reddah.level2Cache(image)"
+                        class="fd-picture" (click)="fd_viewer(i, article.Content.split('$$$'))">
+                    </div>
+                </div>
+                <div class="fd-parent" *ngIf="article.Content.split('$$$').length==3||article.Content.split('$$$').length==5||article.Content.split('$$$').length==6">
+                    <div class="fd-container" *ngFor="let image of article.Content.split('$$$');index as i">
+                        <img [id]="reddah.makeItId(image+'mtlfdtp')" 
+                        (load)="reddah.adjustImage(image, 'mtlfdtp')"
+                        [src]="reddah.level2Cache(image)"
+                        class="fd-picture" (click)="fd_viewer(i, article.Content.split('$$$'))">
+                    </div>
+                </div>
+                <div class="fd-parent2" *ngIf="article.Content.split('$$$').length==2||article.Content.split('$$$').length==4">
+                    <div class="fd-container" *ngFor="let image of article.Content.split('$$$');index as i">
+                        <img [id]="reddah.makeItId(image+'mtlfdtp')" 
+                        (load)="reddah.adjustImage(image, 'mtlfdtp')"
+                        [src]="reddah.level2Cache(image)"
+                        class="fd-picture" (click)="fd_viewer(i, article.Content.split('$$$'))">
+                    </div>
+                </div>
+                <div class="fd-parent3" *ngIf="article.Content.split('$$$').length==1">
+                    <div class="fd-container3">
+                        <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtlfdtp')" 
+                        (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'mtlfdtp')"
+                        [src]="reddah.level2Cache(article.Content.split('$$$')[0])"
+                        class="fd-picture" (click)="fd_viewer(0, article.Content.split('$$$'))">
+                    </div>
+                </div>
+            </ion-card-content>
+
+            <div style="margin-left:15px;border-left:2px solid var(--ion-color-primary);padding-left: 10px;margin-top:10px;margin-bottom:10px;"
+                [class.articleTextRead]="article.Read"
+                *ngIf="article.LastUpdateContent&&article.LastUpdateContent.length>10">
+                <ion-chip color="primary" style="border-radius: 0;margin:0;padding:0 5px;" 
+                    *ngIf="article.LastUpdateBy!=userName&&article.Admins&&article.Admins.split(',').indexOf(article.LastUpdateBy)>-1">
+                    <ion-label style="font-size: smaller;">{{reddah.instant('Article.Author')}}</ion-label>
+                </ion-chip>
+                <ion-chip color="danger" style="border-radius: 0;margin:0;padding:0 5px;" 
+                    *ngIf="article.LastUpdateBy==userName">
+                    <ion-label style="font-size: smaller;">{{reddah.instant('Menu.About')}}</ion-label>
+                </ion-chip>
+                {{reddah.getDisplayName(article.LastUpdateBy)}}:
+                <div class="show-two-lines" [class.articleTextRead]="article.Read">
+                    {{reddah.htmlDecode(article.LastUpdateContent)}}
+                </div>
+            </div>
+
+            <ion-chip style="--background:var(--ion-chip-background);margin-left:15px;margin-top:10px;"
+                (click)="goMiniById(article.Abstract)">
+                <ion-icon name="search-outline" (click)="goSearch(group)" color="dark" size="small"></ion-icon>
+                <ion-label color="dark">
+                    <!--{{reddah.appData('userphoto_'+article.Abstract)}}-->
+                    {{reddah.getDisplayName(article.Abstract, 100)}}
+                </ion-label>
+                <ion-icon style="transform:scale(0.7);" name="caret-forward-outline" color="medium" size="small"></ion-icon>
+            </ion-chip>
+
+            <ion-item style="--background:transparent;margin:2px 0;" lines="none">
+                <app-find-action-bar [article]="article" [key]="'Reddah_findpage_'+userName" [articles]="findPageArticles"></app-find-action-bar>
+            </ion-item>
+            
+        </div>
+    </div>
+    
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" 
+            loadingText="{{ reddah.instant('Button.Loading') }}">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
 
 

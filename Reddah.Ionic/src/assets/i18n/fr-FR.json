@@ -121,6 +121,7 @@
         "Male":"Hommes",
         "Female":"Femmes",
         "Signature":"Signature",
+        "DefaultSignature":"这个人很懒，什么都没有留下",
 
         "CurrentVersion": "Version actuelle",
         "CheckUpgrade": "Check Latest Version",
