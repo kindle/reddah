@@ -121,7 +121,7 @@
         "Male":"Hommes",
         "Female":"Femmes",
         "Signature":"Signature",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"Ce type est paresseux, il n’a plus rien",
 
         "CurrentVersion": "Version actuelle",
         "CheckUpgrade": "Check Latest Version",
@@ -164,6 +164,7 @@
     "Article.CommentYours":"Commenté sur votre post",
     "Article.AtYou":"Vous avez mentionné",
     "Article.LikeYours":"J’ai aimé votre post",
+    "Article.Topic":"Sujet",
 
     "Comment.Comment": "Notes",
     "Comment.MoreComment":"Plus de commentaires",

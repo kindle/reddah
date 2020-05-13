@@ -121,7 +121,7 @@
         "Male":"Mannelijk",
         "Female":"Vrouw",
         "Signature":"Handtekening",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"Hij is lui, hij heeft niets meer over",
 
         "CurrentVersion": "Huidige versie",
         "CheckUpgrade": "Upgrade",
@@ -163,6 +163,7 @@
     "Article.CommentYours":"Reageren op je bericht",
     "Article.AtYou":"Noemde u",
     "Article.LikeYours":"Vond je bericht leuk",
+    "Article.Topic":"Onderwerp",
 
     "Comment.Comment": "Commentaar",
     "Comment.MoreComment":"Meer opmerkingen",

@@ -121,7 +121,7 @@
         "Male":"Maschio",
         "Female":"Donna",
         "Signature":"Firma",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"Questo ragazzo è pigro, non ha più niente",
 
         "CurrentVersion": "Versione corrente",
         "CheckUpgrade": "Aggiornamento",
@@ -163,6 +163,7 @@
     "Article.CommentYours":"Commentato il tuo post",
     "Article.AtYou":"Ti ha menzionato",
     "Article.LikeYours":"Mi è piaciuto il tuo post",
+    "Article.Topic":"Argomento",
 
     "Comment.Comment": "Commento",
     "Comment.MoreComment":"Altri commenti",

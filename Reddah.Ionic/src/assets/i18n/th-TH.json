@@ -121,7 +121,7 @@
         "Male":"ผู้ชาย",
         "Female":"ผู้หญิง",
         "Signature":"ลงนาม",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"ผู้ชายคนนี้ขี้เกียจ",
 
         "CurrentVersion": "รุ่นปัจจุบัน",
         "CheckUpgrade": "การยกระดับ",
@@ -163,6 +163,7 @@
     "Article.CommentYours":"แสดงความคิดเห็นในโพสต์ของคุณ",
     "Article.AtYou":"คุณกล่าวถึงคุณ",
     "Article.LikeYours":"ชอบโพสต์ของคุณ",
+    "Article.Topic":"หัว ข้อ",
 
     "Comment.Comment": "ข้อคิดเห็น",
     "Comment.MoreComment":"แสดงความคิดเห็นเพิ่มเติม",

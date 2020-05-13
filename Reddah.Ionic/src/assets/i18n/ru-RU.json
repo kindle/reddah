@@ -121,7 +121,7 @@
         "Male":"мужской пол",
         "Female":"женский пол",
         "Signature":"подпись",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"Этот парень ленив, у него ничего не осталось",
 
         "CurrentVersion": "текущая версия",
         "CheckUpgrade": "эскалация",
@@ -163,6 +163,7 @@
     "Article.CommentYours":"Комментирует ваш пост",
     "Article.AtYou":"Упомянутые вы",
     "Article.LikeYours":"Понравилась ваша должность",
+    "Article.Topic":"Теме",
 
     "Comment.Comment": "Примечания",
     "Comment.MoreComment":"Дополнительные комментарии",

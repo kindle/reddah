@@ -121,7 +121,7 @@
         "Male":"Αρσενικό",
         "Female":"Θηλυκό",
         "Signature":"Υπογραφή",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"Αυτός ο τύπος είναι τεμπέλης, δεν του έχει μείνει τίποτα",
 
         "CurrentVersion": "Τρέχουσα έκδοση",
         "CheckUpgrade": "Αναβάθμιση",
@@ -163,6 +163,7 @@
     "Article.CommentYours":"Σχολίασε τη θέση σας",
     "Article.AtYou":"Σας ανέφερε",
     "Article.LikeYours":"Σας ανέφερε",
+    "Article.Topic":"Θέμα",
 
     "Comment.Comment": "Σχόλιο",
     "Comment.MoreComment":"Περισσότερα σχόλια",

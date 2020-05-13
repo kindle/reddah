@@ -10,6 +10,7 @@ import { DragulaService } from 'ng2-dragula';
 import { LocationPage } from '../../common/location/location.page';
 import { VideoEditor } from '@ionic-native/video-editor/ngx';
 import { AtChooseUserPage } from 'src/app/chat/at-choose-user/at-choose-user.page';
+import { TopicChoosePage } from 'src/app/chat/topic-choose/topic-choose.page';
 
 @Component({
     selector: 'app-add-timeline',
@@ -196,7 +197,12 @@ export class AddTimelinePage implements OnInit {
         }
         else if(this.action=="topic"){
             this.formData.append('type', JSON.stringify(6));
-            this.formData.append('abstract', this.mini.UserName);
+            if(this.mini==null){
+                this.formData.append('abstract', "");
+            }
+            else{
+                this.formData.append('abstract', this.mini.UserName);
+            }
         }
         else{
             this.formData.append('type', JSON.stringify(1));
@@ -456,6 +462,7 @@ export class AddTimelinePage implements OnInit {
     }
 
     atUsers = "";
+    topicChoose = "";
     async chooseAtUser(){
         const modal = await this.modalController.create({
             component: AtChooseUserPage,
@@ -477,8 +484,19 @@ export class AddTimelinePage implements OnInit {
         }
     }
 
-    chooseTags(){
-
+    async chooseTags(){
+        const modal = await this.modalController.create({
+            component: TopicChoosePage,
+            componentProps: { 
+            },
+            cssClass: "modal-fullscreen",
+        });
+            
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            this.topicChoose = data;
+        }
     }
 
     chooseStock(){

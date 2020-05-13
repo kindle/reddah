@@ -121,7 +121,7 @@
         "Male":"ذكور",
         "Female":"أنوثة",
         "Signature":"توقيع",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"هذا الرجل كسول، لم يتبقى له شيء",
 
         "CurrentVersion": "النسخة الحالية",
         "CheckUpgrade": "تصعيد",
@@ -163,6 +163,7 @@
     "Article.CommentYours":"علقت على مشاركتك",
     "Article.AtYou":"ذكرك",
     "Article.LikeYours":"أعجبني مشاركتك",
+    "Article.Topic":"الموضوع",
 
     "Comment.Comment": "شروح",
     "Comment.MoreComment":"المزيد من التعليقات",

@@ -121,7 +121,7 @@
         "Male":"男性",
         "Female":"女性",
         "Signature":"署名",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"この男は怠け者で、何も残っていない",
 
         "CurrentVersion": "現在のバージョン",
         "CheckUpgrade": "アップグレード",
@@ -164,6 +164,7 @@
     "Article.CommentYours":"あなたの投稿にコメント",
     "Article.AtYou":"あなたを言及",
     "Article.LikeYours":"リックドユールポスト",
+    "Article.Topic":"話題",
 
     "Comment.Comment": "コメント",
     "Comment.MoreComment":"もっと見る",

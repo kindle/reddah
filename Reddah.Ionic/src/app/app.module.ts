@@ -175,6 +175,7 @@ import { AtChooseUserPage } from './chat/at-choose-user/at-choose-user.page';
 import { SettingNetworkPage } from './settings/setting-network/setting-network.page';
 //import { IonicGestureConfig } from './IonicGestureConfig';
 import { TopicActionBarComponent } from './topic/topic-action-bar/topic-action-bar.component';
+import { TopicChoosePage } from './chat/topic-choose/topic-choose.page';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -207,7 +208,7 @@ var firebaseConfig = {
         GroupChatPage,GroupChatFirePage,
         ChatOptPage,
         GroupChatOptPage,
-        ChatChooseUserPage,ShareChooseUserPage,ShareChooseGroupPage,AtChooseUserPage,
+        ChatChooseUserPage,TopicChoosePage,ShareChooseUserPage,ShareChooseGroupPage,AtChooseUserPage,
         ChatChooseGroupPage,
         MyInfoPage,MessagePage,
         NewFriendPage,
@@ -277,7 +278,7 @@ var firebaseConfig = {
         GroupChatPage,GroupChatFirePage,
         ChatOptPage,
         GroupChatOptPage,
-        ChatChooseUserPage,ShareChooseUserPage,ShareChooseGroupPage,AtChooseUserPage,
+        ChatChooseUserPage,TopicChoosePage,ShareChooseUserPage,ShareChooseGroupPage,AtChooseUserPage,
         ChatChooseGroupPage,
         MyInfoPage,MessagePage,
         NewFriendPage,

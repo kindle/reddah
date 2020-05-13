@@ -121,7 +121,7 @@
         "Male":"남성",
         "Female":"여성",
         "Signature":"서명하다",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"이 녀석의 게으른, 그는 아무것도 남아 있어",
 
         "CurrentVersion": "현재 버전",
         "CheckUpgrade": "업그레이드",
@@ -166,6 +166,7 @@
     "Article.CommentYours":"귀하의 게시물에 댓글",
     "Article.AtYou":"당신을 언급 했다",
     "Article.LikeYours":"귀하의 게시물을 칭찬",
+    "Article.Topic":"항목",
 
     "Comment.Comment": "주석",
     "Comment.MoreComment":"더 이상",

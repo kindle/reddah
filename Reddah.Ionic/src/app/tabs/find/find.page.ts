@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular'
+import { ModalController, AlertController, ActionSheetController, PopoverController } from '@ionic/angular'
 import { ScanPage } from '../../common/scan/scan.page';
 import { SearchPage } from '../../common/search/search.page';
 import { ShakePage } from '../../shake/shake.page';
@@ -20,6 +20,8 @@ import { CacheService } from 'ionic-cache';
 import { ArticleTextPopPage } from 'src/app/common/article-text-pop.page';
 import { ImageViewerComponent } from 'src/app/common/image-viewer/image-viewer.component';
 import { UserPage } from 'src/app/common/user/user.page';
+import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
+import { TimelinePopPage } from 'src/app/common/timeline-pop.page';
 
 @Component({
   selector: 'app-find',
@@ -38,6 +40,8 @@ export class FindPage implements OnInit  {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         private alertController: AlertController,
+        private actionSheetController: ActionSheetController,
+        private popoverController: PopoverController,
     ){
         this.user_apps = this.reddah.loadRecent(4);
         this.loadSuggestMini();
@@ -158,9 +162,17 @@ export class FindPage implements OnInit  {
     }
 
     async goMiniById(abstract){
-        
-       let miniName = this.reddah.getDisplayName(abstract, 100);
-       alert(miniName);
+       let key = this.reddah.getDisplayName(abstract, 100);
+        const modal = await this.modalController.create({
+            component: SearchPage,
+            componentProps: { 
+                key: key,
+                type: 3,//array index not id
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await modal.present();
     }
 
     async goUser(userName){
@@ -511,5 +523,37 @@ export class FindPage implements OnInit  {
         this.reddah.setRecentUseMini(mini.UserName).subscribe(data=>{
             this.user_apps = this.reddah.loadRecent(4);
         });
+    }
+
+    async create(ev: any) {
+        const popover = await this.popoverController.create({
+            component: TimelinePopPage,
+            animated: false,
+            translucent: true,
+            cssClass: 'post-option-popover'
+        });
+        await popover.present();
+        const { data } = await popover.onDidDismiss();
+        if(data==1||data==2||data==3){
+            //data=1: take a photo, data=2: lib photo, data=3: lib video
+            this.goPost(data);
+        }
+    }
+
+    async goPost(postType){
+        const postModal = await this.modalController.create({
+            component: AddTimelinePage,
+            componentProps: { 
+                postType: postType,
+                action: 'topic',
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await postModal.present();
+        const { data } = await postModal.onDidDismiss();
+        if(data){
+            this.doRefresh(null);
+        }
     }
 }

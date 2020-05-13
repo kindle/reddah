@@ -121,7 +121,7 @@
         "Male":"Männlich",
         "Female":"Weibliche",
         "Signature":"Unterschrift",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"Dieser Kerl ist faul, er hat nichts mehr",
 
         "CurrentVersion": "Aktuelle Version",
         "CheckUpgrade": "Upgrade",
@@ -163,6 +163,7 @@
     "Article.CommentYours":"Kommentiert auf Ihrem Beitrag",
     "Article.AtYou":"Erwähnt Sie",
     "Article.LikeYours":"Gefällt Ihnen Ihren Beitrag",
+    "Article.Topic":"Thema",
 
     "Comment.Comment": "Kommentar",
     "Comment.MoreComment":"Weitere Kommentare",

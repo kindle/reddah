@@ -121,7 +121,7 @@
         "Male":"Male",
         "Female":"Female",
         "Signature":"Signature",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"This guy's lazy, he's got nothing left",
 
         "CurrentVersion": "Version",
         "CheckUpgrade": "Check Latest Version",
@@ -163,6 +163,7 @@
     "Article.CommentYours":"Commented your post",
     "Article.AtYou":"Mentioned you",
     "Article.LikeYours":"Liked your post",
+    "Article.Topic":"Topic",
 
     "Comment.Comment": "Comment",
     "Comment.MoreComment":"More Comments",

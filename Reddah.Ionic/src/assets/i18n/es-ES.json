@@ -121,7 +121,7 @@
         "Male":"Hombres",
         "Female":"Mujeres",
         "Signature":"Firma",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"Este tipo es perezoso, no le queda nada",
 
         "CurrentVersion": "Versión actual",
         "CheckUpgrade": "Ascensos",
@@ -163,6 +163,7 @@
     "Article.CommentYours":"Comentado en tu publicación",
     "Article.AtYou":"Te mencioné",
     "Article.LikeYours":"Me gustó tu publicación",
+    "Article.Topic":"Tema",
 
     "Comment.Comment": "Notas",
     "Comment.MoreComment":"Más comentarios",

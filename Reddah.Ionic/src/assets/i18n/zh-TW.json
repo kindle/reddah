@@ -121,7 +121,7 @@
         "Male":"男",
         "Female":"女",
         "Signature":"個人簽名",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"這傢伙很懶,什麼都沒有留下",
 
         "CurrentVersion": "當前版本",
         "CheckUpgrade": "檢查新版本",
@@ -166,6 +166,7 @@
     "Article.CommentYours":"評論了你的帖子",
     "Article.AtYou":"提到了你",
     "Article.LikeYours":"讚了你的帖子",
+    "Article.Topic":"話題",
 
     "Comment.Comment": "寫評論",
     "Comment.MoreComment":"更多評論",

@@ -120,7 +120,7 @@
         "Male":"Masculino",
         "Female":"Mulher",
         "Signature":"Assinatura",
-        "DefaultSignature":"这个人很懒，什么都没有留下",
+        "DefaultSignature":"Este tipo é preguiçoso, não tem mais nada",
 
         "CurrentVersion": "Versão atual",
         "CheckUpgrade": "Actualização",
@@ -162,6 +162,7 @@
     "Article.CommentYours":"Comentado no seu post",
     "Article.AtYou":"Mencionou-o",
     "Article.LikeYours":"Gostei do seu post",
+    "Article.Topic":"Tópico",
 
     "Comment.Comment": "Comentário",
     "Comment.MoreComment":"Mais Comentários",
