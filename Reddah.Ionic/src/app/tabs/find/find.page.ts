@@ -525,7 +525,7 @@ export class FindPage implements OnInit  {
         });
     }
 
-    async create(ev: any) {
+    async create() {
         const popover = await this.popoverController.create({
             component: TimelinePopPage,
             animated: false,
