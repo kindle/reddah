@@ -426,6 +426,19 @@ export class ReddahService {
             catchError(this.handleError('get find topic', []))
         );
     }
+
+    //******************************** */
+    private getSearchTopicUrl = `${this.domain}/api/article/getsearchtopic`; 
+
+    getSearchTopic(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getSearchTopicUrl, formData)
+        .pipe(
+            tap(data => this.log('get search topic')),
+            catchError(this.handleError('get search topic', []))
+        );
+    }
     //******************************** */
     private getTimelineUrl = `${this.domain}/api/article/gettimeline`; 
 

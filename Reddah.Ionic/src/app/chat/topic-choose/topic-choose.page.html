@@ -5,9 +5,18 @@
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;">
     <ion-item lines="none" class="borderTop borderItem borderBottom" style="--padding-start:0;--inner-padding-end:0;">
-        <ion-searchbar (ionInput)="filterTopics($event)" placeholder="{{reddah.instant('Search.Title')}}" showCancelButton="focus"></ion-searchbar>
+        <ion-searchbar (ionInput)="filterTopics($event)" placeholder="{{reddah.instant('Article.Topic')}}" showCancelButton="focus"></ion-searchbar>
     </ion-item>
-    <ion-list style="padding-top:0;">
-        
-    </ion-list>
+    <ion-list>
+        <ion-list-header *ngIf="loading">
+            <ion-spinner name="bubbles"></ion-spinner>
+        </ion-list-header>
+        <ion-list-header *ngIf="!loading">
+            {{reddah.instant('Article.Recommend')}}
+        </ion-list-header>
+        <ion-item (click)="chooseTopic(topic)" *ngFor="let topic of topicList">
+          <ion-label>{{topic}}</ion-label>
+          <ion-note slot="end" color="primary"></ion-note>
+        </ion-item>
+      </ion-list>
 </ion-content>

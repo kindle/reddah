@@ -15,7 +15,6 @@ import { MiniViewerComponent } from '../mini-viewer/mini-viewer.component';
 import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
 import { ShareChooseChatPage } from '../../chat/share-choose-chat/share-choose-chat.page';
 import { ArticleTextPopPage } from '../article-text-pop.page';
-import { ArticlePopPage } from '../article-pop.page';
 
 @Component({
     selector: 'app-user',

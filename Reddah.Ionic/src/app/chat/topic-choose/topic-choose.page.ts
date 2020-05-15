@@ -38,16 +38,38 @@ export class TopicChoosePage implements OnInit {
     }
 
     async close() {
-        this.modalController.dismiss(this.topicChoose);
+        this.modalController.dismiss();
     }
 
     async submit(){
-        this.topicChoose = "test"
         this.modalController.dismiss(this.topicChoose);
     }
 
-    filterTopics(event){
+    loading = false;
+    topicList = [];
+    filterTopics(ev){
+        var val = ev.target.value;
+        this.topicChoose = val;
 
+        if(val&&val.length>0){
+            this.loading = true;
+            let formData = new FormData();
+            formData.append("key", val);
+    
+            let cacheKey = "this.reddah.getSearchTopic"+val;
+            let request = this.reddah.getSearchTopic(formData);
+    
+            this.cacheService.loadFromObservable(cacheKey, request, "TopicChoosePage")
+            .subscribe(topics => 
+            {
+                this.topicList = topics;
+                this.loading = false;
+            });
+        }
+    }
+
+    chooseTopic(val){
+        this.modalController.dismiss(val);
     }
 
 }

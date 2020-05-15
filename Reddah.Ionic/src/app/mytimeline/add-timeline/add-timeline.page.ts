@@ -198,7 +198,7 @@ export class AddTimelinePage implements OnInit {
         else if(this.action=="topic"){
             this.formData.append('type', JSON.stringify(6));
             if(this.mini==null){
-                this.formData.append('abstract', "");
+                this.formData.append('abstract', this.topicChoose?this.topicChoose:"");
             }
             else{
                 this.formData.append('abstract', this.mini.UserName);

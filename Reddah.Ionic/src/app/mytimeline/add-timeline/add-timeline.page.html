@@ -51,7 +51,7 @@
     </ion-item>
     <ion-item (click)="chooseTags()" *ngIf="action=='topic'&&!mini">
       <ion-icon name="pricetags-outline"></ion-icon>
-      <ion-text style="margin-left: 15px;">{{ topicChoose?'#'+topicChoose:reddah.instant('Article.Topic') }}</ion-text>
+      <ion-text style="margin-left: 15px;">{{ topicChoose?'# '+topicChoose:reddah.instant('Article.Topic') }}</ion-text>
       <ion-icon name="chevron-forward-outline"slot="end"></ion-icon>
     </ion-item>
     <ion-item (click)="chooseAtUser()">
