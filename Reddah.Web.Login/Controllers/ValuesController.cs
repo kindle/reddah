@@ -3,7 +3,7 @@
 namespace Reddah.Web.Login.Controllers
 {
     [RoutePrefix("api/values")]
-    public class ValuesController : ApiController
+    public class ValuesController : ApiBaseController
     {
         [Route("healthcheck")]
         public IHttpActionResult HealthCheck()

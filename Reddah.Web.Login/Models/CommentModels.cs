@@ -57,6 +57,20 @@ namespace Reddah.Web.Login
         public Nullable<int> UserSex { get; set; }
     }
 
+    public class CommentArticle : Article
+    {
+        public int CommentId { get; set; }
+        public int ParentId { get; set; }
+        public string CommentContent { get; set; }
+        public System.DateTime CommentCreatedOn { get; set; }
+        public Nullable<int> CommentUp { get; set; }
+        public Nullable<int> CommentDown { get; set; }
+        public int CommentCount { get; set; }
+        public int CommentStatus { get; set; }
+        public int CommentType { get; set; }
+        public string CommentUid { get; set; }
+    }
+
     public class AdvancedUserFriend : UserFriend
     {
         public string UserNickName { get; set; }
@@ -67,7 +81,6 @@ namespace Reddah.Web.Login
 
     public class AdvancedPub : Article
     {
-        public string UserName { get; set; }
         public string UserNickName { get; set; }
         public string Signature { get; set; }
         public string UserPhoto { get; set; }

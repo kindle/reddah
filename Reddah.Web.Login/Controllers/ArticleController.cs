@@ -1282,6 +1282,259 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("getusertopic")]
+        [HttpPost]
+        public IHttpActionResult GetUserTopic()
+        {
+            IEnumerable<Article> query = null;
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int[] loadedIds = js.Deserialize<int[]>(HttpContext.Current.Request["loadedIds"]);
+                string targetUserName = HttpContext.Current.Request["abstract"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var pageCount = 10;
+
+                    int[] loaded = loadedIds == null ? new int[] { } : loadedIds;
+
+                    query = (from b in db.Article
+                             join u in db.UserProfile on b.UserName equals u.UserName
+                             where b.Type == 6 && b.Status != -1 && b.UserName == targetUserName
+                             && !(loaded).Contains(b.Id)
+                             orderby b.Id descending
+                             select new AdvancedTimeline
+                             {
+                                 Id = b.Id,
+                                 Title = b.Title,
+                                 Content = b.Content,
+                                 Abstract = b.Abstract,
+                                 CreatedOn = b.CreatedOn,
+                                 Up = b.Up,
+                                 Down = b.Down,
+                                 Count = b.Count,
+                                 UserName = b.UserName,
+                                 GroupName = b.GroupName,
+                                 Locale = b.Locale,
+                                 LastUpdateOn = b.LastUpdateOn,
+                                 Type = b.Type,
+                                 Ref = b.Ref,
+                                 Location = b.Location,
+                                 UserNickName = u.NickName,
+                                 UserPhoto = u.Photo,
+                                 UserSex = u.Sex
+                             })
+                            .Take(pageCount);
+
+                    return Ok(query.ToList());
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("getusercomments")]
+        [HttpPost]
+        public IHttpActionResult GetUserComments()
+        {
+            IEnumerable<Article> query = null;
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int[] loadedIds = js.Deserialize<int[]>(HttpContext.Current.Request["loadedIds"]);
+                string targetUserName = HttpContext.Current.Request["abstract"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var pageCount = 10;
+
+                    int[] loaded = loadedIds == null ? new int[] { } : loadedIds;
+
+                    query = (from c in db.Comment
+                             join a in db.Article on c.ArticleId equals a.Id
+                             where c.UserName == targetUserName && c.Status == 0
+                             && !(loaded).Contains(c.Id)
+                             orderby c.Id descending
+                             select new CommentArticle
+                             {
+                                 Id = a.Id,
+                                 Title = a.Title,
+                                 Content = a.Content,
+                                 Abstract = a.Abstract,
+                                 CreatedOn = a.CreatedOn,
+                                 Up = a.Up,
+                                 Down = a.Down,
+                                 Count = a.Count,
+                                 UserName = a.UserName,
+                                 GroupName = a.GroupName,
+                                 Locale = a.Locale,
+                                 LastUpdateOn = a.LastUpdateOn,
+                                 Type = a.Type,
+                                 Ref = a.Ref,
+                                 Location = a.Location,
+                                 CommentId = c.Id,
+                                 ParentId = c.ParentId,
+                                 CommentContent = c.Content,
+                                 CommentCreatedOn = c.CreatedOn,
+                                 CommentUp = c.Up,
+                                 CommentDown = c.Down,
+                                 CommentCount = c.Count,
+                                 CommentStatus = c.Status,
+                                 CommentType = c.Type,
+                                 CommentUid = c.Uid
+                             })
+                             .Take(pageCount);
+
+                    return Ok(query.ToList());
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("getfindtopic")]
+        [HttpPost]
+        public IHttpActionResult GetFindTopic()
+        {
+            IEnumerable<Article> query = null;
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int[] loadedIds = js.Deserialize<int[]>(HttpContext.Current.Request["loadedIds"]);
+                string targetUserName = HttpContext.Current.Request["abstract"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    var pageCount = 10;
+
+                    int[] loaded = loadedIds == null ? new int[] { } : loadedIds;
+
+                    query = (from b in db.Article
+                             join u in db.UserProfile on b.UserName equals u.UserName
+                             where b.Type == 6 && b.Status != -1 
+                             && !(loaded).Contains(b.Id)
+                             orderby b.Id descending
+                             select new AdvancedTimeline
+                             {
+                                 Id = b.Id,
+                                 Title = b.Title,
+                                 Content = b.Content,
+                                 Abstract = b.Abstract,
+                                 CreatedOn = b.CreatedOn,
+                                 Up = b.Up,
+                                 Down = b.Down,
+                                 Count = b.Count,
+                                 UserName = b.UserName,
+                                 GroupName = b.GroupName,
+                                 Locale = b.Locale,
+                                 LastUpdateOn = b.LastUpdateOn,
+                                 Type = b.Type,
+                                 Ref = b.Ref,
+                                 Location = b.Location,
+                                 UserNickName = u.NickName,
+                                 UserPhoto = u.Photo,
+                                 UserSex = u.Sex,
+                                 LastUpdateBy = b.LastUpdateBy,
+                                 LastUpdateContent = b.LastUpdateContent,
+                             })
+                            .Take(pageCount);
+
+                    return Ok(query.ToList());
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        [Route("getsearchtopic")]
+        [HttpPost]
+        public IHttpActionResult GetSearchTopic()
+        {
+            IEnumerable<string> query = null;
+
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+
+                string key = HttpContext.Current.Request["key"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                using (var db = new reddahEntities())
+                {
+                    query = (from g in db.Group
+                             where g.Name.Contains(key)
+                             orderby g.Name
+                             select g.Name)
+                            .Take(20);
+
+                    return Ok(query.ToList());
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
         [Route("gettimeline")]
         [HttpPost]
         public IHttpActionResult GetTimeline()
