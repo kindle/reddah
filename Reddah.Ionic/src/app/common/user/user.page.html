@@ -96,15 +96,8 @@
                 (click)="goMini(app)" style="border-radius: 50%;">
         </ion-thumbnail>
     </ion-item>
-
-    <ion-item lines="none" class="common-splitter" *ngIf="isFriend">
-    </ion-item>
-    <ion-item class="borderTop borderBottom" lines="none" (click)="goMore()" *ngIf="isFriend">
-        <span class="itemTitle">{{ reddah.instant('Search.More') }}</span>
-        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
-    </ion-item>
     
-    <ion-item lines="none" class="common-splitter">
+    <ion-item lines="none" class="common-splitter" *ngIf="isFriend||(!isFriend&&userName!=reddah.getCurrentUser())">
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" *ngIf="isFriend" (click)="chat()">
         <div class="centerItem">
@@ -123,6 +116,13 @@
             <ion-icon class="cmd-icon" color="secondary" name="add"></ion-icon>
             <ion-note color="secondary" class="cmd-title cmd-line">{{ reddah.instant('Menu.Header.AddFriend') }}</ion-note>
         </div>
+    </ion-item>
+
+    <ion-item lines="none" class="common-splitter">
+    </ion-item>
+    <ion-item class="borderTop borderBottom" lines="none" (click)="goMore()">
+        <span class="itemTitle">{{ reddah.instant('Search.More') }}</span>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
 
     <ion-item lines="none" class="common-splitter">

@@ -8,6 +8,8 @@ import { UserPage } from '../user/user.page';
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { AddFeedbackPage } from 'src/app/mytimeline/add-feedback/add-feedback.page';
 import { ArticleTextPopPage } from '../article-text-pop.page';
+import { Article } from 'src/app/model/article';
+import { PostviewerPage } from 'src/app/postviewer/postviewer.page';
 
 @Component({
     selector: 'app-more',
@@ -39,8 +41,8 @@ export class MorePage implements OnInit {
 
     userCommentArticles = [];
     ngOnInit() {
-        let cachedArticles = this.localStorageService.retrieve("Reddah_morepage_"+this.userName);
-        let cachedArticleIds = this.localStorageService.retrieve("Reddah_morepage_ids_"+this.userName);
+        let cachedArticles = this.localStorageService.retrieve("Reddah_morepage_"+this.target);
+        let cachedArticleIds = this.localStorageService.retrieve("Reddah_morepage_ids_"+this.target);
         let cacheArticleArray = JSON.parse(cachedArticles);
         if(cachedArticles&&cacheArticleArray.length>0){
             let top = 20;
@@ -55,26 +57,26 @@ export class MorePage implements OnInit {
         else{
             this.formData = new FormData();
             this.formData.append("loadedIds", JSON.stringify([]));
-            this.formData.append("abstract", this.userName);
+            this.formData.append("abstract", this.target);
     
-            let cacheKey = "this.reddah.getMorePage"+this.userName;
-            let request = this.reddah.getUserTopic(this.formData);
+            let cacheKey = "this.reddah.getMorePage"+this.target;
+            let request = this.reddah.getUserComments(this.formData);
     
             this.cacheService.loadFromObservable(cacheKey, request, "MorePage")
-            .subscribe(timeline => 
+            .subscribe(commentArticles => 
             {
-                if(cachedArticles!=JSON.stringify(timeline))
+                if(cachedArticles!=JSON.stringify(commentArticles))
                 {
                     this.userCommentArticles = [];
                     this.loadedIds = [];
                     this.commentData = new Map();
     
-                    for(let article of timeline){
+                    for(let article of commentArticles){
     
                         article.like = (this.localStorageService.retrieve(`Reddah_ArticleLike_${this.userName}_${article.Id}`)!=null)
     
                         this.userCommentArticles.push(article);
-                        this.loadedIds.push(article.Id);
+                        this.loadedIds.push(article.CommentId);
                         this.reddah.getUserPhotos(article.UserName);
                         //cache user image
                         this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
@@ -86,12 +88,12 @@ export class MorePage implements OnInit {
                         this.GetCommentsData(article.Id);
                     }
     
-                    this.localStorageService.store("Reddah_morepage_"+this.userName, JSON.stringify(timeline));
-                    this.localStorageService.store("Reddah_morepage_ids_"+this.userName, JSON.stringify(this.loadedIds));
+                    this.localStorageService.store("Reddah_morepage_"+this.target, JSON.stringify(commentArticles));
+                    this.localStorageService.store("Reddah_morepage_ids_"+this.target, JSON.stringify(this.loadedIds));
     
                 }
                 else{
-                    for(let article of timeline){
+                    for(let article of commentArticles){
                         this.GetCommentsData(article.Id);
                     }
                 }
@@ -197,7 +199,7 @@ export class MorePage implements OnInit {
                             this.userCommentArticles.splice(index, 1);
                         }
                     })
-                    this.localStorageService.store("Reddah_morepage_"+this.userName, this.userCommentArticles);
+                    this.localStorageService.store("Reddah_morepage_"+this.target, this.userCommentArticles);
                     this.cacheService.clearGroup("MorePage");
                 }
             }]
@@ -209,19 +211,19 @@ export class MorePage implements OnInit {
     getUserCommentArticles(event):void {
         this.formData = new FormData();
         this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
-        this.formData.append("abstract", this.userName);
+        this.formData.append("abstract", this.target);
         
-        let cacheKey = "this.reddah.getMorePage" + this.userName + this.loadedIds.join(',');
-        let request = this.reddah.getUserTopic(this.formData);
+        let cacheKey = "this.reddah.getMorePage" + this.target + this.loadedIds.join(',');
+        let request = this.reddah.getUserComments(this.formData);
         
         this.cacheService.loadFromObservable(cacheKey, request, "MorePage")
-        .subscribe(timeline => 
+        .subscribe(commentArticles => 
         {
-            console.log(timeline);
-            for(let article of timeline){
+            console.log(commentArticles)
+            for(let article of commentArticles){
                 article.like = (this.localStorageService.retrieve(`Reddah_ArticleLike_${this.userName}_${article.Id}`)!=null)
                 this.userCommentArticles.push(article);
-                this.loadedIds.push(article.Id);
+                this.loadedIds.push(article.CommentId);
                 this.reddah.getUserPhotos(article.UserName);
                 //cache user image
                 this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
@@ -232,8 +234,8 @@ export class MorePage implements OnInit {
                 this.GetCommentsData(article.Id);
             }
 
-            this.localStorageService.store("Reddah_morepage_"+this.userName, JSON.stringify(timeline));
-            this.localStorageService.store("Reddah_morepage_ids_"+this.userName, JSON.stringify(this.loadedIds));
+            this.localStorageService.store("Reddah_morepage_"+this.target, JSON.stringify(commentArticles));
+            this.localStorageService.store("Reddah_morepage_ids_"+this.target, JSON.stringify(this.loadedIds));
 
             if(event){
                 event.target.complete();
@@ -244,8 +246,40 @@ export class MorePage implements OnInit {
 
     }
 
+    clearCacheAndReload(){
+        this.cacheService.clearGroup("MorePage");
+        this.loadedIds = [-1];
+        this.userCommentArticles = [];
+        this.localStorageService.clear("Reddah_morepage_"+this.target);
+        this.localStorageService.clear("Reddah_morepage_ids_"+this.target);
+        this.getUserCommentArticles(event);
+    }
+
+    doRefresh(event) {
+        setTimeout(() => {
+            this.clearCacheAndReload();
+            event.target.complete();
+        }, 2000);
+    }
+
     loadedIds = [];
     formData: FormData;
+
+    async view(article: Article){
+        this.reddah.reloadLocaleSettings();
+        const viewerModal = await this.modalController.create({
+            component: PostviewerPage,
+            componentProps: { article: article },
+            cssClass: "modal-fullscreen",
+        });
+        
+        await viewerModal.present();
+        
+        const { data } = await viewerModal.onDidDismiss();
+        if(data||!data){   
+            article.Read = true;
+        }
+    }
     
     async close() {
         await this.modalController.dismiss();

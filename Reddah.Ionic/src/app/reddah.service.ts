@@ -415,6 +415,18 @@ export class ReddahService {
         );
     }
     //******************************** */
+    private getUserCommentsUrl = `${this.domain}/api/article/getusercomments`; 
+
+    getUserComments(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getUserCommentsUrl, formData)
+        .pipe(
+            tap(data => this.log('get user comments')),
+            catchError(this.handleError('get user comments', []))
+        );
+    }
+    //******************************** */
     private getFindPageTopicUrl = `${this.domain}/api/article/getfindtopic`; 
 
     getFindPageTopic(formData: FormData): Observable<any> {

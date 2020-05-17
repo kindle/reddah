@@ -14,6 +14,7 @@ import { MyReportPage } from '../../mytimeline/myreport/myreport.page';
 import { PunchClockPage } from '../../common/point/punch-clock/punch-clock.page';
 import { PublisherPage } from '../publisher/publisher.page';
 import { SearchPage } from 'src/app/common/search/search.page';
+import { UserPage } from 'src/app/common/user/user.page';
 
 @Component({
     selector: 'app-about',
@@ -56,6 +57,18 @@ export class AboutPage implements OnInit {
         }
         
         this.reddah.getUserPhotos(this.userName);
+    }
+
+    async goUser(userName){
+        const userModal = await this.modalController.create({
+            component: UserPage,
+            componentProps: { 
+                userName: userName
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await userModal.present();
     }
 
 
