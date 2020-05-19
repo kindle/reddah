@@ -176,6 +176,7 @@ import { SettingNetworkPage } from './settings/setting-network/setting-network.p
 //import { IonicGestureConfig } from './IonicGestureConfig';
 import { TopicActionBarComponent } from './topic/topic-action-bar/topic-action-bar.component';
 import { TopicChoosePage } from './chat/topic-choose/topic-choose.page';
+import { ActiveUsersPage } from './activeusers/activeusers.page';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -193,7 +194,7 @@ var firebaseConfig = {
         TopicPage,
         ShareArticleComponent,ShareArticleChatComponent,ShareFaceComponent,
         AppComponent,
-        BookmarkPage,
+        BookmarkPage,ActiveUsersPage,
         BookmarkPopPage,ChatPopPage,
         PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
         RankPage,
@@ -260,7 +261,7 @@ var firebaseConfig = {
     ],
     entryComponents: [
         TopicPage,
-        BookmarkPage,
+        BookmarkPage,ActiveUsersPage,
         BookmarkPopPage,ChatPopPage,
         PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
         RankPage,

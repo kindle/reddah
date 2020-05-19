@@ -399,7 +399,7 @@ export class UserPage implements OnInit {
         await this.modalController.dismiss(isCloseParent);
     }
 
-    clearCacheAndReload(){
+    clearCacheAndReload(event=null){
         this.cacheService.clearGroup("TimeLinePage"+this.userName);
         this.imageList = [];
         this.loadedIds = [];
@@ -416,7 +416,9 @@ export class UserPage implements OnInit {
     doRefresh(event) {
         setTimeout(() => {
             this.clearCacheAndReload();
-            event.target.complete();
+            if(event){
+                event.target.complete();
+            }
         }, 2000);
     }
 

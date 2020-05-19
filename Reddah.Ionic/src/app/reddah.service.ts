@@ -1490,6 +1490,18 @@ export class ReddahService {
             catchError(this.handleError('getReddahBookmarks', []))
         );
     }
+    
+    //******************************** */
+    private activeUsersUrl = `${this.domain}/api/user/getactiveusers`; 
+    
+    getActiveUsers(formData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.activeUsersUrl, formData)
+        .pipe(
+            tap(data => this.log('get active users')),
+            catchError(this.handleError('get active users', []))
+        );
+    }
     //******************************** */
     private pointsUrl = `${this.domain}/api/point/getpointlist`; 
     

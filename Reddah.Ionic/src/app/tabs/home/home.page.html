@@ -119,9 +119,9 @@
                     <ion-label style="font-size: smaller;">{{reddah.instant('Menu.About')}}</ion-label>
                 </ion-chip>
                 {{reddah.getDisplayName(article.LastUpdateBy)}}:
-                <div class="show-two-lines" [class.articleTextRead]="article.Read">
-                    {{reddah.htmlDecode(article.LastUpdateContent)}}
-                </div>
+                <div class="show-two-lines" [class.articleTextRead]="article.Read"
+                [innerHTML]="reddah.htmlDecode(article.LastUpdateContent)"
+                ></div>
             </div>
 
             <div class="listInfo" *ngIf="article.ImageUrls.length==0">

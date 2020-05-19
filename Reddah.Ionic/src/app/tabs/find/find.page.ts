@@ -22,6 +22,7 @@ import { ImageViewerComponent } from 'src/app/common/image-viewer/image-viewer.c
 import { UserPage } from 'src/app/common/user/user.page';
 import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
 import { TimelinePopPage } from 'src/app/common/timeline-pop.page';
+import { ActiveUsersPage } from 'src/app/activeusers/activeusers.page';
 
 @Component({
   selector: 'app-find',
@@ -416,6 +417,15 @@ export class FindPage implements OnInit  {
     async mystic(){
         const modal = await this.modalController.create({
             component: MysticPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        await modal.present();
+    }
+
+    async newUsers(){
+        const modal = await this.modalController.create({
+            component: ActiveUsersPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
         });

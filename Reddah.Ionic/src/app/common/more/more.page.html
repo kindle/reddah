@@ -59,6 +59,9 @@
     </ion-refresher>
     <ion-item lines="none" class="common-splitter">
     </ion-item>
+    <ion-item class="borderTop borderBottom" lines="none">
+        <span class="itemTitle">{{ reddah.instant('Article.Comment') }}</span>
+    </ion-item>
     <div *ngFor="let article of userCommentArticles" 
         style="background-color: var(--ion-color-tertiary); display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
         <div style="width:100%;border: 0px solid red;" *ngIf="article.Title&&article.Content">
@@ -76,7 +79,7 @@
                         <ion-text color="dark">{{reddah.getSendTime(article.CommentCreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-text>
                     </div>
                 </ion-label>
-                <ion-icon name="ellipsis-horizontal" slot="end" (click)="more_report(article)"></ion-icon>
+                <ion-icon name="warning-outline" slot="end" (click)="more_report(article)"></ion-icon>
             </ion-item>
             
             <div style="margin: 0 15px;">
@@ -139,7 +142,7 @@
             <div *ngIf="article.Type==0" (click)="view(article)" style="margin:10px 15px 0 15px;padding:15px 10px;border-radius:5px;background-color: #eeeeee;">
                 <div class="postModuleLiner" *ngIf="article.VideoUrl.length>0">
                     <div>
-                        <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines" (click)="view(article)">{{reddah.htmlDecode(article.Title)}}</span>
+                        <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span>
                         <div class="postClear"></div>
                         <video id="video_{{article.Id}}" [poster]="" [src]="article.VideoUrl" controls>
                             your browser does not support playing video
@@ -151,7 +154,7 @@
                 </div>
          
                 <div class="postModuleLiner" *ngIf="article.VideoUrl.length==0">
-                    <div *ngIf="article.ImageUrls.length>=3" (click)="view(article)">
+                    <div *ngIf="article.ImageUrls.length>=3">
                         <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span>
                         <div class="postClear"></div>
                         <ion-card-content style="padding:0;">
@@ -168,7 +171,7 @@
                         </ion-card-content>
                     </div>
         
-                    <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3" (click)="view(article)">
+                    <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3">
                         <div class="listImage">
                             <div class="listImageWrapper">
                                 <img class="BrowsePreviewImageOne"
@@ -182,13 +185,13 @@
                         <div [class.articleTextRead]="article.Read" class="show-three-lines">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
                     </div>
         
-                    <div *ngIf="article.ImageUrls.length==0" (click)="view(article)">
+                    <div *ngIf="article.ImageUrls.length==0">
                         <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span><br>
                         <div [class.articleTextRead]="article.Read" class="show-two-lines">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
                     </div>
         
                     <div style="border-left:2px solid var(--ion-color-primary);padding-left: 10px;margin-top:10px;"
-                        [class.articleTextRead]="article.Read" (click)="view(article)"
+                        [class.articleTextRead]="article.Read"
                         *ngIf="article.LastUpdateContent&&article.LastUpdateContent.length>10">
                         <ion-chip color="primary" style="border-radius: 0;margin:0;padding:0 5px;" 
                             *ngIf="article.LastUpdateBy!=userName&&article.Admins&&article.Admins.split(',').indexOf(article.LastUpdateBy)>-1">
