@@ -71,7 +71,53 @@ namespace Reddah.Web.Login
         public string CommentUid { get; set; }
     }
 
-    public class AdvancedUserFriend : UserFriend
+    public class AdvancedCommentArticle : CommentArticle
+    {
+        public string ImageUrl { get; set; }
+        public string[] ImageUrls { get; set; }
+        public string VideoUrl { get; set; }
+        public string VideoPoster { get; set; }
+
+        public AdvancedCommentArticle(CommentArticle item)
+        {
+            this.Id = item.Id;
+            this.Title = item.Title;
+            this.Content = item.Content;
+            this.Abstract = item.Abstract;
+            this.CreatedOn = item.CreatedOn;
+            this.Up = item.Up;
+            this.Down = item.Down;
+            this.Count = item.Count;
+            this.UserName = item.UserName;
+            this.GroupName = item.GroupName;
+            this.Locale = item.Locale;
+            this.LastUpdateOn = item.LastUpdateOn;
+            this.Type = item.Type;
+            this.Ref = item.Ref;
+            this.Location = item.Location;
+            this.CreatedBy = item.CreatedBy;
+            this.LastUpdateBy = item.LastUpdateBy;
+            this.Status = item.Status;
+            this.LastUpdateContent = item.LastUpdateContent;
+            this.LastUpdateType = item.LastUpdateType;
+            this.Lat = item.Lat;
+            this.Lng = item.Lng;
+            this.CommentId = item.CommentId;
+            this.ParentId = item.ParentId;
+            this.CommentContent = item.CommentContent;
+            this.CommentCreatedOn = item.CommentCreatedOn;
+            this.CommentUp = item.CommentUp;
+            this.CommentDown = item.CommentDown;
+            this.CommentCount = item.CommentCount;
+            this.CommentStatus = item.CommentStatus;
+            this.CommentType = item.CommentType;
+            this.CommentUid = item.CommentUid;
+        }
+
+
+}
+
+public class AdvancedUserFriend : UserFriend
     {
         public string UserNickName { get; set; }
         public string UserPhoto { get; set; }

@@ -1380,7 +1380,7 @@ namespace Reddah.Web.Login.Controllers
 
                     query = (from c in db.Comment
                              join a in db.Article on c.ArticleId equals a.Id
-                             where c.UserName == targetUserName && c.Status == 0
+                             where c.UserName == targetUserName && c.Status == 0 && (a.Type==0 || a.Type==6)
                              && !(loaded).Contains(c.Id)
                              orderby c.Id descending
                              select new CommentArticle
@@ -1409,11 +1409,23 @@ namespace Reddah.Web.Login.Controllers
                                  CommentCount = c.Count,
                                  CommentStatus = c.Status,
                                  CommentType = c.Type,
-                                 CommentUid = c.Uid
+                                 CommentUid = c.Uid,
                              })
                              .Take(pageCount);
 
-                    return Ok(query.ToList());
+                    var queryList = query.ToList();
+                    var returnList = new List<AdvancedCommentArticle>();
+                    foreach (CommentArticle item in queryList)
+                    {
+                        var returnItem = new AdvancedCommentArticle(item);
+                        returnItem.ImageUrl = Helpers.GetFirstImageSrc(item.Content);
+                        returnItem.ImageUrls = Helpers.GetFirstImageSrc(item.Content, 3);
+                        returnItem.VideoUrl = Helpers.GetVideoSrc(item.Content);
+                        returnItem.VideoPoster = Helpers.GetVideoPoster(item.Content);
+                        returnList.Add(returnItem);
+
+                    }
+                    return Ok(returnList);
 
                 }
 
@@ -3407,8 +3419,6 @@ namespace Reddah.Web.Login.Controllers
 
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 int[] loadedIds = js.Deserialize<int[]>(HttpContext.Current.Request["loadedIds"]);
-
-                string content = HttpContext.Current.Request["Content"];
 
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
