@@ -111,9 +111,6 @@ export class HomePage implements OnInit {
     showSearchBar = false;
     lastScrollTop;
     async onScroll($event){
-
-
-        console.log(this.reddah.unReadMessage)
         let currentScrollTop = $event.detail.scrollTop;
         if(currentScrollTop > this.lastScrollTop){
             //this.direction = 'down';
