@@ -30,6 +30,7 @@ import { Router } from '@angular/router';
 })
 export class ReddahService {
 
+    appStore  = "google";
     //default 2 azure East Asia
     cloud = "azure";
     domain = 'https://reddah-ea.azurewebsites.net';
@@ -2049,7 +2050,7 @@ export class ReddahService {
             this.getVersionNumber().then(appversion => {
                 let info = `${this.device.platform}_${this.device.version}_
                     ${this.device.isVirtual?"Virtual":"Device"}_${this.device.uuid}_
-                    ${this.getCurrentLocale()}_${appversion}`;
+                    ${this.getCurrentLocale()}_${appversion}_${this.appStore}`;
                 let data = new FormData();
                 data.append("info",info);
                 this.updateDeviceInfo(data).subscribe();

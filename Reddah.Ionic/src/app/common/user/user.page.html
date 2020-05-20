@@ -127,7 +127,7 @@
 
     <ion-item lines="none" class="common-splitter">
     </ion-item>
-    <ion-item class="borderTop borderBottom" lines="none">
+    <ion-item class="borderTop borderBottom" lines="none" *ngIf="userPageArticles.length>0">
         <span class="itemTitle">{{ reddah.instant('Article.Topic') }}</span>
     </ion-item>
     <div *ngFor="let article of userPageArticles" 

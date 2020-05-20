@@ -2,7 +2,7 @@
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
         <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
     </ion-button>
-    <ion-label>最近活跃用户</ion-label>
+    <ion-label>{{reddah.instant('Menu.ActiveUsers')}}</ion-label>
     <!--{{ reddah.instant('Menu.Mark') }}-->
 </ion-item>
 <ion-content #pageTop class="common-content">
@@ -23,7 +23,7 @@
                 <ion-icon class="cmd-title" name="female-outline" size="small" *ngIf="reddah.appData('usersex_'+activeUserName)==0" color="danger"></ion-icon>
             </div>
             <div style="display: flex;padding:0 0 5px 0;" *ngIf="reddah.appData('userlan_'+activeUserName)">
-                {{reddah.appData('userlan_'+activeUserName)}}
+                {{reddah.getUserLan(activeUserName)}}
             </div>
             <p *ngIf="reddah.appData('usersignature_'+activeUserName)">{{reddah.appData('usersignature_'+activeUserName)}}</p>
             <p *ngIf="!reddah.appData('usersignature_'+activeUserName)">{{ reddah.instant('About.DefaultSignature')}}</p>
