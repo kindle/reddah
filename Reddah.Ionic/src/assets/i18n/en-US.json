@@ -1,16 +1,17 @@
 {
     "Surface":{
         "Language": "Language",
-        "Login": "Login",
-        "Register": "Register"
+        "Login": "Sign in",
+        "Register": "Register",
+        "SignInApple":"Sign in with Apple"
     },
 
     "Login":{
-        "Title":"Login",
+        "Title":"Sign in",
         "NoAccount":"No Account?",
         "RegisterNow":"Register Now",
         "ForgotPassword":"Forgot Password",
-        "Loading":"Login..."
+        "Loading":"Sign in..."
     },
 
     "Register":{
@@ -23,7 +24,7 @@
         "And":"&",
         "Content":"Content Policy",
         "Loading":"Register...",
-        "Success":"Registration is successful. Please login",
+        "Success":"Registration is successful. Please sign in",
         "Manage":"Manage",
         "SuccessNonUser":"Registration is successful"
     },
@@ -48,7 +49,7 @@
             "SubNameEmpty":"Please input name",
             "SubDescEmpty":"Please input description",
             "TokenEmpty":"Please input security token",
-            "ResetResult":"Reset password successfully, please login",
+            "ResetResult":"Reset password successfully, please sign in",
             "GetTokenFromEmail":"Please get security token from your Email",
             "NetworkError":"No network connection",
             "ServiceError":"The system service is being updated. Please try again later"
@@ -56,9 +57,9 @@
     },
 
     "Button":{
-        "Login": "Login",
+        "Login": "Sign in",
         "Register": "Register",
-        "Logout": "Logout",
+        "Logout": "Sign out",
         "Back": "Back",
         "Close": "Close",
         "Loading":"loading...",

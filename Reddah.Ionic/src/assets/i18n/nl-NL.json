@@ -2,7 +2,8 @@
     "Surface":{
         "Language": "Taal",
         "Login": "Ondertekening",
-        "Register": "Registratie"
+        "Register": "Registratie",
+        "SignInApple":"Inloggen bij Apple"
     },
 
     "Login":{

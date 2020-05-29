@@ -2,7 +2,8 @@
     "Surface":{
         "Language": "Γλώσσα",
         "Login": "Σύνδεση",
-        "Register": "Μητρώο"
+        "Register": "Μητρώο",
+        "SignInApple":"Συνδεθείτε με την Apple"
     },
 
     "Login":{

@@ -2,7 +2,8 @@
     "Surface":{
         "Language": "ภาษา",
         "Login": "ล็อกอิน",
-        "Register": "ลงทะเบียน"
+        "Register": "ลงทะเบียน",
+        "SignInApple":"ลงชื่อเข้าใช้ด้วย Apple"
     },
 
     "Login":{

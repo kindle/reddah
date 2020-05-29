@@ -25,12 +25,16 @@ import { Vibration } from '@ionic-native/vibration/ngx';
 import { createAnimation } from '@ionic/core'
 import { Router } from '@angular/router';
 
+import { SignInWithApple, AppleSignInResponse, 
+    AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } 
+    from '@ionic-native/sign-in-with-apple/ngx';
+
 @Injectable({
     providedIn: 'root'
 })
 export class ReddahService {
 
-    appStore  = "google";
+    appStore  = "ios";
     //default 2 azure East Asia
     cloud = "azure";
     domain = 'https://reddah-ea.azurewebsites.net';
@@ -138,6 +142,7 @@ export class ReddahService {
         private alertController: AlertController,
         private ngZone: NgZone,
         private router: Router,
+        private signInWithApple: SignInWithApple,
     ) { 
         
     }
@@ -3727,6 +3732,25 @@ export class ReddahService {
 
     leftPercentage(content){
         return Math.floor((content.length-100)/content.length*100)+'%';
+    }
+
+
+    openAppleSignIn(){
+        this.signInWithApple.signin({
+            requestedScopes: [
+                ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,
+                ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail
+            ]
+        })
+        .then((res: AppleSignInResponse) => {
+            // https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user
+            alert('Send token to apple for verification: ' + res.identityToken);
+            console.log(res);
+        })
+        .catch((error: AppleSignInErrorResponse) => {
+            alert(error.code + ' ' + error.localizedDescription);
+            console.error(error);
+        });
     }
 
 }

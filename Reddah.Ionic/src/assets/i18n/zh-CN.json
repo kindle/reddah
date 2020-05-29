@@ -2,7 +2,8 @@
     "Surface":{
         "Language": "语言",
         "Login": "登录",
-        "Register": "创建新账户"
+        "Register": "创建新账户",
+        "SignInApple":"通过Apple登录"
     },
 
     "Login":{

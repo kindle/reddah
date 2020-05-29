@@ -2,7 +2,8 @@
     "Surface":{
       "Language": "언어",
       "Login": "로그인",
-      "Register": "레지스터"
+      "Register": "레지스터",
+      "SignInApple":"Apple로 로그인"
     },
 
     "Login":{

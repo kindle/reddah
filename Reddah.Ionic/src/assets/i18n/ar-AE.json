@@ -2,7 +2,8 @@
     "Surface":{
         "Language": "لغوي",
         "Login": "تسجيل الدخول",
-        "Register": "للتسجيل"
+        "Register": "للتسجيل",
+        "SignInApple":"تسجيل الدخول باستخدام Apple"
     },
 
     "Login":{

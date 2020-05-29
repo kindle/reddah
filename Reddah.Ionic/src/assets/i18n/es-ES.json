@@ -2,7 +2,8 @@
     "Surface":{
         "Language": "Idiomas",
         "Login": "Entrada",
-        "Register": "Registro"
+        "Register": "Registro",
+        "SignInApple":"Inicia sesión con Apple"
     },
 
     "Login":{

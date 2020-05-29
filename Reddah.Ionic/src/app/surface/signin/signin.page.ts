@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { CacheService } from "ionic-cache";
 import { RegisterPage } from "../register/register.page"
 import { ForgotPage } from "../forgot/forgot.page";
+
 
 /*import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -18,11 +19,13 @@ import { MeshLine, MeshLineMaterial } from 'three.meshline';*/
 })
 export class SigninPage implements OnInit {
 
+    showSigninWithApple = false;
     constructor(private modalController: ModalController,
         public reddah: ReddahService,
         private loadingController: LoadingController,
         private router: Router,
         private cacheService: CacheService,
+        private platform: Platform,
     ) { }
 
     ngOnInit() {
@@ -31,6 +34,10 @@ export class SigninPage implements OnInit {
             this.username = lastLoginUserName;
 
         //this.drawBackground();
+        if(this.platform.is('ipad')||this.platform.is('iphone')||this.platform.is('ios'))
+        {
+            this.showSigninWithApple = true;
+        }
     }
 
     

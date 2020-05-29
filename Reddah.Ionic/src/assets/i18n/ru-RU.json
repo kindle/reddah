@@ -2,7 +2,8 @@
     "Surface":{
         "Language": "язык",
         "Login": "Bход",
-        "Register": "Pегистрация"
+        "Register": "Pегистрация",
+        "SignInApple":"Вопиюте с Apple"
     },
 
     "Login":{

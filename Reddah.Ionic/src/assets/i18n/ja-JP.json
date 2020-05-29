@@ -2,7 +2,8 @@
     "Surface":{
       "Language": "言語",
       "Login": "ログイン",
-      "Register": "レジスタ"
+      "Register": "レジスタ",
+      "SignInApple":"Apple 経由でサインインする"
     },
 
     "Login":{

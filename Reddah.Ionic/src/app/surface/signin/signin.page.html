@@ -22,6 +22,14 @@
     <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="logIn()" expand="block"
     [disabled]="checkLogin()">{{ reddah.instant('Button.Login') }}</ion-button>
     <div class="forget" (click)="forgot()">{{ reddah.instant('Login.ForgotPassword') }}</div>    
+    
+    
+    <ion-button class="buttonGapTop gapBottom inputItem" size="large" expand="block"
+        (click)="reddah.openAppleSignIn()" *ngIf="showSigninWithApple">
+        <ion-icon name="logo-apple" size="small" slot="start"></ion-icon>
+        {{reddah.instant('Surface.SignInApple')}}
+    </ion-button>
+        
     <div class="conductArea">
         <p class="copyright">
             reddah.com<br>

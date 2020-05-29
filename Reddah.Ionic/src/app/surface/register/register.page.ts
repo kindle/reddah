@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LoadingController } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -11,17 +11,23 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 })
 export class RegisterPage implements OnInit {
 
+    showSigninWithApple = false;
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
         private loadingController: LoadingController,
-        private iab: InAppBrowser
+        private iab: InAppBrowser,
+        private platform: Platform,
     ) { }
 
     locale;
     ngOnInit() {
         this.locale = this.reddah.getCurrentLocale();
         this.generateUserName();
+        if(this.platform.is('ipad')||this.platform.is('iphone')||this.platform.is('ios'))
+        {
+            this.showSigninWithApple = true;
+        }
     }
 
     username = "";

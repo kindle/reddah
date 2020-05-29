@@ -66,6 +66,12 @@
     <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="register()"
      expand="block" [disabled]="checkRegister()">{{ reddah.instant('Button.Register') }}</ion-button>
     
+     <ion-button class="buttonGapTop gapBottom inputItem"  size="large" expand="block" style="text-transform: capitalize;"
+        (click)="reddah.openAppleSignIn()" *ngIf="showSigninWithApple">
+        <ion-icon name="logo-apple" size="small" slot="start"></ion-icon>
+        {{reddah.instant('Surface.SignInApple')}}
+    </ion-button>
+
 </ion-content>
 <div class="footer">
     <div class="conductArea">

@@ -177,6 +177,7 @@ import { SettingNetworkPage } from './settings/setting-network/setting-network.p
 import { TopicActionBarComponent } from './topic/topic-action-bar/topic-action-bar.component';
 import { TopicChoosePage } from './chat/topic-choose/topic-choose.page';
 import { ActiveUsersPage } from './activeusers/activeusers.page';
+import { SignInWithApple } from '@ionic-native/sign-in-with-apple/ngx';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -392,6 +393,7 @@ var firebaseConfig = {
         //Firebase,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
         //{ provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig }
+        SignInWithApple,
     ],
     bootstrap: [AppComponent]
 })
