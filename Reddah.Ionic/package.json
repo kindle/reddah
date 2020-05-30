@@ -100,7 +100,7 @@
     "cordova-plugin-media-capture": "^3.0.2",
     "cordova-plugin-nativeaudio": "^3.0.9",
     "cordova-plugin-network-information": "^2.0.2",
-    "cordova-plugin-photo-library": "^2.3.1",
+    "cordova-plugin-photo-library": "^2.2.1",
     "cordova-plugin-shake": "^0.6.0",
     "cordova-plugin-speechrecognition": "^1.2.0",
     "cordova-plugin-splashscreen": "^5.0.3",
@@ -201,11 +201,11 @@
       "cordova-clipboard": {},
       "cordova-plugin-globalization": {},
       "cordova-plugin-local-notification": {},
-      "cordova-plugin-add-swift-support": {},
       "cordova-plugin-speechrecognition": {},
       "cordova-plugin-network-information": {},
       "info.protonet.imageresizer": {},
       "cordova-plugin-sign-in-with-apple": {},
+      "cordova-plugin-add-swift-support": {},
       "cordova-plugin-photo-library": {
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": " "
       }
