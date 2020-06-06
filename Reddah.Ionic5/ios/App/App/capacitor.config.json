@@ -1,6 +1,6 @@
 {
   "appId": "com.reddah.app",
-  "appName": "reddah",
+  "appName": "Reddah",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
