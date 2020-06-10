@@ -1,0 +1,7 @@
+{
+  "name": "Reddah.Ionic6",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
