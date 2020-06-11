@@ -1,6 +1,5 @@
 import { Component, Inject, Renderer2, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-//import * as $ from 'jquery';
 declare var $:any;
 
 @Component({
@@ -15,31 +14,43 @@ export class Tab1Page implements OnInit{
     @Inject(DOCUMENT) private _document: Document,
     ) {}
 
-  ngOnInit(){
-    //this.addScriptByUrl("/assets/running/jquery.js");
-    //this.addScriptByUrl("/assets/running/jquery.transform.js");
-    this.addScriptByUrl("/assets/js/prefixfree.min.js");
-    this.addScriptByUrl("/assets/running/index.js");
-    
-  }
+    ngOnInit(){
+      this.addScriptByUrl("/assets/balloons/index.js");
+    }
+  
+  
+    ionViewDidEnter(){
+      let player = this._document.body.getElementsByTagName("video")[0];
+      if(player){
+        player.play();
+      }
+    }
+  
+    ionViewWillLeave(){
+        let player = this._document.body.getElementsByTagName("video")[0];
+        if(player){
+          player.pause();
+          player.currentTime = 0;
+        }
+    }
+  
+    addScriptByUrl(src){
+      let key = this.nonce_str()+"_js";
+  
+      let s = this._renderer2.createElement('script');
+      s.type = "text/javascript";
+      s.src = src;
+      s.id = key;
+      
+      this._renderer2.appendChild(
+          this._document.body.getElementsByTagName("app-tab1")[0], s);
+      
+    }
 
-  addScriptByUrl(src){
-    let key = this.nonce_str()+"_js";
-
-    let s = this._renderer2.createElement('script');
-    s.type = "text/javascript";
-    s.src = src;
-    s.id = key;
-    
-    this._renderer2.appendChild(
-        this._document.body.getElementsByTagName("app-tab1")[0], s);
-    
-  }
-
-  nonce_str() {
-      return 'xxxxxxxxxx'.replace(/[xy]/g, function(c) {
-          var r = Math.random() * 10 | 0, v = r;
-          return v.toString(10);
-      });
-  }
+    nonce_str() {
+        return 'xxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 10 | 0, v = r;
+            return v.toString(10);
+        });
+    }
 }

@@ -1,13 +1,28 @@
 <ion-content [fullscreen]="true">
-  <div class='kai animate' id='running'>
-    <div class='eyes'></div>
-  </div>
-  <div class='slide'>
-    <div class='stage'>
-      <div class='foreground-trees'></div>
-      <div class='landscape'></div>
-      <div class='behind-trees'></div>
-      <div class='behind-mountains'></div>
-    </div>
-  </div>
+  <link href="https://fonts.googleapis.com/css?family=Syncopate:700" rel="stylesheet">
+  <header class="video-header">
+      <video autoplay loop playsinline muted control id="myVideo">
+        <source src="/assets/balloons/balloons.mp4" type="video/mp4">
+      </video>
+      <div class="viewport-header">
+          <h1>
+        Explore
+        <span>Reddah</span>
+      </h1>
+      </div>
+  </header>
+
+  <main>
+      <p>Montana is a western state defined by its diverse terrain ranging from the Rocky Mountains to the Great Plains. Its wide-open spaces include Glacier National Park, a vast wilderness preserve that passes into Canada. The park’s many snow-capped peaks,
+          lakes and alpine hiking trails are showcased along its famed Going-to-the-Sun Road, stretching 50 miles.</p>
+
+      <p>Montana State University is ranked in the top tier of U.S. research institutions by the Carnegie Foundation for the Advancement of Teaching. Located in Bozeman Montana, Montana State is an accredited land grant university offering bachelor's, master's
+          and doctoral degrees in 150 fields of study.</p>
+
+      <p>Maybe it's the independent frontier spirit, wild and free and oh-so-American, that earned Montana its 'live and let live' state motto. The sky seems bigger and bluer. The air is crisp and pine-scented. From mountains that drop into undulating ranchlands
+          to brick brewhouses and the shaggy grizzly found lapping at an ice-blue glacier lake, Montana brings you to that euphoric place, naturally. And then it remains with you long after you've left its beautiful spaces behind.
+      </p>
+  </main>
+
+  <div id="circle"></div>
 </ion-content>

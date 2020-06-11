@@ -1,4 +1,6 @@
-$(document).ready(function() {	
+$(document).ready(run());
+
+function run() {	
     $('#running').animate({
         'top' : '10px',
         transform: 'scale(0.6)'
@@ -12,4 +14,4 @@ $(document).ready(function() {
         }, 2000);
         });
     });
-});
+}
