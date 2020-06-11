@@ -1,4 +1,4 @@
-import { Component, Inject, Renderer2 } from '@angular/core';
+import { Component, Inject, Renderer2, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 //import * as $ from 'jquery';
 declare var $:any;
@@ -8,7 +8,7 @@ declare var $:any;
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit{
 
   constructor(
     private _renderer2: Renderer2,
@@ -18,12 +18,11 @@ export class Tab1Page {
   ngOnInit(){
     //this.addScriptByUrl("/assets/running/jquery.js");
     //this.addScriptByUrl("/assets/running/jquery.transform.js");
-    //this.addScriptByUrl("/assets/running/prefixfree.min.js");
+    this.addScriptByUrl("/assets/js/prefixfree.min.js");
     this.addScriptByUrl("/assets/running/index.js");
     
   }
 
-  guid = 123;
   addScriptByUrl(src){
     let key = this.nonce_str()+"_js";
 
