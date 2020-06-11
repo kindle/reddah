@@ -9,4 +9,9 @@ export class TabsPage {
 
   constructor() {}
 
+  tabNum = 1;
+  alsoClick(id){
+    this.tabNum = id;
+  }
+
 }
