@@ -1,0 +1,39 @@
+<ion-content [fullscreen]="true" class="tab5-content">
+  <div class='kai animate' id='running'>
+    <div class='eyes'></div>
+  </div>
+  <div class='slide'>
+    <div class='stage'>
+      <div class='foreground-trees'></div>
+      <div class='landscape'></div>
+      <div class='behind-trees'></div>
+      <div class='behind-mountains'></div>
+    </div>
+  </div>
+  <div class="tag-box">
+    <ion-tab-button class="tag" (click)="goUser(userName)">
+        <ion-icon name="person" color="primary"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.About') }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button class="tag" (click)="goBookmark()">
+        <ion-icon name="bookmark" color="danger"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.Mark') }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button class="tag" (click)="goPublicPage()">
+        <ion-icon name="list" color="subscribe"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.Publisher') }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button class="tag" (click)="goSearch(3)">
+        <ion-icon name="infinite" color="mini"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.MiniApp') }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button class="tag" (click)="goMyReport()">
+      <ion-icon name="logo-twitch" color="dark"></ion-icon>
+      <ion-label>{{ reddah.instant('Common.MyFeedback') }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button class="tag" (click)="goSettings()">
+      <ion-icon name="settings" color="primary"></ion-icon>
+      <ion-label>{{ reddah.instant('Menu.Settings') }}</ion-label>
+    </ion-tab-button>
+  </div>
+</ion-content>

@@ -1,0 +1,168 @@
+
+.headerStart {
+    background-color:transparent;
+    position: fixed;
+    visibility:visible;
+    width: 100%;
+    height: 40px;
+    z-index: 999;
+    font-size:1.5rem;
+}
+
+.headerOnScroll{
+    position: fixed;
+    visibility: hidden;
+    width: 100%;
+    height: 40px;
+    z-index: 999;
+    font-size:1.5rem;
+}
+
+.timelineCover {
+    height: 300px;
+    overflow: hidden;
+}
+
+.timelineAvatar {
+    display: flex; 
+    justify-content: flex-end;
+    margin-bottom: -40px;
+}
+
+.timelineAvatar img {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    top: -60px;
+    margin-right: 15px;
+    border-radius: 7%;
+}
+
+.timelineAvatar ion-label {
+    position: relative;
+    top: -30px;
+    height: 30px;
+    margin-right: 15px;
+    color: white;
+}
+
+.signature{
+    text-align: right;
+    padding: 15px;
+    width: 100%;
+    margin: 0 15px 60px 0;
+    font-size: 15px;
+    color: #585858;
+}
+
+.yearTitle {
+    font-size: 35px; 
+    font-weight: bold;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.monthTitle {
+    font-size: 14px;
+    font-weight: bold;
+ }
+
+.dayTitle {
+    font-size: 22px;
+    font-weight: bold;
+    margin-left:10px;
+    margin-right:0px;
+    padding-right: 0;
+}
+
+.article {
+    display: flex; 
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+.articleDate {
+    min-width: 90px;
+}
+
+.articleContent {
+    width:100%;
+    margin-right: 15px;
+}
+
+.articleContentText{
+    height:100%;
+}
+
+.articleContentTextSummary{
+    top: 0;
+}
+
+.articleContentTextCount{
+    bottom:0;
+    position:absolute;
+}
+
+.textOnlyArticle{
+    width: 100%; 
+    padding: 0px 5px;
+}
+
+.userNameTitle{
+    font-weight: bold;
+}
+
+
+.tscontainer {
+    position: relative;
+    padding-top: 100%;
+    overflow: hidden;
+}
+
+.tsparent4 {
+    display: grid;
+    grid-template-columns: 47% 47%;
+    grid-gap: 1px;
+}
+
+.tspicture {
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    object-fit: cover;
+}
+
+.tsparent2 {
+    display: grid;
+    grid-template-columns: 48% 48%;
+    grid-gap: 1px;
+}
+
+.tspicture2 {
+    top:50%;
+    transform: translateY(-50%);
+    object-fit: cover;
+}
+
+.tsparent3 {
+    display: grid;
+    grid-template-columns: 48% 48%;
+    grid-gap: 1px;
+}
+
+.tspicture3 {
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    object-fit: cover;
+}
+
+.ts2p1{
+    top:50%;
+    transform: translateY(-50%);
+    object-fit: cover;
+}
+
+.ts2p2{
+    
+}

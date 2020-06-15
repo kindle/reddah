@@ -1,0 +1,63 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-label>{{ reddah.instant('About.Privacy') }}</ion-label>
+</ion-item>
+<ion-content class="common-content">
+  
+    <ion-item lines="none" class="borderTop borderBottom">
+        <ion-label>{{ reddah.instant('Common.HideMyLocation') }}</ion-label>
+        <ion-toggle [(ngModel)]="showLocation" color="success" slot="end" (ionChange)="changeShowLocation()"></ion-toggle>
+    </ion-item>
+<!--  
+    <ion-item lines="none" class="borderTop borderItem borderBottom" (click)="changeApproval()">
+        <ion-label>加我为朋友时需要验证</ion-label>
+        <ion-toggle [(ngModel)]="requireApproval" color="success" slot="end"></ion-toggle>
+    </ion-item>
+
+    <ion-item lines="none" class="borderItem" (click)="goEmail()">
+        <ion-label slot="start">向我推荐通讯录朋友</ion-label>
+        <ion-toggle [(ngModel)]="recommendContacts" color="success" slot="end"></ion-toggle>
+    </ion-item>
+    <ion-item class="borderItem">
+        <ion-note text-wrap>
+            开通后，为你推荐已经开通Reddah的手机联系人
+        </ion-note>
+    </ion-item>
+    <ion-item class="borderItem borderBottom" (click)="goPassword()" lines="none">
+        <ion-label>添加我的方式</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+    </ion-item>
+-->
+    <ion-item lines="none" class="common-splitter">
+    </ion-item>
+<!--
+    <ion-item class="borderTop borderItem" (click)="goAbout()">
+        <ion-label>不让他(她)看</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item class="borderItem" (click)="goAbout()">
+        <ion-label>不看他(她)</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+    </ion-item>
+-->
+    
+    <ion-item lines="none" class="borderTop borderItem borderBottom">
+        <ion-label>{{ reddah.instant('Common.AllowTenTimeline') }}</ion-label>
+        <ion-toggle [(ngModel)]="allowTenTimeline" color="success" slot="end" (ionChange)="changeAllowTenTimeline()"></ion-toggle>
+    </ion-item>
+
+<!--
+    <ion-item class="borderBottom borderItem" (click)="goAbout()">
+        <ion-label>允许朋友查看时光圈的范围</ion-label>
+        <ion-select value="0" (ionChange)="changeAllowTsPeriod(allowTsPeriod.value)" 
+        cancel-text="取消" ok-text="确定" #allowTsPeriod>
+            <ion-select-option value="6">最近半年</ion-select-option>
+            <ion-select-option value="30">最近一个月</ion-select-option>
+            <ion-select-option value="3">最近三天</ion-select-option>
+            <ion-select-option value="0">全部</ion-select-option>
+        </ion-select>
+    </ion-item>
+-->
+</ion-content>

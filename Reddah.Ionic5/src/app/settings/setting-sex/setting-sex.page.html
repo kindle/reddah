@@ -1,0 +1,26 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-label>{{title}}</ion-label>
+    <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ reddah.instant('Confirm.Submit') }}</ion-button>
+</ion-item>
+<ion-content class="common-content">
+    <ion-list>
+        <ion-radio-group value="{{currentSex}}">
+            <ion-list-header>
+                <ion-label color="dark">{{ reddah.instant('About.Sex') }}</ion-label>
+            </ion-list-header>
+            <ion-item (click)="setSex(1)">
+                <ion-icon slot="start" name="male-outline" color="subscribe"></ion-icon>
+                <ion-label color="subscribe">{{ reddah.instant('About.Male') }}</ion-label>
+                <ion-radio slot="end" color="subscribe" value="1"></ion-radio>
+            </ion-item>
+            <ion-item lines="none" (click)="setSex(0)">
+                <ion-icon slot="start" name="female-outline" color="danger"></ion-icon>
+                <ion-label color="danger">{{ reddah.instant('About.Female') }}</ion-label>
+                <ion-radio slot="end" color="danger" value="0"></ion-radio>
+            </ion-item>
+        </ion-radio-group>
+    </ion-list>
+</ion-content>

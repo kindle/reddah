@@ -12,6 +12,15 @@ export class TabsPage {
   tabNum = 1;
   alsoClick(id){
     this.tabNum = id;
+    this.play();
+  }
+
+  play(){
+    let audio = new Audio();
+    
+    //audio.src = "/assets/running/run.wav"; 
+    audio.src = "/assets/audio/drop.mp3"; 
+    audio.play();
   }
 
 }

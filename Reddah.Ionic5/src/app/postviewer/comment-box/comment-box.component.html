@@ -1,0 +1,56 @@
+<!--{{selectedArticleId}} {{selectedCommentId}}-->
+<ion-footer *ngIf="direction=='up'" class="content">
+    <ion-item *ngIf="!showEditBox" class="common-content-padding">
+        <ion-icon name="arrow-redo-outline" size="medium" color="dark" (click)="forwardArticle(article)"></ion-icon>
+        <ion-text color="dark" (click)="forwardArticle(article)" class="action-count" *ngIf="article.Down>0">
+            {{reddah.shortCount(article.Down)}}
+        </ion-text>
+        <ion-input id="newComment" (click)="addNewComment(selectedArticleId, selectedCommentId, null)" 
+            readonly style="padding-left:5px !important;margin-right:5px !important;" placeholder="{{ reddah.instant('Comment.Comment') }}..."></ion-input>
+        
+        <ion-icon color="primary" style="margin-right:5px;" name="chatbox-ellipses-outline"size="medium" (click)="addNewComment(selectedArticleId, selectedCommentId, null)"></ion-icon>
+        {{article.Count>0?reddah.shortCount(article.Count):''}}
+
+        <ion-icon (click)="reddah.likeArticle(article)" *ngIf="!article.like" color="dark"
+            name="heart-outline" style="margin-right:5px;margin-left:5px;"></ion-icon>
+        <ion-icon (click)="reddah.likeArticle(article)" *ngIf="article.like" color="danger"
+            name="heart-circle-outline" style="margin-right:5px;margin-left:5px;"></ion-icon>
+        <ion-text color="dark" (click)="reddah.likeArticle(article)" *ngIf="article.Up>0">
+            {{reddah.shortCount(article.Up)}}
+        </ion-text>
+    </ion-item>
+    <ion-item *ngIf="showEditBox" style="--padding-top:5px;--padding-start:5px;--inner-padding-end:0;">
+        <ion-textarea autoresize padding #newComment id="newComment" [(ngModel)]="commentContent" rows="3" cols="21" 
+        style="padding-left:5px !important;"
+        placeholder="{{ replyUserNamePlaceHolder ? reddah.instant('Pop.Reply')+'@'+replyUserNamePlaceHolder:reddah.instant('Comment.Tip') }}" [disabled]="submitClicked"></ion-textarea>    
+        <ion-buttons>
+            <ion-grid>
+                <ion-row>
+                    <ion-col style="text-align:center;">
+                        <ion-icon name="resize-outline"size="medium" (click)="newPopComment(selectedArticleId, selectedCommentId,replyUserNamePlaceHolder)"
+                        *ngIf="!submitClicked"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-button (click)="submit()" color="success" 
+                        [disabled]="submitClicked||commentContent==null||commentContent==''">{{ reddah.instant('Confirm.Submit') }}</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-buttons>
+    </ion-item>
+    <div style="display: flex; justify-content: space-around;margin:10px;" *ngIf="showEditBox">
+        <!--
+        <ion-icon slot="end" name="pricetags-outline" size="medium" (click)="chooseTags()"></ion-icon>
+        <ion-icon slot="end" name="bar-chart-outline" size="medium" (click)="chooseStock()"></ion-icon>
+        -->
+        <ion-icon slot="end" name="at-outline" size="medium" (click)="chooseAtUser()"></ion-icon>
+        <ion-icon id="faceIcon" slot="end" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
+    </div>
+    <!--<ion-item *ngIf="showEditBox">
+        <ion-icon slot="end" name="at-outline" size="medium" (click)="chooseAtUser()"></ion-icon>
+        <ion-icon slot="end" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
+    </ion-item>-->
+    <app-share-face *ngIf="showEditBox&&showFacePanel" (select)="faceSelection($event)"></app-share-face>
+</ion-footer>

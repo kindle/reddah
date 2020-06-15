@@ -1,0 +1,111 @@
+.mini {
+    width: 40px; 
+    height: 40px; 
+    background-color: #605ab0;
+    border-radius: 50%;
+}
+
+.more {
+    width: 25px !important; 
+    height: 25px !important; 
+    padding: 10px;
+    background-color: white;
+    border: 1px solid lightgray;
+}
+
+.recentPortrait {
+    margin: 0 17px;
+    border-radius: 5px;
+    width: 45px;
+    height: 45px;
+}
+
+.borderPortrait {
+    border: 1px solid lightgray;
+}
+
+.mini-box{
+    margin:0 auto 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    /*display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    */
+}
+
+.mini-box-item{
+    display: flex;
+    flex-direction: column;
+    margin-top:15px;
+    min-width: 80px;
+}
+
+.mini-box-label{
+    margin:0;
+    padding:0 5px;
+    width:80px;
+    color:gray;
+    margin-top:-10px;
+    text-align: center;
+}
+
+
+.fd-parent {
+    display: grid;
+    grid-template-columns: 31% 31% 31%;
+    grid-gap: 3px;
+}
+
+.fd-parent2 {
+    display: grid;
+    grid-template-columns: 47% 47%;
+    grid-gap: 3px;
+}
+
+.fd-parent3 {
+    display: grid;
+    grid-template-columns: 61.8%;
+    grid-gap: 3px;
+}
+
+.fd-sk-container {
+   position: relative;
+   overflow: hidden;
+}
+
+.fd-container {
+   position: relative;
+   padding-top: 100%;
+   overflow: hidden;
+}
+
+.fd-picture {
+   position: absolute;
+   top:50%;
+   transform: translateY(-50%);
+   object-fit: cover;
+}
+
+.fd-container3 {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: relative;
+   padding-top: 100%;
+   overflow: hidden;
+   margin-top: 5px;
+}
+
+.fd-picture3 {
+   position: absolute;
+   flex-shrink: 0;
+   min-width: 100%;
+   top:0;
+   left:0;
+}
+
+.fd-portrait{
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+}

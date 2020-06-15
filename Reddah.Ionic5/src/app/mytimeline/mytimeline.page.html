@@ -1,0 +1,179 @@
+<img [src]="reddah.appData('cover_'+userName)" style="position: fixed;" #timelineCoverImage
+    onerror="this.src='assets/icon/timg.jpg';">
+<ion-content style="--background: transparent;" id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop>
+    <div class="headerStart" #headerStart slot="fixed">
+        <ion-item color="transparent" style="--padding-start:0;" lines="none" (dblclick)="clearCacheAndReload(null)">
+            <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
+                <ion-icon color="tertiary" is-active="false" name="chevron-back-outline"></ion-icon>
+            </ion-button>
+            <ion-label></ion-label>
+            <ion-icon name="camera-outline"color="tertiary" slot="end" (click)="post($event)"></ion-icon>
+        </ion-item>
+    </div>
+    <div class="headerOnScroll" #headerOnScroll slot="fixed">
+        <ion-item color="light" style="--padding-start:0;" lines="none" (dblclick)="clearCacheAndReload(null)">
+            <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
+                <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+            </ion-button>
+            <ion-label style="text-transform: none;">{{ reddah.instant('Menu.Timeline') }}</ion-label>
+            <ion-icon name="camera-outline"slot="end" (click)="post($event)"></ion-icon>
+        </ion-item>
+    </div>
+    
+    <div>
+        <ion-refresher slot="fixed" (ionPull)="doPull($event)" (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content 
+            refreshingSpinner="bubbles"></ion-refresher-content>
+        </ion-refresher>  
+        <div class="timelineCover" #timelineCover (click)="changeCover()">
+           <!--<img [src]="reddah.appData('cover_'+userName)" 
+                onerror="this.src='assets/icon/timg.jpg';">-->
+        </div>
+        <div class="timelineAvatar" style="background-color: var(--ion-color-tertiary);">
+            <ion-label class="userNameTitle">{{reddah.getDisplayName(userName,100)}}</ion-label>
+            <img src="{{reddah.appData('userphoto_'+userName)}}" (click)="goUser(userName)"
+                onerror="this.src='assets/icon/anonymous.png';">
+        </div>
+        <div (click)="goMessage()" *ngIf="reddah.getUnReadMessageCount(0)>0" class="messageBox">
+            <img [src]="reddah.appData('userphoto_'+reddah.unReadMessage.slice(-1)[0].From)" class="messagePhoto">
+            <span class="span-eclipse" style="color:white;line-height:2.1em;margin:0.24em 0.8em;">{{reddah.getUnReadMessageCount(0)}} {{ reddah.instant('Pop.MsgCount') }}</span>
+        </div>
+
+        <div *ngIf="loading">
+            <div *ngFor="let skeletonItem of [1,1,1,1,1]"
+            style="background-color:var(--ion-color-white); display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
+                <div style="width:70px;padding: 0 0 0 10px; border: 0px solid blue;">
+                    <ion-avatar slot="start">
+                        <ion-skeleton-text animated style="border-radius: 0;"></ion-skeleton-text>
+                    </ion-avatar>
+                </div>
+                <div style="width:100%;border: 0px solid red;">
+                    <ion-card-header no-padding class="articleUserName">
+                        <ion-card-title>
+                            <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                        </ion-card-title>
+                    </ion-card-header>
+                    <div>
+                        <div style="background-color: white; padding: 0 0 4px 15px;margin-bottom:0px;">
+                            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                        </div>
+                    </div>
+                    <ion-card-content style="display:block;margin-right:20px;">
+                        <div class="parent">
+                            <div class="sk-container" *ngFor="let item of [1,1,1];index as i">
+                                <ion-avatar slot="start">
+                                    <ion-skeleton-text animated style="border-radius: 0;"></ion-skeleton-text>
+                                </ion-avatar>
+                            </div>
+                        </div>
+                    </ion-card-content>
+                </div>
+            </div>
+        </div>
+
+        <div *ngFor="let article of articles" 
+        style="background-color: var(--ion-color-tertiary); display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
+            <div style="width:70px;padding: 0 0 0 10px; border: 0px solid blue;">
+                <img src="{{reddah.appData('userphoto_'+article.UserName)}}" class="portrait" (click)="goUser(article.UserName)">
+            </div>
+            <div style="width:100%;border: 0px solid red;">
+                <ion-card-header no-padding class="articleUserName">
+                    <ion-card-title>
+                        <div (click)="goUser(article.UserName)" class="user-name">{{reddah.getDisplayName(article.UserName,100)}}</div>
+                    </ion-card-title>
+                </ion-card-header>
+                <div *ngIf="article.Title.length>0&&article.Title.length<100">
+                    <div style="padding: 0 0 4px 15px;margin-bottom:0px;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                </div>
+                <ion-item style="--background:transparent;" lines="none" *ngIf="article.Title.length>=100">
+                    <div (click)="fullText(article.Title)" style="background-color:var(--ion-color-light); padding: 12px;margin-bottom:5px;" 
+                    [innerHTML]="reddah.summaryShort(article.Title, 100, '......')"></div>
+                </ion-item>
+                <ion-card-content *ngIf="article.Abstract&&article.Abstract.length>2">
+                    <app-share-article [abstract]="article.Abstract" [image]="article.Content" [id]="article.Ref" [type]="article.Type"></app-share-article>
+                </ion-card-content>
+                <ion-card-content style="display:block;margin-right:20px;" *ngIf="article.Abstract.length<3&&article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
+                    <div class="parent" *ngIf="article.Content.split('$$$').length>6">
+                        <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
+                            <img [id]="reddah.makeItId(image+'mtl')" 
+                            (load)="reddah.adjustImage(image, 'mtl')"
+                            [src]="reddah.level2Cache(image)"
+                            class="picture" (click)="viewer(i, article.Content.split('$$$'))">
+                        </div>
+                    </div>
+                    <div class="parent" *ngIf="article.Content.split('$$$').length==3||article.Content.split('$$$').length==5||article.Content.split('$$$').length==6">
+                        <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
+                            <img [id]="reddah.makeItId(image+'mtl')" 
+                            (load)="reddah.adjustImage(image, 'mtl')"
+                            [src]="reddah.level2Cache(image)"
+                            class="picture" (click)="viewer(i, article.Content.split('$$$'))">
+                        </div>
+                    </div>
+                    <div class="parent2" *ngIf="article.Content.split('$$$').length==2||article.Content.split('$$$').length==4">
+                        <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
+                            <img [id]="reddah.makeItId(image+'mtl24')" 
+                            (load)="reddah.adjustImage(image, 'mtl24')"
+                            [src]="reddah.level2Cache(image)"
+                            class="picture" (click)="viewer(i, article.Content.split('$$$'))">
+                        </div>
+                    </div>
+                    <div class="parent3" *ngIf="article.Content.split('$$$').length==1">
+                        <div class="container3">
+                            <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtl')" 
+                            (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'mtl')"
+                            [src]="reddah.level2Cache(article.Content.split('$$$')[0])"
+                            class="picture" (click)="viewer(0, article.Content.split('$$$'))">
+                        </div>
+                    </div>
+                </ion-card-content>
+                <ion-item style="--background:transparent;margin:2px 0;" lines="none" *ngIf="article.Location&&article.Location!='undefined'" (click)="goLocation(article.Location)">
+                    <ion-icon name="location-outline" color="primary" style="margin-right:5px;"></ion-icon>
+                    <ion-label color="secondary">{{reddah.getJSON(article.Location).title}}</ion-label>
+                </ion-item>
+                <ion-item style="--background:transparent;margin:2px 0;" lines="none">
+                    <ion-text color="dark">{{reddah.getSendTime(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-text>
+                    <ion-text color="secondary" style="margin-left: 5px;" *ngIf="isMe(article.UserName)" (click)="delete(article)">{{ reddah.instant('Comment.Delete') }}</ion-text>
+                    <ion-icon name="ellipsis-horizontal" slot="end" (click)="presentPopover($event, article.Id, article.GroupName)"></ion-icon>
+                </ion-item>
+                <ion-item style="--background:transparent;" lines="none" *ngIf="reddah.getAllowedNames(article.GroupName).length>0">
+                    <div style="width: 100%;">
+                        <div class="like-arrow-up"></div>
+                        <div class="likeSection">
+                            <ion-icon name="heart-outline" color="danger" class="likeIcon" style="font-size:15px;"></ion-icon>
+                            <span class="likeUserName">
+                                <span class="user-name" (click)="goUser(user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName);last as isLast;">{{user.displayName}}{{isLast?"":", "}}</span>
+                            </span>
+                        </div>
+                    </div>
+                </ion-item>
+                <ion-item style="--background:transparent;" lines="none" *ngIf="commentData.get(article.Id)&&reddah.getAllowedComments(commentData.get(article.Id)).length>0">
+                    <div style="width: 100%;">
+                        <div class="like-arrow-up" *ngIf="reddah.getAllowedNames(article.GroupName).length==0"></div>
+                        <div class="like-spliter" *ngIf="reddah.getAllowedNames(article.GroupName).length>0"></div>
+                        <div class="commentSection">
+                            <div style="padding: 10px;">
+                                <ts-comment (reply)="showAddCommentFromChildren($event)" no-padding [data]="commentData.get(article.Id)" [depth]="1" [authoronly]="authoronly" 
+                                [articleauthor]="article.UserName"></ts-comment>
+                            </div>
+                        </div>
+                    </div>
+                </ion-item>
+            </div>
+        </div>
+        
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" 
+                loadingText="{{ reddah.instant('Button.Loading') }}">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </div>
+</ion-content>
+<ion-footer *ngIf="showAddComment">
+    <div style="display:flex;">
+        <ion-input #newComment id="newComment" placeholder="{{selectedReplyPlaceholder}}" style="padding-left:5px !important;"></ion-input>
+        <ion-icon style="align-self:center;" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
+        <ion-button (click)="SendComment()" color="primary" [disabled]="newComment.value==null||newComment.value==''">{{ reddah.instant('Confirm.Submit') }}</ion-button>
+    </div>
+    
+    <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
+</ion-footer>

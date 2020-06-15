@@ -1,0 +1,48 @@
+
+
+.title {
+    font-weight: bold;
+}
+
+.gapTop {
+    margin-top: 20px;
+}
+
+.gapBottom {
+    margin-bottom: 10px;
+    z-index:1;
+}
+
+.inputItem {
+    margin-left: 20px;
+    margin-right: 20px;
+    z-index:1;
+    text-transform: capitalize;
+}
+
+.sectionGapTop {
+    margin-top: 30px;
+}
+
+.buttonGapTop{
+    margin-top: 50px;
+}
+
+.conductArea {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+}
+
+.copyright{
+    font-size: 14px;
+    color: #dedede;
+}
+
+.forget {
+    margin-top: 40px;
+    color: #dedede;
+    text-align: center;
+}

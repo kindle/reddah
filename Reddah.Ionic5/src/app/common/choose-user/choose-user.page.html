@@ -1,0 +1,26 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-label>{{ reddah.instant('Menu.Contact') }}</ion-label>
+    <ion-button *ngIf="!delete" color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ reddah.instant('Confirm.Submit') }}</ion-button>
+    <ion-button *ngIf="delete" color="danger" slot="end" (click)="submit_delete()" [disabled]="submitClicked">{{ reddah.instant('Comment.Delete') }}</ion-button>
+</ion-item>
+<ion-content no-padding style="background-color: #eeeeee;">
+    <ion-list>
+        <ion-item-group *ngFor="let group of groupedContacts" lines="none">
+            <ion-item-divider color="light" lines="none">{{group.letter.toUpperCase()}}</ion-item-divider>
+            <ion-item *ngFor="let contact of group.contacts">
+                <ion-avatar slot="start" class="contactUserPhoto">
+                    <img src="{{reddah.appData('userphoto_'+contact.Watch)}}" class="contactPortrait"
+                    onerror="this.src='assets/icon/anonymous.png';">
+                </ion-avatar>
+                <ion-label style="margin-left:10px;">
+                    <h3>{{reddah.getDisplayName(contact.Watch)}}</h3>
+                    <ion-note>{{contact.Signature}}</ion-note>
+                </ion-label>
+                <ion-checkbox *ngIf="contact.Watch!=userName" slot="end" [(ngModel)]="contact.isChecked"></ion-checkbox>
+            </ion-item>
+        </ion-item-group>
+    </ion-list>
+</ion-content>

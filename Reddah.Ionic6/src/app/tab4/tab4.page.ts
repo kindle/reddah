@@ -18,8 +18,25 @@ export class Tab4Page implements OnInit{
         this.addScriptByUrl("/assets/running/index.js");
     }
 
-    ionViewDidEnter(){
+    
+    play(count) {
+        let start = 0;
+        let times = count;
         
+        let audio = new Audio();
+        
+        audio.src = "/assets/running/run.wav"; 
+        audio.addEventListener("ended",()=>{
+          start++;
+          if(start<times){
+              audio.play();
+          }
+        });
+        audio.play();
+    }
+
+    ionViewDidEnter(){
+      this.play(3);
     }
   
     ionViewWillLeave(){

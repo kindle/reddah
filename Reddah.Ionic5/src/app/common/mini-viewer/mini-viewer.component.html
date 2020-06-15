@@ -1,0 +1,45 @@
+<ion-content style="--background: white;" [innerHTML]="html" id="mini-container" [hidden]="!loaded">
+</ion-content>
+<ion-fab absolute-drag startRight="10" startTop="10" [hidden]="!loaded">
+    <ion-fab-button color="light">
+        <ion-icon color="medium" name="menu"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+        <ion-fab-button (click)="close()">
+            <ion-icon color="dark" name="backspace"></ion-icon>
+        </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="bottom">
+        <ion-fab-button (click)="share()">
+            <ion-icon color="secondary" name="share-social-outline"></ion-icon>
+        </ion-fab-button>
+        <!--<ion-fab-button (click)="rank()">
+            <ion-icon color="primary" name="podium"></ion-icon>
+        </ion-fab-button>-->
+        <ion-fab-button (click)="topic()">
+            <ion-icon color="primary" name="chatbubbles-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="report()">
+            <ion-icon color="dark" name="warning-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab-list>
+</ion-fab>
+<ion-fab vertical="top" horizontal="start" slot="fixed" [hidden]="loaded">
+    <ion-fab-button (click)="close()" color="light">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
+<ion-content class="vertical-align-content" (click)="bodyClick()"
+    style="--background:white;" [hidden]="loaded">
+    <ion-grid style="height:80%;">
+          <ion-row center style="width:100%;">
+                <ion-col>
+                        <img class="logoPortrait" src="{{reddah.appData('userphoto_'+guid, 'photo.svg')}}">
+                        <br>
+                        <h2 no-padding no-margin>
+                          {{ reddah.instant('Button.Loading') }}
+                        </h2>
+                </ion-col>
+          </ion-row>
+    </ion-grid>
+<ion-content >

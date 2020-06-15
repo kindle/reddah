@@ -1,0 +1,54 @@
+.newChatComment {
+    border: solid grey 0px;
+    border-radius: 5px;
+    margin: 10px 10px;
+    padding: 0px 5px;
+    --background: white;
+    overflow: hidden;
+    text-align:center;
+}
+
+.newChatCommentPress {
+    border: solid grey 0px;
+    border-radius: 5px;
+    margin: 10px 10px;
+    padding: 0px 5px;
+    --background: primary;
+    overflow: hidden;
+    color: black;
+}
+
+.chat-footer{
+    background-color: #eeeeee;
+}
+
+.optionPanel {
+    padding-bottom:40px;
+    background-color: #eeeeee;
+}
+
+.funGrid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 100px;
+    background-color: #eeeeee;
+}
+
+.funCard {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.funName {
+    margin: 0;
+    color: gray;
+}
+
+.audio-pressed {
+    background-color:#107c10;
+}

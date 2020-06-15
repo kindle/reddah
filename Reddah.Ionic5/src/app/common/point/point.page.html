@@ -1,0 +1,118 @@
+
+<ion-content color="point">
+    <div class="bg1">
+        {{ reddah.instant('Menu.MyPoints') }}
+    </div>
+    <div class="bg2">
+        P
+    </div>
+
+    <ion-item no-padding lines="none" color="transparent" class="title" style="--background:transparent;">
+        <ion-button clear icon-start color="transparent" (click)="close()" style="--box-shadow: none;">
+            <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <ion-card-title color="light" style="font-size: large;font-weight: bold;">{{ reddah.instant('Menu.MyPoints') }}</ion-card-title>
+        <ion-button clear slot="end" color="transparent" (click)="pointDetails()" 
+            style="--box-shadow: none;text-transform: none;font-size: large;">
+            {{ reddah.instant('Point.PointHistory') }}
+        </ion-button>
+    </ion-item>
+
+    <ion-card>
+        <ion-card-header color="transparent">
+            <ion-card-subtitle style="color:#fff;text-align: center;">
+                {{ reddah.instant('Point.TotalPointTitle') }}
+            </ion-card-subtitle>
+            <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;">
+                {{reddah.appData('userpoint_'+userName)}}
+            </ion-card-title>
+            <ion-card-content style="color:#fff;text-align: center;" (click)="showRule()">
+                <div style="display: flex;margin-top:5px;justify-content:center;">
+                    <span style="margin-right:5px;vertical-align: top;line-height: 18px;">
+                        {{ reddah.instant('Point.PointLevel') }}
+                    </span>
+                    <ion-icon *ngFor="let i of reddah.userLevelIconNumber(userName)" name="{{reddah.userLevelIcon(userName)}}" color="{{reddah.userLevelIconColor(userName)}}" size="small"></ion-icon>
+                </div>
+            </ion-card-content>
+        </ion-card-header>
+    </ion-card>
+
+    <ion-card class="welcome-card" color="light" *ngIf="display">
+        <ion-item lines="none">
+            <ion-icon style="margin-left:30px;" name="leaf" color="primary"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ reddah.instant('Point.Level_Illiterate') }}</ion-card-title>
+            <ion-label slot="end">0-49</ion-label>
+        </ion-item>
+        <ion-item lines="none" style="background-color:#d7d8da;">
+            <ion-icon style="margin-left:30px;" name="ribbon" color="dark"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ reddah.instant('Point.Level_Bronze') }}</ion-card-title>
+            <ion-label slot="end">50-149</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-icon style="margin-left:30px;" name="star-outline" color="primary"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ reddah.instant('Point.Level_Silver') }}</ion-card-title>
+            <ion-label slot="end">150-299</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-icon style="margin-left:30px;" name="star" color="gold"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ reddah.instant('Point.Level_Gold') }}</ion-card-title>
+            <ion-label slot="end">300-499</ion-label>
+        </ion-item>
+        <ion-item lines="none" style="background-color:#d7d8da;">
+            <ion-icon style="margin-left:30px;" name="medal" color="point"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ reddah.instant('Point.Level_Platinum') }}</ion-card-title>
+            <ion-label slot="end">500-999</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-icon style="margin-left:30px;" name="trophy" color="diamond"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ reddah.instant('Point.Level_Diamond') }}</ion-card-title>
+            <ion-label slot="end">1000-1999</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-icon style="margin-left:30px;" name="school" color="dark"></ion-icon>
+            <ion-card-title style="margin-left:15px;">{{ reddah.instant('Point.Level_Erudite') }}</ion-card-title>
+            <ion-label slot="end">2000~</ion-label>
+        </ion-item>
+    </ion-card>
+
+    <ion-item lines="none" color="transparent" class="title">
+        <ion-card-title color="light" style="font-size: large;font-weight: bold;">{{ reddah.instant('Point.RuleTitle') }}</ion-card-title>
+        <ion-text style="font-size: large;" color="light" slot="end">{{ reddah.lan3(reddah.instant('Point.TodayTotal'), '+'+reddah.getPoint('TodayTotalPoint'), reddah.instant('Point.Fen')) }}</ion-text>
+    </ion-item>
+
+    <ion-card class="welcome-card" color="light">
+        <ion-item lines="none">
+            <ion-icon name="today-outline" color="point"></ion-icon>
+            <ion-card-title style="margin-left:5px;">{{ reddah.instant('Point.PunchClock') }}</ion-card-title>
+            <ion-button clear slot="end" color="warning" (click)="punchClock()" 
+                style="--box-shadow: none;text-transform: none;" *ngIf="!reddah.getPoint('PunchClock')">
+                {{ reddah.instant('Point.Letsgo') }}
+            </ion-button>
+            <ion-button clear slot="end" color="light" (click)="punchClock()" 
+                style="--box-shadow: none;text-transform: none;" *ngIf="reddah.getPoint('PunchClock')">
+                {{ reddah.instant('Point.Done') }}
+            </ion-button>
+        </ion-item>
+    </ion-card>
+
+    <ion-card class="welcome-card" color="light" *ngFor="let task of reddah.pointTasks">
+        <ion-item lines="none">
+            <ion-card-title>{{ task.title }}</ion-card-title>
+            <ion-button clear slot="end" color="warning" (click)="doTask(task)" 
+                style="--box-shadow: none;text-transform: none;" *ngIf="!reddah.isPointDone(task)">
+                {{ reddah.instant('Point.Letsgo') }}
+            </ion-button>
+            <ion-button clear slot="end" color="light" 
+                style="--box-shadow: none;text-transform: none;" *ngIf="reddah.isPointDone(task)">
+                {{ reddah.instant('Point.Done') }}
+            </ion-button>
+        </ion-item>
+        <ion-card-content>
+            <p>{{ reddah.lan2(task.point, reddah.instant('Point.Fen')) }} / {{ task.description}}</p>
+            <p *ngIf="task.type==0">{{ reddah.lan3(reddah.instant('Point.AlreadyGot'), reddah.getCurrentPoint(task), reddah.instant('Point.Fen')) }}
+                / {{ reddah.lan3(reddah.instant('Point.DailyMax'), task.max,  reddah.instant('Point.Fen')) }}</p>
+            <p *ngIf="task.type==1">{{ reddah.lan3(reddah.instant('Point.AlreadyGot'), reddah.getCurrentPoint(task), reddah.instant('Point.Fen')) }}
+                / {{ reddah.lan3(reddah.instant('Point.OnceMax'), task.max,  reddah.instant('Point.Fen')) }}</p>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

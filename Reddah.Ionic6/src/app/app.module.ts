@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -8,12 +8,40 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthService } from './auth.service';
+import { ReddahService } from './reddah.service';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+
+import { File } from '@ionic-native/file/ngx';
+import { CacheModule } from 'ionic-cache';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  declarations: [
+    AppComponent,
+  ],
+  entryComponents: [
+    
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [
+    BrowserModule, 
+    HammerModule,
+    FormsModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    CacheModule.forRoot(), 
+    NgxWebstorageModule.forRoot(),
+  ],
   providers: [
+    AuthService,
+    DatePipe,
+    File,
+    FormsModule,
+    ReddahService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

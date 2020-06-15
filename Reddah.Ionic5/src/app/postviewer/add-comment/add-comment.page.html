@@ -1,0 +1,25 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" 
+    style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title style="padding-left:0px;text-transform: none;">{{ reddah.instant('Comment.Comment') }}</ion-title>
+    <ion-button color="success" slot="end" (click)="submit()" 
+    [disabled]="submitClicked||commentContent==null||commentContent==''">{{ reddah.instant('Confirm.Submit') }}</ion-button>
+</ion-item>
+<ion-content>
+    <div style="margin:5px;">
+        <ion-textarea autoresize #newComment id="newComment" [(ngModel)]="commentContent" 
+        rows="6" cols="20" placeholder="{{placeHolder ? reddah.instant('Pop.Reply')+'@'+placeHolder:reddah.instant('Comment.Tip') }}"
+        style="margin:0;"></ion-textarea>
+    </div>
+    <div style="display: flex; justify-content: space-around;margin:10px;">
+        <!--
+        <ion-icon slot="end" name="pricetags-outline" size="medium" (click)="chooseTags()"></ion-icon>
+        <ion-icon slot="end" name="bar-chart-outline" size="medium" (click)="chooseStock()"></ion-icon>
+        -->
+        <ion-icon slot="end" name="at-outline" size="medium" (click)="chooseAtUser()"></ion-icon>
+        <ion-icon id="faceIcon" slot="end" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
+    </div>
+    <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
+</ion-content>

@@ -1,0 +1,70 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-icon name="chevron-back-outline" slot="start" (click)="close()" class="backbutton"></ion-icon>
+    <ion-button color="success" slot="end" (click)="save()" [disabled]="loading">{{ reddah.instant('Common.Save') }}</ion-button>
+</ion-item>
+<ion-content>
+    <ion-tabs>
+        <ion-tab tab="html">
+            <ion-header translucent>
+                <ion-toolbar>
+                    <ion-title>HTML</ion-title>
+                </ion-toolbar>
+            </ion-header>
+    
+            <ion-content fullscreen class="ion-padding">
+                <ion-textarea style="border: 1px solid gray; margin-bottom: 5px; height:100%;" 
+                 [(ngModel)]="content" cols="20" rows="10" [placeholder]="GetLoading('html')" [disabled]="loading">
+                </ion-textarea>
+            </ion-content>
+        </ion-tab>
+    
+        <ion-tab tab="js">
+            <ion-header translucent>
+                <ion-toolbar>
+                    <ion-title>Javascript</ion-title>
+                </ion-toolbar>
+            </ion-header>
+    
+            <ion-content fullscreen class="ion-padding">
+                <ion-textarea style="border: 1px solid gray; margin-bottom: 5px; height:100%;" 
+                 [(ngModel)]="title" cols="20" rows="10" [placeholder]="GetLoading('js')" [disabled]="loading">
+                </ion-textarea>
+            </ion-content>
+        </ion-tab>
+    
+        <ion-tab tab="css">
+            <ion-header translucent>
+                <ion-toolbar>
+                    <ion-title>Css</ion-title>
+                </ion-toolbar>
+            </ion-header>
+    
+            <ion-content fullscreen class="ion-padding">
+                <ion-textarea style="border: 1px solid gray; margin-bottom: 5px; height:100%;" 
+                 [(ngModel)]="abstract" cols="20" rows="10" [placeholder]="GetLoading('css')" [disabled]="loading">
+                </ion-textarea>
+            </ion-content>
+        </ion-tab>
+    
+        <ion-tab-bar slot="bottom">
+            <ion-tab-button tab="html">
+                <ion-label>HTML</ion-label>
+                <ion-icon name="logo-html5"></ion-icon>
+            </ion-tab-button>
+            <ion-tab-button tab="js">
+                <ion-label color="dark">Javascript</ion-label>
+                <ion-icon name="logo-javascript" color="warning"></ion-icon>
+            </ion-tab-button>
+            <ion-tab-button tab="css">
+                <ion-label color="mini">CSS</ion-label>
+                <ion-icon name="logo-css3" color="mini"></ion-icon>
+            </ion-tab-button>
+        </ion-tab-bar>
+    </ion-tabs>
+
+    <ion-item lines="none" *ngIf="article">
+        <ion-button color="success" slot="end" (click)="preview()">{{ reddah.instant('Common.Test') }}</ion-button>
+        <ion-button color="success" slot="end" (click)="publish()">{{ reddah.instant('Common.Publish') }}</ion-button>
+    </ion-item>
+
+</ion-content>

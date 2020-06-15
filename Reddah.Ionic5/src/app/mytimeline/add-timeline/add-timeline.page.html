@@ -1,0 +1,77 @@
+<ion-item color="light" lines="none">
+    <ion-button color="light" slot="start" (click)="close()"
+    style="text-transform: capitalize;">{{ reddah.instant('Confirm.Cancel') }}</ion-button> 
+    <ion-label style="text-align: center;">{{ title }}</ion-label>
+    <ion-button color="success" slot="end" (click)="submit()"
+    style="text-transform: capitalize;">{{ reddah.instant('Common.Publish') }}</ion-button>
+</ion-item>
+<ion-content (click)="tap($event)">
+    <ion-item>
+        <ion-textarea id="thoughtTxt" (ionBlur)="saveDraft()" autoresize [(ngModel)]="yourThoughts" rows="{{postType==4?3:6}}" cols="20" 
+        placeholder="{{ reddah.instant('Pop.YourThoughts') }}..."
+        style="margin: 0 10px 0 0;"></ion-textarea>
+    </ion-item>
+    <div style="display: flex; justify-content: space-around;margin:10px;">
+        <ion-icon slot="end" name="pricetags-outline" size="medium" (click)="chooseTags()"
+        *ngIf="action=='topic'&&!mini"></ion-icon>
+        <!--
+        <ion-icon slot="end" name="bar-chart-outline" size="medium" (click)="chooseStock()"></ion-icon>
+        -->
+        <ion-icon slot="end" name="at-outline" size="medium" (click)="chooseAtUser()"></ion-icon>
+        <ion-icon id="faceIcon" slot="end" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
+    </div>
+    <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
+    <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="postType<3">
+        <div class="imgSqure" *ngFor="let image of photos;index as i">
+            <img [id]="reddah.makeItId(image.webUrl+'addtl')" 
+            (load)="reddah.adjustImage(image.webUrl, 'addtl')" 
+            [src]="reddah.level2Cache(image.webUrl)"
+            (click)="viewer(i, photos)" (press)="pressImage()" (pressup)="pressUpImage()">
+        </div>
+        <div class="imgSqure addImg" (click)="addNewPhoto($event)" *ngIf="photos.length<9">
+          <ion-icon name="add-outline"size="large" color="medium"></ion-icon>
+        </div>
+    </div>
+    <div *ngIf="postType==3">
+      //poster
+      video
+    </div>
+    <div style="margin: 0 10px;border-radius: 5px;">
+      <app-share-article *ngIf="postType==4&&article.Type!=6" [abstract]="article.Title" 
+      [image]="article.ImageUrl" [id]="article.Id" [type]="4"></app-share-article>
+      <app-share-article *ngIf="postType==4&&article.Type==6" [abstract]="article.Title" 
+      [image]="reddah.getFirstImage(article.Content)" [id]="article.Id" [type]="4"></app-share-article>
+    </div>
+    <ion-item lines="none" style="--background:var(--ion-item-background);height:10px;">
+    </ion-item>
+    <ion-item (click)="getLocation()" *ngIf="action!='topic'">
+      <ion-icon name="location-outline" color="{{location?'primary':'dark'}}"></ion-icon>
+      <ion-text color="{{location?'primary':'dark'}}" style="margin-left:15px;">{{location?location.title:reddah.instant('Article.CurrentLocation')}}</ion-text>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item (click)="chooseTags()" *ngIf="action=='topic'&&!mini">
+      <ion-icon name="pricetags-outline"></ion-icon>
+      <ion-text style="margin-left: 15px;">{{ topicChoose?'# '+topicChoose:reddah.instant('Article.Topic') }}</ion-text>
+      <ion-icon name="chevron-forward-outline"slot="end"></ion-icon>
+    </ion-item>
+    <ion-item (click)="chooseAtUser()">
+      <ion-icon name="at-outline"></ion-icon>
+      <ion-text style="margin-left: 15px;">{{ reddah.instant('Article.Mention') }}</ion-text>
+      <ion-icon name="chevron-forward-outline"slot="end"></ion-icon>
+    </ion-item>
+<!--
+    <ion-item>
+      <ion-icon name="person" slot="start"></ion-icon>
+      <ion-label>谁可以看</ion-label>
+      <ion-icon name="chevron-forward-outline"slot="end"></ion-icon>
+    </ion-item>-->
+    
+
+</ion-content>
+<ion-footer *ngIf="dragging" style="--background:red;background-color: red;color: white;">
+    <ion-row id="delete-photo" class="delete-area" align-items-center justify-content-center dragula="bag" [(dragulaModel)]="photos_trash">
+        <ion-icon name="trash-outline" color="tertiary" size="small"></ion-icon>
+        <ion-text *ngIf="dragToDel" color="white">{{ reddah.instant('Pop.ReleaseToDel') }}</ion-text>
+        <ion-text *ngIf="!dragToDel">{{ reddah.instant('Pop.DragToDel') }}</ion-text>
+    </ion-row>
+</ion-footer>

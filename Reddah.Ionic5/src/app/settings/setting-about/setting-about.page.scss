@@ -1,0 +1,39 @@
+.logoArea {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.version {
+    margin-top: 5px;
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+.item {
+    min-height: 50px;
+}
+
+.conductArea {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+}
+
+.copyright{
+    font-size: 14px;
+    color: #dedede;
+}

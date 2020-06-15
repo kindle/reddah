@@ -1,0 +1,41 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon slot="end" name="close-outline" (click)="close()" class="backbutton"></ion-icon>
+</ion-item>
+<ion-content style="background-color: white;" id="container">
+    <ion-item lines="none" class="sectionGapTop inputItem" no-padding>
+        <h2 class="title">{{ reddah.instant('Login.Title') }}</h2>
+    </ion-item>
+    <ion-item lines="none" class="gapBottom inputItem" position="stack" no-padding>
+        <ion-note slot="start" text-wrap color="dark">
+            {{ reddah.instant('Login.NoAccount') }}
+            <span style="color: #107c10;margin-left:5px;" (click)="goRegister()">
+                {{ reddah.instant('Login.RegisterNow') }}
+            </span>
+        </ion-note>
+    </ion-item>
+    <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
+        <ion-input type="text" placeholder="{{ reddah.instant('Input.UserName') }}" [(ngModel)]="username" clearInput></ion-input>
+    </ion-item>
+    <ion-item class="gapBottom inputItem" no-padding>
+        <ion-input type="password" placeholder="{{ reddah.instant('Input.Password') }}" [(ngModel)]="password" clearInput></ion-input>
+    </ion-item>
+    <ion-button class="buttonGapTop gapBottom inputItem" size="large" 
+        (click)="logIn()" expand="block" [disabled]="checkLogin()">
+        {{ reddah.instant('Button.Login') }}
+    </ion-button>
+
+    <div class="forget" (click)="forgot()">{{ reddah.instant('Login.ForgotPassword') }}</div>    
+    
+    
+    <ion-button class="buttonGapTop gapBottom inputItem" size="large" expand="block"
+        (click)="reddah.openAppleSignIn()" *ngIf="showSigninWithApple">
+        <ion-icon name="logo-apple" size="small" slot="start"></ion-icon>
+        {{reddah.instant('Surface.SignInApple')}}
+    </ion-button>
+        
+    <div class="conductArea">
+        <p class="copyright">
+            reddah.com<br>
+        </p>
+    </div>
+</ion-content>

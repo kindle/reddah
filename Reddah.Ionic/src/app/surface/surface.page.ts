@@ -8,8 +8,8 @@ import { SigninPage } from './signin/signin.page';
 //import dat from 'dat.gui'
 //import Stats from 'stats-js';
 //import TweenMax from "gsap";
-import PerspectiveTransform from '../../assets/js/css_globe_PerspectiveTransform.js'
-import TweenMax from '../../assets/js/TweenMax.min.js'
+import PerspectiveTransform from '../../assets/surface/css_globe_PerspectiveTransform.js'
+import TweenMax from '../../assets/surface/TweenMax.min.js'
 import { AuthService } from '../auth.service';
 import { RegisterPage } from './register/register.page'
 import { Globalization } from '@ionic-native/globalization/ngx';
@@ -261,9 +261,9 @@ export class SurfacePage implements OnInit {
     tick = 1;
 
     URLS = {
-        bg: 'assets/icon/css_globe_bg.jpg',
-        diffuse: 'assets/icon/css_globe_diffuse.jpg',
-        halo: 'assets/icon/css_globe_halo.png',
+        bg: 'assets/surface/css_globe_bg.jpg',
+        diffuse: 'assets/surface/css_globe_diffuse.jpg',
+        halo: 'assets/surface/css_globe_halo.png',
     };
 
     transformStyleName = PerspectiveTransform.transformStyleName;

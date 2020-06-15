@@ -128,6 +128,21 @@ export class TabsPage implements OnInit {
         return this.authService.authenticated();
     }
 
+
+    tabNum = 1;
+    alsoClick(id){
+        this.tabNum = id;
+        this.play();
+    }
+
+    play(){
+        let audio = new Audio();
+        
+        //audio.src = "/assets/running/run.wav"; 
+        audio.src = "/assets/sound/drop.mp3"; 
+        audio.play();
+    }
+
     ionViewDidEnter(){
         //this.subscription = this.platform.backButton.subscribe(()=>{
         //    navigator['app'].exitApp();

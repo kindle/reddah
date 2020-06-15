@@ -1,0 +1,58 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-label>{{ reddah.instant('About.Account') }}</ion-label>
+</ion-item>
+<ion-content class="common-content">
+    <ion-item (click)="changePhoto()" class="borderTop borderItem">
+        <ion-label class="title">{{ reddah.instant('About.Photo') }}</ion-label>
+        <ion-thumbnail slot="end">
+            <img src="{{reddah.appData('userphoto_'+userName)}}" class="portrait">
+        </ion-thumbnail>
+        <ion-icon name="chevron-forward-outline"slot="end"></ion-icon>
+    </ion-item>
+    <ion-item>
+        <ion-label class="title">Reddah ID</ion-label>
+        <ion-note color="dark" slot="end" class="reddahId">{{userName}}</ion-note>
+    </ion-item>
+    <ion-item lines="none" (click)="myQrCard()" class="borderItem borderBottom">
+        <ion-label class="title">{{ reddah.instant('About.Card') }}</ion-label>
+        <ion-icon name="qr-code-outline" slot="end"></ion-icon>
+        <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none" class="common-splitter">
+    </ion-item>
+    <ion-item class="borderTop borderBottom" lines="none" (click)="changeLocation()">
+        <ion-label slot="start" color="dark">{{ reddah.instant('About.Location') }}</ion-label>
+        <ion-icon slot="end" name="location-outline"color="{{reddah.appData('userlocation_'+userName)?'primary':'dark'}}"></ion-icon>
+        <!--<ion-label slot="end" *ngIf="reddah.appData('userlocation_'+userName)">
+            {{reddah.appData('userlocation_'+userName)}}</ion-label>
+        -->
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+    </ion-item>
+    
+    <ion-item lines="none" class="common-splitter">
+    </ion-item>
+    <ion-item class="borderTop" (click)="changeNickName()">
+        <ion-label class="title">{{ reddah.instant('About.Nickname') }}</ion-label>
+        <ion-note color="dark" slot="end">{{reddah.appData('usernickname_'+userName)}}</ion-note>
+        <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item (click)="changeSex()">
+        <ion-label class="title">{{ reddah.instant('About.Sex') }}</ion-label>
+        <ion-icon slot="end" name="male-outline"*ngIf="reddah.appData('usersex_'+userName)==1" color="subscribe"></ion-icon>
+        <ion-icon slot="end" name="female-outline"*ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
+        <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" (click)="changeSignature()">
+        <ion-label class="title">{{ reddah.instant('About.Signature') }}</ion-label>
+        <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" class="borderItem borderBottom" (click)="changeSignature()">
+        <ion-note slot="start" color="dark" text-wrap style="padding-bottom: 20px;">
+            {{reddah.appData('usersignature_'+userName)}}
+        </ion-note>
+    </ion-item>
+</ion-content>
