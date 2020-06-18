@@ -1,7 +1,5 @@
 import { Component, Inject, Renderer2, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { EarthPage } from '../tabs/earth/earth.page';
-import { MapPage } from '../map/map.page';
 import { ModalController } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 

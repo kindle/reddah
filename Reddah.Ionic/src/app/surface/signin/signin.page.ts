@@ -65,11 +65,14 @@ export class SigninPage implements OnInit {
                     this.reddah.setCurrentJwt(result.Message);
                     // return token successfully
                     this.modalController.dismiss(result.Message);
+                    //alert(2)
+                    //this.router.navigate(['']);
+                    /*
                     this.router.navigate(['/'], {
                         queryParams: {
                             action: 'login'
                         }
-                    });
+                    });*/
                     this.cacheService.clearAll();
                     this.reddah.updateUserDeviceInfo();
                 }

@@ -5,7 +5,6 @@ import { MyTimeLinePage } from './mytimeline/mytimeline.page';
 import { AuthGuard } from './AuthGuard.service';
 import { SearchPage } from './common/search/search.page';
 import { SurfacePage } from './surface/surface.page';
-import { TabsPage } from './tabs/tabs.page';
 
 const routes: Routes = [
     { 

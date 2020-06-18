@@ -99,7 +99,7 @@ export class SurfacePage implements OnInit {
         if(data){
             let result = this.authService.exactToken(data);
             if(result){
-                this.router.navigate(['/surface']);
+                this.router.navigate(['']);
             }
         }
         //else

@@ -24,10 +24,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { createAnimation } from '@ionic/core'
 import { Router } from '@angular/router';
-
-import { SignInWithApple, AppleSignInResponse, 
-    AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } 
-    from '@ionic-native/sign-in-with-apple/ngx';
+import { Plugins } from '@capacitor/core';
 
 @Injectable({
     providedIn: 'root'
@@ -142,7 +139,6 @@ export class ReddahService {
         private alertController: AlertController,
         private ngZone: NgZone,
         private router: Router,
-        private signInWithApple: SignInWithApple,
     ) { 
         
     }
@@ -3514,7 +3510,6 @@ export class ReddahService {
     isExpired(exp:number): boolean {
         if(!exp) return true;
         let now = Date.now();
-        //console.log(now+"_"+exp*1000)
 
         return now >= exp*1000;
     }
@@ -3735,22 +3730,28 @@ export class ReddahService {
     }
 
 
-    openAppleSignIn(){
-        this.signInWithApple.signin({
-            requestedScopes: [
-                ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,
-                ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail
-            ]
+    openAppleSignIn() {
+        const { SignInWithApple } = Plugins;
+        SignInWithApple.Authorize()
+        .then(async (res) => {
+            if (res.response && res.response.identityToken) {
+                alert(res.response)
+            } else {
+                this.presentAlert();
+            }
         })
-        .then((res: AppleSignInResponse) => {
-            // https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user
-            alert('Send token to apple for verification: ' + res.identityToken);
-            console.log(res);
-        })
-        .catch((error: AppleSignInErrorResponse) => {
-            alert(error.code + ' ' + error.localizedDescription);
-            console.error(error);
+        .catch((response) => {
+            this.presentAlert();
         });
+    }
+    
+    async presentAlert() {
+        const alert = await this.alertController.create({
+            header: 'Login Failed',
+            message: 'Please try again later',
+            buttons: ['OK'],
+        });
+        await alert.present();
     }
 
 }

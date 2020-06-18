@@ -135,12 +135,10 @@ export class TabsPage implements OnInit {
         this.play();
     }
 
+    tabsAudio = new Audio();
     play(){
-        let audio = new Audio();
-        
-        //audio.src = "/assets/running/run.wav"; 
-        audio.src = "/assets/sound/drop.mp3"; 
-        audio.play();
+        this.tabsAudio.src = "/assets/sound/drop.mp3"; 
+        this.tabsAudio.play();
     }
 
     ionViewDidEnter(){

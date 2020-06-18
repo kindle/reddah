@@ -1,4 +1,4 @@
-import { Component, Inject, Renderer2, OnInit } from '@angular/core';
+import { Component, Inject, Renderer2, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { ReddahService } from '../reddah.service';
@@ -17,14 +17,14 @@ declare var $:any;
 })
 export class Tab1Page implements OnInit{
 
-  userName;
+    userName;
 
-  constructor(
-    private _renderer2: Renderer2,
-    @Inject(DOCUMENT) private _document: Document,
-    private router: Router,
-    public reddah: ReddahService,
-    private modalController: ModalController,
+    constructor(
+      private _renderer2: Renderer2,
+      @Inject(DOCUMENT) private _document: Document,
+      private router: Router,
+      public reddah: ReddahService,
+      private modalController: ModalController,
     ) {}
 
     ngOnInit(){
@@ -124,7 +124,7 @@ export class Tab1Page implements OnInit{
     }
   
     addScriptByUrl(src){
-      let key = this.nonce_str()+"_js";
+      let key = this.reddah.nonce_str()+"_js";
   
       let s = this._renderer2.createElement('script');
       s.type = "text/javascript";
@@ -136,10 +136,14 @@ export class Tab1Page implements OnInit{
       
     }
 
-    nonce_str() {
-        return 'xxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random() * 10 | 0, v = r;
-            return v.toString(10);
-        });
-    }
+    @ViewChild('viewporttext')
+    viewPortText:ElementRef;
+
+    async onScroll($event){
+      let opacity = (document.body.offsetHeight - $event.detail.scrollTop) / document.body.offsetHeight;
+      let scale = (document.body.offsetHeight - $event.detail.scrollTop) / document.body.offsetHeight;
+      
+      this.viewPortText.nativeElement.style.setProperty('opacity', opacity+"");
+      this.viewPortText.nativeElement.style.setProperty('transform', 'scale('+scale+')');
+  }
 }
