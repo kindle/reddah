@@ -1,0 +1,33 @@
+{
+  "appId": "com.reddah.app",
+  "appName": "Reddah",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {
+    "preferences": {
+      "StatusBarOverlaysWebView": "false",
+      "WindowsStoreIdentityName": "27997Bailin.Reddah",
+      "WindowsStoreFamilyName": "27997Bailin.Reddah_a910akvnn34f2",
+      "WindowsStorePublisherName": "Bailin",
+      "WindowsStoreDisplayName": "Reddah",
+      "ScrollEnabled": "false",
+      "android-minSdkVersion": "19",
+      "BackupWebStorage": "none",
+      "SplashMaintainAspectRatio": "true",
+      "FadeSplashScreenDuration": "0",
+      "SplashShowOnlyFirstTime": "false",
+      "SplashScreen": "none",
+      "ShowSplashScreenSpinner": "false",
+      "SplashScreenDelay": "0",
+      "windows-target-version": "10.0",
+      "windows-phone-target-version": "10.0",
+      "android-targetSdkVersion": "28"
+    }
+  }
+}
