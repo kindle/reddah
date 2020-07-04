@@ -1,4 +1,3 @@
-
 <ion-content color="point">
     <div class="bg1">
         {{ reddah.instant('Menu.MyPoints') }}
@@ -7,11 +6,11 @@
         P
     </div>
 
-    <ion-item no-padding lines="none" color="transparent" class="title" style="--background:transparent;">
+    <ion-item lines="none" color="transparent" class="title" style="--padding-start:0;">
         <ion-button clear icon-start color="transparent" (click)="close()" style="--box-shadow: none;">
             <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
         </ion-button>
-        <ion-card-title color="light" style="font-size: large;font-weight: bold;">{{ reddah.instant('Menu.MyPoints') }}</ion-card-title>
+        <ion-label style="font-size: large;font-weight: bold;color: #fff;">{{ reddah.instant('Menu.MyPoints') }}</ion-label>
         <ion-button clear slot="end" color="transparent" (click)="pointDetails()" 
             style="--box-shadow: none;text-transform: none;font-size: large;">
             {{ reddah.instant('Point.PointHistory') }}
@@ -31,7 +30,10 @@
                     <span style="margin-right:5px;vertical-align: top;line-height: 18px;">
                         {{ reddah.instant('Point.PointLevel') }}
                     </span>
-                    <ion-icon *ngFor="let i of reddah.userLevelIconNumber(userName)" name="{{reddah.userLevelIcon(userName)}}" color="{{reddah.userLevelIconColor(userName)}}" size="small"></ion-icon>
+                    <ion-icon *ngFor="let i of reddah.userLevelIconNumber(userName)" 
+                        name="{{reddah.userLevelIcon(userName)}}" 
+                        color="{{reddah.userLevelIconColor(userName, true)}}" 
+                        size="small"></ion-icon>
                 </div>
             </ion-card-content>
         </ion-card-header>
@@ -76,8 +78,8 @@
     </ion-card>
 
     <ion-item lines="none" color="transparent" class="title">
-        <ion-card-title color="light" style="font-size: large;font-weight: bold;">{{ reddah.instant('Point.RuleTitle') }}</ion-card-title>
-        <ion-text style="font-size: large;" color="light" slot="end">{{ reddah.lan3(reddah.instant('Point.TodayTotal'), '+'+reddah.getPoint('TodayTotalPoint'), reddah.instant('Point.Fen')) }}</ion-text>
+        <ion-card-title style="font-size: large;font-weight: bold;color: #fff;">{{ reddah.instant('Point.RuleTitle') }}</ion-card-title>
+        <ion-text style="font-size: large;color: #fff;" slot="end">{{ reddah.lan3(reddah.instant('Point.TodayTotal'), '+'+reddah.getPoint('TodayTotalPoint'), reddah.instant('Point.Fen')) }}</ion-text>
     </ion-item>
 
     <ion-card class="welcome-card" color="light">

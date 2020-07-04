@@ -1856,7 +1856,7 @@ export class ReddahService {
         }
     }
 
-    userLevelIconColor(userName){
+    userLevelIconColor(userName, sameColor=false){
         let point = this.appData('userpoint_'+userName);
         if(point<50){
             return "primary";
@@ -1871,7 +1871,7 @@ export class ReddahService {
             return "gold";
         }
         else if(point<1000){
-            return "point";
+            return sameColor?"light":"point";
         }
         else if(point<2000){
             return "diamond";

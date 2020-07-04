@@ -67,7 +67,7 @@ export class SurfacePage implements OnInit {
     }
 
     async register(){
-        this.config.isWorldVisible = false;
+        //this.config.isWorldVisible = false;
 
         const modal = await this.modalController.create({
             component: RegisterPage,
@@ -82,12 +82,12 @@ export class SurfacePage implements OnInit {
             this.signin();
         }
         else{
-            this.config.isWorldVisible = true;
+            //this.config.isWorldVisible = true;
         }
     }
 
     async signin(){
-        this.config.isWorldVisible = false;
+        //this.config.isWorldVisible = false;
         
         const modal = await this.modalController.create({
             component: SigninPage,
@@ -105,12 +105,12 @@ export class SurfacePage implements OnInit {
         }
         //else
         //{
-            this.config.isWorldVisible = true;
+            //this.config.isWorldVisible = true;
         //}
     }
 
     async locale(){
-        this.config.isWorldVisible = false;
+        //this.config.isWorldVisible = false;
 
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
         const changeLocaleModal = await this.modalController.create({
@@ -125,7 +125,7 @@ export class SurfacePage implements OnInit {
             let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
             this.reddah.loadTranslate(currentLocale);
         }
-        this.config.isWorldVisible = true;
+        //this.config.isWorldVisible = true;
         
     }
 

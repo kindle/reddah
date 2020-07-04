@@ -1,6 +1,6 @@
 <ion-item color="light" style="--padding-start:0;" lines="none">
-    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    <ion-button clear icon-start color="transparent" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" color="dark" name="chevron-back-outline"></ion-icon>
     </ion-button>
     <ion-label>{{ reddah.instant('Point.PointHistory') }}</ion-label>
 </ion-item>
@@ -9,7 +9,7 @@
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
     </ion-refresher>
-    <ion-card class="welcome-card" *ngFor="let point of points">
+    <ion-card class="welcome-card-history" *ngFor="let point of points">
         <ion-grid>
             <ion-row>
                 <ion-item lines="none" style="width:100%;">

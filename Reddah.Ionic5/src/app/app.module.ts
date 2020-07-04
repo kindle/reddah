@@ -176,6 +176,7 @@ import { SettingNetworkPage } from './settings/setting-network/setting-network.p
 import { TopicActionBarComponent } from './topic/topic-action-bar/topic-action-bar.component';
 import { TopicChoosePage } from './chat/topic-choose/topic-choose.page';
 import { ActiveUsersPage } from './activeusers/activeusers.page';
+import { PublisherPage } from './tabs/publisher/publisher.page';
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -213,6 +214,7 @@ var firebaseConfig = {
     MyInfoPage,MessagePage,
     NewFriendPage,
     PostviewerPage,
+    PublisherPage,
     SafePipe,
     ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,
     SurfacePage,
@@ -298,6 +300,7 @@ entryComponents: [
     AddFeedbackPage,AddMaterialPage,
     StockPage,
     CommentReplyPage,
+    PublisherPage,
     //SearchPage,
     ShakePage,
     SearchUserPage,

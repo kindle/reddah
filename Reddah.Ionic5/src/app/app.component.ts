@@ -63,23 +63,30 @@ export class AppComponent {
   }
 
 
-  isStatusBarLight = false;
+  isStatusBarLight = true;
 
   initializeApp() {
     this.platform.ready().then(() => {
-
+        this.isStatusBarLight = !this.authService.authenticated();
         if(this.reddah.platformTag==="ios"||
         this.reddah.platformTag==="android")
         {
-            StatusBar.setStyle({
+            /*StatusBar.setStyle({
                 style: this.isStatusBarLight ? StatusBarStyle.Dark : StatusBarStyle.Light
             });
             this.isStatusBarLight = !this.isStatusBarLight;
-        
-            // Display content under transparent status bar (Android only)
-            StatusBar.setOverlaysWebView({
-                overlay: false
-            });
+        */
+
+            //(Android only)
+            if(this.reddah.platformTag==="android"){
+                StatusBar.setOverlaysWebView({
+                    overlay: false
+                });
+            }
+
+            /*if(this.reddah.platformTag==="ios"){
+                StatusBar.hide();
+            }*/
         
             //SplashScreen.hide();
         }
