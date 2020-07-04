@@ -15,6 +15,7 @@ import { PunchClockPage } from '../common/point/punch-clock/punch-clock.page';
 import { PublisherPage } from '../tabs/publisher/publisher.page';
 import { SearchPage } from 'src/app/common/search/search.page';
 import { UserPage } from 'src/app/common/user/user.page';
+import { PlatformPage } from '../tabs/publisher/platform/platform.page';
 
 @Component({
   selector: 'app-tab5',
@@ -195,14 +196,15 @@ export class Tab5Page implements OnInit {
   }
 
 
-  async goPublicPage(){
-      const modal = await this.modalController.create({
-          component: PublisherPage,
-          componentProps: {},
-          cssClass: "modal-fullscreen",
-      });
-      await modal.present();
-  }
+    async goPlatform(){
+        const modal = await this.modalController.create({
+            component: PlatformPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        
+        await modal.present();
+    }
 
   /*
   async goMiniPage(){

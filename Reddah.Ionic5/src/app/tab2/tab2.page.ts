@@ -23,6 +23,7 @@ import { UserPage } from 'src/app/common/user/user.page';
 import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
 import { TimelinePopPage } from 'src/app/common/timeline-pop.page';
 import { ActiveUsersPage } from 'src/app/activeusers/activeusers.page';
+import { PublisherPage } from '../tabs/publisher/publisher.page';
 
 @Component({
   selector: 'app-tab2',
@@ -352,6 +353,18 @@ export class Tab2Page implements OnInit  {
       await userModal.present();
   }
 
+  async goSearchN(type){
+    const modal = await this.modalController.create({
+        component: SearchPage,
+        componentProps: {
+            type: type
+        },
+        cssClass: "modal-fullscreen",
+    });
+    
+    await modal.present();
+}
+
   async shake(){
       let myLocationstr = this.reddah.appData("userlocationjson_"+this.userName);
       let myLocation = null;
@@ -458,16 +471,6 @@ export class Tab2Page implements OnInit  {
       await modal.present();
   }
 
-  async goPlatform(){
-      const modal = await this.modalController.create({
-          component: PlatformPage,
-          componentProps: {},
-          cssClass: "modal-fullscreen",
-      });
-      
-      await modal.present();
-  }
-
   @ViewChild('earthbox') earthbox;
   showBox= false;
   async showEarthBox(){
@@ -566,4 +569,16 @@ export class Tab2Page implements OnInit  {
           this.doRefresh(null);
       }
   }
+
+
+    async goPublicPage(){
+        const modal = await this.modalController.create({
+            component: PublisherPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+        });
+        await modal.present();
+    }
+
+
 }

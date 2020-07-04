@@ -6,7 +6,7 @@
     <ion-icon name="add-outline"slot="end" (click)="goSearch()"></ion-icon>
 </ion-item>
 <ion-content #pageTop style="background-color:white;">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
         <ion-refresher-content refreshingSpinner="bubbles">
         </ion-refresher-content>
     </ion-refresher>

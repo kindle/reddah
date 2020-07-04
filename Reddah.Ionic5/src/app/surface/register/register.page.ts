@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { ReddahService } from '../../reddah.service';
 import { LoadingController } from '@ionic/angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: 'app-register',
@@ -16,7 +15,6 @@ export class RegisterPage implements OnInit {
         private modalController: ModalController,
         public reddah: ReddahService,
         private loadingController: LoadingController,
-        private iab: InAppBrowser,
         private platform: Platform,
     ) { }
 
@@ -103,17 +101,7 @@ export class RegisterPage implements OnInit {
     }
 
     async browse(policy){
-        const browser = this.iab.create(`https://reddah.com/${this.locale}/t/help/${policy}`);
-        browser.show();
-        /*
-        browser.executeScript(...);
-        
-        browser.insertCSS(...);
-        browser.on('loadstop').subscribe(event => {
-        browser.insertCSS({ code: "body{color: red;" });
-        });
-        
-        browser.close();*/
+        this.reddah.Browser(`https://reddah.com/${this.locale}/t/help/${policy}`);
     }
 
     generateUserName(){

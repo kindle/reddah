@@ -5,7 +5,6 @@ import { ReddahService } from '../../reddah.service';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { Platform } from '@ionic/angular'; 
 import { AlertController, ActionSheetController } from '@ionic/angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: 'app-setting-about',
@@ -25,7 +24,6 @@ export class SettingAboutPage implements OnInit {
         public reddah: ReddahService,
         public authService: AuthService,
         private actionSheetController: ActionSheetController,
-        private iab: InAppBrowser,
         private alertController: AlertController,
     ) { 
         this.userName = this.reddah.getCurrentUser();
@@ -110,7 +108,7 @@ export class SettingAboutPage implements OnInit {
             storeAppURL = `https://apps.apple.com/cn/app/id${iosId}?l=${this.reddah.getCurrentLocale()}`;
         }
 
-        this.iab.create(storeAppURL, '_system');
+        this.reddah.Browser(storeAppURL);
     }
 
     async buymebeer(){
@@ -129,7 +127,7 @@ export class SettingAboutPage implements OnInit {
                 text: 'Paypal',
                 cssClass: 'pay-paypal',
                 handler: () => {
-                    this.iab.create("https://paypal.me/reddah", '_system');
+                    this.reddah.Browser("https://paypal.me/reddah");
                 }
             },
             {

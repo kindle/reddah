@@ -36,16 +36,15 @@
 .mini-box-item{
     display: flex;
     flex-direction: column;
-    margin-top:15px;
+    margin-top: 15px;
     min-width: 80px;
 }
 
 .mini-box-label{
-    margin:0;
     padding:0 5px;
-    width:80px;
+    width: 80px;
     color:gray;
-    margin-top:-10px;
+    margin-top: 5px;
     text-align: center;
 }
 

@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ReddahService } from '../../../reddah.service';
 import { LoadingController } from '@ionic/angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: 'app-register-sub',
@@ -16,7 +15,6 @@ export class RegisterSubPage implements OnInit {
     constructor(private modalController: ModalController,
         public reddah: ReddahService,
         private loadingController: LoadingController,
-        private iab: InAppBrowser,
     ) { }
 
     locale;
@@ -87,16 +85,6 @@ export class RegisterSubPage implements OnInit {
     }
 
     async browse(policy){
-        const browser = this.iab.create(`https://reddah.com/${this.locale}/t/help/${policy}`);
-        browser.show();
-        /*
-        browser.executeScript(...);
-        
-        browser.insertCSS(...);
-        browser.on('loadstop').subscribe(event => {
-        browser.insertCSS({ code: "body{color: red;" });
-        });
-        
-        browser.close();*/
+        this.reddah.Browser(`https://reddah.com/${this.locale}/t/help/${policy}`);
     }
 }

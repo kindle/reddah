@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { UserPage } from '../user/user.page';
 import { ReddahService } from '../../reddah.service';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: 'app-scan',
@@ -17,7 +16,6 @@ export class ScanPage implements OnInit {
         private modalController: ModalController,
         public navController: NavController,
         //private barcodeScanner: BarcodeScanner,
-        private iab: InAppBrowser,
     ) { }
 
     debug = "";

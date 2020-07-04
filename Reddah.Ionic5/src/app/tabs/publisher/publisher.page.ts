@@ -157,7 +157,7 @@ export class PublisherPage {
     @ViewChild('pageTop') pageTop: IonContent;
     
     clearCacheAndReload(event){
-        this.pageTop.scrollToTop();
+        //this.pageTop.scrollToTop();
         this.cacheService.clearGroup("PubPage");
         this.localStorageService.clear("Reddah_GroupedContacts_Pub_"+this.userName);
         this.localStorageService.clear("Reddah_Contacts_Pub_"+this.userName);

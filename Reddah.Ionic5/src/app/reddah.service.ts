@@ -7,29 +7,37 @@ import { Article } from "./model/article";
 import { UserProfileModel } from './model/UserProfileModel';
 import { UserModel, QueryCommentModel, NewCommentModel, NewTimelineModel, Queue } from './model/UserModel';
 import { Locale } from './model/locale';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+//////import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
 import { AlertController, LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import * as moment from 'moment';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { Device } from '@ionic-native/device/ngx';
-import { AppVersion } from '@ionic-native/app-version/ngx';
+//////import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+//////import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
+//////import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { DatePipe } from '@angular/common';
 import { Md5 } from 'ts-md5/dist/md5';
-import { Vibration } from '@ionic-native/vibration/ngx';
 import { createAnimation } from '@ionic/core'
 import { Router } from '@angular/router';
-import { Plugins } from '@capacitor/core';
+
+import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, 
+    CameraPhoto, CameraSource, HapticsImpactStyle } from '@capacitor/core';
+    
+const { Browser, Camera, Filesystem, Haptics, Device, Storage } = Plugins;
 
 @Injectable({
     providedIn: 'root'
 })
 export class ReddahService {
+
+    hapticsImpact(style = HapticsImpactStyle.Heavy) {
+        Haptics.impact({
+          style: style
+        });
+    }
+
+    platformTag;
 
     appStore  = "ios";
     //default 2 azure East Asia
@@ -102,19 +110,23 @@ export class ReddahService {
     }
 
     cloudFix(cacheKey){
-        if(this.cloud=="azure"){
-            cacheKey = cacheKey
-                .replace("login.reddah.com/uploadPhoto",
-                "reddah.blob.core.windows.net/photo")
-                .replace("reddah.com/uploadPhoto",
-                "reddah.blob.core.windows.net/photo")
-        }else{
-            
-        }
+        if(cacheKey!=null)
+        {
+            if(this.cloud=="azure"){
+                cacheKey = cacheKey
+                    .replace("login.reddah.com/uploadPhoto",
+                    "reddah.blob.core.windows.net/photo")
+                    .replace("reddah.com/uploadPhoto",
+                    "reddah.blob.core.windows.net/photo")
+            }else{
+                
+            }
 
-        return cacheKey
-        .replace("///","https://")
-        .replace("http://","https://")
+            return cacheKey
+            .replace("///","https://")
+            .replace("http://","https://")
+        }
+        return cacheKey;
     }
 
 
@@ -123,19 +135,15 @@ export class ReddahService {
     constructor(
         private http: HttpClient,
         private localStorageService: LocalStorageService,
-        private transfer: FileTransfer,
+        //////private transfer: FileTransfer,
         private file: File,
         private toastController: ToastController,
         private platform: Platform,
         private cacheService: CacheService,
-        private iab: InAppBrowser,
-        private localNotifications: LocalNotifications,
-        private device: Device,
-        private appVersion: AppVersion,
+        //////private localNotifications: LocalNotifications,
         private datePipe: DatePipe,
-        private camera: Camera,
+        //////private camera: Camera,
         private modalController: ModalController,
-        private vibration: Vibration,
         private alertController: AlertController,
         private ngZone: NgZone,
         private router: Router,
@@ -2038,8 +2046,8 @@ export class ReddahService {
 
     getVersionNumber(): Promise<string> {
         return new Promise((resolve) => {
-            this.appVersion.getVersionNumber().then((value: string) => {
-                resolve(value);
+            Device.getInfo().then((value: any) => {
+                resolve(value.appVersion);
             }).catch(err => {
                 alert(err);
             });
@@ -2047,11 +2055,11 @@ export class ReddahService {
     }
 
     async updateUserDeviceInfo(){
-        if(this.platform.is('cordova')){ 
-            this.getVersionNumber().then(appversion => {
-                let info = `${this.device.platform}_${this.device.version}_
-                    ${this.device.isVirtual?"Virtual":"Device"}_${this.device.uuid}_
-                    ${this.getCurrentLocale()}_${appversion}_${this.appStore}`;
+        if(this.platformTag==="android"||this.platformTag==="ios"){ 
+            Device.getInfo().then((value: any) => {
+                let info = `${value.platform}_${value.osVersion}_
+                    ${value.isVirtual?"Virtual":"Device"}_${value.uuid}_
+                    ${this.getCurrentLocale()}_${value.appVersion}_${this.appStore}`;
                 let data = new FormData();
                 data.append("info",info);
                 this.updateDeviceInfo(data).subscribe();
@@ -2515,8 +2523,9 @@ export class ReddahService {
         return url.substring(start, end);
     }
 
-    private fileTransfer: FileTransferObject; 
+    //////private fileTransfer: FileTransferObject; 
     toFileCache(webUrl, isVideo=false){
+        /*
         let deviceDirectory = this.getDeviceDirectory();
         
         let cachedFilePath = this.localStorageService.retrieve(webUrl);
@@ -2545,16 +2554,17 @@ export class ReddahService {
                 //alert(JSON.stringify(_))
                 console.log(JSON.stringify(_)) });
         }
+        */
     } 
 
     //for normal image download
     getDeviceDirectory(){
         let dir = this.file.externalRootDirectory;
-        if(this.platform.is('android'))
+        if(this.platformTag === 'android')
         {
             dir = this.file.externalApplicationStorageDirectory;
         }
-        else if(this.platform.is('ipad')||this.platform.is('iphone')||this.platform.is('ios')){
+        else if(this.platformTag === 'ios'){
             dir = this.file.cacheDirectory;
         }
         else {
@@ -2566,11 +2576,11 @@ export class ReddahService {
     //for copy image
     getOutputDeviceDirectory(){
         let dir = this.file.externalRootDirectory;
-        if(this.platform.is('android'))
+        if(this.platformTag === 'android')
         {
             dir = this.file.externalRootDirectory;
         }
-        else if(this.platform.is('ipad')||this.platform.is('iphone')||this.platform.is('ios')){
+        else if(this.platformTag ==='ios'){
             dir = this.file.cacheDirectory;
         }
         else {
@@ -2580,6 +2590,8 @@ export class ReddahService {
     }
 
     toImageCache(webUrl, cacheKey){
+        //////
+        /*
         if(webUrl!=null){
             let deviceDirectory = this.getDeviceDirectory();
             
@@ -2604,7 +2616,7 @@ export class ReddahService {
                 }, 
                 _ => { console.log(JSON.stringify(_)); });
             }
-        }
+        }*/
     } 
 
     toTextCache(text, cacheKey){
@@ -2618,6 +2630,8 @@ export class ReddahService {
     } 
 
     verifyImageFile(key){
+        //////
+        /*
         let cachedPath = this.localStorageService.retrieve(key);
         if(cachedPath&&this.platform.is('android')){
             let fileName = this.getFileName(cachedPath);
@@ -2632,7 +2646,7 @@ export class ReddahService {
                     this.localStorageService.clear(key);
                 }
             );
-        }
+        }*/
     }
 
     async getUserPhotos(userName, isTimeline=false){
@@ -3227,6 +3241,8 @@ export class ReddahService {
     }
 
     openMini(webUrl, miniName){
+        //////
+        /*
         let deviceDirectory = this.getDeviceDirectory();
 
         this.fileTransfer = this.transfer.create();  
@@ -3235,10 +3251,11 @@ export class ReddahService {
         _ => {
             let localUrl = (<any>window).Ionic.WebView.convertFileSrc(targetUrl);
 
-            const browser = this.iab.create(localUrl, 'location=no');
-            browser.show();
+            //const browser = this.iab.create(localUrl, 'location=no');
+            //browser.show();
         }, 
         _ => { console.log(JSON.stringify(_)) });
+        */
     }
 
     utcToLocal(str, format="YYYY-MM-DD HH:mm:ss"){
@@ -3389,7 +3406,29 @@ export class ReddahService {
         });
     }
 
+    
     async takePhoto(photos, formData){
+        // Take a photo
+        const capturedPhoto = await Camera.getPhoto({
+            //allowEditing: true,
+            resultType: CameraResultType.Uri, // file-based data; provides best performance
+            source: CameraSource.Camera, // automatically take a new photo with the camera
+            quality: 100 // highest quality (0 to 100)
+        });
+    /*
+        // Save the picture and add it to photo collection
+        const savedImageFile = await this.savePicture(capturedPhoto);
+        console.log(savedImageFile)
+        //let data = {fileUrl: capturedPhoto, webUrl: capturedPhoto.dataUrl};
+        photos.push(savedImageFile);
+        this.addPhotoToFormData(savedImageFile, formData);*/
+
+        //let data = {fileUrl: capturedPhoto, webUrl: capturedPhoto.webPath};
+        photos.push({fileUrl: capturedPhoto.path, webUrl: capturedPhoto.webPath});
+        const savedImageFile = await this.savePicture(capturedPhoto, formData);
+        //this.addPhotoToFormData(data, formData);
+        //////
+        /*
         const options: CameraOptions = {
             quality: 100,
             destinationType: this.camera.DestinationType.FILE_URI,
@@ -3405,11 +3444,29 @@ export class ReddahService {
         }, (err) => {
             //alert(JSON.stringify(err));
         });
-        
+        */
     }
 
     async fromLibPhoto(photos, formData)
     {
+        // From albumn
+
+        const capturedPhoto = await Camera.getPhoto({
+            resultType: CameraResultType.Uri, 
+            source: CameraSource.Photos, 
+            quality: 100
+        });
+
+        photos.push({fileUrl: capturedPhoto.path, webUrl: capturedPhoto.webPath});
+        const savedImageFile = await this.savePicture(capturedPhoto, formData);
+
+        //photos.push({fileUrl: capturedPhoto.path, webUrl: capturedPhoto.webPath});
+
+        //this.prepareData(photo.fileUrl, photo.fileUrl, formData);
+        //this.addPhotoToFormData(data, formData);
+
+        //////
+        /*
         const options: CameraOptions = {
             quality: 100,
             destinationType: this.camera.DestinationType.FILE_URI,
@@ -3426,10 +3483,14 @@ export class ReddahService {
         }, (err) => {
             //alert(JSON.stringify(err));
         });
-        
+        */
     }
 
     addPhotoToFormData(photo, formData){
+
+        
+        //////
+        /*
         //append org photo form data
         this.prepareData(photo.fileUrl, photo.fileUrl, formData);
 
@@ -3454,9 +3515,53 @@ export class ReddahService {
             .resize(options)
             .then((filePath: string) => this.prepareData(filePath, photo.fileUrl+"_reddah_preview", formData))
             .catch(e => alert(e));
+        */
     }
 
+    private async savePicture(cameraPhoto: CameraPhoto, formData) {
+        // Convert photo to base64 format, required by Filesystem API to save
+        const base64Data = await this.readAsBase64(cameraPhoto, formData);
+      
+        // Write the file to the data directory
+        const fileName = new Date().getTime() + '.jpeg';
+        const savedFile = await Filesystem.writeFile({
+          path: fileName,
+          data: base64Data,
+          directory: FilesystemDirectory.Data
+        });
+      
+        // Use webPath to display the new image instead of base64 since it's
+        // already loaded into memory
+        return {
+            fileUrl: fileName,
+            webviewPath: cameraPhoto.webPath
+        };
+    }
+
+    private async readAsBase64(cameraPhoto: CameraPhoto, formData) {
+        // Fetch the photo, read as a blob, then convert to base64 format
+        const response = await fetch(cameraPhoto.webPath!);
+        const blob = await response.blob();
+      
+        return await this.convertBlobToBase64(blob, cameraPhoto, formData) as string;  
+    }
+      
+    convertBlobToBase64 = (blob: Blob, cameraPhoto: CameraPhoto, formData) => new Promise((resolve, reject) => {
+        const reader = new FileReader;
+        reader.onerror = reject;
+        reader.onload = () => {
+            const imgBlob = new Blob([reader.result], {
+                type: cameraPhoto.format
+            });
+            formData.append(cameraPhoto.path, imgBlob, cameraPhoto.path);
+            resolve(reader.result);
+        };
+        reader.readAsDataURL(blob);
+    });
+
     prepareData(filePath, formKey, formData) {
+        //////
+        /*
         this.file.resolveLocalFilesystemUrl(filePath)
         .then(entry => {
             ( <FileEntry> entry).file(file => {
@@ -3474,6 +3579,7 @@ export class ReddahService {
         .catch(err => {
             console.error(JSON.stringify(err));
         });
+        */
     }
 
     checkPermission(permissionId){
@@ -3549,6 +3655,8 @@ export class ReddahService {
     }  
 
     notify(title, text){
+        //////
+        /*
         this.localNotifications.schedule({
             id: 1,
             title: title,
@@ -3557,7 +3665,7 @@ export class ReddahService {
             data: { secret: "key" }
             //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
             //data: { secret: key }
-        });
+        });*/
     }
 
     localeData;
@@ -3643,9 +3751,10 @@ export class ReddahService {
         else
             this.localStorageService.clear(`Reddah_ArticleLike_${userName}_${article.Id}`);
 
-        if(this.platform.is('cordova')){
+        if(this.platformTag==="android"||this.platformTag==="ios"){
             if(this.getLikeShake()){
-                this.vibration.vibrate(100);
+                this.hapticsImpact(HapticsImpactStyle.Light);
+                Haptics.vibrate();
             }
         }
     }
@@ -3670,9 +3779,10 @@ export class ReddahService {
         else
             this.localStorageService.clear(`Reddah_ArticleLike_${userName}_${article.Id}`);
 
-        if(this.platform.is('cordova')){
+            if(this.platformTag==="android"||this.platformTag==="ios"){
             if(this.getLikeShake()){
-                this.vibration.vibrate(100);
+                this.hapticsImpact(HapticsImpactStyle.Light);
+                Haptics.vibrate();
             }
         }
     }
@@ -3753,6 +3863,10 @@ export class ReddahService {
           buttons: ['OK'],
         });
         await alert.present();
-      }
+    }
+
+    async Browser(u){
+        await Browser.open({ url: u });
+    }
 
 }

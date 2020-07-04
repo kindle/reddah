@@ -54,33 +54,34 @@ export class AppComponent {
   }
 
 
-  platformTag;
   async checkPlatform (){
     const { Device } = Plugins;
     // Only show the Apple sign in button on iOS
 
     let device = await Device.getInfo();
-    this.platformTag = device.platform;
+    this.reddah.platformTag = device.platform;
   }
 
 
-  //isStatusBarLight = true;
+  isStatusBarLight = false;
 
   initializeApp() {
     this.platform.ready().then(() => {
 
-        if(this.platformTag==="ios"||
-        this.platformTag==="android")
+        if(this.reddah.platformTag==="ios"||
+        this.reddah.platformTag==="android")
         {
+            StatusBar.setStyle({
+                style: this.isStatusBarLight ? StatusBarStyle.Dark : StatusBarStyle.Light
+            });
+            this.isStatusBarLight = !this.isStatusBarLight;
+        
+            // Display content under transparent status bar (Android only)
             StatusBar.setOverlaysWebView({
                 overlay: false
             });
-            /*StatusBar.setStyle({
-                style: this.isStatusBarLight ? StatusBarStyle.Dark : StatusBarStyle.Light
-            });*/
-            //this.isStatusBarLight = !this.isStatusBarLight;
         
-            SplashScreen.hide();
+            //SplashScreen.hide();
         }
         this.initPlugins();
         this.backButtonEvent();
@@ -91,8 +92,8 @@ export class AppComponent {
       let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
       let defaultLocale ="en-US"
       if(currentLocale==null){
-          if(this.platformTag==="ios"||
-            this.platformTag==="android")
+          if(this.reddah.platformTag==="ios"||
+            this.reddah.platformTag==="android")
           { 
               this.globalization.getPreferredLanguage()
               .then(res => {
@@ -115,6 +116,7 @@ export class AppComponent {
       }
 
       this.platform.ready().then(() => {
+            SplashScreen.hide();
           if(this.platform.is('android'))
           {
               this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(

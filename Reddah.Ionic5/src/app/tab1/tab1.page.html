@@ -6,7 +6,7 @@
   <ion-searchbar placeholder="{{reddah.instant('Search.Title')}}"></ion-searchbar>
 </div>
 <ion-item lines="none" color="light" class="no-padding-end">
-  <ion-title class="header-title">{{ reddah.instant('Menu.Recommend') }}</ion-title>
+  <ion-label slot="start" class="header-title">{{ reddah.instant('Menu.Recommend') }}</ion-label>
 
   <ion-button *ngIf="!showSearchBar" clear slot="end" color="light" (click)="goSearch()" detail="false" style="--box-shadow: none;">
       <ion-icon slot="icon-only" is-active="false" name="search-outline"></ion-icon>

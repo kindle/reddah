@@ -56,15 +56,10 @@
       <ion-label>{{ reddah.instant('Menu.Mark') }}</ion-label>
       <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
   </ion-item>
-  <ion-item (click)="goPublicPage()">
-      <ion-icon class="menuIcon" name="list" slot="start" color="subscribe" size="medium"></ion-icon>
-      <ion-label>{{ reddah.instant('Menu.Publisher') }}</ion-label>
-      <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
-  </ion-item>
-  <ion-item lines="none" class="borderBottom" (click)="goSearch(3)" detail="false">
-      <ion-icon class="menuIcon" name="infinite" slot="start" color="mini" size="medium"></ion-icon>
-      <ion-label>{{ reddah.instant('Menu.MiniApp') }}</ion-label>
-      <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+  <ion-item lines="none" (click)="goPlatform()">
+      <ion-icon class="menuIcon" name="flask" color="mini" slot="start"></ion-icon>
+      <ion-label>{{ reddah.instant('Menu.Platform') }}</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
   </ion-item>
 
 <!--

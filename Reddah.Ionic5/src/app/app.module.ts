@@ -23,7 +23,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { Gyroscope } from '@ionic-native/gyroscope/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
@@ -361,7 +360,6 @@ providers: [
     //Network,
     Shake,
     Crop,
-    InAppBrowser,
     //IonicImageLoader,
     //IonRouterOutlet,
     File,

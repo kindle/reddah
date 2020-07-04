@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PopoverController, LoadingController, ModalController } from '@ionic/angular'
 import { TimelinePopPage } from '../../common/timeline-pop.page';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ReddahService } from '../../reddah.service';
 import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
@@ -11,6 +10,14 @@ import { LocationPage } from '../../common/location/location.page';
 import { VideoEditor } from '@ionic-native/video-editor/ngx';
 import { AtChooseUserPage } from 'src/app/chat/at-choose-user/at-choose-user.page';
 import { TopicChoosePage } from 'src/app/chat/topic-choose/topic-choose.page';
+
+
+
+import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, 
+    CameraPhoto, CameraSource, HapticsImpactStyle } from '@capacitor/core';
+
+const { Camera, Filesystem, Haptics, Device, Storage } = Plugins;
+
 
 @Component({
     selector: 'app-add-timeline',
@@ -41,7 +48,6 @@ export class AddTimelinePage implements OnInit {
         private modalController: ModalController,
         private dragulaService: DragulaService,
         private videoEditor: VideoEditor,
-        private camera: Camera,
     ) { 
         this.dragulaService.drag('bag')
         .subscribe(({ name, el }) => {
@@ -121,15 +127,14 @@ export class AddTimelinePage implements OnInit {
         this.modalController.dismiss(flag);
     }
 
-    ngOnInit() {
+
+    async ngOnInit() {
         if(this.postType==1)//photo
         {
-            //this.takePhoto();
             this.reddah.takePhoto(this.photos, this.formData);
         }
         else if(this.postType==2)//photo//from lib
         {
-            //this.fromLibPhoto();
             this.reddah.fromLibPhoto(this.photos, this.formData);
         }
         else if(this.postType==3){//video from lib
@@ -288,6 +293,7 @@ export class AddTimelinePage implements OnInit {
 */
     async fromLibVideo()
     {
+        /*
         const options: CameraOptions = {
             quality: 100,
             destinationType: this.camera.DestinationType.FILE_URI,
@@ -325,17 +331,17 @@ export class AddTimelinePage implements OnInit {
             }).then((value)=>{alert(JSON.stringify(value))})
             .catch((err)=>{alert(JSON.stringify(err))})
 
-            /*this.videoEditor.transcodeVideo({
-                fileUri: "file://"+imageData,
-                outputFileName: 'output.mp4',
-                outputFileType: this.videoEditor.OutputFileType.MPEG4
-            })
-            .then((fileUri: string) => alert('video transcode success'+fileUri))
-            .catch((error: any) => alert('video transcode error'+JSON.stringify(error)));*/
+            //this.videoEditor.transcodeVideo({
+            //    fileUri: "file://"+imageData,
+            //    outputFileName: 'output.mp4',
+            //    outputFileType: this.videoEditor.OutputFileType.MPEG4
+            //})
+            //.then((fileUri: string) => alert('video transcode success'+fileUri))
+            //.catch((error: any) => alert('video transcode error'+JSON.stringify(error)));
         }, (err) => {
             alert(JSON.stringify(err));
         });
-        
+        */
     }
 /*
     async fromLibPhoto()
