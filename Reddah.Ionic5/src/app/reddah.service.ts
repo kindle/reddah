@@ -3447,18 +3447,99 @@ export class ReddahService {
         */
     }
 
+    private async savePicture2(cameraPhoto: CameraPhoto, formData) {
+        // Convert photo to base64 format, required by Filesystem API to save
+        const base64Data = await this.readAsBase642(cameraPhoto);
+      
+        // Write the file to the data directory
+        const fileName = new Date().getTime() + '.jpeg';
+        const savedFile = await Filesystem.writeFile({
+            path: fileName,
+            data: base64Data,
+            directory: FilesystemDirectory.Data
+        });
+
+        formData.append(fileName, this.b64toBlob(base64Data, 'jpeg'), fileName);
+
+        const fileNamePreview = fileName.replace('.jpeg','_reddah_preview.jpeg');
+        const savedFilePreview = await Filesystem.writeFile({
+            path: fileNamePreview,
+            data: base64Data,
+            directory: FilesystemDirectory.Data
+        });
+
+        formData.append(fileNamePreview, this.b64toBlob(base64Data, 'jpeg'), fileNamePreview);
+      
+        // Use webPath to display the new image instead of base64 since it's
+        // already loaded into memory
+        return {
+            fileUrl: fileName,
+            webUrl: cameraPhoto.webPath
+        };
+      }
+
+
+       b64toBlob = (b64Data, contentType='', sliceSize=512) => {
+        const byteCharacters = atob(b64Data);
+        const byteArrays = [];
+      
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+          const slice = byteCharacters.slice(offset, offset + sliceSize);
+      
+          const byteNumbers = new Array(slice.length);
+          for (let i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+          }
+      
+          const byteArray = new Uint8Array(byteNumbers);
+          byteArrays.push(byteArray);
+        }
+      
+        const blob = new Blob(byteArrays, {type: contentType});
+        return blob;
+      }
     async fromLibPhoto(photos, formData)
     {
-        // From albumn
+        const capturedPhoto = await Camera.getPhoto({
+            resultType: CameraResultType.Uri, // file-based data; provides best performance
+            source: CameraSource.Photos, // automatically take a new photo with the camera
+            quality: 100 // highest quality (0 to 100)
+          });
+        
+          // Save the picture and add it to photo collection
+          const savedImageFile = await this.savePicture2(capturedPhoto, formData);
+          photos.push(savedImageFile);
+        
 
+        
+        
+
+        // image.webPath will contain a path that can be set as an image src.
+        // You can access the original file using image.path, which can be
+        // passed to the Filesystem API to read the raw data of the image,
+        // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
+        //var imageUrl = image.webPath;
+        // Can be set to the src of an image now
+        //imageElement.src = imageUrl;
+
+
+          /*
         const capturedPhoto = await Camera.getPhoto({
             resultType: CameraResultType.Uri, 
             source: CameraSource.Photos, 
             quality: 100
         });
 
-        photos.push({fileUrl: capturedPhoto.path, webUrl: capturedPhoto.webPath});
-        const savedImageFile = await this.savePicture(capturedPhoto, formData);
+
+
+
+        */
+
+        // Convert photo to base64 format, required by Filesystem API to save
+        //const base64Data = await this.readAsBase64(capturedPhoto, formData);
+      
+        //photos.push({fileUrl: capturedPhoto.path, webUrl: capturedPhoto.webPath});
+        //this.savePicture(photos, capturedPhoto, formData);
 
         //photos.push({fileUrl: capturedPhoto.path, webUrl: capturedPhoto.webPath});
 
@@ -3517,6 +3598,34 @@ export class ReddahService {
             .catch(e => alert(e));
         */
     }
+
+    private async readAsBase642(cameraPhoto: CameraPhoto) {
+        // "hybrid" will detect Cordova or Capacitor
+        if (this.platform.is('hybrid')) {
+          // Read the file into base64 format
+          const file = await Filesystem.readFile({
+            path: cameraPhoto.path
+          });
+      
+          return file.data;
+        }
+        else {
+          // Fetch the photo, read as a blob, then convert to base64 format
+          const response = await fetch(cameraPhoto.webPath);
+          const blob = await response.blob();
+      
+          return await this.convertBlobToBase642(blob) as string;
+        }
+    }
+
+    convertBlobToBase642 = (blob: Blob) => new Promise((resolve, reject) => {
+        const reader = new FileReader;
+        reader.onerror = reject;
+        reader.onload = () => {
+            resolve(reader.result);
+        };
+        reader.readAsDataURL(blob);
+    });
 
     private async savePicture(cameraPhoto: CameraPhoto, formData) {
         // Convert photo to base64 format, required by Filesystem API to save

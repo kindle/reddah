@@ -229,12 +229,22 @@ export class AddTimelinePage implements OnInit {
         }
         this.formData.append("at", this.atUsers);
         //alert(this.photos.map(e=>e.fileUrl).join(","));
+        /*alert(1)
+        const response = await fetch(this.photos[0].webPath!);
+        const blob = await response.blob();
+        this.formData.append(
+            this.photos[0].fileUrl.replace("/","_").replace(":","_"), 
+            blob, 
+            this.photos[0].fileUrl.replace("/","_").replace(":","_"));
+        alert(JSON.stringify(this.photos[0]));
+        alert(2)*/
 
         this.reddah.addTimeline(this.formData)
         .subscribe(result => {
             loading.dismiss();
             if(result.Success==0)
             { 
+                alert('success');
                 this.cacheService.clearGroup("MyTimeLinePage");
                 this.localStorageService.clear("Reddah_mytimeline_"+this.reddah.getCurrentUser());
                 this.localStorageService.clear("Reddah_mytimeline_ids_"+this.reddah.getCurrentUser());
@@ -243,6 +253,7 @@ export class AddTimelinePage implements OnInit {
             }
             else
             {
+                alert('failed');
                 alert(result.Message);
             }
         },
