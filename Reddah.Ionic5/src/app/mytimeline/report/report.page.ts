@@ -296,7 +296,9 @@ export class ReportPage implements OnInit {
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
-            showBackdrop: true
+            showBackdrop: true,
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         return await modal.present();
@@ -366,6 +368,8 @@ export class ReportPage implements OnInit {
                 userName: userName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await userModal.present();
@@ -376,6 +380,8 @@ export class ReportPage implements OnInit {
             component: ArticleTextPopPage,
             componentProps: { text: text },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await textModal.present();

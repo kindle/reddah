@@ -41,6 +41,8 @@ export class ShareChooseChatPage implements OnInit {
                 article: this.article,
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();

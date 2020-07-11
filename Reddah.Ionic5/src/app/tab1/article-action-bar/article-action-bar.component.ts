@@ -30,6 +30,8 @@ export class ArticleActionBarComponent {
             component: PostviewerPage,
             componentProps: { article: article },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await viewerModal.present();
@@ -49,6 +51,8 @@ export class ArticleActionBarComponent {
                 article: article
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await postModal.present();
@@ -69,6 +73,8 @@ export class ArticleActionBarComponent {
                 article: article
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();

@@ -111,6 +111,8 @@ export class CommentReplyPage implements OnInit {
                 userName: userName,
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await userModal.present();

@@ -46,6 +46,8 @@ export class ShareArticleChatComponent {
             component: PostviewerPage,
             componentProps: { article: article },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await viewerModal.present();
@@ -85,6 +87,8 @@ export class ShareArticleChatComponent {
                 version: this.reddah.appData('usersex_'+mini.UserName)
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -101,6 +105,8 @@ export class ShareArticleChatComponent {
                         article: mini
                     },
                     cssClass: "modal-fullscreen",
+                    swipeToClose: true,
+                    presentingElement: await this.modalController.getTop(),
                 });
                   
                 await modal.present();
@@ -113,6 +119,8 @@ export class ShareArticleChatComponent {
                         article: mini,
                     },
                     cssClass: "modal-fullscreen",
+                    swipeToClose: true,
+                    presentingElement: await this.modalController.getTop(),
                 });
                   
                 await modal.present();        

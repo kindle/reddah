@@ -50,6 +50,8 @@ export class PostviewerPage implements OnInit {
             component: LocationPage,
             componentProps: { location: JSON.parse(location) },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         await modal.present();
@@ -67,7 +69,9 @@ export class PostviewerPage implements OnInit {
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
-            showBackdrop: true
+            showBackdrop: true,
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         return await modal.present();
@@ -78,6 +82,8 @@ export class PostviewerPage implements OnInit {
             component: ArticleTextPopPage,
             componentProps: { text: text },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await textModal.present();
@@ -128,6 +134,8 @@ export class PostviewerPage implements OnInit {
                 userName: this.article.UserName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -178,6 +186,8 @@ export class PostviewerPage implements OnInit {
                 componentProps: { 
                     title: this.reddah.instant("Common.Choose"),
                     article: this.article,
+                    swipeToClose: true,
+                    presentingElement: await this.modalController.getTop(),
                 },
                 cssClass: "modal-fullscreen",
             });
@@ -201,6 +211,8 @@ export class PostviewerPage implements OnInit {
                 component: SettingFontPage,
                 componentProps: {},
                 cssClass: "modal-fullscreen",
+                swipeToClose: true,
+                presentingElement: await this.modalController.getTop(),
             });
             
             await modal.present();
@@ -215,6 +227,8 @@ export class PostviewerPage implements OnInit {
                 article: this.article
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await postModal.present();
@@ -234,6 +248,8 @@ export class PostviewerPage implements OnInit {
                 article: this.article
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -270,7 +286,9 @@ export class PostviewerPage implements OnInit {
                 },
                 cssClass: 'modal-fullscreen',
                 keyboardClose: true,
-                showBackdrop: true
+                showBackdrop: true,
+                swipeToClose: true,
+                presentingElement: await this.modalController.getTop(),
             });
     
             return await modal.present(); 
@@ -326,6 +344,8 @@ export class PostviewerPage implements OnInit {
                 userName: userName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -339,6 +359,8 @@ export class PostviewerPage implements OnInit {
                 type: 0,//article only
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await userModal.present();
@@ -404,6 +426,8 @@ export class PostviewerPage implements OnInit {
                 action: 'AdminEdit'
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();

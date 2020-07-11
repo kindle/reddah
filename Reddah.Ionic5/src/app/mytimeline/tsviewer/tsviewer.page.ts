@@ -170,7 +170,9 @@ export class TsViewerPage implements OnInit {
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
-            showBackdrop: true
+            showBackdrop: true,
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         return await modal.present();
@@ -241,6 +243,8 @@ export class TsViewerPage implements OnInit {
                 userName: userName,
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await userModal.present();
@@ -255,6 +259,8 @@ export class TsViewerPage implements OnInit {
             component: ArticleTextPopPage,
             componentProps: { text: text },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await textModal.present();
@@ -269,6 +275,8 @@ export class TsViewerPage implements OnInit {
             component: LocationPage,
             componentProps: { location: JSON.parse(location) },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         await modal.present();
@@ -283,6 +291,8 @@ export class TsViewerPage implements OnInit {
             component: ApplyFriendPage,
             componentProps: { targetUserName: this.article.UserName },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await applyFriendModal.present();

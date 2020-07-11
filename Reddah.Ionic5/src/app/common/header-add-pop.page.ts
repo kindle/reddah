@@ -42,6 +42,8 @@ export class HeaderAddPage {
             component: AddFeedbackPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -56,6 +58,8 @@ export class HeaderAddPage {
             component: AddFriendPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await addFriendModal.present();
@@ -66,6 +70,8 @@ export class HeaderAddPage {
             component: ChatChooseUserPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();

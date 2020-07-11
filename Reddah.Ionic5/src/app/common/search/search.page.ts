@@ -67,6 +67,8 @@ export class SearchPage implements OnInit {
                 component: AddFriendPage,
                 componentProps: {},
                 cssClass: "modal-fullscreen",
+                swipeToClose: true,
+                presentingElement: await this.modalController.getTop(),
             });
 
             await addFriendModal.present();
@@ -415,6 +417,8 @@ export class SearchPage implements OnInit {
             component: PostviewerPage,
             componentProps: { article: article },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await viewerModal.present();
@@ -430,6 +434,8 @@ export class SearchPage implements OnInit {
             component: StockPage,
             componentProps: { s: this.searchKeywordModel },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await stockModal.present();
@@ -442,6 +448,8 @@ export class SearchPage implements OnInit {
                 article: article
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await userModal.present();
@@ -455,6 +463,8 @@ export class SearchPage implements OnInit {
                 userName: pub.UserName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -479,6 +489,8 @@ export class SearchPage implements OnInit {
                 version: this.reddah.appData('usersex_'+mini.UserName)
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -495,6 +507,8 @@ export class SearchPage implements OnInit {
                         article: mini
                     },
                     cssClass: "modal-fullscreen",
+                    swipeToClose: true,
+                    presentingElement: await this.modalController.getTop(),
                 });
                   
                 await modal.present();
@@ -507,6 +521,8 @@ export class SearchPage implements OnInit {
                         article: mini,
                     },
                     cssClass: "modal-fullscreen",
+                    swipeToClose: true,
+                    presentingElement: await this.modalController.getTop(),
                 });
                   
                 await modal.present();        

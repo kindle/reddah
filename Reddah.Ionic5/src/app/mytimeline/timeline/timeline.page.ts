@@ -163,7 +163,9 @@ export class TimeLinePage implements OnInit {
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
-            showBackdrop: true
+            showBackdrop: true,
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         return await modal.present();
@@ -176,6 +178,8 @@ export class TimeLinePage implements OnInit {
                 article: article
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await userModal.present();
@@ -201,6 +205,8 @@ export class TimeLinePage implements OnInit {
             component: AddTimelinePage,
             componentProps: { postType: postType },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await postModal.present();
@@ -215,6 +221,8 @@ export class TimeLinePage implements OnInit {
             component: MessagePage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();

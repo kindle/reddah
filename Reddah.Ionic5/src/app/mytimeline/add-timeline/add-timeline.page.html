@@ -21,7 +21,6 @@
         <ion-icon id="faceIcon" slot="end" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
     </div>
     <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
-    <div  *ngFor="let image of photos;index as i">{{image.webUrl}}_{{image.fileUrl}}_=_</div>
     <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="postType<3">
         <div class="imgSqure" *ngFor="let image of photos;index as i">
             <img [id]="reddah.makeItId(image.webUrl+'addtl')" 

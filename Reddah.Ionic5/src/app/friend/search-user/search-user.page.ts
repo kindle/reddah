@@ -72,6 +72,8 @@ export class SearchUserPage implements OnInit {
                 type: -1
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await userModal.present();
@@ -84,6 +86,8 @@ export class SearchUserPage implements OnInit {
                 userName: userName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await userModal.present();

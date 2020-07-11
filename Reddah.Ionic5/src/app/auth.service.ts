@@ -31,6 +31,8 @@ export class AuthService {
         const modal = await this.modalController.create({
             component: RegisterPage,
             componentProps: { url: '' },
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
             cssClass: "modal-fullscreen",
         });
         
@@ -48,6 +50,8 @@ export class AuthService {
         const modal = await this.modalController.create({
             component: SigninPage,
             componentProps: { url: '' },
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
             cssClass: "modal-fullscreen",
         });
         
@@ -66,6 +70,8 @@ export class AuthService {
         const modal = await this.modalController.create({
             component: SurfacePage,
             componentProps: { url: '' },
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
             cssClass: "modal-fullscreen",
         });
         

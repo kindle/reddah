@@ -24,7 +24,8 @@ import { SettingNetworkPage } from '../settings/setting-network/setting-network.
 })
 export class SurfacePage implements OnInit {
 
-    constructor(private modalController: ModalController,
+    constructor(
+        private modalController: ModalController,
         public reddah: ReddahService,
         private platform: Platform,
         private router: Router,
@@ -73,6 +74,8 @@ export class SurfacePage implements OnInit {
             component: RegisterPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -93,6 +96,8 @@ export class SurfacePage implements OnInit {
             component: SigninPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();
@@ -117,6 +122,8 @@ export class SurfacePage implements OnInit {
             component: LocalePage,
             componentProps: { orgLocale: currentLocale },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await changeLocaleModal.present();
@@ -134,6 +141,8 @@ export class SurfacePage implements OnInit {
             component: SettingNetworkPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();
@@ -151,6 +160,8 @@ export class SurfacePage implements OnInit {
                 lng: this.config.lng
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
             
         await modal.present();

@@ -116,6 +116,8 @@ export class CommentComponent implements OnInit {
                 normal: this.normal
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await replayModal.present();
@@ -172,6 +174,8 @@ export class CommentComponent implements OnInit {
                 userName: userName,
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await userModal.present();

@@ -108,6 +108,8 @@ export class CommentBoxComponent implements OnInit {
                 article: article
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await postModal.present();
@@ -160,6 +162,8 @@ export class CommentBoxComponent implements OnInit {
                 placeHolder: newPopComment
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await addCommentModal.present();
@@ -181,6 +185,8 @@ export class CommentBoxComponent implements OnInit {
                 article: this.article,
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
             
         await modal.present();

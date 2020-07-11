@@ -185,6 +185,8 @@ export class ShareChooseUserPage implements OnInit {
                 article: this.article,
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
         const { data } = await modal.onDidDismiss();

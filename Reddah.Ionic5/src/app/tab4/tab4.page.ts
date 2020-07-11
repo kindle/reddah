@@ -150,6 +150,8 @@ export class Tab4Page {
           component: NewFriendPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
           
       await newFriendModal.present();
@@ -168,6 +170,8 @@ export class Tab4Page {
           component: ChatChooseGroupPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       await modal.present();
   }
@@ -179,6 +183,8 @@ export class Tab4Page {
               userName: userName
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await modal.present();
@@ -220,6 +226,8 @@ export class Tab4Page {
           component: MysticPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       await modal.present();
   }
@@ -231,6 +239,8 @@ export class Tab4Page {
           component: MessageListPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
   
       await modal.present();
@@ -243,6 +253,8 @@ export class Tab4Page {
           componentProps: {
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await modal.present();

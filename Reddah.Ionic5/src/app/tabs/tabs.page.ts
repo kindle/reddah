@@ -22,6 +22,8 @@ export class TabsPage {
             componentProps: {
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();

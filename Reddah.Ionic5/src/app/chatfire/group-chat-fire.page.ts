@@ -310,6 +310,8 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
                 groupInfo: this.groupChat
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();
@@ -356,6 +358,8 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
                 userName: userName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
             
         await userModal.present();

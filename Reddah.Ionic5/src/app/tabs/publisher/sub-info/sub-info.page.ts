@@ -253,6 +253,8 @@ export class SubInfoPage implements OnInit {
 
                 },
                 cssClass: "modal-fullscreen",
+                swipeToClose: true,
+                presentingElement: await this.modalController.getTop(),
             });
             await modal.present();
             const {data} = await modal.onDidDismiss();
@@ -270,6 +272,8 @@ export class SubInfoPage implements OnInit {
                 article: article,
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -291,6 +295,8 @@ export class SubInfoPage implements OnInit {
                 version: this.reddah.appData('usersex_'+mini.UserName)
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -307,6 +313,8 @@ export class SubInfoPage implements OnInit {
                         article: mini
                     },
                     cssClass: "modal-fullscreen",
+                    swipeToClose: true,
+                    presentingElement: await this.modalController.getTop(),
                 });
                   
                 await modal.present();
@@ -319,6 +327,8 @@ export class SubInfoPage implements OnInit {
                         article: mini,
                     },
                     cssClass: "modal-fullscreen",
+                    swipeToClose: true,
+                    presentingElement: await this.modalController.getTop(),
                 });
                   
                 await modal.present();        

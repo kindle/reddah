@@ -29,6 +29,8 @@ export class FindActionBarComponent {
                 isTopic: true
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await viewerModal.present();
@@ -48,6 +50,8 @@ export class FindActionBarComponent {
                 article: article
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await postModal.present();

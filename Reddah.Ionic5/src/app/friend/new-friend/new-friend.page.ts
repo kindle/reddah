@@ -62,6 +62,8 @@ export class NewFriendPage implements OnInit {
             component: AddFriendPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -72,6 +74,8 @@ export class NewFriendPage implements OnInit {
             component: SearchUserPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -111,6 +115,8 @@ export class NewFriendPage implements OnInit {
                 userName: userName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await userModal.present();

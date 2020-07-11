@@ -122,6 +122,8 @@ export class PublisherPage {
                 type: 2,//publisher only
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await userModal.present();
@@ -140,6 +142,8 @@ export class PublisherPage {
                 userName: userName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();

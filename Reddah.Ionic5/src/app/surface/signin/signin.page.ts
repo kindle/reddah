@@ -99,6 +99,8 @@ export class SigninPage implements OnInit {
             component: RegisterPage,
             componentProps: { url: '' },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();
@@ -116,6 +118,8 @@ export class SigninPage implements OnInit {
             component: ForgotPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();

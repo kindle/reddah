@@ -52,6 +52,8 @@ export class CategoryPage implements OnInit {
                 type: type 
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();

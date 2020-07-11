@@ -172,6 +172,8 @@ export class Tab2Page implements OnInit  {
               type: 3,//array index not id
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await modal.present();
@@ -184,6 +186,8 @@ export class Tab2Page implements OnInit  {
               userName: userName
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await userModal.present();
@@ -194,6 +198,8 @@ export class Tab2Page implements OnInit  {
           component: ArticleTextPopPage,
           componentProps: { text: text },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await textModal.present();
@@ -226,7 +232,9 @@ export class Tab2Page implements OnInit  {
           },
           cssClass: 'modal-fullscreen',
           keyboardClose: true,
-          showBackdrop: true
+          showBackdrop: true,
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
   
       return await modal.present();
@@ -242,6 +250,8 @@ export class Tab2Page implements OnInit  {
               article: article
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await modal.present();
@@ -333,6 +343,8 @@ export class Tab2Page implements OnInit  {
           component: ScanPage,
           componentProps: { },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       
       await scanModal.present();
@@ -348,6 +360,8 @@ export class Tab2Page implements OnInit  {
           component: SearchPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await userModal.present();
@@ -360,6 +374,8 @@ export class Tab2Page implements OnInit  {
             type: type
         },
         cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
     });
     
     await modal.present();
@@ -376,6 +392,8 @@ export class Tab2Page implements OnInit  {
               component: ShakePage,
               componentProps: {},
               cssClass: "modal-fullscreen",
+              swipeToClose: true,
+              presentingElement: await this.modalController.getTop(),
           });
             
           await modal.present();
@@ -390,6 +408,8 @@ export class Tab2Page implements OnInit  {
           component: LocationPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
   
       await modal.present();
@@ -405,6 +425,8 @@ export class Tab2Page implements OnInit  {
           component: MagicMirrorPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       await modal.present();
   }
@@ -414,6 +436,8 @@ export class Tab2Page implements OnInit  {
           component: MagicMirrorPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       await modal.present();
   }
@@ -423,6 +447,8 @@ export class Tab2Page implements OnInit  {
           component: WormHolePage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       await modal.present();
   }
@@ -432,6 +458,8 @@ export class Tab2Page implements OnInit  {
           component: MysticPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       await modal.present();
   }
@@ -441,6 +469,8 @@ export class Tab2Page implements OnInit  {
           component: ActiveUsersPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       await modal.present();
   }
@@ -453,6 +483,8 @@ export class Tab2Page implements OnInit  {
               //lng: this.config.lng
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
           
       await modal.present();
@@ -466,6 +498,8 @@ export class Tab2Page implements OnInit  {
               //lng: this.config.lng
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await modal.present();
@@ -477,12 +511,18 @@ export class Tab2Page implements OnInit  {
       //this.showBox = !this.showBox;
   }
 
-  goMoreApp(){
-      this.router.navigate(['/search'], {
-          queryParams: {
-              type:3
-          }
-      });
+  async goMoreApp(){
+      const modal = await this.modalController.create({
+            component: SearchPage,
+            componentProps: { 
+                type: 3,
+            },
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+        
+        await modal.present();
   }
 
   async goMini(mini){
@@ -498,6 +538,8 @@ export class Tab2Page implements OnInit  {
               version: this.reddah.appData('usersex_'+mini.UserName)
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await modal.present();
@@ -514,6 +556,8 @@ export class Tab2Page implements OnInit  {
                       article: mini
                   },
                   cssClass: "modal-fullscreen",
+                  swipeToClose: true,
+                  presentingElement: await this.modalController.getTop(),
               });
                 
               await modal.present();
@@ -526,6 +570,8 @@ export class Tab2Page implements OnInit  {
                       article: mini,
                   },
                   cssClass: "modal-fullscreen",
+                  swipeToClose: true,
+                  presentingElement: await this.modalController.getTop(),
               });
                 
               await modal.present();        
@@ -561,6 +607,8 @@ export class Tab2Page implements OnInit  {
               action: 'topic',
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await postModal.present();
@@ -576,6 +624,8 @@ export class Tab2Page implements OnInit  {
             component: PublisherPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
     }

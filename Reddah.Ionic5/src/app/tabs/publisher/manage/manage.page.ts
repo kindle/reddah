@@ -138,6 +138,8 @@ export class ManagePage implements OnInit {
                 targetSub: sub
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await myInfoModal.present();

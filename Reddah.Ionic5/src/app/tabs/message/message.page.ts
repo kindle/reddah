@@ -188,6 +188,8 @@ export class MessageListPage implements OnInit {
                 hasNewMsg: hasNewMsg,
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -205,6 +207,8 @@ export class MessageListPage implements OnInit {
                 hasNewMsg: hasNewMsg,
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
         const { data } = await modal.onDidDismiss();
@@ -228,6 +232,8 @@ export class MessageListPage implements OnInit {
                 title:category.title
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();

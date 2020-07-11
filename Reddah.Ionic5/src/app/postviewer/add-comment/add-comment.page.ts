@@ -76,6 +76,8 @@ export class AddCommentPage implements OnInit {
                 article: null
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
             
         await modal.present();

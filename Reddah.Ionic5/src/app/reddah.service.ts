@@ -7,21 +7,21 @@ import { Article } from "./model/article";
 import { UserProfileModel } from './model/UserProfileModel';
 import { UserModel, QueryCommentModel, NewCommentModel, NewTimelineModel, Queue } from './model/UserModel';
 import { Locale } from './model/locale';
-//////import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
 import { AlertController, LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
 import * as moment from 'moment';
-//////import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-//////import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 //////import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { DatePipe } from '@angular/common';
 import { Md5 } from 'ts-md5/dist/md5';
 import { createAnimation } from '@ionic/core'
 import { Router } from '@angular/router';
 
-import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, 
+import ImageCompressor from 'image-compressor.js'
+
+import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, LocalNotifications,
     CameraPhoto, CameraSource, HapticsImpactStyle } from '@capacitor/core';
     
 const { Browser, Camera, Filesystem, Haptics, Device, Storage } = Plugins;
@@ -135,14 +135,13 @@ export class ReddahService {
     constructor(
         private http: HttpClient,
         private localStorageService: LocalStorageService,
-        //////private transfer: FileTransfer,
+        private transfer: FileTransfer,
         private file: File,
         private toastController: ToastController,
         private platform: Platform,
         private cacheService: CacheService,
         //////private localNotifications: LocalNotifications,
         private datePipe: DatePipe,
-        //////private camera: Camera,
         private modalController: ModalController,
         private alertController: AlertController,
         private ngZone: NgZone,
@@ -2523,9 +2522,9 @@ export class ReddahService {
         return url.substring(start, end);
     }
 
-    //////private fileTransfer: FileTransferObject; 
+    private fileTransfer: FileTransferObject; 
     toFileCache(webUrl, isVideo=false){
-        /*
+        
         let deviceDirectory = this.getDeviceDirectory();
         
         let cachedFilePath = this.localStorageService.retrieve(webUrl);
@@ -2554,7 +2553,7 @@ export class ReddahService {
                 //alert(JSON.stringify(_))
                 console.log(JSON.stringify(_)) });
         }
-        */
+        
     } 
 
     //for normal image download
@@ -2590,8 +2589,7 @@ export class ReddahService {
     }
 
     toImageCache(webUrl, cacheKey){
-        //////
-        /*
+        
         if(webUrl!=null){
             let deviceDirectory = this.getDeviceDirectory();
             
@@ -2616,7 +2614,7 @@ export class ReddahService {
                 }, 
                 _ => { console.log(JSON.stringify(_)); });
             }
-        }*/
+        }
     } 
 
     toTextCache(text, cacheKey){
@@ -3241,8 +3239,6 @@ export class ReddahService {
     }
 
     openMini(webUrl, miniName){
-        //////
-        /*
         let deviceDirectory = this.getDeviceDirectory();
 
         this.fileTransfer = this.transfer.create();  
@@ -3255,7 +3251,6 @@ export class ReddahService {
             //browser.show();
         }, 
         _ => { console.log(JSON.stringify(_)) });
-        */
     }
 
     utcToLocal(str, format="YYYY-MM-DD HH:mm:ss"){
@@ -3408,78 +3403,207 @@ export class ReddahService {
 
     
     async takePhoto(photos, formData){
-        // Take a photo
         const capturedPhoto = await Camera.getPhoto({
-            //allowEditing: true,
-            resultType: CameraResultType.Uri, // file-based data; provides best performance
-            source: CameraSource.Camera, // automatically take a new photo with the camera
-            quality: 100 // highest quality (0 to 100)
+            resultType: CameraResultType.Uri, 
+            source: CameraSource.Camera, 
+            quality: 100 
         });
-    /*
-        // Save the picture and add it to photo collection
-        const savedImageFile = await this.savePicture(capturedPhoto);
-        console.log(savedImageFile)
-        //let data = {fileUrl: capturedPhoto, webUrl: capturedPhoto.dataUrl};
+    
+        const savedImageFile = await this.uploadPicture(capturedPhoto, formData);
         photos.push(savedImageFile);
-        this.addPhotoToFormData(savedImageFile, formData);*/
-
-        //let data = {fileUrl: capturedPhoto, webUrl: capturedPhoto.webPath};
-        photos.push({fileUrl: capturedPhoto.path, webUrl: capturedPhoto.webPath});
-        const savedImageFile = await this.savePicture(capturedPhoto, formData);
-        //this.addPhotoToFormData(data, formData);
-        //////
-        /*
-        const options: CameraOptions = {
-            quality: 100,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE,
-            correctOrientation: true
-        }
-          
-        this.camera.getPicture(options).then((imageData) => {
-            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
-            photos.push(data);
-            this.addPhotoToFormData(data, formData);
-        }, (err) => {
-            //alert(JSON.stringify(err));
-        });
-        */
     }
 
-    private async savePicture2(cameraPhoto: CameraPhoto, formData) {
-        // Convert photo to base64 format, required by Filesystem API to save
-        const base64Data = await this.readAsBase642(cameraPhoto);
-      
-        // Write the file to the data directory
+    async fromLibPhoto(photos, formData)
+    {
+        const capturedPhoto = await Camera.getPhoto({
+            resultType: CameraResultType.Uri, 
+            source: CameraSource.Photos, 
+            quality: 100 
+        });
+    
+        const savedImageFile = await this.uploadPicture(capturedPhoto, formData);
+        photos.push(savedImageFile);
+    }
+
+    getImage(dataUrl: string): Promise<HTMLImageElement> 
+    {
+        return new Promise((resolve, reject) => {
+            const image = new Image();
+            image.src = dataUrl;
+            image.onload = () => {
+                resolve(image);
+            };
+        });
+    }
+
+
+
+    async downscaleImage(
+            dataUrl: string,  
+            quality=0.6,   // e.g. 0.9 = 90% quality
+            imageType='image/jpeg',  // e.g. 'image/jpeg'
+            resolution =500,  // max width/height in pixels
+        ): Promise<string> {
+
+        // Create a temporary image so that we can compute the height of the image.
+        const image = await this.getImage(dataUrl);
+        const oldWidth = image.naturalWidth;
+        const oldHeight = image.naturalHeight;
+        console.log('dims', oldWidth, oldHeight);
+
+        const longestDimension = oldWidth > oldHeight ? 'width' : 'height';
+        const currentRes = longestDimension == 'width' ? oldWidth : oldHeight;
+        console.log('longest dim', longestDimension, currentRes);
+
+        if (currentRes > resolution) {
+            console.log('need to resize...');
+
+            // Calculate new dimensions
+            const newSize = longestDimension == 'width'
+                ? Math.floor(oldHeight / oldWidth * resolution)
+                : Math.floor(oldWidth / oldHeight * resolution);
+            const newWidth = longestDimension == 'width' ? resolution : newSize;
+            const newHeight = longestDimension == 'height' ? resolution : newSize;
+            console.log('new width / height', newWidth, newHeight);
+
+            // Create a temporary canvas to draw the downscaled image on.
+            const canvas = document.createElement('canvas');
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+
+            // Draw the downscaled image on the canvas and return the new data URL.
+            const ctx = canvas.getContext('2d')!;
+            ctx.drawImage(image, 0, 0, newWidth, newHeight);
+            const newDataUrl = canvas.toDataURL(imageType, quality);
+            return newDataUrl;
+        }
+        else {
+            return dataUrl;
+        }
+
+    }
+
+    private async uploadPicture(cameraPhoto: CameraPhoto, formData) {
         const fileName = new Date().getTime() + '.jpeg';
-        const savedFile = await Filesystem.writeFile({
+        const fileNamePreview = fileName.replace('.jpeg','_reddah_preview.jpeg');
+
+        const base64Data = await this.readAsBase64(cameraPhoto);
+        
+        /*const savedFile = await Filesystem.writeFile({
             path: fileName,
             data: base64Data,
             directory: FilesystemDirectory.Data
+        });*/
+
+        formData.append(fileName, this.b64toBlob(base64Data), fileName);
+        //should be compressed
+        formData.append(fileNamePreview, this.b64toBlob(base64Data), fileNamePreview);
+        
+        
+/*
+        this.downscaleImage(base64Data).then((newBase64Data)=>{
+            console.log(newBase64Data);
+            formData.append(fileNamePreview, this.b64toBlob(newBase64Data), fileNamePreview);
         });
+        */
 
-        formData.append(fileName, this.b64toBlob(base64Data, 'jpeg'), fileName);
-
-        const fileNamePreview = fileName.replace('.jpeg','_reddah_preview.jpeg');
-        const savedFilePreview = await Filesystem.writeFile({
+        
+        /*const savedFilePreview = await Filesystem.writeFile({
             path: fileNamePreview,
             data: base64Data,
             directory: FilesystemDirectory.Data
-        });
+        });*/
 
-        formData.append(fileNamePreview, this.b64toBlob(base64Data, 'jpeg'), fileNamePreview);
+        /*let image = new Image();
+        image.src= base64Data;
+        formData.append(fileNamePreview, this.compress(image), fileNamePreview);*/
+
+        /*new ImageCompressor(this.b64toBlob(base64Data), {
+            quality: .6,
+            success(result) {
+                formData.append(fileNamePreview, result, fileNamePreview);
+            },
+            error(e) {
+                console.log(e.message);
+            },
+        });*/
+
       
-        // Use webPath to display the new image instead of base64 since it's
-        // already loaded into memory
         return {
             fileUrl: fileName,
             webUrl: cameraPhoto.webPath
         };
+    }
+
+    private compress(source_img_obj, quality=0.5){
+        var mime_type = "image/jpeg";
+        var cvs = document.createElement('canvas');
+        //naturalWidth真实图片的宽度
+        //cvs.width = source_img_obj.naturalWidth;
+        //cvs.height = source_img_obj.naturalHeight;
+        var xRate = 100 / source_img_obj.naturalWidth;
+        var yRate = 100 / source_img_obj.naturalHeight;
+        cvs.width = 100;
+        cvs.height = 100;
+        var cvsContext = cvs.getContext('2d');
+        cvsContext.scale(xRate, yRate);
+        var ctx = cvsContext.drawImage(source_img_obj, 0, 0);
+        return  cvs.toDataURL(mime_type, quality/100);
+    }
+
+
+    private getNewBase64(bs64, quality=0.6){
+        var img = new Image();
+        img.src = bs64;
+        var canvas = document.createElement("canvas");
+        var ctx = canvas.getContext("2d");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        return canvas.toDataURL("image/jpeg", quality); 
+    }
+
+    private compressImg(canvasResult, size) {
+        let imgBase64 = canvasResult.toDataURL('image/jpeg', 1);
+        let base64Kilobyte = (imgBase64.length - 814) / 1.37 / 1024; //将base64的结果转换成kb
+        let currentQuality = 1
+        //通过循环 进行图片质量的压缩，直到小于规定的大小才停止
+        if (base64Kilobyte > size) {
+          for (let i = 10; i > 0; i--) {
+            currentQuality -= 0.1;
+            const quality = parseFloat((currentQuality).toFixed(2));
+            imgBase64 = canvasResult.toDataURL('image/jpeg', quality);
+            base64Kilobyte = (imgBase64.length - 814) / 1.37 / 1024;
+            if (base64Kilobyte < size) {
+              break;
+            }
+          }
+        }
+        return imgBase64;
       }
 
+    compressImage(base64, quality = 0.6, callback) {
+        
+        var newImage = new Image();
+        newImage.src = base64;
+        newImage.setAttribute("crossOrigin", 'Anonymous');
+        newImage.onload = ()=> {
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+            canvas.width = newImage.width/2;
+            canvas.height = newImage.height/2;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(newImage, 0, 0, canvas.width, canvas.height);
+            var base64 = canvas.toDataURL("image/jpeg", quality); 
+            callback(base64);
+        }
+    }
 
-       b64toBlob = (b64Data, contentType='', sliceSize=512) => {
+    b64toBlob = (b64Data, contentType='image/jpeg', sliceSize=512) => 
+    {
         const byteCharacters = atob(b64Data);
         const byteArrays = [];
       
@@ -3497,128 +3621,28 @@ export class ReddahService {
       
         const blob = new Blob(byteArrays, {type: contentType});
         return blob;
-      }
-    async fromLibPhoto(photos, formData)
-    {
-        const capturedPhoto = await Camera.getPhoto({
-            resultType: CameraResultType.Uri, // file-based data; provides best performance
-            source: CameraSource.Photos, // automatically take a new photo with the camera
-            quality: 100 // highest quality (0 to 100)
-          });
-        
-          // Save the picture and add it to photo collection
-          const savedImageFile = await this.savePicture2(capturedPhoto, formData);
-          photos.push(savedImageFile);
-        
-
-        
-        
-
-        // image.webPath will contain a path that can be set as an image src.
-        // You can access the original file using image.path, which can be
-        // passed to the Filesystem API to read the raw data of the image,
-        // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-        //var imageUrl = image.webPath;
-        // Can be set to the src of an image now
-        //imageElement.src = imageUrl;
-
-
-          /*
-        const capturedPhoto = await Camera.getPhoto({
-            resultType: CameraResultType.Uri, 
-            source: CameraSource.Photos, 
-            quality: 100
-        });
-
-
-
-
-        */
-
-        // Convert photo to base64 format, required by Filesystem API to save
-        //const base64Data = await this.readAsBase64(capturedPhoto, formData);
-      
-        //photos.push({fileUrl: capturedPhoto.path, webUrl: capturedPhoto.webPath});
-        //this.savePicture(photos, capturedPhoto, formData);
-
-        //photos.push({fileUrl: capturedPhoto.path, webUrl: capturedPhoto.webPath});
-
-        //this.prepareData(photo.fileUrl, photo.fileUrl, formData);
-        //this.addPhotoToFormData(data, formData);
-
-        //////
-        /*
-        const options: CameraOptions = {
-            quality: 100,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE,
-            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-            correctOrientation: true
-        }
-          
-        this.camera.getPicture(options).then((imageData) => {
-            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
-            photos.push(data);
-            this.addPhotoToFormData(data, formData);
-        }, (err) => {
-            //alert(JSON.stringify(err));
-        });
-        */
     }
 
-    addPhotoToFormData(photo, formData){
-
-        
-        //////
-        /*
-        //append org photo form data
-        this.prepareData(photo.fileUrl, photo.fileUrl, formData);
-
-        //append preview photo form data
-        let orgFileName = photo.fileUrl.substring(photo.fileUrl.lastIndexOf('/')+1);
-        let fileExtention = orgFileName.substring(orgFileName.lastIndexOf('.'));
-        //remove ?****
-        let removdQFileExtention = fileExtention.lastIndexOf('?')==-1 ? 
-            fileExtention : fileExtention.replace(fileExtention.substring(fileExtention.lastIndexOf('?')),"");
-        
-        let previewFileName = orgFileName.replace(fileExtention,"") + "_reddah_preview" + removdQFileExtention;
-        //alert(photo.fileUrl+"_"+previewFileName);
-        let options = {
-            uri: photo.fileUrl,
-            folderName: 'reddah',
-            fileName: previewFileName,
-            quality: 40,
-            width: 800,
-            height: 800
-        } as ImageResizerOptions;
-        ImageResizer
-            .resize(options)
-            .then((filePath: string) => this.prepareData(filePath, photo.fileUrl+"_reddah_preview", formData))
-            .catch(e => alert(e));
-        */
-    }
-
-    private async readAsBase642(cameraPhoto: CameraPhoto) {
+    private async readAsBase64(cameraPhoto: CameraPhoto) {
         // "hybrid" will detect Cordova or Capacitor
         if (this.platform.is('hybrid')) {
-          // Read the file into base64 format
-          const file = await Filesystem.readFile({
-            path: cameraPhoto.path
-          });
-      
-          return file.data;
+            // Read the file into base64 format
+            const file = await Filesystem.readFile({
+                path: cameraPhoto.path
+            });
+        
+            return file.data;
         }
         else {
-          // Fetch the photo, read as a blob, then convert to base64 format
-          const response = await fetch(cameraPhoto.webPath);
-          const blob = await response.blob();
-      
-          return await this.convertBlobToBase642(blob) as string;
+            // Fetch the photo, read as a blob, then convert to base64 format
+            const response = await fetch(cameraPhoto.webPath);
+            const blob = await response.blob();
+        
+            return await this.convertBlobToBase64(blob) as string;
         }
     }
 
-    convertBlobToBase642 = (blob: Blob) => new Promise((resolve, reject) => {
+    convertBlobToBase64 = (blob: Blob) => new Promise((resolve, reject) => {
         const reader = new FileReader;
         reader.onerror = reject;
         reader.onload = () => {
@@ -3627,70 +3651,7 @@ export class ReddahService {
         reader.readAsDataURL(blob);
     });
 
-    private async savePicture(cameraPhoto: CameraPhoto, formData) {
-        // Convert photo to base64 format, required by Filesystem API to save
-        const base64Data = await this.readAsBase64(cameraPhoto, formData);
-      
-        // Write the file to the data directory
-        const fileName = new Date().getTime() + '.jpeg';
-        const savedFile = await Filesystem.writeFile({
-          path: fileName,
-          data: base64Data,
-          directory: FilesystemDirectory.Data
-        });
-      
-        // Use webPath to display the new image instead of base64 since it's
-        // already loaded into memory
-        return {
-            fileUrl: fileName,
-            webviewPath: cameraPhoto.webPath
-        };
-    }
-
-    private async readAsBase64(cameraPhoto: CameraPhoto, formData) {
-        // Fetch the photo, read as a blob, then convert to base64 format
-        const response = await fetch(cameraPhoto.webPath!);
-        const blob = await response.blob();
-      
-        return await this.convertBlobToBase64(blob, cameraPhoto, formData) as string;  
-    }
-      
-    convertBlobToBase64 = (blob: Blob, cameraPhoto: CameraPhoto, formData) => new Promise((resolve, reject) => {
-        const reader = new FileReader;
-        reader.onerror = reject;
-        reader.onload = () => {
-            const imgBlob = new Blob([reader.result], {
-                type: cameraPhoto.format
-            });
-            formData.append(cameraPhoto.path, imgBlob, cameraPhoto.path);
-            resolve(reader.result);
-        };
-        reader.readAsDataURL(blob);
-    });
-
-    prepareData(filePath, formKey, formData) {
-        //////
-        /*
-        this.file.resolveLocalFilesystemUrl(filePath)
-        .then(entry => {
-            ( <FileEntry> entry).file(file => {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    //org image data
-                    const imgBlob = new Blob([reader.result], {
-                        type: file.type
-                    });
-                    formData.append(formKey, imgBlob, file.name);
-                };
-                reader.readAsArrayBuffer(file);
-            })
-        })
-        .catch(err => {
-            console.error(JSON.stringify(err));
-        });
-        */
-    }
-
+    
     checkPermission(permissionId){
         let jwt  = this.getCurrentJwt();
         let parts = jwt.split('.');
@@ -3763,7 +3724,7 @@ export class ReddahService {
         }
     }  
 
-    notify(title, text){
+    async notify(title, text){
         //////
         /*
         this.localNotifications.schedule({
@@ -3775,6 +3736,20 @@ export class ReddahService {
             //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
             //data: { secret: key }
         });*/
+        const notifs = await LocalNotifications.schedule({
+            notifications: [
+              {
+                title: title,
+                body: text,
+                id: 1,
+                schedule: { at: new Date(Date.now() + 1000 * 5) },
+                sound: null,
+                attachments: null,
+                actionTypeId: "",
+                extra: null
+              }
+            ]
+        });
     }
 
     localeData;
@@ -3953,23 +3928,23 @@ export class ReddahService {
     openAppleSignIn() {
         const { SignInWithApple } = Plugins;
         SignInWithApple.Authorize()
-          .then(async (res) => {
-            if (res.response && res.response.identityToken) {
-              alert(res.response)
-            } else {
-              this.presentAlert();
-            }
-          })
-          .catch((response) => {
-            this.presentAlert();
-          });
+            .then(async (res) => {
+                if (res.response && res.response.identityToken) {
+                    alert(res.response)
+                } else {
+                    this.presentAlert();
+                }
+            })
+            .catch((response) => {
+                this.presentAlert();
+            });
       }
     
       async presentAlert() {
         const alert = await this.alertController.create({
-          header: 'Login Failed',
-          message: 'Please try again later',
-          buttons: ['OK'],
+            header: 'Login Failed',
+            message: 'Please try again later',
+            buttons: ['OK'],
         });
         await alert.present();
     }

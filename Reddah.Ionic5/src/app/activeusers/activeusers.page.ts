@@ -117,6 +117,8 @@ export class ActiveUsersPage implements OnInit {
             component: PostviewerPage,
             componentProps: { article: article },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await viewerModal.present();
@@ -138,7 +140,9 @@ export class ActiveUsersPage implements OnInit {
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
-            showBackdrop: true
+            showBackdrop: true,
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         return await modal.present();
@@ -151,6 +155,8 @@ export class ActiveUsersPage implements OnInit {
                 userName: userName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();

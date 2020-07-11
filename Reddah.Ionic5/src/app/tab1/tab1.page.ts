@@ -156,6 +156,8 @@ export class Tab1Page implements OnInit {
           component: AddTimelinePage,
           componentProps: { postType: postType },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await postModal.present();
@@ -222,6 +224,8 @@ export class Tab1Page implements OnInit {
           component: MyInfoPage,
           componentProps: {  },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       
       await myInfoModal.present();
@@ -237,6 +241,8 @@ export class Tab1Page implements OnInit {
           component: PostviewerPage,
           componentProps: { article: article },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       
       await viewerModal.present();
@@ -255,6 +261,8 @@ export class Tab1Page implements OnInit {
               //type: 0,//article only
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await modal.present();
@@ -266,6 +274,8 @@ export class Tab1Page implements OnInit {
           componentProps: {
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await modal.present();
@@ -282,6 +292,8 @@ export class Tab1Page implements OnInit {
               userName: userName
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await modal.present();

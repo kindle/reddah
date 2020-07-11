@@ -67,6 +67,8 @@ export class Tab5Page implements OnInit {
               userName: userName
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await userModal.present();
@@ -79,6 +81,8 @@ export class Tab5Page implements OnInit {
           component: SettingListPage,
           componentProps: {currentLocale:currentLocale},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       
       await modal.present();
@@ -93,6 +97,8 @@ export class Tab5Page implements OnInit {
           component: MyInfoPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       
       await myInfoModal.present();
@@ -108,6 +114,8 @@ export class Tab5Page implements OnInit {
           component: BookmarkPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       
       await modal.present();
@@ -120,6 +128,8 @@ export class Tab5Page implements OnInit {
               type: type
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
       
       await modal.present();
@@ -148,6 +158,8 @@ export class Tab5Page implements OnInit {
           component: AddTimelinePage,
           componentProps: { postType: postType },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await postModal.present();
@@ -166,6 +178,8 @@ export class Tab5Page implements OnInit {
           component: PointPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
   
       await modal.present();
@@ -176,6 +190,8 @@ export class Tab5Page implements OnInit {
           component: MyReportPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await modal.present();
@@ -186,6 +202,8 @@ export class Tab5Page implements OnInit {
           component: PunchClockPage,
           componentProps: {},
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
   
       await modal.present();
@@ -201,6 +219,8 @@ export class Tab5Page implements OnInit {
             component: PlatformPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();
@@ -209,11 +229,13 @@ export class Tab5Page implements OnInit {
   /*
   async goMiniPage(){
       const userModal = await this.modalController.create({
-          component: SearchPage,
-          componentProps: {
-              type: 3,//mini only
-          },
-          cssClass: "modal-fullscreen",
+            component: SearchPage,
+            componentProps: {
+                type: 3,//mini only
+            },
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
       });
         
       await userModal.present();

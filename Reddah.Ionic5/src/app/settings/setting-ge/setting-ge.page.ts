@@ -81,6 +81,8 @@ export class SettingGePage implements OnInit {
             component: SettingFontPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();
@@ -92,6 +94,8 @@ export class SettingGePage implements OnInit {
             component: LocalePage,
             componentProps: { orgLocale: this.currentLocale },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await changeLocaleModal.present();

@@ -91,7 +91,9 @@ export class ChatFireBase{
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
-            showBackdrop: true
+            showBackdrop: true,
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         await modal.present();
@@ -148,7 +150,9 @@ export class ChatFireBase{
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
-            showBackdrop: true
+            showBackdrop: true,
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         return await modal.present();
@@ -503,6 +507,8 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
                 component: ChatOptPage,
                 componentProps: { targetUser: this.target },
                 cssClass: "modal-fullscreen",
+                swipeToClose: true,
+                presentingElement: await this.modalController.getTop(),
             });
             
             await modal.present();
@@ -540,6 +546,8 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
                 userName: userName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
             
         await userModal.present();

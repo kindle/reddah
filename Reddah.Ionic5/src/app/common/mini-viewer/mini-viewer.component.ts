@@ -217,7 +217,9 @@ export class MiniViewerComponent implements OnInit {
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
-            showBackdrop: true
+            showBackdrop: true,
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         return await modal.present();
@@ -289,6 +291,8 @@ export class MiniViewerComponent implements OnInit {
                 mini: this.mini
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         await modal.present();
@@ -303,6 +307,8 @@ export class MiniViewerComponent implements OnInit {
             component: RankPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         await modal.present();

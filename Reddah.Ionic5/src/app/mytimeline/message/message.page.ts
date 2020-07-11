@@ -75,6 +75,8 @@ export class MessagePage implements OnInit {
                 article: article
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await userModal.present();
@@ -86,6 +88,8 @@ export class MessagePage implements OnInit {
             component: PostviewerPage,
             componentProps: { article: article },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await viewerModal.present();

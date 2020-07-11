@@ -259,6 +259,8 @@ export class MyReportPage implements OnInit {
                 imgTitle: "",
                 imgDescription: "",
                 showDownload: true,
+                swipeToClose: true,
+                presentingElement: await this.modalController.getTop(),
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
@@ -334,6 +336,8 @@ export class MyReportPage implements OnInit {
                 userName: userName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await userModal.present();
@@ -344,6 +348,8 @@ export class MyReportPage implements OnInit {
             component: ArticleTextPopPage,
             componentProps: { text: text },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await textModal.present();
@@ -394,6 +400,8 @@ export class MyReportPage implements OnInit {
             component: AddFeedbackPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();

@@ -142,6 +142,8 @@ export class AddFriendPage implements OnInit {
                 lng: place.lng
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -157,6 +159,8 @@ export class AddFriendPage implements OnInit {
             component: SearchUserPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -167,6 +171,8 @@ export class AddFriendPage implements OnInit {
             component: QrcardPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();

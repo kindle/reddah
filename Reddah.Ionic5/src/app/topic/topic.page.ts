@@ -66,6 +66,8 @@ export class TopicPage implements OnInit {
             component: MessagePage,
             componentProps: {type:0},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -334,7 +336,9 @@ export class TopicPage implements OnInit {
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
-            showBackdrop: true
+            showBackdrop: true,
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         return await modal.present();
@@ -406,6 +410,8 @@ export class TopicPage implements OnInit {
                 userName: userName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await userModal.present();
@@ -416,6 +422,8 @@ export class TopicPage implements OnInit {
             component: ArticleTextPopPage,
             componentProps: { text: text },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await textModal.present();
@@ -426,6 +434,8 @@ export class TopicPage implements OnInit {
             component: LocationPage,
             componentProps: { location: JSON.parse(location) },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         await modal.present();
@@ -500,6 +510,8 @@ export class TopicPage implements OnInit {
                 mini:this.mini
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await postModal.present();
@@ -517,6 +529,8 @@ export class TopicPage implements OnInit {
                 article: this.mini,
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present(); 
@@ -532,6 +546,8 @@ export class TopicPage implements OnInit {
                 article: article
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();

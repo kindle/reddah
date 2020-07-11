@@ -42,6 +42,8 @@ export class MyInfoPage implements OnInit {
               targetUserName: ""
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
         });
           
         await userModal.present();
@@ -58,6 +60,8 @@ export class MyInfoPage implements OnInit {
             component: QrcardPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await qrModal.present();
@@ -71,6 +75,8 @@ export class MyInfoPage implements OnInit {
                 currentNickName: this.reddah.appData('usernickname_'+this.userName)
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -86,6 +92,8 @@ export class MyInfoPage implements OnInit {
                 currentSignature: this.reddah.appData('usersignature_'+this.userName)
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -98,6 +106,8 @@ export class MyInfoPage implements OnInit {
             component: LocationPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         await modal.present();
@@ -115,6 +125,8 @@ export class MyInfoPage implements OnInit {
                 currentSex: this.reddah.appData('usersex_'+this.userName)
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();

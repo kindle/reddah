@@ -29,6 +29,8 @@ export class ChangeCoverPopPage {
               targetUserName: ""
           },
           cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
         
       await changePhotoModal.present();

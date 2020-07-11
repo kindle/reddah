@@ -67,6 +67,8 @@ export class SettingListPage implements OnInit {
             component: SettingAccountPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();
@@ -77,6 +79,8 @@ export class SettingListPage implements OnInit {
             component: SettingNetworkPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();
@@ -87,6 +91,8 @@ export class SettingListPage implements OnInit {
             component: SettingPrivacyPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();
@@ -97,6 +103,8 @@ export class SettingListPage implements OnInit {
             component: SettingGePage,
             componentProps: {currentLocale:this.currentLocale},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();
@@ -112,6 +120,8 @@ export class SettingListPage implements OnInit {
             component: SettingAboutPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();
@@ -123,6 +133,8 @@ export class SettingListPage implements OnInit {
             component: AddFeedbackPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();

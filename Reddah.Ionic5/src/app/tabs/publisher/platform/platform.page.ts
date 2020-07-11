@@ -42,6 +42,8 @@ export class PlatformPage implements OnInit {
             component: CategoryPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
     }
@@ -51,6 +53,8 @@ export class PlatformPage implements OnInit {
             component: ManagePage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
     }
@@ -61,6 +65,8 @@ export class PlatformPage implements OnInit {
             componentProps: { 
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();

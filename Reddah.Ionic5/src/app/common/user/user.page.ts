@@ -121,6 +121,8 @@ export class UserPage implements OnInit {
             component: ArticleTextPopPage,
             componentProps: { text: text },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await textModal.present();
@@ -152,6 +154,8 @@ export class UserPage implements OnInit {
                 showDownload: true,
             },
             cssClass: 'modal-fullscreen',
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
             keyboardClose: true,
             showBackdrop: true
         });
@@ -204,6 +208,8 @@ export class UserPage implements OnInit {
                 article: article
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -347,6 +353,8 @@ export class UserPage implements OnInit {
                 version: this.reddah.appData('usersex_'+mini.UserName)
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -363,6 +371,8 @@ export class UserPage implements OnInit {
                         article: mini
                     },
                     cssClass: "modal-fullscreen",
+                    swipeToClose: true,
+                    presentingElement: await this.modalController.getTop(),
                 });
                   
                 await modal.present();
@@ -375,6 +385,8 @@ export class UserPage implements OnInit {
                         article: mini,
                     },
                     cssClass: "modal-fullscreen",
+                    swipeToClose: true,
+                    presentingElement: await this.modalController.getTop(),
                 });
                   
                 await modal.present();        
@@ -390,6 +402,8 @@ export class UserPage implements OnInit {
             component: TimeLinePage,
             componentProps: { userName: this.userName },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await timelineModal.present();
@@ -473,6 +487,8 @@ export class UserPage implements OnInit {
                 userName: this.userName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await modal.present();
@@ -516,6 +532,8 @@ export class UserPage implements OnInit {
             component: ApplyFriendPage,
             componentProps: { targetUserName: this.userName },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await applyFriendModal.present();
@@ -532,7 +550,9 @@ export class UserPage implements OnInit {
             },
             cssClass: 'modal-fullscreen',
             keyboardClose: true,
-            showBackdrop: true
+            showBackdrop: true,
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         return await modal.present();
@@ -546,6 +566,8 @@ export class UserPage implements OnInit {
                 currentNoteName: this.reddah.appData('usernotename_'+this.userName+'_'+this.currentUserName)
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -561,6 +583,8 @@ export class UserPage implements OnInit {
                 target: this.userName,
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await chatModal.present();
         //const {data} = await modal.onDidDismiss();
@@ -571,6 +595,8 @@ export class UserPage implements OnInit {
             component: MorePage,
             componentProps: { target : this.userName},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         
         await modal.present();
@@ -583,6 +609,8 @@ export class UserPage implements OnInit {
                 component: LocationPage,
                 componentProps: { location: JSON.parse(location) },
                 cssClass: "modal-fullscreen",
+                swipeToClose: true,
+                presentingElement: await this.modalController.getTop(),
             });
         
             await modal.present();
@@ -598,6 +626,8 @@ export class UserPage implements OnInit {
             component: LocationPage,
             componentProps: {},
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
     
         await modal.present();

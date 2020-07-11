@@ -44,6 +44,8 @@ export class GroupChatOptPage {
                 title: this.reddah.instant("Pop.GroupChatTitle"),
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -63,6 +65,8 @@ export class GroupChatOptPage {
                 title: this.reddah.instant("Pop.GroupChatAnnouce"),
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
@@ -114,6 +118,8 @@ export class GroupChatOptPage {
                 userName: userName
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
             
         await userModal.present();
@@ -167,6 +173,8 @@ export class GroupChatOptPage {
                 "delete": false
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
             
         await modal.present();
@@ -197,6 +205,8 @@ export class GroupChatOptPage {
                 "delete": true
             },
             cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
             
         await modal.present();
