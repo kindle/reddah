@@ -181,6 +181,7 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        const int ExpireDays = 90;
 
         [Route("sign")]
         public IHttpActionResult Sign([FromBody]UserModel user)
@@ -214,7 +215,7 @@ namespace Reddah.Web.Login.Controllers
                         audience: user.UserName,
                         claims: claims,
                         //expires: DateTime.Now.AddMinutes(1),
-                        expires: DateTime.Now.AddDays(3),
+                        expires: DateTime.Now.AddDays(ExpireDays),
                         signingCredentials: signinCredentials
                     );
 
@@ -276,7 +277,7 @@ namespace Reddah.Web.Login.Controllers
                     audience: jwtResult.JwtUser.User,
                     claims: claims,
                     //expires: DateTime.Now.AddMinutes(1),
-                    expires: DateTime.Now.AddDays(3),
+                    expires: DateTime.Now.AddDays(ExpireDays),
                     signingCredentials: signinCredentials
                 );
 
