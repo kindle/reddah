@@ -19,6 +19,17 @@ namespace Reddah.Web.Login
         public string Password { get; set; }
     }
 
+    public class AppleUserModel
+    {
+        public string AuthCode { get; set; }
+        public string GivenName { get; set; }
+        public string Email { get; set; }
+        public string User { get; set; }
+        public string FamilyName { get; set; }
+        public string AppleToken { get; set; }
+        public string Locale { get; set; }
+    }
+
     public class JwtUser
     {
         public string User { get; set; }

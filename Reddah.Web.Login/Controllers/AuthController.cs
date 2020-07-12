@@ -249,6 +249,68 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("applesign")]
+        public IHttpActionResult AppleSign([FromBody]AppleUserModel user)
+        {
+            if (user == null)
+            {
+                return Ok(new ApiResult(1, "Input apple user info is empty"));
+            }
+
+            try
+            {
+                var userName = user.User.Replace(".", "_");
+
+                using (var db = new reddahEntities())
+                {
+                    var userExist = db.UserProfile.FirstOrDefault(u => u.UserName == userName || u.UserName.Contains(userName));
+                    if (userExist != null)
+                    {
+                        //check user is real
+                    }
+                    else
+                    {
+                        var newUserProfile = new UserProfile();
+                        newUserProfile.UserName = userName;
+                        newUserProfile.Email = user.Email;
+                        newUserProfile.NickName = user.GivenName;
+                        newUserProfile.CreatedBy = "AppleLogin";
+                        newUserProfile.Lan = user.Locale;
+                        newUserProfile.SystemStatus = 0;
+                        newUserProfile.UserSetStatus = 0;
+                        newUserProfile.Type = 0;
+                        newUserProfile.limit = 1;
+                        db.UserProfile.Add(newUserProfile);
+                        db.SaveChanges();
+                    }
+                }
+
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
+                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+                var claims = GetPermissionClaims(userName);
+                //= new List<Claim>();
+                //claims.Add(new Claim("100", "view"));
+                //claims.Add(new Claim("101", "post"));
+
+                var tokeOptions = new JwtSecurityToken(
+                    issuer: "https://login.reddah.com",
+                    audience: userName,
+                    claims: claims,
+                    expires: DateTime.Now.AddDays(ExpireDays),
+                    signingCredentials: signinCredentials
+                );
+
+                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+                return Ok(new ApiResult(0, tokenString));
+
+            }
+            catch (Exception e)
+            {
+                return Ok(new ApiResult(4, e.Message.ToString()));
+            }
+        }
+
         [Route("renewjwt")]
         public IHttpActionResult RenewJwt()
         {
