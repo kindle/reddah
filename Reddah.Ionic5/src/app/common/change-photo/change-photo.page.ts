@@ -1,9 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, LoadingController } from '@ionic/angular';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ReddahService } from '../../reddah.service';
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { Crop } from '@ionic-native/crop/ngx';
+
+import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, LocalNotifications,
+    CameraPhoto, CameraSource, HapticsImpactStyle } from '@capacitor/core';
+    
+const { Browser, Camera, Filesystem, Haptics, Device, Storage } = Plugins;
 
 @Component({
     selector: 'app-change-photo',
@@ -23,7 +27,6 @@ export class ChangePhotoPage implements OnInit {
         public reddah: ReddahService,
         private crop: Crop,
         private file: File,
-        private camera: Camera,
         ) { }
 
     ngOnInit() {
@@ -48,6 +51,7 @@ export class ChangePhotoPage implements OnInit {
     }
 
     async takePhoto(){
+        /*
         const options: CameraOptions = {
             quality: 100,
             destinationType: this.camera.DestinationType.FILE_URI,
@@ -56,8 +60,26 @@ export class ChangePhotoPage implements OnInit {
             correctOrientation: true
         }
             
-        this.camera.getPicture(options).then((imageData) => {
+        Camera.getPicture(options).then((imageData) => {
             this.crop.crop(imageData, { quality: 100, targetWidth: -1, targetHeight: -1 })
+            .then(
+                    newCropImageData => {
+                    //console.log('new image path is: ' + newCropImageData);
+                    this.prepareData(newCropImageData);
+                },
+                error => console.error('Error cropping image', error)
+            );
+        }, (err) => {
+            // Handle error
+            console.log(JSON.stringify(err));
+        });*/
+
+        Camera.getPhoto({
+            resultType: CameraResultType.Uri, 
+            source: CameraSource.Camera, 
+            quality: 100 
+        }).then((imageData) => {
+            this.crop.crop(imageData.webPath, { quality: 100, targetWidth: -1, targetHeight: -1 })
             .then(
                     newCropImageData => {
                     //console.log('new image path is: ' + newCropImageData);
@@ -74,6 +96,7 @@ export class ChangePhotoPage implements OnInit {
 
     async fromLib()
     {
+        /*
         const options: CameraOptions = {
             quality: 100,
             destinationType: this.camera.DestinationType.FILE_URI,
@@ -99,7 +122,27 @@ export class ChangePhotoPage implements OnInit {
         }, (err) => {
             console.log(JSON.stringify(err));
         });
-        
+        */
+       const capturedPhoto = await Camera.getPhoto({
+            resultType: CameraResultType.Uri, 
+            source: CameraSource.Photos, 
+            quality: 100 
+        }).then((imageData) => {
+            //this.photos.push((<any>window).Ionic.WebView.convertFileSrc(imageData));
+            //this.prepareData(imageData);
+            //this.prepareData((<any>window).Ionic.WebView.convertFileSrc(imageData));
+            this.crop.crop(imageData.webPath, { quality: 100, targetWidth: -1, targetHeight: -1 })
+            .then(
+                    newCropImageData => {
+                    //console.log('new image path is: ' + newCropImageData);
+                    this.prepareData(newCropImageData);
+                },
+                error => console.error('Error cropping image', error)
+            );
+            
+        }, (err) => {
+            console.log(JSON.stringify(err));
+        });
     }
     
     async prepareData(filePath) {

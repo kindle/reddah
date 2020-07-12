@@ -418,5 +418,10 @@
         "1010":"請選擇素材",
         "1011":"您沒有刪除文章的權限",
         "1012":"您沒有刪除評論的權限"
+    },
+
+    "FedLogin":{
+        "FailedTitle":"Login Failed",
+        "FailedMessage":"Please try again later"
     }
 }

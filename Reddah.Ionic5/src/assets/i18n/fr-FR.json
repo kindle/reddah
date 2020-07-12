@@ -416,5 +416,10 @@
         "1010":"Sélectionnez un matériau",
         "1011":"Non vérifié - la page s' ouvre dans une nouvelle fenêtre ou un nouvel onglet",
         "1012":"Non vérifié - la page s' ouvre dans une nouvelle fenêtre ou un nouvel onglet"
+    },
+
+    "FedLogin":{
+        "FailedTitle":"Échec de la connexion",
+        "FailedMessage":"Veuillez vous connecter"
     }
-  }
+}

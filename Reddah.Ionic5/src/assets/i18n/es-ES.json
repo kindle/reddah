@@ -415,6 +415,11 @@
         "1010":"Por favor seleccione un material",
         "1011":"No se puede borrar un artículo",
         "1012":"Sin poder borrar comentarios"
+    },
+
+    "FedLogin":{
+        "FailedTitle":"Inicio de sesión fallido",
+        "FailedMessage":"Por favor, vuelva a iniciar sesión"
     }
 
 }

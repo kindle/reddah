@@ -13,7 +13,6 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { AlertController, LoadingController, NavController, ModalController, ToastController, Platform } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
 import * as moment from 'moment';
-//////import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { DatePipe } from '@angular/common';
 import { Md5 } from 'ts-md5/dist/md5';
 import { createAnimation } from '@ionic/core'
@@ -140,7 +139,6 @@ export class ReddahService {
         private toastController: ToastController,
         private platform: Platform,
         private cacheService: CacheService,
-        //////private localNotifications: LocalNotifications,
         private datePipe: DatePipe,
         private modalController: ModalController,
         private alertController: AlertController,
@@ -2629,10 +2627,8 @@ export class ReddahService {
     } 
 
     verifyImageFile(key){
-        //////
-        /*
         let cachedPath = this.localStorageService.retrieve(key);
-        if(cachedPath&&this.platform.is('android')){
+        if(cachedPath&&this.platformTag == "android"){
             let fileName = this.getFileName(cachedPath);
             let filePath = cachedPath.replace(fileName, "");
             
@@ -2645,7 +2641,7 @@ export class ReddahService {
                     this.localStorageService.clear(key);
                 }
             );
-        }*/
+        }
     }
 
     async getUserPhotos(userName, isTimeline=false){
@@ -3943,7 +3939,7 @@ export class ReddahService {
                 loading.dismiss();
                 if(result.Success==0){
                     let currentUser = appleInfo.user.replace(".","_")
-                    this.setLoginUserName(currentUser);
+                    //this.setLoginUserName(currentUser);
                     this.setCurrentUser(currentUser);
                     this.setCurrentJwt(result.Message);
                     // return token successfully
@@ -3996,8 +3992,8 @@ export class ReddahService {
     
     async presentAlert() {
         const alert = await this.alertController.create({
-            header: 'Login Failed',
-            message: 'Please try again later',
+            header: this.instant('FedLogin.FailedTitle'),
+            message: this.instant('FedLogin.FailedMessage'),
             buttons: ['OK'],
         });
         await alert.present();

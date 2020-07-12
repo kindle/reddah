@@ -2,28 +2,12 @@
 <widget version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <access origin="*" />
   
-  <feature name="AppVersion">
-    <param name="ios-package" value="AppVersion"/>
-  </feature>
-
-  <feature name="RareloopAppVersion">
-    <param name="ios-package" value="RareloopAppVersion"/>
-  </feature>
-
   <feature name="Badge">
     <param name="ios-package" value="APPBadge"/>
   </feature>
 
   <feature name="CropPlugin">
     <param name="ios-package" value="CTCrop"/>
-  </feature>
-
-  <feature name="Device">
-    <param name="ios-package" value="CDVDevice"/>
-  </feature>
-
-  <feature name="Accelerometer">
-    <param name="ios-package" value="CDVAccelerometer"/>
   </feature>
 
   <feature name="File">
@@ -53,15 +37,6 @@
 
   <feature name="NativeAudio">
     <param name="ios-package" value="NativeAudio"/>
-  </feature>
-
-  <feature name="CDVShake">
-    <param name="ios-package" value="CDVShake"/>
-    <param name="onload" value="true"/>
-  </feature>
-
-  <feature name="Vibration">
-    <param name="ios-package" value="CDVVibration"/>
   </feature>
 
   

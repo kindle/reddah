@@ -414,6 +414,11 @@
         "1010":"Por favor, selecione um material",
         "1011":"Sem permissão para apagar o artigo",
         "1012":"Sem permissão para apagar comentários"
+    },
+
+    "FedLogin":{
+        "FailedTitle":"Sindução falhada",
+        "FailedMessage":"Por favor, faça o login de volta"
     }
 
 }

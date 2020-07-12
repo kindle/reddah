@@ -415,6 +415,11 @@
         "1010":"Please select a material",
         "1011":"No permission to delete article",
         "1012":"No permission to delete comment"
+    },
+
+    "FedLogin":{
+        "FailedTitle":"Login Failed",
+        "FailedMessage":"Please try again later"
     }
 
 }

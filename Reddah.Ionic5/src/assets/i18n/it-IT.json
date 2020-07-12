@@ -415,6 +415,11 @@
         "1010":"Selezionare un materiale",
         "1011":"Nessun permesso per eliminare l 'articolo",
         "1012":"Nessun permesso per eliminare il commento"
+    },
+
+    "FedLogin":{
+        "FailedTitle":"Accesso non riuscito",
+        "FailedMessage":"Accedi di nuovo"
     }
 
 }

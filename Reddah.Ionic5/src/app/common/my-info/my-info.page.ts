@@ -35,15 +35,15 @@ export class MyInfoPage implements OnInit {
     changed : false;
     async changePhoto(){
         const userModal = await this.modalController.create({
-          component: ChangePhotoPage,
-          componentProps: { 
-              title: this.reddah.instant("About.Photo"),
-              tag : "portrait",
-              targetUserName: ""
-          },
-          cssClass: "modal-fullscreen",
-          swipeToClose: true,
-          presentingElement: await this.modalController.getTop(),
+            component: ChangePhotoPage,
+            componentProps: { 
+                title: this.reddah.instant("About.Photo"),
+                tag : "portrait",
+                targetUserName: ""
+            },
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
         });
           
         await userModal.present();

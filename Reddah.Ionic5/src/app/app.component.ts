@@ -6,8 +6,7 @@ import {
     Plugins,
     StatusBarStyle,
   } from '@capacitor/core';
-const { StatusBar } = Plugins;
-const { SplashScreen } = Plugins;
+const { StatusBar, SplashScreen, Geolocation } = Plugins;
 
 import { Router } from '@angular/router';
 import { ModalController, AlertController, ActionSheetController, PopoverController, IonRouterOutlet, MenuController, LoadingController } from '@ionic/angular';
@@ -46,6 +45,7 @@ export class AppComponent {
         private androidPermissions: AndroidPermissions,
         public reddah: ReddahService,
         private authService: AuthService,
+        private loadingController: LoadingController,
         //private network: Network,
         //private firebase: Firebase,
   ) {
@@ -123,7 +123,6 @@ export class AppComponent {
       }
 
       this.platform.ready().then(() => {
-            SplashScreen.hide();
           if(this.platform.is('android'))
           {
               this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
@@ -209,6 +208,8 @@ export class AppComponent {
       Network.addListener('networkStatusChange', (status) => {
           this.reddah.networkConnected = status.connected
       });
+
+      SplashScreen.hide();
   }
 
   // set up hardware back button event.
@@ -249,6 +250,16 @@ export class AppComponent {
   // active hardware back button
   backButtonEvent() {
       this.platform.backButton.subscribe(async () => {
+          // close loading
+          try {
+            const element = await this.loadingController.getTop();
+            if (element) {
+                element.dismiss();
+                return;
+            }
+        } catch (error) {
+        }
+
           // close action sheet
           try {
               const element = await this.actionSheetCtrl.getTop();

@@ -414,6 +414,11 @@
         "1010":"Selecteer een materiaal",
         "1011":"Geen toestemming om artikel te verwijderen",
         "1012":"Geen toestemming om commentaar te verwijderen"
+    },
+
+    "FedLogin":{
+        "FailedTitle":"Mislukte aanmelding",
+        "FailedMessage":"Log hier weer in"
     }
 
 }

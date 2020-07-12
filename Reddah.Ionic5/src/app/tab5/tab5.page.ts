@@ -36,8 +36,8 @@ export class Tab5Page implements OnInit {
       public reddah: ReddahService,
       public authService: AuthService,
   ) {
-      this.userName = "Not Set";
-      this.userName = this.localStorageService.retrieve("Reddah_CurrentUser");
+      //this.userName = "Not Set";
+      this.userName = this.reddah.getCurrentUser();
   }
   
   ngOnInit() {

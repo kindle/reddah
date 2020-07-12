@@ -415,6 +415,11 @@
         "1010":"Bitte wählen Sie ein Material",
         "1011":"Keine Berechtigung, Artikel zu löschen",
         "1012":"Keine Berechtigung, Kommentar zu löschen"
+    },
+
+    "FedLogin":{
+        "FailedTitle":"Fehlgeschlagenes Anmelden",
+        "FailedMessage":"Bitte melden Sie sich wieder an"
     }
 
 }
