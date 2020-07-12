@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders,
 import { catchError, map, tap } from 'rxjs/operators';
 import { Article } from "./model/article";
 import { UserProfileModel } from './model/UserProfileModel';
-import { UserModel, QueryCommentModel, NewCommentModel, NewTimelineModel, Queue } from './model/UserModel';
+import { UserModel, QueryCommentModel, NewCommentModel, NewTimelineModel, Queue, AppleUserModel } from './model/UserModel';
 import { Locale } from './model/locale';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File, FileEntry } from '@ionic-native/file/ngx';
@@ -144,6 +144,7 @@ export class ReddahService {
         private datePipe: DatePipe,
         private modalController: ModalController,
         private alertController: AlertController,
+        private loadingController: LoadingController,
         private ngZone: NgZone,
         private router: Router,
     ) { 
@@ -3925,22 +3926,75 @@ export class ReddahService {
     }
 
 
+    async appleSignIn(appleInfo){
+        if (appleInfo.user.length == 0) {
+            this.toast(this.instant("Input.Error.UserNameEmpty"));
+        } else {
+            const loading = await this.loadingController.create({
+                message: this.instant("Login.Loading"),
+                spinner: 'circles',
+            });
+            await loading.present();
+            
+            this.appleLogin(appleInfo)
+            .subscribe(result => 
+            {
+                //alert(JSON.stringify(result))
+                loading.dismiss();
+                if(result.Success==0){
+                    let currentUser = appleInfo.user.replace(".","_")
+                    this.setLoginUserName(currentUser);
+                    this.setCurrentUser(currentUser);
+                    this.setCurrentJwt(result.Message);
+                    // return token successfully
+                    this.modalController.dismiss(result.Message);
+                    this.cacheService.clearAll();
+                    this.updateUserDeviceInfo();
+                }
+                else {
+                    let msg = this.instant(`Service.${result.Success}`);
+                    this.toast(msg, "danger");
+                }
+                
+            });
+        }
+    }
+
+    private appleLoginUrl = `${this.domain}/api/auth/applesign`; 
+
+    appleLogin(appleInfo): Observable<any> {
+
+        return this.http.post<any>(this.appleLoginUrl, new AppleUserModel(
+            appleInfo.authorizationCode,
+            appleInfo.givenName,
+            appleInfo.email,
+            appleInfo.user,
+            appleInfo.familyName,
+            appleInfo.IdentityToken,
+            this.getCurrentLocale()))
+        .pipe(
+            tap(data => this.log('applelogin', false)),
+            catchError(this.handleError('applelogin', []))
+        );
+    }
+    
     openAppleSignIn() {
         const { SignInWithApple } = Plugins;
         SignInWithApple.Authorize()
-            .then(async (res) => {
-                if (res.response && res.response.identityToken) {
-                    alert(res.response)
-                } else {
-                    this.presentAlert();
-                }
-            })
-            .catch((response) => {
+        .then(async (res) => {
+            if (res.response && res.response.identityToken) {
+                //alert(JSON.stringify(res.response))
+                this.appleSignIn(res.response);
+            } else {
                 this.presentAlert();
-            });
-      }
+            }
+        })
+        .catch((response) => {
+            this.presentAlert();
+        });
+    }
     
-      async presentAlert() {
+    async presentAlert() {
         const alert = await this.alertController.create({
             header: 'Login Failed',
             message: 'Please try again later',

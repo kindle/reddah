@@ -7,6 +7,25 @@ export class UserModel {
     public Password: string;
 }
 
+export class AppleUserModel {
+    constructor(AuthCode,GivenName,Email,User,FamilyName,AppleToken,Locale){
+        this.AuthCode = AuthCode;
+        this.GivenName = GivenName;
+        this.Email = Email;
+        this.User = User;
+        this.FamilyName = FamilyName;
+        this.AppleToken = AppleToken;
+        this.Locale = Locale;
+    }
+    public AuthCode: string;
+    public GivenName: string;
+    public Email: string;
+    public User: string;
+    public FamilyName: string;
+    public AppleToken: string;
+    public Locale: string;
+}
+
 export class QueryCommentModel {
     constructor(jwt: string, articleId: number){
         this.Jwt = jwt;
