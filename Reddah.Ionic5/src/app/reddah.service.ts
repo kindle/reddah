@@ -2112,7 +2112,7 @@ export class ReddahService {
         this.localStorageService.clear("Reddah_Local_Messages_"+this.getCurrentUser());
         //this.localStorageService.clear();
         
-        if(this.platform.is('android')){
+        if(this.platformTag =="android"){
             window.location.reload();
         }
         else{
@@ -2383,34 +2383,17 @@ export class ReddahService {
         let result = this.localStorageService.retrieve(storedKey);
         
         if(cacheKey.indexOf('userphoto_')>-1){
-            if(this.platform.is('android')){
-                if(result)
-                {
-                    return (<any>window).Ionic.WebView.convertFileSrc(result);
-                }
-                else
-                    return "assets/icon/"+userPhotoName;
-            }
-            else{
-                let url = this.localStorageService.retrieve(cacheKey+"_url");
-                if(url)
-                    return this.cloudFix(url);
-                return "assets/icon/"+userPhotoName;
-            }
+            let url = this.localStorageService.retrieve(cacheKey+"_url");
+            if(url)
+                return this.cloudFix(url);
+            return "assets/icon/"+userPhotoName;
         }
         else if(cacheKey.indexOf('cover_')>-1){
-            if(this.platform.is('android')){
-                if(result)
-                    return (<any>window).Ionic.WebView.convertFileSrc(result);
-                else
-                    return "assets/icon/timg.jpg";
-            }
-            else{
-                let url = this.localStorageService.retrieve(cacheKey+"_url");
-                if(url!=null)
-                    return this.cloudFix(url);
-                return "assets/icon/timg.jpg";
-            }
+            
+            let url = this.localStorageService.retrieve(cacheKey+"_url");
+            if(url!=null)
+                return this.cloudFix(url);
+            return "assets/icon/timg.jpg";
         }
         else{//pure text
             return result==null ? "": result;
@@ -2419,7 +2402,7 @@ export class ReddahService {
 
     appDataUserPhoto(cacheKey){  
         let result = this.localStorageService.retrieve(cacheKey); 
-        if(result&&this.platform.is('cordova')){
+        if(result&&this.platformTag==="android"||this.platformTag==="ios"){
             return (<any>window).Ionic.WebView.convertFileSrc(result);
         }
 
@@ -2431,7 +2414,7 @@ export class ReddahService {
 
     appDataMap(cacheKey, url){
         let result = this.localStorageService.retrieve(cacheKey); 
-        if(result&&this.platform.is('cordova')){
+        if(result&&this.platformTag==="android"||this.platformTag==="ios"){
             return (<any>window).Ionic.WebView.convertFileSrc(result);
         }
 
@@ -2449,7 +2432,7 @@ export class ReddahService {
         let result = this.localStorageService.retrieve(cacheKey);
         
         if(cacheKey.indexOf('userphoto_')>-1){
-            if(result&&this.platform.is('cordova')){
+            if(result&&this.platformTag==="android"||this.platformTag==="ios"){
                 return await (<any>window).Ionic.WebView.convertFileSrc(result);
             }
             else{
@@ -2457,7 +2440,7 @@ export class ReddahService {
             }
         }
         else if(cacheKey.indexOf('cover_')>-1){
-            if(result&&this.platform.is('cordova')){
+            if(result&&this.platformTag==="android"||this.platformTag==="ios"){
                 return await (<any>window).Ionic.WebView.convertFileSrc(result);
             }
             else{
@@ -2472,7 +2455,7 @@ export class ReddahService {
     level2Cache(cacheKey){
         cacheKey = this.cloudFix(cacheKey);
         if(cacheKey){
-            if(this.platform.is('android')){
+            if(this.platformTag =="android"){
                 let storekey = cacheKey.replace("///","https://")
                 let preview = this.localStorageService.retrieve(storekey);
                 let org = this.localStorageService.retrieve(storekey.replace("_reddah_preview",""))
@@ -2508,7 +2491,7 @@ export class ReddahService {
             return (<any>window).Ionic.WebView.convertFileSrc(preview);
         else
         {
-            if(this.platform.is('cordova'))
+            if(this.platformTag==="android"||this.platformTag==="ios")
                 this.toFileCache(cacheKey);
             return cacheKey;
         }
@@ -2780,7 +2763,7 @@ export class ReddahService {
     }
 
     GetCache(url){
-        if(this.platform.is('cordova')){
+        if(this.platformTag==="android"||this.platformTag==="ios"){
             let org = this.localStorageService.retrieve(url);
             if(org){
                 return (<any>window).Ionic.WebView.convertFileSrc(org);
@@ -3710,7 +3693,7 @@ export class ReddahService {
     }
 
     windowReload(){
-        if(this.platform.is('android')){
+        if(this.platformTag =="android"){
             window.location.reload();
         }
         else{
