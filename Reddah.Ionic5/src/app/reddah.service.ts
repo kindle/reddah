@@ -3463,6 +3463,12 @@ export class ReddahService {
 
     }
 
+    async uploadPictureFromCrop(cameraPhotoPath, formData) {
+        const fileName = new Date().getTime() + '.jpeg';
+        const base64Data = await this.readAsBase64FromCrop(cameraPhotoPath);
+        formData.append(fileName, this.b64toBlob(base64Data), fileName);
+    }
+    
     private async uploadPicture(cameraPhoto: CameraPhoto, formData) {
         const fileName = new Date().getTime() + '.jpeg';
         const fileNamePreview = fileName.replace('.jpeg','_reddah_preview.jpeg');
@@ -3603,6 +3609,14 @@ export class ReddahService {
         return blob;
     }
 
+    private async readAsBase64FromCrop(cameraPhotoPath) {
+        // Read the file into base64 format
+        const file = await Filesystem.readFile({
+            path: cameraPhotoPath
+        });
+    
+        return file.data;
+    }
     private async readAsBase64(cameraPhoto: CameraPhoto) {
         // "hybrid" will detect Cordova or Capacitor
         if (this.platform.is('hybrid')) {

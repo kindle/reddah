@@ -79,11 +79,14 @@ export class ChangePhotoPage implements OnInit {
             source: CameraSource.Camera, 
             quality: 100 
         }).then((imageData) => {
-            this.crop.crop(imageData.webPath, { quality: 100, targetWidth: -1, targetHeight: -1 })
+            this.crop.crop(imageData.path, { quality: 100, targetWidth: -1, targetHeight: -1 })
             .then(
                     newCropImageData => {
                     //console.log('new image path is: ' + newCropImageData);
-                    this.prepareData(newCropImageData);
+                    //this.prepareData(newCropImageData);
+                    this.reddah.uploadPictureFromCrop(newCropImageData, this.formData).then(()=>{
+                        this.changePhoto();
+                    });
                 },
                 error => console.error('Error cropping image', error)
             );
@@ -123,7 +126,7 @@ export class ChangePhotoPage implements OnInit {
             console.log(JSON.stringify(err));
         });
         */
-       const capturedPhoto = await Camera.getPhoto({
+       Camera.getPhoto({
             resultType: CameraResultType.Uri, 
             source: CameraSource.Photos, 
             quality: 100 
@@ -131,11 +134,16 @@ export class ChangePhotoPage implements OnInit {
             //this.photos.push((<any>window).Ionic.WebView.convertFileSrc(imageData));
             //this.prepareData(imageData);
             //this.prepareData((<any>window).Ionic.WebView.convertFileSrc(imageData));
-            this.crop.crop(imageData.webPath, { quality: 100, targetWidth: -1, targetHeight: -1 })
+            this.crop.crop(imageData.path, { quality: 100, targetWidth: -1, targetHeight: -1 })
             .then(
                     newCropImageData => {
                     //console.log('new image path is: ' + newCropImageData);
-                    this.prepareData(newCropImageData);
+                    //this.prepareData(newCropImageData);
+
+
+                    this.reddah.uploadPictureFromCrop(newCropImageData, this.formData).then(()=>{
+                        this.changePhoto();
+                    });
                 },
                 error => console.error('Error cropping image', error)
             );
