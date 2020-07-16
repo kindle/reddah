@@ -17,11 +17,11 @@ import { DatePipe } from '@angular/common';
 import { Md5 } from 'ts-md5/dist/md5';
 import { createAnimation } from '@ionic/core'
 import { Router } from '@angular/router';
-
-import ImageCompressor from 'image-compressor.js'
+//import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer/ngx';
 
 import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, LocalNotifications,
     CameraPhoto, CameraSource, HapticsImpactStyle } from '@capacitor/core';
+import { Crop } from '@ionic-native/crop/ngx';
     
 const { Browser, Camera, Filesystem, Haptics, Device, Storage } = Plugins;
 
@@ -145,6 +145,8 @@ export class ReddahService {
         private loadingController: LoadingController,
         private ngZone: NgZone,
         private router: Router,
+        private crop: Crop,
+        //private imageResizer: ImageResizer
     ) { 
         
     }
@@ -3405,115 +3407,34 @@ export class ReddahService {
         photos.push(savedImageFile);
     }
 
-    getImage(dataUrl: string): Promise<HTMLImageElement> 
-    {
-        return new Promise((resolve, reject) => {
-            const image = new Image();
-            image.src = dataUrl;
-            image.onload = () => {
-                resolve(image);
-            };
-        });
-    }
-
-
-
-    async downscaleImage(
-            dataUrl: string,  
-            quality=0.6,   // e.g. 0.9 = 90% quality
-            imageType='image/jpeg',  // e.g. 'image/jpeg'
-            resolution =500,  // max width/height in pixels
-        ): Promise<string> {
-
-        // Create a temporary image so that we can compute the height of the image.
-        const image = await this.getImage(dataUrl);
-        const oldWidth = image.naturalWidth;
-        const oldHeight = image.naturalHeight;
-        console.log('dims', oldWidth, oldHeight);
-
-        const longestDimension = oldWidth > oldHeight ? 'width' : 'height';
-        const currentRes = longestDimension == 'width' ? oldWidth : oldHeight;
-        console.log('longest dim', longestDimension, currentRes);
-
-        if (currentRes > resolution) {
-            console.log('need to resize...');
-
-            // Calculate new dimensions
-            const newSize = longestDimension == 'width'
-                ? Math.floor(oldHeight / oldWidth * resolution)
-                : Math.floor(oldWidth / oldHeight * resolution);
-            const newWidth = longestDimension == 'width' ? resolution : newSize;
-            const newHeight = longestDimension == 'height' ? resolution : newSize;
-            console.log('new width / height', newWidth, newHeight);
-
-            // Create a temporary canvas to draw the downscaled image on.
-            const canvas = document.createElement('canvas');
-            canvas.width = newWidth;
-            canvas.height = newHeight;
-
-            // Draw the downscaled image on the canvas and return the new data URL.
-            const ctx = canvas.getContext('2d')!;
-            ctx.drawImage(image, 0, 0, newWidth, newHeight);
-            const newDataUrl = canvas.toDataURL(imageType, quality);
-            return newDataUrl;
-        }
-        else {
-            return dataUrl;
-        }
-
-    }
-
     async uploadPictureFromCrop(cameraPhotoPath, formData) {
         const fileName = new Date().getTime() + '.jpeg';
         const base64Data = await this.readAsBase64FromCrop(cameraPhotoPath);
         formData.append(fileName, this.b64toBlob(base64Data), fileName);
     }
-    
+
+    async uploadPictureFromResize(cameraPhotoPath, formData, fileNamePreview) {
+        const base64Data = await this.readAsBase64FromCrop(cameraPhotoPath);
+        formData.append(fileNamePreview, this.b64toBlob(base64Data), fileNamePreview);
+    }
+
     private async uploadPicture(cameraPhoto: CameraPhoto, formData) {
         const fileName = new Date().getTime() + '.jpeg';
         const fileNamePreview = fileName.replace('.jpeg','_reddah_preview.jpeg');
 
         const base64Data = await this.readAsBase64(cameraPhoto);
-        
-        /*const savedFile = await Filesystem.writeFile({
-            path: fileName,
-            data: base64Data,
-            directory: FilesystemDirectory.Data
-        });*/
 
         formData.append(fileName, this.b64toBlob(base64Data), fileName);
         //should be compressed
-        formData.append(fileNamePreview, this.b64toBlob(base64Data), fileNamePreview);
-        
-        
-/*
-        this.downscaleImage(base64Data).then((newBase64Data)=>{
-            console.log(newBase64Data);
-            formData.append(fileNamePreview, this.b64toBlob(newBase64Data), fileNamePreview);
-        });
-        */
-
-        
-        /*const savedFilePreview = await Filesystem.writeFile({
-            path: fileNamePreview,
-            data: base64Data,
-            directory: FilesystemDirectory.Data
-        });*/
-
-        /*let image = new Image();
-        image.src= base64Data;
-        formData.append(fileNamePreview, this.compress(image), fileNamePreview);*/
-
-        /*new ImageCompressor(this.b64toBlob(base64Data), {
-            quality: .6,
-            success(result) {
-                formData.append(fileNamePreview, result, fileNamePreview);
+        //formData.append(fileNamePreview, this.b64toBlob(base64Data), fileNamePreview);
+        this.crop.crop(cameraPhoto.path, {quality: 50, targetWidth: 800, targetHeight: 800})
+        .then(
+            newCropImageData => {
+                this.uploadPictureFromResize(newCropImageData, formData, fileNamePreview);
             },
-            error(e) {
-                console.log(e.message);
-            },
-        });*/
-
+            error => console.error('Error cropping image', error)
+        );
+        
       
         return {
             fileUrl: fileName,
@@ -3521,72 +3442,6 @@ export class ReddahService {
         };
     }
 
-    private compress(source_img_obj, quality=0.5){
-        var mime_type = "image/jpeg";
-        var cvs = document.createElement('canvas');
-        //naturalWidth真实图片的宽度
-        //cvs.width = source_img_obj.naturalWidth;
-        //cvs.height = source_img_obj.naturalHeight;
-        var xRate = 100 / source_img_obj.naturalWidth;
-        var yRate = 100 / source_img_obj.naturalHeight;
-        cvs.width = 100;
-        cvs.height = 100;
-        var cvsContext = cvs.getContext('2d');
-        cvsContext.scale(xRate, yRate);
-        var ctx = cvsContext.drawImage(source_img_obj, 0, 0);
-        return  cvs.toDataURL(mime_type, quality/100);
-    }
-
-
-    private getNewBase64(bs64, quality=0.6){
-        var img = new Image();
-        img.src = bs64;
-        var canvas = document.createElement("canvas");
-        var ctx = canvas.getContext("2d");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        return canvas.toDataURL("image/jpeg", quality); 
-    }
-
-    private compressImg(canvasResult, size) {
-        let imgBase64 = canvasResult.toDataURL('image/jpeg', 1);
-        let base64Kilobyte = (imgBase64.length - 814) / 1.37 / 1024; //将base64的结果转换成kb
-        let currentQuality = 1
-        //通过循环 进行图片质量的压缩，直到小于规定的大小才停止
-        if (base64Kilobyte > size) {
-          for (let i = 10; i > 0; i--) {
-            currentQuality -= 0.1;
-            const quality = parseFloat((currentQuality).toFixed(2));
-            imgBase64 = canvasResult.toDataURL('image/jpeg', quality);
-            base64Kilobyte = (imgBase64.length - 814) / 1.37 / 1024;
-            if (base64Kilobyte < size) {
-              break;
-            }
-          }
-        }
-        return imgBase64;
-      }
-
-    compressImage(base64, quality = 0.6, callback) {
-        
-        var newImage = new Image();
-        newImage.src = base64;
-        newImage.setAttribute("crossOrigin", 'Anonymous');
-        newImage.onload = ()=> {
-            var canvas = document.createElement("canvas");
-            var ctx = canvas.getContext("2d");
-            canvas.width = newImage.width/2;
-            canvas.height = newImage.height/2;
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(newImage, 0, 0, canvas.width, canvas.height);
-            var base64 = canvas.toDataURL("image/jpeg", quality); 
-            callback(base64);
-        }
-    }
 
     b64toBlob = (b64Data, contentType='image/jpeg', sliceSize=512) => 
     {
@@ -3610,7 +3465,6 @@ export class ReddahService {
     }
 
     private async readAsBase64FromCrop(cameraPhotoPath) {
-        // Read the file into base64 format
         const file = await Filesystem.readFile({
             path: cameraPhotoPath
         });
@@ -3644,7 +3498,6 @@ export class ReddahService {
         };
         reader.readAsDataURL(blob);
     });
-
     
     checkPermission(permissionId){
         let jwt  = this.getCurrentJwt();

@@ -5,7 +5,7 @@ import { MediaCapture, MediaFile, CaptureError, CaptureVideoOptions } from '@ion
 import { File, FileEntry } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx'; 
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
+//import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
@@ -41,6 +41,7 @@ export class ChatFireBoxComponent implements OnInit {
         private nativeAudio: NativeAudio,
         private camera: Camera,
         private mediaCapture: MediaCapture,
+        //private imageResizer: ImageResizer,
         //public db: AngularFireDatabase,
     ) { 
         if (this.platform.is('cordova')) {
@@ -451,6 +452,8 @@ export class ChatFireBoxComponent implements OnInit {
             fileExtention : fileExtention.replace(fileExtention.substring(fileExtention.lastIndexOf('?')),"");
         let previewFileName = orgFileName.replace(fileExtention,"") + "_reddah_preview" + removdQFileExtention;
 //alert(photo.fileUrl+"_"+previewFileName+"_**_"+removdQFileExtention);
+    //////        
+        /*
         let options = {
             uri: photo.fileUrl,
             folderName: 'reddah',
@@ -459,10 +462,10 @@ export class ChatFireBoxComponent implements OnInit {
             width: 800,
             height: 800
         } as ImageResizerOptions;
-        ImageResizer
+        this.imageResizer
             .resize(options)
             .then((filePath: string) => this.prepareData(filePath, photo.fileUrl+"_reddah_preview", 2, 2))
-            .catch(e => alert(e));
+            .catch(e => alert(e));*/
     }
 
     addVideoToFormData(data)

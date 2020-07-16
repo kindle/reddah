@@ -76,7 +76,9 @@ export class ImageViewerComponent implements OnInit {
             let org = this.localStorageService.retrieve(storedKey.replace("_reddah_preview",""));
             
             this.imgSourceArray[i].webPreviewUrl = this.imgSourceArray[i].webPreviewUrl
-                .replace("///login.reddah.com","https://login.reddah.com")
+                .replace("///login.reddah.com","https://login.reddah.com") 
+                .replace("///","https://").replace("_reddah_preview","");
+    
             if(org){
                 let localUrl = (<any>window).Ionic.WebView.convertFileSrc(org);
                 this.imgSourceArray[i].localhostImageUrl = localUrl;
@@ -234,7 +236,12 @@ export class ImageViewerComponent implements OnInit {
         let lastSplashIndex = str.lastIndexOf('/');
         return str.substring(lastSplashIndex+1);
     }
+    
     async downloadOrgImage(item, cp = false) {
+        item.webPreviewUrl = item.webPreviewUrl.replace("///","https://").replace("_reddah_preview","");
+    }
+    
+    async downloadOrgImage_bak(item, cp = false) {
         let briefTarget = "DCIM/Reddah/";// + newFileName;
         const toast = await this.toastController.create({
             message: `${this.reddah.instant("Common.Save")}:${briefTarget}`,
