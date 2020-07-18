@@ -31,7 +31,7 @@ export class SettingAboutPage implements OnInit {
     }
 
     ngOnInit() {
-        if(this.platform.is('cordova')){
+        if(this.reddah.isMobile()){
             this.reddah.getVersionNumber().then(version => {
                 this.version = version;
             });

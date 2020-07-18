@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
 import { CacheService } from "ionic-cache";
 import { Shake } from '@ionic-native/shake/ngx';
-import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UserPage } from '../common/user/user.page';
 
@@ -20,7 +18,7 @@ export class ShakePage implements OnInit {
     userName: any;
 
     async close(){
-        if(this.platform.is('cordova')){
+        if(this.reddah.isMobile()){
             this.watch.unsubscribe();
         }
         this.modalController.dismiss();
@@ -33,22 +31,21 @@ export class ShakePage implements OnInit {
         public modalController: ModalController,
         private cacheService: CacheService,
         private shake: Shake,
-        private nativeAudio: NativeAudio,
-        private platform: Platform,
         private geolocation: Geolocation,
     ){
         this.userName = this.reddah.getCurrentUser();
 
-        if (this.platform.is('cordova')) {
-            this.nativeAudio.preloadSimple('shake', 'assets/sound/shake.mp3')
-            
+        if (this.reddah.isMobile()) {
             this.watch = this.shake.startWatch(60).subscribe(() => {
                 this.shakeAni();
-                this.nativeAudio.play("shake");
+                this.audio.src = 'assets/sound/shake.mp3'; 
+                this.audio.play();
             });
         }
     }
     
+    audio = new Audio();
+
     ngOnInit(){
         
     }

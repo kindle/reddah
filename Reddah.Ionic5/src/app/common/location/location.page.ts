@@ -28,9 +28,7 @@ export class LocationPage implements OnInit {
         public navController: NavController,
         public modalController: ModalController,
         public actionSheetController: ActionSheetController,
-        ){
-        
-    }
+    ){}
     
     locations=[];
 
@@ -162,7 +160,7 @@ export class LocationPage implements OnInit {
     selectedItem;
     setLocation(item){
         this.selectedItem = item;
-        console.log(item)
+        //console.log(item)
         if(item!=null&&item.location!=null){
             this.flyMaker = L.marker([item.location.lat, item.location.lng]);
             this.markerGroup.clearLayers();
@@ -170,7 +168,7 @@ export class LocationPage implements OnInit {
             if(this.location)
                 this.map.addLayer(this.markerGroup);
 
-            this.map.setView([item.location.lat, item.location.lng], 5);
+            this.map.setView([item.location.lat, item.location.lng], 15);
         }
     }
 

@@ -16,7 +16,6 @@ import { VideoEditor } from '@ionic-native/video-editor/ngx'
 //import { Firebase } from '@ionic-native/firebase/ngx';
 import { ChatFireBase } from './chat-fire.page';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 @Component({
     selector: 'app-group-chat-fire',
@@ -45,12 +44,11 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
         public platform: Platform,
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
-        public nativeAudio: NativeAudio,
         private notification: LocalNotifications,
         //public db: AngularFireDatabase,
     ) { 
         super(modalController, popoverController, reddah, localStorageService, 
-            streamingMedia, videoEditor, platform, nativeAudio);
+            streamingMedia, videoEditor, platform);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }
@@ -278,7 +276,7 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
                     event.target.complete();
                 }
 
-                if(this.platform.is('cordova'))
+                if(this.reddah.isMobile())
                 {
                     this.messages.forEach((comment:any)=>{
                         if(comment.Type==1&&comment.Duration>=0)//audio only

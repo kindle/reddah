@@ -33,7 +33,6 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions } from '@ionic-native/media-capture/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx'; 
 import { Shake } from '@ionic-native/shake/ngx';
-import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { VideoEditor } from '@ionic-native/video-editor/ngx';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { Device } from '@ionic-native/device/ngx';
@@ -381,7 +380,6 @@ providers: [
     WebView,
     MediaCapture,
     Media,
-    NativeAudio,
     LocalNotifications,
     VideoEditor,
     Vibration,DeviceMotion,Device,

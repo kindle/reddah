@@ -4,7 +4,6 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ModalController, PopoverController, Platform, IonContent } from '@ionic/angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { ImageViewerComponent } from '../../common/image-viewer/image-viewer.component';
 import { VideoViewerComponent } from '../../common/video-viewer/video-viewer.component';
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
@@ -44,7 +43,6 @@ export class MysticPage implements OnInit {
         public popoverController: PopoverController,
         public reddah: ReddahService,
         public localStorageService: LocalStorageService,
-        private nativeAudio: NativeAudio,
         private transfer: FileTransfer, 
         private file: File,
         public platform: Platform,
@@ -56,9 +54,6 @@ export class MysticPage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
         this.getMysticPhoto();
-        if (this.platform.is('cordova')) {
-            this.nativeAudio.preloadSimple('bi', 'assets/sound/bi.mp3')
-        }
     }
     
 ///pop up new window
@@ -555,7 +550,8 @@ export class MysticPage implements OnInit {
             this.audio.play();
             this.audio.addEventListener('ended', ()=>{
                 if(comment.isPlaying){
-                    this.nativeAudio.play("bi");
+                    this.audio.src = 'assets/sound/bi.mp3'; 
+                    this.audio.play();
                 }
                 comment.isPlaying= false;
             });

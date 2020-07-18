@@ -55,7 +55,7 @@
         reddah.appData('userhidelocation_'+userName)==0">
         <span class="itemTitle">{{ reddah.instant('About.Location') }}</span>
         <ion-icon name="location-outline" color="primary" style="margin-right:5px;"></ion-icon>
-        <ion-label>{{reddah.appData('userlocation_'+userName)}}</ion-label>
+        <ion-label>{{reddah.getDisplayLocationName(userName,100)}}</ion-label>
     </ion-item>
 
     <ion-item lines="none" class="common-splitter" *ngIf="reddah.appData('userlan_'+userName)">

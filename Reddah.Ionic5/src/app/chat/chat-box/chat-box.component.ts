@@ -161,7 +161,7 @@ export class ChatBoxComponent implements OnInit {
     async startSpeak(){
         this.isPressed=true;
         this.speakDesc = this.reddah.instant('Pop.ReleaseSend');
-        if (this.platform.is('cordova')) {
+        if (this.reddah.isMobile()) {
             
 
     /*
@@ -198,7 +198,7 @@ export class ChatBoxComponent implements OnInit {
     async stopSpeak(){
         this.isPressed=false;
         this.speakDesc = this.reddah.instant('Pop.PressSpeak');
-        if (this.platform.is('cordova')) {
+        if (this.reddah.isMobile()) {
             this.audioMediaObj.stopRecord();
         }
     }

@@ -68,8 +68,7 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
         this.isStatusBarLight = !this.authService.authenticated();
-        if(this.reddah.platformTag==="ios"||
-        this.reddah.platformTag==="android")
+        if(this.reddah.isMobile())
         {
             /*StatusBar.setStyle({
                 style: this.isStatusBarLight ? StatusBarStyle.Dark : StatusBarStyle.Light
@@ -99,8 +98,7 @@ export class AppComponent {
       let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
       let defaultLocale ="en-US"
       if(currentLocale==null){
-          if(this.reddah.platformTag==="ios"||
-            this.reddah.platformTag==="android")
+          if(this.reddah.isMobile())
           { 
               this.globalization.getPreferredLanguage()
               .then(res => {

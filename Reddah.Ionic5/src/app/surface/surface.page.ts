@@ -38,7 +38,7 @@ export class SurfacePage implements OnInit {
         let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
         let defaultLocale ="en-US"
         if(currentLocale==null){
-            if(this.platform.is('cordova'))
+            if(this.reddah.isMobile())
             { 
                 this.globalization.getPreferredLanguage()
                 .then(res => {

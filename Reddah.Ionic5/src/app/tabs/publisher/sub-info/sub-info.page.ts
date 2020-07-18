@@ -40,7 +40,7 @@ export class SubInfoPage implements OnInit {
         private platform: Platform,
     ) { 
         this.userName = this.reddah.getCurrentUser();
-        this.isCordova = this.platform.is('cordova')
+        this.isCordova = this.reddah.isMobile()
     }
 
     showLoading=false;

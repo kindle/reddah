@@ -151,7 +151,7 @@ export class MessageListPage implements OnInit {
                         }
                     });
 
-                    if(this.platform.is('cordova')){
+                    if(this.reddah.isMobile()){
                         this.reddah.notify(title, text);
                     }
                 }

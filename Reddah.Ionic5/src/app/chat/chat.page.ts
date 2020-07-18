@@ -11,7 +11,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
-import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 import { VideoViewerComponent } from '../common/video-viewer/video-viewer.component';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
@@ -59,7 +58,7 @@ export class ChatBase{
 
     async playVideo(comment){
         let key = comment.Content.toString().toLowerCase();
-        if(this.platform.is('cordova')){
+        if(this.reddah.isMobile()){
             let isLocal = this.reddah.isLocal(key);
             if(isLocal){//play
                 let localPath = this.reddah.appData(key);
@@ -136,7 +135,6 @@ export class ChatPage extends ChatBase implements OnInit  {
         public localStorageService: LocalStorageService,
         private cacheService: CacheService,
         private media: Media,
-        private nativeAudio: NativeAudio,
         private transfer: FileTransfer, 
         private file: File,
         public platform: Platform,
@@ -256,7 +254,7 @@ export class ChatPage extends ChatBase implements OnInit  {
                     event.target.complete();
                 }
 
-                if(this.platform.is('cordova'))
+                if(this.reddah.isMobile())
                 {
                     this.messages.forEach((comment:any)=>{
                         if(comment.Type==1&&comment.Duration>=0)//audio only

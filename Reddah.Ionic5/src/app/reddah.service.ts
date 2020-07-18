@@ -2058,7 +2058,7 @@ export class ReddahService {
     }
 
     async updateUserDeviceInfo(){
-        if(this.platformTag==="android"||this.platformTag==="ios"){ 
+        if(this.isMobile()){ 
             Device.getInfo().then((value: any) => {
                 let info = `${value.platform}_${value.osVersion}_
                     ${value.isVirtual?"Virtual":"Device"}_${value.uuid}_
@@ -2407,7 +2407,7 @@ export class ReddahService {
 
     appDataUserPhoto(cacheKey){  
         let result = this.localStorageService.retrieve(cacheKey); 
-        if(result&&this.platformTag==="android"||this.platformTag==="ios"){
+        if(result&&this.isMobile()){
             return (<any>window).Ionic.WebView.convertFileSrc(result);
         }
 
@@ -2419,7 +2419,7 @@ export class ReddahService {
 
     appDataMap(cacheKey, url){
         let result = this.localStorageService.retrieve(cacheKey); 
-        if(result&&this.platformTag==="android"||this.platformTag==="ios"){
+        if(result&&this.isMobile()){
             return (<any>window).Ionic.WebView.convertFileSrc(result);
         }
 
@@ -2437,7 +2437,7 @@ export class ReddahService {
         let result = this.localStorageService.retrieve(cacheKey);
         
         if(cacheKey.indexOf('userphoto_')>-1){
-            if(result&&this.platformTag==="android"||this.platformTag==="ios"){
+            if(result&&this.isMobile()){
                 return await (<any>window).Ionic.WebView.convertFileSrc(result);
             }
             else{
@@ -2445,7 +2445,7 @@ export class ReddahService {
             }
         }
         else if(cacheKey.indexOf('cover_')>-1){
-            if(result&&this.platformTag==="android"||this.platformTag==="ios"){
+            if(result&&this.isMobile()){
                 return await (<any>window).Ionic.WebView.convertFileSrc(result);
             }
             else{
@@ -2496,7 +2496,7 @@ export class ReddahService {
             return (<any>window).Ionic.WebView.convertFileSrc(preview);
         else
         {
-            if(this.platformTag==="android"||this.platformTag==="ios")
+            if(this.isMobile())
                 this.toFileCache(cacheKey);
             return cacheKey;
         }
@@ -2768,7 +2768,7 @@ export class ReddahService {
     }
 
     GetCache(url){
-        if(this.platformTag==="android"||this.platformTag==="ios"){
+        if(this.isMobile()){
             let org = this.localStorageService.retrieve(url);
             if(org){
                 return (<any>window).Ionic.WebView.convertFileSrc(org);
@@ -2808,6 +2808,11 @@ export class ReddahService {
         let currentUserName = this.getCurrentUser();
         let name = this.appData('usernotename_'+userName+"_"+currentUserName) ? this.appData('usernotename_'+userName+"_"+currentUserName) :
             (this.appData('usernickname_'+userName) ? this.appData('usernickname_'+userName) : userName);
+        return this.summary(name, count, this.getCurrentLocale());    
+    }
+
+    getDisplayLocationName(userName, count=15){
+        let name = this.appData('userlocation_'+userName);
         return this.summary(name, count, this.getCurrentLocale());    
     }
 
@@ -3685,7 +3690,7 @@ export class ReddahService {
         else
             this.localStorageService.clear(`Reddah_ArticleLike_${userName}_${article.Id}`);
 
-        if(this.platformTag==="android"||this.platformTag==="ios"){
+        if(this.isMobile()){
             if(this.getLikeShake()){
                 this.hapticsImpact(HapticsImpactStyle.Light);
                 Haptics.vibrate();
@@ -3696,6 +3701,10 @@ export class ReddahService {
     Vibrate(){
         this.hapticsImpact(HapticsImpactStyle.Light);
         Haptics.vibrate();
+    }
+
+    isMobile(){
+        return this.platformTag=="android"||this.platformTag=="ios";
     }
 
     likeTopic(article, cacheKey, collection){
@@ -3718,7 +3727,7 @@ export class ReddahService {
         else
             this.localStorageService.clear(`Reddah_ArticleLike_${userName}_${article.Id}`);
 
-            if(this.platformTag==="android"||this.platformTag==="ios"){
+            if(this.isMobile()){
             if(this.getLikeShake()){
                 this.hapticsImpact(HapticsImpactStyle.Light);
                 Haptics.vibrate();

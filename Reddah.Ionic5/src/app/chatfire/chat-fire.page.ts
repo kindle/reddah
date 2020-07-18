@@ -9,7 +9,6 @@ import { UserPage } from '../common/user/user.page';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
-import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 import { VideoViewerComponent } from '../common/video-viewer/video-viewer.component';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
@@ -31,11 +30,7 @@ export class ChatFireBase{
         protected streamingMedia: StreamingMedia,
         protected videoEditor: VideoEditor,
         protected platform: Platform,
-        protected nativeAudio: NativeAudio,
     ){
-        if (this.platform.is('cordova')) {
-            this.nativeAudio.preloadSimple('bi', 'assets/sound/bi.mp3')
-        }
     }
 
     userName: string;
@@ -65,7 +60,8 @@ export class ChatFireBase{
             this.audio.play();
             this.audio.addEventListener('ended', ()=>{
                 if(comment.isPlaying){
-                    this.nativeAudio.play("bi");
+                    this.audio.src = 'assets/sound/bi.mp3'; 
+                    this.audio.play();
                 }
                 comment.isPlaying= false;
             });
@@ -104,7 +100,7 @@ export class ChatFireBase{
 
     async playVideo(comment){
         let key = comment.Content.toString().toLowerCase();
-        if(this.platform.is('cordova')){
+        if(this.reddah.isMobile()){
             let isLocal = this.reddah.isLocal(key);
             if(isLocal){//play
                 let localPath = this.reddah.appData(key);
@@ -226,12 +222,11 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         public platform: Platform,
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
-        public nativeAudio: NativeAudio,
         private notification: LocalNotifications,
         //public db: AngularFireDatabase,        
     ) { 
         super(modalController, popoverController, reddah, localStorageService, 
-            streamingMedia, videoEditor, platform, nativeAudio);
+            streamingMedia, videoEditor, platform);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }
@@ -404,7 +399,7 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
                 if(event!=null){
                     event.target.complete();
                 }
-                /*if(this.platform.is('cordova'))
+                /*if(this.reddah.isMobile())
                 {
                     this.messages.forEach((comment:any)=>{
                         if(comment.Type==1&&comment.Duration>=0)//audio only
@@ -446,7 +441,7 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
 
     //async play(audioFileName){
         /*
-        if(this.platform.is('cordova')){
+        if(this.reddah.isMobile()){
             let target = this.reddah.getDeviceDirectory() +"reddah/";
             //let target = this.file.applicationStorageDirectory;
             alert(target+audioFileName)

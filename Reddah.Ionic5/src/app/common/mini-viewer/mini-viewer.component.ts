@@ -88,7 +88,7 @@ export class MiniViewerComponent implements OnInit {
         //non-native api
         this.initApi();
 
-        if(this.platform.is('cordova')){
+        if(this.reddah.isMobile()){
             this.initNativeApi();
         }
     }

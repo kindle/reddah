@@ -223,7 +223,7 @@ export class GroupChatPage extends ChatBase implements OnInit {
                     event.target.complete();
                 }
 
-                if(this.platform.is('cordova'))
+                if(this.reddah.isMobile())
                 {
                     this.messages.forEach((comment:any)=>{
                         if(comment.Type==1&&comment.Duration>=0)//audio only

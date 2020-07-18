@@ -38,7 +38,7 @@ export class ImageViewerComponent implements OnInit {
     isCordova = true;
     //0: web preview url, 1:local preview, 2: on-going, 3: local org, 
     ngOnInit() {
-        this.isCordova = this.platform.is('cordova');
+        this.isCordova = this.reddah.isMobile();
         this.slideOpts = {
             centeredSlides: 'true',
             initialSlide: this.index,

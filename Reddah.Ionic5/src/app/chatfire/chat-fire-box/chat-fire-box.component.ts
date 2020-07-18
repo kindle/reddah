@@ -7,7 +7,6 @@ import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 //import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
-import { NativeAudio } from '@ionic-native/native-audio/ngx';
 //import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
@@ -36,15 +35,11 @@ export class ChatFireBoxComponent implements OnInit {
         private media: Media,
         private platform: Platform,
         private videoEditor: VideoEditor,
-        private nativeAudio: NativeAudio,
         private camera: Camera,
         private mediaCapture: MediaCapture,
         //private imageResizer: ImageResizer,
         //public db: AngularFireDatabase,
     ) { 
-        if (this.reddah.platformTag=='ios'||this.reddah.platformTag=='android') {
-            this.nativeAudio.preloadSimple('xiu', 'assets/sound/xiu.mp3')
-        }
     }
 
     ngOnInit() {
@@ -200,7 +195,7 @@ export class ChatFireBoxComponent implements OnInit {
         this.isPressed=true;
         this.speakPress.emit();
         this.speakDesc = this.reddah.instant('Pop.ReleaseSend');
-        if (this.reddah.platformTag=='ios'||this.reddah.platformTag=='android') {
+        if (this.reddah.isMobile()) {
             this.reddah.Vibrate();
 
     /*
@@ -236,13 +231,14 @@ export class ChatFireBoxComponent implements OnInit {
         }
     }
 
-
+    audio = new Audio();
     async stopSpeak(){
         this.isPressed=false;
         this.speakUnPress.emit();
         this.speakDesc = this.reddah.instant('Pop.PressSpeak');
-        if (this.reddah.platformTag=='ios'||this.reddah.platformTag=='android') {
-            this.nativeAudio.play("xiu");
+        if (this.reddah.isMobile()) {
+            this.audio.src = 'assets/sound/xiu.mp3'; 
+            this.audio.play();
             this.audioMediaObj.stopRecord();
         }
     }
