@@ -10,7 +10,6 @@ import { VideoViewerComponent } from '../../common/video-viewer/video-viewer.com
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
 import { ChatPopPage } from '../../common/chat-pop.page';
-import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { ChatOptPage } from '../../chat/chat-opt/chat-opt.page';
 import { UserPage } from '../user/user.page';
 import { CacheService } from 'ionic-cache';
@@ -51,7 +50,6 @@ export class MysticPage implements OnInit {
         public platform: Platform,
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
-        public clipboard: Clipboard,
         private cacheService: CacheService,
         private zone: NgZone,   
     ) { 
@@ -136,7 +134,7 @@ export class MysticPage implements OnInit {
         
         if(data==1)//copy
         {
-            this.clipboard.copy(content);
+            this.reddah.Clipboard(content);
         }
     }
 

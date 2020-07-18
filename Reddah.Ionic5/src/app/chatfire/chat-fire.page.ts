@@ -15,7 +15,6 @@ import { VideoViewerComponent } from '../common/video-viewer/video-viewer.compon
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
 import { ChatPopPage } from '../common/chat-pop.page';
-import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Directive()
@@ -32,7 +31,6 @@ export class ChatFireBase{
         protected streamingMedia: StreamingMedia,
         protected videoEditor: VideoEditor,
         protected platform: Platform,
-        protected clipboard: Clipboard,
         protected nativeAudio: NativeAudio,
     ){
         if (this.platform.is('cordova')) {
@@ -193,7 +191,7 @@ export class ChatFireBase{
         
         if(data==1)//copy
         {
-            this.clipboard.copy(content);
+            this.reddah.Clipboard(content);
         }
     }
 
@@ -228,13 +226,12 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         public platform: Platform,
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
-        public clipboard: Clipboard,
         public nativeAudio: NativeAudio,
         private notification: LocalNotifications,
         //public db: AngularFireDatabase,        
     ) { 
         super(modalController, popoverController, reddah, localStorageService, 
-            streamingMedia, videoEditor, platform, clipboard, nativeAudio);
+            streamingMedia, videoEditor, platform, nativeAudio);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }

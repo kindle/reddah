@@ -43,7 +43,6 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 //import { LazyLoadImageModule, intersectionObserverPreset, LoadImageProps, SetLoadedImageProps } from 'ng-lazyload-image';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 //import { Network } from '@ionic-native/network/ngx';
-import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { AppRate } from '@ionic-native/app-rate/ngx';
 
 //import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -358,7 +357,7 @@ providers: [
     AlertController,
     AuthService,
     AndroidPermissions,
-    Camera,Clipboard,
+    Camera,
     Keyboard,
     //Network,
     Shake,

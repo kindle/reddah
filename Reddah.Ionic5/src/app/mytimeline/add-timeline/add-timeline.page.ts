@@ -189,7 +189,7 @@ export class AddTimelinePage implements OnInit {
         });
         await loading.present();
         
-        this.formData.append('thoughts', this.yourThoughts);
+        this.formData.append('thoughts', this.yourThoughts?this.yourThoughts:this.reddah.instant("About.DefaultSignature"));
         this.formData.append('location', JSON.stringify(this.location));
         //send the key in UI display order
         this.formData.append('order', this.photos.map(e=>e.fileUrl).join(","));
@@ -203,7 +203,7 @@ export class AddTimelinePage implements OnInit {
         else if(this.action=="topic"){
             this.formData.append('type', JSON.stringify(6));
             if(this.mini==null){
-                this.formData.append('abstract', this.topicChoose?this.topicChoose:"");
+                this.formData.append('abstract', this.topicChoose?this.topicChoose:this.reddah.instant("Article.Topic"));
             }
             else{
                 this.formData.append('abstract', this.mini.UserName);

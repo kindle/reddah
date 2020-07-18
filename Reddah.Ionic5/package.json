@@ -31,7 +31,6 @@
     "@ionic-native/app-update": "^5.26.0",
     "@ionic-native/app-version": "^5.26.0",
     "@ionic-native/camera": "^5.26.0",
-    "@ionic-native/clipboard": "^5.26.0",
     "@ionic-native/core": "^5.0.7",
     "@ionic-native/crop": "^5.26.0",
     "@ionic-native/device": "^5.26.0",

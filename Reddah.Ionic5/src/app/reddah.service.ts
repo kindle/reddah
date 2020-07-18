@@ -20,7 +20,8 @@ import { Router } from '@angular/router';
 //import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer/ngx';
 
 import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, LocalNotifications,
-    CameraPhoto, CameraSource, HapticsImpactStyle } from '@capacitor/core';
+    CameraPhoto, CameraSource, HapticsImpactStyle, Clipboard } from '@capacitor/core';
+    
 import { Crop } from '@ionic-native/crop/ngx';
     
 const { Browser, Camera, Filesystem, Haptics, Device, Storage } = Plugins;
@@ -129,7 +130,9 @@ export class ReddahService {
     }
 
 
-
+    Clipboard(content){
+        Clipboard.write({ string: content });
+    }
 
     constructor(
         private http: HttpClient,
@@ -3688,6 +3691,11 @@ export class ReddahService {
                 Haptics.vibrate();
             }
         }
+    }
+
+    Vibrate(){
+        this.hapticsImpact(HapticsImpactStyle.Light);
+        Haptics.vibrate();
     }
 
     likeTopic(article, cacheKey, collection){

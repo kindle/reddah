@@ -5,7 +5,6 @@ import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
 //import 'hammerjs';
 import { ReddahService } from '../../reddah.service';
-import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @Component({
     selector: 'app-image-viewer',
@@ -31,7 +30,6 @@ export class ImageViewerComponent implements OnInit {
         private toastController: ToastController,
         private actionSheetController: ActionSheetController,
         public reddah: ReddahService,
-        private clipboard: Clipboard,
         private platform: Platform,
         private zone: NgZone,
     ) {
@@ -182,7 +180,7 @@ export class ImageViewerComponent implements OnInit {
                     icon: 'copy-outline',
                     handler: () => {
                         let url = item.webPreviewUrl;
-                        this.clipboard.copy(url);
+                        this.reddah.Clipboard(url);
                         this.reddah.toast(url, "primary");
                     }
                 },

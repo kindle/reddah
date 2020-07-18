@@ -7,7 +7,6 @@ import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 //import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
-import { Vibration } from '@ionic-native/vibration/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 //import { AngularFireDatabase } from '@angular/fire/database';
 
@@ -37,14 +36,13 @@ export class ChatFireBoxComponent implements OnInit {
         private media: Media,
         private platform: Platform,
         private videoEditor: VideoEditor,
-        private vibration: Vibration,
         private nativeAudio: NativeAudio,
         private camera: Camera,
         private mediaCapture: MediaCapture,
         //private imageResizer: ImageResizer,
         //public db: AngularFireDatabase,
     ) { 
-        if (this.platform.is('cordova')) {
+        if (this.reddah.platformTag=='ios'||this.reddah.platformTag=='android') {
             this.nativeAudio.preloadSimple('xiu', 'assets/sound/xiu.mp3')
         }
     }
@@ -202,8 +200,8 @@ export class ChatFireBoxComponent implements OnInit {
         this.isPressed=true;
         this.speakPress.emit();
         this.speakDesc = this.reddah.instant('Pop.ReleaseSend');
-        if (this.platform.is('cordova')) {
-            this.vibration.vibrate(200);
+        if (this.reddah.platformTag=='ios'||this.reddah.platformTag=='android') {
+            this.reddah.Vibrate();
 
     /*
             let fileName = this.reddah.generateFileName()+".m4a";
@@ -243,7 +241,7 @@ export class ChatFireBoxComponent implements OnInit {
         this.isPressed=false;
         this.speakUnPress.emit();
         this.speakDesc = this.reddah.instant('Pop.PressSpeak');
-        if (this.platform.is('cordova')) {
+        if (this.reddah.platformTag=='ios'||this.reddah.platformTag=='android') {
             this.nativeAudio.play("xiu");
             this.audioMediaObj.stopRecord();
         }

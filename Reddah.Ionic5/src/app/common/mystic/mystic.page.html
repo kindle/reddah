@@ -28,7 +28,7 @@
                         <div style="margin-right:-40px;margin-top:5px;" *ngIf="comment.Type==0&&comment.Id==null">
                             <ion-spinner name="crescent"></ion-spinner>
                         </div>
-                        <div class="chat-box-me" (press)="showChatMenu($event, comment.Content)" (click)="copyToInput(comment.Content)"
+                        <div class="chat-box-me" (press)="showChatMenu($event, comment.Content)" (click)="copyToInput(comment)"
                         [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'" *ngIf="comment.Type==0"></div>
                         <div class="chat-box-me-1" *ngIf="comment.Type==1" (click)="play(comment)">
                             <ion-icon slot="start" name="wifi-outline"size="large" 

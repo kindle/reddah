@@ -15,7 +15,6 @@ import { VideoEditor } from '@ionic-native/video-editor/ngx'
 //import { AngularFireDatabase } from 'angularfire2/database';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 import { ChatFireBase } from './chat-fire.page';
-import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
@@ -46,13 +45,12 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
         public platform: Platform,
         public streamingMedia: StreamingMedia,
         public videoEditor: VideoEditor,
-        public clipboard: Clipboard,
         public nativeAudio: NativeAudio,
         private notification: LocalNotifications,
         //public db: AngularFireDatabase,
     ) { 
         super(modalController, popoverController, reddah, localStorageService, 
-            streamingMedia, videoEditor, platform, clipboard, nativeAudio);
+            streamingMedia, videoEditor, platform, nativeAudio);
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
     }
