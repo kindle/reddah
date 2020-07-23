@@ -5,7 +5,6 @@ import { Article } from '../model/article';
 import { LoadingController, NavController, ModalController, PopoverController } from '@ionic/angular';
 import { PostviewerPage } from '../postviewer/postviewer.page';
 import { CacheService } from "ionic-cache";
-import { BookmarkPopPage } from '../common/bookmark-pop.page';
 import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 import { UserPage } from '../common/user/user.page';
 
@@ -32,7 +31,6 @@ export class ActiveUsersPage implements OnInit {
         public reddah : ReddahService,
         public loadingController: LoadingController,
         public navController: NavController,
-        private popoverController: PopoverController,
         public modalController: ModalController,
         private cacheService: CacheService,
 
@@ -62,7 +60,8 @@ export class ActiveUsersPage implements OnInit {
             if(result.Success==0){
                 for(let activeUserName of result.Message){
                     this.activeUsers.push(activeUserName);
-                    this.loadedIds.push(activeUserName);  
+                    this.loadedIds.push(activeUserName); 
+                    this.reddah.getUserPhotos(activeUserName); 
                 }
             }
             else{

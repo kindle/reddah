@@ -102,8 +102,10 @@ export class GroupChatPage extends ChatBase implements OnInit {
 
         if(path==null){
             this.fileTransfer = this.transfer.create();  
-            let target = this.reddah.getDeviceDirectory() +"reddah/"+ guidName;
-            this.file.checkFile(this.reddah.getDeviceDirectory() +"reddah/", guidName)
+            //let target = this.reddah.getDeviceDirectory() +"reddah/"+ guidName;
+            let target = this.reddah.getDeviceDirectory() + guidName;
+            //this.file.checkFile(this.reddah.getDeviceDirectory() +"reddah/", guidName)
+            this.file.checkFile(this.reddah.getDeviceDirectory(), guidName)
             //let target = this.file.applicationStorageDirectory + guidName;
             //this.file.checkFile(this.file.applicationStorageDirectory, guidName)
             .then(_ =>{
@@ -122,7 +124,8 @@ export class GroupChatPage extends ChatBase implements OnInit {
     }
 
     async play(audioFileName){
-        let target = this.reddah.getDeviceDirectory() +"reddah/";
+        //let target = this.reddah.getDeviceDirectory() +"reddah/";
+        let target = this.reddah.getDeviceDirectory();
         //let target = this.file.applicationStorageDirectory;
 
         //error handling, check again

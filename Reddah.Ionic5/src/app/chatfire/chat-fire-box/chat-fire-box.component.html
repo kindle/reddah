@@ -13,6 +13,7 @@
         <ion-icon slot="end" name="add-circle-outline" size="medium" (click)="toggleFunctionPanel()" *ngIf="!commentContent"></ion-icon>-->
         <ion-button slot="end" (click)="submit()" color="primary" *ngIf="commentContent" [disabled]="selectedArticleId<0">{{ reddah.instant('Confirm.Submit') }}</ion-button>
     </ion-item>
+    
     <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
     <!--
     <ion-slides [options]="slideOpts" [pager]="true" *ngIf="showFunctionPanel" class="optionPanel">

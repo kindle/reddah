@@ -100,10 +100,10 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
 
         if(path==null){
             this.fileTransfer = this.transfer.create();  
-            let target = this.reddah.getDeviceDirectory() +"reddah/"+ guidName;
-            this.file.checkFile(this.reddah.getDeviceDirectory() +"reddah/", guidName)
-            //let target = this.file.applicationStorageDirectory + guidName;
-            //this.file.checkFile(this.file.applicationStorageDirectory, guidName)
+            //let target = this.reddah.getDeviceDirectory() +"reddah/"+ guidName;
+            //this.file.checkFile(this.reddah.getDeviceDirectory() +"reddah/", guidName)
+            let target = this.file.applicationStorageDirectory + guidName;
+            this.file.checkFile(this.file.applicationStorageDirectory, guidName)
             .then(_ =>{
                 this.localStorageService.store(guidName, target);
             })

@@ -421,8 +421,10 @@ export class ChatFirePage extends ChatFireBase implements OnInit  {
         let path = this.localStorageService.retrieve(guidName);
 
         if(path==null){
-            let target = this.reddah.getDeviceDirectory() +"reddah/"+ guidName;
-            this.file.checkFile(this.reddah.getDeviceDirectory() +"reddah/", guidName)
+            //let target = this.reddah.getDeviceDirectory() +"reddah/"+ guidName;
+            let target = this.reddah.getDeviceDirectory()+ guidName;
+            //this.file.checkFile(this.reddah.getDeviceDirectory() +"reddah/", guidName)
+            this.file.checkFile(this.reddah.getDeviceDirectory(), guidName)
             .then(_ =>{
                 this.localStorageService.store(guidName, target);
             })

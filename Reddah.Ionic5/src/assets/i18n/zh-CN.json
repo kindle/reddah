@@ -420,7 +420,7 @@
     },
 
     "FedLogin":{
-        "FailedTitle":"登入失敗",
-        "FailedMessage":"請重新登入"
+        "FailedTitle":"登录失败",
+        "FailedMessage":"请重试"
     }
 }

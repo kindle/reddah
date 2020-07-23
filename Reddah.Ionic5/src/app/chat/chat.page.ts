@@ -276,8 +276,10 @@ export class ChatPage extends ChatBase implements OnInit  {
         let path = this.localStorageService.retrieve(guidName);
 
         if(path==null){
-            let target = this.reddah.getDeviceDirectory() +"reddah/"+ guidName;
-            this.file.checkFile(this.reddah.getDeviceDirectory() +"reddah/", guidName)
+            //let target = this.reddah.getDeviceDirectory() +"reddah/"+ guidName;
+            let target = this.reddah.getDeviceDirectory() + guidName;
+            //this.file.checkFile(this.reddah.getDeviceDirectory() +"reddah/", guidName)
+            this.file.checkFile(this.reddah.getDeviceDirectory(), guidName)
             .then(_ =>{
                 this.localStorageService.store(guidName, target);
             })
@@ -295,7 +297,8 @@ export class ChatPage extends ChatBase implements OnInit  {
     }
 
     async play(audioFileName){
-        let target = this.reddah.getDeviceDirectory() +"reddah/";
+        //let target = this.reddah.getDeviceDirectory() +"reddah/";
+        let target = this.reddah.getDeviceDirectory();
         //let target = this.file.applicationStorageDirectory;
 
         //error handling, check again

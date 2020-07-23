@@ -17,10 +17,11 @@ import { DatePipe } from '@angular/common';
 import { Md5 } from 'ts-md5/dist/md5';
 import { createAnimation } from '@ionic/core'
 import { Router } from '@angular/router';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 //import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer/ngx';
 
 import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, LocalNotifications,
-    CameraPhoto, CameraSource, HapticsImpactStyle, Clipboard } from '@capacitor/core';
+    CameraPhoto, CameraSource, HapticsImpactStyle } from '@capacitor/core';
     
 import { Crop } from '@ionic-native/crop/ngx';
     
@@ -131,7 +132,7 @@ export class ReddahService {
 
 
     Clipboard(content){
-        Clipboard.write({ string: content });
+        this.clipboard.copy(content);
     }
 
     constructor(
@@ -149,6 +150,7 @@ export class ReddahService {
         private ngZone: NgZone,
         private router: Router,
         private crop: Crop,
+        private clipboard: Clipboard,
         //private imageResizer: ImageResizer
     ) { 
         
@@ -2519,7 +2521,8 @@ export class ReddahService {
         if(cachedFilePath==null){
             webUrl = webUrl.replace("///","https://");
             let webFileName = this.getFileName(webUrl);
-            let targetUrl = deviceDirectory+"reddah/" + webFileName;
+            //let targetUrl = deviceDirectory+"reddah/" + webFileName;
+            let targetUrl = deviceDirectory+ webFileName;
             //alert(webFileName+"____"+targetUrl)
             this.fileTransfer = this.transfer.create();  
             this.fileTransfer.download(webUrl, targetUrl).then(
@@ -2548,10 +2551,13 @@ export class ReddahService {
         let dir = this.file.externalRootDirectory;
         if(this.platformTag === 'android')
         {
-            dir = this.file.externalApplicationStorageDirectory;
+            //dir = this.file.externalApplicationStorageDirectory;//android/data/com.reddah.app/
+            //dir = this.file.externalDataDirectory;//android/data/com.reddah.app/file/
+            //dir = this.file.externalCacheDirectory; //android/data/com.reddah.app/cache/
+            dir = this.file.externalDataDirectory;
         }
         else if(this.platformTag === 'ios'){
-            dir = this.file.cacheDirectory;
+            dir = this.file.externalDataDirectory;
         }
         else {
             
@@ -2584,7 +2590,8 @@ export class ReddahService {
 
             let cacheImageName = "";
             if(cachedImagePath!=null){
-                cacheImageName = cachedImagePath.replace(deviceDirectory+"reddah/","");
+                //cacheImageName = cachedImagePath.replace(deviceDirectory+"reddah/","");
+                cacheImageName = cachedImagePath.replace(deviceDirectory,"");
             }
 
             
@@ -2593,7 +2600,8 @@ export class ReddahService {
 
             if(cachedImagePath==null||cacheImageName!=webImageName){
                 this.fileTransfer = this.transfer.create();
-                let targetUrl = deviceDirectory+"reddah/" + webImageName;
+                //let targetUrl = deviceDirectory+"reddah/" + webImageName;
+                let targetUrl = deviceDirectory + webImageName;
                 this.fileTransfer.download(webUrl, targetUrl).then(
                 _ => {
                     this.localStorageService.store(cacheKey, targetUrl);
@@ -3232,7 +3240,8 @@ export class ReddahService {
         let deviceDirectory = this.getDeviceDirectory();
 
         this.fileTransfer = this.transfer.create();  
-        let targetUrl = deviceDirectory+"reddah/mini/" + miniName;
+        //let targetUrl = deviceDirectory+"reddah/mini/" + miniName;
+        let targetUrl = deviceDirectory+"mini/" + miniName;
         this.fileTransfer.download(webUrl, targetUrl).then(
         _ => {
             let localUrl = (<any>window).Ionic.WebView.convertFileSrc(targetUrl);
@@ -3415,10 +3424,36 @@ export class ReddahService {
         photos.push(savedImageFile);
     }
 
+    async uploadFileByPath(path, formData) {
+        const fileName = new Date().getTime() + '.jpeg';
+        const base64Data = await this.readAsBase64FromCrop(path);
+        formData.append(fileName, this.b64toBlob(base64Data), fileName);
+    }
+
     async uploadPictureFromCrop(cameraPhotoPath, formData) {
         const fileName = new Date().getTime() + '.jpeg';
         const base64Data = await this.readAsBase64FromCrop(cameraPhotoPath);
         formData.append(fileName, this.b64toBlob(base64Data), fileName);
+    }
+
+    async uploadAudio(fileName, cameraPhotoPath, formData) {
+        const base64Data = await this.readAsBase64FromCrop(cameraPhotoPath);
+        formData.append(fileName, this.b64toBlob(base64Data), fileName);
+        this.addAudioChat(formData).subscribe(result => 
+        {
+            if(result.Success==0)
+            { 
+                console.log("success");
+            }
+            else
+            {
+                console.log(result.Message);
+            }
+            
+        },
+        error=>{
+            console.error(JSON.stringify(error));
+        });
     }
 
     async uploadPictureFromResize(cameraPhotoPath, formData, fileNamePreview) {
@@ -3433,11 +3468,14 @@ export class ReddahService {
         const base64Data = await this.readAsBase64(cameraPhoto);
 
         formData.append(fileName, this.b64toBlob(base64Data), fileName);
-        //should be compressed
-        //formData.append(fileNamePreview, this.b64toBlob(base64Data), fileNamePreview);
+
+        console.log("A"+cameraPhoto.path);
+
         this.crop.crop(cameraPhoto.path, {quality: 50, targetWidth: 800, targetHeight: 800})
         .then(
+            
             newCropImageData => {
+                console.log("B"+newCropImageData)
                 this.uploadPictureFromResize(newCropImageData, formData, fileNamePreview);
             },
             error => console.error('Error cropping image', error)
@@ -3472,7 +3510,7 @@ export class ReddahService {
         return blob;
     }
 
-    private async readAsBase64FromCrop(cameraPhotoPath) {
+    public async readAsBase64FromCrop(cameraPhotoPath) {
         const file = await Filesystem.readFile({
             path: cameraPhotoPath
         });

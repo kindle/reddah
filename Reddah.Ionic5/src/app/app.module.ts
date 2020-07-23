@@ -15,9 +15,8 @@ import { AlertController, ActionSheetController,
          ModalController, MenuController, NavController } from '@ionic/angular';
 import { DatePipe } from '@angular/common';
 
-import { AppVersion } from '@ionic-native/app-version/ngx';
-import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { Crop } from '@ionic-native/crop/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -350,13 +349,11 @@ exports:[
 providers: [
     ActionSheetController,
     NavController,
-    AppVersion,
-    AppUpdate,
     AppRate,
     AlertController,
     AuthService,
     AndroidPermissions,
-    Camera,
+    Camera,Clipboard,
     Keyboard,
     //Network,
     Shake,

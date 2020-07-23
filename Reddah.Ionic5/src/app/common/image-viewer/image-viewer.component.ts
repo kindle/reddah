@@ -260,9 +260,11 @@ export class ImageViewerComponent implements OnInit {
         let orgImageUrl = item.webPreviewUrl.replace("///","https://").replace("_reddah_preview","");
         let orgImageFileName = this.getFileName(item.previewImageFileName.replace("_reddah_preview",""));
         //this.fileTransfer.download(orgImageUrl, this.file.applicationStorageDirectory + orgImageFileName).then((entry) => {
-        this.fileTransfer.download(orgImageUrl, this.reddah.getDeviceDirectory()+"reddah/" + orgImageFileName).then((entry) => {
+        //this.fileTransfer.download(orgImageUrl, this.reddah.getDeviceDirectory()+"reddah/" + orgImageFileName).then((entry) => {
+        this.fileTransfer.download(orgImageUrl, this.reddah.getDeviceDirectory() + orgImageFileName).then((entry) => {
             //let localFileImageUrl = this.file.applicationStorageDirectory + orgImageFileName;
-            let localFileImageUrl = this.reddah.getDeviceDirectory() + "reddah/" + orgImageFileName;
+            //let localFileImageUrl = this.reddah.getDeviceDirectory() + "reddah/" + orgImageFileName;
+            let localFileImageUrl = this.reddah.getDeviceDirectory() + orgImageFileName;
             this.localStorageService.store(item.webPreviewUrl.replace("_reddah_preview",""), localFileImageUrl);
             //this.reddah.appPhoto[item.webPreviewUrl] = (<any>window).Ionic.WebView.convertFileSrc(localFileImageUrl);
             for(let i=0;i<this.imgSourceArray.length;i++){

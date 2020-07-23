@@ -7,6 +7,7 @@ import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 //import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
+import { Filesystem } from '@capacitor/core';
 //import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
@@ -215,9 +216,11 @@ export class ChatFireBoxComponent implements OnInit {
             //let fileName = this.reddah.generateFileName()+".mp3";
             //let fileName = this.reddah.generateFileName()+".wav";
             let fileName = this.reddah.generateFileName()+".m4a";
-            let filePath = this.reddah.getDeviceDirectory().replace(/^file:\/\//, '') + "/reddah/" + fileName;
+            //let filePath = this.reddah.getDeviceDirectory().replace(/^file:\/\//, '') + fileName;
+            let filePath = this.reddah.getDeviceDirectory() + fileName;
             //let filePath = this.file.applicationStorageDirectory.replace(/^file:\/\//, '') + fileName;
             this.audioMediaObj = this.media.create(filePath);
+            console.log(filePath);
             //this.localStorageService.store(fileName, target);
             this.audioMediaObj.startRecord();
             this.audioMediaObj.onSuccess.subscribe(() => {
@@ -243,12 +246,14 @@ export class ChatFireBoxComponent implements OnInit {
         }
     }
 
-    uploadAudio(fileName){
+    
+    async uploadAudio(fileName){
         let formData = new FormData();
         formData.append("ArticleId", JSON.stringify(this.selectedArticleId));
         formData.append("ParentCommentId", JSON.stringify(this.selectedCommentId));
         
-        let fullPath = this.reddah.getDeviceDirectory() +"reddah/"+ fileName;
+        //let fullPath = this.reddah.getDeviceDirectory() +"reddah/"+ fileName;
+        let fullPath = this.reddah.getDeviceDirectory() + fileName;
         //let fullPath = this.file.applicationStorageDirectory + fileName;
         
         let temp = this.media.create(fullPath);
@@ -256,41 +261,7 @@ export class ChatFireBoxComponent implements OnInit {
         temp.pause();
         setTimeout(() => {
             formData.append("Duration", JSON.stringify(parseInt(temp.getDuration().toString())));
-            this.file.resolveLocalFilesystemUrl(fullPath)
-            .then(entry => {
-                (<FileEntry> entry).file(file => {
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                        const imgBlob = new Blob([reader.result], {
-                            type: file.type
-                        });
-                        formData.append(file.name, imgBlob, file.name);
-                        
-                        this.reddah.addAudioChat(formData).subscribe(result => 
-                        {
-                            if(result.Success==0)
-                            { 
-                                //todo not work
-                                this.reloadComments.emit();
-                            }
-                            else
-                            {
-                                alert(result.Message);
-                            }
-                            
-                        },
-                        error=>{
-                            //console.error(JSON.stringify(error));
-                            alert(JSON.stringify(error));
-                        });
-                    };
-                    reader.readAsArrayBuffer(file);
-                })
-            })
-            .catch(err => {
-                console.error(JSON.stringify(err));
-                alert(JSON.stringify(err));
-            });
+            this.reddah.uploadAudio(fileName, fullPath, formData);
         }, 1000)
         temp.release();
     }
