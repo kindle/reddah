@@ -66,7 +66,7 @@
         <div style="display: flex; justify-content: center;"><ion-spinner name="dots" 
             *ngIf="showLoading"></ion-spinner></div>
         <ion-item *ngFor="let article of articles;index as i" lines="none" (click)="editArticle(article)" class="borderTop borderItem borderBottom">
-            <ion-icon slot="start" name="clipboard" color="dark" size="medium"></ion-icon>
+            <ion-icon slot="start" name="clipboard-outline" color="dark" size="medium"></ion-icon>
             <ion-label>{{i+1}} {{reddah.htmlDecode(article.Title)}}</ion-label>
             <ion-note slot="end">{{reddah.getSendTime(article.LastUpdateOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
             <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>

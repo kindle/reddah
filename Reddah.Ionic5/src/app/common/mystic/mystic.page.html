@@ -22,7 +22,7 @@
         <ion-row *ngIf="comment.Type==0||comment.Type==1||comment.Type==4||comment.Type==5">
             <ion-col style="padding:0;">
                 <div class="container-right" *ngIf="userName==comment.UserName">
-                    <img [src]="reddah.appData('userphoto_'+comment.UserName)"
+                    <img [src]="reddah.appData('userphoto_'+comment.UserName)" (click)="viewer(0, [reddah.appData('userphoto_'+comment.UserName)])"
                         class="portrait">
                     <div class="arrow-box-right" *ngIf="comment.Type<2">
                         <div style="margin-right:-40px;margin-top:5px;" *ngIf="comment.Type==0&&comment.Id==null">

@@ -29,7 +29,7 @@
             <ion-card-content style="display:block;" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                 <div class="parent" *ngIf="article.Content.split('$$$').length>6">
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                        <img [id]="reddah.makeItId(image)" 
+                        <img [id]="reddah.makeItId2(image,'tsv')" 
                             (load)="reddah.adjustImage(image, 'tsv')"
                             [src]="reddah.level2Cache(image)"
                             class="picture" 
@@ -38,7 +38,7 @@
                 </div>
                 <div class="parent" *ngIf="article.Content.split('$$$').length==3||article.Content.split('$$$').length==5||article.Content.split('$$$').length==6">
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                        <img [id]="reddah.makeItId(image+'tsv')" 
+                        <img [id]="reddah.makeItId2(image,'tsv')" 
                             (load)="reddah.adjustImage(image, 'tsv')" 
                             [src]="reddah.level2Cache(image)"
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
@@ -46,7 +46,7 @@
                 </div>
                 <div class="parent2" *ngIf="article.Content.split('$$$').length==2||article.Content.split('$$$').length==4">
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
-                        <img [id]="reddah.makeItId(image+'tsv')" 
+                        <img [id]="reddah.makeItId2(image,'tsv')" 
                             (load)="reddah.adjustImage(image, 'tsv')" 
                             [src]="reddah.level2Cache(image)"
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
@@ -54,7 +54,7 @@
                 </div>
                 <div class="parent3" *ngIf="article.Content.split('$$$').length==1">
                     <div class="container3">
-                        <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'tsv')" 
+                        <img [id]="reddah.makeItId2(article.Content.split('$$$')[0],'tsv')" 
                             (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'tsv')" 
                             [src]="reddah.level2Cache(article.Content.split('$$$')[0])"
                             class="picture3" (click)="viewer(0, article.Content.split('$$$'))">
@@ -72,19 +72,19 @@
         </div>
     </div>
     <div style="margin:0 10px;">
-        <ion-item no-padding lines="none" *ngIf="reddah.getAllowedNames(article.GroupName).length>0">
+        <ion-item style="--inner-padding-end:5px;" lines="none" *ngIf="reddah.getAllowedNames(article.GroupName).length>0">
             <div style="width: 100%;">
                 <div class="like-arrow-up"></div>
                 <div class="likeSection">
                     <ion-icon name="heart-outline" color="danger" class="likeIcon" style="font-size:15px;"></ion-icon>
                     <span class="likeUserName">
-                        <img [src]="reddah.appData('userphoto_'+user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName)" (click)="goUser(user.userName)"
+                        <img [src]="reddah.appDataUserPhoto('userphoto_'+user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName)" (click)="goUser(user.userName)"
                         style="margin:0 3px;width:35px;height:35px;">
                     </span>
                 </div>
             </div>
         </ion-item>
-        <ion-item no-padding lines="none" *ngIf="commentData.get(article.Id)&&reddah.getAllowedComments(commentData.get(article.Id)).length>0">
+        <ion-item style="--inner-padding-end:5px;" lines="none" *ngIf="commentData.get(article.Id)&&reddah.getAllowedComments(commentData.get(article.Id)).length>0">
             <div style="width: 100%;">
                 <div class="like-arrow-up" *ngIf="reddah.getAllowedNames(article.GroupName).length==0"></div>
                 <div class="like-spliter" *ngIf="reddah.getAllowedNames(article.GroupName).length>0"></div>
@@ -99,11 +99,11 @@
     </div>
 </ion-content>
 <ion-footer *ngIf="isFriend" style="background-color: white;">
-    <ion-item margin-end>
-        <ion-input #newComment id="newComment" placeholder="{{selectedReplyPlaceholder}}" padding-start></ion-input>
-        <ion-icon name="happy-outline"size="medium" margin-end (click)="toggleFacePanel()"></ion-icon>
-        <ion-button (click)="SendComment()" color="primary">{{ reddah.instant('Confirm.Submit') }}</ion-button>
-    </ion-item>
+    <div style="display:flex;">
+        <ion-input #newComment id="newComment" placeholder="{{selectedReplyPlaceholder}}" style="padding-left:5px !important;"></ion-input>
+        <ion-icon style="align-self:center;" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
+        <ion-button (click)="SendComment()" color="primary" [disabled]="newComment.value==null||newComment.value==''">{{ reddah.instant('Confirm.Submit') }}</ion-button>
+    </div>
     
     <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
 </ion-footer>
