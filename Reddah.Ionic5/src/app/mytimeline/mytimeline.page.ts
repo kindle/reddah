@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
-import { IonInfiniteScroll, IonContent, LoadingController, NavController, PopoverController, ModalController, AlertController, Platform, } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent, LoadingController, NavController, PopoverController, ModalController, AlertController, } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TimelinePopPage } from '../common/timeline-pop.page';
@@ -58,7 +58,6 @@ export class MyTimeLinePage implements OnInit {
         private popoverController: PopoverController,
         private cacheService: CacheService,
         private alertController: AlertController,
-        private platform: Platform,
     ){
         this.reddah.reloadLocaleSettings();
         this.userName = this.reddah.getCurrentUser();
@@ -79,7 +78,7 @@ export class MyTimeLinePage implements OnInit {
 
     isAndroid = false;
     ngOnInit(){
-        if(this.platform.is('android')){
+        if(this.reddah.platformTag == 'android'){
             this.isAndroid = true;
         }
         this.reddah.getUserPhotos(this.userName, true);

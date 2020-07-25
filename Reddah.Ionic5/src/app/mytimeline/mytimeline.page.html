@@ -168,7 +168,7 @@
         </ion-infinite-scroll>
     </div>
 </ion-content>
-<ion-footer *ngIf="showAddComment">
+<ion-footer class="safe-area-bottom" *ngIf="showAddComment">
     <div style="display:flex;">
         <ion-input #newComment id="newComment" placeholder="{{selectedReplyPlaceholder}}" style="padding-left:5px !important;"></ion-input>
         <ion-icon style="align-self:center;" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>

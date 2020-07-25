@@ -118,7 +118,7 @@ export class PostviewerPage implements OnInit {
     }
 
     ionViewDidEnter(){
-        console.log(this.article)
+        //console.log(this.article)
         if(!this.preview)
             this.loadComments();
     }
@@ -306,11 +306,11 @@ export class PostviewerPage implements OnInit {
     }
 
     childReloadComments(event){
-        console.log('childReloadComments')
+        //console.log('childReloadComments')
         this.loadComments();
         if(!this.reddah.isPointDone(this.reddah.pointTasks[4])){
             this.reddah.getPointComment().subscribe(data=>{
-                console.log(data)
+                //console.log(data)
                 if(data.Success==0||data.Success==3){ 
                     this.reddah.setPoint('Comment', data.Message.GotPoint);
                     if(data.Success==0){

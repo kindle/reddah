@@ -82,6 +82,9 @@ export class AppComponent {
                     overlay: false
                 });
             }
+            StatusBar.setBackgroundColor({
+                color : "light"//`--ion-color-light`
+            });
 
             /*if(this.reddah.platformTag==="ios"){
                 StatusBar.hide();
@@ -170,8 +173,7 @@ export class AppComponent {
 
 
       //load friends to cache for permission check
-      /*
-      if(this.platformTag==="android" && this.authService.authenticated())
+      if(this.authService.authenticated())
       {
           this.reddah.loadFriends();
           this.reddah.getMessageUnread().subscribe(data=>{
@@ -179,6 +181,10 @@ export class AppComponent {
                   this.reddah.unReadMessage = data.Message;
               }
           });
+      }
+      /*
+      if(this.platformTag==="android" && this.authService.authenticated())
+      {
           let localCache = this.localStorageService.retrieve("reddah_cache_queue_"+this.reddah.getCurrentUser());
           if(localCache!=null){
               this.reddah.ArticleCacheQueue = new Queue<any>();

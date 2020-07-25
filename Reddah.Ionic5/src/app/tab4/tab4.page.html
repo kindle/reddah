@@ -33,9 +33,9 @@
     <ion-list style="padding-top:0 !important;">
         <ion-item-group *ngFor="let group of groupedContacts" lines="none">
             <ion-item-divider color="light" lines="none">{{group.letter.toUpperCase()}}</ion-item-divider>
-            <ion-item *ngFor="let contact of group.contacts" (click)="goUser(contact.Watch)">
+            <ion-item lines="{{isLast?'none':''}}" *ngFor="let contact of group.contacts;last as isLast" (click)="goUser(contact.Watch)">
                 <ion-avatar slot="start" class="contactUserPhoto">
-                    <img src="{{reddah.appDataUserPhoto('userphoto_'+contact.Watch)}}" class="contactPortrait"
+                    <img src="{{reddah.appData('userphoto_'+contact.Watch)}}" class="contactPortrait"
                     onerror="this.src='assets/icon/anonymous.png';">
                 </ion-avatar>
                 <ion-label style="margin-left:10px;">

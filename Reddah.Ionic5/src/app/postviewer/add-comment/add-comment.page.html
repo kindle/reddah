@@ -7,7 +7,7 @@
     <ion-button color="success" slot="end" (click)="submit()" 
     [disabled]="submitClicked||commentContent==null||commentContent==''">{{ reddah.instant('Confirm.Submit') }}</ion-button>
 </ion-item>
-<ion-content>
+<ion-content class="safe-area-bottom">
     <div style="margin:5px;">
         <ion-textarea autoresize #newComment id="newComment" [(ngModel)]="commentContent" 
         rows="6" cols="20" placeholder="{{placeHolder ? reddah.instant('Pop.Reply')+'@'+placeHolder:reddah.instant('Comment.Tip') }}"

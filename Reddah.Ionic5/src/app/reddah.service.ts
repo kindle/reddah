@@ -2557,7 +2557,7 @@ export class ReddahService {
             dir = this.file.externalDataDirectory;
         }
         else if(this.platformTag === 'ios'){
-            dir = this.file.externalDataDirectory;
+            dir = this.file.cacheDirectory;
         }
         else {
             
@@ -2590,7 +2590,6 @@ export class ReddahService {
 
             let cacheImageName = "";
             if(cachedImagePath!=null){
-                //cacheImageName = cachedImagePath.replace(deviceDirectory+"reddah/","");
                 cacheImageName = cachedImagePath.replace(deviceDirectory,"");
             }
 
@@ -2600,7 +2599,6 @@ export class ReddahService {
 
             if(cachedImagePath==null||cacheImageName!=webImageName){
                 this.fileTransfer = this.transfer.create();
-                //let targetUrl = deviceDirectory+"reddah/" + webImageName;
                 let targetUrl = deviceDirectory + webImageName;
                 this.fileTransfer.download(webUrl, targetUrl).then(
                 _ => {

@@ -1,6 +1,6 @@
-<ion-item color="light" no-padding lines="none">
+<ion-item color="light" style="--padding-start:0;" lines="none">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-        <ion-icon is-active="false" name="arrow-back"></ion-icon>
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
     </ion-button>
     <ion-text>{{ reddah.instant('Common.Details') }}</ion-text>
 </ion-item>
@@ -72,7 +72,7 @@
         </div>
     </div>
     <div style="margin:0 10px;">
-        <ion-item style="--inner-padding-end:5px;" lines="none" *ngIf="reddah.getAllowedNames(article.GroupName).length>0">
+        <ion-item style="--inner-padding-start:0;--inner-padding-end:5px;" lines="none" *ngIf="reddah.getAllowedNames(article.GroupName).length>0">
             <div style="width: 100%;">
                 <div class="like-arrow-up"></div>
                 <div class="likeSection">
@@ -84,7 +84,7 @@
                 </div>
             </div>
         </ion-item>
-        <ion-item style="--inner-padding-end:5px;" lines="none" *ngIf="commentData.get(article.Id)&&reddah.getAllowedComments(commentData.get(article.Id)).length>0">
+        <ion-item style="--inner-padding-start:0;--inner-padding-end:5px;" lines="none" *ngIf="commentData.get(article.Id)&&reddah.getAllowedComments(commentData.get(article.Id)).length>0">
             <div style="width: 100%;">
                 <div class="like-arrow-up" *ngIf="reddah.getAllowedNames(article.GroupName).length==0"></div>
                 <div class="like-spliter" *ngIf="reddah.getAllowedNames(article.GroupName).length>0"></div>
@@ -98,7 +98,7 @@
         </ion-item>
     </div>
 </ion-content>
-<ion-footer *ngIf="isFriend" style="background-color: white;">
+<ion-footer *ngIf="isFriend" class="safe-area-bottom" style="background-color: white;">
     <div style="display:flex;">
         <ion-input #newComment id="newComment" placeholder="{{selectedReplyPlaceholder}}" style="padding-left:5px !important;"></ion-input>
         <ion-icon style="align-self:center;" name="happy-outline" size="medium" (click)="toggleFacePanel()"></ion-icon>
