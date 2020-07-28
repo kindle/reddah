@@ -2,7 +2,7 @@
   <ion-icon slot="start" name="wifi" color="medium"></ion-icon>
   <ion-label color="medium">{{ reddah.instant('Input.Error.NetworkError') }}</ion-label>
 </ion-item>
-<div *ngIf="showSearchBar" (click)="goSearch()" style="padding:0 5px;">
+<div *ngIf="showSearchBar" (click)="goSearch()" style="padding:0 5px;background-color: var(--ion-color-light);">
   <ion-searchbar placeholder="{{reddah.instant('Search.Title')}}"></ion-searchbar>
 </div>
 <ion-item lines="none" class="no-padding-end" color="light">
@@ -116,9 +116,9 @@
               </ion-chip>
               <ion-chip color="danger" style="border-radius: 0;margin:0;padding:0 5px;" 
                   *ngIf="article.LastUpdateBy==userName">
-                  <ion-label style="font-size: smaller;">{{reddah.instant('Menu.About')}}</ion-label>
+                  <ion-label style="font-size: smaller;">{{reddah.instant('Menu.About')}}:</ion-label>
               </ion-chip>
-              {{reddah.getDisplayName(article.LastUpdateBy)}}:
+              <span *ngIf="article.LastUpdateBy!=userName">{{reddah.getDisplayName(article.LastUpdateBy)}}:</span>
               <div class="show-two-lines" [class.articleTextRead]="article.Read"
               [innerHTML]="reddah.htmlDecode(article.LastUpdateContent)"
               ></div>

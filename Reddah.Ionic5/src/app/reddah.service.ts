@@ -38,8 +38,6 @@ export class ReddahService {
         });
     }
 
-    platformTag;
-
     appStore  = "ios";
     //default 2 azure East Asia
     cloud = "azure";
@@ -2119,7 +2117,7 @@ export class ReddahService {
         this.localStorageService.clear("Reddah_Local_Messages_"+this.getCurrentUser());
         //this.localStorageService.clear();
         
-        if(this.platformTag =="android"){
+        if(Capacitor.platform =="android"){
             window.location.reload();
         }
         else{
@@ -2263,7 +2261,7 @@ export class ReddahService {
     drawCanvasBackground(src){
 
         src="assets/icon/timg.jpg";
-        //src= (<any>window).Ionic.WebView.convertFileSrc(src);
+        //src= Capacitor.convertFileSrc(src);
 
         //cavas use local path, web url has cors issue.
         var p = document.getElementById("mycontent");
@@ -2410,7 +2408,7 @@ export class ReddahService {
     appDataUserPhoto(cacheKey){  
         let result = this.localStorageService.retrieve(cacheKey); 
         if(result&&this.isMobile()){
-            return (<any>window).Ionic.WebView.convertFileSrc(result);
+            return Capacitor.convertFileSrc(result);
         }
 
         let url = this.localStorageService.retrieve(cacheKey+"_url"); 
@@ -2422,7 +2420,7 @@ export class ReddahService {
     appDataMap(cacheKey, url){
         let result = this.localStorageService.retrieve(cacheKey); 
         if(result&&this.isMobile()){
-            return (<any>window).Ionic.WebView.convertFileSrc(result);
+            return Capacitor.convertFileSrc(result);
         }
 
         if(url)
@@ -2432,7 +2430,7 @@ export class ReddahService {
 
     async appData2(cacheKey){     
         let result = this.localStorageService.retrieve(cacheKey);
-        return await (<any>window).Ionic.WebView.convertFileSrc(result);
+        return await Capacitor.convertFileSrc(result);
     }
 
     async appData1(cacheKey){        
@@ -2440,7 +2438,7 @@ export class ReddahService {
         
         if(cacheKey.indexOf('userphoto_')>-1){
             if(result&&this.isMobile()){
-                return await (<any>window).Ionic.WebView.convertFileSrc(result);
+                return await Capacitor.convertFileSrc(result);
             }
             else{
                 return "assets/icon/anonymous.png";
@@ -2448,7 +2446,7 @@ export class ReddahService {
         }
         else if(cacheKey.indexOf('cover_')>-1){
             if(result&&this.isMobile()){
-                return await (<any>window).Ionic.WebView.convertFileSrc(result);
+                return await Capacitor.convertFileSrc(result);
             }
             else{
                 return "assets/icon/timg.jpg";
@@ -2459,27 +2457,32 @@ export class ReddahService {
         }
     }
 
+
     level2Cache(cacheKey){
         cacheKey = this.cloudFix(cacheKey);
+        //console.log(cacheKey);
         if(cacheKey){
-            if(this.platformTag =="android"){
-                let storekey = cacheKey.replace("///","https://")
-                let preview = this.localStorageService.retrieve(storekey);
-                let org = this.localStorageService.retrieve(storekey.replace("_reddah_preview",""))
-        
-                if(org){
-                    return (<any>window).Ionic.WebView.convertFileSrc(org);
-                }
-                else if(preview)
-                {
-                    return (<any>window).Ionic.WebView.convertFileSrc(preview);
-                }
-                else
-                {
-                    return cacheKey;
-                }
+            let storekey = cacheKey.replace("///","https://")
+            let preview = this.localStorageService.retrieve(storekey);
+            let org = this.localStorageService.retrieve(storekey.replace("_reddah_preview",""))
+    
+            if(org){
+                //console.log("org"+org)
+                //console.log("display org"+Capacitor.convertFileSrc(org))
+                //return org;
+                return Capacitor.convertFileSrc(org);
             }
-            else{
+            else if(preview)
+            {
+                //console.log("display preview"+preview)
+                //console.log("preview"+Capacitor.convertFileSrc(preview))
+                //return cacheKey;
+                return Capacitor.convertFileSrc(preview);
+
+            }
+            else
+            {
+                //console.log("display cacheKey"+cacheKey)
                 return cacheKey;
             }
         }
@@ -2493,9 +2496,9 @@ export class ReddahService {
         let org = this.localStorageService.retrieve(cacheKey.replace("_reddah_preview",""))
         
         if(org)
-            return (<any>window).Ionic.WebView.convertFileSrc(org);
+            return Capacitor.convertFileSrc(org);
         else if(preview)
-            return (<any>window).Ionic.WebView.convertFileSrc(preview);
+            return Capacitor.convertFileSrc(preview);
         else
         {
             if(this.isMobile())
@@ -2529,13 +2532,13 @@ export class ReddahService {
             _ => {
                 if(isVideo)
                 {
-                    //this.localStorageService.store(webUrl,(<any>window).Ionic.WebView.convertFileSrc(targetUrl));
+                    //this.localStorageService.store(webUrl,Capacitor.convertFileSrc(targetUrl));
                     this.localStorageService.store(webUrl, targetUrl);
                 }
                 else{
                     this.localStorageService.store(webUrl, targetUrl);
                     
-                    this.appCacheToOrg[(<any>window).Ionic.WebView.convertFileSrc(targetUrl)] = webUrl;
+                    this.appCacheToOrg[Capacitor.convertFileSrc(targetUrl)] = webUrl;
                 }
                 //alert(webUrl)
             }, 
@@ -2549,14 +2552,14 @@ export class ReddahService {
     //for normal image download
     getDeviceDirectory(){
         let dir = this.file.externalRootDirectory;
-        if(this.platformTag === 'android')
+        if(Capacitor.platform === 'android')
         {
             //dir = this.file.externalApplicationStorageDirectory;//android/data/com.reddah.app/
             //dir = this.file.externalDataDirectory;//android/data/com.reddah.app/file/
             //dir = this.file.externalCacheDirectory; //android/data/com.reddah.app/cache/
-            dir = this.file.externalDataDirectory;
+            dir = this.file.externalApplicationStorageDirectory;
         }
-        else if(this.platformTag === 'ios'){
+        else if(Capacitor.platform === 'ios'){
             dir = this.file.cacheDirectory;
         }
         else {
@@ -2568,11 +2571,11 @@ export class ReddahService {
     //for copy image
     getOutputDeviceDirectory(){
         let dir = this.file.externalRootDirectory;
-        if(this.platformTag === 'android')
+        if(Capacitor.platform === 'android')
         {
             dir = this.file.externalRootDirectory;
         }
-        else if(this.platformTag ==='ios'){
+        else if(Capacitor.platform ==='ios'){
             dir = this.file.cacheDirectory;
         }
         else {
@@ -2603,7 +2606,7 @@ export class ReddahService {
                 this.fileTransfer.download(webUrl, targetUrl).then(
                 _ => {
                     this.localStorageService.store(cacheKey, targetUrl);
-                    this.appCacheToOrg[(<any>window).Ionic.WebView.convertFileSrc(targetUrl)] = webUrl;
+                    this.appCacheToOrg[Capacitor.convertFileSrc(targetUrl)] = webUrl;
                 }, 
                 _ => { console.log(JSON.stringify(_)); });
             }
@@ -2622,7 +2625,7 @@ export class ReddahService {
 
     verifyImageFile(key){
         let cachedPath = this.localStorageService.retrieve(key);
-        if(cachedPath&&this.platformTag == "android"){
+        if(cachedPath&&Capacitor.platform == "android"){
             let fileName = this.getFileName(cachedPath);
             let filePath = cachedPath.replace(fileName, "");
             
@@ -2777,7 +2780,7 @@ export class ReddahService {
         if(this.isMobile()){
             let org = this.localStorageService.retrieve(url);
             if(org){
-                return (<any>window).Ionic.WebView.convertFileSrc(org);
+                return Capacitor.convertFileSrc(org);
             }
         }
         else
@@ -3242,7 +3245,7 @@ export class ReddahService {
         let targetUrl = deviceDirectory+"mini/" + miniName;
         this.fileTransfer.download(webUrl, targetUrl).then(
         _ => {
-            let localUrl = (<any>window).Ionic.WebView.convertFileSrc(targetUrl);
+            let localUrl = Capacitor.convertFileSrc(targetUrl);
 
             //const browser = this.iab.create(localUrl, 'location=no');
             //browser.show();
@@ -3608,7 +3611,7 @@ export class ReddahService {
     }
 
     windowReload(){
-        if(this.platformTag =="android"){
+        if(Capacitor.platform =="android"){
             window.location.reload();
         }
         else{
@@ -3659,7 +3662,9 @@ export class ReddahService {
     }
 
     instant(key){
-        return this.localeData[key];
+        if(this.localeData)
+            return this.localeData[key];
+        return key;
     }
 
     flatten (obj, prefix = [], current = {}) {
@@ -3744,7 +3749,7 @@ export class ReddahService {
     }
 
     isMobile(){
-        return this.platformTag=="android"||this.platformTag=="ios";
+        return Capacitor.platform=="android"||Capacitor.platform=="ios";
     }
 
     likeTopic(article, cacheKey, collection){
@@ -3893,6 +3898,7 @@ export class ReddahService {
             }
         })
         .catch((response) => {
+            console.log(response)
             this.presentAlert();
         });
     }

@@ -166,6 +166,10 @@
     "Article.AtYou":"Erwähnt Sie",
     "Article.LikeYours":"Gefällt Ihnen Ihren Beitrag",
     "Article.Topic":"Thema",
+    "Article.HisTopic":"Sein Thema",
+    "Article.HisComment":"Seine Kommentare",
+    "Article.HerTopic":"Ihr Thema",
+    "Article.HerComment":"Ihre Kommentare",
 
     "Comment.Comment": "Kommentar",
     "Comment.MoreComment":"Weitere Kommentare",

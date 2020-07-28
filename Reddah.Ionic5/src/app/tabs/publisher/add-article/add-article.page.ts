@@ -7,8 +7,9 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ImageViewerComponent } from '../../../common/image-viewer/image-viewer.component';
 import { AddMaterialPage } from '../../../mytimeline/add-material/add-material.page';
 import { PostviewerPage } from '../../../postviewer/postviewer.page';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-//import * as InlineEditor from '@ckeditor/ckeditor5-build-inline';
+//import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+//import * as BalloonEditor from '@ckeditor/ckeditor5-build-balloon';
+import * as InlineEditor from '@ckeditor/ckeditor5-build-inline';
 
 //import Image from '@ckeditor/ckeditor5-image/src/image';
 //import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
@@ -25,8 +26,9 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 })
 export class AddArticlePage implements OnInit {
 
-    //public Editor = InlineEditor;
-    public Editor = ClassicEditor;
+    public Editor = InlineEditor;
+    //public Editor = ClassicEditor;
+    //public Editor = BalloonEditor;
     
 
     @Input() targetUserName;

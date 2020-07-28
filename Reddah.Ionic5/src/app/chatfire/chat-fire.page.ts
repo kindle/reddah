@@ -15,6 +15,7 @@ import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-m
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
 import { ChatPopPage } from '../common/chat-pop.page';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Capacitor } from '@capacitor/core';
 
 @Directive()
 export class ChatFireBase{
@@ -115,7 +116,7 @@ export class ChatFireBase{
                         controls: true
                     };
                     
-                    let playWebUrlPath = (<any>window).Ionic.WebView.convertFileSrc(localPath);
+                    let playWebUrlPath = Capacitor.convertFileSrc(localPath);
                     //this.streamingMedia.playVideo(playWebUrlPath, options);
                     this.htmlPlayVideo(comment.Id, playWebUrlPath, this.reddah.chatImageCache(comment.Content.toLowerCase().replace('.mp4','.jpg')));
                 })

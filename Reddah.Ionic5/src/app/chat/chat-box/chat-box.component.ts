@@ -7,6 +7,7 @@ import { Media } from '@ionic-native/media/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 //import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
+import { Capacitor } from '@capacitor/core';
 
 @Component({
     selector: 'app-chat-box',
@@ -327,7 +328,7 @@ export class ChatBoxComponent implements OnInit {
         }
         
         this.camera.getPicture(options).then((imageData) => {
-            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
+            let data = {fileUrl: imageData, webUrl: Capacitor.convertFileSrc(imageData)};
             this.addPhotoToFormData(data);
         }, (err) => {
             //console.log(JSON.stringify(err));
@@ -346,7 +347,7 @@ export class ChatBoxComponent implements OnInit {
         }
         
         this.camera.getPicture(options).then((imageData) => {
-            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
+            let data = {fileUrl: imageData, webUrl: Capacitor.convertFileSrc(imageData)};
             this.addPhotoToFormData(data);
         }, (err) => {
             console.log(JSON.stringify(err));
@@ -365,7 +366,7 @@ export class ChatBoxComponent implements OnInit {
         }
         
         this.camera.getPicture(options).then((imageData) => {
-            let data = {fileUrl: "file://"+imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
+            let data = {fileUrl: "file://"+imageData, webUrl: Capacitor.convertFileSrc(imageData)};
             //alert(JSON.stringify(data));
             this.addVideoToFormData(data);
         }, (err) => {
@@ -379,7 +380,7 @@ export class ChatBoxComponent implements OnInit {
         this.mediaCapture.captureVideo(options).then(									
             (mediaFiles: MediaFile[]) => {
                 //alert(JSON.stringify(mediaFiles));
-                let data = {fileUrl: mediaFiles[0].fullPath, webUrl: (<any>window).Ionic.WebView.convertFileSrc(mediaFiles[0].fullPath)};
+                let data = {fileUrl: mediaFiles[0].fullPath, webUrl: Capacitor.convertFileSrc(mediaFiles[0].fullPath)};
                 //alert(mediaFiles[0].fullPath);
                 this.addVideoToFormData(data);
             },									

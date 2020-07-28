@@ -93,6 +93,7 @@
             <img [id]="reddah.makeItId(app.Photo+'usr')" 
                 (load)="reddah.adjustImage(app.Photo, 'usr')"
                 [src]="reddah.level2Cache(app.Photo)"
+                onerror="this.src='/assets/icon/noimage.jpg'"
                 (click)="goMini(app)" style="border-radius: 50%;">
         </ion-thumbnail>
     </ion-item>
@@ -128,7 +129,8 @@
     <ion-item lines="none" class="common-splitter">
     </ion-item>
     <ion-item class="borderTop borderBottom" lines="none" *ngIf="userPageArticles.length>0">
-        <span class="itemTitle">{{ reddah.instant('Article.Topic') }}</span>
+        <span class="itemTitle" *ngIf="reddah.appData('usersex_'+userName)==1">{{ reddah.instant('Article.HisTopic') }}</span>
+        <span class="itemTitle" *ngIf="reddah.appData('usersex_'+userName)!=1">{{ reddah.instant('Article.HerTopic') }}</span>
     </ion-item>
     <div *ngFor="let article of userPageArticles" 
         style="background-color: var(--ion-color-tertiary); display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
@@ -148,7 +150,7 @@
                         <ion-text color="secondary" style="margin-left: 5px;" *ngIf="isMe(article.UserName)" (click)="delete(article)">{{ reddah.instant('Comment.Delete') }}</ion-text>
                     </div>
                 </ion-label>
-                <ion-icon name="warning-outline" slot="end" (click)="up_report(article)"></ion-icon>
+                <ion-text color="medium" (click)="up_report(article)" slot="end">{{ reddah.instant('Pop.Report') }}</ion-text>
             </ion-item>
             
             <div *ngIf="article.Title.length>0&&article.Title.length<100">
@@ -156,8 +158,8 @@
             </div>
             
             
-            <ion-item style="--background:transparent;" lines="none" *ngIf="article.Title.length>=100">
-                <div (click)="fullText(article.Title)" style="background-color:var(--ion-color-light); padding: 12px;margin-bottom:5px;" 
+            <ion-item style="--background:transparent;--inner-padding-end:15px;" lines="none" *ngIf="article.Title.length>=100">
+                <div (click)="fullText(article.Title)" style="background-color:var(--ion-color-light); padding: 12px;margin-bottom:5px;width:100%;" 
                 [innerHTML]="reddah.summaryShort(article.Title, 100, '......')"></div>
             </ion-item>
 
@@ -167,6 +169,7 @@
                         <img [id]="reddah.makeItId(image+'mtlutp')" 
                         (load)="reddah.adjustImage(image, 'mtlutp')"
                         [src]="reddah.level2Cache(image)"
+                        onerror="this.src='/assets/icon/noimage.jpg'"
                         class="up-picture" (click)="up_viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
@@ -175,6 +178,7 @@
                         <img [id]="reddah.makeItId(image+'mtlutp')" 
                         (load)="reddah.adjustImage(image, 'mtlutp')"
                         [src]="reddah.level2Cache(image)"
+                        onerror="this.src='/assets/icon/noimage.jpg'"
                         class="up-picture" (click)="up_viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
@@ -183,6 +187,7 @@
                         <img [id]="reddah.makeItId(image+'mtlutp')" 
                         (load)="reddah.adjustImage(image, 'mtlutp')"
                         [src]="reddah.level2Cache(image)"
+                        onerror="this.src='/assets/icon/noimage.jpg'"
                         class="up-picture" (click)="up_viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
@@ -191,6 +196,7 @@
                         <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtlutp')" 
                         (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'mtlutp')"
                         [src]="reddah.level2Cache(article.Content.split('$$$')[0])"
+                        onerror="this.src='/assets/icon/noimage.jpg'"
                         class="up-picture" (click)="up_viewer(0, article.Content.split('$$$'))">
                     </div>
                 </div>

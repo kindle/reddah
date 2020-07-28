@@ -166,6 +166,10 @@
     "Article.AtYou":"คุณกล่าวถึงคุณ",
     "Article.LikeYours":"ชอบโพสต์ของคุณ",
     "Article.Topic":"หัว ข้อ",
+    "Article.HisTopic":"หัวข้อของเขา",
+    "Article.HisComment":"ความคิดเห็นของเขา",
+    "Article.HerTopic":"หัวข้อของเธอ",
+    "Article.HerComment":"ความคิดเห็นของเธอ",
 
     "Comment.Comment": "ข้อคิดเห็น",
     "Comment.MoreComment":"แสดงความคิดเห็นเพิ่มเติม",

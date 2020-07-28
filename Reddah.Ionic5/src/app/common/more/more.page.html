@@ -60,7 +60,8 @@
     <ion-item lines="none" class="common-splitter">
     </ion-item>
     <ion-item class="borderTop borderBottom" lines="none">
-        <span class="itemTitle">{{ reddah.instant('Article.Comment') }}</span>
+        <span class="itemTitle" *ngIf="reddah.appData('usersex_'+userName)==1">{{ reddah.instant('Article.HisComment') }}</span>
+        <span class="itemTitle" *ngIf="reddah.appData('usersex_'+userName)!=1">{{ reddah.instant('Article.HerComment') }}</span>
     </ion-item>
     <div *ngFor="let article of userCommentArticles" 
         style="background-color: var(--ion-color-tertiary); display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
@@ -79,7 +80,7 @@
                         <ion-text color="dark">{{reddah.getSendTime(article.CommentCreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-text>
                     </div>
                 </ion-label>
-                <ion-icon name="warning-outline" slot="end" (click)="more_report(article)"></ion-icon>
+                <ion-text color="medium" (click)="more_report(article)" slot="end">{{ reddah.instant('Pop.Report') }}</ion-text>
             </ion-item>
             
             <div style="margin: 0 15px;">
@@ -109,6 +110,7 @@
                             <img [id]="reddah.makeItId(image+'mtlmore')" 
                             (load)="reddah.adjustImage(image, 'mtlmore')"
                             [src]="reddah.level2Cache(image)"
+                            onerror="this.src='/assets/icon/noimage.jpg'"
                             class="more-picture" (click)="more_viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
@@ -117,6 +119,7 @@
                             <img [id]="reddah.makeItId(image+'mtlmore')" 
                             (load)="reddah.adjustImage(image, 'mtlmore')"
                             [src]="reddah.level2Cache(image)"
+                            onerror="this.src='/assets/icon/noimage.jpg'"
                             class="up-picture" (click)="more_viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
@@ -125,6 +128,7 @@
                             <img [id]="reddah.makeItId(image+'mtlmore')" 
                             (load)="reddah.adjustImage(image, 'mtlmore')"
                             [src]="reddah.level2Cache(image)"
+                            onerror="this.src='/assets/icon/noimage.jpg'"
                             class="more-picture" (click)="more_viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
@@ -133,6 +137,7 @@
                             <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtlmore')" 
                             (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'mtlmore')"
                             [src]="reddah.level2Cache(article.Content.split('$$$')[0])"
+                            onerror="this.src='/assets/icon/noimage.jpg'"
                             class="more-picture" (click)="more_viewer(0, article.Content.split('$$$'))">
                         </div>
                     </div>

@@ -12,6 +12,7 @@ import { ChangeCoverPopPage } from '../common/change-cover-pop.page'
 import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page'
 import { MessagePage } from '../mytimeline/message/message.page'
 import { LocationPage } from '../common/location/location.page';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
     selector: 'app-mytimeline',
@@ -78,7 +79,7 @@ export class MyTimeLinePage implements OnInit {
 
     isAndroid = false;
     ngOnInit(){
-        if(this.reddah.platformTag == 'android'){
+        if(Capacitor.platform == 'android'){
             this.isAndroid = true;
         }
         this.reddah.getUserPhotos(this.userName, true);

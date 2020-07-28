@@ -5,6 +5,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
 import { ShareChooseGroupPage } from '../share-choose-group/share-choose-group.page';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
     selector: 'app-share-choose-user',
@@ -130,7 +131,7 @@ export class ShareChooseUserPage implements OnInit {
                 //check cache first
                 let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${contact.Watch}`);
                 if(cachedUserPhotoPath!=null){
-                    this.localStorageService.store("userphoto_"+contact.Watch, (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
+                    this.localStorageService.store("userphoto_"+contact.Watch, Capacitor.convertFileSrc(cachedUserPhotoPath));
                 }
                 
                 if(contact.UserPhoto!=null){

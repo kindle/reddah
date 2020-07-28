@@ -166,6 +166,10 @@
     "Article.AtYou":"Noemde u",
     "Article.LikeYours":"Vond je bericht leuk",
     "Article.Topic":"Onderwerp",
+    "Article.HisTopic":"Zijn onderwerp",
+    "Article.HisComment":"Zijn commentaar",
+    "Article.HerTopic":"Haar onderwerp",
+    "Article.HerComment":"Haar commentaar",
 
     "Comment.Comment": "Commentaar",
     "Comment.MoreComment":"Meer opmerkingen",

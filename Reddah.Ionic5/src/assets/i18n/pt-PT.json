@@ -165,6 +165,10 @@
     "Article.AtYou":"Mencionou-o",
     "Article.LikeYours":"Gostei do seu post",
     "Article.Topic":"Tópico",
+    "Article.HisTopic":"O seu tópico",
+    "Article.HisComment":"Os seus comentários",
+    "Article.HerTopic":"O tópico dela",
+    "Article.HerComment":"Os seus comentários",
 
     "Comment.Comment": "Comentário",
     "Comment.MoreComment":"Mais Comentários",

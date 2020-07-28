@@ -169,6 +169,10 @@
     "Article.AtYou":"당신을 언급 했다",
     "Article.LikeYours":"귀하의 게시물을 칭찬",
     "Article.Topic":"항목",
+    "Article.HisTopic":"그의 주제",
+    "Article.HisComment":"그의 의견",
+    "Article.HerTopic":"그녀의 주제",
+    "Article.HerComment":"그녀의 의견",
 
     "Comment.Comment": "주석",
     "Comment.MoreComment":"더 이상",

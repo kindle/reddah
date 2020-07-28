@@ -167,6 +167,10 @@
     "Article.AtYou":"Vous avez mentionné",
     "Article.LikeYours":"J’ai aimé votre post",
     "Article.Topic":"Sujet",
+    "Article.HisTopic":"Son sujet",
+    "Article.HisComment":"Ses commentaires",
+    "Article.HerTopic":"Son sujet",
+    "Article.HerComment":"Ses commentaires",
 
     "Comment.Comment": "Notes",
     "Comment.MoreComment":"Plus de commentaires",

@@ -169,6 +169,10 @@
     "Article.AtYou":"提到了你",
     "Article.LikeYours":"讚了你的帖子",
     "Article.Topic":"話題",
+    "Article.HisTopic":"他的話題",
+    "Article.HisComment":"他的評論",
+    "Article.HerTopic":"她的話題",
+    "Article.HerComment":"她的評論",
 
     "Comment.Comment": "寫評論",
     "Comment.MoreComment":"更多評論",

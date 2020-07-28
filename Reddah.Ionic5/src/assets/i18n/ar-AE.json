@@ -166,6 +166,10 @@
     "Article.AtYou":"ذكرك",
     "Article.LikeYours":"أعجبني مشاركتك",
     "Article.Topic":"الموضوع",
+    "Article.HisTopic":"موضوعه",
+    "Article.HisComment":"تعليقاته",
+    "Article.HerTopic":"موضوعها",
+    "Article.HerComment":"تعليقاتها",
 
     "Comment.Comment": "شروح",
     "Comment.MoreComment":"المزيد من التعليقات",

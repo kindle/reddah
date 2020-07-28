@@ -24,6 +24,7 @@ import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.pa
 import { TimelinePopPage } from 'src/app/common/timeline-pop.page';
 import { ActiveUsersPage } from 'src/app/activeusers/activeusers.page';
 import { PublisherPage } from '../tabs/publisher/publisher.page';
+import { TopicPage } from '../topic/topic.page';
 
 @Component({
   selector: 'app-tab2',
@@ -163,13 +164,23 @@ export class Tab2Page implements OnInit  {
       await alert.present().then(()=>{});
   }
 
+  private isMini(abstract){
+      return abstract.length==32;
+  }
   async goMiniById(abstract){
+     let type=3;//default mini
+     if(this.isMini(abstract)){
+        type=3;//mini
+     }
+     else{
+        type=0;//article
+     }
      let key = this.reddah.getDisplayName(abstract, 100);
       const modal = await this.modalController.create({
           component: SearchPage,
           componentProps: { 
               key: key,
-              type: 3,//array index not id
+              type: type,//array index not id
           },
           cssClass: "modal-fullscreen",
           swipeToClose: true,

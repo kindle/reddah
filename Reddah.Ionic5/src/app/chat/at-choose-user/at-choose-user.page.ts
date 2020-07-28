@@ -4,6 +4,7 @@ import { CacheService } from "ionic-cache";
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
     selector: 'app-at-choose-user',
@@ -77,7 +78,7 @@ export class AtChooseUserPage implements OnInit {
                 //check cache first
                 let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${contact.Watch}`);
                 if(cachedUserPhotoPath!=null){
-                    this.localStorageService.store("userphoto_"+contact.Watch, (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
+                    this.localStorageService.store("userphoto_"+contact.Watch, Capacitor.convertFileSrc(cachedUserPhotoPath));
                 }
                 
                 if(contact.UserPhoto!=null){

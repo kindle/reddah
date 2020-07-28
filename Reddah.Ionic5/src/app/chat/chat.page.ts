@@ -16,6 +16,7 @@ import { VideoViewerComponent } from '../common/video-viewer/video-viewer.compon
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
 import { VideoEditor } from '@ionic-native/video-editor/ngx'
 import { PubPage } from '../tabs/publisher/pub/pub.page';
+import { Capacitor } from '@capacitor/core';
 
 @Directive()
 export class ChatBase{
@@ -73,7 +74,7 @@ export class ChatBase{
                         controls: true
                     };
                     
-                    let playWebUrlPath = (<any>window).Ionic.WebView.convertFileSrc(localPath);
+                    let playWebUrlPath = Capacitor.convertFileSrc(localPath);
                     //this.streamingMedia.playVideo(playWebUrlPath, options);
                     this.htmlPlayVideo(comment.Id, playWebUrlPath, this.reddah.chatImageCache(comment.Content.toLowerCase().replace('.mp4','.jpg')));
                 })

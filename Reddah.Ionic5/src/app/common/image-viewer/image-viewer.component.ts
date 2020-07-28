@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, ViewChild, NgZone } from '@angular/core';
-import { ModalController, ToastController, ActionSheetController, Platform, IonSlides } from '@ionic/angular';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { ModalController, ToastController, ActionSheetController, IonSlides } from '@ionic/angular';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { LocalStorageService } from 'ngx-webstorage';
-//import 'hammerjs';
 import { ReddahService } from '../../reddah.service';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
     selector: 'app-image-viewer',
@@ -30,7 +30,6 @@ export class ImageViewerComponent implements OnInit {
         private toastController: ToastController,
         private actionSheetController: ActionSheetController,
         public reddah: ReddahService,
-        private platform: Platform,
         private zone: NgZone,
     ) {
     }
@@ -75,17 +74,18 @@ export class ImageViewerComponent implements OnInit {
             
             this.imgSourceArray[i].webPreviewUrl = this.imgSourceArray[i].webPreviewUrl
                 .replace("///login.reddah.com","https://login.reddah.com") 
-                .replace("///","https://").replace("_reddah_preview","");
+                .replace("///","https://")
+                //.replace("_reddah_preview","");
     
             if(org){
-                let localUrl = (<any>window).Ionic.WebView.convertFileSrc(org);
+                let localUrl = Capacitor.convertFileSrc(org);
                 this.imgSourceArray[i].localhostImageUrl = localUrl;
                 this.imgSourceArray[i].localFileImageUrl = org;
                 this.imgSourceArray[i].previewImageFileName = fileName;
                 this.imgSourceArray[i].isOrgViewed = 3;
             }
             else if(preview){
-                let localUrl = (<any>window).Ionic.WebView.convertFileSrc(org);
+                let localUrl = Capacitor.convertFileSrc(org);
                 this.imgSourceArray[i].localhostImageUrl = localUrl;
                 this.imgSourceArray[i].localFileImageUrl = preview;
                 this.imgSourceArray[i].previewImageFileName = fileName;
@@ -104,11 +104,14 @@ export class ImageViewerComponent implements OnInit {
 
     flag = false;
     ionViewDidEnter(){
-        
-
-        //if(this.index>=0&&this.index<this.enhanceImgSourceArray.length){
-        //    this.downloadOrgImage(this.enhanceImgSourceArray[this.index]);
-        //}
+        this.slides.getActiveIndex().then(index=>
+        {
+            if(index>=0&&index<this.imgSourceArray.length){
+                let item = this.imgSourceArray[index];
+                if(item.isOrgViewed==0||item.isOrgViewed==1)
+                    this.downloadOrgImage(item);
+            }
+        });
     }
 
     org(src){
@@ -177,7 +180,7 @@ export class ImageViewerComponent implements OnInit {
                 },*/ 
                 {
                     text: this.reddah.instant("Common.Copy"),
-                    icon: 'copy-outline',
+                    icon: 'link-outline',
                     handler: () => {
                         let url = item.webPreviewUrl;
                         this.reddah.Clipboard(url);
@@ -216,30 +219,28 @@ export class ImageViewerComponent implements OnInit {
     ionSlideWillChange(){
         this.slides.getActiveIndex().then(index=>
         {
-            //if(index>=0&&index<this.enhanceImgSourceArray.length){
-            //    let item = this.enhanceImgSourceArray[index];
-            //    if(item.isOrgViewed==0)
-            //        this.downloadOrgImage(item);
-            //}
-
-            //alert(index)
+            if(index>=0&&index<this.imgSourceArray.length){
+                let item = this.imgSourceArray[index];
+                if(item.isOrgViewed==0||item.isOrgViewed==1)
+                    this.downloadOrgImage(item);
+            }
 
             this.flag = true;
         });
         
     }
-    //loadProgress : any;
 
     getFileName(str){
         let lastSplashIndex = str.lastIndexOf('/');
         return str.substring(lastSplashIndex+1);
     }
     
-    async downloadOrgImage(item, cp = false) {
+    async downloadOrgImage33(item, cp = false) {
         item.webPreviewUrl = item.webPreviewUrl.replace("///","https://").replace("_reddah_preview","");
     }
     
-    async downloadOrgImage_bak(item, cp = false) {
+    loadProgress = 0;
+    async downloadOrgImage(item, cp = false) {
         let briefTarget = "DCIM/Reddah/";// + newFileName;
         const toast = await this.toastController.create({
             message: `${this.reddah.instant("Common.Save")}:${briefTarget}`,
@@ -253,23 +254,28 @@ export class ImageViewerComponent implements OnInit {
             item.isOrgViewed = 2;
         })
         // only against preview image
-        this.fileTransfer = this.transfer.create();  
-        //this.fileTransfer.onProgress((data)=>{
-        //    this.loadProgress = data.loaded/data.total*100;
-        //});
+        this.fileTransfer = this.transfer.create(); 
+        console.log('start downloading') 
+        this.fileTransfer.onProgress((data)=>{
+            this.zone.run(()=>{
+                this.loadProgress = parseInt((data.loaded/data.total*100)+"");
+                console.log(this.loadProgress);
+            });
+        });
         let orgImageUrl = item.webPreviewUrl.replace("///","https://").replace("_reddah_preview","");
         let orgImageFileName = this.getFileName(item.previewImageFileName.replace("_reddah_preview",""));
         //this.fileTransfer.download(orgImageUrl, this.file.applicationStorageDirectory + orgImageFileName).then((entry) => {
         //this.fileTransfer.download(orgImageUrl, this.reddah.getDeviceDirectory()+"reddah/" + orgImageFileName).then((entry) => {
-        this.fileTransfer.download(orgImageUrl, this.reddah.getDeviceDirectory() + orgImageFileName).then((entry) => {
+        this.fileTransfer.download(orgImageUrl, this.reddah.getDeviceDirectory() + orgImageFileName, true).then((entry) => {
+            console.log('download completed') 
             //let localFileImageUrl = this.file.applicationStorageDirectory + orgImageFileName;
             //let localFileImageUrl = this.reddah.getDeviceDirectory() + "reddah/" + orgImageFileName;
             let localFileImageUrl = this.reddah.getDeviceDirectory() + orgImageFileName;
             this.localStorageService.store(item.webPreviewUrl.replace("_reddah_preview",""), localFileImageUrl);
-            //this.reddah.appPhoto[item.webPreviewUrl] = (<any>window).Ionic.WebView.convertFileSrc(localFileImageUrl);
+            //this.reddah.appPhoto[item.webPreviewUrl] = Capacitor.convertFileSrc(localFileImageUrl);
             for(let i=0;i<this.imgSourceArray.length;i++){
                 if(this.imgSourceArray[i].webPreviewUrl===item.webPreviewUrl){
-                    let localhostImageUrl = (<any>window).Ionic.WebView.convertFileSrc(localFileImageUrl);
+                    let localhostImageUrl = Capacitor.convertFileSrc(localFileImageUrl);
                     this.zone.run(() => {
                         this.imgSourceArray[i].localhostImageUrl = localhostImageUrl;
                         this.imgSourceArray[i].localFileImageUrl = localFileImageUrl;

@@ -5,10 +5,10 @@ import { Platform } from '@ionic/angular';
 import {
     Plugins,
     StatusBarStyle,
+    Capacitor,
   } from '@capacitor/core';
 const { StatusBar, SplashScreen, Geolocation } = Plugins;
 
-import { Router } from '@angular/router';
 import { ModalController, AlertController, ActionSheetController, PopoverController, IonRouterOutlet, MenuController, LoadingController } from '@ionic/angular';
 
 import { LocalStorageService } from 'ngx-webstorage';
@@ -49,17 +49,7 @@ export class AppComponent {
         //private network: Network,
         //private firebase: Firebase,
   ) {
-    this.checkPlatform();
     this.initializeApp();
-  }
-
-
-  async checkPlatform (){
-    const { Device } = Plugins;
-    // Only show the Apple sign in button on iOS
-
-    let device = await Device.getInfo();
-    this.reddah.platformTag = device.platform;
   }
 
 
@@ -77,7 +67,7 @@ export class AppComponent {
         */
 
             //(Android only)
-            if(this.reddah.platformTag==="android"){
+            if(Capacitor.platform==="android"){
                 StatusBar.setOverlaysWebView({
                     overlay: false
                 });
@@ -86,7 +76,7 @@ export class AppComponent {
                 color : "light"//`--ion-color-light`
             });
 
-            /*if(this.reddah.platformTag==="ios"){
+            /*if(Capacitor.platform==="ios"){
                 StatusBar.hide();
             }*/
         
@@ -183,7 +173,7 @@ export class AppComponent {
           });
       }
       /*
-      if(this.platformTag==="android" && this.authService.authenticated())
+      if(Capacitor.platform==="android" && this.authService.authenticated())
       {
           let localCache = this.localStorageService.retrieve("reddah_cache_queue_"+this.reddah.getCurrentUser());
           if(localCache!=null){

@@ -110,9 +110,9 @@ export class ChangePhotoPage implements OnInit {
         }
             
         this.camera.getPicture(options).then((imageData) => {
-            //this.photos.push((<any>window).Ionic.WebView.convertFileSrc(imageData));
+            //this.photos.push(Capacitor.convertFileSrc(imageData));
             //this.prepareData(imageData);
-            //this.prepareData((<any>window).Ionic.WebView.convertFileSrc(imageData));
+            //this.prepareData(Capacitor.convertFileSrc(imageData));
             this.crop.crop(imageData, { quality: 100, targetWidth: -1, targetHeight: -1 })
             .then(
                     newCropImageData => {
@@ -131,9 +131,9 @@ export class ChangePhotoPage implements OnInit {
             source: CameraSource.Photos, 
             quality: 100 
         }).then((imageData) => {
-            //this.photos.push((<any>window).Ionic.WebView.convertFileSrc(imageData));
+            //this.photos.push(Capacitor.convertFileSrc(imageData));
             //this.prepareData(imageData);
-            //this.prepareData((<any>window).Ionic.WebView.convertFileSrc(imageData));
+            //this.prepareData(Capacitor.convertFileSrc(imageData));
             this.crop.crop(imageData.path, { quality: 100, targetWidth: -1, targetHeight: -1 })
             .then(
                     newCropImageData => {

@@ -166,6 +166,10 @@
     "Article.AtYou":"Упомянутые вы",
     "Article.LikeYours":"Понравилась ваша должность",
     "Article.Topic":"Теме",
+    "Article.HisTopic":"Его тема",
+    "Article.HisComment":"Его комментарии",
+    "Article.HerTopic":"Ее тема",
+    "Article.HerComment":"Ее комментарии",
 
     "Comment.Comment": "Примечания",
     "Comment.MoreComment":"Дополнительные комментарии",

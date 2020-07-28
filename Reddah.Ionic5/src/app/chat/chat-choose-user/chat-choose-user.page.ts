@@ -7,6 +7,7 @@ import { ReddahService } from '../../reddah.service';
 import { ChatFirePage } from '../../chatfire/chat-fire.page';
 import { GroupChatFirePage } from '../../chatfire/group-chat-fire.page';
 import { ChatChooseGroupPage } from '../chat-choose-group/chat-choose-group.page';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
     selector: 'app-chat-choose-user',
@@ -105,7 +106,7 @@ export class ChatChooseUserPage implements OnInit {
                 //check cache first
                 let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${contact.Watch}`);
                 if(cachedUserPhotoPath!=null){
-                    this.localStorageService.store("userphoto_"+contact.Watch, (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
+                    this.localStorageService.store("userphoto_"+contact.Watch, Capacitor.convertFileSrc(cachedUserPhotoPath));
                 }
                 
                 if(contact.UserPhoto!=null){

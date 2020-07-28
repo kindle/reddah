@@ -166,6 +166,10 @@
     "Article.AtYou":"Σας ανέφερε",
     "Article.LikeYours":"Σας ανέφερε",
     "Article.Topic":"Θέμα",
+    "Article.HisTopic":"Το θέμα του",
+    "Article.HisComment":"Τα σχόλιά του",
+    "Article.HerTopic":"Το θέμα της",
+    "Article.HerComment":"Τα σχόλιά της",
 
     "Comment.Comment": "Σχόλιο",
     "Comment.MoreComment":"Περισσότερα σχόλια",

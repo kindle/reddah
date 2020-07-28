@@ -26,6 +26,7 @@
     "@capacitor/ios": "^2.1.2",
     "@ckeditor/ckeditor5-angular": "^1.2.3",
     "@ckeditor/ckeditor5-build-classic": "^19.0.2",
+    "@ckeditor/ckeditor5-build-inline": "^20.0.0",
     "@ionic-native/android-permissions": "^5.26.0",
     "@ionic-native/app-rate": "^5.26.0",
     "@ionic-native/app-update": "^5.26.0",

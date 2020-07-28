@@ -166,6 +166,10 @@
     "Article.AtYou":"Te mencioné",
     "Article.LikeYours":"Me gustó tu publicación",
     "Article.Topic":"Tema",
+    "Article.HisTopic":"Su tema",
+    "Article.HisComment":"Sus comentarios",
+    "Article.HerTopic":"Su tema",
+    "Article.HerComment":"Sus comentarios",
 
     "Comment.Comment": "Notas",
     "Comment.MoreComment":"Más comentarios",

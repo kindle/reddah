@@ -5,6 +5,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../../reddah.service';
 import { AddFriendPage } from '../add-friend/add-friend.page'
 import { SearchUserPage } from '../search-user/search-user.page'
+import { Capacitor } from '@capacitor/core';
 
 @Component({
     selector: 'app-new-friend',
@@ -37,7 +38,7 @@ export class NewFriendPage implements OnInit {
                 let cachedUserPhotoPath = this.localStorageService.retrieve(`userphoto_${request.UserName}`);
                 if(cachedUserPhotoPath!=null){
                     this.localStorageService.store("userphoto_"+request.UserName, 
-                    (<any>window).Ionic.WebView.convertFileSrc(cachedUserPhotoPath));
+                    Capacitor.convertFileSrc(cachedUserPhotoPath));
                 }
                 
                 if(request.UserPhoto!=null){

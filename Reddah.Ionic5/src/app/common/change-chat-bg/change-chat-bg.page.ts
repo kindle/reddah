@@ -84,9 +84,9 @@ export class ChangeChatBgPage implements OnInit {
         }
             
         this.camera.getPicture(options).then((imageData) => {
-            //this.photos.push((<any>window).Ionic.WebView.convertFileSrc(imageData));
+            //this.photos.push(Capacitor.convertFileSrc(imageData));
             //this.prepareData(imageData);
-            //this.prepareData((<any>window).Ionic.WebView.convertFileSrc(imageData));
+            //this.prepareData(Capacitor.convertFileSrc(imageData));
             this.crop.crop(imageData, { quality: 100, targetWidth: -1, targetHeight: -1 })
             .then(
                     newCropImageData => {

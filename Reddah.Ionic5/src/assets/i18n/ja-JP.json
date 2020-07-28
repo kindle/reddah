@@ -167,6 +167,10 @@
     "Article.AtYou":"あなたを言及",
     "Article.LikeYours":"リックドユールポスト",
     "Article.Topic":"話題",
+    "Article.HisTopic":"彼の話題",
+    "Article.HisComment":"彼のコメント",
+    "Article.HerTopic":"彼女の話題",
+    "Article.HerComment":"彼女のコメント",
 
     "Comment.Comment": "コメント",
     "Comment.MoreComment":"もっと見る",

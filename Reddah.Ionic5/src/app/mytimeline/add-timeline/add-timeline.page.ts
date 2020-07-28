@@ -281,7 +281,7 @@ export class AddTimelinePage implements OnInit {
         }
           
         this.camera.getPicture(options).then((imageData) => {
-            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
+            let data = {fileUrl: imageData, webUrl: Capacitor.convertFileSrc(imageData)};
             this.photos.push(data);
             this.addPhotoToFormData(data);
         }, (err) => {
@@ -355,7 +355,7 @@ export class AddTimelinePage implements OnInit {
         }
           
         this.camera.getPicture(options).then((imageData) => {
-            let data = {fileUrl: imageData, webUrl: (<any>window).Ionic.WebView.convertFileSrc(imageData)};
+            let data = {fileUrl: imageData, webUrl: Capacitor.convertFileSrc(imageData)};
             this.photos.push(data);
             this.addPhotoToFormData(data);
         }, (err) => {
