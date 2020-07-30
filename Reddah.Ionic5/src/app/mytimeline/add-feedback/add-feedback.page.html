@@ -14,7 +14,7 @@
         <div class="imgSqure" *ngFor="let image of photos;index as i">
             <img [id]="reddah.makeItId(image.webUrl+'adfb')" 
             (load)="reddah.adjustImage(image.webUrl, 'adfb')"
-            [src]="reddah.level2Cache(image.webUrl)"
+            [src]="reddah.level1Cache(image.webUrl)"
             (click)="viewer(i, photos)">
         </div>
         <div class="imgSqure addImg" (click)="addNewPhoto($event)" *ngIf="photos.length<9">

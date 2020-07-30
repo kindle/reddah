@@ -96,20 +96,20 @@
 
             <div *ngIf="article.Type==6" style="margin:10px 15px 0 15px;padding:15px 0px;border-radius:5px;background-color: #eeeeee;">
                 <div *ngIf="article.Title.length>0&&article.Title.length<100">
-                    <div style="padding: 0 0 4px 15px;margin-bottom:0px;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                    <div style="padding: 0 0 4px 15px;margin-bottom:0px;margin-right:10px;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
                 </div>
                 
                 <ion-item style="--background:transparent;" lines="none" *ngIf="article.Title.length>=100">
-                    <div (click)="fullText(article.Title)" style="background-color:var(--ion-color-light); padding: 12px;margin-bottom:5px;" 
+                    <div (click)="fullText(article.Title)" style="background-color:var(--ion-color-light); margin-bottom:5px;" 
                     [innerHTML]="reddah.summaryShort(article.Title, 100, '......')"></div>
                 </ion-item>
 
-                <ion-card-content style="display:block;margin-right:20px;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
+                <ion-card-content style="display:block;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                     <div class="more-parent" *ngIf="article.Content.split('$$$').length>6">
                         <div class="more-container" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtlmore')" 
                             (load)="reddah.adjustImage(image, 'mtlmore')"
-                            [src]="reddah.level2Cache(image)"
+                            [src]="reddah.level1Cache(image)"
                             onerror="this.src='/assets/icon/noimage.jpg'"
                             class="more-picture" (click)="more_viewer(i, article.Content.split('$$$'))">
                         </div>
@@ -118,7 +118,7 @@
                         <div class="more-container" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtlmore')" 
                             (load)="reddah.adjustImage(image, 'mtlmore')"
-                            [src]="reddah.level2Cache(image)"
+                            [src]="reddah.level1Cache(image)"
                             onerror="this.src='/assets/icon/noimage.jpg'"
                             class="up-picture" (click)="more_viewer(i, article.Content.split('$$$'))">
                         </div>
@@ -127,7 +127,7 @@
                         <div class="more-container" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtlmore')" 
                             (load)="reddah.adjustImage(image, 'mtlmore')"
-                            [src]="reddah.level2Cache(image)"
+                            [src]="reddah.level1Cache(image)"
                             onerror="this.src='/assets/icon/noimage.jpg'"
                             class="more-picture" (click)="more_viewer(i, article.Content.split('$$$'))">
                         </div>
@@ -136,7 +136,7 @@
                         <div class="more-container3">
                             <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtlmore')" 
                             (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'mtlmore')"
-                            [src]="reddah.level2Cache(article.Content.split('$$$')[0])"
+                            [src]="reddah.level1Cache(article.Content.split('$$$')[0])"
                             onerror="this.src='/assets/icon/noimage.jpg'"
                             class="more-picture" (click)="more_viewer(0, article.Content.split('$$$'))">
                         </div>
@@ -160,7 +160,7 @@
          
                 <div class="postModuleLiner" *ngIf="article.VideoUrl.length==0">
                     <div *ngIf="article.ImageUrls.length>=3">
-                        <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span>
+                        <span [class.articleTextRead]="article.Read" style="margin-bottom: 10px;" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span>
                         <div class="postClear"></div>
                         <ion-card-content style="padding:0;">
                             <div class="parent">
@@ -169,21 +169,21 @@
                                         [id]="reddah.makeItId(articleUrl+'home')"  
                                         (load)="reddah.adjustImage(articleUrl, 'home')"
                                         onerror="this.src='/assets/icon/noimage.jpg'"
-                                        [src]="reddah.level2Cache(articleUrl)" 
+                                        [src]="reddah.level1Cache(articleUrl)" 
                                         class="picture">
                                 </div>
                             </div>
                         </ion-card-content>
                     </div>
         
-                    <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3">
+                    <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3" style="display:inline-block;">
                         <div class="listImage">
                             <div class="listImageWrapper">
                                 <img class="BrowsePreviewImageOne"
                                 [id]="reddah.makeItId(article.ImageUrls[0]+'home')" 
                                 (load)="reddah.adjustImage(article.ImageUrls[0], 'home')"
                                 onerror="this.src='/assets/icon/noimage.jpg'"
-                                [src]="reddah.level2Cache(article.ImageUrls[0])">
+                                [src]="reddah.level1Cache(article.ImageUrls[0])">
                             </div>
                         </div>
                         <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span><br>

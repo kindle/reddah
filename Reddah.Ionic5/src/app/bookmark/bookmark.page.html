@@ -33,7 +33,7 @@
             <ion-row>
                 <ion-item lines="none" (click)="viewer(bookmark.Content)" (press)="showChangeMenu($event, bookmark)">
                     <ion-avatar slot="start" class="avatar-top" *ngIf="bookmark.Content.length>0">
-                        <img [src]="reddah.level2Cache(bookmark.Content)">
+                        <img [src]="reddah.level1Cache(bookmark.Content)">
                     </ion-avatar>
                 </ion-item>
             </ion-row>

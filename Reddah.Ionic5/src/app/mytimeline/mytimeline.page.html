@@ -97,7 +97,7 @@
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtl')" 
                             (load)="reddah.adjustImage(image, 'mtl')"
-                            [src]="reddah.level2Cache(image)"
+                            [src]="reddah.level1Cache(image)"
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtl')" 
                             (load)="reddah.adjustImage(image, 'mtl')"
-                            [src]="reddah.level2Cache(image)"
+                            [src]="reddah.level1Cache(image)"
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                         <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtl24')" 
                             (load)="reddah.adjustImage(image, 'mtl24')"
-                            [src]="reddah.level2Cache(image)"
+                            [src]="reddah.level1Cache(image)"
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                         <div class="container3">
                             <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtl')" 
                             (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'mtl')"
-                            [src]="reddah.level2Cache(article.Content.split('$$$')[0])"
+                            [src]="reddah.level1Cache(article.Content.split('$$$')[0])"
                             class="picture" (click)="viewer(0, article.Content.split('$$$'))">
                         </div>
                     </div>

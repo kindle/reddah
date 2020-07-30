@@ -106,7 +106,7 @@
     <ion-item lines="none" class="common-splitter">
     </ion-item>
     <ion-row *ngIf="user_apps.length>0">
-        <ion-item style="width:100%;padding:0px;--inner-padding-end:0;" class="borderTop borderBottom" lines="none">
+        <ion-item style="width:100%;padding:0px;--inner-padding-end:0;--padding-start:0;" class="borderTop borderBottom" lines="none">
             <div class="mini-box">
                 <div class="mini-box-item" *ngFor="let user_app of user_apps" (click)="goMini(user_app)">
                     <img *ngIf="user_app.Photo" src="{{reddah.appData('userphoto_'+user_app.UserName, 'photo.svg')}}" 
@@ -132,7 +132,7 @@
     <ion-item lines="none" class="common-splitter">
     </ion-item>
     <div *ngFor="let article of findPageArticles" 
-        style="background-color: var(--ion-color-tertiary); display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
+        style="background-color: var(--ion-color-tertiary); display: flex; border-bottom: 1px solid lightgrey; padding-top:5px; padding-bottom: 10px;">
         <div style="width:100%;border: 0px solid red;" *ngIf="article.Title&&article.Content">
             <ion-item lines="none" style="--inner-padding-end:15px;">
                 <ion-thumbnail style="margin: 10px 0 0 0;">
@@ -162,12 +162,12 @@
                 [innerHTML]="reddah.summaryShort(article.Title, 100, '......')"></div>
             </ion-item>
 
-            <ion-card-content style="display:block;margin-right:20px;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
+            <ion-card-content style="display:block;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                 <div class="fd-parent" *ngIf="article.Content.split('$$$').length>6">
                     <div class="fd-container" *ngFor="let image of article.Content.split('$$$');index as i">
                         <img [id]="reddah.makeItId(image+'mtlfdtp')" 
                         (load)="reddah.adjustImage(image, 'mtlfdtp')"
-                        [src]="reddah.level2Cache(image)"
+                        [src]="reddah.level1Cache(image)"
                         onerror="this.src='/assets/icon/noimage.jpg'"
                         class="fd-picture" (click)="fd_viewer(i, article.Content.split('$$$'))">
                     </div>
@@ -176,7 +176,7 @@
                     <div class="fd-container" *ngFor="let image of article.Content.split('$$$');index as i">
                         <img [id]="reddah.makeItId(image+'mtlfdtp')" 
                         (load)="reddah.adjustImage(image, 'mtlfdtp')"
-                        [src]="reddah.level2Cache(image)"
+                        [src]="reddah.level1Cache(image)"
                         onerror="this.src='/assets/icon/noimage.jpg'"
                         class="fd-picture" (click)="fd_viewer(i, article.Content.split('$$$'))">
                     </div>
@@ -185,7 +185,7 @@
                     <div class="fd-container" *ngFor="let image of article.Content.split('$$$');index as i">
                         <img [id]="reddah.makeItId(image+'mtlfdtp')" 
                         (load)="reddah.adjustImage(image, 'mtlfdtp')"
-                        [src]="reddah.level2Cache(image)"
+                        [src]="reddah.level1Cache(image)"
                         onerror="this.src='/assets/icon/noimage.jpg'"
                         class="fd-picture" (click)="fd_viewer(i, article.Content.split('$$$'))">
                     </div>
@@ -194,7 +194,7 @@
                     <div class="fd-container3">
                         <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtlfdtp')" 
                         (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'mtlfdtp')"
-                        [src]="reddah.level2Cache(article.Content.split('$$$')[0])"
+                        [src]="reddah.level1Cache(article.Content.split('$$$')[0])"
                         onerror="this.src='/assets/icon/noimage.jpg'"
                         class="fd-picture" (click)="fd_viewer(0, article.Content.split('$$$'))">
 
@@ -203,7 +203,7 @@
             </ion-card-content>
             <!--
             <div *ngIf="article.Content.split('$$$').length==1">
-                {{reddah.level2Cache(article.Content)}}<br>
+                {{reddah.level1Cache(article.Content)}}<br>
                 {{article.Content}}
             </div>-->
             <div style="margin-left:15px;border-left:2px solid var(--ion-color-primary);padding-left: 10px;margin-top:10px;margin-bottom:10px;"

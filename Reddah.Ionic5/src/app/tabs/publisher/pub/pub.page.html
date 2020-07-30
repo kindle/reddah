@@ -60,7 +60,7 @@
                         <img class="BrowsePreviewImageOne" onerror="this.style.display='none'" 
                         [id]="reddah.makeItId(article.ImageUrls[0]+'pubhome')" 
                         (load)="reddah.adjustImage(article.ImageUrls[0], 'pubhome')"
-                        [src]="reddah.level2Cache(article.ImageUrls[0])">
+                        [src]="reddah.level1Cache(article.ImageUrls[0])">
                     </div>
                 </div>
                 <span [class.articleTextRead]="article.Read" class="articleTitle">{{reddah.htmlDecode(article.Title)}}</span><br>

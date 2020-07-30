@@ -5,7 +5,7 @@
     <ion-text>{{ reddah.instant('Common.Details') }}</ion-text>
 </ion-item>
 <ion-content *ngIf="!isFriend" style="background-color: white;">
-    <ion-item lines="none" class="borderTop borderBottom" (click)="addFriend()" *ngIf="!isFriend&&userName!=reddah.getCurrentUser()">
+    <ion-item lines="none" class="borderTop borderBottom" (click)="addFriend()" *ngIf="!isFriend&&article.UserName!=reddah.getCurrentUser()">
         <div class="centerItem">
             <ion-icon class="cmd-icon" color="secondary" name="add"></ion-icon>
             <ion-note color="secondary" class="cmd-title cmd-line">{{ reddah.instant('Menu.Header.AddFriend') }}</ion-note>
@@ -24,14 +24,14 @@
                 </ion-card-title>
             </ion-card-header>
             <div [innerHTML]="reddah.htmlDecode(article.Title)" style="padding: 0 0 4px 15px;" *ngIf="article.Title"></div>
-            <app-share-article *ngIf="article.Abstract&&article.Abstract.length>2" [abstract]="article.Abstract" 
+            <app-share-article style="display: block;margin-left:15px;" *ngIf="article.Abstract&&article.Abstract.length>2" [abstract]="article.Abstract" 
                 [image]="article.Content" [id]="article.Ref" [type]="article.Type"></app-share-article>
             <ion-card-content style="display:block;" *ngIf="(!article.Abstract||article.Abstract.length<3)&&article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                 <div class="parent" *ngIf="article.Content.split('$$$').length>6">
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                         <img [id]="reddah.makeItId2(image,'tsv')" 
                             (load)="reddah.adjustImage(image, 'tsv')"
-                            [src]="reddah.level2Cache(image)"
+                            [src]="reddah.level1Cache(image)"
                             class="picture" 
                             (click)="viewer(i, article.Content.split('$$$'))">
                     </div>
@@ -40,7 +40,7 @@
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                         <img [id]="reddah.makeItId2(image,'tsv')" 
                             (load)="reddah.adjustImage(image, 'tsv')" 
-                            [src]="reddah.level2Cache(image)"
+                            [src]="reddah.level1Cache(image)"
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                     <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
                         <img [id]="reddah.makeItId2(image,'tsv')" 
                             (load)="reddah.adjustImage(image, 'tsv')" 
-                            [src]="reddah.level2Cache(image)"
+                            [src]="reddah.level1Cache(image)"
                             class="picture" (click)="viewer(i, article.Content.split('$$$'))">
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <div class="container3">
                         <img [id]="reddah.makeItId2(article.Content.split('$$$')[0],'tsv')" 
                             (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'tsv')" 
-                            [src]="reddah.level2Cache(article.Content.split('$$$')[0])"
+                            [src]="reddah.level1Cache(article.Content.split('$$$')[0])"
                             class="picture3" (click)="viewer(0, article.Content.split('$$$'))">
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                 <div class="likeSection">
                     <ion-icon name="heart-outline" color="danger" class="likeIcon" style="font-size:15px;"></ion-icon>
                     <span class="likeUserName">
-                        <img [src]="reddah.appDataUserPhoto('userphoto_'+user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName)" (click)="goUser(user.userName)"
+                        <img [src]="reddah.appData('userphoto_'+user.userName)" *ngFor="let user of reddah.getAllowedNames(article.GroupName)" (click)="goUser(user.userName)"
                         style="margin:0 3px;width:35px;height:35px;">
                     </span>
                 </div>

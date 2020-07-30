@@ -28,14 +28,13 @@ export class TsViewerPage implements OnInit {
         this.navController.back();
     }
 
-    isFriend;
+    isFriend = false;
     userName;
     constructor(
         public reddah : ReddahService,
         public loadingController: LoadingController,
         public navController: NavController,
         public modalController: ModalController,
-        private localStorageService: LocalStorageService,
         private popoverController: PopoverController,
         private cacheService: CacheService,
         ){
@@ -66,13 +65,14 @@ export class TsViewerPage implements OnInit {
 
         this.GetCommentsData(this.article.Id);
 
-        this.isFriend = this.article.UserName==this.reddah.getCurrentUser() ||
-            this.reddah.appData('userisfriend_'+this.article.UserName+'_'+this.reddah.getCurrentUser())==1;
+        if(this.article.UserName==this.reddah.getCurrentUser())
+            this.isFriend = true;
+        if(this.reddah.appData('userisfriend_'+this.article.UserName+'_'+this.reddah.getCurrentUser())==1)
+            this.isFriend = true;
         
     }
 
     ionViewDidLoad() {
-        let locale = this.localStorageService.retrieve("Reddah_Locale");
     }
     
 

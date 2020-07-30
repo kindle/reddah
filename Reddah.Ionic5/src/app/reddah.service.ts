@@ -24,6 +24,7 @@ import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, LocalNotific
     CameraPhoto, CameraSource, HapticsImpactStyle } from '@capacitor/core';
     
 import { Crop } from '@ionic-native/crop/ngx';
+import { DomSanitizer } from '@angular/platform-browser';
     
 const { Browser, Camera, Filesystem, Haptics, Device, Storage } = Plugins;
 
@@ -149,6 +150,7 @@ export class ReddahService {
         private router: Router,
         private crop: Crop,
         private clipboard: Clipboard,
+        private sanitizer: DomSanitizer,
         //private imageResizer: ImageResizer
     ) { 
         
@@ -2457,28 +2459,22 @@ export class ReddahService {
         }
     }
 
-
-    level2Cache(cacheKey){
+    //for home/find page article list
+    level1Cache(cacheKey){
         cacheKey = this.cloudFix(cacheKey);
         //console.log(cacheKey);
         if(cacheKey){
             let storekey = cacheKey.replace("///","https://")
             let preview = this.localStorageService.retrieve(storekey);
-            let org = this.localStorageService.retrieve(storekey.replace("_reddah_preview",""))
-    
-            if(org){
-                //console.log("org"+org)
-                //console.log("display org"+Capacitor.convertFileSrc(org))
-                //return org;
-                return Capacitor.convertFileSrc(org);
-            }
-            else if(preview)
+            if(preview)
             {
                 //console.log("display preview"+preview)
                 //console.log("preview"+Capacitor.convertFileSrc(preview))
                 //return cacheKey;
-                return Capacitor.convertFileSrc(preview);
 
+                //let result = this.sanitizer.bypassSecurityTrustUrl(Capacitor.convertFileSrc(preview));
+                //return result;
+                return cacheKey;
             }
             else
             {
@@ -2489,6 +2485,44 @@ export class ReddahService {
         else{
             return cacheKey;
         }
+        
+    }
+
+    level2Cache(cacheKey){
+        cacheKey = this.cloudFix(cacheKey);
+        //console.log(cacheKey);
+        if(cacheKey){
+            let storekey = cacheKey.replace("///","https://")
+            let preview = this.localStorageService.retrieve(storekey);
+            let org = this.localStorageService.retrieve(storekey.replace("_reddah_preview",""))
+            
+            if(org){
+                //console.log("org"+org)
+                //console.log("display org"+Capacitor.convertFileSrc(org))
+                //return org;
+                let result = this.sanitizer.bypassSecurityTrustUrl(Capacitor.convertFileSrc(org));
+                
+                return result;
+            }
+            else if(preview)
+            {
+                //console.log("display preview"+preview)
+                //console.log("preview"+Capacitor.convertFileSrc(preview))
+                //return cacheKey;
+                let result = this.sanitizer.bypassSecurityTrustUrl(Capacitor.convertFileSrc(preview));
+                
+                return result;
+            }
+            else
+            {
+                //console.log("display cacheKey"+cacheKey)
+                return cacheKey;
+            }
+        }
+        else{
+            return cacheKey;
+        }
+        
     }
 
     chatImageCache(cacheKey){
@@ -2551,13 +2585,13 @@ export class ReddahService {
 
     //for normal image download
     getDeviceDirectory(){
-        let dir = this.file.externalRootDirectory;
+        let dir = this.file.cacheDirectory;
         if(Capacitor.platform === 'android')
         {
             //dir = this.file.externalApplicationStorageDirectory;//android/data/com.reddah.app/
             //dir = this.file.externalDataDirectory;//android/data/com.reddah.app/file/
             //dir = this.file.externalCacheDirectory; //android/data/com.reddah.app/cache/
-            dir = this.file.externalApplicationStorageDirectory;
+            dir = this.file.externalCacheDirectory;
         }
         else if(Capacitor.platform === 'ios'){
             dir = this.file.cacheDirectory;

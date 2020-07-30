@@ -74,7 +74,7 @@
         <ion-thumbnail *ngFor="let image of imageList" style="margin-right:5px;">
             <img [id]="reddah.makeItId(image+'usr')" 
                 (load)="reddah.adjustImage(image, 'usr')"
-                [src]="reddah.level2Cache(image)">
+                [src]="reddah.level1Cache(image)">
         </ion-thumbnail>
     </ion-item>
     <ion-item lines="none" class="common-splitter" 
@@ -92,7 +92,7 @@
         <ion-thumbnail *ngFor="let app of appList" style="margin-right: 5px;">
             <img [id]="reddah.makeItId(app.Photo+'usr')" 
                 (load)="reddah.adjustImage(app.Photo, 'usr')"
-                [src]="reddah.level2Cache(app.Photo)"
+                [src]="reddah.level1Cache(app.Photo)"
                 onerror="this.src='/assets/icon/noimage.jpg'"
                 (click)="goMini(app)" style="border-radius: 50%;">
         </ion-thumbnail>
@@ -133,7 +133,7 @@
         <span class="itemTitle" *ngIf="reddah.appData('usersex_'+userName)!=1">{{ reddah.instant('Article.HerTopic') }}</span>
     </ion-item>
     <div *ngFor="let article of userPageArticles" 
-        style="background-color: var(--ion-color-tertiary); display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
+        style="background-color: var(--ion-color-tertiary); display: flex; border-bottom: 1px solid lightgrey; padding-top:5px; padding-bottom: 10px;">
         <div style="width:100%;border: 0px solid red;" *ngIf="article.Title&&article.Content">
             <ion-item lines="none">
                 <ion-thumbnail style="margin: 10px 0 0 0;">
@@ -168,7 +168,7 @@
                     <div class="up-container" *ngFor="let image of article.Content.split('$$$');index as i">
                         <img [id]="reddah.makeItId(image+'mtlutp')" 
                         (load)="reddah.adjustImage(image, 'mtlutp')"
-                        [src]="reddah.level2Cache(image)"
+                        [src]="reddah.level1Cache(image)"
                         onerror="this.src='/assets/icon/noimage.jpg'"
                         class="up-picture" (click)="up_viewer(i, article.Content.split('$$$'))">
                     </div>
@@ -177,7 +177,7 @@
                     <div class="up-container" *ngFor="let image of article.Content.split('$$$');index as i">
                         <img [id]="reddah.makeItId(image+'mtlutp')" 
                         (load)="reddah.adjustImage(image, 'mtlutp')"
-                        [src]="reddah.level2Cache(image)"
+                        [src]="reddah.level1Cache(image)"
                         onerror="this.src='/assets/icon/noimage.jpg'"
                         class="up-picture" (click)="up_viewer(i, article.Content.split('$$$'))">
                     </div>
@@ -186,7 +186,7 @@
                     <div class="up-container" *ngFor="let image of article.Content.split('$$$');index as i">
                         <img [id]="reddah.makeItId(image+'mtlutp')" 
                         (load)="reddah.adjustImage(image, 'mtlutp')"
-                        [src]="reddah.level2Cache(image)"
+                        [src]="reddah.level1Cache(image)"
                         onerror="this.src='/assets/icon/noimage.jpg'"
                         class="up-picture" (click)="up_viewer(i, article.Content.split('$$$'))">
                     </div>
@@ -195,7 +195,7 @@
                     <div class="up-container3">
                         <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtlutp')" 
                         (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'mtlutp')"
-                        [src]="reddah.level2Cache(article.Content.split('$$$')[0])"
+                        [src]="reddah.level1Cache(article.Content.split('$$$')[0])"
                         onerror="this.src='/assets/icon/noimage.jpg'"
                         class="up-picture" (click)="up_viewer(0, article.Content.split('$$$'))">
                     </div>

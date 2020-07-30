@@ -72,7 +72,7 @@
                               [id]="reddah.makeItId(articleUrl+'home')"  
                               (load)="reddah.adjustImage(articleUrl, 'home')"
                               onerror="this.src='/assets/icon/noimage.jpg'"
-                              [src]="reddah.level2Cache(articleUrl)" 
+                              [src]="reddah.level1Cache(articleUrl)" 
                               class="picture">
                       </div>
                   </div>
@@ -86,7 +86,7 @@
                       [id]="reddah.makeItId(article.ImageUrls[0]+'home')" 
                       (load)="reddah.adjustImage(article.ImageUrls[0], 'home')"
                       onerror="this.src='/assets/icon/noimage.jpg'"
-                      [src]="reddah.level2Cache(article.ImageUrls[0])">
+                      [src]="reddah.level1Cache(article.ImageUrls[0])">
                   </div>
               </div>
               <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span><br>

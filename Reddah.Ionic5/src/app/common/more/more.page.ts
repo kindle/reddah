@@ -31,8 +31,6 @@ export class MorePage implements OnInit {
         private localStorageService: LocalStorageService,
         private cacheService: CacheService,
         public authService: AuthService,
-        private toastController: ToastController,
-        private actionSheetController: ActionSheetController,
         private alertController: AlertController,
     ) { 
         this.userName = this.reddah.getCurrentUser();
@@ -51,6 +49,9 @@ export class MorePage implements OnInit {
                 article.like = (this.localStorageService.retrieve(`Reddah_ArticleLike_${this.userName}_${article.Id}`)!=null)
             });
             this.loadedIds = JSON.parse(cachedArticleIds).slice(0,top);
+            this.localStorageService.store("Reddah_morepage_"+this.target, JSON.stringify(this.userCommentArticles));
+            this.localStorageService.store("Reddah_morepage_ids_"+this.target, JSON.stringify(this.loadedIds));
+
             //autofill
             //refer to home, todo
         }
@@ -88,7 +89,7 @@ export class MorePage implements OnInit {
                         this.GetCommentsData(article.Id);
                     }
     
-                    this.localStorageService.store("Reddah_morepage_"+this.target, JSON.stringify(commentArticles));
+                    this.localStorageService.store("Reddah_morepage_"+this.target, JSON.stringify(this.userCommentArticles));
                     this.localStorageService.store("Reddah_morepage_ids_"+this.target, JSON.stringify(this.loadedIds));
     
                 }

@@ -13,7 +13,7 @@
     <ion-list>
         <ion-item *ngFor="let activeUserName of activeUsers" (click)="goUser(activeUserName)">
           <ion-avatar slot="start" style="margin-bottom:auto;margin-top:10px;">
-            <img src="{{reddah.appDataUserPhoto('userphoto_'+activeUserName)}}"
+            <img src="{{reddah.appData('userphoto_'+activeUserName)}}"
             style="border-radius: 5px;">
           </ion-avatar>
           <ion-label>
