@@ -57,25 +57,7 @@ export class PostviewerPage implements OnInit {
         await modal.present();
     }
 
-    async topicViewer(index, imageSrcArray) {
-        const modal = await this.modalController.create({
-            component: ImageViewerComponent,
-            componentProps: {
-                index: index,
-                imgSourceArray: this.reddah.preImageArray(imageSrcArray),
-                imgTitle: "",
-                imgDescription: "",
-                showDownload: true,
-            },
-            cssClass: 'modal-fullscreen',
-            keyboardClose: true,
-            showBackdrop: true,
-            swipeToClose: true,
-            presentingElement: await this.modalController.getTop(),
-        });
     
-        return await modal.present();
-    }
 
     async fullText(text){
         const textModal = await this.modalController.create({
@@ -273,14 +255,37 @@ export class PostviewerPage implements OnInit {
         });
     }
 
+    async topicViewer(index, imageSrcArray) {
+        const modal = await this.modalController.create({
+            component: ImageViewerComponent,
+            componentProps: {
+                index: index,
+                imgSourceArray: this.reddah.preImageArray(imageSrcArray),
+                imgTitle: "",
+                imgDescription: "",
+                showDownload: true,
+            },
+            cssClass: 'modal-fullscreen',
+            keyboardClose: true,
+            showBackdrop: true,
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+    
+        return await modal.present();
+    }
+
     async viewer(event){
         var target = event.target || event.srcElement || event.currentTarget;
         if(target.tagName.toUpperCase()==="IMG"){
+            let imageUrls = this.reddah.getImgsrc(this.reddah.htmlDecode(this.article.Content));
+            let slideIndex = imageUrls.indexOf(target.src);
+            
             const modal = await this.modalController.create({
                 component: ImageViewerComponent,
                 componentProps: {
-                    index:0,
-                    imgSourceArray: this.reddah.preImageArray([target.src]),
+                    index: slideIndex<0?0:slideIndex,
+                    imgSourceArray: this.reddah.preImageArray(imageUrls),
                     imgTitle: "",
                     imgDescription: ""
                 },

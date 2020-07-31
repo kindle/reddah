@@ -43,10 +43,13 @@
                         <ion-note *ngIf="canDelete(reply)" color="danger" slot="end" (click)="delete(reply)">
                             [{{reddah.instant('Comment.Delete') }}]
                         </ion-note>
-                        <div *ngIf="normal" style="display: flex;align-items: center;" (click)="likeComment(reply)">
-                            <ion-icon name="heart-outline" *ngIf="!reply.like" color="warning"></ion-icon>
-                            <ion-icon name="heart-circle-outline" *ngIf="reply.like" color="danger"></ion-icon>
-                            <span color="dark" style="margin-left:2px;vertical-align: top;" *ngIf="reply.Up>0">{{reply.Up}}</span>
+                        <div *ngIf="normal" style="display: flex;align-items: center;">
+                            <ion-icon name="heart-outline" *ngIf="!reply.like" color="warning" (click)="likeComment(reply)"></ion-icon>
+                            <ion-icon name="heart-circle-outline" *ngIf="reply.like" color="danger" (click)="likeComment(reply)"></ion-icon>
+                            <span color="dark" style="margin-left:2px;vertical-align: top;" *ngIf="reply.Up>0" (click)="likeComment(reply)">{{reply.Up}}</span>
+
+                            <ion-icon (click)="translate(reply)" class="action-margin" color="warning" 
+                                name="language-outline"></ion-icon>
                         </div>
                     </div>
                     <span>{{reddah.utcToLocal(reply.CreatedOn,"YY-MM-DD HH:mm")}}</span>
@@ -54,6 +57,9 @@
                         <span class="user-name" (click)="goUser(GetUserNameByCommentId(comments,reply.ParentId))">{{reddah.getDisplayName(GetUserNameByCommentId(comments,reply.ParentId))}}</span> : <span [innerHTML]="reddah.htmlDecode(GetContentByCommentId(comments,reply.ParentId)) | safe: 'html'"></span>
                     </div>
                     <div (click)="commentbox.addNewComment(reply.ArticleId, reply.Id, reply.UserName)" [innerHTML]="reddah.htmlDecode(reply.Content) | safe: 'html'"></div>
+                    <hr style="border-top: 1px dashed var(--ion-color-medium);" *ngIf="reply.Translate==true">
+                    <div (click)="commentbox.addNewComment(reply.ArticleId, reply.Id, reply.UserName)" 
+                    [innerHTML]="reddah.htmlDecode(reply.TranslateContent) | safe: 'html'" *ngIf="reply.Translate==true"></div>
                 </ion-label>
             </ion-item>
         </li>

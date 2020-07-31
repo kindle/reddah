@@ -32,6 +32,7 @@ export class NewFriendPage implements OnInit {
         this.reddah.friendRequests(this.formData)
         .subscribe(friendRequests => 
         {
+            console.log(friendRequests)
             for(let request of friendRequests){
                 //check cache first
                 //can abstract to fun(photourl, username){}

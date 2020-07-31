@@ -236,6 +236,11 @@
 
             <ion-item style="--background:transparent;margin:2px 0;" lines="none">
                 <app-find-action-bar #findActionBar [article]="article" [key]="'Reddah_findpage_'+userName" [articles]="findPageArticles"></app-find-action-bar>
+                
+                <div style="margin-top:15px;display:flex;" slot="end">
+                    <ion-icon (click)="translate(article)" class="action-margin" color="warning" 
+                     name="language-outline"></ion-icon>
+                </div>
             </ion-item>
             
         </div>

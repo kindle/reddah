@@ -3950,4 +3950,14 @@ export class ReddahService {
         await Browser.open({ url: u });
     }
 
+    getImgsrc(htmlstr) {  
+        let tem;
+        var reg = /<img.+?src=('|")?([^'"]+)('|")?(?:\s+|>)/gim;  
+        var imgsrcArr = [];  
+        while (tem = reg.exec(htmlstr)) {  
+            imgsrcArr.push(tem[2]);  
+        }  
+        return imgsrcArr;  
+    }
+
 }
