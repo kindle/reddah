@@ -310,6 +310,7 @@
         "UserNotExist":"المستخدم غير موجود",
         "Document":"فايل",
         "CopyChat":"نسخ",
+        "TranslateChat":"الترجمه",
         "MiniPubMsg":"من خلال تأكيد نشر المستخدم سوف تتلقى التحديثات",
         "CancelPublish":"الآخرة",
         "ConfirmPublish":"صدر",

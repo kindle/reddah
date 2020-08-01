@@ -642,7 +642,7 @@ export class Tab2Page implements OnInit  {
     }
 
     translate(article){
-        article.TranslateContent =  "########...";
+        article.TranslateContent =  "...";
         article.Translate = true;
         //console.log(article)
 

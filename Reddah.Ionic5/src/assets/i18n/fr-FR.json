@@ -311,6 +311,7 @@
         "UserNotExist":"L 'utilisateur n' existe pas",
         "Document":"Documentation",
         "CopyChat":"Copier",
+        "TranslateChat":"Traduire",
         "MiniPubMsg":"L 'utilisateur recevra la mise à jour par confirmation de la publication",
         "CancelPublish":"Après",
         "ConfirmPublish":"Publication",

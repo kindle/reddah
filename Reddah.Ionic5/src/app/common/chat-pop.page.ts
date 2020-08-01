@@ -8,6 +8,9 @@ import { ReddahService } from '../reddah.service';
           <ion-item button (click)="close(1)">
               <ion-label>{{ reddah.instant('Common.CopyChat') }}</ion-label>
           </ion-item>
+          <ion-item button (click)="close(2)">
+              <ion-label>{{ reddah.instant('Common.TranslateChat') }}</ion-label>
+          </ion-item>
       </div>
     `
 })

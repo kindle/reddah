@@ -34,8 +34,8 @@
                         <div style="margin-right:-40px;margin-top:5px;" *ngIf="comment.Type==0&&comment.Id==null">
                             <ion-spinner name="crescent"></ion-spinner>
                         </div>
-                        <div class="chat-box-me" (press)="showChatMenu($event, comment.Content)" (click)="copyToInput(comment.Content)"
-                        [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'" *ngIf="comment.Type==0"></div>
+                        <div class="chat-box-me" (press)="showChatMenu($event, comment)" (click)="copyToInput(comment.Content)"
+                        [innerHTML]="translateWrapper(comment) | safe: 'html'" *ngIf="comment.Type==0"></div>
                         <div class="chat-box-me-1" *ngIf="comment.Type==1" (click)="play(comment)">
                             <ion-icon slot="start" name="wifi-outline"size="large" 
                             style="width:20px;height:18px;transform: rotate(-90deg);margin:auto;"
@@ -86,8 +86,8 @@
                     <div style="display: flex;margin-left:5px;">
                         <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type==0"></div>
                         <div class="chat-box-others" *ngIf="comment.Type==0" 
-                        (press)="showChatMenu($event, comment.Content)" (click)="copyToInput(comment.Content)"
-                        [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                        (press)="showChatMenu($event, comment)" (click)="copyToInput(comment.Content)"
+                        [innerHTML]="translateWrapper(comment) | safe: 'html'"></div>
                         <div class="chat-box-others-1" *ngIf="comment.Type==1" (click)="play(comment)">
                             <ion-icon name="wifi-outline"size="large" style="width:20px;height:18px;transform: rotate(90deg);margin:auto;"
                             *ngIf="!comment.isPlaying"></ion-icon>

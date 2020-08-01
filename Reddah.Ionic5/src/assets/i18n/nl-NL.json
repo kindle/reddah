@@ -310,6 +310,7 @@
         "UserNotExist":"Gebruiker bestaat niet",
         "Document":"Document",
         "CopyChat":"Kopiëren",
+        "TranslateChat":"Vertalen",
         "MiniPubMsg":"Door de publicatie te bevestigen, zullen gebruikers de update ontvangen",
         "CancelPublish":"Later",
         "ConfirmPublish":"Uitgegeven",

@@ -176,7 +176,7 @@ export class ChatFireBase{
         this.lastScrollTop = currentScrollTop;
     }
 
-    async showChatMenu(ev: any, content){
+    async showChatMenu(ev: any, comment){
         const popover = await this.popoverController.create({
             component: ChatPopPage,
             event: ev,
@@ -188,8 +188,52 @@ export class ChatFireBase{
         
         if(data==1)//copy
         {
-            this.reddah.Clipboard(content);
+            this.reddah.Clipboard(comment.Content);
         }
+        if(data==2)//translate
+        {
+            comment.TranslateContent =  "...";
+            comment.Translate = true;
+            //console.log(comment)
+
+            let app_id = this.reddah.qq_app_id;
+            let app_key = this.reddah.qq_app_key;
+            let time_stamp = new Date().getTime();
+            let nonce_str = this.reddah.nonce_str();
+            
+            let params3 = {
+                "app_id":app_id,
+                "time_stamp":Math.floor(time_stamp/1000),
+                "nonce_str":nonce_str,
+                "text": this.reddah.summary(comment.Content,200),
+                "source":"zh",
+                "target":this.reddah.adjustLan(),
+                "sign":""
+            }
+            
+            params3["sign"] = this.reddah.getReqSign(params3, app_key);
+            this.reddah.getQqTextTranslate(params3, app_key).subscribe(data=>{
+                //console.log(data)
+                let response3 = JSON.parse(data.Message)
+                let traslatedAnswer = response3.data.target_text;
+                //console.log(traslatedAnswer);
+                if(data.Success==0){
+                    if(response3.ret!=0)
+                    {
+                        comment.TranslateContent =  this.reddah.instant('FedLogin.FailedMessage');;
+                    }
+                    else{
+                        comment.TranslateContent = traslatedAnswer;
+                    }
+                }
+            });
+        }
+    }
+
+    translateWrapper(comment){
+        if(comment.Translate === true)
+            return this.reddah.htmlDecode(comment.Content) +"<br>"+ comment.TranslateContent;
+        return this.reddah.htmlDecode(comment.Content);
     }
 
 }

@@ -313,6 +313,7 @@
         "UserNotExist":"用戶不存在",
         "Document":"文檔",
         "CopyChat":"復制",
+        "TranslateChat":"翻譯",
         "MiniPubMsg":"確認發佈之後，用戶將收到此小程式的更新",
         "CancelPublish":"稍後發佈",        
         "ConfirmPublish":"確認發佈",

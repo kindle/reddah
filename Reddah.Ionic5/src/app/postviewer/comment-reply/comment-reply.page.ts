@@ -218,7 +218,7 @@ export class CommentReplyPage implements OnInit {
     }
 
     translate(comment){
-        comment.TranslateContent =  "########...";
+        comment.TranslateContent =  "...";
         comment.Translate = true;
         //console.log(comment)
 

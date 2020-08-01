@@ -310,6 +310,7 @@
         "UserNotExist":"L'utente non esiste",
         "Document":"Documento",
         "CopyChat":"Copia",
+        "TranslateChat":"Traduci",
         "MiniPubMsg":"Confermando la pubblicazione, gli utenti riceveranno l'aggiornamento",
         "CancelPublish":"Dopo",
         "ConfirmPublish":"Pubblica",
