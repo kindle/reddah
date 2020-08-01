@@ -89,7 +89,7 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
                 this.cacheService.clearGroup("ChatChooseGroupPage");
             }
             else{
-                alert(JSON.stringify(data));
+                console.log(JSON.stringify(data));
             }
         });
     }
@@ -112,7 +112,7 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
                     this.localStorageService.store(guidName, target);
                 }, (error) => {
                     //console.log(JSON.stringify(error));
-                    alert(JSON.stringify(error));
+                    console.log(JSON.stringify(error));
                 });
             });
         }
@@ -287,7 +287,7 @@ export class GroupChatFirePage extends ChatFireBase implements OnInit {
                 }
             }
             else{
-                alert(JSON.stringify(data));
+                console.log(JSON.stringify(data));
             }
         });
     }

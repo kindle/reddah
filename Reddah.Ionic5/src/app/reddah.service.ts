@@ -2591,7 +2591,7 @@ export class ReddahService {
             //dir = this.file.externalApplicationStorageDirectory;//android/data/com.reddah.app/
             //dir = this.file.externalDataDirectory;//android/data/com.reddah.app/file/
             //dir = this.file.externalCacheDirectory; //android/data/com.reddah.app/cache/
-            dir = this.file.externalCacheDirectory;
+            dir = this.file.externalDataDirectory;
         }
         else if(Capacitor.platform === 'ios'){
             dir = this.file.cacheDirectory;

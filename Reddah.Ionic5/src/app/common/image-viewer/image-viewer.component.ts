@@ -20,7 +20,7 @@ export class ImageViewerComponent implements OnInit {
     @Input() base64 = false;
 
     slideOpts = {};
-    private fileTransfer: FileTransferObject; 
+    fileTransfer: FileTransferObject; 
 
     constructor(
         private modalController: ModalController,
@@ -266,7 +266,10 @@ export class ImageViewerComponent implements OnInit {
         let orgImageFileName = this.getFileName(item.previewImageFileName.replace("_reddah_preview",""));
         //this.fileTransfer.download(orgImageUrl, this.file.applicationStorageDirectory + orgImageFileName).then((entry) => {
         //this.fileTransfer.download(orgImageUrl, this.reddah.getDeviceDirectory()+"reddah/" + orgImageFileName).then((entry) => {
-        this.fileTransfer.download(orgImageUrl, this.reddah.getDeviceDirectory() + orgImageFileName, true).then((entry) => {
+        //console.log("from:"+orgImageUrl)
+        //console.log("to:"+this.reddah.getDeviceDirectory() + orgImageFileName)
+
+        this.fileTransfer.download(orgImageUrl, this.reddah.getDeviceDirectory() + orgImageFileName).then((entry) => {
             console.log('download completed') 
             //let localFileImageUrl = this.file.applicationStorageDirectory + orgImageFileName;
             //let localFileImageUrl = this.reddah.getDeviceDirectory() + "reddah/" + orgImageFileName;
@@ -298,7 +301,9 @@ export class ImageViewerComponent implements OnInit {
                 });
             }
         }, (error) => {
-            //console.log(JSON.stringify(error));
+            console.log(error);
+        }).catch((err)=>{
+            console.log(err);
         });        
     }
 
