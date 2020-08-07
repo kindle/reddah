@@ -1,0 +1,45 @@
+<ion-content>
+    <div class="all-controll">
+        <!--
+        <div class="all-controll-group">
+            <ion-icon is-active="false" size="samll" color="tertiary" class="all-controll-button" name="search-outline" (click)="more()"></ion-icon>
+        </div>
+        -->
+        <div class="all-controll-group">
+            <ion-icon is-active="false" size="samll" color="tertiary" class="all-controll-button" name="ellipsis-horizontal-outline" (click)="more()"></ion-icon>
+            <ion-icon is-active="false" size="samll" color="tertiary" class="all-controll-button" name="close-outline" (click)="close()"></ion-icon>
+        </div>
+    </div>
+    <ion-slides [options]="slideOpts" (ionSlideDidChange)="ionSlideWillChange()" (ionSlidesDidLoad)="ionSlidesDidLoad()">
+        <ion-slide *ngFor="let video of videos">
+            <video loop playsinline control [id]="video.id" class="video-box" (click)="toggleVideo($event)">
+                <source [src]="video.src" type="video/mp4">
+            </video>
+            <div class="user-box">
+                <div>
+                    <ion-avatar slot="start" class="user-box-photo">
+                        <img src="{{reddah.appData('userphoto_'+video.userName)}}" class="contactPortrait"
+                        onerror="this.src='assets/icon/anonymous.png';">
+                    </ion-avatar>
+                </div>
+                <div class="user-box-text">
+                    <ion-text color="tertiary">{{reddah.getDisplayName(video.userName, 100)}}</ion-text>
+                </div>
+            </div>
+            <div class="video-controll">
+                <div class="video-controll-button">
+                    <ion-icon size="large" is-active="false" color="tertiary" class="video-action-button" name="chatbox-ellipses" (click)="more()"></ion-icon>
+                    <ion-text color="tertiary">10</ion-text>
+                </div>
+                <div class="video-controll-button">
+                    <ion-icon size="large" is-active="false" color="tertiary" class="video-action-button" name="arrow-redo" (click)="more()"></ion-icon>
+                    <ion-text color="tertiary">3</ion-text>
+                </div>
+                <div class="video-controll-button">
+                    <ion-icon size="large" is-active="false" color="tertiary" class="video-action-button" name="heart" (click)="more()"></ion-icon>
+                    <ion-text color="tertiary">1</ion-text>
+                </div>
+            </div>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

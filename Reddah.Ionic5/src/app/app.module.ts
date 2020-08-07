@@ -6,7 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 //import { JsonpModule } from '@angular/http';
 import { AlertController, ActionSheetController, 
@@ -174,6 +174,21 @@ import { TopicActionBarComponent } from './topic/topic-action-bar/topic-action-b
 import { TopicChoosePage } from './chat/topic-choose/topic-choose.page';
 import { ActiveUsersPage } from './activeusers/activeusers.page';
 import { PublisherPage } from './tabs/publisher/publisher.page';
+import { VideosPage } from './videos/videos.page';
+
+
+import "@elf/sapphire-chart";
+import "@elf/elf-theme-halo/dark/sapphire-chart";
+import "@elf/sapphire-swing-gauge";
+import "@elf/elf-theme-halo/dark/sapphire-swing-gauge";
+import "@elf/sapphire-sparkline";
+import "@elf/elf-theme-halo/dark/sapphire-sparkline";
+import "@elf/sapphire-parity-chart";
+import "@elf/elf-theme-halo/dark/sapphire-parity-chart";
+import "@elf/sapphire-interactive-chart";
+import "@elf/elf-theme-halo/dark/sapphire-interactive-chart";
+
+
 
 var firebaseConfig = {
     apiKey: "AIzaSyBKOOSwSguEIBc--d6QbUSkO4m2G7Au9fY",
@@ -195,7 +210,7 @@ var firebaseConfig = {
     BookmarkPopPage,ChatPopPage,
     PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
     RankPage,
-    LocalePage,LocationPage,MapPage,StoryPage,Tab3Page,
+    LocalePage,LocationPage,MapPage,StoryPage,Tab3Page,VideosPage,
     ChooseUserPage,ShareChooseChatPage,
     AddCommentPage,
     AddFriendPage,
@@ -263,7 +278,7 @@ entryComponents: [
     BookmarkPopPage,ChatPopPage,
     PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
     RankPage,
-    LocalePage,LocationPage,MapPage,StoryPage,Tab3Page,
+    LocalePage,LocationPage,MapPage,StoryPage,Tab3Page,VideosPage,
     ChooseUserPage,ShareChooseChatPage,
     PostviewerPage,
     ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,
@@ -380,6 +395,7 @@ providers: [
     LocalNotifications,
     VideoEditor,
     Vibration,DeviceMotion,Device,
+    //ReactiveFormsModule,
     //Firebase,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     //{ provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig }

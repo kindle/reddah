@@ -171,6 +171,8 @@ export class AppComponent {
                   this.reddah.unReadMessage = data.Message;
               }
           });
+
+            this.reddah.getUserPhotos(this.reddah.getCurrentUser());
       }
       /*
       if(Capacitor.platform==="android" && this.authService.authenticated())
@@ -187,7 +189,6 @@ export class AppComponent {
           currentFontSize = 4;
       document.documentElement.style.setProperty(`--ion-font-size`, this.reddah.fontSizeMap.get(currentFontSize));
 
-      this.reddah.getUserPhotos(this.reddah.getCurrentUser());
 
       /*
       this.network.onDisconnect().subscribe(() => {

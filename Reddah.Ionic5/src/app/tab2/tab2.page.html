@@ -9,10 +9,14 @@
     <ion-item lines="none" class="borderBottom" (click)="story()">
         <ion-icon class="menuIcon" name="ios-bulb" slot="start" size="medium" color="primary"></ion-icon>
         <ion-label>{{ reddah.instant('Menu.Story') }}</ion-label>
-        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+        <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
     </ion-item>
 -->
-
+    <ion-item (click)="video()">
+        <ion-icon class="menuIcon" name="film-outline" slot="start" size="medium" color="dark"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.Video') }}</ion-label>
+        <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+    </ion-item>
     <ion-item lines="none" class="borderBottom" (click)="mystic()">
         <ion-icon class="menuIcon" color="point" name="logo-octocat" slot="start" size="medium"></ion-icon>
         <ion-label>{{ reddah.instant('Menu.Mystic') }}</ion-label>
@@ -149,7 +153,8 @@
                         <ion-text color="secondary" style="margin-left: 5px;" *ngIf="isMe(article.UserName)" (click)="delete(article)">{{ reddah.instant('Comment.Delete') }}</ion-text>
                     </div>
                 </ion-label>
-                <ion-text color="medium" (click)="fd_report(article)">{{ reddah.instant('Pop.Report') }}</ion-text>
+                <ion-icon (click)="translate(article)" class="action-margin" color="warning" 
+                     name="language-outline"></ion-icon>
             </ion-item>
             
             <div *ngIf="article.Title.length>0&&article.Title.length<100" (click)="findActionBar.view(article)">
@@ -238,8 +243,7 @@
                 <app-find-action-bar #findActionBar [article]="article" [key]="'Reddah_findpage_'+userName" [articles]="findPageArticles"></app-find-action-bar>
                 
                 <div style="margin-top:15px;display:flex;" slot="end">
-                    <ion-icon (click)="translate(article)" class="action-margin" color="warning" 
-                     name="language-outline"></ion-icon>
+                    <ion-text color="medium" (click)="fd_report(article)">{{ reddah.instant('Pop.Report') }}</ion-text>
                 </div>
             </ion-item>
             

@@ -24,7 +24,7 @@ import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.pa
 import { TimelinePopPage } from 'src/app/common/timeline-pop.page';
 import { ActiveUsersPage } from 'src/app/activeusers/activeusers.page';
 import { PublisherPage } from '../tabs/publisher/publisher.page';
-import { TopicPage } from '../topic/topic.page';
+import { VideosPage } from '../videos/videos.page';
 
 @Component({
   selector: 'app-tab2',
@@ -500,6 +500,20 @@ export class Tab2Page implements OnInit  {
           
       await modal.present();
   }
+
+  async video(){
+    const modal = await this.modalController.create({
+        component: VideosPage,
+        componentProps: {
+            
+        },
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+        
+    await modal.present();
+}
 
   async map(){
       const modal = await this.modalController.create({

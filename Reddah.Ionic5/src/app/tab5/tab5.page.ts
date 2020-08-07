@@ -12,7 +12,6 @@ import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page';
 import { PointPage } from '../common/point/point.page';
 import { MyReportPage } from '../mytimeline/myreport/myreport.page';
 import { PunchClockPage } from '../common/point/punch-clock/punch-clock.page';
-import { PublisherPage } from '../tabs/publisher/publisher.page';
 import { SearchPage } from 'src/app/common/search/search.page';
 import { UserPage } from 'src/app/common/user/user.page';
 import { PlatformPage } from '../tabs/publisher/platform/platform.page';

@@ -9,6 +9,8 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { ArticleActionBarComponent } from './article-action-bar/article-action-bar.component';
 import { HeaderModule } from '../common/header/header.module';
 
+
+
 @NgModule({
   imports: [
     IonicModule,

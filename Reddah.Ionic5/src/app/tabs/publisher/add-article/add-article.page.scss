@@ -61,3 +61,8 @@
 .gapItem{
     margin: 10px 0;
 }
+
+ckeditor {
+    -webkit-user-select: text;
+    user-select: text
+}

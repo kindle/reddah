@@ -15,7 +15,9 @@ export class TabsPage {
     public reddah: ReddahService,
     private modalController: ModalController,
     private router: Router,
-    ) {}
+    ) {
+        this.reddah.getUserPhotos(this.reddah.getCurrentUser());
+    }
 
     async openEarth(){
       
