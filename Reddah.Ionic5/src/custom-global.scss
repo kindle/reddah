@@ -315,3 +315,10 @@ ion-loading.custom-loading {
 .no-padding-end{
   --inner-padding-end:5px;
 }
+
+body {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}

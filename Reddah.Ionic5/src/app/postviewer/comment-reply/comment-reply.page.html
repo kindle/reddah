@@ -57,7 +57,7 @@
                         <span class="user-name" (click)="goUser(GetUserNameByCommentId(comments,reply.ParentId))">{{reddah.getDisplayName(GetUserNameByCommentId(comments,reply.ParentId))}}</span> : <span [innerHTML]="reddah.htmlDecode(GetContentByCommentId(comments,reply.ParentId)) | safe: 'html'"></span>
                     </div>
                     <div (click)="commentbox.addNewComment(reply.ArticleId, reply.Id, reply.UserName)" [innerHTML]="reddah.htmlDecode(reply.Content) | safe: 'html'"></div>
-                    <hr style="border-top: 1px dashed var(--ion-color-medium);" *ngIf="reply.Translate==true">
+                    <hr style="border-top: 1px dashed var(--ion-color-medium);margin:5px 0;background:transparent;" *ngIf="reply.Translate==true">
                     <div (click)="commentbox.addNewComment(reply.ArticleId, reply.Id, reply.UserName)" 
                     [innerHTML]="reddah.htmlDecode(reply.TranslateContent) | safe: 'html'" *ngIf="reply.Translate==true"></div>
                 </ion-label>

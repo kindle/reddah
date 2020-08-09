@@ -65,7 +65,7 @@
                         *ngIf="!reddah.showComments.has(comment.Id)&&comment.Content.length>100">
                         <ion-label style="font-size: smaller;">{{reddah.instant('Confirm.ShowAll')}} {{reddah.leftPercentage(comment.Content)}}</ion-label>
                     </ion-chip>
-                    <hr style="border-top: 1px dashed var(--ion-color-medium);" *ngIf="comment.Translate==true">
+                    <hr style="border-top: 1px dashed var(--ion-color-medium);margin:5px 0;background:transparent;" *ngIf="comment.Translate==true">
                     <div (click)="addNewComment(comment.ArticleId, comment.Id, comment.UserName)" 
                     [innerHTML]="reddah.htmlDecode(comment.TranslateContent) | safe: 'html'" *ngIf="comment.Translate==true"></div>
                     <br *ngIf="!reddah.showComments.has(comment.Id)&&comment.Content.length>100">

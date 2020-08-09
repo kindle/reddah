@@ -47,8 +47,15 @@
             </ion-note>
             <ion-note *ngIf="!asNormalUser" color="danger" slot="end" (click)="edit()">[{{reddah.instant('Comment.Edit') }}]</ion-note>
         </div>
+
+        <ion-item lines="none" style="--padding-start:0;--inner-padding-end:0;">
+            <ion-icon slot="end" (click)="translate(article)" class="action-margin" color="warning" 
+                     name="language-outline"></ion-icon>
+        </ion-item>
         
         <ion-text color="dark" *ngIf="!article.VideoUrl">
+            <div [innerHTML]="reddah.htmlDecode(article.TranslateContent) | safe: 'html'" *ngIf="article.Translate==true"></div>
+            <hr style="border-top: 1px dashed var(--ion-color-medium);margin:5px 0;background:transparent;" *ngIf="article.Translate==true">
             <div id="articleContent" (click)="viewer($event)" [innerHTML]="reddah.htmlDecode(article.Content) | safe: 'html'"></div>
         </ion-text>
         <div *ngIf="article.VideoUrl" style="padding: 10px 10px 10px 0;">

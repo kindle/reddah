@@ -456,7 +456,7 @@ export class UserPage implements OnInit {
             ].concat(this.reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1?
                 [{
                     text: this.reddah.instant("Pop.Report"),
-                    icon: 'alert',
+                    icon: 'warning-outline',
                     handler: () => {
                         this.report();                  
                     }
