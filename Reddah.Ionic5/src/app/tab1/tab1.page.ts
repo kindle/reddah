@@ -58,7 +58,7 @@ export class Tab1Page implements OnInit {
           this.reddah.loadedIds = JSON.parse(cacheArticleIds).slice(0,top);
           this.reddah.dislikeGroups = JSON.parse(cacheDislikeGroups);
           this.reddah.dislikeUserNames = JSON.parse(cacheDislikeUserNames);
-          //this.reddah.fillCacheArticles();
+          this.reddah.fillCacheArticles();
       }
       else
       {
@@ -90,7 +90,7 @@ export class Tab1Page implements OnInit {
               this.localStorageService.store("reddah_article_groups_"+this.userName, JSON.stringify(this.reddah.dislikeGroups));
               this.localStorageService.store("reddah_article_usernames_"+this.userName, JSON.stringify(this.reddah.dislikeUserNames));
      
-              //this.reddah.fillCacheArticles();
+              this.reddah.fillCacheArticles();
               this.firstLoad = false;
           });
       }
@@ -169,10 +169,7 @@ export class Tab1Page implements OnInit {
 
   //drag down
   doRefresh(event){
-    this.ngZone.run(()=>{
       this.getCacheArticles(event, true);
-    })
-      
   }
 
   //drag up

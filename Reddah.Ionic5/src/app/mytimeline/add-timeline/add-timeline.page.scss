@@ -43,6 +43,12 @@
     }
     background-color: red;
     color: white;
+    display:flex;
+    justify-content:center;
+}
+
+.d-item-center{
+    align-self: center;
 }
 
 .ex-over {

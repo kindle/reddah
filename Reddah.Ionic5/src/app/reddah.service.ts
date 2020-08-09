@@ -2302,6 +2302,10 @@ export class ReddahService {
         return output;
     }
 
+    htmlDecode2(text: string) {
+        return this.htmlDecode(this.htmlDecode(text));
+    }
+
     subpost(str: string, n: number, sufix="...") {
         var r = /[^\u4e00-\u9fa5]/g;
         if (str.replace(r, "mm").length <= n) { return str; }

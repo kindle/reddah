@@ -172,17 +172,14 @@ export class AppComponent {
               }
           });
 
-            this.reddah.getUserPhotos(this.reddah.getCurrentUser());
-      }
-      /*
-      if(Capacitor.platform==="android" && this.authService.authenticated())
-      {
           let localCache = this.localStorageService.retrieve("reddah_cache_queue_"+this.reddah.getCurrentUser());
           if(localCache!=null){
               this.reddah.ArticleCacheQueue = new Queue<any>();
               this.reddah.ArticleCacheQueue._store = JSON.parse(localCache);
           }
-      }*/
+
+          this.reddah.getUserPhotos(this.reddah.getCurrentUser());
+      }
       
       let currentFontSize = this.localStorageService.retrieve("Reddah_fontsize");
       if(!currentFontSize)
