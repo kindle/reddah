@@ -75,6 +75,8 @@ export class PostviewerPage implements OnInit {
 
     effeciveRead;
     ngOnInit() {
+
+        this.article["Translate"] = false;
         this.reddah.getUserPhotos(this.article.UserName);
 
         if(!this.preview){
@@ -103,6 +105,10 @@ export class PostviewerPage implements OnInit {
         //console.log(this.article)
         if(!this.preview)
             this.loadComments();
+    }
+
+    ionViewDidLeave(){
+        this.article["Translate"] = false;
     }
 
     async focus(){
@@ -441,22 +447,37 @@ export class PostviewerPage implements OnInit {
         }
     }
 
-    translate(article){
-        article.TranslateContent =  "...";
-        article.Translate = true;
-        //console.log(article)
+    speak(article){
 
+    }
+
+    orgLines = [];
+    translateLines = [];
+    translate(article){
+        article.Translate = true;
+
+        this.translateTitle(this.article);
+        
+        this.orgLines = article.Content.replace("&lt;br&gt;","&lt;p&gt;").split("&lt;p&gt;");
+        this.translateLines = [].concat(this.orgLines);
+        this.orgLines.forEach((orgLine, index)=>{
+            this.translateContent(orgLine, index)
+        })
+    }
+
+
+    translateTitle(article){
         let app_id = this.reddah.qq_app_id;
         let app_key = this.reddah.qq_app_key;
         let time_stamp = new Date().getTime();
         let nonce_str = this.reddah.nonce_str();
         
+        
         let params3 = {
             "app_id":app_id,
             "time_stamp":Math.floor(time_stamp/1000),
             "nonce_str":nonce_str,
-            //"text": article.Content,
-            "text": this.reddah.summary(article.Content, 200),
+            "text": this.reddah.summary(article.Title, 200),
             "source":"zh",
             "target":this.reddah.adjustLan(),
             "sign":""
@@ -471,14 +492,59 @@ export class PostviewerPage implements OnInit {
             if(data.Success==0){
                 if(response3.ret!=0)
                 {
-                    article.TranslateContent =  this.reddah.instant('FedLogin.FailedMessage');
+                    //this.translateLines[index] = this.reddah.instant('FedLogin.FailedMessage');
                 }
                 else{
-                    article.TranslateContent =  traslatedAnswer;
+                    article.TranslateTitle =  traslatedAnswer;
                     //article.Content = article.TranslateContent;
                 }
             }
         });
+
+        
+    }
+
+    translateContent(orgLine, index){
+        let app_id = this.reddah.qq_app_id;
+        let app_key = this.reddah.qq_app_key;
+        let time_stamp = new Date().getTime();
+        let nonce_str = this.reddah.nonce_str();
+        
+        if(orgLine.indexOf("&lt;img")>-1){
+            this.translateLines[index] = "";
+        }
+        else{
+
+            let params3 = {
+                "app_id":app_id,
+                "time_stamp":Math.floor(time_stamp/1000),
+                "nonce_str":nonce_str,
+                "text": this.reddah.summary(orgLine, 200),
+                "source":"zh",
+                "target":this.reddah.adjustLan(),
+                "sign":""
+            }
+            
+            params3["sign"] = this.reddah.getReqSign(params3, app_key);
+            this.reddah.getQqTextTranslate(params3, app_key).subscribe(data=>{
+                //console.log(data)
+                let response3 = JSON.parse(data.Message)
+                let traslatedAnswer = response3.data.target_text;
+                ///console.log(traslatedAnswer);
+                if(data.Success==0){
+                    if(response3.ret!=0)
+                    {
+                        //this.translateLines[index] = this.reddah.instant('FedLogin.FailedMessage');
+                    }
+                    else{
+                        this.translateLines[index] =  traslatedAnswer;
+                        //article.Content = article.TranslateContent;
+                    }
+                }
+            });
+        }
+
+        
     }
 
 }

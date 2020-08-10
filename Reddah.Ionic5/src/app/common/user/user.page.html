@@ -134,7 +134,7 @@
     </ion-item>
     <div *ngFor="let article of userPageArticles" 
         style="background-color: var(--ion-color-tertiary); display: flex; border-bottom: 1px solid lightgrey; padding-top:5px; padding-bottom: 10px;">
-        <div style="width:100%;border: 0px solid red;" *ngIf="article.Title&&article.Content">
+        <div style="width:100%;border: 0px solid red;" *ngIf="article.Title">
             <ion-item lines="none">
                 <ion-thumbnail style="margin: 10px 0 0 0;">
                     <img src="{{reddah.appData('userphoto_'+article.UserName)}}" 
