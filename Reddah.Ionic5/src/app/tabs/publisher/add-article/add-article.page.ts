@@ -8,6 +8,7 @@ import { ImageViewerComponent } from '../../../common/image-viewer/image-viewer.
 import { AddMaterialPage } from '../../../mytimeline/add-material/add-material.page';
 import { PostviewerPage } from '../../../postviewer/postviewer.page';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Camera, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
 //import * as BalloonEditor from '@ckeditor/ckeditor5-build-balloon';
 //import * as InlineEditor from '@ckeditor/ckeditor5-build-inline';
 
@@ -42,14 +43,14 @@ export class AddArticlePage implements OnInit {
     content: string = "";
     groupName: string = "";
 
-    
+    //"|", "bulletedList", "numberedList", "imageUpload", 'insertTable','mediaEmbed',
     config = {
         language: this.reddahService.getCurrentLocale(),
         toolbar: [
              
         "|", "alignment:left", "alignment:center", "alignment:right", "alignment:adjust", 
         "bold", "italic", "blockQuote", "link", 
-        "|", "bulletedList", "numberedList", "imageUpload", 'insertTable','mediaEmbed',
+        "|", "bulletedList", "numberedList", 'insertTable','mediaEmbed',
         "|", "undo", "redo",
         "|", "heading",],
        /*
@@ -302,4 +303,28 @@ export class AddArticlePage implements OnInit {
           
         await modal.present();
     }
+
+    async addImage(){
+
+        let photos  = [];
+        let formData = new FormData();
+        this.reddah.fromLibPhoto(photos, formData, false).then(()=>{
+            this.reddah.pubAddImage(formData)
+            .subscribe(result => {
+                if(result.Success==0)
+                { 
+                    this.content += `<img src=${result.Message}>`;  
+                }
+                else
+                {
+                    //alert(result.Message);
+                }
+            },
+            error=>{
+                //alert(JSON.stringify(error));
+            });
+        })   
+        
+    }
+
 }

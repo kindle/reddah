@@ -317,8 +317,8 @@ ion-loading.custom-loading {
 }
 
 body {
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-}
+  -webkit-user-select: auto !important;
+ .scroll {
+     -webkit-user-select: inherit;
+   }
+ }

@@ -226,6 +226,17 @@ export class ReddahService {
     }    
 
     //******************************** */
+    private pubAddImageUrl = `${this.domain}/api/photo/imageupload${this.cloud}`
+    
+    pubAddImage(formData): Observable<any> {
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.pubAddImageUrl, formData)
+        .pipe(
+            tap(data => this.log('pub add image')),
+            catchError(this.handleError('pub add image', []))
+        );
+    }
+    //******************************** */
     private registersubUrl = `${this.domain}/api/pub/registersub`; 
     
     registerSub(formData): Observable<any> {
@@ -3455,7 +3466,7 @@ export class ReddahService {
         photos.push(savedImageFile);
     }
 
-    async fromLibPhoto(photos, formData)
+    async fromLibPhoto(photos, formData, crop = true)
     {
         const capturedPhoto = await Camera.getPhoto({
             resultType: CameraResultType.Uri, 
@@ -3463,7 +3474,7 @@ export class ReddahService {
             quality: 100 
         });
     
-        const savedImageFile = await this.uploadPicture(capturedPhoto, formData);
+        const savedImageFile = await this.uploadPicture(capturedPhoto, formData, crop);
         photos.push(savedImageFile);
     }
 
@@ -3504,7 +3515,7 @@ export class ReddahService {
         formData.append(fileNamePreview, this.b64toBlob(base64Data), fileNamePreview);
     }
 
-    private async uploadPicture(cameraPhoto: CameraPhoto, formData) {
+    private async uploadPicture(cameraPhoto: CameraPhoto, formData, crop=true) {
         const fileName = new Date().getTime() + '.jpeg';
         const fileNamePreview = fileName.replace('.jpeg','_reddah_preview.jpeg');
 
@@ -3512,17 +3523,19 @@ export class ReddahService {
 
         formData.append(fileName, this.b64toBlob(base64Data), fileName);
 
-        console.log("A"+cameraPhoto.path);
+        //console.log("A"+cameraPhoto.path);
 
-        this.crop.crop(cameraPhoto.path, {quality: 50, targetWidth: 800, targetHeight: 800})
-        .then(
-            
-            newCropImageData => {
-                console.log("B"+newCropImageData)
-                this.uploadPictureFromResize(newCropImageData, formData, fileNamePreview);
-            },
-            error => console.error('Error cropping image', error)
-        );
+        if(crop){
+            this.crop.crop(cameraPhoto.path, {quality: 50, targetWidth: 800, targetHeight: 800})
+            .then(
+                
+                newCropImageData => {
+                    //console.log("B"+newCropImageData)
+                    this.uploadPictureFromResize(newCropImageData, formData, fileNamePreview);
+                },
+                error => console.error('Error cropping image', error)
+            );
+        }
         
       
         return {
@@ -3560,7 +3573,8 @@ export class ReddahService {
     
         return file.data;
     }
-    private async readAsBase64(cameraPhoto: CameraPhoto) {
+
+    async readAsBase64(cameraPhoto: CameraPhoto) {
         // "hybrid" will detect Cordova or Capacitor
         if (this.platform.is('hybrid')) {
             // Read the file into base64 format

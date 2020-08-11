@@ -38,3 +38,9 @@
     </ion-item>-->
 
 </ion-content>
+
+<ion-fab *ngIf="reddah.isMobile()" vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom:15px;margin-right:15px;">
+    <ion-fab-button (click)="addImage()">
+        <ion-icon name="image-outline"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
