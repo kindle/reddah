@@ -163,12 +163,18 @@
             
             <div *ngIf="article.Title.length>0&&article.Title.length<100" (click)="findActionBar.view(article)">
                 <div style="padding: 0 15px 4px 15px;margin-bottom:0px;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                <hr style="border-top: 1px dashed var(--ion-color-medium);margin:5px 0;background:transparent;" *ngIf="article.Translate">
+                <div style="padding: 0 15px 4px 15px;margin-bottom:0px;" [innerHTML]="reddah.htmlDecode(article.TranslateContent)" *ngIf="article.Translate"></div>
             </div>
             
             
             <ion-item style="--background:transparent;--inner-padding-end:15px;" lines="none" *ngIf="article.Title.length>=100">
                 <div (click)="fullText(article.Title)" style="background-color:var(--ion-color-light); padding: 12px;margin-bottom:5px;width:100%;" 
                 [innerHTML]="reddah.summaryShort(article.Title, 100, '......')"></div>
+            </ion-item>
+            <ion-item style="--background:transparent;--inner-padding-end:15px;" lines="none" *ngIf="article.Title.length>=100&&article.Translate">
+                <div (click)="fullText(article.Title)" style="background-color:var(--ion-color-light); padding: 12px;margin-bottom:5px;width:100%;" 
+                [innerHTML]="reddah.summaryShort(article.TranslateContent, 100, '......')"></div>
             </ion-item>
 
             <ion-card-content style="display:block;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>

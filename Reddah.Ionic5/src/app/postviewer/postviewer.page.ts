@@ -99,6 +99,9 @@ export class PostviewerPage implements OnInit {
                 }
             },5000);
         }
+
+
+        this.detectLan();
     }
 
     ionViewDidEnter(){
@@ -454,17 +457,44 @@ export class PostviewerPage implements OnInit {
     orgLines = [];
     translateLines = [];
     translate(article){
-        article.Translate = true;
+        if(this.detectedLan!=this.reddah.adjustLan()){
+            article.Translate = true;
 
-        this.translateTitle(this.article);
-        
-        this.orgLines = article.Content.replace("&lt;br&gt;","&lt;p&gt;").split("&lt;p&gt;");
-        this.translateLines = [].concat(this.orgLines);
-        this.orgLines.forEach((orgLine, index)=>{
-            this.translateContent(orgLine, index)
-        })
+            this.translateTitle(this.article);
+            
+            this.orgLines = article.Content.replace("&lt;br&gt;","&lt;p&gt;").split("&lt;p&gt;");
+            this.translateLines = [].concat(this.orgLines);
+            this.orgLines.forEach((orgLine, index)=>{
+                this.translateContent(orgLine, index)
+            })
+        }
     }
 
+    detectedLan;
+    detectLan(){
+        let app_id = this.reddah.qq_app_id;
+        let app_key = this.reddah.qq_app_key;
+        let time_stamp = new Date().getTime();
+        let nonce_str = this.reddah.nonce_str();
+
+        let params2 = {
+            "app_id":app_id,
+            "time_stamp":Math.floor(time_stamp/1000),
+            "nonce_str":nonce_str,
+            "text": this.reddah.summary(this.article.Content, 200),
+            "force":0,
+            "candidate_langs":"",
+            "sign":""
+        }
+
+        params2["sign"] = this.reddah.getReqSign(params2, app_key);
+        this.reddah.getQqLanguageDetect(params2, app_key).subscribe(detect=>{
+            if(detect.Success==0){
+                this.detectedLan = JSON.parse(detect.Message).data.lang;
+                console.log(detect.Message)
+            }
+        });
+    }
 
     translateTitle(article){
         let app_id = this.reddah.qq_app_id;
@@ -478,53 +508,12 @@ export class PostviewerPage implements OnInit {
             "time_stamp":Math.floor(time_stamp/1000),
             "nonce_str":nonce_str,
             "text": this.reddah.summary(article.Title, 200),
-            "source":"zh",
+            "source":this.detectedLan,
             "target":this.reddah.adjustLan(),
             "sign":""
         }
-        
-        params3["sign"] = this.reddah.getReqSign(params3, app_key);
-        this.reddah.getQqTextTranslate(params3, app_key).subscribe(data=>{
-            //console.log(data)
-            let response3 = JSON.parse(data.Message)
-            let traslatedAnswer = response3.data.target_text;
-            ///console.log(traslatedAnswer);
-            if(data.Success==0){
-                if(response3.ret!=0)
-                {
-                    //this.translateLines[index] = this.reddah.instant('FedLogin.FailedMessage');
-                }
-                else{
-                    article.TranslateTitle =  traslatedAnswer;
-                    //article.Content = article.TranslateContent;
-                }
-            }
-        });
-
-        
-    }
-
-    translateContent(orgLine, index){
-        let app_id = this.reddah.qq_app_id;
-        let app_key = this.reddah.qq_app_key;
-        let time_stamp = new Date().getTime();
-        let nonce_str = this.reddah.nonce_str();
-        
-        if(orgLine.indexOf("&lt;img")>-1){
-            this.translateLines[index] = "";
-        }
-        else{
-
-            let params3 = {
-                "app_id":app_id,
-                "time_stamp":Math.floor(time_stamp/1000),
-                "nonce_str":nonce_str,
-                "text": this.reddah.summary(orgLine, 200),
-                "source":"zh",
-                "target":this.reddah.adjustLan(),
-                "sign":""
-            }
-            
+        console.log(params3)
+        if(this.detectedLan!=this.reddah.adjustLan()){
             params3["sign"] = this.reddah.getReqSign(params3, app_key);
             this.reddah.getQqTextTranslate(params3, app_key).subscribe(data=>{
                 //console.log(data)
@@ -537,13 +526,56 @@ export class PostviewerPage implements OnInit {
                         //this.translateLines[index] = this.reddah.instant('FedLogin.FailedMessage');
                     }
                     else{
-                        this.translateLines[index] =  traslatedAnswer;
+                        article.TranslateTitle =  traslatedAnswer;
                         //article.Content = article.TranslateContent;
                     }
                 }
             });
         }
+        
+    }
 
+    translateContent(orgLine, index){
+        let app_id = this.reddah.qq_app_id;
+        let app_key = this.reddah.qq_app_key;
+        let time_stamp = new Date().getTime();
+        let nonce_str = this.reddah.nonce_str();
+
+        if(this.detectedLan!=this.reddah.adjustLan()){
+            if(orgLine.indexOf("&lt;img")>-1){
+                this.translateLines[index] = "";
+            }
+            else{
+
+                let params3 = {
+                    "app_id":app_id,
+                    "time_stamp":Math.floor(time_stamp/1000),
+                    "nonce_str":nonce_str,
+                    "text": this.reddah.summary(orgLine, 200),
+                    "source":this.detectedLan,
+                    "target":this.reddah.adjustLan(),
+                    "sign":""
+                }
+                
+                params3["sign"] = this.reddah.getReqSign(params3, app_key);
+                this.reddah.getQqTextTranslate(params3, app_key).subscribe(data=>{
+                    //console.log(data)
+                    let response3 = JSON.parse(data.Message)
+                    let traslatedAnswer = response3.data.target_text;
+                    ///console.log(traslatedAnswer);
+                    if(data.Success==0){
+                        if(response3.ret!=0)
+                        {
+                            //this.translateLines[index] = this.reddah.instant('FedLogin.FailedMessage');
+                        }
+                        else{
+                            this.translateLines[index] =  traslatedAnswer;
+                            //article.Content = article.TranslateContent;
+                        }
+                    }
+                });
+            }
+        }
         
     }
 

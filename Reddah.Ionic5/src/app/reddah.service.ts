@@ -583,6 +583,34 @@ export class ReddahService {
 
     }
 
+    private nplDetectUrl = `${this.domain}/api/ai/detect`; 
+    getQqLanguageDetect(params, appKey): Observable<any> {
+
+        let nlpQqTextUrl = "https://api.ai.qq.com/fcgi-bin/nlp/nlp_textdetect";
+
+        nlpQqTextUrl += "?"
+        for (var key of Object.keys(params)) {
+            let value = params[key];
+            if(value!=""){
+                nlpQqTextUrl += key + '=' + encodeURIComponent(value) + '&';
+            }
+        }
+        nlpQqTextUrl += 'app_key=' + appKey;
+
+        
+        console.log(nlpQqTextUrl)
+
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append("locale", this.getCurrentLocale());
+        formData.append("url", nlpQqTextUrl);
+        return this.http.post<any>(this.nplDetectUrl, formData)
+        .pipe(
+            tap(data => this.log('get lan detect')),
+            catchError(this.handleError('get lan detect', []))
+        );
+    }
+
     private nplTranslateUrl = `${this.domain}/api/ai/translate`; 
     getQqTextTranslate(params, appKey): Observable<any> {
 

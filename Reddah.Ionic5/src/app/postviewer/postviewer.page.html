@@ -52,9 +52,9 @@
 
         <ion-item lines="none" style="--padding-start:0;">
             <ion-icon (click)="speak(article)" class="action-margin" color="dark" 
-                name="mic-outline"></ion-icon>
+                name="mic-outline" *ngIf="false"></ion-icon>
             <ion-icon slot="end" (click)="translate(article)" class="action-margin" color="warning" 
-                name="language-outline"></ion-icon>
+                name="language-outline" *ngIf="detectedLan!=reddah.adjustLan()"></ion-icon>
         </ion-item>
         
         <ion-text color="dark" *ngIf="!article.VideoUrl">
