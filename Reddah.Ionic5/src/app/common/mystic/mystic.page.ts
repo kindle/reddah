@@ -363,7 +363,7 @@ export class MysticPage implements OnInit {
                     "time_stamp":Math.floor(time_stamp/1000),
                     "nonce_str":nonce_str,
                     "text":question,
-                    "source":this.reddah.adjustLan(),
+                    "source":this.reddah.adjustLan("zh"),
                     "target":"zh",
                     "sign":""
                 }
@@ -402,97 +402,118 @@ export class MysticPage implements OnInit {
                                 }
                                 setTimeout(()=>{this.writing = 1;},1000);
                                 
-                                let params3 = {
+                                let params22 = {
                                     "app_id":app_id,
                                     "time_stamp":Math.floor(time_stamp/1000),
                                     "nonce_str":nonce_str,
-                                    "text":answer,
-                                    "source":"zh",
-                                    "target":this.reddah.adjustLan(),
+                                    "text": answer,
+                                    "force":0,
+                                    "candidate_langs":"",
                                     "sign":""
                                 }
-                                
-                                params3["sign"] = this.reddah.getReqSign(params3, app_key);
-                                this.reddah.getQqTextTranslate(params3, app_key).subscribe(data=>{
-                                    console.log(data)
-                                    let response3 = JSON.parse(data.Message)
-                                    let traslatedAnswer = response3.data.target_text;
-                                    let time = new Date().getTime();
-                                    this.zone.run(()=>{this.writing = 0;});
-                                    if(data.Success==0){
-                                        if(response3.ret!=0)
-                                        {
-                                            traslatedAnswer = this.reddah.instant("Mystic.ChangeQuest");
+                        
+                                params22["sign"] = this.reddah.getReqSign(params22, app_key);
+                                this.reddah.getQqLanguageDetect(params22, app_key).subscribe(detect=>{
+                                    if(detect.Success==0){
+                                        console.log(detect.Message);
+                                        let detectLan = JSON.parse(detect.Message).data.lang;
+                    
+                                        let params3 = {
+                                            "app_id":app_id,
+                                            "time_stamp":Math.floor(time_stamp/1000),
+                                            "nonce_str":nonce_str,
+                                            "text": answer,
+                                            "source":detectLan,
+                                            "target":this.reddah.adjustLan(detectLan),
+                                            "sign":""
                                         }
-                                        let audioMagicNumber = this.reddah.getRandomInt(3);
-                                        console.log(audioMagicNumber)
-                                        let isEnUs = this.reddah.getCurrentLocale()=="en-US";
-                                        if(isEnUs&&audioMagicNumber==0){//random audio output only zh has audio
-                                            let params4 = {
-                                                "app_id":app_id,
-                                                "time_stamp":Math.floor(time_stamp/1000),
-                                                "nonce_str":nonce_str,
-                                                "speaker":this.reddah.appData('usersex_'+this.userName)===1?this.girlVoice:1,
-                                                "format":2,
-                                                "volume":0,
-                                                "speed":100,
-                                                "text":traslatedAnswer,
-                                                "aht":0,
-                                                "apc":58,
-                                                "sign":""
-                                            }
-                                            setTimeout(()=>{this.writing = 1;},1000);
-                                            params4["sign"] = this.reddah.getReqSign(params4, app_key);
-                                            this.reddah.getQqAudioPlay(params4, app_key).subscribe(data=>{
+                                
+                                        if(params3["source"]!=params3["target"]){
+
+                                            params3["sign"] = this.reddah.getReqSign(params3, app_key);
+                                            this.reddah.getQqTextTranslate(params3, app_key).subscribe(data=>{
                                                 console.log(data)
-                                                let response4 = JSON.parse(data.Message)
-                                                let audioAnswer = response4.data.speech;
+                                                let response3 = JSON.parse(data.Message)
+                                                let traslatedAnswer = response3.data.target_text;
                                                 let time = new Date().getTime();
                                                 this.zone.run(()=>{this.writing = 0;});
                                                 if(data.Success==0){
-                                                    if(response4.ret!=0)
+                                                    if(response3.ret!=0)
                                                     {
-                                                        if(response2.ret==0){
-                                                            this.addMessage({
-                                                                CreatedOn: time,
-                                                                Content: response2.data.answer, 
-                                                                UserName: 'Mystic', 
-                                                                Type:0
-                                                            });
-                                                        }
-                                                        else{
-                                                            this.addMessage({
-                                                                CreatedOn: time,
-                                                                Content: this.reddah.instant("Mystic.ChangeQuest"), 
-                                                                UserName: 'Mystic', 
-                                                                Type:0
-                                                            });
-                                                        }
+                                                        traslatedAnswer = this.reddah.instant("Mystic.ChangeQuest");
                                                     }
-                                                    else{
-                                                        let newMsg = {
+                                                    let audioMagicNumber = this.reddah.getRandomInt(3);
+                                                    console.log(audioMagicNumber)
+                                                    let isEnUs = this.reddah.getCurrentLocale()=="en-US";
+                                                    if(isEnUs&&audioMagicNumber==0){//random audio output only zh has audio
+                                                        let params4 = {
+                                                            "app_id":app_id,
+                                                            "time_stamp":Math.floor(time_stamp/1000),
+                                                            "nonce_str":nonce_str,
+                                                            "speaker":this.reddah.appData('usersex_'+this.userName)===1?this.girlVoice:1,
+                                                            "format":2,
+                                                            "volume":0,
+                                                            "speed":100,
+                                                            "text":traslatedAnswer,
+                                                            "aht":0,
+                                                            "apc":58,
+                                                            "sign":""
+                                                        }
+                                                        setTimeout(()=>{this.writing = 1;},1000);
+                                                        params4["sign"] = this.reddah.getReqSign(params4, app_key);
+                                                        this.reddah.getQqAudioPlay(params4, app_key).subscribe(data=>{
+                                                            console.log(data)
+                                                            let response4 = JSON.parse(data.Message)
+                                                            let audioAnswer = response4.data.speech;
+                                                            let time = new Date().getTime();
+                                                            this.zone.run(()=>{this.writing = 0;});
+                                                            if(data.Success==0){
+                                                                if(response4.ret!=0)
+                                                                {
+                                                                    if(response2.ret==0){
+                                                                        this.addMessage({
+                                                                            CreatedOn: time,
+                                                                            Content: response2.data.answer, 
+                                                                            UserName: 'Mystic', 
+                                                                            Type:0
+                                                                        });
+                                                                    }
+                                                                    else{
+                                                                        this.addMessage({
+                                                                            CreatedOn: time,
+                                                                            Content: this.reddah.instant("Mystic.ChangeQuest"), 
+                                                                            UserName: 'Mystic', 
+                                                                            Type:0
+                                                                        });
+                                                                    }
+                                                                }
+                                                                else{
+                                                                    let newMsg = {
+                                                                        CreatedOn: time,
+                                                                        Content: audioAnswer, 
+                                                                        UserName: 'Mystic', 
+                                                                        Type:1,
+                                                                        Base64: true,
+                                                                        Duration: 1,
+                                                                        Played: false
+                                                                    };
+                                                                    this.reddah.getAudioDuration(newMsg);
+                                                                    this.addMessage(newMsg);
+                                                                }
+                                                            }
+                                                            this.zone.run(()=>{this.writing = 0;});
+                                                            
+                                                        });
+                                                    }
+                                                    else{//text output
+                                                        this.addMessage({
                                                             CreatedOn: time,
-                                                            Content: audioAnswer, 
+                                                            Content: traslatedAnswer, 
                                                             UserName: 'Mystic', 
-                                                            Type:1,
-                                                            Base64: true,
-                                                            Duration: 1,
-                                                            Played: false
-                                                        };
-                                                        this.reddah.getAudioDuration(newMsg);
-                                                        this.addMessage(newMsg);
+                                                            Type:0,
+                                                        });
                                                     }
                                                 }
-                                                this.zone.run(()=>{this.writing = 0;});
-                                                
-                                            });
-                                        }
-                                        else{//text output
-                                            this.addMessage({
-                                                CreatedOn: time,
-                                                Content: traslatedAnswer, 
-                                                UserName: 'Mystic', 
-                                                Type:0,
                                             });
                                         }
                                     }

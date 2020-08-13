@@ -11,7 +11,7 @@
         <ion-icon slot="end" name="happy-outline"size="medium" (click)="toggleFacePanel()" *ngIf="!showFacePanel"></ion-icon>
         <!--<ion-icon slot="end" name="apps" size="medium" (click)="toggleFacePanel()" *ngIf="showFacePanel"></ion-icon>
         <ion-icon slot="end" name="add-circle-outline" size="medium" (click)="toggleFunctionPanel()" *ngIf="!commentContent"></ion-icon>-->
-        <ion-button slot="end" (click)="submit()" color="primary" *ngIf="commentContent">{{ reddah.instant('Confirm.Submit') }}</ion-button>
+        <ion-button slot="end" (click)="submit()" color="primary" *ngIf="commentContent" style="text-transform: capitalize;">{{ reddah.instant('Confirm.Submit') }}</ion-button>
     </ion-item>
     <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
     <!--

@@ -201,29 +201,50 @@ export class ChatFireBase{
             let time_stamp = new Date().getTime();
             let nonce_str = this.reddah.nonce_str();
             
-            let params3 = {
+
+            let params2 = {
                 "app_id":app_id,
                 "time_stamp":Math.floor(time_stamp/1000),
                 "nonce_str":nonce_str,
-                "text": this.reddah.summary(comment.Content,200),
-                "source":"zh",
-                "target":this.reddah.adjustLan(),
+                "text": this.reddah.summary(comment.Content, 200),
+                "force":0,
+                "candidate_langs":"",
                 "sign":""
             }
-            
-            params3["sign"] = this.reddah.getReqSign(params3, app_key);
-            this.reddah.getQqTextTranslate(params3, app_key).subscribe(data=>{
-                //console.log(data)
-                let response3 = JSON.parse(data.Message)
-                let traslatedAnswer = response3.data.target_text;
-                //console.log(traslatedAnswer);
-                if(data.Success==0){
-                    if(response3.ret!=0)
-                    {
-                        comment.TranslateContent =  this.reddah.instant('FedLogin.FailedMessage');;
+    
+            params2["sign"] = this.reddah.getReqSign(params2, app_key);
+            this.reddah.getQqLanguageDetect(params2, app_key).subscribe(detect=>{
+                if(detect.Success==0){
+                    console.log(detect.Message);
+                    let detectLan = JSON.parse(detect.Message).data.lang;
+
+                    let params3 = {
+                        "app_id":app_id,
+                        "time_stamp":Math.floor(time_stamp/1000),
+                        "nonce_str":nonce_str,
+                        "text": this.reddah.summary(comment.Content,200),
+                        "source":detectLan,
+                        "target":this.reddah.adjustLan(detectLan),
+                        "sign":""
                     }
-                    else{
-                        comment.TranslateContent = traslatedAnswer;
+            
+                    if(params3["source"]!=params3["target"]){
+                        params3["sign"] = this.reddah.getReqSign(params3, app_key);
+                        this.reddah.getQqTextTranslate(params3, app_key).subscribe(data=>{
+                            //console.log(data)
+                            let response3 = JSON.parse(data.Message)
+                            let traslatedAnswer = response3.data.target_text;
+                            //console.log(traslatedAnswer);
+                            if(data.Success==0){
+                                if(response3.ret!=0)
+                                {
+                                    comment.TranslateContent =  this.reddah.instant('FedLogin.FailedMessage');;
+                                }
+                                else{
+                                    comment.TranslateContent = traslatedAnswer;
+                                }
+                            }
+                        });
                     }
                 }
             });

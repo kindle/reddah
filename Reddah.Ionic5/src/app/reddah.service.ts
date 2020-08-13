@@ -583,6 +583,35 @@ export class ReddahService {
 
     }
 
+    
+    private nplPornImageDetectUrl = `${this.domain}/api/ai/pornimagedetect`; 
+    getQqPornImageDetect(params, appKey): Observable<any> {
+
+        let nlpQqTextUrl = "https://api.ai.qq.com/fcgi-bin/vision/vision_porn";
+
+        nlpQqTextUrl += "?"
+        for (var key of Object.keys(params)) {
+            let value = params[key];
+            if(value!=""){
+                nlpQqTextUrl += key + '=' + encodeURIComponent(value) + '&';
+            }
+        }
+        nlpQqTextUrl += 'app_key=' + appKey;
+
+        
+        console.log(nlpQqTextUrl)
+
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append("locale", this.getCurrentLocale());
+        formData.append("url", nlpQqTextUrl);
+        return this.http.post<any>(this.nplPornImageDetectUrl, formData)
+        .pipe(
+            tap(data => this.log('get porn image detect')),
+            catchError(this.handleError('get porn image detect', []))
+        );
+    }
+
     private nplDetectUrl = `${this.domain}/api/ai/detect`; 
     getQqLanguageDetect(params, appKey): Observable<any> {
 
@@ -740,14 +769,41 @@ export class ReddahService {
         */
     }
 
-    adjustLan(){
+    translateSupportedTarget(source, target){
+        let map = new Map()
+        .set('en', ['zh', 'fr', 'es', 'it', 'de', 'tr', 'ru', 'pt', 'vi', 'id', 'ms', 'th','jp'])
+        .set('zh', ['en', 'fr', 'es', 'it', 'de', 'tr', 'ru', 'pt', 'vi', 'id', 'ms', 'th', 'jp', 'kr'])
+        .set('fr', ['en', 'zh', 'es', 'it', 'de', 'tr', 'ru', 'pt'])
+        .set('es', ['en', 'zh', 'fr', 'it', 'de', 'tr', 'ru', 'pt'])
+        .set('it', ['en', 'zh', 'fr', 'es', 'de', 'tr', 'ru', 'pt'])
+        .set('de', ['en', 'zh', 'fr', 'es', 'it', 'tr', 'ru', 'pt'])
+        .set('tr', ['en', 'zh', 'fr', 'es', 'it', 'de', 'ru', 'pt'])
+        .set('ru', ['en', 'zh', 'fr', 'es', 'it', 'de', 'tr', 'pt'])
+        .set('pt', ['en', 'zh', 'fr', 'es', 'it', 'de', 'tr', 'ru'])
+        .set('vi', ['en', 'zh'])
+        .set('id', ['en', 'zh'])
+        .set('ms', ['en', 'zh'])
+        .set('th', ['en', 'zh'])
+        .set('jp', ['zh'])
+        .set('kr', ['zh']);
+
+        if(map.get(source)==null)
+            return "en";
+
+        if(map.get(source).indexOf(target)>-1)
+            return target;
+
+        return "en";
+    }
+
+    adjustLan(detectLan){
         let value = this.getCurrentLocale().split("-")[0];
         
         //due to qq dev missunderstood lan and region...
         value = value.replace("ja","jp");
         value = value.replace("ko","kr");
-        
-        return value;
+
+        return this.translateSupportedTarget(detectLan, value);
     }
 
     
@@ -3568,7 +3624,8 @@ export class ReddahService {
       
         return {
             fileUrl: fileName,
-            webUrl: cameraPhoto.webPath
+            webUrl: cameraPhoto.webPath,
+            base64: base64Data
         };
     }
 

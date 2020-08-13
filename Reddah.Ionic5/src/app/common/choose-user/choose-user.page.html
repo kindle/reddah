@@ -3,7 +3,7 @@
         <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
     </ion-button>
     <ion-label>{{ reddah.instant('Menu.Contact') }}</ion-label>
-    <ion-button *ngIf="!delete" color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ reddah.instant('Confirm.Submit') }}</ion-button>
+    <ion-button *ngIf="!delete" color="success" slot="end" (click)="submit()" [disabled]="submitClicked" style="text-transform: capitalize;">{{ reddah.instant('Confirm.Submit') }}</ion-button>
     <ion-button *ngIf="delete" color="danger" slot="end" (click)="submit_delete()" [disabled]="submitClicked">{{ reddah.instant('Comment.Delete') }}</ion-button>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;">

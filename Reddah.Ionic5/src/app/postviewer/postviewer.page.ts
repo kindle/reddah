@@ -457,7 +457,7 @@ export class PostviewerPage implements OnInit {
     orgLines = [];
     translateLines = [];
     translate(article){
-        if(this.detectedLan!=this.reddah.adjustLan()){
+        if(this.detectedLan!=this.reddah.adjustLan(this.detectedLan)){
             article.Translate = true;
 
             this.translateTitle(this.article);
@@ -509,11 +509,12 @@ export class PostviewerPage implements OnInit {
             "nonce_str":nonce_str,
             "text": this.reddah.summary(article.Title, 200),
             "source":this.detectedLan,
-            "target":this.reddah.adjustLan(),
+            "target":this.reddah.adjustLan(this.detectedLan),
             "sign":""
         }
-        console.log(params3)
-        if(this.detectedLan!=this.reddah.adjustLan()){
+        //console.log(params3)
+        if(this.detectedLan!=this.reddah.adjustLan(this.detectedLan)){
+            article.TranslateTitle = "...";
             params3["sign"] = this.reddah.getReqSign(params3, app_key);
             this.reddah.getQqTextTranslate(params3, app_key).subscribe(data=>{
                 //console.log(data)
@@ -541,7 +542,7 @@ export class PostviewerPage implements OnInit {
         let time_stamp = new Date().getTime();
         let nonce_str = this.reddah.nonce_str();
 
-        if(this.detectedLan!=this.reddah.adjustLan()){
+        if(this.detectedLan!=this.reddah.adjustLan(this.detectedLan)){
             if(orgLine.indexOf("&lt;img")>-1){
                 this.translateLines[index] = "";
             }
@@ -553,10 +554,11 @@ export class PostviewerPage implements OnInit {
                     "nonce_str":nonce_str,
                     "text": this.reddah.summary(orgLine, 200),
                     "source":this.detectedLan,
-                    "target":this.reddah.adjustLan(),
+                    "target":this.reddah.adjustLan(this.detectedLan),
                     "sign":""
                 }
                 
+                this.translateLines[index] = "...";
                 params3["sign"] = this.reddah.getReqSign(params3, app_key);
                 this.reddah.getQqTextTranslate(params3, app_key).subscribe(data=>{
                     //console.log(data)

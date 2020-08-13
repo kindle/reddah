@@ -3,7 +3,7 @@
         <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
     </ion-button>
     <ion-label>{{ reddah.instant('Pop.Note') }}</ion-label>
-    <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked">{{ reddah.instant('Confirm.Submit') }}</ion-button>
+    <ion-button color="success" slot="end" (click)="submit()" [disabled]="submitClicked" style="text-transform: capitalize;">{{ reddah.instant('Confirm.Submit') }}</ion-button>
 </ion-item>
 <ion-content no-padding style="background-color: #eeeeee;">
     <ion-item no-padding margin>

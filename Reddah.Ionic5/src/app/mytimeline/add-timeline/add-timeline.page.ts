@@ -174,7 +174,32 @@ export class AddTimelinePage implements OnInit {
         this.localStorageService.store("Reddah_Mytimeline_Draft"+this.reddah.getCurrentUser(),this.yourThoughts);
     }
 
+    checkPhotoPorn(){
+        let app_id = this.reddah.qq_app_id;
+        let app_key = this.reddah.qq_app_key;
+        let time_stamp = new Date().getTime();
+        let nonce_str = this.reddah.nonce_str();
+
+        let params2 = {
+            "app_id":app_id,
+            "time_stamp":Math.floor(time_stamp/1000),
+            "nonce_str":nonce_str,
+            "image":this.photos[0].base64,//base64
+            //"image_url":"https://reddah.blob.core.windows.net/photo/58ff6445187a4a0791092d0e9a0667a0.jpg",
+            "sign":""
+        }
+
+        params2["sign"] = this.reddah.getReqSign(params2, app_key);
+        this.reddah.getQqPornImageDetect(params2, app_key).subscribe(detect=>{
+            if(detect.Success==0){
+                //this.detectedLan = JSON.parse(detect.Message).data.lang;
+                console.log(detect.Message)
+            }
+        });
+    }
     async submit(){
+        //this.checkPhotoPorn();
+        //return;
 
         if(this.action=="story"){
             if(this.location==null){

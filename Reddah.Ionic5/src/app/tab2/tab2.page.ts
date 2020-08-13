@@ -674,11 +674,8 @@ export class Tab2Page implements OnInit  {
         params2["sign"] = this.reddah.getReqSign(params2, app_key);
         this.reddah.getQqLanguageDetect(params2, app_key).subscribe(detect=>{
             if(detect.Success==0){
-                //console.log(detect.Message);
+                console.log(detect.Message);
                 let detectLan = JSON.parse(detect.Message).data.lang;
-                
-                //console.log(article)
-
 
                 let params3 = {
                     "app_id":app_id,
@@ -686,7 +683,7 @@ export class Tab2Page implements OnInit  {
                     "nonce_str":nonce_str,
                     "text": this.reddah.summary(article.Title, 200),
                     "source":detectLan,
-                    "target":this.reddah.adjustLan(),
+                    "target":this.reddah.adjustLan(detectLan),
                     "sign":""
                 }
 
