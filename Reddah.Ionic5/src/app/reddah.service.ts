@@ -518,6 +518,34 @@ export class ReddahService {
     qq_app_id=2127183732;
     qq_app_key="493J0jD8PPeNUHNz";
     //******************************** */
+    private nplPornImageDetectUrl = `${this.domain}/api/ai/pornimagedetect`; 
+    getQqPornImageDetect(params, appKey): Observable<any> {
+
+        let nlpQqTextUrl = "https://api.ai.qq.com/fcgi-bin/vision/vision_porn";
+
+        nlpQqTextUrl += "?"
+        for (var key of Object.keys(params)) {
+            let value = params[key];
+            if(value!==""&&key!="image"){
+                nlpQqTextUrl += key + '=' + encodeURIComponent(value) + '&';
+            }
+        }
+        nlpQqTextUrl += 'app_key=' + appKey;
+
+        
+        console.log(nlpQqTextUrl)
+
+        let formData = new FormData();
+        formData.append('jwt', this.getCurrentJwt());
+        formData.append("locale", this.getCurrentLocale());
+        formData.append("url", nlpQqTextUrl);
+        formData.append("image", params["image"]);
+        return this.http.post<any>(this.nplPornImageDetectUrl, formData)
+        .pipe(
+            tap(data => this.log('get porn image detect')),
+            catchError(this.handleError('get porn image detect', []))
+        );
+    }
     private qqMuskUrl = `${this.domain}/api/ai/qqmusk`; 
 
     async getQqMusk(params, appKey): Promise<any> {
@@ -581,35 +609,6 @@ export class ReddahService {
             catchError(this.handleError('get qq read', []))
         ).toPromise();
 
-    }
-
-    
-    private nplPornImageDetectUrl = `${this.domain}/api/ai/pornimagedetect`; 
-    getQqPornImageDetect(params, appKey): Observable<any> {
-
-        let nlpQqTextUrl = "https://api.ai.qq.com/fcgi-bin/vision/vision_porn";
-
-        nlpQqTextUrl += "?"
-        for (var key of Object.keys(params)) {
-            let value = params[key];
-            if(value!=""){
-                nlpQqTextUrl += key + '=' + encodeURIComponent(value) + '&';
-            }
-        }
-        nlpQqTextUrl += 'app_key=' + appKey;
-
-        
-        console.log(nlpQqTextUrl)
-
-        let formData = new FormData();
-        formData.append('jwt', this.getCurrentJwt());
-        formData.append("locale", this.getCurrentLocale());
-        formData.append("url", nlpQqTextUrl);
-        return this.http.post<any>(this.nplPornImageDetectUrl, formData)
-        .pipe(
-            tap(data => this.log('get porn image detect')),
-            catchError(this.handleError('get porn image detect', []))
-        );
     }
 
     private nplDetectUrl = `${this.domain}/api/ai/detect`; 
@@ -815,7 +814,7 @@ export class ReddahService {
             let audio = new Audio();
             audio.src = "data:audio/wav;base64," + msg.Content; 
             audio.onloadeddata=()=>{
-                console.log(audio.duration);
+                //console.log(audio.duration);
                 msg.Duration = Math.ceil(audio.duration);
             }
         }
@@ -857,7 +856,7 @@ export class ReddahService {
 
     //qq encode using php
     php_encodeURIComponent(str){
-        console.log(str);
+        //console.log(str);
         let value = encodeURIComponent(str);
         value = value.split("%20").join("+");
         value = value.split("'").join("%27");

@@ -3,6 +3,7 @@
     <ion-button color="success" slot="end" (click)="save()" [disabled]="loading">{{ reddah.instant('Common.Save') }}</ion-button>
 </ion-item>
 <ion-content>
+    <!--
     <ion-tabs>
         <ion-tab tab="html">
             <ion-header translucent>
@@ -60,7 +61,19 @@
                 <ion-icon name="logo-css3" color="mini"></ion-icon>
             </ion-tab-button>
         </ion-tab-bar>
-    </ion-tabs>
+    </ion-tabs>-->
+    
+    <ion-textarea style="border: 1px solid gray; margin-bottom: 5px; height:100%;" 
+        [(ngModel)]="content" cols="20" rows="10" [placeholder]="GetLoading('html')" [disabled]="loading">
+    </ion-textarea>
+
+    <ion-textarea style="border: 1px solid gray; margin-bottom: 5px; height:100%;" 
+        [(ngModel)]="title" cols="20" rows="10" [placeholder]="GetLoading('js')" [disabled]="loading">
+    </ion-textarea>
+
+    <ion-textarea style="border: 1px solid gray; margin-bottom: 5px; height:100%;" 
+        [(ngModel)]="abstract" cols="20" rows="10" [placeholder]="GetLoading('css')" [disabled]="loading">
+    </ion-textarea>
 
     <ion-item lines="none" *ngIf="article">
         <ion-button color="success" slot="end" (click)="preview()">{{ reddah.instant('Common.Test') }}</ion-button>
