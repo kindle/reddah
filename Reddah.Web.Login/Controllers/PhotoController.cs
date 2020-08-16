@@ -15,6 +15,86 @@ namespace Reddah.Web.Login.Controllers
     [RoutePrefix("api/photo")]
     public class PhotoController : ApiBaseController
     {
+        [Route("imageuploadazure")]
+        [HttpPost]
+        public IHttpActionResult ImageUploadAzure()
+        {
+            var result = new ApiResult(0, "Pub image uploaded");
+
+            string jwt = HttpContext.Current.Request["jwt"];
+                
+
+            HttpFileCollection hfc = HttpContext.Current.Request.Files;
+
+            JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+            if (jwtResult.Success != 0)
+                return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+            try
+            {
+                using (var db = new reddahEntities())
+                {
+                    Dictionary<string, string> dict = new Dictionary<string, string>();
+                    foreach (string rfilename in HttpContext.Current.Request.Files)
+                    {
+                        
+
+                        //upload image first
+                        string guid = Guid.NewGuid().ToString().Replace("-", "");
+                        string containerName = "photo";
+
+                        HttpPostedFile upload = HttpContext.Current.Request.Files[rfilename];
+                        //var fileNameKey = rfilename.Replace("_reddah_preview", "");
+
+                        try
+                        {
+                            var fileFormat = upload.FileName.Substring(upload.FileName.LastIndexOf('.')).Replace(".", "");
+                            var fileNameWithExt = Path.GetFileName(guid + "." + fileFormat);
+
+                            //string connectionString = Environment.GetEnvironmentVariable("REDDAH_AZURE_STORAGE_CONNECTION_STRING");
+                            BlobServiceClient blobServiceClient = new BlobServiceClient(base.GetAzureConnectionString());
+                            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+                            BlobClient blobClient = containerClient.GetBlobClient(fileNameWithExt);
+                            //blobClient.SetAccessTier(Azure.Storage.Blobs.Models.AccessTier.Cool);
+                            blobClient.Upload(upload.InputStream, false);
+
+
+
+                            result.Message = "https://reddah.blob.core.windows.net/" + containerName + "/" + fileNameWithExt;
+
+
+                            UploadFile file = new UploadFile();
+                            file.Guid = guid;
+                            file.Format = fileFormat;
+                            file.UserName = jwtResult.JwtUser.User;
+                            file.CreatedOn = DateTime.UtcNow;
+                            file.GroupName = "pub";
+                            file.Tag = "";
+                            db.UploadFile.Add(file);
+                        }
+                        catch (Exception ex)
+                        {
+                            return Ok(new ApiResult(1, ex.Message));
+                        }
+                    }
+
+
+                    db.SaveChanges();
+                }
+
+                    
+
+
+                return Ok(result);
+
+            }
+            catch (Exception ex1)
+            {
+                return Ok(new ApiResult(4, ex1.Message));
+            }
+        }
+
         [Route("uploadazure")]
         [HttpPost]
         public IHttpActionResult UploadAzure()

@@ -95,6 +95,39 @@ namespace Reddah.Web.Login.Controllers
             }
         }
 
+        [Route("landetect")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetQqLanDetect()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string locale = HttpContext.Current.Request["locale"];
+                string url = HttpContext.Current.Request["url"];
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                return Ok(new ApiResult(0, await this.QqAiTextTask(
+                    locale,
+                    jwtResult.JwtUser.User,
+                    url,
+                    "detect")));
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
+        
+
         [Route("audio")]
         [HttpPost]
         public async Task<IHttpActionResult> GetQqAudio()
@@ -338,11 +371,14 @@ namespace Reddah.Web.Login.Controllers
                 string url = HttpContext.Current.Request["url"];
                 string image = HttpContext.Current.Request["image"];
 
-                var fcontent = new FormUrlEncodedContent(new[]
+                /*var fcontent = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("image", image)
-                });
-                
+                });*/
+
+                var mContent = new MultipartFormDataContent();
+                mContent.Add(new StringContent(image), "image");
+
 
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
@@ -352,11 +388,11 @@ namespace Reddah.Web.Login.Controllers
                 if (jwtResult.Success != 0)
                     return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
 
-                return Ok(new ApiResult(0, await this.QqAiTask(
+                return Ok(new ApiResult(0, await this.QqAiTaskLong(
                     locale,
                     jwtResult.JwtUser.User,
                     url,
-                    fcontent, 
+                    mContent, 
                     "qqmusk")));
             }
             catch (Exception ex)
@@ -364,6 +400,42 @@ namespace Reddah.Web.Login.Controllers
                 return Ok(new ApiResult(4, ex.Message));
             }
         }
+
+        [Route("pornimagedetect")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetQqPornImageDetect()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string locale = HttpContext.Current.Request["locale"];
+                string url = HttpContext.Current.Request["url"];
+                string image = HttpContext.Current.Request["image"];
+
+                var mContent = new MultipartFormDataContent();
+                mContent.Add(new StringContent(image), "image");
+
+                if (String.IsNullOrWhiteSpace(jwt))
+                    return Ok(new ApiResult(1, "No Jwt string"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                return Ok(new ApiResult(0, await this.QqAiTaskLong(
+                    locale,
+                    jwtResult.JwtUser.User,
+                    url,
+                    mContent,
+                    "qqporndetect")));
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult(4, ex.Message));
+            }
+        }
+
 
         [Route("qqread")]
         [HttpPost]
@@ -376,10 +448,12 @@ namespace Reddah.Web.Login.Controllers
                 string url = HttpContext.Current.Request["url"];
                 string image = HttpContext.Current.Request["image"];
 
-                var fcontent = new FormUrlEncodedContent(new[]
+                /*var fcontent = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("image", image)
-                });
+                });*/
+                var mContent = new MultipartFormDataContent();
+                mContent.Add(new StringContent(image), "image");
 
                 if (String.IsNullOrWhiteSpace(jwt))
                     return Ok(new ApiResult(1, "No Jwt string"));
@@ -389,11 +463,11 @@ namespace Reddah.Web.Login.Controllers
                 if (jwtResult.Success != 0)
                     return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
 
-                return Ok(new ApiResult(0, await this.QqAiTask(
+                return Ok(new ApiResult(0, await this.QqAiTaskLong(
                     locale,
                     jwtResult.JwtUser.User,
                     url,
-                    fcontent,
+                    mContent,
                     "qqread")));
                 
             }
@@ -402,8 +476,35 @@ namespace Reddah.Web.Login.Controllers
                 return Ok(new ApiResult(4, ex.Message));
             }
         }
-        
+        /*
         private async Task<string> QqAiTask(string locale, string user, string uri, FormUrlEncodedContent content, string thread)
+        {
+            var client = new HttpClient();
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+
+            using (var db = new reddahEntities())
+            {
+                var log = new Log();
+
+                log.Date = DateTime.UtcNow;
+                log.Thread = thread;
+                log.Level = locale;
+                log.Logger = user;
+                log.Message = uri;
+                db.Log.Add(log);
+                db.SaveChanges();
+            }
+
+            var response = await client.PostAsync(uri, content);
+
+            var strResponseContent = await response.Content.ReadAsStringAsync();
+
+            string responseText = strResponseContent.ToString();
+
+            return responseText;
+        }*/
+
+        private async Task<string> QqAiTaskLong(string locale, string user, string uri, MultipartFormDataContent content, string thread)
         {
             var client = new HttpClient();
             var queryString = HttpUtility.ParseQueryString(string.Empty);
@@ -430,7 +531,7 @@ namespace Reddah.Web.Login.Controllers
             return responseText;
         }
 
-        
+
     }
 
     
