@@ -250,5 +250,13 @@ public class AdvancedUserFriend : UserFriend
         public string PubName;
         public string Admins;
     }
+    /*
+    public class LiborItem
+    {
+        public int Id;
+        public String Date;
+        public String Tenor;
+        public String Result;
+    }*/
 
 }

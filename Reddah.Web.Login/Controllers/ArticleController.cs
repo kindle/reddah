@@ -754,6 +754,7 @@ namespace Reddah.Web.Login.Controllers
         [HttpPost]
         public IHttpActionResult AddTimelineAzure()
         {
+            bool isPorn = false;
             try
             {
                 string jwt = HttpContext.Current.Request["jwt"];
@@ -769,6 +770,9 @@ namespace Reddah.Web.Login.Controllers
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 int feedbackType = js.Deserialize<int>(HttpContext.Current.Request["feedbackType"]);
                 int type = js.Deserialize<int>(HttpContext.Current.Request["type"]);
+                int porn = js.Deserialize<int>(HttpContext.Current.Request["porn"]);
+                if (porn > 50)
+                    isPorn = true;
                 int refArticleId = js.Deserialize<int>(HttpContext.Current.Request["ref"]);
                 //4:article 5:mini
                 int userType = 0;
@@ -842,7 +846,7 @@ namespace Reddah.Web.Login.Controllers
                                 file.Format = fileFormat;
                                 file.UserName = jwtResult.JwtUser.User;
                                 file.CreatedOn = DateTime.UtcNow;
-                                file.GroupName = "";
+                                file.GroupName = isPorn?"porn":"";
                                 file.Tag = "";
                                 db.UploadFile.Add(file);
                                 if (upload.FileName.Contains("_reddah_preview."))
@@ -904,7 +908,8 @@ namespace Reddah.Web.Login.Controllers
                             Type = type,
                             Ref = refArticleId,
                             Abstract = refArticleId > 0 ? shareTitle : feedbackType.ToString(),
-                            LastUpdateType = userType
+                            LastUpdateType = userType,
+                            Status = isPorn?-2:0
                             //when type=9, insert feedbacktype else if share article insert title else insert empty
                             //when type==11, add a story
 
