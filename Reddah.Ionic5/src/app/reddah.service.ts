@@ -611,7 +611,7 @@ export class ReddahService {
 
     }
 
-    private nplDetectUrl = `${this.domain}/api/ai/detect`; 
+    private nplDetectUrl = `${this.domain}/api/ai/landetect`; 
     getQqLanguageDetect(params, appKey): Observable<any> {
 
         let nlpQqTextUrl = "https://api.ai.qq.com/fcgi-bin/nlp/nlp_textdetect";

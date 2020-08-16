@@ -8,9 +8,9 @@ import { Gyroscope, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { RankPage } from '../rank/rank.page';
 
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { TopicPage } from 'src/app/topic/topic.page';
+import { CameraSource, CameraResultType, Camera } from '@capacitor/core';
 
 @Component({
     selector: 'app-mini-viewer',
@@ -39,7 +39,6 @@ export class MiniViewerComponent implements OnInit {
         @Inject(DOCUMENT) private _document: Document,
         private loadingController: LoadingController,
         private alertController: AlertController,
-        private camera: Camera,
     ) {
     }
 
@@ -256,8 +255,8 @@ export class MiniViewerComponent implements OnInit {
     }
 
     initCameraPhoto(){
-        window["reddahApi"].camera = ()=>{
-            const options: CameraOptions = {
+        window["reddahApi"].camera = async ()=>{
+            /*const options: CameraOptions = {
                 quality: 100,
                 destinationType: this.camera.DestinationType.FILE_URI,
                 encodingType: this.camera.EncodingType.JPEG,
@@ -265,13 +264,21 @@ export class MiniViewerComponent implements OnInit {
                 correctOrientation: true
             }
                 
-            return this.camera.getPicture(options);
+            return this.camera.getPicture(options);*/
+            const capturedPhoto = await Camera.getPhoto({
+                resultType: CameraResultType.Uri, 
+                source: CameraSource.Camera, 
+                quality: 100,
+                correctOrientation: true
+            });
+
+            return capturedPhoto;
         }
     }
 
-    initLibPhoto(){
-        window["reddahApi"].album = ()=>{
-            const options: CameraOptions = {
+    async initLibPhoto(){
+        window["reddahApi"].album = async ()=>{
+            /*const options: CameraOptions = {
                 quality: 100,
                 destinationType: this.camera.DestinationType.FILE_URI,
                 encodingType: this.camera.EncodingType.JPEG,
@@ -280,7 +287,16 @@ export class MiniViewerComponent implements OnInit {
                 correctOrientation: true
             }
                 
-            return this.camera.getPicture(options);
+            return this.camera.getPicture(options);*/
+
+            const capturedPhoto = await Camera.getPhoto({
+                resultType: CameraResultType.Uri, 
+                source: CameraSource.Photos, 
+                quality: 100,
+                correctOrientation: true
+            });
+
+            return capturedPhoto;
         }
     }
 

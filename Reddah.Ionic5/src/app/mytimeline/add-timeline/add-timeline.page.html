@@ -6,9 +6,6 @@
     style="text-transform: capitalize;">{{ reddah.instant('Common.Publish') }}</ion-button>
 </ion-item>
 <ion-content (click)="tap($event)">
-  <div *ngFor="let p of photos">
-    {{p.porn}}_
-  </div>
     <ion-item>
         <ion-textarea id="thoughtTxt" (ionBlur)="saveDraft()" autoresize [(ngModel)]="yourThoughts" rows="{{postType==4?3:6}}" cols="20" 
         placeholder="{{ reddah.instant('Pop.YourThoughts') }}..."

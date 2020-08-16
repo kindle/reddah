@@ -251,4 +251,9 @@ export class AddMiniPage implements OnInit {
         //send message to subscribers
     }
 
+    showTabName = 'html';
+    change(tabName){
+        this.showTabName = tabName;
+    }
+
 }

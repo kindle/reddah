@@ -319,4 +319,42 @@ export class StockPage implements OnInit {
         
     }
     */
+
+    data = {
+        type: "line",
+        data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
+            {
+            label: "Price",
+            data: [37.4, 36.6, 40.48, 41.13, 42.05, 40.42, 43.09]
+            }
+        ]
+        },
+        options: {
+        title: {
+            text: "Line chart"
+        },
+        legend: {
+            display: false
+        },
+        scales: {
+            yAxes: [
+            {
+                scaleLabel: {
+                display: true,
+                labelString: "Price ($)"
+                }
+            }
+            ]
+        },
+        tooltips: {
+            callbacks: {
+            label: function(tooltipItem, data) {
+                return tooltipItem.yLabel + " $";
+            }
+            }
+        }
+        }
+    };
 }
