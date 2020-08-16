@@ -6,10 +6,9 @@
     style="text-transform: capitalize;">{{ reddah.instant('Common.Publish') }}</ion-button>
 </ion-item>
 <ion-content (click)="tap($event)">
-    <section>
-      <canvas id="canvas1">不支持canvas显示</canvas>
-      <img id="image1">
-    </section>
+  <div *ngFor="let p of photos">
+    {{p.porn}}_
+  </div>
     <ion-item>
         <ion-textarea id="thoughtTxt" (ionBlur)="saveDraft()" autoresize [(ngModel)]="yourThoughts" rows="{{postType==4?3:6}}" cols="20" 
         placeholder="{{ reddah.instant('Pop.YourThoughts') }}..."
@@ -27,7 +26,7 @@
     <app-share-face *ngIf="showFacePanel" (select)="faceSelection($event)"></app-share-face>
     <div class="imgContainer" dragula="bag" [(dragulaModel)]="photos" *ngIf="postType<3">
         <div class="imgSqure" *ngFor="let image of photos;index as i">
-            <img [id]="reddah.makeItId(image.webUrl+'addtl')" 
+            <img [id]="reddah.makeItId(image.webUrl+'addtl')" [class.might-porn]="image.porn>50" 
             (load)="reddah.adjustImage(image.webUrl, 'addtl')" 
             src="{{ image.webUrl }}"
             (click)="viewer(i, photos)" (press)="pressImage()" (pressup)="pressUpImage()">

@@ -3624,7 +3624,7 @@ export class ReddahService {
         return {
             fileUrl: fileName,
             webUrl: cameraPhoto.webPath,
-            base64: base64Data
+            porn: 0
         };
     }
 

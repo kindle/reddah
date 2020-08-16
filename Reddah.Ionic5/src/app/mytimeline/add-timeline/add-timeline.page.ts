@@ -131,11 +131,15 @@ export class AddTimelinePage implements OnInit {
     async ngOnInit() {
         if(this.postType==1)//photo
         {
-            this.reddah.takePhoto(this.photos, this.formData);
+            this.reddah.takePhoto(this.photos, this.formData).then(()=>{
+                this.checkImagePorn();
+            });
         }
         else if(this.postType==2)//photo//from lib
         {
-            this.reddah.fromLibPhoto(this.photos, this.formData);
+            this.reddah.fromLibPhoto(this.photos, this.formData).then(()=>{
+                this.checkImagePorn();
+            });
         }
         else if(this.postType==3){//video from lib
             this.fromLibVideo();
@@ -154,8 +158,8 @@ export class AddTimelinePage implements OnInit {
     }
     
     //photos = [{fileUrl: '1', webUrl:'web1'},{fileUrl: '2', webUrl:'web2'},{fileUrl: '3', webUrl:'web3'}];
-    //photos = [];
-    photos = [{fileUrl:'/assets/500/musk.jpg', webUrl:'https://reddah.blob.core.windows.net/photo/58ff6445187a4a0791092d0e9a0667a0.jpg'}]
+    photos = [];
+    //photos = [{fileUrl:'/assets/500/musk.jpg', webUrl:'https://reddah.blob.core.windows.net/photo/58ff6445187a4a0791092d0e9a0667a0.jpg'}]
     photos_trash = [];
     dragging = false;
     dragToDel = false;
@@ -175,94 +179,7 @@ export class AddTimelinePage implements OnInit {
         this.localStorageService.store("Reddah_Mytimeline_Draft"+this.reddah.getCurrentUser(),this.yourThoughts);
     }
 
-    canvasId: any;
-    canvasPen: any;
-    canvasObj: any = {//canvas的大小设置
-        canvasWith: 200,
-        canvasHeight: 200,
-    };
-
-    image1: any;
-    loadBase64(){
-        
-        this.canvasId = document.getElementById("canvas1");
-        this.canvasPen = this.canvasId.getContext("2d");
-        this.image1 = document.getElementById("image1") as HTMLImageElement;
-        this.image1.crossOrigin = "Anonymous";  
-        //this.image1.setAttribute("crossOrigin",'Anonymous');
-        this.image1.src = this.photos[0].fileUrl;
-
-        console.log('start load image to canvas')
-        this.image1.onload = ()=>{
-            var originWidth = this.image1.width;
-            var originHeight = this.image1.height;
-            
-            var maxWidth = 400, maxHeight = 400;
-            
-            var targetWidth = originWidth, targetHeight = originHeight;
-            
-            if (originWidth > maxWidth || originHeight > maxHeight) {
-                if (originWidth / originHeight > maxWidth / maxHeight) {
-                    
-                    targetWidth = maxWidth;
-                    targetHeight = Math.round(maxWidth * (originHeight / originWidth));
-                } else {
-                    targetHeight = maxHeight;
-                    targetWidth = Math.round(maxHeight * (originWidth / originHeight));
-                }
-            }
-                
-            this.canvasId.width = targetWidth;
-            this.canvasId.height = targetHeight;
-            this.canvasPen.drawImage(this.image1, 0, 0, this.canvasId.width, this.canvasId.height);
-            
-            //this.canvasPen.drawImage(this.image1, 0, 0, 200, 200);
-        }
-
-        /*this.getURLBase64(imgSrc).then(data=>{
-            console.log(data);
-        })*/
-        
-    }
-
-    base641 = "";
-
-    getBase64(){
-        //this.canvasId = document.getElementById("canvas1");
-        return this.canvasId.toDataURL('image/jpeg');
-    }
-
     async submit(){
-        let app_id = this.reddah.qq_app_id;
-        let app_key = this.reddah.qq_app_key;
-        let time_stamp = new Date().getTime();
-        let nonce_str = this.reddah.nonce_str();
-
-        let params2 = {
-            "app_id":app_id,
-            "time_stamp":Math.floor(time_stamp/1000),
-            "nonce_str":nonce_str,
-            "image":this.getBase64().replace("data:image/jpeg;base64,",""),
-            //"image_url":"https://reddah.blob.core.windows.net/photo/c0bb1fb7037a4f62a96afad56e9d39ac.jpg",
-            "sign":"",
-            "app_key":""
-        }
-
-        params2["sign"] = this.reddah.getReqSign(params2, app_key);
-        this.reddah.getQqPornImageDetect(params2, app_key).subscribe(detect=>{
-            if(detect.Success==0){
-                //this.detectedLan = JSON.parse(detect.Message).data.lang;
-                //console.log(detect.Message)
-                this.yourThoughts = JSON.stringify(detect.Message)
-                
-            }
-            else{
-                this.yourThoughts = JSON.stringify(detect)
-            }
-        });
-
-        return;
-
         if(this.action=="story"){
             if(this.location==null){
                 this.reddah.toast("You should choose a location");
@@ -280,6 +197,7 @@ export class AddTimelinePage implements OnInit {
         this.formData.append('location', JSON.stringify(this.location));
         //send the key in UI display order
         this.formData.append('order', this.photos.map(e=>e.fileUrl).join(","));
+        this.formData.append('porn', JSON.stringify(Math.max.apply(0, this.photos.map(e=>e.porn))));
         //feedback:9, normal:0, timeline:1, story:11
         this.formData.append('action', this.action);
         if(this.action=="story"){
@@ -349,18 +267,87 @@ export class AddTimelinePage implements OnInit {
         if(data==1)//photo
         {
             //await this.takePhoto();
-            await this.reddah.takePhoto(this.photos, this.formData);
+            this.reddah.takePhoto(this.photos, this.formData).then(()=>{
+                this.checkImagePorn();
+            }).catch(()=>{
+            });
         }
         else//from library
         {
             //await this.fromLibPhoto();
             this.reddah.fromLibPhoto(this.photos, this.formData).then(()=>{
-                this.loadBase64();
+                this.checkImagePorn();
             }).catch(()=>{
-                this.loadBase64();
+                
             });
         }
     }
+    
+    checkImagePorn(){
+        let cIndex = this.photos.length - 1;
+        let canvas = document.createElement('canvas');
+        let ctx = canvas.getContext("2d");
+        let image = document.createElement('img');
+        image.src=this.photos[cIndex].webUrl;
+
+        image.onload = ()=>{
+            var originWidth = image.width;
+            var originHeight = image.height;
+            
+            var maxWidth = 400, maxHeight = 400;
+            
+            var targetWidth = originWidth, targetHeight = originHeight;
+            
+            if (originWidth > maxWidth || originHeight > maxHeight) {
+                if (originWidth / originHeight > maxWidth / maxHeight) {
+                    
+                    targetWidth = maxWidth;
+                    targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+                } else {
+                    targetHeight = maxHeight;
+                    targetWidth = Math.round(maxHeight * (originWidth / originHeight));
+                }
+            }
+                
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+            let app_id = this.reddah.qq_app_id;
+            let app_key = this.reddah.qq_app_key;
+            let time_stamp = new Date().getTime();
+            let nonce_str = this.reddah.nonce_str();
+
+            let params2 = {
+                "app_id":app_id,
+                "time_stamp":Math.floor(time_stamp/1000),
+                "nonce_str":nonce_str,
+                "image":canvas.toDataURL('image/jpeg').replace("data:image/jpeg;base64,",""),
+                "sign":"",
+                "app_key":""
+            }
+
+            params2["sign"] = this.reddah.getReqSign(params2, app_key);
+            this.reddah.getQqPornImageDetect(params2, app_key).subscribe(detect=>{
+                if(detect.Success==0){
+                    let p = JSON.parse(detect.Message);
+                    if(p.ret==0){
+                        let pornResult = p.data.tag_list.filter(l=>l.tag_name=="normal_hot_porn");
+                    
+                        if(pornResult.length>0){
+                            this.photos[cIndex]["porn"] = pornResult[0].tag_confidence;
+                        }
+                    }
+                }
+                else{
+                }
+            });
+
+        }
+        
+    }
+
+
 /*
     async takePhoto(){
         const options: CameraOptions = {
