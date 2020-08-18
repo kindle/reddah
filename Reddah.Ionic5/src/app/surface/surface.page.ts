@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LocalePage } from '../common/locale/locale.page';
 import { SigninPage } from './signin/signin.page';
@@ -16,6 +16,7 @@ import { RegisterPage } from './register/register.page'
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { MapPage } from '../map/map.page';
 import { SettingNetworkPage } from '../settings/setting-network/setting-network.page';
+import { UserPage } from '../common/user/user.page';
 
 @Component({
     selector: 'app-surface',
@@ -32,6 +33,7 @@ export class SurfacePage implements OnInit {
         private authService: AuthService,
         private localStorageService: LocalStorageService,
         private globalization: Globalization,
+        private activeRouter: ActivatedRoute,
     ) {}
 
     ngOnInit() {
@@ -61,6 +63,25 @@ export class SurfacePage implements OnInit {
         }
         this.init(null);
         setTimeout(()=>{this.tap()},1500)
+
+        let slugUserName = this.activeRouter.snapshot.queryParams["slugUserName"];
+        if(slugUserName!=null&&slugUserName.length>0){
+            this.goUser(slugUserName);
+        }
+    }
+
+    async goUser(userName){
+        const modal = await this.modalController.create({
+            component: UserPage,
+            componentProps: { 
+                userName: userName
+            },
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+          
+        await modal.present();
     }
 
     isAuthenticated() {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 
@@ -7,7 +7,8 @@ import {
     StatusBarStyle,
     Capacitor,
   } from '@capacitor/core';
-const { StatusBar, SplashScreen, Geolocation } = Plugins;
+
+const { App, StatusBar, SplashScreen, Geolocation } = Plugins;
 
 import { ModalController, AlertController, ActionSheetController, PopoverController, IonRouterOutlet, MenuController, LoadingController } from '@ionic/angular';
 
@@ -21,6 +22,7 @@ import { Globalization } from '@ionic-native/globalization/ngx';
 import { ReddahService } from './reddah.service';
 import { AuthService } from './auth.service';
 import { Queue } from './model/UserModel';
+import { Router } from '@angular/router';
 //import { Network } from '@ionic-native/network/ngx';
 
 @Component({
@@ -46,6 +48,8 @@ export class AppComponent {
         public reddah: ReddahService,
         private authService: AuthService,
         private loadingController: LoadingController,
+        private router: Router,
+        private zone: NgZone,
         //private network: Network,
         //private firebase: Firebase,
   ) {
@@ -56,6 +60,27 @@ export class AppComponent {
   isStatusBarLight = true;
 
   initializeApp() {
+
+    //deep link support
+    App.addListener('appUrlOpen', (data: any) => {
+        this.zone.run(() => {
+            let slug = data.url.split(".app").pop();
+            console.log("slug:"+slug)
+            if (slug) {
+                if(slug.indexOf('/user/')>-1) 
+                {
+                    this.router.navigate(['/surface'], {
+                        queryParams: {
+                            slugUserName:slug.replace('/user/','')
+                        }
+                    });
+                }
+            }
+            // If no match, do nothing - let regular routing 
+            // logic take over
+        });
+    });
+
     this.platform.ready().then(() => {
         this.isStatusBarLight = !this.authService.authenticated();
         if(this.reddah.isMobile())
@@ -84,6 +109,7 @@ export class AppComponent {
         }
         this.initPlugins();
         this.backButtonEvent();
+
     });
   }
 
