@@ -12,6 +12,7 @@ using System.Web.Script.Serialization;
 using System.Text.RegularExpressions;
 using WebMatrix.WebData;
 using System.Net.Mail;
+using Azure.Storage.Blobs;
 
 namespace Reddah.Web.Login.Controllers
 {
@@ -672,6 +673,119 @@ namespace Reddah.Web.Login.Controllers
 
         }
 
+        [Route("addpubminiazure")]
+        [HttpPost]
+        public IHttpActionResult AddPubMiniAzure()
+        {
+            try
+            {
+                string jwt = HttpContext.Current.Request["jwt"];
+                string jsText = HttpContext.Current.Request["title"].Trim();
+                string htmlText = HttpContext.Current.Request["content"].Trim();
+                string cssText = HttpContext.Current.Request["abstract"].Trim();
+                string groupName = HttpContext.Current.Request["groupName"].Trim();
+                string targetUserName = HttpContext.Current.Request["targetUserName"].Trim();
+                string locale = HttpContext.Current.Request["locale"].Trim();
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                int id = js.Deserialize<int>(HttpContext.Current.Request["id"]);
+
+                if (String.IsNullOrWhiteSpace(jsText))
+                    return Ok(new ApiResult(1, "js empty"));
+                if (String.IsNullOrWhiteSpace(htmlText))
+                    return Ok(new ApiResult(1, "html empty"));
+                if (String.IsNullOrWhiteSpace(cssText))
+                    return Ok(new ApiResult(1, "css empty"));
+
+                JwtResult jwtResult = AuthController.ValidJwt(jwt);
+
+                if (jwtResult.Success != 0)
+                    return Ok(new ApiResult(2, "Jwt invalid" + jwtResult.Message));
+
+                try
+                {
+                    using (var db = new reddahEntities())
+                    {
+                        if (id > 0)
+                        {
+                            //update pub article
+                            var existPubArticle = db.Article.FirstOrDefault(a => a.Id == id && a.Type == 0);
+                            if (existPubArticle != null)
+                            {
+                                String[] articleGroupNames = groupName.Split(',');
+                                foreach (string articleGroupName in articleGroupNames)
+                                {
+                                    if (db.Group.FirstOrDefault(g => g.Name == articleGroupName.Trim()) == null)
+                                    {
+                                        db.Group.Add(new Group
+                                        {
+                                            Name = articleGroupName.Trim(),
+                                            CreatedOn = DateTime.Now
+                                        });
+                                    }
+                                }
+
+                                existPubArticle.Title = Helpers.HtmlEncode(jsText);
+                                existPubArticle.Content = Helpers.HtmlEncode(htmlText);
+                                existPubArticle.Abstract = Helpers.HtmlEncode(cssText);
+                                existPubArticle.GroupName = Helpers.HtmlEncode(groupName);
+                                existPubArticle.LastUpdateOn = DateTime.UtcNow;
+                                existPubArticle.LastUpdateBy = jwtResult.JwtUser.User;
+                                existPubArticle.LastUpdateType = 100;
+
+                                this.saveMiniFileAzure(existPubArticle.UserName, "js", jsText, jwtResult.JwtUser.User, db);
+                                this.saveMiniFileAzure(existPubArticle.UserName, "html", htmlText, jwtResult.JwtUser.User, db);
+                                this.saveMiniFileAzure(existPubArticle.UserName, "css", cssText, jwtResult.JwtUser.User, db);
+                            }
+                        }
+                        else
+                        {
+                            //add pub article
+                            db.Article.Add(new Article()
+                            {
+                                Title = Helpers.HtmlEncode(jsText),
+                                Content = Helpers.HtmlEncode(htmlText),
+                                Abstract = Helpers.HtmlEncode(cssText),
+                                CreatedOn = DateTime.UtcNow,
+                                Count = 0,
+                                GroupName = Helpers.HtmlEncode(groupName),
+                                UserName = targetUserName,
+                                CreatedBy = jwtResult.JwtUser.User,
+                                LastUpdateOn = DateTime.UtcNow,
+                                LastUpdateBy = jwtResult.JwtUser.User,
+                                Locale = locale,
+                                Type = 0,
+                                Status = 0, //0 draft, 1 published,
+                                LastUpdateType = 100
+                            });
+
+                            this.saveMiniFileAzure(targetUserName, "js", jsText, jwtResult.JwtUser.User, db);
+                            this.saveMiniFileAzure(targetUserName, "html", htmlText, jwtResult.JwtUser.User, db);
+                            this.saveMiniFileAzure(targetUserName, "css", cssText, jwtResult.JwtUser.User, db);
+                        }
+
+                        db.SaveChanges();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Ok(new ApiResult(3, "Excepion:" + ex.Message.ToString()));
+                }
+
+
+                return Ok(new ApiResult(0, "New pub article added"));
+
+            }
+            catch (Exception ex1)
+            {
+                return Ok(new ApiResult(4, ex1.Message));
+            }
+
+
+
+        }
+
         private void saveMiniFile(string miniGuid, string fileFormat, string content, string userName, reddahEntities db)
         {
             string uploadedImagePath = "/uploadPhoto/";
@@ -704,6 +818,53 @@ namespace Reddah.Web.Login.Controllers
                 file.Tag = "";
                 db.UploadFile.Add(file);
             }
+        }
+
+        private void saveMiniFileAzure(string miniGuid, string fileFormat, string content, string userName, reddahEntities db)
+        {
+
+            /*
+            string uploadedImagePath = "/uploadPhoto/";
+            string uploadImageServerPath = "~" + uploadedImagePath;
+
+            var fileName = Path.GetFileName(miniGuid + "." + fileFormat);
+            var filePhysicalPath = HostingEnvironment.MapPath(uploadImageServerPath + "/" + fileName);
+
+            if (!Directory.Exists(HostingEnvironment.MapPath(uploadImageServerPath)))
+            {
+                Directory.CreateDirectory(HostingEnvironment.MapPath(uploadImageServerPath));
+            }
+
+            using (StreamWriter sw = new StreamWriter(filePhysicalPath, false, System.Text.Encoding.UTF8))
+            {
+                sw.Write(content);
+            }
+
+            var url = uploadedImagePath + fileName;*/
+
+            string containerName = "code";
+            string fileNameWithExt = miniGuid + "." + fileFormat;
+
+            BlobServiceClient blobServiceClient = new BlobServiceClient(base.GetAzureConnectionString());
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+            BlobClient blobClient = containerClient.GetBlobClient(fileNameWithExt);
+            //blobClient.SetAccessTier("Cool");
+            //blobClient.SetAccessTier(Azure.Storage.Blobs.Models.AccessTier.Cool);
+            using (MemoryStream uploadInputStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(content)))
+            {
+                blobClient.Upload(uploadInputStream, true);
+            }
+
+            var url = "https://reddah.blob.core.windows.net/" + containerName + "/" + fileNameWithExt;
+
+            UploadFile file = new UploadFile();
+            file.Guid = miniGuid;
+            file.Format = fileFormat;
+            file.UserName = userName;
+            file.CreatedOn = DateTime.UtcNow;
+            file.GroupName = "";
+            file.Tag = "mini";
+            db.UploadFile.Add(file);
         }
 
 
