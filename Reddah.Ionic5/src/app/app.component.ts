@@ -228,6 +228,7 @@ export class AppComponent {
       });
 
       SplashScreen.hide();
+
   }
 
   // set up hardware back button event.

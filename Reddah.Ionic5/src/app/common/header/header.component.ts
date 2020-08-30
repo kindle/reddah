@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { ModalController, PopoverController, Platform } from '@ionic/angular';
 import { SearchPage } from '../search/search.page';
 import { HeaderAddPage } from '../header-add-pop.page';
-import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from '../../reddah.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { ReddahService } from '../../reddah.service';
 })
 export class HeaderComponent {
 
-    @Input() title: string;
+    @Input() htitle: string;
     @Input() back: boolean;
 
     constructor(

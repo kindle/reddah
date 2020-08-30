@@ -50,9 +50,11 @@
             <ion-note *ngIf="!asNormalUser" color="danger" slot="end" (click)="edit()">[{{reddah.instant('Comment.Edit') }}]</ion-note>
         </div>
 
-        <ion-item lines="none" style="--padding-start:0;" *ngIf="detectedLan!=''&&detectedLan!=reddah.adjustLan(detectedLan)">
+        <ion-item lines="none" style="--padding-start:0;--inner-padding-end:0;" *ngIf="detectedLan!=''&&detectedLan!=reddah.adjustLan(detectedLan)">
             <ion-icon (click)="speak(article)" class="action-margin" color="dark" 
                 name="mic-outline" *ngIf="false"></ion-icon>
+            <ion-icon slot="end" (click)="search(article)" class="action-margin" color="primary" 
+                name="search-outline"></ion-icon>
             <ion-icon slot="end" (click)="translate(article)" class="action-margin" color="warning" 
                 name="language-outline" *ngIf="detectedLan!=''&&detectedLan!=reddah.adjustLan(detectedLan)"></ion-icon>
         </ion-item>

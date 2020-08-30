@@ -257,10 +257,10 @@ export class ImageViewerComponent implements OnInit {
         this.fileTransfer = this.transfer.create(); 
         console.log('start downloading') 
         this.fileTransfer.onProgress((data)=>{
-            this.zone.run(()=>{
-                this.loadProgress = parseInt((data.loaded/data.total*100)+"");
-                console.log(this.loadProgress);
-            });
+            //this.zone.run(()=>{
+            //    this.loadProgress = parseInt((data.loaded/data.total*100)+"");
+            //    console.log(this.loadProgress);
+            //});
         });
         let orgImageUrl = item.webPreviewUrl.replace("///","https://").replace("_reddah_preview","");
         let orgImageFileName = this.getFileName(item.previewImageFileName.replace("_reddah_preview",""));

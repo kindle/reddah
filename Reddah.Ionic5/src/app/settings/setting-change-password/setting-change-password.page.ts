@@ -5,9 +5,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
 import { AppVersion } from '@ionic-native/app-version/ngx';
-import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { Platform } from '@ionic/angular'; 
-import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
 
 @Component({
     selector: 'app-setting-change-password',
@@ -23,12 +21,9 @@ export class SettingChangePasswordPage implements OnInit {
 
     constructor(
         private appVersion: AppVersion,
-        private appUpdate: AppUpdate,
         private platform: Platform,
         private modalController: ModalController,
         public reddah: ReddahService,
-        private localStorageService: LocalStorageService,
-        private cacheService: CacheService,
         public authService: AuthService,
     ) { 
         this.userName = this.reddah.getCurrentUser();

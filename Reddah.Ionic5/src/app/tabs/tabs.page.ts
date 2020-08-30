@@ -3,6 +3,7 @@ import { ReddahService } from '../reddah.service';
 import { MapPage } from '../map/map.page';
 import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { MapHWPage } from '../maphw/maphw.page';
 
 @Component({
   selector: 'app-tabs',
@@ -21,9 +22,11 @@ export class TabsPage {
 
     async openEarth(){
       
-        const modal = await this.modalController.create({
-            component: MapPage,
-            componentProps: {
+        let isHwMapLoaded = (window["reddahMapHw"].loaded ===true);
+        const modal = await this.modalController.create(
+            {
+              component: isHwMapLoaded?MapHWPage:MapPage,
+              componentProps: {
             },
             cssClass: "modal-fullscreen",
             swipeToClose: true,

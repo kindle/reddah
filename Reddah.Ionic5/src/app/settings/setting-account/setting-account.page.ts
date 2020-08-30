@@ -1,11 +1,8 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
-import { CacheService } from "ionic-cache";
-import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
 import { SettingChangePasswordPage } from '../setting-change-password/setting-change-password.page';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-setting-account',

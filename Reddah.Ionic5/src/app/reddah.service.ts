@@ -1262,7 +1262,7 @@ export class ReddahService {
       );
     }
     //******************************** */
-    private addPubMiniUrl = `${this.domain}/api/pub/addpubmini`; 
+    private addPubMiniUrl = `${this.domain}/api/pub/addpubmini${this.cloud}`;  
 
     addPubMini(formData: FormData): Observable<any> {
 
@@ -4050,6 +4050,10 @@ export class ReddahService {
 
     async Browser(u){
         await Browser.open({ url: u });
+    }
+
+    async bingSearch(u){
+        await Browser.open({ url: "https://bing.com/search?q="+u });
     }
 
     getImgsrc(htmlstr) {  

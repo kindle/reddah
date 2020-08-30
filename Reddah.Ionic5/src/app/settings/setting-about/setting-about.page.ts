@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';
-import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { Platform } from '@ionic/angular'; 
 import { AlertController, ActionSheetController } from '@ionic/angular';
 
@@ -18,7 +17,6 @@ export class SettingAboutPage implements OnInit {
     version;
 
     constructor(
-        private appUpdate: AppUpdate,
         private platform: Platform,
         private modalController: ModalController,
         public reddah: ReddahService,
@@ -42,20 +40,6 @@ export class SettingAboutPage implements OnInit {
     }
 
     upgradeChecked = false;
-    upgrade() {
-        this.upgradeChecked = true;
-        const updateUrl = 'https://reddah.com/apk/update.xml';
-        if (this.isMobile()) {
-            this.reddah.getVersionNumber().then(version => {
-                if (this.isAndroid()) {
-                    this.appUpdate.checkAppUpdate(updateUrl).then(data => {});
-                } else {
-                    this.appUpgrade();
-                }
-            });
-                
-        }
-    }
 
 
     appUpgrade() {

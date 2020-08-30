@@ -470,6 +470,10 @@ export class PostviewerPage implements OnInit {
         }
     }
 
+    search(article){
+        this.reddah.bingSearch(article.Title);
+    }
+
     detectedLan;
     detectLan(){
         let app_id = this.reddah.qq_app_id;

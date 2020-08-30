@@ -38,8 +38,8 @@ export class SearchPage implements OnInit {
         [
             {id:4,name:this.reddah.instant("Menu.MiniApp")},
             {id:5,name:this.reddah.instant("Menu.Contact")},
-            //{id:6, name:''}
-            {id:6,name:this.reddah.instant("Menu.Equity")}
+            {id:6, name:''}
+            //{id:6,name:this.reddah.instant("Menu.Equity")}
         ],
         /*,{id:5,name:'聊天记录'},*/
     ];

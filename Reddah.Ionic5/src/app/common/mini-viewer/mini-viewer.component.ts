@@ -10,7 +10,9 @@ import { RankPage } from '../rank/rank.page';
 
 import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 import { TopicPage } from 'src/app/topic/topic.page';
-import { CameraSource, CameraResultType, Camera } from '@capacitor/core';
+import { Plugins, CameraSource, CameraResultType } from '@capacitor/core';
+
+const { Browser, Camera, Filesystem, Haptics, Device, Storage } = Plugins;
 
 @Component({
     selector: 'app-mini-viewer',
@@ -87,9 +89,9 @@ export class MiniViewerComponent implements OnInit {
         //non-native api
         this.initApi();
 
-        if(this.reddah.isMobile()){
+        //if(this.reddah.isMobile()){
             this.initNativeApi();
-        }
+        //}
     }
 
     bodyClick(){
@@ -255,48 +257,22 @@ export class MiniViewerComponent implements OnInit {
     }
 
     initCameraPhoto(){
-        window["reddahApi"].camera = async ()=>{
-            /*const options: CameraOptions = {
-                quality: 100,
-                destinationType: this.camera.DestinationType.FILE_URI,
-                encodingType: this.camera.EncodingType.JPEG,
-                mediaType: this.camera.MediaType.PICTURE,
-                correctOrientation: true
-            }
-                
-            return this.camera.getPicture(options);*/
-            const capturedPhoto = await Camera.getPhoto({
+        window["reddahApi"].camera = ()=>{
+            return Camera.getPhoto({
                 resultType: CameraResultType.Uri, 
                 source: CameraSource.Camera, 
-                quality: 100,
-                correctOrientation: true
+                quality: 100
             });
-
-            return capturedPhoto;
         }
     }
 
     async initLibPhoto(){
-        window["reddahApi"].album = async ()=>{
-            /*const options: CameraOptions = {
-                quality: 100,
-                destinationType: this.camera.DestinationType.FILE_URI,
-                encodingType: this.camera.EncodingType.JPEG,
-                mediaType: this.camera.MediaType.PICTURE,
-                sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-                correctOrientation: true
-            }
-                
-            return this.camera.getPicture(options);*/
-
-            const capturedPhoto = await Camera.getPhoto({
+        window["reddahApi"].album = ()=>{
+            return Camera.getPhoto({
                 resultType: CameraResultType.Uri, 
                 source: CameraSource.Photos, 
-                quality: 100,
-                correctOrientation: true
+                quality: 100 
             });
-
-            return capturedPhoto;
         }
     }
 

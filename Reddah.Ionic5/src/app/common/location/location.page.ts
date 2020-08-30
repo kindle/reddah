@@ -162,7 +162,17 @@ export class LocationPage implements OnInit {
         this.selectedItem = item;
         //console.log(item)
         if(item!=null&&item.location!=null){
-            this.flyMaker = L.marker([item.location.lat, item.location.lng]);
+            var myIcon = L.icon({
+                iconUrl: 'assets/maker/marker-icon-2x-blue.png',
+                shadowUrl: 'assets/maker/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+
+            this.flyMaker = L.marker([item.location.lat, item.location.lng], {icon: myIcon});
+            //this.flyMaker = L.marker([item.location.lat, item.location.lng]);
             this.markerGroup.clearLayers();
             this.markerGroup.addLayer(this.flyMaker);
             if(this.location)
