@@ -16,6 +16,7 @@ import { SettingFontPage } from '../settings/setting-font/setting-font.page';
 import { AddArticlePage } from '../tabs/publisher/add-article/add-article.page';
 import { LocationPage } from '../common/location/location.page';
 import { ArticleTextPopPage } from '../common/article-text-pop.page';
+import { ReadPage } from '../common/read/read.page';
 
 @Component({
     selector: 'app-postviewer',
@@ -450,8 +451,18 @@ export class PostviewerPage implements OnInit {
         }
     }
 
-    speak(article){
-
+    async speak(article){
+        const userModal = await this.modalController.create({
+            component: ReadPage,
+            componentProps: { 
+                article: article
+            },
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+          
+        await userModal.present();
     }
 
     orgLines = [];

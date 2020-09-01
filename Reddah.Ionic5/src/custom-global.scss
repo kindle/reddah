@@ -322,3 +322,12 @@ body {
      -webkit-user-select: inherit;
    }
  }
+
+ .current {
+    z-index: 2;
+    background: #5F70EE;
+    color: white;
+    transform: scale(1.2);
+    border-radius: 2px;
+    box-shadow: -7px 0 0 #5F70EE, 7px 0 0 #5F70EE, 0px 5px 8px rgba(0, 0, 0, 0.1);
+}

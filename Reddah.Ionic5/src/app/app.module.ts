@@ -188,6 +188,7 @@ import "@elf/elf-theme-halo/dark/sapphire-parity-chart";
 import "@elf/sapphire-interactive-chart";
 import "@elf/elf-theme-halo/dark/sapphire-interactive-chart";
 import { MapHWPage } from './maphw/maphw.page';
+import { ReadPage } from './common/read/read.page';
 
 
 
@@ -204,7 +205,7 @@ var firebaseConfig = {
 @NgModule({
   declarations: [
     TopicActionBarComponent,
-    TopicPage,
+    TopicPage,ReadPage,
     ShareArticleComponent,ShareArticleChatComponent,ShareFaceComponent,
     AppComponent,
     BookmarkPage,ActiveUsersPage,
@@ -274,7 +275,7 @@ var firebaseConfig = {
     CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
 ],
 entryComponents: [
-    TopicPage,
+    TopicPage,ReadPage,
     BookmarkPage,ActiveUsersPage,
     BookmarkPopPage,ChatPopPage,
     PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,

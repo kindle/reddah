@@ -292,7 +292,7 @@ export class MapHWPage implements OnInit {
                             map: this.maphw,
                             position: { lat: user.Lat, lng: user.Lng },
                             //label: this.reddah.appData('usersignature_'+user.UserName),
-                            icon: { color: type==0?'red':'blue' },
+                            icon: { opacity: 0.8, color: type==0?'#333':'#fff' },
                             label: { opacity: 0.5, url: type==0?'assets/maker/marker-icon-2x-red.png':'assets/maker/marker-icon-2x-blue.png' },
                         });
                         let marker = itemMarker;
