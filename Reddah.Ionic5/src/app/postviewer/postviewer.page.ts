@@ -472,11 +472,37 @@ export class PostviewerPage implements OnInit {
             article.Translate = true;
 
             this.translateTitle(this.article);
-            
-            this.orgLines = article.Content.replace("&lt;br&gt;","&lt;p&gt;").split("&lt;p&gt;");
+            let orgLinesDraft = article.Content.replace(/\&lt\;br\&gt\;/g,"&lt;p&gt;")
+                .replace(/<br>/g,"&lt;p&gt;")
+                .split(/&lt;p&gt;|<p>/)
+                .filter(l=> l.trim().length>0 );
+            console.log(orgLinesDraft)
+
+            orgLinesDraft.forEach((orgLineDraft, index)=>{
+                console.log(orgLineDraft)
+                let htmlRegex = /(<([^>]+)>)/ig;
+                orgLineDraft = orgLineDraft.replace(htmlRegex, "");
+                let minNumber = 500;
+                let divides = orgLineDraft.length/minNumber
+                console.log(orgLineDraft.length+"::::"+divides+"::::"+orgLineDraft)
+                if(divides>1)
+                {
+                    let sentences = orgLineDraft.split(/.|。/);
+                    for(let i=0;i<sentences.length;i++){
+                        let newLine = sentences[i];// + (i<sentences.length-1)?" "+sentences[i+1]:"";
+                        this.orgLines.push(newLine);
+                    }
+                }
+                else{
+                    this.orgLines.push(orgLineDraft);
+                }
+
+            })
+
             this.translateLines = [].concat(this.orgLines);
             this.orgLines.forEach((orgLine, index)=>{
-                this.translateContent(orgLine, index)
+                if(orgLine.trim().length>0)
+                    this.translateContent(orgLine, index)
             })
         }
     }
@@ -567,7 +593,7 @@ export class PostviewerPage implements OnInit {
                     "app_id":app_id,
                     "time_stamp":Math.floor(time_stamp/1000),
                     "nonce_str":nonce_str,
-                    "text": this.reddah.summary(orgLine, 200),
+                    "text": this.reddah.summary(orgLine, 500),
                     "source":this.detectedLan,
                     "target":this.reddah.adjustLan(this.detectedLan),
                     "sign":""

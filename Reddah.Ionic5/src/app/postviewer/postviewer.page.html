@@ -52,7 +52,7 @@
 
         <ion-item lines="none" style="--padding-start:0;--inner-padding-end:0;" *ngIf="detectedLan!=''&&detectedLan!=reddah.adjustLan(detectedLan)">
             <ion-icon slot="end" (click)="speak(article)" class="action-margin" color="dark" 
-                name="mic-outline"></ion-icon>
+                name="mic-outline" *ngIf="false"></ion-icon>
             <ion-icon slot="end" (click)="search(article)" class="action-margin" color="primary" 
                 name="search-outline"></ion-icon>
             <ion-icon slot="end" (click)="translate(article)" class="action-margin" color="warning" 
@@ -60,7 +60,7 @@
         </ion-item>
         
         <ion-text color="dark" *ngIf="!article.VideoUrl">
-            <div *ngFor="let line of orgLines;let i=index;">
+            <div *ngFor="let line of orgLines;let i=index;" id="articleContent">
                 <div [innerHTML]="reddah.htmlDecode(line) | safe: 'html'" style="color:var(--ion-color-medium);"></div>
                 <hr style="border-top: 1px dashed var(--ion-color-medium);margin:5px 0;background:transparent;" *ngIf="translateLines[i].length>0">
                 <div [innerHTML]="reddah.htmlDecode(translateLines[i])" style="margin-bottom: 20px;"></div>
