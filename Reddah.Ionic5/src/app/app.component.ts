@@ -204,6 +204,12 @@ export class AppComponent {
               this.reddah.ArticleCacheQueue._store = JSON.parse(localCache);
           }
 
+          let localVideoCache = this.localStorageService.retrieve("reddah_video_cache_queue_"+this.reddah.getCurrentUser());
+          if(localVideoCache!=null){
+              this.reddah.VideoArticleCacheQueue = new Queue<any>();
+              this.reddah.VideoArticleCacheQueue._store = JSON.parse(localVideoCache);
+          }
+
           this.reddah.getUserPhotos(this.reddah.getCurrentUser());
       }
       

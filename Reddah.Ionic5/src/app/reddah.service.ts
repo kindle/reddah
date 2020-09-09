@@ -4066,4 +4066,78 @@ export class ReddahService {
         return imgsrcArr;  
     }
 
+
+    //******************************** */
+    videoArticles = [];
+    videoLoadedIds = [];
+    videoDislikeGroups = [];
+    videoDislikeUserNames = [];
+    VideoArticleCacheQueue = new Queue<any>();
+
+    async preloadVideos(username){
+        let locale = this.getCurrentLocale();
+        let cacheKey = "this.reddah.getVideoArticles" + JSON.stringify([])
+            + JSON.stringify([]) + JSON.stringify([]) 
+            + locale;
+        let request = this.getArticles(
+            [], 
+            [],
+            [],
+            locale, "promoted","", 1, "", 12);
+
+        this.cacheService.loadFromObservable(cacheKey, request, "VideoPage")
+        .subscribe(articles => 
+        {
+            for(let article of articles){
+                //this.reddah.videos.push({id:"video1", src:"assets/video/balloons.mp4", userName: "duowen"});
+                this.videoArticles.push(article);
+                this.videoLoadedIds.push(article.Id);
+                if(!this.publishers.has(article.UserName))
+                {
+                    this.publishers.add(article.UserName);
+                    this.getUserPhotos(article.UserName);
+                }
+            }
+            this.localStorageService.store("reddah_video_articles_"+username, JSON.stringify(this.videoArticles));
+            this.localStorageService.store("reddah_video_article_ids_"+username, JSON.stringify(this.videoLoadedIds));
+            this.localStorageService.store("reddah_video_article_groups_"+username, JSON.stringify([]));
+            this.localStorageService.store("reddah_video_article_usernames_"+username, JSON.stringify([]));
+            this.fillCacheVideos();
+        });
+    }
+
+    async fillCacheVideos() {
+        if(this.VideoArticleCacheQueue.length()<30){
+            let locale = this.getCurrentLocale();
+
+            this.getArticles(
+                this.videoLoadedIds, 
+                this.videoDislikeGroups,
+                this.videoDislikeUserNames,
+                locale, "random","", 1, "", 12)
+            .subscribe(articles => 
+            {
+                for(let article of articles){
+                    this.VideoArticleCacheQueue.push(article);
+                    this.videoLoadedIds.push(article.Id);  
+                
+                    if(!this.publishers.has(article.UserName))
+                    {
+                        this.publishers.add(article.UserName);
+                        this.getUserPhotos(article.UserName);
+                    }
+                }
+                let userName = this.getCurrentUser();
+                this.localStorageService.store("reddah_video_cache_queue_"+userName, JSON.stringify(this.VideoArticleCacheQueue._store));
+                this.localStorageService.store("reddah_video_article_ids_"+userName, JSON.stringify(this.videoLoadedIds));
+                this.localStorageService.store("reddah_video_article_groups_"+userName, JSON.stringify(this.videoDislikeGroups));
+                this.localStorageService.store("reddah_video_article_usernames_"+userName, JSON.stringify(this.videoDislikeUserNames));
+                    
+            });
+        }
+    }    
+
+    //******************************** */
+
+
 }
