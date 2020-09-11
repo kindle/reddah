@@ -473,7 +473,9 @@ export class PostviewerPage implements OnInit {
 
             this.translateTitle(this.article);
             let orgLinesDraft = article.Content.replace(/\&lt\;br\&gt\;/g,"&lt;p&gt;")
+                .replace(/\&lt\;br \/\&gt\;/g,"&lt;p&gt;")
                 .replace(/<br>/g,"&lt;p&gt;")
+                .replace(/<br \/>/g,"&lt;p&gt;")
                 .split(/&lt;p&gt;|<p>/)
                 .filter(l=> l.trim().length>0 );
             console.log(orgLinesDraft)

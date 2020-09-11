@@ -2533,6 +2533,12 @@ export class ReddahService {
         return await Capacitor.convertFileSrc(result);
     }
 
+    appVideoData(cacheKey){     
+        let result = this.localStorageService.retrieve(cacheKey);
+        let convertResult = Capacitor.convertFileSrc(result);
+        return convertResult==null?cacheKey:convertResult;
+    }
+
     async appData1(cacheKey){        
         let result = this.localStorageService.retrieve(cacheKey);
         
@@ -3908,7 +3914,7 @@ export class ReddahService {
         else
             this.localStorageService.clear(`Reddah_ArticleLike_${userName}_${article.Id}`);
 
-            if(this.isMobile()){
+        if(this.isMobile()){
             if(this.getLikeShake()){
                 this.hapticsImpact(HapticsImpactStyle.Light);
                 Haptics.vibrate();
@@ -4091,6 +4097,7 @@ export class ReddahService {
             for(let article of articles){
                 //this.reddah.videos.push({id:"video1", src:"assets/video/balloons.mp4", userName: "duowen"});
                 this.videoArticles.push(article);
+                this.toFileCache(article.Content, true);
                 this.videoLoadedIds.push(article.Id);
                 if(!this.publishers.has(article.UserName))
                 {
@@ -4119,6 +4126,7 @@ export class ReddahService {
             {
                 for(let article of articles){
                     this.VideoArticleCacheQueue.push(article);
+                    this.toFileCache(article.Content, true);
                     this.videoLoadedIds.push(article.Id);  
                 
                     if(!this.publishers.has(article.UserName))
@@ -4135,7 +4143,7 @@ export class ReddahService {
                     
             });
         }
-    }    
+    }  
 
     //******************************** */
 

@@ -35,7 +35,6 @@ export class VideosPage implements OnInit {
     ngOnInit(){
         //this.reddah.videos.push({id:"video1", src:"assets/video/balloons.mp4", userName: "duowen"});
         //this.reddah.videos.push({id:"video2", src:"assets/video/ref.mp4", userName: "zixian"});
-console.log(this.reddah.videoArticles)
         this.slideOpts = {
             pager: false,
             direction: 'vertical',
@@ -57,7 +56,7 @@ console.log(this.reddah.videoArticles)
             this.reddah.videoArticles = cacheVideoArticleArray.slice(0,top);
             //console.log(this.reddah.articles)
             this.reddah.videoArticles.forEach(article=>{
-                article.like = (this.localStorageService.retrieve(`Reddah_VideoArticleLike_${this.userName}_${article.Id}`)!=null)
+                article.like = (this.localStorageService.retrieve(`Reddah_ArticleLike_${this.userName}_${article.Id}`)!=null)
             });
             this.reddah.videoLoadedIds = JSON.parse(cacheVideoArticleIds).slice(0,top);
             this.reddah.videoDislikeGroups = JSON.parse(cacheVideoDislikeGroups);
@@ -66,10 +65,8 @@ console.log(this.reddah.videoArticles)
         }
         else
         {
-            console.log('first load')
             //this.firstLoad = true;
             let locale = "";//this.reddah.getCurrentLocale();
-            console.log(locale)
             let cacheKey = "this.reddah.getVideoArticles" + JSON.stringify(this.reddah.videoLoadedIds)
                 + JSON.stringify(this.reddah.videoDislikeGroups) + JSON.stringify(this.reddah.videoDislikeUserNames) 
                 + locale;
@@ -82,10 +79,9 @@ console.log(this.reddah.videoArticles)
             this.cacheService.loadFromObservable(cacheKey, request, "VideoPage")
             .subscribe(articles => 
             {
-                console.log('resultt')
-                console.log(articles)
                 for(let article of articles){
                     this.reddah.videoArticles.push(article);
+                    this.reddah.toFileCache(article.Content, true);
                     this.reddah.videoLoadedIds.push(article.Id);
                     if(!this.reddah.publishers.has(article.UserName))
                     {
