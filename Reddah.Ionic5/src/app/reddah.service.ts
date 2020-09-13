@@ -4097,7 +4097,7 @@ export class ReddahService {
             for(let article of articles){
                 //this.reddah.videos.push({id:"video1", src:"assets/video/balloons.mp4", userName: "duowen"});
                 this.videoArticles.push(article);
-                this.toFileCache(article.Content, true);
+                //this.toFileCache(article.Content, true);
                 this.videoLoadedIds.push(article.Id);
                 if(!this.publishers.has(article.UserName))
                 {
@@ -4126,7 +4126,7 @@ export class ReddahService {
             {
                 for(let article of articles){
                     this.VideoArticleCacheQueue.push(article);
-                    this.toFileCache(article.Content, true);
+                    //this.toFileCache(article.Content, true);
                     this.videoLoadedIds.push(article.Id);  
                 
                     if(!this.publishers.has(article.UserName))
@@ -4147,5 +4147,9 @@ export class ReddahService {
 
     //******************************** */
 
+    removeHtmlTag(str){
+        var regex = /(<([^>]+)>)/ig;
+        return this.htmlDecode2(str).replace(regex, "").trim();
+    }
 
 }

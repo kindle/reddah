@@ -81,7 +81,7 @@ export class VideosPage implements OnInit {
             {
                 for(let article of articles){
                     this.reddah.videoArticles.push(article);
-                    this.reddah.toFileCache(article.Content, true);
+                    //this.reddah.toFileCache(article.Content, true);
                     this.reddah.videoLoadedIds.push(article.Id);
                     if(!this.reddah.publishers.has(article.UserName))
                     {

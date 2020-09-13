@@ -477,7 +477,7 @@ export class PostviewerPage implements OnInit {
                 .replace(/<br>/g,"&lt;p&gt;")
                 .replace(/<br \/>/g,"&lt;p&gt;")
                 .split(/&lt;p&gt;|<p>/)
-                .filter(l=> l.trim().length>0 );
+                .filter(l=> this.reddah.removeHtmlTag(l).length>0);
             console.log(orgLinesDraft)
 
             orgLinesDraft.forEach((orgLineDraft, index)=>{
