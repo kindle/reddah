@@ -189,6 +189,7 @@ import "@elf/sapphire-interactive-chart";
 import "@elf/elf-theme-halo/dark/sapphire-interactive-chart";
 import { MapHWPage } from './maphw/maphw.page';
 import { ReadPage } from './common/read/read.page';
+import { LocationHWPage } from './common/locationhw/locationhw.page';
 
 
 
@@ -212,7 +213,7 @@ var firebaseConfig = {
     BookmarkPopPage,ChatPopPage,
     PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
     RankPage,
-    LocalePage,LocationPage,MapPage,MapHWPage,StoryPage,Tab3Page,VideosPage,
+    LocalePage,LocationPage,LocationHWPage,MapPage,MapHWPage,StoryPage,Tab3Page,VideosPage,
     ChooseUserPage,ShareChooseChatPage,
     AddCommentPage,
     AddFriendPage,
@@ -280,7 +281,7 @@ entryComponents: [
     BookmarkPopPage,ChatPopPage,
     PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
     RankPage,
-    LocalePage,LocationPage,MapPage,MapHWPage,StoryPage,Tab3Page,VideosPage,
+    LocalePage,LocationPage,LocationHWPage,MapPage,MapHWPage,StoryPage,Tab3Page,VideosPage,
     ChooseUserPage,ShareChooseChatPage,
     PostviewerPage,
     ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,

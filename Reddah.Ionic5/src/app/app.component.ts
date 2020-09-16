@@ -44,7 +44,6 @@ export class AppComponent {
         private globalization: Globalization,
         //private imageLoaderConfigService: ImageLoaderConfigService,
         private cacheService: CacheService,
-        private androidPermissions: AndroidPermissions,
         public reddah: ReddahService,
         private authService: AuthService,
         private loadingController: LoadingController,
@@ -139,34 +138,7 @@ export class AppComponent {
           this.reddah.loadTranslate(currentLocale);
       }
 
-      this.platform.ready().then(() => {
-          if(this.platform.is('android'))
-          {
-              this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
-                  result => console.log('Has permission?',result.hasPermission),
-                  err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
-              );
-              this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE).then(
-                  result => console.log('Has permission?',result.hasPermission),
-                  err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
-              );
-              this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO).then(
-                  result => console.log('Has permission?',result.hasPermission),
-                  err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO)
-              );
-              this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
-                  result => console.log('Has permission?',result.hasPermission),
-                  err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
-              );
-              
-              this.androidPermissions.requestPermissions([
-                  this.androidPermissions.PERMISSION.CAMERA, 
-                  this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
-                  this.androidPermissions.PERMISSION.RECORD_AUDIO,
-                  this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION
-              ]);
-          }
-      })
+      
       
   /*
       this.imageLoaderConfigService.useImageTag(true);

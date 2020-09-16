@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
-import { IonInfiniteScroll, IonContent, IonRefresher, ActionSheetController } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent, IonRefresher, ActionSheetController, Platform } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { Article } from '../model/article';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -12,6 +12,7 @@ import { UserPage } from '../common/user/user.page';
 import { PubPage } from '../tabs/publisher/pub/pub.page';
 import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
 import { MessageListPage } from '../tabs/message/message.page';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 @Component({
   selector: 'app-tab1',
@@ -30,6 +31,8 @@ export class Tab1Page implements OnInit {
       private localStorageService: LocalStorageService,
       private cacheService: CacheService,
       private ngZone: NgZone,
+      private platform: Platform,
+      private androidPermissions: AndroidPermissions,
   ){
       this.userName = this.reddah.getCurrentUser();
       this.reddah.articles = [];
@@ -40,6 +43,33 @@ export class Tab1Page implements OnInit {
 
   firstLoad = false;
   ngOnInit(){
+        if(this.platform.is('android'))
+        {
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+                result => console.log('Has permission?',result.hasPermission),
+                err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
+            );
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE).then(
+                result => console.log('Has permission?',result.hasPermission),
+                err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
+            );
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO).then(
+                result => console.log('Has permission?',result.hasPermission),
+                err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO)
+            );
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
+                result => console.log('Has permission?',result.hasPermission),
+                err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
+            );
+            
+            this.androidPermissions.requestPermissions([
+                this.androidPermissions.PERMISSION.CAMERA, 
+                this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
+                this.androidPermissions.PERMISSION.RECORD_AUDIO,
+                this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION
+            ]);
+        }
+
       this.reddah.getUserPhotos(this.userName);
 
       let cacheArticles = this.localStorageService.retrieve("reddah_articles_"+this.userName);

@@ -15,6 +15,7 @@ import { MiniViewerComponent } from '../mini-viewer/mini-viewer.component';
 import { AddFeedbackPage } from '../../mytimeline/add-feedback/add-feedback.page';
 import { ShareChooseChatPage } from '../../chat/share-choose-chat/share-choose-chat.page';
 import { ArticleTextPopPage } from '../article-text-pop.page';
+import { LocationHWPage } from '../locationhw/locationhw.page';
 
 @Component({
     selector: 'app-user',
@@ -605,8 +606,11 @@ export class UserPage implements OnInit {
     async goLocation(){
         if(this.userName!=this.reddah.getCurrentUser()){
             let location = this.reddah.appData('userlocationjson_'+this.userName);
+
+            let isHwMapLoaded = (window["reddahMapHw"].loaded ===true);
+          
             const modal = await this.modalController.create({
-                component: LocationPage,
+                component: isHwMapLoaded?LocationHWPage:LocationPage,
                 componentProps: { location: JSON.parse(location) },
                 cssClass: "modal-fullscreen",
                 swipeToClose: true,

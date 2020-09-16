@@ -22,18 +22,33 @@ export class TabsPage {
 
     async openEarth(){
       
-        let isHwMapLoaded = (window["reddahMapHw"].loaded ===true);
-        const modal = await this.modalController.create(
-            {
-              component: isHwMapLoaded?MapHWPage:MapPage,
-              componentProps: {
-            },
-            cssClass: "modal-fullscreen",
-            swipeToClose: true,
-            presentingElement: await this.modalController.getTop(),
-        });
+        /*if(this.reddah.appStore =="huawei")
+        {
+          let isHwMapLoaded = (window["reddahMapHw"].loaded ===true);
+          const modal = await this.modalController.create(
+              {
+                component: isHwMapLoaded?MapHWPage:MapPage,
+                componentProps: {
+              },
+              cssClass: "modal-fullscreen",
+              swipeToClose: true,
+              presentingElement: await this.modalController.getTop(),
+          });
+
+          await modal.present();
+        }*/
+          const modal = await this.modalController.create(
+              {
+                component: MapPage,
+                componentProps: {
+              },
+              cssClass: "modal-fullscreen",
+              swipeToClose: true,
+              presentingElement: await this.modalController.getTop(),
+          });
+
+          await modal.present();
           
-        await modal.present();
     }
 
 }

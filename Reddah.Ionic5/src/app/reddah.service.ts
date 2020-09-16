@@ -39,7 +39,7 @@ export class ReddahService {
         });
     }
 
-    appStore  = "ios";
+    appStore  = "huawei";//"huawei","xiaomi","ios"
     //default 2 azure East Asia
     cloud = "azure";
     domain = 'https://reddah-ea.azurewebsites.net';
