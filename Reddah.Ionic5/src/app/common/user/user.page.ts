@@ -607,17 +607,30 @@ export class UserPage implements OnInit {
         if(this.userName!=this.reddah.getCurrentUser()){
             let location = this.reddah.appData('userlocationjson_'+this.userName);
 
-            let isHwMapLoaded = (window["reddahMapHw"].loaded ===true);
+            let isHwMapLoaded = (window["reddahMapHw"]!=null&&window["reddahMapHw"].loaded ===true);
           
-            const modal = await this.modalController.create({
-                component: isHwMapLoaded?LocationHWPage:LocationPage,
-                componentProps: { location: JSON.parse(location) },
-                cssClass: "modal-fullscreen",
-                swipeToClose: true,
-                presentingElement: await this.modalController.getTop(),
-            });
-        
-            await modal.present();
+            if(this.reddah.appStore=="huawei"){
+                const modal = await this.modalController.create({
+                    component: isHwMapLoaded?LocationHWPage:LocationPage,
+                    componentProps: { location: JSON.parse(location) },
+                    cssClass: "modal-fullscreen",
+                    swipeToClose: true,
+                    presentingElement: await this.modalController.getTop(),
+                });
+            
+                await modal.present();
+            }
+            else{
+                const modal = await this.modalController.create({
+                    component: LocationPage,
+                    componentProps: { location: JSON.parse(location) },
+                    cssClass: "modal-fullscreen",
+                    swipeToClose: true,
+                    presentingElement: await this.modalController.getTop(),
+                });
+            
+                await modal.present();
+            }
         }
         else{
             this.changeLocation()

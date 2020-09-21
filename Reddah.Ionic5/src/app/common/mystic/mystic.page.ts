@@ -18,7 +18,7 @@ import { SettingSexPage } from '../../settings/setting-sex/setting-sex.page';
 import { MapPage } from '../../map/map.page';
 import { AddTimelinePage } from '../../mytimeline/add-timeline/add-timeline.page';
 import { TimelinePopPage } from '../timeline-pop.page';
-import { ApiAiClient } from 'api-ai-javascript/es6/ApiAiClient'
+//import { ApiAiClient } from 'api-ai-javascript/es6/ApiAiClient'
 
 @Component({
     selector: 'app-mystic',

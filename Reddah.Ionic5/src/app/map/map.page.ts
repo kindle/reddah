@@ -143,6 +143,12 @@ export class MapPage implements OnInit {
                 
             }).on('locationerror', (err) => {
                 console.log(err.message);
+                loc = {
+                    "title": this.userName,
+                    "location":{"lat":192,"lng":90}
+                }
+                this.setLocation(loc);
+                this.reddah.saveUserLocation(this.userName, loc, loc.location.lat, loc.location.lng);
             })
         }
             
@@ -171,7 +177,7 @@ export class MapPage implements OnInit {
         let lngHigh = ne.lng;
         let orgLngHigh = ne.lng;
         
-        //alert(`center_lng:_${lngCenter} _lng:(${lngLow}, ${lngHigh})`);
+        console.log(`center_lng:_${lngCenter} _lng:(${lngLow}, ${lngHigh})`);
 
         //adjust
         lngCenter = lngCenter % 360;
@@ -212,7 +218,8 @@ export class MapPage implements OnInit {
         //do not use cache when user count is too low
         this.reddah.getUsersByLocation(type, latCenter, lngCenter, latLow, latHigh, lngLow, lngHigh, 0)
         .subscribe(data=>{
-            //console.log(data)
+            console.log(`type:${type}, latCenter:${latCenter}, lngCenter:${lngCenter}, latLow:${latLow}, latHigh:${latHigh}, lngLow:${lngLow}, lngHigh:${lngHigh}, 1`)
+            console.log(data)
             if(data.Success==0){
                 this.markerGroup.clearLayers();
 

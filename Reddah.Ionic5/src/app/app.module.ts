@@ -190,6 +190,7 @@ import "@elf/elf-theme-halo/dark/sapphire-interactive-chart";
 import { MapHWPage } from './maphw/maphw.page';
 import { ReadPage } from './common/read/read.page';
 import { LocationHWPage } from './common/locationhw/locationhw.page';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 
 
@@ -367,7 +368,7 @@ exports:[
 providers: [
     ActionSheetController,
     NavController,
-    AppRate,
+    AppRate,AppVersion,
     AlertController,
     AuthService,
     AndroidPermissions,
