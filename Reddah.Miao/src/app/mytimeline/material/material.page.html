@@ -1,0 +1,85 @@
+<ion-content id="mycontent" [scrollEvents]="true" (ionScroll)="onScroll($event)" #pageTop style="background-color:white;">
+    <div class="headerStart" #headerStart slot="fixed">
+        <ion-item color="transparent" style="--padding-start:0;" lines="none" (dblclick)="clearCacheAndReload(null)">
+            <ion-icon name="chevron-back-outline"color="light" slot="start" (click)="close()" class="backbutton"></ion-icon>
+            <ion-label color="light">{{ reddah.instant('Common.MyPhoto') }}</ion-label>
+            <ion-icon name="add" color="light" slot="end" (click)="post($event)"></ion-icon>
+        </ion-item>
+    </div>
+    <div class="headerOnScroll" #headerOnScroll slot="fixed">
+        <ion-item color="light" style="--padding-start:0;" lines="none" (dblclick)="clearCacheAndReload(null)">
+            <ion-icon name="chevron-back-outline"slot="start" (click)="close()" class="backbutton"></ion-icon>
+            <ion-label>{{ reddah.instant('Common.MyPhoto') }}</ion-label>
+            <ion-icon name="add" slot="end" (click)="post($event)"></ion-icon>
+        </ion-item>
+    </div>
+    <div> 
+        <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>
+        </ion-refresher>  
+        <div class="mymaterialCover" #timelineCover>
+            <img src="assets/icon/timg.jpg">
+        </div>
+        <div *ngFor="let article of articles" style="display: flex; border-bottom: 1px solid lightgrey; margin-top:10px; margin-bottom: 15px; padding-bottom: 10px;">
+            <div style="width:50px;padding: 0px 10px;">
+            </div>
+            <div style="width:100%;border: 0px solid red;">
+                <div *ngIf="article.Title.length>0&&article.Title.length<100">
+                    <div style="background-color: white; padding: 0 0 4px 15px;margin-bottom:0px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                </div>
+                <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
+                    <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 2px;margin-bottom:5px;width:96%;" 
+                    [innerHTML]="reddah.summary(article.Title,50)"></div>
+                </ion-item>
+                <ion-card-content style="display:block;margin-right:20px;" *ngIf="article.Abstract.length<3&&article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
+                    <div class="parent" *ngIf="article.Content.split('$$$').length>6">
+                        <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
+                            <img [id]="reddah.makeItId(image+'mtp')" 
+                            (load)="reddah.adjustImage(image, 'mtp')"
+                            [src]="reddah.level1Cache(image)"
+                            class="picture" (click)="viewer(i, article.Content.split('$$$'))">
+                        </div>
+                    </div>
+                    <div class="parent" *ngIf="article.Content.split('$$$').length==3||article.Content.split('$$$').length==5||article.Content.split('$$$').length==6">
+                        <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
+                            <img [id]="reddah.makeItId(image+'mtp')" 
+                            (load)="reddah.adjustImage(image, 'mtp')"  
+                            [src]="reddah.level1Cache(image)"
+                            class="picture" (click)="viewer(i, article.Content.split('$$$'))">
+                        </div>
+                    </div>
+                    <div class="parent2" *ngIf="article.Content.split('$$$').length==2||article.Content.split('$$$').length==4">
+                        <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
+                            <img [id]="reddah.makeItId(image+'mtp')" 
+                            (load)="reddah.adjustImage(image, 'mtp')" 
+                            [src]="reddah.level1Cache(image)"
+                            class="picture" (click)="viewer(i, article.Content.split('$$$'))">
+                        </div>
+                    </div>
+                    <div class="parent3" *ngIf="article.Content.split('$$$').length==1">
+                        <div class="container3">
+                            <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtp')" 
+                            (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'mtp')" 
+                            [src]="reddah.level1Cache(article.Content.split('$$$')[0])"
+                            class="picture" 
+                            (click)="viewer(0, article.Content.split('$$$'))">
+                        </div>
+                    </div>
+                </ion-card-content>
+                <ion-item no-padding lines="none" style="margin:2px 0;" *ngIf="article.Location&&article.Location!='undefined'" (click)="goLocation(article.Location)">
+                    <ion-note color="secondary">{{reddah.getJSON(article.Location).title}}</ion-note>
+                </ion-item>
+                <ion-item no-padding lines="none" style="margin:2px 0;">
+                    <ion-note color="dark">{{reddah.getSendTime(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
+                    <ion-note color="secondary" style="margin-left: 5px;" *ngIf="isMe(article.UserName)" (click)="delete(article)">{{ reddah.instant('Comment.Delete') }}</ion-note>
+                </ion-item>
+            </div>
+        </div>
+        
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" 
+                loadingText="{{ reddah.instant('Button.Loading') }}">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </div>
+</ion-content>

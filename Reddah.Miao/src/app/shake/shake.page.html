@@ -1,0 +1,36 @@
+<ion-item style="--padding-start:0;" lines="none" color="dark" (click)="shakeAni()">
+    <ion-button clear icon-start color="transparent" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-label>{{ reddah.instant('Menu.Shake') }}</ion-label>
+</ion-item>
+<ion-content #pageTop style="background-color: white;">
+    <div class="shakebg" *ngIf="showShakebg">
+        <img src="assets/shake/shakeIcon.png"/>
+        <div style="position: absolute; bottom: 60px; padding:60px 30px; width:100%;">
+            <ion-item style="position:relative;--background: #1d1d1d;" lines="none" *ngFor="let user of users" (click)="goUser(user.UserName)">
+                <ion-avatar class="contactUserPhoto">
+                    <img src="{{reddah.appData('userphoto_'+user.UserName)}}" class="contactPortrait">
+                </ion-avatar>
+                <ion-label style="margin-left:10px;">
+                    <span class="user-name" style="color:white;">{{reddah.getDisplayName(user.UserName)}}</span>
+                    <ion-icon size="small" class="cmd-title" name="male-outline"*ngIf="reddah.appData('usersex_'+userName)==1" color="secondary"></ion-icon>
+                    <ion-icon size="small" class="cmd-title" name="female-outline"*ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
+                    <br>
+                    <ion-note color="tertiary">{{ reddah.instant('Common.Distance') }}: {{reddah.getRuffDistanceByDegree(user.Distance)}}</ion-note>
+                </ion-label>
+            </ion-item>
+        </div>
+    </div>
+    <div class="animetebg" *ngIf="showAnimetebg">
+        <img class="flower" src="assets/shake/flower.png" />
+        <div class="topShakeBox">
+            <img class="topShake" src="assets/shake/topShake.png" />
+            <div class="topBar"></div>
+        </div>
+        <div class="bottomShakeBox">
+            <div class="bottomBar"></div>
+            <img class="bottomShake" src="assets/shake/bottomShake.png" />
+        </div>
+    </div>
+</ion-content>

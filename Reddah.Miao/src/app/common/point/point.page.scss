@@ -1,0 +1,52 @@
+.articleTitle {
+    display: block;
+}
+
+.articleFooterTime, .articleFooter{
+    color: black;
+}
+
+[text-wrap]{
+    font-size: var(--ion-font-size);
+}
+
+.welcome-card {
+    margin-top:20px;
+}
+
+.title{
+    margin-top: 20px;  
+}
+
+.bg1 {
+    position:absolute;
+    font-size: 50px;
+    color:#fc8b6d;
+    margin-top: 20px;  
+    margin-left: -10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width:80%;
+}
+
+.bg2 {
+    position:absolute;
+    font-size: 500px;
+    color:#fc8b6d;
+    margin-left: -100px;
+}
+
+.chip {
+    --background:white;
+    width:31%;
+    border-radius: 5px;
+}
+
+.list {
+    margin: 0;
+}
+
+ion-item {
+    --ion-color-base: var(--ion-item-background, transparent);
+}

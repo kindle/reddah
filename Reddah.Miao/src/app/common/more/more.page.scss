@@ -1,0 +1,162 @@
+
+.portrait{
+    width:40px;
+    height:40px;
+    margin-right:5px;
+}
+
+
+.more-parent {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-gap: 3px;
+ }
+
+.more-parent2 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 3px;
+ }
+
+.more-parent3 {
+    display: grid;
+    grid-template-columns: 61.8%;
+    grid-gap: 3px;
+ }
+
+.more-sk-container {
+   position: relative;
+   overflow: hidden;
+}
+
+.more-container {
+   position: relative;
+   padding-top: 100%;
+   overflow: hidden;
+}
+
+.more-picture {
+   position: absolute;
+   top:50%;
+   transform: translateY(-50%);
+   object-fit: cover;
+}
+
+.more-container3 {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: relative;
+   padding-top: 100%;
+   overflow: hidden;
+   margin-top: 5px;
+}
+
+.more-picture3 {
+   position: absolute;
+   flex-shrink: 0;
+   min-width: 100%;
+   top:0;
+   left:0;
+}
+
+.more-portrait{
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+}
+
+
+
+.container {
+   position: relative;
+   overflow: hidden;
+}
+
+.picture {
+   position: absolute;
+   top:50%;
+   transform: translateY(-50%);
+   object-fit: cover;
+   width:100%;
+}
+
+.header{
+   padding-top: 40px;
+}
+
+.header-title{
+   font-weight: bold;
+   padding:0;
+}
+
+.articleTitle{
+   display: block;
+   padding: 0px;
+   margin-top: 0px !important;
+   font-size: larger;
+   color: var(--ion-color-primary);
+   font-weight: bold;
+}
+
+.articleTextRead{
+   color: #828388;
+}
+
+.sk-parent {
+   display: grid;
+   grid-template-columns: 32% 33% 32%;
+   grid-gap: 3px;
+}
+
+.parent {
+   display: grid;
+   grid-template-columns: 32% 33% 32%;
+   grid-template-rows: 95px;
+   grid-gap: 3px;
+}
+
+
+.BrowsePreviewImage
+{
+    width: 193px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    border: 1px solid #BDBEC1;
+    margin-top: 0px;
+}
+
+.BrowsePreviewImageOne
+{
+    width: 95px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    border: 1px solid #BDBEC1;
+    margin-top: 0px;
+    border-radius: 3px;
+    height:100%;
+    object-fit: cover;
+}
+
+video{
+   width: 100%;
+}
+
+.listInfoBlock {
+   overflow:hidden;
+}
+.listImage {
+   vertical-align: top;
+}
+.listImageWrapper {
+   float: left;
+   height: 130px;
+   overflow: hidden;
+   cursor: pointer;
+   margin: 2px;
+}
+
+
+.listRight .listInfo {
+   color: black;
+}

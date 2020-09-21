@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      发现
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card *ngFor="let cat of article">
+    <img src="{{'/assets/500/'+cat+'.jpeg'}}" />
+    <ion-card-header>
+      <ion-card-subtitle>Destination</ion-card-subtitle>
+      <ion-card-title>Madison, WI</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
+    </ion-card-content>
+    <div class="postModuleLiner">
+      <app-article-action-bar [article]="article" [userName]="userName"></app-article-action-bar>
+    </div>
+  </ion-card>
+</ion-content>

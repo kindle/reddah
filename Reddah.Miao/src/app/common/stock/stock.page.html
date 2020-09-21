@@ -1,0 +1,45 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-text>{{s}}</ion-text>
+</ion-item>
+<ion-content no-padding>
+    <div id="container"></div>
+    <sapphire-swing-gauge
+        primary-value="30"
+        secondary-value="70"
+        primary-label="Remain"
+        secondary-label="Leave">
+    </sapphire-swing-gauge>
+    <sapphire-sparkline data="[-2, -3, 1, 1, 4, 6, -3, 1, 4, 6, 10, 9, 10, 9, 6, 4, 5, 0, 3, 2, 3, -1, -4, 2, 3, 4, 3, 6]"></sapphire-sparkline>
+  <sapphire-sparkline reference-value="0" data="[-2, -3, 1, 1, 4, 6, -3, 1, 4, 6, 10, 9, 10, 9, 6, 4, 5, 0, 3, 2, 3, -1, -4, 2, 3, 4, 3, 6]"></sapphire-sparkline>
+  <sapphire-sparkline custom-line-color data="[-2, -3, 1, 1, 4, 6, -3, 1, 4, 6, 10, 9, 10, 9, 6, 4, 5, 0, 3, 2, 3, -1, -4, 2, 3, 4, 3, 6]"></sapphire-sparkline>
+
+  <sapphire-parity-chart primary="7+ hours" secondary="less than 7 hours">
+    <sapphire-parity-item
+      primary-value="61"
+      primary-label="61%"
+      secondary-value="39"
+      secondary-label="39%"
+      >India</sapphire-parity-item
+    >
+    <sapphire-parity-item
+      primary-value="35"
+      primary-label="35%"
+      secondary-value="65"
+      secondary-label="65%"
+      >China</sapphire-parity-item
+    >
+    <sapphire-parity-item
+      primary-value="5"
+      primary-label="5%"
+      secondary-value="95"
+      secondary-label="95%"
+      >Finland</sapphire-parity-item
+    >
+  </sapphire-parity-chart>
+
+  <hr>
+  <sapphire-chart [config]="data"></sapphire-chart>
+</ion-content>

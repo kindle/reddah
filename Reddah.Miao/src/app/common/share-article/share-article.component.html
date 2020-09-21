@@ -1,0 +1,30 @@
+<div (click)="viewArticle()" class="container" *ngIf="type==4||type==1">
+    <ion-Label>
+        <div style="display: flex;margin:5px 0 10px 0;">
+            <img [src]="reddah.parseImage(image)" class="sharePortrait" *ngIf="image">
+            <ion-icon name="link" color="dark" class="sharePortraitNone" *ngIf="!image"></ion-icon>
+            <span style="margin-left:8px;align-self: center;" class="show-three-lines"
+                [innerHTML]="reddah.htmlDecode(abstract)">
+            </span>
+        </div>
+    </ion-Label>
+    <div style="display: flex;padding-top:5px;border-top:1px solid #dddddd;align-items: center;">
+        <ion-icon name="book-outline" size="small" color="dark" class="portrait mini"></ion-icon>
+        <ion-label color="dark" style="margin-left:5px;">{{ reddah.instant('Menu.Recommend') }}</ion-label>
+    </div>
+</div>
+<div (click)="viewMini()" class="container" *ngIf="type==5">
+    <ion-Label>
+        <div style="display: flex;margin:5px 0 10px 0;">
+            <img [src]="reddah.parseImage(image)" class="sharePortrait" *ngIf="image">
+            <ion-icon name="link" color="dark" class="sharePortraitNone" *ngIf="!image"></ion-icon>
+            <span style="margin-left:8px;align-self: center;">
+                App: {{reddah.htmlDecode(abstract)}}
+            </span>
+        </div>
+    </ion-Label>
+    <div style="display: flex;padding-top:5px;border-top:1px solid #dddddd;align-items:center;">
+        <ion-icon name="infinite" color="mini" class="portrait mini"></ion-icon>
+        <ion-label color="dark" style="margin-left:5px;">{{ reddah.instant('Menu.MiniApp') }}</ion-label>
+    </div>
+</div>

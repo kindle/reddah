@@ -1,0 +1,7 @@
+{
+  "name": "Reddah.Miao",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

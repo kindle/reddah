@@ -1,0 +1,241 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-label>{{ reddah.instant('Search.More') }}</ion-label>
+</ion-item>
+<ion-content no-padding style="background-color: #eeeeee;">
+    <div class="gap" *ngIf="pub">
+        <ion-item lines="none" class="borderTop">
+            <ion-label slot="start">{{reddah.instant('Pop.PubBrief')}}</ion-label>
+        </ion-item>
+        <ion-item lines="none" class="borderBottom">
+            <ion-note slot="start" text-wrap style="padding-bottom: 20px;padding-top:0;">
+                {{ reddah.appData('usersignature_'+target) }}
+            </ion-note>
+        </ion-item>
+    </div>
+    <div class="gap" *ngIf="pub">
+        <ion-item class="borderTop">
+            <ion-label>{{reddah.instant('Pop.Creator')}}</ion-label>
+            <ion-text slot="end">{{reddah.appData('useradmins_'+target)}}</ion-text>
+        </ion-item>
+        <ion-item lines="none" class="borderBottom borderItem" (click)="goEmail()">
+            <ion-label>{{ reddah.instant('Input.Email') }}</ion-label>
+            <ion-text slot="end">{{reddah.appData('useremail_'+target)}}</ion-text>
+        </ion-item>
+    </div>
+    <div class="gap lastGap" *ngIf="pub">
+        <ion-item lines="none" class="borderTop">
+            <ion-label slot="start">{{reddah.instant('Pop.Admins')}}</ion-label>
+        </ion-item>
+        <ion-item lines="none" class="borderBottom" style="--padding-bottom:20px;">
+            <img [src]="reddah.appData('userphoto_'+adminName)" *ngFor="let adminName of getAdmins()"
+                class="portrait" (click)="goUser(adminName)">
+        </ion-item>
+    </div>
+<!--
+    <div class="gap" *ngIf="pub">
+        <ion-item class="borderTop borderItem borderBottom" (click)="goCert()" lines="none">
+            <ion-label>{{ reddah.instant('Common.ServicePhone') }}</ion-label>
+        </ion-item>
+    </div>
+
+    <div class="gap lastGap" *ngIf="pub">
+        <ion-item lines="none" class="borderTop borderItem" (click)="callService()">
+            <ion-label slot="start">{{ reddah.instant('Common.Owner') }}</ion-label>
+        </ion-item>
+        <ion-item lines="none" class="borderItem borderBottom">
+            <ion-note slot="start" text-wrap style="padding-bottom: 20px;">
+                {{ reddah.instant('Common.OwnerDesc') }}
+            </ion-note>
+        </ion-item>
+    </div>
+-->
+
+<!--
+    <sapphire-swing-gauge
+        primary-value="30"
+        secondary-value="70"
+        primary-label="Remain"
+        secondary-label="Leave">
+    </sapphire-swing-gauge>
+-->
+
+
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" spinner="none">
+        <ion-refresher-content refreshingSpinner="bubbles">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-item lines="none" class="common-splitter">
+    </ion-item>
+    <ion-item class="borderTop borderBottom" lines="none">
+        <span class="itemTitle" *ngIf="reddah.appData('usersex_'+userName)==1">{{ reddah.instant('Article.HisComment') }}</span>
+        <span class="itemTitle" *ngIf="reddah.appData('usersex_'+userName)!=1">{{ reddah.instant('Article.HerComment') }}</span>
+    </ion-item>
+    <div *ngFor="let article of userCommentArticles" 
+        style="background-color: var(--ion-color-tertiary); display: flex; border-bottom: 1px solid lightgrey; padding-top:15px; padding-bottom: 10px;">
+        <div style="width:100%;border: 0px solid red;" *ngIf="article.Title&&article.Content">
+            <ion-item lines="none">
+                <ion-thumbnail style="margin: 10px 0 0 0;">
+                    <img src="{{reddah.appData('userphoto_'+target)}}" 
+                        class="more-portrait"
+                        onerror="this.src='assets/icon/anonymous.png';">
+                </ion-thumbnail>
+                <ion-label style="margin-top:0;">
+                    <div style="display: flex;padding:0 0 5px 0;">
+                        <ion-label class="user-name">{{reddah.getDisplayName(target, 100)}}</ion-label>
+                    </div>
+                    <div style="display: flex;">
+                        <ion-text color="dark">{{reddah.getSendTime(article.CommentCreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-text>
+                    </div>
+                </ion-label>
+                <ion-text color="medium" (click)="more_report(article)" slot="end">{{ reddah.instant('Pop.Report') }}</ion-text>
+            </ion-item>
+            
+            <div style="margin: 0 15px;">
+                <div [innerHTML]="reddah.htmlDecode(article.CommentContent) | safe: 'html'" *ngIf="article.CommentContent.length<=100"></div>
+                <div [innerHTML]="reddah.htmlDecode(article.CommentContent) | safe: 'html'"
+                [ngClass]="{'show-three-lines':!reddah.showComments.has(article.CommentId)}" *ngIf="article.CommentContent.length>100"></div>
+                <ion-chip color="primary" style="border-radius: 0;margin:0;padding:0 5px;margin-top:10px;" 
+                (click)="reddah.commentShowAll(article.CommentId)"
+                    *ngIf="!reddah.showComments.has(article.CommentId)&&article.CommentContent.length>100">
+                    <ion-label style="font-size: smaller;">{{reddah.instant('Confirm.ShowAll')}} {{reddah.leftPercentage(article.CommentContent)}}</ion-label>
+                </ion-chip>
+            </div>
+
+            <div *ngIf="article.Type==6" style="margin:10px 15px 0 15px;padding:15px 0px;border-radius:5px;background-color: #eeeeee;">
+                <div *ngIf="article.Title.length>0&&article.Title.length<100">
+                    <div style="padding: 0 0 4px 15px;margin-bottom:0px;margin-right:10px;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                </div>
+                
+                <ion-item style="--background:transparent;" lines="none" *ngIf="article.Title.length>=100">
+                    <div (click)="fullText(article.Title)" style="background-color:var(--ion-color-light); margin-bottom:5px;" 
+                    [innerHTML]="reddah.summaryShort(article.Title, 100, '......')"></div>
+                </ion-item>
+
+                <ion-card-content style="display:block;" *ngIf="article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
+                    <div class="more-parent" *ngIf="article.Content.split('$$$').length>6">
+                        <div class="more-container" *ngFor="let image of article.Content.split('$$$');index as i">
+                            <img [id]="reddah.makeItId(image+'mtlmore')" 
+                            (load)="reddah.adjustImage(image, 'mtlmore')"
+                            [src]="reddah.level1Cache(image)"
+                            onerror="this.src='/assets/icon/noimage.jpg'"
+                            class="more-picture" (click)="more_viewer(i, article.Content.split('$$$'))">
+                        </div>
+                    </div>
+                    <div class="more-parent" *ngIf="article.Content.split('$$$').length==3||article.Content.split('$$$').length==5||article.Content.split('$$$').length==6">
+                        <div class="more-container" *ngFor="let image of article.Content.split('$$$');index as i">
+                            <img [id]="reddah.makeItId(image+'mtlmore')" 
+                            (load)="reddah.adjustImage(image, 'mtlmore')"
+                            [src]="reddah.level1Cache(image)"
+                            onerror="this.src='/assets/icon/noimage.jpg'"
+                            class="up-picture" (click)="more_viewer(i, article.Content.split('$$$'))">
+                        </div>
+                    </div>
+                    <div class="more-parent2" *ngIf="article.Content.split('$$$').length==2||article.Content.split('$$$').length==4">
+                        <div class="more-container" *ngFor="let image of article.Content.split('$$$');index as i">
+                            <img [id]="reddah.makeItId(image+'mtlmore')" 
+                            (load)="reddah.adjustImage(image, 'mtlmore')"
+                            [src]="reddah.level1Cache(image)"
+                            onerror="this.src='/assets/icon/noimage.jpg'"
+                            class="more-picture" (click)="more_viewer(i, article.Content.split('$$$'))">
+                        </div>
+                    </div>
+                    <div class="more-parent3" *ngIf="article.Content.split('$$$').length==1">
+                        <div class="more-container3">
+                            <img [id]="reddah.makeItId(article.Content.split('$$$')[0]+'mtlmore')" 
+                            (load)="reddah.adjustImage(article.Content.split('$$$')[0], 'mtlmore')"
+                            [src]="reddah.level1Cache(article.Content.split('$$$')[0])"
+                            onerror="this.src='/assets/icon/noimage.jpg'"
+                            class="more-picture" (click)="more_viewer(0, article.Content.split('$$$'))">
+                        </div>
+                    </div>
+                </ion-card-content>
+            </div>
+
+            <div *ngIf="article.Type==0" (click)="view(article)" style="margin:10px 15px 0 15px;padding:15px 10px;border-radius:5px;background-color: #eeeeee;">
+                <div class="postModuleLiner" *ngIf="article.VideoUrl.length>0">
+                    <div>
+                        <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span>
+                        <div class="postClear"></div>
+                        <video id="video_{{article.Id}}" [poster]="" [src]="article.VideoUrl" controls>
+                            your browser does not support playing video
+                        </video>
+                        <div class="postClear"></div>
+                    </div>
+                    <app-article-action-bar [article]="article" [userName]="userName">
+                    </app-article-action-bar>
+                </div>
+         
+                <div class="postModuleLiner" *ngIf="article.VideoUrl.length==0">
+                    <div *ngIf="article.ImageUrls.length>=3">
+                        <span [class.articleTextRead]="article.Read" style="margin-bottom: 10px;" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span>
+                        <div class="postClear"></div>
+                        <ion-card-content style="padding:0;">
+                            <div class="parent">
+                                <div class="container" *ngFor="let articleUrl of article.ImageUrls;index as i">
+                                    <img [class.left-radius]="i==0" [class.right-radius]="i==2" 
+                                        [id]="reddah.makeItId(articleUrl+'home')"  
+                                        (load)="reddah.adjustImage(articleUrl, 'home')"
+                                        onerror="this.src='/assets/icon/noimage.jpg'"
+                                        [src]="reddah.level1Cache(articleUrl)" 
+                                        class="picture">
+                                </div>
+                            </div>
+                        </ion-card-content>
+                    </div>
+        
+                    <div *ngIf="article.ImageUrls.length>0&&article.ImageUrls.length<3" style="display:inline-block;">
+                        <div class="listImage">
+                            <div class="listImageWrapper">
+                                <img class="BrowsePreviewImageOne"
+                                [id]="reddah.makeItId(article.ImageUrls[0]+'home')" 
+                                (load)="reddah.adjustImage(article.ImageUrls[0], 'home')"
+                                onerror="this.src='/assets/icon/noimage.jpg'"
+                                [src]="reddah.level1Cache(article.ImageUrls[0])">
+                            </div>
+                        </div>
+                        <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span><br>
+                        <div [class.articleTextRead]="article.Read" class="show-three-lines">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
+                    </div>
+        
+                    <div *ngIf="article.ImageUrls.length==0">
+                        <span [class.articleTextRead]="article.Read" class="articleTitle show-two-lines">{{reddah.htmlDecode(article.Title)}}</span><br>
+                        <div [class.articleTextRead]="article.Read" class="show-two-lines">{{reddah.htmlDecode(reddah.summary(article.Content, 100))}}</div>
+                    </div>
+        
+                    <div style="border-left:2px solid var(--ion-color-primary);padding-left: 10px;margin-top:10px;"
+                        [class.articleTextRead]="article.Read"
+                        *ngIf="article.LastUpdateContent&&article.LastUpdateContent.length>10">
+                        <ion-chip color="primary" style="border-radius: 0;margin:0;padding:0 5px;" 
+                            *ngIf="article.LastUpdateBy!=userName&&article.Admins&&article.Admins.split(',').indexOf(article.LastUpdateBy)>-1">
+                            <ion-label style="font-size: smaller;">{{reddah.instant('Article.Author')}}</ion-label>
+                        </ion-chip>
+                        <ion-chip color="danger" style="border-radius: 0;margin:0;padding:0 5px;" 
+                            *ngIf="article.LastUpdateBy==userName">
+                            <ion-label style="font-size: smaller;">{{reddah.instant('Menu.About')}}</ion-label>
+                        </ion-chip>
+                        {{reddah.getDisplayName(article.LastUpdateBy)}}:
+                        <div class="show-two-lines" [class.articleTextRead]="article.Read">
+                            {{reddah.htmlDecode(article.LastUpdateContent)}}
+                        </div>
+                    </div>
+        
+                </div>
+            </div>
+
+            <ion-item style="--background:transparent;margin:2px 0;" lines="none">
+                <app-topic-action-bar [article]="article" [key]="'Reddah_morepage_'+userName" [articles]="userCommentArticles"></app-topic-action-bar>
+            </ion-item>
+            
+        </div>
+    </div>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" 
+            loadingText="{{ reddah.instant('Button.Loading') }}">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
