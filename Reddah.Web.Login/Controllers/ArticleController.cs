@@ -52,7 +52,7 @@ namespace Reddah.Web.Login.Controllers
                 {
                     query = (from b in db.Article
                                 join u in db.UserProfile on b.UserName equals u.UserName
-                                where b.Status == userProfileModel.Status && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
+                                where b.Status == userProfileModel.Status && b.Type == userProfileModel.Type && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
                                 !(loaded).Contains(b.Id)
                                 orderby b.Id descending
                                 select new PubArticle()
@@ -87,7 +87,7 @@ namespace Reddah.Web.Login.Controllers
                     //query according to user habits
                     //too slow
                     /*query = (from b in db.Articles.AsEnumerable()
-                                where b.Status == userProfileModel.Status && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
+                                where b.Status == userProfileModel.Status && b.Type == userProfileModel.Type && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
                                 //!(loaded).Contains(b.Id) && !(disgrp).Contains(b.GroupName) && !(disuser).Contains(b.UserName)
                                 !(loaded).Contains(b.Id) && !(disuser).Contains(b.UserName) && 
                                 grp.Intersect(b.GroupName.Split(',').ToList()).Count()==0
@@ -126,7 +126,7 @@ namespace Reddah.Web.Login.Controllers
 
                     query = (from b in db.Article
                                 join u in db.UserProfile on b.UserName equals u.UserName
-                                where b.Status == userProfileModel.Status && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
+                                where b.Status == userProfileModel.Status && b.Type == userProfileModel.Type && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
                                 //!(loaded).Contains(b.Id) && !(disgrp).Contains(b.GroupName) && !(disuser).Contains(b.UserName)
                                 !(loaded).Contains(b.Id) && !(disuser).Contains(b.UserName) &&
                                 !b.GroupName.Contains(grp0) &&
@@ -171,7 +171,7 @@ namespace Reddah.Web.Login.Controllers
                     {
                         query = (from b in db.Article
                                     join u in db.UserProfile on b.UserName equals u.UserName
-                                    where b.Status == userProfileModel.Status && b.LastUpdateType != 100 &&
+                                    where b.Status == userProfileModel.Status && b.Type == userProfileModel.Type && b.LastUpdateType != 100 &&
                                     !(loaded).Contains(b.Id) && !(disuser).Contains(b.UserName) &&
                                     !b.GroupName.Contains(grp0) &&
                                     !b.GroupName.Contains(grp1) &&
@@ -219,7 +219,7 @@ namespace Reddah.Web.Login.Controllers
                     //query according to user habits
                     //too slow
                     /*query = (from b in db.Articles.AsEnumerable()
-                                where b.Status == userProfileModel.Status && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
+                                where b.Status == userProfileModel.Status && b.Type == userProfileModel.Type && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
                                 //!(loaded).Contains(b.Id) && !(disgrp).Contains(b.GroupName) && !(disuser).Contains(b.UserName)
                                 !(loaded).Contains(b.Id) && !(disuser).Contains(b.UserName) && 
                                 grp.Intersect(b.GroupName.Split(',').ToList()).Count()==0
@@ -258,7 +258,7 @@ namespace Reddah.Web.Login.Controllers
 
                     query = (from b in db.Article
                                 join u in db.UserProfile on b.UserName equals u.UserName
-                                where b.Status == userProfileModel.Status && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
+                                where b.Status == userProfileModel.Status && b.Type == userProfileModel.Type && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
                                 //!(loaded).Contains(b.Id) && !(disgrp).Contains(b.GroupName) && !(disuser).Contains(b.UserName)
                                 !(loaded).Contains(b.Id) && !(disuser).Contains(b.UserName) &&
                                 !b.GroupName.Contains(grp0) &&
@@ -303,7 +303,7 @@ namespace Reddah.Web.Login.Controllers
                     {
                         query = (from b in db.Article
                                     join u in db.UserProfile on b.UserName equals u.UserName
-                                    where b.Status == userProfileModel.Status && b.LastUpdateType != 100 &&
+                                    where b.Status == userProfileModel.Status && b.Type == userProfileModel.Type && b.LastUpdateType != 100 &&
                                     !(loaded).Contains(b.Id) && !(disuser).Contains(b.UserName) &&
                                     !b.GroupName.Contains(grp0) &&
                                     !b.GroupName.Contains(grp1) &&
@@ -349,7 +349,7 @@ namespace Reddah.Web.Login.Controllers
                 {
                     query = (from b in db.Article
                                 join u in db.UserProfile on b.UserName equals u.UserName
-                                where b.Status == userProfileModel.Status && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
+                                where b.Status == userProfileModel.Status && b.Type == userProfileModel.Type && b.Locale.StartsWith(locale) && b.LastUpdateType != 100 &&
                                 !(loaded).Contains(b.Id)
                                 orderby b.Count descending, b.LastUpdateOn descending
                                 select new PubArticle()
@@ -390,7 +390,7 @@ namespace Reddah.Web.Login.Controllers
                     var g5 = ga.Length > 4 ? ga[4] : "";
                     query = (from b in db.Article
                                 join u in db.UserProfile on b.UserName equals u.UserName
-                                where b.Status == userProfileModel.Status && b.LastUpdateType != 100 &&
+                                where b.Status == userProfileModel.Status && b.Type == userProfileModel.Type && b.LastUpdateType != 100 &&
                                 b.GroupName.Contains(g1) &&
                                 b.GroupName.Contains(g2) &&
                                 b.GroupName.Contains(g3) &&
@@ -430,7 +430,7 @@ namespace Reddah.Web.Login.Controllers
                 {
                     query = (from b in db.Article
                                 join u in db.UserProfile on b.UserName equals u.UserName
-                                where b.Status == userProfileModel.Status && b.LastUpdateType != 100 &&
+                                where b.Status == userProfileModel.Status && b.Type == userProfileModel.Type && b.LastUpdateType != 100 &&
                                 b.UserName == userProfileModel.User &&
                                 b.Locale.StartsWith(locale) &&
                                 !(loaded).Contains(b.Id)
@@ -466,15 +466,14 @@ namespace Reddah.Web.Login.Controllers
                 {
                     query = (from b in db.Article
                                 join u in db.UserProfile on b.UserName equals u.UserName
-                                where b.Status == userProfileModel.Status && b.LastUpdateType != 100 &&
+                                where b.Status == userProfileModel.Status && b.Type == userProfileModel.Type && b.LastUpdateType != 100 &&
                                 (b.Title.Contains(userProfileModel.Keyword) ||
                                 b.Content.Contains(userProfileModel.Keyword) ||
                                 b.UserName.Contains(userProfileModel.Keyword) ||
                                 b.Abstract.Contains(userProfileModel.Keyword) ||
                                 b.GroupName.Contains(userProfileModel.Keyword)) &&
                                 //b.Locale.StartsWith(locale) &&
-                                !(loaded).Contains(b.Id) &&
-                                b.Type == userProfileModel.Type
+                                !(loaded).Contains(b.Id) 
                                 orderby b.Id descending
                                 select new PubArticle()
                                 {
@@ -507,11 +506,10 @@ namespace Reddah.Web.Login.Controllers
                 {
                     query = (from b in db.Article
                                 join u in db.UserProfile on b.UserName equals u.UserName
-                                where b.Status == userProfileModel.Status &&
+                                where b.Status == userProfileModel.Status && b.Type == userProfileModel.Type &&
                                 b.UserName == userProfileModel.User &&
                                 //b.Locale.StartsWith(locale) &&
-                                !(loaded).Contains(b.Id) &&
-                                b.Type == userProfileModel.Type
+                                !(loaded).Contains(b.Id) 
                                 orderby b.Id descending
                                 select new PubArticle()
                                 {

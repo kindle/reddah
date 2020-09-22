@@ -193,6 +193,7 @@
     <Compile Include="Controllers\ApiBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AIController.cs" />
+    <Compile Include="Controllers\MiaoController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\PointController.cs" />
