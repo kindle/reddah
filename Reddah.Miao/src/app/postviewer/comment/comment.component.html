@@ -41,9 +41,9 @@
                                 {{reddah.shortCount(comment.Count)}}
                             </ion-text>
 
-                            <ion-icon (click)="likeComment(comment)" name="heart-outline" *ngIf="!comment.like" 
+                            <ion-icon (click)="likeComment(comment)" name="paw-outline" *ngIf="!comment.like" 
                                 color="warning" class="action-margin"></ion-icon>
-                            <ion-icon (click)="likeComment(comment)" name="heart-circle-outline" *ngIf="comment.like" 
+                            <ion-icon (click)="likeComment(comment)" name="paw" *ngIf="comment.like" 
                                 color="danger" class="action-margin"></ion-icon>
                             <ion-text color="dark" (click)="likeComment(comment)" class="action-count" *ngIf="comment.Up>0">
                                 {{reddah.shortCount(comment.Up)}}

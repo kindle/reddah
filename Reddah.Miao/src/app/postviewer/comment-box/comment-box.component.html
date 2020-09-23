@@ -1,20 +1,20 @@
 <!--{{selectedArticleId}} {{selectedCommentId}}-->
 <ion-footer *ngIf="direction=='up'" class="content">
     <ion-item *ngIf="!showEditBox" class="common-content-padding">
-        <ion-icon name="arrow-redo-outline" size="medium" color="dark" (click)="forwardArticle(article)"></ion-icon>
+        <ion-icon name="arrow-redo-outline" size="medium" color="warning" (click)="forwardArticle(article)"></ion-icon>
         <ion-text color="dark" (click)="forwardArticle(article)" class="action-count" *ngIf="article.Down>0">
             {{reddah.shortCount(article.Down)}}
         </ion-text>
         <ion-input id="newComment" (click)="addNewComment(selectedArticleId, selectedCommentId, null)" 
             readonly style="padding-left:5px !important;margin-right:5px !important;" placeholder="{{ reddah.instant('Comment.Comment') }}..."></ion-input>
         
-        <ion-icon color="primary" style="margin-right:5px;" name="chatbox-ellipses-outline"size="medium" (click)="addNewComment(selectedArticleId, selectedCommentId, null)"></ion-icon>
+        <ion-icon color="warning" style="margin-right:5px;" name="chatbox-ellipses-outline"size="medium" (click)="addNewComment(selectedArticleId, selectedCommentId, null)"></ion-icon>
         {{article.Count>0?reddah.shortCount(article.Count):''}}
 
-        <ion-icon (click)="reddah.likeArticle(article)" *ngIf="!article.like" color="dark"
-            name="heart-outline" style="margin-right:5px;margin-left:5px;"></ion-icon>
+        <ion-icon (click)="reddah.likeArticle(article)" *ngIf="!article.like" color="warning"
+            name="paw-outline" style="margin-right:5px;margin-left:5px;"></ion-icon>
         <ion-icon (click)="reddah.likeArticle(article)" *ngIf="article.like" color="danger"
-            name="heart-circle-outline" style="margin-right:5px;margin-left:5px;"></ion-icon>
+            name="paw" style="margin-right:5px;margin-left:5px;"></ion-icon>
         <ion-text color="dark" (click)="reddah.likeArticle(article)" *ngIf="article.Up>0">
             {{reddah.shortCount(article.Up)}}
         </ion-text>

@@ -43,8 +43,8 @@
     </ion-item>
     <ion-item (click)="changeSex()">
         <ion-label class="title">{{ reddah.instant('About.Sex') }}</ion-label>
-        <ion-icon slot="end" name="male-outline"*ngIf="reddah.appData('usersex_'+userName)==1" color="subscribe"></ion-icon>
-        <ion-icon slot="end" name="female-outline"*ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
+        <ion-icon slot="end" name="male-outline" *ngIf="reddah.appData('usersex_'+userName)==1" color="primary"></ion-icon>
+        <ion-icon slot="end" name="female-outline" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
         <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item lines="none" (click)="changeSignature()">

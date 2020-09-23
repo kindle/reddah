@@ -466,6 +466,19 @@ export class ReddahService {
     }
 
     //******************************** */
+    private getCatFindPageTopicUrl = `${this.domain}/api/miao/getfindtopic`; 
+
+    getCatFindPageTopic(formData: FormData): Observable<any> {
+
+        formData.append('jwt', this.getCurrentJwt());
+        return this.http.post<any>(this.getCatFindPageTopicUrl, formData)
+        .pipe(
+            tap(data => this.log('get find topic')),
+            catchError(this.handleError('get find topic', []))
+        );
+    }
+
+    //******************************** */
     private getSearchTopicUrl = `${this.domain}/api/article/getsearchtopic`; 
 
     getSearchTopic(formData: FormData): Observable<any> {
@@ -1958,22 +1971,22 @@ export class ReddahService {
     userLevelIconColor(userName, sameColor=false){
         let point = this.appData('userpoint_'+userName);
         if(point<50){
-            return "primary";
+            return "success";
         }
         else if(point<150){
-            return "dark";
+            return "tertiary";
         }
         else if(point<300){
-            return "primary";
+            return "medium";
         }
         else if(point<500){
-            return "gold";
+            return "warning";
         }
         else if(point<1000){
-            return sameColor?"light":"point";
+            return sameColor?"light":"danger";
         }
         else if(point<2000){
-            return "diamond";
+            return "primary";
         }
         else{
             return "dark";
@@ -2464,6 +2477,20 @@ export class ReddahService {
 
     playVideo(id: string) {
         let v = document.querySelector('#video_' + id)[0];
+        console.log(id)
+        console.log(document)
+        if(v){
+            if (v.paused) {
+                v.play();
+            } else {
+                v.pause();
+            }
+        }
+    }
+
+    playShortVideo(ev) {
+        let v = ev.srcElement;
+        console.log(v)
         if(v){
             if (v.paused) {
                 v.play();
@@ -3359,9 +3386,17 @@ export class ReddahService {
         //this.localStorageService.clear("reddah_article_groups");
         //this.localStorageService.clear("reddah_article_usernames");
         //this.cacheService.clearGroup("HomePage");
-        this.articles = [];
-        this.fillCacheArticles();
+        if(this.authenticated())
+        {
+            this.articles = [];
+            this.fillCacheArticles();
+        }
     }
+
+    authenticated(): boolean {
+        let currentUser = this.getCurrentUser();
+        return currentUser!=null;
+    }   
 
     async ClearPub(){
         //this.localStorageService.clear("Reddah_GroupedSubs");
@@ -3830,6 +3865,15 @@ export class ReddahService {
         this.localStorageService.store("Reddah_Settings_LikeShake", value);
     }
 
+    getBgm(){
+        let cachedBgm = this.localStorageService.retrieve("Reddah_Settings_bgm");
+        return cachedBgm==null?true:cachedBgm;
+    }
+
+    setBgm(value){
+        this.localStorageService.store("Reddah_Settings_bgm", value);
+    }
+
     getNightMode(){
         let cachedNightMode = this.localStorageService.retrieve("Reddah_Settings_NightMode");
         return cachedNightMode==null?true:cachedNightMode;
@@ -3981,8 +4025,14 @@ export class ReddahService {
             this.toast(this.instant("Input.Error.UserNameEmpty"));
         } else {
             const loading = await this.loadingController.create({
-                message: this.instant("Login.Loading"),
-                spinner: 'circles',
+                cssClass: 'my-custom-class',
+                spinner: null,
+                duration: 5000,
+                message: `<div class='bar-box'>${this.getLoadingEffect()}
+                <div class='bar-text'>${this.instant("Login.Loading")}</div>
+                </div>`,
+                translucent: true,
+                backdropDismiss: true
             });
             await loading.present();
             

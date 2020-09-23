@@ -4,7 +4,7 @@
     </ion-button>
     <ion-input placeholder="{{keywordPlaceholder}}" [(ngModel)]="searchKeywordModel" #searchKeyword clearInput (keyup.enter)="search()" (ionChange)="onSearchchange()"></ion-input>
 </ion-item>
-<ion-content style="--background:var(--ion-color-tertiary);" #searchResult>
+<ion-content style="--background:var(--ion-color-white);" #searchResult>
     <ion-grid *ngIf="showTopic">
         <ion-row style="padding:10px;">
             <ion-col style="text-align:center;">

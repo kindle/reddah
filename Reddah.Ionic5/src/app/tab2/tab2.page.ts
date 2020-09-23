@@ -11,7 +11,6 @@ import {  Router } from '@angular/router';
 import { MysticPage } from '../common/mystic/mystic.page';
 import { StoryPage } from '../story/story.page';
 import { MapPage } from '../map/map.page';
-import { PlatformPage } from '../tabs/publisher/platform/platform.page';
 import { ShareChooseChatPage } from '../chat/share-choose-chat/share-choose-chat.page';
 import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
 import { MiniViewerComponent } from '../common/mini-viewer/mini-viewer.component';
@@ -31,7 +30,7 @@ import { VideosPage } from '../videos/videos.page';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page implements OnInit  {
+export class Tab2Page implements OnInit {
 
   userName;
   user_apps=[];

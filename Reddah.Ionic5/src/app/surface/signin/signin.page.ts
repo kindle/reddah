@@ -51,9 +51,15 @@ export class SigninPage implements OnInit {
             this.reddah.toast(this.reddah.instant("Input.Error.PasswordEmpty"));
         } else {
             const loading = await this.loadingController.create({
-                message: this.reddah.instant("Login.Loading"),
-                spinner: 'circles',
-            });
+                cssClass: 'my-custom-class',
+                spinner: null,
+                duration: 5000,
+                message: `<div class='bar-box'>${this.reddah.getLoadingEffect()}
+                <div class='bar-text'>${this.reddah.instant("Login.Loading")}</div>
+                </div>`,
+                translucent: true,
+                backdropDismiss: true
+              });
             await loading.present();
             
             this.reddah.login(this.username, this.password)

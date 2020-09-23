@@ -129,8 +129,14 @@ export class AddArticlePage implements OnInit {
 
     async save(){
         const loading = await this.loadingController.create({
-            message: this.reddahService.instant('Article.Loading'),
-            spinner: 'circles',
+            cssClass: 'my-custom-class',
+            spinner: null,
+            duration: 5000,
+            message: `<div class='bar-box'>${this.reddah.getLoadingEffect()}
+            <div class='bar-text'>${this.reddah.instant("Article.Loading")}</div>
+            </div>`,
+            translucent: true,
+            backdropDismiss: true
         });
         await loading.present();
 
@@ -239,8 +245,14 @@ export class AddArticlePage implements OnInit {
         //change flag
         if(this.article){
             const loading = await this.loadingController.create({
-                message: this.reddahService.instant('Article.Loading'),
-                spinner: 'circles',
+                cssClass: 'my-custom-class',
+                spinner: null,
+                duration: 5000,
+                message: `<div class='bar-box'>${this.reddah.getLoadingEffect()}
+                <div class='bar-text'>${this.reddah.instant("Article.Loading")}</div>
+                </div>`,
+                translucent: true,
+                backdropDismiss: true
             });
             await loading.present();
 

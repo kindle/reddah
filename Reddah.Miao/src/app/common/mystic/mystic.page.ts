@@ -583,7 +583,8 @@ export class MysticPage implements OnInit {
 
     mysticPhoto = "assets/500/500.jpeg";
     getMysticPhoto(){
-        this.mysticPhoto = "assets/500/50" + this.reddah.getRandomInt(8)+".jpeg";
+        //this.mysticPhoto = "assets/500/50" + this.reddah.getRandomInt(8)+".jpeg";
+        this.mysticPhoto = "assets/icon/mystic.jpg";
         let rv = this.reddah.getRandomInt(2);
         if(rv==0)
             this.girlVoice = 5;

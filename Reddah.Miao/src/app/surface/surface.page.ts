@@ -21,7 +21,6 @@ export class SurfacePage implements OnInit {
     constructor(
         private modalController: ModalController,
         public reddah: ReddahService,
-        private platform: Platform,
         private router: Router,
         private authService: AuthService,
         private localStorageService: LocalStorageService,

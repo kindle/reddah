@@ -15,9 +15,9 @@
         </ion-text>
 
         <ion-icon (click)="reddah.likeTopic(article, key, articles)" *ngIf="!article.like" color="warning"
-            name="heart-outline" class="action-margin"></ion-icon>
+            name="paw-outline" class="action-margin"></ion-icon>
         <ion-icon (click)="reddah.likeTopic(article, key, articles)" *ngIf="article.like" color="danger"
-            name="heart-circle-outline" class="action-margin"></ion-icon>
+            name="paw" class="action-margin"></ion-icon>
         <ion-text color="dark" (click)="reddah.likeTopic(article, key, articles)" class="action-count" *ngIf="article.Up>0">
             {{reddah.shortCount(article.Up)}}
         </ion-text>

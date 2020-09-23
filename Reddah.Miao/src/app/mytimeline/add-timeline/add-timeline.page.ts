@@ -188,8 +188,14 @@ export class AddTimelinePage implements OnInit {
         }
 
         const loading = await this.loadingController.create({
-            message: this.reddah.instant("Article.Loading"),
-            spinner: 'circles',
+            cssClass: 'my-custom-class',
+            spinner: null,
+            duration: 5000,
+            message: `<div class='bar-box'>${this.reddah.getLoadingEffect()}
+            <div class='bar-text'>${this.reddah.instant("Article.Loading")}</div>
+            </div>`,
+            translucent: true,
+            backdropDismiss: true
         });
         await loading.present();
         
@@ -207,8 +213,9 @@ export class AddTimelinePage implements OnInit {
         }
         else if(this.action=="topic"){
             this.formData.append('type', JSON.stringify(6));
+            let defaultGroup = "cat";
             if(this.mini==null){
-                this.formData.append('abstract', this.topicChoose?this.topicChoose:this.reddah.instant("Article.Topic"));
+                this.formData.append('abstract', this.topicChoose?defaultGroup+","+this.topicChoose:defaultGroup);
             }
             else{
                 this.formData.append('abstract', this.mini.UserName);

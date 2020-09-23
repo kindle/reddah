@@ -3359,9 +3359,17 @@ export class ReddahService {
         //this.localStorageService.clear("reddah_article_groups");
         //this.localStorageService.clear("reddah_article_usernames");
         //this.cacheService.clearGroup("HomePage");
-        this.articles = [];
-        this.fillCacheArticles();
+        if(this.authenticated())
+        {
+            this.articles = [];
+            this.fillCacheArticles();
+        }
     }
+
+    authenticated(): boolean {
+        let currentUser = this.getCurrentUser();
+        return currentUser!=null;
+    }   
 
     async ClearPub(){
         //this.localStorageService.clear("Reddah_GroupedSubs");
@@ -3981,9 +3989,15 @@ export class ReddahService {
             this.toast(this.instant("Input.Error.UserNameEmpty"));
         } else {
             const loading = await this.loadingController.create({
-                message: this.instant("Login.Loading"),
-                spinner: 'circles',
-            });
+                cssClass: 'my-custom-class',
+                spinner: null,
+                duration: 5000,
+                message: `<div class='bar-box'>${this.getLoadingEffect()}
+                <div class='bar-text'>${this.instant("Login.Loading")}</div>
+                </div>`,
+                translucent: true,
+                backdropDismiss: true
+              });
             await loading.present();
             
             this.appleLogin(appleInfo)
@@ -4152,4 +4166,37 @@ export class ReddahService {
         return this.htmlDecode2(str).replace(regex, "").trim();
     }
 
+    loadingEffect = [
+        `<div class='spinner-eff spinner-eff-1'>
+            <div class='bar bar-top'></div>
+            <div class='bar bar-right'></div>
+            <div class='bar bar-bottom'></div>
+            <div class='bar bar-left'></div>
+        </div>`,
+        `<div class='spinner-eff spinner-eff-2'>
+            <div class="square"></div>
+        </div>`,
+        `<div class="spinner-eff spinner-eff-3">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+            <div class="circle circle-3"></div>
+        </div>`,
+        `<div class="spinner-eff spinner-eff-4">
+            <div class="bar bar-top"></div>
+            <div class="bar bar-right"></div>
+            <div class="bar bar-bottom"></div>
+            <div class="bar bar-left"></div>
+        </div>`,
+        `<div class="spinner-eff spinner-eff-5">
+            <div class="ellipse"></div>
+        </div>`
+    ];
+
+    getLoadingEffect(n=null){
+        if(n!=null)
+            return this.loadingEffect[n];
+        
+        let loadingRandom = Math.floor((Math.random()*5)+1);
+        return this.loadingEffect[loadingRandom-1];
+    }
 }

@@ -23,6 +23,12 @@ export class SettingGePage implements OnInit {
         this.reddah.setLikeShake(this.likeShake);
     }
 
+
+    bgm = true;
+    changeBgm(){
+        this.reddah.setBgm(this.bgm);
+    }
+
     nightMode = false;
     changeNightMode(){
         this.reddah.setNightMode(this.nightMode);
@@ -55,6 +61,7 @@ export class SettingGePage implements OnInit {
         this.userName = this.reddah.getCurrentUser();
         this.locale = this.reddah.getCurrentLocale();
         this.likeShake = this.reddah.getLikeShake();
+        this.bgm = this.reddah.getBgm();
         this.nightMode = this.reddah.getNightMode();
     }
 

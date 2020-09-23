@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, ViewChild, NgZone } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
-import { CacheService } from "ionic-cache";
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../auth.service';
 import { ReddahService } from '../../reddah.service';

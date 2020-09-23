@@ -13,6 +13,8 @@ export class VideosPage implements OnInit {
 
     userName: any;
 
+    @Input() video;
+
     close(){
         this.modalController.dismiss();
     }
@@ -26,8 +28,6 @@ export class VideosPage implements OnInit {
         private cacheService: CacheService,
     ){
         this.userName = this.reddah.getCurrentUser();
-        
-        
     }
 
     slideOpts;
@@ -54,11 +54,13 @@ export class VideosPage implements OnInit {
         if(cacheVideoArticles&&cacheVideoArticleArray.length>0){
             let top = 20;
             this.reddah.videoArticles = cacheVideoArticleArray.slice(0,top);
+            this.reddah.videoArticles.unshift(this.video);
             //console.log(this.reddah.articles)
             this.reddah.videoArticles.forEach(article=>{
                 article.like = (this.localStorageService.retrieve(`Reddah_ArticleLike_${this.userName}_${article.Id}`)!=null)
             });
             this.reddah.videoLoadedIds = JSON.parse(cacheVideoArticleIds).slice(0,top);
+            this.reddah.videoLoadedIds.unshift(this.video.Id);
             this.reddah.videoDislikeGroups = JSON.parse(cacheVideoDislikeGroups);
             this.reddah.videoDislikeUserNames = JSON.parse(cacheVideoDislikeUserNames);
             this.reddah.fillCacheVideos();
@@ -89,6 +91,14 @@ export class VideosPage implements OnInit {
                         this.reddah.getUserPhotos(article.UserName);
                     }
                 }
+                this.reddah.videoArticles.unshift(this.video);
+                this.reddah.videoLoadedIds.push(this.video.Id);
+                if(!this.reddah.publishers.has(this.video.UserName))
+                {
+                    this.reddah.publishers.add(this.video.UserName);
+                    this.reddah.getUserPhotos(this.video.UserName);
+                }
+
                 this.localStorageService.store("reddah_video_articles_"+this.userName, JSON.stringify(this.reddah.videoArticles));
                 this.localStorageService.store("reddah_video_article_ids_"+this.userName, JSON.stringify(this.reddah.videoLoadedIds));
                 this.localStorageService.store("reddah_video_article_groups_"+this.userName, JSON.stringify(this.reddah.videoDislikeGroups));

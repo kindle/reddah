@@ -44,8 +44,8 @@
                             [{{reddah.instant('Comment.Delete') }}]
                         </ion-note>
                         <div *ngIf="normal" style="display: flex;align-items: center;">
-                            <ion-icon name="heart-outline" *ngIf="!reply.like" color="warning" (click)="likeComment(reply)"></ion-icon>
-                            <ion-icon name="heart-circle-outline" *ngIf="reply.like" color="danger" (click)="likeComment(reply)"></ion-icon>
+                            <ion-icon name="paw-outline" *ngIf="!reply.like" color="warning" (click)="likeComment(reply)"></ion-icon>
+                            <ion-icon name="paw" *ngIf="reply.like" color="danger" (click)="likeComment(reply)"></ion-icon>
                             <span color="dark" style="margin-left:2px;vertical-align: top;" *ngIf="reply.Up>0" (click)="likeComment(reply)">{{reply.Up}}</span>
 
                             <ion-icon (click)="translate(reply)" class="action-margin" color="warning" 

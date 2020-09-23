@@ -50,11 +50,6 @@ export class SigninPage implements OnInit {
         } else if (this.password.length == 0) {
             this.reddah.toast(this.reddah.instant("Input.Error.PasswordEmpty"));
         } else {
-            /*const loading = await this.loadingController.create({
-                message: this.reddah.instant("Login.Loading"),
-                spinner: 'circles',
-            });*/
-            
             const loading = await this.loadingController.create({
                 cssClass: 'my-custom-class',
                 spinner: null,

@@ -102,8 +102,8 @@
     </ion-item>
     <ion-item lines="none" class="borderTop borderBottom" *ngIf="isFriend" (click)="chat()">
         <div class="centerItem">
-            <ion-icon class="cmd-icon" color="secondary" name="chatbubbles-outline"></ion-icon>
-            <ion-note color="secondary" class="cmd-title cmd-line">{{ reddah.instant('Menu.Header.GroupChat') }}</ion-note>
+            <ion-icon class="cmd-icon" color="primary" name="chatbubbles-outline"></ion-icon>
+            <ion-note color="primary" class="cmd-title cmd-line">{{ reddah.instant('Menu.Header.GroupChat') }}</ion-note>
         </div>
     </ion-item>
     <!--<ion-item class="borderBottom" lines="none" href="/#" *ngIf="reddah.appData('userisfriend_'+this.userName+'_'+this.currentUserName)==1">
@@ -133,7 +133,7 @@
         <span class="itemTitle" *ngIf="reddah.appData('usersex_'+userName)!=1">{{ reddah.instant('Article.HerTopic') }}</span>
     </ion-item>
     <div *ngFor="let article of userPageArticles" 
-        style="background-color: var(--ion-color-tertiary); display: flex; border-bottom: 1px solid lightgrey; padding-top:5px; padding-bottom: 10px;">
+        style="background-color: var(--ion-color-white); display: flex; border-bottom: 1px solid lightgrey; padding-top:5px; padding-bottom: 10px;">
         <div style="width:100%;border: 0px solid red;" *ngIf="article.Title">
             <ion-item lines="none">
                 <ion-thumbnail style="margin: 10px 0 0 0;">

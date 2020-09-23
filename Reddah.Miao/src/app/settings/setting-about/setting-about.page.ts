@@ -42,23 +42,6 @@ export class SettingAboutPage implements OnInit {
     upgradeChecked = false;
 
 
-    appUpgrade() {
-        alert('appupgrade');
-        /*this.alertCtrl.create({
-            title: '发现新版本',
-            subTitle: '检查到新版本，是否立即下载？',
-            buttons: [{ text:'取消' },
-            {
-                text: '下载'
-                handler: () => {
-                        //跳转ios 版本下载地址
-                        this.iab.create(url, '_system');
-                }
-            }
-            ]
-        }).present();*/
-    }
-
     isMobile(): boolean {
         return this.platform.is('mobile');
     }

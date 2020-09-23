@@ -18,9 +18,14 @@
             <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
         </ion-item>
         <ion-item class="borderItem">
-            <ion-icon slot="start" name="radio-outline" color="dark" size="medium"></ion-icon>
+            <ion-icon slot="start" name="pulse-outline" color="dark" size="medium"></ion-icon>
             <ion-label>{{ reddah.instant('Common.AllowLikeShake') }}</ion-label>
             <ion-toggle [(ngModel)]="likeShake" color="success" slot="end" (ionChange)="changeLikeShake()"></ion-toggle>
+        </ion-item>
+        <ion-item class="borderItem">
+            <ion-icon slot="start" name="musical-notes-outline" color="dark" size="medium"></ion-icon>
+            <ion-label>{{ reddah.instant('Common.AllowLikeShake') }}</ion-label>
+            <ion-toggle [(ngModel)]="bgm" color="success" slot="end" (ionChange)="changeBgm()"></ion-toggle>
         </ion-item>
         <!--
         <ion-item class="borderItem">

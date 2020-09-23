@@ -1,11 +1,10 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { ModalController, PopoverController } from '@ionic/angular';
+import { Component, OnInit, NgZone, Input } from '@angular/core';
+import { ModalController, PopoverController, AlertController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
 import { NavController } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { AuthService } from '../auth.service';
 import { MyInfoPage } from '../common/my-info/my-info.page';
-import { SettingListPage } from '../settings/setting-list/setting-list.page';
 import { BookmarkPage } from '../bookmark/bookmark.page';
 import { TimelinePopPage } from '../common/timeline-pop.page';
 import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page';
@@ -15,6 +14,12 @@ import { PunchClockPage } from '../common/point/punch-clock/punch-clock.page';
 import { SearchPage } from 'src/app/common/search/search.page';
 import { UserPage } from 'src/app/common/user/user.page';
 import { PlatformPage } from '../tabs/publisher/platform/platform.page';
+import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
+import { SettingAboutPage } from '../settings/setting-about/setting-about.page';
+import { SettingGePage } from '../settings/setting-ge/setting-ge.page';
+import { SettingPrivacyPage } from '../settings/setting-privacy/setting-privacy.page';
+import { SettingNetworkPage } from '../settings/setting-network/setting-network.page';
+import { SettingAccountPage } from '../settings/setting-account/setting-account.page';
 
 @Component({
   selector: 'app-tab4',
@@ -26,17 +31,20 @@ export class Tab4Page implements OnInit {
   //checked = false;
   userName: string;
   nickName: string;
+  currentLocale: string;
 
   constructor(
       private localStorageService: LocalStorageService,
       public modalController: ModalController,
       private popoverController: PopoverController,
       public navController: NavController,
+      private alertController: AlertController,
       public reddah: ReddahService,
       public authService: AuthService,
   ) {
       //this.userName = "Not Set";
       this.userName = this.reddah.getCurrentUser();
+      this.currentLocale = this.reddah.getCurrentLocale();
   }
   
   ngOnInit() {
@@ -73,23 +81,6 @@ export class Tab4Page implements OnInit {
       await userModal.present();
   }
 
-
-  async goSettings(){
-      let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
-      const modal = await this.modalController.create({
-          component: SettingListPage,
-          componentProps: {currentLocale:currentLocale},
-          cssClass: "modal-fullscreen",
-          swipeToClose: true,
-          presentingElement: await this.modalController.getTop(),
-      });
-      
-      await modal.present();
-      const { data } = await modal.onDidDismiss();
-      if(data){
-          this.authService.logout();
-      }
-  }
   
   async myInfo() {
       const myInfoModal = await this.modalController.create({
@@ -240,4 +231,106 @@ export class Tab4Page implements OnInit {
       await userModal.present();
   }
   */
+
+
+ async logout() {
+    const alert = await this.alertController.create({
+        header: this.reddah.instant("Confirm.Title"),
+        message: this.reddah.instant("Confirm.LogoutMessage"),
+        buttons: [
+        {
+            text: this.reddah.instant("Confirm.Cancel"),
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {}
+        }, 
+        {
+            text: this.reddah.instant("Confirm.Yes"),
+            handler: () => {
+                this.authService.logout();
+            }
+        }]
+    });
+
+    await alert.present().then(()=>{});
+}
+
+
+async goAccount(){
+    const modal = await this.modalController.create({
+        component: SettingAccountPage,
+        componentProps: {},
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+    
+    await modal.present();
+}
+
+async goNetwork(){
+    const modal = await this.modalController.create({
+        component: SettingNetworkPage,
+        componentProps: {},
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+    
+    await modal.present();
+}
+
+async goPrivacy(){
+    const modal = await this.modalController.create({
+        component: SettingPrivacyPage,
+        componentProps: {},
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+    
+    await modal.present();
+}
+
+async goGeneral(){
+    const modal = await this.modalController.create({
+        component: SettingGePage,
+        componentProps: {currentLocale:this.currentLocale},
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+    
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+    if(data){
+        this.modalController.dismiss(data);
+    }
+}
+
+
+async goAbout(){
+    const modal = await this.modalController.create({
+        component: SettingAboutPage,
+        componentProps: {},
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+    
+    await modal.present();
+}
+
+
+async goFeedback(){
+    const modal = await this.modalController.create({
+        component: AddFeedbackPage,
+        componentProps: {},
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+      
+    await modal.present();
+}
 }

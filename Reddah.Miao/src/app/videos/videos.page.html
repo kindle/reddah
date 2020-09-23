@@ -2,12 +2,12 @@
     <div class="all-controll">
         <!--
         <div class="all-controll-group">
-            <ion-icon is-active="false" size="samll" color="tertiary" class="all-controll-button" name="search-outline" (click)="more()"></ion-icon>
+            <ion-icon is-active="false" size="small" color="light" class="all-controll-button" name="search-outline" (click)="more()"></ion-icon>
         </div>
         -->
         <div class="all-controll-group">
-            <ion-icon *ngIf="false" is-active="false" size="samll" color="tertiary" class="all-controll-button" name="ellipsis-horizontal-outline" (click)="more()"></ion-icon>
-            <ion-icon is-active="false" size="samll" color="tertiary" class="all-controll-button" name="close-outline" (click)="close()"></ion-icon>
+            <ion-icon *ngIf="false" is-active="false" size="small" color="light" class="all-controll-button" name="ellipsis-horizontal-outline" (click)="more()"></ion-icon>
+            <ion-icon is-active="false" size="small" color="light" class="all-controll-button" name="close-outline" (click)="close()"></ion-icon>
         </div>
     </div>
     <ion-slides [options]="slideOpts" (ionSlideDidChange)="ionSlideWillChange()" (ionSlidesDidLoad)="ionSlidesDidLoad()">
@@ -25,29 +25,27 @@
                     </ion-avatar>
                 </div>
                 <div class="user-box-text">
-                    <ion-text color="tertiary">{{reddah.getDisplayName(video.UserName, 100)}}</ion-text>
+                    <ion-text color="light">{{reddah.getDisplayName(video.UserName, 100)}}</ion-text>
                 </div>
             </div>
             <div class="video-controll">
                 <div class="video-controll-button">
-                    <ion-icon size="large" is-active="false" color="tertiary" class="video-action-button" name="arrow-redo" (click)="more()"></ion-icon>
-                    <ion-text color="tertiary" *ngIf="video.Down>0">{{reddah.shortCount(video.Down)}}</ion-text>
+                    <ion-icon size="large" color="light" class="video-action-button" name="arrow-redo" (click)="more()"></ion-icon>
+                    <ion-text color="light" *ngIf="video.Down>0">{{reddah.shortCount(video.Down)}}</ion-text>
                 </div>
                 <div class="video-controll-button">
-                    <ion-icon size="large" is-active="false" color="tertiary" class="video-action-button" name="chatbox-ellipses" (click)="more()"></ion-icon>
-                    <ion-text color="tertiary" *ngIf="video.Count>0">{{reddah.shortCount(video.Count)}}</ion-text>
+                    <ion-icon size="large" is-active="false" color="light" class="video-action-button" name="chatbox-ellipses" (click)="more()"></ion-icon>
+                    <ion-text color="light" *ngIf="video.Count>0">{{reddah.shortCount(video.Count)}}</ion-text>
                 </div>
                 <div class="video-controll-button">
                     <ion-icon (click)="reddah.likeTopic(video, 'reddah_video_articles_'+userName, reddah.videoArticles)" *ngIf="!video.like" 
-                        size="large" is-active="false" color="tertiary" class="video-action-button" name="heart"></ion-icon>
+                        size="large" is-active="false" color="light" class="video-action-button" name="paw"></ion-icon>
                     <ion-icon (click)="reddah.likeTopic(video, 'reddah_video_articles_'+userName, reddah.videoArticles)" *ngIf="video.like" 
-                        size="large" is-active="false" color="danger" class="video-action-button" name="heart"></ion-icon>
+                        size="large" is-active="false" color="danger" class="video-action-button" name="paw"></ion-icon>
                         
-                    <ion-text (click)="reddah.likeTopic(video, 'reddah_video_articles_'+userName, reddah.videoArticles)" color="tertiary" *ngIf="video.Up>0">
+                    <ion-text (click)="reddah.likeTopic(video, 'reddah_video_articles_'+userName, reddah.videoArticles)" color="light" *ngIf="video.Up>0">
                         {{reddah.shortCount(video.Up)}} 
                     </ion-text>
-
-                    {{'src:'+reddah.appVideoData(video.Content)}}
                 </div>
             </div>
         </ion-slide>

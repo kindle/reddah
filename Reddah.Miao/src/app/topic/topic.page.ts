@@ -11,7 +11,6 @@ import { SearchPage } from '../common/search/search.page';
 import { UserPage } from '../common/user/user.page';
 import { PubPage } from '../tabs/publisher/pub/pub.page';
 import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
-import { MessageListPage } from '../tabs/message/message.page';
 import { ShareChooseChatPage } from '../chat/share-choose-chat/share-choose-chat.page';
 import { TimelinePopPage } from '../common/timeline-pop.page';
 import { LocationPage } from '../common/location/location.page';

@@ -43,8 +43,14 @@ export class RegisterSubPage implements OnInit {
         }
         else {
             const loading = await this.loadingController.create({
-                message: this.reddah.instant("Register.Loading"),
-                spinner: 'circles',
+                cssClass: 'my-custom-class',
+                spinner: null,
+                duration: 5000,
+                message: `<div class='bar-box'>${this.reddah.getLoadingEffect()}
+                <div class='bar-text'>${this.reddah.instant("Register.Loading")}</div>
+                </div>`,
+                translucent: true,
+                backdropDismiss: true
             });
             await loading.present();
             

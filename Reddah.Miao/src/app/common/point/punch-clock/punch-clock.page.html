@@ -1,4 +1,4 @@
-<ion-content color="point">
+<ion-content color="primary">
     <div class="bg1">
         {{ reddah.instant('Point.PunchClock') }}
     </div>
@@ -15,8 +15,8 @@
 
     <ion-card>
         <ion-card-header color="transparent">
-            <ion-item lines="none" color="point" style="--background:transparent;">
-                <ion-icon name="checkmark-circle-outline" color="tertiary" size="large"></ion-icon>
+            <ion-item lines="none" color="primary" style="--background:transparent;">
+                <ion-icon name="checkmark-circle-outline" color="light" size="large"></ion-icon>
                 <ion-card-subtitle style="color:#fff;text-align: center;margin-left:5px;">
                     <p *ngIf="punchClockLoading">{{ reddah.instant('Point.PunchLoading') }}</p>
                     <p *ngIf="!punchClockLoading">{{ reddah.instant('Point.PunchResult') }}</p>
@@ -33,7 +33,7 @@
         </ion-card-header>
     </ion-card>
 
-    <ion-card color="tertiary">
+    <ion-card style="color:#fff;">
         <ion-item lines="none" color="transparent" class="title">
             <ion-label color="dark" style="font-size: large;font-weight: bold;">
              {{reddah.instant('Point.PunchClockTitle')}} ({{select_month}})

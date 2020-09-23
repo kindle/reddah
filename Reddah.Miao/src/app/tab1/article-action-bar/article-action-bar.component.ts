@@ -108,7 +108,8 @@ export class ArticleActionBarComponent {
                 startIndex++;
             }
         }
-        reasons.push(dislikeGroup);
+        if(dislikeGroup.length>0)
+            reasons.push(dislikeGroup);
 
         const popover = await this.popoverController.create({
             component: ArticleDislikePopPage,

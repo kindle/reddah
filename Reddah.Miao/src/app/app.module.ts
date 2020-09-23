@@ -62,7 +62,6 @@ import { LocationPage } from './common/location/location.page'
 import { MapPage } from './map/map.page'
 import { StoryPage } from './story/story.page'
 import { SafePipe } from './safe.pipe';
-import { Tab3Page } from './tab3/tab3.page'
 import { PostviewerPage } from './postviewer/postviewer.page';
 import { ImageViewerComponent } from './common/image-viewer/image-viewer.component';
 import { VideoViewerComponent } from './common/video-viewer/video-viewer.component';
@@ -85,7 +84,6 @@ import { MaterialPage } from './mytimeline/material/material.page';
 import { ReportPage } from './mytimeline/report/report.page';
 import { MyReportPage } from './mytimeline/myreport/myreport.page';
 import { MyTimeLinePage } from './mytimeline/mytimeline.page';
-import { MessageListPage } from './tabs/message/message.page';
 import { UserPage } from './common/user/user.page';
 import { ArticlePopPage } from './common/article-pop.page'
 import { HeaderAddPage } from './common/header-add-pop.page'
@@ -114,7 +112,6 @@ import { SearchPage } from './common/search/search.page';
 import { MessagePage } from './mytimeline/message/message.page'
 import { SearchUserPage } from './friend/search-user/search-user.page';
 import { QrcardPage } from './common/qrcard/qrcard.page';
-import { SettingListPage } from './settings/setting-list/setting-list.page';
 import { SettingGePage } from './settings/setting-ge/setting-ge.page';
 import { SettingAboutPage } from './settings/setting-about/setting-about.page';
 import { SettingChangePasswordPage } from './settings/setting-change-password/setting-change-password.page';
@@ -191,7 +188,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
     BookmarkPopPage,ChatPopPage,
     PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
     RankPage,
-    LocalePage,LocationPage,LocationHWPage,MapPage,MapHWPage,StoryPage,Tab3Page,VideosPage,
+    LocalePage,LocationPage,LocationHWPage,MapPage,MapHWPage,StoryPage,VideosPage,
     ChooseUserPage,ShareChooseChatPage,
     AddCommentPage,
     AddFriendPage,
@@ -215,7 +212,6 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
     CommentTimelineComponent,
     TimeLinePage,MaterialPage,ReportPage,MyReportPage,
     MyTimeLinePage,
-    MessageListPage,
     UserPage,
     ArticlePopPage,
     HeaderAddPage,
@@ -242,7 +238,6 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
     SearchUserPage,
     SettingAboutPage,SettingChangePasswordPage,
     SettingGePage,
-    SettingListPage,
     SettingNoteLabelPage,
     SettingGroupChatTitlePage,SettingFontPage,
     QrcardPage,
@@ -259,7 +254,7 @@ entryComponents: [
     BookmarkPopPage,ChatPopPage,
     PointPage,HistoryPage,PunchPage,PunchClockPage,BlackHolePage,MagicMirrorPage,WormHolePage,MysticPage,
     RankPage,
-    LocalePage,LocationPage,LocationHWPage,MapPage,MapHWPage,StoryPage,Tab3Page,VideosPage,
+    LocalePage,LocationPage,LocationHWPage,MapPage,MapHWPage,StoryPage,VideosPage,
     ChooseUserPage,ShareChooseChatPage,
     PostviewerPage,
     ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,
@@ -286,7 +281,7 @@ entryComponents: [
     TimelineCommentPopPage,ReportCommentPopPage,
     ScanPage,
     SigninPage, ForgotPage,
-    UserPage, MessageListPage,
+    UserPage,
     TimeLinePage,MaterialPage,ReportPage,MyReportPage,
     TsViewerPage,
     AddTimelinePage,
@@ -299,7 +294,6 @@ entryComponents: [
     SearchUserPage,
     SettingAboutPage,SettingChangePasswordPage,
     SettingGePage,
-    SettingListPage,
     SettingNoteLabelPage,
     SettingGroupChatTitlePage,SettingFontPage,
     QrcardPage,
