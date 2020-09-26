@@ -91,6 +91,7 @@ export class ActiveUsersPage implements OnInit {
                 for(let activeUserName of result.Message){
                     this.activeUsers.push(activeUserName);
                     this.loadedIds.push(activeUserName);  
+                    this.reddah.getUserPhotos(activeUserName); 
                 }
             }
             

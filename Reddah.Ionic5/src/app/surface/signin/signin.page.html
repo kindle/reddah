@@ -14,10 +14,10 @@
         </ion-note>
     </ion-item>
     <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
-        <ion-input type="text" placeholder="{{ reddah.instant('Input.UserName') }}" [(ngModel)]="username" clearInput></ion-input>
+        <ion-input type="text" style="text-transform: initial;" placeholder="{{ reddah.instant('Input.UserName') }}" [(ngModel)]="username" clearInput></ion-input>
     </ion-item>
     <ion-item class="gapBottom inputItem" no-padding>
-        <ion-input type="password" placeholder="{{ reddah.instant('Input.Password') }}" [(ngModel)]="password" clearInput></ion-input>
+        <ion-input type="password" style="text-transform: initial;" placeholder="{{ reddah.instant('Input.Password') }}" [(ngModel)]="password" clearInput></ion-input>
     </ion-item>
     <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="logIn()" expand="block"
     [disabled]="checkLogin()">{{ reddah.instant('Button.Login') }}</ion-button>
