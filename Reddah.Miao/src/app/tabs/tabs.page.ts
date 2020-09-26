@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { StartComponent } from '../start/start.component';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +9,24 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  constructor(
+    private modalController: ModalController,
+  ) {
+    this.goStart();
+  }
+
+  async goStart(){
+    const modal = await this.modalController.create({
+        component: StartComponent,
+        componentProps: { 
+            
+        },
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+      
+    await modal.present();
+  }
 
 }

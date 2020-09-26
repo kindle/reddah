@@ -1472,6 +1472,7 @@ export class ReddahService {
         if(check&&this.jwtExpired())
         {
             if(this.logoutConfirmPopup==false){
+                console.log(message)
                 this.loginExpiredConfirm();
             }
         }
@@ -2062,7 +2063,7 @@ export class ReddahService {
         formData.append('offset', JSON.stringify((new Date()).getTimezoneOffset()));
         return this.http.post<any>(this.checkOncePointUrl, formData)
         .pipe(
-            tap(data => this.log('check once point')),
+            tap(data => this.log('check once point',false)),
             catchError(this.handleError('check once point', []))
         );
     }
@@ -2230,7 +2231,7 @@ export class ReddahService {
             window.location.reload();
         }
         else{
-            this.modalController.dismiss();
+            //this.modalController.dismiss();
 
             let currentLocale = this.localStorageService.retrieve("Reddah_Locale");
             

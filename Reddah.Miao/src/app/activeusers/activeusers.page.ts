@@ -77,6 +77,18 @@ export class ActiveUsersPage implements OnInit {
             loading.dismiss();
         });
     }
+
+    getPhotoActiveUsers(){
+        return this.activeUsers.filter(u=>{
+
+            if(this.reddah.appData('userphoto_'+u)!=null&&
+            this.reddah.appData('userphoto_'+u).indexOf('assets/icon/anonymous.png')==-1){
+                //this.reddah.getUserPhotos(u); 
+                return true;
+            }
+            return false;
+        })
+    }
   
     getActiveUsers(event):void {
         let cacheKey = "this.reddah.getActiveUsers" + JSON.stringify(this.loadedIds);
@@ -91,6 +103,7 @@ export class ActiveUsersPage implements OnInit {
                 for(let activeUserName of result.Message){
                     this.activeUsers.push(activeUserName);
                     this.loadedIds.push(activeUserName);  
+                    this.reddah.getUserPhotos(activeUserName); 
                 }
             }
             

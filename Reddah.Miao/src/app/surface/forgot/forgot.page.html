@@ -12,7 +12,7 @@
             <ion-note (click)="change()" style="align-self: auto;">{{ reddah.instant('Button.ChangePassword') }}</ion-note>
         </ion-item>
         <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
-            <ion-input type="text" placeholder="{{ reddah.instant('Input.Email') }}" [(ngModel)]="email" clearInput></ion-input>
+            <ion-input type="text" style="text-transform: initial;" placeholder="{{ reddah.instant('Input.Email') }}" [(ngModel)]="email" clearInput></ion-input>
         </ion-item>
         <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="token()" expand="block">{{ reddah.instant('Confirm.Next') }}</ion-button>
     </div>
@@ -24,13 +24,13 @@
             <ion-note style="font-size: xx-large;margin-left:10px;color:black;">{{ reddah.instant('Button.ChangePassword') }}</ion-note>
         </ion-item>
         <ion-item class="gapBottom inputItem" no-padding>
-            <ion-input type="password" placeholder="{{ reddah.instant('Input.NewPassword') }}" [(ngModel)]="password" clearInput></ion-input>
+            <ion-input type="password" style="text-transform: initial;" placeholder="{{ reddah.instant('Input.NewPassword') }}" [(ngModel)]="password" clearInput></ion-input>
         </ion-item>
         <ion-item class="gapBottom inputItem" no-padding>
-            <ion-input type="password" placeholder="{{ reddah.instant('Input.ConfirmPassword') }}" [(ngModel)]="confirmPassword" clearInput></ion-input>
+            <ion-input type="password" style="text-transform: initial;" placeholder="{{ reddah.instant('Input.ConfirmPassword') }}" [(ngModel)]="confirmPassword" clearInput></ion-input>
         </ion-item>
         <ion-item class="gapBottom inputItem" no-padding>
-            <ion-input type="text" placeholder="{{ reddah.instant('Button.Token') }}" [(ngModel)]="myToken" clearInput></ion-input>
+            <ion-input type="text" style="text-transform: initial;" placeholder="{{ reddah.instant('Button.Token') }}" [(ngModel)]="myToken" clearInput></ion-input>
         </ion-item>
         <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="submit()" expand="block">{{ reddah.instant('Confirm.Yes') }}</ion-button>
     </div>

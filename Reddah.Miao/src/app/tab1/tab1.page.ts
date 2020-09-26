@@ -1,14 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { ModalController, AlertController, ActionSheetController, PopoverController } from '@ionic/angular'
+import { ScanPage } from '../common/scan/scan.page';
+import { SearchPage } from '../common/search/search.page';
+import { ShakePage } from '../shake/shake.page';
 import { ReddahService } from '../reddah.service';
+import { LocationPage } from '../common/location/location.page';
+import { MagicMirrorPage } from '../common/magic-mirror/magic-mirror.page';
+import { WormHolePage } from '../common/worm-hole/worm-hole.page';
+import {  Router } from '@angular/router';
+import { MysticPage } from '../common/mystic/mystic.page';
+import { StoryPage } from '../story/story.page';
+import { MapPage } from '../map/map.page';
+import { ShareChooseChatPage } from '../chat/share-choose-chat/share-choose-chat.page';
+import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
+import { MiniViewerComponent } from '../common/mini-viewer/mini-viewer.component';
 import { LocalStorageService } from 'ngx-webstorage';
 import { CacheService } from 'ionic-cache';
-import { ArticleTextPopPage } from '../common/article-text-pop.page';
-import { ModalController } from '@ionic/angular';
-import { SearchPage } from '../common/search/search.page';
-import { UserPage } from '../common/user/user.page';
-import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
-import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
+import { ArticleTextPopPage } from 'src/app/common/article-text-pop.page';
+import { ImageViewerComponent } from 'src/app/common/image-viewer/image-viewer.component';
+import { UserPage } from 'src/app/common/user/user.page';
+import { AddTimelinePage } from 'src/app/mytimeline/add-timeline/add-timeline.page';
+import { TimelinePopPage } from 'src/app/common/timeline-pop.page';
+import { ActiveUsersPage } from 'src/app/activeusers/activeusers.page';
+import { PublisherPage } from '../tabs/publisher/publisher.page';
 import { VideosPage } from '../videos/videos.page';
+import { GameCubePage } from '../games/cube/cube.page';
+import { GameRememberPage } from '../games/remember/remember.page';
+import { GameConnectPage } from '../games/connect/connect.page';
 
 @Component({
   selector: 'app-tab1',
@@ -18,251 +36,88 @@ import { VideosPage } from '../videos/videos.page';
 export class Tab1Page implements OnInit {
 
   userName;
-  //article = [500,501,502,503,504,505,506,507];
+  user_apps=[];
+
   constructor(
-    public reddah: ReddahService,
-    private localStorageService: LocalStorageService,
-    private cacheService: CacheService,
-    private modalController: ModalController,
-  ) {
+      private modalController: ModalController,
+      public reddah: ReddahService,
+  ){
   }
 
-  loadedIds = [];
-  formData: FormData;
-  
+  async miao(){
+    const userModal = await this.modalController.create({
+        component: SearchPage,
+        componentProps: {},
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+      
+    await userModal.present();
+  }
+
+
   ngOnInit(){
       this.userName = this.reddah.getCurrentUser();
-      
-      let cachedArticles = this.localStorageService.retrieve("Reddah_findpage_"+this.userName);
-      let cachedArticleIds = this.localStorageService.retrieve("Reddah_findpage_ids_"+this.userName);
-      let cacheArticleArray = JSON.parse(cachedArticles);
-      if(cachedArticles&&cacheArticleArray.length>0){
-          let top = 20;
-          this.reddah.articles = JSON.parse(cachedArticles).slice(0,top);
-          this.reddah.articles.forEach(article=>{
-              article.like = (this.localStorageService.retrieve(`Reddah_ArticleLike_${this.userName}_${article.Id}`)!=null)
-          });
-          this.loadedIds = JSON.parse(cachedArticleIds).slice(0,top);
-          //autofill
-          //refer to home, todo
-      }
-      else{
-          this.formData = new FormData();
-          this.formData.append("loadedIds", JSON.stringify([]));
-          this.formData.append("abstract", this.userName);
-
-          let cacheKey = "this.reddah.getFindPage"+this.userName;
-          let request = this.reddah.getCatFindPageTopic(this.formData);
-
-          this.cacheService.loadFromObservable(cacheKey, request, "FindPage")
-          .subscribe(timeline => 
-          {
-              if(cachedArticles!=JSON.stringify(timeline))
-              {
-                  this.reddah.articles = [];
-                  this.loadedIds = [];
-                  this.commentData = new Map();
-
-                  for(let article of timeline){
-
-                      article.like = (this.localStorageService.retrieve(`Reddah_ArticleLike_${this.userName}_${article.Id}`)!=null)
-
-                      this.reddah.articles.push(article);
-                      this.loadedIds.push(article.Id);
-                      this.reddah.getUserPhotos(article.UserName);
-                      if(this.isMini(article.Abstract)){
-                        this.reddah.getUserPhotos(article.Abstract);
-                      }
-                      //cache user image
-                      this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
-                      //cache preview image
-                      article.Content.split('$$$').forEach((previewImageUrl)=>{
-                          this.reddah.toFileCache(previewImageUrl);
-                          //this.reddah.toImageCache(previewImageUrl, previewImageUrl);
-                      });
-                      this.GetCommentsData(article.Id);
-                  }
-
-                  this.localStorageService.store("Reddah_findpage_"+this.userName, JSON.stringify(timeline));
-                  this.localStorageService.store("Reddah_findpage_ids_"+this.userName, JSON.stringify(this.loadedIds));
-
-              }
-              else{
-                  for(let article of timeline){
-                      this.GetCommentsData(article.Id);
-                  }
-              }
-          });
-      }
-
-      
   }
 
-  loadData(event) {
-      this.getFindPageTopics(event);
-  }
-
-  commentData = new Map();
-  authoronly = false;
-  async GetCommentsData(articleId: number){
-      //console.log(`get ts comments:${articleId}`);
-      let cacheKey = "this.reddah.getFindPageComments" + articleId;
-      let request = this.reddah.getComments(articleId)
-
-      this.cacheService.loadFromObservable(cacheKey, request, "FindPage")
-      .subscribe(data => 
-      {
-          //console.log('load comments:'+articleId+JSON.stringify(data));
-          this.commentData.set(articleId, data);
-      });
-  }
-
-  async fd_viewer(index, imageSrcArray) {
-      const modal = await this.modalController.create({
-          component: ImageViewerComponent,
-          componentProps: {
-              index: index,
-              imgSourceArray: this.reddah.preImageArray(imageSrcArray),
-              imgTitle: "",
-              imgDescription: "",
-              showDownload: true,
-          },
-          cssClass: 'modal-fullscreen',
-          keyboardClose: true,
-          showBackdrop: true,
-          swipeToClose: true,
-          presentingElement: await this.modalController.getTop(),
-      });
-
-      return await modal.present();
-  }
-
-  async fd_report(article){
-      const modal = await this.modalController.create({
-          component: AddFeedbackPage,
-          componentProps: { 
-              title: this.reddah.instant("Pop.Report"),
-              desc: this.reddah.instant("Pop.ReportReason"),
-              feedbackType: 4,
-              article: article
-          },
-          cssClass: "modal-fullscreen",
-          swipeToClose: true,
-          presentingElement: await this.modalController.getTop(),
-      });
+  async gameCube(){
+        const scanModal = await this.modalController.create({
+            component: GameCubePage,
+            componentProps: { },
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
         
-      await modal.present();
+        await scanModal.present();
   }
 
-  getFindPageTopics(event):void {
-      this.formData = new FormData();
-      this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
-      this.formData.append("abstract", this.userName);
-      
-      let cacheKey = "this.reddah.getFindPage" + this.userName + this.loadedIds.join(',');
-      let request = this.reddah.getCatFindPageTopic(this.formData);
-      
-      this.cacheService.loadFromObservable(cacheKey, request, "FindPage")
-      .subscribe(timeline => 
-      {
-          console.log(timeline);
-          for(let article of timeline){
-              article.like = (this.localStorageService.retrieve(`Reddah_ArticleLike_${this.userName}_${article.Id}`)!=null)
-              this.reddah.articles.push(article);
-              this.loadedIds.push(article.Id);
-              this.reddah.getUserPhotos(article.UserName);
-              if(this.isMini(article.Abstract)){
-                this.reddah.getUserPhotos(article.Abstract);
-              }
-              //cache user image
-              this.reddah.toImageCache(article.UserPhoto, `userphoto_${article.UserName}`);
-              //cache preview image
-              article.Content.split('$$$').forEach((previewImageUrl)=>{
-                  this.reddah.toFileCache(previewImageUrl);
-              });
-              this.GetCommentsData(article.Id);
-          }
-
-          this.localStorageService.store("Reddah_findpage_"+this.userName, JSON.stringify(timeline));
-          this.localStorageService.store("Reddah_findpage_ids_"+this.userName, JSON.stringify(this.loadedIds));
-
-          if(event){
-              event.target.complete();
-          }
-
-          //this.loading = false;
-      });
-
-  }
-
-  clearCacheAndReload(){
-      this.loadedIds = [];
-      this.cacheService.clearGroup("FindPage");
-      this.loadedIds = [-1];
-      this.reddah.articles = [];
-      this.localStorageService.clear("Reddah_findpage_"+this.userName);
-      this.localStorageService.clear("Reddah_findpage_ids_"+this.userName);
-      this.getFindPageTopics(event);
-  }
-
-  doRefresh(event) {
-      setTimeout(() => {
-          this.clearCacheAndReload();
-          event.target.complete();
-      }, 2000);
-  }
-
-  async fullText(text){
-      const textModal = await this.modalController.create({
-          component: ArticleTextPopPage,
-          componentProps: { text: text },
-          cssClass: "modal-fullscreen",
-          swipeToClose: true,
-          presentingElement: await this.modalController.getTop(),
-      });
-        
-      await textModal.present();
-  }
-
-  private isMini(abstract){
-      if(abstract==null)
-        return false;
-      return abstract.length==32;
-  }
-
-  playVideo(id){
-      this.reddah.playVideo(id);
-  }
+  async gameRemember(){
+    const scanModal = await this.modalController.create({
+        component: GameRememberPage,
+        componentProps: { },
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+    
+    await scanModal.present();
+  }   
   
-  async goMiniById(abstract){
-      let type=3;//default mini
-      if(this.isMini(abstract)){
-        type=3;//mini
-      }
-      else{
-        type=0;//article
-      }
-      let key = this.reddah.getDisplayName(abstract, 100);
-      const modal = await this.modalController.create({
-          component: SearchPage,
-          componentProps: { 
-              key: key,
-              type: type,//array index not id
-          },
+  async gameConnect(){
+    const scanModal = await this.modalController.create({
+        component: GameConnectPage,
+        componentProps: { },
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+    
+    await scanModal.present();
+  }   
+
+  async startScanner(){
+      const scanModal = await this.modalController.create({
+          component: ScanPage,
+          componentProps: { },
           cssClass: "modal-fullscreen",
           swipeToClose: true,
           presentingElement: await this.modalController.getTop(),
       });
-        
-      await modal.present();
-  }
+      
+      await scanModal.present();
+      const { data } = await scanModal.onDidDismiss();
+      if(data){
+          //console.log(data)
+      }
 
-  async goUser(userName){
+  };
+
+  async goSearch(){
       const userModal = await this.modalController.create({
-          component: UserPage,
-          componentProps: { 
-              userName: userName
-          },
+          component: SearchPage,
+          componentProps: {},
           cssClass: "modal-fullscreen",
           swipeToClose: true,
           presentingElement: await this.modalController.getTop(),
@@ -271,79 +126,241 @@ export class Tab1Page implements OnInit {
       await userModal.present();
   }
 
-  isMe(userName){
-      return userName==this.reddah.getCurrentUser();
-  }
+  async goSearchN(type){
+    const modal = await this.modalController.create({
+        component: SearchPage,
+        componentProps: {
+            type: type
+        },
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+    
+    await modal.present();
+}
 
-  translate(article){
-      let app_id = this.reddah.qq_app_id;
-      let app_key = this.reddah.qq_app_key;
-      let time_stamp = new Date().getTime();
-      let nonce_str = this.reddah.nonce_str();
-
-      let params2 = {
-          "app_id":app_id,
-          "time_stamp":Math.floor(time_stamp/1000),
-          "nonce_str":nonce_str,
-          "text": this.reddah.summary(article.Title, 200),
-          "force":0,
-          "candidate_langs":"",
-          "sign":""
+  async shake(){
+      let myLocationstr = this.reddah.appData("userlocationjson_"+this.userName);
+      let myLocation = null;
+      try{
+          myLocation = JSON.parse(myLocationstr);
+      }catch(e){}
+      if(myLocation&&myLocation.location){
+          const modal = await this.modalController.create({
+              component: ShakePage,
+              componentProps: {},
+              cssClass: "modal-fullscreen",
+              swipeToClose: true,
+              presentingElement: await this.modalController.getTop(),
+          });
+            
+          await modal.present();
       }
-
-      params2["sign"] = this.reddah.getReqSign(params2, app_key);
-      this.reddah.getQqLanguageDetect(params2, app_key).subscribe(detect=>{
-          if(detect.Success==0){
-              console.log(detect.Message);
-              let detectLan = JSON.parse(detect.Message).data.lang;
-
-              let params3 = {
-                  "app_id":app_id,
-                  "time_stamp":Math.floor(time_stamp/1000),
-                  "nonce_str":nonce_str,
-                  "text": this.reddah.summary(article.Title, 200),
-                  "source":detectLan,
-                  "target":this.reddah.adjustLan(detectLan),
-                  "sign":""
-              }
-
-              if(params3["source"]!=params3["target"])
-              {
-                  article.TranslateContent =  "...";
-                  article.Translate = true;
-                  params3["sign"] = this.reddah.getReqSign(params3, app_key);
-                  this.reddah.getQqTextTranslate(params3, app_key).subscribe(data=>{
-                      //console.log(data)
-                      let response3 = JSON.parse(data.Message)
-                      let traslatedAnswer = response3.data.target_text;
-                      ///console.log(traslatedAnswer);
-                      if(data.Success==0){
-                          if(response3.ret!=0)
-                          {
-                              article.TranslateContent =  this.reddah.instant('FedLogin.FailedMessage');
-                          }
-                          else{
-                              article.TranslateContent =  traslatedAnswer;
-                              //article.Title = article.TranslateContent;
-                          }
-                      }
-                  });
-              }
-          }
-      });
+      else{
+          this.changeLocation();
+      }
   }
 
-    async video(){
-        const modal = await this.modalController.create({
-            component: VideosPage,
-            componentProps: {
-                
+  async changeLocation(){
+      const modal = await this.modalController.create({
+          component: LocationPage,
+          componentProps: {},
+          cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
+      });
+  
+      await modal.present();
+      const { data } = await modal.onDidDismiss();
+      if(data){
+          this.reddah.saveUserLocation(this.userName, data, data.location.lat, data.location.lng);
+      }
+  }
+
+
+  async magicMirror(){
+      const modal = await this.modalController.create({
+          component: MagicMirrorPage,
+          componentProps: {},
+          cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
+      });
+      await modal.present();
+  }
+
+  async magicMirrorCat(){
+      const modal = await this.modalController.create({
+          component: MagicMirrorPage,
+          componentProps: {},
+          cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
+      });
+      await modal.present();
+  }
+
+  async blackHole(){
+      const modal = await this.modalController.create({
+          component: WormHolePage,
+          componentProps: {},
+          cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
+      });
+      await modal.present();
+  }
+
+  async mystic(){
+      const modal = await this.modalController.create({
+          component: MysticPage,
+          componentProps: {},
+          cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
+      });
+      await modal.present();
+  }
+
+  async newUsers(){
+      const modal = await this.modalController.create({
+          component: ActiveUsersPage,
+          componentProps: {},
+          cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
+      });
+      await modal.present();
+  }
+
+  async story(){
+      const modal = await this.modalController.create({
+          component: StoryPage,
+          componentProps: {
+              //lat: this.config.lat,
+              //lng: this.config.lng
+          },
+          cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
+      });
+          
+      await modal.present();
+  }
+
+  async video(){
+    const modal = await this.modalController.create({
+        component: VideosPage,
+        componentProps: {
+            
+        },
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+        
+    await modal.present();
+}
+
+  async map(){
+      const modal = await this.modalController.create({
+          component: MapPage,
+          componentProps: {
+              //lat: this.config.lat,
+              //lng: this.config.lng
+          },
+          cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
+      });
+        
+      await modal.present();
+  }
+
+
+  async goMoreApp(){
+      const modal = await this.modalController.create({
+            component: SearchPage,
+            componentProps: { 
+                type: 3,
             },
             cssClass: "modal-fullscreen",
             swipeToClose: true,
             presentingElement: await this.modalController.getTop(),
         });
-            
+        
+        await modal.present();
+  }
+
+  async goMini(mini){
+      
+      //open mini page
+      const modal = await this.modalController.create({
+          component: MiniViewerComponent,
+          componentProps: { 
+              mini: mini,
+              content: mini.Cover,
+              guid: mini.UserName,
+              //version: mini.Sex,//always use the latest version
+              version: this.reddah.appData('usersex_'+mini.UserName)
+          },
+          cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
+      });
+        
+      await modal.present();
+      const { data } = await modal.onDidDismiss();
+      if(data||!data)
+      {
+          if(data=='report'){
+              const modal = await this.modalController.create({
+                  component: AddFeedbackPage,
+                  componentProps: { 
+                      title: this.reddah.instant("Pop.Report"),
+                      desc: this.reddah.instant("Pop.ReportReason"),
+                      feedbackType: 4,
+                      article: mini
+                  },
+                  cssClass: "modal-fullscreen",
+                  swipeToClose: true,
+                  presentingElement: await this.modalController.getTop(),
+              });
+                
+              await modal.present();
+          }
+          else if(data=='share'){
+              const modal = await this.modalController.create({
+                  component: ShareChooseChatPage,
+                  componentProps: { 
+                      title: this.reddah.instant("Common.Choose"),
+                      article: mini,
+                  },
+                  cssClass: "modal-fullscreen",
+                  swipeToClose: true,
+                  presentingElement: await this.modalController.getTop(),
+              });
+                
+              await modal.present();        
+          }
+      }
+
+      this.reddah.setRecent(mini,4);
+      this.reddah.setRecentUseMini(mini.UserName).subscribe(data=>{
+          this.user_apps = this.reddah.loadRecent(4);
+      });
+  }
+
+
+    async goPublicPage(){
+        const modal = await this.modalController.create({
+            component: PublisherPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
         await modal.present();
     }
 

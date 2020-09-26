@@ -176,6 +176,10 @@ import { ReadPage } from './common/read/read.page';
 import { LocationHWPage } from './common/locationhw/locationhw.page';
 import { MapHWPage } from './maphw/maphw.page';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { StartComponent } from './start/start.component';
+import { GameCubePage } from './games/cube/cube.page';
+import { GameRememberPage } from './games/remember/remember.page';
+import { GameConnectPage } from './games/connect/connect.page';
 
 
 @NgModule({
@@ -206,7 +210,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
     PostviewerPage,
     PublisherPage,
     SafePipe,
-    ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,
+    ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,StartComponent,
     SurfacePage,
     CommentComponent,
     CommentTimelineComponent,
@@ -247,6 +251,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
     SettingNickNamePage,SettingSignaturePage,SettingSexPage,
     PlatformPage,
     CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
+    GameCubePage,GameRememberPage,GameConnectPage,
 ],
 entryComponents: [
     TopicPage,ReadPage,
@@ -257,7 +262,7 @@ entryComponents: [
     LocalePage,LocationPage,LocationHWPage,MapPage,MapHWPage,StoryPage,VideosPage,
     ChooseUserPage,ShareChooseChatPage,
     PostviewerPage,
-    ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,
+    ImageViewerComponent,VideoViewerComponent,MiniViewerComponent,StartComponent,
     SurfacePage,
     AddCommentPage,
     AddFriendPage,
@@ -303,6 +308,7 @@ entryComponents: [
     SettingNickNamePage,SettingSignaturePage,SettingSexPage,
     PlatformPage,
     CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
+    GameCubePage,GameRememberPage,GameConnectPage,
 ],
 schemas: [CUSTOM_ELEMENTS_SCHEMA],
 imports: [

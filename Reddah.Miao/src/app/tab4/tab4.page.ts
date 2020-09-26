@@ -20,6 +20,7 @@ import { SettingGePage } from '../settings/setting-ge/setting-ge.page';
 import { SettingPrivacyPage } from '../settings/setting-privacy/setting-privacy.page';
 import { SettingNetworkPage } from '../settings/setting-network/setting-network.page';
 import { SettingAccountPage } from '../settings/setting-account/setting-account.page';
+import { MyTimeLinePage } from '../mytimeline/mytimeline.page';
 
 @Component({
   selector: 'app-tab4',
@@ -234,103 +235,116 @@ export class Tab4Page implements OnInit {
 
 
  async logout() {
-    const alert = await this.alertController.create({
-        header: this.reddah.instant("Confirm.Title"),
-        message: this.reddah.instant("Confirm.LogoutMessage"),
-        buttons: [
-        {
-            text: this.reddah.instant("Confirm.Cancel"),
-            role: 'cancel',
-            cssClass: 'secondary',
-            handler: () => {}
-        }, 
-        {
-            text: this.reddah.instant("Confirm.Yes"),
-            handler: () => {
-                this.authService.logout();
-            }
-        }]
-    });
+        const alert = await this.alertController.create({
+            header: this.reddah.instant("Confirm.Title"),
+            message: this.reddah.instant("Confirm.LogoutMessage"),
+            buttons: [
+            {
+                text: this.reddah.instant("Confirm.Cancel"),
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {}
+            }, 
+            {
+                text: this.reddah.instant("Confirm.Yes"),
+                handler: () => {
+                    this.reddah.logout();
+                }
+            }]
+        });
 
-    await alert.present().then(()=>{});
-}
-
-
-async goAccount(){
-    const modal = await this.modalController.create({
-        component: SettingAccountPage,
-        componentProps: {},
-        cssClass: "modal-fullscreen",
-        swipeToClose: true,
-        presentingElement: await this.modalController.getTop(),
-    });
-    
-    await modal.present();
-}
-
-async goNetwork(){
-    const modal = await this.modalController.create({
-        component: SettingNetworkPage,
-        componentProps: {},
-        cssClass: "modal-fullscreen",
-        swipeToClose: true,
-        presentingElement: await this.modalController.getTop(),
-    });
-    
-    await modal.present();
-}
-
-async goPrivacy(){
-    const modal = await this.modalController.create({
-        component: SettingPrivacyPage,
-        componentProps: {},
-        cssClass: "modal-fullscreen",
-        swipeToClose: true,
-        presentingElement: await this.modalController.getTop(),
-    });
-    
-    await modal.present();
-}
-
-async goGeneral(){
-    const modal = await this.modalController.create({
-        component: SettingGePage,
-        componentProps: {currentLocale:this.currentLocale},
-        cssClass: "modal-fullscreen",
-        swipeToClose: true,
-        presentingElement: await this.modalController.getTop(),
-    });
-    
-    await modal.present();
-    const { data } = await modal.onDidDismiss();
-    if(data){
-        this.modalController.dismiss(data);
+        await alert.present().then(()=>{});
     }
-}
 
 
-async goAbout(){
-    const modal = await this.modalController.create({
-        component: SettingAboutPage,
-        componentProps: {},
-        cssClass: "modal-fullscreen",
-        swipeToClose: true,
-        presentingElement: await this.modalController.getTop(),
-    });
-    
-    await modal.present();
-}
+    async goAccount(){
+        const modal = await this.modalController.create({
+            component: SettingAccountPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+        
+        await modal.present();
+    }
+
+    async goNetwork(){
+        const modal = await this.modalController.create({
+            component: SettingNetworkPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+        
+        await modal.present();
+    }
+
+    async goPrivacy(){
+        const modal = await this.modalController.create({
+            component: SettingPrivacyPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+        
+        await modal.present();
+    }
+
+    async goGeneral(){
+        const modal = await this.modalController.create({
+            component: SettingGePage,
+            componentProps: {currentLocale:this.currentLocale},
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+        
+        await modal.present();
+        const { data } = await modal.onDidDismiss();
+        if(data){
+            this.modalController.dismiss(data);
+        }
+    }
 
 
-async goFeedback(){
-    const modal = await this.modalController.create({
-        component: AddFeedbackPage,
-        componentProps: {},
-        cssClass: "modal-fullscreen",
-        swipeToClose: true,
-        presentingElement: await this.modalController.getTop(),
-    });
-      
-    await modal.present();
-}
+    async goAbout(){
+        const modal = await this.modalController.create({
+            component: SettingAboutPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+        
+        await modal.present();
+    }
+
+
+    async goFeedback(){
+        const modal = await this.modalController.create({
+            component: AddFeedbackPage,
+            componentProps: {},
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+        
+        await modal.present();
+    }
+
+    async goMyTimeline(){
+        const modal = await this.modalController.create({
+            component: MyTimeLinePage,
+            componentProps: {
+            },
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+        
+        await modal.present();
+    }
 }
