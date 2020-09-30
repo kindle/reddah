@@ -69,6 +69,7 @@
     },
 
     "Menu":{
+        "Game":"لعبه",
         "Message": "رسالة",
         "Recommend": "مقالات",
         "Earth":"إيرث",

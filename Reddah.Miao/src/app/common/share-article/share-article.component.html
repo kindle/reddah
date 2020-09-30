@@ -1,9 +1,9 @@
-<div (click)="viewArticle()" class="container" *ngIf="type==4||type==1">
+<div (click)="viewArticle()" class="container-share-article" *ngIf="type==4||type==1">
     <ion-Label>
         <div style="display: flex;margin:5px 0 10px 0;">
             <img [src]="reddah.parseImage(image)" class="sharePortrait" *ngIf="image">
             <ion-icon name="link" color="dark" class="sharePortraitNone" *ngIf="!image"></ion-icon>
-            <span style="margin-left:8px;align-self: center;" class="show-three-lines"
+            <span style="margin-left:8px;align-self: center;text-align:left;" class="show-three-lines"
                 [innerHTML]="reddah.htmlDecode(abstract)">
             </span>
         </div>
@@ -13,7 +13,7 @@
         <ion-label color="dark" style="margin-left:5px;">{{ reddah.instant('Menu.Recommend') }}</ion-label>
     </div>
 </div>
-<div (click)="viewMini()" class="container" *ngIf="type==5">
+<div (click)="viewMini()" class="container-share-article" *ngIf="type==5">
     <ion-Label>
         <div style="display: flex;margin:5px 0 10px 0;">
             <img [src]="reddah.parseImage(image)" class="sharePortrait" *ngIf="image">

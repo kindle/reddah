@@ -21,14 +21,15 @@
         }
     });
 
-    $('#theme').click(function() {
-        $('body').toggleClass('light');
-        if ($('body').attr('class') == 'light') {
-            $('#theme').text('Lights Off');
+    $('#gctheme').click(function() {
+        console.log('toggle theme')
+        $('app-connect').toggleClass('light');
+        if ($('app-connect').attr('class') == 'light') {
+            $('#gctheme').text('Lights Off');
         } else {
-            $('#theme').text('Lights On');
+            $('#gctheme').text('Lights On');
         }
-        localStorage.setItem('theme', $('body').attr('class'));
+        localStorage.setItem('theme', $('app-connect').attr('class'));
     });
 
     function combination() {
@@ -48,16 +49,17 @@
     }
 
     function showLevels() {
+        console.log('show levels')
         var remove = stage - 1;
-        $('#win .text span').text(remove);
+        $('#gcwin .text span').text(remove);
         if (stage > levelCount) {
-            $('#finished').fadeIn();
+            $('#gcfinished').fadeIn();
         } else if (stage > 1) {
-            $('#win').fadeIn();
+            $('#gcwin').fadeIn();
             setTimeout(function() {
                 $('.level' + remove).remove();
                 $('div.level' + stage).show();
-                $('#win').fadeOut();
+                $('#gcwin').fadeOut();
                 active = 1;
             }, 2000);
         } else {
@@ -66,6 +68,7 @@
     }
 
     function createLevels() {
+        console.log('create levels')
         $.each($('div[data-set]'), function(i, el) {
             var levelHtml = '';
             var set = $(this).data('set').split('.');
@@ -88,8 +91,8 @@
 
     function setTheme() {
         if (localStorage.theme == 'light') {
-            $('body').addClass('light');
-            $('#theme').text('Lights Off');
+            $('app-connect').addClass('light');
+            $('#gctheme').text('Lights Off');
         }
     }
 

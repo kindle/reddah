@@ -69,6 +69,7 @@
     },
 
     "Menu":{
+        "Game":"Παιχνίδι",
         "Message": "Μήνυμα",
         "Recommend": "Άρθρο",
         "Earth":"Γη",

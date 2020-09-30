@@ -25,7 +25,7 @@ var $board = $('main'),
     card1, card2, msg;
 
 // Let's make some noise
-var assetsUrl = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/',
+var assetsUrl = '/assets/game/remember/',
     sound = [
         'smb3_1-up.mp3',
         'smb3_nspade_match.mp3',

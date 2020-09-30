@@ -69,6 +69,7 @@
     },
 
     "Menu":{
+        "Game":"Spel",
         "Message": "Bericht",
         "Recommend": "Artikel",
         "Earth":"Aarde",

@@ -12,7 +12,7 @@
             <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>
         </ion-refresher>
         <div *ngFor="let article of articles" 
-        style="background-color: white; display: flex; border-bottom: 1px solid lightgrey; padding-top:10px; padding-bottom: 10px;">
+        style="background-color:var(--ion-color-white); display: flex; border-bottom: 1px solid lightgrey; padding-top:10px; padding-bottom: 10px;">
             <div style="width:70px;padding: 0 0 0 10px; border: 0px solid blue;">
                 <img src="{{reddah.appData('userphoto_'+article.UserName)}}" class="portrait" (click)="goUser(article.UserName)">
             </div>
@@ -23,7 +23,7 @@
                     </ion-card-title>
                 </ion-card-header>
                 <div *ngIf="article.Title.length>0&&article.Title.length<100">
-                    <div style="background-color: white; padding: 0 0 4px 15px;margin-bottom:0px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
+                    <div style="background-color:var(--ion-color-white); padding: 0 0 4px 15px;margin-bottom:0px;width:96%;" [innerHTML]="reddah.htmlDecode(article.Title)"></div>
                 </div>
                 <ion-item no-padding lines="none" *ngIf="article.Title.length>=100">
                     <div (click)="fullText(article.Title)" style="background-color: #eeeeee; padding: 2px;margin-bottom:5px;width:96%;" 
@@ -39,7 +39,7 @@
                 </ion-card-content>
                 <ion-card-content style="display:block;margin-right:20px;" *ngIf="(article.LastUpdateType==6||article.Abstract.length<3)&&article.Content.split('$$$').length>0&&article.Content.split('$$$')[0].length>0" no-padding>
                     <div class="parent" *ngIf="article.Content.split('$$$').length>6">
-                        <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
+                        <div class="container-myreport" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtl')" 
                             (load)="reddah.adjustImage(image, 'mtl')"
                             [src]="reddah.level1Cache(image)"
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="parent" *ngIf="article.Content.split('$$$').length==3||article.Content.split('$$$').length==5||article.Content.split('$$$').length==6">
-                        <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
+                        <div class="container-myreport" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtl')" 
                             (load)="reddah.adjustImage(image, 'mtl')" 
                             [src]="reddah.level1Cache(image)"
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="parent2" *ngIf="article.Content.split('$$$').length==2||article.Content.split('$$$').length==4">
-                        <div class="container" *ngFor="let image of article.Content.split('$$$');index as i">
+                        <div class="container-myreport" *ngFor="let image of article.Content.split('$$$');index as i">
                             <img [id]="reddah.makeItId(image+'mtl')" 
                             (load)="reddah.adjustImage(image, 'mtl')" 
                             [src]="reddah.level1Cache(image)"
@@ -76,7 +76,7 @@
                     <ion-note color="dark">{{reddah.getSendTime(article.CreatedOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
                     <ion-note color="secondary" style="margin-left: 5px;" *ngIf="isMe(article.UserName)" (click)="delete(article)">{{ reddah.instant('Comment.Delete') }}</ion-note>
                 </div>
-                <ion-item lines="none" *ngIf="reddah.getAllowedNames(article.GroupName).length>0">
+                <ion-item style="--background:transparent;" lines="none" *ngIf="reddah.getAllowedNames(article.GroupName).length>0">
                     <div style="width: 100%;">
                         <div class="like-arrow-up"></div>
                         <div class="likeSection">
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </ion-item>
-                <ion-item no-padding lines="none" *ngIf="commentData.get(article.Id)&&reddah.getAllowedComments(commentData.get(article.Id)).length>0">
+                <ion-item style="--background:transparent;" no-padding lines="none" *ngIf="commentData.get(article.Id)&&reddah.getAllowedComments(commentData.get(article.Id)).length>0">
                     <div style="width: 100%;">
                         <div class="like-arrow-up" *ngIf="reddah.getAllowedNames(article.GroupName).length==0"></div>
                         <div class="like-spliter" *ngIf="reddah.getAllowedNames(article.GroupName).length>0"></div>

@@ -27,6 +27,8 @@ import { VideosPage } from '../videos/videos.page';
 import { GameCubePage } from '../games/cube/cube.page';
 import { GameRememberPage } from '../games/remember/remember.page';
 import { GameConnectPage } from '../games/connect/connect.page';
+import { GameSnakePage } from '../games/snake/snake.page';
+import { GameTrainPage } from '../games/train/train.page';
 
 @Component({
   selector: 'app-tab1',
@@ -41,19 +43,14 @@ export class Tab1Page implements OnInit {
   constructor(
       private modalController: ModalController,
       public reddah: ReddahService,
+      private router: Router,
   ){
   }
 
   async miao(){
-    const userModal = await this.modalController.create({
-        component: SearchPage,
-        componentProps: {},
-        cssClass: "modal-fullscreen",
-        swipeToClose: true,
-        presentingElement: await this.modalController.getTop(),
+    this.router.navigate(['/tabs/tab0'], {
+        queryParams: {}
     });
-      
-    await userModal.present();
   }
 
 
@@ -61,41 +58,13 @@ export class Tab1Page implements OnInit {
       this.userName = this.reddah.getCurrentUser();
   }
 
-  async gameCube(){
-        const scanModal = await this.modalController.create({
-            component: GameCubePage,
-            componentProps: { },
-            cssClass: "modal-fullscreen",
-            swipeToClose: true,
-            presentingElement: await this.modalController.getTop(),
-        });
-        
-        await scanModal.present();
+  async goGame(){
+    this.router.navigate(['/tabs/tabgame'], {
+        queryParams: {}
+    }); 
   }
 
-  async gameRemember(){
-    const scanModal = await this.modalController.create({
-        component: GameRememberPage,
-        componentProps: { },
-        cssClass: "modal-fullscreen",
-        swipeToClose: true,
-        presentingElement: await this.modalController.getTop(),
-    });
-    
-    await scanModal.present();
-  }   
   
-  async gameConnect(){
-    const scanModal = await this.modalController.create({
-        component: GameConnectPage,
-        componentProps: { },
-        cssClass: "modal-fullscreen",
-        swipeToClose: true,
-        presentingElement: await this.modalController.getTop(),
-    });
-    
-    await scanModal.present();
-  }   
 
   async startScanner(){
       const scanModal = await this.modalController.create({

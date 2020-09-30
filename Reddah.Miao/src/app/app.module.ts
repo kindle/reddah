@@ -180,6 +180,8 @@ import { StartComponent } from './start/start.component';
 import { GameCubePage } from './games/cube/cube.page';
 import { GameRememberPage } from './games/remember/remember.page';
 import { GameConnectPage } from './games/connect/connect.page';
+import { GameSnakePage } from './games/snake/snake.page';
+import { GameTrainPage } from './games/train/train.page';
 
 
 @NgModule({
@@ -251,7 +253,7 @@ import { GameConnectPage } from './games/connect/connect.page';
     SettingNickNamePage,SettingSignaturePage,SettingSexPage,
     PlatformPage,
     CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
-    GameCubePage,GameRememberPage,GameConnectPage,
+    GameCubePage,GameRememberPage,GameConnectPage,GameSnakePage,GameTrainPage,
 ],
 entryComponents: [
     TopicPage,ReadPage,
@@ -308,7 +310,7 @@ entryComponents: [
     SettingNickNamePage,SettingSignaturePage,SettingSexPage,
     PlatformPage,
     CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
-    GameCubePage,GameRememberPage,GameConnectPage,
+    GameCubePage,GameRememberPage,GameConnectPage,GameSnakePage,GameTrainPage,
 ],
 schemas: [CUSTOM_ELEMENTS_SCHEMA],
 imports: [

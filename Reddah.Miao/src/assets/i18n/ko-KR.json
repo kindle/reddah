@@ -69,6 +69,7 @@
     },
 
     "Menu":{
+      "Game":"게임",
       "Message": "소식",
       "Recommend": "문장",
       "Earth":"지구",

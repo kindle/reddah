@@ -7,7 +7,7 @@ import { Tab0Page } from './tab0.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab0PageRoutingModule } from './tab0-routing.module'
-import { HeaderModule } from '../common/header/header.module';
+import { FindActionBarComponent } from './find-action-bar/find-action-bar.component';
 
 @NgModule({
   imports: [
@@ -17,8 +17,7 @@ import { HeaderModule } from '../common/header/header.module';
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: Tab0Page }]),
     Tab0PageRoutingModule,
-    HeaderModule,
   ],
-  declarations: [Tab0Page]
+  declarations: [Tab0Page,FindActionBarComponent]
 })
 export class Tab0PageModule {}

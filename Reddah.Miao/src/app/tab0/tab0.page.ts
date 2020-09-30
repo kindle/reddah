@@ -3,12 +3,15 @@ import { ReddahService } from '../reddah.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { CacheService } from 'ionic-cache';
 import { ArticleTextPopPage } from '../common/article-text-pop.page';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 import { SearchPage } from '../common/search/search.page';
 import { UserPage } from '../common/user/user.page';
 import { ImageViewerComponent } from '../common/image-viewer/image-viewer.component';
 import { AddFeedbackPage } from '../mytimeline/add-feedback/add-feedback.page';
 import { VideosPage } from '../videos/videos.page';
+import { Router } from '@angular/router';
+import { AddTimelinePage } from '../mytimeline/add-timeline/add-timeline.page';
+import { TimelinePopPage } from '../common/timeline-pop.page';
 
 @Component({
   selector: 'app-tab0',
@@ -24,7 +27,19 @@ export class Tab0Page implements OnInit {
     private localStorageService: LocalStorageService,
     private cacheService: CacheService,
     private modalController: ModalController,
+    private popoverController: PopoverController,
+    private router: Router,
+    private alertController: AlertController,
   ) {
+  }
+
+
+  async close(){
+    this.router.navigate(['/tabs/tab1'], {
+        queryParams: {
+            
+        }
+    });
   }
 
   loadedIds = [];
@@ -345,6 +360,91 @@ export class Tab0Page implements OnInit {
         });
             
         await modal.present();
+    }
+
+    async goSearch(key=''){
+        const modal = await this.modalController.create({
+            component: SearchPage,
+            componentProps: { 
+                key: key,
+                //type: 0,//article only
+            },
+            cssClass: "modal-fullscreen",
+        });
+          
+        await modal.present();
+    }
+
+    async add(ev: any){
+        const popover = await this.popoverController.create({
+            component: TimelinePopPage,
+            animated: false,
+            translucent: true,
+            cssClass: 'post-option-popover'
+        });
+        await popover.present();
+        const { data } = await popover.onDidDismiss();
+        if(data==1||data==2||data==3){
+            //data=1: take a photo, data=2: lib photo, data=3: lib video
+            this.goPost(data);
+        }
+    }
+    
+    
+    async goPost(postType){
+        const postModal = await this.modalController.create({
+            component: AddTimelinePage,
+            componentProps: { 
+                postType: postType,
+                action: 'topic',
+            },
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+            
+        await postModal.present();
+        const { data } = await postModal.onDidDismiss();
+        if(data){
+            this.doRefresh(null);
+        }
+    }
+
+    async delete(article){
+        const alert = await this.alertController.create({
+            header: this.reddah.instant("Confirm.Title"),
+            message: this.reddah.instant("Confirm.DeleteMessage"),
+            buttons: [
+            {
+                text: this.reddah.instant("Confirm.Cancel"),
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {}
+            }, 
+            {
+                text: this.reddah.instant("Confirm.Yes"),
+                handler: () => {
+                    //serivce delete
+                    
+                    let formData = new FormData();
+                    formData.append("Id",JSON.stringify(article.Id));
+                    this.reddah.deleteArticle(formData).subscribe(data=>{
+                        //console.log(JSON.stringify(data));
+                    });
+  
+                    //UI delete
+                    this.reddah.articles.forEach((item, index)=>{
+                        if(item.Id==article.Id){
+                            this.reddah.articles.splice(index, 1);
+                        }
+                    })
+                    this.localStorageService.store("Reddah_findpage_"+this.userName,this.reddah.articles);
+                    this.cacheService.clearGroup("FindPage");
+                }
+            }]
+        });
+  
+        await alert.present().then(()=>{});
     }
 
 }

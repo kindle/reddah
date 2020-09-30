@@ -201,46 +201,6 @@ export class MyTimeLinePage implements OnInit {
     @ViewChild('timelineCoverImage')
     timelineCoverImage:ElementRef;
 
-    onScroll($event) {
-
-        this.showAddComment = false;
-        
-        let offset = this.timelineCover.nativeElement.scrollHeight - $event.detail.scrollTop;
-        
-        let newTop = offset-300;
-        this.renderer.setStyle(this.timelineCoverImage.nativeElement, 'top', newTop+'px');
-
-        if(offset>=250)
-        {
-            this.renderer.setStyle(this.headerStart.nativeElement, 'visibility', 'visible');
-            this.renderer.setStyle(this.headerStart.nativeElement, 'opacity', '8');
-            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
-            this.renderer.setStyle(this.timelineCoverImage.nativeElement, 'visibility', 'visible');
-        }
-        else if(offset<250 && offset>=150)
-        {
-            let opacity = (offset-150)/100;
-            if(opacity<0) opacity=0;
-            this.renderer.setStyle(this.headerStart.nativeElement, 'opacity', opacity + '');
-            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'hidden');
-        }
-        else if(offset<150 && offset>=0){
-            this.renderer.setStyle(this.timelineCoverImage.nativeElement, 'visibility', 'visible');
-
-            let opacity = (1-(offset-0)/100);
-            if(opacity>1) opacity=1;
-            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'opacity', opacity + '');
-        }
-        else
-        {
-            this.renderer.setStyle(this.timelineCoverImage.nativeElement, 'visibility', 'hidden');
-
-            this.renderer.setStyle(this.headerStart.nativeElement, 'visibility', 'hidden');
-            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'visibility', 'visible');
-            this.renderer.setStyle(this.headerOnScroll.nativeElement, 'opacity', '8');
-        }
-    }
-
     async post(ev: any) {
         const popover = await this.popoverController.create({
             component: TimelinePopPage,

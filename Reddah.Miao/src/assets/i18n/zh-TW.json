@@ -69,6 +69,7 @@
     },
 
     "Menu":{
+        "Game":"游戏",
         "Message": "消息",
         "Recommend": "閱讀",
         "Earth":"地球",

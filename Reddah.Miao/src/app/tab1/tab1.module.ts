@@ -7,8 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { ArticleActionBarComponent } from './article-action-bar/article-action-bar.component';
-import { HeaderCatModule } from '../common/headercat/headercat.module';
-import { FindActionBarComponent } from './find-action-bar/find-action-bar.component';
+import { HeaderModule } from '../common/header/header.module';
 
 @NgModule({
   imports: [
@@ -17,8 +16,8 @@ import { FindActionBarComponent } from './find-action-bar/find-action-bar.compon
     FormsModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
-    HeaderCatModule,
+    HeaderModule,
   ],
-  declarations: [Tab1Page, ArticleActionBarComponent,FindActionBarComponent]
+  declarations: [Tab1Page, ArticleActionBarComponent]
 })
 export class Tab1PageModule {}

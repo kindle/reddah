@@ -1,0 +1,267 @@
+video{
+    width: 100%;
+}
+
+.listInfoBlock {
+    overflow:hidden;
+}
+.listImage {
+    vertical-align: top;
+}
+.listImageWrapper {
+    float: left;
+    height: 130px;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.BrowsePreviewImage
+{
+    width: 193px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    border: 1px solid #BDBEC1;
+    margin-top: 0px;
+}
+
+.BrowsePreviewImageOne
+{
+    width: 95px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    border: 1px solid #BDBEC1;
+    margin-top: 0px;
+    border-radius: 3px;
+    height:100%;
+    object-fit: cover;
+}
+
+.listRight, .listInfo {
+    color: #BDBEC1;
+    margin-top: 10px;
+}
+div.postClear {
+    clear: left;
+    height: 10px;
+}
+orgImage, .orgArticle {
+    display: none;
+}
+
+div.postModuleLiner
+{
+    border-color: #BDBEC1 ;
+    border-right: 0 none;
+    border-style: solid none none ; 
+    border-width: 0 0 0;
+    padding-bottom: 15px;
+    overflow: hidden;
+    margin: 10px 15px;
+}
+
+div.postClear {
+    clear: left;
+    height: 10px;
+}
+
+.listImage {
+    vertical-align: top;
+}
+
+.listRight .listInfo {
+    color: black;
+}
+
+#homepage {
+    color: #636468;
+}
+
+.header{
+    padding-top: 40px;
+}
+
+.header-title{
+    font-weight: bold;
+    padding:0;
+}
+
+.articleTitle{
+    display: block;
+    padding: 0px;
+    margin-top: 0px !important;
+    font-size: larger;
+    color: var(--ion-color-primary);
+    font-weight: bold;
+}
+
+.articleTextRead{
+    color: #828388;
+}
+
+.sk-parent {
+    display: grid;
+    grid-template-columns: 32% 33% 32%;
+    grid-gap: 3px;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: 32% 33% 32%;
+    grid-template-rows: 95px;
+    grid-gap: 3px;
+}
+
+@media only screen and (min-width: 700px) {
+    .parent {
+        grid-template-rows: 195px;
+    }
+
+    .listImageWrapper {
+        height: 195px;
+    }
+    
+    .BrowsePreviewImageOne
+    {
+        width: 195px;
+    }
+}
+
+.container {
+    position: relative;
+    overflow: hidden;
+}
+
+.picture {
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    object-fit: cover;
+    width:100%;
+}
+
+.left-radius{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.right-radius{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.card-img{
+    width: 100%;
+    object-fit:cover;
+}
+
+.mini {
+    width: 40px; 
+    height: 40px; 
+    background-color: #605ab0;
+    border-radius: 50%;
+}
+
+.more {
+    width: 25px !important; 
+    height: 25px !important; 
+    padding: 10px;
+    background-color: white;
+    border: 1px solid lightgray;
+}
+
+.recentPortrait {
+    margin: 0 17px;
+    border-radius: 5px;
+    width: 45px;
+    height: 45px;
+}
+
+.borderPortrait {
+    border: 1px solid lightgray;
+}
+
+.mini-box{
+    margin:0 auto 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    /*display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    */
+}
+
+.mini-box-item{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    min-width: 80px;
+}
+
+.mini-box-label{
+    padding:0 15px;
+    width: 80px;
+    color:gray;
+    margin-top: 5px;
+    text-align: center;
+}
+
+
+.fd-parent {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-gap: 3px;
+}
+
+.fd-parent2 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 3px;
+}
+
+.fd-parent3 {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-gap: 3px;
+}
+
+.fd-sk-container {
+   position: relative;
+   overflow: hidden;
+}
+
+.fd-container {
+   position: relative;
+   padding-top: 100%;
+   overflow: hidden;
+}
+
+.fd-picture {
+   position: absolute;
+   top:50%;
+   transform: translateY(-50%);
+   object-fit: cover;
+}
+
+.fd-container3 {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: relative;
+   padding-top: 100%;
+   overflow: hidden;
+   margin-top: 5px;
+}
+
+.fd-picture3 {
+   position: absolute;
+   flex-shrink: 0;
+   min-width: 100%;
+   top:0;
+   left:0;
+}
+
+.fd-portrait{
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+}

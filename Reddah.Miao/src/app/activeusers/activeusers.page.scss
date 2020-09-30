@@ -451,7 +451,8 @@ body {
 /* demo params */
 
 .teamy__preview:before {
-    background-color: var(--demoColorMask, rgba(72, 27, 174, .7));
+    /*background-color: var(--demoColorMask, rgba(72, 27, 174, .7));*/
+    background-color: var(--demoColorMask,rgba(80, 126, 209, .7));
 }
 .teamy_style2 .teamy__content {
     background-color: var(--demoColorContent, rgba(72, 27, 174, .85));

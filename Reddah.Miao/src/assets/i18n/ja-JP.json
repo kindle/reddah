@@ -69,6 +69,7 @@
     },
 
     "Menu":{
+      "Game":"ゲーム",
       "Message": "メッセージ",
       "Recommend": "記事",
       "Earth":"アース",

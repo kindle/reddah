@@ -69,6 +69,7 @@
     },
 
     "Menu":{
+        "Game":"Juego",
         "Message": "Mensaje",
         "Recommend": "Artículos",
         "Earth":"Tierra",

@@ -68,6 +68,7 @@
     },
 
     "Menu":{
+        "Game":"O jogo",
         "Message": "Mensagem",
         "Recommend": "Artigo",
         "Earth":"Aarde",
