@@ -9,17 +9,17 @@
     <ion-item lines="none" class="common-splitter">
     </ion-item>
     <ion-item class="borderTop" (click)="shake()">
-        <img src="/assets/icon/cat-fish.png" class="menuIcon icon-image">
+        <ion-icon class="menuIcon" name="swap-vertical-outline" slot="start" color="dark" size="medium"></ion-icon>
         <ion-label>{{ reddah.instant('Menu.Shake') }}</ion-label>
         <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item (click)="map()">
-        <img src="/assets/icon/cat-candy.png" class="menuIcon icon-image">
+        <ion-icon class="menuIcon" name="earth" slot="start" color="primary" size="medium"></ion-icon>
         <ion-label>{{ reddah.instant('Menu.Earth') }}</ion-label>
         <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item lines="none" class="borderBottom" (click)="newUsers()">
-        <img src="/assets/icon/cat-happy.png" class="menuIcon icon-image">
+        <ion-icon class="menuIcon" name="pulse-outline" slot="start" color="danger" size="medium"></ion-icon>
         <ion-label>{{ reddah.instant('Menu.ActiveUsers') }}</ion-label>
         <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
     </ion-item>
@@ -41,12 +41,12 @@
     </ion-item>
     
     <ion-item class="borderTop" (click)="goPublicPage()">
-        <img src="/assets/icon/cat-read.png" class="menuIcon icon-image">
+        <ion-icon class="menuIcon" name="list" slot="start" color="secondary" size="medium"></ion-icon>
         <ion-label>{{ reddah.instant('Menu.Publisher') }}</ion-label>
         <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>
     <ion-item class="borderBottom" lines="none" class="borderBottom" (click)="goGame()" detail="false">
-        <img src="/assets/icon/cat-chief.png" class="menuIcon icon-image">
+        <ion-icon class="menuIcon" name="game-controller-outline" slot="start" color="dark" size="medium"></ion-icon>
         <ion-label>{{ reddah.instant('Menu.Game') }}</ion-label>
         <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
     </ion-item>

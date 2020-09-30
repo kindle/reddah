@@ -7,7 +7,7 @@
 </ion-item>
 <ion-content no-padding style="background-color: white;">
     <ion-item *ngIf="!user404" (click)="search()">
-        <ion-icon name="search-outline" size="small" slot="start" color="tertiary" class="portrait"></ion-icon>
+        <ion-icon name="search-outline" size="small" slot="start" color="white" class="portrait"></ion-icon>
         <ion-label style="margin-left:10px;">{{ reddah.instant('Search.Title') }}:<font color="#107c10">{{searchKeyword.value}}</font></ion-label>
     </ion-item>
 
@@ -16,7 +16,7 @@
     </div>
 
     <ion-item *ngIf="user404" (click)="searchMore()">
-        <ion-icon name="search-outline" slot="start" color="tertiary" class="portrait"></ion-icon>
+        <ion-icon name="search-outline" slot="start" color="white" class="portrait"></ion-icon>
         <ion-label style="margin-left:10px;">
             {{ reddah.instant('Search.Title') }} <font color="#107c10">{{searchKeyword.value}}</font>
             <p class="desc">{{ reddah.instant('Menu.MiniApp') }}、{{ reddah.instant('Menu.Publisher') }}、{{ reddah.instant('Menu.Recommend') }}、{{ reddah.instant('Menu.Timeline') }}</p>

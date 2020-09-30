@@ -12,7 +12,7 @@ export class TabsPage {
   constructor(
     private modalController: ModalController,
   ) {
-    this.goStart();
+    //this.goStart();
   }
 
   async goStart(){
