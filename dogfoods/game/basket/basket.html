@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>test</title>
+<style type="text/css">
+ 
+.wrap-boy {
+   height: 500px;
+   position: relative;
+   overflow: hidden;
+   z-index: -1;
+}
+ 
+
+.wrapper {
+  background-color:transparent;
+	height: 500px;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	position: fixed;
+	overflow: hidden;
+	color: #444;
+}
+
+.ball {
+	height: 150px;
+	width: 150px;
+	position: absolute;
+	top: 150px;
+	bottom: 0;
+	right: 30px;/*calc(50% - 100px);*/
+	background-color: darkblue;
+	border-radius: 50%;
+}
+
+.action-grid{
+  display:grid;
+  grid-template-columns: 50% 50%;
+  border: 1px solid #e8e8e8;
+}
+
+.action{
+  padding: 20px;
+  border: 3px solid white;
+  text-align: center;
+  color: white;
+  font-weight: bolder;
+}
+
+.action-hit{
+  background-color: blue;
+}
+
+.action-test{
+  background-color: red;
+}
+
+.task{
+  background-color: #e8e8e8;
+}
+.result{
+  text-align: center;
+  width:100%;
+  position:absolute;
+  bottom:0;
+}
+
+.menu-grid{
+  display: grid;
+  grid-template-columns: 60px 200px auto;
+  grid-template-rows: 30px 30px;
+  align-items: center;
+  justify-items: center;
+}
+
+
+
+.menu-item1{
+  background-color: #e8e8e8;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.menu-item2{
+  background-color: #e8e8e8;
+}
+
+.menu-item3{
+  background-color: #e8e8e8;
+  font-size: xx-large;
+}
+
+.menu-item4{
+  background-color: #e8e8e8;
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
+
+.ready-box{
+  width:100%;
+  height:100%;
+  margin:100px auto;
+  position:absolute;
+  z-index: 1;
+  opacity: 0.618;
+  background-color: #e8e8e8;
+  }
+.ready-box>h1{font-size:200px;color:red;text-align:center;}
+.ready-box>h1.active{animation:count .5s;}
+@keyframes count {
+  from {
+    transform: scale(.1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.5);
+    opacity: 0;
+    display:none;
+  }
+}
+
+</style>
+
+</head>
+<body>
+  <div class="ready-box">
+    <h1 style="display:none;"></h1>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-item1" onclick="restart()">←</div>
+    <div class="menu-item2">score:</div>
+    <div class="menu-item3" id="count-down">00:00</div>
+    <div class="menu-item4">☆☆☆☆☆</div>
+  </div>
+  <div class="task">
+    <h1>拍球次数：</h1>
+  </div>
+  <section class="wrapper">
+    <div class="ball">
+      <img style="width:100%;" src="basket.gif">
+    </div>
+  </section>
+  <div class="wrap-boy">
+    <img style="position: absolute;right:0px;" src="boy.jpg">
+    <div class="result">
+      <h1></h1>
+    </div>
+  </div>
+  <div class="action-grid">
+    <button id="action-hit" class="action action-hit" onclick="brush()">拍球</button>
+    <button id="action-test" class="action action-test" onclick="confirm()">确定</button>
+  </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.js"></script>
+
+<script type="text/javascript">
+
+
+  let COUNT = 3;
+  //let countText = ['开始!','准备']
+  let timer = null;
+  function restart () {
+    clearTimeout(setIntervalTag);
+    var wrap = document.querySelector(".task");
+    var taskh1 = wrap.querySelector('h1');
+    targetTimes = randomInt(1,10);
+    taskh1.innerText = '拍球次数：' + targetTimes;
+
+    
+    document.getElementById("count-down").innerHTML = fix(20,2)+":"+fix(0,2); 
+    
+    let readybox = document.querySelector(".ready-box");
+    let readyboxh1 = readybox.querySelector('h1');
+    readyboxh1.style.display = 'block';
+    readybox.style.zIndex = 1;
+    timer = setInterval(() => {
+      COUNT--;
+      if (COUNT >= 0) {
+        readyboxh1.classList.remove('active');
+        setTimeout(() => {
+          readyboxh1.innerText = COUNT+1;//countText[COUNT];
+          readyboxh1.style.color = "orange";
+          readyboxh1.classList.add('active');
+        }, 100);
+      } else {
+        clearInterval(timer);
+        readyboxh1.innerText = "";
+        readyboxh1.style.display = 'none';
+        readybox.style.zIndex = -2;
+        COUNT = 3;
+        
+        targetEndDate = new Date(new Date().getTime()+20*1000); 
+        setIntervalTag = setInterval(countDown,100);
+        
+      }
+    }, 1000);
+  }
+
+//wp_register_script('animejs', 'https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js');
+restart();
+
+  function countDown() { 
+    var date = new Date();  
+    var now = date.getTime();  
+    
+    var endDate = targetEndDate;
+    var end = endDate.getTime();  
+    
+    var leftTime = end-now;  
+    var s, ms;  
+    if (leftTime>=0.000) { 
+        s = Math.floor(leftTime/1000);  
+        ms = Math.floor(Math.floor(leftTime%1000)/10);                     
+    }  
+    else{
+      s=0;
+      ms=0;
+      clearTimeout(setIntervalTag);
+
+      document.getElementById('action-hit').disabled = true;
+      document.getElementById('action-test').disabled = true;
+
+    }
+    document.getElementById("count-down").innerHTML = fix(s,2)+":"+fix(ms,2);  
+   
+  }  
+  function fix(num, length) {
+    return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
+  }
+
+
+
+//Animating the ball
+var movingBall = anime({
+  autoplay: false,
+  targets: '.ball',
+  translateY: '190px',
+  duration: 100,
+  direction: 'alternate',//'reverse',//'default'
+  easing: 'easeInCubic',
+  //new code
+  scaleX: {
+    value: 1.05,  //代表缩放的值
+    duration: 50,  // 运行时间
+    delay: 50   //延迟多久执行
+  }
+});
+
+  function brush(e){
+    hitTimes++;
+    let rwrap = document.querySelector(".result");
+    let rh1 = rwrap.querySelector('h1');
+    rh1.innerText = hitTimes;
+    movingBall.play();
+  }
+
+  function confirm(){
+    if(hitTimes==targetTimes){
+      alert('pass')
+    }else{
+      alert('fail')
+    }
+  }
+
+
+  var targetEndDate, setIntervalTag;
+  var hitTimes = 0;
+  var targetTimes;
+
+
+  function randomInt(min, max) { //产生[min,max]范围内的整数
+     return Math.round(Math.random() * (max - min)) + min;
+  }
+   
+  function randomColor() { //产生随机的颜色
+    var map = [1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f'];
+    var str = '#';
+    for (var i = 0; i < 6; i++) {
+    var index = randomInt(0, 15);
+    str += map[index];
+    }
+    return str;
+  }
+  
+    
+  </script>
+
+</html>

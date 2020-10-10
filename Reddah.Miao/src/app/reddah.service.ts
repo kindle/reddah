@@ -4028,7 +4028,7 @@ export class ReddahService {
             const loading = await this.loadingController.create({
                 cssClass: 'my-custom-class',
                 spinner: null,
-                duration: 5000,
+                duration: 30000,
                 message: `<div class='bar-box'>${this.getLoadingEffect()}
                 <div class='bar-text'>${this.instant("Login.Loading")}</div>
                 </div>`,

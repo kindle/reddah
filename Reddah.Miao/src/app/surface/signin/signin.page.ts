@@ -53,6 +53,7 @@ export class SigninPage implements OnInit {
             const loading = await this.loadingController.create({
                 cssClass: 'my-custom-class',
                 spinner: null,
+                duration: 30000,
                 message: `<div class='bar-box'>${this.reddah.getLoadingEffect()}
                 <div class='bar-text'>${this.reddah.instant("Login.Loading")}</div>
                 </div>`,
