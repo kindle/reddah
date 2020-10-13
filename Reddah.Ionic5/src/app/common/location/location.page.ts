@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef, Input, Renderer2 } from '@ang
 import { ReddahService } from '../../reddah.service';
 import { LoadingController, NavController, ActionSheetController  } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 import L from 'leaflet';
 //import 'proj4leaflet';
 //import { OpenStreetMapProvider } from 'leaflet-geosearch';
@@ -11,7 +13,7 @@ import L from 'leaflet';
   templateUrl: 'location.page.html',
   styleUrls: ['location.page.scss']
 })
-export class LocationPage implements OnInit {
+export class LocationPage  implements OnInit {
     @Input() location;
 
     inChina = true;
@@ -28,6 +30,7 @@ export class LocationPage implements OnInit {
         public navController: NavController,
         public modalController: ModalController,
         public actionSheetController: ActionSheetController,
+        private geolocation: Geolocation,
     ){}
     
     locations=[];
@@ -113,9 +116,11 @@ export class LocationPage implements OnInit {
 
         if(!this.location)
         {
-            this.map.locate({ setView: true, maxZoom: 15 }).on('locationfound', (e) => {
+            this.geolocation.getCurrentPosition().then((resp)=>{
+                let elatitude = resp.coords.latitude;
+                let elongitude = resp.coords.longitude;
                 if(this.inChina){
-                    this.reddah.getQqLocation(e.latitude, e.longitude).subscribe(data=>{
+                    this.reddah.getQqLocation(elatitude, elongitude).subscribe(data=>{
                         if(data.status==0){
                             let l = data.locations[0];
                             let marker = L.marker([l.lat, l.lng]).on('click', () => {});
@@ -127,7 +132,7 @@ export class LocationPage implements OnInit {
                                 this.locations = data.result.pois;
                                 if(this.locations.length==0){
                                     this.locations = [{"id":0,"title":this.reddah.instant('Article.CurrentLocation'),
-                                    "location":{"lat":e.latitude,"lng":e.longitude}}];
+                                    "location":{"lat":elatitude,"lng":elongitude}}];
                                 }
                             });
                         }
@@ -138,17 +143,17 @@ export class LocationPage implements OnInit {
                     })
                 }
                 else{
-                    let marker = L.marker([e.latitude, e.longitude]).on('click', () => {});
+                    let marker = L.marker([elatitude, elongitude]).on('click', () => {});
 
                     this.markerGroup.addLayer(marker);
                     this.map.addLayer(this.markerGroup);
 
-                    this.reddah.getNearby(e.latitude, e.longitude).subscribe(data=>{
+                    this.reddah.getNearby(elatitude, elongitude).subscribe(data=>{
                         this.locations = data._body.result.pois;
                     });  
                 }
 
-            }).on('locationerror', (err) => {
+            }).catch( e => {
                 //console.log(err.message);
                 //this.test(31.273139,121.64594);
             })
@@ -178,7 +183,7 @@ export class LocationPage implements OnInit {
             if(this.location)
                 this.map.addLayer(this.markerGroup);
 
-            this.map.setView([item.location.lat, item.location.lng], 15);
+            this.map.setView([item.location.lat, item.location.lng], 13);
         }
     }
 

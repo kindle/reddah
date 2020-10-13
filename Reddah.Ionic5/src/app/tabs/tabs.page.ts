@@ -37,18 +37,19 @@ export class TabsPage {
 
           await modal.present();
         }*/
-          const modal = await this.modalController.create(
-              {
-                component: MapPage,
-                componentProps: {
-              },
-              cssClass: "modal-fullscreen",
-              swipeToClose: true,
-              presentingElement: await this.modalController.getTop(),
-          });
+        const modal = await this.modalController.create(
+        {
+            component: MapPage,
+            componentProps: {readonly: false},
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
 
-          await modal.present();
+        await modal.present();
           
-    }
+        
+
+      }
 
 }

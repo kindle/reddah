@@ -39,7 +39,7 @@ export class ReddahService {
         });
     }
 
-    appStore  = "huawei";//"huawei","xiaomi","ios"
+    appStore  = "ios";//"huawei","xiaomi","ios"
     //default 2 azure East Asia
     cloud = "azure";
     domain = 'https://reddah-ea.azurewebsites.net';
@@ -3623,11 +3623,9 @@ export class ReddahService {
         //console.log("A"+cameraPhoto.path);
 
         if(crop){
-            this.crop.crop(cameraPhoto.path, {quality: 50, targetWidth: 800, targetHeight: 800})
-            .then(
-                
-                newCropImageData => {
-                    //console.log("B"+newCropImageData)
+            this.crop.crop(cameraPhoto.path, {quality: 30, targetWidth: 800, targetHeight: 800})
+            .then( 
+                newCropImageData => { 
                     this.uploadPictureFromResize(newCropImageData, formData, fileNamePreview);
                 },
                 error => console.error('Error cropping image', error)
@@ -3902,6 +3900,14 @@ export class ReddahService {
         return Capacitor.platform=="android"||Capacitor.platform=="ios";
     }
 
+    isAndroid(){
+        return Capacitor.platform=="android";
+    }
+
+    isIos(){
+        return Capacitor.platform=="ios";
+    }
+
     likeTopic(article, cacheKey, collection){
         let userName = this.getCurrentUser()
         
@@ -3991,7 +3997,7 @@ export class ReddahService {
             const loading = await this.loadingController.create({
                 cssClass: 'my-custom-class',
                 spinner: null,
-                duration: 5000,
+                duration: 30000,
                 message: `<div class='bar-box'>${this.getLoadingEffect()}
                 <div class='bar-text'>${this.instant("Login.Loading")}</div>
                 </div>`,

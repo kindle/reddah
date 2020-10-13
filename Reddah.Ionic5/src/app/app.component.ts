@@ -120,8 +120,16 @@ export class AppComponent {
           { 
               this.globalization.getPreferredLanguage()
               .then(res => {
-                  this.localStorageService.store("Reddah_Locale", res.value);
-                  this.reddah.loadTranslate(res.value);
+                  //alert(res.value);
+                  if(this.reddah.Locales.filter(l=>l.Name==res.value).length>0)
+                  {
+                    this.localStorageService.store("Reddah_Locale", res.value);
+                    this.reddah.loadTranslate(res.value);
+                  }
+                  else{
+                    this.localStorageService.store("Reddah_Locale", defaultLocale);
+                    this.reddah.loadTranslate(defaultLocale);
+                  }
               })
               .catch(e => {
                   this.localStorageService.store("Reddah_Locale", defaultLocale);

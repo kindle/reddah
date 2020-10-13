@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { ReddahService } from '../reddah.service';
 import { LoadingController, NavController, ModalController } from '@ionic/angular';
-
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import L from 'leaflet';
 //import "../../assets/maker/leaflet.awesome-markers";
 import { UserPage } from '../common/user/user.page';
@@ -25,6 +25,7 @@ export class MapPage implements OnInit {
 
         public modalController: ModalController,
         private elementRef: ElementRef,
+        private geolocation: Geolocation,
     ){
         this.userName = this.reddah.getCurrentUser();
         /*this.activeRoute.queryParams.subscribe((params: Params) => {
@@ -120,11 +121,13 @@ export class MapPage implements OnInit {
         if(loc&&loc.location){
             this.setLocation(loc);
         }else{
-            this.map.locate({ setView: true, maxZoom: 15 }).on('locationfound', (e) => {
+            this.geolocation.getCurrentPosition().then((resp)=>{
+                let elatitude = resp.coords.latitude;
+                let elongitude = resp.coords.longitude;
                 if(!this.readonly){
                     loc = {
                         "title": this.userName,
-                        "location":{"lat":e.latitude,"lng":e.longitude}
+                        "location":{"lat":elatitude,"lng":elongitude}
                     }
                     this.setLocation(loc);
                     this.reddah.saveUserLocation(this.userName, loc, loc.location.lat, loc.location.lng);
@@ -132,7 +135,7 @@ export class MapPage implements OnInit {
                 else{
                     loc = {
                         "title": this.reddah.instant("Menu.About"),
-                        "location":{"lat":e.latitude,"lng":e.longitude}
+                        "location":{"lat":elatitude,"lng":elongitude}
                     }
                     this.setLocation(loc, false);
                     
@@ -140,16 +143,14 @@ export class MapPage implements OnInit {
                         this.refresh(0);
                     }
                 }
-                
-            }).on('locationerror', (err) => {
-                console.log(err.message);
+              }).catch(e=>{
                 loc = {
                     "title": this.userName,
                     "location":{"lat":192,"lng":90}
                 }
                 this.setLocation(loc);
                 this.reddah.saveUserLocation(this.userName, loc, loc.location.lat, loc.location.lng);
-            })
+              });
         }
             
     }

@@ -1,17 +1,27 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+<ion-content style="background-color: white;">
+  <link href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/maker/leaflet.awesome-markers.css">
+  <script src="/assets/maker/leaflet.awesome-markers.js"></script>
+  <div id="earth" class="sticky"></div>
+  <ion-fab class="safe-area-bottom" vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+          <ion-icon name="search-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="start">
+          <ion-fab-button (click)="goMe()">
+              <ion-icon color="subscribe" name="locate-outline"></ion-icon>
+          </ion-fab-button><!--
+          <ion-fab-button (click)="close()">
+              <ion-icon color="dark" name="backspace"></ion-icon>
+          </ion-fab-button>-->
+      </ion-fab-list>
+      <ion-fab-list side="top">
+          <ion-fab-button (click)="refresh(1)">
+              <ion-icon color="subscribe" name="male"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button (click)="refresh(0)">
+              <ion-icon color="danger" name="female"></ion-icon>
+          </ion-fab-button>
+      </ion-fab-list>
+  </ion-fab>
 </ion-content>

@@ -4,7 +4,7 @@
     </ion-button>
     <ion-text>{{location.title}}</ion-text>
 </ion-item>
-<ion-item color="light" no-padding lines="none" *ngIf="!location">
+<ion-item color="light" style="--padding-start:0;" lines="none" *ngIf="!location">
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
         <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
     </ion-button>

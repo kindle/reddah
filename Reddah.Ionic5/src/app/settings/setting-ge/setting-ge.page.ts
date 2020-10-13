@@ -27,7 +27,7 @@ export class SettingGePage implements OnInit {
     changeNightMode(){
         this.reddah.setNightMode(this.nightMode);
         let systemDark = window.matchMedia("(prefers-color-scheme: dark)");
-        systemDark.addListener(this.colorTest);
+        //systemDark.addListener(this.colorTest);
         if(this.nightMode){
             document.body.setAttribute('data-theme', 'dark');
         }

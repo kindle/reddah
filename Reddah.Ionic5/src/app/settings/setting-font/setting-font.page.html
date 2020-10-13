@@ -2,7 +2,7 @@
     <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
         <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
     </ion-button>
-    <ion-title style="padding-left:0px;">{{ reddah.instant('Common.Font') }}</ion-title>
+    <ion-label>{{ reddah.instant('Common.Font') }}</ion-label>
 </ion-item>
 <ion-content no-padding class="common-content">
     <ion-grid *ngFor="let comment of messages">

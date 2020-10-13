@@ -41,24 +41,6 @@ export class SettingAboutPage implements OnInit {
 
     upgradeChecked = false;
 
-
-    appUpgrade() {
-        alert('appupgrade');
-        /*this.alertCtrl.create({
-            title: '发现新版本',
-            subTitle: '检查到新版本，是否立即下载？',
-            buttons: [{ text:'取消' },
-            {
-                text: '下载'
-                handler: () => {
-                        //跳转ios 版本下载地址
-                        this.iab.create(url, '_system');
-                }
-            }
-            ]
-        }).present();*/
-    }
-
     isMobile(): boolean {
         return this.platform.is('mobile');
     }
@@ -82,17 +64,21 @@ export class SettingAboutPage implements OnInit {
     async like() {
         let iosId = 1481532281;
         let storeAppURL = "ms-windows-store://pdp/?productid=9NBLGGH0B2B9";
-        if(this.platform.is('ios')){
-            storeAppURL = `itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=${iosId}&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software`;
+        if(this.reddah.isIos()){
+            //storeAppURL = `itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=${iosId}&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software`;
+            storeAppURL = `itms-apps://itunes.apple.com/app/id${iosId}`;
+            window.open(storeAppURL);
         }
-        else if(this.platform.is('android')){
+        else if(this.reddah.isAndroid()){
             storeAppURL = "market://details?id=com.reddah.app";
+            this.reddah.Browser(storeAppURL);
         }
         else{
             storeAppURL = `https://apps.apple.com/cn/app/id${iosId}?l=${this.reddah.getCurrentLocale()}`;
+            this.reddah.Browser(storeAppURL);
         }
 
-        this.reddah.Browser(storeAppURL);
+        
     }
 
     async buymebeer(){
@@ -116,7 +102,6 @@ export class SettingAboutPage implements OnInit {
             },
             {
               text: 'Alipay',
-              role: 'destructive',
               cssClass: 'pay-alipay',
               handler: () => {
                 this.alipayQrCode();

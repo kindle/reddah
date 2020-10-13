@@ -78,7 +78,7 @@ export class MiniViewerComponent implements OnInit {
         
         this.html = this.sanitizer.bypassSecurityTrustHtml(text);
         
-        this.addScriptByUrl(`https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js`);
+        //this.addScriptByUrl(`https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js`);
         this.addScriptByUrl("https://wow.techbrood.com/libs/zepto.1.1.4.min.js");
         this.addScriptByUrl("https://wow.techbrood.com/uploads/150101/jsapi_share.js");
         this.addScriptByUrl("https://wow.techbrood.com/uploads/150101/head.min.js");

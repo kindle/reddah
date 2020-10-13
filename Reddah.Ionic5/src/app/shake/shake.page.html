@@ -6,7 +6,7 @@
 </ion-item>
 <ion-content #pageTop style="background-color: white;">
     <div class="shakebg" *ngIf="showShakebg">
-        <img src="assets/shake/shakeIcon.png"/>
+        <img src="assets/shake/shakeIcon.png" (click)="shakeAni()"/>
         <div style="position: absolute; bottom: 60px; padding:60px 30px; width:100%;">
             <ion-item style="position:relative;--background: #1d1d1d;" lines="none" *ngFor="let user of users" (click)="goUser(user.UserName)">
                 <ion-avatar class="contactUserPhoto">
@@ -22,7 +22,7 @@
             </ion-item>
         </div>
     </div>
-    <div class="animetebg" *ngIf="showAnimetebg">
+    <div class="animetebg" *ngIf="showAnimetebg" (click)="shakeAni()">
         <img class="flower" src="assets/shake/flower.png" />
         <div class="topShakeBox">
             <img class="topShake" src="assets/shake/topShake.png" />

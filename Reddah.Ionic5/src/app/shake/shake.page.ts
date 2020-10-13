@@ -4,6 +4,8 @@ import { LoadingController, NavController, ModalController } from '@ionic/angula
 import { CacheService } from "ionic-cache";
 import { Shake } from '@ionic-native/shake/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Plugins } from '@capacitor/core';
+//const { Geolocation } = Plugins;
 import { UserPage } from '../common/user/user.page';
 
 @Component({
@@ -14,7 +16,6 @@ import { UserPage } from '../common/user/user.page';
 export class ShakePage implements OnInit {
 
     watch;
-
     userName: any;
 
     async close(){
@@ -38,8 +39,6 @@ export class ShakePage implements OnInit {
         if (this.reddah.isMobile()) {
             this.watch = this.shake.startWatch(60).subscribe(() => {
                 this.shakeAni();
-                this.audio.src = 'assets/sound/shake.mp3'; 
-                this.audio.play();
             });
         }
     }
@@ -56,6 +55,9 @@ export class ShakePage implements OnInit {
         this.showShakebg = false;
         this.showAnimetebg = true;
 
+        this.audio.src = 'assets/sound/shake.mp3'; 
+        this.audio.play();
+        
         this.shakeUser();
 
         setTimeout(() => {

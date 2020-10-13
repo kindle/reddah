@@ -139,7 +139,7 @@ export class AddFeedbackPage implements OnInit {
         const loading = await this.loadingController.create({
             cssClass: 'my-custom-class',
             spinner: null,
-            duration: 5000,
+            duration: 30000,
             message: `<div class='bar-box'>${this.reddah.getLoadingEffect()}
             <div class='bar-text'>${this.reddah.instant("Article.Loading")}</div>
             </div>`,
