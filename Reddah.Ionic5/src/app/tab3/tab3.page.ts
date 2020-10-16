@@ -64,7 +64,9 @@ export class Tab3Page implements OnInit {
   loadmap() {
 
       this.markerGroup = L.featureGroup();
-      this.map = L.map("earth", {attributionControl: false}).fitWorld();
+      if(this.map==null){
+        this.map = L.map("earth", {attributionControl: false}).fitWorld();
+      }
 
       L.tileLayer(this.tileUrl, this.tileOptions).addTo(this.map);
   }

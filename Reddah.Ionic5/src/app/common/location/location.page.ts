@@ -63,6 +63,9 @@ export class LocationPage  implements OnInit {
             }
             
         }
+        else{
+            this.inChina = false;
+        }
     }
 
     extend(){
@@ -103,10 +106,12 @@ export class LocationPage  implements OnInit {
     loadmap() {
 
         this.markerGroup = L.featureGroup();
-        this.map = L.map("map", {attributionControl: false}).fitWorld();
-
+        if(this.map==null){
+            this.map = L.map("map", {attributionControl: false}).fitWorld();
+        }
+        
         if(this.inChina){
-            //need to adjust location
+            //need to adjust lat/lng
             this.extend()
             L.tileLayer.webdogTileLayer(this.tileUrl, this.tileOptions).addTo(this.map);
         }
@@ -148,9 +153,10 @@ export class LocationPage  implements OnInit {
                     this.markerGroup.addLayer(marker);
                     this.map.addLayer(this.markerGroup);
 
-                    this.reddah.getNearby(elatitude, elongitude).subscribe(data=>{
+                    /*this.reddah.getNearby(elatitude, elongitude).subscribe(data=>{
                         this.locations = data._body.result.pois;
-                    });  
+                    });  */
+                    this.map.setView([elatitude, elongitude], 6);
                 }
 
             }).catch( e => {

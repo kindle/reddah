@@ -1,0 +1,18 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-text>{{ reddah.instant('About.Card') }}</ion-text>
+    <!--<ion-icon name="ellipsis-horizontal"slot="end" (click)="presentActionSheet()"></ion-icon>-->
+</ion-item>
+<ion-content no-padding>
+    <ion-card *ngIf="createdCode" style="text-align:center;">
+        
+        <qr-code [value]="createdCode" size="300" errorCorrectionLevel="M"></qr-code>
+        <!--<ngx-qrcode qrc-element-type="img" [qrc-value]="createdCode" qrc-class="qrsize"></ngx-qrcode>
+        -->
+        <ion-card-content style="text-align:center;">
+            <span>{{ reddah.instant('Common.ScanToAdd') }}</span>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

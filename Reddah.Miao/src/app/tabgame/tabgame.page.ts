@@ -17,6 +17,7 @@ import { GameSnakePage } from '../games/snake/snake.page';
 import { GameConnectPage } from '../games/connect/connect.page';
 import { GameRememberPage } from '../games/remember/remember.page';
 import { GameCubePage } from '../games/cube/cube.page';
+import { GameSudo2Page } from '../games/sudo2/sudo2.page';
 
 @Component({
   selector: 'app-tabgame',
@@ -107,6 +108,19 @@ const scanModal = await this.modalController.create({
 });
 
 await scanModal.present();
+} 
+
+async gameSudo2(task){
+    //window["reddahApi"].Task = task;
+    const scanModal = await this.modalController.create({
+        component: GameSudo2Page,
+        componentProps: { },
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
+    
+    await scanModal.present();
 } 
 
   ngOnInit(){

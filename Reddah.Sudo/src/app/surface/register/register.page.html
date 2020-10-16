@@ -1,0 +1,82 @@
+<ion-item color="light" no-padding lines="none">
+    <ion-icon slot="end" name="close-outline" (click)="close()" class="backbutton"></ion-icon>
+</ion-item>
+<ion-content style="background-color: white;">
+    <ion-item lines="none" class="sectionGapTop inputItem gapBottom" no-padding>
+        <h2 class="title">{{ reddah.instant('Register.Title') }}</h2>
+    </ion-item>
+
+    <ion-item lines="none" class="sectionGapTop gapBottom inputItem" no-padding *ngIf="errorMessage.length>0">
+        <ion-text color="danger">
+            {{errorMessage}}
+        </ion-text>
+    </ion-item>
+
+    <ion-item class="sectionGapTop gapBottom inputItem">
+        <ion-icon name="checkmark-circle-outline" color="primary" *ngIf="!checkFlagUserName&&checkFlagUserNamePass" style="margin-right:5px;"></ion-icon>
+        <ion-spinner name="dots" *ngIf="checkFlagUserName" style="margin-right:5px;"></ion-spinner>
+        <ion-input type="text" style="text-transform: initial;" placeholder="{{ reddah.instant('Input.UserName') }}" 
+        [(ngModel)]="username" clearInput (ionBlur)="checkUserName()" (ionFocus)="focusUserName()"></ion-input>
+        <ion-icon slot="end" name="refresh-circle-outline" color="primary" (click)="generateUserName()"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="{{password==''?'':'none'}}" class="gapBottom inputItem" no-padding>
+        <ion-input type="password" style="text-transform: initial;" placeholder="{{ reddah.instant('Input.Password') }}" 
+            [(ngModel)]="password" clearInput (keyup)="testPwStrength()"></ion-input>
+    </ion-item>
+    <ion-item class="inputItem item-small" style="margin-top:0;margin-bottom:0;"
+        no-padding lines="none" *ngIf="password!=''">
+        <div *ngIf="strength=='orange'||strength=='blue'||strength=='green'"
+        [class.pw-weak]="strength=='orange'"
+        [class.pw-medium]="strength=='blue'"
+        [class.pw-strong]="strength=='green'"></div>
+        <div *ngIf="strength=='blue'||strength=='green'" style="margin-left:3px;"
+        [class.pw-medium]="strength=='blue'"
+        [class.pw-strong]="strength=='green'"></div>
+        <div *ngIf="strength=='green'" style="margin-left:3px;"
+        [class.pw-strong]="strength=='green'"></div>
+    </ion-item>
+
+    <ion-item class="gapBottom inputItem" no-padding>
+        <ion-input type="password" style="text-transform: initial;" placeholder="{{ reddah.instant('Input.ConfirmPassword') }}" 
+        [(ngModel)]="confirmpassword" clearInput (ionBlur)="checkConfirmPassword()"></ion-input>
+    </ion-item>
+
+    <ion-item class="gapBottom inputItem" no-padding>
+        <ion-input type="text" style="text-transform: initial;" placeholder="{{ reddah.instant('Input.Email') }}" 
+        [(ngModel)]="email" clearInput (ionBlur)="checkEmail()"></ion-input>
+    </ion-item>
+    
+    <ion-item lines="none" class="gapBottom inputItem">
+        <ion-checkbox [(ngModel)]="agreed"></ion-checkbox>
+        <ion-text style="margin-left:10px;">
+            {{ reddah.instant('Register.ReadAgree') }}
+        </ion-text>
+    </ion-item>
+    
+    <ion-item lines="none" class="inputItem">
+        <ion-note text-wrap color="dark">
+            <span class="policy" (click)="browse('useragreement')">{{ reddah.instant('Register.UserAgreement') }}</span>
+            <span class="policy" (click)="browse('privacypolicy')">{{ reddah.instant('Register.Privacy') }}</span>
+            {{ reddah.instant('Register.And') }}
+            <span class="policy" (click)="browse('contentpolicy')">{{ reddah.instant('Register.Content') }}</span>
+        </ion-note>
+    </ion-item>
+
+    <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="register()"
+     expand="block" [disabled]="checkRegister()">{{ reddah.instant('Button.Register') }}</ion-button>
+    
+     <ion-button class="buttonGapTop gapBottom inputItem"  size="large" expand="block" style="text-transform: capitalize;"
+        (click)="reddah.openAppleSignIn()" *ngIf="showSigninWithApple">
+        <ion-icon name="logo-apple" size="small" slot="start"></ion-icon>
+        {{reddah.instant('Surface.SignInApple')}}
+    </ion-button>
+
+</ion-content>
+<div class="footer">
+    <div class="conductArea">
+        <p class="copyright">
+            reddah.com<br>
+        </p>
+    </div>
+</div>

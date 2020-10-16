@@ -1,0 +1,74 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-label>{{reddah.instant('Menu.ActiveUsers')}}</ion-label>
+    <!--{{ reddah.instant('Menu.Mark') }}-->
+</ion-item>
+<ion-content #pageTop class="common-content">
+    
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content refreshingSpinner="bubbles">
+        </ion-refresher-content>
+    </ion-refresher>
+    <!--
+    <ion-list>
+        <ion-item *ngFor="let activeUserName of activeUsers" (click)="goUser(activeUserName)">
+          <ion-avatar slot="start" style="margin-bottom:auto;margin-top:10px;">
+            <img src="{{reddah.appData('userphoto_'+activeUserName)}}"
+            style="border-radius: 5px;">
+          </ion-avatar>
+          <ion-label>
+            <div style="display: flex;padding:0 0 5px 0;">
+                <ion-label class="user-name">{{reddah.getDisplayName(activeUserName, 100)}}</ion-label>
+                <ion-icon class="cmd-title" name="male-outline" size="small" *ngIf="reddah.appData('usersex_'+activeUserName)==1" color="diamond"></ion-icon>
+                <ion-icon class="cmd-title" name="female-outline" size="small" *ngIf="reddah.appData('usersex_'+activeUserName)==0" color="danger"></ion-icon>
+            </div>
+            <div style="display: flex;padding:0 0 5px 0;" *ngIf="reddah.appData('userlan_'+activeUserName)">
+                {{reddah.getUserLan(activeUserName)}}
+            </div>
+            <p *ngIf="reddah.appData('usersignature_'+activeUserName)">{{reddah.appData('usersignature_'+activeUserName)}}</p>
+            <p *ngIf="!reddah.appData('usersignature_'+activeUserName)">{{ reddah.instant('About.DefaultSignature')}}</p>
+          </ion-label>
+        </ion-item>
+
+    </ion-list>-->
+    <section class="section">
+        <div class="main-container">
+            <div class="section__content teamy-team">
+                <article *ngFor="let activeUserName of getPhotoActiveUsers();index as i" 
+                    [class.teamy_style1]="i%4==0" 
+                    [class.teamy_mask-circle]="i%4==0"
+                    [class.teamy_style2]="i%4==1" 
+                    [class.teamy_mask-triangle]="i%4==1"
+                    [class.teamy_style3]="i%4==2" 
+                    [class.teamy_mask-circle]="i%4==2"
+                    [class.teamy_style4]="i%4==3" 
+                    [class.teamy_mask-triangle]="i%4==3"
+                    class="teamy">
+                    <div class="teamy__layout">
+                        <div class="teamy__preview">
+                            <img src="{{reddah.appData('userphoto_'+activeUserName)}}" class="teamy__avatar" alt="The demo photo">
+                        </div>
+                        <div class="teamy__back">
+                            <div class="teamy__back-inner">
+                                <a class="social" (click)="goUser(activeUserName)">
+                                    <ion-icon name="add-outline"></ion-icon>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teamy__content">
+                        <h3 class="teamy__name">{{reddah.getDisplayName(activeUserName, 100)}}</h3>
+                        <span class="teamy__post">{{reddah.getUserLan(activeUserName)}}</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ reddah.instant('Button.Loading') }}">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

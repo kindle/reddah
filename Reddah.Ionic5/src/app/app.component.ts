@@ -120,7 +120,6 @@ export class AppComponent {
           { 
               this.globalization.getPreferredLanguage()
               .then(res => {
-                  //alert(res.value);
                   if(this.reddah.Locales.filter(l=>l.Name==res.value).length>0)
                   {
                     this.localStorageService.store("Reddah_Locale", res.value);

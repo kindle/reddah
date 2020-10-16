@@ -1,0 +1,46 @@
+<app-header htitle="Menu.Contact"></app-header>
+<ion-content #pageTop>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content refreshingSpinner="bubbles">
+        </ion-refresher-content>
+    </ion-refresher>
+    
+    <ion-item lines="none" class="borderTop borderBottom" (click)="viewNewFriends()">
+        <ion-icon class="msg" src="/assets/icon/person-add.svg" slot="start" color="primary" size="large"></ion-icon>
+        <ion-label style="margin-left:10px;">{{ reddah.instant('Menu.NewFriends') }}</ion-label>
+        <ion-badge slot="end" color="danger" *ngIf="requestCount>0">{{requestCount}}</ion-badge>
+    </ion-item>
+    <!--
+    <ion-item (click)="mystic()">
+        <ion-icon name="logo-octocat" slot="start" color="tertiary" class="portrait mysticChat"></ion-icon>
+        <ion-label style="margin-left:10px;">{{ reddah.instant('Menu.Mystic') }}</ion-label>
+    </ion-item>-->
+    
+    <ion-list style="padding-top:0 !important;">
+        <ion-item-group *ngFor="let group of groupedContacts" lines="none">
+            <ion-item-divider color="light" lines="none">{{group.letter.toUpperCase()}}</ion-item-divider>
+            <ion-item lines="{{isLast?'none':''}}" *ngFor="let contact of group.contacts;last as isLast" (click)="goUser(contact.Watch)">
+                <ion-avatar slot="start" class="contactUserPhoto">
+                    <img src="{{reddah.appData('userphoto_'+contact.Watch)}}" class="contactPortrait"
+                    onerror="this.src='assets/icon/anonymous.png';">
+                </ion-avatar>
+                <ion-label style="margin-left:10px;">
+                    <div style="display: flex;padding:0 0 5px 0;">
+                        <ion-label class="user-name">{{reddah.getDisplayName(contact.Watch, 100)}}</ion-label>
+                        <ion-icon class="cmd-title" name="male-outline" size="small" *ngIf="reddah.appData('usersex_'+contact.Watch)==1" color="diamond"></ion-icon>
+                        <ion-icon class="cmd-title" name="female-outline" size="small" *ngIf="reddah.appData('usersex_'+contact.Watch)==0" color="danger"></ion-icon>
+                    </div>
+                    <div style="display: flex;padding:0 0 5px 0;">
+                        <ion-icon *ngFor="let i of reddah.userLevelIconNumber(contact.Watch)" name="{{reddah.userLevelIcon(contact.Watch)}}" color="{{reddah.userLevelIconColor(contact.Watch)}}" size="small"></ion-icon>
+                        <span style="margin-left:5px;" *ngIf="reddah.appData('usernickname_'+contact.Watch)">
+                            {{ reddah.appData('userpoint_'+contact.Watch) }} {{ reddah.userLevel(contact.Watch) }}
+                        </span>
+                    </div>
+                    <div style="display: flex;white-space: pre-line;">
+                        {{contact.Signature}}
+                    </div>
+                </ion-label>
+            </ion-item>
+        </ion-item-group>
+    </ion-list>
+</ion-content>

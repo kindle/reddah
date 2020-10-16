@@ -1,0 +1,38 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title style="padding-left:0px;">{{ reddah.instant('Common.Font') }}</ion-title>
+</ion-item>
+<ion-content no-padding class="common-content">
+    <ion-grid *ngFor="let comment of messages">
+        <ion-row>
+            <ion-col no-padding>
+                <div class="container-right" *ngIf="userName==comment.UserName">
+                    <img src="{{reddah.appData('userphoto_'+comment.UserName)}}" class="portrait"
+                    onerror="this.src='assets/icon/anonymous.png';">
+                    <div class="arrow-box-right" *ngIf="comment.Type<2">
+                        <div class="chat-box-me" color="dark" *ngIf="comment.Type==0" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                        <div class="chat-arrow-right" style="flex:auto 0;"></div>
+                    </div>
+                </div>
+                <div class="container-left" *ngIf="userName!=comment.UserName">
+                    <img src="{{reddah.appData('userphoto_'+comment.UserName)}}" class="portrait"
+                    onerror="this.src='assets/icon/anonymous.png';">
+                    <div style="display: flex;margin-left:5px;">
+                        <div class="chat-arrow-left" style="flex:0 auto;" *ngIf="comment.Type<2"></div>
+                        <div class="chat-box-others" color="dark" *ngIf="comment.Type==0" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    
+    <div style="bottom:0;position:absolute;width:100%;background-color:var(--ion-color-light);">
+        <ion-range min="1" max="10" step="1" [(ngModel)]="fontSize" snaps="true" tick="true"
+        color="primary" (ionChange)="changeFontSize()">
+            <ion-text color="dark" slot="start" style="font-size:16px;" margin-end>A</ion-text>
+            <ion-text color="dark" slot="end" style="font-size:34px;" margin-start>A</ion-text>
+        </ion-range>
+    </div>
+</ion-content>

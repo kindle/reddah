@@ -1,0 +1,16 @@
+.articleTitle {
+    display: block;
+}
+
+.articleFooterTime, .articleFooter{
+    color: var(--ion-color-dark);
+}
+
+[text-wrap]{
+    font-size: var(--ion-font-size);
+}
+
+.welcome-card-history{
+    margin-top:20px;
+    --background: var(--ion-color-light);
+}

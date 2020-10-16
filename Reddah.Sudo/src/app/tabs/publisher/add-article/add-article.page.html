@@ -1,0 +1,46 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-button color="success" slot="end" (click)="preview()" *ngIf="article&&!isAdminEdit()">
+        {{ reddah.instant('Common.Test') }}
+    </ion-button>
+    <ion-button color="success" slot="end" (click)="publish()" *ngIf="article&&!isAdminEdit()">
+        {{ reddah.instant('Common.Publish') }}
+    </ion-button>
+    <ion-button color="success" slot="end" (click)="save()">
+        {{ reddah.instant('Common.Save') }}
+    </ion-button>
+</ion-item>
+<ion-content>
+    <ion-item lines="none" class="gapItem">
+        <ion-textarea style="border-bottom: 1px solid gray;" 
+        autoresize [(ngModel)]="title" cols="20" 
+        placeholder="{{ reddah.instant('Input.Name') }}..."></ion-textarea>
+    </ion-item>
+    <ion-item lines="none" no-padding>
+        <ckeditor style="width:100%;" [editor]="Editor"
+            [(ngModel)]="content"
+            debounce="500"
+            [config]="config">
+        </ckeditor> 
+    </ion-item>
+    <ion-item lines="none" class="gapItem">
+        <ion-textarea style="border-bottom: 1px solid gray;" 
+        autoresize [(ngModel)]="groupName" cols="20" 
+        placeholder="{{ reddah.instant('Common.Label') }}... L1,L2,L3 e.g."></ion-textarea>
+    </ion-item>
+    <!--
+    <ion-item lines="none">    
+        <ion-button class="buttonGapTop gapBottom inputItem" slot="start" color="secondary" (click)="SelectPhoto()">
+            {{ reddah.instant('Common.MyPhoto') }}
+        </ion-button>
+    </ion-item>-->
+
+</ion-content>
+
+<ion-fab *ngIf="reddah.isMobile()" vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom:15px;margin-right:15px;">
+    <ion-fab-button (click)="addImage()">
+        <ion-icon name="image-outline"></ion-icon>
+    </ion-fab-button>
+</ion-fab>

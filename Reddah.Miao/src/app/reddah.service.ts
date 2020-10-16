@@ -3938,6 +3938,14 @@ export class ReddahService {
     isMobile(){
         return Capacitor.platform=="android"||Capacitor.platform=="ios";
     }
+    
+    isAndroid(){
+        return Capacitor.platform=="android";
+    }
+
+    isIos(){
+        return Capacitor.platform=="ios";
+    }
 
     likeTopic(article, cacheKey, collection){
         let userName = this.getCurrentUser()

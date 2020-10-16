@@ -11,7 +11,7 @@
     <ion-tab-button (click)="openEarth()" *ngIf="reddah.isAndroid()">
       <ion-icon name="earth" class="earth"></ion-icon>
     </ion-tab-button>
-    <ion-tab-button tab="tab3" *ngIf="reddah.isIos()">
+    <ion-tab-button tab="tab3" *ngIf="!reddah.isAndroid()">
       <ion-icon name="earth" class="earth"></ion-icon>
     </ion-tab-button>
 

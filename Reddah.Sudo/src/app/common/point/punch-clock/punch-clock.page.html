@@ -1,0 +1,68 @@
+<ion-content color="primary">
+    <div class="bg1">
+        {{ reddah.instant('Point.PunchClock') }}
+    </div>
+    <div class="bg2">
+        T
+    </div>
+
+    <ion-item lines="none" color="transparent" class="title" style="--background:transparent;">
+        <ion-card-title style="font-size: large;font-weight: bold;color:white;">{{ reddah.instant('Point.PunchClock') }}</ion-card-title>
+        <ion-button clear slot="end" color="transparent" (click)="close()" style="--box-shadow: none;">
+            <ion-icon is-active="false" name="close-outline"></ion-icon>
+        </ion-button> 
+    </ion-item>
+
+    <ion-card>
+        <ion-card-header color="transparent">
+            <ion-item lines="none" color="primary" style="--background:transparent;">
+                <ion-icon name="checkmark-circle-outline" color="light" size="large"></ion-icon>
+                <ion-card-subtitle style="color:#fff;text-align: center;margin-left:5px;">
+                    <p *ngIf="punchClockLoading">{{ reddah.instant('Point.PunchLoading') }}</p>
+                    <p *ngIf="!punchClockLoading">{{ reddah.instant('Point.PunchResult') }}</p>
+                </ion-card-subtitle>
+            </ion-item>
+            <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;" *ngIf="punchClockLoading">
+                <ion-spinner name="dots"></ion-spinner>
+            </ion-card-title>
+            <ion-card-title style="color:#fff;font-size: -webkit-xxx-large;text-align: center;" *ngIf="!punchClockLoading">
+                +{{pointPunchToday}}
+            </ion-card-title>
+            <ion-card-content style="color:#fff;text-align: center;">
+            </ion-card-content>
+        </ion-card-header>
+    </ion-card>
+
+    <ion-card style="color:#fff;">
+        <ion-item lines="none" color="transparent" class="title">
+            <ion-label color="dark" style="font-size: large;font-weight: bold;">
+             {{reddah.instant('Point.PunchClockTitle')}} ({{select_month}})
+            </ion-label>
+        </ion-item>
+        <div class="app-common-bg">
+            <div class="calendar-table-item" ></div>
+            <div class="calendar-table-item" ></div>
+            <div class="calendar-table-item" ></div>
+            <div class="calendar-table-item" ></div>
+            <div class="calendar-table-item" ></div>
+            <div class="calendar-table-item" ></div>
+            <div class="calendar-table-item" ></div>
+            <div color="dark" class="calendar-table-riqi" *ngFor="let day of days" 
+                [ngClass]="{'currentDay':punchedDays.includes(day.day)}" (click)="change_day(day.day)">
+                <div style="justify-content: center;align-items: center;
+                    font-size: 15px;border: 1px solid white;
+                    border-radius: 5px;
+                    text-align: -webkit-center;
+                    padding: 4px" 
+                    [ngClass]="{'choosedDay':punchedDays.includes(day.day)}">
+                    <div *ngIf="!punchedDays.includes(day.day)" style="color:var(--ion-color-dark);width:fit-content;">{{day.day}}</div>
+                    <div *ngIf="punchedDays.includes(day.day)" style="color:#000;width:fit-content;">{{day.day}}</div>
+                    <div *ngIf="punchedDays.includes(day.day)">
+                        <ion-icon color="success" name="checkmark-circle-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-card>
+    
+</ion-content>

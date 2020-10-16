@@ -1,0 +1,98 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-label>{{ reddah.instant('About.Account') }}</ion-label>
+</ion-item>
+<ion-content #pageTop no-padding class="common-content">
+    
+    <ion-item (click)="changePhoto()" class="borderTop borderItem">
+        <ion-label class="title">{{ reddah.instant('About.Photo') }}</ion-label>
+        <ion-thumbnail slot="end" style="padding:10px;margin-right:-10px;">
+            <img src="{{reddah.appData('userphoto_'+targetSub.UserName, 'photo.svg')}}" class="portrait">
+        </ion-thumbnail>
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" class="borderBottom borderItem"  (click)="changeNickName()">
+        <ion-label class="title">{{ reddah.instant('Input.Name') }}</ion-label>
+        <ion-note color="dark" slot="end">{{reddah.appData('usernickname_'+targetSub.UserName)}}</ion-note>
+        <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+    </ion-item>
+        <!--
+        <ion-item>
+            <ion-label class="title">Reddah ID</ion-label>
+            <ion-note slot="end" class="reddahId">{{targetSub.UserName}}</ion-note>
+        </ion-item>
+        <ion-item lines="none" (click)="myQrCard()" class="borderItem borderBottom">
+            <ion-label class="title">二维码名片</ion-label>
+            <ion-icon name="ios-qr-scanner" slot="end"></ion-icon>
+            <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+        </ion-item>
+        -->
+    
+    <ion-item lines="none" class="common-splitter">
+    </ion-item>
+    <ion-item lines="none" class="borderTop borderItem" (click)="changeSignature()">
+        <ion-label class="title">{{ reddah.instant('Input.Description') }}</ion-label>
+    </ion-item>
+    <ion-item lines="none" class="borderItem borderBottom" (click)="changeSignature()">
+        <ion-note slot="start" color="dark" text-wrap>{{reddah.appData('usersignature_'+targetSub.UserName)}}</ion-note>
+        <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none" class="common-splitter" *ngIf="targetSub.Type==3">
+    </ion-item>
+    <div *ngIf="targetSub.Type==3">
+        <ion-item lines="none" (click)="SelectPhoto()" class="borderTop borderBottom">
+            <ion-icon slot="start" name="images" color="subscribe" size="medium"></ion-icon>
+            <ion-label>{{ reddah.instant('Common.MyPhoto') }}</ion-label>
+            <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+        </ion-item>
+    </div>
+
+    <ion-item lines="none" class="common-splitter" *ngIf="targetSub.Type==1">
+    </ion-item>
+    <div *ngIf="targetSub.Type==1">
+        <ion-item lines="none" (click)="addArticle()" class="borderTop borderBottom">
+            <ion-icon slot="start" name="add" color="subscribe" size="medium"></ion-icon>
+            <ion-label>{{ reddah.instant('Common.Draft') }}</ion-label>
+            <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+        </ion-item>
+    </div>
+
+    <ion-item lines="none" class="common-splitter" *ngIf="targetSub.Type==1">
+    </ion-item>
+    <div *ngIf="targetSub.Type==1">
+        <div style="display: flex; justify-content: center;"><ion-spinner name="dots" 
+            *ngIf="showLoading"></ion-spinner></div>
+        <ion-item *ngFor="let article of articles;index as i" lines="none" (click)="editArticle(article)" class="borderTop borderItem borderBottom">
+            <ion-icon slot="start" name="clipboard-outline" color="dark" size="medium"></ion-icon>
+            <ion-label>{{i+1}} {{reddah.htmlDecode(article.Title)}}</ion-label>
+            <ion-note slot="end">{{reddah.getSendTime(article.LastUpdateOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
+            <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+        </ion-item>
+    </div>
+    
+    <ion-item lines="none" class="common-splitter" *ngIf="targetSub.Type==3">
+    </ion-item>
+    <div *ngIf="targetSub.Type==3">
+        <ion-item lines="none" (click)="addMini()" class="borderTop borderBottom" *ngIf="!showLoading&&articles&&articles.length==0">
+            <ion-icon slot="start" name="add"color="mini" size="medium"></ion-icon>
+            <ion-label>{{ reddah.instant('Common.Draft') }}</ion-label>
+            <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+        </ion-item>
+        <div style="display: flex; justify-content: center;"><ion-spinner name="dots" 
+            *ngIf="showLoading"></ion-spinner></div>
+        <ion-item *ngFor="let article of articles" lines="none" (click)="editMini(article)" class="borderTop borderItem borderBottom">
+            <ion-icon slot="start" name="code-working"color="mini" size="medium"></ion-icon>
+            <ion-label>{{ reddah.instant('Common.Draft') }}</ion-label>
+            <ion-note slot="end">{{reddah.getSendTime(article.LastUpdateOn| date: 'yyyy-MM-dd HH:mm:ss')}}</ion-note>
+            <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+        </ion-item>
+    </div>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content refreshingSpinner="bubbles">
+        </ion-refresher-content>
+    </ion-refresher>
+</ion-content>

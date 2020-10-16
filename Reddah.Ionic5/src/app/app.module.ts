@@ -191,6 +191,7 @@ import { MapHWPage } from './maphw/maphw.page';
 import { ReadPage } from './common/read/read.page';
 import { LocationHWPage } from './common/locationhw/locationhw.page';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { GameSudokuPage } from './games/sudoku/sudoku.page';
 
 
 
@@ -275,6 +276,7 @@ var firebaseConfig = {
     SettingNickNamePage,SettingSignaturePage,SettingSexPage,
     PlatformPage,
     CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
+    GameSudokuPage,
 ],
 entryComponents: [
     TopicPage,ReadPage,
@@ -332,6 +334,7 @@ entryComponents: [
     SettingNickNamePage,SettingSignaturePage,SettingSexPage,
     PlatformPage,
     CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
+    GameSudokuPage,
 ],
 schemas: [CUSTOM_ELEMENTS_SCHEMA],
 imports: [

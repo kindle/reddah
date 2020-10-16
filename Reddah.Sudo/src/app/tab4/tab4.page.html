@@ -1,0 +1,102 @@
+<ion-item style="--background:rgb(254,237,238)" lines="none" *ngIf="!reddah.networkConnected">
+  <ion-icon slot="start" name="wifi"color="medium"></ion-icon>
+  <ion-label color="medium">{{ reddah.instant('Input.Error.NetworkError') }}</ion-label>
+</ion-item>
+<ion-content no-padding class="common-content">
+  <ion-item lines="none" class="no-padding-end">
+      <ion-button clear slot="end" color="transparent" (click)="punchClock()" style="--box-shadow: none;">
+          <ion-icon color="primary" is-active="false" name="today-outline"></ion-icon>
+      </ion-button>
+      <ion-button clear slot="end" color="transparent" (click)="goPost(1)" style="--box-shadow: none;">
+          <ion-icon color="dark" is-active="false" name="camera-outline"></ion-icon>
+      </ion-button>
+  </ion-item>
+  <ion-item lines="none" style="--background:var(--ion-color-white);height:10px;">
+  </ion-item>
+  <ion-item lines="none" class="borderBottom" (click)="myInfo()">
+      <ion-thumbnail style="padding: 5px;">
+        <img src="{{reddah.appData('userphoto_'+userName)}}" class="portrait"
+          onerror="this.src='assets/icon/anonymous.png';">
+      </ion-thumbnail>
+      <ion-label style="margin-left:15px;">
+          <div style="display: flex;padding:0 0 5px 0;">
+              <ion-label class="user-name">{{reddah.getDisplayName(userName, 100)}}</ion-label>
+              <ion-icon class="cmd-title" name="male-outline" size="small" *ngIf="reddah.appData('usersex_'+userName)==1" color="primary"></ion-icon>
+              <ion-icon class="cmd-title" name="female-outline" size="small" *ngIf="reddah.appData('usersex_'+userName)==0" color="danger"></ion-icon>
+          </div>
+          <div style="display: flex;margin-top:5px;">
+              <ion-icon (click)="goCredit($event)" *ngFor="let i of reddah.userLevelIconNumber(userName)" name="{{reddah.userLevelIcon(userName)}}" color="{{reddah.userLevelIconColor(userName)}}" size="small"></ion-icon>
+              <span (click)="goCredit($event)" style="color: gray;margin-left:5px;vertical-align: top;line-height: 18px;">
+                  {{ reddah.appData('userpoint_'+userName) }} {{ reddah.userLevel(userName) }}
+              </span>
+          </div>
+      </ion-label>
+      <ion-icon name="qr-code-outline" slot="end"></ion-icon>
+      <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+  </ion-item>
+  
+  <ion-item lines="none" class="common-splitter">
+  </ion-item>
+
+  <ion-item class="borderTop" (click)="goAccount()">
+    <ion-icon class="menuIcon" slot="start" name="shield-checkmark-outline" color="success" size="medium"></ion-icon>
+    <ion-label color="dark">{{ reddah.instant('About.Account') }}</ion-label>
+    <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+  </ion-item>
+
+    <ion-item (click)="goPrivacy()">
+        <ion-icon class="menuIcon" slot="start" name="key"color="medium" size="medium"></ion-icon>
+        <ion-label color="dark">{{ reddah.instant('About.Privacy') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item lines="none"  class="borderBottom" (click)="goGeneral()">
+        <ion-icon class="menuIcon" slot="start" name="settings-outline" color="primary" size="medium"></ion-icon>
+        <ion-label color="dark">{{ reddah.instant('About.General') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none" class="common-splitter">
+    </ion-item>
+
+    <ion-item class="borderTop" (click)="goMyTimeline()">
+        <ion-icon class="menuIcon" slot="start" name="image-outline" color="primary" size="medium"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.Timeline') }}</ion-label>
+        <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item (click)="goBookmark()">
+        <ion-icon class="menuIcon" slot="start" name="bookmark" color="danger" size="medium"></ion-icon>
+        <ion-label>{{ reddah.instant('Menu.Mark') }}</ion-label>
+        <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" class="borderBottom" (click)="goMyReport()">
+        <ion-icon class="menuIcon" slot="start" name="mail-outline" color="dark" size="medium"></ion-icon>
+        <ion-label>{{ reddah.instant('Common.MyFeedback') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+    </ion-item>
+  
+    <ion-item lines="none" class="common-splitter">
+  </ion-item>
+
+
+    <ion-item  class="borderTop" (click)="goNetwork()">
+        <ion-icon class="menuIcon" slot="start" name="git-network"color="dark" size="medium"></ion-icon>
+        <ion-label color="dark">{{ reddah.instant('About.Network') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" class="borderBottom" (click)="goAbout()">
+        <ion-icon class="menuIcon" slot="start" name="information-circle-outline"color="secondary" size="medium"></ion-icon>
+        <ion-label>{{ reddah.instant('About.About') }}</ion-label>
+        <ion-icon name="chevron-forward-outline"slot="end" size="small"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none" class="common-splitter">
+    </ion-item>
+    <ion-item lines="none" class="borderTop borderItem borderBottom" *ngIf="this.authService.authenticated()" (click)="logout()">
+        <ion-icon class="menuIcon" slot="start" name="log-out-outline"color="dark" size="medium"></ion-icon>
+        <ion-label>{{ reddah.instant('Button.Logout') }}</ion-label>
+        <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
+    </ion-item>
+
+</ion-content>
+
+

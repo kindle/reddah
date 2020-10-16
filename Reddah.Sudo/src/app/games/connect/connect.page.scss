@@ -1,0 +1,163 @@
+app-connect {
+    font-family: 'Source Sans Pro', 'Helvetica Neue';
+    font-size: 16px;
+    background: #000;
+    color: #fff;
+}
+app-connect.light {
+    background: #fff;
+    color: #111;
+}
+#gctoolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    line-height: 25px;
+    padding: 10px;
+    box-sizing: border-box;
+    -webkit-transition: 0.15s;
+    transition: 0.15s;
+    opacity: 0;
+    -webkit-animation: 3s toolbar ease-in-out;
+    animation: 3s toolbar ease-in-out;
+}
+#gctoolbar:hover {
+    opacity: 1;
+}
+
+@-webkit-keyframes toolbar {
+    0%, 50% {
+        opacity: 1
+    }
+}
+@keyframes toolbar {
+    0%, 50% {
+        opacity: 1
+    }
+}
+#gctheme {
+    float: left;
+}
+#gctoolbar span {
+    float: right;
+}
+#gctoolbar a {
+    color: inherit;
+    text-decoration: none;
+}
+#gcwin,
+#gcfinished {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    color: inherit;
+    z-index: 9999;
+    display: none;
+}
+#gcwin .text,
+#gcfinished .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 40px;
+    font-weight: 100;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+}
+app-connect.light #gcwin .text,
+app-connect.light #gcfinished .text {
+    color: #111!important;
+}
+div[class^="level"] {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 280px;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+    display: none;
+}
+div[class^="level"] .text {
+    font-size: 19px;
+    padding-top: 20px;
+    clear: both;
+    overflow: hidden;
+}
+div[class^="level"] .text span {
+    padding: 10px 0 0;
+    font-size: 15px;
+    display: block;
+}
+div[class^="level"] .text.center {
+    text-align: center;
+}
+div[class^="level"] .block {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    float: left;
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-transition: 0.15s ease-in-out;
+    transition: 0.15s ease-in-out;
+}
+div[class^="level"] .block.curve:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 70px;
+    background: url(/assets/game/curve.png) 50% 50% / contain no-repeat;
+    display: block;
+    content: '';
+}
+div[class^="level"] .block.curve.double:before {
+    background: url(/assets/game/curve-double.png) 50% 50% / contain no-repeat;
+}
+div[class^="level"] .block.straight:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 70px;
+    background: url(/assets/game/straight.png) 50% 50% / contain no-repeat;
+    display: block;
+    content: '';
+}
+div[class^="level"] .block.straight.double:before {
+    background: url(/assets/game/straight-double.png) 50% 50% / contain no-repeat;
+}
+div[class^="level"] .block.end:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 70px;
+    background: url(/assets/game/end.png) 50% 50% / contain no-repeat;
+    display: block;
+    content: '';
+}
+app-connect.light div[class^="level"] .block {
+    -webkit-filter: invert(1);
+    filter: invert(1);
+}
+div[class^="level"] .block.r1 {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+div[class^="level"] .block.r2 {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+div[class^="level"] .block.r3 {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+div[class^="level"] .block.r4 {
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+}

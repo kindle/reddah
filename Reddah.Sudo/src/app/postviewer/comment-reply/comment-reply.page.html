@@ -1,0 +1,69 @@
+<ion-item color="light" style="--padding-start:0;--inner-padding-end:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-label style="text-align: center;">{{ reddah.instant('Article.Comment') }}</ion-label>
+</ion-item>
+<ion-content padding [scrollEvents]="true" (ionScroll)="commentbox.onScroll($event)">
+    <ion-item lines="none" class="common-content-padding">
+        <ion-avatar slot="start" class="avatar-top">
+            <img src="{{reddah.appData('userphoto_'+comment.UserName)}}" class="portrait">
+        </ion-avatar>
+        <ion-label text-wrap>
+            <div class="user-name">{{reddah.getDisplayName(comment.UserName)}}</div>
+            <span>{{reddah.utcToLocal(comment.CreatedOn,"YY-MM-DD HH:mm")}}</span><br>
+            <div (click)="commentbox.addNewComment(comment.ArticleId, comment.Id, comment.UserName)" [innerHTML]="reddah.htmlDecode(comment.Content) | safe: 'html'"></div>
+        </ion-label>
+    </ion-item>
+
+    <ion-item lines="none" color="light" style="--padding-start:0;">
+        <ion-button clear icon-start color="transparent" (click)="goback()" style="--box-shadow: none;">
+            <ion-icon color="dark" is-active="false" name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <ion-label>
+            {{ reddah.instant('Article.Comment') }} {{reddah.shortCount(allRepliesCount)}}
+        </ion-label>
+        <!-- [interfaceOptions]="customPopoverOptions" interface="popover" -->
+        <ion-select value="latest" (ionChange)="sortComment(commentSortType.value)" 
+        cancelText="{{ reddah.instant('Confirm.Cancel') }}" okText="{{ reddah.instant('Confirm.Yes') }}" #commentSortType>
+            <ion-select-option value="latest">{{ reddah.instant('Confirm.ByLatest') }}</ion-select-option>
+            <ion-select-option value="oldest">{{ reddah.instant('Confirm.ByEarly') }}</ion-select-option>
+            <ion-select-option value="mostlike">{{ reddah.instant('Confirm.ByLike') }}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <div *ngFor="let reply of comments">
+        <li *ngIf="childrenIds.includes(reply.Id)">
+            <ion-item lines="none" class="common-content-padding">
+                <ion-avatar slot="start" class="avatar-top" (click)="goUser(reply.UserName)">
+                    <img src="{{reddah.appData('userphoto_'+reply.UserName)}}" class="portrait">
+                </ion-avatar>
+                <ion-label text-wrap>
+                    <div style="display: flex;justify-content:space-between">
+                        <span class="user-name" (click)="goUser(reply.UserName)">{{reddah.getDisplayName(reply.UserName)}}</span>
+                        <ion-note *ngIf="canDelete(reply)" color="danger" slot="end" (click)="delete(reply)">
+                            [{{reddah.instant('Comment.Delete') }}]
+                        </ion-note>
+                        <div *ngIf="normal" style="display: flex;align-items: center;">
+                            <ion-icon name="paw-outline" *ngIf="!reply.like" color="warning" (click)="likeComment(reply)"></ion-icon>
+                            <ion-icon name="paw" *ngIf="reply.like" color="danger" (click)="likeComment(reply)"></ion-icon>
+                            <span color="dark" style="margin-left:2px;vertical-align: top;" *ngIf="reply.Up>0" (click)="likeComment(reply)">{{reply.Up}}</span>
+
+                            <ion-icon (click)="translate(reply)" class="action-margin" color="warning" 
+                                name="language-outline"></ion-icon>
+                        </div>
+                    </div>
+                    <span>{{reddah.utcToLocal(reply.CreatedOn,"YY-MM-DD HH:mm")}}</span>
+                    <div *ngIf="reply.ParentId!=comment.Id" style="background-color:#eeeeee;padding:5px;">
+                        <span class="user-name" (click)="goUser(GetUserNameByCommentId(comments,reply.ParentId))">{{reddah.getDisplayName(GetUserNameByCommentId(comments,reply.ParentId))}}</span> : <span [innerHTML]="reddah.htmlDecode(GetContentByCommentId(comments,reply.ParentId)) | safe: 'html'"></span>
+                    </div>
+                    <div (click)="commentbox.addNewComment(reply.ArticleId, reply.Id, reply.UserName)" [innerHTML]="reddah.htmlDecode(reply.Content) | safe: 'html'"></div>
+                    <hr style="border-top: 1px dashed var(--ion-color-medium);margin:5px 0;background:transparent;" *ngIf="reply.Translate==true">
+                    <div (click)="commentbox.addNewComment(reply.ArticleId, reply.Id, reply.UserName)" 
+                    [innerHTML]="reddah.htmlDecode(reply.TranslateContent) | safe: 'html'" *ngIf="reply.Translate==true"></div>
+                </ion-label>
+            </ion-item>
+        </li>
+    </div>
+</ion-content>
+<app-comment-box class="safe-area-bottom" #commentbox [(article)]="comment" selectedArticleId="{{comment.ArticleId}}" selectedCommentId="{{comment.Id}}"
+    (reloadComments)="childReloadComments($event)"></app-comment-box>

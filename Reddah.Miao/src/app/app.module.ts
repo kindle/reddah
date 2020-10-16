@@ -182,6 +182,7 @@ import { GameRememberPage } from './games/remember/remember.page';
 import { GameConnectPage } from './games/connect/connect.page';
 import { GameSnakePage } from './games/snake/snake.page';
 import { GameTrainPage } from './games/train/train.page';
+import { GameSudo2Page } from './games/sudo2/sudo2.page';
 
 
 @NgModule({
@@ -254,6 +255,7 @@ import { GameTrainPage } from './games/train/train.page';
     PlatformPage,
     CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
     GameCubePage,GameRememberPage,GameConnectPage,GameSnakePage,GameTrainPage,
+    GameSudo2Page,
 ],
 entryComponents: [
     TopicPage,ReadPage,
@@ -311,6 +313,7 @@ entryComponents: [
     PlatformPage,
     CategoryPage,RegisterSubPage,ManagePage,SubInfoPage,PubPage,AddArticlePage,MorePage,AddMiniPage,
     GameCubePage,GameRememberPage,GameConnectPage,GameSnakePage,GameTrainPage,
+    GameSudo2Page,
 ],
 schemas: [CUSTOM_ELEMENTS_SCHEMA],
 imports: [

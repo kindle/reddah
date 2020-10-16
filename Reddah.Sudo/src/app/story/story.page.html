@@ -1,0 +1,32 @@
+<ion-content style="background-color: white;">
+    <link href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/maker/leaflet.awesome-markers.css">
+    <script src="/assets/maker/leaflet.awesome-markers.js"></script>
+    <div id="earth" class="sticky"></div>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="bulb"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="start">
+            <ion-fab-button (click)="goMe()">
+                <ion-icon color="subscribe" name="locate-outline"></ion-icon>
+            </ion-fab-button><!--
+            <ion-fab-button (click)="close()">
+                <ion-icon color="dark" name="backspace"></ion-icon>
+            </ion-fab-button>-->
+        </ion-fab-list>
+        <ion-fab-list side="top">
+            <ion-fab-button (click)="refresh()">
+                <ion-icon color="dark" name="refresh"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button (click)="create()">
+                <ion-icon color="primary" name="add"></ion-icon>
+            </ion-fab-button>
+        </ion-fab-list>
+    </ion-fab>
+</ion-content>
+<ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="close()" color="light" mini>
+        <ion-icon name="close-outline"></ion-icon>
+    </ion-fab-button>
+</ion-fab>

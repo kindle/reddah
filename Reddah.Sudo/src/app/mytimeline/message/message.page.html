@@ -1,0 +1,37 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+    <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+        <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-text>{{ title==null?reddah.instant('Menu.Message'):title }}</ion-text>
+    <ion-text slot="end" (click)="clear()">{{ reddah.instant('Common.Clear') }}</ion-text>
+</ion-item>
+<ion-content no-padding>
+    <ion-item *ngFor="let message of messages" (click)="viewItem(message.ArticleId)">
+        <ion-avatar slot="start" class="messageUserPhoto">
+            <img src="{{reddah.appData('userphoto_'+message.From)}}" class="messagePortrait">
+        </ion-avatar>
+        <ion-label *ngIf="message.Type==0">
+            <h3 class="user-name">{{reddah.getDisplayName(message.From)}}</h3>
+            <h4>{{reddah.getSendTime(message.CreatedOn| date:'yyyy-MM-dd HH:mm:ss')}}</h4>
+        </ion-label>
+        <img slot="end" *ngIf="message.Type==0&&message.AritclePhoto"
+        src="{{reddah.level1Cache(message.AritclePhoto)}}" class="messageContentPortrait">
+
+        <ion-label *ngIf="message.Type>0">
+            <h3 class="user-name">{{reddah.getDisplayName(message.From)}}</h3>
+            <ion-icon name="paw" color="danger" class="likeIcon" *ngIf="message.Type==3"></ion-icon>
+            <ion-note *ngIf="message.Type==1">{{reddah.instant('Article.AtYou')}}</ion-note>
+            <ion-note *ngIf="message.Type==2">{{reddah.htmlDecode2(message.AritclePhoto)}}</ion-note>
+        </ion-label>
+        <div slot="end" *ngIf="message.Type>0">
+            <span>
+                {{reddah.getSendTime(message.CreatedOn| date:'yyyy-MM-dd HH:mm:ss')}}
+            </span>
+        </div>
+        
+    </ion-item>
+    <ion-item lines="none" (click)="showStoredMessage()" *ngIf="!showAll">
+        <ion-label style="text-align:center;" *ngIf="type==0">{{ reddah.instant('Search.More') }}...</ion-label>
+        <ion-label style="text-align:center;" *ngIf="type!=0">{{ reddah.instant('Article.History') }}</ion-label>
+    </ion-item>    
+</ion-content>

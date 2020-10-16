@@ -24,6 +24,7 @@ import { TimelinePopPage } from 'src/app/common/timeline-pop.page';
 import { ActiveUsersPage } from 'src/app/activeusers/activeusers.page';
 import { PublisherPage } from '../tabs/publisher/publisher.page';
 import { VideosPage } from '../videos/videos.page';
+import { GameSudokuPage } from '../games/sudoku/sudoku.page';
 
 @Component({
   selector: 'app-tab2',
@@ -515,18 +516,25 @@ export class Tab2Page implements OnInit {
 }
 
   async map(){
-      const modal = await this.modalController.create({
-          component: MapPage,
-          componentProps: {
-              //lat: this.config.lat,
-              //lng: this.config.lng
-          },
-          cssClass: "modal-fullscreen",
-          swipeToClose: true,
-          presentingElement: await this.modalController.getTop(),
-      });
-        
-      await modal.present();
+      if(this.reddah.isAndroid()){
+        const modal = await this.modalController.create({
+            component: MapPage,
+            componentProps: {
+                //lat: this.config.lat,
+                //lng: this.config.lng
+            },
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+
+        await modal.present();
+      }
+      else{
+        this.router.navigate(['/tabs/tab3'], {
+            queryParams: {}
+        });
+      }
   }
 
   @ViewChild('earthbox') earthbox;
@@ -547,6 +555,20 @@ export class Tab2Page implements OnInit {
         });
         
         await modal.present();
+  }
+
+  
+  async goGame(){
+    const modal = await this.modalController.create({
+          component: GameSudokuPage,
+          componentProps: { 
+          },
+          cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
+      });
+      
+      await modal.present();
   }
 
   async goMini(mini){

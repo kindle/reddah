@@ -1,0 +1,7 @@
+{
+  "name": "Reddah.Sudo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
