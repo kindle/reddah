@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Reddah.Sudoku</string>
+    <string name="title_activity_main">Reddah.Sudoku</string>
+    <string name="package_name">com.reddah.sudoku</string>
+    <string name="custom_url_scheme">com.reddah.sudoku</string>
+</resources>

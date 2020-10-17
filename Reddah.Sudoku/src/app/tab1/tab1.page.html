@@ -1,0 +1,141 @@
+<ion-content class="surface-bg">
+  <div class="all-wrap">
+      <div class="all">
+          <div class="yarn"></div>
+          <div class="cat-wrap">
+              <div class="cat">
+                  <div class="cat-upper">
+                      <div class="cat-leg"></div>
+                      <div class="cat-leg"></div>
+                      <div class="cat-head">
+                          <div class="cat-ears">
+                              <div class="cat-ear"></div>
+                              <div class="cat-ear"></div>
+                          </div>
+                          <div class="cat-face">
+                              <div class="cat-eyes"></div>
+                              <div class="cat-mouth"></div>
+                              <div class="cat-whiskers"></div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="cat-lower-wrap">
+                      <div class="cat-lower">
+                          <div class="cat-leg">
+                              <div class="cat-leg">
+                                  <div class="cat-leg">
+                                      <div class="cat-leg">
+                                          <div class="cat-leg">
+                                              <div class="cat-leg">
+                                                  <div class="cat-leg">
+                                                      <div class="cat-leg">
+                                                          <div class="cat-leg">
+                                                              <div class="cat-leg">
+                                                                  <div class="cat-leg">
+                                                                      <div class="cat-leg">
+                                                                          <div class="cat-leg">
+                                                                              <div class="cat-leg">
+                                                                                  <div class="cat-leg">
+                                                                                      <div class="cat-leg">
+                                                                                          <div class="cat-paw"></div>
+                                                                                      </div>
+                                                                                  </div>
+                                                                              </div>
+                                                                          </div>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="cat-leg">
+                              <div class="cat-leg">
+                                  <div class="cat-leg">
+                                      <div class="cat-leg">
+                                          <div class="cat-leg">
+                                              <div class="cat-leg">
+                                                  <div class="cat-leg">
+                                                      <div class="cat-leg">
+                                                          <div class="cat-leg">
+                                                              <div class="cat-leg">
+                                                                  <div class="cat-leg">
+                                                                      <div class="cat-leg">
+                                                                          <div class="cat-leg">
+                                                                              <div class="cat-leg">
+                                                                                  <div class="cat-leg">
+                                                                                      <div class="cat-leg">
+                                                                                          <div class="cat-paw"></div>
+                                                                                      </div>
+                                                                                  </div>
+                                                                              </div>
+                                                                          </div>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="cat-tail">
+                              <div class="cat-tail">
+                                  <div class="cat-tail">
+                                      <div class="cat-tail">
+                                          <div class="cat-tail">
+                                              <div class="cat-tail">
+                                                  <div class="cat-tail">
+                                                      <div class="cat-tail">
+                                                          <div class="cat-tail">
+                                                              <div class="cat-tail">
+                                                                  <div class="cat-tail">
+                                                                      <div class="cat-tail">
+                                                                          <div class="cat-tail">
+                                                                              <div class="cat-tail">
+                                                                                  <div class="cat-tail">
+                                                                                      <div class="cat-tail -end"></div>
+                                                                                  </div>
+                                                                              </div>
+                                                                          </div>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</ion-content>   
+
+<div class="surface-bottom-left">
+    <ion-icon class="surface-button" name="volume-high-outline" color="light" (click)="bgm()" *ngIf="playBgm"></ion-icon>
+    <ion-icon class="surface-button" name="volume-mute-outline" color="light" (click)="bgm()" *ngIf="!playBgm"></ion-icon>
+</div>
+<div class="surface-bottom-right">
+    <ion-icon class="surface-button surface-button-icon" name="earth" color="light" (click)="locale()"></ion-icon>
+    <ion-icon class="surface-button" name="chatbubble-ellipses" color="light" (click)="like()"></ion-icon>
+</div>
+
+<div class="surface-title-box">
+    <div (click)="goClassic()" class="surface-type-button blue surface-title-classic">经典模式</div>
+    <div (click)="goAdventure()" class="surface-type-button yellow surface-title-classic">数独大冒险</div>
+</div>

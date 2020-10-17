@@ -1,0 +1,107 @@
+<ion-content fullscreen>
+  <ion-slides [pager]="true">
+    <div class="parallax-bg" style="background-image:url(assets/icon/long.jpg);background-size: auto 100%;background-repeat: no-repeat;"></div>
+    <ion-slide *ngFor="let slide of slides">
+      <div class="slide">
+        <ol class="level-ol-box">
+          <li class="level-list__item" data-id="{{task.id}}" (click)="goTask(task)" *ngFor="let task of slide">
+            <span class="level-list__item__number">{{task.id}}</span> 
+            <span class="level-list__item__blurb">
+              <b style="color: rgb(255, 238, 0);" *ngFor="let i of [].constructor(task.mystar)">★</b>
+              <b style="color: gray;" *ngFor="let i of [].constructor(3-task.mystar)">☆</b>
+            </span>
+            <span class="level-list__item__check">✔</span>
+          </li>
+        </ol>
+        <!--
+        <h2>1</h2>
+        <p><b>昨夜西风凋碧树，独上高楼，望尽天涯路</b></p>
+        -->
+      </div>
+    </ion-slide>
+   <!-- 
+    <ion-slide>
+      <div class="slide">
+        <ol class="level-ol-box">
+          <li class="level-list__item" data-id="intro-fixed1">
+            <span class="level-list__item__number">1</span> 
+            <span class="level-list__item__blurb">Tutorial</span>
+            <span class="level-list__item__check">✔</span>
+          </li>
+          <li class="level-list__item is-playing" data-id="intro-fixed2">
+            <span class="level-list__item__number">2</span> 
+            <span class="level-list__item__blurb">Tutorial</span>
+            <span class="level-list__item__check">✔</span>
+          </li>
+          <li class="level-list__item" data-id="intro-fixed3">
+            <span class="level-list__item__number">3</span> 
+            <span class="level-list__item__blurb">★★★</span>
+            <span class="level-list__item__check">✔</span>
+          </li>
+
+          <li class="level-list__item" data-id="intro-fixed3" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+            <span class="level-list__item__number">{{i}}</span> 
+            <span class="level-list__item__blurb">★★</span>
+            <span class="level-list__item__check">✔</span>
+          </li>
+        </ol>
+        <h2>1</h2>
+        <p><b>昨夜西风凋碧树，独上高楼，望尽天涯路</b></p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <ol class="level-ol-box">
+        <li class="level-list__item" data-id="intro-fixed3" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+          <span class="level-list__item__number">{{i}}</span> 
+          <span class="level-list__item__blurb">★</span>
+          <span class="level-list__item__check">✔</span>
+        </li>
+        <li class="level-list__item" data-id="intro-fixed3" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+          <span class="level-list__item__number">{{i}}</span> 
+          <span class="level-list__item__blurb">★</span>
+          <span class="level-list__item__check">✔</span>
+        </li>
+        <li class="level-list__item" data-id="intro-fixed3" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+          <span class="level-list__item__number">{{i}}</span> 
+          <span class="level-list__item__blurb">★</span>
+          <span class="level-list__item__check">✔</span>
+        </li>
+        <li class="level-list__item" data-id="intro-fixed3" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+          <span class="level-list__item__number">{{i}}</span> 
+          <span class="level-list__item__blurb">★</span>
+          <span class="level-list__item__check">✔</span>
+        </li>
+        <li class="level-list__item" data-id="intro-fixed3" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+          <span class="level-list__item__number">{{i}}</span> 
+          <span class="level-list__item__blurb">★</span>
+          <span class="level-list__item__check">✔</span>
+        </li>
+        <li class="level-list__item" data-id="intro-fixed3" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+          <span class="level-list__item__number">{{i}}</span> 
+          <span class="level-list__item__blurb">★</span>
+          <span class="level-list__item__check">✔</span>
+        </li>
+      </ol>
+      <h2>2</h2>
+      <p><b>衣带渐宽终不悔，为伊消得人憔悴</b></p>
+    </ion-slide>
+
+    <ion-slide>
+      
+      <h2>3</h2>
+      <p><b>众里寻他千百度，蓦然回首，那人却在灯火阑珊处</b></p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="/assets/icon/slide-4.png"/>
+      <h2>更多</h2>
+      <p><b></b></p>
+    </ion-slide>-->
+
+  </ion-slides>
+  
+  <div class="levels-home">
+    <ion-icon class="surface-button" name="arrow-undo-outline" color="light" (click)="goHome()"></ion-icon>
+  </div>
+</ion-content>

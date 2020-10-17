@@ -1,0 +1,7 @@
+{
+  "name": "Reddah.Sudoku",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
