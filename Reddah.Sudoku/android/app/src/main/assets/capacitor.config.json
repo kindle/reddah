@@ -1,6 +1,6 @@
 {
   "appId": "com.reddah.sudoku",
-  "appName": "Reddah.Sudoku",
+  "appName": "Sudoku",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

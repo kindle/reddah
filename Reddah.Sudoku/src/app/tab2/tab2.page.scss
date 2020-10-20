@@ -5,8 +5,8 @@
       top: 0;
       width: 500%;
       height: 100%;
-      -webkit-background-size: cover;
-      background-size: cover;
+      -webkit-background-size: cover !important;
+      background-size: cover !important;
       background-position: center;
   }
 
@@ -48,25 +48,66 @@
     color: var(--ion-text-color, #000000);
   }
 
-  .levels-home{
-    display:flex;
-    justify-content:center;
-    position:absolute;
-    bottom: 30px;
-    z-index: 1;
-    width:100%;
-  }
 
 
 
 
 
-
-
-
+/*ipad*/
 .level-ol-box{
-  margin:100px 20px; padding:0; text-align: left;
+  margin:100px 30px; padding:0; text-align: left;
 }
+.level-list__item {
+    display: inline-block;
+    background: #DDD;
+    margin: 5px;
+    padding: 10px;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+}
+.level-list__item__number {
+    display: block;
+    font-size: 55px;
+    line-height: 70px;
+}
+.level-list__item__blurb {
+    display: block;
+    font-size: 32px;
+}
+
+/*iphone*/
+@media all and (orientation: portrait) and (max-width: 600px) {
+    .level-ol-box{
+        margin:100px 15px; padding:0; text-align: left;
+    }
+    .level-list__item {
+        display: inline-block;
+        background: #DDD;
+        margin: 5px;
+        padding: 10px;
+        width: 75px;
+        height: 75px;
+        text-align: center;
+        border-radius: 10px;
+        position: relative;
+    }
+    .level-list__item__number {
+        display: block;
+        font-size: 30px;
+        line-height: 35px;
+    }
+    .level-list__item__blurb {
+        display: block;
+        font-size: 16px;
+    }
+}
+
+
+
+
 
 .is-cub-hovered,
 .is-cub-hovered canvas {
@@ -154,17 +195,7 @@
 .level-list.is-open {
     left: 0;
 }
-.level-list__item {
-    display: inline-block;
-    background: #DDD;
-    margin: 5px;
-    padding: 10px;
-    width: 80px;
-    height: 80px;
-    text-align: center;
-    border-radius: 10px;
-    position: relative;
-}
+
 .level-list__item:hover {
     color: #09F;
     cursor: pointer;
@@ -174,15 +205,7 @@
     background: #09F;
     color: white;
 }
-.level-list__item__number {
-    display: block;
-    font-size: 30px;
-    line-height: 35px;
-}
-.level-list__item__blurb {
-    display: block;
-    font-size: 16px;
-}
+
 .level-list__item__check {
     position: absolute;
     right: -10px;

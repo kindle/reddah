@@ -1,6 +1,6 @@
 <ion-content fullscreen>
   <ion-slides [pager]="true">
-    <div class="parallax-bg" style="background-image:url(assets/icon/long.jpg);background-size: auto 100%;background-repeat: no-repeat;"></div>
+    <div class="parallax-bg" style="background-image:url(assets/icon/long.png);background-size: auto 100%;background-repeat: no-repeat;"></div>
     <ion-slide *ngFor="let slide of slides">
       <div class="slide">
         <ol class="level-ol-box">
@@ -102,6 +102,6 @@
   </ion-slides>
   
   <div class="levels-home">
-    <ion-icon class="surface-button" name="arrow-undo-outline" color="light" (click)="goHome()"></ion-icon>
+    <ion-icon class="surface-button" name="arrow-undo-outline" color="light" (click)="goLevels()"></ion-icon>
   </div>
 </ion-content>

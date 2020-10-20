@@ -1,0 +1,23 @@
+{
+    
+    "Language": "语言",
+    "GameTitle": "Number Place",
+    "SubTitle1": "Classic",
+    "SubTitle2":"Adventure",
+
+    "Level1": "初级",
+    "Level1Maxim": "What we think, we become.",
+    "Level1MaximAuthor": "Gautama Buddha",
+    "Level2": "中级",
+    "Level2Maxim": "We need to know, and we will know",
+    "Level2MaximAuthor": "David Hilbert",
+    "Level3": "高级",
+    "Level3Maxim": "Rather less, but better",
+    "Level3MaximAuthor": "Gauss",
+    "Level4": "专家",
+    "Level4Maxim": "专家",
+    "Level4MaximAuthor": "专家",
+
+    "Time":"时间"
+
+}

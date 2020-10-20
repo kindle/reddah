@@ -1,85 +1,8 @@
 <div class="sudo-box">
-  <div class="top-bar">
-      <button class="sd-button level-select-button" (click)="levelSelect()">Levels</button>
-  </div>
-  <ol class="level-list" (click)="levelListSelect()"></ol>
-  <div class="levels">
-      <pre id="intro-fixed1" data-blurb="Tutorial">
-      blurb: Tutorial
-      instruction: Drag cub to star
-      ---
-      *=.=.
-          !
-      . . .
-          !
-      @=.=.
-      </pre>
-      
-          <pre id="intro-fixed2" data-blurb="Tutorial">
-      blurb: Tutorial
-      instruction: Drag grid to rotate. Cub and star moves with grid. Orange links stay in place.
-      ---
-      * . .
-          !
-      . . .
-          !
-      @=.=.
-      </pre>
-      
-          <pre id="intro-fixed3" data-blurb="★">
-      blurb: ★
-      ---
-      @=. .
-      
-      . . .
-          !
-      *=. .
-      </pre>
-      
-          <pre id="intro-free1" data-blurb="Tutorial">
-      blurb: Tutorial
-      instruction: Blue links move with grid. Rotate grid to connect blue and orange links in different ways.
-      ---
-      @-. .
-      !   | 
-      . . .
-          |
-      *-.-.
-      </pre>
-      
-          <pre id="m3x3-2-med" data-blurb="★">
-      blurb: ★
-      ---
-      . . *
-      | | | 
-      . . .
-      | | | 
-      @ .=.
-      </pre>
-      
-          <pre id="m3x3-fixed-switch" data-blurb="★">
-      blurb: ★
-      ---
-      *=.-.
-      
-      . . .
-          | 
-      @-. .
-      </pre>
-  </div>    
-  <div id="sidebar-toggle">
-      <ion-icon name="close" color="tertiary" (click)="close()"></ion-icon>
-  </div>
 
-  <h1 id="sudoku_title">SUDOKU</h1>
+  <div id="sudoku_container" style="margin-top: 30px;"></div>
 
-  <div id="sudoku_menu">
-      <ul>
-          <li><span class="restart">Restart</span>
-          </li>
-          <li></li>
-      </ul>
+  <div class="levels-home">
+    <ion-icon class="surface-button" name="arrow-undo-outline" color="dark" (click)="close()"></ion-icon>
   </div>
-
-  <div id="sudoku_container"></div>
 </div>

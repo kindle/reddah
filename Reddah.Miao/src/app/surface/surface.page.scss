@@ -573,6 +573,7 @@
         transform: rotate(5deg);
     }
 }
+/*
 @-webkit-keyframes swing-leg {
     0% {
         -webkit-transform: rotate(0.5deg);
@@ -724,7 +725,7 @@
         -webkit-transform: rotate(-2deg);
         transform: rotate(-2deg);
     }
-}
+}*/
 @-webkit-keyframes reverse-swing {
     0% {
         -webkit-transform: rotate(-5deg);
@@ -936,4 +937,6 @@
     --background:transparent;
     background-image: url('/assets/icon/landscape.jpg');
     background-repeat: no-repeat;
+    background-size: auto 100%;
+    -moz-background-size: auto 100%;
 }

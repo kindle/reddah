@@ -1,0 +1,23 @@
+{
+    
+  "Language": "语言",
+  "GameTitle": "Sudoku",
+  "SubTitle1": "Classic",
+  "SubTitle2":"Adventure",
+
+  "Level1": "初级",
+  "Level1Maxim": "What we think, we become.",
+  "Level1MaximAuthor": "Gautama Buddha",
+  "Level2": "中级",
+  "Level2Maxim": "中级",
+  "Level2MaximAuthor": "专家",
+  "Level3": "高级",
+  "Level3Maxim": "高级",
+  "Level3MaximAuthor": "专家",
+  "Level4": "专家",
+  "Level4Maxim": "专家",
+  "Level4MaximAuthor": "专家",
+
+  "Time":"时间"
+
+}

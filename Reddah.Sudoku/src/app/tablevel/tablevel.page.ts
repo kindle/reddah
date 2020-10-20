@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
+import { ReddahService } from '../reddah.service';
 
 @Component({
   selector: 'app-tablevel',
@@ -13,15 +14,15 @@ export class TabLevelPage implements OnInit{
     private _renderer2: Renderer2,
     @Inject(DOCUMENT) private _document: Document,
     private router: Router,
+    public reddah: ReddahService,
     ) {}
 
     ngOnInit(){
-      this.addScriptByUrl(`/assets/js/jquery.js`);
-      this.addScriptByUrl("/assets/js/jsapi_share.js");
+      
     }
 
     ionViewDidEnter(){
-      this.addScriptByUrl("/assets/level/start.js");
+      //this.addScriptByUrl("/assets/js/slide.js");
     }
 
     addScriptByUrl(src){

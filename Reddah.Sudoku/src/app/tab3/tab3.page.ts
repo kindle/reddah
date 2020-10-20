@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import * as $ from 'jquery';
 
 @Component({
@@ -13,6 +14,7 @@ export class Tab3Page implements OnInit{
   constructor(
     private router: Router,
     private activeRouter: ActivatedRoute,
+    private alertController: AlertController,
   ) {}
 
   ngOnInit(){
@@ -23,10 +25,17 @@ export class Tab3Page implements OnInit{
     clearInterval(this.timerHook);
   }
 
+  task;
+
   ionViewDidEnter(){
     console.time("loading time");
-
-    this.initLevels();
+    
+    let currentTask = this.activeRouter.snapshot.queryParams["task"];
+    if(currentTask)
+        this.task = JSON.parse(currentTask);
+    else{
+        this.task = null;
+    }
 
     //game  
     this.Sudoku();
@@ -201,8 +210,10 @@ boardGenerator(n, fixCellsNr) {
       }
   }
 
-  this.boardSolution = this.currentSolution;
-  board_init = this.currentDisplay;
+  if(this.task){
+        this.boardSolution = this.task.solution;
+        board_init = this.task.display;
+  }
 
   return (this.displaySolutionOnly) ? this.boardSolution : board_init;
 }
@@ -638,132 +649,39 @@ if (oldNotes.length < 4) {
 return this;
 };
 
-close(){
-  this.router.navigate(['/tabs/tab1'], {
-    queryParams: {
-        lat: 1,
-    }
-});
+async close(){
+    const alert = await this.alertController.create({
+        header: 'confirm',//this.reddah.instant("Confirm.Title"),
+        message: 'confirm to leave',//this.reddah.instant("Confirm.LogoutMessage"),
+        buttons: [
+        {
+            text: 'cancel',//this.reddah.instant("Confirm.Cancel"),
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {}
+        }, 
+        {
+            text: 'yes',//this.reddah.instant("Confirm.Yes"),
+            handler: () => {
+                if(this.task){
+                    //adventure back to slides
+                    this.router.navigate(['/tabs/tab2'], {
+                        queryParams: {}
+                    });
+                }
+                else{
+                    //classic back to home
+                    this.router.navigate(['/tabs/tab1'], {
+                        queryParams: {}
+                    });
+                }
+            }
+        }]
+    });
+
+    await alert.present().then(()=>{});
+  
 } 
-
-
-/***menu below */
-
-currentSolution;
-currentDisplay; 
-
-
-levelList;
-levelsElem;
-levels;
-levelPres = [
-{
-    id:'0',blurb:'Tutorial',
-    solution:[8, 9, 1, 5, 6, 7, 2, 3, 4, 2, 3, 4, 8, 9, 1, 5, 6, 7, 5, 6, 7, 2, 3, 4, 8, 9, 1, 9, 1, 2, 6, 7, 8, 3, 4, 5, 3, 4, 5, 9, 1, 2, 6, 7, 8, 6, 7, 8, 3, 4, 5, 9, 1, 2, 7, 8, 9, 4, 5, 6, 1, 2, 3, 1, 2, 3, 7, 8, 9, 4, 5, 6, 4, 5, 6, 1, 2, 3, 7, 8, 9], 
-    display:[8, 9, 1, 5, 6, 7, 0, 3, 4, 2, 3, 0, 0, 9, 1, 5, 6, 0, 5, 6, 7, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 7, 0, 0, 0, 0, 3, 0, 5, 9, 0, 2, 0, 7, 0, 0, 0, 0, 0, 0, 0, 9, 1, 2, 0, 0, 0, 4, 0, 6, 0, 0, 0, 1, 2, 3, 0, 8, 0, 0, 5, 0, 4, 5, 6, 0, 0, 0, 0, 0, 0],
-},
-{
-    id:'1',blurb:'*',
-    solution:[8, 9, 1, 5, 6, 7, 2, 3, 4, 2, 3, 4, 8, 9, 1, 5, 6, 7, 5, 6, 7, 2, 3, 4, 8, 9, 1, 9, 1, 2, 6, 7, 8, 3, 4, 5, 3, 4, 5, 9, 1, 2, 6, 7, 8, 6, 7, 8, 3, 4, 5, 9, 1, 2, 7, 8, 9, 4, 5, 6, 1, 2, 3, 1, 2, 3, 7, 8, 9, 4, 5, 6, 4, 5, 6, 1, 2, 3, 7, 8, 9], 
-    display:[8, 0, 1, 5, 6, 7, 0, 0, 0, 2, 3, 0, 0, 0, 0, 5, 6, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 7, 0, 0, 0, 0, 3, 0, 5, 9, 0, 2, 0, 7, 0, 0, 0, 0, 0, 0, 0, 9, 1, 2, 0, 0, 0, 4, 0, 6, 0, 0, 0, 1, 2, 3, 0, 8, 0, 0, 5, 0, 4, 5, 6, 0, 0, 0, 0, 0, 0],
-},
-{
-    id:'2',blurb:'**',
-    solution:[8, 9, 1, 5, 6, 7, 2, 3, 4, 2, 3, 4, 8, 9, 1, 5, 6, 7, 5, 6, 7, 2, 3, 4, 8, 9, 1, 9, 1, 2, 6, 7, 8, 3, 4, 5, 3, 4, 5, 9, 1, 2, 6, 7, 8, 6, 7, 8, 3, 4, 5, 9, 1, 2, 7, 8, 9, 4, 5, 6, 1, 2, 3, 1, 2, 3, 7, 8, 9, 4, 5, 6, 4, 5, 6, 1, 2, 3, 7, 8, 9], 
-    display:[8, 9, 1, 5, 6, 7, 0, 0, 0, 2, 3, 0, 0, 0, 0, 5, 6, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 7, 0, 0, 0, 0, 3, 0, 5, 9, 0, 2, 0, 7, 0, 0, 0, 0, 0, 0, 0, 9, 1, 2, 0, 0, 0, 4, 0, 6, 0, 0, 0, 1, 2, 3, 0, 8, 0, 0, 5, 0, 4, 5, 6, 0, 0, 0, 0, 0, 0],
-},
-];
-
-initLevels(){
-
-    /*
-if(this.currentSolution==null)
-    this.currentSolution = this.levelPres[0].solution;
-if(this.currentDisplay==null)
-    this.currentDisplay = this.levelPres[0].display;
-*/
-let task = JSON.parse(this.activeRouter.snapshot.queryParams["task"]);
-
-this.currentSolution = task.solution;
-this.currentDisplay = task.display;
-
-
-this.levelList = document.querySelector('.level-list');
-this.levelsElem = document.querySelector('.levels');
-this.levels = [];
-
-var fragment = document.createDocumentFragment();
-for (var i = 0; i < this.levelPres.length; i++) {
-    var pre = this.levelPres[i];
-    var listItem = document.createElement('li');
-    listItem.className = 'level-list__item';
-    let id = pre['id'];
-    let solution = pre['solution'];
-    let display = pre['display'];
-    listItem.innerHTML = '<span class="level-list__item__number">' + (i + 1) +
-        '</span> <span class="level-list__item__blurb">' +
-        pre['blurb'] + '</span>' +
-        '<span class="level-list__item__check">✔</span>';
-    listItem.setAttribute('data-id', id);
-    listItem.setAttribute('data-solution', solution+"");
-    listItem.setAttribute('data-display', display+"");
-    fragment.appendChild(listItem);
-    this.levels.push(id);
-}
-
-this.levelList.appendChild(fragment);
-}
-
-levelSelect(){
-this.levelList.classList.add('is-open');
-}
-
-levelListSelect(){
-var item = this.getParent(event.target, '.level-list__item');
-if (!item) {
-    return;
-}
-// load level from id
-var id = item.getAttribute('data-id');
-this.loadLevel(id);
-}
-
-getParent(elem, selector) {
-var parent = elem;
-while (parent != document.body) {
-    if (parent.matches(selector)) {
-        return parent;
-    }
-    parent = parent.parentNode;
-}
-}
-
-loadLevel(id) {
-//var pre = this.levelsElem.querySelector('#' + id);
-console.log(this.levelPres[id])
-//maze = new Maze();
-//maze.id = id;
-// load maze level from pre text
-//maze.loadText(pre.textContent);
-// close ui
-this.levelList.classList.remove('is-open');
-
-window.scrollTo(0, 0);
-// highlight list
-var previousItem = this.levelList.querySelector('.is-playing');
-if (previousItem) {
-    previousItem.classList.remove('is-playing');
-}
-this.levelList.querySelector('[data-id="' + id + '"]').classList.add('is-playing');
-localStorage.setItem('currentLevel', id);
-
-this.currentSolution = this.levelPres[id].solution;
-this.currentDisplay = this.levelPres[id].display;
-
-//restart
-this.init();
-this.run();
-}
 
 
 
