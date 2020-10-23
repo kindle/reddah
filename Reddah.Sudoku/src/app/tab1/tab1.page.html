@@ -7,8 +7,9 @@
             <ion-icon class="surface-button" name="volume-mute-outline" color="light" (click)="bgm()" *ngIf="!playBgm"></ion-icon>
           </div>
           <div class="footerContentRight">
-            <ion-icon class="surface-button surface-button-marginright" name="earth" color="light" (click)="locale()"></ion-icon>
-            <ion-icon class="surface-button" name="chatbubble-ellipses" color="light" (click)="like()"></ion-icon>
+            <ion-icon class="surface-button" name="earth" color="light" (click)="locale()"></ion-icon>
+            <!--<ion-icon class="surface-button surface-button-marginright" name="earth" color="light" (click)="locale()"></ion-icon>
+            <ion-icon class="surface-button" name="chatbubble-ellipses" color="light" (click)="like()"></ion-icon>-->
           </div>
           <div id="footer">
               <svg id="scene" x="0px" y="0px" width="1600px" height="315px">
@@ -131,4 +132,5 @@
     {{ reddah.instant('SubTitle2') }}
   </div>
 </ion-content>
+<audio id="bgm" src="/assets/sound/bgm.mp3" loop preload="auto" autoplay="true"></audio>
   

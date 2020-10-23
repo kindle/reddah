@@ -1,7 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import * as $ from 'jquery';
+import { ReddahService } from '../reddah.service';
+import { PassPage } from '../pass/pass.page';
 
 @Component({
   selector: 'app-tab3',
@@ -12,14 +16,44 @@ import * as $ from 'jquery';
 export class Tab3Page implements OnInit{
 
   constructor(
+    private _renderer2: Renderer2,
+    @Inject(DOCUMENT) private _document: Document,
     private router: Router,
     private activeRouter: ActivatedRoute,
     private alertController: AlertController,
+    private modalController: ModalController,
+    public reddah: ReddahService,
   ) {}
 
-  ngOnInit(){
-      
-  }
+  ngOnInit(){}
+
+
+
+  addScriptByUrl(src){
+    let key = "Reddah_Pass_js";
+
+    let s = this._renderer2.createElement('script');
+    s.type = "text/javascript";
+    s.src = src;
+    s.id = key;
+    
+    this._renderer2.appendChild(
+    this._document.body.getElementsByTagName("app-tab3")[0], s);
+
+}
+
+addScriptByText(text){
+    let key = this.reddah.nonce_str() + "_js";
+
+    let s = this._renderer2.createElement('script');
+    s.type = "text/javascript";
+    s.text = text;
+    s.id = key;
+    
+    this._renderer2.appendChild(
+    this._document.body.getElementsByTagName("app-tab3")[0], s);
+
+}
 
   ionViewDidLeave() { 
     clearInterval(this.timerHook);
@@ -28,7 +62,8 @@ export class Tab3Page implements OnInit{
   task;
 
   ionViewDidEnter(){
-    console.time("loading time");
+    
+    //console.time("loading time");
     
     let currentTask = this.activeRouter.snapshot.queryParams["task"];
     if(currentTask)
@@ -58,7 +93,7 @@ export class Tab3Page implements OnInit{
         $('#sudoku_menu').removeClass('open-sidebar');
     });
 
-    console.timeEnd("loading time");
+    //console.timeEnd("loading time");
 
 }
 
@@ -115,6 +150,7 @@ init() {
         $('#sudoku_title').hide();
     }
 
+    //for(let i=1;i<=256;i++) //generate 256 solution
     this.board = this.boardGenerator(this.n, this.fixCellsNr);
 };
 
@@ -212,7 +248,7 @@ boardGenerator(n, fixCellsNr) {
 
   if(this.task){
         this.boardSolution = this.task.solution;
-        board_init = this.task.display;
+        board_init = this.reddah.getDisplay(this.task.solution, this.task.display);
   }
 
   return (this.displaySolutionOnly) ? this.boardSolution : board_init;
@@ -303,389 +339,415 @@ run() {
 }
 
 drawBoard() {
-  var index = 0,
-      position = {
-          x: 0,
-          y: 0
-      },
-      group_position = {
-          x: 0,
-          y: 0
-      };
-
-  var sudoku_board = $('<div></div>').addClass('sudoku_board');
-  var sudoku_statistics = $('<div></div>')
-      .addClass('statistics')
-      .html('<b>Cells:</b> <span class="cells_complete">' + this.cellsComplete + '/' + this.cellsNr + '</span>'
-      +' <b>Time:</b> <span class="time">' + this.fix(this.secondsElapsed/60,2) + ':' + this.fix(this.secondsElapsed%60,2) + '</span>');
-
-  $('#' + this.id).empty();
-
-  //draw board 
-  for (let i = 0; i < this.nn; i++) {
-      for (let j = 0; j < this.nn; j++) {
-          position = {
-              x: i + 1,
-              y: j + 1
-          };
-          group_position = {
-              x: Math.floor((position.x - 1) / this.n),
-              y: Math.floor((position.y - 1) / this.n)
-          };
-
-          var value = (this.board[index] > 0 ? this.board[index] : ''),
-              value_solution = (this.boardSolution[index] > 0 ? this.boardSolution[index] : ''),
-              cell = $('<div></div>')
-              .addClass('cell')
-              .attr('x', position.x)
-              .attr('y', position.y)
-              .attr('gr', group_position.x + '' + group_position.y)
-              .html('<span>' + value + '</span>');
-
-          if (this.displaySolution) {
-              $('<span class="solution">(' + value_solution + ')</span>').appendTo(cell);
-          }
-
-          if (value > 0) {
-              cell.addClass('fix');
-          }
-
-          if (position.x % this.n === 0 && position.x != this.nn) {
-              cell.addClass('border_h');
-          }
-
-          if (position.y % this.n === 0 && position.y != this.nn) {
-              cell.addClass('border_v');
-          }
-
-          cell.appendTo(sudoku_board);
-          index++;
-      }
-  }
-
-  sudoku_board.appendTo('#' + this.id);
-
-  //draw console
-  var sudoku_console_cotainer = $('<div></div>').addClass('board_console_container');
-  var sudoku_console = $('<div></div>').addClass('board_console');
-
-  for (let i = 1; i <= this.nn; i++) {
-      $('<div></div>').addClass('num').text(i).appendTo(sudoku_console);
-  }
-  $('<div></div>').addClass('num remove').text('X').appendTo(sudoku_console);
-  $('<div></div>').addClass('num note').text('?').appendTo(sudoku_console);
-
-  //draw gameover
-  var sudoku_gameover = $('<div class="gameover_container"><div class="gameover">Congratulation! <button class="restart">Play Again</button></div></div>');
-
-  //add all to sudoku container
-  sudoku_console_cotainer.appendTo('#' + this.id).hide();
-  sudoku_console.appendTo(sudoku_console_cotainer);
-  sudoku_statistics.appendTo('#' + this.id);
-  sudoku_gameover.appendTo('#' + this.id).hide();
-
-  //adjust size
-  this.resizeWindow();
-};
-
-fix(num, length) {
-return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
-}
-
-resizeWindow() {
-console.time("resizeWindow");
-
-var screen = {
-    w: $(window).width(),
-    h: $(window).height()
-};
-
-//adjust the board
-var b_pos = $('#' + this.id + ' .sudoku_board').offset(),
-    b_dim = {
-        w: $('#' + this.id + ' .sudoku_board').width(),
-        h: $('#' + this.id + ' .sudoku_board').height()
-    },
-    s_dim = {
-        w: $('#' + this.id + ' .statistics').width(),
-        h: $('#' + this.id + ' .statistics').height()
-    };
-
-var screen_wr = screen.w + s_dim.h + b_pos.top + 10;
-
-if (screen_wr > screen.h) {
-    $('#' + this.id + ' .sudoku_board').css('width', (screen.h - b_pos.top - s_dim.h - 14));
-    $('#' + this.id + ' .board_console').css('width', (b_dim.h / 2));
-} else {
-    $('#' + this.id + ' .sudoku_board').css('width', '98%');
-    $('#' + this.id + ' .board_console').css('width', '50%');
-}
-
-var cell_width = $('#' + this.id + ' .sudoku_board .cell:first').width(),
-    note_with = Math.floor(cell_width / 2) - 1;
-
-$('#' + this.id + ' .sudoku_board .cell').height(cell_width);
-$('#' + this.id + ' .sudoku_board .cell span').css('line-height', cell_width + 'px');
-$('#' + this.id + ' .sudoku_board .cell .note').css({
-    'line-height': note_with + 'px',
-    'width': note_with,
-    'height': note_with
-});
-
-//adjust the console
-var console_cell_width = $('#' + this.id + ' .board_console .num:first').width();
-$('#' + this.id + ' .board_console .num').css('height', console_cell_width);
-$('#' + this.id + ' .board_console .num').css('line-height', console_cell_width + 'px');
-
-//adjust console
-b_dim = {
-    w: $('#' + this.id + ' .sudoku_board').width(),
-    h: $('#' + this.id + ' .sudoku_board').width()
-};
-b_pos = $('#' + this.id + ' .sudoku_board').offset();
-let c_dim = {
-    w: $('#' + this.id + ' .board_console').width(),
-    h: $('#' + this.id + ' .board_console').height()
-};
-
-var c_pos_new = {
-    left: (b_dim.w / 2 - c_dim.w / 2 + b_pos.left),
-    top: (b_dim.h / 2 - c_dim.h / 2 + b_pos.top)
-};
-$('#' + this.id + ' .board_console').css({
-    'left': c_pos_new.left,
-    'top': c_pos_new.top
-});
-
-//adjust the gameover container
-var gameover_pos_new = {
-    left: (screen.w / 20),
-    top: (screen.w / 20 + b_pos.top)
-};
-
-$('#' + this.id + ' .gameover').css({
-    'left': gameover_pos_new.left,
-    'top': gameover_pos_new.top
-});
-
-console.log('screen', screen);
-console.timeEnd("resizeWindow");
-};
-
-cellSelect(cell) {
-this.cell = cell;
-
-var value = $(cell).text() | 0,
-  position = {
-      x: $(cell).attr('x'),
-      y: $(cell).attr('y')
-  },
-  group_position = {
-      x: Math.floor((position.x - 1) / 3),
-      y: Math.floor((position.y - 1) / 3)
-  },
-  horizontal_cells = $('#' + this.id + ' .sudoku_board .cell[x="' + position.x + '"]'),
-  vertical_cells = $('#' + this.id + ' .sudoku_board .cell[y="' + position.y + '"]'),
-  group_cells = $('#' + this.id + ' .sudoku_board .cell[gr="' + group_position.x + '' + group_position.y + '"]'),
-  same_value_cells = $('#' + this.id + ' .sudoku_board .cell span:contains(' + value + ')');
-
-//remove all other selections
-$('#' + this.id + ' .sudoku_board .cell').removeClass('selected current group');
-$('#' + this.id + ' .sudoku_board .cell span').removeClass('samevalue');
-//select current cell
-$(cell).addClass('selected current');
-
-//highlight select cells
-if (this.highlight > 0) {
-  horizontal_cells.addClass('selected');
-  vertical_cells.addClass('selected');
-  group_cells.addClass('selected group');
-  same_value_cells.not($(cell).find('span')).addClass('samevalue');
-}
-
-if ($(this.cell).hasClass('fix')) {
-  $('#' + this.id + ' .board_console .num').addClass('no');
-} else {
-  $('#' + this.id + ' .board_console .num').removeClass('no');
-
-  this.showConsole();
-  this.resizeWindow();
-}
-};
-
-showConsole() {
-$('#' + this.id + ' .board_console_container').show();
-
-var
-  oldNotes = $(this.cell).find('.note');
-
-//init
-$('#' + this.id + ' .board_console .num').removeClass('selected');
-
-//mark buttons
-if (this.markNotes) {
-  //select markNote button  
-  $('#' + this.id + ' .board_console .num.note').addClass('selected');
-
-  //select buttons
-  $.each(oldNotes, ()=> {
-      var noteNum = $(this.cell).text();
-      $('#' + this.id + ' .board_console .num:contains(' + noteNum + ')').addClass('selected');
-  });
-}
-
-return this;
-};
-
-removeNote(value) {
-if (value === 0) {
-  $(this.cell).find('.note').remove();
-} else {
-  $(this.cell).find('.note:contains(' + value + ')').remove();
-}
-
-return this;
-};
-
-addValue(value) {
-console.log('prepare for addValue', value);
-
-var
-  position = {
-      x: $(this.cell).attr('x'),
-      y: $(this.cell).attr('y')
-  },
-  group_position = {
-      x: Math.floor((position.x - 1) / 3),
-      y: Math.floor((position.y - 1) / 3)
-  },
-
-  horizontal_cells = '#' + this.id + ' .sudoku_board .cell[x="' + position.x + '"]',
-  vertical_cells = '#' + this.id + ' .sudoku_board .cell[y="' + position.y + '"]',
-  group_cells = '#' + this.id + ' .sudoku_board .cell[gr="' + group_position.x + '' + group_position.y + '"]',
-
-  horizontal_cells_exists = $(horizontal_cells + ' span:contains(' + value + ')'),
-  vertical_cells_exists = $(vertical_cells + ' span:contains(' + value + ')'),
-  group_cells_exists = $(group_cells + ' span:contains(' + value + ')'),
-
-  horizontal_notes = horizontal_cells + ' .note:contains(' + value + ')',
-  vertical_notes = vertical_cells + ' .note:contains(' + value + ')',
-  group_notes = group_cells + ' .note:contains(' + value + ')',
-
-  old_value = parseInt($(this.cell).not('.notvalid').text()) || 0;
-
-
-if ($(this.cell).hasClass('fix')) {
-  return;
-}
-
-//delete value or write it in cell
-$(this.cell).find('span').text((value === 0) ? '' : value);
-
-if (this.cell !== null && (horizontal_cells_exists.length || vertical_cells_exists.length || group_cells_exists.length)) {
-  if (old_value !== value) {
-      $(this.cell).addClass('notvalid');
-      console.log('not valid')
-  } else {
-      $(this.cell).find('span').text('');
-      console.log('set empty')
-  }
-} else {
-  //add value
-  $(this.cell).removeClass('notvalid');
-  console.log('Value added ', value);
-
-  //remove all notes from current cell,  line column and group
-  $(horizontal_notes).remove();
-  $(vertical_notes).remove();
-  $(group_notes).remove();
-}
-
-//recalculate completed cells
-this.cellsComplete = $('#' + this.id + ' .sudoku_board .cell:not(.notvalid) span:not(:empty)').length;
-console.log('is game over? ', this.cellsComplete, this.cellsNr, (this.cellsComplete === this.cellsNr));
-//game over
-if (this.cellsComplete === this.cellsNr) {
-  this.gameOver();
-}
-
-$('#' + this.id + ' .statistics .cells_complete').text('' + this.cellsComplete + '/' + this.cellsNr);
-
-return this;
-};
-
-gameOver() {
-console.log('GAME OVER!');
-this.status = this.END;
-
-$('#' + this.id + ' .gameover_container').show();
-};
-
-hideConsole() {
-$('#' + this.id + ' .board_console_container').hide();
-return this;
-};
-
-addNote(value) {
-console.log('addNote', value);
-
-var
-  oldNotes = $(this.cell).find('.note'),
-  note_width = Math.floor($(this.cell).width() / 2);
-
-//add note to cell
-if (oldNotes.length < 4) {
-  $('<div></div>')
-      .addClass('note')
-      .css({
-          'line-height': note_width + 'px',
-          'height': note_width - 1,
-          'width': note_width - 1
-      })
-      .text(value)
-      .appendTo(this.cell);
-}
-
-return this;
-};
-
-async close(){
-    const alert = await this.alertController.create({
-        header: 'confirm',//this.reddah.instant("Confirm.Title"),
-        message: 'confirm to leave',//this.reddah.instant("Confirm.LogoutMessage"),
-        buttons: [
-        {
-            text: 'cancel',//this.reddah.instant("Confirm.Cancel"),
-            role: 'cancel',
-            cssClass: 'secondary',
-            handler: () => {}
-        }, 
-        {
-            text: 'yes',//this.reddah.instant("Confirm.Yes"),
-            handler: () => {
-                if(this.task){
-                    //adventure back to slides
-                    this.router.navigate(['/tabs/tab2'], {
-                        queryParams: {}
-                    });
-                }
-                else{
-                    //classic back to home
-                    this.router.navigate(['/tabs/tab1'], {
-                        queryParams: {}
-                    });
-                }
+    var index = 0,
+        position = {
+            x: 0,
+            y: 0
+        },
+        group_position = {
+            x: 0,
+            y: 0
+        };
+
+    var sudoku_board = $('<div></div>').addClass('sudoku_board');
+    var sudoku_statistics = $('<div></div>')
+        .addClass('statistics')
+        .html(''//'<b>Cells:</b> <span class="cells_complete">' + this.cellsComplete + '/' + this.cellsNr + '</span>'
+        + (this.task!=null?(
+            this.task.mytime==9999?'':(
+            '<b>'+this.reddah.instant("Best")+':</b> <span class="cells_best">' 
+            + this.fix(parseInt(this.task.mytime/60+""),2) + ':' + this.fix(this.task.mytime%60,2) 
+            + '</span>'))
+            :'')
+        +' <b>'+this.reddah.instant("Time")+':</b> <span class="time">' + this.fix(this.secondsElapsed/60,2) + ':' + this.fix(this.secondsElapsed%60,2) + '</span>');
+
+    $('#' + this.id).empty();
+
+    //draw board 
+    for (let i = 0; i < this.nn; i++) {
+        for (let j = 0; j < this.nn; j++) {
+            position = {
+                x: i + 1,
+                y: j + 1
+            };
+            group_position = {
+                x: Math.floor((position.x - 1) / this.n),
+                y: Math.floor((position.y - 1) / this.n)
+            };
+
+            var value = (this.board[index] > 0 ? this.board[index] : ''),
+                value_solution = (this.boardSolution[index] > 0 ? this.boardSolution[index] : ''),
+                cell = $('<div></div>')
+                .addClass('cell')
+                .attr('x', position.x)
+                .attr('y', position.y)
+                .attr('gr', group_position.x + '' + group_position.y)
+                .html('<span>' + value + '</span>');
+
+            if (this.displaySolution) {
+                $('<span class="solution">(' + value_solution + ')</span>').appendTo(cell);
             }
-        }]
+
+            if (value > 0) {
+                cell.addClass('fix');
+            }
+
+            if (position.x % this.n === 0 && position.x != this.nn) {
+                cell.addClass('border_h');
+            }
+
+            if (position.y % this.n === 0 && position.y != this.nn) {
+                cell.addClass('border_v');
+            }
+
+            cell.appendTo(sudoku_board);
+            index++;
+        }
+    }
+
+    sudoku_board.appendTo('#' + this.id);
+
+    //draw console
+    var sudoku_console_cotainer = $('<div></div>').addClass('board_console_container');
+    var sudoku_console = $('<div></div>').addClass('board_console');
+
+    for (let i = 1; i <= this.nn; i++) {
+        $('<div></div>').addClass('num').text(i).appendTo(sudoku_console);
+    }
+    $('<div></div>').addClass('num remove').text('X').appendTo(sudoku_console);
+    $('<div></div>').addClass('num note').text('?').appendTo(sudoku_console);
+
+    //draw gameover
+    var sudoku_gameover = $('<div class="gameover_container">'+
+    `<canvas id="canvas"></canvas>
+    <div class="congrat-box">
+        ${this.reddah.instant("Congrats")}
+    </div>
+    <div class="star-box">
+        <ion-icon name="star" color="warning" class="pass-star"></ion-icon>
+        <ion-icon name="star" color="warning" class="pass-star"></ion-icon>
+        <ion-icon name="star" color="warning" class="pass-star"></ion-icon>
+    </div>
+    <div class="button-box">
+        <ion-button color="primary" size="large">${this.reddah.instant("ConfirmClose")}</ion-button>
+    </div>
+    `
+    +'</div>');
+
+    //add all to sudoku container
+    sudoku_console_cotainer.appendTo('#' + this.id).hide();
+    sudoku_console.appendTo(sudoku_console_cotainer);
+    sudoku_statistics.appendTo('#' + this.id);
+    sudoku_gameover.appendTo('#' + this.id).hide();
+    sudoku_gameover.click(()=>{
+        this.realClose();
     });
 
-    await alert.present().then(()=>{});
-  
-} 
+
+    //adjust size
+    this.resizeWindow();
+    };
+
+    o
+
+    fix(num, length) {
+    return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
+    }
+
+    resizeWindow() {
+    //console.time("resizeWindow");
+
+    var screen = {
+        w: $(window).width(),
+        h: $(window).height()
+    };
+
+    //adjust the board
+    var b_pos = $('#' + this.id + ' .sudoku_board').offset(),
+        b_dim = {
+            w: $('#' + this.id + ' .sudoku_board').width(),
+            h: $('#' + this.id + ' .sudoku_board').height()
+        },
+        s_dim = {
+            w: $('#' + this.id + ' .statistics').width(),
+            h: $('#' + this.id + ' .statistics').height()
+        };
+
+    var screen_wr = screen.w + s_dim.h + b_pos.top + 10;
+
+    if (screen_wr > screen.h) {
+        $('#' + this.id + ' .sudoku_board').css('width', (screen.h - b_pos.top - s_dim.h - 14));
+        $('#' + this.id + ' .board_console').css('width', (b_dim.h / 2));
+    } else {
+        $('#' + this.id + ' .sudoku_board').css('width', '98%');
+        $('#' + this.id + ' .board_console').css('width', '50%');
+    }
+
+    var cell_width = $('#' + this.id + ' .sudoku_board .cell:first').width(),
+        note_with = Math.floor(cell_width / 2) - 1;
+
+    $('#' + this.id + ' .sudoku_board .cell').height(cell_width);
+    $('#' + this.id + ' .sudoku_board .cell span').css('line-height', cell_width + 'px');
+    $('#' + this.id + ' .sudoku_board .cell .note').css({
+        'line-height': note_with + 'px',
+        'width': note_with,
+        'height': note_with
+    });
+
+    //adjust the console
+    var console_cell_width = $('#' + this.id + ' .board_console .num:first').width();
+    $('#' + this.id + ' .board_console .num').css('height', console_cell_width);
+    $('#' + this.id + ' .board_console .num').css('line-height', console_cell_width + 'px');
+
+    //adjust console
+    b_dim = {
+        w: $('#' + this.id + ' .sudoku_board').width(),
+        h: $('#' + this.id + ' .sudoku_board').width()
+    };
+    b_pos = $('#' + this.id + ' .sudoku_board').offset();
+    let c_dim = {
+        w: $('#' + this.id + ' .board_console').width(),
+        h: $('#' + this.id + ' .board_console').height()
+    };
+
+    var c_pos_new = {
+        left: (b_dim.w / 2 - c_dim.w / 2 + b_pos.left),
+        top: (b_dim.h / 2 - c_dim.h / 2 + b_pos.top)
+    };
+    $('#' + this.id + ' .board_console').css({
+        'left': c_pos_new.left,
+        'top': c_pos_new.top
+    });
+
+    //adjust the gameover container
+    var gameover_pos_new = {
+        left: (screen.w / 20),
+        top: (screen.w / 20 + b_pos.top)
+    };
+
+    $('#' + this.id + ' .gameover').css({
+        'left': gameover_pos_new.left,
+        'top': gameover_pos_new.top
+    });
+
+    //console.log('screen', screen);
+    //console.timeEnd("resizeWindow");
+    };
+
+    cellSelect(cell) {
+    this.cell = cell;
+
+    var value = $(cell).text() | 0,
+    position = {
+        x: $(cell).attr('x'),
+        y: $(cell).attr('y')
+    },
+    group_position = {
+        x: Math.floor((position.x - 1) / 3),
+        y: Math.floor((position.y - 1) / 3)
+    },
+    horizontal_cells = $('#' + this.id + ' .sudoku_board .cell[x="' + position.x + '"]'),
+    vertical_cells = $('#' + this.id + ' .sudoku_board .cell[y="' + position.y + '"]'),
+    group_cells = $('#' + this.id + ' .sudoku_board .cell[gr="' + group_position.x + '' + group_position.y + '"]'),
+    same_value_cells = $('#' + this.id + ' .sudoku_board .cell span:contains(' + value + ')');
+
+    //remove all other selections
+    $('#' + this.id + ' .sudoku_board .cell').removeClass('selected current group');
+    $('#' + this.id + ' .sudoku_board .cell span').removeClass('samevalue');
+    //select current cell
+    $(cell).addClass('selected current');
+
+    //highlight select cells
+    if (this.highlight > 0) {
+    horizontal_cells.addClass('selected');
+    vertical_cells.addClass('selected');
+    group_cells.addClass('selected group');
+    same_value_cells.not($(cell).find('span')).addClass('samevalue');
+    }
+
+    if ($(this.cell).hasClass('fix')) {
+    $('#' + this.id + ' .board_console .num').addClass('no');
+    } else {
+    $('#' + this.id + ' .board_console .num').removeClass('no');
+
+    this.showConsole();
+    this.resizeWindow();
+    }
+    };
+
+    showConsole() {
+    $('#' + this.id + ' .board_console_container').show();
+
+    var
+    oldNotes = $(this.cell).find('.note');
+
+    //init
+    $('#' + this.id + ' .board_console .num').removeClass('selected');
+
+    //mark buttons
+    if (this.markNotes) {
+    //select markNote button  
+    $('#' + this.id + ' .board_console .num.note').addClass('selected');
+
+    //select buttons
+    $.each(oldNotes, ()=> {
+        var noteNum = $(this.cell).text();
+        $('#' + this.id + ' .board_console .num:contains(' + noteNum + ')').addClass('selected');
+    });
+    }
+
+    return this;
+    };
+
+    removeNote(value) {
+    if (value === 0) {
+    $(this.cell).find('.note').remove();
+    } else {
+    $(this.cell).find('.note:contains(' + value + ')').remove();
+    }
+
+    return this;
+    };
+
+    addValue(value) {
+    console.log('prepare for addValue', value);
+
+    var
+    position = {
+        x: $(this.cell).attr('x'),
+        y: $(this.cell).attr('y')
+    },
+    group_position = {
+        x: Math.floor((position.x - 1) / 3),
+        y: Math.floor((position.y - 1) / 3)
+    },
+
+    horizontal_cells = '#' + this.id + ' .sudoku_board .cell[x="' + position.x + '"]',
+    vertical_cells = '#' + this.id + ' .sudoku_board .cell[y="' + position.y + '"]',
+    group_cells = '#' + this.id + ' .sudoku_board .cell[gr="' + group_position.x + '' + group_position.y + '"]',
+
+    horizontal_cells_exists = $(horizontal_cells + ' span:contains(' + value + ')'),
+    vertical_cells_exists = $(vertical_cells + ' span:contains(' + value + ')'),
+    group_cells_exists = $(group_cells + ' span:contains(' + value + ')'),
+
+    horizontal_notes = horizontal_cells + ' .note:contains(' + value + ')',
+    vertical_notes = vertical_cells + ' .note:contains(' + value + ')',
+    group_notes = group_cells + ' .note:contains(' + value + ')',
+
+    old_value = parseInt($(this.cell).not('.notvalid').text()) || 0;
 
 
+    if ($(this.cell).hasClass('fix')) {
+    return;
+    }
 
+    //delete value or write it in cell
+    $(this.cell).find('span').text((value === 0) ? '' : value);
+
+    if (this.cell !== null && (horizontal_cells_exists.length || vertical_cells_exists.length || group_cells_exists.length)) {
+    if (old_value !== value) {
+        $(this.cell).addClass('notvalid');
+        console.log('not valid')
+    } else {
+        $(this.cell).find('span').text('');
+        console.log('set empty')
+    }
+    } else {
+    //add value
+    $(this.cell).removeClass('notvalid');
+    console.log('Value added ', value);
+
+    //remove all notes from current cell,  line column and group
+    $(horizontal_notes).remove();
+    $(vertical_notes).remove();
+    $(group_notes).remove();
+    }
+
+    //recalculate completed cells
+    this.cellsComplete = $('#' + this.id + ' .sudoku_board .cell:not(.notvalid) span:not(:empty)').length;
+    console.log('is game over? ', this.cellsComplete, this.cellsNr, (this.cellsComplete === this.cellsNr));
+    //game over
+    if (this.cellsComplete === this.cellsNr) {
+        (document.getElementById("wow") as HTMLAudioElement).play();
+        this.gameOver();
+        this.addScriptByUrl("/assets/js/pass.js");
+    }
+
+    $('#' + this.id + ' .statistics .cells_complete').text('' + this.cellsComplete + '/' + this.cellsNr);
+
+    return this;
+    };
+
+    gameOver() {
+        this.status = this.END;
+
+        $('#' + this.id + ' .gameover_container').show();
+        this.reddah.pass(this.task, this.secondsElapsed);
+    };
+
+    hideConsole() {
+    $('#' + this.id + ' .board_console_container').hide();
+    return this;
+    };
+
+    addNote(value) {
+    console.log('addNote', value);
+
+    var
+    oldNotes = $(this.cell).find('.note'),
+    note_width = Math.floor($(this.cell).width() / 2);
+
+    //add note to cell
+    if (oldNotes.length < 4) {
+    $('<div></div>')
+        .addClass('note')
+        .css({
+            'line-height': note_width + 'px',
+            'height': note_width - 1,
+            'width': note_width - 1
+        })
+        .text(value)
+        .appendTo(this.cell);
+    }
+
+    return this;
+    };
+
+    async close(){
+        const alert = await this.alertController.create({
+            header: this.reddah.instant("ConfirmTitle"),
+            message: this.reddah.instant("ConfirmMessage"),
+            buttons: [
+            {
+                text: this.reddah.instant("ConfirmCancel"),
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {}
+            }, 
+            {
+                text: this.reddah.instant("ConfirmYes"),
+                handler: () => {
+                    this.realClose();
+                }
+            }]
+        });
+
+        await alert.present().then(()=>{});
+    
+    } 
+
+    realClose(){
+        if(this.task){
+            //adventure back to slides
+            this.router.navigate(['/tabs/tab2'], {
+                queryParams: { level: this.task.level }
+            });
+        }
+        else{
+            //classic back to home
+            this.router.navigate(['/tabs/tab1'], {
+                queryParams: {}
+            });
+        }
+    }
 }
-
-
-

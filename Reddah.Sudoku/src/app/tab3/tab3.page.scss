@@ -11,7 +11,7 @@
     font-family: verdana, helvetica, arial, sans-serif;
     border: 0px;
     margin: 0px;
-    padding: 0px;
+    padding: 0px 30px;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAIUlEQVQYV2N89urtfwYiACNIoZSYMCMhtaMK8YYQ0cEDAG5yJ8eLRhTfAAAAAElFTkSuQmCC
 ) repeat;
 }
@@ -199,7 +199,8 @@
     background: #c0392b;
 }
 .statistics {
-    text-align: center;
+    text-align: right;
+    margin: 20px 0;
 }
 #sudoku_menu {
     background-color: black;
@@ -318,3 +319,37 @@
 }
 
 
+
+.pass-star{
+    font-size: 150px;
+}
+
+.congrat-box{
+    font-size: 50px;
+    position: absolute;
+    top:20%;
+    width: 100%;
+    display: flex;
+    justify-content:center;
+}
+
+.star-box{
+    position: absolute;
+    top:40%;
+    width: 100%;
+    display: flex;
+    justify-content:center;
+}
+
+.button-box{
+    position: absolute;
+    top:70%;
+    width: 100%;
+    display: flex;
+    justify-content:center;
+}
+
+.cells_best{
+    margin-right: 20px;
+    color: green;
+}

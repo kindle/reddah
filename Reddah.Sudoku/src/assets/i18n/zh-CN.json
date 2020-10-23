@@ -1,23 +1,30 @@
 {
     
     "Language": "语言",
-    "GameTitle": "高米店数独",
+    "GameTitle": "欧拉数独",
     "SubTitle1": "经典模式",
     "SubTitle2":"闯关大冒险",
 
-    "Level1": "初级",
+    "Level1": "萌新",
     "Level1Maxim": "昨夜西风凋碧树。独上高楼，望尽天涯路",
     "Level1MaximAuthor": "晏殊",
-    "Level2": "中级",
+    "Level2": "中二病人",
     "Level2Maxim": "路漫漫其修远兮，吾将上下而求索",
     "Level2MaximAuthor": "屈原",
-    "Level3": "高级",
+    "Level3": "全是弟弟",
     "Level3Maxim": "衣带渐宽终不悔，为伊消得人憔悴",
     "Level3MaximAuthor": "柳永",
-    "Level4": "专家",
+    "Level4": "无尽恶人",
     "Level4Maxim": "众里寻他千百度，蓦然回首，那人却在，灯火阑珊处",
     "Level4MaximAuthor": "辛弃疾",
 
-    "Time":"时间"
+    "Best":"最好成绩",
+    "Time":"计时",
+    "ConfirmTitle":"请确认",
+    "ConfirmMessage":"确定要离开？",
+    "ConfirmYes":"确定",
+    "ConfirmCancel":"取消",
+    "ConfirmClose":"关闭",
+    "Congrats":"恭喜过关！"
 
 }

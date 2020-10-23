@@ -1,131 +1,4 @@
 
-/*.ion-content {
-  padding: 0;
-  margin: 0;
-  font-family: "Roboto", sans-serif;
-  color: white;
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
-}
-#masterWrap {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  overflow: hidden;
-}
-#panelWrap {
-  height: 100%;
-}
-section {
-  height: 100%;
-  display: flex;
-  align-content: center;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  position: relative;
-  float: left;
-}
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 100%;
-  position: relative;
-  background-color: #fff;
-  margin: 12px 8px;
-  cursor: pointer;
-  float: left;
-}
-.dots {
-  position: absolute;
-  z-index: 100;
-  left: 50%;
-  bottom: 16px;
-}
-#leftArrow {
-  left: 12px;
-}
-#rightArrow {
-  right: 12px;
-}
-.arrow {
-  position: absolute;
-  z-index: 100;
-  top: 50%;
-  cursor: pointer;
-  opacity: 0.75;
-  width: 40px;
-  height: 40px;
-  stroke-width: 8px;
-  stroke: white;
-  fill: transparent;
-}
-h1 {
-  position: absolute;
-  z-index: 100;
-  font-size: 18px;
-  text-align: center;
-  width: 100%;
-  text-transform: capitalize;
-}
-span {
-  display: block;
-  font-size: 0.75em;
-  font-weight: 400;
-}
-
-.title {
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-}
-h3,
-p {
-  padding: 0;
-  margin: 0;
-}
-h3 {
-  font-size: 1.5em;
-}
-p {
-  max-width: 400px;
-  font-weight: 400;
-  text-align: center;
-}
-.twitterFollow {
-  padding: 16px;
-  margin-top: 16px;
-  cursor: pointer;
-  border-radius: 500px;
-  text-decoration: none;
-  border: solid 2px white;
-  color: white;
-}
-.twitterFollow:hover {
-  background: white;
-  color: #000;
-}
-.hideMe {
-  opacity: 0;
-}
-.iconWrap {
-  width: 300px;
-  margin-top: 30px;
-}
-.icon {
-  text-align: center;
-  width: 150px;
-  float: left;
-}
-.icon svg {
-  width: 50px;
-  height: 50px;
-  margin: 6px 0;
-  overflow: visible;
-}*/
-
 .level-image{
   margin-bottom: 20px;
 }
@@ -154,18 +27,19 @@ q:after {
 }
 
 
-/*ipad*/
+/*iphone*/
 .titleWrap {
   height: 30px;
   position: absolute;
   z-index: 20;
-  bottom: 30px;
+  bottom: 20px;
   left: 50%;
   overflow-y: hidden;
 }
 
 blockquote {
-  font-size: 2rem;
+  font-size: 1rem;
+  font-weight: 400;
 }
 blockquote q {
     font-family: Georgia, serif;
@@ -175,28 +49,31 @@ blockquote q {
 
 q:before {
   content: open-quote;
-  margin-right: .8rem;
+  margin-right: .1rem;
 }
 q:before,
 q:after {
     color: white;
-    font-size: 3rem;
+    font-size: 1.3rem;
 }
 
-/*iphone*/
-@media all and (orientation: portrait) and (max-width: 600px) {
+.myslide{
+  transform: translateY(16%);
+}
+
+/*ipad*/
+@media all and (orientation: portrait) and (min-width: 700px) {
   .titleWrap {
     height: 30px;
     position: absolute;
     z-index: 20;
-    bottom: 20px;
+    bottom: 30px;
     left: 50%;
     overflow-y: hidden;
   }
 
   blockquote {
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 2rem;
   }
   blockquote q {
       font-family: Georgia, serif;
@@ -206,12 +83,50 @@ q:after {
 
   q:before {
     content: open-quote;
-    margin-right: .1rem;
+    margin-right: .8rem;
   }
   q:before,
   q:after {
       color: white;
-      font-size: 1.3rem;
+      font-size: 3rem;
+  }
+
+  .myslide{
+    transform: translateY(35%);
+  }
+}
+
+@media all and (orientation: landscape) and (min-width: 700px) {
+  .titleWrap {
+    height: 30px;
+    position: absolute;
+    z-index: 20;
+    bottom: 30px;
+    left: 50%;
+    overflow-y: hidden;
+  }
+
+  blockquote {
+    font-size: 2rem;
+  }
+  blockquote q {
+      font-family: Georgia, serif;
+      font-style: italic;
+      letter-spacing: .1rem;
+  }
+
+  q:before {
+    content: open-quote;
+    margin-right: .8rem;
+  }
+  q:before,
+  q:after {
+      color: white;
+      font-size: 3rem;
+  }
+
+  .myslide{
+    transform: translateY(25%);
   }
 }
 
@@ -250,8 +165,4 @@ p {
 
 p b {
   color: var(--ion-text-color, #000000);
-}
-
-.myslide{
-  transform: translateY(35%);
 }

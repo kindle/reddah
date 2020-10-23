@@ -1,126 +1,10 @@
-<!--
 <ion-content>
-    <div class="hideMe" style="color:white;font-family: 'Roboto', sans-serif;">
-        
-        <svg style="display:none;" id="leftArrow" class="arrow" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 100 100">
-            <g stroke-linejoin="round" stroke-linecap="round">
-                <circle r="46" cx="50" cy="50" />
-                <polyline points="60 25, 30 50, 60 75"></polyline>
-            </g>
-        </svg>
-        <svg style="display:none;" id="rightArrow" class="arrow" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 100 100">
-            <g stroke-linejoin="round" stroke-linecap="round">
-                <circle r="46" cx="50" cy="50" />
-                <polyline points="40 25, 70 50, 40 75"></polyline>
-            </g>
-        </svg>
-        <div id="masterWrap">
-            <div id="panelWrap">
-                <section>
-                    <img src="/assets/icon/boy1.png" width="150" class="level-image" (click)="goLevel(1)">
-                    <h3 class="level-title">{{ reddah.instant('Level1') }}</h3>
-                    <blockquote><q>{{ reddah.instant('Level1Maxim') }}</q>
-                        <cite>{{ reddah.instant('Level1MaximAuthor') }}</cite>
-                    </blockquote>
-                </section>
-                <section> 
-                    <img src="/assets/icon/girl1.png" width="150" class="level-image" (click)="goLevel(2)">
-                    <h3 class="level-title">{{ reddah.instant('Level2') }}</h3>
-                    <blockquote><q>{{ reddah.instant('Level2Maxim') }}</q>
-                        <cite>{{ reddah.instant('Level2MaximAuthor') }}</cite>
-                    </blockquote>
-                </section>
-                <section>
-                    <img src="/assets/icon/boy2.png" width="150" class="level-image" (click)="goLevel(3)">
-                    <h3 class="level-title">{{ reddah.instant('Level3') }}</h3>
-                    <blockquote><q>{{ reddah.instant('Level3Maxim') }}</q>
-                        <cite>{{ reddah.instant('LevLevel3MaximAuthor') }}</cite>
-                    </blockquote>
-                </section>
-                <section>
-                    <img src="/assets/icon/girl2.png" width="150" class="level-image" (click)="goLevel(4)">
-                    <h3 class="level-title">{{ reddah.instant('Level4') }}</h3>
-                    <blockquote><q>{{ reddah.instant('Level4Maxim') }}</q>
-                        <cite>{{ reddah.instant('Level4MaximAuthor') }}</cite>
-                    </blockquote>
-                </section>
-                <section>
-                    <h3 class="level-title">更多</h3>
-                    <p>You can control the slider in 4 ways</p>
-                    <div class="iconWrap">
-                        <div class="icon">
-                            <svg xmlns="https://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-                                <path d="M54.53,41.57a12.22,12.22,0,0,1,1.54,5.9c0,3.54-1.76,6.62-4.57,7.52v4.22H70.9A49.15,49.15,0,0,0,63.77,39C60.28,33.65,56,30.18,51.5,29.52v9.12A6.66,6.66,0,0,1,54.53,41.57Z" fill="#fff" />
-                                <path d="M28.67,62.82c-.06.94-.08,1.86-.08,2.87,0,8.73,2.49,16.07,6.4,21.18s9.2,8,15,8,11.08-2.87,15-8,6.41-12.45,6.41-21.18c0-1,0-1.94-.08-2.89ZM53,88h0a1,1,0,0,1-1-1,1,1,0,0,1,1-1c7.43-.11,13.6-7.6,13.6-17v-.45a1,1,0,0,1,2.06,0v.48C68.62,79.14,61.86,87.75,53,88Z"
-                                fill="#fff" />
-                                <path d="M43.64,47.47a12.19,12.19,0,0,1,1.52-5.86,6.64,6.64,0,0,1,3-2.94V29.54c-4.44.72-8.73,4.2-12.18,9.49a48.9,48.9,0,0,0-7.09,20.18H48.15V55C45.38,54,43.62,51,43.64,47.47Z" fill="#fff" />
-                                <path d="M42.3,14.7c1.86,1,4.21,1.16,6,1.72a5.37,5.37,0,0,1,2.08,1,2,2,0,0,1,.68,1.64c0,1.08-.56,2.89-2.18,5.54A1,1,0,0,0,49.27,26l.52.14a1,1,0,0,0,.88-.49c1.7-2.81,2.46-4.88,2.48-6.61a4.2,4.2,0,0,0-2.25-3.8c-1.86-1-4.23-1.26-6.06-1.79a5.74,5.74,0,0,1-2.1-.94,1.7,1.7,0,0,1-.65-1.45,9.45,9.45,0,0,1,1.65-4.37,1,1,0,0,0-1.76-1A11.1,11.1,0,0,0,40,11.08,4,4,0,0,0,42.3,14.7Z"
-                                fill="#fff" />
-                                <g id="mouseRings" stroke="white" stroke-width="2" fill="none">
-                                    <circle cx="50" cy="47" r="12" />
-                                    <circle cx="50" cy="47" r="12" />
-                                    <circle cx="50" cy="47" r="12" />
-                                    <circle cx="50" cy="47" r="12" />
-                                </g>
-                            </svg>
-                            <p>Mousewheel</p>
-                        </div>
-                        <div class="icon">
-                            <svg xmlns="https://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="#fff">
-                                <path d="M71.35,4.5H28.65C23.86,4.5,20,8,20,12.35V72.84c0,4.31,3.91,7.85,8.7,7.85h6.47a20.93,20.93,0,0,1-2.86-8.48c-.07-.7-.16-1.37-.26-2H26.09a1.71,1.71,0,0,1-1.79-1.62V12.69a1.71,1.71,0,0,1,1.79-1.61H73.91a1.71,1.71,0,0,1,1.79,1.61V68.57a1.71,1.71,0,0,1-1.79,1.62h-3c0,1.35-.15,2.87-.31,4.58a13.55,13.55,0,0,1-1.15,4.33,16,16,0,0,1-.83,1.59h2.73c4.79,0,8.7-3.54,8.7-7.85V12.35C80.05,8,76.14,4.5,71.35,4.5ZM54.26,8.36H45.11V7.3h9.15Z"
-                                />
-                                <path id="hand" d="M69.31,74.77c.15-1.59.24-3,.29-4.29.21-5.35-.39-8-1.53-8.75a2.07,2.07,0,0,0-1.23-.38,4.33,4.33,0,0,0-2.38.95s.92-5.51-3.85-5.95c-2,.15-2.78,1-3.11,1.77a2.74,2.74,0,0,0-.21.71,3.06,3.06,0,0,1,0,.39,2.26,2.26,0,0,1,0-.39c0-1.21-.19-4.8-4-4.8l-.7,0a2.62,2.62,0,0,0-2.5,1.71,16.13,16.13,0,0,0-.85,3.08,6.13,6.13,0,0,1-1.4-4.29l-.1-16.43a2.3,2.3,0,0,0-.2-.94,3.16,3.16,0,0,0-2.67-1.76c-.94,0-2,.56-2.75,2.19C40.9,43.76,41,67.49,41,67.49s-2.85-.19-4-7a6.63,6.63,0,0,0-2.85-4.38A4.42,4.42,0,0,0,32,55.17c-.57,0-1,.32-1.38,1.11a2.33,2.33,0,0,0-.11.28c-.81,2.18,1.54,6.6,2.61,13.92.09.61.17,1.24.24,1.9a19.6,19.6,0,0,0,2.68,7.94,19.24,19.24,0,0,0,1.24,1.85C40,85.78,39.79,89,40.35,95.5l21.79-.06s-.88-2.35,2.79-10.56A25.78,25.78,0,0,1,67.07,81l.38-.63a14,14,0,0,0,.79-1.48A13,13,0,0,0,69.31,74.77Z"
-                                />
-                            </svg>
-                            <p>Drag &amp; Throw</p>
-                        </div>
-                        <div class="icon">
-                            <svg xmlns="https://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="#fff">
-                                <path id="cursor" d="M48,23.53,45.94,42.64c-.22,2-.58,5.35-.81,7.38L43.06,69.13c-.22,2,.91,2.65,2.51,1.4L60.7,58.65l5.84-4.57L81.67,42.21c1.6-1.27,1.14-3.28-1-4.48L71,32.35l9.26-16.69a1.87,1.87,0,0,0-.56-2.57L73.78,9.83a1.87,1.87,0,0,0-2.47.88L62,27.4,52.35,22C50.19,20.81,48.23,21.49,48,23.53Z"
-                                />
-                                <g id="iconCircles">
-                                    <circle cx="17.5" cy="90" r="4" />
-                                    <circle cx="33.75" cy="90" r="4" />
-                                    <circle cx="50" cy="90" r="4" />
-                                    <circle cx="66.25" cy="90" r="4" />
-                                    <circle cx="82.5" cy="90" r="4" />
-                                </g>
-                            </svg>
-                            <p>Nav Dots</p>
-                        </div>
-                        <div class="icon">
-                            <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                                <g stroke-linejoin="round" stroke-linecap="round" stroke="white" stroke-width="5" fill="none">
-                                    <circle r="36" cx="50" cy="50" />
-                                    <polyline id="caret" points="40 30, 65 50, 40 70"></polyline>
-                                </g>
-                            </svg>
-                            <p>Arrows</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-        <div class="dots">
-            
-        </div>
-        
-        <div class="titleWrap">
-            
-            <div class="title" *ngFor="let i of [1,2,3,4,5]">
-                - {{i}} -
-            </div>
+    <div class="titleWrap">
+        <div class="title">
+            <b style="color: rgb(255, 238, 0);margin-right:10px;font-size: 25px;">★</b><span style="color:white;font-size:23px;">{{mystars}}</span>
         </div>
     </div>
-
-    <div class="levels-home">
-        <ion-icon class="surface-button" name="arrow-undo-outline" color="light" (click)="goHome()"></ion-icon>
-    </div>
-
-</ion-content>
--->
-
-<ion-content>
+    
     <ion-slides>
         <ion-slide style="background: royalblue;color:white;">
             <div class="myslide" (click)="goLevel(1)">
@@ -135,7 +19,11 @@
         <ion-slide style="background: orange;color:white;">
             <div class="myslide" (click)="goLevel(2)">
                 <img src="/assets/icon/girl1.png" width="150" class="level-image">
-                <h3 class="level-title">{{ reddah.instant('Level2') }}</h3>
+                <h3 class="level-title">
+                    <ion-icon name="lock-closed" color="light" *ngIf="maxLevelUnlocked<2"
+                    style="transform: translateY(3px);"></ion-icon>
+                    {{ reddah.instant('Level2') }}
+                </h3>
                 <blockquote><q>{{ reddah.instant('Level2Maxim') }}</q>
                     <cite>- {{ reddah.instant('Level2MaximAuthor') }}</cite>
                 </blockquote>
@@ -145,7 +33,11 @@
         <ion-slide style="background: deepskyblue;color:white;">
             <div class="myslide" (click)="goLevel(3)">
                 <img src="/assets/icon/boy2.png" width="150" class="level-image">
-                <h3 class="level-title">{{ reddah.instant('Level3') }}</h3>
+                <h3 class="level-title">
+                    <ion-icon name="lock-closed" color="light" *ngIf="maxLevelUnlocked<3"
+                    style="transform: translateY(3px);"></ion-icon>
+                    {{ reddah.instant('Level3') }}
+                </h3>
                 <blockquote><q>{{ reddah.instant('Level3Maxim') }}</q>
                     <cite>- {{ reddah.instant('Level3MaximAuthor') }}</cite>
                 </blockquote>
@@ -155,7 +47,11 @@
         <ion-slide style="background: coral;color:white;">
             <div class="myslide" (click)="goLevel(4)">
                 <img src="/assets/icon/girl2.png" width="150" class="level-image">
-                <h3 class="level-title">{{ reddah.instant('Level4') }}</h3>
+                <h3 class="level-title">
+                    <ion-icon name="lock-closed" color="light" *ngIf="maxLevelUnlocked<4"
+                    style="transform: translateY(3px);"></ion-icon>
+                    {{ reddah.instant('Level4') }}
+                </h3>
                 <blockquote><q>{{ reddah.instant('Level4Maxim') }}</q>
                     <cite>- {{ reddah.instant('Level4MaximAuthor') }}</cite>
                 </blockquote>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IonSlides } from '@ionic/angular';
+import { ReddahService } from '../reddah.service';
 
 @Component({
   selector: 'app-tab2',
@@ -9,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class Tab2Page implements OnInit{
 
   constructor(
+    public reddah : ReddahService,
     private router: Router,
     private activeRouter: ActivatedRoute,
   ) {}
@@ -36,93 +39,23 @@ export class Tab2Page implements OnInit{
     return objArr;
   }
 
-  initTasks(level){
-    let taskTemplate = 
-    {
-        id:1,
-        level: 1,
-        name: 'Tutorial',
-        solution:[8, 9, 1, 5, 6, 7, 2, 3, 4, 2, 3, 4, 8, 9, 1, 5, 6, 7, 5, 6, 7, 2, 3, 4, 8, 9, 1, 9, 1, 2, 6, 7, 8, 3, 4, 5, 3, 4, 5, 9, 1, 2, 6, 7, 8, 6, 7, 8, 3, 4, 5, 9, 1, 2, 7, 8, 9, 4, 5, 6, 1, 2, 3, 1, 2, 3, 7, 8, 9, 4, 5, 6, 4, 5, 6, 1, 2, 3, 7, 8, 9], 
-        display:[8, 9, 1, 5, 6, 7, 0, 3, 4, 2, 3, 0, 0, 9, 1, 5, 6, 0, 5, 6, 7, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 7, 0, 0, 0, 0, 3, 0, 5, 9, 0, 2, 0, 7, 0, 0, 0, 0, 0, 0, 0, 9, 1, 2, 0, 0, 0, 4, 0, 6, 0, 0, 0, 1, 2, 3, 0, 8, 0, 0, 5, 0, 4, 5, 6, 0, 0, 0, 0, 0, 0],
-        maxim: 'Constant dropping wears the stone', 
-        author: '',
-        secondstopass: 600,
-        secondstogood: 300,
-        secondstoexpert: 180,
-        starstoplay: 5,
 
-        mytime: 99999,
-        mystar: 1,
-    };
-
-    if(level==1){
-      this.task = [];
-      
-      this.task.push(
-      {
-        id:1,
-        level: 1,
-        name: 'Tutorial',
-        solution:[3,9,4,1,8,7,2,6,5,5,7,2,3,6,4,8,1,9,1,8,6,9,2,5,3,4,7,9,1,5,8,7,6,4,2,3,7,6,3,4,9,2,1,5,8,2,4,8,5,3,1,9,7,6,8,2,7,6,4,9,5,3,1,6,3,1,2,5,8,7,9,4,4,5,9,7,1,3,6,8,2], 
-        display:[3,0,4,1,0,7,2,6,5,5,7,2,3,6,4,8,1,9,1,8,6,9,2,5,3,4,7,9,1,5,8,7,6,4,2,3,7,6,3,4,9,2,1,5,8,2,4,8,5,3,1,9,7,6,8,2,7,6,4,9,5,3,1,6,3,1,2,5,8,7,9,4,4,5,9,7,1,3,6,8,2], 
-        maxim: 'Constant dropping wears the stone', 
-        author: '',
-        secondstopass: 600,
-        secondstogood: 300,
-        secondstoexpert: 180,
-        starstoplay: 5,
-
-        mytime: 99999,
-        mystar: 1,
-    },
-    {
-      id:2,
-      level: 1,
-      name: 'Tutorial',
-      solution:[3,9,4,1,8,7,2,6,5,5,7,2,3,6,4,8,1,9,1,8,6,9,2,5,3,4,7,9,1,5,8,7,6,4,2,3,7,6,3,4,9,2,1,5,8,2,4,8,5,3,1,9,7,6,8,2,7,6,4,9,5,3,1,6,3,1,2,5,8,7,9,4,4,5,9,7,1,3,6,8,2], 
-      display:[3,0,4,0,8,7,2,0,5,0,7,2,3,6,0,8,1,9,1,8,0,9,0,0,0,4,0,0,1,5,8,7,6,4,0,3,7,6,0,4,0,2,0,0,8,2,0,0,5,3,1,0,7,6,8,2,7,6,0,0,5,3,1,0,3,1,0,0,8,7,9,0,4,5,0,7,1,3,6,0,2], 
-      maxim: 'Constant dropping wears the stone', 
-      author: '',
-      secondstopass: 600,
-      secondstogood: 300,
-      secondstoexpert: 180,
-      starstoplay: 5,
-
-      mytime: 99999,
-      mystar: 1,
-  },
-    );
-      
-    }
-    else if(level==2){
-      this.task = [];
-      for(let i=1;i<20;i++){
-        taskTemplate.id=i;
-        this.task.push(JSON.parse(JSON.stringify(taskTemplate)));
-      }
-    }
-    else if(level==3){
-      this.task = [];
-      for(let i=1;i<54;i++){
-        taskTemplate.id=i;
-        this.task.push(JSON.parse(JSON.stringify(taskTemplate)));
-      }
-    }
-    else if(level==4){
-      this.task = [];
-      for(let i=1;i<36;i++){
-        taskTemplate.id=i;
-        this.task.push(JSON.parse(JSON.stringify(taskTemplate)));
-      }
-    }
-  }
+  @ViewChild(IonSlides) slides1: IonSlides;
 
   ionViewDidEnter(){
     let level = this.activeRouter.snapshot.queryParams["level"];
-    //alert(level);
-
-    this.initTasks(level);
+    let page = this.activeRouter.snapshot.queryParams["page"];
+    if(page!=null){
+        this.slides1.slideTo(0, 500);
+    }
     
+    this.task = this.reddah.getLevelTasks(level);
+    this.task.forEach((t,i)=>{
+      t["mytime"] = this.reddah.getMyTime(t.id);
+      t["mystar"] = this.reddah.getMyStars(t.id);
+      
+      t["unlock"] = (i==0)||(t["mystar"]>0)||(i>0&&this.task[i-1]["mystar"]>0);
+    })
 
     //slides max 4
     this.slides = this.taskToSlides(this.task, 16);
@@ -130,13 +63,13 @@ export class Tab2Page implements OnInit{
   }
 
   goTask(task){
-    console.log('start task')
-    console.log(task)
-    this.router.navigate(['/tabs/tab3'], {
-        queryParams: {
-            task: JSON.stringify(task),
-        }
-    });
+    if(task.unlock){
+      this.router.navigate(['/tabs/tab3'], {
+          queryParams: {
+              task: JSON.stringify(task),
+          }
+      });
+    }
   }
 
   goLevels(){

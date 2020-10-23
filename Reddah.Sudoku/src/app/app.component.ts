@@ -17,7 +17,7 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
+    //private statusBar: StatusBar,
     private localStorageService: LocalStorageService,
     private reddah: ReddahService,
     private globalization: Globalization,
@@ -26,8 +26,9 @@ export class AppComponent {
   }
 
   initializeApp() {
+    //this.reddah.test1();
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      //this.statusBar.styleDefault();
       this.splashScreen.hide();
       
       let currentLocale = this.localStorageService.retrieve("Reddah_Locale");

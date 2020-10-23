@@ -28,7 +28,7 @@ export class Tab1Page  implements OnInit{
   }
 
   addScriptByUrl(src){
-    let key = this.nonce_str()+"_js";
+    let key = this.reddah.nonce_str()+"_js";
 
     let s = this._renderer2.createElement('script');
     s.type = "text/javascript";
@@ -40,18 +40,26 @@ export class Tab1Page  implements OnInit{
     
   }
 
-  nonce_str() {
-      return 'xxxxxxxxxx'.replace(/[xy]/g, function(c) {
-          var r = Math.random() * 10 | 0, v = r;
-          return v.toString(10);
-      });
+  ionViewDidEnter(){
+    this.playBgm = this.reddah.getBgm();
+    if(!this.playBgm){
+      (document.getElementById("bgm") as HTMLAudioElement).pause();
+
+    }
   }
 
+  
 
   playBgm = true;
   bgm(){
-    console.log('test')
     this.playBgm = !this.playBgm;
+    this.reddah.setBgm(this.playBgm);
+    if(this.playBgm){
+      (document.getElementById("bgm") as HTMLAudioElement).play();
+    }
+    else{ 
+      (document.getElementById("bgm") as HTMLAudioElement).pause();
+    }
   }
   
   async locale(){

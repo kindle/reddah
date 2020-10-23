@@ -1,23 +1,30 @@
 {
     
-    "Language": "语言",
+    "Language": "Language",
     "GameTitle": "Number Place",
     "SubTitle1": "Classic",
     "SubTitle2":"Adventure",
 
-    "Level1": "初级",
+    "Level1": "Newbie",
     "Level1Maxim": "What we think, we become.",
     "Level1MaximAuthor": "Gautama Buddha",
-    "Level2": "中级",
+    "Level2": "Junior",
     "Level2Maxim": "We need to know, and we will know",
     "Level2MaximAuthor": "David Hilbert",
-    "Level3": "高级",
+    "Level3": "Senior",
     "Level3Maxim": "Rather less, but better",
     "Level3MaximAuthor": "Gauss",
-    "Level4": "专家",
-    "Level4Maxim": "专家",
-    "Level4MaximAuthor": "专家",
+    "Level4": "Principle",
+    "Level4Maxim": "To be, or not to be, that is the question",
+    "Level4MaximAuthor": "William Shakespeare",
 
-    "Time":"时间"
+    "Best":"Best",
+    "Time":"Time",
+    "ConfirmTitle":"Please Confirm",
+    "ConfirmMessage":"Confirm to leave?",
+    "ConfirmYes":"Yes",
+    "ConfirmCancel":"Cancel",
+    "ConfirmClose":"Close",
+    "Congrats":"Congrats!"
 
 }

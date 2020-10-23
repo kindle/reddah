@@ -21,8 +21,13 @@ export class TabLevelPage implements OnInit{
       
     }
 
+    mystars = 0;
+
+    maxLevelUnlocked = 1;
+
     ionViewDidEnter(){
-      //this.addScriptByUrl("/assets/js/slide.js");
+        this.mystars = this.reddah.getAllMyStars();
+        this.maxLevelUnlocked = this.reddah.getMaxLevelUnlocked();
     }
 
     addScriptByUrl(src){
@@ -47,11 +52,15 @@ export class TabLevelPage implements OnInit{
 
 
   goLevel(n){
-    this.router.navigate(['/tabs/tab2'], {
-        queryParams: {
-            level: n,
-        }
-    });
+    if(this.maxLevelUnlocked>=n)
+    {
+      this.router.navigate(['/tabs/tab2'], {
+          queryParams: {
+              level: n,
+              page: 0,
+          }
+      });
+    }
   }
 
   goHome(){
