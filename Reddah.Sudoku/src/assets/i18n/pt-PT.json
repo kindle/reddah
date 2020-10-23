@@ -1,30 +1,28 @@
 {
-    
-    "Language": "Language",
-    "GameTitle": "Number Place",
-    "SubTitle1": "Classic",
-    "SubTitle2":"Adventure",
+    "Language": "Отключение",
+    "GameTitle": "Ola Sorra canta",
+    "SubTitle1": "Modo clássico",
+    "SubTitle2":"Correr um grande risco",
 
-    "Level1": "Newbie",
+    "Level1": "As primárias",
     "Level1Maxim": "What we think, we become.",
     "Level1MaximAuthor": "Gautama Buddha",
-    "Level2": "Junior",
+    "Level2": "É intermediário",
     "Level2Maxim": "We need to know, and we will know",
     "Level2MaximAuthor": "David Hilbert",
-    "Level3": "Senior",
+    "Level3": "Mais velho",
     "Level3Maxim": "Rather less, but better",
     "Level3MaximAuthor": "Gauss",
-    "Level4": "Principle",
+    "Level4": "Os peritos",
     "Level4Maxim": "To be, or not to be, that is the question",
     "Level4MaximAuthor": "William Shakespeare",
 
-    "Best":"Best",
-    "Time":"Time",
-    "ConfirmTitle":"Please Confirm",
-    "ConfirmMessage":"Confirm to leave?",
-    "ConfirmYes":"Yes",
-    "ConfirmCancel":"Cancel",
-    "ConfirmClose":"Close",
-    "Congrats":"Congrats!"
-
+    "Best":"Os resultados",
+    "Time":"Hora",
+    "ConfirmTitle":"Por favor, confirme",
+    "ConfirmMessage":"Tem certeza que quer ir embora?",
+    "ConfirmYes":"Tens a certeza",
+    "ConfirmCancel":"Cancelar",
+    "ConfirmClose":"Desligar",
+    "Congrats":"Parabéns"
 }

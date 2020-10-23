@@ -1,30 +1,28 @@
 {
-    
-    "Language": "Language",
-    "GameTitle": "Number Place",
-    "SubTitle1": "Classic",
-    "SubTitle2":"Adventure",
+    "Language": "Sprache",
+    "GameTitle": "Ola Sorra singt",
+    "SubTitle1": "Klassischer Modus",
+    "SubTitle2":"Gehen Sie ein großes Risiko ein",
 
-    "Level1": "Newbie",
+    "Level1": "Primäre",
     "Level1Maxim": "What we think, we become.",
     "Level1MaximAuthor": "Gautama Buddha",
-    "Level2": "Junior",
+    "Level2": "Dazwischenliegend",
     "Level2Maxim": "We need to know, and we will know",
     "Level2MaximAuthor": "David Hilbert",
     "Level3": "Senior",
     "Level3Maxim": "Rather less, but better",
     "Level3MaximAuthor": "Gauss",
-    "Level4": "Principle",
+    "Level4": "Experten",
     "Level4Maxim": "To be, or not to be, that is the question",
     "Level4MaximAuthor": "William Shakespeare",
 
-    "Best":"Best",
-    "Time":"Time",
-    "ConfirmTitle":"Please Confirm",
-    "ConfirmMessage":"Confirm to leave?",
-    "ConfirmYes":"Yes",
-    "ConfirmCancel":"Cancel",
-    "ConfirmClose":"Close",
-    "Congrats":"Congrats!"
-
+    "Best":"Ergebnisse",
+    "Time":"Zeit",
+    "ConfirmTitle":"Bitte bestätigen Sie",
+    "ConfirmMessage":"Möchten Sie wirklich gehen?",
+    "ConfirmYes":"Ja",
+    "ConfirmCancel":"Abbrechen",
+    "ConfirmClose":"Herunterfahren",
+    "Congrats":"Herzlichen glückwunsch!"
 }

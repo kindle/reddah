@@ -1,7 +1,6 @@
 {
-    
     "Language": "Language",
-    "GameTitle": "Number Place",
+    "GameTitle": "Euler Sudoku",
     "SubTitle1": "Classic",
     "SubTitle2":"Adventure",
 
@@ -26,5 +25,4 @@
     "ConfirmCancel":"Cancel",
     "ConfirmClose":"Close",
     "Congrats":"Congrats!"
-
 }

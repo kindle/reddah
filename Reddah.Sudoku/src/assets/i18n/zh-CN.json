@@ -1,5 +1,4 @@
 {
-    
     "Language": "语言",
     "GameTitle": "欧拉数独",
     "SubTitle1": "经典模式",
@@ -25,6 +24,5 @@
     "ConfirmYes":"确定",
     "ConfirmCancel":"取消",
     "ConfirmClose":"关闭",
-    "Congrats":"恭喜过关！"
-
+    "Congrats":"恭喜过关"
 }

@@ -1,30 +1,28 @@
 {
-    
-  "Language": "Language",
-  "GameTitle": "Number Place",
-  "SubTitle1": "Classic",
-  "SubTitle2":"Adventure",
+  "Language": "言語",
+  "GameTitle": "オイラー数独",
+  "SubTitle1": "クラシックモード",
+  "SubTitle2":"大冒険を突破する",
 
-  "Level1": "Newbie",
+  "Level1": "初級",
   "Level1Maxim": "What we think, we become.",
   "Level1MaximAuthor": "Gautama Buddha",
-  "Level2": "Junior",
+  "Level2": "中級",
   "Level2Maxim": "We need to know, and we will know",
   "Level2MaximAuthor": "David Hilbert",
-  "Level3": "Senior",
+  "Level3": "高度な",
   "Level3Maxim": "Rather less, but better",
   "Level3MaximAuthor": "Gauss",
-  "Level4": "Principle",
+  "Level4": "専門家",
   "Level4Maxim": "To be, or not to be, that is the question",
   "Level4MaximAuthor": "William Shakespeare",
 
-  "Best":"Best",
-  "Time":"Time",
-  "ConfirmTitle":"Please Confirm",
-  "ConfirmMessage":"Confirm to leave?",
-  "ConfirmYes":"Yes",
-  "ConfirmCancel":"Cancel",
-  "ConfirmClose":"Close",
-  "Congrats":"Congrats!"
-
+  "Best":"成績",
+  "Time":"時間",
+  "ConfirmTitle":"ご確認ください",
+  "ConfirmMessage":"本当に行くの?",
+  "ConfirmYes":"はい",
+  "ConfirmCancel":"キャンセルします",
+  "ConfirmClose":"閉じます",
+  "Congrats":"おめでとうございます!"
 }

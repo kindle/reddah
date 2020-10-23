@@ -1,30 +1,28 @@
 {
-    
-    "Language": "Language",
-    "GameTitle": "Number Place",
-    "SubTitle1": "Classic",
-    "SubTitle2":"Adventure",
+    "Language": "Γλώσσα",
+    "GameTitle": "Η Όλα Σορρά τραγουδάει",
+    "SubTitle1": "Κλασική λειτουργία",
+    "SubTitle2":"Πάρε μεγάλο ρίσκο",
 
-    "Level1": "Newbie",
+    "Level1": "Πρωτοβάθμια",
     "Level1Maxim": "What we think, we become.",
     "Level1MaximAuthor": "Gautama Buddha",
-    "Level2": "Junior",
+    "Level2": "Ενδιάμεσο",
     "Level2Maxim": "We need to know, and we will know",
     "Level2MaximAuthor": "David Hilbert",
-    "Level3": "Senior",
+    "Level3": "Ανώτερος",
     "Level3Maxim": "Rather less, but better",
     "Level3MaximAuthor": "Gauss",
-    "Level4": "Principle",
+    "Level4": "Εμπειρογνώμονες",
     "Level4Maxim": "To be, or not to be, that is the question",
     "Level4MaximAuthor": "William Shakespeare",
 
-    "Best":"Best",
-    "Time":"Time",
-    "ConfirmTitle":"Please Confirm",
-    "ConfirmMessage":"Confirm to leave?",
-    "ConfirmYes":"Yes",
-    "ConfirmCancel":"Cancel",
-    "ConfirmClose":"Close",
-    "Congrats":"Congrats!"
-
+    "Best":"Αποτελέσματα",
+    "Time":"Ώρα",
+    "ConfirmTitle":"Παρακαλώ επιβεβαιώστε",
+    "ConfirmMessage":"Είσαι σίγουρος ότι θέλεις να φύγεις?",
+    "ConfirmYes":"Ναι",
+    "ConfirmCancel":"Ακυρώσετε",
+    "ConfirmClose":"Κλείσε",
+    "Congrats":"Συγχαρητήρια!"
 }
