@@ -1,17 +1,11 @@
 <ion-content>
-    <div class="titleWrap">
-        <div class="title">
-            <b style="color: rgb(255, 238, 0);margin-right:10px;font-size: 25px;">★</b><span style="color:white;font-size:23px;">{{mystars}}</span>
-        </div>
-    </div>
-    
     <ion-slides>
         <ion-slide style="background: royalblue;color:white;">
             <div class="myslide" (click)="goLevel(1)">
                 <img src="/assets/icon/boy1.png" width="150" class="level-image">
                 <h3 class="level-title">{{ reddah.instant('Level1') }}</h3>
                 <blockquote><q>{{ reddah.instant('Level1Maxim') }}</q>
-                    <cite>- {{ reddah.instant('Level1MaximAuthor') }}</cite>
+                    <cite *ngIf="reddah.instant('Level1MaximAuthor').length>0">- {{ reddah.instant('Level1MaximAuthor') }}</cite>
                 </blockquote>
             </div>
         </ion-slide>
@@ -25,7 +19,7 @@
                     {{ reddah.instant('Level2') }}
                 </h3>
                 <blockquote><q>{{ reddah.instant('Level2Maxim') }}</q>
-                    <cite>- {{ reddah.instant('Level2MaximAuthor') }}</cite>
+                    <cite *ngIf="reddah.instant('Level2MaximAuthor').length>0">- {{ reddah.instant('Level2MaximAuthor') }}</cite>
                 </blockquote>
             </div>
         </ion-slide>
@@ -39,7 +33,7 @@
                     {{ reddah.instant('Level3') }}
                 </h3>
                 <blockquote><q>{{ reddah.instant('Level3Maxim') }}</q>
-                    <cite>- {{ reddah.instant('Level3MaximAuthor') }}</cite>
+                    <cite *ngIf="reddah.instant('Level3MaximAuthor').length>0">- {{ reddah.instant('Level3MaximAuthor') }}</cite>
                 </blockquote>
             </div>
         </ion-slide>
@@ -53,14 +47,19 @@
                     {{ reddah.instant('Level4') }}
                 </h3>
                 <blockquote><q>{{ reddah.instant('Level4Maxim') }}</q>
-                    <cite>- {{ reddah.instant('Level4MaximAuthor') }}</cite>
+                    <cite *ngIf="reddah.instant('Level4MaximAuthor').length>0">- {{ reddah.instant('Level4MaximAuthor') }}</cite>
                 </blockquote>
             </div>
         </ion-slide>
 
     </ion-slides>
 
-    <div class="levels-home">
+    <div class="footerContentLeft">
         <ion-icon class="surface-button" name="arrow-undo-outline" color="light" (click)="goHome()"></ion-icon>
+    </div>
+    <div class="footerContentRight">
+        <div class="title">
+            <b style="color:gold;margin-right:10px;font-size: 25px;">★</b><span style="color:white;font-size:23px;">{{mystars}}</span>
+        </div>
     </div>
 </ion-content>

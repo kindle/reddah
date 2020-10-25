@@ -1,6 +1,6 @@
 {
-  "name": "Sudoku",
-  "version": "0.0.1",
+  "name": "com.reddah.sudoku",
+  "version": "1.0.1",
   "author": "bailin.wei",
   "homepage": "https://reddah.com/",
   "scripts": {

@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
 import * as $ from 'jquery';
 import { ReddahService } from '../reddah.service';
-import { PassPage } from '../pass/pass.page';
 
 @Component({
   selector: 'app-tab3',
@@ -21,7 +20,6 @@ export class Tab3Page implements OnInit{
     private router: Router,
     private activeRouter: ActivatedRoute,
     private alertController: AlertController,
-    private modalController: ModalController,
     public reddah: ReddahService,
   ) {}
 
@@ -350,18 +348,26 @@ drawBoard() {
         };
 
     var sudoku_board = $('<div></div>').addClass('sudoku_board');
-    var sudoku_statistics = $('<div></div>')
-        .addClass('statistics')
-        .html(''//'<b>Cells:</b> <span class="cells_complete">' + this.cellsComplete + '/' + this.cellsNr + '</span>'
+    var sudoku_tasktitle = $('<div></div>')
+        .addClass('tasktitle')
+        .html(''
+        + (this.task!=null?('<span style="margin-right:10px;">'+this.task.id+'</span>'):'')
         + (this.task!=null?(
             this.task.mytime==9999?'':(
-            '<b>'+this.reddah.instant("Best")+':</b> <span class="cells_best">' 
+            '<span>'+this.reddah.instant("Best")+':</span> <span class="cells_best">' 
             + this.fix(parseInt(this.task.mytime/60+""),2) + ':' + this.fix(this.task.mytime%60,2) 
             + '</span>'))
             :'')
+        );
+    var sudoku_statistics = $('<div></div>')
+        .addClass('statistics')
+        .html(''//'<b>Cells:</b> <span class="cells_complete">' + this.cellsComplete + '/' + this.cellsNr + '</span>'
+        
         +' <b>'+this.reddah.instant("Time")+':</b> <span class="time">' + this.fix(this.secondsElapsed/60,2) + ':' + this.fix(this.secondsElapsed%60,2) + '</span>');
 
     $('#' + this.id).empty();
+
+    sudoku_tasktitle.appendTo('#' + this.id);
 
     //draw board 
     for (let i = 0; i < this.nn; i++) {

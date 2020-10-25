@@ -1,7 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
 import { TabLevelPage } from './tablevel.page';
 
 describe('TabLevelPage', () => {
@@ -11,7 +9,7 @@ describe('TabLevelPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TabLevelPage],
-      imports: [IonicModule.forRoot(), ExploreContainerComponentModule]
+      imports: [IonicModule.forRoot()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TabLevelPage);

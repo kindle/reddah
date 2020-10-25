@@ -55,6 +55,8 @@ export class Tab2Page implements OnInit{
       t["mystar"] = this.reddah.getMyStars(t.id);
       
       t["unlock"] = (i==0)||(t["mystar"]>0)||(i>0&&this.task[i-1]["mystar"]>0);
+
+      t["musk"] = this.reddah.musk.get(t.id);
     })
 
     //slides max 4

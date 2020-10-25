@@ -13,17 +13,14 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
 import { HttpClientModule } from '@angular/common/http';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { LocalePage } from './locale/locale.page';
-import { PassPage } from './pass/pass.page';
 
 @NgModule({
   declarations: [
     AppComponent,
     LocalePage,
-    PassPage,
   ],
   entryComponents: [
     LocalePage,
-    PassPage,
   ],
   imports: [
     BrowserModule, IonicModule.forRoot(), AppRoutingModule,

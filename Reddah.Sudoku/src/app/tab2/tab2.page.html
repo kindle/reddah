@@ -3,21 +3,33 @@
     <div class="parallax-bg" style="background-image:url(assets/icon/long.png);background-size: auto 100%;background-repeat: no-repeat;"></div>
     <ion-slide *ngFor="let slide of slides">
       <div class="slide">
-        <ol class="level-ol-box" style="display:flex;justify-content: center; flex-wrap: wrap;">
-          <li class="level-list__item" [class.unlock]="task.unlock" data-id="{{task.id}}" (click)="goTask(task)" *ngFor="let task of slide;index as i">
-            <span class="level-list__item__number" *ngIf="task.unlock">{{task.id}}</span> 
+        <div class="level-ol-box" style="display:flex;justify-content: center; flex-wrap: wrap;">
+          <div class="level-list__item" [class.unlock]="task.unlock" data-id="{{task.id}}" (click)="goTask(task)" *ngFor="let task of slide;index as i">
+            <div class="my-demo-box" *ngIf="task.unlock">
+              <div style="width:inherit;height:inherit;display:grid;grid-template-columns: auto auto auto auto auto auto auto auto auto;
+              grid-template-rows: auto auto auto auto auto auto auto auto auto;">
+                <div 
+                  [class.muskdemo0]="i==1&&task.mystar==0"
+                  [class.muskdemo1]="i==1&&task.mystar==1" 
+                  [class.muskdemo2]="i==1&&task.mystar==2"
+                  [class.muskdemo3]="i==1&&task.mystar==3"
+                 *ngFor="let i of task.musk"></div>
+              </div>
+            </div>
+            <div class="level-list__item__number" *ngIf="task.unlock">&nbsp;</div> 
             <span class="level-list__item__number" *ngIf="!task.unlock">
               <img src="/assets/icon/lock.png" style="vertical-align: middle;">
             </span>
-            <span class="level-list__item__blurb" *ngIf="!task.unlock">
-              <b>{{task.id}}</b>
+            <span class="level-list__item__blurb" style="display: block;" *ngIf="!task.unlock">
+              {{task.id}}
             </span>
-            <span class="level-list__item__blurb" *ngIf="task.unlock">
-              <b style="color: rgb(255, 238, 0);" *ngFor="let i of [].constructor(task.mystar)">★</b>
-              <b style="color: gray;" *ngFor="let i of [].constructor(3-task.mystar)">☆</b>
+            <span class="level-list__item__blurb" style="justify-content: center;" *ngIf="task.unlock">
+              <div style="color:gold;transform: rotate(15deg);" *ngFor="let i of [].constructor(task.mystar)">★</div>
+              <div style="color: lightgrey;transform: rotate(15deg);" *ngFor="let i of [].constructor(3-task.mystar)">☆</div>
             </span>
-          </li>
-        </ol>
+            
+          </div>
+        </div>
       </div>
     </ion-slide>
   </ion-slides>

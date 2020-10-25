@@ -2,7 +2,6 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { TweenMax } from "gsap";
 import { LocalePage } from '../locale/locale.page';
 import { ReddahService } from '../reddah.service';
 
@@ -23,7 +22,7 @@ export class Tab1Page  implements OnInit{
     ) {}
 
   ngOnInit(){
-    this.addScriptByUrl("/assets/starsky/index.js");
+    this.addScriptByUrl("/assets/js/starsky.js");
       
   }
 
