@@ -77,6 +77,19 @@ export class ReddahService {
         return Capacitor.platform=="ios";
     }
 
+    fixLocaleStr(str){
+        let result = this.Locales.filter(l=>l.Name==str);
+        if(result==null||result.length>0)
+            return str;
+            
+        str = str.split('-')[0].toLowerCase();
+
+        let match = this.Locales.filter(l=>l.Name.startsWith(str));
+        if(match==null||match.length==0)
+            return "";
+        return match[0].Name;
+    }
+
     public Locales = [
         new Locale("zh-CN", "简体中文 (zh-CN)"),
         new Locale("en-US", "English (en-US)"),
@@ -116,12 +129,25 @@ export class ReddahService {
 
     test1(){
         for(let i=1;i<=31;i++){
+            let r = Math.floor((Math.random()*3)+1);
+
             this.localStorageService.store(`TaskTime_${i}`, 200);
-            this.localStorageService.store(`TaskMyStars_${i}`, 2);
+            this.localStorageService.store(`TaskMyStars_${i}`, r);
         }
+        this.localStorageService.store(`Reddah_MyCoins`, 200);
     }
 
     test2(){
+        for(let i=1;i<=33;i++){
+            let r = Math.floor((Math.random()*3)+1);
+
+            this.localStorageService.store(`TaskTime_${i}`, 200);
+            this.localStorageService.store(`TaskMyStars_${i}`, r);
+        }
+        this.localStorageService.store(`Reddah_MyCoins`, 200);
+    }
+
+    test3(){
         for(let i=1;i<=79;i++){
             this.localStorageService.store(`TaskTime_${i}`, 200);
             this.localStorageService.store(`TaskMyStars_${i}`, 2);
@@ -140,32 +166,92 @@ export class ReddahService {
     }
 
     pass(task, seconds){
-        if(seconds>10&&seconds<9999){
+        if(seconds>10&&seconds<99999){
             let oldTime = this.getMyTime(task.id);
             if(oldTime!=null&&seconds<oldTime)
             {
                 this.localStorageService.store(`TaskTime_${task.id}`, seconds);
                 let mystar = 0;
-                console.log(task)
+                
                 if(seconds<=task["seconds3star"]){
                     mystar = 3;
+                    this.addMyCoints(5);
                 }else if(seconds<=task["seconds2star"]){
                     mystar = 2;
+                    this.addMyCoints(3);
                 }else if(seconds<=task["seconds1star"]){
                     mystar = 1;
+                    this.addMyCoints(2);
                 }else{
                     mystar = 0;
+                    this.addMyCoints(1);
                 }
                 this.localStorageService.store(`TaskMyStars_${task.id}`, mystar);
             }
         }
     }
 
+    getMyCoins(){
+        let count = this.localStorageService.retrieve(`Reddah_MyCoins`);
+        if(count!=null)
+            return count;
+        return 0;
+    }
+
+    addMyCoints(n){
+        let current = this.getMyCoins();
+        this.localStorageService.store(`Reddah_MyCoins`, current+n);
+        this.toast('+', n);
+    }
+
+    subMyCoints(n){
+        let current = this.getMyCoins();
+        this.localStorageService.store(`Reddah_MyCoins`, current-n);
+        this.toast('-', n);
+    }
+
+    async toast(type, n, style="toast-style") {
+        const toast = await this.toastController.create({
+            message: `${this.instant("Coins")}: ${type}${n}`,
+            position: "top",
+            duration: 2000,
+            color: 'primary',
+            cssClass: style,
+        });
+        toast.present();
+    }
+
+    getBuyCount(){
+        let count = this.localStorageService.retrieve(`Reddah_BuyTimes`);
+        if(count==null)
+            count=0;
+        return count;
+    }
+
+    addBuyCount(){
+        let count = this.localStorageService.retrieve(`Reddah_BuyTimes`);
+        if(count==null)
+            count=0;
+        this.localStorageService.store(`Reddah_BuyTimes`, count+1);
+    }
+
+    buyPrice(){
+        return 10 + this.getBuyCount()*10;
+    }
+
+    buyTask(task){
+        this.localStorageService.store(`TaskTime_${task.id-1}`, 99998);
+        this.localStorageService.store(`TaskMyStars_${task.id-1}`, 0);
+        let price = 10 + this.getBuyCount()*10;
+        this.subMyCoints(price);
+        this.addBuyCount();
+    }
+
     getMyTime(taskId){
         let myTime = this.localStorageService.retrieve(`TaskTime_${taskId}`);
         if(myTime!=null&&myTime>0)
             return myTime;
-        return 9999;
+        return 99999;
     }
 
     getMyStars(taskId){
@@ -173,6 +259,9 @@ export class ReddahService {
         if(myStars!=null&&myStars>0&&myStars<=3)
             return myStars;
         return 0;
+        /*if(myStars!=null)
+            return -1;
+        return myStars;*/
     }
 
     getAllMyStars(){
@@ -189,18 +278,13 @@ export class ReddahService {
     }
 
     getMaxLevelUnlocked(){
-        let maxTaskId = 1;
-        for(let i=1;i<=256;i++){
-            let myTime = this.localStorageService.retrieve(`TaskTime_${i}`);
-            if(myTime!=null&&myTime>0)
-                maxTaskId = i;
-        }
+        let allMyStars = this.getAllMyStars();
 
-        if(maxTaskId>=144){
+        if(allMyStars>=300){
             return 4;
-        }else if(maxTaskId>=80){
+        }else if(allMyStars>=145){
             return 3;
-        }else if(maxTaskId>=32){
+        }else if(allMyStars>=35){
             return 2;
         }
 
@@ -223,7 +307,6 @@ export class ReddahService {
                     seconds1star: 600,
                     seconds2star: 300,
                     seconds3star: 180,
-                    starstounlock: 5,
                 });
             }
         }
@@ -237,10 +320,9 @@ export class ReddahService {
                     maxim: 'Constant dropping wears the stone',
                     solution: this.solution[i],
                     display: this.musk.get(i),
-                    seconds1star: 600,
-                    seconds2star: 300,
-                    seconds3star: 180,
-                    starstounlock: 5,
+                    seconds1star: 900,
+                    seconds2star: 600,
+                    seconds3star: 360
                 });
             }
         }else if(n==3){
@@ -253,10 +335,9 @@ export class ReddahService {
                     maxim: 'Constant dropping wears the stone',
                     solution: this.solution[i],
                     display: this.musk.get(i),
-                    seconds1star: 600,
-                    seconds2star: 300,
-                    seconds3star: 180,
-                    starstounlock: 5,
+                    seconds1star: 1200,
+                    seconds2star: 900,
+                    seconds3star: 540,
                 });
             }
         }else if(n==4){
@@ -269,10 +350,9 @@ export class ReddahService {
                     maxim: 'Constant dropping wears the stone',
                     solution: this.solution[i],
                     display: this.musk.get(i),
-                    seconds1star: 600,
-                    seconds2star: 300,
-                    seconds3star: 180,
-                    starstounlock: 5,
+                    seconds1star: 1500,
+                    seconds2star: 1200,
+                    seconds3star: 600,
                 });
             }
         }

@@ -353,7 +353,7 @@ drawBoard() {
         .html(''
         + (this.task!=null?('<span style="margin-right:10px;">'+this.task.id+'</span>'):'')
         + (this.task!=null?(
-            this.task.mytime==9999?'':(
+            (this.task.mytime==99999||this.task.mytime==99998)?'':(
             '<span>'+this.reddah.instant("Best")+':</span> <span class="cells_best">' 
             + this.fix(parseInt(this.task.mytime/60+""),2) + ':' + this.fix(this.task.mytime%60,2) 
             + '</span>'))
@@ -362,6 +362,14 @@ drawBoard() {
     var sudoku_statistics = $('<div></div>')
         .addClass('statistics')
         .html(''//'<b>Cells:</b> <span class="cells_complete">' + this.cellsComplete + '/' + this.cellsNr + '</span>'
+        
+        + (this.task!=null?('<span class="tasktitledown" style="margin-right:10px;">'+this.task.id+'</span>'):'')
+        + (this.task!=null?(
+            (this.task.mytime==99999||this.task.mytime==99998)?'':(
+            '<span class="tasktitledown">'+this.reddah.instant("Best")+':</span> <span class="tasktitledown cells_best">' 
+            + this.fix(parseInt(this.task.mytime/60+""),2) + ':' + this.fix(this.task.mytime%60,2) 
+            + '</span>'))
+            :'')
         
         +' <b>'+this.reddah.instant("Time")+':</b> <span class="time">' + this.fix(this.secondsElapsed/60,2) + ':' + this.fix(this.secondsElapsed%60,2) + '</span>');
 
@@ -424,16 +432,32 @@ drawBoard() {
     $('<div></div>').addClass('num note').text('?').appendTo(sudoku_console);
 
     //draw gameover
+    /*let starHtml = `<img src="/assets/icon/bigstar.png">`;
+    if(this.task!=null){
+        if(this.secondsElapsed<=this.task.seconds3star){
+            starHtml += `<img src="/assets/icon/bigstar.png"><img src="/assets/icon/bigstar.png">`;
+        }else if(this.secondsElapsed<=this.task.seconds2star){
+            starHtml += `<img src="/assets/icon/bigstar.png">`;
+        }else if(this.secondsElapsed<=this.task.seconds1star){
+    
+        }else{
+            starHtml = '';
+        }
+    }else{
+        //classic
+        starHtml += `<img src="/assets/icon/bigstar.png"><img src="/assets/icon/bigstar.png">`;
+    }*/
+    let starHtml = `<img id="passimg1" src="/assets/icon/bigstar.png">`;
+    starHtml += `<img id="passimg2" src="/assets/icon/bigstar.png"><img id="passimg3" src="/assets/icon/bigstar.png">`;
+
     var sudoku_gameover = $('<div class="gameover_container">'+
     `<canvas id="canvas"></canvas>
     <div class="congrat-box">
         ${this.reddah.instant("Congrats")}
     </div>
-    <div class="star-box">
-        <ion-icon name="star" color="warning" class="pass-star"></ion-icon>
-        <ion-icon name="star" color="warning" class="pass-star"></ion-icon>
-        <ion-icon name="star" color="warning" class="pass-star"></ion-icon>
-    </div>
+    <div class="star-box">` 
+        + starHtml + 
+    `</div>
     <div class="button-box">
         <ion-button color="primary" size="large">${this.reddah.instant("ConfirmClose")}</ion-button>
     </div>
@@ -686,6 +710,28 @@ drawBoard() {
 
     gameOver() {
         this.status = this.END;
+
+        if(this.task!=null){
+
+            document.getElementById("passimg1").style.display = '';
+            document.getElementById("passimg2").style.display = '';
+            document.getElementById("passimg3").style.display = '';
+
+            if(this.secondsElapsed<=this.task.seconds3star){
+                
+            }else if(this.secondsElapsed<=this.task.seconds2star){
+                document.getElementById("passimg1").style.display = 'none';
+            }else if(this.secondsElapsed<=this.task.seconds1star){
+                document.getElementById("passimg1").style.display = 'none';
+                document.getElementById("passimg2").style.display = 'none';
+            }else{
+                document.getElementById("passimg1").style.display = 'none';
+                document.getElementById("passimg2").style.display = 'none';
+                document.getElementById("passimg3").style.display = 'none';
+            }
+        }else{
+            //classic display 3 stars
+        }
 
         $('#' + this.id + ' .gameover_container').show();
         this.reddah.pass(this.task, this.secondsElapsed);

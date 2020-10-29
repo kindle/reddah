@@ -24,5 +24,7 @@
   "ConfirmYes":"はい",
   "ConfirmCancel":"キャンセルします",
   "ConfirmClose":"閉じます",
-  "Congrats":"おめでとうございます!"
+  "Congrats":"おめでとうございます!",
+  "Coins":"金貨",
+  "NotEnoughCoins":"十分なお金は、お金を稼ぐために破った"
 }

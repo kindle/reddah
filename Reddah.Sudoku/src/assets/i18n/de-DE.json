@@ -24,5 +24,7 @@
     "ConfirmYes":"Ja",
     "ConfirmCancel":"Abbrechen",
     "ConfirmClose":"Herunterfahren",
-    "Congrats":"Herzlichen glückwunsch!"
+    "Congrats":"Herzlichen glückwunsch!",
+    "Coins":"Gold",
+    "NotEnoughCoins":"Es gibt nicht genug Geld, um durchzubrechen."
 }

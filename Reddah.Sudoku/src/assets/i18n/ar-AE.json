@@ -5,17 +5,17 @@
     "SubTitle2":"اخاطر كثيراً",
 
     "Level1": "الاساسي",
-    "Level1Maxim": "What we think, we become.",
-    "Level1MaximAuthor": "Gautama Buddha",
+    "Level1Maxim": "الابتسامة كلمة طيبة بغير حروف",
+    "Level1MaximAuthor": "",
     "Level2": "المتوسطه",
-    "Level2Maxim": "We need to know, and we will know",
-    "Level2MaximAuthor": "David Hilbert",
+    "Level2Maxim": "لا تفكر في المفقود حتى لا تفقد الموجود",
+    "Level2MaximAuthor": "",
     "Level3": "كبار",
-    "Level3Maxim": "Rather less, but better",
-    "Level3MaximAuthor": "Gauss",
+    "Level3Maxim": "الكلمة الطيبة جواز مرور إلى كل القلوب",
+    "Level3MaximAuthor": "",
     "Level4": "الخبراء",
-    "Level4Maxim": "To be, or not to be, that is the question",
-    "Level4MaximAuthor": "William Shakespeare",
+    "Level4Maxim": "إذا ازداد الغرور..نقص السرور",
+    "Level4MaximAuthor": "",
 
     "Best":"نتائج",
     "Time":"الوقت",
@@ -24,5 +24,7 @@
     "ConfirmYes":"نعم",
     "ConfirmCancel":"إلغاء الأمر",
     "ConfirmClose":"إيقاف التشغيل",
-    "Congrats":"تهانينا"
+    "Congrats":"تهانينا",
+    "Coins":"الذهب",
+    "NotEnoughCoins":"ليس هناك ما يكفي من المال لاختراق"
 }

@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": ["swiper"]
   },
   "files": [
     "src/main.ts",
@@ -14,5 +14,8 @@
   ],
   "exclude": [
     "src/**/*.spec.ts"
+  ],
+  "typeRoots": [
+    "node_modules/@types"
   ]
 }

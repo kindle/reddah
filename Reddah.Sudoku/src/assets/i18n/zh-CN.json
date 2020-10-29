@@ -24,5 +24,7 @@
     "ConfirmYes":"确定",
     "ConfirmCancel":"取消",
     "ConfirmClose":"关闭",
-    "Congrats":"恭喜过关"
+    "Congrats":"恭喜过关",
+    "Coins":"金币",
+    "NotEnoughCoins":"金币不够，闯关赚"
 }

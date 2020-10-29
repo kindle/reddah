@@ -38,10 +38,11 @@ export class AppComponent {
         { 
             this.globalization.getPreferredLanguage()
             .then(res => {
-                if(this.reddah.Locales.filter(l=>l.Name==res.value).length>0)
+                let localeStr = this.reddah.fixLocaleStr(res.value);
+                if(this.reddah.Locales.filter(l=>l.Name==localeStr).length>0)
                 {
-                  this.localStorageService.store("Reddah_Locale", res.value);
-                  this.reddah.loadTranslate(res.value);
+                  this.localStorageService.store("Reddah_Locale", localeStr);
+                  this.reddah.loadTranslate(localeStr);
                 }
                 else{
                   this.localStorageService.store("Reddah_Locale", defaultLocale);

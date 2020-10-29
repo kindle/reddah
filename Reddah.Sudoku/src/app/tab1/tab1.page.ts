@@ -81,18 +81,18 @@ export class Tab1Page  implements OnInit{
 
 
   
-
+/*
   goClassic(){
     this.router.navigate(['/tabs/tab3'], {
         queryParams: {
         }
     });
-  }
+  }*/
 
   goAdventure(){
-    this.router.navigate(['/tabs/tablevel'], {
-        queryParams: {
-        }
-    });
+      this.router.navigate(['/tabs/tab4'], {
+          queryParams: {
+          }
+      });
   }
 }

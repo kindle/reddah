@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonSlides } from '@ionic/angular';
+import { AlertController, IonSlides } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class Tab2Page implements OnInit{
     public reddah : ReddahService,
     private router: Router,
     private activeRouter: ActivatedRoute,
+    private alertController: AlertController,
   ) {}
 
 
@@ -42,7 +43,16 @@ export class Tab2Page implements OnInit{
 
   @ViewChild(IonSlides) slides1: IonSlides;
 
+  mylevelstars = 0;
+  levelstars = 0;
+  mycoins = 0;
+
   ionViewDidEnter(){
+
+    this.mylevelstars=0;
+    this.levelstars = 0;
+    this.mycoins = this.reddah.getMyCoins();
+    
     let level = this.activeRouter.snapshot.queryParams["level"];
     let page = this.activeRouter.snapshot.queryParams["page"];
     if(page!=null){
@@ -53,10 +63,12 @@ export class Tab2Page implements OnInit{
     this.task.forEach((t,i)=>{
       t["mytime"] = this.reddah.getMyTime(t.id);
       t["mystar"] = this.reddah.getMyStars(t.id);
-      
-      t["unlock"] = (i==0)||(t["mystar"]>0)||(i>0&&this.task[i-1]["mystar"]>0);
+      this.mylevelstars += t["mystar"];
+      this.levelstars +=3;
+      t["unlock"] = (i==0)||(t["mytime"]<=99998)||(i>0&&this.task[i-1]["mytime"]<=99998);
 
       t["musk"] = this.reddah.musk.get(t.id);
+      t["index"] = i;
     })
 
     //slides max 4
@@ -64,13 +76,60 @@ export class Tab2Page implements OnInit{
 
   }
 
-  goTask(task){
+  async goTask(task){
     if(task.unlock){
       this.router.navigate(['/tabs/tab3'], {
           queryParams: {
               task: JSON.stringify(task),
           }
       });
+    }
+    else{
+      if(task.index>0&&task.index<this.task.length){
+        if(this.task[task.index-1].unlock==true){
+            if(this.reddah.getMyCoins()>=this.reddah.buyPrice()){ 
+              const alert = await this.alertController.create({
+                  header: this.reddah.instant("ConfirmTitle"),
+                  message: this.reddah.buyPrice() + ' ' + this.reddah.instant("Coins"),
+                  buttons: [
+                  {
+                      text: this.reddah.instant("ConfirmCancel"),
+                      role: 'cancel',
+                      cssClass: 'secondary',
+                      handler: () => {}
+                  }, 
+                  {
+                      text: this.reddah.instant("ConfirmYes"),
+                      handler: () => {
+                          this.reddah.buyTask(task);
+                          this.router.navigate(['/tabs/tab3'], {
+                              queryParams: {
+                                  task: JSON.stringify(task),
+                              }
+                          });
+                      }
+                  }]
+              });
+    
+              await alert.present().then(()=>{});
+            }
+            else{     
+              const alert = await this.alertController.create({
+                  header: this.reddah.instant("ConfirmTitle"),
+                  message: this.reddah.instant("NotEnoughCoins"),
+                  buttons: [
+                  {
+                      text: 'OK',
+                      role: 'ok',
+                      cssClass: 'secondary',
+                      handler: () => {}
+                  }]
+              });
+    
+              await alert.present().then(()=>{});      
+            }
+          }
+      }
     }
   }
 

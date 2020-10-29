@@ -1,0 +1,80 @@
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
+
+.swiper-box{
+    display: flex;
+    height: fit-content;
+}
+
+.level-image{
+    width:12rem;
+    height: auto;
+    position: relative;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.level-title{
+    margin-bottom: 15px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 2rem;
+}
+
+cite {
+    display: block;
+    text-align: center;
+    font-family: Verdana, Arial, sans-serif;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: white;
+    font-style: normal;
+}
+q {
+    quotes: "“" "”" "‘" "’";
+    font-size: 2rem;
+}
+q:after {
+    content: close-quote;
+    color: white;
+    font-size: 2rem;
+}
+
+q:before {
+  content: open-quote;
+  color: white;
+  font-size: 2rem;
+}
+  
+@media only screen and (orientation : portrait) {
+  .swiper-box{
+    flex-direction: column;
+  }
+
+  .swiper-box-text{
+    padding: 3rem 1rem;
+  }
+}
+
+@media only screen and (orientation : landscape) {
+  .swiper-box{
+    flex-direction: row;
+  }
+
+  .swiper-box-text{
+    padding: 3rem;
+  }
+}
+
+  

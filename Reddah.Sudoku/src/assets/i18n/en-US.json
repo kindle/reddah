@@ -24,5 +24,7 @@
     "ConfirmYes":"Yes",
     "ConfirmCancel":"Cancel",
     "ConfirmClose":"Close",
-    "Congrats":"Congrats!"
+    "Congrats":"Congrats!",
+    "Coins":"Coins",
+    "NotEnoughCoins":"Not enough coins, play to earn"
 }

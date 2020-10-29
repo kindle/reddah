@@ -24,5 +24,7 @@
     "ConfirmYes":"Tens a certeza",
     "ConfirmCancel":"Cancelar",
     "ConfirmClose":"Desligar",
-    "Congrats":"Parabéns"
+    "Congrats":"Parabéns",
+    "Coins":"Ouro",
+    "NotEnoughCoins":"Não há dinheiro suficiente para conseguir."
 }

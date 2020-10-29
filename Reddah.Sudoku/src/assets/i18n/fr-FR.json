@@ -24,5 +24,7 @@
   "ConfirmYes":"Oui",
   "ConfirmCancel":"Annuler",
   "ConfirmClose":"Arrêter",
-  "Congrats":"Félicitations!"
+  "Congrats":"Félicitations!",
+  "Coins":"Or",
+  "NotEnoughCoins":"Il n’y a pas assez d’argent pour percer."
 }

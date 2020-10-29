@@ -24,5 +24,7 @@
     "ConfirmYes":"Sí",
     "ConfirmCancel":"Cancelar",
     "ConfirmClose":"Apaga",
-    "Congrats":"Felicitaciones!"
+    "Congrats":"Felicitaciones!",
+    "Coins":"Oro",
+    "NotEnoughCoins":"No hay suficiente dinero para abrirse paso."
 }
