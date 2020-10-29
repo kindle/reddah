@@ -1,18 +1,17 @@
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab2Page } from './tab2.page';
-import { Tab2PageRoutingModule } from './tab2-routing.module';
+import { Tab3listPage } from './tab3list.page';
+import { Tab3listPageRoutingModule } from './tab3list-routing.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    Tab2PageRoutingModule
+    Tab3listPageRoutingModule
   ],
-  declarations: [Tab2Page]
+  declarations: [Tab3listPage]
 })
-export class Tab2PageModule {}
+export class Tab3listPageModule {}

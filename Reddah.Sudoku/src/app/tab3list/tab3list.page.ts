@@ -4,11 +4,11 @@ import { AlertController, IonSlides } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-tab3list',
+  templateUrl: 'tab3list.page.html',
+  styleUrls: ['tab3list.page.scss']
 })
-export class Tab2Page implements OnInit{
+export class Tab3listPage implements OnInit{
 
   constructor(
     public reddah : ReddahService,
@@ -78,7 +78,7 @@ export class Tab2Page implements OnInit{
 
   async goTask(task){
     if(task.unlock){
-      this.router.navigate(['/tabs/tab3'], {
+      this.router.navigate(['/tabs/tab4task'], {
           queryParams: {
               task: JSON.stringify(task),
           }
@@ -102,7 +102,7 @@ export class Tab2Page implements OnInit{
                       text: this.reddah.instant("ConfirmYes"),
                       handler: () => {
                           this.reddah.buyTask(task);
-                          this.router.navigate(['/tabs/tab3'], {
+                          this.router.navigate(['/tabs/tab4task'], {
                               queryParams: {
                                   task: JSON.stringify(task),
                               }
@@ -134,7 +134,7 @@ export class Tab2Page implements OnInit{
   }
 
   goLevels(){
-    this.router.navigate(['/tabs/tablevel'], {
+    this.router.navigate(['/tabs/tab2level'], {
         queryParams: {}
     });
   }

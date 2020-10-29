@@ -6,11 +6,11 @@ import { LocalePage } from '../locale/locale.page';
 import { ReddahService } from '../reddah.service';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-tab1home',
+  templateUrl: 'tab1home.page.html',
+  styleUrls: ['tab1home.page.scss']
 })
-export class Tab1Page  implements OnInit{
+export class Tab1homePage  implements OnInit{
 
   constructor(
     private _renderer2: Renderer2,
@@ -35,7 +35,7 @@ export class Tab1Page  implements OnInit{
     s.id = key;
     
     this._renderer2.appendChild(
-        this._document.body.getElementsByTagName("app-tab1")[0], s);
+        this._document.body.getElementsByTagName("app-tab1home")[0], s);
     
   }
 
@@ -83,14 +83,14 @@ export class Tab1Page  implements OnInit{
   
 /*
   goClassic(){
-    this.router.navigate(['/tabs/tab3'], {
+    this.router.navigate(['/tabs/tab4task'], {
         queryParams: {
         }
     });
   }*/
 
   goAdventure(){
-      this.router.navigate(['/tabs/tab4'], {
+      this.router.navigate(['/tabs/tab2level'], {
           queryParams: {
           }
       });

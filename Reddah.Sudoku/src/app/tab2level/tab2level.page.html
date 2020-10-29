@@ -1,0 +1,75 @@
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide" (click)="goLevel(1)" style="background: royalblue;color:white;">
+            <div class="swiper-box">
+                <img src="/assets/icon/boy1.png" class="level-image">
+                    
+                <div class="swiper-box-text">
+                    <div class="level-title">{{ reddah.instant('Level1') }}</div>
+                    <q>{{ reddah.instant('Level1Maxim') }}</q>
+                    <cite *ngIf="reddah.instant('Level1MaximAuthor').length>0">- {{ reddah.instant('Level1MaximAuthor') }}</cite>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide" (click)="goLevel(2)" style="background: orange;color:white;">
+            <div class="swiper-box">
+                <img src="/assets/icon/girl1.png" class="level-image">
+                        
+                <div class="swiper-box-text">
+                    <div class="level-title">{{ reddah.instant('Level2') }}</div>
+                    <div class="level-title" *ngIf="maxLevelUnlocked<2">
+                        <ion-icon name="lock-closed" color="light"
+                        style="transform: translateY(3px);"></ion-icon>
+                        [35 <img src="/assets/icon/bigstar.png" style="margin: 0;width:25px;vertical-align: middle;margin-top:-8px;">]
+                    </div>
+                    <q>{{ reddah.instant('Level2Maxim') }}</q>
+                    <cite *ngIf="reddah.instant('Level2MaximAuthor').length>0">- {{ reddah.instant('Level2MaximAuthor') }}</cite>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide" (click)="goLevel(3)" style="background: deepskyblue;color:white;">
+            <div class="swiper-box">
+                <img src="/assets/icon/boy2.png" class="level-image">
+                        
+                <div class="swiper-box-text">
+                    <div class="level-title">{{ reddah.instant('Level3') }}</div>
+                    <div class="level-title" *ngIf="maxLevelUnlocked<3">
+                        <ion-icon name="lock-closed" color="light"
+                        style="transform: translateY(3px);"></ion-icon>
+                        [145 <img src="/assets/icon/bigstar.png" style="margin: 0;width:25px;vertical-align: middle;margin-top:-8px;">]
+                    </div>
+                    <q>{{ reddah.instant('Level3Maxim') }}</q>
+                    <cite *ngIf="reddah.instant('Level3MaximAuthor').length>0">- {{ reddah.instant('Level3MaximAuthor') }}</cite>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide" (click)="goLevel(4)" style="background: coral;color:white;">
+            <div class="swiper-box">
+                <img src="/assets/icon/girl2.png" class="level-image">
+                
+                <div class="swiper-box-text">
+                    <div class="level-title">{{ reddah.instant('Level4') }}</div>
+                    <div class="level-title" *ngIf="maxLevelUnlocked<4">
+                        <ion-icon name="lock-closed" color="light"
+                        style="transform: translateY(3px);"></ion-icon>
+                        [300 <img src="/assets/icon/bigstar.png" style="margin: 0;width:25px;vertical-align: middle;margin-top:-8px;">]
+                    </div>
+                    <q>{{ reddah.instant('Level4Maxim') }}</q>
+                    <cite *ngIf="reddah.instant('Level4MaximAuthor').length>0">- {{ reddah.instant('Level4MaximAuthor') }}</cite>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footerContentLeft">
+  <ion-icon class="surface-button" name="arrow-undo-outline" color="light" (click)="goHome()"></ion-icon>
+</div>
+<div class="footerContentRight">
+  <div class="title">
+      <span style="color:white;font-size:23px;">{{mycoins}}</span>
+      <img src="/assets/icon/coin.png" style="margin-left: 5px;margin-right: 15px;width:25px;vertical-align:text-bottom;">
+      <span style="color:white;font-size:23px;">{{mystars}}</span>
+      <img src="/assets/icon/bigstar.png" style="margin-left: 5px;width:25px;vertical-align:text-bottom;">
+  </div>
+</div>

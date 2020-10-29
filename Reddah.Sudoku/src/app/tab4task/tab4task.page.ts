@@ -2,17 +2,17 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Inject, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import * as $ from 'jquery';
 import { ReddahService } from '../reddah.service';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss'],
+  selector: 'app-tab4task',
+  templateUrl: 'tab4task.page.html',
+  styleUrls: ['tab4task.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class Tab3Page implements OnInit{
+export class Tab4taskPage implements OnInit{
 
   constructor(
     private _renderer2: Renderer2,
@@ -36,7 +36,7 @@ export class Tab3Page implements OnInit{
     s.id = key;
     
     this._renderer2.appendChild(
-    this._document.body.getElementsByTagName("app-tab3")[0], s);
+    this._document.body.getElementsByTagName("app-tab4task")[0], s);
 
 }
 
@@ -49,7 +49,7 @@ addScriptByText(text){
     s.id = key;
     
     this._renderer2.appendChild(
-    this._document.body.getElementsByTagName("app-tab3")[0], s);
+    this._document.body.getElementsByTagName("app-tab4task")[0], s);
 
 }
 
@@ -791,13 +791,13 @@ drawBoard() {
     realClose(){
         if(this.task){
             //adventure back to slides
-            this.router.navigate(['/tabs/tab2'], {
+            this.router.navigate(['/tabs/tab3list'], {
                 queryParams: { level: this.task.level }
             });
         }
         else{
             //classic back to home
-            this.router.navigate(['/tabs/tab1'], {
+            this.router.navigate(['/tabs/tab1home'], {
                 queryParams: {}
             });
         }

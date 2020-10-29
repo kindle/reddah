@@ -61,35 +61,57 @@ body {
     width: 100%;
 }
 
-.home-action-classic{
-    font-family: Georgia, serif;
-    font-style: italic;
-    position: absolute;
-    top: 45%;
-    transform: translateY(-50%);
-    color: white;
-    font-size: 35px;
-    text-align: center;
-    width: 100%;
-}
-
-.home-action-adventure{
-    font-family: Georgia, serif;
-    font-style: italic;
-    position: absolute;
-    top: 55%;
-    transform: translateY(-50%);
-    color: white;
-    font-size: 35px;
-    text-align: center;
-    width: 100%;
-}
 
 /*iphone*/
 @media all and (orientation: portrait){
-    
+    .home-action-start{
+        font-family: Georgia, serif;
+        font-style: italic;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 35px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .home-action-classic{
+        font-family: Georgia, serif;
+        font-style: italic;
+        position: absolute;
+        top: 45%;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 35px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .home-action-adventure{
+        font-family: Georgia, serif;
+        font-style: italic;
+        position: absolute;
+        top: 55%;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 35px;
+        text-align: center;
+        width: 100%;
+    }
 }
 @media all and (orientation: landscape){
+    .home-action-start{
+        font-family: Georgia, serif;
+        font-style: italic;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 35px;
+        text-align: center;
+        width: 100%;
+    }
     .home-action-classic{
         font-family: Georgia, serif;
         font-style: italic;

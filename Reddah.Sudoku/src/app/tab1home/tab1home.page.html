@@ -128,9 +128,12 @@
   <!--
   <div class="home-action-classic" (click)="goClassic()">
     {{ reddah.instant('SubTitle1') }}
-  </div>-->
-  <div class="home-action-classic" (click)="goAdventure()">
+  </div>
+  <div class="home-action-adventure" (click)="goAdventure()">
     {{ reddah.instant('SubTitle2') }}
+  </div>-->
+  <div class="home-action-start" (click)="goAdventure()">
+    {{ reddah.instant('SubTitle') }}
   </div>
 </ion-content>
 <audio id="bgm" src="/assets/sound/bgm.mp3" loop preload="auto" autoplay="true"></audio>
