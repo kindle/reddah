@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, IonSlides } from '@ionic/angular';
+import { Swiper } from 'swiper';
 import { ReddahService } from '../reddah.service';
 
 @Component({
@@ -41,13 +42,18 @@ export class Tab3listPage implements OnInit{
   }
 
 
-  @ViewChild(IonSlides) slides1: IonSlides;
+  @ViewChild(IonSlides) slides3: IonSlides;
 
   mylevelstars = 0;
   levelstars = 0;
   mycoins = 0;
 
   ionViewDidEnter(){
+    var swiper3 = new Swiper('.swiper-container3', {
+      speed: 600,
+      parallax: true,
+    });
+    
 
     this.mylevelstars=0;
     this.levelstars = 0;
@@ -56,7 +62,7 @@ export class Tab3listPage implements OnInit{
     let level = this.activeRouter.snapshot.queryParams["level"];
     let page = this.activeRouter.snapshot.queryParams["page"];
     if(page!=null){
-        this.slides1.slideTo(0, 500);
+      swiper3.slideTo(0, 500);
     }
     
     this.task = this.reddah.getLevelTasks(level);

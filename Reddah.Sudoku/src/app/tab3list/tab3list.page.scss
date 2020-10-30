@@ -1,180 +1,25 @@
-  
-  .parallax-bg {
-      position: absolute;
-      left: -50%;
-      top: 0;
-      width: 500%;
-      height: 100%;
-      -webkit-background-size: cover !important;
-      background-size: cover !important;
-      background-position: center;
-  }
-
-  ion-content {
-    height: 100%;
-  }
-
-  ion-slides {
-    height: 100%;
-  }
-
-  .swiper-slide {
-    display: block;
-  }
-
-  .swiper-slide h2 {
-    margin-top: 2.8rem;
-  }
-
-  .swiper-slide img {
-    max-height: 50%;
-    max-width: 80%;
-    pointer-events: none;
-  }
-
-  b {
-    font-weight: 500;
-  }
-
-  p {
-    padding: 0 40px;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--ion-color-step-600, #60646b);
-  }
-
-  p b {
-    color: var(--ion-text-color, #000000);
-  }
-
-
-
-
-.unlock{
-    background:white !important;
-}
-
-
-
-
-
-.is-cub-hovered,
-.is-cub-hovered canvas {
-    cursor: -webkit-grab;
-    cursor: grab;
-}
-.is-cub-dragging,
-.is-cub-dragging canvas {
-    cursor: -webkit-grabbing;
-    cursor: grabbing;
-}
-.instruction {
-    padding: 0 10px;
-    text-align: center;
-    position: absolute;
+.swiper-container3 {
     width: 100%;
-    padding-bottom: 40px;
+    height: 100%;
 }
-.button {
-    font-family: 'Avenir Next', Avenir, sans-serif;
-    font-weight: 500;
-    font-size: 20px;
-    padding: 5px 15px;
-    margin: 10px;
-    background: #BBB;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-.button:hover {
-    background: #09F;
-}
-.top-bar {
+
+.parallax-bg {
     position: absolute;
     left: 0;
     top: 0;
-}
-.level-select-button {
-    position: relative;
-    z-index: 2;
-    /* above canvas */
-}
-.next-level-button {
-    position: absolute;
-    left: 50%;
-    -webkit-transform: translateX(-110px) scale(0.5);
-    transform: translateX(-110px) scale(0.5);
-    opacity: 0;
-    background: #09F;
-    width: 200px;
-    height: 80px;
-    pointer-events: none;
-    -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
-    transition: transform 0.2s, opacity 0.2s;
-}
-.next-level-button:hover {
-    background: #2BF;
-}
-.next-level-button.is-open {
-    display: inline-block;
-    pointer-events: auto;
-    -webkit-transform: translateX(-110px) scale(1);
-    transform: translate(-110px) scale(1);
-    opacity: 1;
-}
-/* ---- level list ---- */
-
-.level-list {
-    position: absolute;
-    background: #EEE;
-    width: 100%;
-    min-height: 100%;
-    left: 0;
-    top: 0;
-    margin: 0;
-    list-style: none;
-    padding: 10px;
-    z-index: 3;
-    /* above canvas, level select button */
-    
-    left: -100%;
-    transition: left 0.2s;
-}
-.level-list.is-open {
-    left: 0;
+    width: 130%;
+    height: 100%;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
 }
 
-.level-list__item:hover {
-    color: #09F;
-    cursor: pointer;
-    background: white;
+.swiper-slide{
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    padding: 0 30px;
 }
-.level-list__item.is-playing {
-    background: #09F;
-    color: white;
-}
-
-.level-list__item__check {
-    position: absolute;
-    right: -10px;
-    top: -10px;
-    width: 30px;
-    line-height: 30px;
-    background: #555;
-    border-radius: 15px;
-    color: white;
-    display: none;
-}
-.level-list__item.did-complete .level-list__item__check {
-    display: block;
-}
-/* ---- level pres ---- */
-
-.levels {
-    display: none;
-}
-
 
 .muskdemo0{
     background-color: lightgray;
@@ -192,27 +37,44 @@
     background-color: coral;
 }
 
-
-
-
-/*iphone*/
-@media all and (orientation: portrait){
-    .level-ol-box{
-        margin:100px 0px; padding:0; text-align: left;
-    }
+.unlock{
+    background:white !important;
 }
-@media all and (orientation: landscape){
-    .level-ol-box{
-        margin:30px 0; padding:0; text-align: left;
-    }
+
+
+.level-list {
+    position: absolute;
+    background: #EEE;
+    width: 100%;
+    min-height: 100%;
+    left: 0;
+    top: 0;
+    margin: 0;
+    list-style: none;
+    padding: 10px;
+    z-index: 3;
+    
+    left: -100%;
+    transition: left 0.2s;
 }
+
+
+.levels {
+    display: none;
+}
+
+
+.lock-img{
+    width: 40px;
+}
+
 .level-list__item {
     display: inline-block;
     background: #DDD;
     margin: 10px 5px;
     padding: 10px;
-    width: 75px;
-    height: 75px;
+    width: 65px;
+    height: 65px;
     text-align: center;
     border-radius: 10px;
     position: relative;
@@ -222,10 +84,6 @@
     line-height: 35px;
     z-index: 10;
 }
-.level-list__item__blurb_text {
-    display: flex;
-    font-size: 18px;
-}
 .level-list__item__blurb {
     position: absolute;
     bottom: -10px;
@@ -234,14 +92,13 @@
     margin-left: -2px;
 }
 .my-demo-box{
-    transform: scale(0.6) translateX(-20%) translateY(-25%); 
+    transform: scale(0.6) translateX(-25%) translateY(-25%); 
     position:fixed;width:inherit;height:inherit;
 }
 .levelstar{
     width:20px;height: 20px;z-index:10;
 }
   
-/*ipad*/
 @media all and (orientation: portrait) and (min-width: 700px) {
     .level-ol-box{
         margin:100px 30px; padding:0; text-align: left;
@@ -249,10 +106,10 @@
     .level-list__item {
         display: inline-block;
         background: #DDD;
-        margin: 15px;
+        margin: 15px 10px;
         padding: 10px;
-        width: 150px;
-        height: 150px;
+        width: 140px;
+        height: 140px;
         text-align: center;
         border-radius: 10px;
         position: relative;
@@ -260,11 +117,6 @@
     .level-list__item__number {
         font-size: 55px;
         line-height: 80px;
-    }
-    .level-list__item__blurb_text {
-        display: flex;
-        font-size: 30px;
-        margin-top: 5px;
     }
     .level-list__item__blurb {
         position: absolute;
@@ -282,9 +134,14 @@
     .levelstar{
         width:35px;height: 35px;z-index:10;
     }
+
+    .lock-img{
+        vertical-align: -webkit-baseline-middle; 
+        width: 75px;
+    }
 }
 
-@media all and (orientation: landscape) and (min-width: 700px) {
+@media all and (orientation: landscape) and (min-width: 700px) and (min-height: 500px) {
     .level-ol-box{
         margin:100px 30px; padding:0; text-align: left;
     }
@@ -303,11 +160,6 @@
         font-size: 45px;
         line-height: 60px;
     }
-    .level-list__item__blurb_text {
-        display: flex;
-        font-size: 25px;
-        margin-top: 5px;
-    }
     .level-list__item__blurb {
         position: absolute;
         bottom: -20px;
@@ -323,5 +175,9 @@
     }
     .levelstar{
         width:35px;height: 35px;z-index:10;
+    }
+    .lock-img{
+        vertical-align: -webkit-baseline-middle; 
+        width: 75px;
     }
 }

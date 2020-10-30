@@ -1,3 +1,9 @@
+.sudo-box{
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
+
 .sudo-box H1 {
     background: black;
     color: white;
@@ -10,7 +16,7 @@
 /* board */
 
 .sudoku_board {
-    margin: 6px auto;
+    margin: 15px auto;
     overflow: hidden;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -341,17 +347,6 @@
     justify-content:center;
 }
 
-.cells_best{
-    margin-right: 20px;
-    color: green;
-}
-
-.tasktitle{
-    padding:10px 5px;
-}
-
-
-/*iphone*/
 .sudo-box {
     height: 100%;
     font-family: verdana, helvetica, arial, sans-serif;
@@ -360,69 +355,4 @@
     padding: 0 0;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAIUlEQVQYV2N89urtfwYiACNIoZSYMCMhtaMK8YYQ0cEDAG5yJ8eLRhTfAAAAAElFTkSuQmCC
 ) repeat;
-}
-
-.my-container{
-    margin-top: 25%;
-}
-
-.time{
-    margin-right:20px;
-}
-
-.tasktitledown{
-    display: none;
-}
-  
-/*ipad*/
-@media all and (orientation: portrait) and (min-width: 700px) {
-    .sudo-box {
-        height: 100%;
-        font-family: verdana, helvetica, arial, sans-serif;
-        border: 0px;
-        margin: 0px;
-        padding: 0px 30px;
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAIUlEQVQYV2N89urtfwYiACNIoZSYMCMhtaMK8YYQ0cEDAG5yJ8eLRhTfAAAAAElFTkSuQmCC
-        ) repeat;
-    }
-
-    .my-container{
-        margin-top: 50px;
-    }
-
-    .time{
-        margin-right:0;
-    }
-
-    .tasktitledown{
-        display: none;
-    }
-}
-
-@media all and (orientation: landscape) and (min-width: 700px) {
-    .sudo-box {
-        height: 100%;
-        font-family: verdana, helvetica, arial, sans-serif;
-        border: 0px;
-        margin: 0px;
-        padding: 0px 30px;
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAIUlEQVQYV2N89urtfwYiACNIoZSYMCMhtaMK8YYQ0cEDAG5yJ8eLRhTfAAAAAElFTkSuQmCC
-        ) repeat;
-    }
-
-    .my-container{
-        margin-top: 20px;
-    }
-
-    .time{
-        margin-right:0;
-    }
-
-    .tasktitle{
-        display: none;
-    }
-
-    .tasktitledown{
-        display: '' !important;
-    }
 }

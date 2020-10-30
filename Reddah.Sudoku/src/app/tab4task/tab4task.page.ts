@@ -348,7 +348,7 @@ drawBoard() {
         };
 
     var sudoku_board = $('<div></div>').addClass('sudoku_board');
-    var sudoku_tasktitle = $('<div></div>')
+    /*var sudoku_tasktitle = $('<div></div>')
         .addClass('tasktitle')
         .html(''
         + (this.task!=null?('<span style="margin-right:10px;">'+this.task.id+'</span>'):'')
@@ -358,11 +358,12 @@ drawBoard() {
             + this.fix(parseInt(this.task.mytime/60+""),2) + ':' + this.fix(this.task.mytime%60,2) 
             + '</span>'))
             :'')
-        );
+        );*/
     var sudoku_statistics = $('<div></div>')
         .addClass('statistics')
-        .html(''//'<b>Cells:</b> <span class="cells_complete">' + this.cellsComplete + '/' + this.cellsNr + '</span>'
-        
+        .html('');
+
+        /*
         + (this.task!=null?('<span class="tasktitledown" style="margin-right:10px;">'+this.task.id+'</span>'):'')
         + (this.task!=null?(
             (this.task.mytime==99999||this.task.mytime==99998)?'':(
@@ -372,10 +373,11 @@ drawBoard() {
             :'')
         
         +' <b>'+this.reddah.instant("Time")+':</b> <span class="time">' + this.fix(this.secondsElapsed/60,2) + ':' + this.fix(this.secondsElapsed%60,2) + '</span>');
+        */
 
     $('#' + this.id).empty();
 
-    sudoku_tasktitle.appendTo('#' + this.id);
+    //sudoku_tasktitle.appendTo('#' + this.id);
 
     //draw board 
     for (let i = 0; i < this.nn; i++) {
@@ -481,7 +483,11 @@ drawBoard() {
     o
 
     fix(num, length) {
-    return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
+        return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
+    }
+
+    getBest(taskmytime){
+        return `${this.fix(parseInt(taskmytime/60+""),2)}:${this.fix(taskmytime%60,2)}`;
     }
 
     resizeWindow() {
