@@ -27,5 +27,6 @@
     "ConfirmClose":"關閉",
     "Congrats":"恭喜過關",
     "Coins":"金幣",
-    "NotEnoughCoins":"金幣唔夠,闖關賺。"
+    "CoinsToUnlock":"支付{0}金幣解鎖",
+    "NotEnoughCoins":"需要支付{0}金幣解鎖，金幣不够啦!"
 }

@@ -60,12 +60,12 @@ export class Tab3listPage implements OnInit{
         this.slides3.slideTo(0,500);
     }
 
-    /*
+    
     this.screenOrientation.onChange().subscribe(
         () => {
-            this.slides3.slideTo(0,500);
+            //this.slides3.update();
         }
-    );*/
+    );
     
     this.task = this.reddah.getLevelTasks(level);
     this.task.forEach((t,i)=>{
@@ -95,10 +95,11 @@ export class Tab3listPage implements OnInit{
     else{
       if(task.index>0&&task.index<this.task.length){
         if(this.task[task.index-1].unlock==true){
-            if(this.reddah.getMyCoins()>=this.reddah.buyPrice()){ 
+            let price = this.reddah.buyPrice();
+            if(this.reddah.getMyCoins()>=price){ 
               const alert = await this.alertController.create({
                   header: this.reddah.instant("ConfirmTitle"),
-                  message: this.reddah.buyPrice() + ' ' + this.reddah.instant("Coins"),
+                  message: this.reddah.instant("CoinsToUnlock").replace("{0}",price),
                   buttons: [
                   {
                       text: this.reddah.instant("ConfirmCancel"),
@@ -124,7 +125,7 @@ export class Tab3listPage implements OnInit{
             else{     
               const alert = await this.alertController.create({
                   header: this.reddah.instant("ConfirmTitle"),
-                  message: this.reddah.instant("NotEnoughCoins"),
+                  message: this.reddah.instant("NotEnoughCoins").replace("{0}",price),
                   buttons: [
                   {
                       text: 'OK',

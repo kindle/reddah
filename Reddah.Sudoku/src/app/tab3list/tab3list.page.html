@@ -1,38 +1,5 @@
-<!--<div class="swiper-container3">
-    <div class="parallax-bg" style="background-image:url(assets/icon/long.png);" data-swiper-parallax="-23%"></div>
-    <div class="swiper-wrapper">
-        <div class="swiper-slide" *ngFor="let slide of slides">
-            <div class="level-ol-box" style="display:flex;justify-content: flex-start; flex-wrap: wrap;">
-                
-                <div class="level-list__item" [class.unlock]="task.unlock" data-id="{{task.id}}" (click)="goTask(task)" *ngFor="let task of slide;index as i">
-                    <div class="my-demo-box" *ngIf="task.unlock">
-                        <div style="width:inherit;height:inherit;display:grid;grid-template-columns: auto auto auto auto auto auto auto auto auto;
-                        grid-template-rows: auto auto auto auto auto auto auto auto auto;">
-                          <div 
-                              [class.muskdemo0]="i==1&&task.mystar==0"
-                              [class.muskdemo1]="i==1&&task.mystar==1" 
-                              [class.muskdemo2]="i==1&&task.mystar==2"
-                              [class.muskdemo3]="i==1&&task.mystar==3"
-                              *ngFor="let i of task.musk"></div>
-                        </div>
-                    </div>
-                    <div class="level-list__item__number" *ngIf="task.unlock">&nbsp;</div> 
-                    <span class="level-list__item__number" *ngIf="!task.unlock">
-                        <img src="/assets/icon/lock.png" class="lock-img">
-                    </span>
-                    <span class="level-list__item__blurb" style="justify-content: center;" *ngIf="task.unlock">
-                        <img src="/assets/icon/star.png" class="levelstar" *ngFor="let i of [].constructor(task.mystar)">
-                        <img src="/assets/icon/stardark.png" class="levelstar" *ngFor="let i of [].constructor(3-task.mystar)">
-                    </span>
-                </div>
-                
-            </div>
-        </div>
-      
-    </div>
-</div>-->
 <ion-content fullscreen>
-    <ion-slides [pager]="true">
+    <ion-slides [pager]="true" id="myslide">
         <div class="parallax-bg" style="background-image:url(assets/icon/long.png);background-size: auto 100%;background-repeat: no-repeat;"></div>
         <ion-slide *ngFor="let slide of slides">
         <div class="slide">

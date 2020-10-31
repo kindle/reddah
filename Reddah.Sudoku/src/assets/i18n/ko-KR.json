@@ -27,5 +27,6 @@
   "ConfirmClose":"닫습니다",
   "Congrats":"축하합니다",
   "Coins":"금화",
-  "NotEnoughCoins":"돈이 모자라서, 난관에 부닥치다."
+  "CoinsToUnlock":"{0} 개의 동전 잠 금 풀기",
+  "NotEnoughCoins":"너 는 {0} 개의 동전 이 있어 야만 자 물 쇠 를 풀 수 있다!"
 }

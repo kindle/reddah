@@ -27,5 +27,6 @@
     "ConfirmClose":"Close",
     "Congrats":"Congrats!",
     "Coins":"Coins",
-    "NotEnoughCoins":"Not enough coins, play to earn"
+    "CoinsToUnlock":"{0} coins to unlock",
+    "NotEnoughCoins":"You need {0} coins to unlock!"
 }

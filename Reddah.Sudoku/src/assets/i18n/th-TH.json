@@ -26,6 +26,7 @@
     "ConfirmCancel":"ยกเลิก",
     "ConfirmClose":"ปิดกล้อง",
     "Congrats":"ยินดีด้วยครับ",
-    "Coins":"ทอง",
-    "NotEnoughCoins":"มีเงินไม่เพียงพอที่จะเจาะทะลุได้"
+    "Coins":"เหรียญ",
+    "CoinsToUnlock":"เหรียญ {0}",
+    "NotEnoughCoins":"เหรียญ {0}"
 }

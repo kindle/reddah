@@ -27,5 +27,6 @@
     "ConfirmClose":"Desligar",
     "Congrats":"Parabéns",
     "Coins":"Ouro",
-    "NotEnoughCoins":"Não há dinheiro suficiente para conseguir."
+    "CoinsToUnlock":"{0} moedas para desbloquear",
+    "NotEnoughCoins":"Você Precisa de {0} moedas para desbloquear!"
 }

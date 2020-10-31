@@ -27,5 +27,6 @@
     "ConfirmClose":"إيقاف التشغيل",
     "Congrats":"تهانينا",
     "Coins":"الذهب",
-    "NotEnoughCoins":"ليس هناك ما يكفي من المال لاختراق"
+    "CoinsToUnlock":"{0} عملة معدنيةفتح",
+    "NotEnoughCoins":"{0} عملة معدنيةفتح"
 }

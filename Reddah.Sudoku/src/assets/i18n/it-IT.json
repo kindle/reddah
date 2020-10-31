@@ -27,5 +27,6 @@
     "ConfirmClose":"Spegni",
     "Congrats":"Congratulazioni!",
     "Coins":"Oro",
-    "NotEnoughCoins":"Non ci sono abbastanza soldi per sfondare."
+    "CoinsToUnlock":"{0} monete da sbloccare",
+    "NotEnoughCoins":"Hai bisogno di {0} monete per sbloccare!"
 }

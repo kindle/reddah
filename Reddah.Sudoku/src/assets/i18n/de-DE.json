@@ -27,5 +27,6 @@
     "ConfirmClose":"Herunterfahren",
     "Congrats":"Herzlichen glückwunsch!",
     "Coins":"Gold",
-    "NotEnoughCoins":"Es gibt nicht genug Geld, um durchzubrechen."
+    "CoinsToUnlock":"{0} Münzen zu entsperren",
+    "NotEnoughCoins":"Du brauchst {0} Münzen, um dich zu entsperren!"
 }

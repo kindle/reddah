@@ -27,5 +27,6 @@
     "ConfirmClose":"Afsluiten",
     "Congrats":"Gefeliciteerd",
     "Coins":"Goud",
-    "NotEnoughCoins":"Er is niet genoeg geld om door te breken"
+    "CoinsToUnlock":"{0} munten om te ontgrendelen",
+    "NotEnoughCoins":"Je hebt {0} munten nodig om te ontgrendelen."
 }

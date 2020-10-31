@@ -26,6 +26,7 @@
     "ConfirmCancel":"Cancelar",
     "ConfirmClose":"Apaga",
     "Congrats":"Felicitaciones!",
-    "Coins":"Oro",
-    "NotEnoughCoins":"No hay suficiente dinero para abrirse paso."
+    "Coins":"Moneda",
+    "CoinsToUnlock":"{0} monedas",
+    "NotEnoughCoins":"Necesitas {0} monedas para desbloquear!"
 }

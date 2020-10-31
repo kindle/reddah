@@ -1,8 +1,8 @@
-/*.sudo-box{
+.sudo-box{
     display: flex;
     align-items: center; 
     justify-content: center;
-}*/
+}
 
 .sudo-box H1 {
     background: black;
@@ -12,8 +12,6 @@
     padding: 2px 1px 5px 1px;
     text-align: center;
 }
-
-/* board */
 
 .sudoku_board {
     margin: 15px auto;
@@ -354,5 +352,34 @@
     margin: 0px;
     padding: 0 0;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAIUlEQVQYV2N89urtfwYiACNIoZSYMCMhtaMK8YYQ0cEDAG5yJ8eLRhTfAAAAAElFTkSuQmCC
-) repeat;
+    ) repeat;
+}
+
+
+
+@media all and (orientation: portrait) {
+    .footerContentRight4 {
+        font-family: sans-serif;
+        font-size: 110%;
+        color: rgba(200, 220, 255, .3);
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        padding: 30px 30px;
+        text-align: right;
+    }
+}
+
+@media all and (orientation: landscape) {
+    .footerContentRight4 {
+        font-family: sans-serif;
+        font-size: 110%;
+        color: rgba(200, 220, 255, .3);
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        padding: 30px 30px;
+        text-align: right;
+        z-index: -1;
+    }
 }

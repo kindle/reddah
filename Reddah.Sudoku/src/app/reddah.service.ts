@@ -296,7 +296,21 @@ export class ReddahService {
         let tasks = [];
         if(n==1){
             //16*3
-            for(let i=1;i<=48;i++){
+            for(let i=1;i<=16;i++){
+                tasks.push({
+                    id: i,
+                    level: 1,
+                    name: 'Sudoku',
+                    maxim: 'maxim',
+                    solution: this.solution[i],
+                    display: this.musk.get(i),
+                    seconds1star: 300,
+                    seconds2star: 150,
+                    seconds3star: 90,
+                });
+            }
+
+            for(let i=17;i<=48;i++){
                 tasks.push({
                     id: i,
                     level: 1,

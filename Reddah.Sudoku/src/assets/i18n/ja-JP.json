@@ -27,5 +27,6 @@
   "ConfirmClose":"閉じます",
   "Congrats":"おめでとうございます!",
   "Coins":"金貨",
-  "NotEnoughCoins":"十分なお金は、お金を稼ぐために破った"
+  "CoinsToUnlock":"{0}コインを解除する",
+  "NotEnoughCoins":"あなたがロックを解除する{0}コインが必要です！"
 }

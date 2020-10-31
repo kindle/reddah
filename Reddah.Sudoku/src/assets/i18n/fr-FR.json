@@ -21,11 +21,12 @@
   "Best":"Résultats",
   "Time":"Heure",
   "ConfirmTitle":"S’ll vous plaît, confirmez",
-  "ConfirmMessage":"Tu es sûr de vouloir partir ?",
+  "ConfirmMessage":"Tu es sûr de vouloir partir?",
   "ConfirmYes":"Oui",
   "ConfirmCancel":"Annuler",
   "ConfirmClose":"Arrêter",
   "Congrats":"Félicitations!",
-  "Coins":"Or",
-  "NotEnoughCoins":"Il n’y a pas assez d’argent pour percer."
+  "Coins":"Pièce",
+  "CoinsToUnlock":"{0} pièces détachées",
+  "NotEnoughCoins":"Il te faut {0} pièces pour le déblocage!"
 }
