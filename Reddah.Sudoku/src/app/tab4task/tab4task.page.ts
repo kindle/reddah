@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import * as $ from 'jquery';
 import { ReddahService } from '../reddah.service';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-tab4task',
@@ -21,6 +22,7 @@ export class Tab4taskPage implements OnInit{
     private activeRouter: ActivatedRoute,
     private alertController: AlertController,
     public reddah: ReddahService,
+    private screenOrientation: ScreenOrientation,
   ) {}
 
   ngOnInit(){}
@@ -92,6 +94,14 @@ addScriptByText(text){
     });
 
     //console.timeEnd("loading time");
+
+
+    this.screenOrientation.onChange().subscribe(
+        () => {
+            this.resizeWindow();
+        }
+    );
+    
 
 }
 
@@ -646,7 +656,7 @@ drawBoard() {
     };
 
     addValue(value) {
-    console.log('prepare for addValue', value);
+    //console.log('prepare for addValue', value);
 
     var
     position = {
@@ -683,15 +693,15 @@ drawBoard() {
     if (this.cell !== null && (horizontal_cells_exists.length || vertical_cells_exists.length || group_cells_exists.length)) {
     if (old_value !== value) {
         $(this.cell).addClass('notvalid');
-        console.log('not valid')
+        //console.log('not valid')
     } else {
         $(this.cell).find('span').text('');
-        console.log('set empty')
+        //console.log('set empty')
     }
     } else {
     //add value
     $(this.cell).removeClass('notvalid');
-    console.log('Value added ', value);
+    //console.log('Value added ', value);
 
     //remove all notes from current cell,  line column and group
     $(horizontal_notes).remove();
@@ -701,7 +711,7 @@ drawBoard() {
 
     //recalculate completed cells
     this.cellsComplete = $('#' + this.id + ' .sudoku_board .cell:not(.notvalid) span:not(:empty)').length;
-    console.log('is game over? ', this.cellsComplete, this.cellsNr, (this.cellsComplete === this.cellsNr));
+    //console.log('is game over? ', this.cellsComplete, this.cellsNr, (this.cellsComplete === this.cellsNr));
     //game over
     if (this.cellsComplete === this.cellsNr) {
         (document.getElementById("wow") as HTMLAudioElement).play();
@@ -749,7 +759,7 @@ drawBoard() {
     };
 
     addNote(value) {
-    console.log('addNote', value);
+    //console.log('addNote', value);
 
     var
     oldNotes = $(this.cell).find('.note'),

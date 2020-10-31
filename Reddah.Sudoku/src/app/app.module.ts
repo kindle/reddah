@@ -13,6 +13,7 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
 import { HttpClientModule } from '@angular/common/http';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { LocalePage } from './locale/locale.page';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { LocalePage } from './locale/locale.page';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ReddahService,
     Globalization,
+    ScreenOrientation,
   ],
   bootstrap: [AppComponent]
 })

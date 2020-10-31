@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, IonSlides } from '@ionic/angular';
-import { Swiper } from 'swiper';
 import { ReddahService } from '../reddah.service';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-tab3list',
@@ -16,6 +16,7 @@ export class Tab3listPage implements OnInit{
     private router: Router,
     private activeRouter: ActivatedRoute,
     private alertController: AlertController,
+    private screenOrientation: ScreenOrientation,
   ) {}
 
 
@@ -49,12 +50,6 @@ export class Tab3listPage implements OnInit{
   mycoins = 0;
 
   ionViewDidEnter(){
-    var swiper3 = new Swiper('.swiper-container3', {
-      speed: 600,
-      parallax: true,
-    });
-    
-
     this.mylevelstars=0;
     this.levelstars = 0;
     this.mycoins = this.reddah.getMyCoins();
@@ -62,8 +57,15 @@ export class Tab3listPage implements OnInit{
     let level = this.activeRouter.snapshot.queryParams["level"];
     let page = this.activeRouter.snapshot.queryParams["page"];
     if(page!=null){
-      swiper3.slideTo(0, 500);
+        this.slides3.slideTo(0,500);
     }
+
+    /*
+    this.screenOrientation.onChange().subscribe(
+        () => {
+            this.slides3.slideTo(0,500);
+        }
+    );*/
     
     this.task = this.reddah.getLevelTasks(level);
     this.task.forEach((t,i)=>{
