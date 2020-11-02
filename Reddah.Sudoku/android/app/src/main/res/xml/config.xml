@@ -6,5 +6,9 @@
     <param name="android-package" value="org.apache.cordova.globalization.Globalization"/>
   </feature>
 
+  <feature name="CDVOrientation">
+    <param name="android-package" value="cordova.plugins.screenorientation.CDVOrientation"/>
+  </feature>
+
   
 </widget>
