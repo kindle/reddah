@@ -21,7 +21,7 @@ const routes: Routes = [
       },
       {
         path: 'tab4task',
-        loadChildren: () => import('../tab4task/tab4task.module').then(m => m.Tab5taskPageModule)
+        loadChildren: () => import('../tab4task/tab4task.module').then(m => m.Tab4taskPageModule)
       },
       {
         path: '',

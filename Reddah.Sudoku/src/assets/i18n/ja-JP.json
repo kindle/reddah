@@ -28,5 +28,6 @@
   "Congrats":"おめでとうございます!",
   "Coins":"金貨",
   "CoinsToUnlock":"{0}コインを解除する",
-  "NotEnoughCoins":"あなたがロックを解除する{0}コインが必要です！"
+  "NotEnoughCoins":"あなたがロックを解除する{0}コインが必要です！",
+  "GiveFeedback":"このゲームが好きなら、好評を書きに行きませんか？"
 }

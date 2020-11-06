@@ -84,13 +84,62 @@ export class Tab3listPage implements OnInit{
 
   }
 
-  async goTask(task){
-    if(task.unlock){
+  async realGoTask(task){
       this.router.navigate(['/tabs/tab4task'], {
           queryParams: {
               task: JSON.stringify(task),
           }
       });
+  }
+
+  async goFeedback() {
+      let iosId = 1538301589;
+      let storeAppURL = "";
+      if(this.reddah.isIos()){
+          storeAppURL = `itms-apps://itunes.apple.com/app/id${iosId}`;
+          window.open(storeAppURL);
+      }
+      else if(this.reddah.isAndroid()){
+          storeAppURL = "market://details?id=com.reddah.sudoku";
+          this.reddah.Browser(storeAppURL);
+      }
+      else{
+          storeAppURL = `https://apps.apple.com/cn/app/id${iosId}?l=${this.reddah.getCurrentLocale()}`;
+          this.reddah.Browser(storeAppURL);
+      }
+  }
+
+  async goTask(task){
+    if(task.unlock){
+      if(this.reddah.checkGoFeedback(task)){ 
+          const alert = await this.alertController.create({
+              header: this.reddah.instant("ConfirmTitle"),
+              message: this.reddah.instant("GiveFeedback"),
+              buttons: [
+              {
+                  text: this.reddah.instant("ConfirmCancel"),
+                  role: 'cancel',
+                  cssClass: 'secondary',
+                  handler: () => {
+                      this.realGoTask(task);
+                  }
+              }, 
+              {
+                  text: this.reddah.instant("ConfirmYes"),
+                  handler: () => {
+                      this.goFeedback();
+                      this.reddah.setFeedback();
+                  }
+              }]
+          });
+
+          await alert.present().then(()=>{});
+      }
+      else{
+          this.realGoTask(task);
+      }
+
+      
     }
     else{
       if(task.index>0&&task.index<this.task.length){

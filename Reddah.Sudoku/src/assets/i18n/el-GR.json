@@ -6,17 +6,17 @@
     "SubTitle2":"Εισάγετε",
 
     "Level1": "Πρωτοβάθμια",
-    "Level1Maxim": "What we think, we become.",
-    "Level1MaximAuthor": "Gautama Buddha",
+    "Level1Maxim": "Οι αντιξοότητες είναι το υψηλότερο ίδρυμα για την εκπαίδευση των ανθρώπων",
+    "Level1MaximAuthor": "Σωκράτης",
     "Level2": "Ενδιάμεσο",
-    "Level2Maxim": "We need to know, and we will know",
-    "Level2MaximAuthor": "David Hilbert",
+    "Level2Maxim": "Η υπομονή είναι το θεμέλιο όλης της σοφίας",
+    "Level2MaximAuthor": "Πλατών",
     "Level3": "Ανώτερος",
-    "Level3Maxim": "Rather less, but better",
-    "Level3MaximAuthor": "Gauss",
+    "Level3Maxim": "δος μοι που στω και κινο την γην",
+    "Level3MaximAuthor": "Αρχιμήδη",
     "Level4": "Εμπειρογνώμονες",
-    "Level4Maxim": "To be, or not to be, that is the question",
-    "Level4MaximAuthor": "William Shakespeare",
+    "Level4Maxim": "Η μνήμη είναι η μητέρα της σοφίας",
+    "Level4MaximAuthor": "Αριστοτέλη",
 
     "Best":"Αποτελέσματα",
     "Time":"Ώρα",
@@ -28,5 +28,6 @@
     "Congrats":"Συγχαρητήρια!",
     "Coins":"κέρματα",
     "CoinsToUnlock":"{0} κέρματα για ξεκλείδωμα",
-    "NotEnoughCoins":"Χρειάζεσαι {0} νομίσματα για να ξεκλειδώσεις!"
+    "NotEnoughCoins":"Χρειάζεσαι {0} νομίσματα για να ξεκλειδώσεις!",
+    "GiveFeedback":"Αν σας αρέσει αυτό το παιχνίδι, παρακαλώ γράψτε ένα καλό σχόλιο"
 }

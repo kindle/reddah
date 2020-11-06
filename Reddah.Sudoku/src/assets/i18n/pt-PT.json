@@ -1,6 +1,6 @@
 {
-    "Language": "Отключение",
-    "GameTitle": "Ola Sorra canta",
+    "Language": "Língua",
+    "GameTitle": "Ola Sudoku",
     "SubTitle": "Começar",
     "SubTitle1": "Modo clássico",
     "SubTitle2":"Correr um grande risco",
@@ -22,11 +22,12 @@
     "Time":"Hora",
     "ConfirmTitle":"Por favor, confirme",
     "ConfirmMessage":"Tem certeza que quer ir embora?",
-    "ConfirmYes":"Tens a certeza",
+    "ConfirmYes":"Sim",
     "ConfirmCancel":"Cancelar",
     "ConfirmClose":"Desligar",
     "Congrats":"Parabéns",
     "Coins":"Ouro",
     "CoinsToUnlock":"{0} moedas para desbloquear",
-    "NotEnoughCoins":"Você Precisa de {0} moedas para desbloquear!"
+    "NotEnoughCoins":"Você Precisa de {0} moedas para desbloquear!",
+    "GiveFeedback":"Como este jogo, escreve uma boa crítica, certo?"
 }

@@ -22,11 +22,12 @@
     "Time":"Время",
     "ConfirmTitle":"Пожалуйста, подтвердите",
     "ConfirmMessage":"Ты уверен, что хочешь уйти?",
-    "ConfirmYes":"Уверен",
+    "ConfirmYes":"Да",
     "ConfirmCancel":"Отмена",
     "ConfirmClose":"Отключение",
     "Congrats":"Поздравляю с переходом",
     "Coins":"Золото",
     "CoinsToUnlock":"Pаспаковка {0} монет",
-    "NotEnoughCoins":"Тебе нужно {0} монет, чтобы открыть замок!"
+    "NotEnoughCoins":"Тебе нужно {0} монет, чтобы открыть замок!",
+    "GiveFeedback":"Kак игра, просто напиши хорошо?"
 }

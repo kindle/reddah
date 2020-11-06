@@ -28,5 +28,6 @@
     "Congrats":"Congrats!",
     "Coins":"Coins",
     "CoinsToUnlock":"{0} coins to unlock",
-    "NotEnoughCoins":"You need {0} coins to unlock!"
+    "NotEnoughCoins":"You need {0} coins to unlock!",
+    "GiveFeedback":"You like this game? Write a good comment"
 }

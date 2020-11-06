@@ -1,6 +1,6 @@
 {
     "Language": "Idioma",
-    "GameTitle": "Ola Sorra canta",
+    "GameTitle": "Ola Sudoku",
     "SubTitle": "Empezar",
     "SubTitle1": "Modo clásico",
     "SubTitle2":"Arriesguen mucho",
@@ -28,5 +28,6 @@
     "Congrats":"Felicitaciones!",
     "Coins":"Moneda",
     "CoinsToUnlock":"{0} monedas",
-    "NotEnoughCoins":"Necesitas {0} monedas para desbloquear!"
+    "NotEnoughCoins":"Necesitas {0} monedas para desbloquear!",
+    "GiveFeedback":"Si te gusta este juego, por qué no escribes una buena crítica?"
 }

@@ -154,6 +154,10 @@ export class ReddahService {
         }
     }
 
+    async Browser(u){
+        await Browser.open({ url: u });
+    }
+
     setBgm(bgm){
         this.localStorageService.store(`Reddah_Bgm`, bgm);
     }
@@ -189,6 +193,21 @@ export class ReddahService {
                 this.localStorageService.store(`TaskMyStars_${task.id}`, mystar);
             }
         }
+    }
+
+    checkGoFeedback(task){
+        console.log(task);
+        return task.id>0&&(task.id%10==0)&&this.getFeedback();
+    }
+
+    getFeedback(){
+        let feedback = this.localStorageService.retrieve(`Reddah_Feedback`);
+        return feedback==null;
+    }
+
+
+    setFeedback(){
+        this.localStorageService.store(`Reddah_Feedback`, 'done');
     }
 
     getMyCoins(){

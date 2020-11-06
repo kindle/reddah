@@ -22,11 +22,12 @@
     "Time":"Tijd",
     "ConfirmTitle":"Bevestig het alsjeblieft",
     "ConfirmMessage":"Weet je zeker dat je weg wilt?",
-    "ConfirmYes":"Weet je het zeker",
+    "ConfirmYes":"Ja",
     "ConfirmCancel":"Annuleren",
     "ConfirmClose":"Afsluiten",
     "Congrats":"Gefeliciteerd",
     "Coins":"Goud",
     "CoinsToUnlock":"{0} munten om te ontgrendelen",
-    "NotEnoughCoins":"Je hebt {0} munten nodig om te ontgrendelen."
+    "NotEnoughCoins":"Je hebt {0} munten nodig om te ontgrendelen.",
+    "GiveFeedback":"Net als dit spel, schrijf gewoon een goede recensie, toch?"
 }
