@@ -26,7 +26,9 @@ export class AppComponent {
   }
 
   initializeApp() {
-    //this.reddah.test1();
+    /*this.reddah.test1();
+    this.reddah.test2();
+    this.reddah.test3();*/
     this.platform.ready().then(() => {
       //this.statusBar.styleDefault();
       this.splashScreen.hide();

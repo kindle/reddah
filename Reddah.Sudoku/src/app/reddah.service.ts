@@ -148,9 +148,11 @@ export class ReddahService {
     }
 
     test3(){
-        for(let i=1;i<=79;i++){
+        for(let i=34;i<=79;i++){
+            let r = Math.floor((Math.random()*3)+1);
+
             this.localStorageService.store(`TaskTime_${i}`, 200);
-            this.localStorageService.store(`TaskMyStars_${i}`, 2);
+            this.localStorageService.store(`TaskMyStars_${i}`, r);
         }
     }
 
