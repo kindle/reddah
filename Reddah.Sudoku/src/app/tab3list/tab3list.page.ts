@@ -92,23 +92,6 @@ export class Tab3listPage implements OnInit{
       });
   }
 
-  async goFeedback() {
-      let iosId = 1538301589;
-      let storeAppURL = "";
-      if(this.reddah.isIos()){
-          storeAppURL = `itms-apps://itunes.apple.com/app/id${iosId}`;
-          window.open(storeAppURL);
-      }
-      else if(this.reddah.isAndroid()){
-          storeAppURL = "market://details?id=com.reddah.sudoku";
-          this.reddah.Browser(storeAppURL);
-      }
-      else{
-          storeAppURL = `https://apps.apple.com/cn/app/id${iosId}?l=${this.reddah.getCurrentLocale()}`;
-          this.reddah.Browser(storeAppURL);
-      }
-  }
-
   async goTask(task){
     if(task.unlock){
       if(this.reddah.checkGoFeedback(task)){ 
@@ -127,7 +110,7 @@ export class Tab3listPage implements OnInit{
               {
                   text: this.reddah.instant("ConfirmYes"),
                   handler: () => {
-                      this.goFeedback();
+                      this.reddah.goFeedback();
                       this.reddah.setFeedback();
                   }
               }]

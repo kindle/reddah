@@ -197,6 +197,23 @@ export class ReddahService {
         }
     }
 
+    async goFeedback() {
+        let iosId = 1538301589;
+        let storeAppURL = "";
+        if(this.isIos()){
+            storeAppURL = `itms-apps://itunes.apple.com/app/id${iosId}`;
+            window.open(storeAppURL);
+        }
+        else if(this.isAndroid()){
+            storeAppURL = "market://details?id=com.reddah.sudoku";
+            this.Browser(storeAppURL);
+        }
+        else{
+            storeAppURL = `https://apps.apple.com/cn/app/id${iosId}?l=${this.getCurrentLocale()}`;
+            this.Browser(storeAppURL);
+        }
+    }
+
     checkGoFeedback(task){
         console.log(task);
         return task.id>0&&(task.id%10==0)&&this.getFeedback();

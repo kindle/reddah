@@ -96,10 +96,14 @@ export class Tab1homePage  implements OnInit{
       });
   }
 
+  goFeedback(){
+      this.reddah.goFeedback();
+  }
+
   goTest(){
     this.router.navigate(['/tabs/tab5'], {
-      queryParams: {
-      }
-  });
+        queryParams: {
+        }
+    });
   }
 }
