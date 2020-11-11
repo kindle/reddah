@@ -79,7 +79,7 @@ export class Tab1homePage  implements OnInit{
     }    
 }
 
-
+showFeauture = true;
   
 /*
   goClassic(){
