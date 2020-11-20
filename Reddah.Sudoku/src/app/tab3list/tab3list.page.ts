@@ -85,11 +85,21 @@ export class Tab3listPage implements OnInit{
   }
 
   async realGoTask(task){
-      this.router.navigate(['/tabs/tab4task'], {
+      if(!this.reddah.isTestPass()){
+        this.router.navigate(['/tabs/tab5test'], {
           queryParams: {
               task: JSON.stringify(task),
           }
       });
+      }
+      else{
+        this.router.navigate(['/tabs/tab4task'], {
+          queryParams: {
+              task: JSON.stringify(task),
+          }
+      });
+      }
+      
   }
 
   async goTask(task){

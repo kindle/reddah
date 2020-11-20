@@ -65,6 +65,8 @@ export class ReddahService {
         return current
     }
 
+    tfModel;
+
     isMobile(){
         return Capacitor.platform=="android"||Capacitor.platform=="ios";
     }
@@ -227,6 +229,15 @@ export class ReddahService {
 
     setFeedback(){
         this.localStorageService.store(`Reddah_Feedback`, 'done');
+    }
+
+    isTestPass(){
+        let pass = this.localStorageService.retrieve(`Reddah_TestPass`);
+        return pass=='pass';
+    }
+
+    setTestPass(){
+        this.localStorageService.store(`Reddah_TestPass`, 'pass');
     }
 
     getMyCoins(){

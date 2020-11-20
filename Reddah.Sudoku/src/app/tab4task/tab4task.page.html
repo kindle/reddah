@@ -1,9 +1,23 @@
 <div class="sudo-box">
+  <!--
+    <div id='pencontainer'>
+        <canvas width="90" height="90" id="canvaspen" class="canvaspen"></canvas>
+        <div class='button-container'>
+            <button (click)="recognize()">recognize</button>
+            <button (click)="clear_canvas()">clear</button>   
+        </div>
+    </div>-->
     <div id="sudoku_container" >
     </div>
 </div>
 
 <audio id="wow" src="/assets/sound/wow.mp3" preload="auto"></audio>
+
+
+<div class="headerContentRight">
+    <ion-icon class="surface-button" name="finger-print-outline" *ngIf="!isPencil" color="dark" (click)="togglePencil()"></ion-icon>
+    <ion-icon class="surface-button" name="pencil-outline" *ngIf="isPencil" color="dark" (click)="togglePencil()"></ion-icon>
+</div>
 
 <div class="footerContentLeft">
   <ion-icon class="surface-button" name="arrow-undo-outline" color="dark" (click)="close()"></ion-icon>

@@ -6,6 +6,8 @@ import { AlertController } from '@ionic/angular';
 import * as $ from 'jquery';
 import { ReddahService } from '../reddah.service';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { fabric } from "fabric";
+import * as tf from '@tensorflow/tfjs';
 
 @Component({
   selector: 'app-tab4task',
@@ -25,8 +27,87 @@ export class Tab4taskPage implements OnInit{
     private screenOrientation: ScreenOrientation,
   ) {}
 
-  ngOnInit(){}
+    model;
+    fabric_canvas;
 
+    ngOnInit(){    
+        let loadModel = (async ()=> {
+            this.model = await tf.loadLayersModel('/assets/mnist/model.json');
+            
+            return this.model;
+        })
+        loadModel();
+    }
+
+    timer;
+    drawCompleted = true;
+    initPenCanvas(){
+        this.fabric_canvas = new fabric.Canvas('canvaspen', {backgroundColor: "transparent"});
+        
+        this.fabric_canvas.renderTop();
+        this.fabric_canvas.isDrawingMode = true;
+        this.fabric_canvas.freeDrawingBrush.width = 16;
+        this.fabric_canvas.freeDrawingBrush.color = "#ff0000";
+        this.fabric_canvas.on("mouse:up", (e)=> {
+            this.drawCompleted = false;
+            window.clearTimeout(this.timer);
+            
+            this.timer = setTimeout(()=>{
+                this.recognize();
+            },500);
+        });
+    }
+
+    resetPenCanvas(){
+        this.fabric_canvas.clear();
+    }
+
+    async recognize(){
+        var results = await this.predict('canvaspen');
+        console.log(results);
+        let r = this.getMaxIndex(results);
+        console.log(r)
+        if(this.drawCompleted==false){
+            this.addValue(r);
+            this.resetPenCanvas();
+            this.drawCompleted=true;
+            setTimeout(() =>{this.hideConsole();},5000)
+        }
+    }
+
+    getMaxIndex(arr) {
+        var max = arr[0];
+        var index = 0;
+        for (var i = 0; i < arr.length; i++) {
+            if (max < arr[i]) {
+                max = arr[i];
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    async predict(id) {
+        var canvas = document.getElementById(id);
+        var example = this.load_img(canvas);
+        const prediction = await this.model.predict(example).data();
+        var results = Array.from(prediction);
+        return results
+    }
+
+    load_img(img) {
+        var tensor = tf.browser.fromPixels(img)
+            .resizeNearestNeighbor([28, 28])
+            .mean(2)
+            .expandDims()
+            .toFloat()
+            .div(255.0)
+        return tensor;
+    };
+            
+
+
+            
 
 
   addScriptByUrl(src){
@@ -76,6 +157,8 @@ addScriptByText(text){
     this.Sudoku();
 
     this.run();
+
+    this.initPenCanvas();
 
     $('#sidebar-toggle').on('click', (e)=> {
         $('#sudoku_menu').toggleClass("open-sidebar");
@@ -285,6 +368,7 @@ run() {
 
   //click on board cell
   $('#' + this.id + ' .sudoku_board .cell').on('click', (e)=> {
+      
       let t = e.target;
       if(e.target.tagName=="SPAN"){
         t = e.target.parentElement;
@@ -294,44 +378,46 @@ run() {
 
   //click on console num
   $('#' + this.id + ' .board_console .num').on('click', (e)=> {
-      var t = e.target,
-          value = $.isNumeric($(t).text()) ? parseInt($(t).text()) : 0,
-          clickMarkNotes = $(t).hasClass('note'),
-          clickRemove = $(t).hasClass('remove'),
-          numSelected = $(t).hasClass('selected');
+      
+    var t = e.target,
+        value = $.isNumeric($(t).text()) ? parseInt($(t).text()) : 0,
+        clickMarkNotes = $(t).hasClass('note'),
+        clickRemove = $(t).hasClass('remove'),
+        numSelected = $(t).hasClass('selected');
 
-      if (clickMarkNotes) {
-          this.markNotes = !this.markNotes;
+    if (clickMarkNotes) {
+        this.markNotes = !this.markNotes;
 
-          if (this.markNotes) {
-              $(t).addClass('selected');
-          } else {
-              $(t).removeClass('selected');
-              this.removeNote(0);
-              this.showConsole();
-          }
+        if (this.markNotes) {
+            $(t).addClass('selected');
+        } else {
+            $(t).removeClass('selected');
+            this.removeNote(0);
+            this.showConsole();
+        }
 
-      } else {
-          if (this.markNotes) {
-              if (!numSelected) {
-                  if (!value) {
+    } else {
+        if (this.markNotes) {
+            if (!numSelected) {
+                if (!value) {
                     this.removeNote(0);
                     this.hideConsole();
-                  } else {
+                } else {
                     this.addValue(0);
                     this.addNote(value);
                     this.hideConsole();
-                  }
-              } else {
+                }
+            } else {
                 this.removeNote(value);
                 this.hideConsole();
-              }
-          } else {
+            }
+        } else {
             this.removeNote(0);
             this.addValue(value);
             this.hideConsole();
-          }
-      }
+        }
+    }
+    
   });
 
   //click outer console
@@ -340,6 +426,7 @@ run() {
           $(e.target).hide();
       }
   });
+
 
   $(window).resize(()=> {
     this.resizeWindow();
@@ -403,7 +490,8 @@ drawBoard() {
 
             var value = (this.board[index] > 0 ? this.board[index] : ''),
                 value_solution = (this.boardSolution[index] > 0 ? this.boardSolution[index] : ''),
-                cell = $('<div></div>')
+               
+            cell = $('<div></div>')
                 .addClass('cell')
                 .attr('x', position.x)
                 .attr('y', position.y)
@@ -432,6 +520,12 @@ drawBoard() {
     }
 
     sudoku_board.appendTo('#' + this.id);
+
+    //draw console pen
+    var pen_sudoku_console_container = $('<div></div>').addClass('pen_board_console_container');
+    var pen_sudoku_console = $('<div></div>').addClass('pen_board_console');
+
+    $('<canvas id="canvaspen"></canvas>').appendTo(pen_sudoku_console);
 
     //draw console
     var sudoku_console_cotainer = $('<div></div>').addClass('board_console_container');
@@ -479,6 +573,9 @@ drawBoard() {
     //add all to sudoku container
     sudoku_console_cotainer.appendTo('#' + this.id).hide();
     sudoku_console.appendTo(sudoku_console_cotainer);
+    //pen
+    pen_sudoku_console_container.appendTo('#' + this.id).hide();
+    pen_sudoku_console.appendTo(pen_sudoku_console_container);
     sudoku_statistics.appendTo('#' + this.id);
     sudoku_gameover.appendTo('#' + this.id).hide();
     sudoku_gameover.click(()=>{
@@ -578,9 +675,11 @@ drawBoard() {
 
     //console.log('screen', screen);
     //console.timeEnd("resizeWindow");
+
+
     };
 
-    cellSelect(cell) {
+cellSelect(cell) {
     this.cell = cell;
 
     var value = $(cell).text() | 0,
@@ -617,12 +716,37 @@ drawBoard() {
     $('#' + this.id + ' .board_console .num').removeClass('no');
 
     this.showConsole();
-    this.resizeWindow();
+    if(!this.isPencil)
+    {this.resizeWindow();}
     }
     };
 
+
+isPencil = true;
+togglePencil(){
+    this.isPencil = !this.isPencil;
+}
+
     showConsole() {
-    $('#' + this.id + ' .board_console_container').show();
+
+    if(this.isPencil){
+        this.recognize();
+        this.resetPenCanvas();
+        $('#' + this.id + ' .pen_board_console_container').css('left', $(this.cell)[0].offsetLeft);
+        $('#' + this.id + ' .pen_board_console_container').css('top', $(this.cell)[0].offsetTop);
+
+        $('#' + this.id + ' .canvas-container').css('width', $(this.cell)[0].offsetWidth);
+        $('#' + this.id + ' .canvas-container').css('height', $(this.cell)[0].offsetHeight);
+        $('#' + this.id + ' .upper-canvas').css('width', $(this.cell)[0].offsetWidth);
+        $('#' + this.id + ' .upper-canvas').css('height', $(this.cell)[0].offsetHeight);
+        $('#' + this.id + ' .lower-canvas').css('width', $(this.cell)[0].offsetWidth);
+        $('#' + this.id + ' .lower-canvas').css('height', $(this.cell)[0].offsetHeight);
+
+
+        $('#' + this.id + ' .pen_board_console_container').show();
+    }
+    else
+        $('#' + this.id + ' .board_console_container').show();
 
     var
     oldNotes = $(this.cell).find('.note');
@@ -643,6 +767,8 @@ drawBoard() {
     }
 
     return this;
+    
+
     };
 
     removeNote(value) {
@@ -754,8 +880,10 @@ drawBoard() {
     };
 
     hideConsole() {
-    $('#' + this.id + ' .board_console_container').hide();
-    return this;
+
+        $('#' + this.id + ' .pen_board_console_container').hide();
+        $('#' + this.id + ' .board_console_container').hide();
+        return this;
     };
 
     addNote(value) {

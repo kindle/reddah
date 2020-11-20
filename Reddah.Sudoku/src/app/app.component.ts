@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import * as tf from '@tensorflow/tfjs';
 
 import { LocalStorageService } from 'ngx-webstorage';
 import { ReddahService } from './reddah.service';
@@ -65,6 +65,11 @@ export class AppComponent {
       else{
         this.reddah.loadTranslate(currentLocale);
       }
+
+      let loadModel = (async ()=> {
+        this.reddah.tfModel = await tf.loadLayersModel('/assets/mnist/model.json');
+      })
+      loadModel();
     });
   }
 }

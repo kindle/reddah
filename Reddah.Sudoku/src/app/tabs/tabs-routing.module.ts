@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () => import('../tab4task/tab4task.module').then(m => m.Tab4taskPageModule)
       },
       {
+        path: 'tab5test',
+        loadChildren: () => import('../tab5test/tab5test.module').then(m => m.Tab5TestPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1home',
         pathMatch: 'full'
