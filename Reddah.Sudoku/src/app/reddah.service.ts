@@ -158,6 +158,10 @@ export class ReddahService {
         }
     }
 
+    fix(num, length) {
+        return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
+    }
+
     async Browser(u){
         await Browser.open({ url: u });
     }
@@ -217,7 +221,7 @@ export class ReddahService {
     }
 
     checkGoFeedback(task){
-        console.log(task);
+        //console.log(task);
         return task.id>0&&(task.id%10==0)&&this.getFeedback();
     }
 
@@ -238,6 +242,15 @@ export class ReddahService {
 
     setTestPass(){
         this.localStorageService.store(`Reddah_TestPass`, 'pass');
+    }
+
+    getIsPencil(){
+        let isPencil = this.localStorageService.retrieve(`Reddah_IsPencil`);
+        return isPencil===true;
+    }
+
+    setPencil(value){
+        this.localStorageService.store(`Reddah_IsPencil`, value);
     }
 
     getMyCoins(){

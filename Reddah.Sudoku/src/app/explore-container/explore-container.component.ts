@@ -29,7 +29,7 @@ export class ExploreContainerComponent implements OnInit {
 
     resetPenCanvas(){
         this.fabric_canvas.clear();
-        this.reddah.setTestPass();
+        //this.reddah.setTestPass();
     }
 
     async recognize(){

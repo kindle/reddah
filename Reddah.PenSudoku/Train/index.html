@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.4.0/fabric.min.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        
+    </head>
+    <body>
+        <div id='container'>
+            <canvas width="140" height="140" id="canvas" class="canvas"></canvas>
+            <div class='button-container'>
+                <button onclick="recognize()">recognize</button>
+                <button onclick="clear_canvas()">clear</button>   
+            </div>
+        </div>
+        <script>
+            const MODEL_URL = 'http://localhost:5000/mnist/model.json' 
+
+            var loadModel = (async function() {
+                window.model = await tf.loadLayersModel(MODEL_URL);
+                console.log('load model')
+                return model;
+            })
+            loadModel();
+
+
+
+            var fabric_canvas = new fabric.Canvas('canvas', {backgroundColor: "#ffffff"});
+            fabric_canvas.renderTop();
+            fabric_canvas.isDrawingMode = true;
+            fabric_canvas.freeDrawingBrush.width = 12;
+            fabric_canvas.freeDrawingBrush.color = "#000000";
+
+            var recognize = async function() {
+                var results = await predict('canvas');
+                console.log(results);
+                console.log(getMaxIndex(results))
+            }
+
+            //获取最大值的下标
+            function getMaxIndex(arr) {
+                var max = arr[0];
+                //声明了个变量 保存下标值
+                var index = 0;
+                for (var i = 0; i < arr.length; i++) {
+                    if (max < arr[i]) {
+                        max = arr[i];
+                        index = i;
+                    }
+                }
+                return index;
+            }
+
+            var clear_canvas = function() {
+                fabric_canvas.clear();
+            }
+
+            const width = 28;
+            const height = 28;
+
+            var predict = async function(id) {
+                var model = window.model;
+                var canvas = document.getElementById(id);
+                var example = this.load_img(canvas);
+                var prediction = await model.predict(example).data();
+                var results = Array.from(prediction);
+                return results
+            }
+
+            var load_img = function(img) {
+                var tensor = tf.browser.fromPixels(img)
+                    .resizeNearestNeighbor([width, height])
+                    .mean(2)
+                    .expandDims()
+                    .toFloat()
+                    .div(255.0)
+                return tensor;
+            };
+        </script>
+    </body>
+</html>

@@ -19,6 +19,10 @@
     <ion-icon class="surface-button" name="pencil-outline" *ngIf="isPencil" color="dark" (click)="togglePencil()"></ion-icon>
 </div>
 
+<div class="headerDebugContentRight" *ngIf="isDebug">
+    <div style="color:black;" *ngFor="let item of myresults;index as i">{{item.id}}  {{parseItem(item.value*10000)}}</div>
+</div>
+
 <div class="footerContentLeft">
   <ion-icon class="surface-button" name="arrow-undo-outline" color="dark" (click)="close()"></ion-icon>
 </div>

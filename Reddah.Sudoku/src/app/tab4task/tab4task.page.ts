@@ -30,13 +30,25 @@ export class Tab4taskPage implements OnInit{
     model;
     fabric_canvas;
 
-    ngOnInit(){    
+
+    isPencil = false;
+    togglePencil(){
+        this.isPencil = !this.isPencil;
+        this.reddah.setPencil(this.isPencil);
+    }
+
+    ngOnInit(){  
+        this.isPencil = this.reddah.getIsPencil();
         let loadModel = (async ()=> {
             this.model = await tf.loadLayersModel('/assets/mnist/model.json');
             
             return this.model;
         })
         loadModel();
+    }
+
+    parseItem(item){
+        return parseInt(item);
     }
 
     timer;
@@ -54,7 +66,7 @@ export class Tab4taskPage implements OnInit{
             
             this.timer = setTimeout(()=>{
                 this.recognize();
-            },500);
+            },900);
         });
     }
 
@@ -62,17 +74,33 @@ export class Tab4taskPage implements OnInit{
         this.fabric_canvas.clear();
     }
 
+    isDebug = false;
+    myresults;
+
     async recognize(){
         var results = await this.predict('canvaspen');
-        console.log(results);
+        //console.log(results);
+        if(this.isDebug){
+            this.myresults = [];
+            for(let i=0;i<=9;i++){
+                this.myresults.push({id:i,value: results[i]})
+            }
+            this.myresults.sort((a,b)=>{a-b});
+        }
+
         let r = this.getMaxIndex(results);
         console.log(r)
+
         if(this.drawCompleted==false){
             this.addValue(r);
-            this.resetPenCanvas();
-            this.drawCompleted=true;
-            setTimeout(() =>{this.hideConsole();},5000)
+            this.drawComplete();
         }
+    }
+
+    drawComplete(){
+        this.resetPenCanvas();
+        this.drawCompleted=true;
+        setTimeout(() =>{this.hideConsole();},5000)
     }
 
     getMaxIndex(arr) {
@@ -378,7 +406,7 @@ run() {
 
   //click on console num
   $('#' + this.id + ' .board_console .num').on('click', (e)=> {
-      
+    
     var t = e.target,
         value = $.isNumeric($(t).text()) ? parseInt($(t).text()) : 0,
         clickMarkNotes = $(t).hasClass('note'),
@@ -722,10 +750,6 @@ cellSelect(cell) {
     };
 
 
-isPencil = true;
-togglePencil(){
-    this.isPencil = !this.isPencil;
-}
 
     showConsole() {
 
