@@ -1,0 +1,7 @@
+{
+  "name": "Reddah.Metronome",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

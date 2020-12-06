@@ -1,0 +1,99 @@
+.knob-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.knob-box{
+    display: flex;
+    justify-content:center;
+    margin: 20px;
+}
+
+.button-box{
+    display: flex;
+    justify-content:space-around;
+    margin-top:200px;
+}
+
+
+.sw-highlight2{
+    border: 3px solid lawngreen;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.sw-none2{
+    border: 3px solid white;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.sw-green2{
+    border: 3px solid green;
+    border-radius: 5px;
+    height: 100%;
+}
+.sw-red2{
+    border: 3px solid red;
+    border-radius: 5px;
+    height: 100%;
+}
+
+
+.strongweek2{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+
+.sw-box2{
+    border: 1px solid lightgreen;
+    border-radius: 5px;
+    width: 40px;
+    height: 10px;
+    margin: 5px;
+}
+
+
+.sw-box2-stop{
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    width: 40px;
+    height: 10px;
+    margin: 5px;
+}
+
+
+.sw-item-stop{
+    height:33%;
+    border: 1px solid lightgrey;
+}
+
+.speed-add-button{
+    margin-left:50%;
+    transform:translateX(-50%);
+    position: absolute;
+    margin-top: -350px;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+
+.speed-sub-button{
+    margin-left:50%;
+    transform:translateX(-50%);
+    position: absolute;
+    margin-top: -160px;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.play-button{
+    margin-left:50%;
+    transform:translateX(-50%);
+    border-radius: 50%;
+    background-color: transparent;
+}

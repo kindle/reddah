@@ -1,0 +1,15 @@
+{
+    "Language": "Lingua",
+    "AppTitle": "Metronomo",
+    "Record": "Registrazione",
+    "NewRecord": "Nuovo record",
+
+    "Delete": "Elimina",
+    "Create": "Creato il",
+    "ConfirmTitle": "Si prega di confermare",
+    "ConfirmDeleteMessage": "Eliminarlo?",
+    "ConfirmYes": "Sì",
+    "ConfirmCancel": "Annulla",
+
+    "GiveFeedback":"Ti piace questa app, per favore dai un feedback?"
+}

@@ -1,0 +1,15 @@
+{
+  "Language": "言語",
+  "AppTitle": "メトロノーム",
+  "Record": "ビート",
+  "NewRecord": "新しいレコード",
+
+  "Delete": "削除",
+  "Create": "作成日",
+  "ConfirmTitle": "ご確認ください",
+  "ConfirmDeleteMessage": "削除してもよいですか?",
+  "ConfirmYes": "はい",
+  "ConfirmCancel": "キャンセル",
+
+  "GiveFeedback":"あなたはこのアプリを楽しんでいますか、フィードバックを与えてください?"
+}

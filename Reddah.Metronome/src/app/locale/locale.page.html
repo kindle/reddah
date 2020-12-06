@@ -1,0 +1,17 @@
+<ion-item color="light" style="--padding-start:0;" lines="none">
+  <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
+      <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
+  </ion-button>
+  <ion-label *ngIf="reddah.getCurrentLocale()!='en-US'">{{ reddah.instant('Language') }}(Language)</ion-label>
+  <ion-label *ngIf="reddah.getCurrentLocale()=='en-US'">Language</ion-label>
+</ion-item>
+<ion-content>
+  <ng-template ngFor let-locale [ngForOf]="reddah.Locales">
+      <ion-item (click)="changeLocale(locale.Name)" *ngIf="locale.Name!=selectedLocale">
+          <ion-label style="margin-left:10px;">{{locale.Description}}</ion-label>
+      </ion-item>
+      <ion-item (click)="changeLocale(locale.Name)" color="primary" *ngIf="locale.Name==selectedLocale">
+          <ion-label style="margin-left:10px;">{{locale.Description}}</ion-label>
+      </ion-item>
+  </ng-template>
+</ion-content>

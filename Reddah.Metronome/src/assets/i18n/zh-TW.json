@@ -1,0 +1,15 @@
+{
+    "Language": "語言",
+    "AppTitle": "節拍器",
+    "Record": "節拍",
+    "NewRecord": "新節拍",
+
+    "Delete": "刪除",
+    "Create": "創建",
+    "ConfirmTitle": "請確認",
+    "ConfirmDeleteMessage": "確定要刪除？",
+    "ConfirmYes": "確定",
+    "ConfirmCancel": "取消",
+
+    "GiveFeedback":"喜歡這個App，就去寫個好評吧？"
+}

@@ -1,0 +1,15 @@
+{
+    "Language": "Language",
+    "AppTitle": "Metronome",
+    "Record": "Metronome",
+    "NewRecord": "New Metronome",
+
+    "Delete": "Delete",
+    "Create": "Created on",
+    "ConfirmTitle": "Please Confirm",
+    "ConfirmDeleteMessage": "Are you sure to delete it?",
+    "ConfirmYes": "Yes",
+    "ConfirmCancel": "Cancel",
+
+    "GiveFeedback":"Do you enjoy this App, please give a feedback?"
+}

@@ -1,0 +1,15 @@
+{
+  "Language": "언어",
+  "AppTitle": "메트로놈",
+  "Record": "레코드",
+  "NewRecord": "새 레코드",
+
+  "Delete": "삭제",
+  "Create": "에 생성됨",
+  "ConfirmTitle": "확인해 주세요",
+  "ConfirmDeleteMessage": "당신은 그것을 삭제해야합니다?",
+  "ConfirmYes": "예",
+  "ConfirmCancel": "취소",
+
+  "GiveFeedback":"당신은이 응용 프로그램을 즐길 수 있습니까, 피드백을 제공하시기 바랍니다?"
+}

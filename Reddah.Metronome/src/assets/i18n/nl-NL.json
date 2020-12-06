@@ -1,0 +1,15 @@
+{
+    "Language": "Taal",
+    "AppTitle": "Metronoom",
+    "Record": "Record",
+    "NewRecord": "Nieuw record",
+
+    "Delete": "Verwijderen",
+    "Create": "Gemaakt op",
+    "ConfirmTitle": "Bevestig dit alsjeblieft",
+    "ConfirmDeleteMessage": "Weet u zeker dat u het verwijdert?",
+    "ConfirmYes": "Ja",
+    "ConfirmCancel": "Annuleren",
+
+    "GiveFeedback":"Geniet je van deze App, geef dan een feedback?"
+}

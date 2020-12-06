@@ -1,0 +1,15 @@
+{
+  "Language": "Langue",
+  "AppTitle": "Métronome",
+  "Record": "enregistrer",
+  "NewRecord": "Nouveau record",
+
+  "Delete": "Supprimer",
+  "Create": "Créé sur",
+  "ConfirmTitle": "S’il vous plaît confirmer",
+  "ConfirmDeleteMessage": "Êtes-vous sûr de le supprimer?",
+  "ConfirmYes": "Oui",
+  "ConfirmCancel": "Annuler",
+
+  "GiveFeedback":"Aimez-vous cette application, s’il vous plaît donner une rétroaction?"
+}

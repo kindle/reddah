@@ -1,0 +1,76 @@
+<ion-header translucent>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button icon="chevron-back-outline" text="" defaultHref="/" (click)="goBack()"></ion-back-button>
+      </ion-buttons>
+      <ion-title color="dark" *ngIf="!isEdit" (click)="toggleEdit()">{{name}}</ion-title>
+      <ion-input color="primary" placeholder="{{name}}" [(ngModel)]="name" (ionBlur)="onBlur()" *ngIf="isEdit"></ion-input>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item lines="none">
+      <ion-avatar slot="start" style="min-width:60px;">
+        <ion-button style="width:100%;font-size: large;" *ngIf="!isPlay">
+            {{beat}}
+        </ion-button>
+        <ion-button style="width:100%;font-size: large;" color="success" *ngIf="isPlay">
+            {{i%beat +1}}
+          </ion-button>
+      </ion-avatar>
+      
+      <div class="strongweek2" *ngIf="!isPlay">
+        <div *ngFor="let b of box;index as index" class="sw-box2-stop">
+            <div>
+                <div class="sw-item-stop"></div>
+                <div class="sw-item-stop"></div>
+                <div class="sw-item-stop"></div>
+            </div>
+        </div>
+      </div>
+      <div class="strongweek2" *ngIf="isPlay">
+        <div *ngFor="let b of box;index as index" class="sw-box2">
+            <div [class.sw-highlight2]="i%box.length==index" [class.sw-none]="i%box.length!=index">
+                <div class="sw-item"></div>
+                <div class="sw-item"></div>
+                <div class="sw-item"></div>
+            </div>
+        </div>
+      </div>
+      <ion-icon slot="end" size="large" color="dark" name="remove-circle-outline" (click)="subBeat()"></ion-icon>
+      <ion-icon slot="end" size="large" color="dark" name="add-circle-outline" (click)="addBeat()"></ion-icon>
+    
+  </ion-item>
+  <!-- 
+            data-angleOffset="-170" data-angleArc="340"-->
+
+<div style="display:flex;flex-direction:column;">
+    <div class="knob-container">
+        <div class="knob-box">
+              <input data-width="400" data-height="400" 
+              data-cursor="true"
+              data-skin="tron"
+              data-displayPrevious="true"
+              type="text" value="100" [(ngModel)]="speed" class="dial">
+        </div>
+        <div>
+          <button (click)="btnSub()" class="speed-sub-button">
+              <ion-icon name="remove-outline" style="width: 64px; height: 64px;vertical-align: middle;"></ion-icon>
+          </button>
+        </div>
+        <div>
+          <button (click)="btnAdd()" class="speed-add-button">
+              <ion-icon name="add-outline" style="width: 64px; height: 64px;vertical-align: middle;"></ion-icon>
+          </button>
+        </div>
+    </div>
+    <div>
+        <button (click)="btnPlay()" class="play-button">
+            <ion-icon *ngIf="!isPlay" name="play-circle" style="width: 120px; height: 120px;vertical-align: middle;"></ion-icon>
+            <ion-icon *ngIf="isPlay" color="danger" name="pause-circle" style="width: 120px; height: 120px;vertical-align: middle;"></ion-icon>
+        </button>
+    </div>
+</div>
+  
+
+</ion-content>

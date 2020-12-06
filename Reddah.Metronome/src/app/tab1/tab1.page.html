@@ -1,0 +1,60 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>{{ reddah.instant('AppTitle') }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="locale()" style="margin-right: 12px;">
+        <ion-icon name="earth" color="primary" size="large"></ion-icon>
+      </ion-button>
+      <ion-button (click)="toggleReorder()" style="margin-right: 12px;">
+        <ion-icon name="reorder-three-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-list>
+      <ion-reorder-group id="reorder" [disabled]="reorderDisabled" (ionItemReorder)="reorder($event)">
+          <ion-item-sliding *ngFor="let record of reddah.records">
+              <ion-item>
+                  <ion-avatar slot="start" style="min-width:60px;">
+                      <ion-button style="width:100%;font-size: large;" (click)="chooseToPlay(record)" *ngIf="record.create!=create">
+                        {{record.beat}}
+                      </ion-button>
+                      <ion-button style="width:100%;font-size: large;" color="success" (click)="chooseToStop()" *ngIf="record.create==create">
+                        {{i%record.beat +1}}
+                      </ion-button>
+                  </ion-avatar>
+                  <ion-label (click)="goToDetails(record)">
+                      <h2>{{record.name}}</h2>
+                      <p *ngIf="record.create!=create">{{ reddah.instant('Create') }} {{reddah.utcToLocal(record.create,'YYYY-MM-DD HH:mm')}}</p>
+                      <div class="strongweek" *ngIf="record.create==create&&i>=0">
+                        <div *ngFor="let b of box;index as index" class="sw-box">
+                            <div [class.sw-highlight]="i%box.length==index" [class.sw-none]="i%box.length!=index">
+                                <div class="sw-item"></div>
+                                <div class="sw-item"></div>
+                                <div class="sw-item"></div>
+                            </div>
+                        </div>
+                      </div>
+                  </ion-label>
+                  
+                  <ion-badge color="danger" slot="end" style="font-size: large;">{{record.speed}}</ion-badge>
+                  <ion-reorder slot="end"></ion-reorder>
+              </ion-item>
+              <ion-item-options side="end">
+                  <ion-item-option color="danger" expandable (click)="deleteConfirm(record)">
+                      <ion-text color="light">{{ reddah.instant('Delete') }}</ion-text>
+                  </ion-item-option>
+              </ion-item-options>
+          </ion-item-sliding>
+      </ion-reorder-group>
+  </ion-list>
+</ion-content>
+<!--
+<ion-fab horizontal="end" vertical="bottom" slot="fixed" style="margin-bottom: 15px;margin-right:15px;">
+  <ion-fab-button color="primary" (click)="add()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+-->
