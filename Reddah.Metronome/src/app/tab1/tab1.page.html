@@ -12,19 +12,27 @@
     
   </ion-toolbar>
 </ion-header>
-<ion-content fullscreen>
+<ion-content>
   <ion-list>
       <ion-reorder-group id="reorder" [disabled]="reorderDisabled" (ionItemReorder)="reorder($event)">
           <ion-item-sliding *ngFor="let record of reddah.records">
               <ion-item>
-                  <ion-avatar slot="start" style="min-width:60px;">
+                  <!--<ion-avatar slot="start" style="min-width:60px;">
                       <ion-button style="width:100%;font-size: large;" (click)="chooseToPlay(record)" *ngIf="record.create!=create">
                         {{record.beat}}
                       </ion-button>
                       <ion-button style="width:100%;font-size: large;" color="success" (click)="chooseToStop()" *ngIf="record.create==create">
                         {{i%record.beat +1}}
                       </ion-button>
-                  </ion-avatar>
+                  </ion-avatar>-->
+                  <ion-avatar slot="start" style="min-width:50px;">
+                    <ion-button style="width:100%;font-size: large;" (click)="chooseToPlay(record)" *ngIf="record.create!=create">
+                      <ion-icon name="play"></ion-icon>
+                    </ion-button>
+                    <ion-button style="width:100%;font-size: large;" color="success" (click)="chooseToStop()" *ngIf="record.create==create">
+                      <ion-icon name="pause-outline"></ion-icon>
+                    </ion-button>
+                </ion-avatar>
                   <ion-label (click)="goToDetails(record)">
                       <h2>{{record.name}}</h2>
                       <p *ngIf="record.create!=create">{{ reddah.instant('Create') }} {{reddah.utcToLocal(record.create,'YYYY-MM-DD HH:mm')}}</p>
@@ -38,8 +46,7 @@
                         </div>
                       </div>
                   </ion-label>
-                  
-                  <ion-badge color="danger" slot="end" style="font-size: large;">{{record.speed}}</ion-badge>
+                  <ion-badge color="primary" slot="end" style="font-size: large;min-width: 35px;">{{record.speed}}</ion-badge>
                   <ion-reorder slot="end"></ion-reorder>
               </ion-item>
               <ion-item-options side="end">

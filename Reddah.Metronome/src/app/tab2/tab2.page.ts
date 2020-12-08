@@ -67,6 +67,12 @@ export class Tab2Page implements OnInit  {
         this.reddah.setRecords();
     }
 
+    ionViewDidLeave(){  
+        if(this.isPlay){
+            this.btnStop();
+        }
+
+    }
     ionViewDidEnter(){  
         let currentRecord = this.activeRouter.snapshot.queryParams["record"];
         if(currentRecord==null){
@@ -84,6 +90,7 @@ export class Tab2Page implements OnInit  {
                 this.reload();
             }
         }
+        this.btnPlay();
     }
 
     play = () => {
@@ -115,14 +122,16 @@ export class Tab2Page implements OnInit  {
         oscillator.connect(gainNode);
         gainNode.connect(this.audioCtx.destination);
         //oscillator.type = 'sine';//其他可选'sine','square','sawtooth','triangle'和'custom'
-        if(this.i%this.box.length==0){
+        /*if(this.i%this.box.length==0){
           oscillator.type = 'triangle';
           oscillator.frequency.setValueAtTime(2220, this.audioCtx.currentTime);
         }
         else{ 
           oscillator.type = 'sine';
           oscillator.frequency.setValueAtTime(1220, this.audioCtx.currentTime);
-        }
+        }*/
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(1220, this.audioCtx.currentTime);
         //oscillator.frequency.linearRampToValueAtTime(50, this.audioCtx.currentTime + 0.1);
         gainNode.gain.setValueAtTime(0, this.audioCtx.currentTime);
         gainNode.gain.linearRampToValueAtTime(1, this.audioCtx.currentTime + 0.01);

@@ -1,0 +1,41 @@
+
+.strongweek{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.sw-box{
+    border: 1px solid lightgreen;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+}
+
+.sw-item{
+    height:33%;
+    border: 1px solid lightgreen;
+}
+
+.sw-highlight{
+    border: 3px solid lawngreen;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.sw-none{
+    border: 3px solid white;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.sw-green{
+    border: 3px solid green;
+    border-radius: 5px;
+    height: 100%;
+}
+.sw-red{
+    border: 3px solid red;
+    border-radius: 5px;
+    height: 100%;
+}

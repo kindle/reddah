@@ -24,7 +24,7 @@ export class Tab1Page implements OnInit {
 
   reorderDisabled = true;
   toggleReorder() {
-    this.reorderDisabled = !this.reorderDisabled;
+        this.reorderDisabled = !this.reorderDisabled;
   }
 
   reorder(ev){
@@ -71,6 +71,9 @@ export class Tab1Page implements OnInit {
                 handler: () => {
                   for (var i = 0; i < this.reddah.records.length; i++) { 
                       if (this.reddah.records[i].create == record.create) {
+                          if(record.create==this.create&&this.isPlay){
+                              this.btnStop();
+                          }
                           this.reddah.records.splice(i, 1); 
                           this.reddah.setRecords();
                           break;
@@ -146,14 +149,16 @@ export class Tab1Page implements OnInit {
         oscillator.connect(gainNode);
         gainNode.connect(this.audioCtx.destination);
         //oscillator.type = 'sine';//其他可选'sine','square','sawtooth','triangle'和'custom'
-        if(this.i%this.box.length==0){
+        /*if(this.i%this.box.length==0){
           oscillator.type = 'triangle';
           oscillator.frequency.setValueAtTime(2220, this.audioCtx.currentTime);
         }
         else{ 
           oscillator.type = 'sine';
           oscillator.frequency.setValueAtTime(1220, this.audioCtx.currentTime);
-        }
+        }*/
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(1220, this.audioCtx.currentTime);
         //oscillator.frequency.linearRampToValueAtTime(50, this.audioCtx.currentTime + 0.1);
         gainNode.gain.setValueAtTime(0, this.audioCtx.currentTime);
         gainNode.gain.linearRampToValueAtTime(1, this.audioCtx.currentTime + 0.01);
@@ -164,7 +169,11 @@ export class Tab1Page implements OnInit {
     }
 
 
-
+    ionViewDidLeave(){  
+        if(this.isPlay){
+            this.btnStop();
+        }
+    }
 
     btnPlay(){
         if(this.isPlay){
