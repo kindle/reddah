@@ -1,41 +1,33 @@
-<ion-header translucent>
-  <ion-toolbar>
+<ion-item color="light" lines="none" style="--inner-padding-end:5px;">
+    <ion-buttons>
+        <ion-button (click)="locale()">
+            <ion-icon name="earth" color="primary" size="large"></ion-icon>
+        </ion-button>
+    </ion-buttons>
     <ion-title>{{ reddah.instant('AppTitle') }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="locale()" style="margin-right: 12px;">
-        <ion-icon name="earth" color="primary" size="large"></ion-icon>
-      </ion-button>
-      <ion-button (click)="toggleReorder()" style="margin-right: 12px;">
-        <ion-icon name="reorder-three-outline" size="large"></ion-icon>
-      </ion-button>
+        <ion-button (click)="toggleReorder()">
+            <ion-icon name="reorder-three-outline" size="large"></ion-icon>
+        </ion-button> 
     </ion-buttons>
-    
-  </ion-toolbar>
-</ion-header>
+</ion-item>
+
 <ion-content>
   <ion-list>
       <ion-reorder-group id="reorder" [disabled]="reorderDisabled" (ionItemReorder)="reorder($event)">
           <ion-item-sliding *ngFor="let record of reddah.records">
               <ion-item>
-                  <!--<ion-avatar slot="start" style="min-width:60px;">
+                  <ion-avatar slot="start" style="min-width:50px;">
                       <ion-button style="width:100%;font-size: large;" (click)="chooseToPlay(record)" *ngIf="record.create!=create">
-                        {{record.beat}}
+                        <ion-icon name="play"></ion-icon>
                       </ion-button>
                       <ion-button style="width:100%;font-size: large;" color="success" (click)="chooseToStop()" *ngIf="record.create==create">
-                        {{i%record.beat +1}}
+                        <ion-icon name="pause-outline"></ion-icon>
                       </ion-button>
-                  </ion-avatar>-->
-                  <ion-avatar slot="start" style="min-width:50px;">
-                    <ion-button style="width:100%;font-size: large;" (click)="chooseToPlay(record)" *ngIf="record.create!=create">
-                      <ion-icon name="play"></ion-icon>
-                    </ion-button>
-                    <ion-button style="width:100%;font-size: large;" color="success" (click)="chooseToStop()" *ngIf="record.create==create">
-                      <ion-icon name="pause-outline"></ion-icon>
-                    </ion-button>
-                </ion-avatar>
+                  </ion-avatar>
                   <ion-label (click)="goToDetails(record)">
-                      <h2>{{record.name}}</h2>
-                      <p *ngIf="record.create!=create">{{ reddah.instant('Create') }} {{reddah.utcToLocal(record.create,'YYYY-MM-DD HH:mm')}}</p>
+                      <div style="margin-bottom:5px;">{{record.name}}</div>
+                      <ion-text *ngIf="record.create!=create" color="medium">{{ reddah.instant('Create') }} {{reddah.utcToLocal(record.create,'YYYY-MM-DD HH:mm')}}</ion-text>
                       <div class="strongweek" *ngIf="record.create==create&&i>=0">
                         <div *ngFor="let b of box;index as index" class="sw-box">
                             <div [class.sw-highlight]="i%box.length==index" [class.sw-none]="i%box.length!=index">
@@ -58,10 +50,3 @@
       </ion-reorder-group>
   </ion-list>
 </ion-content>
-<!--
-<ion-fab horizontal="end" vertical="bottom" slot="fixed" style="margin-bottom: 15px;margin-right:15px;">
-  <ion-fab-button color="primary" (click)="add()">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
--->

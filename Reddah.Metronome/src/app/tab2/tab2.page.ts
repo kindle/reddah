@@ -46,11 +46,18 @@ export class Tab2Page implements OnInit  {
 
 
     isEdit = false;
+    namebak = "";
     toggleEdit(){
+        console.log(this.isEdit)
+        this.namebak = this.name;
         this.isEdit = !this.isEdit;
     }
 
     onBlur(){
+        if(this.name.length==0)
+        {
+            this.name = this.namebak;
+        }
         this.saveRecord();
         this.toggleEdit();
     }
@@ -192,6 +199,11 @@ export class Tab2Page implements OnInit  {
 
     goBack(){
         this.btnStop();
+
+        this.router.navigate(['/tabs/tab1'], {
+            queryParams: {
+            }
+        });
     }
 
     addRecord(){

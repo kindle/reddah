@@ -1,7 +1,9 @@
-<ion-item color="light" style="--padding-start:0;" lines="none">
-  <ion-button clear icon-start color="light" (click)="close()" style="--box-shadow: none;">
-      <ion-icon is-active="false" name="chevron-back-outline"></ion-icon>
-  </ion-button>
+<ion-item color="light" lines="none">
+  <ion-buttons slot="start" style="margin-inline-end:15px;">
+      <ion-button (click)="close()">
+          <ion-icon size="large" is-active="false" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>  
   <ion-label *ngIf="reddah.getCurrentLocale()!='en-US'">{{ reddah.instant('Language') }}(Language)</ion-label>
   <ion-label *ngIf="reddah.getCurrentLocale()=='en-US'">Language</ion-label>
 </ion-item>

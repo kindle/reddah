@@ -1,51 +1,17 @@
-<ion-header translucent>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button icon="chevron-back-outline" text="" defaultHref="/" (click)="goBack()"></ion-back-button>
-      </ion-buttons>
-      <ion-text color="dark" *ngIf="!isEdit" (click)="toggleEdit()" >{{name}}</ion-text>
-      <ion-input color="primary" placeholder="{{name}}" [(ngModel)]="name" (ionBlur)="onBlur()" *ngIf="isEdit"></ion-input>
-    </ion-toolbar>
-</ion-header>
+<ion-item color="light" lines="none">
+    <ion-buttons slot="start" style="margin-inline-end:15px;">
+        <ion-button (click)="goBack()">
+            <ion-icon size="large" is-active="false" name="chevron-back-outline"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-label *ngIf="!isEdit" (click)="toggleEdit()" style="pointer-events: all;">{{name}}</ion-label>
+    <ion-input color="primary" placeholder="{{name}}" 
+    [(ngModel)]="name" (ionBlur)="onBlur()" *ngIf="isEdit"></ion-input>
+</ion-item>
 
 <ion-content [fullscreen]="true">
-  <!--<ion-item lines="none">
-      <ion-avatar slot="start" style="min-width:60px;">
-        <ion-button style="width:100%;font-size: large;" *ngIf="!isPlay">
-            {{beat}}
-        </ion-button>
-        <ion-button style="width:100%;font-size: large;" color="success" *ngIf="isPlay">
-            {{i%beat +1}}
-          </ion-button>
-      </ion-avatar>
 
-      
-      <div class="strongweek2" *ngIf="!isPlay">
-        <div *ngFor="let b of box;index as index" class="sw-box2-stop">
-            <div>
-                <div class="sw-item-stop"></div>
-                <div class="sw-item-stop"></div>
-                <div class="sw-item-stop"></div>
-            </div>
-        </div>
-      </div>
-      <div class="strongweek2" *ngIf="isPlay">
-        <div *ngFor="let b of box;index as index" class="sw-box2">
-            <div [class.sw-highlight2]="i%box.length==index" [class.sw-none]="i%box.length!=index">
-                <div class="sw-item"></div>
-                <div class="sw-item"></div>
-                <div class="sw-item"></div>
-            </div>
-        </div>
-      </div>
-      <ion-icon slot="end" size="large" color="dark" name="remove-circle-outline" (click)="subBeat()"></ion-icon>
-      <ion-icon slot="end" size="large" color="dark" name="add-circle-outline" (click)="addBeat()"></ion-icon>
-    
-  </ion-item>-->
-  <!-- 
-            data-angleOffset="-170" data-angleArc="340"-->
-
-<div style="display:flex;flex-direction:column;">
+<div class="circle-box">
 
     <div style="display:flex;justify-content:center;margin-top:20px;">
         <ion-icon slot="end" size="large" color="dark" name="remove-circle-outline" (click)="subBeat()"></ion-icon>
@@ -82,14 +48,6 @@
           </button>
         </div>
     </div>
-    <!--
-    <div>
-        <button (click)="btnPlay()" class="play-button">
-            <ion-icon *ngIf="!isPlay" name="play-circle" style="width: 120px; height: 120px;vertical-align: middle;"></ion-icon>
-            <ion-icon *ngIf="isPlay" color="danger" name="pause-circle" style="width: 120px; height: 120px;vertical-align: middle;"></ion-icon>
-        </button>
-    </div>
-    -->
 </div>
   
 

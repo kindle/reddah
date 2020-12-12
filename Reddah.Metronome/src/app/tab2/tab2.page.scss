@@ -128,3 +128,29 @@
     border-radius: 5px;
     height: 100%;
 }
+
+.circle-box{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+}
+
+
+/*ipad*/
+@media all and (orientation: portrait) and (min-width: 700px) {
+    .circle-box{
+        display:flex;
+        flex-direction:column;
+        justify-content:space-around;
+        height: 70vh;
+    }
+}
+
+@media all and (orientation: landscape) and (min-width: 700px) {
+    .circle-box{
+        display:flex;
+        flex-direction:column;
+        justify-content:space-around;
+        height: 70vh;
+    }
+}
