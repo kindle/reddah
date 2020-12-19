@@ -10,20 +10,18 @@ import { ReddahService } from '../reddah.service';
   templateUrl: 'tab1home.page.html',
   styleUrls: ['tab1home.page.scss']
 })
-export class Tab1homePage  implements OnInit{
+export class Tab1homePage implements OnInit{
 
   constructor(
     private _renderer2: Renderer2,
     @Inject(DOCUMENT) private _document: Document,
     private router: Router,
     private modalController: ModalController,
-    private reddahService: ReddahService,
     public reddah: ReddahService,
     ) {}
 
   ngOnInit(){
     this.addScriptByUrl("/assets/js/starsky.js");
-      
   }
 
   addScriptByUrl(src){
@@ -62,7 +60,7 @@ export class Tab1homePage  implements OnInit{
   }
   
   async locale(){
-    let currentLocale = this.reddahService.getCurrentLocale();
+    let currentLocale = this.reddah.getCurrentLocale();
     const changeLocaleModal = await this.modalController.create({
         component: LocalePage,
         componentProps: { orgLocale: currentLocale },
@@ -74,8 +72,8 @@ export class Tab1homePage  implements OnInit{
     await changeLocaleModal.present();
     const { data } = await changeLocaleModal.onDidDismiss();
     if(data){
-        let currentLocale = this.reddahService.getCurrentLocale();
-        this.reddahService.loadTranslate(currentLocale);
+        let currentLocale = this.reddah.getCurrentLocale();
+        this.reddah.loadTranslate(currentLocale);
     }    
 }
 

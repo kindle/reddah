@@ -1,0 +1,7 @@
+{
+  "name": "Reddah.Pianote",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

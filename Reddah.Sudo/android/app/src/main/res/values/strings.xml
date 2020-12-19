@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Reddah.Sudo</string>
-    <string name="title_activity_main">Reddah.Sudo</string>
-    <string name="package_name">com.reddah.sudo</string>
-    <string name="custom_url_scheme">com.reddah.sudo</string>
-</resources>

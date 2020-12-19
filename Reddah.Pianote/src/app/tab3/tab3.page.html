@@ -1,0 +1,19 @@
+<ion-content [fullscreen]="true">
+  <div style="display:flex;flex-wrap: wrap;padding-left:15px;">
+    <canvas id="{{canvas.id}}" style="border: 1px solid gray;" *ngFor="let canvas of canvasBox"></canvas>
+  </div>
+</ion-content>
+
+<ion-item>
+  <ion-button (click)="addNote(1)">
+    <ion-icon name="musical-note-outline"></ion-icon>
+  </ion-button>
+  <ion-button (click)="addNote(2)">
+    <ion-icon name="musical-notes-outline"></ion-icon>
+  </ion-button>
+  <ion-button (click)="play()">
+    <ion-icon name="play-outline"></ion-icon>
+  </ion-button>
+
+  <div *ngFor="let canvas of this.canvasBox">{{canvas.note}}</div>
+</ion-item>
