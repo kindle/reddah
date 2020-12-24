@@ -864,9 +864,11 @@ cellSelect(cell) {
     //console.log('is game over? ', this.cellsComplete, this.cellsNr, (this.cellsComplete === this.cellsNr));
     //game over
     if (this.cellsComplete === this.cellsNr) {
-        (document.getElementById("wow") as HTMLAudioElement).play();
-        this.gameOver();
         this.addScriptByUrl("/assets/js/pass.js");
+        (document.getElementById("wow") as HTMLAudioElement).play();
+        setTimeout(()=>{
+            this.gameOver();
+        },500)
     }
 
     $('#' + this.id + ' .statistics .cells_complete').text('' + this.cellsComplete + '/' + this.cellsNr);
