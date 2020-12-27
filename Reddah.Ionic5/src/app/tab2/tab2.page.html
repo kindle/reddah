@@ -69,17 +69,18 @@
         <ion-label>{{ reddah.instant('Menu.Publisher') }}</ion-label>
         <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
     </ion-item>
-    <ion-item (click)="goSearchN(3)" detail="false">
+    <ion-item lines="none" class="borderBottom" (click)="goSearchN(3)" detail="false">
         <ion-icon class="menuIcon" name="infinite" slot="start" color="mini" size="medium"></ion-icon>
         <ion-label>{{ reddah.instant('Menu.MiniApp') }}</ion-label>
         <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
     </ion-item>
+    <!--
     <ion-item lines="none" class="borderBottom" (click)="goGame()">
         <ion-icon class="menuIcon" name="game-controller-outline" slot="start" color="dark" size="medium"></ion-icon>
         <ion-label>{{ reddah.instant('Menu.Game') }} - Sudoku</ion-label>
         <ion-icon name="chevron-forward-outline" slot="end" size="small"></ion-icon>
     </ion-item>
-   
+   -->
 
     <!--<div class="gap">
         <ion-item class="borderTop borderItem" href="/tabs/(home:home)">
@@ -237,8 +238,9 @@
                     <ion-label style="font-size: smaller;">{{reddah.instant('Menu.About')}}</ion-label>
                 </ion-chip>
                 {{reddah.getDisplayName(article.LastUpdateBy)}}:
-                <div class="show-two-lines" [class.articleTextRead]="article.Read">
-                    {{reddah.htmlDecode(article.LastUpdateContent)}}
+                <div class="show-two-lines" [class.articleTextRead]="article.Read"
+                [innerHTML]="reddah.htmlDecode(article.LastUpdateContent)"
+                >
                 </div>
             </div>
 

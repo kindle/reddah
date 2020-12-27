@@ -1,19 +1,60 @@
+
+<ion-item>
+  <ion-button (click)="sharp()">
+    #
+  </ion-button>
+  <ion-button (click)="flat()">
+    b
+  </ion-button>
+</ion-item>
+
 <ion-content [fullscreen]="true">
   <div style="display:flex;flex-wrap: wrap;padding-left:15px;">
     <canvas id="{{canvas.id}}" style="border: 1px solid gray;" *ngFor="let canvas of canvasBox"></canvas>
   </div>
 </ion-content>
 
+
 <ion-item>
+  <ion-button (click)="addNote(0)">
+    休止符
+  </ion-button>
   <ion-button (click)="addNote(1)">
-    <ion-icon name="musical-note-outline"></ion-icon>
+    全音符
   </ion-button>
   <ion-button (click)="addNote(2)">
-    <ion-icon name="musical-notes-outline"></ion-icon>
+    二分
   </ion-button>
-  <ion-button (click)="play()">
+  <ion-button (click)="addNote(4)">
+    四分
+  </ion-button>
+  <ion-button (click)="addNote(8)">
+    八分
+  </ion-button>
+  <ion-button (click)="addNote(16)">
+    十六
+  </ion-button>
+
+  ###
+
+
+  <div *ngFor="let canvas of this.canvasBox">{{canvas.note}}</div>
+</ion-item>
+<ion-item>
+  <ion-button (click)="clear()">
+    <ion-icon name="refresh-outline" ></ion-icon>
+  </ion-button>
+
+  <ion-button (click)="play()" *ngIf="!isPlay">
     <ion-icon name="play-outline"></ion-icon>
   </ion-button>
 
-  <div *ngFor="let canvas of this.canvasBox">{{canvas.note}}</div>
+  <ion-button (click)="stop()" *ngIf="isPlay">
+    <ion-icon name="stop"></ion-icon>
+  </ion-button>
+
+  <ion-text style="margin-left: 30px;">{{speed}}</ion-text>
+  <ion-range min="20" max="500" step="1" [(ngModel)]="speed" snaps="true" tick="true"
+        color="primary"></ion-range>
+
 </ion-item>

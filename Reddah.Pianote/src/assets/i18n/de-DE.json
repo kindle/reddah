@@ -1,0 +1,15 @@
+{
+    "Language": "Sprache",
+    "AppTitle": "Metronom",
+    "Record": "Aufzeichnung",
+    "NewRecord": "Neuer Rekord",
+
+    "Delete": "Löschen",
+    "Create": "Erstellt auf",
+    "ConfirmTitle": "Bitte bestätigen Sie",
+    "ConfirmDeleteMessage": "Sind Sie sicher, es zu löschen?",
+    "ConfirmYes": "Ja",
+    "ConfirmCancel": "Abbrechen",
+
+    "GiveFeedback":"Genießen Sie diese App, einfach ein Feedback geben?"
+}

@@ -1,0 +1,15 @@
+{
+    "Language": "Idioma",
+    "AppTitle": "Metrónomo",
+    "Record": "grabar",
+    "NewRecord": "Nuevo disco",
+
+    "Delete": "Eliminar",
+    "Create": "Creado en",
+    "ConfirmTitle": "Por favor, confirme",
+    "ConfirmDeleteMessage": "Está seguro de eliminarlo?",
+    "ConfirmYes": "Sí",
+    "ConfirmCancel": "Cancelar",
+
+    "GiveFeedback":"Te gusta esta aplicación, por favor dar un comentario?"
+}

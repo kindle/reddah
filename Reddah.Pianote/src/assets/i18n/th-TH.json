@@ -1,0 +1,15 @@
+{
+    "Language": "ภาษา",
+    "AppTitle": "เมโทรโนม",
+    "Record": "เรก คอร์ด",
+    "NewRecord": "ระเบียนใหม่",
+
+    "Delete": "ลบ",
+    "Create": "สร้างเมื่อ",
+    "ConfirmTitle": "โปรดยืนยัน",
+    "ConfirmDeleteMessage": "คุณแน่ใจหรือไม่ว่าคุณต้องการลบแฟ้มนี้",
+    "ConfirmYes": "ใช่",
+    "ConfirmCancel": "ยกเลิก",
+
+    "GiveFeedback":"คุณสนุกกับแอพนี้โปรดให้ข้อเสนอแนะหรือไม่?"
+}

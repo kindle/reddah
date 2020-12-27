@@ -1,0 +1,15 @@
+{
+    "Language": "Язык",
+    "AppTitle": "Метроном",
+    "Record": "Записи",
+    "NewRecord": "Новый рекорд",
+
+    "Delete": "Удалить",
+    "Create": "Создано",
+    "ConfirmTitle": "Пожалуйста, подтвердите",
+    "ConfirmDeleteMessage": "Вы уверены, чтобы удалить его?",
+    "ConfirmYes": "Да",
+    "ConfirmCancel": "Отмена",
+
+    "GiveFeedback":"Вам нравится это приложение, пожалуйста, дать обратную связь?"
+}

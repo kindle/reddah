@@ -9,7 +9,7 @@ import { ModalController } from '@ionic/angular';
     styleUrls: ['./sudoku.page.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class GameSudokuPage  implements OnInit{
+export class GameSudokuPage implements OnInit{
 
     constructor(
         private _renderer2: Renderer2,

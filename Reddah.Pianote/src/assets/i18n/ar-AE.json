@@ -1,0 +1,15 @@
+{
+    "Language": "اللغة",
+    "AppTitle": "المسرع",
+    "Record": "فاز",
+    "NewRecord": "فوز جديد",
+
+    "Delete": "حذف",
+    "Create": "تم الإنشاء على",
+    "ConfirmTitle": "يرجى تأكيد",
+    "ConfirmDeleteMessage": "هل أنت متأكد من حذفه؟",
+    "ConfirmYes": "نعم",
+    "ConfirmCancel": "إلغاء الأمر",
+
+    "GiveFeedback":"هل تستمتع بهذا التطبيق، يرجى إعطاء ردود فعل؟"
+}

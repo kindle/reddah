@@ -1,0 +1,15 @@
+{
+    "Language": "Γλώσσα",
+    "AppTitle": "Μετρονόμος",
+    "Record": "Εγγραφή",
+    "NewRecord": "Νέα εγγραφή",
+
+    "Delete": "Διαγράψετε",
+    "Create": "Δημιουργήθηκε στις",
+    "ConfirmTitle": "Επιβεβαιώστε",
+    "ConfirmDeleteMessage": "Είστε βέβαιοι να το διαγράψετε",
+    "ConfirmYes": "Ναι",
+    "ConfirmCancel": "Ακυρώσετε",
+
+    "GiveFeedback":"Σας αρέσει αυτό το app, εύκολο να δώσει μια ανατροφοδότηση"
+}

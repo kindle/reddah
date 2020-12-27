@@ -6,6 +6,7 @@ import { ReddahService } from '../../reddah.service';
 import { SearchUserPage } from '../search-user/search-user.page'
 import anime from 'animejs';
 import { MapPage } from '../../map/map.page';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-add-friend',
@@ -20,6 +21,7 @@ export class AddFriendPage implements OnInit {
         private modalController: ModalController,
         public reddah: ReddahService,
         public renderer: Renderer2,
+        private router: Router,
     ) { 
         this.userName = this.reddah.getCurrentUser();
     }
@@ -135,6 +137,7 @@ export class AddFriendPage implements OnInit {
     async goMap(){
         this.close();
         let place = this.landmarks[this.index];
+        /*
         const modal = await this.modalController.create({
             component: MapPage,
             componentProps: {
@@ -146,7 +149,13 @@ export class AddFriendPage implements OnInit {
             presentingElement: await this.modalController.getTop(),
         });
           
-        await modal.present();
+        await modal.present();*/
+        this.router.navigate(['/tabs/tab3'], {
+            queryParams: {
+                lat: place.lat,
+                lng: place.lng
+            }
+        });
     }
 
 

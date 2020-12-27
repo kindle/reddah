@@ -8,14 +8,26 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ReddahService } from './reddah.service';
+import { Globalization } from '@ionic-native/globalization/ngx';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule,
+    NgxWebstorageModule.forRoot(),
+    HttpClientModule,
+  ],
   providers: [
     StatusBar,
     SplashScreen,
+    ReddahService,
+    Globalization,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
