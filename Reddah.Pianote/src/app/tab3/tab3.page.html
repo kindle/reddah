@@ -6,23 +6,91 @@
   <ion-button (click)="accidental('flat')" [disabled]="lastTarget==null">
     b
   </ion-button>
+  <ion-button (click)="accidental('2flat')" [disabled]="lastTarget==null">
+    bb
+  </ion-button>
   <ion-button (click)="accidental('nature')" [disabled]="lastTarget==null">
     ♮
   </ion-button>
-</ion-item>
-<ion-item>
-  <ion-button (click)="dot()" [disabled]="lastTarget==null">
-    ·
+  <ion-button (click)="accidental('accent')" [disabled]="lastTarget==null">
+    X
   </ion-button>
-</ion-item>
 
-<ion-item>
-  <ion-text style="margin-right:15px;">Actions</ion-text>
+  <ion-text style="margin:0 15px;">|</ion-text>
+
   <ion-button (click)="move(1)" [disabled]="lastTarget==null">
     <ion-icon name="chevron-up-outline"></ion-icon>
   </ion-button>
   <ion-button (click)="move(-1)" [disabled]="lastTarget==null">
     <ion-icon name="chevron-down-outline"></ion-icon>
+  </ion-button>
+
+  <ion-text style="margin:0 15px;">|</ion-text>
+
+
+  <ion-button (click)="deleteLastNote()" [disabled]="lastTarget==null">
+    delete last note
+  </ion-button>
+
+  <ion-button (click)="addBar()">
+    add Bar
+  </ion-button>
+
+</ion-item>
+<ion-item>
+  <ion-text style="margin-right:15px;">Duration</ion-text>
+  <ion-button (click)="addNote(1)">
+    全音符
+  </ion-button>
+  <ion-button (click)="addNote(2)">
+    2
+  </ion-button>
+  <ion-button (click)="addNote(4)">
+    4
+  </ion-button>
+  <ion-button (click)="addNote(8)">
+    8
+  </ion-button>
+  <ion-button (click)="addNote(16)">
+    16
+  </ion-button>
+
+  <ion-button (click)="addNote(32)">
+    32
+  </ion-button>
+
+  <ion-button (click)="addNote(64)">
+    64
+  </ion-button>
+
+  <ion-text style="margin:0 15px;">|</ion-text>
+
+  <ion-button (click)="dot()" [disabled]="lastTarget==null">
+    ·
+  </ion-button>
+
+  <ion-text style="margin:0 15px;">|</ion-text>
+
+  <ion-button (click)="addRest('r1')">
+    1 R
+  </ion-button>
+  <ion-button (click)="addRest('r2')">
+    1/2 R
+  </ion-button>
+  <ion-button (click)="addRest('r4')">
+    1/4 R
+  </ion-button>
+  <ion-button (click)="addRest('r8')">
+    1/8 R
+  </ion-button>
+  <ion-button (click)="addRest('r16')">
+    1/16 R
+  </ion-button>
+  <ion-button (click)="addRest('r32')">
+    1/32 R
+  </ion-button>
+  <ion-button (click)="addRest('r64')">
+    1/64 R
   </ion-button>
 </ion-item>
 
@@ -45,46 +113,6 @@
 </ion-content>
 
 
-<ion-item>
-  <ion-button (click)="addNote(1)">
-    全音符
-  </ion-button>
-  <ion-button (click)="addNote(2)">
-    二分
-  </ion-button>
-  <ion-button (click)="addNote(4)">
-    四分
-  </ion-button>
-  <ion-button (click)="addNote(8)">
-    八分
-  </ion-button>
-  <ion-button (click)="addNote(16)">
-    十六
-  </ion-button>
-</ion-item>
-<ion-item>
-  <ion-button (click)="addNote('r1')">
-    Whole Rest
-  </ion-button>
-  <ion-button (click)="addNote('r2')">
-    1/2 Rest
-  </ion-button>
-  <ion-button (click)="addNote('r4')">
-    1/4 Rest
-  </ion-button>
-  <ion-button (click)="addNote('r8')">
-    1/8 Rest
-  </ion-button>
-  <ion-button (click)="addNote('r16')">
-    1/16 Rest
-  </ion-button>
-  <ion-button (click)="addNote('r32')">
-    1/32 Rest
-  </ion-button>
-  <ion-button (click)="addNote('r64')">
-    1/64 Rest
-  </ion-button>
-</ion-item>
 <ion-item>
   <ion-button (click)="clear()">
     <ion-icon name="refresh-outline" ></ion-icon>
