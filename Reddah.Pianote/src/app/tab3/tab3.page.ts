@@ -955,11 +955,13 @@ export class Tab3Page implements OnInit {
 
       this.cursorAnimations(canvasIndex, playBeatIndex);
       
-      if(lastJump==0)
+      if(lastJump<=0)
       {
         let beat = this.getBeat(canvasIndex, beatIndex);
 
         this.currentJump.set(this.currentClef, beat.last-1);
+
+        console.log(beat);
 
         if(beat.frequency!=0){
           let oscillator = this.audioCtx.createOscillator();
@@ -976,8 +978,9 @@ export class Tab3Page implements OnInit {
           oscillator.start(this.audioCtx.currentTime);
           oscillator.stop(this.audioCtx.currentTime + beat.last*singleBeatTime);
 
-          this.currentBeatIndex.set(this.currentClef, beatIndex+1);
         }
+
+        this.currentBeatIndex.set(this.currentClef, beatIndex+1);
 
       }else{
         this.currentJump.set(this.currentClef, lastJump-1);
