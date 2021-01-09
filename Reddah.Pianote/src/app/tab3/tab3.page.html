@@ -98,14 +98,19 @@
   <div style="display:flex;flex-wrap: nowrap;overflow-x:auto;padding-left:15px;">
 
     <div style="display: flex;flex-direction:column;">
-      <canvas id="startT" style="border: 1px solid gray;"></canvas>
-      <canvas id="startB" style="border: 1px solid gray;"></canvas>
+      <canvas id="startT" [class.debug-grid]="showGrid"></canvas>
+      <canvas id="startB" [class.debug-grid]="showGrid"></canvas>
     </div>
 
 
     <div style="display: flex;flex-direction:column;" *ngFor="let canvas of canvasBox[0]">
-      <canvas id="{{'t'+canvas.id}}" style="border: 1px solid gray;"></canvas>
-      <canvas id="{{'b'+canvas.id}}" style="border: 1px solid gray;"></canvas>
+      <canvas id="{{'t'+canvas.id}}" [class.debug-grid]="showGrid"></canvas>
+      <canvas id="{{'b'+canvas.id}}" [class.debug-grid]="showGrid"></canvas>
+    </div>
+
+    <div style="display: flex;flex-direction:column;">
+      <canvas id="endT" [class.debug-grid]="showGrid"></canvas>
+      <canvas id="endB" [class.debug-grid]="showGrid"></canvas>
     </div>
     
   </div>

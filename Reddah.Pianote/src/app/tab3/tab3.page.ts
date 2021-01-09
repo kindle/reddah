@@ -16,6 +16,7 @@ export class Tab3Page implements OnInit {
     ) {}
 
 
+  showGrid = false;
   canvasBox = [[],[]];
 
   beatsPerBar = 4;  //up
@@ -25,13 +26,14 @@ export class Tab3Page implements OnInit {
 
   ngOnInit() {
       for(let i=0;i<3;i++){
-          //this.canvasBox[0].push({id:i, canvas: null, note: -100, sound: new Array(this.beatsPerBar), json: null});
-          //this.canvasBox[1].push({id:i, canvas: null, note: -100, sound: new Array(this.beatsPerBar), json: null});
           this.canvasBox[0].push({id:i, canvas: null, beats: [], json: null});
           this.canvasBox[1].push({id:i, canvas: null, beats: [], json: null});
       }
   }
 
+
+  barStartWidth = 140;
+  barWidth = 240;
   halfLineHeight = 7;
   topMargin = 60;
   cursorInitLeft = 0;
@@ -42,19 +44,106 @@ export class Tab3Page implements OnInit {
 
     this.init(0);
     this.init(1);
+
+    this.addEndCanvas(true);
+    this.addEndCanvas(false);
+  }
+
+
+  addStartCanvas(flag, n1, n2){
+    let startCanvas = new fabric.Canvas(flag?"startT":"startB");
+    startCanvas.setWidth(this.barStartWidth);
+    startCanvas.setHeight(240);
+
+    startCanvas.on({
+      'mouse:up': (e)=> this.currentClef = flag? 0:1
+    });
+
+    let frontLine = new fabric.Rect({ left: 0, top: this.topMargin+this.halfLineHeight*2, fill: '#000000', width: 1, height: this.halfLineHeight*8 });
+    frontLine.tag='front'
+    frontLine.selectable = false;
+    startCanvas.add(frontLine);
+
+    for(let j=1;j<=5;j++){
+        let line = new fabric.Rect({ left: 0, top: this.halfLineHeight*2*j+this.topMargin, fill: '#000', width: this.barWidth, height: 1 });
+        line.id=j;
+        line.selectable = false;
+        startCanvas.add(line);
+    }
+
+    let offset = flag?0:-20;
+    let groupStart = new fabric.Group([
+      flag?this.reddah.trebleClef():this.reddah.baseClef(),
+      this.reddah.pai(n1, true, offset),
+      this.reddah.pai(n2, false, offset)
+    ],
+    {
+      left: 15,
+      top: (flag?0:this.halfLineHeight*2) + this.topMargin,
+      scaleY: 1.5,
+      scaleX: 1.5
+    })
+
+    groupStart.selectable = false;
+    groupStart.lockMovementX = true;
+    groupStart.lockMovemenY = true;
+    groupStart.lockRotation = true;
+    groupStart.hasBorders = false;
+    groupStart.hasControls = false;
+    startCanvas.add(groupStart);
+  }
+
+
+  addEndCanvas(flag){
+    let myCanvas = new fabric.Canvas(flag?"endT":"endB");
+    myCanvas.setWidth(11);
+    myCanvas.setHeight(240);
+
+    myCanvas.on({
+      'mouse:up': (e)=> this.currentClef = flag? 0:1
+    });
+
+    for(let j=1;j<=5;j++){
+        let line = new fabric.Rect({ left: 0, top: this.halfLineHeight*2*j+this.topMargin, fill: '#000', width: this.barWidth, height: 1 });
+        line.id=j;
+        line.selectable = false;
+        myCanvas.add(line);
+    }
+    let myGroup = new fabric.Group([
+      this.reddah.endClef(),
+    ],
+    {
+      left: 0,
+      top: this.topMargin+15,
+      scaleY: 1,
+      scaleX: 1
+    })
+
+    myGroup.selectable = false;
+    myGroup.lockMovementX = true;
+    myGroup.lockMovemenY = true;
+    myGroup.lockRotation = true;
+    myGroup.hasBorders = false;
+    myGroup.hasControls = false;
+    myCanvas.add(myGroup);
   }
 
   init(clef){
     for(let i = 0;i<this.canvasBox[clef].length;i++)
     {
       if(this.canvasBox[clef][i].canvas==null){
-        console.log("init:"+clef+"_"+i)
+        //console.log("init:"+clef+"_"+i)
         this.canvasBox[clef][i].canvas = new fabric.Canvas((clef==0?"t":"b")+this.canvasBox[clef][i].id);
-        this.canvasBox[clef][i].canvas.setWidth(200);
+        this.canvasBox[clef][i].canvas.setWidth(this.barWidth);
         this.canvasBox[clef][i].canvas.setHeight(240);
 
+        let frontLine = new fabric.Rect({ left: 0, top: this.topMargin+this.halfLineHeight*2, fill: '#000000', width: 1, height: this.halfLineHeight*8 });
+        frontLine.tag='front'
+        frontLine.selectable = false;
+        this.canvasBox[clef][i].canvas.add(frontLine);
+
         for(let h=11;h<=14;h++){
-          let line = new fabric.Rect({ left: 0, top: this.halfLineHeight*2*(11-h)+this.topMargin, fill: 'transparent', width: 200, height: 1 });
+          let line = new fabric.Rect({ left: 0, top: this.halfLineHeight*2*(11-h)+this.topMargin, fill: 'transparent', width: this.barWidth*10, height: 1 });
           line.id=h;
           line.tag='sub'
           line.selectable = false;
@@ -62,7 +151,7 @@ export class Tab3Page implements OnInit {
         }
 
         for(let j=1;j<=5;j++){
-          let line = new fabric.Rect({ left: 0, top: this.halfLineHeight*2*j+this.topMargin, fill: '#000', width: 200, height: 1 });
+          let line = new fabric.Rect({ left: 0, top: this.halfLineHeight*2*j+this.topMargin, fill: '#000', width: this.barWidth*10, height: 1 });
           line.id=j;
           line.tag='main'
           line.selectable = false;
@@ -70,13 +159,12 @@ export class Tab3Page implements OnInit {
         }
 
         for(let j=6;j<=9;j++){
-          let line = new fabric.Rect({ left: 0, top: this.halfLineHeight*2*j+this.topMargin, fill: 'transparent', width: 200, height: 1 });
+          let line = new fabric.Rect({ left: 0, top: this.halfLineHeight*2*j+this.topMargin, fill: 'transparent', width: this.barWidth*10, height: 1 });
           line.id=j;
           line.tag='sub'
           line.selectable = false;
           this.canvasBox[clef][i].canvas.add(line);
         }
-
 
         let rect = new fabric.Rect({
           width: 1,
@@ -107,11 +195,6 @@ export class Tab3Page implements OnInit {
     }
   }
 
-  cursorAnimations(i, beatIndex){
-    this.cursorAnimation(0, i, beatIndex);
-    this.cursorAnimation(1, i, beatIndex);
-  }
-
   cursorAnimation(clef, i, beatIndex) {
       let canvas = this.canvasBox[clef][i].canvas;
 
@@ -119,7 +202,7 @@ export class Tab3Page implements OnInit {
       for(let j = 0; j < objects.length; j++){
         if(objects[j].tag=="cursor"){
           if(beatIndex==0){
-            objects[j].left = 20;
+            objects[j].left = this.barWidth/5-this.noteOffsetx;
           }else{
             objects[j].left = objects[j].left+50;
           }
@@ -136,23 +219,6 @@ export class Tab3Page implements OnInit {
               this.canvasBox[clef][i].canvas.requestRenderAll();
             }, Math.floor(60000 / this.speed))
           }
-          /*
-          if(beatIndex==0){
-            objects[j].left = 15+5;
-            ///objects[j].set('stroke' , '#aaf');
-            //objects[j].set('fill' , '#faa');
-          }
-          objects[j].animate('left', 
-            objects[j].left+50, 
-            {
-              duration: Math.floor(60000 / this.speed),
-              onChange: canvas.renderAll.bind(canvas),
-              onComplete: ()=> {
-                objects[j].left = 0;
-                canvas.renderAll.bind(canvas);
-              },
-              easing: fabric.util.ease['easeIn']
-          });*/
           
           break;
         }
@@ -188,6 +254,8 @@ export class Tab3Page implements OnInit {
         if(["main","sub","cursor"].indexOf(objects[j].tag)==-1)    
           this.canvasBox[clef][i].canvas.remove(objects[j]);
       }
+
+      this.canvasBox[clef][i].canvas.setWidth(this.barWidth);
     }
 
     this.currentIndex.set(clef, 0);
@@ -199,43 +267,6 @@ export class Tab3Page implements OnInit {
   }
 
 
-  addStartCanvas(flag, n1, n2){
-    let startCanvas = new fabric.Canvas(flag?"startT":"startB");
-    startCanvas.setWidth(100);
-    startCanvas.setHeight(240);
-
-    startCanvas.on({
-      'mouse:up': (e)=> this.currentClef = flag? 0:1
-    });
-
-    for(let j=1;j<=5;j++){
-        let line = new fabric.Rect({ left: 0, top: this.halfLineHeight*2*j+this.topMargin, fill: '#000', width: 200, height: 1 });
-        line.id=j;
-        line.selectable = false;
-        startCanvas.add(line);
-    }
-
-    let offset = flag?0:-20;
-    let groupStart = new fabric.Group([
-      flag?this.reddah.trebleClef():this.reddah.baseClef(),
-      this.reddah.pai(n1, true, offset),
-      this.reddah.pai(n2, false, offset)
-    ],
-    {
-      left: 15,
-      top: (flag?0:this.halfLineHeight*2) + this.topMargin,
-      scaleY: 1.5,
-      scaleX: 1.5
-    })
-
-    groupStart.selectable = false;
-    groupStart.lockMovementX = true;
-    groupStart.lockMovemenY = true;
-    groupStart.lockRotation = true;
-    groupStart.hasBorders = false;
-    groupStart.hasControls = false;
-    startCanvas.add(groupStart);
-  }
 
   currentIndex = new Map()
     .set(0,0)
@@ -264,6 +295,7 @@ export class Tab3Page implements OnInit {
     this.setLastTarget(this.currentClef, group0, canvasIndex);
   }
 
+  noteOffsetx = 13;
   addRest(n){
     let clef = this.currentClef;
     let canvasIndex = parseInt(this.currentIndex.get(clef)/this.beatsPerBar+"");
@@ -275,37 +307,37 @@ export class Tab3Page implements OnInit {
     if(n=='r64'){
       p = 64;
       this.rest(p, canvasIndex,
-        15+(this.currentIndex.get(this.currentClef)%this.beatsPerBar)*50, 
+        (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50, 
         this.halfLineHeight*2 + this.topMargin, 1, 1);
     }
     else if(n=='r32'){
       p = 32;
       this.rest(p, canvasIndex,
-        15+(this.currentIndex.get(this.currentClef)%this.beatsPerBar)*50, 
+        (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50, 
         this.halfLineHeight*2 + this.topMargin, 1, 1);
     }
     else if(n=='r16'){
       p = 16;
       this.rest(p, canvasIndex,
-        15+(this.currentIndex.get(this.currentClef)%this.beatsPerBar)*50, 
+        (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50, 
         this.halfLineHeight*4 + this.topMargin, 1.5, 1.2);
     }
     else if(n=='r8'){
       p = 8;
       this.rest(p, canvasIndex,
-        15+(this.currentIndex.get(this.currentClef)%this.beatsPerBar)*50, 
+        (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50, 
         this.halfLineHeight*4 + this.topMargin, 1.5, 1.2);
     }
     else if(n=='r4'){
       p = 4;
       this.rest(p, canvasIndex,
-        15+(this.currentIndex.get(this.currentClef)%this.beatsPerBar)*50, 
+        (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(this.currentClef)%this.beatsPerBar)*50, 
         this.halfLineHeight*3 + this.topMargin, 1.5, 1.2);
     }
     else if(n=='r2'){
       p = 2;
       this.rest(p, canvasIndex,
-        15+(this.currentIndex.get(this.currentClef)%this.beatsPerBar)*50, 
+        (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(this.currentClef)%this.beatsPerBar)*50, 
         this.halfLineHeight*5 + this.topMargin, 1.5, 1.2);
     }
     else if(n=='r1'){
@@ -323,6 +355,11 @@ export class Tab3Page implements OnInit {
 
   }
 
+  extendCanvasWidth(clef, canvasIndex, extendWidth){
+    let orgWidth = this.canvasBox[clef][canvasIndex].canvas.width;
+    this.canvasBox[clef][canvasIndex].canvas.setWidth(orgWidth+extendWidth);
+    this.canvasBox[clef==0?1:0][canvasIndex].canvas.setWidth(orgWidth+extendWidth); 
+  }
 
   addNote(n){
     let color=n==1?"#000":"#0f0";
@@ -340,7 +377,7 @@ export class Tab3Page implements OnInit {
         this.reddah.stem('stemwhole',11,0,'transparent'),
         this.reddah.stem('stemwhole',0,42,'transparent')],{
         //left: this.canvasBox[clef][canvasIndex].canvas.width/2,
-        left: 15+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
+        left: (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
         top: this.halfLineHeight*6 + this.topMargin,
       })
 
@@ -362,9 +399,10 @@ export class Tab3Page implements OnInit {
         this.reddah.hollowHead(),
         this.reddah.stemUp()
         ,this.reddah.stemDown()],{
-        left: 15+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
+        left: (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
         top: this.halfLineHeight*6 + this.topMargin,
       })
+      group2.left = group2.left-group2.width/2;
       group2.lockMovementX = true;
       group2.lockRotation = true;
       group2.hasBorders = false;
@@ -382,9 +420,12 @@ export class Tab3Page implements OnInit {
           this.reddah.solidHead(),
           this.reddah.stemUp(),
           this.reddah.stemDown()],{
-        left: 15+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
+        left: (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
         top: this.halfLineHeight*6 + this.topMargin,
       })
+
+      console.log("4---"+this.currentIndex.get(clef)%this.beatsPerBar)
+      group4.left = group4.left-group4.width/2;
       group4.lockMovementX = true;
       group4.lockRotation = true;
       group4.hasBorders = false;
@@ -398,7 +439,6 @@ export class Tab3Page implements OnInit {
       this.setLastTarget(this.currentClef, group4, canvasIndex);
     }
     else if(n==8){
-      console.log(8)
       let group8 = new fabric.Group([
           this.reddah.solidHead(),
           this.reddah.stemUp(),
@@ -406,9 +446,10 @@ export class Tab3Page implements OnInit {
           this.reddah.tailUp(1),
           this.reddah.tailDown(1),
         ],{
-        left: 15+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
+        left: (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
         top: this.halfLineHeight*6 + this.topMargin,
       })
+      //this.extendCanvasWidth(clef, canvasIndex, 30);
       group8.lockMovementX = true;
       group8.lockRotation = true;
       group8.hasBorders = false;
@@ -429,9 +470,11 @@ export class Tab3Page implements OnInit {
         this.reddah.tailUp(2), 
         this.reddah.tailDown(2),
       ],{
-        left: 15+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
+        left: this.barWidth/(this.beatsPerBar+1)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
         top: this.halfLineHeight*6 + this.topMargin,
       })
+
+      //this.extendCanvasWidth(clef, canvasIndex, 20);
       group16.lockMovementX = true;
       group16.lockRotation = true;
       group16.hasBorders = false;
@@ -452,7 +495,7 @@ export class Tab3Page implements OnInit {
         this.reddah.tailUp(3), 
         this.reddah.tailDown(3),
       ],{
-        left: 15+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
+        left: (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
         top: this.halfLineHeight*6 + this.topMargin,
       })
       group32.lockMovementX = true;
@@ -475,7 +518,7 @@ export class Tab3Page implements OnInit {
         this.reddah.tailUp(4), 
         this.reddah.tailDown(4),
       ],{
-        left: 15+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
+        left: (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
         top: this.halfLineHeight*6 + this.topMargin,
       })
       group64.lockMovementX = true;
@@ -887,7 +930,7 @@ export class Tab3Page implements OnInit {
         this.lastCanvasIndex==i){
           let grpObjects = objects[j].getObjects();
           for(let k=0;k<grpObjects.length;k++){
-            console.log(grpObjects[k].tag)
+            //console.log(grpObjects[k].tag)
             if(["stemup"].indexOf(grpObjects[k].tag)>-1){
                 grpObjects[k].set('stroke' , isUnderb4?'#000000':'transparent');
             }
@@ -917,7 +960,7 @@ export class Tab3Page implements OnInit {
         this.isPlay = true;
         
         window.clearTimeout(this.time);
-        this.playBar();
+        this.playBars();
         if (this.isPlay) {
             this.time = window.setTimeout(this.play, Math.floor(60000 / this.speed));
         };
@@ -940,26 +983,40 @@ export class Tab3Page implements OnInit {
     .set(1,0);
 
     playIndex = 0;
-    playBar(){
-      let lastJump = this.currentJump.get(this.currentClef);
-      
+
+    playBars(){
+      this.playBar(0);
+      this.playBar(1);
+
+      if(this.playIndex!=this.canvasBox[0].length*this.beatsPerBar-1){  
+          this.playIndex++;
+      }else{
+          this.stop();
+      }
+    }
+
+
+    playBar(clef){
+
       let canvasIndex = parseInt(this.playIndex/this.beatsPerBar+"");
       let playBeatIndex = parseInt(this.playIndex%this.beatsPerBar+"");
-      let beatIndex = this.currentBeatIndex.get(this.currentClef);
+
+      let lastJump = this.currentJump.get(clef);
+      let beatIndex = this.currentBeatIndex.get(clef);
 
 
       if(this.playIndex%this.beatsPerBar==0){
-        this.currentBeatIndex.set(this.currentClef, 0);
+        this.currentBeatIndex.set(clef, 0);
         beatIndex = 0;
       }
 
-      this.cursorAnimations(canvasIndex, playBeatIndex);
-      
+      this.cursorAnimation(clef, canvasIndex, playBeatIndex);
+
       if(lastJump<=0)
       {
-        let beat = this.getBeat(canvasIndex, beatIndex);
+        let beat = this.getBeat(clef, canvasIndex, beatIndex);
 
-        this.currentJump.set(this.currentClef, beat.last-1);
+        this.currentJump.set(clef, beat.last-1);
 
         console.log(beat);
 
@@ -980,29 +1037,18 @@ export class Tab3Page implements OnInit {
 
         }
 
-        this.currentBeatIndex.set(this.currentClef, beatIndex+1);
+        this.currentBeatIndex.set(clef, beatIndex+1);
 
       }else{
-        this.currentJump.set(this.currentClef, lastJump-1);
-      }
-
-      console.log("lastjump:"+this.currentJump.get(this.currentClef))
-
-      if(this.playIndex!=this.canvasBox[this.currentClef].length*this.beatsPerBar-1)
-      {  
-          this.playIndex++;
-      }
-      else{
-          this.stop();
+        this.currentJump.set(clef, lastJump-1);
       }
     }
 
-    getBeat(canvasIndex, beatIndex){
+    getBeat(clef, canvasIndex, beatIndex){
       let result = { 
         frequency: 0, 
         last: 1
       }
-      let clef = this.currentClef;
       if((canvasIndex>this.canvasBox[clef].length-1)||canvasIndex<0){
         return result;
       }
