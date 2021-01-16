@@ -1,0 +1,70 @@
+
+<ion-item>
+   
+    <ion-button (click)="play()" *ngIf="!isPlay">
+      <ion-icon name="play-outline"></ion-icon>
+    </ion-button>
+  
+    <ion-button (click)="stop()" *ngIf="isPlay">
+      <ion-icon name="stop"></ion-icon>
+    </ion-button>
+  
+    <ion-text style="margin-left: 30px;">speed={{speed}}</ion-text>
+    <!--<ion-range min="20" max="500" step="1" [(ngModel)]="speed" snaps="true" tick="true"
+          color="primary"></ion-range>-->
+  
+  </ion-item>
+  
+  <ion-content [fullscreen]="true">
+  
+<!--
+    <div style="height: 100px;border:1px solid gray;"
+      (click)="hideActionBarVisibility()">
+      title
+    </div>
+-->
+  
+    <div id="playboard" style="display:flex;flex-wrap: nowrap;overflow-x:auto;padding-left:15px;">
+  
+      <div style="display: flex;flex-direction:column;">
+        <div class="action-bar-header"><ion-item lines="none" [class.hide-action-bar]="hideActionBar"></ion-item></div>
+        <canvas id="startT" [class.debug-grid]="showGrid"></canvas>
+        <canvas id="startB" [class.debug-grid]="showGrid"></canvas>
+      </div>
+  
+  
+      <div style="display: flex;flex-direction:column;" *ngFor="let canvas of canvasBox[0];index as i">
+        <div class="action-bar-header">
+          <ion-item [class.hide-action-bar]="hideActionBar" style="--padding-start:0;--inner-padding-end:0;--background:rgb(238,238,238, 0.8);" lines="none">
+              <ion-text style="margin:0 5px;">{{i+1}}</ion-text>
+              <ion-icon color="dark" name="add-outline" (click)="insertBar(i)"></ion-icon>  
+              <ion-icon name="copy-outline"></ion-icon>
+              <ion-icon style="margin:0 5px" name="remove-circle-outline" slot="end"></ion-icon>    
+          </ion-item>
+        </div>
+        <canvas (click)="showActionBarVisibility(0, i)" id="{{'t'+canvas.id}}" [class.debug-grid]="showGrid"></canvas>
+        <canvas (click)="showActionBarVisibility(1, i)" id="{{'b'+canvas.id}}" [class.debug-grid]="showGrid"></canvas>
+      </div>
+  
+      <div style="display: flex;flex-direction:column;">
+        <div class="action-bar-header">
+          <ion-item [class.hide-action-bar]="hideActionBar" style="--padding-start:0;" lines="none">
+              <ion-icon color="dark" name="add-outline" (click)="addBar()"></ion-icon>   
+          </ion-item>
+        </div>
+        <canvas id="endT" [class.debug-grid]="showGrid"></canvas>
+        <canvas id="endB" [class.debug-grid]="showGrid"></canvas>
+      </div>
+      
+    </div>
+      
+  </ion-content>
+  
+  
+  
+  
+  
+  <ion-item>
+    <div *ngFor="let canvas of this.canvasBox">{{canvas.note}}</div>
+  </ion-item>
+  

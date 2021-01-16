@@ -1,6 +1,7 @@
 {
     "Language": "语言",
     "AppTitle": "节拍器",
+    "SongTitle":"乐曲",
     "Record":"节拍",
     "NewRecord": "新节拍",
 
@@ -11,5 +12,26 @@
     "ConfirmYes":"确定",
     "ConfirmCancel":"取消",
 
-    "GiveFeedback":"喜欢这个App，就去写个好评吧？"
+    "GiveFeedback":"喜欢这个App，就去写个好评吧？",
+    
+    "1001":{
+        "title": "玛丽有只小羔羊",
+        "desc": "4/4"
+    },
+
+    "1002":{
+        "title": "排钟",
+        "desc": "3/4"
+    },
+
+    "1003":{
+        "title": "滑稽面孔",
+        "desc": "3/4"
+    },
+
+    "1004":{
+        "title": "老麦克唐纳",
+        "desc": "4/4"
+    }
+
 }

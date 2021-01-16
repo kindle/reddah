@@ -1,7 +1,10 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { LocalePage } from '../locale/locale.page';
+import { MusicService } from '../music.service';
+import { PlayPage } from '../play/play.page';
 import { ReddahService } from '../reddah.service';
-//import { Draggable } from 'gsap';
 
 @Component({
   selector: 'app-tab3',
@@ -10,39 +13,52 @@ import { ReddahService } from '../reddah.service';
 })
 export class Tab3Page implements OnInit {
 
+  songs=[];
+
   constructor(
     public reddah: ReddahService,
+    private music: MusicService,
     private _renderer2: Renderer2,
     @Inject(DOCUMENT) private _document: Document,
+    private modalController: ModalController,
   ) {}
   
   ngOnInit() {
-    
-    //this.addScriptByUrl("/assets/knob.js");
+    this.songs = this.music.songs;
   }
 
   ionViewDidEnter(){
 
   }
 
-  addScriptByUrl(src){
-    let key = this.nonce_str()+"_js";
-
-    let s = this._renderer2.createElement('script');
-    s.type = "text/javascript";
-    s.src = src;
-    s.id = key;
+  async playSong(song){
+    const modal = await this.modalController.create({
+        component: PlayPage,
+        componentProps: { song: song.json },
+        cssClass: "modal-fullscreen",
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+    });
     
-    this._renderer2.appendChild(
-        this._document.body.getElementsByTagName("app-tab1")[0], s);
-    
+    await modal.present();
   }
 
-  nonce_str() {
-      return 'xxxxxxxxxx'.replace(/[xy]/g, function(c) {
-          var r = Math.random() * 10 | 0, v = r;
-          return v.toString(10);
+  async locale(){
+      let currentLocale = this.reddah.getCurrentLocale();
+      const changeLocaleModal = await this.modalController.create({
+          component: LocalePage,
+          componentProps: { orgLocale: currentLocale },
+          cssClass: "modal-fullscreen",
+          swipeToClose: true,
+          presentingElement: await this.modalController.getTop(),
       });
+      
+      await changeLocaleModal.present();
+      const { data } = await changeLocaleModal.onDidDismiss();
+      if(data){
+          let currentLocale = this.reddah.getCurrentLocale();
+          this.reddah.loadTranslate(currentLocale);
+      }    
   }
 
 

@@ -13,14 +13,18 @@ import { LocalePage } from './locale/locale.page';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { HttpClientModule } from '@angular/common/http';
 import { Globalization } from '@ionic-native/globalization/ngx';
+import { PlayPage } from './play/play.page';
+import { MusicService } from './music.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LocalePage,
+    PlayPage,
   ],
   entryComponents: [
     LocalePage,
+    PlayPage,
   ],
   imports: [
     BrowserModule, IonicModule.forRoot(), AppRoutingModule,
@@ -31,6 +35,7 @@ import { Globalization } from '@ionic-native/globalization/ngx';
     StatusBar,
     SplashScreen,
     ReddahService,
+    MusicService,
     Globalization,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

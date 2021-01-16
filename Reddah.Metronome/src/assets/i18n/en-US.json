@@ -1,6 +1,7 @@
 {
     "Language": "Language",
     "AppTitle": "Metronome",
+    "SongTitle":"Music",
     "Record": "Metronome",
     "NewRecord": "New Metronome",
 
@@ -11,5 +12,25 @@
     "ConfirmYes": "Yes",
     "ConfirmCancel": "Cancel",
 
-    "GiveFeedback":"Do you enjoy this App, please give a feedback?"
+    "GiveFeedback":"Do you enjoy this App, please give a feedback?",
+
+    "1001":{
+        "title": "Mary had a little lamb",
+        "desc": "4/4"
+    },
+
+    "1002":{
+        "title": "The Chimes",
+        "desc": "3/4"
+    },
+
+    "1003":{
+        "title": "Funny Faces",
+        "desc": "3/4"
+    },
+
+    "1004":{
+        "title": "Old MacDonald had a farm",
+        "desc": "4/4"
+    }
 }

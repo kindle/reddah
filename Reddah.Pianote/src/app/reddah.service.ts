@@ -533,7 +533,7 @@ export class ReddahService {
 
   dot = (groupId, n, pai)=>{
     return this.mark("dot", this.pathDot, groupId, n, pai, 
-    6, 10, 6);
+    6, 10, 10);
   }
 
   
@@ -632,7 +632,7 @@ export class ReddahService {
     .set('a3',220.000)
     .set('a#3',233.082)
     .set('b3',246.942)
-    .set('c4',261.626)
+    .set('c4',261.626)//central c
     .set('c#4',277.183)
     .set('d4',293.665)
     .set('d#4',311.127)
@@ -641,7 +641,7 @@ export class ReddahService {
     .set('f#4',369.994)
     .set('g4',391.995)
     .set('g#4',415.305)
-    .set('a4',440.000)//central c
+    .set('a4',440.000)
     .set('a#4',466.164)
     .set('b4',493.883)
     .set('c5',523.251)
@@ -682,4 +682,12 @@ export class ReddahService {
     .set('b7',3951.066)
     .set('c8',4186.009)
 
+
+    save(music){
+        this.localStorageService.store("1", music);
+    }
+
+    load(key){
+        return this.localStorageService.retrieve(key);
+    }
 }
