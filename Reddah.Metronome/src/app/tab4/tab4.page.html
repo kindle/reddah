@@ -5,17 +5,14 @@
             <ion-icon size="large" is-active="false" name="chevron-back-outline"></ion-icon>
         </ion-button>
     </ion-buttons>
-    {{ reddah.instant(song.id+'.title') }}
-    <!--
     <ion-button slot="end" (click)="createMetronome()">
         <ion-icon name="create-outline"></ion-icon>
     </ion-button>
-    -->
 </ion-item>
 
 <ion-item>
    
-    <ion-button (click)="playPrepare()" *ngIf="!isPlay">
+    <ion-button (click)="play()" *ngIf="!isPlay">
       <ion-icon name="play-outline"></ion-icon>
     </ion-button>
   
@@ -23,19 +20,14 @@
       <ion-icon name="stop"></ion-icon>
     </ion-button>
   
-    <ion-text style="margin-left: 30px;" *ngIf="speed">speed={{speed}}</ion-text>
+    <ion-text style="margin-left: 30px;">speed={{speed}}</ion-text>
+    <ion-range min="20" max="500" step="1" [(ngModel)]="speed" snaps="true" tick="true"
+          color="primary"></ion-range>
   
-    <ion-range *ngIf="speed" min="20" max="500" step="1" [(value)]="speed" (ionChange)="rangeChanged($event)"
-      snaps="true" tick="true" color="primary"></ion-range>
-
   </ion-item>
   
   <ion-content [fullscreen]="true">
   
-
-    <div class="ready-box">
-      <h1 style="display:none;">{{COUNT+1}}</h1>
-    </div>
 <!--
     <div style="height: 100px;border:1px solid gray;"
       (click)="hideActionBarVisibility()">

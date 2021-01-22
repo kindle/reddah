@@ -13,3 +13,25 @@
 .hide-action-bar{
     display: none;
 }
+
+
+.ready-box{
+    width:100%;
+    height:100%;
+    margin:100px auto;
+    position:absolute;
+    z-index: 1;
+}
+.ready-box>h1{font-size:200px;color:red;text-align:center;}
+.ready-box>h1.active{animation:count .5s;}
+@keyframes count {
+from {
+    transform: scale(.1);
+    opacity: 1;
+}
+to {
+    transform: scale(1.5);
+    opacity: 0;
+    display:none;
+}
+}

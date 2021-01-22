@@ -5,17 +5,16 @@ import { fabric } from 'fabric';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-    selector: 'app-play',
-    templateUrl: './play.page.html',
-    styleUrls: ['./play.page.scss'],
+    selector: 'app-tab4',
+    templateUrl: './tab4.page.html',
+    styleUrls: ['./tab4.page.scss'],
 })
-export class PlayPage implements OnInit {
+export class Tab4Page implements OnInit {
     @Input() song;
 
     constructor(
         private router: Router,
         private activeRoute: ActivatedRoute,
-        private modalController: ModalController,
         public reddah: ReddahService,
         ) {
     }
@@ -33,9 +32,6 @@ export class PlayPage implements OnInit {
         'hasControls',
       ]);
     }
-
-    cursorColor = 'orange';
-    countDownColor = '#3880ff';
   
     save(){
   
@@ -103,9 +99,9 @@ export class PlayPage implements OnInit {
     }
   
     ngOnInit() {
-      /*this.activeRoute.queryParams.subscribe(params => {
+      this.activeRoute.queryParams.subscribe(params => {
         this.song = params['song'];
-      });*/
+      });
     }
   
     barStartWidth = 140;
@@ -120,19 +116,11 @@ export class PlayPage implements OnInit {
           this.stop();
         }
     }
-
-    initSpeed(){
-        let speed = this.reddah.getSpeed(this.song.id);
-        if(speed!=null)
-          this.speed = speed;
-        else
-          this.speed = 90;
-    }
     
     ionViewDidEnter(){
-        this.initSpeed();
-        
-        let music = JSON.parse(this.song.json);
+        //let music = JSON.parse(this.reddah.tempGet());
+
+        let music =  JSON.parse(this.song);
 
         this.beatsPerBar = music.beatsPerBar;
         this.beatNote = music.beatNote;
@@ -183,6 +171,8 @@ export class PlayPage implements OnInit {
                 }
             }
         }, 1)
+
+
     }
   
   
@@ -346,8 +336,8 @@ export class PlayPage implements OnInit {
               objects[j].left = objects[j].left+50;
             }
   
-            objects[j].set('stroke' , this.cursorColor);
-            objects[j].set('fill' , this.cursorColor);
+            objects[j].set('stroke' , '#aaf');
+            objects[j].set('fill' , '#faa');
             
             this.canvasBox[clef][i].canvas.requestRenderAll();
             
@@ -1170,57 +1160,22 @@ export class PlayPage implements OnInit {
   
       time;
       isPlay = false;
-      speed;
-      rangeChanged(e){
-        this.speed = e.detail.value;
-        this.reddah.saveSpeed(this.song.id, this.speed)
-      }
+      speed = 80;
+  
      
   
-
-
-      COUNT = 3;
-      countTimer = null;
-      playPrepare () {
-
-        if(this.playIndex==0){
-          document.getElementById('playboard').scrollTo({
-              top: 0,
-              left: 0,
-              behavior: 'smooth'
-          });  
-        }
-        
-        let readybox = document.querySelector(".ready-box");
-        let readyboxh1 = readybox.querySelector('h1');
-        
-        this.countTimer = setInterval(() => {
-          this.COUNT--;
-          readyboxh1.style.display = 'block';
-          readyboxh1.style.zIndex = "1";
-          
-          if (this.COUNT >= 0) {
-            readyboxh1.classList.remove('active');
-            setTimeout(() => {
-              readyboxh1.style.color = this.countDownColor;
-              readyboxh1.classList.add('active');
-            }, 100);
-          } else {
-            clearInterval(this.countTimer);
-            readyboxh1.style.display = 'none';
-            this.COUNT = 3;
-            
-            this.play();
-          }
-        }, 1000);
-      }
-
-
-
-
   
       play=()=>{
           this.isPlay = true;
+          
+          if(this.playIndex==0){
+            document.getElementById('playboard').scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });  
+          }
+
           
           window.clearTimeout(this.time);
           this.playBars();
@@ -1236,21 +1191,11 @@ export class PlayPage implements OnInit {
               this.time = window.setTimeout(this.play, Math.floor(60000 / this.speed));
           };
       }
-
-      //add pause/resume function
   
       stop(){
         this.playIndex=0;
         this.isPlay = false;
         window.clearTimeout(this.time);
-
-        /*
-        document.getElementById('playboard').scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth'
-        });
-        */
       }
   
       audioCtx = new AudioContext();
@@ -1395,9 +1340,6 @@ export class PlayPage implements OnInit {
     }
   
       playNote(key){
-        if(this.readonly)
-          return;
-
         console.log("play:"+key)
         let oscillator = this.audioCtx.createOscillator();
         let gainNode = this.audioCtx.createGain();
@@ -1467,8 +1409,7 @@ export class PlayPage implements OnInit {
   
   
     async close() {
-        //this.router.navigate(['/tabs/tab3'], {});
-        this.modalController.dismiss();
+        this.router.navigate(['/tabs/tab3'], {});
     }
 
     createMetronome(){

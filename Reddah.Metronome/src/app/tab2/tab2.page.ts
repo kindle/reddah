@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import * as $ from 'jquery';
 import 'jquery-knob';
+import { ListPage } from '../list/list.page';
 import { ReddahService } from '../reddah.service';
 
 @Component({
@@ -15,6 +17,7 @@ export class Tab2Page implements OnInit  {
         private router: Router,
         public reddah: ReddahService,
         private activeRouter: ActivatedRoute,
+        private modalController: ModalController,
     ) {}
 
     ngOnInit(): void {
@@ -245,5 +248,24 @@ export class Tab2Page implements OnInit  {
             this.beat=16;
         this.reload();
         this.saveRecord();
+    }
+
+
+
+    async link(){
+        const modal = await this.modalController.create({
+            component: ListPage,
+            componentProps: {  },
+            cssClass: "modal-fullscreen",
+            swipeToClose: true,
+            presentingElement: await this.modalController.getTop(),
+        });
+    
+        await modal.present();
+
+        const { data } = await modal.onDidDismiss();
+        if(data!=null){
+            console.log(data)
+        }  
     }
 }

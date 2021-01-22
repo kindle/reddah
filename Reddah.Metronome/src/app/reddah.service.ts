@@ -688,5 +688,21 @@ export class ReddahService {
         return this.localStorageService.retrieve(key);
     }
 
+    tempStore(value){
+        this.localStorageService.store("tempStore", value);
+    }
+
+    tempGet(){
+        return this.localStorageService.retrieve("tempStore");
+    }
+
+    saveSpeed(songId, speed){
+        this.localStorageService.store(songId, speed);
+    }
+
+    getSpeed(songId){
+        return this.localStorageService.retrieve(songId);
+    }
+
 
 }

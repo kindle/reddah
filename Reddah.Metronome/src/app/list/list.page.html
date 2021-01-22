@@ -1,0 +1,27 @@
+<ion-item color="light" lines="none" style="--inner-padding-end:5px;">
+  <ion-buttons>
+      <ion-button (click)="locale()">
+          <ion-icon name="earth" color="primary" size="large"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+  <ion-title>{{ reddah.instant('SongTitle') }}</ion-title>
+</ion-item>
+<ion-content fullscreen>
+  <ion-list>
+
+    <ion-item *ngFor="let song of songs" (click)="chooseSong(song)">
+      
+      <ion-label>
+        <h2>{{ reddah.instant(song.id+'.title') }}</h2>
+        
+        <p>{{ reddah.instant(song.id+'.desc') }}</p>
+      </ion-label>
+      <ion-badge color="warning" slot="end" style="font-size: large;min-width: 35px;">
+        {{song.level}}
+      </ion-badge>
+
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

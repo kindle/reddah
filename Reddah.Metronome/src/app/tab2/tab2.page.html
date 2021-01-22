@@ -7,6 +7,13 @@
     <ion-label *ngIf="!isEdit" (click)="toggleEdit()" style="pointer-events: all;">{{name}}</ion-label>
     <ion-input color="primary" placeholder="{{name}}" 
     [(ngModel)]="name" (ionBlur)="onBlur()" *ngIf="isEdit"></ion-input>
+    <!--
+    <ion-buttons slot="end" style="margin-inline-end:15px;">
+        <ion-button (click)="link()">
+            <ion-icon size="large" is-active="false" name="link-outline"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    -->
 </ion-item>
 
 <ion-content [fullscreen]="true">
