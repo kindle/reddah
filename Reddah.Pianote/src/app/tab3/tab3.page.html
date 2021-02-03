@@ -1,5 +1,16 @@
 
 <ion-item>
+
+  <ion-button (click)="save()">
+    <ion-icon name="save-outline" ></ion-icon>
+  </ion-button>
+
+  <ion-button (click)="load()">
+    <ion-icon name="cloud-download-outline"></ion-icon>
+  </ion-button>
+
+  <ion-text style="margin:0 15px;">|</ion-text>
+
   <ion-button (click)="clear()">
     <ion-icon name="refresh-outline" ></ion-icon>
   </ion-button>
@@ -17,18 +28,8 @@
         color="primary"></ion-range>
 
 </ion-item>
-<ion-item>
-  <ion-button (click)="save()">
-    <ion-icon name="save-outline" ></ion-icon>
-  </ion-button>
 
-  <ion-button (click)="load()">
-    <ion-icon name="cloud-download-outline"></ion-icon>
-  </ion-button>
-
-</ion-item>
-
-<ion-item>
+<ion-item *ngIf="!hideActionBar">
   <ion-text style="margin-right:15px;">Accidentals</ion-text>
   <ion-button (click)="accidental('sharp')" [disabled]="lastTarget==null">
     #
@@ -67,61 +68,63 @@
   </ion-button>
 
 </ion-item>
-<ion-item>
+<ion-item *ngIf="!hideActionBar">
   <ion-text style="margin-right:15px;">Duration</ion-text>
-  <ion-button (click)="addNote(1)">
-    全音符
-  </ion-button>
-  <ion-button (click)="addNote(2)">
-    2
-  </ion-button>
-  <ion-button (click)="addNote(4)">
-    4
-  </ion-button>
-  <ion-button (click)="addNote(8)">
-    8
-  </ion-button>
-  <ion-button (click)="addNote(16)">
-    16
-  </ion-button>
-
-  <ion-button (click)="addNote(32)">
-    32
-  </ion-button>
-
-  <ion-button (click)="addNote(64)">
-    64
+  <ion-button (click)="addNote(n)" *ngFor="let n of [1,2,4,8,16,32,64]">
+    <ion-icon src="{{'/assets/icon/note'+n+'.svg'}}"></ion-icon>
   </ion-button>
 
   <ion-text style="margin:0 15px;">|</ion-text>
+
 
   <ion-button (click)="dot()" [disabled]="lastTarget==null">
     ·
   </ion-button>
 
+  <ion-button (click)="tie()" [disabled]="lastTarget==null">
+    <ion-icon src="/assets/icon/tie.svg"></ion-icon>
+  </ion-button>
+
   <ion-text style="margin:0 15px;">|</ion-text>
 
-  <ion-button (click)="addRest('r1')">
-    1 R
+  <ion-button (click)="addRest(r)" *ngFor="let r of ['r1','r2','r4','r8','r16','r32','r64']">
+    {{r}}
   </ion-button>
-  <ion-button (click)="addRest('r2')">
-    1/2 R
+</ion-item>
+
+<ion-item *ngIf="!hideActionBar">
+  <ion-text style="margin-right:15px;">Chord</ion-text>
+  <div *ngIf="lastTarget!=null">
+    <ion-button (click)="addChord()" *ngIf="isUnderTurnAroundNoteKey()"
+    [disabled]="lastTarget==null||lastTarget.tag!='note'||lastTarget.chord!=null">
+      +1
+    </ion-button>
+    <ion-button (click)="addChord()" *ngIf="!isUnderTurnAroundNoteKey()"
+    [disabled]="lastTarget==null||lastTarget.tag!='note'||lastTarget.chord!=null">
+      -1
+    </ion-button>
+  </div>
+  <ion-button (click)="clearChord()"
+    *ngIf="lastTarget!=null&&lastTarget.chord!=null">
+    <ion-icon name="trash-outline"></ion-icon>
   </ion-button>
-  <ion-button (click)="addRest('r4')">
-    1/4 R
+
+  <ion-text style="margin:0 15px;">|</ion-text>
+
+  <ion-text style="margin-right:15px;">Mark</ion-text>
+  <ion-button (click)="setFinger(number)" [disabled]="lastTarget==null" *ngFor="let number of [1,2,3,4,5]">
+    {{number}}
   </ion-button>
-  <ion-button (click)="addRest('r8')">
-    1/8 R
+  <ion-button (click)="clearFinger()" [disabled]="lastTarget==null">
+    <ion-icon name="trash-outline"></ion-icon>
   </ion-button>
-  <ion-button (click)="addRest('r16')">
-    1/16 R
+
+  <ion-text style="margin:0 15px;">|</ion-text>
+  
+  <ion-button (click)="setPause()" [disabled]="lastTarget==null">
+    <ion-icon size="large" src="/assets/icon/fermata.svg"></ion-icon>
   </ion-button>
-  <ion-button (click)="addRest('r32')">
-    1/32 R
-  </ion-button>
-  <ion-button (click)="addRest('r64')">
-    1/64 R
-  </ion-button>
+
 </ion-item>
 
 <ion-content [fullscreen]="true">
