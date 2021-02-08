@@ -313,10 +313,11 @@ export class ReddahService {
   
   pathHollowHead = "M0,1.472C0,3.265 1.761,4.321 3.937,4.321C7.586,4.321 11.268,1.889 11.268,-1.12C11.268,-3.169 9.539,-4.353 6.882,-4.353C3.617,-4.353 0,-1.472 0,1.472ZM8.707,-3.393C9.923,-3.393 10.531,-2.881 10.531,-1.889C10.531,-0.032 4.834,3.361 2.561,3.361C1.344,3.361 0.736,2.849 0.736,1.857C0.736,-0.128 6.658,-3.393 8.707,-3.393Z";
   pathSolidHead = "M 13 -1.55 Q 12.8 1.2 10.15 3.15 Q 7.4 5.1 4.4 5.2 Q 2.5 5.15 1.3 4.2 Q 0.05 3.15 0 1.45 Q 0.2 -1.15 2.85 -3.1 Q 5.45 -5.1 8.25 -5.2 Q 10.45 -5.25 11.65 -4.3 Q 12.95 -3.45 13 -1.55";
-  pathNoteStem = "M0 0 L0,42";
+  //pathNoteStem = "M0 0 L0,42";
+  pathNoteStem = "M0 0 H 1 V 49 H 0 Z";
 
-  pathTailUp1 = "M0.32,0C1.921,0 2.465,0.608 3.393,1.28C5.986,3.105 7.298,5.122 7.298,7.362L7.298,7.522C7.234,10.403 7.202,10.627 6.37,12.484C6.242,12.772 6.178,12.964 6.178,13.092C6.178,13.252 6.274,13.348 6.434,13.348C6.754,13.348 8.387,11.108 8.387,7.01L8.387,6.85C8.387,5.474 8.003,4.161 7.234,2.945C7.01,2.561 6.018,1.248 4.257,-0.96C2.881,-2.721 1.697,-4.898 0.736,-7.426C0.704,-7.522 0.704,-7.618 0.704,-7.714C0.704,-7.81 0.704,-7.906 0.736,-7.971C0.768,-8.003 0.608,-8.003 0.32,-8.003L0.32,0Z";
-  pathTailDown1 = "M0.32,7.971C0.608,7.971 0.768,7.971 0.736,7.939C0.704,7.874 0.704,7.778 0.704,7.682C0.704,7.586 0.704,7.49 0.736,7.394C1.729,4.898 2.849,2.657 4.257,0.928C5.41,-0.48 6.722,-1.761 7.906,-3.169C9.155,-4.641 9.731,-6.37 9.731,-8.003C9.731,-8.867 9.635,-9.699 9.411,-10.563C8.995,-12.196 7.714,-15.333 6.946,-15.333C6.85,-15.333 6.818,-15.237 6.818,-15.045C6.818,-14.885 6.882,-14.661 7.01,-14.437C8.131,-12.356 8.675,-10.595 8.675,-9.219C8.675,-7.266 7.939,-5.474 6.562,-3.937C6.274,-3.649 5.346,-2.881 3.777,-1.633C1.793,-0.032 1.665,0 0.32,0L0.32,7.971Z";
+  pathTailUp1 = "M 9.65 19.45 Q 9.6 22.6 8.45 25.45 L 6.2 30 L 5.6 30 L 7.35 25.85 Q 8.3 23.35 8.3 20.5 Q 8.15 17.1 6.05 14.4 Q 4.9 12.9 3.2 11.9 Q 1.5 10.9 -0.2 10.7 L -0.2 11.5 L -1.25 11.5 L -1.25 0 L -0.2 0 L 0.35 3.3 Q 0.7 5.15 2.2 7.05 L 6.8 12.25 Q 9.45 15.45 9.65 19.45";
+  pathTailDown1 = "M 7.5 -28.25 Q 8.6 -26.5 9.7 -23.7 Q 10.85 -20.85 10.9 -17.7 Q 10.7 -13.7 8.05 -10.5 L 3.45 -5.3 Q 1.95 -3.4 1.6 -1.55 L 1.05 1.75 L 0 1.75 L 0 -9.75 L 1.05 -9.75 L 1.05 -8.95 Q 2.75 -9.15 4.45 -10.15 Q 6.15 -11.15 7.3 -12.65 Q 9.4 -15.35 9.55 -18.75 Q 9.55 -21.65 8.65 -24.05 L 6.9 -28 L 7.5 -28.25";
   pathTailUp2 = "M7.074,16.485C7.714,16.485 8.611,13.732 8.611,12.548L8.611,12.388C8.579,11.428 8.483,10.691 8.259,10.147C8.611,9.443 8.771,8.515 8.771,7.33C8.771,5.698 8.323,4.001 7.362,2.721C6.37,1.408 5.218,0.288 4.289,-0.992C2.465,-3.233 1.28,-5.41 0.736,-7.426C0.64,-7.81 0.672,-8.003 0.416,-8.003L0.32,-8.003L0.32,6.082C1.472,6.082 1.761,6.21 3.393,7.458C6.786,10.115 7.394,10.819 7.458,12.356C7.458,13.508 6.818,15.749 6.818,16.229C6.818,16.389 6.914,16.485 7.074,16.485ZM7.682,7.842C7.682,8.131 7.682,8.419 7.65,8.739C7.106,7.65 4.513,5.346 4.257,5.026C3.137,3.649 2.209,2.049 1.408,0.224C3.041,0.736 6.274,3.937 6.402,4.097C7.266,5.154 7.682,6.402 7.682,7.842Z";
   pathTailDown2 = "M9.1,-29.6L9.55,-30Q11.2,-27.55 11.4,-23.3Q11.45,-21.1 10.45,-19.25Q10.9,-18.1 10.9,-16.45Q10.95,-14.4 10.25,-11.95Q9.5,-9.5 7.8,-7.25Q6,-5.05 3.1,-2.6Q1.9,-1.4 1.5,-0.2L1.05,1.4L0,1.4L0,-14.35L1.05,-14.35L1.05,-13.55L5.25,-16.15Q7.6,-17.6 8.9,-19.05Q9.85,-20.25 10.15,-21.4L10.45,-24.1Q10.5,-25.65 10,-27.35L9.1,-29.6M8.7,-16.45L7,-14.55L4.7,-12.35Q3.4,-11.15 2.3,-9.2Q1.2,-7.2 1.05,-5Q3.75,-6.45 5.75,-8.05Q7.75,-9.7 9.05,-12.6L9.75,-14.7L10,-16.65L10,-18.5L8.7,-16.45";
   pathTailUp3 = "M1.85,-3.5Q4.9,-0.9 6.85,1.5Q9.5,4.65 9.65,8.7Q9.65,10.95 9.05,13.05Q9.6,14.65 9.65,16.45Q9.65,18.45 9.05,20.4Q10.1,22.45 10.15,24.85Q10,29.05 8.1,31.9L7.45,31.9L8.7,29Q9.25,27.2 9.2,25.65L8.9,23Q8.6,21.85 7.6,20.6Q6.3,19.15 3.95,17.75L-0.2,15.15L-0.2,15.95L-1.25,15.95L-1.25,-8.5L-0.2,-8.5L0.2,-6.05Q0.6,-4.7 1.85,-3.5M6.1,3.65Q3.5,0.75 -0.2,-1.15L-0.2,-0.7L0.2,1.75Q0.6,3.05 1.85,4.25Q4.9,6.9 6.85,9.25Q7.9,10.5 8.55,11.85L8.6,10.85L8.6,9.1Q8.3,6.05 6.1,3.65M8.6,16.85Q8.3,13.8 6.1,11.4Q3.5,8.55 -0.2,6.6Q-0.05,8.8 1.05,10.8Q2.15,12.75 3.5,14L5.85,16.15L7.55,18.05L8.5,19.45L8.6,16.85";
@@ -422,7 +423,7 @@ export class ReddahService {
   }
 
 
-  hollowHead = (left=0,top=39,color='black')=>{
+  hollowHead = (left=0,top=44,color='black')=>{
     return new fabric.Path(this.pathHollowHead, {
         fill: color,
         stroke: color,
@@ -430,10 +431,12 @@ export class ReddahService {
         opacity: 1,
         left: left, 
         top: top,
+        scaleX: 1.3,
+        scaleY: 1.3
     });
   }
 
-  solidHead = (left=0,top=39,color='black')=>{
+  solidHead = (left=0,top=43,color='black')=>{
     return new fabric.Path(this.pathSolidHead, {
         fill: color,
         stroke: color,
@@ -441,13 +444,15 @@ export class ReddahService {
         opacity: 1,
         left: left, 
         top: top,
+        scaleX: 1.2,
+        scaleY: 1.2
     })
   };
 
-  stem = (tag, left, top, stroke)=>{
+  stem = (tag, left, top, color)=>{
     let l = new fabric.Path(this.pathNoteStem, {
-        fill: 'none',
-        stroke: stroke,
+        fill: color,
+        stroke: color,
         strokeMiterLimit: 10,
         opacity: 1,
         left: left, 
@@ -457,12 +462,12 @@ export class ReddahService {
     return l;
   }
 
-  stemUp = ()=>{
-    return this.stem('stemup',11,0,'#000000');
+  stemUp = (left=15, top=0)=>{
+    return this.stem('stemup',left,top,'#000000');
   }
 
-  stemDown = ()=>{
-    return this.stem('stemdown',0,42,'transparent');
+  stemDown = (left=0,top=50)=>{
+    return this.stem('stemdown',left,top,'transparent');
   }
 
   tailsUp = new Map()
@@ -483,7 +488,7 @@ export class ReddahService {
         stroke: 'transparent',
         strokeMiterLimit: 10,
         opacity: 1,
-        left: 11, 
+        left: 16, 
         top: 0, 
     });
     l.tag="tailup";
@@ -500,21 +505,25 @@ export class ReddahService {
         strokeMiterLimit: 10,
         opacity: 1,
         left: 0 + offsetLet, 
-        top: 52 + offsetTop, 
+        top: 69 + offsetTop, 
     });
     l.tag="taildown"
     return l;
   }
 
-  pathUnderline = "M970.335,1463.46L987.34,1463.46";
+  pathUnderline = "M0,0L24,0";
   underLine = (groupId, n, pai)=>{
     return this.mark("underline", this.pathUnderline, groupId, n, pai, 
-    -14, -9, 15, true);
+    -17, -12, 14, true);
+  }
+  uperLine = (groupId, n, pai)=>{
+    return this.markUp("underline", this.pathUnderline, groupId, n, pai, 
+    -17, -12, -15);
   }
 
-  dot = (groupId, n, pai)=>{
+  dot = (groupId, n, pai, color)=>{
     return this.mark("dot", this.pathDot, groupId, n, pai, 
-    6, 10, 10, true);
+    7, 11, 10, true, color);
   }
 
   tie = (groupId, n, pai, isUnderTurnAroundNoteKey)=>{
@@ -545,16 +554,17 @@ export class ReddahService {
   .set("nature", this.pathNature)
   .set("accent", this.pathAccent)
 
-  accidental = (tag, groupId, n, pai)=>{
+  accidental = (tag, groupId, n, pai, color)=>{
     return this.mark(tag, this.accidentals.get(tag), groupId, n, pai, 
-    -22, -18, 5, true);
+    -28, -22, 5, true, color);
   }
 
-  mark = (tag, path, groupId, n, pai, leftWidthTail, leftNoTail, top, lockY=true, scaleX=1, scaleY=1)=>{
+  mark = (tag, path, groupId, n, pai, leftWidthTail, leftNoTail, top, 
+    lockY=true, color = "black", scaleX=1, scaleY=1)=>{
     let left = (pai<=1/8)?leftWidthTail:leftNoTail;
     let l = new fabric.Path(path, {
-        fill: 'none',
-        stroke: '#000000',
+        fill: color,
+        stroke: color,
         strokeMiterLimit: 10,
         opacity: 1,
         left: left, 
@@ -570,10 +580,6 @@ export class ReddahService {
   }
 
 
-  uperLine = (groupId, n, pai)=>{
-    return this.markUp("underline", this.pathUnderline, groupId, n, pai, 
-    -13, -9, -13);
-  }
 
   markUp = (tag, path, groupId, n, pai, left1, left2, top)=>{
     let left = pai<=1/8?left1:left2;
