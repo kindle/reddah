@@ -81,15 +81,16 @@
     ·
   </ion-button>
 
-  <ion-button (click)="tie()" [disabled]="lastTarget==null">
+  <ion-button (click)="tie()" *ngIf="lastTarget!=null&&lastTarget.tag=='note'">
     <ion-icon src="/assets/icon/tie.svg"></ion-icon>
   </ion-button>
 
   <ion-text style="margin:0 15px;">|</ion-text>
 
-  <ion-button (click)="addRest(r)" *ngFor="let r of ['r1','r2','r4','r8','r16','r32','r64']">
-    {{r}}
+  <ion-button (click)="addRest('r'+r)" *ngFor="let r of ['1','2','4','8','16','32','64']">
+    <ion-icon src="{{'/assets/icon/rest'+r+'.svg'}}"></ion-icon>
   </ion-button>
+
 </ion-item>
 
 <ion-item *ngIf="!hideActionBar">

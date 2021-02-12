@@ -333,9 +333,11 @@ export class ReddahService {
   pathAccent = "M3.9,-2.6Q3.9,-2.3 4.25,-1.7Q4.55,-1.15 5.35,-1.1Q6.7,-1.35 6.8,-2.65L7.1,-5L10.7,-5L10.7,-1.55L8.4,-1.1Q7.2,-0.95 7,0.35Q7.2,1.7 8.5,1.75L10.7,2.1L10.7,5.6L7.1,5.6L6.8,3.1Q6.6,1.8 5.35,1.7Q4.6,1.8 4.3,2.3L3.95,3.15L3.5,5.6L0,5.6L0,2.1L2.25,1.65Q3.6,1.5 3.7,0.2Q3.65,-0.55 3.1,-0.9L2.25,-1.25L0,-1.55L0,-5L3.5,-5L3.9,-2.6";
   pathDoubleFlat = "M7.95,-20L7.95,-4.3Q9.5,-5.65 11.5,-5.8Q12.75,-5.8 13.7,-4.8Q14.65,-3.85 14.7,-2.45Q14.55,-0.65 13.3,0.7Q12.05,2.05 10.7,3.05Q8.55,4.85 6.7,6.8L6.7,0.4L3.95,3.05L0,6.8L0,-20L1.25,-20L1.25,-4.3Q2.75,-5.65 4.75,-5.8Q5.85,-5.8 6.7,-5L6.7,-20L7.95,-20M3.4,-4.25Q2.7,-4.3 2,-3.65Q1.3,-2.95 1.25,-2.5L1.25,4.2L3.6,1.3Q4.85,-0.4 4.95,-2.1Q4.8,-4 3.4,-4.25M7.95,-2.5L7.95,4.2L10.35,1.3Q11.6,-0.4 11.7,-2.1Q11.6,-4 10.15,-4.25Q9.45,-4.3 8.75,-3.65L7.95,-2.5";
 
-  pathLegatoUp = "M 0 0 Q 11.3745 -11.054 113.269 -11.054 Q 215.164 -11.054 226.538 0 Q 215.164 -11.804 113.269 -11.804 Q 11.3745 -11.804 0 0";
-  pathLegatoDown = "M 0 0 Q 11.6801 11.9243 116.404 11.9243 Q 221.128 11.9243 232.808 0 Q 221.128 11.1743 116.404 11.1743 Q 11.6801 11.1743 0 0";
+  pathTieLongUp = "M 0 0 Q 11.3745 -11.054 113.269 -11.054 Q 215.164 -11.054 226.538 0 Q 215.164 -11.804 113.269 -11.804 Q 11.3745 -11.804 0 0";
+  pathTieLongDown = "M 0 0 Q 11.6801 11.9243 116.404 11.9243 Q 221.128 11.9243 232.808 0 Q 221.128 11.1743 116.404 11.1743 Q 11.6801 11.1743 0 0";
 
+  pathTieShortUp = "M 0 0 Q 7.00566 -7.98301 62.3759 -7.98301 Q 117.746 -7.98301 124.752 0 Q 117.746 -8.73301 62.3759 -8.73301 Q 7.00566 -8.73301 0 0";
+  pathTieShortDown = "M 0 0 Q 7.00566 8.73301 62.3759 8.73301 Q 117.746 8.73301 124.752 0 Q 117.746 7.98301 62.3759 7.98301 Q 7.00566 7.98301 0 0";
 
   trebleClef = ()=>{
     let l= new fabric.Path(this.pathTrebleClef, {
@@ -526,9 +528,17 @@ export class ReddahService {
     7, 11, 10, true, color);
   }
 
-  tie = (groupId, n, pai, isUnderTurnAroundNoteKey)=>{
-    return this.mark("tie", isUnderTurnAroundNoteKey?this.pathLegatoDown:this.pathLegatoUp, groupId, n, pai, 
+  tie = (distance, groupId, n, pai, isUnderTurnAroundNoteKey)=>{
+    return this.mark("tie", this.getTiePath(distance,isUnderTurnAroundNoteKey), groupId, n, pai, 
     6, 10, 30, true);
+  }
+
+  getTiePath(distance, isUnderTurnAroundNoteKey){
+    let path = isUnderTurnAroundNoteKey?this.pathTieLongDown:this.pathTieLongUp;
+    if(distance<160){
+        path =  isUnderTurnAroundNoteKey?this.pathTieShortDown:this.pathTieShortUp;
+    }
+    return path;
   }
 
   

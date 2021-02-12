@@ -585,11 +585,12 @@ export class Tab3Page implements OnInit {
 
 
   addNote(n){
-    let defaultNoteKey ='c4';
+    let defaultNoteKey = 'c4';
 
     let clef = this.currentClef;
     let canvasIndex = parseInt(this.currentIndex.get(clef)/this.beatsPerBar+"");
-
+    let top = this.currentClef == 0 ?this.halfLineHeight*5 + this.topMargin:
+    this.halfLineHeight*-7 + this.topMargin;
     if(n==1){
       let group1 = new fabric.Group([
         this.reddah.hollowHead(),
@@ -597,7 +598,7 @@ export class Tab3Page implements OnInit {
         this.reddah.stem('stemwhole',0,50,'transparent')],{
         //left: this.canvasBox[clef][canvasIndex].canvas.width/2,
         left: (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
-        top: this.halfLineHeight*5 + this.topMargin,
+        top: top,
       })
 
       //group1.left = group1.left-group1.width/2;
@@ -610,8 +611,6 @@ export class Tab3Page implements OnInit {
       group1.dot = 0;
       group1.tag = 'note';
       group1.noteIndex = this.reddah.nonce_str();
-      console.log("whole:"+group1.noteIndex)
-      //this.canvasBox[clef][canvasIndex].sound[group1.noteIndex] = defaultNoteKey;
       this.canvasBox[clef][canvasIndex].canvas.add(group1);
       this.setLastTarget(this.currentClef, group1, canvasIndex);
     }
@@ -621,7 +620,7 @@ export class Tab3Page implements OnInit {
         this.reddah.stemUp(14)
         ,this.reddah.stemDown()],{
         left: (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
-        top: this.halfLineHeight*5 + this.topMargin,
+        top: top,
       })
       group2.left = group2.left-group2.width/2;
       group2.lockMovementX = true;
@@ -633,8 +632,6 @@ export class Tab3Page implements OnInit {
       group2.dot = 0;
       group2.tag = 'note';
       group2.noteIndex = this.reddah.nonce_str();
-      console.log("1/2:"+group2.noteIndex)
-      //this.canvasBox[clef][canvasIndex].sound[group2.noteIndex] = defaultNoteKey;
       this.canvasBox[clef][canvasIndex].canvas.add(group2);
       this.setLastTarget(this.currentClef, group2, canvasIndex);
     }
@@ -644,7 +641,7 @@ export class Tab3Page implements OnInit {
           this.reddah.stemUp(),
           this.reddah.stemDown()],{
         left: (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
-        top: this.halfLineHeight*5 + this.topMargin,
+        top: top,
       })
 
       console.log("4---"+this.currentIndex.get(clef)%this.beatsPerBar)
@@ -658,8 +655,6 @@ export class Tab3Page implements OnInit {
       group4.dot = 0;
       group4.tag = 'note';
       group4.noteIndex = this.reddah.nonce_str();
-      console.log("1/4:"+group4.noteIndex)
-      //this.canvasBox[clef][canvasIndex].sound[group4.noteIndex] = defaultNoteKey;
       this.canvasBox[clef][canvasIndex].canvas.add(group4);
       this.setLastTarget(this.currentClef, group4, canvasIndex);
     }
@@ -672,9 +667,8 @@ export class Tab3Page implements OnInit {
           this.reddah.tailDown(1),
         ],{
         left: (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
-        top: this.halfLineHeight*5 + this.topMargin,
+        top: top,
       })
-      //this.extendCanvasWidth(clef, canvasIndex, 30);
       group8.lockMovementX = true;
       group8.lockRotation = true;
       group8.hasBorders = false;
@@ -684,7 +678,6 @@ export class Tab3Page implements OnInit {
       group8.dot = 0;
       group8.tag = 'note';
       group8.noteIndex = this.reddah.nonce_str();
-      //this.canvasBox[clef][canvasIndex].sound[group8.noteIndex] = defaultNoteKey;
       this.canvasBox[clef][canvasIndex].canvas.add(group8);
       this.setLastTarget(this.currentClef, group8, canvasIndex);
     }
@@ -698,10 +691,9 @@ export class Tab3Page implements OnInit {
         this.reddah.tailDown(2),
       ],{
         left: this.barWidth/(this.beatsPerBar+1)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
-        top: this.halfLineHeight*5 + this.topMargin,
+        top: top,
       })
 
-      //this.extendCanvasWidth(clef, canvasIndex, 20);
       group16.lockMovementX = true;
       group16.lockRotation = true;
       group16.hasBorders = false;
@@ -711,7 +703,6 @@ export class Tab3Page implements OnInit {
       group16.dot = 0;
       group16.tag = 'note';
       group16.noteIndex = this.reddah.nonce_str();
-      //this.canvasBox[clef][canvasIndex].sound[group16.noteIndex] = defaultNoteKey;
       this.canvasBox[clef][canvasIndex].canvas.add(group16);
       this.setLastTarget(this.currentClef, group16, canvasIndex);
     }
@@ -725,7 +716,7 @@ export class Tab3Page implements OnInit {
         this.reddah.tailDown(3),
       ],{
         left: (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
-        top: this.halfLineHeight*5 + this.topMargin,
+        top: top,
       })
       group32.lockMovementX = true;
       group32.lockRotation = true;
@@ -736,7 +727,6 @@ export class Tab3Page implements OnInit {
       group32.dot = 0;
       group32.tag = 'note';
       group32.noteIndex = this.reddah.nonce_str();
-      //this.canvasBox[clef][canvasIndex].sound[group32.noteIndex] = defaultNoteKey;
       this.canvasBox[clef][canvasIndex].canvas.add(group32);
       this.setLastTarget(this.currentClef, group32, canvasIndex);
     }
@@ -750,7 +740,7 @@ export class Tab3Page implements OnInit {
         this.reddah.tailDown(4),
       ],{
         left: (this.barWidth/(this.beatsPerBar+1)-this.noteOffsetx)+(this.currentIndex.get(clef)%this.beatsPerBar)*50,
-        top: this.halfLineHeight*5 + this.topMargin,
+        top: top,
       })
       group64.lockMovementX = true;
       group64.lockRotation = true;
@@ -761,7 +751,6 @@ export class Tab3Page implements OnInit {
       group64.dot = 0;
       group64.tag = 'note';
       group64.noteIndex = this.reddah.nonce_str();
-      //this.canvasBox[clef][canvasIndex].sound[group64.noteIndex] = defaultNoteKey;
       this.canvasBox[clef][canvasIndex].canvas.add(group64);
       this.setLastTarget(this.currentClef, group64, canvasIndex);
     }
@@ -832,19 +821,23 @@ export class Tab3Page implements OnInit {
         this.lastTarget.lockMovementY = false;
       }
       else{
-        let canvas1 = this.canvasBox[this.currentClef][this.lastCanvasIndex].canvas;
-        let tie1 = this.reddah.tie(groupId, 1, this.lastTarget.pai, isUnderTurnAroundNoteKey);
-        tie1.left =  this.lastTarget.left + offSetX;
-        tie1.top = this.lastTarget.top + 8*this.halfLineHeight +offSetY;
-        tie1.tag = 'tie';
-        canvas1.add(tie1);
-        canvas1.requestRenderAll();
-
         if(this.lastCanvasIndex<this.canvasBox[this.currentClef].length-1){
+          let canvas1 = this.canvasBox[this.currentClef][this.lastCanvasIndex].canvas;
           let canvas2 = this.canvasBox[this.currentClef][this.lastCanvasIndex+1].canvas;
-        
-          let tie2 = this.reddah.tie(groupId, 1, this.lastTarget.pai, isUnderTurnAroundNoteKey);
-          tie2.left = this.lastTarget.left + offSetX - this.barWidth;
+          let note2 = this.getFirstNote(canvas2);
+          let distance = note2.left + this.barWidth - this.lastTarget.left;
+          console.log("#$"+distance)
+          let tie1 = this.reddah.tie(distance, groupId, 1, this.lastTarget.pai, isUnderTurnAroundNoteKey);
+          tie1.left =  this.lastTarget.left + offSetX;
+          tie1.top = this.lastTarget.top + 8*this.halfLineHeight +offSetY;
+          tie1.tag = 'tie';
+          canvas1.add(tie1);
+          canvas1.requestRenderAll();
+
+          let tie2 = this.reddah.tie(distance, groupId, 1, this.lastTarget.pai, isUnderTurnAroundNoteKey);
+          //tie2.left = this.lastTarget.left + offSetX - this.barWidth;
+          
+          tie2.left = note2.left + offSetX - distance;
           tie2.top = this.lastTarget.top + 8*this.halfLineHeight+offSetY;
           tie2.tag = 'tie';
           canvas2.add(tie2);
@@ -857,17 +850,31 @@ export class Tab3Page implements OnInit {
     }
   }
 
+  getFirstNote(canvas){
+    let note = null;
+    let objects = canvas.getObjects();
+    for(let j = 0; j < objects.length; j++){
+      if(objects[j].type=="group"&&objects[j].tag=='note')
+      {
+          note = objects[j];
+          break;
+      }
+    }
+    return note;
+  }
+
   setTieForBoth(canvas){
     let objects = canvas.getObjects();
     for(let j = 0; j < objects.length; j++){
       if(objects[j].type=="group"&&objects[j].tag=='note')
       {
-          this.lastTarget.tie = objects[j].pai;
+          this.lastTarget.tie = objects[j].pai * (objects[j].dot==1? 1.5:1);
           objects[j].tie = -1;
           break;
       }
     }
   }
+
   clearTieForBoth(canvas){
     let objects = canvas.getObjects();
     for(let j = 0; j < objects.length; j++){
@@ -1424,7 +1431,7 @@ export class Tab3Page implements OnInit {
         if(lTie<0)
           result.tie  = -1;
         else
-          result.tie = lTie/(1/this.beatsPerBar);  //dot?todo
+          result.tie = lTie/(1/this.beatsPerBar);  //contains dot
       }
 
       console.log('NoteKey:'+fValue+" Last:"+lValue+" beatIndex:"+beatIndex)
@@ -1518,9 +1525,9 @@ export class Tab3Page implements OnInit {
       if(tag=='pause')
         return Math.min((this.lastTarget.top+20), this.topMargin);
 
-      return this.isUnderTurnAroundNoteKey() ? 
-              Math.max(this.topMargin + this.halfLineHeight*6 + 5, this.lastTarget.top+50)  :
-              Math.min((this.lastTarget.top+20), this.topMargin) 
+      return this.currentClef==0 ?
+        Math.min((this.lastTarget.top+20), this.topMargin-10) : 
+        Math.max(this.topMargin + this.halfLineHeight*8 + 25, this.lastTarget.top+65);
     }
 
     setPause(){
@@ -1560,7 +1567,9 @@ export class Tab3Page implements OnInit {
             left: fingerLeft,
             top: this.getFingerTop(tag)
           })
-          fingerGroup.lockMovementX = true;
+          
+          if(tag=='pause')
+            fingerGroup.lockMovementX = true;
           fingerGroup.lockRotation = true;
           fingerGroup.hasBorders = false;
           fingerGroup.hasControls = false;
