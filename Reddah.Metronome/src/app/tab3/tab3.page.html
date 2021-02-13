@@ -24,7 +24,10 @@
         
         <p>{{ reddah.instant(song.id+'.desc') }}</p>
       </ion-label>
-      <ion-badge color="warning" slot="end" style="font-size: large;min-width: 35px;">
+      <ion-badge *ngIf="song.level==1" color="warning" slot="end" style="font-size: large;min-width: 35px;">
+        {{song.level}}
+      </ion-badge>
+      <ion-badge *ngIf="song.level==2" color="secondary" slot="end" style="font-size: large;min-width: 35px;">
         {{song.level}}
       </ion-badge>
 

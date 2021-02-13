@@ -24,7 +24,11 @@ export class PlayPage implements OnInit {
   
     toJSON(canvas){
       return canvas.toJSON([
-        'id','pai','noteIndex','noteKey','tag','accidental','type',
+        'id','pai','noteIndex','noteKey','tag',
+        'accidental','type','finger','pause',
+        'chord','tie','rest','dot','underline',
+        'number',
+
         'selectable',
         'lockMovementX',
         'lockMovementY',
@@ -1299,24 +1303,7 @@ export class PlayPage implements OnInit {
   
           this.currentJump.set(clef, beat.last-1);
   
-          console.log(beat);
-  
-          if(beat.frequency!=0){
-            let oscillator = this.audioCtx.createOscillator();
-            let gainNode = this.audioCtx.createGain();
-            oscillator.connect(gainNode);
-            gainNode.connect(this.audioCtx.destination);
-            oscillator.type = 'sine';
-            
-            oscillator.frequency.value = beat.frequency;
-  
-            let singleBeatTime = Math.floor(60000 / this.speed)/1000;
-            gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + beat.last*singleBeatTime);
-            console.log(beat.last*singleBeatTime)
-            oscillator.start(this.audioCtx.currentTime);
-            oscillator.stop(this.audioCtx.currentTime + beat.last*singleBeatTime);
-  
-          }
+          this.playFrequency(beat);
   
           this.currentBeatIndex.set(clef, beatIndex+1);
   
@@ -1324,11 +1311,48 @@ export class PlayPage implements OnInit {
           this.currentJump.set(clef, lastJump-1);
         }
       }
+
+      playFrequency(beat){
+        if(beat.frequency!=null){
+          for(let i=0;i<beat.frequency.length;i++){
+            this.createSound(beat.frequency[i], beat.last, beat.tie);
+          }
+        }
+      }
+  
+      createSound(freq, last, tie) {
+        if(tie!=null&&tie<0)
+          return;
+  
+        let singleBeatTime = Math.floor(60000 / this.speed)/1000;
+        let duration = last*singleBeatTime;
+        if(tie!=null&&tie>0){
+          duration += tie*singleBeatTime;
+        }
+        let oscillator = this.audioCtx.createOscillator();
+        let gainNode = this.audioCtx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(this.audioCtx.destination);
+        // sine|square|triangle|sawtooth
+        oscillator.type = 'sine';
+        oscillator.frequency.value = freq;
+        // 当前时间设置音量为0
+        gainNode.gain.setValueAtTime(0, this.audioCtx.currentTime);
+        // 0.01秒后音量为1
+        gainNode.gain.linearRampToValueAtTime(1, this.audioCtx.currentTime + 0.01);
+        // 音调从当前时间开始播放
+        oscillator.start(this.audioCtx.currentTime);
+        // this.opts.duration秒内声音慢慢降低，是个不错的停止声音的方法
+        gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + duration);
+        // this.opts.duration秒后完全停止声音
+        oscillator.stop(this.audioCtx.currentTime + duration);
+      }
   
       getBeat(clef, canvasIndex, beatIndex){
         let result = { 
-          frequency: 0, 
-          last: 1
+          frequency: null, 
+          last: 1,
+          tie: 0,
         }
         if((canvasIndex>this.canvasBox[clef].length-1)||canvasIndex<0){
           return result;
@@ -1341,6 +1365,8 @@ export class PlayPage implements OnInit {
         let lValue = 1;
         let lDot = 0;
         let lAccidental = '';
+        let lTie = null;
+        let lChord = null;
   
         let flag = false;
         let count = 0;
@@ -1353,6 +1379,8 @@ export class PlayPage implements OnInit {
                 lValue = objects[j].pai; 
                 lDot = objects[j].dot; 
                 lAccidental = objects[j].accidental;
+                lTie = objects[j].tie;
+                lChord = objects[j].chord;
                 flag = true;
                 break;
             }
@@ -1362,13 +1390,20 @@ export class PlayPage implements OnInit {
           }
         }
   
-        if(flag){
-          result.frequency = this.getFrequency(fValue, lAccidental);
-          result.last = lValue/(1/this.beatsPerBar) * (lDot==1? 1.5:1);
+        if(flag==false){
+          result.frequency = null;
+          result.last = 1;
+          result.tie = 0;
         }
         else{
-          result.frequency = 0;
-          result.last = 1;
+          result.frequency = this.getFrequency(fValue, lAccidental, lChord);
+          
+          result.last = lValue/(1/this.beatsPerBar) * (lDot==1? 1.5:1);
+          
+          if(lTie<0)
+            result.tie  = -1;
+          else
+            result.tie = lTie/(1/this.beatsPerBar);  //contains dot
         }
   
         console.log('NoteKey:'+fValue+" Last:"+lValue+" beatIndex:"+beatIndex)
@@ -1376,22 +1411,50 @@ export class PlayPage implements OnInit {
         return result;
     }
   
-    getFrequency(fValue, lAccidental){
-      if(lAccidental==null||lAccidental.length==0){
-        return this.reddah.f.get(fValue);
-      }
-      else{
-        let keyBox = Array.from(this.reddah.f.keys());
-        let index = keyBox.indexOf(fValue);
-        if(lAccidental=='sharp'&&index<keyBox.length){//#
-          let newKey = keyBox[index+1];
-          return this.reddah.f.get(newKey);
+    getFrequency(fValue, lAccidental, lChord){
+      if(lChord==null){
+        if(lAccidental==null||lAccidental.length==0){
+          return [this.reddah.f.get(fValue)];
         }
-        else if(lAccidental=='flat'&&index>0){//b
-          let newKey = keyBox[index-1];
-          return this.reddah.f.get(newKey);
+        else{
+          let keyBox = Array.from(this.reddah.f.keys());
+          let index = keyBox.indexOf(fValue);
+          if(lAccidental=='sharp'&&index<keyBox.length){//#
+            let newKey = keyBox[index+1];
+            return [this.reddah.f.get(newKey)];
+          }
+          else if(lAccidental=='flat'&&index>0){//b
+            let newKey = keyBox[index-1];
+            return [this.reddah.f.get(newKey)];
+          }
         }
       }
+      else{//chord
+        if(lAccidental==null||lAccidental.length==0){
+          let result = [this.reddah.f.get(fValue)];
+          let keyBox = Array.from(this.reddah.f.keys()).filter(a=>a.indexOf('#')==-1);
+          let index = keyBox.indexOf(fValue);
+          for(let i=0;i<lChord.length;i++){
+            let newKey = keyBox[index+lChord[i]];
+            result.push(this.reddah.f.get(newKey));
+          }
+          return result;
+        }
+        else{
+          //todo
+          let keyBox = Array.from(this.reddah.f.keys());
+          let index = keyBox.indexOf(fValue);
+          if(lAccidental=='sharp'&&index<keyBox.length){//#
+            let newKey = keyBox[index+1];
+            return [this.reddah.f.get(newKey)];
+          }
+          else if(lAccidental=='flat'&&index>0){//b
+            let newKey = keyBox[index-1];
+            return [this.reddah.f.get(newKey)];
+          }
+        }
+      }
+      
     }
   
       playNote(key){

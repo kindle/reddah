@@ -3,17 +3,17 @@
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="tab1" layout="icon-start">
       <ion-icon size="large" name="list-outline"></ion-icon>
-      <ion-text style="margin-left:10px;">{{ reddah.instant('Record') }}</ion-text>
+      <ion-label>{{ reddah.instant('Record') }}</ion-label>
     </ion-tab-button>
 
     <ion-tab-button layout="icon-start" (click)="add()">
       <ion-icon size="large" name="add-outline"></ion-icon>
-      <ion-text style="margin-left:10px;">{{ reddah.instant('NewRecord') }}</ion-text>
+      <ion-label>{{ reddah.instant('NewRecord') }}</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="tab3" layout="icon-start">
       <ion-icon name="musical-notes-outline"></ion-icon>
-      <ion-label>曲目</ion-label>
+      <ion-label>{{ reddah.instant('SongTitle') }}</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 
