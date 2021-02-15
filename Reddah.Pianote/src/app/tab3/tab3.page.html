@@ -31,20 +31,9 @@
 
 <ion-item *ngIf="!hideActionBar">
   <ion-text style="margin-right:15px;">Accidentals</ion-text>
-  <ion-button (click)="accidental('sharp')" [disabled]="lastTarget==null">
-    #
-  </ion-button>
-  <ion-button (click)="accidental('flat')" [disabled]="lastTarget==null">
-    b
-  </ion-button>
-  <ion-button (click)="accidental('2flat')" [disabled]="lastTarget==null">
-    bb
-  </ion-button>
-  <ion-button (click)="accidental('nature')" [disabled]="lastTarget==null">
-    ♮
-  </ion-button>
-  <ion-button (click)="accidental('accent')" [disabled]="lastTarget==null">
-    X
+  <ion-button (click)="accidental(tag)" [disabled]="lastTarget==null" 
+    *ngFor="let tag of ['sharp','2sharp','flat','2flat','natural']">
+    <ion-icon src="{{'/assets/icon/'+tag+'.svg'}}"></ion-icon>
   </ion-button>
 
   <ion-text style="margin:0 15px;">|</ion-text>
@@ -87,27 +76,27 @@
 
   <ion-text style="margin:0 15px;">|</ion-text>
 
-  <ion-button (click)="addRest('r'+r)" *ngFor="let r of ['1','2','4','8','16','32','64']">
-    <ion-icon src="{{'/assets/icon/rest'+r+'.svg'}}"></ion-icon>
-  </ion-button>
-
-</ion-item>
-
-<ion-item *ngIf="!hideActionBar">
-  <ion-text style="margin-right:15px;">Chord</ion-text>
-  <div *ngIf="lastTarget!=null">
-    <ion-button (click)="addChord()" *ngIf="isUnderTurnAroundNoteKey()"
+  <ion-text style="margin-right:15px;">Chord2</ion-text>
+  <div *ngFor="let n of [1,2,4]">
+    <ion-button (click)="addChord(n)" *ngIf="lastTarget!=null&&isUnderTurnAroundNoteKey()"
     [disabled]="lastTarget==null||lastTarget.tag!='note'||lastTarget.chord!=null">
-      +1
+      +{{n}}
     </ion-button>
-    <ion-button (click)="addChord()" *ngIf="!isUnderTurnAroundNoteKey()"
+    <ion-button (click)="addChord(n)" *ngIf="lastTarget!=null&&!isUnderTurnAroundNoteKey()"
     [disabled]="lastTarget==null||lastTarget.tag!='note'||lastTarget.chord!=null">
-      -1
+      -{{n}}
     </ion-button>
   </div>
   <ion-button (click)="clearChord()"
     *ngIf="lastTarget!=null&&lastTarget.chord!=null">
     <ion-icon name="trash-outline"></ion-icon>
+  </ion-button>
+</ion-item>
+
+<ion-item *ngIf="!hideActionBar">
+  <ion-text style="margin-right:15px;">Rest</ion-text>
+  <ion-button (click)="addRest('r'+r)" *ngFor="let r of ['1','2','4','8','16','32','64']">
+    <ion-icon src="{{'/assets/icon/rest'+r+'.svg'}}"></ion-icon>
   </ion-button>
 
   <ion-text style="margin:0 15px;">|</ion-text>
@@ -130,7 +119,7 @@
 
 <ion-content [fullscreen]="true">
 
-  <div style="height: 100px;border:1px solid gray;"
+  <div style="height: 50px;border:1px solid gray;"
     (click)="hideActionBarVisibility()">
     title
   </div>
