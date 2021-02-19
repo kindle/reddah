@@ -566,6 +566,9 @@ export class ReddahService {
     -8, -3, 5, false, scaleX, scaleY);
   }
 
+  keySignature = new Map()
+  .set("G", [{name: "f", accidental: 'sharp'}])
+  .set("F", [{name: "b", accidental: 'flat'}])
 
   accidentals = new Map()
   .set("sharp", this.pathSharp)
@@ -574,9 +577,9 @@ export class ReddahService {
   .set("2flat", this.pathDoubleFlat)
   .set("natural", this.pathNature)
 
-  accidental = (tag, groupId, n, pai, color)=>{
+  accidental = (tag, groupId, n, pai, color, left1=-28, left2=-22, top=5)=>{
     return this.mark(tag, this.accidentals.get(tag), groupId, n, pai, 
-    -28, -22, 5, true, color);
+    left1, left2, top, true, color);
   }
 
   mark = (tag, path, groupId, n, pai, leftWidthTail, leftNoTail, top, 

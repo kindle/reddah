@@ -23,7 +23,12 @@
     <ion-icon name="stop"></ion-icon>
   </ion-button>
 
-  <ion-text style="margin-left: 30px;">{{speed}}</ion-text>
+  <ion-text style="margin:0 15px;">|</ion-text>
+
+  <ion-button color="light" disabled="true">
+    <ion-icon src="{{'/assets/icon/note4.svg'}}"></ion-icon>= {{speed}}
+  </ion-button>
+  
   <ion-range min="20" max="500" step="1" [(ngModel)]="speed" snaps="true" tick="true"
         color="primary"></ion-range>
 
@@ -117,6 +122,20 @@
 
 </ion-item>
 
+<ion-item *ngIf="startCanvasSelected">
+  <ion-text style="margin-right:15px;">Time Signature</ion-text>
+  <ion-button (click)="changeTime(t.up, t.down)" *ngFor="let t of [{up:2,down:4},{up:3,down:4},{up:4,down:4}]">
+    {{t.up}}/{{t.down}}
+  </ion-button>
+
+  <ion-text style="margin:0 15px;">|</ion-text>
+
+  <ion-text style="margin-right:15px;">Key Signature</ion-text>
+  <ion-button (click)="changeKey(k)" *ngFor="let k of ['C','G','F']">
+    {{k}}
+  </ion-button>
+</ion-item>
+
 <ion-content [fullscreen]="true">
 
   <div style="height: 50px;border:1px solid gray;"
@@ -128,8 +147,8 @@
 
     <div style="display: flex;flex-direction:column;">
       <div class="action-bar-header"><ion-item lines="none" [class.hide-action-bar]="hideActionBar"></ion-item></div>
-      <canvas id="startT" [class.debug-grid]="showGrid"></canvas>
-      <canvas id="startB" [class.debug-grid]="showGrid"></canvas>
+      <canvas (click)="showActionBarVisibility(0, -1)" id="startT" [class.debug-grid]="showGrid"></canvas>
+      <canvas (click)="showActionBarVisibility(1, -1)" id="startB" [class.debug-grid]="showGrid"></canvas>
     </div>
 
 

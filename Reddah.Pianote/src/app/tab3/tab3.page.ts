@@ -10,10 +10,12 @@ import { ReddahService } from '../reddah.service';
 export class Tab3Page implements OnInit {
 
   showGrid = false;
+  startCanvasBox = [];
   canvasBox = [[],[]];
 
   beatsPerBar = 3;  //up
   beatNote = 4; //down
+  keySignature = "C";
 
   defaultColor = 'black';
   highlightColor = 'red';
@@ -31,7 +33,7 @@ export class Tab3Page implements OnInit {
       'id','pai','noteIndex','noteKey','tag',
       'accidental','type','finger','pause',
       'chord','tie','rest','dot','underline',
-      'number',
+      'number','time','key',
 
       'selectable',
       'lockMovementX',
@@ -45,7 +47,7 @@ export class Tab3Page implements OnInit {
   save(){
 
     let canvasArray0 = [];
-    let  canvasArray1 = [];
+    let canvasArray1 = [];
     for(let i=0;i<this.canvasBox[0].length;i++){
       let canvas0 = this.canvasBox[0][i].canvas;
       canvasArray0.push(this.toJSON(canvas0));
@@ -130,10 +132,22 @@ export class Tab3Page implements OnInit {
     }
   }
 
+
+  startCanvasSelected = false;
   showActionBarVisibility(clef, canvasIndex){
     this.hideActionBar = false;
     this.currentClef = clef;
     
+    if(canvasIndex==-1){
+      this.startCanvasSelected = true;
+      this.startCanvasBox[0].setBackgroundColor('lightcyan', this.startCanvasBox[0].renderAll.bind(this.startCanvasBox[0]));
+      this.startCanvasBox[1].setBackgroundColor('lightcyan', this.startCanvasBox[1].renderAll.bind(this.startCanvasBox[1]));
+    }
+    else{
+      this.startCanvasSelected = false;
+      this.startCanvasBox[0].setBackgroundColor('white', this.startCanvasBox[0].renderAll.bind(this.startCanvasBox[0]));
+      this.startCanvasBox[1].setBackgroundColor('white', this.startCanvasBox[1].renderAll.bind(this.startCanvasBox[1]));
+    }
     for(let i=0;i<this.canvasBox[clef].length;i++){
       let canvas0 = this.canvasBox[0][i].canvas;
       canvas0.setBackgroundColor('white', canvas0.renderAll.bind(canvas0));
@@ -145,6 +159,132 @@ export class Tab3Page implements OnInit {
         canvas0.setBackgroundColor('lightcyan', canvas0.renderAll.bind(canvas0));
       }
     }
+
+    
+  }
+  
+  changeTime(beatsPerBar, beatNote){
+    this.beatsPerBar = beatsPerBar;
+    this.beatNote = beatNote;
+
+    this.updateTime(true);
+    this.updateTime(false);
+  }
+
+  updateTime(flag){
+    let clef = flag?0:1;
+    let objects = this.startCanvasBox[clef].getObjects()
+    for(let j = 0; j < objects.length; j++){
+      if(objects[j].type=="group"&&objects[j].tag=="time"){
+        this.startCanvasBox[clef].remove(objects[j]);
+      }
+    }
+    this.startCanvasBox[clef].add(this.createTimeGroup(flag, this.beatsPerBar, this.beatNote));
+  }
+
+  changeKey(key){
+    this.keySignature = key;
+
+    this.updateKey(true);
+    this.updateKey(false);
+    this.updateTime(true);
+    this.updateTime(false);
+  }
+
+  updateKey(flag){
+    let clef = flag?0:1;
+    let objects = this.startCanvasBox[clef].getObjects()
+    for(let j = 0; j < objects.length; j++){
+      if(objects[j].type=="group"&&objects[j].tag=="key"){
+        this.startCanvasBox[clef].remove(objects[j]);
+      }
+    }
+
+    let group = this.createKeyGroup(flag);
+    if(group)
+      this.startCanvasBox[clef].add(group);
+  }
+
+  createKeyGroup(flag){
+    let group = null;
+    let top = this.topMargin;
+    if(this.keySignature=="C")
+      return group;
+    
+    if(this.keySignature=="G"){
+      group =[
+        this.reddah.accidental("sharp", "", 1, 0, this.defaultColor)
+      ];
+      top += 3;
+    }
+    if(this.keySignature=="F"){
+      group =[
+        this.reddah.accidental("flat", "", 1, 0, this.defaultColor)
+      ]
+      top += 30;
+    }
+
+    let groupStart = new fabric.Group(group, { left: 70, top: top })
+    groupStart.selectable = false;
+    groupStart.lockMovementX = true;
+    groupStart.lockMovementY = true;
+    groupStart.lockRotation = true;
+    groupStart.hasBorders = false;
+    groupStart.hasControls = false;
+    groupStart.tag = "key";
+
+    return groupStart;
+  }
+
+  createClefGroup(flag){
+    let groupStart = new fabric.Group([
+      flag?this.reddah.trebleClef():this.reddah.baseClef()
+    ],
+    {
+      left: 15,
+      top: (flag?0:this.halfLineHeight*2) + this.topMargin,
+      scaleY: 1.5,
+      scaleX: 1.5
+    })
+
+    groupStart.selectable = false;
+    groupStart.lockMovementX = true;
+    groupStart.lockMovementY = true;
+    groupStart.lockRotation = true;
+    groupStart.hasBorders = false;
+    groupStart.hasControls = false;
+    groupStart.tag = "clef";
+
+    return groupStart;
+  }
+
+  createTimeGroup(flag, n1, n2){
+    let keyOffset = 0;
+    if(this.keySignature=="C") keyOffset = 0;
+    if(this.keySignature=="G"||this.keySignature=="F") 
+      keyOffset = 20;
+    
+    let offset = flag?0:-20;
+    let groupStart = new fabric.Group([
+      this.reddah.pai(n1, true, offset),
+      this.reddah.pai(n2, false, offset)
+    ],
+    {
+      left: 15+ 60 + keyOffset,
+      top: this.halfLineHeight*2 + this.topMargin,
+      scaleY: 1.5,
+      scaleX: 1.5
+    })
+
+    groupStart.selectable = false;
+    groupStart.lockMovementX = true;
+    groupStart.lockMovementY = true;
+    groupStart.lockRotation = true;
+    groupStart.hasBorders = false;
+    groupStart.hasControls = false;
+    groupStart.tag = "time";
+
+    return groupStart;
   }
 
   ngOnInit() {
@@ -164,7 +304,7 @@ export class Tab3Page implements OnInit {
   ionViewDidEnter(){
     this.addStartCanvas(true, this.beatsPerBar, this.beatNote);
     this.addStartCanvas(false, this.beatsPerBar, this.beatNote);
-
+    
     this.init(0);
     this.init(1);
 
@@ -172,50 +312,32 @@ export class Tab3Page implements OnInit {
     this.addEndCanvas(false);
   }
 
-
   addStartCanvas(flag, n1, n2){
-    let startCanvas = new fabric.Canvas(flag?"startT":"startB");
-    startCanvas.setWidth(this.barStartWidth);
-    startCanvas.setHeight(240);
+    let canvas = new fabric.Canvas(flag?"startT":"startB");
+    canvas.setWidth(this.barStartWidth);
+    canvas.setHeight(240);
 
-    startCanvas.on({
+    canvas.on({
+      'mouse:down': (e)=> this.showActionBarVisibility(this.currentClef, -1),
       'mouse:up': (e)=> this.currentClef = flag? 0:1
     });
 
     let frontLine = new fabric.Rect({ left: 0, top: this.topMargin+this.halfLineHeight*2, fill: '#000000', width: 1, height: this.halfLineHeight*8 });
     frontLine.tag='front'
     frontLine.selectable = false;
-    startCanvas.add(frontLine);
+    canvas.add(frontLine);
 
     for(let j=1;j<=5;j++){
         let line = new fabric.Rect({ left: 0, top: this.halfLineHeight*2*j+this.topMargin, fill: '#000', width: this.barWidth, height: 1 });
         line.id=j;
         line.selectable = false;
-        startCanvas.add(line);
+        canvas.add(line);
     }
 
-    let offset = flag?0:-20;
-    let groupStart = new fabric.Group([
-      flag?this.reddah.trebleClef():this.reddah.baseClef(),
-      this.reddah.pai(n1, true, offset),
-      this.reddah.pai(n2, false, offset)
-    ],
-    {
-      left: 15,
-      top: (flag?0:this.halfLineHeight*2) + this.topMargin,
-      scaleY: 1.5,
-      scaleX: 1.5
-    })
-
-    groupStart.selectable = false;
-    groupStart.lockMovementX = true;
-    groupStart.lockMovementY = true;
-    groupStart.lockRotation = true;
-    groupStart.hasBorders = false;
-    groupStart.hasControls = false;
-    startCanvas.add(groupStart);
+    canvas.add(this.createClefGroup(flag));
+    canvas.add(this.createTimeGroup(flag, n1, n2));
+    this.startCanvasBox.push(canvas);
   }
-
 
   addEndCanvas(flag){
     let myCanvas = new fabric.Canvas(flag?"endT":"endB");
@@ -1410,6 +1532,27 @@ export class Tab3Page implements OnInit {
 
   getFrequency(fValue, lAccidental, lChord){
     if(lChord==null){
+      if(this.keySignature!="C"){
+        //G: [#],F: [b]
+        let notesToChange = this.reddah.keySignature.get(this.keySignature);
+        let keyBox = Array.from(this.reddah.f.keys());
+        let index = keyBox.indexOf(fValue);
+        notesToChange.forEach((item) => {
+          if(fValue.indexOf(item.name)>-1&&fValue.indexOf('#')==-1)
+          {
+            if(item.accidental=="sharp"){//+1
+              console.log("# old f:"+fValue)
+              fValue = keyBox[index+1];
+              console.log("# new f:"+fValue)
+            }
+            if(item.accidental=="flat"){//-1
+              console.log("b old f:"+fValue)
+              fValue = keyBox[index-1];
+              console.log("b new f:"+fValue)
+            }
+          }
+        });
+      }
       if(lAccidental==null||lAccidental.length==0){
         return [this.reddah.f.get(fValue)];
       }
