@@ -22,7 +22,10 @@
       <ion-label>
         <h2>{{ reddah.instant(song.id+'.title') }}</h2>
         
-        <p>{{ reddah.instant(song.id+'.desc') }}</p>
+        <p>
+          <ion-icon name="checkmark-circle-outline" color="primary" *ngIf="song.json!=''"></ion-icon>
+          {{ reddah.instant(song.id+'.desc') }}
+        </p>
       </ion-label>
       <ion-badge *ngIf="song.level==1" color="warning" slot="end" style="font-size: large;min-width: 35px;">
         {{song.level}}

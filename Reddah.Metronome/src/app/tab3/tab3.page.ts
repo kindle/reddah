@@ -32,12 +32,16 @@ export class Tab3Page implements OnInit {
   }
 
   async playSong(song){
+    if(song.json==""){
+      return;
+    }
     //this.reddah.tempStore(song.json);
-    /*
+    
     this.router.navigate(['/tabs/tab4'], {
-      queryParams: { song: song.json }
+      queryParams: { id: song.id }
     });
-    */
+    
+   /*
     const modal = await this.modalController.create({
         component: PlayPage,
         componentProps: { song: song },
@@ -47,7 +51,7 @@ export class Tab3Page implements OnInit {
     });
 
     await modal.present();
-
+    */
   }
 
   async locale(){

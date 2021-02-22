@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { ReddahService } from '../reddah.service';
 import { fabric } from 'fabric';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MusicService } from '../music.service';
 
 @Component({
     selector: 'app-tab4',
@@ -10,20 +10,41 @@ import { ActivatedRoute, Router } from '@angular/router';
     styleUrls: ['./tab4.page.scss'],
 })
 export class Tab4Page implements OnInit {
-    @Input() song;
+    id;
+
+    showGrid = false;
+    startCanvasBox = [];
+    canvasBox = [[],[]];
+
+    beatsPerBar = 3;  //up
+    beatNote = 4; //down
+    keySignature = "C";
+
+    defaultColor = 'black';
+    highlightColor = 'red';
+
+    currentClef = 0;
+    keys88 = Array.from(this.reddah.f.keys());
+
+    cursorColor = 'orange';
+    countDownColor = '#3880ff';
+    
 
     constructor(
         private router: Router,
         private activeRoute: ActivatedRoute,
         public reddah: ReddahService,
+        private musicBox: MusicService,
         ) {
     }
 
-    keys88 = Array.from(this.reddah.f.keys());
-  
     toJSON(canvas){
       return canvas.toJSON([
-        'id','pai','noteIndex','noteKey','tag','accidental','type',
+        'id','pai','noteIndex','noteKey','tag',
+        'accidental','type','finger','pause',
+        'chord','tie','rest','dot','underline',
+        'number','time','key',
+  
         'selectable',
         'lockMovementX',
         'lockMovementY',
@@ -36,7 +57,7 @@ export class Tab4Page implements OnInit {
     save(){
   
       let canvasArray0 = [];
-      let  canvasArray1 = [];
+      let canvasArray1 = [];
       for(let i=0;i<this.canvasBox[0].length;i++){
         let canvas0 = this.canvasBox[0][i].canvas;
         canvasArray0.push(this.toJSON(canvas0));
@@ -48,6 +69,7 @@ export class Tab4Page implements OnInit {
       let music = {
         beatsPerBar: this.beatsPerBar, 
         beatNote: this.beatNote,
+        keySignature: this.keySignature,
         canvas0: canvasArray0,
         canvas1: canvasArray1,
       }
@@ -56,18 +78,46 @@ export class Tab4Page implements OnInit {
   
   
     }
-  
-  
-    showGrid = false;
-    canvasBox = [[],[]];
-  
-    beatsPerBar = 4;  //up
-    beatNote = 4; //down
-  
-    currentClef = 0;
+
+
+  load(readOnly=true){
+    //load key/time signaure
+    this.updateKey(true);
+    this.updateKey(false);
+    this.updateTime(true);
+    this.updateTime(false);
+
+    
+    for(let i=0;i<this.canvasBox[0].length;i++){
+      let canvas0 = this.canvasBox[0][i].canvas;
+      canvas0.loadFromJSON(this.music.canvas0[i], canvas0.renderAll.bind(canvas0));
+      
+      let canvas1 = this.canvasBox[1][i].canvas;
+      canvas1.loadFromJSON(this.music.canvas1[i], canvas1.renderAll.bind(canvas1));
+    
+      if(readOnly){
+        let obj0 = canvas0.getObjects();
+        let obj1 = canvas1.getObjects();
+        for(let j=0;j<obj0.length; j++){
+          if(obj0[j].type=="group"){
+            obj0[j].lockMovementY = true;
+            obj0[j].selectable = false;
+          }
+        }
+        for(let j=0;j<obj1.length; j++){
+          if(obj1[j].type=="group"){
+            obj1[j].lockMovementY = true;
+            obj1[j].selectable = false;
+          }
+        }
+      }
+    }
+      
+
+  }
   
     hideActionBar = true;
-  
+
     hideActionBarVisibility(){
       this.hideActionBar = true;
       for(let i=0;i<this.canvasBox[0].length;i++){
@@ -76,56 +126,200 @@ export class Tab4Page implements OnInit {
         let canvas1 = this.canvasBox[1][i].canvas;
         canvas1.setBackgroundColor('white', canvas1.renderAll.bind(canvas1));
       }
+      if(this.lastTarget!=null){
+        this.setLastTargetColor(this.lastTarget, this.defaultColor);
+      }
     }
   
-    readonly = true;
+  
+    startCanvasSelected = false;
     showActionBarVisibility(clef, canvasIndex){
-        if(!this.readonly){
-            this.hideActionBar = false;
-            this.currentClef = clef;
-            
-            for(let i=0;i<this.canvasBox[clef].length;i++){
-                let canvas0 = this.canvasBox[0][i].canvas;
-                canvas0.setBackgroundColor('white', canvas0.renderAll.bind(canvas0));
-                let canvas1 = this.canvasBox[1][i].canvas;
-                canvas1.setBackgroundColor('white', canvas1.renderAll.bind(canvas1));
-                
-                if(i==canvasIndex){
-                let canvas0 = this.canvasBox[clef][canvasIndex].canvas;
-                canvas0.setBackgroundColor('lightcyan', canvas0.renderAll.bind(canvas0));
-                }
-            }
+      this.hideActionBar = false;
+      this.currentClef = clef;
+      
+      if(canvasIndex==-1){
+        this.startCanvasSelected = true;
+        this.startCanvasBox[0].setBackgroundColor('lightcyan', this.startCanvasBox[0].renderAll.bind(this.startCanvasBox[0]));
+        this.startCanvasBox[1].setBackgroundColor('lightcyan', this.startCanvasBox[1].renderAll.bind(this.startCanvasBox[1]));
+      }
+      else{
+        this.startCanvasSelected = false;
+        this.startCanvasBox[0].setBackgroundColor('white', this.startCanvasBox[0].renderAll.bind(this.startCanvasBox[0]));
+        this.startCanvasBox[1].setBackgroundColor('white', this.startCanvasBox[1].renderAll.bind(this.startCanvasBox[1]));
+      }
+      for(let i=0;i<this.canvasBox[clef].length;i++){
+        let canvas0 = this.canvasBox[0][i].canvas;
+        canvas0.setBackgroundColor('white', canvas0.renderAll.bind(canvas0));
+        let canvas1 = this.canvasBox[1][i].canvas;
+        canvas1.setBackgroundColor('white', canvas1.renderAll.bind(canvas1));
+        
+        if(i==canvasIndex){
+          let canvas0 = this.canvasBox[clef][canvasIndex].canvas;
+          canvas0.setBackgroundColor('lightcyan', canvas0.renderAll.bind(canvas0));
         }
+      }
+  
+      
+    }
+    
+    changeTime(beatsPerBar, beatNote){
+      this.beatsPerBar = beatsPerBar;
+      this.beatNote = beatNote;
+  
+      this.updateTime(true);
+      this.updateTime(false);
+    }
+  
+    updateTime(flag){
+      let clef = flag?0:1;
+      let objects = this.startCanvasBox[clef].getObjects()
+      for(let j = 0; j < objects.length; j++){
+        if(objects[j].type=="group"&&objects[j].tag=="time"){
+          this.startCanvasBox[clef].remove(objects[j]);
+        }
+      }
+      this.startCanvasBox[clef].add(this.createTimeGroup(flag, this.beatsPerBar, this.beatNote));
+    }
+  
+    changeKey(key){
+      this.keySignature = key;
+  
+      this.updateKey(true);
+      this.updateKey(false);
+      this.updateTime(true);
+      this.updateTime(false);
+    }
+  
+    updateKey(flag){
+      let clef = flag?0:1;
+      let objects = this.startCanvasBox[clef].getObjects()
+      for(let j = 0; j < objects.length; j++){
+        if(objects[j].type=="group"&&objects[j].tag=="key"){
+          this.startCanvasBox[clef].remove(objects[j]);
+        }
+      }
+  
+      let group = this.createKeyGroup(flag);
+      if(group)
+        this.startCanvasBox[clef].add(group);
+    }
+  
+    createKeyGroup(flag){
+      let group = null;
+      let top = this.topMargin;
+      if(this.keySignature=="C")
+        return group;
+      
+      if(this.keySignature=="G"){
+        group =[
+          this.reddah.accidental("sharp", "", 1, 0, this.defaultColor)
+        ];
+        top += 3;
+      }
+      if(this.keySignature=="F"){
+        group =[
+          this.reddah.accidental("flat", "", 1, 0, this.defaultColor)
+        ]
+        top += 30;
+      }
+  
+      let groupStart = new fabric.Group(group, { left: 70, top: top })
+      groupStart.selectable = false;
+      groupStart.lockMovementX = true;
+      groupStart.lockMovementY = true;
+      groupStart.lockRotation = true;
+      groupStart.hasBorders = false;
+      groupStart.hasControls = false;
+      groupStart.tag = "key";
+  
+      return groupStart;
+    }
+  
+    createClefGroup(flag){
+      let groupStart = new fabric.Group([
+        flag?this.reddah.trebleClef():this.reddah.baseClef()
+      ],
+      {
+        left: 15,
+        top: (flag?0:this.halfLineHeight*2) + this.topMargin,
+        scaleY: 1.5,
+        scaleX: 1.5
+      })
+  
+      groupStart.selectable = false;
+      groupStart.lockMovementX = true;
+      groupStart.lockMovementY = true;
+      groupStart.lockRotation = true;
+      groupStart.hasBorders = false;
+      groupStart.hasControls = false;
+      groupStart.tag = "clef";
+  
+      return groupStart;
+    }
+  
+    createTimeGroup(flag, n1, n2){
+      let keyOffset = 0;
+      if(this.keySignature=="C") keyOffset = 0;
+      if(this.keySignature=="G"||this.keySignature=="F") 
+        keyOffset = 20;
+      
+      let offset = flag?0:-20;
+      let groupStart = new fabric.Group([
+        this.reddah.pai(n1, true, offset),
+        this.reddah.pai(n2, false, offset)
+      ],
+      {
+        left: 15+ 60 + keyOffset,
+        top: this.halfLineHeight*2 + this.topMargin,
+        scaleY: 1.5,
+        scaleX: 1.5
+      })
+  
+      groupStart.selectable = false;
+      groupStart.lockMovementX = true;
+      groupStart.lockMovementY = true;
+      groupStart.lockRotation = true;
+      groupStart.hasBorders = false;
+      groupStart.hasControls = false;
+      groupStart.tag = "time";
+  
+      return groupStart;
     }
   
     ngOnInit() {
       this.activeRoute.queryParams.subscribe(params => {
-        this.song = params['song'];
+        this.id = params['id'];
       });
     }
-  
+
     barStartWidth = 140;
     barWidth = 240;
     halfLineHeight = 7;
     topMargin = 60;
     cursorInitLeft = 0;
-  
+
     ionViewDidLeave(){
         if(this.isPlay)
         {
           this.stop();
         }
+        //clean up
+        this.canvasBox = [[],[]];
     }
-    
+
+    readonly = true;
+    music;
     ionViewDidEnter(){
-        //let music = JSON.parse(this.reddah.tempGet());
+        let musicJson = this.musicBox.songs.filter(m=>m.id==this.id)[0];
 
-        let music =  JSON.parse(this.song);
+        this.music =  JSON.parse(musicJson.json);
 
-        this.beatsPerBar = music.beatsPerBar;
-        this.beatNote = music.beatNote;
+        this.beatsPerBar = this.music.beatsPerBar;
+        this.beatNote = this.music.beatNote;
+        this.keySignature = this.music.keySignature?this.music.keySignature:"C";
+        
 
-        let barCount = music.canvas0.length;
+        let barCount = this.music.canvas0.length;
 
         for(let i=0;i<barCount;i++){
             this.canvasBox[0].push({id:i, canvas: null, beats: [], json: null});
@@ -143,33 +337,7 @@ export class Tab4Page implements OnInit {
             this.addEndCanvas(true);
             this.addEndCanvas(false);
     
-            //load song
-            for(let i=0;i<this.canvasBox[0].length;i++)
-            {
-                let canvas0 = this.canvasBox[0][i].canvas;
-                canvas0.loadFromJSON(music.canvas0[i], canvas0.renderAll.bind(canvas0));
-                
-                let canvas1 = this.canvasBox[1][i].canvas;
-                canvas1.loadFromJSON(music.canvas1[i], canvas1.renderAll.bind(canvas1));
-            
-                if(this.readonly){
-                    let obj0 = canvas0.getObjects();
-                    let obj1 = canvas1.getObjects();
-                    for(let j=0;j<obj0.length; j++){
-                        console.log(obj0[j])
-                        if(obj0[j].type=="group"){
-                        obj0[j].lockMovementY = true;
-                        obj0[j].selectable = false;
-                        }
-                    }
-                    for(let j=0;j<obj1.length; j++){
-                        if(obj1[j].type=="group"){
-                        obj1[j].lockMovementY = true;
-                        obj1[j].selectable = false;
-                        }
-                    }
-                }
-            }
+             this.load();
         }, 1)
 
 
@@ -177,46 +345,30 @@ export class Tab4Page implements OnInit {
   
   
     addStartCanvas(flag, n1, n2){
-      let startCanvas = new fabric.Canvas(flag?"startT":"startB");
-      startCanvas.setWidth(this.barStartWidth);
-      startCanvas.setHeight(240);
+      let canvas = new fabric.Canvas(flag?"startT":"startB");
+      canvas.setWidth(this.barStartWidth);
+      canvas.setHeight(240);
   
-      startCanvas.on({
+      canvas.on({
+        'mouse:down': (e)=> this.showActionBarVisibility(this.currentClef, -1),
         'mouse:up': (e)=> this.currentClef = flag? 0:1
       });
   
       let frontLine = new fabric.Rect({ left: 0, top: this.topMargin+this.halfLineHeight*2, fill: '#000000', width: 1, height: this.halfLineHeight*8 });
       frontLine.tag='front'
       frontLine.selectable = false;
-      startCanvas.add(frontLine);
+      canvas.add(frontLine);
   
       for(let j=1;j<=5;j++){
           let line = new fabric.Rect({ left: 0, top: this.halfLineHeight*2*j+this.topMargin, fill: '#000', width: this.barWidth, height: 1 });
           line.id=j;
           line.selectable = false;
-          startCanvas.add(line);
+          canvas.add(line);
       }
   
-      let offset = flag?0:-20;
-      let groupStart = new fabric.Group([
-        flag?this.reddah.trebleClef():this.reddah.baseClef(),
-        this.reddah.pai(n1, true, offset),
-        this.reddah.pai(n2, false, offset)
-      ],
-      {
-        left: 15,
-        top: (flag?0:this.halfLineHeight*2) + this.topMargin,
-        scaleY: 1.5,
-        scaleX: 1.5
-      })
-  
-      groupStart.selectable = false;
-      groupStart.lockMovementX = true;
-      groupStart.lockMovemenY = true;
-      groupStart.lockRotation = true;
-      groupStart.hasBorders = false;
-      groupStart.hasControls = false;
-      startCanvas.add(groupStart);
+      canvas.add(this.createClefGroup(flag));
+      canvas.add(this.createTimeGroup(flag, n1, n2));
+      this.startCanvasBox.push(canvas);
     }
   
   
@@ -336,8 +488,8 @@ export class Tab4Page implements OnInit {
               objects[j].left = objects[j].left+50;
             }
   
-            objects[j].set('stroke' , '#aaf');
-            objects[j].set('fill' , '#faa');
+            objects[j].set('stroke' , this.cursorColor);
+            objects[j].set('fill' , this.cursorColor);
             
             this.canvasBox[clef][i].canvas.requestRenderAll();
             
@@ -346,7 +498,8 @@ export class Tab4Page implements OnInit {
                 objects[j].left = this.cursorInitLeft;
                 objects[j].set('stroke' , 'transparent');
                 objects[j].set('fill' , 'transparent');
-                this.canvasBox[clef][i].canvas.requestRenderAll();
+                if(i<this.canvasBox[clef].length)
+                  this.canvasBox[clef][i].canvas.requestRenderAll();
               }, Math.floor(60000 / this.speed))
             }
             
@@ -356,7 +509,7 @@ export class Tab4Page implements OnInit {
         
     };
   
-    addBar() {
+    addBar(f) {
         let barId = this.canvasBox[0].length;
         this.canvasBox[0].push({id:barId, canvas: null, beats: [], json: null});
         this.canvasBox[1].push({id:barId, canvas: null, beats: [], json: null});
@@ -738,7 +891,19 @@ export class Tab4Page implements OnInit {
         }  
         
         if(flag){
-          this.lastTarget.add(this.reddah.dot(groupId, 1, this.lastTarget.pai));
+          let isUnderTurnAroundNoteKey = this.isUnderTurnAroundNoteKey();
+          this.lastTarget.add(this.reddah.dot(groupId, 1, this.lastTarget.pai, this.highlightColor));
+          if(this.lastTarget.chord==1){
+            //this.lastTarget.add(this.reddah.dot(groupId, 1, this.lastTarget.pai, this.highlightColor));
+          }else if(this.lastTarget.chord==2){
+            this.lastTarget.add(this.reddah.dot(groupId, 1, this.lastTarget.pai, this.highlightColor,
+            8, 8+ (isUnderTurnAroundNoteKey ? -14:14)));
+          }else if(this.lastTarget.chord==3){
+            //this.lastTarget.add(this.reddah.dot(groupId, 1, this.lastTarget.pai, this.highlightColor));
+          }else if(this.lastTarget.chord==4){
+            this.lastTarget.add(this.reddah.dot(groupId, 1, this.lastTarget.pai, this.highlightColor,
+            8, 8+(isUnderTurnAroundNoteKey ? -14:14)*2));
+          }
   
           let n = 1/this.lastTarget.pai;
           this.currentIndex.set(this.currentClef, this.currentIndex.get(this.currentClef)+this.beatNote/n/2);
@@ -750,22 +915,118 @@ export class Tab4Page implements OnInit {
       }
     }
   
+    tie(){
+      if(this.lastTarget!=null){
+  
+        let isUnderTurnAroundNoteKey = this.isUnderTurnAroundNoteKey();
+        let offSetX = isUnderTurnAroundNoteKey?10:14;
+        let offSetY = isUnderTurnAroundNoteKey?5:-28;
+        let groupId = this.lastCanvasIndex + "_" + this.lastNoteIndex;
+  
+        if(this.lastTarget.tie!=null){
+          let canvas1 = this.canvasBox[this.currentClef][this.lastCanvasIndex].canvas;
+          let grpObjects1 = canvas1.getObjects();
+          for(let k=0;k<grpObjects1.length;k++){
+            if(["tie"].indexOf(grpObjects1[k].tag)>-1){
+              canvas1.remove(grpObjects1[k]);
+            }
+          } 
+          let canvas2 = this.canvasBox[this.currentClef][this.lastCanvasIndex+1].canvas;
+          let grpObjects2 = canvas2.getObjects();
+          for(let k=0;k<grpObjects2.length;k++){
+            if(["tie"].indexOf(grpObjects2[k].tag)>-1){
+              canvas2.remove(grpObjects2[k]);
+            }
+          } 
+          this.clearTieForBoth(canvas2);
+          this.lastTarget.lockMovementY = false;
+        }
+        else{
+          if(this.lastCanvasIndex<this.canvasBox[this.currentClef].length-1){
+            let canvas1 = this.canvasBox[this.currentClef][this.lastCanvasIndex].canvas;
+            let canvas2 = this.canvasBox[this.currentClef][this.lastCanvasIndex+1].canvas;
+            let note2 = this.getFirstNote(canvas2);
+            let distance = note2.left + this.barWidth - this.lastTarget.left;
+            console.log("#$"+distance)
+            let tie1 = this.reddah.tie(distance, groupId, 1, this.lastTarget.pai, isUnderTurnAroundNoteKey);
+            tie1.left =  this.lastTarget.left + offSetX;
+            tie1.top = this.lastTarget.top + 8*this.halfLineHeight +offSetY;
+            tie1.tag = 'tie';
+            canvas1.add(tie1);
+            canvas1.requestRenderAll();
+  
+            let tie2 = this.reddah.tie(distance, groupId, 1, this.lastTarget.pai, isUnderTurnAroundNoteKey);
+            //tie2.left = this.lastTarget.left + offSetX - this.barWidth;
+            
+            tie2.left = note2.left + offSetX - distance;
+            tie2.top = this.lastTarget.top + 8*this.halfLineHeight+offSetY;
+            tie2.tag = 'tie';
+            canvas2.add(tie2);
+            canvas2.requestRenderAll();
+            this.setTieForBoth(canvas2);
+          }
+          
+          this.lastTarget.lockMovementY = true;
+        }
+      }
+    }
+  
+    getFirstNote(canvas){
+      let note = null;
+      let objects = canvas.getObjects();
+      for(let j = 0; j < objects.length; j++){
+        if(objects[j].type=="group"&&objects[j].tag=='note')
+        {
+            note = objects[j];
+            break;
+        }
+      }
+      return note;
+    }
+  
+    setTieForBoth(canvas){
+      let objects = canvas.getObjects();
+      for(let j = 0; j < objects.length; j++){
+        if(objects[j].type=="group"&&objects[j].tag=='note')
+        {
+            this.lastTarget.tie = objects[j].pai * (objects[j].dot==1? 1.5:1);
+            objects[j].tie = -1;
+            break;
+        }
+      }
+    }
+  
+  
+    clearTieForBoth(canvas){
+      let objects = canvas.getObjects();
+      for(let j = 0; j < objects.length; j++){
+        if(objects[j].type=="group"&&objects[j].tag=='note')
+        {
+            this.lastTarget.tie = null;
+            objects[j].tie = null;
+            break;
+        }
+      }
+    }
   
   
     getHead(target){
         return new fabric.Rect({ 
             left: target.left, 
-            //top: target.top + target.isWholeNote==null ? this.halfLineHeight*5 : this.halfLineHeight, 
-            top: target.top + this.halfLineHeight*5,
+            top: target.top + this.halfLineHeight*6,
             width: target.width, 
             height: this.halfLineHeight*2
         });
     }
   
+    tagNotTriggerChange = ['undefined','finger','pause'];
+    tagNotTriggerPlayNote = ['undefined','rest','finger','pause'];
     onChange(clef, e, i) {
         e.target.setCoords();
         this.canvasBox[clef][i].canvas.forEachObject((obj)=> {     
-          if (obj === e.target) return;
+          if (obj === e.target||this.tagNotTriggerChange.indexOf(e.target.tag)>-1) {
+            return;
+          }
   
           if(this.getHead(e.target).intersectsWithObject(obj)){
             obj.set('opacity' , 0.5);
@@ -780,23 +1041,49 @@ export class Tab4Page implements OnInit {
           
         });
     }
+
+
+    refreshCanvas(){
+      let canvas = this.canvasBox[this.currentClef][this.lastCanvasIndex].canvas;
+      if(canvas){
+        canvas.requestRenderAll();
+      }
+    }
+
+  
+    setLastTargetColor(target, color){
+      let objects = target.canvas.getObjects();
+      for(let j = 0; j < objects.length; j++){
+  
+        if(objects[j].type=="group"&&
+            objects[j].noteIndex==target.noteIndex){
+            let grpObjects = objects[j].getObjects();
+  
+            if(objects[j].tag=='rest'){
+              for(let k=0;k<grpObjects.length;k++){
+                grpObjects[k].set('fill', color);
+              }
+            }
+  
+            if(objects[j].tag=='note'){
+              for(let k=0;k<grpObjects.length;k++){
+                if(grpObjects[k].stroke!="transparent"){
+                  grpObjects[k].set('stroke', color);
+                }
+                if(grpObjects[k].fill!="transparent"){
+                  grpObjects[k].set('fill', color);
+                }
+              }
+            }
+        }
+      }
+  
+      this.refreshCanvas();
+    }
   
     setLastTarget(clef, target, canvasIndex){
       if(this.lastTarget!=null){
-        let objects = this.lastTarget.canvas.getObjects();
-        for(let j = 0; j < objects.length; j++){
-          if(objects[j].type=="group"){
-            let grpObjects = objects[j].getObjects();
-            for(let k=0;k<grpObjects.length;k++){
-              if(grpObjects[k].tag=="rest"){
-                grpObjects[k].set('fill', '#000000');
-              }
-            }
-            
-          }
-        }
-        if(this.canvasBox[this.currentClef][this.lastCanvasIndex].canvas)
-          this.canvasBox[this.currentClef][this.lastCanvasIndex].canvas.requestRenderAll();
+        this.setLastTargetColor(this.lastTarget, this.defaultColor);
       }
   
       this.currentClef = clef;
@@ -804,21 +1091,28 @@ export class Tab4Page implements OnInit {
       this.lastCanvasIndex = canvasIndex;
       this.lastNoteIndex = target.noteIndex;
   
-      let objects = this.lastTarget.canvas.getObjects();
-      for(let j = 0; j < objects.length; j++){
-        if(objects[j].type=="group"){
-          let grpObjects = objects[j].getObjects();
-          for(let k=0;k<grpObjects.length;k++){
-            if(grpObjects[k].tag=="rest"){
-              grpObjects[k].set('fill', 'red');
+      this.setLastTargetColor(this.lastTarget, this.highlightColor);
+    }
+  
+    setDefaultLastTarget(canvasIndex){
+      let target;
+      if(canvasIndex>=0){
+        let objects = this.canvasBox[this.currentClef][canvasIndex].canvas.getObjects();
+        for(let j = 0; j < objects.length; j++){
+            if(objects[j].type=="group"){
+              target = objects[j];
             }
-          }
-          
         }
+  
+        this.lastCanvasIndex = canvasIndex;
+        this.lastNoteIndex = target.noteIndex;
+        this.lastTarget = target;
+  
+        this.setLastTargetColor(this.lastTarget, this.highlightColor);
       }
-  
-      this.canvasBox[this.currentClef][this.lastCanvasIndex].canvas.requestRenderAll();
-  
+      else{
+        this.clearLastTarget();
+      }
     }
   
     clearLastTarget(){
@@ -1127,6 +1421,10 @@ export class Tab4Page implements OnInit {
       }
   
   
+      isUnderTurnAroundNoteKey(){
+        return this.keys88.indexOf(this.lastTarget.noteKey)<this.keys88.indexOf(this.currentClef==0?'b4':'d3')
+      }
+
       checkStemTailTurnAround(){
         let isUnderTurnAroundNoteKey = this.keys88.indexOf(this.lastTarget.noteKey)<this.keys88.indexOf(this.currentClef==0?'b4':'d3');
         let target = this.lastTarget;
@@ -1134,12 +1432,10 @@ export class Tab4Page implements OnInit {
   
         let objects = target.canvas.getObjects();
         for(let j = 0; j < objects.length; j++){
-          if(objects[j].type=="group"&&
-          objects[j].noteIndex==this.lastNoteIndex&&
+          if(objects[j].type=="group"&&objects[j].noteIndex==this.lastNoteIndex&&
           this.lastCanvasIndex==i){
             let grpObjects = objects[j].getObjects();
             for(let k=0;k<grpObjects.length;k++){
-              //console.log(grpObjects[k].tag)
               if(["stemup"].indexOf(grpObjects[k].tag)>-1){
                   grpObjects[k].set('stroke' , isUnderTurnAroundNoteKey?'#000000':'transparent');
               }
@@ -1164,39 +1460,76 @@ export class Tab4Page implements OnInit {
   
      
   
-  
-      play=()=>{
-          this.isPlay = true;
+      
+
+    COUNT = 3;
+      countTimer = null;
+      playPrepare () {
+
+        if(this.playIndex==0){
+          document.getElementById('playboard').scrollTo({
+              top: 0,
+              left: 0,
+              behavior: 'smooth'
+          });  
+        }
+
+        let readybox = document.querySelector(".ready-box");
+        let readyboxh1 = readybox.querySelector('h1');
+
+        this.countTimer = setInterval(() => {
+          this.COUNT--;
+          readyboxh1.style.display = 'block';
+          readyboxh1.style.zIndex = "1";
+          if (this.COUNT >= 0) {
+            readyboxh1.classList.remove('active');
+            setTimeout(() => {
+              readyboxh1.style.color = this.countDownColor;
+              readyboxh1.classList.add('active');
+            }, 100);
+          } else {
+            clearInterval(this.countTimer);
+            readyboxh1.style.display = 'none';
+            this.COUNT = 3;
+
+            this.play();
+          }
+        }, 1000);
+    }
+
+    stop(){
+      this.playIndex=0;
+      this.isPlay = false;
+      window.clearTimeout(this.time);
+    }
+
+    play=()=>{
+      this.isPlay = true;
+      
+      if(this.playIndex==0){
+        document.getElementById('playboard').scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });  
+      }
+
+      
+      window.clearTimeout(this.time);
+      this.playBars();
+      if (this.isPlay) {
           
-          if(this.playIndex==0){
+          if(this.playIndex%this.beatsPerBar==0){
             document.getElementById('playboard').scrollTo({
                 top: 0,
-                left: 0,
+                left: this.barWidth*this.playIndex/this.beatsPerBar,
                 behavior: 'smooth'
-            });  
+            });
           }
+          this.time = window.setTimeout(this.play, Math.floor(60000 / this.speed));
+      };
+  }
 
-          
-          window.clearTimeout(this.time);
-          this.playBars();
-          if (this.isPlay) {
-              
-              if(this.playIndex%this.beatsPerBar==0){
-                document.getElementById('playboard').scrollTo({
-                    top: 0,
-                    left: this.barWidth*this.playIndex/this.beatsPerBar,
-                    behavior: 'smooth'
-                });
-              }
-              this.time = window.setTimeout(this.play, Math.floor(60000 / this.speed));
-          };
-      }
-  
-      stop(){
-        this.playIndex=0;
-        this.isPlay = false;
-        window.clearTimeout(this.time);
-      }
   
       audioCtx = new AudioContext();
   
@@ -1244,99 +1577,194 @@ export class Tab4Page implements OnInit {
   
           this.currentJump.set(clef, beat.last-1);
   
-          console.log(beat);
-  
-          if(beat.frequency!=0){
-            let oscillator = this.audioCtx.createOscillator();
-            let gainNode = this.audioCtx.createGain();
-            oscillator.connect(gainNode);
-            gainNode.connect(this.audioCtx.destination);
-            oscillator.type = 'sine';
-            
-            oscillator.frequency.value = beat.frequency;
-  
-            let singleBeatTime = Math.floor(60000 / this.speed)/1000;
-            gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + beat.last*singleBeatTime);
-            console.log(beat.last*singleBeatTime)
-            oscillator.start(this.audioCtx.currentTime);
-            oscillator.stop(this.audioCtx.currentTime + beat.last*singleBeatTime);
-  
-          }
-  
-          this.currentBeatIndex.set(clef, beatIndex+1);
-  
-        }else{
-          this.currentJump.set(clef, lastJump-1);
+          this.playFrequency(beat);
+
+        this.currentBeatIndex.set(clef, beatIndex+1);
+
+      }else{
+        this.currentJump.set(clef, lastJump-1);
+      }
+    }
+
+    playFrequency(beat){
+      if(beat.frequency!=null){
+        for(let i=0;i<beat.frequency.length;i++){
+          this.createSound(beat.frequency[i], beat.last, beat.tie);
         }
       }
+    }
+
+
+    createSound(freq, last, tie) {
+      if(tie!=null&&tie<0)
+        return;
+
+      let singleBeatTime = Math.floor(60000 / this.speed)/1000;
+      let duration = last*singleBeatTime;
+      if(tie!=null&&tie>0){
+        duration += tie*singleBeatTime;
+      }
+      this.soundPlay(freq, duration);
+    }
+
+    oscillator;
+    gainNode;
+
+    soundSetup() {
+      this.oscillator = this.audioCtx.createOscillator();
+      this.gainNode = this.audioCtx.createGain();
   
-      getBeat(clef, canvasIndex, beatIndex){
-        let result = { 
-          frequency: 0, 
-          last: 1
-        }
-        if((canvasIndex>this.canvasBox[clef].length-1)||canvasIndex<0){
-          return result;
-        }
-        if((beatIndex>this.beatsPerBar)||beatIndex<0){
-          return result;
-        }
-        
-        let fValue = 'c4';
-        let lValue = 1;
-        let lDot = 0;
-        let lAccidental = '';
-  
-        let flag = false;
-        let count = 0;
-        let objects = this.canvasBox[clef][canvasIndex].canvas.getObjects();
-        for(let j = 0; j < objects.length; j++){
-          if(objects[j].type=="group"){
-            if(count==beatIndex)
-            {
-                fValue = objects[j].noteKey;
-                lValue = objects[j].pai; 
-                lDot = objects[j].dot; 
-                lAccidental = objects[j].accidental;
-                flag = true;
-                break;
-            }
-  
-            count++;
-            
-          }
-        }
-  
-        if(flag){
-          result.frequency = this.getFrequency(fValue, lAccidental);
-          result.last = lValue/(1/this.beatsPerBar) * (lDot==1? 1.5:1);
-        }
-        else{
-          result.frequency = 0;
-          result.last = 1;
-        }
-  
-        console.log('NoteKey:'+fValue+" Last:"+lValue+" beatIndex:"+beatIndex)
-  
-        return result;
+      this.oscillator.connect(this.gainNode);
+      this.gainNode.connect(this.audioCtx.destination);
+      this.oscillator.type = 'sine';
     }
   
-    getFrequency(fValue, lAccidental){
-      if(lAccidental==null||lAccidental.length==0){
-        return this.reddah.f.get(fValue);
+    soundPlay(value, duration) {
+      this.soundSetup();
+  
+      this.oscillator.frequency.value = value;
+      this.gainNode.gain.setValueAtTime(0, this.audioCtx.currentTime);
+      this.gainNode.gain.linearRampToValueAtTime(1, this.audioCtx.currentTime + 0.01);
+              
+      this.oscillator.start(this.audioCtx.currentTime);
+      this.soundStop(this.audioCtx.currentTime, duration);
+    }
+    
+    soundStop(currentTime, duration) {
+      this.gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + duration);
+      this.oscillator.stop(this.audioCtx.currentTime + duration);
+    }
+  
+    
+    getBeat(clef, canvasIndex, beatIndex){
+      let result = { 
+        frequency: null, 
+        last: 1,
+        tie: 0,
+      }
+      if((canvasIndex>this.canvasBox[clef].length-1)||canvasIndex<0){
+        return result;
+      }
+      if((beatIndex>this.beatsPerBar)||beatIndex<0){
+        return result;
+      }
+      
+      let fValue = 'c4';
+      let lValue = 1;
+      let lDot = 0;
+      let lAccidental = '';
+      let lTie = null;
+      let lChord = null;
+
+      let flag = false;
+      let count = 0;
+      let objects = this.canvasBox[clef][canvasIndex].canvas.getObjects();
+      for(let j = 0; j < objects.length; j++){
+        if(objects[j].type=="group"){
+          if(count==beatIndex)
+          {
+              fValue = objects[j].noteKey;
+              lValue = objects[j].pai; 
+              lDot = objects[j].dot; 
+              lAccidental = objects[j].accidental;
+              lTie = objects[j].tie;
+              lChord = objects[j].chord;
+              flag = true;
+              break;
+          }
+
+          count++;
+          
+        }
+      }
+
+      if(flag==false){
+        result.frequency = null;
+        result.last = 1;
+        result.tie = 0;
       }
       else{
-        let keyBox = Array.from(this.reddah.f.keys());
-        let index = keyBox.indexOf(fValue);
-        if(lAccidental=='sharp'&&index<keyBox.length){//#
-          let newKey = keyBox[index+1];
-          return this.reddah.f.get(newKey);
+        result.frequency = this.getFrequency(fValue, lAccidental, lChord);
+        
+        result.last = lValue/(1/this.beatsPerBar) * (lDot==1? 1.5:1);
+        
+        if(lTie<0)
+          result.tie  = -1;
+        else
+          result.tie = lTie/(1/this.beatsPerBar);  //contains dot
+      }
+
+      console.log('NoteKey:'+fValue+" Last:"+lValue+" beatIndex:"+beatIndex)
+
+      return result;
+  }
+
+  
+    getFrequency(fValue, lAccidental, lChord){
+      if(lChord==null){
+        if(this.keySignature!="C"){
+          //G: [#],F: [b]
+          let notesToChange = this.reddah.keySignature.get(this.keySignature);
+          let keyBox = Array.from(this.reddah.f.keys());
+          let index = keyBox.indexOf(fValue);
+          notesToChange.forEach((item) => {
+            if(fValue.indexOf(item.name)>-1&&fValue.indexOf('#')==-1)
+            {
+              if(item.accidental=="sharp"){//+1
+                console.log("# old f:"+fValue)
+                fValue = keyBox[index+1];
+                console.log("# new f:"+fValue)
+              }
+              if(item.accidental=="flat"){//-1
+                console.log("b old f:"+fValue)
+                fValue = keyBox[index-1];
+                console.log("b new f:"+fValue)
+              }
+            }
+          });
         }
-        else if(lAccidental=='flat'&&index>0){//b
-          let newKey = keyBox[index-1];
-          return this.reddah.f.get(newKey);
+        if(lAccidental==null||lAccidental.length==0){
+          return [this.reddah.f.get(fValue)];
+        }
+        else{
+          let keyBox = Array.from(this.reddah.f.keys());
+          let index = keyBox.indexOf(fValue);
+          if(lAccidental=='sharp'&&index<keyBox.length){//#
+            let newKey = keyBox[index+1];
+            return [this.reddah.f.get(newKey)];
+          }
+          else if(lAccidental=='flat'&&index>0){//b
+            let newKey = keyBox[index-1];
+            return [this.reddah.f.get(newKey)];
+          }
         }
       }
+      else{//chord
+        if(lAccidental==null||lAccidental.length==0){
+          let result = [this.reddah.f.get(fValue)];
+          let keyBox = Array.from(this.reddah.f.keys()).filter(a=>a.indexOf('#')==-1);
+          let index = keyBox.indexOf(fValue);
+          for(let i=0;i<lChord.length;i++){
+            let newKey = keyBox[index+lChord[i]];
+            result.push(this.reddah.f.get(newKey));
+          }
+          return result;
+        }
+        else{
+          //todo
+          let keyBox = Array.from(this.reddah.f.keys());
+          let index = keyBox.indexOf(fValue);
+          if(lAccidental=='sharp'&&index<keyBox.length){//#
+            let newKey = keyBox[index+1];
+            return [this.reddah.f.get(newKey)];
+          }
+          else if(lAccidental=='flat'&&index>0){//b
+            let newKey = keyBox[index-1];
+            return [this.reddah.f.get(newKey)];
+          }
+        }
+      }
+      
     }
   
       playNote(key){
@@ -1359,32 +1787,33 @@ export class Tab4Page implements OnInit {
   
       
   
-      accidental(tag){
-        if(this.lastTarget!=null){
-          let groupId = this.lastCanvasIndex + "_" + this.lastNoteIndex;
-          
-  
-          let flag = true;
-          let grpObjects = this.lastTarget.getObjects();
-          for(let k=0;k<grpObjects.length;k++){
-            if(Array.from(this.reddah.accidentals.keys()).filter(a => a != tag).indexOf(grpObjects[k].tag)>-1){
-              this.lastTarget.remove(grpObjects[k]);
-            }
-            if(grpObjects[k].tag===tag){
-              this.lastTarget.remove(grpObjects[k]);
-              flag = false;
-            }
-            this.lastTarget.accidental = '';
-          }  
-          
-          if(flag){
-            this.lastTarget.add(this.reddah.accidental(tag, groupId, 1, this.lastTarget.pai));
-            this.lastTarget.accidental = tag;
+    accidental(tag){
+      if(this.lastTarget!=null){
+        let groupId = this.lastCanvasIndex + "_" + this.lastNoteIndex;
+        
+
+        let flag = true;
+        let grpObjects = this.lastTarget.getObjects();
+        for(let k=0;k<grpObjects.length;k++){
+          if(Array.from(this.reddah.accidentals.keys()).filter(a => a != tag).indexOf(grpObjects[k].tag)>-1){
+            this.lastTarget.remove(grpObjects[k]);
           }
-  
-          this.canvasBox[this.currentClef][this.lastCanvasIndex].canvas.requestRenderAll();
+          if(grpObjects[k].tag===tag){
+            this.lastTarget.remove(grpObjects[k]);
+            flag = false;
+          }
+          this.lastTarget.accidental = '';
+        }  
+        
+        if(flag){
+          this.lastTarget.add(this.reddah.accidental(tag, groupId, 1, this.lastTarget.pai, this.highlightColor));
+          this.lastTarget.accidental = tag;
         }
+
+        this.canvasBox[this.currentClef][this.lastCanvasIndex].canvas.requestRenderAll();
       }
+    }
+
   
   
   
