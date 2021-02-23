@@ -299,7 +299,7 @@ export class Tab4Page implements OnInit {
     cursorInitLeft = 0;
 
     ionViewDidLeave(){
-        if(this.isPlay)
+        if(this.isPlay!=0)
         {
           this.stop();
         }
@@ -576,7 +576,7 @@ export class Tab4Page implements OnInit {
   
       this.currentIndex.set(clef, 0);
       
-      if(this.isPlay)
+      if(this.isPlay!=0)
         this.stop();
   
       this.clearLastTarget()
@@ -1455,56 +1455,77 @@ export class Tab4Page implements OnInit {
       }
   
       time;
-      isPlay = false;
+      isPlay = 0;//0:not play 1:prepare 2:playing
       speed = 80;
   
      
   
       
 
-    COUNT = 3;
+      defaultAnimationCount = 2;
+      COUNT = this.defaultAnimationCount;
       countTimer = null;
+
       playPrepare () {
+        if(this.isPlay==0)
+        {
+          this.isPlay = 1;
 
-        if(this.playIndex==0){
-          document.getElementById('playboard').scrollTo({
-              top: 0,
-              left: 0,
-              behavior: 'smooth'
-          });  
-        }
-
-        let readybox = document.querySelector(".ready-box");
-        let readyboxh1 = readybox.querySelector('h1');
-
-        this.countTimer = setInterval(() => {
-          this.COUNT--;
-          readyboxh1.style.display = 'block';
-          readyboxh1.style.zIndex = "1";
-          if (this.COUNT >= 0) {
-            readyboxh1.classList.remove('active');
-            setTimeout(() => {
-              readyboxh1.style.color = this.countDownColor;
-              readyboxh1.classList.add('active');
-            }, 100);
-          } else {
-            clearInterval(this.countTimer);
-            readyboxh1.style.display = 'none';
-            this.COUNT = 3;
-
-            this.play();
+          if(this.playIndex==0){
+            document.getElementById('playboard').scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });  
           }
-        }, 1000);
+
+          let readybox = document.querySelector(".ready-box");
+          let readyboxh1 = readybox.querySelector('h1');
+
+          this.countTimer = setInterval(() => {
+            this.COUNT--;
+            readyboxh1.style.display = 'block';
+            readyboxh1.style.zIndex = "1";
+            if (this.COUNT >= 0) {
+              readyboxh1.classList.remove('active');
+              setTimeout(() => {
+                readyboxh1.style.color = this.countDownColor;
+                readyboxh1.classList.add('active');
+              }, 100);
+            } else {
+              clearInterval(this.countTimer);
+              readyboxh1.style.display = 'none';
+              this.COUNT = this.defaultAnimationCount;
+
+              this.play();
+            }
+          }, 1000);
+        }
     }
 
+    
     stop(){
-      this.playIndex=0;
-      this.isPlay = false;
-      window.clearTimeout(this.time);
+      if(this.isPlay==1){
+        this.playIndex=0;
+        this.isPlay = 0;
+        window.clearTimeout(this.countTimer);
+        let readybox = document.querySelector(".ready-box");
+        let readyboxh1 = readybox.querySelector('h1');
+        readyboxh1.style.display = 'none';
+        this.COUNT = this.defaultAnimationCount;
+      }
+      else if(this.isPlay==2){
+        this.playIndex=0;
+        this.isPlay = 0;
+        window.clearTimeout(this.time);
+        let stopCanvasIndex = parseInt(this.playIndex/this.beatsPerBar+"");
+        this.cursorAnimation(0, stopCanvasIndex, this.beatsPerBar-1);
+        this.cursorAnimation(1, stopCanvasIndex, this.beatsPerBar-1);
+      }
     }
 
     play=()=>{
-      this.isPlay = true;
+      this.isPlay = 2;
       
       if(this.playIndex==0){
         document.getElementById('playboard').scrollTo({
@@ -1517,9 +1538,9 @@ export class Tab4Page implements OnInit {
       
       window.clearTimeout(this.time);
       this.playBars();
-      if (this.isPlay) {
+      if (this.isPlay==2) {
           
-          if(this.playIndex%this.beatsPerBar==0){
+          if(this.playIndex%(this.beatsPerBar*2)==0){
             document.getElementById('playboard').scrollTo({
                 top: 0,
                 left: this.barWidth*this.playIndex/this.beatsPerBar,
@@ -1556,7 +1577,6 @@ export class Tab4Page implements OnInit {
   
   
       playBar(clef){
-  
         let canvasIndex = parseInt(this.playIndex/this.beatsPerBar+"");
         let playBeatIndex = parseInt(this.playIndex%this.beatsPerBar+"");
   
@@ -1838,7 +1858,10 @@ export class Tab4Page implements OnInit {
   
   
     async close() {
-        this.router.navigate(['/tabs/tab3'], {});
+        this.router.navigate(['/tabs/tab3'], {}).then(()=>{
+          //clean up
+          this.canvasBox = [[],[]];
+        });
     }
 
     createMetronome(){
