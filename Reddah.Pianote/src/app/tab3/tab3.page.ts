@@ -939,13 +939,26 @@ export class Tab3Page implements OnInit {
         if(n==8){
           let prevGroup = this.getConnectNote(canvasIndex);
           if(prevGroup!=null){
-            prevLeft = prevGroup.left;
-            prevTop = prevGroup.top;
+
+            let isUp = this.isTargetUnderTurnAroundNoteKey(prevGroup);
+
+            if(isUp){
+              prevLeft = prevGroup.left;
+              prevTop = prevGroup.top;
+            }
+            else{
+              prevLeft = prevGroup.left-15;
+              prevTop = prevGroup.top+prevGroup.height;
+            }
 
             let xOffset= 15;
             let lineGroup = [];
             for(let i=0;i<7;i++){
-              let line = this.makeLine([ prevLeft+xOffset, prevTop+i, left+xOffset, top+i ]);
+              let line;
+              if(isUp)
+                line = this.makeLine([ prevLeft+xOffset, prevTop+i, left+xOffset, top+i ]);
+              else
+                line = this.makeLine([ prevLeft+xOffset, prevTop-i, left+xOffset, top-i ]);
               canvas.add(line);
               lineGroup.push(line);
             }
@@ -991,14 +1004,21 @@ export class Tab3Page implements OnInit {
   }
 
   adjustLine(p, canvas, xOffset){
+    let isUp = this.isTargetUnderTurnAroundNoteKey(p);
     if(p.line1){
       for(let i=0;i<p.line1.length;i++){
-        p.line1[i].set({ 'x2': p.left+xOffset, 'y2': p.top+i });
+        if(isUp)
+          p.line1[i].set({ 'x2': p.left+xOffset, 'y2': p.top+i });
+        else
+          p.line1[i].set({ 'x2': p.left, 'y2': p.top-i+p.height });
       }
     }
     if(p.line2){
-      for(let i=0;i<p.line1.length;i++){
-        p.line2.set({ 'x1': p.left+xOffset, 'y1': p.top+i });
+      for(let i=0;i<p.line2.length;i++){
+        if(isUp)
+          p.line2[i].set({ 'x1': p.left+xOffset, 'y1': p.top+i });
+        else
+          p.line2[i].set({ 'x1': p.left, 'y1': p.top-i+p.height });
       }
     }
     canvas.renderAll();
@@ -1504,10 +1524,15 @@ export class Tab3Page implements OnInit {
 
         this.checkStemTailTurnAround();
         
+        canvas.requestRenderAll();
     }
 
     isUnderTurnAroundNoteKey(){
       return this.keys88.indexOf(this.lastTarget.noteKey)<this.keys88.indexOf(this.currentClef==0?'b4':'d3')
+    }
+
+    isTargetUnderTurnAroundNoteKey(target){
+      return this.keys88.indexOf(target.noteKey)<this.keys88.indexOf(this.currentClef==0?'b4':'d3')
     }
 
     checkStemTailTurnAround(){
@@ -1526,17 +1551,29 @@ export class Tab3Page implements OnInit {
                 grpObjects[k].set('stroke' , isUnderTurnAroundNoteKey? this.highlightColor:'transparent');
                 grpObjects[k].set('fill' , isUnderTurnAroundNoteKey? this.highlightColor:'transparent');
             }
-            if(["tailup"].indexOf(grpObjects[k].tag)>-1&&grpObjects[k].line1!=null&&grpObjects[k].line2!=null){
-              grpObjects[k].set('stroke' , isUnderTurnAroundNoteKey? this.highlightColor:'transparent');
-              grpObjects[k].set('fill' , isUnderTurnAroundNoteKey? this.highlightColor:'transparent');
+            if(["tailup"].indexOf(grpObjects[k].tag)>-1){
+                if(objects[j].line1!=null||objects[j].line2!=null){
+                  grpObjects[k].set('stroke' , 'transparent');
+                  grpObjects[k].set('fill' , 'transparent');
+                }
+                else{
+                  grpObjects[k].set('stroke' , isUnderTurnAroundNoteKey? this.highlightColor:'transparent');
+                  grpObjects[k].set('fill' , isUnderTurnAroundNoteKey? this.highlightColor:'transparent');
+                }
             }
             if(["stemdown"].indexOf(grpObjects[k].tag)>-1){
                 grpObjects[k].set('stroke' , isUnderTurnAroundNoteKey?'transparent':this.highlightColor);
                 grpObjects[k].set('fill' , isUnderTurnAroundNoteKey?'transparent':this.highlightColor);
             }
-            if(["taildown"].indexOf(grpObjects[k].tag)>-1&&grpObjects[k].line1!=null&&grpObjects[k].line2!=null){
-              grpObjects[k].set('stroke' , isUnderTurnAroundNoteKey?'transparent':this.highlightColor);
-              grpObjects[k].set('fill' , isUnderTurnAroundNoteKey?'transparent':this.highlightColor);
+            if(["taildown"].indexOf(grpObjects[k].tag)>-1){
+                if(objects[j].line1!=null||objects[j].line2!=null){
+                  grpObjects[k].set('stroke' , 'transparent');
+                  grpObjects[k].set('fill' , 'transparent');
+                }
+                else{
+                  grpObjects[k].set('stroke' , isUnderTurnAroundNoteKey?'transparent':this.highlightColor);
+                  grpObjects[k].set('fill' , isUnderTurnAroundNoteKey?'transparent':this.highlightColor);
+                }
             }
           }
           
