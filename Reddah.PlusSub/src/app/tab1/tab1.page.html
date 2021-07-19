@@ -1,0 +1,23 @@
+<!--
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      100以内加减法
+    </ion-title>
+  </ion-toolbar>
+</ion-header>-->
+
+<ion-content [fullscreen]="true">
+  <ion-content fullscreen>
+    <div class="box">
+      <div class="question" *ngFor="let q of questions">
+        <span>{{q.a}}</span> 
+        <span>{{q.sign}}</span> 
+        <span>{{q.b}}</span> 
+        <span>=</span> 
+        <span>{{q.result}}</span>
+      </div>
+    </div>
+  </ion-content>
+  
+</ion-content>

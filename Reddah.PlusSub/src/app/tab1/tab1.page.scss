@@ -1,0 +1,26 @@
+:root {
+    --ion-safe-area-top: 20px;
+    --ion-safe-area-bottom: 22px;
+  }
+
+  div {
+    padding: 10px;
+  }
+
+  span {
+    display: inline-block;
+    min-width: 30px;
+    text-align: center;
+    font-size: xx-large;
+  }
+
+  .box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .question{
+    min-width: 200px;
+    margin: 10px;
+  }

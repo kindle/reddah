@@ -1,0 +1,7 @@
+{
+  "name": "Reddah.PlusSub",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
