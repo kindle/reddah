@@ -9,6 +9,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-content fullscreen>
+    
     <div class="box">
       <div class="question" *ngFor="let q of questions">
         <span>{{q.a}}</span> 
@@ -18,6 +19,15 @@
         <span>{{q.result}}</span>
       </div>
     </div>
+
+    <ion-item lines="none">
+      <ion-checkbox color="primary" disabled checked="{{isHard}}" slot="start"></ion-checkbox>
+      <ion-label (click)="setHard()" slot="start">加难度</ion-label>
+
+      <ion-button color="primary" (click)="refresh()" slot="start">出题</ion-button>
+      <ion-button color="secondary" slot="start">打印</ion-button>
+
+    </ion-item>
   </ion-content>
   
 </ion-content>

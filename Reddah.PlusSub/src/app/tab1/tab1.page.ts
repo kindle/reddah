@@ -7,10 +7,16 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
+  isHard = false;
   questions = [];
 
   constructor() {
-    for(var i=0;i<50;i++){
+    this.refresh();
+  }
+
+  refresh(){
+    this.questions = [];
+    for(var i=0;i<30;i++){
       var sign = this.getRandomInt(10)%2 == 0;
       var a = this.getRandomInt(100);
       var b = this.getRandomInt(100);
@@ -21,10 +27,35 @@ export class Tab1Page {
         i--;
         continue;
       }
+
+      if(this.isHard===true){
+        var ga = a%10;
+        var gb = b%10;
+        var pass = false;
+        if(sign){
+          if(ga+gb<10)
+          {
+            pass = true;
+          }
+        }
+        else{ 
+          if(ga>=gb)
+          {
+            pass = true;            
+          }
+        }
+        if(pass===true){
+          i--;
+          continue;
+        }
+      }
       
       this.questions.push({a: a, sign: sign?"+":"-", b: b, result:result});
     }
+  }
 
+  setHard(){
+    this.isHard = !this.isHard;
   }
 
   getRandomInt(max) {
