@@ -1,0 +1,35 @@
+<ion-content [fullscreen]="true">
+  <ion-slides style="height:100%;" 
+      [options]="slideOpts" 
+      (ionSlideDidChange)="ionSlideWillChange()" 
+      (ionSlidesDidLoad)="ionSlidesDidLoad()">
+      <ion-slide *ngFor="let d of dao">
+          <img src="/assets/zmf/img/{{d.id}}.jpg" draggable="false" />
+      </ion-slide>
+  </ion-slides>
+</ion-content>
+
+<ion-fab horizontal="end" vertical="top" slot="fixed">
+  <ion-fab-button color="light" (click)="toggleMute()">
+    <ion-icon name="volume-high-outline" *ngIf="isMute==false"></ion-icon>
+    <ion-icon name="volume-mute-outline" *ngIf="isMute!=false"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+
+<ion-fab horizontal="end" vertical="bottom" slot="fixed" style="margin-bottom:15px;margin-right:15px;">
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top">
+    <ion-fab-button color="light">
+      <ion-icon name="mic-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button color="light">
+      <ion-icon name="mic-off-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button color="light" (click)="goTab2()">
+      <ion-icon name="document-text-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>

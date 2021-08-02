@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab 3
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="window" class="magnify" data-magnified-zone=".mg_zone">
+      <div class="magnify_glass">
+          <div class="mg_ring"></div>
+          <div class="pm_btn plus">
+              <h2>+</h2>
+          </div>
+          <div class="pm_btn minus">
+              <h2>-</h2>
+          </div>
+          <div class="mg_zone"></div>
+      </div>
+      <div class="element_to_magnify">
+          <ion-slides [options]="slideOpts" (ionSlideDidChange)="ionSlideWillChange()" (ionSlidesDidLoad)="ionSlidesDidLoad()">
+            <ion-slide *ngFor="let d of dao">
+                <img src="/assets/zmf/{{d.id}}.jpeg" draggable="false" />
+            </ion-slide>
+        </ion-slides>
+      </div>
+
+  </div>
+
+</ion-content>

@@ -1,0 +1,55 @@
+<ion-content>
+    <div class="all-controll">
+        <!--
+        <div class="all-controll-group">
+            <ion-icon is-active="false" size="samll" color="tertiary" class="all-controll-button" name="search-outline" (click)="more()"></ion-icon>
+        </div>
+        -->
+        <div class="all-controll-group">
+            <ion-icon *ngIf="false" is-active="false" size="samll" color="tertiary" class="all-controll-button" name="ellipsis-horizontal-outline" (click)="more()"></ion-icon>
+            <ion-icon is-active="false" size="samll" color="tertiary" class="all-controll-button" name="close-outline" (click)="close()"></ion-icon>
+        </div>
+    </div>
+    <ion-slides [options]="slideOpts" (ionSlideDidChange)="ionSlideWillChange()" (ionSlidesDidLoad)="ionSlidesDidLoad()">
+        <ion-slide *ngFor="let video of reddah.videoArticles">
+            <video loop playsinline control [id]="video.Id" class="video-box" (click)="toggleVideo($event)">
+                <!--<source [src]="reddah.appVideoData(video.Content)" type="video/mp4" *ngIf="reddah.appVideoData(video.Content)">
+                <source [src]="video.Content" type="video/mp4" *ngIf="!reddah.appVideoData(video.Content)">-->
+                    <source [src]="reddah.appVideoData(video.Content)" type="video/mp4">
+            </video>
+            <div class="user-box">
+                <div>
+                    <ion-avatar slot="start" class="user-box-photo">
+                        <img src="{{reddah.appData('userphoto_'+video.UserName)}}" class="contactPortrait"
+                        onerror="this.src='assets/icon/anonymous.png';">
+                    </ion-avatar>
+                </div>
+                <div class="user-box-text">
+                    <ion-text color="tertiary">{{reddah.getDisplayName(video.UserName, 100)}}</ion-text>
+                </div>
+            </div>
+            <div class="video-controll">
+                <div class="video-controll-button">
+                    <ion-icon size="large" is-active="false" color="tertiary" class="video-action-button" name="arrow-redo" (click)="more()"></ion-icon>
+                    <ion-text color="tertiary" *ngIf="video.Down>0">{{reddah.shortCount(video.Down)}}</ion-text>
+                </div>
+                <div class="video-controll-button">
+                    <ion-icon size="large" is-active="false" color="tertiary" class="video-action-button" name="chatbox-ellipses" (click)="more()"></ion-icon>
+                    <ion-text color="tertiary" *ngIf="video.Count>0">{{reddah.shortCount(video.Count)}}</ion-text>
+                </div>
+                <div class="video-controll-button">
+                    <ion-icon (click)="reddah.likeTopic(video, 'reddah_video_articles_'+userName, reddah.videoArticles)" *ngIf="!video.like" 
+                        size="large" is-active="false" color="tertiary" class="video-action-button" name="heart"></ion-icon>
+                    <ion-icon (click)="reddah.likeTopic(video, 'reddah_video_articles_'+userName, reddah.videoArticles)" *ngIf="video.like" 
+                        size="large" is-active="false" color="danger" class="video-action-button" name="heart"></ion-icon>
+                        
+                    <ion-text (click)="reddah.likeTopic(video, 'reddah_video_articles_'+userName, reddah.videoArticles)" color="tertiary" *ngIf="video.Up>0">
+                        {{reddah.shortCount(video.Up)}} 
+                    </ion-text>
+
+                    {{'src:'+reddah.appVideoData(video.Content)}}
+                </div>
+            </div>
+        </ion-slide>
+    </ion-slides>
+</ion-content>
