@@ -1,0 +1,142 @@
+<div class="minifigure" [ngClass]="minifigure ? '': 'explode'" >
+  <div class="head">
+      <div class="faces-wrap">
+          <div class="faces" [style.transform]="'translateX(-' + expressionVal + '%)'">
+              <div class="face classic">
+                  <div class="eye right"></div>
+                  <div class="eye left"></div>
+                  <div class="mouth"></div>
+              </div>
+
+              <div class="face smile">
+                  <div class="eye right">
+                      <div class="brow"></div>
+                  </div>
+                  <div class="eye left">
+                      <div class="brow"></div>
+                  </div>
+                  <div class="mouth"></div>
+              </div>
+
+              <div class="face large-smile">
+                  <div class="eye right">
+                      <div class="brow"></div>
+                  </div>
+                  <div class="eye left">
+                      <div class="brow"></div>
+                  </div>
+                  <div class="mouth"></div>
+              </div>
+
+              <div class="face worried">
+                  <div class="eye right">
+                      <div class="brow"></div>
+                  </div>
+                  <div class="eye left">
+                      <div class="brow"></div>
+                  </div>
+                  <div class="mouth"></div>
+              </div>
+
+              <div class="face frown">
+                  <div class="eye right">
+                      <div class="brow"></div>
+                  </div>
+                  <div class="eye left">
+                      <div class="brow"></div>
+                  </div>
+                  <div class="mouth"></div>
+              </div>
+
+              <div class="face surprised">
+                  <div class="eye right">
+                      <div class="brow"></div>
+                  </div>
+                  <div class="eye left">
+                      <div class="brow"></div>
+                  </div>
+                  <div class="mouth"></div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="upper-body" [style.color]="'hsl(' + upperHueVal + ',' + upperSaturationVal + '%,' + upperLightnessVal + '%)'">
+      <div class="torso"></div>
+      <div class="arm right">
+          <div class="hand right"></div>
+      </div>
+      <div class="arm left">
+          <div class="hand left"></div>
+      </div>
+  </div>
+  <div class="lower-body" [style.color]="'hsl(' + lowerHueVal + ',' + lowerSaturationVal + '%,' + lowerLightnessVal + '%)'">
+      <div class="waist"></div>
+      <div class="crotch"></div>
+      <div class="leg right"></div>
+      <div class="leg left"></div>
+  </div>
+</div>
+
+<div class="controls">
+  <h2 class="title">Name</h2>
+
+  <button class="button explode" (click)="explodeMinifigure()">{{minifigureText}}</button>
+  <button class="button randomize" (click)="randomizeInputs()">Randomize</button>
+
+  <fieldset class="head-expression">
+      <legend>Head</legend>
+
+      <div class="form-element">
+          <label for="expression">Expression</label>
+          <ion-range min="0" max="500" step="100" color="secondary" [(ngModel)]="expressionVal"
+           snaps="true" tick="true">
+          </ion-range>
+      </div>
+  </fieldset>
+
+  <fieldset class="upper-color">
+      <legend>Upper Body</legend>
+
+      <div class="form-element">
+          <label for="upper-hue">Hue</label>
+          <ion-range min="0" max="360" step="1" color="secondary" [(ngModel)]="upperHueVal"
+           snaps="true" tick="true">
+          </ion-range>
+      </div>
+
+      <div class="form-element">
+          <label for="upper-saturation">Saturation</label>
+          <ion-range min="0" max="100" step="1" color="secondary" [(ngModel)]="upperSaturationVal"
+           snaps="true" tick="true">
+          </ion-range>
+      </div>
+
+      <div class="form-element">
+          <label for="upper-lightness">Lightness</label>
+          <ion-range min="0" max="90" step="1" color="secondary" [(ngModel)]="upperLightnessVal"
+           snaps="true" tick="true"></ion-range>
+      </div>
+  </fieldset>
+
+  <fieldset class="lower-color">
+      <legend>Lower Body</legend>
+
+      <div class="form-element">
+          <label for="lower-hue">Hue</label>
+          <ion-range min="0" max="360" step="1" color="secondary" [(ngModel)]="lowerHueVal"
+           snaps="true" tick="true"></ion-range>
+      </div>
+
+      <div class="form-element">
+          <label for="lower-saturation">Saturation</label>
+          <ion-range min="0" max="100" step="1" color="secondary" [(ngModel)]="lowerSaturationVal"
+           snaps="true" tick="true"></ion-range>
+      </div>
+
+      <div class="form-element">
+          <label for="lower-lightness">Lightness</label>
+          <ion-range min="0" max="90" step="1" color="secondary" [(ngModel)]="lowerLightnessVal"
+           snaps="true" tick="true"></ion-range>
+      </div>
+  </fieldset>
+</div>
