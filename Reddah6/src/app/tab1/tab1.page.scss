@@ -1,0 +1,31 @@
+.container
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+.container-left,.container-right
+{
+    width: 50%;
+}
+.card-left
+{
+    margin-right: 5px;
+}
+.card-right
+{
+    margin-left: 5px;
+}
+
+img.ng-lazyloaded{
+    animation: fadein 2.5s;
+}
+
+@keyframes fadein {
+    from{
+        opacity: 0;
+    }
+
+    to{
+        opacity: 1;
+    }
+}

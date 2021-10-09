@@ -13,5 +13,34 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div class="container">
+    <div class="container-left">
+      <a *ngFor="let card of cards;let i=index;">
+        <ion-card class="card-left" *ngIf="i%2==0">
+          <img [debug]="true" [lazyLoad]="getFirstImage(card.Content)">
+          <ion-card-header>
+            <ion-card-title [innerHTML]="text.summaryShort(card.Title, 100, '......')"></ion-card-title>
+            <ion-card-subtitle>{{card.UserName}}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </a>
+    </div>
+    <div class="container-right">
+      <a *ngFor="let card of cards;let i=index;">
+        <ion-card class="card-right" *ngIf="i%2==1">
+          <img [lazyLoad]="getFirstImage(card.Content)">
+          <ion-card-header>
+            <ion-card-title [innerHTML]="text.summaryShort(card.Title, 100, '......')"></ion-card-title>
+            <ion-card-subtitle>{{card.UserName}}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </a>
+    </div>
+    
+  </div>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" 
+        loadingText="{{ reddah.instant('Button.Loading') }}">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

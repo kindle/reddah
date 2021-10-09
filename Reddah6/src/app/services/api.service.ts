@@ -1,15 +1,18 @@
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { tap, switchMap } from 'rxjs/operators';
 import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserModel } from '../models/user-models';
 import { Storage } from '@capacitor/storage';
- 
+import { map, switchMap, delay, tap } from 'rxjs/operators';
+import { CachingService } from './caching.service';
+import { ToastController } from '@ionic/angular';
+import { Network } from '@capacitor/network';
+
 const ACCESS_TOKEN_KEY = 'my-access-token';
 const REFRESH_TOKEN_KEY = 'my-refresh-token';
- 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,14 +21,28 @@ export class ApiService {
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
   currentAccessToken = null;
   url = environment.api_url;
- 
-  constructor(private http: HttpClient, private router: Router) {
+
+  connected = true;
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private toastController: ToastController,
+    private cachingService: CachingService,
+  ) {
+    Network.addListener('networkStatusChange', async status => {
+      this.connected = status.connected;
+    });
+
+    // Can be removed once #17450 is resolved: https://github.com/ionic-team/ionic/issues/17450
+    this.toastController.create({ animated: false }).then(t => { t.present(); t.dismiss(); });
+
     this.loadToken();
   }
- 
+
   // Load accessToken on startup
   async loadToken() {
-    const token = await Storage.get({ key: ACCESS_TOKEN_KEY });    
+    const token = await Storage.get({ key: ACCESS_TOKEN_KEY });
     if (token && token.value) {
       this.currentAccessToken = token.value;
       this.isAuthenticated.next(true);
@@ -33,26 +50,27 @@ export class ApiService {
       this.isAuthenticated.next(false);
     }
   }
- 
+
   // Get our secret protected data
   getSecretData() {
     return this.http.get(`${this.url}/users/secret`);
   }
- 
+
   // Create new user
-  signUp(credentials: {username, password}): Observable<any> {
+  signUp(credentials: { username, password }): Observable<any> {
     return this.http.post(`${this.url}/users`, credentials);
   }
- 
+
   // Sign in a user and store access and refres token
-  login(credentials: {username, password}): Observable<any> {
+  login(credentials: { username, password }): Observable<any> {
     return this.http.post(`${this.url}/api/auth/sign`, new UserModel(credentials.username, credentials.password)).pipe(
-      switchMap((result: {Success, Message }) => {
+      switchMap((result: { Success, Message }) => {
         //console.log(result)
         this.currentAccessToken = result.Message;
-        const storeAccess = Storage.set({key: ACCESS_TOKEN_KEY, value: result.Message});
+        this.setCurrentJwt(result.Message);
+        const storeAccess = Storage.set({ key: ACCESS_TOKEN_KEY, value: result.Message });
         console.log(1)
-        const storeRefresh = Storage.set({key: REFRESH_TOKEN_KEY, value: result.Message});
+        const storeRefresh = Storage.set({ key: REFRESH_TOKEN_KEY, value: result.Message });
         console.log(2)
         return from(Promise.all([storeAccess, storeRefresh]));
       }),
@@ -60,7 +78,7 @@ export class ApiService {
         this.isAuthenticated.next(true);
       })
 
-      
+
       /*switchMap((tokens: {accessToken, refreshToken }) => {
         this.currentAccessToken = tokens.accessToken;
         const storeAccess = Storage.set({key: ACCESS_TOKEN_KEY, value: tokens.accessToken});
@@ -118,4 +136,105 @@ export class ApiService {
     this.currentAccessToken = accessToken;
     return from(Storage.set({ key: ACCESS_TOKEN_KEY, value: accessToken }));
   }
+
+  setCurrentJwt(jwt: string) {
+    Storage.set({ key: "Reddah_CurrentJwt", value: jwt });
+  }
+
+  getCurrentJwt() {
+    return Storage.get({ key: "Reddah_CurrentJwt" });
+  }
+
+  clearCurrentJwt() {
+    Storage.remove({ key: "Reddah_CurrentJwt" });
+  }
+
+  setCurrentUser(userName: string) {
+    Storage.set({ key: "Reddah_CurrentUser", value: userName });
+  }
+
+  getCurrentUser() {
+    return Storage.get({ key: "Reddah_CurrentUser" });
+  }
+
+  private getFindPageTopicUrl = `${this.url}/api/article/getfindtopic`;
+
+  getFindPageTopic(formData: FormData): Observable<any> {
+    return this.http.post<any>(this.getFindPageTopicUrl, formData)
+      .pipe(
+        tap(data => this.log('get find topic')),
+      );
+  }
+
+  log(message) {
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
+  }
+
+
+  // Standard API Functions
+
+  getUsers(forceRefresh: boolean) {
+    const url = 'https://randomuser.me/api?results=10';
+    return this.getData(url, forceRefresh).pipe(
+      map(res => res['results'])
+    );
+  }
+
+  getChuckJoke(forceRefresh: boolean) {
+    const url = 'https://api.chucknorris.io/jokes/random';
+    return this.getData(url, forceRefresh);
+  }
+
+  // Caching Functions
+
+  private getData(url, forceRefresh = false): Observable<any> {
+
+    // Handle offline case
+    if (!this.connected) {
+      this.toastController.create({
+        message: 'You are viewing offline data.',
+        duration: 2000
+      }).then(toast => {
+        toast.present();
+      });
+      return from(this.cachingService.getCachedRequest(url));
+    }
+
+    // Handle connected case
+    if (forceRefresh) {
+      // Make a new API call
+      return this.callAndCache(url);
+    } else {
+      // Check if we have cached data
+      const storedValue = from(this.cachingService.getCachedRequest(url));
+      return storedValue.pipe(
+        switchMap(result => {
+          if (!result) {
+            // Perform a new request since we have no data
+            return this.callAndCache(url);
+          } else {
+            // Return cached data
+            return of(result);
+          }
+        })
+      );
+    }
+  }
+
+  private callAndCache(url): Observable<any> {
+    return this.http.get(url).pipe(
+      delay(2000), // Only for testing!
+      tap(res => {
+        // Store our new data
+        this.cachingService.cacheRequest(url, res);
+      })
+    )
+  }
+
 }
