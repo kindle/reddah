@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReddahService {
+export class I18nService {
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) { }
+
+  doubleByteLocale = ["zh-cn","zh-tw","ja-jp","ko-kr"];
 
   localeData;
   loadTranslate(locale){

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ReddahService } from '../services/reddah.service';
+import { I18nService } from '../services/i18n.service';
 
 @Component({
   selector: 'app-tabs',
@@ -8,9 +8,9 @@ import { ReddahService } from '../services/reddah.service';
 })
 export class TabsPage {
 
-  constructor(public reddahService: ReddahService) {
+  constructor(public i18n: I18nService) {
     let currentLocale = "zh-CN";
-    this.reddahService.loadTranslate(currentLocale);
+    this.i18n.loadTranslate(currentLocale);
   }
 
 }

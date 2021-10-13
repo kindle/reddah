@@ -157,15 +157,6 @@ export class ApiService {
     return Storage.get({ key: "Reddah_CurrentUser" });
   }
 
-  private getFindPageTopicUrl = `${this.url}/api/article/getfindtopic`;
-
-  getFindPageTopic(formData: FormData): Observable<any> {
-    return this.http.post<any>(this.getFindPageTopicUrl, formData)
-      .pipe(
-        tap(data => this.log('get find topic')),
-      );
-  }
-
   log(message) {
   }
 
@@ -177,8 +168,70 @@ export class ApiService {
   }
 
 
-  // Standard API Functions
 
+
+
+  //api list
+  getFindPageTopic(formData: FormData, cacheKey, forceRefresh): Observable<any> {
+    const url = `${this.url}/api/article/getfindtopic`;
+    return this.postData(url, formData, cacheKey, forceRefresh);
+  }
+
+
+  // Caching Functions
+  private postData(url, formData: FormData, cacheKey, forceRefresh = false): Observable<any> {
+    // Handle offline case
+    if (!this.connected) {
+      this.toastController.create({
+        message: 'You are viewing offline data.',
+        duration: 2000
+      }).then(toast => {
+        toast.present();
+      });
+      return from(this.cachingService.getCachedRequest(url+cacheKey));
+    }
+
+    // Handle connected case
+    if (forceRefresh) {
+      // Make a new API call
+      return this.callAndCache(url, formData, cacheKey);
+    } else {
+      // Check if we have cached data
+      const storedValue = from(this.cachingService.getCachedRequest(url+cacheKey));
+      return storedValue.pipe(
+        switchMap(result => {
+          if (!result) {
+            // Perform a new request since we have no data
+            return this.callAndCache(url, formData, cacheKey);
+          } else {
+            // Return cached data
+            return of(result);
+          }
+        })
+      );
+    }
+  }
+
+  private callAndCache(url, formData: FormData, cacheKey): Observable<any> {
+    return this.http.post<any>(url, formData).pipe(
+      delay(2000), 
+      tap(res => {
+        this.cachingService.cacheRequest(url+cacheKey, res);
+      })
+    )
+  }
+
+
+
+
+
+
+
+
+
+
+  // Standard API Functions
+/*
   getUsers(forceRefresh: boolean) {
     const url = 'https://randomuser.me/api?results=10';
     return this.getData(url, forceRefresh).pipe(
@@ -189,52 +242,8 @@ export class ApiService {
   getChuckJoke(forceRefresh: boolean) {
     const url = 'https://api.chucknorris.io/jokes/random';
     return this.getData(url, forceRefresh);
-  }
+  }*/
+  
 
-  // Caching Functions
-
-  private getData(url, forceRefresh = false): Observable<any> {
-
-    // Handle offline case
-    if (!this.connected) {
-      this.toastController.create({
-        message: 'You are viewing offline data.',
-        duration: 2000
-      }).then(toast => {
-        toast.present();
-      });
-      return from(this.cachingService.getCachedRequest(url));
-    }
-
-    // Handle connected case
-    if (forceRefresh) {
-      // Make a new API call
-      return this.callAndCache(url);
-    } else {
-      // Check if we have cached data
-      const storedValue = from(this.cachingService.getCachedRequest(url));
-      return storedValue.pipe(
-        switchMap(result => {
-          if (!result) {
-            // Perform a new request since we have no data
-            return this.callAndCache(url);
-          } else {
-            // Return cached data
-            return of(result);
-          }
-        })
-      );
-    }
-  }
-
-  private callAndCache(url): Observable<any> {
-    return this.http.get(url).pipe(
-      delay(2000), // Only for testing!
-      tap(res => {
-        // Store our new data
-        this.cachingService.cacheRequest(url, res);
-      })
-    )
-  }
 
 }

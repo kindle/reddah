@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { SurfacePage } from './surface.page';
+import { CachedImageComponent } from './cached-image.component';
 
-describe('SurfacePage', () => {
-  let component: SurfacePage;
-  let fixture: ComponentFixture<SurfacePage>;
+describe('CachedImageComponent', () => {
+  let component: CachedImageComponent;
+  let fixture: ComponentFixture<CachedImageComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SurfacePage ],
+      declarations: [ CachedImageComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SurfacePage);
+    fixture = TestBed.createComponent(CachedImageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

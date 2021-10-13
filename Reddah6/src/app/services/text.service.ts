@@ -1,19 +1,24 @@
 import { Injectable } from '@angular/core';
+import { I18nService } from './i18n.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TextService {
 
-  constructor() { }
+  constructor(private i18n: I18nService) { }
 
-  doubleByteLocale = ["zh-cn","zh-tw","ja-jp","ko-kr"];
+
+
+  getFirstImage(link){
+    return link==null?link:link.split('$$$')[0];
+  }
 
   summaryShort(str: string, n: number, fix: string,  locale='en-US') {
       if(locale==null)
           locale='en-US';
       locale = locale.toLowerCase();
-      if(!this.doubleByteLocale.includes(locale))
+      if(!this.i18n.doubleByteLocale.includes(locale))
           n = 2*n;
       str = this.htmlDecode(str)
           
