@@ -13,14 +13,19 @@ export class CachedImageComponent {
   _src = '';
   @Input() spinner = false;
 
+  @Input() round = false;
+
   constructor() { }
 
   @Input()
   set src(imageUrl: string){
     //console.log('SET SOURC URL', imageUrl);
 
-    const imageName =   imageUrl.split('/').pop();
-    const fileType =   imageUrl.split('.').pop();
+    if(imageUrl==null)
+      return;
+
+    const imageName = imageUrl.split('/').pop();
+    const fileType = imageUrl.split('.').pop();
 
     Filesystem.readFile({
       directory: Directory.Cache,

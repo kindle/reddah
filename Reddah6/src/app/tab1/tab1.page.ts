@@ -29,8 +29,6 @@ export class Tab1Page {
     });
     this.apiService.getCurrentJwt().then(data=>{
       this.jwt = data.value
-      console.log(this.jwt)
-      console.log(this.userName)
       this.loadData(null);
     });
   }
@@ -60,6 +58,7 @@ export class Tab1Page {
     this.formData.append("jwt", this.jwt);
     
     const cacheKey = this.userName + this.loadedIds.join(',');
+    //forceRefresh = true;
     this.apiService.getFindPageTopic(this.formData, cacheKey, forceRefresh)
     .pipe(
         finalize(() => {        
@@ -69,11 +68,17 @@ export class Tab1Page {
           //loading.dismiss();
     }))
     .subscribe(data=>{
-      for(let article of data){
-        this.cards.push(article);
-        this.loadedIds.push(article.Id);
+
+      console.log(data)
+      if(data){
+        for(let article of data){
+          this.cards.push(article);
+          this.loadedIds.push(article.Id);
+        }
+        console.log(this.cards)
       }
-      console.log(this.cards)
+      else{
+      }
     });
   }
 

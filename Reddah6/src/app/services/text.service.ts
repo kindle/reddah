@@ -11,7 +11,30 @@ export class TextService {
 
 
   getFirstImage(link){
-    return link==null?link:link.split('$$$')[0];
+    if(link!=null)
+        link = link.split('$$$')[0];
+    return link;
+  }
+
+  getImageUrl(link){
+    if(link!=null)
+        link = link
+        .replace("login.reddah.com/uploadPhoto",
+        "reddah.blob.core.windows.net/photo")
+        .replace("reddah.com/uploadPhoto",
+        "reddah.blob.core.windows.net/photo")
+        .replace("///","https://");
+    return link;
+  }
+
+
+  shortCount(n){
+    if(n>10000)
+        return Math.floor(n/10000)+"w";
+    else if(n>1000)
+        return Math.floor(n/1000)+"k";
+    else
+        return n;
   }
 
   summaryShort(str: string, n: number, fix: string,  locale='en-US') {

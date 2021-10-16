@@ -27,14 +27,13 @@
           <cached-image [spinner]="true" [src]="text.getFirstImage(card.Content)"></cached-image>
           <ion-card-header>
             <ion-card-title [innerHTML]="text.summaryShort(card.Title, 30, '......')"></ion-card-title>
-            <ion-card-subtitle>{{card.UserName}}</ion-card-subtitle>
-            <ion-card-subtitle>{{card.Up}}</ion-card-subtitle>
-            <ion-item>
+            <ion-item lines="none" class="card-bar">
               <ion-avatar slot="start">
-                <cached-image [spinner]="true" [src]="card.UserPhoto"></cached-image>
+                <cached-image [round]="true" [spinner]="true" [src]="text.getImageUrl(card.UserPhoto)"></cached-image>
               </ion-avatar>
-              <h2 class="ion-text-capitalize">{{card.UserName}}</h2>
-
+              <p slot="start" class="ion-text-capitalize">{{card.UserName}}</p>
+              <ion-icon color="danger" name="heart-outline"></ion-icon>
+              <ion-text color="dark" class="count-margin" *ngIf="card.Up>0">{{text.shortCount(card.Up)}}</ion-text>
             </ion-item>
           </ion-card-header>
         </ion-card>
@@ -46,7 +45,14 @@
           <cached-image [spinner]="true" [src]="text.getFirstImage(card.Content)"></cached-image>
           <ion-card-header>
             <ion-card-title [innerHTML]="text.summaryShort(card.Title, 30, '......')"></ion-card-title>
-            <ion-card-subtitle>{{card.UserName}}</ion-card-subtitle>
+            <ion-item lines="none" class="card-bar">
+              <ion-avatar slot="start">
+                <cached-image [round]="true" [spinner]="true" [src]="text.getImageUrl(card.UserPhoto)"></cached-image>
+              </ion-avatar>
+              <p slot="start" class="ion-text-capitalize">{{card.UserName}}</p>
+              <ion-icon color="danger" name="heart-outline"></ion-icon>
+              <ion-text color="dark" class="count-margin" *ngIf="card.Up>0">{{text.shortCount(card.Up)}}</ion-text>
+            </ion-item>
           </ion-card-header>
         </ion-card>
       </a>

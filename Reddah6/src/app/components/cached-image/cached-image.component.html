@@ -1,4 +1,4 @@
-<img [lazyLoad]="_src" *ngIf="_src != ''; else loading;">
+<img [lazyLoad]="_src" *ngIf="_src != ''; else loading;" [ngClass]="{'round':round}">
 
 <ng-template #loading>
   <div class="ion-text-center" *ngIf="spinner">

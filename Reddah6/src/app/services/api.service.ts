@@ -216,6 +216,8 @@ export class ApiService {
     return this.http.post<any>(url, formData).pipe(
       delay(2000), 
       tap(res => {
+        console.log('callAndCache')
+        console.log(res)
         this.cachingService.cacheRequest(url+cacheKey, res);
       })
     )
