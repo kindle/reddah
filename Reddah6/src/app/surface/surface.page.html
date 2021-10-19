@@ -1,4 +1,4 @@
-<ion-header>
+<!--<ion-header>
   <ion-toolbar>
     <ion-title>surface</ion-title>
   </ion-toolbar>
@@ -20,4 +20,18 @@
     <ion-button type="button" expand="block" (click)="signUp()" color="secondary">Sign up!
     </ion-button>
   </form>
-</ion-content>
+</ion-content>-->
+<div class="world" (dblclick)="goMap()" (click)="tap()" (panstart)="panstart($event)" (panend)="panend($event)" (pan)="pan($event)">
+  <div class="world-bg"></div>
+  <div class="world-globe">
+      <div class="world-globe-pole"></div>
+      <div class="world-globe-doms-container"></div>
+      <div class="world-globe-halo"></div>
+  </div>
+</div>
+<ion-text class="safe-area-margin-top" *ngIf="!isAuthenticated()" color="light" (click)="network()" style="position:absolute;left:15px;top:15px;padding:5px;">{{ i18n.instant('About.Network') }}</ion-text> 
+<ion-text class="safe-area-margin-top" color="light" (click)="locale()" style="position:absolute;right:15px;top:15px;padding:5px;">{{ i18n.instant('Surface.Language') }}</ion-text>     
+<ion-button class="safe-area-margin-bottom" *ngIf="!isAuthenticated()" color="primary" (click)="signin()" style="position:absolute;left:15px;bottom:15px;text-transform: none;">{{ i18n.instant('Surface.Login') }}</ion-button>
+<ion-button class="safe-area-margin-bottom" *ngIf="!isAuthenticated()" color="light" (click)="register()" style="position:absolute;right:15px;bottom:15px;text-transform: none;">{{ i18n.instant('Surface.Register') }}</ion-button>
+<ion-button class="safe-area-margin-bottom" *ngIf="isAuthenticated()" color="primary" style="position:absolute;left:15px;bottom:15px;text-transform: none;" 
+href="/">{{ i18n.instant('Point.Letsgo') }}</ion-button>

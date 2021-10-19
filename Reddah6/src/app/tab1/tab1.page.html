@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      {{ i18n.instant('Menu.Home') }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -11,7 +11,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">{{ i18n.instant('Menu.Home') }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -32,7 +32,7 @@
                 <cached-image [round]="true" [spinner]="true" [src]="text.getImageUrl(card.UserPhoto)"></cached-image>
               </ion-avatar>
               <p slot="start" class="ion-text-capitalize">{{card.UserName}}</p>
-              <ion-icon color="danger" name="heart-outline"></ion-icon>
+              <ion-icon color="danger" name="heart" *ngIf="card.Up>0"></ion-icon>
               <ion-text color="dark" class="count-margin" *ngIf="card.Up>0">{{text.shortCount(card.Up)}}</ion-text>
             </ion-item>
           </ion-card-header>
@@ -50,7 +50,7 @@
                 <cached-image [round]="true" [spinner]="true" [src]="text.getImageUrl(card.UserPhoto)"></cached-image>
               </ion-avatar>
               <p slot="start" class="ion-text-capitalize">{{card.UserName}}</p>
-              <ion-icon color="danger" name="heart-outline"></ion-icon>
+              <ion-icon color="danger" name="heart" *ngIf="card.Up>0"></ion-icon>
               <ion-text color="dark" class="count-margin" *ngIf="card.Up>0">{{text.shortCount(card.Up)}}</ion-text>
             </ion-item>
           </ion-card-header>

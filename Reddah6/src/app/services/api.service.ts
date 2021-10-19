@@ -223,6 +223,26 @@ export class ApiService {
     )
   }
 
+  getSecurityToken(formData){
+    const url = "";
+    return this.http.post<any>(url, formData);
+  }
+
+  resetPassword(formData){
+    const url = "";
+    return this.http.post<any>(url, formData);
+  }
+
+  register(formData){
+    const url = "";
+    return this.http.post<any>(url, formData);
+  }
+
+  checkUserName(formData){
+    const url = "";
+    return this.http.post<any>(url, formData);
+  }
+
 
 
 
