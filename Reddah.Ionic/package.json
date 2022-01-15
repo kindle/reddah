@@ -125,7 +125,7 @@
     "promise-polyfill": "^8.1.0",
     "reddah-mini-app": "0.0.1",
     "rxjs": "^6.5.2",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.5",
     "stats-js": "^1.0.1",
     "three": "^0.111.0",
     "three.meshline": "^1.2.0",
