@@ -44,14 +44,16 @@ export class SigninPage implements OnInit {
         }
     }
 
-    
-    username = "";
-    password = "";
+    credentials = {
+        username : "",
+        password : ""
+    }
+   
     
     async logIn() {
-        if (this.username.length == 0) {
+        if (this.credentials.username.length == 0) {
             this.text.toast(this.i18n.instant("Input.Error.UserNameEmpty"));
-        } else if (this.password.length == 0) {
+        } else if (this.credentials.password.length == 0) {
             this.text.toast(this.i18n.instant("Input.Error.PasswordEmpty"));
         } else {
             const loading = await this.loadingController.create({
@@ -72,17 +74,15 @@ export class SigninPage implements OnInit {
             });*/
 
 
-            this.api.login({ 
-                username:this.username,
-                password:this.password
-            }).subscribe(
-                async _ => {        
-                  await loading.dismiss();     
+            this.api.login(this.credentials).subscribe(
+                async _ => {  
+                    console.log(loading)      
+                  loading.dismiss();     
                   //if(result.Success==0){   
                   this.router.navigateByUrl('/tabs', { replaceUrl: true });
                 },
                 async (result) => {        
-                    await loading.dismiss();
+                    loading.dismiss();
                     let msg = this.i18n.instant(`Service.${result.Success}`);
                     this.text.toast(msg, "danger");
                 }
@@ -114,10 +114,6 @@ export class SigninPage implements OnInit {
             });
             */
         }
-    }
-
-    checkLogin(){
-        return this.username=="" ||this.password=="";
     }
 
     async close(){

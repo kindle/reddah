@@ -19,7 +19,7 @@ export class LazyLoadImageHooks extends IntersectionObserverHooks {
 
   setup(attributes: Attributes){
     attributes.offset = 10;
-    attributes.defaultImagePath = './assets/noimage.jpg';
+    //attributes.defaultImagePath = './assets/noimage.jpg';
     attributes.errorImagePath = './assets/broken.jpeg';
     return super.setup(attributes);
   }

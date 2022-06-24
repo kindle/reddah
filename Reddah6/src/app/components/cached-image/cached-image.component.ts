@@ -47,7 +47,8 @@ export class CachedImageComponent {
   }
 
   async storeImage(url, path){
-    const response = await fetch(`https://api-cors-proxy-devdactic.herokuapp.com/${url}`);
+    //const response = await fetch(`https://api-cors-proxy-devdactic.herokuapp.com/${url}`);
+    const response = await fetch(`${url}`);
     const blob = await response.blob();
     const base64Data = await this.convertBlobToBase64(blob) as string;
     const savedFile = await Filesystem.writeFile({ 

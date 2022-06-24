@@ -14,13 +14,13 @@
         </ion-note>
     </ion-item>
     <ion-item class="sectionGapTop gapBottom inputItem" no-padding>
-        <ion-input type="text" style="text-transform: initial;" placeholder="{{ i18n.instant('Input.UserName') }}" [(ngModel)]="username" clearInput></ion-input>
+        <ion-input type="text" style="text-transform: initial;" placeholder="{{ i18n.instant('Input.UserName') }}" [(ngModel)]="credentials.username" clearInput></ion-input>
     </ion-item>
     <ion-item class="gapBottom inputItem" no-padding>
-        <ion-input type="password" style="text-transform: initial;" placeholder="{{ i18n.instant('Input.Password') }}" [(ngModel)]="password" clearInput></ion-input>
+        <ion-input type="password" style="text-transform: initial;" placeholder="{{ i18n.instant('Input.Password') }}" [(ngModel)]="credentials.password" clearInput></ion-input>
     </ion-item>
     <ion-button class="buttonGapTop gapBottom inputItem" size="large" (click)="logIn()" expand="block"
-    [disabled]="checkLogin()">{{ i18n.instant('Button.Login') }}</ion-button>
+    [disabled]="this.credentials.username==''||this.credentials.password==''">{{ i18n.instant('Button.Login') }}</ion-button>
     <div class="forget" (click)="forgot()">{{ i18n.instant('Login.ForgotPassword') }}</div>    
     
     

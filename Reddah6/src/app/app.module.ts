@@ -21,6 +21,8 @@ import { HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { SigninPage } from './surface/signin/signin.page';
 import { ForgotPage } from './surface/forgot/forgot.page';
 import { RegisterPage } from './surface/register/register.page';
+import { FormsModule } from '@angular/forms';
+//import {BlobServiceClient, StorageSharedKeyCredential } from '@azure/storage-blob'
 
 @NgModule({
   declarations: [
@@ -30,8 +32,11 @@ import { RegisterPage } from './surface/register/register.page';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     //BrowserAnimationsModule,
+    ///BlobServiceClient,
+    //StorageSharedKeyCredential,
     BrowserModule, 
     CommonModule,
+    FormsModule,
     HammerModule,
     HttpClientModule,
     IonicModule.forRoot(), 

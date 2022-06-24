@@ -51,13 +51,35 @@ export class Tab1Page {
       }, 1000);
   }
 
-  loadData(event, forceRefresh = false) {
+  loadData(event, forceRefresh = true) {
     this.formData = new FormData();
     this.formData.append("loadedIds", JSON.stringify(this.loadedIds));
     this.formData.append("abstract", this.userName);
     this.formData.append("jwt", this.jwt);
     
     const cacheKey = this.userName + this.loadedIds.join(',');
+
+    if(this.loadedIds.length==0)
+    {
+      //ok to get json file from azure;
+      this.apiService.getCachedJsonFromAzure().then(data=>{
+        if(data){
+          console.log("bailin test azuree string")
+          console.log(data);
+          console.log("bailin test azuree json")
+          const articles = JSON.parse(data+"");
+          
+          console.log(data);
+          for(let article of articles){
+            this.cards.push(article);
+            this.loadedIds.push(article.Id);
+          }
+          console.log(this.cards)
+        }
+      })
+    }
+
+    
     //forceRefresh = true;
     this.apiService.getFindPageTopic(this.formData, cacheKey, forceRefresh)
     .pipe(
@@ -68,7 +90,7 @@ export class Tab1Page {
           //loading.dismiss();
     }))
     .subscribe(data=>{
-
+      console.log('get jsoon11111...')
       console.log(data)
       if(data){
         for(let article of data){
@@ -80,7 +102,11 @@ export class Tab1Page {
       else{
       }
     });
+    
+
+    
   }
+  
 
   loadedIds = [];
   formData: FormData;

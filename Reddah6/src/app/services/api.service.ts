@@ -10,8 +10,22 @@ import { CachingService } from './caching.service';
 import { ToastController } from '@ionic/angular';
 import { Network } from '@capacitor/network';
 
+import { BlobServiceClient } from "@azure/storage-blob";
+
 const ACCESS_TOKEN_KEY = 'my-access-token';
 const REFRESH_TOKEN_KEY = 'my-refresh-token';
+
+
+
+
+const account = "reddah";
+const sas = "sp=r&st=2022-01-12T06:46:52Z&se=2122-02-05T14:46:52Z&sv=2020-08-04&sr=c&sig=IDeOcVqRzfwk2ce7D1s9eSxHrqIWDvo0OlzIrNN3mBU%3D";
+const containerName = "cache";
+const blobName = "2022624.json";
+const blobServiceClient = new BlobServiceClient(`https://${account}.blob.core.windows.net?${sas}`);
+
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -173,9 +187,43 @@ export class ApiService {
 
   //api list
   getFindPageTopic(formData: FormData, cacheKey, forceRefresh): Observable<any> {
+    //this.getCachedJsonFromAzure();
     const url = `${this.url}/api/article/getfindtopic`;
     return this.postData(url, formData, cacheKey, forceRefresh);
+    
+  };
+
+    
+
+
+
+   async getCachedJsonFromAzure() {
+
+    const containerClient = blobServiceClient.getContainerClient(containerName);
+    const blobClient = containerClient.getBlobClient(blobName);
+
+    // Get blob content from position 0 to the end
+    // In browsers, get downloaded data by accessing downloadBlockBlobResponse.blobBody
+    const downloadBlockBlobResponse = await blobClient.download();
+    //let downloadedJson = await blobToString(await downloadBlockBlobResponse.blobBody);
+    //return JSON.parse(downloadedJson);
+    return blobToString(await downloadBlockBlobResponse.blobBody);
+    //console.log("Downloaded blob content", downloadedJson);
+    //JSON.parse("")
+
+    // [Browsers only] A helper method used to convert a browser Blob into string.
+    async function blobToString(blob) {
+      const fileReader = new FileReader();
+      return new Promise((resolve, reject) => {
+        fileReader.onloadend = (ev) => {
+          resolve(ev.target.result);
+        };
+        fileReader.onerror = reject;
+        fileReader.readAsText(blob);
+      });
+    }
   }
+
 
 
   // Caching Functions
@@ -214,7 +262,7 @@ export class ApiService {
 
   private callAndCache(url, formData: FormData, cacheKey): Observable<any> {
     return this.http.post<any>(url, formData).pipe(
-      delay(2000), 
+      //delay(2000), 
       tap(res => {
         console.log('callAndCache')
         console.log(res)
