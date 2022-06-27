@@ -1,9 +1,7 @@
 import { Injectable, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CachedImageComponent } from './cached-image/cached-image.component';
-import { TabsPageModule } from '../tabs/tabs.module';
 import { IonicModule, ToastController } from '@ionic/angular';
-import { TabsPage } from '../tabs/tabs.page';
 
 import { Attributes, IntersectionObserverHooks, LazyLoadImageModule, LAZYLOAD_IMAGE_HOOKS } from 'ng-lazyload-image';
 import { from } from 'rxjs';
@@ -24,12 +22,13 @@ export class LazyLoadImageHooks extends IntersectionObserverHooks {
     return super.setup(attributes);
   }
 
+  /*
   loadImage(attributes: Attributes){
     return from(this.toastCtrl.create({message: 'Start loading...', duration: 2000})).pipe(
       switchMap(toast=>toast.present()),
       switchMap(_ =>super.loadImage(attributes))
     );
-  }
+  }*/
 
 }
 

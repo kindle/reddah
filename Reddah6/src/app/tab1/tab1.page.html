@@ -25,15 +25,16 @@
       <a *ngFor="let card of cards;let i=index;">
         <ion-card class="card-left" *ngIf="i%2==0">
           <cached-image [spinner]="true" [src]="text.getFirstImage(card.Content)"></cached-image>
-          <ion-card-header>
-            <ion-card-title [innerHTML]="text.summaryShort(card.Title, 30, '......')"></ion-card-title>
+          <ion-card-header class="card-header">
+            <ion-card-title class="card-title" [innerHTML]="text.summaryShort(card.Title, 20, '......')"></ion-card-title>
             <ion-item lines="none" class="card-bar">
-              <ion-avatar slot="start">
+              <ion-avatar slot="start" class="avatar">
                 <cached-image [round]="true" [spinner]="true" [src]="text.getImageUrl(card.UserPhoto)"></cached-image>
               </ion-avatar>
               <p slot="start" class="ion-text-capitalize">{{card.UserName}}</p>
-              <ion-icon color="danger" name="heart" *ngIf="card.Up>0"></ion-icon>
-              <ion-text color="dark" class="count-margin" *ngIf="card.Up>0">{{text.shortCount(card.Up)}}</ion-text>
+              <ion-icon slot="end" color="medium" name="heart-outline" *ngIf="!card.Up>0"></ion-icon>
+              <ion-icon slot="end" color="danger" name="heart" *ngIf="card.Up>0"></ion-icon>
+              <ion-text slot="end" color="medium" class="count-margin" *ngIf="card.Up>0">{{text.shortCount(card.Up)}}</ion-text>
             </ion-item>
           </ion-card-header>
         </ion-card>
@@ -43,15 +44,16 @@
       <a *ngFor="let card of cards;let i=index;">
         <ion-card class="card-right" *ngIf="i%2==1">
           <cached-image [spinner]="true" [src]="text.getFirstImage(card.Content)"></cached-image>
-          <ion-card-header>
-            <ion-card-title [innerHTML]="text.summaryShort(card.Title, 30, '......')"></ion-card-title>
+          <ion-card-header class="card-header">
+            <ion-card-title class="card-title" [innerHTML]="text.summaryShort(card.Title, 20, '......')"></ion-card-title>
             <ion-item lines="none" class="card-bar">
-              <ion-avatar slot="start">
+              <ion-avatar slot="start" class="avatar">
                 <cached-image [round]="true" [spinner]="true" [src]="text.getImageUrl(card.UserPhoto)"></cached-image>
               </ion-avatar>
               <p slot="start" class="ion-text-capitalize">{{card.UserName}}</p>
-              <ion-icon color="danger" name="heart" *ngIf="card.Up>0"></ion-icon>
-              <ion-text color="dark" class="count-margin" *ngIf="card.Up>0">{{text.shortCount(card.Up)}}</ion-text>
+              <ion-icon slot="end" color="medium" name="heart-outline" *ngIf="!card.Up>0"></ion-icon>
+              <ion-icon slot="end" color="danger" name="heart" *ngIf="card.Up>0"></ion-icon>
+              <ion-text slot="end" color="medium" class="count-margin" *ngIf="card.Up>0">{{text.shortCount(card.Up)}}</ion-text>
             </ion-item>
           </ion-card-header>
         </ion-card>

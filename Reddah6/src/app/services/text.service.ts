@@ -52,6 +52,7 @@ export class TextService {
             
         if(str.startsWith("<br>"))
             str = str.replace("<br>", "");
+        str = str.replace(/<br\s*\/?>/gi,' ');
         return this.subpost(str, n, fix);
     }
 
