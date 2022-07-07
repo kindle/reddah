@@ -115,7 +115,7 @@
     "leaflet": "^1.5.1",
     "leaflet-geosearch": "^2.7.0",
     "leaflet-search": "^2.9.8",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng-lazyload-image": "^6.1.0",
     "ng-qrcode": "^3.1.0",
     "ng2-dragula": "^2.1.1",
